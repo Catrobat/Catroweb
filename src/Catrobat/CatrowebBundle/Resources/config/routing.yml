@@ -1,0 +1,18 @@
+catroweb_index_default:
+    path: /
+    defaults: { _controller: "CatrowebBundle:Default:index" }
+
+catroweb_index:
+    path: /{_locale}/
+    defaults: { _controller: "CatrowebBundle:Default:index", _locale: en }
+    requirements:
+        _locale:  en|de    
+        
+catroweb_project:
+    resource: "@CatrowebBundle/Controller/ProjectController.php"
+    type:     annotation
+
+catroweb_featured:
+    resource: "@CatrowebBundle/Controller/FeaturedProjectController.php"
+    type:     annotation
+ 

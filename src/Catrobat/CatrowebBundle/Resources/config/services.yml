@@ -1,0 +1,43 @@
+parameters:
+      catrobat.webdir:                  "%kernel.root_dir%/../web/"
+      catrobat.file.extract.dir:        "%kernel.root_dir%/../web/uploads/extract/"
+      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/uploads/projects/"
+      catrobat.screenshot.storage.dir:  "media/screenshots/"
+      catrobat.thumbnail.storage.dir:   "media/thumbnails/"
+
+services:
+# =========================== Kernel Listener ===========================
+      catrowebbundle.listener.request:
+              class: Catrobat\CatrowebBundle\EventListener\RequestListener
+              tags:
+                  - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+                  
+# =========================== Services ===========================
+      catrobat.file.extractor:
+              class:        Catrobat\CatrowebBundle\Helper\CatrobatFileExtractor
+              arguments:    ["%catrobat.file.extract.dir%"]
+              public:       false
+
+      catrobat.file.repository:
+              class:        Catrobat\CatrowebBundle\Helper\ProjectRepository
+              arguments:    ["%catrobat.file.storage.dir%"]
+              public:       false
+
+      catrobat.screenshot.repository:
+              class:        Catrobat\CatrowebBundle\Helper\ScreenshotRepository
+              arguments:    ["%catrobat.webdir%","%catrobat.screenshot.storage.dir%","%catrobat.thumbnail.storage.dir%"]
+              public:       false
+
+      extractor:
+              alias:        catrobat.file.extractor
+      projectrepository:
+              alias:        catrobat.file.repository
+      screenshotrepository:
+              alias:        catrobat.screenshot.repository
+
+# =========================== TWIG ===========================
+      catrobat.twig.project.assets:
+              class: Catrobat\CatrowebBundle\Twig\ProjectAssetsExtension
+              arguments: ["@screenshotrepository"]
+              tags:
+                  - { name: twig.extension }              

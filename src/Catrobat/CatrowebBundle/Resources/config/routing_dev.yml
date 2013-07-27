@@ -1,0 +1,5 @@
+catroweb_debug:
+    prefix: /debug 
+    resource: "@CatrowebBundle/Controller/DebugController.php"
+    type:     annotation
+    

@@ -1,0 +1,187 @@
+/*
+ * Catroid: An on-device visual programming system for Android devices
+ * Copyright (C) 2010-2013 The Catrobat Team
+ * (<http://developer.catrobat.org/credits>)
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * An additional term exception under section 7 of the GNU Affero
+ * General Public License, version 3, is available at
+ * http://developer.catrobat.org/license_additional_term
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.debug
+{
+	border: 1px solid red;
+}
+
+.gradient (@angle,@start,@stop)
+{
+  background-image: linear-gradient(@angle,@start,@stop);
+  background-image:	-moz-linear-gradient(@angle,@start,@stop);
+  background-image: -webkit-linear-gradient(@angle,@start,@stop);
+}
+
+#wrapper header nav {
+  display: table;
+  width: 100%;
+  padding-top: 1.8125em;
+  padding-bottom: 2em;
+}
+
+#wrapper header nav div {
+  display: table-row;
+}
+
+#wrapper header nav div div {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+#wrapper header button, input {
+  vertical-align: bottom;
+}
+
+#wrapper header button {
+  border: 0;
+  padding: 0 0 0.14em 0;
+  background-color: transparent;
+  margin: 0.5625em;
+  background-repeat: norepeat;
+}
+
+#wrapper header nav div div.catroidLink {
+  width: 100%;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 2.2em;
+}
+
+#wrapper header nav div div.catroidLink a {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#logo {
+  max-height: 1.4em;
+}
+
+#wrapper header nav div div.largeSearchBarLeft {
+  background-color: #74b1c6;
+  border-top-left-radius: 0.125em;
+  border-bottom-left-radius: 0.125em;
+  vertical-align: middle;
+  .gradient(top, #93c4d7, #74b0c7);
+}
+
+#wrapper header nav div div.largeSearchBarMiddle {
+  border-right: 1px solid #c8e3ee;
+  padding-right: 0.625em;
+  .gradient(top, #93c4d7, #74b0c7);
+  vertical-align: middle;
+}
+
+#wrapper header nav div div.largeSearchBarMiddle input {
+  border: 0;
+  background-color: #c8e3ee;
+  border-radius: 0.125em;
+  padding: 0.5em;
+  color: #000000;
+  margin: 0.375em 0 0.375em 0;
+}
+
+#wrapper header nav div div.largeSearchBarRight {
+  background-color: #74b1c6;
+  border-top-right-radius: 0.125em;
+  border-bottom-right-radius: 0.125em;
+  .gradient(top, #93c4d7, #74b0c7);
+  vertical-align: middle;
+}
+
+#wrapper header nav div div.largeSearchBarRight button:nth-child(1) {
+  border: 0.15em solid #fff;
+}
+
+#wrapper header nav div div.largeSearchBarRight button:nth-child(2) {
+  margin-left: -0.5625em;
+  font-size: 1.1em;
+  color: #fff;
+
+}
+
+#wrapper header nav div#navigationMenu {
+  display: none;
+  background-image: url("../images/symbols/menu_upper_border.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 0.3em;
+  opacity: 0.95;
+}
+
+#wrapper header nav div#navigationMenu ul {
+  list-style: none;
+}
+
+#wrapper header nav div#navigationMenu li {
+  background-color: #74B1C6;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 1em 1em 1em 0;
+  cursor: pointer;
+}
+
+#wrapper header nav div#navigationMenu li div {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1em;
+}
+
+#wrapper header nav div#navigationMenu li:active {
+  background-color: #025168;
+}
+
+#wrapper header nav div#smallMenu #mobileSearchButton, #mobileMenuButton {
+  background-color:#74b1c6;
+  border-radius: 0.125em;
+}
+
+#wrapper header nav div div#smallSearchBar {
+  display: none;
+  width: 100%;
+  border-top: 1px solid #74b1c6;
+  border-left: 1px solid #74b1c6;
+  background-color: #29505f;
+  vertical-align: middle;
+  border-bottom: 1px solid #74b1c6;
+}
+
+#wrapper header nav div div#smallSearchBar input {
+  font-size: 0.9em;
+  border: 0;
+  background-color: #29505f;
+  padding: 0.625em 0 0.5em 0.5em;
+  color: #ffffff;
+  width: 95%;
+}
+
+#wrapper header nav div#smallMenu {
+  display: none;
+}
+
+
+

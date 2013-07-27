@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>projects.newest</source>
+                <target>Newest Projects</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>projects.mostdownloaded</source>
+                <target>Most downloaded</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>projects.mostviewed</source>
+                <target>Most viewed</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

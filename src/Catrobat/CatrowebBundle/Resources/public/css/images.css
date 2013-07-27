@@ -1,0 +1,196 @@
+.img-age {  
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px 0px;
+}
+
+.img-downloads {
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px -35px;
+}
+
+.img-views {
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px -70px;
+}
+
+.img-size {
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px -105px;
+}
+
+.img-author {  
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px -140px;
+}
+
+.img-load-more {
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px -175px;
+}
+
+.img-author-blue {  
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: 0px -210px;
+}
+
+.img-plus {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -74px -39px;
+}
+
+.img-more {
+  width: 10px;
+  height: 10px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -117px -58px;
+  background-repeat: no-repeat;
+}
+
+.img-less {
+  width: 10px;
+  height: 10px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -117px -69px;
+  background-repeat: no-repeat;
+}
+
+.img-magnifying-glass {
+  width: 31px;
+  height: 31px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -131px -31px;
+}
+
+.img-magnifying-glass-blue {
+  width: 31px;
+  height: 31px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -131px -62px;
+}
+
+.blue {
+  background-color: #7cb5ca;
+  background-image: linear-gradient(top, #A8DFF4, #74b0c7);
+  background-image: -moz-linear-gradient(top, #A8DFF4, #74b0c7);
+  background-image: -webkit-linear-gradient(top, #A8DFF4, #74b0c7);
+}
+
+.img-avatar {
+  width: 31px;
+  height: 31px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -131px -93px;
+  outline: 1px solid #FFFFFF;
+}
+
+.img-undo-search {
+  width: 31px;
+  height: 31px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -131px -124px;
+}
+
+.img-delete {
+  width: 31px;
+  height: 31px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -131px -186px;
+}
+
+.img-password {
+  width: 39px;
+  height: 39px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -74px -117px;
+  float: right;
+}
+
+.img-failedPw {
+  width: 39px;
+  height: 39px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -74px -79px;
+  float: right;
+}
+
+.img-first-email {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -35px -78px;
+  float: right;
+}
+
+.img-failed-first-email {
+  width: 39px;
+  height: 39px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -35px -40px;
+  float: right;
+}
+
+.img-second-email {
+  width: 39px;
+  height: 39px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -74px 0px;
+  float: right;
+}
+
+.img-failed-second-email {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -35px -116px;
+  float: right;
+}
+
+.img-author-big {
+  display:inline-block;
+  width: 39px;
+  height: 39px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -35px -195px;
+}
+
+.img-logout  {
+  display:inline-block;
+  width: 39px;
+  height: 39px;
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -74px -195px;
+}
+
+.img-select {
+  width: 19px;
+  height: 19px;
+  background-image: url(../images/symbols/sprite_icons_web.png);
+  background-position: -113px 0px;
+  float: right;
+}
+  
+.img-saved {
+  background-image: url('../images/symbols/sprite_icons_web.png');
+  background-position: -131px -217px;
+  width: 25px;
+  height: 25px;
+}

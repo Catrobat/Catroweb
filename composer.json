@@ -1,0 +1,68 @@
+{
+	"name" : "symfony/framework-standard-edition",
+	"description" : "The \"Symfony Standard Edition\" distribution",
+	"type" : "project",
+	"keywords" : [],
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"leafo/lessphp" : "dev-master",
+		"symfony/symfony" : "2.3.*",
+		"jms/i18n-routing-bundle" : "dev-master",
+		"doctrine/doctrine-fixtures-bundle" : "dev-master",
+		"friendsofsymfony/user-bundle" : "~2.0@dev",
+		"symfony/swiftmailer-bundle" : "2.3.*",
+		"doctrine/orm" : ">=2.2.3,<2.4-dev",
+		"doctrine/data-fixtures" : "dev-master",
+		"symfony/assetic-bundle" : "2.3.*",
+		"incenteev/composer-parameter-handler" : "~2.0",
+		"twig/extensions" : "1.0.*",
+		"php" : ">=5.3.3",
+		"sensio/generator-bundle" : "2.3.*",
+		"symfony/monolog-bundle" : "2.3.*",
+		"braincrafted/bootstrap-bundle" : "dev-master",
+		"sensio/framework-extra-bundle" : "2.3.*",
+		"sensio/distribution-bundle" : "2.3.*",
+		"doctrine/doctrine-bundle" : "1.2.*",
+		"twitter/bootstrap" : "2.3.*"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "3.7.*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"" : "src/"
+		}
+	},
+	"minimum-stability" : "stable",
+	"config" : {
+		"bin-dir" : "bin"
+	},
+	"scripts" : {
+		"post-update-cmd" : [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+		],
+		"post-install-cmd" : [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+		]
+	},
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "2.3-dev"
+		},
+		"symfony-web-dir" : "web",
+		"symfony-app-dir" : "app",
+		"incenteev-parameters" : {
+			"file" : "app/config/parameters.yml"
+		}
+	}
+}

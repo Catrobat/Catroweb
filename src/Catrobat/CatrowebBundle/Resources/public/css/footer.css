@@ -1,0 +1,187 @@
+/*
+ * Catroid: An on-device visual programming system for Android devices
+ * Copyright (C) 2010-2013 The Catrobat Team
+ * (<http://developer.catrobat.org/credits>)
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * An additional term exception under section 7 of the GNU Affero
+ * General Public License, version 3, is available at
+ * http://developer.catrobat.org/license_additional_term
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+footer {
+  background-color: #00475D;
+}
+
+footer div {
+  display: table;
+  width: 100%;
+  background-color: #00475D;
+}
+
+footer div div {
+  display: table-row;
+}
+
+footer div span#footerMoreButton, footer div span#footerLessButton {
+  cursor: pointer;
+}
+
+footer div span#footerLessButton {
+  display: none;
+}
+
+footer div div span {
+  display: inline-block;
+}
+
+footer div.footerMenu div {
+  border-top: 1px solid #385f6e;
+}
+
+footer div div div {
+  display: table-cell;
+  vertical-align: middle;
+  width: 50%;
+  padding: 0.4em 0.6em 0.4em 0.6em;
+  text-align: center;
+  overflow: hidden;
+}
+
+footer div div:nth-child(1) {
+  text-align: left;
+  padding-left: 3em;
+}
+
+footer div div:nth-child(2) {
+  text-align: right;
+  padding-right: 3em;
+}
+
+footer div.footerMenu div:nth-child(3), footer div.footerMenu div:nth-child(4) {
+  display: none;
+}
+
+footer div#largeFooterMenu div {
+  border-top: 1px solid #385f6e;
+}
+
+footer div#largeFooterMenu div:nth-child(2) {
+  vertical-align: bottom;
+  padding-bottom: 2.8em;
+}
+
+footer div#largeFooterMenu div:nth-child(2) span {
+  text-align: left;
+}
+
+footer div#largeFooterMenu div:nth-child(2) span#footerSearchButton {
+  margin-right: 0.6em;
+  cursor: pointer;
+}
+
+footer div#largeFooterMenu div:nth-child(2) span header {
+  padding: 0.4em;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+footer div#largeFooterMenu div:nth-child(2) span input {
+  width: 20em;
+}
+
+footer select {
+  border: 0;
+  background-color: #05222a;
+  color: #a8dff4;
+  padding: 0.4em 0.6em 0.4em 0.6em;
+}
+
+footer input {
+  border: 0;
+  background-color: #05222a;
+  color: #a8dff4;
+  padding: 0.8em 0.6em 0.8em 0.6em;
+}
+
+footer ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0.7em 0 0.7em 0;
+}
+
+footer div#mobileFooterMenu {
+  display: none;
+  text-align: center;
+}
+
+footer div#mobileFooterMenu ul {
+  background-color: #013042;
+  display: none;
+}
+
+footer ul li {
+  padding: 0.5em;
+  text-shadow: #333333 1px 1px 2px;
+}
+
+footer ul a {
+  text-decoration: none;
+  color: #a8dff4;
+}
+
+
+
+@media screen and (max-width: 720px) {
+  #wrapper article {
+    padding-bottom: 3.5em;
+  }
+  
+  footer {
+    margin-top: -3.5em; /*negative value of footer height*/
+    height: 3,5em;
+  }
+  
+  footer div div:nth-child(1) {
+    padding-left: 0;
+  }
+
+  footer div div:nth-child(2) {
+    text-align: center;
+    padding-right: 0;
+  }
+
+  footer select {
+    width: 100%;
+  }
+  
+  footer div.footerMenu div:nth-child(3), footer div.footerMenu div:nth-child(4) {
+    text-align: right;
+    display: table-cell;
+  }
+
+  footer div div div {
+    width: 33.3%;
+  }
+  
+  footer div#mobileFooterMenu {
+    display: block;
+  }
+
+  footer div#largeFooterMenu {
+    display: none;
+  }
+}
