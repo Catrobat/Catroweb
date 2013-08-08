@@ -321,7 +321,7 @@ class ProjectController extends Controller
       $em->flush();
 
       
-      $screen_repo->saveProjectAssets($extract_dir."manual_screenshot.png",$project->getId());
+      $screen_repo->saveProjectAssets($info['screenshot'], $project->getId());
 
     //  $filesystem = new Filesystem();
     //  $filesystem->remove($extract_dir);

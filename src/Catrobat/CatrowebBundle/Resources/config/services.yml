@@ -2,8 +2,11 @@ parameters:
       catrobat.webdir:                  "%kernel.root_dir%/../web/"
       catrobat.file.extract.dir:        "%kernel.root_dir%/../web/uploads/extract/"
       catrobat.file.storage.dir:        "%kernel.root_dir%/../web/uploads/projects/"
-      catrobat.screenshot.storage.dir:  "media/screenshots/"
-      catrobat.thumbnail.storage.dir:   "media/thumbnails/"
+      catrobat.screenshot.dir:  "%catrobat.webdir%/media/screenshots/"
+      catrobat.screenshot.path: "media/screenshots/"
+      catrobat.thumbnail.dir:   "%catrobat.webdir%/media/thumbnails/"
+      catrobat.thumbnail.path:  "media/thumbnails/"
+      
 
 services:
 # =========================== Kernel Listener ===========================
@@ -25,7 +28,7 @@ services:
 
       catrobat.screenshot.repository:
               class:        Catrobat\CatrowebBundle\Helper\ScreenshotRepository
-              arguments:    ["%catrobat.webdir%","%catrobat.screenshot.storage.dir%","%catrobat.thumbnail.storage.dir%"]
+              arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
               public:       false
 
       extractor:

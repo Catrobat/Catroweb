@@ -28,6 +28,18 @@ class ProjectDirectoryValidator
     $info['name'] = (string)$project_properties->header->programName;
     $info['description'] = (string)$project_properties->header->description;
     $info['application_version'] = (string)$project_properties->header->applicationVersion;
+    if (is_file($base_dir . "screenshot.png"))
+    {
+      $info['screenshot'] = $base_dir . "screenshot.png";
+    }
+    else if (is_file($base_dir . "manual_screenshot.png"))
+    {
+      $info['screenshot'] = $base_dir . "manual_screenshot.png";
+    }
+    else if (is_file($base_dir . "automatic_screenshot.png"))
+    {
+      $info['screenshot'] = $base_dir . "automatic_screenshot.png";
+    }
   
     return $info;
   }
