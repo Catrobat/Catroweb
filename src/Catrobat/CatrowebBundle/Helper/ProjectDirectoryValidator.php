@@ -20,7 +20,14 @@ class ProjectDirectoryValidator
   private function parseXML($base_dir)
   {
     $info = array();
-    $project_properties = simplexml_load_file($base_dir . "code.xml");
+    try
+    {
+      $project_properties = simplexml_load_file($base_dir . "code.xml");
+    }
+    catch (\Exception $e)
+    {
+      throw new InvalidCatrobatFileException("missing project xml");
+    }
     if ($project_properties === false)
     {
       throw new InvalidCatrobatFileException("error parsing config xml");

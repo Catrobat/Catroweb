@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FeaturedProjectControllerTest extends WebTestCase
 {
+  
+    public function testNothing()
+    {
+      
+    }
     /*
     public function testCompleteScenario()
     {

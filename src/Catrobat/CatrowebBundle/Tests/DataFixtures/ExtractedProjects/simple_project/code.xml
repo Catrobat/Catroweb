@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<program>
+  <header>
+    <applicationBuildName></applicationBuildName>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Catroid</applicationName>
+    <applicationVersion>0.7.0beta-1492-debug</applicationVersion>
+    <catrobatLanguageVersion>0.6</catrobatLanguageVersion>
+    <dateTimeUpload></dateTimeUpload>
+    <description></description>
+    <deviceName>Nexus 4</deviceName>
+    <mediaLicense></mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>17</platformVersion>
+    <programLicense></programLicense>
+    <programName>Simple Project</programName>
+    <programScreenshotManuallyTaken>true</programScreenshotManuallyTaken>
+    <remixOf></remixOf>
+    <screenHeight>1184</screenHeight>
+    <screenWidth>768</screenWidth>
+    <tags></tags>
+    <url></url>
+    <userHandle></userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>D336AC0F8EE68A1F7759A6FF8DCAC6D6_background.png</fileName>
+          <name>background</name>
+        </look>
+      </lookList>
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>160</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>AD18C7301B037F635D21CDB8DC8B2F73_zip2.png</fileName>
+          <name>zip2</name>
+        </look>
+        <look>
+          <fileName>52D0ACF0CCC194AAD20B4E0065C6277E_zip1.png</fileName>
+          <name>zip1</name>
+        </look>
+        <look>
+          <fileName>1D0C4CD08F0EBB7BDA20A6669FDC76E1_zip3.png</fileName>
+          <name>zip3</name>
+        </look>
+      </lookList>
+      <name>Zipline</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>120</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>zipx</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>290</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>gzipy</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[3]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50.0</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>zip</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>D486B6633CC8EED7FD1D2A5A39285385_ghost.png</fileName>
+          <name>ghost</name>
+        </look>
+      </lookList>
+      <name>Ghost</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>140</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <foreverBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick class="loopEndlessBrick">
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="foreverBrick" reference="../.."/>
+              </loopEndBrick>
+            </foreverBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>200</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>200</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>400</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>400</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>75</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50.0</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>25</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>2</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <leftChild>
+                    <type>SENSOR</type>
+                    <value>LOOK_X</value>
+                  </leftChild>
+                  <rightChild>
+                    <leftChild>
+                      <type>NUMBER</type>
+                      <value>50</value>
+                    </leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>FUNCTION</type>
+                    <value>RAND</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>PLUS</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <leftChild>
+                    <type>SENSOR</type>
+                    <value>LOOK_Y</value>
+                  </leftChild>
+                  <rightChild>
+                    <leftChild>
+                      <rightChild>
+                        <type>NUMBER</type>
+                        <value>100</value>
+                      </rightChild>
+                      <type>OPERATOR</type>
+                      <value>MINUS</value>
+                    </leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>FUNCTION</type>
+                    <value>RAND</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>PLUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>25</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50.0</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setGhostEffectBrick>
+              <object reference="../../../../.."/>
+              <transparency>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>75</value>
+                </formulaTree>
+              </transparency>
+            </setGhostEffectBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.5</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <whenScript>
+          <brickList>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>zipx</name>
+                <value>94.70857238769531</value>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>SENSOR</type>
+                  <value>LOOK_X</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>gzipy</name>
+                <value>187.93569946289063</value>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>SENSOR</type>
+                  <value>LOOK_Y</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>zip</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[3]"/>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable reference="../../../objectList/object[3]/scriptList/whenScript/brickList/setVariableBrick/userVariable"/>
+      <userVariable>
+        <name>zipy</name>
+        <value>0.0</value>
+      </userVariable>
+      <userVariable reference="../../../objectList/object[3]/scriptList/whenScript/brickList/setVariableBrick[2]/userVariable"/>
+    </programVariableList>
+  </variables>
+</program>

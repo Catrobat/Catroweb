@@ -42,7 +42,7 @@ class CatrobatFileExtractor
     }
     else
     {
-      throw new InvalidCatrobatFileException("Unziping file failed");
+      throw new InvalidCatrobatFileException("unable to extract catrobat file");
     }
     
     return $full_extract_dir;
