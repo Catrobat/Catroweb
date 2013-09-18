@@ -1,0 +1,7 @@
+catrobat_api_check_token:
+    pattern:  /api/checkToken.{_format}
+    defaults: { _controller: 'CatrobatApiBundle:Api:checkToken' }
+
+catrobat_api_upload:
+    pattern:  /api/upload.{_format}
+    defaults: { _controller: 'CatrobatApiBundle:Api:upload', _format: html}

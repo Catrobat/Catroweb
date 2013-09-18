@@ -189,7 +189,7 @@ class FeaturedProjectController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl(''));
+        return $this->redirect($this->generateUrl('projects_featured'));
     }
 
     /**

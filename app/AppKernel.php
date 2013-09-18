@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
         	new Catrobat\CatrowebBundle\CatrowebBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Catrobat\ApiBundle\CatrobatApiBundle(),
+            new Catrobat\AdminBundle\CatrobatAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

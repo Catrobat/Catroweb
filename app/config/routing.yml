@@ -1,3 +1,11 @@
+catrobat_admin:
+    resource: "@CatrobatAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+catrobat_api:
+    resource: "@CatrobatApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
 catroweb:
     resource: "@CatrowebBundle/Resources/config/routing.yml"
     prefix:   /
