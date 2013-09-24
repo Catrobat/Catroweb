@@ -1,3 +1,5 @@
+################## index ################## 
+
 catroweb_index:
     path: /
     defaults: { _controller: "CatrowebBundle:Default:index" }
@@ -8,11 +10,34 @@ catroweb_index_locale:
     requirements:
         _locale:  en|de    
         
-catroweb_project:
-    resource: "@CatrowebBundle/Controller/ProjectController.php"
-    type:     annotation
+################## featured ################## 
 
 catroweb_featured:
     resource: "@CatrowebBundle/Controller/FeaturedProjectController.php"
     type:     annotation
  
+################## project listings ################## 
+
+catroweb_most_downloaded:
+    path:      /most-downloaded
+    methods:  [GET]
+    defaults:  { _controller: "CatrowebBundle:Project:mostDownloaded" }
+
+catroweb_most_viewed:
+    path:      /most-viewed
+    methods:  [GET]
+    defaults:  { _controller: "CatrowebBundle:Project:mostViewed" }
+
+catroweb_newest:
+    path:      /newest
+    methods:  [GET]
+    defaults:  { _controller: "CatrowebBundle:Project:newest" }
+
+################## project details ################## 
+
+project_show:
+    path:      /projects/{id}
+    methods:  [GET]
+    defaults:  { _controller: "CatrowebBundle:Project:show" }
+    requirements:
+      page:  \d+

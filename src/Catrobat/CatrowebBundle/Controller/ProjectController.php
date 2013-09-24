@@ -63,6 +63,25 @@ class ProjectController extends Controller
           'entities' => $entities
       );
     }
+
+    /**
+     * Lists all Project entities.
+     * @Template()
+     */
+    public function newestAction(Request $request)
+    {
+    	$limit = intval($request->query->get('limit',9));
+    	$offset = intval($request->query->get('offset',0));
+    
+    	$em = $this->getDoctrine()->getManager();
+    
+    	$entities = $em->getRepository('CatrowebBundle:Project')->findByOrderedByDownloads($limit,$offset);
+    
+    	return array(
+    			'entities' => $entities
+    	);
+    }
+    
     
     /**
      * Lists all Project entities.

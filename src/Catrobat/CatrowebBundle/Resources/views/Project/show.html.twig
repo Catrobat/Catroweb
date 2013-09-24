@@ -1,8 +1,9 @@
-{% extends '::base.html.twig' %}
+{% extends 'CatrowebBundle::base.html.twig' %}
 
-{% block body -%}
-    <h1>Project</h1>
-
+{% block body %}
+<article>
+	<header>{{ entity.name }}</header>
+	<div class="projectContainer">
     <table class="record_properties">
         <tbody>
             <tr>
@@ -39,24 +40,7 @@
             </tr>
         </tbody>
     </table>
+   </div>
+</article>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('project') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('project_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('project_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
 {% endblock %}
