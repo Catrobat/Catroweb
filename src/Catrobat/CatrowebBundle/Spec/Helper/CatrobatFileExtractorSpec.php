@@ -28,4 +28,10 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
 //    	echo($path_to_extracted_folder);
     	$filesystem->remove($path_to_extracted_folder->getWrappedObject());
     }
+    
+    function it_throws_an_exception_while_extracting_an_invalid_file()
+    {
+    	$invalid_catrobat_file = new File(__DIR__ . "/../../../../src/Catrobat/CatrowebBundle/Tests/DataFixtures/CatrobatFiles/invalid_archive.catrobat");
+    	$this->shouldThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringExtract($invalid_catrobat_file);
+    }
 }

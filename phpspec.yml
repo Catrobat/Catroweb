@@ -1,0 +1,3 @@
+formatter.name: pretty
+extensions:
+  - PhpSpec\Symfony2Extension\Extension

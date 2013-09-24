@@ -1,0 +1,18 @@
+default:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            bundle: CatrowebBundle
+            mink_driver: true
+        Behat\MinkExtension\Extension:
+            default_session: 'symfony2'
+
+web:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            bundle: CatrowebBundle
+
+api:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            bundle: CatrobatApiBundle
+            

@@ -6,12 +6,12 @@
 		"MIT"
 	],
 	"require" : {
-		"jms/i18n-routing-bundle" : "dev-master",
-		"symfony/symfony" : "2.3.*",
 		"leafo/lessphp" : "dev-master",
+		"symfony/symfony" : "2.3.*",
+		"jms/i18n-routing-bundle" : "dev-master",
 		"doctrine/doctrine-fixtures-bundle" : "dev-master",
-		"symfony/swiftmailer-bundle" : "2.3.*",
 		"friendsofsymfony/user-bundle" : "~2.0@dev",
+		"symfony/swiftmailer-bundle" : "2.3.*",
 		"doctrine/orm" : ">=2.2.3,<2.4-dev",
 		"doctrine/data-fixtures" : "dev-master",
 		"symfony/assetic-bundle" : "2.3.*",
@@ -30,7 +30,12 @@
 	"require-dev" : {
 		"phpspec/phpspec" : "2.0.*@dev",
 		"behat/symfony2-extension" : "*",
-		"phpunit/phpunit" : "3.7.*"
+		"phpspec/symfony2-extension" : "*@dev",
+		"sensiolabs/behat-page-object-extension" : "*",
+		"phpunit/phpunit" : "3.7.*",
+		"behat/mink-browserkit-driver" : "*",
+		"bossa/phpspec2-expect" : "*@dev",
+		"behat/mink-extension" : "*"
 	},
 	"autoload" : {
 		"psr-0" : {

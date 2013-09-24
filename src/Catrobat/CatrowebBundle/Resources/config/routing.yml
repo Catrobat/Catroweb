@@ -1,8 +1,8 @@
-catroweb_index_default:
+catroweb_index:
     path: /
     defaults: { _controller: "CatrowebBundle:Default:index" }
 
-catroweb_index:
+catroweb_index_locale:
     path: /{_locale}/
     defaults: { _controller: "CatrowebBundle:Default:index", _locale: en }
     requirements:
