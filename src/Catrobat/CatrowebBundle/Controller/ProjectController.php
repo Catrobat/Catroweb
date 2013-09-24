@@ -75,7 +75,7 @@ class ProjectController extends Controller
     
     	$em = $this->getDoctrine()->getManager();
     
-    	$entities = $em->getRepository('CatrowebBundle:Project')->findByOrderedByDownloads($limit,$offset);
+    	$entities = $em->getRepository('CatrowebBundle:Project')->findByOrderedByDate($limit,$offset);
     
     	return array(
     			'entities' => $entities
