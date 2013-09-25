@@ -19,9 +19,11 @@ catroweb_featured:
 ################## project listings ################## 
 
 catroweb_most_downloaded:
-    path:      /most-downloaded
+    path:      /most-downloaded.{_format}
     methods:  [GET]
-    defaults:  { _controller: "CatrowebBundle:Project:mostDownloaded" }
+    defaults:  { _controller: "CatrowebBundle:Project:mostDownloaded", _format: html }
+    requirements:
+      _format:  html|json
 
 catroweb_most_viewed:
     path:      /most-viewed
