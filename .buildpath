@@ -6,8 +6,8 @@
 	<buildpathentry kind="src" path="vendor/doctrine/cache/lib"/>
 	<buildpathentry kind="src" path="vendor/doctrine/common/lib"/>
 	<buildpathentry kind="src" path="vendor/phpunit/phpunit-mock-objects/PHPUnit"/>
-	<buildpathentry kind="src" path="vendor/jms/translation-bundle"/>
 	<buildpathentry excluding="Symfony/Component/HttpFoundation/Resources/stubs/|Symfony/Component/Intl/Resources/stubs/" kind="src" path="vendor/symfony/symfony/src"/>
+	<buildpathentry kind="src" path="vendor/jms/translation-bundle"/>
 	<buildpathentry kind="src" path="vendor/bossa/phpspec2-expect"/>
 	<buildpathentry kind="src" path="vendor/hwi/oauth-bundle"/>
 	<buildpathentry kind="src" path="vendor/phpspec/phpspec/src"/>
@@ -19,8 +19,8 @@
 	<buildpathentry kind="src" path="src"/>
 	<buildpathentry kind="src" path="vendor/composer"/>
 	<buildpathentry kind="src" path="vendor/jdorn/sql-formatter/lib"/>
-	<buildpathentry kind="src" path="vendor/behat/symfony2-extension/src"/>
 	<buildpathentry kind="src" path="vendor/phpunit/php-code-coverage/PHP"/>
+	<buildpathentry kind="src" path="vendor/behat/symfony2-extension/src"/>
 	<buildpathentry kind="src" path="vendor/sensiolabs/behat-page-object-extension/src"/>
 	<buildpathentry kind="src" path="vendor/friendsofsymfony/user-bundle"/>
 	<buildpathentry kind="src" path="vendor/kriswallsmith/buzz/lib"/>
