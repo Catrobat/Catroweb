@@ -15,4 +15,12 @@ api:
     extensions:
         Behat\Symfony2Extension\Extension:
             bundle: CatrobatApiBundle
+            kernel:
+                env: testsqlite
+                debug: true
+        VIPSoft\DoctrineDataFixturesExtension\Extension:
+            lifetime:    feature
+            autoload:    true
+#            directories: ["."]
+#            fixtures:    ~
             

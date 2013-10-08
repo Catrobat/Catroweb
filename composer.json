@@ -28,14 +28,16 @@
 		"twitter/bootstrap" : "2.3.*"
 	},
 	"require-dev" : {
+		"vipsoft/doctrine-data-fixtures-extension": "*",
+		"behat/behat" : "*@dev",
 		"phpspec/phpspec" : "2.0.*@dev",
-		"behat/symfony2-extension" : "*",
+		"behat/symfony2-extension" : "*@dev",
 		"phpspec/symfony2-extension" : "*@dev",
-		"sensiolabs/behat-page-object-extension" : "*",
+		"sensiolabs/behat-page-object-extension" : "*@dev",
 		"phpunit/phpunit" : "3.7.*",
-		"behat/mink-browserkit-driver" : "*",
+		"behat/mink-browserkit-driver" : "*@dev",
 		"bossa/phpspec2-expect" : "*@dev",
-		"behat/mink-extension" : "*"
+		"behat/mink-extension" : "*@dev"
 	},
 	"autoload" : {
 		"psr-0" : {
