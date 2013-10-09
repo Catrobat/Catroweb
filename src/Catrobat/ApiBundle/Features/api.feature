@@ -35,7 +35,7 @@ Feature: Pocketcode API
     Given I am not registered
     And I have a username "newuser"
     And I have a password "newpassword"
-    And I have a language "at"
+    And I have a language "en"
     And I have an email address "test@wherever.com"
     When I call "/api/loginOrRegister/loginOrRegister.json" the given data
     Then I should see:

@@ -11,12 +11,14 @@ use Behat\Behat\Context\BehatContext,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Catrobat\CatrowebBundle\Entity\User;
+use Catrobat\CatrowebBundle\Entity\Project;
+use Behat\Behat\Event\SuiteEvent;
 
 //
 // Require 3rd-party libraries here:
 //
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
+require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
 /**
@@ -27,7 +29,10 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 {
     private $kernel;
     private $parameters;
+    private $client;
 
+    private $user;
+    
     /**
      * Initializes context with parameters from behat.yml.
      *
@@ -47,6 +52,10 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+				if ($kernel->getContainer() != null)
+				{
+					$this->client = $kernel->getContainer()->get('test.client');
+				}
     }
 
     /**
@@ -74,26 +83,36 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function thereAreProjects(TableNode $table)
     {
     	$em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    	$entity = $em->getRepository('CatrowebBundle:User')->findAll();
-    	
-    	
-    	throw new PendingException();
+    	$projects = $table->getHash();
+    	for ($i = 0; $i < count($projects); $i++)
+    	{
+    		$user = $em->getRepository('CatrowebBundle:User')->findOneBy(['username' => 'Catrobat']);
+				$project = new Project();
+				$project->setUser($user);
+				$project->setName($projects[$i]['name']);
+				$project->setDescription($projects[$i]['description']);
+				$project->setFilename("file".$i.".catrobat");
+				$project->setThumbnail("thumb.png");
+				$project->setScreenshot("screenshot.png");
+				$em->persist($project);
+    	}
+    	$em->flush();
     }
     
     /**
      * @Given /^I am "([^"]*)"$/
      */
-    public function iAm($arg1)
+    public function iAm($username)
     {
-    	throw new PendingException();
+    	$this->user = $username;
     }
     
     /**
      * @When /^I call "([^"]*)" with token "([^"]*)"$/
      */
-    public function iCallWithToken($arg1, $arg2)
+    public function iCallWithToken($url, $token)
     {
-    	throw new PendingException();
+    	$crawler = $this->client->request('POST', $url);
     }
     
     /**
@@ -101,7 +120,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iShouldSee(PyStringNode $string)
     {
-    	throw new PendingException();
+    	$response = $this->client->getResponse();
+    	assertEquals(200, $response->getStatusCode(), "Server request failed");
+    	assertEquals($string->getRaw(), $response->getContent());
     }
     
     /**
