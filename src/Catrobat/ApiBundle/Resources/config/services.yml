@@ -2,6 +2,10 @@ parameters:
 #    catrobat_api.example.class: Catrobat\ApiBundle\Example
 
 services:
-#    catrobat_api.example:
-#        class: %catrobat_api.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    uploadtoken.security.authentication.provider:
+        class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider
+        arguments: [""]
+
+    uploadtoken.security.authentication.listener:
+        class:  Catrobat\ApiBundle\Security\UploadTokenListener
+        arguments: ["@security.context", "@security.authentication.manager","","@templating"]

@@ -19,8 +19,8 @@ api:
                 env: testsqlite
                 debug: true
         VIPSoft\DoctrineDataFixturesExtension\Extension:
-            lifetime:    feature
-            autoload:    true
+            lifetime:    scenario
+            autoload:    false
 #            directories: ["."]
 #            fixtures:    ~
             

@@ -3,16 +3,15 @@ Feature: Pocketcode API
 
   Background: 
     Given there are users:
-      | name       | password | token        |
-      | "Catrobat" | "12345"  | "cccccccccc" |
-      | "User1"    | "vwxyz"  | "aaaaaaaaaa" |
+      | name     | password | token      |
+      | Catrobat | 12345    | cccccccccc |
+      | User1    | vwxyz    | aaaaaaaaaa |
     And there are projects:
-      | id | name        | description | owned by   | downloads | views | upload time      | version |
-      | 1  | "project 1" | "p1"        | "Catrobat" | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | "project 2" | ""          | "Catrobat" | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
-      | 3  | "project 3" | ""          | "User1"    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | id | name      | description | owned by | downloads | views | upload time      | version |
+      | 1  | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | project 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
+      | 3  | project 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
-  ####### check token #######
   Scenario: Checking the current token
     Given I am "Catrobat"
     When I call "/api/checkToken/check.json" with token "cccccccccc"
@@ -20,6 +19,7 @@ Feature: Pocketcode API
       """
       {"statusCode":200,"answer":"ok","preHeaderMessages":"  \n"}
       """
+    And the response code should be "200"
 
   Scenario: Checking an invalid token
     Given I am "Catrobat"
@@ -28,16 +28,16 @@ Feature: Pocketcode API
       """
       {"statusCode":601,"answer":"Sorry, your authentication data was incorrect. Please check your nickname and password!","preHeaderMessages":"  \n"}
       """
+    And the response code should be "403"
 
   ####### login or register #######
-  @TODO
   Scenario: loginOrRegister with new user
     Given I am not registered
     And I have a username "newuser"
     And I have a password "newpassword"
     And I have a language "en"
     And I have an email address "test@wherever.com"
-    When I call "/api/loginOrRegister/loginOrRegister.json" the given data
+    When I call "/api/loginOrRegister/loginOrRegister.json" with the given data
     Then I should see:
       """
       {"token":"<token>","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
@@ -144,5 +144,3 @@ Feature: Pocketcode API
           "preHeaderMessages":""
       }
       """
-
- 

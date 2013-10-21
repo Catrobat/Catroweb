@@ -11,6 +11,10 @@ security:
             id: fos_user.user_provider.username
             
     firewalls:
+        api:
+            pattern: ^/api/.*
+            uploadtoken: true
+            
         debug:
             pattern: ^/debug
             security: false
@@ -22,6 +26,14 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            remember_me:
+                name: remember_me
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+                secure: false
+                httponly: false
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

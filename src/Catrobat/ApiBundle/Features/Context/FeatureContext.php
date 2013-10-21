@@ -29,7 +29,6 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 {
     private $kernel;
     private $parameters;
-    private $client;
 
     private $user;
     
@@ -52,10 +51,6 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
-				if ($kernel->getContainer() != null)
-				{
-					$this->client = $kernel->getContainer()->get('test.client');
-				}
     }
 
     /**
@@ -71,10 +66,10 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 	    	$user->setEmail("dev".$i."@pocketcode.org");
 	    	$user->setPlainPassword($users[$i]["password"]);
 	    	$user->setEnabled(true);
+	    	$user->setToken($users[$i]["token"]);
     		$this->kernel->getContainer()->get('doctrine')->getManager()->persist($user);
     	}
     	$this->kernel->getContainer()->get('doctrine')->getManager()->flush();
-    	
     }
     
     /**
@@ -112,7 +107,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iCallWithToken($url, $token)
     {
-    	$crawler = $this->client->request('POST', $url);
+      $this->client = $this->kernel->getContainer()->get('test.client');
+      $params = array("token" => $token, "username" => $this->user); 
+    	$crawler = $this->client->request('POST', $url, $params);
     }
     
     /**
@@ -121,9 +118,18 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function iShouldSee(PyStringNode $string)
     {
     	$response = $this->client->getResponse();
-    	assertEquals(200, $response->getStatusCode(), "Server request failed");
     	assertEquals($string->getRaw(), $response->getContent());
     }
+    
+    /**
+     * @Given /^the response code should be "([^"]*)"$/
+     */
+    public function theResponseCodeShouldBe($code)
+    {
+    	$response = $this->client->getResponse();
+    	assertEquals($code, $response->getStatusCode(), "Wrong response code");
+    }
+    
     
     /**
      * @Given /^I am not registered$/

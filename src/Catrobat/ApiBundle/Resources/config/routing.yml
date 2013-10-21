@@ -1,7 +1,7 @@
 catrobat_api_check_token:
     pattern:  /api/checkToken/check.json
     methods: [POST]
-    defaults: { _controller: 'CatrobatApiBundle:Api:checkToken' }
+    defaults: { _controller: 'CatrobatApiBundle:Api:checkToken', _format: json }
 
 catrobat_api_upload:
     pattern:  /api/upload.{_format}
