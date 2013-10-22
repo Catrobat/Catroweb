@@ -31,6 +31,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     private $parameters;
 
     private $user;
+    private $request_parameters;
     
     /**
      * Initializes context with parameters from behat.yml.
@@ -40,6 +41,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function __construct(array $parameters)
     {
         $this->parameters = $parameters;
+        $this->request_parameters = array();
     }
 
     /**
@@ -92,6 +94,23 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 				$em->persist($project);
     	}
     	$em->flush();
+    }
+    
+    /**
+     * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
+     */
+    public function iHaveAParameterWithValue($name, $value)
+    {
+      $this->request_parameters[$name] = $value;
+    }
+    
+    /**
+     * @When /^I POST these parameters to "([^"]*)"$/
+     */
+    public function iPostTheseParametersTo($url)
+    {
+      $this->client = $this->kernel->getContainer()->get('test.client');
+    	$crawler = $this->client->request('POST', $url, $this->request_parameters);
     }
     
     /**
