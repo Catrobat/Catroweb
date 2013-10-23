@@ -163,6 +163,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iHaveAUsername($arg1)
     {
+      //just a test input
     	throw new PendingException();
     }
     
