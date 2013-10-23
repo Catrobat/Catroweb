@@ -31,6 +31,7 @@ class UploadTokenListener implements ListenerInterface
     $request = $event->getRequest();
     
     $upload_token = $request->request->get('token');
+    $username = $request->request->get('username');
     
     if ($upload_token == "")
     {
@@ -38,7 +39,7 @@ class UploadTokenListener implements ListenerInterface
       return;
     }
     
-    $token = new PreAuthenticatedToken('UNKNOWN', $upload_token, $this->provider);
+    $token = new PreAuthenticatedToken($username, $upload_token, $this->provider);
     
     try
     {
