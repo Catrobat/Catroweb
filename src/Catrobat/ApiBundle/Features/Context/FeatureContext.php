@@ -141,6 +141,20 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     }
     
     /**
+     * @Then /^I should get the json object with random token:$/
+     */
+    public function iShouldGetTheJsonObjectWithRandomToken(PyStringNode $string)
+    {
+      $response = $this->client->getResponse();
+      $responseArray = json_decode($response->getContent(),true);
+      $expectedArray = json_decode($string->getRaw(),true);
+      $responseArray['token'] = "";
+      $expectedArray['token'] = "";
+      assertEquals($expectedArray, $responseArray);
+    }
+    
+    
+    /**
      * @Given /^the response code should be "([^"]*)"$/
      */
     public function theResponseCodeShouldBe($code)

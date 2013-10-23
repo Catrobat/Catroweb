@@ -12,7 +12,7 @@ security:
             
     firewalls:
         api:
-            pattern: ^/api/.*
+            pattern: ^/api/checkToken/check.json
             uploadtoken: true
             
         debug:
