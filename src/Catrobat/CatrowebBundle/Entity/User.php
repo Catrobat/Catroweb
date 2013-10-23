@@ -19,7 +19,7 @@ class User extends BaseUser
   protected $id;
   
   /**
-   * @ORM\Column(type="string", length=300)
+   * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected $token;
   

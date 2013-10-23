@@ -83,7 +83,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     	$projects = $table->getHash();
     	for ($i = 0; $i < count($projects); $i++)
     	{
-    		$user = $em->getRepository('CatrowebBundle:User')->findOneBy(['username' => 'Catrobat']);
+    		$user = $em->getRepository('CatrowebBundle:User')->findOneBy(array('username' => 'Catrobat'));
 				$project = new Project();
 				$project->setUser($user);
 				$project->setName($projects[$i]['name']);
