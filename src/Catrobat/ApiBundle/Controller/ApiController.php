@@ -4,27 +4,46 @@ namespace Catrobat\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\CatrowebBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Doctrine\UserManager;
+use Symfony\Component\Validator\Validator;
 
-class ApiController extends Controller
+class ApiController
 {
+    protected $templating;
+    protected $user_manager;
+    protected $validator;
+    protected $encoder_service;
+    
+    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, $encoder_service)
+    {
+      $this->templating = $templating;
+      $this->user_manager = $user_manager;
+      $this->validator = $validator;
+      $this->encoder_service = $encoder_service;
+    }
+  
     public function checkTokenAction()
     {
-        return $this->render('CatrobatApiBundle:Api:checkToken.json.twig');
+        return $this->templating->renderResponse('CatrobatApiBundle:Api:checkToken.json.twig');
     }
 
     public function uploadAction()
     {
-    	return $this->render('CatrobatApiBundle:Api:index.json.twig');
+    	return $this->templating->renderResponse('CatrobatApiBundle:Api:index.json.twig');
     }
     
-    public function loginOrRegisterAction()
+    public function loginOrRegisterAction(Request $request)
     {
-      $userManager = $this->container->get('fos_user.user_manager');
-      $request = $this->getRequest();
+      
+      $userManager = $this->user_manager;
       $retArray = array();
       $username = $request->request->get('registrationUsername');
       $userpassword = $request->request->get('registrationPassword');
       $usercountry = $request->request->get('registrationCountry');
+
       $user = $userManager->findUserByUsername($username);
       
       if ($user == null) 
@@ -62,11 +81,11 @@ class ApiController extends Controller
       else 
       {
         $retArray['statusCode'] = 200;
-        $encoder_service = $this->get('security.encoder_factory');
+        $encoder_service = $this->encoder_service;
         $encoder = $encoder_service->getEncoder($user);
-        $encoded_pass = $encoder->encodePassword($request->request->get('registrationPassword'), $user->getSalt());
+        $correct_pass = $encoder->isPasswordValid($user->getPassword(), $request->request->get('registrationPassword'), $user->getSalt());
         
-        if ($user->getPassword() == $encoded_pass) 
+        if ($correct_pass) 
         {
           $retArray['statusCode'] = 200;
           $retArray['token'] = $user->getToken();
@@ -79,11 +98,7 @@ class ApiController extends Controller
         }
       }
       
-      
-//       $this->getDoctrine()->getManager()->persist($user);
-//       $this->getDoctrine()->getManager()->flush();
-      
-      return $this->render('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
     }
     
 }

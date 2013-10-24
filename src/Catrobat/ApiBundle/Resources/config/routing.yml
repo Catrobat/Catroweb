@@ -1,13 +1,13 @@
 catrobat_api_check_token:
     pattern:  /api/checkToken/check.json
     methods: [POST]
-    defaults: { _controller: 'CatrobatApiBundle:Api:checkToken', _format: json }
+    defaults: { _controller: 'catrobat.api.controller:checkTokenAction', _format: json }
 
 catrobat_api_login_or_register:
     pattern:  /api/loginOrRegister/loginOrRegister.json
     methods: [POST, GET]
-    defaults: { _controller: 'CatrobatApiBundle:Api:loginOrRegister', _format: json }
+    defaults: { _controller: 'catrobat.api.controller:loginOrRegisterAction', _format: json }
 
 catrobat_api_upload:
     pattern:  /api/upload.{_format}
-    defaults: { _controller: 'CatrobatApiBundle:Api:upload', _format: html}
+    defaults: { _controller: 'catrobat.api.controller:uploadAction', _format: html}
