@@ -7,22 +7,20 @@ use Catrobat\CatrowebBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
-use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\Validator\Validator;
+use Catrobat\CatrowebBundle\Model\UserManager;
 
 class ApiController
 {
     protected $templating;
     protected $user_manager;
     protected $validator;
-    protected $encoder_service;
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, $encoder_service)
+    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator)
     {
       $this->templating = $templating;
       $this->user_manager = $user_manager;
       $this->validator = $validator;
-      $this->encoder_service = $encoder_service;
     }
   
     public function checkTokenAction()
@@ -81,9 +79,7 @@ class ApiController
       else 
       {
         $retArray['statusCode'] = 200;
-        $encoder_service = $this->encoder_service;
-        $encoder = $encoder_service->getEncoder($user);
-        $correct_pass = $encoder->isPasswordValid($user->getPassword(), $request->request->get('registrationPassword'), $user->getSalt());
+        $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
         
         if ($correct_pass) 
         {
