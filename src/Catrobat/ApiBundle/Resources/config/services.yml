@@ -4,7 +4,7 @@ parameters:
 services:
     catrobat.api.controller:
         class: "%catrobat.api.controller.class%"
-        arguments: ["@templating","@catroweb.usermanager","@validator"]
+        arguments: ["@templating","@catroweb.usermanager","@validator","@security.context", "@catroweb.projectmanager"]
 
     uploadtoken.security.authentication.provider:
         class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider

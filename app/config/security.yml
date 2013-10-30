@@ -11,8 +11,12 @@ security:
             id: fos_user.user_provider.username
             
     firewalls:
-        api:
+        api_checktoken:
             pattern: ^/api/checkToken/check.json
+            uploadtoken: true
+
+        api_upload:
+            pattern: ^/api/upload/upload.json
             uploadtoken: true
             
         debug:

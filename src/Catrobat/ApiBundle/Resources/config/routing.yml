@@ -9,5 +9,6 @@ catrobat_api_login_or_register:
     defaults: { _controller: 'catrobat.api.controller:loginOrRegisterAction', _format: json }
 
 catrobat_api_upload:
-    pattern:  /api/upload.{_format}
-    defaults: { _controller: 'catrobat.api.controller:uploadAction', _format: html}
+    pattern:  /api/upload/upload.json
+    methods: [POST]
+    defaults: { _controller: 'catrobat.api.controller:uploadAction', _format: json}

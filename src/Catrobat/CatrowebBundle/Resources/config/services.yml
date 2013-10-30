@@ -16,6 +16,10 @@ services:
                   - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
                   
 # =========================== Services ===========================
+      catroweb.projectmanager:
+            class: Catrobat\CatrowebBundle\Model\ProjectManager
+            arguments: ["@catrobat.file.extractor","@catrobat.file.repository", "@catrobat.screenshot.repository", "@doctrine"]
+
       catroweb.usermanager:
             class: Catrobat\CatrowebBundle\Model\UserManager
             arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
@@ -23,17 +27,14 @@ services:
       catrobat.file.extractor:
               class:        Catrobat\CatrowebBundle\Helper\CatrobatFileExtractor
               arguments:    ["%catrobat.file.extract.dir%"]
-              public:       false
 
       catrobat.file.repository:
               class:        Catrobat\CatrowebBundle\Helper\ProjectRepository
               arguments:    ["%catrobat.file.storage.dir%"]
-              public:       false
 
       catrobat.screenshot.repository:
               class:        Catrobat\CatrowebBundle\Helper\ScreenshotRepository
               arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
-              public:       false
 
       extractor:
               alias:        catrobat.file.extractor
