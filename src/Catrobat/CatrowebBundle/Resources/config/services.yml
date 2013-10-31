@@ -25,15 +25,15 @@ services:
             arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
 
       catrobat.file.extractor:
-              class:        Catrobat\CatrowebBundle\Helper\CatrobatFileExtractor
+              class:        Catrobat\CatrowebBundle\Services\CatrobatFileExtractor
               arguments:    ["%catrobat.file.extract.dir%"]
 
       catrobat.file.repository:
-              class:        Catrobat\CatrowebBundle\Helper\ProjectRepository
+              class:        Catrobat\CatrowebBundle\Services\ProjectRepository
               arguments:    ["%catrobat.file.storage.dir%"]
 
       catrobat.screenshot.repository:
-              class:        Catrobat\CatrowebBundle\Helper\ScreenshotRepository
+              class:        Catrobat\CatrowebBundle\Services\ScreenshotRepository
               arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
 
       extractor:

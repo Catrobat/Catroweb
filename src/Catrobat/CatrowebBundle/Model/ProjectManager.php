@@ -3,7 +3,7 @@ namespace Catrobat\CatrowebBundle\Model;
 
 use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CatrowebBundle\Entity\Project;
-use Catrobat\CatrowebBundle\Helper\ProjectDirectoryValidator;
+use Catrobat\CatrowebBundle\Services\ProjectDirectoryValidator;
 
 class ProjectManager
 {

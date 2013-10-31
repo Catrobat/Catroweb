@@ -2,7 +2,7 @@
 
 namespace Catrobat\CatrowebBundle\Twig;
 
-use Catrobat\CatrowebBundle\Helper\ScreenshotRepository;
+use Catrobat\CatrowebBundle\Services\ScreenshotRepository;
 
 class ProjectAssetsExtension extends \Twig_Extension
 {
