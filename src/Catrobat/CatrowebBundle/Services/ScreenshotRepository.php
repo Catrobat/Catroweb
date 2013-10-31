@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CatrowebBundle\Helper;
+namespace Catrobat\CatrowebBundle\Services;
 
 use Catrobat\CatrowebBundle\Exceptions\InvalidStorageDirectoryException;
 

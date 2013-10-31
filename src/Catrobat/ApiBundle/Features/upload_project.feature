@@ -14,11 +14,11 @@ Feature: Upload a project
 
   @TODO
   Scenario: project upload with valid data
-    Given I have the username "Catrobat"
-    And I have a token "cccccccccc"
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
     And I have a file "test.catrobat"
-    And I have the md5sum of "test.catrobat"
-    When I call "/api/upload/upload.json" with the given data
+    And I have a parameter "fileChecksum" with the md5checksum of "test.catrobat"
+    When I POST these parameters to "/api/upload/upload.json"
     Then I should see:
       """
       {"projectId":<id>,"statusCode":200,"answer":"Your project was uploaded successfully!","token":<token>,"preHeaderMessages":""}

@@ -13,6 +13,8 @@ use Behat\Gherkin\Node\PyStringNode,
 use Catrobat\CatrowebBundle\Entity\User;
 use Catrobat\CatrowebBundle\Entity\Project;
 use Behat\Behat\Event\SuiteEvent;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 //
 // Require 3rd-party libraries here:
@@ -33,6 +35,8 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     private $user;
     private $request_parameters;
     
+    private $files;
+    
     /**
      * Initializes context with parameters from behat.yml.
      *
@@ -42,6 +46,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     {
         $this->parameters = $parameters;
         $this->request_parameters = array();
+        $this->files = array();
     }
 
     /**
@@ -110,7 +115,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function iPostTheseParametersTo($url)
     {
       $this->client = $this->kernel->getContainer()->get('test.client');
-    	$crawler = $this->client->request('POST', $url, $this->request_parameters);
+    	$crawler = $this->client->request('POST', $url, $this->request_parameters, $this->files);
     }
     
     /**
@@ -240,17 +245,19 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     /**
      * @Given /^I have a file "([^"]*)"$/
      */
-    public function iHaveAFile($arg1)
+    public function iHaveAFile($filename)
     {
-    	throw new PendingException();
+      $filepath = "./src/Catrobat/ApiBundle/Features/Fixtures/".$filename;
+      assertTrue(file_exists($filepath),"File not found");
+      $this->files[] = new UploadedFile($filepath,$filename);
     }
     
     /**
-     * @Given /^I have the md(\d+)sum of "([^"]*)"$/
+     * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
      */
-    public function iHaveTheMdsumOf($arg1, $arg2)
+    public function iHaveAParameterWithTheMdchecksumOf($parameter, $file)
     {
-    	throw new PendingException();
+      $this->request_parameters[$parameter] = md5_file($this->files[0]->getPathname()); 
     }
     
     /**

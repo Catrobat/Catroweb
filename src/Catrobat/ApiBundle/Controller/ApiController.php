@@ -4,27 +4,55 @@ namespace Catrobat\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\CatrowebBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator;
+use Symfony\Component\Security\Core\SecurityContext;
+use Catrobat\CatrowebBundle\Model\UserManager;
+use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
+use Catrobat\CatrowebBundle\Model\ProjectManager;
 
-class ApiController extends Controller
+class ApiController
 {
+    protected $templating;
+    protected $user_manager;
+    protected $validator;
+    protected $context;
+    protected $project_manager;
+    
+    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager)
+    {
+      $this->templating = $templating;
+      $this->user_manager = $user_manager;
+      $this->validator = $validator;
+      $this->context = $context;
+      $this->project_manager = $project_manager;
+    }
+  
     public function checkTokenAction()
     {
-        return $this->render('CatrobatApiBundle:Api:checkToken.json.twig');
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:checkToken.json.twig');
     }
 
-    public function uploadAction()
+    public function uploadAction(Request $request)
     {
-    	return $this->render('CatrobatApiBundle:Api:index.json.twig');
+      $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
+      
+      $this->project_manager->addProject($add_project_request);
+      
+      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
+    	return $this->templating->renderResponse('CatrobatApiBundle:Api:index.json.twig', array("msg" => $num_files));
     }
     
-    public function loginOrRegisterAction()
+    public function loginOrRegisterAction(Request $request)
     {
-      $userManager = $this->container->get('fos_user.user_manager');
-      $request = $this->getRequest();
+      $userManager = $this->user_manager;
       $retArray = array();
       $username = $request->request->get('registrationUsername');
       $userpassword = $request->request->get('registrationPassword');
       $usercountry = $request->request->get('registrationCountry');
+
       $user = $userManager->findUserByUsername($username);
       
       if ($user == null) 
@@ -62,11 +90,9 @@ class ApiController extends Controller
       else 
       {
         $retArray['statusCode'] = 200;
-        $encoder_service = $this->get('security.encoder_factory');
-        $encoder = $encoder_service->getEncoder($user);
-        $encoded_pass = $encoder->encodePassword($request->request->get('registrationPassword'), $user->getSalt());
+        $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
         
-        if ($user->getPassword() == $encoded_pass) 
+        if ($correct_pass) 
         {
           $retArray['statusCode'] = 200;
           $retArray['token'] = $user->getToken();
@@ -79,11 +105,7 @@ class ApiController extends Controller
         }
       }
       
-      
-//       $this->getDoctrine()->getManager()->persist($user);
-//       $this->getDoctrine()->getManager()->flush();
-      
-      return $this->render('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
     }
     
 }

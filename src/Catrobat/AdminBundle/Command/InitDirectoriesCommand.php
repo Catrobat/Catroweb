@@ -54,8 +54,8 @@ class InitDirectoriesCommand extends Command
 		$text = "";
 		if (!$this->fileystem->exists($directory))
 		{
-			$this->fileystem->mkdir($this->dir);
-			$this->fileystem->chgrp($this->dir, "www-data");
+			$this->fileystem->mkdir($directory);
+			$text .= "Creating Directory " . $directory . "\n";
 		}
 		else
 		{

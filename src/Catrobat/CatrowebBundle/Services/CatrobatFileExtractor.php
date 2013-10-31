@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CatrowebBundle\Helper;
+namespace Catrobat\CatrowebBundle\Services;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;
