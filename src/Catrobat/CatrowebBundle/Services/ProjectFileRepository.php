@@ -4,7 +4,7 @@ namespace Catrobat\CatrowebBundle\Services;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ProjectRepository
+class ProjectFileRepository
 {
   private $directory = "";
   private $filesystem;

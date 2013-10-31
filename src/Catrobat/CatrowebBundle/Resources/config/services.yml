@@ -6,7 +6,6 @@ parameters:
       catrobat.screenshot.path: "resources/screenshots/"
       catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
       catrobat.thumbnail.path:  "resources/thumbnails/"
-      
 
 services:
 # =========================== Kernel Listener ===========================
@@ -29,7 +28,7 @@ services:
               arguments:    ["%catrobat.file.extract.dir%"]
 
       catrobat.file.repository:
-              class:        Catrobat\CatrowebBundle\Services\ProjectRepository
+              class:        Catrobat\CatrowebBundle\Services\ProjectFileRepository
               arguments:    ["%catrobat.file.storage.dir%"]
 
       catrobat.screenshot.repository:

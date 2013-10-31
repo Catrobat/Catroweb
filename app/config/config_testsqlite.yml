@@ -6,3 +6,11 @@ doctrine:
         driver: pdo_sqlite
         path: sqlite/behattest.sqlite
 #        memory: true
+
+parameters:
+      catrobat.file.extract.dir:        "%kernel.root_dir%/../web/resources_test/extract/"
+      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources_test/projects/"
+      catrobat.screenshot.dir:  "%catrobat.webdir%resources_test/screenshots/"
+      catrobat.screenshot.path: "resources_test/screenshots/"
+      catrobat.thumbnail.dir:   "%catrobat.webdir%resources_test/thumbnails/"
+      catrobat.thumbnail.path:  "resources_test/thumbnails/"      
