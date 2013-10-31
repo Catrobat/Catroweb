@@ -6,13 +6,14 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ProjectFileRepository
 {
-  private $directory = "";
+  private $directory;
   private $filesystem;
+  private $webpath;
   
-  
-  function __construct($directory)
+  function __construct($directory, $webpath)
   {
     $this->directory = $directory;
+    $this->webpath = $webpath
     $this->filesystem = new Filesystem();
   }
   
@@ -21,13 +22,13 @@ class ProjectFileRepository
     $this->filesystem->copy($file->getPathname(), $this->directory . $id . ".catrobat");
   }
   
-  function getProjectFile($handle)
+  function getProjectFile($id)
   {
-    
+    return new File($this->directory . $id . ".catrobat");
   }
   
-  function getProjectFileWebUrl($handle)
+  function getProjectFileWebUrl($id)
   {
-    
+    return $this->webpath . $id . ".catrobat";
   }
 }

@@ -42,5 +42,7 @@ class ProjectManager
     $em->flush();
 
     $this->screenshot_repository->saveProjectAssets($info['screenshot'], $project->getId());
+    $this->file_repository->saveProjectfile($file,$project->getId());
   }
+  
 }

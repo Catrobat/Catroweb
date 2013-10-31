@@ -2,6 +2,7 @@ parameters:
       catrobat.webdir:                  "%kernel.root_dir%/../web/"
       catrobat.file.extract.dir:        "%kernel.root_dir%/../web/resources/extract/"
       catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources/projects/"
+      catrobat.file.storage.path:        "resources/projects/"
       catrobat.screenshot.dir:  "%catrobat.webdir%resources/screenshots/"
       catrobat.screenshot.path: "resources/screenshots/"
       catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
@@ -29,7 +30,7 @@ services:
 
       catrobat.file.repository:
               class:        Catrobat\CatrowebBundle\Services\ProjectFileRepository
-              arguments:    ["%catrobat.file.storage.dir%"]
+              arguments:    ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
 
       catrobat.screenshot.repository:
               class:        Catrobat\CatrowebBundle\Services\ScreenshotRepository
