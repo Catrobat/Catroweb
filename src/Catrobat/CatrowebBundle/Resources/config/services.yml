@@ -35,6 +35,9 @@ services:
       catrobat.screenshot.repository:
               class:        Catrobat\CatrowebBundle\Services\ScreenshotRepository
               arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
+              
+      catrobat.tokengenerator:
+              class:        Catrobat\CatrowebBundle\Services\TokenGenerator
 
       extractor:
               alias:        catrobat.file.extractor
