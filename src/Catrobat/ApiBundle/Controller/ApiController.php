@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Catrobat\CatrowebBundle\Model\UserManager;
 use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CatrowebBundle\Model\ProjectManager;
+use Catrobat\CatrowebBundle\Services\TokenGenerator;
 
 class ApiController
 {
@@ -20,14 +21,17 @@ class ApiController
     protected $validator;
     protected $context;
     protected $project_manager;
+    protected $tokenGenerator;
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager)
+    
+    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator)
     {
       $this->templating = $templating;
       $this->user_manager = $user_manager;
       $this->validator = $validator;
       $this->context = $context;
       $this->project_manager = $project_manager;
+      $this->tokenGenerator = $tokenGenerator;
     }
   
     public function checkTokenAction()
@@ -85,7 +89,7 @@ class ApiController
           $user->setEmail($request->request->get('registrationEmail'));
           $user->setPlainPassword($userpassword);
           $user->setEnabled(true);
-          $user->setToken("RandomToken");
+          $user->setToken($this->tokenGenerator->generateToken());
           
           $userManager->updateUser($user);
           $retArray['statusCode'] = 201;
