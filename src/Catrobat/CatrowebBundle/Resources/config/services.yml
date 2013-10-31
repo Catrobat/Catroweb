@@ -1,11 +1,11 @@
 parameters:
       catrobat.webdir:                  "%kernel.root_dir%/../web/"
-      catrobat.file.extract.dir:        "%kernel.root_dir%/../web/uploads/extract/"
-      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/uploads/projects/"
-      catrobat.screenshot.dir:  "%catrobat.webdir%/media/screenshots/"
-      catrobat.screenshot.path: "media/screenshots/"
-      catrobat.thumbnail.dir:   "%catrobat.webdir%/media/thumbnails/"
-      catrobat.thumbnail.path:  "media/thumbnails/"
+      catrobat.file.extract.dir:        "%kernel.root_dir%/../web/resources/extract/"
+      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources/projects/"
+      catrobat.screenshot.dir:  "%catrobat.webdir%resources/screenshots/"
+      catrobat.screenshot.path: "resources/screenshots/"
+      catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
+      catrobat.thumbnail.path:  "resources/thumbnails/"
       
 
 services:
