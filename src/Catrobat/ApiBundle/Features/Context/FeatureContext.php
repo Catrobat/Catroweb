@@ -146,6 +146,15 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     }
     
     /**
+     * @Then /^I should get the json object:$/
+     */
+    public function iShouldGetTheJsonObject(PyStringNode $string)
+    {
+      $response = $this->client->getResponse();
+      assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), $response->getContent());
+    }
+    
+    /**
      * @Then /^I should get the json object with random token:$/
      */
     public function iShouldGetTheJsonObjectWithRandomToken(PyStringNode $string)
@@ -158,6 +167,18 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
       assertEquals($expectedArray, $responseArray);
     }
     
+    /**
+     * @Then /^I should get the json object with random "([^"]*)" and "([^"]*)":$/
+     */
+    public function iShouldGetTheJsonObjectWithRandomAndProjectid($arg1, $arg2, PyStringNode $string)
+    {
+      $response = $this->client->getResponse();
+      $responseArray = json_decode($response->getContent(),true);
+      $expectedArray = json_decode($string->getRaw(),true);
+      $responseArray[$arg1] = $expectedArray[$arg1] = "";
+      $responseArray[$arg2] = $expectedArray[$arg2] = "";
+      assertEquals($expectedArray, $responseArray);
+    }
     
     /**
      * @Given /^the response code should be "([^"]*)"$/
@@ -168,6 +189,14 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     	assertEquals($code, $response->getStatusCode(), "Wrong response code");
     }
     
+    /**
+     * @Given /^the returned "([^"]*)" should be a number$/
+     */
+    public function theReturnedShouldBeANumber($arg1)
+    {
+      $response = json_decode($this->client->getResponse()->getContent(),true);
+      assertTrue(is_numeric($response[$arg1]));
+    }
     
     /**
      * @Given /^I am not registered$/

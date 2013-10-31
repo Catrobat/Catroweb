@@ -41,21 +41,29 @@ class ApiController
 
     public function uploadAction(Request $request)
     {
-      $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
-      
-      $this->project_manager->addProject($add_project_request);
-      $user = $this->context->getToken()->getUser();
-      $user->setToken($this->tokenGenerator->generateToken());
-      $this->user_manager->updateUser($user);
-      
-      $response["projectId"] = "";
-      $response["statusCode"] = 200;
-      $response["answer"] = "Your project was uploaded successfully!";
-      $response["token"] = $user->getToken();
-      $response["preHeaderMessages"] = "";
+      if ($request->files->count() != 1)
+      {
+        $response["statusCode"] = 501;
+        $response["answer"] = "POST-Data not correct or missing!";
+      }
+      else 
+      {
+        $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
+        
+        $id = $this->project_manager->addProject($add_project_request);
+        $user = $this->context->getToken()->getUser();
+        $user->setToken($this->tokenGenerator->generateToken());
+        $this->user_manager->updateUser($user);
+        
+        $response["projectId"] = $id;
+        $response["statusCode"] = 200;
+        $response["answer"] = "Your project was uploaded successfully!";
+        $response["token"] = $user->getToken();
+      }
         
 //      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
-    	return $this->templating->renderResponse('CatrobatApiBundle:Api:upload.json.twig', array("response" => $response));
+      $response["preHeaderMessages"] = "";
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:upload.json.twig', array("response" => $response));
     }
     
     public function loginOrRegisterAction(Request $request)

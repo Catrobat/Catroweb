@@ -25,6 +25,8 @@ class ProjectManager
     $file = $request->getProjectfile();
 
     $validator = new ProjectDirectoryValidator();
+    
+    
     $extract_dir = $this->file_extractor->extract($file);
      
     $info = $validator->getProjectInfo($extract_dir);
@@ -43,6 +45,8 @@ class ProjectManager
 
     $this->screenshot_repository->saveProjectAssets($info['screenshot'], $project->getId());
     $this->file_repository->saveProjectfile($file,$project->getId());
+    
+    return $project->getId();
   }
   
 }

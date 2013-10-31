@@ -31,9 +31,9 @@ Feature: Checking a user's token validity
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "invalid"
     When I POST these parameters to "/api/checkToken/check.json"
-    Then I should see:
+    Then I should get the json object:
       """
-      {"statusCode":601,"answer":"Sorry, your authentication data was incorrect. Please check your nickname and password!","preHeaderMessages":"  \n"}
+      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
     And the response code should be "403"
 
@@ -41,9 +41,9 @@ Feature: Checking a user's token validity
     Given I have a parameter "username" with value "doesnotexist"
     And I have a parameter "token" with value "doesnotmatter"
     When I POST these parameters to "/api/checkToken/check.json"
-    Then I should see:
+    Then I should get the json object:
       """
-      {"statusCode":601,"answer":"Sorry, your authentication data was incorrect. Please check your nickname and password!","preHeaderMessages":"  \n"}
+      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
     And the response code should be "403"
     

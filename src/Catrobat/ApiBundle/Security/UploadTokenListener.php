@@ -51,7 +51,7 @@ class UploadTokenListener implements ListenerInterface
     {
     }
     
-    $content = $this->templating->render('CatrobatApiBundle:Api:403.json.twig');
+    $content = $this->templating->render('CatrobatApiBundle:Api:TokenAuthenticationFailed.json.twig');
     $response = new Response($content);
     $response->setStatusCode(403);
     $event->setResponse($response);
@@ -59,7 +59,7 @@ class UploadTokenListener implements ListenerInterface
 
   protected function newTokenMissingResponse()
   {
-    $content = $this->templating->render('CatrobatApiBundle:Api:NoTokenError.json.twig');
+    $content = $this->templating->render('CatrobatApiBundle:Api:TokenAuthenticationFailed.json.twig');
     $response = new Response($content);
     $response->setStatusCode(401);
     return $response;
