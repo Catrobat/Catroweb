@@ -41,8 +41,14 @@ class ApiController
       
       $this->project_manager->addProject($add_project_request);
       
-      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
-    	return $this->templating->renderResponse('CatrobatApiBundle:Api:index.json.twig', array("msg" => $num_files));
+      $response["projectId"] = "";
+      $response["statusCode"] = 200;
+      $response["answer"] = "Your project was uploaded successfully!";
+      $response["token"] = "";
+      $response["preHeaderMessages"] = "";
+
+//      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
+    	return $this->templating->renderResponse('CatrobatApiBundle:Api:upload.json.twig', array("response" => $response));
     }
     
     public function loginOrRegisterAction(Request $request)

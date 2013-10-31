@@ -13,7 +13,7 @@ class ProjectFileRepository
   function __construct($directory, $webpath)
   {
     $this->directory = $directory;
-    $this->webpath = $webpath
+    $this->webpath = $webpath;
     $this->filesystem = new Filesystem();
   }
   
