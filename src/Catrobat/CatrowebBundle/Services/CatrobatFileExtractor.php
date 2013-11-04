@@ -5,6 +5,7 @@ namespace Catrobat\CatrowebBundle\Services;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;
 use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile;
 
 class CatrobatFileExtractor
 {
@@ -45,7 +46,7 @@ class CatrobatFileExtractor
       throw new InvalidCatrobatFileException("unable to extract catrobat file");
     }
     
-    return $full_extract_dir;
+    return new ExtractedCatrobatFile($full_extract_dir);
   }
   
 }

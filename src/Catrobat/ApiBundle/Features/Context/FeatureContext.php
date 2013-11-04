@@ -177,7 +177,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
       $expectedArray = json_decode($string->getRaw(),true);
       $responseArray[$arg1] = $expectedArray[$arg1] = "";
       $responseArray[$arg2] = $expectedArray[$arg2] = "";
-      assertEquals($expectedArray, $responseArray);
+      assertEquals($expectedArray, $responseArray, $response);
     }
     
     /**

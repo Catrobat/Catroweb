@@ -24,16 +24,11 @@ class ProjectManager
   {
     $file = $request->getProjectfile();
 
-    $validator = new ProjectDirectoryValidator();
-    
-    
-    $extract_dir = $this->file_extractor->extract($file);
+    $extracted_file = $this->file_extractor->extract($file);
      
-    $info = $validator->getProjectInfo($extract_dir);
-    
     $project = new Project();
-    $project->setName($info['name']);
-    $project->setDescription($info['description']);
+    $project->setName($extracted_file->getName());
+    $project->setDescription($extracted_file->getDescription());
     $project->setFilename($file->getFilename());
     $project->setThumbnail("");
     $project->setScreenshot("");
@@ -43,7 +38,7 @@ class ProjectManager
     $em->persist($project);
     $em->flush();
 
-    $this->screenshot_repository->saveProjectAssets($info['screenshot'], $project->getId());
+    $this->screenshot_repository->saveProjectAssets($extracted_file->getScreenshotPath(), $project->getId());
     $this->file_repository->saveProjectfile($file,$project->getId());
     
     return $project->getId();

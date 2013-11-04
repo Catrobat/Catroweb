@@ -2530,16 +2530,16 @@
         },
         {
             "name": "phpspec/php-diff",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "shasum": ""
             },
             "type": "library",
@@ -2559,7 +2559,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2012-11-08 08:55:45"
+            "time": "2013-11-01 13:02:21"
         },
         {
             "name": "phpspec/phpspec",
@@ -2567,12 +2567,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32"
+                "reference": "e4ea2441d044057698b7e1e2a51cb5d33fa8ea20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e4ea2441d044057698b7e1e2a51cb5d33fa8ea20",
+                "reference": "e4ea2441d044057698b7e1e2a51cb5d33fa8ea20",
                 "shasum": ""
             },
             "require": {
@@ -2627,7 +2627,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-10-21 19:22:09"
+            "time": "2013-11-03 18:32:44"
         },
         {
             "name": "phpspec/prophecy",
@@ -2690,12 +2690,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/Symfony2Extension.git",
-                "reference": "2d6f94e80ebe1319ec23716bddf2df2ab956fb67"
+                "reference": "2dd925fe68bc2a5e1d21576080818d7235d0d69a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/Symfony2Extension/zipball/2d6f94e80ebe1319ec23716bddf2df2ab956fb67",
-                "reference": "2d6f94e80ebe1319ec23716bddf2df2ab956fb67",
+                "url": "https://api.github.com/repos/phpspec/Symfony2Extension/zipball/2dd925fe68bc2a5e1d21576080818d7235d0d69a",
+                "reference": "2dd925fe68bc2a5e1d21576080818d7235d0d69a",
                 "shasum": ""
             },
             "require": {
@@ -2730,7 +2730,7 @@
                 "Symfony2",
                 "phpspec"
             ],
-            "time": "2013-09-02 22:03:06"
+            "time": "2013-11-03 18:53:32"
         },
         {
             "name": "phpunit/php-code-coverage",
