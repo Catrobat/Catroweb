@@ -3,7 +3,6 @@ namespace Catrobat\CatrowebBundle\Model;
 
 use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CatrowebBundle\Entity\Project;
-use Catrobat\CatrowebBundle\Services\ProjectDirectoryValidator;
 
 class ProjectManager
 {
@@ -16,10 +15,10 @@ class ProjectManager
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $doctrine, $extracted_file_validator)
   {
     $this->file_extractor = $file_extractor;
+    $this->extracted_file_validator = $extracted_file_validator;
     $this->file_repository = $file_repository;
     $this->screenshot_repository = $screenshot_repository;
     $this->doctrine = $doctrine;
-    $this->extracted_file_validator = $extracted_file_validator;
   }
   
   public function addProject(AddProjectRequest $request)
