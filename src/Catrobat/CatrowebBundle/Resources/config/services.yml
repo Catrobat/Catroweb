@@ -18,7 +18,7 @@ services:
 # =========================== Services ===========================
       catroweb.projectmanager:
             class: Catrobat\CatrowebBundle\Model\ProjectManager
-            arguments: ["@catrobat.file.extractor","@catrobat.file.repository", "@catrobat.screenshot.repository", "@doctrine"]
+            arguments: ["@catrobat.file.extractor","@catrobat.file.repository", "@catrobat.screenshot.repository", "@doctrine","@catroweb.file.validator"]
 
       catroweb.usermanager:
             class: Catrobat\CatrowebBundle\Model\UserManager

@@ -13,6 +13,7 @@ use Catrobat\CatrowebBundle\Model\UserManager;
 use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CatrowebBundle\Model\ProjectManager;
 use Catrobat\CatrowebBundle\Services\TokenGenerator;
+use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
 
 class ApiController
 {
@@ -48,17 +49,25 @@ class ApiController
       }
       else 
       {
-        $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
-        
-        $id = $this->project_manager->addProject($add_project_request);
-        $user = $this->context->getToken()->getUser();
-        $user->setToken($this->tokenGenerator->generateToken());
-        $this->user_manager->updateUser($user);
-        
-        $response["projectId"] = $id;
-        $response["statusCode"] = 200;
-        $response["answer"] = "Your project was uploaded successfully!";
-        $response["token"] = $user->getToken();
+        try 
+        {
+          $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
+          
+          $id = $this->project_manager->addProject($add_project_request);
+          $user = $this->context->getToken()->getUser();
+          $user->setToken($this->tokenGenerator->generateToken());
+          $this->user_manager->updateUser($user);
+          
+          $response["projectId"] = $id;
+          $response["statusCode"] = 200;
+          $response["answer"] = "Your project was uploaded successfully!";
+          $response["token"] = $user->getToken();
+        }
+        catch (InvalidCatrobatFileException $exception)
+        {
+          $response["statusCode"] = 501;
+          $response["answer"] = $exception->getMessage();
+        }
       }
         
 //      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
