@@ -14,10 +14,10 @@ Feature: Search in the project repository
 
   @TODO
   Scenario: search projects
-    Given I want to search for the term "project"
-    And I have the limit "1"
-    And I have the offset "0"
-    When I call "/api/projects/search.json" with the given data
+    Given I have a parameter "projectName" with value "project 1"
+    And I have a parameter "limit" with value "1"
+    And I have a parameter "offset" with value "0"
+    When I POST these parameters to "/api/projects/search.json"
     Then I should see:
       """
       {

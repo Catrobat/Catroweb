@@ -13,6 +13,7 @@ use Catrobat\CatrowebBundle\Model\UserManager;
 use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CatrowebBundle\Model\ProjectManager;
 use Catrobat\CatrowebBundle\Services\TokenGenerator;
+use Catrobat\ApiBundle\Entity;
 
 class ApiController
 {
@@ -24,7 +25,7 @@ class ApiController
     protected $tokenGenerator;
     
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator)
+    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator, $doctrine)
     {
       $this->templating = $templating;
       $this->user_manager = $user_manager;
@@ -32,6 +33,7 @@ class ApiController
       $this->context = $context;
       $this->project_manager = $project_manager;
       $this->tokenGenerator = $tokenGenerator;
+      $this->doctrine = $doctrine;
     }
   
     public function checkTokenAction()
@@ -121,4 +123,22 @@ class ApiController
       return $this->templating->renderResponse('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
     }
     
+    public function searchProjectsAction(Request $request) 
+    {
+      $retArray = array();
+      $projectName = $request->request->get('projectName');
+      $limit = intval($request->request->get('limit'));
+      $offset = intval($request->request->get('offset'));
+       
+      //$retArray['projectName'] = $projectName;
+      $retArray['limit'] = $limit;
+      $retArray['offset'] = $offset;
+      
+      $em = $this->doctrine->getManager();
+      $entities = $em->getRepository('CatrobatApiBundle:Project')->findBy(array('name' => $projectName));
+      $retArray['id'] = $entities[0]->getId();
+      //$retArray['projectName'] = $entities[0]->getName();
+      
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:searchProjects.json.twig', $retArray);
+    }
 }
