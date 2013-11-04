@@ -27,7 +27,7 @@ class ExtractedCatrobatFile
 
   public function getName()
   {
-    return ""; //(string)$this->project_xml_properties->header->programName;
+    return (string)$this->project_xml_properties->header->programName;
   }
   
   public function getDescription()
