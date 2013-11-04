@@ -2,7 +2,15 @@ services:
       catroweb.file.validator:
             class: Catrobat\CatrowebBundle\Services\Validators\ExtractedFileValidator
             calls:
-              - [addValidator, ["@catroweb.file.validator.required"]]
+              - [addValidator, ["@catroweb.file.validator.name"]]
+              - [addValidator, ["@catroweb.file.validator.description"]]
 
-      catroweb.file.validator.required:
-            class: Catrobat\CatrowebBundle\Services\Validators\RequiredFieldsValidator
+      catroweb.file.validator.name:
+            class: Catrobat\CatrowebBundle\Services\Validators\NameValidator
+            public: false
+
+      catroweb.file.validator.description:
+            class: Catrobat\CatrowebBundle\Services\Validators\DescriptionValidator
+            public: false
+
+            
