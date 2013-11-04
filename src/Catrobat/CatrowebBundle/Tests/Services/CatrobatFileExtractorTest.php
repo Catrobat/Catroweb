@@ -1,7 +1,7 @@
 <?php
-namespace Catrobat\CatrowebBundle\Tests\Helper;
+namespace Catrobat\CatrowebBundle\Tests\Services;
 
-use Catrobat\CatrowebBundle\Helper\CatrobatFileExtractor;
+use Catrobat\CatrowebBundle\Services\CatrobatFileExtractor;
 use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;

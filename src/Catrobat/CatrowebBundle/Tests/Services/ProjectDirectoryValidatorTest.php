@@ -1,6 +1,6 @@
 <?php
-namespace Catrobat\CatrowebBundle\Tests\Helper;
-use Catrobat\CatrowebBundle\Helper\ProjectDirectoryValidator;
+namespace Catrobat\CatrowebBundle\Tests\Services;
+use Catrobat\CatrowebBundle\Services\ProjectDirectoryValidator;
 
 class ProjectDirectoryValidatorTest extends \PHPUnit_Framework_TestCase
 {
