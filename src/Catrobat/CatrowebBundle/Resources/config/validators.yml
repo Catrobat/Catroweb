@@ -4,6 +4,7 @@ services:
             calls:
               - [addValidator, ["@catroweb.file.validator.name"]]
               - [addValidator, ["@catroweb.file.validator.description"]]
+              - [addValidator, ["@catroweb.file.validator.filestructure"]]
 
       catroweb.file.validator.name:
             class: Catrobat\CatrowebBundle\Services\Validators\NameValidator
@@ -13,4 +14,7 @@ services:
             class: Catrobat\CatrowebBundle\Services\Validators\DescriptionValidator
             public: false
 
+      catroweb.file.validator.filestructure:
+            class: Catrobat\CatrowebBundle\Services\Validators\FileStructureValidator
+            public: false
             
