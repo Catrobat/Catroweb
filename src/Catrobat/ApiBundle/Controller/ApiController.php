@@ -135,10 +135,18 @@ class ApiController
       $retArray['offset'] = $offset;
       
       $em = $this->doctrine->getManager();
-      $entities = $em->getRepository('CatrobatApiBundle:Project')->findBy(array('name' => $projectName));
-      $retArray['id'] = $entities[0]->getId();
-      //$retArray['projectName'] = $entities[0]->getName();
+      $entities = $em->getRepository('CatrowebBundle:Project')->findAll();
+      $retArray['numOfProjects'] = count($entities);
       
+      $entities = $em->getRepository('CatrowebBundle:Project')->findOneByName($projectName);
+      $retArray['id'] = $entities->getId();
+      $retArray['projectName'] = $entities->getName();
+      $retArray['description'] = $entities->getDescription();
+      $retArray['downloads'] = $entities->getDownloads();
+      $retArray['views'] = $entities->getViews();
+      $retArray['author'] = $entities->getUser()->getUsername();
+      $retArray['uploaded_time'] = $entities->getUploadedAt()->getTimestamp();
+
       return $this->templating->renderResponse('CatrobatApiBundle:Api:searchProjects.json.twig', $retArray);
     }
 }

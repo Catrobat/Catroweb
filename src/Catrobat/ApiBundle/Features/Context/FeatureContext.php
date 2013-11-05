@@ -96,6 +96,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 				$project->setFilename("file".$i.".catrobat");
 				$project->setThumbnail("thumb.png");
 				$project->setScreenshot("screenshot.png");
+				$project->setViews($projects[$i]['views']);
+				$project->setDownloads($projects[$i]['downloads']);
+				$project->setUploadedAt(new \DateTime($projects[$i]['upload time']));
 				$em->persist($project);
     	}
     	$em->flush();

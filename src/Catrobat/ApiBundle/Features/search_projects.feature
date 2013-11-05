@@ -19,30 +19,30 @@ Feature: Search in the project repository
     And I have a parameter "offset" with value "0"
     When I POST these parameters to "/api/projects/search.json"
     Then I should see:
-      """
-      {
-	      "completeTerm":"",
-	      "CatrobatInformation": {
-	                               "BaseUrl":"https:\/\/localhost\/",
-	                               "TotalProjects":3,
-	                               "ProjectsExtension":".catrobat"
-	                              },
-	      "CatrobatProjects":[{
-	                            "ProjectId":"1",
-	                            "ProjectName":"project 1",
-	                            "ProjectNameShort":"project 1",
-	                            "ScreenshotBig":"resources\/thumbnails\/1_large.png",
-												      "ScreenshotSmall":"resources\/thumbnails\/1_small.png",
-												      "Author":"Catrobat",
-												      "Description":"",
-												      "Uploaded":<time>,
-												      "UploadedString":<timestring>,
-												      "Version":"0.8.5",
-												      "Views":"12",
-												      "Downloads":"3",
-												      "ProjectUrl":"details\/1",
-												      "DownloadUrl":"download\/1.catrobat"
-												    }],
-	      "preHeaderMessages":""
-      }
-      """
+"""
+{
+  "completeTerm":"",
+  "CatrobatInformation": {
+		"BaseUrl":"https:\/\/localhost\/",
+		"TotalProjects":3,
+		"ProjectsExtension":".catrobat"
+  },
+  "CatrobatProjects":[{
+		"ProjectId":"1",
+		"ProjectName":"project 1",
+		"ProjectNameShort":"project 1",
+		"ScreenshotBig":"resources\/thumbnails\/1_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+		"Author":"Catrobat",
+		"Description":"p1",
+		"Uploaded":"1357038000",
+		"UploadedString":<timestring>,
+		"Version":"0.8.5",
+		"Views":"12",
+		"Downloads":"3",
+		"ProjectUrl":"details\/1",
+		"DownloadUrl":"download\/1.catrobat"
+  }],
+  "preHeaderMessages":""
+}
+"""

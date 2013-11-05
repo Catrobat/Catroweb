@@ -1,1 +1,25 @@
-{ projectName: "{{ projectName|default("nothing to do here") }}" id: "{{ id|default("no ID") }}" limit: "{{ limit|default("no limit") }}", offset: "{{ offset|default("no offset") }}"}
+{
+  "completeTerm":"",
+  "CatrobatInformation": {
+		"BaseUrl":"https:\/\/localhost\/",
+		"TotalProjects":{{ numOfProjects|default("NO PROJECTS") }},
+		"ProjectsExtension":".catrobat"
+  },
+  "CatrobatProjects":[{
+		"ProjectId":"{{ id|default("NO ID") }}",
+		"ProjectName":"{{ projectName|default("NO PROJECTNAME") }}",
+		"ProjectNameShort":"{{ projectName|default("no ID") }}",
+		"ScreenshotBig":"resources\/thumbnails\/1_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+		"Author":"{{ author|default("NO AUTHOR") }}",
+		"Description":"{{ description|default("NO DESCRIPTION") }}",
+		"Uploaded":"{{ uploaded_time|default("NO TIME") }}",
+		"UploadedString":<timestring>,
+		"Version":"0.8.5",
+		"Views":"{{ views|default("NO VIEWS") }}",
+		"Downloads":"{{ downloads|default("NO DOWNLOADS") }}",
+		"ProjectUrl":"details\/1",
+		"DownloadUrl":"download\/1.catrobat"
+  }],
+  "preHeaderMessages":""
+}
