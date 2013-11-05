@@ -19,7 +19,43 @@ Feature: Upload a project
     And I have a file "test.catrobat"
     And I have a parameter "fileChecksum" with the md5checksum of "test.catrobat"
     When I POST these parameters to "/api/upload/upload.json"
-    Then I should see:
+    Then I should get the json object with random "token" and "projectId":
       """
-      {"projectId":<id>,"statusCode":200,"answer":"Your project was uploaded successfully!","token":<token>,"preHeaderMessages":""}
+      {"projectId":"","statusCode":200,"answer":"Your project was uploaded successfully!","token":"","preHeaderMessages":""}
       """
+    And the returned "projectId" should be a number
+
+  Scenario: missing all prameters will result in an error
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
+      """
+  Scenario: trying to upload with an invalid user should result in an error
+    Given I have a parameter "username" with value "INVALID"
+    And I have a parameter "token" with value "cccccccccc"
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
+      """
+    
+  Scenario: trying to upload with an invalid token should result in an error
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "INVALID"
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
+      """
+
+  Scenario: trying to upload with a missing token should result in an error
+    Given I have a parameter "username" with value "Catrobat"
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
+      """
+    

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7c79ecb3496cfeed8934656f893c593e",
+    "hash": "e2c8ab65bd24698ffc74165571b4f18d",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -2491,12 +2491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
-                "reference": "3f39e519ce7a5f34a561bd71e9b719fedc127f83"
+                "reference": "d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/3f39e519ce7a5f34a561bd71e9b719fedc127f83",
-                "reference": "3f39e519ce7a5f34a561bd71e9b719fedc127f83",
+                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57",
+                "reference": "d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57",
                 "shasum": ""
             },
             "require": {
@@ -2526,20 +2526,57 @@
                 "spec",
                 "specification"
             ],
-            "time": "2013-08-29 09:05:16"
+            "time": "2013-11-04 07:42:31"
         },
         {
-            "name": "phpspec/php-diff",
-            "version": "v1.0.1",
+            "name": "henrikbjorn/phpspec-code-coverage",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
+                "url": "https://github.com/henrikbjorn/PhpSpecCodeCoverageExtension.git",
+                "reference": "ed308e2537989d83c23d63c1e4b5e7793eb4cce5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "url": "https://api.github.com/repos/henrikbjorn/PhpSpecCodeCoverageExtension/zipball/ed308e2537989d83c23d63c1e4b5e7793eb4cce5",
+                "reference": "ed308e2537989d83c23d63c1e4b5e7793eb4cce5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "phpspec/phpspec": "dev-master",
+                "phpunit/php-code-coverage": "~1.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PhpSpec\\Extension\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Integrates CodeCoverage with PhpSpec",
+            "time": "2013-10-04 13:25:28"
+        },
+        {
+            "name": "phpspec/php-diff",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/php-diff.git",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "shasum": ""
             },
             "type": "library",
@@ -2559,7 +2596,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2012-11-08 08:55:45"
+            "time": "2013-11-01 13:02:21"
         },
         {
             "name": "phpspec/phpspec",
@@ -2567,12 +2604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32"
+                "reference": "c2092073588364e1f1ffa8c279ca2bea778b9be7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c2092073588364e1f1ffa8c279ca2bea778b9be7",
+                "reference": "c2092073588364e1f1ffa8c279ca2bea778b9be7",
                 "shasum": ""
             },
             "require": {
@@ -2627,7 +2664,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-10-21 19:22:09"
+            "time": "2013-11-04 20:18:29"
         },
         {
             "name": "phpspec/prophecy",
@@ -2690,12 +2727,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/Symfony2Extension.git",
-                "reference": "2d6f94e80ebe1319ec23716bddf2df2ab956fb67"
+                "reference": "2dd925fe68bc2a5e1d21576080818d7235d0d69a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/Symfony2Extension/zipball/2d6f94e80ebe1319ec23716bddf2df2ab956fb67",
-                "reference": "2d6f94e80ebe1319ec23716bddf2df2ab956fb67",
+                "url": "https://api.github.com/repos/phpspec/Symfony2Extension/zipball/2dd925fe68bc2a5e1d21576080818d7235d0d69a",
+                "reference": "2dd925fe68bc2a5e1d21576080818d7235d0d69a",
                 "shasum": ""
             },
             "require": {
@@ -2730,7 +2767,7 @@
                 "Symfony2",
                 "phpspec"
             ],
-            "time": "2013-09-02 22:03:06"
+            "time": "2013-11-03 18:53:32"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3220,13 +3257,14 @@
         "doctrine/data-fixtures": 20,
         "hwi/oauth-bundle": 20,
         "braincrafted/bootstrap-bundle": 20,
-        "behat/behat": 20,
         "phpspec/phpspec": 20,
         "behat/symfony2-extension": 20,
         "phpspec/symfony2-extension": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "behat/mink-browserkit-driver": 20,
         "bossa/phpspec2-expect": 20,
+        "henrikbjorn/phpspec-code-coverage": 20,
+        "behat/behat": 20,
         "behat/mink-extension": 20
     },
     "platform": {

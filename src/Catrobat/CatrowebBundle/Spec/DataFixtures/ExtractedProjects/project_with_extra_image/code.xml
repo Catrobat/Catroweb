@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.2</applicationVersion>
+    <catrobatLanguageVersion>0.9</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description>Simpler is impossible ;-)</description>
+    <deviceName>HTC Sensation Z710e</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>15</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>Compass 0.1</programName>
+    <remixOf>http://pocketcode.org/details/0</remixOf>
+    <screenHeight>960</screenHeight>
+    <screenWidth>540</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/825</url>
+    <userHandle>hej-wickie-hej</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>6be14df76d83b53f78a5833f8eedd53d_look.png</fileName>
+          <name>look</name>
+        </look>
+      </lookList>
+      <name>Background</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <foreverBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick class="loopEndlessBrick">
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="foreverBrick" reference="../.."/>
+              </loopEndBrick>
+            </foreverBrick>
+            <pointInDirectionBrick>
+              <object reference="../../../../.."/>
+              <degrees>
+                <formulaTree>
+                  <type>SENSOR</type>
+                  <value>COMPASS_DIRECTION</value>
+                </formulaTree>
+              </degrees>
+            </pointInDirectionBrick>
+            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object>
+          <lookList>
+            <look>
+              <fileName>904ED6FF45095AD4977CD4B73D7772C9_look.png</fileName>
+              <name>look</name>
+            </look>
+          </lookList>
+          <name>Needle</name>
+          <scriptList>
+            <startScript>
+              <brickList/>
+              <object reference="../../.."/>
+            </startScript>
+            <broadcastScript>
+              <brickList>
+                <setLookBrick>
+                  <object reference="../../../../.."/>
+                  <look reference="../../../../../lookList/look"/>
+                </setLookBrick>
+                <foreverBrick>
+                  <object reference="../../../../.."/>
+                  <loopEndBrick class="loopEndlessBrick">
+                    <object reference="../../../../../.."/>
+                    <loopBeginBrick class="foreverBrick" reference="../.."/>
+                  </loopEndBrick>
+                </foreverBrick>
+                <pointInDirectionBrick>
+                  <object reference="../../../../.."/>
+                  <degrees>
+                    <formulaTree>
+                      <type>SENSOR</type>
+                      <value>COMPASS_DIRECTION</value>
+                    </formulaTree>
+                  </degrees>
+                </pointInDirectionBrick>
+                <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+              </brickList>
+              <object reference="../../.."/>
+              <receivedMessage/>
+            </broadcastScript>
+          </scriptList>
+          <soundList/>
+        </object>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList/>
+  </variables>
+</program>

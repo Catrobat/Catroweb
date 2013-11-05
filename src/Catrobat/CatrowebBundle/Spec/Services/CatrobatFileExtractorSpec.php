@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CatrobatFileExtractorSpec extends ObjectBehavior
 {
+  
     function let()
     {
     	$this->beConstructedWith(__DIR__ . "/../Cache/");
@@ -23,9 +24,10 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
     {
     	$filesystem = new Filesystem();
     	$valid_catrobat_file = new File(__DIR__ . "/../../Tests/DataFixtures/CatrobatFiles/scaryghost.catrobat");
-    	$path_to_extracted_folder = $this->extract($valid_catrobat_file);
+    	$extracted_file = $this->extract($valid_catrobat_file);
+    	$extracted_file->shouldHaveType('Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile');
     	//    	echo($path_to_extracted_folder);
-    	$filesystem->remove($path_to_extracted_folder->getWrappedObject());
+    	$filesystem->remove($extracted_file->getWrappedObject()->getPath());
     }
     
     function it_throws_an_exception_while_extracting_an_invalid_file()
