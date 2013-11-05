@@ -2491,12 +2491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
-                "reference": "3f39e519ce7a5f34a561bd71e9b719fedc127f83"
+                "reference": "d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/3f39e519ce7a5f34a561bd71e9b719fedc127f83",
-                "reference": "3f39e519ce7a5f34a561bd71e9b719fedc127f83",
+                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57",
+                "reference": "d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57",
                 "shasum": ""
             },
             "require": {
@@ -2526,7 +2526,7 @@
                 "spec",
                 "specification"
             ],
-            "time": "2013-08-29 09:05:16"
+            "time": "2013-11-04 07:42:31"
         },
         {
             "name": "henrikbjorn/phpspec-code-coverage",
@@ -2604,12 +2604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "e4ea2441d044057698b7e1e2a51cb5d33fa8ea20"
+                "reference": "c2092073588364e1f1ffa8c279ca2bea778b9be7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e4ea2441d044057698b7e1e2a51cb5d33fa8ea20",
-                "reference": "e4ea2441d044057698b7e1e2a51cb5d33fa8ea20",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c2092073588364e1f1ffa8c279ca2bea778b9be7",
+                "reference": "c2092073588364e1f1ffa8c279ca2bea778b9be7",
                 "shasum": ""
             },
             "require": {
@@ -2664,7 +2664,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-11-03 18:32:44"
+            "time": "2013-11-04 20:18:29"
         },
         {
             "name": "phpspec/prophecy",

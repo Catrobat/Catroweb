@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CatrobatFileExtractorSpec extends ObjectBehavior
 {
+  
     function let()
     {
     	$this->beConstructedWith(__DIR__ . "/../Cache/");
