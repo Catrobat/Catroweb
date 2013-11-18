@@ -55,7 +55,7 @@ class ExtractedCatrobatFile
   
   public function getApplicationVersion()
   {
-    $info['application_version'] = (string)$$this->project_properties->header->applicationVersion;
+    return (string)$this->project_xml_properties->header->applicationVersion;
   }
   
   public function getPath()
