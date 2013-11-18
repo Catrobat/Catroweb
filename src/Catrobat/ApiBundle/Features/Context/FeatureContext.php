@@ -15,6 +15,8 @@ use Catrobat\CatrowebBundle\Entity\Project;
 use Behat\Behat\Event\SuiteEvent;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 //
 // Require 3rd-party libraries here:
@@ -60,6 +62,24 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
         $this->kernel = $kernel;
     }
 
+    /**
+     * @Given /^the upload folder is empty$/
+     */
+    public function theUploadFolderIsEmpty()
+    {
+      $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
+      $this->emptyDirectory($extract_dir);
+    }
+    
+    /**
+     * @Given /^the extract folder is empty$/
+     */
+    public function theExtractFolderIsEmpty()
+    {
+      $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
+      $this->emptyDirectory($extract_dir);
+    }
+    
     /**
      * @Given /^there are users:$/
      */
@@ -324,5 +344,15 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     	throw new PendingException();
     }
     
-    
+   private function emptyDirectory($directory)
+   {
+     $filesystem = new Filesystem();
+     
+     $finder = new Finder();
+     $finder->in($directory)->depth(0);
+     foreach ($finder as $file)
+     {
+       $filesystem->remove($file);
+     }
+   }
 }

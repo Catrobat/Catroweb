@@ -2,7 +2,9 @@
 Feature: Upload a project 
 
   Background: 
-    Given there are users:
+    Given the upload folder is empty
+    And the extract folder is empty
+    And there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
