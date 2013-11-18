@@ -30,6 +30,11 @@ class ExtractedCatrobatFile
     return (string)$this->project_xml_properties->header->programName;
   }
   
+  public function getLanguageVersion()
+  {
+    return (string)$this->project_xml_properties->header->catrobatLanguageVersion;
+  }
+  
   public function getDescription()
   {
     return (string)$this->project_xml_properties->header->description;

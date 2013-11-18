@@ -38,7 +38,7 @@ class ProjectManager
     $project->setUser($request->getUser());
     $project->setCatrobatVersion(1);
     $project->setCatrobatVersionName($extracted_file->getApplicationVersion());
-    $project->setLanguageVersion(1);
+    $project->setLanguageVersion($extracted_file->getLanguageVersion());
     $project->setUploadIp("127.0.0.1");
     $project->setRemixCount(0);
     $project->setFilesize(0);

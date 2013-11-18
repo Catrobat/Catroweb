@@ -15,11 +15,11 @@
 		"Description":"{{ description|default("NO DESCRIPTION") }}",
 		"Uploaded":"{{ uploaded_time|default("NO TIME") }}",
 		"UploadedString":<timestring>,
-		"Version":"0.8.5",
+		"Version":"{{ catrobat_version_name|default("NO VERSION") }}",
 		"Views":"{{ views|default("NO VIEWS") }}",
 		"Downloads":"{{ downloads|default("NO DOWNLOADS") }}",
-		"ProjectUrl":"details\/1",
-		"DownloadUrl":"download\/1.catrobat"
+		"ProjectUrl":"details\/{{ id|default("NO ID") }}",
+		"DownloadUrl":"download\/{{ id|default("NO ID") }}.catrobat"
   }],
   "preHeaderMessages":""
 }

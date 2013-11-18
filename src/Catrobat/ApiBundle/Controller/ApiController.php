@@ -162,6 +162,7 @@ class ApiController
       $retArray['views'] = $entities->getViews();
       $retArray['author'] = $entities->getUser()->getUsername();
       $retArray['uploaded_time'] = $entities->getUploadedAt()->getTimestamp();
+      $retArray['catrobat_version_name'] = $entities->getCatrobatVersionName();
 
       return $this->templating->renderResponse('CatrobatApiBundle:Api:searchProjects.json.twig', $retArray);
     }
