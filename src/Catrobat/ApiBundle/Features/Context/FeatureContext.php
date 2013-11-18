@@ -99,6 +99,14 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 				$project->setViews($projects[$i]['views']);
 				$project->setDownloads($projects[$i]['downloads']);
 				$project->setUploadedAt(new \DateTime($projects[$i]['upload time'],new \DateTimeZone('UTC')));
+				$project->setCatrobatVersion(1);
+				$project->setCatrobatVersionName($projects[$i]['version']);
+				$project->setLanguageVersion(1);
+				$project->setUploadIp("127.0.0.1");
+				$project->setRemixCount(0);
+				$project->setFilesize(0);
+				$project->setVisible(true);
+				$project->setUploadLanguage("en");
 				$em->persist($project);
     	}
     	$em->flush();

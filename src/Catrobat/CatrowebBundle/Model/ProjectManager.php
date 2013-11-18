@@ -36,6 +36,14 @@ class ProjectManager
     $project->setThumbnail("");
     $project->setScreenshot("");
     $project->setUser($request->getUser());
+    $project->setCatrobatVersion(1);
+    $project->setCatrobatVersionName($extracted_file->getApplicationVersion());
+    $project->setLanguageVersion(1);
+    $project->setUploadIp("127.0.0.1");
+    $project->setRemixCount(0);
+    $project->setFilesize(0);
+    $project->setVisible(true);
+    $project->setUploadLanguage("en");
     
     $em = $this->doctrine->getManager();
     $em->persist($project);

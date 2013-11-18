@@ -72,6 +72,52 @@ class Project
   protected $last_modified_at;
   
   /**
+   * @ORM\Column(type="string", options={"default":0})
+   */
+  protected $language_version = 0;
+  
+  /**
+   * @ORM\Column(type="string", options={"default":""})
+   */
+  protected $catrobat_version_name;
+  
+  /**
+   * @ORM\Column(type="integer", options={"default":0})
+   */
+  protected $catrobat_version;
+  
+  /**
+   * @ORM\Column(type="string", options={"default":""})
+   */
+  protected $upload_ip;
+  
+  /**
+   * @ORM\Column(type="boolean", options={"default":true})
+   */
+  protected $visible;
+  
+  /**
+   * @ORM\Column(type="string", options={"default":""})
+   */
+  protected $upload_language;
+  
+  /**
+   * @ORM\Column(type="integer", options={"default":0})
+   */
+  protected $filesize;
+  
+  /**
+   * @ORM\Column(type="integer", options={"default":0})
+   */
+  protected $remix_count;
+  
+  /**
+   * @ORM\ManyToOne(targetEntity="Project")
+   * @ORM\JoinColumn(name="remix_id", referencedColumnName="id")
+   */
+  protected $remix_of;
+  
+  /**
    * @ORM\PreUpdate
    */
   public function updateLastModifiedTimestamp()
@@ -335,5 +381,212 @@ class Project
     public function __toString()
     {
       return $this->name;
+    }
+
+    /**
+     * Set language_version
+     *
+     * @param string $languageVersion
+     * @return Project
+     */
+    public function setLanguageVersion($languageVersion)
+    {
+        $this->language_version = $languageVersion;
+    
+        return $this;
+    }
+
+    /**
+     * Get language_version
+     *
+     * @return string 
+     */
+    public function getLanguageVersion()
+    {
+        return $this->language_version;
+    }
+
+    /**
+     * Set catrobat_version_name
+     *
+     * @param string $catrobatVersionName
+     * @return Project
+     */
+    public function setCatrobatVersionName($catrobatVersionName)
+    {
+        $this->catrobat_version_name = $catrobatVersionName;
+    
+        return $this;
+    }
+
+    /**
+     * Get catrobat_version_name
+     *
+     * @return string 
+     */
+    public function getCatrobatVersionName()
+    {
+        return $this->catrobat_version_name;
+    }
+
+    /**
+     * Set catrobat_version
+     *
+     * @param integer $catrobatVersion
+     * @return Project
+     */
+    public function setCatrobatVersion($catrobatVersion)
+    {
+        $this->catrobat_version = $catrobatVersion;
+    
+        return $this;
+    }
+
+    /**
+     * Get catrobat_version
+     *
+     * @return integer 
+     */
+    public function getCatrobatVersion()
+    {
+        return $this->catrobat_version;
+    }
+
+    /**
+     * Set upload_ip
+     *
+     * @param string $uploadIp
+     * @return Project
+     */
+    public function setUploadIp($uploadIp)
+    {
+        $this->upload_ip = $uploadIp;
+    
+        return $this;
+    }
+
+    /**
+     * Get upload_ip
+     *
+     * @return string 
+     */
+    public function getUploadIp()
+    {
+        return $this->upload_ip;
+    }
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     * @return Project
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+    
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean 
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
+
+    /**
+     * Set upload_language
+     *
+     * @param string $uploadLanguage
+     * @return Project
+     */
+    public function setUploadLanguage($uploadLanguage)
+    {
+        $this->upload_language = $uploadLanguage;
+    
+        return $this;
+    }
+
+    /**
+     * Get upload_language
+     *
+     * @return string 
+     */
+    public function getUploadLanguage()
+    {
+        return $this->upload_language;
+    }
+
+    /**
+     * Set filesize
+     *
+     * @param integer $filesize
+     * @return Project
+     */
+    public function setFilesize($filesize)
+    {
+        $this->filesize = $filesize;
+    
+        return $this;
+    }
+
+    /**
+     * Get filesize
+     *
+     * @return integer 
+     */
+    public function getFilesize()
+    {
+        return $this->filesize;
+    }
+
+    /**
+     * Set remix_count
+     *
+     * @param integer $remixCount
+     * @return Project
+     */
+    public function setRemixCount($remixCount)
+    {
+        $this->remix_count = $remixCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get remix_count
+     *
+     * @return integer 
+     */
+    public function getRemixCount()
+    {
+        return $this->remix_count;
+    }
+
+    /**
+     * Set remix_of
+     *
+     * @param \Catrobat\CatrowebBundle\Entity\Project $remixOf
+     * @return Project
+     */
+    public function setRemixOf(\Catrobat\CatrowebBundle\Entity\Project $remixOf = null)
+    {
+        $this->remix_of = $remixOf;
+    
+        return $this;
+    }
+
+    /**
+     * Get remix_of
+     *
+     * @return \Catrobat\CatrowebBundle\Entity\Project 
+     */
+    public function getRemixOf()
+    {
+        return $this->remix_of;
     }
 }
