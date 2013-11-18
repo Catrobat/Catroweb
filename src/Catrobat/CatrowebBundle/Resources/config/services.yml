@@ -11,7 +11,7 @@ parameters:
 services:
 # =========================== Kernel Listener ===========================
       catrowebbundle.listener.request:
-              class: Catrobat\CatrowebBundle\EventListener\RequestListener
+              class: Catrobat\CatrowebBundle\EventListener\LanguageListener
               tags:
                   - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
                   
