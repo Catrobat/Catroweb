@@ -11,6 +11,8 @@ class ProjectManager
   protected $screenshot_repository;
   protected $doctrine;
   protected $extracted_file_validator;
+  protected $entity_manager;
+  protected $project_repository;
   
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $doctrine, $extracted_file_validator)
   {
@@ -19,6 +21,8 @@ class ProjectManager
     $this->file_repository = $file_repository;
     $this->screenshot_repository = $screenshot_repository;
     $this->doctrine = $doctrine;
+    $this->entity_manager = $this->doctrine->getManager();
+    $this->project_repository = $this->doctrine->getRepository('CatrowebBundle:Project');
   }
   
   public function addProject(AddProjectRequest $request)
@@ -45,14 +49,23 @@ class ProjectManager
     $project->setVisible(true);
     $project->setUploadLanguage("en");
     
-    $em = $this->doctrine->getManager();
-    $em->persist($project);
-    $em->flush();
+    $this->entity_manager->persist($project);
+    $this->entity_manager->flush();
 
     $this->screenshot_repository->saveProjectAssets($extracted_file->getScreenshotPath(), $project->getId());
     $this->file_repository->saveProjectfile($file,$project->getId());
     
     return $project->getId();
+  }
+  
+  public function findOneByName($projectName)
+  {
+    return $this->project_repository->findOneByName($projectName);
+  }
+  
+  public function findAll()
+  {
+    return $this->project_repository->findAll();
   }
   
 }
