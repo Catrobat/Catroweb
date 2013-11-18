@@ -786,12 +786,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "0cb03029c7c1c833a11c7bebf30125276f0aa5b9"
+                "reference": "e543600e49216765315610b6281349ee86dfe87e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/0cb03029c7c1c833a11c7bebf30125276f0aa5b9",
-                "reference": "0cb03029c7c1c833a11c7bebf30125276f0aa5b9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/e543600e49216765315610b6281349ee86dfe87e",
+                "reference": "e543600e49216765315610b6281349ee86dfe87e",
                 "shasum": ""
             },
             "require": {
@@ -846,7 +846,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-10-28 10:50:07"
+            "time": "2013-11-07 03:54:10"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -1363,16 +1363,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "f72392d0e6eb855118f5a84e89ac2d257c704abd"
+                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f72392d0e6eb855118f5a84e89ac2d257c704abd",
-                "reference": "f72392d0e6eb855118f5a84e89ac2d257c704abd",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6225b22de9dcf36546be3a0b2fa8e3d986153f57",
+                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57",
                 "shasum": ""
             },
             "require": {
@@ -1380,21 +1380,26 @@
                 "psr/log": "~1.0"
             },
             "require-dev": {
+                "aws/aws-sdk-php": "~2.4.8",
                 "doctrine/couchdb": "dev-master",
                 "mlehner/gelf-php": "1.0.*",
-                "raven/raven": "0.5.*"
+                "phpunit/phpunit": "~3.7.0",
+                "raven/raven": "0.5.*",
+                "ruflin/elastica": "0.90.*"
             },
             "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "raven/raven": "Allow sending log messages to a Sentry server"
+                "raven/raven": "Allow sending log messages to a Sentry server",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -1421,7 +1426,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-07-28 22:38:30"
+            "time": "2013-11-14 19:48:31"
         },
         {
             "name": "nikic/php-parser",
@@ -1916,16 +1921,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.6",
+            "version": "v2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "d0597156c4c03ceca039f6b7770a47397ba295f0"
+                "reference": "2829b471871c2564228fe9f0832a0f928a8ffaa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/d0597156c4c03ceca039f6b7770a47397ba295f0",
-                "reference": "d0597156c4c03ceca039f6b7770a47397ba295f0",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/2829b471871c2564228fe9f0832a0f928a8ffaa1",
+                "reference": "2829b471871c2564228fe9f0832a0f928a8ffaa1",
                 "shasum": ""
             },
             "require": {
@@ -2020,7 +2025,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-10-10 13:24:22"
+            "time": "2013-11-14 07:58:51"
         },
         {
             "name": "twig/extensions",
@@ -2491,12 +2496,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
-                "reference": "d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57"
+                "reference": "ca1ec876b793684462167b9c65b2fef959610c56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57",
-                "reference": "d28fd0a927a3eb6c6d2de35011a85bcc5e79fb57",
+                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/ca1ec876b793684462167b9c65b2fef959610c56",
+                "reference": "ca1ec876b793684462167b9c65b2fef959610c56",
                 "shasum": ""
             },
             "require": {
@@ -2526,7 +2531,7 @@
                 "spec",
                 "specification"
             ],
-            "time": "2013-11-04 07:42:31"
+            "time": "2013-11-08 11:32:19"
         },
         {
             "name": "henrikbjorn/phpspec-code-coverage",
@@ -2534,12 +2539,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrikbjorn/PhpSpecCodeCoverageExtension.git",
-                "reference": "ed308e2537989d83c23d63c1e4b5e7793eb4cce5"
+                "reference": "1d38c8019e10ad05c7a71624f142d2e60f37aee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrikbjorn/PhpSpecCodeCoverageExtension/zipball/ed308e2537989d83c23d63c1e4b5e7793eb4cce5",
-                "reference": "ed308e2537989d83c23d63c1e4b5e7793eb4cce5",
+                "url": "https://api.github.com/repos/henrikbjorn/PhpSpecCodeCoverageExtension/zipball/1d38c8019e10ad05c7a71624f142d2e60f37aee0",
+                "reference": "1d38c8019e10ad05c7a71624f142d2e60f37aee0",
                 "shasum": ""
             },
             "require": {
@@ -2563,7 +2568,7 @@
                 "MIT"
             ],
             "description": "Integrates CodeCoverage with PhpSpec",
-            "time": "2013-10-04 13:25:28"
+            "time": "2013-11-12 10:32:24"
         },
         {
             "name": "phpspec/php-diff",
@@ -2604,12 +2609,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "c2092073588364e1f1ffa8c279ca2bea778b9be7"
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c2092073588364e1f1ffa8c279ca2bea778b9be7",
-                "reference": "c2092073588364e1f1ffa8c279ca2bea778b9be7",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c631a7c980d5be303ba513c1598a663393a59028",
+                "reference": "c631a7c980d5be303ba513c1598a663393a59028",
                 "shasum": ""
             },
             "require": {
@@ -2664,7 +2669,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-11-04 20:18:29"
+            "time": "2013-11-13 10:07:05"
         },
         {
             "name": "phpspec/prophecy",
@@ -3142,12 +3147,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/BehatPageObjectExtension.git",
-                "reference": "f49b8fe3789ba866b141baf851c5a6843326917b"
+                "reference": "2a8de8aabc6631ab83e1fe282bb93107b64685de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/f49b8fe3789ba866b141baf851c5a6843326917b",
-                "reference": "f49b8fe3789ba866b141baf851c5a6843326917b",
+                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/2a8de8aabc6631ab83e1fe282bb93107b64685de",
+                "reference": "2a8de8aabc6631ab83e1fe282bb93107b64685de",
                 "shasum": ""
             },
             "require": {
@@ -3193,7 +3198,7 @@
                 "Behat",
                 "page"
             ],
-            "time": "2013-08-13 09:40:20"
+            "time": "2013-11-13 09:31:10"
         },
         {
             "name": "vipsoft/doctrine-data-fixtures-extension",

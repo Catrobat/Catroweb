@@ -20,8 +20,7 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
     {
       $file->getPath()->willReturn(__DIR__ . "/../../DataFixtures/ExtractedProjects/compass");
       $file->getProjectXmlProperties()->willReturn(simplexml_load_file(__DIR__ . "/../../DataFixtures/ExtractedProjects/compass/code.xml"));
-      $this->validate($file);
-      //$this->shouldNotThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldNotThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**

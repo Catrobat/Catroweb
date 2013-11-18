@@ -98,7 +98,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 				$project->setScreenshot("screenshot.png");
 				$project->setViews($projects[$i]['views']);
 				$project->setDownloads($projects[$i]['downloads']);
-				$project->setUploadedAt(new \DateTime($projects[$i]['upload time']));
+				$project->setUploadedAt(new \DateTime($projects[$i]['upload time'],new \DateTimeZone('UTC')));
 				$em->persist($project);
     	}
     	$em->flush();

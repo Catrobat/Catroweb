@@ -35,7 +35,7 @@ Feature: Search in the project repository
 		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
 		"Author":"Catrobat",
 		"Description":"p1",
-		"Uploaded":"1357038000",
+		"Uploaded":"1357041600",
 		"UploadedString":<timestring>,
 		"Version":"0.8.5",
 		"Views":"12",
