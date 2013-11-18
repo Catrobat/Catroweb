@@ -85,18 +85,20 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function thereAreUsers(TableNode $table)
     {
-    	$users = $table->getHash();
-    	for ($i = 0; $i < count($users); $i++)
-    	{
-	    	$user = new User();
-	    	$user->setUsername($users[$i]["name"]);
-	    	$user->setEmail("dev".$i."@pocketcode.org");
-	    	$user->setPlainPassword($users[$i]["password"]);
-	    	$user->setEnabled(true);
-	    	$user->setToken($users[$i]["token"]);
-    		$this->kernel->getContainer()->get('doctrine')->getManager()->persist($user);
-    	}
-    	$this->kernel->getContainer()->get('doctrine')->getManager()->flush();
+      $user_manager =  $this->kernel->getContainer()->get('catroweb.usermanager');
+      $users = $table->getHash();
+      $user = null;
+      for ($i = 0; $i < count($users); $i++)
+      {
+      	$user = $user_manager->createUser();
+      	$user->setUsername($users[$i]["name"]);
+      	$user->setEmail("dev".$i."@pocketcode.org");
+      	$user->setPlainPassword($users[$i]["password"]);
+      	$user->setEnabled(true);
+      	$user->setToken($users[$i]["token"]);
+      	$user_manager->updateUser($user,false);
+      }
+      $user_manager->updateUser($user,true);
     }
     
     /**

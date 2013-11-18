@@ -24,8 +24,7 @@ class ApiController
     protected $project_manager;
     protected $tokenGenerator;
     
-    
-    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator, $doctrine)
+    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator)
     {
       $this->templating = $templating;
       $this->user_manager = $user_manager;
@@ -33,7 +32,6 @@ class ApiController
       $this->context = $context;
       $this->project_manager = $project_manager;
       $this->tokenGenerator = $tokenGenerator;
-      $this->doctrine = $doctrine;
     }
   
     public function checkTokenAction()
@@ -150,11 +148,10 @@ class ApiController
       $retArray['limit'] = $limit;
       $retArray['offset'] = $offset;
       
-      $em = $this->doctrine->getManager();
-      $entities = $em->getRepository('CatrowebBundle:Project')->findAll();
+      $entities = $this->project_manager->findAll();
       $retArray['numOfProjects'] = count($entities);
       
-      $entities = $em->getRepository('CatrowebBundle:Project')->findOneByName($projectName);
+      $entities = $this->project_manager->findOneByName($projectName);
       $retArray['id'] = $entities->getId();
       $retArray['projectName'] = $entities->getName();
       $retArray['description'] = $entities->getDescription();
