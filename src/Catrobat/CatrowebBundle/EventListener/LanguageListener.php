@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Cookie;
 
-class RequestListener
+class LanguageListener
 {
     public function onKernelRequest(GetResponseEvent $event)
     {
