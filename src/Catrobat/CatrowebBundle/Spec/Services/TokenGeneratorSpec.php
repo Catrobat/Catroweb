@@ -13,11 +13,21 @@ class TokenGeneratorSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Catrobat\CatrowebBundle\Services\TokenGenerator');
     }
+
+    function it_generates_a_string()
+    {
+      $generated_token = $this->generateToken();
+      $generated_token->shouldBeString();
+    }
     
     function it_generates_a_different_token_each_time()
     {
-
-      $test = $this->generateToken();
-
+      $generated_tokens = array();
+      for ($i=0; $i<100; $i++)
+      {
+        $generated_token = $this->generateToken();
+        $generated_tokens[] = $generated_token->getWrappedObject();
+      }
+      expect(count(array_unique($generated_tokens)))->toBe(100);
     }
 }
