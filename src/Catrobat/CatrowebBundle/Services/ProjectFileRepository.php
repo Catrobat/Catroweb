@@ -32,8 +32,4 @@ class ProjectFileRepository
     return new File($this->directory . $id . ".catrobat");
   }
   
-  function getProjectFileWebUrl($id)
-  {
-    return $this->webpath . $id . ".catrobat";
-  }
 }

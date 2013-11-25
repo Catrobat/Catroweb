@@ -20,6 +20,11 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
     	$this->shouldHaveType('Catrobat\CatrowebBundle\Services\CatrobatFileExtractor');
     }
     
+    function it_throws_an_exception_if_given_an_valid_extraction_directory()
+    {
+      $this->shouldThrow('Catrobat\CatrowebBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array(__DIR__ . "/invalid_directory/"));
+    }
+    
     function it_extracts_a_valid_file()
     {
     	$filesystem = new Filesystem();

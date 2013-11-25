@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;
 use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile;
+use Catrobat\CatrowebBundle\Exceptions\InvalidStorageDirectoryException;
 
 class CatrobatFileExtractor
 {
@@ -14,16 +15,9 @@ class CatrobatFileExtractor
   public function __construct($extract_dir)
   {
     $filesystem = new Filesystem();
-    if ($filesystem->exists($extract_dir))
+    if (!is_dir($extract_dir))
     {
-      if (!is_dir($extract_dir))
-      {
-        throw new \Exception();
-      }
-    }
-    else
-    {
-      $filesystem->mkdir($extract_dir);
+      throw new InvalidStorageDirectoryException($extract_dir . " is not a valid directory");
     }
     $this->extract_dir = $extract_dir;
   }
