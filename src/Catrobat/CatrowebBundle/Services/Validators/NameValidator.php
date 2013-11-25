@@ -17,6 +17,10 @@ class NameValidator implements ExtractedCatrobatFileValidatorInterface
     {
       throw new InvalidCatrobatFileException("project name missing");
     }
+    else if (strlen($file->getName()) > 200)
+    {
+      throw new InvalidCatrobatFileException("project name too long");
+    }
   }
 
 }
