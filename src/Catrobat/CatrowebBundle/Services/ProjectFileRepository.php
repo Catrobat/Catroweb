@@ -3,6 +3,7 @@ namespace Catrobat\CatrowebBundle\Services;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
+use Catrobat\CatrowebBundle\Exceptions\InvalidStorageDirectoryException;
 
 class ProjectFileRepository
 {
@@ -12,6 +13,10 @@ class ProjectFileRepository
   
   function __construct($directory, $webpath)
   {
+    if (!is_dir($directory))
+    {
+      throw new InvalidStorageDirectoryException($directory . " is not a valid directory");
+    }
     $this->directory = $directory;
     $this->webpath = $webpath;
     $this->filesystem = new Filesystem();
