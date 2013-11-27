@@ -8,3 +8,4 @@
 /bin/
 /composer.phar
 /coverage
+/phpspec.yml
