@@ -51,6 +51,8 @@ class GenerateTestDataCommand extends Command
       $this->extractBaseTestProject("base");
       $this->generateProjectWithExtraImage("project_with_extra_image");
       $this->generateProjectWithMissingImage("project_with_missing_image");
+      $this->generateProjectWithTooManyFiles("project_with_too_many_files");
+      $this->generateProjectWithTooManyFolders("project_with_too_many_folders");
       $output->writeln("Done");
     }
   }
@@ -73,7 +75,19 @@ class GenerateTestDataCommand extends Command
   protected function generateProjectWithMissingImage($directory)
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
-    $this->filesystem->remove($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png", $this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_extra.png");
+    $this->filesystem->remove($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png");
+  }
+  
+  protected function generateProjectWithTooManyFiles($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->copy($this->target_directory.$directory."/code.xml", $this->target_directory.$directory."/extraFile.xml");
+  }
+  
+  protected function generateProjectWithTooManyFolders($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->mirror($this->target_directory.$directory."/sounds", $this->target_directory.$directory."/extraFolder");
   }
 
 }

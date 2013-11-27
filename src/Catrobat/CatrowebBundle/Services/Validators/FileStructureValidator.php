@@ -15,14 +15,13 @@ class FileStructureValidator implements ExtractedCatrobatFileValidatorInterface
   public function validate(ExtractedCatrobatFile $file)
   {
     $finder = new Finder();
-    $finder->files()
-           ->in($file->getPath())
+    $finder->in($file->getPath())
            ->exclude(array("sounds","images"))
            ->notPath("/^code.xml$/")
            ->notPath("/^screenshot.png$/")
            ->notPath("/^manual_screenshot.png$/")
            ->notPath("/^automatic_screenshot.png$/");
-
+    
     if ($finder->count() > 0)
     {
       $list = array();
