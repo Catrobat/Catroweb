@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Catrobat\CatrowebBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Finder\Finder;
 
 class GenerateTestDataCommand extends Command
 {
@@ -38,9 +39,14 @@ class GenerateTestDataCommand extends Command
     if ($dialog->askConfirmation($output, '<question>Generate test data in ' . $this->target_directory . ' (Y/N)?</question>', false))
     {
       $output->writeln("<info>Reseting directory " . $this->target_directory . "</info>");
-      $this->filesystem->remove($this->target_directory);
-      $this->filesystem->mkdir($this->target_directory);
-      // $this->runCommand('doctrine:fixtures:load', $input, $output);
+      
+      $finder = new Finder();
+      $finder->in($this->target_directory)->ignoreDotFiles(true)->depth(0);
+      foreach ($finder as $file)
+      {
+        $this->filesystem->remove($file);
+      }
+      
       $output->writeln("<info>Generating test data</info>");
       $this->extractBaseTestProject("base");
       $this->generateProjectWithExtraImage("project_with_extra_image");
