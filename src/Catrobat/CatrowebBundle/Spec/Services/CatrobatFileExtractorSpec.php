@@ -28,7 +28,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
     function it_extracts_a_valid_file()
     {
     	$filesystem = new Filesystem();
-    	$valid_catrobat_file = new File(__DIR__ . "/../../Tests/DataFixtures/CatrobatFiles/scaryghost.catrobat");
+    	$valid_catrobat_file = new File(__SPEC_FIXTURES_DIR__."/compass.catrobat");
     	$extracted_file = $this->extract($valid_catrobat_file);
     	$extracted_file->shouldHaveType('Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile');
     	//    	echo($path_to_extracted_folder);
@@ -37,7 +37,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
     
     function it_throws_an_exception_while_extracting_an_invalid_file()
     {
-    	$invalid_catrobat_file = new File(__DIR__ . "/../../Tests/DataFixtures/CatrobatFiles/invalid_archive.catrobat");
+    	$invalid_catrobat_file = new File(__SPEC_FIXTURES_DIR__."/invalid_archive.catrobat");
     	$this->shouldThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringExtract($invalid_catrobat_file);
     }
 }
