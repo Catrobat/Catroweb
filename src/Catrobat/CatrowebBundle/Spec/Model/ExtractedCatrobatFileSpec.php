@@ -22,10 +22,10 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     $this->getName()->shouldReturn("compass");
   }
 
-//   function it_gets_the_project_description_from_xml()
-//   {
-//     $this->getDescription()->shouldReturn("a simple compass");
-//   }
+  function it_gets_the_project_description_from_xml()
+  {
+    $this->getDescription()->shouldReturn("");
+  }
   
   function it_gets_the_language_version_from_xml()
   {
