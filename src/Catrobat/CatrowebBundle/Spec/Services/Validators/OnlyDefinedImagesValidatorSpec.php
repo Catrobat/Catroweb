@@ -33,4 +33,15 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
       $file->getProjectXmlProperties()->willReturn(simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/project_with_extra_image/code.xml"));
       $this->shouldThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
+    
+    /**
+     * @param \Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile $file
+     */
+    function it_throws_an_exception_if_a_image_is_missing($file)
+    {
+      $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/project_with_missing_image");
+    
+      $file->getProjectXmlProperties()->willReturn(simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/project_with_missing_image/code.xml"));
+      $this->shouldThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    }
 }

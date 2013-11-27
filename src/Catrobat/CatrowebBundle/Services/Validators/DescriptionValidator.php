@@ -3,6 +3,7 @@
 namespace Catrobat\CatrowebBundle\Services\Validators;
 
 use Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile;
+use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
 
 class DescriptionValidator implements ExtractedCatrobatFileValidatorInterface
 {
@@ -12,7 +13,11 @@ class DescriptionValidator implements ExtractedCatrobatFileValidatorInterface
    */
   public function validate(ExtractedCatrobatFile $file)
   {
-    
+    if (strlen($file->getDescription()) > 1000 )
+    {
+      throw new InvalidCatrobatFileException("project description too long");
+    }
+
   }
 
 }

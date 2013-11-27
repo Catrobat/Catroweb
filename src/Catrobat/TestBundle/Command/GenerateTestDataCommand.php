@@ -44,6 +44,7 @@ class GenerateTestDataCommand extends Command
       $output->writeln("<info>Generating test data</info>");
       $this->extractBaseTestProject("base");
       $this->generateProjectWithExtraImage("project_with_extra_image");
+      $this->generateProjectWithMissingImage("project_with_missing_image");
       $output->writeln("Done");
     }
   }
@@ -61,6 +62,12 @@ class GenerateTestDataCommand extends Command
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
     $this->filesystem->copy($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png", $this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_extra.png");
+  }
+  
+  protected function generateProjectWithMissingImage($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->remove($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png", $this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_extra.png");
   }
 
 }

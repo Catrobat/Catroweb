@@ -36,6 +36,15 @@ class NameValidatorSpec extends ObjectBehavior
     /**
      * @param \Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile $file
      */
+    function it_throws_nothing_if_a_normal_name_is_validated($file)
+    {
+      $file->getName()->willReturn("Jhon Doe");
+      $this->shouldNotThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    }
+    
+    /**
+     * @param \Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile $file
+     */
     function it_throws_an_exception_if_the_name_is_too_long($file)
     {
       $name = "";
