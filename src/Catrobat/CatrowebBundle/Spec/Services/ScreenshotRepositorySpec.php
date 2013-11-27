@@ -45,7 +45,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
   
   function it_stores_a_screenshot()
   {
-    $filepath = __DIR__ . "/../DataFixtures/ExtractedProjects/compass/manual_screenshot.png";
+    $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
     $this->saveProjectAssets($filepath, $id);
     
@@ -55,7 +55,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
 
   function it_generates_a_thumbnail()
   {
-    $filepath = __DIR__ . "/../DataFixtures/ExtractedProjects/compass/manual_screenshot.png";
+    $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
     $this->saveProjectAssets($filepath, $id);
     
@@ -65,7 +65,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
 
   function it_returns_the_url_of_a_screenshot()
   {
-    $filepath = __DIR__ . "/../DataFixtures/ExtractedProjects/compass/manual_screenshot.png";
+    $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
     $this->saveProjectAssets($filepath, $id);
     $this->getScreenshotWebPath($id)->shouldBe($this->screenshot_base_url . "screen_test.png");
@@ -73,7 +73,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
 
   function it_returns_the_url_of_a_thumbnail()
   {
-    $filepath = __DIR__ . "/../DataFixtures/ExtractedProjects/compass/manual_screenshot.png";
+    $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
     $this->saveProjectAssets($filepath, $id);
     $this->getThumbnailWebPath($id)->shouldBe($this->thumbnail_base_url . "screen_test.png");
