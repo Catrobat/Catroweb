@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\CatrowebBundle\Model;
 
 use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
@@ -13,7 +14,7 @@ class ProjectManager
   protected $extracted_file_validator;
   protected $entity_manager;
   protected $project_repository;
-  
+
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $doctrine, $extracted_file_validator)
   {
     $this->file_extractor = $file_extractor;
@@ -24,13 +25,13 @@ class ProjectManager
     $this->entity_manager = $this->doctrine->getManager();
     $this->project_repository = $this->doctrine->getRepository('CatrowebBundle:Project');
   }
-  
+
   public function addProject(AddProjectRequest $request)
   {
     $file = $request->getProjectfile();
-
+    
     $extracted_file = $this->file_extractor->extract($file);
-
+    
     $this->extracted_file_validator->validate($extracted_file);
     
     $project = new Project();
@@ -51,21 +52,41 @@ class ProjectManager
     
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-
+    
     $this->screenshot_repository->saveProjectAssets($extracted_file->getScreenshotPath(), $project->getId());
-    $this->file_repository->saveProjectfile($file,$project->getId());
+    $this->file_repository->saveProjectfile($file, $project->getId());
     
     return $project->getId();
   }
-  
+
   public function findOneByName($projectName)
   {
     return $this->project_repository->findOneByName($projectName);
   }
-  
+
   public function findAll()
   {
     return $this->project_repository->findAll();
+  }
+
+  public function find($id)
+  {
+    return $this->project_repository->find($id);
+  }
+  
+  public function findByOrderedByDownloads($limit = null, $offset = null)
+  {
+    return $this->project_repository->createQueryBuilder('e')->select('e')->orderBy('e.downloads', 'DESC')->setFirstResult($offset)->setMaxResults($limit)->getQuery()->getResult();
+  }
+
+  public function findByOrderedByViews($limit = null, $offset = null)
+  {
+    return $this->project_repository->findBy(array(),array('views' => 'desc'), $limit, $offset);
+  }
+  
+  public function findByOrderedByDate($limit = null, $offset = null)
+  {
+    return $this->project_repository->findBy(array(),array('uploaded_at' => 'desc'), $limit, $offset);
   }
   
 }

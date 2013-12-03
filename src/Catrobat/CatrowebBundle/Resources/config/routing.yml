@@ -2,11 +2,11 @@
 
 catroweb_index:
     path: /
-    defaults: { _controller: "CatrowebBundle:Default:index" }
+    defaults: { _controller: "catrobat.web.project.controller:indexAction" }
 
 catroweb_index_locale:
     path: /{_locale}/
-    defaults: { _controller: "CatrowebBundle:Default:index", _locale: en }
+    defaults: { _controller: "catrobat.web.project.controller:indexAction", _locale: en }
     requirements:
         _locale:  en|de    
         
@@ -21,25 +21,25 @@ catroweb_featured:
 catroweb_most_downloaded:
     path:      /most-downloaded.{_format}
     methods:  [GET]
-    defaults:  { _controller: "CatrowebBundle:Project:mostDownloaded", _format: html }
+    defaults:  { _controller: "catrobat.web.project.controller:mostDownloadedAction", _format: html }
     requirements:
       _format:  html|json
 
 catroweb_most_viewed:
     path:      /most-viewed
     methods:  [GET]
-    defaults:  { _controller: "CatrowebBundle:Project:mostViewed" }
+    defaults:  { _controller: "catrobat.web.project.controller:mostViewedAction" }
 
 catroweb_newest:
     path:      /newest
     methods:  [GET]
-    defaults:  { _controller: "CatrowebBundle:Project:newest" }
+    defaults:  { _controller: "catrobat.web.project.controller:newestAction" }
 
 ################## project details ################## 
 
 project_show:
     path:      /projects/{id}
     methods:  [GET]
-    defaults:  { _controller: "CatrowebBundle:Project:show" }
+    defaults:  { _controller: "catrobat.web.project.controller:showAction" }
     requirements:
       page:  \d+

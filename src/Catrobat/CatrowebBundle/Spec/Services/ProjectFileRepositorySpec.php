@@ -16,7 +16,7 @@ class ProjectFileRepositorySpec extends ObjectBehavior
 
     function let()
     {
-      $this->storage_dir = __DIR__ . "/../Cache/file_repository/";
+      $this->storage_dir = __SPEC_CACHE_DIR__."/file_repository/";
       $this->filesystem = new Filesystem();
       $this->filesystem->mkdir($this->storage_dir);
       $this->beConstructedWith($this->storage_dir,"");  

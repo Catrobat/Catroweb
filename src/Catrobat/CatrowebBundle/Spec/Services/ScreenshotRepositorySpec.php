@@ -17,8 +17,8 @@ class ScreenshotRepositorySpec extends ObjectBehavior
   
   function let()
   {
-    $this->screenshot_dir = __DIR__ . "/../Cache/screenshot_repository/";
-    $this->thumbnail_dir = __DIR__ . "/../Cache/thumbnail_repository/";
+    $this->screenshot_dir = __SPEC_CACHE_DIR__."/screenshot_repository/";
+    $this->thumbnail_dir = __SPEC_CACHE_DIR__."/Cache/thumbnail_repository/";
     $this->screenshot_base_url = "screenshots/";
     $this->thumbnail_base_url = "thumbnails/";
     $this->filesystem = new Filesystem();
