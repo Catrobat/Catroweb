@@ -7,6 +7,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile;
 use Catrobat\CatrowebBundle\Exceptions\InvalidStorageDirectoryException;
+use Symfony\Component\Finder\Finder;
 
 class CatrobatFileCompressor
 {
@@ -28,28 +29,25 @@ class CatrobatFileCompressor
     $zip = new \ZipArchive;
     $filename = $directory . ".catrobat";
     
-    if ($zip->open($full_dir_path . $filename, ZIPARCHIVE::CREATE)!==TRUE) {
+    if ($zip->open($this->compress_dir . $filename, \ZipArchive::CREATE)!==TRUE) {
       throw new InvalidCatrobatFileException("unable to create: " . $filename);
     }
     else 
     {
-      echo "FILE ERSTELLT";
+      $finder = new Finder();      
+      $finder->in($full_dir_path);
+      foreach ($finder as $element)
+      {        
+        if ($element->isDir()) 
+        {
+          $zip->addEmptyDir($element->getRelativePathname() . "/");
+        } 
+        elseif ($element->isFile())
+        {
+          $zip->addFile($element->getRealpath(), $element->getRelativePathname());
+        }
+      }
+      $zip->close();
     }
-    
-//     $zip = new \ZipArchive;
-//     $res = $zip->open($file->getPathname());
-
-//     if ($res === TRUE)
-//     {
-//       $zip->extractTo($full_extract_dir);
-//       $zip->close();
-//     }
-//     else
-//     {
-//       throw new InvalidCatrobatFileException("unable to extract catrobat file");
-//     }
-    
-//     return new ExtractedCatrobatFile($full_extract_dir);
-  }
-  
+  }  
 }

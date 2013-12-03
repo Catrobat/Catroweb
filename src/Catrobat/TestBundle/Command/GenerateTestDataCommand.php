@@ -52,19 +52,25 @@ class GenerateTestDataCommand extends Command
       }
       
       $output->writeln("<info>Generating test data</info>");
-      $this->extractBaseTestProject("base");
-      $this->generateProjectWithExtraImage("project_with_extra_image");
-      $this->generateProjectWithMissingImage("project_with_missing_image");
+      $this->extractBaseTestProject("base");      
+      $this->generateProjectWithExtraImage("project_with_extra_image");      
+      $this->generateProjectWithMissingImage("project_with_missing_image");     
       $this->generateProjectWithTooManyFiles("project_with_too_many_files");
-      $this->generateProjectWithTooManyFolders("project_with_too_many_folders");
-      $this->compressTest("base");
+      $this->generateProjectWithTooManyFolders("project_with_too_many_folders"); 
+      
+      $this->compressDirectory("base");
+      $this->compressDirectory("project_with_too_many_folders");      
+      $this->compressDirectory("project_with_extra_image");
+      $this->compressDirectory("project_with_missing_image");
+      $this->compressDirectory("project_with_too_many_files");
+      
       $output->writeln("Done");
     }
   }
   
-  protected function compressTest($directory)
+  protected function compressDirectory($directory)
   {
-
+    $this->compressor->compress($directory);
   }
 
   protected function extractBaseTestProject($directory)
