@@ -4,10 +4,10 @@
 
     {{ render(controller('CatrowebBundle:FeaturedProject:index', { _locale: app.request.locale, _embedded: true })) }}
 
-    {{ render(controller('CatrowebBundle:Project:newest', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
+    {{ render(controller('catrobat.web.project.controller:newestAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
     
-    {{ render(controller('CatrowebBundle:Project:mostDownloaded', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
+    {{ render(controller('catrobat.web.project.controller:mostDownloadedAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
 
-    {{ render(controller('CatrowebBundle:Project:mostViewed', { _locale: app.request.locale, _embedded: true }, { 'limit' : 18})) }}
+    {{ render(controller('catrobat.web.project.controller:mostViewedAction', { _locale: app.request.locale, _embedded: true }, { 'limit' : 18})) }}
 	
 {% endblock %}

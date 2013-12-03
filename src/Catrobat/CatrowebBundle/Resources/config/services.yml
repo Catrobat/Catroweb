@@ -7,6 +7,7 @@ parameters:
       catrobat.screenshot.path: "resources/screenshots/"
       catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
       catrobat.thumbnail.path:  "resources/thumbnails/"
+      catrobat.web.project.controller.class: Catrobat\CatrowebBundle\Controller\ProjectController
 
 services:
 # =========================== Kernel Listener ===========================
@@ -14,6 +15,13 @@ services:
               class: Catrobat\CatrowebBundle\EventListener\LanguageListener
               tags:
                   - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+# =========================== Controller ===========================
+
+      catrobat.web.project.controller:
+              class: "%catrobat.web.project.controller.class%"
+              arguments: ["@templating", "@catroweb.projectmanager"]
+
                   
 # =========================== Services ===========================
       catroweb.projectmanager:
