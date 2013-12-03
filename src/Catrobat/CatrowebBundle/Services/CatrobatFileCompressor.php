@@ -26,28 +26,27 @@ class CatrobatFileCompressor
   public function compress($directory)
   {
     $full_dir_path = $this->compress_dir . $directory . "/";
-    $zip = new \ZipArchive;
+    if (!is_dir($full_dir_path))
+    {
+      throw new InvalidCatrobatFileException("invalid directory");
+    }
+    $archive = new \ZipArchive;
     $filename = $directory . ".catrobat";
     
-    if ($zip->open($this->compress_dir . $filename, \ZipArchive::CREATE)!==TRUE) {
-      throw new InvalidCatrobatFileException("unable to create: " . $filename);
-    }
-    else 
-    {
-      $finder = new Finder();      
-      $finder->in($full_dir_path);
-      foreach ($finder as $element)
-      {        
-        if ($element->isDir()) 
-        {
-          $zip->addEmptyDir($element->getRelativePathname() . "/");
-        } 
-        elseif ($element->isFile())
-        {
-          $zip->addFile($element->getRealpath(), $element->getRelativePathname());
-        }
+    $archive->open($this->compress_dir . $filename, \ZipArchive::OVERWRITE);
+    $finder = new Finder();      
+    $finder->in($full_dir_path);
+    foreach ($finder as $element)
+    {        
+      if ($element->isDir()) 
+      {
+        $archive->addEmptyDir($element->getRelativePathname() . "/");
+      } 
+      elseif ($element->isFile())
+      {
+        $archive->addFile($element->getRealpath(), $element->getRelativePathname());
       }
-      $zip->close();
     }
+    $archive->close();
   }  
 }
