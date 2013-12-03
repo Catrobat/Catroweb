@@ -2,6 +2,8 @@
 
 namespace Catrobat\TestBundle\Command;
 
+use Catrobat\CatrowebBundle\Services\CatrobatFileCompressor;
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,14 +19,16 @@ class GenerateTestDataCommand extends Command
   protected $target_directory;
   protected $extractor;
   protected $extracted_source_project_directory;
+  protected $compressor;
 
-  public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor, $source, $target_directory)
+  public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor, CatrobatFileCompressor $compressor, $source, $target_directory)
   {
     parent::__construct();
     $this->filesystem = $filesystem;
     $this->source = $source;
     $this->target_directory = realpath($target_directory)."/";
     $this->extractor = $extractor;
+    $this->compressor = $compressor;
   }
 
   protected function configure()
@@ -53,8 +57,14 @@ class GenerateTestDataCommand extends Command
       $this->generateProjectWithMissingImage("project_with_missing_image");
       $this->generateProjectWithTooManyFiles("project_with_too_many_files");
       $this->generateProjectWithTooManyFolders("project_with_too_many_folders");
+      $this->compressTest("base");
       $output->writeln("Done");
     }
+  }
+  
+  protected function compressTest($directory)
+  {
+
   }
 
   protected function extractBaseTestProject($directory)

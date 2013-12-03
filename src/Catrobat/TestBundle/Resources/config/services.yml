@@ -5,7 +5,7 @@ parameters:
 services:
       catrobat.test.command.generatetestdata:
               class: Catrobat\TestBundle\Command\GenerateTestDataCommand
-              arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
+              arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
 
       catrobat.test.filesystem:
               class: Symfony\Component\Filesystem\Filesystem

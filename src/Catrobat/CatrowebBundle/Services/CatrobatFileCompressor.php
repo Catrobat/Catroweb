@@ -22,11 +22,19 @@ class CatrobatFileCompressor
     $this->compress_dir = $compress_dir;
   }
   
-  public function extract($directory)
+  public function compress($directory)
   {
-    $full_dir_path = $this->compress_dir . $directory;
+    $full_dir_path = $this->compress_dir . $directory . "/";
     $zip = new \ZipArchive;
     $filename = $directory . ".catrobat";
+    
+    if ($zip->open($full_dir_path . $filename, ZIPARCHIVE::CREATE)!==TRUE) {
+      throw new InvalidCatrobatFileException("unable to create: " . $filename);
+    }
+    else 
+    {
+      echo "FILE ERSTELLT";
+    }
     
 //     $zip = new \ZipArchive;
 //     $res = $zip->open($file->getPathname());
