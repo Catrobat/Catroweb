@@ -15,63 +15,23 @@ use Catrobat\CoreBundle\Model\ProjectManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 
-class ApiController
+class SecurityController
 {
     protected $templating;
     protected $user_manager;
-    protected $validator;
-    protected $context;
     protected $project_manager;
     protected $tokenGenerator;
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, Validator $validator, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator)
+    public function __construct(EngineInterface $templating, UserManager $user_manager, TokenGenerator $tokenGenerator)
     {
       $this->templating = $templating;
       $this->user_manager = $user_manager;
-      $this->validator = $validator;
-      $this->context = $context;
-      $this->project_manager = $project_manager;
       $this->tokenGenerator = $tokenGenerator;
     }
   
     public function checkTokenAction()
     {
       return $this->templating->renderResponse('CatrobatApiBundle:Api:checkToken.json.twig');
-    }
-
-    public function uploadAction(Request $request)
-    {
-      if ($request->files->count() != 1)
-      {
-        $response["statusCode"] = 501;
-        $response["answer"] = "POST-Data not correct or missing!";
-      }
-      else 
-      {
-        try 
-        {
-          $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
-          
-          $id = $this->project_manager->addProject($add_project_request);
-          $user = $this->context->getToken()->getUser();
-          $user->setToken($this->tokenGenerator->generateToken());
-          $this->user_manager->updateUser($user);
-          
-          $response["projectId"] = $id;
-          $response["statusCode"] = 200;
-          $response["answer"] = "Your project was uploaded successfully!";
-          $response["token"] = $user->getToken();
-        }
-        catch (InvalidCatrobatFileException $exception)
-        {
-          $response["statusCode"] = 501;
-          $response["answer"] = $exception->getMessage();
-        }
-      }
-        
-//      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
-      $response["preHeaderMessages"] = "";
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:upload.json.twig', array("response" => $response));
     }
     
     public function loginOrRegisterAction(Request $request)
@@ -135,32 +95,5 @@ class ApiController
       }
       
       return $this->templating->renderResponse('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
-    }
-    
-    public function searchProjectsAction(Request $request) 
-    {
-      $retArray = array();
-      $projectName = $request->request->get('projectName');
-      $limit = intval($request->request->get('limit'));
-      $offset = intval($request->request->get('offset'));
-       
-      //$retArray['projectName'] = $projectName;
-      $retArray['limit'] = $limit;
-      $retArray['offset'] = $offset;
-      
-      $entities = $this->project_manager->findAll();
-      $retArray['numOfProjects'] = count($entities);
-      
-      $entities = $this->project_manager->findOneByName($projectName);
-      $retArray['id'] = $entities->getId();
-      $retArray['projectName'] = $entities->getName();
-      $retArray['description'] = $entities->getDescription();
-      $retArray['downloads'] = $entities->getDownloads();
-      $retArray['views'] = $entities->getViews();
-      $retArray['author'] = $entities->getUser()->getUsername();
-      $retArray['uploaded_time'] = $entities->getUploadedAt()->getTimestamp();
-      $retArray['catrobat_version_name'] = $entities->getCatrobatVersionName();
-
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:searchProjects.json.twig', $retArray);
     }
 }
