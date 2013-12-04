@@ -7,13 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Catrobat\CatrowebBundle\Entity\Project;
+use Catrobat\CoreBundle\Entity\Project;
 use Catrobat\CatrowebBundle\Form\ProjectType;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Templating\EngineInterface;
-use Catrobat\CatrowebBundle\Model\ProjectManager;
+use Catrobat\CoreBundle\Model\ProjectManager;
 
 /**
  * Project controller.

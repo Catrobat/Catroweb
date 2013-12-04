@@ -2,13 +2,13 @@
 
 namespace Catrobat\TestBundle\Command;
 
-use Catrobat\CatrowebBundle\Services\CatrobatFileCompressor;
+use Catrobat\CoreBundle\Services\CatrobatFileCompressor;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Catrobat\CatrowebBundle\Services\CatrobatFileExtractor;
+use Catrobat\CoreBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Finder\Finder;
 

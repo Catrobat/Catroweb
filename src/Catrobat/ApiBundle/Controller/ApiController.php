@@ -3,17 +3,17 @@
 namespace Catrobat\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Catrobat\CatrowebBundle\Entity\User;
+use Catrobat\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Security\Core\SecurityContext;
-use Catrobat\CatrowebBundle\Model\UserManager;
-use Catrobat\CatrowebBundle\Model\Requests\AddProjectRequest;
-use Catrobat\CatrowebBundle\Model\ProjectManager;
-use Catrobat\CatrowebBundle\Services\TokenGenerator;
-use Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\CoreBundle\Model\UserManager;
+use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
+use Catrobat\CoreBundle\Model\ProjectManager;
+use Catrobat\CoreBundle\Services\TokenGenerator;
+use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 
 class ApiController
 {

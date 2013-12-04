@@ -10,8 +10,8 @@ use Behat\Behat\Context\BehatContext,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
-use Catrobat\CatrowebBundle\Entity\User;
-use Catrobat\CatrowebBundle\Entity\Project;
+use Catrobat\CoreBundle\Entity\User;
+use Catrobat\CoreBundle\Entity\Project;
 use Behat\Behat\Event\SuiteEvent;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -110,7 +110,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     	$projects = $table->getHash();
     	for ($i = 0; $i < count($projects); $i++)
     	{
-    		$user = $em->getRepository('CatrowebBundle:User')->findOneBy(array('username' => 'Catrobat'));
+    		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => 'Catrobat'));
 				$project = new Project();
 				$project->setUser($user);
 				$project->setName($projects[$i]['name']);

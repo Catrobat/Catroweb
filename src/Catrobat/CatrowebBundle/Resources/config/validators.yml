@@ -1,27 +1,27 @@
 services:
       catroweb.file.validator:
-            class: Catrobat\CatrowebBundle\Services\Validators\ExtractedFileValidator
+            class: Catrobat\CoreBundle\Services\Validators\ExtractedFileValidator
 
       catroweb.file.validator.name:
-            class: Catrobat\CatrowebBundle\Services\Validators\NameValidator
+            class: Catrobat\CoreBundle\Services\Validators\NameValidator
             public: false
             tags:
             -  { name: catroweb.file.validator.service }
 
       catroweb.file.validator.description:
-            class: Catrobat\CatrowebBundle\Services\Validators\DescriptionValidator
+            class: Catrobat\CoreBundle\Services\Validators\DescriptionValidator
             public: false
             tags:
             -  { name: catroweb.file.validator.service }
 
       catroweb.file.validator.filestructure:
-            class: Catrobat\CatrowebBundle\Services\Validators\FileStructureValidator
+            class: Catrobat\CoreBundle\Services\Validators\FileStructureValidator
             public: false
             tags:
             -  { name: catroweb.file.validator.service }
 
       catroweb.file.validator.definedimages:
-            class: Catrobat\CatrowebBundle\Services\Validators\OnlyDefinedImagesValidator
+            class: Catrobat\CoreBundle\Services\Validators\OnlyDefinedImagesValidator
             public: false
             tags:
             -  { name: catroweb.file.validator.service }

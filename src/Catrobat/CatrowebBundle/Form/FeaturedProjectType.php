@@ -19,7 +19,7 @@ class FeaturedProjectType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Catrobat\CatrowebBundle\Entity\FeaturedProject'
+            'data_class' => 'Catrobat\CoreBundle\Entity\FeaturedProject'
         ));
     }
 

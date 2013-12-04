@@ -4,8 +4,8 @@ namespace Catrobat\CatrowebBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Catrobat\CatrowebBundle\Entity\Project;
-use Catrobat\CatrowebBundle\Entity\User;
+use Catrobat\CoreBundle\Entity\Project;
+use Catrobat\CoreBundle\Entity\User;
 
 class LoadSampleProjects implements FixtureInterface
 {

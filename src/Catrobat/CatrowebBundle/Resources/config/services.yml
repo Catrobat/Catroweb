@@ -23,29 +23,29 @@ services:
               arguments: ["@templating", "@catroweb.projectmanager"]
 
                   
-# =========================== Services ===========================
+
       catroweb.projectmanager:
-            class: Catrobat\CatrowebBundle\Model\ProjectManager
+            class: Catrobat\CoreBundle\Model\ProjectManager
             arguments: ["@catrobat.file.extractor","@catrobat.file.repository", "@catrobat.screenshot.repository", "@doctrine","@catroweb.file.validator"]
 
       catroweb.usermanager:
-            class: Catrobat\CatrowebBundle\Model\UserManager
+            class: Catrobat\CoreBundle\Model\UserManager
             arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
 
       catrobat.file.extractor:
-              class:        Catrobat\CatrowebBundle\Services\CatrobatFileExtractor
+              class:        Catrobat\CoreBundle\Services\CatrobatFileExtractor
               arguments:    ["%catrobat.file.extract.dir%"]
 
       catrobat.file.repository:
-              class:        Catrobat\CatrowebBundle\Services\ProjectFileRepository
+              class:        Catrobat\CoreBundle\Services\ProjectFileRepository
               arguments:    ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
 
       catrobat.screenshot.repository:
-              class:        Catrobat\CatrowebBundle\Services\ScreenshotRepository
+              class:        Catrobat\CoreBundle\Services\ScreenshotRepository
               arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
               
       catrobat.tokengenerator:
-              class:        Catrobat\CatrowebBundle\Services\TokenGenerator
+              class:        Catrobat\CoreBundle\Services\TokenGenerator
 
       extractor:
               alias:        catrobat.file.extractor
@@ -53,7 +53,7 @@ services:
               alias:        catrobat.file.repository
       screenshotrepository:
               alias:        catrobat.screenshot.repository
-
+              
 # =========================== TWIG ===========================
       catrobat.twig.project.assets:
               class: Catrobat\CatrowebBundle\Twig\ProjectAssetsExtension

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Catrobat\CatrowebBundle\Entity\FeaturedProject;
+use Catrobat\CoreBundle\Entity\FeaturedProject;
 use Catrobat\CatrowebBundle\Form\FeaturedProjectType;
 
 /**
@@ -29,7 +29,7 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CatrowebBundle:FeaturedProject')->findAll();
+        $entities = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->findAll();
 
         return array(
             'entities' => $entities,
@@ -91,7 +91,7 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatrowebBundle:FeaturedProject')->find($id);
+        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
@@ -116,7 +116,7 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatrowebBundle:FeaturedProject')->find($id);
+        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
@@ -143,7 +143,7 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatrowebBundle:FeaturedProject')->find($id);
+        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
@@ -179,7 +179,7 @@ class FeaturedProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CatrowebBundle:FeaturedProject')->find($id);
+            $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
