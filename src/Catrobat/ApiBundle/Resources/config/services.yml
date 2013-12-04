@@ -1,10 +1,20 @@
 parameters:
-    catrobat.api.controller.class: Catrobat\ApiBundle\Controller\ApiController
+    catrobat.api.controller.search.class: Catrobat\ApiBundle\Controller\SearchController
+    catrobat.api.controller.upload.class: Catrobat\ApiBundle\Controller\UploadController
+    catrobat.api.controller.security.class: Catrobat\ApiBundle\Controller\SecurityController
 
 services:
-    catrobat.api.controller:
-        class: "%catrobat.api.controller.class%"
-        arguments: ["@templating","@catroweb.usermanager","@validator","@security.context", "@catroweb.projectmanager", "@catrobat.tokengenerator"]
+    catrobat.api.controller.search:
+        class: "%catrobat.api.controller.search.class%"
+        arguments: ["@templating", "@catroweb.projectmanager"]
+    
+    catrobat.api.controller.security:
+        class: "%catrobat.api.controller.security.class%"
+        arguments: ["@templating","@catroweb.usermanager", "@catrobat.tokengenerator"]
+        
+    catrobat.api.controller.upload:
+        class: "%catrobat.api.controller.upload.class%"
+        arguments: ["@templating","@catroweb.usermanager", "@security.context", "@catroweb.projectmanager", "@catrobat.tokengenerator"]
 
     uploadtoken.security.authentication.provider:
         class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider

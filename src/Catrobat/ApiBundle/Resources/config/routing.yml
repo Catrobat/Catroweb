@@ -1,19 +1,19 @@
 catrobat_api_check_token:
     pattern:  /api/checkToken/check.json
     methods: [POST]
-    defaults: { _controller: 'catrobat.api.controller:checkTokenAction', _format: json }
+    defaults: { _controller: 'catrobat.api.controller.security:checkTokenAction', _format: json }
 
 catrobat_api_login_or_register:
     pattern:  /api/loginOrRegister/loginOrRegister.json
     methods: [POST, GET]
-    defaults: { _controller: 'catrobat.api.controller:loginOrRegisterAction', _format: json }
+    defaults: { _controller: 'catrobat.api.controller.security:loginOrRegisterAction', _format: json }
 
 catrobat_api_upload:
     pattern:  /api/upload/upload.json
     methods: [POST]
-    defaults: { _controller: 'catrobat.api.controller:uploadAction', _format: json}
+    defaults: { _controller: 'catrobat.api.controller.upload:uploadAction', _format: json}
     
 catrobat_api_search_projects:
     pattern:  /api/projects/search.json
     methods: [POST, GET]
-    defaults: { _controller: 'catrobat.api.controller:searchProjectsAction', _format: json }
+    defaults: { _controller: 'catrobat.api.controller.search:searchProjectsAction', _format: json }
