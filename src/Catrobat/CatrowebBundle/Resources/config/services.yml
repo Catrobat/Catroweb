@@ -1,12 +1,4 @@
 parameters:
-      catrobat.webdir:                  "%kernel.root_dir%/../web/"
-      catrobat.file.extract.dir:        "%kernel.root_dir%/../web/resources/extract/"
-      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources/projects/"
-      catrobat.file.storage.path:        "resources/projects/"
-      catrobat.screenshot.dir:  "%catrobat.webdir%resources/screenshots/"
-      catrobat.screenshot.path: "resources/screenshots/"
-      catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
-      catrobat.thumbnail.path:  "resources/thumbnails/"
       catrobat.web.project.controller.class: Catrobat\CatrowebBundle\Controller\ProjectController
 
 services:
@@ -20,43 +12,12 @@ services:
 
       catrobat.web.project.controller:
               class: "%catrobat.web.project.controller.class%"
-              arguments: ["@templating", "@catroweb.projectmanager"]
+              arguments: ["@templating", "@catrobat.core.model.projectmanager"]
 
-                  
-
-      catroweb.projectmanager:
-            class: Catrobat\CoreBundle\Model\ProjectManager
-            arguments: ["@catrobat.file.extractor","@catrobat.file.repository", "@catrobat.screenshot.repository", "@doctrine","@catroweb.file.validator"]
-
-      catroweb.usermanager:
-            class: Catrobat\CoreBundle\Model\UserManager
-            arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
-
-      catrobat.file.extractor:
-              class:        Catrobat\CoreBundle\Services\CatrobatFileExtractor
-              arguments:    ["%catrobat.file.extract.dir%"]
-
-      catrobat.file.repository:
-              class:        Catrobat\CoreBundle\Services\ProjectFileRepository
-              arguments:    ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
-
-      catrobat.screenshot.repository:
-              class:        Catrobat\CoreBundle\Services\ScreenshotRepository
-              arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
-              
-      catrobat.tokengenerator:
-              class:        Catrobat\CoreBundle\Services\TokenGenerator
-
-      extractor:
-              alias:        catrobat.file.extractor
-      projectrepository:
-              alias:        catrobat.file.repository
-      screenshotrepository:
-              alias:        catrobat.screenshot.repository
               
 # =========================== TWIG ===========================
       catrobat.twig.project.assets:
               class: Catrobat\CatrowebBundle\Twig\ProjectAssetsExtension
-              arguments: ["@screenshotrepository"]
+              arguments: ["@catrobat.core.services.screenshot.repository"]
               tags:
                   - { name: twig.extension }              

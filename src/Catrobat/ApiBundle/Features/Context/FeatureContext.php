@@ -85,7 +85,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function thereAreUsers(TableNode $table)
     {
-      $user_manager =  $this->kernel->getContainer()->get('catroweb.usermanager');
+      $user_manager =  $this->kernel->getContainer()->get('catrobat.core.model.usermanager');
       $users = $table->getHash();
       $user = null;
       for ($i = 0; $i < count($users); $i++)
