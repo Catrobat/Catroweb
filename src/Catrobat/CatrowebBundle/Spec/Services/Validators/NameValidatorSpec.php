@@ -14,6 +14,15 @@ class NameValidatorSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Catrobat\CatrowebBundle\Services\Validators\NameValidator');
     }
+    
+    /**
+     * @param \Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile $file
+     */
+    function it_validates_a_name($file)
+    {
+      $file->getName()->willReturn("Jhon Doe");
+      $this->shouldNotThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    }
 
     /**
      * @param \Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile $file
@@ -31,15 +40,6 @@ class NameValidatorSpec extends ObjectBehavior
     {
       $file->getName()->willReturn("");
       $this->shouldThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
-    }
-    
-    /**
-     * @param \Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile $file
-     */
-    function it_throws_nothing_if_a_normal_name_is_validated($file)
-    {
-      $file->getName()->willReturn("Jhon Doe");
-      $this->shouldNotThrow('Catrobat\CatrowebBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**

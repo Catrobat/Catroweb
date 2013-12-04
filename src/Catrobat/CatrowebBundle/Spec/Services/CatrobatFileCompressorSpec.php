@@ -29,7 +29,7 @@ class CatrobatFileCompressorSpec extends ObjectBehavior
     $path_to_file = __SPEC_FIXTURES_DIR__ . "GeneratedFixtures/base";
     $filesystem->mirror($path_to_file, __SPEC_CACHE_DIR__ . "/base/");    
     $this->compress("base");
-    expect(is_file(__SPEC_CACHE_DIR__ ."/base.catrobat"))->toBe(true);    
+    expect(is_file(__SPEC_CACHE_DIR__ ."/base.catrobat"))->toBe(true); 
   }
   
   function it_throws_an_exception_if_a_none_existing_directory_should_be_compressed()
