@@ -16,7 +16,7 @@ Feature: Checking a user's token validity
     Given I have a parameter "username" with value "<username>"
     And I have a parameter "token" with value "<token>"
     When I POST these parameters to "/api/checkToken/check.json"
-    Then I should see:
+    Then I should get the json object:
       """
       {"statusCode":200,"answer":"ok","preHeaderMessages":"  \n"}
       """

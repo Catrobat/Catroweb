@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e2c8ab65bd24698ffc74165571b4f18d",
+    "hash": "11dbed49b36a17367a13861869b6631a",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -787,12 +787,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "f7380a4e476302aa8ca16c9fd017d6d9adc9482e"
+                "reference": "7a5e29a56418fc409d1475149710239d17ad4135"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f7380a4e476302aa8ca16c9fd017d6d9adc9482e",
-                "reference": "f7380a4e476302aa8ca16c9fd017d6d9adc9482e",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/7a5e29a56418fc409d1475149710239d17ad4135",
+                "reference": "7a5e29a56418fc409d1475149710239d17ad4135",
                 "shasum": ""
             },
             "require": {
@@ -847,7 +847,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-12-02 23:42:45"
+            "time": "2013-12-09 02:46:36"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -856,12 +856,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "630d61ca64dfcafd02a13b61698fa99d7ec2c74e"
+                "reference": "43ada9a9238d777fef7c57dc3a2b2960402e2029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/630d61ca64dfcafd02a13b61698fa99d7ec2c74e",
-                "reference": "630d61ca64dfcafd02a13b61698fa99d7ec2c74e",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/43ada9a9238d777fef7c57dc3a2b2960402e2029",
+                "reference": "43ada9a9238d777fef7c57dc3a2b2960402e2029",
                 "shasum": ""
             },
             "require": {
@@ -884,7 +884,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.4-dev"
                 }
             },
             "autoload": {
@@ -908,7 +908,8 @@
                 },
                 {
                     "name": "Alexander",
-                    "email": "iam.asm89@gmail.com"
+                    "email": "iam.asm89@gmail.com",
+                    "homepage": "http://asm89.github.io/"
                 },
                 {
                     "name": "Joseph Bielawski",
@@ -944,6 +945,7 @@
                 "oauth2",
                 "odnoklassniki",
                 "qq",
+                "salesforce",
                 "security",
                 "sensio connect",
                 "sina weibo",
@@ -958,34 +960,36 @@
                 "yahoo",
                 "yandex"
             ],
-            "time": "2013-09-28 12:37:04"
+            "time": "2013-12-09 10:01:02"
         },
         {
             "name": "incenteev/composer-parameter-handler",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "target-dir": "Incenteev/ParameterHandler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "v2.0.0"
+                "reference": "143272a0a09c62616a3c8011fc165a10c6b35241"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/v2.0.0",
-                "reference": "v2.0.0",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/143272a0a09c62616a3c8011fc165a10c6b35241",
+                "reference": "143272a0a09c62616a3c8011fc165a10c6b35241",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/yaml": ">=2.0,<3.0"
+                "symfony/yaml": "~2.0"
             },
             "require-dev": {
-                "composer/composer": "*"
+                "composer/composer": "1.0.*@dev",
+                "phpspec/prophecy-phpunit": "~1.0",
+                "symfony/filesystem": "~2.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -1008,7 +1012,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2013-04-06 17:15:44"
+            "time": "2013-12-07 10:10:39"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1067,12 +1071,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
-                "reference": "81be3311d1ee2d00ee6ab3aaf52a46a4fd41127d"
+                "reference": "c58e4d99ae867f8b64a481c84cad89e1df03d1c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/81be3311d1ee2d00ee6ab3aaf52a46a4fd41127d",
-                "reference": "81be3311d1ee2d00ee6ab3aaf52a46a4fd41127d",
+                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/c58e4d99ae867f8b64a481c84cad89e1df03d1c6",
+                "reference": "c58e4d99ae867f8b64a481c84cad89e1df03d1c6",
                 "shasum": ""
             },
             "require": {
@@ -1126,7 +1130,7 @@
                 "routing",
                 "translation"
             ],
-            "time": "2013-06-08 14:01:20"
+            "time": "2013-12-05 21:19:53"
         },
         {
             "name": "jms/translation-bundle",
@@ -1327,12 +1331,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6"
+                "reference": "33a82c3d65d8004872f2f560a4d35eca8b85762b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/bc4f33b4bfc889018ebe53611050729641b82dc6",
-                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/33a82c3d65d8004872f2f560a4d35eca8b85762b",
+                "reference": "33a82c3d65d8004872f2f560a4d35eca8b85762b",
                 "shasum": ""
             },
             "type": "library",
@@ -1360,7 +1364,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-10-17 16:23:00"
+            "time": "2013-12-05 20:49:10"
         },
         {
             "name": "monolog/monolog",
@@ -2077,16 +2081,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.14.2",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "ca445842fcea4f844d68203ffa2d00f5e3cdea64"
+                "reference": "85e4ff98000157ff753d934b9f13659a953f5666"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/ca445842fcea4f844d68203ffa2d00f5e3cdea64",
-                "reference": "ca445842fcea4f844d68203ffa2d00f5e3cdea64",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/85e4ff98000157ff753d934b9f13659a953f5666",
+                "reference": "85e4ff98000157ff753d934b9f13659a953f5666",
                 "shasum": ""
             },
             "require": {
@@ -2095,7 +2099,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -2122,7 +2126,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-10-30 08:20:53"
+            "time": "2013-12-06 07:47:10"
         },
         {
             "name": "twitter/bootstrap",
@@ -2337,12 +2341,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkBrowserKitDriver.git",
-                "reference": "dab4a996724146a9f6cebfea4882d096fad85da8"
+                "reference": "8fa555312d754e64bdb14c62e0e52d44c63e484b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/dab4a996724146a9f6cebfea4882d096fad85da8",
-                "reference": "dab4a996724146a9f6cebfea4882d096fad85da8",
+                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/8fa555312d754e64bdb14c62e0e52d44c63e484b",
+                "reference": "8fa555312d754e64bdb14c62e0e52d44c63e484b",
                 "shasum": ""
             },
             "require": {
@@ -2384,7 +2388,7 @@
                 "browser",
                 "testing"
             ],
-            "time": "2013-12-02 12:53:57"
+            "time": "2013-12-07 19:30:08"
         },
         {
             "name": "behat/mink-extension",
@@ -2610,12 +2614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "c631a7c980d5be303ba513c1598a663393a59028"
+                "reference": "fada9de313a8f11869844f7d0881c7ceb49a8e7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c631a7c980d5be303ba513c1598a663393a59028",
-                "reference": "c631a7c980d5be303ba513c1598a663393a59028",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/fada9de313a8f11869844f7d0881c7ceb49a8e7b",
+                "reference": "fada9de313a8f11869844f7d0881c7ceb49a8e7b",
                 "shasum": ""
             },
             "require": {
@@ -2670,7 +2674,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-11-13 10:07:05"
+            "time": "2013-12-09 08:32:24"
         },
         {
             "name": "phpspec/prophecy",

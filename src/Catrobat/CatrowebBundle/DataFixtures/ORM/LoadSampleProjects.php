@@ -32,7 +32,14 @@ class LoadSampleProjects implements FixtureInterface
     $project->setDownloads(4);
     $project->setViews(4);
     $project->setFilename("file.catrobat");
+    $project->setCatrobatVersionName("0.8.5");
+    $project->setCatrobatVersion(1);
     $project->setUser($user);
+    $project->setUploadIp("127.0.0.1");
+    $project->setVisible(true);
+    $project->setUploadLanguage("en");
+    $project->setFilesize("100");
+    $project->setRemixCount(0);
     $manager->persist($project);
 
     $project = new Project();
@@ -45,6 +52,14 @@ class LoadSampleProjects implements FixtureInterface
     $project->setDownloads(100);
     $project->setViews(100);
     $project->setFilename("file.catrobat");
+    $project->setCatrobatVersionName("0.8.5");
+    $project->setCatrobatVersion(1);
+    $project->setUser($user);
+    $project->setUploadIp("127.0.0.1");
+    $project->setVisible(true);
+    $project->setUploadLanguage("en");
+    $project->setFilesize("100");
+    $project->setRemixCount(0);
     $manager->persist($project);
     
     
@@ -60,7 +75,15 @@ class LoadSampleProjects implements FixtureInterface
       $project->setDownloads(40);
       $project->setViews(200);
       $project->setFilename("file.catrobat");
+      $project->setCatrobatVersionName("0.8.5");
+      $project->setCatrobatVersion(1);
+      $project->setUser($user);
       $project->setUploadedAt(new \DateTime('2013-01-01 15:00:00'));
+      $project->setUploadIp("127.0.0.1");
+      $project->setVisible(true);
+      $project->setUploadLanguage("en");
+      $project->setFilesize("100");
+      $project->setRemixCount(0);
       $manager->persist($project);
     } 
     

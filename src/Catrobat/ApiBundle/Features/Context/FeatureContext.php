@@ -214,12 +214,28 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     }
     
     /**
+     * @Then /^I should get projects in the following order:$/
+     */
+    public function iShouldGetProjectsInTheFollowingOrder(TableNode $table)
+    {
+      $response = $this->client->getResponse();
+      $responseArray = json_decode($response->getContent(),true);
+      $returned_projects = $responseArray['CatrobatProjects'];
+      $expected_projects = $table->getHash();
+      assertEquals(count($expected_projects), count($returned_projects), "Wrong number of returned projects");
+      for ($i = 0; $i < count($returned_projects); $i++)
+      {
+        assertEquals($expected_projects[$i]["Name"], $returned_projects[$i]["ProjectName"], "Wrong order of results");
+      }
+    }
+    
+    /**
      * @Given /^the response code should be "([^"]*)"$/
      */
     public function theResponseCodeShouldBe($code)
     {
-    	$response = $this->client->getResponse();
-    	assertEquals($code, $response->getStatusCode(), "Wrong response code");
+      $response = $this->client->getResponse();
+      assertEquals($code, $response->getStatusCode(), "Wrong response code");
     }
     
     /**

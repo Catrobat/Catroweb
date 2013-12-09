@@ -17,3 +17,9 @@ catrobat_api_search_projects:
     pattern:  /api/projects/search.json
     methods: [POST, GET]
     defaults: { _controller: 'catrobat.api.controller.search:searchProjectsAction', _format: json }
+
+catrobat_api_recent_projects:
+    pattern:  /api/projects/recent.json
+    methods: [POST, GET]
+    defaults: { _controller: 'catrobat.api.controller.search:recentProjectsAction', _format: json }
+    

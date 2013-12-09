@@ -43,4 +43,33 @@ class SearchController
 
       return $this->templating->renderResponse('CatrobatApiBundle:Api:searchProjects.json.twig', $retArray);
     }
+    
+    public function recentProjectsAction(Request $request)
+    {
+      $retArray = array();
+      $limit = intval($request->request->get('limit',10));
+      $offset = intval($request->request->get('offset',0));
+       
+      $projects = $this->project_manager->findByOrderedByDate($limit, $offset);
+      foreach ($projects as $project)
+      {
+        $new_project = array();
+        $new_project['ProjectName'] = $project->getName();
+        $new_project['ProjectId'] = $project->getId();
+        $new_project['Author'] = $project->getUser()->getUserName();
+        $new_project['Description'] = $project->getDescription();
+        $new_project['Version'] = $project->getCatrobatVersionName();
+        $new_project['Views'] = $project->getViews();
+        $new_project['Downloads'] = $project->getDownloads();
+        $new_project['Uploaded'] = $project->getUploadedAt()->getTimestamp();
+        $retArray['CatrobatProjects'][] = $new_project;
+      }
+      $retArray['completeTerm'] = "";
+      $retArray['preHeaderMessages'] = "";
+      
+      $retArray['CatrobatInformation'] = array("BaseUrl" => "https://localhost/", "TotalProjects" => 3, "ProjectsExtension" => ".catrobat");
+      
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:recentProjects.json.twig', array('b' => $retArray));
+    }
+    
 }

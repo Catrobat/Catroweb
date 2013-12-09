@@ -28,7 +28,7 @@ Feature: Login with an existing accunt or register a new one
     Given I have a parameter "registrationUsername" with value "Catrobat"
     And I have a parameter "registrationPassword" with value "123456"
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
-    Then I should see:
+    Then I should get the json object:
       """
       {"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
       """
@@ -38,7 +38,7 @@ Feature: Login with an existing accunt or register a new one
     Given I have a parameter "registrationUsername" with value "Catrobat"
     And I have a parameter "registrationPassword" with value "invalid"
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
-    Then I should see:
+    Then I should get the json object:
       """
       {"statusCode":601,"answer":"The password or username was incorrect.","preHeaderMessages":""}
       """
@@ -49,7 +49,7 @@ Feature: Login with an existing accunt or register a new one
     And I have a parameter "registrationEmail" with value "test@mail.com"
     And I have a parameter "registrationCountry" with value "at"
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
-    Then I should see:
+    Then I should get the json object:
       """
       {"statusCode":602,"answer":"The password is missing.","preHeaderMessages":""}
       """
@@ -60,7 +60,7 @@ Feature: Login with an existing accunt or register a new one
     And I have a parameter "registrationEmail" with value "test@mail.com"
     And I have a parameter "registrationCountry" with value "at"
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
-    Then I should see:
+    Then I should get the json object:
       """
       {"statusCode":602,"answer":"Your password must have at least 6 characters.","preHeaderMessages":""}
       """
@@ -71,7 +71,7 @@ Feature: Login with an existing accunt or register a new one
     And I have a parameter "registrationEmail" with value "test@mail.com"
     And I have a parameter "registrationCountry" with value ""
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
-    Then I should see:
+    Then I should get the json object:
       """
       {"statusCode":602,"answer":"The country is missing.","preHeaderMessages":""}
       """
