@@ -30,8 +30,8 @@ Feature: Get the most recent projects
                                 "ProjectId": 2,
                                 "ProjectName":"project 2",
                                 "ProjectNameShort":"project 2",
-                                "ScreenshotBig":"resources\/thumbnails\/1_large.png",
-                                                      "ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+                                "ScreenshotBig":"resources\/thumbnails\/2_large.png",
+                                                      "ScreenshotSmall":"resources\/thumbnails\/2_small.png",
                                                       "Author":"Catrobat",
                                                       "Description":"",
                                                       "Uploaded": 1359723600,
@@ -39,8 +39,8 @@ Feature: Get the most recent projects
                                                       "Version":"0.8.5",
                                                       "Views":"9",
                                                       "Downloads":"33",
-                                                      "ProjectUrl":"details\/1",
-                                                      "DownloadUrl":"download\/1.catrobat"
+                                                      "ProjectUrl":"details\/2",
+                                                      "DownloadUrl":"download\/2.catrobat"
                                                     }],
           "preHeaderMessages":""
       }
@@ -54,3 +54,14 @@ Feature: Get the most recent projects
       | Name      |
       | project 2 |
       | project 1 |
+
+  Scenario: show recent projects with limit and offset
+    Given I have a parameter "limit" with value "2"
+    And I have a parameter "offset" with value "1"
+    When I POST these parameters to "/api/projects/recent.json"
+    Then I should get projects in the following order:
+      | Name      |
+      | project 1 |
+      | project 3 |
+
+      

@@ -55,6 +55,7 @@ class SearchController
       {
         $new_project = array();
         $new_project['ProjectName'] = $project->getName();
+        $new_project['ProjectNameShort'] = $project->getName();
         $new_project['ProjectId'] = $project->getId();
         $new_project['Author'] = $project->getUser()->getUserName();
         $new_project['Description'] = $project->getDescription();
@@ -62,6 +63,11 @@ class SearchController
         $new_project['Views'] = $project->getViews();
         $new_project['Downloads'] = $project->getDownloads();
         $new_project['Uploaded'] = $project->getUploadedAt()->getTimestamp();
+        $new_project['UploadedString'] = "";
+        $new_project['ScreenshotBig'] = "resources/thumbnails/" . $project->getId() . "_large.png";
+        $new_project['ScreenshotSmall'] = "resources/thumbnails/"  . $project->getId() . "_small.png";
+        $new_project['ProjectUrl'] = "details/" . $project->getId();
+        $new_project['DownloadUrl'] = "download/"  . $project->getId() . ".catrobat";
         $retArray['CatrobatProjects'][] = $new_project;
       }
       $retArray['completeTerm'] = "";
