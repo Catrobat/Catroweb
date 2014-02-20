@@ -9,6 +9,8 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 {
   function let()
   {
+    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "project_with_missing_code_xml/"));
+    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "project_with_invalid_code_xml/"));
     $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."base/");
   }
   
@@ -47,8 +49,20 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     $this->getProjectXmlProperties()->shouldHaveType('SimpleXMLElement');
   }
   
-  function it_returns_the_path_of_the_screenshot()
+  function it_returns_the_path_of_the_automatic_screenshot()
   {
     $this->getScreenshotPath()->shouldReturn(__SPEC_GENERATED_FIXTURES_DIR__."base/automatic_screenshot.png");
+  }
+  
+  function it_returns_the_path_of_the_manual_screenshot()
+  {
+    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."project_with_manual_screenshot/");
+    $this->getScreenshotPath()->shouldReturn(__SPEC_GENERATED_FIXTURES_DIR__."project_with_manual_screenshot/manual_screenshot.png");
+  }
+  
+  function it_returns_the_path_of_the_screenshot()
+  {
+    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."project_with_screenshot/");
+    $this->getScreenshotPath()->shouldReturn(__SPEC_GENERATED_FIXTURES_DIR__."project_with_screenshot/screenshot.png");
   }
 }

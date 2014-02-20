@@ -11,15 +11,17 @@ class ExtractedCatrobatFile
   public function __construct($base_dir)
   {
     $this->path = $base_dir;
+    
+    if (!file_exists($base_dir . "code.xml"))
+    {
+      throw new InvalidCatrobatFileException("missing project xml");
+    }
+    
     try
     {
       $this->project_xml_properties = simplexml_load_file($base_dir . "code.xml");
     }
     catch (\Exception $e)
-    {
-      throw new InvalidCatrobatFileException("missing project xml");
-    }
-    if ($this->project_xml_properties === false)
     {
       throw new InvalidCatrobatFileException("error parsing config xml");
     }
