@@ -41,6 +41,7 @@
 	<buildpathentry kind="src" path="vendor/phpspec/php-diff/lib"/>
 	<buildpathentry kind="src" path="vendor/phpspec/symfony2-extension/src"/>
 	<buildpathentry kind="src" path="vendor/doctrine/doctrine-fixtures-bundle"/>
+	<buildpathentry kind="src" path="vendor/knplabs/knp-components/src/Knp"/>
 	<buildpathentry kind="src" path="vendor/doctrine/doctrine-bundle"/>
 	<buildpathentry kind="src" path="vendor/jms/i18n-routing-bundle"/>
 	<buildpathentry kind="src" path="vendor/braincrafted/bootstrap-bundle"/>
@@ -58,5 +59,6 @@
 	<buildpathentry kind="src" path="vendor/behat/mink-extension/src"/>
 	<buildpathentry kind="src" path="vendor/doctrine/orm/lib"/>
 	<buildpathentry kind="src" path="vendor/symfony/icu"/>
+	<buildpathentry kind="src" path="vendor/knplabs/knp-paginator-bundle/Knp"/>
 	<buildpathentry kind="src" path="vendor/sensio/generator-bundle"/>
 </buildpath>
