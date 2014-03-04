@@ -11,21 +11,19 @@ class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   protected $file_extractor;
   protected $file_repository;
   protected $screenshot_repository;
-  protected $doctrine;
   protected $extracted_file_validator;
   protected $entity_manager;
   protected $project_repository;
   protected $pagination;
 
-  public function __construct($file_extractor, $file_repository, $screenshot_repository, $doctrine, $extracted_file_validator)
+  public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, $extracted_file_validator)
   {
     $this->file_extractor = $file_extractor;
     $this->extracted_file_validator = $extracted_file_validator;
     $this->file_repository = $file_repository;
     $this->screenshot_repository = $screenshot_repository;
-    $this->doctrine = $doctrine;
-    $this->entity_manager = $this->doctrine->getManager();
-    $this->project_repository = $this->doctrine->getRepository('CatrobatCoreBundle:Project');
+    $this->entity_manager = $entity_manager;
+    $this->project_repository = $project_repository;
   }
 
   public function setPaginator(Paginator $paginator)
