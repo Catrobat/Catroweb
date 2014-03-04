@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Catrobat\AdminBundle\CatrobatAdminBundle(),
             new Catrobat\TestBundle\CatrobatTestBundle(),
             new Catrobat\CoreBundle\CatrobatCoreBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'testsqlite'))) {

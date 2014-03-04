@@ -12,6 +12,8 @@ services:
       catrobat.core.model.projectmanager:
             class: Catrobat\CoreBundle\Model\ProjectManager
             arguments: ["@catrobat.core.services.file.extractor","@catrobat.core.services.file.repository", "@catrobat.core.services.screenshot.repository", "@doctrine","@catroweb.file.validator"]
+            tags:
+            -  { name:  "knp_paginator.injectable" }
 
       catrobat.core.model.usermanager:
             class: Catrobat\CoreBundle\Model\UserManager

@@ -4,8 +4,9 @@ namespace Catrobat\CoreBundle\Model;
 
 use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CoreBundle\Entity\Project;
+use Knp\Component\Pager\Paginator;
 
-class ProjectManager
+class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface
 {
   protected $file_extractor;
   protected $file_repository;
@@ -14,6 +15,7 @@ class ProjectManager
   protected $extracted_file_validator;
   protected $entity_manager;
   protected $project_repository;
+  protected $pagination;
 
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $doctrine, $extracted_file_validator)
   {
@@ -26,6 +28,11 @@ class ProjectManager
     $this->project_repository = $this->doctrine->getRepository('CatrobatCoreBundle:Project');
   }
 
+  public function setPaginator(Paginator $paginator)
+  {
+    $this->pagination = $paginator;
+  }
+  
   public function addProject(AddProjectRequest $request)
   {
     $file = $request->getProjectfile();
@@ -84,9 +91,13 @@ class ProjectManager
     return $this->project_repository->findBy(array(),array('views' => 'desc'), $limit, $offset);
   }
   
-  public function findByOrderedByDate($limit = null, $offset = null)
+  public function findByOrderedByDate($limit = 1, $offset = 1)
   {
-    return $this->project_repository->findBy(array(),array('uploaded_at' => 'desc'), $limit, $offset);
+    return $this->project_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC')->setFirstResult($offset)->setMaxResults($limit)->getQuery()->getResult();
+//    $offset = $offset / $limit;
+//    $query = $this->project_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC');
+//    return $this->pagination->paginate($query, 1, $limit);
   }
+  
   
 }
