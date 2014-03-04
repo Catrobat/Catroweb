@@ -8,10 +8,10 @@ code_coverage:
     whitelist:
       - "src/Catrobat/ApiBundle/Controller"
       - "src/Catrobat/CatrowebBundle/Controller"
-      - "src/Catrobat/CatrowebBundle/Services"
-      - "src/Catrobat/CatrowebBundle/Model"
-      - "src/Catrobat/CatrowebBundle/Exceptions"
-      - "src/Catrobat/CatrowebBundle/Spec"
+      - "src/Catrobat/CoreBundle/Services"
+      - "src/Catrobat/CoreBundle/Model"
+      - "src/Catrobat/CoreBundle/Exceptions"
+      - "src/Catrobat/CoreBundle/Spec"
       
 # TODO: values not used
 catrobat:

@@ -57,12 +57,18 @@ class GenerateTestDataCommand extends Command
       $this->generateProjectWithMissingImage("project_with_missing_image");     
       $this->generateProjectWithTooManyFiles("project_with_too_many_files");
       $this->generateProjectWithTooManyFolders("project_with_too_many_folders"); 
+      $this->generateProjectWithMissingCodeXML("project_with_missing_code_xml");
+      $this->generateProjectWithInvalidCodeXML("project_with_invalid_code_xml");
+      $this->generateProjectWithManualScreenshot("project_with_manual_screenshot");
+      $this->generateProjectWithScreenshot("project_with_screenshot");
       
       $this->compressDirectory("base");
       $this->compressDirectory("project_with_too_many_folders");      
       $this->compressDirectory("project_with_extra_image");
       $this->compressDirectory("project_with_missing_image");
       $this->compressDirectory("project_with_too_many_files");
+      $this->compressDirectory("project_with_missing_code_xml");
+      $this->compressDirectory("project_with_invalid_code_xml");
       
       $output->writeln("Done");
     }
@@ -104,6 +110,31 @@ class GenerateTestDataCommand extends Command
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
     $this->filesystem->mirror($this->target_directory.$directory."/sounds", $this->target_directory.$directory."/extraFolder");
+  }
+  
+  protected function generateProjectWithMissingCodeXML($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->remove($this->target_directory.$directory."/code.xml");
+  }
+  
+  protected function generateProjectWithInvalidCodeXML($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->remove($this->target_directory.$directory."/code.xml");
+    $this->filesystem->copy($this->target_directory.$directory."/automatic_screenshot.png", $this->target_directory.$directory."/code.xml"); 
+  }
+  
+  protected function generateProjectWithManualScreenshot($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->rename($this->target_directory.$directory."/automatic_screenshot.png", $this->target_directory.$directory."/manual_screenshot.png");  
+  }
+  
+  protected function generateProjectWithScreenshot($directory)
+  {
+    $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
+    $this->filesystem->rename($this->target_directory.$directory."/automatic_screenshot.png", $this->target_directory.$directory."/screenshot.png");    
   }
 
 }
