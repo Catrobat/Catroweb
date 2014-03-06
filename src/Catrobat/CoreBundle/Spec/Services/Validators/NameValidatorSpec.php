@@ -18,6 +18,16 @@ class NameValidatorSpec extends ObjectBehavior
     /**
      * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $file
      */
+    function it_makes_sure_the_given_project_name_is_valid($file)
+    {
+      $file->getName()->willReturn("Jhon Doe");
+      $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    }
+    
+    
+    /**
+     * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $file
+     */
     function it_throws_an_exception_if_the_name_is_null($file)
     {
       $file->getName()->willReturn(null);
@@ -31,15 +41,6 @@ class NameValidatorSpec extends ObjectBehavior
     {
       $file->getName()->willReturn("");
       $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
-    }
-    
-    /**
-     * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $file
-     */
-    function it_throws_nothing_if_a_normal_name_is_validated($file)
-    {
-      $file->getName()->willReturn("Jhon Doe");
-      $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**
