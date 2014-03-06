@@ -15,7 +15,7 @@ class FileStructureValidatorSpec extends ObjectBehavior
     /**
      * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $file
      */
-    function it_should_throw_nothig_with_a_good_project($file)
+    function it_makes_sure_the_project_has_a_valid_file_structure($file)
     {
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/base");
       $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
