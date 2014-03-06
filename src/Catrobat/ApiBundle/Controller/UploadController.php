@@ -45,7 +45,7 @@ class UploadController
         {
           $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
           
-          $id = $this->project_manager->addProject($add_project_request);
+          $id = $this->project_manager->addProject($add_project_request)->getId();
           $user = $this->context->getToken()->getUser();
           $user->setToken($this->tokenGenerator->generateToken());
           $this->user_manager->updateUser($user);

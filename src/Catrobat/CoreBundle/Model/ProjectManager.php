@@ -61,7 +61,7 @@ class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $this->screenshot_repository->saveProjectAssets($extracted_file->getScreenshotPath(), $project->getId());
     $this->file_repository->saveProjectfile($file, $project->getId());
     
-    return $project->getId();
+    return $project;
   }
 
   public function findOneByName($projectName)
