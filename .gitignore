@@ -9,3 +9,4 @@
 /composer.phar
 /coverage
 /phpspec.yml
+.idea/workspace.xml
