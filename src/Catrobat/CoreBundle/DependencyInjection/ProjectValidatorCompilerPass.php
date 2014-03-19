@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CatrowebBundle\DependencyInjection;
+namespace Catrobat\CoreBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
