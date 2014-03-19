@@ -166,7 +166,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     {
       $this->client = $this->kernel->getContainer()->get('test.client');
       $params = array("token" => $token, "username" => $this->user); 
-    	$crawler = $this->client->request('POST', $url, $params);
+      $crawler = $this->client->request('POST', $url, $params);
     }
     
     /**
