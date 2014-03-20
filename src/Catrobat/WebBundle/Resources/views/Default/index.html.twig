@@ -1,0 +1,13 @@
+{% extends 'CatrobatWebBundle::base.html.twig' %}
+
+{% block body %}
+
+    {{ render(controller('CatrobatWebBundle:FeaturedProject:index', { _locale: app.request.locale, _embedded: true })) }}
+
+    {{ render(controller('catrobat.web.project.controller:newestAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
+    
+    {{ render(controller('catrobat.web.project.controller:mostDownloadedAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
+
+    {{ render(controller('catrobat.web.project.controller:mostViewedAction', { _locale: app.request.locale, _embedded: true }, { 'limit' : 18})) }}
+	
+{% endblock %}
