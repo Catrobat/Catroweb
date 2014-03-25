@@ -31,6 +31,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class FeatureContext extends BehatContext //MinkContext if you want to test web
                   implements KernelAwareInterface
 {
+    const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
     private $kernel;
     private $parameters;
 
@@ -329,7 +330,18 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
       assertTrue(file_exists($filepath),"File not found");
       $this->files[] = new UploadedFile($filepath,$filename);
     }
-    
+
+    /**
+     * @Given /^I have a valid Catrobat file$/
+     */
+    public function iHaveAValidCatrobatFile()
+    {
+        $filepath = self::FIXTUREDIR . "compass.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"compass.catrobat");
+    }
+
+
     /**
      * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
      */

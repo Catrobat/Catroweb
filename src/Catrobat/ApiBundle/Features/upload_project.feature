@@ -18,7 +18,7 @@ Feature: Upload a project
   Scenario: project upload with valid data
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
-    And I have a file "test.catrobat"
+    And I have a valid Catrobat file
     And I have a parameter "fileChecksum" with the md5checksum of "test.catrobat"
     When I POST these parameters to "/api/upload/upload.json"
     Then I should get the json object with random "token" and "projectId":
