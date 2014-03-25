@@ -10,11 +10,15 @@ services:
                 - [setExtractDirectory, ["%catrobat.file.extract.dir%"]]
                 - [setScreenshotDirectory, ["%catrobat.screenshot.dir%"]]
                 - [setThumbnailDirectory, ["%catrobat.thumbnail.dir%"]]
-      
+              tags:
+                -  { name: console.command }
+
       catrowebadmin.command.import:
               class: Catrobat\AdminBundle\Command\ProjectImportCommand
               arguments: ["@catrowebadmin.filesystem","@catrobat.core.model.usermanager","@catrobat.core.model.projectmanager"]
-      
+              tags:
+                -  { name: console.command }
+
       catrowebadmin.filesystem:
               class: Symfony\Component\Filesystem\Filesystem
               public: false
