@@ -1,7 +1,7 @@
 default:
     extensions:
         Behat\Symfony2Extension\Extension:
-            bundle: CatrowebBundle
+            bundle: CatrobatWebBundle
             mink_driver: true
         Behat\MinkExtension\Extension:
             default_session: 'symfony2'
@@ -9,7 +9,9 @@ default:
 web:
     extensions:
         Behat\Symfony2Extension\Extension:
-            bundle: CatrowebBundle
+            bundle: CatrobatWebBundle
+        Behat\MinkExtension\Extension:
+            default_session: 'symfony2'
 
 api:
     extensions:

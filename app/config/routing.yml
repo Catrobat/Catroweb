@@ -7,7 +7,7 @@ catrobat_api:
     prefix:   /
 
 catroweb:
-    resource: "@CatrowebBundle/Resources/config/routing.yml"
+    resource: "@CatrobatWebBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user_security:

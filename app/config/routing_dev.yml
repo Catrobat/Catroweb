@@ -14,5 +14,5 @@ _main:
     resource: routing.yml
 
 catroweb_dev:
-    resource: "@CatrowebBundle/Resources/config/routing_dev.yml"
+    resource: "@CatrobatWebBundle/Resources/config/routing_dev.yml"
     prefix:   /

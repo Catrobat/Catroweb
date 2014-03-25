@@ -1,0 +1,23 @@
+parameters:
+      catrobat.web.project.controller.class: Catrobat\WebBundle\Controller\ProjectController
+
+services:
+# =========================== Kernel Listener ===========================
+      catrowebbundle.listener.request:
+              class: Catrobat\WebBundle\EventListener\LanguageListener
+              tags:
+                  - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+# =========================== Controller ===========================
+
+      catrobat.web.project.controller:
+              class: "%catrobat.web.project.controller.class%"
+              arguments: ["@templating", "@catrobat.core.model.projectmanager"]
+
+              
+# =========================== TWIG ===========================
+      catrobat.twig.project.assets:
+              class: Catrobat\WebBundle\Twig\ProjectAssetsExtension
+              arguments: ["@catrobat.core.services.screenshot.repository"]
+              tags:
+                  - { name: twig.extension }              
