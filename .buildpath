@@ -8,21 +8,22 @@
 	<buildpathentry kind="src" path="vendor/phpunit/phpunit-mock-objects/PHPUnit"/>
 	<buildpathentry excluding="Symfony/Component/HttpFoundation/Resources/stubs/|Symfony/Component/Intl/Resources/stubs/" kind="src" path="vendor/symfony/symfony/src"/>
 	<buildpathentry kind="src" path="vendor/jms/translation-bundle"/>
+	<buildpathentry kind="src" path="app"/>
 	<buildpathentry kind="src" path="vendor/bossa/phpspec2-expect"/>
 	<buildpathentry kind="src" path="vendor/hwi/oauth-bundle"/>
 	<buildpathentry kind="src" path="vendor/phpspec/phpspec/src"/>
-	<buildpathentry kind="src" path="vendor/nikic/php-parser/lib"/>
 	<buildpathentry kind="src" path="vendor/behat/gherkin/src"/>
+	<buildpathentry kind="src" path="vendor/nikic/php-parser/lib"/>
 	<buildpathentry kind="src" path="vendor/phpunit/phpunit/PHPUnit"/>
-	<buildpathentry kind="src" path="vendor/doctrine/collections/lib"/>
 	<buildpathentry kind="src" path="vendor/phpunit/php-timer/PHP"/>
-	<buildpathentry kind="src" path="src"/>
-	<buildpathentry kind="src" path="vendor/composer"/>
+	<buildpathentry kind="src" path="vendor/doctrine/collections/lib"/>
 	<buildpathentry kind="src" path="vendor/jdorn/sql-formatter/lib"/>
-	<buildpathentry kind="src" path="vendor/phpunit/php-code-coverage/PHP"/>
+	<buildpathentry kind="src" path="vendor/composer"/>
+	<buildpathentry kind="src" path="src"/>
 	<buildpathentry kind="src" path="vendor/behat/symfony2-extension/src"/>
-	<buildpathentry kind="src" path="vendor/sensiolabs/behat-page-object-extension/src"/>
+	<buildpathentry kind="src" path="vendor/phpunit/php-code-coverage/PHP"/>
 	<buildpathentry kind="src" path="vendor/friendsofsymfony/user-bundle"/>
+	<buildpathentry kind="src" path="vendor/sensiolabs/behat-page-object-extension/src"/>
 	<buildpathentry kind="src" path="vendor/kriswallsmith/buzz/lib"/>
 	<buildpathentry kind="src" path="vendor/psr/log"/>
 	<buildpathentry kind="src" path="vendor/leafo/lessphp"/>
@@ -48,17 +49,17 @@
 	<buildpathentry kind="src" path="vendor/behat/behat/src"/>
 	<buildpathentry kind="src" path="vendor/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs"/>
 	<buildpathentry kind="src" path="vendor/behat/mink-browserkit-driver/src"/>
-	<buildpathentry kind="src" path="vendor/doctrine/dbal/lib"/>
-	<buildpathentry kind="src" path="vendor/phpunit/php-token-stream/PHP"/>
 	<buildpathentry kind="src" path="vendor/phpspec/prophecy/src"/>
+	<buildpathentry kind="src" path="vendor/phpunit/php-token-stream/PHP"/>
+	<buildpathentry kind="src" path="vendor/doctrine/dbal/lib"/>
 	<buildpathentry kind="src" path="vendor/doctrine/annotations/lib"/>
 	<buildpathentry kind="src" path="vendor/behat/mink/src"/>
-	<buildpathentry kind="src" path="vendor/phpunit/php-text-template/Text"/>
 	<buildpathentry kind="src" path="vendor/symfony/swiftmailer-bundle"/>
+	<buildpathentry kind="src" path="vendor/phpunit/php-text-template/Text"/>
 	<buildpathentry kind="src" path="vendor/symfony/monolog-bundle"/>
-	<buildpathentry kind="src" path="vendor/behat/mink-extension/src"/>
-	<buildpathentry kind="src" path="vendor/doctrine/orm/lib"/>
 	<buildpathentry kind="src" path="vendor/symfony/icu"/>
-	<buildpathentry kind="src" path="vendor/knplabs/knp-paginator-bundle/Knp"/>
+	<buildpathentry kind="src" path="vendor/doctrine/orm/lib"/>
+	<buildpathentry kind="src" path="vendor/behat/mink-extension/src"/>
 	<buildpathentry kind="src" path="vendor/sensio/generator-bundle"/>
+	<buildpathentry kind="src" path="vendor/knplabs/knp-paginator-bundle/Knp"/>
 </buildpath>

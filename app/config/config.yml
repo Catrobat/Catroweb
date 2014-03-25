@@ -30,7 +30,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ CatrowebBundle ]
+    bundles:        [ CatrobatWebBundle ]
     #java: /usr/bin/java
     filters:
         lessphp:
