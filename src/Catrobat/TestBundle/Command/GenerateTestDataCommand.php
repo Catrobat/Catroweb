@@ -67,7 +67,7 @@ class GenerateTestDataCommand extends Command
       {
         $this->compressDirectory($dir->getRelativePathname());
       }
-      
+
       $output->writeln("Done");
     }
   }
@@ -89,13 +89,13 @@ class GenerateTestDataCommand extends Command
   protected function generateProjectWithExtraImage($directory)
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
-    $this->filesystem->copy($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png", $this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_extra.png");
+    $this->filesystem->copy($this->target_directory.$directory."/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png", $this->target_directory.$directory."/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png");
   }
   
   protected function generateProjectWithMissingImage($directory)
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
-    $this->filesystem->remove($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png");
+    $this->filesystem->remove($this->target_directory.$directory."/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png");
   }
   
   protected function generateProjectWithTooManyFiles($directory)
