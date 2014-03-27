@@ -61,14 +61,12 @@ class GenerateTestDataCommand extends Command
       $this->generateProjectWithInvalidCodeXML("project_with_invalid_code_xml");
       $this->generateProjectWithManualScreenshot("project_with_manual_screenshot");
       $this->generateProjectWithScreenshot("project_with_screenshot");
-      
-      $this->compressDirectory("base");
-      $this->compressDirectory("project_with_too_many_folders");      
-      $this->compressDirectory("project_with_extra_image");
-      $this->compressDirectory("project_with_missing_image");
-      $this->compressDirectory("project_with_too_many_files");
-      $this->compressDirectory("project_with_missing_code_xml");
-      $this->compressDirectory("project_with_invalid_code_xml");
+
+      $finder->directories()->in($this->target_directory)->depth(0);
+      foreach ($finder as $dir)
+      {
+        $this->compressDirectory($dir->getRelativePathname());
+      }
       
       $output->writeln("Done");
     }
