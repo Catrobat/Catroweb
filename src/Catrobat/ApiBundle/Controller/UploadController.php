@@ -57,8 +57,16 @@ class UploadController
         }
         catch (InvalidCatrobatFileException $exception)
         {
-          $response["statusCode"] = 501;
-          $response["answer"] = $exception->getMessage();
+          switch ($exception->getStatusCode())
+          {
+            case 507:
+              $response["statusCode"] = 507;
+              $response["answer"] = "unknown error: project_xml_not_found!";
+              break;
+            default:
+              $response["statusCode"] = 500;
+              $response["answer"] = "unknown error";
+          }
         }
       }
         

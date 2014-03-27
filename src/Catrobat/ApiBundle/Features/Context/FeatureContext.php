@@ -341,6 +341,35 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
         $this->files[] = new UploadedFile($filepath,"compass.catrobat");
     }
 
+    /**
+     * @Given /^I have a Catrobat file with an invalid code\.xml$/
+     */
+    public function iHaveACatrobatFileWithAnInvalidCodeXml()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_invalid_code_xml.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_invalid_code_xml.catrobat");
+    }
+    
+    /**
+     * @Given /^I have a Catrobat file with an missing code\.xml$/
+     */
+    public function iHaveACatrobatFileWithAnMissingCodeXml()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_code_xml.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_missing_code_xml.catrobat");
+    }
+    
+    
+    /**
+     * @Given /^I have a parameter "([^"]*)" with the md5checksum my file$/
+     */
+    public function iHaveAParameterWithTheMdchecksumMyFile($parameter)
+    {
+      $this->request_parameters[$parameter] = md5_file($this->files[0]->getPathname()); 
+    }
+    
 
     /**
      * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/

@@ -14,7 +14,7 @@ class ExtractedCatrobatFile
     
     if (!file_exists($base_dir . "code.xml"))
     {
-      throw new InvalidCatrobatFileException("missing project xml");
+      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::PROJECT_XML_MISSING);
     }
     
     try

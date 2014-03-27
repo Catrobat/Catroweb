@@ -4,11 +4,21 @@ namespace Catrobat\CoreBundle\Exceptions;
 
 class InvalidCatrobatFileException extends \RuntimeException
 {
+  const PROJECT_XML_MISSING = 507;
+  
+  protected $code;
+  
   /*
    * (non-PHPdoc) @see RuntimeException::__construct()
   */
-  public function __construct($message)
+  public function __construct($code)
   {
-    parent::__construct($message);
+    parent::__construct($code);
+    $this->code = $code;
+  }
+  
+  public function getStatusCode()
+  {
+    return $this->code;
   }
 }
