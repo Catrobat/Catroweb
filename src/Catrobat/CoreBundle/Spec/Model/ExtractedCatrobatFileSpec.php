@@ -21,7 +21,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 
   function it_gets_the_project_name_from_xml()
   {
-    $this->getName()->shouldReturn("compass");
+    $this->getName()->shouldReturn("test");
   }
 
   function it_gets_the_project_description_from_xml()
@@ -31,12 +31,12 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
   
   function it_gets_the_language_version_from_xml()
   {
-    $this->getLanguageVersion()->shouldReturn("0.9");
+    $this->getLanguageVersion()->shouldReturn("0.92");
   }
   
   function it_gets_the_application_version_from_xml()
   {
-    $this->getApplicationVersion()->shouldReturn("0.8.5");
+    $this->getApplicationVersion()->shouldReturn("0.9.7");
   }
   
   function it_returns_the_path_of_the_base_directory()
