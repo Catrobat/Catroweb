@@ -5,9 +5,15 @@ namespace Catrobat\CoreBundle\Services\Validators;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
 
 class OnlyDefinedImagesValidator implements ExtractedCatrobatFileValidatorInterface
 {
+  
+  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event)
+  {
+    $this->validate($event->getExtractedFile());
+  }
   
   /*
    * (non-PHPdoc) @see \Catrobat\CoreBundle\Services\Validators\ExtractedCatrobatFileValidatorInterface::validate()
@@ -26,7 +32,7 @@ class OnlyDefinedImagesValidator implements ExtractedCatrobatFileValidatorInterf
     $files = array_diff($files_in_xml, $files_in_directory);
     if (count($files) > 0)
     {
-      throw new InvalidCatrobatFileException("Files missing: " . implode(", ", $files));
+      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::IMAGE_MISSING);
     }
   }
 

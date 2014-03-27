@@ -5,6 +5,7 @@ namespace Catrobat\CoreBundle\Exceptions;
 class InvalidCatrobatFileException extends \RuntimeException
 {
   const PROJECT_XML_MISSING = 507;
+  const IMAGE_MISSING = 524;
   
   protected $code;
   

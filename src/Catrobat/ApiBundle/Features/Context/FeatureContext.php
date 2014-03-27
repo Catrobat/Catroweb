@@ -361,6 +361,15 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
         $this->files[] = new UploadedFile($filepath,"project_with_missing_code_xml.catrobat");
     }
     
+    /**
+     * @Given /^I have a Catrobat file with a missing image$/
+     */
+    public function iHaveACatrobatFileWithAMissingImage()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_image.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_missing_image.catrobat");
+    }
     
     /**
      * @Given /^I have a parameter "([^"]*)" with the md5checksum my file$/

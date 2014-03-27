@@ -57,11 +57,14 @@ class UploadController
         }
         catch (InvalidCatrobatFileException $exception)
         {
+          $response["statusCode"] = $exception->getStatusCode();
           switch ($exception->getStatusCode())
           {
-            case 507:
-              $response["statusCode"] = 507;
+            case InvalidCatrobatFileException::PROJECT_XML_MISSING:
               $response["answer"] = "unknown error: project_xml_not_found!";
+              break;
+            case InvalidCatrobatFileException::IMAGE_MISSING:
+              $response["answer"] = "Project XML metions a file which not exists in project-folder";
               break;
             default:
               $response["statusCode"] = 500;

@@ -13,5 +13,9 @@ class ProjectBeforeInsertEvent extends Event
   {
     $this->extracted_file = $extracted_file;
   }
-  
+
+  public function getExtractedFile()
+  {
+    return $this->extracted_file;
+  }
 }

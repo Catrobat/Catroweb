@@ -22,7 +22,7 @@ services:
 
       catroweb.file.validator.definedimages:
             class: Catrobat\CoreBundle\Services\Validators\OnlyDefinedImagesValidator
-            public: false
             tags:
-            -  { name: catroweb.file.validator.service }
+            - { name: kernel.event_listener, event: catrobat.project.before, method: onProjectBeforeInsert }
+            
             
