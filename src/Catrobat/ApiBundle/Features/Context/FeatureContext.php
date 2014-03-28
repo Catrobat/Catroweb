@@ -379,7 +379,15 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
       $this->request_parameters[$parameter] = md5_file($this->files[0]->getPathname()); 
     }
     
-
+    /**
+     * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
+     */
+    public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile($parameter)
+    {
+      $this->request_parameters[$parameter] = "INVALIDCHECKSUM"; 
+    }
+    
+    
     /**
      * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
      */

@@ -42,6 +42,17 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":503,"answer":"Client did not send fileChecksum! Are you using an outdated version of Pocket Code?","preHeaderMessages":""}
       """
 
+  Scenario: project with invalid file checksum are rejected
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have a valid Catrobat file
+    And I have a parameter "fileChecksum" with an invalid md5checksum of my file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
+      """
+
       
   Scenario: A valid file must contain at least one screenshot and image and sound directories
 

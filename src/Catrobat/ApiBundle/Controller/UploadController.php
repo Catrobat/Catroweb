@@ -44,6 +44,11 @@ class UploadController
         $response["statusCode"] = InvalidCatrobatFileException::MISSING_CHECKSUM;
         $response["answer"] = "Client did not send fileChecksum! Are you using an outdated version of Pocket Code?";
       }
+      else if (md5_file($request->files->get(0)->getPathname()) != $request->request->get("fileChecksum"))
+      {
+        $response["statusCode"] = InvalidCatrobatFileException::INVALID_CHECKSUM;
+        $response["answer"] = "invalid checksum";
+      }
       else
       {
         try 
@@ -72,7 +77,7 @@ class UploadController
               $response["answer"] = "Project XML metions a file which not exists in project-folder";
               break;
             default:
-              $response["statusCode"] = 500;
+              $response["statusCode"] = InvalidCatrobatFileException::INTERNAL_SERVER_ERROR;
               $response["answer"] = "unknown error";
           }
         }
