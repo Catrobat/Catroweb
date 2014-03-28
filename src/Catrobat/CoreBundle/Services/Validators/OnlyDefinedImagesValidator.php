@@ -7,7 +7,7 @@ use Symfony\Component\Finder\Finder;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
 
-class OnlyDefinedImagesValidator implements ExtractedCatrobatFileValidatorInterface
+class OnlyDefinedImagesValidator
 {
   
   public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event)
@@ -15,9 +15,6 @@ class OnlyDefinedImagesValidator implements ExtractedCatrobatFileValidatorInterf
     $this->validate($event->getExtractedFile());
   }
   
-  /*
-   * (non-PHPdoc) @see \Catrobat\CoreBundle\Services\Validators\ExtractedCatrobatFileValidatorInterface::validate()
-   */
   public function validate(ExtractedCatrobatFile $file)
   {
     

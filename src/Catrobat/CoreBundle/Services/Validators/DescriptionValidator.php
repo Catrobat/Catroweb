@@ -4,13 +4,16 @@ namespace Catrobat\CoreBundle\Services\Validators;
 
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
 
-class DescriptionValidator implements ExtractedCatrobatFileValidatorInterface
+class DescriptionValidator
 {
   
-  /*
-   * (non-PHPdoc) @see \Catrobat\CoreBundle\Services\Validators\ExtractedCatrobatFileValidatorInterface::validate()
-   */
+  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event)
+  {
+    $this->validate($event->getExtractedFile());
+  }
+  
   public function validate(ExtractedCatrobatFile $file)
   {
     if (strlen($file->getDescription()) > 1000 )

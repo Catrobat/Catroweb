@@ -14,8 +14,7 @@ class ProjectManagerSpec extends ObjectBehavior
   /**
    * @param \Catrobat\CoreBundle\Services\CatrobatFileExtractor $file_extractor          
    * @param \Catrobat\CoreBundle\Services\ProjectFileRepository $file_repository          
-   * @param \Catrobat\CoreBundle\Services\ScreenshotRepository $screenshot_repository          
-   * @param \Catrobat\CoreBundle\Services\Validators\ExtractedFileValidator $extracted_file_validator          
+   * @param \Catrobat\CoreBundle\Services\ScreenshotRepository $screenshot_repository
    * @param \Catrobat\CoreBundle\Entity\ProjectRepository $project_repository          
    * @param \Doctrine\ORM\EntityManager $entity_manager          
    * @param \Symfony\Component\HttpFoundation\File\File $file          
