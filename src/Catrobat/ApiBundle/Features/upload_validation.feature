@@ -53,6 +53,17 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
       """
 
+  Scenario: project with media files not defined in xml are rejected
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have a Catrobat file with an additional image
+    And I have a parameter "fileChecksum" with the md5checksum my file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
+      """
+
       
   Scenario: A valid file must contain at least one screenshot and image and sound directories
 

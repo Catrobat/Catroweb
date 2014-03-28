@@ -77,6 +77,9 @@ class UploadController
             case InvalidCatrobatFileException::IMAGE_MISSING:
               $response["answer"] = "Project XML metions a file which not exists in project-folder";
               break;
+            case InvalidCatrobatFileException::UNEXPECTED_FILE:
+              $response["answer"] = "unexpected file found";
+              break;
             default:
               $response["statusCode"] = InvalidCatrobatFileException::INTERNAL_SERVER_ERROR;
               $response["answer"] = "unknown error";

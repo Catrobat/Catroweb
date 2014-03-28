@@ -24,7 +24,7 @@ class OnlyDefinedImagesValidator
     $files = array_diff($files_in_directory, $files_in_xml);
     if (count($files) > 0)
     {
-      throw new InvalidCatrobatFileException("Unexpected files found: " . implode(", ", $files));
+      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::UNEXPECTED_FILE);
     }
     $files = array_diff($files_in_xml, $files_in_directory);
     if (count($files) > 0)

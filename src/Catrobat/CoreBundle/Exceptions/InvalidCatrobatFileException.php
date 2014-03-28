@@ -10,6 +10,7 @@ class InvalidCatrobatFileException extends \RuntimeException
   const INVALID_CHECKSUM = 504;
   const PROJECT_XML_MISSING = 507;
   const IMAGE_MISSING = 524;
+  const UNEXPECTED_FILE = 525;
   
   protected $code;
   
