@@ -32,6 +32,16 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":524,"answer":"Project XML metions a file which not exists in project-folder","preHeaderMessages":""}
       """
 
+  Scenario: project with missing file checksum are rejected
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have a valid Catrobat file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":503,"answer":"Client did not send fileChecksum! Are you using an outdated version of Pocket Code?","preHeaderMessages":""}
+      """
+
       
   Scenario: A valid file must contain at least one screenshot and image and sound directories
 

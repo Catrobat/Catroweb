@@ -39,7 +39,12 @@ class UploadController
         $response["statusCode"] = 501;
         $response["answer"] = "POST-Data not correct or missing!";
       }
-      else 
+      else if (!$request->request->has("fileChecksum"))
+      {
+        $response["statusCode"] = InvalidCatrobatFileException::MISSING_CHECKSUM;
+        $response["answer"] = "Client did not send fileChecksum! Are you using an outdated version of Pocket Code?";
+      }
+      else
       {
         try 
         {
