@@ -14,6 +14,7 @@ use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CoreBundle\Model\ProjectManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use Buzz\Exception\InvalidArgumentException;
 
 class UploadController
 {
@@ -36,7 +37,7 @@ class UploadController
     {
       if ($request->files->count() != 1)
       {
-        $response["statusCode"] = 501;
+        $response["statusCode"] = InvalidCatrobatFileException::MISSING_POST_DATA;
         $response["answer"] = "POST-Data not correct or missing!";
       }
       else if (!$request->request->has("fileChecksum"))
