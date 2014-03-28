@@ -80,8 +80,10 @@ class UploadController
             case InvalidCatrobatFileException::UNEXPECTED_FILE:
               $response["answer"] = "unexpected file found";
               break;
+            case InvalidCatrobatFileException::INVALID_XML:
+              $response["answer"] = "invalid code xml";
+              break;
             default:
-              $response["statusCode"] = InvalidCatrobatFileException::INTERNAL_SERVER_ERROR;
               $response["answer"] = "unknown error";
           }
         }

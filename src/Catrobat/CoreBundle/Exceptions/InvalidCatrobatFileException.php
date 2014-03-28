@@ -9,6 +9,7 @@ class InvalidCatrobatFileException extends \RuntimeException
   const MISSING_CHECKSUM = 503;
   const INVALID_CHECKSUM = 504;
   const PROJECT_XML_MISSING = 507;
+  const INVALID_XML = 508;
   const IMAGE_MISSING = 524;
   const UNEXPECTED_FILE = 525;
   

@@ -21,6 +21,18 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":507,"answer":"unknown error: project_xml_not_found!","preHeaderMessages":""}
       """
 
+  Scenario: project must have a valid code.xml
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have a Catrobat file with an invalid code.xml
+    And I have a parameter "fileChecksum" with the md5checksum my file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":508,"answer":"invalid code xml","preHeaderMessages":""}
+      """
+
+
   Scenario: project with missing images are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
