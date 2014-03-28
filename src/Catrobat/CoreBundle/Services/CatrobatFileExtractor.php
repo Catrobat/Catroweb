@@ -37,7 +37,7 @@ class CatrobatFileExtractor
     }
     else
     {
-      throw new InvalidCatrobatFileException("unable to extract catrobat file");
+      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::INVALID_FILE);
     }
     
     return new ExtractedCatrobatFile($full_extract_dir);

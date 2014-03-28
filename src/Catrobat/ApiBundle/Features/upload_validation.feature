@@ -76,6 +76,17 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
       """
 
+  Scenario: invalid catrobat project files should be rejected
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have an invalid Catrobat file
+    And I have a parameter "fileChecksum" with the md5checksum my file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":505,"answer":"invalid file","preHeaderMessages":""}
+      """
+
       
   Scenario: A valid file must contain at least one screenshot and image and sound directories
 

@@ -83,6 +83,9 @@ class UploadController
             case InvalidCatrobatFileException::INVALID_XML:
               $response["answer"] = "invalid code xml";
               break;
+            case InvalidCatrobatFileException::INVALID_FILE:
+              $response["answer"] = "invalid file";
+              break;
             default:
               $response["answer"] = "unknown error";
           }
