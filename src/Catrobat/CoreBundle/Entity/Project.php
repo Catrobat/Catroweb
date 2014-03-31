@@ -31,7 +31,7 @@ class Project
   protected $description;
   
   /**
-   * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
+   * @ORM\ManyToOne(targetEntity="\Catrobat\Sonata\UserBundle\Entity\User", inversedBy="projects")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
    */
   protected $user;
@@ -124,7 +124,12 @@ class Project
   {
     $this->setLastModifiedAt(new \DateTime());
   }
-  
+
+  /**
+  * @ORM\Column(type="boolean", options={"default":false})
+  */
+  protected $approved;
+
   /**
    * @ORM\PrePersist
    */
@@ -357,10 +362,10 @@ class Project
     /**
      * Set user
      *
-     * @param \Catrobat\CoreBundle\Entity\User $user
+     * @param \Catrobat\Sonata\UserBundle\Entity\User $user
      * @return Project
      */
-    public function setUser(\Catrobat\CoreBundle\Entity\User $user = null)
+    public function setUser(\Catrobat\Sonata\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
     
@@ -588,5 +593,25 @@ class Project
     public function getRemixOf()
     {
         return $this->remix_of;
+    }
+
+    /**
+     * Set if project is approved
+     *
+     * @param boolean
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+    }
+
+    /**
+     * Get if project is approved
+     *
+     * @return boolean
+     */
+    public function getApproved()
+    {
+        return $this->approved;
     }
 }

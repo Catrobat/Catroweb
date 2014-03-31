@@ -5,7 +5,7 @@ namespace Catrobat\WebBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Catrobat\CoreBundle\Entity\Project;
-use Catrobat\CoreBundle\Entity\User;
+use Catrobat\Sonata\UserBundle\Entity\User;
 
 class LoadSampleProjects implements FixtureInterface
 {
@@ -39,6 +39,8 @@ class LoadSampleProjects implements FixtureInterface
     $project->setVisible(true);
     $project->setUploadLanguage("en");
     $project->setFilesize("100");
+
+      $project->setApproved(false);
     $project->setRemixCount(0);
     $manager->persist($project);
 
@@ -60,6 +62,7 @@ class LoadSampleProjects implements FixtureInterface
     $project->setUploadLanguage("en");
     $project->setFilesize("100");
     $project->setRemixCount(0);
+      $project->setApproved(false);
     $manager->persist($project);
     
     
@@ -84,6 +87,7 @@ class LoadSampleProjects implements FixtureInterface
       $project->setUploadLanguage("en");
       $project->setFilesize("100");
       $project->setRemixCount(0);
+        $project->setApproved(false);
       $manager->persist($project);
     } 
     
