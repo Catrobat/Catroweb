@@ -30,7 +30,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ CatrobatWebBundle ]
+    bundles:        [ CatrobatWebBundle, CatrobatAdminBundle ]
     #java: /usr/bin/java
     filters:
         lessphp:
@@ -55,10 +55,15 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: %kernel.root_dir%/data/data.db3
         # path:     %database_path%
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        mappings:
+            CatrobatSonataUserBundle:
+                type: annotation
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -71,6 +76,93 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Catrobat\CoreBundle\Entity\User
+    user_class: Catrobat\Sonata\UserBundle\Entity\User
 
-    
+    group:
+        group_class:   Catrobat\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm
+
+    service:
+        user_manager: sonata.user.orm.user_manager
+
+# Sonata Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:  [admin]
+        sonata.block.service.text:
+        catrowebadmin.block.all_programs:
+        catrowebadmin.block.approve_programs:
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+
+sonata_admin:
+    title:     Admin Panel
+    title_logo: /bundles/catrobatadmin/images/admin_logo.png
+    dashboard:
+        blocks:
+           # display a dashboard block
+           - { position: left, type: sonata.admin.block.admin_list }
+    security:
+        handler: sonata.admin.security.handler.acl
+        # acl security information
+        information:
+            GUEST:   [VIEW, LIST]
+            STAFF:   [EDIT, LIST, CREATE]
+            EDITOR:  [OPERATOR, EXPORT]
+            ADMIN:   [MASTER]
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+
+
+sonata_doctrine_orm_admin:
+   # default value is null, so doctrine uses the value defined in the configuration
+    entity_manager: ~
+
+    templates:
+        form:
+           - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
+        filter:
+           - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
+        types:
+            list:
+                array:     SonataAdminBundle:CRUD:list_array.html.twig
+                boolean:   SonataAdminBundle:CRUD:list_boolean.html.twig
+                date:      SonataAdminBundle:CRUD:list_date.html.twig
+                time:      SonataAdminBundle:CRUD:list_time.html.twig
+                datetime:  SonataAdminBundle:CRUD:list_datetime.html.twig
+                text:      SonataAdminBundle:CRUD:base_list_field.html.twig
+                trans:     SonataAdminBundle:CRUD:list_trans.html.twig
+                string:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                smallint:  SonataAdminBundle:CRUD:base_list_field.html.twig
+                bigint:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                integer:   SonataAdminBundle:CRUD:base_list_field.html.twig
+                decimal:   SonataAdminBundle:CRUD:base_list_field.html.twig
+                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
+
+            show:
+                array:     SonataAdminBundle:CRUD:show_array.html.twig
+                boolean:   SonataAdminBundle:CRUD:show_boolean.html.twig
+                date:      SonataAdminBundle:CRUD:show_date.html.twig
+                time:      SonataAdminBundle:CRUD:show_time.html.twig
+                datetime:  SonataAdminBundle:CRUD:show_datetime.html.twig
+                text:      SonataAdminBundle:CRUD:base_show_field.html.twig
+                trans:     SonataAdminBundle:CRUD:show_trans.html.twig
+                string:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                smallint:  SonataAdminBundle:CRUD:base_show_field.html.twig
+                bigint:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                integer:   SonataAdminBundle:CRUD:base_show_field.html.twig
+                decimal:   SonataAdminBundle:CRUD:base_show_field.html.twig
+
+
+sonata_user:
+    security_acl:  true
+    manager_type:  orm
+    class:
+        user:               Catrobat\Sonata\UserBundle\Entity\User
+        group:              Catrobat\Sonata\UserBundle\Entity\Group
+

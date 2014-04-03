@@ -23,6 +23,17 @@ class AppKernel extends Kernel
             new Catrobat\TestBundle\CatrobatTestBundle(),
             new Catrobat\CoreBundle\CatrobatCoreBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            //Begin Sonata--Admin
+            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Catrobat\Sonata\UserBundle\CatrobatSonataUserBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle()
+            //End Sonata--Admin
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'testsqlite'))) {
