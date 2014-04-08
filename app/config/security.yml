@@ -3,8 +3,19 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+#        # for convenience, I decided to gather Sonata roles here
+#        ROLE_SONATA_FOO_READER:
+#            - ROLE_SONATA_ADMIN_DEMO_FOO_LIST
+#            - ROLE_SONATA_ADMIN_DEMO_FOO_VIEW
+#        ROLE_SONATA_FOO_EDITOR:
+#            - ROLE_SONATA_ADMIN_DEMO_FOO_CREATE
+#            - ROLE_SONATA_ADMIN_DEMO_FOO_EDIT
+#        ROLE_SONATA_FOO_ADMIN:
+#            - ROLE_SONATA_ADMIN_DEMO_FOO_DELETE
+#            - ROLE_SONATA_ADMIN_DEMO_FOO_EXPORT
+        # those are the roles I will use (less verbose)
+        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         fos_userbundle:
@@ -22,7 +33,22 @@ security:
         debug:
             pattern: ^/debug
             security: false
-            
+
+        # -> custom firewall for the admin area of the URL
+        admin:
+            pattern:            /admin(.*)
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                failure_path:   null
+            logout:
+                path:           /admin/logout
+                target:         /
+            anonymous:          true
+
         main:
             pattern: ^/
             form_login:
@@ -43,8 +69,25 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+
     access_control:
+        # URL of FOSUserBundle which need to be available to anonymous users
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+
+        # Admin login page needs to be access without credential
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # Change these rules to adapt them to your needs
+        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+    acl:
+        connection: default
+
