@@ -14,16 +14,13 @@ class ExtractedCatrobatFile
     
     if (!file_exists($base_dir . "code.xml"))
     {
-      throw new InvalidCatrobatFileException("missing project xml");
+      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::PROJECT_XML_MISSING);
     }
     
-    try
+    $this->project_xml_properties = @simplexml_load_file($base_dir . "code.xml");
+    if ($this->project_xml_properties === false)
     {
-      $this->project_xml_properties = simplexml_load_file($base_dir . "code.xml");
-    }
-    catch (\Exception $e)
-    {
-      throw new InvalidCatrobatFileException("error parsing config xml");
+      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::INVALID_XML);
     }
   }
 

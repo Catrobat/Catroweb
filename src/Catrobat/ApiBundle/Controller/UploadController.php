@@ -14,6 +14,7 @@ use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CoreBundle\Model\ProjectManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use Buzz\Exception\InvalidArgumentException;
 
 class UploadController
 {
@@ -36,10 +37,20 @@ class UploadController
     {
       if ($request->files->count() != 1)
       {
-        $response["statusCode"] = 501;
+        $response["statusCode"] = InvalidCatrobatFileException::MISSING_POST_DATA;
         $response["answer"] = "POST-Data not correct or missing!";
       }
-      else 
+      else if (!$request->request->has("fileChecksum"))
+      {
+        $response["statusCode"] = InvalidCatrobatFileException::MISSING_CHECKSUM;
+        $response["answer"] = "Client did not send fileChecksum! Are you using an outdated version of Pocket Code?";
+      }
+      else if (md5_file($request->files->get(0)->getPathname()) != $request->request->get("fileChecksum"))
+      {
+        $response["statusCode"] = InvalidCatrobatFileException::INVALID_CHECKSUM;
+        $response["answer"] = "invalid checksum";
+      }
+      else
       {
         try 
         {
@@ -57,8 +68,27 @@ class UploadController
         }
         catch (InvalidCatrobatFileException $exception)
         {
-          $response["statusCode"] = 501;
-          $response["answer"] = $exception->getMessage();
+          $response["statusCode"] = $exception->getStatusCode();
+          switch ($exception->getStatusCode())
+          {
+            case InvalidCatrobatFileException::PROJECT_XML_MISSING:
+              $response["answer"] = "unknown error: project_xml_not_found!";
+              break;
+            case InvalidCatrobatFileException::IMAGE_MISSING:
+              $response["answer"] = "Project XML metions a file which not exists in project-folder";
+              break;
+            case InvalidCatrobatFileException::UNEXPECTED_FILE:
+              $response["answer"] = "unexpected file found";
+              break;
+            case InvalidCatrobatFileException::INVALID_XML:
+              $response["answer"] = "invalid code xml";
+              break;
+            case InvalidCatrobatFileException::INVALID_FILE:
+              $response["answer"] = "invalid file";
+              break;
+            default:
+              $response["answer"] = "unknown error";
+          }
         }
       }
         

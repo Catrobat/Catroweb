@@ -4,7 +4,6 @@ namespace Catrobat\CoreBundle\Spec\Services\Validators;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Catrobat\CatrowebBundle\Model\ExtractedCatrobatFile;
 
 class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
 {

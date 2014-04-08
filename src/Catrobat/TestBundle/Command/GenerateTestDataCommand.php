@@ -61,15 +61,13 @@ class GenerateTestDataCommand extends Command
       $this->generateProjectWithInvalidCodeXML("project_with_invalid_code_xml");
       $this->generateProjectWithManualScreenshot("project_with_manual_screenshot");
       $this->generateProjectWithScreenshot("project_with_screenshot");
-      
-      $this->compressDirectory("base");
-      $this->compressDirectory("project_with_too_many_folders");      
-      $this->compressDirectory("project_with_extra_image");
-      $this->compressDirectory("project_with_missing_image");
-      $this->compressDirectory("project_with_too_many_files");
-      $this->compressDirectory("project_with_missing_code_xml");
-      $this->compressDirectory("project_with_invalid_code_xml");
-      
+
+      $finder->directories()->in($this->target_directory)->depth(0);
+      foreach ($finder as $dir)
+      {
+        $this->compressDirectory($dir->getRelativePathname());
+      }
+
       $output->writeln("Done");
     }
   }
@@ -91,13 +89,13 @@ class GenerateTestDataCommand extends Command
   protected function generateProjectWithExtraImage($directory)
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
-    $this->filesystem->copy($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png", $this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_extra.png");
+    $this->filesystem->copy($this->target_directory.$directory."/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png", $this->target_directory.$directory."/images/6153c44ce0f49f21facbb8c2b2263ce8_extra.png");
   }
   
   protected function generateProjectWithMissingImage($directory)
   {
     $this->filesystem->mirror($this->extracted_source_project_directory, $this->target_directory.$directory);
-    $this->filesystem->remove($this->target_directory.$directory."/images/e72ab0fa5902dc9dbd3adbbe558d4727_look.png");
+    $this->filesystem->remove($this->target_directory.$directory."/images/6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png");
   }
   
   protected function generateProjectWithTooManyFiles($directory)

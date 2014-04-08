@@ -68,7 +68,7 @@ class SecurityController
           $user->setEmail($request->request->get('registrationEmail'));
           $user->setPlainPassword($userpassword);
           $user->setEnabled(true);
-          $user->setToken($this->tokenGenerator->generateToken());
+          $user->setUploadToken($this->tokenGenerator->generateToken());
           
           $userManager->updateUser($user);
           $retArray['statusCode'] = 201;
@@ -84,7 +84,7 @@ class SecurityController
         if ($correct_pass) 
         {
           $retArray['statusCode'] = 200;
-          $retArray['token'] = $user->getToken();
+          $retArray['token'] = $user->getUploadToken();
         } 
         else 
         {

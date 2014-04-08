@@ -2,7 +2,7 @@
 
 namespace Catrobat\CoreBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +21,7 @@ class User extends BaseUser
   /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  protected $token;
+  protected $upload_token;
   
   /**
    * @ORM\OneToMany(targetEntity="Project", mappedBy="user")
@@ -76,14 +76,14 @@ class User extends BaseUser
     return $this->projects;
   }
 
-  public function getToken()
+  public function getUploadToken()
   {
-    return $this->token;
+    return $this->upload_token;
   }
 
-  public function setToken($token)
+  public function setUploadToken($upload_token)
   {
-    $this->token = $token;
+    $this->upload_token = $upload_token;
   }
 
 }

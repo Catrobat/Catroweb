@@ -5,21 +5,23 @@ namespace Catrobat\CoreBundle\Model;
 use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CoreBundle\Entity\Project;
 use Knp\Component\Pager\Paginator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
 
 class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface
 {
   protected $file_extractor;
   protected $file_repository;
   protected $screenshot_repository;
-  protected $extracted_file_validator;
+  protected $event_dispatcher;
   protected $entity_manager;
   protected $project_repository;
   protected $pagination;
 
-  public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, $extracted_file_validator)
+  public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, EventDispatcherInterface $event_dispatcher)
   {
     $this->file_extractor = $file_extractor;
-    $this->extracted_file_validator = $extracted_file_validator;
+    $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
     $this->screenshot_repository = $screenshot_repository;
     $this->entity_manager = $entity_manager;
@@ -37,7 +39,11 @@ class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     
     $extracted_file = $this->file_extractor->extract($file);
     
-    $this->extracted_file_validator->validate($extracted_file);
+    $event = $this->event_dispatcher->dispatch("catrobat.project.before", new ProjectBeforeInsertEvent($extracted_file));
+    if ($event->isPropagationStopped())
+    {
+      return null;
+    }
     
     $project = new Project();
     $project->setName($extracted_file->getName());
@@ -53,6 +59,7 @@ class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $project->setRemixCount(0);
     $project->setFilesize(0);
     $project->setVisible(true);
+    $project->setApproved(false);
     $project->setUploadLanguage("en");
     
     $this->entity_manager->persist($project);

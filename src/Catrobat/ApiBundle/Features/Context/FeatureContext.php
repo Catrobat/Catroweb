@@ -96,7 +96,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
       	$user->setEmail("dev".$i."@pocketcode.org");
       	$user->setPlainPassword($users[$i]["password"]);
       	$user->setEnabled(true);
-      	$user->setToken($users[$i]["token"]);
+      	$user->setUploadToken($users[$i]["token"]);
       	$user_manager->updateUser($user,false);
       }
       $user_manager->updateUser($user,true);
@@ -130,6 +130,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 				$project->setFilesize(0);
 				$project->setVisible(true);
 				$project->setUploadLanguage("en");
+				$project->setApproved(false);
 				$em->persist($project);
     	}
     	$em->flush();
@@ -341,7 +342,74 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
         $this->files[] = new UploadedFile($filepath,"compass.catrobat");
     }
 
-
+    /**
+     * @Given /^I have a Catrobat file with an invalid code\.xml$/
+     */
+    public function iHaveACatrobatFileWithAnInvalidCodeXml()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_invalid_code_xml.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_invalid_code_xml.catrobat");
+    }
+    
+    /**
+     * @Given /^I have a Catrobat file with an missing code\.xml$/
+     */
+    public function iHaveACatrobatFileWithAnMissingCodeXml()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_code_xml.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_missing_code_xml.catrobat");
+    }
+    
+    /**
+     * @Given /^I have a Catrobat file with a missing image$/
+     */
+    public function iHaveACatrobatFileWithAMissingImage()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_image.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_missing_image.catrobat");
+    }
+    
+    /**
+     * @Given /^I have a Catrobat file with an additional image$/
+     */
+    public function iHaveACatrobatFileWithAnAdditionalImage()
+    {
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_extra_image.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"project_with_extra_image.catrobat");
+    }
+    
+    /**
+     * @Given /^I have an invalid Catrobat file$/
+     */
+    public function iHaveAnInvalidCatrobatFile()
+    {
+        $filepath = self::FIXTUREDIR . "invalid_archive.catrobat";
+        assertTrue(file_exists($filepath),"File not found");
+        $this->files[] = new UploadedFile($filepath,"invalid_archive.catrobat");
+    }
+    
+    
+    /**
+     * @Given /^I have a parameter "([^"]*)" with the md5checksum my file$/
+     */
+    public function iHaveAParameterWithTheMdchecksumMyFile($parameter)
+    {
+      $this->request_parameters[$parameter] = md5_file($this->files[0]->getPathname()); 
+    }
+    
+    /**
+     * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
+     */
+    public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile($parameter)
+    {
+      $this->request_parameters[$parameter] = "INVALIDCHECKSUM"; 
+    }
+    
+    
     /**
      * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
      */

@@ -31,7 +31,7 @@ class Project
   protected $description;
   
   /**
-   * @ORM\ManyToOne(targetEntity="\Catrobat\Sonata\UserBundle\Entity\User", inversedBy="projects")
+   * @ORM\ManyToOne(targetEntity="\Catrobat\CoreBundle\Entity\User", inversedBy="projects")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
    */
   protected $user;
@@ -362,10 +362,10 @@ class Project
     /**
      * Set user
      *
-     * @param \Catrobat\Sonata\UserBundle\Entity\User $user
+     * @param \Catrobat\CoreBundle\Entity\User $user
      * @return Project
      */
-    public function setUser(\Catrobat\Sonata\UserBundle\Entity\User $user = null)
+    public function setUser(\Catrobat\CoreBundle\Entity\User $user = null)
     {
         $this->user = $user;
     

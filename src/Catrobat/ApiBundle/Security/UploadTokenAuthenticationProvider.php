@@ -20,7 +20,7 @@ class UploadTokenAuthenticationProvider implements AuthenticationProviderInterfa
   public function authenticate(TokenInterface $token)
   {
     $user = $this->user_provider->loadUserByUsername($token->getUsername());
-    if ($token->getCredentials() === $user->getToken())
+    if ($token->getCredentials() === $user->getUploadToken())
     {
       $authenticated_token = new PreAuthenticatedToken($user, $token->getCredentials(), $token->getProviderKey(), $user->getRoles());
       $authenticated_token->setAuthenticated(true);

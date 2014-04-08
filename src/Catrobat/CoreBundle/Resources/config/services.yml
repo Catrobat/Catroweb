@@ -25,7 +25,7 @@ services:
                 - "@catrobat.core.services.screenshot.repository"
                 - "@doctrine.orm.entity_manager"
                 - "@catrobat.core.model.projectrepository"
-                - "@catroweb.file.validator"
+                - "@event_dispatcher"
             tags:
             -  { name:  "knp_paginator.injectable" }
 
