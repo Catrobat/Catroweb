@@ -59,6 +59,7 @@ class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $project->setRemixCount(0);
     $project->setFilesize(0);
     $project->setVisible(true);
+    $project->setApproved(false);
     $project->setUploadLanguage("en");
     
     $this->entity_manager->persist($project);

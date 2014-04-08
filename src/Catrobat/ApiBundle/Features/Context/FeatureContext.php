@@ -96,7 +96,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
       	$user->setEmail("dev".$i."@pocketcode.org");
       	$user->setPlainPassword($users[$i]["password"]);
       	$user->setEnabled(true);
-      	$user->setToken($users[$i]["token"]);
+      	$user->setUploadToken($users[$i]["token"]);
       	$user_manager->updateUser($user,false);
       }
       $user_manager->updateUser($user,true);
@@ -130,6 +130,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
 				$project->setFilesize(0);
 				$project->setVisible(true);
 				$project->setUploadLanguage("en");
+				$project->setApproved(false);
 				$em->persist($project);
     	}
     	$em->flush();
