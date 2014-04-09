@@ -121,14 +121,13 @@
           <root url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
           <root url="file://$MODULE_DIR$/vendor/twitter/bootstrap" />
           <root url="file://$MODULE_DIR$/vendor/behat/gherkin" />
-          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
+          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
           <root url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
           <root url="file://$MODULE_DIR$/vendor/twig/extensions" />
           <root url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
-          <root url="file://$MODULE_DIR$/vendor/henrikbjorn/phpspec-code-coverage" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
@@ -184,17 +183,17 @@
           <root url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
           <root url="file://$MODULE_DIR$/vendor/twitter/bootstrap" />
           <root url="file://$MODULE_DIR$/vendor/behat/gherkin" />
-          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
+          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
           <root url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
           <root url="file://$MODULE_DIR$/vendor/twig/extensions" />
           <root url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
-          <root url="file://$MODULE_DIR$/vendor/henrikbjorn/phpspec-code-coverage" />
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="sass-stdlib" level="application" />
   </component>
 </module>
 
