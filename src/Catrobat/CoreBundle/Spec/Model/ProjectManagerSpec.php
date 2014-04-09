@@ -2,6 +2,7 @@
 
 namespace Catrobat\CoreBundle\Spec\Model;
 
+use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Services\CatrobatFileExtractor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -24,6 +25,7 @@ class ProjectManagerSpec extends ObjectBehavior
    * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $extracted_file          
    * @param \Catrobat\CoreBundle\Entity\Project $inserted_project
    * @param \Symfony\Component\EventDispatcher\Event $event
+   * @param \Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException $validation_exception
    */
   
   function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, $event_dispatcher)
@@ -60,6 +62,19 @@ class ProjectManagerSpec extends ObjectBehavior
     $event_dispatcher->dispatch("catrobat.project.before",Argument::type('Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent'))->willReturn($event)->shouldBeCalled();
   
     $this->addProject($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Project');
+  }
+
+  function it_fires_an_event_when_the_project_is_invalid($request, $user, $projectfile, $file, $file_extractor, $extracted_file, $entity_manager, $inserted_project, $event_dispatcher, $event, $validation_exception)
+  {
+    $validation_exception = new InvalidCatrobatFileException("500");
+    $request->getProjectfile()->willReturn($file);
+    $request->getUser()->willReturn($user);
+    $file_extractor->extract($file)->willReturn($extracted_file);
+    $inserted_project->getId()->willReturn(0);
+    $event_dispatcher->dispatch("catrobat.project.before",Argument::type('Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent'))->willThrow($validation_exception)->shouldBeCalled();
+    $event_dispatcher->dispatch("catrobat.project.invalid.upload",Argument::type('Catrobat\CoreBundle\Events\InvalidProjectUploadedEvent'))->willReturn($event)->shouldBeCalled();
+
+    $this->shouldThrow('\Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('addProject',array($request));// $this->addProject($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Project');
   }
   
   

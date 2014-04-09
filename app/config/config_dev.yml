@@ -12,7 +12,13 @@ web_profiler:
     intercept_redirects: false
 
 monolog:
+    channels: ["upload"]
     handlers:
+        upload:
+            type: stream
+            path: %kernel.logs_dir%/upload.log
+            level: error
+            channels: [upload]
         main:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
@@ -23,6 +29,8 @@ monolog:
         chromephp:
             type:  chromephp
             level: info
+
+
 
 assetic:
     use_controller: true

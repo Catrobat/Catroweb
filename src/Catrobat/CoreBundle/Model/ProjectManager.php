@@ -2,9 +2,12 @@
 
 namespace Catrobat\CoreBundle\Model;
 
+use Catrobat\CoreBundle\Events\InvalidProjectUploadedEvent;
+use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
 use Catrobat\CoreBundle\Entity\Project;
 use Knp\Component\Pager\Paginator;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
 
@@ -36,10 +39,16 @@ class ProjectManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   public function addProject(AddProjectRequest $request)
   {
     $file = $request->getProjectfile();
-    
+
     $extracted_file = $this->file_extractor->extract($file);
-    
-    $event = $this->event_dispatcher->dispatch("catrobat.project.before", new ProjectBeforeInsertEvent($extracted_file));
+    try {
+      $event = $this->event_dispatcher->dispatch("catrobat.project.before", new ProjectBeforeInsertEvent($extracted_file));
+    }
+    catch (InvalidCatrobatFileException $e) {
+      $event = $this->event_dispatcher->dispatch("catrobat.project.invalid.upload", new InvalidProjectUploadedEvent($file));
+      throw $e;
+    }
+
     if ($event->isPropagationStopped())
     {
       return null;

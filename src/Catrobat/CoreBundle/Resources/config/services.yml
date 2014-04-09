@@ -47,3 +47,10 @@ services:
               
       catrobat.core.services.tokengenerator:
               class:        Catrobat\CoreBundle\Services\TokenGenerator
+
+      catrobat.core.services.invalidprojectuploadlogger:
+              class:        Catrobat\CoreBundle\Services\InvalidProjectUploadLogger
+              arguments:    ["@logger"]
+              tags:
+                  - { name: monolog.logger, channel: upload }
+                  - { name: kernel.event_listener, event: catrobat.project.invalid.upload, method: onInvalidProjectUploadedEvent }
