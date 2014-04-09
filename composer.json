@@ -36,7 +36,7 @@
 		"friendsofsymfony/user-bundle": "1.3.3",
 		"sonata-project/core-bundle": "~2.2@dev",
 		"sonata-project/admin-bundle": "2.3.*@dev",
-		"sonata-project/user-bundle": "2.2.*@dev",
+		"sonata-project/user-bundle": "2.3.*@dev",
 		"sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev"
 	},
 	"require-dev" : {
@@ -44,12 +44,13 @@
 		"phpspec/symfony2-extension" : "*@dev",
 		"behat/symfony2-extension" : "*@dev",
 		"sensiolabs/behat-page-object-extension" : "*@dev",
-		"phpunit/phpunit" : "3.7.*",
+		"phpunit/phpunit" : "4.0.*",
 		"behat/mink-browserkit-driver" : "*@dev",
 		"behat/behat" : "*@dev",
-		"chartinger/phpspec2-expect" : "dev-master",
+		"bossa/phpspec2-expect" : "dev-master",
 		"vipsoft/doctrine-data-fixtures-extension" : "*",
-		"behat/mink-extension" : "*@dev"
+		"behat/mink-extension" : "*@dev",
+		"henrikbjorn/phpspec-code-coverage" : "1.0.*@dev"
 	},
 	"autoload" : {
 		"psr-0" : {
