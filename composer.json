@@ -44,7 +44,7 @@
 		"phpspec/symfony2-extension" : "*@dev",
 		"behat/symfony2-extension" : "*@dev",
 		"sensiolabs/behat-page-object-extension" : "*@dev",
-		"phpunit/phpunit" : "4.0.*",
+		"phpunit/phpunit" : "3.7.*",
 		"behat/mink-browserkit-driver" : "*@dev",
 		"behat/behat" : "*@dev",
 		"bossa/phpspec2-expect" : "dev-master",
