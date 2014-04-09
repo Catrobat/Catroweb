@@ -5,7 +5,7 @@ namespace Catrobat\WebBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Catrobat\CoreBundle\Entity\Project;
-use Catrobat\Sonata\UserBundle\Entity\User;
+use Catrobat\CoreBundle\Entity\User;
 
 class LoadSampleProjects implements FixtureInterface
 {
