@@ -19,21 +19,25 @@ catroweb_featured:
 ################## project listings ################## 
 
 catroweb_most_downloaded:
-    path:      /most-downloaded.{_format}
+    path:      /most_downloaded.{_format}
     methods:  [GET]
-    defaults:  { _controller: "catrobat.web.project.controller:mostDownloadedAction", _format: html }
+    defaults:  { _controller: "catrobat.web.project.controller:mostDownloadedAction", _format: json }
     requirements:
-      _format:  html|json
+      _format:  json
 
-catroweb_most_viewed:
-    path:      /most-viewed
-    methods:  [GET]
-    defaults:  { _controller: "catrobat.web.project.controller:mostViewedAction" }
-
-catroweb_newest:
-    path:      /newest
-    methods:  [GET]
-    defaults:  { _controller: "catrobat.web.project.controller:newestAction" }
+#catroweb_most_viewed:
+#    path:      /most-viewed.{_format}
+#    methods:  [GET]
+#    defaults:  { _controller: "catrobat.web.project.controller:mostViewedAction", _format: html }
+#    requirements:
+#          _format:  html|json
+#
+#catroweb_newest:
+#    path:      /newest.{_format}
+#    methods:  [GET]
+#    defaults:  { _controller: "catrobat.web.project.controller:newestAction", _format: html }
+#    requirements:
+#          _format:  html|json
 
 ################## project details ################## 
 

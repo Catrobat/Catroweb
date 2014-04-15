@@ -34,7 +34,6 @@ class ProjectController
   public function indexAction()
   {
     $entities = $this->project_manager->findAll();
-    
     return $this->templating->renderResponse('CatrobatWebBundle:Default:index.html.twig');
   }
 
@@ -42,9 +41,9 @@ class ProjectController
   {
     $limit = intval($request->query->get('limit', 9));
     $offset = intval($request->query->get('offset', 0));
-    
+
     $entities = $this->project_manager->findByOrderedByDownloads($limit, $offset);
-    
+
     return $this->templating->renderResponse('CatrobatWebBundle:Project:mostDownloaded.html.twig', array("entities" => $entities));
   }
 

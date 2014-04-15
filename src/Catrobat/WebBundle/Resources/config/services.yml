@@ -20,4 +20,4 @@ services:
               class: Catrobat\WebBundle\Twig\ProjectAssetsExtension
               arguments: ["@catrobat.core.services.screenshot.repository"]
               tags:
-                  - { name: twig.extension }              
+                  - { name: twig.extension }

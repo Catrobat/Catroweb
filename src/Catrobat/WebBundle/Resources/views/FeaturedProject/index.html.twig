@@ -1,8 +1,8 @@
-{% extends (app.request.attributes.get('_embedded') == true) 
+{% extends (app.request.attributes.get('_embedded') == true)
          ? 'CatrobatWebBundle::fragment.html.twig'
          : 'CatrobatWebBundle::base.html.twig' %}
 
-{% block body -%}
+{% block body %}
 <article>
 	<header>{{ "projects.featured"|trans }}</header>
 	<div id="featuredProjects" class="projectContainer">
