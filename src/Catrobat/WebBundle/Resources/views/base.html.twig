@@ -4,7 +4,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
         <meta name="robots" content="noindex,nofollow" />
         <title>{% block title %}Pocket Code Website{% endblock %}</title>
-        {% stylesheets 'bundles/catroweb/css/*' filter='cssrewrite,lessphp' %}
+
+        {% stylesheets '@CatrobatWebBundle/Resources/public/css/normalize.css' filter='cssrewrite,lessphp' %}
+          <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% stylesheets '@CatrobatWebBundle/Resources/public/css/base/*' filter='cssrewrite,lessphp' %}
           <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         {% block head %}{% endblock %}
@@ -13,16 +17,21 @@
     
     <div id="wrapper">
 
-      {% block header %}
+      <header role="banner">
+        {% block header %}
           {{ render(controller('CatrobatWebBundle:Default:header', { _locale: app.request.locale, _embedded: true })) }}
-      {% endblock %}
+        {% endblock %}
+      </header>
 
-      {% block body %}{% endblock %}
+      <article>
+        {% block body %}{% endblock %}
+      </article>
 
-      {% block footer %}
+      <footer>
+        {% block footer %}
           {{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}
-      {% endblock %}
-         
+        {% endblock %}
+      </footer>
     </div>
 
     </body>

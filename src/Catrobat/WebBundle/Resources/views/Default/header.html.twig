@@ -2,33 +2,31 @@
 
 {% block header %}
 
-    <header role="banner">
-        <nav role="navigation">
-            <div id="largeMenu">
-                <div class="catroidLink">
-                    <a href="{{ path('catroweb_index') }}"><img id="logo" src="{{ asset("bundles/catroweb/images/logo/logo_text.png") }}" alt="" /></a>
-                </div>
-
-                <div id="largeSearchButton" class="largeSearchBarLeft">
-                    <button class="img-magnifying-glass"></button>
-                </div>
-
-                <div class="largeSearchBarMiddle">
-                    <input type="search" placeholder="" />
-                </div>
-
-                <div id="largeMenuButton" class="largeSearchBarRight">
-                    <button class="img-avatar"></button>
-                </div>
+    <nav role="navigation">
+        <div id="largeMenu">
+            <div class="catroidLink">
+                <a href="{{ path('catroweb_index') }}"><img id="logo" src="{{ asset("bundles/catroweb/images/logo/logo_text.png") }}" alt="" /></a>
             </div>
 
-            <div id="navigationMenu">
-                <ul>
-                    <li id="menuProfileButton"><div class="img-author-big">my profile</div></li>
-                    <li id="menuLogoutButton"><div class="img-logout">logout</div></li>
-                </ul>
+            <div id="largeSearchButton" class="largeSearchBarLeft">
+                <button class="img-magnifying-glass"></button>
             </div>
-        </nav>
-    </header>
+
+            <div class="largeSearchBarMiddle">
+                <input type="search" placeholder="" />
+            </div>
+
+            <div id="largeMenuButton" class="largeSearchBarRight">
+                <button class="img-avatar"></button>
+            </div>
+        </div>
+
+        <div id="navigationMenu">
+            <ul>
+                <li id="menuProfileButton"><div class="img-author-big">my profile</div></li>
+                <li id="menuLogoutButton"><div class="img-logout">logout</div></li>
+            </ul>
+        </div>
+    </nav>
 
 {% endblock %}

@@ -1,13 +1,37 @@
 {% extends 'CatrobatWebBundle::base.html.twig' %}
 
+{% block head %}
+    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/index.css' filter='cssrewrite,lessphp' %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
 
-    {{ render(controller('CatrobatWebBundle:FeaturedProject:index', { _locale: app.request.locale, _embedded: true })) }}
 
-    {{ render(controller('catrobat.web.project.controller:newestAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
+    <div id="featuredPrograms">
+      <div class="headline">Headline</div>
+      <div class="programs">[][][][][]</div>
+    </div>
+    <div id="newest">
+      <div class="headline">Headline</div>
+      <div class="programs">[][][][][]</div>
+    </div>
+    <div id="mostDownloaded">
+      <div class="headline">Headline</div>
+      <div class="programs">[][][][][]</div>
+    </div>
+    <div id="mostViewed">
+      <div class="headline">Headline</div>
+      <div class="programs">[][][][][]</div>
+    </div>
 
-    {{ render(controller('catrobat.web.project.controller:mostDownloadedAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}
+    {#{{ render(controller('CatrobatWebBundle:FeaturedProject:index', { _locale: app.request.locale, _embedded: true })) }}#}
 
-    {{ render(controller('catrobat.web.project.controller:mostViewedAction', { _locale: app.request.locale, _embedded: true }, { 'limit' : 18})) }}
+    {#{{ render(controller('catrobat.web.project.controller:newestAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}#}
+
+    {#{{ render(controller('catrobat.web.project.controller:mostDownloadedAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}#}
+
+    {#{{ render(controller('catrobat.web.project.controller:mostViewedAction', { _locale: app.request.locale, _embedded: true }, { 'limit' : 18})) }}#}
 
 {% endblock %}
