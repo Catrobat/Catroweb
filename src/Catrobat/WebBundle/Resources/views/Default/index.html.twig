@@ -10,28 +10,23 @@
 
 
     <div id="featuredPrograms">
-      <div class="headline">Headline</div>
+      <h1>Featured</h1>
       <div class="programs">[][][][][]</div>
     </div>
+
     <div id="newest">
-      <div class="headline">Headline</div>
+      <h1>Newest</h1>
       <div class="programs">[][][][][]</div>
     </div>
+
     <div id="mostDownloaded">
-      <div class="headline">Headline</div>
+        <h1>Most Downloaded</h1>
       <div class="programs">[][][][][]</div>
     </div>
+
     <div id="mostViewed">
-      <div class="headline">Headline</div>
+        <h1>Most Viewed</h1>
       <div class="programs">[][][][][]</div>
     </div>
-
-    {#{{ render(controller('CatrobatWebBundle:FeaturedProject:index', { _locale: app.request.locale, _embedded: true })) }}#}
-
-    {#{{ render(controller('catrobat.web.project.controller:newestAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}#}
-
-    {#{{ render(controller('catrobat.web.project.controller:mostDownloadedAction', { _locale: app.request.locale, _embedded: true }, { 'limit': 18 })) }}#}
-
-    {#{{ render(controller('catrobat.web.project.controller:mostViewedAction', { _locale: app.request.locale, _embedded: true }, { 'limit' : 18})) }}#}
 
 {% endblock %}

@@ -15,9 +15,8 @@
     </head>
     <body>
     
-    <div id="wrapper">
-
-      <header role="banner">
+    <main>
+      <header>
         {% block header %}
           {{ render(controller('CatrobatWebBundle:Default:header', { _locale: app.request.locale, _embedded: true })) }}
         {% endblock %}
@@ -27,12 +26,12 @@
         {% block body %}{% endblock %}
       </article>
 
-      <footer>
-        {% block footer %}
-          {{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}
-        {% endblock %}
-      </footer>
-    </div>
+      {#<footer>#}
+        {#{% block footer %}#}
+          {#{{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}#}
+        {#{% endblock %}#}
+      {#</footer>#}
+    </main>
 
     </body>
 </html>
