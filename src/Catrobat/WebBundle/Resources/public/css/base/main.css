@@ -1,35 +1,35 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('../include/css/Roboto/Roboto-Regular-webfont.eot');
+    src: url('/bundles/catroweb/css/Roboto/Roboto-Regular-webfont.eot');
     src: local('Roboto Regular'), local('Roboto-Regular'),
-    url('../include/css/Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../include/css/Roboto/Roboto-Regular-webfont.woff') format('woff'),
-    url('../include/css/Roboto/Roboto-Regular-webfont.ttf') format('truetype'),
-    url('../include/css/Roboto/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
+    url('/bundles/catroweb/css/Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Regular-webfont.woff') format('woff'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Regular-webfont.ttf') format('truetype'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: url('../include/css/Roboto/Roboto-Italic-webfont.eot');
+    src: url('/bundles/catroweb/css/Roboto/Roboto-Italic-webfont.eot');
     src: local('Roboto Italic'), local('Roboto-Italic'),
-    url('../include/css/Roboto/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../include/css/Roboto/Roboto-Italic-webfont.woff') format('woff'),
-    url('../include/css/Roboto/Roboto-Italic-webfont.ttf') format('truetype'),
-    url('../include/css/Roboto/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
+    url('/bundles/catroweb/css/Roboto/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Italic-webfont.woff') format('woff'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Italic-webfont.ttf') format('truetype'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: url('../include/css/Roboto/Roboto-Bold-webfont.eot');
+    src: url('/bundles/catroweb/css/Roboto/Roboto-Bold-webfont.eot');
     src: local('Roboto Bold'), local('Roboto-Bold'),
-    url('../include/css/Roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../include/css/Roboto/Roboto-Bold-webfont.woff') format('woff'),
-    url('../include/css/Roboto/Roboto-Bold-webfont.ttf') format('truetype'),
-    url('../include/css/Roboto/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
+    url('/bundles/catroweb/css/Roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Bold-webfont.woff') format('woff'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Bold-webfont.ttf') format('truetype'),
+    url('/bundles/catroweb/css/Roboto/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
@@ -45,6 +45,22 @@ select,
 textarea,
 a {
     color: #17a5b8;
+}
+
+::-webkit-input-placeholder {
+    color: #05222a !important;
+}
+
+:-moz-placeholder {
+    color: #05222a !important;
+}
+
+::-moz-placeholder {
+    color: #05222a !important;
+}
+
+:ms-input-placeholder {
+    color: #05222a !important;
 }
 
 html {
@@ -95,4 +111,8 @@ main {
 
 .programs {
 
+}
+
+.clear {
+    clear: both;
 }

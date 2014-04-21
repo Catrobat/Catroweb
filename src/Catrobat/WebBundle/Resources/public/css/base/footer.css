@@ -1,0 +1,94 @@
+footer {
+    background-color: #177f8d;
+    color: #FFF;
+    font-size: 0.8em;
+}
+
+footer #largeFooterMenu {
+    width: 100%;
+    display: table;
+    padding: 0.3em 0em;
+}
+
+#largeFooterMenu #leftFooterMenu {
+    width: 50%;
+    display: table-cell;
+    padding-left: 3em;
+}
+
+#largeFooterMenu #rightFooterMenu {
+    width: 50%;
+    text-align: right;
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 3em;
+    padding-bottom: 2em;
+}
+
+#largeFooterMenu #rightFooterMenu span:nth-child(1) {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 0.6em;
+}
+
+#largeFooterMenu #rightFooterMenu span:nth-child(2) {
+    display: inline-block;
+    text-align: left;
+}
+
+#largeFooterMenu #rightFooterMenu span:nth-child(2) h2 {
+    padding: 0.4em
+}
+
+#largeFooterMenu #rightFooterMenu span:nth-child(2) input {
+    width: 20em;
+    border: 0;
+    background-color: #96CED6;
+    color: #05222a;
+    padding: 0.8em 0.6em;
+}
+
+/*#largeFooterMenu #rightFooterMenu #footerSearchButton {*/
+
+/*}*/
+
+footer #largeFooterMenu ul {
+    list-style: none;
+    padding: 0 5em 0 0;
+    float: left;
+}
+
+footer #largeFooterMenu li {
+    padding: 0.5em;
+}
+
+footer a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+footer #footerBottomMenu {
+    width: 100%;
+    padding: 0 3em;
+    border-top: 1px solid #385f6e;
+    display: table;
+}
+
+footer #footerBottomMenu div {
+    width: 50%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0.4em 0.6em
+}
+
+footer #footerBottomMenu div:last-child {
+    text-align: right;
+}
+
+footer #footerBottomMenu select {
+    border: 0;
+    background-color: #96CED6;
+    color: #05222a;
+    padding: 0.4em 0.6em;
+}

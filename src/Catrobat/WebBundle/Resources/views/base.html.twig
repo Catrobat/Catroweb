@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         {% stylesheets '@CatrobatWebBundle/Resources/public/css/base/*' filter='cssrewrite,lessphp' %}
-          <link rel="stylesheet" href="{{ asset_url }}" />
+          <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
         {% endstylesheets %}
         {% block head %}{% endblock %}
     </head>
@@ -26,11 +26,11 @@
         {% block body %}{% endblock %}
       </article>
 
-      {#<footer>#}
-        {#{% block footer %}#}
-          {#{{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}#}
-        {#{% endblock %}#}
-      {#</footer>#}
+      <footer>
+        {% block footer %}
+          {{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}
+        {% endblock %}
+      </footer>
     </main>
 
     </body>
