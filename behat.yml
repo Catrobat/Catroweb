@@ -1,4 +1,7 @@
 default:
+    formatters:
+        pretty:   false
+        progress: true
     extensions:
         Behat\Symfony2Extension\Extension: 
             kernel:
