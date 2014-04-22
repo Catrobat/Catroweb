@@ -3,7 +3,7 @@
 namespace Catrobat\ApiBundle\Features\Context;
 
 use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 
 use Behat\Behat\Context\BehatContext,
@@ -28,12 +28,10 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Feature context.
  */
-class FeatureContext extends BehatContext //MinkContext if you want to test web
-                  implements KernelAwareInterface
+class FeatureContext implements KernelAwareContext
 {
     const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
     private $kernel;
-    private $parameters;
 
     private $user;
     private $request_parameters;
@@ -45,9 +43,8 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      *
      * @param array $parameters
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
-        $this->parameters = $parameters;
         $this->request_parameters = array();
         $this->files = array();
     }
