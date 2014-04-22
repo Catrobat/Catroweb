@@ -26,7 +26,7 @@
         {% block body %}{% endblock %}
       </article>
 
-      <footer>
+      <footer class="size-medium">
         {% block footer %}
           {{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}
         {% endblock %}

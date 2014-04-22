@@ -65,7 +65,7 @@ a {
 
 html {
     height: 100%;
-    font-size: 1.0em;
+    font-size: 12px;
 }
 
 body {
@@ -89,13 +89,13 @@ h3 {
 }
 
 h1 {
-    font-size: 1.8em;
-    padding: 0.07em 0.375em;
+    font-size: 21px;
+    padding: 1px 1px;
     border-bottom: 1px solid #17a5b8;
 }
 
 h2 {
-    font-size: 1.4em;
+    font-size: 16px;
 }
 
 
@@ -106,7 +106,18 @@ main {
     max-width: 1024px;
     min-height: 100%;
     min-width: 320px;
-    margin-bottom: -10em;
+}
+
+.size-small {
+    font-size: 8px;
+}
+
+.size-medium {
+  font-size: 12px;
+}
+
+.size-large {
+    font-size: 16px;
 }
 
 .programs {

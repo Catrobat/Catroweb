@@ -1,19 +1,19 @@
 footer {
     background-color: #177f8d;
     color: #FFF;
-    font-size: 0.8em;
+    margin-bottom: 10px;
 }
 
 footer #largeFooterMenu {
     width: 100%;
     display: table;
-    padding: 0.3em 0em;
+    padding: 5px 0px;
 }
 
 #largeFooterMenu #leftFooterMenu {
     width: 50%;
     display: table-cell;
-    padding-left: 3em;
+    padding-left: 35px;
 }
 
 #largeFooterMenu #rightFooterMenu {
@@ -21,15 +21,15 @@ footer #largeFooterMenu {
     text-align: right;
     display: table-cell;
     vertical-align: middle;
-    padding-right: 3em;
-    padding-bottom: 2em;
+    padding-right: 35px;
+    padding-bottom: 23px;
 }
 
 #largeFooterMenu #rightFooterMenu span:nth-child(1) {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
-    margin-right: 0.6em;
+    margin-right: 7px;
 }
 
 #largeFooterMenu #rightFooterMenu span:nth-child(2) {
@@ -38,25 +38,25 @@ footer #largeFooterMenu {
 }
 
 #largeFooterMenu #rightFooterMenu span:nth-child(2) h2 {
-    padding: 0.4em
+    padding: 5px;
 }
 
 #largeFooterMenu #rightFooterMenu span:nth-child(2) input {
-    width: 20em;
+    width: 233px;
     border: 0;
     background-color: #96CED6;
     color: #05222a;
-    padding: 0.8em 0.6em;
+    padding: 9px 7px;
 }
 
 footer #largeFooterMenu ul {
     list-style: none;
-    padding: 0 5em 0 0;
+    padding: 0px 58px 0px 0px;
     float: left;
 }
 
 footer #largeFooterMenu li {
-    padding: 0.5em;
+    padding: 6px;
 }
 
 footer a {
@@ -66,7 +66,7 @@ footer a {
 
 footer #footerBottomMenu {
     width: 100%;
-    padding: 0 3em;
+    padding: 0px 36px;
     border-top: 1px solid #385f6e;
     display: table;
 }
@@ -75,7 +75,7 @@ footer #footerBottomMenu div {
     width: 50%;
     display: table-cell;
     vertical-align: middle;
-    padding: 0.4em 0.6em
+    padding: 5px 7px;
 }
 
 footer #footerBottomMenu div:last-child {
@@ -86,5 +86,5 @@ footer #footerBottomMenu select {
     border: 0;
     background-color: #96CED6;
     color: #05222a;
-    padding: 0.4em 0.6em;
+    padding: 5px 7px;
 }
