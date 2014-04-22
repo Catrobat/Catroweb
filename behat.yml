@@ -10,6 +10,11 @@ default:
 
 
     suites:
-        simple:
+        api:
             type: symfony_bundle
             bundle: 'CatrobatApiBundle'
+        web:
+            type: symfony_bundle
+            bundle: 'CatrobatWebBundle'
+
+            

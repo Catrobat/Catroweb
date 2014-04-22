@@ -6,13 +6,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 
-use Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Catrobat\CoreBundle\Entity\User;
 use Catrobat\CoreBundle\Entity\Project;
-use Behat\Behat\Event\SuiteEvent;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -247,79 +244,6 @@ class FeatureContext implements KernelAwareContext
     }
     
     /**
-     * @Given /^I am not registered$/
-     */
-    public function iAmNotRegistered()
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a username "([^"]*)"$/
-     */
-    public function iHaveAUsername($arg1)
-    {
-      //just a test input
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a password "([^"]*)"$/
-     */
-    public function iHaveAPassword($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a language "([^"]*)"$/
-     */
-    public function iHaveALanguage($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have an email address "([^"]*)"$/
-     */
-    public function iHaveAnEmailAddress($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @When /^I call "([^"]*)" the given data$/
-     */
-    public function iCallTheGivenData($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @When /^I call "([^"]*)" with username "([^"]*)" and password "([^"]*)"$/
-     */
-    public function iCallWithUsernameAndPassword($arg1, $arg2, $arg3)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have the username "([^"]*)"$/
-     */
-    public function iHaveTheUsername($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a token "([^"]*)"$/
-     */
-    public function iHaveAToken($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
      * @Given /^I have a file "([^"]*)"$/
      */
     public function iHaveAFile($filename)
@@ -413,38 +337,6 @@ class FeatureContext implements KernelAwareContext
     public function iHaveAParameterWithTheMdchecksumOf($parameter, $file)
     {
       $this->request_parameters[$parameter] = md5_file($this->files[0]->getPathname()); 
-    }
-    
-    /**
-     * @When /^I call "([^"]*)" with the given data$/
-     */
-    public function iCallWithTheGivenData($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I want to search for the term "([^"]*)"$/
-     */
-    public function iWantToSearchForTheTerm($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have the limit "([^"]*)"$/
-     */
-    public function iHaveTheLimit($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have the offset "([^"]*)"$/
-     */
-    public function iHaveTheOffset($arg1)
-    {
-    	throw new PendingException();
     }
     
    private function emptyDirectory($directory)
