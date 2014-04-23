@@ -1,10 +1,10 @@
 <?php
 namespace Catrobat\CoreBundle\Services;
 
-use Catrobat\CoreBundle\Events\InvalidProjectUploadedEvent;
+use Catrobat\CoreBundle\Events\InvalidProgramUploadedEvent;
 use Monolog\Logger;
 
-class InvalidProjectUploadLogger
+class InvalidProgramUploadLogger
 {
   private $logger;
 
@@ -13,7 +13,7 @@ class InvalidProjectUploadLogger
     $this->logger = $logger;
   }
 
-  function onInvalidProjectUploadedEvent(InvalidProjectUploadedEvent $event)
+  function onInvalidProgramUploadedEvent(InvalidProgramUploadedEvent $event)
   {
     $this->logger->error("Invalid File: " . $event->getFile()->getFilename());
   }

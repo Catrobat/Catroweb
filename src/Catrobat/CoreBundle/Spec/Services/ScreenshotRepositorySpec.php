@@ -47,7 +47,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
   {
     $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
-    $this->saveProjectAssets($filepath, $id);
+    $this->saveProgramAssets($filepath, $id);
     
     $finder = new Finder();
     expect($finder->files()->in($this->screenshot_dir)->count())->toBe(1);
@@ -57,7 +57,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
   {
     $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
-    $this->saveProjectAssets($filepath, $id);
+    $this->saveProgramAssets($filepath, $id);
     
     $finder = new Finder();
     expect($finder->files()->in($this->thumbnail_dir)->count())->toBe(1);
@@ -67,7 +67,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
   {
     $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
-    $this->saveProjectAssets($filepath, $id);
+    $this->saveProgramAssets($filepath, $id);
     $this->getScreenshotWebPath($id)->shouldBe($this->screenshot_base_url . "screen_test.png");
   }
 
@@ -75,7 +75,7 @@ class ScreenshotRepositorySpec extends ObjectBehavior
   {
     $filepath = __SPEC_GENERATED_FIXTURES_DIR__."/base/automatic_screenshot.png";
     $id = "test";
-    $this->saveProjectAssets($filepath, $id);
+    $this->saveProgramAssets($filepath, $id);
     $this->getThumbnailWebPath($id)->shouldBe($this->thumbnail_base_url . "screen_test.png");
   }
 

@@ -4,8 +4,8 @@
 
 {% block body -%}
 <article>
-	<header>{{ "projects.featured"|trans }}</header>
-	<div id="featuredProjects" class="projectContainer">
+	<header>{{ "programs.featured"|trans }}</header>
+	<div id="featuredPrograms" class="programContainer">
 	
     <table class="records_list">
         <thead>
@@ -19,7 +19,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.image }} {{ entity.project.name }}</td>
+                <td>{{ entity.image }} {{ entity.program.name }}</td>
                 <td>
                 <ul>
                     <li>

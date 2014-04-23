@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="project")
- * @ORM\Entity(repositoryClass="Catrobat\CoreBundle\Entity\ProjectRepository")
+ * @ORM\Table(name="program")
+ * @ORM\Entity(repositoryClass="Catrobat\CoreBundle\Entity\ProgramRepository")
  */
-class Project
+class Program
 {
   
   /**
@@ -31,7 +31,7 @@ class Project
   protected $description;
   
   /**
-   * @ORM\ManyToOne(targetEntity="\Catrobat\CoreBundle\Entity\User", inversedBy="projects")
+   * @ORM\ManyToOne(targetEntity="\Catrobat\CoreBundle\Entity\User", inversedBy="programs")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
    */
   protected $user;
@@ -112,7 +112,7 @@ class Project
   protected $remix_count;
   
   /**
-   * @ORM\ManyToOne(targetEntity="Project")
+   * @ORM\ManyToOne(targetEntity="Program")
    * @ORM\JoinColumn(name="remix_id", referencedColumnName="id")
    */
   protected $remix_of;
@@ -156,7 +156,7 @@ class Project
    * Set name
    *
    * @param string $name          
-   * @return Project
+   * @return Program
    */
   public function setName($name)
   {
@@ -179,7 +179,7 @@ class Project
    * Set description
    *
    * @param string $description          
-   * @return Project
+   * @return Program
    */
   public function setDescription($description)
   {
@@ -202,7 +202,7 @@ class Project
    * Set views
    *
    * @param integer $views          
-   * @return Project
+   * @return Program
    */
   public function setViews($views)
   {
@@ -225,7 +225,7 @@ class Project
    * Set downloads
    *
    * @param integer $downloads          
-   * @return Project
+   * @return Program
    */
   public function setDownloads($downloads)
   {
@@ -248,7 +248,7 @@ class Project
    * Set filename
    *
    * @param string $filename          
-   * @return Project
+   * @return Program
    */
   public function setFilename($filename)
   {
@@ -271,7 +271,7 @@ class Project
    * Set thumbnail
    *
    * @param string $thumbnail          
-   * @return Project
+   * @return Program
    */
   public function setThumbnail($thumbnail)
   {
@@ -294,7 +294,7 @@ class Project
    * Set screenshot
    *
    * @param string $screenshot          
-   * @return Project
+   * @return Program
    */
   public function setScreenshot($screenshot)
   {
@@ -317,7 +317,7 @@ class Project
    * Set uploaded_at
    *
    * @param \DateTime $uploadedAt          
-   * @return Project
+   * @return Program
    */
   public function setUploadedAt($uploadedAt)
   {
@@ -340,7 +340,7 @@ class Project
    * Set last_modified_at
    *
    * @param \DateTime $lastModifiedAt          
-   * @return Project
+   * @return Program
    */
   public function setLastModifiedAt($lastModifiedAt)
   {
@@ -363,7 +363,7 @@ class Project
      * Set user
      *
      * @param \Catrobat\CoreBundle\Entity\User $user
-     * @return Project
+     * @return Program
      */
     public function setUser(\Catrobat\CoreBundle\Entity\User $user = null)
     {
@@ -392,7 +392,7 @@ class Project
      * Set language_version
      *
      * @param string $languageVersion
-     * @return Project
+     * @return Program
      */
     public function setLanguageVersion($languageVersion)
     {
@@ -415,7 +415,7 @@ class Project
      * Set catrobat_version_name
      *
      * @param string $catrobatVersionName
-     * @return Project
+     * @return Program
      */
     public function setCatrobatVersionName($catrobatVersionName)
     {
@@ -438,7 +438,7 @@ class Project
      * Set catrobat_version
      *
      * @param integer $catrobatVersion
-     * @return Project
+     * @return Program
      */
     public function setCatrobatVersion($catrobatVersion)
     {
@@ -461,7 +461,7 @@ class Project
      * Set upload_ip
      *
      * @param string $uploadIp
-     * @return Project
+     * @return Program
      */
     public function setUploadIp($uploadIp)
     {
@@ -484,7 +484,7 @@ class Project
      * Set visible
      *
      * @param boolean $visible
-     * @return Project
+     * @return Program
      */
     public function setVisible($visible)
     {
@@ -507,7 +507,7 @@ class Project
      * Set upload_language
      *
      * @param string $uploadLanguage
-     * @return Project
+     * @return Program
      */
     public function setUploadLanguage($uploadLanguage)
     {
@@ -530,7 +530,7 @@ class Project
      * Set filesize
      *
      * @param integer $filesize
-     * @return Project
+     * @return Program
      */
     public function setFilesize($filesize)
     {
@@ -553,7 +553,7 @@ class Project
      * Set remix_count
      *
      * @param integer $remixCount
-     * @return Project
+     * @return Program
      */
     public function setRemixCount($remixCount)
     {
@@ -575,10 +575,10 @@ class Project
     /**
      * Set remix_of
      *
-     * @param \Catrobat\CoreBundle\Entity\Project $remixOf
-     * @return Project
+     * @param \Catrobat\CoreBundle\Entity\Program $remixOf
+     * @return Program
      */
-    public function setRemixOf(\Catrobat\CoreBundle\Entity\Project $remixOf = null)
+    public function setRemixOf(\Catrobat\CoreBundle\Entity\Program $remixOf = null)
     {
         $this->remix_of = $remixOf;
     
@@ -588,7 +588,7 @@ class Project
     /**
      * Get remix_of
      *
-     * @return \Catrobat\CoreBundle\Entity\Project 
+     * @return \Catrobat\CoreBundle\Entity\Program 
      */
     public function getRemixOf()
     {
@@ -596,7 +596,7 @@ class Project
     }
 
     /**
-     * Set if project is approved
+     * Set if program is approved
      *
      * @param boolean
      */
@@ -606,7 +606,7 @@ class Project
     }
 
     /**
-     * Get if project is approved
+     * Get if program is approved
      *
      * @return boolean
      */

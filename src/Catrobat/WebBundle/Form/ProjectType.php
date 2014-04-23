@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProjectType extends AbstractType
+class ProgramType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,12 +24,12 @@ class ProjectType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Catrobat\CoreBundle\Entity\Project'
+            'data_class' => 'Catrobat\CoreBundle\Entity\Program'
         ));
     }
 
     public function getName()
     {
-        return 'catrobat_catrowebbundle_projecttype';
+        return 'catrobat_catrowebbundle_programtype';
     }
 }

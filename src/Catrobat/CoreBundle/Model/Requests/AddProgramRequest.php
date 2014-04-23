@@ -5,15 +5,15 @@ namespace Catrobat\CoreBundle\Model\Requests;
 use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\CoreBundle\Entity\User;
 
-class AddProjectRequest
+class AddProgramRequest
 {
   private $user;
-  private $projectfile;
+  private $programfile;
 
-  public function __construct(User $user, File $projectfile)
+  public function __construct(User $user, File $programfile)
   {
     $this->user = $user;
-    $this->projectfile = $projectfile;
+    $this->programfile = $programfile;
   }
 
   public function getUser()
@@ -26,14 +26,14 @@ class AddProjectRequest
     $this->user = $user;
   }
 
-  public function getProjectfile()
+  public function getProgramfile()
   {
-    return $this->projectfile;
+    return $this->programfile;
   }
 
-  public function setProjectfile(File $projectfile)
+  public function setProgramfile(File $programfile)
   {
-    $this->projectfile = $projectfile;
+    $this->programfile = $programfile;
   }
 
 }

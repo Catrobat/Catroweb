@@ -9,7 +9,7 @@ use Behat\MinkExtension\Context\MinkContext;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Catrobat\CoreBundle\Entity\User;
-use Catrobat\CoreBundle\Entity\Project;
+use Catrobat\CoreBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -97,35 +97,35 @@ class FeatureContext implements KernelAwareContext
     }
     
     /**
-     * @Given /^there are projects:$/
+     * @Given /^there are programs:$/
      */
-    public function thereAreProjects(TableNode $table)
+    public function thereArePrograms(TableNode $table)
     {
     	$em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    	$projects = $table->getHash();
-    	for ($i = 0; $i < count($projects); $i++)
+    	$programs = $table->getHash();
+    	for ($i = 0; $i < count($programs); $i++)
     	{
     		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => 'Catrobat'));
-				$project = new Project();
-				$project->setUser($user);
-				$project->setName($projects[$i]['name']);
-				$project->setDescription($projects[$i]['description']);
-				$project->setFilename("file".$i.".catrobat");
-				$project->setThumbnail("thumb.png");
-				$project->setScreenshot("screenshot.png");
-				$project->setViews($projects[$i]['views']);
-				$project->setDownloads($projects[$i]['downloads']);
-				$project->setUploadedAt(new \DateTime($projects[$i]['upload time'],new \DateTimeZone('UTC')));
-				$project->setCatrobatVersion(1);
-				$project->setCatrobatVersionName($projects[$i]['version']);
-				$project->setLanguageVersion(1);
-				$project->setUploadIp("127.0.0.1");
-				$project->setRemixCount(0);
-				$project->setFilesize(0);
-				$project->setVisible(true);
-				$project->setUploadLanguage("en");
-				$project->setApproved(false);
-				$em->persist($project);
+				$program = new Program();
+				$program->setUser($user);
+				$program->setName($programs[$i]['name']);
+				$program->setDescription($programs[$i]['description']);
+				$program->setFilename("file".$i.".catrobat");
+				$program->setThumbnail("thumb.png");
+				$program->setScreenshot("screenshot.png");
+				$program->setViews($programs[$i]['views']);
+				$program->setDownloads($programs[$i]['downloads']);
+				$program->setUploadedAt(new \DateTime($programs[$i]['upload time'],new \DateTimeZone('UTC')));
+				$program->setCatrobatVersion(1);
+				$program->setCatrobatVersionName($programs[$i]['version']);
+				$program->setLanguageVersion(1);
+				$program->setUploadIp("127.0.0.1");
+				$program->setRemixCount(0);
+				$program->setFilesize(0);
+				$program->setVisible(true);
+				$program->setUploadLanguage("en");
+				$program->setApproved(false);
+				$em->persist($program);
     	}
     	$em->flush();
     }
@@ -199,7 +199,7 @@ class FeatureContext implements KernelAwareContext
     /**
      * @Then /^I should get the json object with random "([^"]*)" and "([^"]*)":$/
      */
-    public function iShouldGetTheJsonObjectWithRandomAndProjectid($arg1, $arg2, PyStringNode $string)
+    public function iShouldGetTheJsonObjectWithRandomAndProgramid($arg1, $arg2, PyStringNode $string)
     {
       $response = $this->client->getResponse();
       $responseArray = json_decode($response->getContent(),true);
@@ -210,18 +210,18 @@ class FeatureContext implements KernelAwareContext
     }
     
     /**
-     * @Then /^I should get projects in the following order:$/
+     * @Then /^I should get programs in the following order:$/
      */
-    public function iShouldGetProjectsInTheFollowingOrder(TableNode $table)
+    public function iShouldGetProgramsInTheFollowingOrder(TableNode $table)
     {
       $response = $this->client->getResponse();
       $responseArray = json_decode($response->getContent(),true);
-      $returned_projects = $responseArray['CatrobatProjects'];
-      $expected_projects = $table->getHash();
-      assertEquals(count($expected_projects), count($returned_projects), "Wrong number of returned projects");
-      for ($i = 0; $i < count($returned_projects); $i++)
+      $returned_programs = $responseArray['CatrobatProjects'];
+      $expected_programs = $table->getHash();
+      assertEquals(count($expected_programs), count($returned_programs), "Wrong number of returned programs");
+      for ($i = 0; $i < count($returned_programs); $i++)
       {
-        assertEquals($expected_projects[$i]["Name"], $returned_projects[$i]["ProjectName"], "Wrong order of results");
+        assertEquals($expected_programs[$i]["Name"], $returned_programs[$i]["ProjectName"], "Wrong order of results");
       }
     }
     
@@ -268,9 +268,9 @@ class FeatureContext implements KernelAwareContext
      */
     public function iHaveACatrobatFileWithAnInvalidCodeXml()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_invalid_code_xml.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_invalid_code_xml.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_invalid_code_xml.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_invalid_code_xml.catrobat");
     }
     
     /**
@@ -278,9 +278,9 @@ class FeatureContext implements KernelAwareContext
      */
     public function iHaveACatrobatFileWithAnMissingCodeXml()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_code_xml.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_missing_code_xml.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_missing_code_xml.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_missing_code_xml.catrobat");
     }
     
     /**
@@ -288,9 +288,9 @@ class FeatureContext implements KernelAwareContext
      */
     public function iHaveACatrobatFileWithAMissingImage()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_image.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_missing_image.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_missing_image.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_missing_image.catrobat");
     }
     
     /**
@@ -298,9 +298,9 @@ class FeatureContext implements KernelAwareContext
      */
     public function iHaveACatrobatFileWithAnAdditionalImage()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_extra_image.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_extra_image.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_extra_image.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_extra_image.catrobat");
     }
     
     /**

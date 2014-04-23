@@ -1,7 +1,7 @@
 {% extends 'CatrobatWebBundle::base.html.twig' %}
 
 {% block body -%}
-    <h1>FeaturedProject creation</h1>
+    <h1>FeaturedProgram creation</h1>
 
     <form action="{{ path('_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
@@ -12,7 +12,7 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('projects_featured') }}">
+        <a href="{{ path('programs_featured') }}">
             Back to the list
         </a>
     </li>

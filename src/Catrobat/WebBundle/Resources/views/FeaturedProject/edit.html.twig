@@ -1,7 +1,7 @@
 {% extends 'CatrowebBundle::base.html.twig' %}
 
 {% block body -%}
-    <h1>FeaturedProject edit</h1>
+    <h1>FeaturedProgram edit</h1>
 
     <form action="{{ path('_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
@@ -13,7 +13,7 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('projects_featured') }}">
+        <a href="{{ path('programs_featured') }}">
             Back to the list
         </a>
     </li>

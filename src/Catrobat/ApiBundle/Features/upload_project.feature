@@ -1,5 +1,5 @@
 @api
-Feature: Upload a project 
+Feature: Upload a program 
 
   Background: 
     Given the upload folder is empty
@@ -8,13 +8,13 @@ Feature: Upload a project
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
-    And there are projects:
+    And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
-      | 1  | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | project 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
-      | 3  | project 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
+      | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
-  Scenario: project upload with valid data
+  Scenario: program upload with valid data
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a valid Catrobat file
@@ -60,6 +60,6 @@ Feature: Upload a project
       {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
 
-  Scenario: uploading the same project again should result in an update
+  Scenario: uploading the same program again should result in an update
 
     

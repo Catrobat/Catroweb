@@ -16,7 +16,7 @@ class AllProgramsAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'text', array('label' => 'Project name'))
+            ->add('name', 'text', array('label' => 'Program name'))
             ->add('user', 'entity', array('class' => 'Catrobat\Sonata\UserBundle\Entity\User'))
         ;
     }

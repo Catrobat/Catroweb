@@ -7,33 +7,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Catrobat\CoreBundle\Entity\Project;
-use Catrobat\WebBundle\Form\ProjectType;
+use Catrobat\CoreBundle\Entity\Program;
+use Catrobat\WebBundle\Form\ProgramType;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Templating\EngineInterface;
-use Catrobat\CoreBundle\Model\ProjectManager;
+use Catrobat\CoreBundle\Model\ProgramManager;
 
 /**
- * Project controller.
+ * Program controller.
  *
- * @Route("/projects")
+ * @Route("/programs")
  */
-class ProjectController
+class ProgramController
 {
   protected $templating;
-  protected $project_manager;
+  protected $program_manager;
   
-  public function __construct(EngineInterface $templating, ProjectManager $project_manager)
+  public function __construct(EngineInterface $templating, ProgramManager $program_manager)
   {
     $this->templating = $templating;
-    $this->project_manager = $project_manager;
+    $this->program_manager = $program_manager;
   }
   
   public function indexAction()
   {
-    $entities = $this->project_manager->findAll();
+    $entities = $this->program_manager->findAll();
     
     return $this->templating->renderResponse('CatrobatWebBundle:Default:index.html.twig');
   }
@@ -43,9 +43,9 @@ class ProjectController
     $limit = intval($request->query->get('limit', 9));
     $offset = intval($request->query->get('offset', 0));
     
-    $entities = $this->project_manager->findByOrderedByDownloads($limit, $offset);
+    $entities = $this->program_manager->findByOrderedByDownloads($limit, $offset);
     
-    return $this->templating->renderResponse('CatrobatWebBundle:Project:mostDownloaded.html.twig', array("entities" => $entities));
+    return $this->templating->renderResponse('CatrobatWebBundle:Program:mostDownloaded.html.twig', array("entities" => $entities));
   }
 
   public function newestAction(Request $request)
@@ -53,9 +53,9 @@ class ProjectController
     $limit = intval($request->query->get('limit', 9));
     $offset = intval($request->query->get('offset', 0));
     
-    $entities = $this->project_manager->findByOrderedByDate($limit, $offset);
+    $entities = $this->program_manager->findByOrderedByDate($limit, $offset);
     
-    return $this->templating->renderResponse('CatrobatWebBundle:Project:newest.html.twig', array("entities" => $entities));
+    return $this->templating->renderResponse('CatrobatWebBundle:Program:newest.html.twig', array("entities" => $entities));
   }
 
   public function mostViewedAction(Request $request, $limit = 3)
@@ -63,20 +63,20 @@ class ProjectController
     $limit = intval($request->query->get('limit', 9));
     $offset = intval($request->query->get('offset', 0));
     
-    $entities = $this->project_manager->findByOrderedByDate($limit, $offset);
+    $entities = $this->program_manager->findByOrderedByDate($limit, $offset);
     
-    return $this->templating->renderResponse('CatrobatWebBundle:Project:mostViewed.html.twig', array("entities" => $entities));
+    return $this->templating->renderResponse('CatrobatWebBundle:Program:mostViewed.html.twig', array("entities" => $entities));
   }
 
   public function showAction($id)
   {
-    $entity = $this->project_manager->find($id);
+    $entity = $this->program_manager->find($id);
     
     if (! $entity)
     {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+      throw $this->createNotFoundException('Unable to find Program entity.');
     }
-    return $this->templating->renderResponse('CatrobatWebBundle:Project:show.html.twig', array("entity" => $entity));
+    return $this->templating->renderResponse('CatrobatWebBundle:Program:show.html.twig', array("entity" => $entity));
   }
 
 }

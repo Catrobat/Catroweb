@@ -4,7 +4,7 @@ namespace Catrobat\CoreBundle\Events;
 use Symfony\Component\EventDispatcher\Event;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 
-class ProjectBeforeInsertEvent extends Event
+class ProgramBeforeInsertEvent extends Event
 {
   
   protected $extracted_file; 

@@ -2,21 +2,21 @@ services:
       catroweb.file.validator.name:
             class: Catrobat\CoreBundle\Services\Validators\NameValidator
             tags:
-            - { name: kernel.event_listener, event: catrobat.project.before, method: onProjectBeforeInsert }
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
       catroweb.file.validator.description:
             class: Catrobat\CoreBundle\Services\Validators\DescriptionValidator
             tags:
-            - { name: kernel.event_listener, event: catrobat.project.before, method: onProjectBeforeInsert }
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
       catroweb.file.validator.filestructure:
             class: Catrobat\CoreBundle\Services\Validators\FileStructureValidator
             tags:
-            - { name: kernel.event_listener, event: catrobat.project.before, method: onProjectBeforeInsert, priority: 250 }
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
 
       catroweb.file.validator.definedimages:
             class: Catrobat\CoreBundle\Services\Validators\OnlyDefinedImagesValidator
             tags:
-            - { name: kernel.event_listener, event: catrobat.project.before, method: onProjectBeforeInsert }
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
             
             

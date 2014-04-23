@@ -24,9 +24,9 @@ class User extends BaseUser
   protected $upload_token;
   
   /**
-   * @ORM\OneToMany(targetEntity="Project", mappedBy="user")
+   * @ORM\OneToMany(targetEntity="Program", mappedBy="user")
    */
-  protected $projects;
+  protected $programs;
 
   public function __construct()
   {
@@ -44,36 +44,36 @@ class User extends BaseUser
   }
 
   /**
-   * Add projects
+   * Add programs
    *
-   * @param \Catrobat\CoreBundle\Entity\Project $projects          
+   * @param \Catrobat\CoreBundle\Entity\Program $programs          
    * @return User
    */
-  public function addProject(\Catrobat\CoreBundle\Entity\Project $projects)
+  public function addProgram(\Catrobat\CoreBundle\Entity\Program $programs)
   {
-    $this->projects[] = $projects;
+    $this->programs[] = $programs;
     
     return $this;
   }
 
   /**
-   * Remove projects
+   * Remove programs
    *
-   * @param \Catrobat\CoreBundle\Entity\Project $projects          
+   * @param \Catrobat\CoreBundle\Entity\Program $programs          
    */
-  public function removeProject(\Catrobat\CoreBundle\Entity\Project $projects)
+  public function removeProgram(\Catrobat\CoreBundle\Entity\Program $programs)
   {
-    $this->projects->removeElement($projects);
+    $this->programs->removeElement($programs);
   }
 
   /**
-   * Get projects
+   * Get programs
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getProjects()
+  public function getPrograms()
   {
-    return $this->projects;
+    return $this->programs;
   }
 
   public function getUploadToken()

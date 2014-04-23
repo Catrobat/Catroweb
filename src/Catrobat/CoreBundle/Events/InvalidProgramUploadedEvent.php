@@ -5,7 +5,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\HttpFoundation\File\File;
 
-class InvalidProjectUploadedEvent extends Event
+class InvalidProgramUploadedEvent extends Event
 {
   
   protected $file;

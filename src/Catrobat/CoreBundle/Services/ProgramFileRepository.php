@@ -5,7 +5,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException;
 
-class ProjectFileRepository
+class ProgramFileRepository
 {
   private $directory;
   private $filesystem;
@@ -22,12 +22,12 @@ class ProjectFileRepository
     $this->filesystem = new Filesystem();
   }
   
-  function saveProjectfile(File $file, $id)
+  function saveProgramfile(File $file, $id)
   {
     $this->filesystem->copy($file->getPathname(), $this->directory . $id . ".catrobat");
   }
   
-  function getProjectFile($id)
+  function getProgramFile($id)
   {
     return new File($this->directory . $id . ".catrobat");
   }

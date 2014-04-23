@@ -4,15 +4,15 @@
 
 {% block body %}
 <article>
-	<header>{{ "projects.mostviewed"|trans }}</header>
-	<div id="mostViewedProjects" class="projectContainer">
+	<header>{{ "programs.mostviewed"|trans }}</header>
+	<div id="mostViewedPrograms" class="programContainer">
 		<ul>
 			{% for entity in entities %}
 			<li style="visibility: visible;">
-			  <a title="{{ entity.name }}" href="{{ path('project_show', { 'id': entity.id }) }}">
+			  <a title="{{ entity.name }}" href="{{ path('program_show', { 'id': entity.id }) }}">
 			    <img alt="{{ entity.name }}" src="{{ asset( thumbnail_url(entity.id) ) }}">
- 					<div class="projectTitle">{{ entity.name }}</div>
-				<div class="projectAddition">vor 4 Stunden</div>
+ 					<div class="programTitle">{{ entity.name }}</div>
+				<div class="programAddition">vor 4 Stunden</div>
 			</a>
 		    {% endfor %}
 		</ul>
