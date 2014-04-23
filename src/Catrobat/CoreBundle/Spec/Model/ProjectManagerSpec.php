@@ -28,9 +28,14 @@ class ProjectManagerSpec extends ObjectBehavior
    * @param \Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException $validation_exception
    */
   
-  function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, $event_dispatcher)
+  function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_project, $event)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $project_repository, $event_dispatcher);
+    $request->getProjectfile()->willReturn($file);
+    $request->getUser()->willReturn($user);
+    $file_extractor->extract($file)->willReturn($extracted_file);
+    $inserted_project->getId()->willReturn(1);
+    $event_dispatcher->dispatch(Argument::any(),Argument::any())->willReturn($event);
   }
 
   function it_is_initializable()
@@ -38,44 +43,33 @@ class ProjectManagerSpec extends ObjectBehavior
     $this->shouldHaveType('Catrobat\CoreBundle\Model\ProjectManager');
   }
 
-  /**
-   */
-  function it_returns_the_project_after_successfully_adding_a_project($request, $user, $projectfile, $file, $file_extractor, $extracted_file, $entity_manager, $inserted_project, $event_dispatcher, $event)
+  function it_returns_the_project_after_successfully_adding_a_project($request, $entity_manager)
   {
-    $request->getProjectfile()->willReturn($file);
-    $request->getUser()->willReturn($user);
-    $file_extractor->extract($file)->willReturn($extracted_file);
-    $inserted_project->getId()->willReturn(0);
     $entity_manager->persist(Argument::any())->shouldBecalled();
     $entity_manager->flush()->shouldBecalled();
-    $event_dispatcher->dispatch(Argument::any(),Argument::any())->willReturn($event);
-    
     $this->addProject($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Project');
   }
 
-  function it_fires_an_event_before_inserting_a_project($request, $user, $projectfile, $file, $file_extractor, $extracted_file, $entity_manager, $inserted_project, $event_dispatcher, $event)
+  function it_fires_an_event_before_inserting_a_project($request, $event_dispatcher)
   {
-    $request->getProjectfile()->willReturn($file);
-    $request->getUser()->willReturn($user);
-    $file_extractor->extract($file)->willReturn($extracted_file);
-    $inserted_project->getId()->willReturn(0);
-    $event_dispatcher->dispatch("catrobat.project.before",Argument::type('Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent'))->willReturn($event)->shouldBeCalled();
-  
     $this->addProject($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Project');
+    $event_dispatcher->dispatch("catrobat.project.before",Argument::type('Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent'))->shouldHaveBeenCalled();
   }
 
-  function it_fires_an_event_when_the_project_is_invalid($request, $user, $projectfile, $file, $file_extractor, $extracted_file, $entity_manager, $inserted_project, $event_dispatcher, $event, $validation_exception)
+  function it_fires_an_event_when_the_project_is_invalid($request, $event_dispatcher)
   {
     $validation_exception = new InvalidCatrobatFileException("500");
-    $request->getProjectfile()->willReturn($file);
-    $request->getUser()->willReturn($user);
-    $file_extractor->extract($file)->willReturn($extracted_file);
-    $inserted_project->getId()->willReturn(0);
     $event_dispatcher->dispatch("catrobat.project.before",Argument::type('Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent'))->willThrow($validation_exception)->shouldBeCalled();
-    $event_dispatcher->dispatch("catrobat.project.invalid.upload",Argument::type('Catrobat\CoreBundle\Events\InvalidProjectUploadedEvent'))->willReturn($event)->shouldBeCalled();
-
-    $this->shouldThrow('\Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('addProject',array($request));// $this->addProject($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Project');
+    
+    $this->shouldThrow('\Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('addProject',array($request));
+    
+    $event_dispatcher->dispatch("catrobat.project.invalid.upload",Argument::type('Catrobat\CoreBundle\Events\InvalidProjectUploadedEvent'))->shouldHaveBeenCalled();
   }
   
+   function it_fires_an_event_when_the_project_is_stored($request, $event_dispatcher)
+   {
+     $this->addProject($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Project');
+     $event_dispatcher->dispatch("catrobat.project.successful.upload",Argument::type('Catrobat\CoreBundle\Events\ProjectInsertEvent'))->shouldHaveBeenCalled();
+   }
   
 }
