@@ -5,7 +5,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Catrobat\Sonata\UserBundle\Entity\User;
+use Catrobat\CoreBundle\Entity\User;
 
 class AllProgramsAdmin extends Admin
 {
@@ -17,7 +17,7 @@ class AllProgramsAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
-            ->add('user', 'entity', array('class' => 'Catrobat\Sonata\UserBundle\Entity\User'))
+            ->add('user', 'entity', array('class' => 'Catrobat\CoreBundle\Entity\User'))
         ;
     }
 
