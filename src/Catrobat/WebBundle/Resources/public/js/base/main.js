@@ -1,5 +1,5 @@
 var Main = function() {
-    self = this;
+    var self = this;
 
     self.handleFooterView = function() {
         $('#footerMoreLess').click(function() {
@@ -8,5 +8,12 @@ var Main = function() {
         });
     };
 
+    self.handleLanguage = function() {
+
+        $('#switchLanguage').on("change", function() {
+            console.log("TODO: change language");
+        });
+
+    }
 
 }

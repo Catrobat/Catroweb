@@ -5,7 +5,7 @@ footer {
     color: #FFF;
 }
 
-footer #largeFooterMenu {
+#largeFooterMenu {
     width: 100%;
     display: table;
     padding: 5px 0px;
@@ -26,23 +26,23 @@ footer #largeFooterMenu {
     padding-bottom: 23px;
 }
 
-#largeFooterMenu #rightFooterMenu span:nth-child(1) {
+ #footerSearchButton {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: bottom;
     cursor: pointer;
     margin-right: 7px;
 }
 
-#largeFooterMenu #rightFooterMenu span:nth-child(2) {
+#footerSearchField {
     display: inline-block;
     text-align: left;
 }
 
-#largeFooterMenu #rightFooterMenu span:nth-child(2) h2 {
+#footerSearchField h2 {
     padding: 5px;
 }
 
-#largeFooterMenu #rightFooterMenu span:nth-child(2) input {
+#footerSearchField input {
     width: 233px;
     border: 0;
     background-color: #96CED6;
@@ -50,13 +50,13 @@ footer #largeFooterMenu {
     padding: 9px 7px;
 }
 
-footer #largeFooterMenu ul {
+#largeFooterMenu ul {
     list-style: none;
     padding: 0px 58px 0px 0px;
     float: left;
 }
 
-footer #largeFooterMenu li {
+#largeFooterMenu li {
     padding: 6px;
 }
 
@@ -65,32 +65,32 @@ footer a {
     text-decoration: none;
 }
 
-footer #footerBottomMenu {
+#footerBottomMenu {
     width: 100%;
     padding: 0px 36px;
     border-top: 1px solid #385f6e;
     display: table;
 }
 
-footer #footerBottomMenu div {
+#footerBottomMenu div {
     width: 50%;
     display: table-cell;
     vertical-align: middle;
     padding: 5px 7px;
 }
 
-footer #footerBottomMenu div:nth-child(2) {
+#footerCopyright {
     text-align: right;
 }
 
-footer #footerBottomMenu select {
+#footerBottomMenu select {
     border: 0;
     background-color: #96CED6;
     color: #05222a;
     padding: 5px 7px;
 }
 
-footer #mobileFooterMenu {
+#mobileFooterMenu {
     display: none;
     width: 100%;
     height: 191px;
@@ -121,11 +121,11 @@ footer #mobileFooterMenu {
         margin-top: -39px !important; /* footer height */
     }
 
-    footer #footerBottomMenu div {
+    #footerBottomMenu div {
         width: 33%;
     }
 
-    footer #footerBottomMenu div:nth-child(2) {
+    #footerCopyright {
         text-align: center;
     }
 

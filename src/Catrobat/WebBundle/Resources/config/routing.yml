@@ -24,6 +24,43 @@ program_show:
     requirements:
       page:  \d+
 
+profile_show:
+    path:      /profile/{id}
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.profile.controller:showAction" }
+    requirements:
+      page:  \d+
+
+tutorial_show:
+    path:      /tutorial
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:showTutorialAction" }
+
+tutorials_show:
+    path:      /tutorial/tutorials
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:showTutorialsAction" }
+
+stepByStep_show:
+    path:      /tutorial/stepByStep
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:showStepByStepAction" }
+
+starter_show:
+    path:      /tutorial/starterPrograms
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:showStarterProgramsAction" }
+
+termsOfUse_show:
+    path:      /termsOfUse
+    methods:  [GET]
+    defaults:  { _controller: CatrobatWebBundle:Default:showTermsOfUse }
+
+licenseToPlay_show:
+    path:      /licenseToPlay
+    methods:  [GET]
+    defaults:  { _controller: CatrobatWebBundle:Default:showLicenseToPlay }
+
 # Same as /programs ... just for compatibility reason again with /details
 detail_show:
     path:      /details/{id}

@@ -1,5 +1,7 @@
 parameters:
       catrobat.web.program.controller.class: Catrobat\WebBundle\Controller\ProgramController
+      catrobat.web.profile.controller.class: Catrobat\WebBundle\Controller\ProfileController
+      catrobat.web.tutorial.controller.class: Catrobat\WebBundle\Controller\TutorialController
 
 services:
 # =========================== Kernel Listener ===========================
@@ -13,6 +15,14 @@ services:
       catrobat.web.program.controller:
               class: "%catrobat.web.program.controller.class%"
               arguments: ["@templating", "@catrobat.core.model.programmanager"]
+
+      catrobat.web.profile.controller:
+              class: "%catrobat.web.profile.controller.class%"
+              arguments: ["@templating"]
+
+      catrobat.web.tutorial.controller:
+              class: "%catrobat.web.tutorial.controller.class%"
+              arguments: ["@templating"]
 
               
 # =========================== TWIG ===========================
