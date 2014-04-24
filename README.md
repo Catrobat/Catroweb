@@ -26,6 +26,6 @@ Tests
 
 Make sure every test works before pushing to master!
 
-  - ```$ php bin/behat -p=api```
+  - ```$ php bin/behat```
   - ```$ php bin/phpspec run```
 
