@@ -2,6 +2,7 @@
 
 namespace Catrobat\ApiBundle\Features\Context;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Behat\Behat\Context\CustomSnippetAcceptingContext;
 
 //
 // Require 3rd-party libraries here:
@@ -25,7 +27,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Feature context.
  */
-class FeatureContext implements KernelAwareContext
+class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
     const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
     private $kernel;
@@ -34,8 +36,10 @@ class FeatureContext implements KernelAwareContext
     private $request_parameters;
     
     private $files;
-    
-    /**
+
+    public static function getAcceptedSnippetType() { return 'regex'; }
+
+  /**
      * Initializes context with parameters from behat.yml.
      *
      * @param array $parameters
@@ -146,6 +150,15 @@ class FeatureContext implements KernelAwareContext
       $this->client = $this->kernel->getContainer()->get('test.client');
     	$crawler = $this->client->request('POST', $url, $this->request_parameters, $this->files);
     }
+
+    /**
+     * @When /^I GET "([^"]*)" with these parameters$/
+     */
+    public function iGetWithTheseParameters($url)
+    {
+      $this->client = $this->kernel->getContainer()->get('test.client');
+      $crawler = $this->client->request('POST', $url, $this->request_parameters, $this->files);
+    }
     
     /**
      * @Given /^I am "([^"]*)"$/
@@ -162,16 +175,7 @@ class FeatureContext implements KernelAwareContext
     {
       $this->client = $this->kernel->getContainer()->get('test.client');
       $params = array("token" => $token, "username" => $this->user); 
-      $crawler = $this->client->request('POST', $url, $params);
-    }
-    
-    /**
-     * @Then /^I should see:$/
-     */
-    public function iShouldSee(PyStringNode $string)
-    {
-    	$response = $this->client->getResponse();
-    	assertEquals($string->getRaw(), $response->getContent());
+      $crawler = $this->client->request('GET', $url."?".http_build_query($params));
     }
     
     /**
