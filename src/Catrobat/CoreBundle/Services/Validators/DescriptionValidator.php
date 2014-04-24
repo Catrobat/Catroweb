@@ -4,12 +4,12 @@ namespace Catrobat\CoreBundle\Services\Validators;
 
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
+use Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent;
 
 class DescriptionValidator
 {
   
-  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile());
   }
@@ -18,7 +18,7 @@ class DescriptionValidator
   {
     if (strlen($file->getDescription()) > 1000 )
     {
-      throw new InvalidCatrobatFileException("project description too long");
+      throw new InvalidCatrobatFileException("program description too long");
     }
 
   }

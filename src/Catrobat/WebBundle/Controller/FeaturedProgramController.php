@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Catrobat\CoreBundle\Entity\FeaturedProject;
-use Catrobat\WebBundle\Form\FeaturedProjectType;
+use Catrobat\CoreBundle\Entity\FeaturedProgram;
+use Catrobat\WebBundle\Form\FeaturedProgramType;
 
 /**
- * FeaturedProject controller.
+ * FeaturedProgram controller.
  *
  * @Route("/featured")
  */
-class FeaturedProjectController extends Controller
+class FeaturedProgramController extends Controller
 {
 
     /**
-     * Lists all FeaturedProject entities.
+     * Lists all FeaturedProgram entities.
      *
-     * @Route("/", name="projects_featured")
+     * @Route("/", name="programs_featured")
      * @Method("GET")
      * @Template()
      */
@@ -29,23 +29,23 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->findAll();
+        $entities = $em->getRepository('CatrobatCoreBundle:FeaturedProgram')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new FeaturedProject entity.
+     * Creates a new FeaturedProgram entity.
      *
      * @Route("/", name="_create")
      * @Method("POST")
-     * @Template("CatrobatWebBundle:FeaturedProject:new.html.twig")
+     * @Template("CatrobatWebBundle:FeaturedProgram:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new FeaturedProject();
-        $form = $this->createForm(new FeaturedProjectType(), $entity);
+        $entity  = new FeaturedProgram();
+        $form = $this->createForm(new FeaturedProgramType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -63,7 +63,7 @@ class FeaturedProjectController extends Controller
     }
 
     /**
-     * Displays a form to create a new FeaturedProject entity.
+     * Displays a form to create a new FeaturedProgram entity.
      *
      * @Route("/new", name="_new")
      * @Method("GET")
@@ -71,8 +71,8 @@ class FeaturedProjectController extends Controller
      */
     public function newAction()
     {
-        $entity = new FeaturedProject();
-        $form   = $this->createForm(new FeaturedProjectType(), $entity);
+        $entity = new FeaturedProgram();
+        $form   = $this->createForm(new FeaturedProgramType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -81,7 +81,7 @@ class FeaturedProjectController extends Controller
     }
 
     /**
-     * Finds and displays a FeaturedProject entity.
+     * Finds and displays a FeaturedProgram entity.
      *
      * @Route("/{id}", name="_show")
      * @Method("GET")
@@ -91,10 +91,10 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
+        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProgram')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
+            throw $this->createNotFoundException('Unable to find FeaturedProgram entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -106,7 +106,7 @@ class FeaturedProjectController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing FeaturedProject entity.
+     * Displays a form to edit an existing FeaturedProgram entity.
      *
      * @Route("/{id}/edit", name="_edit")
      * @Method("GET")
@@ -116,13 +116,13 @@ class FeaturedProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
+        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProgram')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
+            throw $this->createNotFoundException('Unable to find FeaturedProgram entity.');
         }
 
-        $editForm = $this->createForm(new FeaturedProjectType(), $entity);
+        $editForm = $this->createForm(new FeaturedProgramType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -133,24 +133,24 @@ class FeaturedProjectController extends Controller
     }
 
     /**
-     * Edits an existing FeaturedProject entity.
+     * Edits an existing FeaturedProgram entity.
      *
      * @Route("/{id}", name="_update")
      * @Method("PUT")
-     * @Template("CatrobatWebBundle:FeaturedProject:edit.html.twig")
+     * @Template("CatrobatWebBundle:FeaturedProgram:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
+        $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProgram')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
+            throw $this->createNotFoundException('Unable to find FeaturedProgram entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new FeaturedProjectType(), $entity);
+        $editForm = $this->createForm(new FeaturedProgramType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -167,7 +167,7 @@ class FeaturedProjectController extends Controller
         );
     }
     /**
-     * Deletes a FeaturedProject entity.
+     * Deletes a FeaturedProgram entity.
      *
      * @Route("/{id}", name="_delete")
      * @Method("DELETE")
@@ -179,21 +179,21 @@ class FeaturedProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProject')->find($id);
+            $entity = $em->getRepository('CatrobatCoreBundle:FeaturedProgram')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find FeaturedProject entity.');
+                throw $this->createNotFoundException('Unable to find FeaturedProgram entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('projects_featured'));
+        return $this->redirect($this->generateUrl('programs_featured'));
     }
 
     /**
-     * Creates a form to delete a FeaturedProject entity by id.
+     * Creates a form to delete a FeaturedProgram entity by id.
      *
      * @param mixed $id The entity id
      *

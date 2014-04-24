@@ -10,6 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-extension" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/symfony2-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/transliterator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/braincrafted/bootstrap-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
@@ -119,10 +120,11 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/data-fixtures" />
           <root url="file://$MODULE_DIR$/vendor/sensiolabs/behat-page-object-extension" />
           <root url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
+          <root url="file://$MODULE_DIR$/vendor/behat/transliterator" />
           <root url="file://$MODULE_DIR$/vendor/twitter/bootstrap" />
           <root url="file://$MODULE_DIR$/vendor/behat/gherkin" />
-          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
+          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
           <root url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
@@ -182,10 +184,11 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/data-fixtures" />
           <root url="file://$MODULE_DIR$/vendor/sensiolabs/behat-page-object-extension" />
           <root url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
+          <root url="file://$MODULE_DIR$/vendor/behat/transliterator" />
           <root url="file://$MODULE_DIR$/vendor/twitter/bootstrap" />
           <root url="file://$MODULE_DIR$/vendor/behat/gherkin" />
-          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
+          <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
           <root url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
@@ -195,6 +198,7 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="sass-stdlib" level="application" />
   </component>
 </module>
 

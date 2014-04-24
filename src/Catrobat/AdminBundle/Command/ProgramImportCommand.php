@@ -9,31 +9,31 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Catrobat\CoreBundle\Model\ProjectManager;
+use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Model\UserManager;
-use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
+use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ProjectImportCommand extends Command
+class ProgramImportCommand extends Command
 {
   private $fileystem;
   private $user_manager;
-  private $project_manager;
+  private $program_manager;
 
-  public function __construct(Filesystem $filesystem, UserManager $user_manager, ProjectManager $project_manager)
+  public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager)
   {
     parent::__construct();
     $this->fileystem = $filesystem;
     $this->user_manager = $user_manager;
-    $this->project_manager = $project_manager;
+    $this->program_manager = $program_manager;
   }
 
   protected function configure()
   {
     $this->setName('catrobat:import')
-          ->setDescription('Import projects from a given directory to the application')
+          ->setDescription('Import programs from a given directory to the application')
           ->addArgument('directory', InputArgument::REQUIRED, 'Direcory contaning catrobat files for import')
-          ->addArgument('user', InputArgument::REQUIRED, 'User who will be the ower of these projects');
+          ->addArgument('user', InputArgument::REQUIRED, 'User who will be the ower of these programs');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
@@ -60,9 +60,9 @@ class ProjectImportCommand extends Command
     
     foreach ($finder as $file)
     {
-      $add_project_request = new AddProjectRequest($user, new File($file));
-      $project = $this->project_manager->addProject($add_project_request);
-      $output->writeln("Added Project " . $project->getName());
+      $add_program_request = new AddProgramRequest($user, new File($file));
+      $program = $this->program_manager->addProgram($add_program_request);
+      $output->writeln("Added Program " . $program->getName());
     }
   }
 

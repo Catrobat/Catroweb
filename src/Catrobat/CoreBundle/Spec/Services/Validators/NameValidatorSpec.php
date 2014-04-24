@@ -18,7 +18,7 @@ class NameValidatorSpec extends ObjectBehavior
     /**
      * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $file
      */
-    function it_makes_sure_the_given_project_name_is_valid($file)
+    function it_makes_sure_the_given_program_name_is_valid($file)
     {
       $file->getName()->willReturn("Jhon Doe");
       $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);

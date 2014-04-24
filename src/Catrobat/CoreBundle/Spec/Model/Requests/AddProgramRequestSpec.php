@@ -5,7 +5,7 @@ namespace Catrobat\CoreBundle\Spec\Model\Requests;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class AddProjectRequestSpec extends ObjectBehavior
+class AddProgramRequestSpec extends ObjectBehavior
 {
 
   /**
@@ -19,7 +19,7 @@ class AddProjectRequestSpec extends ObjectBehavior
 
   function it_is_initializable()
   {
-    $this->shouldHaveType('Catrobat\CoreBundle\Model\Requests\AddProjectRequest');
+    $this->shouldHaveType('Catrobat\CoreBundle\Model\Requests\AddProgramRequest');
   }
 
   /**
@@ -37,9 +37,9 @@ class AddProjectRequestSpec extends ObjectBehavior
    */
   function it_holds_a_file($file,$new_file)
   {
-    $this->getProjectfile()->shouldReturn($file);
-    $this->setProjectfile($new_file);
-    $this->getProjectfile()->shouldReturn($new_file);
+    $this->getProgramfile()->shouldReturn($file);
+    $this->setProgramfile($new_file);
+    $this->getProgramfile()->shouldReturn($new_file);
   }
   
 }

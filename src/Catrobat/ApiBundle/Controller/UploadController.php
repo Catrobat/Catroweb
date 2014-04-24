@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Security\Core\SecurityContext;
 use Catrobat\CoreBundle\Model\UserManager;
-use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
-use Catrobat\CoreBundle\Model\ProjectManager;
+use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
+use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Buzz\Exception\InvalidArgumentException;
@@ -21,15 +21,15 @@ class UploadController
     protected $templating;
     protected $user_manager;
     protected $context;
-    protected $project_manager;
+    protected $program_manager;
     protected $tokenGenerator;
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, SecurityContext $context, ProjectManager $project_manager, TokenGenerator $tokenGenerator)
+    public function __construct(EngineInterface $templating, UserManager $user_manager, SecurityContext $context, ProgramManager $program_manager, TokenGenerator $tokenGenerator)
     {
       $this->templating = $templating;
       $this->user_manager = $user_manager;
       $this->context = $context;
-      $this->project_manager = $project_manager;
+      $this->program_manager = $program_manager;
       $this->tokenGenerator = $tokenGenerator;
     }
 
@@ -54,9 +54,9 @@ class UploadController
       {
         try 
         {
-          $add_project_request = new AddProjectRequest($this->context->getToken()->getUser(), $request->files->get(0));
+          $add_program_request = new AddProgramRequest($this->context->getToken()->getUser(), $request->files->get(0));
           
-          $id = $this->project_manager->addProject($add_project_request)->getId();
+          $id = $this->program_manager->addProgram($add_program_request)->getId();
           $user = $this->context->getToken()->getUser();
           $user->setToken($this->tokenGenerator->generateToken());
           $this->user_manager->updateUser($user);
@@ -75,7 +75,7 @@ class UploadController
               $response["answer"] = "unknown error: project_xml_not_found!";
               break;
             case InvalidCatrobatFileException::IMAGE_MISSING:
-              $response["answer"] = "Project XML metions a file which not exists in project-folder";
+              $response["answer"] = "Project XML mentions a file which not exists in project-folder";
               break;
             case InvalidCatrobatFileException::UNEXPECTED_FILE:
               $response["answer"] = "unexpected file found";

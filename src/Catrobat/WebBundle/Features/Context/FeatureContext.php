@@ -3,13 +3,12 @@
 namespace Catrobat\WebBundle\Features\Context;
 
 use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 
-use Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Tester\Exception\PendingException;
 
 //
 // Require 3rd-party libraries here:
@@ -21,20 +20,17 @@ use Behat\Gherkin\Node\PyStringNode,
 /**
  * Feature context.
  */
-class FeatureContext extends BehatContext //MinkContext if you want to test web
-                  implements KernelAwareInterface
+class FeatureContext implements KernelAwareContext
 {
     private $kernel;
-    private $parameters;
 
     /**
      * Initializes context with parameters from behat.yml.
      *
      * @param array $parameters
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
-        $this->parameters = $parameters;
     }
 
     /**

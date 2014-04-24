@@ -4,7 +4,7 @@ namespace Catrobat\WebBundle\Twig;
 
 use Catrobat\CoreBundle\Services\ScreenshotRepository;
 
-class ProjectAssetsExtension extends \Twig_Extension
+class ProgramAssetsExtension extends \Twig_Extension
 {
   private $screen_repo;
   
@@ -19,7 +19,7 @@ class ProjectAssetsExtension extends \Twig_Extension
   public function getFunctions()
   {
     return array(
-        'thumbnail_url' => new \Twig_Function_Method($this, 'getProjectThumbnail')
+        'thumbnail_url' => new \Twig_Function_Method($this, 'getProgramThumbnail')
     );
   }
    
@@ -29,7 +29,7 @@ class ProjectAssetsExtension extends \Twig_Extension
    * @param string $string
    * @return int
    */
-  public function getProjectThumbnail($id)
+  public function getProgramThumbnail($id)
   {
     return $this->screen_repo->getScreenshotWebPath($id);
   }
@@ -41,6 +41,6 @@ class ProjectAssetsExtension extends \Twig_Extension
    */
   public function getName()
   {
-    return 'project_assets';
+    return 'program_assets';
   }
 }

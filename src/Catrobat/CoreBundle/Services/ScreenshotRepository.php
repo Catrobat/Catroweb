@@ -33,7 +33,7 @@ class ScreenshotRepository
     $this->thumbnail_path = $thumbnail_path;
   }
   
-  public function saveProjectAssets($screenshot_filepath,$id)
+  public function saveProgramAssets($screenshot_filepath,$id)
   {
     $this->saveScreenshot($screenshot_filepath, $id);
     $this->saveThumbnail($screenshot_filepath, $id);

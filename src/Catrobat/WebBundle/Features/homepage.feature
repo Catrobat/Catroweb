@@ -1,6 +1,6 @@
 @homepage
 Feature: Pocketcode homepage
-  In order to access and browse the projects
+  In order to access and browse the programs
   As a visitor
   I want to be able to see the homepage
 

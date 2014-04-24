@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Security\Core\SecurityContext;
 use Catrobat\CoreBundle\Model\UserManager;
-use Catrobat\CoreBundle\Model\Requests\AddProjectRequest;
-use Catrobat\CoreBundle\Model\ProjectManager;
+use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
+use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 
@@ -19,7 +19,7 @@ class SecurityController
 {
     protected $templating;
     protected $user_manager;
-    protected $project_manager;
+    protected $program_manager;
     protected $tokenGenerator;
     
     public function __construct(EngineInterface $templating, UserManager $user_manager, TokenGenerator $tokenGenerator)

@@ -6,7 +6,7 @@ parameters:
 services:
     catrobat.api.controller.search:
         class: "%catrobat.api.controller.search.class%"
-        arguments: ["@templating", "@catrobat.core.model.projectmanager"]
+        arguments: ["@templating", "@catrobat.core.model.programmanager"]
     
     catrobat.api.controller.security:
         class: "%catrobat.api.controller.security.class%"
@@ -14,7 +14,7 @@ services:
         
     catrobat.api.controller.upload:
         class: "%catrobat.api.controller.upload.class%"
-        arguments: ["@templating","@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.projectmanager", "@catrobat.core.services.tokengenerator"]
+        arguments: ["@templating","@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.programmanager", "@catrobat.core.services.tokengenerator"]
 
     uploadtoken.security.authentication.provider:
         class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider

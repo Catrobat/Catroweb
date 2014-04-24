@@ -14,15 +14,15 @@ class InitDirectoriesCommand extends Command
 {
   public $fileystem;
   public $extract_directory;
-  public $projectfile_directory;
+  public $programfile_directory;
   public $thumbnail_directory;
   public $screenshot_directory;
 
-  public function __construct(Filesystem $filesystem, $projectfile_directory)
+  public function __construct(Filesystem $filesystem, $programfile_directory)
   {
     parent::__construct();
     $this->fileystem = $filesystem;
-    $this->projectfile_directory = $projectfile_directory;
+    $this->programfile_directory = $programfile_directory;
   }
 
   protected function configure()
@@ -39,7 +39,7 @@ class InitDirectoriesCommand extends Command
       return;
     }
     $text = "";
-    $text .= $this->makeSuredirectoryExists($this->projectfile_directory);
+    $text .= $this->makeSuredirectoryExists($this->programfile_directory);
     $text .= $this->makeSuredirectoryExists($this->extract_directory);
     $text .= $this->makeSuredirectoryExists($this->thumbnail_directory);
     $text .= $this->makeSuredirectoryExists($this->screenshot_directory);
@@ -71,9 +71,9 @@ class InitDirectoriesCommand extends Command
     $this->extract_directory = $extract_directory;
   }
 
-  public function setProjectfileDirectory($projectfile_directory)
+  public function setProgramfileDirectory($programfile_directory)
   {
-    $this->projectfile_directory = $projectfile_directory;
+    $this->programfile_directory = $programfile_directory;
   }
 
   public function setThumbnailDirectory($thumbnail_directory)

@@ -9,7 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Finder\Finder;
 
-class ProjectFileRepositorySpec extends ObjectBehavior
+class ProgramFileRepositorySpec extends ObjectBehavior
 {
     private $storage_dir;
     private $filesystem;
@@ -24,7 +24,7 @@ class ProjectFileRepositorySpec extends ObjectBehavior
     
     function it_is_initializable()
     {
-      $this->shouldHaveType('Catrobat\CoreBundle\Services\ProjectFileRepository');
+      $this->shouldHaveType('Catrobat\CoreBundle\Services\ProgramFileRepository');
     }
     
     function it_throws_an_exception_if_directory_is_not_found()
@@ -38,7 +38,7 @@ class ProjectFileRepositorySpec extends ObjectBehavior
       $id = "test";
       $file = new File($file_name);
       
-      $this->saveProjectfile($file, $id);
+      $this->saveProgramfile($file, $id);
       
       $finder = new Finder();
       expect($finder->files()->in($this->storage_dir)->count())->toBe(1);
@@ -51,10 +51,10 @@ class ProjectFileRepositorySpec extends ObjectBehavior
       $id = "test";
       $file = new File($file_name);
       
-      $this->saveProjectfile($file, $id);
+      $this->saveProgramfile($file, $id);
       
       $original_md5_sum = md5_file($file);
-      $returned_file = $this->getProjectFile($id)->getWrappedObject();
+      $returned_file = $this->getProgramFile($id)->getWrappedObject();
       $returned_file_md5_sum = md5_file($returned_file);
       
       expect($returned_file_md5_sum)->toBe($original_md5_sum);

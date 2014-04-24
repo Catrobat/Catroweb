@@ -6,7 +6,7 @@ services:
               class: Catrobat\AdminBundle\Command\InitDirectoriesCommand
               arguments: ["@catrowebadmin.filesystem","%catrobat.file.storage.dir%"]
               calls:
-                - [setProjectfileDirectory, ["%catrobat.file.storage.dir%"]]
+                - [setProgramfileDirectory, ["%catrobat.file.storage.dir%"]]
                 - [setExtractDirectory, ["%catrobat.file.extract.dir%"]]
                 - [setScreenshotDirectory, ["%catrobat.screenshot.dir%"]]
                 - [setThumbnailDirectory, ["%catrobat.thumbnail.dir%"]]
@@ -14,8 +14,8 @@ services:
                 -  { name: console.command }
 
       catrowebadmin.command.import:
-              class: Catrobat\AdminBundle\Command\ProjectImportCommand
-              arguments: ["@catrowebadmin.filesystem","@catrobat.core.model.usermanager","@catrobat.core.model.projectmanager"]
+              class: Catrobat\AdminBundle\Command\ProgramImportCommand
+              arguments: ["@catrowebadmin.filesystem","@catrobat.core.model.usermanager","@catrobat.core.model.programmanager"]
               tags:
                 -  { name: console.command }
 
@@ -27,10 +27,10 @@ services:
         class: Catrobat\AdminBundle\Admin\AllProgramsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: Programs, label: All Programs }
-        arguments: [null, Catrobat\CoreBundle\Entity\Project, null]
+        arguments: [null, Catrobat\CoreBundle\Entity\Program, null]
 
       catrowebadmin.block.approve_programs:
         class: Catrobat\AdminBundle\Admin\ApproveProgramsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: Programs, label: Approve Programs }
-        arguments: [null, Catrobat\CoreBundle\Entity\Project, null]
+        arguments: [null, Catrobat\CoreBundle\Entity\Program, null]

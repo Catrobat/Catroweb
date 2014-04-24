@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="featured")
  */
-class FeaturedProject
+class FeaturedProgram
 {
     /**
      * @ORM\Id
@@ -23,10 +23,10 @@ class FeaturedProject
     protected $image;
     
     /**
-     * @ORM\OneToOne(targetEntity="Project",fetch="EAGER")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Program",fetch="EAGER")
+     * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
      **/
-    private $project;
+    private $program;
 
     /**
      * Get id
@@ -42,7 +42,7 @@ class FeaturedProject
      * Set image
      *
      * @param string $image
-     * @return FeaturedProject
+     * @return FeaturedProgram
      */
     public function setImage($image)
     {
@@ -62,25 +62,25 @@ class FeaturedProject
     }
 
     /**
-     * Set project
+     * Set program
      *
-     * @param \Catrobat\CoreBundle\Entity\Project $project
-     * @return FeaturedProject
+     * @param \Catrobat\CoreBundle\Entity\Program $program
+     * @return FeaturedProgram
      */
-    public function setProject(\Catrobat\CoreBundle\Entity\Project $project = null)
+    public function setProgram(\Catrobat\CoreBundle\Entity\Program $program = null)
     {
-        $this->project = $project;
+        $this->program = $program;
     
         return $this;
     }
 
     /**
-     * Get project
+     * Get program
      *
-     * @return \Catrobat\CoreBundle\Entity\Project 
+     * @return \Catrobat\CoreBundle\Entity\Program 
      */
-    public function getProject()
+    public function getProgram()
     {
-        return $this->project;
+        return $this->program;
     }
 }
