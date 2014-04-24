@@ -115,6 +115,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
 //    $query = $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC');
 //    return $this->pagination->paginate($query, 1, $limit);
   }
+
+  public function search($query, $limit=10, $offset=0)
+  {
+    return $this->program_repository->findBy(array('name' => $query),array('views' => 'desc'), $limit, $offset);
+  }
   
   
 }
