@@ -16,34 +16,17 @@ catroweb_index_locale:
 #    resource: "@CatrobatWebBundle/Controller/FeaturedProjectController.php"
 #    type:     annotation
 
-################## program listings ################## 
-
-#catroweb_most_downloaded:
-#    path:      /most_downloaded.{_format}
-#    methods:  [GET]
-#    defaults:  { _controller: "catrobat.web.project.controller:mostDownloadedAction", _format: json }
-#    requirements:
-#      _format:  json
-
-#catroweb_most_viewed:
-#    path:      /most-viewed.{_format}
-#    methods:  [GET]
-#    defaults:  { _controller: "catrobat.web.project.controller:mostViewedAction", _format: html }
-#    requirements:
-#          _format:  html|json
-#
-#catroweb_newest:
-#    path:      /newest.{_format}
-#    methods:  [GET]
-#    defaults:  { _controller: "catrobat.web.project.controller:newestAction", _format: html }
-#    requirements:
-#          _format:  html|json
-
-
-################## program details ################## 
-
+################## program details ##################
 program_show:
     path:      /programs/{id}
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.program.controller:showAction" }
+    requirements:
+      page:  \d+
+
+# Same as /programs ... just for compatibility reason again with /details
+detail_show:
+    path:      /details/{id}
     methods:  [GET]
     defaults:  { _controller: "catrobat.web.program.controller:showAction" }
     requirements:

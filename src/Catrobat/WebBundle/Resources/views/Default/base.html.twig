@@ -3,12 +3,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
         <meta name="robots" content="noindex,nofollow" />
-        <title>{% block title %}Pocket Code Website{% endblock %}</title>
+        <title>Pocket Code Website {% block title %}{% endblock %}</title>
 
         {% stylesheets '@CatrobatWebBundle/Resources/public/css/plugins/*'
                        '@CatrobatWebBundle/Resources/public/css/base/*' filter='cssrewrite,lessphp' %}
           <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
         {% endstylesheets %}
+
+        {% javascripts '@CatrobatWebBundle/Resources/public/js/plugins/*'
+                       '@CatrobatWebBundle/Resources/public/js/base/*' %}
+          <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
         {% block head %}{% endblock %}
     </head>
     <body>

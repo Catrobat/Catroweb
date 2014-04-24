@@ -34,49 +34,19 @@ class ProgramController
   public function indexAction()
   {
     $entities = $this->program_manager->findAll();
-    return $this->templating->renderResponse('CatrobatWebBundle:Default:index.html.twig');
+    return $this->templating->renderResponse('CatrobatWebBundle::index.html.twig');
   }
 
-//  public function mostDownloadedAction(Request $request)
-//  {
-//    $limit = intval($request->query->get('limit', 9));
-//    $offset = intval($request->query->get('offset', 0));
-//
-//    $entities = $this->project_manager->findByOrderedByDownloads($limit, $offset);
-//
-//    return $this->templating->renderResponse('CatrobatWebBundle:Project:mostDownloaded.html.twig', array("entities" => $entities));
-//  }
-//
-//  public function newestAction(Request $request)
-//  {
-//    $limit = intval($request->query->get('limit', 9));
-//    $offset = intval($request->query->get('offset', 0));
-//
-//    $entities = $this->project_manager->findByOrderedByDate($limit, $offset);
-//
-//    return $this->templating->renderResponse('CatrobatWebBundle:Project:newest.html.twig', array("entities" => $entities));
-//  }
-//
-//  public function mostViewedAction(Request $request, $limit = 3)
-//  {
-//    $limit = intval($request->query->get('limit', 9));
-//    $offset = intval($request->query->get('offset', 0));
-//
-//    $entities = $this->project_manager->findByOrderedByDate($limit, $offset);
-//
-//    return $this->templating->renderResponse('CatrobatWebBundle:Project:mostViewed.html.twig', array("entities" => $entities));
-//  }
-//
-//  public function showAction($id)
-//  {
-//    $entity = $this->project_manager->find($id);
-//
-//    if (! $entity)
-//    {
-//      throw $this->createNotFoundException('Unable to find Project entity.');
-//    }
-//    return $this->templating->renderResponse('CatrobatWebBundle:Project:show.html.twig', array("entity" => $entity));
-//  }
+  public function showAction($id)
+  {
+    $entity = $this->program_manager->find($id);
+
+    if (! $entity)
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+    return $this->templating->renderResponse('CatrobatWebBundle::detail.html.twig', array("entity" => $entity));
+  }
 
 
 }

@@ -132,6 +132,10 @@ h2 {
 
 @media screen and (max-width: 768px) {
    #wrapper {
-       padding-bottom: 230px;
+       padding-bottom: 39px;
    }
+
+    #wrapper.expandFooter {
+        padding-bottom: 230px;
+    }
 }

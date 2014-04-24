@@ -9,15 +9,13 @@
                 <li><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">Google Play</a></li>
             </ul>
             <ul>
-                <li><a href="http://developer.catrobat.org/privacy_policy" target="_blank">Privacy Policy</a>
-                </li>
+                <li><a href="http://developer.catrobat.org/privacy_policy" target="_blank">Privacy Policy</a></li>
                 <li><a href="/termsOfUse">Terms of Use</a></li>
                 <li><a href="http://developer.catrobat.org/imprint" target="_blank">Imprint</a></li>
             </ul>
             <div class="clear"></div>
         </div>
         <div id="rightFooterMenu">
-
             <span id="footerSearchButton" class="img-magnifying-glass"></span>
             <span>
                 <h2>Search</h2>
@@ -25,7 +23,6 @@
             </span>
         </div>
     </div>
-
     <div id="footerBottomMenu">
         <div>
             <select id="switchLanguage">
@@ -42,27 +39,41 @@
         <div>
             <a href="http://www.catrobat.org" target="_blank">&copy; Catrobat</a>
         </div>
-        {#<div>#}
-            {#<span id="footerMoreButton">#}
-            {#<span class="img-more"></span> mehr            </span>#}
-            {#<span id="footerLessButton">#}
-            {#<span class="img-less"></span> weniger            </span>#}
-        {#</div>#}
+        <div id="footerMoreLess">
+            <span id="footerMoreButton">
+                <span class="img-more"></span><span>more</span>
+            </span>
+            <span id="footerLessButton">
+              <span class="img-less"></span>less
+            </span>
+        </div>
     </div>
 
-    {#<div id="mobileFooterMenu">#}
-    {#<ul>#}
-    {#<li><a href="http://developer.catrobat.org/privacy_policy" target="_blank">Datenschutzrichtlinien</a></li>#}
-    {#<li><a href="https://pocketcode.org/termsOfUse">Nutzungsbedingungen</a></li>#}
-    {#<li><a href="http://developer.catrobat.org/imprint" target="_blank">Impressum</a></li>#}
-    {#</ul>#}
-    {#</div>#}
+    <div id="mobileFooterMenu">
+        <ul>
+            <li><a href="/tutorial">Tutorial</a></li>
+            <li><a href="http://www.catrobat.org" target="_blank">About</a></li>
+            <li><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">Google Play</a></li>
+            <li><a href="http://developer.catrobat.org/privacy_policy" target="_blank">Privacy Policy</a></li>
+            <li><a href="/termsOfUse">Terms of Use</a></li>
+            <li><a href="http://developer.catrobat.org/imprint" target="_blank">Imprint</a></li>
+        </ul>
+    </div>
 
-    {#<script type="text/javascript">#}
+    <script type="text/javascript">
+
+        var main = new Main();
+        main.handleFooterView();
+
+//        $('#footerMoreLess').click(function() {
+//            $('#wrapper, footer').toggleClass('expandFooter');
+//            $(window).scrollTop($(document).height());
+//        });
+
     {#$(document).ready(function() {#}
     {#new Footer();#}
     {#new LanguageHandler();#}
     {#});#}
-    {#</script>#}
+    </script>
 
 {% endblock %}

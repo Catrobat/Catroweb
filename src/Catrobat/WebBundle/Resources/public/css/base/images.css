@@ -4,3 +4,19 @@
     background-image: url('/bundles/catrobatweb/images/symbols/sprite_icons_web.png');
     background-position: -131px -31px;
 }
+
+.img-more {
+    width: 10px;
+    height: 10px;
+    background-image: url('/bundles/catrobatweb/images/symbols/sprite_icons_web.png');
+    background-position: -117px -61px;
+    background-repeat: no-repeat;
+}
+
+.img-less {
+    width: 10px;
+    height: 10px;
+    background-image: url('/bundles/catrobatweb/images/symbols/sprite_icons_web.png');
+    background-position: -117px -72px;
+    background-repeat: no-repeat;
+}
