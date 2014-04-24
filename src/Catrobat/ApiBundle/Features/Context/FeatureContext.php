@@ -3,16 +3,13 @@
 namespace Catrobat\ApiBundle\Features\Context;
 
 use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 
-use Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Catrobat\CoreBundle\Entity\User;
-use Catrobat\CoreBundle\Entity\Project;
-use Behat\Behat\Event\SuiteEvent;
+use Catrobat\CoreBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,19 +18,17 @@ use Symfony\Component\Finder\Finder;
 //
 // Require 3rd-party libraries here:
 //
-require_once 'PHPUnit/Autoload.php';
+//require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
 /**
  * Feature context.
  */
-class FeatureContext extends BehatContext //MinkContext if you want to test web
-                  implements KernelAwareInterface
+class FeatureContext implements KernelAwareContext
 {
     const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
     private $kernel;
-    private $parameters;
 
     private $user;
     private $request_parameters;
@@ -45,9 +40,8 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      *
      * @param array $parameters
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
-        $this->parameters = $parameters;
         $this->request_parameters = array();
         $this->files = array();
     }
@@ -103,35 +97,35 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     }
     
     /**
-     * @Given /^there are projects:$/
+     * @Given /^there are programs:$/
      */
-    public function thereAreProjects(TableNode $table)
+    public function thereArePrograms(TableNode $table)
     {
     	$em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    	$projects = $table->getHash();
-    	for ($i = 0; $i < count($projects); $i++)
+    	$programs = $table->getHash();
+    	for ($i = 0; $i < count($programs); $i++)
     	{
     		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => 'Catrobat'));
-				$project = new Project();
-				$project->setUser($user);
-				$project->setName($projects[$i]['name']);
-				$project->setDescription($projects[$i]['description']);
-				$project->setFilename("file".$i.".catrobat");
-				$project->setThumbnail("thumb.png");
-				$project->setScreenshot("screenshot.png");
-				$project->setViews($projects[$i]['views']);
-				$project->setDownloads($projects[$i]['downloads']);
-				$project->setUploadedAt(new \DateTime($projects[$i]['upload time'],new \DateTimeZone('UTC')));
-				$project->setCatrobatVersion(1);
-				$project->setCatrobatVersionName($projects[$i]['version']);
-				$project->setLanguageVersion(1);
-				$project->setUploadIp("127.0.0.1");
-				$project->setRemixCount(0);
-				$project->setFilesize(0);
-				$project->setVisible(true);
-				$project->setUploadLanguage("en");
-				$project->setApproved(false);
-				$em->persist($project);
+				$program = new Program();
+				$program->setUser($user);
+				$program->setName($programs[$i]['name']);
+				$program->setDescription($programs[$i]['description']);
+				$program->setFilename("file".$i.".catrobat");
+				$program->setThumbnail("thumb.png");
+				$program->setScreenshot("screenshot.png");
+				$program->setViews($programs[$i]['views']);
+				$program->setDownloads($programs[$i]['downloads']);
+				$program->setUploadedAt(new \DateTime($programs[$i]['upload time'],new \DateTimeZone('UTC')));
+				$program->setCatrobatVersion(1);
+				$program->setCatrobatVersionName($programs[$i]['version']);
+				$program->setLanguageVersion(1);
+				$program->setUploadIp("127.0.0.1");
+				$program->setRemixCount(0);
+				$program->setFilesize(0);
+				$program->setVisible(true);
+				$program->setUploadLanguage("en");
+				$program->setApproved(false);
+				$em->persist($program);
     	}
     	$em->flush();
     }
@@ -205,7 +199,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     /**
      * @Then /^I should get the json object with random "([^"]*)" and "([^"]*)":$/
      */
-    public function iShouldGetTheJsonObjectWithRandomAndProjectid($arg1, $arg2, PyStringNode $string)
+    public function iShouldGetTheJsonObjectWithRandomAndProgramid($arg1, $arg2, PyStringNode $string)
     {
       $response = $this->client->getResponse();
       $responseArray = json_decode($response->getContent(),true);
@@ -216,18 +210,18 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     }
     
     /**
-     * @Then /^I should get projects in the following order:$/
+     * @Then /^I should get programs in the following order:$/
      */
-    public function iShouldGetProjectsInTheFollowingOrder(TableNode $table)
+    public function iShouldGetProgramsInTheFollowingOrder(TableNode $table)
     {
       $response = $this->client->getResponse();
       $responseArray = json_decode($response->getContent(),true);
-      $returned_projects = $responseArray['CatrobatProjects'];
-      $expected_projects = $table->getHash();
-      assertEquals(count($expected_projects), count($returned_projects), "Wrong number of returned projects");
-      for ($i = 0; $i < count($returned_projects); $i++)
+      $returned_programs = $responseArray['CatrobatProjects'];
+      $expected_programs = $table->getHash();
+      assertEquals(count($expected_programs), count($returned_programs), "Wrong number of returned programs");
+      for ($i = 0; $i < count($returned_programs); $i++)
       {
-        assertEquals($expected_projects[$i]["Name"], $returned_projects[$i]["ProjectName"], "Wrong order of results");
+        assertEquals($expected_programs[$i]["Name"], $returned_programs[$i]["ProjectName"], "Wrong order of results");
       }
     }
     
@@ -247,79 +241,6 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     {
       $response = json_decode($this->client->getResponse()->getContent(),true);
       assertTrue(is_numeric($response[$arg1]));
-    }
-    
-    /**
-     * @Given /^I am not registered$/
-     */
-    public function iAmNotRegistered()
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a username "([^"]*)"$/
-     */
-    public function iHaveAUsername($arg1)
-    {
-      //just a test input
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a password "([^"]*)"$/
-     */
-    public function iHaveAPassword($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a language "([^"]*)"$/
-     */
-    public function iHaveALanguage($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have an email address "([^"]*)"$/
-     */
-    public function iHaveAnEmailAddress($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @When /^I call "([^"]*)" the given data$/
-     */
-    public function iCallTheGivenData($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @When /^I call "([^"]*)" with username "([^"]*)" and password "([^"]*)"$/
-     */
-    public function iCallWithUsernameAndPassword($arg1, $arg2, $arg3)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have the username "([^"]*)"$/
-     */
-    public function iHaveTheUsername($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have a token "([^"]*)"$/
-     */
-    public function iHaveAToken($arg1)
-    {
-    	throw new PendingException();
     }
     
     /**
@@ -347,9 +268,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iHaveACatrobatFileWithAnInvalidCodeXml()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_invalid_code_xml.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_invalid_code_xml.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_invalid_code_xml.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_invalid_code_xml.catrobat");
     }
     
     /**
@@ -357,9 +278,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iHaveACatrobatFileWithAnMissingCodeXml()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_code_xml.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_missing_code_xml.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_missing_code_xml.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_missing_code_xml.catrobat");
     }
     
     /**
@@ -367,9 +288,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iHaveACatrobatFileWithAMissingImage()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_missing_image.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_missing_image.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_missing_image.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_missing_image.catrobat");
     }
     
     /**
@@ -377,9 +298,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iHaveACatrobatFileWithAnAdditionalImage()
     {
-        $filepath = self::FIXTUREDIR . "GeneratedFixtures/project_with_extra_image.catrobat";
+        $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_extra_image.catrobat";
         assertTrue(file_exists($filepath),"File not found");
-        $this->files[] = new UploadedFile($filepath,"project_with_extra_image.catrobat");
+        $this->files[] = new UploadedFile($filepath,"program_with_extra_image.catrobat");
     }
     
     /**
@@ -416,38 +337,6 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function iHaveAParameterWithTheMdchecksumOf($parameter, $file)
     {
       $this->request_parameters[$parameter] = md5_file($this->files[0]->getPathname()); 
-    }
-    
-    /**
-     * @When /^I call "([^"]*)" with the given data$/
-     */
-    public function iCallWithTheGivenData($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I want to search for the term "([^"]*)"$/
-     */
-    public function iWantToSearchForTheTerm($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have the limit "([^"]*)"$/
-     */
-    public function iHaveTheLimit($arg1)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^I have the offset "([^"]*)"$/
-     */
-    public function iHaveTheOffset($arg1)
-    {
-    	throw new PendingException();
     }
     
    private function emptyDirectory($directory)

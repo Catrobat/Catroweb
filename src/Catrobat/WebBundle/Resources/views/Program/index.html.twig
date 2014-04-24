@@ -1,0 +1,21 @@
+<article>
+	<header>{{ "programs.newest"|trans }} {{ app.request.locale }} </header>
+	<div class="programContainer">
+		<div id="newestPrograms" class="programContainer">
+			<ul style="height: 318px;">
+				{% for entity in entities %}
+				<li style="visibility: visible;">
+				  <a title="{{ entity.name }}" href="{{ path('program_show', { 'id': entity.id }) }}">
+				    <img alt="{{ entity.name }}" src="{{ entity.thumbnail }}">
+ 					<div class="programTitle">{{ entity.name }}</div>
+					<div class="programAddition">vor 4 Stunden</div>
+				</a>
+			    {% endfor %}
+			</ul>
+		</div>
+	</div>
+</article>
+
+
+
+

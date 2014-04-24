@@ -1,28 +1,23 @@
 default:
+    formatters:
+        pretty:   false
+        progress: true
     extensions:
-        Behat\Symfony2Extension\Extension:
-            bundle: CatrobatWebBundle
-            mink_driver: true
-        Behat\MinkExtension\Extension:
-            default_session: 'symfony2'
-
-web:
-    extensions:
-        Behat\Symfony2Extension\Extension:
-            bundle: CatrobatWebBundle
-        Behat\MinkExtension\Extension:
-            default_session: 'symfony2'
-
-api:
-    extensions:
-        Behat\Symfony2Extension\Extension:
-            bundle: CatrobatApiBundle
+        Behat\Symfony2Extension\Extension: 
             kernel:
                 env: testsqlite
                 debug: true
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
-#            directories: ["."]
-#            fixtures:    ~
+
+
+    suites:
+        api:
+            type: symfony_bundle
+            bundle: 'CatrobatApiBundle'
+        web:
+            type: symfony_bundle
+            bundle: 'CatrobatWebBundle'
+
             

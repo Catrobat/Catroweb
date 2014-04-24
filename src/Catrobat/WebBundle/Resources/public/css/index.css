@@ -66,14 +66,14 @@
   font-size: 1.6em;
 }
 
-#wrapper article div.projectContainer {
+#wrapper article div.programContainer {
   background-color: #00475d;
   margin-top: 0.2em;
   text-align: center;
   overflow: hidden;
 }
 
-#wrapper article div.projectContainer ul {
+#wrapper article div.programContainer ul {
 	float:left;
 	margin:auto;
 	padding:0;
@@ -82,7 +82,7 @@
 	left:50%;
 }
 
-#wrapper article div.projectContainer ul li {
+#wrapper article div.programContainer ul li {
 	display:inline-block;
 	position:relative;
 	left:-50%;
@@ -91,7 +91,7 @@
 	vertical-align: top;
 }
 
-#wrapper article div.projectContainer ul li img {
+#wrapper article div.programContainer ul li img {
 	border: 2px solid #a8dff4;
   width: 80px;
   height: 80px;
@@ -99,37 +99,37 @@
 	margin: auto;
 }
 
-#wrapper article div.projectContainer ul li div {
+#wrapper article div.programContainer ul li div {
 	white-space: nowrap;  
 	overflow: hidden;
 }
 
-#wrapper article div.projectContainer ul li a {
+#wrapper article div.programContainer ul li a {
   text-decoration: none; 
   color: #a8dff4; 
 }
 
-#wrapper article div.projectContainer ul li div.projectTitle {
+#wrapper article div.programContainer ul li div.programTitle {
 	text-align: left;
 	font-size: 0.8em;
 	font-weight: bold;
 	margin-top: 0.5em;
 }
 
-#wrapper article div.projectContainer ul li div.projectAddition {
+#wrapper article div.programContainer ul li div.programAddition {
 	text-align: left;
 	font-size: 0.7em;
 	font-weight: lighter;
 	line-height: 1.6;
 }
 
-#wrapper article div.projectContainer ul li div.projectLink {
+#wrapper article div.programContainer ul li div.programLink {
 	background-color: #05222a;
 	margin: 0.8em 0.4em 0.4em 0.4em;
 	border-radius: 3px;
 }
 
-#wrapper article div.projectContainer ul li div.projectLink a {
+#wrapper article div.programContainer ul li div.programLink a {
 	font-size: 1.4em;
 	text-transform: uppercase;
 	text-decoration: none;
@@ -137,13 +137,13 @@
 	font-weight: bold;
 }
 
-#wrapper article div.projectFooter {
+#wrapper article div.programFooter {
   padding-top: 0.7em;
   padding-bottom: 1.3em;
   text-align: center;
 }
 
-#wrapper article div.projectFooter p {
+#wrapper article div.programFooter p {
   background-color: #00475d;
   margin: 0;
   cursor: pointer;
@@ -152,20 +152,20 @@
   padding-top: 0.39em;
 }
 
-#wrapper article div.projectFooter img {
+#wrapper article div.programFooter img {
   margin-top: 3px;
 }
 
-#wrapper article div.projectFooter div {
+#wrapper article div.programFooter div {
   margin: auto;
   cursor: pointer;
 }
 
-#wrapper article div#newestProjectsLoader, #wrapper article div#mostDownloadedProjectsLoader, #wrapper article div#mostViewedProjectsLoader {
+#wrapper article div#newestProgramsLoader, #wrapper article div#mostDownloadedProgramsLoader, #wrapper article div#mostViewedProgramsLoader {
   display: none;
 }
 
-#wrapper article div.projectContainerFooter {
+#wrapper article div.programContainerFooter {
   background-color: #00475d;
   padding-bottom: 1em;
   margin-bottom: 2.8em;

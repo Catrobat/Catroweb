@@ -5,12 +5,12 @@ namespace Catrobat\CoreBundle\Services\Validators;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\CoreBundle\Events\ProjectBeforeInsertEvent;
+use Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent;
 
 class FileStructureValidator
 {
   
-  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event)
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile());
   }

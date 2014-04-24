@@ -1,5 +1,5 @@
 @api
-Feature: All uploaded projects have to be validated.
+Feature: All uploaded programs have to be validated.
 
   Background: 
     Given the upload folder is empty
@@ -10,7 +10,7 @@ Feature: All uploaded projects have to be validated.
       | User1    | vwxyz    | aaaaaaaaaa |
 
 
-  Scenario: project must have a code.xml
+  Scenario: program must have a code.xml
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a Catrobat file with an missing code.xml
@@ -21,7 +21,7 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":507,"answer":"unknown error: project_xml_not_found!","preHeaderMessages":""}
       """
 
-  Scenario: project must have a valid code.xml
+  Scenario: program must have a valid code.xml
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a Catrobat file with an invalid code.xml
@@ -33,7 +33,7 @@ Feature: All uploaded projects have to be validated.
       """
 
 
-  Scenario: project with missing images are rejected
+  Scenario: program with missing images are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a Catrobat file with a missing image
@@ -41,10 +41,10 @@ Feature: All uploaded projects have to be validated.
     When I POST these parameters to "/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":524,"answer":"Project XML metions a file which not exists in project-folder","preHeaderMessages":""}
+      {"statusCode":524,"answer":"Project XML mentions a file which not exists in project-folder","preHeaderMessages":""}
       """
 
-  Scenario: project with missing file checksum are rejected
+  Scenario: program with missing file checksum are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a valid Catrobat file
@@ -54,7 +54,7 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":503,"answer":"Client did not send fileChecksum! Are you using an outdated version of Pocket Code?","preHeaderMessages":""}
       """
 
-  Scenario: project with invalid file checksum are rejected
+  Scenario: program with invalid file checksum are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a valid Catrobat file
@@ -65,7 +65,7 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
       """
 
-  Scenario: project with media files not defined in xml are rejected
+  Scenario: program with media files not defined in xml are rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have a Catrobat file with an additional image
@@ -76,7 +76,7 @@ Feature: All uploaded projects have to be validated.
       {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
       """
 
-  Scenario: invalid catrobat project files should be rejected
+  Scenario: invalid catrobat program files should be rejected
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
     And I have an invalid Catrobat file
@@ -92,4 +92,4 @@ Feature: All uploaded projects have to be validated.
 
   Scenario: All media files except screenshots have to be defined in code.xml
 
-  Scenario: A project must have a name.
+  Scenario: A program must have a name.

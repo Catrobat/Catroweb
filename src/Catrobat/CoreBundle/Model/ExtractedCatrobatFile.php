@@ -6,7 +6,7 @@ use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 class ExtractedCatrobatFile
 {
   protected $path;
-  protected $project_xml_properties;
+  protected $program_xml_properties;
 
   public function __construct($base_dir)
   {
@@ -17,8 +17,8 @@ class ExtractedCatrobatFile
       throw new InvalidCatrobatFileException(InvalidCatrobatFileException::PROJECT_XML_MISSING);
     }
     
-    $this->project_xml_properties = @simplexml_load_file($base_dir . "code.xml");
-    if ($this->project_xml_properties === false)
+    $this->program_xml_properties = @simplexml_load_file($base_dir . "code.xml");
+    if ($this->program_xml_properties === false)
     {
       throw new InvalidCatrobatFileException(InvalidCatrobatFileException::INVALID_XML);
     }
@@ -26,17 +26,17 @@ class ExtractedCatrobatFile
 
   public function getName()
   {
-    return (string)$this->project_xml_properties->header->programName;
+    return (string)$this->program_xml_properties->header->programName;
   }
   
   public function getLanguageVersion()
   {
-    return (string)$this->project_xml_properties->header->catrobatLanguageVersion;
+    return (string)$this->program_xml_properties->header->catrobatLanguageVersion;
   }
   
   public function getDescription()
   {
-    return (string)$this->project_xml_properties->header->description;
+    return (string)$this->program_xml_properties->header->description;
   }
   
   public function getScreenshotPath()
@@ -59,7 +59,7 @@ class ExtractedCatrobatFile
   
   public function getApplicationVersion()
   {
-    return (string)$this->project_xml_properties->header->applicationVersion;
+    return (string)$this->program_xml_properties->header->applicationVersion;
   }
   
   public function getPath()
@@ -67,8 +67,8 @@ class ExtractedCatrobatFile
     return $this->path;
   }
   
-  public function getProjectXmlProperties()
+  public function getProgramXmlProperties()
   {
-    return $this->project_xml_properties;
+    return $this->program_xml_properties;
   }
 }

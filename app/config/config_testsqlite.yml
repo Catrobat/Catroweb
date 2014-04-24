@@ -14,3 +14,15 @@ parameters:
       catrobat.screenshot.path: "resources_test/screenshots/"
       catrobat.thumbnail.dir:   "%catrobat.webdir%resources_test/thumbnails/"
       catrobat.thumbnail.path:  "resources_test/thumbnails/"      
+
+monolog:
+    channels: ["upload"]
+    handlers:
+        upload:
+            type: stream
+            path: %kernel.logs_dir%/upload.log
+            channels: [upload]
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug

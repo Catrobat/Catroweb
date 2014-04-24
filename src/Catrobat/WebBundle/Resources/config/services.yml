@@ -1,5 +1,5 @@
 parameters:
-      catrobat.web.project.controller.class: Catrobat\WebBundle\Controller\ProjectController
+      catrobat.web.program.controller.class: Catrobat\WebBundle\Controller\ProgramController
 
 services:
 # =========================== Kernel Listener ===========================
@@ -10,14 +10,14 @@ services:
 
 # =========================== Controller ===========================
 
-      catrobat.web.project.controller:
-              class: "%catrobat.web.project.controller.class%"
-              arguments: ["@templating", "@catrobat.core.model.projectmanager"]
+      catrobat.web.program.controller:
+              class: "%catrobat.web.program.controller.class%"
+              arguments: ["@templating", "@catrobat.core.model.programmanager"]
 
               
 # =========================== TWIG ===========================
-      catrobat.twig.project.assets:
-              class: Catrobat\WebBundle\Twig\ProjectAssetsExtension
+      catrobat.twig.program.assets:
+              class: Catrobat\WebBundle\Twig\ProgramAssetsExtension
               arguments: ["@catrobat.core.services.screenshot.repository"]
               tags:
                   - { name: twig.extension }              

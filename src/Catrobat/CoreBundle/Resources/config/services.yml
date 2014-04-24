@@ -1,8 +1,8 @@
 parameters:
       catrobat.webdir:                  "%kernel.root_dir%/../web/"
       catrobat.file.extract.dir:        "%kernel.root_dir%/../web/resources/extract/"
-      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources/projects/"
-      catrobat.file.storage.path:        "resources/projects/"
+      catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources/programs/"
+      catrobat.file.storage.path:        "resources/programs/"
       catrobat.screenshot.dir:  "%catrobat.webdir%resources/screenshots/"
       catrobat.screenshot.path: "resources/screenshots/"
       catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
@@ -10,21 +10,21 @@ parameters:
 
 services:
 
-      catrobat.core.model.projectrepository:
-            class: CoreBundle\Entity\ProjectRepository
+      catrobat.core.model.programrepository:
+            class: CoreBundle\Entity\ProgramRepository
             factory_service: doctrine.orm.entity_manager
             factory_method: getRepository
             arguments:
-                - "CatrobatCoreBundle:Project"
+                - "CatrobatCoreBundle:Program"
                 
-      catrobat.core.model.projectmanager:
-            class: Catrobat\CoreBundle\Model\ProjectManager
+      catrobat.core.model.programmanager:
+            class: Catrobat\CoreBundle\Model\ProgramManager
             arguments: 
                 - "@catrobat.core.services.file.extractor"
                 - "@catrobat.core.services.file.repository"
                 - "@catrobat.core.services.screenshot.repository"
                 - "@doctrine.orm.entity_manager"
-                - "@catrobat.core.model.projectrepository"
+                - "@catrobat.core.model.programrepository"
                 - "@event_dispatcher"
             tags:
             -  { name:  "knp_paginator.injectable" }
@@ -38,7 +38,7 @@ services:
               arguments:    ["%catrobat.file.extract.dir%"]
 
       catrobat.core.services.file.repository:
-              class:        Catrobat\CoreBundle\Services\ProjectFileRepository
+              class:        Catrobat\CoreBundle\Services\ProgramFileRepository
               arguments:    ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
 
       catrobat.core.services.screenshot.repository:
@@ -47,3 +47,10 @@ services:
               
       catrobat.core.services.tokengenerator:
               class:        Catrobat\CoreBundle\Services\TokenGenerator
+
+      catrobat.core.services.invalidprogramuploadlogger:
+              class:        Catrobat\CoreBundle\Services\InvalidProgramUploadLogger
+              arguments:    ["@logger"]
+              tags:
+                  - { name: monolog.logger, channel: upload }
+                  - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }

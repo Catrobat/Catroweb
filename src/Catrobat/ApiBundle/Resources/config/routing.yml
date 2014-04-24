@@ -13,13 +13,13 @@ catrobat_api_upload:
     methods: [POST]
     defaults: { _controller: 'catrobat.api.controller.upload:uploadAction', _format: json}
     
-catrobat_api_search_projects:
+catrobat_api_search_programs:
     pattern:  /api/projects/search.json
     methods: [POST, GET]
-    defaults: { _controller: 'catrobat.api.controller.search:searchProjectsAction', _format: json }
+    defaults: { _controller: 'catrobat.api.controller.search:searchProgramsAction', _format: json }
 
-catrobat_api_recent_projects:
+catrobat_api_recent_programs:
     pattern:  /api/projects/recent.json
     methods: [POST, GET]
-    defaults: { _controller: 'catrobat.api.controller.search:recentProjectsAction', _format: json }
+    defaults: { _controller: 'catrobat.api.controller.search:recentProgramsAction', _format: json }
     
