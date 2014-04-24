@@ -5,7 +5,11 @@
     <nav role="navigation">
         <div id="largeMenu">
             <div class="catroidLink">
-                <a href="{{ path('catroweb_index') }}"><img id="logo" src="{{ asset("bundles/catroweb/images/logo/logo_text.png") }}" alt="" /></a>
+                <a href="{{ path('catroweb_index') }}">
+                    {% image '@CatrobatWebBundle/Resources/public/images/logo/logo_text.png' %}
+                    <img src="{{ asset_url }}" alt="" />
+                    {% endimage %}
+                </a>
             </div>
 
             <div id="largeSearchButton" class="largeSearchBarLeft">

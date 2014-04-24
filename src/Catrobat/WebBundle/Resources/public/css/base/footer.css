@@ -1,7 +1,8 @@
 footer {
+    height: 157px;
+    margin-top: -157px !important; /* footer height */
     background-color: #177f8d;
     color: #FFF;
-    margin-bottom: 10px;
 }
 
 footer #largeFooterMenu {
@@ -87,4 +88,11 @@ footer #footerBottomMenu select {
     background-color: #96CED6;
     color: #05222a;
     padding: 5px 7px;
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        height: 230px;
+        margin-top: -230px !important; /* footer height */
+    }
 }
