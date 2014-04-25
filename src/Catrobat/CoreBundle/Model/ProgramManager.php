@@ -118,7 +118,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
 
   public function search($query, $limit=10, $offset=0)
   {
-    return $this->program_repository->findBy(array('name' => $query),array('views' => 'desc'), $limit, $offset);
+    $qb = $this->program_repository->createQueryBuilder('e');
+    return $qb->select('e')->where($qb->expr()->like('e.name','?1'))->setParameter(1,'%'.$query.'%')->orderBy('e.uploaded_at', 'DESC')->setFirstResult($offset)->setMaxResults($limit)->getQuery()->getResult();
+    //return $this->program_repository->findBy(array('name' => $query),array('views' => 'desc'), $limit, $offset);
   }
   
   
