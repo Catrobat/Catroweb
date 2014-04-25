@@ -41,7 +41,7 @@ class SearchController
         $new_program['Views'] = $program->getViews();
         $new_program['Downloads'] = $program->getDownloads();
         $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-        $new_program['UploadedString'] = "0";
+        $new_program['UploadedString'] = '0';
         $new_program['ScreenshotBig'] = "resources/thumbnails/" . $program->getId() . "_large.png";
         $new_program['ScreenshotSmall'] = "resources/thumbnails/"  . $program->getId() . "_small.png";
         $new_program['ProjectUrl'] = "details/" . $program->getId();

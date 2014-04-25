@@ -109,7 +109,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     	$programs = $table->getHash();
     	for ($i = 0; $i < count($programs); $i++)
     	{
-    		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => 'Catrobat'));
+    		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => $programs[$i]['owned by']));
 				$program = new Program();
 				$program->setUser($user);
 				$program->setName($programs[$i]['name']);
@@ -133,8 +133,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     	}
     	$em->flush();
     }
-    
-    /**
+
+  /**
      * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
      */
     public function iHaveAParameterWithValue($name, $value)
