@@ -10,3 +10,4 @@
 /coverage
 /phpspec.yml
 .idea/workspace.xml
+.idea/uiDesigner.xml
