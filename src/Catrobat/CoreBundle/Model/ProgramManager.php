@@ -100,17 +100,17 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   
   public function findByOrderedByDownloads($limit = null, $offset = null)
   {
-    return $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.downloads', 'DESC')->setFirstResult($offset)->setMaxResults($limit)->getQuery()->getResult();
+    return $this->program_repository->findByOrderedByDownloads($limit, $offset);
   }
 
   public function findByOrderedByViews($limit = null, $offset = null)
   {
-    return $this->program_repository->findBy(array(),array('views' => 'desc'), $limit, $offset);
+    return $this->program_repository->findByOrderedByViews($limit, $offset);
   }
   
   public function findByOrderedByDate($limit = 1, $offset = 1)
   {
-    return $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC')->setFirstResult($offset)->setMaxResults($limit)->getQuery()->getResult();
+    return $this->program_repository->findByOrderedByDate($limit, $offset);
 //    $offset = $offset / $limit;
 //    $query = $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC');
 //    return $this->pagination->paginate($query, 1, $limit);
@@ -118,10 +118,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
 
   public function search($query, $limit=10, $offset=0)
   {
-    $qb = $this->program_repository->createQueryBuilder('e');
-    return $qb->select('e')->where($qb->expr()->like('e.name','?1'))->setParameter(1,'%'.$query.'%')->orderBy('e.uploaded_at', 'DESC')->setFirstResult($offset)->setMaxResults($limit)->getQuery()->getResult();
-    //return $this->program_repository->findBy(array('name' => $query),array('views' => 'desc'), $limit, $offset);
+    return $this->program_repository->search($query, $limit, $offset);
   }
-  
-  
+
 }
