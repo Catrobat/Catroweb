@@ -59,7 +59,7 @@ class SearchController
 //      $retArray['author'] = $entities->getUser()->getUsername();
 //      $retArray['uploaded_time'] = $entities->getUploadedAt()->getTimestamp();
 //      $retArray['catrobat_version_name'] = $entities->getCatrobatVersionName();
-
+     // print_r($programs);
       return $this->templating->renderResponse('CatrobatApiBundle:Api:searchPrograms.json.twig', array('b' => $retArray));
     }
     

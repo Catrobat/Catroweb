@@ -106,6 +106,41 @@ Feature: Search in the program repository
 }
 """
 
+#  Scenario: search program by name
+#    Given I have a parameter "q" with value "NewUs"
+#    And I have a parameter "limit" with value "1"
+#    And I have a parameter "offset" with value "0"
+#    When I GET "/api/projects/search.json" with these parameters
+#    Then I should get the json object:
+#    """
+#{
+#  "completeTerm":"",
+#  "CatrobatInformation": {
+#		"BaseUrl":"https:\/\/localhost\/",
+#		"TotalProjects":1,
+#		"ProjectsExtension":".catrobat"
+#  },
+#  "CatrobatProjects":[{
+#  		"ProjectId":5,
+#		"ProjectName":"MarkoTheBest",
+#		"ProjectNameShort":"MarkoTheBest",
+#		"ScreenshotBig":"resources\/thumbnails\/5_large.png",
+#		"ScreenshotSmall":"resources\/thumbnails\/5_small.png",
+#		"Author":"NewUs",
+#		"Description":"",
+#		"Uploaded":1325422800,
+#		"UploadedString":0,
+#		"Version":"0.8.5",
+#		"Views":"33",
+#		"Downloads":"335",
+#		"ProjectUrl":"details\/5",
+#		"DownloadUrl":"download\/5.catrobat"
+#  }],
+#  "preHeaderMessages":""
+#}
+#"""
+
+
 
 #
 #
