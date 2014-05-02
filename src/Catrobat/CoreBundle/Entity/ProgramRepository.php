@@ -52,7 +52,7 @@ class ProgramRepository extends EntityRepository
   public function search($query, $limit=10, $offset=0)
   {
     $query = '%'.$query.'%';
-    $qb_program = $this->getEntityManager()->getRepository('CatrobatCoreBundle:Program')->createQueryBuilder('e');
+    $qb_program = $this->createQueryBuilder('e');
     $result = $qb_program->select('e')
       ->leftJoin('e.user',"f")
       ->where($qb_program->expr()->like('e.name','?1'))
