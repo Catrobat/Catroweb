@@ -6,7 +6,7 @@ Feature: Search in the program repository
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
-      | NewUser    | 54321    | bbbbbbbbbb |
+      | NewUser  | 54321    | bbbbbbbbbb |
     And there are programs:
       | id | name             | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War       | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -22,7 +22,7 @@ Feature: Search in the program repository
 
 
   Scenario: search program by name
-    Given I have a parameter "q" with value "Galaxy War"
+    Given I have a parameter "q" with value "Galaxy"
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
     When I GET "/api/projects/search.json" with these parameters
@@ -44,7 +44,7 @@ Feature: Search in the program repository
 		"Author":"User1",
 		"Description":"p1",
 		"Uploaded":1357041600,
-		"UploadedString":'0',
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"12",
 		"Downloads":"3",
@@ -78,7 +78,7 @@ Feature: Search in the program repository
 		"Author":"Catrobat",
 		"Description":"",
 		"Uploaded":1328101200,
-		"UploadedString":0,
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"33",
 		"Downloads":"2",
@@ -94,7 +94,7 @@ Feature: Search in the program repository
 		"Author":"NewUser",
 		"Description":"",
 		"Uploaded":1325422800,
-		"UploadedString":0,
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"33",
 		"Downloads":"335",
@@ -129,7 +129,7 @@ Feature: Search in the program repository
 		"Author":"NewUser",
 		"Description":"",
 		"Uploaded":1325422800,
-		"UploadedString":0,
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"33",
 		"Downloads":"335",
@@ -183,7 +183,7 @@ Feature: Search in the program repository
 		"Author":"User1",
 		"Description":"p1",
 		"Uploaded":1357041600,
-		"UploadedString":'0',
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"12",
 		"Downloads":"3",
@@ -199,7 +199,7 @@ Feature: Search in the program repository
 		"Author":"User1",
 		"Description":"p1 p2 p3",
 		"Uploaded":1325419200,
-		"UploadedString":0,
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"33",
 		"Downloads":"4",
@@ -234,7 +234,7 @@ Feature: Search in the program repository
 		"Author":"User1",
 		"Description":"p2",
 		"Uploaded":1325422800,
-		"UploadedString":0,
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"33",
 		"Downloads":"245",
@@ -250,7 +250,7 @@ Feature: Search in the program repository
 		"Author":"User1",
 		"Description":"p1 p2 p3",
 		"Uploaded":1325419200,
-		"UploadedString":0,
+		"UploadedString":"0",
 		"Version":"0.8.5",
 		"Views":"33",
 		"Downloads":"4",
