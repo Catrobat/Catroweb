@@ -80,7 +80,7 @@ fos_user:
         group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm
 
     service:
-        user_manager: sonata.user.orm.user_manager
+        user_manager: catrobat.core.model.usermanager
 
 # Sonata Configuration
 sonata_block:
@@ -155,11 +155,10 @@ sonata_doctrine_orm_admin:
                 integer:   SonataAdminBundle:CRUD:base_show_field.html.twig
                 decimal:   SonataAdminBundle:CRUD:base_show_field.html.twig
 
-
 sonata_user:
     security_acl:  true
     manager_type:  orm
     class:
-        user:               Catrobat\CoreBundle\Entity\User
-        group:              Catrobat\CoreBundle\Entity\Group
+        user:   Catrobat\CoreBundle\Entity\User
+        group:  Catrobat\CoreBundle\Entity\Group
 
