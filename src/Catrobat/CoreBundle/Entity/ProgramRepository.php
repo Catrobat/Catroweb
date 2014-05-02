@@ -57,6 +57,7 @@ class ProgramRepository extends EntityRepository
       ->leftJoin('e.user',"f")
       ->where($qb_program->expr()->like('e.name','?1'))
         ->orWhere($qb_program->expr()->like('f.username','?1'))
+          ->orWhere($qb_program->expr()->like('e.description','?1'))
       ->setParameter(1, $query)
       ->orderBy('e.uploaded_at', 'DESC')
       ->setFirstResult($offset)
