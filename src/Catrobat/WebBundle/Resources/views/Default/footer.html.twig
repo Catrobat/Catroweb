@@ -1,0 +1,69 @@
+{#{% extends 'CatrobatWebBundle::base.html.twig' %}#}
+
+{% block footer %}
+    <div id="largeFooterMenu">
+        <div id="leftFooterMenu">
+            <ul>
+                <li><a href="/tutorial">Tutorial</a></li>
+                <li><a href="http://www.catrobat.org" target="_blank">About</a></li>
+                <li><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">Google Play</a></li>
+            </ul>
+            <ul>
+                <li><a href="http://developer.catrobat.org/privacy_policy" target="_blank">Privacy Policy</a></li>
+                <li><a href="/termsOfUse">Terms of Use</a></li>
+                <li><a href="http://developer.catrobat.org/imprint" target="_blank">Imprint</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div id="rightFooterMenu">
+            <span id="footerSearchButton" class="img-magnifying-glass"></span>
+            <span id="footerSearchField">
+                <h2>Search</h2>
+              <input type="search" placeholder="Search..." />
+            </span>
+        </div>
+    </div>
+    <div id="footerBottomMenu">
+        <div>
+            <select id="switchLanguage">
+                <option value="zh-CN">‪中文（简体中文）‬</option>
+                <option value="zh-TW">‪中文 (繁體中文)‬</option>
+                <option value="en">‪English (United States)‬</option>
+                <option selected value="de">‪Deutsch‬</option>
+                <option value="ja">‪日本語‬</option>
+                <option value="ms">‪Bahasa Melayu‬</option>
+                <option value="ro">‪română‬</option>
+                <option value="ru">‪русский‬</option>
+            </select>
+        </div>
+        <div id="footerCopyright">
+            <a href="http://www.catrobat.org" target="_blank">&copy; Catrobat</a>
+        </div>
+        <div id="footerMoreLess">
+            <span id="footerMoreButton">
+                <span class="img-more"></span><span>more</span>
+            </span>
+            <span id="footerLessButton">
+              <span class="img-less"></span>less
+            </span>
+        </div>
+    </div>
+
+    <div id="mobileFooterMenu">
+        <ul>
+            <li><a href="/tutorial">Tutorial</a></li>
+            <li><a href="http://www.catrobat.org" target="_blank">About</a></li>
+            <li><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">Google Play</a></li>
+            <li><a href="http://developer.catrobat.org/privacy_policy" target="_blank">Privacy Policy</a></li>
+            <li><a href="/termsOfUse">Terms of Use</a></li>
+            <li><a href="http://developer.catrobat.org/imprint" target="_blank">Imprint</a></li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        var main = new Main();
+        main.handleFooterView();
+        main.handleLanguage();
+    </script>
+
+{% endblock %}

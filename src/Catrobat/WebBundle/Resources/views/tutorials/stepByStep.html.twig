@@ -1,0 +1,13 @@
+{% extends 'CatrobatWebBundle:Default:base.html.twig' %}
+
+{% block head %}
+    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/tutorial.css' filter='cssrewrite,lessphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block body %}
+    Tutorial - StepByStep
+{% endblock %}
+

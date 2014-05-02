@@ -1,5 +1,6 @@
 parameters:
-      catrobat.web.program.controller.class: Catrobat\WebBundle\Controller\ProgramController
+      catrobat.web.default.controller.class: Catrobat\WebBundle\Controller\DefaultController
+      catrobat.web.tutorial.controller.class: Catrobat\WebBundle\Controller\TutorialController
 
 services:
 # =========================== Kernel Listener ===========================
@@ -9,10 +10,13 @@ services:
                   - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
 # =========================== Controller ===========================
+      catrobat.web.default.controller:
+                          class: "%catrobat.web.default.controller.class%"
+                          arguments: ["@templating", "@catrobat.core.model.programmanager"]
 
-      catrobat.web.program.controller:
-              class: "%catrobat.web.program.controller.class%"
-              arguments: ["@templating", "@catrobat.core.model.programmanager"]
+      catrobat.web.tutorial.controller:
+              class: "%catrobat.web.tutorial.controller.class%"
+              arguments: ["@templating"]
 
               
 # =========================== TWIG ===========================
@@ -20,4 +24,4 @@ services:
               class: Catrobat\WebBundle\Twig\ProgramAssetsExtension
               arguments: ["@catrobat.core.services.screenshot.repository"]
               tags:
-                  - { name: twig.extension }              
+                  - { name: twig.extension }

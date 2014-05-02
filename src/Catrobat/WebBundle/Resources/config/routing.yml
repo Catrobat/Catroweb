@@ -1,45 +1,63 @@
 ################## index ################## 
-
-catroweb_index:
+catrobat_web_index:
     path: /
-    defaults: { _controller: "catrobat.web.program.controller:indexAction" }
+    defaults: { _controller: "catrobat.web.default.controller:indexAction" }
 
-catroweb_index_locale:
+catrobat_web_index_locale:
     path: /{_locale}/
-    defaults: { _controller: "catrobat.web.program.controller:indexAction", _locale: en }
+    defaults: { _controller: "catrobat.web.default.controller:indexAction", _locale: en }
     requirements:
         _locale:  en|de    
         
-################## featured ################## 
-
-catroweb_featured:
-    resource: "@CatrobatWebBundle/Controller/FeaturedProgramController.php"
-    type:     annotation
- 
-################## program listings ################## 
-
-catroweb_most_downloaded:
-    path:      /most-downloaded.{_format}
-    methods:  [GET]
-    defaults:  { _controller: "catrobat.web.program.controller:mostDownloadedAction", _format: html }
-    requirements:
-      _format:  html|json
-
-catroweb_most_viewed:
-    path:      /most-viewed
-    methods:  [GET]
-    defaults:  { _controller: "catrobat.web.program.controller:mostViewedAction" }
-
-catroweb_newest:
-    path:      /newest
-    methods:  [GET]
-    defaults:  { _controller: "catrobat.web.program.controller:newestAction" }
-
-################## program details ################## 
-
-program_show:
+################## program details ##################
+catrobat_web_program:
     path:      /programs/{id}
     methods:  [GET]
-    defaults:  { _controller: "catrobat.web.program.controller:showAction" }
+    defaults:  { _controller: "catrobat.web.default.controller:programAction" }
     requirements:
-      page:  \d+
+      id:  \d+
+
+catrobat_web_profile:
+    path:      /profile/{id}
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.default.controller:profileAction" }
+    requirements:
+      id:  \d+
+
+catrobat_web_tutorial:
+    path:      /tutorial
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:tutorialAction" }
+
+catrobat_web_tutorials:
+    path:      /tutorial/tutorials
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:tutorialsAction" }
+
+catrobat_web_stepByStep:
+    path:      /tutorial/stepByStep
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:stepByStepAction" }
+
+catrobat_web_starter:
+    path:      /tutorial/starterPrograms
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.tutorial.controller:starterProgramsAction" }
+
+catrobat_web_termsOfUse:
+    path:      /termsOfUse
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.default.controller:termsOfUseAction" }
+
+catrobat_web_licenseToPlay:
+    path:      /licenseToPlay
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.default.controller:licenseToPlayAction" }
+
+# Same as /programs ... just for compatibility reason again with /details
+catrobat_web_detail:
+    path:      /details/{id}
+    methods:  [GET]
+    defaults:  { _controller: "catrobat.web.default.controller:programAction" }
+    requirements:
+      id:  \d+
