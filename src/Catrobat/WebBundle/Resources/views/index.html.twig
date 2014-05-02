@@ -1,0 +1,32 @@
+{% extends 'CatrobatWebBundle:Default:base.html.twig' %}
+
+{% block head %}
+    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/index.css' filter='cssrewrite,lessphp' %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+    <div id="featuredPrograms">
+      <h1>Featured</h1>
+      <div class="programs">[][][][][]</div>
+    </div>
+
+    <div id="newest">
+      <h1>Newest</h1>
+      <div class="programs">[][][][][]</div>
+    </div>
+
+    <div id="mostDownloaded">
+        <h1>Most Downloaded</h1>
+      <div class="programs">[][][][][]</div>
+    </div>
+
+    <div id="mostViewed">
+        <h1>Most Viewed</h1>
+      <div class="programs">[][][][][]</div>
+    </div>
+
+{% endblock %}
+
