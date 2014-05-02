@@ -12,10 +12,10 @@ Feature: Search in the program repository
       | 1  | Galaxy War       | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | Minions          |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
       | 3  | Fisch            |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 4  | Ponny            |             | User1    | 245       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 4  | Ponny            | p2          | User1    | 245       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 5  | MarkoTheBest     |             | NewUser  | 335       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 6  | Whack the Marko  |             | Catrobat | 2         | 33    | 01.02.2012 13:00 | 0.8.5   |
-      | 7  | Superponny       |             | User1    | 4         | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 7  | Superponny       | p1 p2 p3    | User1    | 4         | 33    | 01.01.2012 12:00 | 0.8.5   |
       | 8  | Universe         |             | User1    | 23        | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 9  | Webteam          |             | User1    | 100       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 10 | Fritz the Cat    |             | User1    | 112       | 33    | 01.01.2012 13:00 | 0.8.5   |
@@ -146,7 +146,7 @@ Feature: Search in the program repository
     And I have a parameter "offset" with value "0"
     When I GET "/api/projects/search.json" with these parameters
     Then I should get the json object:
-    """
+"""
 {
   "completeTerm":"",
   "CatrobatInformation": {
@@ -155,6 +155,109 @@ Feature: Search in the program repository
 		"ProjectsExtension":".catrobat"
   },
   "CatrobatProjects":[],
+  "preHeaderMessages":""
+}
+"""
+
+
+  Scenario: search program by description
+    Given I have a parameter "q" with value "p1"
+    And I have a parameter "limit" with value "10"
+    And I have a parameter "offset" with value "0"
+    When I GET "/api/projects/search.json" with these parameters
+    Then I should get the json object:
+"""
+{
+  "completeTerm":"",
+  "CatrobatInformation": {
+		"BaseUrl":"https:\/\/localhost\/",
+		"TotalProjects":1,
+		"ProjectsExtension":".catrobat"
+  },
+  "CatrobatProjects":[{
+		"ProjectId":1,
+		"ProjectName":"Galaxy War",
+		"ProjectNameShort":"Galaxy War",
+		"ScreenshotBig":"resources\/thumbnails\/1_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+		"Author":"User1",
+		"Description":"p1",
+		"Uploaded":1357041600,
+		"UploadedString":'0',
+		"Version":"0.8.5",
+		"Views":"12",
+		"Downloads":"3",
+		"ProjectUrl":"details\/1",
+		"DownloadUrl":"download\/1.catrobat"
+  },
+  {
+  		"ProjectId":7,
+		"ProjectName":"Superponny",
+		"ProjectNameShort":"Superponny",
+		"ScreenshotBig":"resources\/thumbnails\/7_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/7_small.png",
+		"Author":"User1",
+		"Description":"p1 p2 p3",
+		"Uploaded":1325419200,
+		"UploadedString":0,
+		"Version":"0.8.5",
+		"Views":"33",
+		"Downloads":"4",
+		"ProjectUrl":"details\/7",
+		"DownloadUrl":"download\/7.catrobat"
+
+  }],
+  "preHeaderMessages":""
+}
+"""
+
+  Scenario: search program by description
+    Given I have a parameter "q" with value "p2"
+    And I have a parameter "limit" with value "10"
+    And I have a parameter "offset" with value "0"
+    When I GET "/api/projects/search.json" with these parameters
+    Then I should get the json object:
+"""
+{
+  "completeTerm":"",
+  "CatrobatInformation": {
+		"BaseUrl":"https:\/\/localhost\/",
+		"TotalProjects":1,
+		"ProjectsExtension":".catrobat"
+  },
+  "CatrobatProjects":[{
+		"ProjectId":4,
+		"ProjectName":"Ponny",
+		"ProjectNameShort":"Ponny",
+		"ScreenshotBig":"resources\/thumbnails\/4_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/4_small.png",
+		"Author":"User1",
+		"Description":"p2",
+		"Uploaded":1325422800,
+		"UploadedString":0,
+		"Version":"0.8.5",
+		"Views":"33",
+		"Downloads":"245",
+		"ProjectUrl":"details\/4",
+		"DownloadUrl":"download\/4.catrobat"
+  },
+  {
+  		"ProjectId":7,
+		"ProjectName":"Superponny",
+		"ProjectNameShort":"Superponny",
+		"ScreenshotBig":"resources\/thumbnails\/7_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/7_small.png",
+		"Author":"User1",
+		"Description":"p1 p2 p3",
+		"Uploaded":1325419200,
+		"UploadedString":0,
+		"Version":"0.8.5",
+		"Views":"33",
+		"Downloads":"4",
+		"ProjectUrl":"details\/7",
+		"DownloadUrl":"download\/7.catrobat"
+
+  }],
   "preHeaderMessages":""
 }
 """
@@ -249,41 +352,6 @@ Feature: Search in the program repository
 #}
 #"""
 #
-#
-#  @TODO
-#  Scenario: search programs by description
-#    Given I have a parameter "Description" with value "p1"
-#    And I have a parameter "limit" with value "10"
-#    And I have a parameter "offset" with value "0"
-#    When I POST these parameters to "/api/projects/search.json"
-#    Then I should get the json object:
-#"""
-#{
-#  "completeTerm":"",
-#  "CatrobatInformation": {
-#		"BaseUrl":"https:\/\/localhost\/",
-#		"TotalProjects":3,
-#		"ProjectsExtension":".catrobat"
-#  },
-#  "CatrobatProjects":[{
-#		"ProjectId":"1",
-#		"ProjectName":"program 1",
-#		"ProjectNameShort":"program 1",
-#		"ScreenshotBig":"resources\/thumbnails\/1_large.png",
-#		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
-#		"Author":"Catrobat",
-#		"Description":"p1",
-#		"Uploaded":"1357041600",
-#		"UploadedString":<timestring>,
-#		"Version":"0.8.5",
-#		"Views":"12",
-#		"Downloads":"3",
-#		"ProjectUrl":"details\/1",
-#		"DownloadUrl":"download\/1.catrobat"
-#  }],
-#  "preHeaderMessages":""
-#}
-#"""
 #
 #
 #  @TODO
