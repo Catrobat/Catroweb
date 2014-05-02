@@ -2,25 +2,11 @@
 
 namespace Catrobat\WebBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Catrobat\CoreBundle\Entity\Program;
-use Catrobat\WebBundle\Form\ProgramType;
-use Symfony\Component\Validator\Constraints\Range;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Templating\EngineInterface;
-use Catrobat\CoreBundle\Model\ProgramManager;
 
-/**
- * Program controller.
- *
- * @Route("/tutorial")
- */
-class TutorialController
+
+class TutorialController extends Controller
 {
   protected $templating;
   

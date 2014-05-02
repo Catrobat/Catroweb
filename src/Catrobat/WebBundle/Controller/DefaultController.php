@@ -2,8 +2,8 @@
 
 namespace Catrobat\WebBundle\Controller;
 
-use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 class DefaultController extends Controller
