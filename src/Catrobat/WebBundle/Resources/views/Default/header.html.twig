@@ -1,0 +1,36 @@
+{#{% extends 'CatrobatWebBundle::base.html.twig' %}#}
+
+{% block header %}
+
+    <nav role="navigation">
+        <div id="largeMenu">
+            <div class="catroidLink">
+                <a href="{{ path('catrobat_web_index') }}">
+                    {% image '@CatrobatWebBundle/Resources/public/images/logo/logo_text.png' %}
+                    <img src="{{ asset_url }}" alt="" />
+                    {% endimage %}
+                </a>
+            </div>
+
+            <div id="largeSearchButton" class="largeSearchBarLeft">
+                <button class="img-magnifying-glass"></button>
+            </div>
+
+            <div class="largeSearchBarMiddle">
+                <input type="search" placeholder="" />
+            </div>
+
+            <div id="largeMenuButton" class="largeSearchBarRight">
+                <button class="img-avatar"></button>
+            </div>
+        </div>
+
+        <div id="navigationMenu">
+            <ul>
+                <li id="menuProfileButton"><div class="img-author-big">my profile</div></li>
+                <li id="menuLogoutButton"><div class="img-logout">logout</div></li>
+            </ul>
+        </div>
+    </nav>
+
+{% endblock %}
