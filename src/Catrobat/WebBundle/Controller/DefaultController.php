@@ -2,27 +2,61 @@
 
 namespace Catrobat\WebBundle\Controller;
 
+use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 class DefaultController extends Controller
 {
+    protected $templating;
+    protected $program_manager;
+
+    public function __construct(EngineInterface $templating, ProgramManager $program_manager)
+    {
+        $this->templating = $templating;
+        $this->program_manager = $program_manager;
+    }
+
     public function headerAction()
     {
-        return $this->render('CatrobatWebBundle:Default:header.html.twig');
+        return $this->templating->renderResponse('CatrobatWebBundle:Default:header.html.twig');
     }
 
     public function footerAction()
     {
-        return $this->render('CatrobatWebBundle:Default:footer.html.twig');
+        return $this->templating->renderResponse('CatrobatWebBundle:Default:footer.html.twig');
     }
 
-    public function showTermsOfUseAction()
+    public function indexAction()
     {
-        return $this->render('CatrobatWebBundle::termsOfUse.html.twig');
+        return $this->templating->renderResponse('CatrobatWebBundle::index.html.twig');
     }
 
-    public function showLicenseToPlayAction()
+    public function programAction($id)
     {
-      return $this->render('CatrobatWebBundle::licenseToPlay.html.twig');
+        $entity = $this->program_manager->find($id);
+
+        if (! $entity)
+        {
+            throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        return $this->templating->renderResponse('CatrobatWebBundle::detail.html.twig', array("entity" => $entity));
+    }
+
+    public function profileAction($id)
+    {
+        $entity = $id;
+
+        return $this->templating->renderResponse('CatrobatWebBundle::profile.html.twig', array("entity" => $entity));
+    }
+
+    public function termsOfUseAction()
+    {
+        return $this->templating->renderResponse('CatrobatWebBundle::termsOfUse.html.twig');
+    }
+
+    public function licenseToPlayAction()
+    {
+        return $this->templating->renderResponse('CatrobatWebBundle::licenseToPlay.html.twig');
     }
 }

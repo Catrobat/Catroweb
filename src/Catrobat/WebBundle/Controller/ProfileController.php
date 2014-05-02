@@ -29,15 +29,11 @@ class ProfileController
     $this->templating = $templating;
   }
 
-  public function showAction($id)
+  public function profileAction($id)
   {
-//    $entity = $this->program_manager->find($id);
+    $entity = $id;
 
-//    if (! $entity)
-//    {
-//      throw $this->createNotFoundException('Unable to find Project entity.');
-//    }
-    return $this->templating->renderResponse('CatrobatWebBundle::profile.html.twig');
+    return $this->templating->renderResponse('CatrobatWebBundle::profile.html.twig', array("entity" => $entity));
   }
 
 

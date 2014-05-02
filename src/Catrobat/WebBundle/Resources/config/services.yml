@@ -1,6 +1,5 @@
 parameters:
-      catrobat.web.program.controller.class: Catrobat\WebBundle\Controller\ProgramController
-      catrobat.web.profile.controller.class: Catrobat\WebBundle\Controller\ProfileController
+      catrobat.web.default.controller.class: Catrobat\WebBundle\Controller\DefaultController
       catrobat.web.tutorial.controller.class: Catrobat\WebBundle\Controller\TutorialController
 
 services:
@@ -11,14 +10,9 @@ services:
                   - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
 # =========================== Controller ===========================
-
-      catrobat.web.program.controller:
-              class: "%catrobat.web.program.controller.class%"
-              arguments: ["@templating", "@catrobat.core.model.programmanager"]
-
-      catrobat.web.profile.controller:
-              class: "%catrobat.web.profile.controller.class%"
-              arguments: ["@templating"]
+      catrobat.web.default.controller:
+                          class: "%catrobat.web.default.controller.class%"
+                          arguments: ["@templating", "@catrobat.core.model.programmanager"]
 
       catrobat.web.tutorial.controller:
               class: "%catrobat.web.tutorial.controller.class%"

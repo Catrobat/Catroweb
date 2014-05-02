@@ -22,7 +22,7 @@
     <div id="wrapper">
       <header>
         {% block header %}
-          {{ render(controller('CatrobatWebBundle:Default:header', { _locale: app.request.locale, _embedded: true })) }}
+          {{ render(controller('catrobat.web.default.controller:headerAction', { _locale: app.request.locale, _embedded: true })) }}
         {% endblock %}
       </header>
 
@@ -33,7 +33,7 @@
 
       <footer class="size-medium">
         {% block footer %}
-          {{ render(controller('CatrobatWebBundle:Default:footer', { _locale: app.request.locale, _embedded: true })) }}
+          {{ render(controller('catrobat.web.default.controller:footerAction', { _locale: app.request.locale, _embedded: true })) }}
         {% endblock %}
       </footer>
 

@@ -29,22 +29,22 @@ class TutorialController
     $this->templating = $templating;
   }
 
-  public function showTutorialAction()
+  public function tutorialAction()
   {
     return $this->templating->renderResponse('CatrobatWebBundle:tutorials:tutorial.html.twig');
   }
 
-  public function showTutorialsAction()
+  public function tutorialsAction()
   {
     return $this->templating->renderResponse('CatrobatWebBundle:tutorials:tutorials.html.twig');
   }
 
-  public function showStepByStepAction()
+  public function stepByStepAction()
   {
     return $this->templating->renderResponse('CatrobatWebBundle:tutorials:stepByStep.html.twig');
   }
 
-  public function showStarterProgramsAction()
+  public function starterProgramsAction()
   {
     return $this->templating->renderResponse('CatrobatWebBundle:tutorials:starterPrograms.html.twig');
   }
