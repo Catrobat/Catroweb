@@ -18,6 +18,12 @@ services:
               arguments: ["@catrowebadmin.filesystem","@catrobat.core.model.usermanager","@catrobat.core.model.programmanager"]
               tags:
                 -  { name: console.command }
+      catrowebadmin.command.refresh:
+              class: Catrobat\AdminBundle\Command\RefreshCommand
+              arguments: ["@catrowebadmin.filesystem"]
+              tags:
+                -  { name: console.command }
+
 
       catrowebadmin.filesystem:
               class: Symfony\Component\Filesystem\Filesystem
