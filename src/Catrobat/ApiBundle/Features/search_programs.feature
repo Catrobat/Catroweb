@@ -6,14 +6,14 @@ Feature: Search in the program repository
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
-      | NewUs    | 54321    | bbbbbbbbbb |
+      | NewUser    | 54321    | bbbbbbbbbb |
     And there are programs:
       | id | name             | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War       | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | Minions          |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
       | 3  | Fisch            |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 4  | Ponny            |             | User1    | 245       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 5  | MarkoTheBest     |             | NewUs    | 335       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 5  | MarkoTheBest     |             | NewUser  | 335       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 6  | Whack the Marko  |             | Catrobat | 2         | 33    | 01.02.2012 13:00 | 0.8.5   |
       | 7  | Superponny       |             | User1    | 4         | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 8  | Universe         |             | User1    | 23        | 33    | 01.01.2012 13:00 | 0.8.5   |
@@ -22,7 +22,7 @@ Feature: Search in the program repository
 
 
   Scenario: search program by name
-    Given I have a parameter "q" with value "war"
+    Given I have a parameter "q" with value "Galaxy War"
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
     When I GET "/api/projects/search.json" with these parameters
@@ -91,7 +91,7 @@ Feature: Search in the program repository
 		"ProjectNameShort":"MarkoTheBest",
 		"ScreenshotBig":"resources\/thumbnails\/5_large.png",
 		"ScreenshotSmall":"resources\/thumbnails\/5_small.png",
-		"Author":"NewUs",
+		"Author":"NewUser",
 		"Description":"",
 		"Uploaded":1325422800,
 		"UploadedString":0,
@@ -106,40 +106,58 @@ Feature: Search in the program repository
 }
 """
 
-#  Scenario: search program by name
-#    Given I have a parameter "q" with value "NewUs"
-#    And I have a parameter "limit" with value "1"
-#    And I have a parameter "offset" with value "0"
-#    When I GET "/api/projects/search.json" with these parameters
-#    Then I should get the json object:
-#    """
-#{
-#  "completeTerm":"",
-#  "CatrobatInformation": {
-#		"BaseUrl":"https:\/\/localhost\/",
-#		"TotalProjects":1,
-#		"ProjectsExtension":".catrobat"
-#  },
-#  "CatrobatProjects":[{
-#  		"ProjectId":5,
-#		"ProjectName":"MarkoTheBest",
-#		"ProjectNameShort":"MarkoTheBest",
-#		"ScreenshotBig":"resources\/thumbnails\/5_large.png",
-#		"ScreenshotSmall":"resources\/thumbnails\/5_small.png",
-#		"Author":"NewUs",
-#		"Description":"",
-#		"Uploaded":1325422800,
-#		"UploadedString":0,
-#		"Version":"0.8.5",
-#		"Views":"33",
-#		"Downloads":"335",
-#		"ProjectUrl":"details\/5",
-#		"DownloadUrl":"download\/5.catrobat"
-#  }],
-#  "preHeaderMessages":""
-#}
-#"""
+  Scenario: search program by name
+    Given I have a parameter "q" with value "NewUser"
+    And I have a parameter "limit" with value "1"
+    And I have a parameter "offset" with value "0"
+    When I GET "/api/projects/search.json" with these parameters
+    Then I should get the json object:
+    """
+{
+  "completeTerm":"",
+  "CatrobatInformation": {
+		"BaseUrl":"https:\/\/localhost\/",
+		"TotalProjects":1,
+		"ProjectsExtension":".catrobat"
+  },
+  "CatrobatProjects":[{
+  		"ProjectId":5,
+		"ProjectName":"MarkoTheBest",
+		"ProjectNameShort":"MarkoTheBest",
+		"ScreenshotBig":"resources\/thumbnails\/5_large.png",
+		"ScreenshotSmall":"resources\/thumbnails\/5_small.png",
+		"Author":"NewUser",
+		"Description":"",
+		"Uploaded":1325422800,
+		"UploadedString":0,
+		"Version":"0.8.5",
+		"Views":"33",
+		"Downloads":"335",
+		"ProjectUrl":"details\/5",
+		"DownloadUrl":"download\/5.catrobat"
+  }],
+  "preHeaderMessages":""
+}
+"""
 
+  Scenario: search program by name
+    Given I have a parameter "q" with value "noUser"
+    And I have a parameter "limit" with value "1"
+    And I have a parameter "offset" with value "0"
+    When I GET "/api/projects/search.json" with these parameters
+    Then I should get the json object:
+    """
+{
+  "completeTerm":"",
+  "CatrobatInformation": {
+		"BaseUrl":"https:\/\/localhost\/",
+		"TotalProjects":1,
+		"ProjectsExtension":".catrobat"
+  },
+  "CatrobatProjects":[],
+  "preHeaderMessages":""
+}
+"""
 
 
 #
