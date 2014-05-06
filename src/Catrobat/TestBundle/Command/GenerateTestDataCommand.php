@@ -40,9 +40,9 @@ class GenerateTestDataCommand extends Command
   {
     $dialog = $this->getHelperSet()->get('dialog');
     
-    if ($dialog->askConfirmation($output, '<question>Generate test data in ' . $this->target_directory . ' (Y/N)?</question>', false))
+    if ($dialog->askConfirmation($output, '<question>Generate test data in ' . $this->target_directory . ' (Y/n)?</question>', true))
     {
-      $output->writeln("<info>Reseting directory " . $this->target_directory . "</info>");
+      $output->writeln("<info>Deleting old test data in " . $this->target_directory . "</info>");
       
       $finder = new Finder();
       $finder->in($this->target_directory)->ignoreDotFiles(true)->depth(0);
@@ -51,7 +51,7 @@ class GenerateTestDataCommand extends Command
         $this->filesystem->remove($file);
       }
       
-      $output->writeln("<info>Generating test data</info>");
+      $output->writeln("<info>Generating new test data</info>");
       $this->extractBaseTestProgram("base");      
       $this->generateProgramWithExtraImage("program_with_extra_image");      
       $this->generateProgramWithMissingImage("program_with_missing_image");     
@@ -67,8 +67,6 @@ class GenerateTestDataCommand extends Command
       {
         $this->compressDirectory($dir->getRelativePathname());
       }
-
-      $output->writeln("Done");
     }
   }
   

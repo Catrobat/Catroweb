@@ -44,7 +44,7 @@ class RefreshCommand extends ContainerAwareCommand
     
     switch ($env)
     {
-      case "testsqlite":
+      case "test":
         $this->generateTestdata();
         $this->deleteSqLiteDatabase();
       break; 
@@ -52,10 +52,9 @@ class RefreshCommand extends ContainerAwareCommand
     $this->clearCache();
     
     
-    $output->writeln("done");
     $output->writeln("<info>");
     $output->writeln("Make sure to run this command in all environments!");
-    $output->writeln($this->getName() . " --env=testsqlite");
+    $output->writeln($this->getName() . " --env=test");
     $output->writeln($this->getName() . " --env=prod");
     $output->writeln("</info>");
   }
