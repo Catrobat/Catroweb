@@ -5,7 +5,7 @@ default:
     extensions:
         Behat\Symfony2Extension\Extension: 
             kernel:
-                env: testsqlite
+                env: test
                 debug: true
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
