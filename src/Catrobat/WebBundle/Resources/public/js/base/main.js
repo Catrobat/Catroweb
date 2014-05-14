@@ -1,19 +1,13 @@
-var Main = function() {
-    var self = this;
+var Main = function () {
+  var self = this;
 
-    self.handleFooterView = function() {
-        $('#footerMoreLess').click(function() {
-            $('#wrapper, footer').toggleClass('expandFooter');
-            $(window).scrollTop($(document).height());
-        });
-    };
+  self.handleFooterView = function () {
+    $('#footerMoreLess').click(function () {
+      $('body').toggleClass('expandFooter');
+      $(window).scrollTop($(document).height());
+    });
+  };
 
-    self.handleLanguage = function() {
-
-        $('#switchLanguage').on("change", function() {
-            console.log("TODO: change language");
-        });
-
-    }
-
-}
+  self.handleLanguage = function () {
+  };
+};

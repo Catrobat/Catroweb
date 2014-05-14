@@ -1,4 +1,3 @@
-################## index ################## 
 catrobat_web_index:
     path: /
     defaults: { _controller: "catrobat.web.default.controller:indexAction" }
@@ -8,10 +7,9 @@ catrobat_web_index_locale:
     defaults: { _controller: "catrobat.web.default.controller:indexAction", _locale: en }
     requirements:
         _locale:  en|de    
-        
-################## program details ##################
+
 catrobat_web_program:
-    path:      /programs/{id}
+    path:      /program/{id}
     methods:  [GET]
     defaults:  { _controller: "catrobat.web.default.controller:programAction" }
     requirements:
