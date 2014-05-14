@@ -3,7 +3,7 @@ var Main = function () {
 
   self.handleFooterView = function () {
     $('#footerMoreLess').click(function () {
-      $('body').toggleClass('expandFooter');
+      $('body').toggleClass('footerExpand');
       $(window).scrollTop($(document).height());
     });
   };
