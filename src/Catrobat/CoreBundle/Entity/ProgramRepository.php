@@ -53,18 +53,11 @@ class ProgramRepository extends EntityRepository
   {
     $query = '%'.$query.'%';
     $qb_program = $this->createQueryBuilder('e');
-    $result = $qb_program->select('e')
-      ->leftJoin('e.user',"f")
-      ->where($qb_program->expr()->like('e.name','?1'))
-        ->orWhere($qb_program->expr()->like('f.username','?1'))
-          ->orWhere($qb_program->expr()->like('e.description','?1'))
-      ->setParameter(1, $query)
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-      ->getQuery()
-      ->getResult();
-
+    $weighting = "((CASE WHEN e.name LIKE ?1 THEN 10 ELSE 0 END) + (CASE WHEN f.username LIKE ?1 THEN 1 ELSE 0 END) + (CASE WHEN e.description LIKE ?1 THEN 3 ELSE 0 END))";
+    $q2 = $qb_program->getEntityManager()->createQuery("SELECT e, ".$weighting." AS weight FROM Catrobat\CoreBundle\Entity\Program e LEFT JOIN e.user f WHERE ".$weighting." > 0 ORDER BY weight DESC, e.uploaded_at DESC");
+    $q2->setParameter(1, $query);
+    $result = $q2->getResult(); 
+    $result = array_column($result,0);
     return $result;
   }
 }
