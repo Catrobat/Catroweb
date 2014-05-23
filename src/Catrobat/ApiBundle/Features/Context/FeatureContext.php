@@ -218,7 +218,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     public function iShouldGetTheJsonObject(PyStringNode $string)
     {
       $response = $this->client->getResponse();
-      assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), $response->getContent());
+      assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), "");
     }
     
     /**

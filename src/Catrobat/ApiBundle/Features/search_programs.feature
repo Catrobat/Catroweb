@@ -16,7 +16,7 @@ Feature: Search programs
       | 3  | Fisch            |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 4  | Ponny            | p2          | User1    | 245       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 5  | MarkoTheBest     |             | NewUser  | 335       | 33    | 01.01.2012 13:00 | 0.8.5   |
-      | 6  | Whack the Marko  |             | Catrobat | 2         | 33    | 01.02.2012 13:00 | 0.8.5   |
+      | 6  | Whack the Marko  | Universe    | Catrobat | 2         | 33    | 01.02.2012 13:00 | 0.8.5   |
       | 7  | Superponny       | p1 p2 p3    | User1    | 4         | 33    | 01.01.2012 12:00 | 0.8.5   |
       | 8  | Universe         |             | User1    | 23        | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 9  | Webteam          |             | User1    | 100       | 33    | 01.01.2012 13:00 | 0.8.5   |
@@ -138,6 +138,17 @@ Feature: Search programs
         | Name                |
         | Ponny               |
         | Superponny          |
+
+
+
+  Scenario: if the query matches in title and description, return the program with the matching title first
+
+    Given I use the limit "10"
+    When I search for "Universe"
+    Then I should get following programs:
+        | Name                |
+        | Universe            |
+        | Whack the Marko     |
 
 #
 #
