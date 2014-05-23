@@ -121,4 +121,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->search($query, $limit, $offset);
   }
 
+  public function searchCount($query)
+  {
+    return $this->program_repository->searchCount($query);
+  }
+
 }
