@@ -23,7 +23,7 @@ class SearchController
       $query = $request->query->get('q');
       $limit = intval($request->query->get('limit'));
       $offset = intval($request->query->get('offset'));
-      
+      $numbOfTotalProjects = $this->program_manager->searchCount($query);
       $programs = $this->program_manager->search($query, $limit, $offset);
       $retArray['CatrobatProjects'] = array();
       foreach ($programs as $program)
@@ -47,15 +47,7 @@ class SearchController
       }
       $retArray['completeTerm'] = "";
       $retArray['preHeaderMessages'] = "";
-      $retArray['CatrobatInformation'] = array("BaseUrl" => "https://localhost/", "TotalProjects" => 1, "ProjectsExtension" => ".catrobat");
-//      $retArray['id'] = $entities->getId();
-//      $retArray['programName'] = $entities->getName();
-//      $retArray['description'] = $entities->getDescription();
-//      $retArray['downloads'] = $entities->getDownloads();
-//      $retArray['views'] = $entities->getViews();
-//      $retArray['author'] = $entities->getUser()->getUsername();
-//      $retArray['uploaded_time'] = $entities->getUploadedAt()->getTimestamp();
-//      $retArray['catrobat_version_name'] = $entities->getCatrobatVersionName();
+      $retArray['CatrobatInformation'] = array("BaseUrl" => "https://localhost/", "TotalProjects" => $numbOfTotalProjects, "ProjectsExtension" => ".catrobat");
       return $this->templating->renderResponse('CatrobatApiBundle:Api:searchPrograms.json.twig', array('b' => $retArray));
     }
     

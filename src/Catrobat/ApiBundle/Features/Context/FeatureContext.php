@@ -192,17 +192,34 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       }
       $this->iGetWithTheseParameters("/api/projects/search.json");
     }
-    
+
     /**
+     * @Then /^I should get a total of "([^"]*)" projects$/
+     */
+    public function iShouldGetATotalOfProjects($arg1)
+    {
+      $response = $this->client->getResponse();
+      $responseArray = json_decode($response->getContent(),true);
+      assertEquals($arg1,$responseArray['CatrobatInformation']['TotalProjects'],"Wrong number of total projects");
+    }
+
+  /**
      * @Given /^I use the limit "([^"]*)"$/
      */
     public function iUseTheLimit($arg1)
     {
       $this->iHaveAParameterWithValue("limit", $arg1);
     }
-    
-    
+
     /**
+     * @Given /^I use the offset "([^"]*)"$/
+     */
+    public function iUseTheOffset($arg1)
+    {
+      $this->iHaveAParameterWithValue("offset", $arg1);
+    }
+
+  /**
      * @When /^I call "([^"]*)" with token "([^"]*)"$/
      */
     public function iCallWithToken($url, $token)

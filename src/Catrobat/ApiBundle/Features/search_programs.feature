@@ -109,7 +109,7 @@ Feature: Search programs
       "completeTerm":"",
       "CatrobatInformation": {
         "BaseUrl":"https:\/\/localhost\/",
-        "TotalProjects":1,
+        "TotalProjects":0,
         "ProjectsExtension":".catrobat"
     },
     "CatrobatProjects":[],
@@ -150,20 +150,21 @@ Feature: Search programs
         | Universe            |
         | Whack the Marko     |
 
-#
-#
-#  @TODO
-#  Scenario: search all programs
-#    Given I have a parameter "projectName" with value "program 1"
-#    And I have a parameter "limit" with value "1"
-#    And I have a parameter "offset" with value "0"
-#    When I GET "/api/projects/search.json" with these parameters
-#    Then I should get the json object:
-#"""
-#{
-#  "ProgrammCount":"10";
-#}
-#"""
+
+  Scenario Outline: the result contains the number of all projects effected by the search, independent from offset and limit
+
+    Given I use the limit "<Limit>"
+    Given I use the offset "<Offset>"
+    When I search for "<Search>"
+    Then I should get a total of "<TotalProjects>" projects
+
+    Examples:
+    | Search | Limit | Offset | TotalProjects |
+    | User1  |   1   |   1    |      7        |
+    | User1  |   9   |   2    |      7        |
+    | Marko  |   5   |   0    |      2        |
+
+
 #
 #
 #
