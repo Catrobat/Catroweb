@@ -169,6 +169,40 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     }
     
     /**
+     * @Given /^I search for "([^"]*)"$/
+     */
+    public function iSearchFor($arg1)
+    {
+      $this->iHaveAParameterWithValue("q", $arg1);
+      if (isset($this->request_parameters['limit']))
+      {
+        $this->iHaveAParameterWithValue("limit", $this->request_parameters['limit']);
+      }
+      else
+      {
+        $this->iHaveAParameterWithValue("limit", "1");
+      }
+      if (isset($this->request_parameters['offset']))
+      {
+        $this->iHaveAParameterWithValue("offset", $this->request_parameters['offset']);
+      }
+      else
+      {
+        $this->iHaveAParameterWithValue("offset", "0");
+      }
+      $this->iGetWithTheseParameters("/api/projects/search.json");
+    }
+    
+    /**
+     * @Given /^I use the limit "([^"]*)"$/
+     */
+    public function iUseTheLimit($arg1)
+    {
+      $this->iHaveAParameterWithValue("limit", $arg1);
+    }
+    
+    
+    /**
      * @When /^I call "([^"]*)" with token "([^"]*)"$/
      */
     public function iCallWithToken($url, $token)
@@ -228,6 +262,15 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         assertEquals($expected_programs[$i]["Name"], $returned_programs[$i]["ProjectName"], "Wrong order of results");
       }
     }
+    
+    /**
+     * @Then /^I should get following programs:$/
+     */
+    public function iShouldGetFollowingPrograms(TableNode $table)
+    {
+      $this->iShouldGetProgramsInTheFollowingOrder($table);
+    }
+    
     
     /**
      * @Given /^the response code should be "([^"]*)"$/
