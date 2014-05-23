@@ -20,13 +20,10 @@ class SearchController
     public function searchProgramsAction(Request $request) 
     {
       $retArray = array();
-      $query = $request->request->get('q');
-      $limit = intval($request->request->get('limit'));
-      $offset = intval($request->request->get('offset'));
+      $query = $request->query->get('q');
+      $limit = intval($request->query->get('limit'));
+      $offset = intval($request->query->get('offset'));
       
-      //$entities = $this->program_manager->findAll();
-      //$retArray['numOfPrograms'] = count($entities);
-
       $programs = $this->program_manager->search($query, $limit, $offset);
       $retArray['CatrobatProjects'] = array();
       foreach ($programs as $program)
