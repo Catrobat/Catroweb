@@ -55,6 +55,8 @@ class ProgramRepository extends EntityRepository
     $qb_program = $this->createQueryBuilder('e');
     $weighting = "((CASE WHEN e.name LIKE ?1 THEN 10 ELSE 0 END) + (CASE WHEN f.username LIKE ?1 THEN 1 ELSE 0 END) + (CASE WHEN e.description LIKE ?1 THEN 3 ELSE 0 END))";
     $q2 = $qb_program->getEntityManager()->createQuery("SELECT e, ".$weighting." AS weight FROM Catrobat\CoreBundle\Entity\Program e LEFT JOIN e.user f WHERE ".$weighting." > 0 ORDER BY weight DESC, e.uploaded_at DESC");
+    $q2->setFirstResult($offset);
+    $q2->setMaxResults($limit);
     $q2->setParameter(1, $query);
     $result = $q2->getResult(); 
     $result = array_column($result,0);

@@ -164,6 +164,33 @@ Feature: Search programs
     | User1  |   9   |   2    |      7        |
     | Marko  |   5   |   0    |      2        |
 
+  Scenario: if the query matches in title and description, return the program with the matching title first
+
+    Given I use the limit "2"
+    And I use the offset "0"
+    When I search for "User1"
+    Then I should get following programs:
+        | Name                |
+        | Galaxy War          |
+        | Fisch               |
+
+  Scenario: if the query matches in title and description, return the program with the matching title first
+
+    Given I use the limit "1"
+    And I use the offset "0"
+    When I search for "User1"
+    Then I should get following programs:
+        | Name                |
+        | Galaxy War          |
+
+  Scenario: if the query matches in title and description, return the program with the matching title first
+
+    Given I use the limit "1"
+    And I use the offset "1"
+    When I search for "User1"
+    Then I should get following programs:
+        | Name                |
+        | Fisch               |
 
 #
 #
