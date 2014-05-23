@@ -157,7 +157,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     public function iGetWithTheseParameters($url)
     {
       $this->client = $this->kernel->getContainer()->get('test.client');
-      $crawler = $this->client->request('GET', $url."?".http_build_query($this->request_parameters), array(), $this->files);
+      $crawler = $this->client->request('GET', $url."?".http_build_query($this->request_parameters), array(), $this->files, array('HTTP_HOST' => 'localhost'));
     }
     
     /**

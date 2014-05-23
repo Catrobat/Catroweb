@@ -47,7 +47,7 @@ class SearchController
       }
       $retArray['completeTerm'] = "";
       $retArray['preHeaderMessages'] = "";
-      $retArray['CatrobatInformation'] = array("BaseUrl" => "https://localhost/", "TotalProjects" => $numbOfTotalProjects, "ProjectsExtension" => ".catrobat");
+      $retArray['CatrobatInformation'] = array("BaseUrl" => 'https://' . $request->getHttpHost() . '/', "TotalProjects" => $numbOfTotalProjects, "ProjectsExtension" => ".catrobat");
       return $this->templating->renderResponse('CatrobatApiBundle:Api:searchPrograms.json.twig', array('b' => $retArray));
     }
     
