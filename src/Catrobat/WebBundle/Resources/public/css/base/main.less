@@ -58,11 +58,11 @@ a {
 
 html {
   height: 100%;
-  font-size: 12px;
+  font-size: @default-font-size;
 }
 
 body {
-  background-color: @default-background-color;
+  background: @default-background-color;
   font-family: 'Roboto', Arial, sans-serif;
   height: 100%;
 }
@@ -104,15 +104,15 @@ h2 {
 }
 
 .size-small {
-  font-size: 8px;
+  font-size: @default-font-size - 4;
 }
 
 .size-medium {
-  font-size: 12px;
+  font-size: @default-font-size;
 }
 
 .size-large {
-  font-size: 16px;
+  font-size: @default-font-size + 4;
 }
 
 .programs {

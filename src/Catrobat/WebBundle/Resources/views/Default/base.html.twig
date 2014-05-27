@@ -31,7 +31,7 @@
   </article>
 </div>
 
-<footer class="size-medium">
+<footer>
   {% block footer %}
     {{ render(controller('catrobat.web.default.controller:footerAction', { _locale: app.request.locale, _embedded: true })) }}
   {% endblock %}
