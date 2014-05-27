@@ -1,13 +1,16 @@
 var Main = function () {
   var self = this;
 
-  self.handleFooterView = function () {
-    $('#footerMoreLess').click(function () {
-      $('body').toggleClass('footerExpand');
+  self.handleFooterView = function() {
+    $('#footer-more-less').click(function () {
+      $('body').toggleClass('footer-expand');
       $(window).scrollTop($(document).height());
     });
   };
 
-  self.handleLanguage = function () {
+  self.initialize = function() {
+    self.handleFooterView();
   };
+
+  self.initialize();
 };
