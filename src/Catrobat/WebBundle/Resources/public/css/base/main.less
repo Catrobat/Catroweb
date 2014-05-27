@@ -119,8 +119,85 @@ h2 {
 
 }
 
+#header-logo {
+  padding-top: 40px;
+  width: 100%;
+  text-align: center;
+}
+
 .clear {
   clear: both;
+}
+
+input:focus {
+  border: 0;
+  outline: none;
+}
+
+label {
+  display: block;
+}
+
+.link {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.error-text {
+  color: #f78181;
+  font-size: 22px;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+form {
+  margin: 40px auto;
+  width: 320px;
+  text-align: center;
+
+  button {
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: @default-button-size;
+    font-weight: bold;
+    .gradient(#177f8d,#177f8d,#17A5B8);
+    margin-top: 30px;
+    padding: @default-button-padding;
+    text-shadow: #333 1px 1px 1px;
+    text-align: center;
+    text-transform: uppercase;
+
+  }
+
+  .input-field {
+    background: #fff;
+    border: .2em solid #05222a;
+    .box-shadow(inset 2px 2px 5px #999);
+    overflow: auto;
+    padding: @default-input-padding;
+    margin-bottom: 10px;
+
+    input {
+      border: none;
+      color: #05222a;
+      float: left;
+      font-size: @default-input-size;
+      height: 35px;
+      padding-left: 5px;
+      outline: none;
+      width: 80%;
+    }
+
+    div {
+      float: right;
+      text-align: center;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -22,6 +22,11 @@ class DefaultController extends Controller
     return $this->templating->renderResponse('CatrobatWebBundle:Default:header.html.twig');
   }
 
+  public function headerLogoAction()
+  {
+    return $this->templating->renderResponse('CatrobatWebBundle:Default:headerLogo.html.twig');
+  }
+
   public function footerAction()
   {
     return $this->templating->renderResponse('CatrobatWebBundle:Default:footer.html.twig');
