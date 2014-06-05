@@ -103,9 +103,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->getRecentPrograms($limit, $offset);
   }
 
-  public function findByOrderedByViews($limit = null, $offset = null)
+  public function getMostViewedPrograms($limit = null, $offset = null)
   {
-    return $this->program_repository->findByOrderedByViews($limit, $offset);
+    return $this->program_repository->getMostViewedPrograms($limit, $offset);
   }
   
   public function getMostDownloadedPrograms($limit = null, $offset = null)
