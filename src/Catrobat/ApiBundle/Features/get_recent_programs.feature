@@ -16,7 +16,7 @@ Feature: Get the most recent programs
   Scenario: show recent programs
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I POST these parameters to "/api/projects/recent.json"
+    When I GET "/api/projects/recent.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -49,7 +49,7 @@ Feature: Get the most recent programs
   Scenario: show recent programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I POST these parameters to "/api/projects/recent.json"
+    When I GET "/api/projects/recent.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | program 2 |
@@ -58,7 +58,7 @@ Feature: Get the most recent programs
   Scenario: show recent programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "1"
-    When I POST these parameters to "/api/projects/recent.json"
+    When I GET "/api/projects/recent.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | program 1 |

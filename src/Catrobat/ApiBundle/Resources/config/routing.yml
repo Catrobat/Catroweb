@@ -21,5 +21,5 @@ catrobat_api_search_programs:
 catrobat_api_recent_programs:
     pattern:  /api/projects/recent.json
     methods: [POST, GET]
-    defaults: { _controller: 'catrobat.api.controller.search:recentProgramsAction', _format: json }
+    defaults: { _controller: 'catrobat.api.controller.listprograms:listProgramsAction', _format: json }
     

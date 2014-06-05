@@ -37,7 +37,7 @@ class ProgramRepository extends EntityRepository
     ->getResult();
   }
   
-  public function findByOrderedByDate($limit = null, $offset = null)
+  public function getRecentPrograms($limit = null, $offset = null)
   {
     //return $this->findBy(array(),array('uploaded_at' => 'desc'), $limit, $offset);
     return $this->createQueryBuilder('e')
@@ -68,6 +68,14 @@ class ProgramRepository extends EntityRepository
     $weighting = "((CASE WHEN e.name LIKE ?1 THEN 10 ELSE 0 END) + (CASE WHEN f.username LIKE ?1 THEN 1 ELSE 0 END) + (CASE WHEN e.description LIKE ?1 THEN 3 ELSE 0 END))";
     $q2 = $qb_program->getEntityManager()->createQuery("SELECT COUNT(e.id) FROM Catrobat\CoreBundle\Entity\Program e LEFT JOIN e.user f WHERE ".$weighting." > 0 ");
     $q2->setParameter(1, $query);
+    $result = $q2->getSingleScalarResult();
+    return $result;
+  }
+
+  public function getTotalPrograms()
+  {
+    $qb_program = $this->createQueryBuilder('e');
+    $q2 = $qb_program->getEntityManager()->createQuery("SELECT COUNT(e.id) FROM Catrobat\CoreBundle\Entity\Program e");
     $result = $q2->getSingleScalarResult();
     return $result;
   }
