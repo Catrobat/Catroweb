@@ -98,9 +98,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->find($id);
   }
   
-  public function findByOrderedByDownloads($limit = null, $offset = null)
+  public function getRecentPrograms($limit = null, $offset = null)
   {
-    return $this->program_repository->findByOrderedByDownloads($limit, $offset);
+    return $this->program_repository->getRecentPrograms($limit, $offset);
   }
 
   public function findByOrderedByViews($limit = null, $offset = null)
@@ -124,6 +124,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   public function searchCount($query)
   {
     return $this->program_repository->searchCount($query);
+  }
+
+  public function getTotalPrograms()
+  {
+    return $this->program_repository->getTotalPrograms();
   }
 
 }

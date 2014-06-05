@@ -2,12 +2,17 @@ parameters:
     catrobat.api.controller.search.class: Catrobat\ApiBundle\Controller\SearchController
     catrobat.api.controller.upload.class: Catrobat\ApiBundle\Controller\UploadController
     catrobat.api.controller.security.class: Catrobat\ApiBundle\Controller\SecurityController
+    catrobat.api.controller.listprograms.class: Catrobat\ApiBundle\Controller\ListProgramsController
 
 services:
     catrobat.api.controller.search:
         class: "%catrobat.api.controller.search.class%"
         arguments: ["@templating", "@catrobat.core.model.programmanager"]
-    
+
+    catrobat.api.controller.listprograms:
+        class: "%catrobat.api.controller.listprograms.class%"
+        arguments: ["@templating", "@catrobat.core.model.programmanager"]
+
     catrobat.api.controller.security:
         class: "%catrobat.api.controller.security.class%"
         arguments: ["@templating","@catrobat.core.model.usermanager", "@catrobat.core.services.tokengenerator"]

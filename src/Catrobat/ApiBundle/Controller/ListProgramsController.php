@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 
-class SearchController
+class ListProgramsController
 {
     protected $templating;
     protected $program_manager;
@@ -16,16 +16,15 @@ class SearchController
       $this->templating = $templating;
       $this->program_manager = $program_manager;
     }
-     
-    public function searchProgramsAction(Request $request) 
+
+    public function listProgramsAction(Request $request)
     {
       $retArray = array();
-      $query = $request->query->get('q');
-      $limit = intval($request->query->get('limit'));
-      $offset = intval($request->query->get('offset'));
-      $numbOfTotalProjects = $this->program_manager->searchCount($query);
-      $programs = $this->program_manager->search($query, $limit, $offset);
-      $retArray['CatrobatProjects'] = array();
+      $limit = intval($request->query->get('limit',10));
+      $offset = intval($request->query->get('offset',0));
+      $numbOfTotalProjects = $this->program_manager->getTotalPrograms();
+       
+      $programs = $this->program_manager->getRecentPrograms($limit, $offset);
       foreach ($programs as $program)
       {
         $new_program = array();
@@ -38,7 +37,7 @@ class SearchController
         $new_program['Views'] = $program->getViews();
         $new_program['Downloads'] = $program->getDownloads();
         $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-        $new_program['UploadedString'] = '0';
+        $new_program['UploadedString'] = "";
         $new_program['ScreenshotBig'] = "resources/thumbnails/" . $program->getId() . "_large.png";
         $new_program['ScreenshotSmall'] = "resources/thumbnails/"  . $program->getId() . "_small.png";
         $new_program['ProjectUrl'] = "details/" . $program->getId();
@@ -47,8 +46,10 @@ class SearchController
       }
       $retArray['completeTerm'] = "";
       $retArray['preHeaderMessages'] = "";
+      
       $retArray['CatrobatInformation'] = array("BaseUrl" => 'https://' . $request->getHttpHost() . '/', "TotalProjects" => $numbOfTotalProjects, "ProjectsExtension" => ".catrobat");
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:searchPrograms.json.twig', array('b' => $retArray));
+      
+      return $this->templating->renderResponse('CatrobatApiBundle:Api:recentPrograms.json.twig', array('b' => $retArray));
     }
-        
+    
 }
