@@ -108,9 +108,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->findByOrderedByViews($limit, $offset);
   }
   
-  public function findByOrderedByDate($limit = 1, $offset = 1)
+  public function getMostDownloadedPrograms($limit = null, $offset = null)
   {
-    return $this->program_repository->findByOrderedByDate($limit, $offset);
+    return $this->program_repository->getMostDownloadedPrograms($limit, $offset);
 //    $offset = $offset / $limit;
 //    $query = $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC');
 //    return $this->pagination->paginate($query, 1, $limit);

@@ -13,6 +13,10 @@ services:
         class: "%catrobat.api.controller.listprograms.class%"
         arguments: ["@templating", "@catrobat.core.model.programmanager"]
 
+    catrobat.api.controller.listmostdownloadedprograms:
+        class: "%catrobat.api.controller.listprograms.class%"
+        arguments: ["@templating", "@catrobat.core.model.programmanager"]
+
     catrobat.api.controller.security:
         class: "%catrobat.api.controller.security.class%"
         arguments: ["@templating","@catrobat.core.model.usermanager", "@catrobat.core.services.tokengenerator"]

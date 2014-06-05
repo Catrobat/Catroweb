@@ -13,7 +13,7 @@ use Doctrine\ORM\Query;
  */
 class ProgramRepository extends EntityRepository
 {
-  public function findByOrderedByDownloads($limit = null, $offset = null)
+  public function getMostDownloadedPrograms($limit = null, $offset = null)
   {
     //return $this->findBy(array(),array('downloads' => 'desc'), $limit, $offset);
   	return $this->createQueryBuilder('e')
