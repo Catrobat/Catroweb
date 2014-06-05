@@ -98,19 +98,19 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->find($id);
   }
   
-  public function findByOrderedByDownloads($limit = null, $offset = null)
+  public function getRecentPrograms($limit = null, $offset = null)
   {
-    return $this->program_repository->findByOrderedByDownloads($limit, $offset);
+    return $this->program_repository->getRecentPrograms($limit, $offset);
   }
 
-  public function findByOrderedByViews($limit = null, $offset = null)
+  public function getMostViewedPrograms($limit = null, $offset = null)
   {
-    return $this->program_repository->findByOrderedByViews($limit, $offset);
+    return $this->program_repository->getMostViewedPrograms($limit, $offset);
   }
   
-  public function findByOrderedByDate($limit = 1, $offset = 1)
+  public function getMostDownloadedPrograms($limit = null, $offset = null)
   {
-    return $this->program_repository->findByOrderedByDate($limit, $offset);
+    return $this->program_repository->getMostDownloadedPrograms($limit, $offset);
 //    $offset = $offset / $limit;
 //    $query = $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC');
 //    return $this->pagination->paginate($query, 1, $limit);
@@ -124,6 +124,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   public function searchCount($query)
   {
     return $this->program_repository->searchCount($query);
+  }
+
+  public function getTotalPrograms()
+  {
+    return $this->program_repository->getTotalPrograms();
   }
 
 }
