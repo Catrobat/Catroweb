@@ -23,8 +23,13 @@ catrobat_api_recent_programs:
     methods: [POST, GET]
     defaults: { _controller: 'catrobat.api.controller.listprograms:listProgramsAction', _format: json }
 
-catrobat_api_recent_programs:
+catrobat_api_most_downloaded_programs:
     pattern:  /api/projects/mostDownloaded.json
     methods: [POST, GET]
     defaults: { _controller: 'catrobat.api.controller.listprograms:listMostDownloadedProgramsAction', _format: json }
+
+catrobat_api_most_viewed_programs:
+    pattern:  /api/projects/mostViewed.json
+    methods: [POST, GET]
+    defaults: { _controller: 'catrobat.api.controller.listprograms:listMostViewedProgramsAction', _format: json }
     

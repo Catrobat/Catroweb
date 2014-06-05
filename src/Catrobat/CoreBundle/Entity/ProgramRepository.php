@@ -25,7 +25,7 @@ class ProgramRepository extends EntityRepository
   	->getResult();
   }
 
-  public function findByOrderedByViews($limit = null, $offset = null)
+  public function getMostViewedPrograms($limit = null, $offset = null)
   {
     //return $this->findBy(array(),array('views' => 'desc'), $limit, $offset);
     return $this->createQueryBuilder('e')
