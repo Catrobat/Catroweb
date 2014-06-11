@@ -18,6 +18,7 @@ class AllProgramsAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
             ->add('user', 'entity', array('class' => 'Catrobat\CoreBundle\Entity\User'))
+            ->add('approved', null, array('required' => false))
         ;
     }
 
@@ -31,6 +32,21 @@ class AllProgramsAdmin extends Admin
         ;
     }
 
+    public function preUpdate($program)
+    {
+        $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
+
+        if($old_program["approved"] == false && $program->getApproved() == true)
+        {
+            $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser());
+            $this->getModelManager()->update($program);
+        }elseif($old_program["approved"] == true && $program->getApproved() == false)
+        {
+            $program->setApprovedByUser(null);
+            $this->getModelManager()->update($program);
+        }
+    }
+
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -42,6 +58,8 @@ class AllProgramsAdmin extends Admin
             ->add('views')
             ->add('downloads')
             ->add('thumbnail')
+            ->add('approved')
+            ->add('approved_by_user')
         ;
     }
 }
