@@ -1,0 +1,40 @@
+{% extends "CatrobatWebBundle:Default:base.html.twig" %}
+
+{% block head %}
+  {#{% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/login.less' filter='cssrewrite,lessphp' %}#}
+  {#<link rel="stylesheet" href="{{ asset_url }}" />#}
+  {#{% endstylesheets %}#}
+{% endblock %}
+
+{% block header %}
+  {{ render(controller('catrobat.web.default.controller:headerLogoAction', { _locale: app.request.locale, _embedded: true })) }}
+{% endblock header%}
+
+{% block body %}
+
+{% block fos_user_content %}
+  <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+
+
+      {#<label for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>#}
+
+      <div class="input-field">
+        <input type="text" id="username" name="username" placeholder="Username or Email" />
+        <div class="img-login"></div>
+      </div>
+
+    {% if invalid_username is defined %}
+      <div class="error-text">Your Username or Email address was not found.</div>
+    {% endif %}
+
+
+
+    <button id="_submit" name="_submit" >Recover Password</button>
+
+    {#<div>#}
+      {#<input type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />#}
+    {#</div>#}
+  </form>
+{% endblock fos_user_content %}
+
+{% endblock body %}

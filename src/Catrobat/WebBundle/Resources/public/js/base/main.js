@@ -1,19 +1,16 @@
-var Main = function() {
-    var self = this;
+var Main = function () {
+  var self = this;
 
-    self.handleFooterView = function() {
-        $('#footerMoreLess').click(function() {
-            $('#wrapper, footer').toggleClass('expandFooter');
-            $(window).scrollTop($(document).height());
-        });
-    };
+  self.handleFooterView = function() {
+    $('#footer-more-less').click(function () {
+      $('body').toggleClass('footer-expand');
+      $(window).scrollTop($(document).height());
+    });
+  };
 
-    self.handleLanguage = function() {
+  self.initialize = function() {
+    self.handleFooterView();
+  };
 
-        $('#switchLanguage').on("change", function() {
-            console.log("TODO: change language");
-        });
-
-    }
-
-}
+  self.initialize();
+};

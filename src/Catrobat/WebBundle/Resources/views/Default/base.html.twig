@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
-        <meta name="robots" content="noindex,nofollow" />
-        <title>Pocket Code Website {% block title %}{% endblock %}</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <title>Pocket Code Website {% block title %}{% endblock %}</title>
 
-        {% stylesheets '@CatrobatWebBundle/Resources/public/css/plugins/*'
-                       '@CatrobatWebBundle/Resources/public/css/base/*' filter='cssrewrite,lessphp' %}
-          <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
-        {% endstylesheets %}
+  {% stylesheets '@CatrobatWebBundle/Resources/public/css/plugins/*'
+                 '@CatrobatWebBundle/Resources/public/css/base/*' filter='cssrewrite,lessphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
+  {% endstylesheets %}
 
-        {% javascripts '@CatrobatWebBundle/Resources/public/js/plugins/*'
-                       '@CatrobatWebBundle/Resources/public/js/base/*' %}
-          <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+  {% javascripts '@CatrobatWebBundle/Resources/public/js/plugins/*'
+                 '@CatrobatWebBundle/Resources/public/js/base/*' %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 
-        {% block head %}{% endblock %}
-    </head>
-    <body>
-    
-    <div id="wrapper">
-      <header>
-        {% block header %}
-          {{ render(controller('catrobat.web.default.controller:headerAction', { _locale: app.request.locale, _embedded: true })) }}
-        {% endblock %}
-      </header>
+  {% block head %}{% endblock %}
+</head>
+<body>
 
-      <article>
-        {% block body %}{% endblock %}
-      </article>
-    </div>
+<div id="wrapper">
+  <header>
+    {% block header %}
+      {{ render(controller('catrobat.web.default.controller:headerAction', { _locale: app.request.locale, _embedded: true })) }}
+    {% endblock %}
+  </header>
 
-      <footer class="size-medium">
-        {% block footer %}
-          {{ render(controller('catrobat.web.default.controller:footerAction', { _locale: app.request.locale, _embedded: true })) }}
-        {% endblock %}
-      </footer>
+  <article>
+    {% block body %}{% endblock %}
+  </article>
+</div>
+
+<footer>
+  {% block footer %}
+    {{ render(controller('catrobat.web.default.controller:footerAction', { _locale: app.request.locale, _embedded: true })) }}
+  {% endblock %}
+</footer>
 
 
-    </body>
+<script>
+  new Main();
+</script>
+
+</body>
 </html>
