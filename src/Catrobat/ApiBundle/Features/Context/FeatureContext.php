@@ -2,6 +2,7 @@
 
 namespace Catrobat\ApiBundle\Features\Context;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Behat\Behat\Context\CustomSnippetAcceptingContext;
 
 //
 // Require 3rd-party libraries here:
@@ -25,7 +27,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Feature context.
  */
-class FeatureContext implements KernelAwareContext
+class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
     const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
     private $kernel;
@@ -34,8 +36,10 @@ class FeatureContext implements KernelAwareContext
     private $request_parameters;
     
     private $files;
-    
-    /**
+
+    public static function getAcceptedSnippetType() { return 'regex'; }
+
+  /**
      * Initializes context with parameters from behat.yml.
      *
      * @param array $parameters
@@ -105,7 +109,7 @@ class FeatureContext implements KernelAwareContext
     	$programs = $table->getHash();
     	for ($i = 0; $i < count($programs); $i++)
     	{
-    		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => 'Catrobat'));
+    		$user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array('username' => $programs[$i]['owned by']));
 				$program = new Program();
 				$program->setUser($user);
 				$program->setName($programs[$i]['name']);
@@ -129,8 +133,8 @@ class FeatureContext implements KernelAwareContext
     	}
     	$em->flush();
     }
-    
-    /**
+
+  /**
      * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
      */
     public function iHaveAParameterWithValue($name, $value)
@@ -146,6 +150,15 @@ class FeatureContext implements KernelAwareContext
       $this->client = $this->kernel->getContainer()->get('test.client');
     	$crawler = $this->client->request('POST', $url, $this->request_parameters, $this->files);
     }
+
+    /**
+     * @When /^I GET "([^"]*)" with these parameters$/
+     */
+    public function iGetWithTheseParameters($url)
+    {
+      $this->client = $this->kernel->getContainer()->get('test.client');
+      $crawler = $this->client->request('GET', $url."?".http_build_query($this->request_parameters), array(), $this->files, array('HTTP_HOST' => 'localhost'));
+    }
     
     /**
      * @Given /^I am "([^"]*)"$/
@@ -156,22 +169,64 @@ class FeatureContext implements KernelAwareContext
     }
     
     /**
+     * @Given /^I search for "([^"]*)"$/
+     */
+    public function iSearchFor($arg1)
+    {
+      $this->iHaveAParameterWithValue("q", $arg1);
+      if (isset($this->request_parameters['limit']))
+      {
+        $this->iHaveAParameterWithValue("limit", $this->request_parameters['limit']);
+      }
+      else
+      {
+        $this->iHaveAParameterWithValue("limit", "1");
+      }
+      if (isset($this->request_parameters['offset']))
+      {
+        $this->iHaveAParameterWithValue("offset", $this->request_parameters['offset']);
+      }
+      else
+      {
+        $this->iHaveAParameterWithValue("offset", "0");
+      }
+      $this->iGetWithTheseParameters("/api/projects/search.json");
+    }
+
+    /**
+     * @Then /^I should get a total of "([^"]*)" projects$/
+     */
+    public function iShouldGetATotalOfProjects($arg1)
+    {
+      $response = $this->client->getResponse();
+      $responseArray = json_decode($response->getContent(),true);
+      assertEquals($arg1,$responseArray['CatrobatInformation']['TotalProjects'],"Wrong number of total projects");
+    }
+
+  /**
+     * @Given /^I use the limit "([^"]*)"$/
+     */
+    public function iUseTheLimit($arg1)
+    {
+      $this->iHaveAParameterWithValue("limit", $arg1);
+    }
+
+    /**
+     * @Given /^I use the offset "([^"]*)"$/
+     */
+    public function iUseTheOffset($arg1)
+    {
+      $this->iHaveAParameterWithValue("offset", $arg1);
+    }
+
+  /**
      * @When /^I call "([^"]*)" with token "([^"]*)"$/
      */
     public function iCallWithToken($url, $token)
     {
       $this->client = $this->kernel->getContainer()->get('test.client');
       $params = array("token" => $token, "username" => $this->user); 
-      $crawler = $this->client->request('POST', $url, $params);
-    }
-    
-    /**
-     * @Then /^I should see:$/
-     */
-    public function iShouldSee(PyStringNode $string)
-    {
-    	$response = $this->client->getResponse();
-    	assertEquals($string->getRaw(), $response->getContent());
+      $crawler = $this->client->request('GET', $url."?".http_build_query($params));
     }
     
     /**
@@ -180,7 +235,7 @@ class FeatureContext implements KernelAwareContext
     public function iShouldGetTheJsonObject(PyStringNode $string)
     {
       $response = $this->client->getResponse();
-      assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), $response->getContent());
+      assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), "");
     }
     
     /**
@@ -224,6 +279,15 @@ class FeatureContext implements KernelAwareContext
         assertEquals($expected_programs[$i]["Name"], $returned_programs[$i]["ProjectName"], "Wrong order of results");
       }
     }
+    
+    /**
+     * @Then /^I should get following programs:$/
+     */
+    public function iShouldGetFollowingPrograms(TableNode $table)
+    {
+      $this->iShouldGetProgramsInTheFollowingOrder($table);
+    }
+    
     
     /**
      * @Given /^the response code should be "([^"]*)"$/

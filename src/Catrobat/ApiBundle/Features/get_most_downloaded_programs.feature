@@ -1,5 +1,5 @@
 @api
-Feature: Get the most recent programs
+Feature: Get the most downloaded programs
 
   Background: 
     Given there are users:
@@ -9,14 +9,14 @@ Feature: Get the most recent programs
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
+      | 2  | program 2 |             | Catrobat | 333       | 9     | 01.02.2013 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
       
-  Scenario: show recent programs
+  Scenario: show most downloaded programs
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
-    When I GET "/api/projects/recent.json" with these parameters
+    When I GET "/api/projects/mostDownloaded.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -38,7 +38,7 @@ Feature: Get the most recent programs
                                                       "UploadedString":"",
                                                       "Version":"0.8.5",
                                                       "Views":"9",
-                                                      "Downloads":"33",
+                                                      "Downloads":"333",
                                                       "ProjectUrl":"details\/2",
                                                       "DownloadUrl":"download\/2.catrobat"
                                                     }],
@@ -46,22 +46,21 @@ Feature: Get the most recent programs
       }
       """
 
-  Scenario: show recent programs with limit and offset
+  Scenario: show most downloaded programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/api/projects/recent.json" with these parameters
+    When I GET "/api/projects/mostDownloaded.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | program 2 |
-      | program 1 |
-
-  Scenario: show recent programs with limit and offset
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "1"
-    When I GET "/api/projects/recent.json" with these parameters
-    Then I should get programs in the following order:
-      | Name      |
-      | program 1 |
       | program 3 |
 
-      
+  Scenario: show most downloaded programs with limit and offset
+    Given I have a parameter "limit" with value "2"
+    And I have a parameter "offset" with value "1"
+    When I GET "/api/projects/mostDownloaded.json" with these parameters
+    Then I should get programs in the following order:
+      | Name      |
+      | program 3 |
+      | program 1 |
+
