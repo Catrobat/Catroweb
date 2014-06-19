@@ -40,3 +40,9 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, group: Programs, label: Approve Programs }
         arguments: [null, Catrobat\CoreBundle\Entity\Program, null]
+
+      catrowebadmin.block.notify_upload_programs:
+        class: Catrobat\AdminBundle\Admin\UploadNotificationAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Tools, label: Upload Notify }
+        arguments: [null, Catrobat\CoreBundle\Entity\User, null]

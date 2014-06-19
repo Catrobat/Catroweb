@@ -22,7 +22,12 @@ class User extends BaseUser
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected $upload_token;
-  
+
+    /**
+    * @ORM\Column(type="boolean", nullable=true, options={"default":false})
+    */
+    protected $upload_notification;
+
   /**
    * @ORM\OneToMany(targetEntity="Program", mappedBy="user")
    */
@@ -85,5 +90,21 @@ class User extends BaseUser
   {
     $this->upload_token = $upload_token;
   }
+
+    /**
+     * @param mixed $upload_notification
+     */
+    public function setUploadNotification($upload_notification)
+    {
+        $this->upload_notification = $upload_notification;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUploadNotification()
+    {
+        return $this->upload_notification;
+    }
 
 }

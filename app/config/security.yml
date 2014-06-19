@@ -1,6 +1,8 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        FOS\UserBundle\Model\UserInterface:
+          algorithm: bcrypt
+          cost:      11
 
     role_hierarchy:
 #        # for convenience, I decided to gather Sonata roles here

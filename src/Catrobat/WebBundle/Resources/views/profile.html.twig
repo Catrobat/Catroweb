@@ -1,12 +1,12 @@
 {% extends 'CatrobatWebBundle:Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/profile.css' filter='cssrewrite,lessphp' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+  {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/profile.css' filter='cssrewrite,lessphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+  {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
-    Profilepage with profile id: {{ entity }}
+  Profilepage with profile id: {{ profile }}
 {% endblock %}
 

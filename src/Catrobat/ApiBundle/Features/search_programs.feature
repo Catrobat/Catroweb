@@ -151,7 +151,6 @@ Feature: Search programs
         | Whack the Marko     |
 
 
-
   Scenario Outline: the result contains the number of all projects effected by the search, independent from offset and limit
 
     Given I use the limit "<Limit>"
@@ -164,7 +163,6 @@ Feature: Search programs
     | User1  |   1   |   1    |      7        |
     | User1  |   9   |   2    |      7        |
     | Marko  |   5   |   0    |      2        |
-
 
 
   Scenario: to browse programs in smaller chunks you can request a subset of found projects 
@@ -194,4 +192,108 @@ Feature: Search programs
     Then I should get following programs:
         | Name                |
         | Fisch               |
+
+#
+#
+#
+#
+#  @TODO
+#  Scenario: search programs by name and with a limit of 5 and offset of 0
+#    Given I have a parameter "projectName" with value "program 1"
+#    And I have a parameter "limit" with value "5"
+#    And I have a parameter "offset" with value "0"
+#    When I POST these parameters to "/api/projects/search.json"
+#    Then I should get the json object:
+#"""
+#{
+#  "completeTerm":"",
+#  "CatrobatInformation": {
+#		"BaseUrl":"https:\/\/localhost\/",
+#		"TotalProjects":3,
+#		"ProjectsExtension":".catrobat"
+#  },
+#  "CatrobatProjects":[{
+#		"ProjectId":"1",
+#		"ProjectName":"program 1",
+#		"ProjectNameShort":"program 1",
+#		"ScreenshotBig":"resources\/thumbnails\/1_large.png",
+#		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+#		"Author":"Catrobat",
+#		"Description":"p1",
+#		"Uploaded":"1357041600",
+#		"UploadedString":<timestring>,
+#		"Version":"0.8.5",
+#		"Views":"12",
+#		"Downloads":"3",
+#		"ProjectUrl":"details\/1",
+#		"DownloadUrl":"download\/1.catrobat"
+#  }],
+#  "preHeaderMessages":""
+#}
+#"""
+#
+#
+#  @TODO
+#  Scenario: search programs by name and with a limit of 5 and offset of 2
+#    Given I have a parameter "projectName" with value "program 1"
+#    And I have a parameter "limit" with value "5"
+#    And I have a parameter "offset" with value "2"
+#    When I POST these parameters to "/api/projects/search.json"
+#    Then I should get the json object:
+#"""
+#{
+#  "completeTerm":"",
+#  "CatrobatInformation": {
+#		"BaseUrl":"https:\/\/localhost\/",
+#		"TotalProjects":3,
+#		"ProjectsExtension":".catrobat"
+#  },
+#  "CatrobatProjects":[{
+#		"ProjectId":"1",
+#		"ProjectName":"program 1",
+#		"ProjectNameShort":"program 1",
+#		"ScreenshotBig":"resources\/thumbnails\/1_large.png",
+#		"ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+#		"Author":"Catrobat",
+#		"Description":"p1",
+#		"Uploaded":"1357041600",
+#		"UploadedString":<timestring>,
+#		"Version":"0.8.5",
+#		"Views":"12",
+#		"Downloads":"3",
+#		"ProjectUrl":"details\/1",
+#		"DownloadUrl":"download\/1.catrobat"
+#  }],
+#  "preHeaderMessages":""
+#}
+#"""
+#
+#
+#
+#  @TODO
+#  Scenario: search all users
+#    Given I have a parameter "projectName" with value "program 1"
+#    And I have a parameter "limit" with value "1"
+#    And I have a parameter "offset" with value "0"
+#    When I POST these parameters to "/api/projects/search.json"
+#    Then I should get the json object:
+#    """
+#{
+#  "UserCount":"2";
+#}
+#"""
+#
+#  @TODO
+#  Scenario: search user by name
+#    Given I have a parameter "Author" with value "User1"
+#    And I have a parameter "limit" with value "1"
+#    And I have a parameter "offset" with value "0"
+#    When I POST these parameters to "/api/projects/search.json"
+#    Then I should get the json object:
+#"""
+#{
+#"Author":"User1";
+#}
+#"""
+
 

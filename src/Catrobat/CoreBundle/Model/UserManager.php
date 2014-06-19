@@ -4,9 +4,9 @@ namespace Catrobat\CoreBundle\Model;
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use FOS\UserBundle\Model\UserInterface;
+use Sonata\UserBundle\Model\UserInterface;
 
-class UserManager extends \FOS\UserBundle\Doctrine\UserManager
+class UserManager extends \Sonata\UserBundle\Entity\UserManager
 {
   public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, ObjectManager $om, $class)
   {

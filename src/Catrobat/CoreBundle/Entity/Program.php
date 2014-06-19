@@ -116,6 +116,34 @@ class Program
    * @ORM\JoinColumn(name="remix_id", referencedColumnName="id")
    */
   protected $remix_of;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    protected $approved;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\CoreBundle\Entity\User")
+     * @ORM\JoinColumn(name="approved_by_user", referencedColumnName="id", nullable=true)
+     */
+    protected $approved_by_user;
+
+    /**
+     * @param mixed $approved_by_user
+     */
+    public function setApprovedByUser($approved_by_user)
+    {
+        $this->approved_by_user = $approved_by_user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApprovedByUser()
+    {
+        return $this->approved_by_user;
+    }
   
   /**
    * @ORM\PreUpdate
@@ -124,11 +152,6 @@ class Program
   {
     $this->setLastModifiedAt(new \DateTime());
   }
-
-  /**
-  * @ORM\Column(type="boolean", options={"default":false})
-  */
-  protected $approved;
 
   /**
    * @ORM\PrePersist

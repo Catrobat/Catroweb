@@ -1,0 +1,45 @@
+{% extends "CatrobatWebBundle:Default:base.html.twig" %}
+
+{% block head %}
+  {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/login.less' filter='cssrewrite,lessphp' %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    {{ render(controller('catrobat.web.default.controller:headerLogoAction', { _locale: app.request.locale, _embedded: true })) }}
+{% endblock header%}
+
+{% block body %}
+
+{% block fos_user_content %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    {#<label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>#}
+    <div class="input-field">
+      <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" />
+      <div class="img-login"></div>
+    </div>
+
+    {#<label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>#}
+    <div class="input-field">
+      <input type="password" id="password" name="_password" placeholder="Password" />
+      <div class="img-password"></div>
+    </div>
+
+    {#<input type="checkbox" id="remember_me" name="_remember_me" value="on" />#}
+
+    {#<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />#}
+
+    {% if error %}
+      <div class="error-text">Your password or username<br /> was incorrect.</div>
+    {% endif %}
+
+    <button id="_submit" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+</form>
+  <div class="link center"><a href="resetting/request">Forgot password or username?</a></div>
+{% endblock fos_user_content %}
+
+{% endblock body %}
