@@ -5,15 +5,14 @@ namespace Catrobat\ApiBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SearchController
 {
-    protected $templating;
     protected $program_manager;
     
-    public function __construct(EngineInterface $templating, ProgramManager $program_manager)
+    public function __construct(ProgramManager $program_manager)
     {
-      $this->templating = $templating;
       $this->program_manager = $program_manager;
     }
      
@@ -48,7 +47,7 @@ class SearchController
       $retArray['completeTerm'] = "";
       $retArray['preHeaderMessages'] = "";
       $retArray['CatrobatInformation'] = array("BaseUrl" => 'https://' . $request->getHttpHost() . '/', "TotalProjects" => $numbOfTotalProjects, "ProjectsExtension" => ".catrobat");
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:searchPrograms.json.twig', array('b' => $retArray));
+      return JsonResponse::create($retArray);
     }
         
 }
