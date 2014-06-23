@@ -7,7 +7,7 @@
 	],
 	"require" : {
 		"jms/i18n-routing-bundle" : "dev-master",
-		"symfony/symfony" : "2.4.*",
+		"symfony/symfony" : "2.5.*",
 		"symfony/icu" : "1.2.*",
 		"leafo/lessphp" : "dev-master",
 		"doctrine/doctrine-fixtures-bundle" : "dev-master",
@@ -31,7 +31,8 @@
 		"sonata-project/core-bundle": "~2.2@dev",
 		"sonata-project/admin-bundle": "2.3.*@dev",
 		"sonata-project/user-bundle": "2.3.*@dev",
-		"sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev"
+		"sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
+		"sonata-project/datagrid-bundle": "2.2.*@dev"
 	},
 	"require-dev" : {
 		"phpspec/phpspec" : "dev-master",
