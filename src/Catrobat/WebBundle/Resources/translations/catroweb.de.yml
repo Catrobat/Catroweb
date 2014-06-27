@@ -1,4 +1,6 @@
 ---
-programs.newest: Neueste Programme
-programs.most.viewed: Meistangesehen
-programs.most.downloaded: Meist heruntergeladen
+programs:
+  newest: Neueste Programme
+  most:
+    viewed: Meistangesehen
+    downloaded: Die meisten downloaded2

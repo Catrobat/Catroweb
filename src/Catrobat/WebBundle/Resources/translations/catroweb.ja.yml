@@ -1,4 +1,6 @@
 ---
-programs.newest: Newest program
-programs.most.viewed: Most viewed
-programs.most.downloaded: Most downloaded
+programs:
+  newest: Newest program
+  most:
+    viewed: Most viewed
+    downloaded: Most downloaded2
