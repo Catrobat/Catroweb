@@ -82,7 +82,7 @@ h3 {
 }
 
 h1 {
-  font-size: 21px;
+  font-size: 30px;
   padding: 1px 1px;
   border-bottom: 1px solid @default-text-color;
 }
@@ -115,8 +115,8 @@ h2 {
   font-size: @default-font-size + 4;
 }
 
-.programs {
-
+.padding {
+  padding: 25px;
 }
 
 #header-logo {
@@ -203,6 +203,77 @@ form {
       text-align: center;
     }
   }
+}
+
+.programs {
+  overflow: hidden;
+  width: 98.5%;
+  margin: 25px auto 0 auto;
+
+  img {
+    height: 84px;
+    width: 84px;
+    border: 2px solid #17a5b8; /* TODO CHANGE COLORRRR TO VARIABLE */
+  }
+
+  .no-programs {
+    text-align: center;
+    font-size: 16px; //todo: change to variable...
+  }
+
+  > .program {
+    float: left;
+    width: 11.11%; /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in 'ProgramLoader.js' before changing the width! */
+    padding-bottom: 20px;
+
+    > div {
+      margin: auto;
+      width: 84px;
+      cursor: pointer;
+
+      > div {
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+
+      > div:nth-child(2) {
+        padding: 2px 0;
+      }
+    }
+
+    @media (max-width: 975px) {
+      width: 12.5%; /* 8 in a row */
+    }
+    @media (max-width: 865px) {
+      width: 14.28571%; /* 7 in a row */
+    }
+    @media (max-width: 755px) {
+      width: 16.667%; /* 6 in a row */
+    }
+    @media (max-width: 645px) {
+      width: 20%; /* 5 in a row */
+    }
+    @media (max-width: 535px) {
+      width: 25%; /* 4 in a row */
+    }
+    @media (max-width: 425px) {
+      width: 33.33%; /* 3 in a row */
+    }
+  }
+}
+
+.button-show-more, .button-show-ajax {
+  margin: 0px auto 30px auto;
+  text-align: center;
+}
+
+.button-show-more {
+  cursor: pointer;
+}
+
+.button-show-ajax {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {

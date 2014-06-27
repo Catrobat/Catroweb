@@ -1,32 +1,42 @@
 {% extends 'CatrobatWebBundle:Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/index.css' filter='cssrewrite,lessphp' %}
-      <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+  {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/index.css' filter='cssrewrite,lessphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
 
-    <div id="featuredPrograms">
-      <h1>Featured</h1>
-      <div class="programs">[][][][][]</div>
-    </div>
+  <div id="featuredPrograms">
+    <h1>Featured</h1>
+    <div></div>
+  </div>
 
-    <div id="newest">
-      <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
-      <div class="programs">[][][][][]</div>
-    </div>
+  <div id="newest">
+    <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
+    <div class="programs"></div>
+  </div>
 
-    <div id="mostDownloaded">
-        <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
-      <div class="programs">[][][][][]</div>
-    </div>
+  <div id="mostDownloaded">
+      <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
+    <div class="programs"></div>
+  </div>
 
-    <div id="mostViewed">
-        <h1>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h1>
-      <div class="programs">[][][][][]</div>
-    </div>
+  <div id="mostViewed">
+      <h1>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h1>
+    <div class="programs"></div>
+  </div>
 
 {% endblock %}
 
+{% block js %}
+  <script>
+    var newest = new ProgramLoader('#newest', '{{ path('catrobat_api_recent_programs') }}');
+    var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('catrobat_api_most_downloaded_programs') }}');
+    var mostViewed = new ProgramLoader('#mostViewed', '{{ path('catrobat_api_most_viewed_programs') }}');
+    newest.init();
+    mostDownloaded.init();
+    mostViewed.init();
+  </script>
+{% endblock %}

@@ -12,7 +12,7 @@
 
   {% javascripts '@CatrobatWebBundle/Resources/public/js/plugins/*'
                  '@CatrobatWebBundle/Resources/public/js/base/*' %}
-  <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 
   {% block head %}{% endblock %}
@@ -41,6 +41,7 @@
 <script>
   new Main();
 </script>
+{% block js %}{% endblock %}
 
 </body>
 </html>

@@ -11,6 +11,5 @@ var Main = function () {
   self.initialize = function() {
     self.handleFooterView();
   };
-
   self.initialize();
 };
