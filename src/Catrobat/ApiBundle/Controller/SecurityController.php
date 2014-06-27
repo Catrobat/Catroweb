@@ -14,24 +14,23 @@ use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SecurityController
 {
-    protected $templating;
     protected $user_manager;
     protected $program_manager;
     protected $tokenGenerator;
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, TokenGenerator $tokenGenerator)
+    public function __construct(UserManager $user_manager, TokenGenerator $tokenGenerator)
     {
-      $this->templating = $templating;
       $this->user_manager = $user_manager;
       $this->tokenGenerator = $tokenGenerator;
     }
   
     public function checkTokenAction()
     {
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:checkToken.json.twig');
+      return JsonResponse::create(array("statusCode" => 200, "answer" => "ok", "preHeaderMessages" => "  \n"));
     }
     
     public function loginOrRegisterAction(Request $request)
@@ -93,7 +92,7 @@ class SecurityController
           
         }
       }
-      
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:loginOrRegister.json.twig', $retArray);
+      $retArray['preHeaderMessages'] = "";
+      return JsonResponse::create($retArray);
     }
 }

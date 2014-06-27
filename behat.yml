@@ -3,7 +3,7 @@ default:
         pretty:   false
         progress: true
     extensions:
-        Behat\Symfony2Extension\Extension: 
+        Behat\Symfony2Extension\ServiceContainer\Symfony2Extension: 
             kernel:
                 env: test
                 debug: true

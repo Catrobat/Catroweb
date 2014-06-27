@@ -7,27 +7,27 @@ parameters:
 services:
     catrobat.api.controller.search:
         class: "%catrobat.api.controller.search.class%"
-        arguments: ["@templating", "@catrobat.core.model.programmanager"]
+        arguments: ["@catrobat.core.model.programmanager"]
 
     catrobat.api.controller.listprograms:
         class: "%catrobat.api.controller.listprograms.class%"
-        arguments: ["@templating", "@catrobat.core.model.programmanager"]
+        arguments: ["@catrobat.core.model.programmanager"]
 
     catrobat.api.controller.listmostdownloadedprograms:
         class: "%catrobat.api.controller.listprograms.class%"
-        arguments: ["@templating", "@catrobat.core.model.programmanager"]
+        arguments: ["@catrobat.core.model.programmanager"]
 
     catrobat.api.controller.listmostviewedprograms:
         class: "%catrobat.api.controller.listprograms.class%"
-        arguments: ["@templating", "@catrobat.core.model.programmanager"]
+        arguments: ["@catrobat.core.model.programmanager"]
 
     catrobat.api.controller.security:
         class: "%catrobat.api.controller.security.class%"
-        arguments: ["@templating","@catrobat.core.model.usermanager", "@catrobat.core.services.tokengenerator"]
+        arguments: ["@catrobat.core.model.usermanager", "@catrobat.core.services.tokengenerator"]
         
     catrobat.api.controller.upload:
         class: "%catrobat.api.controller.upload.class%"
-        arguments: ["@templating","@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.programmanager", "@catrobat.core.services.tokengenerator"]
+        arguments: ["@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.programmanager", "@catrobat.core.services.tokengenerator"]
 
     uploadtoken.security.authentication.provider:
         class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider
@@ -35,4 +35,4 @@ services:
 
     uploadtoken.security.authentication.listener:
         class:  Catrobat\ApiBundle\Security\UploadTokenListener
-        arguments: ["@security.context", "@security.authentication.manager","","@templating"]
+        arguments: ["@security.context", "@security.authentication.manager",""]

@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new Catrobat\CoreBundle\CatrobatCoreBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             //Begin Sonata--Admin
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),

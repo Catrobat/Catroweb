@@ -15,18 +15,17 @@ use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Buzz\Exception\InvalidArgumentException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UploadController
 {
-    protected $templating;
     protected $user_manager;
     protected $context;
     protected $program_manager;
     protected $tokenGenerator;
     
-    public function __construct(EngineInterface $templating, UserManager $user_manager, SecurityContext $context, ProgramManager $program_manager, TokenGenerator $tokenGenerator)
+    public function __construct(UserManager $user_manager, SecurityContext $context, ProgramManager $program_manager, TokenGenerator $tokenGenerator)
     {
-      $this->templating = $templating;
       $this->user_manager = $user_manager;
       $this->context = $context;
       $this->program_manager = $program_manager;
@@ -35,6 +34,7 @@ class UploadController
 
     public function uploadAction(Request $request)
     {
+      $response = array();
       if ($request->files->count() != 1)
       {
         $response["statusCode"] = InvalidCatrobatFileException::MISSING_POST_DATA;
@@ -94,6 +94,6 @@ class UploadController
         
 //      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
       $response["preHeaderMessages"] = "";
-      return $this->templating->renderResponse('CatrobatApiBundle:Api:upload.json.twig', array("response" => $response));
+      return JsonResponse::create($response);
     }
 }
