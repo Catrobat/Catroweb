@@ -18,16 +18,31 @@ class CatrowebTranslator extends Translator
 
   public function addResource($format, $resource, $locale, $domain = "catroweb")
   {
-    parent::addResource($format, $resource, $locale, "catroweb");
+    if (file_exists("./../Resources/translations/catroweb.en.yml")) {
+      $domain = "catroweb";
+    } else {
+      $domain = "messages";
+    }
+    parent::addResource($format, $resource, $locale, $domain);
   }
 
   public function trans($id, array $parameters = array(), $domain = "catroweb", $locale = null)
   {
-    return parent::trans($id, $parameters, "catroweb", $locale);
+    if (file_exists("./../Resources/translations/catroweb.en.yml")) {
+      $domain = "catroweb";
+    } else {
+      $domain = "messages";
+    }
+    return parent::trans($id, $parameters, $domain, $locale);
   }
 
   public function transChoice($id, $number, array $parameters = array(), $domain = "catroweb", $locale = null)
   {
-    return parent::transChoice($id, $number, $parameters, "catroweb", $locale);
+    if (file_exists("./../Resources/translations/catroweb.en.yml")) {
+      $domain = "catroweb";
+    } else {
+      $domain = "messages";
+    }
+    return parent::transChoice($id, $number, $parameters, $domain, $locale);
   }
 } 
