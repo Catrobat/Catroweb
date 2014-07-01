@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CoreBundle\Spec\Services\Validators;
+namespace Catrobat\CoreBundle\Spec\Listeners;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -10,7 +10,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Catrobat\CoreBundle\Services\Validators\DescriptionValidator');
+        $this->shouldHaveType('Catrobat\CoreBundle\Listeners\DescriptionValidator');
     }
     
     /**

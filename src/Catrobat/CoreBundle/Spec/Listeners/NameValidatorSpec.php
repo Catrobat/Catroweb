@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CoreBundle\Spec\Services\Validators;
+namespace Catrobat\CoreBundle\Spec\Listeners;
 
 use Symfony\Component\Translation\Tests\String;
 
@@ -12,7 +12,7 @@ class NameValidatorSpec extends ObjectBehavior
   
     function it_is_initializable()
     {
-        $this->shouldHaveType('Catrobat\CoreBundle\Services\Validators\NameValidator');
+        $this->shouldHaveType('Catrobat\CoreBundle\Listeners\NameValidator');
     }
 
     /**
