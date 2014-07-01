@@ -48,9 +48,3 @@ services:
       catrobat.core.services.tokengenerator:
               class:        Catrobat\CoreBundle\Services\TokenGenerator
 
-      catrobat.core.services.invalidprogramuploadlogger:
-              class:        Catrobat\CoreBundle\Services\InvalidProgramUploadLogger
-              arguments:    ["@logger"]
-              tags:
-                  - { name: monolog.logger, channel: upload }
-                  - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }

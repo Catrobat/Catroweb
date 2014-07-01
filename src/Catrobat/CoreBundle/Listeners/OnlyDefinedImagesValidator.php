@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CoreBundle\Services\Validators;
+namespace Catrobat\CoreBundle\Listeners;
 
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
