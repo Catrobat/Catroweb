@@ -16,6 +16,7 @@ class CreateUserRequest
 
   /**
    * @Assert\NotBlank(message = "error.username.blank")
+   * @Assert\Regex(pattern="/^[\w@_\-\.]+$/")
    */  
   public $username;
 
