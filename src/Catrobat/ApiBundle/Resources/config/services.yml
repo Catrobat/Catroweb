@@ -23,7 +23,7 @@ services:
 
     catrobat.api.controller.security:
         class: "%catrobat.api.controller.security.class%"
-        arguments: ["@catrobat.core.model.usermanager", "@catrobat.core.services.tokengenerator","@validator"]
+        arguments: ["@catrobat.core.model.usermanager", "@catrobat.core.services.tokengenerator","@validator", "@translator"]
         
     catrobat.api.controller.upload:
         class: "%catrobat.api.controller.upload.class%"

@@ -17,23 +17,26 @@ use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\ValidatorInterface;
 use Catrobat\ApiBundle\Requests\CreateUserRequest;
+use Symfony\Component\Translation\Translator;
 
 class SecurityController
 {
     protected $user_manager;
     protected $tokenGenerator;
     protected $validator;
+    protected $translator;
     
-    public function __construct(UserManager $user_manager, TokenGenerator $tokenGenerator, ValidatorInterface $validator)
+    public function __construct(UserManager $user_manager, TokenGenerator $tokenGenerator, ValidatorInterface $validator, Translator $translator)
     {
       $this->user_manager = $user_manager;
       $this->tokenGenerator = $tokenGenerator;
       $this->validator = $validator;
+      $this->translator = $translator;
     }
   
     public function checkTokenAction()
     {
-      return JsonResponse::create(array("statusCode" => 200, "answer" => "ok", "preHeaderMessages" => "  \n"));
+      return JsonResponse::create(array("statusCode" => 200, "answer" => $this->trans("success.token"), "preHeaderMessages" => "  \n"));
     }
     
     public function loginOrRegisterAction(Request $request)
@@ -51,7 +54,7 @@ class SecurityController
         foreach ($violations as $violation)
         {
           $retArray['statusCode'] = 602;
-          $retArray['answer'] = $violation->getMessage();
+          $retArray['answer'] = $this->trans($violation->getMessageTemplate(),$violation->getParameters());
           break;
         }
         
@@ -66,7 +69,7 @@ class SecurityController
           
           $userManager->updateUser($user);
           $retArray['statusCode'] = 201;
-          $retArray['answer'] = "Registration successful!";
+          $retArray['answer'] = $this->trans("success.registration");
           $retArray['token'] = $user->getToken();
         }
       } 
@@ -83,11 +86,16 @@ class SecurityController
         else 
         {
           $retArray['statusCode'] = 601;
-          $retArray['answer'] = "The password or username was incorrect.";
+          $retArray['answer'] = $this->trans("error.login");
           
         }
       }
       $retArray['preHeaderMessages'] = "";
       return JsonResponse::create($retArray);
+    }
+    
+    private function trans($message, $parameters = array())
+    {
+      return $this->translator->trans($message,$parameters,"catroweb_api");
     }
 }
