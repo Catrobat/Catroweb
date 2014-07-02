@@ -13,5 +13,5 @@ error:
     invalid: Your email seems to be invalid
   login: The password or username was incorrect.
 success:
-  registration: Registration successful!
+  registration: تم التسجيل بنجاح
   token: ok

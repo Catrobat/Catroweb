@@ -1,0 +1,17 @@
+---
+error:
+  username:
+    blank: Username must not be blank
+  password:
+    blank: '&#x41F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x434;&#x43E;&#x43B;&#x436;&#x435;&#x43D; &#x43E;&#x442;&#x43B;&#x438;&#x447;&#x430;&#x442;&#x44C;&#x441;&#x44F; &#x43E;&#x442; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x430;.'
+    short: 'Your password must have at least {{ limit }} characters.'
+  country:
+    blank: '&#x410;&#x443;&#x442;&#x435;&#x43D;&#x442;&#x438;&#x444;&#x438;&#x43A;&#x430;&#x446;&#x438;&#x44F; &#x43D;&#x435; &#x443;&#x434;&#x430;&#x43B;&#x430;&#x441;&#x44C;.'
+    invalid: Invalid country
+  email:
+    blank: email must not be blank
+    invalid: Your email seems to be invalid
+  login: '&#x41E;&#x442;&#x432;&#x435;&#x442; &#x43E;&#x442; mediawiki API &#x431;&#x44B;&#x43B; &#x43D;&#x435; &#x43F;&#x440;&#x430;&#x432;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x43C;.'
+success:
+  registration: 'BOARD &#x440;&#x435;&#x433;&#x438;&#x441;&#x442;&#x440;&#x430;&#x446;&#x438;&#x44F; &#x43F;&#x440;&#x43E;&#x448;&#x43B;&#x430; &#x443;&#x441;&#x43F;&#x435;&#x448;&#x43D;&#x43E;!'
+  token: ok

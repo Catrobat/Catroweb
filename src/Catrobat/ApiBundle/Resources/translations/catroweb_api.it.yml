@@ -3,15 +3,15 @@ error:
   username:
     blank: Username must not be blank
   password:
-    blank: The password is missing.
+    blank: Manca la password.
     short: 'Your password must have at least {{ limit }} characters.'
   country:
-    blank: The country is missing.
+    blank: Manca la nazione.
     invalid: Invalid country
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-  login: The password or username was incorrect.
+  login: La password o il nome utente sono sbagliati.
 success:
-  registration: Registration successful!
+  registration: Registrazione effettuata con successo!
   token: ok

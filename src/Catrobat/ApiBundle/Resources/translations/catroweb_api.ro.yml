@@ -3,15 +3,15 @@ error:
   username:
     blank: Username must not be blank
   password:
-    blank: The password is missing.
+    blank: 'Parola trebuie s&#x103; difere de nume.'
     short: 'Your password must have at least {{ limit }} characters.'
   country:
-    blank: The country is missing.
+    blank: 'Autentificarea &#xEE;n board a e&#x219;uat.'
     invalid: Invalid country
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-  login: The password or username was incorrect.
+  login: 'R&#x103;spunsul mediawiki API a fost gre&#x219;it.'
 success:
-  registration: Registration successful!
+  registration: 'BOARD registrare reu&#x219;it&#x103;!'
   token: ok

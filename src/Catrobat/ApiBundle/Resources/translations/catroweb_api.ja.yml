@@ -3,15 +3,15 @@ error:
   username:
     blank: Username must not be blank
   password:
-    blank: The password is missing.
+    blank: パスワードがありません。
     short: 'Your password must have at least {{ limit }} characters.'
   country:
-    blank: The country is missing.
+    blank: 国は、不足しています。
     invalid: Invalid country
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-  login: The password or username was incorrect.
+  login: ユーザー名またはパスワードが正しくありません。
 success:
-  registration: Registration successful!
+  registration: 登録に成功しました ！
   token: ok

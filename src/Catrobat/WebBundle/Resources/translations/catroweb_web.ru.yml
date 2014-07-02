@@ -1,0 +1,6 @@
+---
+programs:
+  newest: Newest program
+  most:
+    viewed: Most viewed
+    downloaded: Most downloaded
