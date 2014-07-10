@@ -3,7 +3,7 @@
 @footer-height-bottom: 35px;
 
 footer {
-  margin-top: -@footer-height-desktop - @footer-height-bottom !important;
+  margin-top: -@footer-height-desktop - @footer-height-bottom - @footer-border !important;
   background-color: #177f8d;
   color: #fff;
   font-size: @default-font-size;
@@ -16,6 +16,7 @@ footer {
 
 #footer-menu-desktop {
   overflow: auto;
+  border-bottom: 1px solid #385f6e;
 
   #footer-menu-desktop-left {
     > div {
@@ -51,8 +52,8 @@ footer {
 }
 
 #footer-menu-bottom {
-  border-top: 1px solid #385f6e;
-  border-bottom: 1px solid #385f6e;
+//  border-top: 1px solid #385f6e;
+//  border-bottom: 1px solid #385f6e;
   height: @footer-height-bottom;
   overflow: auto;
 
@@ -91,7 +92,6 @@ footer {
 
 #footer-menu-mobile {
   display: none;
-  padding: 10px 0;
 
   > div {
     text-align: center;
