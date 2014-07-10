@@ -1,13 +1,15 @@
 {% extends 'CatrobatWebBundle:Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/licenseToPlay.css' filter='cssrewrite,lessphp' %}
+    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/licenseToPlay.less' filter='cssrewrite,lessphp' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
   <h1>License To Play</h1>
-  <div class=""
+  <div class="license-text standard-article-text size-large">
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  </div>
 {% endblock %}
 
