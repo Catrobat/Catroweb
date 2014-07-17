@@ -27,7 +27,7 @@ services:
         
     catrobat.api.controller.upload:
         class: "%catrobat.api.controller.upload.class%"
-        arguments: ["@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.programmanager", "@catrobat.core.services.tokengenerator"]
+        arguments: ["@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.programmanager", "@catrobat.core.services.tokengenerator","@translator"]
 
     uploadtoken.security.authentication.provider:
         class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider
