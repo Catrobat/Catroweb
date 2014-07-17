@@ -6,6 +6,7 @@ use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent;
+use Catrobat\CoreBundle\StatusCode;
 
 class OnlyDefinedImagesValidator
 {
@@ -24,12 +25,12 @@ class OnlyDefinedImagesValidator
     $files = array_diff($files_in_directory, $files_in_xml);
     if (count($files) > 0)
     {
-      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::UNEXPECTED_FILE);
+      throw new InvalidCatrobatFileException(StatusCode::UNEXPECTED_FILE);
     }
     $files = array_diff($files_in_xml, $files_in_directory);
     if (count($files) > 0)
     {
-      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::IMAGE_MISSING);
+      throw new InvalidCatrobatFileException(StatusCode::IMAGE_MISSING);
     }
   }
 

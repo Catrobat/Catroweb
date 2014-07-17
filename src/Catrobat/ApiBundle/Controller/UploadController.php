@@ -16,6 +16,7 @@ use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Buzz\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Catrobat\CoreBundle\StatusCode;
 
 class UploadController
 {
@@ -37,17 +38,17 @@ class UploadController
       $response = array();
       if ($request->files->count() != 1)
       {
-        $response["statusCode"] = InvalidCatrobatFileException::MISSING_POST_DATA;
+        $response["statusCode"] = StatusCode::MISSING_POST_DATA;
         $response["answer"] = "POST-Data not correct or missing!";
       }
       else if (!$request->request->has("fileChecksum"))
       {
-        $response["statusCode"] = InvalidCatrobatFileException::MISSING_CHECKSUM;
+        $response["statusCode"] = StatusCode::MISSING_CHECKSUM;
         $response["answer"] = "Client did not send fileChecksum! Are you using an outdated version of Pocket Code?";
       }
       else if (md5_file($request->files->get(0)->getPathname()) != $request->request->get("fileChecksum"))
       {
-        $response["statusCode"] = InvalidCatrobatFileException::INVALID_CHECKSUM;
+        $response["statusCode"] = StatusCode::INVALID_CHECKSUM;
         $response["answer"] = "invalid checksum";
       }
       else
@@ -71,19 +72,19 @@ class UploadController
           $response["statusCode"] = $exception->getStatusCode();
           switch ($exception->getStatusCode())
           {
-            case InvalidCatrobatFileException::PROJECT_XML_MISSING:
+            case StatusCode::PROJECT_XML_MISSING:
               $response["answer"] = "unknown error: project_xml_not_found!";
               break;
-            case InvalidCatrobatFileException::IMAGE_MISSING:
+            case StatusCode::IMAGE_MISSING:
               $response["answer"] = "Project XML mentions a file which not exists in project-folder";
               break;
-            case InvalidCatrobatFileException::UNEXPECTED_FILE:
+            case StatusCode::UNEXPECTED_FILE:
               $response["answer"] = "unexpected file found";
               break;
-            case InvalidCatrobatFileException::INVALID_XML:
+            case StatusCode::INVALID_XML:
               $response["answer"] = "invalid code xml";
               break;
-            case InvalidCatrobatFileException::INVALID_FILE:
+            case StatusCode::INVALID_FILE:
               $response["answer"] = "invalid file";
               break;
             default:

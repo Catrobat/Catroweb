@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\ValidatorInterface;
 use Catrobat\ApiBundle\Requests\CreateUserRequest;
 use Symfony\Component\Translation\Translator;
+use Catrobat\CoreBundle\StatusCode;
 
 class SecurityController
 {
@@ -36,7 +37,7 @@ class SecurityController
   
     public function checkTokenAction()
     {
-      return JsonResponse::create(array("statusCode" => 200, "answer" => $this->trans("success.token"), "preHeaderMessages" => "  \n"));
+      return JsonResponse::create(array("statusCode" => StatusCode::OK, "answer" => $this->trans("success.token"), "preHeaderMessages" => "  \n"));
     }
     
     public function loginOrRegisterAction(Request $request)
@@ -53,7 +54,7 @@ class SecurityController
         $violations = $this->validator->validate($create_request);
         foreach ($violations as $violation)
         {
-          $retArray['statusCode'] = 602;
+          $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
           $retArray['answer'] = $this->trans($violation->getMessageTemplate(),$violation->getParameters());
           break;
         }
@@ -75,19 +76,18 @@ class SecurityController
       } 
       else 
       {
-        $retArray['statusCode'] = 200;
+        $retArray['statusCode'] = StatusCode::OK;
         $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
         
         if ($correct_pass) 
         {
-          $retArray['statusCode'] = 200;
+          $retArray['statusCode'] = StatusCode::OK;
           $retArray['token'] = $user->getUploadToken();
         } 
         else 
         {
-          $retArray['statusCode'] = 601;
+          $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
           $retArray['answer'] = $this->trans("error.login");
-          
         }
       }
       $retArray['preHeaderMessages'] = "";

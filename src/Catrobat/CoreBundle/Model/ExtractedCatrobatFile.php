@@ -2,6 +2,7 @@
 namespace Catrobat\CoreBundle\Model;
 
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\CoreBundle\StatusCode;
 
 class ExtractedCatrobatFile
 {
@@ -14,13 +15,13 @@ class ExtractedCatrobatFile
     
     if (!file_exists($base_dir . "code.xml"))
     {
-      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::PROJECT_XML_MISSING);
+      throw new InvalidCatrobatFileException(StatusCode::PROJECT_XML_MISSING);
     }
     
     $this->program_xml_properties = @simplexml_load_file($base_dir . "code.xml");
     if ($this->program_xml_properties === false)
     {
-      throw new InvalidCatrobatFileException(InvalidCatrobatFileException::INVALID_XML);
+      throw new InvalidCatrobatFileException(StatusCode::INVALID_XML);
     }
   }
 
