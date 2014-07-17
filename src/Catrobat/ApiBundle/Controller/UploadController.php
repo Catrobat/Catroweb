@@ -91,7 +91,7 @@ class UploadController
               $response["answer"] = $this->trans("error.file.invalid");
               break;
             default:
-              $response["answer"] = $this->trans("error.file.unkonw");
+              $response["answer"] = $this->trans("error.file.unknown");
           }
         }
       }
