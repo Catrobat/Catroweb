@@ -46,6 +46,7 @@ class ListProgramsController
     else
       $programs = $this->program_manager->getRecentPrograms($limit, $offset);
 
+    $retArray['CatrobatProjects'] = array();
     foreach ($programs as $program)
     {
       $new_program = array();
