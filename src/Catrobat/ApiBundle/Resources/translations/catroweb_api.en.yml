@@ -24,6 +24,7 @@ error:
     invalid: invalid file
   image.missing: Project XML mentions a file which not exists in project-folder
   unknown: unknown error
+  token: 'Authentication of device failed: invalid auth-token!'
 success:
   registration: Registration successful!
   token: ok

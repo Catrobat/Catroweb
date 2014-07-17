@@ -35,4 +35,4 @@ services:
 
     uploadtoken.security.authentication.listener:
         class:  Catrobat\ApiBundle\Security\UploadTokenListener
-        arguments: ["@security.context", "@security.authentication.manager",""]
+        arguments: ["@security.context", "@security.authentication.manager","", "@translator"]
