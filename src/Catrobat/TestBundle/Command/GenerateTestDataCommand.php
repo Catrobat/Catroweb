@@ -61,6 +61,7 @@ class GenerateTestDataCommand extends Command
       $this->generateProgramWithInvalidCodeXML("program_with_invalid_code_xml");
       $this->generateProgramWithManualScreenshot("program_with_manual_screenshot");
       $this->generateProgramWithScreenshot("program_with_screenshot");
+      $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
 
       $finder->directories()->in($this->target_directory)->depth(0);
       foreach ($finder as $dir)
@@ -131,6 +132,12 @@ class GenerateTestDataCommand extends Command
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->rename($this->target_directory.$directory."/automatic_screenshot.png", $this->target_directory.$directory."/screenshot.png");    
+  }
+
+  protected function generateProgramWithInvalidContentCodeXML($directory)
+  {
+//    $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
+//    $this->filesystem->remove($this->target_directory.$directory."/code.xml");
   }
 
 }

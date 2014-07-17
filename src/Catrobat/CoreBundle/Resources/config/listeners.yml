@@ -19,8 +19,8 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-      catroweb.file.validator.xmlfile:
-            class: Catrobat\CoreBundle\Listeners\XmlFileValidator
+      catroweb.file.validator.xmlheadervalidator:
+            class: Catrobat\CoreBundle\Listeners\ProgramXmlHeaderValidator
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
             
