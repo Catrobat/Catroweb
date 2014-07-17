@@ -17,6 +17,7 @@ use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Buzz\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\CoreBundle\StatusCode;
+use Symfony\Component\Translation\Translator;
 
 class UploadController
 {
@@ -24,13 +25,15 @@ class UploadController
     protected $context;
     protected $program_manager;
     protected $tokenGenerator;
+    protected $translator;
     
-    public function __construct(UserManager $user_manager, SecurityContext $context, ProgramManager $program_manager, TokenGenerator $tokenGenerator)
+    public function __construct(UserManager $user_manager, SecurityContext $context, ProgramManager $program_manager, TokenGenerator $tokenGenerator, Translator $translator)
     {
       $this->user_manager = $user_manager;
       $this->context = $context;
       $this->program_manager = $program_manager;
       $this->tokenGenerator = $tokenGenerator;
+      $this->translator = $translator;
     }
 
     public function uploadAction(Request $request)
@@ -39,17 +42,17 @@ class UploadController
       if ($request->files->count() != 1)
       {
         $response["statusCode"] = StatusCode::MISSING_POST_DATA;
-        $response["answer"] = "POST-Data not correct or missing!";
+        $response["answer"] = $this->trans("error.post-data");
       }
       else if (!$request->request->has("fileChecksum"))
       {
         $response["statusCode"] = StatusCode::MISSING_CHECKSUM;
-        $response["answer"] = "Client did not send fileChecksum! Are you using an outdated version of Pocket Code?";
+        $response["answer"] = $this->trans("error.checksum.missing");
       }
       else if (md5_file($request->files->get(0)->getPathname()) != $request->request->get("fileChecksum"))
       {
         $response["statusCode"] = StatusCode::INVALID_CHECKSUM;
-        $response["answer"] = "invalid checksum";
+        $response["answer"] = $this->trans("error.checksum.invalid");
       }
       else
       {
@@ -64,7 +67,7 @@ class UploadController
           
           $response["projectId"] = $id;
           $response["statusCode"] = StatusCode::OK;
-          $response["answer"] = "Your project was uploaded successfully!";
+          $response["answer"] = $this->trans("success.upload");
           $response["token"] = $user->getToken();
         }
         catch (InvalidCatrobatFileException $exception)
@@ -73,28 +76,32 @@ class UploadController
           switch ($exception->getStatusCode())
           {
             case StatusCode::PROJECT_XML_MISSING:
-              $response["answer"] = "unknown error: project_xml_not_found!";
-              break;
-            case StatusCode::IMAGE_MISSING:
-              $response["answer"] = "Project XML mentions a file which not exists in project-folder";
-              break;
-            case StatusCode::UNEXPECTED_FILE:
-              $response["answer"] = "unexpected file found";
+              $response["answer"] = $this->trans("error.xml.missing");
               break;
             case StatusCode::INVALID_XML:
-              $response["answer"] = "invalid code xml";
+              $response["answer"] = $this->trans("error.xml.invalid");
+              break;
+            case StatusCode::IMAGE_MISSING:
+              $response["answer"] = $this->trans("error.image.missing");
+              break;
+            case StatusCode::UNEXPECTED_FILE:
+              $response["answer"] = $this->trans("error.file.unexpected");
               break;
             case StatusCode::INVALID_FILE:
-              $response["answer"] = "invalid file";
+              $response["answer"] = $this->trans("error.file.invalid");
               break;
             default:
-              $response["answer"] = "unknown error";
+              $response["answer"] = $this->trans("error.file.unkonw");
           }
         }
       }
         
-//      $num_files = $this->context->getToken()->getUser()->getUsername(); //$request->request->get('fileChecksum'); //$request->files->count();
       $response["preHeaderMessages"] = "";
       return JsonResponse::create($response);
+    }
+    
+    private function trans($message, $parameters = array())
+    {
+      return $this->translator->trans($message,$parameters,"catroweb_api");
     }
 }

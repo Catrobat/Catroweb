@@ -12,6 +12,19 @@ error:
     blank: email must not be blank
     invalid: Your email seems to be invalid
   login: The password or username was incorrect.
+  post-data: POST-Data not correct or missing!
+  checksum:
+    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
+    invalid: invalid checksum
+  xml:
+    invalid: invalid code xml
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: invalid file
+  image.missing: Project XML mentions a file which not exists in project-folder
+  unknown: unknown error
 success:
   registration: Registration successful!
   token: ok
+  upload: Your project was uploaded successfully!
