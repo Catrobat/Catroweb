@@ -63,7 +63,7 @@ class UploadController
           $this->user_manager->updateUser($user);
           
           $response["projectId"] = $id;
-          $response["statusCode"] = 200;
+          $response["statusCode"] = StatusCode::OK;
           $response["answer"] = "Your project was uploaded successfully!";
           $response["token"] = $user->getToken();
         }
