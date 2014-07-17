@@ -2,6 +2,7 @@
 
 namespace Catrobat\ApiBundle\Security;
 
+use Catrobat\CoreBundle\StatusCode;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
@@ -11,18 +12,21 @@ use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterfac
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Translation\Translator;
 
 class UploadTokenListener implements ListenerInterface
 {
   protected $securityContext;
   protected $authenticationManager;
   protected $provider;
+  protected $translator;
 
-  public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, $providerkey)
+  public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, $providerkey, Translator $translator)
   {
     $this->securityContext = $securityContext;
     $this->authenticationManager = $authenticationManager;
     $this->provider = $providerkey;
+    $this->translator = $translator;
   }
 
   public function handle(GetResponseEvent $event)
@@ -50,14 +54,19 @@ class UploadTokenListener implements ListenerInterface
     {
     }
     
-    $response = JsonResponse::create(array("statusCode" => 601, "answer" => "Authentication of device failed: invalid auth-token!", "preHeaderMessages" => ""),403);
+    $response = JsonResponse::create(array("statusCode" => StatusCode::LOGIN_ERROR, "answer" => $this->trans("error.token"), "preHeaderMessages" => ""),Response::HTTP_FORBIDDEN);
     $event->setResponse($response);
   }
 
   protected function newTokenMissingResponse()
   {
-    $response = JsonResponse::create(array("statusCode" => 601, "answer" => "Authentication of device failed: invalid auth-token!", "preHeaderMessages" => ""),401);
+    $response = JsonResponse::create(array("statusCode" => StatusCode::LOGIN_ERROR, "answer" => $this->trans("error.token"), "preHeaderMessages" => ""),Response::HTTP_UNAUTHORIZED);
     return $response;
+  }
+
+  private function trans($message, $parameters = array())
+  {
+    return $this->translator->trans($message,$parameters,"catroweb_api");
   }
 
 }
