@@ -4,8 +4,187 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93c73d65a485f44d709fd18a7d1a5df2",
+    "hash": "0367280d44c913a180ca93a72bec2ace",
     "packages": [
+        {
+            "name": "behat/behat",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Behat.git",
+                "reference": "ee9e22ee55a4982c9c3ebebbb39ea9dee99c4e08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/ee9e22ee55a4982c9c3ebebbb39ea9dee99c4e08",
+                "reference": "ee9e22ee55a4982c9c3ebebbb39ea9dee99c4e08",
+                "shasum": ""
+            },
+            "require": {
+                "behat/gherkin": "~4.3",
+                "behat/transliterator": "~1.0",
+                "ext-mbstring": "*",
+                "php": ">=5.3.3",
+                "symfony/class-loader": "~2.1",
+                "symfony/config": "~2.3",
+                "symfony/console": "~2.1",
+                "symfony/dependency-injection": "~2.1",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/translation": "~2.1",
+                "symfony/yaml": "~2.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy-phpunit": "~1.0",
+                "phpunit/phpunit": "~4.0.7",
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "behat/mink-extension": "for integration with Mink testing framework",
+                "behat/symfony2-extension": "for integration with Symfony2 web framework",
+                "behat/yii-extension": "for integration with Yii web framework"
+            },
+            "bin": [
+                "bin/behat"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Behat": "src/",
+                    "Behat\\Testwork": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Scenario-oriented BDD framework for PHP 5.3",
+            "homepage": "http://behat.org/",
+            "keywords": [
+                "Agile",
+                "BDD",
+                "ScenarioBDD",
+                "Scrum",
+                "StoryBDD",
+                "User story",
+                "business",
+                "development",
+                "documentation",
+                "examples",
+                "symfony",
+                "testing"
+            ],
+            "time": "2014-07-09 07:20:09"
+        },
+        {
+            "name": "behat/gherkin",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Gherkin.git",
+                "reference": "43777c51058b77bcd84a8775b7a6ad05e986b5db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/43777c51058b77bcd84a8775b7a6ad05e986b5db",
+                "reference": "43777c51058b77bcd84a8775b7a6ad05e986b5db",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "symfony/yaml": "~2.1"
+            },
+            "suggest": {
+                "symfony/yaml": "If you want to parse features, represented in YAML files"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Gherkin": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Gherkin DSL parser for PHP 5.3",
+            "homepage": "http://behat.org/",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "Cucumber",
+                "DSL",
+                "gherkin",
+                "parser"
+            ],
+            "time": "2014-06-06 01:24:32"
+        },
+        {
+            "name": "behat/transliterator",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Transliterator.git",
+                "reference": "c93521d3462a554332d1ef5bb0e9b5b8ca4106c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/c93521d3462a554332d1ef5bb0e9b5b8ca4106c4",
+                "reference": "c93521d3462a554332d1ef5bb0e9b5b8ca4106c4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Transliterator": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Artistic-1.0"
+            ],
+            "description": "String transliterator",
+            "keywords": [
+                "i18n",
+                "slug",
+                "transliterator"
+            ],
+            "time": "2014-05-15 22:08:22"
+        },
         {
             "name": "braincrafted/bootstrap-bundle",
             "version": "dev-master",
@@ -68,17 +247,59 @@
             "time": "2014-04-03 17:17:03"
         },
         {
-            "name": "doctrine/annotations",
-            "version": "v1.1.2",
+            "name": "chartinger/behat-twig-report-extension",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/annotations.git",
-                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670"
+                "url": "https://github.com/chartinger/behat-twig-report-extension.git",
+                "reference": "01e08e64dd88a15d27f5006eb3814099d27010d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/40db0c96985aab2822edbc4848b3bd2429e02670",
-                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670",
+                "url": "https://api.github.com/repos/chartinger/behat-twig-report-extension/zipball/01e08e64dd88a15d27f5006eb3814099d27010d6",
+                "reference": "01e08e64dd88a15d27f5006eb3814099d27010d6",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "~3.0.0@dev",
+                "php": ">=5.3.2",
+                "twig/twig": "1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.28",
+                "symfony/process": "~2.1"
+            },
+            "type": "behat-extension",
+            "autoload": {
+                "psr-0": {
+                    "chartinger\\Behat\\TwigReportExtension": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Hartinger",
+                    "email": "c.k.hartinger@gmail.com"
+                }
+            ],
+            "description": "Create Behat 3 test reports with Twig templates",
+            "time": "2014-07-09 13:02:01"
+        },
+        {
+            "name": "doctrine/annotations",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/annotations.git",
+                "reference": "d9b1a37e9351ddde1f19f09a02e3d6ee92e82efd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/d9b1a37e9351ddde1f19f09a02e3d6ee92e82efd",
+                "reference": "d9b1a37e9351ddde1f19f09a02e3d6ee92e82efd",
                 "shasum": ""
             },
             "require": {
@@ -86,12 +307,13 @@
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "doctrine/cache": "1.*"
+                "doctrine/cache": "1.*",
+                "phpunit/phpunit": "4.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -107,7 +329,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -136,7 +359,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2013-06-16 21:33:03"
+            "time": "2014-07-06 15:52:21"
         },
         {
             "name": "doctrine/cache",
@@ -946,12 +1169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "26033b75bda64e33d9258dda50defd10e6b6dbb2"
+                "reference": "c1cf178d72eb8c97b5547d898201490d33212373"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/26033b75bda64e33d9258dda50defd10e6b6dbb2",
-                "reference": "26033b75bda64e33d9258dda50defd10e6b6dbb2",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/c1cf178d72eb8c97b5547d898201490d33212373",
+                "reference": "c1cf178d72eb8c97b5547d898201490d33212373",
                 "shasum": ""
             },
             "require": {
@@ -1052,7 +1275,7 @@
                 "yahoo",
                 "yandex"
             ],
-            "time": "2014-06-02 13:28:07"
+            "time": "2014-07-09 10:50:19"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1706,12 +1929,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "8067a1b46260c619ae8f3ffa3c32a612ff04924c"
+                "reference": "67eb0e1c8f0d7cc88a2c807bf9dac3bbf5644769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/8067a1b46260c619ae8f3ffa3c32a612ff04924c",
-                "reference": "8067a1b46260c619ae8f3ffa3c32a612ff04924c",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/67eb0e1c8f0d7cc88a2c807bf9dac3bbf5644769",
+                "reference": "67eb0e1c8f0d7cc88a2c807bf9dac3bbf5644769",
                 "shasum": ""
             },
             "require": {
@@ -1756,7 +1979,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2014-05-13 07:26:35"
+            "time": "2014-07-08 22:31:25"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2039,17 +2262,17 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "2.5.2",
+            "version": "2.6.0",
             "target-dir": "Nelmio/ApiDocBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "fa920111260e350ea17942c77c811762e965cbdc"
+                "reference": "b48650a9e020d43ec5a3c0f4345714ef724344d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/fa920111260e350ea17942c77c811762e965cbdc",
-                "reference": "fa920111260e350ea17942c77c811762e965cbdc",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/b48650a9e020d43ec5a3c0f4345714ef724344d7",
+                "reference": "b48650a9e020d43ec5a3c0f4345714ef724344d7",
                 "shasum": ""
             },
             "require": {
@@ -2110,7 +2333,7 @@
                 "documentation",
                 "rest"
             ],
-            "time": "2014-05-16 09:33:58"
+            "time": "2014-06-25 06:52:01"
         },
         {
             "name": "nikic/php-parser",
@@ -2383,17 +2606,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.3.4",
+            "version": "v2.3.5",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "4a7b126e9c22f858e3584b19ddce6e5bdd7677ee"
+                "reference": "8b7a33aa3d22388443b6de0b0cf184122e9f60d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/4a7b126e9c22f858e3584b19ddce6e5bdd7677ee",
-                "reference": "4a7b126e9c22f858e3584b19ddce6e5bdd7677ee",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/8b7a33aa3d22388443b6de0b0cf184122e9f60d2",
+                "reference": "8b7a33aa3d22388443b6de0b0cf184122e9f60d2",
                 "shasum": ""
             },
             "require": {
@@ -2423,11 +2646,13 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2013-08-21 18:09:35"
+            "time": "2014-04-28 14:01:06"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -2435,12 +2660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "f2b22cecba3be0920669c46d0d2616d29834ea34"
+                "reference": "bce1cd28281e1081d45da49b95bfde318d337439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/f2b22cecba3be0920669c46d0d2616d29834ea34",
-                "reference": "f2b22cecba3be0920669c46d0d2616d29834ea34",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/bce1cd28281e1081d45da49b95bfde318d337439",
+                "reference": "bce1cd28281e1081d45da49b95bfde318d337439",
                 "shasum": ""
             },
             "require": {
@@ -2506,7 +2731,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2014-06-18 10:13:04"
+            "time": "2014-07-03 11:46:17"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2638,12 +2863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "fdeb39d81d31f377b49e8bbfa2b72eb2d4ae1dcb"
+                "reference": "22a024f5e0b401bfe2195816ef7979770708fb3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/fdeb39d81d31f377b49e8bbfa2b72eb2d4ae1dcb",
-                "reference": "fdeb39d81d31f377b49e8bbfa2b72eb2d4ae1dcb",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/22a024f5e0b401bfe2195816ef7979770708fb3a",
+                "reference": "22a024f5e0b401bfe2195816ef7979770708fb3a",
                 "shasum": ""
             },
             "require": {
@@ -2693,7 +2918,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2014-06-14 13:33:31"
+            "time": "2014-07-08 08:42:00"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -3032,12 +3257,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "49769e79b4fcbeb1cb9b9f8582c8092c90d6e08d"
+                "reference": "13ede3fed65709c90a652e64912251f56cd46b84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/49769e79b4fcbeb1cb9b9f8582c8092c90d6e08d",
-                "reference": "49769e79b4fcbeb1cb9b9f8582c8092c90d6e08d",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/13ede3fed65709c90a652e64912251f56cd46b84",
+                "reference": "13ede3fed65709c90a652e64912251f56cd46b84",
                 "shasum": ""
             },
             "require": {
@@ -3096,7 +3321,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2014-06-18 09:56:30"
+            "time": "2014-07-07 12:43:03"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3384,16 +3609,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "59365832a09a1d914d14cbca6a21a7f572760c3b"
+                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/59365832a09a1d914d14cbca6a21a7f572760c3b",
-                "reference": "59365832a09a1d914d14cbca6a21a7f572760c3b",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e3d2844abc988bc467bb1593cd340700096b0ac0",
+                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0",
                 "shasum": ""
             },
             "require": {
@@ -3401,7 +3626,7 @@
                 "php": ">=5.3.3",
                 "psr/log": "~1.0",
                 "symfony/icu": "~1.0",
-                "twig/twig": "~1.11"
+                "twig/twig": "~1.12"
             },
             "replace": {
                 "symfony/browser-kit": "self.version",
@@ -3496,7 +3721,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-05-31 18:45:50"
+            "time": "2014-07-08 14:42:08"
         },
         {
             "name": "twig/extensions",
@@ -3547,16 +3772,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.15.1",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed"
+                "reference": "8ce37115802e257a984a82d38254884085060024"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1fb5784662f438d7d96a541e305e28b812e2eeed",
-                "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/8ce37115802e257a984a82d38254884085060024",
+                "reference": "8ce37115802e257a984a82d38254884085060024",
                 "shasum": ""
             },
             "require": {
@@ -3565,7 +3790,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.16-dev"
                 }
             },
             "autoload": {
@@ -3585,7 +3810,7 @@
                     "role": "Lead Developer"
                 },
                 {
-                    "name": "Armin Ronacher2",
+                    "name": "Armin Ronacher",
                     "email": "armin.ronacher@active-4.com",
                     "role": "Project Founder"
                 },
@@ -3600,7 +3825,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-02-13 10:19:29"
+            "time": "2014-07-05 12:19:05"
         },
         {
             "name": "twitter/bootstrap",
@@ -3721,145 +3946,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "behat/behat",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Behat/Behat.git",
-                "reference": "c0409b8a44dd363ea69a39428d131b1ae3581814"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/c0409b8a44dd363ea69a39428d131b1ae3581814",
-                "reference": "c0409b8a44dd363ea69a39428d131b1ae3581814",
-                "shasum": ""
-            },
-            "require": {
-                "behat/gherkin": "~4.3",
-                "behat/transliterator": "~1.0",
-                "ext-mbstring": "*",
-                "php": ">=5.3.3",
-                "symfony/class-loader": "~2.1",
-                "symfony/config": "~2.3",
-                "symfony/console": "~2.1",
-                "symfony/dependency-injection": "~2.1",
-                "symfony/event-dispatcher": "~2.1",
-                "symfony/translation": "~2.1",
-                "symfony/yaml": "~2.1"
-            },
-            "require-dev": {
-                "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.0.7",
-                "symfony/process": "~2.1"
-            },
-            "suggest": {
-                "behat/mink-extension": "for integration with Mink testing framework",
-                "behat/symfony2-extension": "for integration with Symfony2 web framework",
-                "behat/yii-extension": "for integration with Yii web framework"
-            },
-            "bin": [
-                "bin/behat"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Behat": "src/",
-                    "Behat\\Testwork": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                }
-            ],
-            "description": "Scenario-oriented BDD framework for PHP 5.3",
-            "homepage": "http://behat.org/",
-            "keywords": [
-                "Agile",
-                "BDD",
-                "ScenarioBDD",
-                "Scrum",
-                "StoryBDD",
-                "User story",
-                "business",
-                "development",
-                "documentation",
-                "examples",
-                "symfony",
-                "testing"
-            ],
-            "time": "2014-06-20 21:35:01"
-        },
-        {
-            "name": "behat/gherkin",
-            "version": "v4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "43777c51058b77bcd84a8775b7a6ad05e986b5db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/43777c51058b77bcd84a8775b7a6ad05e986b5db",
-                "reference": "43777c51058b77bcd84a8775b7a6ad05e986b5db",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "symfony/yaml": "~2.1"
-            },
-            "suggest": {
-                "symfony/yaml": "If you want to parse features, represented in YAML files"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Gherkin": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                }
-            ],
-            "description": "Gherkin DSL parser for PHP 5.3",
-            "homepage": "http://behat.org/",
-            "keywords": [
-                "BDD",
-                "Behat",
-                "Cucumber",
-                "DSL",
-                "gherkin",
-                "parser"
-            ],
-            "time": "2014-06-06 01:24:32"
-        },
         {
             "name": "behat/mink",
             "version": "v1.5.0",
@@ -4092,46 +4178,6 @@
             "time": "2014-05-09 01:46:47"
         },
         {
-            "name": "behat/transliterator",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Behat/Transliterator.git",
-                "reference": "c93521d3462a554332d1ef5bb0e9b5b8ca4106c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/c93521d3462a554332d1ef5bb0e9b5b8ca4106c4",
-                "reference": "c93521d3462a554332d1ef5bb0e9b5b8ca4106c4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Transliterator": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Artistic-1.0"
-            ],
-            "description": "String transliterator",
-            "keywords": [
-                "i18n",
-                "slug",
-                "transliterator"
-            ],
-            "time": "2014-05-15 22:08:22"
-        },
-        {
             "name": "chartinger/phpspec2-expect",
             "version": "dev-master",
             "source": {
@@ -4185,12 +4231,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrikbjorn/PhpSpecCodeCoverageExtension.git",
-                "reference": "068e6d72d24ae8bcc0a72d6667732bebdb80bd0f"
+                "reference": "987be21438b4e2905563d74634ee36cf73290f40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrikbjorn/PhpSpecCodeCoverageExtension/zipball/068e6d72d24ae8bcc0a72d6667732bebdb80bd0f",
-                "reference": "068e6d72d24ae8bcc0a72d6667732bebdb80bd0f",
+                "url": "https://api.github.com/repos/henrikbjorn/PhpSpecCodeCoverageExtension/zipball/987be21438b4e2905563d74634ee36cf73290f40",
+                "reference": "987be21438b4e2905563d74634ee36cf73290f40",
                 "shasum": ""
             },
             "require": {
@@ -4198,6 +4244,9 @@
                 "php": ">=5.3.3",
                 "phpspec/phpspec": "~2.0",
                 "phpunit/php-code-coverage": "~2.0"
+            },
+            "require-dev": {
+                "bossa/phpspec2-expect": "~1.0"
             },
             "type": "library",
             "extra": {
@@ -4215,7 +4264,7 @@
                 "MIT"
             ],
             "description": "Integrates CodeCoverage with PhpSpec",
-            "time": "2014-06-19 16:14:38"
+            "time": "2014-07-04 11:53:55"
         },
         {
             "name": "phpspec/php-diff",
@@ -4256,12 +4305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "5f3b795d37488439fc08ca6c7b33ec8fb28f643d"
+                "reference": "294cfcc2c4a23f6f22f55f48dd885a40b441d4ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/5f3b795d37488439fc08ca6c7b33ec8fb28f643d",
-                "reference": "5f3b795d37488439fc08ca6c7b33ec8fb28f643d",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/294cfcc2c4a23f6f22f55f48dd885a40b441d4ac",
+                "reference": "294cfcc2c4a23f6f22f55f48dd885a40b441d4ac",
                 "shasum": ""
             },
             "require": {
@@ -4321,7 +4370,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-03-19 14:23:26"
+            "time": "2014-07-02 12:25:38"
         },
         {
             "name": "phpspec/prophecy",
@@ -4428,16 +4477,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.8",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "58401826c8cfc8fd689b60026e91c337df374bca"
+                "reference": "ed8ac99ce38c3fd134128c898f7ca74665abef7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/58401826c8cfc8fd689b60026e91c337df374bca",
-                "reference": "58401826c8cfc8fd689b60026e91c337df374bca",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ed8ac99ce38c3fd134128c898f7ca74665abef7f",
+                "reference": "ed8ac99ce38c3fd134128c898f7ca74665abef7f",
                 "shasum": ""
             },
             "require": {
@@ -4489,7 +4538,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-26 14:55:24"
+            "time": "2014-06-29 08:14:40"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4886,12 +4935,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/BehatPageObjectExtension.git",
-                "reference": "a0a4f5aee6fb240adcfbe1d2a3586aa157278f42"
+                "reference": "0275f44d1794e6e6e3d7fc93d4ba920de016c971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/a0a4f5aee6fb240adcfbe1d2a3586aa157278f42",
-                "reference": "a0a4f5aee6fb240adcfbe1d2a3586aa157278f42",
+                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/0275f44d1794e6e6e3d7fc93d4ba920de016c971",
+                "reference": "0275f44d1794e6e6e3d7fc93d4ba920de016c971",
                 "shasum": ""
             },
             "require": {
@@ -4942,7 +4991,7 @@
                 "Behat",
                 "page"
             ],
-            "time": "2014-06-15 17:09:37"
+            "time": "2014-07-07 17:01:23"
         },
         {
             "name": "vipsoft/doctrine-data-fixtures-extension",
@@ -5024,6 +5073,7 @@
         "sonata-project/user-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
+        "chartinger/behat-twig-report-extension": 20,
         "phpspec/phpspec": 20,
         "phpspec/symfony2-extension": 20,
         "behat/symfony2-extension": 20,

@@ -18,7 +18,11 @@ services:
             class: Catrobat\CoreBundle\Listeners\OnlyDefinedImagesValidator
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
-            
+
+      catroweb.file.validator.xmlfile:
+            class: Catrobat\CoreBundle\Listeners\XmlFileValidator
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
             
       catrobat.core.services.invalidprogramuploadlogger:
               class:        Catrobat\CoreBundle\Listeners\InvalidProgramUploadLogger
@@ -26,4 +30,3 @@ services:
               tags:
                   - { name: monolog.logger, channel: upload }
                   - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }
-            

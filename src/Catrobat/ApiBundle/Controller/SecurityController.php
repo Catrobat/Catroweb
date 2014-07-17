@@ -15,7 +15,7 @@ use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Catrobat\ApiBundle\Requests\CreateUserRequest;
 use Symfony\Component\Translation\Translator;
 use Catrobat\CoreBundle\StatusCode;
@@ -78,7 +78,6 @@ class SecurityController
       {
         $retArray['statusCode'] = StatusCode::OK;
         $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
-        
         if ($correct_pass) 
         {
           $retArray['statusCode'] = StatusCode::OK;

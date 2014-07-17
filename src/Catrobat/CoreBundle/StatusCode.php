@@ -18,4 +18,14 @@ class StatusCode
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;
   
+  static private $messages = array(
+    OK => "",
+    PROJECT_XML_MISSING => "unknown error: project_xml_not_found!"
+  );
+  
+  static function getMessage($code)
+  {
+    return StatusCode::$messages[$code];
+  }
+  
 }

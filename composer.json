@@ -1,85 +1,86 @@
 {
-	"name" : "symfony/framework-standard-edition",
-	"description" : "The \"Symfony Standard Edition\" distribution",
-	"type" : "project",
-	"license" : [
-		"MIT"
-	],
-	"require" : {
-		"jms/i18n-routing-bundle" : "dev-master",
-		"symfony/symfony" : "2.5.*",
-		"symfony/icu" : "1.2.*",
-		"leafo/lessphp" : "dev-master",
-		"doctrine/doctrine-fixtures-bundle" : "dev-master",
-		"symfony/swiftmailer-bundle" : "2.3.*",
-		"doctrine/orm" : ">=2.2.3,<2.4-dev",
-		"doctrine/data-fixtures" : "dev-master",
-		"symfony/assetic-bundle" : "2.3.*",
-		"incenteev/composer-parameter-handler" : "~2.0",
-		"twig/extensions" : "1.0.*",
-		"hwi/oauth-bundle" : "*@dev",
-		"php" : ">=5.3.3",
-		"sensio/generator-bundle" : "2.3.*",
-		"symfony/monolog-bundle" : "2.4.*",
-		"knplabs/knp-paginator-bundle" : "dev-master",
-		"braincrafted/bootstrap-bundle" : "dev-master",
-		"sensio/framework-extra-bundle" : "2.3.*",
-		"sensio/distribution-bundle" : "2.3.*",
-		"doctrine/doctrine-bundle" : "1.2.*",
-		"twitter/bootstrap" : "2.3.*",
-		"friendsofsymfony/user-bundle": "1.3.3",
-		"sonata-project/core-bundle": "~2.2@dev",
-		"sonata-project/admin-bundle": "2.3.*@dev",
-		"sonata-project/user-bundle": "2.3.*@dev",
-		"sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-		"sonata-project/datagrid-bundle": "2.2.*@dev"
-	},
-	"require-dev" : {
-		"phpspec/phpspec" : "dev-master",
-		"phpspec/symfony2-extension" : "*@dev",
-		"behat/symfony2-extension" : "2.0.*@dev",
-		"sensiolabs/behat-page-object-extension" : "*@dev",
-		"phpunit/phpunit" : "3.7.*",
-		"behat/mink-browserkit-driver" : "*@dev",
-		"behat/behat" : "3.0.*@dev",
-		"bossa/phpspec2-expect" : "dev-master",
-		"vipsoft/doctrine-data-fixtures-extension" : "3.0.*@dev",
-		"behat/mink-extension" : "*@dev",
-		"henrikbjorn/phpspec-code-coverage" : "1.0.*@dev"
-	},
-	"autoload" : {
-		"psr-0" : {
-			"" : "src/"
-		}
-	},
-	"minimum-stability" : "stable",
-	"config" : {
-		"bin-dir" : "bin"
-	},
-	"scripts" : {
-		"post-update-cmd" : [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-		],
-		"post-install-cmd" : [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-		]
-	},
-	"extra" : {
-		"branch-alias" : {
-			"dev-master" : "2.3-dev"
-		},
-		"symfony-web-dir" : "web",
-		"symfony-app-dir" : "app",
-		"incenteev-parameters" : {
-			"file" : "app/config/parameters.yml"
-		}
-	}
+    "name": "symfony/framework-standard-edition",
+    "description": "The \"Symfony Standard Edition\" distribution",
+    "type": "project",
+    "license": [
+        "MIT"
+    ],
+    "require": {
+        "jms/i18n-routing-bundle": "dev-master",
+        "symfony/symfony": "2.5.*",
+        "symfony/icu": "1.2.*",
+        "leafo/lessphp": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "symfony/swiftmailer-bundle": "2.3.*",
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/data-fixtures": "dev-master",
+        "symfony/assetic-bundle": "2.3.*",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "twig/extensions": "1.0.*",
+        "hwi/oauth-bundle": "*@dev",
+        "php": ">=5.3.3",
+        "sensio/generator-bundle": "2.3.*",
+        "symfony/monolog-bundle": "2.4.*",
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "braincrafted/bootstrap-bundle": "dev-master",
+        "sensio/framework-extra-bundle": "2.3.*",
+        "sensio/distribution-bundle": "2.3.*",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "twitter/bootstrap": "2.3.*",
+        "friendsofsymfony/user-bundle": "1.3.3",
+        "sonata-project/core-bundle": "~2.2@dev",
+        "sonata-project/admin-bundle": "2.3.*@dev",
+        "sonata-project/user-bundle": "2.3.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
+        "sonata-project/datagrid-bundle": "2.2.*@dev",
+        "chartinger/behat-twig-report-extension": "dev-master@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "dev-master",
+        "phpspec/symfony2-extension": "*@dev",
+        "behat/symfony2-extension": "2.0.*@dev",
+        "sensiolabs/behat-page-object-extension": "*@dev",
+        "phpunit/phpunit": "3.7.*",
+        "behat/mink-browserkit-driver": "*@dev",
+        "behat/behat": "3.0.*@dev",
+        "bossa/phpspec2-expect": "dev-master",
+        "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
+        "behat/mink-extension": "*@dev",
+        "henrikbjorn/phpspec-code-coverage": "1.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.3-dev"
+        },
+        "symfony-web-dir": "web",
+        "symfony-app-dir": "app",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        }
+    }
 }

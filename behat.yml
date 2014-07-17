@@ -10,7 +10,11 @@ default:
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
-
+        chartinger\Behat\TwigReportExtension\Extension:
+            templates:
+                file: default.twig
+            output:
+                file: ./output/index.html
 
     suites:
         api:
