@@ -16,6 +16,18 @@ class XmlFileValidator
   
   public function validate(ExtractedCatrobatFile $file)
   {
+    $program_xml_properties = $file->getProgramXmlProperties();
+    if(isset($program_xml_properties->header))
+    {
+      if($program_xml_properties->header->applicationName)
+      {
+        //TODO
+      }
+    }
+    else
+    {
+      throw new InvalidCatrobatFileException("program name missing");
+    }
 
   }
 
