@@ -15,13 +15,13 @@ class ExtractedCatrobatFile
     
     if (!file_exists($base_dir . "code.xml"))
     {
-      throw new InvalidCatrobatFileException(StatusCode::PROJECT_XML_MISSING);
+      throw new InvalidCatrobatFileException("No code.xml found!", StatusCode::PROJECT_XML_MISSING);
     }
     
     $this->program_xml_properties = @simplexml_load_file($base_dir . "code.xml");
     if ($this->program_xml_properties === false)
     {
-      throw new InvalidCatrobatFileException(StatusCode::INVALID_XML);
+      throw new InvalidCatrobatFileException("code.xml is not a valid xml file!",StatusCode::INVALID_XML);
     }
   }
 
@@ -42,7 +42,7 @@ class ExtractedCatrobatFile
   
   public function getScreenshotPath()
   {
-    $screenshot_path = "";
+    $screenshot_path = null;
     if (is_file($this->path . "screenshot.png"))
     {
       $screenshot_path = $this->path . "screenshot.png";

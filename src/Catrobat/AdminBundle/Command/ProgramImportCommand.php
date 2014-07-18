@@ -13,6 +13,7 @@ use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Model\UserManager;
 use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
+use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 
 class ProgramImportCommand extends Command
 {
@@ -38,7 +39,6 @@ class ProgramImportCommand extends Command
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    $text = "TODO: implement this command";
     $directory = $input->getArgument('directory');
     $username = $input->getArgument('user');
     
@@ -60,9 +60,19 @@ class ProgramImportCommand extends Command
     
     foreach ($finder as $file)
     {
-      $add_program_request = new AddProgramRequest($user, new File($file));
-      $program = $this->program_manager->addProgram($add_program_request);
-      $output->writeln("Added Program " . $program->getName());
+      try 
+      {
+        $output->writeln("Importing file " . $file);
+        $add_program_request = new AddProgramRequest($user, new File($file));
+        $program = $this->program_manager->addProgram($add_program_request);
+        $output->writeln("Added Program " . $program->getName());
+      }
+      catch (InvalidCatrobatFileException $e)
+      {
+        $output->writeln("FAILED TO add program " . $program->getName());
+        $output->writeln($e->getMessage(). " (" . $e->getCode() . ")");
+      }
+      
     }
   }
 

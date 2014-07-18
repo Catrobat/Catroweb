@@ -33,12 +33,12 @@ class ProgramXmlHeaderValidator
         isset($program_xml_properties->header->url) &&
         isset($program_xml_properties->header->userHandle)))
       {
-        throw new InvalidCatrobatFileException(StatusCode::INVALID_XML);
+        throw new InvalidCatrobatFileException("Program XML header information missing",StatusCode::INVALID_XML);
       }
     }
     else
     {
-      throw new InvalidCatrobatFileException(StatusCode::INVALID_XML);
+      throw new InvalidCatrobatFileException("No Program XML header found!",StatusCode::INVALID_XML);
     }
 
   }

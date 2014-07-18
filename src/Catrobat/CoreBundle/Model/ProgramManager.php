@@ -75,7 +75,14 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     
-    $this->screenshot_repository->saveProgramAssets($extracted_file->getScreenshotPath(), $program->getId());
+    if ($extracted_file->getScreenshotPath() == null)
+    {
+      // Todo: default screenshot
+    }
+    else
+    {
+      $this->screenshot_repository->saveProgramAssets($extracted_file->getScreenshotPath(), $program->getId());
+    }
     $this->file_repository->saveProgramfile($file, $program->getId());
 
     $event = $this->event_dispatcher->dispatch("catrobat.program.successful.upload", new ProgramInsertEvent());
