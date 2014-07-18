@@ -37,6 +37,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     
     private $files;
 
+    private $last_response;
+    
     public static function getAcceptedSnippetType() { return 'regex'; }
 
   /**
@@ -392,6 +394,37 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile($parameter)
     {
       $this->request_parameters[$parameter] = "INVALIDCHECKSUM"; 
+    }
+    
+    /**
+     * @When /^I upload a catrobat program$/
+     */
+    public function iUploadACatrobatProgram()
+    {
+      $this->iHaveAValidCatrobatFile();
+      $this->iHaveAParameterWithTheMdchecksumMyFile("fileChecksum");
+      $this->request_parameters["username"] = $this->user;
+      $this->request_parameters["token"] = "cccccccccc";
+      $this->iPostTheseParametersTo("/api/upload/upload.json");
+    }
+    
+    /**
+     * @When /^I upload a catrobat program with the same name$/
+     */
+    public function iUploadACatrobatProgramWithTheSameName()
+    {
+      $this->last_response = $this->client->getResponse()->getContent();
+      $this->iPostTheseParametersTo("/api/upload/upload.json");
+    }
+    
+    /**
+     * @Then /^it should be updated$/
+     */
+    public function itShouldBeUpdated()
+    {
+      $last_json = json_decode($this->last_response, true);
+      $json = json_decode($this->client->getResponse()->getContent(), true);
+      assertEquals($last_json['projectId'], $json['projectId']);
     }
     
     

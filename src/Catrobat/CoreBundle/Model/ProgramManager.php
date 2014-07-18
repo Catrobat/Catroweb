@@ -55,7 +55,15 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
       return null;
     }
     
-    $program = new Program();
+    $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
+    if ($old_program != null)
+    {
+      $program = $old_program;
+    }
+    else
+    {
+      $program = new Program();
+    }
     $program->setName($extracted_file->getName());
     $program->setDescription($extracted_file->getDescription());
     $program->setFilename($file->getFilename());
@@ -90,6 +98,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $program;
   }
 
+  public function findOneByNameAndUser($program_name, $user)
+  {
+    return $this->program_repository->findOneBy(array('name' => $program_name, 'user' => $user));
+  }
+  
   public function findOneByName($programName)
   {
     return $this->program_repository->findOneByName($programName);

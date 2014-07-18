@@ -61,5 +61,10 @@ Feature: Upload a program
       """
 
   Scenario: uploading the same program again should result in an update
+    Given I am "Catrobat"
+    When I upload a catrobat program
+    And I upload a catrobat program with the same name
+    Then it should be updated
 
+    
     
