@@ -19,6 +19,7 @@
         "twig/extensions": "1.0.*",
         "hwi/oauth-bundle": "*@dev",
         "php": ">=5.3.3",
+        "ircmaxell/password-compat": "1.0.3",
         "sensio/generator-bundle": "2.3.*",
         "symfony/monolog-bundle": "2.4.*",
         "knplabs/knp-paginator-bundle": "dev-master",
@@ -35,7 +36,8 @@
         "sonata-project/datagrid-bundle": "2.2.*@dev",
         "chartinger/behat-twig-report-extension": "dev-master@dev"
     },
-    "require-dev": {
+
+    "require-dev" : {
         "phpspec/phpspec": "dev-master",
         "phpspec/symfony2-extension": "*@dev",
         "behat/symfony2-extension": "2.0.*@dev",
@@ -48,6 +50,7 @@
         "behat/mink-extension": "*@dev",
         "henrikbjorn/phpspec-code-coverage": "1.0.*@dev"
     },
+
     "autoload": {
         "psr-0": {
             "": "src/"
