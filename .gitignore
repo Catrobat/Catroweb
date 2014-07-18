@@ -14,5 +14,6 @@
 /phpspec.yml
 .idea/workspace.xml
 .idea/uiDesigner.xml
+app/config/deploy.rb
 crowdin.yaml
 crowdin-cli.jar
