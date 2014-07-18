@@ -25,12 +25,12 @@ class OnlyDefinedImagesValidator
     $files = array_diff($files_in_directory, $files_in_xml);
     if (count($files) > 0)
     {
-      throw new InvalidCatrobatFileException(StatusCode::UNEXPECTED_FILE);
+      throw new InvalidCatrobatFileException("Unexpected files: [" . implode(", ", $files)."]",StatusCode::UNEXPECTED_FILE);
     }
     $files = array_diff($files_in_xml, $files_in_directory);
     if (count($files) > 0)
     {
-      throw new InvalidCatrobatFileException(StatusCode::IMAGE_MISSING);
+      throw new InvalidCatrobatFileException("Missing image: " . implode(", ", $files)."]",StatusCode::IMAGE_MISSING);
     }
   }
 
