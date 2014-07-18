@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "ee9e22ee55a4982c9c3ebebbb39ea9dee99c4e08"
+                "reference": "a996f07b052f61cf224c4494d06c424bde1b341f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/ee9e22ee55a4982c9c3ebebbb39ea9dee99c4e08",
-                "reference": "ee9e22ee55a4982c9c3ebebbb39ea9dee99c4e08",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/a996f07b052f61cf224c4494d06c424bde1b341f",
+                "reference": "a996f07b052f61cf224c4494d06c424bde1b341f",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2014-07-09 07:20:09"
+            "time": "2014-07-17 06:37:16"
         },
         {
             "name": "behat/gherkin",
@@ -252,12 +252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chartinger/behat-twig-report-extension.git",
-                "reference": "01e08e64dd88a15d27f5006eb3814099d27010d6"
+                "reference": "e6cee33478b04b74c2fd22d988186d9bb9b8faf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chartinger/behat-twig-report-extension/zipball/01e08e64dd88a15d27f5006eb3814099d27010d6",
-                "reference": "01e08e64dd88a15d27f5006eb3814099d27010d6",
+                "url": "https://api.github.com/repos/chartinger/behat-twig-report-extension/zipball/e6cee33478b04b74c2fd22d988186d9bb9b8faf1",
+                "reference": "e6cee33478b04b74c2fd22d988186d9bb9b8faf1",
                 "shasum": ""
             },
             "require": {
@@ -286,7 +286,7 @@
                 }
             ],
             "description": "Create Behat 3 test reports with Twig templates",
-            "time": "2014-07-09 13:02:01"
+            "time": "2014-07-10 11:59:39"
         },
         {
             "name": "doctrine/annotations",
@@ -1017,17 +1017,17 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "target-dir": "FOS/RestBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "d37f4410e6a97e81c720840b56e35c3a44942723"
+                "reference": "e3a28ebf74724a51a31d6142b002c0c9652f71a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/d37f4410e6a97e81c720840b56e35c3a44942723",
-                "reference": "d37f4410e6a97e81c720840b56e35c3a44942723",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/e3a28ebf74724a51a31d6142b002c0c9652f71a4",
+                "reference": "e3a28ebf74724a51a31d6142b002c0c9652f71a4",
                 "shasum": ""
             },
             "require": {
@@ -1092,7 +1092,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2014-06-04 13:11:41"
+            "time": "2014-07-11 21:09:03"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1169,12 +1169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "c1cf178d72eb8c97b5547d898201490d33212373"
+                "reference": "f8897695e75ec6d3d14cacccba0714b8ae55fe94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/c1cf178d72eb8c97b5547d898201490d33212373",
-                "reference": "c1cf178d72eb8c97b5547d898201490d33212373",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/f8897695e75ec6d3d14cacccba0714b8ae55fe94",
+                "reference": "f8897695e75ec6d3d14cacccba0714b8ae55fe94",
                 "shasum": ""
             },
             "require": {
@@ -1275,7 +1275,7 @@
                 "yahoo",
                 "yandex"
             ],
-            "time": "2014-07-09 10:50:19"
+            "time": "2014-07-10 08:47:25"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1449,16 +1449,16 @@
         },
         {
             "name": "jms/metadata",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/metadata.git",
-                "reference": "88ffa28bc987e4c26229fc84a2e541b6ed4e1459"
+                "reference": "22b72455559a25777cfd28c4ffda81ff7639f353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/88ffa28bc987e4c26229fc84a2e541b6ed4e1459",
-                "reference": "88ffa28bc987e4c26229fc84a2e541b6ed4e1459",
+                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/22b72455559a25777cfd28c4ffda81ff7639f353",
+                "reference": "22b72455559a25777cfd28c4ffda81ff7639f353",
                 "shasum": ""
             },
             "require": {
@@ -1497,7 +1497,7 @@
                 "xml",
                 "yaml"
             ],
-            "time": "2013-11-05 23:02:36"
+            "time": "2014-07-12 07:13:19"
         },
         {
             "name": "jms/parser-lib",
@@ -1929,12 +1929,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "67eb0e1c8f0d7cc88a2c807bf9dac3bbf5644769"
+                "reference": "d35547a771a03923d19d55ea335cd2801ad72dc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/67eb0e1c8f0d7cc88a2c807bf9dac3bbf5644769",
-                "reference": "67eb0e1c8f0d7cc88a2c807bf9dac3bbf5644769",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/d35547a771a03923d19d55ea335cd2801ad72dc2",
+                "reference": "d35547a771a03923d19d55ea335cd2801ad72dc2",
                 "shasum": ""
             },
             "require": {
@@ -1979,7 +1979,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2014-07-08 22:31:25"
+            "time": "2014-07-18 12:20:39"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2660,12 +2660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "bce1cd28281e1081d45da49b95bfde318d337439"
+                "reference": "d4667a3d6efcc3c6bd877188e0bd33096e5ac90e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/bce1cd28281e1081d45da49b95bfde318d337439",
-                "reference": "bce1cd28281e1081d45da49b95bfde318d337439",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/d4667a3d6efcc3c6bd877188e0bd33096e5ac90e",
+                "reference": "d4667a3d6efcc3c6bd877188e0bd33096e5ac90e",
                 "shasum": ""
             },
             "require": {
@@ -2731,7 +2731,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2014-07-03 11:46:17"
+            "time": "2014-07-18 12:17:16"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2863,12 +2863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "22a024f5e0b401bfe2195816ef7979770708fb3a"
+                "reference": "82daabfa9ea48158e6f57cb703fe9a32011b9358"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/22a024f5e0b401bfe2195816ef7979770708fb3a",
-                "reference": "22a024f5e0b401bfe2195816ef7979770708fb3a",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/82daabfa9ea48158e6f57cb703fe9a32011b9358",
+                "reference": "82daabfa9ea48158e6f57cb703fe9a32011b9358",
                 "shasum": ""
             },
             "require": {
@@ -2918,7 +2918,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2014-07-08 08:42:00"
+            "time": "2014-07-10 12:21:27"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -3609,16 +3609,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0"
+                "reference": "e66ee967571b89234c90946fe0d50dad195ad29c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/e3d2844abc988bc467bb1593cd340700096b0ac0",
-                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e66ee967571b89234c90946fe0d50dad195ad29c",
+                "reference": "e66ee967571b89234c90946fe0d50dad195ad29c",
                 "shasum": ""
             },
             "require": {
@@ -3721,7 +3721,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-07-08 14:42:08"
+            "time": "2014-07-15 15:39:46"
         },
         {
             "name": "twig/extensions",
@@ -4935,12 +4935,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/BehatPageObjectExtension.git",
-                "reference": "0275f44d1794e6e6e3d7fc93d4ba920de016c971"
+                "reference": "b2d948536ba026a4d49f4242d8e4d29d73669eb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/0275f44d1794e6e6e3d7fc93d4ba920de016c971",
-                "reference": "0275f44d1794e6e6e3d7fc93d4ba920de016c971",
+                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/b2d948536ba026a4d49f4242d8e4d29d73669eb2",
+                "reference": "b2d948536ba026a4d49f4242d8e4d29d73669eb2",
                 "shasum": ""
             },
             "require": {
@@ -4991,7 +4991,7 @@
                 "Behat",
                 "page"
             ],
-            "time": "2014-07-07 17:01:23"
+            "time": "2014-07-14 22:19:40"
         },
         {
             "name": "vipsoft/doctrine-data-fixtures-extension",
@@ -4999,12 +4999,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vipsoft/DoctrineDataFixturesExtension.git",
-                "reference": "3ea1d03578659b6c015289ead67fe302f2973dc6"
+                "reference": "e673566d9e6bed3322891c7f8f90800ceddbd8a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vipsoft/DoctrineDataFixturesExtension/zipball/3ea1d03578659b6c015289ead67fe302f2973dc6",
-                "reference": "3ea1d03578659b6c015289ead67fe302f2973dc6",
+                "url": "https://api.github.com/repos/vipsoft/DoctrineDataFixturesExtension/zipball/e673566d9e6bed3322891c7f8f90800ceddbd8a9",
+                "reference": "e673566d9e6bed3322891c7f8f90800ceddbd8a9",
                 "shasum": ""
             },
             "require": {
@@ -5042,7 +5042,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "Doctrine data fixtures extension for Behat",
@@ -5053,7 +5053,7 @@
                 "Data fixtures",
                 "doctrine"
             ],
-            "time": "2014-06-21 02:40:39"
+            "time": "2014-07-14 14:48:43"
         }
     ],
     "aliases": [
