@@ -32,4 +32,9 @@ catrobat_api_most_viewed_programs:
     pattern:  /api/projects/mostViewed.json
     methods: [POST, GET]
     defaults: { _controller: 'catrobat.api.controller.listprograms:listMostViewedProgramsAction', _format: json }
+
+catrobat_api_download:
+    pattern:  /downloads/{id}.catrobat
+    methods: [GET]
+    defaults: { _controller: 'catrobat.api.controller.download:downloadProgramAction', _format: json }
     

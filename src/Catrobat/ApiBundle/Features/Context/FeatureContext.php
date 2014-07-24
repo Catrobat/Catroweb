@@ -35,6 +35,11 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   private $files;
   private $last_response;
 
+  /*
+   * @var \Symfony\Component\HttpKernel\Client
+   */
+  private $client;
+  
   public static function getAcceptedSnippetType()
   {
     return 'regex';
@@ -80,6 +85,15 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $this->emptyDirectory($extract_dir);
   }
 
+  /** @AfterSuite */
+  protected function emptyDirectories()
+  {
+    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
+    $this->emptyDirectory($extract_dir);
+    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
+    $this->emptyDirectory($extract_dir);
+  }
+  
   /**
    * @Given /^there are users:$/
    */
@@ -129,7 +143,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       $program->setUploadIp("127.0.0.1");
       $program->setRemixCount(0);
       $program->setFilesize(0);
-      $program->setVisible(true);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
       $program->setUploadLanguage("en");
       $program->setApproved(false);
       $em->persist($program);
@@ -137,6 +151,45 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $em->flush();
   }
 
+  
+  /**
+   * @Given /^there are downloadable programs:$/
+   */
+  public function thereAreDownloadablePrograms(TableNode $table)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $file_repo = $this->kernel->getContainer()->get('catrobat.core.services.file.repository');
+    $programs = $table->getHash();
+    for($i = 0; $i < count($programs); $i ++)
+    {
+      $user = $em->getRepository('CatrobatCoreBundle:User')->findOneBy(array (
+          'username' => $programs[$i]['owned by'] 
+      ));
+      $program = new Program();
+      $program->setUser($user);
+      $program->setName($programs[$i]['name']);
+      $program->setDescription($programs[$i]['description']);
+      $program->setFilename("file" . $i . ".catrobat");
+      $program->setThumbnail("thumb.png");
+      $program->setScreenshot("screenshot.png");
+      $program->setViews($programs[$i]['views']);
+      $program->setDownloads($programs[$i]['downloads']);
+      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setCatrobatVersion(1);
+      $program->setCatrobatVersionName($programs[$i]['version']);
+      $program->setLanguageVersion(1);
+      $program->setUploadIp("127.0.0.1");
+      $program->setRemixCount(0);
+      $program->setFilesize(0);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
+      $program->setUploadLanguage("en");
+      $program->setApproved(false);
+      $em->persist($program);
+      $em->flush();
+      $file_repo->saveProgramfile(new File(self::FIXTUREDIR . "compass.catrobat"), $program->getId());
+    }
+  }
+  
   /**
    * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
    */
@@ -300,7 +353,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   public function theResponseCodeShouldBe($code)
   {
     $response = $this->client->getResponse();
-    assertEquals($code, $response->getStatusCode(), "Wrong response code");
+    assertEquals($code, $response->getStatusCode(), "Wrong response code. " . $response->getContent());
   }
 
   /**
@@ -519,5 +572,33 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   {
     $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
   }
+
+  /**
+   * @Given /^there are uploaded programs:$/
+   */
+  public function thereAreUploadedPrograms(TableNode $table)
+  {
+    throw new PendingException();
+  }
+
+  /**
+   * @When /^i download "([^"]*)"$/
+   */
+  public function iDownload($arg1)
+  {
+    $this->client = $this->kernel->getContainer()->get('test.client');
+    $this->client->request('GET', $arg1);
+  }
+
+  /**
+   * @Then /^i should receive a file$/
+   */
+  public function iShouldReceiveAFile()
+  {
+    $content_type = $this->client->getResponse()->headers->get('Content-Type');
+    assertEquals("application/zip", $content_type);
+  }
+
+
 
 }

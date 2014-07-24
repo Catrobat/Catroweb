@@ -3,6 +3,7 @@ parameters:
     catrobat.api.controller.upload.class: Catrobat\ApiBundle\Controller\UploadController
     catrobat.api.controller.security.class: Catrobat\ApiBundle\Controller\SecurityController
     catrobat.api.controller.listprograms.class: Catrobat\ApiBundle\Controller\ListProgramsController
+    catrobat.api.controller.download.class: Catrobat\ApiBundle\Controller\DownloadProgramController
 
 services:
     catrobat.api.controller.search:
@@ -29,6 +30,10 @@ services:
         class: "%catrobat.api.controller.upload.class%"
         arguments: ["@catrobat.core.model.usermanager", "@security.context", "@catrobat.core.model.programmanager", "@catrobat.core.services.tokengenerator","@translator"]
 
+    catrobat.api.controller.download:
+        class: "%catrobat.api.controller.download.class%"
+        arguments: ["@catrobat.core.model.programmanager","@catrobat.core.services.file.repository"]
+        
     uploadtoken.security.authentication.provider:
         class:  Catrobat\ApiBundle\Security\UploadTokenAuthenticationProvider
         arguments: [""]

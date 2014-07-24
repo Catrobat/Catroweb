@@ -637,4 +637,9 @@ class Program
     {
         return $this->approved;
     }
+    
+    public function isVisible()
+    {
+      return $this->visible;
+    }
 }
