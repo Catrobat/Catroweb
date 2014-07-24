@@ -35,8 +35,10 @@ Feature: Login with an existing accunt or register a new one
 
 
   Scenario: loginOrRegister with invalid login
-    Given I have a parameter "registrationUsername" with value "Catrobat"
-    And I have a parameter "registrationPassword" with value "invalid"
+    Given I have the POST parameters:
+        | name                 | value                 |
+        | registrationUsername | Catrobat              |
+        | registrationPassword | invalid               |
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
     Then I should get the json object:
       """
