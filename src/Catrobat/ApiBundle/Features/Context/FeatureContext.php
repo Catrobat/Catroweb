@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
+use Catrobat\CoreBundle\Services\TokenGenerator;
 
 //
 // Require 3rd-party libraries here:
@@ -447,4 +448,13 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
        $filesystem->remove($file);
      }
    }
+
+    /**
+     * @Given /^the next generated token will be "([^"]*)"$/
+     */
+    public function theNextGeneratedTokenWillBe($token)
+    {
+        $security_controller = $this->kernel->getContainer()->get("catrobat.api.controller.security");
+        $security_controller->setTokenGenerator(new FixedTokenGenerator($token));
+    }
 }

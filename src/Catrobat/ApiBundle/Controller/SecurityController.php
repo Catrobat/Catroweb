@@ -35,6 +35,11 @@ class SecurityController
       $this->translator = $translator;
     }
   
+    public function setTokenGenerator(TokenGenerator $tokenGenerator)
+    {
+      $this->tokenGenerator = $tokenGenerator;
+    }
+    
     public function checkTokenAction()
     {
       return JsonResponse::create(array("statusCode" => StatusCode::OK, "answer" => $this->trans("success.token"), "preHeaderMessages" => "  \n"));
@@ -71,7 +76,7 @@ class SecurityController
           $userManager->updateUser($user);
           $retArray['statusCode'] = 201;
           $retArray['answer'] = $this->trans("success.registration");
-          $retArray['token'] = $user->getToken();
+          $retArray['token'] = $user->getUploadToken();
         }
       } 
       else 

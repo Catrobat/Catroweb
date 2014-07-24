@@ -13,14 +13,15 @@ Feature: Login with an existing accunt or register a new one
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
   Scenario: Register a new user
-    Given I have a parameter "registrationUsername" with value "newuser"
+    Given the next generated token will be "rrrrrrrrrrr"
+    And I have a parameter "registrationUsername" with value "newuser"
     And I have a parameter "registrationPassword" with value "registrationpassword"
     And I have a parameter "registrationEmail" with value "test@mail.com"
     And I have a parameter "registrationCountry" with value "at"
     When I POST these parameters to "/api/loginOrRegister/loginOrRegister.json"
-    Then I should get the json object with random token:
+    Then I should get the json object:
       """
-      {"token":"<token>","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
+      {"token":"rrrrrrrrrrr","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
       """
 
   @TODO
