@@ -12,7 +12,7 @@ services:
 
     catrobat.api.controller.listprograms:
         class: "%catrobat.api.controller.listprograms.class%"
-        arguments: ["@catrobat.core.model.programmanager"]
+        arguments: ["@catrobat.core.model.programmanager", "@catrobat.core.services.screenshot.repository"]
 
     catrobat.api.controller.listmostdownloadedprograms:
         class: "%catrobat.api.controller.listprograms.class%"

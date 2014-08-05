@@ -22,7 +22,7 @@ Feature: Get the most recent programs
       {
           "completeTerm":"",
           "CatrobatInformation": {
-                                   "BaseUrl":"https:\/\/localhost\/",
+                                   "BaseUrl":"http:\/\/localhost\/",
                                    "TotalProjects":3,
                                    "ProjectsExtension":".catrobat"
                                   },
@@ -30,18 +30,18 @@ Feature: Get the most recent programs
                                 "ProjectId": 2,
                                 "ProjectName":"program 2",
                                 "ProjectNameShort":"program 2",
-                                "ScreenshotBig":"resources\/thumbnails\/2_large.png",
-                                                      "ScreenshotSmall":"resources\/thumbnails\/2_small.png",
-                                                      "Author":"Catrobat",
-                                                      "Description":"",
-                                                      "Uploaded": 1359723600,
-                                                      "UploadedString":"",
-                                                      "Version":"0.8.5",
-                                                      "Views":"9",
-                                                      "Downloads":"33",
-                                                      "ProjectUrl":"details\/2",
-                                                      "DownloadUrl":"download\/2.catrobat"
-                                                    }],
+                                "ScreenshotBig":"resources_test\/screenshots\/screen_2.png",
+                                "ScreenshotSmall":"resources_test\/thumbnails\/screen_2.png",
+                                "Author":"Catrobat",
+                                "Description":"",
+                                "Uploaded": 1359723600,
+                                "UploadedString":"",
+                                "Version":"0.8.5",
+                                "Views":"9",
+                                "Downloads":"33",
+                                "ProjectUrl":"details\/2",
+                                "DownloadUrl":"download\/2.catrobat"
+                            }],
           "preHeaderMessages":""
       }
       """
