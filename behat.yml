@@ -7,6 +7,12 @@ default:
             kernel:
                 env: test
                 debug: true
+        Behat\MinkExtension:
+              base_url: http://catroid.local/app_dev.php/
+              sessions:
+                default:
+                  selenium2:
+                    wd_host: "http://localhost:8643/wd/hub"
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
