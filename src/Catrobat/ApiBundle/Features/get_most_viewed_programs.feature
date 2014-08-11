@@ -22,7 +22,7 @@ Feature: Get the most downloaded programs
       {
           "completeTerm":"",
           "CatrobatInformation": {
-                                   "BaseUrl":"http:\/\/localhost\/",
+                                   "BaseUrl":"http://localhost\/",
                                    "TotalProjects":3,
                                    "ProjectsExtension":".catrobat"
                                   },
@@ -30,8 +30,8 @@ Feature: Get the most downloaded programs
                                 "ProjectId": 2,
                                 "ProjectName":"program 2",
                                 "ProjectNameShort":"program 2",
-                                "ScreenshotBig":"resources_test\/screenshots\/screen_2.png",
-                                "ScreenshotSmall":"resources_test\/thumbnails\/screen_2.png",
+                                "ScreenshotBig":"resources_test/screenshots/screen_2.png",
+                                "ScreenshotSmall":"resources_test/thumbnails/screen_2.png",
                                 "Author":"Catrobat",
                                 "Description":"",
                                 "Uploaded": 1359723600,
@@ -39,8 +39,8 @@ Feature: Get the most downloaded programs
                                 "Version":"0.8.5",
                                 "Views":"90",
                                 "Downloads":"333",
-                                "ProjectUrl":"details\/2",
-                                "DownloadUrl":"download\/2.catrobat"
+                                "ProjectUrl":"details/2",
+                                "DownloadUrl":"download/2.catrobat"
                             }],
           "preHeaderMessages":""
       }
