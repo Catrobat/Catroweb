@@ -15,6 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\CoreBundle\Services\TokenGenerator;
+use Symfony\Bundle\FrameworkBundle\Client;
 
 //
 // Require 3rd-party libraries here:
@@ -34,6 +35,10 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   private $request_parameters;
   private $files;
   private $last_response;
+  /**
+   * @var Client
+   */
+  private $client;
 
   /*
    * @var \Symfony\Component\HttpKernel\Client
