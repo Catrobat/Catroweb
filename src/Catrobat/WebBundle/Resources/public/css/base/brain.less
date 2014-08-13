@@ -115,9 +115,19 @@ h2 {
   font-size: @default-font-size + 4;
 }
 
-.standard-article-text {
+.size-xlarge {
+  font-size: @default-font-size + 8;
+}
+
+.standard-col-text {
+//  .columns(250px, 2, 40px, #EEE, solid, 0px);
+  .box-columns(2, 40px);
   text-align: justify;
   padding: 25px 25px;
+}
+
+.standard-article-link {
+  font-weight: bold;
 }
 
 .programs {

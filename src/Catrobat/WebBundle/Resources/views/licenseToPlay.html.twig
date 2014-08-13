@@ -1,15 +1,22 @@
 {% extends 'CatrobatWebBundle:Default:base.html.twig' %}
 
-{% block head %}
-    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/licenseToPlay.less' filter='cssrewrite,lessphp' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
-
 {% block body %}
-  <h1>License To Play</h1>
-  <div class="license-text standard-article-text size-large">
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  <h1>License To Play - Give credit and share</h1>
+  <div class="standard-col-text size-large">
+    Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+    <p>There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.</p>
+    <p>
+      <b>You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:</b>
+      <ul>
+        <li>share your cakes along with the recipe</li>
+        <li>give credit to those who inspired you</li>
+      </ul>
+    </p>
+    <br /><br />
+    <p>In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit.</p>
+    <p>In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.</p>
+    <p>Learn more about the terms of use of the Catrobat online community on <a class="standard-article-link" href="https://pocketcode.org/termsOfUse">https://pocketcode.org/termsOfUse</a>.</p>
+    <p>Version 1.1, 2 April 2013 </p>
   </div>
 {% endblock %}
 
