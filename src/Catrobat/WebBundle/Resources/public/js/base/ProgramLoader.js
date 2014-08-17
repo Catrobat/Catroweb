@@ -17,8 +17,11 @@ var ProgramLoader = function (container, url) {
         return;
       }
 
-      $(self.container).append('<div class="button-show-more img-load-more"></div>');
-      $(self.container).append('<div class="button-show-ajax img-load-ajax"></div>');
+      $(self.container).append('' +
+        '<div class="button-show-placeholder">' +
+          '<div class="button-show-more img-load-more"></div>' +
+          '<div class="button-show-ajax img-load-ajax"></div>' +
+        '</div>');
 
       self.loadProgramsIntoContainer(data);
       self.showMoreListener();

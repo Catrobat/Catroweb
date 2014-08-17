@@ -4,3 +4,5 @@ programs:
   most:
     viewed: Most viewed
     downloaded: Most downloaded
+search:
+  dotdotdot: Search...

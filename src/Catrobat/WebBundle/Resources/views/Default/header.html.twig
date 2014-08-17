@@ -1,41 +1,39 @@
-{#{% extends 'CatrobatWebBundle::base.html.twig' %}#}
+<nav>
+  <div id="header-left">
+    <div id="logo">
+      <a href="{{ path('catrobat_web_index') }}">
+        {% image '@CatrobatWebBundle/Resources/public/images/logo/logo_text.png' %}
+        <img src="{{ asset_url }}" alt="Pocket Code Logo" />
+        {% endimage %}
+      </a>
+    </div>
+    <div class="input-search-big">
+      <input placeholder="{{ "Search.dotdotdot"|trans({}, "catroweb") }}">
+    </div>
+  </div>
 
-{% block header %}
+  <div id="header-right">
+    <div id="menu">
+      <div class="btn btn-search">
+        <div class="img-magnifying-glass"></div>
+      </div>
+      <div>
+        <input placeholder="{{ "Search.dotdotdot"|trans({}, "catroweb") }}" class="size-large">
+      </div>
+      <div class="btn btn-menu">
+        <div class="img-avatar"></div>
+      </div>
+    </div>
 
-    <nav role="navigation">
-        <div id="largeMenu">
-            <div class="catroidLink">
-                <a href="{{ path('catrobat_web_index') }}">
-                    {% image '@CatrobatWebBundle/Resources/public/images/logo/logo_text.png' %}
-                    <img src="{{ asset_url }}" alt="" />
-                    {% endimage %}
-                </a>
-            </div>
-
-            <div id="largeSearchButton" class="largeSearchBarLeft">
-                <button class="img-magnifying-glass"></button>
-            </div>
-
-            <div class="largeSearchBarMiddle">
-                <input type="search" placeholder="" />
-            </div>
-
-            <div id="largeMenuButton" class="largeSearchBarRight">
-                <button class="img-avatar"></button>
-            </div>
-        </div>
-
-        {#<div id="navigationMenu">#}
-            {#<ul>#}
-                {#<li id="menuProfileButton"><div class="img-author-big">my profile</div></li>#}
-                {#<li id="menuLogoutButton"><div class="img-logout">logout</div></li>#}
-            {#</ul>#}
-        {#</div>#}
-    </nav>
-
-  {#<div id="testing">#}
-    {#<div class="one">1</div>#}
-    {#<div class="two">2</div>#}
-  {#</div>#}
-
-{% endblock %}
+    <div id="menu-mobile">
+      <div class="btn btn-search">
+        <div class="img-magnifying-glass"></div>
+        <div class="img-undo-search"></div>
+      </div>
+      <div class="margin-spacer"></div>
+      <div class="btn btn-menu">
+        <div class="img-avatar"></div>
+      </div>
+    </div>
+  </div>
+</nav>

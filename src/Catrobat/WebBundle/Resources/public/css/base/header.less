@@ -1,16 +1,109 @@
 @import 'default.less';
 
-@red: red;
-
-#testing {
-
-  .one {
-    font-size: 20px;
-    color: @red;
-  }
-
-  .two {
-    border: 50px -30px;
-  }
-
+#header-logo {
+  padding-top: 40px;
+  width: 100%;
+  text-align: center;
 }
+
+header {
+  padding: 20px 10px;
+
+  nav {
+
+    #header-left, #header-right {
+      display: table-cell;
+      vertical-align: middle;
+
+      width: 100%;
+    }
+
+    #logo img {
+      width: 300px;
+      min-width: 150px;
+    }
+
+    #menu, #menu-mobile {
+      > div {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .btn {
+        padding: 9px;
+      }
+    }
+
+    #menu {
+      .gradient(#177f8d,#177f8d,#17A5B8);
+      .rounded(2px);
+
+      .btn-menu {
+        border-left: 1px solid white;
+      }
+
+      input {
+        background: @default-input-background-color;
+        border: 0;
+        padding: 8px;
+        width: 200px;
+        .rounded(2px);
+        margin-right: 8px;
+      }
+    }
+
+    #menu-mobile {
+      display: none;
+
+      .btn {
+        .gradient(#177f8d,#177f8d,#17A5B8);
+        .rounded(2px);
+      }
+
+      .margin-spacer {
+        padding: 0 5px;
+      }
+
+    }
+
+  @media (max-width: 767px) {
+    #menu {
+      display: none;
+    }
+    #menu-mobile {
+      display: block;
+    }
+  }
+  }
+}
+
+//.searchbar-visible {
+//  #header-left {
+//    display: none;
+//  }
+//
+//  #header-right {
+//    display: table;
+//
+//    #menu-mobile {
+//      display: table-row;
+//
+//      .input-search-big {
+//        display: table-cell;
+//        vertical-align: middle;
+//        height: 49px;
+//        width: 100%;
+//        background: #29505f;
+//        border-top: 1px solid #17A5B8;
+//        border-left: 1px solid #17A5B8;
+//        border-bottom: 1px solid #177f8d;
+//
+//        input {
+//          width: 100%;
+//          background: #29505f;
+//          border: 0;
+//        }
+//      }
+//    }
+//  }
+//}

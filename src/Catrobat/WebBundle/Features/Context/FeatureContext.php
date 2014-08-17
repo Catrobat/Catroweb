@@ -66,7 +66,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iGoToTheWebsiteRoot()
   {
-    $this->getSession()->visit('http://catroid.local/app.php/');
+    $this->getSession()->visit('http://catroid.local/app_dev.php/');
   }
 
   /**
@@ -130,6 +130,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $script = <<<JS
     newest.loaded == $arg1 && mostDownloaded.loaded == $arg1 && mostViewed.loaded == $arg1;
+JS;
+
+    assertTrue($this->getSession()->evaluateScript($script));
+  }
+
+  /**
+   * @Then /^in each of them there should be "([^"]*)" programs visible$/
+   */
+  public function inEachOfThemThereShouldBeProgramsVisible($arg1)
+  {
+    $script = <<<JS
+    newest.visible == $arg1 && mostDownloaded.visible == $arg1 && mostViewed.visible == $arg1;
 JS;
 
     assertTrue($this->getSession()->evaluateScript($script));

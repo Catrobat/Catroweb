@@ -13,7 +13,7 @@ Feature: All uploaded programs have to be validated.
   Scenario: program must have a code.xml
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "cccccccccc"
-    And I have a Catrobat file with an missing code.xml
+    And I have a Catrobat file with a missing code.xml
     And I have a parameter "fileChecksum" with the md5checksum my file
     When I POST these parameters to "/api/upload/upload.json"
     Then I should get the json object:
