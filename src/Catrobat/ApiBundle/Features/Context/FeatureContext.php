@@ -35,10 +35,6 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   private $request_parameters;
   private $files;
   private $last_response;
-  /**
-   * @var Client
-   */
-  private $client;
 
   /*
    * @var \Symfony\Component\HttpKernel\Client
