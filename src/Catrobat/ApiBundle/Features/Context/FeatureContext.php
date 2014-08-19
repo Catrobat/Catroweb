@@ -508,7 +508,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theNextGeneratedTokenWillBe($token)
   {
-    $security_controller = $this->kernel->getContainer()->get("catrobat.api.controller.security");
+    $security_controller = $this->kernel->getContainer()->get("catrobat.core.services.tokengenerator");
     $security_controller->setTokenGenerator(new FixedTokenGenerator($token));
   }
 

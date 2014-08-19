@@ -15,7 +15,6 @@ class CatrobatFileCompressor
   
   public function __construct($compress_dir)
   {
-    $filesystem = new Filesystem();
     if (!is_dir($compress_dir))
     {
       throw new InvalidStorageDirectoryException($compress_dir . " is not a valid directory");

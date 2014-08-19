@@ -15,7 +15,6 @@ class CatrobatFileExtractor
   
   public function __construct($extract_dir)
   {
-    $filesystem = new Filesystem();
     if (!is_dir($extract_dir))
     {
       throw new InvalidStorageDirectoryException($extract_dir . " is not a valid directory");

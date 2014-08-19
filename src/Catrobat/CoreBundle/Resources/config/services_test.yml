@@ -1,0 +1,12 @@
+imports:
+    - { resource: services.yml }
+    
+services:
+
+    catrobat.core.services.tokengenerator.inner:
+              class:        Catrobat\CoreBundle\Services\TokenGenerator
+
+    catrobat.core.services.tokengenerator:
+          class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTokenGenerator
+          arguments: ["@catrobat.core.services.tokengenerator.inner"]
+

@@ -35,11 +35,6 @@ class SecurityController
       $this->translator = $translator;
     }
   
-    public function setTokenGenerator(TokenGenerator $tokenGenerator)
-    {
-      $this->tokenGenerator = $tokenGenerator;
-    }
-    
     public function checkTokenAction()
     {
       return JsonResponse::create(array("statusCode" => StatusCode::OK, "answer" => $this->trans("success.token"), "preHeaderMessages" => "  \n"));
