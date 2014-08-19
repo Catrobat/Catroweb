@@ -508,9 +508,20 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theNextGeneratedTokenWillBe($token)
   {
-    $security_controller = $this->kernel->getContainer()->get("catrobat.core.services.tokengenerator");
-    $security_controller->setTokenGenerator(new FixedTokenGenerator($token));
+    $token_generator = $this->kernel->getContainer()->get("catrobat.core.services.tokengenerator");
+    $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
+
+  /**
+   * @Given /^the current time is "([^"]*)"$/
+   */
+  public function theCurrentTimeIs($time)
+  {
+    $date = new \DateTime($time, new \DateTimeZone('UTC'));
+    $time_service = $this->kernel->getContainer()->get("catrobat.core.services.time");
+    $time_service->setTime(new FixedTime($date->getTimestamp()));
+  }
+
 
   /**
    * @Given /^I have the POST parameters:$/
@@ -599,6 +610,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $content_type = $this->client->getResponse()->headers->get('Content-Type');
     assertEquals("application/zip", $content_type);
   }
+
+
 
 
 

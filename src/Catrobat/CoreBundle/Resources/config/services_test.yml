@@ -10,3 +10,10 @@ services:
           class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTokenGenerator
           arguments: ["@catrobat.core.services.tokengenerator.inner"]
 
+
+    catrobat.core.services.time.inner:
+              class:        Catrobat\CoreBundle\Services\Time
+
+    catrobat.core.services.time:
+          class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTime
+          arguments: ["@catrobat.core.services.time.inner"]

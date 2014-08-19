@@ -48,3 +48,9 @@ services:
       catrobat.core.services.tokengenerator:
               class:        Catrobat\CoreBundle\Services\TokenGenerator
 
+      catrobat.core.services.time:
+              class: Catrobat\CoreBundle\Services\Time
+
+      catrobat.core.services.elapsed.time:
+              class: Catrobat\CoreBundle\Services\ElapsedTimeString
+              arguments:    ["@translator","@catrobat.core.services.time"]

@@ -9,8 +9,9 @@ Feature: Get the most downloaded programs
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 333       | 9     | 01.02.2013 13:00 | 0.8.5   |
+      | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+    And the current time is "01.08.2014 13:00"
 
       
   Scenario: show most downloaded programs
@@ -34,8 +35,8 @@ Feature: Get the most downloaded programs
                                 "ScreenshotSmall":"resources_test/thumbnails/screen_2.png",
                                 "Author":"Catrobat",
                                 "Description":"",
-                                "Uploaded": 1359723600,
-                                "UploadedString":"",
+                                "Uploaded": 1398171600,
+                                "UploadedString":"3 months ago",
                                 "Version":"0.8.5",
                                 "Views":"9",
                                 "Downloads":"333",

@@ -29,3 +29,10 @@ success:
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
+
+time:
+  minutes.ago: "{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago"
+  hours.ago: "{1}1 hour ago |]1,Inf] %count% hours ago"
+  days.ago: "{1}1 day ago |]1,Inf] %count% days ago"
+  months.ago: "{1}1 month ago |]1,Inf] %count% months ago"
+  years.ago: "{1}1 year ago |]1,Inf] more than one year ago"

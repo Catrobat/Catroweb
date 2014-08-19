@@ -3,11 +3,9 @@
 namespace Catrobat\ApiBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\CoreBundle\Services\ProgramFileRepository;
 
 class DownloadProgramController

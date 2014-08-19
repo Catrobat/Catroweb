@@ -21,6 +21,7 @@ Feature: Search programs
       | 8  | Universe         |             | User1    | 23        | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 9  | Webteam          |             | User1    | 100       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 10 | Fritz the Cat    |             | User1    | 112       | 33    | 01.01.2012 13:00 | 0.8.5   |
+    And the current time is "01.08.2014 13:00"
 
 
 
@@ -57,7 +58,7 @@ Feature: Search programs
          "Author":"User1",
          "Description":"p1",
          "Uploaded":1357041600,
-         "UploadedString":"0",
+         "UploadedString":"1 year ago",
          "Version":"0.8.5",
          "Views":"12",
          "Downloads":"3",
