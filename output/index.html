@@ -325,7 +325,7 @@ Checking a user&#039;s token validity
         <span class="glyphicon
       glyphicon-ok-circle
     "></span>
-Get the most downloaded programs
+Download programs
     </div>
         <div class="panel-collapse collapse" id="feature2">
       <div class="panel-body">
@@ -346,7 +346,7 @@ Get the most downloaded programs
     "></span>
 
                 <b>Background:</b> 
-                <span class="badge pull-right">2</span>
+                <span class="badge pull-right">4</span>
               </div>
                 <div class="panel-body">
                   <ul class="list-group">
@@ -355,7 +355,21 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                     Given there are users:
+                     Given the upload folder is empty
+                                          </li>
+                                       <li class="list-group-item list-group-item-success">
+                       <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                     And the extract folder is empty
+                                          </li>
+                                       <li class="list-group-item list-group-item-success">
+                       <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                     And there are users:
                                                                                              <div class="panel panel-default stepargument"><div class="panel-body">
                         <table class="table table-condensed">
                                                     <tr>
@@ -368,11 +382,6 @@ Get the most downloaded programs
                               </td>                                                          <td>                              12345
                               </td>                                                          <td>                              cccccccccc
                               </td>                                                      </tr>
-                                                    <tr>
-                                                          <td>                              User1
-                              </td>                                                          <td>                              vwxyz
-                              </td>                                                          <td>                              aaaaaaaaaa
-                              </td>                                                      </tr>
                                                  </table>
                        </div></div>
                                                                  </li>
@@ -381,7 +390,7 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                     And there are programs:
+                     And there are downloadable programs:
                                                                                              <div class="panel panel-default stepargument"><div class="panel-body">
                         <table class="table table-condensed">
                                                     <tr>
@@ -393,6 +402,7 @@ Get the most downloaded programs
                               </th>                                                          <th>                              views
                               </th>                                                          <th>                              upload time
                               </th>                                                          <th>                              version
+                              </th>                                                          <th>                              visible
                               </th>                                                      </tr>
                                                     <tr>
                                                           <td>                              1
@@ -403,26 +413,18 @@ Get the most downloaded programs
                               </td>                                                          <td>                              12
                               </td>                                                          <td>                              01.01.2013 12:00
                               </td>                                                          <td>                              0.8.5
+                              </td>                                                          <td>                              true
                               </td>                                                      </tr>
                                                     <tr>
                                                           <td>                              2
                               </td>                                                          <td>                              program 2
                               </td>                                                          <td>                              
                               </td>                                                          <td>                              Catrobat
-                              </td>                                                          <td>                              333
+                              </td>                                                          <td>                              33
                               </td>                                                          <td>                              9
                               </td>                                                          <td>                              01.02.2013 13:00
                               </td>                                                          <td>                              0.8.5
-                              </td>                                                      </tr>
-                                                    <tr>
-                                                          <td>                              3
-                              </td>                                                          <td>                              program 3
-                              </td>                                                          <td>                              
-                              </td>                                                          <td>                              User1
-                              </td>                                                          <td>                              133
-                              </td>                                                          <td>                              33
-                              </td>                                                          <td>                              01.01.2012 13:00
-                              </td>                                                          <td>                              0.8.5
+                              </td>                                                          <td>                              false
                               </td>                                                      </tr>
                                                  </table>
                        </div></div>
@@ -439,8 +441,8 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                <b>Scenario:</b> show most downloaded programs
-                <span class="badge pull-right">4</span>
+                <b>Scenario:</b> 
+                <span class="badge pull-right">3</span>
               </div>
               <div class="panel-collapse collapse" id="scenario-1-2">
                 <div class="panel-body">
@@ -450,53 +452,22 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                       Given I have a parameter &quot;limit&quot; with value &quot;1&quot;
+                       When i download &quot;/downloads/1.catrobat&quot;
                                             </li>
                                        <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 
-                       And I have a parameter &quot;offset&quot; with value &quot;0&quot;
+                       Then i should receive a file
                                             </li>
                                        <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 
-                       When I GET &quot;/api/projects/mostDownloaded.json&quot; with these parameters
+                       And the response code should be &quot;200&quot;
                                             </li>
-                                       <li class="list-group-item list-group-item-success">
-                         <span class="glyphicon
-      glyphicon-ok-circle
-    "></span>
-
-                       Then I should get the json object:
-                                               <pre class="stepargument"><code>{
-    &quot;completeTerm&quot;:&quot;&quot;,
-    &quot;CatrobatInformation&quot;: {
-                             &quot;BaseUrl&quot;:&quot;https:\/\/localhost\/&quot;,
-                             &quot;TotalProjects&quot;:3,
-                             &quot;ProjectsExtension&quot;:&quot;.catrobat&quot;
-                            },
-    &quot;CatrobatProjects&quot;:[{
-                          &quot;ProjectId&quot;: 2,
-                          &quot;ProjectName&quot;:&quot;program 2&quot;,
-                          &quot;ProjectNameShort&quot;:&quot;program 2&quot;,
-                          &quot;ScreenshotBig&quot;:&quot;resources\/thumbnails\/2_large.png&quot;,
-                                                &quot;ScreenshotSmall&quot;:&quot;resources\/thumbnails\/2_small.png&quot;,
-                                                &quot;Author&quot;:&quot;Catrobat&quot;,
-                                                &quot;Description&quot;:&quot;&quot;,
-                                                &quot;Uploaded&quot;: 1359723600,
-                                                &quot;UploadedString&quot;:&quot;&quot;,
-                                                &quot;Version&quot;:&quot;0.8.5&quot;,
-                                                &quot;Views&quot;:&quot;9&quot;,
-                                                &quot;Downloads&quot;:&quot;333&quot;,
-                                                &quot;ProjectUrl&quot;:&quot;details\/2&quot;,
-                                                &quot;DownloadUrl&quot;:&quot;download\/2.catrobat&quot;
-                                              }],
-    &quot;preHeaderMessages&quot;:&quot;&quot;
-}</code></pre>                                                                  </li>
                                     </ul>
                                   </div>
               </div>
@@ -508,8 +479,8 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                <b>Scenario:</b> show most downloaded programs with limit and offset
-                <span class="badge pull-right">4</span>
+                <b>Scenario:</b> 
+                <span class="badge pull-right">2</span>
               </div>
               <div class="panel-collapse collapse" id="scenario-2-2">
                 <div class="panel-body">
@@ -519,42 +490,15 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                       Given I have a parameter &quot;limit&quot; with value &quot;2&quot;
+                       When i download &quot;/downloads/2.catrobat&quot;
                                             </li>
                                        <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 
-                       And I have a parameter &quot;offset&quot; with value &quot;0&quot;
+                       Then the response code should be &quot;404&quot;
                                             </li>
-                                       <li class="list-group-item list-group-item-success">
-                         <span class="glyphicon
-      glyphicon-ok-circle
-    "></span>
-
-                       When I GET &quot;/api/projects/mostDownloaded.json&quot; with these parameters
-                                            </li>
-                                       <li class="list-group-item list-group-item-success">
-                         <span class="glyphicon
-      glyphicon-ok-circle
-    "></span>
-
-                       Then I should get programs in the following order:
-                                                                                               <div class="panel panel-default stepargument"><div class="panel-body">
-                        <table class="table table-condensed">
-                                                    <tr>
-                                                          <th>                              Name
-                              </th>                                                      </tr>
-                                                    <tr>
-                                                          <td>                              program 2
-                              </td>                                                      </tr>
-                                                    <tr>
-                                                          <td>                              program 3
-                              </td>                                                      </tr>
-                                                 </table>
-                       </div></div>
-                                                                 </li>
                                     </ul>
                                   </div>
               </div>
@@ -566,8 +510,8 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                <b>Scenario:</b> show most downloaded programs with limit and offset
-                <span class="badge pull-right">4</span>
+                <b>Scenario:</b> 
+                <span class="badge pull-right">2</span>
               </div>
               <div class="panel-collapse collapse" id="scenario-3-2">
                 <div class="panel-body">
@@ -577,42 +521,15 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                       Given I have a parameter &quot;limit&quot; with value &quot;2&quot;
+                       When i download &quot;/downloads/999.catrobat&quot;
                                             </li>
                                        <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 
-                       And I have a parameter &quot;offset&quot; with value &quot;1&quot;
+                       Then the response code should be &quot;404&quot;
                                             </li>
-                                       <li class="list-group-item list-group-item-success">
-                         <span class="glyphicon
-      glyphicon-ok-circle
-    "></span>
-
-                       When I GET &quot;/api/projects/mostDownloaded.json&quot; with these parameters
-                                            </li>
-                                       <li class="list-group-item list-group-item-success">
-                         <span class="glyphicon
-      glyphicon-ok-circle
-    "></span>
-
-                       Then I should get programs in the following order:
-                                                                                               <div class="panel panel-default stepargument"><div class="panel-body">
-                        <table class="table table-condensed">
-                                                    <tr>
-                                                          <th>                              Name
-                              </th>                                                      </tr>
-                                                    <tr>
-                                                          <td>                              program 3
-                              </td>                                                      </tr>
-                                                    <tr>
-                                                          <td>                              program 1
-                              </td>                                                      </tr>
-                                                 </table>
-                       </div></div>
-                                                                 </li>
                                     </ul>
                                   </div>
               </div>
@@ -718,7 +635,7 @@ Get the most downloaded programs
                               </td>                                                          <td>                              
                               </td>                                                          <td>                              Catrobat
                               </td>                                                          <td>                              333
-                              </td>                                                          <td>                              90
+                              </td>                                                          <td>                              9
                               </td>                                                          <td>                              01.02.2013 13:00
                               </td>                                                          <td>                              0.8.5
                               </td>                                                      </tr>
@@ -772,7 +689,7 @@ Get the most downloaded programs
       glyphicon-ok-circle
     "></span>
 
-                       When I GET &quot;/api/projects/mostViewed.json&quot; with these parameters
+                       When I GET &quot;/api/projects/mostDownloaded.json&quot; with these parameters
                                             </li>
                                        <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
@@ -783,7 +700,7 @@ Get the most downloaded programs
                                                <pre class="stepargument"><code>{
     &quot;completeTerm&quot;:&quot;&quot;,
     &quot;CatrobatInformation&quot;: {
-                             &quot;BaseUrl&quot;:&quot;https:\/\/localhost\/&quot;,
+                             &quot;BaseUrl&quot;:&quot;http://localhost/&quot;,
                              &quot;TotalProjects&quot;:3,
                              &quot;ProjectsExtension&quot;:&quot;.catrobat&quot;
                             },
@@ -791,18 +708,18 @@ Get the most downloaded programs
                           &quot;ProjectId&quot;: 2,
                           &quot;ProjectName&quot;:&quot;program 2&quot;,
                           &quot;ProjectNameShort&quot;:&quot;program 2&quot;,
-                          &quot;ScreenshotBig&quot;:&quot;resources\/thumbnails\/2_large.png&quot;,
-                                                &quot;ScreenshotSmall&quot;:&quot;resources\/thumbnails\/2_small.png&quot;,
-                                                &quot;Author&quot;:&quot;Catrobat&quot;,
-                                                &quot;Description&quot;:&quot;&quot;,
-                                                &quot;Uploaded&quot;: 1359723600,
-                                                &quot;UploadedString&quot;:&quot;&quot;,
-                                                &quot;Version&quot;:&quot;0.8.5&quot;,
-                                                &quot;Views&quot;:&quot;90&quot;,
-                                                &quot;Downloads&quot;:&quot;333&quot;,
-                                                &quot;ProjectUrl&quot;:&quot;details\/2&quot;,
-                                                &quot;DownloadUrl&quot;:&quot;download\/2.catrobat&quot;
-                                              }],
+                          &quot;ScreenshotBig&quot;:&quot;resources_test/screenshots/screen_2.png&quot;,
+                          &quot;ScreenshotSmall&quot;:&quot;resources_test/thumbnails/screen_2.png&quot;,
+                          &quot;Author&quot;:&quot;Catrobat&quot;,
+                          &quot;Description&quot;:&quot;&quot;,
+                          &quot;Uploaded&quot;: 1359723600,
+                          &quot;UploadedString&quot;:&quot;&quot;,
+                          &quot;Version&quot;:&quot;0.8.5&quot;,
+                          &quot;Views&quot;:&quot;9&quot;,
+                          &quot;Downloads&quot;:&quot;333&quot;,
+                          &quot;ProjectUrl&quot;:&quot;details/2&quot;,
+                          &quot;DownloadUrl&quot;:&quot;download/2.catrobat&quot;
+                      }],
     &quot;preHeaderMessages&quot;:&quot;&quot;
 }</code></pre>                                                                  </li>
                                     </ul>
@@ -820,6 +737,314 @@ Get the most downloaded programs
                 <span class="badge pull-right">4</span>
               </div>
               <div class="panel-collapse collapse" id="scenario-2-3">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I have a parameter &quot;limit&quot; with value &quot;2&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I have a parameter &quot;offset&quot; with value &quot;0&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I GET &quot;/api/projects/mostDownloaded.json&quot; with these parameters
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then I should get programs in the following order:
+                                                                                               <div class="panel panel-default stepargument"><div class="panel-body">
+                        <table class="table table-condensed">
+                                                    <tr>
+                                                          <th>                              Name
+                              </th>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              program 2
+                              </td>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              program 3
+                              </td>                                                      </tr>
+                                                 </table>
+                       </div></div>
+                                                                 </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                        <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-3">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> show most downloaded programs with limit and offset
+                <span class="badge pull-right">4</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-3-3">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I have a parameter &quot;limit&quot; with value &quot;2&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I have a parameter &quot;offset&quot; with value &quot;1&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I GET &quot;/api/projects/mostDownloaded.json&quot; with these parameters
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then I should get programs in the following order:
+                                                                                               <div class="panel panel-default stepargument"><div class="panel-body">
+                        <table class="table table-condensed">
+                                                    <tr>
+                                                          <th>                              Name
+                              </th>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              program 3
+                              </td>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              program 1
+                              </td>                                                      </tr>
+                                                 </table>
+                       </div></div>
+                                                                 </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature4">
+      <span class="badge pull-right">3</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Get the most downloaded programs
+    </div>
+        <div class="panel-collapse collapse" id="feature4">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+                    <li><a href="#background-tab-4" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-4" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                              <div class="tab-pane" id="background-tab-4">
+            <div class="panel           panel-success
+    ">
+              <div class="panel-heading">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Background:</b> 
+                <span class="badge pull-right">2</span>
+              </div>
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                       <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                     Given there are users:
+                                                                                             <div class="panel panel-default stepargument"><div class="panel-body">
+                        <table class="table table-condensed">
+                                                    <tr>
+                                                          <th>                              name
+                              </th>                                                          <th>                              password
+                              </th>                                                          <th>                              token
+                              </th>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              Catrobat
+                              </td>                                                          <td>                              12345
+                              </td>                                                          <td>                              cccccccccc
+                              </td>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              User1
+                              </td>                                                          <td>                              vwxyz
+                              </td>                                                          <td>                              aaaaaaaaaa
+                              </td>                                                      </tr>
+                                                 </table>
+                       </div></div>
+                                                                 </li>
+                                       <li class="list-group-item list-group-item-success">
+                       <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                     And there are programs:
+                                                                                             <div class="panel panel-default stepargument"><div class="panel-body">
+                        <table class="table table-condensed">
+                                                    <tr>
+                                                          <th>                              id
+                              </th>                                                          <th>                              name
+                              </th>                                                          <th>                              description
+                              </th>                                                          <th>                              owned by
+                              </th>                                                          <th>                              downloads
+                              </th>                                                          <th>                              views
+                              </th>                                                          <th>                              upload time
+                              </th>                                                          <th>                              version
+                              </th>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              1
+                              </td>                                                          <td>                              program 1
+                              </td>                                                          <td>                              p1
+                              </td>                                                          <td>                              Catrobat
+                              </td>                                                          <td>                              3
+                              </td>                                                          <td>                              12
+                              </td>                                                          <td>                              01.01.2013 12:00
+                              </td>                                                          <td>                              0.8.5
+                              </td>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              2
+                              </td>                                                          <td>                              program 2
+                              </td>                                                          <td>                              
+                              </td>                                                          <td>                              Catrobat
+                              </td>                                                          <td>                              333
+                              </td>                                                          <td>                              90
+                              </td>                                                          <td>                              01.02.2013 13:00
+                              </td>                                                          <td>                              0.8.5
+                              </td>                                                      </tr>
+                                                    <tr>
+                                                          <td>                              3
+                              </td>                                                          <td>                              program 3
+                              </td>                                                          <td>                              
+                              </td>                                                          <td>                              User1
+                              </td>                                                          <td>                              133
+                              </td>                                                          <td>                              33
+                              </td>                                                          <td>                              01.01.2012 13:00
+                              </td>                                                          <td>                              0.8.5
+                              </td>                                                      </tr>
+                                                 </table>
+                       </div></div>
+                                                                 </li>
+                                    </ul>
+              </div>
+            </div>
+          </div>
+                    <div class="tab-pane active" id="scenario-tab-4">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-4">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> show most downloaded programs
+                <span class="badge pull-right">4</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-4">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I have a parameter &quot;limit&quot; with value &quot;1&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I have a parameter &quot;offset&quot; with value &quot;0&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I GET &quot;/api/projects/mostViewed.json&quot; with these parameters
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then I should get the json object:
+                                               <pre class="stepargument"><code>{
+    &quot;completeTerm&quot;:&quot;&quot;,
+    &quot;CatrobatInformation&quot;: {
+                             &quot;BaseUrl&quot;:&quot;http://localhost\/&quot;,
+                             &quot;TotalProjects&quot;:3,
+                             &quot;ProjectsExtension&quot;:&quot;.catrobat&quot;
+                            },
+    &quot;CatrobatProjects&quot;:[{
+                          &quot;ProjectId&quot;: 2,
+                          &quot;ProjectName&quot;:&quot;program 2&quot;,
+                          &quot;ProjectNameShort&quot;:&quot;program 2&quot;,
+                          &quot;ScreenshotBig&quot;:&quot;resources_test/screenshots/screen_2.png&quot;,
+                          &quot;ScreenshotSmall&quot;:&quot;resources_test/thumbnails/screen_2.png&quot;,
+                          &quot;Author&quot;:&quot;Catrobat&quot;,
+                          &quot;Description&quot;:&quot;&quot;,
+                          &quot;Uploaded&quot;: 1359723600,
+                          &quot;UploadedString&quot;:&quot;&quot;,
+                          &quot;Version&quot;:&quot;0.8.5&quot;,
+                          &quot;Views&quot;:&quot;90&quot;,
+                          &quot;Downloads&quot;:&quot;333&quot;,
+                          &quot;ProjectUrl&quot;:&quot;details/2&quot;,
+                          &quot;DownloadUrl&quot;:&quot;download/2.catrobat&quot;
+                      }],
+    &quot;preHeaderMessages&quot;:&quot;&quot;
+}</code></pre>                                                                  </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                        <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-4">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> show most downloaded programs with limit and offset
+                <span class="badge pull-right">4</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-2-4">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -869,7 +1094,7 @@ Get the most downloaded programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-3">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-4">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -877,7 +1102,7 @@ Get the most downloaded programs
                 <b>Scenario:</b> show most downloaded programs with limit and offset
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-3-3">
+              <div class="panel-collapse collapse" id="scenario-3-4">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -936,24 +1161,24 @@ Get the most downloaded programs
       </div>
   <div class="panel           panel-success
     ">
-    <div class="panel-heading" data-toggle="collapse" data-target="#feature4">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature5">
       <span class="badge pull-right">3</span>
         <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 Get the most recent programs
     </div>
-        <div class="panel-collapse collapse" id="feature4">
+        <div class="panel-collapse collapse" id="feature5">
       <div class="panel-body">
         <div class="row">
         <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-                    <li><a href="#background-tab-4" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-4" role="tab" data-toggle="tab">Scenarios</a></li>
+                    <li><a href="#background-tab-5" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-5" role="tab" data-toggle="tab">Scenarios</a></li>
         </ul>
         </div>
         <div class="col-md-10">
         <div class="tab-content">
-                              <div class="tab-pane" id="background-tab-4">
+                              <div class="tab-pane" id="background-tab-5">
             <div class="panel           panel-success
     ">
               <div class="panel-heading">
@@ -1047,10 +1272,10 @@ Get the most recent programs
               </div>
             </div>
           </div>
-                    <div class="tab-pane active" id="scenario-tab-4">
+                    <div class="tab-pane active" id="scenario-tab-5">
                                     <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-4">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-5">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1058,7 +1283,7 @@ Get the most recent programs
                 <b>Scenario:</b> show recent programs
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-1-4">
+              <div class="panel-collapse collapse" id="scenario-1-5">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1091,7 +1316,7 @@ Get the most recent programs
                                                <pre class="stepargument"><code>{
     &quot;completeTerm&quot;:&quot;&quot;,
     &quot;CatrobatInformation&quot;: {
-                             &quot;BaseUrl&quot;:&quot;https:\/\/localhost\/&quot;,
+                             &quot;BaseUrl&quot;:&quot;http://localhost/&quot;,
                              &quot;TotalProjects&quot;:3,
                              &quot;ProjectsExtension&quot;:&quot;.catrobat&quot;
                             },
@@ -1099,18 +1324,18 @@ Get the most recent programs
                           &quot;ProjectId&quot;: 2,
                           &quot;ProjectName&quot;:&quot;program 2&quot;,
                           &quot;ProjectNameShort&quot;:&quot;program 2&quot;,
-                          &quot;ScreenshotBig&quot;:&quot;resources\/thumbnails\/2_large.png&quot;,
-                                                &quot;ScreenshotSmall&quot;:&quot;resources\/thumbnails\/2_small.png&quot;,
-                                                &quot;Author&quot;:&quot;Catrobat&quot;,
-                                                &quot;Description&quot;:&quot;&quot;,
-                                                &quot;Uploaded&quot;: 1359723600,
-                                                &quot;UploadedString&quot;:&quot;&quot;,
-                                                &quot;Version&quot;:&quot;0.8.5&quot;,
-                                                &quot;Views&quot;:&quot;9&quot;,
-                                                &quot;Downloads&quot;:&quot;33&quot;,
-                                                &quot;ProjectUrl&quot;:&quot;details\/2&quot;,
-                                                &quot;DownloadUrl&quot;:&quot;download\/2.catrobat&quot;
-                                              }],
+                          &quot;ScreenshotBig&quot;:&quot;resources_test/screenshots/screen_2.png&quot;,
+                          &quot;ScreenshotSmall&quot;:&quot;resources_test/thumbnails/screen_2.png&quot;,
+                          &quot;Author&quot;:&quot;Catrobat&quot;,
+                          &quot;Description&quot;:&quot;&quot;,
+                          &quot;Uploaded&quot;: 1359723600,
+                          &quot;UploadedString&quot;:&quot;&quot;,
+                          &quot;Version&quot;:&quot;0.8.5&quot;,
+                          &quot;Views&quot;:&quot;9&quot;,
+                          &quot;Downloads&quot;:&quot;33&quot;,
+                          &quot;ProjectUrl&quot;:&quot;details/2&quot;,
+                          &quot;DownloadUrl&quot;:&quot;download/2.catrobat&quot;
+                      }],
     &quot;preHeaderMessages&quot;:&quot;&quot;
 }</code></pre>                                                                  </li>
                                     </ul>
@@ -1119,7 +1344,7 @@ Get the most recent programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-4">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-5">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1127,7 +1352,7 @@ Get the most recent programs
                 <b>Scenario:</b> show recent programs with limit and offset
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-2-4">
+              <div class="panel-collapse collapse" id="scenario-2-5">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1177,7 +1402,7 @@ Get the most recent programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-4">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-5">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1185,7 +1410,7 @@ Get the most recent programs
                 <b>Scenario:</b> show recent programs with limit and offset
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-3-4">
+              <div class="panel-collapse collapse" id="scenario-3-5">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1244,24 +1469,24 @@ Get the most recent programs
       </div>
   <div class="panel           panel-success
     ">
-    <div class="panel-heading" data-toggle="collapse" data-target="#feature5">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature6">
       <span class="badge pull-right">6</span>
         <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 Login with an existing accunt or register a new one
     </div>
-        <div class="panel-collapse collapse" id="feature5">
+        <div class="panel-collapse collapse" id="feature6">
       <div class="panel-body">
         <div class="row">
         <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-                    <li><a href="#background-tab-5" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-5" role="tab" data-toggle="tab">Scenarios</a></li>
+                    <li><a href="#background-tab-6" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-6" role="tab" data-toggle="tab">Scenarios</a></li>
         </ul>
         </div>
         <div class="col-md-10">
         <div class="tab-content">
-                              <div class="tab-pane" id="background-tab-5">
+                              <div class="tab-pane" id="background-tab-6">
             <div class="panel           panel-success
     ">
               <div class="panel-heading">
@@ -1299,10 +1524,10 @@ Login with an existing accunt or register a new one
               </div>
             </div>
           </div>
-                    <div class="tab-pane active" id="scenario-tab-5">
+                    <div class="tab-pane active" id="scenario-tab-6">
                                     <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-5">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-6">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1310,7 +1535,7 @@ Login with an existing accunt or register a new one
                 <b>Scenario:</b> Register a new user
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-1-5">
+              <div class="panel-collapse collapse" id="scenario-1-6">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1371,7 +1596,7 @@ Login with an existing accunt or register a new one
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-5">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-6">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1379,7 +1604,7 @@ Login with an existing accunt or register a new one
                 <b>Scenario:</b> login with valid username and password
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-2-5">
+              <div class="panel-collapse collapse" id="scenario-2-6">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1425,7 +1650,7 @@ Login with an existing accunt or register a new one
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-5">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-6">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1433,7 +1658,7 @@ Login with an existing accunt or register a new one
                 <b>Scenario:</b> loginOrRegister with invalid login
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-3-5">
+              <div class="panel-collapse collapse" id="scenario-3-6">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1479,7 +1704,7 @@ Login with an existing accunt or register a new one
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-5">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-6">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1487,7 +1712,7 @@ Login with an existing accunt or register a new one
                 <b>Scenario:</b> Trying to register without password should fail
                 <span class="badge pull-right">2</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-4-5">
+              <div class="panel-collapse collapse" id="scenario-4-6">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1510,7 +1735,7 @@ Login with an existing accunt or register a new one
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-5">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-6">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1518,7 +1743,7 @@ Login with an existing accunt or register a new one
                 <b>Scenario:</b> Trying to register without country should fail
                 <span class="badge pull-right">2</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-5-5">
+              <div class="panel-collapse collapse" id="scenario-5-6">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1541,7 +1766,7 @@ Login with an existing accunt or register a new one
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-5">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-6">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1549,7 +1774,7 @@ Login with an existing accunt or register a new one
                 <b>Scenario:</b> Trying to register with a password smaller then six characters
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-6-5">
+              <div class="panel-collapse collapse" id="scenario-6-6">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1595,28 +1820,28 @@ Login with an existing accunt or register a new one
       </div>
   <div class="panel           panel-success
     ">
-    <div class="panel-heading" data-toggle="collapse" data-target="#feature6">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature7">
       <span class="badge pull-right">13</span>
         <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 Search programs
     </div>
-        <div class="panel-collapse collapse" id="feature6">
+        <div class="panel-collapse collapse" id="feature7">
       <div class="panel-body">
         <div class="row">
         <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-          <li class="active"><a href="#description-tab-6" role="tab" data-toggle="tab">Description</a></li>          <li><a href="#background-tab-6" role="tab" data-toggle="tab">Background</a></li>          <li ><a href="#scenario-tab-6" role="tab" data-toggle="tab">Scenarios</a></li>
+          <li class="active"><a href="#description-tab-7" role="tab" data-toggle="tab">Description</a></li>          <li><a href="#background-tab-7" role="tab" data-toggle="tab">Background</a></li>          <li ><a href="#scenario-tab-7" role="tab" data-toggle="tab">Scenarios</a></li>
         </ul>
         </div>
         <div class="col-md-10">
         <div class="tab-content">
-                    <div class="tab-pane active" id="description-tab-6">
+                    <div class="tab-pane active" id="description-tab-7">
             <p><br />
   To find programs, users should be able to search all available programs for specific words</p>
           </div>
-                              <div class="tab-pane" id="background-tab-6">
+                              <div class="tab-pane" id="background-tab-7">
             <div class="panel           panel-success
     ">
               <div class="panel-heading">
@@ -1785,10 +2010,10 @@ Search programs
               </div>
             </div>
           </div>
-                    <div class="tab-pane " id="scenario-tab-6">
+                    <div class="tab-pane " id="scenario-tab-7">
                                     <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1796,7 +2021,7 @@ Search programs
                 <b>Scenario:</b> A request must have specific parameters to succeed
                 <span class="badge pull-right">5</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-1-6">
+              <div class="panel-collapse collapse" id="scenario-1-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1850,7 +2075,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1858,7 +2083,7 @@ Search programs
                 <b>Scenario:</b> The result is in JSON format
                 <span class="badge pull-right">2</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-2-6">
+              <div class="panel-collapse collapse" id="scenario-2-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1905,7 +2130,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1913,7 +2138,7 @@ Search programs
                 <b>Scenario:</b> Search for a program with a certain name
                 <span class="badge pull-right">2</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-3-6">
+              <div class="panel-collapse collapse" id="scenario-3-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -1946,7 +2171,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -1954,7 +2179,7 @@ Search programs
                 <b>Scenario:</b> The results can be limited and offset
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-4-6">
+              <div class="panel-collapse collapse" id="scenario-4-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2004,7 +2229,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2012,7 +2237,7 @@ Search programs
                 <b>Scenario:</b> If a user is found with the given search query, return her programs
                 <span class="badge pull-right">2</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-5-6">
+              <div class="panel-collapse collapse" id="scenario-5-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2045,7 +2270,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2053,7 +2278,7 @@ Search programs
                 <b>Scenario:</b> If nothing is found the following JSON is returned
                 <span class="badge pull-right">2</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-6-6">
+              <div class="panel-collapse collapse" id="scenario-6-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2085,7 +2310,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-7-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-7-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2093,7 +2318,7 @@ Search programs
                 <b>Scenario:</b> search program by description
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-7-6">
+              <div class="panel-collapse collapse" id="scenario-7-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2136,7 +2361,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-8-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-8-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2144,7 +2369,7 @@ Search programs
                 <b>Scenario:</b> search program by description
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-8-6">
+              <div class="panel-collapse collapse" id="scenario-8-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2187,7 +2412,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-9-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-9-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2195,7 +2420,7 @@ Search programs
                 <b>Scenario:</b> if the query matches in title and description, return the program with the matching title first
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-9-6">
+              <div class="panel-collapse collapse" id="scenario-9-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2238,7 +2463,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-10-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-10-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2246,7 +2471,7 @@ Search programs
                 <b>Scenario:</b> the result contains the number of all projects effected by the search, independent from offset and limit
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-10-6">
+              <div class="panel-collapse collapse" id="scenario-10-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2309,7 +2534,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-11-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-11-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2317,7 +2542,7 @@ Search programs
                 <b>Scenario:</b> to browse programs in smaller chunks you can request a subset of found projects
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-11-6">
+              <div class="panel-collapse collapse" id="scenario-11-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2367,7 +2592,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-12-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-12-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2375,7 +2600,7 @@ Search programs
                 <b>Scenario:</b> to browse programs in smaller chunks you can request a subset of found projects
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-12-6">
+              <div class="panel-collapse collapse" id="scenario-12-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2422,7 +2647,7 @@ Search programs
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-13-6">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-13-7">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2430,7 +2655,7 @@ Search programs
                 <b>Scenario:</b> to browse programs in smaller chunks you can request a subset of found projects
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-13-6">
+              <div class="panel-collapse collapse" id="scenario-13-7">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2486,24 +2711,24 @@ Search programs
       </div>
   <div class="panel           panel-success
     ">
-    <div class="panel-heading" data-toggle="collapse" data-target="#feature7">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature8">
       <span class="badge pull-right">6</span>
         <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 Upload a program
     </div>
-        <div class="panel-collapse collapse" id="feature7">
+        <div class="panel-collapse collapse" id="feature8">
       <div class="panel-body">
         <div class="row">
         <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-                    <li><a href="#background-tab-7" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-7" role="tab" data-toggle="tab">Scenarios</a></li>
+                    <li><a href="#background-tab-8" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-8" role="tab" data-toggle="tab">Scenarios</a></li>
         </ul>
         </div>
         <div class="col-md-10">
         <div class="tab-content">
-                              <div class="tab-pane" id="background-tab-7">
+                              <div class="tab-pane" id="background-tab-8">
             <div class="panel           panel-success
     ">
               <div class="panel-heading">
@@ -2611,10 +2836,10 @@ Upload a program
               </div>
             </div>
           </div>
-                    <div class="tab-pane active" id="scenario-tab-7">
+                    <div class="tab-pane active" id="scenario-tab-8">
                                     <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-7">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-8">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2622,7 +2847,7 @@ Upload a program
                 <b>Scenario:</b> program upload with valid data
                 <span class="badge pull-right">7</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-1-7">
+              <div class="panel-collapse collapse" id="scenario-1-8">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2680,7 +2905,7 @@ Upload a program
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-7">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-8">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2688,7 +2913,7 @@ Upload a program
                 <b>Scenario:</b> missing all prameters will result in an error
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-2-7">
+              <div class="panel-collapse collapse" id="scenario-2-8">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2725,7 +2950,7 @@ Upload a program
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-7">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-8">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2733,7 +2958,7 @@ Upload a program
                 <b>Scenario:</b> trying to upload with an invalid user should result in an error
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-3-7">
+              <div class="panel-collapse collapse" id="scenario-3-8">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2770,7 +2995,7 @@ Upload a program
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-7">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-8">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2778,7 +3003,7 @@ Upload a program
                 <b>Scenario:</b> trying to upload with an invalid token should result in an error
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-4-7">
+              <div class="panel-collapse collapse" id="scenario-4-8">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2815,7 +3040,7 @@ Upload a program
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-7">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-8">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2823,7 +3048,7 @@ Upload a program
                 <b>Scenario:</b> trying to upload with a missing token should result in an error
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-5-7">
+              <div class="panel-collapse collapse" id="scenario-5-8">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2853,7 +3078,7 @@ Upload a program
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-7">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-8">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -2861,7 +3086,7 @@ Upload a program
                 <b>Scenario:</b> uploading the same program again should result in an update
                 <span class="badge pull-right">4</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-6-7">
+              <div class="panel-collapse collapse" id="scenario-6-8">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -2905,26 +3130,26 @@ Upload a program
       </div>
     </div>
       </div>
-  <div class="panel           panel-default
+  <div class="panel           panel-success
     ">
-    <div class="panel-heading" data-toggle="collapse" data-target="#feature8">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature9">
       <span class="badge pull-right">10</span>
         <span class="glyphicon
-      glyphicon-ban-circle
+      glyphicon-ok-circle
     "></span>
 All uploaded programs have to be validated.
     </div>
-        <div class="panel-collapse collapse" id="feature8">
+        <div class="panel-collapse collapse" id="feature9">
       <div class="panel-body">
         <div class="row">
         <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-                    <li><a href="#background-tab-8" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-8" role="tab" data-toggle="tab">Scenarios</a></li>
+                    <li><a href="#background-tab-9" role="tab" data-toggle="tab">Background</a></li>          <li class="active"><a href="#scenario-tab-9" role="tab" data-toggle="tab">Scenarios</a></li>
         </ul>
         </div>
         <div class="col-md-10">
         <div class="tab-content">
-                              <div class="tab-pane" id="background-tab-8">
+                              <div class="tab-pane" id="background-tab-9">
             <div class="panel           panel-success
     ">
               <div class="panel-heading">
@@ -2981,18 +3206,18 @@ All uploaded programs have to be validated.
               </div>
             </div>
           </div>
-                    <div class="tab-pane active" id="scenario-tab-8">
-                                    <div class="panel           panel-default
+                    <div class="tab-pane active" id="scenario-tab-9">
+                                    <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-9">
                   <span class="glyphicon
-      glyphicon-ban-circle
+      glyphicon-ok-circle
     "></span>
 
                 <b>Scenario:</b> program must have a code.xml
                 <span class="badge pull-right">6</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-1-8">
+              <div class="panel-collapse collapse" id="scenario-1-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3011,28 +3236,28 @@ All uploaded programs have to be validated.
                                             </li>
                                        <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
-      glyphicon-ban-circle
+      glyphicon-ok-circle
     "></span>
 
                        And I have a Catrobat file with a missing code.xml
                                             </li>
-                                       <li class="list-group-item disabled">
+                                       <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
-      glyphicon-ban-circle
+      glyphicon-ok-circle
     "></span>
 
                        And I have a parameter &quot;fileChecksum&quot; with the md5checksum my file
                                             </li>
-                                       <li class="list-group-item disabled">
+                                       <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
-      glyphicon-ban-circle
+      glyphicon-ok-circle
     "></span>
 
                        When I POST these parameters to &quot;/api/upload/upload.json&quot;
                                             </li>
-                                       <li class="list-group-item disabled">
+                                       <li class="list-group-item list-group-item-success">
                          <span class="glyphicon
-      glyphicon-ban-circle
+      glyphicon-ok-circle
     "></span>
 
                        Then I should get the json object:
@@ -3043,7 +3268,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3051,7 +3276,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> program must have a valid code.xml
                 <span class="badge pull-right">6</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-2-8">
+              <div class="panel-collapse collapse" id="scenario-2-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3102,7 +3327,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-3-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3110,7 +3335,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> program with missing images are rejected
                 <span class="badge pull-right">6</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-3-8">
+              <div class="panel-collapse collapse" id="scenario-3-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3161,7 +3386,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-4-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3169,7 +3394,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> program with missing file checksum are rejected
                 <span class="badge pull-right">5</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-4-8">
+              <div class="panel-collapse collapse" id="scenario-4-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3213,7 +3438,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-5-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3221,7 +3446,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> program with invalid file checksum are rejected
                 <span class="badge pull-right">6</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-5-8">
+              <div class="panel-collapse collapse" id="scenario-5-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3272,7 +3497,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-6-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3280,7 +3505,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> program with media files not defined in xml are rejected
                 <span class="badge pull-right">6</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-6-8">
+              <div class="panel-collapse collapse" id="scenario-6-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3331,7 +3556,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-7-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-7-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3339,7 +3564,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> invalid catrobat program files should be rejected
                 <span class="badge pull-right">6</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-7-8">
+              <div class="panel-collapse collapse" id="scenario-7-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3390,7 +3615,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-8-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-8-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3398,7 +3623,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> A valid file must contain at least one screenshot and image and sound directories
                 <span class="badge pull-right">0</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-8-8">
+              <div class="panel-collapse collapse" id="scenario-8-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                     </ul>
@@ -3407,7 +3632,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-9-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-9-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3415,7 +3640,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> All media files except screenshots have to be defined in code.xml
                 <span class="badge pull-right">0</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-9-8">
+              <div class="panel-collapse collapse" id="scenario-9-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                     </ul>
@@ -3424,7 +3649,7 @@ All uploaded programs have to be validated.
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-10-8">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-10-9">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3432,7 +3657,7 @@ All uploaded programs have to be validated.
                 <b>Scenario:</b> A program must have a name.
                 <span class="badge pull-right">0</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-10-8">
+              <div class="panel-collapse collapse" id="scenario-10-9">
                 <div class="panel-body">
                   <ul class="list-group">
                                     </ul>
@@ -3450,32 +3675,32 @@ All uploaded programs have to be validated.
       </div>
   <div class="panel           panel-success
     ">
-    <div class="panel-heading" data-toggle="collapse" data-target="#feature9">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature10">
       <span class="badge pull-right">2</span>
         <span class="glyphicon
       glyphicon-ok-circle
     "></span>
 Pocketcode homepage
     </div>
-        <div class="panel-collapse collapse" id="feature9">
+        <div class="panel-collapse collapse" id="feature10">
       <div class="panel-body">
         <div class="row">
         <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-          <li class="active"><a href="#description-tab-9" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-9" role="tab" data-toggle="tab">Scenarios</a></li>
+          <li class="active"><a href="#description-tab-10" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-10" role="tab" data-toggle="tab">Scenarios</a></li>
         </ul>
         </div>
         <div class="col-md-10">
         <div class="tab-content">
-                    <div class="tab-pane active" id="description-tab-9">
+                    <div class="tab-pane active" id="description-tab-10">
             <p>In order to access and browse the programs<br />
 As a visitor<br />
 I want to be able to see the homepage</p>
           </div>
-                              <div class="tab-pane " id="scenario-tab-9">
+                              <div class="tab-pane " id="scenario-tab-10">
                                     <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-9">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-10">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3483,7 +3708,7 @@ I want to be able to see the homepage</p>
                 <b>Scenario:</b> Viewing the homepage at website root
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-1-9">
+              <div class="panel-collapse collapse" id="scenario-1-10">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3513,7 +3738,7 @@ I want to be able to see the homepage</p>
             </div>
                         <div class="panel           panel-success
     ">
-              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-9">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-10">
                   <span class="glyphicon
       glyphicon-ok-circle
     "></span>
@@ -3521,7 +3746,7 @@ I want to be able to see the homepage</p>
                 <b>Scenario:</b> Viewing the homepage at website root
                 <span class="badge pull-right">3</span>
               </div>
-              <div class="panel-collapse collapse" id="scenario-2-9">
+              <div class="panel-collapse collapse" id="scenario-2-10">
                 <div class="panel-body">
                   <ul class="list-group">
                                        <li class="list-group-item list-group-item-success">
@@ -3562,17 +3787,17 @@ I want to be able to see the homepage</p>
 
 <h3 class="page-header">Scenarios</h3>
 <div class="progress">
-  <div class="progress-bar progress-bar-success" style="width: 97.959183673469%">48 passed</div>
+  <div class="progress-bar progress-bar-success" style="width: 100%">52 passed</div>
   <div class="progress-bar progress-bar-warning" style="width: 0%">0 pending</div>
   <div class="progress-bar progress-bar-danger" style="width: 0%">0 failed</div>
-  <div class="progress-bar progress-bar-info" style="width: 2.0408163265306%">1 skipped</div>
+  <div class="progress-bar progress-bar-info" style="width: 0%">0 skipped</div>
 </div>
 <h3 class="page-header">Steps</h3>
 <div class="progress">
-  <div class="progress-bar progress-bar-success" style="width: 98.722044728434%">309 passed</div>
+  <div class="progress-bar progress-bar-success" style="width: 100%">332 passed</div>
   <div class="progress-bar progress-bar-warning" style="width: 0%">0 pending</div>
   <div class="progress-bar progress-bar-danger" style="width: 0%">0 failed</div>
-  <div class="progress-bar progress-bar-info" style="width: 1.2779552715655%">4 skipped</div>
+  <div class="progress-bar progress-bar-info" style="width: 0%">0 skipped</div>
 </div>
 </div>
 </body>

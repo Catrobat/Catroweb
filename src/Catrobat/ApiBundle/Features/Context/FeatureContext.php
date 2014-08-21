@@ -397,7 +397,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   }
 
   /**
-   * @Given /^I have a Catrobat file with an missing code\.xml$/
+   * @Given /^I have a Catrobat file with a missing code\.xml$/
    */
   public function iHaveACatrobatFileWithAnMissingCodeXml()
   {
