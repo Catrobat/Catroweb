@@ -7,7 +7,7 @@
         {% endimage %}
       </a>
     </div>
-    <input id="searchbar" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb_web") }}">
+    <input id="searchbar" placeholder="{{ "Search..."|trans({}, "catroweb_web") }}">
   </div>
 
   <div id="header-right">
@@ -16,11 +16,25 @@
         <div class="img-magnifying-glass"></div>
       </div>
       <div>
-        <input placeholder="{{ "search.dotdotdot"|trans({}, "catroweb_web") }}" class="size-large">
+        <input placeholder="{{ "Search..."|trans({}, "catroweb_web") }}" class="size-large">
       </div>
-      <div class="btn btn-menu">
-        <div class="img-avatar"></div>
-      </div>
+
+      {% if app.user %}
+        <div class="btn btn-menu logged-in show-nav-dropdown">
+          <div class="img-avatar"></div>
+        </div>
+        <div class="btn btn-username show-nav-dropdown">{{ app.user.username }}</div>
+        <div class="btn show-nav-dropdown">
+          <div class="img-dropdownArrow"></div>
+        </div>
+      {% else %}
+        <a href="{{ url('fos_user_security_login') }}">
+          <div class="btn btn-menu">
+            <div class="img-avatar"></div>
+          </div>
+        </a>
+      {% endif %}
+
     </div>
 
     <div id="menu-mobile">
@@ -29,9 +43,35 @@
         <div class="img-undo-search"></div>
       </div>
       <div class="margin-spacer"></div>
-      <div class="btn btn-menu">
+      {% if app.user %}
+      <div class="btn btn-menu show-nav-dropdown">
         <div class="img-avatar"></div>
       </div>
+      {% else %}
+      <a href="{{ url('fos_user_security_login') }}">
+        <div class="btn btn-menu">
+          <div class="img-avatar"></div>
+        </div>
+      </a>
+      {% endif %}
     </div>
+
   </div>
+
+  {% if app.user %}
+    <div id="nav-dropdown" class="img-nav-dropdown">
+      <div>
+        <a href="#">
+          <div><div class="img-author-big"></div></div>
+          <div>{{ "My Profile"|trans({}, "catroweb_web") }}</div>
+        </a>
+      </div>
+      <div>
+        <a href="{{ url('fos_user_security_logout') }}">
+          <div><div class="img-logout"></div></div>
+          <div>{{ "Logout"|trans({}, "catroweb_web") }}</div>
+        </a>
+      </div>
+    </div>
+  {% endif %}
 </nav>

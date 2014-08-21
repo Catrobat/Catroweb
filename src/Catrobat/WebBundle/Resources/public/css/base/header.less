@@ -1,5 +1,8 @@
 @import 'default.less';
 
+@nav-font-size: @default-font-size + 4;
+@searchbar-font-size: @default-font-size + 2;
+
 #header-logo {
   padding-top: 40px;
   width: 100%;
@@ -24,7 +27,7 @@ header {
     }
 
     #menu, #menu-mobile {
-      > div {
+      > * {
         display: table-cell;
         vertical-align: middle;
       }
@@ -73,12 +76,45 @@ header {
       width: 100%;
       background: #29505f;
       padding: 5px;
-      font-size: @default-font-size + 2;
+      font-size: @searchbar-font-size;
       color: #fff;
     }
 
     .img-undo-search {
       display: none;
+    }
+
+    .btn-username {
+      font-size: @nav-font-size;
+      color: #fff;
+      padding: 0 !important;
+      white-space: nowrap;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #nav-dropdown {
+      display: none;
+      position: absolute;
+      padding-top: 17px;
+
+      > div {
+        background-color: #177f8d;
+        overflow: auto;
+
+        div {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 12px;
+          font-size: @nav-font-size;
+          color: #fff;
+        }
+      }
+
+      a:link {
+        text-decoration: none;
+      }
     }
 
     @media (max-width: @responsive-width-tablet) {
@@ -106,6 +142,7 @@ header {
       border-top: 1px solid #17A5B8;
       border-left: 1px solid #17A5B8;
       border-bottom: 1px solid #17A5B8;
+      .border-radius(0, 0, 2px, 2px);
 
       input::-webkit-input-placeholder { color: #fff !important; }
       input:-moz-placeholder { color: #fff !important; }

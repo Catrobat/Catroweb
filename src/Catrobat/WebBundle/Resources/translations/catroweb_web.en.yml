@@ -1,7 +1,12 @@
 ---
+Search:
+Search...:
+My Profile:
+Logout:
+
 programs:
   featured: Featured
-  newest: Newest program
+  newest: Newest programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
