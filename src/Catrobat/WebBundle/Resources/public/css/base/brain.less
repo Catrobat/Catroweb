@@ -91,6 +91,7 @@ h2 {
   font-size: 16px;
 }
 
+
 #wrapper, footer {
   margin: 0 auto;
   width: 100%; /* 1024px; */
@@ -101,6 +102,10 @@ h2 {
 #wrapper {
   min-height: 100%;
   padding-bottom: @footer-height-desktop + @footer-height-bottom + @footer-height-padding; /* footer height */
+
+  article {
+    clear: both;
+  }
 }
 
 .size-small {
@@ -136,12 +141,6 @@ li {
 
 .programs {
 
-}
-
-#header-logo {
-  padding-top: 40px;
-  width: 100%;
-  text-align: center;
 }
 
 .clear {
@@ -282,9 +281,14 @@ form {
   }
 }
 
-.button-show-more, .button-show-ajax {
+.button-show-placeholder {
   margin: 0px auto 30px auto;
+  min-height: 32px;
+}
+
+.button-show-more, .button-show-ajax {
   text-align: center;
+  margin: auto;
 }
 
 .button-show-more {
@@ -293,6 +297,10 @@ form {
 
 .button-show-ajax {
   display: none;
+}
+
+.btn {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
