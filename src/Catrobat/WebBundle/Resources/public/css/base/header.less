@@ -1,16 +1,129 @@
 @import 'default.less';
 
-@red: red;
+#header-logo {
+  padding-top: 40px;
+  width: 100%;
+  text-align: center;
+}
 
-#testing {
+header {
+  padding: 20px 10px;
 
-  .one {
-    font-size: 20px;
-    color: @red;
+  nav {
+
+    #header-left, #header-right {
+      display: table-cell;
+      vertical-align: middle;
+
+      width: 100%;
+    }
+
+    #logo img {
+      width: 300px;
+      min-width: 150px;
+    }
+
+    #menu, #menu-mobile {
+      > div {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .btn {
+        padding: 9px;
+      }
+    }
+
+    #menu {
+      .gradient(#177f8d,#177f8d,#17A5B8);
+      .rounded(2px);
+
+      .btn-menu {
+        border-left: 1px solid white;
+      }
+
+      input {
+        background: @default-input-background-color;
+        border: 0;
+        padding: 8px;
+        width: 200px;
+        .rounded(2px);
+        margin-right: 8px;
+      }
+    }
+
+    #menu-mobile {
+      display: none;
+
+      .btn {
+        .gradient(#177f8d,#177f8d,#17A5B8);
+        .rounded(2px);
+      }
+
+      .margin-spacer {
+        padding: 0 5px;
+      }
+
+    }
+
+    #searchbar {
+      display: none;
+      border: 0;
+      height: 47px;
+      width: 100%;
+      background: #29505f;
+      padding: 5px;
+      font-size: @default-font-size + 2;
+      color: #fff;
+    }
+
+    .img-undo-search {
+      display: none;
+    }
+
+    @media (max-width: @responsive-width-tablet) {
+      #menu {
+        display: none;
+      }
+      #menu-mobile {
+        display: block;
+      }
+    }
   }
+}
 
-  .two {
-    border: 50px -30px;
+@media (max-width: @responsive-width-tablet) {
+  .searchbar-visible {
+    #logo {
+      display: none;
+    }
+
+    #searchbar {
+      display: table-cell;
+    }
+
+    #header-left {
+      border-top: 1px solid #17A5B8;
+      border-left: 1px solid #17A5B8;
+      border-bottom: 1px solid #17A5B8;
+
+      input::-webkit-input-placeholder { color: #fff !important; }
+      input:-moz-placeholder { color: #fff !important; }
+      input::-moz-placeholder { color: #fff !important; }
+      input:-ms-input-placeholder { color: #fff !important; }
+    }
+
+    #header-right {
+      .img-magnifying-glass {
+        display: none;
+      }
+      .img-undo-search {
+        display: block;
+      }
+
+      .btn-search {
+        .border-radius(2px, 2px, 0, 0);
+      }
+    }
   }
-
 }

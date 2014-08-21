@@ -33,11 +33,14 @@
 
 html,
 button,
-input,
 select,
 textarea,
 a {
   color: @default-text-color;
+}
+
+input {
+  color: #000;
 }
 
 ::-webkit-input-placeholder {
@@ -91,6 +94,7 @@ h2 {
   font-size: 16px;
 }
 
+
 #wrapper, footer {
   margin: 0 auto;
   width: 100%; /* 1024px; */
@@ -100,11 +104,19 @@ h2 {
 
 #wrapper {
   min-height: 100%;
-  padding-bottom: @footer-height-desktop + @footer-height-bottom; /* footer height */
+  padding-bottom: @footer-height-desktop + @footer-height-bottom + @footer-height-padding; /* footer height */
+
+  article {
+    clear: both;
+  }
 }
 
 .size-small {
   font-size: @default-font-size - 4;
+}
+
+li {
+  word-wrap: break-word;
 }
 
 .size-medium {
@@ -115,14 +127,23 @@ h2 {
   font-size: @default-font-size + 4;
 }
 
-.padding {
-  padding: 25px;
+.size-xlarge {
+  font-size: @default-font-size + 8;
 }
 
-#header-logo {
-  padding-top: 40px;
-  width: 100%;
-  text-align: center;
+.standard-col-text {
+//  .columns(250px, 2, 40px, #EEE, solid, 0px);
+  .box-columns(2, 40px);
+  text-align: justify;
+  padding: 25px 25px;
+}
+
+.standard-article-link {
+  font-weight: bold;
+}
+
+.programs {
+
 }
 
 .clear {
@@ -263,9 +284,14 @@ form {
   }
 }
 
-.button-show-more, .button-show-ajax {
+.button-show-placeholder {
   margin: 0px auto 30px auto;
+  min-height: 32px;
+}
+
+.button-show-more, .button-show-ajax {
   text-align: center;
+  margin: auto;
 }
 
 .button-show-more {
@@ -276,15 +302,19 @@ form {
   display: none;
 }
 
+.btn {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
 
   #wrapper {
-    padding-bottom: @footer-height-bottom; /* TODO: ändern !!! */
+    padding-bottom: @footer-height-bottom + @footer-height-padding; /* TODO: ändern !!! */
   }
 
   .footer-expand {
     #wrapper {
-      padding-bottom: @footer-height-bottom + @footer-height-mobile;
+      padding-bottom: @footer-height-bottom + @footer-height-mobile + @footer-height-padding;
     }
   }
 

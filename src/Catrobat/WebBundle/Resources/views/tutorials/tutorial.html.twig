@@ -1,13 +1,36 @@
 {% extends 'CatrobatWebBundle:Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/tutorial.css' filter='cssrewrite,lessphp' %}
+    {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/tutorial.less' filter='cssrewrite,lessphp' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
 
 
 {% block body %}
-    Tutorial - Startpage
+    <div id="tutorial-container">
+      <div class="tutorial-top">
+        <img src="{{ asset('bundles/catrobatweb/images/tutorial/1_stepbystep.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
+      </div>
+      <div class="tutorial-top">
+        <img src="{{ asset('bundles/catrobatweb/images/tutorial/2_stepbystep.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
+      </div>
+      <div class="tutorial-middle">
+        <div id="tutorial-tutorials">
+          <img src="{{ asset('bundles/catrobatweb/images/tutorial/tutorials.png') }}" alt="Tutorials" onclick="self.location.href='{{ url('catrobat_web_tutorials') }}'" />
+        </div>
+        <div id="tutorial-spacer"></div>
+        <div id="tutorial-starters">
+          <img src="{{ asset('bundles/catrobatweb/images/tutorial/1_starters.png') }}" alt="Starter Programs" onclick="self.location.href='{{ url('catrobat_web_starter') }}'" />
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="tutorial-bottom">
+        <img src="{{ asset('bundles/catrobatweb/images/tutorial/1_discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
+      </div>
+      <div class="tutorial-bottom">
+        <img src="{{ asset('bundles/catrobatweb/images/tutorial/2_discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
+      </div>
+    </div>
 {% endblock %}
 

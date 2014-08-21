@@ -146,6 +146,14 @@
   column-rule-style: @columnRuleStyle;
   column-rule-width: @columnRuleWidth;
 }
+.box-columns(@colcount: 2, @colgap: 50px) {
+  -webkit-column-count: @colcount;
+  -webkit-column-gap: @colgap;
+  -moz-column-count: @colcount;
+  -moz-column-gap: @colgap;
+  column-count: @colcount;
+  column-gap: @colgap;
+}
 .translate(@x:0, @y:0) {
   .transform(translate(@x, @y));
 }
