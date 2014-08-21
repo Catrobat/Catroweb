@@ -15,7 +15,8 @@ var Main = function () {
 
   self.setHeaderMobileSearchbarListener = function() {
     $('#menu-mobile').find('.btn-search').click(function() {
-      $('nav').slide('searchbar-visible');
+      $('nav').toggleClass('searchbar-visible');
+      $('nav').find('input').focus();
     });
   };
 };
