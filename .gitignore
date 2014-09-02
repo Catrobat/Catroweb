@@ -18,3 +18,4 @@ app/config/deploy.rb
 crowdin.yaml
 crowdin-cli.jar
 /screens
+/output
