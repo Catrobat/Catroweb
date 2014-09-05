@@ -1,6 +1,57 @@
 ---
 programs:
-  newest: Newest program
+  featured: In evidenza
+  newest: Programma più recente
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: Il più visto
+    downloaded: Il più scaricato
+licenseToPlay:
+  title: 'Licenza per il gioco - Dare credito e condividere'
+  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
+  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
+  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  list1:
+    item1: condividi le tue torte insieme alle ricette
+    item2: dai credito a chi ti ha ispirato
+  version: Versione 1.1, 2 Aprile 2013
+termsOfUse:
+  title: Termini di utilizzo
+  headline: Welcome to the Catrobat Community!
+  text1: 'Come parte della comunità Catrobat, condividi programmi e idee con altre persone:'
+  text2: 'Abbiamo bisogno del tuo aiuto per rendere questa comunità un luogo di condivisione per ogni membro. Ecco come puoi aiutarci:'
+  text3: "Attraverso il progetto Catrobat vogliamo promuovere la cooperazione e permettere che la creatività  di tutti possa contribuire al miglioramento di tutta l'umanità. Puoi diventare anche un membro attivo della comunità Catrobat condividendo, come un dono, i tuoi programmi allo stesso modo in cui altri membri attivi stanno dando i loro programmi a te:"
+  text4: 'Il nostro regalo per te:'
+  text5: 'I nostri termini di utilizzo e di servizio:'
+  list1:
+    item1: da molti paesi e culture diverse
+    item2: di tutte le età (partendo da bambini e adolescenti fino ai nonni)
+    item3: con tutti i livelli di esperienza
+  list2:
+    item1: Sii rispettoso. Quando condividi applicazioni, ricordati che persone di diverse età e provenienza vedranno i tuoi contributi.
+    item2: 'Dai il giusto credito. Sentiti libero di fare modifiche ai programmi altrui - basta fare in modo di dare loro credito. Un luogo per dare credito è nella descrizione del tuo programma. Leggi il paragrafo sotto questo elenco puntato per informazioni dettagliate sulla modifica dei programmi di altri utenti.'
+    item3: Sii onesto. Non fingere di essere qualcun altro e non tentare di ingannare la comunità.
+    item4: Mantieni privati i dati personali. Non condividere il tuo indirizzo email, numero di telefono o altre informazioni di contatto personali.
+    item5: "Aiuta a mantenere il sito amichevole. Se ti senti che altri potrebbero trovare un programma o un commento insultante, troppo violento o comunque inappropriato, semplicemente clicca il pulsante 'segnala come inappropriato' e lascia una breve spiegazione. Il team di Catrobat controllerà il tuo rapporto e potrebbe rimuovere un qualsiasi programma, commento o un post."
+  list3:
+    item1: "Caricando il tuo programma su uno dei nostri siti web, acconsenti a rilasciarlo secondo le licenze libere con cui vengono rilasciati i programmi caricati su Catrobat. Tali licenze sono simili a quelle con cui il sistema Catrobat è esso stesso rilasciato; con queste licenze si acconsente che chiunque abbia il diritto di imparare dal lavoro altrui precedentemente pubblicato, come pure il diritto a modificarlo e a utilizzarlo per propri programmi come giochi, animazioni e altro. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Il tuo lavoro potrà beneficare l'intera comunità mondiale e rimarrà libera per essere usata da tutti, un po' come i testi e le foto inviate volontariamente a Wikipedia. Pensalo come il tuo regalo all'umanità: doni a tutti il tuo lavoro, e tutti gli altri che pubblicheranno il loro lavoro sui nostri siti ti rifarà un regale. Pertanto un programma inviato è un dono dal grande valore, donato anche a te dal suo creatore, purché anche tu partecipi alla comunità allo stesso modo."
+    item2: "Non sei obbligato ad accettare il dono; ma se lo fai dovrai accettare anche certe regole. I benefici di tali regole sono che tu puoi imparare dai lavori precedenti e costruirci sopra cose ancora più belle che, se vuoi, potrai imviare nuovamente sui nostri siti come tue. Un alro beneficio è che queste licenze ti assicurano che nessuno potrà ritenerti responsabile per l'uso che fa qualcun altro del tuo programma."
+    item3: "Un'importante ulteriore condizione è che tu citi chiaramente gli autori dai quali deriva il tuo lavoro. Allo stesso tempo, noi faremo il possibile affinché il tuo lavoro sia apprezzato dagli altri per il contributo da te dato, usando il nome univoco da te scelto per rappresentarti all'interno della comunità di Catrobat, dando l'opportunità a chiunque di esprimerti pubblicamente la propria gratitudine per il tuo lavoro dato agli altri."
+    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+  list4:
+    item1: Noi offriamo tutti i nostri software e le nostre risorse Internet legate al progetto Catrobat secondo licenze libere. Questo vale per tutto il software scritto dal team di Catrobat, per i siti web e le risorse Internet, il codice sorgente e tutto il materiale aggiuntivo come, per esempio, immagini, suoni, testi. Questo vale ora e varrà anche per il futuro.
+    item2: "Queste licenze permettono di rendere dsponibili tutte le parti di Catrobat libere sia nel senso di gratuite sia nel senso di darti la libertà di utilizzarle come meglio credi, con poche restrizioni legate, per lo più, al fatto di assicurarci che l'intero sistema Catrobat rimanga per sempre libero e utile a tutti."
+    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+  list5:
+    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item2: Se non hai ancora compiuto i 13 anni, devi chiedere ai tuoi genitori o ai tuoi tutori legali se ti permettono di usare il software applicativo di Catrobat e i suoi servizi.
+    item3: Ci riserviamo il diritto di rifiutare, cancellare o nascondere i programmi, gli account utente, e qualsiasi materiale digitale caricato sui siti web di Catrobat in qualsiasi momento a nostra sola discrezione; questo può accadere se, per esempio, troviamo che un programma contiene materiale inappropriato o che un utente violi i diritti di altre persone.
+    item4: Tutti i software di Catrobat e le risorse Internet sono offerti nella speranza che siano utili, ma senza alcuna garanzia.
+    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+  bottom1: "Di volta in volta riontrollate queste condizioni, perché le nostre condizioni d'uso sono sempre soggette a miglioramenti e modifiche."
+  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  version: Versione 1.3, 4 marzo 2014
+search:
+  dotdotdot: Search...

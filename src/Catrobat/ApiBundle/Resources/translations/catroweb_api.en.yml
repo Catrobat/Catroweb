@@ -22,17 +22,16 @@ error:
   file:
     unexpected: unexpected file found
     invalid: invalid file
-  image.missing: Project XML mentions a file which not exists in project-folder
+  image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
 success:
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
-
 time:
-  minutes.ago: "{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago"
-  hours.ago: "{1}1 hour ago |]1,Inf] %count% hours ago"
-  days.ago: "{1}1 day ago |]1,Inf] %count% days ago"
-  months.ago: "{1}1 month ago |]1,Inf] %count% months ago"
-  years.ago: "{1}1 year ago |]1,Inf] more than one year ago"
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'

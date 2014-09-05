@@ -1,6 +1,57 @@
 ---
 programs:
+  featured: Unterstützt
   newest: Newest program
   most:
     viewed: Most viewed
     downloaded: Most downloaded
+licenseToPlay:
+  title: 'Stell dir vor, dass jedes Catrobat Programm ein Kuchen ist, ein ganz besonderer Kuchen, der mit seinem Rezept kommt (Programmierte Bl&#xF6;cke). Alle Mitglieder der Catrobat Gemeinschaft teilen ihre Kuchen mit den dazugeh&#xF6;rigen Rezepten. Dies bedeutet, dass man die Kuchen genie&#xDF;en kann und lernen kann, wie man sie selbst machen!'
+  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
+  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
+  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  list1:
+    item1: 'Lizenz zum Spielen - Sag "Danke" und teile deine Programme'
+    item2: 'Es gibt keine geheimen Rezepte: die Anleitung wie Du einen Kuchen selbst machen kannst, ist frei f&#xFC;r alle. Alle d&#xFC;rfen die Rezepte verwenden, &#xE4;ndern und sie als Quelle f&#xFC;r neue Ideen verwenden.'
+  version: 'Mehr &#xFC;ber die Nutzungsbedingungen der Catrobat Online-Gemeinschaft erf&#xE4;hrst du auf {*termsOfUseLink*}.'
+termsOfUse:
+  title: Datenschutzrichtlinien
+  headline: Welcome to the Catrobat Community!
+  text1: 'Sei respektvoll. Wenn du Programme teilst, denke bitte daran, dass Menschen aus vielen verschiedenen Altersgruppen und Hintergr&#xFC;nden deine Beitr&#xE4;ge sehen k&#xF6;nnen.'
+  text2: 'Du musst das Geschenk nicht annehmen; aber wenn du es tust, gelten bestimmte Regeln. Die Vorteile dieser Regeln sind, dass du von der Arbeit anderer lernen und darauf aufbauen kannst, um noch cooler Sachen selbst zu machen, die du dann z. B. als dein eigenes Werk wieder auf unseren Webseiten hochladen kannst. Ein weiterer Vorteil ist, dass diese Lizenzen sicher stellen, dass du nicht f&#xFC;r etwaige Probleme von anderen Personen, die durch den Einsatz von deinem Programm entstehen k&#xF6;nnen, haftbar gemacht werden kannst.'
+  text3: 'Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen gesch&#xE4;tzt werden kann, indem wir anderen die M&#xF6;glichkeit schaffen &#xF6;ffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gw&#xE4;hlt hast und der dich in der Catrobat Gemeinschaft vertritt.'
+  text4: 'Als Teil der Catrobat Gemeinschaft, teilst du Programme und Ideen mit andere Leuten:'
+  text5: 'Alle Software und Internet-Ressourcen von Catrobat werden in der Hoffnung, dass sie n&#xFC;tzlich sind bereitgestellt, allerdings ohne jeglicher Garantie.'
+  list1:
+    item1: 'Sei ehrlich. Versuche nicht Dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betr&#xFC;gen.'
+    item2: 'Behalte pers&#xF6;nliche Informationen f&#xFC;r Dich. Ver&#xF6;ffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere pers&#xF6;nliche Kontakt-Informationen.'
+    item3: 'Mit dem Catrobat Projekt wollen wir die Zusammenarbeit f&#xF6;rdern und damit die Kreativit&#xE4;t aller kombinieren - zum Wohle der ganzen Menschheit. Auch du kannst ein aktives Mitglied der Catrobat Gemeinschaft werden, indem du deine Programme als Geschenk zur&#xFC;ck an die Gemeinschaft gibst, in der gleichen Weise wie andere aktive Mitglieder ihre Programme dir geben:'
+  list2:
+    item1: 'Die genauen rechtlichen Bedingungen findest du auf {*licenseofuploadedprojects*}.'
+    item2: 'Unser Geschenk an dich:'
+    item3: 'Bitte wende dich an {*licenseofsystem*} f&#xFC;r genaue rechtliche Bedingungen. Der Quellcode des Catrobat Systems sowie viele andere Dokumente und Ressourcen sind verf&#xFC;gbar &#xFC;ber {*googlecode*}.'
+    item4: 'Hilf die Website freundlich zu halten. Wenn du glaubst, dass andere ein Programm oder einen Kommentar gemein, beleidigenden, zu gewaltt&#xE4;tig oder anderweitig unangemessen finden, klicke einfach auf den "Als unpassend melden"-Button und hinterlasse eine kurze Erkl&#xE4;rung. Das Catrobat Team pr&#xFC;ft deinen Hinweis und kann ein beliebiges Programm, Kommentar oder Post entfernen.'
+    item5: "Mit dem Hochladen eines Programms auf unsere Webseiten, akzeptierst du und stimmst zu, diese Arbeit unter bestimmte freie Lizenzen der hochgeladenen Catrobat Programme zu legen. &#xE4;hnlich wie bei den freien Lizenzen, unter denen das Catrobat System dir zur Verf&#xFC;gung steht, geben diese freien Lizenzen, der hochgeladenen Catrobat Programme, jedem das Recht, von der Arbeit zuvor hochgeladener Programme zu lernen und diese anzupassen und neu zu mischen, um ihre eigenen neuen faszinierenden Spiele, Animationen und andere Programme zu bauen. Das erm&#xF6;glicht jedem 'Schulter an Schulter mit seinesgleichen zu stehen', einer davon bist du! Deine Arbeit wird der ganzen Welt zu Gute kommen und wird f&#xFC;r jeden frei benutzbar bleiben, ungef&#xE4;hr so wie freiwillige aus der ganzen Welt Texte und Bilder zu Wikipedia beitragen. Betrachte es als Geschenck an die Menschheit: du gibst allen, und alle anderen, die ihre Arbeit auf unsere Webseiten laden, geben dir. Ein hochgeladenes Programm ist ein Geschenk von gro&#xDF;em Wert, der dir vom Besitzer frei zur Verf&#xFC;gung gestellt wird, unter der Bedingung, dass du an der Gemeinschaft mit den gleichen Bedingungen teilnimmst."
+  list3:
+    item1: 'Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, zB die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zus&#xE4;tzlich enthalten Materialien, wie z. B. , Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat.'
+    item2: 'Diese Lizenzen machen alle Teile von Catrobat sowohl kostenlos als auch frei im Sinne von Freiheit, dass du alles nutzen kannst wie du willst, lediglich mit ein paar Einschr&#xE4;nkungen, um gew&#xE4;hrleisten zu k&#xF6;nnen, dass das Catrobat System f&#xFC;r immer frei bleiben und n&#xFC;tzlich f&#xFC;r jeden sein wird.'
+    item3: Schaue hier von Zeit zu Zeit vorbei, weil wir immer versuchen unsere Nutzungsbedingungen zu verbessern.
+    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+  list4:
+    item1: 'die unterschiedliche F&#xE4;higkeiten haben'
+    item2: 'Wir ben&#xF6;tigen Deine Hilfe um diese Community zu einem hilfreichen Platz f&#xFC;r alle Mitglieder zu machen. Und so kannst Du uns helfen:'
+    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+  list5:
+    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item2: 'Wir behalten uns das Recht vor, Programme, Benutzerkonten, und alle digitalen Materialien, die auf die Catrobat Webseiten hochgeladen werden, in unserem alleinigen Ermessen jederzeit abzulehnen, zu l&#xF6;schen oder zu verstecken, zum Beispiel, wenn wir feststellen, dass ein Programm unangemessenes Material enth&#xE4;lt, oder dass ein Benutzer die Rechte anderer Personen verletzt.'
+    item3: 'Bitte sende deine Verbesserungsvorschl&#xE4;ge zu diesen Nutzungsbedingungen an {*mailus*}.'
+    item4: 'aus vielen verschieden L&#xE4;ndern und Kulturkreisen'
+    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+  bottom1: 'Bitte konsultiere unsere {*termsofservice*} f&#xFC;r pr&#xE4;zise Formulierungen der oben genannten Punkte und einige zus&#xE4;tzliche rechtliche Bedingungen.'
+  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  version: Wenn du jünger als 13 Jahre bist, musst du deine Eltern oder Erziehungsberechtigten fragen ob sie dir erlauben Catrobat Software-Anwendungen und Services zu nutzen.
+search:
+  dotdotdot: Search...

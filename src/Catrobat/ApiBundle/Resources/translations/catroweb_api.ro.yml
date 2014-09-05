@@ -12,6 +12,26 @@ error:
     blank: email must not be blank
     invalid: Your email seems to be invalid
   login: 'R&#x103;spunsul mediawiki API a fost gre&#x219;it.'
+  post-data: POST-Data not correct or missing!
+  checksum:
+    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
+    invalid: invalid checksum
+  xml:
+    invalid: invalid code xml
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: invalid file
+  image.missing: Project XML mentions a file which not exists in project-folder
+  unknown: unknown error
+  token: 'Autentificarea dispozitivului a e&#x219;uat: auth-token nevalid!'
 success:
   registration: 'BOARD registrare reu&#x219;it&#x103;!'
   token: ok
+  upload: Your project was uploaded successfully!
+time:
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
