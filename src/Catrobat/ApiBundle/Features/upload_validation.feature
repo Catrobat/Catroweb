@@ -41,7 +41,7 @@ Feature: All uploaded programs have to be validated.
     When I POST these parameters to "/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":524,"answer":"Project XML mentions a file which not exists in project-folder","preHeaderMessages":""}
+      {"statusCode":524,"answer":"Project XML mentions a file which does not exist in project-folder","preHeaderMessages":""}
       """
 
   Scenario: program with missing file checksum are rejected
