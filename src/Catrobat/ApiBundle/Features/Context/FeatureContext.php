@@ -437,6 +437,16 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   }
 
   /**
+   * @Given /^I have a Catrobat file with an bad word in the description$/
+   */
+  public function iHaveACatrobatFileWithAnBadWordInTheDescription()
+  {
+    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_badword_in_description.catrobat";
+    assertTrue(file_exists($filepath),"File not found");
+    $this->files[] = new UploadedFile($filepath,"program_with_badword_in_description.catrobat");
+  }
+
+  /**
    * @Given /^I have a parameter "([^"]*)" with the md5checksum my file$/
    */
   public function iHaveAParameterWithTheMdchecksumMyFile($parameter)
@@ -494,7 +504,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   private function emptyDirectory($directory)
   {
     $filesystem = new Filesystem();
-    
+
     $finder = new Finder();
     $finder->in($directory)->depth(0);
     foreach($finder as $file)

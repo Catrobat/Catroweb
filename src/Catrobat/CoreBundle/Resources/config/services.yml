@@ -16,6 +16,13 @@ services:
             factory_method: getRepository
             arguments:
                 - "CatrobatCoreBundle:Program"
+
+      catrobat.core.model.badwordrepository:
+            class: CoreBundle\Entity\InsultingWordsRepository
+            factory_service: doctrine.orm.entity_manager
+            factory_method: getRepository
+            arguments:
+                - "CatrobatCoreBundle:InsultingWord"
                 
       catrobat.core.model.programmanager:
             class: Catrobat\CoreBundle\Model\ProgramManager
