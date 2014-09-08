@@ -12,6 +12,8 @@ code_coverage:
       - "src/Catrobat/CoreBundle/Model"
       - "src/Catrobat/CoreBundle/Exceptions"
       - "src/Catrobat/CoreBundle/Spec"
+    output:
+      html: ./testreports/coverage
       
 # TODO: values not used
 catrobat:

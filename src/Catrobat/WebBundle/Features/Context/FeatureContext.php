@@ -10,6 +10,7 @@ use Behat\MinkExtension\Context\MinkContext;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Exception\Exception;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -26,16 +27,23 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class FeatureContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
   private $kernel;
+  private $screenshot_directory;
 
   /**
    * Initializes context with parameters from behat.yml.
    *
    * @param array $parameters
    */
-  public function __construct()
+  public function __construct($screenshot_directory)
   {
+    $this->screenshot_directory = preg_replace('/([^\/]+)$/', '$1/', $screenshot_directory);
+    if (!is_dir($this->screenshot_directory))
+    {
+      throw new Exception("No screenshot directory specified!");
+    }
   }
 
+  
   /**
    * Sets HttpKernel instance.
    * This method will be automatically called by Symfony2Extension ContextInitializer.
@@ -54,7 +62,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   private function deleteScreens()
   {
-    $files = glob('./screens/*');
+    $files = glob($this->screenshot_directory.'*');
     foreach($files as $file) {
       if(is_file($file))
         unlink($file);
@@ -101,7 +109,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function makeScreenshot()
   {
-    $this->saveScreenshot(null, "./screens/");
+    $this->saveScreenshot(null, $this->screenshot_directory);
   }
 
   /**

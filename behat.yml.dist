@@ -20,7 +20,7 @@ default:
             templates:
                 file: default.twig
             output:
-                file: ./output/index.html
+                file: ./testreports/behat/index.html
 
     suites:
         api:
@@ -29,5 +29,8 @@ default:
         web:
             type: symfony_bundle
             bundle: 'CatrobatWebBundle'
+            contexts:
+              - Catrobat\WebBundle\Features\Context\FeatureContext:
+                    screenshot_directory: "./testreports/screens/"
 
             
