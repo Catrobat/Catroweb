@@ -98,7 +98,22 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $this->client = $this->kernel->getContainer()->get('test.client');
     $this->client->request('POST', $url, $this->request_parameters, $this->files);
   }
-
+  
+  private function uploadProgramFileAsDefaultUser($directory, $filename)
+  {
+    $filepath = self::FIXTUREDIR . $directory . "/" . $filename;
+    assertTrue(file_exists($filepath), "File not found");
+    $files = array(new UploadedFile($filepath, $filename));
+    $url = "/api/upload/upload.json";
+    $parameters = array(
+        "username" => "BehatGeneratedName",
+        "token" => "BehatGeneratedToken",
+        "fileChecksum" => md5_file($files[0]->getPathname())
+    );
+    
+    $this->client = $this->kernel->getContainer()->get('test.client');
+    $this->client->request('POST', $url, $parameters, $files);
+  }
 
 
 
@@ -129,32 +144,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   }
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Steps
-
-  /**
-   * @Given /^the upload folder is empty$/
-   */
-  public function theUploadFolderIsEmpty()
-  {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
-    $this->emptyDirectory($extract_dir);
-  }
-
-  /**
-   * @Given /^the extract folder is empty$/
-   */
-  public function theExtractFolderIsEmpty()
-  {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
-    $this->emptyDirectory($extract_dir);
-  }
-
-
-
-
 
   /**
    * @Given /^I define the following rude words:$/
@@ -204,26 +195,33 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       case "a rude word in the name":
         $filename = "program_with_rudeword_in_name.catrobat";
         break;
-
+      case "a missing code.xml":
+        $filename = "program_with_missing_code_xml.catrobat";
+        break;
+      case "an invalid code.xml":
+        $filename = "program_with_invalid_code_xml.catrobat";
+        break;
+      case "a missing image":
+        $filename = "program_with_missing_image.catrobat";
+        break;
+      case "an additional image":
+        $filename = "program_with_extra_image.catrobat";
+        break;
+        
       default:
         throw new PendingException("No case defined for \"" . $programattribute . "\"");
     }
-    $filepath = self::FIXTUREDIR . "GeneratedFixtures/" . $filename;
-    assertTrue(file_exists($filepath), "File not found");
-    $files = array(new UploadedFile($filepath, $filename));
-    $url = "/api/upload/upload.json";
-    $parameters = array(
-      "username" => "BehatGeneratedName",
-      "token" => "BehatGeneratedToken",
-      "fileChecksum" => md5_file($files[0]->getPathname())
-    );
-
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $parameters, $files);
+    $this->uploadProgramFileAsDefaultUser("GeneratedFixtures", $filename);
   }
 
-
-
+  /**
+   * @When /^I upload an invalid program file$/
+   */
+  public function iUploadAnInvalidProgramFile()
+  {
+    $this->uploadProgramFileAsDefaultUser("","invalid_archive.catrobat");
+  }
+  
   /**
    * @Given /^there are users:$/
    */
@@ -513,56 +511,6 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $filepath = self::FIXTUREDIR . "compass.catrobat";
     assertTrue(file_exists($filepath), "File not found");
     $this->files[] = new UploadedFile($filepath, "compass.catrobat");
-  }
-
-  /**
-   * @Given /^I have a Catrobat file with an invalid code\.xml$/
-   */
-  public function iHaveACatrobatFileWithAnInvalidCodeXml()
-  {
-    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_invalid_code_xml.catrobat";
-    assertTrue(file_exists($filepath), "File not found");
-    $this->files[] = new UploadedFile($filepath, "program_with_invalid_code_xml.catrobat");
-  }
-
-  /**
-   * @Given /^I have a Catrobat file with a missing code\.xml$/
-   */
-  public function iHaveACatrobatFileWithAnMissingCodeXml()
-  {
-    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_missing_code_xml.catrobat";
-    assertTrue(file_exists($filepath), "File not found");
-    $this->files[] = new UploadedFile($filepath, "program_with_missing_code_xml.catrobat");
-  }
-
-  /**
-   * @Given /^I have a Catrobat file with a missing image$/
-   */
-  public function iHaveACatrobatFileWithAMissingImage()
-  {
-    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_missing_image.catrobat";
-    assertTrue(file_exists($filepath), "File not found");
-    $this->files[] = new UploadedFile($filepath, "program_with_missing_image.catrobat");
-  }
-
-  /**
-   * @Given /^I have a Catrobat file with an additional image$/
-   */
-  public function iHaveACatrobatFileWithAnAdditionalImage()
-  {
-    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_extra_image.catrobat";
-    assertTrue(file_exists($filepath), "File not found");
-    $this->files[] = new UploadedFile($filepath, "program_with_extra_image.catrobat");
-  }
-
-  /**
-   * @Given /^I have an invalid Catrobat file$/
-   */
-  public function iHaveAnInvalidCatrobatFile()
-  {
-    $filepath = self::FIXTUREDIR . "invalid_archive.catrobat";
-    assertTrue(file_exists($filepath), "File not found");
-    $this->files[] = new UploadedFile($filepath, "invalid_archive.catrobat");
   }
 
   /**

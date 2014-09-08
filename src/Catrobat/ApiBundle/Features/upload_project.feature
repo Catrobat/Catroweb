@@ -2,9 +2,7 @@
 Feature: Upload a program 
 
   Background: 
-    Given the upload folder is empty
-    And the extract folder is empty
-    And there are users:
+    Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
@@ -66,5 +64,25 @@ Feature: Upload a program
     And I upload a catrobat program with the same name
     Then it should be updated
 
+  Scenario: program with missing file checksum are rejected
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have a valid Catrobat file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":503,"answer":"Client did not send fileChecksum! Are you using an outdated version of Pocket Code?","preHeaderMessages":""}
+      """
+
+  Scenario: program with invalid file checksum are rejected
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
+    And I have a valid Catrobat file
+    And I have a parameter "fileChecksum" with an invalid md5checksum of my file
+    When I POST these parameters to "/api/upload/upload.json"
+    Then I should get the json object:
+      """
+      {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
+      """
     
     

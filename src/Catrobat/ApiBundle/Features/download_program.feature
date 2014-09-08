@@ -2,9 +2,7 @@
 Feature: Download programs
 
   Background: 
-    Given the upload folder is empty
-    And the extract folder is empty
-    And there are users:
+    Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
     And there are downloadable programs:
