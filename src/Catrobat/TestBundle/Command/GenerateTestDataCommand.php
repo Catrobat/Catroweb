@@ -62,7 +62,7 @@ class GenerateTestDataCommand extends Command
       $this->generateProgramWithManualScreenshot("program_with_manual_screenshot");
       $this->generateProgramWithScreenshot("program_with_screenshot");
      // $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
-      $this->generateProgramWithBadWordInDescription("program_with_badword_in_description");
+      $this->generateProgramWithRudeWordInDescription("program_with_rudeword_in_description");
 
       $finder->directories()->in($this->target_directory)->depth(0);
       foreach ($finder as $dir)
@@ -135,7 +135,7 @@ class GenerateTestDataCommand extends Command
     $this->filesystem->rename($this->target_directory.$directory."/automatic_screenshot.png", $this->target_directory.$directory."/screenshot.png");    
   }
 
-  protected function generateProgramWithBadWordInDescription($directory)
+  protected function generateProgramWithRudeWordInDescription($directory)
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory."/code.xml");
