@@ -19,9 +19,9 @@ class InsultingWordsRepository extends EntityRepository
   {
     $qb = $this->createQueryBuilder('e');
     $qb->select($qb->expr()->count('e.word'))
-      ->where($qb->expr()->in('e.word',array('?1')))
+      ->where($qb->expr()->in('e.word',"?1"))
       ->setParameter(1,$array);
-    $result = $qb->getSingleScalarResult();
+    $result = $qb->getQuery()->getSingleScalarResult();
     return $result > 0;
   }
 

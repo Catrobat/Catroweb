@@ -85,6 +85,9 @@ class UploadController
           case StatusCode::INVALID_FILE:
             $response["answer"] = $this->trans("error.file.invalid");
             break;
+          case StatusCode::RUDE_WORD_IN_DESCRIPTION:
+            $response["answer"] = $this->trans("error.description.rude");
+            break;
           default:
             $response["answer"] = $this->trans("error.file.unknown");
         }

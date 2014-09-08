@@ -6,6 +6,7 @@ services:
 
       catroweb.file.validator.description:
             class: Catrobat\CoreBundle\Listeners\DescriptionValidator
+            arguments:    ["@catrobat.core.services.rudewordfilter"]
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 

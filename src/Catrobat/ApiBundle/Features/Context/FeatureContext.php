@@ -3,6 +3,7 @@
 namespace Catrobat\ApiBundle\Features\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\CoreBundle\Entity\InsultingWord;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
@@ -155,6 +156,24 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 
 
 
+  /**
+   * @Given /^I define the following rude words:$/
+   */
+  public function iDefineTheFollowingRudeWords(TableNode $table)
+  {
+    $words = $table->getHash();
+
+    $word = null;
+    $em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+
+    for($i = 0; $i < count($words); $i ++)
+    {
+      $word = new InsultingWord();
+      $word->setWord($words[$i]["word"]);
+      $em->persist($word);
+    }
+    $em->flush();
+  }
 
   /**
    * @Given /^I am a valid user$/

@@ -17,7 +17,7 @@ services:
             arguments:
                 - "CatrobatCoreBundle:Program"
 
-      catrobat.core.model.badwordrepository:
+      catrobat.core.model.rudewordrepository:
             class: CoreBundle\Entity\InsultingWordsRepository
             factory_service: doctrine.orm.entity_manager
             factory_method: getRepository
@@ -35,6 +35,10 @@ services:
                 - "@event_dispatcher"
             tags:
             -  { name:  "knp_paginator.injectable" }
+
+      catrobat.core.services.rudewordfilter:
+              class:        Catrobat\CoreBundle\Services\RudeWordFilter
+              arguments:    ["@catrobat.core.model.rudewordrepository"]
 
       catrobat.core.model.usermanager:
             class: Catrobat\CoreBundle\Model\UserManager

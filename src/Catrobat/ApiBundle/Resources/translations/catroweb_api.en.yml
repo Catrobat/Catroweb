@@ -5,6 +5,8 @@ error:
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
+  description:
+    rude: Description must not contain rude wordes.
   country:
     blank: The country is missing.
     invalid: Invalid country
