@@ -19,3 +19,4 @@ crowdin.yaml
 crowdin-cli.jar
 /screens
 /output
+/behat.yml
