@@ -88,6 +88,9 @@ class UploadController
           case StatusCode::RUDE_WORD_IN_DESCRIPTION:
             $response["answer"] = $this->trans("error.description.rude");
             break;
+          case StatusCode::RUDE_WORD_IN_PROGRAM_NAME:
+            $response["answer"] = $this->trans("error.programname.rude");
+            break;
           default:
             $response["answer"] = $this->trans("error.file.unknown");
         }

@@ -9,8 +9,6 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 {
   function let()
   {
-//    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_missing_code_xml/"));
-//    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_invalid_code_xml/"));
     $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."base/");
   }
   

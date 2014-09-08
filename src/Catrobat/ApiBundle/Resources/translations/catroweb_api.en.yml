@@ -27,6 +27,8 @@ error:
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
 success:
   registration: Registration successful!
   token: ok

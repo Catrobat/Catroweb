@@ -201,6 +201,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       case "a rude word in the description":
         $filename = "program_with_rudeword_in_description.catrobat";
         break;
+      case "a rude word in the name":
+        $filename = "program_with_rudeword_in_name.catrobat";
+        break;
 
       default:
         throw new PendingException("No case defined for \"" . $programattribute . "\"");

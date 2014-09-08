@@ -14,6 +14,7 @@ class StatusCode
   const INVALID_XML = 508;
   const IMAGE_MISSING = 524;
   const UNEXPECTED_FILE = 525;
+  const RUDE_WORD_IN_PROGRAM_NAME = 511;
   const RUDE_WORD_IN_DESCRIPTION = 512;
   
   const LOGIN_ERROR = 601;
