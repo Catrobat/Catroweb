@@ -76,6 +76,10 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 
   private function emptyDirectory($directory)
   {
+    if(!is_dir($directory))
+    {
+      return;
+    }
     $filesystem = new Filesystem();
 
     $finder = new Finder();
