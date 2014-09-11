@@ -149,16 +149,26 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 ////////////////////////////////////////////// Steps
 
   /**
-   * @Given /^I have a program with "(.*)" as description$/
+   * @Given /^I have a program with "([^"]*)" as (name|description)$/
    */
-  public function iHaveAProgramWithAsDescription($description)
+  public function iHaveAProgramWithAsDescription($value, $header)
   {
     $filesystem = new Filesystem();
     $this->emptyDirectory(sys_get_temp_dir()."/program_generated/");
     $new_program_dir = sys_get_temp_dir()."/program_generated/";
     $filesystem->mirror(self::FIXTUREDIR."/GeneratedFixtures/base", $new_program_dir);
     $properties = simplexml_load_file($new_program_dir."/code.xml");
-    $properties->header->description = $description;
+    switch ($header)
+    {
+      case "description":
+        $properties->header->description = $value;
+        break;
+      case "name":
+        $properties->header->programName = $value;
+        break;
+      default:
+        throw new PendingException();
+    }
     $properties->asXML($new_program_dir."/code.xml");
     $compressor = new CatrobatFileCompressor(sys_get_temp_dir()."/");
     $compressor->compress("program_generated");

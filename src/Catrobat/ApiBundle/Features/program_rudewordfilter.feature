@@ -7,7 +7,16 @@ Feature: Checking for rude words
       | fuck     |
       | assbite  |
 
-  Scenario: upload a program with a rude word should be rejected
+  Scenario: upload a program with a rude word in description should be rejected
+    Given I am a valid user
+    And I have a program with "assbite" as name
+    When i upload this program
+    Then I should get the json object:
+    """
+    {"statusCode":511,"answer":"Programname must not contain rude wordes.","preHeaderMessages":""}
+    """
+    
+  Scenario: upload a program with a rude word in description should be rejected
     Given I am a valid user
     And I have a program with "assbite" as description
     When i upload this program
@@ -15,16 +24,8 @@ Feature: Checking for rude words
       """
       {"statusCode":512,"answer":"Description must not contain rude wordes.","preHeaderMessages":""}
       """
-
-  Scenario: upload a program with a rude word should be rejected
-    Given I am a valid user
-    When I upload a program with a rude word in the name
-    Then I should get the json object:
-    """
-    {"statusCode":511,"answer":"Programname must not contain rude wordes.","preHeaderMessages":""}
-    """
     
-  Scenario Outline:
+  Scenario Outline: a program with a rude word in description should be rejected
     Given I am a valid user
     And I have a program with "<description>" as description
     When i upload this program
