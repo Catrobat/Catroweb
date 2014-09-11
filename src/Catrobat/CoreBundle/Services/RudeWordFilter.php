@@ -14,10 +14,10 @@ class RudeWordFilter {
       $this->repository = $repository;
     }
 
-  public function containsBadWord($string)
+  public function containsRudeWord($string)
   {
     $string = strtolower($string);
-    $badwords = explode(" ", $string);
-    return $this->repository->contains($badwords);
+    $rudewords = explode(" ", $string);
+    return $this->repository->contains($rudewords);
   }
 } 

@@ -72,7 +72,7 @@ class NameValidatorSpec extends ObjectBehavior
   function it_throws_an_exception_if_the_name_contains_a_rude_word($file, $rudewordfilter)
   {
     $file->getName()->willReturn("rudeword");
-    $rudewordfilter->containsBadWord(Argument::any())->willReturn(true);
+    $rudewordfilter->containsRudeWord(Argument::any())->willReturn(true);
     $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
     

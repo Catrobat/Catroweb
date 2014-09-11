@@ -33,7 +33,7 @@ class NameValidator
       throw new InvalidCatrobatFileException("program name too long");
     }
 
-    if ($this->rudeWordFilter->containsBadWord($file->getName()))
+    if ($this->rudeWordFilter->containsRudeWord($file->getName()))
     {
       throw new InvalidCatrobatFileException("rude word in name", StatusCode::RUDE_WORD_IN_PROGRAM_NAME);
     }

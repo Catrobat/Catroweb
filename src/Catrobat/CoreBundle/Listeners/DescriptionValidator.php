@@ -29,7 +29,7 @@ class DescriptionValidator
       throw new InvalidCatrobatFileException("program description too long");
     }
 
-    if ($this->rudeWordFilter->containsBadWord($file->getDescription()))
+    if ($this->rudeWordFilter->containsRudeWord($file->getDescription()))
     {
       throw new InvalidCatrobatFileException("rude word in descritption", StatusCode::RUDE_WORD_IN_DESCRIPTION);
     }

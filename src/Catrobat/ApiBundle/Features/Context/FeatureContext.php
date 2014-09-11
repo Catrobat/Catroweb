@@ -516,11 +516,11 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   /**
    * @Given /^I have a Catrobat file with an bad word in the description$/
    */
-  public function iHaveACatrobatFileWithAnBadWordInTheDescription()
+  public function iHaveACatrobatFileWithAnRudeWordInTheDescription()
   {
-    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_badword_in_description.catrobat";
+    $filepath = self::FIXTUREDIR . "GeneratedFixtures/program_with_rudeword_in_description.catrobat";
     assertTrue(file_exists($filepath),"File not found");
-    $this->files[] = new UploadedFile($filepath,"program_with_badword_in_description.catrobat");
+    $this->files[] = new UploadedFile($filepath,"program_with_rudeword_in_description.catrobat");
   }
 
   /**
