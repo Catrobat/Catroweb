@@ -17,6 +17,7 @@ use Symfony\Component\Finder\Finder;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Symfony\Bundle\FrameworkBundle\Client;
+use Catrobat\CoreBundle\Services\CatrobatFileCompressor;
 
 //
 // Require 3rd-party libraries here:
@@ -101,7 +102,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   
   private function uploadProgramFileAsDefaultUser($directory, $filename)
   {
-    $filepath = self::FIXTUREDIR . $directory . "/" . $filename;
+    $filepath = $directory . "/" . $filename;
     assertTrue(file_exists($filepath), "File not found");
     $files = array(new UploadedFile($filepath, $filename));
     $url = "/api/upload/upload.json";
@@ -147,6 +148,51 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Steps
 
+  /**
+   * @Given /^I have a program with "(.*)" as description$/
+   */
+  public function iHaveAProgramWithAsDescription($description)
+  {
+    $filesystem = new Filesystem();
+    $this->emptyDirectory(sys_get_temp_dir()."/program_generated/");
+    $new_program_dir = sys_get_temp_dir()."/program_generated/";
+    $filesystem->mirror(self::FIXTUREDIR."/GeneratedFixtures/base", $new_program_dir);
+    $properties = simplexml_load_file($new_program_dir."/code.xml");
+    $properties->header->description = $description;
+    $properties->asXML($new_program_dir."/code.xml");
+    $compressor = new CatrobatFileCompressor(sys_get_temp_dir()."/");
+    $compressor->compress("program_generated");
+  }
+  
+  /**
+   * @When /^i upload this program$/
+   */
+  public function iUploadThisProgram()
+  {
+    $this->uploadProgramFileAsDefaultUser(sys_get_temp_dir(), "program_generated.catrobat");
+  }
+  
+  /**
+   * @Then /^the program should get (.*)$/
+   */
+  public function theProgramShouldGet($result)
+  {
+    $response = $this->client->getResponse();
+    $response_array = json_decode($response->getContent(), true);
+    $code = $response_array["statusCode"];
+    switch ($result)
+    {
+      case "accepted":
+        assertEquals(200, $code, "Program was rejected (Status code 200)");
+        break;
+      case "rejected":
+        assertNotEquals(200, $code, "Program was NOT rejected");
+        break;
+      default:
+        new PendingException();
+    }
+  }
+  
   /**
    * @Given /^I define the following rude words:$/
    */
@@ -211,7 +257,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       default:
         throw new PendingException("No case defined for \"" . $programattribute . "\"");
     }
-    $this->uploadProgramFileAsDefaultUser("GeneratedFixtures", $filename);
+    $this->uploadProgramFileAsDefaultUser(self::FIXTUREDIR . "/GeneratedFixtures", $filename);
   }
 
   /**
@@ -219,7 +265,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iUploadAnInvalidProgramFile()
   {
-    $this->uploadProgramFileAsDefaultUser("","invalid_archive.catrobat");
+    $this->uploadProgramFileAsDefaultUser(self::FIXTUREDIR,"invalid_archive.catrobat");
   }
   
   /**
