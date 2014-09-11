@@ -3,13 +3,13 @@
 namespace Catrobat\CoreBundle\Services;
 
 
-use Catrobat\CoreBundle\Entity\InsultingWords;
+use Catrobat\CoreBundle\Entity\RudeWords;
 
 class RudeWordFilter {
 
   private $repository;
 
-    public function __construct(\Catrobat\CoreBundle\Entity\InsultingWordsRepository $repository)
+    public function __construct(\Catrobat\CoreBundle\Entity\RudeWordsRepository $repository)
     {
       $this->repository = $repository;
     }

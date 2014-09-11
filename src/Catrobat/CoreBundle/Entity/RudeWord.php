@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="rudewords")
- * @ORM\Entity(repositoryClass="Catrobat\CoreBundle\Entity\InsultingWordsRepository")
+ * @ORM\Entity(repositoryClass="Catrobat\CoreBundle\Entity\RudeWordsRepository")
  */
-class InsultingWord
+class RudeWord
 {
   /**
    * @ORM\Id

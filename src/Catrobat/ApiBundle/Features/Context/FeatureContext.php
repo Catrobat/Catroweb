@@ -3,7 +3,7 @@
 namespace Catrobat\ApiBundle\Features\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
-use Catrobat\CoreBundle\Entity\InsultingWord;
+use Catrobat\CoreBundle\Entity\RudeWord;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
@@ -159,7 +159,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 
     for($i = 0; $i < count($words); $i ++)
     {
-      $word = new InsultingWord();
+      $word = new RudeWord();
       $word->setWord($words[$i]["word"]);
       $em->persist($word);
     }
