@@ -20,3 +20,6 @@ crowdin-cli.jar
 /screens
 /output
 /behat.yml
+/.externalToolBuilders
+/.settings
+/.buildpath
