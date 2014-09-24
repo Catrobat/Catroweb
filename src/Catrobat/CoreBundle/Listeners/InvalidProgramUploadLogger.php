@@ -15,6 +15,6 @@ class InvalidProgramUploadLogger
 
   function onInvalidProgramUploadedEvent(InvalidProgramUploadedEvent $event)
   {
-    $this->logger->error("Invalid File: " . $event->getFile()->getFilename());
+    $this->logger->error("Invalid File: " . $event->getFile()->getFilename() . " Exception: " . $event->getException()->getMessage());
   }
 }

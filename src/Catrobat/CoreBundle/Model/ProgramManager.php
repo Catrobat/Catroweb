@@ -46,7 +46,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
       $event = $this->event_dispatcher->dispatch("catrobat.program.before", new ProgramBeforeInsertEvent($extracted_file));
     }
     catch (InvalidCatrobatFileException $e) {
-      $event = $this->event_dispatcher->dispatch("catrobat.program.invalid.upload", new InvalidProgramUploadedEvent($file));
+      $event = $this->event_dispatcher->dispatch("catrobat.program.invalid.upload", new InvalidProgramUploadedEvent($file, $e));
       throw $e;
     }
 
