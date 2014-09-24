@@ -44,55 +44,59 @@ class UploadController
       $response["statusCode"] = StatusCode::MISSING_CHECKSUM;
       $response["answer"] = $this->trans("error.checksum.missing");
     }
-    else if (md5_file($request->files->get(0)->getPathname()) != $request->request->get("fileChecksum"))
-    {
-      $response["statusCode"] = StatusCode::INVALID_CHECKSUM;
-      $response["answer"] = $this->trans("error.checksum.invalid");
-    }
     else
     {
-      try
+      $file = array_values($request->files->all())[0];
+      if (md5_file($file->getPathname()) != $request->request->get("fileChecksum"))
       {
-        $add_program_request = new AddProgramRequest($this->context->getToken()->getUser(), $request->files->get(0));
-
-        $id = $this->program_manager->addProgram($add_program_request)->getId();
-        $user = $this->context->getToken()->getUser();
-        $user->setToken($this->tokenGenerator->generateToken());
-        $this->user_manager->updateUser($user);
-
-        $response["projectId"] = $id;
-        $response["statusCode"] = StatusCode::OK;
-        $response["answer"] = $this->trans("success.upload");
-        $response["token"] = $user->getToken();
+        $response["statusCode"] = StatusCode::INVALID_CHECKSUM;
+        $response["answer"] = $this->trans("error.checksum.invalid");
       }
-      catch (InvalidCatrobatFileException $exception)
+      else
       {
-        $response["statusCode"] = $exception->getStatusCode();
-        switch ($exception->getStatusCode())
+        try
         {
-          case StatusCode::PROJECT_XML_MISSING:
-            $response["answer"] = $this->trans("error.xml.missing");
-            break;
-          case StatusCode::INVALID_XML:
-            $response["answer"] = $this->trans("error.xml.invalid");
-            break;
-          case StatusCode::IMAGE_MISSING:
-            $response["answer"] = $this->trans("error.image.missing");
-            break;
-          case StatusCode::UNEXPECTED_FILE:
-            $response["answer"] = $this->trans("error.file.unexpected");
-            break;
-          case StatusCode::INVALID_FILE:
-            $response["answer"] = $this->trans("error.file.invalid");
-            break;
-          case StatusCode::RUDE_WORD_IN_DESCRIPTION:
-            $response["answer"] = $this->trans("error.description.rude");
-            break;
-          case StatusCode::RUDE_WORD_IN_PROGRAM_NAME:
-            $response["answer"] = $this->trans("error.programname.rude");
-            break;
-          default:
-            $response["answer"] = $this->trans("error.file.unknown");
+          $add_program_request = new AddProgramRequest($this->context->getToken()->getUser(), $file);
+  
+          $id = $this->program_manager->addProgram($add_program_request)->getId();
+          $user = $this->context->getToken()->getUser();
+          $user->setToken($this->tokenGenerator->generateToken());
+          $this->user_manager->updateUser($user);
+  
+          $response["projectId"] = $id;
+          $response["statusCode"] = StatusCode::OK;
+          $response["answer"] = $this->trans("success.upload");
+          $response["token"] = $user->getToken();
+        }
+        catch (InvalidCatrobatFileException $exception)
+        {
+          $response["statusCode"] = $exception->getStatusCode();
+          switch ($exception->getStatusCode())
+          {
+            case StatusCode::PROJECT_XML_MISSING:
+              $response["answer"] = $this->trans("error.xml.missing");
+              break;
+            case StatusCode::INVALID_XML:
+              $response["answer"] = $this->trans("error.xml.invalid");
+              break;
+            case StatusCode::IMAGE_MISSING:
+              $response["answer"] = $this->trans("error.image.missing");
+              break;
+            case StatusCode::UNEXPECTED_FILE:
+              $response["answer"] = $this->trans("error.file.unexpected");
+              break;
+            case StatusCode::INVALID_FILE:
+              $response["answer"] = $this->trans("error.file.invalid");
+              break;
+            case StatusCode::RUDE_WORD_IN_DESCRIPTION:
+              $response["answer"] = $this->trans("error.description.rude");
+              break;
+            case StatusCode::RUDE_WORD_IN_PROGRAM_NAME:
+              $response["answer"] = $this->trans("error.programname.rude");
+              break;
+            default:
+              $response["answer"] = $this->trans("error.file.unknown");
+          }
         }
       }
     }
