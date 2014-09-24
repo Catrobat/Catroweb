@@ -30,4 +30,20 @@ class TokenGeneratorSpec extends ObjectBehavior
       }
       expect(count(array_unique($generated_tokens)))->toBe(100);
     }
+    
+    function it_generates_a_token_with_a_length_of_32()
+    {
+      $generated_token = $this->generateToken();
+      $generated_token->shouldHaveLength(32);
+    }
+    
+    
+    public function getMatchers()
+    {
+      return [
+      'haveLength' => function($subject, $key) {
+        return strlen($subject) === $key;
+      }
+      ];
+    }
 }

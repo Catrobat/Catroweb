@@ -10,7 +10,7 @@ class TokenGenerator
   
   function generateToken()
   {
-    return uniqid(rand(),false);
+    return md5(uniqid(rand(),false));
   }
   
 }
