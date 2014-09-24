@@ -74,7 +74,7 @@ class ListProgramsController
     $retArray['preHeaderMessages'] = "";
     
     $retArray['CatrobatInformation'] = array (
-        "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . '/',
+        "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . $request->getBaseUrl() . '/',
         "TotalProjects" => $numbOfTotalProjects,
         "ProjectsExtension" => ".catrobat" 
     );

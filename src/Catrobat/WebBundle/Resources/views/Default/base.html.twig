@@ -5,8 +5,8 @@
   <meta name="robots" content="noindex,nofollow"/>
   <title>Pocket Code Website {% block title %}{% endblock %}</title>
 
-  {% stylesheets '@CatrobatWebBundle/Resources/public/css/plugins/*'
-                 '@CatrobatWebBundle/Resources/public/css/base/*' filter='cssrewrite,lessphp' %}
+  {% stylesheets 'bundles/catrobatweb/css/plugins/*'
+                 'bundles/catrobatweb/css/base/*' filter='cssrewrite,lessphp' %}
     <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
   {% endstylesheets %}
 
