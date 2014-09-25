@@ -18,6 +18,7 @@ use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Catrobat\CoreBundle\Services\CatrobatFileCompressor;
+use Behat\Behat\Hook\Scope\AfterStepScope;
 
 //
 // Require 3rd-party libraries here:
@@ -32,6 +33,8 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
   const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
+  private $error_directory;
+  
   private $kernel;
   private $user;
   private $request_parameters;
@@ -53,8 +56,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    *
    * @param array $parameters          
    */
-  public function __construct()
+  public function __construct($error_directory)
   {
+    $this->error_directory = $error_directory;
     $this->request_parameters = array ();
     $this->files = array ();
   }
@@ -72,7 +76,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// SUpport Functions
+////////////////////////////////////////////// Support Functions
 
   private function emptyDirectory($directory)
   {
@@ -148,6 +152,18 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $this->emptyDirectory($extract_dir);
   }
 
+  /** @AfterStep */
+  public function saveResponseToFile(AfterStepScope $scope)
+  {
+    if (!$scope->getTestResult()->isPassed())
+    {
+      $response = $this->client->getResponse(); 
+      if ($response->getContent() != "")
+      {
+        file_put_contents($this->error_directory . "error.json", $response->getContent());
+      }
+    }
+  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Steps
@@ -732,8 +748,24 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     assertEquals("application/zip", $content_type);
   }
 
-
-
+  /**
+   * @When /^I register a new user$/
+   */
+  public function iRegisterANewUser()
+  {
+    $this->prepareValidRegistrationParameters();
+    $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
+  }
+  
+  /**
+   * @When /^I try to register another user with the same email adress$/
+   */
+  public function iTryToRegisterAnotherUserWithTheSameEmailAdress()
+  {
+    $this->prepareValidRegistrationParameters();
+    $this->request_parameters['registrationUsername'] = "AnotherUser";
+    $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
+  }
 
 
 }

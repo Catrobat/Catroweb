@@ -54,17 +54,25 @@ class SecurityController
 
       if (count($violations) == 0)
       {
-        $user = $userManager->createUser();
-        $user->setUsername($create_request->username);
-        $user->setEmail($create_request->mail);
-        $user->setPlainPassword($create_request->password);
-        $user->setEnabled(true);
-        $user->setUploadToken($this->tokenGenerator->generateToken());
-
-        $userManager->updateUser($user);
-        $retArray['statusCode'] = 201;
-        $retArray['answer'] = $this->trans("success.registration");
-        $retArray['token'] = $user->getUploadToken();
+        if ($userManager->findUserByEmail($create_request->mail) != null)
+        {
+          $retArray['statusCode'] = StatusCode::EMAIL_ALREADY_EXISTS;
+          $retArray['answer'] = $this->trans("error.email.exists");
+        }
+        else 
+        {
+          $user = $userManager->createUser();
+          $user->setUsername($create_request->username);
+          $user->setEmail($create_request->mail);
+          $user->setPlainPassword($create_request->password);
+          $user->setEnabled(true);
+          $user->setUploadToken($this->tokenGenerator->generateToken());
+  
+          $userManager->updateUser($user);
+          $retArray['statusCode'] = 201;
+          $retArray['answer'] = $this->trans("success.registration");
+          $retArray['token'] = $user->getUploadToken();
+        }
       }
     }
     else

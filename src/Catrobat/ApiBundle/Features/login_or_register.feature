@@ -71,3 +71,13 @@ Feature: Login with an existing accunt or register a new one
       {"statusCode":602,"answer":"Your password must have at least 6 characters.","preHeaderMessages":""}
       """
 
+
+  Scenario: an email address can only be used by one user
+    When I register a new user
+    And I try to register another user with the same email adress
+    Then I should get the json object:
+      """
+      {"statusCode":300,"answer":"This email address already exists.","preHeaderMessages":""}
+      """
+
+

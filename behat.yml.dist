@@ -26,6 +26,9 @@ default:
         api:
             type: symfony_bundle
             bundle: 'CatrobatApiBundle'
+            contexts:
+              - Catrobat\ApiBundle\Features\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
         web:
             type: symfony_bundle
             bundle: 'CatrobatWebBundle'

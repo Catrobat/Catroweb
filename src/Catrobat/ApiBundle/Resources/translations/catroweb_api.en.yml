@@ -13,6 +13,7 @@ error:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
+    exists: This email address already exists.
   login: The password or username was incorrect.
   post-data: POST-Data not correct or missing!
   checksum:
