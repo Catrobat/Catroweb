@@ -155,7 +155,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   /** @AfterStep */
   public function saveResponseToFile(AfterStepScope $scope)
   {
-    if (!$scope->getTestResult()->isPassed())
+    if (!$scope->getTestResult()->isPassed() && $this->client != null)
     {
       $response = $this->client->getResponse(); 
       if ($response->getContent() != "")
