@@ -18,8 +18,8 @@ var Main = function () {
     });
 
     $('.show-nav-dropdown').click(function() {
-      //todo: dropdown is at correct position after 3x clicking!!!
-      $('#nav-dropdown').css('left', $('nav').position().left + $('nav').outerWidth() - $('#nav-dropdown').width()).toggle();
+      var newPosition = $('nav').position().left + $('nav').outerWidth() - $('#nav-dropdown').width();
+      $('#nav-dropdown').css('left', newPosition).toggle();
     });
   };
 
