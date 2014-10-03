@@ -11,41 +11,38 @@ use Symfony\Component\Finder\Finder;
 
 class CatrobatFileCompressor
 {
-  private $compress_dir;
-  
-  public function __construct($compress_dir)
+  public function __construct(){}
+
+  public function compress($source, $destination, $archive_name)
   {
-    if (!is_dir($compress_dir))
+    if (!is_dir($source))
     {
-      throw new InvalidStorageDirectoryException($compress_dir . " is not a valid directory");
+      throw new InvalidStorageDirectoryException($source . " is not a valid target directory");
     }
-    $this->compress_dir = $compress_dir;
-  }
-  
-  public function compress($directory)
-  {
-    $full_dir_path = $this->compress_dir . $directory . "/";
-    if (!is_dir($full_dir_path))
+    if (!is_dir($destination))
     {
-      throw new InvalidCatrobatFileException("invalid directory");
+      mkdir($destination, 0777, true);
     }
+
     $archive = new \ZipArchive;
-    $filename = $directory . ".catrobat";
-    
-    $archive->open($this->compress_dir . $filename, \ZipArchive::OVERWRITE);
-    $finder = new Finder();      
-    $finder->in($full_dir_path);
+    $filename = $archive_name . ".catrobat";
+
+    $archive->open($destination. "/" . $filename, \ZipArchive::OVERWRITE);
+
+    $finder = new Finder();
+    $finder->in($source);
+
     foreach ($finder as $element)
-    {        
-      if ($element->isDir()) 
+    {
+      if ($element->isDir())
       {
         $archive->addEmptyDir($element->getRelativePathname() . "/");
-      } 
+      }
       elseif ($element->isFile())
       {
         $archive->addFile($element->getRealpath(), $element->getRelativePathname());
       }
     }
     $archive->close();
-  }  
+  }
 }

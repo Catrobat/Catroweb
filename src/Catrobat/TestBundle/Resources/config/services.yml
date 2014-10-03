@@ -19,5 +19,4 @@ services:
   
       catrobat.test.compressor:
               class:        Catrobat\CoreBundle\Services\CatrobatFileCompressor
-              arguments:    ["%catrobat.test.directory.target%"]
              

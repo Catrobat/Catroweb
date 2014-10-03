@@ -190,8 +190,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         throw new PendingException();
     }
     $properties->asXML($new_program_dir."/code.xml");
-    $compressor = new CatrobatFileCompressor(sys_get_temp_dir()."/");
-    $compressor->compress("program_generated");
+    $compressor = new CatrobatFileCompressor();
+    $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
   }
   
   /**

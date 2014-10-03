@@ -68,14 +68,9 @@ class GenerateTestDataCommand extends Command
       $finder->directories()->in($this->target_directory)->depth(0);
       foreach ($finder as $dir)
       {
-        $this->compressDirectory($dir->getRelativePathname());
+        $this->compressor->compress($this->target_directory . $dir->getRelativePathname(), $this->target_directory, $dir->getRelativePathname());
       }
     }
-  }
-  
-  protected function compressDirectory($directory)
-  {
-    $this->compressor->compress($directory);
   }
 
   protected function extractBaseTestProgram($directory)
