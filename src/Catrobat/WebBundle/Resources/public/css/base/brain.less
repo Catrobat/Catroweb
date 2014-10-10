@@ -85,13 +85,13 @@ h3 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: @font-size-h1;
   padding: 1px 1px;
   border-bottom: 1px solid @default-text-color;
 }
 
 h2 {
-  font-size: 16px;
+  font-size: @font-size-h2;
 }
 
 
@@ -302,7 +302,16 @@ form {
   cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
+#error {
+  text-align: center;
+  margin-top: 50px;
+
+  p {
+    font-size: @default-font-size + 20;
+  }
+}
+
+@media screen and (max-width: @responsive-width-tablet) {
 
   #wrapper {
     padding-bottom: @footer-height-bottom + @footer-height-padding; /* TODO: ändern !!! */

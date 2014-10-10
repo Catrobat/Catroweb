@@ -7,7 +7,7 @@
         {% endimage %}
       </a>
     </div>
-    <input id="searchbar" placeholder="{{ "Search..."|trans({}, "catroweb_web") }}">
+    <input id="searchbar" class="input-search" placeholder="{{ "Search..."|trans({}, "catroweb_web") }}">
   </div>
 
   <div id="header-right">
@@ -16,7 +16,7 @@
         <div class="img-magnifying-glass"></div>
       </div>
       <div>
-        <input placeholder="{{ "Search..."|trans({}, "catroweb_web") }}" class="size-large">
+        <input placeholder="{{ "Search..."|trans({}, "catroweb_web") }}" class="size-large input-search">
       </div>
 
       {% if app.user %}

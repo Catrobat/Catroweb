@@ -101,7 +101,7 @@ footer {
   padding: 0 35px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: @responsive-width-tablet) {
 
   footer {
     margin-top: -@footer-height-bottom !important;
@@ -148,6 +148,18 @@ footer {
     #footer-menu-mobile {
       display: block;
     }
+  }
+
+  select {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 525px) {
+
+  .footer-padding {
+    padding: 0 4px;
   }
 
 }

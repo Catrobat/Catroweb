@@ -15,6 +15,18 @@ catrobat_web_program:
     requirements:
       id:  \d+
 
+catrobat_web_search:
+    path:     /search/{q}
+    methods:  [GET]
+    defaults: { _controller: "catrobat.web.default.controller:searchAction" }
+    requirements:
+      q: .+
+
+catrobat_web_search_nothing:
+    path:     /search/
+    methods:  [GET]
+    defaults: { _controller: "catrobat.web.default.controller:searchNothingAction" }
+
 catrobat_web_profile:
     path:      /profile/{id}
     methods:  [GET]
