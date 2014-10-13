@@ -4,7 +4,7 @@ parameters:
       
 services:
       catrobat.test.command.generatetestdata:
-              class: Catrobat\TestBundle\Command\GenerateTestDataCommand
+              class: AppBundle\Commands\GenerateTestDataCommand
               arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
               tags:
                 -  { name: console.command }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\TestBundle\Command;
+namespace AppBundle\Commands;
 
 use Catrobat\CoreBundle\Services\CatrobatFileCompressor;
 
