@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AdminBundle\Command;
+namespace AppBundle\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

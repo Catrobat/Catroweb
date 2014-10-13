@@ -1,5 +1,5 @@
 <?php
-namespace Catrobat\AdminBundle\Admin;
+namespace AppBundle\Admin;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Sonata\AdminBundle\Admin\Admin;

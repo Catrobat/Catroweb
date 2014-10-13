@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\WebBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM;
 
 use Catrobat\CoreBundle\Entity\Group;
 use Doctrine\Common\DataFixtures\FixtureInterface;

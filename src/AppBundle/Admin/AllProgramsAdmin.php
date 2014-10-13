@@ -1,5 +1,5 @@
 <?php
-namespace Catrobat\AdminBundle\Admin;
+namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;

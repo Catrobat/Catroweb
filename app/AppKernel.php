@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Catrobat\WebBundle\CatrobatWebBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Catrobat\AdminBundle\CatrobatAdminBundle(),
             new Catrobat\TestBundle\CatrobatTestBundle(),
             new Catrobat\CoreBundle\CatrobatCoreBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),

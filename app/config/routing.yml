@@ -3,10 +3,6 @@ catroweb_app:
     type:     annotation
     prefix:   /
 
-catrobat_admin:
-    resource: "@CatrobatAdminBundle/Resources/config/routing.yml"
-    prefix:   /
-
 catroweb:
     resource: "@CatrobatWebBundle/Resources/config/routing.yml"
     prefix:   /

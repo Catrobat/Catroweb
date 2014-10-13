@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: commands.yml }
+    - { resource: admin.yml }
 
 framework:
     #esi:             ~
@@ -31,7 +33,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ CatrobatWebBundle, CatrobatAdminBundle, FOSUserBundle, SonataUserBundle ]
+    bundles:        [ CatrobatWebBundle, FOSUserBundle, SonataUserBundle ]
     #java: /usr/bin/java
     filters:
         lessphp:
@@ -97,7 +99,7 @@ sonata_block:
 
 sonata_admin:
     title:     Admin Panel
-    title_logo: /bundles/catrobatadmin/images/admin_logo.png
+    title_logo: /admin/admin_logo.png
     dashboard:
         blocks:
            # display a dashboard block
