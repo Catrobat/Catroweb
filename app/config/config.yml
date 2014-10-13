@@ -1,6 +1,10 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: commands.yml }
+    - { resource: admin.yml }
+    - { resource: listeners.yml }
 
 framework:
     #esi:             ~
@@ -30,7 +34,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ CatrobatWebBundle, CatrobatAdminBundle, FOSUserBundle, SonataUserBundle ]
+    bundles:        [ CatrobatWebBundle, FOSUserBundle, SonataUserBundle ]
     #java: /usr/bin/java
     filters:
         lessphp:
@@ -73,14 +77,14 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Catrobat\CoreBundle\Entity\User
+    user_class: Catrobat\AppBundle\Entity\User
 
     group:
-        group_class:   Catrobat\CoreBundle\Entity\Group
+        group_class:   Catrobat\AppBundle\Entity\Group
         group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm
 
     service:
-        user_manager: catrobat.core.model.usermanager
+        user_manager: usermanager
 
 # Sonata Configuration
 sonata_block:
@@ -96,7 +100,7 @@ sonata_block:
 
 sonata_admin:
     title:     Admin Panel
-    title_logo: /bundles/catrobatadmin/images/admin_logo.png
+    title_logo: /admin/admin_logo.png
     dashboard:
         blocks:
            # display a dashboard block
@@ -159,6 +163,6 @@ sonata_user:
     security_acl:  true
     manager_type:  orm
     class:
-        user:   Catrobat\CoreBundle\Entity\User
-        group:  Catrobat\CoreBundle\Entity\Group
+        user:   Catrobat\AppBundle\Entity\User
+        group:  Catrobat\AppBundle\Entity\Group
 

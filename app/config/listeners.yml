@@ -1,0 +1,34 @@
+services:
+      catroweb.file.validator.name:
+            class: Catrobat\AppBundle\Listeners\NameValidator
+            arguments:    ["@rudewordfilter"]
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+      catroweb.file.validator.description:
+            class: Catrobat\AppBundle\Listeners\DescriptionValidator
+            arguments:    ["@rudewordfilter"]
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+      catroweb.file.validator.filestructure:
+            class: Catrobat\AppBundle\Listeners\FileStructureValidator
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
+
+      catroweb.file.validator.definedimages:
+            class: Catrobat\AppBundle\Listeners\OnlyDefinedImagesValidator
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+      catroweb.file.validator.xmlheadervalidator:
+            class: Catrobat\AppBundle\Listeners\ProgramXmlHeaderValidator
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+            
+      catrobat.core.services.invalidprogramuploadlogger:
+              class:        Catrobat\AppBundle\Listeners\InvalidProgramUploadLogger
+              arguments:    ["@logger"]
+              tags:
+                  - { name: monolog.logger, channel: upload }
+                  - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }

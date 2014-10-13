@@ -1,0 +1,19 @@
+services:
+
+      catrowebadmin.block.all_programs:
+        class: Catrobat\AppBundle\Admin\AllProgramsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Programs, label: All Programs }
+        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
+
+      catrowebadmin.block.approve_programs:
+        class: Catrobat\AppBundle\Admin\ApproveProgramsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Programs, label: Approve Programs }
+        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
+
+      catrowebadmin.block.notify_upload_programs:
+        class: Catrobat\AppBundle\Admin\UploadNotificationAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Tools, label: Upload Notify }
+        arguments: [null, Catrobat\AppBundle\Entity\User, null]
