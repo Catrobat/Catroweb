@@ -1,22 +1,35 @@
 parameters:
-      catrobat.test.directory.source: "%kernel.root_dir%/../src/Catrobat/TestBundle/DataFixtures/test.catrobat"
-      catrobat.test.directory.target: "%kernel.root_dir%/../src/Catrobat/TestBundle/DataFixtures/GeneratedFixtures/"
+     catrobat.test.directory.source: "%kernel.root_dir%/../src/Catrobat/TestBundle/DataFixtures/test.catrobat"
+     catrobat.test.directory.target: "%kernel.root_dir%/../src/Catrobat/TestBundle/DataFixtures/GeneratedFixtures/"
       
 services:
-      catrobat.test.command.generatetestdata:
-              class: AppBundle\Commands\GenerateTestDataCommand
-              arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
-              tags:
-                -  { name: console.command }
+    catrobat.test.command.generatetestdata:
+        class: AppBundle\Commands\GenerateTestDataCommand
+        arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
+        tags:
+            -  { name: console.command }
 
-      catrobat.test.filesystem:
-              class: Symfony\Component\Filesystem\Filesystem
-              public: false
-              
-      catrobat.test.extractor:
-              class:        Catrobat\CoreBundle\Services\CatrobatFileExtractor
-              arguments:    ["%catrobat.test.directory.target%"]
-  
-      catrobat.test.compressor:
-              class:        Catrobat\CoreBundle\Services\CatrobatFileCompressor
-             
+    catrobat.test.filesystem:
+        class: Symfony\Component\Filesystem\Filesystem
+        public: false
+
+    catrobat.test.extractor:
+        class: Catrobat\CoreBundle\Services\CatrobatFileExtractor
+        arguments: ["%catrobat.test.directory.target%"]
+
+    catrobat.test.compressor:
+        class: Catrobat\CoreBundle\Services\CatrobatFileCompressor
+
+    tokengenerator.inner:
+        class: Catrobat\CoreBundle\Services\TokenGenerator
+
+    tokengenerator:
+        class: Catrobat\CoreBundle\Services\TestEnv\ProxyTokenGenerator
+        arguments: ["@tokengenerator.inner"]
+
+    time.inner:
+        class:        Catrobat\CoreBundle\Services\Time
+
+    time:
+        class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTime
+        arguments: ["@time.inner"]

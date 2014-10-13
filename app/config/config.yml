@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: commands.yml }
     - { resource: admin.yml }
+    - { resource: listeners.yml }
 
 framework:
     #esi:             ~
