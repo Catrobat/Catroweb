@@ -6,7 +6,7 @@
  * Time: 16:44
  */
 
-namespace Catrobat\ApiBundle\Features\Context;
+namespace AppBundle\Features\Api\Context;
 
 
 use Catrobat\CoreBundle\Services\Time;

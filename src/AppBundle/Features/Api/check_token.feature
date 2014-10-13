@@ -35,7 +35,7 @@ Feature: Checking a user's token validity
       """
       {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
-    And the response code should be "403"
+    And the response code should be "401"
 
   Scenario: Checking the token of a non-existing user should return an error
     Given I have a parameter "username" with value "doesnotexist"
@@ -45,7 +45,7 @@ Feature: Checking a user's token validity
       """
       {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
-    And the response code should be "403"
+    And the response code should be "401"
     
   
   

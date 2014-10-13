@@ -1,36 +1,41 @@
 <?php
 
-namespace Catrobat\ApiBundle\Controller;
+namespace AppBundle\Controller\Api;
 
 use Catrobat\CoreBundle\Services\ElapsedTimeString;
 use Catrobat\CoreBundle\Model\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\CoreBundle\Services\ScreenshotRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class ListProgramsController
+class ListProgramsController extends Controller
 {
-  protected $program_manager;
-  protected $screenshot_repository;
-  protected $elapsed_time;
 
-  public function __construct(ProgramManager $program_manager, ScreenshotRepository $screenshot_repository, ElapsedTimeString $elapsed_time)
-  {
-    $this->program_manager = $program_manager;
-    $this->screenshot_repository = $screenshot_repository;
-    $this->elapsed_time = $elapsed_time;
-  }
-
+  /**
+   * @Route("/api/projects/recent.json", name="catrobat_api_recent_programs", defaults={"_format": "json"})
+   * @Method({"GET"})
+   */
   public function listProgramsAction(Request $request)
   {
     return $this->listSortedPrograms($request, "recent");
   }
 
+  /**
+   * @Route("/api/projects/mostDownloaded.json", name="catrobat_api_most_downloaded_programs", defaults={"_format": "json"})
+   * @Method({"GET"})
+   */
   public function listMostDownloadedProgramsAction(Request $request)
   {
     return $this->listSortedPrograms($request, "downloads");
   }
 
+  /**
+   * @Route("/api/projects/mostViewed.json", name="catrobat_api_most_viewed_programs", defaults={"_format": "json"})
+   * @Method({"GET"})
+   */
   public function listMostViewedProgramsAction(Request $request)
   {
     return $this->listSortedPrograms($request, "views");
@@ -38,17 +43,22 @@ class ListProgramsController
 
   private function listSortedPrograms(Request $request, $sortBy)
   {
+    $program_manager = $this->get("programmanager");
+    $screenshot_repository = $this->get("screenshotrepository");
+    $elapsed_time = $this->get("elapsedtime");
+    
+    
     $retArray = array ();
     $limit = intval($request->query->get('limit', 10));
     $offset = intval($request->query->get('offset', 0));
-    $numbOfTotalProjects = $this->program_manager->getTotalPrograms();
+    $numbOfTotalProjects = $program_manager->getTotalPrograms();
     
     if ($sortBy == "downloads")
-      $programs = $this->program_manager->getMostDownloadedPrograms($limit, $offset);
+      $programs = $program_manager->getMostDownloadedPrograms($limit, $offset);
     else if ($sortBy == "views")
-      $programs = $this->program_manager->getMostViewedPrograms($limit, $offset);
+      $programs = $program_manager->getMostViewedPrograms($limit, $offset);
     else
-      $programs = $this->program_manager->getRecentPrograms($limit, $offset);
+      $programs = $program_manager->getRecentPrograms($limit, $offset);
     
     $retArray['CatrobatProjects'] = array ();
     foreach($programs as $program)
@@ -63,9 +73,9 @@ class ListProgramsController
       $new_program['Views'] = $program->getViews();
       $new_program['Downloads'] = $program->getDownloads();
       $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-      $new_program['UploadedString'] = $this->elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
-      $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
-      $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
+      $new_program['UploadedString'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
+      $new_program['ScreenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
+      $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
       $new_program['ProjectUrl'] = "details/" . $program->getId();
       $new_program['DownloadUrl'] = "download/" . $program->getId() . ".catrobat";
       $retArray['CatrobatProjects'][] = $new_program;

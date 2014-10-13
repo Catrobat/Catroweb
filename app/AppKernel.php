@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Catrobat\WebBundle\CatrobatWebBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Catrobat\ApiBundle\CatrobatApiBundle(),
             new Catrobat\AdminBundle\CatrobatAdminBundle(),
             new Catrobat\TestBundle\CatrobatTestBundle(),
             new Catrobat\CoreBundle\CatrobatCoreBundle(),
@@ -30,8 +29,9 @@ class AppKernel extends Kernel
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
-            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle()
-            //End Sonata--Admin
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            //End Sonata--Admin,
+            new AppBundle\AppBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -12,7 +12,7 @@ services:
 # =========================== Controller ===========================
       catrobat.web.default.controller:
                           class: "%catrobat.web.default.controller.class%"
-                          arguments: ["@templating", "@catrobat.core.model.programmanager"]
+                          arguments: ["@templating", "@programmanager"]
 
       catrobat.web.tutorial.controller:
               class: "%catrobat.web.tutorial.controller.class%"
@@ -22,6 +22,6 @@ services:
 # =========================== TWIG ===========================
       catrobat.twig.program.assets:
               class: Catrobat\WebBundle\Twig\ProgramAssetsExtension
-              arguments: ["@catrobat.core.services.screenshot.repository"]
+              arguments: ["@screenshotrepository"]
               tags:
                   - { name: twig.extension }

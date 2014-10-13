@@ -10,58 +10,58 @@ parameters:
 
 services:
 
-      catrobat.core.model.programrepository:
+      programrepository:
             class: CoreBundle\Entity\ProgramRepository
             factory_service: doctrine.orm.entity_manager
             factory_method: getRepository
             arguments:
                 - "CatrobatCoreBundle:Program"
 
-      catrobat.core.model.rudewordrepository:
+      rudewordrepository:
             class: CoreBundle\Entity\RudeWordsRepository
             factory_service: doctrine.orm.entity_manager
             factory_method: getRepository
             arguments:
                 - "CatrobatCoreBundle:RudeWord"
                 
-      catrobat.core.model.programmanager:
+      programmanager:
             class: Catrobat\CoreBundle\Model\ProgramManager
             arguments: 
-                - "@catrobat.core.services.file.extractor"
-                - "@catrobat.core.services.file.repository"
-                - "@catrobat.core.services.screenshot.repository"
+                - "@fileextractor"
+                - "@filerepository"
+                - "@screenshotrepository"
                 - "@doctrine.orm.entity_manager"
-                - "@catrobat.core.model.programrepository"
+                - "@programrepository"
                 - "@event_dispatcher"
             tags:
             -  { name:  "knp_paginator.injectable" }
 
-      catrobat.core.services.rudewordfilter:
+      rudewordfilter:
               class:        Catrobat\CoreBundle\Services\RudeWordFilter
-              arguments:    ["@catrobat.core.model.rudewordrepository"]
+              arguments:    ["@rudewordrepository"]
 
-      catrobat.core.model.usermanager:
+      usermanager:
             class: Catrobat\CoreBundle\Model\UserManager
             arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
 
-      catrobat.core.services.file.extractor:
+      fileextractor:
               class:        Catrobat\CoreBundle\Services\CatrobatFileExtractor
               arguments:    ["%catrobat.file.extract.dir%"]
 
-      catrobat.core.services.file.repository:
+      filerepository:
               class:        Catrobat\CoreBundle\Services\ProgramFileRepository
               arguments:    ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
 
-      catrobat.core.services.screenshot.repository:
+      screenshotrepository:
               class:        Catrobat\CoreBundle\Services\ScreenshotRepository
               arguments:    ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
               
-      catrobat.core.services.tokengenerator:
+      tokengenerator:
               class:        Catrobat\CoreBundle\Services\TokenGenerator
 
-      catrobat.core.services.time:
+      time:
               class: Catrobat\CoreBundle\Services\Time
 
-      catrobat.core.services.elapsed.time:
+      elapsedtime:
               class: Catrobat\CoreBundle\Services\ElapsedTimeString
-              arguments:    ["@translator","@catrobat.core.services.time"]
+              arguments:    ["@translator","@time"]

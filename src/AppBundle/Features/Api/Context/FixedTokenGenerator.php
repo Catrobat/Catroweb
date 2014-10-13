@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\ApiBundle\Features\Context;
+namespace AppBundle\Features\Api\Context;
 
 use Catrobat\CoreBundle\Services\TokenGenerator;
 

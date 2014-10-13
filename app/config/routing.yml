@@ -1,9 +1,10 @@
-catrobat_admin:
-    resource: "@CatrobatAdminBundle/Resources/config/routing.yml"
+catroweb_app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
     prefix:   /
 
-catrobat_api:
-    resource: "@CatrobatApiBundle/Resources/config/routing.yml"
+catrobat_admin:
+    resource: "@CatrobatAdminBundle/Resources/config/routing.yml"
     prefix:   /
 
 catroweb:

@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -80,7 +81,7 @@ fos_user:
         group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm
 
     service:
-        user_manager: catrobat.core.model.usermanager
+        user_manager: usermanager
 
 # Sonata Configuration
 sonata_block:

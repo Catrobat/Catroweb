@@ -3,17 +3,17 @@ imports:
     
 services:
 
-    catrobat.core.services.tokengenerator.inner:
+    tokengenerator.inner:
               class:        Catrobat\CoreBundle\Services\TokenGenerator
 
-    catrobat.core.services.tokengenerator:
+    tokengenerator:
           class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTokenGenerator
-          arguments: ["@catrobat.core.services.tokengenerator.inner"]
+          arguments: ["@tokengenerator.inner"]
 
 
-    catrobat.core.services.time.inner:
+    time.inner:
               class:        Catrobat\CoreBundle\Services\Time
 
-    catrobat.core.services.time:
+    time:
           class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTime
-          arguments: ["@catrobat.core.services.time.inner"]
+          arguments: ["@time.inner"]

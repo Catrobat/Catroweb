@@ -1,5 +1,5 @@
 <?php
-namespace Catrobat\ApiBundle\Requests;
+namespace AppBundle\Requests;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;

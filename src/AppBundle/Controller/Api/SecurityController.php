@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\ApiBundle\Controller;
+namespace AppBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
@@ -9,34 +9,35 @@ use Catrobat\CoreBundle\Model\UserManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Catrobat\ApiBundle\Requests\CreateUserRequest;
 use Symfony\Component\Translation\Translator;
 use Catrobat\CoreBundle\StatusCode;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Requests\CreateUserRequest;
 
-class SecurityController
+class SecurityController extends Controller
 {
-  protected $user_manager;
-  protected $tokenGenerator;
-  protected $validator;
-  protected $translator;
-
-  public function __construct(UserManager $user_manager, TokenGenerator $tokenGenerator, ValidatorInterface $validator, Translator $translator)
-  {
-    $this->user_manager = $user_manager;
-    $this->tokenGenerator = $tokenGenerator;
-    $this->validator = $validator;
-    $this->translator = $translator;
-  }
-
+  /**
+   * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"})
+   * @Method({"POST"})
+   */
   public function checkTokenAction()
   {
     return JsonResponse::create(array("statusCode" => StatusCode::OK, "answer" => $this->trans("success.token"), "preHeaderMessages" => "  \n"));
   }
 
+  /**
+   * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"})
+   * @Method({"POST"})
+   */
   public function loginOrRegisterAction(Request $request)
   {
+    $userManager = $this->get("usermanager");
+    $tokenGenerator = $this->get("tokengenerator");
+    $validator = $this->get("validator");
+    
     $retArray = array();
-    $userManager = $this->user_manager;
     $username = $request->request->get('registrationUsername');
 
     $user = $userManager->findUserByUsername($username);
@@ -44,7 +45,7 @@ class SecurityController
     if ($user == null)
     {
       $create_request = new CreateUserRequest($request);
-      $violations = $this->validator->validate($create_request);
+      $violations = $validator->validate($create_request);
       foreach ($violations as $violation)
       {
         $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
@@ -66,7 +67,7 @@ class SecurityController
           $user->setEmail($create_request->mail);
           $user->setPlainPassword($create_request->password);
           $user->setEnabled(true);
-          $user->setUploadToken($this->tokenGenerator->generateToken());
+          $user->setUploadToken($tokenGenerator->generateToken());
   
           $userManager->updateUser($user);
           $retArray['statusCode'] = 201;
@@ -96,6 +97,6 @@ class SecurityController
 
   private function trans($message, $parameters = array())
   {
-    return $this->translator->trans($message,$parameters,"catroweb_api");
+    return $this->get("translator")->trans($message,$parameters,"catroweb_api");
   }
 }

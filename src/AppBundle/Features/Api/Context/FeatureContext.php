@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\ApiBundle\Features\Context;
+namespace AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\CoreBundle\Entity\RudeWord;
@@ -247,7 +247,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iAmAValidUser()
   {
-    $user_manager = $this->kernel->getContainer()->get('catrobat.core.model.usermanager');
+    $user_manager = $this->kernel->getContainer()->get('usermanager');
     $user = $user_manager->createUser();
     $user->setUsername("BehatGeneratedName");
     $user->setEmail("dev@pocketcode.org");
@@ -303,7 +303,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function thereAreUsers(TableNode $table)
   {
-    $user_manager = $this->kernel->getContainer()->get('catrobat.core.model.usermanager');
+    $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
     $user = null;
     for($i = 0; $i < count($users); $i ++)
@@ -362,7 +362,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   public function thereAreDownloadablePrograms(TableNode $table)
   {
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $file_repo = $this->kernel->getContainer()->get('catrobat.core.services.file.repository');
+    $file_repo = $this->kernel->getContainer()->get('filerepository');
     $programs = $table->getHash();
     for($i = 0; $i < count($programs); $i ++)
     {
@@ -659,7 +659,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theNextGeneratedTokenWillBe($token)
   {
-    $token_generator = $this->kernel->getContainer()->get("catrobat.core.services.tokengenerator");
+    $token_generator = $this->kernel->getContainer()->get("tokengenerator");
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
@@ -669,7 +669,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   public function theCurrentTimeIs($time)
   {
     $date = new \DateTime($time, new \DateTimeZone('UTC'));
-    $time_service = $this->kernel->getContainer()->get("catrobat.core.services.time");
+    $time_service = $this->kernel->getContainer()->get("time");
     $time_service->setTime(new FixedTime($date->getTimestamp()));
   }
 

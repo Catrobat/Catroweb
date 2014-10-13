@@ -15,7 +15,7 @@ services:
 
       catrowebadmin.command.import:
               class: Catrobat\AdminBundle\Command\ProgramImportCommand
-              arguments: ["@catrowebadmin.filesystem","@catrobat.core.model.usermanager","@catrobat.core.model.programmanager"]
+              arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager"]
               tags:
                 -  { name: console.command }
       catrowebadmin.command.refresh:

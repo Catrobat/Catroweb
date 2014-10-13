@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\ApiBundle\Controller;
+namespace AppBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
@@ -13,26 +13,24 @@ use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\CoreBundle\StatusCode;
 use Symfony\Component\Translation\Translator;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class UploadController
+class UploadController extends Controller
 {
-  protected $user_manager;
-  protected $context;
-  protected $program_manager;
-  protected $tokenGenerator;
-  protected $translator;
-
-  public function __construct(UserManager $user_manager, SecurityContext $context, ProgramManager $program_manager, TokenGenerator $tokenGenerator, Translator $translator)
-  {
-    $this->user_manager = $user_manager;
-    $this->context = $context;
-    $this->program_manager = $program_manager;
-    $this->tokenGenerator = $tokenGenerator;
-    $this->translator = $translator;
-  }
-
+  
+  /**
+   * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"})
+   * @Method({"POST"})
+   */
   public function uploadAction(Request $request)
   {
+    $user_manager = $this->get("usermanager");
+    $context = $this->get("security.context");
+    $program_manager = $this->get("programmanager");
+    $tokenGenerator = $this->get("tokengenerator");
+    
     $response = array();
     if ($request->files->count() != 1)
     {
@@ -56,12 +54,12 @@ class UploadController
       {
         try
         {
-          $add_program_request = new AddProgramRequest($this->context->getToken()->getUser(), $file);
+          $add_program_request = new AddProgramRequest($context->getToken()->getUser(), $file);
   
-          $id = $this->program_manager->addProgram($add_program_request)->getId();
-          $user = $this->context->getToken()->getUser();
-          $user->setToken($this->tokenGenerator->generateToken());
-          $this->user_manager->updateUser($user);
+          $id = $program_manager->addProgram($add_program_request)->getId();
+          $user = $context->getToken()->getUser();
+          $user->setToken($tokenGenerator->generateToken());
+          $user_manager->updateUser($user);
   
           $response["projectId"] = $id;
           $response["statusCode"] = StatusCode::OK;
@@ -107,6 +105,6 @@ class UploadController
 
   private function trans($message, $parameters = array())
   {
-    return $this->translator->trans($message,$parameters,"catroweb_api");
+    return  $this->get("translator")->trans($message,$parameters,"catroweb_api");
   }
 }

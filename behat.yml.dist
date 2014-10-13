@@ -25,9 +25,12 @@ default:
     suites:
         api:
             type: symfony_bundle
-            bundle: 'CatrobatApiBundle'
+            bundle: 'AppBundle'
+            features:
+            paths:
+                - "%paths.base%/src/AppBundle/Features/Api/"
             contexts:
-              - Catrobat\ApiBundle\Features\Context\FeatureContext:
+              - AppBundle\Features\Api\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
         web:
             type: symfony_bundle
