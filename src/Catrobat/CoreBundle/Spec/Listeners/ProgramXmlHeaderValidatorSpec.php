@@ -20,7 +20,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
   {
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
     $file->getProgramXmlProperties()->willReturn($xml);
-    $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldNotThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -31,7 +31,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
     unset($xml->header);
     $file->getProgramXmlProperties()->willReturn($xml);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -42,7 +42,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
     unset($xml->header->applicationName);
     $file->getProgramXmlProperties()->willReturn($xml);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -53,7 +53,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
     unset($xml->header->programName);
     $file->getProgramXmlProperties()->willReturn($xml);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -64,6 +64,6 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
     unset($xml->header->description);
     $file->getProgramXmlProperties()->willReturn($xml);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 }

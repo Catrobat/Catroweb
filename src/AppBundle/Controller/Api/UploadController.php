@@ -9,7 +9,7 @@ use Catrobat\CoreBundle\Model\UserManager;
 use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\StatusCode;
 use Symfony\Component\Translation\Translator;

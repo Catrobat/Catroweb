@@ -19,7 +19,7 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
     {
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/base");
       $file->getProgramXmlProperties()->willReturn(simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml"));
-      $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldNotThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**
@@ -30,7 +30,7 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/program_with_extra_image");
       
       $file->getProgramXmlProperties()->willReturn(simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/program_with_extra_image/code.xml"));
-      $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**
@@ -41,6 +41,6 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/program_with_missing_image");
     
       $file->getProgramXmlProperties()->willReturn(simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/program_with_missing_image/code.xml"));
-      $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
 }

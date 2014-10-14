@@ -29,7 +29,7 @@ class ProgramFileRepositorySpec extends ObjectBehavior
     
     function it_throws_an_exception_if_directory_is_not_found()
     {
-      $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array(__DIR__ . "/invalid_directory/", ""));
+      $this->shouldThrow('AppBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array(__DIR__ . "/invalid_directory/", ""));
     }
     
     function it_stores_a_file_to_the_given_directory()

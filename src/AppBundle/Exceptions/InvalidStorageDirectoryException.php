@@ -1,5 +1,5 @@
 <?php
-namespace Catrobat\CoreBundle\Exceptions;
+namespace AppBundle\Exceptions;
 
 class InvalidStorageDirectoryException extends \RuntimeException
 {

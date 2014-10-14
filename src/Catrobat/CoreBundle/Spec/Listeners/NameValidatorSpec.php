@@ -30,7 +30,7 @@ class NameValidatorSpec extends ObjectBehavior
   function it_makes_sure_the_given_program_name_is_valid($file)
   {
     $file->getName()->willReturn("Jhon Doe");
-    $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldNotThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
 
@@ -40,7 +40,7 @@ class NameValidatorSpec extends ObjectBehavior
   function it_throws_an_exception_if_the_name_is_null($file)
   {
     $file->getName()->willReturn(null);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -49,7 +49,7 @@ class NameValidatorSpec extends ObjectBehavior
   function it_throws_an_exception_if_the_name_is_empty($file)
   {
     $file->getName()->willReturn("");
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -63,7 +63,7 @@ class NameValidatorSpec extends ObjectBehavior
       $name = $name . "a";
     }
     $file->getName()->willReturn($name);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -73,7 +73,7 @@ class NameValidatorSpec extends ObjectBehavior
   {
     $file->getName()->willReturn("rudeword");
     $rudewordfilter->containsRudeWord(Argument::any())->willReturn(true);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
     
 }

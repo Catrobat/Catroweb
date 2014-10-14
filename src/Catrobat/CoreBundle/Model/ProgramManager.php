@@ -3,7 +3,7 @@
 namespace Catrobat\CoreBundle\Model;
 
 use AppBundle\Events\InvalidProgramUploadedEvent;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Catrobat\CoreBundle\Entity\Program;
 use Knp\Component\Pager\Paginator;

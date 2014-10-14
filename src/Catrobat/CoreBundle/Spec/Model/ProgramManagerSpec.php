@@ -2,7 +2,7 @@
 
 namespace Catrobat\CoreBundle\Spec\Model;
 
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Services\CatrobatFileExtractor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -25,7 +25,7 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param \Catrobat\CoreBundle\Model\ExtractedCatrobatFile $extracted_file          
    * @param \Catrobat\CoreBundle\Entity\Program $inserted_program
    * @param \Symfony\Component\EventDispatcher\Event $event
-   * @param \Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException $validation_exception
+   * @param \AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception
    */
   
   function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_program, $event)
@@ -61,7 +61,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $validation_exception = new InvalidCatrobatFileException("500");
     $event_dispatcher->dispatch("catrobat.program.before",Argument::type('AppBundle\Events\ProgramBeforeInsertEvent'))->willThrow($validation_exception)->shouldBeCalled();
     
-    $this->shouldThrow('\Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('addProgram',array($request));
+    $this->shouldThrow('\AppBundle\Exceptions\InvalidCatrobatFileException')->during('addProgram',array($request));
     
     $event_dispatcher->dispatch("catrobat.program.invalid.upload",Argument::type('AppBundle\Events\InvalidProgramUploadedEvent'))->shouldHaveBeenCalled();
   }

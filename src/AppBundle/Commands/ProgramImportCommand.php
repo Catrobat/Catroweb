@@ -13,7 +13,7 @@ use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Model\UserManager;
 use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 
 class ProgramImportCommand extends Command
 {

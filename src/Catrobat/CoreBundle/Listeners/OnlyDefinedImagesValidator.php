@@ -4,7 +4,7 @@ namespace Catrobat\CoreBundle\Listeners;
 
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use AppBundle\Events\ProgramBeforeInsertEvent;
 use AppBundle\StatusCode;
 

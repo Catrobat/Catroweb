@@ -2,7 +2,7 @@
 
 namespace Catrobat\CoreBundle\Services;
 
-use Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException;
+use AppBundle\Exceptions\InvalidStorageDirectoryException;
 
 class ScreenshotRepository
 {

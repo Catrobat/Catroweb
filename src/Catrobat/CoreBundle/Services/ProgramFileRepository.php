@@ -3,7 +3,7 @@ namespace Catrobat\CoreBundle\Services;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
-use Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException;
+use AppBundle\Exceptions\InvalidStorageDirectoryException;
 
 class ProgramFileRepository
 {

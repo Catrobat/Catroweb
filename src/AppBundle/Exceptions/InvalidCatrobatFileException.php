@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CoreBundle\Exceptions;
+namespace AppBundle\Exceptions;
 
 class InvalidCatrobatFileException extends \RuntimeException
 {

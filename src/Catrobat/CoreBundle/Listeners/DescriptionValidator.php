@@ -3,7 +3,7 @@
 namespace Catrobat\CoreBundle\Listeners;
 
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\CoreBundle\Services\RudeWordFilter;
 use AppBundle\StatusCode;

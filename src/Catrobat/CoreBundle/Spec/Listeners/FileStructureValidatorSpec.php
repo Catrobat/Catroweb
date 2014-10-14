@@ -18,7 +18,7 @@ class FileStructureValidatorSpec extends ObjectBehavior
     function it_makes_sure_the_program_has_a_valid_file_structure($file)
     {
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/base");
-      $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldNotThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**
@@ -27,7 +27,7 @@ class FileStructureValidatorSpec extends ObjectBehavior
     function it_throws_an_exception_if_there_are_too_many_files($file)
     {
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/program_with_too_many_files");
-      $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
     
     /**
@@ -36,6 +36,6 @@ class FileStructureValidatorSpec extends ObjectBehavior
     function it_throws_an_exception_if_there_are_too_many_folders($file)
     {
       $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__."/program_with_too_many_folders");
-      $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
 }

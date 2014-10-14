@@ -32,7 +32,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
     $description = $description . "a";
     }
     $file->getDescription()->willReturn($description);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -41,7 +41,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
   function it_throws_nothing_if_a_normal_description_is_validated($file)
   {
     $file->getDescription()->willReturn("Hello Text.");
-    $this->shouldNotThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldNotThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
   /**
@@ -51,6 +51,6 @@ class DescriptionValidatorSpec extends ObjectBehavior
   {
     $file->getDescription()->willReturn("rudeword");
     $rudewordfilter->containsRudeWord(Argument::any())->willReturn(true);
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 }

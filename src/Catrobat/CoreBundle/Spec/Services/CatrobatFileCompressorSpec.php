@@ -16,7 +16,7 @@ class CatrobatFileCompressorSpec extends ObjectBehavior
   
   function it_throws_an_exception_if_given_an_invalid_compress_directory()
   {
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException')->duringCompress(__DIR__ . "/invalid_directory/", __SPEC_CACHE_DIR__ . "/base/", "archivename");
+    $this->shouldThrow('AppBundle\Exceptions\InvalidStorageDirectoryException')->duringCompress(__DIR__ . "/invalid_directory/", __SPEC_CACHE_DIR__ . "/base/", "archivename");
   }
   
   function it_compress_a_valid_directory()

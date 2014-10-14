@@ -66,12 +66,12 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
   
   function it_throws_an_exception_when_code_xml_is_missing()
   {
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_missing_code_xml/"));
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_missing_code_xml/"));
   }
 
   function it_throws_an_exception_when_code_xml_is_invalid()
   {
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_invalid_code_xml/")); 
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_invalid_code_xml/")); 
   }
   
 }

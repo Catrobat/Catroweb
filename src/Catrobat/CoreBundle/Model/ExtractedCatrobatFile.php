@@ -1,7 +1,7 @@
 <?php
 namespace Catrobat\CoreBundle\Model;
 
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use AppBundle\StatusCode;
 
 class ExtractedCatrobatFile

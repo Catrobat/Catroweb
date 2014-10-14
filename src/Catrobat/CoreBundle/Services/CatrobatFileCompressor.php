@@ -4,9 +4,9 @@ namespace Catrobat\CoreBundle\Services;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
-use Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException;
+use AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Finder\Finder;
 
 class CatrobatFileCompressor

@@ -22,7 +22,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
 
   function it_throws_an_exception_if_given_an_valid_extraction_directory()
   {
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array (
+    $this->shouldThrow('AppBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array (
         __DIR__ . "/invalid_directory/" 
     ));
   }
@@ -37,7 +37,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
   function it_throws_an_exception_while_extracting_an_invalid_file()
   {
     $invalid_catrobat_file = new File(__SPEC_FIXTURES_DIR__ . "/invalid_archive.catrobat");
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->duringExtract($invalid_catrobat_file);
+    $this->shouldThrow('AppBundle\Exceptions\InvalidCatrobatFileException')->duringExtract($invalid_catrobat_file);
   }
 
 }

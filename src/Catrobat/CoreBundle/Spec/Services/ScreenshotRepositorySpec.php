@@ -35,12 +35,12 @@ class ScreenshotRepositorySpec extends ObjectBehavior
 
   function it_throws_an_exception_if_given_an_valid_screenshot_directory()
   {
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array(__DIR__ . "/invalid_directory/", "", $this->thumbnail_dir, ""));
+    $this->shouldThrow('AppBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array(__DIR__ . "/invalid_directory/", "", $this->thumbnail_dir, ""));
   }
 
   function it_throws_an_exception_if_given_an_valid_thumbnail_directory()
   {
-    $this->shouldThrow('Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array($this->screenshot_dir, "", __DIR__ . "/invalid_directory/", ""));
+    $this->shouldThrow('AppBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array($this->screenshot_dir, "", __DIR__ . "/invalid_directory/", ""));
   }
   
   function it_stores_a_screenshot()

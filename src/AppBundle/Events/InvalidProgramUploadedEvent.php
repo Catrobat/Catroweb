@@ -4,7 +4,7 @@ namespace AppBundle\Events;
 use Symfony\Component\EventDispatcher\Event;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\HttpFoundation\File\File;
-use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
+use AppBundle\Exceptions\InvalidCatrobatFileException;
 
 class InvalidProgramUploadedEvent extends Event
 {
