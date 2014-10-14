@@ -2,15 +2,15 @@
 
 namespace Catrobat\CoreBundle\Model;
 
-use Catrobat\CoreBundle\Events\InvalidProgramUploadedEvent;
+use AppBundle\Events\InvalidProgramUploadedEvent;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
 use Catrobat\CoreBundle\Entity\Program;
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent;
-use Catrobat\CoreBundle\Events\ProgramInsertEvent;
+use AppBundle\Events\ProgramBeforeInsertEvent;
+use AppBundle\Events\ProgramInsertEvent;
 
 class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface
 {

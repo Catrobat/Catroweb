@@ -53,23 +53,23 @@ class ProgramManagerSpec extends ObjectBehavior
   function it_fires_an_event_before_inserting_a_program($request, $event_dispatcher)
   {
     $this->addProgram($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Program');
-    $event_dispatcher->dispatch("catrobat.program.before",Argument::type('Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent'))->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch("catrobat.program.before",Argument::type('AppBundle\Events\ProgramBeforeInsertEvent'))->shouldHaveBeenCalled();
   }
 
   function it_fires_an_event_when_the_program_is_invalid($request, $event_dispatcher)
   {
     $validation_exception = new InvalidCatrobatFileException("500");
-    $event_dispatcher->dispatch("catrobat.program.before",Argument::type('Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent'))->willThrow($validation_exception)->shouldBeCalled();
+    $event_dispatcher->dispatch("catrobat.program.before",Argument::type('AppBundle\Events\ProgramBeforeInsertEvent'))->willThrow($validation_exception)->shouldBeCalled();
     
     $this->shouldThrow('\Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException')->during('addProgram',array($request));
     
-    $event_dispatcher->dispatch("catrobat.program.invalid.upload",Argument::type('Catrobat\CoreBundle\Events\InvalidProgramUploadedEvent'))->shouldHaveBeenCalled();
+    $event_dispatcher->dispatch("catrobat.program.invalid.upload",Argument::type('AppBundle\Events\InvalidProgramUploadedEvent'))->shouldHaveBeenCalled();
   }
   
    function it_fires_an_event_when_the_program_is_stored($request, $event_dispatcher)
    {
      $this->addProgram($request)->shouldHaveType('Catrobat\CoreBundle\Entity\Program');
-     $event_dispatcher->dispatch("catrobat.program.successful.upload",Argument::type('Catrobat\CoreBundle\Events\ProgramInsertEvent'))->shouldHaveBeenCalled();
+     $event_dispatcher->dispatch("catrobat.program.successful.upload",Argument::type('AppBundle\Events\ProgramInsertEvent'))->shouldHaveBeenCalled();
    }
   
 }

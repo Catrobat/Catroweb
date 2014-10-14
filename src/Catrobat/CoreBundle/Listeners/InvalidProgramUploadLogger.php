@@ -1,7 +1,7 @@
 <?php
 namespace Catrobat\CoreBundle\Listeners;
 
-use Catrobat\CoreBundle\Events\InvalidProgramUploadedEvent;
+use AppBundle\Events\InvalidProgramUploadedEvent;
 use Monolog\Logger;
 
 class InvalidProgramUploadLogger
