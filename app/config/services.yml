@@ -29,7 +29,7 @@ services:
             - "CatrobatCoreBundle:RudeWord"
 
     programmanager:
-        class: Catrobat\CoreBundle\Model\ProgramManager
+        class: AppBundle\Model\ProgramManager
         arguments: 
             - "@fileextractor"
             - "@filerepository"
@@ -41,31 +41,31 @@ services:
             -  { name:  "knp_paginator.injectable" }
 
     rudewordfilter:
-        class: Catrobat\CoreBundle\Services\RudeWordFilter
+        class: AppBundle\Services\RudeWordFilter
         arguments: ["@rudewordrepository"]
 
     usermanager:
-        class: Catrobat\CoreBundle\Model\UserManager
+        class: AppBundle\Model\UserManager
         arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
 
     fileextractor:
-        class: Catrobat\CoreBundle\Services\CatrobatFileExtractor
+        class: AppBundle\Services\CatrobatFileExtractor
         arguments: ["%catrobat.file.extract.dir%"]
 
     filerepository:
-        class: Catrobat\CoreBundle\Services\ProgramFileRepository
+        class: AppBundle\Services\ProgramFileRepository
         arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
 
     screenshotrepository:
-        class: Catrobat\CoreBundle\Services\ScreenshotRepository
+        class: AppBundle\Services\ScreenshotRepository
         arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
               
     tokengenerator:
-        class: Catrobat\CoreBundle\Services\TokenGenerator
+        class: AppBundle\Services\TokenGenerator
 
     time:
-        class: Catrobat\CoreBundle\Services\Time
+        class: AppBundle\Services\Time
 
     elapsedtime:
-        class: Catrobat\CoreBundle\Services\ElapsedTimeString
+        class: AppBundle\Services\ElapsedTimeString
         arguments: ["@translator","@time"]

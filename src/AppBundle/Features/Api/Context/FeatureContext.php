@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
-use Catrobat\CoreBundle\Services\TokenGenerator;
+use AppBundle\Services\TokenGenerator;
 use Symfony\Bundle\FrameworkBundle\Client;
-use Catrobat\CoreBundle\Services\CatrobatFileCompressor;
+use AppBundle\Services\CatrobatFileCompressor;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 
 //

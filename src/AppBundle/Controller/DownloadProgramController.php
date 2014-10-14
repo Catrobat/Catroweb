@@ -3,10 +3,10 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Catrobat\CoreBundle\Model\ProgramManager;
+use AppBundle\Model\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Catrobat\CoreBundle\Services\ProgramFileRepository;
+use AppBundle\Services\ProgramFileRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

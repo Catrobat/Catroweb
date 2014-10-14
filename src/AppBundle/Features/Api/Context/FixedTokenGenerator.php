@@ -2,13 +2,13 @@
 
 namespace AppBundle\Features\Api\Context;
 
-use Catrobat\CoreBundle\Services\TokenGenerator;
+use AppBundle\Services\TokenGenerator;
 
 class FixedTokenGenerator extends TokenGenerator
 {
   private $token;
   /*
-   * (non-PHPdoc) @see \Catrobat\CoreBundle\Services\TokenGenerator::__construct()
+   * (non-PHPdoc) @see \AppBundle\Services\TokenGenerator::__construct()
    */
   public function __construct($token)
   {
@@ -16,7 +16,7 @@ class FixedTokenGenerator extends TokenGenerator
   }
   
   /*
-   * (non-PHPdoc) @see \Catrobat\CoreBundle\Services\TokenGenerator::generateToken()
+   * (non-PHPdoc) @see \AppBundle\Services\TokenGenerator::generateToken()
    */
   public function generateToken()
   {

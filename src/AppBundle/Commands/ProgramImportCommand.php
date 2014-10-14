@@ -9,9 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Catrobat\CoreBundle\Model\ProgramManager;
-use Catrobat\CoreBundle\Model\UserManager;
-use Catrobat\CoreBundle\Model\Requests\AddProgramRequest;
+use AppBundle\Model\ProgramManager;
+use AppBundle\Model\UserManager;
+use AppBundle\Model\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Exceptions\InvalidCatrobatFileException;
 

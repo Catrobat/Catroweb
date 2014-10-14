@@ -2,7 +2,7 @@
 namespace AppBundle\Events;
 
 use Symfony\Component\EventDispatcher\Event;
-use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
+use AppBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Exceptions\InvalidCatrobatFileException;
 

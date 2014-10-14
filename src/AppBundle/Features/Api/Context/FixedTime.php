@@ -9,7 +9,7 @@
 namespace AppBundle\Features\Api\Context;
 
 
-use Catrobat\CoreBundle\Services\Time;
+use AppBundle\Services\Time;
 
 class FixedTime extends Time
 {

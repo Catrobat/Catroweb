@@ -2,10 +2,10 @@
 
 namespace AppBundle\Controller\Api;
 
-use Catrobat\CoreBundle\Model\ProgramManager;
+use AppBundle\Model\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Catrobat\CoreBundle\Services\ElapsedTimeString;
+use AppBundle\Services\ElapsedTimeString;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

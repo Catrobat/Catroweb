@@ -14,22 +14,22 @@ services:
         public: false
 
     catrobat.test.extractor:
-        class: Catrobat\CoreBundle\Services\CatrobatFileExtractor
+        class: AppBundle\Services\CatrobatFileExtractor
         arguments: ["%catrobat.test.directory.target%"]
 
     catrobat.test.compressor:
-        class: Catrobat\CoreBundle\Services\CatrobatFileCompressor
+        class: AppBundle\Services\CatrobatFileCompressor
 
     tokengenerator.inner:
-        class: Catrobat\CoreBundle\Services\TokenGenerator
+        class: AppBundle\Services\TokenGenerator
 
     tokengenerator:
-        class: Catrobat\CoreBundle\Services\TestEnv\ProxyTokenGenerator
+        class: AppBundle\Services\TestEnv\ProxyTokenGenerator
         arguments: ["@tokengenerator.inner"]
 
     time.inner:
-        class:        Catrobat\CoreBundle\Services\Time
+        class:        AppBundle\Services\Time
 
     time:
-        class:  Catrobat\CoreBundle\Services\TestEnv\ProxyTime
+        class:  AppBundle\Services\TestEnv\ProxyTime
         arguments: ["@time.inner"]
