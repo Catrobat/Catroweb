@@ -4,7 +4,7 @@ services:
               public: false
 
       catrowebadmin.command.init:
-              class: AppBundle\Commands\InitDirectoriesCommand
+              class: Catrobat\AppBundle\Commands\InitDirectoriesCommand
               arguments: ["@catrowebadmin.filesystem","%catrobat.file.storage.dir%"]
               calls:
                 - [setProgramfileDirectory, ["%catrobat.file.storage.dir%"]]
@@ -15,13 +15,13 @@ services:
                 -  { name: console.command }
 
       catrowebadmin.command.import:
-              class: AppBundle\Commands\ProgramImportCommand
+              class: Catrobat\AppBundle\Commands\ProgramImportCommand
               arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager"]
               tags:
                 -  { name: console.command }
 
       catrowebadmin.command.refresh:
-              class: AppBundle\Commands\RefreshCommand
+              class: Catrobat\AppBundle\Commands\RefreshCommand
               arguments: ["@catrowebadmin.filesystem"]
               tags:
                 -  { name: console.command }

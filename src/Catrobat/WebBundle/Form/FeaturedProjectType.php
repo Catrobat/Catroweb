@@ -19,7 +19,7 @@ class FeaturedProgramType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Catrobat\CoreBundle\Entity\FeaturedProgram'
+            'data_class' => 'Catrobat\AppBundle\Entity\FeaturedProgram'
         ));
     }
 

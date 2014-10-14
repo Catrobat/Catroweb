@@ -4,7 +4,7 @@ parameters:
       
 services:
     catrobat.test.command.generatetestdata:
-        class: AppBundle\Commands\GenerateTestDataCommand
+        class: Catrobat\AppBundle\Commands\GenerateTestDataCommand
         arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
         tags:
             -  { name: console.command }
@@ -14,22 +14,22 @@ services:
         public: false
 
     catrobat.test.extractor:
-        class: AppBundle\Services\CatrobatFileExtractor
+        class: Catrobat\AppBundle\Services\CatrobatFileExtractor
         arguments: ["%catrobat.test.directory.target%"]
 
     catrobat.test.compressor:
-        class: AppBundle\Services\CatrobatFileCompressor
+        class: Catrobat\AppBundle\Services\CatrobatFileCompressor
 
     tokengenerator.inner:
-        class: AppBundle\Services\TokenGenerator
+        class: Catrobat\AppBundle\Services\TokenGenerator
 
     tokengenerator:
-        class: AppBundle\Services\TestEnv\ProxyTokenGenerator
+        class: Catrobat\AppBundle\Services\TestEnv\ProxyTokenGenerator
         arguments: ["@tokengenerator.inner"]
 
     time.inner:
-        class:        AppBundle\Services\Time
+        class:        Catrobat\AppBundle\Services\Time
 
     time:
-        class:  AppBundle\Services\TestEnv\ProxyTime
+        class:  Catrobat\AppBundle\Services\TestEnv\ProxyTime
         arguments: ["@time.inner"]

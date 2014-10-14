@@ -2,7 +2,7 @@
 
 namespace Catrobat\WebBundle\Twig;
 
-use AppBundle\Services\ScreenshotRepository;
+use Catrobat\AppBundle\Services\ScreenshotRepository;
 
 class ProgramAssetsExtension extends \Twig_Extension
 {

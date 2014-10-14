@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new Catrobat\WebBundle\CatrobatWebBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Catrobat\TestBundle\CatrobatTestBundle(),
-            new Catrobat\CoreBundle\CatrobatCoreBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             //Begin Sonata--Admin
             new Sonata\AdminBundle\SonataAdminBundle(),
@@ -30,7 +29,7 @@ class AppKernel extends Kernel
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             //End Sonata--Admin,
-            new AppBundle\AppBundle()
+            new Catrobat\AppBundle\AppBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

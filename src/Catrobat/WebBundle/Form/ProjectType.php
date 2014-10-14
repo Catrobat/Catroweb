@@ -24,7 +24,7 @@ class ProgramType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Catrobat\CoreBundle\Entity\Program'
+            'data_class' => 'Catrobat\AppBundle\Entity\Program'
         ));
     }
 
