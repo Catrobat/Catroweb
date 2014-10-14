@@ -3,11 +3,7 @@ parameters:
       catrobat.web.tutorial.controller.class: Catrobat\WebBundle\Controller\TutorialController
 
 services:
-# =========================== Kernel Listener ===========================
-      catrowebbundle.listener.request:
-              class: Catrobat\WebBundle\EventListener\LanguageListener
-              tags:
-                  - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
 
 # =========================== Controller ===========================
       catrobat.web.default.controller:
@@ -19,9 +15,4 @@ services:
               arguments: ["@templating"]
 
               
-# =========================== TWIG ===========================
-      catrobat.twig.program.assets:
-              class: Catrobat\WebBundle\Twig\ProgramAssetsExtension
-              arguments: ["@screenshotrepository"]
-              tags:
-                  - { name: twig.extension }
+

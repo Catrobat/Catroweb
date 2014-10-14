@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\WebBundle\EventListener;
+namespace Catrobat\AppBundle\Listeners;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
