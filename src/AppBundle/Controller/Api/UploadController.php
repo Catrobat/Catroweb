@@ -11,7 +11,7 @@ use Catrobat\CoreBundle\Model\ProgramManager;
 use Catrobat\CoreBundle\Services\TokenGenerator;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Catrobat\CoreBundle\StatusCode;
+use AppBundle\StatusCode;
 use Symfony\Component\Translation\Translator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

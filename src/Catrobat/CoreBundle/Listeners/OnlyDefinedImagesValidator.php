@@ -6,7 +6,7 @@ use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent;
-use Catrobat\CoreBundle\StatusCode;
+use AppBundle\StatusCode;
 
 class OnlyDefinedImagesValidator
 {

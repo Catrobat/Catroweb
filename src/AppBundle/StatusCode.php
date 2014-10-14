@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\CoreBundle;
+namespace AppBundle;
 
 class StatusCode
 {

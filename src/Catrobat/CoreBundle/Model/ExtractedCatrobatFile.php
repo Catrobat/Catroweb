@@ -2,7 +2,7 @@
 namespace Catrobat\CoreBundle\Model;
 
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\CoreBundle\StatusCode;
+use AppBundle\StatusCode;
 
 class ExtractedCatrobatFile
 {

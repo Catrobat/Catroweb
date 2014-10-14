@@ -6,7 +6,7 @@ use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\CoreBundle\Services\RudeWordFilter;
-use Catrobat\CoreBundle\StatusCode;
+use AppBundle\StatusCode;
 
 class NameValidator
 {

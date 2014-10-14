@@ -7,7 +7,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Catrobat\CoreBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\CoreBundle\Model\ExtractedCatrobatFile;
 use Catrobat\CoreBundle\Exceptions\InvalidStorageDirectoryException;
-use Catrobat\CoreBundle\StatusCode;
+use AppBundle\StatusCode;
 
 class CatrobatFileExtractor
 {
