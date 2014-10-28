@@ -1,0 +1,29 @@
+{% extends 'CatrobatWebBundle:Default:base.html.twig' %}
+
+{% block head %}
+  {% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/search.less' filter='cssrewrite,lessphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+  <div id="search-results">
+    <h1>{{ "search.results"|trans({}, "catroweb_web") }}</h1>
+    <div id="search-results-text">
+      {{ "Your Search Returned Results"|trans({'%count%': '<span></span>'}, "catroweb_web")|raw }}
+    </div>
+    <div class="programs"></div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script>
+    var search = new ProgramLoader('#search-results', '{{ path('catrobat_api_search_programs') }}');
+    search.initSearch('{{ q }}');
+
+    $('.input-search').val('{{ q }}');
+  </script>
+{% endblock %}

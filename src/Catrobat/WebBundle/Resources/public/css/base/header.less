@@ -2,6 +2,7 @@
 
 @nav-font-size: @default-font-size + 4;
 @searchbar-font-size: @default-font-size + 2;
+@logo-width: 300px;
 
 #header-logo {
   padding-top: 40px;
@@ -22,7 +23,7 @@ header {
     }
 
     #logo img {
-      width: 300px;
+      width: @logo-width;
       min-width: 150px;
     }
 
@@ -89,7 +90,7 @@ header {
       color: #fff;
       padding: 0 !important;
       white-space: nowrap;
-      max-width: 100px;
+      max-width: 85px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -172,3 +173,17 @@ header {
     }
   }
 }
+
+.reponsive-logo-h1 (@i) when (@i > 0) {
+  .reponsive-logo-h1(@i - 1);
+  @media (max-width: @responsive-width-tablet - 300 - @i*20) {
+    #logo img {
+      width: @logo-width - @i*20 !important;
+    }
+    h1 {
+      font-size: @font-size-h1 - @i*2 !important;
+    }
+  }
+}
+.reponsive-logo-h1(0) {};
+.reponsive-logo-h1(6);

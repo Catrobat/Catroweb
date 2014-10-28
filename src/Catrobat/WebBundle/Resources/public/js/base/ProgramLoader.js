@@ -16,18 +16,34 @@ var ProgramLoader = function (container, url) {
         $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
         return;
       }
-
-      $(self.container).append('' +
-        '<div class="button-show-placeholder">' +
-          '<div class="button-show-more img-load-more"></div>' +
-          '<div class="button-show-ajax img-load-ajax"></div>' +
-        '</div>');
-
-      self.loadProgramsIntoContainer(data);
-      self.showMoreListener();
-      self.setDefaultVisibility();
-      $(window).resize(function() { self.setDefaultVisibility(); });
+      self.setup(data);
     });
+  };
+
+  self.initSearch = function(query) {
+    $.get(self.url, { q: query, limit: self.download_limit*2, offset: self.loaded }, function(data) {
+      if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
+        $('#search-results-text').addClass('no-results');
+        $('#search-results-text').find('span').text(0);
+        return;
+      }
+      $('#search-results-text').find('span').text(data.CatrobatProjects.length);
+      self.setup(data);
+      self.showMorePrograms();
+    });
+  };
+
+  self.setup = function(data) {
+    $(self.container).append('' +
+      '<div class="button-show-placeholder">' +
+      '<div class="button-show-more img-load-more"></div>' +
+      '<div class="button-show-ajax img-load-ajax"></div>' +
+      '</div>');
+
+    self.loadProgramsIntoContainer(data);
+    self.showMoreListener();
+    self.setDefaultVisibility();
+    $(window).resize(function() { self.setDefaultVisibility(); });
   };
 
   self.loadProgramsIntoContainer = function(data) {
@@ -38,6 +54,7 @@ var ProgramLoader = function (container, url) {
       // Extend this for new containers...
       switch(self.container) {
         case '#newest':
+        case '#search-results':
           div = '<div><div class="img-time-small"></div>' + programs[i].UploadedString + '</div>';
           break;
         case '#mostDownloaded':
