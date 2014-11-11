@@ -1,10 +1,10 @@
 ---
 programs:
   featured: Featured
-  newest: Newest program
+  newest: Newest programs
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: Sa najviše pregleda
+    downloaded: Sa najviše preuzimanja
 licenseToPlay:
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
@@ -18,7 +18,7 @@ licenseToPlay:
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
 termsOfUse:
-  title: 利用規約
+  title: Terms of Use
   headline: Welcome to the Catrobat Community!
   text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
@@ -55,3 +55,50 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
+  results: Search Results
+Your Search Returned Results: 'Your search returned %count% results'
+Search: ""
+Search...: ""
+My Profile: ""
+Logout: ""
+error:
+  username:
+    blank: Korisničko ime ne smije biti prazno
+  password:
+    blank: The password is missing.
+    short: 'Lozinka mora imati barem {{ limit }} znakova.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: The country is missing.
+    invalid: Država nije ispravna
+  email:
+    blank: e-mail ne smije biti prazan
+    invalid: E-mail adresa nije ispravna
+    exists: This email address already exists.
+  login: The password or username was incorrect.
+  post-data: POST-Data not correct or missing!
+  checksum:
+    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
+    invalid: invalid checksum
+  xml:
+    invalid: xml kod neispravan
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: neočekivana datoteka pronađena
+    invalid: neispravna datoteka
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: nepoznata greška
+  token: 'Authentication of device failed: invalid auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+success:
+  registration: Registracija uspješna!
+  token: ok
+  upload: Your project was uploaded successfully!
+time:
+  minutes.ago: '{0} < 1 prije manje od minute |{1} prije 1 minute |]1,Inf] prije %count% minuta'
+  hours.ago: '{1} prije sat vremena|]1,Inf] prije %count% sati'
+  days.ago: '{1} prije jedan dan|]1,Inf] prije %count% dana'
+  months.ago: '{1} prije jedan mjesec|]1,Inf] prije %count% mjeseci'
+  years.ago: '{1} prije jednu godinu|]1,Inf] prije više od godinu dana'

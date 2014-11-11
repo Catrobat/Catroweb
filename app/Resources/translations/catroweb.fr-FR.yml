@@ -1,7 +1,7 @@
 ---
 programs:
-  featured: Destacados
-  newest: Newest program
+  featured: Featured
+  newest: Newest programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -55,3 +55,50 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
+  results: Search Results
+Your Search Returned Results: 'Your search returned %count% results'
+Search: ""
+Search...: ""
+My Profile: ""
+Logout: ""
+error:
+  username:
+    blank: Le pseudo ne doit pas être vide
+  password:
+    blank: The password is missing.
+    short: 'Votre mot de passe doit avoir au moins {{ limit }} caractères.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: The country is missing.
+    invalid: Pays non valide
+  email:
+    blank: "L'e-mail ne doit pas être vide"
+    invalid: "L'e-mail ne semble pas valide"
+    exists: This email address already exists.
+  login: The password or username was incorrect.
+  post-data: POST-Data not correct or missing!
+  checksum:
+    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
+    invalid: Checksum invalide
+  xml:
+    invalid: Code XML invalide
+    missing: 'erreur inconnue : project_xml_not_found !'
+  file:
+    unexpected: fichier inattendu
+    invalid: Fichier invalide
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: Erreur inconnue
+  token: 'Authentication of device failed: invalid auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+success:
+  registration: Registration successful!
+  token: OK
+  upload: Votre projet a été envoyé avec succès !
+time:
+  minutes.ago: '{0}  < il y a 1 minute |{1} il y a 1 minute |]1, Inf] il y a %count% minutes'
+  hours.ago: '{1} il y a 1 heure |]1, Inf] il y a %count% heures'
+  days.ago: '{1} il y a 1 jour |]1, Inf] il y a %count% jours'
+  months.ago: '{1} il y a 1 mois |]1, Inf] il y a %count% mois'
+  years.ago: "{1} il y a 1 an |]1, Inf] il y a plus d'un an"

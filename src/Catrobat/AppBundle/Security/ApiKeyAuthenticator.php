@@ -71,7 +71,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
   
   private function trans($message, $parameters = array())
   {
-    return $this->translator->trans($message,$parameters,"catroweb_api");
+    return $this->translator->trans($message,$parameters,"catroweb");
   }
   
   

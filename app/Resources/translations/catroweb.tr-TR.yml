@@ -1,12 +1,12 @@
 ---
 programs:
   featured: Featured
-  newest: Newest program
+  newest: Newest programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
 licenseToPlay:
-  title: 'License to play - Give credit and share'
+  title: 'Oynamak için lisans- prim ver ve paylaş'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
@@ -14,21 +14,21 @@ licenseToPlay:
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
+    item1: Sizinde kendi pastanızı tarifi ile paylaşmanızı
+    item2: ve ilhamı kimden aldığınızı belirterek o kişinin hakkını vermenizi
   version: Version 1.1, 2 April 2013
 termsOfUse:
-  title: Terms of Use
+  title: Kullanım Şartları
   headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
+  text1: 'Catrobat toplumunun bir parçası, insanlarla programları ve fikirleri paylaşıyorsunuz:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
   text4: 'Our gift to you:'
   text5: 'Our Terms of Use and Service:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: çok sayıda farklı ülke ve kültürlerden
+    item2: her yaştan (küçük çocuklar, gençler ve dedeler)
+    item3: tüm tecrübe seviyelerinde
   list2:
     item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
     item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
@@ -55,3 +55,52 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
+  results: Sonuçlarda Ara
+Your Search Returned Results: 'Your search returned %count% results'
+Search: ""
+Search...: ""
+My Profile: ""
+Logout: ""
+error:
+  username:
+    blank: Kullanıcı adı boş olmamalıdır
+  password:
+    blank: Şifre eksik.
+    short: |
+      Şifrenizde en az  {{sayı}} karakter olmalıdır.
+      
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Ülke adı eksik.
+    invalid: Geçersiz ülke
+  email:
+    blank: e-posta bölümü boş olmamalıdır
+    invalid: E-posta adresiniz geçersiz görünüyor
+    exists: Bu e-posta adresi mevcut.
+  login: Kullanıcı adı veya şifre yanlış.
+  post-data: Son veriler eksik yada yanlış!
+  checksum:
+    missing: "İstemci sağlama toplamı dosyası göndermedi. Cep Kodu'nun eski bir sürümü nümü kullanıyorsunuz?"
+    invalid: geçersiz sağlama toplamı
+  xml:
+    invalid: Geçersiz xml kodu
+    missing: 'Bilinmeyen hata: proje_xml_bulunamadı!'
+  file:
+    unexpected: Beklenmeyen dosya bulundu
+    invalid: Geçersiz dosya
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: Bilinmeyen bir hata oluştu
+  token: 'Authentication of device failed: invalid auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+success:
+  registration: Kayıt başarılı!
+  token: Tamam
+  upload: Proje başarıyla yüklendi!
+time:
+  minutes.ago: '{0} < 1 dakika önce |{1} 1 dakika önce|]1, INF] %rakam% dakika önce'
+  hours.ago: '{1} 1 saat önce |]1, INF] %rakam% saat önce'
+  days.ago: '{1} 1 gün önce |]1, INF] %rakam% gün önce'
+  months.ago: '{1} 1 ay önce |]1, INF] %rakam% ay önce'
+  years.ago: '{1} 1 yıl önce |]1, INF] bir yıldan fazla'

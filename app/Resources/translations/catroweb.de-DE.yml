@@ -1,7 +1,7 @@
 ---
 programs:
   featured: Unterstützt
-  newest: Newest program
+  newest: Newest programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -55,3 +55,50 @@ termsOfUse:
   version: Wenn du jünger als 13 Jahre bist, musst du deine Eltern oder Erziehungsberechtigten fragen ob sie dir erlauben Catrobat Software-Anwendungen und Services zu nutzen.
 search:
   dotdotdot: Search...
+  results: Suchergebnisse
+Your Search Returned Results: 'Your search returned %count% results'
+Search: ""
+Search...: ""
+My Profile: ""
+Logout: ""
+error:
+  username:
+    blank: Benutzername darf nicht leer sein
+  password:
+    blank: Wiederherstellungs Hash wurde nicht gefunden.
+    short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Das Passwort oder der Username ist falsch.
+    invalid: Ungültiges Land
+  email:
+    blank: E-Mail Adresse darf nicht leer sein
+    invalid: Deine E-Mail Adresse scheint ungültig zu sein
+    exists: Die E-Mail Adresse existiert bereits!
+  login: Der Username oder die E-Mail Adresse konnte nicht gefunden werden.
+  post-data: Der Client hat die fileChecksum nicht mitgeschickt! Verwendest du eine veraltete Version von Pocket Code?
+  checksum:
+    missing: Du kannst keine Projekte hochladen die den Standard Projekt-Namen haben. Bitte benenne dein Projekt vorher um.
+    invalid: Ungültige Prüfsumme
+  xml:
+    invalid: Ungültiger xml Code
+    missing: 'Unbekannter Fehler: project_xml_not_found!'
+  file:
+    unexpected: Unerwartete Datei gefunden
+    invalid: Ungültige Datei
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: Unbekannter Fehler
+  token: 'Authentifizierung des Ger&#xE4;ts fehlgeschlagen: ung&#xFC;ltiger auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+success:
+  registration: Registrierung erfolgreich!
+  token: ok
+  upload: Your project was uploaded successfully!
+time:
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'

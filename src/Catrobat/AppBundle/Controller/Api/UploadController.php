@@ -105,6 +105,6 @@ class UploadController extends Controller
 
   private function trans($message, $parameters = array())
   {
-    return  $this->get("translator")->trans($message,$parameters,"catroweb_api");
+    return  $this->get("translator")->trans($message,$parameters,"catroweb");
   }
 }

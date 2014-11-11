@@ -1,25 +1,31 @@
 ---
 programs:
   featured: In evidenza
-  newest: Programma più recente
+  newest: Newest programs
   most:
     viewed: Il più visto
     downloaded: Il più scaricato
 licenseToPlay:
   title: 'Licenza per il gioco - Dare credito e condividere'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text1: |
+    Immagina che ciascun programma del progetto Catrobat sia una torta, una torta molto speciale che viene fornita con la sua ricetta (blocchi di programmazione).
+    Tutti i membri della comunità di Catrobat condividono le loro torte insieme alle relative ricette. Questo significa che puoi godere di tutte le torte e, allo stesso tempo, imparare a come crearne di nuove!
+  text2: 'Non ci sono ricette segrete: le istruzioni su come creare ciascuna torta sono rese fruibili per chiunque per essere usate, riusate, modificate e possono servire come ispirazione per nuove idee... pardon, torte.'
+  text3: |
+    Puoi mangiare le torte come pure copiare le ricette altrui per farne di nuove, anche con nuovi ingredienti.
+    Questa libertà viene garantita da due semplici requisiti:
+  text4: |
+    Nel creare la comunità Catrobat, abbiamo deciso di adottare questo approccio in quanto crediamo che esso supporti la creatività e l'apprendimento all'interno della comunità.
+    Condividendo le ricette e gli ingredienti (script e opere multimediali), le persone possono costruire appoggiandosi su le idee altri e, in definitiva, crescere tutti insieme.
+  text5: Nel progettare il sito web di Catrobat, abbiamo pensato a funzionalità che incoraggino le persone a condividere le proprie idee e dar credito agli altri. In ciascuna pagina dedicata ai diversi programmi, puoi sempre scaricare gli script originali del programma. Se modifichi script o altre opere multimediali di un programma esistente, vi incoraggiamo a dare credito al programma originale direttamente nelle note del programma, menzionando sia il creatore sia il programma che ha ispirato il vostro.
+  text6: "Ulteriori informazioni sui termini d'uso relativi alla comunità online di Catrobat li trovi alla pagina %link-termsOfUse%."
   list1:
     item1: condividi le tue torte insieme alle ricette
     item2: dai credito a chi ti ha ispirato
   version: Versione 1.1, 2 Aprile 2013
 termsOfUse:
   title: Termini di utilizzo
-  headline: Welcome to the Catrobat Community!
+  headline: Benvenuti nella comunità di Catrobat!
   text1: 'Come parte della comunità Catrobat, condividi programmi e idee con altre persone:'
   text2: 'Abbiamo bisogno del tuo aiuto per rendere questa comunità un luogo di condivisione per ogni membro. Ecco come puoi aiutarci:'
   text3: "Attraverso il progetto Catrobat vogliamo promuovere la cooperazione e permettere che la creatività  di tutti possa contribuire al miglioramento di tutta l'umanità. Puoi diventare anche un membro attivo della comunità Catrobat condividendo, come un dono, i tuoi programmi allo stesso modo in cui altri membri attivi stanno dando i loro programmi a te:"
@@ -39,19 +45,66 @@ termsOfUse:
     item1: "Caricando il tuo programma su uno dei nostri siti web, acconsenti a rilasciarlo secondo le licenze libere con cui vengono rilasciati i programmi caricati su Catrobat. Tali licenze sono simili a quelle con cui il sistema Catrobat è esso stesso rilasciato; con queste licenze si acconsente che chiunque abbia il diritto di imparare dal lavoro altrui precedentemente pubblicato, come pure il diritto a modificarlo e a utilizzarlo per propri programmi come giochi, animazioni e altro. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Il tuo lavoro potrà beneficare l'intera comunità mondiale e rimarrà libera per essere usata da tutti, un po' come i testi e le foto inviate volontariamente a Wikipedia. Pensalo come il tuo regalo all'umanità: doni a tutti il tuo lavoro, e tutti gli altri che pubblicheranno il loro lavoro sui nostri siti ti rifarà un regale. Pertanto un programma inviato è un dono dal grande valore, donato anche a te dal suo creatore, purché anche tu partecipi alla comunità allo stesso modo."
     item2: "Non sei obbligato ad accettare il dono; ma se lo fai dovrai accettare anche certe regole. I benefici di tali regole sono che tu puoi imparare dai lavori precedenti e costruirci sopra cose ancora più belle che, se vuoi, potrai imviare nuovamente sui nostri siti come tue. Un alro beneficio è che queste licenze ti assicurano che nessuno potrà ritenerti responsabile per l'uso che fa qualcun altro del tuo programma."
     item3: "Un'importante ulteriore condizione è che tu citi chiaramente gli autori dai quali deriva il tuo lavoro. Allo stesso tempo, noi faremo il possibile affinché il tuo lavoro sia apprezzato dagli altri per il contributo da te dato, usando il nome univoco da te scelto per rappresentarti all'interno della comunità di Catrobat, dando l'opportunità a chiunque di esprimerti pubblicamente la propria gratitudine per il tuo lavoro dato agli altri."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item4: 'Per i dettagli dei termini legali e delle condizioni, consultare %link-licenseUploaded%.'
   list4:
     item1: Noi offriamo tutti i nostri software e le nostre risorse Internet legate al progetto Catrobat secondo licenze libere. Questo vale per tutto il software scritto dal team di Catrobat, per i siti web e le risorse Internet, il codice sorgente e tutto il materiale aggiuntivo come, per esempio, immagini, suoni, testi. Questo vale ora e varrà anche per il futuro.
     item2: "Queste licenze permettono di rendere dsponibili tutte le parti di Catrobat libere sia nel senso di gratuite sia nel senso di darti la libertà di utilizzarle come meglio credi, con poche restrizioni legate, per lo più, al fatto di assicurarci che l'intero sistema Catrobat rimanga per sempre libero e utile a tutti."
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item3: 'Per i dettagli dei termini legali e delle condizioni, consultare %link-licenseToPlay%. Il codice sorgente del sistema Catrobat, insieme a molti altri documenti e risorse, è disponibile sul sito %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item1: "Se tu o, nel caso tu abbia meno di 13 anni, i tuoi genitori o il tuo tutore legale, siete coinvolti in organizzazioni che hanno violato la privacy in maniera sistematica, o coinvolte in sorveglianza di massa, non vi è permesso l'uso del nostro software e di accedere ai nostri servizi. I termini precisi di tale restrizione e alcune eccezioni sono illustrate nelle sezioni 4.a e 4.b dei %link-termsOfUse%."
     item2: Se non hai ancora compiuto i 13 anni, devi chiedere ai tuoi genitori o ai tuoi tutori legali se ti permettono di usare il software applicativo di Catrobat e i suoi servizi.
     item3: Ci riserviamo il diritto di rifiutare, cancellare o nascondere i programmi, gli account utente, e qualsiasi materiale digitale caricato sui siti web di Catrobat in qualsiasi momento a nostra sola discrezione; questo può accadere se, per esempio, troviamo che un programma contiene materiale inappropriato o che un utente violi i diritti di altre persone.
     item4: Tutti i software di Catrobat e le risorse Internet sono offerti nella speranza che siano utili, ma senza alcuna garanzia.
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+    item5: 'Consultare la pagina %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service per  le condizioni sopracitate ma espresse in maniera formale, insieme ad ulteriori termini e condizioni legali aggiuntive.'
   bottom1: "Di volta in volta riontrollate queste condizioni, perché le nostre condizioni d'uso sono sempre soggette a miglioramenti e modifiche."
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  bottom2: "Sono graditi eventuali suggerimenti in merito a questi Termini d'Uso inviando una mail a %email-webmaster%."
   version: Versione 1.3, 4 marzo 2014
 search:
-  dotdotdot: Search...
+  dotdotdot: Cerca...
+  results: Risultati della ricerca
+Your Search Returned Results: 'Your search returned %count% results'
+Search: ""
+Search...: ""
+My Profile: ""
+Logout: ""
+error:
+  username:
+    blank: Il nome utente non può essere vuoto
+  password:
+    blank: Manca la password.
+    short: 'La tua password deve avere almeno {{ limit }} caratteri.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Manca la nazione.
+    invalid: Nazione non valida
+  email:
+    blank: "L'e-mail non può essere vuota"
+    invalid: La tua e-mail sembra non essere valida
+    exists: "L'indirizzo e-mail è già stato usato."
+  login: La password o il nome utente sono sbagliati.
+  post-data: Dati POST non corretti o mancanti!
+  checksum:
+    missing: Il client non ha inviato fileChecksum! Stai usando una versione non aggiornata di Pocket Code?
+    invalid: checksum non valido
+  xml:
+    invalid: Codice xml non valido
+    missing: 'errore sconosciuto: project_xml_not_found!'
+  file:
+    unexpected: trovato file inatteso
+    invalid: file non valido
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: errore sconosciuto
+  token: 'Autenticazione del dispositivo non riuscita: auth-token non valido!'
+  programname:
+    rude: Programname must not contain rude wordes.
+success:
+  registration: Registrazione effettuata con successo!
+  token: ok
+  upload: Il progetto è stato caricato con successo!
+time:
+  minutes.ago: '{0} < 1 minuto fa |{1}1 minuto fa |]1,Inf] %count% minuti fa'
+  hours.ago: '{1}1 ora fa |]1,Inf] %count% ore fa'
+  days.ago: '{1} 1 giorno fa |]1, Inf] %count% giorni fa'
+  months.ago: '{1} 1 mese fa |]1, Inf] %count% mesi fa'
+  years.ago: '{1} 1 anno fa |]1, Inf] più di un anno fa'

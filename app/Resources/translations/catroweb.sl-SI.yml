@@ -1,14 +1,9 @@
 ---
-Search:
-Search...:
-My Profile:
-Logout:
-
 programs:
   featured: Featured
   newest: Newest programs
   most:
-    viewed: Most viewed
+    viewed: Najbolj ogledano
     downloaded: Most downloaded
 licenseToPlay:
   title: 'License to play - Give credit and share'
@@ -60,5 +55,50 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  results: Search Results
-Your Search Returned Results: Your search returned %count% results
+  results: Rezultati iskanja
+Your Search Returned Results: 'Your search returned %count% results'
+Search: ""
+Search...: ""
+My Profile: ""
+Logout: ""
+error:
+  username:
+    blank: Uporabniško ime ne sme biti prazno
+  password:
+    blank: The password is missing.
+    short: 'Geslo mora imeti vsaj {{ limit }} znakov.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: The country is missing.
+    invalid: Neveljavna država
+  email:
+    blank: Elektronski naslov ne sme biti prazen
+    invalid: Elektronski naslov zgleda neveljaven
+    exists: This email address already exists.
+  login: The password or username was incorrect.
+  post-data: POST-Data not correct or missing!
+  checksum:
+    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
+    invalid: Neveljavna checksum
+  xml:
+    invalid: Neveljavna code xml
+    missing: 'Neznana napaka: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: Napačna datoteka
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: Neznana napaka
+  token: 'Authentication of device failed: invalid auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+success:
+  registration: Registracija uspešna!
+  token: v redu
+  upload: Upload projekta je bil uspešen!
+time:
+  minutes.ago: '{0} pravkar |{1} pred eno minuto |]1,Inf] %count% min'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1} eno leto nazaj |]1, Inf] več kot eno leto nazaj'
