@@ -6,7 +6,7 @@
   <title>Pocket Code Website {% block title %}{% endblock %}</title>
 
   {% stylesheets 'css/plugins/*'
-                 'css/base/*' filter='cssrewrite,lessphp' output='compiled/style.css' %}
+                 'css/base/*' filter='cssrewrite,lessphp' output='compiled/base.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
   {% endstylesheets %}
 

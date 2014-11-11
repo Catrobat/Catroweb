@@ -1,9 +1,9 @@
-{% extends 'CatrobatWebBundle:Default:base.html.twig' %}
+{% extends ':Default:base.html.twig' %}
 
 {% block body %}
 
   <div id="error">
-    <img src="images/symbols/error.png" alt="An Error Occurred" />
+    <img src="{{ asset('images/symbols/error.png') }}" alt="An Error Occurred" />
     <p>Ooooops something went wrong.<br>Please try again!</p>
   </div>
 
