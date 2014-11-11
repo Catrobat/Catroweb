@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\WebBundle\DataFixtures\ORM;
+namespace Catrobat\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
