@@ -15,7 +15,7 @@ class TutorialController extends Controller
    */
   public function tutorialAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:tutorials:tutorial.html.twig');
+    return $this->get("templating")->renderResponse(':tutorials:tutorial.html.twig');
   }
 
   /**
@@ -24,7 +24,7 @@ class TutorialController extends Controller
    */
   public function tutorialsAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:tutorials:tutorials.html.twig');
+    return $this->get("templating")->renderResponse(':tutorials:tutorials.html.twig');
   }
 
   /**
@@ -33,7 +33,7 @@ class TutorialController extends Controller
    */
   public function stepByStepAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:tutorials:stepByStep.html.twig');
+    return $this->get("templating")->renderResponse(':tutorials:stepByStep.html.twig');
   }
 
   /**
@@ -42,6 +42,6 @@ class TutorialController extends Controller
    */
   public function starterProgramsAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:tutorials:starterPrograms.html.twig');
+    return $this->get("templating")->renderResponse(':tutorials:starterPrograms.html.twig');
   }
 }

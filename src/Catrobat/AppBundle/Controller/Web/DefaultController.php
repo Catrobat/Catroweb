@@ -10,17 +10,17 @@ class DefaultController extends Controller
 {
   public function headerAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:Default:header.html.twig');
+    return $this->get("templating")->renderResponse(':Default:header.html.twig');
   }
 
   public function headerLogoAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:Default:headerLogo.html.twig');
+    return $this->get("templating")->renderResponse(':Default:headerLogo.html.twig');
   }
 
   public function footerAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle:Default:footer.html.twig');
+    return $this->get("templating")->renderResponse(':Default:footer.html.twig');
   }
 
   /**
@@ -29,7 +29,7 @@ class DefaultController extends Controller
    */
   public function indexAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::index.html.twig');
+    return $this->get("templating")->renderResponse('::index.html.twig');
   }
 
   /**
@@ -44,7 +44,7 @@ class DefaultController extends Controller
     if (!$program) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::program.html.twig', array("program" => $program));
+    return $this->get("templating")->renderResponse('::program.html.twig', array("program" => $program));
   }
 
   /**
@@ -53,7 +53,7 @@ class DefaultController extends Controller
    */
   public function searchAction($q)
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::search.html.twig', array("q" => $q));
+    return $this->get("templating")->renderResponse('::search.html.twig', array("q" => $q));
   }
 
   /**
@@ -62,7 +62,7 @@ class DefaultController extends Controller
    */
   public function searchNothingAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::search.html.twig', array("q" => null));
+    return $this->get("templating")->renderResponse('::search.html.twig', array("q" => null));
   }
 
   /**
@@ -73,7 +73,7 @@ class DefaultController extends Controller
   {
     $profile = $id;
 
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::profile.html.twig', array("profile" => $profile));
+    return $this->get("templating")->renderResponse('::profile.html.twig', array("profile" => $profile));
   }
 
   /**
@@ -82,7 +82,7 @@ class DefaultController extends Controller
    */
   public function termsOfUseAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::termsOfUse.html.twig');
+    return $this->get("templating")->renderResponse('::termsOfUse.html.twig');
   }
 
   /**
@@ -91,6 +91,6 @@ class DefaultController extends Controller
    */
   public function licenseToPlayAction()
   {
-    return $this->get("templating")->renderResponse('CatrobatWebBundle::licenseToPlay.html.twig');
+    return $this->get("templating")->renderResponse('::licenseToPlay.html.twig');
   }
 }
