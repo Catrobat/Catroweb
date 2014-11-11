@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\WebBundle\Features\Context;
+namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Symfony\Component\HttpKernel\KernelInterface;

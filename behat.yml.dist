@@ -34,9 +34,12 @@ default:
                     error_directory: "./testreports/behat/"
         web:
             type: symfony_bundle
-            bundle: 'CatrobatWebBundle'
+            bundle: 'AppBundle'
+            features:
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/Web/"
             contexts:
-              - Catrobat\WebBundle\Features\Context\FeatureContext:
+              - Catrobat\AppBundle\Features\Web\Context\FeatureContext:
                     screenshot_directory: "./testreports/screens/"
 
             
