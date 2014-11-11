@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Catrobat\TestBundle\CatrobatTestBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             //Begin Sonata--Admin
             new Sonata\AdminBundle\SonataAdminBundle(),

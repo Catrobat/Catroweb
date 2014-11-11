@@ -1,6 +1,6 @@
 parameters:
-     catrobat.test.directory.source: "%kernel.root_dir%/../src/Catrobat/TestBundle/DataFixtures/test.catrobat"
-     catrobat.test.directory.target: "%kernel.root_dir%/../src/Catrobat/TestBundle/DataFixtures/GeneratedFixtures/"
+     catrobat.test.directory.source: "%kernel.root_dir%/../testdata/DataFixtures/test.catrobat"
+     catrobat.test.directory.target: "%kernel.root_dir%/../testdata/DataFixtures/GeneratedFixtures/"
       
 services:
     catrobat.test.command.generatetestdata:

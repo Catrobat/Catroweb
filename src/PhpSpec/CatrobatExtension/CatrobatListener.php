@@ -16,13 +16,13 @@ class CatrobatListener implements \Symfony\Component\EventDispatcher\EventSubscr
   
   public function __construct()
   {
-    $this->cache_dir = realpath(__DIR__."/../../Catrobat/TestBundle/Cache")."/";
+    $this->cache_dir = realpath(__DIR__."/../../../testdata/Cache")."/";
     define("__SPEC_CACHE_DIR__",$this->cache_dir);
   }
   
   public function beforeSuite(SuiteEvent $event)
   {
-    $fixtures_dir = __DIR__."/../../Catrobat/TestBundle/DataFixtures";
+    $fixtures_dir = __DIR__."/../../../testdata/DataFixtures";
     $fixtures_dir = realpath($fixtures_dir)."/";
     define("__SPEC_FIXTURES_DIR__",$fixtures_dir);
     define("__SPEC_GENERATED_FIXTURES_DIR__",$fixtures_dir."GeneratedFixtures/");

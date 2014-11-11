@@ -34,7 +34,7 @@ class ProgramFileRepositorySpec extends ObjectBehavior
     
     function it_stores_a_file_to_the_given_directory()
     {
-      $file_name = __SPEC_FIXTURES_DIR__."/compass.catrobat";
+      $file_name = __SPEC_FIXTURES_DIR__."/test.catrobat";
       $id = "test";
       $file = new File($file_name);
       
@@ -47,7 +47,7 @@ class ProgramFileRepositorySpec extends ObjectBehavior
     
     function it_returns_the_file()
     {
-      $file_name = __SPEC_FIXTURES_DIR__."/compass.catrobat";
+      $file_name = __SPEC_FIXTURES_DIR__."/test.catrobat";
       $id = "test";
       $file = new File($file_name);
       

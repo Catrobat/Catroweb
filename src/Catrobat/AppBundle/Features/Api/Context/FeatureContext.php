@@ -32,7 +32,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
-  const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
+  const FIXTUREDIR = "./testdata/DataFixtures/";
   private $error_directory;
   
   private $kernel;
@@ -390,7 +390,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       $program->setApproved(false);
       $em->persist($program);
       $em->flush();
-      $file_repo->saveProgramfile(new File(self::FIXTUREDIR . "compass.catrobat"), $program->getId());
+      $file_repo->saveProgramfile(new File(self::FIXTUREDIR . "test.catrobat"), $program->getId());
     }
   }
   
@@ -584,9 +584,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iHaveAValidCatrobatFile()
   {
-    $filepath = self::FIXTUREDIR . "compass.catrobat";
+    $filepath = self::FIXTUREDIR . "test.catrobat";
     assertTrue(file_exists($filepath), "File not found");
-    $this->files[] = new UploadedFile($filepath, "compass.catrobat");
+    $this->files[] = new UploadedFile($filepath, "test.catrobat");
   }
 
   /**

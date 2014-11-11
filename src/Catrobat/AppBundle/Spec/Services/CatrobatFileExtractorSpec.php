@@ -29,7 +29,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
 
   function it_extracts_a_valid_file()
   {
-    $valid_catrobat_file = new File(__SPEC_FIXTURES_DIR__ . "/compass.catrobat");
+    $valid_catrobat_file = new File(__SPEC_FIXTURES_DIR__ . "/test.catrobat");
     $extracted_file = $this->extract($valid_catrobat_file);
     $extracted_file->shouldHaveType('Catrobat\AppBundle\Model\ExtractedCatrobatFile');
   }
