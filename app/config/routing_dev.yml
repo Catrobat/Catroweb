@@ -13,6 +13,3 @@ _configurator:
 _main:
     resource: routing.yml
 
-catroweb_dev:
-    resource: "@CatrobatWebBundle/Resources/config/routing_dev.yml"
-    prefix:   /
