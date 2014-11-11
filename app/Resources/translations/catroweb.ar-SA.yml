@@ -55,12 +55,12 @@ termsOfUse:
   version: الإصدار 1، 3، 4 مارس 2014
 search:
   dotdotdot: بحث...
+  search: بحث
   results: نتائج البحث
-Your Search Returned Results: 'Your search returned %count% results'
-Search: ""
-Search...: ""
-My Profile: ""
-Logout: ""
+  resultcount: 'Your search returned %count% results'
+menu:
+  profile: الصفحة الشخصية
+  logout: خروج
 error:
   username:
     blank: يجب أن لا يكون اسم المستخدم فارغ

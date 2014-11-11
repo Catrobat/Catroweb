@@ -55,12 +55,12 @@ termsOfUse:
   version: Wenn du jünger als 13 Jahre bist, musst du deine Eltern oder Erziehungsberechtigten fragen ob sie dir erlauben Catrobat Software-Anwendungen und Services zu nutzen.
 search:
   dotdotdot: Search...
+  search: Suche
   results: Suchergebnisse
-Your Search Returned Results: 'Your search returned %count% results'
-Search: ""
-Search...: ""
-My Profile: ""
-Logout: ""
+  resultcount: 'Your search returned %count% results'
+menu:
+  profile: Meine erste E-Mail
+  logout: Oktober
 error:
   username:
     blank: Benutzername darf nicht leer sein

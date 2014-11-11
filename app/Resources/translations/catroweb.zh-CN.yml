@@ -55,12 +55,12 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
+  search: Search
   results: '&#x641C;&#x7D22;&#x7ED3;&#x679C;'
-Your Search Returned Results: 'Your search returned %count% results'
-Search: ""
-Search...: ""
-My Profile: ""
-Logout: ""
+  resultcount: 'Your search returned %count% results'
+menu:
+  profile: '&#x6839;&#x6362;&#x5BC6;&#x7801;'
+  logout: '&#x4E00;&#x5929;&#x524D;'
 error:
   username:
     blank: Username must not be blank
