@@ -6,12 +6,12 @@
   <title>Pocket Code Website {% block title %}{% endblock %}</title>
 
   {% stylesheets 'css/plugins/*'
-                 'css/base/*' filter='cssrewrite,lessphp' %}
+                 'css/base/*' filter='cssrewrite,lessphp' output='compiled/style.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
   {% endstylesheets %}
 
   {% javascripts 'js/plugins/*'
-                 'js/base/*' %}
+                 'js/base/*' output='compiled/script.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 
