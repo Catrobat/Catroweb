@@ -1,0 +1,326 @@
+@import 'default';
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('Roboto/Roboto-Regular-webfont.eot');
+  src: local('Roboto Regular'), local('Roboto-Regular'), url('Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto/Roboto-Regular-webfont.woff') format('woff'), url('Roboto/Roboto-Regular-webfont.ttf') format('truetype'), url('Roboto/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('Roboto/Roboto-Italic-webfont.eot');
+  src: local('Roboto Italic'), local('Roboto-Italic'), url('Roboto/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto/Roboto-Italic-webfont.woff') format('woff'), url('Roboto/Roboto-Italic-webfont.ttf') format('truetype'), url('Roboto/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('Roboto/Roboto-Bold-webfont.eot');
+  src: local('Roboto Bold'), local('Roboto-Bold'), url('Roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto/Roboto-Bold-webfont.woff') format('woff'), url('Roboto/Roboto-Bold-webfont.ttf') format('truetype'), url('Roboto/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+*, *:before, *:after {
+          box-sizing: border-box;
+     -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+}
+
+html,
+button,
+select,
+textarea,
+a {
+  color: @default-text-color;
+}
+
+input {
+  color: #000;
+}
+
+::-webkit-input-placeholder {
+  color: @default-background-color !important;
+}
+
+:-moz-placeholder {
+  color: @default-background-color !important;
+}
+
+::-moz-placeholder {
+  color: @default-background-color !important;
+}
+
+:ms-input-placeholder {
+  color: @default-background-color !important;
+}
+
+html {
+  height: 100%;
+  font-size: @default-font-size;
+}
+
+body {
+  background: @default-background-color;
+  font-family: 'Roboto', Arial, sans-serif;
+  height: 100%;
+}
+
+img {
+  page-break-inside: avoid;
+  max-width: 100% !important;
+  vertical-align: middle;
+}
+
+h1,
+h2,
+h3 {
+  page-break-after: avoid;
+  text-transform: uppercase;
+  margin: 0px;
+}
+
+h1 {
+  font-size: @font-size-h1;
+  padding: 1px 1px;
+  border-bottom: 1px solid @default-text-color;
+}
+
+h2 {
+  font-size: @font-size-h2;
+}
+
+
+#wrapper, footer {
+  margin: 0 auto;
+  width: 100%; /* 1024px; */
+  max-width: 1024px;
+  min-width: 320px;
+}
+
+#wrapper {
+  min-height: 100%;
+  padding-bottom: @footer-height-desktop + @footer-height-bottom + @footer-height-padding; /* footer height */
+
+  article {
+    clear: both;
+  }
+}
+
+.size-small {
+  font-size: @default-font-size - 4;
+}
+
+li {
+  word-wrap: break-word;
+}
+
+.size-medium {
+  font-size: @default-font-size;
+}
+
+.size-large {
+  font-size: @default-font-size + 4;
+}
+
+.size-xlarge {
+  font-size: @default-font-size + 8;
+}
+
+.standard-col-text {
+//  .columns(250px, 2, 40px, #EEE, solid, 0px);
+  .box-columns(2, 40px);
+  text-align: justify;
+  padding: 25px 25px;
+}
+
+.standard-article-link {
+  font-weight: bold;
+}
+
+.clear {
+  clear: both;
+}
+
+input:focus {
+  border: 0;
+  outline: none;
+}
+
+label {
+  display: block;
+}
+
+.link {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.error-text {
+  color: #f78181;
+  font-size: 22px;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.notification-text {
+  font-size: 22px;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+form {
+  margin: 40px auto;
+  width: 320px;
+  text-align: center;
+
+  button, .button {
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: @default-button-size;
+    font-weight: bold;
+    .gradient(#177f8d,#177f8d,#17A5B8);
+    margin-top: 30px;
+    padding: @default-button-padding;
+    text-shadow: #333 1px 1px 1px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .input-field {
+    background: #fff;
+    border: .2em solid #05222a;
+    .box-shadow(inset 2px 2px 5px #999);
+    overflow: auto;
+    padding: @default-input-padding;
+    margin-bottom: 10px;
+
+    input {
+      border: none;
+      color: #05222a;
+      float: left;
+      font-size: @default-input-size;
+      height: 35px;
+      padding-left: 5px;
+      outline: none;
+      width: 80%;
+    }
+
+    div {
+      float: right;
+      text-align: center;
+    }
+  }
+}
+
+.programs {
+  overflow: hidden;
+  width: 98.5%;
+  margin: 25px auto 0 auto;
+
+  img {
+    height: 84px;
+    width: 84px;
+    border: 2px solid #17a5b8; /* TODO CHANGE COLORRRR TO VARIABLE */
+  }
+
+  .no-programs {
+    text-align: center;
+    font-size: 16px; //todo: change to variable...
+  }
+
+  > .program {
+    float: left;
+    width: 11.11%; /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in 'ProgramLoader.js' before changing the width! */
+    padding-bottom: 20px;
+
+    > div {
+      margin: auto;
+      width: 84px;
+      cursor: pointer;
+
+      > div {
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+
+      > div:nth-child(2) {
+        padding: 2px 0;
+      }
+    }
+
+    @media (max-width: 975px) {
+      width: 12.5%; /* 8 in a row */
+    }
+    @media (max-width: 865px) {
+      width: 14.28571%; /* 7 in a row */
+    }
+    @media (max-width: 755px) {
+      width: 16.667%; /* 6 in a row */
+    }
+    @media (max-width: 645px) {
+      width: 20%; /* 5 in a row */
+    }
+    @media (max-width: 535px) {
+      width: 25%; /* 4 in a row */
+    }
+    @media (max-width: 425px) {
+      width: 33.33%; /* 3 in a row */
+    }
+  }
+}
+
+.button-show-placeholder {
+  margin: 0px auto 30px auto;
+  min-height: 32px;
+}
+
+.button-show-more, .button-show-ajax {
+  text-align: center;
+  margin: auto;
+}
+
+.button-show-more {
+  cursor: pointer;
+}
+
+.button-show-ajax {
+  display: none;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+#error {
+  text-align: center;
+  margin-top: 50px;
+
+  p {
+    font-size: @default-font-size + 20;
+  }
+}
+
+@media screen and (max-width: @responsive-width-tablet) {
+
+  #wrapper {
+    padding-bottom: @footer-height-bottom + @footer-height-padding; /* TODO: ändern !!! */
+  }
+
+  .footer-expand {
+    #wrapper {
+      padding-bottom: @footer-height-bottom + @footer-height-mobile + @footer-height-padding;
+    }
+  }
+
+}
