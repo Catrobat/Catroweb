@@ -65,11 +65,11 @@ class ProgramImportCommand extends Command
         $output->writeln("Importing file " . $file);
         $add_program_request = new AddProgramRequest($user, new File($file));
         $program = $this->program_manager->addProgram($add_program_request);
-        $output->writeln("Added Program " . $program->getName());
+        $output->writeln("Added Program <" . $program->getName(). ">");
       }
       catch (InvalidCatrobatFileException $e)
       {
-        $output->writeln("FAILED TO add program " . $program->getName());
+        $output->writeln("FAILED to add program!");
         $output->writeln($e->getMessage(). " (" . $e->getCode() . ")");
       }
       

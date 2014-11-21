@@ -25,3 +25,8 @@ services:
               arguments: ["@catrowebadmin.filesystem"]
               tags:
                 -  { name: console.command }
+
+      command.reset:
+              class: Catrobat\AppBundle\Commands\ResetCommand
+              tags:
+                -  { name: console.command }
