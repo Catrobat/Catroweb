@@ -21,3 +21,4 @@ crowdin-cli.jar
 /.externalToolBuilders
 /.settings
 /.buildpath
+/.rsync_cache
