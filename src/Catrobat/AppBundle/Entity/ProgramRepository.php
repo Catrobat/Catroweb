@@ -58,9 +58,8 @@ class ProgramRepository extends EntityRepository
     $q2->setFirstResult($offset);
     $q2->setMaxResults($limit);
     $q2->setParameter(1, $query);
-    $result = $q2->getResult(); 
-    $result = array_column($result,0);
-    return $result;
+    $result = $q2->getResult();
+    return array_map(function($element){return $element[0];}, $result);
   }
 
   public function searchCount($query)
