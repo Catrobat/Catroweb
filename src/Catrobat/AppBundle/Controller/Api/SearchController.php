@@ -20,6 +20,7 @@ class SearchController extends Controller
   public function searchProgramsAction(Request $request)
   {
     $program_manager = $this->get("programmanager");
+    $screenshot_repository = $this->get("screenshotrepository");
     $elapsed_time = $this->get("elapsedtime");
     
     $retArray = array();
@@ -42,15 +43,19 @@ class SearchController extends Controller
       $new_program['Downloads'] = $program->getDownloads();
       $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
       $new_program['UploadedString'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
-      $new_program['ScreenshotBig'] = "resources/thumbnails/" . $program->getId() . "_large.png";
-      $new_program['ScreenshotSmall'] = "resources/thumbnails/"  . $program->getId() . "_small.png";
+      $new_program['ScreenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
+      $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
       $new_program['ProjectUrl'] = "details/" . $program->getId();
       $new_program['DownloadUrl'] = "download/"  . $program->getId() . ".catrobat";
       $retArray['CatrobatProjects'][] = $new_program;
     }
     $retArray['completeTerm'] = "";
     $retArray['preHeaderMessages'] = "";
-    $retArray['CatrobatInformation'] = array("BaseUrl" => 'https://' . $request->getHttpHost() . '/', "TotalProjects" => $numbOfTotalProjects, "ProjectsExtension" => ".catrobat");
+    $retArray['CatrobatInformation'] = array (
+        "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . $request->getBaseUrl() . '/',
+        "TotalProjects" => $numbOfTotalProjects,
+        "ProjectsExtension" => ".catrobat" 
+    );
     return JsonResponse::create($retArray);
   }
 }

@@ -45,7 +45,7 @@ Feature: Search programs
     {
       "completeTerm":"",
       "CatrobatInformation": {
-           "BaseUrl":"https:\/\/localhost\/",
+           "BaseUrl":"http:\/\/localhost\/",
          "TotalProjects":1,
          "ProjectsExtension":".catrobat"
      },
@@ -53,8 +53,8 @@ Feature: Search programs
          "ProjectId":1,
          "ProjectName":"Galaxy War",
          "ProjectNameShort":"Galaxy War",
-         "ScreenshotBig":"resources\/thumbnails\/1_large.png",
-         "ScreenshotSmall":"resources\/thumbnails\/1_small.png",
+         "ScreenshotBig":"resources_test\/screenshots\/screen_1.png",
+         "ScreenshotSmall":"resources_test\/thumbnails\/screen_1.png",
          "Author":"User1",
          "Description":"p1",
          "Uploaded":1357041600,
@@ -109,7 +109,7 @@ Feature: Search programs
     {
       "completeTerm":"",
       "CatrobatInformation": {
-        "BaseUrl":"https:\/\/localhost\/",
+        "BaseUrl":"http:\/\/localhost\/",
         "TotalProjects":0,
         "ProjectsExtension":".catrobat"
     },
