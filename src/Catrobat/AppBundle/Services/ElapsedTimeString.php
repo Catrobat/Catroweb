@@ -3,14 +3,14 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Services\Time;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ElapsedTimeString
 {
   private $translator;
   private $time;
   
-  public function __construct(Translator $translator, Time $time)
+  public function __construct(TranslatorInterface $translator, Time $time)
   {
     $this->translator = $translator;
     $this->time = $time;

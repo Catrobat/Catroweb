@@ -9,7 +9,6 @@ use Catrobat\AppBundle\Model\UserManager;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Translation\Translator;
 use Catrobat\AppBundle\StatusCode;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

@@ -9,7 +9,7 @@ class ElapsedTimeStringSpec extends ObjectBehavior
 {
   protected $testTime;
   /**
-   * @param \Symfony\Component\Translation\Translator $translator
+   * @param \Symfony\Component\Translation\TranslatorInterface $translator
    * @param \Catrobat\AppBundle\Services\Time $time
    */
   function let($translator, $time)

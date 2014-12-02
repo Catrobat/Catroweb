@@ -12,15 +12,15 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use FOS\UserBundle\Security\UserProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
-use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\HttpFoundation\Response;
 use Catrobat\AppBundle\StatusCode;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
   protected $user_provider;
   
-  public function __construct(UserProvider $user_provider, Translator $translator)
+  public function __construct(UserProvider $user_provider, TranslatorInterface $translator)
   {
     $this->user_provider = $user_provider;
     $this->translator = $translator;
