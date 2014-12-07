@@ -39,6 +39,8 @@ class DefaultController extends Controller
    */
   public function programAction($id)
   {
+    //IMPORTANT: if you change the route '/program' .. also adapt it in ProgramLoader.js (variable: 'program_link')
+
     $program = $this->get("programmanager")->find($id);
 
     if (!$program) {

@@ -67,10 +67,11 @@ var ProgramLoader = function (container, url) {
           div = '<div>unknown</div>';
       }
 
+      var program_link = data.CatrobatInformation.BaseUrl + 'program/';
       $(self.container).find('.programs').append(
         '<div class="program">'+
-          '<div>'+
-            '<div><img src="'+ data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
+          '<div onclick="window.location.href = \''+ program_link + programs[i].ProjectId + '\'">'+
+            '<div><img src="/'+ programs[i].ScreenshotSmall +'"></div>'+
             '<div><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
           '</div>'+
@@ -143,5 +144,9 @@ var ProgramLoader = function (container, url) {
       }
 
     });
+  };
+
+  self.goToProgram = function() {
+    alert(1);
   };
 };
