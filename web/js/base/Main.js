@@ -27,6 +27,7 @@ var Main = function (search_url) {
     });
 
     self.setSearchBtnListener();
+    self.setLanguageSwitchListener();
   };
 
   self.setWindowResizeListener = function() {
@@ -54,5 +55,31 @@ var Main = function (search_url) {
 
   self.searchPrograms = function(string) {
     window.location.href = self.search_url + string;
+  };
+
+  self.setLanguageSwitchListener = function() {
+    var select = $('#switch-language');
+    var cookie = self.getCookie('hl');
+
+    if(cookie == '')
+      $(select).val('en');
+    else
+      $(select).val(cookie);
+
+    $(select).change(function() {
+      document.cookie = 'hl=' + $(this).val();
+      location.reload();
+    });
+  };
+
+  self.getCookie = function(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1);
+      if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+    }
+    return "";
   };
 };

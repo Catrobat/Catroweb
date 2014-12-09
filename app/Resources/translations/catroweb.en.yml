@@ -1,5 +1,7 @@
 ---
 #homepage translation
+localLanguage: English
+
 programs:
   featured: Featured
   newest: Newest programs
