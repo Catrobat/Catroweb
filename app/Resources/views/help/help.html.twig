@@ -1,34 +1,40 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets 'css/custom/tutorial.less' filter='cssrewrite,lessphp' output='compiled/tutorial.css' %}
+    {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
 
 
 {% block body %}
-    <div id="tutorial-container">
-      <div class="tutorial-top">
+    <div id="help-container">
+      <div class="help-desktop">
+        <img src="{{ asset('images/tutorial/1_hourOfCode.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
+      </div>
+      <div class="help-mobile">
+        <img src="{{ asset('images/tutorial/2_hourOfCode.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
+      </div>
+      <div class="help-desktop help-special-margin">
         <img src="{{ asset('images/tutorial/1_stepbystep.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
       </div>
-      <div class="tutorial-top">
+      <div class="help-mobile">
         <img src="{{ asset('images/tutorial/2_stepbystep.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
       </div>
-      <div class="tutorial-middle">
-        <div id="tutorial-tutorials">
+      <div class="help-split-desktop">
+        <div class="help-split">
           <img src="{{ asset('images/tutorial/tutorials.png') }}" alt="Tutorials" onclick="self.location.href='{{ url('catrobat_web_tutorials') }}'" />
         </div>
-        <div id="tutorial-spacer"></div>
-        <div id="tutorial-starters">
+        <div class="help-split-spacer"></div>
+        <div class="help-split">
           <img src="{{ asset('images/tutorial/1_starters.png') }}" alt="Starter Programs" onclick="self.location.href='{{ url('catrobat_web_starter') }}'" />
         </div>
         <div class="clear"></div>
       </div>
-      <div class="tutorial-bottom">
+      <div class="help-desktop">
         <img src="{{ asset('images/tutorial/1_discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
       </div>
-      <div class="tutorial-bottom">
+      <div class="help-mobile">
         <img src="{{ asset('images/tutorial/2_discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
       </div>
     </div>
