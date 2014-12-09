@@ -1,13 +1,14 @@
+set :ssh_options, {
+    config: false,
+    forward_agent: true
+}
+
 #Server settings
 set :application, "Pocketcode"
 set :domain,      ""                        #i.e. test.google.com
 set :deploy_to,   ""                        #i.e. /var/www/google
 set :app_path,    "app"
 set :user, ""                               #ftp/ssh-user
-set :password, ""                           #ssh-pwd
-set :ssh_options, {:forward_agent => true}
-ssh_options[:forward_agent] = true
-ssh_options[:password] = ""
 
 set :use_sudo, false
 
@@ -21,10 +22,10 @@ set :dump_assetic_assets, true
 
 #files which are not in the git repo. When you add one, upload it yourself via ftp first
 set :shared_files,      ["app/config/parameters.yml"]
-set :shared_children,     [app_path + "/logs", web_path + "/uploads", "vendor"] #uploads could be the projects folder
+set :shared_children,     [app_path + "/logs", web_path + "/resources", "vendor"] #uploads could be the projects folder
 
 #Which repo to use and how
-set :repository,  "/home/catroweb/projects/catroweb"        #It's the path to your local repo
+set :repository,  "/home/catroweb/projects/catroweb/"        #It's the path to your local repo
 set :scm,         :git
 set :deploy_via, :rsync_with_remote_cache
 set :keep_releases,  3
@@ -40,4 +41,4 @@ set :permission_method,   :acl
 set :use_set_permissions, true
 
 # for logging
-# logger.level = Logger::MAX_LEVEL
+#logger.level = Logger::MAX_LEVEL
