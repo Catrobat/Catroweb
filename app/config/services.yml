@@ -58,9 +58,12 @@ services:
         class: Catrobat\AppBundle\Services\CatrobatFileExtractor
         arguments: ["%catrobat.file.extract.dir%"]
 
+    filecompressor:
+        class: Catrobat\AppBundle\Services\CatrobatFileCompressor
+
     filerepository:
         class: Catrobat\AppBundle\Services\ProgramFileRepository
-        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%"]
+        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%", "@filecompressor"]
 
     screenshotrepository:
         class: Catrobat\AppBundle\Services\ScreenshotRepository

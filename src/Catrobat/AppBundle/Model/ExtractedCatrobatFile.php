@@ -72,4 +72,9 @@ class ExtractedCatrobatFile
   {
     return $this->program_xml_properties;
   }
+
+  public function saveProgramXmlProperties()
+  {
+    $this->program_xml_properties->asXML($this->path . "code.xml");
+  }
 }

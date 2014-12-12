@@ -91,7 +91,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     {
       $this->screenshot_repository->saveProgramAssets($extracted_file->getScreenshotPath(), $program->getId());
     }
-    $this->file_repository->saveProgramfile($file, $program->getId());
+    $this->file_repository->saveProgram($extracted_file, $program->getId());
 
     $event = $this->event_dispatcher->dispatch("catrobat.program.successful.upload", new ProgramInsertEvent());
     

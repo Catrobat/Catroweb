@@ -83,7 +83,6 @@
           <root url="file://$MODULE_DIR$/vendor/braincrafted/bootstrap-bundle" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
           <root url="file://$MODULE_DIR$/vendor/symfony/symfony" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/icu" />
           <root url="file://$MODULE_DIR$/vendor/psr/log" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/common" />
           <root url="file://$MODULE_DIR$/vendor/behat/symfony2-extension" />
@@ -125,8 +124,8 @@
           <root url="file://$MODULE_DIR$/vendor/behat/mink" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
-          <root url="file://$MODULE_DIR$/vendor/behat/mink-extension" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/data-fixtures" />
+          <root url="file://$MODULE_DIR$/vendor/behat/mink-extension" />
           <root url="file://$MODULE_DIR$/vendor/sensiolabs/behat-page-object-extension" />
           <root url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
           <root url="file://$MODULE_DIR$/vendor/behat/transliterator" />
@@ -145,7 +144,6 @@
           <root url="file://$MODULE_DIR$/vendor/braincrafted/bootstrap-bundle" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
           <root url="file://$MODULE_DIR$/vendor/symfony/symfony" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/icu" />
           <root url="file://$MODULE_DIR$/vendor/psr/log" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/common" />
           <root url="file://$MODULE_DIR$/vendor/behat/symfony2-extension" />
@@ -187,8 +185,8 @@
           <root url="file://$MODULE_DIR$/vendor/behat/mink" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
-          <root url="file://$MODULE_DIR$/vendor/behat/mink-extension" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/data-fixtures" />
+          <root url="file://$MODULE_DIR$/vendor/behat/mink-extension" />
           <root url="file://$MODULE_DIR$/vendor/sensiolabs/behat-page-object-extension" />
           <root url="file://$MODULE_DIR$/vendor/chartinger/phpspec2-expect" />
           <root url="file://$MODULE_DIR$/vendor/behat/transliterator" />

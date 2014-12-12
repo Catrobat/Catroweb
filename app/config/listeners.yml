@@ -25,6 +25,11 @@ services:
             class: Catrobat\AppBundle\Listeners\ProgramXmlHeaderValidator
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+      catroweb.file.license.updater:
+            class: Catrobat\AppBundle\Listeners\LicenseUpdater
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: -1 }
             
       catrobat.core.services.invalidprogramuploadlogger:
               class:        Catrobat\AppBundle\Listeners\InvalidProgramUploadLogger
