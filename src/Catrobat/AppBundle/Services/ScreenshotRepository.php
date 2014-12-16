@@ -6,6 +6,8 @@ use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 
 class ScreenshotRepository
 {
+  const DEFAULT_SCREENSHOT = "images/default/screenshot.png";
+  const DEFAULT_THUMBNAIL = "images/default/thumbnail.png";
   private $thumbnail_dir;
   private $thumbnail_path;
   private $screenshot_dir;
@@ -62,12 +64,18 @@ class ScreenshotRepository
   
   public function getScreenshotWebPath($id)
   {
-    return $this->screenshot_path . $this->generateFileNameFromId($id);
+    if(file_exists($this->screenshot_dir . $this->generateFileNameFromId($id))) {
+      return $this->screenshot_path . $this->generateFileNameFromId($id);
+    }
+    return self::DEFAULT_SCREENSHOT;
   }
 
   public function getThumbnailWebPath($id)
   {
-    return $this->thumbnail_path . $this->generateFileNameFromId($id);
+    if(file_exists($this->thumbnail_dir . $this->generateFileNameFromId($id))) {
+      return $this->thumbnail_path . $this->generateFileNameFromId($id);
+    }
+    return self::DEFAULT_THUMBNAIL;
   }
   
 }

@@ -8,7 +8,6 @@ use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Model\Requests\AddProgramRequest;
 use Catrobat\AppBundle\Entity\Program;
 use Knp\Component\Pager\Paginator;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
@@ -91,7 +90,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
 
     if ($extracted_file->getScreenshotPath() == null)
     {
-      // Todo: default screenshot
+      // Todo: maybe for later implementations
     }
     else
     {
