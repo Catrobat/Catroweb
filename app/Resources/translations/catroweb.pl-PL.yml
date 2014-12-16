@@ -1,12 +1,12 @@
 ---
 programs:
   featured: Polecane
-  newest: Newest programs
+  newest: Najnowsze programy
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
 licenseToPlay:
-  title: 'Licencja na granie - oceń i podziel się'
+  title: 'Licencja na korzystanie - podziękuj i podziel się'
   text1: Wyobraź sobie program w Catrobat jako ciasteczko, takie specjalne ciasteczko z przepisem (blokami programu). Wszyscy uczestnicy społeczności Catrobat dzielą się tymi ciasteczkami, łącznie z przepisami na nie. Oznacza to, że możesz posmakować ciasteczka i nauczyć się jak je przygotowywać!
   text2: 'Nie ma sekretnych przepisów: instrukcje, jak zrobić ciasteczko są dostępne dla każdego, aby je wykorzystywać, modyfikować i traktować je jako inspirację dla nowych pomysłów... to znaczy ciasteczek.'
   text3: 'Możesz zjeść ciasteczko możesz też skopiować przepisy innych, aby zrobić własne z nieco innymi składnikami. Ta swoboda pociąga za sobą dwa proste wymagania:'
@@ -22,7 +22,7 @@ termsOfUse:
   headline: Witaj w społeczności Catrobat!
   text1: 'Jako uczestnik społeczności Catrobat dzielisz się programami i pomysłami z innymi ludźmi:'
   text2: 'Potrzebujemy Twojej pomocy, aby ta społeczność dawała wsparcie dla każdego jej członka. Oto jak możesz pomóc:'
-  text3: 'Dzięki projektowi Catrobat chcemy wspierać współpracę i umożliwić połączenie kreatywności wszystkich użytkowników na rzecz całej ludzkości. Również Ty możesz zostać aktywnym członkiem społeczności Catrobat, oddając swoje programy społeczności jako prezent, w taki sam sposób, jak inni aktywni uczestnicy dają swoje programy Tobie:'
+  text3: 'Dzięki projektowi Catrobat chcemy wspierać współpracę i umożliwić połączenie kreatywności wszystkich użytkowników na rzecz całej ludzkości. Również Ty możesz zostać aktywnym członkiem społeczności Catrobat oddając swoje programy społeczności jako prezent, w taki sam sposób, jak inni aktywni uczestnicy dają swoje programy Tobie:'
   text4: 'Nasz prezent dla Ciebie:'
   text5: 'Nasze warunki użytkowania i korzystania z usługi:'
   list1:
@@ -30,24 +30,24 @@ termsOfUse:
     item2: w każdym wieku (od małych dzieci do nastolatków i ich dziadków)
     item3: na wszystkich poziomach doświadczenia
   list2:
-    item1: Miej szacunek. Podczas udostępniania programów, pamiętaj, proszę, że ludzie z różnych grup wiekowych i środowisk zobaczą Twój wkład.
-    item2: 'Podziękuj. Masz swobodę przerabiania programów innych ludzi - po prostu upewnij się, że składasz im podziękowania. Jednym z miejsc podziękowań jest opis programu. Proszę, zobacz ustęp poniżej, tę wypunktowaną listę szczegółowych informacji na temat modyfikowania programów innych użytkowników.'
-    item3: Zachowaj uczciwość. Nie udawaj, że jesteś kim innym i nie staraj się oszukać społeczności.
+    item1: Miej szacunek. Podczas udostępniania programów, pamiętaj proszę, że ludzie z różnych grup wiekowych i środowisk zobaczą Twój wkład.
+    item2: 'Podziękuj. Masz swobodę przerabiania programów innych ludzi - po prostu upewnij się, że składasz im podziękowania. Jednym z miejsc podziękowań jest opis programu. Zobacz ustęp poniżej, wypunktowaną listę szczegółowych informacji na temat modyfikowania programów innych użytkowników.'
+    item3: Zachowaj uczciwość. Nie udawaj, że jesteś kimś innym i nie staraj się oszukać społeczności.
     item4: Nie ujawniaj informacji osobistych. Nie dziel się swoim adresem e-mail, numerem telefonu lub innymi danymi osobowymi.
-    item5: 'Pomóż zachować przyjazność witryny. Jeśli czujesz, że inni mogliby odczuć program lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk "Zgłoś jako niewłaściwe" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi twoje zgłoszenie i może usunąć dowolny program, komentarz lub post.'
+    item5: 'Pomóż zachować witrynę przyjazną. Jeśli czujesz, że inni mogliby odczuć program lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk "Zgłoś jako niewłaściwe" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi Twoje zgłoszenie i może usunąć dowolny program, komentarz lub post.'
   list3:
-    item1: 'Umieszczając program na naszych stronach internetowych, akceptujesz i zgadzasz się na korzystanie z Twojej pracy na wolnych darmowych licencjach dla przesłanych programów Catrobat. Na tych samych wolnych licencjach sam system Catrobat jest dostępny dla Ciebie, Wolne licencje przesłanych programów Catrobat dają każdemu prawo do uczenia się z prac wcześniej przesłanych przez innych, a także dostosowania i remiksownia tych prac aby budować własne nowe fascynujące gry, animacje i inne programy. To pozwala każdemu "stanąć na barkach kolegów", jednym z nich jesteś Ty! Twoja praca będzie zatem dostępna dla całego świata i wolno z niej będzie wszystkim korzystać, trochę podobnie do tekstów i zdjęć umieszczanych w Wikipedii przez wolontariuszy z całego świata. Potraktuj to jak Twój prezent dla ludzkości: dajesz go każdemu i wszyscy inni, którzy przesyłają swoje prace na nasze strony internetowych dają go Tobie. Dzięki temu umieszczony program jest darem wielkiej wartości, który jego właściciel daje Ci za darmo, pod warunkiem, że uczestniczysz we wspólnocie na tych samych warunkach.'
+    item1: 'Umieszczając program na naszych stronach internetowych, akceptujesz i zgadzasz się na korzystanie z Twojej pracy na wolnych  licencjach dla przesłanych programów Catrobat. Na tych samych wolnych licencjach sam system Catrobat jest dostępny dla Ciebie. Wolne licencje przesłanych programów Catrobat dają każdemu prawo do uczenia się z prac wcześniej przesłanych przez innych, a także dostosowania i remiksownia tych prac, aby budować własne nowe fascynujące gry, animacje i inne programy. To pozwala każdemu "stanąć na barkach kolegów", jednym z nich jesteś Ty! Twoja praca będzie zatem dostępna dla całego świata i wolno z niej będzie wszystkim korzystać, trochę podobnie do tekstów i zdjęć umieszczanych w Wikipedii przez wolontariuszy z całego świata. Potraktuj to jak Twój prezent dla ludzkości: dajesz go każdemu i wszyscy inni, którzy przesyłają swoje prace na nasze strony internetowe dają go Tobie. Dzięki temu umieszczony program jest darem wielkiej wartości, który jego właściciel daje Ci za darmo, pod warunkiem, że uczestniczysz we wspólnocie na tych samych warunkach.'
     item2: 'Nie musisz przyjąć tego daru; ale jeśli przyjmiesz, obowiązują Cię pewne zasady. Korzyścią płynącą z tych zasad jest to, czego możesz się nauczyć i to że możesz budować nawet ciekawsze rzeczy samemu, aby je następnie, np., ponownie umieścić na naszych stronach internetowych jako własne. Kolejną zaletą jest to, że te licencje zapewniają, że nie ponosisz odpowiedzialności za wszelkie problemy wynikające dla innych  używających twojego programu.'
-    item3: Jeden ważny dodatkowy warunek, to uznanie wkładu autorów, na których pracy został oparty Twój projekt. W tym samym czasie będziemy pracować ciężko, żeby Twoja praca została wyraźnie doceniona przez innych, jako Twój wkład, poprzez przypisanie do niego unikatowej nazwy, która została przez Ciebie wybrana do reprezentowania Ciebie w społeczności Catrobat i dając innym możliwość wyrażenia publicznie ich wdzięczności dla Ciebie za to, że Twoja praca jest dostępna dla wszystkich, a w szczególności dla nich.
+    item3: Jeden ważny dodatkowy warunek to uznanie wkładu autorów, na których pracy został oparty Twój projekt. W tym samym czasie będziemy pracować ciężko, żeby Twoja praca została wyraźnie doceniona przez innych, jako Twój wkład, poprzez przypisanie do niego unikatowej nazwy, która została przez Ciebie wybrana do reprezentowania Ciebie w społeczności Catrobat i dając innym możliwość wyrażenia publicznie ich wdzięczności dla Ciebie za to, że Twoja praca jest dostępna dla wszystkich, a w szczególności dla nich.
     item4: 'Proszę, odwiedź %link-licenseUploaded%, żeby poznać dokładne warunki i terminy prawne.'
   list4:
     item1: Oferujemy całe nasze oprogramowanie i zasoby internetowe związane z systemem Catrobat, tj. oprogramowanie napisane przez zespół Catrobat, nasze strony internetowe i zasoby internetowe, nasz własny kod źródłowy związany z systemem Catrobat i wszelkie dodatkowe dołączone materiały, takie jak np. zdjęcia, dźwięki i teksty, teraz i w przyszłości dla Ciebie na wolnych licencjach Catrobat.
-    item2: Te licencje czynią wszystkie części Catrobat zarówno wolnymi od opłat, jak również wolnymi w sensie swobody korzystania z nich, jak tylko chcesz, z kilkoma tylko ograniczeniami, zapewniającymi, między innymi, że system Catrobat zawsze pozostanie wolny i użyteczny dla wszystkich.
+    item2: Te licencje czynią wszystkie części Catrobat zarówno wolnymi od opłat, jak również wolnymi w sensie swobody korzystania z nich, jak tylko chcesz, z kilkoma tylko ograniczeniami zapewniającymi, między innymi, że system Catrobat zawsze pozostanie wolny i użyteczny dla wszystkich.
     item3: 'Aby poznać dokładne warunki i zasady prawne, skorzystaj z %link-licenseToPlay%. Kod źródłowy systemu Catrobat, a także wiele innych dokumentów oraz zasoby, są dostępne za pośrednictwem %link-developer%.'
   list5:
     item1: 'Jeśli jesteś związany (lub Twoi rodzice lub opiekunowie prawni są związani, jeśli jesteś w wieku poniżej 13 lat) z organizacją zajmującą się odpowiedzialnością za naruszenia prywatności  i/lub masową inwigilację, wtedy nie wolno Ci korzystać z naszej aplikacji i dostępu do naszych usług. Dokładne szczegóły tego ograniczenia i pewne wyjątki są określone w sekcjach 4.a i 4.b na naszych %link-termsOfUse%.'
     item2: Jeśli jesteś w wieku poniżej 13 lat, to musisz zapytać rodziców lub opiekunów prawnych, czy pozwalają Ci używać aplikacji i usług Catrobat.
-    item3: Zastrzegamy sobie prawo do odrzucenia, usunięcia lub ukrycia programów, kont użytkowników i wszelkich materiałów cyfrowych przesłanych na strony internetowe Catrobat w dowolnym czasie według własnego uznania, przykładowo, jeśli zauważymy, że program zawiera nieodpowiednie materiały lub użytkownik narusza prawa innych osób.
+    item3: Zastrzegamy sobie prawo do odrzucenia, usunięcia lub ukrycia programów, kont użytkowników i wszelkich materiałów cyfrowych przesłanych na strony internetowe Catrobat w dowolnym czasie według własnego uznania, na przykład, jeśli zauważymy, że program zawiera nieodpowiednie materiały lub użytkownik narusza prawa innych osób.
     item4: 'Całe oprogramowanie i zasoby internetowe Catrobat  są oferowane w nadziei, że będą one przydatne, ale bez jakiejkolwiek gwarancji.'
     item5: 'Po precyzyjne sformułowania powyższych punktów oraz niektóre dodatkowe warunki prawne, zajrzyj do naszego %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.'
   bottom1: Zajrzyj tutaj z powrotem od czasu do czasu, ponieważ zawsze staramy się poprawić nasze warunki korzystania z serwisu.
@@ -57,7 +57,7 @@ search:
   dotdotdot: Szukaj...
   search: Szukaj
   results: Wyniki wyszukiwania
-  resultcount: 'Your search returned %count% results'
+  resultcount: 'Znaleziono %count% wyników wyszukiwania'
 menu:
   profile: Mój profil
   logout: Wyloguj się
@@ -68,7 +68,7 @@ error:
     blank: Brakuje hasła.
     short: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: Opis nie może zawierać nieuprzejmych zwrotów.
   country:
     blank: Brakuje kraju.
     invalid: Nieprawidłowy kraj
@@ -87,11 +87,11 @@ error:
   file:
     unexpected: znaleziono nieoczekiwany plik
     invalid: nieprawidłowy plik
-  image.missing: Project XML mentions a file which does not exist in project-folder
+  image.missing: Projekt XML odwołuje się do pliku, który nie ma w folderze projektu
   unknown: nieznany błąd
   token: 'Uwierzytelnienie urządzenia nie powiodło się: nieprawidłowy token uwierzytelniania!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: Program nie może zawierać nieuprzejmych zwrotów.
 success:
   registration: Rejestracja udana!
   token: OK

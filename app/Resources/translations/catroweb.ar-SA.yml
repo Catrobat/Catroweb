@@ -1,7 +1,7 @@
 ---
 programs:
   featured: خصائص
-  newest: Newest programs
+  newest: أحدث برنامج
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
@@ -57,7 +57,7 @@ search:
   dotdotdot: بحث...
   search: بحث
   results: نتائج البحث
-  resultcount: 'Your search returned %count% results'
+  resultcount: 'نتائج البحث الذي قمت به %count% نتيجة'
 menu:
   profile: الصفحة الشخصية
   logout: خروج
@@ -68,7 +68,7 @@ error:
     blank: كلمة المرور غير موجودة.
     short: 'يجب أن تكون كلمة المرور تحتوي على الأقل الأحرف {{ limit }}.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: لا يجب أن يتضمن الوصف كلمات وقحة.
   country:
     blank: اسم الدولة غير موجود.
     invalid: اسم الدولة غير صحيح
@@ -87,11 +87,11 @@ error:
   file:
     unexpected: تم العثور على ملف غير متوقع
     invalid: الملف غير صحيح
-  image.missing: Project XML mentions a file which does not exist in project-folder
+  image.missing: ويشير المشروع XML إلى ملف غير موجود في مجلد المشروع
   unknown: خطأ غير معروف
   token: 'لقد فشل التحقق من الجهاز : رمز مميز غير صالح!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: 'يجب أن لا يحتوي اسم  البرنامج على كلمات  وقحة.'
 success:
   registration: تم التسجيل بنجاح
   token: موافق

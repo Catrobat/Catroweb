@@ -10,8 +10,7 @@
 /composer.phar
 /coverage
 /phpspec.yml
-.idea/workspace.xml
-.idea/uiDesigner.xml
+.idea/
 app/config/deploy.rb
 crowdin.yaml
 crowdin-cli.jar

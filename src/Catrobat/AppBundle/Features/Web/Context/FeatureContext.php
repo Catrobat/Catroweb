@@ -118,46 +118,84 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^Newest Programs should be "([^"]*)" loaded$/
+   * @Then /^I should see the featured slider$/
    */
-  public function newestProgramsShouldBeLoaded($arg1)
+  public function iShouldSeeTheFeaturedSlider()
   {
-
-    assertTrue($this->getSession()->evaluateScript($script));
+    $this->assertSession()->responseContains("featured");
+    assertTrue($this->getSession()->getPage()->findById('featuredPrograms')->isVisible());
   }
 
   /**
-   * @Then /^I should see three containers: "([^"]*)", "([^"]*)" and "([^"]*)"$/
+   * @Then /^I should see ([^"]*) programs$/
    */
-  public function iShouldSeeThreeContainersAnd($arg1, $arg2, $arg3)
+  public function iShouldSeePrograms($arg1)
   {
-    $this->assertSession()->responseContains($arg1);
-    $this->assertSession()->responseContains($arg2);
-    $this->assertSession()->responseContains($arg3);
+    $arg1 = trim($arg1);
+
+    switch($arg1) {
+      case "some":
+        $this->assertSession()->elementExists("css", ".program");
+        break;
+
+      case "no":
+        $this->assertSession()->elementNotExists("css", ".program");
+        break;
+
+      case "newest":
+        $this->assertSession()->elementExists("css", "#newest");
+        break;
+
+      case "most downloaded":
+        $this->assertSession()->elementExists("css", "#mostDownloaded");
+        break;
+
+      case "most viewed":
+        $this->assertSession()->elementExists("css", "#mostViewed");
+        break;
+
+      default:
+        assertTrue(false);
+    }
   }
 
   /**
-   * @Then /^in each of them there should be "([^"]*)" programs loaded$/
+   * @Then /^the selected language should be "([^"]*)"$/
    */
-  public function inEachOfThemThereShouldBeProgramsLoaded($arg1)
+  public function theSelectedLanguageShouldBe($arg1)
   {
-    $script = <<<JS
-    newest.loaded == $arg1 && mostDownloaded.loaded == $arg1 && mostViewed.loaded == $arg1;
-JS;
+    switch($arg1) {
+      case "English":
+        $cookie = $this->getSession()->getCookie("hl");
+        if(!empty($cookie))
+          $this->assertSession()->cookieEquals("hl", "en");
+        break;
 
-    assertTrue($this->getSession()->evaluateScript($script));
+      case "Deutsch":
+        $this->assertSession()->cookieEquals("hl", "de-DE");
+        break;
+
+      default:
+        assertTrue(false);
+    }
   }
 
   /**
-   * @Then /^in each of them there should be "([^"]*)" programs visible$/
+   * @Then /^I switch the language to "([^"]*)"$/
    */
-  public function inEachOfThemThereShouldBeProgramsVisible($arg1)
+  public function iSwitchTheLanguageTo($arg1)
   {
-    $script = <<<JS
-    newest.visible == $arg1 && mostDownloaded.visible == $arg1 && mostViewed.visible == $arg1;
-JS;
-
-    assertTrue($this->getSession()->evaluateScript($script));
+    switch($arg1) {
+      case "English":
+        $this->getSession()->setCookie("hl", "en");
+        break;
+      case "Deutsch":
+        $this->getSession()->setCookie("hl", "de-DE");
+        break;
+      default:
+        assertTrue(false);
+    }
+    $this->reload();
   }
 
   /**

@@ -4,14 +4,10 @@ Feature: Pocketcode homepage
   As a visitor
   I want to be able to see the homepage
 
-@Desktop
 Scenario: Viewing the homepage at website root
-  When I am on homepage
-  Then I should see three containers: "newest", "mostDownloaded" and "mostViewed"
-  And in each of them there should be "18" programs loaded
-
-@Mobile
-Scenario: Viewing the homepage at website root
-  When I am on homepage
-  Then I should see three containers: "newest", "mostDownloaded" and "mostViewed"
-  And in each of them there should be "6" programs visible
+  Given I am on homepage
+  Then I should see the featured slider
+  And I should see newest programs
+  And I should see most downloaded programs
+  And I should see most viewed programs
+  And I should see some programs

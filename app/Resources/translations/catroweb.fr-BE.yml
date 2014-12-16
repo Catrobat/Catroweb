@@ -1,10 +1,10 @@
 ---
 programs:
   featured: Featured
-  newest: Najnoviji programi
+  newest: Newest programs
   most:
-    viewed: Sa najviše pregleda
-    downloaded: Sa najviše preuzimanja
+    viewed: Most viewed
+    downloaded: Most downloaded
 licenseToPlay:
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
@@ -18,7 +18,7 @@ licenseToPlay:
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
 termsOfUse:
-  title: Uvjeti korištenja
+  title: Terms of Use
   headline: Welcome to the Catrobat Community!
   text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
@@ -52,53 +52,53 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Verzija 1.3, 4 mart 2014
+  version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  search: Pretraži
-  results: Rezultati pretrage
+  search: chercher
+  results: Search Results
   resultcount: 'Your search returned %count% results'
 menu:
-  profile: Moj profil
+  profile: My Profile
   logout: Logout
 error:
   username:
-    blank: Korisničko ime ne smije biti prazno
+    blank: Le pseudo ne doit pas être vide
   password:
-    blank: Lozinka nedostaje.
-    short: 'Lozinka mora imati barem {{ limit }} znakova.'
+    blank: The password is missing.
+    short: 'Votre mot de passe doit avoir au moins {{ limit }} caractères.'
   description:
     rude: Description must not contain rude wordes.
   country:
     blank: The country is missing.
-    invalid: Država nije ispravna
+    invalid: Pays non valide
   email:
-    blank: e-mail ne smije biti prazan
-    invalid: E-mail adresa nije ispravna
+    blank: "L'e-mail ne doit pas être vide"
+    invalid: "L'e-mail ne semble pas valide"
     exists: This email address already exists.
   login: The password or username was incorrect.
   post-data: POST-Data not correct or missing!
   checksum:
     missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    invalid: Checksum invalide
   xml:
-    invalid: xml kod neispravan
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: Code XML invalide
+    missing: 'erreur inconnue : project_xml_not_found !'
   file:
-    unexpected: neočekivana datoteka pronađena
-    invalid: neispravna datoteka
+    unexpected: fichier inattendu
+    invalid: Fichier invalide
   image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: nepoznata greška
+  unknown: Erreur inconnue
   token: 'Authentication of device failed: invalid auth-token!'
   programname:
     rude: Programname must not contain rude wordes.
 success:
-  registration: Registracija uspješna!
-  token: ok
-  upload: Your project was uploaded successfully!
+  registration: Registration successful!
+  token: OK
+  upload: Votre projet a été envoyé avec succès !
 time:
-  minutes.ago: '{0} < 1 prije manje od minute |{1} prije 1 minute |]1,Inf] prije %count% minuta'
-  hours.ago: '{1} prije sat vremena|]1,Inf] prije %count% sati'
-  days.ago: '{1} prije jedan dan|]1,Inf] prije %count% dana'
-  months.ago: '{1} prije jedan mjesec|]1,Inf] prije %count% mjeseci'
-  years.ago: '{1} prije jednu godinu|]1,Inf] prije više od godinu dana'
+  minutes.ago: '{0}  < il y a 1 minute |{1} il y a 1 minute |]1, Inf] il y a %count% minutes'
+  hours.ago: '{1} il y a 1 heure |]1, Inf] il y a %count% heures'
+  days.ago: '{1} il y a 1 jour |]1, Inf] il y a %count% jours'
+  months.ago: '{1} il y a 1 mois |]1, Inf] il y a %count% mois'
+  years.ago: "{1} il y a 1 an |]1, Inf] il y a plus d'un an"

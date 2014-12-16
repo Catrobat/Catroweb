@@ -56,10 +56,10 @@ termsOfUse:
 search:
   dotdotdot: Search...
   search: Keresés
-  results: Search Results
+  results: Keresés eredménye
   resultcount: 'Your search returned %count% results'
 menu:
-  profile: My Profile
+  profile: Profilom
   logout: Logout
 error:
   username:

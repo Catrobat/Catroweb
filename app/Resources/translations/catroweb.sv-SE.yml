@@ -1,0 +1,104 @@
+---
+programs:
+  featured: Presenterade
+  newest: Nyaste program
+  most:
+    viewed: Mest visade
+    downloaded: Mest nedladdningar
+licenseToPlay:
+  title: 'Licens för att spela - ge kredit och dela'
+  text1: 'Tänk dig att varje Catrobat program är en tårta, en mycket speciell kaka som kommer med dess recept (programmering block).   Alla medlemmar i Catrobat gemenskapen delar deras kakor tillsammans med sina recept. Detta innebär att du kan njuta av kakor och lär dig hur man gör dem själv!'
+  text2: 'Det finns inga hemliga recept: instruktionerna på hur man gör dessa kakor är öppna för alla att använda, återanvända, ändra och tjäna som inspiration för nya idéer... Jag menar kakor.'
+  text3: 'Du kan äta kakor samt kopiera andras recept för att göra dina egna, kanske med olika ingredienser.   Denna frihet kommer med två enkla krav:'
+  text4: 'när vi upprättade gemenskapen Catrobat, beslutade vi att anta denna strategi eftersom vi anser att det stöder lärande och kreativitet inom gemenskapen.          Genom att dela recept och ingredienser (skript och teckningar), människor kan bygga vidare på varandras idéer och alla kommer att gynnas.'
+  text5: Vid utformningen av webbplatsen Catrobat, ingår vi funktioner för att uppmuntra människor att dela och ge kredit till andra. På varje sida, kan du alltid hämta de ursprungliga skript för programmet. Om du remixar ett program (ändra skript eller konstverk och dela resultatet), uppmuntrar vi dig att ge kredit i programmets anteckningar, och nämna dom människor och program som inspirerade dig.
+  text6: 'Läs mer om villkoren för användning av gemenskapens Catrobat online på %link-termsOfUse%.'
+  list1:
+    item1: Dela dina kakor tillsammans med receptet
+    item2: ge kredit till dem som inspirerade dig
+  version: Version 1.1, 2 April 2013
+termsOfUse:
+  title: Användarvillkor
+  headline: Välkommen till Catrobat gemenskapen!
+  text1: 'Som en del av Catrobat gemenskapen, delar du program och idéer med människor:'
+  text2: 'Vi behöver din hjälp att göra denna gemenskap en stödjande plats för varje medlem. Här är hur du kan hjälpa:'
+  text3: 'Genom Catrobat projektet vill vi främja samarbete och se allas kreativitet för att kombinera för hela mänskligheten. Du kan också bli en aktiv medlem av Catrobat gemenskapen genom att ge dina program tillbaka till gemenskapen som en gåva, på samma sätt som andra aktiva medlemmar ger sina program till dig:'
+  text4: 'Vår gåva till dig:'
+  text5: 'Våra användarvillkor och Service:'
+  list1:
+    item1: från många olika länder och kulturer
+    item2: i alla åldrar (från små barn till tonåringar och farföräldrar)
+    item3: med alla nivåer av erfarenhet
+  list2:
+    item1: 'Vara respektfull. När du delar program, kom ihåg att människor av många olika åldrar och bakgrunder kommer att  se ditt bidrag.'
+    item2: 'Ge kredit. Känn dig fri att göra modifierade versioner av andras program - se bara till att ge dem kredit. En plats att ge kredit är i programmets beskrivning. Se stycket under denna prickade lista för information om hur du ändrar program av andra användare.'
+    item3: Vara ärlig. Inte låtsas vara någon annan än vem du är eller försöka lura gemenskapen.
+    item4: Hålla personlig information privat. Dela inte din e-postadress, telefonnummer eller annan personlig kontaktinformation.
+    item5: 'Att hålla webbplatsen vänlig. Om du känner att andra skulle tycka ett program eller kommentar är, förolämpande, för våldsamma eller annars olämplig, bara klicka på knappen "rapportera som olämpligt" och lämna en kort förklaring. Catrobat laget kommer att granska rapporten och ta bort alla program, kommentar, eller post.'
+  list3:
+    item1: 'Genom att överföra ett program till våra webbplatser,  accepterar du och godkänner att sätta detta arbete under vissa fria licenser av uppladdade Catrobat program. Liknar de fria licenser som själva Catrobat systemet är tillgänglig för dig, dessa fria licenser av uppladdade Catrobat program ger alla rätt att lära sig från jobbet tidigare laddat upp av andra och att anpassa och remixa, som fungerar för att bygga sina egna nya fascinerande spel, animationer och andra program. Detta ger alla möjlighet att "stå på axlarna av sina kamrater", en av dem är du! Ditt arbete kommer således gynna hela världen och fortfarande gratis för alla att använda, lite liknande text och bilder har fritt bidragits till Wikipedia av frivilliga från hela världen. Tänk på det som din gåva till mänskligheten: du ger till alla, och alla andra som laddar upp deras arbete till våra webbplatser ger dig. Således är ett uppladdat program en gåva av stort värde som dess ägare ger dig gratis, med villkoret att du deltar i samhället på samma villkor.'
+    item2: 'Du behöver inte acceptera gåvan; Om du gör, följer vissa regler med. Fördelarna med dessa regler är att du kan lära av arbetet och bygga på det och  göra ännu coolare saker själv, som du kan då exempelvis igen ladda upp till våra webbplatser som ditt eget. En annan fördel är att dessa licenser ser till att du inte kan hållas ansvarig för eventuella problem som uppstår för andra genom sin användning av ditt program.'
+    item3: En ytterligare viktig förutsättning är att du tydligt ger erkännande till de författare vars verk bygger på ditt eget arbete. På samma gång, kommer vi att arbeta hårt för att ditt arbete klart uppskattas av andra för att ha bidragit av dig, genom att ge erkännande till det unika namn du fritt har valt att representera dig i Catrobats gemenskapen och genom att ge andra möjlighet att uttrycka sin tacksamhet till dig i offentliga sätt för att ha gett ditt arbete för alla, och i synnerhet till dem.
+    item4: 'Kontakta %link-licenseUploaded% för exakta rättsliga villkoren.'
+  list4:
+    item1: Vi erbjuder alla våran egna programvara och Internet-resurser med Catrobat systemet, t.ex., den programvara skriven av Catrobat laget, våra webbplatser och Internet-resurser, vår egen källkod relaterat med Catrobat systemet, och ytterligare ingår material som, t.ex. bilder, ljud och texter, nu och i framtiden till dig under Catrobats fria licenser.
+    item2: Dessa licenser göra alla delar av Catrobat både kostnadsfritt till dig samt gratis i avkänningen av att ge dig frihet att använda dem hur du vill, med bara några begränsningar, bland annat garantera att Catrobat systemet för alltid kommer att förbli fri och användbart för alla.
+    item3: 'Kontakta %link-licenseToPlay% för exakta rättsliga villkoren. Källkoden till det Catrobat systemet samt många andra dokument och resurser finns tillgängliga via %link-developer%.'
+  list5:
+    item1: 'Om du, eller, om du är under 13 års ålder, dina föräldrar eller vårdnadshavare, är associerade med en organisation som bedriver eller ansvarar för dragnet typ kränkningar av privatlivet och/eller bulk eller massövervakning, då du inte får använda våra program och tillgång till våra tjänster. De exakta detaljerna i denna begränsning och vissa undantag till det är beskrivet i avsnitt 4.a och 4.b på våran %link-termsOfUse%.'
+    item2: Om du är under 13 år, måste du fråga dina föräldrar eller vårdnadshavare om de tillåter dig att använda Catrobats programvaror och tjänster.
+    item3: Vi förbehåller oss rätten att avvisa, ta bort eller dölja program, användarkonton, och digitala material upp till Catrobats webbplatser helst i godtycke, för anföra som exempel om vi finner att ett program innehåller olämpligt material eller om en användare gör intrång i andra personers rättigheter.
+    item4: Alla Catrobats programvara och Internet-resurser erbjuds i hopp om att de kommer att vara användbara, men utan någon garanti.
+    item5: 'Kontakta vår %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service för exakta formuleringar av ovanstående punkter och några ytterligare rättsliga villkor.'
+  bottom1: Kontrollera tillbaka hit från tid till tid, eftersom vi försöker alltid att förbättra våra användarvillkor.
+  bottom2: 'Maila några förslag angående dessa användarvillkor till %email-webmaster%.'
+  version: Version 1.3, 4 mars 2014
+search:
+  dotdotdot: Sök...
+  search: Sök
+  results: Sökresultat
+  resultcount: 'Din sökning gav %count% resultat'
+menu:
+  profile: Min Profil
+  logout: Logga ut
+error:
+  username:
+    blank: Användarnamn får inte vara tomt
+  password:
+    blank: Lösenord saknas.
+    short: 'Ditt lösenord måste ha minst {{ limit }} tecken.'
+  description:
+    rude: Beskrivningen får inte innehålla oförskämda ord.
+  country:
+    blank: Landet saknas.
+    invalid: Ogiltigt land
+  email:
+    blank: e-post får inte vara tomt
+    invalid: Din e-post verkar vara ogiltigt
+    exists: Denna e-postadress finns redan.
+  login: Lösenordet eller användarnamnet var felaktig.
+  post-data: Efter Data saknas eller inte korrekt!
+  checksum:
+    missing: Klienten skickade inte fileChecksum! Använder du en gammal version av Pocket Code?
+    invalid: felaktig kontrollsumma
+  xml:
+    invalid: ogiltig kod xml
+    missing: 'okänt fel: project_xml_not_found!'
+  file:
+    unexpected: oväntad fil hittades
+    invalid: Ogiltig fil
+  image.missing: Projektet XML nämner en fil som inte finns i projektet-mappen
+  unknown: Okänt fel
+  token: 'Autentisering av enhet misslyckades: Ogiltig auth-token!'
+  programname:
+    rude: Programnamn får inte innehålla oförskämda ord.
+success:
+  registration: Registreringen lyckades!
+  token: Okej
+  upload: Ditt Projektet lyckades laddas upp!
+time:
+  minutes.ago: '{0} < 1 minut sedan |{1}1 minuter sedan |]1 Inf] %count% minuter sedan'
+  hours.ago: '{1}1 timme sedan |]1 Inf] %count% timmar sedan'
+  days.ago: '{1}1 dag sedan |]1 Inf] %count% dagar sedan'
+  months.ago: '{1}1 månad sedan |]1 Inf] %count% månader sedan'
+  years.ago: '{1}1 år sedan |]1 Inf] mer än ett år sedan'

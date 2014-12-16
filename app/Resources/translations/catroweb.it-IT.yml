@@ -1,7 +1,7 @@
 ---
 programs:
   featured: In evidenza
-  newest: Newest programs
+  newest: Programmi più recenti
   most:
     viewed: Il più visto
     downloaded: Il più scaricato
@@ -63,7 +63,7 @@ search:
   dotdotdot: Cerca...
   search: Cerca
   results: Risultati della ricerca
-  resultcount: 'Your search returned %count% results'
+  resultcount: 'La tua ricerca ha ottenuto %count% risultati'
 menu:
   profile: Il mio profilo
   logout: Logout
@@ -74,7 +74,7 @@ error:
     blank: Manca la password.
     short: 'La tua password deve avere almeno {{ limit }} caratteri.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: La descrizione non deve contenere parolacce.
   country:
     blank: Manca la nazione.
     invalid: Nazione non valida
@@ -93,11 +93,11 @@ error:
   file:
     unexpected: trovato file inatteso
     invalid: file non valido
-  image.missing: Project XML mentions a file which does not exist in project-folder
+  image.missing: "Nel file XML del progetto si menziona un file che non c'è nella cartella del progetto"
   unknown: errore sconosciuto
   token: 'Autenticazione del dispositivo non riuscita: auth-token non valido!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: Il nome del programma non deve contenere parolacce.
 success:
   registration: Registrazione effettuata con successo!
   token: ok
