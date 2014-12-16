@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Model;
 
 use Catrobat\AppBundle\Events\InvalidProgramUploadedEvent;
+use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Model\Requests\AddProgramRequest;
 use Catrobat\AppBundle\Entity\Program;
@@ -81,8 +82,13 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $program->setUploadLanguage("en");
     
     $this->entity_manager->persist($program);
+    //$this->entity_manager->flush();
+
+    $this->event_dispatcher->dispatch("catrobat.program.after.insert", new ProgramAfterInsertEvent($extracted_file, $program));
+
+    $this->entity_manager->persist($program);
     $this->entity_manager->flush();
-    
+
     if ($extracted_file->getScreenshotPath() == null)
     {
       // Todo: default screenshot

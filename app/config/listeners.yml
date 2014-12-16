@@ -30,6 +30,12 @@ services:
             class: Catrobat\AppBundle\Listeners\LicenseUpdater
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: -1 }
+
+      catroweb.file.remix.updater:
+            class: Catrobat\AppBundle\Listeners\RemixUpdater
+            arguments: ["@programrepository"]
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
             
       catrobat.core.services.invalidprogramuploadlogger:
               class:        Catrobat\AppBundle\Listeners\InvalidProgramUploadLogger
