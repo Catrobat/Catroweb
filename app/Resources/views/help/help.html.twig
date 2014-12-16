@@ -10,32 +10,32 @@
 {% block body %}
     <div id="help-container">
       <div class="help-desktop">
-        <img src="{{ asset('images/tutorial/1_hourOfCode.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
+        <img id="hour-of-code-desktop" src="{{ asset('images/help/hour_of_code.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
       </div>
       <div class="help-mobile">
-        <img src="{{ asset('images/tutorial/2_hourOfCode.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
+        <img id="hour-of-code-mobile" src="{{ asset('images/help/hour_of_code_mobile.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
       </div>
       <div class="help-desktop help-special-margin">
-        <img src="{{ asset('images/tutorial/1_stepbystep.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
+        <img id="step-by-step-desktop" src="{{ asset('images/help/step_by_step.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
       </div>
       <div class="help-mobile">
-        <img src="{{ asset('images/tutorial/2_stepbystep.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
+        <img id="step-by-step-mobile" src="{{ asset('images/help/step_by_step_mobile.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
       </div>
       <div class="help-split-desktop">
         <div class="help-split">
-          <img src="{{ asset('images/tutorial/tutorials.png') }}" alt="Tutorials" onclick="self.location.href='{{ url('catrobat_web_tutorials') }}'" />
+          <img id="tutorials" src="{{ asset('images/help/tutorials.png') }}" alt="Tutorials" onclick="self.location.href='{{ url('catrobat_web_tutorials') }}'" />
         </div>
         <div class="help-split-spacer"></div>
         <div class="help-split">
-          <img src="{{ asset('images/tutorial/1_starters.png') }}" alt="Starter Programs" onclick="self.location.href='{{ url('catrobat_web_starter') }}'" />
+          <img id="starters" src="{{ asset('images/help/starters.png') }}" alt="Starter Programs" onclick="self.location.href='{{ url('catrobat_web_starter') }}'" />
         </div>
         <div class="clear"></div>
       </div>
       <div class="help-desktop">
-        <img src="{{ asset('images/tutorial/1_discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
+        <img id="discuss-desktop" src="{{ asset('images/help/discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
       </div>
       <div class="help-mobile">
-        <img src="{{ asset('images/tutorial/2_discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
+        <img id="discuss-mobile" src="{{ asset('images/help/discuss_mobile.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
       </div>
     </div>
 {% endblock %}

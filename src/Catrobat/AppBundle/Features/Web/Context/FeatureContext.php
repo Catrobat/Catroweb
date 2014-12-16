@@ -26,6 +26,11 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
+  /*
+   * @var \Symfony\Component\HttpKernel\Client
+   */
+  private $client;
+
   private $kernel;
   private $screenshot_directory;
 
@@ -153,6 +158,93 @@ JS;
 JS;
 
     assertTrue($this->getSession()->evaluateScript($script));
+  }
+
+  /**
+   * @Then /^I should see a( [^"]*)? help image "([^"]*)"$/
+   */
+  public function iShouldSeeAHelpImage($arg1, $arg2)
+  {
+    $arg1 = trim($arg1);
+
+    $this->assertSession()->responseContains("help-desktop");
+    $this->assertSession()->responseContains("help-mobile");
+
+    if($arg1 == "big") {
+      assertTrue($this->getSession()->getPage()->find("css",".help-desktop")->isVisible());
+      assertFalse($this->getSession()->getPage()->find("css",".help-mobile")->isVisible());
+    }
+    else if($arg1 == "small") {
+      assertFalse($this->getSession()->getPage()->find("css",".help-desktop")->isVisible());
+      assertTrue($this->getSession()->getPage()->find("css",".help-mobile")->isVisible());
+    }
+    else if($arg1 == "")
+      assertTrue($this->getSession()->getPage()->find("css",".help-split-desktop")->isVisible());
+    else
+      assertTrue(false);
+
+    $img = null;
+    $path = null;
+
+    switch($arg2) {
+      case "Hour of Code":
+        if($arg1 == "big") {
+          $img = $this->getSession()->getPage()->findById("hour-of-code-desktop");
+          $path = "/images/help/hour_of_code.png";
+        }
+        else if($arg1 == "small") {
+          $img = $this->getSession()->getPage()->findById("hour-of-code-mobile");
+          $path = "/images/help/hour_of_code_mobile.png";
+        }
+        else
+          assertTrue(false);
+        break;
+      case "Step By Step":
+        if($arg1 == "big") {
+          $img = $this->getSession()->getPage()->findById("step-by-step-desktop");
+          $path = "/images/help/step_by_step.png";
+        }
+        else if($arg1 == "small") {
+          $img = $this->getSession()->getPage()->findById("step-by-step-mobile");
+          $path = "/images/help/step_by_step_mobile.png";
+        }
+        else
+          assertTrue(false);
+        break;
+      case "Tutorials":
+        $img = $this->getSession()->getPage()->findById("tutorials");
+        $path = "/images/help/tutorials.png";
+        break;
+      case "Starters":
+        $img = $this->getSession()->getPage()->findById("starters");
+        $path = "/images/help/starters.png";
+        break;
+      case "Discussion":
+        if($arg1 == "big") {
+          $img = $this->getSession()->getPage()->findById("discuss-desktop");
+          $path = "/images/help/discuss.png";
+        }
+        else if($arg1 == "small") {
+          $img = $this->getSession()->getPage()->findById("discuss-mobile");
+          $path = "/images/help/discuss_mobile.png";
+        }
+        else
+          assertTrue(false);
+        break;
+      default:
+        assertTrue(false);
+        break;
+
+    }
+
+    if($img != null) {
+      assertEquals($img->getTagName(), "img");
+      assertEquals($img->getAttribute("src"), $path);
+      assertTrue($img->isVisible());
+    }
+    else
+      assertTrue(false);
+
   }
 
 
