@@ -315,7 +315,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       for ($i = 0; $i < count($users); ++$i ) {
           $user = $user_manager->createUser();
           $user->setUsername($users[$i]['name']);
-          $user->setEmail('dev'.$i.'@pocketcode.org');
+          $user->setEmail($users[$i]['email']);
           $user->setAdditionalEmail('');
           $user->setPlainPassword($users[$i]['password']);
           $user->setEnabled(true);
@@ -384,6 +384,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
       if ($arg1 == 'in') {
           $this->assertPageNotContainsText('Your password or username was incorrect.');
+          $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+          $this->getSession()->wait(1000);
           $this->assertElementOnPage('#logo');
           $this->assertElementNotOnPage('#btn-login');
           $this->assertElementOnPage('#nav-dropdown');
@@ -391,6 +393,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $this->assertElementOnPage('#nav-dropdown');
       }
       if ($arg1 == 'out') {
+          $this->getSession()->wait(10000, 'window.location.href.search("profile") == -1');
+          $this->getSession()->wait(1000);
           $this->assertElementOnPage('#btn-login');
           $this->assertElementNotOnPage('#nav-dropdown');
       }
@@ -504,6 +508,93 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $this->getSession()->evaluateScript("$('#searchbar').trigger($.Event( 'keypress', { which: 13 } ))");
       $this->getSession()->wait(5000, '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)');
   }
+
+    /**
+     * @When /^I click the "([^"]*)" button$/
+     */
+    public function iClickTheButton($arg1)
+    {
+        $arg1 = trim($arg1);
+        $page = $this->getSession()->getPage();
+        $button = null;
+
+        switch($arg1) {
+            case "login":
+                $button = $page->find("css", "#btn-login");
+                break;
+            case "logout":
+                $url = $this->getSession()->getCurrentUrl();
+                if(strpos($url, 'profile') != false) {
+                    $page->find("css", ".show-nav-dropdown")->click();
+                }
+                $button = $page->find("css", "#btn-logout");
+                break;
+            case "profile":
+                $button = $page->find("css", "#btn-profile");
+                break;
+            case "forgot pw or username":
+                $button = $page->find("css", "#pw-request");
+                break;
+            default:
+                assertTrue(false);
+        }
+        $button->click();
+
+    }
+
+    /**
+     * @When /^I trigger Facebook login with auth_type '([^']*)'$/
+     */
+    public function iTriggerFacebookLogin($arg1)
+    {
+      $this->assertElementOnPage('#btn-login');
+      $this->iClickTheButton('login');
+      $this->assertPageAddress('/pocketcode/login');
+      $this->assertElementOnPage('#header-logo');
+      $this->assertElementOnPage('#btn-login_facebook');
+      $this->getSession()->executeScript('document.getElementById("facebook_auth_type").type = "text";');
+      $this->getSession()->getPage()->findById('facebook_auth_type')->setValue($arg1);
+
+     }
+
+    /**
+     * @When /^I click Facebook login link$/
+     */
+    public function iClickFacebookLoginLink()
+    {
+      $this->clickLink('btn-login_facebook');
+      $this->getSession()->wait(2000);
+    }
+
+    /**
+     * @When /^I trigger Google login with approval prompt "([^"]*)"$/
+     */
+
+    public function iTriggerGoogleLogin($arg1)
+    {
+        $this->assertElementOnPage('#btn-login');
+        $this->iClickTheButton('login');
+        $this->assertPageAddress('/pocketcode/login');
+        $this->getSession()->wait(200);
+        $this->assertElementOnPage('#header-logo');
+        $this->assertElementOnPage('#btn-login_google');
+        $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
+        $this->getSession()->wait(200);
+        $this->getSession()->getPage()->findById('gplus_approval_prompt')->setValue($arg1);
+    }
+
+    /**
+     * @When /^I click Google login link "([^"]*)"$/
+     */
+    public function iClickGoogleLoginLink($arg1)
+    {
+        $this->clickLink('btn-login_google');
+        $this->getSession()->wait(1500);
+        if($arg1 == 'twice') {
+            $this->clickLink('btn-login_google');
+            $this->getSession()->wait(2500);
+        }
+    }
 
   /**
    * @Then /^there should be "([^"]*)" programs in the database$/
@@ -690,4 +781,256 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     return $this->client;
   }
+
+    /**
+   * @When /^I switch to popup window$/
+   */
+  public function iSwitchToPopupWindow()
+  {
+      $this->getSession()->wait(6000);
+      $page = $this->getSession()->getPage();
+      $window_names = $this->getSession()->getDriver()->getWindowNames();
+      foreach ($window_names as $name) {
+          echo $name;
+          if($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')
+              || $page->find('css', '#approval_container') || $page->find('css', '#gaia_firstform')) {
+              break;
+          }
+          $this->getSession()->switchToWindow($name);
+      }
+      $this->getSession()->wait(1000);
+  }
+
+    /**
+     * @Then /^I log in to Facebook with valid credentials$/
+     */
+    public function iLogInToFacebookWithEmailAndPassword()
+    {
+        $mail = $this->getParameterValue('facebook_testuser_mail');
+        $pw = $this->getParameterValue('facebook_testuser_pw');
+        echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+        $this->getSession()->wait(1000);
+        $page = $this->getSession()->getPage();
+        if($page->find('css', '#facebook') && $page->find('css', '#login_form')) {
+            echo 'facebook login form appeared' . "\n";
+            $page->fillField('email',$mail);
+            $page->fillField('pass',$pw);
+            $button = $page->findById('u_0_2');
+            assertTrue($button != null);
+            $button->press();
+        } else if($page->find('css', '#facebook') && $page->find('css', '#u_0_1')) {
+            echo 'facebook reauthentication login form appeared' . "\n";
+            $page->fillField('pass',$pw);
+            $button = $page->findById('u_0_0');
+            assertTrue($button != null);
+            $this->getSession()->wait(500);
+            $button->press();
+        } else {
+            assertTrue(false, 'No Facebook form appeared!' . "\n");
+        }
+        $this->getSession()->switchToWindow(null);
+        $this->getSession()->wait(1000);
+
+        $this->iSwitchToPopupWindow();
+        if($page->find('css', '#facebook') && $page->find('css', '._1a_q') ) {
+            echo 'facebook authentication login form appeared' . "\n";
+            $button = $page->findButton('__CONFIRM__');
+            assertTrue($button != null);
+            $this->getSession()->wait(500);
+            $button->press();
+            $this->getSession()->switchToWindow(null);
+            $this->getSession()->wait(1000);
+        }
+    }
+
+    /**
+     * @Then /^I log in to Google with valid credentials$/
+     */
+    public function iLogInToGoogleWithEmailAndPassword()
+    {
+        $mail = $this->getParameterValue('google_testuser_mail');
+        $pw = $this->getParameterValue('google_testuser_pw');
+        echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+        $this->getSession()->wait(3000);
+        $page = $this->getSession()->getPage();
+        if($page->find('css', '#approval_container') &&
+            $page->find('css', '#submit_approve_access')) {
+                $this->approveGoogleAccess();
+        } else if($page->find('css', '.google-header-bar centered') &&
+            $page->find('css', '.signin-card clearfix')) {
+            $this->signInWithGoogleEMailAndPassword($mail, $pw);
+        } else if($page->find('css', '#gaia_firstform') &&
+                  $page->find('css', '#Email') &&
+                  $page->find('css', '#Passwd-hidden')
+                  ) {
+                $this->signInWithGoogleEMail($mail, $pw);
+        }
+        else {
+            assertTrue(false, 'No Google form appeared!' . "\n");
+        }
+        $this->getSession()->wait(1000);
+    }
+
+    private function approveGoogleAccess(){
+        echo 'Google Approve Access form appeared' . "\n";
+        $page = $this->getSession()->getPage();
+        $button = $page->findById('submit_approve_access');
+        assertTrue($button != null);
+        $this->getSession()->wait(1500);
+        $button->press();
+        $this->getSession()->switchToWindow(null);
+    }
+
+    private function signInWithGoogleEMailAndPassword($mail, $pw){
+        echo 'Google login form with E-Mail and Password appeared' . "\n";
+        $page = $this->getSession()->getPage();
+
+        $page->fillField('Email',$mail);
+        $page->fillField('Passwd',$pw);
+        $button = $page->findById('signIn');
+        assertTrue($button != null);
+        $button->press();
+        $this->getSession()->wait(2000);
+
+        $this->approveGoogleAccess();
+    }
+
+    private function signInWithGoogleEMail($mail, $pw){
+        echo 'Google Signin with E-Mail form appeared' . "\n";
+        $page = $this->getSession()->getPage();
+
+        $page->fillField('Email',$mail);
+        $button = $page->findById('next');
+        assertTrue($button != null);
+        $button->press();
+        $this->getSession()->wait(2000);
+        if($page->find('css', '#gaia_firstform') &&
+            $page->find('css', '#Email-hidden') &&
+            $page->find('css', '#Passwd')
+        ) {
+            $this->signInWithGooglePassword($pw);
+        }
+    }
+
+    private function signInWithGooglePassword($pw){
+        echo 'Google Signin with Password form appeared' . "\n";
+        $page = $this->getSession()->getPage();
+
+        $page->fillField('Passwd',$pw);
+        $button = $page->findById('signIn');
+        assertTrue($button != null);
+        $button->press();
+        $this->getSession()->wait(2000);
+        if($page->find('css', '#approval_container') &&
+            $page->find('css', '#submit_approve_access')) {
+            $this->approveGoogleAccess();
+        }
+    }
+
+    /**
+     * @Then /^there is a user in the database:$/
+     */
+    public function thereIsAUserInTheDatabase(TableNode $table)
+    {
+        /**
+         * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
+         */
+        $user_manager = $this->kernel->getContainer()->get('usermanager');
+        $users = $table->getHash();
+        $user = null;
+        for($i = 0; $i < count($users); $i++)
+        {
+            $user = $user_manager->findUserByUsername($users[$i]["name"]);
+            assertNotNull($user);
+            assertTrue($user->getUsername() == $users[$i]["name"],
+                'Name wrong' . $users[$i]["name"] . 'expected, but ' . $user->getUsername() . ' found.');
+            assertTrue($user->getEmail() == $users[$i]["email"],
+                'E-Mail wrong' . $users[$i]["email"] . 'expected, but ' . $user->getEmail() . ' found.');
+            assertTrue($user->getCountry() == $users[$i]["country"],
+                'Country wrong' . $users[$i]["country"] . 'expected, but ' . $user->getCountry() . ' found.');
+            if($user->getFacebookUid() != ''){
+                assertTrue($user->getFacebookAccessToken() != '', 'no Facebook access token present');
+                assertTrue($user->getFacebookUid() == $users[$i]["facebook_uid"], 'Facebook UID wrong');
+                assertTrue($user->getFacebookName() == $users[$i]["facebook_name"], 'Facebook name wrong');
+            }
+            if($user->getGplusUid() != ''){
+                assertTrue($user->getGplusAccessToken() != '', 'no GPlus access token present');
+                assertTrue($user->getGplusIdToken() != '', 'no GPlus id token present');
+                assertTrue($user->getGplusRefreshToken() != '', 'no GPlus refresh token present');
+                assertTrue($user->getGplusUid() == $users[$i]["google_uid"], 'Google UID wrong');
+                assertTrue($user->getGplusName() == $users[$i]["google_name"], 'Google name wrong');
+            }
+        }
+    }
+
+    /**
+     * @When /^I logout$/
+     */
+    public function iLogout()
+    {
+        $this->getSession()->getPage()->find("css", ".btn show-nav-dropdown")->click();
+        $this->assertElementOnPage(".img-author-big");
+        $this->getSession()->getPage()->find("css", ".img-author-big")->click();
+
+    }
+
+    /**
+     * @Then /^I should not be logged in$/
+     */
+    public function iShouldNotBeLoggedIn()
+    {
+        $this->getSession()->wait(10000, 'window.location.href.search("profile") == -1');
+        $this->getSession()->wait(1000);
+        $this->assertElementOnPage("#logo");
+        $this->assertElementOnPage("#btn-login");
+        $this->assertElementNotOnPage("#nav-dropdown");
+    }
+
+    /**
+     * @When /^I wait for a second$/
+     */
+    public function iWaitForASecond()
+    {
+        $this->getSession()->wait(1000);
+    }
+
+    /**
+     * @Then /^I choose the username '([^']*)'$/
+     */
+    public function iChooseTheUsername($arg1)
+    {
+        $this->getSession()->wait(2000);
+        $page = $this->getSession()->getPage();
+
+        $button = $page->findById('btn_oauth_username');
+        assertTrue($button != null);
+        assertTrue($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username_input',$arg1);
+        $this->getSession()->wait(400);
+        assertFalse($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username_input','');
+        $this->getSession()->wait(400);
+        assertTrue($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username_input',$arg1);
+        $this->getSession()->wait(400);
+        $button->press();
+        $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+        $this->getSession()->wait(2000);
+    }
+
+    private function getParameterValue($name) {
+        $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
+        while(!feof($myfile)) {
+            $line = fgets($myfile);
+            if(strpos($line, $name) != false) {
+                fclose($myfile);
+                return substr(trim($line), strpos(trim($line), ':') + 2);
+            }
+        }
+        fclose($myfile);
+        assertTrue(false, 'No entry found in parameters.yml!');
+    }
 }

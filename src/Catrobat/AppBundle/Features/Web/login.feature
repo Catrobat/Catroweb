@@ -4,9 +4,9 @@
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 123456    | cccccccccc |
-      | User1    | 654321    | cccccccccc |
+      | name     | password | token       | email               |
+      | Catrobat | 123456    | cccccccccc | dev1@pocketcode.org |
+      | User1    | 654321    | cccccccccc | dev2@pocketcode.org |
 
   Scenario: Login and logout
     Given I am on homepage
@@ -35,14 +35,17 @@
     When I click "#pw-request"
     Then I should be on "/pocketcode/resetting/request"
     When I fill in "username" with "abcd"
-    And I press "recover"
+    And I press "reset_pw"
+    And I wait for a second
     Then I should see "Your username or email address was not found."
     When I fill in "username" with "Catrobat"
-    And I press "recover"
+    And I press "reset_pw"
+    And I wait for a second
     Then I should see "An email was sent to your email address. Please check your inbox."
     When I go to "/pocketcode/resetting/request"
     And I fill in "username" with "Catrobat"
-    And I press "recover"
+    And I press "reset_pw"
+    And I wait for a second
     Then I should see "The password for this user has already been requested within the last 24 hours."
 
 Scenario: The referer should work even after one failed login

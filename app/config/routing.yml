@@ -62,3 +62,11 @@ old_version_error:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    :Error:oldversion.html.twig
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+login:
+    path:      /{flavor}/login
+    defaults:  { _controller: FOSUserBundle:Security:login }
+    requirements: { "flavor": "pocketcode|pocketkodey" }

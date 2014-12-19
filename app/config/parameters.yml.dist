@@ -20,3 +20,12 @@ parameters:
         job: "Build"
         token: "token"
         uploadtoken: "secret"
+    application_name: Pocket Code
+    google_app_id: ~
+    google_secret: ~
+    facebook_app_id: ~
+    facebook_secret: ~
+    google_testuser_mail: ~
+    google_testuser_pw: ~
+    facebook_testuser_mail: ~
+    facebook_testuser_pw: ~
