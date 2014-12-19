@@ -448,6 +448,7 @@ apk:
 errors:
   username:
     blank: Benutzername darf nicht leer sein
+    invalid: Dein Benutzerame ist ungültig
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
@@ -460,6 +461,8 @@ errors:
     blank: E-Mail Adresse darf nicht leer sein
     invalid: Deine E-Mail Adresse scheint ungültig zu sein
     exists: Die E-Mail Adresse existiert bereits!
+  id:
+    blank: Open Authentication ID darf nicht leer sein
   login: Das Passwort oder der Username ist falsch.
   post-data: POST-Daten nicht korrekt oder fehlt!
   checksum:

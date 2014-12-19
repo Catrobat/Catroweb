@@ -21,3 +21,54 @@ Feature: Pocketcode homepage
     And I should see newest programs
     And I should see most downloaded programs
     And I should see most viewed programs
+
+  Scenario: Login and logout
+    Given I am on homepage
+    Then I should see an "#btn-login" element
+    When I click the "login" button
+    Then I should be on "/pocketcode/login"
+    And I should see an "#header-logo" element
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123456"
+    Then I press "Login"
+    Then I should be logged in
+
+
+  #Facebook and Google Scenarios only works with PhantommJS >= 2.0.
+  #In previous versions there was a bug that 'clicks cannot be completed' when switching back from the Login popup
+  #windows. There is also a bug with PhantomJS 2.0 where file uploads do not work (should be fixed soon)
+  #This bug can be fixed in QT --> processingUserGesture() in UserGestureIndicator.h must return true! see https://github.com/ariya/phantomjs/pull/12896/files
+  #This is because when testing with PhantomJS it's no User Gesture but a programmatic gesture (which must be allowed when testing)!
+  @Insulated
+  Scenario: Login with a new user into Facebook, logout and login again with the now existing user
+    Given I am on homepage
+    When I trigger Facebook login with auth_type 'reauthenticate'
+    And I switch to popup window
+    Then I log in to Facebook with valid credentials
+    Then I should be logged in
+    And there is a user in the database:
+      | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
+      | Pocket Tester     | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   | Pocket Tester |                        |                    | at     |
+    And I should see an "#btn-logout" element
+    When I click the "logout" button
+    Then I should not be logged in
+    When I trigger Facebook login with auth_type ''
+    And I wait for a second
+    Then I should be logged in
+
+  @Insulated
+  Scenario: Login with a new user into Google, logout and login again with the now existing user
+    Given I am on homepage
+    When I trigger Google login with approval prompt "force"
+    And I switch to popup window
+    Then I log in to Google with valid credentials
+    Then I should be logged in
+    And there is a user in the database:
+      | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
+      | PocketCode Tester | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  | PocketCode Tester  | at     |
+    And I should see an "#btn-logout" element
+    When I click the "logout" button
+    Then I should not be logged in
+    When I trigger Google login with approval prompt "auto"
+    And I wait for a second
+    Then I should be logged in

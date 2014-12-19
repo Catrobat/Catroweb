@@ -4,6 +4,14 @@
   {% stylesheets 'css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/login.css' %}
   <link rel="stylesheet" href="{{ asset_url }}" />
   {% endstylesheets %}
+
+  {% javascripts 'js/plugins/*'
+        'js/base/*' 'js/custom/social/*'
+        output='compiled/script.js' %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 {% endblock %}
 
 {% block header %}
@@ -14,8 +22,11 @@
 
 {% block fos_user_content %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+<form id ="form_fos" action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" id = "csrf_token" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <h1>{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</h1>
+    <p></p>
 
     <div class="input-field">
       <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ "username"|trans({}, "catroweb") }}" />
@@ -27,30 +38,75 @@
       <div class="img-password"></div>
     </div>
 
+    {% if ("/login" in app.request.headers.get('referer')) %}
+
+        {% if app.session.has("catroweb_login_referer") %}
+            <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer")  }}#login" />
+        {% else %}
+            <input type="hidden" name="_target_path" value="{{ path("index") }}#login" />
+        {% endif %}
+    {% else %}
+        {% if (app.request.headers.get('referer') is not empty) %}
+            <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login" />
+            {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
+        {% else %}
+            <input type="hidden" name="_target_path" value="index" />
+        {% endif %}
+    {% endif %}
+
+    <div id="login_links">
+         <span id="login_link_left">
+             <a href="register">Create an account</a>
+         </span>
+         <span id="login_link_right">
+             <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>
+         </span>
+    </div>
+
     {% if error %}
       <div class="error-text">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
     {% endif %}
 
-    {% if ("/login" in app.request.headers.get('referer')) %}
-
-      {% if app.session.has("catroweb_login_referer") %}
-        <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer")  }}#login" />
-      {% else %}
-        <input type="hidden" name="_target_path" value="{{ path("index") }}#login" />
-      {% endif %}
-
-    {% else %}
-      {% if (app.request.headers.get('referer') is not empty) %}
-      <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login" />
-      {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
-      {% else %}
-        <input type="hidden" name="_target_path" value="index" />
-      {% endif %}
-    {% endif %}
-
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
-<div class="link center"><a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a></div>
+
+<form id ="form_oauth" action="{{ path("fos_user_security_check") }}" method="post">
+
+    <input type="hidden" id = "csrf_token_oauth" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="hidden" id = "username_oauth" name="_username" />
+    <input type="hidden" id = "password_oauth" name="_password" />
+    <input type="hidden" id = "gplus_approval_prompt" value="auto" />
+    <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
+
+    <div id="separator">
+        <br>
+        <hr/>
+        <span id="or">
+            OR
+        </span>
+        <hr/>
+        <br>
+        <p></p>
+    </div>
+
+    <div id="fb-root"></div>
+    <div id ="googleLoginButton">
+            <!--
+                Google Login Button is a 2 click button, where image is removed at first click, second click triggers login because of data privacy - see:
+                http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons
+            -->
+    <a id="btn-login_google" href="#" onclick="triggerGoogleLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-google.png') }}" alt="Google Login"></a>
+    </div>
+    <div id ="facebookLoginButton">
+    <a id="btn-login_facebook" href="#" onclick="triggerFacebookLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
+    </div>
+
+     <div id="status">
+    </div>
+
+    <button id="_submit_oauth" name="_submit" class="hidden" />
+
+</form>
 {% endblock fos_user_content %}
 
 {% endblock body %}
