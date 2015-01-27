@@ -12,13 +12,33 @@
 
   <div class="content-container wizard">
 
-    <div class="header-arrows"> <</div>
-    <div class="header-pagination">1,2,3...</div>
-    <div class="header-arrows"> ></div>
+    <nav>
+      {{ knp_pagination_render(pagination) }}
+    </nav>
+
     <div class="clear"></div>
-    <div class="title center size-xxlarge">#{{ page }}: {{ ("help.hourOfCode.step"~page~".title")|trans({}, "catroweb") }}</div>
+    <div class="title center size-xxlarge">#{{ page }}
+      : {{ ("help.hourOfCode.step"~page~".title")|trans({}, "catroweb") }}</div>
     <div class="description center size-large">
       {{ ("help.hourOfCode.step"~page~".description")|trans({}, "catroweb") }}
+    </div>
+
+    <div class="image-container">
+      <div style="display: table-cell">
+        <img src="{{ asset('images/help/hour_of_code/thumbs/0_1.jpg') }}" alt="" title="" />
+      </div>
+      <div class="spacer">
+        <div class="arrow"></div>
+      </div>
+      <div style="display: table-cell">
+        <img src="{{ asset('images/help/hour_of_code/thumbs/0_1.jpg') }}" alt="" title="" />
+      </div>
+      <div class="spacer">
+        <div class="arrow"></div>
+      </div>
+      <div style="display: table-cell">
+        <img src="{{ asset('images/help/hour_of_code/thumbs/0_1.jpg') }}" alt="" title="" />
+      </div>
     </div>
 
 

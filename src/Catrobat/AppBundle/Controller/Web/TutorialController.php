@@ -25,13 +25,29 @@ class TutorialController extends Controller
    */
   public function hourOfCodeAction($page)
   {
-    if ($page > 21) {
+    $paginator = $this->get('knp_paginator');
+
+    $images = array();
+
+    for ($i = 0; $i < 21; $i++)
+      $images[] = $i;
+
+
+    $pagination = $paginator->paginate(
+      $images,
+      $page, //current page
+      1/*limit per page*/
+    );
+
+    $pagination->setTemplate(':help:pagination.html.twig');
+
+    if($page > 21) {
       throw $this->createNotFoundException('Unable to find step.');
     }
-    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig', array("page" => $page));
+    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig', array("page" => $page, 'pagination' => $pagination));
   }
 
-    /**
+  /**
    * @Route("/step-by-step", name="catrobat_web_stepByStep")
    * @Method({"GET"})
    */
@@ -46,10 +62,10 @@ class TutorialController extends Controller
    */
   public function tutorialsAction()
   {
-      return $this->get("templating")->renderResponse(':help:tutorials.html.twig');
+    return $this->get("templating")->renderResponse(':help:tutorials.html.twig');
   }
 
-    /**
+  /**
    * @Route("/starter-programs", name="catrobat_web_starter")
    * @Method({"GET"})
    */

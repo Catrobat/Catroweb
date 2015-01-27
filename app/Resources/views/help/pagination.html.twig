@@ -1,0 +1,76 @@
+{% if pageCount > 1 %}
+  <div class="header-arrows">
+    {% if current > first-1 %}
+      <a href="{{ path(route, query|merge({(pageParameterName): current-1})) }}">
+        <div class="arrow left"></div>
+      </a>
+    {% else %}
+      &nbsp;
+    {% endif %}
+  </div>
+
+  <div class="header-pagination">
+    {% if first is defined %}
+      <a href="{{ path(route, query|merge({(pageParameterName): first-1})) }}">
+        {% if current == first-1 %}
+          <div class="bubbles"><span class="current">{{ first-1 }}</span></div>
+        {% else %}
+          <div class="bubbles">{{ first-1 }}</div>
+        {% endif %}
+      </a>
+      {% if current < 3 %}
+        <a href="{{ path(route, query|merge({(pageParameterName): first})) }}">
+          {% if current == first %}
+            <div class="bubbles"><span class="current">{{ first }}</span></div>
+          {% else %}
+            <div class="bubbles">{{ first }}</div>
+          {% endif %}
+        </a>
+      {% else %}
+        <div class="bubbles">...</div>
+      {% endif %}
+    {% endif %}
+
+    {% for page in pagesInRange %}
+
+      {% if current != first-1 or page != 3 %}
+
+        {% if page != first and page != last %}
+          {% if page != current %}
+            <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+              <div class="bubbles">{{ page }}</div>
+            </a>
+          {% else %}
+            <div class="bubbles"><span class="current">{{ page }}</span></div>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if last is defined %}
+      {% if current <= last-3 %}
+        <div class="bubbles">...</div>
+      {% endif %}
+
+      <a href="{{ path(route, query|merge({(pageParameterName): last})) }}">
+        {% if current == last %}
+          <div class="bubbles"><span class="current">{{ last }}</span></div>
+        {% else %}
+          <div class="bubbles">{{ last }}</div>
+        {% endif %}
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="header-arrows">
+    {% if next is defined %}
+      <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+        <div class="arrow right"></div>
+      </a>
+    {% else %}
+      &nbsp;
+    {% endif %}
+  </div>
+
+  <div class="clear"></div>
+{% endif %}
