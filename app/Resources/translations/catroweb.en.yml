@@ -59,6 +59,76 @@ termsOfUse:
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 March 2014
 
+help:
+  hourOfCode:
+    step0:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step1:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step2:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step3:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step4:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step5:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step6:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step7:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step8:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step9:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step10:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step11:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step12:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step13:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step14:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step15:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step16:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step17:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step18:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step19:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step20:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+    step21:
+      title: "Skydiving Steve"
+      description: "Lorem..."
+
+
 search:
   dotdotdot: Search...
   search: Search

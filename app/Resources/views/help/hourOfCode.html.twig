@@ -1,17 +1,28 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+  {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}"/>
+  {% endstylesheets %}
 {% endblock %}
 
 
 {% block body %}
-    Tutorial - Hour Of Code
+  <h1>Skydiving Steve</h1>
+
+  <div class="content-container wizard">
+
+    <div class="header-arrows"> <</div>
+    <div class="header-pagination">1,2,3...</div>
+    <div class="header-arrows"> ></div>
+    <div class="clear"></div>
+    <div class="title center size-xxlarge">#{{ page }}: {{ ("help.hourOfCode.step"~page~".title")|trans({}, "catroweb") }}</div>
+    <div class="description center size-large">
+      {{ ("help.hourOfCode.step"~page~".description")|trans({}, "catroweb") }}
+    </div>
 
 
-
+  </div>
 
 
 {% endblock %}

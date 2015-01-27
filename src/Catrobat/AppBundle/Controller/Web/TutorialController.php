@@ -25,7 +25,10 @@ class TutorialController extends Controller
    */
   public function hourOfCodeAction($page)
   {
-    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig');
+    if ($page > 21) {
+      throw $this->createNotFoundException('Unable to find step.');
+    }
+    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig', array("page" => $page));
   }
 
     /**
