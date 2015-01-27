@@ -17,6 +17,8 @@ class StatusCode
   const UNEXPECTED_FILE = 525;
   const RUDE_WORD_IN_PROGRAM_NAME = 511;
   const RUDE_WORD_IN_DESCRIPTION = 512;
+  const OLD_CATROBAT_LANGUAGE = 518;
+
   
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;

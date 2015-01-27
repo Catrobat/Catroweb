@@ -91,8 +91,11 @@ class UploadController extends Controller
             case StatusCode::RUDE_WORD_IN_PROGRAM_NAME:
               $response["answer"] = $this->trans("error.programname.rude");
               break;
+            case StatusCode::OLD_CATROBAT_LANGUAGE:
+              $response["answer"] = $this->trans("error.languageversion.tooold");
+              break;
             default:
-              $response["answer"] = $this->trans("error.file.unknown");
+              $response["answer"] = $this->trans("error.unknown");
           }
         }
       }

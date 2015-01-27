@@ -11,6 +11,12 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
+      catroweb.file.validator.languageversion:
+            class: Catrobat\AppBundle\Listeners\VersionValidator
+#            arguments:    ["@rudewordfilter"]
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
       catroweb.file.validator.filestructure:
             class: Catrobat\AppBundle\Listeners\FileStructureValidator
             tags:

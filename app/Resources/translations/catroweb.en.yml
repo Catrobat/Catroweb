@@ -101,6 +101,9 @@ error:
   token: 'Authentication of device failed: invalid auth-token!'
   programname:
     rude: Programname must not contain rude wordes.
+  languageversion:
+    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+
 success:
   registration: Registration successful!
   token: ok
