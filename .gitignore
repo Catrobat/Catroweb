@@ -21,3 +21,5 @@ crowdin-cli.jar
 /.settings
 /.buildpath
 /.rsync_cache
+Catroweb.iml
+.idea/vcs.xml
