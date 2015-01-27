@@ -58,7 +58,7 @@ Feature: Search programs
          "Author":"User1",
          "Description":"p1",
          "Uploaded":1357041600,
-         "UploadedString":"1 year ago",
+         "UploadedString":"more than one year ago",
          "Version":"0.8.5",
          "Views":"12",
          "Downloads":"3",
