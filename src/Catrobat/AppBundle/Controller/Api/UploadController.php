@@ -94,6 +94,9 @@ class UploadController extends Controller
             case StatusCode::OLD_CATROBAT_LANGUAGE:
               $response["answer"] = $this->trans("error.languageversion.tooold");
               break;
+            case StatusCode::OLD_CATROBAT_VERSION:
+              $response["answer"] = $this->trans("error.programversion.tooold");
+              break;
             default:
               $response["answer"] = $this->trans("error.unknown");
           }

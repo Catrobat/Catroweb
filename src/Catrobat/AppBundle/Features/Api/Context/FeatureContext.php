@@ -125,6 +125,39 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   }
 
 
+  private function generateProgramFileWith($parameters)
+  {
+    $filesystem = new Filesystem();
+    $this->emptyDirectory(sys_get_temp_dir()."/program_generated/");
+    $new_program_dir = sys_get_temp_dir()."/program_generated/";
+    $filesystem->mirror(self::FIXTUREDIR."/GeneratedFixtures/base", $new_program_dir);
+    $properties = simplexml_load_file($new_program_dir."/code.xml");
+
+    foreach($parameters as $name => $value) {
+
+      switch ($name)
+      {
+        case "description":
+          $properties->header->description = $value;
+          break;
+        case "name":
+          $properties->header->programName = $value;
+          break;
+
+        default:
+          throw new PendingException("unknown xml field " . $name);
+      }
+
+    }
+
+
+    $properties->asXML($new_program_dir."/code.xml");
+    $compressor = new CatrobatFileCompressor();
+    $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
+
+  }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Hooks
@@ -173,25 +206,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iHaveAProgramWithAsDescription($value, $header)
   {
-    $filesystem = new Filesystem();
-    $this->emptyDirectory(sys_get_temp_dir()."/program_generated/");
-    $new_program_dir = sys_get_temp_dir()."/program_generated/";
-    $filesystem->mirror(self::FIXTUREDIR."/GeneratedFixtures/base", $new_program_dir);
-    $properties = simplexml_load_file($new_program_dir."/code.xml");
-    switch ($header)
-    {
-      case "description":
-        $properties->header->description = $value;
-        break;
-      case "name":
-        $properties->header->programName = $value;
-        break;
-      default:
-        throw new PendingException();
-    }
-    $properties->asXML($new_program_dir."/code.xml");
-    $compressor = new CatrobatFileCompressor();
-    $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
+    $this->generateProgramFileWith(array($header => $value));
   }
   
   /**

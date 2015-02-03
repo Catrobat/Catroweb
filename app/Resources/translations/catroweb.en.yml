@@ -103,6 +103,8 @@ error:
     rude: Programname must not contain rude wordes.
   languageversion:
     tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+  programversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 
 success:
   registration: Registration successful!
