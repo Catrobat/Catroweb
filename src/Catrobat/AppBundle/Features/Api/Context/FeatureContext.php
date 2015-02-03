@@ -143,6 +143,15 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         case "name":
           $properties->header->programName = $value;
           break;
+        case "platform":
+          $properties->header->platform = $value;
+          break;
+        case "catrobatLanguageVersion":
+          $properties->header->catrobatLanguageVersion = $value;
+          break;
+        case "applicationVersion":
+          $properties->header->applicationVersion = $value;
+          break;
 
         default:
           throw new PendingException("unknown xml field " . $name);
@@ -783,4 +792,28 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   }
 
 
+
+    /**
+     * @Given /^I am using pocketcode for "([^"]*)" with version "([^"]*)"$/
+     */
+    public function iAmUsingPocketcodeForWithVersion($platform, $version)
+    {
+      $this->generateProgramFileWith(array("platform" => $platform, "applicationVersion" => $version));
+    }
+
+    /**
+     * @When /^I upload a program$/
+     */
+    public function iUploadAProgram()
+    {
+      $this->uploadProgramFileAsDefaultUser(sys_get_temp_dir(), "program_generated.catrobat");
+    }
+
+    /**
+     * @Given /^I am using pocketcode with language version "([^"]*)"$/
+     */
+    public function iAmUsingPocketcodeWithLanguageVersion($version)
+    {
+      $this->generateProgramFileWith(array("catrobatLanguageVersion" => $version));
+    }
 }

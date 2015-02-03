@@ -39,6 +39,28 @@ Feature: All uploaded programs have to be validated.
       {"statusCode":505,"answer":"invalid file","preHeaderMessages":""}
       """
 
+  Scenario Outline: user should not be able to upload a program with an old pocketcode version
+    Given I am using pocketcode for "<Platform>" with version "<Version>"
+    When I upload a program
+    Then I should get the json object:
+    """
+      {"statusCode":519,"answer":"Sorry, you are using an old version of Pocket Code. Please update to the lastest version.","preHeaderMessages":""}
+    """
+
+    Examples:
+    | Platform | Version   |
+    | Android  |   0.5     |
+    | Windows  |   0.0.1   |
+    | iOS      |   0.0.1   |
+
+  Scenario: user should not be able to upload a program with an old language version
+    Given I am using pocketcode with language version "0.7"
+    When I upload a program
+    Then I should get the json object:
+    """
+      {"statusCode":518,"answer":"Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
+    """
+
       
   Scenario: A valid file must contain at least one screenshot and image and sound directories
 
