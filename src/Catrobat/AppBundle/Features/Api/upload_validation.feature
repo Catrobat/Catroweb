@@ -53,6 +53,19 @@ Feature: All uploaded programs have to be validated.
     | Windows  |   0.0.1   |
     | iOS      |   0.0.1   |
 
+  Scenario Outline: user should not be able to upload a program with an old pocketcode version
+    Given I am using pocketcode for "<Platform>" with version "<Version>"
+    When I upload a program
+    Then The upload should be successful
+
+    Examples:
+    | Platform | Version   |
+    | Android  |   0.9.1   |
+    | Android  |  v0.9.1   |
+    | Windows  |   0.1.0   |
+    | iOS      |   0.1.0   |
+
+
   Scenario: user should not be able to upload a program with an old language version
     Given I am using pocketcode with language version "0.7"
     When I upload a program

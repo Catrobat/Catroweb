@@ -816,4 +816,14 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     {
       $this->generateProgramFileWith(array("catrobatLanguageVersion" => $version));
     }
+
+    /**
+     * @Then /^The upload should be successful$/
+     */
+    public function theUploadShouldBeSuccessful()
+    {
+        $response = $this->client->getResponse();
+        $responseArray = json_decode($response->getContent(), true);
+        assertEquals(200, $responseArray["statusCode"]);
+    }
 }

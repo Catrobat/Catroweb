@@ -25,11 +25,12 @@ class VersionValidator
       if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, "<")) {
           throw new InvalidCatrobatFileException("catrobat language version too old", StatusCode::OLD_CATROBAT_LANGUAGE);
       }
-
+      
+      $version = ltrim((string)$xml->header->applicationVersion, "v");
 
       switch($xml->header->platform) {
         case "Android":
-          if (version_compare($xml->header->applicationVersion, self::MIN_ANDROID_PROGRAM_VERSION, "<")) {
+          if (version_compare($version, self::MIN_ANDROID_PROGRAM_VERSION, "<")) {
             throw new InvalidCatrobatFileException("android catrobat version too old", StatusCode::OLD_CATROBAT_VERSION);
           }
           break;
