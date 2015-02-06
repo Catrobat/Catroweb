@@ -44,7 +44,7 @@ class FeaturedProgramAdmin extends Admin
         
         $formMapper
             ->add('file', 'file', $file_options)
-            ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'required' => true), array('admin_code' => 'catrowebadmin.block.all_programs'))
+            ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'required' => true), array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('active', null, array('required' => false))
             ;
     }
@@ -53,7 +53,7 @@ class FeaturedProgramAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('program', null, array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.all_programs'))
+            ->add('program', null, array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'))
         ;
     }
 
@@ -63,7 +63,7 @@ class FeaturedProgramAdmin extends Admin
         $listMapper
             ->addIdentifier('id')
             ->add('Featured Image', 'string', array('template' => ':Admin:featured_image.html.twig'))
-            ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'route' => array('name' => 'show'), 'admin_code' => 'catrowebadmin.block.all_programs'))
+            ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'route' => array('name' => 'show'), 'admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(

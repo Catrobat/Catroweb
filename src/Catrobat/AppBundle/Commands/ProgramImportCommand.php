@@ -11,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Model\ProgramManager;
 use Catrobat\AppBundle\Model\UserManager;
-use Catrobat\AppBundle\Model\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 

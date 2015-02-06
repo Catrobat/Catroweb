@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Model\Requests;
+namespace Catrobat\AppBundle\Requests;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\AppBundle\Entity\User;

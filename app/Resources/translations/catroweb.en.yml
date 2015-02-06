@@ -439,6 +439,8 @@ error:
   token: 'Authentication of device failed: invalid auth-token!'
   programname:
     rude: Programname must not contain rude wordes.
+  program:
+    invalid: Invalid program.
   languageversion:
     tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
@@ -448,6 +450,7 @@ success:
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
+  report: Your report was successfully sent!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'

@@ -29,6 +29,12 @@ class Program
    * @ORM\Column(type="text")
    */
   protected $description;
+
+
+  /**
+   * @ORM\Column(type="integer", options={"default" = 1})
+   */
+  protected $version = 1;
   
   /**
    * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User", inversedBy="programs")
@@ -175,6 +181,15 @@ class Program
       $this->setUploadedAt(new \DateTime());
     }
   }
+
+
+  /**
+   * @ORM\PrePersist
+   */
+  public function setInitialVersion()
+  {
+    $this->version = 1;
+  }
   
   /**
    * Get id
@@ -231,20 +246,20 @@ class Program
   {
     return $this->description;
   }
-  
+
   /**
    * Set views
    *
-   * @param integer $views          
+   * @param integer $views
    * @return Program
    */
   public function setViews($views)
   {
     $this->views = $views;
-    
+
     return $this;
   }
-  
+
   /**
    * Get views
    *
@@ -253,6 +268,42 @@ class Program
   public function getViews()
   {
     return $this->views;
+  }
+  
+  /**
+   * Set version
+   *
+   * @param integer $version
+   * @return Program
+   */
+  public function setVersion($version)
+  {
+    $this->version = $version;
+    
+    return $this;
+  }
+
+
+  /**
+   * Increment version
+   *
+   * @return Program
+   */
+  public function incrementVersion()
+  {
+    $this->version += 1;
+
+    return $this;
+  }
+  
+  /**
+   * Get Version
+   *
+   * @return integer
+   */
+  public function getVersion()
+  {
+    return $this->version;
   }
   
   /**
@@ -530,7 +581,7 @@ class Program
     /**
      * Get visible
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getVisible()
     {

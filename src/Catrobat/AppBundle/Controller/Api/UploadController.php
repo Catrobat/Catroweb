@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Security\Core\SecurityContext;
 use Catrobat\AppBundle\Model\UserManager;
-use Catrobat\AppBundle\Model\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Requests\AddProgramRequest;
 use Catrobat\AppBundle\Model\ProgramManager;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;

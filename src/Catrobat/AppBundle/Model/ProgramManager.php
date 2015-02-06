@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\Model;
 use Catrobat\AppBundle\Events\InvalidProgramUploadedEvent;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\AppBundle\Model\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Requests\AddProgramRequest;
 use Catrobat\AppBundle\Entity\Program;
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -55,11 +55,15 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     {
       return null;
     }
+
+    /* @var $program Program*/
     
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if ($old_program != null)
     {
       $program = $old_program;
+      //it's an update
+      $program->incrementVersion();
     }
     else
     {

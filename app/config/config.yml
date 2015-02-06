@@ -93,8 +93,9 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:  [admin]
         sonata.block.service.text:
-        catrowebadmin.block.all_programs:
-        catrowebadmin.block.approve_programs:
+        catrowebadmin.block.programs.all:
+        catrowebadmin.block.programs.approve:
+        catrowebadmin.block.programs.reported:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
 

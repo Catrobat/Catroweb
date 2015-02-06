@@ -29,8 +29,11 @@ class ResetCommand extends ContainerAwareCommand
       $output->writeln("This command will reset everything, use with caution! Use '--hard' option if you are sure.");
       return;
     }
+
     $this->executeShellCommand("php app/console doctrine:schema:drop --force", "Dropping database", $output);
     $this->executeShellCommand("php app/console doctrine:schema:create", "Creating database", $output);
+    $this->executeShellCommand("php app/console cache:clear --env=test", "Resetting Cache", $output);
+
     
     $this->emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'), "Delete screenshots", $output);
     $this->emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'),  "Delete thumnails", $output);

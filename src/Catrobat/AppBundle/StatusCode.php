@@ -12,6 +12,7 @@ class StatusCode
   const MISSING_CHECKSUM = 503;
   const INVALID_CHECKSUM = 504;
   const INVALID_FILE = 505;
+  const INVALID_PROGRAM = 506;
   const PROJECT_XML_MISSING = 507;
   const INVALID_XML = 508;
   const IMAGE_MISSING = 524;
