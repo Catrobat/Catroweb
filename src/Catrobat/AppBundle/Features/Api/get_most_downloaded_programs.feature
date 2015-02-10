@@ -47,6 +47,27 @@ Feature: Get the most downloaded programs
       }
       """
 
+  Scenario: show most downloaded program ids
+    Given I have a parameter "limit" with value "1"
+    And I have a parameter "offset" with value "0"
+    When I GET "/api/projects/mostDownloadedIDs.json" with these parameters
+    Then I should get the json object:
+      """
+      {
+          "completeTerm":"",
+          "CatrobatInformation": {
+                                   "BaseUrl":"http://localhost/",
+                                   "TotalProjects":3,
+                                   "ProjectsExtension":".catrobat"
+                                  },
+          "CatrobatProjects":[{
+                                "ProjectId": 2,
+                                "ProjectName":"program 2"
+                            }],
+          "preHeaderMessages":""
+      }
+      """
+
   Scenario: show most downloaded programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
