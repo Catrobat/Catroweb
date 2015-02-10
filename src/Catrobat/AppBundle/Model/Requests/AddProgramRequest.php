@@ -9,11 +9,13 @@ class AddProgramRequest
 {
   private $user;
   private $programfile;
+  private $ip;
 
-  public function __construct(User $user, File $programfile)
+  public function __construct(User $user, File $programfile, $ip = "127.0.0.1")
   {
     $this->user = $user;
     $this->programfile = $programfile;
+    $this->ip = $ip;
   }
 
   public function getUser()
@@ -34,6 +36,11 @@ class AddProgramRequest
   public function setProgramfile(File $programfile)
   {
     $this->programfile = $programfile;
+  }
+  
+  public function getIp()
+  {
+      return $this->ip;
   }
 
 }

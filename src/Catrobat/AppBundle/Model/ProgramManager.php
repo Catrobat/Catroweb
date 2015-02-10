@@ -73,7 +73,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $program->setCatrobatVersion(1);
     $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
     $program->setLanguageVersion($extracted_file->getLanguageVersion());
-    $program->setUploadIp("127.0.0.1");
+    $program->setUploadIp($request->getIp());
     $program->setRemixCount(0);
     $program->setFilesize(0);
     $program->setVisible(true);

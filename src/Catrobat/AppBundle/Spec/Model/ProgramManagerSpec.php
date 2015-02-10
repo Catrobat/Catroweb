@@ -33,6 +33,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher);
     $request->getProgramfile()->willReturn($file);
     $request->getUser()->willReturn($user);
+    $request->getIp()->willReturn("127.0.0.1");
     $file_extractor->extract($file)->willReturn($extracted_file);
     $inserted_program->getId()->willReturn(1);
     $event_dispatcher->dispatch(Argument::any(),Argument::any())->willReturn($event);

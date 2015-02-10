@@ -53,7 +53,7 @@ class UploadController extends Controller
       {
         try
         {
-          $add_program_request = new AddProgramRequest($context->getToken()->getUser(), $file);
+          $add_program_request = new AddProgramRequest($context->getToken()->getUser(), $file, $request->getClientIp());
   
           $id = $program_manager->addProgram($add_program_request)->getId();
           $user = $context->getToken()->getUser();
