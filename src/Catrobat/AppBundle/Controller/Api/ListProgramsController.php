@@ -67,6 +67,16 @@ class ListProgramsController extends Controller
   {
       return $this->listSortedPrograms($request, "views", false);
   }
+
+  /**
+   * @Route("/api/projects/userPrograms.json", name="catrobat_api_user_programs", defaults={"_format": "json"})
+   * @Method({"GET"})
+   */
+  public function listUserProgramsAction(Request $request)
+  {
+    //return JsonResponse::create(array("a" => "Orange", "b" => "Banane", "c" => "Apfel"));
+    return $this->listSortedPrograms($request, "user");
+  }
   
   private function listSortedPrograms(Request $request, $sortBy, $details = true)
   {
@@ -78,12 +88,19 @@ class ListProgramsController extends Controller
     $retArray = array ();
     $limit = intval($request->query->get('limit', 20));
     $offset = intval($request->query->get('offset', 0));
-    $numbOfTotalProjects = $program_manager->getTotalPrograms();
+    $user_id = intval($request->query->get('user_id', 0));
+
+    if ($sortBy == "user")
+      $numbOfTotalProjects = $program_manager->searchCountUserPrograms($user_id);
+    else
+      $numbOfTotalProjects = $program_manager->getTotalPrograms();
     
     if ($sortBy == "downloads")
       $programs = $program_manager->getMostDownloadedPrograms($limit, $offset);
     else if ($sortBy == "views")
       $programs = $program_manager->getMostViewedPrograms($limit, $offset);
+    else if ($sortBy == "user")
+      $programs = $program_manager->getUserPrograms($user_id);
     else
       $programs = $program_manager->getRecentPrograms($limit, $offset);
     

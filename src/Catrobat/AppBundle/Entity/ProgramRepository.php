@@ -73,6 +73,23 @@ class ProgramRepository extends EntityRepository
     return $result;
   }
 
+  public function searchCountUserPrograms($user_id)
+  {
+    $qb_program = $this->createQueryBuilder('e');
+    $q2 = $qb_program->getEntityManager()->createQuery("SELECT COUNT(e.id) FROM Catrobat\AppBundle\Entity\Program e LEFT JOIN e.user f WHERE f.id =" . $user_id);
+    $result = $q2->getSingleScalarResult();
+    return $result;
+  }
+
+  public function getUserPrograms($user_id)
+  {
+    $qb_program = $this->createQueryBuilder('e');
+    $q2 = $qb_program->getEntityManager()->createQuery("SELECT e FROM Catrobat\AppBundle\Entity\Program e LEFT JOIN e.user f WHERE f.id =" . $user_id);
+    $result = $q2->getResult();
+    return $result;
+  }
+
+
   public function getTotalPrograms()
   {
     $qb_program = $this->createQueryBuilder('e');

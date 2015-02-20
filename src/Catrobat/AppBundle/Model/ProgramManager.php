@@ -113,6 +113,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->findOneByName($programName);
   }
 
+  public function getUserPrograms($user_id)
+  {
+    return $this->program_repository->getUserPrograms($user_id);//findBy(array("user_id" => $user_id), array('id' => 'ASC'));
+  }
+
   public function findAll()
   {
     return $this->program_repository->findAll();
@@ -150,6 +155,13 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   {
     return $this->program_repository->searchCount($query);
   }
+
+
+  public function searchCountUserPrograms($user_id)
+  {
+    return $this->program_repository->searchCountUserPrograms($user_id);
+  }
+
 
   public function getTotalPrograms()
   {
