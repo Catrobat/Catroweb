@@ -24,24 +24,18 @@
     </div>
 
     <div class="image-container">
-      <div style="display: table-cell">
-        <img src="{{ asset('images/help/hour_of_code/thumbs/0_1.jpg') }}" alt="" title="" />
-      </div>
-      <div class="spacer">
-        <div class="arrow"></div>
-      </div>
-      <div style="display: table-cell">
-        <img src="{{ asset('images/help/hour_of_code/thumbs/0_1.jpg') }}" alt="" title="" />
-      </div>
-      <div class="spacer">
-        <div class="arrow"></div>
-      </div>
-      <div style="display: table-cell">
-        <img src="{{ asset('images/help/hour_of_code/thumbs/0_1.jpg') }}" alt="" title="" />
-      </div>
+      {% for i in 1..containers %}
+        <div class="image-detail {{ class }}">
+          <img src="{{ asset('images/help/hour_of_code/thumbs/'~page~'_'~i~'.jpg') }}" alt="" title=""/>
+        </div>
+        {% if(i!=containers) %}
+          <div class="spacer">
+            <div class="arrow"></div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="clear"></div>
     </div>
-
-
   </div>
 
 

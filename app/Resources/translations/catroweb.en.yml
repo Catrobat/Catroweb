@@ -63,70 +63,70 @@ help:
   hourOfCode:
     step0:
       title: "Skydiving Steve"
-      description: "Lorem..."
+      description: "In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck..."
     step1:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Install "Pocket Code"'
+      description: "How to install Pocket Code on your mobile device."
     step2:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Download Project"
+      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
     step3:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Open Project"
+      description: "Let’s look inside the program."
     step4:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Add Variable"
+      description: "The variables x and y allow you to control the position of your parachute."
     step5:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Label variables"
+      description: "Label the x position of your parachute."
     step6:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Set variable "y"'
+      description: "Label and set the y starting position of your parachute."
     step7:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Forever"
+      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
     step8:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Insert and modify bricks"
+      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
     step9:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Change variables and values"
+      description: "Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device."
     step10:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Loudness sensor"
+      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
     step11:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Change some more bricks"
+      description: "When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below."
     step12:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: "Back to objects"
+      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
     step13:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "target"'
+      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
     step14:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "target"'
+      description: "When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function."
     step15:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "target"'
+      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
     step16:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "parcel"'
+      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
     step17:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "parcel"'
+      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
     step18:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "parcel"'
+      description: 'If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.'
     step19:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "restart"'
+      description: 'Here you modify the object “restart”. Define the position and the behavior of the object.'
     step20:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Object "Background"'
+      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
     step21:
-      title: "Skydiving Steve"
-      description: "Lorem..."
+      title: 'Check your scripts!'
+      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
 
 search:
   dotdotdot: Search...

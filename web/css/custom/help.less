@@ -44,7 +44,6 @@
   }
 
   @media screen and (max-width: 1024px) {
-
     .help-desktop {
       display: none;
     }
@@ -76,7 +75,7 @@
   border: 3px @default-text-color solid;
   border-radius: 10px;
   -moz-border-radius: 10px;
-  padding: 10px 20px;
+  padding: 10px 20px 20px 10px;
 
   a {
     display: inline-block;
@@ -142,21 +141,46 @@
   }
 
   .image-container {
-    display: table;
     margin-top: 15px;
 
-    .spacer {
+    .col-3, .col-4, .col-5, .spacer {
       display: table-cell;
-      vertical-align: middle;
+    }
+
+    .col-3 {
+      width: 31.33333333334%;
+      padding: 0 32px;
+    }
+
+    .col-4 {
+      width: 22%;
+      padding: 0 24px;
+    }
+
+    .col-5 {
+      width: 17%;
+      padding: 0 20px;
+    }
+
+    .spacer {
+      width: 3%;
     }
 
     .arrow {
       margin: 0 auto;
-      width: 35px;
       height: 35px;
       background-image: url('../../images/symbols/sprite_icons_web.png');
       background-position: 0 -244px;
       .rotation(-90deg);
     }
+
+//    .image-detail {
+//      padding: 0 32px;
+//    }
+
+    img {
+      border: 1px #ffffff solid;
+    }
+
   }
 }

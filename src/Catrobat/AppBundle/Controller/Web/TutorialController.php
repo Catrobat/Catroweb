@@ -27,6 +27,10 @@ class TutorialController extends Controller
   {
     $paginator = $this->get('knp_paginator');
 
+//    $translated = $this->get('translator')->getMessages();
+
+//    var_dump($translated);
+
     $images = array();
 
     for ($i = 0; $i < 21; $i++)
@@ -44,7 +48,20 @@ class TutorialController extends Controller
     if($page > 21) {
       throw $this->createNotFoundException('Unable to find step.');
     }
-    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig', array("page" => $page, 'pagination' => $pagination));
+
+    $containers = 3;
+    $class = "col-3";
+
+    if($page == 4 || $page == 7 || $page == 8 || $page == 11 || $page == 14) {
+      $containers = 4;
+      $class = "col-4";
+    }
+    else if($page == 21) {
+      $containers = 5;
+      $class = "col-5";
+    }
+
+    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig', array("page" => $page, "containers" => $containers, "class" => $class, 'pagination' => $pagination));
   }
 
   /**
