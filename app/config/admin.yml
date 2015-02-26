@@ -17,3 +17,16 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, group: Tools, label: Upload Notify }
         arguments: [null, Catrobat\AppBundle\Entity\User, null]
+
+      catrowebadmin.block.featured.program:
+        class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Featured, label: Programs }
+        arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
+
+      catrowebadmin.block.featured.url:
+        class: Catrobat\AppBundle\Admin\FeaturedUrlAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Featured, label: Urls }
+        arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
+        

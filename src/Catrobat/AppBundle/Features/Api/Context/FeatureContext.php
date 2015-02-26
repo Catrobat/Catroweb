@@ -19,6 +19,7 @@ use Catrobat\AppBundle\Services\TokenGenerator;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Catrobat\AppBundle\Entity\FeaturedProgram;
 
 //
 // Require 3rd-party libraries here:
@@ -40,7 +41,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   private $request_parameters;
   private $files;
   private $last_response;
-
+  private $hostname;
+  private $secure;
+  
   /*
    * @var \Symfony\Component\HttpKernel\Client
    */
@@ -61,6 +64,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $this->error_directory = $error_directory;
     $this->request_parameters = array ();
     $this->files = array ();
+    $this->hostname = "localhost";
+    $this->secure = false;
   }
 
   /**
@@ -379,6 +384,24 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $em->flush();
   }
 
+  /**
+   * @Given /^following programs are featured:$/
+   */
+  public function followingProgramsAreFeatured(TableNode $table)
+  {
+      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+      $featured = $table->getHash();
+      for($i = 0; $i < count($featured); $i ++)
+      {
+          $program = $em->getRepository('AppBundle:Program')->findOneByName($featured[$i]['name']);
+          $featured_entry = new FeaturedProgram();
+          $featured_entry->setProgram($program);
+          $featured_entry->setActive($featured[$i]['active'] == 'yes');
+          $featured_entry->setImageType("jpg");
+          $em->persist($featured_entry);
+      }
+      $em->flush();
+  }
   
   /**
    * @Given /^there are downloadable programs:$/
@@ -442,7 +465,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   {
     $this->client = $this->kernel->getContainer()->get('test.client');
     $this->client->request('GET', $url . "?" . http_build_query($this->request_parameters), array (), $this->files, array (
-        'HTTP_HOST' => 'localhost' 
+        'HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure
     ));
   }
 
@@ -826,4 +849,21 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         $responseArray = json_decode($response->getContent(), true);
         assertEquals(200, $responseArray["statusCode"]);
     }
+    
+    /**
+     * @Given /^the server name is "([^"]*)"$/
+     */
+    public function theServerNameIs($name)
+    {
+        $this->hostname = $name;
+    }
+    
+    /**
+     * @Given /^I use a secure connection$/
+     */
+    public function iUseASecureConnection()
+    {
+        $this->secure = true;
+    }
+    
 }

@@ -1,4 +1,7 @@
 services:
+
+# ======== Upload Validation ========
+
       catroweb.file.validator.name:
             class: Catrobat\AppBundle\Listeners\NameValidator
             arguments:    ["@rudewordfilter"]
@@ -13,7 +16,6 @@ services:
 
       catroweb.file.validator.languageversion:
             class: Catrobat\AppBundle\Listeners\VersionValidator
-#            arguments:    ["@rudewordfilter"]
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
@@ -32,6 +34,8 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
+# ======== Upload Modification ========
+
       catroweb.file.license.updater:
             class: Catrobat\AppBundle\Listeners\LicenseUpdater
             tags:
@@ -43,9 +47,20 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
             
+
+# ======== Logging ========
+
       catrobat.core.services.invalidprogramuploadlogger:
               class:        Catrobat\AppBundle\Listeners\InvalidProgramUploadLogger
               arguments:    ["@logger"]
               tags:
                   - { name: monolog.logger, channel: upload }
                   - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }
+
+# ======== Entity ========
+
+      catrobat.entity.featured.image_istener:
+          class: Catrobat\AppBundle\Listeners\Entity\FeaturedProgramImageListener
+          arguments: ["@featuredimagerepository"]
+          tags:
+              - { name: doctrine.orm.entity_listener }

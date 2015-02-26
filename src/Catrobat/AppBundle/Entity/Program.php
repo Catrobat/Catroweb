@@ -32,7 +32,7 @@ class Program
   
   /**
    * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User", inversedBy="programs")
-   * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
    */
   protected $user;
   

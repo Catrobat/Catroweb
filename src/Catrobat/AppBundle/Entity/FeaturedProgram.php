@@ -5,11 +5,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\FeaturedRepository")
+ * @ORM\EntityListeners({"Catrobat\AppBundle\Listeners\Entity\FeaturedProgramImageListener"})
  * @ORM\Table(name="featured")
  */
 class FeaturedProgram
 {
+    public $file;
+    public $removed_id;
+    
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -20,14 +24,23 @@ class FeaturedProgram
     /**
      * @ORM\Column(type="string")
      */
-    protected $image;
+    protected $imagetype;
     
     /**
-     * @ORM\OneToOne(targetEntity="Program",fetch="EAGER")
-     * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Program", fetch="EAGER")
      **/
     private $program;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $url;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $active;
+    
     /**
      * Get id
      *
@@ -44,9 +57,9 @@ class FeaturedProgram
      * @param string $image
      * @return FeaturedProgram
      */
-    public function setImage($image)
+    public function setImageType($image)
     {
-        $this->image = $image;
+        $this->imagetype = $image;
     
         return $this;
     }
@@ -56,9 +69,9 @@ class FeaturedProgram
      *
      * @return string 
      */
-    public function getImage()
+    public function getImageType()
     {
-        return $this->image;
+        return $this->imagetype;
     }
 
     /**
@@ -83,4 +96,28 @@ class FeaturedProgram
     {
         return $this->program;
     }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active)
+    {
+        $this->active = $active;
+        return $this;
+    }
+ 
+ 
 }

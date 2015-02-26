@@ -7,6 +7,8 @@ parameters:
       catrobat.screenshot.path: "resources/screenshots/"
       catrobat.thumbnail.dir:   "%catrobat.webdir%resources/thumbnails/"
       catrobat.thumbnail.path:  "resources/thumbnails/"
+      catrobat.featuredimage.dir:  "%catrobat.webdir%resources/featured/"
+      catrobat.featuredimage.path: "resources/featured/"
       
 services:
 
@@ -33,6 +35,13 @@ services:
         factory_method: getRepository
         arguments:
             - "AppBundle:RudeWord"
+
+    featuredrepository:
+        class: CoreBundle\Entity\FeaturedRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:FeaturedProgram"
 
     programmanager:
         class: Catrobat\AppBundle\Model\ProgramManager
@@ -68,6 +77,10 @@ services:
     screenshotrepository:
         class: Catrobat\AppBundle\Services\ScreenshotRepository
         arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
+
+    featuredimagerepository:
+        class: Catrobat\AppBundle\Services\FeaturedImageRepository
+        arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
               
     tokengenerator:
         class: Catrobat\AppBundle\Services\TokenGenerator

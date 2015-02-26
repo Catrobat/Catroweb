@@ -5,6 +5,8 @@ namespace Catrobat\AppBundle\Controller\Web;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Catrobat\AppBundle\Services\FeaturedImageRepository;
+use Catrobat\AppBundle\Entity\FeaturedRepository;
 
 class DefaultController extends Controller
 {
@@ -29,7 +31,29 @@ class DefaultController extends Controller
    */
   public function indexAction()
   {
-    return $this->get("templating")->renderResponse('::index.html.twig');
+      /* @var $image_repository FeaturedImageRepository */
+      $image_repository = $this->get('featuredimagerepository');
+      /* @var $repository FeaturedRepository */
+      $repository = $this->get('featuredrepository');
+
+      $programs = $repository->getFeaturedPrograms(5, 0);
+
+      $featured = array();
+      foreach ($programs as $program)
+      {
+          $info = array();
+          if ($program->getProgram() !== null)
+          {
+              $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $program->getProgram()->getId()));
+          }
+          else 
+          {
+              $info['url'] = $program->getUrl();
+          }
+          $info['image'] = $image_repository->getWebPath($program->getId(), $program->getImageType());;
+          $featured[] = $info;
+      }
+    return $this->get("templating")->renderResponse('::index.html.twig', array("featured" => $featured));
   }
 
   /**

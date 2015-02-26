@@ -28,7 +28,9 @@ parameters:
       catrobat.screenshot.path:  "resources_test/screenshots/"
       catrobat.thumbnail.dir:    "%catrobat.webdir%resources_test/thumbnails/"
       catrobat.thumbnail.path:   "resources_test/thumbnails/"
-
+      catrobat.featuredimage.dir:  "%catrobat.webdir%resources_test/featured/"
+      catrobat.featuredimage.path: "resources_test/featured/"
+      
 monolog:
     channels: ["upload"]
     handlers:
