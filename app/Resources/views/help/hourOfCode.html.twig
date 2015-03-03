@@ -26,7 +26,23 @@
     <div class="image-container">
       {% for i in 1..containers %}
         <div class="image-detail {{ class }}">
-          <img src="{{ asset('images/help/hour_of_code/thumbs/'~page~'_'~i~'.jpg') }}" alt="" title=""/>
+          <img src="{{ asset('images/help/hour_of_code/thumbs/'~page~'_'~i~'.jpg') }}" data-img-id="{{ page }}"
+               data-img-index="{{ i }}" data-img-type="1" alt="" title=""/>
+
+          <div class="subtext size-large">
+            {% if(("help.hourOfCode.step"~page~".image"~i)|trans({}, "catroweb") != "help.hourOfCode.step"~page~".image"~i) %}
+              {{ ("help.hourOfCode.step"~page~".image"~i)|trans({}, "catroweb") }}
+            {% else %}
+              {% for j in 1..5 %}
+                {{ j==1 ? '<ol>' : "" }}
+                {% if(("help.hourOfCode.step"~page~".image"~i~".subtext"~j)|trans({}, "catroweb") != "help.hourOfCode.step"~page~".image"~i~".subtext"~j) %}
+                  <li>{{ ("help.hourOfCode.step"~page~".image"~i~".subtext"~j)|trans({}, "catroweb") }}</li>
+                {% endif %}
+                {{ j==5 ? '</ol>' : "" }}
+              {% endfor %}
+            {% endif %}
+          </div>
+
         </div>
         {% if(i!=containers) %}
           <div class="spacer">
@@ -37,7 +53,19 @@
       <div class="clear"></div>
     </div>
   </div>
-
-
+  <div id="image-overlay"></div>
+  <div id="image-popup">
+    <div id="outer-container">
+      <div></div>
+    </div>
+  </div>
 {% endblock %}
 
+{% block js %}
+  <script src="{{ asset('js/custom/Help.js') }}"></script>
+  <script>
+    var help = new Help();
+    help.setImageModal("{{  asset('images/help/hour_of_code/') }}");
+  </script>
+
+{% endblock %}

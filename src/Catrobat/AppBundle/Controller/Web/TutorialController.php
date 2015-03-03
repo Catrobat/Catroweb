@@ -26,15 +26,37 @@ class TutorialController extends Controller
   public function hourOfCodeAction($page)
   {
     $paginator = $this->get('knp_paginator');
-
-//    $translated = $this->get('translator')->getMessages();
-
-//    var_dump($translated);
-
     $images = array();
+    $descriptions = array();
 
-    for ($i = 0; $i < 21; $i++)
+    $translations = $this->get('translator')->getMessages()["catroweb"];
+
+//    var_dump($translations["help.hourOfCode.step17"]);
+
+    for ($i = 0; $i < 21; $i++) {
       $images[] = $i;
+//
+//      $tmp = array();
+//
+//      for($j = 0; $j < 5; $j++) {
+//
+//        if(isset($translations["help.hourOfCode.step".$i.".image".$j])) {
+//
+//        }
+//
+//
+//        $tmp[] = $translations["help.hourOfCode.step".$i.".image".$j];
+//
+//
+//
+////      $descriptions[$i] = { }
+//
+//      }
+//
+//
+//
+//
+    }
 
 
     $pagination = $paginator->paginate(
