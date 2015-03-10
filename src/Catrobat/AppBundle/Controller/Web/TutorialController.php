@@ -27,35 +27,9 @@ class TutorialController extends Controller
   {
     $paginator = $this->get('knp_paginator');
     $images = array();
-    $descriptions = array();
-
-    $translations = $this->get('translator')->getMessages()["catroweb"];
-
-//    var_dump($translations["help.hourOfCode.step17"]);
 
     for ($i = 0; $i < 21; $i++) {
       $images[] = $i;
-//
-//      $tmp = array();
-//
-//      for($j = 0; $j < 5; $j++) {
-//
-//        if(isset($translations["help.hourOfCode.step".$i.".image".$j])) {
-//
-//        }
-//
-//
-//        $tmp[] = $translations["help.hourOfCode.step".$i.".image".$j];
-//
-//
-//
-////      $descriptions[$i] = { }
-//
-//      }
-//
-//
-//
-//
     }
 
 
@@ -65,7 +39,7 @@ class TutorialController extends Controller
       1/*limit per page*/
     );
 
-    $pagination->setTemplate(':help:pagination.html.twig');
+    $pagination->setTemplate(':help:paginationStart0.html.twig');
 
     if($page > 21) {
       throw $this->createNotFoundException('Unable to find step.');
@@ -87,12 +61,28 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/step-by-step", name="catrobat_web_stepByStep")
+   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page" = 1}, requirements={"page":"\d+"})
+   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1}, requirements={"page":"\d+"})
    * @Method({"GET"})
    */
-  public function stepByStepAction()
+  public function stepByStepAction($page)
   {
-    return $this->get("templating")->renderResponse(':help:stepByStep.html.twig');
+    $paginator = $this->get('knp_paginator');
+    $steps = array();
+
+    for ($i = 1; $i < 12; $i++) {
+      $steps[] = $i;
+    }
+
+    $pagination = $paginator->paginate(
+      $steps,
+      $page, //current page
+      1/*limit per page*/
+    );
+
+    $pagination->setTemplate(':help:paginationStart1.html.twig');
+
+    return $this->get("templating")->renderResponse(':help:stepByStep.html.twig', array("page" => $page, 'pagination' => $pagination));
   }
 
   /**
