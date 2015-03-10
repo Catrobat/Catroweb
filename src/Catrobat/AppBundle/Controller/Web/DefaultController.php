@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Controller\Web;
 
 use Catrobat\AppBundle\StatusCode;
+use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

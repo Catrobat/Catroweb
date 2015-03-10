@@ -1,0 +1,51 @@
+@import '../base/default';
+
+article > div {
+  margin-top: 25px;
+  overflow: auto;
+}
+
+#user-avatar {
+  float: left;
+  width: 32%;
+  margin-right: 2%;
+}
+
+#user-programs {
+  float:right;
+  width: 66%;
+  h1 {
+    border-bottom: 0;
+  }
+}
+
+.programs {
+  margin: 25px 0 0 0;
+  > .program {
+    width: 16.66%;
+
+    @media (max-width: 940px) {
+      width: 20%; /* 5 in a row */
+    }
+    @media (max-width: 830px) {
+      width: 25%; /* 4 in a row */
+    }
+    @media (max-width: 720px) {
+      width: 33.33%; /* 3 in a row */
+    }
+
+  }
+}
+
+@media (max-width: @responsive-width-tablet) {
+  #user-avatar {
+    float: none;
+    width: auto;
+  }
+
+  #user-programs {
+    float:none;
+    width: auto;
+  }
+}
+

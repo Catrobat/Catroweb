@@ -1,17 +1,27 @@
-var ProgramLoader = function (container, url) {
+var ProgramLoader = function (container, url, column_max) {
   var self = this;
   self.container = container;
   self.url = url;
   self.default_rows = 2;
   self.columns_min = 3; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
-  self.columns_max = 9; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
+  self.columns_max = (typeof column_max === "undefined") ? 9 : column_max; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
   self.download_limit = self.default_rows * self.columns_max;
   self.loaded = 0;
   self.visible = 0;
   self.visible_steps = 0;
 
   self.init = function() {
-    $.get(self.url, { limit: self.download_limit, offset: self.loaded }, function(data) {
+    $.get(self.url, { limit: self.download_limit, offset: self.loaded}, function(data) {
+      if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
+        $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
+        return;
+      }
+      self.setup(data);
+    });
+  };
+
+  self.initProfile = function(user_id) {
+    $.get(self.url, { limit: self.download_limit, offset: self.loaded, user_id: user_id }, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
         return;

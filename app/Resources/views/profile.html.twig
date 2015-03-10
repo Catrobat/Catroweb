@@ -1,12 +1,35 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  {% stylesheets 'css/custom/profile.css' filter='cssrewrite,lessphp' output='compiled/profile.css' %}
+  {% stylesheets 'css/custom/profile.less' filter='cssrewrite,lessphp' output='compiled/profile.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
-  Profilepage with profile id: {{ profile }}
+  <h1> {{ profile.username }} </h1>
+
+<div>
+  <div id="user-avatar">
+    <img src="http://placehold.it/314x400"> </img>
+    <p>avatar</p>
+
+  </div>
+
+  <div id="user-programs">
+    <h1>{{ "programs.of"|trans({}, "catroweb") }}</h1>
+    <div class="programs"></div>
+  </div>
+</div>
+
+
+
 {% endblock %}
 
+{% block js %}
+  <script>
+    var programs = new ProgramLoader('#user-programs', '{{ path('catrobat_api_user_programs') }}', 6);
+    programs.initProfile('{{ profile.id }}');
+
+  </script>
+{% endblock %}
