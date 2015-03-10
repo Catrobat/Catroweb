@@ -86,6 +86,7 @@ class FeaturedProgramAdmin extends Admin
     
     public function preUpdate($image)
     {
+        $image->old_image_type = $image->getImageType();
         $image->setImageType(null);
     }
 }

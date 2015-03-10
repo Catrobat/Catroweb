@@ -13,6 +13,7 @@ class FeaturedProgram
 {
     public $file;
     public $removed_id;
+    public $old_image_type;
     
     /**
      * @ORM\Id
@@ -27,7 +28,7 @@ class FeaturedProgram
     protected $imagetype;
     
     /**
-     * @ORM\OneToOne(targetEntity="Program", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Program", fetch="EAGER")
      **/
     private $program;
 

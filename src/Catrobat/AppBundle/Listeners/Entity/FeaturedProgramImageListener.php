@@ -43,6 +43,7 @@ class FeaturedProgramImageListener
         $file = $featured->file;
         if ($file == null)
         {
+            $featured->setImageType($featured->old_image_type); 
             return;
         }
         $featured->setImageType($file->guessExtension());
