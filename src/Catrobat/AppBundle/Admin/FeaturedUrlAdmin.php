@@ -80,5 +80,9 @@ class FeaturedUrlAdmin extends Admin
         return new Metadata($object->getUrl(), "", $this->getFeaturedImageUrl($object));
     }
     
+    public function preUpdate($image)
+    {
+        $image->setImageType(null);
+    }
 }
 

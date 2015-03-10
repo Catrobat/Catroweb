@@ -4,6 +4,10 @@ namespace Catrobat\AppBundle\Listeners\Entity;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
+use Doctrine\ORM\Mapping\PostPersist;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PostUpdate;
+use Doctrine\ORM\Mapping\PreUpdate;
 
 class FeaturedProgramImageListener
 {
@@ -25,6 +29,26 @@ class FeaturedProgramImageListener
     }
     
     public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+    {
+        $file = $featured->file;
+        if ($file == null)
+        {
+            return;
+        }
+        $this->repository->save($file, $featured->getId(), $featured->getImageType());
+    }
+
+    public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+    {
+        $file = $featured->file;
+        if ($file == null)
+        {
+            return;
+        }
+        $featured->setImageType($file->guessExtension());
+    }
+    
+    public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
     {
         $file = $featured->file;
         if ($file == null)

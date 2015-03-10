@@ -83,5 +83,10 @@ class FeaturedProgramAdmin extends Admin
     {
         return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(), $this->getFeaturedImageUrl($object));
     }
+    
+    public function preUpdate($image)
+    {
+        $image->setImageType(null);
+    }
 }
 
