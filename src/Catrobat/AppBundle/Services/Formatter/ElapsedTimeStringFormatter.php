@@ -1,11 +1,11 @@
 <?php
 
-namespace Catrobat\AppBundle\Services;
+namespace Catrobat\AppBundle\Services\Formatter;
 
 use Catrobat\AppBundle\Services\Time;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ElapsedTimeString
+class ElapsedTimeStringFormatter
 {
   private $translator;
   private $time;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Services;
+namespace Catrobat\AppBundle\Spec\Services\Formatter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ElapsedTimeStringSpec extends ObjectBehavior
+class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 {
   protected $testTime;
   /**
@@ -21,7 +21,7 @@ class ElapsedTimeStringSpec extends ObjectBehavior
   
   function it_is_initializable()
   {
-    $this->shouldHaveType('Catrobat\AppBundle\Services\ElapsedTimeString');
+    $this->shouldHaveType('Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter');
   }
   
   function it_returns_the_elapsed_time_since_timestamps_in_minutes($translator)

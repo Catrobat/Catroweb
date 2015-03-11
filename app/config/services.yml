@@ -89,5 +89,5 @@ services:
         class: Catrobat\AppBundle\Services\Time
 
     elapsedtime:
-        class: Catrobat\AppBundle\Services\ElapsedTimeString
+        class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
         arguments: ["@translator","@time"]
