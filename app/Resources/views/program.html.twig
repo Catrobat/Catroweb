@@ -1,12 +1,94 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets 'css/custom/detail.css' filter='cssrewrite,lessphp' output='compiled/program.css' %}
+    {% stylesheets 'css/custom/program.less' filter='cssrewrite,lessphp' output='compiled/program.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
-    Detailpage for program with id: {{ program.id }}
+    <div class="header">
+        <div>
+            <span id="projectDetailsProjectTitle">{{ program.name }}</span>
+            <div class="projectDetailsAuthorTop">
+                <ul>
+                    <li>
+                        <div class="img-author"></div>
+                        <div class="link-author">
+                            {# Todo: Create link to profile of User #}
+                            <a href="/profile/{{ program.user.id }}">{{ program.user }}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="projectDetailsContainer">
+        <div class="projectDetailsThumbnail">
+            {# Todo: Create download link #}
+            <a href="/download/{{ program.id }}">
+                <img id="projectDetailsThumbnailImage" src="/resources/thumbnails/{{ program.id }}_large.png" />
+            </a>
+        </div>
+
+        <div class="projectDetailsDescription">
+            <div>
+                <span class="projectDetailsDescriptionHeading">Description</span>
+            </div>
+
+            <div class="projectDetailsDescriptionText">
+                <span>{{ program.description }}</span>
+
+                <div class="projectDetailsDownloadButton">
+                    <a style="text-decoration: none;" href="https://pocketcode.org/download/719.catrobat?fname=Galaxy+War">
+                        <div class="blue">
+                            <span class="projectDetailsDownloadText shrinkTextToFit" style="font-size: 25px;">Download</span>
+                        </div>
+                    </a>
+                </div>
+
+                {# Todo: Create report link #}
+                <span id="reportAsInappropriateButton">Report as inappropriate</span>
+                <br>
+                <span id="projectDetailsDownloadLanguageVersion">Catrobat Language version: Todo: Version ID</span>
+            </div>
+        </div>
+
+        {# Todo: Check if the user is logged in #}
+        <div id="projectDetailsReportContainer">
+            <div class="reportAsInappropriateDialog" id="reportAsInappropriateDialog" style="display: none;">
+                Please <a href="https://pocketcode.org/login/?requestUri=details/719">login</a> to report this program as inappropriate.
+            </div>
+        </div>
+
+        <div class="projectDetailsSeperator">
+        </div>
+
+        <div class="projectDetailsInformation">
+            <ul>
+                <li>
+                    <div class="img-age"></div>
+                    <div class="projectDetailsInformationText">Todo: Age</div>
+                </li>
+                <li>
+                    <div class="img-size"></div>
+                    <div class="projectDetailsInformationText">{{ program.filesize }}</div>
+                </li>
+                <li>
+                    <div class="img-downloads"></div>
+                    <div class="projectDetailsInformationText">
+                        <span>{{ program.downloads }} downloads</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="img-views"></div>
+                    <div class="projectDetailsInformationText">
+                        {{ program.views }} views</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {# Detailpage for program with id: {{ program.id }} #}
 {% endblock %}
 
