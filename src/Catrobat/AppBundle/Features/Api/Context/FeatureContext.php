@@ -283,6 +283,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $user->setPlainPassword("BehatGeneratedPassword");
     $user->setEnabled(true);
     $user->setUploadToken("BehatGeneratedToken");
+    $user->setCountry("at");
     $user_manager->updateUser($user, true);
   }
 
@@ -343,6 +344,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       $user->setPlainPassword($users[$i]["password"]);
       $user->setEnabled(true);
       $user->setUploadToken($users[$i]["token"]);
+      $user->setCountry("at");
       $user_manager->updateUser($user, false);
     }
     $user_manager->updateUser($user, true);

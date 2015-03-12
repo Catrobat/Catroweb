@@ -67,6 +67,7 @@ class SecurityController extends Controller
           $user->setPlainPassword($create_request->password);
           $user->setEnabled(true);
           $user->setUploadToken($tokenGenerator->generateToken());
+          $user->setCountry($create_request->country);
   
           $userManager->updateUser($user);
           $retArray['statusCode'] = 201;
