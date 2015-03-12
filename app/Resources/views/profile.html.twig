@@ -10,18 +10,25 @@
   <h1> {{ profile.username }} </h1>
 
 <div>
-  <div id="user-avatar">
-    <img src="http://placehold.it/314x400"> </img>
-    <p>avatar</p>
+
+  <div id="user-avatar-container">
+    <div id="user-avatar">
+      <img id="user-image" src="http://placehold.it/304x304"> </img>
+
+      <div id="user-informations">
+        <p><strong>Amount of programs: {{ profile.username }}</strong></p>
+        <p><strong>Country: {{ profile.username }}</strong></p>
+      </div>
+    </div>
 
   </div>
 
   <div id="user-programs">
-    <h1>{{ "programs.of"|trans({}, "catroweb") }}</h1>
+    <h1>{{ "programs.of"|trans({}, "catroweb")  }} {{ profile.username }}</h1>
     <div class="programs"></div>
   </div>
-</div>
 
+</div>
 
 
 {% endblock %}

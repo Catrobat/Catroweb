@@ -5,10 +5,31 @@ article > div {
   overflow: auto;
 }
 
+#user-avatar-container {
+  float: left;
+  width: 19.6em;
+  background-color: #fff;
+  height: 25em;
+}
+
+#user-informations {
+  font-size: 1em;
+  margin-left: .3em;
+  color: #000;
+  padding-bottom: .1em;
+}
+
 #user-avatar {
   float: left;
-  width: 32%;
-  margin-right: 2%;
+  width: 19em;
+  height: 19em;
+  margin-left: .3em;
+  margin-top: .3em;
+}
+
+#user-image {
+  width: 19em;
+  margin: 0;
 }
 
 #user-programs {
@@ -30,22 +51,42 @@ article > div {
     @media (max-width: 830px) {
       width: 25%; /* 4 in a row */
     }
-    @media (max-width: 720px) {
-      width: 33.33%; /* 3 in a row */
-    }
-
   }
 }
 
 @media (max-width: @responsive-width-tablet) {
-  #user-avatar {
+  #user-avatar-container {
+    display: block;
+    margin: 0 auto 2em;
     float: none;
-    width: auto;
   }
+
 
   #user-programs {
     float:none;
     width: auto;
+
+    clear: both;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 1em;
   }
+
+  .programs {
+    margin: 25px 0 0 0;
+    > .program {
+      width: 20%;
+
+      @media (max-width: 645px) {
+        width: 25%; /* 4 in a row */
+      }
+      @media (max-width: 535px) {
+        width: 33.33%; /* 3 in a row */
+      }
+
+    }
+  }
+
+
 }
 
