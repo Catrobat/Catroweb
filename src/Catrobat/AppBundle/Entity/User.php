@@ -39,7 +39,7 @@ class User extends BaseUser
     protected $additional_email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Program", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $programs;
 

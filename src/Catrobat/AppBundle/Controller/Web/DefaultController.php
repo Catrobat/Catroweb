@@ -11,6 +11,7 @@ use Catrobat\AppBundle\Services\FeaturedImageRepository;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Intl\Intl;
 
 class DefaultController extends Controller
 {
@@ -102,9 +103,10 @@ class DefaultController extends Controller
    * @Route("/profile/{id}", name="catrobat_web_profile", requirements={"id":"\d+"}, defaults={"id" = 0})
    * @Method({"GET"})
    */
-  public function profileAction($id)
+  public function profileAction(Request $request, $id)
   {
     $twig = '::profile.html.twig';
+
 
     if($id == 0) {
       $user = $this->getUser();
@@ -116,12 +118,14 @@ class DefaultController extends Controller
     if (!$user)
       throw $this->createNotFoundException('Unable to find User entity.');
 
-    $profile = $user->getId();
+    \Locale::setDefault(substr($request->getLocale(),0,2));
+    $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
 
     return $this->get("templating")->renderResponse($twig, array(
-      "profile" => $profile,
+      "profile" => $user,
       "minPassLength" => self::MIN_PASSWORD_LENGTH,
-      "maxPassLength" => self::MAX_PASSWORD_LENGTH
+      "maxPassLength" => self::MAX_PASSWORD_LENGTH,
+      "country" => $country
     ));
   }
 
@@ -256,4 +260,14 @@ class DefaultController extends Controller
       return true;
     return false;
   }
+
+  public function country($code, $locale = null)
+  {
+    $countries = Locale::getDisplayCountries($locale ?: $this->localeDetector->getLocale());
+    if (array_key_exists($code, $countries)) {
+      return $this->fixCharset($countries[$code]);
+    }
+    return '';
+  }
+
 }
