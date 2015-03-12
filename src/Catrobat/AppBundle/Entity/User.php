@@ -29,7 +29,7 @@ class User extends BaseUser
     protected $upload_notification;
 
     /**
-     * @ORM\Column(type="string", length=5, nullable=false)
+     * @ORM\Column(type="string", length=5, nullable=false, options={"default":""})
      */
     protected $country;
 
@@ -41,6 +41,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->country = "";
     }
 
     /**
@@ -123,5 +124,10 @@ class User extends BaseUser
     {
         $this->country = $country;
         return $this;
+    }
+    
+    public function setId($id)
+    {
+        $this->id = $id; 
     }
 }

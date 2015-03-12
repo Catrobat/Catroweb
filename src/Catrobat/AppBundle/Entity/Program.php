@@ -642,4 +642,9 @@ class Program
     {
       return $this->visible;
     }
+    
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 }

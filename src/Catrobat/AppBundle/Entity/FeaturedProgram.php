@@ -2,6 +2,7 @@
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 /**
@@ -120,5 +121,8 @@ class FeaturedProgram
         return $this;
     }
  
- 
+    public function setNewFeaturedImage(File $file)
+    {
+        $this->file = $file;
+    }
 }

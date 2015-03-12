@@ -36,6 +36,7 @@ class ResetCommand extends ContainerAwareCommand
     $this->emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'),  "Delete thumnails", $output);
     $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.storage.dir'),  "Delete programs", $output);
     $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'),  "Delete extracted programs", $output);
+    $this->emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'),  "Delete featured images", $output);
     
     $this->executeShellCommand("php app/console init:acl", "Init ACL", $output);
     $this->executeShellCommand("php app/console sonata:admin:setup-acl", "Init Sonata admin ACL", $output);
