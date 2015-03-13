@@ -377,7 +377,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       $program->setLanguageVersion(1);
       $program->setUploadIp("127.0.0.1");
       $program->setRemixCount(0);
-      $program->setFilesize(0);
+      $program->setFilesize(isset($programs[$i]['FileSize']) ? $programs[$i]['FileSize'] : 0);
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
       $program->setUploadLanguage("en");
       $program->setApproved(false);
@@ -868,4 +868,40 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         $this->secure = true;
     }
     
+
+    /**
+     * @Given /^program "([^"]*)" is not visible$/
+     */
+    public function programIsNotVisible($programname)
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $program = $em->getRepository('AppBundle:Program')->findOneBy(array (
+          'name' => $programname
+        ));
+        if ($program == null)
+        {
+            throw new PendingException("There is no program named " . $programname);
+        }
+        $program->setVisible(false);
+        $em->persist($program);
+        $em->flush();
+    }
+
+    /**
+     * @When /^I get the most recent programs$/
+     */
+    public function iGetTheMostRecentPrograms()
+    {
+        $this->client = $this->kernel->getContainer()->get('test.client');
+        $this->client->request('GET', "/api/projects/recent.json");
+    }
+
+    /**
+     * @When /^I get the most recent programs with limit "([^"]*)" and offset "([^"]*)"$/
+     */
+    public function iGetTheMostRecentProgramsWithLimitAndOffset($limit, $offset)
+    {
+        $this->client = $this->kernel->getContainer()->get('test.client');
+        $this->client->request('GET', "/api/projects/recent.json", array("limit" => $limit, "offset" => $offset));
+    }
 }

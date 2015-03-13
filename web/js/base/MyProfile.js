@@ -1,6 +1,7 @@
-var MyProfile = function(url) {
+var MyProfile = function(url, delete_url, deleteProgramString) {
   var self = this;
   self.save_url = url;
+  self.delete_url = delete_url;
   self.newPassword = null;
   self.repeatPassword = null;
   self.firstMail = null;
@@ -8,6 +9,7 @@ var MyProfile = function(url) {
   self.country = null;
   self.regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   self.data_changed = false;
+  self.deleteProgramString = deleteProgramString;
 
   self.tmp_newPassword = null;
   self.tmp_repeatPassword = null;
@@ -178,4 +180,11 @@ var MyProfile = function(url) {
     });
     self.data_changed = false;
   };
+
+  self.deleteProgram = function(id) {
+    var programName = $('#program-' + id).find('.program-name').text();
+    if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
+      window.location.href = self.delete_url + '/' + id;
+    }
+  }
 };

@@ -16,16 +16,24 @@ var Help = function () {
       $( popup ).fadeToggle( 300);
     });
 
-    $('.image-detail img').click(function () {
+    $('.image-detail').find('img').click(function () {
       var id = $(this).data("img-id");
       var index = $(this).data("img-index");
       var type = $(this).data("img-type");
 
 //      type: 1....hourOfCode
 //            2....stepByStep
+      if (id > 0) {
+        if(type == 1)
+          $(container).html('<img src="' + path + id + '_' + index + '.jpg" alt="" title="" />');
+        else {
+          if(index)
+            $(container).html('<img src="' + path + id + '_' + 'right' + '_' + index + '.png" alt="" title="" />');
+          else
+            $(container).html('<img src="' + path + id + '_' + 'left' + '.png" alt="" title="" />');
+        }
 
-      if (id > 0 || type != 1) {
-        $(container).html('<img src="' + path + id + '_' + index + '.jpg" />');
+
         $(container).find("img").height($(window).height() - 108);
 
         overlay.fadeIn(300);

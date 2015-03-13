@@ -11,6 +11,7 @@ use Knp\Component\Pager\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
+use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 
 class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface
 {
@@ -75,13 +76,14 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $program->setLanguageVersion($extracted_file->getLanguageVersion());
     $program->setUploadIp($request->getIp());
     $program->setRemixCount(0);
-    $program->setFilesize(0);
+    $program->setFilesize($file->getSize());
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage("en");
     
+    $this->event_dispatcher->dispatch("catrobat.program.before.persist", new ProgramBeforePersistEvent($extracted_file, $program));
+    
     $this->entity_manager->persist($program);
-    //$this->entity_manager->flush();
 
     $this->event_dispatcher->dispatch("catrobat.program.after.insert", new ProgramAfterInsertEvent($extracted_file, $program));
 
@@ -115,7 +117,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
 
   public function getUserPrograms($user_id)
   {
-    return $this->program_repository->getUserPrograms($user_id);//findBy(array("user_id" => $user_id), array('id' => 'ASC'));
+    return $this->program_repository->getUserPrograms($user_id);
   }
 
   public function findAll()
@@ -141,9 +143,6 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   public function getMostDownloadedPrograms($limit = null, $offset = null)
   {
     return $this->program_repository->getMostDownloadedPrograms($limit, $offset);
-//    $offset = $offset / $limit;
-//    $query = $this->program_repository->createQueryBuilder('e')->select('e')->orderBy('e.uploaded_at', 'DESC');
-//    return $this->pagination->paginate($query, 1, $limit);
   }
 
   public function search($query, $limit=10, $offset=0)

@@ -171,16 +171,16 @@
         height: 35px;
         border-radius: 50%;
         padding: 5px 0;
+      }
 
-        .current {
-          color: #fff;
-        }
+      .bubbles.current {
+        color: #fff;
       }
     }
   }
 
   .title {
-    padding: 10px 0px;
+    padding: 10px 20px;
   }
 
   .description {
@@ -190,6 +190,8 @@
 
   .image-container {
     margin-top: 15px;
+    display: table;
+    width: 100%;
 
     .col-3, .col-4, .col-5, .spacer {
       display: table-cell;
@@ -257,6 +259,135 @@
         -ms-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+    }
+  }
+
+  .step-by-step-container {
+    display: table;
+    width: 100%;
+
+    .col-per-35, .col-per-65 {
+      display: table-cell;
+      padding-left: 20px;
+
+      img {
+        border: 1px #fff solid;
+        margin-top: 5px;
+      }
+    }
+
+    .col-per-35 {
+      width: 35%;
+
+      img {
+        width: 70%;
+      }
+    }
+
+    .col-per-65 {
+      width: 65%;
+
+      img {
+        width: 37%;
+      }
+
+      img.plus, img.play {
+        width: 20%;
+      }
+
+      img.back {
+        width: 10%;
+      }
+
+      img.width-100 {
+        width: 100%;
+      }
+
+      img.width-15 {
+        width: 15%;
+      }
+
+      img.width-7 {
+        width: 7%;
+        margin-left: 10px;
+        margin-right: 5px;
+      }
+
+      img.width-7:not(.no-margin-bottom) {
+        margin-bottom: 7px;
+      }
+
+      .special-2-left, .special-2-right {
+        float: left;
+      }
+
+      .special-2-left {
+        width: 30%;
+      }
+
+      .special-2-right {
+        width: 70%;
+      }
+
+    }
+
+    @media screen and (max-width: 840px) {
+      .col-per-35, .col-per-65{
+        width: 100%;
+        display: block;
+      }
+
+      }
+  }
+}
+
+.tutorialcards-container {
+  padding: 0 10px;
+
+  h3 {
+    margin: 30px auto 0px auto;
+  }
+
+  .img-container {
+    margin: 5px auto;
+    width: 50%;
+
+    .extra-text {
+      margin-top: 55px;
+      margin-bottom: 30px;
+    }
+
+    img {
+      border: 1px solid #fff;
+      margin: 0px auto 15px auto;
+    }
+  }
+
+  p.description {
+    margin: 20px 0 40px 0;
+
+    strong {
+      text-transform: uppercase;
+    }
+  }
+
+  .col-2 {
+    float: left;
+    width: 50%;
+    padding: 5px 0;
+
+    img {
+      border: 2px solid @default-text-color;
+    }
+
+    .title {
+      padding-left: 15px;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .col-2 {
+      width: 100%;
     }
   }
 }

@@ -63,7 +63,8 @@ Feature: Search programs
          "Views":"12",
          "Downloads":"3",
          "ProjectUrl":"details\/1",
-         "DownloadUrl":"download\/1.catrobat"
+         "DownloadUrl":"download\/1.catrobat",
+         "FileSize":0
      }],
     "preHeaderMessages":""
     }
@@ -212,4 +213,13 @@ Feature: Search programs
         | Name                |
         | Minions             |
         | Ponny               |
+        | Superponny          |
+        
+        
+  Scenario: only show visible programs
+    Given program "Ponny" is not visible
+    And I use the limit "10"
+    When I search for "p2"
+    Then I should get following programs:
+        | Name                |
         | Superponny          |

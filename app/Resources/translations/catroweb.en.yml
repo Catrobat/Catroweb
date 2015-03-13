@@ -28,6 +28,7 @@ profile:
   firstEmail: My first email
   secondEmail: My second email
   country: Country
+  myPrograms: My programs
   form:
     passwordsNoMatch: The passwords didn't match.
     passwordTooShort: The new password must have at least %length% characters.
@@ -37,6 +38,7 @@ profile:
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
     submitSuccess: saved!
+  reallyDeleteProgram: Do you really want to delete your program
 
 
 licenseToPlay:
@@ -91,6 +93,7 @@ termsOfUse:
 
 help:
   hourOfCode:
+    title: "Skydiving Steve"
     step0:
       title: "Skydiving Steve"
       description: "In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck..."
@@ -253,6 +256,134 @@ help:
       image3: 'Object "parcel"'
       image4: 'Object "restart"'
       image5: 'Object "target"'
+  stepByStep:
+    title: "Step-by-Step Intro"
+    start: "Starting position:"
+    step1:
+      title: 'Make a new program'
+      detail:
+        text1: 'Tap on "New".'
+        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
+    step2:
+      title: "Create a new object"
+      detail:
+        text1: 'Tap:'
+        text2: 'Choose the source of the first look of your new object.'
+        text3: 'Enter an object name and tap "OK" to create the object.'
+        special1: 'Draw a new look.'
+        special2: 'Choose from gallery.'
+        special3: 'Take a picture.'
+    step3:
+      title: "Start Moving"
+      detail:
+        text1: 'Tap:'
+        text2: 'The first brick we use is out of the category "Motion".'
+        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: 'Use the Android Back Button to get back from the stage.'
+    step4:
+      title: "Change Look"
+      description: "You can change the look of your object."
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Snap the brick underneath the "Glide" - brick.'
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'Now you have to select the new image.'
+        text6: 'Tap play to see the behaviour on the stage.'
+    step5:
+      title: "Speak"
+      description: "Now you will find out how to make an object talk."
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: 'Snap the brick underneath the "Switch to look" brick.'
+        text3: 'Tap play to see the behaviour on the stage.'
+    step6:
+      title: 'Again and again'
+      description: "This step shows you how to repeat behaviour of objects."
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
+    step7:
+      title: "Tapping is everything"
+      description: 'You can also control the behaviour of the object when the program is running on the stage.'
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
+    step8:
+      title: "Copy, delete or edit a brick"
+      detail:
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
+    step9:
+      title: "Navigation in the app"
+      detail:
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
+    step10:
+      title: "Change the background"
+      description: 'This is the overview of your objects and the background depends to one program.'
+      detail:
+        text1: 'The background is like an object, but you just can have on background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
+    step11:
+      title: "Main Menu"
+      description: "Use the Android Back Button to get to this screen."
+      detail:
+        text1: 'Continue with your currently opened program.'
+        text2: 'Add a new program.'
+        text3: 'See all your local programs.'
+        text4: 'Go to the help site and discuss with other users.'
+        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
+        text6: 'Upload the program that is currently opened.'
+  tutorialcards:
+      title: "Tutorials"
+      description1: "This tutorials show you how to use effective tricks in"
+      description2: "Pocket Code."
+      getReady: "Get Ready:"
+      tryCode: "Try this code:"
+      doIt: "Do it:"
+      tip: "Extra Tip:"
+      card1:
+        title: "Change Size"
+        description: "Tap the duck to change the size."
+      card2:
+        title: "Change Look"
+        description: "Use this trick to count automatically."
+      card3:
+        title: "Moving Animation"
+        description: "Use this trick when you want a flying parrot."
+      card4:
+        title: "Glide"
+        description: "Move smoothly from one point to another."
+      card5:
+        title: "Play Sound"
+        description: "Tap the drum to play this sound."
+        extra1: '1. Click "+"'
+        extra2: '2. Select "Pocket Code Recorder"'
+        extra3: '3. Press icon to record your sound'
+      card6:
+        title: "Speak Something"
+        description: "Use this code to make an object speaking."
+      card7:
+        title: "GSensor"
+        description: "Use this trick to control an object with the inclination of your device."
+        extra1: 'If too sensitive, divide by 10'
+      card8:
+        title: "Compass"
+        description: "Use this code to make a compass."
+      card9:
+        title: "Broadcast"
+        description: "Look at this code! This shows you how to communicate between objects."
+
 search:
   dotdotdot: Search...
   search: Search

@@ -13,37 +13,34 @@
     {% if first is defined %}
       <a href="{{ path(route, query|merge({(pageParameterName): first-1})) }}">
         {% if current == first-1 %}
-          <div class="bubbles"><span class="current">{{ first-1 }}</span></div>
+          <div class="bubbles current">{{ first-1 }}</div>
         {% else %}
           <div class="bubbles">{{ first-1 }}</div>
         {% endif %}
       </a>
-      {% if current < 3 %}
-        <a href="{{ path(route, query|merge({(pageParameterName): first})) }}">
-          {% if current == first %}
-            <div class="bubbles"><span class="current">{{ first }}</span></div>
-          {% else %}
-            <div class="bubbles">{{ first }}</div>
-          {% endif %}
-        </a>
-      {% else %}
+      {% if current > 2 %}
         <div class="bubbles">...</div>
       {% endif %}
     {% endif %}
 
     {% for page in pagesInRange %}
 
-      {% if current != first-1 or page != 3 %}
-
-        {% if page != first and page != last %}
-          {% if page != current %}
-            <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
-              <div class="bubbles">{{ page }}</div>
-            </a>
-          {% else %}
-            <div class="bubbles"><span class="current">{{ page }}</span></div>
-          {% endif %}
+      {% if(current == first-1) or (current == first) %}
+        {% if(page <= 2) %}
+          <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+            <div class="bubbles {{ page==current?'current':'' }}">{{ page }}</div>
+          </a>
         {% endif %}
+      {% elseif(current == last-1) or (current == last) %}
+        {% if(page < 21) %}
+          <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+            <div class="bubbles {{ page==current?'current':'' }}">{{ page }}</div>
+          </a>
+        {% endif %}
+      {% else %}
+        <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+          <div class="bubbles {{ page==current?'current':'' }}">{{ page }}</div>
+        </a>
       {% endif %}
     {% endfor %}
 
@@ -54,7 +51,7 @@
 
       <a href="{{ path(route, query|merge({(pageParameterName): last})) }}">
         {% if current == last %}
-          <div class="bubbles"><span class="current">{{ last }}</span></div>
+          <div class="bubbles current">{{ last }}</div>
         {% else %}
           <div class="bubbles">{{ last }}</div>
         {% endif %}

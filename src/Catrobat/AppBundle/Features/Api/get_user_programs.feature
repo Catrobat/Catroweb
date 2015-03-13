@@ -51,7 +51,8 @@ Feature: Get users programs
                                 "Views":"9",
                                 "Downloads":"33",
                                 "ProjectUrl":"details/2",
-                                "DownloadUrl":"download/2.catrobat"
+                                "DownloadUrl":"download/2.catrobat",
+                                "FileSize":0
                             },
                             {
                                 "ProjectId": 6,
@@ -67,7 +68,8 @@ Feature: Get users programs
                                 "Views":"33",
                                 "Downloads":"2",
                                 "ProjectUrl":"details/6",
-                                "DownloadUrl":"download/6.catrobat"
+                                "DownloadUrl":"download/6.catrobat",
+                                "FileSize":0
                             }],
           "preHeaderMessages":""
       }
@@ -82,6 +84,13 @@ Feature: Get users programs
 
   Scenario: empty result set is returend if the user doesnt exist or has no programs
     Given I have a parameter "user_id" with value "5"
+    When I GET "/api/projects/userPrograms.json" with these parameters
+    Then I should get programs in the following order:
+      | Name      |
+   
+  Scenario: show only visible programs
+    Given program "MarkoTheBest" is not visible
+    And I have a parameter "user_id" with value "3"
     When I GET "/api/projects/userPrograms.json" with these parameters
     Then I should get programs in the following order:
       | Name      |

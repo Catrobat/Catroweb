@@ -41,7 +41,8 @@ Feature: Get the most downloaded programs
                                 "Views":"9",
                                 "Downloads":"333",
                                 "ProjectUrl":"details/2",
-                                "DownloadUrl":"download/2.catrobat"
+                                "DownloadUrl":"download/2.catrobat",
+                                "FileSize":0
                             }],
           "preHeaderMessages":""
       }
@@ -86,3 +87,11 @@ Feature: Get the most downloaded programs
       | program 3 |
       | program 1 |
 
+  Scenario: show only visible programs
+    Given program "program 2" is not visible
+    When I GET "/api/projects/mostDownloaded.json" with these parameters
+    Then I should get programs in the following order:
+      | Name      |
+      | program 3 |
+      | program 1 |
+      

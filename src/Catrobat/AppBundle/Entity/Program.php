@@ -97,6 +97,11 @@ class Program
   protected $visible;
   
   /**
+   * @ORM\Column(type="boolean", options={"default":false})
+   */
+  protected $kodey = false;
+  
+  /**
    * @ORM\Column(type="string", options={"default":""})
    */
   protected $upload_language;
@@ -647,4 +652,16 @@ class Program
     {
         $this->id = $id;
     }
+
+    public function getKodey()
+    {
+        return $this->kodey;
+    }
+
+    public function setKodey($kodey)
+    {
+        $this->kodey = $kodey;
+        return $this;
+    }
+ 
 }

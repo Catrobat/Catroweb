@@ -90,11 +90,6 @@ class ListProgramsController extends Controller
     $offset = intval($request->query->get('offset', 0));
     $user_id = intval($request->query->get('user_id', 0));
 
-    if ($sortBy == "user")
-      $numbOfTotalProjects = $program_manager->searchCountUserPrograms($user_id);
-    else
-      $numbOfTotalProjects = $program_manager->getTotalPrograms();
-    
     if ($sortBy == "downloads")
       $programs = $program_manager->getMostDownloadedPrograms($limit, $offset);
     else if ($sortBy == "views")
@@ -103,6 +98,11 @@ class ListProgramsController extends Controller
       $programs = $program_manager->getUserPrograms($user_id);
     else
       $programs = $program_manager->getRecentPrograms($limit, $offset);
+    
+    if ($sortBy == "user")
+        $numbOfTotalProjects = count($programs);
+    else
+        $numbOfTotalProjects = $program_manager->getTotalPrograms();
     
     $retArray['CatrobatProjects'] = array ();
     foreach($programs as $program)
@@ -124,6 +124,7 @@ class ListProgramsController extends Controller
           $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
           $new_program['ProjectUrl'] = "details/" . $program->getId();
           $new_program['DownloadUrl'] = "download/" . $program->getId() . ".catrobat";
+          $new_program['FileSize'] = $program->getFilesize()/1048576;
       }
       $retArray['CatrobatProjects'][] = $new_program;
     }

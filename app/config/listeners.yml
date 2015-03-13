@@ -47,6 +47,11 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
             
+      catroweb.kodey.check:
+            class: Catrobat\AppBundle\Listeners\KodeyListener
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+            
 
 # ======== Logging ========
 

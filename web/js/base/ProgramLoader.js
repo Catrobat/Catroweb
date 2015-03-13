@@ -67,6 +67,9 @@ var ProgramLoader = function (container, url, column_max) {
         case '#search-results':
           div = '<div><div class="img-time-small"></div>' + programs[i].UploadedString + '</div>';
           break;
+        case '#myprofile-programs':
+          div = '<div>' + programs[i].UploadedString + '</div>';
+          break;
         case '#mostDownloaded':
           div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
           break;
@@ -78,15 +81,21 @@ var ProgramLoader = function (container, url, column_max) {
       }
 
       var program_link = data.CatrobatInformation.BaseUrl + 'program/';
-      $(self.container).find('.programs').append(
-        '<div class="program">'+
+
+      var program = $(
+        '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
           '<div onclick="window.location.href = \''+ program_link + programs[i].ProjectId + '\'">'+
             '<div><img src="' + data.CatrobatInformation.BaseUrl + "/" + programs[i].ScreenshotSmall +'"></div>'+
-            '<div><b>'+ programs[i].ProjectName +'</b></div>'+
+            '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
           '</div>'+
         '</div>'
       );
+
+      $(self.container).find('.programs').append(program);
+
+      if(self.container == '#myprofile-programs')
+        $(program).prepend('<div class="img-delete" onclick="profile.deleteProgram('+ programs[i].ProjectId +')"></div>');
     }
     self.loaded += programs.length;
   };
@@ -140,6 +149,7 @@ var ProgramLoader = function (container, url, column_max) {
       else {
         $(self.container).find('.button-show-more').hide();
         $(self.container).find('.button-show-ajax').show();
+        // on loadUserPrograms... set user_id as parameter
         $.get(self.url, { limit: self.download_limit, offset: self.loaded }, function(data) {
           if((data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) && self.loaded <= self.visible) {
             $(self.container).find('.button-show-ajax').hide();
@@ -154,9 +164,5 @@ var ProgramLoader = function (container, url, column_max) {
       }
 
     });
-  };
-
-  self.goToProgram = function() {
-    alert(1);
   };
 };

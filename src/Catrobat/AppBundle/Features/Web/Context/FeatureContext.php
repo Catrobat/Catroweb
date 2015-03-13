@@ -3,10 +3,13 @@
 namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
+use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Exception\Exception;
+use Behat\Gherkin\Node\PyStringNode, Behat\Gherkin\Node\TableNode;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -22,18 +25,16 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
-  /*
-   * @var \Symfony\Component\HttpKernel\Client
-   */
-  private $client;
-
   private $kernel;
   private $screenshot_directory;
+
+  const BASE_URL = 'http://catroid.local/app_test.php/';
 
   /**
    * Initializes context with parameters from behat.yml.
    *
-   * @param array $parameters
+   * @param array $screenshot_directory
+   * @throws Exception
    */
   public function __construct($screenshot_directory)
   {
@@ -75,31 +76,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iGoToTheWebsiteRoot()
   {
-    $this->getSession()->visit('http://catroid.local/app_dev.php/');
+    $this->getSession()->visit(self::BASE_URL);
   }
 
   /**
-   * @BeforeScenario @Mobile
+   * @BeforeScenario
    */
-  public function resizeWindowMobile()
-  {
-    $this->deleteScreens();
-    $this->getSession()->resizeWindow(320, 1000);
-  }
-
-  /**
-   * @BeforeScenario @Tablet
-   */
-  public function resizeWindowTablet()
-  {
-    $this->deleteScreens();
-    $this->getSession()->resizeWindow(768, 1000);
-  }
-
-  /**
-   * @BeforeScenario @Desktop
-   */
-  public function resizeWindowDesktop()
+  public function setup()
   {
     $this->deleteScreens();
     $this->getSession()->resizeWindow(1280, 1000);
@@ -110,7 +93,24 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function makeScreenshot()
   {
+
     $this->saveScreenshot(null, $this->screenshot_directory);
+  }
+
+  /**
+   * @BeforeScenario @Mobile
+   */
+  public function resizeWindowMobile()
+  {
+    $this->getSession()->resizeWindow(320, 1000);
+  }
+
+  /**
+   * @BeforeScenario @Tablet
+   */
+  public function resizeWindowTablet()
+  {
+    $this->getSession()->resizeWindow(768, 1000);
   }
 
   /**
@@ -140,14 +140,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
       case "newest":
         $this->assertSession()->elementExists("css", "#newest");
+        $this->assertSession()->elementExists("css", ".program");
         break;
 
       case "most downloaded":
         $this->assertSession()->elementExists("css", "#mostDownloaded");
+        $this->assertSession()->elementExists("css", ".program");
         break;
 
       case "most viewed":
         $this->assertSession()->elementExists("css", "#mostViewed");
+        $this->assertSession()->elementExists("css", ".program");
         break;
 
       default:
@@ -279,6 +282,104 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     else
       assertTrue(false);
 
+  }
+
+  /**
+   * @Given /^there are users:$/
+   */
+  public function thereAreUsers(TableNode $table)
+  {
+    /**
+     * @var $user_manager \Catrobat\AppBundle\Model\UserManager
+     */
+    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $users = $table->getHash();
+    $user = null;
+    for($i = 0; $i < count($users); $i ++)
+    {
+      $user = $user_manager->createUser();
+      $user->setUsername($users[$i]["name"]);
+      $user->setEmail("dev" . $i . "@pocketcode.org");
+      $user->setPlainPassword($users[$i]["password"]);
+      $user->setEnabled(true);
+      $user->setUploadToken($users[$i]["token"]);
+      $user->setCountry("at");
+      $user_manager->updateUser($user, false);
+    }
+    $user_manager->updateUser($user, true);
+  }
+
+  /**
+   * @Given /^there are programs:$/
+   */
+  public function thereArePrograms(TableNode $table)
+  {
+    /**
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $programs = $table->getHash();
+    for($i = 0; $i < count($programs); $i ++)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy(array (
+        'username' => $programs[$i]['owned by']
+      ));
+      $program = new Program();
+      $program->setUser($user);
+      $program->setName($programs[$i]['name']);
+      $program->setDescription($programs[$i]['description']);
+      $program->setFilename("file" . $i . ".catrobat");
+      $program->setThumbnail("thumb.png");
+      $program->setScreenshot("screenshot.png");
+      $program->setViews($programs[$i]['views']);
+      $program->setDownloads($programs[$i]['downloads']);
+      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setCatrobatVersion(1);
+      $program->setCatrobatVersionName($programs[$i]['version']);
+      $program->setLanguageVersion(1);
+      $program->setUploadIp("127.0.0.1");
+      $program->setRemixCount(0);
+      $program->setFilesize(0);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
+      $program->setUploadLanguage("en");
+      $program->setApproved(false);
+      $em->persist($program);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @When /^I click the "([^"]*)" button$/
+   */
+  public function iClickTheButton($arg1)
+  {
+    $arg1 = trim($arg1);
+    $page = $this->getSession()->getPage();
+    $button = null;
+
+    switch($arg1) {
+      case "login":
+        $button = $page->find("css", "#btn-login");
+        break;
+      default:
+        assertTrue(false);
+    }
+
+    $button->click();
+
+  }
+
+  /**
+   * @Then /^I should be logged in$/
+   */
+  public function iShouldBeLoggedIn()
+  {
+    $this->assertPageNotContainsText("Your password or username was incorrect.");
+    $this->assertElementOnPage("#logo");
+    $this->assertElementNotOnPage("#btn-login");
+    $this->assertElementOnPage("#nav-dropdown");
+    $this->getSession()->getPage()->find("css", ".show-nav-dropdown")->click();
+    $this->assertElementOnPage("#nav-dropdown");
   }
 
 }
