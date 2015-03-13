@@ -15,8 +15,7 @@
                     <li>
                         <div class="img-author"></div>
                         <div class="link-author">
-                            {# Todo: Create link to profile of User #}
-                            <a href="/profile/{{ program.user.id }}">{{ program.user }}</a>
+                            <a href="{{ url('catrobat_web_profile', { id : program.user.id }) }}">{{ program.user }}</a>
                         </div>
                     </li>
                 </ul>
@@ -26,39 +25,40 @@
 
     <div id="projectDetailsContainer">
         <div class="projectDetailsThumbnail">
-            {# Todo: Create download link #}
-            <a href="/download/{{ program.id }}">
-                <img id="projectDetailsThumbnailImage" src="/resources/thumbnails/{{ program.id }}_large.png" />
+            <a href="../{{ program_details.downloadUrl }}">
+                <img id="projectDetailsThumbnailImage" src="../{{ program_details.screenshotBig }}" />
             </a>
         </div>
 
         <div class="projectDetailsDescription">
             <div>
-                <span class="projectDetailsDescriptionHeading">Description</span>
+                <span class="projectDetailsDescriptionHeading">{{ "programs.description"|trans({}, 'catroweb') }}</span>
             </div>
 
             <div class="projectDetailsDescriptionText">
                 <span>{{ program.description }}</span>
 
                 <div class="projectDetailsDownloadButton">
-                    <a style="text-decoration: none;" href="https://pocketcode.org/download/719.catrobat?fname=Galaxy+War">
+                    <a style="text-decoration: none;" href="../{{ program_details.downloadUrl }}">
                         <div class="blue">
-                            <span class="projectDetailsDownloadText shrinkTextToFit" style="font-size: 25px;">Download</span>
+                            <span class="projectDetailsDownloadText shrinkTextToFit" style="font-size: 25px;">{{ "programs.download"|trans({}, 'catroweb') }}</span>
                         </div>
                     </a>
                 </div>
-
-                {# Todo: Create report link #}
-                <span id="reportAsInappropriateButton">Report as inappropriate</span>
+                <span id="reportAsInappropriateButton">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
                 <br>
-                <span id="projectDetailsDownloadLanguageVersion">Catrobat Language version: Todo: Version ID</span>
+              <span id="projectDetailsDownloadLanguageVersion">{{ "programs.languageVersion"|trans({ "%languageVersion%" : program_details.languageVersion }, 'catroweb') }}</span>
             </div>
         </div>
 
         {# Todo: Check if the user is logged in #}
         <div id="projectDetailsReportContainer">
             <div class="reportAsInappropriateDialog" id="reportAsInappropriateDialog" style="display: none;">
-                Please <a href="https://pocketcode.org/login/?requestUri=details/719">login</a> to report this program as inappropriate.
+              {% if app.user != null %}
+                TODO report program
+              {% else %}
+                {{ "programs.reportLoginBeforeLink"|trans({}, 'catroweb') }} <a href="{{ url('fos_user_security_login') }}?requestUri=program/{{ program.id }}">{{ "programs.reportLoginLink"|trans({}, 'catroweb') }}</a> {{ "programs.reportLoginAfterLink"|trans({}, 'catroweb') }}
+              {% endif %}
             </div>
         </div>
 
@@ -69,26 +69,48 @@
             <ul>
                 <li>
                     <div class="img-age"></div>
-                    <div class="projectDetailsInformationText">Todo: Age</div>
+                    <div class="projectDetailsInformationText">
+                        {{ "programs.age"|trans({ '%age%' : program_details.age }, "catroweb") }}
+                    </div>
                 </li>
                 <li>
                     <div class="img-size"></div>
-                    <div class="projectDetailsInformationText">{{ program.filesize }}</div>
+                    <div class="projectDetailsInformationText">
+                        {{ "programs.size"|trans({ '%size%' : program_details.filesize }, "catroweb") }}
+                    </div>
                 </li>
                 <li>
                     <div class="img-downloads"></div>
                     <div class="projectDetailsInformationText">
-                        <span>{{ program.downloads }} downloads</span>
+                        {{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
                     </div>
                 </li>
                 <li>
                     <div class="img-views"></div>
                     <div class="projectDetailsInformationText">
-                        {{ program.views }} views</div>
+                        {{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
-    {# Detailpage for program with id: {{ program.id }} #}
 {% endblock %}
 
+
+{% block js %}
+  <script>
+    $("#reportAsInappropriateDialog").toggle(false);
+    //$("#reportAsInappropriateAnswer").toggle(false);
+
+    $("#reportAsInappropriateButton").click(function() {
+      //$("#reportAsInappropriateAnswer").toggle(false);
+      $("#reportAsInappropriateDialog").toggle();
+    });
+
+    //$("#reportInappropriateCancelButton").click(function() {
+    //  $("#reportAsInappropriateDialog").toggle(false);
+    //});
+    //$("#reportInappropriateReportButton").click($.proxy(this.reportInappropriateSubmit, this));
+    //$("#reportInappropriateReason").keypress($.proxy(this.reportInappropriateCatchKeypress, this));
+  </script>
+{% endblock %}

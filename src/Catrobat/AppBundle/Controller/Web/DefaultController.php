@@ -69,16 +69,33 @@ class DefaultController extends Controller
    * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"})
    * @Method({"GET"})
    */
-  public function programAction($id)
+  public function programAction(Request $request, $id)
   {
     //IMPORTANT: if you change the route '/program' .. also adapt it in ProgramLoader.js (variable: 'program_link')
-
+    //$session = $request->getSession();
     $program = $this->get("programmanager")->find($id);
+    $screenshot_repository = $this->get("screenshotrepository");
+    $elapsed_time = $this->get("elapsedtime");
 
     if (!$program) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-    return $this->get("templating")->renderResponse('::program.html.twig', array("program" => $program));
+
+    //TODO increase the View Count only once per Session/User
+    $program_views_inc = $program->getViews() + 1;
+    $this->get("programmanager")->updateProgramViews($program->getId(), $program_views_inc);
+    $program->setViews($program_views_inc);
+
+    $program_details = array ();
+    $program_details['screenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
+    $program_details['downloadUrl'] = "download/" . $program->getId() . ".catrobat";
+    $program_details['languageVersion'] = $program->getLanguageVersion();
+    $program_details['downloads'] = $program->getDownloads();
+    $program_details['views'] = $program->getViews();
+    $program_details['filesize'] = $program->getFilesize();
+    $program_details['age'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
+
+    return $this->get("templating")->renderResponse('::program.html.twig', array("program" => $program, "program_details" => $program_details));
   }
 
   /**

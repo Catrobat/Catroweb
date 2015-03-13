@@ -8,6 +8,18 @@ programs:
   most:
     viewed: Most viewed
     downloaded: Most downloaded
+  age: %age%
+  size: %size% MB big
+  downloads: %downloads% downloads
+  views: %views% views
+  description: Description
+  download: Download
+  reportAsInappropriate: Report as inappropriate
+  languageVersion: Catrobat Language version: %languageVersion%
+  reportLoginBeforeLink: Please
+  reportLoginLink: login
+  reportLoginAfterLink: to report this program as inappropriate.
+
 
 profile:
   saveChanges: save changes
