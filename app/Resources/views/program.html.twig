@@ -71,6 +71,8 @@
               {% endif %}
             </div>
 
+            <div id="reportAsInappropriateAnswer" style="display: none;"></div>
+
         </div>
 
         <div class="projectDetailsSeperator">
@@ -111,17 +113,55 @@
 {% block js %}
   <script>
     $("#reportAsInappropriateDialog").toggle(false);
-    //$("#reportAsInappropriateAnswer").toggle(false);
+    $("#reportAsInappropriateAnswer").toggle(false);
 
     $("#reportAsInappropriateButton").click(function() {
-      //$("#reportAsInappropriateAnswer").toggle(false);
+      $("#reportAsInappropriateAnswer").toggle(false);
       $("#reportAsInappropriateDialog").toggle();
     });
 
-    //$("#reportInappropriateCancelButton").click(function() {
-    //  $("#reportAsInappropriateDialog").toggle(false);
-    //});
-    //$("#reportInappropriateReportButton").click($.proxy(this.reportInappropriateSubmit, this));
-    //$("#reportInappropriateReason").keypress($.proxy(this.reportInappropriateCatchKeypress, this));
+    $("#reportInappropriateCancelButton").click(function() {
+      $("#reportAsInappropriateDialog").toggle(false);
+    });
+
+    $("#reportInappropriateReportButton").click(
+      $.proxy(reportInappropriateSubmit, this)
+    );
+
+    $("#reportInappropriateReason").keypress(
+      $.proxy(reportInappropriateCatchKeypress, this)
+    );
+
+    function reportInappropriateCatchKeypress(event) {
+      if(event.which == '13') {
+        event.preventDefault();
+        reportInappropriateSubmit();
+      }
+    }
+
+    function reportInappropriateSubmit() {
+      $("#reportInappropriateReportButton").attr('disabled', true);
+      $("#reportInappropriateReason").attr('disabled', true);
+
+      var url = '/api/reportProgram/reportProgram.json';
+      $.post(url, {
+        program : $("#reportInappropriateProjectId").val(),
+        note : $("#reportInappropriateReason").val()
+      }, $.proxy(reportInappropriateSuccess, this), "json");
+    }
+
+    function reportInappropriateSuccess(response) {
+      $("#reportAsInappropriateAnswer").toggle(true);
+      $("#reportAsInappropriateAnswer").html(response.answer);
+
+      if(response.statusCode == 200) {
+        $("#reportAsInappropriateDialog").toggle(false);
+      }  else {
+        $("#reportAsInappropriateDialog").toggle(false);
+        $("#reportInappropriateReportButton").attr('disabled', false);
+        $("#reportInappropriateReason").attr('disabled', false);
+      }
+    }
+
   </script>
 {% endblock %}
