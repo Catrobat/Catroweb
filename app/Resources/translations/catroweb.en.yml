@@ -16,9 +16,11 @@ programs:
   download: Download
   reportAsInappropriate: Report as inappropriate
   languageVersion: Catrobat Language version: %languageVersion%
-  reportLoginBeforeLink: Please
-  reportLoginLink: login
-  reportLoginAfterLink: to report this program as inappropriate.
+  reportLoginText: Please %href1%login%href2% to report this program as inappropriate.
+  reportDialogHeader: Why do you think this program is inappropriate?
+  reportDialogReason: Enter a reason
+  reportDialogCancel: Cancel
+  reportDialogConfirm: Report
 
 
 profile:

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="header">
+    <div class="projectDetailsHeader">
         <div>
             <span id="projectDetailsProjectTitle">{{ program.name }}</span>
             <div class="projectDetailsAuthorTop">
@@ -51,15 +51,26 @@
             </div>
         </div>
 
-        {# Todo: Check if the user is logged in #}
         <div id="projectDetailsReportContainer">
-            <div class="reportAsInappropriateDialog" id="reportAsInappropriateDialog" style="display: none;">
+
+            <div id="reportAsInappropriateDialog" class="reportAsInappropriateDialog" style="display: none;">
               {% if app.user != null %}
-                TODO report program
+                <form method="POST" class="reportInappropriateForm">
+                  <p>{{ "programs.reportDialogHeader"|trans({}, "catroweb") }}</p>
+                  <input id="reportInappropriateProjectId" type="hidden" value="{{ program.id }}">
+                  <p>
+                    <textarea id="reportInappropriateReason" class="reportInappropriateReason" name="flagReason" placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}" required="required"></textarea>
+                  </p>
+                  <p class="reportAsInappropriateDialogButtons">
+                    <input id="reportInappropriateCancelButton" type="button" class="buttonWhite buttonSmall" value="{{ "programs.reportDialogCancel"|trans({}, "catroweb") }}">
+                    <input id="reportInappropriateReportButton" type="button" class="buttonGreen buttonSmall" value="{{ "programs.reportDialogConfirm"|trans({}, "catroweb") }}">
+                  </p>
+                  </form>
               {% else %}
-                {{ "programs.reportLoginBeforeLink"|trans({}, 'catroweb') }} <a href="{{ url('login', { flavor: app.request.attributes.get('flavor') }) }}">{{ "programs.reportLoginLink"|trans({}, 'catroweb') }}</a> {{ "programs.reportLoginAfterLink"|trans({}, 'catroweb') }}
+                {{ "programs.reportLoginText"|trans( { '%href1%' : "<a href=" ~ url( 'login', { flavor : app.request.attributes.get('flavor') } ) ~ ">", '%href2%' : "</a>" }, 'catroweb' )|raw }}
               {% endif %}
             </div>
+
         </div>
 
         <div class="projectDetailsSeperator">
