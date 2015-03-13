@@ -5,6 +5,157 @@
   }
 }
 
+/*
+ * MEDIA QUERIES
+ */
+
+@media screen and (max-width: 800px) {
+  .projectDetailsAuthorTop {
+    display: none;
+  }
+
+  .projectDetailsDescription {
+    width: 100%;
+    margin-top: 10%;
+    max-width: 100%;
+  }
+
+
+  .projectDetailsDescriptionHeading {
+    margin-left: 4%;
+  }
+
+  .projectDetailsDescriptionText {
+    margin: 4%;
+  }
+
+  #projectDetailsContainer {
+
+    .projectDetailsThumbnail {
+      width: 70% !important;
+      clear: left;
+
+      img {
+        display: block;
+        margin-left: 35%;
+        margin-right: 35%;
+        width: 70%;
+        max-width: 70%;
+      }
+    }
+
+    .projectDetailsDescription, .projectDetailsDownload {
+      clear: left;
+    }
+
+    textarea {
+      width: 75%;
+    }
+
+  }
+
+  .green {
+    font-size: 1.3em;
+    padding: 5% 0 5% 0;
+  }
+
+  .projectDetailsInformation {
+    margin-top: 0;
+    padding-top:0;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 93%;
+
+    ul li {
+      clear: both;
+      margin-top: 5%;
+      width: 100%;
+
+      :nth-child(n+4) {
+        margin-top: 5%;
+      }
+    }
+
+    ul>li:first-of-type {
+      margin-top: 0;
+      padding-top:0;
+      display: inline;
+    }
+  }
+
+  .reportAsInappropriateDialogButtons {
+    font-size: 0.7em;
+  }
+
+  .projectDetailsDownload {
+    min-width: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .projectDetailsDownloadButton {
+    margin:5% 0 5% 0;
+    width: 200px;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .projectDetailsThumbnail {
+    width: 100%;
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 70%;
+      max-width: 70%;
+    }
+  }
+
+  .projectDetailsInformation {
+    margin-top: 0;
+    padding-top:0;
+    padding-left: 5%;
+    width: 93%;
+
+    ul li {
+      clear: both;
+      margin-top: 5%;
+      width: 100%;
+
+      :nth-child(n+4) {
+        margin-top: 5%;
+      }
+    }
+
+    ul>li:first-of-type {
+      margin-top: 0;
+      padding-top:0;
+      display: inline;
+    }
+  }
+
+  .projectDetailsDescription {
+    width: 100%;
+    margin-top: 10%;
+    max-width: 100%;
+  }
+
+  .projectDetailsDownload {
+    min-width: 100%;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .projectDetailsDownloadButton {
+    margin:5% 0 5% 0;
+    width: 200px;
+    height: auto;
+  }
+}
+
 .projectDetailsHeader {
   border-bottom: 1px solid #17a5b8;
   font-size: 1.8em;
@@ -122,6 +273,7 @@
       margin-left: 1em;
       overflow: hidden;
       text-align: left;
+      min-width: 200px;
 
       a {
         font-weight: bold;

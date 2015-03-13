@@ -163,5 +163,42 @@
       }
     }
 
+    window.onresize = $.proxy(function(){
+      $.proxy(resizeColumnsAndText(), this);
+    }, this);
+
+    window.onload = $.proxy(function(){
+      $.proxy(resizeColumnsAndText(), this);
+    }, this);
+
+    function resizeColumnsAndText() {
+      resizeText($(".shrinkTextToFit"));
+      resizeColumns();
+    }
+
+    function resizeColumns() {
+      var colThumbnail       = $(".projectDetailsThumbnail");
+      var colDescription     = $(".projectDetailsDescription");
+      var cssMediaQueryWidth = 800; /* defined in details.css (media query for single column layout) */
+
+      if(!$('body').width() > cssMediaQueryWidth) {
+        colThumbnail.css("height", "auto");
+        colDescription.css("height", "auto");
+      }
+    }
+
+    function resizeText(elem) {
+
+      while(elem.width() > elem.parent().width()-20) {
+        var fontsize = parseFloat(elem.css('font-size')) - 2.0;
+        elem.css('font-size', parseFloat(fontsize) + "px" );
+      }
+
+      while(elem.width() < elem.parent().width() - 60) {
+        var fontsize = parseFloat(elem.css('font-size')) + 2.0;
+        elem.css('font-size', parseFloat(fontsize) + "px" );
+      }
+    }
+
   </script>
 {% endblock %}
