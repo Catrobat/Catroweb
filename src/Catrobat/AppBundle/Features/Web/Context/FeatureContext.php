@@ -6,10 +6,6 @@ use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
-
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Exception\Exception;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -284,6 +280,5 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       assertTrue(false);
 
   }
-
 
 }

@@ -9,6 +9,24 @@ programs:
     viewed: Most viewed
     downloaded: Most downloaded
 
+profile:
+  saveChanges: save changes
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: My first email
+  secondEmail: My second email
+  country: Country
+  form:
+    passwordsNoMatch: The passwords didn't match.
+    passwordTooShort: The new password must have at least %length% characters.
+    passwordTooLong: The new password can have a maximum of %length% characters.
+    passwordIsUsername: The password must differ from the username.
+    emailNotValid: This email address is not valid.
+    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailExists: This email address already exists.
+    submitSuccess: saved!
+
+
 licenseToPlay:
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
@@ -111,3 +129,51 @@ time:
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  
+
+#languages and countries 
+language:
+  arabic: Arabic
+  bulgarian: Bulgarian
+  catalan: Catalan
+  chinese_simplified_han: Chinese (Simplified Han)
+  chinese_traditional_han: Chinese (Traditional Han)
+  croatian: Croatian
+  czech: Czech
+  danish: Danish
+  dutch: Dutch
+  english_united_kingdom: English (United Kingdom)
+  english_united_states: English (United States)
+  estonian: Estonian
+  filipino: Filipino
+  finnish: Finnish
+  french: French
+  german: German
+  greek: Greek
+  hebrew: Hebrew
+  hindi: Hindi
+  hungarian: Hungarian
+  indonesian: Indonesian
+  italian: Italian
+  japanese: Japanese
+  korean: Korean
+  latvian: Latvian
+  lithuanian: Lithuanian
+  malay: Malay
+  norwegian: Norwegian
+  persian: Persian
+  polish: Polish
+  portuguese_brazil: Portuguese (Brazil)
+  portuguese_portugal: Portuguese (Portugal)
+  romanian: Romanian
+  russian: Russian
+  serbian: Serbian
+  slovak: Slovak
+  slovenian: Slovenian
+  spanish_latin_america: Spanish (Latin America)
+  spanish_spain: Spanish (Spain)
+  swedish: Swedish
+  thai: Thai
+  turkish: Turkish
+  ukrainian: Ukrainian
+  vietnamese: Vietnamese

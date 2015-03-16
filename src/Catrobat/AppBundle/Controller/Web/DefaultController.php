@@ -2,12 +2,18 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
+  const MIN_PASSWORD_LENGTH = 6;
+  const MAX_PASSWORD_LENGTH = 32;
+
   public function headerAction()
   {
     return $this->get("templating")->renderResponse(':Default:header.html.twig');
@@ -68,14 +74,81 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/profile/{id}", name="catrobat_web_profile", requirements={"id":"\d+"})
+   * @Route("/profile/{id}", name="catrobat_web_profile", requirements={"id":"\d+"}, defaults={"id" = 0})
    * @Method({"GET"})
    */
   public function profileAction($id)
   {
-    $profile = $id;
+    $twig = '::profile.html.twig';
 
-    return $this->get("templating")->renderResponse('::profile.html.twig', array("profile" => $profile));
+    if($id == 0) {
+      $user = $this->getUser();
+      $twig = '::myprofile.html.twig';
+    }
+    else
+      $user = $this->get("usermanager")->find($id);
+
+    if (!$user)
+      throw $this->createNotFoundException('Unable to find User entity.');
+
+    $profile = $user->getId();
+
+    return $this->get("templating")->renderResponse($twig, array(
+      "profile" => $profile,
+      "minPassLength" => self::MIN_PASSWORD_LENGTH,
+      "maxPassLength" => self::MAX_PASSWORD_LENGTH
+    ));
+  }
+
+  /**
+   * @Route("/profileSave", name="catrobat_web_profile_save")
+   * @Method({"POST"})
+   */
+  public function profileSaveAction(Request $request)
+  {
+    $user = $this->getUser();
+    if(!$user)
+      return JsonResponse::create(array('statusCode' => StatusCode::INTERNAL_SERVER_ERROR));
+
+    $newPassword = $request->request->get('newPassword');
+    $repeatPassword = $request->request->get('repeatPassword');
+    $firstMail = $request->request->get('firstEmail');
+    $secondMail = $request->request->get('secondEmail');
+    $country = $request->request->get('country');
+
+    try {
+      $this->validateUserPassword($newPassword, $repeatPassword);
+      $this->validateEmail($firstMail);
+      $this->validateEmail($secondMail);
+      $this->validateCountryCode($country);
+    } catch(\Exception $e) {
+      return JsonResponse::create(array('statusCode' => $e->getMessage()));
+    }
+
+    if($firstMail === "" && $secondMail === "")
+      return JsonResponse::create(array('statusCode' => StatusCode::USER_UPDATE_EMAIL_FAILED));
+
+    if($this->checkEmailExists($firstMail))
+      return JsonResponse::create(array('statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 1));
+    if($this->checkEmailExists($secondMail))
+      return JsonResponse::create(array('statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 2));
+
+    if($newPassword !== "")
+      $user->setPlainPassword($newPassword);
+    if($firstMail !== "" && $firstMail != $user->getEmail())
+      $user->setEmail($firstMail);
+    if($firstMail !== "" && $secondMail !== "" && $secondMail != $user->getAdditionalEmail())
+      $user->setAdditionalEmail($secondMail);
+    if($firstMail === "" && $user->getAdditionalEmail() !== "") {
+      $user->setEmail($user->getAdditionalEmail());
+      $user->setAdditionalEmail("");
+    }
+
+    $user->setCountry($country);
+
+    $this->get("usermanager")->updateUser($user);
+
+    return JsonResponse::create(array('statusCode' => StatusCode::OK));
   }
 
   /**
@@ -94,5 +167,68 @@ class DefaultController extends Controller
   public function licenseToPlayAction()
   {
     return $this->get("templating")->renderResponse('::licenseToPlay.html.twig');
+  }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //// private functions
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /*
+   * @param string $username
+   * @param int $pass1
+   * @param int $pass2
+   */
+  private function validateUserPassword($pass1, $pass2)
+  {
+    if($pass1 !== $pass2)
+      throw new \Exception(StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
+
+    if(strcasecmp($this->getUser()->getUsername(), $pass1) == 0)
+      throw new \Exception(StatusCode::USER_USERNAME_PASSWORD_EQUAL);
+
+    if($pass1 != "" && strlen($pass1) < self::MIN_PASSWORD_LENGTH)
+      throw new \Exception(StatusCode::USER_PASSWORD_TOO_SHORT);
+
+    if($pass1 != "" && strlen($pass1) > self::MAX_PASSWORD_LENGTH)
+      throw new \Exception(StatusCode::USER_PASSWORD_TOO_LONG);
+  }
+
+  /*
+   * @param string $email
+   */
+  private function validateEmail($email)
+  {
+    $name = '[a-zA-Z0-9]((\.|\-|_)?[a-zA-Z0-9])*';
+    $domain = '[a-zA-Z]((\.|\-)?[a-zA-Z0-9])*';
+    $tld = '[a-zA-Z]{2,8}';
+    $regEx = '/^('.$name.')@('.$domain.')\.('.$tld.')$/';
+
+    if(!preg_match($regEx, $email) && !empty($email))
+      throw new \Exception(StatusCode::USER_EMAIL_INVALID);
+  }
+
+  /*
+   * @param string $country
+   */
+  private function validateCountryCode($country)
+  {
+    //todo: check if code is really from the drop-down
+    if(!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country))
+      throw new \Exception(StatusCode::USER_COUNTRY_INVALID);
+  }
+
+  /*
+   * @param string $email
+   * @return bool
+   */
+  private function checkEmailExists($email)
+  {
+    $userWithFirstMail = $this->get("usermanager")->findOneBy(array('email' => $email));
+    $userWithSecondMail = $this->get("usermanager")->findOneBy(array('additional_email' => $email));
+
+    if($userWithFirstMail != null && $userWithFirstMail != $this->getUser() || $userWithSecondMail != null && $userWithSecondMail != $this->getUser())
+      return true;
+    return false;
   }
 }

@@ -178,8 +178,6 @@ label {
 }
 
 form {
-  margin: 40px auto;
-  width: 320px;
   text-align: center;
 
   button, .button {
@@ -197,6 +195,8 @@ form {
   }
 
   .input-field {
+    margin: 10px auto;
+    width: 320px;
     background: #fff;
     border: .2em solid #05222a;
     .box-shadow(inset 2px 2px 5px #999);
@@ -209,7 +209,7 @@ form {
       color: #05222a;
       float: left;
       font-size: @default-input-size;
-      height: 35px;
+      height: 33px;
       padding-left: 5px;
       outline: none;
       width: 80%;
@@ -314,7 +314,7 @@ form {
 @media screen and (max-width: @responsive-width-tablet) {
 
   #wrapper {
-    padding-bottom: @footer-height-bottom + @footer-height-padding; /* TODO: ändern !!! */
+    padding-bottom: @footer-height-bottom + @footer-height-padding; /* TODO: ändern (keine fixgröße->variabel)!!! */
   }
 
   .footer-expand {

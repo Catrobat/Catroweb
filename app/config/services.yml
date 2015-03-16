@@ -78,3 +78,9 @@ services:
     elapsedtime:
         class: Catrobat\AppBundle\Services\ElapsedTimeString
         arguments: ["@translator","@time"]
+
+    app.twig_extension:
+        class: Catrobat\AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }

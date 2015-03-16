@@ -23,15 +23,25 @@ class User extends BaseUser
    */
   protected $upload_token;
 
-    /**
-    * @ORM\Column(type="boolean", nullable=true, options={"default":false})
-    */
-    protected $upload_notification;
+  /**
+  * @ORM\Column(type="boolean", nullable=true, options={"default":false})
+  */
+  protected $upload_notification;
 
   /**
    * @ORM\OneToMany(targetEntity="Program", mappedBy="user")
    */
   protected $programs;
+
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $additional_email;
+
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $country;
 
   public function __construct()
   {
@@ -91,20 +101,52 @@ class User extends BaseUser
     $this->upload_token = $upload_token;
   }
 
-    /**
-     * @param mixed $upload_notification
-     */
-    public function setUploadNotification($upload_notification)
-    {
-        $this->upload_notification = $upload_notification;
-    }
+  /**
+   * @param mixed $upload_notification
+   */
+  public function setUploadNotification($upload_notification)
+  {
+      $this->upload_notification = $upload_notification;
+  }
 
-    /**
-     * @return mixed
-     */
-    public function getUploadNotification()
-    {
-        return $this->upload_notification;
-    }
+  /**
+   * @return mixed
+   */
+  public function getUploadNotification()
+  {
+      return $this->upload_notification;
+  }
+
+  /**
+   * @param mixed $additional_email
+   */
+  public function setAdditionalEmail($additional_email)
+  {
+    $this->additional_email = $additional_email;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getAdditionalEmail()
+  {
+    return $this->additional_email;
+  }
+
+  /**
+   * @param mixed $country
+   */
+  public function setCountry($country)
+  {
+    $this->country = $country;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getCountry()
+  {
+    return $this->country;
+  }
 
 }
