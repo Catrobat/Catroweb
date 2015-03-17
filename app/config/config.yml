@@ -100,7 +100,7 @@ sonata_block:
 
 sonata_admin:
     title:     Admin Panel
-    title_logo: /admin/admin_logo.png
+    title_logo: admin/admin_logo.png
     dashboard:
         blocks:
            # display a dashboard block

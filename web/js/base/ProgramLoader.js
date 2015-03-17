@@ -81,7 +81,7 @@ var ProgramLoader = function (container, url, column_max) {
       $(self.container).find('.programs').append(
         '<div class="program">'+
           '<div onclick="window.location.href = \''+ program_link + programs[i].ProjectId + '\'">'+
-            '<div><img src="'+ programs[i].ScreenshotSmall +'"></div>'+
+            '<div><img src="' + data.CatrobatInformation.BaseUrl + "/" + programs[i].ScreenshotSmall +'"></div>'+
             '<div><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
           '</div>'+
