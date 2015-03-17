@@ -1,0 +1,131 @@
+@import '../base/default';
+
+@color-failed: #f78181;
+@background-color-failed: #f1997e;
+@border-color-failed: #800;
+
+article > div {
+  margin-top: 25px;
+  overflow: auto;
+}
+
+#profile-avatar {
+  float: left;
+  width: 33%;
+}
+
+#profile-form {
+  float: right;
+  width: 67%;
+
+  form  {
+    width: 100%;
+
+    > div {
+      float: right;
+      margin-left: 15px;
+      max-width: 48%;
+
+      .input-field {
+        margin: 0 auto 15px 0;
+        padding: 2px;
+
+        input {
+          font-size: 17px;
+          margin-top: 2px;
+          margin-left: 8px;
+        }
+      }
+    }
+
+    button {
+      margin-top: auto;
+      width: 100%;
+      padding: 4px;
+    }
+
+    #select-country {
+      font-size: 17px;
+      font-weight: bold;
+
+      > div:nth-child(1) {
+        float: left;
+        line-height: 43px;
+      }
+
+      > div:nth-child(2) {
+        text-align: right;
+
+        select {
+          margin-top: 3px;
+          width: 240px;
+          height: 37px;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+.input-error {
+  display: none;
+  color: @color-failed;
+  font-size: @default-font-size + 8;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+.password-failed {
+  border: 2px solid @border-color-failed !important;
+  background-color: @background-color-failed !important;
+
+  input {
+    background-color: @background-color-failed;
+    text-shadow: 0 1px 0 #FFF;
+  }
+
+  > div {
+    background-position: -74px -78px !important;
+  }
+}
+
+.mail-failed {
+  border: 2px solid @border-color-failed !important;
+  background-color: @background-color-failed !important;
+
+  input {
+    background-color: @background-color-failed;
+    text-shadow: 0 1px 0 #FFF;
+  }
+
+  > div {
+    background-position: -35px -39px !important;
+  }
+}
+
+.additional-mail-failed {
+  > div {
+    background-position: -35px -116px !important;
+  }
+}
+
+.img-load-ajax {
+  display: none;
+  margin: 15px auto;
+}
+
+#submit-done {
+  display: none;
+  width: 150px;
+  margin: 15px auto;
+
+  .img-saved {
+    float: left;
+  }
+
+  span {
+    font-size: @default-font-size + 4;
+    color: #FFF;
+    font-weight: bold;
+  }
+}

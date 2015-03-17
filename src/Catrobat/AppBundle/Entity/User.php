@@ -34,6 +34,11 @@ class User extends BaseUser
     protected $country;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $additional_email;
+
+    /**
      * @ORM\OneToMany(targetEntity="Program", mappedBy="user")
      */
     protected $programs;
@@ -130,4 +135,20 @@ class User extends BaseUser
     {
         $this->id = $id; 
     }
+
+  /**
+   * @param mixed $additional_email
+   */
+  public function setAdditionalEmail($additional_email)
+  {
+    $this->additional_email = $additional_email;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getAdditionalEmail()
+  {
+    return $this->additional_email;
+  }
 }

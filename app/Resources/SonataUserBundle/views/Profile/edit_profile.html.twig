@@ -9,96 +9,81 @@ file that was distributed with this source code.
 
 #}
 
-{#{% extends "SonataUserBundle:Profile:action.html.twig" %}#}
 {% extends ':Default:base.html.twig' %}
 
+{% block head %}
+  {% stylesheets 'css/custom/myprofile.less' filter='cssrewrite,lessphp' output='compiled/myprofile.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
 
 {% block body %}
   {% block sonata_page_breadcrumb %}
     {% if breadcrumb_context is not defined %}
       {% set breadcrumb_context = 'user_index' %}
     {% endif %}
-    <div class="row-fluid clearfix">
-      {{ sonata_block_render_event('breadcrumb', { 'context': breadcrumb_context, 'current_uri': app.request.requestUri }) }}
-    </div>
-  {% endblock %}
-
-  {#<h2>{% block sonata_profile_title %}{% trans from 'SonataUserBundle' %}sonata_profile_title{% endtrans %}{% endblock %}</h2>#}
-
-  {#<div class="sonata-user-show row row-fluid">#}
-
-    {#<div class="span2 col-lg-2" style="padding: 8px 0;">#}
-      {#{% block sonata_profile_menu %}#}
-        {#{{ sonata_block_render({'type': 'sonata.user.block.menu'}, {'current_uri': app.request.requestUri}) }}#}
-      {#{% endblock %}#}
-    {#</div>#}
-
-    {#<div class="span10 col-lg-10">#}
-      {#{% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}#}
-
-      {#{% block sonata_profile_content '' %}#}
-    {#</div>#}
-
-  {#</div>#}
-
-
-
-
-  {#######################################}
-
-  {% block sonata_profile_title %}
-      {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_profile" | trans({}, 'SonataUserBundle')}}
   {% endblock %}
 
   {% block sonata_profile_content %}
-      {#{% sonata_template_box 'This is the user profile edition template. Feel free to override it.' %}#}
 
-    {#{% if app.user %}#}
-      {#Hi {{ app.user.username }}#}
-    {#{% endif %}#}
+    <h1>{{ app.user.username }}</h1>
 
-      {{ form_errors(form) }}
+    <div>
+      <div id="profile-avatar">
+        <img src="" width="300" height="300">
+      </div>
+      <div id="profile-form">
 
-      {#{% form_theme form _self %}#}
+        <form action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
 
-      {#<div class="panel panel-info">#}
-          {#<div class="panel-heading">#}
-              {#<h3 class="panel-title">{{ "title_user_account" | trans({}, 'SonataUserBundle')}}</h3>#}
-          {#</div>#}
-          {#<div class="panel-body">#}
-              {#&#123;&#35;<form action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">&#35;&#125;#}
-                  {#&#123;&#35;&#123;&#35;{{ form_widget(form) }}&#35;&#125;&#35;&#125;#}
+          {#{{ form_widget(form) }}#}
 
-                {#&#123;&#35;<div class="input-field">&#35;&#125;#}
-                  {#&#123;&#35;{{ form_widget(form.firstname, {'required': false, 'attr': {'placeholder': 'Username' } }) }}&#35;&#125;#}
-                  {#&#123;&#35;<div class="img-login"></div>&#35;&#125;#}
-                {#&#123;&#35;</div>&#35;&#125;#}
+        <div>
+          <div class="input-field">
+            <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" />
+            <div class="img-mail-first"></div>
+          </div>
+          <div class="input-field">
+            <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" />
+            <div class="img-mail-second"></div>
+          </div>
+          <div>
+            <button type="submit" name="submit" class="btn btn-primary pull-right">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
+          </div>
+        </div>
+        <div>
+          <div class="input-field">
+            <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" />
+            <div class="img-password"></div>
+          </div>
+          <div class="input-field">
+            <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" />
+            <div class="img-password"></div>
+          </div>
+          <div id="select-country">
+            <div>{{ 'profile.country'|trans({}, 'catroweb') }}</div>
+            <div>
+              <select>
+                {{ app.request.locale }}
+                {% for key, country in  countriesList() %}
+                  {% if app.user.country == key %}
+                    <option value="{{ key }}" selected>{{ country }}</option>
+                  {% else %}
+                    <option value="{{ key }}">{{ country }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        </form>
 
-
-                  {#&#123;&#35;<div class="form-actions">&#35;&#125;#}
-                      {#&#123;&#35;<button type="submit" name="submit"  class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>&#35;&#125;#}
-                  {#&#123;&#35;</div>&#35;&#125;#}
-              {#&#123;&#35;</form>&#35;&#125;#}
-          {#</div>#}
-      {#</div>#}
-
-      {% render url("sonata_user_profile_edit_authentication") %}
-
-
-    {#<form action="{{ path('sonata_user_profile_edit_authentication') }}" method="POST" class="form-horizontal">#}
-      {#{{ form_widget(form) }}#}
-
-      {#<button type="submit" name="submit" class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>#}
-    {#</form>#}
-
-
-
-    {#<form action="{{ path('sonata_user_change_password') }}" {{ form_enctype(form) }} method="POST" class="fos_user_change_password form-horizontal">#}
-      {#{{ form_widget(form) }}#}
-      {#<button type="submit" class="btn btn-danger pull-right"><i class="icon-lock icon-white glyphicon glyphicon-lock"></i>&nbsp;{{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}</button>#}
-    {#</form>#}
-
-
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div id="user-programs">
+      user programs...
+    </div>
 
   {% endblock %}
 {% endblock %}
