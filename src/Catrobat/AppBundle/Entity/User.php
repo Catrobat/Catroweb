@@ -24,6 +24,11 @@ class User extends BaseUser
     protected $upload_token;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $avatar;
+    
+    /**
      * @ORM\Column(type="boolean", nullable=true, options={"default":false})
      */
     protected $upload_notification;
@@ -151,4 +156,16 @@ class User extends BaseUser
   {
     return $this->additional_email;
   }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+ 
 }

@@ -196,6 +196,8 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $user->setCountry($data[4]);
                     $user->setUploadToken($data[11]);
                     $user->setEnabled(true);
+                    $user->setAvatar(($data[13] === "\N") ? null : $data[13]);
+                    $user->setAdditionalEmail($data[14]);
                     $this->em->persist($user);
                 } else {
                     break;
