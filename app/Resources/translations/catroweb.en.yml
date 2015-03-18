@@ -16,6 +16,7 @@ profile:
   firstEmail: My first email
   secondEmail: My second email
   country: Country
+  myPrograms: My programs
   form:
     passwordsNoMatch: The passwords didn't match.
     passwordTooShort: The new password must have at least %length% characters.
@@ -25,6 +26,7 @@ profile:
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
     submitSuccess: saved!
+  reallyDeleteProgram: Do you really want to delete your program
 
 
 licenseToPlay:

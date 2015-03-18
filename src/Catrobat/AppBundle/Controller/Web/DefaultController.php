@@ -116,7 +116,7 @@ class DefaultController extends Controller
       $user = $this->get("usermanager")->find($id);
 
     if (!$user)
-      throw $this->createNotFoundException('Unable to find User entity.');
+      return $this->redirectToRoute('fos_user_security_login');
 
     \Locale::setDefault(substr($request->getLocale(),0,2));
     $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
@@ -137,7 +137,7 @@ class DefaultController extends Controller
   {
     $user = $this->getUser();
     if(!$user)
-      return JsonResponse::create(array('statusCode' => StatusCode::INTERNAL_SERVER_ERROR));
+      return $this->redirectToRoute('fos_user_security_login');
 
     $newPassword = $request->request->get('newPassword');
     $repeatPassword = $request->request->get('repeatPassword');
@@ -178,6 +178,33 @@ class DefaultController extends Controller
     $this->get("usermanager")->updateUser($user);
 
     return JsonResponse::create(array('statusCode' => StatusCode::OK));
+  }
+
+  /**
+   * @Route("/profileDeleteProgram/{id}", name="catrobat_web_profile_delete_program", requirements={"id":"\d+"}, defaults={"id" = 0})
+   * @Method({"GET"})
+   */
+  public function deleteProgramAction($id)
+  {
+    if($id == 0)
+      return $this->redirectToRoute('catrobat_web_profile');
+
+    $user = $this->getUser();
+    if(!$user)
+      return $this->redirectToRoute('fos_user_security_login');
+
+    $program = $this->get("programmanager")->find($id);
+
+    if(!$program)
+      throw $this->createNotFoundException('Unable to find Project entity.');
+
+    $program->setVisible(false);
+
+    $em = $this->getDoctrine()->getEntityManager();
+    $em->persist($program);
+    $em->flush();
+
+    return $this->redirectToRoute('catrobat_web_profile');
   }
 
   /**

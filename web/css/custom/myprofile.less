@@ -5,30 +5,37 @@
 @border-color-failed: #800;
 
 article > div {
-  margin-top: 25px;
-  overflow: auto;
+  margin: 25px 0;
 }
 
 #profile-avatar {
   float: left;
-  width: 33%;
+
+  img {
+    border: 4px solid #FFF;
+  }
 }
 
 #profile-form {
+  overflow: auto;
   float: right;
-  width: 67%;
 
   form  {
     width: 100%;
 
+    > div:nth-child(1) {
+      overflow: auto;
+    }
+
     > div {
-      float: right;
+      float: left;
       margin-left: 15px;
-      max-width: 48%;
+      width: 295px;
 
       .input-field {
         margin: 0 auto 15px 0;
         padding: 2px;
+        width: auto;
 
         input {
           font-size: 17px;
@@ -58,7 +65,8 @@ article > div {
 
         select {
           margin-top: 3px;
-          width: 240px;
+          margin-bottom: 15px;
+          width: 215px;
           height: 37px;
           color: #000;
         }
@@ -127,5 +135,56 @@ article > div {
     font-size: @default-font-size + 4;
     color: #FFF;
     font-weight: bold;
+  }
+}
+
+#myprofile-programs h1 {
+  border-bottom: 0;
+}
+
+.img-delete {
+  position: relative;
+  cursor: pointer;
+  width: 31px !important;
+  left: 40px;
+  top: 19px;
+  margin-top: -19px;
+  -webkit-filter: drop-shadow(2px 0px 2px #222);
+  /* ..webkit +... */
+}
+
+@media screen and (max-width: 950px) {
+  #profile-avatar {
+    img {
+      margin-left: 25px;
+    }
+  }
+
+  #profile-form {
+    form  {
+      > div {
+        float: none;
+        margin-right: 25px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @responsive-width-tablet) {
+  #profile-avatar {
+    float: none;
+    text-align: center;
+
+    img {
+      margin: 0;
+    }
+  }
+
+  #profile-form {
+    float: none;
+
+    form > div {
+      margin: auto;
+    }
   }
 }
