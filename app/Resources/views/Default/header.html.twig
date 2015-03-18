@@ -19,7 +19,7 @@
 
       {% if app.user %}
         <div class="btn btn-menu logged-in show-nav-dropdown">
-          <div class="img-avatar"></div>
+          <div class="img-avatar" {%  if app.user.avatar is not empty %}style="background-size:cover; background-position:center; outline: 1px solid #FFFFFF; background-image:url({{ app.user.avatar }});"{%  endif %}></div>
         </div>
         <div class="btn btn-username show-nav-dropdown">{{ app.user.username }}</div>
         <div class="btn show-nav-dropdown">
