@@ -21,6 +21,7 @@ class FileStructureValidator
     $finder->in($file->getPath())
            ->exclude(array("sounds","images"))
            ->notPath("/^code.xml$/")
+           ->notPath("/^permissions.txt$/")
            ->notPath("/^screenshot.png$/")
            ->notPath("/^manual_screenshot.png$/")
            ->notPath("/^automatic_screenshot.png$/");

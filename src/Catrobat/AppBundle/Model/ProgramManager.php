@@ -11,6 +11,7 @@ use Knp\Component\Pager\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
+use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 
 class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface
 {
@@ -80,8 +81,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $program->setApproved(false);
     $program->setUploadLanguage("en");
     
+    $this->event_dispatcher->dispatch("catrobat.program.before.persist", new ProgramBeforePersistEvent($extracted_file, $program));
+    
     $this->entity_manager->persist($program);
-    //$this->entity_manager->flush();
 
     $this->event_dispatcher->dispatch("catrobat.program.after.insert", new ProgramAfterInsertEvent($extracted_file, $program));
 
