@@ -65,7 +65,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
         $this->executeShellCommand("tar xf $temp_dir/".self::SQL_CONTAINER_FILE." --directory $temp_dir", "Extracting SQL files");
         $this->executeShellCommand("tar xfz $temp_dir/".self::SQL_WEB_CONTAINER_FILE." --directory $temp_dir", "Extracting Catroweb SQL files");
         $this->executeShellCommand("tar xf $temp_dir/".self::RESOURCE_CONTAINER_FILE." --directory $temp_dir", "Extracting resource files");
-
+        
         $finder->in($temp_dir."/resources/projects")->depth(0);
         foreach ($finder as $file) {
             $filesystem->rename($file->getRealpath(), $storage_dir."/".$file->getFilename());
@@ -193,11 +193,11 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $user->setUsername($data[1]);
                     $user->setPassword($data[2]);
                     $user->setEmail($data[3]);
-                    $user->setCountry($data[4]);
+                    $user->setCountry(strtoupper($data[4]));
                     $user->setUploadToken($data[11]);
                     $user->setEnabled(true);
                     $user->setAvatar(($data[13] === "\N") ? null : $data[13]);
-                    $user->setAdditionalEmail($data[14]);
+                    $user->setAdditionalEmail($data[14] === "\N" ? null : $data[14]);
                     $this->em->persist($user);
                 } else {
                     break;
@@ -220,6 +220,8 @@ class ImportLegacyCommand extends ContainerAwareCommand
             ->getParameter('catrobat.file.storage.dir'), "Delete programs");
         $this->emptyDirectory($this->getContainer()
             ->getParameter('catrobat.file.extract.dir'), "Delete extracted programs");
+        $this->emptyDirectory($this->getContainer()
+            ->getParameter('catrobat.featuredimage.dir'), "Delete feature imagess");
     }
 
     private function executeShellCommand($command, $description)
