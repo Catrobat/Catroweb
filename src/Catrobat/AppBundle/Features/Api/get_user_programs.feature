@@ -85,3 +85,10 @@ Feature: Get users programs
     When I GET "/api/projects/userPrograms.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
+   
+  Scenario: show only visible programs
+    Given program "MarkoTheBest" is not visible
+    And I have a parameter "user_id" with value "3"
+    When I GET "/api/projects/userPrograms.json" with these parameters
+    Then I should get programs in the following order:
+      | Name      |

@@ -213,3 +213,12 @@ Feature: Search programs
         | Minions             |
         | Ponny               |
         | Superponny          |
+        
+        
+  Scenario: only show visible programs
+    Given program "Ponny" is not visible
+    And I use the limit "10"
+    When I search for "p2"
+    Then I should get following programs:
+        | Name                |
+        | Superponny          |

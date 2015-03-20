@@ -68,21 +68,24 @@ Feature: Get the most recent programs
       """
 
   Scenario: show recent programs with limit and offset
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
-    When I GET "/api/projects/recent.json" with these parameters
+    When I get the most recent programs with limit "2" and offset "0"
     Then I should get programs in the following order:
       | Name      |
       | program 2 |
       | program 1 |
 
   Scenario: show recent programs with limit and offset
-    Given I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "1"
-    When I GET "/api/projects/recent.json" with these parameters
+    When I get the most recent programs with limit "3" and offset "1"
     Then I should get programs in the following order:
       | Name      |
       | program 1 |
       | program 3 |
 
+  Scenario: show only visible programs
+    Given program "program 1" is not visible
+    When I get the most recent programs
+    Then I should get programs in the following order:
+      | Name      |
+      | program 2 |
+      | program 3 |
       

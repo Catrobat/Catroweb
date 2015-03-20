@@ -86,3 +86,11 @@ Feature: Get the most downloaded programs
       | program 3 |
       | program 1 |
 
+  Scenario: show only visible programs
+    Given program "program 3" is not visible
+    When I GET "/api/projects/mostViewed.json" with these parameters
+    Then I should get programs in the following order:
+      | Name      |
+      | program 2 |
+      | program 1 |
+            
