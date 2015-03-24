@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Controller\Web;
 
 use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Entity\User;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -206,6 +207,10 @@ class DefaultController extends Controller
    */
   public function deleteProgramAction($id)
   {
+    /**
+     * @var $user \Catrobat\AppBundle\Entity\User
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     */
     if($id == 0)
       return $this->redirectToRoute('catrobat_web_profile');
 
@@ -213,7 +218,8 @@ class DefaultController extends Controller
     if(!$user)
       return $this->redirectToRoute('fos_user_security_login');
 
-    $program = $this->get("programmanager")->find($id);
+    $program = $user->getPrograms()->matching(Criteria::create()
+      ->where(Criteria::expr()->eq("id", $id)));
 
     if(!$program)
       throw $this->createNotFoundException('Unable to find Project entity.');

@@ -5,8 +5,7 @@ Feature: Pocketcode homepage
   I want to be able to see the homepage
 
   Background:
-    Given I am on homepage
-    And there are users:
+    Given there are users:
       | name     | password | token      |
       | Catrobat | 123456    | cccccccccc |
       | User1    | 654321    | cccccccccc |
@@ -17,6 +16,7 @@ Feature: Pocketcode homepage
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
   Scenario: Viewing the homepage at website root
+    Given I am on homepage
     Then I should see the featured slider
     And I should see newest programs
     And I should see most downloaded programs
