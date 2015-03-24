@@ -39,7 +39,7 @@ Feature: Get the most recent programs
                                 "Version":"0.8.5",
                                 "Views":"9",
                                 "Downloads":"33",
-                                "ProjectUrl":"details/2",
+                                "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"download/2.catrobat",
                                 "FileSize":0
                             }],

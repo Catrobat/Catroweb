@@ -38,7 +38,7 @@ Feature: Get details for a specific program
                                 "Version":"0.8.5",
                                 "Views":"9",
                                 "Downloads":"333",
-                                "ProjectUrl":"details/2",
+                                "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"download/2.catrobat",
                                 "FileSize":2.5
                             }],

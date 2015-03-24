@@ -45,7 +45,7 @@ Feature: Search programs
     {
       "completeTerm":"",
       "CatrobatInformation": {
-           "BaseUrl":"http:\/\/localhost\/",
+         "BaseUrl":"http://localhost/",
          "TotalProjects":1,
          "ProjectsExtension":".catrobat"
      },
@@ -53,8 +53,8 @@ Feature: Search programs
          "ProjectId":1,
          "ProjectName":"Galaxy War",
          "ProjectNameShort":"Galaxy War",
-         "ScreenshotBig":"resources_test\/screenshots\/screen_1.png",
-         "ScreenshotSmall":"resources_test\/thumbnails\/screen_1.png",
+         "ScreenshotBig":"resources_test/screenshots/screen_1.png",
+         "ScreenshotSmall":"resources_test/thumbnails/screen_1.png",
          "Author":"User1",
          "Description":"p1",
          "Uploaded":1357041600,
@@ -62,8 +62,8 @@ Feature: Search programs
          "Version":"0.8.5",
          "Views":"12",
          "Downloads":"3",
-         "ProjectUrl":"details\/1",
-         "DownloadUrl":"download\/1.catrobat",
+         "ProjectUrl":"pocketcode/program/1",
+         "DownloadUrl":"download/1.catrobat",
          "FileSize":0
      }],
     "preHeaderMessages":""

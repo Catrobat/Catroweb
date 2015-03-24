@@ -19,26 +19,11 @@ class DefaultController extends Controller
   const MIN_PASSWORD_LENGTH = 6;
   const MAX_PASSWORD_LENGTH = 32;
 
-  public function headerAction()
-  {
-    return $this->get("templating")->renderResponse(':Default:header.html.twig');
-  }
-
-  public function headerLogoAction()
-  {
-    return $this->get("templating")->renderResponse(':Default:headerLogo.html.twig');
-  }
-
-  public function footerAction()
-  {
-    return $this->get("templating")->renderResponse(':Default:footer.html.twig');
-  }
-
   /**
-   * @Route("/", name="catrobat_web_index")
+   * @Route("/{flavor}/", name="index", requirements={"flavor": "pocketcode|pocketkodey"})
    * @Method({"GET"})
    */
-  public function indexAction()
+  public function indexAction(Request $request)
   {
       /* @var $image_repository FeaturedImageRepository */
       $image_repository = $this->get('featuredimagerepository');
@@ -53,7 +38,14 @@ class DefaultController extends Controller
           $info = array();
           if ($program->getProgram() !== null)
           {
-              $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $program->getProgram()->getId()));
+              if ($request->get('flavor'))
+              {
+                  $info['url'] = $this->generateUrl('program', array('id' => $program->getProgram()->getId(), 'flavor' => $request->get('flavor')));
+              }
+              else
+              {
+                  $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $program->getProgram()->getId()));
+              }
           }
           else 
           {
@@ -68,9 +60,10 @@ class DefaultController extends Controller
   /**
    * @Route("/program/{id}", name="catrobat_web_program", requirements={"id":"\d+"})
    * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"})
+   * @Route("/{flavor}/program/{id}", name="program", requirements={"id":"\d+", "flavor": "pocketcode|pocketkodey"})
    * @Method({"GET"})
    */
-  public function programAction(Request $request, $id)
+  public function programAction(Request $request, $id, $flavor  = "pocketcode")
   {
     //IMPORTANT: if you change the route '/program' .. also adapt it in ProgramLoader.js (variable: 'program_link')
     //$session = $request->getSession();
@@ -101,6 +94,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/search/{q}", name="catrobat_web_search", requirements={"q":".+"})
+   * @Route("/{flavor}/search/{q}", name="search", requirements={"q":".+", "flavor": "pocketcode|pocketkodey"})
    * @Method({"GET"})
    */
   public function searchAction($q)
@@ -110,6 +104,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/search/", name="catrobat_web_search_nothing")
+   * @Route("/{flavor}/search/", name="empty_search", requirements={"flavor": "pocketcode|pocketkodey"})
    * @Method({"GET"})
    */
   public function searchNothingAction()
@@ -119,6 +114,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/profile/{id}", name="catrobat_web_profile", requirements={"id":"\d+"}, defaults={"id" = 0})
+   * @Route("/{flavor}/profile/{id}", name="profile", requirements={"id":"\d+", "flavor": "pocketcode|pocketkodey"}, defaults={"id" = 0})
    * @Method({"GET"})
    */
   public function profileAction(Request $request, $id)
@@ -149,6 +145,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/profileSave", name="catrobat_web_profile_save")
+   * @Route("/{flavor}/profileSave", name="profile_save", requirements={"flavor": "pocketcode|pocketkodey"})
    * @Method({"POST"})
    */
   public function profileSaveAction(Request $request)
@@ -203,6 +200,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/profileDeleteProgram/{id}", name="catrobat_web_profile_delete_program", requirements={"id":"\d+"}, defaults={"id" = 0})
+   * @Route("/{flavor}/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+", "flavor": "pocketcode|pocketkodey"}, defaults={"id" = 0})
    * @Method({"GET"})
    */
   public function deleteProgramAction($id)
@@ -235,6 +233,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/termsOfUse", name="catrobat_web_termsOfUse")
+   * @Route("/{flavor}/termsOfUse", name="termsOfUse", requirements={"flavor": "pocketcode|pocketkodey"})
    * @Method({"GET"})
    */
   public function termsOfUseAction()
@@ -244,6 +243,7 @@ class DefaultController extends Controller
 
   /**
    * @Route("/licenseToPlay", name="catrobat_web_licenseToPlay")
+   * @Route("/{flavor}/licenseToPlay", name="licenseToPlay", requirements={"flavor": "pocketcode|pocketkodey"})
    * @Method({"GET"})
    */
   public function licenseToPlayAction()

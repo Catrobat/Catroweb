@@ -16,6 +16,7 @@ class ListProgramsController extends Controller
 
   /**
    * @Route("/api/projects/recent.json", name="catrobat_api_recent_programs", defaults={"_format": "json"})
+   * @Route("/{flavor}/api/projects/recent.json", name="api_recent_programs", requirements={"flavor": "pocketcode|pocketkodey"}, defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listProgramsAction(Request $request)
@@ -34,6 +35,7 @@ class ListProgramsController extends Controller
   
   /**
    * @Route("/api/projects/mostDownloaded.json", name="catrobat_api_most_downloaded_programs", defaults={"_format": "json"})
+   * @Route("/{flavor}/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", requirements={"flavor": "pocketcode|pocketkodey"}, defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostDownloadedProgramsAction(Request $request)
@@ -122,8 +124,8 @@ class ListProgramsController extends Controller
           $new_program['UploadedString'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
           $new_program['ScreenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
           $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
-          $new_program['ProjectUrl'] = "details/" . $program->getId();
-          $new_program['DownloadUrl'] = "download/" . $program->getId() . ".catrobat";
+          $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', array('flavor' => $request->attributes->get("flavor"), 'id' => $program->getId())),"/");
+          $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', array('id' => $program->getId())),"/"); //"download/" . $program->getId() . ".catrobat";
           $new_program['FileSize'] = $program->getFilesize()/1048576;
       }
       $retArray['CatrobatProjects'][] = $new_program;

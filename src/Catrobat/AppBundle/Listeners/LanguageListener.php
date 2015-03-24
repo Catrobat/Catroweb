@@ -10,7 +10,6 @@ class LanguageListener
 {
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $test = new Cookie("language","en");
         $cookie_language = $event->getRequest()->cookies->get("hl");
         $event->getRequest()->setLocale($cookie_language);
     }

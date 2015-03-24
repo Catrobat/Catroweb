@@ -1,3 +1,11 @@
+catrobat_web_index:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: index
+        permanent: false
+        flavor: "pocketcode"
+        
 catroweb_app:
     resource: "@AppBundle/Controller/"
     type:     annotation
@@ -34,3 +42,10 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+    
+    
+login:
+    path:      /{flavor}/login
+    defaults:  { _controller: FOSUserBundle:Security:login }
+    requirements: { "flavor": "pocketcode|pocketkodey" }
+    

@@ -23,7 +23,7 @@
 <div id="wrapper">
   <header>
     {% block header %}
-      {{ render(controller('AppBundle:Web/Default:header', { _locale: app.request.locale, _embedded: true })) }}
+      {% include ':Default:header.html.twig' %}
     {% endblock %}
   </header>
 
@@ -34,13 +34,13 @@
 
 <footer>
   {% block footer %}
-    {{ render(controller('AppBundle:Web/Default:footer', { _locale: app.request.locale, _embedded: true })) }}
+      {% include ':Default:footer.html.twig' %}
   {% endblock %}
 </footer>
 
 
 <script>
-  new Main('{{ path('catrobat_web_search', {'q': 0}) }}');
+  new Main('{{ path('search', {'q': 0, 'flavor': app.request.attributes.get('flavor') } ) }}');
 </script>
 {% block js %}{% endblock %}
 

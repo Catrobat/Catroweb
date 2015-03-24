@@ -15,7 +15,7 @@ class DownloadProgramController extends Controller
 {
 
   /**
-   * @Route("/downloads/{id}.catrobat", name="catrobat_api_download", defaults={"_format": "json"})
+   * @Route("/download/{id}.catrobat", name="download", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   function downloadProgramAction(Request $request, $id)

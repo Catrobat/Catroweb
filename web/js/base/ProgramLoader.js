@@ -84,11 +84,11 @@ var ProgramLoader = function (container, url, column_max) {
           div = '<div>unknown</div>';
       }
 
-      var program_link = data.CatrobatInformation.BaseUrl + 'program/';
+      var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
 
       var program = $(
         '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
-          '<div onclick="window.location.href = \''+ program_link + programs[i].ProjectId + '\'">'+
+          '<div onclick="window.location.href = \''+ program_link + '\'">'+
             '<div><img src="' + data.CatrobatInformation.BaseUrl + "/" + programs[i].ScreenshotSmall +'"></div>'+
             '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
             div +

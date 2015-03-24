@@ -39,7 +39,7 @@ Feature: Get the most downloaded programs
                                 "Version":"0.8.5",
                                 "Views":"90",
                                 "Downloads":"333",
-                                "ProjectUrl":"details/2",
+                                "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"download/2.catrobat",
                                 "FileSize":"0"
                             }],

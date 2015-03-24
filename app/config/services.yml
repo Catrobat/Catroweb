@@ -13,8 +13,13 @@ parameters:
 services:
 
 # =========================== Kernel Listener ===========================
-    catrowebbundle.listener.request:
+    catrowebbundle.listener.language:
         class: Catrobat\AppBundle\Listeners\LanguageListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    catrowebbundle.listener.flavor:
+        class: Catrobat\AppBundle\Listeners\FlavorListener
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
                   
