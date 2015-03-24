@@ -135,6 +135,12 @@ class Program
     protected $approved_by_user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="StarterCategory", inversedBy="programs")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $category;
+
+    /**
      * @param mixed $approved_by_user
      */
     public function setApprovedByUser($approved_by_user)
@@ -668,5 +674,21 @@ class Program
     {
       $this->flavor = $flavor;
     }
+
+  /**
+   * @return mixed
+   */
+  public function getCategory()
+  {
+    return $this->category;
+  }
+
+  /**
+   * @param mixed $category
+   */
+  public function setCategory($category)
+  {
+    $this->category = $category;
+  }
  
 }

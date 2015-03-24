@@ -2,9 +2,12 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Symfony\Component\HttpFoundation\Request;
+use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class TutorialController extends Controller
@@ -139,6 +142,59 @@ class TutorialController extends Controller
    */
   public function starterProgramsAction()
   {
-    return $this->get("templating")->renderResponse(':help:starterPrograms.html.twig');
+    /**
+     * @var $categories \Catrobat\AppBundle\Entity\StarterCategory
+     */
+    $em = $this->getDoctrine()->getManager();
+
+    $categories = $em->getRepository('AppBundle:StarterCategory')->findBy(array(), array('order' => 'asc'));
+
+    $categories_twig = array();
+
+    foreach ($categories as $category) {
+      $categories_twig[] = array(
+        'id' => $category->getId(),
+        'alias' => $category->getAlias()
+      );
+    }
+
+    return $this->get("templating")->renderResponse(':help:starterPrograms.html.twig', array('categories' => $categories_twig));
+  }
+
+  /**
+   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", requirements={"id":"\d+"})
+   * @Method({"GET"})
+   */
+  public function categoryProgramsAction(Request $request, $id)
+  {
+    /**
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     */
+    $em = $this->getDoctrine()->getManager();
+    $programs = $em->getRepository('AppBundle:Program')->findBy(array('category' => $id));
+
+    $screenshot_repository = $this->get("screenshotrepository");
+
+    $retArray = array (
+      'CatrobatProjects' => array()
+    );
+
+    foreach($programs as $program) {
+      $retArray['CatrobatProjects'][] = array(
+        'ProjectId' => $program->getId(),
+        'ProjectName' => $program->getName(),
+        'Downloads' => $program->getDownloads(),
+        'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
+        'ProjectUrl' => "details/" . $program->getId()
+      );
+    }
+
+    $retArray['CatrobatInformation'] = array (
+      "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . $request->getBaseUrl() . '/',
+      "TotalProjects" => count($programs),
+      "ProjectsExtension" => ".catrobat"
+    );
+
+    return JsonResponse::create($retArray);
   }
 }

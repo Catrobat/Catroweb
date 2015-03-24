@@ -1,6 +1,7 @@
 var ProgramLoader = function (container, url, column_max) {
   var self = this;
   self.container = container;
+  self.container_elem = $(container);
   self.url = url;
   self.default_rows = 2;
   self.columns_min = 3; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
@@ -81,7 +82,10 @@ var ProgramLoader = function (container, url, column_max) {
           div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
           break;
         default:
-          div = '<div>unknown</div>';
+          if(self.container_elem.hasClass('starterDownloads'))
+            div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
+          else
+            div = '<div>unknown</div>';
       }
 
       var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;

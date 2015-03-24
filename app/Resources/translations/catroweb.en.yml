@@ -385,6 +385,14 @@ help:
       card9:
         title: "Broadcast"
         description: "Look at this code! This shows you how to communicate between objects."
+  starterPrograms:
+      title: "Starter Programs"
+      description: "Try out these starter programs. Look inside to make changes and add your ideas."
+      categories:
+        games: "Games"
+        animations: "Animations"
+        interactive: "Interactive Art and Stories"
+        music: "Music And Dance"
 
 search:
   dotdotdot: Search...

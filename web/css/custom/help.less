@@ -391,3 +391,32 @@
     }
   }
 }
+
+.starter-container {
+
+  a {
+    text-decoration: none !important;
+  }
+
+  .starter-header {
+    border-bottom: 1px solid @default-text-color;
+
+    .col-per-25 {
+      float: left;
+      padding: 20px 0;
+      width: 25%;
+    }
+  }
+
+  .program {
+    font-size: @default-font-size;
+  }
+
+  @media screen and (max-width: @responsive-width-tablet) {
+    .col-per-25 {
+      width: 50% !important;
+    }
+
+  }
+
+}
