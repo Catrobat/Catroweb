@@ -7,29 +7,22 @@
 {% endblock %}
 
 {% block body %}
-  <h1> {{ profile.username }} </h1>
+<h1> {{ profile.username }} </h1>
 
-<div>
+<div id="user-avatar">
+  <img id="user-image" src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"> </img>
 
-  <div id="user-avatar-container">
-    <div id="user-avatar">
-      <img id="user-image" src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"> </img>
-
-      <div id="user-informations">
-        <p><strong>Amount of programs: {{ profile.programs | length }}</strong></p>
-        <p><strong>Country: {{ country }}</strong></p>
-      </div>
-    </div>
-
+  <div id="user-information">
+    <p><strong>Amount of programs: {{ profile.programs | length }}</strong></p>
+    <p><strong>Country: {{ country }}</strong></p>
   </div>
-
-  <div id="user-programs">
-    <h1>{{ "programs.of"|trans({}, "catroweb")  }} {{ profile.username }}</h1>
-    <div class="programs"></div>
-  </div>
-
+</div>
+<div id="user-programs">
+  <h1>{{ "profile.programsOf"|trans({}, "catroweb")  }} {{ profile.username }}</h1>
+  <div class="programs"></div>
 </div>
 
+<div class="clear"></div>
 
 {% endblock %}
 
@@ -37,6 +30,5 @@
   <script>
     var programs = new ProgramLoader('#user-programs', '{{ path('catrobat_api_user_programs') }}', 6);
     programs.initProfile('{{ profile.id }}');
-
   </script>
 {% endblock %}

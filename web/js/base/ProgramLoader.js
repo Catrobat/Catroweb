@@ -9,6 +9,7 @@ var ProgramLoader = function (container, url, column_max) {
   self.loaded = 0;
   self.visible = 0;
   self.visible_steps = 0;
+  self.showAllPrograms = false;
 
   self.init = function() {
     $.get(self.url, { limit: self.download_limit, offset: self.loaded}, function(data) {
@@ -21,6 +22,7 @@ var ProgramLoader = function (container, url, column_max) {
   };
 
   self.initProfile = function(user_id) {
+    self.showAllPrograms = true;
     $.get(self.url, { limit: self.download_limit, offset: self.loaded, user_id: user_id }, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
@@ -44,12 +46,13 @@ var ProgramLoader = function (container, url, column_max) {
   };
 
   self.setup = function(data) {
-    $(self.container).append('' +
-      '<div class="button-show-placeholder">' +
-      '<div class="button-show-more img-load-more"></div>' +
-      '<div class="button-show-ajax img-load-ajax"></div>' +
-      '</div>');
-
+    if(!self.showAllPrograms) {
+      $(self.container).append('' +
+        '<div class="button-show-placeholder">' +
+        '<div class="button-show-more img-load-more"></div>' +
+        '<div class="button-show-ajax img-load-ajax"></div>' +
+        '</div>');
+    }
     self.loadProgramsIntoContainer(data);
     self.showMoreListener();
     self.setDefaultVisibility();
@@ -68,6 +71,7 @@ var ProgramLoader = function (container, url, column_max) {
           div = '<div><div class="img-time-small"></div>' + programs[i].UploadedString + '</div>';
           break;
         case '#myprofile-programs':
+        case '#user-programs':
           div = '<div>' + programs[i].UploadedString + '</div>';
           break;
         case '#mostDownloaded':
@@ -121,6 +125,9 @@ var ProgramLoader = function (container, url, column_max) {
   };
 
   self.setDefaultVisibility = function() {
+    if(self.showAllPrograms)
+      return false;
+
     var programs_in_row = parseInt($(window).width() / $('.program').width());
     if(programs_in_row < self.columns_min) programs_in_row = self.columns_min;
     if(programs_in_row > self.columns_max) programs_in_row = self.columns_max;

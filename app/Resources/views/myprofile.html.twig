@@ -10,7 +10,7 @@
   <h1>{{ app.user.username }}</h1>
 
   <div id="profile-avatar">
-    <img src="" width="300" height="300">
+    <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
   </div>
   <div id="profile-form">
 
