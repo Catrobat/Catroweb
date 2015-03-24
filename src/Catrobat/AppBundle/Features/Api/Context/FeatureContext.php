@@ -377,7 +377,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       $program->setLanguageVersion(1);
       $program->setUploadIp("127.0.0.1");
       $program->setRemixCount(0);
-      $program->setFilesize(0);
+      $program->setFilesize(isset($programs[$i]['FileSize']) ? $programs[$i]['FileSize'] : 0);
       $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
       $program->setUploadLanguage("en");
       $program->setApproved(false);

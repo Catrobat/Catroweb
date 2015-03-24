@@ -41,7 +41,8 @@ Feature: Get the most downloaded programs
                                 "Views":"9",
                                 "Downloads":"333",
                                 "ProjectUrl":"details/2",
-                                "DownloadUrl":"download/2.catrobat"
+                                "DownloadUrl":"download/2.catrobat",
+                                "FileSize":0
                             }],
           "preHeaderMessages":""
       }

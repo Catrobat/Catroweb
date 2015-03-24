@@ -51,7 +51,8 @@ Feature: Get users programs
                                 "Views":"9",
                                 "Downloads":"33",
                                 "ProjectUrl":"details/2",
-                                "DownloadUrl":"download/2.catrobat"
+                                "DownloadUrl":"download/2.catrobat",
+                                "FileSize":0
                             },
                             {
                                 "ProjectId": 6,
@@ -67,7 +68,8 @@ Feature: Get users programs
                                 "Views":"33",
                                 "Downloads":"2",
                                 "ProjectUrl":"details/6",
-                                "DownloadUrl":"download/6.catrobat"
+                                "DownloadUrl":"download/6.catrobat",
+                                "FileSize":0
                             }],
           "preHeaderMessages":""
       }

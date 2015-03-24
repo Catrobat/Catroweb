@@ -6,10 +6,10 @@ Feature: Get details for a specific program
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
     And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | id | name      | description | owned by | downloads | views | upload time      | version | FileSize |
+      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 1024     |
+      | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 2621440  |
+      | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | 1337     |
     And the current time is "01.08.2014 13:00"
 
       
@@ -39,7 +39,8 @@ Feature: Get details for a specific program
                                 "Views":"9",
                                 "Downloads":"333",
                                 "ProjectUrl":"details/2",
-                                "DownloadUrl":"download/2.catrobat"
+                                "DownloadUrl":"download/2.catrobat",
+                                "FileSize":2.5
                             }],
           "preHeaderMessages":""
       }

@@ -124,6 +124,7 @@ class ListProgramsController extends Controller
           $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
           $new_program['ProjectUrl'] = "details/" . $program->getId();
           $new_program['DownloadUrl'] = "download/" . $program->getId() . ".catrobat";
+          $new_program['FileSize'] = $program->getFilesize()/1048576;
       }
       $retArray['CatrobatProjects'][] = $new_program;
     }

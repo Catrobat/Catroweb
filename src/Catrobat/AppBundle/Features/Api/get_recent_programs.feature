@@ -40,7 +40,8 @@ Feature: Get the most recent programs
                                 "Views":"9",
                                 "Downloads":"33",
                                 "ProjectUrl":"details/2",
-                                "DownloadUrl":"download/2.catrobat"
+                                "DownloadUrl":"download/2.catrobat",
+                                "FileSize":0
                             }],
           "preHeaderMessages":""
       }

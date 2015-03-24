@@ -63,7 +63,8 @@ Feature: Search programs
          "Views":"12",
          "Downloads":"3",
          "ProjectUrl":"details\/1",
-         "DownloadUrl":"download\/1.catrobat"
+         "DownloadUrl":"download\/1.catrobat",
+         "FileSize":0
      }],
     "preHeaderMessages":""
     }
