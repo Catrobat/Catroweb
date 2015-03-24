@@ -19,7 +19,7 @@ swiftmailer:
 doctrine:
     dbal:
         driver: pdo_sqlite
-        path: sqlite/behattest.sqlite
+        path: "%kernel.root_dir%/../sqlite/behattest.sqlite"
 
 parameters:
       catrobat.file.extract.dir: "%kernel.root_dir%/../web/resources_test/extract/"
