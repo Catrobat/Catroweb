@@ -25,10 +25,12 @@ class TutorialController extends Controller
    */
   public function hourOfCodeAction($page)
   {
+    $max_page = 21;
+
     $paginator = $this->get('knp_paginator');
     $images = array();
 
-    for ($i = 0; $i < 21; $i++) {
+    for ($i = 0; $i < $max_page; $i++) {
       $images[] = $i;
     }
 
@@ -41,7 +43,7 @@ class TutorialController extends Controller
 
     $pagination->setTemplate(':help:paginationStart0.html.twig');
 
-    if($page > 21) {
+    if($page > $max_page) {
       throw $this->createNotFoundException('Unable to find step.');
     }
 
@@ -52,7 +54,7 @@ class TutorialController extends Controller
       $containers = 4;
       $class = "col-4";
     }
-    else if($page == 21) {
+    else if($page == $max_page) {
       $containers = 5;
       $class = "col-5";
     }
@@ -67,10 +69,16 @@ class TutorialController extends Controller
    */
   public function stepByStepAction($page)
   {
+    $max_page = 11;
+
+    if($page > $max_page) {
+      throw $this->createNotFoundException('Unable to find step.');
+    }
+
     $paginator = $this->get('knp_paginator');
     $steps = array();
 
-    for ($i = 1; $i < 12; $i++) {
+    for ($i = 1; $i <= $max_page; $i++) {
       $steps[] = $i;
     }
 
@@ -86,12 +94,43 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/tutorials", name="catrobat_web_tutorials")
+   * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page" = -1}, requirements={"page":"\d+"})
    * @Method({"GET"})
    */
-  public function tutorialsAction()
+  public function tutorialcardsAction($page)
   {
-    return $this->get("templating")->renderResponse(':help:tutorials.html.twig');
+    $max_page = 9;
+
+    if($page > $max_page) {
+      throw $this->createNotFoundException('Unable to find tutorialcard.');
+    }
+
+    if($page == -1) {
+      return $this->get("templating")->renderResponse(':help:tutorialcards.html.twig', array("count" => $max_page));
+    }
+
+    else {
+
+      $count = array(
+        "get_ready" => 1,
+        "try_code" => 1,
+        "extra_tip" => 0
+      );
+
+      if($page == 2 || $page == 3 || $page == 5) {
+        $count['get_ready'] = 2;
+      }
+
+      if($page == 5) {
+        $count['extra_tip'] = 3;
+      }
+
+      if($page == 7) {
+        $count['extra_tip'] = 1;
+      }
+
+      return $this->get("templating")->renderResponse(':help:tutorialcard.html.twig', array("page" => $page, "count" => $count));
+    }
   }
 
   /**

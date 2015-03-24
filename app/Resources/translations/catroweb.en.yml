@@ -332,6 +332,45 @@ help:
         text4: 'Go to the help site and discuss with other users.'
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
         text6: 'Upload the program that is currently opened.'
+  tutorialcards:
+      title: "Tutorials"
+      description1: "This tutorials show you how to use effective tricks in"
+      description2: "Pocket Code."
+      getReady: "Get Ready:"
+      tryCode: "Try this code:"
+      doIt: "Do it:"
+      tip: "Extra Tip:"
+      card1:
+        title: "Change Size"
+        description: "Tap the duck to change the size."
+      card2:
+        title: "Change Look"
+        description: "Use this trick to count automatically."
+      card3:
+        title: "Moving Animation"
+        description: "Use this trick when you want a flying parrot."
+      card4:
+        title: "Glide"
+        description: "Move smoothly from one point to another."
+      card5:
+        title: "Play Sound"
+        description: "Tap the drum to play this sound."
+        extra1: '1. Click "+"'
+        extra2: '2. Select "Pocket Code Recorder"'
+        extra3: '3. Press icon to record your sound'
+      card6:
+        title: "Speak Something"
+        description: "Use this code to make an object speaking."
+      card7:
+        title: "GSensor"
+        description: "Use this trick to control an object with the inclination of your device."
+        extra1: 'If too sensitive, divide by 10'
+      card8:
+        title: "Compass"
+        description: "Use this code to make a compass."
+      card9:
+        title: "Broadcast"
+        description: "Look at this code! This shows you how to communicate between objects."
 
 search:
   dotdotdot: Search...

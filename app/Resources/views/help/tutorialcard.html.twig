@@ -1,0 +1,68 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+
+{% block body %}
+  <h1>{{ ("help.tutorialcards.card"~page~".title")|trans({}, "catroweb") }}</h1>
+
+  <div class="tutorialcards-container size-large">
+    <p class="description">{{ ("help.tutorialcards.card"~page~".description")|trans({}, "catroweb") }}</p>
+
+    <div class="img-container">
+      <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_1.png') }}" alt="" title=""/>
+    </div>
+
+    {% for i in 1..count.get_ready %}
+      {% if(i == 1) %}
+        <div>
+          <h3>{{ ("help.tutorialcards.getReady")|trans({}, "catroweb") }}</h3>
+        </div>
+      {% endif %}
+      <div class="img-container">
+        <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_2_'~i~'.png') }}" alt="" title=""/>
+      </div>
+    {% endfor %}
+
+    {% for i in 1..count.try_code %}
+      {% if(i == 1) %}
+        <div>
+          <h3>{{ ("help.tutorialcards.tryCode")|trans({}, "catroweb") }}</h3>
+        </div>
+      {% endif %}
+      <div class="img-container">
+        <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_3_'~i~'.png') }}" alt="" title=""/>
+      </div>
+    {% endfor %}
+
+    <div>
+      <h3>{{ ("help.tutorialcards.doIt")|trans({}, "catroweb") }}</h3>
+    </div>
+    <div class="img-container">
+      <img src="{{ asset('images/help/tutorialcards/cards/do_it.png') }}" alt="" title=""/>
+    </div>
+
+    {% if(count.extra_tip > 0) %}
+      {% for i in 1..count.extra_tip %}
+        {% if(i == 1) %}
+          <div>
+            <h3>{{ ("help.tutorialcards.tip")|trans({}, "catroweb") }}</h3>
+          </div>
+        {% endif %}
+        <div class="img-container">
+          <div class="extra-text">{{ ("help.tutorialcards.card"~page~".extra"~i)|trans({}, "catroweb") }}</div>
+          <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_4_'~i~'.png') }}" alt="" title=""/>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+
+  </div>
+
+
+{% endblock %}
+
