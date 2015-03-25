@@ -15,7 +15,7 @@
                     <li>
                         <div class="img-author"></div>
                         <div class="link-author">
-                            <a href="{{ url('catrobat_web_profile', { id : program.user.id }) }}">{{ program.user }}</a>
+                            <a href="{{ url('profile', { id : program.user.id, flavor: app.request.attributes.get('flavor') }) }}">{{ program.user }}</a>
                         </div>
                     </li>
                 </ul>
@@ -25,8 +25,8 @@
 
     <div id="projectDetailsContainer">
         <div class="projectDetailsThumbnail">
-            <a href="../{{ program_details.downloadUrl }}">
-                <img id="projectDetailsThumbnailImage" src="../{{ program_details.screenshotBig }}" />
+            <a href="{{ program_details.downloadUrl }}">
+                <img id="projectDetailsThumbnailImage" src="{{ asset(program_details.screenshotBig) }}" />
             </a>
         </div>
 
@@ -39,7 +39,7 @@
                 <span>{{ program.description }}</span>
 
                 <div class="projectDetailsDownloadButton">
-                    <a style="text-decoration: none;" href="../{{ program_details.downloadUrl }}">
+                    <a style="text-decoration: none;" href="{{ program_details.downloadUrl }}">
                         <div class="blue">
                             <span class="projectDetailsDownloadText shrinkTextToFit" style="font-size: 25px;">{{ "programs.download"|trans({}, 'catroweb') }}</span>
                         </div>
@@ -57,7 +57,7 @@
               {% if app.user != null %}
                 TODO report program
               {% else %}
-                {{ "programs.reportLoginBeforeLink"|trans({}, 'catroweb') }} <a href="{{ url('fos_user_security_login') }}?requestUri=program/{{ program.id }}">{{ "programs.reportLoginLink"|trans({}, 'catroweb') }}</a> {{ "programs.reportLoginAfterLink"|trans({}, 'catroweb') }}
+                {{ "programs.reportLoginBeforeLink"|trans({}, 'catroweb') }} <a href="{{ url('login', { flavor: app.request.attributes.get('flavor') }) }}">{{ "programs.reportLoginLink"|trans({}, 'catroweb') }}</a> {{ "programs.reportLoginAfterLink"|trans({}, 'catroweb') }}
               {% endif %}
             </div>
         </div>

@@ -82,11 +82,11 @@ class DefaultController extends Controller
 
     $program_details = array ();
     $program_details['screenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
-    $program_details['downloadUrl'] = "download/" . $program->getId() . ".catrobat";
+    $program_details['downloadUrl'] = $this->generateUrl('download', array('id' => $program->getId()));
     $program_details['languageVersion'] = $program->getLanguageVersion();
     $program_details['downloads'] = $program->getDownloads();
     $program_details['views'] = $program->getViews();
-    $program_details['filesize'] = $program->getFilesize();
+    $program_details['filesize'] = sprintf("%.2f", $program->getFilesize()/1048576);
     $program_details['age'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
 
     return $this->get("templating")->renderResponse('::program.html.twig', array("program" => $program, "program_details" => $program_details));
