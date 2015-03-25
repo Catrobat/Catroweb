@@ -10,10 +10,23 @@ class FlavorListener
 {
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $event->getRequest()->attributes->set("kodey", $event->getRequest()->attributes->get('flavor') === "pocketkodey");
-        if (!$event->getRequest()->attributes->has('flavor'))
+        $attributes = $event->getRequest()->attributes;
+        $session = $event->getRequest()->getSession();
+        if ($attributes->has('flavor'))
         {
-            $event->getRequest()->attributes->set('flavor','pocketcode');
+            $session->set('flavor', $attributes->get('flavor'));
+        }
+        else
+        {
+            if ($session->has('flavor'))
+            {
+                $attributes->set('flavor', $session->get('flavor'));
+            }
+            else
+            {
+                $attributes->set('flavor','pocketcode');
+                $session->set('flavor','pocketcode');
+            }
         }
     }
 }

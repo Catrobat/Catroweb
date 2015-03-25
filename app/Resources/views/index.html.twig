@@ -36,9 +36,9 @@
 
 {% block js %}
   <script>
-    var newest = new ProgramLoader('#newest', '{{ path('catrobat_api_recent_programs') }}');
-    var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('catrobat_api_most_downloaded_programs') }}');
-    var mostViewed = new ProgramLoader('#mostViewed', '{{ path('catrobat_api_most_viewed_programs') }}');
+    var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs', { flavor: app.session.get('flavor') }) }}');
+    var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs', { flavor: app.session.get('flavor') }) }}');
+    var mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs', { flavor: app.session.get('flavor') }) }}');
     newest.init();
     mostDownloaded.init();
     mostViewed.init();
