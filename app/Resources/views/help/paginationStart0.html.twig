@@ -1,7 +1,7 @@
 {% if pageCount > 1 %}
   <div class="header-arrows">
     {% if current > first-1 %}
-      <a href="{{ path(route, query|merge({(pageParameterName): current-1})) }}">
+      <a href="{{ path(route, {(pageParameterName): current-1}) }}">
         <div class="arrow left"></div>
       </a>
     {% else %}
@@ -11,7 +11,7 @@
 
   <div class="header-pagination">
     {% if first is defined %}
-      <a href="{{ path(route, query|merge({(pageParameterName): first-1})) }}">
+      <a href="{{ path(route, {(pageParameterName): first-1}) }}">
         {% if current == first-1 %}
           <div class="bubbles current">{{ first-1 }}</div>
         {% else %}
@@ -27,18 +27,18 @@
 
       {% if(current == first-1) or (current == first) %}
         {% if(page <= 2) %}
-          <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+          <a href="{{ path(route, {(pageParameterName): page}) }}">
             <div class="bubbles {{ page==current?'current':'' }}">{{ page }}</div>
           </a>
         {% endif %}
       {% elseif(current == last-1) or (current == last) %}
         {% if(page < 21) %}
-          <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+          <a href="{{ path(route, {(pageParameterName): page}) }}">
             <div class="bubbles {{ page==current?'current':'' }}">{{ page }}</div>
           </a>
         {% endif %}
       {% else %}
-        <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+        <a href="{{ path(route, {(pageParameterName): page}) }}">
           <div class="bubbles {{ page==current?'current':'' }}">{{ page }}</div>
         </a>
       {% endif %}
