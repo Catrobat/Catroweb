@@ -26,7 +26,7 @@
           <div class="img-dropdownArrow"></div>
         </div>
       {% else %}
-        <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}">
+        <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}" id="btn-login">
           <div class="btn btn-menu">
             <div class="img-avatar"></div>
           </div>
@@ -46,7 +46,7 @@
         <div class="img-avatar"></div>
       </div>
       {% else %}
-      <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}">
+      <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}" id="btn-login">
         <div class="btn btn-menu">
           <div class="img-avatar"></div>
         </div>
