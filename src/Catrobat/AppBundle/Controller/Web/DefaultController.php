@@ -218,9 +218,10 @@ class DefaultController extends Controller
     if(!$user)
       return $this->redirectToRoute('fos_user_security_login');
 
-    $program = $user->getPrograms()->matching(Criteria::create()
+    $programs = $user->getPrograms()->matching(Criteria::create()
       ->where(Criteria::expr()->eq("id", $id)));
 
+    $program = $programs[0];
     if(!$program)
       throw $this->createNotFoundException('Unable to find Project entity.');
 
@@ -231,6 +232,27 @@ class DefaultController extends Controller
     $em->flush();
 
     return $this->redirectToRoute('catrobat_web_profile');
+  }
+
+  /**
+   * @Route("/profileUploadAvatar", name="catrobat_web_profile_upload_avatar")
+   * @Route("/{flavor}/profileUploadAvatar", name="profile_upload_avatar", requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Method({"POST"})
+   */
+  public function uploadAvatarAction(Request $request)
+  {
+    /**
+     * @var $user \Catrobat\AppBundle\Entity\User
+     */
+    $user = $this->getUser();
+    if(!$user)
+      return $this->redirectToRoute('fos_user_security_login');
+
+    $image = $request->request->get('image');
+    $user->setAvatar($image);
+    $this->get("usermanager")->updateUser($user);
+
+    return JsonResponse::create(array('statusCode' => StatusCode::OK));
   }
 
   /**

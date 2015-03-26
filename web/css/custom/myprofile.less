@@ -16,6 +16,38 @@ article > div {
   }
 }
 
+#avatar-upload {
+  position: relative;
+  top: -40px;
+  text-align: center;
+  margin: 0 auto;
+
+  span {
+    font-size: @default-font-size + 2;
+    cursor: pointer;
+  }
+}
+
+#avatar-upload > button {
+  position: relative;
+  overflow: hidden;
+  background-color: #05222a;
+  border: 0;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 4px 15px;
+
+  input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.001;
+    cursor: pointer;
+  }
+}
+
 #profile-form {
   overflow: auto;
   float: right;

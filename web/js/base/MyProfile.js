@@ -1,7 +1,8 @@
-var MyProfile = function(url, delete_url, deleteProgramString) {
+var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
   var self = this;
   self.save_url = url;
   self.delete_url = delete_url;
+  self.upload_url = upload_url;
   self.newPassword = null;
   self.repeatPassword = null;
   self.firstMail = null;
@@ -41,6 +42,24 @@ var MyProfile = function(url, delete_url, deleteProgramString) {
         return false;
       self.submit();
       return false;
+    });
+
+    $('#avatar-upload').find('input[type=file]').change(function(data) {
+      var file = data.target.files[0];
+      var reader = new FileReader();
+      reader.onerror = function(evt) {
+        // display error message above the avatar-image
+        console.log(evt);
+      };
+      reader.onload = function(evt) {
+        $.post(self.upload_url, { image: evt.currentTarget.result }, function(data) {
+          if(data.statusCode != 200)
+            console.log('error upload');
+          $('#profile-avatar').find('img').attr('src', evt.currentTarget.result);
+          $('.img-avatar').css('background-image', 'url('+evt.currentTarget.result+')');
+        });
+      };
+      reader.readAsDataURL(file);
     });
   };
 

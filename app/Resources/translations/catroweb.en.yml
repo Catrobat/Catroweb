@@ -40,7 +40,7 @@ profile:
     submitSuccess: saved!
   reallyDeleteProgram: Do you really want to delete your program
   programsOf: Programs of
-
+  changePicture: Change picture
 
 
 licenseToPlay:

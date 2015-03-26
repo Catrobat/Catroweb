@@ -11,6 +11,12 @@
 
   <div id="profile-avatar">
     <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
+    <div id="avatar-upload">
+      <button>
+        <input type="file">
+        <span>{{ 'profile.changePicture'|trans({}, 'catroweb') }}</span>
+      </button>
+    </div>
   </div>
   <div id="profile-form">
 
@@ -79,9 +85,8 @@
 {% block js %}
   <script>
     var programs = new ProgramLoader('#myprofile-programs', '{{ path('catrobat_api_user_programs') }}');
-    var profile = new MyProfile('{{ path('catrobat_web_profile_save') }}', '{{ path('catrobat_web_profile_delete_program') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}');
+    var profile = new MyProfile('{{ path('catrobat_web_profile_save') }}', '{{ path('catrobat_web_profile_delete_program') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('catrobat_web_profile_upload_avatar') }}');
     programs.initProfile({{ app.user.id }});
-
     profile.init();
   </script>
 {% endblock %}
