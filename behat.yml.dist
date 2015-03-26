@@ -32,14 +32,14 @@ default:
             contexts:
               - Catrobat\AppBundle\Features\Api\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
-        kodey:
+        flavor:
             type: symfony_bundle
             bundle: 'AppBundle'
             features:
             paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/Kodey/"
+                - "%paths.base%/src/Catrobat/AppBundle/Features/Flavor/"
             contexts:
-              - Catrobat\AppBundle\Features\Kodey\Context\FeatureContext:
+              - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
         web:
             type: symfony_bundle

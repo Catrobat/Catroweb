@@ -97,9 +97,9 @@ class Program
   protected $visible;
   
   /**
-   * @ORM\Column(type="boolean", options={"default":false})
+   * @ORM\Column(type="string", options={"default":"pocketcode"})
    */
-  protected $kodey = false;
+  protected $flavor = "pocketcode";
   
   /**
    * @ORM\Column(type="string", options={"default":""})
@@ -653,15 +653,20 @@ class Program
         $this->id = $id;
     }
 
-    public function getKodey()
+    /**
+     * @return mixed
+     */
+    public function getFlavor()
     {
-        return $this->kodey;
+      return $this->flavor;
     }
 
-    public function setKodey($kodey)
+    /**
+     * @param mixed $flavor
+     */
+    public function setFlavor($flavor)
     {
-        $this->kodey = $kodey;
-        return $this;
+      $this->flavor = $flavor;
     }
  
 }

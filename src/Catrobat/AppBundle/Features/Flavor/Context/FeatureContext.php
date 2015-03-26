@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Features\Kodey\Context;
+namespace Catrobat\AppBundle\Features\Flavor\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\RudeWord;
@@ -95,37 +95,6 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     }
   }
 
-  private function prepareValidRegistrationParameters()
-  {
-    $this->request_parameters['registrationUsername'] = "newuser";
-    $this->request_parameters['registrationPassword'] = "topsecret";
-    $this->request_parameters['registrationEmail'] = "someuser@example.com";
-    $this->request_parameters['registrationCountry'] = "at";
-  }
-
-  private function sendPostRequest($url)
-  {
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $this->request_parameters, $this->files);
-  }
-  
-  private function uploadProgramFileAsDefaultUser($directory, $filename)
-  {
-    $filepath = $directory . "/" . $filename;
-    assertTrue(file_exists($filepath), "File not found");
-    $files = array(new UploadedFile($filepath, $filename));
-    $url = "/api/upload/upload.json";
-    $parameters = array(
-        "username" => "BehatGeneratedName",
-        "token" => "BehatGeneratedToken",
-        "fileChecksum" => md5_file($files[0]->getPathname())
-    );
-    
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $parameters, $files);
-  }
-
-
   private function generateProgramFileWith($parameters)
   {
     $filesystem = new Filesystem();
@@ -153,6 +122,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         case "applicationVersion":
           $properties->header->applicationVersion = $value;
           break;
+        case "applicationName":
+          $properties->header->applicationName = $value;
+          break;
 
         default:
           throw new PendingException("unknown xml field " . $name);
@@ -160,17 +132,15 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 
     }
 
-
     $properties->asXML($new_program_dir."/code.xml");
     $compressor = new CatrobatFileCompressor();
-    $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
-
+    return $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
   }
 
     /**
-     * @When /^I upload a catrobat program with kodey bricks$/
+     * @When /^I upload a catrobat program with the kodey app$/
      */
-    public function iUploadACatrobatProgramWithKodeyBricks()
+    public function iUploadACatrobatProgramWithTheKodeyApp()
     {
         $user = $this->generateUser();
         $program = $this->getKodeyProgramFile();
@@ -186,7 +156,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         $program_manager = $this->kernel->getContainer()->get('programmanager');
         $program = $program_manager->find(1);
         assertNotNull($program, "No program added");
-        assertTrue($program->getKodey(), "Program is NOT flagged a kodey");
+        assertEquals("pocketkodey", $program->getFlavor(), "Program is NOT flagged a kodey");
     }
 
     /**
@@ -208,7 +178,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         $program_manager = $this->kernel->getContainer()->get('programmanager');
         $program = $program_manager->find(1);
         assertNotNull($program, "No program added");
-        assertFalse($program->getKodey(), "Program is flagged a kodey");
+        assertNotEquals("pocketkodey", $program->getFlavor(), "Program is flagged a kodey");
     }
     
     private function generateUser($name = "Generated")
@@ -234,9 +204,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     
     private function getKodeyProgramFile()
     {
-        $filepath = self::FIXTUREDIR . "/GeneratedFixtures/kodey.catrobat";
+        $filepath = $this->generateProgramFileWith(array('applicationName' => 'Pocket Kodey'));
         assertTrue(file_exists($filepath), "File not found");
-        return new UploadedFile($filepath, "kodey.catrobat");
+        return new UploadedFile($filepath, "program_generated.catrobat");
     }
     
     private function upload($file, $user)

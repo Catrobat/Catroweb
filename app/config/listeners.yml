@@ -47,8 +47,8 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
             
-      catroweb.kodey.check:
-            class: Catrobat\AppBundle\Listeners\KodeyListener
+      catroweb.flavor.check:
+            class: Catrobat\AppBundle\Listeners\ProgramFlavorListener
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
             
@@ -64,7 +64,7 @@ services:
 
 # ======== Entity ========
 
-      catrobat.entity.featured.image_istener:
+      catrobat.entity.featured.image_listener:
           class: Catrobat\AppBundle\Listeners\Entity\FeaturedProgramImageListener
           arguments: ["@featuredimagerepository"]
           tags:

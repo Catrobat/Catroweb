@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Process\Process;
 use Catrobat\AppBundle\Entity\Program;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -153,6 +152,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program->setThumbnail("thumb.png");
                     $program->setScreenshot("screenshot.png");
                     $program->setCatrobatVersion(1);
+                    $program->setFlavor("pocketcode");
                     $this->em->persist($program);
                 } else {
                     break;

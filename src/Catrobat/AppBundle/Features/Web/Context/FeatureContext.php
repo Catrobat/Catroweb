@@ -41,7 +41,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->screenshot_directory = preg_replace('/([^\/]+)$/', '$1/', $screenshot_directory);
     if (!is_dir($this->screenshot_directory))
     {
-      throw new Exception("No screenshot directory specified!");
+      throw new \Exception("No screenshot directory specified!");
     }
   }
 

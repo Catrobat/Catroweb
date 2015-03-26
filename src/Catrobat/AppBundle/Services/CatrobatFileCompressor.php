@@ -44,5 +44,6 @@ class CatrobatFileCompressor
       }
     }
     $archive->close();
+    return $destination. "/" . $filename;
   }
 }
