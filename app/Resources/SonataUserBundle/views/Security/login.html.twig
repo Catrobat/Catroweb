@@ -30,7 +30,7 @@
     {% if error %}
       <div class="error-text">Your password or username<br /> was incorrect.</div>
     {% endif %}
-
+    <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
   <div class="link center"><a href="resetting/request">Forgot password or username?</a></div>
