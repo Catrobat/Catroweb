@@ -101,12 +101,4 @@ class ProgramRepository extends EntityRepository
           ->getQuery()
           ->getSingleScalarResult();
   }
-
-  public function updateProgramViews($program_id, $program_views)
-  {
-    $qb_program = $this->createQueryBuilder('e');
-    $q2 = $qb_program->getEntityManager()->createQuery("UPDATE Catrobat\AppBundle\Entity\Program e SET e.views = " . $program_views . " WHERE e.id =" . $program_id);
-    $result = $q2->getResult();
-    return $result;
-  }
 }

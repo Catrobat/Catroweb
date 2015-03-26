@@ -167,9 +167,18 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->getTotalPrograms();
   }
 
-  public function updateProgramViews($program_id, $program_views)
+  public function increaseViews(Program $program)
   {
-    return $this->program_repository->updateProgramViews($program_id, $program_views);
+    $program->setViews($program->getViews() + 1);
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
+  }
+
+  public function increaseDownloads(Program $program)
+  {
+    $program->setDownloads($program->getDownloads() + 1);
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
   }
 
 }

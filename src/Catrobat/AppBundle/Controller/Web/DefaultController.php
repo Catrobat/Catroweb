@@ -75,12 +75,9 @@ class DefaultController extends Controller
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
-    //TODO increase the View Count only once per Session/User
     $viewed = $request->getSession()->get('viewed', array());
-    if(!in_array($program->getId(), $viewed)){
-      $program_views_inc = $program->getViews() + 1;
-      $this->get("programmanager")->updateProgramViews($program->getId(), $program_views_inc);
-      $program->setViews($program_views_inc);
+    if(!in_array($program->getId(), $viewed)) {
+      $this->get("programmanager")->increaseViews($program);
       $viewed[] = $program->getId();
       $request->getSession()->set('viewed', $viewed);
     }

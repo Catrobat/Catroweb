@@ -38,6 +38,14 @@ class DownloadProgramController extends Controller
     $file = $file_repository->getProgramFile($id);
     if ($file->isFile())
     {
+
+      $downloaded = $request->getSession()->get('downloaded', array());
+      if(!in_array($program->getId(), $downloaded)){
+        $this->get("programmanager")->increaseDownloads($program);
+        $downloaded[] = $program->getId();
+        $request->getSession()->set('downloaded', $downloaded);
+      }
+
       return new BinaryFileResponse($file);
     }
     throw new NotFoundHttpException();
