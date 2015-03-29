@@ -44,23 +44,7 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
       return false;
     });
 
-    $('#avatar-upload').find('input[type=file]').change(function(data) {
-      var file = data.target.files[0];
-      var reader = new FileReader();
-      reader.onerror = function(evt) {
-        // display error message above the avatar-image
-        console.log(evt);
-      };
-      reader.onload = function(evt) {
-        $.post(self.upload_url, { image: evt.currentTarget.result }, function(data) {
-          if(data.statusCode != 200)
-            console.log('error upload');
-          $('#profile-avatar').find('img').attr('src', evt.currentTarget.result);
-          $('.img-avatar').css('background-image', 'url('+evt.currentTarget.result+')');
-        });
-      };
-      reader.readAsDataURL(file);
-    });
+    self.setAvatarUploadListener();
   };
 
   self.checkPasswords = function() {
@@ -205,5 +189,44 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
     if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
       window.location.href = self.delete_url + '/' + id;
     }
-  }
+  };
+
+  self.setAvatarUploadListener = function() {
+    $('#avatar-upload').find('input[type=file]').change(function(data) {
+      var avatarContainer = $('#profile-avatar');
+      avatarContainer.find('.text-avatar-toolarge').hide();
+
+      var file = data.target.files[0];
+      if(file.size > 5 * 1024 * 1024) {
+        avatarContainer.find('.text-avatar-toolarge').show();
+        return;
+      }
+
+      var avatarUpload = $('#avatar-upload');
+      avatarUpload.find('span').hide();
+      avatarUpload.find('.button-show-ajax').show();
+
+      var reader = new FileReader();
+
+      reader.onerror = function(evt) {
+        // display error message above the avatar-image
+        console.log(evt);
+      };
+
+      reader.onload = function(evt) {
+        self.filename = evt.currentTarget.result;
+        $.post(self.upload_url, { image: evt.currentTarget.result }, function(data) {
+          if(data.statusCode != 200)
+            console.log('error upload');
+          $('#profile-avatar').find('img').attr('src', self.filename);
+          $('.img-avatar').css('background-image', 'url('+self.filename+')');
+          var avatarUpload = $('#avatar-upload');
+          avatarUpload.find('span').show();
+          avatarUpload.find('.button-show-ajax').hide();
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
 };

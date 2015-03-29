@@ -41,6 +41,8 @@ profile:
   reallyDeleteProgram: Do you really want to delete your program
   programsOf: Programs of
   changePicture: Change picture
+  avatar:
+    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
 
 
 licenseToPlay:

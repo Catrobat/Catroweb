@@ -10,12 +10,14 @@
   <h1>{{ app.user.username }}</h1>
 
   <div id="profile-avatar">
+    <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
     <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
     <div id="avatar-upload">
-      <button>
-        <input type="file">
+      <div>
+        <input type="file" name="file">
         <span>{{ 'profile.changePicture'|trans({}, 'catroweb') }}</span>
-      </button>
+        <div class="button-show-ajax img-load-ajax"></div>
+      </div>
     </div>
   </div>
   <div id="profile-form">
