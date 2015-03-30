@@ -35,7 +35,7 @@ role :app,        domain, :primary => true       # This may be the same as your 
 
 
 #shitty permissions...
-set :writable_dirs,       ["app/cache", "app/logs", "web/resources/featured", "web/resources/extract", "web/resources/programs", "web/resources/screenshots", "web/resources/thumbnails"]
+set :writable_dirs,       ["app/cache", "app/logs", "web/resources/featured", "web/resources/extract", "web/resources/programs", "web/resources/screenshots", "web/resources/thumbnails", "web/resources/apk"]
 set :webserver_user,      "www-data"
 set :permission_method,   :acl
 set :use_set_permissions, true

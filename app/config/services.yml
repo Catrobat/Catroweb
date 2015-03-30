@@ -10,6 +10,7 @@ parameters:
       catrobat.thumbnail.path:  "resources/thumbnails/"
       catrobat.featuredimage.dir:  "%catrobat.webdir%resources/featured/"
       catrobat.featuredimage.path: "resources/featured/"
+      catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
       
 services:
 
@@ -80,6 +81,10 @@ services:
     featuredimagerepository:
         class: Catrobat\AppBundle\Services\FeaturedImageRepository
         arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
+
+    apkrepository:
+        class: Catrobat\AppBundle\Services\ApkRepository
+        arguments: ["%catrobat.apk.dir%"]
 
 # =========================== Manager & Stuff ===========================
 
