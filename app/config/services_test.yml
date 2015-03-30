@@ -1,7 +1,14 @@
 parameters:
      catrobat.test.directory.source: "%kernel.root_dir%/../testdata/DataFixtures/test.catrobat"
      catrobat.test.directory.target: "%kernel.root_dir%/../testdata/DataFixtures/GeneratedFixtures/"
-      
+     jenkins:
+        url: https://jenkins.catrob.at/buildByToken/buildWithParameters
+        job: "Build-Program"
+        token: "SECRETTOKEN"
+        id_parameter_name: "PROJECT"
+        download_url_parameter_name: "download"
+        upload_url_paramenter: "upload"
+        uploadtoken: "UPLOADTOKEN"
 services:
     catrobat.test.command.generatetestdata:
         class: Catrobat\AppBundle\Commands\GenerateTestDataCommand
@@ -33,3 +40,10 @@ services:
     time:
         class:  Catrobat\AppBundle\Services\TestEnv\ProxyTime
         arguments: ["@time.inner"]
+        
+    ci.jenkins.dispatcher:
+        class: Catrobat\AppBundle\Features\Helpers\FakeJenkinsDispatcher
+        arguments: 
+          - "@router" 
+          - "%jenkins%"
+          

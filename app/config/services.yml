@@ -125,3 +125,10 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+    
+    ci.jenkins.dispatcher:
+        class: Catrobat\AppBundle\Services\Ci\JenkinsDispatcher
+        arguments: 
+          - "@router" 
+          - "%jenkins%"
+          
