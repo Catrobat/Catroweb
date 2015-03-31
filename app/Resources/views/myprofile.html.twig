@@ -11,6 +11,8 @@
 
   <div id="profile-avatar">
     <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
+    <div class="avatar-error text-avatar-uploadError">{{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}</div>
+    <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
     <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
     <div id="avatar-upload">
       <div>

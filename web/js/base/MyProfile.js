@@ -194,7 +194,7 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
   self.setAvatarUploadListener = function() {
     $('#avatar-upload').find('input[type=file]').change(function(data) {
       var avatarContainer = $('#profile-avatar');
-      avatarContainer.find('.text-avatar-toolarge').hide();
+      avatarContainer.find('.avatar-error').hide();
 
       var file = data.target.files[0];
       if(file.size > 5 * 1024 * 1024) {
@@ -208,18 +208,28 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
 
       var reader = new FileReader();
 
-      reader.onerror = function(evt) {
-        // display error message above the avatar-image
-        console.log(evt);
+      reader.onerror = function() {
+        avatarContainer.find('.text-avatar-uploadError').show();
       };
 
       reader.onload = function(evt) {
         self.filename = evt.currentTarget.result;
         $.post(self.upload_url, { image: evt.currentTarget.result }, function(data) {
-          if(data.statusCode != 200)
-            console.log('error upload');
-          $('#profile-avatar').find('img').attr('src', self.filename);
-          $('.img-avatar').css('background-image', 'url('+self.filename+')');
+
+          switch (parseInt(data.statusCode)) {
+            case 200:
+              $('#profile-avatar').find('img').attr('src', self.filename);
+              $('.img-avatar').css('background-image', 'url('+self.filename+')');
+              break;
+
+            case 502:
+              avatarContainer.find('.text-avatar-toolarge').show();
+              break;
+
+            default:
+              avatarContainer.find('.text-avatar-uploadError').show();
+          }
+
           var avatarUpload = $('#avatar-upload');
           avatarUpload.find('span').show();
           avatarUpload.find('.button-show-ajax').hide();

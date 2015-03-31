@@ -18,6 +18,7 @@ class DefaultController extends Controller
 {
   const MIN_PASSWORD_LENGTH = 6;
   const MAX_PASSWORD_LENGTH = 32;
+  const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
 
   /**
    * @Route("/{flavor}/", name="index", requirements={"flavor": "pocketcode|pocketkodey"})
@@ -227,7 +228,7 @@ class DefaultController extends Controller
 
     $program->setVisible(false);
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $em->persist($program);
     $em->flush();
 
@@ -248,8 +249,16 @@ class DefaultController extends Controller
     if(!$user)
       return $this->redirectToRoute('fos_user_security_login');
 
-    $image = $request->request->get('image');
-    $user->setAvatar($image);
+    $image_base64 = $request->request->get('image');
+
+    try {
+      $this->checkBase64Image($image_base64);
+    }
+    catch(\Exception $e) {
+      return JsonResponse::create(array('statusCode' => $e->getMessage()));
+    }
+
+    $user->setAvatar($image_base64);
     $this->get("usermanager")->updateUser($user);
 
     return JsonResponse::create(array('statusCode' => StatusCode::OK));
@@ -345,6 +354,52 @@ class DefaultController extends Controller
       return $this->fixCharset($countries[$code]);
     }
     return '';
+  }
+
+  /**
+   * @param $image_base64
+   * @throws \Exception
+   */
+  public function checkBase64Image($image_base64)
+  {
+    $data_regx = "/data:(.+);base64,(.+)/";
+    $image_type = preg_replace($data_regx, "data:\\1", $image_base64);
+
+    if(!preg_match("/data:(.+)/", $image_type))
+      throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+
+    $image_type = preg_replace("/data:(.+)/", "\\1", $image_type);
+    $image = null;
+
+    switch($image_type) {
+      case "image/jpg":
+      case "image/jpeg":
+        $image = imagecreatefromjpeg($image_base64);
+        break;
+      case "image/png":
+        $image = imagecreatefrompng($image_base64);
+        break;
+      case "image/gif":
+        $image = imagecreatefromgif($image_base64);
+        break;
+      default:
+        throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE);
+    }
+
+    if(!$image)
+      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+
+    $width = imagesx($image);
+    $height = imagesy($image);
+
+    if($width == 0 || $height == 0)
+      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+
+    $image_data = preg_replace($data_regx, "\\2", $image_base64);
+    $image_size = strlen(base64_decode($image_data));
+
+    if($image_size > self::MAX_UPLOAD_SIZE)
+      throw new \Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
   }
 
 }
