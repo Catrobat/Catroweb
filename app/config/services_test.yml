@@ -15,7 +15,7 @@ services:
 
     catrobat.test.extractor:
         class: Catrobat\AppBundle\Services\CatrobatFileExtractor
-        arguments: ["%catrobat.test.directory.target%"]
+        arguments: ["%catrobat.test.directory.target%","%catrobat.file.extract.path%"]
 
     catrobat.test.compressor:
         class: Catrobat\AppBundle\Services\CatrobatFileCompressor

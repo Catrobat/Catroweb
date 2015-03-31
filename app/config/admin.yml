@@ -1,5 +1,8 @@
 services:
 
+
+# =========================== Blocks ===========================
+
       catrowebadmin.block.programs.all:
         class: Catrobat\AppBundle\Admin\AllProgramsAdmin
         tags:
@@ -10,7 +13,7 @@ services:
         class: Catrobat\AppBundle\Admin\ApproveProgramsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: Programs, label: Approve Programs }
-        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
+        arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\ApproveProgram]
 
       catrowebadmin.block.programs.reported:
         class: Catrobat\AppBundle\Admin\ReportedProgramsAdmin
@@ -41,4 +44,3 @@ services:
               tags:
                 - { name: sonata.admin, manager_type: orm, group: Programs, label: Categories }
               arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]
-        

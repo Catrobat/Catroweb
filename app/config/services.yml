@@ -1,6 +1,7 @@
 parameters:
       catrobat.webdir:                  "%kernel.root_dir%/../web/"
       catrobat.file.extract.dir:        "%kernel.root_dir%/../web/resources/extract/"
+      catrobat.file.extract.path:        "resources/extract/"
       catrobat.file.storage.dir:        "%kernel.root_dir%/../web/resources/programs/"
       catrobat.file.storage.path:        "resources/programs/"
       catrobat.screenshot.dir:  "%catrobat.webdir%resources/screenshots/"
@@ -12,6 +13,11 @@ parameters:
       
 services:
 
+
+    apikey_authenticator:
+        class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
+        arguments: ["@fos_user.user_provider.username","@translator"]
+
 # =========================== Kernel Listener ===========================
     catrowebbundle.listener.language:
         class: Catrobat\AppBundle\Listeners\LanguageListener
@@ -22,10 +28,9 @@ services:
         class: Catrobat\AppBundle\Listeners\FlavorListener
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-                  
-    apikey_authenticator:
-        class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
-        arguments: ["@fos_user.user_provider.username","@translator"]
+
+
+# =========================== Repository ===========================
 
     programrepository:
         class: Catrobat\AppBundle\Entity\ProgramRepository
@@ -54,6 +59,20 @@ services:
         arguments:
             - "AppBundle:FeaturedProgram"
 
+    filerepository:
+        class: Catrobat\AppBundle\Services\ProgramFileRepository
+        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%", "@filecompressor"]
+
+    screenshotrepository:
+        class: Catrobat\AppBundle\Services\ScreenshotRepository
+        arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
+
+    featuredimagerepository:
+        class: Catrobat\AppBundle\Services\FeaturedImageRepository
+        arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
+
+# =========================== Manager & Stuff ===========================
+
     programmanager:
         class: Catrobat\AppBundle\Model\ProgramManager
         arguments: 
@@ -76,23 +95,11 @@ services:
 
     fileextractor:
         class: Catrobat\AppBundle\Services\CatrobatFileExtractor
-        arguments: ["%catrobat.file.extract.dir%"]
+        arguments: ["%catrobat.file.extract.dir%","%catrobat.file.extract.path%"]
 
     filecompressor:
         class: Catrobat\AppBundle\Services\CatrobatFileCompressor
 
-    filerepository:
-        class: Catrobat\AppBundle\Services\ProgramFileRepository
-        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%", "@filecompressor"]
-
-    screenshotrepository:
-        class: Catrobat\AppBundle\Services\ScreenshotRepository
-        arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
-
-    featuredimagerepository:
-        class: Catrobat\AppBundle\Services\FeaturedImageRepository
-        arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
-              
     tokengenerator:
         class: Catrobat\AppBundle\Services\TokenGenerator
 

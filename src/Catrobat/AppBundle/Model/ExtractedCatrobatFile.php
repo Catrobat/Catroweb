@@ -7,11 +7,13 @@ use Catrobat\AppBundle\StatusCode;
 class ExtractedCatrobatFile
 {
   protected $path;
+  protected $web_path;
   protected $program_xml_properties;
 
-  public function __construct($base_dir)
+  public function __construct($base_dir, $base_path)
   {
     $this->path = $base_dir;
+    $this->web_path = $base_path;
     
     if (!file_exists($base_dir . "code.xml"))
     {
@@ -38,6 +40,28 @@ class ExtractedCatrobatFile
   public function getDescription()
   {
     return (string)$this->program_xml_properties->header->description;
+  }
+
+  public function getContainingImagePaths()
+  {
+    $directory = $this->path."images/";
+    $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+    foreach($scanned_directory as &$image)
+    {
+        $image = "/".$this->web_path."images/".$image;
+    }
+    return $scanned_directory;
+  }
+
+  public function getContainingSoundPaths()
+  {
+    $directory = $this->path."sounds/";
+    $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+    foreach($scanned_directory as &$image)
+    {
+      $image = "/".$this->web_path."sounds/".$image;
+    }
+    return $scanned_directory;
   }
   
   public function getScreenshotPath()
@@ -77,4 +101,5 @@ class ExtractedCatrobatFile
   {
     $this->program_xml_properties->asXML($this->path . "code.xml");
   }
+
 }

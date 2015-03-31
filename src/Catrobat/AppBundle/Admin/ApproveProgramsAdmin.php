@@ -1,16 +1,22 @@
 <?php
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Services\CatrobatFileExtractor;
+use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Project;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+
 class ApproveProgramsAdmin extends Admin
 {
+
+    private $extractedProgram = null;
 
     public function createQuery($context = 'list')
     {
@@ -20,6 +26,30 @@ class ApproveProgramsAdmin extends Admin
         );
         $query->setParameter('approved_filter', 'true');
         return $query;
+    }
+
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+      // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
+      $showMapper
+
+          /*
+           * The default option is to just display the value as text (for boolean this will be 1 or 0)
+           */
+          ->add('Thumbnail', null, array('template' => ':Admin:program_thumbnail_image.html.twig'))
+          ->add('id')
+          ->add('Name')
+          ->add('Description')
+          ->add('version')
+          ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
+          ->add('upload_ip')
+          ->add('filename')
+          ->add('visible','boolean')
+          ->add('Images', null, array('template' => ':Admin:program_containing_image.html.twig'))
+          ->add('Sounds', null, array('template' => ':Admin:program_containing_sound.html.twig'))
+          ->add('', null, array('template' => ':Admin:program_approve_action.html.twig'))
+      ;
+
     }
 
     public function preUpdate($program)
@@ -64,13 +94,61 @@ class ApproveProgramsAdmin extends Admin
             ->add('name')
             ->add('description')
             ->add('approved', 'boolean', array('editable' => true))
-            ->add('_action', 'actions', array('actions' => array('show' => array(),)))
+            ->add('_action', 'actions', array('actions' => array('show' => array())))
         ;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+
+    public function getThumbnailImageUrl($object)
+    {
+      return "/".$this->getConfigurationPool()->getContainer()->get("screenshotrepository")->getThumbnailWebPath($object->getId());
+    }
+
+
+    public function getContainingImageUrls($object)
+    {
+
+      /* @var $fileEctractor CatrobatFileExtractor */
+      /* @var $fileRepo ProgramFileRepository */
+
+      if($this->extractedProgram == null)
+      {
+        $fileExctractor = $this->getConfigurationPool()->getContainer()->get("fileextractor");
+        $fileRepo = $this->getConfigurationPool()->getContainer()->get("filerepository");
+        $this->extractedProgram = $fileExctractor->extract($fileRepo->getProgramFile($object->getId()));
+        //TODO: Cleanup, directory will never get used again
+      }
+
+      return $this->extractedProgram->getContainingImagePaths();
+    }
+
+
+  public function getContainingSoundUrls($object)
+  {
+
+    /* @var $fileEctractor CatrobatFileExtractor */
+    /* @var $fileRepo ProgramFileRepository */
+
+    if($this->extractedProgram == null)
+    {
+      $fileExctractor = $this->getConfigurationPool()->getContainer()->get("fileextractor");
+      $fileRepo = $this->getConfigurationPool()->getContainer()->get("filerepository");
+      $this->extractedProgram = $fileExctractor->extract($fileRepo->getProgramFile($object->getId()));
+      //TODO: Cleanup, directory will never get used again
+    }
+
+    return $this->extractedProgram->getContainingSoundPaths();
+  }
+
+
+  protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create')->remove('delete')->remove('edit');
+        $collection
+            ->add('approve', $this->getRouterIdParameter().'/approve')
+            ->add('invisible', $this->getRouterIdParameter().'/invisible')
+            ->add('skip', $this->getRouterIdParameter().'/skip')
+      ;
     }
 }
 
