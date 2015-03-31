@@ -7,6 +7,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Catrobat\AppBundle\Model\ProgramManager;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
 class BuildApkController extends Controller
@@ -21,10 +25,18 @@ class BuildApkController extends Controller
         {
             throw $this->createNotFoundException();
         }
+        if ($program->getApkStatus() !== Program::APK_NONE)
+        {
+            return JsonResponse::create(array("error" => "already built"));
+        }
+        
         $config = $this->container->getParameter("jenkins");
         
         $dispatcher = $this->get("ci.jenkins.dispatcher");
         $call = $dispatcher->sendBuildRequest($program->getId());
+        
+        $program->setApkStatus(Program::APK_PENDING);
+        $this->get("programmanager")->save($program);
         
         $config['call'] = $call;
         return JsonResponse::create($config);
@@ -37,17 +49,22 @@ class BuildApkController extends Controller
     public function uploadApkAction(Request $request, Program $program)
     {
         $config = $this->container->getParameter("jenkins");
-        if ($request->query->get('uploadtoken') !== $config['uploadtoken'])
+        if ($request->query->get('token') !== $config['uploadtoken'])
         {
-            return JsonResponse::create(array("error" => "invalid token"));
+            throw new AccessDeniedException();
         }
         else if ($request->files->count() != 1)
         {
-           return JsonResponse::create(array("error" => "no file given"));
+           throw new BadRequestHttpException();
         }
         else
         {
             $file = array_values($request->files->all())[0];
+            /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+            $apkrepository = $this->get('apkrepository');
+            $apkrepository->save($file, $program->getId());
+            $program->setApkStatus(Program::APK_READY);
+            $this->get('programmanager')->save($program);
         }
         return JsonResponse::create($config);
     }

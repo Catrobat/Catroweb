@@ -185,5 +185,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
   }
+  
+  public function save(Program $program)
+  {
+      $this->entity_manager->persist($program);
+      $this->entity_manager->flush();
+  }
 
 }

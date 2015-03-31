@@ -244,6 +244,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     $program->setUploadLanguage("en");
     $program->setApproved(isset($config['approved']) ? $config['approved'] : true);
     $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : "pocketcode");
+    $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
     $em->persist($program);
     $em->flush();
 
@@ -309,6 +310,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     return $response;
   }
 
+  protected function getTempCopy($path)
+  {
+    $temppath = tempnam(sys_get_temp_dir(), "apktest");
+    copy($path, $temppath);
+    return $temppath;
+  }
+  
+  
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
     

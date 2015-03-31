@@ -20,26 +20,17 @@ use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Model\ProgramManager;
+use Symfony\Component\Routing\Router;
+use Catrobat\AppBundle\Features\Helpers\BaseContext;
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
  * Feature context.
  */
-class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContext
+class FeatureContext extends BaseContext
 {
-
-    const FIXTUREDIR = "./testdata/DataFixtures/";
-
-    private $kernel;
-
     private $hostname;
-
     private $secure;
-
-    public static function getAcceptedSnippetType()
-    {
-        return 'regex';
-    }
 
     /**
      * Initializes context with parameters from behat.yml.
@@ -48,68 +39,23 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function __construct($error_directory)
     {
-        $this->error_directory = $error_directory;
-        $this->request_parameters = array();
-        $this->files = array();
+        $this->setErrorDirectory($error_directory);
         $this->hostname = "localhost";
         $this->secure = false;
     }
 
-    /**
-     * Sets HttpKernel instance.
-     * This method will be automatically called by Symfony2Extension ContextInitializer.
-     *
-     * @param KernelInterface $kernel            
-     */
-    public function setKernel(KernelInterface $kernel)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// Hooks
+    
+    /** @BeforeScenario */
+    public function emptyUploadFolder()
     {
-        $this->kernel = $kernel;
+        $extract_dir = $this->getSymfonyParameter("catrobat.apk.dir");
+        $this->emptyDirectory($extract_dir);
     }
     
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // //////////////////////////////////////////// Support Functions
-
-    private function generateUser($name = "Generated")
-    {
-        $user_manager = $this->kernel->getContainer()->get('usermanager');
-        $user = $user_manager->createUser();
-        $user->setUsername($name);
-        $user->setEmail("dev@pocketcode.org");
-        $user->setPlainPassword("GeneratedPassword");
-        $user->setEnabled(true);
-        $user->setUploadToken("GeneratedToken");
-        $user->setCountry("at");
-        $user_manager->updateUser($user, true);
-        return $user;
-    }
-
-    private function generateFakeProgramFor($user, $name)
-    {
-        $em = $this->kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
-        $program = new Program();
-        $program->setUser($user);
-        $program->setName($name);
-        $program->setDescription("Generated");
-        $program->setFilename("file.catrobat");
-        $program->setThumbnail("thumb.png");
-        $program->setScreenshot("screenshot.png");
-        $program->setViews(1);
-        $program->setDownloads(1);
-        $program->setUploadedAt(new \DateTime());
-        $program->setCatrobatVersion(1);
-        $program->setCatrobatVersionName("0.9.1");
-        $program->setLanguageVersion(1);
-        $program->setUploadIp("127.0.0.1");
-        $program->setRemixCount(0);
-        $program->setFilesize(0);
-        $program->setVisible(true);
-        $program->setUploadLanguage("en");
-        $program->setApproved(true);
-        $em->persist($program);
-        $em->flush();
-    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// Support Functions
 
     private function getStandardProgramFile()
     {
@@ -118,6 +64,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         return new UploadedFile($filepath, "test.catrobat");
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// Steps
+    
     /**
      * @Given /^the server name is "([^"]*)"$/
      */
@@ -147,8 +96,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function iHaveAProgramWithId($arg1, $arg2)
     {
-        $user = $this->generateUser();
-        $this->generateFakeProgramFor($user, $arg1);
+        $config = array("name" => $arg1);
+        $this->insertProgram(null, $config);
     }
 
     /**
@@ -172,7 +121,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function iStartAnApkGenerationOfMyProgram()
     {
-        $client = $this->kernel->getContainer()->get('test.client');
+        $client = $this->getClient();
         $client->request('GET', "/ci/build/1", array(), array(), array('HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure));
         $response = $client->getResponse();
         assertEquals(200, $response->getStatusCode(), "Wrong response code. " . $response->getContent());
@@ -189,8 +138,164 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
         {
             $expected_parameters[$parameter_defs[$i]['parameter']] = $parameter_defs[$i]['value'];
         }
-        $dispatcher = $this->kernel->getContainer()->get('ci.jenkins.dispatcher');
+        $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
         $parameters = $dispatcher->getLastParameters();
         assertEquals($expected_parameters, $parameters);
+    }
+
+    /**
+     * @Then /^the program apk status will be flagged "([^"]*)"$/
+     */
+    public function theProgramApkStatusWillBeFlagged($arg1)
+    {
+        $pm = $this->getProgramManger();
+        /* @var $program \Catrobat\AppBundle\Entity\Program */
+        $program = $pm->find(1);
+        switch ($arg1)
+        {
+            case "pending":
+                assertEquals(Program::APK_PENDING, $program->getApkStatus());
+                break;
+            case "ready":
+                assertEquals(Program::APK_READY, $program->getApkStatus());
+                break;
+            default:
+                throw new PendingException("Unknown state: " + $arg1);
+        }
+    }
+
+    /**
+     * @Given /^I requested jenkins to build it$/
+     */
+    public function iRequestedJenkinsToBuildIt()
+    {
+        //
+    }
+
+    /**
+     * @When /^jenkins uploads the apk file to the given upload url$/
+     */
+    public function jenkinsUploadsTheApkFileToTheGivenUploadUrl()
+    {
+        $filepath = self::FIXTUREDIR . "/test.catrobat";
+        assertTrue(file_exists($filepath), "File not found");
+        $temppath = $this->getTempCopy($filepath);
+        $files = array(new UploadedFile($temppath, "test.apk"));
+        $url = "/ci/upload/1?token=UPLOADTOKEN";
+        $parameters = array(
+        );
+        $this->client = $this->getClient();
+        $this->client->request('POST', $url, $parameters, $files);
+    }
+
+    /**
+     * @Then /^it will be stored on the server$/
+     */
+    public function itWillBeStoredOnTheServer()
+    {
+        $directory = $this->getSymfonyParameter("catrobat.apk.dir");
+        $finder = new Finder();
+        $finder->in($directory)->depth(0);
+        assertEquals(1, $finder->count());
+    }
+
+    /**
+     * @Given /^there are programs:$/
+     */
+    public function thereArePrograms(TableNode $table)
+    {
+        $programs = $table->getHash();
+        for($i = 0; $i < count($programs); $i ++)
+        {
+            $apk_status = Program::APK_NONE;
+            if ($programs[$i]['apk status'] === "ready")
+                $apk_status = Program::APK_READY;
+            else if ($programs[$i]['apk status'] === "pending")
+                $apk_status = Program::APK_PENDING;
+            
+            $config = array(
+                "name" => $programs[$i]['name'],
+                "visible" => ($programs[$i]['visible'] === "true"),
+                "apk_status" => $apk_status
+            );
+            $this->insertProgram(null, $config);
+            
+            if ($programs[$i]['apk status'] == "ready")
+            {
+                /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+                $apkrepository = $this->getSymfonyService("apkrepository");
+                $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . "/test.catrobat")), $i);
+            }
+        }
+    }
+
+    /**
+     * @When /^I want to download the apk file of "([^"]*)"$/
+     */
+    public function iWantToDownloadTheApkFileOf($arg1)
+    {
+        $pm = $this->getProgramManger();
+        $program = $pm->findOneByName($arg1);
+        if ($program === null)
+        {
+            throw new PendingException("Program not found: " + $arg1);
+        }
+        $router = $this->getSymfonyService('router');
+        $url = $router->generate("ci_download", array("id" => $program->getId()));
+        
+        $this->client = $this->getClient();
+        $this->client->request('GET', $url, array(), array());
+    }
+
+    /**
+     * @Then /^I should receive the apk file$/
+     */
+    public function iShouldReceiveTheApkFile()
+    {
+        $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
+        $code = $this->getClient()->getResponse()->getStatusCode();
+        assertEquals(200, $code);
+        assertEquals("application/zip", $content_type);
+    }
+
+    /**
+     * @Then /^the apk file will not be found$/
+     */
+    public function theApkFileWillNotBeFound()
+    {
+        $code = $this->getClient()->getResponse()->getStatusCode();
+        assertEquals(404, $code);
+    }
+
+    /**
+     * @Given /^the program apk status is flagged "([^"]*)"$/
+     */
+    public function theProgramApkStatusIsFlagged($arg1)
+    {
+        $pm = $this->getProgramManger();
+        /* @var $program \Catrobat\AppBundle\Entity\Program */
+        $program = $pm->find(1);
+        switch ($arg1)
+        {
+            case "pending":
+                $program->setApkStatus(Program::APK_PENDING);
+                break;
+            case "ready":
+                $program->setApkStatus(Program::APK_READY);
+                break;
+            default:
+                $program->setApkStatus(Program::APK_NONE);
+        }
+        $pm->save($program);
+    }
+
+    /**
+     * @Then /^no build request will be sent to jenkins$/
+     */
+    public function noBuildRequestWillBeSentToJenkins()
+    {
+        $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
+        $parameters = $dispatcher->getLastParameters();
+        assertNull($parameters);
     }
 }

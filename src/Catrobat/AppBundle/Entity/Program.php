@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Program
 {
+  const APK_NONE = 0;
+  const APK_PENDING = 1;
+  const APK_READY = 2;
   
   /**
    * @ORM\Id
@@ -136,6 +139,11 @@ class Program
      */
     protected $category;
 
+    /**
+      * @ORM\Column(type="smallint", options={"default":0})
+     */
+    protected $apk_status = 0;
+    
     /**
      * @param mixed $approved_by_user
      */
@@ -678,5 +686,16 @@ class Program
   {
     return $this->directory_hash;
   }
- 
+
+    public function getApkStatus()
+    {
+        return $this->apk_status;
+    }
+
+    public function setApkStatus($apk_status)
+    {
+        $this->apk_status = $apk_status;
+        return $this;
+    }
+
 }

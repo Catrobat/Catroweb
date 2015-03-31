@@ -13,7 +13,22 @@ Feature:
           | parameter | value                                                |
           | job       | Build-Program                                        |
           | token     | SECRETTOKEN                                          |
-          | PROJECT   | 1                                                    |
-          | download  | https://pocketcode.org/download/1.catrobat           |
-          | upload    | https://pocketcode.org/ci/upload/1?token=UPLOADTOKEN |
+          | SUFFIX    | generated1                                           |
+          | DOWNLOAD  | https://pocketcode.org/download/1.catrobat           |
+          | UPLOAD    | https://pocketcode.org/ci/upload/1?token=UPLOADTOKEN |
+        And the program apk status will be flagged "pending"
           
+    Scenario: Accept the compiled apk from jenkins
+        Given I have a program "My little program" with id "1"
+        And I requested jenkins to build it
+        When jenkins uploads the apk file to the given upload url
+        Then it will be stored on the server
+        And the program apk status will be flagged "ready"
+
+    Scenario: Only build the apk once
+        Given I have a program "My little program" with id "1"
+        And the program apk status is flagged "pending"
+        And the jenkins job id is "Build-Program"
+        And the jenkins token is "SECRETTOKEN"
+        When I start an apk generation of my program
+        Then no build request will be sent to jenkins

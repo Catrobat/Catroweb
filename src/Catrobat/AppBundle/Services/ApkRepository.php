@@ -10,7 +10,7 @@ class ApkRepository
 {
   private $dir;
   
-  public function __construct($dir, $path)
+  public function __construct($dir)
   {
     $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
     

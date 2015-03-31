@@ -19,7 +19,4 @@ parameters:
         url: http://localhost
         job: "Build"
         token: "token"
-        id_parameter_name: "id"
-        download_url_parameter_name: "download"
-        upload_url_paramenter: "upload"
         uploadtoken: "secret"
