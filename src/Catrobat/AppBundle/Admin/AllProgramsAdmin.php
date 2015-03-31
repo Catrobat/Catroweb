@@ -18,6 +18,7 @@ class AllProgramsAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
+            ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\StarterCategory', 'required' => false))
             ->add('approved', null, array('required' => false))
         ;
     }
@@ -58,6 +59,7 @@ class AllProgramsAdmin extends Admin
             ->add('views')
             ->add('downloads')
             ->add('thumbnail')
+            ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\StarterCategory','editable' => true))
             ->add('approved')
             ->add('approved_by_user')
         ;

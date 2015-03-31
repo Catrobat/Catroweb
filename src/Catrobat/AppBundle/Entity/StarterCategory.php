@@ -117,6 +117,11 @@ class StarterCategory
   {
     $this->order = $order;
   }
+
+  public function __toString()
+  {
+    return $this->alias;
+  }
     
 
 }

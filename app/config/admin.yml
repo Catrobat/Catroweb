@@ -29,4 +29,10 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, group: Featured, label: Urls }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
+
+      catrowebadmin.block.categoriesadmin:
+              class: Catrobat\AppBundle\Admin\CategoriesAdmin
+              tags:
+                - { name: sonata.admin, manager_type: orm, group: Programs, label: Categories }
+              arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]
         
