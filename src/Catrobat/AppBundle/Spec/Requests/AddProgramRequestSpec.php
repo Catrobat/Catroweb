@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Model\Requests;
+namespace Catrobat\AppBundle\Spec\Requests;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -19,7 +19,7 @@ class AddProgramRequestSpec extends ObjectBehavior
 
   function it_is_initializable()
   {
-    $this->shouldHaveType('Catrobat\AppBundle\Model\Requests\AddProgramRequest');
+    $this->shouldHaveType('Catrobat\AppBundle\Requests\AddProgramRequest');
   }
 
   /**

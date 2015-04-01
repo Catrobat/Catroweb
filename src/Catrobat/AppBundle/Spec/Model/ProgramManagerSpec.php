@@ -6,7 +6,7 @@ use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Catrobat\AppBundle\Model\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Requests\AddProgramRequest;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ProgramManagerSpec extends ObjectBehavior
@@ -21,7 +21,7 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param \Symfony\Component\HttpFoundation\File\File $file          
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    * @param \Catrobat\AppBundle\Entity\User $user          
-   * @param \Catrobat\AppBundle\Model\Requests\AddProgramRequest $request          
+   * @param \Catrobat\AppBundle\Requests\AddProgramRequest $request
    * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $extracted_file          
    * @param \Catrobat\AppBundle\Entity\Program $inserted_program
    * @param \Symfony\Component\EventDispatcher\Event $event
