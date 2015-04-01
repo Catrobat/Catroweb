@@ -19,6 +19,7 @@ class DefaultController extends Controller
   const MIN_PASSWORD_LENGTH = 6;
   const MAX_PASSWORD_LENGTH = 32;
   const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
+  const MAX_AVATAR_SIZE = 300;
 
   /**
    * @Route("/{flavor}/", name="index", requirements={"flavor": "pocketcode|pocketkodey"})
@@ -252,7 +253,7 @@ class DefaultController extends Controller
     $image_base64 = $request->request->get('image');
 
     try {
-      $this->checkBase64Image($image_base64);
+      $image_base64 = $this->checkAndResizeBase64Image($image_base64);
     }
     catch(\Exception $e) {
       return JsonResponse::create(array('statusCode' => $e->getMessage()));
@@ -360,15 +361,15 @@ class DefaultController extends Controller
    * @param $image_base64
    * @throws \Exception
    */
-  public function checkBase64Image($image_base64)
+  private function checkAndResizeBase64Image($image_base64)
   {
-    $data_regx = "/data:(.+);base64,(.+)/";
-    $image_type = preg_replace($data_regx, "data:\\1", $image_base64);
+    $image_data = explode(";base64,",$image_base64);
+    $data_regx = "/data:(.+)/";
 
-    if(!preg_match("/data:(.+)/", $image_type))
-      throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+    if(!preg_match($data_regx, $image_data[0]))
+      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
 
-    $image_type = preg_replace("/data:(.+)/", "\\1", $image_type);
+    $image_type = preg_replace("/data:(.+)/", "\\1", $image_data[0]);
     $image = null;
 
     switch($image_type) {
@@ -389,17 +390,20 @@ class DefaultController extends Controller
     if(!$image)
       throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
 
+    $image_data = preg_replace($data_regx, "\\2", $image_base64);
+    $image_size = strlen(base64_decode($image_data));
+
+    if($image_size > self::MAX_UPLOAD_SIZE)
+      throw new \Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
+
     $width = imagesx($image);
     $height = imagesy($image);
 
     if($width == 0 || $height == 0)
       throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
 
-    $image_data = preg_replace($data_regx, "\\2", $image_base64);
-    $image_size = strlen(base64_decode($image_data));
+    //todo resize image if width/height > self::MAX_AVATAR_SIZE
 
-    if($image_size > self::MAX_UPLOAD_SIZE)
-      throw new \Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
   }
 
 }
