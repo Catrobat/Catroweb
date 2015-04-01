@@ -134,19 +134,19 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     return $this->program_repository->find($id);
   }
   
-  public function getRecentPrograms($limit = null, $offset = null)
+  public function getRecentPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getRecentPrograms($limit, $offset);
+    return $this->program_repository->getRecentPrograms($flavor, $limit, $offset);
   }
 
-  public function getMostViewedPrograms($limit = null, $offset = null)
+  public function getMostViewedPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getMostViewedPrograms($limit, $offset);
+    return $this->program_repository->getMostViewedPrograms($flavor, $limit, $offset);
   }
   
-  public function getMostDownloadedPrograms($limit = null, $offset = null)
+  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getMostDownloadedPrograms($limit, $offset);
+    return $this->program_repository->getMostDownloadedPrograms($flavor, $limit, $offset);
   }
 
   public function search($query, $limit=10, $offset=0)
@@ -166,9 +166,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   }
 
 
-  public function getTotalPrograms()
+  public function getTotalPrograms($flavor)
   {
-    return $this->program_repository->getTotalPrograms();
+    return $this->program_repository->getTotalPrograms($flavor);
   }
 
   public function increaseViews(Program $program)

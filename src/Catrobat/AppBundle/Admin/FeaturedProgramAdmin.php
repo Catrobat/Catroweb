@@ -45,6 +45,11 @@ class FeaturedProgramAdmin extends Admin
         $formMapper
             ->add('file', 'file', $file_options)
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'required' => true), array('admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('flavor', 'choice', array(
+              'choices' => array(
+                'pocketcode' => 'Pocketcode',
+                'pocketkodey' => 'Pocketkodey',
+              )))
             ->add('active', null, array('required' => false))
             ;
     }
@@ -64,6 +69,7 @@ class FeaturedProgramAdmin extends Admin
             ->addIdentifier('id')
             ->add('Featured Image', 'string', array('template' => ':Admin:featured_image.html.twig'))
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'route' => array('name' => 'show'), 'admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('flavor')
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(

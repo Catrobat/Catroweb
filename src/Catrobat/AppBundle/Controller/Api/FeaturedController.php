@@ -20,18 +20,20 @@ class FeaturedController extends Controller
    * @Route("/api/projects/featured.json", name="catrobat_api_featured_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
-  public function searchProgramsAction(Request $request)
+  public function getFeaturedProgramsAction(Request $request)
   {
     /* @var $image_repository FeaturedImageRepository */
     $image_repository = $this->get('featuredimagerepository');
     /* @var $repository FeaturedRepository */
     $repository = $this->get('featuredrepository');
 
+    $flavor = $request->getSession()->get('flavor');
+
     $limit = intval($request->query->get('limit'));
     $offset = intval($request->query->get('offset'));
 
-    $programs = $repository->getFeaturedPrograms($limit, $offset);
-    $numbOfTotalProjects = $repository->getFeaturedProgramCount();
+    $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset);
+    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor);
     
     $retArray = array();
     $retArray['CatrobatProjects'] = array();

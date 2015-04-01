@@ -42,6 +42,27 @@ class FeaturedProgram
      * @ORM\Column(type="boolean")
      */
     protected $active;
+
+    /**
+     * @ORM\Column(type="string", options={"default":"pocketcode"})
+     */
+    protected $flavor = 'pocketcode';
+
+    /**
+     * @return mixed
+     */
+    public function getFlavor()
+    {
+        return $this->flavor;
+    }
+
+    /**
+     * @param mixed $flavor
+     */
+    public function setFlavor($flavor)
+    {
+        $this->flavor = $flavor;
+    }
     
     /**
      * Get id

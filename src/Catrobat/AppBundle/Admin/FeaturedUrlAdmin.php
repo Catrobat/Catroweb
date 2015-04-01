@@ -41,6 +41,11 @@ class FeaturedUrlAdmin extends Admin
         $formMapper
             ->add('file', 'file', $file_options)
             ->add('url', 'url')
+            ->add('flavor', 'choice', array(
+            'choices' => array(
+              'pocketcode' => 'Pocketcode',
+              'pocketkodey' => 'Pocketkodey',
+            )))
             ->add('active', null, array('required' => false))
             ;
     }
@@ -60,6 +65,7 @@ class FeaturedUrlAdmin extends Admin
             ->addIdentifier('id')
             ->add('Featured Image', 'string', array('template' => ':Admin:featured_image.html.twig'))
             ->add('url', 'url')
+            ->add('flavor')
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(

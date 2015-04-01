@@ -89,7 +89,7 @@ class ListProgramsController extends Controller
     $program_manager = $this->get("programmanager");
     $screenshot_repository = $this->get("screenshotrepository");
     $elapsed_time = $this->get("elapsedtime");
-    
+    $flavor = $request->getSession()->get('flavor');
     
     $retArray = array ();
     $limit = intval($request->query->get('limit', 20));
@@ -97,18 +97,18 @@ class ListProgramsController extends Controller
     $user_id = intval($request->query->get('user_id', 0));
 
     if ($sortBy == "downloads")
-      $programs = $program_manager->getMostDownloadedPrograms($limit, $offset);
+      $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
     else if ($sortBy == "views")
-      $programs = $program_manager->getMostViewedPrograms($limit, $offset);
+      $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset);
     else if ($sortBy == "user")
       $programs = $program_manager->getUserPrograms($user_id);
     else
-      $programs = $program_manager->getRecentPrograms($limit, $offset);
+      $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset);
     
     if ($sortBy == "user")
         $numbOfTotalProjects = count($programs);
     else
-        $numbOfTotalProjects = $program_manager->getTotalPrograms();
+        $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor);
     
     $retArray['CatrobatProjects'] = array ();
     foreach($programs as $program)

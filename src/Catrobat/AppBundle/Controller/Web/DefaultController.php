@@ -31,7 +31,7 @@ class DefaultController extends Controller
       /* @var $repository FeaturedRepository */
       $repository = $this->get('featuredrepository');
 
-      $programs = $repository->getFeaturedPrograms(5, 0);
+      $programs = $repository->getFeaturedPrograms($request->getSession()->get('flavor'), 5, 0);
 
       $featured = array();
       foreach ($programs as $program)

@@ -13,39 +13,45 @@ use Doctrine\ORM\Query;
  */
 class ProgramRepository extends EntityRepository
 {
-  public function getMostDownloadedPrograms($limit = 20, $offset = 0)
+  public function getMostDownloadedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
   	return $qb
   	->select('e')
   	->where($qb->expr()->eq("e.visible", true))
+    ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
   	->orderBy('e.downloads', 'DESC')
+    ->setParameter("flavor", $flavor)
   	->setFirstResult($offset)
   	->setMaxResults($limit)
   	->getQuery()
   	->getResult();
   }
 
-  public function getMostViewedPrograms($limit = 20, $offset = 0)
+  public function getMostViewedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
     return $qb
     ->select('e')
     ->where($qb->expr()->eq("e.visible", true))
+    ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
     ->orderBy('e.views', 'DESC')
+    ->setParameter("flavor", $flavor)
     ->setFirstResult($offset)
     ->setMaxResults($limit)
     ->getQuery()
     ->getResult();
   }
   
-  public function getRecentPrograms($limit = 20, $offset = 0)
+  public function getRecentPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
     return $qb
     ->select('e')
     ->where($qb->expr()->eq("e.visible", true))
+    ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
     ->orderBy('e.uploaded_at', 'DESC')
+    ->setParameter("flavor", $flavor)
     ->setFirstResult($offset)
     ->setMaxResults($limit)
     ->getQuery()
@@ -91,13 +97,15 @@ class ProgramRepository extends EntityRepository
     ->getResult();
   }
 
-  public function getTotalPrograms()
+  public function getTotalPrograms($flavor = 'pocketcode')
   {
       $qb = $this->createQueryBuilder('e');
       return $qb
           ->select('COUNT (e.id)')
           ->where($qb->expr()->eq("e.visible", true))
+          ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
           ->orderBy('e.downloads', 'DESC')
+          ->setParameter("flavor", $flavor)
           ->getQuery()
           ->getSingleScalarResult();
   }
