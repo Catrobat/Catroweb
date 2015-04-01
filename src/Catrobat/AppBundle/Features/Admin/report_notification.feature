@@ -9,15 +9,15 @@ Feature: Admin Report Notification
 
 Scenario: Email subscribed admins directly after report
   Given there are users:
-    | name     | password | token      | SuperAdmin | email           |
-    | Catrobat | 12345    | cccccccccc | true       | admin@catrob.at |
-    | User1    | vwxyz    | aaaaaaaaaa | true      | dog@catrob.at   |
-    | User2    | vwxyz    | aaaaaaaaaa | true      | dog2@catrob.at   |
+    | name     |  email           |
+    | Catrobat |  admin@catrob.at |
+    | User1    |  dog@catrob.at   |
+    | User2    |  dog2@catrob.at  |
   And there are programs:
-    | id | name      | description | owned by | downloads | views | upload time      | version |
-    | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-    | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
-    | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+    | id | name      |
+    | 1  | program 1 |
+    | 2  | program 2 |
+    | 3  | program 3 |
   And there are notifications:
     |user     |upload   |report | summary |
     |Catrobat |1        |true   | 1       |

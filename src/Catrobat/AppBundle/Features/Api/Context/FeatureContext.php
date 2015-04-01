@@ -4,21 +4,14 @@ namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\RudeWord;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Behat\MinkExtension\Context\MinkContext;
+use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\PyStringNode, Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\AppBundle\Services\TokenGenerator;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 
 //
@@ -31,28 +24,14 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Feature context.
  */
-class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContext
+class FeatureContext extends BaseContext
 {
-  const FIXTUREDIR = "./testdata/DataFixtures/";
-  private $error_directory;
-  
-  private $kernel;
   private $user;
   private $request_parameters;
   private $files;
   private $last_response;
   private $hostname;
   private $secure;
-  
-  /*
-   * @var \Symfony\Component\HttpKernel\Client
-   */
-  private $client;
-  
-  public static function getAcceptedSnippetType()
-  {
-    return 'regex';
-  }
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -61,43 +40,16 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function __construct($error_directory)
   {
-    $this->error_directory = $error_directory;
+    $this->setErrorDirectory($error_directory);
     $this->request_parameters = array ();
     $this->files = array ();
     $this->hostname = "localhost";
     $this->secure = false;
   }
 
-  /**
-   * Sets HttpKernel instance.
-   * This method will be automatically called by Symfony2Extension ContextInitializer.
-   *
-   * @param KernelInterface $kernel          
-   */
-  public function setKernel(KernelInterface $kernel)
-  {
-    $this->kernel = $kernel;
-  }
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Support Functions
 
-  private function emptyDirectory($directory)
-  {
-    if(!is_dir($directory))
-    {
-      return;
-    }
-    $filesystem = new Filesystem();
-
-    $finder = new Finder();
-    $finder->in($directory)->depth(0);
-    foreach($finder as $file)
-    {
-      $filesystem->remove($file);
-    }
-  }
 
   private function prepareValidRegistrationParameters()
   {
@@ -109,108 +61,9 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
 
   private function sendPostRequest($url)
   {
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $this->request_parameters, $this->files);
-  }
-  
-  private function uploadProgramFileAsDefaultUser($directory, $filename)
-  {
-    $filepath = $directory . "/" . $filename;
-    assertTrue(file_exists($filepath), "File not found");
-    $files = array(new UploadedFile($filepath, $filename));
-    $url = "/api/upload/upload.json";
-    $parameters = array(
-        "username" => "BehatGeneratedName",
-        "token" => "BehatGeneratedToken",
-        "fileChecksum" => md5_file($files[0]->getPathname())
-    );
-    
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $parameters, $files);
+    $this->getClient()->request('POST', $url, $this->request_parameters, $this->files);
   }
 
-
-  private function generateProgramFileWith($parameters)
-  {
-    $filesystem = new Filesystem();
-    $this->emptyDirectory(sys_get_temp_dir()."/program_generated/");
-    $new_program_dir = sys_get_temp_dir()."/program_generated/";
-    $filesystem->mirror(self::FIXTUREDIR."/GeneratedFixtures/base", $new_program_dir);
-    $properties = simplexml_load_file($new_program_dir."/code.xml");
-
-    foreach($parameters as $name => $value) {
-
-      switch ($name)
-      {
-        case "description":
-          $properties->header->description = $value;
-          break;
-        case "name":
-          $properties->header->programName = $value;
-          break;
-        case "platform":
-          $properties->header->platform = $value;
-          break;
-        case "catrobatLanguageVersion":
-          $properties->header->catrobatLanguageVersion = $value;
-          break;
-        case "applicationVersion":
-          $properties->header->applicationVersion = $value;
-          break;
-
-        default:
-          throw new PendingException("unknown xml field " . $name);
-      }
-
-    }
-
-
-    $properties->asXML($new_program_dir."/code.xml");
-    $compressor = new CatrobatFileCompressor();
-    $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
-
-  }
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Hooks
-
-  /** @AfterSuite */
-  protected function emptyDirectories()
-  {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
-    $this->emptyDirectory($extract_dir);
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
-    $this->emptyDirectory($extract_dir);
-  }
-
-  /** @BeforeScenario */
-  public function emptyUploadFolder()
-  {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
-    $this->emptyDirectory($extract_dir);
-  }
-
-  /** @BeforeScenario */
-  public function emptyExtraxtFolder()
-  {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
-    $this->emptyDirectory($extract_dir);
-  }
-
-  /** @AfterStep */
-  public function saveResponseToFile(AfterStepScope $scope)
-  {
-    if (!$scope->getTestResult()->isPassed() && $this->client != null)
-    {
-      $response = $this->client->getResponse(); 
-      if ($response->getContent() != "")
-      {
-        file_put_contents($this->error_directory . "error.json", $response->getContent());
-      }
-    }
-  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Steps
@@ -228,7 +81,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iUploadThisProgram()
   {
-    $this->uploadProgramFileAsDefaultUser(sys_get_temp_dir(), "program_generated.catrobat");
+    $this->upload(sys_get_temp_dir() . "/program_generated.catrobat", null);
   }
   
   /**
@@ -236,7 +89,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theProgramShouldGet($result)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     $response_array = json_decode($response->getContent(), true);
     $code = $response_array["statusCode"];
     switch ($result)
@@ -260,7 +113,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
     $words = $table->getHash();
 
     $word = null;
-    $em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+    $em = $this->getManager();
 
     for($i = 0; $i < count($words); $i ++)
     {
@@ -276,15 +129,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iAmAValidUser()
   {
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
-    $user = $user_manager->createUser();
-    $user->setUsername("BehatGeneratedName");
-    $user->setEmail("dev@pocketcode.org");
-    $user->setPlainPassword("BehatGeneratedPassword");
-    $user->setEnabled(true);
-    $user->setUploadToken("BehatGeneratedToken");
-    $user->setCountry("at");
-    $user_manager->updateUser($user, true);
+    $this->insertUser(array('name' => "BehatGeneratedName", 'token' => "BehatGeneratedToken", 'password' => "BehatGeneratedPassword"));
   }
 
   /**
@@ -292,7 +137,6 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iUploadAProgramWith($programattribute)
   {
-    $filename = "NOFILENAMEDEFINED";
     switch($programattribute)
     {
       case "a rude word in the description":
@@ -317,7 +161,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
       default:
         throw new PendingException("No case defined for \"" . $programattribute . "\"");
     }
-    $this->uploadProgramFileAsDefaultUser(self::FIXTUREDIR . "/GeneratedFixtures", $filename);
+    $this->upload(self::FIXTUREDIR . "/GeneratedFixtures/" . $filename, null);
   }
 
   /**
@@ -325,7 +169,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iUploadAnInvalidProgramFile()
   {
-    $this->uploadProgramFileAsDefaultUser(self::FIXTUREDIR,"invalid_archive.catrobat");
+    $this->upload(self::FIXTUREDIR . "/invalid_archive.catrobat", null);
   }
   
   /**
@@ -333,21 +177,17 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function thereAreUsers(TableNode $table)
   {
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
-    $user = null;
     for($i = 0; $i < count($users); $i ++)
     {
-      $user = $user_manager->createUser();
-      $user->setUsername($users[$i]["name"]);
-      $user->setEmail("dev" . $i . "@pocketcode.org");
-      $user->setPlainPassword($users[$i]["password"]);
-      $user->setEnabled(true);
-      $user->setUploadToken($users[$i]["token"]);
-      $user->setCountry("at");
-      $user_manager->updateUser($user, false);
+      $this->insertUser(
+        array(
+          'name' => $users[$i]["name"],
+          'token' => $users[$i]["token"],
+          'password' => $users[$i]["password"],
+          'email' => "dev" . $i . "@pocketcode.org"
+        ));
     }
-    $user_manager->updateUser($user, true);
   }
 
   /**
@@ -355,35 +195,25 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function thereArePrograms(TableNode $table)
   {
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     for($i = 0; $i < count($programs); $i ++)
     {
-      $user = $em->getRepository('AppBundle:User')->findOneBy(array (
+      $user = $this->getUserManager()->findOneBy(array (
           'username' => $programs[$i]['owned by'] 
       ));
-      $program = new Program();
-      $program->setUser($user);
-      $program->setName($programs[$i]['name']);
-      $program->setDescription($programs[$i]['description']);
-      $program->setFilename("file" . $i . ".catrobat");
-      $program->setThumbnail("thumb.png");
-      $program->setScreenshot("screenshot.png");
-      $program->setViews($programs[$i]['views']);
-      $program->setDownloads($programs[$i]['downloads']);
-      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
-      $program->setCatrobatVersion(1);
-      $program->setCatrobatVersionName($programs[$i]['version']);
-      $program->setLanguageVersion(1);
-      $program->setUploadIp("127.0.0.1");
-      $program->setRemixCount(0);
-      $program->setFilesize(isset($programs[$i]['FileSize']) ? $programs[$i]['FileSize'] : 0);
-      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
-      $program->setUploadLanguage("en");
-      $program->setApproved(false);
-      $em->persist($program);
+      $config = array(
+        'name' => $programs[$i]['name'],
+        'description' => $programs[$i]['description'],
+        'views' => $programs[$i]['views'],
+        'downloads' => $programs[$i]['downloads'],
+        'uploadtime' => $programs[$i]['upload time'],
+        'catrobatversionname' => $programs[$i]['version'],
+        'filesize' => @$programs[$i]['FileSize'],
+        'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] =="true" : true
+      );
+
+      $this->insertProgram($user, $config);
     }
-    $em->flush();
   }
 
   /**
@@ -391,11 +221,11 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function followingProgramsAreFeatured(TableNode $table)
   {
-      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+      $em = $this->getManager();
       $featured = $table->getHash();
       for($i = 0; $i < count($featured); $i ++)
       {
-          $program = $em->getRepository('AppBundle:Program')->findOneByName($featured[$i]['name']);
+          $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
           $featured_entry = new FeaturedProgram();
           $featured_entry->setProgram($program);
           $featured_entry->setActive($featured[$i]['active'] == 'yes');
@@ -410,35 +240,27 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function thereAreDownloadablePrograms(TableNode $table)
   {
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $file_repo = $this->kernel->getContainer()->get('filerepository');
+    $em = $this->getManager();
+    $file_repo = $this->getFileRepository();
     $programs = $table->getHash();
     for($i = 0; $i < count($programs); $i ++)
     {
-      $user = $em->getRepository('AppBundle:User')->findOneBy(array (
-          'username' => $programs[$i]['owned by'] 
+      $user = $this->getUserManager()->findOneBy(array (
+        'username' => $programs[$i]['owned by']
       ));
-      $program = new Program();
-      $program->setUser($user);
-      $program->setName($programs[$i]['name']);
-      $program->setDescription($programs[$i]['description']);
-      $program->setFilename("file" . $i . ".catrobat");
-      $program->setThumbnail("thumb.png");
-      $program->setScreenshot("screenshot.png");
-      $program->setViews($programs[$i]['views']);
-      $program->setDownloads($programs[$i]['downloads']);
-      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
-      $program->setCatrobatVersion(1);
-      $program->setCatrobatVersionName($programs[$i]['version']);
-      $program->setLanguageVersion(1);
-      $program->setUploadIp("127.0.0.1");
-      $program->setRemixCount(0);
-      $program->setFilesize(0);
-      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
-      $program->setUploadLanguage("en");
-      $program->setApproved(false);
-      $em->persist($program);
-      $em->flush();
+      $config = array(
+        'name' => $programs[$i]['name'],
+        'description' => $programs[$i]['description'],
+        'views' => $programs[$i]['views'],
+        'downloads' => $programs[$i]['downloads'],
+        'uploadtime' => $programs[$i]['upload time'],
+        'catrobatversionname' => $programs[$i]['version'],
+        'filesize' => @$programs[$i]['FileSize'],
+        'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] =="true" : true
+      );
+
+      $program = $this->insertProgram($user, $config);
+
       $file_repo->saveProgramfile(new File(self::FIXTUREDIR . "test.catrobat"), $program->getId());
     }
   }
@@ -456,8 +278,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iPostTheseParametersTo($url)
   {
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $this->request_parameters, $this->files);
+    $this->getClient()->request('POST', $url, $this->request_parameters, $this->files);
   }
 
   /**
@@ -465,8 +286,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iGetWithTheseParameters($url)
   {
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('GET', $url . "?" . http_build_query($this->request_parameters), array (), $this->files, array (
+    $this->getClient()->request('GET', $url . "?" . http_build_query($this->request_parameters), array (), $this->files, array (
         'HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure
     ));
   }
@@ -507,7 +327,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iShouldGetATotalOfProjects($arg1)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
     assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects'], "Wrong number of total projects");
   }
@@ -533,12 +353,11 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iCallWithToken($url, $token)
   {
-    $this->client = $this->kernel->getContainer()->get('test.client');
     $params = array (
         "token" => $token,
         "username" => $this->user 
     );
-    $this->client->request('GET', $url . "?" . http_build_query($params));
+    $this->getClient()->request('GET', $url . "?" . http_build_query($params));
   }
 
   /**
@@ -546,7 +365,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iShouldGetTheJsonObject(PyStringNode $string)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), "");
   }
 
@@ -555,7 +374,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iShouldGetTheJsonObjectWithRandomToken(PyStringNode $string)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
     $expectedArray = json_decode($string->getRaw(), true);
     $responseArray['token'] = "";
@@ -568,7 +387,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iShouldGetTheJsonObjectWithRandomAndProgramid($arg1, $arg2, PyStringNode $string)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
     $expectedArray = json_decode($string->getRaw(), true);
     $responseArray[$arg1] = $expectedArray[$arg1] = "";
@@ -581,7 +400,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iShouldGetProgramsInTheFollowingOrder(TableNode $table)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
@@ -605,7 +424,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theResponseCodeShouldBe($code)
   {
-    $response = $this->client->getResponse();
+    $response = $this->getClient()->getResponse();
     assertEquals($code, $response->getStatusCode(), "Wrong response code. " . $response->getContent());
   }
 
@@ -614,7 +433,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theReturnedShouldBeANumber($arg1)
   {
-    $response = json_decode($this->client->getResponse()->getContent(), true);
+    $response = json_decode($this->getClient()->getResponse()->getContent(), true);
     assertTrue(is_numeric($response[$arg1]));
   }
 
@@ -681,7 +500,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iUploadACatrobatProgramWithTheSameName()
   {
-    $this->last_response = $this->client->getResponse()->getContent();
+    $this->last_response = $this->getClient()->getResponse()->getContent();
     $this->iPostTheseParametersTo("/api/upload/upload.json");
   }
 
@@ -691,7 +510,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   public function itShouldBeUpdated()
   {
     $last_json = json_decode($this->last_response, true);
-    $json = json_decode($this->client->getResponse()->getContent(), true);
+    $json = json_decode($this->getClient()->getResponse()->getContent(), true);
     assertEquals($last_json['projectId'], $json['projectId']);
   }
 
@@ -708,7 +527,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function theNextGeneratedTokenWillBe($token)
   {
-    $token_generator = $this->kernel->getContainer()->get("tokengenerator");
+    $token_generator = $this->getSymfonyService("tokengenerator");
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
@@ -718,7 +537,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
   public function theCurrentTimeIs($time)
   {
     $date = new \DateTime($time, new \DateTimeZone('UTC'));
-    $time_service = $this->kernel->getContainer()->get("time");
+    $time_service = $this->getSymfonyService("time");
     $time_service->setTime(new FixedTime($date->getTimestamp()));
   }
 
@@ -784,8 +603,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iDownload($arg1)
   {
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('GET', $arg1);
+    $this->getClient()->request('GET', $arg1);
   }
 
   /**
@@ -793,7 +611,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
    */
   public function iShouldReceiveAFile()
   {
-    $content_type = $this->client->getResponse()->headers->get('Content-Type');
+    $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
     assertEquals("application/zip", $content_type);
   }
 
@@ -831,7 +649,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function iUploadAProgram()
     {
-      $this->uploadProgramFileAsDefaultUser(sys_get_temp_dir(), "program_generated.catrobat");
+      $this->upload(sys_get_temp_dir() . "/program_generated.catrobat", null);
     }
 
     /**
@@ -847,7 +665,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function theUploadShouldBeSuccessful()
     {
-        $response = $this->client->getResponse();
+        $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
         assertEquals(200, $responseArray["statusCode"]);
     }
@@ -874,10 +692,8 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function programIsNotVisible($programname)
     {
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $program = $em->getRepository('AppBundle:Program')->findOneBy(array (
-          'name' => $programname
-        ));
+        $em = $this->getManager();
+        $program = $this->getProgramManger()->findOneByName($programname);
         if ($program == null)
         {
             throw new PendingException("There is no program named " . $programname);
@@ -892,8 +708,7 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function iGetTheMostRecentPrograms()
     {
-        $this->client = $this->kernel->getContainer()->get('test.client');
-        $this->client->request('GET', "/api/projects/recent.json");
+        $this->getClient()->request('GET', "/api/projects/recent.json");
     }
 
     /**
@@ -901,7 +716,6 @@ class FeatureContext implements KernelAwareContext, CustomSnippetAcceptingContex
      */
     public function iGetTheMostRecentProgramsWithLimitAndOffset($limit, $offset)
     {
-        $this->client = $this->kernel->getContainer()->get('test.client');
-        $this->client->request('GET', "/api/projects/recent.json", array("limit" => $limit, "offset" => $offset));
+        $this->getClient()->request('GET', "/api/projects/recent.json", array("limit" => $limit, "offset" => $offset));
     }
 }

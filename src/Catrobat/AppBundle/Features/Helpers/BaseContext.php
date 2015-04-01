@@ -2,8 +2,10 @@
 
 namespace Catrobat\AppBundle\Features\Helpers;
 
+use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\RudeWord;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Catrobat\AppBundle\Entity\User;
@@ -26,6 +28,10 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   const FIXTUREDIR = "./testdata/DataFixtures/";
 
   private $kernel;
+  private $client;
+  private $test_user_count = 0;
+  private $default_user;
+  private $error_directory;
 
   public function __construct()
   {
@@ -57,7 +63,9 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
    */
   public function getClient()
   {
-    return $this->kernel->getContainer()->get('test.client');
+    if($this->client == null)
+      $this->client = $this->kernel->getContainer()->get('test.client');
+    return $this->client;
   }
 
   /**
@@ -77,6 +85,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   }
 
   /**
+   * @return \Catrobat\AppBundle\Services\ProgramFileRepository
+   */
+  public function getFileRepository()
+  {
+    return $this->kernel->getContainer()->get('filerepository');
+  }
+
+  /**
    * @return \Doctrine\ORM\EntityManager
    */
   public function getManager()
@@ -84,15 +100,90 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     return $this->kernel->getContainer()->get('doctrine')->getManager();
   }
 
+  /**
+   * @return mixed
+   */
+  public function getSymfonyParameter($param)
+  {
+    return $this->kernel->getContainer()->getParameter($param);
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSymfonyService($param)
+  {
+    return $this->kernel->getContainer()->get($param);
+  }
+
+  /**
+   * @return \Symfony\Component\HttpKernel\Profiler\Profiler
+   */
+  public function getSymfonyProfile()
+  {
+    $profile = $this->getClient()->getProfile();
+    if (false === $profile) {
+      throw new \RuntimeException(
+        'The profiler is disabled. Activate it by setting '.
+        'framework.profiler.only_exceptions to false in '.
+        'your config'
+      );
+    }
+
+    return $profile;
+  }
+
+  /**
+   * @return \Catrobat\AppBundle\Entity\User
+   */
+  public function getDefaultUser()
+  {
+    if($this->default_user == null)
+      $this->default_user = $this->insertUser();
+
+    return $this->default_user;
+  }
 
 
+  public function setErrorDirectory($dir)
+  {
+    $this->error_directory = $dir;
+  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// HOOKS
 
+  /** @BeforeScenario */
+  public function clearDefaultUser()
+  {
+    $this->default_user = null;
+  }
 
+  /** @BeforeScenario */
+  public function emptyStorage()
+  {
+    $this->emptyDirectory($this->getSymfonyParameter("catrobat.file.extract.dir"));
+    $this->emptyDirectory($this->getSymfonyParameter("catrobat.file.storage.dir"));
+    $this->emptyDirectory($this->getSymfonyParameter("catrobat.screenshot.dir"));
+    $this->emptyDirectory($this->getSymfonyParameter("catrobat.thumbnail.dir"));
+    $this->emptyDirectory($this->getSymfonyParameter("catrobat.featuredimage.dir"));
+  }
 
+  /** @AfterStep */
+  public function saveResponseToFile(AfterStepScope $scope)
+  {
+    if($this->error_directory == null)
+      return;
 
+    if (!$scope->getTestResult()->isPassed() && $this->getClient() != null)
+    {
+      $response = $this->getClient()->getResponse();
+      if ($response != null && $response->getContent() != "")
+      {
+        file_put_contents($this->error_directory . "error.json", $response->getContent());
+      }
+    }
+  }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,16 +207,49 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
 
   public function insertUser($config = array())
   {
+    $this->test_user_count++;
     $user_manager = $this->getUserManager();
     $user = $user_manager->createUser();
-    @$user->setUsername($config['name'] ?: 'GeneratedUser');
-    @$user->setEmail($config['email'] ?: "dev@pocketcode.org");
+    @$user->setUsername($config['name'] ?: 'GeneratedUser' . $this->test_user_count);
+    @$user->setEmail($config['email'] ?: "default" . $this->test_user_count . "@pocketcode.org");
     @$user->setPlainPassword($config['password'] ?: "GeneratedPassword");
     @$user->setEnabled($config['enabled'] ?: true);
     @$user->setUploadToken($config['token'] ?: "GeneratedToken");
     @$user->setCountry($config['country'] ?: "at");
     @$user_manager->updateUser($user, true);
+
     return $user;
+  }
+
+  public function insertProgram($user, $config)
+  {
+    if($user == null)
+      $user = $this->getDefaultUser();
+
+    $em = $this->getManager();
+    $program = new Program();
+    $program->setUser($user);
+    $program->setName($config['name'] ?: "Generated program");
+    $program->setDescription(isset($config['description']) ? $config['description'] : "Generated");
+    $program->setFilename("file.catrobat");
+    $program->setThumbnail("thumb.png");
+    $program->setScreenshot("screenshot.png");
+    $program->setViews(isset($config['views']) ? $config['views'] : 1);
+    $program->setDownloads(isset($config['downloads']) ? $config['downloads'] : 1);
+    $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : new \DateTime());
+    $program->setCatrobatVersion(isset($config['catrobatversion']) ? $config['catrobatversion'] : 1);
+    $program->setCatrobatVersionName(isset($config['catrobatversionname']) ? $config['catrobatversionname'] : "0.9.1");
+    $program->setLanguageVersion(isset($config['languageversion']) ? $config['languageversion'] : 1);
+    $program->setUploadIp("127.0.0.1");
+    $program->setRemixCount(0);
+    $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
+    $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
+    $program->setUploadLanguage("en");
+    $program->setApproved(isset($config['approved']) ? $config['approved'] : true);
+    $em->persist($program);
+    $em->flush();
+
+    return $program;
   }
 
   public function generateProgramFileWith($parameters)
@@ -169,35 +293,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     return $compressor->compress($new_program_dir, sys_get_temp_dir()."/", "program_generated");
   }
 
-  public function insertProgram($user, $config)
-  {
-    $em = $this->getManager();
-    $program = new Program();
-    $program->setUser($user);
-    $program->setName($config['name'] ?: "Generated program");
-    $program->setDescription($config['description'] ?: "Generated");
-    $program->setFilename("file.catrobat");
-    $program->setThumbnail("thumb.png");
-    $program->setScreenshot("screenshot.png");
-    $program->setViews($config['views'] ?: 1);
-    $program->setDownloads($config['downloads'] ?: 1);
-    $program->setUploadedAt($config['uploadtime'] ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : new \DateTime());
-    $program->setCatrobatVersion($config['catrobatversion'] ?: 1);
-    $program->setCatrobatVersionName($config['catrobatversionname'] ?: "0.9.1");
-    $program->setLanguageVersion($config['languageversion'] ?: 1);
-    $program->setUploadIp("127.0.0.1");
-    $program->setRemixCount(0);
-    $program->setFilesize(0);
-    $program->setVisible($config['visible'] ?: true);
-    $program->setUploadLanguage("en");
-    $program->setApproved($config['approve'] ?: true);
-    $program->setApkStatus($config['apkstatus'] ?: Program::APK_NONE);
-    $em->persist($program);
-    $em->flush();
-  }
-
   public function upload($file, $user)
   {
+    if($user == null)
+      $user = $this->getDefaultUser();
+
+    if(is_string($file))
+      $file = new UploadedFile($file, 'uploadedFile');
+
     $parameters =  array();
     $parameters["username"] = $user->getUsername();
     $parameters["token"] = $user->getUploadToken();
@@ -207,7 +310,6 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     $response = $client->getResponse();
     return $response;
   }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

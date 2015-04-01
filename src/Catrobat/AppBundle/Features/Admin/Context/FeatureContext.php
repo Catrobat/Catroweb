@@ -3,26 +3,16 @@
 namespace Catrobat\AppBundle\Features\Admin\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Symfony2Extension\Driver\KernelDriver;
 use Catrobat\AppBundle\Entity\Notification;
 use Catrobat\AppBundle\Entity\RudeWord;
+use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Model\UserManager;
 use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Gherkin\Node\PyStringNode, Behat\Gherkin\Node\TableNode;
+use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\AppBundle\Services\TokenGenerator;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 
 //
 // Require 3rd-party libraries here:
@@ -34,26 +24,10 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Feature context.
  */
-class FeatureContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
+class FeatureContext extends BaseContext
 {
-  const FIXTUREDIR = "./src/Catrobat/TestBundle/DataFixtures/";
-  private $error_directory;
-  
-  private $kernel;
-  private $user;
   private $request_parameters;
   private $files;
-  private $last_response;
-
-  /*
-   * @var \Symfony\Component\HttpKernel\Client
-   */
-  private $client;
-  
-  public static function getAcceptedSnippetType()
-  {
-    return 'regex';
-  }
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -62,72 +36,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function __construct($error_directory)
   {
-    $this->error_directory = $error_directory;
+    $this->setErrorDirectory($error_directory);
     $this->request_parameters = array ();
     $this->files = array ();
   }
 
-  /**
-   * Sets HttpKernel instance.
-   * This method will be automatically called by Symfony2Extension ContextInitializer.
-   *
-   * @param KernelInterface $kernel          
-   */
-  public function setKernel(KernelInterface $kernel)
-  {
-    $this->kernel = $kernel;
-  }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Support Functions
-
-    public function getSymfonyProfile()
-    {
-        $profile = $this->client->getProfile();
-        if (false === $profile) {
-            throw new \RuntimeException(
-                'The profiler is disabled. Activate it by setting '.
-                'framework.profiler.only_exceptions to false in '.
-                'your config'
-            );
-        }
-
-        return $profile;
-    }
-
-  private function emptyDirectory($directory)
-  {
-    if(!is_dir($directory))
-    {
-      return;
-    }
-    $filesystem = new Filesystem();
-
-    $finder = new Finder();
-    $finder->in($directory)->depth(0);
-    foreach($finder as $file)
-    {
-      $filesystem->remove($file);
-    }
-  }
-  
-  private function uploadProgramFileAsDefaultUser($directory, $filename)
-  {
-    $filepath = $directory . "/" . $filename;
-    assertTrue(file_exists($filepath), "File not found");
-    $files = array(new UploadedFile($filepath, $filename));
-    $url = "/api/upload/upload.json";
-    $parameters = array(
-        "username" => "BehatGeneratedName",
-        "token" => "BehatGeneratedToken",
-        "fileChecksum" => md5_file($files[0]->getPathname())
-    );
-    
-    $this->client = $this->kernel->getContainer()->get('test.client');
-    $this->client->request('POST', $url, $parameters, $files);
-  }
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,106 +53,66 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   /** @AfterSuite */
   protected function emptyDirectories()
   {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
+    $extract_dir = $this->getSymfonyParameter("catrobat.file.storage.dir");
     $this->emptyDirectory($extract_dir);
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
+    $extract_dir = $this->getSymfonyParameter("catrobat.file.extract.dir");
     $this->emptyDirectory($extract_dir);
   }
 
   /** @BeforeScenario */
   public function emptyUploadFolder()
   {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.storage.dir");
+    $extract_dir = $this->getSymfonyParameter("catrobat.file.storage.dir");
     $this->emptyDirectory($extract_dir);
   }
 
   /** @BeforeScenario */
   public function emptyExtraxtFolder()
   {
-    $extract_dir = $this->kernel->getContainer()->getParameter("catrobat.file.extract.dir");
+    $extract_dir = $this->getSymfonyParameter("catrobat.file.extract.dir");
     $this->emptyDirectory($extract_dir);
   }
 
   /** @AfterScenario */
   public function disableProfiler()
   {
-    $this->kernel->getContainer()->get('profiler')->disable();
-  }
-
-  /** @AfterStep */
-  public function saveResponseToFile(AfterStepScope $scope)
-  {
-    if (!$scope->getTestResult()->isPassed() && $this->client != null)
-    {
-      $response = $this->client->getResponse(); 
-      if ($response->getContent() != "")
-      {
-        file_put_contents($this->error_directory . "error.json", $response->getContent());
-      }
-    }
+    $this->getSymfonyService('profiler')->disable();
   }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Steps
 
-    /**
-     * @Given /^there are users:$/
-     */
-    public function thereAreUsers(TableNode $table)
+  /**
+   * @Given /^there are users:$/
+   */
+  public function thereAreUsers(TableNode $table)
+  {
+    $users = $table->getHash();
+    for($i = 0; $i < count($users); $i ++)
     {
-        /* @var $user User*/
-        $user_manager = $this->kernel->getContainer()->get('usermanager');
-        $users = $table->getHash();
-        $user = null;
-        for($i = 0; $i < count($users); $i ++)
-        {
-            $user = $user_manager->createUser();
-            $user->setUsername($users[$i]["name"]);
-            //$user->setEmail("dev" . $i . "@pocketcode.org");
-            $user->setPlainPassword($users[$i]["password"]);
-            $user->setEnabled(true);
-            $user->setEmail($users[$i]["email"]);
-            $user->setUploadToken($users[$i]["token"]);
-            $user->setSuperAdmin($users[$i]["SuperAdmin"]);
-            $user_manager->updateUser($user, false);
-        }
-        $user_manager->updateUser($user, true);
+      $this->insertUser(
+        array(
+          'name' => $users[$i]["name"],
+          'email' => $users[$i]["email"]
+        ));
     }
+  }
 
   /**
    * @Given /^there are programs:$/
    */
   public function thereArePrograms(TableNode $table)
   {
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     for($i = 0; $i < count($programs); $i ++)
     {
-      $user = $em->getRepository('AppBundle:User')->findOneBy(array (
-          'username' => $programs[$i]['owned by']
-      ));
-      $program = new Program();
-      $program->setUser($user);
-      $program->setName($programs[$i]['name']);
-      $program->setDescription($programs[$i]['description']);
-      $program->setFilename("file" . $i . ".catrobat");
-      $program->setThumbnail("thumb.png");
-      $program->setScreenshot("screenshot.png");
-      $program->setViews($programs[$i]['views']);
-      $program->setDownloads($programs[$i]['downloads']);
-      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
-      $program->setCatrobatVersion(1);
-      $program->setCatrobatVersionName($programs[$i]['version']);
-      $program->setLanguageVersion(1);
-      $program->setUploadIp("127.0.0.1");
-      $program->setRemixCount(0);
-      $program->setFilesize(isset($programs[$i]['FileSize']) ? $programs[$i]['FileSize'] : 0);
-      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
-      $program->setUploadLanguage("en");
-      $program->setApproved(false);
-      $em->persist($program);
+
+      $config = array(
+        'name' => $programs[$i]['name']
+      );
+
+      $this->insertProgram(null, $config);
     }
-    $em->flush();
   }
 
   /**
@@ -244,12 +121,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereAreNotifications(TableNode $table)
   {
     /* @var $user_manager UserManager*/
-    $user_manager = $this->kernel->getContainer()->get('usermanager');
-    $em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+    $user_manager = $this->getUserManager();
+    $em = $this->getManager();
     $nots = $table->getHash();
     for($i = 0; $i < count($nots); $i ++)
     {
-      $user = $em->getRepository('AppBundle:User')->findOneBy(array (
+      $user = $user_manager->findOneBy(array (
           'username' => $nots[$i]['user']
       ));
       $notification = new Notification();
@@ -268,14 +145,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     public function iAmAValidUser()
     {
-        $user_manager = $this->kernel->getContainer()->get('usermanager');
-        $user = $user_manager->createUser();
-        $user->setUsername("BehatGeneratedName");
-        $user->setEmail("dev@pocketcode.org");
-        $user->setPlainPassword("BehatGeneratedPassword");
-        $user->setEnabled(true);
-        $user->setUploadToken("BehatGeneratedToken");
-        $user_manager->updateUser($user, true);
+      $this->getDefaultUser();
     }
 
     /**
@@ -283,8 +153,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iActivateTheProfiler()
     {
-      $this->client = $this->kernel->getContainer()->get('test.client');
-      $this->client->enableProfiler();
+      $this->getClient()->enableProfiler();
     }
 
     /**
@@ -319,7 +188,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iUploadAProgramWith($programattribute)
     {
-        $filename = "NOFILENAMEDEFINED";
         switch($programattribute)
         {
             case "a rude word in the description":
@@ -347,7 +215,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             default:
                 throw new PendingException("No case defined for \"" . $programattribute . "\"");
         }
-        $this->uploadProgramFileAsDefaultUser(self::FIXTUREDIR . "/GeneratedFixtures", $filename);
+        $this->upload(self::FIXTUREDIR . "/GeneratedFixtures/" . $filename, null);
     }
 
     /**
@@ -360,8 +228,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           "program" => $program_id,
           "note" => $note
       );
-
-      $this->client = $this->kernel->getContainer()->get('test.client');
-      $this->client->request('POST', $url, $parameters);
+      $this->getClient()->request('POST', $url, $parameters);
     }
 }

@@ -9,10 +9,10 @@ Feature: Admin Upload Notification
 
 Scenario: Email only subscribed admins directly after upload
   Given there are users:
-    | name     | password | token      | SuperAdmin | email           |
-    | Catrobat | 12345    | cccccccccc | true       | admin@catrob.at |
-    | User1    | vwxyz    | aaaaaaaaaa | true       | dog@catrob.at   |
-    | User2    | vwxyz    | aaaaaaaaaa | true       | dog2@catrob.at   |
+    | name     |  email           |
+    | Catrobat |  admin@catrob.at |
+    | User1    |  dog@catrob.at   |
+    | User2    |  dog2@catrob.at  |
   And there are notifications:
     |user     |upload   |report | summary |
     |Catrobat |true     |1      | 1       |
