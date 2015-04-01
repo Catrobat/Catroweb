@@ -39,8 +39,7 @@ default:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Flavor/"
             contexts:
-              - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext:
-                    error_directory: "./testreports/behat/"
+              - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext
         web:
             type: symfony_bundle
             bundle: 'AppBundle'
