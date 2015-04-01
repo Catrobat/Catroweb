@@ -27,11 +27,6 @@ class User extends BaseUser
      * @ORM\Column(type="text", nullable=true)
      */
     protected $avatar;
-    
-    /**
-     * @ORM\Column(type="boolean", nullable=true, options={"default":false})
-     */
-    protected $upload_notification;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=false, options={"default":""})
@@ -107,24 +102,6 @@ class User extends BaseUser
         $this->upload_token = $upload_token;
     }
 
-    /**
-     *
-     * @param mixed $upload_notification            
-     */
-    public function setUploadNotification($upload_notification)
-    {
-        $this->upload_notification = $upload_notification;
-    }
-
-    /**
-     *
-     * @return mixed
-     */
-    public function getUploadNotification()
-    {
-        return $this->upload_notification;
-    }
-
     public function getCountry()
     {
         return $this->country;
@@ -167,5 +144,4 @@ class User extends BaseUser
         $this->avatar = $avatar;
         return $this;
     }
- 
 }

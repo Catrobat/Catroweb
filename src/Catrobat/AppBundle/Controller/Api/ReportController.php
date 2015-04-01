@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
+use Catrobat\AppBundle\Events\ReportInsertEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Null;
 use Symfony\Component\Validator\Validator;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Catrobat\AppBundle\StatusCode;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 
@@ -31,11 +33,11 @@ class ReportController extends Controller
     $context = $this->get("security.context");
     $programmanager = $this->get("programmanager");
     $entityManager = $this->getDoctrine()->getManager();
+    $eventdispacher = $this->get("event_dispatcher");
 
     $response = array();
     if(!$request->get('program') || !$request->get('note'))
     {
-      $response["printr"] = print_r($request,true);
       $response["statusCode"] = StatusCode::MISSING_POST_DATA;
       $response["answer"] = $this->trans("error.post-data");
       $response["preHeaderMessages"] = "";
@@ -63,10 +65,9 @@ class ReportController extends Controller
     $report->setProject($program);
 
     $entityManager->persist($report);
-    //Do we need an event dispatcher?
-
-    echo "done";
     $entityManager->flush();
+
+    $eventdispacher->dispatch("catrobat.report.insert", new ReportInsertEvent($request->get('note'),$report));
 
     $response = array();
     $response["answer"] = $this->trans("success.report");

@@ -21,8 +21,8 @@ services:
       catrowebadmin.block.tools.notify:
         class: Catrobat\AppBundle\Admin\UploadNotificationAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Tools, label: Upload Notify }
-        arguments: [null, Catrobat\AppBundle\Entity\User, null]
+          - { name: sonata.admin, manager_type: orm, group: Tools, label: Notifications }
+        arguments: [null, Catrobat\AppBundle\Entity\Notification, null]
 
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin

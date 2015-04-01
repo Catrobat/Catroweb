@@ -50,5 +50,12 @@ default:
             contexts:
               - Catrobat\AppBundle\Features\Web\Context\FeatureContext:
                     screenshot_directory: "./testreports/screens/"
-
-            
+        admin:
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            features:
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/Admin/"
+            contexts:
+              - Catrobat\AppBundle\Features\Admin\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
