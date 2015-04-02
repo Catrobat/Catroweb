@@ -41,7 +41,7 @@
         <div id="select-country">
           <div>{{ 'profile.country'|trans({}, 'catroweb') }}</div>
           <div>
-            <select tabindex="5">
+            <select name="country" tabindex="5">
               <option value=""></option>
               {% for key, country in  countriesList() %}
                 {% if app.user.country == key %}

@@ -38,6 +38,7 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
       $('#email').parent().removeClass('mail-failed');
       $('#additional-email').parent().removeClass('mail-failed');
 
+      $('#submit-done').hide();
       if(!self.checkPasswords() || !self.checkFirstMail() || !self.checkSecondMail() || !self.checkCountry())
         return false;
       self.submit();
@@ -93,7 +94,6 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
 
     if(!self.data_changed) return;
     $('.img-load-ajax').show();
-    $('#submit-done').hide();
     $.post(self.save_url, {
       newPassword: self.tmp_newPassword,
       repeatPassword: self.tmp_repeatPassword,

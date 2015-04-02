@@ -34,7 +34,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    * Initializes context with parameters from behat.yml.
    *
    * @param array $screenshot_directory
-   * @throws Exception
+   * @throws \Exception
    */
   public function __construct($screenshot_directory)
   {
@@ -370,16 +370,60 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^I should be logged in$/
+   * @Then /^I should be logged ([^"]*)?$/
    */
-  public function iShouldBeLoggedIn()
+  public function iShouldBeLoggedIn($arg1)
   {
-    $this->assertPageNotContainsText("Your password or username was incorrect.");
-    $this->assertElementOnPage("#logo");
-    $this->assertElementNotOnPage("#btn-login");
-    $this->assertElementOnPage("#nav-dropdown");
-    $this->getSession()->getPage()->find("css", ".show-nav-dropdown")->click();
-    $this->assertElementOnPage("#nav-dropdown");
+    if($arg1 == "in") {
+      $this->assertPageNotContainsText("Your password or username was incorrect.");
+      $this->assertElementOnPage("#logo");
+      $this->assertElementNotOnPage("#btn-login");
+      $this->assertElementOnPage("#nav-dropdown");
+      $this->getSession()->getPage()->find("css", ".show-nav-dropdown")->click();
+      $this->assertElementOnPage("#nav-dropdown");
+    }
+    if($arg1 == "out") {
+      $this->assertElementOnPage("#btn-login");
+      $this->assertElementNotOnPage("#nav-dropdown");
+    }
+  }
+
+  /**
+   * @Given /^I( [^"]*)? log in as "([^"]*)" with the password "([^"]*)"$/
+   */
+  public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
+  {
+    $this->visitPath("/pocketcode/login");
+    $this->fillField("username", $arg2);
+    $this->fillField("password", $arg3);
+    $this->pressButton("Login");
+    if($arg1 == "try to")
+      $this->assertPageNotContainsText("Your password or username was incorrect.");
+  }
+
+  /**
+   * @Given /^I wait for the server response$/
+   */
+  public function iWaitForTheServerResponse()
+  {
+    $this->getSession()->wait(5000, '(0 === jQuery.active)');
+  }
+
+  /**
+   * @Given /^I make a screenshot$/
+   */
+  public function iMakeAScreenshot()
+  {
+    $this->makeScreenshot();
+  }
+
+  /**
+   * @Then /^"([^"]*)" must be selected in "([^"]*)"$/
+   */
+  public function mustBeSelectedIn($country, $select)
+  {
+    $field = $this->getSession()->getPage()->findField($select);
+    assertTrue($country == $field->getValue());
   }
 
 }

@@ -32,3 +32,6 @@ Feature: Pocketcode homepage
     And I fill in "password" with "123456"
     Then I press "Login"
     Then I should be logged in
+    And I should see "Catrobat"
+    When I am on "/logout"
+    Then I should be logged out

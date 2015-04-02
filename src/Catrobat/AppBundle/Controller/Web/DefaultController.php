@@ -190,8 +190,14 @@ class DefaultController extends Controller
       $user->setEmail($firstMail);
     if($firstMail !== "" && $secondMail !== "" && $secondMail != $user->getAdditionalEmail())
       $user->setAdditionalEmail($secondMail);
-    if($firstMail === "" && $user->getAdditionalEmail() !== "") {
+    if($firstMail !== "" && $secondMail === "")
+      $user->setAdditionalEmail("");
+    if($firstMail === "" && $secondMail === "" && $user->getAdditionalEmail() !== "") {
       $user->setEmail($user->getAdditionalEmail());
+      $user->setAdditionalEmail("");
+    }
+    if($firstMail === "" && $secondMail !== "") {
+      $user->setEmail($secondMail);
       $user->setAdditionalEmail("");
     }
 
