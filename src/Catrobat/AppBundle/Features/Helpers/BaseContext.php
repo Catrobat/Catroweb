@@ -246,6 +246,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
     $program->setUploadLanguage("en");
     $program->setApproved(isset($config['approved']) ? $config['approved'] : true);
+    $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : "pocketcode");
     $em->persist($program);
     $em->flush();
 

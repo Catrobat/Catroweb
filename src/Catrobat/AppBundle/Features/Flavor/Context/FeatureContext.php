@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Features\Flavor\Context;
 
+use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\RudeWord;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Entity\User;
@@ -83,7 +84,66 @@ class FeatureContext extends BaseContext
         assertNotNull($program, "No program added");
         assertNotEquals("pocketkodey", $program->getFlavor(), "Program is flagged a kodey");
     }
-    
 
-    
+    /**
+     * @When /^I get the recent programs with "([^"]*)"$/
+     * @When /^I get the most downloaded programs with "([^"]*)"$/
+     * @When /^I get the most viewed programs with "([^"]*)"$/
+     *
+     */
+    public function iGetTheMostProgramsWith($url)
+    {
+        $this->getClient()->request('GET', $url);
+    }
+
+    /**
+     * @Then /^I should get following programs:$/
+     */
+    public function iShouldGetFollowingPrograms(TableNode $table)
+    {
+      $response = $this->getClient()->getResponse();
+      assertEquals(200, $response->getStatusCode());
+      $responseArray = json_decode($response->getContent(), true);
+      $returned_programs = $responseArray['CatrobatProjects'];
+      $expected_programs = $table->getHash();
+      assertEquals(count($expected_programs), count($returned_programs), "Wrong number of returned programs");
+      for($i = 0; $i < count($returned_programs); $i ++)
+      {
+        assertEquals($expected_programs[$i]["name"], $returned_programs[$i]["ProjectName"], "Wrong order of results");
+      }
+    }
+
+    /**
+     * @Given /^there are programs:$/
+     */
+    public function thereArePrograms(TableNode $table)
+    {
+      $programs = $table->getHash();
+      for($i = 0; $i < count($programs); $i ++)
+      {
+
+        $config = array(
+          'name' => $programs[$i]['name'],
+          'flavor' => $programs[$i]['flavor']
+        );
+
+        $this->insertProgram(null, $config);
+      }
+    }
+
+    /**
+     * @Given /^All programs are from the same user$/
+     */
+    public function allProgramsAreFromTheSameUser()
+    {
+      ///
+    }
+
+    /**
+     * @When /^I get the user\'s programs with "([^"]*)"$/
+     */
+    public function iGetTheUserSProgramsWith($url)
+    {
+      $this->getClient()->request('GET', $url, array('user_id' => 1));
+    }
 }
