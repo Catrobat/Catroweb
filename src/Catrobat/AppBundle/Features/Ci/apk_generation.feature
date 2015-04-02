@@ -16,6 +16,7 @@ Feature:
           | SUFFIX    | generated1                                           |
           | DOWNLOAD  | https://pocketcode.org/download/1.catrobat           |
           | UPLOAD    | https://pocketcode.org/ci/upload/1?token=UPLOADTOKEN |
+          | ONERROR   | https://pocketcode.org/ci/failed/1?token=UPLOADTOKEN |
         And the program apk status will be flagged "pending"
           
     Scenario: Accept the compiled apk from jenkins

@@ -24,7 +24,8 @@ class JenkinsDispatcher
                 "SUFFIX" => "generated" . $id,
                 "DOWNLOAD" => $this->router->generate('download', array('id' => $id), true),
                 "UPLOAD" => $this->router->generate('ci_upload_apk', array('id' => $id, 'token' => $this->config['uploadtoken']), true),
-            );
+                "ONERROR" => $this->router->generate('ci_failed_apk', array('id' => $id, 'token' => $this->config['uploadtoken']), true),
+        );
         return $this->dispatch($params);
     }
     

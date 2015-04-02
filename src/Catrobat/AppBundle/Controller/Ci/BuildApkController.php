@@ -55,7 +55,7 @@ class BuildApkController extends Controller
         }
         else if ($request->files->count() != 1)
         {
-           throw new BadRequestHttpException();
+           throw new BadRequestHttpException("Wrong number of files: " + $request->files->count());
         }
         else
         {
@@ -66,7 +66,7 @@ class BuildApkController extends Controller
             $program->setApkStatus(Program::APK_READY);
             $this->get('programmanager')->save($program);
         }
-        return JsonResponse::create($config);
+        return JsonResponse::create(array("result" => "success"));
     }
     
     /**
