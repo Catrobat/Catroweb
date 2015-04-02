@@ -69,4 +69,23 @@ class BuildApkController extends Controller
         return JsonResponse::create($config);
     }
     
+    /**
+     * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, requirements={"id": "\d+"})
+     * @Method({"GET"})
+     */
+    public function failedApkAction(Request $request, Program $program)
+    {
+        $config = $this->container->getParameter("jenkins");
+        if ($request->query->get('token') !== $config['uploadtoken'])
+        {
+            throw new AccessDeniedException();
+        }
+        if ($program->getApkStatus() === Program::APK_PENDING)
+        {
+            $program->setApkStatus(Program::APK_NONE);
+            $this->get('programmanager')->save($program);
+            return JsonResponse::create(array("OK"));
+        }
+        return JsonResponse::create(array("error" => "program is not building"));
+    }
 }

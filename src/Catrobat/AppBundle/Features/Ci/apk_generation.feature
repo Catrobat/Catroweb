@@ -28,7 +28,18 @@ Feature:
     Scenario: Only build the apk once
         Given I have a program "My little program" with id "1"
         And the program apk status is flagged "pending"
-        And the jenkins job id is "Build-Program"
-        And the jenkins token is "SECRETTOKEN"
         When I start an apk generation of my program
         Then no build request will be sent to jenkins
+
+    Scenario: Reset flag if a build fails
+        Given I have a program "My little program" with id "1"
+        And the program apk status is flagged "pending"
+        When I report a build error
+        Then the program apk status will be flagged "none"
+      
+    Scenario: only reset flag if status is "pending"
+        Given I have a program "My little program" with id "1"
+        And the program apk status is flagged "ready"
+        When I report a build error
+        Then the program apk status will still be flagged "ready"
+      

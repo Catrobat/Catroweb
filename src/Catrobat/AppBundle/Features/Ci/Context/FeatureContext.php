@@ -144,7 +144,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^the program apk status will be flagged "([^"]*)"$/
+     * @Then /^the program apk status will.* be flagged "([^"]*)"$/
      */
     public function theProgramApkStatusWillBeFlagged($arg1)
     {
@@ -158,6 +158,9 @@ class FeatureContext extends BaseContext
                 break;
             case "ready":
                 assertEquals(Program::APK_READY, $program->getApkStatus());
+                break;
+            case "none":
+                assertEquals(Program::APK_NONE, $program->getApkStatus());
                 break;
             default:
                 throw new PendingException("Unknown state: " + $arg1);
@@ -184,8 +187,7 @@ class FeatureContext extends BaseContext
         $url = "/ci/upload/1?token=UPLOADTOKEN";
         $parameters = array(
         );
-        $this->client = $this->getClient();
-        $this->client->request('POST', $url, $parameters, $files);
+        $this->getClient()->request('POST', $url, $parameters, $files);
     }
 
     /**
@@ -212,6 +214,8 @@ class FeatureContext extends BaseContext
                 $apk_status = Program::APK_READY;
             else if ($programs[$i]['apk status'] === "pending")
                 $apk_status = Program::APK_PENDING;
+            else if ($programs[$i]['apk status'] === "none")
+                $apk_status = Program::APK_NONE;
             
             $config = array(
                 "name" => $programs[$i]['name'],
@@ -243,8 +247,7 @@ class FeatureContext extends BaseContext
         $router = $this->getSymfonyService('router');
         $url = $router->generate("ci_download", array("id" => $program->getId()));
         
-        $this->client = $this->getClient();
-        $this->client->request('GET', $url, array(), array());
+        $this->getClient()->request('GET', $url, array(), array());
     }
 
     /**
@@ -297,5 +300,15 @@ class FeatureContext extends BaseContext
         $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
         $parameters = $dispatcher->getLastParameters();
         assertNull($parameters);
+    }
+
+    /**
+     * @When /^I report a build error$/
+     */
+    public function iReportABuildError()
+    {
+        $url = "/ci/failed/1?token=UPLOADTOKEN";
+        $this->getClient()->request('GET', $url);
+        assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
     }
 }
