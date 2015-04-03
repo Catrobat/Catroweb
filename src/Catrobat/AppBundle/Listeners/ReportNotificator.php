@@ -26,13 +26,6 @@ class ReportNotificator
     $all_users = $notification_repo->findAll();
     $notification = $event->getReport();
     $program = $notification->getProject();
-    echo "A Project got reported!
-
-Note: ".$event->getNote()."
-Project Name:".$program->getName()."
-Project Description: ".$program->getDescription()."
-
-";
     foreach($all_users as $user)
     {
       /* @var $user \Catrobat\AppBundle\Entity\Notification */
