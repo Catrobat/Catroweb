@@ -410,6 +410,7 @@ class DefaultController extends Controller
 
     //todo resize image if width/height > self::MAX_AVATAR_SIZE
 
+    return $image_base64;
   }
 
 }

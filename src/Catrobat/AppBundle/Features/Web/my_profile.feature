@@ -23,7 +23,7 @@ Feature:
     And I press "save changes"
     Then I wait for the server response
     And I should see "saved!"
-    When I am on "/logout"
+    When I go to "/logout"
     And I try to log in as "Catrobat" with the password "123456"
     Then I should see "Your password or username was incorrect."
     When I log in as "Catrobat" with the password "abcdef"
@@ -115,4 +115,36 @@ Feature:
     Then I should see "saved!"
     And I reload the page
     Then "AT" must be selected in "country"
+
+  Scenario: uploading avatar should work
+    Given I attach the avatar "logo.png" to "file"
+    And I wait for the server response
+    Then the avatar img tag should have the "logo.png" data url
+    When I reload the page
+    Then the avatar img tag should have the "logo.png" data url
+
+#  Scenario: when chaning avatar, it should also appear in the header (desktop + mobile)
+
+  Scenario: only jpg, png or gif allowed for avatar
+    Given I attach the avatar "fail.tif" to "file"
+    And I wait for the server response
+    When I reload the page
+    Then the avatar img tag should not have the "fail.tif" data url
+
+  Scenario: max. 5MB for avatar image
+    Given I attach the avatar "galaxy_big.png" to "file"
+    Then I should see "Your chosen picture is too large, please do not use images larger than 5mb."
+
+  Scenario: deleting a program should work
+    Given I should see "program 1"
+    And I should see "program 2"
+    When I go to "/profileDeleteProgram/2"
+    Then I should not see "program 2"
+    And I should see "program 1"
+
+#  Scenario: deleting a program should work (with confirm message)
+
+  Scenario: deleting another user's program should not work
+    Given I go to "/profileDeleteProgram/3"
+    Then I should see "Ooooops something went wrong."
 
