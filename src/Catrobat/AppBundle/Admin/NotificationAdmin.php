@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class UploadNotificationAdmin extends Admin
+class NotificationAdmin extends Admin
 {
 
     protected $baseRouteName = 'admin_catrobat_adminbundle_uploadnotificationadmin';
@@ -20,14 +20,7 @@ class UploadNotificationAdmin extends Admin
     {
 
         $formMapper
-            ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User',
-                    'query_builder' => function (\Doctrine\ORM\EntityRepository $repository)
-                        {
-                            return $repository->createQueryBuilder('u')
-                                ->where('u.roles LIKE ?1')
-                                ->setParameter(1, '%ADMIN%');
-                        })
-            )
+            ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add("upload",null,array("label"=>"Email bei Upload","required"=>false))
             ->add("report",null,array("label"=>"Email bei Inappropriate Report","required"=>false))
             ->add("summary",null,array("label"=>"Emails täglich sammeln","required"=>false))

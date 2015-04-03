@@ -22,7 +22,7 @@ services:
         arguments: [null, Catrobat\AppBundle\Entity\ProgramInappropriateReport, null]
 
       catrowebadmin.block.tools.notify:
-        class: Catrobat\AppBundle\Admin\UploadNotificationAdmin
+        class: Catrobat\AppBundle\Admin\NotificationAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: Tools, label: Notifications }
         arguments: [null, Catrobat\AppBundle\Entity\Notification, null]
@@ -40,7 +40,7 @@ services:
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
 
       catrowebadmin.block.categoriesadmin:
-              class: Catrobat\AppBundle\Admin\CategoriesAdmin
-              tags:
-                - { name: sonata.admin, manager_type: orm, group: Programs, label: Categories }
-              arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]
+        class: Catrobat\AppBundle\Admin\CategoriesAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: Programs, label: Categories }
+        arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]

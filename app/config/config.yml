@@ -92,12 +92,11 @@ fos_user:
 sonata_block:
     default_contexts: [cms]
     blocks:
+        sonata.admin.block.stats:
+            contexts: [admin]
         sonata.admin.block.admin_list:
             contexts:  [admin]
         sonata.block.service.text:
-        catrowebadmin.block.programs.all:
-        catrowebadmin.block.programs.approve:
-        catrowebadmin.block.programs.reported:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
 
@@ -106,8 +105,46 @@ sonata_admin:
     title_logo: admin/admin_logo.png
     dashboard:
         blocks:
+          -
+              class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: catrowebadmin.block.programs.approve
+                  icon: fa-warning
+                  text: Programme unbestätigt
+                  color: bg-yellow
+          -
+              class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: catrowebadmin.block.programs.reported
+                  icon: fa-bullhorn
+                  text: Programme reportet
+                  color: bg-orange
+          -
+              class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: catrowebadmin.block.programs.all
+                  icon: fa-database
+                  text: Programme gesamt
+                  color: bg-blue
+          -
+              class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: sonata.user.admin.user
+                  icon: fa-users
+                  text: User
+                  color: bg-green
+
+
            # display a dashboard block
-           - { position: left, type: sonata.admin.block.admin_list }
+          - { position: center, type: sonata.admin.block.admin_list }
     security:
         handler: sonata.admin.security.handler.acl
         # acl security information

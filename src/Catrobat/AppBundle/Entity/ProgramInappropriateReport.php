@@ -31,7 +31,7 @@ class ProgramInappropriateReport
     /**
      * @var \Catrobat\AppBundle\Entity\User
      *
-     * @ORM\OneToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $reportingUser;
