@@ -24,7 +24,7 @@ services:
       catrowebadmin.block.programs.categories:
         class: Catrobat\AppBundle\Admin\CategoriesAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, label: Categories }
+          - { name: sonata.admin, manager_type: orm, label: Starter Programs }
         arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]
 
       catrowebadmin.block.tools.notify:
@@ -36,11 +36,11 @@ services:
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, label: Programs }
+          - { name: sonata.admin, manager_type: orm, label: Featured Programs }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
 
       catrowebadmin.block.featured.url:
         class: Catrobat\AppBundle\Admin\FeaturedUrlAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, label: Urls }
+          - { name: sonata.admin, manager_type: orm, label: Featured Urls }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]

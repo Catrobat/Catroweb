@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class AllProgramsAdmin extends Admin
 {
@@ -18,7 +19,6 @@ class AllProgramsAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
-            ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\StarterCategory', 'required' => false))
             ->add('approved', null, array('required' => false))
         ;
     }
@@ -58,11 +58,19 @@ class AllProgramsAdmin extends Admin
             ->add('description')
             ->add('views')
             ->add('downloads')
-            ->add('thumbnail')
-            ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\StarterCategory','editable' => true))
+            ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
             ->add('approved')
-            ->add('approved_by_user')
         ;
+    }
+
+  protected function configureRoutes(RouteCollection $collection)
+  {
+    $collection->remove('create');
+  }
+
+    public function getThumbnailImageUrl($object)
+    {
+      return "/".$this->getConfigurationPool()->getContainer()->get("screenshotrepository")->getThumbnailWebPath($object->getId());
     }
 }
 

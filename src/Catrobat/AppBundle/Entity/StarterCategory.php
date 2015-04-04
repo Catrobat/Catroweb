@@ -34,7 +34,7 @@ class StarterCategory
     protected $alias;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="order_pos")
      */
     protected $order;
 
@@ -68,6 +68,25 @@ class StarterCategory
   public function setPrograms($programs)
   {
     $this->programs = $programs;
+  }
+
+
+  /**
+   * @param mixed $programs
+   */
+  public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
+  {
+    $program->setCategory($this);
+    $this->programs->add($program);
+  }
+
+  /**
+   * @param mixed $programs
+   */
+  public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
+  {
+    $program->setCategory(null);
+    $this->programs->removeElement($program);
   }
 
   /**

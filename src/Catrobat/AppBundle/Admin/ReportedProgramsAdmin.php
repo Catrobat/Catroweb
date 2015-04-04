@@ -6,7 +6,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\Project;
+use Catrobat\AppBundle\Admin\AllProgramsAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class ReportedProgramsAdmin extends Admin
@@ -38,10 +40,12 @@ class ReportedProgramsAdmin extends Admin
   // Fields to be shown on filter forms
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
-//    $datagridMapper
-//        ->add('name')
-//        ->add('user')
-//    ;
+    $datagridMapper
+        ->add('reportingUser')
+        ->add('time')
+        ->add('state')
+        ->add('project.visible')
+    ;
   }
 
   // Fields to be shown on lists
@@ -54,10 +58,9 @@ class ReportedProgramsAdmin extends Admin
         ->add('time')
         ->add('note')
         ->add('reportingUser', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
-        ->add('project', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'))
-        ->add('project.approved', 'boolean', array('editable' => false))
+        ->add('project', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all','editable' => false))
         ->add('project.visible', 'boolean', array('editable' => true))
-        ->add('_action', 'actions', array('actions' => array('show' => array(),'edit' => array())))
+        ->add('_action', 'actions', array('actions' => array('show' => array())))
     ;
   }
 
@@ -80,7 +83,7 @@ class ReportedProgramsAdmin extends Admin
 
   protected function configureRoutes(RouteCollection $collection)
   {
-    $collection->remove('create')->remove('delete');
+    $collection->remove('create')->remove('delete')->remove('edit');
   }
 }
 

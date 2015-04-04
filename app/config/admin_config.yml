@@ -33,6 +33,8 @@ sonata_admin:
                     icon: fa-bullhorn
                     text: Programme gemeldet
                     color: bg-red
+                    filters:
+                        state: { type: 3, value: 1 } # 3 => NumberType::TYPE_EQUAL
             -
                 class:    col-lg-3 col-xs-6
                 position: top
@@ -58,14 +60,22 @@ sonata_admin:
 
         groups:
             sonata.admin.group.programs:
-                label:           Programme
+                label:           Programs
                 label_catalogue: CatrobatAppBundle
                 icon:            '<i class="fa fa-cubes"></i>'
                 items:
                     - catrowebadmin.block.programs.all
-                    - catrowebadmin.block.programs.categories
                     - catrowebadmin.block.programs.approve
                     - catrowebadmin.block.programs.reported
+
+            sonata.admin.group.featured:
+                label:           Special Programs
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-bullhorn"></i>'
+                items:
+                    - catrowebadmin.block.programs.categories
+                    - catrowebadmin.block.featured.program
+                    - catrowebadmin.block.featured.url
 
             sonata.admin.group.tools:
                 label:           Tools
@@ -73,14 +83,6 @@ sonata_admin:
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - catrowebadmin.block.tools.notify
-
-            sonata.admin.group.featured:
-                label:           Featured
-                label_catalogue: CatrobatAppBundle
-                icon:            '<i class="fa fa-bullhorn"></i>'
-                items:
-                    - catrowebadmin.block.featured.program
-                    - catrowebadmin.block.featured.url
 
             sonata.admin.group.users:
                 label:           Users
