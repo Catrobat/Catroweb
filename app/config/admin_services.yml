@@ -6,41 +6,41 @@ services:
       catrowebadmin.block.programs.all:
         class: Catrobat\AppBundle\Admin\AllProgramsAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Programs, label: All Programs }
+          - { name: sonata.admin, manager_type: orm, label: All Programs }
         arguments: [null, Catrobat\AppBundle\Entity\Program, null]
 
       catrowebadmin.block.programs.approve:
         class: Catrobat\AppBundle\Admin\ApproveProgramsAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Programs, label: Approve Programs }
+          - { name: sonata.admin, manager_type: orm, label: Approve Programs }
         arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\ApproveProgram]
 
       catrowebadmin.block.programs.reported:
         class: Catrobat\AppBundle\Admin\ReportedProgramsAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Programs, label: Reported Programs }
+          - { name: sonata.admin, manager_type: orm, label: Reported Programs }
         arguments: [null, Catrobat\AppBundle\Entity\ProgramInappropriateReport, null]
+
+      catrowebadmin.block.programs.categories:
+        class: Catrobat\AppBundle\Admin\CategoriesAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Categories }
+        arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]
 
       catrowebadmin.block.tools.notify:
         class: Catrobat\AppBundle\Admin\NotificationAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Tools, label: Notifications }
+          - { name: sonata.admin, manager_type: orm, label: Notifications }
         arguments: [null, Catrobat\AppBundle\Entity\Notification, null]
 
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Featured, label: Programs }
+          - { name: sonata.admin, manager_type: orm, label: Programs }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
 
       catrowebadmin.block.featured.url:
         class: Catrobat\AppBundle\Admin\FeaturedUrlAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: Featured, label: Urls }
+          - { name: sonata.admin, manager_type: orm, label: Urls }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
-
-      catrowebadmin.block.categoriesadmin:
-        class: Catrobat\AppBundle\Admin\CategoriesAdmin
-        tags:
-          - { name: sonata.admin, manager_type: orm, group: Programs, label: Categories }
-        arguments: [null, Catrobat\AppBundle\Entity\StarterCategory, null]
