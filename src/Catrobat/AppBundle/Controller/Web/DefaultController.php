@@ -410,6 +410,37 @@ class DefaultController extends Controller
 
     //todo resize image if width/height > self::MAX_AVATAR_SIZE
 
+    if(max($width, $height) > self::MAX_AVATAR_SIZE) {
+      if($width > $height) {
+        $newHeight = round(self::MAX_AVATAR_SIZE / $width) * $height;
+        $newWidth = self::MAX_AVATAR_SIZE;
+      }
+      else {
+        $newWidth = round(self::MAX_AVATAR_SIZE / $height) * $width;
+        $newHeight = self::MAX_AVATAR_SIZE;
+      }
+
+      $new_image = imagecreatetruecolor(self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE);
+      if(!$new_image)
+        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+
+      imagesavealpha($new_image, true);
+      imagefill($new_image, 0, 0, imagecolorallocatealpha($new_image, 0, 0, 0, 127));
+
+      if(!imagecopyresized($new_image, $image, 0, 0, 0, 0, self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE, $width, $height)) {
+        imagedestroy($new_image);
+        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+      }
+
+      ob_start();
+      if(!imagepng($new_image)) {
+        imagedestroy($new_image);
+        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+      }
+
+      $image_base64 = "data:image/png;base64," . base64_encode(ob_get_clean());
+    }
+
     return $image_base64;
   }
 
