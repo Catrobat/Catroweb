@@ -42,9 +42,17 @@
       </div>
       <div class="margin-spacer"></div>
       {% if app.user %}
-      <div class="btn btn-menu show-nav-dropdown">
-        <div class="img-avatar"></div>
-      </div>
+        {% if app.user.avatar is not empty %}
+          <div id="custom-avatar" class="btn btn-menu show-nav-dropdown">
+            <div style="background-image:url({{ app.user.avatar }});">
+              <div class="img-dropdownArrow-mobile"></div>
+            </div>
+          </div>
+        {% else %}
+          <div class="btn btn-menu show-nav-dropdown">
+            <div class="img-avatar"></div>
+          </div>
+        {% endif %}
       {% else %}
       <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}" id="btn-login">
         <div class="btn btn-menu">

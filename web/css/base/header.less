@@ -127,6 +127,26 @@ header {
       }
     }
 
+    #custom-avatar {
+      border: 2px solid #FFF;
+      border-radius: 2px;
+      padding: 0 !important;
+
+      > div {
+        background-size:cover !important;
+        background-position:center;
+        outline: 1px solid #FFF;
+        width: @avatar-img-size + 14;
+        height: @avatar-img-size + 14;
+
+        > .img-dropdownArrow-mobile {
+          position: relative;
+          left: 31px;
+          top: 31px;
+        }
+      }
+    }
+
     @media (max-width: @responsive-width-tablet) {
       #menu {
         display: none;

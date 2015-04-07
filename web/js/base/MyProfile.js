@@ -218,8 +218,9 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
 
           switch (parseInt(data.statusCode)) {
             case 200:
-              $('#profile-avatar').find('img').attr('src', self.filename);
-              $('.img-avatar').css('background-image', 'url('+self.filename+')');
+              $('#profile-avatar').find('img').attr('src', data.image_base64);
+              $('#custom-avatar').find('div').first().css('background-image', 'url('+data.image_base64+')');
+              $('.img-avatar').css('background-image', 'url('+data.image_base64+')');
               break;
 
             case 502:

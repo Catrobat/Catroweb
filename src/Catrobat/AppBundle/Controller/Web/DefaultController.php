@@ -268,7 +268,10 @@ class DefaultController extends Controller
     $user->setAvatar($image_base64);
     $this->get("usermanager")->updateUser($user);
 
-    return JsonResponse::create(array('statusCode' => StatusCode::OK));
+    return JsonResponse::create(array(
+      'statusCode' => StatusCode::OK,
+      'image_base64' => $image_base64
+    ));
   }
 
   /**
@@ -364,8 +367,9 @@ class DefaultController extends Controller
   }
 
   /**
-   * @param $image_base64
+   * @param string $image_base64
    * @throws \Exception
+   * @return string
    */
   private function checkAndResizeBase64Image($image_base64)
   {
@@ -408,18 +412,7 @@ class DefaultController extends Controller
     if($width == 0 || $height == 0)
       throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
 
-    //todo resize image if width/height > self::MAX_AVATAR_SIZE
-
     if(max($width, $height) > self::MAX_AVATAR_SIZE) {
-      if($width > $height) {
-        $newHeight = round(self::MAX_AVATAR_SIZE / $width) * $height;
-        $newWidth = self::MAX_AVATAR_SIZE;
-      }
-      else {
-        $newWidth = round(self::MAX_AVATAR_SIZE / $height) * $width;
-        $newHeight = self::MAX_AVATAR_SIZE;
-      }
-
       $new_image = imagecreatetruecolor(self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE);
       if(!$new_image)
         throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
