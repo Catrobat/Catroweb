@@ -227,6 +227,10 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
               avatarContainer.find('.text-avatar-toolarge').show();
               break;
 
+            case 516:
+              avatarContainer.find('.text-avatar-noSupport').show();
+              break;
+
             default:
               avatarContainer.find('.text-avatar-uploadError').show();
           }

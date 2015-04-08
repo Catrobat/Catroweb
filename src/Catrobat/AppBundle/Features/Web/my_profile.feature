@@ -125,6 +125,7 @@ Feature:
 
 #  Scenario: when chaning avatar, it should also appear in the header (desktop + mobile)
 
+  #todo: try not to reload the page, but check if the text "This image type is not supported, ..." is visible
   Scenario: only jpg, png or gif allowed for avatar
     Given I attach the avatar "fail.tif" to "file"
     And I wait for the server response
