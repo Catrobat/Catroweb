@@ -285,6 +285,9 @@ class FeatureContext extends BaseContext
                 break;
             case "ready":
                 $program->setApkStatus(Program::APK_READY);
+                /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+                $apkrepository = $this->getSymfonyService("apkrepository");
+                $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . "/test.catrobat")), $program->getId());
                 break;
             default:
                 $program->setApkStatus(Program::APK_NONE);
@@ -310,5 +313,31 @@ class FeatureContext extends BaseContext
         $url = "/ci/failed/1?token=UPLOADTOKEN";
         $this->getClient()->request('GET', $url);
         assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @When /^I update this program$/
+     */
+    public function iUpdateThisProgram()
+    {
+        $pm = $this->getProgramManger();
+        $program = $pm->find(1);
+        if ($program === null)
+        {
+            throw new PendingException("last program not found");
+        }
+        $file = $this->generateProgramFileWith(array("name" => $program->getName()));
+        $this->upload($file, null);
+    }
+
+    /**
+     * @Then /^the apk file will be deleted$/
+     */
+    public function theApkFileWillBeDeleted()
+    {
+        $directory = $this->getSymfonyParameter("catrobat.apk.dir");
+        $finder = new Finder();
+        $finder->in($directory)->depth(0);
+        assertEquals(0, $finder->count());
     }
 }

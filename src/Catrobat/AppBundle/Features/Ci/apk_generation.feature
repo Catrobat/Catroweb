@@ -44,3 +44,11 @@ Feature:
         When I report a build error
         Then the program apk status will still be flagged "ready"
       
+    Scenario: reset apk status after an update
+        Given I have a program "My little program" with id "1"
+        And the program apk status is flagged "ready"
+        When I update this program
+        Then the program apk status will still be flagged "none"
+        And the apk file will be deleted
+        
+        

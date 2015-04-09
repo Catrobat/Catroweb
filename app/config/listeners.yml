@@ -52,8 +52,13 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
             
+      catroweb.apk.cleanup:
+            class: Catrobat\AppBundle\Listeners\ApkCleanupListener
+            arguments: ["@apkrepository"]
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
+            
 # ======== Notifications =======
-
 
       catrobat.core.services.uploadnotificator:
               class:        Catrobat\AppBundle\Listeners\UploadNotificator
