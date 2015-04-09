@@ -340,4 +340,22 @@ class FeatureContext extends BaseContext
         $finder->in($directory)->depth(0);
         assertEquals(0, $finder->count());
     }
+
+    /**
+     * @When /^I GET "([^"]*)"$/
+     */
+    public function iGet($uri)
+    {
+        $this->getClient()->request("GET", $uri);
+    }
+
+    /**
+     * @Then /^will get the following JSON:$/
+     */
+    public function willGetTheFollowingJson(PyStringNode $string)
+    {
+        $response = $this->getClient()->getResponse();
+        assertEquals(200, $response->getStatusCode());
+        assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent());
+    }
 }
