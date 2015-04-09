@@ -25,21 +25,22 @@ class BuildApkController extends Controller
         {
             throw $this->createNotFoundException();
         }
-        if ($program->getApkStatus() !== Program::APK_NONE)
+        if ($program->getApkStatus() === Program::APK_READY)
         {
-            return JsonResponse::create(array("error" => "already built"));
+            return JsonResponse::create(array("status" => "ready"));
+        }
+        else if ($program->getApkStatus() === Program::APK_PENDING)
+        {
+            return JsonResponse::create(array("status" => "pending"));
         }
         
-        $config = $this->container->getParameter("jenkins");
-        
         $dispatcher = $this->get("ci.jenkins.dispatcher");
-        $call = $dispatcher->sendBuildRequest($program->getId());
+        $dispatcher->sendBuildRequest($program->getId());
         
         $program->setApkStatus(Program::APK_PENDING);
         $this->get("programmanager")->save($program);
         
-        $config['call'] = $call;
-        return JsonResponse::create($config);
+        return JsonResponse::create(array("status" => "pending"));
     }
     
     /**

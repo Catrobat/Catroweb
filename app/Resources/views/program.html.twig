@@ -111,6 +111,7 @@
 
 
 {% block js %}
+  <script src="{{ asset('js/custom/Program.js') }}"></script>
   <script>
     $("#reportAsInappropriateDialog").toggle(false);
     $("#reportAsInappropriateAnswer").toggle(false);
@@ -200,5 +201,7 @@
       }
     }
 
+    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}');
+    program.getApkStatus();
   </script>
 {% endblock %}
