@@ -1,7 +1,9 @@
 <?php
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Model\ProgramManager;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
+use Catrobat\AppBundle\Services\ExtractedFileRepository;
 use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -108,15 +110,14 @@ class ApproveProgramsAdmin extends Admin
     public function getContainingImageUrls($object)
     {
 
-      /* @var $fileEctractor CatrobatFileExtractor */
-      /* @var $fileRepo ProgramFileRepository */
+      /* @var $extractedFileRepository ExtractedFileRepository */
+      /* @var $progManager ProgramManager */
 
       if($this->extractedProgram == null)
       {
-        $fileExctractor = $this->getConfigurationPool()->getContainer()->get("fileextractor");
-        $fileRepo = $this->getConfigurationPool()->getContainer()->get("filerepository");
-        $this->extractedProgram = $fileExctractor->extract($fileRepo->getProgramFile($object->getId()));
-        //TODO: Cleanup, directory will never get used again
+        $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get("extractedfilerepository");
+        $progManager = $this->getConfigurationPool()->getContainer()->get("programmanager");
+        $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
       }
 
       return $this->extractedProgram->getContainingImagePaths();
@@ -125,16 +126,14 @@ class ApproveProgramsAdmin extends Admin
 
   public function getContainingSoundUrls($object)
   {
-
-    /* @var $fileEctractor CatrobatFileExtractor */
-    /* @var $fileRepo ProgramFileRepository */
+    /* @var $extractedFileRepository ExtractedFileRepository */
+    /* @var $progManager ProgramManager */
 
     if($this->extractedProgram == null)
     {
-      $fileExctractor = $this->getConfigurationPool()->getContainer()->get("fileextractor");
-      $fileRepo = $this->getConfigurationPool()->getContainer()->get("filerepository");
-      $this->extractedProgram = $fileExctractor->extract($fileRepo->getProgramFile($object->getId()));
-      //TODO: Cleanup, directory will never get used again
+      $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get("extractedfilerepository");
+      $progManager = $this->getConfigurationPool()->getContainer()->get("programmanager");
+      $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
     return $this->extractedProgram->getContainingSoundPaths();

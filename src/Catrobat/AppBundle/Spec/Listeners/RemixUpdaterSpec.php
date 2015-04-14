@@ -35,7 +35,7 @@ class RemixUpdaterSpec extends ObjectBehavior
   {
     $expected_url = "http://pocketcode.org/details/1337";
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
-    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/");
+    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/","/webpath","hash");
     $program_entity->getId()->willReturn(1337);
 
     expect($xml->header->url)->notToBeLike($expected_url);
@@ -54,7 +54,7 @@ class RemixUpdaterSpec extends ObjectBehavior
     $xml->header->remixOf = "";
     $xml->asXML(__SPEC_CACHE_DIR__."/base/code.xml");
 
-    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/");
+    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/","/webpath","hash");
     $program_entity->getId()->willReturn(1338);
 
     $this->update($file,$program_entity);
@@ -77,7 +77,7 @@ class RemixUpdaterSpec extends ObjectBehavior
     $xml->header->remixOf = "";
     $xml->asXML(__SPEC_CACHE_DIR__."/base/code.xml");
 
-    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/");
+    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/","/webpath","hash");
     $program_entity->getId()->willReturn(1338);
 
     $this->update($file,$program_entity);

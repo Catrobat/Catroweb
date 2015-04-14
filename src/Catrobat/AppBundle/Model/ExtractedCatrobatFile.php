@@ -8,11 +8,13 @@ class ExtractedCatrobatFile
 {
   protected $path;
   protected $web_path;
+  protected $dir_hash;
   protected $program_xml_properties;
 
-  public function __construct($base_dir, $base_path)
+  public function __construct($base_dir, $base_path, $dir_hash)
   {
     $this->path = $base_dir;
+    $this->dir_hash = $dir_hash;
     $this->web_path = $base_path;
     
     if (!file_exists($base_dir . "code.xml"))
@@ -40,6 +42,11 @@ class ExtractedCatrobatFile
   public function getDescription()
   {
     return (string)$this->program_xml_properties->header->description;
+  }
+
+  public function getDirHash()
+  {
+    return $this->dir_hash;
   }
 
   public function getContainingImagePaths()

@@ -21,7 +21,7 @@ class LicenseUpdaterSpec extends ObjectBehavior
     $filesystem->mirror(__SPEC_GENERATED_FIXTURES_DIR__."/base/", __SPEC_CACHE_DIR__."/base/" );
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
     expect($xml->header->mediaLicense)->toBeLike("");
-    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/");
+    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/","/webpath","hash");
     $this->update($file);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
     expect($xml->header->mediaLicense)->toBeLike("http://developer.catrobat.org/ccbysa_v4");
@@ -33,7 +33,7 @@ class LicenseUpdaterSpec extends ObjectBehavior
     $filesystem->mirror(__SPEC_GENERATED_FIXTURES_DIR__."/base/", __SPEC_CACHE_DIR__."/base/" );
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
     expect($xml->header->programLicense)->toBeLike("");
-    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/");
+    $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/","/webpath","hash");
     $this->update($file);
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
     expect($xml->header->programLicense)->toBeLike("http://developer.catrobat.org/agpl_v3");

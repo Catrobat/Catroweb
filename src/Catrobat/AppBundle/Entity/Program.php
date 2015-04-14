@@ -41,7 +41,7 @@ class Program
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
    */
   protected $user;
-  
+
   /**
    * @ORM\Column(type="integer")
    */
@@ -51,77 +51,67 @@ class Program
    * @ORM\Column(type="integer")
    */
   protected $downloads = 0;
-  
+
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", nullable=true)
    */
-  protected $filename;
-  
-  /**
-   * @ORM\Column(type="string")
-   */
-  protected $thumbnail;
-  
-  /**
-   * @ORM\Column(type="string")
-   */
-  protected $screenshot;
-  
+  protected $directory_hash;
+
   /**
    * @ORM\Column(type="datetime")
    */
   protected $uploaded_at;
-  
+
   /**
    * @ORM\Column(type="datetime")
    */
   protected $last_modified_at;
-  
+
   /**
    * @ORM\Column(type="string", options={"default":0})
    */
   protected $language_version = 0;
-  
+
   /**
    * @ORM\Column(type="string", options={"default":""})
    */
   protected $catrobat_version_name;
-  
+
   /**
    * @ORM\Column(type="integer", options={"default":0})
    */
   protected $catrobat_version;
-  
+
   /**
    * @ORM\Column(type="string", options={"default":""})
    */
   protected $upload_ip;
-  
+
   /**
    * @ORM\Column(type="boolean", options={"default":true})
    */
   protected $visible;
-  
+
   /**
    * @ORM\Column(type="string", options={"default":"pocketcode"})
    */
   protected $flavor = "pocketcode";
-  
+
   /**
    * @ORM\Column(type="string", options={"default":""})
    */
   protected $upload_language;
-  
+
   /**
    * @ORM\Column(type="integer", options={"default":0})
    */
   protected $filesize;
-  
+
   /**
    * @ORM\Column(type="integer", options={"default":0})
    */
   protected $remix_count;
-  
+
   /**
    * @ORM\ManyToOne(targetEntity="Program")
    * @ORM\JoinColumn(name="remix_id", referencedColumnName="id")
@@ -161,7 +151,7 @@ class Program
     {
         return $this->approved_by_user;
     }
-  
+
   /**
    * @ORM\PreUpdate
    */
@@ -190,7 +180,7 @@ class Program
   {
     $this->version = 1;
   }
-  
+
   /**
    * Get id
    *
@@ -200,20 +190,20 @@ class Program
   {
     return $this->id;
   }
-  
+
   /**
    * Set name
    *
-   * @param string $name          
+   * @param string $name
    * @return Program
    */
   public function setName($name)
   {
     $this->name = $name;
-    
+
     return $this;
   }
-  
+
   /**
    * Get name
    *
@@ -223,20 +213,20 @@ class Program
   {
     return $this->name;
   }
-  
+
   /**
    * Set description
    *
-   * @param string $description          
+   * @param string $description
    * @return Program
    */
   public function setDescription($description)
   {
     $this->description = $description;
-    
+
     return $this;
   }
-  
+
   /**
    * Get description
    *
@@ -269,7 +259,7 @@ class Program
   {
     return $this->views;
   }
-  
+
   /**
    * Set version
    *
@@ -279,7 +269,7 @@ class Program
   public function setVersion($version)
   {
     $this->version = $version;
-    
+
     return $this;
   }
 
@@ -295,7 +285,7 @@ class Program
 
     return $this;
   }
-  
+
   /**
    * Get Version
    *
@@ -305,20 +295,20 @@ class Program
   {
     return $this->version;
   }
-  
+
   /**
    * Set downloads
    *
-   * @param integer $downloads          
+   * @param integer $downloads
    * @return Program
    */
   public function setDownloads($downloads)
   {
     $this->downloads = $downloads;
-    
+
     return $this;
   }
-  
+
   /**
    * Get downloads
    *
@@ -328,89 +318,20 @@ class Program
   {
     return $this->downloads;
   }
-  
-  /**
-   * Set filename
-   *
-   * @param string $filename          
-   * @return Program
-   */
-  public function setFilename($filename)
-  {
-    $this->filename = $filename;
-    
-    return $this;
-  }
-  
-  /**
-   * Get filename
-   *
-   * @return string
-   */
-  public function getFilename()
-  {
-    return $this->filename;
-  }
-  
-  /**
-   * Set thumbnail
-   *
-   * @param string $thumbnail          
-   * @return Program
-   */
-  public function setThumbnail($thumbnail)
-  {
-    $this->thumbnail = $thumbnail;
-    
-    return $this;
-  }
-  
-  /**
-   * Get thumbnail
-   *
-   * @return string
-   */
-  public function getThumbnail()
-  {
-    return $this->thumbnail;
-  }
-  
-  /**
-   * Set screenshot
-   *
-   * @param string $screenshot          
-   * @return Program
-   */
-  public function setScreenshot($screenshot)
-  {
-    $this->screenshot = $screenshot;
-    
-    return $this;
-  }
-  
-  /**
-   * Get screenshot
-   *
-   * @return string
-   */
-  public function getScreenshot()
-  {
-    return $this->screenshot;
-  }
-  
+
   /**
    * Set uploaded_at
    *
-   * @param \DateTime $uploadedAt          
+   * @param \DateTime $uploadedAt
    * @return Program
    */
   public function setUploadedAt($uploadedAt)
   {
     $this->uploaded_at = $uploadedAt;
-    
+
     return $this;
   }
-  
+
   /**
    * Get uploaded_at
    *
@@ -420,20 +341,20 @@ class Program
   {
     return $this->uploaded_at;
   }
-  
+
   /**
    * Set last_modified_at
    *
-   * @param \DateTime $lastModifiedAt          
+   * @param \DateTime $lastModifiedAt
    * @return Program
    */
   public function setLastModifiedAt($lastModifiedAt)
   {
     $this->last_modified_at = $lastModifiedAt;
-    
+
     return $this;
   }
-  
+
   /**
    * Get last_modified_at
    *
@@ -453,21 +374,21 @@ class Program
     public function setUser(\Catrobat\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \Catrobat\AppBundle\Entity\User 
+     * @return \Catrobat\AppBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
     }
-    
-    
+
+
     public function __toString()
     {
       return $this->name;
@@ -482,14 +403,14 @@ class Program
     public function setLanguageVersion($languageVersion)
     {
         $this->language_version = $languageVersion;
-    
+
         return $this;
     }
 
     /**
      * Get language_version
      *
-     * @return string 
+     * @return string
      */
     public function getLanguageVersion()
     {
@@ -505,14 +426,14 @@ class Program
     public function setCatrobatVersionName($catrobatVersionName)
     {
         $this->catrobat_version_name = $catrobatVersionName;
-    
+
         return $this;
     }
 
     /**
      * Get catrobat_version_name
      *
-     * @return string 
+     * @return string
      */
     public function getCatrobatVersionName()
     {
@@ -528,14 +449,14 @@ class Program
     public function setCatrobatVersion($catrobatVersion)
     {
         $this->catrobat_version = $catrobatVersion;
-    
+
         return $this;
     }
 
     /**
      * Get catrobat_version
      *
-     * @return integer 
+     * @return integer
      */
     public function getCatrobatVersion()
     {
@@ -551,14 +472,14 @@ class Program
     public function setUploadIp($uploadIp)
     {
         $this->upload_ip = $uploadIp;
-    
+
         return $this;
     }
 
     /**
      * Get upload_ip
      *
-     * @return string 
+     * @return string
      */
     public function getUploadIp()
     {
@@ -574,7 +495,7 @@ class Program
     public function setVisible($visible)
     {
         $this->visible = $visible;
-    
+
         return $this;
     }
 
@@ -597,14 +518,14 @@ class Program
     public function setUploadLanguage($uploadLanguage)
     {
         $this->upload_language = $uploadLanguage;
-    
+
         return $this;
     }
 
     /**
      * Get upload_language
      *
-     * @return string 
+     * @return string
      */
     public function getUploadLanguage()
     {
@@ -620,14 +541,14 @@ class Program
     public function setFilesize($filesize)
     {
         $this->filesize = $filesize;
-    
+
         return $this;
     }
 
     /**
      * Get filesize
      *
-     * @return integer 
+     * @return integer
      */
     public function getFilesize()
     {
@@ -643,14 +564,14 @@ class Program
     public function setRemixCount($remixCount)
     {
         $this->remix_count = $remixCount;
-    
+
         return $this;
     }
 
     /**
      * Get remix_count
      *
-     * @return integer 
+     * @return integer
      */
     public function getRemixCount()
     {
@@ -666,14 +587,14 @@ class Program
     public function setRemixOf(\Catrobat\AppBundle\Entity\Program $remixOf = null)
     {
         $this->remix_of = $remixOf;
-    
+
         return $this;
     }
 
     /**
      * Get remix_of
      *
-     * @return \Catrobat\AppBundle\Entity\Program 
+     * @return \Catrobat\AppBundle\Entity\Program
      */
     public function getRemixOf()
     {
@@ -699,12 +620,12 @@ class Program
     {
         return $this->approved;
     }
-    
+
     public function isVisible()
     {
       return $this->visible;
     }
-    
+
     public function setId($id)
     {
         $this->id = $id;
@@ -740,6 +661,22 @@ class Program
   public function setCategory($category)
   {
     $this->category = $category;
+  }
+
+  /**
+   * @param mixed $directory_hash
+   */
+  public function setExtractedDirectoryHash($directory_hash)
+  {
+    $this->directory_hash = $directory_hash;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getExtractedDirectoryHash()
+  {
+    return $this->directory_hash;
   }
  
 }

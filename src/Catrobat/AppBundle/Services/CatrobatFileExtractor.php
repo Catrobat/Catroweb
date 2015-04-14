@@ -43,7 +43,7 @@ class CatrobatFileExtractor
       throw new InvalidCatrobatFileException("Error extracting catrobat file",StatusCode::INVALID_FILE);
     }
     
-    return new ExtractedCatrobatFile($full_extract_dir,$full_extract_path);
+    return new ExtractedCatrobatFile($full_extract_dir,$full_extract_path,$temp_path);
   }
   
 }

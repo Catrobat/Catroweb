@@ -12,7 +12,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
 
   function let()
   {
-    $this->beConstructedWith(__SPEC_CACHE_DIR__);
+    $this->beConstructedWith(__SPEC_CACHE_DIR__,"/webpath");
   }
 
   function it_is_initializable()
@@ -23,7 +23,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
   function it_throws_an_exception_if_given_an_valid_extraction_directory()
   {
     $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException')->during('__construct', array (
-        __DIR__ . "/invalid_directory/" 
+        __DIR__ . "/invalid_directory/" ,"/webpath","hash"
     ));
   }
 

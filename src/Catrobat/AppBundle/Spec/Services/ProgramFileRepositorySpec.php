@@ -49,7 +49,7 @@ class ProgramFileRepositorySpec extends ObjectBehavior
 
   function it_saves_a_given_program_directory()
   {
-    $extracted_program = new ExtractedCatrobatFile(__SPEC_GENERATED_FIXTURES_DIR__."/base/");
+    $extracted_program = new ExtractedCatrobatFile(__SPEC_GENERATED_FIXTURES_DIR__."/base/","/webpath","hash");
     $id = "test";
 
     $this->saveProgram($extracted_program,$id);

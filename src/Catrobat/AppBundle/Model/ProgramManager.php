@@ -71,9 +71,6 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     }
     $program->setName($extracted_file->getName());
     $program->setDescription($extracted_file->getDescription());
-    $program->setFilename($file->getFilename());
-    $program->setThumbnail("");
-    $program->setScreenshot("");
     $program->setUser($request->getUser());
     $program->setCatrobatVersion(1);
     $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
@@ -174,13 +171,17 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
   public function increaseViews(Program $program)
   {
     $program->setViews($program->getViews() + 1);
-    $this->entity_manager->persist($program);
-    $this->entity_manager->flush();
+    $this->save($program);
   }
 
   public function increaseDownloads(Program $program)
   {
     $program->setDownloads($program->getDownloads() + 1);
+    $this->save($program);
+  }
+
+  public function save(Program $program)
+  {
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
   }

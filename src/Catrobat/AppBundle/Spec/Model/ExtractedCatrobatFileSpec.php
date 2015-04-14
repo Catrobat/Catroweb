@@ -9,7 +9,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
 {
   function let()
   {
-    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."base/");
+    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."base/","/webpath","hash");
   }
   
   function it_is_initializable()
@@ -54,24 +54,24 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
   
   function it_returns_the_path_of_the_manual_screenshot()
   {
-    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."program_with_manual_screenshot/");
+    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."program_with_manual_screenshot/","/webpath","hash");
     $this->getScreenshotPath()->shouldReturn(__SPEC_GENERATED_FIXTURES_DIR__."program_with_manual_screenshot/manual_screenshot.png");
   }
   
   function it_returns_the_path_of_the_screenshot()
   {
-    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."program_with_screenshot/");
+    $this->beConstructedWith(__SPEC_GENERATED_FIXTURES_DIR__."program_with_screenshot/","/webpath","hash");
     $this->getScreenshotPath()->shouldReturn(__SPEC_GENERATED_FIXTURES_DIR__."program_with_screenshot/screenshot.png");
   }
   
   function it_throws_an_exception_when_code_xml_is_missing()
   {
-    $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_missing_code_xml/"));
+    $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_missing_code_xml/","/webpath","hash"));
   }
 
   function it_throws_an_exception_when_code_xml_is_invalid()
   {
-    $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_invalid_code_xml/")); 
+    $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__ . "program_with_invalid_code_xml/","/webpath","hash"));
   }
   
 }

@@ -231,9 +231,6 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     $program->setUser($user);
     $program->setName($config['name'] ?: "Generated program");
     $program->setDescription(isset($config['description']) ? $config['description'] : "Generated");
-    $program->setFilename("file.catrobat");
-    $program->setThumbnail("thumb.png");
-    $program->setScreenshot("screenshot.png");
     $program->setViews(isset($config['views']) ? $config['views'] : 1);
     $program->setDownloads(isset($config['downloads']) ? $config['downloads'] : 1);
     $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : new \DateTime());

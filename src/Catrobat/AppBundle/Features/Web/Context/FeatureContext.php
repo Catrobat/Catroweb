@@ -328,9 +328,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program->setUser($user);
       $program->setName($programs[$i]['name']);
       $program->setDescription($programs[$i]['description']);
-      $program->setFilename("file" . $i . ".catrobat");
-      $program->setThumbnail("thumb.png");
-      $program->setScreenshot("screenshot.png");
       $program->setViews($programs[$i]['views']);
       $program->setDownloads($programs[$i]['downloads']);
       $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
