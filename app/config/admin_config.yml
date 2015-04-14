@@ -92,6 +92,13 @@ sonata_admin:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
 
+            sonata.admin.group.apk:
+                label:           Apk Generation
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-android"></i>'
+                items:
+                    - catrowebadmin.block.apk.pending
+
     security:
         handler: sonata.admin.security.handler.acl
         # acl security information

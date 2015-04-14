@@ -44,3 +44,10 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, label: Featured Urls }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
+        
+      catrowebadmin.block.apk.pending:
+        class: Catrobat\AppBundle\Admin\PendingApkRequestsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Pending }
+        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
+      
