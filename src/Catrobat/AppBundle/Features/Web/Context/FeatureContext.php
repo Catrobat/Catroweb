@@ -347,24 +347,19 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @When /^I click the "([^"]*)" button$/
+   * @When /^I click "([^"]*)"$/
    */
-  public function iClickTheButton($arg1)
+  public function iClick($arg1)
   {
     $arg1 = trim($arg1);
-    $page = $this->getSession()->getPage();
-    $button = null;
 
-    switch($arg1) {
-      case "login":
-        $button = $page->find("css", "#btn-login");
-        break;
-      default:
-        assertTrue(false);
-    }
+    $this->assertSession()->elementExists("css", $arg1);
 
-    $button->click();
-
+    $this
+      ->getSession()
+      ->getPage()
+      ->find("css", $arg1)
+      ->click();
   }
 
   /**

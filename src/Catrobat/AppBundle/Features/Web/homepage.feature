@@ -25,7 +25,7 @@ Feature: Pocketcode homepage
   Scenario: Login and logout
     Given I am on homepage
     Then I should see an "#btn-login" element
-    When I click the "login" button
+    When I click "#btn-login"
     Then I should be on "/pocketcode/login"
     And I should see an "#header-logo" element
     And I fill in "username" with "Catrobat"
