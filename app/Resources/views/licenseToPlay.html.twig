@@ -1,5 +1,11 @@
 {% extends ':Default:base.html.twig' %}
 
+{% block head %}
+  {% stylesheets 'css/custom/licensetoplay.less' filter='cssrewrite,lessphp' output='compiled/licensetoplay.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
   <h1>{{ "licenseToPlay.title"|trans({}, "catroweb") }}</h1>
   <div class="standard-col-text size-large">

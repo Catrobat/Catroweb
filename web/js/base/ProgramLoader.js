@@ -1,7 +1,6 @@
 var ProgramLoader = function (container, url, column_max) {
   var self = this;
   self.container = container;
-  self.container_elem = $(container);
   self.url = url;
   self.default_rows = 2;
   self.columns_min = 3; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
@@ -15,7 +14,7 @@ var ProgramLoader = function (container, url, column_max) {
   self.init = function() {
     $.get(self.url, { limit: self.download_limit, offset: self.loaded}, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
-        $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
+        $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>'); //todo: translate
         return;
       }
       self.setup(data);
@@ -26,7 +25,7 @@ var ProgramLoader = function (container, url, column_max) {
     self.showAllPrograms = true;
     $.get(self.url, { limit: self.download_limit, offset: self.loaded, user_id: user_id }, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
-        $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
+        $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>'); //todo: translate
         return;
       }
       self.setup(data);
@@ -35,12 +34,13 @@ var ProgramLoader = function (container, url, column_max) {
 
   self.initSearch = function(query) {
     $.get(self.url, { q: query, limit: self.download_limit*2, offset: self.loaded }, function(data) {
+      var searchResultsText = $('#search-results-text');
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
-        $('#search-results-text').addClass('no-results');
-        $('#search-results-text').find('span').text(0);
+        searchResultsText.addClass('no-results');
+        searchResultsText.find('span').text(0);
         return;
       }
-      $('#search-results-text').find('span').text(data.CatrobatProjects.length);
+      searchResultsText.find('span').text(data.CatrobatProjects.length);
       self.setup(data);
       self.showMorePrograms();
     });
@@ -50,8 +50,8 @@ var ProgramLoader = function (container, url, column_max) {
     if(!self.showAllPrograms) {
       $(self.container).append('' +
         '<div class="button-show-placeholder">' +
-        '<div class="button-show-more img-load-more"></div>' +
-        '<div class="button-show-ajax img-load-ajax"></div>' +
+          '<div class="button-show-more img-load-more"></div>' +
+          '<div class="button-show-ajax img-load-ajax"></div>' +
         '</div>');
     }
     self.loadProgramsIntoContainer(data);
@@ -82,7 +82,7 @@ var ProgramLoader = function (container, url, column_max) {
           div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
           break;
         default:
-          if(self.container_elem.hasClass('starterDownloads'))
+          if($(self.container).hasClass('starterDownloads'))
             div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
           else
             div = '<div>unknown</div>';
@@ -130,7 +130,7 @@ var ProgramLoader = function (container, url, column_max) {
 
   self.setDefaultVisibility = function() {
     if(self.showAllPrograms)
-      return false;
+      return;
 
     var programs_in_row = parseInt($(window).width() / $('.program').width());
     if(programs_in_row < self.columns_min) programs_in_row = self.columns_min;

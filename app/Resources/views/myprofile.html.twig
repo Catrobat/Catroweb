@@ -88,6 +88,7 @@
 {% endblock %}
 
 {% block js %}
+  <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
   <script>
     var programs = new ProgramLoader('#myprofile-programs', '{{ path('catrobat_api_user_programs') }}');
     var profile = new MyProfile('{{ path('catrobat_web_profile_save') }}', '{{ path('catrobat_web_profile_delete_program') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('catrobat_web_profile_upload_avatar') }}');

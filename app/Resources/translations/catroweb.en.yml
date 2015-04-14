@@ -408,6 +408,9 @@ menu:
   profile: My Profile
   logout: Logout
 
+programLoader:
+  noPrograms: There are currently no programs.
+
 #api
 error:
   username:

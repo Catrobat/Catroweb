@@ -35,6 +35,7 @@
 {% endblock %}
 
 {% block js %}
+  <script src="{{ asset('./js/plugins/owl.carousel.min.js') }}"></script>
   <script>
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs', { flavor: app.session.get('flavor') }) }}');
     var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs', { flavor: app.session.get('flavor') }) }}');
@@ -42,17 +43,5 @@
     newest.init();
     mostDownloaded.init();
     mostViewed.init();
-  </script>
-  <script src="{{ asset('./js/extra/owl.carousel.min.js') }}"></script>
-  <script>
-  $(document).ready(function()
-  {
-      $("#feature-slider").owlCarousel({
-          responsive: true,
-          items : 1,
-          singleItem: true,
-          autoPlay: 5000
-          });
-  });
   </script>
 {% endblock %}

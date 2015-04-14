@@ -123,7 +123,7 @@ Feature:
     When I reload the page
     Then the avatar img tag should have the "logo.png" data url
 
-#  Scenario: when chaning avatar, it should also appear in the header (desktop + mobile)
+#todo:  Scenario: when chaning avatar, it should also appear in the header (desktop + mobile)
 
   #todo: try not to reload the page, but check if the text "This image type is not supported, ..." is visible
   Scenario: only jpg, png or gif allowed for avatar
@@ -143,7 +143,7 @@ Feature:
     Then I should not see "program 2"
     And I should see "program 1"
 
-#  Scenario: deleting a program should work (with confirm message)
+#todo:  Scenario: deleting a program should work (with confirm message)
 
   Scenario: deleting another user's program should not work
     Given I go to "/profileDeleteProgram/3"

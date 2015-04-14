@@ -449,17 +449,20 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $name = trim($name);
     $not = trim($not);
 
-    $imageTag = $this->getSession()->getPage()->find("css", "#profile-avatar > img");
-    $source = $imageTag->getAttribute("src");
+    $source = $this->getSession()->getPage()->find("css", "#profile-avatar > img")->getAttribute("src");
+    $styleHeader = $this->getSession()->getPage()->find("css", "#menu .img-avatar")->getAttribute("style");
+    $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", "\\2", $styleHeader);
 
     switch($name) {
       case "logo.png":
-        $isSame = ($source == "data:image/png;base64," . base64_encode(file_get_contents(self::AVATAR_DIR . "logo.png")));
+        $logoUrl = "data:image/png;base64," . base64_encode(file_get_contents(self::AVATAR_DIR . "logo.png"));
+        $isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
         $not == "not" ? assertFalse($isSame) : assertTrue($isSame);
         break;
 
       case "fail.tif":
-        $isSame = ($source == "data:image/tiff;base64," . base64_encode(file_get_contents(self::AVATAR_DIR . "fail.tif")));
+        $failUrl = "data:image/tiff;base64," . base64_encode(file_get_contents(self::AVATAR_DIR . "fail.tif"));
+        $isSame = (($source == $failUrl) && ($sourceHeader == $failUrl));
         $not == "not" ? assertFalse($isSame) : assertTrue($isSame);
         break;
 

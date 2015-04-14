@@ -5,9 +5,19 @@ var Main = function (search_url) {
   $(window).ready(function() {
     self.setClickListener();
     self.setWindowResizeListener();
+
+    $("#feature-slider").owlCarousel({
+      responsive: true,
+      items : 1,
+      singleItem: true,
+      autoPlay: 5000
+    });
   });
 
   self.setClickListener = function() {
+    var nav = $('nav');
+    var navDropdown = $('#nav-dropdown');
+
     // toggle footer view
     $('#footer-more-less').click(function () {
       $('body').toggleClass('footer-expand');
@@ -16,14 +26,14 @@ var Main = function (search_url) {
 
     // toggle searchbar
     $('#menu-mobile').find('.btn-search').click(function() {
-      $('nav').toggleClass('searchbar-visible');
-      $('nav').find('input').focus();
+      nav.toggleClass('searchbar-visible');
+      nav.find('input').focus();
     });
 
     // toggle navigation dropdown (when logged in)
     $('.show-nav-dropdown').click(function() {
-      var newPosition = $('nav').position().left + $('nav').outerWidth() - $('#nav-dropdown').width();
-      $('#nav-dropdown').css('left', newPosition).toggle();
+      var newPosition = nav.position().left + nav.outerWidth() - navDropdown.width();
+      navDropdown.css('left', newPosition).toggle();
     });
 
     self.setSearchBtnListener();
@@ -62,11 +72,11 @@ var Main = function (search_url) {
     var cookie = self.getCookie('hl');
 
     if(cookie == '')
-      $(select).val('en');
+      select.val('en');
     else
-      $(select).val(cookie);
+      select.val(cookie);
 
-    $(select).change(function() {
+    select.change(function() {
       document.cookie = 'hl=' + $(this).val();
       location.reload();
     });
