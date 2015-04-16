@@ -473,6 +473,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function theElementShouldBeVisible($element)
   {
     $element = $this->getSession()->getPage()->find("css", $element);
+    assertNotNull($element);
     assertTrue($element->isVisible());
   }
 
@@ -482,6 +483,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function theElementShouldNotBeVisible($element)
   {
     $element = $this->getSession()->getPage()->find("css", $element);
+    assertNotNull($element);
     assertFalse($element->isVisible());
   }
 
