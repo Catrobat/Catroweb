@@ -11,10 +11,10 @@
   <div id="header-right">
     <div id="menu">
       <div class="btn btn-search">
-        <div class="img-magnifying-glass"></div>
+        <div id="search-header" class="img-magnifying-glass"></div>
       </div>
       <div>
-        <input placeholder="{{ "Search..."|trans({}, "catroweb") }}" class="size-large input-search">
+        <input id="search-input-header" placeholder="{{ "Search..."|trans({}, "catroweb") }}" class="size-large input-search">
       </div>
 
       {% if app.user %}
@@ -37,7 +37,7 @@
 
     <div id="menu-mobile">
       <div class="btn btn-search">
-        <div class="img-magnifying-glass"></div>
+        <div id="search-header-mobile" class="img-magnifying-glass"></div>
         <div class="img-undo-search"></div>
       </div>
       <div class="margin-spacer"></div>

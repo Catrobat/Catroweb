@@ -48,7 +48,7 @@ var Main = function (search_url) {
 
   self.setSearchBtnListener = function() {
     // search enter pressed
-    $('.input-search').keypress(function(event) {
+    $('#searchbar').keypress(function(event) {
       if(event.which == 13) self.searchPrograms($(this).val());
     });
 

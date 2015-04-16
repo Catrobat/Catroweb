@@ -467,4 +467,31 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   }
 
+  /**
+   * @Given /^the element "([^"]*)" should be visible$/
+   */
+  public function theElementShouldBeVisible($element)
+  {
+    $element = $this->getSession()->getPage()->find("css", $element);
+    assertTrue($element->isVisible());
+  }
+
+  /**
+   * @Given /^the element "([^"]*)" should not be visible$/
+   */
+  public function theElementShouldNotBeVisible($element)
+  {
+    $element = $this->getSession()->getPage()->find("css", $element);
+    assertFalse($element->isVisible());
+  }
+
+  /**
+   * @When /^I press enter in the search bar$/
+   */
+  public function iPressEnterInTheSearchBar()
+  {
+    $this->getSession()->evaluateScript("$('#searchbar').trigger($.Event( 'keypress', { which: 13 } ))");
+    $this->getSession()->wait(5000, '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)');
+  }
+
 }

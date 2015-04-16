@@ -43,6 +43,7 @@ var ProgramLoader = function (container, url, column_max) {
       searchResultsText.find('span').text(data.CatrobatProjects.length);
       self.setup(data);
       self.showMorePrograms();
+      self.searchPageLoadDone = true; // fix for search.feature: 'I press enter "#searchbar"'
     });
   };
 
