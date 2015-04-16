@@ -31,6 +31,12 @@ services:
               tags:
                 -  { name: console.command }
 
+      command.purge:
+              class: Catrobat\AppBundle\Commands\PurgeCommand
+              tags:
+                -  { name: console.command }
+
+
       catrowebadmin.command.import.legacy:
               class: Catrobat\AppBundle\Commands\ImportLegacyCommand
               arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager", "@doctrine.orm.entity_manager"]
