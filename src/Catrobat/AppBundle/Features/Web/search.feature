@@ -1,8 +1,5 @@
 @homepage
-Feature:
-  In order to manage the my profile page
-  As a logged in user
-  I want to be able to change my password, email and country, upload an avatar image and delete my own programs
+Feature: Searching for programs
 
   Background:
     Given there are users:
