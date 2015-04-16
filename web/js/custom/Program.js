@@ -17,21 +17,22 @@ var Program = function(status_url, create_url)
 
     self.onResult = function(data)
     {
+        $('#apkDownloadButton').show();
         if (data.status == "ready")
         {
-            $("#apkDownloadLabel").text("download apk");
+            $("#apkDownloadLabel").text(data.label);
             $("#apkDownloadLink").click(function() { top.location.href = data.url; });
         }
         else if (data.status == "pending") 
         {
-            $("#apkDownloadLabel").text("pending");
+            $("#apkDownloadLabel").text(data.label);
             $("#apkDownloadLabel").off('click');
             console.log("pending");
             setTimeout(self.getApkStatus, 5000);
         }
         else
         {
-            $("#apkDownloadLabel").text("generate apk");
+            $("#apkDownloadLabel").text(data.label);
             $("#apkDownloadLink").click(self.createApk);
         }
     }

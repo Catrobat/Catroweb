@@ -22,11 +22,14 @@ class ApkStatusController extends Controller
             case Program::APK_READY:
                 $result['status'] = "ready";
                 $result['url'] = $this->generateUrl("ci_download", array("id" => $program->getId()), true);
+                $result['label'] = $this->get("translator")->trans("ci.download",array(),"catroweb");
                 break;
             case Program::APK_PENDING:
                 $result['status'] = "pending";
+                $result['label'] = $this->get("translator")->trans("ci.pending",array(),"catroweb");
                 break;
             default:
+                $result['label'] = $this->get("translator")->trans("ci.generate",array(),"catroweb");
                 $result['status'] = "none";
         }
         return JsonResponse::create($result);

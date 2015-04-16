@@ -6,7 +6,10 @@ Feature: Get the APK status of a program
         When I GET "/ci/status/1"
         Then will get the following JSON:
         """
-        { "status" : "pending" }
+        { 
+          "status" : "pending",
+          "label" : "Generating Apk"
+         }
         """
         
     Scenario: get the apk status ready
@@ -17,7 +20,8 @@ Feature: Get the APK status of a program
         """
         { 
           "status" : "ready",
-          "url" : "http://localhost/ci/download/1"
+          "url" : "http://localhost/ci/download/1",
+          "label" : "Download Apk"
         }
         """
         
@@ -27,7 +31,10 @@ Feature: Get the APK status of a program
         When I GET "/ci/status/1"
         Then will get the following JSON:
         """
-        { "status" : "none" }
+        {
+          "status" : "none",
+          "label" : "Generate Apk"
+        }
         """
         
         

@@ -511,3 +511,8 @@ language:
   turkish: Turkish
   ukrainian: Ukrainian
   vietnamese: Vietnamese
+
+ci:
+  generate: Generate Apk
+  pending: Generating Apk
+  download: Download Apk
