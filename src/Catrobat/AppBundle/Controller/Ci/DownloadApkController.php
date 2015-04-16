@@ -40,10 +40,14 @@ class DownloadApkController extends Controller
         }
         if ($file->isFile())
         {
+            $filename = preg_replace("/[^0-9^a-z^_^.]/", "", $program->getName());
+            if ($filename == "")
+                $filename = $program->getId();
+             
             $response = new BinaryFileResponse($file);
             $d = $response->headers->makeDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                $program->getId() . '.apk'
+                $filename . '.apk'
             );
             $response->headers->set('Content-Disposition', $d);
             
