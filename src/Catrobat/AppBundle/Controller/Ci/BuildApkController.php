@@ -38,6 +38,7 @@ class BuildApkController extends Controller
         $dispatcher->sendBuildRequest($program->getId());
         
         $program->setApkStatus(Program::APK_PENDING);
+        $program->setApkRequestTime(new \DateTime());
         $this->get("programmanager")->save($program);
         
         return JsonResponse::create(array("status" => "pending"));

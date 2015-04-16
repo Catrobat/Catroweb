@@ -98,6 +98,7 @@ sonata_admin:
                 icon:            '<i class="fa fa-android"></i>'
                 items:
                     - catrowebadmin.block.apk.pending
+                    - catrowebadmin.block.apk.list
 
     security:
         handler: sonata.admin.security.handler.acl

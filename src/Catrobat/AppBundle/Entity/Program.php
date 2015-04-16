@@ -145,6 +145,16 @@ class Program
     protected $apk_status = 0;
     
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $apk_request_time;
+    
+    /**
+     * @ORM\Column(type="integer", options={"default":0})
+     */
+    protected $apk_downloads = 0;
+    
+    /**
      * @param mixed $approved_by_user
      */
     public function setApprovedByUser($approved_by_user)
@@ -698,4 +708,75 @@ class Program
         return $this;
     }
 
+ 
+
+
+    /**
+     * Set directory_hash
+     *
+     * @param string $directoryHash
+     * @return Program
+     */
+    public function setDirectoryHash($directoryHash)
+    {
+        $this->directory_hash = $directoryHash;
+
+        return $this;
+    }
+
+    /**
+     * Get directory_hash
+     *
+     * @return string 
+     */
+    public function getDirectoryHash()
+    {
+        return $this->directory_hash;
+    }
+
+    /**
+     * Set apk_request_time
+     *
+     * @param \DateTime $apkRequestTime
+     * @return Program
+     */
+    public function setApkRequestTime($apkRequestTime)
+    {
+        $this->apk_request_time = $apkRequestTime;
+
+        return $this;
+    }
+
+    /**
+     * Get apk_request_time
+     *
+     * @return \DateTime 
+     */
+    public function getApkRequestTime()
+    {
+        return $this->apk_request_time;
+    }
+
+    /**
+     * Set apk_downloads
+     *
+     * @param integer $apkDownloads
+     * @return Program
+     */
+    public function setApkDownloads($apkDownloads)
+    {
+        $this->apk_downloads = $apkDownloads;
+
+        return $this;
+    }
+
+    /**
+     * Get apk_downloads
+     *
+     * @return integer 
+     */
+    public function getApkDownloads()
+    {
+        return $this->apk_downloads;
+    }
 }

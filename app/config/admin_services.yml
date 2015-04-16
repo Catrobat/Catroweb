@@ -49,5 +49,11 @@ services:
         class: Catrobat\AppBundle\Admin\PendingApkRequestsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Pending }
-        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
+        arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\Apk]
+      
+      catrowebadmin.block.apk.list:
+        class: Catrobat\AppBundle\Admin\ApkListAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Ready }
+        arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\Apk]
       

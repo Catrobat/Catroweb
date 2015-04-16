@@ -9,10 +9,10 @@ use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Catrobat\AppBundle\Entity\Program;
 
-class PendingApkRequestsAdmin extends Admin
+class ApkListAdmin extends Admin
 {
-    protected $baseRouteName = 'admin_catrobat_apk_pending_requests';
-    protected $baseRoutePattern = 'apk_pending_requests';
+    protected $baseRouteName = 'admin_catrobat_apk_list';
+    protected $baseRoutePattern = 'apk_list';
 
     protected $datagridValues = array(
         '_sort_by' => 'apk_request_time',
@@ -24,7 +24,7 @@ class PendingApkRequestsAdmin extends Admin
         $query->andWhere(
             $query->expr()->eq($query->getRootAlias() . '.apk_status', ':apk_status')
         );
-        $query->setParameter('apk_status', Program::APK_PENDING);
+        $query->setParameter('apk_status', Program::APK_READY);
         return $query;
     }
     
@@ -60,11 +60,11 @@ class PendingApkRequestsAdmin extends Admin
             )))
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'Reset' => array(
-                        'template' => ':CRUD:list__action_reset_status.html.twig'
-                    ),
                     'Rebuild' => array(
                         'template' => ':CRUD:list__action_rebuild_apk.html.twig'
+                    ),
+                    'Delete Apk' => array(
+                        'template' => ':CRUD:list__action_delete_apk.html.twig'
                     )
                 )
             ))
@@ -74,8 +74,8 @@ class PendingApkRequestsAdmin extends Admin
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(array('list'));
-    $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
     $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
+    $collection->add('deleteApk', $this->getRouterIdParameter().'/deleteApk');
   }
 
     public function getThumbnailImageUrl($object)

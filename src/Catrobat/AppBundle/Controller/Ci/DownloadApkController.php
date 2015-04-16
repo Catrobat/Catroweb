@@ -8,10 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-=======
->>>>>>> c18f0f1a390d5fe895b4a45f46ef9ea4542007e6
 
 class DownloadApkController extends Controller
 {
@@ -43,7 +40,6 @@ class DownloadApkController extends Controller
         }
         if ($file->isFile())
         {
-<<<<<<< HEAD
             $response = new BinaryFileResponse($file);
             $d = $response->headers->makeDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
@@ -52,9 +48,6 @@ class DownloadApkController extends Controller
             $response->headers->set('Content-Disposition', $d);
             
             return $response;
-=======
-            return new BinaryFileResponse($file);
->>>>>>> c18f0f1a390d5fe895b4a45f46ef9ea4542007e6
         }
         throw new NotFoundHttpException();
     }
