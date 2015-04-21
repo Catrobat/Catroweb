@@ -15,6 +15,8 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class ImportLegacyCommand extends ContainerAwareCommand
 {
@@ -29,7 +31,16 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private $user_manager;
     private $program_manager;
     private $output;
-
+    
+    private $importdir;
+    private $finder;
+    private $filesystem;
+    
+    private $thumbnaildir;
+    private $screenshotdir;
+    private $screenshot_repository;
+    private $catrobat_file_repository;
+    
     public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager, EntityManager $em)
     {
         parent::__construct();
@@ -49,48 +60,29 @@ class ImportLegacyCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $filesystem = new Filesystem();
-        $finder = new Finder();
-
-        $storage_dir = $this->getContainer()->getParameter('catrobat.file.storage.dir');
-
-        $this->deleteUserFiles();
-        $this->deleteDatabase();
-
+        $this->filesystem = new Filesystem();
+        $this->finder = new Finder();
+        $this->screenshot_repository = $this->getContainer()->get('screenshotrepository');
+        $this->catrobat_file_repository = $this->getContainer()->get('filerepository');
+        
+        $this->executeSymfonyCommand("catrobat:purge", array("--force" => true), $output);
+        
         $backup_file = $input->getArgument('backupfile');
-        $temp_dir = $this->createTempDir();
 
+        $this->importdir = $this->createTempDir();
+        $this->writeln("Using Temp directory " . $this->importdir);
+        
+        $temp_dir = $this->importdir;
         $this->executeShellCommand("tar xfz $backup_file --directory $temp_dir", "Extracting backupfile");
         $this->executeShellCommand("tar xf $temp_dir/".self::SQL_CONTAINER_FILE." --directory $temp_dir", "Extracting SQL files");
         $this->executeShellCommand("tar xfz $temp_dir/".self::SQL_WEB_CONTAINER_FILE." --directory $temp_dir", "Extracting Catroweb SQL files");
         $this->executeShellCommand("tar xf $temp_dir/".self::RESOURCE_CONTAINER_FILE." --directory $temp_dir", "Extracting resource files");
         
-        $finder->in($temp_dir."/resources/projects")->depth(0);
-        foreach ($finder as $file) {
-            $filesystem->rename($file->getRealpath(), $storage_dir."/".$file->getFilename());
-        }
-
-        $this->importUsers($temp_dir."/".self::TSV_USERS_FILE);
-        $this->importProgramMetadata($temp_dir."/".self::TSV_PROGRAMS_FILE);
-
-        /**
-         * Create Thumbnails *
-         */
-        $screenshot_repository = $this->getContainer()->get('screenshotrepository');
-        $finder->in($temp_dir."/resources/thumbnails/")
-            ->name('*_large.png')
-            ->notName("thumbnail_large.png")
-            ->depth(0);
-
-        foreach ($finder as $file) {
-            $parts = explode("_", $file->getFilename());
-            $id = intval($parts[0]);
-            $screenshot_repository->saveProgramAssets($file->getRealpath(), $id);
-            $this->write(".");
-        }
+        $this->importUsers($this->importdir."/".self::TSV_USERS_FILE);
+        $this->importPrograms($this->importdir."/".self::TSV_PROGRAMS_FILE);
 
         $row = 0;
-        $features_tsv = $temp_dir."/".self::TSV_FEATURED_PROGRAMS;
+        $features_tsv = $this->importdir."/".self::TSV_FEATURED_PROGRAMS;
         if (($handle = fopen($features_tsv, "r")) !== false) {
             while (($data = fgetcsv($handle, 0, "\t")) !== false) {
                 $num = count($data);
@@ -98,7 +90,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program = new FeaturedProgram();
                     $program->setProgram($this->program_manager->find($data[1]));
                     $program->setActive($data[3] === "t");
-                    $program->setNewFeaturedImage(new File($temp_dir."/resources/featured/".$data[1].".jpg"));
+                    $program->setNewFeaturedImage(new File($this->importdir."/resources/featured/".$data[1].".jpg"));
                     $this->em->persist($program);
                 } else {
                     break;
@@ -110,19 +102,18 @@ class ImportLegacyCommand extends ContainerAwareCommand
             $this->writeln("Imported ".$row." featured programs");
         }
 
-        $filesystem->remove($temp_dir);
+        $this->filesystem->remove($temp_dir);
     }
 
-    protected function deleteDatabase()
-    {
-        $this->executeShellCommand("php app/console doctrine:schema:drop --force", "droping schema");
-        $this->executeShellCommand("php app/console doctrine:schema:create", "creating schema");
-    }
-
-    protected function importProgramMetadata($program_file)
+    protected function importPrograms($program_file)
     {
         $row = 0;
+        $skipped = 0;
 
+        $progress = new ProgressBar($this->output);
+        $progress->setFormat(' %current%/%max% [%bar%] %message%');
+        $progress->start();
+        
         $metadata = $this->em->getClassMetaData("Catrobat\AppBundle\Entity\Program");
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
@@ -130,9 +121,19 @@ class ImportLegacyCommand extends ContainerAwareCommand
             while (($data = fgetcsv($handle, 0, "\t")) !== false) {
                 $num = count($data);
                 if ($num > 2) {
-                    $this->writeln("Inserting ".$data[1]);
+                    $id = $data[0];
+                    $language_version = $data[13];
+                    
+                    $progress->setMessage($data[1] . " (" . $id . ")");
+                    $progress->advance();
+                    
+                    if (version_compare($language_version, "0.92", "<"))
+                    {
+                        $skipped++;
+                        continue;
+                    }
                     $program = new Program();
-                    $program->setId($data[0]);
+                    $program->setId($id);
                     $program->setName($data[1]);
                     $program->setDescription($data[2]);
                     $program->setUploadedAt(new \DateTime($data[4], new \DateTimeZone('UTC')));
@@ -144,24 +145,28 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program->setUploadLanguage($data[10]);
                     $program->setFilesize($data[11]);
                     $program->setCatrobatVersionName($data[12]);
+                    $program->setLanguageVersion($language_version);
                     $program->setRemixCount($data[19]);
                     $program->setApproved($data[20] === "t");
-
-                    $program->setLanguageVersion(1);
-                    $program->setFilename("0.catrobat");
-                    $program->setThumbnail("thumb.png");
-                    $program->setScreenshot("screenshot.png");
                     $program->setCatrobatVersion(1);
                     $program->setFlavor("pocketcode");
                     $this->em->persist($program);
+                    $this->importScreenshots($id);
+                    $this->importProgramfile($id);
                 } else {
                     break;
                 }
                 $row ++;
             }
-            $this->em->flush();
             fclose($handle);
-            $this->writeln("Imported ".$row." programs");
+            
+            $progress->setMessage("Saving to database");
+            $progress->advance();
+            $this->em->flush();
+            $progress->setMessage("");
+            $progress->finish();
+            $this->writeln("");
+            $this->writeln("<info>Imported ".$row." programs (Skipped " . $skipped . ")</info>");
         }
     }
 
@@ -171,6 +176,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
 
         $row = 0;
 
+        $progress = new ProgressBar($this->output);
+        $progress->setFormat(' %current%/%max% [%bar%] %message%');
+        $progress->start();
+        
         $metadata = $this->em->getClassMetaData("Catrobat\AppBundle\Entity\User");
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
@@ -187,7 +196,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
                         continue;
                     }
 
-                    $this->writeln("Inserting ".$data[0]." - ".$data[1]);
+                    $progress->setMessage($data[1] . " (" . $data[0]. ")");
+                    $progress->advance();
+                    
                     $user = new User();
                     $user->setId($data[0]);
                     $user->setUsername($data[1]);
@@ -204,26 +215,45 @@ class ImportLegacyCommand extends ContainerAwareCommand
                 }
                 $row ++;
             }
-            $this->em->flush();
             fclose($handle);
-            $this->writeln("Imported ".$row." users");
+            $progress->setMessage("Saving to database");
+            $progress->advance();
+            $this->em->flush();
+            $progress->setMessage("");
+            $progress->finish();
+            $this->writeln("");
+            $this->writeln("<info>Imported ".$row." users</info>");
         }
     }
 
-    private function deleteUserFiles()
+    private function importScreenshots($id)
     {
-        $this->emptyDirectory($this->getContainer()
-            ->getParameter('catrobat.screenshot.dir'), "Delete screenshots");
-        $this->emptyDirectory($this->getContainer()
-            ->getParameter('catrobat.thumbnail.dir'), "Delete thumnails");
-        $this->emptyDirectory($this->getContainer()
-            ->getParameter('catrobat.file.storage.dir'), "Delete programs");
-        $this->emptyDirectory($this->getContainer()
-            ->getParameter('catrobat.file.extract.dir'), "Delete extracted programs");
-        $this->emptyDirectory($this->getContainer()
-            ->getParameter('catrobat.featuredimage.dir'), "Delete feature imagess");
+        $screenhot_dir = $this->importdir . "/resources/thumbnails/";
+        $screenshot_path = $screenhot_dir .  $id . "_large.png";
+        $thumbnail_path = $screenhot_dir .  $id . "_small.png";
+        if (file_exists($screenshot_path))
+        {
+            $this->screenshot_repository->importProgramAssets($screenshot_path, $thumbnail_path, $id);
+        }
     }
-
+    
+    private function importProgramfile($id)
+    {
+        $filepath = $this->importdir . "/resources/projects/" . "$id" . ".catrobat";
+        if (file_exists($filepath))
+        {
+            $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
+        }
+    }
+    
+    private function executeSymfonyCommand($command, $args, $output)
+    {
+        $command = $this->getApplication()->find($command);
+        $args["command"] = $command;
+        $input = new ArrayInput($args);
+        $command->run($input, $output);
+    }
+    
     private function executeShellCommand($command, $description)
     {
         $this->write($description." ('".$command."') ... ");
@@ -232,34 +262,15 @@ class ImportLegacyCommand extends ContainerAwareCommand
         $process->run();
         if ($process->isSuccessful()) {
             $this->writeln("OK");
-
+    
             return true;
         } else {
             $this->writeln("failed!");
-
+    
             return false;
         }
     }
-
-    private function emptyDirectory($directory, $description)
-    {
-        $this->write($description." ('".$directory."') ... ");
-        if ($directory == "") {
-            $this->writeln("failed");
-
-            return;
-        }
-
-        $filesystem = new Filesystem();
-
-        $finder = new Finder();
-        $finder->in($directory)->depth(0);
-        foreach ($finder as $file) {
-            $filesystem->remove($file);
-        }
-        $this->writeln("OK");
-    }
-
+    
     private function write($string)
     {
         if ($this->output != null) {

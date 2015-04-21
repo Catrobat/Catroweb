@@ -13,7 +13,7 @@ class ProgramFileRepository
   private $webpath;
   private $file_compressor;
   
-  function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor)
+  public function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor)
   {
     if (!is_dir($directory))
     {
@@ -25,17 +25,17 @@ class ProgramFileRepository
     $this->file_compressor = $file_compressor;
   }
 
-  function  saveProgram(ExtractedCatrobatFile $extracted, $id)
+  public function saveProgram(ExtractedCatrobatFile $extracted, $id)
   {
     $this->file_compressor->compress($extracted->getPath(), $this->directory, $id);
   }
 
-  function saveProgramfile(File $file, $id)
+  public function saveProgramfile(File $file, $id)
   {
     $this->filesystem->copy($file->getPathname(), $this->directory . $id . ".catrobat");
   }
   
-  function getProgramFile($id)
+  public function getProgramFile($id)
   {
     return new File($this->directory . $id . ".catrobat");
   }

@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ScreenshotRepository
 {
@@ -12,6 +13,7 @@ class ScreenshotRepository
   private $thumbnail_path;
   private $screenshot_dir;
   private $screenshot_path;
+  private $imagick;
   
   public function __construct($screenshot_dir, $screenshot_path, $thumbnail_dir, $thumbnail_path)
   {
@@ -43,7 +45,8 @@ class ScreenshotRepository
   
   public function saveScreenshot($filepath,$id)
   {
-    $screen = new \Imagick($filepath);
+    $screen = $this->getImagick();
+    $screen->readImage($filepath);
     $screen->resizeImage(480,480,\Imagick::FILTER_LANCZOS,1);
     $screen->writeImage($this->screenshot_dir . $this->generateFileNameFromId($id));
     $screen->destroy();
@@ -51,7 +54,8 @@ class ScreenshotRepository
   
   private function saveThumbnail($filepath,$id)
   {
-    $thumb = new \Imagick($filepath);
+    $thumb = $this->getImagick();
+    $thumb->readImage($filepath);
     $thumb->resizeImage(80,80,\Imagick::FILTER_LANCZOS,1);
     $thumb->writeImage($this->thumbnail_dir . $this->generateFileNameFromId($id));
     $thumb->destroy();
@@ -76,6 +80,22 @@ class ScreenshotRepository
       return $this->thumbnail_path . $this->generateFileNameFromId($id);
     }
     return self::DEFAULT_THUMBNAIL;
+  }
+  
+  public function importProgramAssets($screenshot_filepath, $thumbnail_filepath, $id)
+  {
+      $filesystem = new Filesystem();
+      $filesystem->copy($screenshot_filepath, $this->screenshot_dir . $this->generateFileNameFromId($id));
+      $filesystem->copy($thumbnail_filepath, $this->thumbnail_dir . $this->generateFileNameFromId($id));
+  }
+  
+  public function getImagick()
+  {
+    if ($this->imagick == null)
+    {
+        $this->imagick = new \Imagick();
+    }
+    return $this->imagick;
   }
   
 }
