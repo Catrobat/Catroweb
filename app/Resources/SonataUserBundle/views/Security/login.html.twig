@@ -18,22 +18,22 @@
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
     <div class="input-field">
-      <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" />
+      <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ "username"|trans({}, "catroweb") }}" />
       <div class="img-login"></div>
     </div>
 
     <div class="input-field">
-      <input type="password" id="password" name="_password" placeholder="Password" />
+      <input type="password" id="password" name="_password" placeholder="{{ "password"|trans({}, "catroweb") }}" />
       <div class="img-password"></div>
     </div>
 
     {% if error %}
-      <div class="error-text">Your password or username<br /> was incorrect.</div>
+      <div class="error-text">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
     {% endif %}
     <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
-  <div class="link center"><a href="{{ path("sonata_user_resetting_request") }}">Forgot password or username?</a></div>
+<div class="link center"><a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a></div>
 {% endblock fos_user_content %}
 
 {% endblock body %}

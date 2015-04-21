@@ -1,9 +1,9 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
-  {#{% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/request.css' %}#}
-  {#<link rel="stylesheet" href="{{ asset_url }}" />#}
-  {#{% endstylesheets %}#}
+  {% stylesheets 'css/custom/request.less' filter='cssrewrite,lessphp' output='compiled/request.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
 {% endblock %}
 
 {% block header %}
@@ -14,26 +14,16 @@
 
 {% block fos_user_content %}
   <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-
-
-      {#<label for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>#}
-
-      <div class="input-field">
-        <input type="text" id="username" name="username" placeholder="Username or Email" />
-        <div class="img-login"></div>
-      </div>
+    <div class="input-field">
+      <input type="text" id="username" name="username" placeholder="{{ "login.userOrEmail"|trans({}, "catroweb") }}" />
+      <div class="img-login"></div>
+    </div>
 
     {% if invalid_username is defined %}
-      <div class="error-text">Your Username or Email address was not found.</div>
+      <div class="error-text">{{ "login.noUsername"|trans({}, "catroweb")}}</div>
     {% endif %}
 
-
-
-    <button id="_submit" name="_submit" >Recover Password</button>
-
-    {#<div>#}
-      {#<input type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />#}
-    {#</div>#}
+    <button id="_submit" name="recover" >{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
   </form>
 {% endblock fos_user_content %}
 

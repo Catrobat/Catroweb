@@ -1,6 +1,8 @@
 ---
 #homepage translation
 localLanguage: English
+username: Username
+password: Password
 
 programs:
   featured: Featured
@@ -412,6 +414,14 @@ menu:
 
 programLoader:
   noPrograms: There are currently no programs.
+
+login:
+  passOrUser: Your password or username was incorrect.
+  noUsername: Your username or email address was not found.
+  forgotPass: Forgot password or username?
+  recoverPass: Recover password
+  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  userOrEmail: Username or Email
 
 #api
 error:

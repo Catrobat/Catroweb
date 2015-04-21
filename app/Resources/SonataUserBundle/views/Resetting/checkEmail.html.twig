@@ -1,20 +1,19 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
-  {#{% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/checkemail.css' %}#}
+  {#{% stylesheets 'css/custom/check-mail.less' filter='cssrewrite,lessphp' output='compiled/check-mail.css' %}#}
   {#<link rel="stylesheet" href="{{ asset_url }}" />#}
   {#{% endstylesheets %}#}
 {% endblock %}
 
 {% block header %}
-  {{ render(controller('AppBundle:Web/Default:headerLogo', { _locale: app.request.locale, _embedded: true })) }}
+  {% include ':Default:headerLogo.html.twig' %}
 {% endblock header%}
 
 {% block body %}
 
 {% block fos_user_content %}
-<div class="notification-text">An Email was sent to your Email address. <br />Please check your inbox.</div>
-{#{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}#}
+  <div class="notification-text">{{ "login.recoverPassSend"|trans({}, "catroweb") }}</div>
 {% endblock %}
 
 {% endblock body %}
