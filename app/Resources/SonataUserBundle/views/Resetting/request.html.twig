@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block header %}
-  {{ render(controller('AppBundle:Web/Default:headerLogo', { _locale: app.request.locale, _embedded: true })) }}
+  {% include ':Default:headerLogo.html.twig' %}
 {% endblock header%}
 
 {% block body %}
