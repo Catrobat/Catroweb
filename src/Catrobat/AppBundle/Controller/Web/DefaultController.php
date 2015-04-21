@@ -349,6 +349,9 @@ class DefaultController extends Controller
    */
   private function checkEmailExists($email)
   {
+    if($email === "")
+      return false;
+
     $userWithFirstMail = $this->get("usermanager")->findOneBy(array('email' => $email));
     $userWithSecondMail = $this->get("usermanager")->findOneBy(array('additional_email' => $email));
 

@@ -292,6 +292,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var $user_manager \Catrobat\AppBundle\Model\UserManager
+     * @var $user \Catrobat\AppBundle\Entity\User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
@@ -301,6 +302,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $user = $user_manager->createUser();
       $user->setUsername($users[$i]["name"]);
       $user->setEmail("dev" . $i . "@pocketcode.org");
+      $user->setAdditionalEmail("");
       $user->setPlainPassword($users[$i]["password"]);
       $user->setEnabled(true);
       $user->setUploadToken($users[$i]["token"]);
