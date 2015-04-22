@@ -10,6 +10,7 @@ var ProgramLoader = function (container, url, column_max) {
   self.visible = 0;
   self.visible_steps = 0;
   self.showAllPrograms = false;
+  self.windowWidth = $(window).width();
 
   self.init = function() {
     $.get(self.url, { limit: self.download_limit, offset: self.loaded}, function(data) {
@@ -58,7 +59,12 @@ var ProgramLoader = function (container, url, column_max) {
     self.loadProgramsIntoContainer(data);
     self.showMoreListener();
     self.setDefaultVisibility();
-    $(window).resize(function() { self.setDefaultVisibility(); });
+    $(window).resize(function() {
+      if(self.windowWidth == $(window).width())
+        return;
+      self.setDefaultVisibility();
+      self.windowWidth = $(window).width();
+    });
   };
 
   self.loadProgramsIntoContainer = function(data) {

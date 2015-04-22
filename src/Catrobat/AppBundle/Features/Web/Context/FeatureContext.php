@@ -490,4 +490,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->getSession()->wait(5000, '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)');
   }
 
+  /**
+   * @Then /^there should be "([^"]*)" programs in the database$/
+   */
+  public function thereShouldBeProgramsInTheDatabase($arg1)
+  {
+    /**
+     * @var $program_manager \Catrobat\AppBundle\Model\ProgramManager
+     */
+    $program_manager = $this->kernel->getContainer()->get('programmanager');
+    $programs = $program_manager->findAll();
+
+    assertEquals($arg1, count($programs));
+  }
+
 }

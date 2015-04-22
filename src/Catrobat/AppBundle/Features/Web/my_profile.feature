@@ -142,6 +142,7 @@ Feature:
     When I go to "/profileDeleteProgram/2"
     Then I should not see "program 2"
     And I should see "program 1"
+    And there should be "3" programs in the database
 
 #todo:  Scenario: deleting a program should work (with confirm message)
 
