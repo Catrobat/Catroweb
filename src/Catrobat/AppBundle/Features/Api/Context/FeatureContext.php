@@ -319,7 +319,7 @@ class FeatureContext extends BaseContext
     {
       $this->iHaveAParameterWithValue("offset", "0");
     }
-    $this->iGetWithTheseParameters("/api/projects/search.json");
+    $this->iGetWithTheseParameters("/pocketcode/api/projects/search.json");
   }
 
   /**
@@ -492,7 +492,7 @@ class FeatureContext extends BaseContext
     $this->iHaveAParameterWithTheMdchecksumMyFile("fileChecksum");
     $this->request_parameters["username"] = $this->user;
     $this->request_parameters["token"] = "cccccccccc";
-    $this->iPostTheseParametersTo("/api/upload/upload.json");
+    $this->iPostTheseParametersTo("/pocketcode/api/upload/upload.json");
   }
 
   /**
@@ -501,7 +501,7 @@ class FeatureContext extends BaseContext
   public function iUploadACatrobatProgramWithTheSameName()
   {
     $this->last_response = $this->getClient()->getResponse()->getContent();
-    $this->iPostTheseParametersTo("/api/upload/upload.json");
+    $this->iPostTheseParametersTo("/pocketcode/api/upload/upload.json");
   }
 
   /**
@@ -571,7 +571,7 @@ class FeatureContext extends BaseContext
       default :
         throw new PendingException();
     }
-    $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
+    $this->sendPostRequest("/pocketcode/api/loginOrRegister/loginOrRegister.json");
   }
 
   /**
@@ -587,7 +587,7 @@ class FeatureContext extends BaseContext
    */
   public function iTryToRegister()
   {
-    $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
+    $this->sendPostRequest("/pocketcode/api/loginOrRegister/loginOrRegister.json");
   }
 
   /**
@@ -621,7 +621,7 @@ class FeatureContext extends BaseContext
   public function iRegisterANewUser()
   {
     $this->prepareValidRegistrationParameters();
-    $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
+    $this->sendPostRequest("/pocketcode/api/loginOrRegister/loginOrRegister.json");
   }
   
   /**
@@ -631,7 +631,7 @@ class FeatureContext extends BaseContext
   {
     $this->prepareValidRegistrationParameters();
     $this->request_parameters['registrationUsername'] = "AnotherUser";
-    $this->sendPostRequest("/api/loginOrRegister/loginOrRegister.json");
+    $this->sendPostRequest("/pocketcode/api/loginOrRegister/loginOrRegister.json");
   }
 
 
@@ -708,7 +708,7 @@ class FeatureContext extends BaseContext
      */
     public function iGetTheMostRecentPrograms()
     {
-        $this->getClient()->request('GET', "/api/projects/recent.json");
+        $this->getClient()->request('GET', "/pocketcode/api/projects/recent.json");
     }
 
     /**
@@ -716,6 +716,6 @@ class FeatureContext extends BaseContext
      */
     public function iGetTheMostRecentProgramsWithLimitAndOffset($limit, $offset)
     {
-        $this->getClient()->request('GET', "/api/projects/recent.json", array("limit" => $limit, "offset" => $offset));
+        $this->getClient()->request('GET', "/pocketcode/api/projects/recent.json", array("limit" => $limit, "offset" => $offset));
     }
 }

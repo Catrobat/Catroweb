@@ -23,7 +23,7 @@ Feature: Get featured programs
   Scenario: show featured programs
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
-    When I GET "/api/projects/featured.json" with these parameters
+    When I GET "/pocketcode/api/projects/featured.json" with these parameters
     Then I should get the json object:
       """
       {

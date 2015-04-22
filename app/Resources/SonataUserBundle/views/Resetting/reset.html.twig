@@ -29,7 +29,7 @@
       {% if form_errors(form.new.first) %}
         <div class="error-text">{{ "passwordsNoMatch"|trans({}, "catroweb") }}</div>
       {% endif %}
-      <input type="hidden" name="_target_path" value="{{ path('index', { 'flavor': app.request.attributes.get('flavor') }) }}" />
+      <input type="hidden" name="_target_path" value="{{ path('index') }}" />
       <button id="_submit" class="login" name="_submit" >{{ 'login.changePass'|trans({}, 'catroweb') }}</button>
     </form>
 

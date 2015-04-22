@@ -27,7 +27,7 @@ Feature: Get users programs
 
   Scenario: show user programs
     Given I have a parameter "user_id" with value "1"
-    When I GET "/api/projects/userPrograms.json" with these parameters
+    When I GET "/pocketcode/api/projects/userPrograms.json" with these parameters
     Then I should get the json object:
     """
       {
@@ -51,7 +51,7 @@ Feature: Get users programs
                                 "Views":"9",
                                 "Downloads":"33",
                                 "ProjectUrl":"pocketcode/program/2",
-                                "DownloadUrl":"download/2.catrobat",
+                                "DownloadUrl":"pocketcode/download/2.catrobat",
                                 "FileSize":0
                             },
                             {
@@ -68,7 +68,7 @@ Feature: Get users programs
                                 "Views":"33",
                                 "Downloads":"2",
                                 "ProjectUrl":"pocketcode/program/6",
-                                "DownloadUrl":"download/6.catrobat",
+                                "DownloadUrl":"pocketcode/download/6.catrobat",
                                 "FileSize":0
                             }],
           "preHeaderMessages":""
@@ -77,20 +77,20 @@ Feature: Get users programs
 
   Scenario: show one project from one user
     Given I have a parameter "user_id" with value "3"
-    When I GET "/api/projects/userPrograms.json" with these parameters
+    When I GET "/pocketcode/api/projects/userPrograms.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
       | MarkoTheBest |
 
   Scenario: empty result set is returend if the user doesnt exist or has no programs
     Given I have a parameter "user_id" with value "5"
-    When I GET "/api/projects/userPrograms.json" with these parameters
+    When I GET "/pocketcode/api/projects/userPrograms.json" with these parameters
     Then I should get programs in the following order:
       | Name      |
    
   Scenario: show only visible programs
     Given program "MarkoTheBest" is not visible
     And I have a parameter "user_id" with value "3"
-    When I GET "/api/projects/userPrograms.json" with these parameters
+    When I GET "/pocketcode/api/projects/userPrograms.json" with these parameters
     Then I should get programs in the following order:
       | Name      |

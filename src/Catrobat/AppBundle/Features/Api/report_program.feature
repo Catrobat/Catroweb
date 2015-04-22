@@ -15,7 +15,7 @@ Feature: Report a program
   Scenario: report program with valid data
     Given I have a parameter "program" with value "1"
     And I have a parameter "note" with value "Bad Project"
-    When I POST these parameters to "/api/reportProgram/reportProgram.json"
+    When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
       """
       {"answer":"Your report was successfully sent!","statusCode":200}
@@ -25,7 +25,7 @@ Feature: Report a program
   Scenario: report program with invalid project
     Given I have a parameter "program" with value "4"
     And I have a parameter "note" with value "Bad Project"
-    When I POST these parameters to "/api/reportProgram/reportProgram.json"
+    When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
       """
       {"statusCode":506,"answer":"Invalid program.","preHeaderMessages":""}
@@ -34,7 +34,7 @@ Feature: Report a program
   Scenario: report program with missing parameter
     Given I have a parameter "program" with value ""
     And I have a parameter "note" with value ""
-    When I POST these parameters to "/api/reportProgram/reportProgram.json"
+    When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
     """
       {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}

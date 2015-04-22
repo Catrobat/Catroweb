@@ -25,13 +25,13 @@ security:
             
     firewalls:
         api_checktoken:
-            pattern: ^/api/checkToken/check.json
+            pattern: ^.*/api/checkToken/check.json
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
 
         api_upload:
-            pattern: ^/api/upload/upload.json
+            pattern: ^.*/api/upload/upload.json
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator

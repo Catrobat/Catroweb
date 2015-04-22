@@ -305,7 +305,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     $parameters["token"] = $user->getUploadToken();
     $parameters["fileChecksum"] = md5_file($file->getPathname());
     $client = $this->getClient();
-    $client->request('POST', "/api/upload/upload.json", $parameters, array($file));
+    $client->request('POST', "/pocketcode/api/upload/upload.json", $parameters, array($file));
     $response = $client->getResponse();
     return $response;
   }

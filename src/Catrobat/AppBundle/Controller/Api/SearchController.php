@@ -14,8 +14,7 @@ class SearchController extends Controller
 {
 
   /**
-   * @Route("/{flavor}/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
-   * @Route("/api/projects/search.json", name="catrobat_api_search_programs", defaults={"_format": "json"})
+   * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function searchProgramsAction(Request $request)

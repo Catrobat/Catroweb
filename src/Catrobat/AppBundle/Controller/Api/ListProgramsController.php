@@ -15,8 +15,7 @@ class ListProgramsController extends Controller
 {
 
   /**
-   * @Route("/api/projects/recent.json", name="catrobat_api_recent_programs", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listProgramsAction(Request $request)
@@ -25,8 +24,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/recentIDs.json", name="catrobat_api_recent_program_ids", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listProgramIdsAction(Request $request)
@@ -35,8 +33,7 @@ class ListProgramsController extends Controller
   }
   
   /**
-   * @Route("/api/projects/mostDownloaded.json", name="catrobat_api_most_downloaded_programs", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostDownloadedProgramsAction(Request $request)
@@ -45,8 +42,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloadedIDs.json", name="catrobat_api_most_downloaded_program_ids", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostDownloadedProgramIdsAction(Request $request)
@@ -55,8 +51,7 @@ class ListProgramsController extends Controller
   }
   
   /**
-   * @Route("/api/projects/mostViewed.json", name="catrobat_api_most_viewed_programs", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostViewedProgramsAction(Request $request)
@@ -65,8 +60,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewedIDs.json", name="catrobat_api_most_viewed_programids", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostViewedProgramIdsAction(Request $request)
@@ -75,8 +69,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/userPrograms.json", name="catrobat_api_user_programs", defaults={"_format": "json"})
-   * @Route("/{flavor}/api/projects/userPrograms.json", name="api_user_programs", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
+   * @Route("/api/projects/userPrograms.json", name="api_user_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listUserProgramsAction(Request $request)

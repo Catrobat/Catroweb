@@ -15,7 +15,7 @@ Feature: Get details for a specific program
       
   Scenario: show details of a program with given id
     Given I have a parameter "id" with value "2"
-    When I GET "/api/projects/getInfoById.json" with these parameters
+    When I GET "/pocketcode/api/projects/getInfoById.json" with these parameters
     Then I should get the json object:
       """
       {
@@ -39,7 +39,7 @@ Feature: Get details for a specific program
                                 "Views":"9",
                                 "Downloads":"333",
                                 "ProjectUrl":"pocketcode/program/2",
-                                "DownloadUrl":"download/2.catrobat",
+                                "DownloadUrl":"pocketcode/download/2.catrobat",
                                 "FileSize":2.5
                             }],
           "preHeaderMessages":""
@@ -48,7 +48,7 @@ Feature: Get details for a specific program
       
   Scenario: return error if no program matches the given id
     Given I have a parameter "id" with value "9"
-    When I GET "/api/projects/getInfoById.json" with these parameters
+    When I GET "/pocketcode/api/projects/getInfoById.json" with these parameters
     Then I should get the json object:
       """
         {

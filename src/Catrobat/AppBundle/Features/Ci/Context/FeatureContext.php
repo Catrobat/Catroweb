@@ -122,7 +122,7 @@ class FeatureContext extends BaseContext
     public function iStartAnApkGenerationOfMyProgram()
     {
         $client = $this->getClient();
-        $client->request('GET', "/ci/build/1", array(), array(), array('HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure));
+        $client->request('GET', "/pocketcode/ci/build/1", array(), array(), array('HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure));
         $response = $client->getResponse();
         assertEquals(200, $response->getStatusCode(), "Wrong response code. " . $response->getContent());
     }
@@ -184,7 +184,7 @@ class FeatureContext extends BaseContext
         assertTrue(file_exists($filepath), "File not found");
         $temppath = $this->getTempCopy($filepath);
         $files = array(new UploadedFile($temppath, "test.apk"));
-        $url = "/ci/upload/1?token=UPLOADTOKEN";
+        $url = "/pocketcode/ci/upload/1?token=UPLOADTOKEN";
         $parameters = array(
         );
         $this->getClient()->request('POST', $url, $parameters, $files);
@@ -245,7 +245,7 @@ class FeatureContext extends BaseContext
             throw new PendingException("Program not found: " + $arg1);
         }
         $router = $this->getSymfonyService('router');
-        $url = $router->generate("ci_download", array("id" => $program->getId()));
+        $url = $router->generate("ci_download", array("id" => $program->getId(), "flavor" => "pocketcode"));
         
         $this->getClient()->request('GET', $url, array(), array());
     }
@@ -310,7 +310,7 @@ class FeatureContext extends BaseContext
      */
     public function iReportABuildError()
     {
-        $url = "/ci/failed/1?token=UPLOADTOKEN";
+        $url = "/pocketcode/ci/failed/1?token=UPLOADTOKEN";
         $this->getClient()->request('GET', $url);
         assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
     }

@@ -16,8 +16,7 @@ class FeaturedController extends Controller
 {
 
   /**
-   * @Route("/{flavor}/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
-   * @Route("/api/projects/featured.json", name="catrobat_api_featured_programs", defaults={"_format": "json"})
+   * @Route("/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function getFeaturedProgramsAction(Request $request)

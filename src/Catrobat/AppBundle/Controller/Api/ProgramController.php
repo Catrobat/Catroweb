@@ -15,8 +15,7 @@ class ProgramController extends Controller
 {
 
   /**
-   * @Route("/{flavor}/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"}, requirements={"flavor": "pocketcode|pocketkodey"})
-   * @Route("/api/projects/getInfoById.json", name="catrobat_api_info_by_id", defaults={"_format": "json"})
+   * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function showProgramAction(Request $request)

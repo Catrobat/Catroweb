@@ -223,7 +223,7 @@ class FeatureContext extends BaseContext
      */
     public function iReportProgramWithNote($program_id, $note)
     {
-      $url = "/api/reportProgram/reportProgram.json";
+      $url = "/pocketcode/api/reportProgram/reportProgram.json";
       $parameters = array(
           "program" => $program_id,
           "note" => $note

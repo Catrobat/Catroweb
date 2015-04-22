@@ -1,3 +1,16 @@
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
 catrobat_web_index:
     path: /
     defaults:
@@ -6,10 +19,11 @@ catrobat_web_index:
         permanent: false
         flavor: "pocketcode"
         
-catroweb_app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
-    prefix:   /
+catroweb_flavored:
+    resource: "routing_flavored.yml"
+    prefix:   /{flavor}/
+    requirements:
+      flavor:  pocketcode|pocketkodey
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
@@ -30,22 +44,8 @@ sonata_user_change_password:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
     prefix: /profile
 
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
 
-admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
-
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
     
     
-login:
-    path:      /{flavor}/login
-    defaults:  { _controller: FOSUserBundle:Security:login }
-    requirements: { "flavor": "pocketcode|pocketkodey" }
+
     

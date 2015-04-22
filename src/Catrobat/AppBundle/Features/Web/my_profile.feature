@@ -139,7 +139,7 @@ Feature:
   Scenario: deleting a program should work
     Given I should see "program 1"
     And I should see "program 2"
-    When I go to "/profileDeleteProgram/2"
+    When I go to "/pocketcode/profileDeleteProgram/2"
     Then I should not see "program 2"
     And I should see "program 1"
     And there should be "3" programs in the database
@@ -147,6 +147,6 @@ Feature:
 #todo:  Scenario: deleting a program should work (with confirm message)
 
   Scenario: deleting another user's program should not work
-    Given I go to "/profileDeleteProgram/3"
+    Given I go to "/pocketcode/profileDeleteProgram/3"
     Then I should see "Ooooops something went wrong."
 
