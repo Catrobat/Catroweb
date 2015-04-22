@@ -12,7 +12,13 @@ class AppExtension extends \Twig_Extension
   {
     return array(
       'countriesList' => new \Twig_Function_Method($this, 'getCountriesList'),
+      'isWebview' => new \Twig_Function_Method($this, 'isWebview'),
     );
+  }
+
+  public function getName()
+  {
+    return 'app_extension';
   }
 
   public function getCountriesList()
@@ -25,8 +31,12 @@ class AppExtension extends \Twig_Extension
     return Intl::getRegionBundle()->getCountryNames($language);
   }
 
-  public function getName()
+  public function isWebview()
   {
-    return 'app_extension';
+    $request = Request::createFromGlobals();
+    $user_agent = $request->headers->get('User-Agent');
+
+    // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
+    return preg_match("/Catrobat/", $user_agent);
   }
 }

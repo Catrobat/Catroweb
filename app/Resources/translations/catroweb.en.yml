@@ -3,6 +3,9 @@
 localLanguage: English
 username: Username
 password: Password
+aboutPocketCode: About Pocket Code
+tutorials: Tutorials
+googlePlay: Google Play
 
 programs:
   featured: Featured

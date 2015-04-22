@@ -15,11 +15,27 @@ header {
 
   nav {
 
-    #header-left, #header-right {
+    #header-left, #header-right{
       display: table-cell;
       vertical-align: middle;
 
       width: 100%;
+    }
+
+    #header-top {
+      width: 100%;
+      overflow: auto;
+      margin-bottom: 10px;
+
+      > div {
+        float: right;
+        margin-left: 15px;
+        font-weight: bold;
+
+        a {
+          text-decoration: none;
+        }
+      }
     }
 
     #logo img {
