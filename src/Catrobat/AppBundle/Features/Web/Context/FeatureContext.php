@@ -427,15 +427,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function attachFileToField($field, $path)
   {
     $field = $this->fixStepArgument($field);
-
-    if ($this->getMinkParameter('files_path')) {
-      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
-      if (is_file($fullPath)) {
-        $path = $fullPath;
-      }
-    }
-
-    $this->getSession()->getPage()->attachFileToField($field, self::AVATAR_DIR . $path);
+    $this->getSession()->getPage()->attachFileToField($field, realpath(self::AVATAR_DIR . $path));
   }
 
   /**
