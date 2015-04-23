@@ -77,7 +77,6 @@ class StarterCategory
   public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
   {
     $program->setCategory($this);
-    $this->programs->add($program);
   }
 
   /**
@@ -86,7 +85,6 @@ class StarterCategory
   public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
   {
     $program->setCategory(null);
-    $this->programs->removeElement($program);
   }
 
   /**
