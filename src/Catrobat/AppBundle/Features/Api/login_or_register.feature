@@ -3,8 +3,9 @@ Feature: Login with an existing accunt or register a new one
 
   Background: 
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 123456   | cccccccccc |
+      | name     | password | token      | dn           |
+      | Catrobat | 123456   | cccccccccc |              |
+      | LDAP-user|          | cccccccccc | cn=LDAP-user |
 
 
   Scenario: Register a new user
@@ -24,9 +25,24 @@ Feature: Login with an existing accunt or register a new one
 
   Scenario: login with valid username and password
     Given I have the POST parameters:
-        | name                 | value                 |
-        | registrationUsername | Catrobat              |
-        | registrationPassword | 123456                |
+      | name                 | value                 |
+      | registrationUsername | Catrobat              |
+      | registrationPassword | 123456                |
+    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+    Then I should get the json object:
+      """
+      {"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
+      """
+
+
+  Scenario: login with valid username and password of LDAP-User
+    Given I have the POST parameters:
+      | name                 | value                 |
+      | registrationUsername | LDAP-user             |
+      | registrationPassword | 654321                |
+    And there are LDAP-users:
+      | name                    | password  |
+      | LDAP-user               | 654321    |
     When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
     Then I should get the json object:
       """
@@ -90,3 +106,18 @@ Feature: Login with an existing accunt or register a new one
       """
 
 
+  Scenario: registration with a username used on ldap should fail
+    Given I have the POST parameters:
+      | name                 | value                 |
+      | registrationUsername | LDAP-user             |
+      | registrationPassword | battery-horse-stapler |
+      | registrationEmail    | test@mail.com         |
+      | registrationCountry  | at                    |
+    And there are LDAP-users:
+      | name                    | password  | groups                                |
+      | LDAP-user               | 654321    | Webserver-FeaturedProgramsMaintainers |
+    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+    Then I should get the json object:
+      """
+      {"statusCode":601,"answer":"The password or username was incorrect.","preHeaderMessages":""}
+      """

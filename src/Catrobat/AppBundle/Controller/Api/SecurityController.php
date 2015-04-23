@@ -13,6 +13,8 @@ use Google_Service_Plus;
 use Assetic\Exception;
 use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
 use HWI\Bundle\OAuthBundle\Tests\Security\Core\Authentication\Token\OAuthTokenTest;
+use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator;
@@ -39,76 +41,101 @@ class SecurityController extends Controller
         return JsonResponse::create(array('statusCode' => StatusCode::OK, 'answer' => $this->trans('success.token'), 'preHeaderMessages' => "  \n"));
     }
 
-
     /*
      * loginOrRegisterAction is DEPRECATED!!
      */
     /**
-     * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"})
-     * @Method({"POST"})
-     */
+    * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"})
+    * @Method({"POST"})
+     * @deprecated
+    */
     public function loginOrRegisterAction(Request $request)
     {
-        $userManager = $this->get('usermanager');
-        $tokenGenerator = $this->get('tokengenerator');
-        $validator = $this->get('validator');
+      $userManager = $this->get('usermanager');
+      $userManagerLdap = $this->get('usermanager.ldap');
+      $tokenGenerator = $this->get('tokengenerator');
+      $validator = $this->get('validator');
 
-        $retArray = array();
-        $username = $request->request->get('registrationUsername');
+      $retArray = array();
+      $username = $request->request->get('registrationUsername');
 
+      $ldap_user = true;
+      $user = $userManagerLdap->findUserByUsername($username);
+      if($user == null) {
         $user = $userManager->findUserByUsername($username);
+        $ldap_user = false;
+      }
 
-        if ($user == null) {
-            $create_request = new CreateUserRequest($request);
-            $violations = $validator->validate($create_request);
-            foreach ($violations as $violation) {
-                $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-                switch ($violation->getMessageTemplate()) {
-                    case 'errors.password.short':
-                        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-                        break;
-                    case 'errors.email.invalid':
-                        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-                        break;
-                }
-                $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
-                break;
-            }
+      if ($user == null) {
+          $create_request = new CreateUserRequest($request);
+          $violations = $validator->validate($create_request);
+          foreach ($violations as $violation) {
+              $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
+              switch ($violation->getMessageTemplate()) {
+                  case 'errors.password.short':
+                      $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+                      break;
+                  case 'errors.email.invalid':
+                      $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+                      break;
+              }
+              $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
+              break;
+          }
 
-            if (count($violations) == 0) {
-                if ($userManager->findUserByEmail($create_request->mail) != null) {
-                    $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
-                    $retArray['answer'] = $this->trans('errors.email.exists');
-                } else {
-                    $user = $userManager->createUser();
-                    $user->setUsername($create_request->username);
-                    $user->setEmail($create_request->mail);
-                    $user->setPlainPassword($create_request->password);
-                    $user->setEnabled(true);
-                    $user->setUploadToken($tokenGenerator->generateToken());
-                    $user->setCountry($create_request->country);
+          if (count($violations) == 0) {
+              if ($userManager->findUserByEmail($create_request->mail) != null) {
+                  $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
+                  $retArray['answer'] = $this->trans('errors.email.exists');
+              } else {
+                  $user = $userManager->createUser();
+                  $user->setUsername($create_request->username);
+                  $user->setEmail($create_request->mail);
+                  $user->setPlainPassword($create_request->password);
+                  $user->setEnabled(true);
+                  $user->setUploadToken($tokenGenerator->generateToken());
+                  $user->setCountry($create_request->country);
 
+                  $violations = $validator->validate($user,"Registration");
+                  if(count($violations) > 0)
+                  {
+                    $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+                    $retArray['answer'] = $this->trans('errors.login');
+                  }else{
                     $userManager->updateUser($user);
                     $retArray['statusCode'] = 201;
                     $retArray['answer'] = $this->trans('success.registration');
                     $retArray['token'] = $user->getUploadToken();
-                }
-            }
-        } else {
-            $retArray['statusCode'] = StatusCode::OK;
-            $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
-            if ($correct_pass) {
-                $retArray['statusCode'] = StatusCode::OK;
-                $retArray['token'] = $user->getUploadToken();
-            } else {
-                $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-                $retArray['answer'] = $this->trans('errors.login');
-            }
-        }
-        $retArray['preHeaderMessages'] = '';
+                  }
 
-        return JsonResponse::create($retArray);
+              }
+          }
+      } else {
+          $retArray['statusCode'] = StatusCode::OK;
+          if($ldap_user){
+            $correct_pass = $userManagerLdap->bind($user, $request->request->get('registrationPassword'));
+            if($correct_pass)
+            {
+              //at the latest now the user is created and can be loaded
+              $user = $userManager->findUserByUsername($username);
+            }
+          }
+          else{
+            $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
+          }
+          if ($correct_pass) {
+              $retArray['statusCode'] = StatusCode::OK;
+              $retArray['token'] = $user->getUploadToken();
+          } else {
+              $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+              $retArray['answer'] = $this->trans('errors.login');
+          }
+      }
+      $retArray['preHeaderMessages'] = '';
+
+      return JsonResponse::create($retArray);
     }
+
 
     /**
      * @Route("/api/register/Register.json", name="catrobat_api_register", options={"expose"=true}, defaults={"_format": "json"})

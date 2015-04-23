@@ -153,6 +153,9 @@ class FeatureContext extends BaseContext
       case 'an additional image':
         $filename = 'program_with_extra_image.catrobat';
         break;
+      case 'valid parameters':
+        $filename = 'base.catrobat';
+        break;
 
       default:
         throw new PendingException('No case defined for "'.$programattribute.'"');
@@ -176,13 +179,35 @@ class FeatureContext extends BaseContext
       $users = $table->getHash();
       for ($i = 0; $i < count($users); ++$i ) {
           $this->insertUser(
-        array(
+        @array(
           'name' => $users[$i]['name'],
-          'token' => $users[$i]['token'],
-          'password' => $users[$i]['password'],
-          'email' => 'dev'.$i.'@pocketcode.org',
+          'email' => $users[$i]['email'],
+          'token' => isset($users[$i]['token'])?$users[$i]['token']:"",
+          'password' => isset($users[$i]['password'])?$users[$i]['password']:"",
         ));
       }
+  }
+
+  /**
+   * @Given /^there are LDAP-users:$/
+   */
+  public function thereAreLdapUsers(TableNode $table)
+  {
+    /**
+     * @var $ldap_test_driver LdapTestDriver
+     * @var $user User
+     */
+    $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
+    $users = $table->getHash();
+    $ldap_test_driver->resetFixtures();
+
+    for ($i = 0; $i < count($users); ++$i ) {
+      $username = $users[$i]['name'];
+      $pwd = $users[$i]['password'];
+      $groups = array_key_exists("groups",$users[$i])?explode(",",$users[$i]["groups"]):array();
+      assert($ldap_test_driver->addTestUser($username,$pwd,$groups,isset($users[$i]['email'])?$users[$i]['email']:null),
+        "APC_store not working. Check your cli/php.ini settings, add \"apc.enabled = 1\" and \"apc.enable_cli = 1\" at the end");
+    }
   }
 
   /**
@@ -194,15 +219,17 @@ class FeatureContext extends BaseContext
       $program_manager = $this->getProgramManger();
       for ($i = 0; $i < count($programs); ++$i ) {
           $user = $this->getUserManager()->findOneBy(array(
-          'username' => $programs[$i]['owned by'],
+          'username' => isset($programs[$i]['owned by'])?$programs[$i]['owned by']:"",
       ));
-          $config = array(
+          @$config = array(
         'name' => $programs[$i]['name'],
         'description' => $programs[$i]['description'],
         'views' => $programs[$i]['views'],
         'downloads' => $programs[$i]['downloads'],
         'uploadtime' => $programs[$i]['upload time'],
+        'apk_status' => $programs[$i]['apk_status'],
         'catrobatversionname' => $programs[$i]['version'],
+        'directory_hash' => $programs[$i]['directory_hash'],
         'filesize' => @$programs[$i]['FileSize'],
         'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
         'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,

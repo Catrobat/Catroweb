@@ -17,7 +17,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enabled: true, enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -90,6 +90,32 @@ fos_user:
 
     from_email:
         address: noreply@catrob.at
+
+fr3d_ldap:
+    driver:
+        host:                %ldap_host%
+        port:                %ldap_port%    # Optional
+        username:            %ldap_user%    # Optional
+        password:            %ldap_password%    # Optional
+        bindRequiresDn:      true   # Optional
+        baseDn:              %ldap_base_dn%   # Optional
+        accountFilterFormat: (cn=%s) # Optional. sprintf format %s will be the username
+#       optReferrals:        false  # Optional
+        useSsl:              true   # Enable SSL negotiation. Optional
+#       useStartTls:         true   # Enable TLS negotiation. Optional
+#       accountCanonicalForm: 3 # ACCTNAME_FORM_BACKSLASH this is only needed if your users have to login with something like HOST\User
+#       accountDomainName: HOST
+#       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
+
+    user:
+        baseDn: %ldap_base_dn%
+        filter: (&(ObjectClass=person))
+        attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
+           - { ldap_attr: cn,  user_method: setUsername } # Default
+           - { ldap_attr: mail,  user_method: setEmail } # Default
+    service:
+        user_manager: usermanager          # Overrides default user manager
+        ldap_manager: usermanager.ldap      # Overrides default ldap manager
 
 knp_paginator:
     page_range: 3                      # default page range used in pagination control

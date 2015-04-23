@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new FR3D\LdapBundle\FR3DLdapBundle(),
             //End Sonata--Admin,
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Catrobat\AppBundle\AppBundle()

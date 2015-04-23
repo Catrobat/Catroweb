@@ -46,4 +46,9 @@ services:
         arguments: 
           - "@router" 
           - "%jenkins%"
+
+    fr3d_ldap.ldap_driver:
+        class: Catrobat\AppBundle\Services\TestEnv\LdapTestDriver
+        arguments:
+          - "%ldap_base_dn%"
           

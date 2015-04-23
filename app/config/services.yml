@@ -104,6 +104,17 @@ services:
         class: Catrobat\AppBundle\Entity\UserManager
         arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
 
+    usermanager.ldap:
+        class: Catrobat\AppBundle\Entity\UserLDAPManager
+        arguments:
+            - "@fr3d_ldap.ldap_driver"
+            - "@fr3d_ldap.user_manager"
+            - %fr3d_ldap.ldap_manager.parameters%
+            - %ldap_role_mappings%
+            - %ldap_group_filter%
+            - "@tokengenerator"
+            - "@logger"
+
     fileextractor:
         class: Catrobat\AppBundle\Services\CatrobatFileExtractor
         arguments: ["%catrobat.file.extract.dir%","%catrobat.file.extract.path%"]

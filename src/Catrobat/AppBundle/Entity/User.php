@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Entity;
 
+use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements LdapUserInterface
 {
     /**
      * @ORM\Id
@@ -37,6 +38,11 @@ class User extends BaseUser
      * @ORM\Column(type="string", nullable=true)
      */
     protected $additional_email;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $dn;
 
     /**
      * @ORM\OneToMany(targetEntity="Program", mappedBy="user", fetch="EXTRA_LAZY")
@@ -210,21 +216,21 @@ class User extends BaseUser
         $this->id = $id;
     }
 
-  /**
-   * @param mixed $additional_email
-   */
-  public function setAdditionalEmail($additional_email)
-  {
-      $this->additional_email = $additional_email;
-  }
+    /**
+     * @param mixed $additional_email
+     */
+    public function setAdditionalEmail($additional_email)
+    {
+        $this->additional_email = $additional_email;
+    }
 
-  /**
-   * @return mixed
-   */
-  public function getAdditionalEmail()
-  {
-      return $this->additional_email;
-  }
+    /**
+     * @return mixed
+     */
+    public function getAdditionalEmail()
+    {
+        return $this->additional_email;
+    }
 
     public function getAvatar()
     {
@@ -238,20 +244,40 @@ class User extends BaseUser
         return $this;
     }
 
-        /**
-         * @param mixed $oauth_password
-         */
-        public function setOauthPassword($oauth_password)
+    /**
+     * @param mixed $oauth_password
+     */
+    public function setOauthPassword($oauth_password)
     {
         $this->oauth_password = $oauth_password;
     }
 
-        /**
-         * @return mixed
-         */
-        public function getOauthPassword()
+    /**
+     * @return mixed
+     */
+    public function getOauthPassword()
     {
         return $this->oauth_password;
+    }
+
+    /**
+     * Set Ldap Distinguished Name.
+     *
+     * @param string $dn Distinguished Name
+     */
+    public function setDn($dn)
+    {
+        $this->dn = strtolower($dn);
+    }
+
+    /**
+     * Get Ldap Distinguished Name.
+     *
+     * @return string Distinguished Name
+     */
+    public function getDn()
+    {
+        return $this->dn;
     }
 }
 

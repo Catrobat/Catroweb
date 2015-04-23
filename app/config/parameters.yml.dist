@@ -20,6 +20,7 @@ parameters:
         job: "Build"
         token: "token"
         uploadtoken: "secret"
+
     application_name: Pocket Code
     google_app_id: ~
     google_secret: ~
@@ -29,3 +30,10 @@ parameters:
     google_testuser_pw: ~
     facebook_testuser_mail: ~
     facebook_testuser_pw: ~
+
+    ldap_host: http://localhost
+    ldap_port: 636
+    ldap_user: cn=user, dc=organisation, dc=org
+    ldap_password: "secret"
+    ldap_base_dn: ou=users, dc=organisation, dc=org
+    ldap_group_filter: "(&(&(ObjectClass=groupOfUniqueNames))(uniqueMember=%s))" #%s is replaced by sprintf with user dn

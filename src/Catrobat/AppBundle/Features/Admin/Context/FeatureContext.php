@@ -4,14 +4,19 @@ namespace Catrobat\AppBundle\Features\Admin\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\Notification;
+use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Entity\UserManager;
+use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
+use Sonata\AdminBundle\Command\SetupAclCommand;
 use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
 
 //
 // Require 3rd-party libraries here:
@@ -23,27 +28,8 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Feature context.
  */
-class FeatureContext extends BaseContext
+class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureContext
 {
-    private $request_parameters;
-    private $files;
-    private $hostname;
-    private $secure;
-    private $last_response;
-
-  /**
-   * Initializes context with parameters from behat.yml.
-   *
-   * @param array $parameters
-   */
-  public function __construct($error_directory)
-  {
-      $this->setErrorDirectory($error_directory);
-      $this->request_parameters = array();
-      $this->files = array();
-      $this->hostname = 'localhost';
-      $this->secure = false;
-  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Support Functions
@@ -51,53 +37,57 @@ class FeatureContext extends BaseContext
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Hooks
+
+/** @BeforeScenario */
+  public function followRedirects()
+  {
+    $this->getClient()->followRedirects(true);
+  }
+
+  /** @BeforeScenario */
+  public function generateSessionCookie()
+  {
+
+    $client = $this->getClient();
+
+    $session = $this->getClient()->getContainer()->get("session");
+
+    $cookie = new Cookie($session->getName(), $session->getId());
+    $client->getCookieJar()->set($cookie);
+  }
+
+  /** @BeforeScenario */
+  public function initACL()
+  {
+    $acl_command = new SetupAclCommand();
+
+    $acl_command->setContainer($this->getClient()->getContainer());
+    $return = $acl_command->run(new ArrayInput(array()),new NullOutput());
+    if($return != 0)
+    {
+      assert(false,"Oh no!");
+    }
+  }
+
   /** @AfterScenario */
   public function disableProfiler()
   {
       $this->getSymfonyService('profiler')->disable();
   }
 
+  /** @AfterScenario */
+  public function resetLdapTestDriver()
+  {
+    /**
+     * @var $ldap_test_driver LdapTestDriver
+     * @var $user User
+     */
+    $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
+    $ldap_test_driver->resetFixtures();
+  }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Steps
-
-  /**
-   * @Given /^there are users:$/
-   */
-  public function thereAreUsers(TableNode $table)
-  {
-      $users = $table->getHash();
-      for ($i = 0; $i < count($users); ++$i ) {
-          $this->insertUser(
-        array(
-          'name' => $users[$i]['name'],
-          'email' => $users[$i]['email'],
-        ));
-      }
-  }
-
-  /**
-   * @Given /^there are programs:$/
-   */
-  public function thereArePrograms(TableNode $table)
-  {
-      $programs = $table->getHash();
-      $program_class = new \ReflectionClass(get_class(new Program()));
-      $entity_variables = $program_class->getDefaultProperties();
-      for ($i = 0; $i < count($programs); ++$i ) {
-
-          $config = array();
-          foreach($entity_variables as $entity_key=>$entity_var)
-          {
-              if(array_key_exists($entity_key,$programs[$i]))
-                  $config[$entity_key] = $programs[$i][$entity_key];
-          }
-          if(count(array_intersect_key($entity_variables,$programs[$i])) != count(array_keys($programs[$i])))
-          {
-              throw new \Exception("Program entity variables: '".implode("','",array_keys(array_diff_key($programs[$i],$entity_variables)))."' not known");
-          }
-          $this->insertProgram(null, $config);
-      }
-  }
 
   /**
    * @Given /^there are notifications:$/
@@ -121,14 +111,6 @@ class FeatureContext extends BaseContext
       }
       $em->flush();
   }
-
-    /**
-     * @Given /^I am a valid user$/
-     */
-    public function iAmAValidUser()
-    {
-        $this->getDefaultUser();
-    }
 
 
     /**
@@ -175,40 +157,6 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @When /^I upload a program with (.*)$/
-     */
-    public function iUploadAProgramWith($programattribute)
-    {
-        switch ($programattribute) {
-            case 'a rude word in the description':
-                $filename = 'program_with_rudeword_in_description.catrobat';
-                break;
-            case 'a rude word in the name':
-                $filename = 'program_with_rudeword_in_name.catrobat';
-                break;
-            case 'a missing code.xml':
-                $filename = 'program_with_missing_code_xml.catrobat';
-                break;
-            case 'an invalid code.xml':
-                $filename = 'program_with_invalid_code_xml.catrobat';
-                break;
-            case 'a missing image':
-                $filename = 'program_with_missing_image.catrobat';
-                break;
-            case 'an additional image':
-                $filename = 'program_with_extra_image.catrobat';
-                break;
-            case 'valid parameters':
-                $filename = 'base.catrobat';
-                break;
-
-            default:
-                throw new PendingException('No case defined for "'.$programattribute.'"');
-        }
-        $this->upload(self::FIXTUREDIR.'/GeneratedFixtures/'.$filename, null);
-    }
-
-    /**
      * @When /^I report program (\d+) with note "([^"]*)"$/
      */
     public function iReportProgramWithNote($program_id, $note)
@@ -219,19 +167,6 @@ class FeatureContext extends BaseContext
           'note' => $note,
       );
         $this->getClient()->request('POST', $url, $parameters);
-    }
-
-
-    /**
-     * @When /^I GET "([^"]*)"$/
-     */
-    public function iGet($url)
-    {
-        $this->getClient()->followRedirects(true);
-        $this->getClient()->request('GET', $url, array(), $this->files, array(
-            'HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure,
-        ));
-        $this->last_response = $this->getClient()->getResponse();
     }
 
     /**
@@ -262,7 +197,8 @@ class FeatureContext extends BaseContext
      */
     public function theResponseShouldContain($needle)
     {
-        assertContains($needle,$this->last_response->getContent());
+      if(strpos($this->getClient()->getResponse()->getContent(),$needle)===false)
+        assert(false,$needle." not found in the response ");
     }
 
     /**
@@ -270,7 +206,7 @@ class FeatureContext extends BaseContext
      */
     public function theResponseShouldNotContain($needle)
     {
-        assertNotContains($needle,$this->last_response->getContent());
+        assertNotContains($needle,$this->getClient()->getResponse()->getContent());
     }
 
     /**
@@ -353,5 +289,33 @@ class FeatureContext extends BaseContext
     public function iAmALoggedInAsAdmin()
     {
       $this->iAmAUserWithRole("ROLE_ADMIN");
+    }
+
+    /**
+     * @When /^I GET "([^"]*)"$/
+     */
+    public function iGet($arg1)
+    {
+        $this->getClient()->request('GET', $arg1);
+    }
+
+    /**
+     * @When /^I POST login with user "([^"]*)" and password "([^"]*)"$/
+     */
+    public function iPostLoginUserWithPassword($uname, $pwd)
+    {
+      $csrfToken = $this->getSymfonyService('form.csrf_provider')->generateCsrfToken('authenticate');
+
+      $session = $this->getClient()->getContainer()->get("session");
+      $session->set('_csrf_token', $csrfToken);
+      $session->set('something', $csrfToken);
+      $session->save();
+      $cookie = new Cookie($session->getName(), $session->getId());
+      $this->getClient()->getCookieJar()->set($cookie);
+
+      $this->iHaveAParameterWithValue("_username",$uname);
+      $this->iHaveAParameterWithValue("_password",$pwd);
+      $this->iHaveAParameterWithValue("_csrf_token",$csrfToken);
+      $this->iPostTheseParametersTo("/login_check");
     }
 }

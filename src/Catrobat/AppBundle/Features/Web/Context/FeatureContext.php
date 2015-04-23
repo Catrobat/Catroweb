@@ -10,6 +10,7 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\StarterCategory;
 use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Doctrine\ORM\EntityManager;
