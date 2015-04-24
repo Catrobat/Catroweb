@@ -36,6 +36,16 @@ services:
               tags:
                 -  { name: console.command }
 
+      command.backup.create:
+              class: Catrobat\AppBundle\Commands\CreateBackupCommand
+              tags:
+                -  { name: console.command }
+
+      command.backup.restore:
+              class: Catrobat\AppBundle\Commands\RestoreBackupCommand
+              tags:
+                -  { name: console.command }
+
 
       catrowebadmin.command.import.legacy:
               class: Catrobat\AppBundle\Commands\ImportLegacyCommand

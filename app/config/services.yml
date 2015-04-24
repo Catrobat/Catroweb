@@ -11,6 +11,7 @@ parameters:
       catrobat.featuredimage.dir:  "%catrobat.webdir%resources/featured/"
       catrobat.featuredimage.path: "resources/featured/"
       catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
+      catrobat.backup.dir:        "%kernel.root_dir%/../backups/"
       
 services:
 
