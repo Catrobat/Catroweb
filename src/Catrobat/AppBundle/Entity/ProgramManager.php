@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Model;
+namespace Catrobat\AppBundle\Entity;
 
 use Catrobat\AppBundle\Events\InvalidProgramUploadedEvent;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;

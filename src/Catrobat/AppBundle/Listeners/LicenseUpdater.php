@@ -3,7 +3,7 @@
 namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 
 class LicenseUpdater
 {

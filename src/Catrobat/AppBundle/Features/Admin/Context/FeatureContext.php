@@ -6,7 +6,7 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\Notification;
 use Catrobat\AppBundle\Entity\RudeWord;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
-use Catrobat\AppBundle\Model\UserManager;
+use Catrobat\AppBundle\Entity\UserManager;
 use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;

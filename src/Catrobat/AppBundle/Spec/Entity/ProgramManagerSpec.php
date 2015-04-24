@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Model;
+namespace Catrobat\AppBundle\Spec\Entity;
 
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
@@ -22,7 +22,7 @@ class ProgramManagerSpec extends ObjectBehavior
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    * @param \Catrobat\AppBundle\Entity\User $user          
    * @param \Catrobat\AppBundle\Requests\AddProgramRequest $request
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $extracted_file          
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $extracted_file          
    * @param \Catrobat\AppBundle\Entity\Program $inserted_program
    * @param \Symfony\Component\EventDispatcher\Event $event
    * @param \Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception
@@ -41,7 +41,7 @@ class ProgramManagerSpec extends ObjectBehavior
 
   function it_is_initializable()
   {
-    $this->shouldHaveType('Catrobat\AppBundle\Model\ProgramManager');
+    $this->shouldHaveType('Catrobat\AppBundle\Entity\ProgramManager');
   }
 
   function it_returns_the_program_after_successfully_adding_a_program($request, $entity_manager)

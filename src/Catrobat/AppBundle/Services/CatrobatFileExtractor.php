@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\Services;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Catrobat\AppBundle\StatusCode;
 

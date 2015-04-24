@@ -3,7 +3,7 @@ namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\StatusCode;

@@ -1,7 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Services;
 
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;

@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\StatusCode;

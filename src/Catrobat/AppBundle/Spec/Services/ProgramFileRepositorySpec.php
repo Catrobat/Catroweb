@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Spec\Services;
 
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

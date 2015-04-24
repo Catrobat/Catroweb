@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\Listeners;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramRepository;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 
 class RemixUpdater
 {

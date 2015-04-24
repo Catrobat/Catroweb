@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Null;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Security\Core\SecurityContext;
-use Catrobat\AppBundle\Model\UserManager;
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\UserManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -28,7 +28,7 @@ class ReportController extends Controller
   public function reportProgramAction(Request $request)
   {
     /* @var $context \Symfony\Component\Security\Core\SecurityContext */
-    /* @var $programmanager \Catrobat\AppBundle\Model\ProgramManager */
+    /* @var $programmanager \Catrobat\AppBundle\Entity\ProgramManager */
 
     $context = $this->get("security.context");
     $programmanager = $this->get("programmanager");

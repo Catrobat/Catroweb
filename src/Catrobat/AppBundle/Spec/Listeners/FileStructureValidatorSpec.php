@@ -13,7 +13,7 @@ class FileStructureValidatorSpec extends ObjectBehavior
     }
     
     /**
-     * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
      */
     function it_makes_sure_the_program_has_a_valid_file_structure($file)
     {
@@ -22,7 +22,7 @@ class FileStructureValidatorSpec extends ObjectBehavior
     }
     
     /**
-     * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
      */
     function it_throws_an_exception_if_there_are_too_many_files($file)
     {
@@ -31,7 +31,7 @@ class FileStructureValidatorSpec extends ObjectBehavior
     }
     
     /**
-     * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
      */
     function it_throws_an_exception_if_there_are_too_many_folders($file)
     {

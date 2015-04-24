@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\Listeners;
 use Catrobat\AppBundle\Entity\NotificationRepository;
 use Catrobat\AppBundle\Entity\Notification;
 use Catrobat\AppBundle\Events\ReportInsertEvent;
-use Catrobat\AppBundle\Model\UserManager;
+use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Entity\User;
 
 class ReportNotificator

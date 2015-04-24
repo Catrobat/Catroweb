@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Model;
+namespace Catrobat\AppBundle\Spec\Entity;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -29,7 +29,7 @@ class UserManagerSpec extends ObjectBehavior
   
     function it_is_initializable()
     {
-      $this->shouldHaveType('Catrobat\AppBundle\Model\UserManager');
+      $this->shouldHaveType('Catrobat\AppBundle\Entity\UserManager');
     }
     
     function it_checks_if_password_is_valid($user, $object_manager, $repository)

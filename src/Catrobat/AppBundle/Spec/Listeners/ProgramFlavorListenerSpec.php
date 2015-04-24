@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Spec\Listeners;
 
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Filesystem\Filesystem;
@@ -16,7 +16,7 @@ class ProgramFlavorListenerSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    * @param \Catrobat\AppBundle\Entity\Program $program
    */
   function it_detects_the_pocketcode_flavor($file, $program)
@@ -29,7 +29,7 @@ class ProgramFlavorListenerSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    * @param \Catrobat\AppBundle\Entity\Program $program
    */
   function it_detects_the_kodey_flavor($file, $program)
@@ -42,7 +42,7 @@ class ProgramFlavorListenerSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    * @param \Catrobat\AppBundle\Entity\Program $program
    */
   function it_throws_an_exception_if_the_flavor_is_unknown($file, $program)

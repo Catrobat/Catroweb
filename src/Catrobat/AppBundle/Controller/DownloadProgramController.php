@@ -3,7 +3,7 @@
 namespace Catrobat\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Catrobat\AppBundle\Services\ProgramFileRepository;

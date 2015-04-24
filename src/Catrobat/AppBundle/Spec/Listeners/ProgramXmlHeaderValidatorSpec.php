@@ -14,7 +14,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_checks_if_the_program_xml_header_is_valid($file)
   {
@@ -24,7 +24,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_header_is_missing($file)
   {
@@ -35,7 +35,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_header_information_is_missing($file)
   {
@@ -46,7 +46,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_checks_if_program_name_is_set($file)
   {
@@ -57,7 +57,7 @@ class ProgramXmlHeaderValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_checks_if_description_is_set($file)
   {

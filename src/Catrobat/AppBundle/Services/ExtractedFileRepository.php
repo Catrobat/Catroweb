@@ -1,10 +1,10 @@
 <?php
 namespace Catrobat\AppBundle\Services;
 
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ExtractedFileRepository {

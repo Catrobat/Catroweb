@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter;

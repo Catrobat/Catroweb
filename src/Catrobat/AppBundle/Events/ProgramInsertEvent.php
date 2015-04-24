@@ -2,7 +2,7 @@
 namespace Catrobat\AppBundle\Events;
 
 use Symfony\Component\EventDispatcher\Event;
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 
 class ProgramInsertEvent extends Event
 {

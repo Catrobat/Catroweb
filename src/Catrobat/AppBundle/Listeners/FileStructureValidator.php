@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;

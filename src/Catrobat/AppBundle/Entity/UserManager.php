@@ -1,5 +1,5 @@
 <?php
-namespace Catrobat\AppBundle\Model;
+namespace Catrobat\AppBundle\Entity;
 
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use Doctrine\Common\Persistence\ObjectManager;

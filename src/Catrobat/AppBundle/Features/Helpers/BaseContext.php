@@ -16,7 +16,7 @@ use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -69,7 +69,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   }
 
   /**
-   * @return \Catrobat\AppBundle\Model\UserManager
+   * @return \Catrobat\AppBundle\Entity\UserManager
    */
   public function getUserManager()
   {
@@ -77,7 +77,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   }
 
   /**
-   * @return \Catrobat\AppBundle\Model\ProgramManager
+   * @return \Catrobat\AppBundle\Entity\ProgramManager
    */
   public function getProgramManger()
   {

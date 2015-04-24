@@ -13,7 +13,7 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
     }
     
     /**
-     * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
      */
     function it_makes_sure_only_images_defined_in_the_xml_are_in_the_image_directory($file)
     {
@@ -23,7 +23,7 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
     }
     
     /**
-     * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
      */
     function it_throws_an_exception_if_there_is_an_image_not_specified_in_xml($file)
     {
@@ -34,7 +34,7 @@ class OnlyDefinedImagesValidatorSpec extends ObjectBehavior
     }
     
     /**
-     * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
      */
     function it_throws_an_exception_if_a_image_is_missing($file)
     {

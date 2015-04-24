@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\Listeners;
 use Catrobat\AppBundle\Entity\NotificationRepository;
 use Catrobat\AppBundle\Entity\Notification;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
-use Catrobat\AppBundle\Model\UserManager;
+use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Entity\User;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;

@@ -1,5 +1,5 @@
 <?php
-namespace Catrobat\AppBundle\Model;
+namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\StatusCode;

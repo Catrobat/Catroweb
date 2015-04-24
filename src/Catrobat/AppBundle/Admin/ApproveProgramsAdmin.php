@@ -1,7 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Admin;
 
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Catrobat\AppBundle\Services\ExtractedFileRepository;
 use Catrobat\AppBundle\Services\ProgramFileRepository;

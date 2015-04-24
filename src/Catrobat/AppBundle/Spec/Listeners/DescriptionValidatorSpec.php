@@ -22,7 +22,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_the_description_is_too_long($file)
   {
@@ -36,7 +36,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_nothing_if_a_normal_description_is_validated($file)
   {
@@ -45,7 +45,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_the_descripiton_contains_a_rude_word($file, $rudewordfilter)
   {

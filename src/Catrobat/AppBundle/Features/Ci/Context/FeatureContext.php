@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Client;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\Routing\Router;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 require_once 'PHPUnit/Framework/Assert/Functions.php';

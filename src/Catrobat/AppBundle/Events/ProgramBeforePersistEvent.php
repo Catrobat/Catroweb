@@ -3,7 +3,7 @@ namespace Catrobat\AppBundle\Events;
 
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\EventDispatcher\Event;
-use Catrobat\AppBundle\Model\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 
 class ProgramBeforePersistEvent extends Event
 {

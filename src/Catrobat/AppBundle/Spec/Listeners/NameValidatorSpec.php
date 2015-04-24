@@ -25,7 +25,7 @@ class NameValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_makes_sure_the_given_program_name_is_valid($file)
   {
@@ -35,7 +35,7 @@ class NameValidatorSpec extends ObjectBehavior
 
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_the_name_is_null($file)
   {
@@ -44,7 +44,7 @@ class NameValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_the_name_is_empty($file)
   {
@@ -53,7 +53,7 @@ class NameValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_the_name_is_too_long($file)
   {
@@ -67,7 +67,7 @@ class NameValidatorSpec extends ObjectBehavior
   }
 
   /**
-   * @param \Catrobat\AppBundle\Model\ExtractedCatrobatFile $file
+   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    */
   function it_throws_an_exception_if_the_name_contains_a_rude_word($file, $rudewordfilter)
   {

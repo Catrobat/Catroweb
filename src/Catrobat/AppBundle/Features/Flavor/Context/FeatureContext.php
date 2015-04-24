@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
-use Catrobat\AppBundle\Model\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramManager;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 

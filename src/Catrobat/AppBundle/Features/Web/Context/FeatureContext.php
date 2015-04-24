@@ -291,7 +291,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereAreUsers(TableNode $table)
   {
     /**
-     * @var $user_manager \Catrobat\AppBundle\Model\UserManager
+     * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
      * @var $user \Catrobat\AppBundle\Entity\User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
@@ -496,7 +496,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereShouldBeProgramsInTheDatabase($arg1)
   {
     /**
-     * @var $program_manager \Catrobat\AppBundle\Model\ProgramManager
+     * @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager
      */
     $program_manager = $this->kernel->getContainer()->get('programmanager');
     $programs = $program_manager->findAll();

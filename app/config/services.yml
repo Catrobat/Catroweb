@@ -90,7 +90,7 @@ services:
 # =========================== Manager & Stuff ===========================
 
     programmanager:
-        class: Catrobat\AppBundle\Model\ProgramManager
+        class: Catrobat\AppBundle\Entity\ProgramManager
         arguments: 
             - "@fileextractor"
             - "@filerepository"
@@ -106,7 +106,7 @@ services:
         arguments: ["@rudewordrepository"]
 
     usermanager:
-        class: Catrobat\AppBundle\Model\UserManager
+        class: Catrobat\AppBundle\Entity\UserManager
         arguments: ["@security.encoder_factory","@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager","%fos_user.model.user.class%"]
 
     fileextractor:

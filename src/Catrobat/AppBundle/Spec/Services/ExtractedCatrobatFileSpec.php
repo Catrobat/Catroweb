@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Model;
+namespace Catrobat\AppBundle\Spec\Services;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,7 +14,7 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
   
   function it_is_initializable()
   {
-    $this->shouldHaveType('Catrobat\AppBundle\Model\ExtractedCatrobatFile');
+    $this->shouldHaveType('Catrobat\AppBundle\Services\ExtractedCatrobatFile');
   }
 
   function it_gets_the_program_name_from_xml()

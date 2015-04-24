@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\Controller\Api;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Security\Core\SecurityContext;
-use Catrobat\AppBundle\Model\UserManager;
+use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

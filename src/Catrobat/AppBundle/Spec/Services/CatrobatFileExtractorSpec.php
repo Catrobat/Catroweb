@@ -31,7 +31,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
   {
     $valid_catrobat_file = new File(__SPEC_FIXTURES_DIR__ . "/test.catrobat");
     $extracted_file = $this->extract($valid_catrobat_file);
-    $extracted_file->shouldHaveType('Catrobat\AppBundle\Model\ExtractedCatrobatFile');
+    $extracted_file->shouldHaveType('Catrobat\AppBundle\Services\ExtractedCatrobatFile');
   }
 
   function it_throws_an_exception_while_extracting_an_invalid_file()
