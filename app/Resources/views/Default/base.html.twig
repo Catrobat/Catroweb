@@ -41,7 +41,7 @@
 
 
 <script>
-  new Main('{{ path('search', {'q': 0, 'flavor': app.request.attributes.get('flavor') } ) }}');
+  new Main('{{ path('search', {'q': 0 } ) }}');
 </script>
 {% block js %}{% endblock %}
 

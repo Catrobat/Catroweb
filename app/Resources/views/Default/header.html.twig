@@ -9,7 +9,7 @@
 
   <div id="header-left">
     <div id="logo">
-      <a href="{{ path('index', { 'flavor': app.request.attributes.get('flavor') }) }}">
+      <a href="{{ path('index') }}">
         <img src="{{ asset('images/logo/logo_text.png') }}" alt="Pocket Code Logo" />
       </a>
     </div>
@@ -34,7 +34,7 @@
           <div class="img-dropdownArrow"></div>
         </div>
       {% else %}
-        <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}" id="btn-login">
+        <a href="{{ url('login') }}" id="btn-login">
           <div class="btn btn-menu">
             <div class="img-avatar"></div>
           </div>
@@ -62,7 +62,7 @@
           </div>
         {% endif %}
       {% else %}
-      <a href="{{ url('login', { 'flavor': app.request.attributes.get('flavor') }) }}" id="btn-login">
+      <a href="{{ url('login') }}" id="btn-login">
         <div class="btn btn-menu">
           <div class="img-avatar"></div>
         </div>
@@ -75,7 +75,7 @@
   {% if app.user %}
     <div id="nav-dropdown" class="img-nav-dropdown">
       <div>
-        <a href="{{ url('profile', { 'flavor': app.request.attributes.get('flavor') }) }}">
+        <a href="{{ url('profile') }}">
           <div><div class="img-author-big"></div></div>
           <div>{{ "My Profile"|trans({}, "catroweb") }}</div>
         </a>

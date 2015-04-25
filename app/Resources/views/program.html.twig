@@ -15,7 +15,7 @@
                     <li>
                         <div class="img-author"></div>
                         <div class="link-author">
-                            <a href="{{ url('profile', { id : program.user.id, flavor: app.request.attributes.get('flavor') }) }}">{{ program.user }}</a>
+                            <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
                         </div>
                     </li>
                 </ul>
@@ -74,7 +74,7 @@
                   </p>
                   </form>
               {% else %}
-                {{ "programs.reportLoginText"|trans( { '%href1%' : "<a href=" ~ url( 'login', { flavor : app.request.attributes.get('flavor') } ) ~ ">", '%href2%' : "</a>" }, 'catroweb' )|raw }}
+                {{ "programs.reportLoginText"|trans( { '%href1%' : "<a href=" ~ url( 'login' ) ~ ">", '%href2%' : "</a>" }, 'catroweb' )|raw }}
               {% endif %}
             </div>
 
