@@ -1,0 +1,38 @@
+{% extends ":Default:base.html.twig" %}
+
+{% block head %}
+  {% stylesheets 'css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/login.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+  {% include ':Default:headerLogo.html.twig' %}
+{% endblock header%}
+
+{% block body %}
+
+  {% block fos_user_content %}
+
+    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
+      <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]" value="{{ form.children._token.vars.value }}">
+      <div class="input-field">
+        <input type="password" id="fos_user_resetting_form_new_first" name="fos_user_resetting_form[new][first]" placeholder="{{ "profile.newPass"|trans({}, "catroweb") }}" />
+        <div class="img-password"></div>
+      </div>
+
+      <div class="input-field">
+        <input type="password" id="fos_user_resetting_form_new_second" name="fos_user_resetting_form[new][second]" placeholder="{{ "profile.repeatPass"|trans({}, "catroweb") }}" />
+        <div class="img-password"></div>
+      </div>
+
+      {% if form_errors(form.new.first) %}
+        <div class="error-text">{{ "passwordsNoMatch"|trans({}, "catroweb") }}</div>
+      {% endif %}
+      <input type="hidden" name="_target_path" value="{{ path('index', { 'flavor': app.request.attributes.get('flavor') }) }}" />
+      <button id="_submit" class="login" name="_submit" >{{ 'login.changePass'|trans({}, 'catroweb') }}</button>
+    </form>
+
+  {% endblock fos_user_content %}
+
+{% endblock body %}

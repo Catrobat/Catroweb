@@ -6,6 +6,13 @@ password: Password
 aboutPocketCode: About Pocket Code
 tutorials: Tutorials
 googlePlay: Google Play
+passwordsNoMatch: The passwords didn't match.
+error: Error
+cancel: Cancel
+report: Report
+download: Download
+description: Description
+country: Country
 
 programs:
   featured: Featured
@@ -13,19 +20,13 @@ programs:
   most:
     viewed: Most viewed
     downloaded: Most downloaded
-  age: %age%
-  size: %size% MB big
   downloads: %downloads% downloads
   views: %views% views
-  description: Description
-  download: Download
   reportAsInappropriate: Report as inappropriate
   languageVersion: Catrobat Language version: %languageVersion%
   reportLoginText: Please %href1%login%href2% to report this program as inappropriate.
   reportDialogHeader: Why do you think this program is inappropriate?
   reportDialogReason: Enter a reason
-  reportDialogCancel: Cancel
-  reportDialogConfirm: Report
 
 
 profile:
@@ -34,10 +35,8 @@ profile:
   repeatPass: repeat password
   firstEmail: My first email
   secondEmail: My second email
-  country: Country
   myPrograms: My programs
   form:
-    passwordsNoMatch: The passwords didn't match.
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
     passwordIsUsername: The password must differ from the username.
@@ -425,6 +424,7 @@ login:
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Username or Email
+  changePass: Change password
 
 #api
 error:
