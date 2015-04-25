@@ -180,7 +180,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
       $response = $this->getClient()->getResponse();
       if ($response != null && $response->getContent() != "")
       {
-        file_put_contents($this->error_directory . "error.json", $response->getContent());
+        file_put_contents($this->error_directory . "errors.json", $response->getContent());
       }
     }
   }

@@ -427,7 +427,7 @@ login:
   changePass: Change password
 
 #api
-error:
+errors:
   username:
     blank: Username must not be blank
   password:

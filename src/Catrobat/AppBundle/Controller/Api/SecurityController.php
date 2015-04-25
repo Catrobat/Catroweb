@@ -57,7 +57,7 @@ class SecurityController extends Controller
         if ($userManager->findUserByEmail($create_request->mail) != null)
         {
           $retArray['statusCode'] = StatusCode::EMAIL_ALREADY_EXISTS;
-          $retArray['answer'] = $this->trans("error.email.exists");
+          $retArray['answer'] = $this->trans("errors.email.exists");
         }
         else 
         {
@@ -88,7 +88,7 @@ class SecurityController extends Controller
       else
       {
         $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-        $retArray['answer'] = $this->trans("error.login");
+        $retArray['answer'] = $this->trans("errors.login");
       }
     }
     $retArray['preHeaderMessages'] = "";

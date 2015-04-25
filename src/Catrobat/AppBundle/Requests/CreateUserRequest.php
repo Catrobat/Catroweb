@@ -15,26 +15,26 @@ class CreateUserRequest
   }
 
   /**
-   * @Assert\NotBlank(message = "error.username.blank")
+   * @Assert\NotBlank(message = "errors.username.blank")
    * @Assert\Regex(pattern="/^[\w@_\-\.]+$/")
    */  
   public $username;
 
   /**
-   * @Assert\NotBlank(message = "error.email.blank")
-   * @Assert\Email(message = "error.email.invalid")
+   * @Assert\NotBlank(message = "errors.email.blank")
+   * @Assert\Email(message = "errors.email.invalid")
    */
   public $mail;
   
   /**
-   * @Assert\NotBlank(message = "error.password.blank")
-   * @Assert\Length(min = "6", minMessage = "error.password.short")
+   * @Assert\NotBlank(message = "errors.password.blank")
+   * @Assert\Length(min = "6", minMessage = "errors.password.short")
    */
   public $password;
   
   /**
-   * @Assert\NotBlank(message = "error.country.blank")
-   * @Assert\Country(message = "error.country.invalid")
+   * @Assert\NotBlank(message = "errors.country.blank")
+   * @Assert\Country(message = "errors.country.invalid")
    */
   public $country;
 }

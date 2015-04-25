@@ -34,12 +34,12 @@ class UploadController extends Controller
     if ($request->files->count() != 1)
     {
       $response["statusCode"] = StatusCode::MISSING_POST_DATA;
-      $response["answer"] = $this->trans("error.post-data");
+      $response["answer"] = $this->trans("errors.post-data");
     }
     else if (!$request->request->has("fileChecksum"))
     {
       $response["statusCode"] = StatusCode::MISSING_CHECKSUM;
-      $response["answer"] = $this->trans("error.checksum.missing");
+      $response["answer"] = $this->trans("errors.checksum.missing");
     }
     else
     {
@@ -47,7 +47,7 @@ class UploadController extends Controller
       if (md5_file($file->getPathname()) != $request->request->get("fileChecksum"))
       {
         $response["statusCode"] = StatusCode::INVALID_CHECKSUM;
-        $response["answer"] = $this->trans("error.checksum.invalid");
+        $response["answer"] = $this->trans("errors.checksum.invalid");
       }
       else
       {
@@ -71,34 +71,34 @@ class UploadController extends Controller
           switch ($exception->getStatusCode())
           {
             case StatusCode::PROJECT_XML_MISSING:
-              $response["answer"] = $this->trans("error.xml.missing");
+              $response["answer"] = $this->trans("errors.xml.missing");
               break;
             case StatusCode::INVALID_XML:
-              $response["answer"] = $this->trans("error.xml.invalid");
+              $response["answer"] = $this->trans("errors.xml.invalid");
               break;
             case StatusCode::IMAGE_MISSING:
-              $response["answer"] = $this->trans("error.image.missing");
+              $response["answer"] = $this->trans("errors.image.missing");
               break;
             case StatusCode::UNEXPECTED_FILE:
-              $response["answer"] = $this->trans("error.file.unexpected");
+              $response["answer"] = $this->trans("errors.file.unexpected");
               break;
             case StatusCode::INVALID_FILE:
-              $response["answer"] = $this->trans("error.file.invalid");
+              $response["answer"] = $this->trans("errors.file.invalid");
               break;
             case StatusCode::RUDE_WORD_IN_DESCRIPTION:
-              $response["answer"] = $this->trans("error.description.rude");
+              $response["answer"] = $this->trans("errors.description.rude");
               break;
             case StatusCode::RUDE_WORD_IN_PROGRAM_NAME:
-              $response["answer"] = $this->trans("error.programname.rude");
+              $response["answer"] = $this->trans("errors.programname.rude");
               break;
             case StatusCode::OLD_CATROBAT_LANGUAGE:
-              $response["answer"] = $this->trans("error.languageversion.tooold");
+              $response["answer"] = $this->trans("errors.languageversion.tooold");
               break;
             case StatusCode::OLD_CATROBAT_VERSION:
-              $response["answer"] = $this->trans("error.programversion.tooold");
+              $response["answer"] = $this->trans("errors.programversion.tooold");
               break;
             default:
-              $response["answer"] = $this->trans("error.unknown");
+              $response["answer"] = $this->trans("errors.unknown");
           }
         }
       }

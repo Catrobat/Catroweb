@@ -39,7 +39,7 @@ class ReportController extends Controller
     if(!$request->get('program') || !$request->get('note'))
     {
       $response["statusCode"] = StatusCode::MISSING_POST_DATA;
-      $response["answer"] = $this->trans("error.post-data");
+      $response["answer"] = $this->trans("errors.post-data");
       $response["preHeaderMessages"] = "";
       return JsonResponse::create($response);
     }
@@ -48,7 +48,7 @@ class ReportController extends Controller
     if($program == null)
     {
       $response["statusCode"] = StatusCode::INVALID_PROGRAM;
-      $response["answer"] = $this->trans("error.program.invalid");
+      $response["answer"] = $this->trans("errors.program.invalid");
       $response["preHeaderMessages"] = "";
       return JsonResponse::create($response);
     }

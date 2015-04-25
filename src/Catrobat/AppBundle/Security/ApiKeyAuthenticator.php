@@ -66,7 +66,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
   
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
-    return JsonResponse::create(array("statusCode" => StatusCode::LOGIN_ERROR, "answer" => $this->trans("error.token"), "preHeaderMessages" => ""),Response::HTTP_UNAUTHORIZED);
+    return JsonResponse::create(array("statusCode" => StatusCode::LOGIN_ERROR, "answer" => $this->trans("errors.token"), "preHeaderMessages" => ""),Response::HTTP_UNAUTHORIZED);
   }
   
   private function trans($message, $parameters = array())
