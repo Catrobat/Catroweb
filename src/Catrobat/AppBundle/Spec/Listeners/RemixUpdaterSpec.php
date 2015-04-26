@@ -5,6 +5,7 @@ namespace Catrobat\AppBundle\Spec\Listeners;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Filesystem\Filesystem;
 
 class RemixUpdaterSpec extends ObjectBehavior
@@ -14,15 +15,18 @@ class RemixUpdaterSpec extends ObjectBehavior
    * @param \Catrobat\AppBundle\Entity\ProgramRepository $repository
    * @param \Catrobat\AppBundle\Entity\Program $program_entity
    * @param \Catrobat\AppBundle\Entity\User $user
+   * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
    */
-  function let($repository, $program_entity, $user)
+  function let($repository, $program_entity, $user, $router)
   {
-    $this->beConstructedWith($repository);
+    $this->beConstructedWith($repository, $router);
 
     $filesystem = new Filesystem();
     $filesystem->mirror(__SPEC_GENERATED_FIXTURES_DIR__."/base/", __SPEC_CACHE_DIR__."/base/" );
 
     $user->getUsername()->willReturn("catroweb");
+    $router->generate(Argument::exact("program"),Argument::exact(array("id"=>1337)))->willReturn("http://share.catrob.at/details/1337");
+    $router->generate(Argument::exact("program"),Argument::exact(array("id"=>1338)))->willReturn("http://share.catrob.at/details/1338");
     $program_entity->getUser()->willReturn($user);
   }
 
@@ -33,7 +37,8 @@ class RemixUpdaterSpec extends ObjectBehavior
 
   function it_saves_the_new_url_to_xml($program_entity)
   {
-    $expected_url = "http://pocketcode.org/details/1337";
+    $expected_url =  "http://share.catrob.at/details/1337";
+    //$expected_url = $client->getContainer()->get('router')->generate("program",array("id"=>1337));
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
     $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__."/base/","/webpath","hash");
     $program_entity->getId()->willReturn(1337);
@@ -46,8 +51,8 @@ class RemixUpdaterSpec extends ObjectBehavior
 
   function it_saves_the_old_url_to_remixOf($program_entity)
   {
-    $current_url = "http://pocketcode.org/details/1337";
-    $new_url = "http://pocketcode.org/details/1338";
+    $current_url = "http://share.catrob.at/details/1337";
+    $new_url = "http://share.catrob.at/details/1338";
 
     $xml = simplexml_load_file(__SPEC_CACHE_DIR__."/base/code.xml");
     $xml->header->url = $current_url;
@@ -68,7 +73,7 @@ class RemixUpdaterSpec extends ObjectBehavior
    */
   function it_update_the_remixOf_of_the_entity($program_entity, $parent_entity, $repository)
   {
-    $current_url = "http://pocketcode.org/details/1337";;
+    $current_url = "http://share.catrob.at/details/1337";
     $repository->find(1337)->willReturn($parent_entity);
     $program_entity->setRemixOf($parent_entity)->shouldBeCalled();
 

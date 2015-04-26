@@ -85,6 +85,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $this->event_dispatcher->dispatch("catrobat.program.before.persist", new ProgramBeforePersistEvent($extracted_file, $program));
     
     $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
 
     $this->event_dispatcher->dispatch("catrobat.program.after.insert", new ProgramAfterInsertEvent($extracted_file, $program));
 

@@ -43,7 +43,7 @@ services:
 
       catroweb.file.remix.updater:
             class: Catrobat\AppBundle\Listeners\RemixUpdater
-            arguments: ["@programrepository"]
+            arguments: ["@programrepository","@router"]
             tags:
             - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
             
