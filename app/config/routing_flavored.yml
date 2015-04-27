@@ -1,0 +1,20 @@
+catroweb_api:
+    resource: "@AppBundle/Controller/Api"
+    type:     annotation
+
+catroweb_web:
+    resource: "@AppBundle/Controller/Web"
+    type:     annotation
+
+catroweb_ci:
+    resource: "@AppBundle/Controller/Ci"
+    type:     annotation
+
+catroweb_download:
+    resource: "@AppBundle/Controller/DownloadProgramController.php"
+    type:     annotation
+
+login:
+    path:      login
+    defaults:  { _controller: FOSUserBundle:Security:login }
+
