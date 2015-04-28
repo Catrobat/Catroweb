@@ -12,7 +12,9 @@ cancel: Cancel
 report: Report
 download: Download
 description: Description
+noDescription: No description available.
 country: Country
+loginText: login
 
 programs:
   featured: Featured
@@ -24,9 +26,12 @@ programs:
   views: %views% views
   reportAsInappropriate: Report as inappropriate
   languageVersion: Catrobat Language version: %languageVersion%
-  reportLoginText: Please %href1%login%href2% to report this program as inappropriate.
+  reportLoginText: Please %login% to report this program as inappropriate.
   reportDialogHeader: Why do you think this program is inappropriate?
   reportDialogReason: Enter a reason
+  reportOwnProgram: You cannot flag your own program.
+  reportAlready: You've already flagged this program as inappropriate.
+  reportDone: You reported this program as inappropriate!
 
 
 profile:
@@ -425,6 +430,11 @@ login:
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Username or Email
   changePass: Change password
+
+apk:
+  generate: Generate APK
+  pending: Pending
+  download: Download APK
 
 #api
 errors:

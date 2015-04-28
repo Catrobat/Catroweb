@@ -78,19 +78,23 @@ img {
 
 h1,
 h2,
-h3 {
+h3,
+.h1,
+.h2,
+.h3 {
   page-break-after: avoid;
   text-transform: uppercase;
   margin: 0px;
+  font-weight: bold;
 }
 
-h1 {
+h1, .h1 {
   font-size: @font-size-h1;
   padding: 1px 1px;
   border-bottom: 1px solid @default-text-color;
 }
 
-h2 {
+h2, .h2 {
   font-size: @font-size-h2;
 }
 
@@ -192,22 +196,22 @@ label {
   text-transform: uppercase;
 }
 
+button, .button {
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  font-size: @default-button-size;
+  font-weight: bold;
+  .gradient(#177f8d,#177f8d,#17A5B8);
+  margin-top: 30px;
+  padding: @default-button-padding;
+  text-shadow: #333 1px 1px 1px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 form {
   text-align: center;
-
-  button, .button {
-    border: 0;
-    border-radius: 4px;
-    color: #fff;
-    font-size: @default-button-size;
-    font-weight: bold;
-    .gradient(#177f8d,#177f8d,#17A5B8);
-    margin-top: 30px;
-    padding: @default-button-padding;
-    text-shadow: #333 1px 1px 1px;
-    text-align: center;
-    text-transform: uppercase;
-  }
 
   .input-field {
     margin: 10px auto;
@@ -320,6 +324,16 @@ form {
 
 .btn {
   cursor: pointer;
+}
+
+.btn-white {
+  background: #EAEAEA;
+  color: #000;
+}
+
+.btn-green {
+  .gradient(top, #6F992F, #5EC03F);
+  color: #FFF;
 }
 
 #error {

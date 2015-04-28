@@ -7,208 +7,103 @@
 {% endblock %}
 
 {% block body %}
-    <div class="projectDetailsHeader">
-        <div>
-            <span id="projectDetailsProjectTitle">{{ program.name }}</span>
-            <div class="projectDetailsAuthorTop">
-                <ul>
-                    <li>
-                        <div class="img-author"></div>
-                        <div class="link-author">
-                            <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+  <div id="program-top" class="h1">
+    <div id="program-name">{{ program.name }}</div>
+    <div id="program-user">
+      <span class="img-author"></span>
+      <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
+    <div class="clear"></div>
+  </div>
 
-    <div id="projectDetailsContainer">
-        <div class="projectDetailsThumbnail">
-            <a href="{{ program_details.downloadUrl }}">
-                <img id="projectDetailsThumbnailImage" src="{{ asset(program_details.screenshotBig) }}" />
-            </a>
-        </div>
-
-        <div class="projectDetailsDescription">
-            <div>
-                <span class="projectDetailsDescriptionHeading">{{ "description"|trans({}, 'catroweb') }}</span>
-            </div>
-
-            <div class="projectDetailsDescriptionText">
-                <span>{{ program.description }}</span>
-
-                <div class="projectDetailsDownloadButton">
-                    <a style="text-decoration: none;" href="{{ program_details.downloadUrl }}">
-                        <div class="blue">
-                            <span class="projectDetailsDownloadText shrinkTextToFit" style="font-size: 25px;">{{ "download"|trans({}, 'catroweb') }}</span>
-                        </div>
-                    </a>
-                </div>
-                <div id="apkDownloadButton" class="projectDetailsDownloadButton">
-                    <a id="apkDownloadLink" style="text-decoration: none;" href="#">
-                        <div class="blue">
-                            <span id="apkDownloadLabel" class="projectDetailsDownloadText shrinkTextToFit" style="font-size: 25px;">...</span>
-                        </div>
-                    </a>
-                </div>
-                <span id="reportAsInappropriateButton">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
-                <br>
-              <span id="projectDetailsDownloadLanguageVersion">{{ "programs.languageVersion"|trans({ "%languageVersion%" : program_details.languageVersion }, 'catroweb') }}</span>
-            </div>
-        </div>
-
-        <div id="projectDetailsReportContainer">
-
-            <div id="reportAsInappropriateDialog" class="reportAsInappropriateDialog" style="display: none;">
-              {% if app.user != null %}
-                <form method="POST" class="reportInappropriateForm">
-                  <p>{{ "programs.reportDialogHeader"|trans({}, "catroweb") }}</p>
-                  <input id="reportInappropriateProjectId" type="hidden" value="{{ program.id }}">
-                  <p>
-                    <textarea id="reportInappropriateReason" class="reportInappropriateReason" name="flagReason" placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}" required="required"></textarea>
-                  </p>
-                  <p class="reportAsInappropriateDialogButtons">
-                    <input id="reportInappropriateCancelButton" type="button" class="buttonWhite buttonSmall" value="{{ "programs.reportDialogCancel"|trans({}, "catroweb") }}">
-                    <input id="reportInappropriateReportButton" type="button" class="buttonGreen buttonSmall" value="{{ "programs.reportDialogConfirm"|trans({}, "catroweb") }}">
-                  </p>
-                  </form>
-              {% else %}
-                {{ "programs.reportLoginText"|trans( { '%href1%' : "<a href=" ~ url( 'login' ) ~ ">", '%href2%' : "</a>" }, 'catroweb' )|raw }}
-              {% endif %}
-            </div>
-
-            <div id="reportAsInappropriateAnswer" style="display: none;"></div>
-
-        </div>
-
-        <div class="projectDetailsSeperator">
-        </div>
-
-        <div class="projectDetailsInformation">
-            <ul>
-                <li>
-                    <div class="img-age"></div>
-                    <div class="projectDetailsInformationText">
-                        {{ program_details.age }}
-                    </div>
-                </li>
-                <li>
-                    <div class="img-size"></div>
-                    <div class="projectDetailsInformationText">
-                        {{ "programs.size"|trans({ '%size%' : program_details.filesize }, "catroweb") }}
-                    </div>
-                </li>
-                <li>
-                    <div class="img-downloads"></div>
-                    <div class="projectDetailsInformationText">
-                        {{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
-                    </div>
-                </li>
-                <li>
-                    <div class="img-views"></div>
-                    <div class="projectDetailsInformationText">
-                        {{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}
-                    </div>
-                </li>
-            </ul>
-        </div>
+  <div id="program-middle">
+    <div id="image">
+      <a href="{{ program_details.downloadUrl }}">
+        <img width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
+      </a>
     </div>
+    <div id="info">
+      <h2>{{ "description"|trans({}, "catroweb") }}</h2>
+      <div id="description">
+        {% if program.description %}
+          {{ program.description }}
+        {% else %}
+          {{ "noDescription"|trans({}, "catroweb") }}
+        {% endif %}
+      </div>
+      <a href="{{ program_details.downloadUrl }}">
+        <button id="download" class="btn btn-primary">{{ "download"|trans({}, "catroweb") }}</button>
+      </a>
+      <br>
+      <button id="apk-generate" class="btn btn-apk">{{ "apk.generate"|trans({}, "catroweb") }}</button>
+      <button id="apk-pending" class="btn btn-apk">{{ "apk.pending"|trans({}, "catroweb") }}</button>
+      <button id="apk-download" class="btn btn-apk">{{ "apk.download"|trans({}, "catroweb") }}</button>
+      <br>
+      <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
+      <br>
+      {{ "programs.languageVersion"|trans({ "%languageVersion%" : program_details.languageVersion }, 'catroweb') }}
+
+    </div>
+    <div class="clear"></div>
+    <div id="report-container" class="size-large">
+      {% if app.user %}
+        {% if my_program %}
+          {{ "programs.reportOwnProgram"|trans({}, "catroweb") }} ... LOL?
+        {% elseif already_reported %}
+          {{ "programs.reportAlready"|trans({}, "catroweb") }}
+        {% else %}
+          <span id="report-form">
+            {{ "programs.reportDialogHeader"|trans({}, "catroweb") }}
+            <br>
+          <textarea id="reportReason" placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}"></textarea>
+          <br>
+          <button id="report-cancel" class="btn-white">{{ "cancel"|trans({}, "catroweb") }}</button>
+          <button id="report-report" class="btn-green">{{ "report"|trans({}, "catroweb") }}</button>
+          </span>
+          <span id="report-done">
+            {{ "programs.reportDone"|trans({}, "catroweb") }}
+          </span>
+        {% endif %}
+      {% else %}
+        {% set loginText = "loginText"|trans({}, "catroweb") %}
+        {{ "programs.reportLoginText"|trans({"%login%" : "<a href=\"" ~ url('login') ~ "\">" ~ loginText ~ "</a>"}, "catroweb")|raw }}
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="program-bottom">
+    <div id="icon-author">
+      <div class="img-author-2 icon"></div>
+      <a href="{{ url('profile', { id : program.user.id }) }}" class="icon-text">{{ program.user }}</a>
+    </div>
+    <div>
+      <div class="img-age icon"></div>
+      <span class="icon-text">{{ program_details.age }}</span>
+    </div>
+    <div>
+      <div class="img-size icon"></div>
+      <span class="icon-text">{{ program_details.filesize }} MB</span>
+    </div>
+    <div>
+      <div class="img-downloads icon"></div>
+      <span class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
+    </div>
+    <div>
+      <div class="img-views icon"></div>
+      <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
+    </div>
+  </div>
+
 {% endblock %}
 
 
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
   <script>
-    $("#reportAsInappropriateDialog").toggle(false);
-    $("#reportAsInappropriateAnswer").toggle(false);
-
-    $("#reportAsInappropriateButton").click(function() {
-      $("#reportAsInappropriateAnswer").toggle(false);
-      $("#reportAsInappropriateDialog").toggle();
-    });
-
-    $("#reportInappropriateCancelButton").click(function() {
-      $("#reportAsInappropriateDialog").toggle(false);
-    });
-
-    $("#reportInappropriateReportButton").click(
-      $.proxy(reportInappropriateSubmit, this)
-    );
-
-    $("#reportInappropriateReason").keypress(
-      $.proxy(reportInappropriateCatchKeypress, this)
-    );
-
-    function reportInappropriateCatchKeypress(event) {
-      if(event.which == '13') {
-        event.preventDefault();
-        reportInappropriateSubmit();
-      }
-    }
-
-    function reportInappropriateSubmit() {
-      $("#reportInappropriateReportButton").attr('disabled', true);
-      $("#reportInappropriateReason").attr('disabled', true);
-
-      var url = '/api/reportProgram/reportProgram.json';
-      $.post(url, {
-        program : $("#reportInappropriateProjectId").val(),
-        note : $("#reportInappropriateReason").val()
-      }, $.proxy(reportInappropriateSuccess, this), "json");
-    }
-
-    function reportInappropriateSuccess(response) {
-      $("#reportAsInappropriateAnswer").toggle(true);
-      $("#reportAsInappropriateAnswer").html(response.answer);
-
-      if(response.statusCode == 200) {
-        $("#reportAsInappropriateDialog").toggle(false);
-      }  else {
-        $("#reportAsInappropriateDialog").toggle(false);
-        $("#reportInappropriateReportButton").attr('disabled', false);
-        $("#reportInappropriateReason").attr('disabled', false);
-      }
-    }
-
-    window.onresize = $.proxy(function(){
-      $.proxy(resizeColumnsAndText(), this);
-    }, this);
-
-    window.onload = $.proxy(function(){
-      $.proxy(resizeColumnsAndText(), this);
-    }, this);
-
-    function resizeColumnsAndText() {
-      resizeText($(".shrinkTextToFit"));
-      resizeColumns();
-    }
-
-    function resizeColumns() {
-      var colThumbnail       = $(".projectDetailsThumbnail");
-      var colDescription     = $(".projectDetailsDescription");
-      var cssMediaQueryWidth = 800; /* defined in details.css (media query for single column layout) */
-
-      if(!$('body').width() > cssMediaQueryWidth) {
-        colThumbnail.css("height", "auto");
-        colDescription.css("height", "auto");
-      }
-    }
-
-    function resizeText(elem) {
-
-      while(elem.width() > elem.parent().width()-20) {
-        var fontsize = parseFloat(elem.css('font-size')) - 2.0;
-        elem.css('font-size', parseFloat(fontsize) + "px" );
-      }
-
-      while(elem.width() < elem.parent().width() - 60) {
-        var fontsize = parseFloat(elem.css('font-size')) + 2.0;
-        elem.css('font-size', parseFloat(fontsize) + "px" );
-      }
-    }
-
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}');
     program.getApkStatus();
+    program.createLinks();
+    program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
   </script>
 {% endblock %}

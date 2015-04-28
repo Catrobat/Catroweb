@@ -66,6 +66,12 @@ class DefaultController extends Controller
    */
   public function programAction(Request $request, $id, $flavor  = "pocketcode")
   {
+    /**
+     * @var $user \Catrobat\AppBundle\Entity\User
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var $reported_program \Catrobat\AppBundle\Entity\ProgramInappropriateReport
+     */
+
     $program = $this->get("programmanager")->find($id);
     $screenshot_repository = $this->get("screenshotrepository");
     $elapsed_time = $this->get("elapsedtime");
@@ -81,16 +87,37 @@ class DefaultController extends Controller
       $request->getSession()->set('viewed', $viewed);
     }
 
-    $program_details = array ();
-    $program_details['screenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
-    $program_details['downloadUrl'] = $this->generateUrl('download', array('id' => $program->getId()));
-    $program_details['languageVersion'] = $program->getLanguageVersion();
-    $program_details['downloads'] = $program->getDownloads();
-    $program_details['views'] = $program->getViews();
-    $program_details['filesize'] = sprintf("%.2f", $program->getFilesize()/1048576);
-    $program_details['age'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
+    $program_details = array (
+      "screenshotBig" => $screenshot_repository->getScreenshotWebPath($program->getId()),
+      "downloadUrl" => $this->generateUrl('download', array('id' => $program->getId())),
+      "languageVersion" => $program->getLanguageVersion(),
+      "downloads" => $program->getDownloads(),
+      "views" => $program->getViews(),
+      "filesize" => sprintf("%.2f", $program->getFilesize()/1048576),
+      "age" => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp())
+    );
 
-    return $this->get("templating")->renderResponse('::program.html.twig', array("program" => $program, "program_details" => $program_details));
+    $user = $this->getUser();
+    $user_programs = null;
+    if($user) {
+      $user_programs = $user->getPrograms()->matching(Criteria::create()
+        ->where(Criteria::expr()->eq("id", $program->getId())));
+    }
+
+    $isReportedByUser = false;
+    $em = $this->getDoctrine()->getManager();
+    $reported_program = $em->getRepository("\Catrobat\AppBundle\Entity\ProgramInappropriateReport")
+      ->findOneBy(array("project" => $program->getId()));
+
+    if($reported_program)
+      $isReportedByUser = ($user == $reported_program->getReportingUser());
+
+    return $this->get("templating")->renderResponse('::program.html.twig', array(
+      "program" => $program,
+      "program_details" => $program_details,
+      "my_program" => count($user_programs) > 0 ? true : false,
+      "already_reported" => $isReportedByUser
+    ));
   }
 
   /**
