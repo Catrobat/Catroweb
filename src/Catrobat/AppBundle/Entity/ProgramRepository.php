@@ -18,8 +18,8 @@ class ProgramRepository extends EntityRepository
     $qb = $this->createQueryBuilder('e');
   	return $qb
   	->select('e')
-  	->where($qb->expr()->eq("e.visible", '0'))
-    ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
+    ->where($qb->expr()->eq("e.visible", $qb->expr()->literal(true)))
+  	->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
   	->orderBy('e.downloads', 'DESC')
     ->setParameter("flavor", $flavor)
   	->setFirstResult($offset)
@@ -33,7 +33,7 @@ class ProgramRepository extends EntityRepository
     $qb = $this->createQueryBuilder('e');
     return $qb
     ->select('e')
-    ->where($qb->expr()->eq("e.visible", "true"))
+    ->where($qb->expr()->eq("e.visible", $qb->expr()->literal(true)))
     ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
     ->orderBy('e.views', 'DESC')
     ->setParameter("flavor", $flavor)
@@ -60,26 +60,60 @@ class ProgramRepository extends EntityRepository
 
   public function search($query, $limit=10, $offset=0)
   {
-    $query_raw = $query;
-    $query = '%'.$query.'%';
+    $dql = "SELECT e,
+          (CASE
+            WHEN (e.name LIKE :searchterm) THEN 10
+            ELSE 0
+          END) +
+          (CASE
+            WHEN (f.username LIKE :searchterm) THEN 1
+            ELSE 0
+          END) +
+          (CASE
+            WHEN (e.description LIKE :searchterm) THEN 3
+            ELSE 0
+          END) +
+          (CASE
+            WHEN (e.id = :searchtermint) THEN 11
+            ELSE 0
+          END)
+          AS weight
+        FROM Catrobat\AppBundle\Entity\Program e
+        LEFT JOIN e.user f
+        WHERE
+          (e.name LIKE :searchterm OR
+          f.username LIKE :searchterm OR
+          e.description LIKE :searchterm OR
+          e.id = :searchtermint) AND 
+          e.visible = true
+        ORDER BY weight DESC, e.uploaded_at DESC
+      ";
     $qb_program = $this->createQueryBuilder('e');
-    $weighting = "((CASE WHEN e.name LIKE ?1 THEN 10 ELSE 0 END) + (CASE WHEN f.username LIKE ?1 THEN 1 ELSE 0 END) + (CASE WHEN e.description LIKE ?1 THEN 3 ELSE 0 END) + (CASE WHEN e.id LIKE ?1 THEN 15 ELSE 0 END) + (CASE WHEN e.id = ?2 THEN 11 ELSE 0 END))";
-    $q2 = $qb_program->getEntityManager()->createQuery("SELECT e, ".$weighting." AS weight FROM Catrobat\AppBundle\Entity\Program e LEFT JOIN e.user f WHERE ".$weighting." > 0  AND e.visible = true ORDER BY weight DESC, e.uploaded_at DESC");
+    $q2 = $qb_program->getEntityManager()->createQuery($dql);
     $q2->setFirstResult($offset);
     $q2->setMaxResults($limit);
-    $q2->setParameter(1, $query);
-    $q2->setParameter(2, $query_raw);
+    $q2->setParameter("searchterm", "%".$query."%");
+    $q2->setParameter("searchtermint", intval($query));
     $result = $q2->getResult();
     return array_map(function($element){return $element[0];}, $result);
   }
 
   public function searchCount($query)
   {
-    $query = '%'.$query.'%';
     $qb_program = $this->createQueryBuilder('e');
-    $weighting = "((CASE WHEN e.name LIKE ?1 THEN 10 ELSE 0 END) + (CASE WHEN f.username LIKE ?1 THEN 1 ELSE 0 END) + (CASE WHEN e.description LIKE ?1 THEN 3 ELSE 0 END))";
-    $q2 = $qb_program->getEntityManager()->createQuery("SELECT COUNT(e.id) FROM Catrobat\AppBundle\Entity\Program e LEFT JOIN e.user f WHERE ".$weighting." > 0 AND e.visible = true");
-    $q2->setParameter(1, $query);
+    $dql = "SELECT COUNT(e.id)
+        FROM Catrobat\AppBundle\Entity\Program e
+        LEFT JOIN e.user f
+        WHERE
+          (e.name LIKE :searchterm OR
+          f.username LIKE :searchterm OR
+          e.description LIKE :searchterm OR
+          e.id = :searchtermint) AND
+          e.visible = true
+      ";
+    $q2 = $qb_program->getEntityManager()->createQuery($dql);
+    $q2->setParameter("searchterm", "%".$query."%");
+    $q2->setParameter("searchtermint", intval($query));
     $result = $q2->getSingleScalarResult();
     return $result;
   }
