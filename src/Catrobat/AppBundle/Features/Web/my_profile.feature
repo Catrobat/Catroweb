@@ -7,8 +7,8 @@ Feature:
   Background:
     Given there are users:
       | name     | password | token      |
-      | Catrobat | 123456    | cccccccccc |
-      | User1    | 654321    | cccccccccc |
+      | Catrobat | 123456   | cccccccccc |
+      | User1    | 654321   | cccccccccc |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |

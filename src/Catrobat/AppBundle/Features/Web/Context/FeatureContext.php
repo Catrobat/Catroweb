@@ -5,6 +5,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\StarterCategory;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
@@ -505,4 +506,49 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     assertEquals($arg1, count($programs));
   }
 
+  /**
+   * @Given /^there are starter programs:$/
+   */
+  public function thereAreStarterPrograms(TableNode $table)
+  {
+    /**
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var $starter \Catrobat\AppBundle\Entity\StarterCategory
+     */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+    $starter = new StarterCategory();
+    $starter->setName("Games");
+    $starter->setAlias("games");
+    $starter->setOrder(1);
+
+    $programs = $table->getHash();
+    for($i = 0; $i < count($programs); $i ++) {
+      $user = $em->getRepository('AppBundle:User')->findOneBy(array (
+        'username' => $programs[$i]['owned by']
+      ));
+      $program = new Program();
+      $program->setUser($user);
+      $program->setName($programs[$i]['name']);
+      $program->setDescription($programs[$i]['description']);
+      $program->setViews($programs[$i]['views']);
+      $program->setDownloads($programs[$i]['downloads']);
+      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setCatrobatVersion(1);
+      $program->setCatrobatVersionName($programs[$i]['version']);
+      $program->setLanguageVersion(1);
+      $program->setUploadIp("127.0.0.1");
+      $program->setRemixCount(0);
+      $program->setFilesize(0);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible']=="true" : true);
+      $program->setUploadLanguage("en");
+      $program->setApproved(false);
+      $em->persist($program);
+
+      $starter->addProgram($program);
+    }
+
+    $em->persist($starter);
+    $em->flush();
+  }
 }

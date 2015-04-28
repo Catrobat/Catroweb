@@ -13,7 +13,7 @@
     <div class="starter-header">
       {% for category in categories %}
         <div class="col-per-25 center bold uppercase">
-          <a href='#{{ category.alias }}'>{{ ("help.starterPrograms.categories."~category.alias)|trans({}, "catroweb") }}</a>
+          <a href='#{{ category.alias }}' class="anchor">{{ ("help.starterPrograms.categories."~category.alias)|trans({}, "catroweb") }}</a>
         </div>
       {% endfor %}
       <div class="clear"></div>

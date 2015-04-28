@@ -94,9 +94,24 @@ Feature: Pocketcode help page
     | 9  | Broadcast        |
 
   Scenario: Clicking on starters image at help page and test navigation
+    Given there are users:
+      | name     | password | token      |
+      | Catrobat | 123456   | cccccccccc |
+    And there are starter programs:
+      | id | name      | description | owned by | downloads | views | upload time      | version |
+      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | program 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
     When I click "#starters"
-    Then  I should see "STARTER PROGRAMS"
-    Then  I should see "Try out these starter programs. Look inside to make changes and add your ideas."
+    Then I should see "STARTER PROGRAMS"
+    And I should see "Try out these starter programs. Look inside to make changes and add your ideas."
+    And I should see "Games"
+    And I should see "program 1"
+    And I should see "program 2"
+    And I should see "program 3"
+    And I should see an ".anchor" element
+    When I click ".anchor"
+    Then I am on "/pocketcode/starterPrograms"
 
   Scenario: Clicking on discuss-desktop image at help page and test navigation
     When I click "#discuss-desktop"
@@ -106,10 +121,3 @@ Feature: Pocketcode help page
   Scenario: Clicking on discuss-mobile image at help page and test navigation
     When I click "#discuss-mobile"
     Then I should see an "#discuss-mobile" element
-
-
-
-
-
-
-
