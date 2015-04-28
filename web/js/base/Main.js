@@ -77,7 +77,7 @@ var Main = function (search_url) {
       select.val(cookie);
 
     select.change(function() {
-      document.cookie = 'hl=' + $(this).val();
+      document.cookie = 'hl=' + $(this).val() +  "; path=/";
       location.reload();
     });
   };
