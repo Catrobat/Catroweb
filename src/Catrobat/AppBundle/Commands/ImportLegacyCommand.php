@@ -128,7 +128,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $progress->setMessage($data[1] . " (" . $id . ")");
                     $progress->advance();
                     
-                    if (version_compare($language_version, "0.92", "<"))
+                    if (version_compare($language_version, "0.9", "<"))
                     {
                         $skipped++;
                         continue;
@@ -252,18 +252,22 @@ class ImportLegacyCommand extends ContainerAwareCommand
 
             $xmlprops->header->url = $router->generate('program', array('id' => $id));
 
+            $matches = array();
             preg_match("/([\d]+)$/", $xmlprops->header->remixOf->__toString(),$matches);
-            $remix_program_id = intval($matches[1]);
-            if($remix_program_id != "")
-              $xmlprops->header->remixOf = $router->generate('program', array('id' => $remix_program_id));
-
-            $parent = $this->program_manager->find($remix_program_id);
-            if($parent != null) {
-              $program = $this->program_manager->find($id);
-              $program->setRemixOf($parent);
-              $this->program_manager->save($program);
+            if (isset($matches[1]))
+            {
+                $remix_program_id = intval($matches[1]);
+                if($remix_program_id != "")
+                {
+                    $xmlprops->header->remixOf = $router->generate('program', array('id' => $remix_program_id));
+                    $parent = $this->program_manager->find($remix_program_id);
+                    if($parent != null) {
+                      $program = $this->program_manager->find($id);
+                      $program->setRemixOf($parent);
+                      $this->program_manager->save($program);
+                    }
+                }
             }
-
             $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
         }
     }
