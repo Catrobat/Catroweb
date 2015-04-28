@@ -98,6 +98,15 @@ Feature: Pocketcode help page
     Then  I should see "STARTER PROGRAMS"
     Then  I should see "Try out these starter programs. Look inside to make changes and add your ideas."
 
+  Scenario: Clicking on discuss-desktop image at help page and test navigation
+    When I click "#discuss-desktop"
+    Then I should see an "#discuss-desktop" element
+
+  @Mobile
+  Scenario: Clicking on discuss-mobile image at help page and test navigation
+    When I click "#discuss-mobile"
+    Then I should see an "#discuss-mobile" element
+
 
 
 
