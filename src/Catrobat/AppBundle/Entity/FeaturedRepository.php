@@ -10,7 +10,7 @@ class FeaturedRepository extends EntityRepository
         $qb = $this->createQueryBuilder('e');
         return $qb
             ->select('e')
-            ->where($qb->expr()->eq('e.active',true))
+            ->where("e.active = true")
             ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
             ->setParameter("flavor", $flavor)
             ->setFirstResult($offset)

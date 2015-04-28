@@ -18,7 +18,7 @@ class ProgramRepository extends EntityRepository
     $qb = $this->createQueryBuilder('e');
   	return $qb
   	->select('e')
-  	->where($qb->expr()->eq("e.visible", true))
+  	->where($qb->expr()->eq("e.visible", '0'))
     ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
   	->orderBy('e.downloads', 'DESC')
     ->setParameter("flavor", $flavor)
@@ -33,7 +33,7 @@ class ProgramRepository extends EntityRepository
     $qb = $this->createQueryBuilder('e');
     return $qb
     ->select('e')
-    ->where($qb->expr()->eq("e.visible", true))
+    ->where($qb->expr()->eq("e.visible", "true"))
     ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
     ->orderBy('e.views', 'DESC')
     ->setParameter("flavor", $flavor)
@@ -48,7 +48,7 @@ class ProgramRepository extends EntityRepository
     $qb = $this->createQueryBuilder('e');
     return $qb
     ->select('e')
-    ->where($qb->expr()->eq("e.visible", true))
+    ->where($qb->expr()->eq("e.visible", $qb->expr()->literal(true)))
     ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
     ->orderBy('e.uploaded_at', 'DESC')
     ->setParameter("flavor", $flavor)
@@ -90,7 +90,7 @@ class ProgramRepository extends EntityRepository
     return $qb
     ->select('e')
     ->leftJoin('e.user', 'f')
-    ->where($qb->expr()->eq("e.visible", true))
+    ->where($qb->expr()->eq("e.visible", $qb->expr()->literal(true)))
     ->andWhere($qb->expr()->eq("f.id", ":user_id"))
     ->setParameter("user_id", $user_id)
     ->getQuery()
@@ -102,9 +102,8 @@ class ProgramRepository extends EntityRepository
       $qb = $this->createQueryBuilder('e');
       return $qb
           ->select('COUNT (e.id)')
-          ->where($qb->expr()->eq("e.visible", true))
+          ->where($qb->expr()->eq("e.visible", $qb->expr()->literal(true)))
           ->andWhere($qb->expr()->eq("e.flavor", ":flavor"))
-          ->orderBy('e.downloads', 'DESC')
           ->setParameter("flavor", $flavor)
           ->getQuery()
           ->getSingleScalarResult();
