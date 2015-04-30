@@ -1,0 +1,531 @@
+---
+localLanguage: English
+username: Nombre de usuario
+password: Contraseña
+aboutPocketCode: Acerca de Pocket Code
+tutorials: Tutoriales
+googlePlay: Google Play
+passwordsNoMatch: Las contraseñas no coinciden.
+error: Error
+cancel: Cancelar
+report: Informe
+download: Descargar
+description: Descripción
+noDescription: No hay descripción disponible
+country: País
+loginText: Inicio de sesión
+programs:
+  featured: Destacados
+  newest: Newest programs
+  most:
+    viewed: Más visto
+    downloaded: Más descargados
+  downloads: '%downloads% downloads'
+  views: '%views% views'
+  reportAsInappropriate: Reporte como inapropiado
+  languageVersion:
+    Catrobat Language version: '%languageVersion%'
+  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportDialogHeader: ¿Por qué crees que este programa es inapropiado?
+  reportDialogReason: Entre una razón
+  reportOwnProgram: Usted no debería incluir bandera de su propio programa.
+  reportAlready: Ya has marcado este programa como inadecuado.
+  reportDone: Ha evaluado este programa como inapropiado!
+profile:
+  saveChanges: ¿Desea guardar los cambios?
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: Mi primera dirección de correo electrónico
+  secondEmail: Mi segunda dirección de correo electrónico
+  myPrograms: My programs
+  form:
+    passwordTooShort: 'The new password must have at least %length% characters.'
+    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordIsUsername: La contraseña debe ser diferenta al nombre de usuario.
+    emailNotValid: Esta dirección email no es válida.
+    emailMissing: Ha habido un error al actualizar esta dirección de correo electrónico. Debe tener al menos una dirección de correo electrónico validada.
+    emailExists: Esta dirección de correo electrónico ya existe.
+    submitSuccess: Guardado!
+  reallyDeleteProgram: ¿Estas seguro que quieres eliminar tu programa?
+  programsOf: Programas de
+  changePicture: Cambiar la imagen
+  avatar:
+    pictureTooLarge: La imagen elegida es demasiado pesada, no utilice imágenes de más de 5mb.
+    uploadError: Lo sentimos, hubo un problema durante el proceso de carga al servidor!
+    noSupport: Este formato de imagen no es compatible, por favor, intente con otro formato de imagen.
+licenseToPlay:
+  title: 'Licencia para jugar - reconoce y comparte'
+  text1: |
+    Imagina que cada programa de Cartrobat es una tarta, una tarta muy especial que viene con su propia receta (bloques de programación). 
+    Todos los miembros de la comunidad Cartrobat comparten sus tartas junto con sus recetas. ¡Esto significa que tú puedes disfrutar de las tartas y aprender cómo hacerlas tú mismo!
+  text2: 'No hay recetas secretas: las instrucciones de cómo hacer las tartas son abierta para que puedan ser utilizadas, re-utilizadas, modificadas y que sirvan de inspiración para nuevas ideas…... quiero decir nuevas tartas. hay recetas secretas.'
+  text3: |
+    Tú puedes comer las tartas, así como copiar las recetas de otras personas para hacer tus tartas, inclusive con otros ingredientes. 
+    Para tener esta libertad solo se te piden dos requisitos:
+  text4: |
+    Cuando establecimos la comunidad de Cartrobat, decidimos adoptar este enfoque ya que nosotros creemos que da apoyo al aprendizaje y la creatividad dentro de una comunidad. 
+    Compartiendo recetas e ingredientes (líneas de programación e ilustraciones), las personas pueden construir sobre las ideas de otras personas y así todos se benefician.
+  text5: 'En el diseño de la página web de Catrobat, se han incluido herramientas para animar a las personas a compartir y a reconocer los desarrollos de otras personas.  En cada página de programa, siempre puedes descargar las líneas de código de programación originales de ese programa. Si tu modificas o mezclas un programa (modificar las líneas de código de programación o las ilustraciones y comparte el resultado), te animamos a reconocer al autor del programa te has descargado en las Notas de Programa, mencionando a las personas y el programa que te inspiró.'
+  text6: 'Aprenda más sobre los términos de uso de la comunidad en línea Catrobat en %link-termsOfUse%.'
+  list1:
+    item1: compartir tus tartas con la receta
+    item2: dar reconocimiento a aquellos que te han inspirado
+  version: Versión 1.1, 02 de abril de 2013
+termsOfUse:
+  title: Términos de Uso
+  headline: Bienvenido a la comunidad Catrobat!
+  text1: 'Como parte de la comunidad de Catrobat, tú estás compartiendo ideas y programas con otras personas:'
+  text2: 'Necesitamos tu ayuda para hacer de esta comunidad un sitio de apoyo para cada uno de los miembros. Aquí te explicamos cómo puedes ayudar:'
+  text3: 'A través del proyecto Catrobat queremos fomentar la cooperación y permitir que la creatividad de todos se combine, para así beneficiar a toda la humanidad. Tú puedes convertirte en un miembro activo de la Comunidad de Catrobat donando tus programas a la Comunidad, de la misma manera que otros miembros dan sus programas:'
+  text4: 'Nuestro regalo para tí:'
+  text5: 'Nuestros Términos de Uso y Servicio:'
+  list1:
+    item1: de muchos países y culturas diferentes
+    item2: de todas las edades (desde niños a adolescentes y abuelos)
+    item3: con todos los niveles de experiencia
+  list2:
+    item1: Se respetuoso. Al compartir programas, por favor, recuerde que las personas de diferentes edades y procedencias verán sus contribuciones.
+    item2: 'Reconocimiento. No dude en hacer versiones modificadas de los programas de otras personas - sólo Asegúrese de darles reconocimiento. Un lugar para dar este reconocimiento es en la descripción del programa. Por favor vea el párrafo de abajo, donde se presentan una lista de puntos para obtener más información acerca de la modificación de los programas de otros usuarios.'
+    item3: Sea honesto. No pretendas ser otra persona, sino aquella que eres, o trates de engañar a la comunidad.
+    item4: Mantén tu información personal privada. No compartas tu dirección de correo electrónico, número de teléfono u otra información de contacto personal.
+    item5: 'Ayuda a mantener este sitio como un espacio amigable. Si te sientes que otras personas pueden encontrar que un programa o comentario es cruel, insultante, violento o inapropiado, simplemente haz clic en el botón "Reportar como inapropiado" y dejar una breve explicación. El equipo de Catrobat revisará su informe y podrá eliminar cualquier programa, comentario o correo.'
+  list3:
+    item1: |
+      Al cargar un programa en nuestra web, usted acepta y está de acuerdo que este trabajo se pondrá bajo ciertas licencias libres de programas los Catrobat subidos. Al igual que las licencias libres bajo las cuales el propio sistema Catrobat está disponible para usted, estas licencias libres de Catrobat de programas subidos dan a todos el derecho a aprender del trabajo previamente cargado por otros, así como adaptar y mezclar dicho trabajo para realizar nuevos juegos, animaciones y otros programas fascinantes. 
+      Esto permite que todos los miembros se apoyen en el hombro de sus compañeros, siendo tú uno de ellos. Tú trabajo beneficiará así a todo el mundo y se mantendrá libre para que todos lo puedan usar;  en una forma similar al texto e imágenes que los voluntarios de todo el mundo proveen libremente a Wikipedia. Piense en ello como tu regalo a la humanidad: le das a todo el mundo, y todos los demás que suben su trabajo a nuestro sitio web, te dan a ti. Por lo tanto un programa cargado en nuestro servidor, es un regalo de gran valor que su dueño te está dando totalmente gratis a ti, con la condición de que tú participes en la comunidad bajo los mismos términos de uso.
+    item2: 'No tienes que aceptar el regalo; pero si lo haces, ciertas reglas se aplican. Los beneficios de estas reglas son que tú puedes aprender de la obra y construir sobre ella; para que tú mismo, no solo puedas hacer cosas mejores  sino que además puedes volver a cargarla en nuestro sitio web como tuya. Otro beneficio es que estas licencias aseguran que no seas responsable por cualquier problema que surja a los demás por el uso de tu programa.'
+    item3: 'Una condición adicional importante es que, en forma clara, les des reconocimiento a los autores en cuyas obras basaste tu trabajo. Al mismo tiempo, trabajaremos duro reconocer al nombre que has elegido libremente para que te represente en la comunidad de Catrobat, para que tu trabajo sea claramente apreciado por aquellos cuyas obras tú has contribuido y para dar la oportunidad a otros para expresarte su agradecimiento públicamente,  por haber dado tu trabajo a todo el mundo y en particular a ellos.'
+    item4: 'Por favor revisa %link-licenseUploaded% para los términos y condiciones jurídicas.'
+  list4:
+    item1: 'Ahora y en el futuro te ofrecemos todo nuestro software y recursos de Internet relacionados con el sistema Catrobat bajo licencias libres de Catrobat; como por ejemplo: el software escrito por el equipo de Catrobat, nuestros sitios web y recursos de Internet, nuestro propio código fuente relacionado con el sistema Catrobat, y otros materiales adicionales tales como imágenes, sonidos y textos.'
+    item2: 'Estas licencias hacen que todas las partes de Catrobat: sean: sin coste alguno para ti y libres, en el sentido de que te dan libertad, para usar Cartrobat como quieras, sólo con algunas restricciones; entre otras, asegurando que el sistema Catrobat permanecerá libre y útil para todos y para siempre.'
+    item3: 'Por favor consulte %link-licenseToPlay% para conocer con precisión los términos y condiciones legales.  El código fuente del sistema Cartrobat, así como muchos otros documentos y recursos, están disponibles via %link-developer%.'
+  list5:
+    item1: 'Si usted es menor de 13 años de edad, o si usted, sus padres o tutores legales están asociados a una organización involucrada en, o responsable de,  violaciones de la privacidad tipo dragnet, y/o a vigilancia masiva o a granel, entonces no le está permitido utilizar nuestras aplicaciones de software y acceder a nuestros servicios. Los detalles precisos de esta restricción y ciertas excepciones se encuentran en las secciones 4.a y 4.b en nuestros  %link-termsOfUse%.'
+    item2: Si eres menor de 13 años de edad, entonces tienes que pedirle permiso a tus padres o tutores legales para usar las aplicaciones de Software y Servicios de Catrobat.
+    item3: Nos reservamos el derecho a rechazar, eliminar u ocultar programas, cuentas de usuario, y cualquier material digital subido a los sitios web de Catrobat, en cualquier momento y a nuestra discreción, por ejemplo si nos encontramos con un programa que contiene material inapropiado o un usuario infrinje los derechos de otras personas.
+    item4: Todo el software Cartrobat y los recursos de internet son ofrecidos con la esperanza de que serán útiles, pero sin garantías.
+    item5: 'Por favor consulte nuestro link  %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service   para tener explicaciones más precisas sobre los puntos mencionados anteriormente y algunos términos y condiciones legales.'
+  bottom1: Revise esta sección de vez en cuando, porque nosotros esatamos siempre tratando de mejorar nuestros términos y condiciones de uso.
+  bottom2: 'Por favor envíenos por correo electrónico cualquier sugerencia con respecto a los Términos de uso a %email-webmaster%.'
+  version: Versión 1.3, 04 de marzo de 2014
+help:
+  hourOfCode:
+    title: Skydiving Steve
+    step0:
+      title: Skydiving Steve
+      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+    step1:
+      title: 'Install "Pocket Code"'
+      description: How to install Pocket Code on your mobile device.
+      image1: 'Tap "Play Store".'
+      image2: 'Search "Pocket Code".'
+      image3: 'Tap "Install".'
+    step2:
+      title: Download Project
+      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
+      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
+      image2: Tap the banner.
+      image3: 'Download the program "Skydiving Steve".'
+    step3:
+      title: Open Project
+      description: Let’s look inside the program.
+      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
+      image2: 'Tap object "parachute".'
+      image3: 'Choose "Scripts".'
+    step4:
+      title: Añadir variable
+      description: The variables x and y allow you to control the position of your parachute.
+      image1: 'Tap "+".'
+      image2: 'Go to the category "Variables".'
+      image3: 'Tap "Set variable".'
+      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
+    step5:
+      title: Label variables
+      description: Label the x position of your parachute.
+      image1: Add a second variable just as before.
+      image2: 'Tap "New...".'
+      image3: 'Insert "x" and tap "OK".'
+    step6:
+      title: 'Set variable "y"'
+      description: Label and set the y starting position of your parachute.
+      image1: 'Label the second variable with "y".'
+      image2: 'Tap the field filled with "0.0".'
+      image3: 'Insert "-500" and tap "OK".'
+    step7:
+      title: Para siempre
+      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
+      image1: 'Tap "+".'
+      image2: 'Go to the "Control" - category.'
+      image3: 'Choose the "Forever" - brick.'
+      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
+    step8:
+      title: Insert and modify bricks
+      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
+      image1: 'Insert the shown bricks below the "Forever" - brick.'
+      image2: 'Tap the "100" field.'
+      image3: 'Tap "Variables" and choose "x".'
+      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
+    step9:
+      title: Change variables and values
+      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
+      image1:
+        subtext1: 'Set the size to "20" %.'
+        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
+        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
+      image2:
+        subtext1: 'Tap on "y" and choose "x".'
+        subtext2: 'Insert "-".'
+        subtext3: 'Tap "Sensors" and choose "inclination_x".'
+      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
+    step10:
+      title: Loudness sensor
+      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
+      image1:
+        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
+        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
+      image2:
+        subtext1: 'Tap "Sensors".'
+        subtext2: 'Choose "loudness".'
+        subtext3: 'Tap "Logic".'
+        subtext4: 'Choose ">".'
+        subtext5: 'Insert "50".'
+      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
+    step11:
+      title: Change some more bricks
+      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
+      image1: 'Add a "Change variable" - brick and modify the value like above.'
+      image2:
+        subtext1: 'Add a "When I receive" - brick.'
+        subtext2: 'Place it below the last brick ("End of loop").'
+        subtext3: 'Add two "Set variable" - bricks.'
+      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
+      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
+    step12:
+      title: Back to objects
+      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
+      image1: 'Tap the "back" - button on your device.'
+      image2: 'Tap the "back" - button once more.'
+      image3: Now you should see this screen on your device.
+    step13:
+      title: 'Object "target"'
+      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
+      image1: 'Tap "target" and choose "Scripts".'
+      image2: Add and modify the bricks as in the screenshot above.
+      image3: Add four more bricks like shown above.
+    step14:
+      title: 'Object "target"'
+      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
+      image1: 'Tap the field "y:" and choose "New".'
+      image2: 'Insert "goalx" and confirm with "OK".'
+      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
+      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
+    step15:
+      title: 'Object "target"'
+      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
+      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
+      image2: Check if your values match the ones above.
+      image3: Go back until you see this screen.
+    step16:
+      title: 'Object "parcel"'
+      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
+      image1: 'Tap "parcel" and choose "Scripts".'
+      image2: Add all the bricks shown above.
+      image3:
+        subtext1: 'Change the value of the "Set size" - brick to "50".'
+        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
+        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
+    step17:
+      title: 'Object "parcel"'
+      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
+      image1: 'Add the above shown bricks below the last "Place at" - brick.'
+      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
+      image3:
+        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
+        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
+        subtext3: '"AND" is in the "Logic" category.'
+    step18:
+      title: 'Object "parcel"'
+      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
+      image1:
+        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
+        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
+      image2: Add the above shown bricks and modify their values alike.
+      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
+    step19:
+      title: 'Object "restart"'
+      description: Here you modify the object “restart”. Define the position and the behavior of the object.
+      image1: Add the above shown bricks and modify their values alike.
+      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
+      image3: Go back until you see this screen, then go to the scripts of “Background”.
+    step20:
+      title: 'Object "Background"'
+      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
+      image1:
+        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
+        subtext2: 'Tap the "Play" - button.'
+      image2: Enjoy your game.
+      image3: |-
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+    step21:
+      title: Check your scripts!
+      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
+      image1: 'Object "background"'
+      image2: 'Object "parachute"'
+      image3: 'Object "parcel"'
+      image4: 'Object "restart"'
+      image5: 'Object "target"'
+  stepByStep:
+    title: Introducción paso a paso
+    start: 'Posición inicial:'
+    step1:
+      title: Make a new program
+      detail:
+        text1: 'Pulse "Nuevo".'
+        text2: 'Introduzca un nombre para el programa, seleccione "Crear programa vacío" y pulse "OK".'
+    step2:
+      title: Create a new object
+      detail:
+        text1: 'Pulsar:'
+        text2: Choose the source of the first look of your new object.
+        text3: 'Enter an object name and tap "OK" to create the object.'
+        special1: Cree un nuevo diseño.
+        special2: Seleccione de la galería.
+        special3: Tome una foto.
+    step3:
+      title: Start Moving
+      detail:
+        text1: 'Pulsar:'
+        text2: 'El primer bloque que utilizamos está fuera de la categoría "Movimiento".'
+        text3: 'Seleccione el bloque "Deslizable". El objeto se moverá hasta la nueva posición definida por el bloque en el panel escenario.'
+        text4: El bloque está ahora flotando. Para pegarlo, mueva el bloque a la posición deseada. También puede mover los otros bloques insertados pulsando cada bloque hasta que estén flotando.
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: 'Utilice el botón "atrás" de  Android para salir y salir del panel escenario.'
+    step4:
+      title: Cambio de Apariencia
+      description: Puede cambiar la apariencia de su objeto.
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Encaje el bloque debajo del bloque "Deslizable".'
+        text3: Presione el desplegable para darle una nueva apariencia.
+        text4: Seleccione la fuente de la imagen como antes.
+        text5: Ahora ya has elegido la nueva imagen.
+        text6: Pulse Jugar para ver el funcionamiento en el panel escenario.
+    step5:
+      title: Hablar
+      description: Ahora te explicaremos cómo hacer que un objeto hable.
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: 'Encaje este bloque debajo del bloque "Cambiar Apariencia".'
+        text3: Pulse Jugar para ver el funcionamiento en el panel escenario.
+    step6:
+      title: Again and again
+      description: Este paso muestra cómo hacer que se repita el comportamiento de los objetos.
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: 'Encaje el bloque "Para siempre" debajo del bloque "Cuando el programa comience".'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: 'Pulse en el campo de valor "x" y "y" e iniciarlo en 0.'
+        text6: Pulse Jugar para ver el funcionamiento en el panel escenario.
+    step7:
+      title: Tapping is everything
+      description: También puede controlar el comportamiento del objeto cuando el programa se está ejecutando en el escenario.
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: Ahora tienes codigo con instrucciones de programación.
+        text5: Pulse jugar para ver el comportamiento en el panel escenario. Si ahora toca en el objeto, gira.
+    step8:
+      title: Copy, delete or edit a brick
+      detail:
+        text1: Solo tiene que pulsar en el lado izquierdo de cada bloque para abrir el menú contextual. Allí puede pulsar mover, copiar, borrar o editar los valores de los bloques con el editor de fórmulas.
+    step9:
+      title: Navigation in the app
+      detail:
+        text1: Utilice el botón Atrás de Android para navegar en la aplicación.
+        text2: Vaya una pantalla hacia atrás para ir a la descripción del objeto. Aquí se puede ir las secuencias del código de programación, así como acceder a la apariencia y sonidos del objeto. Aquí puedes renombrar, copia agregar o eliminar la apariencia y los sonidos.
+        text3: Utilice de nuevo el botón Atrás de Android para llegar a la descripción de los objetos y sus antecedentes.
+    step10:
+      title: Change the background
+      description: Aquí se te presenta un resumen de tus objetos y el fondo depende de un programa.
+      detail:
+        text1: El fondo es como un objeto, pero que sólo puede tener el fondo.
+        text2: Al objeto de fondo, le puedes agregar lineas de código de programación, sonidos y apariencia de la misma manera que a los otros objetos.
+    step11:
+      title: Main Menu
+      description: Utilice el botón Atrás de Android para llegar a esta pantalla.
+      detail:
+        text1: Continúe con su programa que tiene abierto en este momento.
+        text2: Añada un nuevo programa.
+        text3: Vea todos los programas locales.
+        text4: Ir a la página de ayuda y comentar con otros usuarios.
+        text5: Explora el mundo de los programas de Pocket Code. Descargar y mezclar programas que te gustan.
+        text6: Cargar el programa que actualmente está abierto.
+  tutorialcards:
+    title: Tutoriales
+    description1: Este tutorial te enseña cómo utilizar trucos efectivos en
+    description2: Pocket Code.
+    getReady: 'Prepárate:'
+    tryCode: 'Try this code:'
+    doIt: 'Hazlo:'
+    tip: 'Sugerencia adicional:'
+    card1:
+      title: Cambia el tamaño
+      description: Presione el pato para cambiar su tamaño.
+    card2:
+      title: Cambio de Apariencia
+      description: Utilizar este truco para contar automáticamente.
+    card3:
+      title: Animaciones con movimiento
+      description: Utilice este truco cuando quieres hacer que un loro vuele.
+    card4:
+      title: Deslizar
+      description: Mover suavemente de un punto a otro.
+    card5:
+      title: Reproducir sonido
+      description: Tap the drum to play this sound.
+      extra1: '1. Haga clic en "+"'
+      extra2: '2. Seleccione "Grabador de Pocket Code"'
+      extra3: 3. Pulse el icono para grabar tu sonido
+    card6:
+      title: Hablar algo
+      description: Utilice este código para hacer que un objeto hable.
+    card7:
+      title: Acelerómetro
+      description: Usar este truco para controlar un objeto usando la inclinación del dispositivo.
+      extra1: Si es demasiado sensible, divide por 10
+    card8:
+      title: Brújula
+      description: Usa este código para hacer una brújula.
+    card9:
+      title: Difundir
+      description: Mira este código! Muestra cómo hacer que los objetos se comuniquen entre ellos.
+  starterPrograms:
+    title: Programas de Inicio
+    description: Pruebe estos programas de inicio. Revisalos para hacer cambios y agregar tus ideas.
+    categories:
+      games: Juegos
+      animations: Animaciones
+      interactive: Historias y Arte Interactivo
+      music: Music And Dance
+search:
+  dotdotdot: Búscar...
+  search: Búscar
+  results: Resultados de la búsqueda
+  resultcount: 'Your search returned %count% results'
+menu:
+  profile: Mi Perfil
+  logout: Desconectarse
+programLoader:
+  noPrograms: Actualmente no existen programas.
+login:
+  passOrUser: Su contraseña o nombre de usuario era incorrecto.
+  noUsername: Su nombre de usuario o correo electrónico no han podido ser encontrados.
+  forgotPass: ¿Ha olvidado su contraseña o usuario?
+  recoverPass: Recuperar la contraseña
+  recoverPassSend: Un correo electrónico ha sido enviado a tu dirección de correo electrónico. Por favor revise su bandeja de entrada.
+  userOrEmail: Nombre de Usuario o Email
+  changePass: Cambiar la contraseña
+apk:
+  generate: Generate APK
+  pending: Pending
+  download: Download APK
+errors:
+  username:
+    blank: Username must not be blank
+  password:
+    blank: Falta la contraseña.
+    short: 'Your password must have at least {{ limit }} characters.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Falta el país.
+    invalid: Invalid country
+  email:
+    blank: email must not be blank
+    invalid: Your email seems to be invalid
+    exists: Esta dirección de correo electrónico ya existe.
+  login: La contraseña o nombre de usuario es incorrecto.
+  post-data: El POST-Data no es correcto o falta!
+  checksum:
+    missing: El servidor no ha enviado el archivo fileChecksum! ¿Estás usando una versión vieja de Pocket Code?
+    invalid: invalid checksum
+  xml:
+    invalid: invalid code xml
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: invalid file
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: unknown error
+  token: 'La autenticación del dispositivo ha fallado: auth-token es inválido!'
+  programname:
+    rude: Programname must not contain rude wordes.
+  program:
+    invalid: Invalid program.
+  languageversion:
+    tooold: Lo sentimos, el programa contiene una versión antigua del lenguage de Catrobat! ¿Estás utilizando la última versión de Pocket Code?
+  programversion:
+    tooold: Lo sentimos, está utilizando una versión antigua de Pocket Code. Por favor actualice a la última versión.
+success:
+  registration: ¡Registro exitoso!
+  token: ok
+  upload: '!Tu proyecto se guardó con éxito!'
+  report: Your report was successfully sent!
+time:
+  minutes.ago: '{0} < hace 1 minuto |{1}hace 1 minuto |]1,Inf] hace %count% minutos'
+  hours.ago: '{1}hace 1 hora |]1,Inf] hace %count% horas'
+  days.ago: '{1}hace 1 día |]1,Inf] hace %count% días'
+  months.ago: '{1}hace 1 mes |]1,Inf] hace %count% meses'
+  years.ago: '{1}hace 1 año |]1,Inf] hace más de un año'
+language:
+  arabic: Árabe
+  bulgarian: Búlgaro
+  catalan: Catalán
+  chinese_simplified_han: Chino (simplificado Han)
+  chinese_traditional_han: Chino (tradicional Han)
+  croatian: Croata
+  czech: Checo
+  danish: Danés
+  dutch: Holandés
+  english_united_kingdom: Inglés (Reino Unido)
+  english_united_states: Inglés (Estados Unidos)
+  estonian: Estonio
+  filipino: Filipino
+  finnish: Finlandés
+  french: Francés
+  german: Alemán
+  greek: Griego
+  hebrew: Hebreo
+  hindi: Hindú
+  hungarian: Húngaro
+  indonesian: Indonesio
+  italian: Italiano
+  japanese: Japones
+  korean: Coreano
+  latvian: Letón
+  lithuanian: Lituano
+  malay: Malayo
+  norwegian: Noruego
+  persian: Persa
+  polish: Polaco
+  portuguese_brazil: Portugués (Brasil)
+  portuguese_portugal: Portugués (Portugal)
+  romanian: Rumano
+  russian: Ruso
+  serbian: Serbio
+  slovak: Eslovaco
+  slovenian: Esloveno
+  spanish_latin_america: Español (Latinoamérica)
+  spanish_spain: Español (España)
+  swedish: Sueco
+  thai: Tailandés
+  turkish: Turco
+  ukrainian: Ucraniano
+  vietnamese: Vietnamita
+ci:
+  generate: Generate Apk
+  pending: Generating Apk
+  download: Download Apk

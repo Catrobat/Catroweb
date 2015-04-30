@@ -1,0 +1,523 @@
+---
+localLanguage: English
+username: Username
+password: Passwort
+aboutPocketCode: Über Pocket Code
+tutorials: Tutorials
+googlePlay: Google Play
+passwordsNoMatch: 'Du hast zwei unterschiedliche Passw&#xF6;rrter eingegeben.'
+error: Fehler
+cancel: Abbrechen
+report: Melden
+download: Download
+description: Beschreibung
+noDescription: 'Keine Beschreibung verf&#xFC;gbar.'
+country: Land
+loginText: einloggen
+programs:
+  featured: Empfohlen
+  newest: Neuesten Programme
+  most:
+    viewed: meist gesehen
+    downloaded: meist heruntergeladen
+  downloads: '%downloads% downloads'
+  views: '%views% views'
+  reportAsInappropriate: Als unpassend melden
+  languageVersion:
+    Catrobat Language version: '%languageVersion%'
+  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportDialogHeader: Warum ist dieses Programm unpassend?
+  reportDialogReason: Gib einen Grund an
+  reportOwnProgram: Du kannst dein eigenes Programm nicht markieren.
+  reportAlready: Du hast dieses Programm bereits als unpassend gemeldet.
+  reportDone: Du hast dieses Programm als unpassend gemeldet!
+profile:
+  saveChanges: '&#xC4;nderungen speichern'
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: Meine erste E-Mail
+  secondEmail: Meine zweite E-Mail
+  myPrograms: My programs
+  form:
+    passwordTooShort: 'The new password must have at least %length% characters.'
+    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordIsUsername: 'Passwort und Username d&#xFC;rfen nicht gleich sein.'
+    emailNotValid: 'Diese E-mail Adresse ist ung&#xFC;ltig!'
+    emailMissing: Fehler beim Speicher dieser E-Mail Adresse. Du musst zumindest eine verifizierte E-Mail Adresse haben.
+    emailExists: Die E-Mail Adresse existiert bereits!
+    submitSuccess: gespeichert
+  reallyDeleteProgram: 'Willst du wirklich dein Programm l&#xF6;schen'
+  programsOf: Programme von
+  changePicture: 'Bild &#xE4;ndern'
+  avatar:
+    pictureTooLarge: 'Dein gew&#xE4;hltes Bild ist zu gro&#xDF;, verwende bitte keine Bilder, die gr&#xF6;&#xDF;er als 5MB sind.'
+    uploadError: Tut mir leid, es gab ein Problem beim Hochladen!
+    noSupport: 'Dieser Bild-Typ wird nicht unterst&#xFC;tzt, versuche ein anderes Bild.'
+licenseToPlay:
+  title: 'Lizenz zum Spielen - Sag "Danke" und teile deine Programme'
+  text1: Stell dir vor, dass jedes Catrobat Programm ein Kuchen ist, ein sehr spezieller Kuchen, welches ein Rezept beinhaltet (Programmblöcke). Alle Mitglieder der Catrobat Gemeinschaft teilen ihre Kuchen zusammen mit ihren Rezepten. Dies bedeutet, dass du die Kuchen genießen kannst und dadurch erfährst, wie man sie selbst erstellt!
+  text2: 'Es gibt keine geheimen Rezepte: die Anweisungen wie diese Kuchen erstellt werden sind offen für jeden um sie zu verwenden, wiederverwenden, ändern und als Inspiration für neue Ideen... Ich meine Kuchen.'
+  text3: 'Du darfst die Kuchen essen und du darfst die Rezepte von anderen kopieren um deinen eigenen Kuchen zu machen - wenn du möchtest mit anderen Zutaten. Es gibt zwei Dinge die du beachten sollst:'
+  text4: Bei der Einrichtung der Catrobat Gemeinschaft, haben wir beschlossen, diesen Ansatz zu verfolgen, da wir glauben, dass es das Lernen und die Kreativität in der Gemeinschaft unterstützt. Durch den Austausch von Rezepten und Zutaten (Skripte und Grafiken), können Menschen gegenseitig Ideen aufbauen und alle profitieren davon.
+  text5: Bei der Gestaltung der Catrobat Website, fügten wir Funktionen hinzu, um Menschen zu ermutigen, zu teilen und anderen Respekt zu zollen. Auf jeder Seite des Programmes kannst du immer die ursprünglichen Skripts für das Programm herunterladen. Wenn du ein Programm (Veränderung des Skripts oder Grafiken, und wenn das Ergebnis geteilt wird) vermischst, empfehlen wir dir eine Nennung in den Programm-Anmerkungen zu erstellen, in denen die Menschen und das Programm, welches dich inspiriert hat, steht.
+  text6: 'Erfahre mehr über die Nutzungsbedingungen der online-Community von Catrobat auf %link-termsOfUse%.'
+  list1:
+    item1: teile Deine Kuchen und die Rezepte mit anderen
+    item2: bedanke Dich bei denen, deren Rezepte Du verwendet hast und die Dich auf neue Ideen gebracht haben
+  version: Version 1.1, 2 April 2013
+termsOfUse:
+  title: Datenschutzrichtlinien
+  headline: Willkommen in der Catrobat Gemeinschaft!
+  text1: 'Als Teil der Catrobat Gemeinschaft, teilst du Programme und Ideen mit andere Leuten:'
+  text2: 'Wir ben&#xF6;tigen Deine Hilfe um diese Community zu einem hilfreichen Platz f&#xFC;r alle Mitglieder zu machen. Und so kannst Du uns helfen:'
+  text3: 'Mit dem Catrobat Projekt wollen wir die Zusammenarbeit f&#xF6;rdern und damit die Kreativit&#xE4;t aller kombinieren - zum Wohle der ganzen Menschheit. Auch du kannst ein aktives Mitglied der Catrobat Gemeinschaft werden, indem du deine Programme als Geschenk zur&#xFC;ck an die Gemeinschaft gibst, in der gleichen Weise wie andere aktive Mitglieder ihre Programme dir geben:'
+  text4: 'Unser Geschenk an dich:'
+  text5: 'Unsere allgemeinen Gesch&#xE4;ftsbedingungen:'
+  list1:
+    item1: 'aus vielen verschieden L&#xE4;ndern und Kulturkreisen'
+    item2: 'mit unterschiedlichem Alter (von kleinen Kindern &#xFC;ber Jugendliche bis Gro&#xDF;eltern)'
+    item3: 'die unterschiedliche F&#xE4;higkeiten haben'
+  list2:
+    item1: 'Sei respektvoll. Wenn du Programme teilst, denke bitte daran, dass Menschen aus vielen verschiedenen Altersgruppen und Hintergr&#xFC;nden deine Beitr&#xE4;ge sehen k&#xF6;nnen.'
+    item2: 'Gib Anerkennung. Du kannst modifizierte Versionen der Programme anderer Leuten machen - achte nur darauf ihnen anschliesend deine Anerkennung zu geben. Eine Stelle daf&#xFC;r ist in deiner Programmbeschreibung. Bitte lies dir den Abschnitt unterhalb dieser gepunkteten Liste f&#xFC;r Details &#xFC;ber das &#xC4;ndern von Programmen anderer Teilnehmer.'
+    item3: 'Sei ehrlich. Versuche nicht Dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betr&#xFC;gen.'
+    item4: 'Behalte pers&#xF6;nliche Informationen f&#xFC;r Dich. Ver&#xF6;ffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere pers&#xF6;nliche Kontakt-Informationen.'
+    item5: 'Hilf die Website freundlich zu halten. Wenn du glaubst, dass andere ein Programm oder einen Kommentar gemein, beleidigenden, zu gewaltt&#xE4;tig oder anderweitig unangemessen finden, klicke einfach auf den "Als unpassend melden"-Button und hinterlasse eine kurze Erkl&#xE4;rung. Das Catrobat Team pr&#xFC;ft deinen Hinweis und kann ein beliebiges Programm, Kommentar oder Post entfernen.'
+  list3:
+    item1: "Mit dem Hochladen eines Programms auf unsere Webseiten, akzeptierst du und stimmst zu, diese Arbeit unter bestimmte freie Lizenzen der hochgeladenen Catrobat Programme zu legen. &#xE4;hnlich wie bei den freien Lizenzen, unter denen das Catrobat System dir zur Verf&#xFC;gung steht, geben diese freien Lizenzen, der hochgeladenen Catrobat Programme, jedem das Recht, von der Arbeit zuvor hochgeladener Programme zu lernen und diese anzupassen und neu zu mischen, um ihre eigenen neuen faszinierenden Spiele, Animationen und andere Programme zu bauen. Das erm&#xF6;glicht jedem 'Schulter an Schulter mit seinesgleichen zu stehen', einer davon bist du! Deine Arbeit wird der ganzen Welt zu Gute kommen und wird f&#xFC;r jeden frei benutzbar bleiben, ungef&#xE4;hr so wie freiwillige aus der ganzen Welt Texte und Bilder zu Wikipedia beitragen. Betrachte es als Geschenck an die Menschheit: du gibst allen, und alle anderen, die ihre Arbeit auf unsere Webseiten laden, geben dir. Ein hochgeladenes Programm ist ein Geschenk von gro&#xDF;em Wert, der dir vom Besitzer frei zur Verf&#xFC;gung gestellt wird, unter der Bedingung, dass du an der Gemeinschaft mit den gleichen Bedingungen teilnimmst."
+    item2: 'Du musst das Geschenk nicht annehmen; aber wenn du es tust, gelten bestimmte Regeln. Die Vorteile dieser Regeln sind, dass du von der Arbeit anderer lernen und darauf aufbauen kannst, um noch cooler Sachen selbst zu machen, die du dann z. B. als dein eigenes Werk wieder auf unseren Webseiten hochladen kannst. Ein weiterer Vorteil ist, dass diese Lizenzen sicher stellen, dass du nicht f&#xFC;r etwaige Probleme von anderen Personen, die durch den Einsatz von deinem Programm entstehen k&#xF6;nnen, haftbar gemacht werden kannst.'
+    item3: 'Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen gesch&#xE4;tzt werden kann, indem wir anderen die M&#xF6;glichkeit schaffen &#xF6;ffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gw&#xE4;hlt hast und der dich in der Catrobat Gemeinschaft vertritt.'
+    item4: 'Bitte konsultiere %link-licenseUploaded%  für die genauen rechtlichen Geschäftsbedingungen.'
+  list4:
+    item1: 'Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, zB die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zus&#xE4;tzlich enthalten Materialien, wie z. B. , Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat.'
+    item2: 'Diese Lizenzen machen alle Teile von Catrobat sowohl kostenlos als auch frei im Sinne von Freiheit, dass du alles nutzen kannst wie du willst, lediglich mit ein paar Einschr&#xE4;nkungen, um gew&#xE4;hrleisten zu k&#xF6;nnen, dass das Catrobat System f&#xFC;r immer frei bleiben und n&#xFC;tzlich f&#xFC;r jeden sein wird.'
+    item3: 'Bitte konsultiere %link-licenseToPlay% für die genauen rechtlichen Geschäftsbedingungen. Der Source-Code des Catrobat-Systems sowie viele weitere Dokumente und Ressourcen sind auf %link-developer% erhältlich.'
+  list5:
+    item1: 'Wenn du unter 13 Jahre alt bist, deine Eltern oder legale Erziehungsberechtigte bei einer Organisation beteiligt oder involviert sind, oder verantwortlich für Datenschutzverletzungen und/oder Bulk oder Massenüberwachung sind, dann bist du nicht befugt unsere Software Anwendung zu verwenden. Die genauen Details dieser Beschränkungen und Ausnahmen findest du in den Abschnitten 4.a und 4.b auf diesem Link %link-termsOfUse%.'
+    item2: Wenn du jünger als 13 Jahre bist, musst du deine Eltern oder Erziehungsberechtigten fragen ob sie dir erlauben Catrobat Software-Anwendungen und Services zu nutzen.
+    item3: 'Wir behalten uns das Recht vor, Programme, Benutzerkonten, und alle digitalen Materialien, die auf die Catrobat Webseiten hochgeladen werden, in unserem alleinigen Ermessen jederzeit abzulehnen, zu l&#xF6;schen oder zu verstecken, zum Beispiel, wenn wir feststellen, dass ein Programm unangemessenes Material enth&#xE4;lt, oder dass ein Benutzer die Rechte anderer Personen verletzt.'
+    item4: 'Alle Software und Internet-Ressourcen von Catrobat werden in der Hoffnung, dass sie n&#xFC;tzlich sind bereitgestellt, allerdings ohne jeglicher Garantie.'
+    item5: 'Bitte konsultiere unsere %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service für genauere Informationen der obigen Punkte und einigen zusätzlichen rechtlichen Bedingungen.'
+  bottom1: Schaue hier von Zeit zu Zeit vorbei, weil wir immer versuchen unsere Nutzungsbedingungen zu verbessern.
+  bottom2: 'Bitte sende Anregungen bezüglich dieser Nutzungsbedingungen an %email-webmaster%.'
+  version: Version 1.3, 4. März 2014
+help:
+  hourOfCode:
+    title: Skydiving Steve
+    step0:
+      title: Skydiving Steve
+      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+    step1:
+      title: 'Install "Pocket Code"'
+      description: Wie du Pocket Code auf deinem mobilen Gerät installierst.
+      image1: 'Tippe auf "Play Store".'
+      image2: 'Suche "Pocket Code".'
+      image3: 'Tippe auf "Install".'
+    step2:
+      title: Download Project
+      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
+      image1: 'Tippe auf deinem mobilen Gerät im "Pocket Code" auf "Durchsuchen".'
+      image2: Tippe auf das Banner.
+      image3: 'Download the program "Skydiving Steve".'
+    step3:
+      title: Open Project
+      description: Lass uns ins Programm schauen.
+      image1: 'Öffne das Menü und tippe auf "Open Skydiving Steve".'
+      image2: 'Tippe auf das Objekt "Fallschirm".'
+      image3: 'Wähle "Skripte".'
+    step4:
+      title: Variable hinzufügen
+      description: Die Variablen x und y erlauben es dir deinen Fallschirm zu steuern.
+      image1: 'Tippe auf "+".'
+      image2: 'Go to the category "Variables".'
+      image3: 'Tippe auf "Set Variable".'
+      image4: 'Ziehe den "Set Variable" Baustein unten den "When program started" Baustein.'
+    step5:
+      title: Label variables
+      description: Beschrifte die x Position deines Fallschirmes.
+      image1: Füge eine zweite Variable, wie zuvor, hinzu.
+      image2: 'Tippe auf "Neu...".'
+      image3: 'Füge "x" ein und drücke auf "OK".'
+    step6:
+      title: 'Set variable "y"'
+      description: Beschrifte und setze die y Startposition deines Fallschirmes.
+      image1: 'Beschrifte die zweite Variable mit "y".'
+      image2: 'Tippe auf das Feld, welches mit "0.0" gefüllt ist.'
+      image3: 'Füge "-500" ein und drücke auf "OK".'
+    step7:
+      title: Wiederhole fortlaufend
+      description: 'Du musst jederzeit die Position deines Fallschirmes kontrollieren können. Füge dazu eine "Forever"- Schleife ein.'
+      image1: 'Tippe auf "+".'
+      image2: 'Gehe zur Kategorie "Kontrolle".'
+      image3: 'Wähle den "Forever" Baustein.'
+      image4: 'Ziehe den "Forever" Baustein unter den "Set variable" Baustein.'
+    step8:
+      title: Insert and modify bricks
+      description: 'Füge mehr Bausteine in deine "Forever" Schleife ein, um deinen Fallschirm zu steuern. Füge die Variablen "x" und "y" in deinem "Place at" Baustein ein, um die Position deines Fallschirms zu steuern.'
+      image1: 'Füge die gezeigten Bausteine unterhalb des "Forever" Bausteines ein.'
+      image2: 'Tippe auf das Feld "100".'
+      image3: 'Tippe auf "Variablen" und wähle "x" aus.'
+      image4: 'Tippe bei dem gleichen Baustein auf der Oberseite auf "200", gehe zur Kategorie "Variablen" und wähle "y" aus. Bestätige mit "OK".'
+    step9:
+      title: Change variables and values
+      description: Ändere die Variable y auf -3 um deinen Fallschirm auf den Boden gleiten zu lassen. Ändere die Variable x, sodass dein Fallschirm den Neigungswinkel deines mobilen Gerätes folgt.
+      image1:
+        subtext1: 'Setze die Größe auf "20" %.'
+        subtext2: 'Ändere den Wert des ersten "Set variable" Bausteines auf "-3".'
+        subtext3: 'Beim zweiten "Set variable" Baustein tippe auf das Feld "0.0".'
+      image2:
+        subtext1: 'Tippe auf "y" und wähle "x".'
+        subtext2: 'Einfügen "-".'
+        subtext3: 'Tippe auf "Sensor" und wähle "inclination_x".'
+      image3: 'Überprüfe ob die eingefügte Formel mit der auf dem Screenshot übereinstimmt und bestätige mit "OK".'
+    step10:
+      title: Loudness sensor
+      description: 'Du kannst die Höhe deines Fallschirms mit dem Lautstärke Sensor deines mobilen Gerätes steuern. Dafür musst du einen "If 1 is true then" Baustein hinzufügen.'
+      image1:
+        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
+        subtext2: 'Tippe innerhalb des "If 1 is true then" Baustein auf das Feld mit dem Wert "0".'
+      image2:
+        subtext1: 'Tippe auf "Sensoren".'
+        subtext2: 'Wähle "Lautstärke".'
+        subtext3: 'Tippe auf "Logik".'
+        subtext4: 'Choose ">".'
+        subtext5: 'Füge "50" ein.'
+      image3: 'Überprüfe ob deine Formel mit der Formel im Screenshot übereinstimmt und tippe auf "OK".'
+    step11:
+      title: Change some more bricks
+      description: Wenn du das Spiel neu startest, dann sollte die Startposition deines Fallschirms mit deiner ursprünglichen Anfangsposition übereinstimmen. Dafür musst du drei Bausteine hinzufügen und verändern, wie es in den Bildern darunter gezeigt wird.
+      image1: 'Füge einen "Change variable" Baustein ein und ändere den Wert wie oben.'
+      image2:
+        subtext1: 'Füge einen "When I receive" Baustein ein.'
+        subtext2: 'Platziere es unter dem letzten Baustein ("Ende der Schleife").'
+        subtext3: 'Füge zwei "Set variable" Bausteine ein.'
+      image3: 'Tippe auf das Feld mit dem Eintrag "message 1", wähle "Neu..." und füge "Neustart" ein.'
+      image4: 'Ändere den Wert der zwei "Set Variablen" Bausteine wie im obigen Screenshot gezeigt.'
+    step12:
+      title: Back to objects
+      description: 'Du hast nun dein Objekt "Fallschirm" erfolgreich fertiggestellt! Navigiere zurück zur Objektübersicht um das nächste Objekt ändern zu können.'
+      image1: 'Tippe auf die "Zurück" Taste deines Gerätes.'
+      image2: 'Tippe noch einmal auf die "Zurück" Taste.'
+      image3: Nun solltest du diesen Bildschirm auf deinem Gerät sehen.
+    step13:
+      title: 'Objekt "Ziel"'
+      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
+      image1: 'Tippe auf "Ziel" und wähle "Skripte".'
+      image2: Füge und verändere den Baustein, wie in dem Screenshot oben.
+      image3: Füge vier weitere Bausteine, wie oben abgebildet, hinzu.
+    step14:
+      title: 'Objekt "Ziel"'
+      description: Wenn du das Spiel neu startest, muss die Position deines Zielobjektes geändert. werden. Für diesen Schritt setze die Variablen goalx und goaly mit einer random Funktion.
+      image1: 'Tippe auf das Feld "y:" und wähle "Neu".'
+      image2: 'Füge "goalx" hinzu und bestätige mit "OK".'
+      image3: 'Tippe auf das Feld "0.0" und füge diese Formel "random(-400,400)" ein.'
+      image4: 'Wiederhole die Schritte 1-3 für den zweiten "Set variable" Baustein, nenne diese Variable "goaly" und setze den Wert auf "random(400,-700)".'
+    step15:
+      title: 'Objekt "Ziel"'
+      description: 'Ändere deinen "Place at" Baustein um die Position deines Zielobjektes mit den Variablen goalx und goaly steuern zu können.'
+      image1: 'Ändere den Wert bei dem "Place at" Baustein auf "goalx" und "goaly".'
+      image2: Überprüfe ob deine Werte mit den obigen übereinstimmen.
+      image3: Gehe zurück, bis du diesen Bildschirm siehst.
+    step16:
+      title: 'Objekt "Paket"'
+      description: 'Hier beginnst du dein Objekt "Paket". Wenn das Objekt "Paket" die "start" Nachricht erhält, sollte das Paket angezeigt werden. Setze die Position des Paketes mit den Variablen x und y.'
+      image1: 'Tippe auf "Ziel" und wähle "Skripte".'
+      image2: Füge alle Bausteine, wie oben gezeigt, hinzu.
+      image3:
+        subtext1: 'Ändere den Wert des "Set size" Bausteines auf "50".'
+        subtext2: 'Tippe innerhalb des "When I receive" Bausteines auf das Feld "Neustart" und erstelle eine neue Nachricht: "start".'
+        subtext3: 'Ändere den Wert des "Place at" Bausteines auf "x" and "y".'
+    step17:
+      title: 'Objekt "Paket"'
+      description: 'Um zu prüfen ob das Paket das Zielobjekt getroffen hat, benötigst du einen "If 1 is true then" Baustein.'
+      image1: 'Füge den oben gezeigten Baustein unter den letzten "Place at" Bausteines.'
+      image2: 'Ändere den Wert mit dem "Change Y by" Bausteines zu "-5". Danach tippe auf das Feld "1" in der "If 1 is true then".'
+      image3:
+        subtext1: '"positon_x" und "position_y" kann man in der Kategorie "Objekt" finden.'
+        subtext2: '"goaly" und "goalx" findet man in der Kategorie "Variablen".'
+        subtext3: '"AND" ist in der "Logik" Kategorie.'
+    step18:
+      title: 'Objekt "Paket"'
+      description: Wenn das Paket erfolgreich das Zielobjekt getroffen hat, dann musst du die Position des Paketes ändern. Sende eine Nachricht an die anderen Objekte, um denen wissen zu lassen, dass du gewonnen hast.
+      image1:
+        subtext1: 'Ändere den Wert des "Place at" Bausteines zu "position_x" und "goaly+100".'
+        subtext2: 'Tippe auf das Feld "Broadcast" und erstelle eine neue Nachricht "Gewonnen".'
+      image2: Füge die oben gezeigten Bausteine hinzu und verändere ihre Werte gleichermaßen.
+      image3: 'Gehe zurück, bis du diesen Bildschirm auf deinem Gerät siehst. Gehe zu den Skripten des Objektes "Neustart".'
+    step19:
+      title: 'Objekt "Neustart"'
+      description: 'Hier änderst du das Objekt "Neustart". Definiere die Position und das Verhalten des Objektes.'
+      image1: Füge die oben gezeigten Bausteine hinzu und verändere ihre Werte gleichermaßen.
+      image2: 'Füge die oben gezeigten Bausteine hinzu und setze die "Broadcast" Nachricht auf "Neustart".'
+      image3: 'Gehe zurück, bis du diesen Bildschirm siehst, dann gehe zu den Skripten "Hintergrund".'
+    step20:
+      title: 'Object "Background"'
+      description: 'Vervollständige das Programm, indem du das "Hintergrund" Objekt veränderst. Jetzt kannst du dein Spiel spielen. Viel Spaß!'
+      image1:
+        subtext1: 'Füge die oben gezeigten Bausteine hinzu und setze die "Broadcast" Nachricht auf "Start".'
+        subtext2: 'Tippe auf die "Spiel" Taste.'
+      image2: Genieße dein Spiel.
+      image3: |-
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+    step21:
+      title: Check your scripts!
+      description: Klicke auf die Bilder unten, um diese zu vergrößern. Überprüfe die Skripte deines Objektes, falls dein Spiel nicht richtig funktioniert.
+      image1: 'Objekt "Hintergrund"'
+      image2: 'Objekt "Fallschirm"'
+      image3: 'Objekt "Paket"'
+      image4: 'Objekt "Neustart"'
+      image5: 'Objekt "Ziel"'
+  stepByStep:
+    title: 'Schrittweise Einf&#xFC;hrung'
+    start: 'Ausgangsposition:'
+    step1:
+      title: Make a new program
+      detail:
+        text1: 'Tippe auf "Neu".'
+        text2: 'Gib einen Programmnamen ein, w&#xE4;hle "Erstelle leeres Programm" und tippe auf "OK".'
+    step2:
+      title: Create a new object
+      detail:
+        text1: 'Tippe auf "+".'
+        text2: Choose the source of the first look of your new object.
+        text3: 'Enter an object name and tap "OK" to create the object.'
+        special1: Zeichne ein neues Aussehen.
+        special2: 'W&#xE4;hle von der Galerie.'
+        special3: Mach ein Foto.
+    step3:
+      title: Start Moving
+      detail:
+        text1: 'Tippe auf "+".'
+        text2: 'Wir wollen einen Baustein aus der Kategorie "Bewegung" verwenden.'
+        text3: 'W&#xE4;hle den "Gleiten" - Baustein aus. Das Objekt wird zu der Position gleiten, die du in den Baustein eingibst.'
+        text4: 'Der Baustein wird jetzt schwebend angezeigt. Du kannst ihn einf&#xFC;gen, indem du ihn an die gew&#xFC;nschte Stelle ziehst. Du kannst auch bereits eingef&#xFC;gte Bausteine verschieben, indem du den Baustein solange antippst, bis er wieder schwebend wird.'
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: 'Dr&#xFC;cke den "Zur&#xFC;ck"-Button, um die B&#xFC;hne zu verlassen.'
+    step4:
+      title: 'Aussehen &#xE4;ndern'
+      description: 'Du kannst das Aussehen deines Objektes ver&#xE4;ndern.'
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Platziere den Baustein unter dem "Gleiten" - Baustein.'
+        text3: Um ein neues Aussehen zu erstellen, tippe zuerst in das Dropdown-Feld.
+        text4: 'F&#xFC;ge wie vorher ein neues Bild hinzu.'
+        text5: 'Jetzt musst du das neue Bild ausw&#xE4;hlen.'
+        text6: 'Tippe auf den Start-Button, um die &#xC4;nderungen auf der B&#xFC;hne zu sehen.'
+    step5:
+      title: Sprich
+      description: 'Jetzt wirst du herausfinden, wie man ein Objekt zum "Sprechen" bringt.'
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: 'Platziere den Baustein unter dem "Setze Aussehen" - Baustein.'
+        text3: 'Tippe auf den Start-Button, um die &#xC4;nderungen auf der B&#xFC;hne zu sehen.'
+    step6:
+      title: Again and again
+      description: Jetzt werden wir dir zeigen, wie du das Verhalten deines Objektes wiederholen kannst.
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: 'Platziere den "Wiederhole fortlaufend" - Baustein unterhalb des "Wenn Programm gestartet" - Bausteins.'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: Tippe in das Textfeld der x und y Koordinaten und setze sie auf 0.
+        text6: 'Tippe auf den Start-Button, um die &#xC4;nderungen auf der B&#xFC;hne zu sehen.'
+    step7:
+      title: Tapping is everything
+      description: 'Du kannst das Verhalten eines Objektes auch ver&#xE4;ndern, wenn dein Programm auf der B&#xFC;hne ausgef&#xFC;hrt wird.'
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: Jetzt solltest du dieses Skript haben.
+        text5: 'Tippe auf den Start-Button, um die &#xC4;nderungen auf der B&#xFC;hne zu sehen. Wenn du jetzt das neue Objekt antippst, wird es sich drehen.'
+    step8:
+      title: Copy, delete or edit a brick
+      detail:
+        text1: 'Wenn du einen Baustein auf der linken Seite antippst, &#xF6;ffnet sich ein Men&#xFC;. Damit kannst du das Objekt bewegen, kopieren oder die Werte des Bausteins mit dem Formel-Editor ver&#xE4;ndern.'
+    step9:
+      title: Navigation in the app
+      detail:
+        text1: 'Nutze den Android "Zur&#xFC;ck" - Button, um zum vorherigen Bildschirm zur&#xFC;ck zu gelangen.'
+        text2: 'Gehe einmal zur&#xFC;ck um zur &#xDC;bersicht deines Objektes zu gelangen. Von hier gelangst du zu den Skripten, Aussehen und Kl&#xE4;nge deines Objektes. Hier kannst du sie umbenennen, kopieren, editieren oder l&#xF6;schen.'
+        text3: 'Wenn du noch einmal den Android "Zur&#xFC;ck"-Button antippst, gelangst du zur &#xDC;bersicht &#xFC;ber deine Objekte und den Hintergrund.'
+    step10:
+      title: Change the background
+      description: 'Das ist die &#xDC;bersicht &#xFC;ber deine Objekte und den Hintergrund deines Programmes.'
+      detail:
+        text1: 'Der Hintergrund verh&#xE4;lt sich wie ein Objekt, allerdings gibt es nur ein Hintergrund-Objekt.'
+        text2: 'Du kannst Skripte, Aussehen und Kl&#xE4;nge auf die gleiche Weise zum Hintergrund-Objekt hinzuf&#xFC;gen, wie bei den Objekten.'
+    step11:
+      title: Main Menu
+      description: 'Tippe noch einmal auf den Android "Zur&#xFC;ck"-Button, um zu diesem Bildschirm zu gelangen.'
+      detail:
+        text1: Setze dein aktuelles Programm fort.
+        text2: Füge ein neues Programm hinzu.
+        text3: Schau dir all deine lokalen Programme an.
+        text4: Besuche die Hilfe Website und diskutiere mit den anderen Benutzern.
+        text5: Entdecke die Welt der Pocket Code Programme. Lade und vermische Programme, wie du möchtest.
+        text6: Lade das derzeit geöffnete Programm hoch.
+  tutorialcards:
+    title: Tutorials
+    description1: 'Diese Tutorials zeigen dir, wie man effektive Tricks verwendet in '
+    description2: Pocket Code.
+    getReady: 'Bereite alles vor:'
+    tryCode: 'Try this code:'
+    doIt: 'Tu es:'
+    tip: 'Extra Tipp:'
+    card1:
+      title: 'Gr&#xF6;&#xDF;e &#xE4;ndern'
+      description: 'Tippe auf die Ente um ihre Gr&#xF6;&#xDF;e zu ver&#xE4;ndern.'
+    card2:
+      title: 'Aussehen &#xE4;ndern'
+      description: 'Verwende diesen Trick um automatisch mitzuz&#xE4;hlen.'
+    card3:
+      title: Bewegte Animation
+      description: Verwende diesen Trick um den Papagei fliegen zu lassen.
+    card4:
+      title: Gleite
+      description: 'Gleite mit einem Objekt &#xFC;ber den Bildschirm.'
+    card5:
+      title: Spiele einen Klang ab
+      description: Tap the drum to play this sound.
+      extra1: '1. Tipp "+"'
+      extra2: '2. W&#xE4;hle "Pocket Code Rekorder"'
+      extra3: 3. Tippe auf das Icon um einen Klang aufzunehmen
+    card6:
+      title: Sprich etwas
+      description: Verwende diesen Code damit ein Objekt spricht.
+    card7:
+      title: GSensor
+      description: Verwende diesen Trick um ein Objekt mit Neigung deines Handys zu kontrollieren.
+      extra1: Wenn es zu heikel ist, teile es durch 10
+    card8:
+      title: Kompass
+      description: Verwende diesen Code um einen Kompass zu erstellen.
+    card9:
+      title: 'Verschicke an alle:'
+      description: Schau dir diesen Code an! Er zeigt dir, wie man zwischen Objekten kommuniziert.
+  starterPrograms:
+    title: Starter Programme
+    description: 'Probiere diese Starter Programme aus. Schau dir den Code an und ver&#xE4;ndere ihn so wie du willst.'
+    categories:
+      games: Spiele
+      animations: Animationen
+      interactive: Interaktive Kunst und Geschichten
+      music: Music And Dance
+search:
+  dotdotdot: Suche...
+  search: Suche
+  results: Suchergebnisse
+  resultcount: 'Ihre Suche brachte %count% Ergebnisse'
+menu:
+  profile: Mein Profil
+  logout: Ausloggen
+programLoader:
+  noPrograms: Es gibt im Moment keine Programme.
+login:
+  passOrUser: Das Passwort oder der Username ist falsch.
+  noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
+  forgotPass: Passwort oder Usernamen vergessen?
+  recoverPass: Passwort wiederherstellen
+  recoverPassSend: 'Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte &#xFC;berpr&#xFC;fe deinen Posteingang.'
+  userOrEmail: Username oder Email
+  changePass: 'Passwort &#xE4;ndern'
+apk:
+  generate: Generate APK
+  pending: Pending
+  download: Download APK
+errors:
+  username:
+    blank: Username must not be blank
+  password:
+    blank: Du hast kein Passwort angegeben.
+    short: 'Your password must have at least {{ limit }} characters.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Du hast kein Land angegeben.
+    invalid: Invalid country
+  email:
+    blank: email must not be blank
+    invalid: Your email seems to be invalid
+    exists: Die E-Mail Adresse existiert bereits!
+  login: Das Passwort oder der Username ist falsch.
+  post-data: POST-Daten nicht korrekt oder fehlt!
+  checksum:
+    missing: Der Client hat die fileChecksum nicht mitgeschickt! Verwendest du eine veraltete Version von Pocket Code?
+    invalid: invalid checksum
+  xml:
+    invalid: invalid code xml
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: invalid file
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: unknown error
+  token: 'Authentifizierung des Ger&#xE4;ts fehlgeschlagen: ung&#xFC;ltiger auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+  program:
+    invalid: Invalid program.
+  languageversion:
+    tooold: 'Tut mir leid, dein Programm enth&#xE4;lt eine alte Version der Catrobat-Sprache! Verwenden Sie die neueste Version von Pocket-Code?'
+  programversion:
+    tooold: Es tut uns Leid, du nutzt eine alte Version von Pocket Code. Bitte lade dir die aktuelle Version herunter.
+success:
+  registration: Registrierung erfolgreich!
+  token: Ok
+  upload: Das Projekt wurde erfolgreich hochgeladen!
+  report: Your report was successfully sent!
+time:
+  minutes.ago: '{0} < vor 1 Minute |{1} vor 1 Minute |]1, Inf]  vor %count% Minuten'
+  hours.ago: '{1} vor 1 Stunde |]1, Inf]  vor %count% Stunden'
+  days.ago: '{1} vor 1 Tag |]1, Inf] vor %count% Tagen'
+  months.ago: '{1} vor 1 Monat |]1, Inf] vor %count% Monaten'
+  years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
+language:
+  arabic: Arabisch
+  bulgarian: Bulgarisch
+  catalan: Katalanisch
+  chinese_simplified_han: Chinesisch (Vereinfachte Chinesische Schrift)
+  chinese_traditional_han: Chinesisch (Traditionelle Chinesische Schrift)
+  croatian: Kroatisch
+  czech: Tschechisch
+  danish: 'D&#xE4;nisch'
+  dutch: 'Niederl&#xE4;ndisch'
+  english_united_kingdom: 'Englisch (Vereinigtes K&#xF6;nigreich)'
+  english_united_states: Englisch (Vereinigte Staaten)
+  estonian: Estnisch
+  filipino: Filipino
+  finnish: Finnisch
+  french: 'Franz&#xF6;sisch'
+  german: Deutsch
+  greek: Griechisch
+  hebrew: 'Hebr&#xE4;isch'
+  hindi: Hindi
+  hungarian: Ungarisch
+  indonesian: Indonesisch
+  italian: Italienisch
+  japanese: Japanisch
+  korean: Koreanisch
+  latvian: Lettisch
+  lithuanian: Litauisch
+  malay: Malaiisch
+  norwegian: Norwegisch
+  persian: Persisch
+  polish: Polnisch
+  portuguese_brazil: Portugiesisch (Brasilien)
+  portuguese_portugal: Portugiesisch (Portugal)
+  romanian: 'Rum&#xE4;nisch'
+  russian: Russisch
+  serbian: Serbisch
+  slovak: Slowakisch
+  slovenian: Slowenisch
+  spanish_latin_america: Spanisch (Lateinamerika und Karibik)
+  spanish_spain: Spanisch (Spanien)
+  swedish: Schwedisch
+  thai: 'Thail&#xE4;ndisch'
+  turkish: 'T&#xFC;rkisch'
+  ukrainian: Ukrainisch
+  vietnamese: Vietnamesisch
+ci:
+  generate: Generate Apk
+  pending: Generating Apk
+  download: Download Apk

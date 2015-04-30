@@ -1,15 +1,42 @@
-project_identifier: catroweb
-api_key: #ask for the key
+project_identifier: catrobat
+api_key: #ask the crowdin coordinator for key
 base_url: http://api.crowdin.net
-base_path:
 preserve_hierarchy: true
 
 files:
   -
-    source: '/src/Catrobat/WebBundle/Resources/translations/catroweb_web.en.yml'                                   #source files filter
-    translation: '/src/Catrobat/WebBundle/Resources/translations/catroweb_web.%two_letters_code%.yml'  #where translations live
+    source: '/app/Resources/translations/catroweb.en.yml'                                   #source files filter
+    translation: '/app/Resources/translations/catroweb.%locale_with_underscore%.yml'  #where translations live
     update_option: 'update_as_unapproved'
-  -
-    source: '/src/Catrobat/ApiBundle/Resources/translations/catroweb_api.en.yml'                                   #source files filter
-    translation: '/src/Catrobat/ApiBundle/Resources/translations/catroweb_api.%two_letters_code%.yml'  #where translations live
-    update_option: 'update_as_unapproved's
+    languages_mapping:
+      locale_with_underscore:
+        'ar': 'ar'
+        'bs': 'bs'
+        'da': 'da'
+        'de': 'de'
+        'es-ES': 'es'
+        'fa': 'fa'
+        'fr': 'fr'
+        'gu-IN': 'gu'
+        'hi': 'hi'
+        'hr': 'hr'
+        'hu': 'hu'
+        'it': 'it'
+        'ja': 'ja'
+        'ms': 'ms'
+        'ko': 'ko'
+        'nl': 'nl'
+        'no': 'no'
+        'pl': 'pl'
+        'ps': 'ps'
+        'pt-PT': 'pt'
+        'ro': 'ro'
+        'ru': 'ru'
+        'sl': 'sl'
+        'sr': 'sr'
+        'sv-SE': 'sv'
+        'ta': 'ta'
+        'th': 'th'
+        'tr': 'tr'
+        'ur-PK': 'ur'
+        'zh-CN': 'zh'

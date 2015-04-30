@@ -1,0 +1,523 @@
+---
+localLanguage: English
+username: Användarnamn
+password: Lösenord
+aboutPocketCode: Om Pocket Code
+tutorials: Handledningar
+googlePlay: Google Play
+passwordsNoMatch: Lösenorden matchade inte.
+error: Fel
+cancel: Avbryt
+report: Rapportera
+download: Ladda ner
+description: Beskrivning
+noDescription: Ingen beskrivning tillgänglig.
+country: Land
+loginText: Logga in
+programs:
+  featured: Dagens
+  newest: Nyaste program
+  most:
+    viewed: Mest visade
+    downloaded: Mest nedladdningar
+  downloads: '%downloads% downloads'
+  views: '%views% views'
+  reportAsInappropriate: Rapportera som olämpligt
+  languageVersion:
+    Catrobat Language version: '%languageVersion%'
+  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportDialogHeader: Varför tycker du att detta program är olämpligt?
+  reportDialogReason: Ange en orsak
+  reportOwnProgram: Du kan inte flagga ditt eget program.
+  reportAlready: Du har redan flaggat detta program som olämpligt.
+  reportDone: Du rapporterade detta program som olämpligt!
+profile:
+  saveChanges: Spara ändringar
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: Min första e-post
+  secondEmail: Min andra e-post
+  myPrograms: My programs
+  form:
+    passwordTooShort: 'The new password must have at least %length% characters.'
+    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordIsUsername: Lösenordet måste skilja sig från användarnamnet.
+    emailNotValid: Denna e-postadress är inte giltig.
+    emailMissing: Fel vid uppdatering av denna e-postadress. Du måste ha minst en verifierad e-postadress.
+    emailExists: Denna e-postadress finns redan.
+    submitSuccess: sparat!
+  reallyDeleteProgram: Vill du verkligen ta bort ditt program
+  programsOf: Program av
+  changePicture: Ändra bild
+  avatar:
+    pictureTooLarge: Din valda bild är för stor, Använd inte bilder större än 5mb.
+    uploadError: Tyvärr, var det ett problem under uppladdningen!
+    noSupport: Den här bildtypen stöds inte, försök med en annan bild.
+licenseToPlay:
+  title: 'Licens för att spela - ge kredit och dela'
+  text1: 'Tänk dig att varje Catrobat program är en tårta, en mycket speciell kaka som kommer med dess recept (programmering block).   Alla medlemmar i Catrobat gemenskapen delar deras kakor tillsammans med sina recept. Detta innebär att du kan njuta av kakor och lär dig hur man gör dem själv!'
+  text2: 'Det finns inga hemliga recept: instruktionerna på hur man gör dessa kakor är öppna för alla att använda, återanvända, ändra och tjäna som inspiration för nya idéer... Jag menar kakor.'
+  text3: 'Du kan äta kakor samt kopiera andras recept för att göra dina egna, kanske med olika ingredienser.   Denna frihet kommer med två enkla krav:'
+  text4: 'när vi upprättade gemenskapen Catrobat, beslutade vi att anta denna strategi eftersom vi anser att det stöder lärande och kreativitet inom gemenskapen.          Genom att dela recept och ingredienser (skript och teckningar), människor kan bygga vidare på varandras idéer och alla kommer att gynnas.'
+  text5: Vid utformningen av webbplatsen Catrobat, ingår vi funktioner för att uppmuntra människor att dela och ge kredit till andra. På varje sida, kan du alltid hämta de ursprungliga skript för programmet. Om du remixar ett program (ändra skript eller konstverk och dela resultatet), uppmuntrar vi dig att ge kredit i programmets anteckningar, och nämna dom människor och program som inspirerade dig.
+  text6: 'Läs mer om villkoren för användning av gemenskapens Catrobat online på %link-termsOfUse%.'
+  list1:
+    item1: Dela dina kakor tillsammans med receptet
+    item2: ge kredit till dem som inspirerade dig
+  version: Version 1.1, 2 April 2013
+termsOfUse:
+  title: Användarvillkor
+  headline: Välkommen till Catrobat gemenskapen!
+  text1: 'Som en del av Catrobat gemenskapen, delar du program och idéer med människor:'
+  text2: 'Vi behöver din hjälp att göra denna gemenskap en stödjande plats för varje medlem. Här är hur du kan hjälpa:'
+  text3: 'Genom Catrobat projektet vill vi främja samarbete och se allas kreativitet för att kombinera för hela mänskligheten. Du kan också bli en aktiv medlem av Catrobat gemenskapen genom att ge dina program tillbaka till gemenskapen som en gåva, på samma sätt som andra aktiva medlemmar ger sina program till dig:'
+  text4: 'Vår gåva till dig:'
+  text5: 'Våra användarvillkor och Service:'
+  list1:
+    item1: från många olika länder och kulturer
+    item2: i alla åldrar (från små barn till tonåringar och farföräldrar)
+    item3: med alla nivåer av erfarenhet
+  list2:
+    item1: 'Vara respektfull. När du delar program, kom ihåg att människor av många olika åldrar och bakgrunder kommer att  se ditt bidrag.'
+    item2: 'Ge kredit. Känn dig fri att göra modifierade versioner av andras program - se bara till att ge dem kredit. En plats att ge kredit är i programmets beskrivning. Se stycket under denna prickade lista för information om hur du ändrar program av andra användare.'
+    item3: Vara ärlig. Inte låtsas vara någon annan än vem du är eller försöka lura gemenskapen.
+    item4: Hålla personlig information privat. Dela inte din e-postadress, telefonnummer eller annan personlig kontaktinformation.
+    item5: 'Att hålla webbplatsen vänlig. Om du känner att andra skulle tycka ett program eller kommentar är, förolämpande, för våldsamma eller annars olämplig, bara klicka på knappen "rapportera som olämpligt" och lämna en kort förklaring. Catrobat laget kommer att granska rapporten och ta bort alla program, kommentar, eller post.'
+  list3:
+    item1: 'Genom att överföra ett program till våra webbplatser,  accepterar du och godkänner att sätta detta arbete under vissa fria licenser av uppladdade Catrobat program. Liknar de fria licenser som själva Catrobat systemet är tillgänglig för dig, dessa fria licenser av uppladdade Catrobat program ger alla rätt att lära sig från jobbet tidigare laddat upp av andra och att anpassa och remixa, som fungerar för att bygga sina egna nya fascinerande spel, animationer och andra program. Detta ger alla möjlighet att "stå på axlarna av sina kamrater", en av dem är du! Ditt arbete kommer således gynna hela världen och fortfarande gratis för alla att använda, lite liknande text och bilder har fritt bidragits till Wikipedia av frivilliga från hela världen. Tänk på det som din gåva till mänskligheten: du ger till alla, och alla andra som laddar upp deras arbete till våra webbplatser ger dig. Således är ett uppladdat program en gåva av stort värde som dess ägare ger dig gratis, med villkoret att du deltar i samhället på samma villkor.'
+    item2: 'Du behöver inte acceptera gåvan; Om du gör, följer vissa regler med. Fördelarna med dessa regler är att du kan lära av arbetet och bygga på det och  göra ännu coolare saker själv, som du kan då exempelvis igen ladda upp till våra webbplatser som ditt eget. En annan fördel är att dessa licenser ser till att du inte kan hållas ansvarig för eventuella problem som uppstår för andra genom sin användning av ditt program.'
+    item3: En ytterligare viktig förutsättning är att du tydligt ger erkännande till de författare vars verk bygger på ditt eget arbete. På samma gång, kommer vi att arbeta hårt för att ditt arbete klart uppskattas av andra för att ha bidragit av dig, genom att ge erkännande till det unika namn du fritt har valt att representera dig i Catrobats gemenskapen och genom att ge andra möjlighet att uttrycka sin tacksamhet till dig i offentliga sätt för att ha gett ditt arbete för alla, och i synnerhet till dem.
+    item4: 'Kontakta %link-licenseUploaded% för exakta rättsliga villkoren.'
+  list4:
+    item1: Vi erbjuder alla våran egna programvara och Internet-resurser med Catrobat systemet, t.ex., den programvara skriven av Catrobat laget, våra webbplatser och Internet-resurser, vår egen källkod relaterat med Catrobat systemet, och ytterligare ingår material som, t.ex. bilder, ljud och texter, nu och i framtiden till dig under Catrobats fria licenser.
+    item2: Dessa licenser göra alla delar av Catrobat både kostnadsfritt till dig samt gratis i avkänningen av att ge dig frihet att använda dem hur du vill, med bara några begränsningar, bland annat garantera att Catrobat systemet för alltid kommer att förbli fri och användbart för alla.
+    item3: 'Kontakta %link-licenseToPlay% för exakta rättsliga villkoren. Källkoden till det Catrobat systemet samt många andra dokument och resurser finns tillgängliga via %link-developer%.'
+  list5:
+    item1: 'Om du, eller, om du är under 13 års ålder, dina föräldrar eller vårdnadshavare, är associerade med en organisation som bedriver eller ansvarar för dragnet typ kränkningar av privatlivet och/eller bulk eller massövervakning, då du inte får använda våra program och tillgång till våra tjänster. De exakta detaljerna i denna begränsning och vissa undantag till det är beskrivet i avsnitt 4.a och 4.b på våran %link-termsOfUse%.'
+    item2: Om du är under 13 år, måste du fråga dina föräldrar eller vårdnadshavare om de tillåter dig att använda Catrobats programvaror och tjänster.
+    item3: Vi förbehåller oss rätten att avvisa, ta bort eller dölja program, användarkonton, och digitala material upp till Catrobats webbplatser helst i godtycke, för anföra som exempel om vi finner att ett program innehåller olämpligt material eller om en användare gör intrång i andra personers rättigheter.
+    item4: Alla Catrobats programvara och Internet-resurser erbjuds i hopp om att de kommer att vara användbara, men utan någon garanti.
+    item5: 'Kontakta vår %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service för exakta formuleringar av ovanstående punkter och några ytterligare rättsliga villkor.'
+  bottom1: Kontrollera tillbaka hit från tid till tid, eftersom vi försöker alltid att förbättra våra användarvillkor.
+  bottom2: 'Maila några förslag angående dessa användarvillkor till %email-webmaster%.'
+  version: Version 1.3, 4 mars 2014
+help:
+  hourOfCode:
+    title: Fallskärmshopparen Steve
+    step0:
+      title: Fallskärmshopparen Steve
+      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+    step1:
+      title: 'Install "Pocket Code"'
+      description: Hur man installerar Pocket Code på din mobila enhet.
+      image1: 'Tryck på "Play Store".'
+      image2: 'Sök "Pocket Code".'
+      image3: 'Tryck på "Installera".'
+    step2:
+      title: Download Project
+      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
+      image1: 'Tryck på  "Utforska" i "Pocket Code" på din mobila enhet.'
+      image2: Tryck på bannern.
+      image3: 'Download the program "Skydiving Steve".'
+    step3:
+      title: Open Project
+      description: Låt oss titta inuti programmet.
+      image1: 'Scrolla ner på menyn och tryck på "Öppna fallskärmshopparen Steve".'
+      image2: 'tryck på objektet "fallskärm".'
+      image3: 'Välj "Skript".'
+    step4:
+      title: Lägg till Variabel
+      description: Variablerna x och y tillåter dig att styra placeringen av din fallskärm.
+      image1: 'Tryck på "+".'
+      image2: 'Go to the category "Variables".'
+      image3: 'Tryck på "Ange variabel".'
+      image4: 'Dra och släpp "Ange variabel" - Klossen nedan  "när programmet startar" - Klossen.'
+    step5:
+      title: Label variables
+      description: Sätt x-position för din fallskärm.
+      image1: Lägga till en andra variabel precis som innan.
+      image2: 'Tryck på "nytt...".'
+      image3: 'ange "x" och tryck på "OK".'
+    step6:
+      title: 'Set variable "y"'
+      description: 'Märk ettiket  och ange y startposition för din fallskärm.'
+      image1: 'Märk den andra variabeln med "y".'
+      image2: 'Tryck på fältet fylld med "0,0".'
+      image3: 'sätt in "-500" och tryck på "OK".'
+    step7:
+      title: För alltid
+      description: 'Du måste kontrollera din fallskärms position hela tiden. lägg ut en "För alltid" -  slinga för att göra detta.'
+      image1: 'Tryck på "+".'
+      image2: 'Gå till "Kontroll" - kategorin.'
+      image3: 'Välj "För alltid" - klossen.'
+      image4: 'Dra och släpp "För alltid" - klossen nedanför "Ange variabeln" - klossen.'
+    step8:
+      title: Insert and modify bricks
+      description: 'Lägg till mer klossar i din "För Alltid" slinga för att styra din fallskärm. sätt in variablerna x och y i din "Placera vid" kloss så kan du styra placeringen av din fallskärm.'
+      image1: 'sätt in dom visade klossarna nedanför  "För alltid" - klossen.'
+      image2: 'tryck på fältet "100".'
+      image3: 'tryck på "Variabler" och välj "x".'
+      image4: 'tryck på "200" i samma kloss högst upp, gå till kategorin "Variabler" och välj "y". Bekräfta med "OK".'
+    step9:
+      title: Change variables and values
+      description: 'Ändra variabel y till -3  för att låta din fallskärm glida till marken. Ändra variabeln x så din fallskärm följer lutningen på vinkeln på din mobila enhet.'
+      image1:
+        subtext1: 'Ställ in storleken till "20" %.'
+        subtext2: 'Ändra värdet för den första "Ange variabeln" - Klossen till "-3".'
+        subtext3: 'tryckpå  "0,0" på den andra "Ange variabeln" - Klossen.'
+      image2:
+        subtext1: 'Tryck på "y" och välj "x".'
+        subtext2: 'Infoga "-".'
+        subtext3: 'Tryck på  "Sensorer" och välj "inclination_x".'
+      image3: 'Kontrollera om din infogade formeln matchar den som är i skärmdumpen och bekräfta med "OK".'
+    step10:
+      title: Loudness sensor
+      description: 'Du kan Kontrollera din fallskärms höjd med Ljud sensorn i din mobila enhet. för att göra så, lägg till och ändra en "om 1 är sant då" kloss.'
+      image1:
+        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
+        subtext2: 'Tryck på fältet med värdet "0" inom  "om 1 är sant då"-klossen.'
+      image2:
+        subtext1: 'Tryck på "Sensorer".'
+        subtext2: 'Välj "högljudhet".'
+        subtext3: 'Tryck på "Logik".'
+        subtext4: 'Choose ">".'
+        subtext5: 'Infoga "50".'
+      image3: 'Kontrollera om din formel överensstämmer med formeln i skärmbilden och tryck på "OK".'
+    step11:
+      title: Change some more bricks
+      description: När du startar spelet, ska startpositionen för din fallskärm matcha din första startposition. För att göra detta måste du lägga till och ändra tre klossar så som dom visas i bilderna nedan.
+      image1: 'Lägg till en "ändra variabeln" - Kloss och ändra värdet som ovan.'
+      image2:
+        subtext1: 'Lägg till en "När jag tar emot" - kloss.'
+        subtext2: 'Placera den under den senaste Klossen ("slutet av slingan").'
+        subtext3: 'Lägg till två "Ange variabeln" - Klossar.'
+      image3: 'Tryck på fältet fylld med "meddelande 1", välj "Nytt..." och infoga "starta om".'
+      image4: 'Ändra värdena för de två "ange variabeln" - Klossarna som visas i skärmdumpen ovan.'
+    step12:
+      title: Back to objects
+      description: 'Du har nu lyckats avsluta ditt "fallskärm" objekt! gå tillbaka till objektets översikt att ändra nästa objekt.'
+      image1: 'Tryck på "tillbaka" - knappen på enheten.'
+      image2: 'Tryck på "tillbaka" - knappen en gång till.'
+      image3: Nu bör du se denna skärmen på din enhet.
+    step13:
+      title: 'Objekt "mål"'
+      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
+      image1: 'Tryck på "mål" och välj "Skript".'
+      image2: Lägg till och ändra klossarna som i skärmdumpen ovan.
+      image3: Lägg till fyra mer klossar som visas ovan.
+    step14:
+      title: 'Objekt "mål"'
+      description: När du startar om spelet, måste positionen för målet ändras. för detta steg, ange variablerna goalx and goaly med funktionen slumpmässigt.
+      image1: 'Tryck på fältet "y" och välj "Nytt".'
+      image2: 'Infoga "goalx" och bekräfta med "OK".'
+      image3: 'Tryck på fältet "0,0" och infoga formeln "random (-400, 400)".'
+      image4: 'Upprepa stegen 1-3 för den andra "Ange variabeln" - klossen, men istället  namnge variabeln "goaly" och ange värdet till "random (400,-700)".'
+    step15:
+      title: 'Objekt "mål"'
+      description: 'Ändra din "Placera vid" kloss för att kontrollera placeringen av ditt mål med  variabler goalx och goaly.'
+      image1: 'Ändra värdena för "Placera vid" - klossen till "goalx" och "goaly".'
+      image2: Kontrollera om dina värden matchar dom ovan.
+      image3: Gå tillbaka tills du ser denna skärm.
+    step16:
+      title: 'Objekt "paket"'
+      description: 'Här börjar du ändra objektet "paket". När objektet "paket" får meddelandet "start", ska paketet visas. Ange position för paketet med variablerna x och y.'
+      image1: 'Tryck på "paket" och välj "Skript".'
+      image2: Lägg till alla Klossar som visas ovan.
+      image3:
+        subtext1: 'Ändra värdet för "Ange storlek" - Klossen till "50".'
+        subtext2: 'Tryck på fältet "starta om" inom  "när jag tar emot" - Klossen och skapa det nya meddelandet: "starta".'
+        subtext3: 'Ändra värdena för "Placera vid" - klossen till "x" och "y".'
+    step17:
+      title: 'Objekt "paket"'
+      description: 'För att kontrollera om paketet har nått målet, du behöver "om 1 är sant då" klossen.'
+      image1: 'Lägg till ovanstående klossar nedanför senaste "placera vid" - Klossen.'
+      image2: 'Ändra värdet i "Ändra Y med" - klossen till "-5". Tryck sedan in i fältet "1" inom  "om 1 är sant då".'
+      image3:
+        subtext1: '"position_x" och "position_y" kan hittas i kategorin "Objekt".'
+        subtext2: '"goaly" och "goalx" är i kategorin "Variabler".'
+        subtext3: '"Och" är i kategorin "Logik".'
+    step18:
+      title: 'Objekt "paket"'
+      description: 'Om paketet har lyckats nå målet, måste du ändra positionen för paketet .Skicka ett meddelande till de andra objekten för  att låta dem veta att du har vunnit.'
+      image1:
+        subtext1: 'Ändra värdena för "Placera vid" - klossen till "position_x" och "goaly+100".'
+        subtext2: 'Tryck på fältet "Sändning" och skapa ett nytt meddelande "vinna".'
+      image2: Lägg till ovanstående visade klossar och ändra deras värden lika.
+      image3: 'Gå tillbaka tills du ser denna skärm på din enhet. Gå till skripten för objektet "omstart".'
+    step19:
+      title: 'Objekt "omstart"'
+      description: 'Här ändra du objektet "starta om". Definiera positionen och uppförandet av objektet.'
+      image1: Lägg till ovanstående visade klossar och ändra deras värden lika.
+      image2: 'Lägg till ovanstående visade klossar och ange "Sändning" - meddelande till "starta om".'
+      image3: 'Gå tillbaka tills du ser denna skärm, sedan gå till Skripten av "Bakgrund".'
+    step20:
+      title: 'Object "Background"'
+      description: 'Avsluta programmet genom att ändra  "bakgrund" objektet . Nu kan du börja spela ditt spel. Ha det så kul!'
+      image1:
+        subtext1: 'Lägg till ovanstående visade klossar och ange "Sändning" - meddelande till "starta om".'
+        subtext2: 'Tryck på "Spela" - knappen.'
+      image2: Njut av ditt spel.
+      image3: |-
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+    step21:
+      title: Check your scripts!
+      description: Klicka på bilderna nedan för att förstora dem. Granska klossarna om ditt spel inte fungerar korrekt.
+      image1: 'Objekt "bakgrund"'
+      image2: 'Objekt "fallskärm"'
+      image3: 'Objekt "paket"'
+      image4: 'Objekt "omstart"'
+      image5: 'Objekt "mål"'
+  stepByStep:
+    title: Steg för steg-Intro
+    start: 'Utgångsläget:'
+    step1:
+      title: Make a new program
+      detail:
+        text1: 'Klicka på "Nya".'
+        text2: 'Ange ett progam namn, välj "Skapa tomma program" och tryck "OK".'
+    step2:
+      title: Create a new object
+      detail:
+        text1: 'tryck på:'
+        text2: Choose the source of the first look of your new object.
+        text3: 'Enter an object name and tap "OK" to create the object.'
+        special1: Rita ett nytt utseende.
+        special2: Välj från Galleri.
+        special3: Ta en bild.
+    step3:
+      title: Start Moving
+      detail:
+        text1: 'tryck på:'
+        text2: 'Den första kloss som vi använder är av kategorin "Rörelser".'
+        text3: 'Välj "Glid" klossen. Objektet flyttas till den nya positionen som definieras med klossen på scenen.'
+        text4: Klossen flyter nu. Om du vill klistra in den, flytta klossen till önskad position. Du kan också flytta redan infogade klossar genom att trycka på klossen tills den är flytande igen.
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: Använd Androids tillbaka knapp, för att få tillbaka från scenen.
+    step4:
+      title: Ändra utseende
+      description: Du kan ändra utseendet på ditt objekt.
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Fäst klossen under "Glid" - klossen.'
+        text3: Klicka på fliken för att skapa ett nytt utseende.
+        text4: Välj källan till bilden som innan.
+        text5: Nu måste du att välja den nya bilden.
+        text6: tryck på play för att se uppträdandet på scenen.
+    step5:
+      title: Tala
+      description: Nu kommer du få reda på hur du får ett objekt att tala.
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: 'Fäst klossen under "byt utseende till" tegel.'
+        text3: tryck på play för att se uppträdandet på scenen.
+    step6:
+      title: Again and again
+      description: Detta steg visar hur du upprepar beteendet hos objekten.
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: 'Fäst "För alltid" klossen under "när programmet startar" - klossen.'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: tryck in till textfältet för x och y-värdet och sätt värdet 0.
+        text6: tryck på play för att se uppträdandet på scenen.
+    step7:
+      title: Tapping is everything
+      description: Du kan också styra beteendet hos objektet när programmet körs på scenen.
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: Nu har du detta skript.
+        text5: tryck på starta för att se uppträdande på scenen. Om du nu klickar på objektet, snurrar det.
+    step8:
+      title: Copy, delete or edit a brick
+      detail:
+        text1: Ett enda tryck på vänster sida av varje kloss öppnar den sammanhangsberoende menyn. Där kan du flytta, kopiera, ta bort eller redigera värdena i klossen med formel redigeraren.
+    step9:
+      title: Navigation in the app
+      detail:
+        text1: Använd Android tillbaka knappen för att navigera i app.
+        text2: Gå tillbaka en skärm till översikten över dina objekt. Här kan du gå in i skript och även till en kraftfull representation av utseende och ljud för objektet. Där kan du byta namn, kopiera lägga till eller ta bort utseenden och ljud.
+        text3: Använd igen Android tillbaka knappen för att komma till översikten över dina objekt och din bakgrund.
+    step10:
+      title: Change the background
+      description: Detta är en översikt över dina objekt och bakgrunden beror på ett program.
+      detail:
+        text1: Bakgrunden är som ett objekt, men du bara kan ha en bakgrund.
+        text2: Du kan lägga till skript, ljud och utseenden på samma sätt till objektet bakgrund.
+    step11:
+      title: Main Menu
+      description: Använd Android tillbaka knappen för att komma till denna skärm.
+      detail:
+        text1: Fortsätt med det för närvarande öppnade programmet.
+        text2: Lägg till ett nytt program.
+        text3: Se alla dina lokala program.
+        text4: Gå till Hjälp sidan och diskutera med andra användare.
+        text5: Utforska världen av Pocket Code program. Ladda ner och remixa program du gillar.
+        text6: Ladda upp det program som just nu är öppnat.
+  tutorialcards:
+    title: Handledningar
+    description1: Denna handledning visar dig hur du kan använda effektiva tricks i
+    description2: Pocked Code.
+    getReady: 'Gör dig beredd:'
+    tryCode: 'Try this code:'
+    doIt: 'Gör det:'
+    tip: 'Extra tips:'
+    card1:
+      title: Ändra storlek
+      description: tryck på ankan för att ändra storlek.
+    card2:
+      title: Ändra utseende
+      description: Använd detta trick för att räkna automatiskt.
+    card3:
+      title: Flyttar Animation
+      description: Använd detta knep när du vill ha en flygande papegoja.
+    card4:
+      title: Glid
+      description: Röra sig smidigt från en punkt till en annan.
+    card5:
+      title: Spela upp ljud
+      description: Tap the drum to play this sound.
+      extra1: '1. Klicka på "+"'
+      extra2: '2. Välj "Pocket Code Inspelare"'
+      extra3: 3. Tryck på ikonen för att spela in ljud
+    card6:
+      title: Säg något
+      description: Använd denna kod för att göra så ett objekt talar.
+    card7:
+      title: GSensor
+      description: Använd detta trick för att styra ett objekt med lutningen på din enhet.
+      extra1: Om alltför känslig, dividera med 10
+    card8:
+      title: Kompass
+      description: Använd denna kod för att göra en kompass.
+    card9:
+      title: Sändning
+      description: Titta på denna kod! Detta visar hur man kommunicerar mellan objekt.
+  starterPrograms:
+    title: Start-program
+    description: Prova dessa start-program. Titta inuti för att göra ändringar och lägg till dina idéer.
+    categories:
+      games: Spel
+      animations: Animationer
+      interactive: Interaktiv konst och berättelser
+      music: Music And Dance
+search:
+  dotdotdot: Sök...
+  search: Sök
+  results: Sökresultat
+  resultcount: 'Din sökning gav %count% resultat'
+menu:
+  profile: Min Profil
+  logout: Logga ut
+programLoader:
+  noPrograms: Det finns för närvarande inga program.
+login:
+  passOrUser: Ditt lösenord eller användarnamn var felaktigt.
+  noUsername: Ditt användarnamn eller e-post adress hittades inte.
+  forgotPass: Glömt lösenord eller användarnamn?
+  recoverPass: Återställ lösenord
+  recoverPassSend: Ett e-postmeddelande skickades till din e-postadress. Vänligen kontrollera din inkorg.
+  userOrEmail: Användarnamn eller email
+  changePass: Ändra lösenord
+apk:
+  generate: Generate APK
+  pending: Pending
+  download: Download APK
+errors:
+  username:
+    blank: Username must not be blank
+  password:
+    blank: Lösenord saknas.
+    short: 'Your password must have at least {{ limit }} characters.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Landet saknas.
+    invalid: Invalid country
+  email:
+    blank: email must not be blank
+    invalid: Your email seems to be invalid
+    exists: Denna e-postadress finns redan.
+  login: Lösenordet eller användarnamnet var felaktigt.
+  post-data: Efter Data saknas eller inte korrekt!
+  checksum:
+    missing: Klienten skickade inte fileChecksum! Använder du en gammal version av Pocket Code?
+    invalid: invalid checksum
+  xml:
+    invalid: invalid code xml
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: invalid file
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: unknown error
+  token: 'Autentisering av enhet misslyckades: Ogiltig auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+  program:
+    invalid: Invalid program.
+  languageversion:
+    tooold: Tyvärr, innehåller ditt program en gammal version av Catrobat språket! Använder du den senaste versionen av Pocket Code?
+  programversion:
+    tooold: Tyvärr, använder du en gammal version av Pocket Code. Vänligen uppdatera till den senaste versionen.
+success:
+  registration: Registreringen lyckades!
+  token: Okej
+  upload: Ditt Projektet lyckades laddas upp!
+  report: Your report was successfully sent!
+time:
+  minutes.ago: '{0} < 1 minut sedan |{1}1 minuter sedan |]1 Inf] %count% minuter sedan'
+  hours.ago: '{1}1 timme sedan |]1 Inf] %count% timmar sedan'
+  days.ago: '{1}1 dag sedan |]1 Inf] %count% dagar sedan'
+  months.ago: '{1}1 månad sedan |]1 Inf] %count% månader sedan'
+  years.ago: '{1}1 år sedan |]1 Inf] mer än ett år sedan'
+language:
+  arabic: Arabiska
+  bulgarian: Bulgariska
+  catalan: Katalanska
+  chinese_simplified_han: Kinesiska (förenklad Han)
+  chinese_traditional_han: Kinesiska (traditionell Han)
+  croatian: Kroatiska
+  czech: Tjeckiska
+  danish: Danska
+  dutch: Holländska
+  english_united_kingdom: Engelska (Storbritannien)
+  english_united_states: Engelska (USA)
+  estonian: Estniska
+  filipino: Filippinska
+  finnish: Finska
+  french: Franska
+  german: Tyska
+  greek: Grekiska
+  hebrew: Hebreiska
+  hindi: Hindi
+  hungarian: Ungerska
+  indonesian: Indonesiska
+  italian: Italienska
+  japanese: Japanska
+  korean: Koreanska
+  latvian: Lettiska
+  lithuanian: Litauiska
+  malay: Malajiska
+  norwegian: Norska
+  persian: Persiska
+  polish: Polska
+  portuguese_brazil: Portugisiska (Brasilien)
+  portuguese_portugal: Portugisiska (Portugal)
+  romanian: Rumänska
+  russian: Ryska
+  serbian: Serbiska
+  slovak: Slovakiska
+  slovenian: Slovenska
+  spanish_latin_america: Spanska (Latinamerika)
+  spanish_spain: Spanska (Spanien)
+  swedish: Svenska
+  thai: Thailändska
+  turkish: Turkiska
+  ukrainian: Ukrainska
+  vietnamese: Vietnamesiska
+ci:
+  generate: Generate Apk
+  pending: Generating Apk
+  download: Download Apk

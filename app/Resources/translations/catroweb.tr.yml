@@ -1,0 +1,526 @@
+---
+localLanguage: English
+username: Kullanıcı adı
+password: Şifre
+aboutPocketCode: Cep kodu hakkında
+tutorials: Rehberler
+googlePlay: Google Play
+passwordsNoMatch: Şifreler eşleşmedi.
+error: Hata
+cancel: İptal et
+report: Rapor et
+download: indir
+description: Açıklama
+noDescription: Açıklama mevcut değil.
+country: Ülke
+loginText: oturum aç
+programs:
+  featured: Seçme
+  newest: Newest programs
+  most:
+    viewed: Most viewed
+    downloaded: Most downloaded
+  downloads: '%downloads% downloads'
+  views: '%views% views'
+  reportAsInappropriate: Uygunsuz olarak rapor et
+  languageVersion:
+    Catrobat Language version: '%languageVersion%'
+  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportDialogHeader: Bu programı neden uygunsuz buldunuz?
+  reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne
+  reportOwnProgram: Kendi programınızı uygunsuz olarak işaretleyemezsiniz.
+  reportAlready: Bu programı daha önce uygunsuz olarak belirttiniz.
+  reportDone: Bu programı uygunsuz olarak bildirdiniz!
+profile:
+  saveChanges: Değişiklikleri kaydet
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: Benim ilk e-postam
+  secondEmail: İkinci e-postam
+  myPrograms: My programs
+  form:
+    passwordTooShort: 'The new password must have at least %length% characters.'
+    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordIsUsername: Şifre kullanıcı adından farklı olmalıdır.
+    emailNotValid: This email address is not valid.
+    emailMissing: E-posta adresinizi güncelleştirme sırasında bir hata oluştu. En az bir onaylanmış e-posta adresi olması gerekir.
+    emailExists: Bu e-posta adresi mevcut.
+    submitSuccess: Kaydedildi!
+  reallyDeleteProgram: Programınızı gerçekten silmek istiyor musunuz
+  programsOf: Programları
+  changePicture: Resmi değiştir
+  avatar:
+    pictureTooLarge: "Seçilen resim çok büyük, 5 mb'den büyük görüntüleri  lütfen kullanmayın."
+    uploadError: Sorry, there was a problem during the upload!
+    noSupport: This image type is not supported, please try another image.
+licenseToPlay:
+  title: 'Oynamak için lisans- prim ver ve paylaş'
+  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
+  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
+  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  list1:
+    item1: Sizinde kendi pastanızı tarifi ile paylaşmanızı
+    item2: ve ilhamı kimden aldığınızı belirterek o kişinin hakkını vermenizi
+  version: Version 1.1, 2 April 2013
+termsOfUse:
+  title: Kullanım Şartları
+  headline: Welcome to the Catrobat Community!
+  text1: 'Catrobat toplumunun bir parçası, insanlarla programları ve fikirleri paylaşıyorsunuz:'
+  text2: 'Catrobat toplumunun her bir üyesini desteklemek için yardımına ihtiyacımız var. Yardımcı olmak için yapman gerekenler:'
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
+  text4: 'Our gift to you:'
+  text5: 'Our Terms of Use and Service:'
+  list1:
+    item1: çok sayıda farklı ülke ve kültürlerden
+    item2: her yaştan (küçük çocuklar, gençler ve dedeler)
+    item3: tüm tecrübe seviyelerinde
+  list2:
+    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
+    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
+    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
+    item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
+  list3:
+    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
+    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
+    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+  list4:
+    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
+    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
+    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+  list5:
+    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
+    item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
+    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
+  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  version: Version 1.3, 4 March 2014
+help:
+  hourOfCode:
+    title: Skydiving Steve
+    step0:
+      title: Skydiving Steve
+      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+    step1:
+      title: 'Install "Pocket Code"'
+      description: How to install Pocket Code on your mobile device.
+      image1: 'Tap "Play Store".'
+      image2: 'Search "Pocket Code".'
+      image3: 'Tap "Install".'
+    step2:
+      title: Download Project
+      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
+      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
+      image2: Tap the banner.
+      image3: 'Download the program "Skydiving Steve".'
+    step3:
+      title: Open Project
+      description: Let’s look inside the program.
+      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
+      image2: 'Tap object "parachute".'
+      image3: 'Choose "Scripts".'
+    step4:
+      title: Değişken Ekle
+      description: The variables x and y allow you to control the position of your parachute.
+      image1: 'Tap "+".'
+      image2: 'Go to the category "Variables".'
+      image3: 'Tap "Set variable".'
+      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
+    step5:
+      title: Label variables
+      description: Label the x position of your parachute.
+      image1: Add a second variable just as before.
+      image2: 'Tap "New...".'
+      image3: 'Insert "x" and tap "OK".'
+    step6:
+      title: 'Set variable "y"'
+      description: Label and set the y starting position of your parachute.
+      image1: 'Label the second variable with "y".'
+      image2: 'Tap the field filled with "0.0".'
+      image3: 'Insert "-500" and tap "OK".'
+    step7:
+      title: Daima
+      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
+      image1: 'Tap "+".'
+      image2: 'Go to the "Control" - category.'
+      image3: 'Choose the "Forever" - brick.'
+      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
+    step8:
+      title: Insert and modify bricks
+      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
+      image1: 'Insert the shown bricks below the "Forever" - brick.'
+      image2: 'Tap the "100" field.'
+      image3: 'Tap "Variables" and choose "x".'
+      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
+    step9:
+      title: Change variables and values
+      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
+      image1:
+        subtext1: 'Set the size to "20" %.'
+        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
+        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
+      image2:
+        subtext1: 'Tap on "y" and choose "x".'
+        subtext2: 'Insert "-".'
+        subtext3: 'Tap "Sensors" and choose "inclination_x".'
+      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
+    step10:
+      title: Loudness sensor
+      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
+      image1:
+        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
+        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
+      image2:
+        subtext1: 'Tap "Sensors".'
+        subtext2: 'Choose "loudness".'
+        subtext3: 'Tap "Logic".'
+        subtext4: 'Choose ">".'
+        subtext5: 'Insert "50".'
+      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
+    step11:
+      title: Change some more bricks
+      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
+      image1: 'Add a "Change variable" - brick and modify the value like above.'
+      image2:
+        subtext1: 'Add a "When I receive" - brick.'
+        subtext2: 'Place it below the last brick ("End of loop").'
+        subtext3: 'Add two "Set variable" - bricks.'
+      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
+      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
+    step12:
+      title: Back to objects
+      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
+      image1: 'Tap the "back" - button on your device.'
+      image2: 'Tap the "back" - button once more.'
+      image3: Now you should see this screen on your device.
+    step13:
+      title: 'Object "target"'
+      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
+      image1: 'Tap "target" and choose "Scripts".'
+      image2: Add and modify the bricks as in the screenshot above.
+      image3: Add four more bricks like shown above.
+    step14:
+      title: 'Object "target"'
+      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
+      image1: 'Tap the field "y:" and choose "New".'
+      image2: 'Insert "goalx" and confirm with "OK".'
+      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
+      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
+    step15:
+      title: 'Object "target"'
+      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
+      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
+      image2: Check if your values match the ones above.
+      image3: Go back until you see this screen.
+    step16:
+      title: 'Object "parcel"'
+      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
+      image1: 'Tap "parcel" and choose "Scripts".'
+      image2: Add all the bricks shown above.
+      image3:
+        subtext1: 'Change the value of the "Set size" - brick to "50".'
+        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
+        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
+    step17:
+      title: 'Object "parcel"'
+      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
+      image1: 'Add the above shown bricks below the last "Place at" - brick.'
+      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
+      image3:
+        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
+        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
+        subtext3: '"AND" is in the "Logic" category.'
+    step18:
+      title: 'Object "parcel"'
+      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
+      image1:
+        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
+        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
+      image2: Add the above shown bricks and modify their values alike.
+      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
+    step19:
+      title: 'Object "restart"'
+      description: Here you modify the object “restart”. Define the position and the behavior of the object.
+      image1: Add the above shown bricks and modify their values alike.
+      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
+      image3: Go back until you see this screen, then go to the scripts of “Background”.
+    step20:
+      title: 'Object "Background"'
+      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
+      image1:
+        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
+        subtext2: 'Tap the "Play" - button.'
+      image2: Enjoy your game.
+      image3: |-
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+    step21:
+      title: Check your scripts!
+      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
+      image1: 'Object "background"'
+      image2: 'Object "parachute"'
+      image3: 'Object "parcel"'
+      image4: 'Object "restart"'
+      image5: 'Object "target"'
+  stepByStep:
+    title: Adım adım tanıtım
+    start: 'Başlangıç konumu:'
+    step1:
+      title: Make a new program
+      detail:
+        text1: |-
+          "Yeni"'ye dokunun.
+        text2: |-
+          Program adı girin, "boş program oluştur"'u seçin ve "OK"ye dokunun.
+    step2:
+      title: Create a new object
+      detail:
+        text1: 'Dokunun:'
+        text2: Choose the source of the first look of your new object.
+        text3: 'Enter an object name and tap "OK" to create the object.'
+        special1: Yeni bir görünüm çizin.
+        special2: Galeriden seçin.
+        special3: Fotoğraf Çek.
+    step3:
+      title: Start Moving
+      detail:
+        text1: 'Dokunun:'
+        text2: 'Kullandığımız ilk tuğla "Hareket" kategorisi dışında.'
+        text3: '"Kay" tuğlasını seçin. Nesne sahnedeki tugla tarafından tanımlanan konuma taşınacaktır.'
+        text4: Tuğla yüzer durumda. Yapıştırmak için tuğlayı istediğiniz konuma taşıyın. Eklenmiş durumda olan tuğlalara dokunarak yüzer duruma getirdikten sonra yine taşıyabilirsiniz.
+        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text6: "Sahne alanı'ndan geri gitmek için 'Android Geri Düğmesi'ni kullanın."
+    step4:
+      title: Change Look
+      description: Nesnenizin görünümünü değiştirebilirsiniz.
+      detail:
+        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text2: 'Tuğlayı "Kayma" - tuğlasının altına oturtun.'
+        text3: Yeni bir görünüm oluşturmak için aşağı açılan alana dokunun.
+        text4: Daha önceki gibi resmin kaynağını seçin.
+        text5: Şimdi yeni resmi seçmeniz gerekmektedir.
+        text6: "Davranışı sahnede görmek için oyna'ya dokunun."
+    step5:
+      title: Konuş
+      description: Şimdi nesneyi nasıl konuşturacagınızı öğreneceksiniz.
+      detail:
+        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text2: |-
+          Tuğla'yı "görünüme geç" tuğlası'nın altına oturtun.
+        text3: "Davranışı sahnede görmek için oyna'ya dokunun."
+    step6:
+      title: Again and again
+      description: Bu aşamada, nesnelerin davranışlarının nasıl tekrar edileceği gösterilmektedir.
+      detail:
+        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text2: ' "Sonsuza dek" tuğlasını "Program başladığı zaman" tuğlasının altına oturtun'
+        text3: 'Add another "Glide" brick.'
+        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text5: Metin alanına dokunarak x ve y değerlerini 0 olarak ayarlayın.
+        text6: "Davranışı sahnede görmek için oyna'ya dokunun."
+    step7:
+      title: Tapping is everything
+      description: Nesnenin davranışını program ekranda çalışırkende denetleyebilirsiniz.
+      detail:
+        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
+        text2: 'Place the "When tapped" underneath the other bricks.'
+        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text4: Şimdi bu komut dosyanız var.
+        text5: "Davranışı sahnede görmek için Oyna'ya dokunun. Nesneye şimdi dokunursanız, dönmeye başlayacaktır."
+    step8:
+      title: Copy, delete or edit a brick
+      detail:
+        text1: "Her tuğla'nın sol tarafına bir kez dokundugunuzda  içerik menüsü açılır. Formül düzenleyicisi ile oradaki tuğla degerlerini, taşır, kopyalar, siler yada istediginiz şekilde düzenleyebilirsiniz."
+    step9:
+      title: Navigation in the app
+      detail:
+        text1: Proğram içinde gezinmek için Android geri düğmesini kullanın.
+        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
+        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+    step10:
+      title: Change the background
+      description: This is the overview of your objects and the background depends to one program.
+      detail:
+        text1: Arka plan, bir nesne gibi olmakla birlikte, sadece arka planda olabilir.
+        text2: You can add scripts, sounds and look in the same way to the background object.
+    step11:
+      title: Main Menu
+      description: Bu ekrana ulaşmak için Android geri düğmesini kullanın.
+      detail:
+        text1: Açık olan program ile devam edin.
+        text2: Yeni bir program ekleyin.
+        text3: See all your local programs.
+        text4: Yardım sitesini ziyaret edin ve diğer kullanıcılarla görüş alişverişinde bulunun.
+        text5: Cep şifre programları dünyasını keşfedin. Istediginiz programları indirin yada yeniden düzenleyin.
+        text6: Şu anda açık olan program yükle.
+  tutorialcards:
+    title: Rehberler
+    description1: Bu öğreticiler size etkili hileleri gösterir
+    description2: Cep Kodu.
+    getReady: 'Get Ready:'
+    tryCode: 'Try this code:'
+    doIt: 'Do it:'
+    tip: 'Extra Tip:'
+    card1:
+      title: Change Size
+      description: Tap the duck to change the size.
+    card2:
+      title: Change Look
+      description: Use this trick to count automatically.
+    card3:
+      title: Moving Animation
+      description: Use this trick when you want a flying parrot.
+    card4:
+      title: Kay
+      description: Move smoothly from one point to another.
+    card5:
+      title: Play Sound
+      description: Tap the drum to play this sound.
+      extra1: '1. Click "+"'
+      extra2: '2. Select "Pocket Code Recorder"'
+      extra3: 3. Press icon to record your sound
+    card6:
+      title: Speak Something
+      description: Use this code to make an object speaking.
+    card7:
+      title: GSensor
+      description: Use this trick to control an object with the inclination of your device.
+      extra1: If too sensitive, divide by 10
+    card8:
+      title: Compass
+      description: Use this code to make a compass.
+    card9:
+      title: Yayınla
+      description: Look at this code! This shows you how to communicate between objects.
+  starterPrograms:
+    title: Başlangıç programları
+    description: "Bu başlangıç programlarını deneyin. Değişiklik yapmak ve fikirlerinizi eklemek için Görünüş'e bakın."
+    categories:
+      games: Oyunlar
+      animations: Animasyonlar
+      interactive: Etkileşimli sanat ve hikayeler
+      music: Music And Dance
+search:
+  dotdotdot: Search...
+  search: Ara
+  results: Sonuçlarda Ara
+  resultcount: 'Your search returned %count% results'
+menu:
+  profile: Benim profilim
+  logout: Çıkış Yap
+programLoader:
+  noPrograms: şu anda mevcut program yok.
+login:
+  passOrUser: Your password or username was incorrect.
+  noUsername: Your username or email address was not found.
+  forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
+  recoverPass: Parolayı hatırlat
+  recoverPassSend: Bir e-posta adresinize gönderildi. Lütfen gelen kutunuzu kontrol edin.
+  userOrEmail: Kullanıcı adı veya E-Posta
+  changePass: Şifre değiştir
+apk:
+  generate: Generate APK
+  pending: Pending
+  download: Download APK
+errors:
+  username:
+    blank: Username must not be blank
+  password:
+    blank: Şifre eksik.
+    short: 'Your password must have at least {{ limit }} characters.'
+  description:
+    rude: Description must not contain rude wordes.
+  country:
+    blank: Ülke adı eksik.
+    invalid: Invalid country
+  email:
+    blank: email must not be blank
+    invalid: Your email seems to be invalid
+    exists: Bu e-posta adresi mevcut.
+  login: Kullanıcı adı veya şifre yanlış.
+  post-data: Son veriler eksik yada yanlış!
+  checksum:
+    missing: "İstemci sağlama toplamı dosyası göndermedi. Cep Kodu'nun eski bir sürümü nümü kullanıyorsunuz?"
+    invalid: invalid checksum
+  xml:
+    invalid: invalid code xml
+    missing: 'unknown error: project_xml_not_found!'
+  file:
+    unexpected: unexpected file found
+    invalid: invalid file
+  image.missing: Project XML mentions a file which does not exist in project-folder
+  unknown: unknown error
+  token: 'Authentication of device failed: invalid auth-token!'
+  programname:
+    rude: Programname must not contain rude wordes.
+  program:
+    invalid: Invalid program.
+  languageversion:
+    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+  programversion:
+    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+success:
+  registration: Kayıt başarılı!
+  token: Tamam
+  upload: Proje başarıyla yüklendi!
+  report: Your report was successfully sent!
+time:
+  minutes.ago: '{0} < 1 dakika önce |{1} 1 dakika önce|]1, INF] %rakam% dakika önce'
+  hours.ago: '{1} 1 saat önce |]1, INF] %rakam% saat önce'
+  days.ago: '{1} 1 gün önce |]1, INF] %rakam% gün önce'
+  months.ago: '{1} 1 ay önce |]1, INF] %rakam% ay önce'
+  years.ago: '{1} 1 yıl önce |]1, INF] bir yıldan fazla'
+language:
+  arabic: Arapça
+  bulgarian: Bulgarca
+  catalan: Katalanca
+  chinese_simplified_han: Çince (Basitleştirilmiş Han)
+  chinese_traditional_han: Çince (geleneksel Han)
+  croatian: Hırvatça
+  czech: Çekçe
+  danish: Danimarkaca
+  dutch: Hollandaca
+  english_united_kingdom: İngilizce (Birleşik Krallık)
+  english_united_states: İngilizce (ABD)
+  estonian: Estonyaca
+  filipino: Filipince
+  finnish: Fince
+  french: Fransızca
+  german: Almanca
+  greek: Yunanca
+  hebrew: İbranice
+  hindi: Hintçe
+  hungarian: Macarca
+  indonesian: Endonezyaca
+  italian: İtalyanca
+  japanese: Japonca
+  korean: Korece
+  latvian: Letonyaca
+  lithuanian: Litvanyaca
+  malay: Malayca
+  norwegian: Norveççe
+  persian: Farsça
+  polish: Polonyaca
+  portuguese_brazil: Portekizce (Brezilya)
+  portuguese_portugal: Portekizce (Portekiz)
+  romanian: Romence
+  russian: Rusça
+  serbian: Sırpça
+  slovak: Slovakça
+  slovenian: Slovakça
+  spanish_latin_america: İspanyolca (Latin Amerika)
+  spanish_spain: İspanyolca (İspanya)
+  swedish: İsveççe
+  thai: Taylandca
+  turkish: Türkçe
+  ukrainian: Ukraynaca
+  vietnamese: Vietnamca
+ci:
+  generate: Generate Apk
+  pending: Generating Apk
+  download: Download Apk
