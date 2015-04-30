@@ -23,12 +23,13 @@ a {
 #program-top {
   overflow: auto;
 
-  > div:nth-child(1) {
+  #program-name {
     float: left;
   }
 
-  > div:nth-child(2) {
+  #program-user {
     float: right;
+    text-transform: none;
 
     > .img-author {
       float: left;
@@ -67,7 +68,6 @@ a {
 
   #report {
     font-weight: bold;
-    text-decoration: underline;
     cursor: pointer;
   }
 
@@ -83,6 +83,11 @@ a {
       margin: 12px;
       color: #000;
     }
+  }
+
+  #report, a {
+    color: white;
+    font-weight: normal;
   }
 }
 
