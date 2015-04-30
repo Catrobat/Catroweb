@@ -64,7 +64,7 @@ class ProgramController extends Controller
     $retArray['preHeaderMessages'] = "";
     
     $retArray['CatrobatInformation'] = array (
-        "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . $request->getBaseUrl() . '/',
+        "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . '/',
         "TotalProjects" => $numbOfTotalProjects,
         "ProjectsExtension" => ".catrobat" 
     );

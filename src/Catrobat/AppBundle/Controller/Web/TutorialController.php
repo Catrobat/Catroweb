@@ -190,7 +190,7 @@ class TutorialController extends Controller
     }
 
     $retArray['CatrobatInformation'] = array (
-      "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . $request->getBaseUrl() . '/',
+      "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . '/',
       "TotalProjects" => count($programs),
       "ProjectsExtension" => ".catrobat"
     );
