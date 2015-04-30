@@ -41,7 +41,7 @@ var ProgramLoader = function (container, url, column_max) {
         searchResultsText.find('span').text(0);
         return;
       }
-      searchResultsText.find('span').text(data.CatrobatProjects.length);
+      searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects);
       self.setup(data);
       self.showMorePrograms();
       self.searchPageLoadDone = true; // fix for search.feature: 'I press enter "#searchbar"'
