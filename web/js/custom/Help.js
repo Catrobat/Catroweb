@@ -6,6 +6,8 @@ var Help = function () {
     var overlay = $("#image-overlay");
     var popup = $("#image-popup");
 
+    var large_popups = [21];
+
     $(overlay).click(function() {
       $( overlay ).fadeToggle( 300);
       $( popup ).fadeToggle( 300);
@@ -33,8 +35,12 @@ var Help = function () {
             $(container).html('<img src="' + path + id + '_' + 'left' + '.png" alt="" title="" />');
         }
 
-
-        $(container).find("img").height($(window).height() - 108);
+        if(large_popups.indexOf(id) != -1) {
+          popup.addClass('large');
+        }
+        else {
+          $(container).find("img").height($(window).height() - 108);
+        }
 
         overlay.fadeIn(300);
         popup.fadeIn(300);

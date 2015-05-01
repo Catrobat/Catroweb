@@ -37,7 +37,6 @@ class TutorialController extends Controller
       $images[] = $i;
     }
 
-
     $pagination = $paginator->paginate(
       $images,
       $page, //current page
