@@ -1,5 +1,4 @@
 {% block footer %}
-
   <div id="footer-menu-desktop" class="footer-padding">
     <div id="footer-menu-desktop-left">
       <div>
@@ -22,10 +21,11 @@
 
   <div id="footer-menu-bottom" class="footer-padding">
     <div>
-      <select id="switch-language">
-        <!-- vorerst hardcoded! -->
-        <option value="en">‪English (United States)‬</option>
-        <option value="de-DE">‪Deutsch‬</option>
+      <select id="switch-language" autocomplete="off">
+        {% set countries = getLanguageOptions() %}
+        {% for country in countries %}
+        <option value="{{ country[0] }}" {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
+        {% endfor %}
       </select>
     </div>
     <div id="footer-copyright">

@@ -69,13 +69,6 @@ var Main = function (search_url) {
 
   self.setLanguageSwitchListener = function() {
     var select = $('#switch-language');
-    var cookie = self.getCookie('hl');
-
-    if(cookie == '')
-      select.val('en');
-    else
-      select.val(cookie);
-
     select.change(function() {
       document.cookie = 'hl=' + $(this).val() +  "; path=/";
       location.reload();

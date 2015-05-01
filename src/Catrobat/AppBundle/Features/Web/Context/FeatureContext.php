@@ -11,6 +11,8 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Exception\Exception;
 use Behat\Gherkin\Node\PyStringNode, Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use WebDriver;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -86,17 +88,26 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function setup()
   {
-    $this->deleteScreens();
     $this->getSession()->resizeWindow(1280, 1000);
   }
 
   /**
    * @AfterScenario
    */
-  public function makeScreenshot()
+  public function resetSession()
   {
-
-    $this->saveScreenshot(null, $this->screenshot_directory);
+      $this->getSession()->getDriver()->reset();
+  }
+  
+  /**
+   * @AfterStep
+   */
+  public function makeScreenshot(AfterStepScope $scope)
+  {
+      if (!$scope->getTestResult()->isPassed())
+      {
+         $this->saveScreenshot(null, $this->screenshot_directory);
+      }
   }
 
   /**
@@ -173,7 +184,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         break;
 
       case "Deutsch":
-        $this->assertSession()->cookieEquals("hl", "de-DE");
+        $this->assertSession()->cookieEquals("hl", "de");
         break;
 
       default:
@@ -191,7 +202,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $this->getSession()->setCookie("hl", "en");
         break;
       case "Deutsch":
-        $this->getSession()->setCookie("hl", "de-DE");
+        $this->getSession()->setCookie("hl", "de");
         break;
       default:
         assertTrue(false);
@@ -447,6 +458,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       case "logo.png":
         $logoUrl = "data:image/png;base64," . base64_encode(file_get_contents(self::AVATAR_DIR . "logo.png"));
         $isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
+        assertEquals($source, $logoUrl, "SOURCE BLA");
+        assertEquals($sourceHeader, $logoUrl, "HEADER BLA");
+        echo("-------------".$sourceHeader."-------------\n");
+        echo("-------------".$logoUrl."-------------\n");
         $not == "not" ? assertFalse($isSame) : assertTrue($isSame);
         break;
 
