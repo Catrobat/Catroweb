@@ -107,9 +107,17 @@ class FeatureContext extends BaseContext
       $returned_programs = $responseArray['CatrobatProjects'];
       $expected_programs = $table->getHash();
       assertEquals(count($expected_programs), count($returned_programs), "Wrong number of returned programs");
-      for($i = 0; $i < count($returned_programs); $i ++)
+      for($i = 0; $i < count($expected_programs); $i ++)
       {
-        assertEquals($expected_programs[$i]["name"], $returned_programs[$i]["ProjectName"], "Wrong order of results");
+          $found = false;
+          for($j = 0; $j < count($returned_programs); $j ++)
+          {
+              if ($expected_programs[$i]["name"] === $returned_programs[$j]["ProjectName"])
+              {
+                  $found = true;
+              }
+          }
+        assertTrue($found, $expected_programs[$i]["name"] . " was not found in the returned programs");
       }
     }
 

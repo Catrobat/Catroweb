@@ -451,17 +451,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $not = trim($not);
 
     $source = $this->getSession()->getPage()->find("css", "#profile-avatar > img")->getAttribute("src");
+    $source = trim($source, "\"");
     $styleHeader = $this->getSession()->getPage()->find("css", "#menu .img-avatar")->getAttribute("style");
     $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", "\\2", $styleHeader);
-
+    $sourceHeader = trim($sourceHeader, "\"");
+    
     switch($name) {
       case "logo.png":
         $logoUrl = "data:image/png;base64," . base64_encode(file_get_contents(self::AVATAR_DIR . "logo.png"));
         $isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
-        assertEquals($source, $logoUrl, "SOURCE BLA");
-        assertEquals($sourceHeader, $logoUrl, "HEADER BLA");
-        echo("-------------".$sourceHeader."-------------\n");
-        echo("-------------".$logoUrl."-------------\n");
         $not == "not" ? assertFalse($isSame) : assertTrue($isSame);
         break;
 
