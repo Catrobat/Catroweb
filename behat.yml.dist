@@ -13,6 +13,10 @@ default:
                 default:
                   selenium2:
                     wd_host: "http://localhost:8643/wd/hub"
+                    capabilities:
+                      extra_capabilities:
+                        phantomjs.page.customHeaders.Accept-Language: 'en'
+                    
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
