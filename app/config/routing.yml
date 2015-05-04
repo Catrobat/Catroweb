@@ -30,24 +30,28 @@ sonata_user_security:
 
 sonata_user_resetting:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
-    prefix: /resetting
+    prefix: /{flavor}/resetting
 
 sonata_user_profile:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
-    prefix: /profile
+    prefix: /{flavor}/profile
 
 sonata_user_register:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
-    prefix: /register
+    prefix: /{flavor}/register
 
 sonata_user_change_password:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-    prefix: /profile
+    prefix: /{flavor}/profile
 
 sonata_user_admin_security_logout:
     pattern: /logout
     defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" } 
 
-    
+sonata_user_profile_show:
+    pattern: /{flavor}/myprofile
+    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
 
-    
+fos_user_profile_show:
+    pattern: /{flavor}/myprofile
+    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
