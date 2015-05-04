@@ -12,7 +12,13 @@ imports:
 #        query_cache_driver: apc
 
 monolog:
+    channels: ["upload"]
     handlers:
+        upload:
+            type: stream
+            path: %kernel.logs_dir%/upload.log
+            level: error
+            channels: [upload]
         main:
             type:         fingers_crossed
             action_level: error
