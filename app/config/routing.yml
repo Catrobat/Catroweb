@@ -44,8 +44,10 @@ sonata_user_change_password:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
     prefix: /profile
 
+sonata_user_admin_security_logout:
+    pattern: /logout
+    defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" } 
 
-    
     
 
     

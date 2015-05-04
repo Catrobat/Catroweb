@@ -1,5 +1,19 @@
 services:
 
+# ======== System Validation ========
+
+      catrowebbundle.listener.language:
+          class: Catrobat\AppBundle\Listeners\LanguageListener
+          tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+
+      catrowebbundle.listener.flavor:
+          arguments:
+            - "@router"
+          class: Catrobat\AppBundle\Listeners\FlavorListener
+          tags:
+              - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
+
 # ======== Upload Validation ========
 
       catroweb.file.validator.name:

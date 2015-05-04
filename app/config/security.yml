@@ -45,7 +45,10 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-            logout:       true
+            logout:
+                path:   /logout
+                target: index
+                invalidate_session: false
             anonymous:    true
             remember_me:
                 name: remember_me
