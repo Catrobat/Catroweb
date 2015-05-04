@@ -10,8 +10,6 @@ use Catrobat\AppBundle\StatusCode;
 
 class ProgramFlavorListener
 {
-    const KODEY_PERMISSION = "BLUETOOTH_KODEY";
-    
     public function onEvent(ProgramBeforePersistEvent $event)
     {
         $this->checkFlavor($event->getExtractedFile(), $event->getProgramEntity());
@@ -27,9 +25,9 @@ class ProgramFlavorListener
         {
             $program->setFlavor('pocketcode');
         }
-        else if($appName === 'Pocket Kodey')
+        else if($appName === 'Pocket Phiro Pro')
         {
-            $program->setFlavor('pocketkodey');
+            $program->setFlavor('pocketphiropro');
         }
         else
         {

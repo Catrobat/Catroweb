@@ -48,7 +48,7 @@ class FeaturedProgramAdmin extends Admin
             ->add('flavor', 'choice', array(
               'choices' => array(
                 'pocketcode' => 'Pocketcode',
-                'pocketkodey' => 'Pocketkodey',
+                'pocketphiropro' => 'pocketphiropro',
               )))
             ->add('active', null, array('required' => false))
             ;

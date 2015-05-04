@@ -64,7 +64,6 @@ class GenerateTestDataCommand extends Command
      // $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
       $this->generateProgramWithRudeWordInDescription("program_with_rudeword_in_description");
       $this->generateProgramWithRudeWordInName("program_with_rudeword_in_name");
-      $this->generateKodeyProgram("kodey");
       
       $finder->directories()->in($this->target_directory)->depth(0);
       foreach ($finder as $dir)
@@ -146,12 +145,6 @@ class GenerateTestDataCommand extends Command
     $properties = @simplexml_load_file($this->target_directory.$directory."/code.xml");
     $properties->header->programName = "FUCK YOU";
     $properties->asXML($this->target_directory.$directory."/code.xml");
-  }
-  
-  protected function generateKodeyProgram($directory)
-  {
-      $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
-      file_put_contents($this->target_directory.$directory."/permissions.txt", "TEXT_TO_SPEECH\nBLUETOOTH_KODEY\nVIBRATOR");
   }
 
 }

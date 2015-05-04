@@ -31,9 +31,9 @@ class FeatureContext extends BaseContext
     return new UploadedFile($filepath, "test.catrobat");
   }
 
-  private function getKodeyProgramFile()
+  private function getPhiroProProgramFile()
   {
-    $filepath = $this->generateProgramFileWith(array('applicationName' => 'Pocket Kodey'));
+    $filepath = $this->generateProgramFileWith(array('applicationName' => 'Pocket Phiro Pro'));
     assertTrue(file_exists($filepath), "File not found");
     return new UploadedFile($filepath, "program_generated.catrobat");
   }
@@ -42,25 +42,25 @@ class FeatureContext extends BaseContext
 //////////////////////////////////////////////
 
     /**
-     * @When /^I upload a catrobat program with the kodey app$/
+     * @When /^I upload a catrobat program with the phiropro app$/
      */
-    public function iUploadACatrobatProgramWithTheKodeyApp()
+    public function iUploadACatrobatProgramWithThePhiroProApp()
     {
         $user = $this->insertUser();
-        $program = $this->getKodeyProgramFile();
+        $program = $this->getPhiroProProgramFile();
         $response = $this->upload($program, $user);
         assertEquals(200, $response->getStatusCode(), "Wrong response code. " . $response->getContent());
     }
 
     /**
-     * @Then /^the program should be flagged as kodey$/
+     * @Then /^the program should be flagged as phiropro$/
      */
-    public function theProgramShouldBeFlaggedAsKodey()
+    public function theProgramShouldBeFlaggedAsPhiroPro()
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
         assertNotNull($program, "No program added");
-        assertEquals("pocketkodey", $program->getFlavor(), "Program is NOT flagged a kodey");
+        assertEquals("pocketphiropro", $program->getFlavor(), "Program is NOT flagged a phiropro");
     }
 
     /**
@@ -75,14 +75,14 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^the program should not be flagged as kodey$/
+     * @Then /^the program should not be flagged as phiropro$/
      */
-    public function theProgramShouldNotBeFlaggedAsKodey()
+    public function theProgramShouldNotBeFlaggedAsPhiroPro()
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
         assertNotNull($program, "No program added");
-        assertNotEquals("pocketkodey", $program->getFlavor(), "Program is flagged a kodey");
+        assertNotEquals("pocketphiropro", $program->getFlavor(), "Program is flagged a phiropro");
     }
 
     /**

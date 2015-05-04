@@ -32,12 +32,12 @@ class ProgramFlavorListenerSpec extends ObjectBehavior
    * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
    * @param \Catrobat\AppBundle\Entity\Program $program
    */
-  function it_detects_the_kodey_flavor($file, $program)
+  function it_detects_the_phiropro_flavor($file, $program)
   {
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
-    $xml->header->applicationName = "Pocket Kodey";
+    $xml->header->applicationName = "Pocket Phiro Pro";
     $file->getProgramXmlProperties()->willReturn($xml);
-    $program->setFlavor(Argument::exact('pocketkodey'))->shouldBeCalled();
+    $program->setFlavor(Argument::exact('pocketphiropro'))->shouldBeCalled();
     $this->checkFlavor($file,$program);
   }
 

@@ -8,9 +8,9 @@ Feature: Filtering programs with specific flavor
     Given there are programs:
     | name         | flavor      |
     | Invaders     | pocketcode  |
-    | Simple click | pocketkodey |
+    | Simple click | pocketphiropro |
     | A new world  | pocketcode  |
-    | Soon to be   | pocketkodey |
+    | Soon to be   | pocketphiropro |
 
 
   Scenario: Get most viewed programs of flavor
