@@ -76,7 +76,7 @@ class DefaultController extends Controller
     $screenshot_repository = $this->get("screenshotrepository");
     $elapsed_time = $this->get("elapsedtime");
 
-    if (!$program) {
+    if (!$program || !$program->isVisible()) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 

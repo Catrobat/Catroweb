@@ -4,18 +4,14 @@ namespace Catrobat\AppBundle\Controller\Api;
 
 use Catrobat\AppBundle\Events\ReportInsertEvent;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\Null;
 use Symfony\Component\Validator\Validator;
-use Symfony\Component\Security\Core\SecurityContext;
 use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Catrobat\AppBundle\StatusCode;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 
@@ -29,6 +25,7 @@ class ReportController extends Controller
   {
     /* @var $context \Symfony\Component\Security\Core\SecurityContext */
     /* @var $programmanager \Catrobat\AppBundle\Entity\ProgramManager */
+    /* @var $program \Catrobat\AppBundle\Entity\Program */
 
     $context = $this->get("security.context");
     $programmanager = $this->get("programmanager");
@@ -58,9 +55,13 @@ class ReportController extends Controller
     if($context->isGranted("IS_AUTHENTICATED_REMEMBERED"))
     {
       $report->setReportingUser($context->getToken()->getUser()); //could be anon
-    }else
+    }
+    else
+    {
       $report->setReportingUser(NULL); //could be anon
+    }
 
+    $program->setVisible(false);
     $report->setNote($request->get('note'));
     $report->setProject($program);
 
