@@ -63,7 +63,7 @@ class ProgramInappropriateReport
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program")
      * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
      */
-    private $project;
+    private $program;
 
     /**
      * @var integer
@@ -216,21 +216,21 @@ class ProgramInappropriateReport
      * @param \Catrobat\AppBundle\Entity\Program $project
      * @return ProgramInappropriateReport
      */
-    public function setProject($project)
+    public function setProgram($program)
     {
-        $this->project = $project;
+        $this->program = $program;
 
         return $this;
     }
 
     /**
-     * Get project
+     * Get program
      *
      * @return \Catrobat\AppBundle\Entity\Program
      */
-    public function getProject()
+    public function getProgram()
     {
-        return $this->project;
+        return $this->program;
     }
 
     /**

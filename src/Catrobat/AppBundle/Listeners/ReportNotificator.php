@@ -25,7 +25,7 @@ class ReportNotificator
     $notification_repo = $this->notification_repo;
     $all_users = $notification_repo->findAll();
     $notification = $event->getReport();
-    $program = $notification->getProject();
+    $program = $notification->getProgram();
     foreach($all_users as $user)
     {
       /* @var $user \Catrobat\AppBundle\Entity\Notification */

@@ -45,10 +45,10 @@ class ApproveProgramsAdmin extends Admin
           ->add('version')
           ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
           ->add('upload_ip')
-          ->add('filename')
           ->add('visible','boolean')
           ->add('Images', null, array('template' => ':Admin:program_containing_image.html.twig'))
           ->add('Sounds', null, array('template' => ':Admin:program_containing_sound.html.twig'))
+          ->add('Strings', null, array('template' => ':Admin:program_containing_strings.html.twig'))
           ->add('', null, array('template' => ':Admin:program_approve_action.html.twig'))
       ;
 
@@ -139,6 +139,16 @@ class ApproveProgramsAdmin extends Admin
     return $this->extractedProgram->getContainingSoundPaths();
   }
 
+  public function getContainingStrings($object)
+  {
+      if($this->extractedProgram == null)
+      {
+          $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get("extractedfilerepository");
+          $progManager = $this->getConfigurationPool()->getContainer()->get("programmanager");
+          $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+      }
+      return $this->extractedProgram->getContainingStrings();
+  }
 
   protected function configureRoutes(RouteCollection $collection)
     {

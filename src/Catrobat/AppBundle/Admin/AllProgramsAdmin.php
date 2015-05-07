@@ -19,6 +19,8 @@ class AllProgramsAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
+            ->add('downloads')
+            ->add('views')
             ->add('approved', null, array('required' => false))
         ;
     }
@@ -60,6 +62,7 @@ class AllProgramsAdmin extends Admin
             ->add('downloads')
             ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
             ->add('approved')
+            ->add('_action', 'actions', array('actions' => array('edit' => array())))
         ;
     }
 

@@ -3,6 +3,7 @@ namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\StatusCode;
+use Symfony\Component\Finder\Finder;
 
 class ExtractedCatrobatFile
 {
@@ -51,24 +52,34 @@ class ExtractedCatrobatFile
 
   public function getContainingImagePaths()
   {
-    $directory = $this->path."images/";
-    $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-    foreach($scanned_directory as &$image)
+    $finder = new Finder();
+    $finder->files()->in($this->path."images/");
+    $file_paths = array();
+    foreach($finder as $file)
     {
-        $image = "/".$this->web_path."images/".$image;
+        $file_paths[] = "/".$this->web_path."images/".$file->getFilename();
     }
-    return $scanned_directory;
+    return $file_paths;
   }
 
   public function getContainingSoundPaths()
   {
-    $directory = $this->path."sounds/";
-    $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-    foreach($scanned_directory as &$image)
+    $finder = new Finder();
+    $finder->files()->in($this->path."sounds/");
+    $file_paths = array();
+    foreach($finder as $file)
     {
-      $image = "/".$this->web_path."sounds/".$image;
+        $file_paths[] = "/".$this->web_path."sounds/".$file->getFilename();
     }
-    return $scanned_directory;
+    return $file_paths;
+  }
+  
+  public function getContainingStrings()
+  {
+      $xml = file_get_contents($this->path . "code.xml");
+      $matches = array();
+      preg_match_all("#>(.*[a-zA-Z].*)<#", $xml, $matches);
+      return array_unique($matches[1]);
   }
   
   public function getScreenshotPath()

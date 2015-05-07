@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Entity\Project;
 use Catrobat\AppBundle\Admin\AllProgramsAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -44,7 +43,7 @@ class ReportedProgramsAdmin extends Admin
         ->add('reportingUser')
         ->add('time')
         ->add('state')
-        ->add('project.visible')
+        ->add('program.visible')
     ;
   }
 
@@ -58,9 +57,13 @@ class ReportedProgramsAdmin extends Admin
         ->add('time')
         ->add('note')
         ->add('reportingUser', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
-        ->add('project', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all','editable' => false))
-        ->add('project.visible', 'boolean', array('editable' => true))
-        ->add('_action', 'actions', array('actions' => array('show' => array())))
+        ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all','editable' => false))
+        ->add('program.visible', 'boolean', array('editable' => true))
+        ->add('_action', 'actions', array('actions' => 
+            array(
+                'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),
+                'edit' => array()
+            )))
     ;
   }
 
@@ -72,7 +75,7 @@ class ReportedProgramsAdmin extends Admin
         ->add('state',
             'choice',
             array('choices' => Array(1=>"NEW",2=>"ACCEPTED",3=>"REJECTED")))
-        ->add('project.visible','choice', array(
+        ->add('program.visible','choice', array(
       'choices' => array(
           '0' => 'No',
           '1' => 'Yes',
@@ -83,7 +86,7 @@ class ReportedProgramsAdmin extends Admin
 
   protected function configureRoutes(RouteCollection $collection)
   {
-    $collection->remove('create')->remove('delete')->remove('edit');
+    $collection->remove('create')->remove('delete');
   }
 }
 
