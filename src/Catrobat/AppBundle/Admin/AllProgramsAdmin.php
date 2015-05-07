@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\CoreBundle\Model\Metadata;
 
 class AllProgramsAdmin extends Admin
 {
@@ -21,6 +22,7 @@ class AllProgramsAdmin extends Admin
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('downloads')
             ->add('views')
+            ->add('visible', null, array('required' => false))
             ->add('approved', null, array('required' => false))
         ;
     }
@@ -62,13 +64,19 @@ class AllProgramsAdmin extends Admin
             ->add('downloads')
             ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
             ->add('approved')
+            ->add('visible')
             ->add('_action', 'actions', array('actions' => array('edit' => array())))
         ;
     }
 
+    public function getObjectMetadata($object)
+    {
+        return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
+    }
+    
   protected function configureRoutes(RouteCollection $collection)
   {
-    $collection->remove('create');
+    $collection->remove('create')->remove('delete')->remove('export');
   }
 
     public function getThumbnailImageUrl($object)
