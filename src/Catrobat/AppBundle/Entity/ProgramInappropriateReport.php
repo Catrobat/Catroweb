@@ -101,7 +101,7 @@ class ProgramInappropriateReport
      */
     public function updateProgramVersion()
     {
-      $this->setProjectVersion($this->getProject()->getVersion());
+      $this->setProjectVersion($this->getProgram()->getVersion());
     }
 
     /**

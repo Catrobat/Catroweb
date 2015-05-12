@@ -63,7 +63,7 @@ class ReportController extends Controller
 
     $program->setVisible(false);
     $report->setNote($request->get('note'));
-    $report->setProject($program);
+    $report->setProgram($program);
 
     $entityManager->persist($report);
     $entityManager->flush();
