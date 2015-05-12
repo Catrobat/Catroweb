@@ -61,7 +61,7 @@ class ReportedProgramsAdmin extends Admin
         ->add('program.visible', 'boolean', array('editable' => true))
         ->add('_action', 'actions', array('actions' => 
             array(
-                'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),
+                'show' => array('template' => ':CRUD:list__action_show_reported_program_details.html.twig'),
                 'edit' => array()
             )))
     ;
@@ -86,7 +86,7 @@ class ReportedProgramsAdmin extends Admin
 
   protected function configureRoutes(RouteCollection $collection)
   {
-    $collection->remove('create')->remove('delete');
+    $collection->remove('create')->remove('delete')->remove('export');
   }
 }
 
