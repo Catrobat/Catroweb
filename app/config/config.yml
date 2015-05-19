@@ -89,6 +89,9 @@ fos_user:
     service:
         user_manager: usermanager
 
+    from_email:
+        address: noreply@catrob.at
+
 knp_paginator:
     page_range: 3                      # default page range used in pagination control
     default_options:
