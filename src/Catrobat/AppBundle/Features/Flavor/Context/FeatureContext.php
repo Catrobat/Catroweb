@@ -33,7 +33,7 @@ class FeatureContext extends BaseContext
 
   private function getPhiroProProgramFile()
   {
-    $filepath = $this->generateProgramFileWith(array('applicationName' => 'Pocket Phiro Pro'));
+    $filepath = $this->generateProgramFileWith(array('applicationName' => 'Pocket Phiro'));
     assertTrue(file_exists($filepath), "File not found");
     return new UploadedFile($filepath, "program_generated.catrobat");
   }
@@ -42,7 +42,7 @@ class FeatureContext extends BaseContext
 //////////////////////////////////////////////
 
     /**
-     * @When /^I upload a catrobat program with the phiropro app$/
+     * @When /^I upload a catrobat program with the phiro app$/
      */
     public function iUploadACatrobatProgramWithThePhiroProApp()
     {
@@ -53,14 +53,14 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^the program should be flagged as phiropro$/
+     * @Then /^the program should be flagged as phiro$/
      */
     public function theProgramShouldBeFlaggedAsPhiroPro()
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
         assertNotNull($program, "No program added");
-        assertEquals("pocketphiropro", $program->getFlavor(), "Program is NOT flagged a phiropro");
+        assertEquals("pocketphiropro", $program->getFlavor(), "Program is NOT flagged a phiro");
     }
 
     /**
@@ -75,14 +75,14 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^the program should not be flagged as phiropro$/
+     * @Then /^the program should not be flagged as phiro$/
      */
     public function theProgramShouldNotBeFlaggedAsPhiroPro()
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
         assertNotNull($program, "No program added");
-        assertNotEquals("pocketphiropro", $program->getFlavor(), "Program is flagged a phiropro");
+        assertNotEquals("pocketphiropro", $program->getFlavor(), "Program is flagged a phiro");
     }
 
     /**

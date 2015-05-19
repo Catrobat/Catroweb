@@ -81,7 +81,8 @@ class ImportLegacyCommand extends ContainerAwareCommand
         
         $this->importUsers($this->importdir."/".self::TSV_USERS_FILE);
         $this->importPrograms($this->importdir."/".self::TSV_PROGRAMS_FILE);
-
+        $this->importProgramFiles($this->importdir."/".self::TSV_PROGRAMS_FILE);
+        
         $row = 0;
         $features_tsv = $this->importdir."/".self::TSV_FEATURED_PROGRAMS;
         if (($handle = fopen($features_tsv, "r")) !== false) {
@@ -128,7 +129,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $progress->setMessage($data[1] . " (" . $id . ")");
                     $progress->advance();
                     
-                    if (version_compare($language_version, "0.9", "<"))
+                    if (version_compare($language_version, "0.8", "<"))
                     {
                         $skipped++;
                         continue;
@@ -152,8 +153,6 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program->setCatrobatVersion(1);
                     $program->setFlavor("pocketcode");
                     $this->em->persist($program);
-                    $this->importScreenshots($id);
-                    $this->importProgramfile($id);
                 } else {
                     break;
                 }
@@ -171,6 +170,52 @@ class ImportLegacyCommand extends ContainerAwareCommand
         }
     }
 
+    protected function importProgramFiles($program_file)
+    {
+        $row = 0;
+        $skipped = 0;
+    
+        $progress = new ProgressBar($this->output);
+        $progress->setFormat(' %current%/%max% [%bar%] %message%');
+        $progress->start();
+    
+        $metadata = $this->em->getClassMetaData("Catrobat\AppBundle\Entity\Program");
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+    
+        if (($handle = fopen($program_file, "r")) !== false) {
+            while (($data = fgetcsv($handle, 0, "\t")) !== false) {
+                $num = count($data);
+                if ($num > 2) {
+                    $id = $data[0];
+                    $language_version = $data[13];
+    
+                    $progress->setMessage($data[1] . " (" . $id . ")");
+                    $progress->advance();
+    
+                    if (version_compare($language_version, "0.8", "<"))
+                    {
+                        $skipped++;
+                        continue;
+                    }
+                    $this->importScreenshots($id);
+                    $this->importProgramfile($id);
+                } else {
+                    break;
+                }
+                $row ++;
+            }
+            fclose($handle);
+    
+            $progress->setMessage("Saving to database");
+            $progress->advance();
+            $this->em->flush();
+            $progress->setMessage("");
+            $progress->finish();
+            $this->writeln("");
+            $this->writeln("<info>Imported ".$row." programs (Skipped " . $skipped . ")</info>");
+        }
+    }
+    
     protected function importUsers($user_file)
     {
         print_r($user_file);
@@ -264,7 +309,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     if($parent != null) {
                       $program = $this->program_manager->find($id);
                       $program->setRemixOf($parent);
-                      $this->program_manager->save($program);
+                    }
+                    else 
+                    {
+                        $this->writeln("Could not set remix info: program not in database (" + $remix_program_id + ")");
                     }
                 }
             }

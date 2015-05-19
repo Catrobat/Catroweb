@@ -25,7 +25,7 @@ class ProgramFlavorListener
         {
             $program->setFlavor('pocketcode');
         }
-        else if($appName === 'Pocket Phiro Pro')
+        else if($appName === 'Pocket Phiro')
         {
             $program->setFlavor('pocketphiropro');
         }

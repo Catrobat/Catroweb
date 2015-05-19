@@ -35,7 +35,7 @@ class ProgramFlavorListenerSpec extends ObjectBehavior
   function it_detects_the_phiropro_flavor($file, $program)
   {
     $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__."/base/code.xml");
-    $xml->header->applicationName = "Pocket Phiro Pro";
+    $xml->header->applicationName = "Pocket Phiro";
     $file->getProgramXmlProperties()->willReturn($xml);
     $program->setFlavor(Argument::exact('pocketphiropro'))->shouldBeCalled();
     $this->checkFlavor($file,$program);
