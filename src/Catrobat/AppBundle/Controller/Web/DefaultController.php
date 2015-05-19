@@ -107,7 +107,7 @@ class DefaultController extends Controller
     $isReportedByUser = false;
     $em = $this->getDoctrine()->getManager();
     $reported_program = $em->getRepository("\Catrobat\AppBundle\Entity\ProgramInappropriateReport")
-      ->findOneBy(array("project" => $program->getId()));
+      ->findOneBy(array("program" => $program->getId()));
 
     if($reported_program)
       $isReportedByUser = ($user == $reported_program->getReportingUser());
