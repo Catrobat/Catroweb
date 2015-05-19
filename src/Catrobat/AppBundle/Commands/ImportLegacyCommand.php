@@ -129,8 +129,12 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $progress->setMessage($data[1] . " (" . $id . ")");
                     $progress->advance();
                     
-                    if (version_compare($language_version, "0.8", "<"))
+                    // ignore old programs except for manually changed ones - because FU
+                    if (version_compare($language_version, "0.8", "<") && $id != 821)
                     {
+                        $progress->clear();
+                        $this->writeln("<error>Could not import program " . $id . " - version too old: " .$language_version. "</error>");
+                        $progress->display();
                         $skipped++;
                         continue;
                     }
@@ -147,7 +151,15 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program->setUploadLanguage($data[10]);
                     $program->setFilesize($data[11]);
                     $program->setCatrobatVersionName($data[12]);
-                    $program->setLanguageVersion($language_version);
+
+                    if ($id == 821)
+                    {
+                        $program->setLanguageVersion("0.8");
+                    }
+                    {
+                        $program->setLanguageVersion($language_version);
+                    }
+                    
                     $program->setRemixCount($data[19]);
                     $program->setApproved($data[20] === "t");
                     $program->setCatrobatVersion(1);
@@ -192,7 +204,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $progress->setMessage($data[1] . " (" . $id . ")");
                     $progress->advance();
     
-                    if (version_compare($language_version, "0.8", "<"))
+                    if (version_compare($language_version, "0.8", "<") && $id != 821)
                     {
                         $skipped++;
                         continue;
@@ -312,7 +324,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     }
                     else 
                     {
-                        $this->writeln("Could not set remix info: program not in database (" + $remix_program_id + ")");
+                        $this->writeln("Could not set remix info: program not in database (" . $remix_program_id . ")");
                     }
                 }
             }
