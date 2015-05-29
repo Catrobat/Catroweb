@@ -30,7 +30,6 @@ class RemixUpdater
         if ($program_xml_properties->header->url->__toString() != "") {
             preg_match("/([\d]+)$/",$program_xml_properties->header->url->__toString(),$matches);
             $program_id = intval($matches[1]);
-            print_r($this->router->generate('program', array('id' => $program_id)));
             $program_xml_properties->header->remixOf = $program_xml_properties->header->url->__toString();
             $parent = $this->repository->find($program_id);
             if($parent != null) {

@@ -71,7 +71,12 @@ services:
             arguments: ["@apkrepository"]
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
-            
+      
+      catroweb.permissions.check:
+            class: Catrobat\AppBundle\Listeners\ProgramPermissionsListener
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+      
 # ======== Notifications =======
 
       catrobat.core.services.uploadnotificator:

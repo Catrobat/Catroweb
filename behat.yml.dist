@@ -44,6 +44,14 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Flavor/"
             contexts:
               - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext
+        permissions:
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            features:
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/Permissions/"
+            contexts:
+              - Catrobat\AppBundle\Features\Permissions\Context\FeatureContext
         web:
             type: symfony_bundle
             bundle: 'AppBundle'
