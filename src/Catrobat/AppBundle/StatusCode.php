@@ -5,7 +5,6 @@ namespace Catrobat\AppBundle;
 class StatusCode
 {
   const OK = 200;
-  const EMAIL_ALREADY_EXISTS = 300;
   const INTERNAL_SERVER_ERROR = 500;
   const MISSING_POST_DATA = 501;
   const UPLOAD_EXCEEDING_FILESIZE = 502;

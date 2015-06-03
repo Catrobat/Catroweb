@@ -48,6 +48,15 @@ class SecurityController extends Controller
       foreach ($violations as $violation)
       {
         $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
+        switch($violation->getMessageTemplate())
+        {
+            case "errors.password.short":
+                $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+                break;
+            case "errors.email.invalid":
+                $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+                break;
+        }
         $retArray['answer'] = $this->trans($violation->getMessageTemplate(),$violation->getParameters());
         break;
       }
@@ -56,7 +65,7 @@ class SecurityController extends Controller
       {
         if ($userManager->findUserByEmail($create_request->mail) != null)
         {
-          $retArray['statusCode'] = StatusCode::EMAIL_ALREADY_EXISTS;
+          $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
           $retArray['answer'] = $this->trans("errors.email.exists");
         }
         else 

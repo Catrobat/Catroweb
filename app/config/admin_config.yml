@@ -83,6 +83,7 @@ sonata_admin:
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - catrowebadmin.block.tools.notify
+                    - catrowebadmin.block.tools.rudewords
 
             sonata.admin.group.users:
                 label:           Users

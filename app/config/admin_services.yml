@@ -33,6 +33,12 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Notifications }
         arguments: [null, Catrobat\AppBundle\Entity\Notification, null]
 
+      catrowebadmin.block.tools.rudewords:
+        class: Catrobat\AppBundle\Admin\RudewordAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Rudewords }
+        arguments: [null, Catrobat\AppBundle\Entity\RudeWord, null]
+
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
         tags:

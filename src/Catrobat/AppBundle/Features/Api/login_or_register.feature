@@ -68,7 +68,16 @@ Feature: Login with an existing accunt or register a new one
     When I try to register
     Then I should get the json object:
       """
-      {"statusCode":602,"answer":"Your password must have at least 6 characters.","preHeaderMessages":""}
+      {"statusCode":753,"answer":"Your password must have at least 6 characters.","preHeaderMessages":""}
+      """
+
+  Scenario: Trying to register with an invalid email should fail 
+    Given I have otherwise valid registration parameters
+    But I have a parameter "registrationEmail" with value "invalid#mail"
+    When I try to register
+    Then I should get the json object:
+      """
+      {"statusCode":765,"answer":"Your email seems to be invalid","preHeaderMessages":""}
       """
 
 
@@ -77,7 +86,7 @@ Feature: Login with an existing accunt or register a new one
     And I try to register another user with the same email adress
     Then I should get the json object:
       """
-      {"statusCode":300,"answer":"This email address already exists.","preHeaderMessages":""}
+      {"statusCode":757,"answer":"This email address already exists.","preHeaderMessages":""}
       """
 
 
