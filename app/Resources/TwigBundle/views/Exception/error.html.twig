@@ -4,7 +4,7 @@
 
   <div id="error">
     <img src="{{ asset('images/symbols/error.png') }}" alt="An Error Occurred" />
-    <p>Ooooops something went wrong.<br>Please try again!</p>
+    <p>{{ "somethingWentWrong"|trans({}, "catroweb") }} <br> {{ "pleaseTryAgain"|trans({}, "catroweb") }}</p>
   </div>
 
 {% endblock %}

@@ -16,6 +16,8 @@ country: کشور
 loginText: ورود به سیستم
 privacyPolicy: Privacy Policy
 imprint: Imprint
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured:  پيشنهادي
   newest: Newest programs

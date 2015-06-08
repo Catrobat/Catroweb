@@ -16,6 +16,8 @@ country: 国
 loginText: ログイン
 privacyPolicy: プライバシーポリシー
 imprint: インプリント
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: おすすめ
   newest: Newest programs

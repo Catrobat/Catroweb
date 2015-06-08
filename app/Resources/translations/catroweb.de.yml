@@ -16,6 +16,8 @@ country: Land
 loginText: einloggen
 privacyPolicy: Datenschutzrichtlinien
 imprint: Impressum
+somethingWentWrong: Ooooops etwas ging schief.
+pleaseTryAgain: Bitte versuche es noch einmal!
 programs:
   featured: Empfohlen
   newest: Neuesten Programme

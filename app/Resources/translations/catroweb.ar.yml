@@ -16,6 +16,8 @@ country: البلد
 loginText: تسجيل الدخول
 privacyPolicy: سياسة الخصوصية
 imprint: بصمة
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: خصائص
   newest: أحدث برنامج

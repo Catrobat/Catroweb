@@ -16,6 +16,8 @@ country: Country
 loginText: '&#x4E0B;&#x8F09;'
 privacyPolicy: '&#x6211;&#x7684;&#x5E33;&#x6236;'
 imprint: '&#x641C;&#x5C0B;&#x5C08;&#x6848;'
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: '&#x7E3D;&#x7E9C;&#x6B21;&#x6578;'
   newest: Newest programs

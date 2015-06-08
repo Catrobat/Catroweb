@@ -16,6 +16,8 @@ country: Ország
 loginText: bejelentkezés
 privacyPolicy: Adatvédelem
 imprint: Impresszum
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Kiemelt
   newest: Legújabb programok

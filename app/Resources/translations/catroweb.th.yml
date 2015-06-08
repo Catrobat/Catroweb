@@ -16,6 +16,8 @@ country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
 imprint: ประทับตรา
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: รายการเด่น
   newest: โปรแกรมใหม่ล่าสุด

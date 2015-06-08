@@ -16,6 +16,8 @@ country: દેશ
 loginText: લોગીન (પ્રવેશ)
 privacyPolicy: Privacy Policy
 imprint: Imprint
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: દર્શાવેલ
   newest: Newest programs

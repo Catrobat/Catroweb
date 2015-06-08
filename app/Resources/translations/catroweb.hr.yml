@@ -16,6 +16,8 @@ country: Država
 loginText: prijava
 privacyPolicy: Pravila privatnosti
 imprint: Impresum
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Izdvojeni
   newest: Newest programs

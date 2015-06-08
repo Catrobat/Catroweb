@@ -16,6 +16,8 @@ country: ملک
 loginText: لاگ آن
 privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام

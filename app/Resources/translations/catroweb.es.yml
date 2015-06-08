@@ -16,6 +16,8 @@ country: País
 loginText: Inicio de sesión
 privacyPolicy: Política de Privacidad
 imprint: Grabado
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Destacados
   newest: Newest programs

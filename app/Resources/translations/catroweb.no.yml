@@ -16,6 +16,8 @@ country: Country
 loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Featured
   newest: Newest programs

@@ -16,6 +16,8 @@ country: Ülke
 loginText: oturum aç
 privacyPolicy: Gizlilik İlkesi
 imprint: Künye
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Seçme
   newest: Newest programs

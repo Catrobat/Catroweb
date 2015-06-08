@@ -16,6 +16,8 @@ country: Land
 loginText: Logga in
 privacyPolicy: Sekretesspolicy
 imprint: Avtryck
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Dagens
   newest: Nyaste program

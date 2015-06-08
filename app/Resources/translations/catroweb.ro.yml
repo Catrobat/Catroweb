@@ -16,6 +16,8 @@ country: Country
 loginText: login
 privacyPolicy: 'Ceh&#x103;'
 imprint: 'Englez&#x103; (Regatul Unit)'
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Recomandate
   newest: Newest programs

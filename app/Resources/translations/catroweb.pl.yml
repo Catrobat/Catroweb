@@ -16,6 +16,8 @@ country: Kraj
 loginText: login
 privacyPolicy: Polityka prywatności
 imprint: Stopka
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Polecane
   newest: Najnowsze programy

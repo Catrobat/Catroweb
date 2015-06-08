@@ -16,6 +16,8 @@ country: Country
 loginText: '&#x421;&#x43A;&#x430;&#x447;&#x430;&#x442;&#x44C;'
 privacyPolicy: '&#x427;&#x435;&#x448;&#x441;&#x43A;&#x438;&#x439;'
 imprint: '&#x410;&#x43D;&#x433;&#x43B;&#x438;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x412;&#x435;&#x43B;&#x438;&#x43A;&#x43E;&#x431;&#x440;&#x438;&#x442;&#x430;&#x43D;&#x438;&#x44F;)'
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
 programs:
   featured: Featured
   newest: Newest programs
