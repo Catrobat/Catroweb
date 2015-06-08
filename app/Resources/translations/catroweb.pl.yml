@@ -14,6 +14,8 @@ description: Opis
 noDescription: Brak opisu.
 country: Kraj
 loginText: login
+privacyPolicy: Polityka prywatności
+imprint: Stopka
 programs:
   featured: Polecane
   newest: Najnowsze programy
@@ -23,14 +25,27 @@ programs:
   downloads: '%downloads% downloads'
   views: '%views% views'
   reportAsInappropriate: Zgłoś jako niewłaściwe
-  languageVersion:
-    Catrobat Language version: '%languageVersion%'
+  languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Please %login% to report this program as inappropriate.'
   reportDialogHeader: Dlaczego uważasz, że ten program jest niewłaściwy?
   reportDialogReason: Podaj powód
   reportOwnProgram: Nie możesz oflagować własnego programu.
   reportAlready: Ten program jest już oflagowany jako nieodpowiedni.
   reportDone: Ten program został przez Ciebie zgłoszony jako nieodpowiedni!
+passwordRecovery:
+  subject: Your Catrobat Password Recovery
+  message: |
+    Dear %username%.
+    
+    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    
+    Best regards,
+    Your Catrobat Team.
 profile:
   saveChanges: zapisz zmiany
   newPass: new password
@@ -54,6 +69,7 @@ profile:
     uploadError: Przepraszamy, wystąpił błąd podczas wysyłania!
     noSupport: Ten typ obrazu nie jest obsługiwany, proszę wybierz inny obraz.
 licenseToPlay:
+  link: Licencja na korzystanie
   title: 'Licencja na korzystanie - podziękuj i podziel się'
   text1: Wyobraź sobie program w Catrobat jako ciasteczko, takie specjalne ciasteczko z przepisem (blokami programu). Wszyscy uczestnicy społeczności Catrobat dzielą się tymi ciasteczkami, łącznie z przepisami na nie. Oznacza to, że możesz posmakować ciasteczka i nauczyć się jak je przygotowywać!
   text2: 'Nie ma sekretnych przepisów: instrukcje, jak zrobić ciasteczko są dostępne dla każdego, aby je wykorzystywać, modyfikować i traktować je jako inspirację dla nowych pomysłów... to znaczy ciasteczek.'

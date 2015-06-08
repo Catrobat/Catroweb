@@ -15,6 +15,8 @@ description: Description
 noDescription: No description available.
 country: Country
 loginText: login
+privacyPolicy: Privacy Policy
+imprint: Imprint
 
 programs:
   featured: Featured
@@ -25,7 +27,7 @@ programs:
   downloads: %downloads% downloads
   views: %views% views
   reportAsInappropriate: Report as inappropriate
-  languageVersion: Catrobat Language version: %languageVersion%
+  languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: Please %login% to report this program as inappropriate.
   reportDialogHeader: Why do you think this program is inappropriate?
   reportDialogReason: Enter a reason
@@ -74,6 +76,7 @@ profile:
 
 
 licenseToPlay:
+  link: 'License to play'
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'

@@ -14,6 +14,8 @@ description: Description
 noDescription: No description available.
 country: Country
 loginText: '&#x421;&#x43A;&#x430;&#x447;&#x430;&#x442;&#x44C;'
+privacyPolicy: '&#x427;&#x435;&#x448;&#x441;&#x43A;&#x438;&#x439;'
+imprint: '&#x410;&#x43D;&#x433;&#x43B;&#x438;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x412;&#x435;&#x43B;&#x438;&#x43A;&#x43E;&#x431;&#x440;&#x438;&#x442;&#x430;&#x43D;&#x438;&#x44F;)'
 programs:
   featured: Featured
   newest: Newest programs
@@ -23,14 +25,27 @@ programs:
   downloads: '%downloads% downloads'
   views: '%views% views'
   reportAsInappropriate: '&#x41F;&#x43E;&#x436;&#x430;&#x43B;&#x43E;&#x432;&#x430;&#x442;&#x44C;&#x441;&#x44F;'
-  languageVersion:
-    Catrobat Language version: '%languageVersion%'
+  languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Please %login% to report this program as inappropriate.'
   reportDialogHeader: '&#x41E;&#x442;&#x43C;&#x435;&#x43D;&#x438;&#x442;&#x44C;'
   reportDialogReason: Enter a reason
   reportOwnProgram: '&#x43F;&#x440;&#x43E;&#x441;&#x43C;&#x43E;&#x442;&#x440;&#x43E;&#x432;'
   reportAlready: '&#x441;&#x43A;&#x430;&#x447;&#x438;&#x432;&#x430;&#x43D;&#x438;&#x439;'
   reportDone: '&#x412;&#x44B; &#x43E;&#x442;&#x43C;&#x435;&#x442;&#x438;&#x43B;&#x438; &#x44D;&#x442;&#x43E;&#x442; &#x43F;&#x440;&#x43E;&#x435;&#x43A;&#x442; &#x43A;&#x430;&#x43A; &#x43D;&#x435;&#x443;&#x43C;&#x435;&#x441;&#x442;&#x43D;&#x44B;&#x43C;!'
+passwordRecovery:
+  subject: Your Catrobat Password Recovery
+  message: |
+    Dear %username%.
+    
+    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    
+    Best regards,
+    Your Catrobat Team.
 profile:
   saveChanges: save changes
   newPass: new password
@@ -54,6 +69,7 @@ profile:
     uploadError: Sorry, there was a problem during the upload!
     noSupport: '&#x412;&#x430;&#x448;&#x435; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B; &#x43E;&#x442;&#x441;&#x443;&#x442;&#x441;&#x442;&#x432;&#x443;&#x435;&#x442;.'
 licenseToPlay:
+  link: License to play
   title: '&#x41B;&#x438;&#x446;&#x435;&#x43D;&#x437;&#x438;&#x44F; &#x434;&#x43B;&#x44F; &#x43F;&#x440;&#x43E;&#x438;&#x433;&#x440;&#x44B;&#x432;&#x430;&#x43D;&#x438;&#x44F; - &#x423;&#x43A;&#x430;&#x437;&#x44B;&#x432;&#x430;&#x439;&#x442;&#x435; &#x438;&#x441;&#x442;&#x43E;&#x447;&#x43D;&#x438;&#x43A; &#x438; &#x434;&#x435;&#x43B;&#x438;&#x442;&#x435;&#x441;&#x44C;'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'

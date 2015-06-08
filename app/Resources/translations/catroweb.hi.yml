@@ -14,6 +14,8 @@ description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
 country: देश
 loginText: प्रवेश करे
+privacyPolicy: गोपनीयता नीति
+imprint: छापकूट
 programs:
   featured: विशेषताएं
   newest: सबसे नये प्रोग्राम
@@ -23,14 +25,27 @@ programs:
   downloads: '%downloads% downloads'
   views: '%views% views'
   reportAsInappropriate: अनुचित विवरण दे
-  languageVersion:
-    Catrobat Language version: '%languageVersion%'
+  languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Please %login% to report this program as inappropriate.'
   reportDialogHeader: आपको क्यों लगता है कि यह प्रोग्राम अनुचित है?
   reportDialogReason: एक कारण दर्ज करें
   reportOwnProgram: आप अपने खुद के प्रोग्राम को अनुपयुक्त नही बता सकते|
   reportAlready: आप पहले से ही इस प्रोग्राम को अनुपयुक्त बता चुके हैं।
   reportDone: आपने इस प्रोग्राम का अनुपयुक्त विवरण दर्ज किया हैं|
+passwordRecovery:
+  subject: Your Catrobat Password Recovery
+  message: |
+    Dear %username%.
+    
+    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    
+    Best regards,
+    Your Catrobat Team.
 profile:
   saveChanges: परिवर्तन सहेजें
   newPass: new password
@@ -54,6 +69,7 @@ profile:
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
 licenseToPlay:
+  link: चलाने के लिए लाइसेंस
   title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'

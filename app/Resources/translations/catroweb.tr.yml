@@ -14,6 +14,8 @@ description: Açıklama
 noDescription: Açıklama mevcut değil.
 country: Ülke
 loginText: oturum aç
+privacyPolicy: Gizlilik İlkesi
+imprint: Künye
 programs:
   featured: Seçme
   newest: Newest programs
@@ -23,14 +25,27 @@ programs:
   downloads: '%downloads% downloads'
   views: '%views% views'
   reportAsInappropriate: Uygunsuz olarak rapor et
-  languageVersion:
-    Catrobat Language version: '%languageVersion%'
+  languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Please %login% to report this program as inappropriate.'
   reportDialogHeader: Bu programı neden uygunsuz buldunuz?
   reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne
   reportOwnProgram: Kendi programınızı uygunsuz olarak işaretleyemezsiniz.
   reportAlready: Bu programı daha önce uygunsuz olarak belirttiniz.
   reportDone: Bu programı uygunsuz olarak bildirdiniz!
+passwordRecovery:
+  subject: Your Catrobat Password Recovery
+  message: |
+    Dear %username%.
+    
+    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
+    
+    Best regards,
+    Your Catrobat Team.
 profile:
   saveChanges: Değişiklikleri kaydet
   newPass: new password
@@ -54,6 +69,7 @@ profile:
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
 licenseToPlay:
+  link: Oynamak için lisansınız
   title: 'Oynamak için lisans- prim ver ve paylaş'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
@@ -78,10 +94,10 @@ termsOfUse:
     item2: her yaştan (küçük çocuklar, gençler ve dedeler)
     item3: tüm tecrübe seviyelerinde
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: Lütfen saygılı olun. Paylaştıgınız programları, çok farklı yaş ve kültürden insanların göreceğini unutmayın.
     item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
+    item3: 'Dürüst olun. Başka birisi gibi davranıp yada kendinizi olduğunuzdan farklı  göstererek baskalarını kandırmaya çalışmayın.'
+    item4: Kişisel bilgilerinizi gizli tutunuz. E-posta adresi, telefon numarası yada diğer kişisel iletişim bilgilerinizi burdan paylaşmayınız.
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
     item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
@@ -296,7 +312,7 @@ help:
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
         text6: "Sahne alanı'ndan geri gitmek için 'Android Geri Düğmesi'ni kullanın."
     step4:
-      title: Change Look
+      title: Görünümü değiştir
       description: Nesnenizin görünümünü değiştirebilirsiniz.
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
@@ -362,37 +378,37 @@ help:
     title: Rehberler
     description1: Bu öğreticiler size etkili hileleri gösterir
     description2: Cep Kodu.
-    getReady: 'Get Ready:'
+    getReady: 'Hazır Ol:'
     tryCode: 'Try this code:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    doIt: 'Bunu yapın:'
+    tip: 'İlave ipucu:'
     card1:
-      title: Change Size
-      description: Tap the duck to change the size.
+      title: Boyutu değiştir
+      description: "Boyutu değiştirmek için ördeg'e dokunun."
     card2:
-      title: Change Look
-      description: Use this trick to count automatically.
+      title: Görünümü değiştir
+      description: Otomatik olarak saymak icin bu yöntemi kullanın.
     card3:
-      title: Moving Animation
-      description: Use this trick when you want a flying parrot.
+      title: Hareketli animasyon
+      description: Uçan bir papağan istediğinizde, bu yöntemi kullanın.
     card4:
       title: Kay
-      description: Move smoothly from one point to another.
+      description: Bir noktadan diğerine yavaşça hareket edin
     card5:
-      title: Play Sound
+      title: Ses çıkar
       description: Tap the drum to play this sound.
       extra1: '1. Click "+"'
       extra2: '2. Select "Pocket Code Recorder"'
       extra3: 3. Press icon to record your sound
     card6:
-      title: Speak Something
-      description: Use this code to make an object speaking.
+      title: Bir şey söyle
+      description: Bir nesneyi konuşturmak için bu kodu kullanın.
     card7:
       title: GSensor
       description: Use this trick to control an object with the inclination of your device.
       extra1: If too sensitive, divide by 10
     card8:
-      title: Compass
+      title: Pusula
       description: Use this code to make a compass.
     card9:
       title: Yayınla
