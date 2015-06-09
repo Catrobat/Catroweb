@@ -89,7 +89,7 @@ class DefaultController extends Controller
 
     $program_details = array (
       "screenshotBig" => $screenshot_repository->getScreenshotWebPath($program->getId()),
-      "downloadUrl" => $this->generateUrl('download', array('id' => $program->getId())),
+      "downloadUrl" => $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName())),
       "languageVersion" => $program->getLanguageVersion(),
       "downloads" => $program->getDownloads(),
       "views" => $program->getViews(),
