@@ -9,7 +9,7 @@ passwordsNoMatch: Du hast zwei unterschiedliche Passwörter eingegeben.
 error: Fehler
 cancel: Abbrechen
 report: Melden
-download: Download
+download: Als Programm herunterladen
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 country: Land
@@ -18,6 +18,7 @@ privacyPolicy: Datenschutzrichtlinien
 imprint: Impressum
 somethingWentWrong: Ooooops etwas ging schief.
 pleaseTryAgain: Bitte versuche es noch einmal!
+oldVersionError: Bitte aktualisiere auf die neueste Version von Pocket-Code!
 programs:
   featured: Empfohlen
   newest: Neuesten Programme
@@ -132,11 +133,11 @@ help:
       image2: 'Suche "Pocket Code".'
       image3: 'Tippe auf "Install".'
     step2:
-      title: Download Project
+      title: Projekt herunterladen
       description: 'Wie du das notwendige Programm herunterlädst um "Skydiving Steve" programmieren zu können.'
       image1: 'Tippe auf deinem mobilen Gerät im "Pocket Code" auf "Durchsuchen".'
       image2: Tippe auf das Banner.
-      image3: 'Download the program "Skydiving Steve".'
+      image3: 'Lade das Programm "Skydiving Steve" herunter.'
     step3:
       title: Projekt öffnen
       description: Lass uns ins Programm schauen.
@@ -439,9 +440,7 @@ login:
   userOrEmail: Username oder Email
   changePass: Passwort ändern
 apk:
-  generate: APK generieren
-  pending: Ausstehend
-  download: APK downloaden
+  download: Als app herunterladen
 errors:
   username:
     blank: Benutzername darf nicht leer sein
@@ -537,5 +536,5 @@ language:
   vietnamese: Vietnamesisch
 ci:
   generate: Apk generieren
-  pending: Generating Apk
-  download: Download Apk
+  pending: Generiere Apk
+  download: Apk Runterladen

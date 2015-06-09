@@ -18,6 +18,7 @@ privacyPolicy: Sekretesspolicy
 imprint: Avtryck
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: Dagens
   newest: Nyaste program
@@ -439,9 +440,7 @@ login:
   userOrEmail: Användarnamn eller email
   changePass: Ändra lösenord
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

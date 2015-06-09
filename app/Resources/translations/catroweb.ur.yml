@@ -18,6 +18,7 @@ privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
@@ -445,9 +446,7 @@ login:
   userOrEmail: صارف کا نام یا ای میل
   changePass: خفیہ کوڈ تبدیل کریں
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

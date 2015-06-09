@@ -9,7 +9,7 @@ passwordsNoMatch: "The passwords didn't match."
 error: Ошибка
 cancel: Отмена
 report: Report
-download: Download
+download: Download as program
 description: Description
 noDescription: No description available.
 country: Country
@@ -18,6 +18,7 @@ privacyPolicy: '&#x427;&#x435;&#x448;&#x441;&#x43A;&#x438;&#x439;'
 imprint: '&#x410;&#x43D;&#x433;&#x43B;&#x438;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x412;&#x435;&#x43B;&#x438;&#x43A;&#x43E;&#x431;&#x440;&#x438;&#x442;&#x430;&#x43D;&#x438;&#x44F;)'
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: Featured
   newest: Newest programs
@@ -439,9 +440,7 @@ login:
   userOrEmail: '&#x421;&#x43E;&#x445;&#x440;&#x430;&#x43D;&#x435;&#x43D;&#x438;&#x435; &#x432;&#x430;&#x448;&#x435;&#x433;&#x43E; &#x43D;&#x43E;&#x432;&#x43E;&#x433;&#x43E; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44F;, &#x43F;&#x43E;&#x436;&#x430;&#x43B;&#x443;&#x439;&#x441;&#x442;&#x430;, &#x43F;&#x43E;&#x434;&#x43E;&#x436;&#x434;&#x438;&#x442;&#x435;...'
   changePass: '&#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x430;&#x44F; &#x43F;&#x43E;&#x447;&#x442;&#x430;'
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

@@ -18,6 +18,7 @@ privacyPolicy: Politique de confidentialité
 imprint: Mentions légales
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: "A l'affiche"
   newest: Newest programs
@@ -442,9 +443,7 @@ login:
   userOrEmail: "Nom d'utilisateur ou email"
   changePass: Modifier le mot de passe
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

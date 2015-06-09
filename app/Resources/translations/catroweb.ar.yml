@@ -18,6 +18,7 @@ privacyPolicy: سياسة الخصوصية
 imprint: بصمة
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: خصائص
   newest: أحدث برنامج
@@ -439,9 +440,7 @@ login:
   userOrEmail: إسم المستخدم أو البريد الإلكتروني
   changePass: تغيير كلمة السر
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

@@ -18,6 +18,7 @@ privacyPolicy: '&#x4E2A;&#x4EBA;&#x6863;&#x6848;'
 imprint: '&#x641C;&#x7D22;&#x9879;&#x76EE;'
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: '&#x89C6;&#x56FE;'
   newest: Newest programs
@@ -439,9 +440,7 @@ login:
   userOrEmail: Username or Email
   changePass: '&#x6635;&#x79F0;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;'
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

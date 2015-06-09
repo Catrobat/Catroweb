@@ -18,6 +18,7 @@ privacyPolicy: Política de Privacidad
 imprint: Grabado
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: Destacados
   newest: Newest programs
@@ -447,9 +448,7 @@ login:
   userOrEmail: Nombre de Usuario o Email
   changePass: Cambiar la contraseña
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

@@ -9,7 +9,7 @@ passwordsNoMatch: "The passwords didn't match."
 error: Napaka
 cancel: Prekliči
 report: Report
-download: Download
+download: Download as program
 description: Opis
 noDescription: Opisa ni na voljo.
 country: Country
@@ -18,6 +18,7 @@ privacyPolicy: Privacy Policy
 imprint: Imprint
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: Featured
   newest: Newest programs
@@ -439,9 +440,7 @@ login:
   userOrEmail: Uporabniško ime ali elektronski naslov
   changePass: Zamenjaj geslo
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

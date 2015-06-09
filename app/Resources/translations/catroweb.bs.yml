@@ -18,6 +18,7 @@ privacyPolicy: Privacy Policy
 imprint: Imprint
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: Istaknut
   newest: Najnoviji programi
@@ -439,9 +440,7 @@ login:
   userOrEmail: Korisničko ime ili email adresa
   changePass: Promjeni lozinku
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 errors:
   username:
     blank: Username must not be blank

@@ -18,6 +18,7 @@ privacyPolicy: นโยบายความเป็นส่วนตัว
 imprint: ประทับตรา
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
 programs:
   featured: รายการเด่น
   newest: โปรแกรมใหม่ล่าสุด
@@ -445,8 +446,6 @@ login:
   userOrEmail: ชื่อผู้ใช้หรืออีเมล์
   changePass: เปลี่ยนรหัสผ่าน
 apk:
-  generate: สร้าง APK
-  pending: กําลังดำเนินการ
   download: ดาวน์โหลด APK
 errors:
   username:

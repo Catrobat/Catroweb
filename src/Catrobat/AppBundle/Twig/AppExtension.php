@@ -13,7 +13,7 @@ class AppExtension extends \Twig_Extension
     private $supported_languages = array(
         "en",
         "de",
-        "zh_TW"
+    //    "zh_TW"
     );
 
     public function __construct(RequestStack $request_stack)
