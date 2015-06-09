@@ -55,3 +55,9 @@ sonata_user_profile_show:
 fos_user_profile_show:
     pattern: /{flavor}/myprofile
     defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
+
+old_version_error:
+    path: /error/oldversion
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    :Error:oldversion.html.twig

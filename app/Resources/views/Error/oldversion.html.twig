@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="viewport" content="width=device-width">
+  <title>Pocket Code Website {% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}" />
+
+  {% stylesheets 'css/plugins/*'
+  'css/base/*' filter='cssrewrite,lessphp' output='compiled/base.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
+  {% endstylesheets %}
+
+  <style>
+    #error {
+      margin-top: 0px;
+      padding-top: 50px;
+    }
+
+  </style>
+</head>
+<body>
+
+
+
+  <article>
+    <div id="error">
+      <img src="{{ asset('images/symbols/error.png') }}" alt="An Error Occurred" />
+      <p>{{ "oldVersionError"|trans({}, "catroweb") }}</p>
+    </div>
+  </article>
+
+
+</body>
+</html>

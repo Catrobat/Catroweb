@@ -19,6 +19,7 @@ privacyPolicy: Privacy Policy
 imprint: Imprint
 somethingWentWrong: 'Ooooops something went wrong.'
 pleaseTryAgain: 'Please try again!'
+oldVersionError: 'Please update to the newest Pocket Code version!'
 
 programs:
   featured: Featured
