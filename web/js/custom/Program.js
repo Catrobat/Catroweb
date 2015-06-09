@@ -13,7 +13,7 @@ var Program = function(status_url, create_url)
     self.createApk = function()
     {
         $('.btn-apk').hide();
-        $('#apk-pending').show();
+        $('#apk-pending').show().css("display", "inline-block");
         $.get(self.create_url, null, self.onResult);
     };
 
@@ -27,7 +27,7 @@ var Program = function(status_url, create_url)
         }
         else if (data.status == "pending") 
         {
-            $('#apk-pending').show();
+            $('#apk-pending').show().css("display", "inline-block");
             console.log('pending');
             setTimeout(self.getApkStatus, 5000);
         }

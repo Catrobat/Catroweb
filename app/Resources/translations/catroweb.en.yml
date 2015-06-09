@@ -10,7 +10,7 @@ passwordsNoMatch: The passwords didn't match.
 error: Error
 cancel: Cancel
 report: Report
-download: Download
+download: Download as program
 description: Description
 noDescription: No description available.
 country: Country
@@ -452,9 +452,7 @@ login:
   changePass: Change password
 
 apk:
-  generate: Generate APK
-  pending: Pending
-  download: Download APK
+  download: Download as app
 
 #api
 errors:
