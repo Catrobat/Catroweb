@@ -100,7 +100,7 @@ var ProgramLoader = function (container, url, column_max) {
       var program = $(
         '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
           '<div onclick="window.location.href = \''+ program_link + '\'">'+
-            '<div><img src="' + data.CatrobatInformation.BaseUrl + "/" + programs[i].ScreenshotSmall +'"></div>'+
+            '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
             '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
           '</div>'+
