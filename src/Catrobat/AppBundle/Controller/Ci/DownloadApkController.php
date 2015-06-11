@@ -46,6 +46,7 @@ class DownloadApkController extends Controller
                 $program->getId() . '.apk'
             );
             $response->headers->set('Content-Disposition', $d);
+            $response->headers->set('Content-type', 'application/vnd.android.package-archive');
             return $response;
         }
         throw new NotFoundHttpException();
