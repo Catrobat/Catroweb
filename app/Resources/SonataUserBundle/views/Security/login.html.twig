@@ -30,7 +30,20 @@
     {% if error %}
       <div class="error-text">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
     {% endif %}
-    <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login" />
+
+    {% if ("/login" in app.request.headers.get('referer')) %}
+
+      {% if app.session.has("catroweb_login_referer") %}
+        <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer")  }}#login" />
+      {% else %}
+        <input type="hidden" name="_target_path" value="{{ path("index") }}#login" />
+      {% endif %}
+
+    {% else %}
+      <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login" />
+      {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
+    {% endif %}
+
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
 <div class="link center"><a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a></div>
