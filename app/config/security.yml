@@ -45,6 +45,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
+                failure_path: login
             logout:
                 path:   /logout
                 target: index
