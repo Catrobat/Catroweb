@@ -258,7 +258,7 @@ class FeatureContext extends BaseContext
         $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
         $code = $this->getClient()->getResponse()->getStatusCode();
         assertEquals(200, $code);
-        assertEquals("application/zip", $content_type);
+        assertEquals("application/vnd.android.package-archive", $content_type);
     }
 
     /**

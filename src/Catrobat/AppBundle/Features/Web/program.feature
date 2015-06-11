@@ -37,7 +37,7 @@ Feature: As a visitor I want to see a program page
       And I fill in "username" with "Gregor"
       And I fill in "password" with "123456"
       And I press "Login"
-      Then I should be on "/pocketcode/program/1"
+      Then I should be on "/pocketcode/program/1#login"
       When I click "#report"
       Then I should see "Why do you think this program is inappropriate?"
       And I fill in "reportReason" with "I do not like this program ... hehe"

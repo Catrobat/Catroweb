@@ -54,6 +54,15 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Permissions/"
             contexts:
               - Catrobat\AppBundle\Features\Permissions\Context\FeatureContext
+        ci:
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            features:
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/Ci/"
+            contexts:
+              - Catrobat\AppBundle\Features\Ci\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
         web:
             type: symfony_bundle
             bundle: 'AppBundle'
