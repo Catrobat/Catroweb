@@ -19,6 +19,8 @@ imprint: Imprint
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
 oldVersionError: Please update to the newest Pocket Code version!
+more: more
+less: less
 programs:
   featured: દર્શાવેલ
   newest: Newest programs

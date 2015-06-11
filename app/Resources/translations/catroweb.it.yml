@@ -16,9 +16,11 @@ country: Paese
 loginText: login
 privacyPolicy: Informativa sulla privacy
 imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: Ooooops qualcosa è andato storto.
+pleaseTryAgain: Per favore riprova!
+oldVersionError: Si prega di aggiornare alla nuova versione di Pocket Code!
+more: altro
+less: meno
 programs:
   featured: In evidenza
   newest: Programmi più recenti
@@ -28,7 +30,7 @@ programs:
   downloads: '%downloads% download'
   views: '%views% visualizzazioni'
   reportAsInappropriate: Segnala come inappropriato
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'Versione del linguaggio Catrobat: %languageVersion%'
   reportLoginText: 'Effettuare la %login% per segnalare il programma come inappropriato.'
   reportDialogHeader: Perché pensi che questo programma sia inappropriato?
   reportDialogReason: Inserire un motivo
@@ -36,19 +38,19 @@ programs:
   reportAlready: Hai già segnalato questo programma come inappropriato.
   reportDone: Hai segnalato questo programma come inappropriato!
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Recupero della Password Catrobat
   message: |
-    Dear %username%.
+    Gentile %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Hai richiesto di reimpostare la tua password su %appplication_url% perché dimenticata. Se non l'hai richiesto tu, ignora questo messaggio. La richiesta diventerà obsoleta in 24 ore.
+    Se invece la vuoi reimpostare, vai alla seguente pagina: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Puoi usare il tuo nome utente e la password per accedere alla comunità %appplication_url% .
+    Per farlo vai alla seguente pagina: %loginPage%
+    Per modificare il tuo profilo vai alla pagina: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    Cordiali saluti,
+    Il Team di Catrobat.
 profile:
   saveChanges: salva le modifiche
   newPass: nuova password
@@ -131,21 +133,21 @@ help:
     title: 'Skydiving Steve - Steve il paracadutista'
     step0:
       title: 'Skydiving Steve - Steve il paracadutista'
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+      description: 'Nel seguente tutorial passo-passo imparerai a programmare il comportamento di Steve e il suo pacco. Le seguenti immagini mostrano come controllare Steve durante il gioco. Devi muore  Steve sopra il bersaglio e toccare lo sfondo per far cadere il pacco. In bocca al lupo...'
     step1:
-      title: 'Install "Pocket Code"'
+      title: 'Installa "Pocket Code"'
       description: Come installare Pocket Code sul tuo dispositivo.
       image1: 'Premi su "Play Store".'
       image2: 'Cerca "Pocket Code".'
       image3: 'Premi su "Installa".'
     step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
+      title: Scarica il progetto
+      description: 'Come scaricare il programma, consentendoti di personalizzare "Steve il paracadutista" ("Skydiving Steve").'
       image1: 'Premi "Esplora" di "Pocket Code" sul tuo dispositivo.'
       image2: Tocca il banner.
-      image3: 'Download the program "Skydiving Steve".'
+      image3: 'Scarica il programma "Skydiving Steve".'
     step3:
-      title: Open Project
+      title: Apri il progetto
       description: "Diamo un'occhiata all'interno del programma."
       image1: 'Scorri il menu e seleziona "Apri Skydiving Steve".'
       image2: |-
@@ -155,17 +157,17 @@ help:
       title: Aggiungi Variabile
       description: Le variabili x e y permettono di controllare la posizione del paracadute.
       image1: 'Premi su "+".'
-      image2: 'Go to the category "Variables".'
+      image2: 'Vai alla categoria "Variabili".'
       image3: 'Premi su "Imposta variabile".'
       image4: 'Trascina il mattoncino "Imposta variabile" sotto quello "Quando il programma inizia".'
     step5:
-      title: Label variables
+      title: "Modifica l'etichetta delle variabili"
       description: Memorizziamo la posizione x del paracadute.
       image1: Allo stesso modo di prima, aggiungi una seconda variabile.
       image2: 'Premi su "Nuovo...".'
       image3: 'Inserisci "x" e premi su "OK".'
     step6:
-      title: 'Set variable "y"'
+      title: 'Imposta la variabile "y"'
       description: Memorizziamo e impostiamo la posizione iniziale y del paracadute.
       image1: 'Dai il nome "y" alla seconda variabile.'
       image2: 'Seleziona il campo che contiene "0.0".'
@@ -178,7 +180,7 @@ help:
       image3: 'Scegli il mattoncino "Per sempre".'
       image4: 'Trascina il mattoncino "Per sempre" sotto quelli "Imposta variabile".'
     step8:
-      title: Insert and modify bricks
+      title: Inserisci e modifica i mattoncini
       description: |-
         Aggiungi più mattoncini all'interno del ciclo "Per sempre" per controllare il paracadute. Inserendo le variabili x e y nel mattoncino "Posiziona a" possiamo controllare la posizione del paracadute.
       image1: 'Inserisci il mattoncino mostrato sotto quello "Per sempre".'
@@ -186,7 +188,7 @@ help:
       image3: 'Scegli "Variabili" e poi "x".'
       image4: 'Premi su "200" nello stesso mattoncino posto in alto, vai sulla categoria "Variabili" e scegli "y". Poi conferma con "OK".'
     step9:
-      title: Change variables and values
+      title: Modifica le variabili e i valori
       description: "Cambiando il valore della variabile y di -3, si fa scivolare il paracadute a terra. Cambiare il valore della variabile x affinché il paracadute segua l'inclinazione del dispositivo."
       image1:
         subtext1: 'Imposta la dimensione al "20" %.'
@@ -198,22 +200,23 @@ help:
         subtext3: 'Premi su "Sensori" e scegli "inclinazione_x".'
       image3: 'Controlla se la tua formula corrisponde a quella della schermata qui sotto e poi conferma con "OK".'
     step10:
-      title: Loudness sensor
+      title: Sensore di livello sonoro
       description: |-
         Puoi controllare l'altezza del paracadute attraverso il sensore del livello sonoro. Per farlo aggiungere e modificare il mattoncino "Se 1 è vero allora".
       image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
+        subtext1: |-
+          Aggiungi un mattoncino "se 1 è vero allora" -  posizionalo sotto l'ultimo mattoncino "Cambia variabile".
         subtext2: |-
           Premi sul campo con valore "0" all'interno del "Se 1 è vero allora".
       image2:
         subtext1: 'Premi su "Sensori".'
         subtext2: 'Scegli "livello_sonoro".'
         subtext3: 'Premi su "Logica".'
-        subtext4: 'Choose ">".'
+        subtext4: 'Scegli ">".'
         subtext5: 'Inserisci "50".'
       image3: 'Verifica se la formula inserita corrisponde a quella della schermata qui sotto e poi premi su "OK".'
     step11:
-      title: Change some more bricks
+      title: Cambia qualche altro mattoncino
       description: Quando il gioco inizia, la posizione iniziale del paracadute dovrebbe coincidere con la posizione iniziale appena impostata. Per far questo è necessario aggiungere e modificare tre mattoncini come mostrato nella figura seguente.
       image1: 'Aggiungi un mattoncino "Cambia variabile"  e modifica il suo valore come fatto in precedenza.'
       image2:
@@ -224,7 +227,7 @@ help:
       image3: 'Premi sul campo con scritto "messaggio 1" e scegli "Nuovo.."; inserisci "restart".'
       image4: 'Cambia i valori dei due mattoncini "Imposta variabile" come mostrato nella schermata sopra.'
     step12:
-      title: Back to objects
+      title: Torna agli oggetti
       description: |-
         Ora hai completato la gestione dell'oggetto "Paracadute"! RItorna indietro al menu che mostra gli oggetti del progetto, al fine di modificare il prossimo oggetto.
       image1: 'Premi sul pulsante "indietro" del dispositivo.'
@@ -232,7 +235,8 @@ help:
       image3: Ora dovresti vedere questa schermata.
     step13:
       title: 'Oggetto "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
+      description: |-
+        Qui inizi a modificare l'oggetto "target". Aggiungi mattoncini per controllare la posizione e la dimensione del tuo bersaglio.
       image1: 'Scegli "target" e poi "Script".'
       image2: Aggiungi e personalizza i mattoncini come nella schermata.
       image3: Aggiungi altri quattro mattoncini come quelli mostrati.
@@ -290,17 +294,16 @@ help:
       image3: |-
         Vai indietro finché non vedi questa schermata; poi vai sugli script dell'oggetto "Backgroud".
     step20:
-      title: 'Object "Background"'
+      title: 'Oggetto "Sfondo"'
       description: |-
         Completa il programma personalizzando l'oggetto "background". Ora puoi iniziare a giocare. Buon divertimento!
       image1:
         subtext1: 'Aggiungi i mattoncini mostrati e poi imposta "Invia evento" scrivendo "start".'
         subtext2: 'Premi sul pulsante "Play".'
       image2: Buon divertimento con il gioco.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+      image3: 'Hai completato con successo il tutorial "Steve il paracadutista". Ci piacerebbe trovare dei remix interessanti di "Steve il paracadutista" su pocketcode.org -- cambialo come ti piace e caricalo dal tuo account.'
     step21:
-      title: Check your scripts!
+      title: Verifica i tuoi script!
       description: "Fai clic sull'immagine sotto per allargarla. Ricontrolla il codice associato agli oggetti se il gioco non funziona correttamente."
       image1: 'Oggetto "backgroud"'
       image2: 'Oggetto "parachute"'
@@ -311,21 +314,22 @@ help:
     title: Introduzione passo per passo
     start: 'Posizione iniziale:'
     step1:
-      title: Make a new program
+      title: Crea un nuovo programma
       detail:
         text1: 'Premi su "Nuovo".'
         text2: 'Scrivi il nome del programma, seleziona "Crea programma vuoto" e premi "OK".'
     step2:
-      title: Create a new object
+      title: Crea un nuovo oggetto
       detail:
         text1: 'Tocca lo schermo:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
+        text2: "Scegli l'origine del primo aspetto del nuovo oggetto."
+        text3: |-
+          Immetti il nome dell'oggetto e tocca "OK" per crearlo.
         special1: Disegna un nuovo aspetto.
         special2: Scegli dalla galleria.
         special3: Scatta una foto.
     step3:
-      title: Start Moving
+      title: Inizia a muoverlo
       detail:
         text1: 'Tocca lo schermo:'
         text2: |-
@@ -333,13 +337,15 @@ help:
         text3: |-
           Seleziona il mattoncino "Scivola". L'oggetto si sposterà sulla scena nella nuova posizione definita dal mattoncino.
         text4: Il mattoncino ora è sganciato. Per incollarlo, spostarlo alla posizione desiderata. Puoi anche spostare mattoncini già inseriti toccando il mattoncino finché non risulta sganciato.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text5: |-
+          Premi "Play" per mostrare lo stage e vedere l'oggetto che scivola.
         text6: Utilizza il pulsante indietro di Android per chiudere la scena.
     step4:
       title: Modifica aspetto
       description: "Puoi cambiare l'aspetto dell'oggetto."
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text1: |-
+          Scegli il mattoncino "Passa all'aspetto"; con esso puoi scegliere uno degli aspetti esistenti o crearne uno nuovo.
         text2: 'Scegli il mattoncino sotto il mattoncino "Scivola".'
         text3: "Tocca dentro l'elenco a discesa per creare un nuovo aspetto."
         text4: "Scegli, come prima, la sorgente dell'immagine."
@@ -349,47 +355,49 @@ help:
       title: Parla
       description: Ora scoprirai il modo di far parlare un oggetto.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text1: |-
+          Scegli il mattoncino "Parla". L'oggetto pronuncerà il testo, quando viene eseguito questo mattoncino.
         text2: |-
           Metti il mattoncino sotto il mattoncino "Passa all'aspetto".
         text3: Tocca play per vedere in azione le modifiche.
     step6:
-      title: Again and again
+      title: Ancora e ancora
       description: Qui si illustra come far ripetere agli oggetti un certo comportamento.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text1: 'Scegli il mattoncino "Per sempre". Tutto ciò che viene messo dentro il ciclo si ripete per sempre.'
         text2: 'Porta il mattoncino "Per sempre" sotto il mattoncino "Quando il programma inizia".'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text3: 'Aggiungere un altro mattoncino "Scivola".'
+        text4: 'Sposta il mattoncino "Scivola" sopra "Fine del ciclo".'
         text5: Premi sulla casella di testo di x e poi quella di y e scrivi il valore 0.
         text6: Tocca play per vedere in azione le modifiche.
     step7:
-      title: Tapping is everything
+      title: Premere è tutto
       description: "Puoi anche controllare il comportamento dell'oggetto sulla scena quando il programma è in esecuzione."
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text1: |-
+          Scegli il mattoncino "Quando premuto". Ciascun mattoncino messo sotto "Quando premuto" verrà eseguito ogni volta che si tocca l'oggetto sulla scena.
+        text2: 'Posiziona "Quando premuto" sotto gli altri mattoncini.'
+        text3: 'Scegli il mattoncino "Gira a destra" e posizionalo sotto il mattoncino "Quando premuto".'
         text4: Ora lo script è pronto.
         text5: "Tocca play per vedere in azione le modifiche. Se ora premi sull'oggetto, esso si gira."
     step8:
-      title: Copy, delete or edit a brick
+      title: 8. Copiare, eliminare o modificare un mattoncino
       detail:
         text1: "Premendo una sola volta sulla parte sinistra di un qualunque mattoncino si apre un menu contestuale. Da lì puoi muovere, copiare, eliminare o modificare i valori all'interno del mattoncino usando l'editor di formule."
     step9:
-      title: Navigation in the app
+      title: "Navigazione nell'app"
       detail:
         text1: "Usa il pulsante Indietro di Android per navigare nell'app."
         text2: "Vai indietro di una schermata alla pagina iniziale del tuo oggetto. Da qui puoi gestire gli script ma anche gli aspetti e i suoni associati all'oggetto. Da qui puoi rinominare, copiare, aggiugere o eliminare aspetti e suoni."
         text3: Se premi ancora sul pusante indietro di Android vai ad una schermata con tutti gli oggetti e lo sfondo.
     step10:
-      title: Change the background
+      title: Cambiare lo sfondo
       description: Questa è una panoramica di tutti gli oggetti e dello sfondo associati ad un singolo programma.
       detail:
         text1: Lo sfondo è come un qualsiasi oggetto, ma puoi avere solo uno sfondo.
         text2: Anche allo sfondo puoi aggiungere script suoni e aspetti nello stesso modo che faresti con un qualsiasi altro oggetto.
     step11:
-      title: Main Menu
+      title: Menu principale
       description: Usa il pulsante indiero di Android per ottenere questa schermata.
       detail:
         text1: Continua con il programma attualmente aperto.
@@ -403,7 +411,7 @@ help:
     description1: Questi tutorial mostrano come utilizzare in maniera efficace
     description2: Pocket Code.
     getReady: 'Preparati:'
-    tryCode: 'Try this code:'
+    tryCode: 'Prova questo codice:'
     doIt: 'Esegui:'
     tip: 'Ulteriore suggerimento:'
     card1:
@@ -420,7 +428,7 @@ help:
       description: Muovi in maniera fluida da un punto ad un altro.
     card5:
       title: Riproduci suono
-      description: Tap the drum to play this sound.
+      description: Tocca il tamburo per ascoltare il suo suono.
       extra1: '1. fai clic su "+"'
       extra2: '2. Seleziona "Registratore di Pocket Code"'
       extra3: "3. Premi l'icona per registrare il suono"
@@ -444,7 +452,7 @@ help:
       games: Giochi
       animations: Animazioni
       interactive: Arte interattiva e storie
-      music: Music And Dance
+      music: Musica e danza
 search:
   dotdotdot: Cerca...
   search: Cerca
@@ -464,40 +472,40 @@ login:
   userOrEmail: Nome utente o Email
   changePass: Cambia password
 apk:
-  download: Download as app
+  download: Scarica come app
 errors:
   username:
-    blank: Username must not be blank
+    blank: Il nome utente non può essere vuoto
   password:
     blank: Manca la password.
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: 'La tua password deve avere almeno {{ limit }} caratteri.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: La descrizione non deve contenere parolacce.
   country:
     blank: Manca la nazione.
-    invalid: Invalid country
+    invalid: Nazione non valida
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: "L'e-mail non può essere vuota"
+    invalid: La tua e-mail sembra non essere valida
     exists: "L'indirizzo e-mail è già stato usato."
   login: La password o il nome utente sono sbagliati.
   post-data: Dati POST non corretti o mancanti!
   checksum:
     missing: Il client non ha inviato fileChecksum! Stai usando una versione non aggiornata di Pocket Code?
-    invalid: invalid checksum
+    invalid: checksum non valido
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: Codice xml non valido
+    missing: 'errore sconosciuto: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+    unexpected: trovato file inatteso
+    invalid: file non valido
+  image.missing: "Nel file XML del progetto si menziona un file che non c'è nella cartella del progetto"
+  unknown: errore sconosciuto
   token: 'Autenticazione del dispositivo non riuscita: auth-token non valido!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: Il nome del programma non deve contenere parolacce.
   program:
-    invalid: Invalid program.
+    invalid: Programma non valido.
   languageversion:
     tooold: "Spiacenti, il tuo programma contiene una vecchia versione del linguaggio Catrobat! Stai usando l'ultima versione di Pocket Code?"
   programversion:
@@ -506,7 +514,7 @@ success:
   registration: Registrazione effettuata con successo!
   token: ok
   upload: Il progetto è stato caricato con successo!
-  report: Your report was successfully sent!
+  report: La tua segnalazione è stata inviata con successo!
 time:
   minutes.ago: '{0} < 1 minuto fa |{1}1 minuto fa |]1,Inf] %count% minuti fa'
   hours.ago: '{1}1 ora fa |]1,Inf] %count% ore fa'
@@ -559,6 +567,6 @@ language:
   ukrainian: Ucraino
   vietnamese: Vietnamese
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: "Generare  l'Apk"
+  pending: "Generazione dell'Apk"
+  download: Scarica Apk

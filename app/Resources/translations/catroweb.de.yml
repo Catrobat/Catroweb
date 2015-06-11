@@ -19,6 +19,8 @@ imprint: Impressum
 somethingWentWrong: Ooooops etwas ging schief.
 pleaseTryAgain: Bitte versuche es noch einmal!
 oldVersionError: Bitte aktualisiere auf die neueste Version von Pocket-Code!
+more: mehr
+less: weniger
 programs:
   featured: Empfohlen
   newest: Neuesten Programme
@@ -125,7 +127,7 @@ help:
     title: Skydiving Steve
     step0:
       title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+      description: In der folgenden Schritt für Schritt Anleitung erfährst Du, wie Du das Verhalten von Steve und seinem Päckchen programmieren kannst. Die Bilder unten zeigen, wie Du Steve während des Spiels kontrollierst. Du musst Steve über das Ziel navigieren und den Hintergrund antippen um das Packet fallen zu lassen. Viel Glück...
     step1:
       title: 'Installiere "Pocket Code"'
       description: Wie du Pocket Code auf deinem mobilen Gerät installierst.
@@ -276,8 +278,7 @@ help:
         subtext1: 'Füge die oben gezeigten Bausteine hinzu und setze die "Broadcast" Nachricht auf "Start".'
         subtext2: 'Tippe auf die "Spiel" Taste.'
       image2: Genieße dein Spiel.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+      image3: 'Du hast das Tutorial "Skydiving Steve" erfolgreich abgeschlossen. Wir würden uns freuen, wenn wir einige wirklich coole Remixes von "Skydiving Steve" bei share.catrob.at finden könnten ---ändere es wie Du es willst und lade es von Deinem Account neu hoch.'
     step21:
       title: Überprüfe Deine Scipts!
       description: Klicke auf die Bilder unten, um diese zu vergrößern. Überprüfe die Skripte deines Objektes, falls dein Spiel nicht richtig funktioniert.

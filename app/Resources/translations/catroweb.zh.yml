@@ -19,6 +19,8 @@ imprint: '&#x641C;&#x7D22;&#x9879;&#x76EE;'
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
 oldVersionError: Please update to the newest Pocket Code version!
+more: '&#x52A0;&#x8F7D;&#x4E2D;&#x3002;&#x3002;&#x3002;'
+less: '&#x60A8;&#x767B;&#x5F55;&#x4E3A;'
 programs:
   featured: '&#x89C6;&#x56FE;'
   newest: Newest programs

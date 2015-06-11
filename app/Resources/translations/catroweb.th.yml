@@ -16,9 +16,11 @@ country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
 imprint: ประทับตรา
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: Ooooops เกิดข้อผิดพลาดบางอย่าง
+pleaseTryAgain: กรุณาลองอีกครั้ง!
+oldVersionError: กรุณาอัพเดต Pocket Code ให้เป็นเวอร์ชั่นล่าสุด
+more: เพิ่มเติม
+less: ย่อ
 programs:
   featured: รายการเด่น
   newest: โปรแกรมใหม่ล่าสุด
@@ -28,7 +30,7 @@ programs:
   downloads: '{downloads} ดาวน์โหลด'
   views: '%views% มุมมอง'
   reportAsInappropriate: รายงาน ไม่เหมาะสม
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'ภาษา Catrobat รุ่น: %languageVersion%'
   reportLoginText: 'กรุณา %login% เพื่อรายงานโปรแกรมนี้ว่าไม่เหมาะสม'
   reportDialogHeader: ทำไมคุณคิดว่า โปรแกรมนี้ไม่เหมาะสม?
   reportDialogReason: ป้อนเหตุผล
@@ -36,7 +38,7 @@ programs:
   reportAlready: คุณแล้วได้ตั้งค่าสถานะโปรแกรมนี้ว่าไม่เหมาะสมแล้ว
   reportDone: โปรแกรมนี้ไม่เหมาะสม
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: การกู้คืนรหัสผ่าน Catrobat ของคุณ
   message: |
     Dear %username%.
     

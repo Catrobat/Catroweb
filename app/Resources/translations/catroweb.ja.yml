@@ -19,6 +19,8 @@ imprint: インプリント
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
 oldVersionError: Please update to the newest Pocket Code version!
+more: 詳細
+less: 少ない
 programs:
   featured: おすすめ
   newest: Newest programs

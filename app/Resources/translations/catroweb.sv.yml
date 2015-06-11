@@ -19,6 +19,8 @@ imprint: Avtryck
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
 oldVersionError: Please update to the newest Pocket Code version!
+more: mer
+less: mindre
 programs:
   featured: Dagens
   newest: Nyaste program

@@ -19,6 +19,8 @@ imprint: 'Englez&#x103; (Regatul Unit)'
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
 oldVersionError: Please update to the newest Pocket Code version!
+more: 'Catalan&#x103;'
+less: 'Chinez&#x103; (Simplificat&#x103;)'
 programs:
   featured: Recomandate
   newest: Newest programs
