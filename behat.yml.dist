@@ -28,6 +28,8 @@ default:
 
     suites:
         api:
+            filters:
+                tags: ~@disabled
             type: symfony_bundle
             bundle: 'AppBundle'
             features:

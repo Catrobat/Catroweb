@@ -18,6 +18,7 @@ Feature: All uploaded programs have to be validated.
       {"statusCode":508,"answer":"invalid code xml","preHeaderMessages":""}
       """
 
+  @disabled
   Scenario: program with missing images are rejected
     When I upload a program with a missing image
     Then I should get the json object:
@@ -25,6 +26,7 @@ Feature: All uploaded programs have to be validated.
       {"statusCode":524,"answer":"Project XML mentions a file which does not exist in project-folder","preHeaderMessages":""}
       """
 
+  @disabled
   Scenario: program with media files not defined in xml are rejected
     When I upload a program with an additional image
     Then I should get the json object:
