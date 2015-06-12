@@ -37,8 +37,12 @@
       <div class="download-container">
         <a href="{{ program_details.downloadUrl }}">
           <button id="download" class="btn btn-primary download-button">
-            <img src="{{ asset('images/symbols/download.svg') }}" >
-            {{ "download"|trans({}, "catroweb") }}
+            <table style="width: 100%; text-align: center">
+              <tr>
+                <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
+                <td>{{ "download"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
           </button>
         </a>
 
@@ -64,8 +68,12 @@
         </div>
 
         <button id="apk-download" class="btn btn-apk download-button">
-          <img src="{{ asset('images/symbols/apk_download.svg') }}" >
-          {{ "apk.download"|trans({}, "catroweb") }}
+          <table style="width: 100%; text-align: center">
+            <tr>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+              <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
         </button>
       </div>
       <br>

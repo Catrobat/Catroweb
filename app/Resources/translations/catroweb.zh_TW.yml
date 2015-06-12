@@ -443,6 +443,9 @@ login:
   changePass: '&#x6635;&#x7A31;&#x6216;&#x96FB;&#x90F5;'
 apk:
   download: Download as app
+  prepare: Prepare app
+  preparing: Preparing app
+  text: The process may take a while
 errors:
   username:
     blank: Username must not be blank

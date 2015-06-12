@@ -443,6 +443,9 @@ login:
   changePass: પાસવર્ડ બદલો
 apk:
   download: Download as app
+  prepare: Prepare app
+  preparing: Preparing app
+  text: The process may take a while
 errors:
   username:
     blank: Username must not be blank

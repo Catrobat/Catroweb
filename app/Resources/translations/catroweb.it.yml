@@ -473,6 +473,9 @@ login:
   changePass: Cambia password
 apk:
   download: Scarica come app
+  prepare: Prepare app
+  preparing: Preparing app
+  text: The process may take a while
 errors:
   username:
     blank: Il nome utente non può essere vuoto

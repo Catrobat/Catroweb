@@ -449,6 +449,9 @@ login:
   changePass: เปลี่ยนรหัสผ่าน
 apk:
   download: ดาวน์โหลด APK
+  prepare: Prepare app
+  preparing: Preparing app
+  text: The process may take a while
 errors:
   username:
     blank: ชื่อผู้ใช้ต้องไม่ว่างเปล่า

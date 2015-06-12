@@ -442,6 +442,9 @@ login:
   changePass: Passwort ändern
 apk:
   download: Als app herunterladen
+  prepare: App erstellen
+  preparing: App wird vorbereitet
+  text: The process may take a while
 errors:
   username:
     blank: Benutzername darf nicht leer sein
