@@ -28,7 +28,7 @@
 
       <div id="description">
         {% if program.description %}
-          {{ program.description }}
+          {{ program.description|nl2br }}
         {% else %}
           {{ "noDescription"|trans({}, "catroweb") }}
         {% endif %}

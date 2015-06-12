@@ -141,7 +141,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program = new Program();
                     $program->setId($id);
                     $program->setName($data[1]);
-                    $program->setDescription($data[2]);
+                    $description = $data[2];
+                    $description = str_replace("<br />\\n","\n", $description);
+                    $program->setDescription($description);
                     $program->setUploadedAt(new \DateTime($data[4], new \DateTimeZone('UTC')));
                     $program->setUploadIp($data[5]);
                     $program->setDownloads($data[6]);
