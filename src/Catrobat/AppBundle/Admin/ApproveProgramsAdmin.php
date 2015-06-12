@@ -24,9 +24,11 @@ class ApproveProgramsAdmin extends Admin
     {
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->eq($query->getRootAlias() . '.approved', ':approved_filter')
+            $query->expr()->eq($query->getRootAlias() . '.approved', $query->expr()->literal(false))
         );
-        $query->setParameter('approved_filter', 'true');
+        $query->andWhere(
+            $query->expr()->eq($query->getRootAlias() . '.visible', $query->expr()->literal(true))
+        );
         return $query;
     }
 
@@ -95,6 +97,7 @@ class ApproveProgramsAdmin extends Admin
             ->add('user')
             ->add('name')
             ->add('description')
+            ->add('visible', 'boolean', array('editable' => true))
             ->add('approved', 'boolean', array('editable' => true))
             ->add('_action', 'actions', array('actions' => array('show' => array())))
         ;
