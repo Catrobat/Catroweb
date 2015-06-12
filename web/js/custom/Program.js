@@ -89,7 +89,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
             'border': '3px solid #17A5B8',
             'border-radius': '10px',
             'padding': '20px 5px 20px 5px',
-            'margin': '-160px 0 0 -210px',
+            'margin': '-125px 0 0 -160px',
             'text-align': 'center',
             'font-size': '15px'
         });
