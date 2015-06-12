@@ -444,7 +444,7 @@ apk:
   download: Als app herunterladen
   prepare: App erstellen
   preparing: App wird vorbereitet
-  text: The process may take a while
+  text: Der Vorgang kann eine Weile dauern
 errors:
   username:
     blank: Benutzername darf nicht leer sein

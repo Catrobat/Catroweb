@@ -40,6 +40,11 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
             $('#apk-generate').show();
             $('#apk-generate').click(self.createApk);
         }
+
+        if ($('#bg-dark, #popup-info').length > 0 && data.status == 'ready')
+        {
+            $('#bg-dark, #popup-info').remove();
+        }
     };
 
     self.createLinks = function()
@@ -67,7 +72,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     };
 
     self.showPopup = function() {
-        var popup_div = $('<div></div>');
+        var popup_div = $('<div id="popup-info"></div>');
         var dark_background = $('<div id="bg-dark"></div>');
         dark_background.css({
             'position': 'fixed',
@@ -107,7 +112,6 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         $('#bg-dark, #ok-button').click(function() {
             popup_div.remove();
             dark_background.remove();
-            ok_button.remove();
         });
     };
     
