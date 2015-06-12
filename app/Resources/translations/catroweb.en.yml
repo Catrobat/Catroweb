@@ -456,6 +456,9 @@ login:
 
 apk:
   download: Download as app
+  prepare: 'Prepare app'
+  preparing: 'Preparing app'
+  text: 'The process may take a while'
 
 #api
 errors:

@@ -25,6 +25,7 @@
     </div>
     <div id="info">
       <h2>{{ "description"|trans({}, "catroweb") }}</h2>
+
       <div id="description">
         {% if program.description %}
           {{ program.description }}
@@ -32,17 +33,40 @@
           {{ "noDescription"|trans({}, "catroweb") }}
         {% endif %}
       </div>
+
       <div class="download-container">
-      <a href="{{ program_details.downloadUrl }}">
-        <button id="download" class="btn btn-primary download-button"><img src="{{ asset('images/symbols/download.svg') }}" > {{ "download"|trans({}, "catroweb") }} </button>
-      </a>
-      <button id="apk-generate" class="btn btn-apk download-button"><img src="{{ asset('images/symbols/apk_download.svg') }}" > {{ "apk.download"|trans({}, "catroweb") }}</button>
+        <a href="{{ program_details.downloadUrl }}">
+          <button id="download" class="btn btn-primary download-button">
+            <img src="{{ asset('images/symbols/download.svg') }}" >
+            {{ "download"|trans({}, "catroweb") }}
+          </button>
+        </a>
+
+        <button id="apk-generate" class="btn btn-apk download-button">
+          <table style="width: 100%; text-align: center">
+            <tr>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+              <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
+
         <div id="apk-pending" class="btn-apk pending-container">
           <button  class="btn download-button download-pending">
-            <img src="{{ asset('images/symbols/apk_download.svg') }}" >{{ "apk.download"|trans({}, "catroweb") }}</button>
+            <table style="width: 100%; text-align: center">
+              <tr>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+                <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
           <img class="pending-icon" src="{{ asset('images/symbols/loading.gif') }}" >
         </div>
-      <button id="apk-download" class="btn btn-apk download-button"><img src="{{ asset('images/symbols/apk_download.svg') }}" > {{ "apk.download"|trans({}, "catroweb") }}</button>
+
+        <button id="apk-download" class="btn btn-apk download-button">
+          <img src="{{ asset('images/symbols/apk_download.svg') }}" >
+          {{ "apk.download"|trans({}, "catroweb") }}
+        </button>
       </div>
       <br>
       <p>
@@ -107,7 +131,7 @@
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
   <script>
-    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}');
+    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}', '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}', '{{ asset('images/symbols/loading.gif') }}');
     program.getApkStatus();
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');

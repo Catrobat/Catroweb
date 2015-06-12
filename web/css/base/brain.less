@@ -208,6 +208,10 @@ button, .button {
   text-shadow: #333 1px 1px 1px;
   text-align: center;
   text-transform: uppercase;
+
+  img {
+    margin-right: 6px;
+  }
 }
 
 form {
@@ -342,6 +346,62 @@ form {
 
   p {
     font-size: @default-font-size + 20;
+  }
+}
+
+.blink {
+  opacity: 0;
+  -webkit-animation: dot 0.7s infinite;
+  -webkit-animation-delay: 0s;
+  animation: dot 0.7s infinite;
+  animation-delay: 0s;
+}
+
+.blink-one {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.1s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.1s;
+}
+
+.blink-two {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.2s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.2s;
+}
+
+.blink-three {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.3s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.3s;
+}
+
+@-webkit-keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
