@@ -40,8 +40,12 @@
       {% endif %}
 
     {% else %}
+      {% if (app.request.headers.get('referer') is not empty) %}
       <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login" />
       {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
+      {% else %}
+        <input type="hidden" name="_target_path" value="index" />
+      {% endif %}
     {% endif %}
 
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
