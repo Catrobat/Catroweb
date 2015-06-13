@@ -145,14 +145,17 @@ class DefaultController extends Controller
   public function profileAction(Request $request, $id)
   {
     $twig = '::profile.html.twig';
-
+    $program_count = 0;
 
     if($id == 0) {
       $user = $this->getUser();
       $twig = '::myprofile.html.twig';
     }
-    else
+    else {
       $user = $this->get("usermanager")->find($id);
+      $program_count = count($this->get("programmanager")->getUserPrograms($id));
+    }
+
 
     if (!$user)
       return $this->redirectToRoute('fos_user_security_login');
@@ -162,6 +165,7 @@ class DefaultController extends Controller
 
     return $this->get("templating")->renderResponse($twig, array(
       "profile" => $user,
+      "program_count" => $program_count,
       "minPassLength" => self::MIN_PASSWORD_LENGTH,
       "maxPassLength" => self::MAX_PASSWORD_LENGTH,
       "country" => $country
