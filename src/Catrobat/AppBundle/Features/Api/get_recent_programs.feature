@@ -89,4 +89,29 @@ Feature: Get the most recent programs
       | Name      |
       | program 2 |
       | program 3 |
-      
+
+  Scenario: show recent programs after uploading a new program
+    Given I am "Catrobat"
+    And I have a program with "WebTeam" as name
+    When i upload this program
+    And I get the most recent programs
+    Then I should get programs in the following order:
+      | Name      |
+      | WebTeam   |
+      | program 2 |
+      | program 1 |
+      | program 3 |
+
+  Scenario: show recent programs after updating an existing program
+    Given I am "Catrobat"
+    And I upload the program with "WebTeam" as name
+    And I upload the program with "WebTeamV2" as name
+    And I upload the program with "WebTeam" as name again
+    When I get the most recent programs
+    Then I should get programs in the following order:
+      | Name      |
+      | WebTeam   |
+      | WebTeamV2 |
+      | program 2 |
+      | program 1 |
+      | program 3 |

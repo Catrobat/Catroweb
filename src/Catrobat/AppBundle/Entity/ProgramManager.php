@@ -81,6 +81,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage("en");
+    $program->setUploadedAt(new \DateTime());
     
     $this->event_dispatcher->dispatch("catrobat.program.before.persist", new ProgramBeforePersistEvent($extracted_file, $program));
     

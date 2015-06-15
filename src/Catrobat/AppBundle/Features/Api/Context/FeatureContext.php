@@ -718,4 +718,22 @@ class FeatureContext extends BaseContext
     {
         $this->getClient()->request('GET', "/pocketcode/api/projects/recent.json", array("limit" => $limit, "offset" => $offset));
     }
+
+    /**
+     * @Given /^I upload the program with "([^"]*)" as name$/
+     */
+    public function iUploadTheProgramWithAsName($name)
+    {
+      $this->generateProgramFileWith(array('name' => $name));
+      $this->upload(sys_get_temp_dir() . "/program_generated.catrobat", null);
+    }
+
+    /**
+     * @When /^I upload the program with "([^"]*)" as name again$/
+     */
+    public function iUploadTheProgramWithAsNameAgain($name)
+    {
+      $this->iUploadTheProgramWithAsName($name);
+    }
+
 }
