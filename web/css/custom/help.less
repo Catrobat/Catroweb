@@ -1,5 +1,10 @@
 @import '../base/default';
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 #help-container {
   margin: 0 auto;
   text-align: center;
@@ -426,13 +431,28 @@
 }
 
 #game-jam {
-  .description {
+  .title {
+    margin-top: 20px;
+  }
+
+  .text {
     width: auto;
     padding: 10px 20px;
+
+    .circle:before {
+      content: '\25CF';
+      margin-right: 5px;
+      float:left;
+    }
+
+    div {
+      overflow: auto;
+    }
   }
 
   img {
     height: 380px;
     width: auto;
+    margin: 10px;
   }
 }

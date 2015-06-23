@@ -10,49 +10,122 @@
 {% block body %}
   <h1>{{ ("help.gameJam.title")|trans({}, "catroweb") }}</h1>
   <br>
-  <div class="size-large">
-    First congratulations on your game! Now you can upload it on pocketcode.org in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.
-  </div>
+  <div class="size-large">{{ "help.gameJam.text0"|trans({'%link%': 'share.catrob.at/pocketcode'}, "catroweb")|raw }}</div>
 
   <div id="game-jam" class="content-container wizard">
 
-    <div class="title size-xxlarge">1. Registration</div>
-    <div class="description size-large">
-      First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    </div>
+    <div class="title size-xxlarge">1. {{ ("help.gameJam.title1")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text1")|trans({}, "catroweb") }}</div>
+
     <div class="image-container center">
       <div class="image-detail">
-        <img src="{{ asset('images/help/game_jam/01.png') }}" data-img-id="1" data-img-index="1" data-img-type="3" alt="" title=""/>
+        <img src="{{ asset('images/help/game_jam/thumbs/1.png') }}" data-img-id="1" data-img-index="1" data-img-type="3" alt="" title="">
       </div>
     </div>
 
-    <div class="title size-xxlarge">2. Upload</div>
-    <div class="description size-large">
-      After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the title.
-    </div>
+    <div class="title size-xxlarge">2. {{ ("help.gameJam.title2")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text2")|trans({}, "catroweb") }}</div>
     <div class="image-container center">
       <div class="image-detail">
-        <img src="{{ asset('images/help/game_jam/02.png') }}" data-img-id="1" data-img-index="2" data-img-type="3" alt="" title=""/>
+        <img src="{{ asset('images/help/game_jam/thumbs/2.png') }}" data-img-id="1" data-img-index="2" data-img-type="3" alt="" title="">
       </div>
     </div>
 
-    {#<div class="title size-xxlarge">3.</div>#}
-{##}
-    {#<div class="title size-xxlarge">4.</div>#}
-{##}
-    {#<div class="title size-xxlarge">5.</div>#}
-{##}
-    {#<div class="title size-xxlarge">6.</div>#}
-{##}
-    {#<div class="title size-xxlarge">7.</div>#}
-{##}
-    {#<div class="title size-xxlarge">8.</div>#}
-{##}
-    {#<div class="title size-xxlarge">9.</div>#}
-{##}
-    {#<div class="title size-xxlarge"></div>#}
+    <div class="title size-xxlarge">3. {{ ("help.gameJam.title3")|trans({}, "catroweb") }}</div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/3.png') }}" data-img-id="1" data-img-index="3" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/4.png') }}" data-img-id="1" data-img-index="4" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+
+    <div class="title size-xxlarge">4. {{ ("help.gameJam.title4")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text4")|trans({}, "catroweb") }}</div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/5.png') }}" data-img-id="1" data-img-index="5" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/6.png') }}" data-img-id="1" data-img-index="6" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+
+    <div class="title size-xxlarge">5. {{ ("help.gameJam.title5")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text5")|trans({'%link%': '<a href="http://www.google.com/url?q=http%3A%2F%2Fjams.gamejolt.io%2Falicejam150&sa=D&sntz=1&usg=AFQjCNEb6fMa6fqvvUVn4OcFN_859j3YBw" target="_blank">Alice Jam 150</a>'}, "catroweb")|raw }}</div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/7.png') }}" data-img-id="1" data-img-index="7" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/8.png') }}" data-img-id="1" data-img-index="8" data-img-type="3" alt="" title="">
+        <br>
+        <img src="{{ asset('images/help/game_jam/thumbs/9.png') }}" data-img-id="1" data-img-index="9" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/10.png') }}" data-img-id="1" data-img-index="10" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+    <div class="text size-large">
+      {{ ("help.gameJam.text5_1")|trans({'%link%': '<a href="www.gamejolt.com" target="_blank">www.gamejolt.com</a>'}, "catroweb")|raw }}<br>
+      {{ ("help.gameJam.text5_2")|trans({}, "catroweb") }}
+    </div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/11.png') }}" data-img-id="1" data-img-index="11" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/12.png') }}" data-img-id="1" data-img-index="12" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+
+    <div class="title size-xxlarge">6. {{ ("help.gameJam.title6")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">
+      {{ ("help.gameJam.text6")|trans({}, "catroweb") }}<br>
+      {{ ("help.gameJam.text6_1")|trans({}, "catroweb") }}
+    </div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/13.png') }}" data-img-id="1" data-img-index="13" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/14.png') }}" data-img-id="1" data-img-index="14" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+    <div class="text size-large">{{ ("help.gameJam.text6_2")|trans({}, "catroweb") }}</div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/15.png') }}" data-img-id="1" data-img-index="15" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+    <div class="text size-large">
+      {{ ("help.gameJam.text6_3")|trans({}, "catroweb") }}<br>
+      {{ ("help.gameJam.text6_4")|trans({}, "catroweb") }}
+    </div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/16.png') }}" data-img-id="1" data-img-index="16" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+    <div class="text size-large">
+      {{ ("help.gameJam.text6_5")|trans({}, "catroweb") }}<br>
+      {{ ("help.gameJam.text6_6")|trans({}, "catroweb") }}
+    </div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/17.png') }}" data-img-id="1" data-img-index="17" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/18.png') }}" data-img-id="1" data-img-index="18" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/19.png') }}" data-img-id="1" data-img-index="19" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+    <div class="text size-large">
+      {{ ("help.gameJam.text6_7")|trans({}, "catroweb") }}<br>
+      <span class="circle"></span><div>{{ ("help.gameJam.text6_7_1")|trans({}, "catroweb") }}</div>
+      <span class="circle"></span><div>{{ ("help.gameJam.text6_7_2")|trans({}, "catroweb") }}</div>
+      <span class="circle"></span><div>{{ ("help.gameJam.text6_7_3")|trans({}, "catroweb") }}</div>
+    </div>
+    <div class="image-container center">
+      <div class="image-detail">
+        <img src="{{ asset('images/help/game_jam/thumbs/20.png') }}" data-img-id="1" data-img-index="20" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/21.png') }}" data-img-id="1" data-img-index="21" data-img-type="3" alt="" title="">
+        <img src="{{ asset('images/help/game_jam/thumbs/22.png') }}" data-img-id="1" data-img-index="22" data-img-type="3" alt="" title="">
+      </div>
+    </div>
+    <div class="text size-large">
+      {{ ("help.gameJam.text6_8")|trans({}, "catroweb") }}
+    </div>
 
   </div>
+
   <div id="image-overlay"></div>
   <div id="image-popup">
     <div id="outer-container">
