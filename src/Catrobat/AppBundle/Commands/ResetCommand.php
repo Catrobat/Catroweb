@@ -106,7 +106,7 @@ class ResetCommand extends ContainerAwareCommand
   
   private function downloadPrograms($dir, OutputInterface $output)
   {
-    $server_json = json_decode(file_get_contents("https://pocketcode.org/api/projects/recent.json"), true);
+    $server_json = json_decode(file_get_contents("https://share.catrob.at/pocketcode/api/projects/recent.json"), true);
     $base_url = $server_json['CatrobatInformation']['BaseUrl'];
     foreach ($server_json['CatrobatProjects'] as $program)
     {
