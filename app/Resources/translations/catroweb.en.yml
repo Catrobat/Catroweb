@@ -431,6 +431,8 @@ help:
         animations: "Animations"
         interactive: "Interactive Art and Stories"
         music: "Music And Dance"
+  gameJam:
+      title: "How to upload a Pocket Code game to the Game Jolt Site?"
 
 search:
   dotdotdot: Search...

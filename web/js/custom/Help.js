@@ -8,14 +8,14 @@ var Help = function () {
 
     var large_popups = [21];
 
-    $(overlay).click(function() {
-      $( overlay ).fadeToggle( 300);
-      $( popup ).fadeToggle( 300);
+    overlay.click(function() {
+      overlay.fadeToggle( 300);
+      popup.fadeToggle( 300);
     });
 
-    $(popup).click(function() {
-      $( overlay ).fadeToggle( 300);
-      $( popup ).fadeToggle( 300);
+    popup.click(function() {
+      overlay.fadeToggle( 300);
+      popup.fadeToggle( 300);
     });
 
     $('.image-detail').find('img').click(function () {
@@ -25,9 +25,12 @@ var Help = function () {
 
 //      type: 1....hourOfCode
 //            2....stepByStep
+//            3....game jam
       if (id > 0) {
         if(type == 1)
           $(container).html('<img src="' + path + id + '_' + index + '.jpg" alt="" title="" />');
+        else if(type == 3)
+          $(container).html('<img src="' + path + '0' + index + '.png" alt="" title="" />');
         else {
           if(index)
             $(container).html('<img src="' + path + id + '_' + 'right' + '_' + index + '.png" alt="" title="" />');
@@ -44,7 +47,8 @@ var Help = function () {
 
         overlay.fadeIn(300);
         popup.fadeIn(300);
-        window.scrollTo(0, 0);
+        if(type != 3)
+          window.scrollTo(0, 0); // why scroll to top?
 
         overlay.width($(document).width() - 1);
         overlay.height($(document).height());

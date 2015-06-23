@@ -18,7 +18,7 @@ class TutorialController extends Controller
    */
   public function helpAction()
   {
-    return $this->get("templating")->renderResponse(':help:help.html.twig');
+    return $this->get("templating")->renderResponse(":help:help.html.twig");
   }
 
   /**
@@ -30,7 +30,7 @@ class TutorialController extends Controller
   {
     $max_page = 21;
 
-    $paginator = $this->get('knp_paginator');
+    $paginator = $this->get("knp_paginator");
     $images = array();
 
     for ($i = 0; $i < $max_page; $i++) {
@@ -43,10 +43,10 @@ class TutorialController extends Controller
       1/*limit per page*/
     );
 
-    $pagination->setTemplate(':help:paginationStart0.html.twig');
+    $pagination->setTemplate(":help:paginationStart0.html.twig");
 
     if($page > $max_page) {
-      throw $this->createNotFoundException('Unable to find step.');
+      throw $this->createNotFoundException("Unable to find step.");
     }
 
     $containers = 3;
@@ -61,7 +61,12 @@ class TutorialController extends Controller
       $class = "col-5";
     }
 
-    return $this->get("templating")->renderResponse(':help:hourOfCode.html.twig', array("page" => $page, "containers" => $containers, "class" => $class, 'pagination' => $pagination));
+    return $this->get("templating")->renderResponse(":help:hourOfCode.html.twig", array(
+      "page" => $page,
+      "containers" => $containers,
+      "class" => $class,
+      "pagination" => $pagination
+    ));
   }
 
   /**
@@ -74,10 +79,10 @@ class TutorialController extends Controller
     $max_page = 11;
 
     if($page > $max_page) {
-      throw $this->createNotFoundException('Unable to find step.');
+      throw $this->createNotFoundException("Unable to find step.");
     }
 
-    $paginator = $this->get('knp_paginator');
+    $paginator = $this->get("knp_paginator");
     $steps = array();
 
     for ($i = 1; $i <= $max_page; $i++) {
@@ -90,9 +95,12 @@ class TutorialController extends Controller
       1/*limit per page*/
     );
 
-    $pagination->setTemplate(':help:paginationStart1.html.twig');
+    $pagination->setTemplate(":help:paginationStart1.html.twig");
 
-    return $this->get("templating")->renderResponse(':help:stepByStep.html.twig', array("page" => $page, 'pagination' => $pagination));
+    return $this->get("templating")->renderResponse(":help:stepByStep.html.twig", array(
+      "page" => $page,
+      "pagination" => $pagination
+    ));
   }
 
   /**
@@ -104,11 +112,11 @@ class TutorialController extends Controller
     $max_page = 9;
 
     if($page > $max_page) {
-      throw $this->createNotFoundException('Unable to find tutorialcard.');
+      throw $this->createNotFoundException("Unable to find tutorialcard.");
     }
 
     if($page == -1) {
-      return $this->get("templating")->renderResponse(':help:tutorialcards.html.twig', array("count" => $max_page));
+      return $this->get("templating")->renderResponse(":help:tutorialcards.html.twig", array("count" => $max_page));
     }
 
     else {
@@ -120,18 +128,21 @@ class TutorialController extends Controller
       );
 
       if($page == 2 || $page == 3 || $page == 5) {
-        $count['get_ready'] = 2;
+        $count["get_ready"] = 2;
       }
 
       if($page == 5) {
-        $count['extra_tip'] = 3;
+        $count["extra_tip"] = 3;
       }
 
       if($page == 7) {
-        $count['extra_tip'] = 1;
+        $count["extra_tip"] = 1;
       }
 
-      return $this->get("templating")->renderResponse(':help:tutorialcard.html.twig', array("page" => $page, "count" => $count));
+      return $this->get("templating")->renderResponse(":help:tutorialcard.html.twig", array(
+        "page" => $page,
+        "count" => $count
+      ));
     }
   }
 
@@ -146,18 +157,20 @@ class TutorialController extends Controller
      */
     $em = $this->getDoctrine()->getManager();
 
-    $categories = $em->getRepository('AppBundle:StarterCategory')->findBy(array(), array('order' => 'asc'));
+    $categories = $em->getRepository("AppBundle:StarterCategory")->findBy(array(), array("order" => "asc"));
 
     $categories_twig = array();
 
     foreach ($categories as $category) {
       $categories_twig[] = array(
-        'id' => $category->getId(),
-        'alias' => $category->getAlias()
+        "id" => $category->getId(),
+        "alias" => $category->getAlias()
       );
     }
 
-    return $this->get("templating")->renderResponse(':help:starterPrograms.html.twig', array('categories' => $categories_twig));
+    return $this->get("templating")->renderResponse(":help:starterPrograms.html.twig", array(
+      "categories" => $categories_twig
+    ));
   }
 
   /**
@@ -170,30 +183,43 @@ class TutorialController extends Controller
      * @var $program \Catrobat\AppBundle\Entity\Program
      */
     $em = $this->getDoctrine()->getManager();
-    $programs = $em->getRepository('AppBundle:Program')->findBy(array('category' => $id));
+    $programs = $em->getRepository("AppBundle:Program")->findBy(array("category" => $id));
 
     $screenshot_repository = $this->get("screenshotrepository");
 
     $retArray = array (
-      'CatrobatProjects' => array()
+      "CatrobatProjects" => array()
     );
 
     foreach($programs as $program) {
-      $retArray['CatrobatProjects'][] = array(
-        'ProjectId' => $program->getId(),
-        'ProjectName' => $program->getName(),
-        'Downloads' => $program->getDownloads(),
-        'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
-        'ProjectUrl' => ltrim($this->generateUrl('program', array('flavor' => $request->attributes->get("flavor"), 'id' => $program->getId())),"/")
+      $retArray["CatrobatProjects"][] = array(
+        "ProjectId" => $program->getId(),
+        "ProjectName" => $program->getName(),
+        "Downloads" => $program->getDownloads(),
+        "ScreenshotSmall" => $screenshot_repository->getThumbnailWebPath($program->getId()),
+        "ProjectUrl" => ltrim($this->generateUrl("program", array(
+          "flavor" => $request->attributes->get("flavor"),
+          "id" => $program->getId()
+        )),"/")
       );
     }
 
-    $retArray['CatrobatInformation'] = array (
-      "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . '/',
+    $retArray["CatrobatInformation"] = array (
+      "BaseUrl" => ($request->isSecure() ? "https://" : "http://"). $request->getHttpHost() . "/",
       "TotalProjects" => count($programs),
       "ProjectsExtension" => ".catrobat"
     );
 
     return JsonResponse::create($retArray);
   }
+
+  /**
+   * @Route("/pocket-game-jam", name="catrobat_web_game_jam")
+   * @Method({"GET"})
+   */
+  public function gameJamAction()
+  {
+    return $this->get("templating")->renderResponse(":help:gamejam.html.twig");
+  }
+
 }
