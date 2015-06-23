@@ -287,7 +287,7 @@ help:
         subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
         subtext2: 'Tap the "Play" - button.'
       image2: 'Enjoy your game.'
-      image3: You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+      image3: You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
     step21:
       title: 'Check your scripts!'
       description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
