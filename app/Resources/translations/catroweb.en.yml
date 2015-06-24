@@ -438,7 +438,8 @@ help:
       text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
       title2: "Upload"
       text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the title."
-      title3: "Go to your Pocket Code profile or search directly for your program."
+      title3: "Search for your program"
+      text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
       title4: "Create Android app"
       text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
       title5: "Download app"
@@ -447,7 +448,7 @@ help:
       text5_2: "When registering make sure you tick ‘Yes’ I’m a developer in order to upload your own games later."
       title6: "Upload your game on the Game Jolt Site"
       text6: "After the registration process you can add your own game."
-      text6_1: "First you have to click on ‘Accept rules’. Then fill out the game information. Include #AliceJam150 in the description so it appears on the Alice Jam 150 page."
+      text6_1: "First you have to click on ‘Accept rules’. Then fill out the game information. Include #AliceJam150 in the description so it appears on the %link% page."
       text6_2: "After filling out the form you can click on ‘Distribution/Files’ in order to upload the apk."
       text6_3: "You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
       text6_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
@@ -457,7 +458,7 @@ help:
       text6_7_1: "Upload a thumbnail for your game (Info: The Game Jolt site requires the thumbnail image to be 16:9 ratio and a minimum size of 588 x 331 pixels)"
       text6_7_2: "Set your game’s ‘Maturity rating’."
       text6_7_3: "Unhide your game."
-      text6_8: "Other people will now be able to find your game and it will appear on the Alice Jam 150 page."
+      text6_8: "Other people will now be able to find your game and it will appear on the %link% page."
 
 search:
   dotdotdot: Search...

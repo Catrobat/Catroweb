@@ -15,7 +15,7 @@
   <div id="game-jam" class="content-container wizard">
 
     <div class="title size-xxlarge">1. {{ ("help.gameJam.title1")|trans({}, "catroweb") }}</div>
-    <div class="text size-large">{{ ("help.gameJam.text1")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text1")|trans({'‘Login or Register’': '<span class="clickable">‘Login or Register’</span>'}, "catroweb")|raw }}</div>
 
     <div class="image-container center">
       <div class="image-detail">
@@ -32,6 +32,7 @@
     </div>
 
     <div class="title size-xxlarge">3. {{ ("help.gameJam.title3")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text3")|trans({}, "catroweb") }}</div>
     <div class="image-container center">
       <div class="image-detail">
         <img src="{{ asset('images/help/game_jam/thumbs/3.png') }}" data-img-id="1" data-img-index="3" data-img-type="3" alt="" title="">
@@ -40,7 +41,7 @@
     </div>
 
     <div class="title size-xxlarge">4. {{ ("help.gameJam.title4")|trans({}, "catroweb") }}</div>
-    <div class="text size-large">{{ ("help.gameJam.text4")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text4")|trans({'‘Prepare app’': '<span class="clickable">‘Prepare app’</span>'}, "catroweb")|raw }}</div>
     <div class="image-container center">
       <div class="image-detail">
         <img src="{{ asset('images/help/game_jam/thumbs/5.png') }}" data-img-id="1" data-img-index="5" data-img-type="3" alt="" title="">
@@ -49,7 +50,7 @@
     </div>
 
     <div class="title size-xxlarge">5. {{ ("help.gameJam.title5")|trans({}, "catroweb") }}</div>
-    <div class="text size-large">{{ ("help.gameJam.text5")|trans({'%link%': '<a href="http://www.google.com/url?q=http%3A%2F%2Fjams.gamejolt.io%2Falicejam150&sa=D&sntz=1&usg=AFQjCNEb6fMa6fqvvUVn4OcFN_859j3YBw" target="_blank">Alice Jam 150</a>'}, "catroweb")|raw }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text5")|trans({'%link%': '<a href="http://jams.gamejolt.io/alicejam150" target="_blank">Alice Jam 150</a>'}, "catroweb")|raw }}</div>
     <div class="image-container center">
       <div class="image-detail">
         <img src="{{ asset('images/help/game_jam/thumbs/7.png') }}" data-img-id="1" data-img-index="7" data-img-type="3" alt="" title="">
@@ -60,8 +61,11 @@
       </div>
     </div>
     <div class="text size-large">
-      {{ ("help.gameJam.text5_1")|trans({'%link%': '<a href="www.gamejolt.com" target="_blank">www.gamejolt.com</a>'}, "catroweb")|raw }}<br>
-      {{ ("help.gameJam.text5_2")|trans({}, "catroweb") }}
+      {{ ("help.gameJam.text5_1")|trans({
+        '%link%': '<a href="http://gamejolt.com/" target="_blank">www.gamejolt.com</a>',
+        '‘Developers’': '<span class="clickable">‘Developers’</span>',}, "catroweb")|raw }}
+      <br>
+      {{ ("help.gameJam.text5_2")|trans({'‘Yes’': '<span class="clickable">‘Yes’</span>'}, "catroweb")|raw }}
     </div>
     <div class="image-container center">
       <div class="image-detail">
@@ -73,7 +77,9 @@
     <div class="title size-xxlarge">6. {{ ("help.gameJam.title6")|trans({}, "catroweb") }}</div>
     <div class="text size-large">
       {{ ("help.gameJam.text6")|trans({}, "catroweb") }}<br>
-      {{ ("help.gameJam.text6_1")|trans({}, "catroweb") }}
+      {{ ("help.gameJam.text6_1")|trans({
+        '%link%': '<a href="http://jams.gamejolt.io/alicejam150" target="_blank">Alice Jam 150</a>',
+        '‘Accept rules’': '<span class="clickable">‘Accept rules’</span>'}, "catroweb")|raw }}
     </div>
     <div class="image-container center">
       <div class="image-detail">
@@ -81,7 +87,7 @@
         <img src="{{ asset('images/help/game_jam/thumbs/14.png') }}" data-img-id="1" data-img-index="14" data-img-type="3" alt="" title="">
       </div>
     </div>
-    <div class="text size-large">{{ ("help.gameJam.text6_2")|trans({}, "catroweb") }}</div>
+    <div class="text size-large">{{ ("help.gameJam.text6_2")|trans({'‘Distribution/Files’': '<span class="clickable">‘Distribution/Files’</span>'}, "catroweb")|raw }}</div>
     <div class="image-container center">
       <div class="image-detail">
         <img src="{{ asset('images/help/game_jam/thumbs/15.png') }}" data-img-id="1" data-img-index="15" data-img-type="3" alt="" title="">
@@ -97,8 +103,12 @@
       </div>
     </div>
     <div class="text size-large">
-      {{ ("help.gameJam.text6_5")|trans({}, "catroweb") }}<br>
-      {{ ("help.gameJam.text6_6")|trans({}, "catroweb") }}
+      {{ ("help.gameJam.text6_5")|trans({
+        '‘Add distribution’': '<span class="clickable">‘Add distribution’</span>',
+        '‘Desktop’': '<span class="clickable">‘Desktop’</span>',
+        '‘?’': '<span class="clickable">‘?’</span>'}, "catroweb")|raw }}
+      <br>
+      {{ ("help.gameJam.text6_6")|trans({'‘Active’': '<span class="clickable">‘Active’</span>'}, "catroweb")|raw }}
     </div>
     <div class="image-container center">
       <div class="image-detail">
@@ -109,9 +119,11 @@
     </div>
     <div class="text size-large">
       {{ ("help.gameJam.text6_7")|trans({}, "catroweb") }}<br>
-      <span class="circle"></span><div>{{ ("help.gameJam.text6_7_1")|trans({}, "catroweb") }}</div>
-      <span class="circle"></span><div>{{ ("help.gameJam.text6_7_2")|trans({}, "catroweb") }}</div>
-      <span class="circle"></span><div>{{ ("help.gameJam.text6_7_3")|trans({}, "catroweb") }}</div>
+      <ul>
+        <li>{{ ("help.gameJam.text6_7_1")|trans({}, "catroweb") }}</li>
+        <li>{{ ("help.gameJam.text6_7_2")|trans({}, "catroweb") }}</li>
+        <li>{{ ("help.gameJam.text6_7_3")|trans({}, "catroweb") }}</li>
+      </ul>
     </div>
     <div class="image-container center">
       <div class="image-detail">
@@ -121,7 +133,7 @@
       </div>
     </div>
     <div class="text size-large">
-      {{ ("help.gameJam.text6_8")|trans({}, "catroweb") }}
+      {{ ("help.gameJam.text6_8")|trans({'%link%': '<a href="http://jams.gamejolt.io/alicejam150" target="_blank">Alice Jam 150</a>'}, "catroweb")|raw }}
     </div>
 
   </div>
