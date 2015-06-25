@@ -127,7 +127,7 @@ Feature: Pocketcode help page
     Then I should see "HOW TO UPLOAD A POCKET CODE GAME TO THE GAME JOLT SITE?"
     And I should see "1. Registration"
     And I should see "2. Upload"
-    And I should see "3. Go to your Pocket Code profile or search directly for your program."
+    And I should see "3. Search for your program"
     And I should see "4. Create Android app"
     And I should see "5. Download app"
     And I should see "6. Upload your game on the Game Jolt Site"
