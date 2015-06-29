@@ -130,4 +130,5 @@ Feature: Pocketcode help page
     And I should see "3. Search for your program"
     And I should see "4. Create Android app"
     And I should see "5. Download app"
-    And I should see "6. Upload your game on the Game Jolt Site"
+    And I should see "6. Register/Login at GameJolt.com"
+    And I should see "7. Upload your game on the Game Jolt Site"
