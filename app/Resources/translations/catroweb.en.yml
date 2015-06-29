@@ -454,7 +454,7 @@ help:
       text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
       text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
       text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
-      text7_7: "Other people will now be able to find your game and it will appear on the Alice Jam 150 page."
+      text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
 
 
 search:

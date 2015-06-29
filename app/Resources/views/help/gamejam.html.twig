@@ -130,7 +130,7 @@
     <div class="text size-large">
       {{ ("help.gameJam.text7_5")|trans({
         '‘OK’': '<span class="clickable">‘OK’’</span>'
-      }, "catroweb") }}
+      }, "catroweb")|raw }}
     </div>
     <div class="image-container center">
       <div class="image-detail">
@@ -142,7 +142,9 @@
     <div class="text size-large">
       {{ ("help.gameJam.text7_6")|trans({}, "catroweb") }}
       <br>
-      {{ ("help.gameJam.text7_7")|trans({}, "catroweb") }}
+      {{ ("help.gameJam.text7_7")|trans({
+        '%link%': '<a href="http://jams.gamejolt.io/alicejam150" target="_blank">Alice Jam 150</a>'
+      }, "catroweb")|raw }}
     </div>
 
   </div>
