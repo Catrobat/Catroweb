@@ -75,7 +75,6 @@ swiftmailer:
     password:  %mailer_password%
     encryption: ssl
     auth_mode: plain
-    spool:     { type: memory }
 
 fos_user:
     db_driver: orm

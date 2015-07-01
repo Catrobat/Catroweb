@@ -33,27 +33,21 @@ class ReportNotificator
       {
         continue;
       }
-      $message = $this->mailer->createMessage()
-          ->setSubject('[Pocketcode] reported project!')
-          ->setTo($user->getUser()->getEmail())
-          ->setBody("A Project got reported!
+      
+      $message = \Swift_Message::newInstance()
+      ->setSubject('[Pocketcode] reported project!')
+      ->setFrom('noreply@catrob.at')
+      ->setTo($user->getUser()->getEmail())
+      ->setContentType('text/html')
+       ->setBody("A Project got reported!
 
 Note: ".$event->getNote()."
 Project Name:".$program->getName()."
 Project Description: ".$program->getDescription()."
 
 ")
-        /*
-         * If you also want to include a plaintext version of the message
-        ->addPart(
-            $this->renderView(
-                'Emails/registration.txt.twig',
-                array('name' => $name)
-            ),
-            'text/plain'
-        )
-        */
       ;
+      
       $this->mailer->send($message);
     }
   }

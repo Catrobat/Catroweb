@@ -11,13 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class UploadNotificator
 {
-  private $logger;
   private $mailer;
   private $notification_repo;
 
-  function __construct(Logger $logger, \Swift_Mailer $mailer,  \Catrobat\AppBundle\Entity\NotificationRepository $repository)
+  function __construct(\Swift_Mailer $mailer,  \Catrobat\AppBundle\Entity\NotificationRepository $repository)
   {
-    $this->logger = $logger;
     $this->mailer = $mailer;
     $this->notification_repo = $repository;
   }
@@ -36,10 +34,13 @@ class UploadNotificator
         continue;
       }
       $program = $event->getProgramEntity();
-      $message = $this->mailer->createMessage()
-          ->setSubject('[Pocketcode] Project upload')
-          ->setTo($user->getUser()->getEmail())
-          ->setBody("A Project was uploaded.
+      
+      $message = \Swift_Message::newInstance()
+      ->setSubject('[Pocketcode] Project upload')
+      ->setFrom('noreply@catrob.at')
+      ->setTo($user->getUser()->getEmail())
+      ->setContentType('text/html')
+      ->setBody("A Project was uploaded.
 
 Name: ".$program->getName()."
 Description: ".$program->getDescription()."

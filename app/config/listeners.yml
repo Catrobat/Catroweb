@@ -81,16 +81,14 @@ services:
 
       catrobat.core.services.uploadnotificator:
               class:        Catrobat\AppBundle\Listeners\UploadNotificator
-              arguments:    ["@logger","@mailer","@notificationrepository"]
+              arguments:    ["@mailer","@notificationrepository"]
               tags:
-                  - { name: monolog.logger, channel: upload }
                   - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramInsertEvent }
 
       catrobat.core.services.reportnotificator:
               class:        Catrobat\AppBundle\Listeners\ReportNotificator
               arguments:    ["@mailer","@notificationrepository"]
               tags:
-                  - { name: monolog.logger, channel: upload }
                   - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
 
 
