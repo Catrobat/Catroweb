@@ -1,12 +1,11 @@
 <?php
+
 namespace Catrobat\AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Entity\StarterCategory;
 
 class CategoriesAdmin extends Admin
 {
@@ -19,9 +18,9 @@ class CategoriesAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Name'))
             ->add('alias', 'text', array('label' => 'Alias'))
-            ->add('programs', null , array(
+            ->add('programs', null, array(
                 'required' => false,
-                'by_reference' => false
+                'by_reference' => false,
             ), array(
                 'edit' => 'inline',
                 'inline' => 'table',
@@ -44,9 +43,8 @@ class CategoriesAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('alias')
-            ->add('programs','entity',array('admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('programs', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('order')
         ;
     }
 }
-

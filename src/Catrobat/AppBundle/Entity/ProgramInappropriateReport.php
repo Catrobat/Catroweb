@@ -2,11 +2,10 @@
 
 namespace Catrobat\AppBundle\Entity;
 
-use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ProgramInappropriateReport
+ * ProgramInappropriateReport.
  *
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table()
@@ -14,13 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramInappropriateReport
 {
-
     const STATUS_NEW = 1;
     const STATUS_REJECTED = 2;
     const STATUS_ACCEPTED = 3;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -51,7 +49,7 @@ class ProgramInappropriateReport
     private $time;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
@@ -66,21 +64,18 @@ class ProgramInappropriateReport
     private $program;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="projectVersion", type="integer")
      */
     private $projectVersion;
-
-
 
     /**
      * @ORM\PrePersist
      */
     public function updateTimestamps()
     {
-        if ($this->getTime() == null)
-        {
+        if ($this->getTime() == null) {
             $this->setTime(new \DateTime());
         }
     }
@@ -90,8 +85,7 @@ class ProgramInappropriateReport
      */
     public function updateState()
     {
-        if ($this->getState() == null)
-        {
+        if ($this->getState() == null) {
             $this->setState(self::STATUS_NEW);
         }
     }
@@ -101,13 +95,13 @@ class ProgramInappropriateReport
      */
     public function updateProgramVersion()
     {
-      $this->setProjectVersion($this->getProgram()->getVersion());
+        $this->setProjectVersion($this->getProgram()->getVersion());
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -115,9 +109,10 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Set reportingUser
+     * Set reportingUser.
      *
      * @param \Catrobat\AppBundle\Entity\User $reportingUser
+     *
      * @return ProgramInappropriateReport
      */
     public function setReportingUser($reportingUser)
@@ -128,7 +123,7 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Get reportingUser
+     * Get reportingUser.
      *
      * @return \Catrobat\AppBundle\Entity\User
      */
@@ -138,9 +133,10 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Set note
+     * Set note.
      *
      * @param string $note
+     *
      * @return ProgramInappropriateReport
      */
     public function setNote($note)
@@ -151,9 +147,9 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Get note
+     * Get note.
      *
-     * @return string 
+     * @return string
      */
     public function getNote()
     {
@@ -161,9 +157,10 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Set time
+     * Set time.
      *
      * @param \DateTime $time
+     *
      * @return ProgramInappropriateReport
      */
     public function setTime($time)
@@ -174,9 +171,9 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Get time
+     * Get time.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTime()
     {
@@ -184,16 +181,18 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Set state
+     * Set state.
      *
-     * @param integer $state
+     * @param int $state
+     *
      * @return ProgramInappropriateReport
+     *
      * @throws \InvalidArgumentException
      */
     public function setState($state)
     {
         if (!in_array($state, array(self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED))) {
-            throw new \InvalidArgumentException("Invalid state");
+            throw new \InvalidArgumentException('Invalid state');
         }
         $this->state = $state;
 
@@ -201,9 +200,9 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Get state
+     * Get state.
      *
-     * @return integer
+     * @return int
      */
     public function getState()
     {
@@ -211,9 +210,10 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Set project
+     * Set project.
      *
      * @param \Catrobat\AppBundle\Entity\Program $project
+     *
      * @return ProgramInappropriateReport
      */
     public function setProgram($program)
@@ -224,7 +224,7 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Get program
+     * Get program.
      *
      * @return \Catrobat\AppBundle\Entity\Program
      */
@@ -234,9 +234,10 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Set projectVersion
+     * Set projectVersion.
      *
-     * @param integer $projectVersion
+     * @param int $projectVersion
+     *
      * @return ProgramInappropriateReport
      */
     public function setProjectVersion($projectVersion)
@@ -247,9 +248,9 @@ class ProgramInappropriateReport
     }
 
     /**
-     * Get projectVersion
+     * Get projectVersion.
      *
-     * @return integer 
+     * @return int
      */
     public function getProjectVersion()
     {

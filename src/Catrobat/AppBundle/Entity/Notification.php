@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Notification
+ * Notification.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\NotificationRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Notification
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -30,38 +30,39 @@ class Notification
     private $user;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="upload", type="boolean")
      */
     private $upload;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="report", type="boolean")
      */
     private $report;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="summary", type="boolean")
      */
     private $summary;
 
+    public function __toString()
+    {
+        if (is_object($this->user)) {
+            return $this->user->__toString().' notification';
+        }
 
-  public function __toString()
-  {
-    if(is_object($this->user))
-      return $this->user->__toString()." notification";
-    return "notification";
-  }
+        return 'notification';
+    }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -69,9 +70,10 @@ class Notification
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Catrobat\AppBundle\Entity\User $user
+     *
      * @return Notification
      */
     public function setUser($user)
@@ -82,7 +84,7 @@ class Notification
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Catrobat\AppBundle\Entity\User
      */
@@ -92,9 +94,10 @@ class Notification
     }
 
     /**
-     * Set upload
+     * Set upload.
      *
-     * @param boolean $upload
+     * @param bool $upload
+     *
      * @return Notification
      */
     public function setUpload($upload)
@@ -105,9 +108,9 @@ class Notification
     }
 
     /**
-     * Get upload
+     * Get upload.
      *
-     * @return boolean 
+     * @return bool
      */
     public function getUpload()
     {
@@ -115,9 +118,10 @@ class Notification
     }
 
     /**
-     * Set report
+     * Set report.
      *
-     * @param boolean $report
+     * @param bool $report
+     *
      * @return Notification
      */
     public function setReport($report)
@@ -128,9 +132,9 @@ class Notification
     }
 
     /**
-     * Get report
+     * Get report.
      *
-     * @return boolean 
+     * @return bool
      */
     public function getReport()
     {
@@ -138,9 +142,10 @@ class Notification
     }
 
     /**
-     * Set summary
+     * Set summary.
      *
-     * @param boolean $summary
+     * @param bool $summary
+     *
      * @return Notification
      */
     public function setSummary($summary)
@@ -151,9 +156,9 @@ class Notification
     }
 
     /**
-     * Get summary
+     * Get summary.
      *
-     * @return boolean 
+     * @return bool
      */
     public function getSummary()
     {

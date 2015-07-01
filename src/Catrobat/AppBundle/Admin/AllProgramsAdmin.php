@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -41,12 +42,10 @@ class AllProgramsAdmin extends Admin
     {
         $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
 
-        if($old_program["approved"] == false && $program->getApproved() == true)
-        {
+        if ($old_program['approved'] == false && $program->getApproved() == true) {
             $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser());
             $this->getModelManager()->update($program);
-        }elseif($old_program["approved"] == true && $program->getApproved() == false)
-        {
+        } elseif ($old_program['approved'] == true && $program->getApproved() == false) {
             $program->setApprovedByUser(null);
             $this->getModelManager()->update($program);
         }
@@ -67,7 +66,7 @@ class AllProgramsAdmin extends Admin
             ->add('visible')
             ->add('_action', 'actions', array('actions' => array(
                 'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),
-                'edit' => array()
+                'edit' => array(),
             )))
         ;
     }
@@ -76,15 +75,14 @@ class AllProgramsAdmin extends Admin
     {
         return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
     }
-    
-  protected function configureRoutes(RouteCollection $collection)
-  {
-    $collection->remove('create')->remove('delete')->remove('export');
-  }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create')->remove('delete')->remove('export');
+    }
 
     public function getThumbnailImageUrl($object)
     {
-      return "/".$this->getConfigurationPool()->getContainer()->get("screenshotrepository")->getThumbnailWebPath($object->getId());
+        return '/'.$this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
     }
 }
-

@@ -9,18 +9,16 @@ use Catrobat\AppBundle\StatusCode;
 
 class ProgramXmlHeaderValidator
 {
-  
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
-  {
-    $this->validate($event->getExtractedFile());
-  }
-  
-  public function validate(ExtractedCatrobatFile $file)
-  {
-    $program_xml_properties = $file->getProgramXmlProperties();
-    if(isset($program_xml_properties->header))
+    public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
     {
-      if(!(isset($program_xml_properties->header->applicationName) &&
+        $this->validate($event->getExtractedFile());
+    }
+
+    public function validate(ExtractedCatrobatFile $file)
+    {
+        $program_xml_properties = $file->getProgramXmlProperties();
+        if (isset($program_xml_properties->header)) {
+            if (!(isset($program_xml_properties->header->applicationName) &&
         isset($program_xml_properties->header->applicationVersion) &&
         isset($program_xml_properties->header->catrobatLanguageVersion) &&
         isset($program_xml_properties->header->description) &&
@@ -31,16 +29,11 @@ class ProgramXmlHeaderValidator
         isset($program_xml_properties->header->programName) &&
         isset($program_xml_properties->header->remixOf) &&
         isset($program_xml_properties->header->url) &&
-        isset($program_xml_properties->header->userHandle)))
-      {
-        throw new InvalidCatrobatFileException("Program XML header information missing",StatusCode::INVALID_XML);
-      }
+        isset($program_xml_properties->header->userHandle))) {
+                throw new InvalidCatrobatFileException('Program XML header information missing', StatusCode::INVALID_XML);
+            }
+        } else {
+            throw new InvalidCatrobatFileException('No Program XML header found!', StatusCode::INVALID_XML);
+        }
     }
-    else
-    {
-      throw new InvalidCatrobatFileException("No Program XML header found!",StatusCode::INVALID_XML);
-    }
-
-  }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Controller\Ci;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,21 +18,21 @@ class ApkStatusController extends Controller
     public function getApkStatusAction(Request $request, Program $program)
     {
         $result = array();
-        switch($program->getApkStatus())
-        {
+        switch ($program->getApkStatus()) {
             case Program::APK_READY:
-                $result['status'] = "ready";
-                $result['url'] = $this->generateUrl("ci_download", array("id" => $program->getId(), "fname" => $program->getName()), true);
-                $result['label'] = $this->get("translator")->trans("ci.download",array(),"catroweb");
+                $result['status'] = 'ready';
+                $result['url'] = $this->generateUrl('ci_download', array('id' => $program->getId(), 'fname' => $program->getName()), true);
+                $result['label'] = $this->get('translator')->trans('ci.download', array(), 'catroweb');
                 break;
             case Program::APK_PENDING:
-                $result['status'] = "pending";
-                $result['label'] = $this->get("translator")->trans("ci.pending",array(),"catroweb");
+                $result['status'] = 'pending';
+                $result['label'] = $this->get('translator')->trans('ci.pending', array(), 'catroweb');
                 break;
             default:
-                $result['label'] = $this->get("translator")->trans("ci.generate",array(),"catroweb");
-                $result['status'] = "none";
+                $result['label'] = $this->get('translator')->trans('ci.generate', array(), 'catroweb');
+                $result['status'] = 'none';
         }
+
         return JsonResponse::create($result);
     }
 }

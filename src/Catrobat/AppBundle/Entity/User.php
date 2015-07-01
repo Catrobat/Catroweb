@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Entity;
 
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -10,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -46,13 +46,13 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->country = "";
+        $this->country = '';
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -60,22 +60,23 @@ class User extends BaseUser
     }
 
     /**
-     * Add programs
+     * Add programs.
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs            
+     * @param \Catrobat\AppBundle\Entity\Program $programs
+     *
      * @return User
      */
     public function addProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
         $this->programs[] = $programs;
-        
+
         return $this;
     }
 
     /**
-     * Remove programs
+     * Remove programs.
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs            
+     * @param \Catrobat\AppBundle\Entity\Program $programs
      */
     public function removeProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
@@ -83,7 +84,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get programs
+     * Get programs.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -110,12 +111,13 @@ class User extends BaseUser
     public function setCountry($country)
     {
         $this->country = $country;
+
         return $this;
     }
-    
+
     public function setId($id)
     {
-        $this->id = $id; 
+        $this->id = $id;
     }
 
   /**
@@ -123,7 +125,7 @@ class User extends BaseUser
    */
   public function setAdditionalEmail($additional_email)
   {
-    $this->additional_email = $additional_email;
+      $this->additional_email = $additional_email;
   }
 
   /**
@@ -131,7 +133,7 @@ class User extends BaseUser
    */
   public function getAdditionalEmail()
   {
-    return $this->additional_email;
+      return $this->additional_email;
   }
 
     public function getAvatar()
@@ -142,6 +144,7 @@ class User extends BaseUser
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
         return $this;
     }
 }

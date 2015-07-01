@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Forms;
 
 use Symfony\Component\Validator\Constraint;

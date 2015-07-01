@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
-use Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,14 +12,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ListProgramsController extends Controller
 {
-
-  /**
+    /**
    * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listProgramsAction(Request $request)
   {
-    return $this->listSortedPrograms($request, "recent");
+      return $this->listSortedPrograms($request, 'recent');
   }
 
   /**
@@ -29,16 +27,16 @@ class ListProgramsController extends Controller
    */
   public function listProgramIdsAction(Request $request)
   {
-      return $this->listSortedPrograms($request, "recent", false);
+      return $this->listSortedPrograms($request, 'recent', false);
   }
-  
+
   /**
    * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostDownloadedProgramsAction(Request $request)
   {
-    return $this->listSortedPrograms($request, "downloads");
+      return $this->listSortedPrograms($request, 'downloads');
   }
 
   /**
@@ -47,16 +45,16 @@ class ListProgramsController extends Controller
    */
   public function listMostDownloadedProgramIdsAction(Request $request)
   {
-      return $this->listSortedPrograms($request, "downloads", false);
+      return $this->listSortedPrograms($request, 'downloads', false);
   }
-  
+
   /**
    * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function listMostViewedProgramsAction(Request $request)
   {
-    return $this->listSortedPrograms($request, "views");
+      return $this->listSortedPrograms($request, 'views');
   }
 
   /**
@@ -65,7 +63,7 @@ class ListProgramsController extends Controller
    */
   public function listMostViewedProgramIdsAction(Request $request)
   {
-      return $this->listSortedPrograms($request, "views", false);
+      return $this->listSortedPrograms($request, 'views', false);
   }
 
   /**
@@ -74,69 +72,68 @@ class ListProgramsController extends Controller
    */
   public function listUserProgramsAction(Request $request)
   {
-    return $this->listSortedPrograms($request, "user");
+      return $this->listSortedPrograms($request, 'user');
   }
-  
-  private function listSortedPrograms(Request $request, $sortBy, $details = true)
-  {
-    $program_manager = $this->get("programmanager");
-    $screenshot_repository = $this->get("screenshotrepository");
-    $elapsed_time = $this->get("elapsedtime");
-    $flavor = $request->getSession()->get('flavor');
-    
-    $retArray = array ();
-    $limit = intval($request->query->get('limit', 20));
-    $offset = intval($request->query->get('offset', 0));
-    $user_id = intval($request->query->get('user_id', 0));
 
-    if ($sortBy == "downloads")
-      $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
-    else if ($sortBy == "views")
-      $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset);
-    else if ($sortBy == "user")
-      $programs = $program_manager->getUserPrograms($user_id);
-    else
-      $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset);
-    
-    if ($sortBy == "user")
-        $numbOfTotalProjects = count($programs);
-    else
-        $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor);
-    
-    $retArray['CatrobatProjects'] = array ();
-    foreach($programs as $program)
+    private function listSortedPrograms(Request $request, $sortBy, $details = true)
     {
-      $new_program = array ();
-      $new_program['ProjectId'] = $program->getId();
-      $new_program['ProjectName'] = $program->getName();
-      if ($details === true)
-      {
-          $new_program['ProjectNameShort'] = $program->getName();
-          $new_program['Author'] = $program->getUser()->getUserName();
-          $new_program['Description'] = $program->getDescription();
-          $new_program['Version'] = $program->getCatrobatVersionName();
-          $new_program['Views'] = $program->getViews();
-          $new_program['Downloads'] = $program->getDownloads();
-          $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-          $new_program['UploadedString'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
-          $new_program['ScreenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
-          $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
-          $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', array('flavor' => $request->attributes->get("flavor"), 'id' => $program->getId())),"/");
-          $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', array('id' => $program->getId())),"/");
-          $new_program['FileSize'] = $program->getFilesize()/1048576;
-      }
-      $retArray['CatrobatProjects'][] = $new_program;
-    }
-    $retArray['completeTerm'] = "";
-    $retArray['preHeaderMessages'] = "";
-    
-    $retArray['CatrobatInformation'] = array (
-        "BaseUrl" => ($request->isSecure() ? 'https://' : 'http://'). $request->getHttpHost() . '/',
-        "TotalProjects" => $numbOfTotalProjects,
-        "ProjectsExtension" => ".catrobat" 
-    );
-    
-    return JsonResponse::create($retArray);
-  }
+        $program_manager = $this->get('programmanager');
+        $screenshot_repository = $this->get('screenshotrepository');
+        $elapsed_time = $this->get('elapsedtime');
+        $flavor = $request->getSession()->get('flavor');
 
+        $retArray = array();
+        $limit = intval($request->query->get('limit', 20));
+        $offset = intval($request->query->get('offset', 0));
+        $user_id = intval($request->query->get('user_id', 0));
+
+        if ($sortBy == 'downloads') {
+            $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
+        } elseif ($sortBy == 'views') {
+            $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset);
+        } elseif ($sortBy == 'user') {
+            $programs = $program_manager->getUserPrograms($user_id);
+        } else {
+            $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset);
+        }
+
+        if ($sortBy == 'user') {
+            $numbOfTotalProjects = count($programs);
+        } else {
+            $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor);
+        }
+
+        $retArray['CatrobatProjects'] = array();
+        foreach ($programs as $program) {
+            $new_program = array();
+            $new_program['ProjectId'] = $program->getId();
+            $new_program['ProjectName'] = $program->getName();
+            if ($details === true) {
+                $new_program['ProjectNameShort'] = $program->getName();
+                $new_program['Author'] = $program->getUser()->getUserName();
+                $new_program['Description'] = $program->getDescription();
+                $new_program['Version'] = $program->getCatrobatVersionName();
+                $new_program['Views'] = $program->getViews();
+                $new_program['Downloads'] = $program->getDownloads();
+                $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
+                $new_program['UploadedString'] = $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp());
+                $new_program['ScreenshotBig'] = $screenshot_repository->getScreenshotWebPath($program->getId());
+                $new_program['ScreenshotSmall'] = $screenshot_repository->getThumbnailWebPath($program->getId());
+                $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', array('flavor' => $request->attributes->get('flavor'), 'id' => $program->getId())), '/');
+                $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', array('id' => $program->getId())), '/');
+                $new_program['FileSize'] = $program->getFilesize() / 1048576;
+            }
+            $retArray['CatrobatProjects'][] = $new_program;
+        }
+        $retArray['completeTerm'] = '';
+        $retArray['preHeaderMessages'] = '';
+
+        $retArray['CatrobatInformation'] = array(
+        'BaseUrl' => ($request->isSecure() ? 'https://' : 'http://').$request->getHttpHost().'/',
+        'TotalProjects' => $numbOfTotalProjects,
+        'ProjectsExtension' => '.catrobat',
+    );
+
+        return JsonResponse::create($retArray);
+    }
 }

@@ -1,23 +1,21 @@
 <?php
+
 namespace Catrobat\AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Admin\AllProgramsAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Catrobat\AppBundle\Entity\Program; use Sonata\AdminBundle\Route\RouteCollection;
 
 class ReportedProgramsAdmin extends Admin
 {
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
 
-  public function createQuery($context = 'list')
-  {
-    $query = parent::createQuery($context);
-    return $query;
-  }
+        return $query;
+    }
 
 //  TODO: Log who accepted/rejected
 //  public function preUpdate($program)
@@ -39,7 +37,7 @@ class ReportedProgramsAdmin extends Admin
   // Fields to be shown on filter forms
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
-    $datagridMapper
+      $datagridMapper
         ->add('reportingUser')
         ->add('time')
         ->add('state')
@@ -50,43 +48,40 @@ class ReportedProgramsAdmin extends Admin
   // Fields to be shown on lists
   protected function configureListFields(ListMapper $listMapper)
   {
-    $listMapper
+      $listMapper
         ->add('state',
         'choice',
-        array('choices' => Array(1=>"NEW",2=>"ACCEPTED",3=>"REJECTED") ,'editable' => true))
+        array('choices' => array(1 => 'NEW', 2 => 'ACCEPTED', 3 => 'REJECTED'), 'editable' => true))
         ->add('time')
         ->add('note')
         ->add('reportingUser', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
-        ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all','editable' => false))
+        ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all', 'editable' => false))
         ->add('program.visible', 'boolean', array('editable' => true))
-        ->add('_action', 'actions', array('actions' => 
-            array(
+        ->add('_action', 'actions', array('actions' => array(
                 'show' => array('template' => ':CRUD:list__action_show_reported_program_details.html.twig'),
-                'edit' => array()
+                'edit' => array(),
             )))
     ;
   }
 
-
   // Fields to be shown on create/edit forms
   protected function configureFormFields(FormMapper $formMapper)
   {
-    $formMapper
+      $formMapper
         ->add('state',
             'choice',
-            array('choices' => Array(1=>"NEW",2=>"ACCEPTED",3=>"REJECTED")))
-        ->add('program.visible','choice', array(
+            array('choices' => array(1 => 'NEW', 2 => 'ACCEPTED', 3 => 'REJECTED')))
+        ->add('program.visible', 'choice', array(
       'choices' => array(
           '0' => 'No',
           '1' => 'Yes',
       ),
-      'required' => true,))
+      'required' => true, ))
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection)
-  {
-    $collection->remove('create')->remove('delete')->remove('export');
-  }
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create')->remove('delete')->remove('export');
+    }
 }
-

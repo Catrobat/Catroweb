@@ -13,7 +13,7 @@ class RemixUpdater
     private $repository;
     private $router;
 
-    function __construct(ProgramRepository $repository, Router $router)
+    public function __construct(ProgramRepository $repository, Router $router)
     {
         $this->repository = $repository;
         $this->router = $router;
@@ -27,12 +27,12 @@ class RemixUpdater
     public function update(ExtractedCatrobatFile $file, Program $program)
     {
         $program_xml_properties = $file->getProgramXmlProperties();
-        if ($program_xml_properties->header->url->__toString() != "") {
-            preg_match("/([\d]+)$/",$program_xml_properties->header->url->__toString(),$matches);
+        if ($program_xml_properties->header->url->__toString() != '') {
+            preg_match("/([\d]+)$/", $program_xml_properties->header->url->__toString(), $matches);
             $program_id = intval($matches[1]);
             $program_xml_properties->header->remixOf = $program_xml_properties->header->url->__toString();
             $parent = $this->repository->find($program_id);
-            if($parent != null) {
+            if ($parent != null) {
                 $program->setRemixOf($parent);
             }
         }

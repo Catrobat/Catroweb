@@ -18,62 +18,55 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
-  protected $user_provider;
-  
-  public function __construct(UserProvider $user_provider, TranslatorInterface $translator)
-  {
-    $this->user_provider = $user_provider;
-    $this->translator = $translator;
-  }
-  
-  public function createToken(Request $request, $providerKey)
-  {
-    $upload_token = $request->request->get ( 'token' );
-    $username = $request->request->get ( 'username' );
-    
-    if (!$upload_token)
+    protected $user_provider;
+
+    public function __construct(UserProvider $user_provider, TranslatorInterface $translator)
     {
-      throw new BadCredentialsException ('No API key found');
+        $this->user_provider = $user_provider;
+        $this->translator = $translator;
     }
-    
-    return new PreAuthenticatedToken ( $username, $upload_token, $providerKey );
-  }
-  
-  public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
-  {
-    $user = $this->user_provider->loadUserByUsername($token->getUsername());
-    if (!$user)
+
+    public function createToken(Request $request, $providerKey)
     {
-      throw new AuthenticationException ('No user found');
+        $upload_token = $request->request->get('token');
+        $username = $request->request->get('username');
+
+        if (!$upload_token) {
+            throw new BadCredentialsException('No API key found');
+        }
+
+        return new PreAuthenticatedToken($username, $upload_token, $providerKey);
     }
-    
-    if ($token->getCredentials() === $user->getUploadToken())
+
+    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
-      $authenticated_token = new PreAuthenticatedToken($user, $token->getCredentials(), $providerKey, $user->getRoles());
-      $authenticated_token->setAuthenticated(true);
-      return $authenticated_token;
+        $user = $this->user_provider->loadUserByUsername($token->getUsername());
+        if (!$user) {
+            throw new AuthenticationException('No user found');
+        }
+
+        if ($token->getCredentials() === $user->getUploadToken()) {
+            $authenticated_token = new PreAuthenticatedToken($user, $token->getCredentials(), $providerKey, $user->getRoles());
+            $authenticated_token->setAuthenticated(true);
+
+            return $authenticated_token;
+        } else {
+            throw new AuthenticationException('Upload Token auth failed.');
+        }
     }
-    else
+
+    public function supportsToken(TokenInterface $token, $providerKey)
     {
-      throw new AuthenticationException('Upload Token auth failed.');
+        return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
     }
-  }
-  
-  public function supportsToken(TokenInterface $token, $providerKey)
-  {
-    return $token instanceof PreAuthenticatedToken && $token->getProviderKey () === $providerKey;
-  }
-  
-  public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-  {
-    return JsonResponse::create(array("statusCode" => StatusCode::LOGIN_ERROR, "answer" => $this->trans("errors.token"), "preHeaderMessages" => ""),Response::HTTP_UNAUTHORIZED);
-  }
-  
-  private function trans($message, $parameters = array())
-  {
-    return $this->translator->trans($message,$parameters,"catroweb");
-  }
-  
-  
-  
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        return JsonResponse::create(array('statusCode' => StatusCode::LOGIN_ERROR, 'answer' => $this->trans('errors.token'), 'preHeaderMessages' => ''), Response::HTTP_UNAUTHORIZED);
+    }
+
+    private function trans($message, $parameters = array())
+    {
+        return $this->translator->trans($message, $parameters, 'catroweb');
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Controller\Ci;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,35 +19,30 @@ class DownloadApkController extends Controller
      */
     public function downloadApkAction(Request $request, Program $program)
     {
-        if (!$program->isVisible())
-        {
+        if (!$program->isVisible()) {
             throw new NotFoundHttpException();
         }
-        if ($program->getApkStatus() != Program::APK_READY)
-        {
+        if ($program->getApkStatus() != Program::APK_READY) {
             throw new NotFoundHttpException();
         }
-        
+
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
-        $apkrepository = $this->get("apkrepository");
-        
-        try
-        {
-          $file = $apkrepository->getProgramFile($program->getId());
-        }
-        catch (\Exception $e)
-        {
+        $apkrepository = $this->get('apkrepository');
+
+        try {
+            $file = $apkrepository->getProgramFile($program->getId());
+        } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
-        if ($file->isFile())
-        {
+        if ($file->isFile()) {
             $response = new BinaryFileResponse($file);
             $d = $response->headers->makeDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                $program->getId() . '.apk'
+                $program->getId().'.apk'
             );
             $response->headers->set('Content-Disposition', $d);
             $response->headers->set('Content-type', 'application/vnd.android.package-archive');
+
             return $response;
         }
         throw new NotFoundHttpException();

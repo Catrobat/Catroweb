@@ -1,9 +1,9 @@
 <?php
+
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-
 
 /**
  * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\FeaturedRepository")
@@ -15,19 +15,19 @@ class FeaturedProgram
     public $file;
     public $removed_id;
     public $old_image_type;
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="string")
      */
     protected $imagetype;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Program", fetch="EAGER")
      **/
@@ -37,7 +37,7 @@ class FeaturedProgram
      * @ORM\Column(type="string", nullable=true)
      */
     protected $url;
-    
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -63,11 +63,11 @@ class FeaturedProgram
     {
         $this->flavor = $flavor;
     }
-    
+
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -75,22 +75,23 @@ class FeaturedProgram
     }
 
     /**
-     * Set image
+     * Set image.
      *
      * @param string $image
+     *
      * @return FeaturedProgram
      */
     public function setImageType($image)
     {
         $this->imagetype = $image;
-    
+
         return $this;
     }
 
     /**
-     * Get image
+     * Get image.
      *
-     * @return string 
+     * @return string
      */
     public function getImageType()
     {
@@ -98,22 +99,23 @@ class FeaturedProgram
     }
 
     /**
-     * Set program
+     * Set program.
      *
      * @param \Catrobat\AppBundle\Entity\Program $program
+     *
      * @return FeaturedProgram
      */
     public function setProgram(\Catrobat\AppBundle\Entity\Program $program = null)
     {
         $this->program = $program;
-    
+
         return $this;
     }
 
     /**
-     * Get program
+     * Get program.
      *
-     * @return \Catrobat\AppBundle\Entity\Program 
+     * @return \Catrobat\AppBundle\Entity\Program
      */
     public function getProgram()
     {
@@ -128,6 +130,7 @@ class FeaturedProgram
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -139,9 +142,10 @@ class FeaturedProgram
     public function setActive($active)
     {
         $this->active = $active;
+
         return $this;
     }
- 
+
     public function setNewFeaturedImage(File $file)
     {
         $this->file = $file;

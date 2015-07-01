@@ -1,18 +1,17 @@
 <?php
+
 namespace Catrobat\AppBundle\Twig;
 
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class AppExtension extends \Twig_Extension
 {
-
     private $request_stack;
 
     private $supported_languages = array(
-        "en",
-        "de",
+        'en',
+        'de',
     //    "zh_TW"
     );
 
@@ -26,7 +25,7 @@ class AppExtension extends \Twig_Extension
         return array(
             'countriesList' => new \Twig_Function_Method($this, 'getCountriesList'),
             'isWebview' => new \Twig_Function_Method($this, 'isWebview'),
-            'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions')
+            'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
         );
     }
 
@@ -46,28 +45,28 @@ class AppExtension extends \Twig_Extension
         $selected = $this->supported_languages[0];
         if (in_array($current_language, $this->supported_languages)) {
             $selected = $current_language;
-        } else
-            if (in_array(substr($current_language, 0, 2), $this->supported_languages)) {
-                $selected = substr($current_language, 0, 2);
-            }
-    
+        } elseif (in_array(substr($current_language, 0, 2), $this->supported_languages)) {
+            $selected = substr($current_language, 0, 2);
+        }
+
         $list = array();
         foreach ($this->supported_languages as $language) {
             $list[] = array(
                 $language,
                 Intl::getLocaleBundle()->getLocaleName($language, $language),
-                $selected === $language
+                $selected === $language,
             );
         }
+
         return $list;
     }
-    
+
     public function isWebview()
     {
         $request = $this->request_stack->getCurrentRequest();
         $user_agent = $request->headers->get('User-Agent');
-        
+
         // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-        return preg_match("/Catrobat/", $user_agent);
+        return preg_match('/Catrobat/', $user_agent);
     }
 }

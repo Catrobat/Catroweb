@@ -7,8 +7,8 @@ use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 
 class LicenseUpdater
 {
-    const MEDIALICENSE = "http://developer.catrobat.org/ccbysa_v4";
-    const PROGRAMLICENSE = "http://developer.catrobat.org/agpl_v3";
+    const MEDIALICENSE = 'http://developer.catrobat.org/ccbysa_v4';
+    const PROGRAMLICENSE = 'http://developer.catrobat.org/agpl_v3';
 
     public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
     {

@@ -10,53 +10,47 @@ use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class DownloadProgramController extends Controller
 {
-
-  /**
+    /**
    * @Route("/download/{id}.catrobat", name="download", defaults={"_format": "json"})
    * @Method({"GET"})
    */
-  function downloadProgramAction(Request $request, $id)
+  public function downloadProgramAction(Request $request, $id)
   {
-    /* @var $program_manager ProgramManager */
-    $program_manager = $this->get("programmanager");
+      /* @var $program_manager ProgramManager */
+    $program_manager = $this->get('programmanager');
     /* @var $file_repository ProgramFileRepository */
-    $file_repository = $this->get("filerepository");
-    
-    $program = $program_manager->find($id);
-    if (!$program)
-    {
-      throw new NotFoundHttpException();
-    }
-    if (!$program->isVisible())
-    {
-      throw new NotFoundHttpException();
-    }
-    
-    $file = $file_repository->getProgramFile($id);
-    if ($file->isFile())
-    {
+    $file_repository = $this->get('filerepository');
 
-      $downloaded = $request->getSession()->get('downloaded', array());
-      if(!in_array($program->getId(), $downloaded)){
-        $this->get("programmanager")->increaseDownloads($program);
-        $downloaded[] = $program->getId();
-        $request->getSession()->set('downloaded', $downloaded);
+      $program = $program_manager->find($id);
+      if (!$program) {
+          throw new NotFoundHttpException();
+      }
+      if (!$program->isVisible()) {
+          throw new NotFoundHttpException();
       }
 
-      $response = new BinaryFileResponse($file); 
-      $d = $response->headers->makeDisposition(
+      $file = $file_repository->getProgramFile($id);
+      if ($file->isFile()) {
+          $downloaded = $request->getSession()->get('downloaded', array());
+          if (!in_array($program->getId(), $downloaded)) {
+              $this->get('programmanager')->increaseDownloads($program);
+              $downloaded[] = $program->getId();
+              $request->getSession()->set('downloaded', $downloaded);
+          }
+
+          $response = new BinaryFileResponse($file);
+          $d = $response->headers->makeDisposition(
           ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-           $program->getId() . '.catrobat'
+           $program->getId().'.catrobat'
       );
-      $response->headers->set('Content-Disposition', $d);
-      
-      return $response; 
-    }
-    throw new NotFoundHttpException();
+          $response->headers->set('Content-Disposition', $d);
+
+          return $response;
+      }
+      throw new NotFoundHttpException();
   }
 }

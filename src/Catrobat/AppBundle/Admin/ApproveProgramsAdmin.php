@@ -1,40 +1,37 @@
 <?php
+
 namespace Catrobat\AppBundle\Admin;
 
 use Catrobat\AppBundle\Entity\ProgramManager;
-use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Catrobat\AppBundle\Services\ExtractedFileRepository;
-use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Entity\Project;
 use Sonata\AdminBundle\Route\RouteCollection;
-
 
 class ApproveProgramsAdmin extends Admin
 {
-
     private $extractedProgram = null;
 
     public function createQuery($context = 'list')
     {
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->eq($query->getRootAlias() . '.approved', $query->expr()->literal(false))
+            $query->expr()->eq($query->getRootAlias().'.approved', $query->expr()->literal(false))
         );
         $query->andWhere(
-            $query->expr()->eq($query->getRootAlias() . '.visible', $query->expr()->literal(true))
+            $query->expr()->eq($query->getRootAlias().'.visible', $query->expr()->literal(true))
         );
+
         return $query;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-      // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
+        // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
       $showMapper
 
           /*
@@ -47,25 +44,22 @@ class ApproveProgramsAdmin extends Admin
           ->add('version')
           ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
           ->add('upload_ip')
-          ->add('visible','boolean')
+          ->add('visible', 'boolean')
           ->add('Images', null, array('template' => ':Admin:program_containing_image.html.twig'))
           ->add('Sounds', null, array('template' => ':Admin:program_containing_sound.html.twig'))
           ->add('Strings', null, array('template' => ':Admin:program_containing_strings.html.twig'))
           ->add('', null, array('template' => ':Admin:program_approve_action.html.twig'))
       ;
-
     }
 
     public function preUpdate($program)
     {
         $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
 
-        if($old_program["approved"] == false && $program->getApproved() == true)
-        {
+        if ($old_program['approved'] == false && $program->getApproved() == true) {
             $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser());
             $this->getModelManager()->update($program);
-        }elseif($old_program["approved"] == true && $program->getApproved() == false)
-        {
+        } elseif ($old_program['approved'] == true && $program->getApproved() == false) {
             $program->setApprovedByUser(null);
             $this->getModelManager()->update($program);
         }
@@ -103,12 +97,10 @@ class ApproveProgramsAdmin extends Admin
         ;
     }
 
-
     public function getThumbnailImageUrl($object)
     {
-      return "/".$this->getConfigurationPool()->getContainer()->get("screenshotrepository")->getThumbnailWebPath($object->getId());
+        return '/'.$this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
     }
-
 
     public function getContainingImageUrls($object)
     {
@@ -116,44 +108,41 @@ class ApproveProgramsAdmin extends Admin
       /* @var $extractedFileRepository ExtractedFileRepository */
       /* @var $progManager ProgramManager */
 
-      if($this->extractedProgram == null)
-      {
-        $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get("extractedfilerepository");
-        $progManager = $this->getConfigurationPool()->getContainer()->get("programmanager");
-        $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
-      }
-
-      return $this->extractedProgram->getContainingImagePaths();
-    }
-
-
-  public function getContainingSoundUrls($object)
-  {
-    /* @var $extractedFileRepository ExtractedFileRepository */
-    /* @var $progManager ProgramManager */
-
-    if($this->extractedProgram == null)
-    {
-      $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get("extractedfilerepository");
-      $progManager = $this->getConfigurationPool()->getContainer()->get("programmanager");
-      $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
-    }
-
-    return $this->extractedProgram->getContainingSoundPaths();
-  }
-
-  public function getContainingStrings($object)
-  {
-      if($this->extractedProgram == null)
-      {
-          $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get("extractedfilerepository");
-          $progManager = $this->getConfigurationPool()->getContainer()->get("programmanager");
+      if ($this->extractedProgram == null) {
+          $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
+          $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
           $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
       }
-      return $this->extractedProgram->getContainingStrings();
-  }
 
-  protected function configureRoutes(RouteCollection $collection)
+        return $this->extractedProgram->getContainingImagePaths();
+    }
+
+    public function getContainingSoundUrls($object)
+    {
+        /* @var $extractedFileRepository ExtractedFileRepository */
+    /* @var $progManager ProgramManager */
+
+    if ($this->extractedProgram == null) {
+        $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
+        $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
+        $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+    }
+
+        return $this->extractedProgram->getContainingSoundPaths();
+    }
+
+    public function getContainingStrings($object)
+    {
+        if ($this->extractedProgram == null) {
+            $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
+            $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
+            $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+        }
+
+        return $this->extractedProgram->getContainingStrings();
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create')->remove('delete')->remove('edit');
         $collection
@@ -163,4 +152,3 @@ class ApproveProgramsAdmin extends Admin
       ;
     }
 }
-

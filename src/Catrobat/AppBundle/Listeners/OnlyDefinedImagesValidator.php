@@ -10,51 +10,46 @@ use Catrobat\AppBundle\StatusCode;
 
 class OnlyDefinedImagesValidator
 {
-  
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
-  {
-    $this->validate($event->getExtractedFile());
-  }
-  
-  public function validate(ExtractedCatrobatFile $file)
-  {
-    
-    $files_in_xml = OnlyDefinedImagesValidator::getImagesFromXml($file->getProgramXmlProperties());
-    $files_in_directory = OnlyDefinedImagesValidator::getImagesFromImageDirectory($file->getPath());
-    
-    $files = array_diff($files_in_directory, $files_in_xml);
-    if (count($files) > 0)
+    public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
     {
-      throw new InvalidCatrobatFileException("Unexpected files: [" . implode(", ", $files)."]",StatusCode::UNEXPECTED_FILE);
+        $this->validate($event->getExtractedFile());
     }
-    $files = array_diff($files_in_xml, $files_in_directory);
-    if (count($files) > 0)
-    {
-      throw new InvalidCatrobatFileException("Missing image: " . implode(", ", $files)."]",StatusCode::IMAGE_MISSING);
-    }
-  }
 
-  protected static function getImagesFromImageDirectory($base_path)
-  {
-    $images = array();
-    $finder = new Finder();
-    $finder->notPath("/^.nomedia$/")->ignoreDotFiles(false)->ignoreVCS(false)->in($base_path . "/images/");
-    foreach ($finder as $file)
+    public function validate(ExtractedCatrobatFile $file)
     {
-      $images[] = $file->getRelativePathname();
+        $files_in_xml = self::getImagesFromXml($file->getProgramXmlProperties());
+        $files_in_directory = self::getImagesFromImageDirectory($file->getPath());
+
+        $files = array_diff($files_in_directory, $files_in_xml);
+        if (count($files) > 0) {
+            throw new InvalidCatrobatFileException('Unexpected files: ['.implode(', ', $files).']', StatusCode::UNEXPECTED_FILE);
+        }
+        $files = array_diff($files_in_xml, $files_in_directory);
+        if (count($files) > 0) {
+            throw new InvalidCatrobatFileException('Missing image: '.implode(', ', $files).']', StatusCode::IMAGE_MISSING);
+        }
     }
-    return $images;
-  }
-  
-  protected static function getImagesFromXml($xml)
-  {
-    $defined_file_nodes = $xml->xpath('/program/objectList/object/lookList/look/fileName');
-    $defined_files = array();
-    while (list (, $node) = each($defined_file_nodes))
+
+    protected static function getImagesFromImageDirectory($base_path)
     {
-      $defined_files[] = $node;
+        $images = array();
+        $finder = new Finder();
+        $finder->notPath('/^.nomedia$/')->ignoreDotFiles(false)->ignoreVCS(false)->in($base_path.'/images/');
+        foreach ($finder as $file) {
+            $images[] = $file->getRelativePathname();
+        }
+
+        return $images;
     }
-    return array_unique($defined_files);
-  }
-  
+
+    protected static function getImagesFromXml($xml)
+    {
+        $defined_file_nodes = $xml->xpath('/program/objectList/object/lookList/look/fileName');
+        $defined_files = array();
+        while (list(, $node) = each($defined_file_nodes)) {
+            $defined_files[] = $node;
+        }
+
+        return array_unique($defined_files);
+    }
 }

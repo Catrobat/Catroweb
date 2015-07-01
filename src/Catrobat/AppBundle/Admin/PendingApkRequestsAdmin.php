@@ -1,10 +1,10 @@
 <?php
+
 namespace Catrobat\AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Catrobat\AppBundle\Entity\Program;
@@ -17,17 +17,18 @@ class PendingApkRequestsAdmin extends Admin
     protected $datagridValues = array(
         '_sort_by' => 'apk_request_time',
     );
-    
+
     public function createQuery($context = 'list')
     {
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->eq($query->getRootAlias() . '.apk_status', ':apk_status')
+            $query->expr()->eq($query->getRootAlias().'.apk_status', ':apk_status')
         );
         $query->setParameter('apk_status', Program::APK_PENDING);
+
         return $query;
     }
-    
+
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -46,8 +47,8 @@ class PendingApkRequestsAdmin extends Admin
             ->addIdentifier('id')
             ->add('user', null, array(
                 'route' => array(
-                    'name' => 'show'
-                )
+                    'name' => 'show',
+                ),
             ))
             ->add('name')
             ->add('apk_request_time')
@@ -57,30 +58,29 @@ class PendingApkRequestsAdmin extends Admin
                   Program::APK_NONE => 'none',
                   Program::APK_PENDING => 'pending',
                   Program::APK_READY => 'ready',
-            )))
+            ), ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'Reset' => array(
-                        'template' => ':CRUD:list__action_reset_status.html.twig'
+                        'template' => ':CRUD:list__action_reset_status.html.twig',
                     ),
                     'Rebuild' => array(
-                        'template' => ':CRUD:list__action_rebuild_apk.html.twig'
-                    )
-                )
+                        'template' => ':CRUD:list__action_rebuild_apk.html.twig',
+                    ),
+                ),
             ))
         ;
     }
 
-  protected function configureRoutes(RouteCollection $collection)
-  {
-    $collection->clearExcept(array('list'));
-    $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
-    $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
-  }
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(array('list'));
+        $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
+        $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
+    }
 
     public function getThumbnailImageUrl($object)
     {
-      return "/".$this->getConfigurationPool()->getContainer()->get("screenshotrepository")->getThumbnailWebPath($object->getId());
+        return '/'.$this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
     }
 }
-

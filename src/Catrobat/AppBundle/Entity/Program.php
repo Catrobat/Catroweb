@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Program
 {
-
     const APK_NONE = 0;
 
     const APK_PENDING = 1;
@@ -99,7 +99,7 @@ class Program
     /**
      * @ORM\Column(type="string", options={"default":"pocketcode"})
      */
-    protected $flavor = "pocketcode";
+    protected $flavor = 'pocketcode';
 
     /**
      * @ORM\Column(type="string", options={"default":""})
@@ -165,8 +165,7 @@ class Program
     protected $lego = false;
 
     /**
-     *
-     * @param mixed $approved_by_user            
+     * @param mixed $approved_by_user
      */
     public function setApprovedByUser($approved_by_user)
     {
@@ -174,7 +173,6 @@ class Program
     }
 
     /**
-     *
      * @return mixed
      */
     public function getApprovedByUser()
@@ -210,9 +208,9 @@ class Program
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -220,20 +218,21 @@ class Program
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param string $name            
+     * @param string $name
+     *
      * @return Program
      */
     public function setName($name)
     {
         $this->name = $name;
-        
+
         return $this;
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -243,20 +242,21 @@ class Program
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param string $description            
+     * @param string $description
+     *
      * @return Program
      */
     public function setDescription($description)
     {
         $this->description = $description;
-        
+
         return $this;
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -266,22 +266,23 @@ class Program
     }
 
     /**
-     * Set views
+     * Set views.
      *
-     * @param integer $views            
+     * @param int $views
+     *
      * @return Program
      */
     public function setViews($views)
     {
         $this->views = $views;
-        
+
         return $this;
     }
 
     /**
-     * Get views
+     * Get views.
      *
-     * @return integer
+     * @return int
      */
     public function getViews()
     {
@@ -289,34 +290,35 @@ class Program
     }
 
     /**
-     * Set version
+     * Set version.
      *
-     * @param integer $version            
+     * @param int $version
+     *
      * @return Program
      */
     public function setVersion($version)
     {
         $this->version = $version;
-        
+
         return $this;
     }
 
     /**
-     * Increment version
+     * Increment version.
      *
      * @return Program
      */
     public function incrementVersion()
     {
         $this->version += 1;
-        
+
         return $this;
     }
 
     /**
-     * Get Version
+     * Get Version.
      *
-     * @return integer
+     * @return int
      */
     public function getVersion()
     {
@@ -324,22 +326,23 @@ class Program
     }
 
     /**
-     * Set downloads
+     * Set downloads.
      *
-     * @param integer $downloads            
+     * @param int $downloads
+     *
      * @return Program
      */
     public function setDownloads($downloads)
     {
         $this->downloads = $downloads;
-        
+
         return $this;
     }
 
     /**
-     * Get downloads
+     * Get downloads.
      *
-     * @return integer
+     * @return int
      */
     public function getDownloads()
     {
@@ -347,20 +350,21 @@ class Program
     }
 
     /**
-     * Set uploaded_at
+     * Set uploaded_at.
      *
-     * @param \DateTime $uploadedAt            
+     * @param \DateTime $uploadedAt
+     *
      * @return Program
      */
     public function setUploadedAt($uploadedAt)
     {
         $this->uploaded_at = $uploadedAt;
-        
+
         return $this;
     }
 
     /**
-     * Get uploaded_at
+     * Get uploaded_at.
      *
      * @return \DateTime
      */
@@ -370,20 +374,21 @@ class Program
     }
 
     /**
-     * Set last_modified_at
+     * Set last_modified_at.
      *
-     * @param \DateTime $lastModifiedAt            
+     * @param \DateTime $lastModifiedAt
+     *
      * @return Program
      */
     public function setLastModifiedAt($lastModifiedAt)
     {
         $this->last_modified_at = $lastModifiedAt;
-        
+
         return $this;
     }
 
     /**
-     * Get last_modified_at
+     * Get last_modified_at.
      *
      * @return \DateTime
      */
@@ -393,20 +398,21 @@ class Program
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param \Catrobat\AppBundle\Entity\User $user            
+     * @param \Catrobat\AppBundle\Entity\User $user
+     *
      * @return Program
      */
     public function setUser(\Catrobat\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
-        
+
         return $this;
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Catrobat\AppBundle\Entity\User
      */
@@ -421,20 +427,21 @@ class Program
     }
 
     /**
-     * Set language_version
+     * Set language_version.
      *
-     * @param string $languageVersion            
+     * @param string $languageVersion
+     *
      * @return Program
      */
     public function setLanguageVersion($languageVersion)
     {
         $this->language_version = $languageVersion;
-        
+
         return $this;
     }
 
     /**
-     * Get language_version
+     * Get language_version.
      *
      * @return string
      */
@@ -444,20 +451,21 @@ class Program
     }
 
     /**
-     * Set catrobat_version_name
+     * Set catrobat_version_name.
      *
-     * @param string $catrobatVersionName            
+     * @param string $catrobatVersionName
+     *
      * @return Program
      */
     public function setCatrobatVersionName($catrobatVersionName)
     {
         $this->catrobat_version_name = $catrobatVersionName;
-        
+
         return $this;
     }
 
     /**
-     * Get catrobat_version_name
+     * Get catrobat_version_name.
      *
      * @return string
      */
@@ -467,22 +475,23 @@ class Program
     }
 
     /**
-     * Set catrobat_version
+     * Set catrobat_version.
      *
-     * @param integer $catrobatVersion            
+     * @param int $catrobatVersion
+     *
      * @return Program
      */
     public function setCatrobatVersion($catrobatVersion)
     {
         $this->catrobat_version = $catrobatVersion;
-        
+
         return $this;
     }
 
     /**
-     * Get catrobat_version
+     * Get catrobat_version.
      *
-     * @return integer
+     * @return int
      */
     public function getCatrobatVersion()
     {
@@ -490,20 +499,21 @@ class Program
     }
 
     /**
-     * Set upload_ip
+     * Set upload_ip.
      *
-     * @param string $uploadIp            
+     * @param string $uploadIp
+     *
      * @return Program
      */
     public function setUploadIp($uploadIp)
     {
         $this->upload_ip = $uploadIp;
-        
+
         return $this;
     }
 
     /**
-     * Get upload_ip
+     * Get upload_ip.
      *
      * @return string
      */
@@ -513,22 +523,23 @@ class Program
     }
 
     /**
-     * Set visible
+     * Set visible.
      *
-     * @param boolean $visible            
+     * @param bool $visible
+     *
      * @return Program
      */
     public function setVisible($visible)
     {
         $this->visible = $visible;
-        
+
         return $this;
     }
 
     /**
-     * Get visible
+     * Get visible.
      *
-     * @return boolean
+     * @return bool
      */
     public function getVisible()
     {
@@ -536,20 +547,21 @@ class Program
     }
 
     /**
-     * Set upload_language
+     * Set upload_language.
      *
-     * @param string $uploadLanguage            
+     * @param string $uploadLanguage
+     *
      * @return Program
      */
     public function setUploadLanguage($uploadLanguage)
     {
         $this->upload_language = $uploadLanguage;
-        
+
         return $this;
     }
 
     /**
-     * Get upload_language
+     * Get upload_language.
      *
      * @return string
      */
@@ -559,22 +571,23 @@ class Program
     }
 
     /**
-     * Set filesize
+     * Set filesize.
      *
-     * @param integer $filesize            
+     * @param int $filesize
+     *
      * @return Program
      */
     public function setFilesize($filesize)
     {
         $this->filesize = $filesize;
-        
+
         return $this;
     }
 
     /**
-     * Get filesize
+     * Get filesize.
      *
-     * @return integer
+     * @return int
      */
     public function getFilesize()
     {
@@ -582,22 +595,23 @@ class Program
     }
 
     /**
-     * Set remix_count
+     * Set remix_count.
      *
-     * @param integer $remixCount            
+     * @param int $remixCount
+     *
      * @return Program
      */
     public function setRemixCount($remixCount)
     {
         $this->remix_count = $remixCount;
-        
+
         return $this;
     }
 
     /**
-     * Get remix_count
+     * Get remix_count.
      *
-     * @return integer
+     * @return int
      */
     public function getRemixCount()
     {
@@ -605,20 +619,21 @@ class Program
     }
 
     /**
-     * Set remix_of
+     * Set remix_of.
      *
-     * @param \Catrobat\AppBundle\Entity\Program $remixOf            
+     * @param \Catrobat\AppBundle\Entity\Program $remixOf
+     *
      * @return Program
      */
     public function setRemixOf(\Catrobat\AppBundle\Entity\Program $remixOf = null)
     {
         $this->remix_of = $remixOf;
-        
+
         return $this;
     }
 
     /**
-     * Get remix_of
+     * Get remix_of.
      *
      * @return \Catrobat\AppBundle\Entity\Program
      */
@@ -628,7 +643,7 @@ class Program
     }
 
     /**
-     * Set if program is approved
+     * Set if program is approved.
      *
      * @param
      *            boolean
@@ -639,9 +654,9 @@ class Program
     }
 
     /**
-     * Get if program is approved
+     * Get if program is approved.
      *
-     * @return boolean
+     * @return bool
      */
     public function getApproved()
     {
@@ -659,7 +674,6 @@ class Program
     }
 
     /**
-     *
      * @return mixed
      */
     public function getFlavor()
@@ -668,8 +682,7 @@ class Program
     }
 
     /**
-     *
-     * @param mixed $flavor            
+     * @param mixed $flavor
      */
     public function setFlavor($flavor)
     {
@@ -677,7 +690,6 @@ class Program
     }
 
     /**
-     *
      * @return mixed
      */
     public function getCategory()
@@ -686,8 +698,7 @@ class Program
     }
 
     /**
-     *
-     * @param mixed $category            
+     * @param mixed $category
      */
     public function setCategory($category)
     {
@@ -695,8 +706,7 @@ class Program
     }
 
     /**
-     *
-     * @param mixed $directory_hash            
+     * @param mixed $directory_hash
      */
     public function setExtractedDirectoryHash($directory_hash)
     {
@@ -704,7 +714,6 @@ class Program
     }
 
     /**
-     *
      * @return mixed
      */
     public function getExtractedDirectoryHash()
@@ -720,24 +729,26 @@ class Program
     public function setApkStatus($apk_status)
     {
         $this->apk_status = $apk_status;
+
         return $this;
     }
 
     /**
-     * Set directory_hash
+     * Set directory_hash.
      *
-     * @param string $directoryHash            
+     * @param string $directoryHash
+     *
      * @return Program
      */
     public function setDirectoryHash($directoryHash)
     {
         $this->directory_hash = $directoryHash;
-        
+
         return $this;
     }
 
     /**
-     * Get directory_hash
+     * Get directory_hash.
      *
      * @return string
      */
@@ -747,20 +758,21 @@ class Program
     }
 
     /**
-     * Set apk_request_time
+     * Set apk_request_time.
      *
-     * @param \DateTime $apkRequestTime            
+     * @param \DateTime $apkRequestTime
+     *
      * @return Program
      */
     public function setApkRequestTime($apkRequestTime)
     {
         $this->apk_request_time = $apkRequestTime;
-        
+
         return $this;
     }
 
     /**
-     * Get apk_request_time
+     * Get apk_request_time.
      *
      * @return \DateTime
      */
@@ -770,22 +782,23 @@ class Program
     }
 
     /**
-     * Set apk_downloads
+     * Set apk_downloads.
      *
-     * @param integer $apkDownloads            
+     * @param int $apkDownloads
+     *
      * @return Program
      */
     public function setApkDownloads($apkDownloads)
     {
         $this->apk_downloads = $apkDownloads;
-        
+
         return $this;
     }
 
     /**
-     * Get apk_downloads
+     * Get apk_downloads.
      *
-     * @return integer
+     * @return int
      */
     public function getApkDownloads()
     {
@@ -800,6 +813,7 @@ class Program
     public function setPhiro($phiro)
     {
         $this->phiro = $phiro;
+
         return $this;
     }
 
@@ -811,6 +825,7 @@ class Program
     public function setLego($lego)
     {
         $this->lego = $lego;
+
         return $this;
     }
 }

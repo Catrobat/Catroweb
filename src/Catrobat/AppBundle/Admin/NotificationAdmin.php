@@ -1,7 +1,7 @@
 <?php
+
 namespace Catrobat\AppBundle\Admin;
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -11,19 +11,17 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class NotificationAdmin extends Admin
 {
-
     protected $baseRouteName = 'admin_catrobat_adminbundle_uploadnotificationadmin';
     protected $baseRoutePattern = 'upload_notification';
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         $formMapper
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
-            ->add("upload",null,array("label"=>"Email bei Upload","required"=>false))
-            ->add("report",null,array("label"=>"Email bei Inappropriate Report","required"=>false))
-            ->add("summary",null,array("label"=>"Emails täglich sammeln","required"=>false))
+            ->add('upload', null, array('label' => 'Email bei Upload', 'required' => false))
+            ->add('report', null, array('label' => 'Email bei Inappropriate Report', 'required' => false))
+            ->add('summary', null, array('label' => 'Emails täglich sammeln', 'required' => false))
             ;
     }
 
@@ -39,14 +37,14 @@ class NotificationAdmin extends Admin
         $listMapper
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('user.email')
-            ->add("upload",null, array('editable' => true))
-            ->add("report",null, array('editable' => true))
-            ->add("summary",null, array('editable' => true))
+            ->add('upload', null, array('editable' => true))
+            ->add('report', null, array('editable' => true))
+            ->add('summary', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -55,4 +53,3 @@ class NotificationAdmin extends Admin
     {
     }
 }
-
