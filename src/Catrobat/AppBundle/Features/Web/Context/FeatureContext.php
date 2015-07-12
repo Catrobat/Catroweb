@@ -959,7 +959,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $page->fillField('dialog_oauth_username',$arg1);
         $button->press();
         $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
-        $this->getSession()->wait(1000);
+        $this->getSession()->wait(2000);
     }
 
     private function getParameterValue($name) {

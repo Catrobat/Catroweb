@@ -59,7 +59,7 @@ Feature:
     Then the "email" field should contain "first@email.com"
     And the "additional-email" field should contain "second@email.com"
 
-  Scenario: chaning email adresses with an invalid email should not work
+  Scenario: changing email adresses with an invalid email should not work
     Given I fill in "email" with "first"
     And I press "save changes"
     Then I should see "This email address is not valid."
