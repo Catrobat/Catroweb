@@ -457,6 +457,10 @@ help:
       text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
       text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
 
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: Please choose a username:
+  username_proceed: Proceed to Pocket Code Website
 
 search:
   dotdotdot: Search...

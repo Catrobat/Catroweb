@@ -24,8 +24,8 @@ $(document).ready(function () {
     $("#_submit_oauth").attr("disabled", true);
 });
 
-function triggerFacebookLogin(){
-    FB.login(function(response){
+function triggerFacebookLogin() {
+    FB.login(function(response) {
         if (response.authResponse) {
             console.log('Facebook Login successful');
             checkLoginState();
@@ -48,7 +48,8 @@ function checkLoginState() {
 
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
-        getFacebookUserInfo(response['authResponse'].accessToken);
+        $("#access_token_oauth").val(response['authResponse'].accessToken);
+        getFacebookUserInfo();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please sign in to Pocket Code';
@@ -59,12 +60,15 @@ function statusChangeCallback(response) {
     }
 }
 
-function getFacebookUserInfo($accessToken) {
+function getDesiredUsernameFB() {
+    $("#fb_google").val('fb');
+    openDialog();
+}
+
+function getFacebookUserInfo() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function (response) {
         console.log('Successful login for: ' + response.name);
-        $('#status').text('Thanks for logging in, ' + response.name + '!');
-
         console.log("First name:" + response.first_name);
         console.log("Last name:" + response.last_name);
         console.log("Name:" + response.name);
@@ -81,18 +85,22 @@ function getFacebookUserInfo($accessToken) {
             },
             function (data, status) {
                 console.log(data);
+                console.log(status);
                 var $server_token_available = data['token_available'];
                 if (!$server_token_available) {
-                    sendTokenToServer($accessToken, response.id, response.name, response.email);
+                    $("#id_oauth").val(response.id);
+                    $("#email_oauth").val(response.email);
+                    $("#locale_oauth").val(response.locale);
+                    getDesiredUsernameFB();
                 } else {
-                    FacebookLogin(response.email, response.name, response.id);
+                    FacebookLogin(data['email'], data['username'], response.id);
                 }
             });
     });
 }
 
 
-function sendTokenToServer($token, $facebook_id, $username, $email) {
+function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
 
     var $state = $('#csrf_token').val();
 
@@ -108,7 +116,8 @@ function sendTokenToServer($token, $facebook_id, $username, $email) {
             id: $facebook_id,
             state: $state,
             username: $username,
-            mail: $email
+            mail: $email,
+            locale: $locale
         },
         function () {
 

@@ -791,7 +791,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             assertTrue(false, 'No Facebook form appeared!' . "\n");
         }
         $this->getSession()->switchToWindow(null);
-        $this->getSession()->wait(6000);
+        $this->getSession()->wait(1000);
     }
 
     /**
@@ -819,7 +819,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         else {
             assertTrue(false, 'No Google form appeared!' . "\n");
         }
-        $this->getSession()->wait(6000);
+        $this->getSession()->wait(1000);
     }
 
     private function approveGoogleAccess(){
@@ -939,6 +939,29 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $this->getSession()->wait(1000);
     }
 
+    /**
+     * @Then /^I choose the username '([^']*)'$/
+     */
+    public function iChooseTheUsername($arg1)
+    {
+        $page = $this->getSession()->getPage();
+
+        $button = $page->findById('btn_oauth_username');
+        assertTrue($button != null);
+        assertTrue($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username',$arg1);
+        assertFalse($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username','');
+        assertTrue($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username',$arg1);
+        $button->press();
+        $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+        $this->getSession()->wait(1000);
+    }
+
     private function getParameterValue($name) {
         $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
         while(!feof($myfile)) {
@@ -948,7 +971,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
                 return substr(trim($line), strpos(trim($line), ':') + 2);
             }
         }
-        echo 'No entry found in parameters.yml!';
         fclose($myfile);
+        assertTrue(false, 'No entry found in parameters.yml!');
     }
 }

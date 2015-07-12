@@ -2,7 +2,9 @@
 
 {% block head %}
   {% stylesheets 'css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/login.css' %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="{{ asset_url }}" />
+
   {% endstylesheets %}
 
   {% javascripts 'js/plugins/*'
@@ -10,6 +12,8 @@
         output='compiled/script.js' %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 {% endblock %}
@@ -70,11 +74,23 @@
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
 
+<div id="dialog-oauth-username" title="Pocket Code Website">
+    <p>{{ "oauth.username_header"|trans({}, "catroweb") }}</p>
+    <p>{{ "oauth.username_chooser"|trans({}, "catroweb") }}</p>
+    <input type="text" id="dialog_oauth_username">
+    <input type="hidden" id="fb_google">
+    <p><button id="btn_oauth_username">{{ "oauth.username_proceed"|trans({}, "catroweb") }}</button></p>
+</div>
+
 <form id ="form_oauth" action="{{ path("fos_user_security_check") }}" method="post">
 
     <input type="hidden" id = "csrf_token_oauth" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="hidden" id = "id_oauth" name="_id" />
+    <input type="hidden" id = "email_oauth" name="_email" />
+    <input type="hidden" id = "locale_oauth" name="_locale" />
     <input type="hidden" id = "username_oauth" name="_username" />
     <input type="hidden" id = "password_oauth" name="_password" />
+    <input type="hidden" id = "access_token_oauth" name="_access_token" />
     <input type="hidden" id = "gplus_approval_prompt" value="auto" />
     <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
 

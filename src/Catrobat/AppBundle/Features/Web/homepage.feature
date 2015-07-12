@@ -45,10 +45,11 @@ Feature: Pocketcode homepage
     When I trigger Facebook login with auth_type 'reauthenticate'
     And I switch to popup window
     Then I log in to Facebook with valid credentials
+    And I choose the username 'HeyWickieHey'
     Then I should be logged in
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
-      | Pocket Tester     | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   | Pocket Tester |                        |                    | at     |
+      | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
     And I should see an "#btn-logout" element
     When I click the "logout" button
     Then I should not be logged in
@@ -62,10 +63,11 @@ Feature: Pocketcode homepage
     When I trigger Google login with approval prompt "force"
     And I switch to popup window
     Then I log in to Google with valid credentials
+    And I choose the username 'PocketGoogler'
     Then I should be logged in
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
-      | PocketCode Tester | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  | PocketCode Tester  | at     |
+      | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
     And I should see an "#btn-logout" element
     When I click the "logout" button
     Then I should not be logged in

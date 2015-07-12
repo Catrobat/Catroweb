@@ -185,8 +185,10 @@ class SecurityController extends Controller
         $retArray = array();
 
         $google_user = $userManager->findOneBy(array('gplusUid' => $google_id));
-        if ($google_user && $google_user->getGplusRefreshToken() && $google_user->getGplusAccessToken()) {
+        if ($google_user && $google_user->getGplusAccessToken()) {
             $retArray['token_available'] = true;
+            $retArray['username'] = $google_user->getUsername();
+            $retArray['email'] = $google_user->getEmail();
         } else {
             $retArray['token_available'] = false;
         }
@@ -207,6 +209,8 @@ class SecurityController extends Controller
         $facebook_user = $userManager->findOneBy(array('facebookUid' => $facebook_id));
         if ($facebook_user && $facebook_user->getFacebookAccessToken()) {
             $retArray['token_available'] = true;
+            $retArray['username'] = $facebook_user->getUsername();
+            $retArray['email'] = $facebook_user->getEmail();
         } else {
             $retArray['token_available'] = false;
         }
@@ -228,6 +232,7 @@ class SecurityController extends Controller
         $gPlusId = $request->request->get('id');
         $google_username = $request->request->get('username');
         $google_mail = $request->request->get('mail');
+        $locale = $request->request->get('locale');
 
         // Ensure that this is no request forgery going on, and that the user
         // sending us this request is the user that was supposed to.
@@ -301,7 +306,7 @@ class SecurityController extends Controller
             $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $gPlusId, $google_username);
             $this->setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token);
         } else {
-            $this->registerGoogleUser($request, $userManager, $retArray, $gPlusId, $google_username, $google_mail, $access_token, $refresh_token, $id_token);
+            $this->registerGoogleUser($request, $userManager, $retArray, $gPlusId, $google_username, $google_mail, $locale, $access_token, $refresh_token, $id_token);
         }
 
         $retArray['statusCode'] = 201;
@@ -325,6 +330,7 @@ class SecurityController extends Controller
         $facebookId = $request->request->get('id');
         $facebook_username = $request->request->get('username');
         $facebook_mail = $request->request->get('mail');
+        $locale = $request->request->get('locale');
 
         // Ensure that this is no request forgery going on, and that the user
         // sending us this request is the user that was supposed to.
@@ -404,7 +410,7 @@ class SecurityController extends Controller
             $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $facebookId, $facebook_username);
             $user->setFacebookAccessToken($server_token);
         } else {
-            $this->registerFacebookUser($request, $userManager, $retArray, $facebookId, $facebook_username, $facebook_mail, $server_token);
+            $this->registerFacebookUser($request, $userManager, $retArray, $facebookId, $facebook_username, $facebook_mail, $locale, $server_token);
         }
 
         if(!$retArray['statusCode'] == StatusCode::LOGIN_ERROR){
@@ -451,12 +457,9 @@ class SecurityController extends Controller
         } else if ($user) {
             $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $google_id, $google_username);
             $retArray['password'] = $user->getOauthPassword();
-        } else {
-            $this->registerGoogleUser($request, $userManager, $retArray, $google_id, $google_username, $google_mail);
         }
 
         $retArray['username'] = $google_username;
-        $retArray['preHeaderMessages'] = "";
         return JsonResponse::create($retArray);
     }
 
@@ -481,12 +484,9 @@ class SecurityController extends Controller
         } else if ($user) {
             $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $fb_id, $fb_username, $fb_mail);
             $retArray['password'] = $user->getOauthPassword();
-        } else {
-            $this->registerFacebookUser($request, $userManager, $retArray, $fb_id, $fb_username, $fb_mail);
         }
 
         $retArray['username'] = $fb_username;
-        $retArray['preHeaderMessages'] = "";
         return JsonResponse::create($retArray);
     }
 
@@ -559,15 +559,13 @@ class SecurityController extends Controller
         }
     }
 
-    private function registerFacebookUser($request, $userManager, &$retArray, $facebookId, $facebookUsername, $facebookEmail, $access_token = null)
+    private function registerFacebookUser($request, $userManager, &$retArray, $facebookId, $facebookUsername, $facebookEmail, $locale, $access_token = null)
     {
         $violations = $this->validateOAuthUser($request, $retArray);
         if (count($violations) == 0) {
             $user = $userManager->createUser();
             $user->setUsername($facebookUsername);
-            $user->setFacebookName($facebookUsername);
-            //TODO: read country from social graph
-            $user->setCountry('at');
+            $user->setCountry($locale);
 
             if ($access_token) {
                 $user->setFacebookAccessToken($access_token);
@@ -594,18 +592,17 @@ class SecurityController extends Controller
     }
 
     private function registerGoogleUser($request, $userManager, &$retArray, $googleId, $googleUsername, $googleEmail,
-                                        $access_token = null, $refresh_token = null, $id_token = null)
+                                        $locale, $access_token = null, $refresh_token = null, $id_token = null)
     {
         $violations = $this->validateOAuthUser($request, $retArray);
         $retArray['violations'] = count($violations);
         if (count($violations) == 0) {
             $user = $userManager->createUser();
             $user->setUsername($googleUsername);
-            $user->setGplusName($googleUsername);
+            //$user->setGplusName($googleUsername);
             $user->setGplusUid($googleId);
             $user->setEmail($googleEmail);
-            //TODO: read country from social graph
-            $user->setCountry('at');
+            $user->setCountry($locale);
             $generator = new SecureRandom();
             $password = bin2hex($generator->nextBytes(16));
             $retArray['password'] = $password;
@@ -638,5 +635,6 @@ class SecurityController extends Controller
     {
         return $this->get('translator')->trans($message, $parameters, 'catroweb');
     }
+
 }
 

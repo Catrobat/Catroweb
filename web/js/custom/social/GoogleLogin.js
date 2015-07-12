@@ -35,6 +35,7 @@ function triggerGoogleLogin(){
 
 function signinCallback(authResult) {
     if (authResult['code']) {
+        $("#access_token_oauth").val(authResult['code']);
         console.log('auth: ' + authResult['code']);
         getGoogleUserInfo(authResult);
     } else if (authResult['error']) {
@@ -48,6 +49,11 @@ function signinCallback(authResult) {
     }
 }
 
+function getDesiredUsernameGoogle() {
+    $("#fb_google").val('g+');
+    openDialog();
+}
+
 function getGoogleUserInfo(authResult) {
     gapi.client.load('oauth2', 'v2', function () {
         var request = gapi.client.oauth2.userinfo.get();
@@ -58,6 +64,7 @@ function getGoogleUserInfo(authResult) {
         var $email = '';
         var $username = '';
         var $id = '';
+        var $locale = '';
 
         if (obj['email']) {
             $email = obj['email'];
@@ -67,6 +74,9 @@ function getGoogleUserInfo(authResult) {
         }
         if (obj['id']) {
             $id = obj['id'];
+        }
+        if (obj['locale']) {
+            $locale = obj['locale'];
         }
         var $ajaxUrlCheckServerTokenAvailable = Routing.generate(
             'catrobat_oauth_login_google_servertoken_available', {flavor: 'pocketcode'}
@@ -79,16 +89,19 @@ function getGoogleUserInfo(authResult) {
                 console.log(data);
                 var $server_token_available = data['token_available'];
                 if (!$server_token_available) {
-                    sendCodeToServer(authResult['code'], $id, $username, $email);
+                    $("#id_oauth").val($id);
+                    $("#email_oauth").val($email);
+                    $("#locale_oauth").val($locale);
+                    getDesiredUsernameGoogle();
                 } else {
-                    GoogleLogin($email, $username, $id);
+                    GoogleLogin(data['email'], data['username'], $id);
                 }
             });
     }
 }
 
 
-function sendCodeToServer($code, $gplus_id, $username, $email) {
+function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
 
     var $state = $('#csrf_token').val();
     var $ajaxUrl = Routing.generate(
@@ -101,7 +114,8 @@ function sendCodeToServer($code, $gplus_id, $username, $email) {
             id: $gplus_id,
             state: $state,
             username: $username,
-            mail: $email
+            mail: $email,
+            locale: $locale
         },
         function (data, status) {
 
