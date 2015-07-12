@@ -626,6 +626,16 @@ class SecurityController extends Controller
         }
     }
 
+    /**
+     * @Route("/api/generateCsrfToken/generateCsrfToken.json", name="catrobat_oauth_register_get_csrftoken", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"GET"})
+     */
+    public function generateCsrfToken() {
+        $retArray = array();
+        $retArray['csrf_token'] = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
+        return JsonResponse::create($retArray);
+    }
+
     private function loginOAuthUser(&$retArray)
     {
         $retArray['statusCode'] = StatusCode::OK;

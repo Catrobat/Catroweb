@@ -1,9 +1,21 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
-  {#{% stylesheets '@CatrobatWebBundle/Resources/public/css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/register.css' %}#}
-  {#<link rel="stylesheet" href="{{ asset_url }}" />#}
-  {#{% endstylesheets %}#}
+    {% stylesheets 'css/custom/login.less' filter='cssrewrite,lessphp' output='compiled/login.css' %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset_url }}" />
+
+    {% endstylesheets %}
+
+    {% javascripts 'js/plugins/*'
+    'js/base/*' 'js/custom/social/*'
+    output='compiled/script.js' %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 {% block header %}
@@ -49,6 +61,9 @@
       </div>
       {{ form_rest(form) }}
     </form>
+
+    {% include ':Default:oauth_form.html.twig' %}
+
   {% endblock fos_user_content %}
 
 {% endblock body %}

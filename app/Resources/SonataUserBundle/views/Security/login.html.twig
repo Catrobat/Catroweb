@@ -29,9 +29,6 @@
 <form id ="form_fos" action="{{ path("fos_user_security_check") }}" method="post">
     <input type="hidden" id = "csrf_token" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <h1>{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</h1>
-    <p></p>
-
     <div class="input-field">
       <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ "username"|trans({}, "catroweb") }}" />
       <div class="img-login"></div>
@@ -58,71 +55,24 @@
         {% endif %}
     {% endif %}
 
-    <div id="login_links">
-         <span id="login_link_left">
-             <a href="register">Create an account</a>
-         </span>
-         <span id="login_link_right">
-             <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>
-         </span>
-    </div>
-
     {% if error %}
       <div class="error-text">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
     {% endif %}
 
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+
+    <div id="login_links">
+         <span id="login_link_left">
+             <a href="{{ path('fos_user_registration_register', {'csrf_token' : csrf_token}) }}">Create an account</a>
+         </span>
+         <span id="login_link_right">
+             <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>
+         </span>
+    </div>
 </form>
 
-<div id="dialog-oauth-username" title="Pocket Code Website">
-    <p>{{ "oauth.username_header"|trans({}, "catroweb") }}</p>
-    <p>{{ "oauth.username_chooser"|trans({}, "catroweb") }}</p>
-    <input type="text" id="dialog_oauth_username">
-    <input type="hidden" id="fb_google">
-    <p><button id="btn_oauth_username">{{ "oauth.username_proceed"|trans({}, "catroweb") }}</button></p>
-</div>
+{% include ':Default:oauth_form.html.twig' %}
 
-<form id ="form_oauth" action="{{ path("fos_user_security_check") }}" method="post">
-
-    <input type="hidden" id = "csrf_token_oauth" name="_csrf_token" value="{{ csrf_token }}" />
-    <input type="hidden" id = "id_oauth" name="_id" />
-    <input type="hidden" id = "email_oauth" name="_email" />
-    <input type="hidden" id = "locale_oauth" name="_locale" />
-    <input type="hidden" id = "username_oauth" name="_username" />
-    <input type="hidden" id = "password_oauth" name="_password" />
-    <input type="hidden" id = "access_token_oauth" name="_access_token" />
-    <input type="hidden" id = "gplus_approval_prompt" value="auto" />
-    <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
-
-    <div id="separator">
-        <br>
-        <hr/>
-        <span id="or">
-            OR
-        </span>
-        <hr/>
-        <br>
-        <p></p>
-    </div>
-
-    <div id="fb-root"></div>
-    <div id ="googleLoginButton">
-            <!--
-                Google Login Button is a 2 click button, where image is removed at first click, second click triggers login because of data privacy - see:
-                http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons
-            -->
-    <a id="btn-login_google" href="#" onclick="triggerGoogleLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-google.png') }}" alt="Google Login"></a>
-    </div>
-    <div id ="facebookLoginButton">
-    <a id="btn-login_facebook" href="#" onclick="triggerFacebookLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
-    </div>
-
-     <div id="status">
-    </div>
-
-    <button id="_submit_oauth" name="_submit" class="hidden" />
-
-</form>
 {% endblock fos_user_content %}
 
 {% endblock body %}
