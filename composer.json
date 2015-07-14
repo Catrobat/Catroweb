@@ -25,6 +25,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
+        "doctrine/migrations": "1.0.*@dev",
+        "doctrine/doctrine-migrations-bundle": "1.0.*",
         "leafo/lessphp": "dev-master",
         "hwi/oauth-bundle": "*@dev",
         "knplabs/knp-paginator-bundle": "dev-master",
