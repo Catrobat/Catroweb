@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Services;
+namespace spec\Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;

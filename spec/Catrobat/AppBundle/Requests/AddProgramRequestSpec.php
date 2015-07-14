@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Requests;
+namespace spec\Catrobat\AppBundle\Requests;
 
 use PhpSpec\ObjectBehavior;
 

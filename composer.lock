@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8791538f8dbef919a77d5ba7637a6129",
+    "hash": "dbba9cf58cf992975115f3a911990699",
     "packages": [
         {
             "name": "behat/behat",
@@ -5123,53 +5123,6 @@
             "time": "2015-04-27 22:15:08"
         },
         {
-            "name": "phpspec/symfony2-extension",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpspec/Symfony2Extension.git",
-                "reference": "bd348f60bac46a346372552e55acb6dd12fcd82a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/Symfony2Extension/zipball/bd348f60bac46a346372552e55acb6dd12fcd82a",
-                "reference": "bd348f60bac46a346372552e55acb6dd12fcd82a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "phpspec/phpspec": "dev-master",
-                "symfony/framework-bundle": "~2.0"
-            },
-            "require-dev": {
-                "behat/behat": "*",
-                "bossa/phpspec2-expect": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PhpSpec\\Symfony2Extension": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jakub Zalas",
-                    "email": "jakub@zalas.pl"
-                }
-            ],
-            "description": "Symfony2 extension for phpspec",
-            "homepage": "https://github.com/phpspec/Symfony2Extension",
-            "keywords": [
-                "Symfony2",
-                "phpspec"
-            ],
-            "time": "2015-04-24 07:14:25"
-        },
-        {
             "name": "phpunit/php-code-coverage",
             "version": "2.1.8",
             "source": {
@@ -6091,7 +6044,6 @@
         "sonata-project/datagrid-bundle": 20,
         "chartinger/behat-twig-report-extension": 20,
         "phpspec/phpspec": 20,
-        "phpspec/symfony2-extension": 20,
         "henrikbjorn/phpspec-code-coverage": 20,
         "bossa/phpspec2-expect": 20,
         "behat/behat": 20,

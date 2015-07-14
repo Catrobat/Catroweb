@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Services\Formatter;
+namespace spec\Catrobat\AppBundle\Services\Formatter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

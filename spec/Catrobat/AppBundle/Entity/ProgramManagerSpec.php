@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Entity;
+namespace spec\Catrobat\AppBundle\Entity;
 
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use PhpSpec\ObjectBehavior;

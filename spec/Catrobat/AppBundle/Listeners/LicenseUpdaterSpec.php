@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Listeners;
+namespace spec\Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use PhpSpec\ObjectBehavior;

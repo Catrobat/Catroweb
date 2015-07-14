@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Spec\Services;
+namespace spec\Catrobat\AppBundle\Services;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\File\File;

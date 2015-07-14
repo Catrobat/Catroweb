@@ -43,7 +43,6 @@
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",
         "phpspec/phpspec": "dev-master",
-        "phpspec/symfony2-extension": "*@dev",
         "henrikbjorn/phpspec-code-coverage": "1.0.*@dev",
         "phpunit/phpunit": "3.7.*",
         "bossa/phpspec2-expect": "dev-master",

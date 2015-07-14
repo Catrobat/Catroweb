@@ -1,22 +1,11 @@
 formatter.name: pretty
 extensions:
-  - PhpSpec\Symfony2Extension\Extension
   - PhpSpec\CatrobatExtension\Extension
-  - PhpSpec\Extension\CodeCoverageExtension
+#  - PhpSpec\Extension\CodeCoverageExtension
   
 code_coverage:
     whitelist:
-      - "src/Catrobat/ApiBundle/Controller"
-      - "src/Catrobat/CatrowebBundle/Controller"
-      - "src/Catrobat/CoreBundle/Services"
-      - "src/Catrobat/CoreBundle/Model"
-      - "src/Catrobat/CoreBundle/Exceptions"
-      - "src/Catrobat/CoreBundle/Spec"
+      - "src/Catrobat/AppBundle/"
     output:
       html: ./testreports/coverage
       
-# TODO: values not used
-catrobat:
-    cache: "src/Catrobat/CatrowebBundle/Spec/Cache"
-    datafixtures: "src/Catrobat/CatrowebBundle/Spec/DataFixtures"
-    
