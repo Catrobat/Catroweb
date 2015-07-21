@@ -8,7 +8,7 @@ default:
                 env: test
                 debug: true
         Behat\MinkExtension:
-              base_url: http://catroid.local/app_test.php/
+              base_url: http://localhost/app_test.php/
               sessions:
                 default:
                   selenium2:
