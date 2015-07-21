@@ -317,6 +317,17 @@ class DefaultController extends Controller
       return $this->get('templating')->renderResponse('::licenseToPlay.html.twig');
   }
 
+  /**
+   * @Route("/media-package/{type}", name="media_package", requirements={"type":"backgrounds|sounds|looks"})
+   * @Method({"GET"})
+   */
+  public function MediaPackageAction($type)
+  {
+    return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
+      'type' => $type
+    ));
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //// private functions
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

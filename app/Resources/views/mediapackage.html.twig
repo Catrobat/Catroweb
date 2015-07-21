@@ -1,0 +1,98 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+  <div id="animals">
+    <h1>Animals</h1>
+    <div class="programs">
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/animals/bat1-a .png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/animals/bat1-a .png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/animals/bat1-b .png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/animals/bat1-b .png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/animals/bat2-a .png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/animals/bat2-a .png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/animals/bat2-b .png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/animals/bat2-b .png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/animals/beetle.png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/animals/beetle.png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/animals/bird.png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/animals/bird.png') }}">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="fantasy">
+    <h1>Fantasy</h1>
+    <div class="programs">
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/fantasy/alien.png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/fantasy/alien.png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/fantasy/creature1-a.png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/fantasy/creature1-a.png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/fantasy/creature1-b.png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/fantasy/creature1-b.png') }}">
+          </div>
+        </a>
+      </div>
+      <div class="program" id="look-1">
+        <a href="http://catroweb/images/mediapackage/looks/fantasy/creature1-c.png" download>
+          <div>
+            <img src="{{ asset('images/mediapackage/looks/fantasy/creature1-c.png') }}">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script>
+  </script>
+{% endblock %}
