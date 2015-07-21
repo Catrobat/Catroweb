@@ -29,6 +29,7 @@ programs:
   most:
     viewed: Most viewed
     downloaded: Most downloaded
+  random: Random Programs
   downloads: %downloads% downloads
   views: %views% views
   reportAsInappropriate: Report as inappropriate

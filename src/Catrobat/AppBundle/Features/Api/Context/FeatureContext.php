@@ -399,6 +399,27 @@ class FeatureContext extends BaseContext
   }
 
   /**
+   * @Then /^I should get (\d+) programs in random order:$/
+   */
+  public function iShouldGetProgramsInRandomOrder($program_count, TableNode $table)
+  {
+    $response = $this->getClient()->getResponse();
+    $response_array = json_decode($response->getContent(), true);
+    $random_programs = $response_array['CatrobatProjects'];
+    $expected_programs = $table->getHash();
+    assertEquals($program_count, count($random_programs), 'Wrong number of random programs');
+
+    for ($i = 0; $i < count($random_programs); ++$i) {
+      $program_found = false;
+      for ($j = 0; $j < count($expected_programs); ++$j) {
+        if(strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]['Name']) === 0)
+          $program_found = true;
+      }
+      assertEquals($program_found, true, 'Program does not exist in the database');
+    }
+  }
+
+  /**
    * @Then /^I should get following programs:$/
    */
   public function iShouldGetFollowingPrograms(TableNode $table)
