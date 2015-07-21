@@ -154,6 +154,8 @@ class DefaultController extends Controller
           return $this->redirectToRoute('fos_user_security_login');
       }
 
+      $oauth_user = $user->getFacebookUid() || $user->getGplusUid();
+
       \Locale::setDefault(substr($request->getLocale(), 0, 2));
       $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
 
@@ -163,6 +165,7 @@ class DefaultController extends Controller
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,
       'country' => $country,
+      'oauth_user' => $oauth_user
     ));
   }
 

@@ -1,9 +1,13 @@
 <div id="dialog-oauth-username" title="Pocket Code Website">
-    <p>{{ "oauth.username_header"|trans({}, "catroweb") }}</p>
-    <p>{{ "oauth.username_chooser"|trans({}, "catroweb") }}</p>
-    <input type="text" id="dialog_oauth_username">
+    <p class="dialog-oauth-username">{{ "oauth.username_header"|trans({}, "catroweb") }}</p>
+    <p class="dialog-oauth-username">{{ "oauth.username_chooser"|trans({}, "catroweb") }}</p>
+    <input type="text" id="dialog_oauth_username_input">
+    <p class="dialog-oauth-username">{{ "oauth.username_hint"|trans({}, "catroweb") }}</p>
     <input type="hidden" id="fb_google">
-    <p><button id="btn_oauth_username">{{ "oauth.username_proceed"|trans({}, "catroweb") }}</button></p>
+    <div id="error_username_taken" class="error-text" >
+        {{ "oauth.usernameTaken"|trans({}, "catroweb") }}
+    </div>
+    <p class="dialog-oauth-username"><button id="btn_oauth_username">{{ "ok"|trans({}, "catroweb") }}</button></p>
 </div>
 
 <form id ="form_oauth" action="{{ path("fos_user_security_check") }}" method="post">
@@ -22,16 +26,16 @@
     <input type="hidden" id = "gplus_approval_prompt" value="auto" />
     <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
 
-    <div id="separator">
+    <span id="separator">
         <br>
         <hr/>
         <span id="or">
-            OR
+            {{ 'login.or'|trans({}, 'catroweb') }}
         </span>
         <hr/>
         <br>
         <p></p>
-    </div>
+    </span>
 
     <div id="fb-root"></div>
     <div id ="googleLoginButton">
@@ -51,3 +55,5 @@
     <button id="_submit_oauth" name="_submit" class="hidden" />
 
 </form>
+
+

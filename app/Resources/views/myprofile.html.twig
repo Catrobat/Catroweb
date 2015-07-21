@@ -31,14 +31,16 @@
         <div class="input-error text-password-tooshort">{{ 'profile.form.passwordTooShort'|trans({'%length%':minPassLength}, 'catroweb') }}</div>
         <div class="input-error text-password-toolong">{{ 'profile.form.passwordTooLong'|trans({'%length%':maxPassLength}, 'catroweb') }}</div>
         <div class="input-error text-password-isusername">{{ 'profile.form.passwordIsUsername'|trans({}, 'catroweb') }}</div>
-        <div class="input-field">
-          <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" tabindex="1">
-          <div class="img-password"></div>
-        </div>
-        <div class="input-field">
-          <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" tabindex="2">
-          <div class="img-password"></div>
-        </div>
+        {% if not oauth_user %}
+          <div class="input-field">
+            <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" tabindex="1">
+            <div class="img-password"></div>
+          </div>
+          <div class="input-field">
+            <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" tabindex="2">
+            <div class="img-password"></div>
+          </div>
+        {% endif %}
         <div id="select-country">
           <div>{{ 'country'|trans({}, 'catroweb') }}</div>
           <div>

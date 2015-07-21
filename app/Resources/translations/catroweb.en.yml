@@ -22,6 +22,7 @@ pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
+ok: OK
 
 programs:
   featured: Featured
@@ -460,7 +461,9 @@ help:
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: Please choose a username:
-  username_proceed: Proceed to Pocket Code Website
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 
 search:
   dotdotdot: Search...
@@ -483,6 +486,8 @@ login:
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Username or Email
   changePass: Change password
+  createAccount: Create an account
+  or: OR
 
 apk:
   download: Download as app

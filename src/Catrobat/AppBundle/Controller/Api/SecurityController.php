@@ -218,6 +218,73 @@ class SecurityController extends Controller
     }
 
     /**
+     * @Route("/api/EMailAvailable/EMailnAvailable.json", name="catrobat_oauth_login_email_available", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function checkEMailAvailable(Request $request)
+    {
+        $email = $request->request->get('email');
+
+        $userManager = $this->get("usermanager");
+        $retArray = array();
+
+        $user = $userManager->findOneBy(array('email' => $email));
+        if ($user) {
+            $retArray['email_available'] = true;
+            $retArray['username'] = $user->getUsername();
+        } else {
+            $retArray['email_available'] = false;
+        }
+        return JsonResponse::create($retArray);
+    }
+
+    /**
+     * @Route("/api/UsernameAvailable/UsernameAvailable.json", name="catrobat_oauth_login_username_available", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function checkUserNameAvailable(Request $request)
+    {
+        $username = $request->request->get('username');
+
+        $userManager = $this->get("usermanager");
+        $retArray = array();
+
+        $user = $userManager->findOneBy(array('username' => $username));
+
+        if ($user) {
+            $retArray['username_available'] = true;
+        } else {
+            $retArray['username_available'] = false;
+        }
+        return JsonResponse::create($retArray);
+    }
+
+    /**
+     * @Route("/api/IsOAuthUser/IsOAuthUser.json", name="catrobat_is_oauth_user", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function isOAuthUser(Request $request)
+    {
+        $username_email = $request->request->get('username_email');
+
+        $userManager = $this->get("usermanager");
+        $retArray = array();
+
+        $user = $userManager->findOneBy(array('username' => $username_email));
+        if(!$user) {
+            $user = $userManager->findOneBy(array('email' => $username_email));
+        }
+
+        if ($user && ($user->getFacebookUid() || $user->getGplusUid())) {
+            $retArray['is_oauth_user'] = true;
+        } else {
+            $retArray['is_oauth_user'] = false;
+        }
+        return JsonResponse::create($retArray);
+    }
+
+
+    /**
      * @Route("/api/exchangeGoogleCode/exchangeGoogleCode.json", name="catrobat_oauth_login_google_code", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
@@ -303,7 +370,7 @@ class SecurityController extends Controller
         if ($google_user) {
             $this->setGoogleTokens($userManager, $google_user, $access_token, $refresh_token, $id_token);
         } else if ($user) {
-            $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $gPlusId, $google_username);
+            $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $gPlusId, $google_username, $locale);
             $this->setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token);
         } else {
             $this->registerGoogleUser($request, $userManager, $retArray, $gPlusId, $google_username, $google_mail, $locale, $access_token, $refresh_token, $id_token);
@@ -404,11 +471,13 @@ class SecurityController extends Controller
         $userManager = $this->get("usermanager");
         $user = $userManager->findUserByEmail($facebook_mail);
         $facebook_user = $userManager->findUserBy(array('facebookUid' => $facebookId));
+
         if ($facebook_user) {
             $facebook_user->setFacebookAccessToken($server_token);
         } else if ($user) {
-            $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $facebookId, $facebook_username);
+            $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $facebookId, $facebook_username, $locale);
             $user->setFacebookAccessToken($server_token);
+            $userManager->updateUser($user);
         } else {
             $this->registerFacebookUser($request, $userManager, $retArray, $facebookId, $facebook_username, $facebook_mail, $locale, $server_token);
         }
@@ -448,6 +517,7 @@ class SecurityController extends Controller
         $google_username = $request->request->get('username');
         $google_id = $request->request->get('id');
         $google_mail = $request->request->get('mail');
+        $locale = $request->request->get('locale');
 
         $user = $userManager->findUserByEmail($google_mail);
         $google_user = $userManager->findOneBy(array('gplusUid' => $google_id));
@@ -455,11 +525,11 @@ class SecurityController extends Controller
             $retArray['password'] = $google_user->getOauthPassword();
             $this->loginOAuthUser($retArray);
         } else if ($user) {
-            $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $google_id, $google_username);
+            $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $google_id, $google_username, $locale);
             $retArray['password'] = $user->getOauthPassword();
         }
 
-        $retArray['username'] = $google_username;
+        $retArray['username'] = $user->getUsername();
         return JsonResponse::create($retArray);
     }
 
@@ -475,6 +545,7 @@ class SecurityController extends Controller
         $fb_username = $request->request->get('username');
         $fb_id = $request->request->get('id');
         $fb_mail = $request->request->get('mail');
+        $locale = $request->request->get('locale');
 
         $user = $userManager->findUserByEmail($fb_mail);
         $fb_user = $userManager->findOneBy(array('facebookUid' => $fb_id));
@@ -482,11 +553,11 @@ class SecurityController extends Controller
             $this->loginOAuthUser($retArray);
             $retArray['password'] = $fb_user->getOauthPassword();
         } else if ($user) {
-            $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $fb_id, $fb_username, $fb_mail);
+            $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $fb_id, $fb_username, $fb_mail, $locale);
             $retArray['password'] = $user->getOauthPassword();
         }
 
-        $retArray['username'] = $fb_username;
+        $retArray['username'] = $user->getUsername();
         return JsonResponse::create($retArray);
     }
 
@@ -525,15 +596,20 @@ class SecurityController extends Controller
         return $violations;
     }
 
-    private function connectGoogleUserToExistingUserAccount($userManager, $request, &$retArray, $user, $googleId, $googleUsername)
+    private function connectGoogleUserToExistingUserAccount($userManager, $request, &$retArray, $user, $googleId, $googleUsername, $locale)
     {
         $violations = $this->validateOAuthUser($request, $retArray);
         if (count($violations) == 0) {
             if ($user->getUsername() == '') {
                 $user->setUsername($googleUsername);
             }
+            if ($user->getCountry() == '') {
+                $user->setCountry($locale);
+            }
+
             $user->setGplusName($googleUsername);
             $user->setGplusUid($googleId);
+            $retArray['password'] = $this->generateOAuthPassword($user);
 
             $user->setEnabled(true);
             $userManager->updateUser($user);
@@ -542,15 +618,21 @@ class SecurityController extends Controller
         }
     }
 
-    private function connectFacebookUserToExistingUserAccount($userManager, $request, &$retArray, $user, $facebookId, $facebookUsername)
+    private function connectFacebookUserToExistingUserAccount($userManager, $request, &$retArray, $user, $facebookId, $facebookUsername, $locale)
     {
         $violations = $this->validateOAuthUser($request, $retArray);
         if (count($violations) == 0) {
             if ($user->getUsername() == '') {
                 $user->setUsername($facebookUsername);
             }
+
+            if ($user->getCountry() == '') {
+                $user->setCountry($locale);
+            }
+
             $user->setFacebookName($facebookUsername);
             $user->setFacebookUid($facebookId);
+            $retArray['password'] = $this->generateOAuthPassword($user);
 
             $user->setEnabled(true);
             $userManager->updateUser($user);
@@ -573,13 +655,7 @@ class SecurityController extends Controller
 
             $user->setFacebookUid($facebookId);
             $user->setEmail($facebookEmail);
-
-            $generator = new SecureRandom();
-            $password = bin2hex($generator->nextBytes(16));
-
-            $retArray['password'] = $password;
-            $user->setPlainPassword($password);
-            $user->setOauthPassword($password);
+            $retArray['password'] = $this->generateOAuthPassword($user);
 
             $user->setEnabled(true);
             $userManager->updateUser($user);
@@ -603,12 +679,9 @@ class SecurityController extends Controller
             $user->setGplusUid($googleId);
             $user->setEmail($googleEmail);
             $user->setCountry($locale);
-            $generator = new SecureRandom();
-            $password = bin2hex($generator->nextBytes(16));
-            $retArray['password'] = $password;
 
-            $user->setPlainPassword($password);
-            $user->setOauthPassword($password);
+            $retArray['password'] = $this->generateOAuthPassword($user);
+
             if ($access_token) {
                 $user->setGplusAccessToken($access_token);
             }
@@ -626,6 +699,8 @@ class SecurityController extends Controller
         }
     }
 
+
+
     /**
      * @Route("/api/generateCsrfToken/generateCsrfToken.json", name="catrobat_oauth_register_get_csrftoken", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
@@ -634,6 +709,14 @@ class SecurityController extends Controller
         $retArray = array();
         $retArray['csrf_token'] = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         return JsonResponse::create($retArray);
+    }
+
+    private function generateOAuthPassword($user) {
+        $generator = new SecureRandom();
+        $password = bin2hex($generator->nextBytes(16));
+        $user->setPlainPassword($password);
+        $user->setOauthPassword($password);
+        return $password;
     }
 
     private function loginOAuthUser(&$retArray)
@@ -647,4 +730,3 @@ class SecurityController extends Controller
     }
 
 }
-

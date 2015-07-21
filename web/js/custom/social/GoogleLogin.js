@@ -49,11 +49,6 @@ function signinCallback(authResult) {
     }
 }
 
-function getDesiredUsernameGoogle() {
-    $("#fb_google").val('g+');
-    openDialog();
-}
-
 function getGoogleUserInfo(authResult) {
     gapi.client.load('oauth2', 'v2', function () {
         var request = gapi.client.oauth2.userinfo.get();
@@ -92,14 +87,35 @@ function getGoogleUserInfo(authResult) {
                     $("#id_oauth").val($id);
                     $("#email_oauth").val($email);
                     $("#locale_oauth").val($locale);
-                    getDesiredUsernameGoogle();
+
+                    var $ajaxUrlCheckEmailAvailable = Routing.generate(
+                      'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
+                    );
+                    $.post($ajaxUrlCheckEmailAvailable,
+                      {
+                          email: $email
+                      },
+                      function (data, status) {
+                          console.log(data);
+                          console.log(status);
+
+                          if(data['email_available'] == false) {
+                              getDesiredUsernameGoogle();
+                          } else {
+                              sendCodeToServer($("#access_token_oauth").val(), $id, data['username'], $email, $locale);
+                          }
+                      });
                 } else {
-                    GoogleLogin(data['email'], data['username'], $id);
+                    GoogleLogin(data['email'], data['username'], $id, $locale);
                 }
             });
     }
 }
 
+function getDesiredUsernameGoogle() {
+    $("#fb_google").val('g+');
+    openDialog();
+}
 
 function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
 
@@ -135,7 +151,7 @@ function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
         });
 }
 
-function GoogleLogin($email, $username, $id) {
+function GoogleLogin($email, $username, $id, $locale) {
 
     var $ajaxUrl = Routing.generate(
         'catrobat_oauth_login_google', {flavor: 'pocketcode'}
@@ -145,26 +161,15 @@ function GoogleLogin($email, $username, $id) {
         {
             username: $username,
             id: $id,
-            mail: $email
+            mail: $email,
+            locale: $locale
         },
         function (data, status) {
             submitOAuthForm(data)
         });
 }
 
-function submitOAuthForm(data){
-    var $username = data['username'];
-    var $password = data['password'];
-    $("#username_oauth").val($username);
-    $("#password_oauth").val($password);
-    $("#_submit_oauth").attr("disabled", false);
-    $("#_submit_oauth").click();
-    $("#_submit_oauth").attr("disabled", true);
-}
-
 function GoogleLogout() {
-
-
     var $appid = '';
     var $ajaxGetGoogleAppId = Routing.generate(
         'catrobat_oauth_login_get_google_appid', {flavor: 'pocketcode'}

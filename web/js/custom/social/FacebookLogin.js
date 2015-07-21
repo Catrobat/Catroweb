@@ -60,11 +60,6 @@ function statusChangeCallback(response) {
     }
 }
 
-function getDesiredUsernameFB() {
-    $("#fb_google").val('fb');
-    openDialog();
-}
-
 function getFacebookUserInfo() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function (response) {
@@ -91,14 +86,35 @@ function getFacebookUserInfo() {
                     $("#id_oauth").val(response.id);
                     $("#email_oauth").val(response.email);
                     $("#locale_oauth").val(response.locale);
-                    getDesiredUsernameFB();
+
+                    var $ajaxUrlCheckEmailAvailable = Routing.generate(
+                      'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
+                    );
+                    $.post($ajaxUrlCheckEmailAvailable,
+                      {
+                          email: response.email
+                      },
+                      function (data, status) {
+                          console.log(data);
+                          console.log(status);
+
+                          if(data['email_available'] == false) {
+                              getDesiredUsernameFB();
+                          } else {
+                            sendTokenToServer($("#access_token_oauth").val(), response.id, data['username'], response.email, response.locale)
+                          }
+                      });
                 } else {
-                    FacebookLogin(data['email'], data['username'], response.id);
+                    FacebookLogin(data['email'], data['username'], response.id, response.locale);
                 }
             });
     });
 }
 
+function getDesiredUsernameFB() {
+    $("#fb_google").val('fb');
+    openDialog();
+}
 
 function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
 
@@ -107,8 +123,6 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
     var $ajaxUrl = Routing.generate(
         'catrobat_oauth_login_facebook_token', {flavor: 'pocketcode'}
     );
-
-    console.log($ajaxUrl);
 
     $.post($ajaxUrl,
         {
@@ -119,7 +133,7 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
             mail: $email,
             locale: $locale
         },
-        function () {
+        function (data, status) {
 
             $ajaxUrl = Routing.generate(
                 'catrobat_oauth_login_facebook', {flavor: 'pocketcode'}
@@ -138,7 +152,7 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
 }
 
 
-function FacebookLogin($email, $username, $id) {
+function FacebookLogin($email, $username, $id, $locale) {
 
     var $ajaxUrl = Routing.generate(
         'catrobat_oauth_login_facebook', {flavor: 'pocketcode'}
@@ -148,21 +162,12 @@ function FacebookLogin($email, $username, $id) {
         {
             username: $username,
             id: $id,
-            mail: $email
+            mail: $email,
+            locale: $locale
         },
         function (data, status) {
             submitOAuthForm(data);
         });
-}
-
-function submitOAuthForm(data){
-    var $username = data['username'];
-    var $password = data['password'];
-    $("#username_oauth").val($username);
-    $("#password_oauth").val($password);
-    $("#_submit_oauth").attr("disabled", false);
-    $("#_submit_oauth").click();
-    $("#_submit_oauth").attr("disabled", true);
 }
 
 function FacebookLogout() {

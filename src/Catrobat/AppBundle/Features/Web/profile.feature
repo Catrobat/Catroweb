@@ -3,9 +3,9 @@ Feature: As a visitor I want to see user profiles
 
   Background:
     Given there are users:
-      | name      | password | token      |
-      | Christian | 123456   | cccccccccc |
-      | Gregor    | 654321   | cccccccccc |
+      | name      | password | token      | email               |
+      | Christian | 123456   | cccccccccc | dev1@pocketcode.org |
+      | Gregor    | 654321   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
       | id | name      | description        | owned by  | downloads | views | upload time      | version |
       | 1  | program 1 | p1                 | Christian | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |

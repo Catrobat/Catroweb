@@ -21,6 +21,8 @@ pleaseTryAgain: Bitte versuche es noch einmal!
 oldVersionError: Bitte aktualisiere auf die neueste Version von Pocket-Code!
 more: mehr
 less: weniger
+ok: OK
+
 programs:
   featured: Empfohlen
   newest: Neuesten Programme
@@ -422,6 +424,14 @@ help:
       animations: Animationen
       interactive: Interaktive Kunst und Geschichten
       music: Musik und Tanz
+
+oauth:
+  username_header: Danke für deine Registrierung bei Pocket Code!
+  username_chooser: Bitte wähle einen Benutzeramen:
+  username_hint: Der Benutzername sollte nicht dein echter Name sein.
+  usernameTaken: Der Benutzername existiert bereits, bitte wähle einen anderen.
+  noReset: Facebook und Google+ haben kein Password zum zurücksetzen.
+
 search:
   dotdotdot: Suche...
   search: Suche
@@ -440,6 +450,8 @@ login:
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   userOrEmail: Username oder Email
   changePass: Passwort ändern
+  createAccount: Konto anlegen
+  or: ODER
 apk:
   download: Als app herunterladen
   prepare: App erstellen

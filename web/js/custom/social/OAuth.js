@@ -1,21 +1,41 @@
 $(document).ready(function () {
     $('#btn_oauth_username').attr('disabled','disabled');
-    $('#dialog_oauth_username').on('input',function(e) {
-        if($('#dialog_oauth_username').val() != '') {
+    $('#dialog_oauth_username_input').on('input',function(e) {
+        $( "#error_username_taken" ).css("display", "none");
+        if($('#dialog_oauth_username_input').val().trim() != '') {
             $('#btn_oauth_username').removeAttr('disabled');
+            $('#btn_oauth_username').css({ opacity: 1.0});
         } else {
             $('#btn_oauth_username').attr('disabled','disabled');
+            $('#btn_oauth_username').css({ opacity: 0.5});
         }
     });
 
     $('#btn_oauth_username').click(function() {
-        if($("#fb_google").val() == 'fb') {
-            sendTokenToServer($("#access_token_oauth").val(), $("#id_oauth").val(),
-                $("#dialog_oauth_username").val(), $("#email_oauth").val(), $("#locale_oauth").val());
-        } else if($("#fb_google").val() == 'g+'){
-            sendCodeToServer($("#access_token_oauth").val(), $("#id_oauth").val(),
-                $("#dialog_oauth_username").val(), $("#email_oauth").val(), $("#locale_oauth").val());
-        }
+
+        var $ajaxUrl = Routing.generate(
+          'catrobat_oauth_login_username_available', {flavor: 'pocketcode'}
+        );
+
+        $.post($ajaxUrl,
+          {
+            username: $("#dialog_oauth_username_input").val(),
+          },
+          function (data) {
+            if(data['username_available'] == true) {
+              $( "#error_username_taken" ).css("display", "block");
+            } else {
+              if($("#fb_google").val() == 'fb') {
+                sendTokenToServer($("#access_token_oauth").val(), $("#id_oauth").val(),
+                  $("#dialog_oauth_username_input").val(), $("#email_oauth").val(), $("#locale_oauth").val());
+              } else if($("#fb_google").val() == 'g+') {
+                sendCodeToServer($("#access_token_oauth").val(), $("#id_oauth").val(),
+                  $("#dialog_oauth_username_input").val(), $("#email_oauth").val(), $("#locale_oauth").val());
+              }
+            }
+          });
+
+
     });
 
     if($( "#csrf_token_oauth" ).val() == '') {
@@ -40,6 +60,12 @@ function openDialog() {
     $( "#dialog-oauth-username" ).dialog( "open" );
 }
 
-function createCsrfToken() {
-
+function submitOAuthForm(data){
+  var $username = data['username'];
+  var $password = data['password'];
+  $("#username_oauth").val($username);
+  $("#password_oauth").val($password);
+  $("#_submit_oauth").attr("disabled", false);
+  $("#_submit_oauth").click();
+  $("#_submit_oauth").attr("disabled", true);
 }
