@@ -60,6 +60,49 @@ class ProgramRepository extends EntityRepository
     ->getResult();
     }
 
+    public function getRandomPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
+    {
+      // Rand(), newid() and TABLESAMPLE() doesn't exist in the Native Query therefore we have to do a workaround
+      // for random results
+      if ($offset > 0 && isset($_SESSION['randomProgramIds']))
+      {
+        $array_program_ids = $_SESSION['randomProgramIds'];
+      }
+      else
+      {
+        $array_program_ids = $this->getVisibleProgramIds($flavor);
+        shuffle($array_program_ids);
+        $_SESSION['randomProgramIds'] = $array_program_ids;
+      }
+
+      $array_programs = array();
+      $max_element = ($offset + $limit) > count($array_program_ids) ? count($array_program_ids) : $offset + $limit;
+      $current_element = $offset;
+
+      while ($current_element < $max_element)
+      {
+        $array_programs[] = $this->find($array_program_ids[$current_element]);
+        $current_element++;
+      }
+
+      return $array_programs;
+    }
+
+    public function getVisibleProgramIds($flavor)
+    {
+      $qb = $this->createQueryBuilder('e');
+
+      $result = $qb
+        ->select('e.id')
+        ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+        ->setParameter('flavor', $flavor)
+        ->getQuery()
+        ->getResult();
+
+      return $result;
+    }
+
     public function search($query, $limit = 10, $offset = 0)
     {
         $dql = "SELECT e,
