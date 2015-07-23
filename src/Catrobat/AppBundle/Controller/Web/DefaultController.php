@@ -318,13 +318,13 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/media-package/{type}", name="media_package", requirements={"type":"backgrounds|sounds|looks"})
+   * @Route("/media-package/{topic}", name="media_package", requirements={"topic":"\d+"})
    * @Method({"GET"})
    */
-  public function MediaPackageAction($type)
+  public function MediaPackageAction($topic)
   {
     return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
-      'type' => $type
+      'topic' => $topic
     ));
   }
 
