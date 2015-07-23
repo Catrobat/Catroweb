@@ -77,6 +77,15 @@ sonata_admin:
                     - catrowebadmin.block.featured.program
                     - catrowebadmin.block.featured.url
 
+            sonata.admin.group.mediapackage:
+                label:           Media Package
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-newspaper-o"></i>'
+                items:
+                    - catrowebadmin.block.mediapackage.package
+                    - catrowebadmin.block.mediapackage.category
+                    - catrowebadmin.block.mediapackage.file
+
             sonata.admin.group.tools:
                 label:           Tools
                 label_catalogue: CatrobatAppBundle

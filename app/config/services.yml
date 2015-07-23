@@ -10,6 +10,8 @@ parameters:
       catrobat.thumbnail.path:  "resources/thumbnails/"
       catrobat.featuredimage.dir:  "%catrobat.webdir%resources/featured/"
       catrobat.featuredimage.path: "resources/featured/"
+      catrobat.mediapackage.dir:  "%catrobat.webdir%resources/mediapackage/"
+      catrobat.mediapackage.path: "resources/mediapackage/"
       catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
       catrobat.backup.dir:        "%kernel.root_dir%/../backups/"
       
@@ -70,6 +72,11 @@ services:
     featuredimagerepository:
         class: Catrobat\AppBundle\Services\FeaturedImageRepository
         arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
+
+    mediapackagefilerepository:
+        class: Catrobat\AppBundle\Services\MediaPackageFileRepository
+        arguments: ["%catrobat.mediapackage.dir%","%catrobat.mediapackage.path%"]
+
 
     apkrepository:
         class: Catrobat\AppBundle\Services\ApkRepository

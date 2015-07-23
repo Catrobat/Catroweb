@@ -5,10 +5,10 @@ namespace Catrobat\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\MediaCategory")
- * @ORM\Table(name="media_category")
+ * @ORM\Entity
+ * @ORM\Table(name="media_package_category")
  */
-class MediaCategory
+class MediaPackageCategory
 {
   /**
    * @ORM\Id
@@ -28,7 +28,7 @@ class MediaCategory
   protected $package;
 
   /**
-   * @ORM\OneToMany(targetEntity="MediaFile", mappedBy="category")
+   * @ORM\OneToMany(targetEntity="MediaPackageFile", mappedBy="category")
    */
   protected $files;
 
@@ -94,6 +94,15 @@ class MediaCategory
   public function setFiles($files)
   {
     $this->files = $files;
+  }
+
+
+  public function __toString()
+  {
+    if($this->package)
+      return $this->name." (".$this->package->getName().")";
+    else
+      return $this->name;
   }
 
 }

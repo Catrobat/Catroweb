@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\MediaPackage")
+ * @ORM\Entity
  * @ORM\Table(name="media_package")
  */
 class MediaPackage
@@ -28,7 +28,7 @@ class MediaPackage
   protected $name_url;
 
   /**
-   * @ORM\OneToMany(targetEntity="MediaCategory", mappedBy="package")
+   * @ORM\OneToMany(targetEntity="MediaPackageCategory", mappedBy="package")
    */
   protected $categories;
 
@@ -94,5 +94,10 @@ class MediaPackage
   public function setCategories($categories)
   {
     $this->categories = $categories;
+  }
+
+  public function __toString()
+  {
+    return $this->name;
   }
 }
