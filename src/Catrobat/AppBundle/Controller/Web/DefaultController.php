@@ -274,8 +274,8 @@ class DefaultController extends Controller
    */
   public function uploadAvatarAction(Request $request)
   {
-      /**
-     * @var \Catrobat\AppBundle\Entity\User
+    /*
+     * @var $user \Catrobat\AppBundle\Entity\User
      */
     $user = $this->getUser();
       if (!$user) {
@@ -318,13 +318,36 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/media-package/{topic}", name="media_package", requirements={"topic":"\d+"})
+   * @Route("/media-package/{package_name}", name="media_package")
    * @Method({"GET"})
    */
-  public function MediaPackageAction($topic)
+  public function MediaPackageAction($package_name)
   {
+    /*
+     * @var $package \Catrobat\AppBundle\Entity\MediaPackage
+     * @var $file \Catrobat\AppBundle\Entity\MediaPackageFile
+     */
+    $em = $this->getDoctrine()->getManager();
+    $package = $em->getRepository("\Catrobat\AppBundle\Entity\MediaPackage")
+      ->findOneBy(array('name_url' => $package_name));
+
+    $categories = array();
+    foreach($package->getCategories() as $category) {
+      $files = array();
+      foreach($category->getFiles() as $file) {
+        if(!$file->getActive()) {
+          continue;
+        }
+        $files[] = $file;
+      }
+      $categories[] = array(
+        'name' => $category->getName(),
+        'files' => $files
+      );
+    }
+
     return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
-      'topic' => $topic
+      'categories' => $categories
     ));
   }
 

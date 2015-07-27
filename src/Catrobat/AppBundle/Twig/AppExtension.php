@@ -26,6 +26,8 @@ class AppExtension extends \Twig_Extension
             'countriesList' => new \Twig_Function_Method($this, 'getCountriesList'),
             'isWebview' => new \Twig_Function_Method($this, 'isWebview'),
             'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
+            'getMediaPackageImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageImageUrl'),
+            'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl')
         );
     }
 
@@ -68,5 +70,35 @@ class AppExtension extends \Twig_Extension
 
         // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
         return preg_match('/Catrobat/', $user_agent);
+    }
+
+    public function getMediaPackageImageUrl($object)
+    {
+        switch($object->getExtension())
+        {
+            case "jpg":
+            case "jpeg":
+            case "png":
+            case "gif":
+                return 'resources/mediapackage/mediapackage_' . $object->getId() . '.' . $object->getExtension();
+                break;
+            default:
+                return null;
+        }
+    }
+
+    public function getMediaPackageSoundUrl($object)
+    {
+        switch($object->getExtension())
+        {
+            case "mp3":
+            case "mpga":
+            case "wav":
+            case "ogg":
+            return 'resources/mediapackage/mediapackage_' . $object->getId() . '.' . $object->getExtension();
+                break;
+            default:
+                return null;
+        }
     }
 }

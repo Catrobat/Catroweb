@@ -8,87 +8,56 @@
 
 {% block body %}
 
-  <div id="animals">
-    <h1>Animals</h1>
-    <div class="programs">
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/animals/bat1-a .png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/animals/bat1-a .png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/animals/bat1-b .png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/animals/bat1-b .png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/animals/bat2-a .png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/animals/bat2-a .png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/animals/bat2-b .png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/animals/bat2-b .png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/animals/beetle.png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/animals/beetle.png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/animals/bird.png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/animals/bird.png') }}">
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
+  {% for category in categories %}
+    <div>
+      <h1>{{ category.name }}</h1>
+      <div class="programs">
 
-  <div id="fantasy">
-    <h1>Fantasy</h1>
-    <div class="programs">
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/fantasy/alien.png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/fantasy/alien.png') }}">
+        {% for file in category.files %}
+          {% set sound = getMediaPackageSoundUrl(file) %}
+          {% set image = getMediaPackageImageUrl(file) %}
+          <div class="program">
+
+            {% if image %}
+            <a href="{{ asset(image) }}" download>
+              <div>
+                <img src="{{ asset(image) }}">
+              </div>
+            </a>
+            {% endif %}
+
+            {% if sound %}
+            <div>
+              <div>
+                <audio controls>
+                  <source src="{{ asset(sound) }}" type="audio/mpeg">
+
+                  <object>
+                    <param name="autostart" value="false">
+                    <param name="src" value="{{ sound }}">
+                    <param name="autoplay" value="false">
+                    <param name="controller" value="true">
+                    <embed src="{{ asset(sound) }}" controller="true" autoplay="false" autostart="false" type="audio/mpeg"></embed>
+                    Update your Browser
+                  </object>
+                </audio>
+              </div>
+              <div>
+                <b>{{ file.name }}</b>
+              </div>
+              <div>
+                <a href="{{ asset(sound) }}" download>Download</a>
+              </div>
+            </div>
+            {% endif %}
+
           </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/fantasy/creature1-a.png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/fantasy/creature1-a.png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/fantasy/creature1-b.png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/fantasy/creature1-b.png') }}">
-          </div>
-        </a>
-      </div>
-      <div class="program" id="look-1">
-        <a href="http://catroweb/images/mediapackage/looks/fantasy/creature1-c.png" download>
-          <div>
-            <img src="{{ asset('images/mediapackage/looks/fantasy/creature1-c.png') }}">
-          </div>
-        </a>
+        {% endfor %}
+
       </div>
     </div>
-  </div>
+    <br>
+  {% endfor %}
 
 {% endblock %}
 

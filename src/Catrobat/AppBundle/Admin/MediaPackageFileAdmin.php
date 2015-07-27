@@ -57,36 +57,6 @@ class MediaPackageFileAdmin extends Admin
             ;
     }
 
-    public function getImageUrl($object)
-    {
-        switch($object->getExtension())
-        {
-            case "jpg":
-            case "jpeg":
-            case "png":
-            case "gif":
-                return '../../'.$this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')->getWebPath($object->getId(), $object->getExtension());
-                break;
-            default:
-                return null;
-        }
-    }
-
-    public function getSoundUrl($object)
-    {
-        switch($object->getExtension())
-        {
-            case "mp3":
-            case "mpga":
-            case "wav":
-            case "ogg":
-                return '../../'.$this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')->getWebPath($object->getId(), $object->getExtension());
-                break;
-            default:
-                return null;
-        }
-    }
-
     public function prePersist($object)
     {
         $file = $object->file;
