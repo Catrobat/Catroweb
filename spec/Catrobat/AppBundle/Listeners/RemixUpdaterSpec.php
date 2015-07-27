@@ -67,6 +67,31 @@ class RemixUpdaterSpec extends ObjectBehavior
         expect($xml->header->remixOf)->toBeLike($current_url);
     }
 
+    /**
+     * @param \Catrobat\AppBundle\Entity\Program $parent_entity
+     */
+    public function it_saves_the_scratch_url_to_remixOf($program_entity, $parent_entity, $repository)
+    {
+        $current_url = 'https://scratch.mit.edu/projects/70058680';
+        $new_url = 'http://share.catrob.at/details/1338';
+
+        $repository->find(70058680)->willReturn($parent_entity);
+
+        $xml = simplexml_load_file(__SPEC_CACHE_DIR__.'/base/code.xml');
+        $xml->header->url = $current_url;
+        $xml->header->remixOf = '';
+        $xml->asXML(__SPEC_CACHE_DIR__.'/base/code.xml');
+
+        $file = new ExtractedCatrobatFile(__SPEC_CACHE_DIR__.'/base/', '/webpath', 'hash');
+        $program_entity->getId()->willReturn(1338);
+        $program_entity->setRemixOf(Argument::any())->shouldNotBeCalled();
+
+        $this->update($file, $program_entity);
+        $xml = simplexml_load_file(__SPEC_CACHE_DIR__.'/base/code.xml');
+        expect($xml->header->url)->toBeLike($new_url);
+        expect($xml->header->remixOf)->toBeLike($current_url);
+    }
+
   /**
    * @param \Catrobat\AppBundle\Entity\Program $parent_entity
    */

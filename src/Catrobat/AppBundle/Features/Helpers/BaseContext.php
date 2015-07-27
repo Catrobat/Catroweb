@@ -88,6 +88,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
       return $this->kernel->getContainer()->get('filerepository');
   }
 
+    /**
+     * @return \Catrobat\AppBundle\Services\ExtractedFileRepository
+     */
+    public function getExtractedFileRepository()
+    {
+        return $this->kernel->getContainer()->get('extractedfilerepository');
+    }
+
   /**
    * @return \Doctrine\ORM\EntityManager
    */
@@ -232,6 +240,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         $program->setLanguageVersion(isset($config['languageversion']) ? $config['languageversion'] : 1);
         $program->setUploadIp('127.0.0.1');
         $program->setRemixCount(0);
+        $program->setRemixOf(isset($config['remixof']) ? $config['remixof'] : null);
         $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
         $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
         $program->setUploadLanguage('en');
@@ -272,6 +281,9 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         case 'applicationName':
           $properties->header->applicationName = $value;
           break;
+        case 'url':
+            $properties->header->url = $value;
+            break;
 
         default:
           throw new PendingException('unknown xml field '.$name);
