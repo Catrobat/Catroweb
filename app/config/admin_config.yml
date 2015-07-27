@@ -9,6 +9,7 @@ sonata_block:
         sonata.block.service.text:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
+        catrowebadmin.block.tools.statistic:
 
 sonata_admin:
     title:     Admin Panel
@@ -56,9 +57,13 @@ sonata_admin:
 
 
              # display a dashboard block
-            - { position: center, type: sonata.admin.block.admin_list }
+            # - { position: left, type: sonata.admin.block.admin_list }
+            - { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> Accourding to your role you can access different information and tools in our Admin.<br> Have Fun :)"} }
+            - { position: right, type: catrowebadmin.block.tools.statistic}
+
 
         groups:
+
             sonata.admin.group.programs:
                 label:           Programs
                 label_catalogue: CatrobatAppBundle
@@ -86,13 +91,13 @@ sonata_admin:
                     - catrowebadmin.block.mediapackage.category
                     - catrowebadmin.block.mediapackage.file
 
-            sonata.admin.group.tools:
-                label:           Tools
+            sonata.admin.group.apk:
+                label:           Apk Generation
                 label_catalogue: CatrobatAppBundle
-                icon:            '<i class="fa fa-cogs"></i>'
+                icon:            '<i class="fa fa-android"></i>'
                 items:
-                    - catrowebadmin.block.tools.notify
-                    - catrowebadmin.block.tools.rudewords
+                    - catrowebadmin.block.apk.pending
+                    - catrowebadmin.block.apk.list
 
             sonata.admin.group.users:
                 label:           Users
@@ -102,13 +107,15 @@ sonata_admin:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
 
-            sonata.admin.group.apk:
-                label:           Apk Generation
+            sonata.admin.group.tools:
+                label:           Tools
                 label_catalogue: CatrobatAppBundle
-                icon:            '<i class="fa fa-android"></i>'
+                icon:            '<i class="fa fa-cogs"></i>'
                 items:
-                    - catrowebadmin.block.apk.pending
-                    - catrowebadmin.block.apk.list
+                    - catrowebadmin.block.tools.maintain
+                    - catrowebadmin.block.tools.notify
+                    - catrowebadmin.block.tools.rudewords
+
 
     security:
         handler: sonata.admin.security.handler.acl

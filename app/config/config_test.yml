@@ -24,8 +24,8 @@ doctrine:
         path: "%kernel.root_dir%/../sqlite/behattest.sqlite"
 
 parameters:
-      catrobat.file.extract.dir:   "%kernel.root_dir%/../web/resources_test/extract/"
-      catrobat.file.storage.dir:   "%kernel.root_dir%/../web/resources_test/projects/"
+      catrobat.file.extract.dir:   "%catrobat.webdir%resources_test/extract/"
+      catrobat.file.storage.dir:   "%catrobat.webdir%resources_test/projects/"
       catrobat.screenshot.dir:     "%catrobat.webdir%resources_test/screenshots/"
       catrobat.screenshot.path:    "resources_test/screenshots/"
       catrobat.thumbnail.dir:      "%catrobat.webdir%resources_test/thumbnails/"
@@ -35,6 +35,7 @@ parameters:
       catrobat.apk.dir:            "%catrobat.webdir%resources_test/apk/"
       catrobat.mediapackage.dir:   "%catrobat.webdir%resources_test/mediapackage/"
       catrobat.mediapackage.path:  "resources_test/mediapackage/"
+      catrobat.backup.dir:         "%catrobat.webdir%resources_test/backups/"
       
 monolog:
     channels: ["upload"]

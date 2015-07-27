@@ -191,4 +191,27 @@ class ProgramRepository extends EntityRepository
           ->getQuery()
           ->getSingleScalarResult();
     }
+
+    public function getProgramsWithApkStatus($apk_status)
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        return $qb
+          ->select('e')
+          ->where($qb->expr()->eq('e.apk_status', ':apk_status'))
+          ->setParameter('apk_status', $apk_status)
+          ->getQuery()
+          ->getResult();
+    }
+
+    public function getProgramsWithExtractedDirectoryHash()
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        return $qb
+          ->select('e')
+          ->where($qb->expr()->isNotNull('e.directory_hash'))
+          ->getQuery()
+          ->getResult();
+    }
 }
