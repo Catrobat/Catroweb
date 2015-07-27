@@ -27,13 +27,19 @@ class RemixUpdater
     public function update(ExtractedCatrobatFile $file, Program $program)
     {
         $program_xml_properties = $file->getProgramXmlProperties();
+
         if ($program_xml_properties->header->url->__toString() != '') {
-            preg_match("/([\d]+)$/", $program_xml_properties->header->url->__toString(), $matches);
-            $program_id = intval($matches[1]);
+
             $program_xml_properties->header->remixOf = $program_xml_properties->header->url->__toString();
-            $parent = $this->repository->find($program_id);
-            if ($parent != null) {
-                $program->setRemixOf($parent);
+
+            if(!strstr($program_xml_properties->header->url->__toString(),"scratch"))
+            {
+                preg_match("/([\d]+)$/", $program_xml_properties->header->url->__toString(), $matches);
+                $program_id = intval($matches[1]);
+                $parent = $this->repository->find($program_id);
+                if ($parent != null) {
+                    $program->setRemixOf($parent);
+                }
             }
         }
         $program_xml_properties->header->url = $this->router->generate('program', array('id' => $program->getId()));

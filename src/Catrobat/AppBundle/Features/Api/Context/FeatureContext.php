@@ -191,6 +191,7 @@ class FeatureContext extends BaseContext
   public function thereArePrograms(TableNode $table)
   {
       $programs = $table->getHash();
+      $program_manager = $this->getProgramManger();
       for ($i = 0; $i < count($programs); ++$i ) {
           $user = $this->getUserManager()->findOneBy(array(
           'username' => $programs[$i]['owned by'],
@@ -204,6 +205,7 @@ class FeatureContext extends BaseContext
         'catrobatversionname' => $programs[$i]['version'],
         'filesize' => @$programs[$i]['FileSize'],
         'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
+        'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
       );
 
           $this->insertProgram($user, $config);
@@ -647,6 +649,15 @@ class FeatureContext extends BaseContext
         $this->generateProgramFileWith(array('platform' => $platform, 'applicationVersion' => $version));
     }
 
+
+    /**
+     * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
+     */
+    public function iHaveAProgramWithAs($key, $value)
+    {
+        $this->generateProgramFileWith(array($key => $value));
+    }
+
     /**
      * @When /^I upload a program$/
      */
@@ -735,5 +746,45 @@ class FeatureContext extends BaseContext
     public function iUploadTheProgramWithAsNameAgain($name)
     {
         $this->iUploadTheProgramWithAsName($name);
+    }
+
+    /**
+     * @Then /^the uploaded program should be a remix of "([^"]*)"$/
+     */
+    public function theUploadedProgramShouldBeARemixOf($id)
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+
+        $program_manager = $this->getProgramManger();
+        $uploaded_program = $program_manager->find($json["projectId"]);
+        assertEquals($id,$uploaded_program->getRemixOf()->getId());
+    }
+
+    /**
+     * @Then /^the uploaded program shouldn\'t have any parent entity$/
+     */
+    public function theUploadedProgramShouldnTHaveAnyParentEntity()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+
+        $program_manager = $this->getProgramManger();
+        $uploaded_program = $program_manager->find($json["projectId"]);
+        assertEquals(null,$uploaded_program->getRemixOf());
+    }
+
+    /**
+     * @Then /^the uploaded program should have RemixOf "([^"]*)" in the xml$/
+     */
+    public function theUploadedProgramShouldHaveRemixofInTheXml($value)
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+
+        $program_manager = $this->getProgramManger();
+        $uploaded_program = $program_manager->find($json["projectId"]);
+        $efr = $this->getExtractedFileRepository();
+        /** @var Program $uploaded_program **/
+        $extracetCatrobatFile = $efr->loadProgramExtractedFile($uploaded_program);
+        $progXmlProp = $extracetCatrobatFile->getProgramXmlProperties();
+        assertEquals($value,$progXmlProp->header->remixOf->__toString());
     }
 }
