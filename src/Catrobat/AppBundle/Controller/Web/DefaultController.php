@@ -318,7 +318,7 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/media-package/{package_name}", name="media_package")
+   * @Route("/pocket-library/{package_name}", name="media_package")
    * @Method({"GET"})
    */
   public function MediaPackageAction($package_name)
