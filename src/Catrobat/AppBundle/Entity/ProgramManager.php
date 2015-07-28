@@ -139,6 +139,11 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
         return $this->program_repository->getMostDownloadedPrograms($flavor, $limit, $offset);
     }
 
+    public function getRandomPrograms($flavor, $limit = null, $offset = null)
+    {
+      return $this->program_repository->getRandomPrograms($flavor, $limit, $offset);
+    }
+
     public function search($query, $limit = 10, $offset = 0)
     {
         return $this->program_repository->search($query, $limit, $offset);

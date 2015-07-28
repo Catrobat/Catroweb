@@ -76,6 +76,7 @@ var ProgramLoader = function (container, url, column_max) {
       switch(self.container) {
         case '#newest':
         case '#search-results':
+        case "#random":
           div = '<div><div class="img-time-small"></div>' + programs[i].UploadedString + '</div>';
           break;
         case '#myprofile-programs':
