@@ -11,6 +11,7 @@ services:
                 - [setExtractDirectory, ["%catrobat.file.extract.dir%"]]
                 - [setScreenshotDirectory, ["%catrobat.screenshot.dir%"]]
                 - [setThumbnailDirectory, ["%catrobat.thumbnail.dir%"]]
+                - [setMediaPackageDirectory, ["%catrobat.mediapackage.dir%"]]
               tags:
                 -  { name: console.command }
 

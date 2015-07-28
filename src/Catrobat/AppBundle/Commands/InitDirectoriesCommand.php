@@ -14,6 +14,7 @@ class InitDirectoriesCommand extends Command
     public $programfile_directory;
     public $thumbnail_directory;
     public $screenshot_directory;
+    public $mediapackage_directory;
 
     public function __construct(Filesystem $filesystem, $programfile_directory)
     {
@@ -40,6 +41,7 @@ class InitDirectoriesCommand extends Command
         $text .= $this->makeSuredirectoryExists($this->extract_directory);
         $text .= $this->makeSuredirectoryExists($this->thumbnail_directory);
         $text .= $this->makeSuredirectoryExists($this->screenshot_directory);
+        $text .= $this->makeSuredirectoryExists($this->mediapackage_directory);
         $text .= $this->showInfo();
         $output->writeln($text);
     }
@@ -80,5 +82,10 @@ class InitDirectoriesCommand extends Command
     public function setScreenshotDirectory($screenshot_directory)
     {
         $this->screenshot_directory = $screenshot_directory;
+    }
+
+    public function setMediaPackageDirectory($mediapackage_directory)
+    {
+        $this->mediapackage_directory = $mediapackage_directory;
     }
 }
