@@ -85,7 +85,7 @@ class MediaPackageFileAdmin extends Admin
             $object->setExtension($object->old_extension);
             return;
         }
-        $object->setImageType($file->guessExtension());
+        $object->setExtension($file->guessExtension());
     }
 
     public function postUpdate($object)
