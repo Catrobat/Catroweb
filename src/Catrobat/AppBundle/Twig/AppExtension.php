@@ -80,7 +80,7 @@ class AppExtension extends \Twig_Extension
             case "jpeg":
             case "png":
             case "gif":
-                return 'resources/mediapackage/mediapackage_' . $object->getId() . '.' . $object->getExtension();
+                return 'resources/mediapackage/' . $object->getId() . '.' . $object->getExtension();
                 break;
             default:
                 return null;
@@ -95,7 +95,7 @@ class AppExtension extends \Twig_Extension
             case "mpga":
             case "wav":
             case "ogg":
-            return 'resources/mediapackage/mediapackage_' . $object->getId() . '.' . $object->getExtension();
+            return 'resources/mediapackage/' . $object->getId() . '.' . $object->getExtension();
                 break;
             default:
                 return null;

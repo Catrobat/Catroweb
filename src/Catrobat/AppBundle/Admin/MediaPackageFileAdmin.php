@@ -47,6 +47,7 @@ class MediaPackageFileAdmin extends Admin
             ->add("name")
             ->add('file', 'string', array('template' => ':Admin:mediapackage_file.html.twig'))
             ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory'))
+            ->add('downloads')
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(

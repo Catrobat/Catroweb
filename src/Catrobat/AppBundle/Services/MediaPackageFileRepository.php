@@ -4,11 +4,14 @@ namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use FOS\RestBundle\Controller\Annotations\Unlink;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 
 class MediaPackageFileRepository
 {
     private $dir;
     private $path;
+    private $filesystem;
 
     public function __construct($dir, $path)
     {
@@ -21,6 +24,7 @@ class MediaPackageFileRepository
 
         $this->dir = $dir;
         $this->path = $path;
+        $this->filesystem = new Filesystem();
     }
 
     public function save($file, $id, $extension)
@@ -38,11 +42,16 @@ class MediaPackageFileRepository
 
     private function generateFileNameFromId($id, $extension)
     {
-        return 'mediapackage_'.$id.'.'.$extension;
+        return $id.'.'.$extension;
     }
 
     public function getWebPath($id, $extension)
     {
         return $this->path.$this->generateFileNameFromId($id, $extension);
+    }
+
+    public function getMediaFile($id, $extension)
+    {
+      return new File($this->dir.$id.'.'.$extension);
     }
 }

@@ -26,9 +26,11 @@ class DefaultController extends Controller
    */
   public function indexAction(Request $request)
   {
-      /* @var $image_repository FeaturedImageRepository */
+      /**
+       * @var $image_repository FeaturedImageRepository
+       * @var $repository FeaturedRepository
+       */
       $image_repository = $this->get('featuredimagerepository');
-      /* @var $repository FeaturedRepository */
       $repository = $this->get('featuredrepository');
 
       $programs = $repository->getFeaturedPrograms($request->getSession()->get('flavor'), 5, 0);
@@ -323,12 +325,13 @@ class DefaultController extends Controller
    */
   public function MediaPackageAction($package_name)
   {
-    /*
+    /**
      * @var $package \Catrobat\AppBundle\Entity\MediaPackage
      * @var $file \Catrobat\AppBundle\Entity\MediaPackageFile
+     * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
      */
     $em = $this->getDoctrine()->getManager();
-    $package = $em->getRepository("\Catrobat\AppBundle\Entity\MediaPackage")
+    $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
       ->findOneBy(array('name_url' => $package_name));
 
     $categories = array();
@@ -338,7 +341,13 @@ class DefaultController extends Controller
         if(!$file->getActive()) {
           continue;
         }
-        $files[] = $file;
+        $files[] = array(
+          'data' => $file,
+          'downloadUrl' => $this->generateUrl('download_media', array(
+            'id' => $file->getId(),
+            'fname' => $file->getName()
+          ))
+        );
       }
       $categories[] = array(
         'name' => $category->getName(),

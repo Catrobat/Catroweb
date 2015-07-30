@@ -14,12 +14,12 @@
       <div class="programs">
 
         {% for file in category.files %}
-          {% set sound = getMediaPackageSoundUrl(file) %}
-          {% set image = getMediaPackageImageUrl(file) %}
+          {% set sound = getMediaPackageSoundUrl(file.data) %}
+          {% set image = getMediaPackageImageUrl(file.data) %}
           <div class="program">
 
             {% if image %}
-            <a href="{{ asset(image) }}" download>
+            <a href="{{ file.downloadUrl }}">
               <div>
                 <img src="{{ asset(image) }}">
               </div>
@@ -43,7 +43,7 @@
                 </audio>
               </div>
               <div>
-                <b>{{ file.name }}</b>
+                <b>{{ file.data.name }}</b>
               </div>
               <div>
                 <a href="{{ asset(sound) }}" download>Download</a>

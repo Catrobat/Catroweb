@@ -48,6 +48,11 @@ class MediaPackageFile
   protected $active;
 
   /**
+   * @ORM\Column(type="integer")
+   */
+  protected $downloads = 0;
+
+  /**
    * @return boolean
    */
   public function getActive()
@@ -151,6 +156,70 @@ class MediaPackageFile
   public function getExtension()
   {
     return $this->extension;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  /**
+   * @param mixed $file
+   */
+  public function setFile($file)
+  {
+    $this->file = $file;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getRemovedId()
+  {
+    return $this->removed_id;
+  }
+
+  /**
+   * @param mixed $removed_id
+   */
+  public function setRemovedId($removed_id)
+  {
+    $this->removed_id = $removed_id;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getOldExtension()
+  {
+    return $this->old_extension;
+  }
+
+  /**
+   * @param mixed $old_extension
+   */
+  public function setOldExtension($old_extension)
+  {
+    $this->old_extension = $old_extension;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getDownloads()
+  {
+    return $this->downloads;
+  }
+
+  /**
+   * @param mixed $downloads
+   */
+  public function setDownloads($downloads)
+  {
+    $this->downloads = $downloads;
   }
 
 }
