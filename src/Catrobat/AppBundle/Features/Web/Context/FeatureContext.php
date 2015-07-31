@@ -28,7 +28,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     private $kernel;
     private $screenshot_directory;
 
-    const BASE_URL = 'http://catroid.local/app_test.php/';
+    const BASE_URL = 'http://localhost/app_test.php/';
     const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
 
   /**
@@ -553,4 +553,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $em->persist($starter);
       $em->flush();
   }
+
+  /**
+   * @Then /^the copy link should be "([^"]*)"$/
+   */
+  public function theCopyLinkShouldBe($url)
+  {
+    assertEquals($this->getSession()->getPage()->findField('copy-link')->getValue(), self::BASE_URL . $url);
+  }
+
 }

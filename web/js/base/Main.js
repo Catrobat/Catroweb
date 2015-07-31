@@ -36,6 +36,12 @@ var Main = function (search_url) {
       navDropdown.css('left', newPosition).toggle();
     });
 
+    $('#copy-link').click(function() {
+      $(this).find('tr').first().hide();
+      $(this).find('tr').last().show();
+      $('#url-link').focus().select();
+    });
+
     self.setSearchBtnListener();
     self.setLanguageSwitchListener();
   };

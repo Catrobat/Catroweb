@@ -2,7 +2,7 @@
 
 {% block head %}
     {% stylesheets 'css/custom/program.less' filter='cssrewrite,lessphp' output='compiled/program.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+  <link rel="stylesheet" href="{{ asset_url }}" xmlns="http://www.w3.org/1999/html"/>
     {% endstylesheets %}
 {% endblock %}
 
@@ -37,7 +37,7 @@
       <div class="download-container">
         <a href="{{ program_details.downloadUrl }}">
           <button id="download" class="btn btn-primary download-button">
-            <table style="width: 100%; text-align: center">
+            <table>
               <tr>
                 <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
                 <td>{{ "download"|trans({}, "catroweb") }}</td>
@@ -47,7 +47,7 @@
         </a>
 
         <button id="apk-generate" class="btn btn-apk download-button">
-          <table style="width: 100%; text-align: center">
+          <table>
             <tr>
               <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
               <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
@@ -57,7 +57,7 @@
 
         <div id="apk-pending" class="btn-apk pending-container">
           <button  class="btn download-button download-pending">
-            <table style="width: 100%; text-align: center">
+            <table>
               <tr>
                 <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
                 <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
@@ -68,7 +68,7 @@
         </div>
 
         <button id="apk-download" class="btn btn-apk download-button">
-          <table style="width: 100%; text-align: center">
+          <table>
             <tr>
               <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
               <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
@@ -76,7 +76,25 @@
           </table>
         </button>
       </div>
+
       <br>
+
+      <table id="copy-link">
+        <tr>
+          <td><img src="{{ asset('images/symbols/link.svg') }}" > </td>
+          <td>
+            <span>Link</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+              <input name="copy-link" id="url-link" value="{{ url('program', { id : program.id }) }}">
+          </td>
+        </tr>
+      </table>
+
+      <br>
+
       <p>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
       <br>
