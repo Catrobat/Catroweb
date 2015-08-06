@@ -32,6 +32,11 @@ class MediaPackageFileRepository
         $file->move($this->dir, $this->generateFileNameFromId($id, $extension));
     }
 
+    public function saveMediaPackageFile(File $file, $id, $extension)
+    {
+        $this->filesystem->copy($file->getPathname(), $this->dir.$id.'.'.$extension);
+    }
+
     public function remove($id, $extension)
     {
         $path = $this->dir.$this->generateFileNameFromId($id, $extension);

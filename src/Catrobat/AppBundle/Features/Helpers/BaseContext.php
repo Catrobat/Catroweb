@@ -97,6 +97,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     }
 
   /**
+   * @return \Catrobat\AppBundle\Services\MediaPackageFileRepository
+   */
+  public function getMediaPackageFileRepository()
+  {
+    return $this->kernel->getContainer()->get('mediapackagefilerepository');
+  }
+
+  /**
    * @return \Doctrine\ORM\EntityManager
    */
   public function getManager()

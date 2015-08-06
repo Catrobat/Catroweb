@@ -320,7 +320,8 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/pocket-library/{package_name}", name="media_package")
+   * @Route("/pocket-library/{package_name}", name="pocket_library")
+   * @Route("/media-library/{package_name}", name="media_package")
    * @Method({"GET"})
    */
   public function MediaPackageAction($package_name)
@@ -333,6 +334,10 @@ class DefaultController extends Controller
     $em = $this->getDoctrine()->getManager();
     $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
       ->findOneBy(array('name_url' => $package_name));
+
+    if (!$package) {
+      throw $this->createNotFoundException('Unable to find Package entity.');
+    }
 
     $categories = array();
     foreach($package->getCategories() as $category) {

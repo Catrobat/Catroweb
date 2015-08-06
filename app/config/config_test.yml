@@ -33,8 +33,8 @@ parameters:
       catrobat.featuredimage.dir:  "%catrobat.webdir%resources_test/featured/"
       catrobat.featuredimage.path: "resources_test/featured/"
       catrobat.apk.dir:            "%catrobat.webdir%resources_test/apk/"
-      catrobat.mediapackage.dir:   "%catrobat.webdir%resources/mediapackage/"
-      catrobat.mediapackage.path:  "resources/mediapackage/"
+      catrobat.mediapackage.dir:   "%catrobat.webdir%resources_test/mediapackage/"
+      catrobat.mediapackage.path:  "resources_test/mediapackage/"
       
 monolog:
     channels: ["upload"]

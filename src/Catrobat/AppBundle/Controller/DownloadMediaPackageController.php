@@ -44,9 +44,9 @@ class DownloadMediaPackageController extends Controller
           ResponseHeaderBag::DISPOSITION_ATTACHMENT,
           $media_file->getId().'.'.$media_file->getExtension()
     );
-        $response->headers->set('Content-Disposition', $d);
+    $response->headers->set('Content-Disposition', $d);
 
-        return $response;
+    return $response;
     }
     throw new NotFoundHttpException();
   }

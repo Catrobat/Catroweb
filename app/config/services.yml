@@ -124,7 +124,7 @@ services:
     app.twig_extension:
         class: Catrobat\AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack"]
+        arguments: ["@request_stack", "@mediapackagefilerepository"]
         tags:
             - { name: twig.extension }
             
