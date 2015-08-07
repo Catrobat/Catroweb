@@ -130,7 +130,7 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
             id: $facebook_id,
             state: $state,
             username: $username,
-            mail: $email,
+            email: $email,
             locale: $locale
         },
         function (data, status) {
@@ -143,7 +143,7 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
                 {
                     username: $username,
                     id: $facebook_id,
-                    mail: $email
+                    email: $email
                 },
                 function (data) {
                     submitOAuthForm(data);
@@ -162,7 +162,7 @@ function FacebookLogin($email, $username, $id, $locale) {
         {
             username: $username,
             id: $id,
-            mail: $email,
+            email: $email,
             locale: $locale
         },
         function (data, status) {

@@ -11,7 +11,7 @@ class CreateOAuthUserRequest
 
     $this->username = $request->request->get('username');
     $this->id = $request->request->get('id');
-    $this->mail = $request->request->get('mail');
+    $this->mail = $request->request->get('email');
   }
 
   /**

@@ -130,7 +130,7 @@ function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
             id: $gplus_id,
             state: $state,
             username: $username,
-            mail: $email,
+            email: $email,
             locale: $locale
         },
         function (data, status) {
@@ -143,7 +143,7 @@ function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
                 {
                     username: $username,
                     id: $gplus_id,
-                    mail: $email
+                    email: $email
                 },
                 function (data, status) {
                     submitOAuthForm(data)
@@ -161,7 +161,7 @@ function GoogleLogin($email, $username, $id, $locale) {
         {
             username: $username,
             id: $id,
-            mail: $email,
+            email: $email,
             locale: $locale
         },
         function (data, status) {

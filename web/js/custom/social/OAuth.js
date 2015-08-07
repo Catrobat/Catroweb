@@ -11,6 +11,10 @@ $(document).ready(function () {
         }
     });
 
+  $( "#dialog-oauth-username" ).on( "dialogclose", function( event, ui ) {
+    $("#bg-dark").remove();
+  } );
+
     $('#btn_oauth_username').click(function() {
 
         var $ajaxUrl = Routing.generate(
@@ -58,6 +62,20 @@ $(function() {
 
 function openDialog() {
     $( "#dialog-oauth-username" ).dialog( "open" );
+
+  var dark_background = $('<div id="bg-dark"></div>');
+  dark_background.css({
+    'position': 'fixed',
+    'width': '100%',
+    'height': '100%',
+    'background-color': 'black',
+    'left': '0',
+    'top': '0',
+    'opacity': '0.5'
+  });
+
+  $('body').append(dark_background);
+
 }
 
 function submitOAuthForm(data){

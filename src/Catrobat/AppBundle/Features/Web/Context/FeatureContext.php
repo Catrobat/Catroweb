@@ -783,21 +783,19 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSwitchToPopupWindow()
   {
-      $this->getSession()->wait(3000);
+      $this->getSession()->wait(3500);
       $page = $this->getSession()->getPage();
       $window_names = $this->getSession()->getDriver()->getWindowNames();
       foreach ($window_names as $name) {
           echo $name;
-          $this->getSession()->switchToWindow($name);
-          if($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')) {
-            break;
+          if($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')
+              || $page->find('css', '#approval_container') || $page->find('css', '#gaia_firstform')) {
+              break;
           }
+          $this->getSession()->switchToWindow($name);
       }
       $this->getSession()->wait(1000);
   }
-
-
-
 
     /**
      * @Then /^I log in to Facebook with valid credentials$/

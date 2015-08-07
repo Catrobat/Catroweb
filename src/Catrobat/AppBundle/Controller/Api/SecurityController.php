@@ -106,7 +106,7 @@ class SecurityController extends Controller
      * @Route("/api/register/Register.json", name="catrobat_api_register", defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    private function registerNativeUser($request, $validator, $userManager, $tokenGenerator, &$retArray)
+    private function registerNativeUser($request)
     {
         $userManager = $this->get("usermanager");
         $tokenGenerator = $this->get("tokengenerator");
@@ -153,7 +153,7 @@ class SecurityController extends Controller
      * @Route("/api/login/Login.json", name="catrobat_api_login", defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    private function loginNativeUser($request, $userManager, $user, &$retArray)
+    private function loginNativeUser($request)
     {
         $userManager = $this->get("usermanager");
         $retArray = array();
@@ -192,6 +192,7 @@ class SecurityController extends Controller
         } else {
             $retArray['token_available'] = false;
         }
+        $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
     }
 
@@ -214,6 +215,7 @@ class SecurityController extends Controller
         } else {
             $retArray['token_available'] = false;
         }
+        $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
     }
 
@@ -235,6 +237,7 @@ class SecurityController extends Controller
         } else {
             $retArray['email_available'] = false;
         }
+        $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
     }
 
@@ -256,6 +259,7 @@ class SecurityController extends Controller
         } else {
             $retArray['username_available'] = false;
         }
+        $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
     }
 
@@ -280,6 +284,7 @@ class SecurityController extends Controller
         } else {
             $retArray['is_oauth_user'] = false;
         }
+        $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
     }
 
@@ -298,7 +303,7 @@ class SecurityController extends Controller
 
         $gPlusId = $request->request->get('id');
         $google_username = $request->request->get('username');
-        $google_mail = $request->request->get('mail');
+        $google_mail = $request->request->get('email');
         $locale = $request->request->get('locale');
 
         // Ensure that this is no request forgery going on, and that the user
@@ -396,7 +401,7 @@ class SecurityController extends Controller
 
         $facebookId = $request->request->get('id');
         $facebook_username = $request->request->get('username');
-        $facebook_mail = $request->request->get('mail');
+        $facebook_mail = $request->request->get('email');
         $locale = $request->request->get('locale');
 
         // Ensure that this is no request forgery going on, and that the user
@@ -512,11 +517,12 @@ class SecurityController extends Controller
     public function loginWithGoogleAction(Request $request)
     {
         $userManager = $this->get("usermanager");
+        $tokenGenerator = $this->get('tokengenerator');
         $retArray = array();
 
         $google_username = $request->request->get('username');
         $google_id = $request->request->get('id');
-        $google_mail = $request->request->get('mail');
+        $google_mail = $request->request->get('email');
         $locale = $request->request->get('locale');
 
         $user = $userManager->findUserByEmail($google_mail);
@@ -529,6 +535,9 @@ class SecurityController extends Controller
             $retArray['password'] = $user->getOauthPassword();
         }
 
+        $user->setUploadToken($tokenGenerator->generateToken());
+        $retArray['token'] = $user->getUploadToken();
+
         $retArray['username'] = $user->getUsername();
         return JsonResponse::create($retArray);
     }
@@ -540,11 +549,12 @@ class SecurityController extends Controller
     public function loginWithFacebookAction(Request $request)
     {
         $userManager = $this->get("usermanager");
+        $tokenGenerator = $this->get('tokengenerator');
         $retArray = array();
 
         $fb_username = $request->request->get('username');
         $fb_id = $request->request->get('id');
-        $fb_mail = $request->request->get('mail');
+        $fb_mail = $request->request->get('email');
         $locale = $request->request->get('locale');
 
         $user = $userManager->findUserByEmail($fb_mail);
@@ -556,6 +566,9 @@ class SecurityController extends Controller
             $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $fb_id, $fb_username, $fb_mail, $locale);
             $retArray['password'] = $user->getOauthPassword();
         }
+
+        $user->setUploadToken($tokenGenerator->generateToken());
+        $retArray['token'] = $user->getUploadToken();
 
         $retArray['username'] = $user->getUsername();
         return JsonResponse::create($retArray);
