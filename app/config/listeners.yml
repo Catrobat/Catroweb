@@ -68,6 +68,12 @@ services:
                 - "@request_stack"
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+
+      catroweb.fb_post.id:
+                  class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
+                  arguments: ["@router", "@service_container"]
+                  tags:
+                  - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
             
       catroweb.apk.cleanup:
             class: Catrobat\AppBundle\Listeners\ApkCleanupListener

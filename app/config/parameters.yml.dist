@@ -37,3 +37,7 @@ parameters:
     ldap_password: "secret"
     ldap_base_dn: ou=users, dc=organisation, dc=org
     ldap_group_filter: "(&(&(ObjectClass=groupOfUniqueNames))(uniqueMember=%s))" #%s is replaced by sprintf with user dn
+
+    fb_share_app_id: ~
+    fb_share_app_secret: ~
+    fb_share_access_token: ~

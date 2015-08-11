@@ -59,4 +59,7 @@ class StatusCode
     const USER_ADD_USERNAME_EXISTS = 777;
     
     const NO_GAME_JAM = 900;
+
+    const FB_POST_ERROR = 790;
+    const FB_DELETE_ERROR = 791;
 }

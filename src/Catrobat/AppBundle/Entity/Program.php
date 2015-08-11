@@ -181,6 +181,27 @@ class Program
     protected $gamejam_submission_date;
     
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $fb_post_id;
+
+    /**
+     * @return mixed
+     */
+    public function getFbPostId()
+    {
+        return $this->fb_post_id;
+    }
+
+    /**
+     * @param mixed $fb_post_id
+     */
+    public function setFbPostId($fb_post_id)
+    {
+        $this->fb_post_id = $fb_post_id;
+    }
+
+    /**
      * @param mixed $approved_by_user
      */
     public function setApprovedByUser($approved_by_user)
