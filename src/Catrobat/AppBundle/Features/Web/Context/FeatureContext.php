@@ -666,6 +666,16 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
   }
 
+  /**
+   * @Then /^the link to "([^"]*)" should be "([^"]*)"$/
+   */
+  public function theLinkToShouldBe($name, $name_url)
+  {
+    $bla = $this->getSession()->getPage()->find('css', '.program a')->getAttribute('href');
+    assertTrue(is_int(strpos($bla, $name_url)));
+  }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Getter & Setter
 
