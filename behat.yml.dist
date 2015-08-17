@@ -16,6 +16,13 @@ default:
                     capabilities:
                       extra_capabilities:
                         phantomjs.page.customHeaders.Accept-Language: 'en'
+                mobile:
+                  selenium2:
+                    wd_host: "http://localhost:8643/wd/hub"
+                    capabilities:
+                      extra_capabilities:
+                        phantomjs.page.customHeaders.Accept-Language: 'en'
+                        phantomjs.page.settings.userAgent: 'Catrobat/0.93 PocketCode/0.9.14 Platform/Android WebKit'
                     
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario

@@ -28,6 +28,7 @@ class AppExtension extends \Twig_Extension
         return array(
             'countriesList' => new \Twig_Function_Method($this, 'getCountriesList'),
             'isWebview' => new \Twig_Function_Method($this, 'isWebview'),
+            'checkCatrobatLanguage' => new \Twig_Function_Method($this, 'checkCatrobatLanguage'),
             'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
             'getMediaPackageImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageImageUrl'),
             'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl')
@@ -73,6 +74,33 @@ class AppExtension extends \Twig_Extension
 
         // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
         return preg_match('/Catrobat/', $user_agent);
+    }
+
+    /**
+     * @param $program_catrobat_language
+     * @return true|false
+     */
+    public function checkCatrobatLanguage($program_catrobat_language)
+    {
+      $request = $this->request_stack->getCurrentRequest();
+      $user_agent = $request->headers->get('User-Agent');
+
+      // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
+      if (preg_match('/Catrobat/', $user_agent))
+      {
+        $user_agent_array = explode("/", $user_agent);
+
+        //$user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];
+        $catrobat_language_array = explode(" ", $user_agent_array[1]);
+        //$catrobat_language_array = [ "0.93", "PocketCode" ];
+        $catrobat_language = $catrobat_language_array[0] * 1.0;
+
+        if ($catrobat_language < $program_catrobat_language) {
+          return false;
+        }
+      }
+
+      return true;
     }
 
     /**

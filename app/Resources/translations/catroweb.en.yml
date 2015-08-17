@@ -41,6 +41,9 @@ programs:
   reportOwnProgram: You cannot flag your own program.
   reportAlready: You've already flagged this program as inappropriate.
   reportDone: You reported this program as inappropriate!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 
 passwordRecovery:
   subject: Your Catrobat Password Recovery

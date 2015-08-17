@@ -350,7 +350,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
           $program->setCatrobatVersion(1);
           $program->setCatrobatVersionName($programs[$i]['version']);
-          $program->setLanguageVersion(1);
+          $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
           $program->setUploadIp('127.0.0.1');
           $program->setRemixCount(0);
           $program->setFilesize(0);
@@ -421,14 +421,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iWaitForTheServerResponse()
   {
       $this->getSession()->wait(5000, '(0 === jQuery.active)');
-  }
-
-  /**
-   * @Given /^I make a screenshot$/
-   */
-  public function iMakeAScreenshot()
-  {
-      $this->makeScreenshot();
   }
 
   /**
@@ -767,6 +759,115 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     assertTrue(is_int(strpos($bla, $name_url)));
   }
 
+  /**
+   * @Then /^the link of "([^"]*)" should open "([^"]*)"$/
+   */
+  public function theLinkOfShouldOpen($identifier, $url_type)
+  {
+    switch ($identifier) {
+      case "image":
+        $class_name = "image-container";
+        break;
+
+      case "download":
+        $class_name = "download-container";
+        break;
+
+      default:
+        break;
+    }
+    assertTrue(strlen($class_name) > 0);
+
+    switch ($url_type) {
+      case "download":
+        $url_text = "pocketcode/download";
+        break;
+
+      case "popup":
+        $url_text = "program.showUpdateAppPopup";
+        break;
+
+      default:
+        break;
+    }
+    assertTrue(strlen($url_text) > 0);
+
+    $selector = "." . $class_name . " a";
+    $href_value = $this->getSession()->getPage()->find('css', $selector)->getAttribute('href');
+    assertTrue(is_int(strpos($href_value, $url_text)));
+  }
+
+  /**
+   * @Then /^I see the "([^"]*)" popup$/
+   */
+  public function iSeeThePopup($arg1)
+  {
+    switch($arg1) {
+      case "update app":
+        $this->assertElementOnPage("#popup-info");
+        $this->assertElementOnPage("#popup-background");
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * @Then /^I see not the "([^"]*)" popup$/
+   */
+  public function iSeeNotThePopup($arg1)
+  {
+    switch($arg1) {
+      case "update app":
+        $this->assertElementNotOnPage("#popup-info");
+        $this->assertElementNotOnPage("#popup-background");
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * @Then /^I click the program download button$/
+   */
+  public function iClickTheProgramDownloadButton()
+  {
+    $this->iClick("#url-download");
+  }
+
+  /**
+   * @Then /^I click the program image$/
+   */
+  public function iClickTheProgramImage()
+  {
+    $this->iClick("#url-image");
+  }
+
+  /**
+   * @Then /^I click on the program popup background$/
+   */
+  public function iClickOnTheProgramPopupBackground()
+  {
+    $this->iClick("#popup-background");
+  }
+
+  /**
+   * @Then /^I click on the propgram popup button$/
+   */
+  public function iClickOnThePropgramPopupButton()
+  {
+    $this->iClick("#btn-close-popup");
+  }
+
+  /**
+   * @Given /^I am browsing with my pocketcode app$/
+   */
+  public function iAmBrowsingWithMyPocketcodeApp()
+  {
+    $this->getMink()->setDefaultSessionName("mobile");
+  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Getter & Setter

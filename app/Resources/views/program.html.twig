@@ -18,8 +18,8 @@
   </div>
 
   <div id="program-middle">
-    <div id="image">
-      <a href="{{ program_details.downloadUrl }}">
+    <div id="image" class="image-container">
+      <a id="url-image" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
         <img width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
       </a>
     </div>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="download-container">
-        <a href="{{ program_details.downloadUrl }}">
+        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
           <button id="download" class="btn btn-primary download-button">
             <table>
               <tr>
@@ -157,7 +157,10 @@
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
   <script>
-    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}', '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}', '{{ asset('images/symbols/loading.gif') }}');
+    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
+      '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}','{{ asset('images/symbols/loading.gif') }}',
+      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}','{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
+      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}');
     program.getApkStatus();
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');

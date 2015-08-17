@@ -1,4 +1,4 @@
-var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif)
+var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif, update_app_header, update_app_text, btn_close_popup)
 {
     var self = this;
     
@@ -7,6 +7,9 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     self.apk_preparing = apk_preparing;
     self.apk_text = apk_text;
     self.waiting_gif = waiting_gif;
+    self.update_app_header = update_app_header;
+    self.update_app_text = update_app_text;
+    self.btn_close_popup = btn_close_popup;
     
     self.getApkStatus = function()
     {
@@ -18,7 +21,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         $('.btn-apk').hide();
         $('#apk-pending').show().css("display", "inline-block");
         $.get(self.create_url, null, self.onResult);
-        self.showPopup();
+        self.showPreparingApkPopup();
     };
 
     self.onResult = function(data)
@@ -71,48 +74,53 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         });
     };
 
-    self.showPopup = function() {
-        var popup_div = $('<div id="popup-info"></div>');
-        var dark_background = $('<div id="bg-dark"></div>');
-        dark_background.css({
-            'position': 'fixed',
-            'width': '100%',
-            'height': '100%',
-            'background-color': 'black',
-            'left': '0',
-            'top': '0',
-            'opacity': '0.5'
-        });
+    self.showUpdateAppPopup = function() {
+        var popup_background = self.createPopupBackgroundDiv();
+        var popup_div = self.createPopupDiv();
+        popup_div.append("<h2>" + self.update_app_header + "</h2><br>");
+        popup_div.append("<p>" + self.update_app_text + "</p>");
 
-        popup_div.css({
-            'position': 'fixed',
-            'width': '320px',
-            'height': '250px',
-            'background-color': '#05222a',
-            'left': '50%',
-            'top': '50%',
-            'border': '3px solid #17A5B8',
-            'border-radius': '10px',
-            'padding': '20px 5px 20px 5px',
-            'margin': '-125px 0 0 -160px',
-            'text-align': 'center',
-            'font-size': '15px'
+        var close_popup_button = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btn_close_popup + '</button>';
+        popup_div.append(close_popup_button);
+
+        $('body').append(popup_background);
+        $('body').append(popup_div);
+
+        $('#popup-background, #btn-close-popup').click(function() {
+            popup_div.remove();
+            popup_background.remove();
         });
+    };
+
+    self.showPreparingApkPopup = function() {
+        var popup_background = self.createPopupBackgroundDiv();
+        var popup_div = self.createPopupDiv();
 
         popup_div.append("<h2>" + self.apk_preparing + " <span class='blink-one'>.</span> <span class='blink-two'>.</span> <span class='blink-three'>.</span> </h2><br>");
         popup_div.append('<img class="pending-icon" src="' + waiting_gif + '">');
         popup_div.append("<p>" + self.apk_text + "</p>");
 
-        var ok_button = '<button id="ok-button" class="btn btn-primary" style="min-width: 50%; margin-top: 2px">OK</button>';
-        popup_div.append(ok_button);
+        var close_popup_button = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btn_close_popup + '</button>';
+        popup_div.append(close_popup_button);
 
-        $('body').append(dark_background);
+        $('body').append(popup_background);
         $('body').append(popup_div);
 
-        $('#bg-dark, #ok-button').click(function() {
+        $('#popup-background, #btn-close-popup').click(function() {
             popup_div.remove();
-            dark_background.remove();
+            popup_background.remove();
         });
+    };
+
+    self.createPopupDiv = function() {
+        var popup_div = $('<div id="popup-info" class="popup-div"></div>');
+        return popup_div;
+    };
+
+    self.createPopupBackgroundDiv = function() {
+        var popup_background = $('<div id="popup-background" class="popup-bg"></div>');
+
+        return popup_background;
     };
     
 };

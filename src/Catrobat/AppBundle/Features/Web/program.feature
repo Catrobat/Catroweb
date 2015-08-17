@@ -7,9 +7,9 @@ Feature: As a visitor I want to see a program page
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org |
       | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
-      | id | name      | description             | owned by | downloads | views | upload time      | version | visible |
-      | 1  | program 1 | my superman description | Superman | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true    |
-      | 2  | program 2 | abcef                   | Gregor   | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | false   |
+      | id | name      | description             | owned by | downloads | views | upload time      | version | language version | visible |
+      | 1  | program 1 | my superman description | Superman | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             |  true   |
+      | 2  | program 2 | abcef                   | Gregor   | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             |  true   |
 
     Scenario: Viewing program page
       Given I am on "/pocketcode/program/1"
@@ -17,7 +17,7 @@ Feature: As a visitor I want to see a program page
       And I should see "Superman"
       And I should see "my superman description"
       And I should see "Report as inappropriate"
-      And I should see "Catrobat Language version: 1"
+      And I should see "Catrobat Language version: 0.94"
       And I should see "more than one year ago"
       And I should see "0.00 MB"
       And I should see "3 downloads"
@@ -52,3 +52,28 @@ Feature: As a visitor I want to see a program page
       Then the element "#copy-link input" should be visible
       And the element "#copy-link tr:nth-child(1)" should not be visible
       And the copy link should be "pocketcode/program/1"
+
+    Scenario: I want to download a program from the browser
+      Given I am on "/pocketcode/program/1"
+      Then the link of "download" should open "download"
+      And the link of "image" should open "download"
+
+    Scenario: I want to download a program from the app with the correct language version
+      Given I am browsing with my pocketcode app
+      And I am on "/pocketcode/program/2"
+      Then the link of "download" should open "download"
+      And the link of "image" should open "download"
+
+    Scenario: I want to download a program from the app with an an old language version
+      Given I am browsing with my pocketcode app
+      And I am on "/pocketcode/program/1"
+      Then the link of "download" should open "popup"
+      And the link of "image" should open "popup"
+      Then I click the program download button
+      And I see the "update app" popup
+      Then I click on the program popup background
+      And I see not the "update app" popup
+      Then I click the program image
+      And I see the "update app" popup
+      Then I click on the propgram popup button
+      And I see not the "update app" popup
