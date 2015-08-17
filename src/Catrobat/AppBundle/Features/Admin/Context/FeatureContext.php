@@ -330,4 +330,28 @@ class FeatureContext extends BaseContext
         $program = $program_manager->find($program_id);
         assertEquals(null,$program->getDirectoryHash());
     }
+
+    /**
+     * @Given /^I am a logged in as super admin$/
+     */
+    public function iAmALoggedInAsSuperAdmin()
+    {
+        $this->iAmAUserWithRole("ROLE_SUPER_ADMIN");
+    }
+
+    /**
+     * @Given /^I am logged in as normal user$/
+     */
+    public function iAmLoggedInAsNormalUser()
+    {
+        $this->iAmAUserWithRole("ROLE_USER");
+    }
+
+    /**
+     * @Given /^I am a logged in as admin$/
+     */
+    public function iAmALoggedInAsAdmin()
+    {
+      $this->iAmAUserWithRole("ROLE_ADMIN");
+    }
 }

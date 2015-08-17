@@ -5,12 +5,12 @@ Feature: Admin Server Maintenance
   I want to be able to delete Extracted Catrobatfiles/APKs and Backups in the Backend
 
 Scenario: As a valid admin i want to be able to see the Maintain menu
-  Given I am a user with role "ROLE_SUPER_ADMIN"
+  Given I am a logged in as super admin
   When I GET "/admin/dashboard"
   Then the response should contain "Maintain"
 
 Scenario: As a valid admin i want to be able to delete the resources
-  Given I am a user with role "ROLE_SUPER_ADMIN"
+  Given I am a logged in as super admin
   When I GET "/admin/maintain/list"
   Then the response should contain "Delete APKs"
   And the response should contain "Delete extracted files"
@@ -18,7 +18,7 @@ Scenario: As a valid admin i want to be able to delete the resources
 
 Scenario: As a valid admin i want to be able to remove the APKs through the backend
   which should result in deleting apk from disk and reset entity state
-  Given I am a user with role "ROLE_SUPER_ADMIN"
+  Given I am a logged in as super admin
   And there are programs:
     | id | name      |  apk_status  | directory_hash  |
     | 1  | program 1 |  2           | null            |
@@ -31,7 +31,7 @@ Scenario: As a valid admin i want to be able to remove the APKs through the back
 
 
   Scenario: As a valid admin i want to be able to delete all backups through the backend
-    Given I am a user with role "ROLE_SUPER_ADMIN"
+    Given I am a logged in as super admin
     And there is a file "a_backup.zip" with size "4096" bytes in the backup-folder
     And there is a file "a_second_backup.zip" with size "4096" bytes in the backup-folder
     When I GET "/admin/maintain/list"
@@ -41,7 +41,7 @@ Scenario: As a valid admin i want to be able to remove the APKs through the back
 
 
   Scenario: As a valid admin i want to be able to delete a single backup through the backend
-    Given I am a user with role "ROLE_SUPER_ADMIN"
+    Given I am a logged in as super admin
     And there is a file "a_backup.zip" with size "4096" bytes in the backup-folder
     And there is a file "a_second_backup.zip" with size "4096" bytes in the backup-folder
     When I GET "/admin/maintain/list"
@@ -53,7 +53,7 @@ Scenario: As a valid admin i want to be able to remove the APKs through the back
 
   Scenario: As a valid admin i want to be able to remove the extracted program files through the backend
   which should result in deleting resources from disk and reset entity state
-    Given I am a user with role "ROLE_SUPER_ADMIN"
+    Given I am a logged in as super admin
     And there are programs:
       | id | name      |  apk_status  | directory_hash  |
       | 1  | program   |  0           | generated_hash  |
