@@ -50,6 +50,24 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, label: Featured Urls }
         arguments: [null, Catrobat\AppBundle\Entity\FeaturedProgram, null]
+
+      catrowebadmin.block.mediapackage.file:
+        class: Catrobat\AppBundle\Admin\MediaPackageFileAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Files }
+        arguments: [null, Catrobat\AppBundle\Entity\MediaPackageFile, null]
+
+      catrowebadmin.block.mediapackage.category:
+        class: Catrobat\AppBundle\Admin\MediaPackageCategoriesAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Categories }
+        arguments: [null, Catrobat\AppBundle\Entity\MediaPackageCategory, null]
+
+      catrowebadmin.block.mediapackage.package:
+        class: Catrobat\AppBundle\Admin\MediaPackageAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Packages }
+        arguments: [null, Catrobat\AppBundle\Entity\MediaPackage, null]
         
       catrowebadmin.block.apk.pending:
         class: Catrobat\AppBundle\Admin\PendingApkRequestsAdmin
@@ -62,4 +80,20 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, label: Ready }
         arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\Apk]
+
+      catrowebadmin.block.tools.statistic:
+        class: Catrobat\AppBundle\Admin\Blocks\StatisticBlockService
+        tags:
+          - { name: sonata.block, label: Cleanup }
+        arguments:
+         - "catrowebadmin.block.tools.statistic"
+         - "@templating"
+         - "%catrobat.file.extract.dir%"
+         - "%catrobat.apk.dir%"
+
+      catrowebadmin.block.tools.maintain:
+        class: Catrobat\AppBundle\Admin\MaintainAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Maintain, icon: '<i class="fa fa-cogs"></i>' }
+        arguments: [null, null, AppBundle:Admin\Maintain]
       

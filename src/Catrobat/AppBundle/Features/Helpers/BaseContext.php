@@ -88,6 +88,22 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
       return $this->kernel->getContainer()->get('filerepository');
   }
 
+    /**
+     * @return \Catrobat\AppBundle\Services\ExtractedFileRepository
+     */
+    public function getExtractedFileRepository()
+    {
+        return $this->kernel->getContainer()->get('extractedfilerepository');
+    }
+
+  /**
+   * @return \Catrobat\AppBundle\Services\MediaPackageFileRepository
+   */
+  public function getMediaPackageFileRepository()
+  {
+    return $this->kernel->getContainer()->get('mediapackagefilerepository');
+  }
+
   /**
    * @return \Doctrine\ORM\EntityManager
    */
@@ -163,6 +179,8 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
       $this->emptyDirectory($this->getSymfonyParameter('catrobat.screenshot.dir'));
       $this->emptyDirectory($this->getSymfonyParameter('catrobat.thumbnail.dir'));
       $this->emptyDirectory($this->getSymfonyParameter('catrobat.featuredimage.dir'));
+      $this->emptyDirectory($this->getSymfonyParameter('catrobat.apk.dir'));
+      $this->emptyDirectory($this->getSymfonyParameter('catrobat.backup.dir'));
   }
 
   /** @AfterStep */
@@ -208,6 +226,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         @$user->setEnabled($config['enabled'] ?: true);
         @$user->setUploadToken($config['token'] ?: 'GeneratedToken');
         @$user->setCountry($config['country'] ?: 'at');
+        @$user->addRole($config['role']?: 'ROLE_USER');
         @$user_manager->updateUser($user, true);
 
         return $user;
@@ -232,12 +251,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         $program->setLanguageVersion(isset($config['languageversion']) ? $config['languageversion'] : 1);
         $program->setUploadIp('127.0.0.1');
         $program->setRemixCount(0);
+        $program->setRemixOf(isset($config['remixof']) ? $config['remixof'] : null);
         $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
         $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
         $program->setUploadLanguage('en');
         $program->setApproved(isset($config['approved']) ? $config['approved'] : true);
         $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
         $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
+        $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
         $em->persist($program);
         $em->flush();
 
@@ -272,6 +293,9 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         case 'applicationName':
           $properties->header->applicationName = $value;
           break;
+        case 'url':
+            $properties->header->url = $value;
+            break;
 
         default:
           throw new PendingException('unknown xml field '.$name);

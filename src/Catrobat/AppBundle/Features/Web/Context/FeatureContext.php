@@ -3,13 +3,23 @@
 namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
+use Catrobat\AppBundle\Entity\MediaPackage;
+use Catrobat\AppBundle\Entity\MediaPackageCategory;
+use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\StarterCategory;
+use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Entity\UserManager;
+use Catrobat\AppBundle\Services\MediaPackageFileRepository;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Catrobat\AppBundle\Features\Helpers\BaseContext;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -27,9 +37,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 {
     private $kernel;
     private $screenshot_directory;
+    private $client;
 
-    const BASE_URL = 'http://catroid.local/app_test.php/';
     const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
+    const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -295,8 +306,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereAreUsers(TableNode $table)
   {
       /**
-     * @var \Catrobat\AppBundle\Entity\UserManager
-     * @var \Catrobat\AppBundle\Entity\User
+     * @var $user_manager UserManager
+     * @var $user User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
       $users = $table->getHash();
@@ -552,5 +563,131 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
       $em->persist($starter);
       $em->flush();
+  }
+
+  /**
+   * @Then /^the copy link should be "([^"]*)"$/
+   */
+  public function theCopyLinkShouldBe($url)
+  {
+      assertEquals($this->getSession()->getPage()->findField('copy-link')->getValue(), $this->locatePath($url));
+  }
+
+  /**
+   * @Given /^there are mediapackages:$/
+   */
+  public function thereAreMediapackages(TableNode $table)
+  {
+    /**
+     * @var $em EntityManager
+     */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $packages = $table->getHash();
+    foreach($packages as $package) {
+      $new_package = new MediaPackage();
+      $new_package->setName($package['name']);
+      $new_package->setNameUrl($package['name_url']);
+      $em->persist($new_package);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Given /^there are mediapackage categories:$/
+   */
+  public function thereAreMediapackageCategories(TableNode $table)
+  {
+    /**
+     * @var $em EntityManager
+     */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $categories = $table->getHash();
+    foreach($categories as $category) {
+      $new_category = new MediaPackageCategory();
+      $new_category->setName($category['name']);
+      $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(array('name' => $category['package']));
+      $new_category->setPackage($package);
+      $em->persist($new_category);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Given /^there are mediapackage files:$/
+   */
+  public function thereAreMediapackageFiles(TableNode $table)
+  {
+    /**
+     * @var $em EntityManager
+     * @var $file_repo MediaPackageFileRepository
+     */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $file_repo = $this->kernel->getContainer()->get('mediapackagefilerepository');
+    $files = $table->getHash();
+    foreach($files as $file) {
+      $new_file = new MediaPackageFile();
+      $new_file->setName($file['name']);
+      $new_file->setDownloads(0);
+      $new_file->setExtension($file['extension']);
+      $new_file->setActive($file['active']);
+      $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(array('name' => $file['category']));
+      $new_file->setCategory($category);
+
+      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR.$file['id'].'.'.$file['extension']), $file['id'], $file['extension']);
+
+      $em->persist($new_file);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @When /^I download "([^"]*)"$/
+   */
+  public function iDownload($arg1)
+  {
+    $this->getClient()->request('GET', $arg1);
+  }
+
+  /**
+   * @Then /^I should receive a "([^"]*)" file$/
+   */
+  public function iShouldReceiveAFile($extension)
+  {
+    $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
+    assertEquals('image/'.$extension, $content_type);
+  }
+
+  /**
+   * @Given /^the response code should be "([^"]*)"$/
+   */
+  public function theResponseCodeShouldBe($code)
+  {
+    $response = $this->getClient()->getResponse();
+    assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+  }
+
+  /**
+   * @Then /^the link to "([^"]*)" should be "([^"]*)"$/
+   */
+  public function theLinkToShouldBe($name, $name_url)
+  {
+    $bla = $this->getSession()->getPage()->find('css', '.program a')->getAttribute('href');
+    assertTrue(is_int(strpos($bla, $name_url)));
+  }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// Getter & Setter
+
+  /**
+   * @return \Symfony\Bundle\FrameworkBundle\Client
+   */
+  public function getClient()
+  {
+    if ($this->client == null) {
+      $this->client = $this->kernel->getContainer()->get('test.client');
+    }
+
+    return $this->client;
   }
 }

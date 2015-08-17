@@ -119,9 +119,23 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
         return $this->program_repository->findAll();
     }
 
+    /**
+     * @param $id
+     * @return \Catrobat\AppBundle\Entity\Program
+     */
     public function find($id)
     {
         return $this->program_repository->find($id);
+    }
+
+    public function getProgramsWithApkStatus($apk_status)
+    {
+        return $this->program_repository->getProgramsWithApkStatus($apk_status);
+    }
+
+    public function getProgramsWithExtractedDirectoryHash()
+    {
+        return $this->program_repository->getProgramsWithExtractedDirectoryHash();
     }
 
     public function getRecentPrograms($flavor, $limit = null, $offset = null)
