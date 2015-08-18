@@ -179,6 +179,8 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
       $this->emptyDirectory($this->getSymfonyParameter('catrobat.screenshot.dir'));
       $this->emptyDirectory($this->getSymfonyParameter('catrobat.thumbnail.dir'));
       $this->emptyDirectory($this->getSymfonyParameter('catrobat.featuredimage.dir'));
+      $this->emptyDirectory($this->getSymfonyParameter('catrobat.apk.dir'));
+      $this->emptyDirectory($this->getSymfonyParameter('catrobat.backup.dir'));
   }
 
   /** @AfterStep */
@@ -224,6 +226,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         @$user->setEnabled($config['enabled'] ?: true);
         @$user->setUploadToken($config['token'] ?: 'GeneratedToken');
         @$user->setCountry($config['country'] ?: 'at');
+        @$user->addRole($config['role']?: 'ROLE_USER');
         @$user_manager->updateUser($user, true);
 
         return $user;
@@ -255,6 +258,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         $program->setApproved(isset($config['approved']) ? $config['approved'] : true);
         $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
         $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
+        $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
         $em->persist($program);
         $em->flush();
 

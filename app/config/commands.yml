@@ -3,6 +3,24 @@ services:
               class: Symfony\Component\Filesystem\Filesystem
               public: false
 
+
+      catrowebadmin.command.clean.apk:
+              class: Catrobat\AppBundle\Commands\CleanApkCommand
+              arguments: ["@apkrepository","@programmanager"]
+              tags:
+                -  { name: console.command }
+
+      catrowebadmin.command.clean.backup:
+              class: Catrobat\AppBundle\Commands\CleanBackupsCommand
+              tags:
+                -  { name: console.command }
+
+      catrowebadmin.command.clean.extracted:
+              class: Catrobat\AppBundle\Commands\CleanExtractedFileCommand
+              arguments: ["@extractedfilerepository","@programmanager"]
+              tags:
+                -  { name: console.command }
+
       catrowebadmin.command.init:
               class: Catrobat\AppBundle\Commands\InitDirectoriesCommand
               arguments: ["@catrowebadmin.filesystem","%catrobat.file.storage.dir%"]

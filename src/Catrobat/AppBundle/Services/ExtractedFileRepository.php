@@ -5,6 +5,7 @@ namespace Catrobat\AppBundle\Services;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Entity\ProgramManager;
+use Symfony\Component\Finder\Finder;
 
 class ExtractedFileRepository
 {
@@ -38,11 +39,64 @@ class ExtractedFileRepository
             return $extracted_file;
         } catch (InvalidCatrobatFileException $e) {
             //need to extract first
-      $extracted_file = $this->file_extractor->extract($this->prog_file_repo->getProgramFile($program->getId()));
+            $extracted_file = $this->file_extractor->extract($this->prog_file_repo->getProgramFile($program->getId()));
             $program->setExtractedDirectoryHash($extracted_file->getDirHash());
             $this->program_manager->save($program);
 
             return $extracted_file;
         }
+    }
+
+    public function removeProgramExtractedFile(\Catrobat\AppBundle\Entity\Program $program)
+    {
+      try {
+        $hash = $program->getExtractedDirectoryHash();
+
+        if ($hash != null)
+        {
+          $path = $this->local_path . $hash . '/';
+
+          if (is_dir($path))
+          {
+            $finder = new Finder();
+
+            $image_path = $path . 'images/';
+            if (is_dir($image_path))
+            {
+              $finder->files()->in($image_path);
+              foreach ($finder as $file)
+              {
+                unlink($image_path . $file->getFilename());
+              }
+                rmdir($image_path);
+            }
+
+            $sound_path = $path . 'sounds/';
+            if (is_dir($sound_path))
+            {
+              $finder->files()->in($sound_path);
+              foreach ($finder as $file)
+              {
+                unlink($sound_path . $file->getFilename());
+              }
+                rmdir($sound_path);
+            }
+
+            $finder->files()->in($path);
+            foreach($finder as $file)
+            {
+              unlink($path . $file->getFilename());
+            }
+
+            rmdir($path);
+          }
+
+          $program->setExtractedDirectoryHash(null);
+          $this->program_manager->save($program);
+        }
+
+      } catch (InvalidCatrobatFileException $e) {
+        // do nothing
+      }
     }
 }

@@ -85,6 +85,8 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
         $query->setParameter('status', Program::APK_NONE);
+        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
+        $query->setParameter('hash', "null");
         $result = $query->getSingleScalarResult();
         $output->writeln('Reset the apk status of '.$result.' projects');
         $output->writeln('Import finished!');
