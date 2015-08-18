@@ -461,6 +461,7 @@ errors:
   username:
     blank: Benutzername darf nicht leer sein
     invalid: Dein Benutzerame ist ungültig
+    exists: Benutzername existiert bereits
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'

@@ -27,108 +27,54 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
 class SecurityController extends Controller
 {
     /**
-   * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"})
-   * @Method({"POST"})
-   */
-  public function checkTokenAction()
-  {
-      return JsonResponse::create(array('statusCode' => StatusCode::OK, 'answer' => $this->trans('success.token'), 'preHeaderMessages' => "  \n"));
-  }
-
-  /**
-   * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"})
-   * @Method({"POST"})
-   */
-  public function loginOrRegisterAction(Request $request)
-  {
-      $userManager = $this->get('usermanager');
-      $tokenGenerator = $this->get('tokengenerator');
-      $validator = $this->get('validator');
-
-      $retArray = array();
-      $username = $request->request->get('registrationUsername');
-
-      $user = $userManager->findUserByUsername($username);
-
-      if ($user == null) {
-          $create_request = new CreateUserRequest($request);
-          $violations = $validator->validate($create_request);
-          foreach ($violations as $violation) {
-              $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-              switch ($violation->getMessageTemplate()) {
-            case 'errors.password.short':
-                $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-                break;
-            case 'errors.email.invalid':
-                $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-                break;
-        }
-              $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
-              break;
-          }
-
-          if (count($violations) == 0) {
-              if ($userManager->findUserByEmail($create_request->mail) != null) {
-                  $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
-                  $retArray['answer'] = $this->trans('errors.email.exists');
-              } else {
-                  $user = $userManager->createUser();
-                  $user->setUsername($create_request->username);
-                  $user->setEmail($create_request->mail);
-                  $user->setPlainPassword($create_request->password);
-                  $user->setEnabled(true);
-                  $user->setUploadToken($tokenGenerator->generateToken());
-                  $user->setCountry($create_request->country);
-
-                  $userManager->updateUser($user);
-                  $retArray['statusCode'] = 201;
-                  $retArray['answer'] = $this->trans('success.registration');
-                  $retArray['token'] = $user->getUploadToken();
-              }
-          }
-      } else {
-          $retArray['statusCode'] = StatusCode::OK;
-          $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
-          if ($correct_pass) {
-              $retArray['statusCode'] = StatusCode::OK;
-              $retArray['token'] = $user->getUploadToken();
-          } else {
-              $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-              $retArray['answer'] = $this->trans('errors.login');
-          }
-      }
-      $retArray['preHeaderMessages'] = '';
-
-      return JsonResponse::create($retArray);
-  }
-
-    /**
-     * @Route("/api/register/Register.json", name="catrobat_api_register", defaults={"_format": "json"})
+     * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    private function registerNativeUser($request)
+    public function checkTokenAction()
     {
-        $userManager = $this->get("usermanager");
-        $tokenGenerator = $this->get("tokengenerator");
-        $validator = $this->get("validator");
+        return JsonResponse::create(array('statusCode' => StatusCode::OK, 'answer' => $this->trans('success.token'), 'preHeaderMessages' => "  \n"));
+    }
+
+
+    /*
+     * DEPRECATED!!
+     */
+    /**
+     * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function loginOrRegisterAction(Request $request)
+    {
+        $userManager = $this->get('usermanager');
+        $tokenGenerator = $this->get('tokengenerator');
+        $validator = $this->get('validator');
 
         $retArray = array();
         $username = $request->request->get('registrationUsername');
+
         $user = $userManager->findUserByUsername($username);
 
-        if($user == null) {
+        if ($user == null) {
             $create_request = new CreateUserRequest($request);
             $violations = $validator->validate($create_request);
             foreach ($violations as $violation) {
                 $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
+                switch ($violation->getMessageTemplate()) {
+                    case 'errors.password.short':
+                        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+                        break;
+                    case 'errors.email.invalid':
+                        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+                        break;
+                }
                 $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
                 break;
             }
 
             if (count($violations) == 0) {
                 if ($userManager->findUserByEmail($create_request->mail) != null) {
-                    $retArray['statusCode'] = StatusCode::EMAIL_ALREADY_EXISTS;
-                    $retArray['answer'] = $this->trans("error.email.exists");
+                    $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
+                    $retArray['answer'] = $this->trans('errors.email.exists');
                 } else {
                     $user = $userManager->createUser();
                     $user->setUsername($create_request->username);
@@ -140,22 +86,89 @@ class SecurityController extends Controller
 
                     $userManager->updateUser($user);
                     $retArray['statusCode'] = 201;
-                    $retArray['answer'] = $this->trans("success.registration");
+                    $retArray['answer'] = $this->trans('success.registration');
                     $retArray['token'] = $user->getUploadToken();
                 }
+            }
+        } else {
+            $retArray['statusCode'] = StatusCode::OK;
+            $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
+            if ($correct_pass) {
+                $retArray['statusCode'] = StatusCode::OK;
+                $retArray['token'] = $user->getUploadToken();
+            } else {
+                $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+                $retArray['answer'] = $this->trans('errors.login');
+            }
+        }
+        $retArray['preHeaderMessages'] = '';
+
+        return JsonResponse::create($retArray);
+    }
+
+    /**
+     * @Route("/api/register/Register.json", name="catrobat_api_register", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function registerNativeUser(Request $request)
+    {
+        $userManager = $this->get("usermanager");
+        $tokenGenerator = $this->get("tokengenerator");
+        $validator = $this->get("validator");
+
+        $retArray = array();
+
+        $create_request = new CreateUserRequest($request);
+        $violations = $validator->validate($create_request);
+        foreach ($violations as $violation) {
+            $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
+            switch ($violation->getMessageTemplate()) {
+                case 'errors.password.short':
+                    $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+                    break;
+                case 'errors.email.invalid':
+                    $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+                    break;
+            }
+            $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
+            break;
+        }
+
+        if (count($violations) == 0) {
+            if ($userManager->findUserByEmail($create_request->mail) != null) {
+                $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
+                $retArray['answer'] = $this->trans("error.email.exists");
+            } else if ($userManager->findUserByUsername($create_request->username) != null) {
+                $retArray['statusCode'] = StatusCode::USER_ADD_USERNAME_EXISTS;
+                $retArray['answer'] = $this->trans("error.username.exists");
+            } else {
+                $user = $userManager->createUser();
+                $user->setUsername($create_request->username);
+                $user->setEmail($create_request->mail);
+                $user->setPlainPassword($create_request->password);
+                $user->setEnabled(true);
+                $user->setUploadToken($tokenGenerator->generateToken());
+                $user->setCountry($create_request->country);
+
+                $userManager->updateUser($user);
+                $retArray['statusCode'] = 201;
+                $retArray['answer'] = $this->trans("success.registration");
+                $retArray['token'] = $user->getUploadToken();
             }
         }
         $retArray['preHeaderMessages'] = "";
         return JsonResponse::create($retArray);
     }
 
+
     /**
-     * @Route("/api/login/Login.json", name="catrobat_api_login", defaults={"_format": "json"})
+     * @Route("/api/login/Login.json", name="catrobat_api_login", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    private function loginNativeUser($request)
+    public function loginNativeUser(Request $request)
     {
         $userManager = $this->get("usermanager");
+        $tokenGenerator = $this->get("tokengenerator");
         $retArray = array();
         $username = $request->request->get('registrationUsername');
 
@@ -164,7 +177,10 @@ class SecurityController extends Controller
         $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
         if ($correct_pass) {
             $retArray['statusCode'] = StatusCode::OK;
+            $user->setUploadToken($tokenGenerator->generateToken());
             $retArray['token'] = $user->getUploadToken();
+            $retArray['email'] = $user->getEmail();
+            $userManager->updateUser($user);
         } else {
             $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
             $retArray['answer'] = $this->trans("error.login");
@@ -275,7 +291,7 @@ class SecurityController extends Controller
         $retArray = array();
 
         $user = $userManager->findOneBy(array('username' => $username_email));
-        if(!$user) {
+        if (!$user) {
             $user = $userManager->findOneBy(array('email' => $username_email));
         }
 
@@ -318,7 +334,7 @@ class SecurityController extends Controller
         $client_secret = $this->container->getParameter('google_secret');
         $redirect_uri = 'postmessage';
 
-        if(!$client_secret || !$client_id || !$application_name){
+        if (!$client_secret || !$client_id || !$application_name) {
             throw $this->createNotFoundException('Google app authentication data not found!');
         }
 
@@ -326,7 +342,9 @@ class SecurityController extends Controller
         $client->setApplicationName($application_name);
         $client->setClientId($client_id);
         $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
+        if(!$request->request->has('mobile')) {
+            $client->setRedirectUri($redirect_uri);
+        }
         $client->setScopes('https://www.googleapis.com/auth/userinfo.email');
 
         $token = '';
@@ -361,7 +379,7 @@ class SecurityController extends Controller
         $access_token = $token->access_token;
         $id_token = $token->id_token;
         $refresh_token = '';
-        if(property_exists($token, 'refresh_token')) {
+        if (property_exists($token, 'refresh_token')) {
             $refresh_token = $token->refresh_token;
         }
 
@@ -416,23 +434,27 @@ class SecurityController extends Controller
         $client_secret = $this->container->getParameter('facebook_secret');
         $app_token = $app_id . '|' . $client_secret;
 
-        if(!$client_secret || !$app_id || !$application_name) {
+        if (!$client_secret || !$app_id || !$application_name) {
             throw $this->createNotFoundException('Facebook app authentication data not found!');
         }
 
         FacebookSession::setDefaultApplication($app_id, $client_secret);
 
-        $helper = new FacebookJavaScriptLoginHelper();
-        try {
-            $facebook_session = $helper->getSession();
-        } catch (FacebookRequestException $ex) {
-            // When Facebook returns an error
-            return new Response(
-                "Facebook Session could not be retrieved", 401);
-        } catch (\Exception $ex) {
-            // When validation fails or other local issues
-            return new Response(
-                "Facebook Session could not be retrieved", 401);
+        if($request->request->has('mobile')) {
+            $facebook_session = new FacebookSession($client_token);
+        } else {
+            $helper = new FacebookJavaScriptLoginHelper();
+            try {
+                $facebook_session = $helper->getSession();
+            } catch (FacebookRequestException $ex) {
+                // When Facebook returns an error
+                return new Response(
+                    "Facebook Session could not be retrieved", 401);
+            } catch (\Exception $ex) {
+                // When validation fails or other local issues
+                return new Response(
+                    "Facebook Session could not be retrieved", 401);
+            }
         }
 
         try {
@@ -441,10 +463,10 @@ class SecurityController extends Controller
             $server_token = $result->getProperty('access_token');
         } catch (FacebookRequestException $exception) {
             return new Response(
-                "Graph API returned an error during token exchange", 401);
+                "Graph API returned an error during token exchange for 'GET', '/oauth/access_token'", 401);
         } catch (\Exception $exception) {
             return new Response(
-                "Error during token exchange", 401);
+                "Error during token exchange for 'GET', '/oauth/access_token' with exception" . $exception, 401);
         }
 
         try {
@@ -455,10 +477,10 @@ class SecurityController extends Controller
             $facebookId_debug = $result->getProperty('user_id');
         } catch (FacebookRequestException $exception) {
             return new Response(
-                "Graph API returned an error during token exchange", 401);
+                "Graph API returned an error during token exchange for 'GET', '/debug_token'", 401);
         } catch (\Exception $exception) {
             return new Response(
-                "Error during token exchange", 401);
+                "Error during token exchange for 'GET', '/debug_token' with exception" . $exception, 401);
         }
 
         // Make sure the token we got is for the intended user.
@@ -487,7 +509,7 @@ class SecurityController extends Controller
             $this->registerFacebookUser($request, $userManager, $retArray, $facebookId, $facebook_username, $facebook_mail, $locale, $server_token);
         }
 
-        if(!$retArray['statusCode'] == StatusCode::LOGIN_ERROR){
+        if (!array_key_exists('statusCode', $retArray) || !$retArray['statusCode'] == StatusCode::LOGIN_ERROR) {
             $retArray['statusCode'] = 201;
             $retArray['answer'] = $this->trans("success.registration");
         }
@@ -536,6 +558,7 @@ class SecurityController extends Controller
         }
 
         $user->setUploadToken($tokenGenerator->generateToken());
+        $userManager->updateUser($user);
         $retArray['token'] = $user->getUploadToken();
 
         $retArray['username'] = $user->getUsername();
@@ -568,6 +591,7 @@ class SecurityController extends Controller
         }
 
         $user->setUploadToken($tokenGenerator->generateToken());
+        $userManager->updateUser($user);
         $retArray['token'] = $user->getUploadToken();
 
         $retArray['username'] = $user->getUsername();
@@ -713,18 +737,19 @@ class SecurityController extends Controller
     }
 
 
-
     /**
      * @Route("/api/generateCsrfToken/generateCsrfToken.json", name="catrobat_oauth_register_get_csrftoken", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function generateCsrfToken() {
+    public function generateCsrfToken()
+    {
         $retArray = array();
         $retArray['csrf_token'] = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         return JsonResponse::create($retArray);
     }
 
-    private function generateOAuthPassword($user) {
+    private function generateOAuthPassword($user)
+    {
         $generator = new SecureRandom();
         $password = bin2hex($generator->nextBytes(16));
         $user->setPlainPassword($password);
