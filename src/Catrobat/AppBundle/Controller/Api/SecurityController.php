@@ -342,7 +342,7 @@ class SecurityController extends Controller
         $client->setApplicationName($application_name);
         $client->setClientId($client_id);
         $client->setClientSecret($client_secret);
-        if(!$request->request->has('mobile')) {
+        if (!$request->request->has('mobile')) {
             $client->setRedirectUri($redirect_uri);
         }
         $client->setScopes('https://www.googleapis.com/auth/userinfo.email');
@@ -440,7 +440,7 @@ class SecurityController extends Controller
 
         FacebookSession::setDefaultApplication($app_id, $client_secret);
 
-        if($request->request->has('mobile')) {
+        if ($request->request->has('mobile')) {
             $facebook_session = new FacebookSession($client_token);
         } else {
             $helper = new FacebookJavaScriptLoginHelper();
@@ -746,6 +746,81 @@ class SecurityController extends Controller
         $retArray = array();
         $retArray['csrf_token'] = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         return JsonResponse::create($retArray);
+    }
+
+    /**
+     * @Route("/api/deleteOAuthUserAccounts/deleteOAuthUserAccounts.json", name="catrobat_oauth_delete_testusers", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"GET"})
+     */
+    public function deleteOAuthTestUserAccounts()
+    {
+        $userManager = $this->get('usermanager');
+        $retArray = array();
+
+        $deleted = '';
+
+        $facebook_testuser_mail = 'pocket_zlxacqt_tester@tfbnw.net';
+        $google_testuser_mail = 'pocketcodetester@gmail.com';
+        $facebook_testuser_username = 'HeyWickieHey';
+        $google_testuser_username = 'PocketGoogler';
+        $facebook_testuser_id = '105678789764016';
+        $google_testuser_id = '105155320106786463089';
+
+        $user = $userManager->findUserByEmail($facebook_testuser_mail);
+        if ($user != null) {
+            $deleted = $deleted . '_FB-Mail:' . $user->getEmail();
+            $this->deleteUser($user);
+        }
+
+        $user = $userManager->findUserByEmail($google_testuser_mail);
+        if ($user != null) {
+            $deleted = $deleted . '_G+-Mail:' . $user->getEmail();
+            $this->deleteUser($user);
+        }
+
+        $user = $userManager->findUserByUsername($facebook_testuser_username);
+        if ($user != null) {
+            $deleted = $deleted . '_FB-User:' . $user->getUsername();
+            $this->deleteUser($user);
+        }
+
+        $user = $userManager->findUserByUsername($google_testuser_username);
+        if ($user != null) {
+            $deleted = $deleted . '_G+-User' . $user->getUsername();
+            $this->deleteUser($user);
+        }
+
+        $user = $userManager->findUserBy(array('facebookUid' => $facebook_testuser_id));
+        if ($user != null) {
+            $deleted = $deleted . '_FB-ID:' . $user->getFacebookUid();
+            $this->deleteUser($user);
+        }
+
+        $user = $userManager->findUserBy(array('gplusUid' => $google_testuser_id));
+        if ($user != null) {
+            $deleted = $deleted . '_G+-ID' . $user->getGplusUid();
+            $this->deleteUser($user);
+        }
+
+        $retArray['deleted'] = $deleted;
+        $retArray['statusCode'] = StatusCode::OK;
+
+        return JsonResponse::create($retArray);
+    }
+
+    private function deleteUser($user) {
+        $userManager = $this->get('usermanager');
+        $program_manager = $this->get('programmanager');
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $user_programms = $program_manager->getUserPrograms($user->getId());
+
+        foreach ($user_programms as $user_program) {
+            $em->remove($user_program);
+            $em->flush();
+        }
+
+        $userManager->deleteUser($user);
     }
 
     private function generateOAuthPassword($user)
