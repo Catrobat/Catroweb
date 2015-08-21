@@ -384,8 +384,7 @@ class SecurityController extends Controller
         }
 
         // Store the token in the session for later use.
-        $response = 'Succesfully connected with token: ' . print_r($token, true);
-        $retArray['response'] = $response;
+        //'Succesfully connected with token: ' . print_r($token, true);
 
         $userManager = $this->get("usermanager");
         $user = $userManager->findUserByEmail($google_mail);

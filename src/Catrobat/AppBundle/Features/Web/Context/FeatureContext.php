@@ -783,7 +783,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSwitchToPopupWindow()
   {
-      $this->getSession()->wait(3500);
+      $this->getSession()->wait(5000);
       $page = $this->getSession()->getPage();
       $window_names = $this->getSession()->getDriver()->getWindowNames();
       foreach ($window_names as $name) {
@@ -819,12 +819,24 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             $page->fillField('pass',$pw);
             $button = $page->findById('u_0_0');
             assertTrue($button != null);
+            $this->getSession()->wait(500);
             $button->press();
         } else {
             assertTrue(false, 'No Facebook form appeared!' . "\n");
         }
         $this->getSession()->switchToWindow(null);
         $this->getSession()->wait(1000);
+
+        $this->iSwitchToPopupWindow();
+        if($page->find('css', '#facebook') && $page->find('css', '._1a_q') ) {
+            echo 'facebook authentication login form appeared' . "\n";
+            $button = $page->findButton('__CONFIRM__');
+            assertTrue($button != null);
+            $this->getSession()->wait(500);
+            $button->press();
+            $this->getSession()->switchToWindow(null);
+            $this->getSession()->wait(1000);
+        }
     }
 
     /**
@@ -983,6 +995,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iChooseTheUsername($arg1)
     {
+        $this->getSession()->wait(2000);
         $page = $this->getSession()->getPage();
 
         $button = $page->findById('btn_oauth_username');
@@ -990,12 +1003,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         assertTrue($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input',$arg1);
+        $this->getSession()->wait(400);
         assertFalse($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input','');
+        $this->getSession()->wait(400);
         assertTrue($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input',$arg1);
+        $this->getSession()->wait(400);
         $button->press();
         $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
         $this->getSession()->wait(2000);
