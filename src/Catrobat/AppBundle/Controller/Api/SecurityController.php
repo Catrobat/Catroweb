@@ -9,7 +9,10 @@ use Facebook\FacebookRequestException;
 use Facebook\FacebookRedirectLoginHelper;
 use Google_Client;
 use Google_Http_Request;
+use Google_Service_Plus;
 use Assetic\Exception;
+use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
+use HWI\Bundle\OAuthBundle\Tests\Security\Core\Authentication\Token\OAuthTokenTest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator;
@@ -37,7 +40,7 @@ class SecurityController extends Controller
 
 
     /*
-     * DEPRECATED!!
+     * loginOrRegisterAction is DEPRECATED!!
      */
     /**
      * @Route("/api/loginOrRegister/loginOrRegister.json", name="catrobat_api_login_or_register", defaults={"_format": "json"})
@@ -210,6 +213,7 @@ class SecurityController extends Controller
         }
         $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
+        //TODO: falls token abläuft, mit refresh token neuen anfordern
     }
 
     /**
@@ -431,29 +435,15 @@ class SecurityController extends Controller
         $application_name = $this->container->getParameter('application_name');
         $app_id = $this->container->getParameter('facebook_app_id');
         $client_secret = $this->container->getParameter('facebook_secret');
-        $app_token = $app_id . '|' . $client_secret;
 
         if (!$client_secret || !$app_id || !$application_name) {
             throw $this->createNotFoundException('Facebook app authentication data not found!');
         }
 
-        FacebookSession::setDefaultApplication($app_id, $client_secret);
-
         if ($request->request->has('mobile')) {
-            $facebook_session = new FacebookSession($client_token);
+            $facebook_session = $this->getFacebookSession($client_token);
         } else {
-            $helper = new FacebookJavaScriptLoginHelper();
-            try {
-                $facebook_session = $helper->getSession();
-            } catch (FacebookRequestException $ex) {
-                // When Facebook returns an error
-                return new Response(
-                    "Facebook Session could not be retrieved", 401);
-            } catch (\Exception $ex) {
-                // When validation fails or other local issues
-                return new Response(
-                    "Facebook Session could not be retrieved", 401);
-            }
+            $facebook_session = $this->getFacebookSession();
         }
 
         try {
@@ -469,8 +459,7 @@ class SecurityController extends Controller
         }
 
         try {
-            $result = (new FacebookRequest($facebook_session, 'GET', '/debug_token', array('input_token' => $server_token,
-                'access_token' => $app_token)))->execute()->getGraphObject();
+            $result = $this->checkFacebookServerAccessTokenValidity($facebook_session, $server_token);
             $app_id_debug = $result->getProperty('app_id');
             $application_name_debug = $result->getProperty('application');
             $facebookId_debug = $result->getProperty('user_id');
@@ -516,19 +505,94 @@ class SecurityController extends Controller
         return JsonResponse::create($retArray);
     }
 
-
-    private function setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token)
+    /**
+     * @Route("/api/checkFacebookServerTokenValidity/checkFacebookServerTokenValidity.json", name="catrobat_oauth_facebook_server_token_validity", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function isFacebookServerAccessTokenValid(Request $request)
     {
-        if ($access_token) {
-            $user->setGplusAccessToken($access_token);
+        $userManager = $this->get("usermanager");
+        $retArray = array();
+
+        $facebook_id = $request->request->get('id');
+
+        $fb_user = $userManager->findOneBy(array('facebookUid' => $facebook_id));
+        if (!$fb_user) {
+            //should not happen, but who knows
+            $retArray['token_invalid'] = true;
+            $retArray['reason'] = 'No Facebook User with given ID in database';
+            $retArray['statusCode'] = StatusCode::OK;
+            return JsonResponse::create($retArray);
         }
-        if ($refresh_token) {
-            $user->setGplusRefreshToken($refresh_token);
+
+        $app_token = $this->getAppToken();
+        $server_token_to_check = $fb_user->getFacebookAccessToken();
+
+        $facebook_session = $this->getFacebookSession($app_token);
+        $result = $this->checkFacebookServerAccessTokenValidity($facebook_session, $server_token_to_check);
+
+        /*result:
+         * data:
+         *  app_id
+         *  application
+         *  expires at
+         *  is_valid
+         *  issued_at
+         *  scopes
+         *      profile, email ...
+         *  user_id
+         */
+
+        $application_name = $this->container->getParameter('application_name');
+        $app_id = $this->container->getParameter('facebook_app_id');
+
+        $is_valid = $result->getProperty('is_valid');
+        $expires = $result->getProperty('expires_at');
+        $app_id_debug = $result->getProperty('app_id');
+        $application_name_debug = $result->getProperty('application');
+        $facebook_id_debug = $result->getProperty('user_id');
+
+        if ($app_id_debug != $app_id || $application_name_debug != $application_name || $facebook_id_debug != $facebook_id) {
+            $retArray['token_invalid'] = true;
+            $retArray['reason'] = 'Token data does not match application data';
+            $retArray['statusCode'] = StatusCode::OK;
+            return JsonResponse::create($retArray);
         }
-        if ($id_token) {
-            $user->setGplusIdToken($id_token);
+
+        if (!$is_valid) {
+            $retArray['token_invalid'] = true;
+            $retArray['reason'] = 'Token has been invalidated';
+            $retArray['statusCode'] = StatusCode::OK;
+            return JsonResponse::create($retArray);
         }
-        $userManager->updateUser($user);
+
+        $current_timestamp = time();
+        $time_to_expiry = $expires - $current_timestamp;
+        $limit = 5 * 24 * 60 * 60; //5 days
+
+        if ($time_to_expiry < $limit) {
+            $retArray['token_invalid'] = true;
+            $retArray['statusCode'] = StatusCode::OK;
+            $retArray['reason'] = 'Token will expire soon or has been expired';
+            return JsonResponse::create($retArray);
+        }
+        $retArray['token_invalid'] = false;
+        $retArray['statusCode'] = StatusCode::OK;
+        return JsonResponse::create($retArray);
+    }
+
+    private function checkFacebookServerAccessTokenValidity($facebook_session, $token_to_check)
+    {
+        $app_token = $this->getAppToken();
+        return (new FacebookRequest($facebook_session, 'GET', '/debug_token', array('input_token' => $token_to_check,
+            'access_token' => $app_token)))->execute()->getGraphObject();
+    }
+
+    private function getAppToken() {
+        $app_id = $this->container->getParameter('facebook_app_id');
+        $client_secret = $this->container->getParameter('facebook_secret');
+        $app_token = $app_id . '|' . $client_secret;
+        return $app_token;
     }
 
     /**
@@ -550,18 +614,203 @@ class SecurityController extends Controller
         $google_user = $userManager->findOneBy(array('gplusUid' => $google_id));
         if ($google_user) {
             $retArray['password'] = $google_user->getOauthPassword();
+            $google_user->setUploadToken($tokenGenerator->generateToken());
+            $userManager->updateUser($google_user);
+            $retArray['token'] = $google_user->getUploadToken();
+            $retArray['username'] = $google_user->getUsername();
             $this->loginOAuthUser($retArray);
         } else if ($user) {
             $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $google_id, $google_username, $locale);
             $retArray['password'] = $user->getOauthPassword();
+            $user->setUploadToken($tokenGenerator->generateToken());
+            $userManager->updateUser($user);
+            $retArray['token'] = $user->getUploadToken();
+            $retArray['username'] = $user->getUsername();
         }
 
-        $user->setUploadToken($tokenGenerator->generateToken());
-        $userManager->updateUser($user);
-        $retArray['token'] = $user->getUploadToken();
-
-        $retArray['username'] = $user->getUsername();
         return JsonResponse::create($retArray);
+    }
+
+    /**
+     * @Route("/api/getFacebookUserInfo/getFacebookUserInfo.json", name="catrobat_facebook_userinfo", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function getFacebookUserProfileInfo(Request $request)
+    {
+        $userManager = $this->get("usermanager");
+        $retArray = array();
+
+        $facebook_id = $request->request->get('id');
+        $facebook_user = $userManager->findOneBy(array('facebookUid' => $facebook_id));
+
+        if ($facebook_user) {
+
+            if ($request->request->has('mobile')) {
+                $client_token = $facebook_user->getFacebookAccessToken();
+                $facebook_session = $this->getFacebookSession($client_token);
+            } else {
+                $facebook_session = $this->getFacebookSession();
+            }
+
+            $request = new FacebookRequest(
+                $facebook_session,
+                'GET',
+                '/' . $facebook_id
+            );
+            $response = $request->execute();
+            $graphObject = $response->getGraphObject();
+            $retArray['id'] = $graphObject->getProperty('id');
+            $retArray['first_name'] = $graphObject->getProperty('first_name');
+            $retArray['last_name'] = $graphObject->getProperty('last_name');
+            $retArray['name'] = $graphObject->getProperty('name');
+            $retArray['link'] = $graphObject->getProperty('link');
+        } else {
+            $retArray['error'] = 'invalid id';
+        }
+
+        return JsonResponse::create($retArray);
+    }
+
+    private function getFacebookSession($client_token = NULL) {
+        $app_id = $this->container->getParameter('facebook_app_id');
+        $client_secret = $this->container->getParameter('facebook_secret');
+
+        if (!$client_secret || !$app_id) {
+            throw $this->createNotFoundException('Facebook app authentication data not found!');
+        }
+
+        FacebookSession::setDefaultApplication($app_id, $client_secret);
+
+        if ($client_token) {
+            $facebook_session = new FacebookSession($client_token);
+        } else {
+            $helper = new FacebookJavaScriptLoginHelper();
+            try {
+                $facebook_session = $helper->getSession();
+            } catch (FacebookRequestException $ex) {
+                // When Facebook returns an error
+                return new Response(
+                    "Facebook Session could not be retrieved", 401);
+            } catch (\Exception $ex) {
+                // When validation fails or other local issues
+                return new Response(
+                    "Facebook Session could not be retrieved", 401);
+            }
+        }
+        try {
+            $facebook_session->validate();
+        } catch (FacebookSDKException $ex) {
+            //session expired or invalid
+            $facebook_session = null;
+        }
+
+        return $facebook_session;
+    }
+
+    /**
+     * @Route("/api/getGoogleUserInfo/getGoogleUserInfo.json", name="catrobat_google_userinfo", options={"expose"=true}, defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function getGoogleUserProfileInfo(Request $request)
+    {
+        $userManager = $this->get("usermanager");
+        $retArray = array();
+
+        $google_id = $request->request->get('id');
+        $google_user = $userManager->findOneBy(array('gplusUid' => $google_id));
+
+        if ($google_user) {
+            $this->refreshGoogleAccessToken($google_user);
+
+            $client = $this->getAuthenticatedGoogleClientForGPlusUser($google_user);
+            $plus = new \Google_Service_Plus($client);
+            $person = $plus->people->get($google_id);
+
+            $retArray['ID'] = $person->getId();
+            $retArray['displayName'] = $person->getDisplayName();
+            $retArray['imageUrl'] = $person->getImage()->getUrl();
+            $retArray['profileUrl'] = $person->getUrl();
+        } else {
+            $retArray['error'] = 'invalid id';
+        }
+
+        return JsonResponse::create($retArray);
+    }
+
+    private function refreshGoogleAccessToken($user)
+    {
+        //Google offline server tokens are valid for ~1h. So, we need to check if the token has to be refreshed
+        //before making server-side requests. The refresh token has an unlimited lifetime.
+
+        $userManager = $this->get("usermanager");
+        $server_access_token = $user->getGplusAccessToken();
+        $refresh_token = $user->getGplusRefreshToken();
+
+        if ($server_access_token != null && $refresh_token != null) {
+
+            $client = $this->getAuthenticatedGoogleClientForGPlusUser($user);
+
+            //TODO: access token generell ausprobieren fb + g+ ob sie funktionieren
+            $reqUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=' .
+                $server_access_token;
+            $req = new Google_Http_Request($reqUrl);
+
+            /* result for valid token:
+                {
+                 "issued_to": "427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com",
+                 "audience": "427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com",
+                 "user_id": "108529842678819847821",
+                 "scope": "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.moments.write https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.profile.agerange.read https://www.googleapis.com/auth/plus.profile.language.read https://www.googleapis.com/auth/plus.circles.members.read https://www.googleapis.com/auth/userinfo.profile",
+                 "expires_in": 3181,
+                 "email": "jaindl.stefan@gmail.com",
+                 "verified_email": true,
+                 "access_type": "offline"
+                }
+            */
+
+            /* result for invalid token:
+                {
+                 "error_description": "Invalid Value"
+                }
+            */
+            $results = get_object_vars(json_decode($client->getAuth()->authenticatedRequest($req)->getResponseBody()));
+
+            if (isset($results['error_description']) && $results['error_description'] == 'Invalid Value') {
+                //token expired --> refresh
+                $newtoken_array = json_decode($client->getAccessToken());
+                $newtoken = $newtoken_array->access_token;
+                $user->setGplusAccessToken($newtoken);
+                $userManager->updateUser($user);
+            }
+        }
+    }
+
+    private function getAuthenticatedGoogleClientForGPlusUser($user)
+    {
+        $application_name = $this->container->getParameter('application_name');
+        $client_id = $this->container->getParameter('google_app_id');
+        $client_secret = $this->container->getParameter('google_secret');
+        //$redirect_uri = 'postmessage';
+
+        if (!$client_secret || !$client_id || !$application_name) {
+            throw $this->createNotFoundException('Google app authentication data not found!');
+        }
+
+        $server_access_token = $user->getGplusAccessToken();
+        $refresh_token = $user->getGplusRefreshToken();
+
+        $client = new Google_Client();
+        $client->setApplicationName($application_name);
+        $client->setClientId($client_id);
+        $client->setClientSecret($client_secret);
+        //$client->setRedirectUri($redirect_uri);
+        $client->setScopes('https://www.googleapis.com/auth/userinfo.email');
+        $client->setState('offline');
+        $token_array = array();
+        $token_array['access_token'] = $server_access_token;
+        $client->setAccessToken(json_encode($token_array));
+        $client->refreshToken($refresh_token);
+        return $client;
     }
 
     /**
@@ -617,6 +866,20 @@ class SecurityController extends Controller
         $retArray = array();
         $retArray['gplus_appid'] = $this->container->getParameter('google_app_id');
         return JsonResponse::create($retArray);
+    }
+
+    private function setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token)
+    {
+        if ($access_token) {
+            $user->setGplusAccessToken($access_token);
+        }
+        if ($refresh_token) {
+            $user->setGplusRefreshToken($refresh_token);
+        }
+        if ($id_token) {
+            $user->setGplusIdToken($id_token);
+        }
+        $userManager->updateUser($user);
     }
 
     private function validateOAuthUser($request, &$retArray)
@@ -711,7 +974,6 @@ class SecurityController extends Controller
         if (count($violations) == 0) {
             $user = $userManager->createUser();
             $user->setUsername($googleUsername);
-            //$user->setGplusName($googleUsername);
             $user->setGplusUid($googleId);
             $user->setEmail($googleEmail);
             $user->setCountry($locale);
@@ -807,7 +1069,8 @@ class SecurityController extends Controller
         return JsonResponse::create($retArray);
     }
 
-    private function deleteUser($user) {
+    private function deleteUser($user)
+    {
         $userManager = $this->get('usermanager');
         $program_manager = $this->get('programmanager');
         $em = $this->getDoctrine()->getEntityManager();
