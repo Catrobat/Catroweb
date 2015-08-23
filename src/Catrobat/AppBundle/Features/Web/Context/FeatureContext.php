@@ -575,9 +575,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $this->assertElementOnPage('#btn-login');
         $this->iClickTheButton('login');
         $this->assertPageAddress('/pocketcode/login');
+        $this->getSession()->wait(200);
         $this->assertElementOnPage('#header-logo');
         $this->assertElementOnPage('#btn-login_google');
         $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
+        $this->getSession()->wait(200);
         $this->getSession()->getPage()->findById('gplus_approval_prompt')->setValue($arg1);
     }
 
@@ -588,6 +590,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     public function iClickGoogleLoginLink()
     {
         $this->clickLink('btn-login_google');
+        $this->getSession()->wait(1500);
         $this->clickLink('btn-login_google');
         $this->getSession()->wait(2500);
     }
@@ -783,7 +786,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSwitchToPopupWindow()
   {
-      $this->getSession()->wait(5000);
+      $this->getSession()->wait(6000);
       $page = $this->getSession()->getPage();
       $window_names = $this->getSession()->getDriver()->getWindowNames();
       foreach ($window_names as $name) {
@@ -847,7 +850,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $mail = $this->getParameterValue('google_testuser_mail');
         $pw = $this->getParameterValue('google_testuser_pw');
         echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-        $this->getSession()->wait(2000);
+        $this->getSession()->wait(3000);
         $page = $this->getSession()->getPage();
         if($page->find('css', '#approval_container') &&
             $page->find('css', '#submit_approve_access')) {

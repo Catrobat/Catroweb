@@ -23,6 +23,7 @@ use Catrobat\AppBundle\StatusCode;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Catrobat\AppBundle\Requests\LoginUserRequest;
 use Catrobat\AppBundle\Requests\CreateUserRequest;
 use Catrobat\AppBundle\Requests\CreateOAuthUserRequest;
 use Symfony\Component\Security\Core\Util\SecureRandom;
@@ -171,23 +172,50 @@ class SecurityController extends Controller
     public function loginNativeUser(Request $request)
     {
         $userManager = $this->get("usermanager");
+        $validator = $this->get("validator");
         $tokenGenerator = $this->get("tokengenerator");
         $retArray = array();
-        $username = $request->request->get('registrationUsername');
 
-        $user = $userManager->findUserByUsername($username);
-
-        $correct_pass = $userManager->isPasswordValid($user, $request->request->get('registrationPassword'));
-        if ($correct_pass) {
-            $retArray['statusCode'] = StatusCode::OK;
-            $user->setUploadToken($tokenGenerator->generateToken());
-            $retArray['token'] = $user->getUploadToken();
-            $retArray['email'] = $user->getEmail();
-            $userManager->updateUser($user);
-        } else {
+        $login_request = new LoginUserRequest($request);
+        $violations = $validator->validate($login_request);
+        foreach ($violations as $violation) {
             $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-            $retArray['answer'] = $this->trans("error.login");
+            switch ($violation->getMessageTemplate()) {
+                case 'errors.password.short':
+                    $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+                    break;
+                case 'errors.email.invalid':
+                    $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+                    break;
+            }
+            $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
+            break;
         }
+
+        if (count($violations) == 0) {
+            $username = $request->request->get('registrationUsername');
+            $password = $request->request->get('registrationPassword');
+
+            $user = $userManager->findUserByUsername($username);
+
+            if(!$user) {
+                $retArray['statusCode'] = StatusCode::USER_USERNAME_INVALID;
+                $retArray['answer'] = $this->trans('errors.username.not_exists');
+            } else {
+                $correct_pass = $userManager->isPasswordValid($user, $password);
+                if ($correct_pass) {
+                    $retArray['statusCode'] = StatusCode::OK;
+                    $user->setUploadToken($tokenGenerator->generateToken());
+                    $retArray['token'] = $user->getUploadToken();
+                    $retArray['email'] = $user->getEmail();
+                    $userManager->updateUser($user);
+                } else {
+                    $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+                    $retArray['answer'] = $this->trans("error.login");
+                }
+            }
+        }
+
         $retArray['preHeaderMessages'] = "";
         return JsonResponse::create($retArray);
     }
@@ -792,7 +820,7 @@ class SecurityController extends Controller
         $client_secret = $this->container->getParameter('google_secret');
         //$redirect_uri = 'postmessage';
 
-        if (!$client_secret || !$client_id || !$application_name) {
+        if (!$client_secret || !$client_id |ccccccccccccccccccccccccccc| !$application_name) {
             throw $this->createNotFoundException('Google app authentication data not found!');
         }
 
@@ -906,7 +934,6 @@ class SecurityController extends Controller
                 $user->setCountry($locale);
             }
 
-            $user->setGplusName($googleUsername);
             $user->setGplusUid($googleId);
             $retArray['password'] = $this->generateOAuthPassword($user);
 
@@ -929,7 +956,6 @@ class SecurityController extends Controller
                 $user->setCountry($locale);
             }
 
-            $user->setFacebookName($facebookUsername);
             $user->setFacebookUid($facebookId);
             $retArray['password'] = $this->generateOAuthPassword($user);
 

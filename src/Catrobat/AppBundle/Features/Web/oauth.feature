@@ -129,7 +129,6 @@ Feature: Open Authentication
     And I wait for a second
     Then the "email" field should contain "pocket_tester@tfbnw.net"
 
-
   @javascript @insulated
   Scenario: It should be possible to change the E-Mail address on the profile page and login again with the same Google+ account
     Given I am on homepage
