@@ -241,7 +241,6 @@ class SecurityController extends Controller
         }
         $retArray['statusCode'] = StatusCode::OK;
         return JsonResponse::create($retArray);
-        //TODO: falls token abläuft, mit refresh token neuen anfordern
     }
 
     /**
@@ -769,7 +768,6 @@ class SecurityController extends Controller
     {
         //Google offline server tokens are valid for ~1h. So, we need to check if the token has to be refreshed
         //before making server-side requests. The refresh token has an unlimited lifetime.
-
         $userManager = $this->get("usermanager");
         $server_access_token = $user->getGplusAccessToken();
         $refresh_token = $user->getGplusRefreshToken();
@@ -778,33 +776,31 @@ class SecurityController extends Controller
 
             $client = $this->getAuthenticatedGoogleClientForGPlusUser($user);
 
-            //TODO: access token generell ausprobieren fb + g+ ob sie funktionieren
             $reqUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=' .
                 $server_access_token;
             $req = new Google_Http_Request($reqUrl);
 
             /* result for valid token:
                 {
-                 "issued_to": "427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com",
-                 "audience": "427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com",
-                 "user_id": "108529842678819847821",
+                 "issued_to": "[app id]",
+                 "audience": "[app id]",
+                 "user_id": "[user id]",
                  "scope": "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.moments.write https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.profile.agerange.read https://www.googleapis.com/auth/plus.profile.language.read https://www.googleapis.com/auth/plus.circles.members.read https://www.googleapis.com/auth/userinfo.profile",
                  "expires_in": 3181,
-                 "email": "jaindl.stefan@gmail.com",
-                 "verified_email": true,
+                 "email": "[email]",
+                 "verified_email": [true/false],
                  "access_type": "offline"
                 }
-            */
-
-            /* result for invalid token:
+            result for invalid token:
                 {
                  "error_description": "Invalid Value"
                 }
             */
+
             $results = get_object_vars(json_decode($client->getAuth()->authenticatedRequest($req)->getResponseBody()));
 
             if (isset($results['error_description']) && $results['error_description'] == 'Invalid Value') {
-                //token expired --> refresh
+                //token is expired --> refresh
                 $newtoken_array = json_decode($client->getAccessToken());
                 $newtoken = $newtoken_array->access_token;
                 $user->setGplusAccessToken($newtoken);
@@ -820,7 +816,7 @@ class SecurityController extends Controller
         $client_secret = $this->container->getParameter('google_secret');
         //$redirect_uri = 'postmessage';
 
-        if (!$client_secret || !$client_id |ccccccccccccccccccccccccccc| !$application_name) {
+        if (!$client_secret || !$client_id || !$application_name) {
             throw $this->createNotFoundException('Google app authentication data not found!');
         }
 

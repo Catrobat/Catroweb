@@ -32,7 +32,7 @@ Feature: Open Authentication
   Scenario: Login with a new user into Google+, logout and login again with the now existing user
     Given I am on homepage
     When I trigger Google login with approval prompt "force"
-    And I click Google login link
+    And I click Google login link "twice"
     And I switch to popup window
     Then I log in to Google with valid credentials
     And I choose the username 'PocketGoogler'
@@ -44,7 +44,7 @@ Feature: Open Authentication
     When I click the "logout" button
     Then I should not be logged in
     When I trigger Google login with approval prompt "auto"
-    And I click Google login link
+    And I click Google login link "once"
     And I wait for a second
     Then I should be logged in
 
@@ -62,7 +62,7 @@ Feature: Open Authentication
   Scenario: Try to login with a new user into Google+ where the username already exists
     Given I am on homepage
     When I trigger Google login with approval prompt "force"
-    And I click Google login link
+    And I click Google login link "twice"
     And I switch to popup window
     Then I log in to Google with valid credentials
     And I choose the username 'AlreadyinDB'
@@ -133,7 +133,7 @@ Feature: Open Authentication
   Scenario: It should be possible to change the E-Mail address on the profile page and login again with the same Google+ account
     Given I am on homepage
     When I trigger Google login with approval prompt "force"
-    And I click Google login link
+    And I click Google login link "twice"
     And I switch to popup window
     Then I log in to Google with valid credentials
     And I choose the username 'PocketGoogler'
@@ -154,7 +154,7 @@ Feature: Open Authentication
     When I go to "/logout"
     Then I should not be logged in
     When I trigger Google login with approval prompt "auto"
-    And I click Google login link
+    And I click Google login link "once"
     And I wait for a second
     Then I should be logged in
     And I should see an "#btn-profile" element

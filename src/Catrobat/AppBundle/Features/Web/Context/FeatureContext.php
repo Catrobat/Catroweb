@@ -584,15 +584,16 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
 
     /**
-     * @When /^I click Google login link$/
+     * @When /^I click Google login link "([^"]*)"$/
      */
-
-    public function iClickGoogleLoginLink()
+    public function iClickGoogleLoginLink($arg1)
     {
         $this->clickLink('btn-login_google');
         $this->getSession()->wait(1500);
-        $this->clickLink('btn-login_google');
-        $this->getSession()->wait(2500);
+        if($arg1 == 'twice') {
+            $this->clickLink('btn-login_google');
+            $this->getSession()->wait(2500);
+        }
     }
 
   /**

@@ -33,7 +33,7 @@ Feature: Open Authentication
             Google+ account should be auto-connected to existing account.
     Given I am on homepage
     When I trigger Google login with approval prompt "force"
-    And I click Google login link
+    And I click Google login link "twice"
     And I switch to popup window
     Then I log in to Google with valid credentials
     Then I should be logged in
@@ -44,5 +44,5 @@ Feature: Open Authentication
     When I click the "logout" button
     Then I should not be logged in
     When I trigger Google login with approval prompt "auto"
-    And I click Google login link
+    And I click Google login link "once"
     Then I should be logged in
