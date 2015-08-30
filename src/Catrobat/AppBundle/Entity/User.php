@@ -43,6 +43,95 @@ class User extends BaseUser
      */
     protected $programs;
 
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     */
+    protected $gplus_access_token;
+
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     */
+    protected $gplus_id_token;
+
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     */
+    protected $gplus_refresh_token;
+
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     */
+    protected $facebook_access_token;
+
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     */
+    protected $oauth_password;
+
+    /**
+     * @param mixed $facebook_access_token
+     */
+    public function setFacebookAccessToken($facebook_access_token)
+    {
+        $this->facebook_access_token = $facebook_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * @param mixed $gplus_access_token
+     */
+    public function setGplusAccessToken($gplus_access_token)
+    {
+        $this->gplus_access_token = $gplus_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGplusAccessToken()
+    {
+        return $this->gplus_access_token;
+    }
+
+    /**
+     * @param mixed $gplus_id_token
+     */
+    public function setGplusIdToken($gplus_id_token)
+    {
+        $this->gplus_id_token = $gplus_id_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGplusIdToken()
+    {
+        return $this->gplus_id_token;
+    }
+
+    /**
+     * @param mixed $gplus_refresh_token
+     */
+    public function setGplusRefreshToken($gplus_refresh_token)
+    {
+        $this->gplus_refresh_token = $gplus_refresh_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGplusRefreshToken()
+    {
+        return $this->gplus_refresh_token;
+    }
+
     public function __construct()
     {
         parent::__construct();
@@ -74,7 +163,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove programs.
+     * Remove programs
      *
      * @param \Catrobat\AppBundle\Entity\Program $programs
      */
@@ -92,6 +181,7 @@ class User extends BaseUser
     {
         return $this->programs;
     }
+
 
     public function getUploadToken()
     {
@@ -147,4 +237,21 @@ class User extends BaseUser
 
         return $this;
     }
+
+        /**
+         * @param mixed $oauth_password
+         */
+        public function setOauthPassword($oauth_password)
+    {
+        $this->oauth_password = $oauth_password;
+    }
+
+        /**
+         * @return mixed
+         */
+        public function getOauthPassword()
+    {
+        return $this->oauth_password;
+    }
 }
+

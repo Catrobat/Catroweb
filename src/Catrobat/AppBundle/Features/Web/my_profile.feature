@@ -6,9 +6,9 @@ Feature:
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 123456   | cccccccccc |
-      | User1    | 654321   | cccccccccc |
+      | name     | password | token      | email               |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
@@ -59,7 +59,7 @@ Feature:
     Then the "email" field should contain "first@email.com"
     And the "additional-email" field should contain "second@email.com"
 
-  Scenario: chaning email adresses with an invalid email should not work
+  Scenario: changing email adresses with an invalid email should not work
     Given I fill in "email" with "first"
     And I press "save changes"
     Then I should see "This email address is not valid."

@@ -95,8 +95,8 @@ Feature: Pocketcode help page
 
   Scenario: Clicking on starters image at help page and test navigation
     Given there are users:
-      | name     | password | token      |
-      | Catrobat | 123456   | cccccccccc |
+      | name     | password | token      | email               |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
     And there are starter programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |

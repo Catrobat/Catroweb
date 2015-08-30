@@ -3,9 +3,9 @@ Feature: As a visitor I want to see a program page
 
   Background:
     Given there are users:
-      | name     | password | token      |
-      | Superman | 123456   | cccccccccc |
-      | Gregor   | 123456   | cccccccccc |
+      | name     | password | token      | email               |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |
+      | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
       | id | name      | description             | owned by | downloads | views | upload time      | version | visible |
       | 1  | program 1 | my superman description | Superman | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true    |

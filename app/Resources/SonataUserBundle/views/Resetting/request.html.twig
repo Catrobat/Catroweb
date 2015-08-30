@@ -4,6 +4,14 @@
   {% stylesheets 'css/custom/request.less' filter='cssrewrite,lessphp' output='compiled/request.css' %}
   <link rel="stylesheet" href="{{ asset_url }}" />
   {% endstylesheets %}
+
+  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+  {% javascripts 'js/plugins/*'
+    'js/base/*' 'js/custom/Reset.js' output='compiled/script.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 {% endblock %}
 
 {% block header %}
@@ -23,8 +31,13 @@
       <div class="error-text">{{ "login.noUsername"|trans({}, "catroweb")}}</div>
     {% endif %}
 
-    <button id="_submit" name="recover" >{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
+    <div id="error_user_oauth" class="error-text" >
+        {{ "oauth.noReset"|trans({}, "catroweb") }}
+    </div>
+
+    <button id="_submit" name="recover" class="hidden" />
   </form>
+  <button id="reset_pw">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
 {% endblock fos_user_content %}
 
 {% endblock body %}
