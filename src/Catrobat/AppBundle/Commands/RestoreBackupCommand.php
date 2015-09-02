@@ -11,6 +11,8 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\ArrayInput;
 use Catrobat\AppBundle\Entity\Program;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Filesystem\Filesystem;
 
 class RestoreBackupCommand extends ContainerAwareCommand
 {
@@ -32,10 +34,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
             throw new \Exception('File not found');
         }
 
-        $zip = new \ZipArchive();
-        if ($zip->open($backupfile) !== true) {
-            throw new \Exception('Could not open backup file');
-        }
+        $phar = new \PharData($backupfile);
 
         if ($this->getContainer()->getParameter('database_driver') != 'pdo_mysql') {
             throw new \Exception('This script only supports mysql databases');
@@ -44,7 +43,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
 
         $sqlpath = tempnam(sys_get_temp_dir(), 'Sql');
-        copy('zip://'.$backupfile.'#database.sql', $sqlpath);
+        copy('phar://'.$backupfile.'/database.sql', $sqlpath);
         $databasename = $this->getContainer()->getParameter('database_name');
         $databaseuser = $this->getContainer()->getParameter('database_user');
         $databasepassword = $this->getContainer()->getParameter('database_password');
@@ -53,31 +52,28 @@ class RestoreBackupCommand extends ContainerAwareCommand
 
         $output->writeln('Importing files');
 
-        $mapper = array(
-            'thumbnails' => $this->getContainer()->getParameter('catrobat.thumbnail.dir'),
-            'screenshots' => $this->getContainer()->getParameter('catrobat.screenshot.dir'),
-            'featured' => $this->getContainer()->getParameter('catrobat.featuredimage.dir'),
-            'programs' => $this->getContainer()->getParameter('catrobat.file.storage.dir'),
-        );
-
-        $progress = new ProgressBar($output, $zip->numFiles);
+        $progress = new ProgressBar($output, 4);
         $progress->setFormat(' %current%/%max% [%bar%] %message%');
         $progress->start();
 
-        for ($i = 0; $i < $zip->numFiles; ++$i) {
-            $filename = $zip->getNameIndex($i);
-
-            $progress->setMessage($filename);
-            $progress->advance();
-
-            $fileinfo = pathinfo($filename);
-            foreach ($mapper as $zipdir => $catrobatdir) {
-                if (preg_match('/'.$zipdir."\/(.*)/", $filename) === 1) {
-                    copy('zip://'.$backupfile.'#'.$filename, $catrobatdir.'/'.$fileinfo['basename']);
-                }
-            }
-        }
-        $zip->close();
+        $filesystem = new Filesystem();
+        
+        $progress->setMessage("Extracting Thumbnails");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/thumbnails/", $this->getContainer()->getParameter('catrobat.thumbnail.dir'));
+        
+        $progress->setMessage("Extracting Screenshots");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/screenshots/", $this->getContainer()->getParameter('catrobat.screenshot.dir'));
+        
+        $progress->setMessage("Extracting Featured Images");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/featured/", $this->getContainer()->getParameter('catrobat.featuredimage.dir'));
+        
+        $progress->setMessage("Extracting Programs");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
+        
         $progress->finish();
         $output->writeln('');
 
