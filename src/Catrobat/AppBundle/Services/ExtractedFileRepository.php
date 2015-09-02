@@ -56,12 +56,12 @@ class ExtractedFileRepository
         {
           $path = $this->local_path . $hash . '/';
 
-          if (is_dir($path))
+          if (file_exists($path) && is_dir($path))
           {
             $finder = new Finder();
 
             $image_path = $path . 'images/';
-            if (is_dir($image_path))
+            if (file_exists($image_path) && is_dir($image_path))
             {
               $finder->files()->in($image_path);
               foreach ($finder as $file)
@@ -72,7 +72,7 @@ class ExtractedFileRepository
             }
 
             $sound_path = $path . 'sounds/';
-            if (is_dir($sound_path))
+            if (file_exists($sound_path) && is_dir($sound_path))
             {
               $finder->files()->in($sound_path);
               foreach ($finder as $file)
