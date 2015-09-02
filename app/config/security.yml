@@ -3,7 +3,7 @@ parameters:
         ROLE_MEDIAPACKAGE:  "Webserver-MediaPackageMaintainers"
         ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
         ROLE_APPROVE:       "Webserver-AppApprovers"
-        ROLE_SUPER_ADMIN:   "Catroweb"
+        ROLE_SUPER_ADMIN:   "Webserver-Administrators"
 
 
 security:
