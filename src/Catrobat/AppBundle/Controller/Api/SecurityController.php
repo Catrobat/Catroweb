@@ -117,7 +117,7 @@ class SecurityController extends Controller
             if($correct_pass)
             {
               //at the latest now the user is created and can be loaded
-              $user = $userManager->findUserByUsername($username);
+              $user = $userManager->findUserByUsername($user->getUsername());
             }
           }
           else{

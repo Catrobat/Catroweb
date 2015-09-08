@@ -43,6 +43,24 @@ Feature: Login with an existing accunt or register a new one
     And there are LDAP-users:
       | name                    | password  |
       | LDAP-user               | 654321    |
+    And the next generated token will be "cccccccccc"
+    When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
+    Then I should get the json object:
+      """
+      {"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
+      """
+
+  Scenario: login with valid LDAP-User and existing Catrobat user
+    Given I have the POST parameters:
+      | name                 | value                 |
+      | registrationUsername | LDAP-troll            |
+      | registrationPassword | 654321                |
+    And there are LDAP-users:
+      | name                    | password  | email     |
+      | LDAP-troll              | 654321    | c@d.com   |
+    And there are users:
+      | name                    | password    | email   | token     |
+      | TheTroll                |             | c@d.com |cccccccccc |
     When I POST these parameters to "/pocketcode/api/loginOrRegister/loginOrRegister.json"
     Then I should get the json object:
       """

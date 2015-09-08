@@ -10,7 +10,7 @@ Background:
 Scenario: login with valid username and password on LDAP should succeed
   Given there are LDAP-users:
     | name                    | password  | groups                            |
-    | ldap-user               | 123456    | Catroweb                          |
+    | ldap-user               | 123456    | Webserver-Administrators          |
     | ldap-mediapackage       | 654321    | Webserver-MediaPackageMaintainers |
   When I POST login with user "ldap-user" and password "123456"
   Then the response should contain "Featured"
@@ -34,8 +34,8 @@ Scenario: User without group on LDAP should not be able to log into admin-area
 
 Scenario: User in Catroweb-Group on LDAP should be Super-Admin after login
   Given there are LDAP-users:
-    | name                    | password  | groups     |
-    | ldap-user               | 123456    | Catroweb   |
+    | name                    | password  | groups                     |
+    | ldap-user               | 123456    | Webserver-Administrators   |
   When I POST login with user "ldap-user" and password "123456"
   And I GET "/admin/dashboard"
   Then the response should contain "Admin Panel"
@@ -44,7 +44,7 @@ Scenario: User in Catroweb-Group on LDAP should be Super-Admin after login
 Scenario: login as Mediapackage-User should give access only to mediapackage in admin-area
   Given there are LDAP-users:
     | name                    | password  | groups                            |
-    | ldap-user               | 123456    | Catroweb                          |
+    | ldap-user               | 123456    | Webserver-Administrators          |
     | ldap-mediapackage       | 654321    | Webserver-MediaPackageMaintainers |
   When I POST login with user "ldap-mediapackage" and password "654321"
   And I GET "/admin/media_package/list"
@@ -56,7 +56,7 @@ Scenario: login as Mediapackage-User should give access only to mediapackage in 
 Scenario: login as FeaturedProgram-User should give access only to featured programs in admin-area
   Given there are LDAP-users:
     | name                    | password  | groups                                |
-    | ldap-user               | 123456    | Catroweb                              |
+    | ldap-user               | 123456    | Webserver-Administrators              |
     | ldap-featured           | 654321    | Webserver-FeaturedProgramsMaintainers |
   When I POST login with user "ldap-featured" and password "654321"
   And I GET "/admin/featured_program/list"

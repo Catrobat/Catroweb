@@ -142,7 +142,7 @@ class LdapTestDriver implements LdapDriverInterface
       {
         $group_entity = [
           "ObjectClass"=>"groupOfUniqueNames",
-          "dn"=>"cn=".$group.", ".$this->baseDN,
+          "dn"=>"cn=".strtolower($group).", ".$this->baseDN,
           "cn"=>array($group),
           "uniqueMember"=>array("cn=".strtolower($username).",".$this->baseDN)
         ];
@@ -152,7 +152,7 @@ class LdapTestDriver implements LdapDriverInterface
 
     $user_entity = [
       "ObjectClass"=>"person",
-      "dn"=>"cn=".$username.",".$this->baseDN,
+      "dn"=>"cn=".strtolower($username).",".$this->baseDN,
       "cn"=>array($username),
       "password"=>$password,
       "mail"=>$mail!=null?$mail:array($username."@generated.at")
