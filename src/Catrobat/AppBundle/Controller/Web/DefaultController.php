@@ -85,7 +85,7 @@ class DefaultController extends Controller
       'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
       'downloadUrl' => $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName())),
       'languageVersion' => $program->getLanguageVersion(),
-      'downloads' => $program->getDownloads(),
+      'downloads' => $program->getDownloads() + $program->getApkDownloads(),
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
       'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),

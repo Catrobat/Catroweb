@@ -190,6 +190,12 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
         $this->save($program);
     }
 
+    public function increaseApkDownloads(Program $program)
+    {
+        $program->setApkDownloads($program->getApkDownloads() + 1);
+        $this->save($program);
+    }
+
     public function save(Program $program)
     {
         $this->entity_manager->persist($program);
