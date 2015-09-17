@@ -1,109 +1,116 @@
 ---
 localLanguage: English
-username: Username
-password: Password
+username: Nome de usuário
+password: Senha
 aboutPocketCode: Sobre o Pocket Code
-tutorials: Tutorials
+tutorials: Tutoriais
 googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
+passwordsNoMatch: As senhas não coincidem.
 error: Erro
 cancel: Cancelar
-report: Report
-download: Download as program
-description: Description
-noDescription: No description available.
-country: Country
+report: Denunciar
+download: Baixar como programa
+description: Descrição
+noDescription: Sem descrição disponível.
+country: País
 loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
-more: more
-less: less
+privacyPolicy: Política de Privacidade
+imprint: Imprimir
+somethingWentWrong: Ooooops! Algo deu errado.
+pleaseTryAgain: Por favor, tente de novo!
+oldVersionError: Por favor, atualize para a versão mais recente do Pocket Code!
+more: mais
+less: menos
+ok: OK
 programs:
-  featured: Featured
-  newest: Newest programs
+  featured: Em Destaque
+  newest: Programas mais recentes
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: Mais vistos
+    downloaded: Mais baixados
+  random: Random Programs
   downloads: '%downloads% downloads'
-  views: '%views% views'
-  reportAsInappropriate: Report as inappropriate
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
-  reportDialogHeader: Why do you think this program is inappropriate?
-  reportDialogReason: Enter a reason
-  reportOwnProgram: You cannot flag your own program.
-  reportAlready: "You've already flagged this program as inappropriate."
-  reportDone: You reported this program as inappropriate!
+  views: '%views% visualizações'
+  reportAsInappropriate: Reportar como impróprio
+  languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
+  reportLoginText: 'Por favor, faça %login% para reportar este programa como impróprio.'
+  reportDialogHeader: Por que você considera este programa impróprio?
+  reportDialogReason: Entre um motivo
+  reportOwnProgram: Você não pode sinalizar o seu próprio programa.
+  reportAlready: Você já sinalizou este programa como impróprio.
+  reportDone: Você reportou este programa como impróprio!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Recuperação de senha do Seu Catrobat
   message: |
-    Dear %username%.
+    Prezado %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Você requisitou redefinir sua senha em %appplication_url% por tê-la esquecido. Caso você não tenha requisitado a redefinição de sua senha, por favor ignore-a. Ela expirará em 24 horas.
+    Para redefinir sua senha por favor acesse a seguinte página:
+    %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a comunidade %appplication_url%.
+    Para fazê-lo agora, visite a seguinte página: %loginPage%
+    Para editar seu perfil acesse a página: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    
+    Atenciosamente,
+    Equipe Seu Catrobat.
 profile:
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My programs
+  saveChanges: salvar alterações
+  newPass: nova senha
+  repeatPass: repita a senha
+  firstEmail: Meu primeiro email
+  secondEmail: Meu segundo email
+  myPrograms: Meus programas
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
-    passwordIsUsername: The password must differ from the username.
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
-  changePicture: Change picture
+    passwordTooShort: 'A nova senha deve conter no mínimo %length% caracteres.'
+    passwordTooLong: 'A nova senha deve conter no máximo %length% caracteres.'
+    passwordIsUsername: A senha deve ser diferente do nome de usuário.
+    emailNotValid: Este endereço de e-mail não é válido.
+    emailMissing: Erro ao atualizar este endereço de email. Você deve ter ao menos um email validado.
+    emailExists: Este endereço de e-mail já existe.
+    submitSuccess: salvo!
+  reallyDeleteProgram: Você realmente quer deletar seu programa
+  programsOf: Programas de
+  changePicture: Alterar Imagem
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
+    uploadError: Desculpe! Houve um problema durante o upload!
+    noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
 licenseToPlay:
-  link: License to play
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: Licença para jogar
+  title: 'Licença para jogar - Dê crédito e compartilhe'
+  text1: Imagine que cada programa do Catrobat é um bolo, um bolo muito especial que vem com a receita (blocos de programação). Todos os membros da comunidade Catrobat compartilham seus bolos juntament com as receitas. Isso significa que você pode aproveitar os bolos e aprender como fazê-los!
+  text2: 'Não há receitas secretas: as instruções sobre como fazer os bolos estão abertas a todos para utilizar, reutilizar, modificar e servir de inspiração para novas ideias... digo, bolos.'
+  text3: 'Você pode comer os bolos bem como copiar receitas de outras pessoas para fazer a sua própria, talvez com ingredientes diferentes. Esta liberdade vem com dois requisitos simples:'
+  text4: Na criação da comunidade Catrobat, decidimos adotar esta abordagem pois acreditamos que ela oferece suporte à aprendizagem e criatividade dentro da Comunidade. Através do compartilhamento de receitas e ingredientes (scripts e artwork), todos podem criar com base nas ideias uns dos outros. Assim, todos podem se beneficiar.
+  text5: "Ao projetar o site Catrobat, foram incluídos recursos para incentivar as pessoas a compartilhar e dar crédito aos outros. Em cada página do programa, você sempre pode baixar os scripts originais do programa. Se você 'remixar' um programa (modificar os scripts ou artwork e compartilhar o resultado), nós encorajamos você a dar crédito em Notas do Programa, mencionando as pessoas e o programa que te inspiraram."
+  text6: 'Saiba mais sobre os termos de uso da comunidade Catrobat online em %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: compartilhar seus bolos juntamente com a receita
+    item2: dar crédito a quem te inspirou
+  version: Versão 1.1, 2 de abril de 2013
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  title: Termos de Uso
+  headline: Bem-vindo à comunidade Catrobat!
+  text1: 'Como parte da comunidade Catrobat, você está compartilhando programas e idéias com as pessoas:'
+  text2: 'Precisamos de sua ajuda para fazer desta comunidade um lugar de apoio para todos os membros. Aqui está como você pode ajudar:'
+  text3: 'Através do projeto Catrobat, queremos fomentar a cooperação e permitir que a criatividade de todos se combine em benefício de toda a humanidade. Você também pode se tornar um membro ativo da Comunidade Catrobat, presenteando a comunidade com seus programas, da mesma forma que outros membros ativos estão te presenteando com seus programas:'
+  text4: 'Nosso presente a você:'
+  text5: 'Nossos Termos de Uso e de Serviço:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: de muitos países e culturas diferentes
+    item2: de todas as idades (de crianças a adolescentes e avós)
+    item3: com todos os níveis de experiência
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
+    item1: Seja respeitoso. Ao compartilhar programas, lembre-se que pessoas de diferentes idades e origens verão suas contribuições.
+    item2: 'Dê crédito. Sinta-se livre para fazer versões modificadas de programas de outras pessoas - apenas certifique-se de dar-lhes crédito. Um bom lugar para dar crédito é na descrição de seu programa. Por favor, leia o parágrafo abaixo da lista pontilhada para obter detalhes sobre como modificar programas de outros usuários.'
+    item3: Seja honesto. Não finja ser outra pessoa nem tente enganar a comunidade.
+    item4: Mantenha privadas suas informações pessoais. Não compartilhe seu endereço de e-mail, número de telefone ou outras informações de contato pessoais.
+    item5: "Ajude a manter o site amigável. Se você sentir que outros achariam um programa ou comentário vil, muito violento, ofensivo ou impróprio, clique no botão 'denunciar como impróprio' e deixe uma breve explicação. A equipe do Catrobat checará sua denúncia e poderá remover o programa, comentário ou post."
   list3:
     item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
@@ -121,7 +128,7 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Versão 1.3, 4 de março de 2014
 help:
   hourOfCode:
     title: Skydiving Steve
@@ -129,13 +136,13 @@ help:
       title: Skydiving Steve
       description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
     step1:
-      title: 'Install "Pocket Code"'
-      description: How to install Pocket Code on your mobile device.
-      image1: 'Tap "Play Store".'
-      image2: 'Search "Pocket Code".'
-      image3: 'Tap "Install".'
+      title: 'Instalar "Pocket Code"'
+      description: Como instalar o Pocket Code no seu dispositivo móvel.
+      image1: 'Toque em "Play Store".'
+      image2: 'Pesquisar "Pocket Code".'
+      image3: 'Toque em "Instalar".'
     step2:
-      title: Download Project
+      title: Baixar Projeto
       description: 'How to download the essential program allowing you to program "Skydiving Steve".'
       image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
       image2: Tap the banner.
@@ -279,7 +286,7 @@ help:
         subtext2: 'Tap the "Play" - button.'
       image2: Enjoy your game.
       image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
     step21:
       title: Check your scripts!
       description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
@@ -377,7 +384,7 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: Tutorials
+    title: Tutoriais
     description1: This tutorials show you how to use effective tricks in
     description2: Pocket Code.
     getReady: 'Get Ready:'
@@ -423,6 +430,36 @@ help:
       animations: Animations
       interactive: Interactive Art and Stories
       music: Music And Dance
+  gameJam:
+    title: How to upload a Pocket Code game to the Game Jolt Site?
+    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    title1: Registration
+    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
+    title2: Carregar
+    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
+    title3: Search for your program
+    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
+    title4: Create Android app
+    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
+    title5: Download app
+    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    title6: Register/Login at GameJolt.com
+    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    title7: Upload your game on the Game Jolt Site
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
+    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
+    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
+    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
+    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
+    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: Search
@@ -441,6 +478,8 @@ login:
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Username or Email
   changePass: Change password
+  createAccount: Create an account
+  or: OR
 apk:
   download: Download as app
   prepare: Prepare app
@@ -449,6 +488,9 @@ apk:
 errors:
   username:
     blank: Username must not be blank
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -460,7 +502,9 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Este endereço de e-mail já existe.
+  id:
+    blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
   post-data: POST-Data not correct or missing!
   checksum:

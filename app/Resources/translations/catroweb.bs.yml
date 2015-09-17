@@ -1,11 +1,11 @@
 ---
-localLanguage: English
+localLanguage: Engleski
 username: Korisničko Ime
 password: Lozinka
 aboutPocketCode: O Pocket Code-u
-tutorials: Tutorials
+tutorials: Tutoriali
 googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
+passwordsNoMatch: Lozinke se ne podudaraju.
 error: Greška
 cancel: Odustani
 report: Prijavi
@@ -14,31 +14,36 @@ description: Opis
 noDescription: Opis nije dostupan.
 country: Država
 loginText: prijava
-privacyPolicy: Privacy Policy
-imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
-more: more
-less: less
+privacyPolicy: Pravila o privatnosti
+imprint: Impresum
+somethingWentWrong: Ooooops nešto je pošlo po zlu.
+pleaseTryAgain: Pokušajte ponovo!
+oldVersionError: Ažurirajte na najnoviju verziju Pocket Code-a!
+more: više
+less: manje
+ok: OK
 programs:
   featured: Istaknut
   newest: Najnoviji programi
   most:
     viewed: Sa najviše pregleda
     downloaded: Sa najviše preuzimanja
-  downloads: '%downloads% downloads'
-  views: '%views% views'
+  random: Random Programs
+  downloads: '%downloads% preuzimanje'
+  views: '%views% pogledi'
   reportAsInappropriate: Prijavi kao neprimjeren
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  languageVersion: 'Catrobat verzija jezika: %languageVersion%'
+  reportLoginText: 'Molim vas %login% da označite ovaj program kao neprikladan.'
   reportDialogHeader: Zašto misliš da je ovaj program neprimjeren?
   reportDialogReason: Unesi razlog
   reportOwnProgram: Ne možeš označiti vlastiti program.
-  reportAlready: "You've already flagged this program as inappropriate."
+  reportAlready: Označiliste ovaj program kao neprikladno.
   reportDone: Prijavio/la si ovaj program kao neprimjeren!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Povrat lozinke
   message: |
     Dear %username%.
     
@@ -53,25 +58,25 @@ passwordRecovery:
     Your Catrobat Team.
 profile:
   saveChanges: sačuvaj promjene
-  newPass: new password
-  repeatPass: repeat password
+  newPass: nova lozinka
+  repeatPass: ponovi lozinku
   firstEmail: Moja prva email adresa
   secondEmail: Moja druga email adresa
-  myPrograms: My programs
+  myPrograms: Moji programi
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
-    passwordIsUsername: The password must differ from the username.
+    passwordTooShort: 'Nova lozinka mora imati najmanje %length% znakova.'
+    passwordTooLong: 'Nova lozinka možete imati najviše %length% znakova.'
+    passwordIsUsername: Lozinka se mora razlikovati od korisničkog imena.
     emailNotValid: Ova email adresa nije ispravna.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
+    emailMissing: Greška prilikom ažuriranja ove e-mail adrese. Morate imati najmanje jednu potvrđenu e-mail adresu.
+    emailExists: Ova e-mail adresa već postoji.
     submitSuccess: sačuvano!
   reallyDeleteProgram: Da li stvarno želiš obrisati program
   programsOf: Programi od
   changePicture: Promijeni sliku
   avatar:
     pictureTooLarge: Izabrana slika je prevelika, molimo ne koristi slike veće od 5mb.
-    uploadError: Sorry, there was a problem during the upload!
+    uploadError: Nažalost, došlo je do problema prilikom upload-a!
     noSupport: Ovaj tip slike nije podržan, molimo probaj sa drugom slikom.
 licenseToPlay:
   link: License to play
@@ -279,7 +284,7 @@ help:
         subtext2: 'Tap the "Play" - button.'
       image2: Enjoy your game.
       image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
     step21:
       title: Check your scripts!
       description: Klikni na slike ispod da ih uvećaš. Pregledaj skripte objekata ako igra ne radi ispravno.
@@ -377,7 +382,7 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: Tutorials
+    title: Tutoriali
     description1: This tutorials show you how to use effective tricks in
     description2: Pocket Code.
     getReady: 'Get Ready:'
@@ -423,6 +428,36 @@ help:
       animations: Animations
       interactive: Interactive Art and Stories
       music: Music And Dance
+  gameJam:
+    title: How to upload a Pocket Code game to the Game Jolt Site?
+    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    title1: Registration
+    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
+    title2: Upload
+    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
+    title3: Search for your program
+    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
+    title4: Create Android app
+    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
+    title5: Download app
+    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    title6: Register/Login at GameJolt.com
+    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    title7: Upload your game on the Game Jolt Site
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
+    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
+    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
+    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
+    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
+    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: Pretraži
@@ -441,6 +476,8 @@ login:
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Korisničko ime ili email adresa
   changePass: Promjeni lozinku
+  createAccount: Create an account
+  or: OR
 apk:
   download: Download as app
   prepare: Prepare app
@@ -449,6 +486,9 @@ apk:
 errors:
   username:
     blank: Username must not be blank
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -460,7 +500,9 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Ova e-mail adresa već postoji.
+  id:
+    blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
   post-data: POST-Data not correct or missing!
   checksum:

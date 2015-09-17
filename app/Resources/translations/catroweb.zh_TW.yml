@@ -2,31 +2,33 @@
 localLanguage: English
 username: Username
 password: Password
-aboutPocketCode: About Pocket Code
+aboutPocketCode: 關於 Pocket Code
 tutorials: Tutorials
 googlePlay: '&#x9996;&#x9801;'
 passwordsNoMatch: "The passwords didn't match."
-error: Error
-cancel: Cancel
+error: 錯誤
+cancel: 取消
 report: Report
-download: '&#x8209;&#x5831;'
+download: 下載程式檔
 description: Description
 noDescription: No description available.
 country: Country
-loginText: '&#x4E0B;&#x8F09;'
-privacyPolicy: '&#x6211;&#x7684;&#x5E33;&#x6236;'
+loginText: 登入
+privacyPolicy: 私隱政策
 imprint: '&#x641C;&#x5C0B;&#x5C08;&#x6848;'
 somethingWentWrong: Ooooops something went wrong.
 pleaseTryAgain: Please try again!
 oldVersionError: Please update to the newest Pocket Code version!
 more: '&#x8F09;&#x5165;&#x4E2D;&#x3002;&#x3002;&#x3002;'
 less: '&#x60A8;&#x767B;&#x5165;&#x70BA;'
+ok: 確認
 programs:
   featured: '&#x7E3D;&#x7E9C;&#x6B21;&#x6578;'
   newest: Newest programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
+  random: Random Programs
   downloads: '%downloads% downloads'
   views: '%views% views'
   reportAsInappropriate: '&#x53D6;&#x6D88;'
@@ -37,6 +39,9 @@ programs:
   reportOwnProgram: '&#x7E3D;&#x7E9C;&#x6B21;&#x6578;'
   reportAlready: '&#x4E0B;&#x8F09;&#x6B21;&#x6578;'
   reportDone: '&#x60A8;&#x5DF2;&#x8209;&#x5831;&#x6B64;&#x5C08;&#x6848;&#xFF01;'
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -147,7 +152,7 @@ help:
       image2: 'Tap object "parachute".'
       image3: 'Choose "Scripts".'
     step4:
-      title: Add Variable
+      title: 新增變數
       description: The variables x and y allow you to control the position of your parachute.
       image1: 'Tap "+".'
       image2: 'Go to the category "Variables".'
@@ -166,7 +171,7 @@ help:
       image2: 'Tap the field filled with "0.0".'
       image3: 'Insert "-500" and tap "OK".'
     step7:
-      title: Forever
+      title: 永遠重複執行
       description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
       image1: 'Tap "+".'
       image2: 'Go to the "Control" - category.'
@@ -279,7 +284,7 @@ help:
         subtext2: 'Tap the "Play" - button.'
       image2: Enjoy your game.
       image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
     step21:
       title: Check your scripts!
       description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
@@ -325,7 +330,7 @@ help:
         text5: Now you have to select the new image.
         text6: Tap play to see the behaviour on the stage.
     step5:
-      title: Speak
+      title: 對話
       description: Now you will find out how to make an object talk.
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -394,7 +399,7 @@ help:
       title: Moving Animation
       description: Use this trick when you want a flying parrot.
     card4:
-      title: Glide
+      title: 滑動
       description: Move smoothly from one point to another.
     card5:
       title: Play Sound
@@ -413,7 +418,7 @@ help:
       title: Compass
       description: Use this code to make a compass.
     card9:
-      title: Broadcast
+      title: 送出訊息
       description: Look at this code! This shows you how to communicate between objects.
   starterPrograms:
     title: Starter Programs
@@ -423,14 +428,44 @@ help:
       animations: Animations
       interactive: Interactive Art and Stories
       music: Music And Dance
+  gameJam:
+    title: How to upload a Pocket Code game to the Game Jolt Site?
+    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    title1: Registration
+    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
+    title2: 上傳
+    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
+    title3: Search for your program
+    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
+    title4: Create Android app
+    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
+    title5: Download app
+    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    title6: Register/Login at GameJolt.com
+    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    title7: Upload your game on the Game Jolt Site
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
+    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
+    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
+    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
+    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
+    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: '&#x516B;&#x6708;'
-  results: '&#x641C;&#x5C0B;&#x7D50;&#x679C;'
+  results: 搜尋結果
   resultcount: 'Your search returned %count% results'
 menu:
   profile: '&#x66F4;&#x63DB;&#x5BC6;&#x78BC;'
-  logout: '1 &#x5929;&#x524D;'
+  logout: 登出
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -441,6 +476,8 @@ login:
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Username or Email
   changePass: '&#x6635;&#x7A31;&#x6216;&#x96FB;&#x90F5;'
+  createAccount: Create an account
+  or: OR
 apk:
   download: Download as app
   prepare: Prepare app
@@ -449,6 +486,9 @@ apk:
 errors:
   username:
     blank: Username must not be blank
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: '&#x5BC6;&#x78BC;&#x9700;&#x8207;&#x5462;&#x7A31;&#x4E0D;&#x540C;&#x3002;'
     short: 'Your password must have at least {{ limit }} characters.'
@@ -461,6 +501,8 @@ errors:
     blank: email must not be blank
     invalid: Your email seems to be invalid
     exists: '&#x5BC6;&#x78BC;&#x6216;&#x7528;&#x6236;&#x540D;&#x7A31;&#x932F;&#x8AA4;&#x3002;'
+  id:
+    blank: Open Authentication ID must not be blank
   login: 'Mediawiki API &#x7684;&#x56DE;&#x61C9;&#x932F;&#x8AA4;&#x3002;'
   post-data: POST-Data not correct or missing!
   checksum:

@@ -1,6 +1,6 @@
 ---
-localLanguage: English
-username: Nombre de usuario
+localLanguage: Inglés
+username: Usuario
 password: Contraseña
 aboutPocketCode: Acerca de Pocket Code
 tutorials: Tutoriales
@@ -16,51 +16,54 @@ country: País
 loginText: Inicio de sesión
 privacyPolicy: Política de Privacidad
 imprint: Grabado
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: Ooooops algo está mal.
+pleaseTryAgain: Por favor inténtalo de nuevo!
+oldVersionError: Por favor actualice a la versión de Pocket Code más nueva!
 more: más
 less: menos
+ok: OK
 programs:
   featured: Destacados
-  newest: Newest programs
+  newest: Los más nuevos
   most:
     viewed: Más visto
     downloaded: Más descargados
-  downloads: '%downloads% downloads'
-  views: '%views% views'
+  random: Random Programs
+  downloads: descargas
+  views: '%views% visitas'
   reportAsInappropriate: Reporte como inapropiado
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  languageVersion: Versión de idioma
+  reportLoginText: 'Por favor %login% para divulgar este programa como inadecuado.'
   reportDialogHeader: ¿Por qué crees que este programa es inapropiado?
   reportDialogReason: Entre una razón
   reportOwnProgram: Usted no debería incluir bandera de su propio programa.
   reportAlready: Ya has marcado este programa como inadecuado.
   reportDone: Ha evaluado este programa como inapropiado!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Recuperación de su clave Catrobat
   message: |
-    Dear %username%.
+    Estimado %username%.
+    Ha solicitado generar una nueva contraseña en %appplication_url% porque se le ha olvidado su contraseña. Si no la ha solicitado, por favor ignore este mensaje. Se vencerá y no podrá usarse después de 24 horas.
+    Para generar su nueva contraseña, por favor visite la siguiente página: %confirmationUrl%
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    
-    Best regards,
-    Your Catrobat Team.
+    Podrá utilizar su nombre de usuario y contraseña en todo momento para acceder a la comiunidad %appplication_url%.
+    Para ello, visite la siguiente página: %loginPage%
+    Para editar sus detalles de perfil, vaya a esta página: %profilePage%
+    Saludos, 
+    Su equipo Catrobat.
 profile:
   saveChanges: ¿Desea guardar los cambios?
-  newPass: new password
-  repeatPass: repeat password
+  newPass: nueva contraseña
+  repeatPass: repita la contraseña
   firstEmail: Mi primera dirección de correo electrónico
   secondEmail: Mi segunda dirección de correo electrónico
-  myPrograms: My programs
+  myPrograms: Mis programas
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordTooShort: 'La nueva contraseña debe tener al menos %length% caracteres.'
+    passwordTooLong: 'La nueva contraseña debe tener un máximo de %length% caracteres.'
     passwordIsUsername: La contraseña debe ser diferenta al nombre de usuario.
     emailNotValid: Esta dirección email no es válida.
     emailMissing: Ha habido un error al actualizar esta dirección de correo electrónico. Debe tener al menos una dirección de correo electrónico validada.
@@ -132,201 +135,200 @@ termsOfUse:
   version: Versión 1.3, 04 de marzo de 2014
 help:
   hourOfCode:
-    title: Skydiving Steve
+    title: Steve el paracaisdista
     step0:
-      title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+      title: Steve el paracaidista
+      description: En el siguiente tutorial aprenderá paso a paso a programar el comportamiento de Steve y su parcela. Las imágenes de abajo muestran cómo controlar Steve durante el juego. Tienes que controlar la navegación de Steve para que este sobre la diana y toque el fondo para dejar caer el paquete. Buena suerte...
     step1:
-      title: 'Install "Pocket Code"'
-      description: How to install Pocket Code on your mobile device.
-      image1: 'Tap "Play Store".'
-      image2: 'Search "Pocket Code".'
-      image3: 'Tap "Install".'
+      title: 'Instale "Código de bolsillo"'
+      description: Cómo instalar código de bolsillo en su dispositivo móvil.
+      image1: 'Pulse "Play Store".'
+      image2: 'Busque "Pocket Code".'
+      image3: 'Pulse "Instalar".'
     step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
-      image2: Tap the banner.
-      image3: 'Download the program "Skydiving Steve".'
+      title: Descargar Proyecto
+      description: 'Cómo descargar el programa principal que le permite programar el juego "Steve el paracaidista".'
+      image1: 'Toque en "Explorar" en el "Pocket Code" en su dispositivo móvil.'
+      image2: Pulse el anuncio (banner).
+      image3: 'Descargar el programa "Steve el paracaidista".'
     step3:
-      title: Open Project
-      description: Let’s look inside the program.
-      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
-      image2: 'Tap object "parachute".'
-      image3: 'Choose "Scripts".'
+      title: Abrir proyecto
+      description: Veamos dentro del código de programa.
+      image1: 'Toque el menú y seleccione hacia abajo "abrir Steve el paracaidista".'
+      image2: 'Toque el objeto "paracaídas".'
+      image3: 'Seleccione "Comandos".'
     step4:
       title: Añadir variable
-      description: The variables x and y allow you to control the position of your parachute.
-      image1: 'Tap "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tap "Set variable".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
+      description: Las variables x e y le permiten controlar la posición de su paracaídas.
+      image1: 'Toque "+".'
+      image2: 'Ir a la categoría "Variables".'
+      image3: 'Toque "Preparar variable".'
+      image4: 'Arrastrar y soltar el "Establecer variable" - ladrillo debajo de la "al programa iniciado" - ladrillo.'
     step5:
-      title: Label variables
-      description: Label the x position of your parachute.
-      image1: Add a second variable just as before.
-      image2: 'Tap "New...".'
-      image3: 'Insert "x" and tap "OK".'
+      title: Etiqueta las variables
+      description: Etiqueta de la posición de x de su paracaídas.
+      image1: Añade una segunda variable como antes.
+      image2: 'Toque "nuevo...".'
+      image3: 'Inserte "x" y toque "Aceptar".'
     step6:
-      title: 'Set variable "y"'
-      description: Label and set the y starting position of your parachute.
-      image1: 'Label the second variable with "y".'
-      image2: 'Tap the field filled with "0.0".'
-      image3: 'Insert "-500" and tap "OK".'
+      title: 'Prepare la variable "y"'
+      description: Etiquete y establezca el punto de partida de su paracaidas en la posición y.
+      image1: 'Etiquete la segunda variable con "y".'
+      image2: 'Toque el campo del cuadrante "0.0".'
+      image3: 'Inserte "-500" y toque "OK".'
     step7:
       title: Para siempre
-      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
-      image1: 'Tap "+".'
-      image2: 'Go to the "Control" - category.'
-      image3: 'Choose the "Forever" - brick.'
-      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
+      description: 'Es necesario controlar la posición de su paracaídas en todo momento. Inserte un "para siempre" - loop para hacerlo.'
+      image1: 'Toque "+".'
+      image2: 'Vaya a "Control" - categoría.'
+      image3: 'Escoja el bloque "para siempre".'
+      image4: 'Arrastre y suelte los bloques "Para siempre" en el bloque de debajo de la "variable de ajuste".'
     step8:
-      title: Insert and modify bricks
-      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
-      image1: 'Insert the shown bricks below the "Forever" - brick.'
-      image2: 'Tap the "100" field.'
-      image3: 'Tap "Variables" and choose "x".'
-      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
+      title: Inserte y modifique los bloques
+      description: 'Añada más bloques en su loop "Para siempre" para el control de su paracaídas. Insertar las variables x y y en el bloque "colocar" le permitira controlar la posición de su paracaídas.'
+      image1: 'Añada los bloques mostrados debajo del bloque "para siempre".'
+      image2: 'Toque en el campo "100".'
+      image3: 'Toque en "Variables" y elija "x".'
+      image4: 'Toque en "200" en el mismo bloque en la parte superior, ir a la categoría de "Variables" y elija "y". Confirme con "OK".'
     step9:
-      title: Change variables and values
-      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
+      title: Cambie de variables y valores
+      description: Cambie la variable y a -3 para dejar que su paracaídas se deslice hasta el suelo. Cambie la variable x para que su paracaídas siga en el ángulo de inclinación de su dispositivo móvil.
       image1:
-        subtext1: 'Set the size to "20" %.'
-        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
-        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
+        subtext1: 'Establezca el tamaño a "20" %.'
+        subtext2: 'Cambie el valor del primer bloque "Establecer variable" a "-3".'
+        subtext3: 'En el segundo bloque "Establecer variable" toque en el campo "0.0".'
       image2:
-        subtext1: 'Tap on "y" and choose "x".'
-        subtext2: 'Insert "-".'
-        subtext3: 'Tap "Sensors" and choose "inclination_x".'
-      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
+        subtext1: 'Toque en "y" y elija "x".'
+        subtext2: 'Inserte "-".'
+        subtext3: 'Toque en "Sensores" y elegir "inclination_x".'
+      image3: 'Compruebe si su fórmula insertada en la captura de pantalla y confirme con "OK".'
     step10:
-      title: Loudness sensor
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
+      title: Sensor de volumen
+      description: 'Usted puede controlar la altura de su paracaídas con el sensor de volumen de su dispositivo móvil. Para ello, agregue y modifique un bloque "Si 1 es verdadero entonces".'
       image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
+        subtext1: 'Añada el bloque "Si 1 es verdadero entonces" y coloque este bloque debajo del último bloque "variable de cambio".'
+        subtext2: 'Toque en el campo con el valor "0" en e bloque "Si 1 es verdadero entonces".'
       image2:
-        subtext1: 'Tap "Sensors".'
-        subtext2: 'Choose "loudness".'
-        subtext3: 'Tap "Logic".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Insert "50".'
-      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
+        subtext1: 'Toque "Sensores".'
+        subtext2: 'Elija "vplumen".'
+        subtext3: Toque «Lógica».
+        subtext4: 'Elija ">".'
+        subtext5: 'Inserte "50".'
+      image3: 'Compruebe si su fórmula corresponde a la fórmula en la captura de pantalla y pulse "OK".'
     step11:
-      title: Change some more bricks
-      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
-      image1: 'Add a "Change variable" - brick and modify the value like above.'
+      title: Cambiar algunos bloques más
+      description: Al reiniciar el juego, la posición inicial de tu paracaídas debe coincidir con su posición inicial de partida. Para esto usted necesita agregar y modificar tres bloques como se muestra en las siguientes imágenes.
+      image1: 'Agregue un bloque "Cambio de variable" y modifique el valor como arriba.'
       image2:
-        subtext1: 'Add a "When I receive" - brick.'
-        subtext2: 'Place it below the last brick ("End of loop").'
-        subtext3: 'Add two "Set variable" - bricks.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
+        subtext1: 'Añada un bloque "Cuando reciba".'
+        subtext2: 'Coloque a continuación el último bloque ("fin del bucle").'
+        subtext3: 'Agregue dos bloques "Establecer variable".'
+      image3: 'Toque en el campo que pone "mensaje 1", elija "Nuevo..." e inserte "reiniciar".'
+      image4: 'Cambie los valores de los dos bloques "Establecer variable" como se muestra en la imagen superior.'
     step12:
-      title: Back to objects
-      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
-      image1: 'Tap the "back" - button on your device.'
-      image2: 'Tap the "back" - button once more.'
-      image3: Now you should see this screen on your device.
+      title: Vuelva a objetos
+      description: 'Ahora ha finalizado con éxito su objeto de "paracaídas". Vuelva de nuevo a la descripción del objeto para modificar el siguiente objeto.'
+      image1: 'Toque el botón "atrás" de su dispositivo.'
+      image2: Toque el botón atrás una vez más.
+      image3: Ahora debería ver esto en la pantalla del dispositivo.
     step13:
-      title: 'Object "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tap "target" and choose "Scripts".'
-      image2: Add and modify the bricks as in the screenshot above.
-      image3: Add four more bricks like shown above.
+      title: 'Objeto "diana"'
+      description: 'Aquí empiezas a modificar el objeto "diana". Añada los bloques para controlar la posición y el tamaño de tu diana.'
+      image1: 'Toque en "parcela" y seleccione "Comandos".'
+      image2: Agregue y modifique los bloques como en la captura de pantalla anterior.
+      image3: Añada 4 bloques más como se muestra arriba.
     step14:
-      title: 'Object "target"'
-      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
-      image1: 'Tap the field "y:" and choose "New".'
-      image2: 'Insert "goalx" and confirm with "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
+      title: 'Objeto "diana"'
+      description: Al reiniciar el juego, la posición de su diana necesita ser cambiada. Para este paso, se establecen la variables objetivolx y objetivoy con la función aleatoria.
+      image1: 'Toque en el cuadrante "y:" y elige "Nuevo".'
+      image2: 'Inserte "objetivox" y confirme con "OK".'
+      image3: 'Toque el cuadrante "0.0" e inserte la fórmula "al azar (-400, 400)".'
+      image4: 'Repita los pasos 1-3 para el segundo "Establecer variable" - ladrillo, esperen nombrar la variable "objetivoy" y el valor "al azar (400, -700)".'
     step15:
-      title: 'Object "target"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
-      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
-      image2: Check if your values match the ones above.
-      image3: Go back until you see this screen.
+      title: 'Objeto "diana"'
+      description: 'Modifique su ladrillo de "Colocar" para controlar la posición de tu objetivo con la variables objetivox un objetivoy.'
+      image1: 'Cambie los valores del "Colocar"- ladrillo "obejetivox" y "objetivoy".'
+      image2: Compruebe si sus valores coinciden con los anteriores.
+      image3: Vaya hacia atrás hasta que vea esta pantalla.
     step16:
-      title: 'Object "parcel"'
-      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
-      image1: 'Tap "parcel" and choose "Scripts".'
-      image2: Add all the bricks shown above.
+      title: 'Objeto "Parcela"'
+      description: 'Aquí empiezas a modificar tu objeto "parcela". Cuando el objeto de "parcela" recibe el mensaje "inico", el paquete debe ser demostrado. Establecer la posición de la parcela con las variables x e y.'
+      image1: 'Toque en "parcela" y seleccione "Comandos".'
+      image2: Añada todos los ladrillos que se muestra arriba.
       image3:
-        subtext1: 'Change the value of the "Set size" - brick to "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
+        subtext1: 'Cambie el valor del "Establecer tamaño " - ladrillo"50".'
+        subtext2: 'Toque el campo de "reinicio" dentro de la "Cuando yo reciba" - ladrillo y crear el nuevo mensaje: "Inicio".'
+        subtext3: 'Cambie los valores del "Colocar" - ladrillo a "x" e "y".'
     step17:
-      title: 'Object "parcel"'
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Add the above shown bricks below the last "Place at" - brick.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
+      title: 'Objeto "Parcela"'
+      description: 'Para comprobar si el paquete ha golpeado la diana, se necesita la "Si 1 es verdadero entonces" ladrillo.'
+      image1: 'Añada los ladrillos anteriores por debajo del ladrillos "Colocar".'
+      image2: 'Cambie el valor en el ladrillo "Cambiar Y por" a "-5". A continuación, pulse en el campo "1" en el "Si 1 es verdadero entonces".'
       image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"AND" is in the "Logic" category.'
+        subtext1: '"posicion_x" y "posicion_y" se puede encontrar en la categoría de "Objeto".'
+        subtext2: '"objetivoy" y "objetivox" están en la categoría de "Variables".'
+        subtext3: '"Y" está en la categoría «Lógica».'
     step18:
-      title: 'Object "parcel"'
-      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
+      title: 'Objeto "Parcela"'
+      description: Si la parcela ha golpeado con éxito la diana, tienes que modificar la posición de la parcela. Envie un mensaje a los otros objetos para hacerles saber que has ganado.
       image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Add the above shown bricks and modify their values alike.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
+        subtext1: 'Cambie los valores del ladrillo "Colocar" en la "posicion_x" y "objetivoy + 100".'
+        subtext2: 'Toque en el campo "Emisión" y crea un nuevo mensaje "ganar".'
+      image2: Añada los ladrillos mostrados anteriormente y modifique sus valores por igual.
+      image3: 'Vaya hacia atrás hasta que vea esta pantalla en el dispositivo. Vaya a los comandos del objeto "reiniciar".'
     step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Add the above shown bricks and modify their values alike.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: Go back until you see this screen, then go to the scripts of “Background”.
+      title: 'Objeto "reiniciar"'
+      description: 'Aquí modifique el objeto "reiniciar". Defina la posición y el comportamiento del objeto.'
+      image1: Añada los ladrillos mostrados anteriormente y modifique sus valores por igual.
+      image2: 'Agregue los ladrillos que se muestran arriba y la "difusión" - mensaje para "reiniciar".'
+      image3: 'Vaya hacia atrás hasta que vea esta pantalla, y luego vaya a los guiones de "Fondo".'
     step20:
-      title: 'Object "Background"'
-      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
+      title: 'Objeto "Fondo"'
+      description: 'Complete el programa modificando el objeto de "Fondo". Ahora puedes comenzar a jugar su juego. ¡Que te diviertas!'
       image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: 'Tap the "Play" - button.'
-      image2: Enjoy your game.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+        subtext1: 'Agregue los ladrillos que se muestran arriba y establezca la "difusión" - mande mensaje para "iniciar".'
+        subtext2: 'Pulse el botón de "Jugar".'
+      image2: Disfrute su juego.
+      image3: 'Has completado con éxito el tutorial "Steve el paracaidista". Estaríamos encantados de encontrar muchas combinaciones interesantes de "Steve paracaidismo" en share.catrob.at/pocketcode---solo cámbielo a su gusto y subalo otra vez a su cuenta.'
     step21:
-      title: Check your scripts!
-      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
-      image1: 'Object "background"'
-      image2: 'Object "parachute"'
-      image3: 'Object "parcel"'
-      image4: 'Object "restart"'
-      image5: 'Object "target"'
+      title: Revisa tus comandos!
+      description: Haga clic en las imágenes para ampliarlas. Revise los comandos de los objetos si su juego no funciona correctamente.
+      image1: 'Objeto "Fondo"'
+      image2: 'Objeto "Paracaídas"'
+      image3: 'Objeto "Parcela"'
+      image4: 'Objeto "reiniciar"'
+      image5: 'Objeto "diana"'
   stepByStep:
     title: Introducción paso a paso
     start: 'Posición inicial:'
     step1:
-      title: Make a new program
+      title: Haga un nuevo programa
       detail:
         text1: 'Pulse "Nuevo".'
         text2: 'Introduzca un nombre para el programa, seleccione "Crear programa vacío" y pulse "OK".'
     step2:
-      title: Create a new object
+      title: Cree un nuevo objeto
       detail:
         text1: 'Pulsar:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
+        text2: Seleccione la fuente para proporcionar el aspecto de su nuevo objeto.
+        text3: 'Introduzca un nombre de objeto y pulse "OK" para crear el objeto.'
         special1: Cree un nuevo diseño.
         special2: Seleccione de la galería.
         special3: Tome una foto.
     step3:
-      title: Start Moving
+      title: Empiece a moverse
       detail:
-        text1: 'Pulsar:'
+        text1: 'Toque:'
         text2: 'El primer bloque que utilizamos está fuera de la categoría "Movimiento".'
         text3: 'Seleccione el bloque "Deslizable". El objeto se moverá hasta la nueva posición definida por el bloque en el panel escenario.'
         text4: El bloque está ahora flotando. Para pegarlo, mueva el bloque a la posición deseada. También puede mover los otros bloques insertados pulsando cada bloque hasta que estén flotando.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text5: 'Toque "Play" para ir al escenario y ver el objeto deslizándose.'
         text6: 'Utilice el botón "atrás" de  Android para salir y salir del panel escenario.'
     step4:
       title: Cambio de Apariencia
       description: Puede cambiar la apariencia de su objeto.
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text1: 'Seleccione el bloque "Cambiar Apariencia". Con este bloque puede elegir un aspecto para el objeto o crear uno nuevo.'
         text2: 'Encaje el bloque debajo del bloque "Deslizable".'
         text3: Presione el desplegable para darle una nueva apariencia.
         text4: Seleccione la fuente de la imagen como antes.
@@ -336,46 +338,46 @@ help:
       title: Hablar
       description: Ahora te explicaremos cómo hacer que un objeto hable.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text1: 'Elija el bloque "Hablar". El objeto habla el texto que se escriba, cuando se ejecuta este bloque.'
         text2: 'Encaje este bloque debajo del bloque "Cambiar Apariencia".'
         text3: Pulse Jugar para ver el funcionamiento en el panel escenario.
     step6:
-      title: Again and again
+      title: Una y otra vez
       description: Este paso muestra cómo hacer que se repita el comportamiento de los objetos.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text1: 'Elija el bloque "Para siempre". Todo los bloques entran en un bucle que hace que su comportamiento se repita siempre.'
         text2: 'Encaje el bloque "Para siempre" debajo del bloque "Cuando el programa comience".'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text3: 'Añadir otro ladrillo "Deslizar".'
+        text4: 'Ponga el bloque de arriba del bloque "Terminar bucle".'
         text5: 'Pulse en el campo de valor "x" y "y" e iniciarlo en 0.'
         text6: Pulse Jugar para ver el funcionamiento en el panel escenario.
     step7:
-      title: Tapping is everything
+      title: Pulsar es todo
       description: También puede controlar el comportamiento del objeto cuando el programa se está ejecutando en el escenario.
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text1: 'Elija el bloque "Cuando se Pulsa". Cada bloque por debajo del bloque "Cuando se Pulsa" se ejecutará una vez cuando pulsa o toca el objeto en el panel escenario.'
+        text2: 'Coloque el bloque "Cuando se Pulsa" debajo de los otros bloques.'
+        text3: 'Elegir el bloque "Gire a la derecha" y pongalo debajo del ladrillo "cuando aprovechado".'
         text4: Ahora tienes codigo con instrucciones de programación.
         text5: Pulse jugar para ver el comportamiento en el panel escenario. Si ahora toca en el objeto, gira.
     step8:
-      title: Copy, delete or edit a brick
+      title: Copiar, borrar o editar un bloque
       detail:
         text1: Solo tiene que pulsar en el lado izquierdo de cada bloque para abrir el menú contextual. Allí puede pulsar mover, copiar, borrar o editar los valores de los bloques con el editor de fórmulas.
     step9:
-      title: Navigation in the app
+      title: Navegación en la aplicación
       detail:
         text1: Utilice el botón Atrás de Android para navegar en la aplicación.
         text2: Vaya una pantalla hacia atrás para ir a la descripción del objeto. Aquí se puede ir las secuencias del código de programación, así como acceder a la apariencia y sonidos del objeto. Aquí puedes renombrar, copia agregar o eliminar la apariencia y los sonidos.
         text3: Utilice de nuevo el botón Atrás de Android para llegar a la descripción de los objetos y sus antecedentes.
     step10:
-      title: Change the background
+      title: Cambiar el fondo
       description: Aquí se te presenta un resumen de tus objetos y el fondo depende de un programa.
       detail:
         text1: El fondo es como un objeto, pero que sólo puede tener el fondo.
         text2: Al objeto de fondo, le puedes agregar lineas de código de programación, sonidos y apariencia de la misma manera que a los otros objetos.
     step11:
-      title: Main Menu
+      title: Menu Principal
       description: Utilice el botón Atrás de Android para llegar a esta pantalla.
       detail:
         text1: Continúe con su programa que tiene abierto en este momento.
@@ -389,7 +391,7 @@ help:
     description1: Este tutorial te enseña cómo utilizar trucos efectivos en
     description2: Pocket Code.
     getReady: 'Prepárate:'
-    tryCode: 'Try this code:'
+    tryCode: 'Prueba este código:'
     doIt: 'Hazlo:'
     tip: 'Sugerencia adicional:'
     card1:
@@ -406,7 +408,7 @@ help:
       description: Mover suavemente de un punto a otro.
     card5:
       title: Reproducir sonido
-      description: Tap the drum to play this sound.
+      description: Presione el tambor para reproducir este sonido.
       extra1: '1. Haga clic en "+"'
       extra2: '2. Seleccione "Grabador de Pocket Code"'
       extra3: 3. Pulse el icono para grabar tu sonido
@@ -430,12 +432,43 @@ help:
       games: Juegos
       animations: Animaciones
       interactive: Historias y Arte Interactivo
-      music: Music And Dance
+      music: Música y Baile
+  gameJam:
+    title: ¿Cómo subir un juego de Pocket Code al sitio juego Jolt?
+    text0: 'En primer lugar, Enhorabuena por tu juego! Ahora puedes subirlo en %link% para crear una aplicación independiente para Android, que luego puede cargar en el sitio de juego Jolt.'
+    title1: Registro
+    text1: "Primero necesitas crear una cuenta. Después de eso puedes subir el programa creado. No te preocupes es fácil y sólo necesita pensar en un nombre de usuario y una contraseña. Después de llenar ambos, haga clic en 'Inicio de sesión o registro'. Eso es todo!"
+    title2: Cargar
+    text2: 'Tras el proceso de registro que son capaces de cargar tu juego. Sólo pensar en un nombre y añadir una descripción. También agregar #AliceJam150 en el campo Descripción.'
+    title3: Busque su programa
+    text3: Vaya a su perfil código de bolsillo donde se enumeran todos los programas o buscar directamente su programa mediante la búsqueda y el nombre del programa.
+    title4: Crea una aplicación para Android
+    text4: 'En la página de detalles podrá crear una aplicación de Android directamente. Haciendo click en "preparar aplicación" se construirá la aplicación.'
+    title5: Descargar la aplicación
+    text5: 'Después del proceso de construcción puede descargar su programa como una aplicación. Esta aplicación descargada necesita ser subirse otra vez en el sitio de Jolt de juego para participar en el %link%.'
+    title6: Registro/Login en GameJolt.com
+    text6: "Visite %link% y haga clic en 'Iniciar sesión' en el menú. Si ya tienes una cuenta simplemente inicie la sesión, si no, usted necesitará registrarse con tu dirección de correo electrónico, nombre de usuario y contraseña."
+    title7: Sube tu juego en el sitio de Jolt juego
+    text7: "Después de que usted inicie la sesión, vaya a su panel de control. Ahí puedes añadir tu juego. Primero tienes que hacer clic en 'Aceptar reglas'. A continuación, rellene la información del juego. Como herramienta de creación de lenguaje escoja 'Otro' y agregue al campo otro motor/lenguaje/herramienta 'Android'. Como estado de 'Desarrollo' elegir ' Acabado/estable'. Asegúrese de incluir #AliceJam150 en la descripción, por lo que aparece en la página %link%."
+    text7_1: 'Antes de que publique su juego, siga los siguientes pasos. Tienes que añadir al menos una "imagen pequeña", establecer "madurez de valoración", y subir tus juegos haciendo clic en "archivos de compilación".'
+    text7_2: "Haga clic en 'Añadir paquete' y llene la información del paquete. Guarde y añada la liberación. "
+    text7_3: Ahora puedes subir el apk del programa. Encontrará la aplicación descargada en tu carpeta de descarga. Es mejor usar un explorador de datos (por ejemplo, es data explorer).
+    text7_4: |-
+      Nota: Si la aplicación le falta su sufijo ".apk", tienes que añadir '.apk' manualmente. Simplemente volver a nombrar el fichero. Ahora debería poder subirlo.
+    text7_5: "Después de la subida haga clic en 'OK' para publicar tu juego. Más tarde mostrará a gente un enlace para descargar tu juego."
+    text7_6: Ahora ha subido su primer juego en el sitio de juego Jolt y establecerla como activa. ¡ Felicidades!
+    text7_7: 'Otras personas ahora serán capaces de encontrar su juego y aparecerán en la página %link%.'
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Búscar...
   search: Búscar
   results: Resultados de la búsqueda
-  resultcount: 'Your search returned %count% results'
+  resultcount: 'La búsqueda tiene %count% resultados'
 menu:
   profile: Mi Perfil
   logout: Desconectarse
@@ -449,44 +482,51 @@ login:
   recoverPassSend: Un correo electrónico ha sido enviado a tu dirección de correo electrónico. Por favor revise su bandeja de entrada.
   userOrEmail: Nombre de Usuario o Email
   changePass: Cambiar la contraseña
+  createAccount: Create an account
+  or: O
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  download: Descargar como aplicación
+  prepare: Prepare la aplicación
+  preparing: Preparando la aplicación
+  text: El proceso puede tardar un rato
 errors:
   username:
-    blank: Username must not be blank
+    blank: El nombre de usuario no debe quedar vacío
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: Falta la contraseña.
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: 'Su contraseña debe tener al menos {{ limit }} caracteres.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: La descripción no debe contener palabras groseras.
   country:
     blank: Falta el país.
-    invalid: Invalid country
+    invalid: País no válido
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: el correo electrónico no debe quedar vacío
+    invalid: Tu correo electrónico parece ser no válido
     exists: Esta dirección de correo electrónico ya existe.
+  id:
+    blank: Open Authentication ID must not be blank
   login: La contraseña o nombre de usuario es incorrecto.
   post-data: El POST-Data no es correcto o falta!
   checksum:
     missing: El servidor no ha enviado el archivo fileChecksum! ¿Estás usando una versión vieja de Pocket Code?
-    invalid: invalid checksum
+    invalid: checksum no válido
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: código xml no válido
+    missing: 'error desconocido: ¡proyecto_xml_no_encontrado!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+    unexpected: archivo inesperado encontrado
+    invalid: archivo no válido
+  image.missing: Proyecto XML menciona un archivo que no existe en la carpeta del proyecto
+  unknown: error desconocido
   token: 'La autenticación del dispositivo ha fallado: auth-token es inválido!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: El nombre del programa no debe contener palabras groseras.
   program:
-    invalid: Invalid program.
+    invalid: Programa no válido.
   languageversion:
     tooold: Lo sentimos, el programa contiene una versión antigua del lenguage de Catrobat! ¿Estás utilizando la última versión de Pocket Code?
   programversion:
@@ -495,7 +535,7 @@ success:
   registration: ¡Registro exitoso!
   token: ok
   upload: '!Tu proyecto se guardó con éxito!'
-  report: Your report was successfully sent!
+  report: Su informe fue enviado con éxito!
 time:
   minutes.ago: '{0} < hace 1 minuto |{1}hace 1 minuto |]1,Inf] hace %count% minutos'
   hours.ago: '{1}hace 1 hora |]1,Inf] hace %count% horas'
@@ -548,6 +588,6 @@ language:
   ukrainian: Ucraniano
   vietnamese: Vietnamita
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Generar Apk
+  pending: Generando el Apk
+  download: Descargar Apk

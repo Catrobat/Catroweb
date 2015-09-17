@@ -22,13 +22,13 @@ oldVersionError: Bitte aktualisiere auf die neueste Version von Pocket-Code!
 more: mehr
 less: weniger
 ok: OK
-
 programs:
   featured: Empfohlen
-  newest: Neuesten Programme
+  newest: Neueste Programme
   most:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
+  random: Random Programs
   downloads: '%downloads% heruntergeladen'
   views: '%views% gesehen'
   reportAsInappropriate: Als unpassend melden
@@ -39,20 +39,23 @@ programs:
   reportOwnProgram: Du kannst dein eigenes Programm nicht markieren.
   reportAlready: Du hast dieses Programm bereits als unpassend gemeldet.
   reportDone: Du hast dieses Programm als unpassend gemeldet!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
-    Dear %username%.
+    Liebe/r %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Du hast die Zurücksetzung deines Passwortes von  %appplication_url% beantragt, weil du dein Passwort vergessen hast. Wenn du dies nicht beantragt hast, dann ingoriere bitte diese Nachricht. Sie wird innerhalb von 24 Stunden auslaufen und nutzlos werden.
+    Um dein Passwort zurückzusetzen und eine neues zu erstellen, besuche bitte folgende Seite: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Du kannst deinen Benutzernamen und dein Passwort jederzeit verwenden um Zugang zur  %appplication_url% community zu bekommen.
+    Um dies zu tun, brauchst du nur die folgende Seite zu besuchen: %loginPage%
+    Um deine Profileigenschaften zu verändern, gehe auf diese Seite:  %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    mit besten Grüßen,
+    Dein Catrobat Team.
 profile:
   saveChanges: Änderungen speichern
   newPass: Neues Passwort
@@ -207,7 +210,7 @@ help:
         subtext5: 'Füge "50" ein.'
       image3: 'Überprüfe ob deine Formel mit der Formel im Screenshot übereinstimmt und tippe auf "OK".'
     step11:
-      title: Change some more bricks
+      title: Ändere weitere Bausteine
       description: Wenn du das Spiel neu startest, dann sollte die Startposition deines Fallschirms mit deiner ursprünglichen Anfangsposition übereinstimmen. Dafür musst du drei Bausteine hinzufügen und verändern, wie es in den Bildern darunter gezeigt wird.
       image1: 'Füge einen "Change variable" Baustein ein und ändere den Wert wie oben.'
       image2:
@@ -307,13 +310,13 @@ help:
         special2: Wähle von der Galerie.
         special3: Mach ein Foto.
     step3:
-      title: Start Moving
+      title: Fange an
       detail:
         text1: 'Tippe auf "+".'
         text2: 'Wir wollen einen Baustein aus der Kategorie "Bewegung" verwenden.'
         text3: 'W&#xE4;hle den "Gleiten" - Baustein aus. Das Objekt wird zu der Position gleiten, die du in den Baustein eingibst.'
         text4: Der Baustein wird jetzt schwebend angezeigt. Du kannst ihn einfügen, indem du ihn an die gewünschte Stelle ziehst. Du kannst auch bereits eingefügte Bausteine verschieben, indem du den Baustein solange antippst, bis er wieder schwebend wird.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text5: 'Berühre "Spiel" um die Bühne zu betreten und sehe das Objekt gleiten.'
         text6: 'Drücke den "Zurück"-Button, um die Bühne zu verlassen.'
     step4:
       title: Aussehen ändern
@@ -338,17 +341,17 @@ help:
       detail:
         text1: 'Wähle den "Wiederhole fortlaufend" Baustein. Alles in der Schleife wiederholt sich für immer.'
         text2: 'Platziere den "Wiederhole fortlaufend" - Baustein unterhalb des "Wenn Programm gestartet" - Bausteins.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text3: 'Füge einen weiteren "Gleiten" Baustein hinzu.'
+        text4: 'Lasse den "Gleiten" Baustein einrasten über dem "Ende der Schleife" Baustein.'
         text5: Tippe in das Textfeld der x und y Koordinaten und setze sie auf 0.
         text6: Tippe auf den Start-Button, um die Änderungen auf der Bühne zu sehen.
     step7:
-      title: Tapping is everything
+      title: Tippen ist alles
       description: Du kannst das Verhalten eines Objektes auch verändern, wenn dein Programm auf der Bühne ausgeführt wird.
       detail:
         text1: 'Wähle den "Wenn angetippt" - Baustein aus. Jeden Baustein, den du unterhalb dieses Bausteins einfügst, wird erst ausgeführt, wenn du das Objekt auf der Bühne antippst.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text2: 'Platziere den "Wenn getippt" Baustein unter den anderen Bausteinen.'
+        text3: 'Wähle den "Drehe nach rechts" Baustein und lass ihn unter den "Wenn getippt" Baustein einrasten.'
         text4: Jetzt solltest du dieses Skript haben.
         text5: Tippe auf den Start-Button, um die Änderungen auf der Bühne zu sehen. Wenn du jetzt das neue Objekt antippst, wird es sich drehen.
     step8:
@@ -356,13 +359,13 @@ help:
       detail:
         text1: Wenn du einen Baustein auf der linken Seite antippst, öffnet sich ein Menü. Damit kannst du das Objekt bewegen, kopieren oder die Werte des Bausteins mit dem Formel-Editor verändern.
     step9:
-      title: Navigation in the app
+      title: Navigation in der App
       detail:
         text1: 'Nutze den Android "Zurück" - Button, um zum vorherigen Bildschirm zurück zu gelangen.'
         text2: Gehe einmal zurück um zur Übersicht deines Objektes zu gelangen. Von hier gelangst du zu den Skripten, Aussehen und Klänge deines Objektes. Hier kannst du sie umbenennen, kopieren, editieren oder löschen.
         text3: 'Wenn du noch einmal den Android "Zurück"-Button antippst, gelangst du zur Übersicht über deine Objekte und den Hintergrund.'
     step10:
-      title: Change the background
+      title: Ändere den Hintergrund
       description: Das ist die Übersicht über deine Objekte und den Hintergrund deines Programmes.
       detail:
         text1: Der Hintergrund verhält sich wie ein Objekt, allerdings gibt es nur ein Hintergrund-Objekt.
@@ -424,14 +427,36 @@ help:
       animations: Animationen
       interactive: Interaktive Kunst und Geschichten
       music: Musik und Tanz
-
+  gameJam:
+    title: Wie du ein Pocket Code Spiel auf die Game Jolt Seite hochladen kannst?
+    text0: 'Herzlichen Glückwunsch zu deinem Spiel! Du kannst es nun auf %link% hochladen, um eine eigenständige Android App zu erstellen. Diese kannst du dann auf der Game Jolt Seite hochladen.'
+    title1: Anmeldung
+    text1: "Zuerst musst du ein Konto erstellen. Danach kannst du dein erstelltes Programm hochladen. Keine Angst, es ist nicht schwer. Überlege dir einfach einen Benutzernamen und ein Passwort. Nachdem du beides ausgefüllt hast, klicke auf 'Login oder Anmeldung'. Das war's!"
+    title2: Hochladen
+    text2: 'Nachdem du dich angemeldet hast, kannst du dein Spiel hochladen. Überlege dir einen Namen und eine Beschreibung. Füge #AliceJam150 zur Beschreibung hinzu.'
+    title3: Suche nach deinem Program
+    text3: Öffne dein Pocket Code Profil in dem all deine Programme aufgelistet sind, oder suche dein Programm direkt indem du die Suche und den Namen deines Programmes verwendest.
+    title4: Erstelle eine Android App
+    text4: "Eine Android App kannst du direkt auf der Programm Detailseite erstellen. Ein Klick auf 'App vorbereiten' erstellt eine App."
+    title5: App herunterladen
+    text5: 'Nach dem Erstellungsprozess kannst du dein Programm als App herunterladen. Um an %link% teilnehmen zu können, muss die heruntergeladene App direkt auf der Game Jolt Seite hochgeladen werden.'
+    title6: Anmelden/Einloggen bei GameJolt.com
+    text6: "Besuche %link% und klicke im Menü auf 'Einloggen' oder 'Anmelden!'. Wenn du schon einen Account besitzt, log dich ein, wenn nicht musst du dich mit deiner Email Adresse, dem Benutzernamen und einem Passwort anmelden."
+    title7: Lade dein Spiel auf der Game Jolt Seite hoch
+    text7: "Nachdem du angemeldet bist, gehe zu deinem Dashboard. Dort kannst du dein erstes Spiel hinzufügen. Zuerst musst du auf 'Regeln akzeptieren' klicken. Dann füllst du die Informationen zu deinem Spiel aus. Als Motor/Sprache/Kreation Werkzeug wähle 'Sonstige' aus und füge zu dem Feld Sonstige Motor/Sprache/Werkzeug 'Android' hinzu. Als 'Entwicklung' Status wähle 'Fertig/Stabil'. Versichere dich, dass du #AliceJam150 in der Beschreibung hinzugefügt hast, damit es auf %link% erscheint."
+    text7_1: "Bevor du dein Spiel veröffentlichen kannst musst du die folgenden Schritte durchführen. Du musst zumindest ein 'Miniaturbild' hinzugefügt, eine 'Reifebewertung' angelegt und dein Spiel durch klicken von 'Erstellen/Dateien' hochgeladen haben."
+    text7_2: "Klicke auf 'Paket hinzufügen' und fülle die Informationen zum Paket aus. Speichere jetzt und füge dann den Release hinzu. "
+    text7_3: Jetzt kannst du die apk-Datei deines Programmes hochladen. Du findest die heruntergeladene App im Download-Ordner. Am besten verwendest du einen Datei-Explorer (z.B. data explorer).
+    text7_4: "Hinweis: Wenn die App nicht mit '.apk' endet, musst du '.apk' manuell zum Namen hinzufügen. Ändere dazu einfach den Namen der Datei. Jetzt sollte es dir möglich sein die App hochzuladen."
+    text7_5: "Klicke nach dem Upload auf 'OK', um dein Spiel zu veröffentlichen. Dadurch wird anderen Leuten ein Link angezeigt, mit dem sie dein Spiel herunterladen können."
+    text7_6: Du hast jetzt dein erstes Spiel auf der Game Jolt Seite hochgeladen und aktiviert. Herzlichen Glückwunsch!
+    text7_7: 'Andere Leute können dein Spiel jetzt finden und es erscheint auf der %link% Seite.'
 oauth:
-  username_header: Danke für deine Registrierung bei Pocket Code!
-  username_chooser: Bitte wähle einen Benutzeramen:
-  username_hint: Der Benutzername sollte nicht dein echter Name sein.
-  usernameTaken: Der Benutzername existiert bereits, bitte wähle einen anderen.
-  noReset: Facebook und Google+ haben kein Password zum zurücksetzen.
-
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Suche...
   search: Suche
@@ -450,7 +475,7 @@ login:
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   userOrEmail: Username oder Email
   changePass: Passwort ändern
-  createAccount: Konto anlegen
+  createAccount: Create an account
   or: ODER
 apk:
   download: Als app herunterladen
@@ -460,8 +485,9 @@ apk:
 errors:
   username:
     blank: Benutzername darf nicht leer sein
-    invalid: Dein Benutzerame ist ungültig
-    exists: Benutzername existiert bereits
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
@@ -473,9 +499,9 @@ errors:
   email:
     blank: E-Mail Adresse darf nicht leer sein
     invalid: Deine E-Mail Adresse scheint ungültig zu sein
-    exists: Die E-Mail Adresse existiert bereits!
+    exists: Die E-Mail Adresse existiert bereits.
   id:
-    blank: Open Authentication ID darf nicht leer sein
+    blank: Open Authentication ID must not be blank
   login: Das Passwort oder der Username ist falsch.
   post-data: POST-Daten nicht korrekt oder fehlt!
   checksum:

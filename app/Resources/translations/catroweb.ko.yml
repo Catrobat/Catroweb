@@ -1,83 +1,85 @@
 ---
-localLanguage: English
-username: Username
-password: Password
-aboutPocketCode: About Pocket Code
-tutorials: Tutorials
-googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
+localLanguage: 영어
+username: 아이디
+password: 비밀번호
+aboutPocketCode: 포켓코드에 대하여
+tutorials: 튜터리얼
+googlePlay: 구글 플레이
+passwordsNoMatch: 비밀번호가 일치하지 않습니다
 error: 오류
 cancel: 취소
-report: Report
-download: Download as program
-description: Description
-noDescription: No description available.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
-more: more
-less: less
+report: 보고서
+download: 프로그램 다운로드
+description: 설명
+noDescription: 설명 없음
+country: 국가
+loginText: 로그인
+privacyPolicy: 개인정보 보호방침
+imprint: 표시하기
+somethingWentWrong: 뭔가 이상합니다
+pleaseTryAgain: 다시 시도하세요
+oldVersionError: 포켓코드를 최신 버전으로 업데이트 하시기 바랍니다!
+more: 더 많은
+less: 적은
+ok: 확인
 programs:
-  featured: Featured
-  newest: Newest programs
+  featured: 추천
+  newest: 최신 프로그램
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  downloads: '%downloads% downloads'
-  views: '%views% views'
-  reportAsInappropriate: Report as inappropriate
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
-  reportDialogHeader: Why do you think this program is inappropriate?
-  reportDialogReason: Enter a reason
-  reportOwnProgram: You cannot flag your own program.
-  reportAlready: "You've already flagged this program as inappropriate."
-  reportDone: You reported this program as inappropriate!
+    viewed: 가장 많이 본 프로그램
+    downloaded: 가장 많이 다운로드한 프로그램
+  random: Random Programs
+  downloads: '%downloads% 다운로드'
+  views: '%views% 조회'
+  reportAsInappropriate: 부적합한 프로그램으로 보고
+  languageVersion: 'Catrobat 언어 버전: %languageVersion%'
+  reportLoginText: '%login% 부적당한 프로그램으로 보고하시기 바랍니다.'
+  reportDialogHeader: 왜 부적합한 프로그램이라고 생각하세요
+  reportDialogReason: 이유를 입력하세요
+  reportOwnProgram: 자신의 프로그램을 추천할 수 없습니다
+  reportAlready: 이미 이 프로그램을 부적합하다고 추천했습니다
+  reportDone: 이 프로그램을 부적합하다고 신고했습니다
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
-    Dear %username%.
+    친애 하는 %username%.  당신은 비밀 번호를 잊어버려서 %appplication_url%에 비밀 번호 재설정을 요청 했습니다. 요청하지 않은 경우에는 무시하시기 바랍니다. 해지되어 24시간이내에 사용할 수 없게 될 것입니이다. 비밀 번호를 재설정 하고 새로운 비밀번호를 만들려면, 다음 페이지를 방문 하십시오: %confirmationUrl%
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    당신은  %appplication_url% 커뮤니티에 언제라도 사용하기 위해서  사용자 이름과 비밀 번호를 사용할 수 있습니다.
+    그렇게 하려면 그냥 다음 페이지를 방문 하십시오: %loginPage%
+    당신의 프로필 세부 정보를 편집하려면 이 페이지로 이동: %profilePage% 
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    
-    Best regards,
-    Your Catrobat Team.
+    안녕하세요, 
+    Catrobat 팀.
 profile:
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My programs
+  saveChanges: 변경내용을 저장
+  newPass: 새로운 비밀번호
+  repeatPass: 비밀번호 다시 입력
+  firstEmail: 처음 메일
+  secondEmail: 두번째 메일
+  myPrograms: 내 프로그램
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
-    passwordIsUsername: The password must differ from the username.
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
-  changePicture: Change picture
+    passwordTooShort: '새 암호는 적어도 %length% 문자 이상이어야 합니다.'
+    passwordTooLong: '새 암호는 최대로 %length% 문자 사용할 수 있습니다.'
+    passwordIsUsername: 암호는 사용자 이름과는 달라야 합니다.
+    emailNotValid: 이 이메일 주소는 유효하지 않습니다.
+    emailMissing: 이 전자 메일 주소를 업데이트 하는 동안 오류가 발생 했습니다. 유효한 전자 메일 주소가 하나 이상 있어야 합니다.
+    emailExists: 이 이메일 주소는 이미 존재합니다.
+    submitSuccess: 저장 완료
+  reallyDeleteProgram: 프로그램을 삭제 하시겠습니까?
+  programsOf: 프로그램
+  changePicture: 사진 변경
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: 선택한 그림이 너무 큽니다, 5mb 보다 큰 이미지를 사용 하지 마십시오.
+    uploadError: 죄송합니다, 업로드하는 동안 문제가 발생했습니다!
+    noSupport: 이 이미지 형식은 지원되지 않습니다, 그리고 다른 이미지를 시도하십시오.
 licenseToPlay:
-  link: License to play
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  link: 게임 라이센스
+  title: 신용 및 공유 라이센스
+  text1: 각 Catrobat 프로그램을 제조법(프로그래밍 블록)과 함께 제공 되는 아주 특별한 케이크라고 상상해 보라. Catrobat 공동체의 모든 구성원이 그들의 조리법과 함께 그들의 케이크를 공유합니다. 즉, 당신이 케이크를 즐길 수 있고 그들 스스로 만드는 방법을 배울 수 있다는 것을 의미한다.
+  text2: 특별한 비밀 요리법은 없습니다:이 케이크를 만드는 방법에 대 한 지침 사용, 재사용, 수정, 및 새로운 아이디어에 대한 영감으로 봉사하는 것 등이 누구에게나 열려 있습니다... 나는 케이크를 의미 한다.
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
@@ -87,9 +89,9 @@ licenseToPlay:
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
+  title: 이용 약관
+  headline: 오신 것을 환영 합니다 Catrobat 커뮤니티!
+  text1: 'Catrobat 커뮤니티의 일환으로, 사람들과 프로그램과 아이디어를 공유할 수 있습니다 :'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
   text4: 'Our gift to you:'
@@ -124,18 +126,18 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 help:
   hourOfCode:
-    title: Skydiving Steve
+    title: 스카이 다이빙 Steve
     step0:
-      title: Skydiving Steve
+      title: 스카이 다이빙 Steve
       description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
     step1:
-      title: 'Install "Pocket Code"'
-      description: How to install Pocket Code on your mobile device.
-      image1: 'Tap "Play Store".'
-      image2: 'Search "Pocket Code".'
-      image3: 'Tap "Install".'
+      title: '"포켓 코드" 설치'
+      description: 모바일 장치에서 포켓 코드를 설치 하는 방법.
+      image1: '"플레이 스토어"를 누릅니다.'
+      image2: '"포켓 코드"를 검색합니다.'
+      image3: '"설치"를 누릅니다.'
     step2:
-      title: Download Project
+      title: 프로젝트 다운로드
       description: 'How to download the essential program allowing you to program "Skydiving Steve".'
       image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
       image2: Tap the banner.
@@ -144,23 +146,23 @@ help:
       title: Open Project
       description: Let’s look inside the program.
       image1: 'Pull down the menu and tap "Open Skydiving Steve".'
-      image2: 'Tap object "parachute".'
-      image3: 'Choose "Scripts".'
+      image2: '개체 "낙하산"를 누릅니다.'
+      image3: '"스크립트"를 선택 하십시오.'
     step4:
-      title: Add Variable
-      description: The variables x and y allow you to control the position of your parachute.
-      image1: 'Tap "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tap "Set variable".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
+      title: 변수 추가
+      description: 변수 x와 y 낙하산의 위치를 제어할 수 있습니다.
+      image1: '탭 "+".'
+      image2: '"변수" 카테고리로 이동합니다.'
+      image3: '"변수 설정"을 누릅니다.'
+      image4: '드래그 앤 드롭 "변수 설정"-아래에서 "프로그램 시작"블록 아래에 블록을 놓는다.'
     step5:
-      title: Label variables
-      description: Label the x position of your parachute.
-      image1: Add a second variable just as before.
-      image2: 'Tap "New...".'
-      image3: 'Insert "x" and tap "OK".'
+      title: 변수에 이름을 붙인다
+      description: 낙하산의 x 위치 이름을 지정 합니다.
+      image1: 직전에 두 번째 변수를 추가합니다.
+      image2: '"새..."를 터치하라.'
+      image3: '"x"를 삽입하고 "확인"을 누릅니다.'
     step6:
-      title: 'Set variable "y"'
+      title: '변수 "y" 설정'
       description: Label and set the y starting position of your parachute.
       image1: 'Label the second variable with "y".'
       image2: 'Tap the field filled with "0.0".'
@@ -168,7 +170,7 @@ help:
     step7:
       title: 무한 반복
       description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
-      image1: 'Tap "+".'
+      image1: '탭 "+".'
       image2: 'Go to the "Control" - category.'
       image3: 'Choose the "Forever" - brick.'
       image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
@@ -279,7 +281,7 @@ help:
         subtext2: 'Tap the "Play" - button.'
       image2: Enjoy your game.
       image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on pocketcode.org --- just change it as you like and upload it again from your own account.
+        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
     step21:
       title: Check your scripts!
       description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
@@ -377,7 +379,7 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: Tutorials
+    title: 튜터리얼
     description1: This tutorials show you how to use effective tricks in
     description2: Pocket Code.
     getReady: 'Get Ready:'
@@ -423,6 +425,36 @@ help:
       animations: Animations
       interactive: Interactive Art and Stories
       music: Music And Dance
+  gameJam:
+    title: How to upload a Pocket Code game to the Game Jolt Site?
+    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    title1: Registration
+    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
+    title2: 업로드
+    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
+    title3: Search for your program
+    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
+    title4: Create Android app
+    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
+    title5: Download app
+    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    title6: Register/Login at GameJolt.com
+    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    title7: Upload your game on the Game Jolt Site
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
+    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
+    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
+    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
+    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
+    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: Search
@@ -441,6 +473,8 @@ login:
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   userOrEmail: Username or Email
   changePass: Change password
+  createAccount: Create an account
+  or: OR
 apk:
   download: Download as app
   prepare: Prepare app
@@ -449,6 +483,9 @@ apk:
 errors:
   username:
     blank: Username must not be blank
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -460,7 +497,9 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: 이 이메일 주소는 이미 존재합니다.
+  id:
+    blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
   post-data: POST-Data not correct or missing!
   checksum:
@@ -520,26 +559,26 @@ language:
   japanese: Japanese
   korean: Korean
   latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  lithuanian: 리투아니아어
+  malay: 말레이어
+  norwegian: 노르웨이어
+  persian: 페르시아어
+  polish: 폴란드어
+  portuguese_brazil: 포르투갈어 (브라질)
+  portuguese_portugal: 포르투갈어 (포르투갈)
+  romanian: 루마니아어
+  russian: 러시아어
+  serbian: 세르비아어
+  slovak: 슬로바키아어
+  slovenian: 슬로베니아어
+  spanish_latin_america: 스페인어 (라틴 아메리카)
+  spanish_spain: 스페인어 (스페인)
+  swedish: 스웨덴어
+  thai: 태국어
+  turkish: 터키어
+  ukrainian: 우크라이나어
+  vietnamese: 베트남어
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Apk 생성
+  pending: Apk 생성중
+  download: Apk 다운로드

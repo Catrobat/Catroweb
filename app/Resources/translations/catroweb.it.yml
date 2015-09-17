@@ -21,12 +21,14 @@ pleaseTryAgain: Per favore riprova!
 oldVersionError: Si prega di aggiornare alla nuova versione di Pocket Code!
 more: altro
 less: meno
+ok: Ok
 programs:
   featured: In evidenza
   newest: Programmi più recenti
   most:
     viewed: Il più visto
     downloaded: Il più scaricato
+  random: Random Programs
   downloads: '%downloads% download'
   views: '%views% visualizzazioni'
   reportAsInappropriate: Segnala come inappropriato
@@ -37,6 +39,9 @@ programs:
   reportOwnProgram: Non puoi segnalare il tuo programma.
   reportAlready: Hai già segnalato questo programma come inappropriato.
   reportDone: Hai segnalato questo programma come inappropriato!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
+  btnClosePopup: Ok
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -453,6 +458,37 @@ help:
       animations: Animazioni
       interactive: Arte interattiva e storie
       music: Musica e danza
+  gameJam:
+    title: Come si carica un gioco Pocket Code nel sito Game Jolt?
+    text0: "Congratulazioni per il tuo nuovo gioco! Puoi caricarlo ora su %link% in modo da generare un' app Android, che potrai caricare sul sito Game Jolt."
+    title1: Regisrazione
+    text1: "Devi prima creare un account. Successivamente potrai caricare il tuo codice. Non preoccuparti: e' facile, basta che ti inventi un username e una password. Dopo averli inseriti entrambi, fai click su 'Login o registrati'. E' tutto!"
+    title2: Carica
+    text2: 'Dopo il processo di registrazione sarai in grado di caricare il tuo gioco. Basta pensare a un nome e aggiungere una descrizione. Devi aggiungere #AliceJam150 nel campo Descrizione.'
+    title3: Cerca il tuo programma
+    text3: Vai al tuo profilo Pocket Code, dove sono elencati tutti i programmi oppure cerca direttamente il tuo programma utilizzando la ricerca e il nome del programma.
+    title4: "Crea un' app Android"
+    text4: "Direttamente sulla pagina di dettaglio del programma è possibile creare un'applicazione Android. Cliccando su 'Prepare app', verra' generata l'app."
+    title5: "Scarica un' app"
+    text5: 'Dopo il processo di costruzione è possibile scaricare il programma come un app. Questa app scaricata deve essere caricata di nuovo direttamente sul sito di Game Jolt, al fine di partecipare a %link%.'
+    title6: Registrati/fai Login sul sito GameJolt.com
+    text6: "Visita %link% e fai clic su 'Log In' o 'Sign Up!' nel menu. Se hai già un account, basta fare login, altrimenti e' necessario registrarsi con il tuo indirizzo Email, nome utente e Password."
+    title7: Caricare il gioco sul sito Game Jolt
+    text7: "Dopo che sei entrato, vai al tuo dashboard. Puoi aggiungere il tuo gioco. In primo luogo è necessario fare clic su 'Accetta regole'. Quindi compilare le informazioni sul gioco. Come strumento motore/lingua/creazione devi scegliere 'Altro' e aggiungere 'Android' al campo altri: strumento/motore/lingua. Come stato di 'Sviluppo' scegliere 'Finito/stabile'. Assicurati di includere #AliceJam150 nella descrizione, in modo che appaia nella pagina %link%."
+    text7_1: "Prima di poter pubblicare il tuo gioco, devi completare i passi successivi. Devi aggiungere una 'miniatura', impostare una 'valutazione di' maturità' e caricare il gioco cliccando su 'file/compila'."
+    text7_2: "Clicca su 'Aggiungi pacchetto' e compila le informazioni sul pacchetto. Salva il file e aggiungi la versione. "
+    text7_3: |-
+      Ora è possibile caricare l'apk del tuo programma. Trovi l'applicazione scaricata nella cartella download. È preferibile utilizzare un visualizzatore di dati (per esempio "data explorer").
+    text7_4: "Nota: Se l'app non contiene il suffisso '. apk', è necessario aggiungere manualmente '. apk'. Basta rinominare il file. Ora dovresti essere in grado di caricarlo."
+    text7_5: "Dopo il caricamento fare clic su 'OK' per pubblicare il gioco. Questo mostrerà più tardi alle altre persone un link per scaricare il tuo gioco."
+    text7_6: Hai caricato il tuo primo gioco sul sito Game Jolt e lo hai attivato. Congratulazioni!
+    text7_7: "Gli altri saranno in grado di trovare il tuo gioco. Apparira' nella pagina %link%."
+oauth:
+  username_header: Thank you for signing up to Pocket Code!
+  username_chooser: 'Please choose a username:'
+  username_hint: The username should not be your real name.
+  usernameTaken: Username already taken, please choose a different one.
+  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Cerca...
   search: Cerca
@@ -471,14 +507,19 @@ login:
   recoverPassSend: Una mail è stata inviata al tuo indirizzo email. Controlla la tua casella di posta.
   userOrEmail: Nome utente o Email
   changePass: Cambia password
+  createAccount: Create an account
+  or: OR
 apk:
   download: Scarica come app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  prepare: "Prepara l'app"
+  preparing: App in preparazione
+  text: "L'attività potrebbe richiedere un po' di tempo"
 errors:
   username:
     blank: Il nome utente non può essere vuoto
+    invalid: Your username is invalid
+    exists: This username already exists.
+    not_exists: This username does not exist.
   password:
     blank: Manca la password.
     short: 'La tua password deve avere almeno {{ limit }} caratteri.'
@@ -491,6 +532,8 @@ errors:
     blank: "L'e-mail non può essere vuota"
     invalid: La tua e-mail sembra non essere valida
     exists: "L'indirizzo e-mail è già stato usato."
+  id:
+    blank: Open Authentication ID must not be blank
   login: La password o il nome utente sono sbagliati.
   post-data: Dati POST non corretti o mancanti!
   checksum:
