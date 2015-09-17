@@ -489,11 +489,11 @@ success:
   upload: Ditt Projektet lyckades laddas upp!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 minut sedan |{1}1 minuter sedan |]1 Inf] %count% minuter sedan'
-  hours.ago: '{1}1 timme sedan |]1 Inf] %count% timmar sedan'
-  days.ago: '{1}1 dag sedan |]1 Inf] %count% dagar sedan'
-  months.ago: '{1}1 månad sedan |]1 Inf] %count% månader sedan'
-  years.ago: '{1}1 år sedan |]1 Inf] mer än ett år sedan'
+  minutes.ago: '{0} < 1 minut sedan |{1}1 minuter sedan |]1,Inf] %count% minuter sedan'
+  hours.ago: '{1}1 timme sedan |]1,Inf] %count% timmar sedan'
+  days.ago: '{1}1 dag sedan |]1,Inf] %count% dagar sedan'
+  months.ago: '{1}1 månad sedan |]1,Inf] %count% månader sedan'
+  years.ago: '{1}1 år sedan |]1,Inf] mer än ett år sedan'
 language:
   arabic: Arabiska
   bulgarian: Bulgariska
