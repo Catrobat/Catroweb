@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c92e73c087b82ad1bedaabd9121425d",
+    "hash": "71d5f291fadaa97d15c7f5656451d446",
     "packages": [
         {
             "name": "behat/behat",
@@ -637,7 +637,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/a02f0e7e2c68cc0237c33cbc8e8605aceb3b481a",
                 "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
                 "shasum": ""
             },
@@ -1218,7 +1218,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/4e85ba638acf62e1afe735f94b0c51aa971f8773",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/6c527d8ccbccec5257bb2c92bca973653b1e3976",
                 "reference": "4e85ba638acf62e1afe735f94b0c51aa971f8773",
                 "shasum": ""
             },
@@ -1718,7 +1718,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/d0b9a9ef41b819f7daad27062036c67269fdc8bf",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/39666f7d31e50e8f6cd10fc6e997e968623d8937",
                 "reference": "d0b9a9ef41b819f7daad27062036c67269fdc8bf",
                 "shasum": ""
             },
@@ -2366,7 +2366,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2390,7 +2390,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/4a1daf55560ca7cf9c13b357135d72f4dc13375f",
                 "reference": "84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
                 "shasum": ""
             },
@@ -2613,6 +2613,66 @@
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
             "time": "2014-12-29 20:45:53"
+        },
+        {
+            "name": "liip/theme-bundle",
+            "version": "dev-master",
+            "target-dir": "Liip/ThemeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liip/LiipThemeBundle.git",
+                "reference": "ced45bfea228f0f418bb67d7c3b20db2213d1b6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liip/LiipThemeBundle/zipball/ced45bfea228f0f418bb67d7c3b20db2213d1b6a",
+                "reference": "ced45bfea228f0f418bb67d7c3b20db2213d1b6a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "psr/log": "~1.0",
+                "symfony/framework-bundle": "~2.3"
+            },
+            "require-dev": {
+                "kriswallsmith/assetic": "~1.1",
+                "phpunit/php-code-coverage": "@stable",
+                "phpunit/phpunit": "~4.5@stable",
+                "symfony/console": "~2.0",
+                "symfony/expression-language": "~2.6",
+                "twig/twig": "~1.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Liip\\ThemeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/liip/LiipThemeBundle/contributors"
+                },
+                {
+                    "name": "Liip AG",
+                    "homepage": "http://www.liip.ch/"
+                }
+            ],
+            "description": "Provides theming support for #Symfony2 Bundles",
+            "keywords": [
+                "themes",
+                "theming"
+            ],
+            "time": "2015-08-28 18:50:10"
         },
         {
             "name": "michelf/php-markdown",
@@ -3126,7 +3186,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/fbd7300558790e1cb40893e9d1606ed8fccc70bf",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/991006ef43743a6de733ce9f2fb157313f37f75e",
                 "reference": "fbd7300558790e1cb40893e9d1606ed8fccc70bf",
                 "shasum": ""
             },
@@ -4401,7 +4461,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -4705,7 +4765,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkGoutteDriver/zipball/7e9a7319cc0e8cf9d4d4c9e06e2020d3a31bd792",
+                "url": "https://api.github.com/repos/minkphp/MinkGoutteDriver/zipball/c8e254f127d6f2242b994afd4339fb62d471df3f",
                 "reference": "7e9a7319cc0e8cf9d4d4c9e06e2020d3a31bd792",
                 "shasum": ""
             },
@@ -4866,32 +4926,31 @@
             "time": "2015-03-17 08:57:17"
         },
         {
-            "name": "bossa/phpspec2-expect",
+            "name": "chartinger/phpspec2-expect",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
-                "reference": "f3a80b7fa743b8a1078a7e320bd3e8b8b6283780"
+                "url": "https://github.com/chartinger/phpspec2-expect.git",
+                "reference": "df4802d89ca9352b1da5d60e24e48881d7b3c3a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/f3a80b7fa743b8a1078a7e320bd3e8b8b6283780",
-                "reference": "f3a80b7fa743b8a1078a7e320bd3e8b8b6283780",
+                "url": "https://api.github.com/repos/chartinger/phpspec2-expect/zipball/df4802d89ca9352b1da5d60e24e48881d7b3c3a3",
+                "reference": "df4802d89ca9352b1da5d60e24e48881d7b3c3a3",
                 "shasum": ""
             },
             "require": {
-                "phpspec/phpspec": "~2.0"
+                "phpspec/phpspec": "*@dev"
+            },
+            "replace": {
+                "bossa/phpspec2-expect": "*@dev"
             },
             "type": "library",
             "autoload": {
                 "files": [
                     "expect.php"
-                ],
-                "psr-0": {
-                    "Bossa\\PhpSpec\\Expect\\": ""
-                }
+                ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4909,7 +4968,10 @@
                 "spec",
                 "specification"
             ],
-            "time": "2014-09-12 09:25:51"
+            "support": {
+                "source": "https://github.com/chartinger/phpspec2-expect/tree/master"
+            },
+            "time": "2014-02-19 15:09:21"
         },
         {
             "name": "fabpot/goutte",
@@ -5322,7 +5384,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/6c5809238d07e3ef6c60cd4d0493900e67573cb4",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/30f7eb6b43223df048fc5bc428a13381a2214cc1",
                 "reference": "6c5809238d07e3ef6c60cd4d0493900e67573cb4",
                 "shasum": ""
             },
@@ -6371,6 +6433,7 @@
         "sonata-project/datagrid-bundle": 20,
         "chartinger/behat-twig-report-extension": 20,
         "fr3d/ldap-bundle": 20,
+        "liip/theme-bundle": 20,
         "phpspec/phpspec": 20,
         "henrikbjorn/phpspec-code-coverage": 20,
         "bossa/phpspec2-expect": 20,

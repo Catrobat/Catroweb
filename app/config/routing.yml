@@ -23,7 +23,7 @@ catroweb_flavored:
     resource: "routing_flavored.yml"
     prefix:   /{flavor}/
     requirements:
-      flavor:  pocketcode|pocketphiro
+      flavor:  pocketcode|pocketphiro|pocketalice
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
@@ -66,7 +66,3 @@ old_version_error:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-login:
-    path:      /{flavor}/login
-    defaults:  { _controller: FOSUserBundle:Security:login }
-    requirements: { "flavor": "pocketcode|pocketkodey" }

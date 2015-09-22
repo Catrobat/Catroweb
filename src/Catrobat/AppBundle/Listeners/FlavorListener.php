@@ -8,10 +8,12 @@ use Symfony\Component\Routing\RouterInterface;
 class FlavorListener
 {
     private $router;
+    private $theme;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, $theme)
     {
         $this->router = $router;
+        $this->theme = $theme;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -33,5 +35,6 @@ class FlavorListener
         if (!$context->hasParameter('flavor')) {
             $context->setParameter('flavor', $attributes->get('flavor'));
         }
+        $this->theme->setName($attributes->get('flavor'));
     }
 }
