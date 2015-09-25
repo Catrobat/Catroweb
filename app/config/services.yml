@@ -15,6 +15,7 @@ parameters:
       catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
       catrobat.backup.dir:         "%kernel.root_dir%/../backups/"
       catrobat.snapshot.dir:       "%kernel.root_dir%/../Resources/Snapshots"
+      catrobat.translations.dir:    "%kernel.root_dir%/Resources/translations"
       
 services:
 
@@ -147,7 +148,7 @@ services:
     app.twig_extension:
         class: Catrobat\AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme"]
+        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%"]
         tags:
             - { name: twig.extension }
 
