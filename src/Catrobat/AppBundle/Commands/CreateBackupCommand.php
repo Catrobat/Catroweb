@@ -36,39 +36,37 @@ class CreateBackupCommand extends ContainerAwareCommand
         $databasepassword = $this->getContainer()->getParameter('database_password');
         $this->executeShellCommand("mysqldump -u $databaseuser -p$databasepassword $databasename > $sqlpath", 'Saving SQL file');
 
-        $zippath = $backupdir.'/'.date('Y-m-d_His').'.zip';
-        $output->writeln('Creating zipfile at '.$zippath);
-        $zip = new \ZipArchive();
-        $zip->open($zippath, \ZIPARCHIVE::CREATE);
+        $zippath = $backupdir.'/'.date('Y-m-d_His').'.tar';
+        $output->writeln('Creating archive at '.$zippath);
+        $phar = new \PharData($zippath);
 
-        $zip->addFile($sqlpath, 'database.sql');
+        $phar->addFile($sqlpath, 'database.sql');
 
         $this->output->writeln('Saving thumbnails');
         $dir = $this->getContainer()->getParameter('catrobat.thumbnail.dir');
-        $this->addFilesToArchive($dir, 'thumbnails', $zip);
+        $this->addFilesToArchive($dir, 'thumbnails', $phar);
 
         $this->output->writeln('Saving screenshots');
         $dir = $this->getContainer()->getParameter('catrobat.screenshot.dir');
-        $this->addFilesToArchive($dir, 'screenshots', $zip);
+        $this->addFilesToArchive($dir, 'screenshots', $phar);
 
         $this->output->writeln('Saving featured images');
         $dir2 = $this->getContainer()->getParameter('catrobat.featuredimage.dir');
-        $this->addFilesToArchive($dir2, 'featured', $zip);
+        $this->addFilesToArchive($dir2, 'featured', $phar);
 
         $this->output->writeln('Saving catrobat files');
         $dir = $this->getContainer()->getParameter('catrobat.file.storage.dir');
-        $this->addFilesToArchive($dir, 'programs', $zip);
+        $this->addFilesToArchive($dir, 'programs', $phar);
 
         $this->output->writeln('Saving Zip File');
         $this->output->writeln('Packing '.sprintf('%.2f', $this->totalsize / 1024 / 1024).' MB, this may take a while...');
-        $zip->close();
         chmod($zippath, 0600);
-
+        
         unlink($sqlpath);
         $this->output->writeln('Finished! Backupfile created at '.$zippath);
     }
 
-    private function addFilesToArchive($src_directory, $dest_directory, $zip)
+    private function addFilesToArchive($src_directory, $dest_directory, $phar)
     {
         $finder = new Finder();
         $files = $finder->in($src_directory)->files();
@@ -79,12 +77,15 @@ class CreateBackupCommand extends ContainerAwareCommand
 
         $size = 0;
 
+        $values = array();
+        
         foreach ($files as $file) {
             $progress->setMessage($file->getFilename());
             $size += $file->getSize();
             $progress->advance();
-            $zip->addFile($file->getPathname(), $dest_directory.'/'.$file->getFilename());
+            $values[$dest_directory.'/'.$file->getFilename()] = $file->getPathname();
         }
+        $phar->buildFromIterator(new \ArrayIterator($values));
         $this->totalsize += $size;
         $progress->setMessage(sprintf('%.2f', $size / 1024 / 1024).' MB');
         $progress->finish();
