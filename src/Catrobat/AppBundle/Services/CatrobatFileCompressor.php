@@ -23,7 +23,7 @@ class CatrobatFileCompressor
         $archive = new \ZipArchive();
         $filename = $archive_name.'.catrobat';
 
-        $archive->open($destination.'/'.$filename, \ZipArchive::OVERWRITE);
+        $archive->open($destination.'/'.$filename, \ZipArchive::OVERWRITE | \ZipArchive::CREATE);
 
         $finder = new Finder();
         $finder->in($source);
