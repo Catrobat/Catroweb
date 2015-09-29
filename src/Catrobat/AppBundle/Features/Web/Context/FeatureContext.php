@@ -42,6 +42,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
     const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
+    const FIXTUREDIR = './testdata/DataFixtures/';
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -347,6 +348,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setDescription($programs[$i]['description']);
           $program->setViews($programs[$i]['views']);
           $program->setDownloads($programs[$i]['downloads']);
+          $program->setApkDownloads($programs[$i]['apk_downloads']);
+          $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
           $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
           $program->setCatrobatVersion(1);
           $program->setCatrobatVersionName($programs[$i]['version']);
@@ -357,6 +360,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
           $program->setUploadLanguage('en');
           $program->setApproved(false);
+
+          if($program->getApkStatus() == Program::APK_READY) {
+            /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+            $apkrepository = $this->kernel->getContainer()->get('apkrepository');
+            $temppath = tempnam(sys_get_temp_dir(), 'apktest');
+            copy(self::FIXTUREDIR.'test.catrobat', $temppath);
+            $apkrepository->save(new File($temppath), $i);
+
+            $file_repo = $this->kernel->getContainer()->get('filerepository');
+            $file_repo->saveProgramfile(new File(self::FIXTUREDIR.'test.catrobat'), $i);
+          }
+
           $em->persist($program);
       }
       $em->flush();
@@ -760,6 +775,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+<<<<<<< HEAD
    * @Then /^the link of "([^"]*)" should open "([^"]*)"$/
    */
   public function theLinkOfShouldOpen($identifier, $url_type)
@@ -867,6 +883,43 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iAmBrowsingWithMyPocketcodeApp()
   {
     $this->getMink()->setDefaultSessionName("mobile");
+  }
+
+    /**
+    * @When /^I want to download the apk file of "([^"]*)"$/
+    */
+  public function iWantToDownloadTheApkFileOf($arg1)
+  {
+    $pm = $this->kernel->getContainer()->get('programmanager');
+    $program = $pm->findOneByName($arg1);
+    if ($program === null) {
+      throw new \Exception('Program not found: ' + $arg1);
+    }
+    $router = $this->kernel->getContainer()->get('router');
+    $url = $router->generate('ci_download', array('id' => $program->getId(), 'flavor' => 'pocketcode'));
+    $this->getClient()->request('GET', $url, array(), array());
+  }
+
+  /**
+   * @Then /^I should receive the apk file$/
+   */
+  public function iShouldReceiveTheApkFile()
+  {
+    $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
+    $code = $this->getClient()->getResponse()->getStatusCode();
+    assertEquals(200, $code);
+    assertEquals('application/vnd.android.package-archive', $content_type);
+  }
+
+  /**
+   * @Then /^I should receive an application file$/
+   */
+  public function iShouldReceiveAnApplicationFile()
+  {
+    $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
+    $code = $this->getClient()->getResponse()->getStatusCode();
+    assertEquals(200, $code);
+    assertEquals('application/zip', $content_type);
   }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

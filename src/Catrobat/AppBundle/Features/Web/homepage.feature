@@ -10,10 +10,10 @@ Feature: Pocketcode homepage
       | Catrobat | 123456    | cccccccccc | dev1@pocketcode.org |
       | User1    | 654321    | cccccccccc | dev2@pocketcode.org |
     And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
+      | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | program 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
 
   Scenario: Viewing the homepage at website root
     Given I am on homepage

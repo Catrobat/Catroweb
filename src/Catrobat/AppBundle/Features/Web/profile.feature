@@ -7,10 +7,10 @@ Feature: As a visitor I want to see user profiles
       | Christian | 123456   | cccccccccc | dev1@pocketcode.org |
       | Gregor    | 654321   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
-      | id | name      | description        | owned by  | downloads | views | upload time      | version |
-      | 1  | program 1 | p1                 | Christian | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | program 2 | abcef              | Christian | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | program 3 | mein Super Program | Gregor    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | id | name      | description        | owned by  | downloads | apk_downloads | views | upload time      | version |
+      | 1  | program 1 | p1                 | Christian | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | program 2 | abcef              | Christian | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | program 3 | mein Super Program | Gregor    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
 
   Scenario: Show Christian's profile
     Given I am on "/pocketcode/profile/1"

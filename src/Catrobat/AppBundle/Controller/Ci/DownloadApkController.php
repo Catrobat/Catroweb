@@ -19,12 +19,15 @@ class DownloadApkController extends Controller
      */
     public function downloadApkAction(Request $request, Program $program)
     {
+
         if (!$program->isVisible()) {
             throw new NotFoundHttpException();
         }
         if ($program->getApkStatus() != Program::APK_READY) {
             throw new NotFoundHttpException();
         }
+
+
 
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
         $apkrepository = $this->get('apkrepository');
@@ -35,6 +38,14 @@ class DownloadApkController extends Controller
             throw new NotFoundHttpException();
         }
         if ($file->isFile()) {
+
+            $downloaded = $request->getSession()->get('apk_downloaded', array());
+            if (!in_array($program->getId(), $downloaded)) {
+                $this->get('programmanager')->increaseApkDownloads($program);
+                $downloaded[] = $program->getId();
+                $request->getSession()->set('apk_downloaded', $downloaded);
+            }
+
             $response = new BinaryFileResponse($file);
             $d = $response->headers->makeDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
@@ -42,6 +53,7 @@ class DownloadApkController extends Controller
             );
             $response->headers->set('Content-Disposition', $d);
             $response->headers->set('Content-type', 'application/vnd.android.package-archive');
+
 
             return $response;
         }
