@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Features\Admin\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
@@ -30,95 +29,107 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureContext
 {
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Support Functions
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Hooks
-
-/** @BeforeScenario */
-  public function followRedirects()
-  {
-    $this->getClient()->followRedirects(true);
-  }
-
-  /** @BeforeScenario */
-  public function generateSessionCookie()
-  {
-
-    $client = $this->getClient();
-
-    $session = $this->getClient()->getContainer()->get("session");
-
-    $cookie = new Cookie($session->getName(), $session->getId());
-    $client->getCookieJar()->set($cookie);
-  }
-
-  /** @BeforeScenario */
-  public function initACL()
-  {
-    $acl_command = new SetupAclCommand();
-
-    $acl_command->setContainer($this->getClient()->getContainer());
-    $return = $acl_command->run(new ArrayInput(array()),new NullOutput());
-    if($return != 0)
-    {
-      assert(false,"Oh no!");
-    }
-  }
-
-  /** @AfterScenario */
-  public function disableProfiler()
-  {
-      $this->getSymfonyService('profiler')->disable();
-  }
-
-  /** @AfterScenario */
-  public function resetLdapTestDriver()
-  {
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Support Functions
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Hooks
+    
     /**
-     * @var $ldap_test_driver LdapTestDriver
-     * @var $user User
+     * @BeforeScenario
      */
-    $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
-    $ldap_test_driver->resetFixtures();
-  }
+    public function followRedirects()
+    {
+        $this->getClient()->followRedirects(true);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Steps
+    /**
+     * @BeforeScenario
+     */
+    public function generateSessionCookie()
+    {
+        $client = $this->getClient();
+        
+        $session = $this->getClient()
+            ->getContainer()
+            ->get("session");
+        
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $client->getCookieJar()->set($cookie);
+    }
 
-  /**
-   * @Given /^there are notifications:$/
-   */
-  public function thereAreNotifications(TableNode $table)
-  {
-      /* @var $user_manager UserManager*/
-    $user_manager = $this->getUserManager();
-      $em = $this->getManager();
-      $nots = $table->getHash();
-      for ($i = 0; $i < count($nots); ++$i ) {
-          $user = $user_manager->findOneBy(array(
-          'username' => $nots[$i]['user'],
-      ));
-          $notification = new Notification();
-          $notification->setUser($user);
-          $notification->setReport($nots[$i]['report']);
-          $notification->setSummary($nots[$i]['summary']);
-          $notification->setUpload($nots[$i]['upload']);
-          $em->persist($notification);
-      }
-      $em->flush();
-  }
+    /**
+     * @BeforeScenario
+     */
+    public function initACL()
+    {
+        $acl_command = new SetupAclCommand();
+        
+        $acl_command->setContainer($this->getClient()
+            ->getContainer());
+        $return = $acl_command->run(new ArrayInput(array()), new NullOutput());
+        if ($return != 0) {
+            assert(false, "Oh no!");
+        }
+    }
 
+    /**
+     * @AfterScenario
+     */
+    public function disableProfiler()
+    {
+        $this->getSymfonyService('profiler')->disable();
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function resetLdapTestDriver()
+    {
+        /**
+         *
+         * @var $ldap_test_driver LdapTestDriver
+         * @var $user User
+         */
+        $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
+        $ldap_test_driver->resetFixtures();
+    }
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Steps
+    
+    /**
+     * @Given /^there are notifications:$/
+     */
+    public function thereAreNotifications(TableNode $table)
+    {
+        /* @var $user_manager UserManager*/
+        $user_manager = $this->getUserManager();
+        $em = $this->getManager();
+        $nots = $table->getHash();
+        for ($i = 0; $i < count($nots); ++ $i) {
+            $user = $user_manager->findOneBy(array(
+                'username' => $nots[$i]['user']
+            ));
+            $notification = new Notification();
+            $notification->setUser($user);
+            $notification->setReport($nots[$i]['report']);
+            $notification->setSummary($nots[$i]['summary']);
+            $notification->setUpload($nots[$i]['upload']);
+            $em->persist($notification);
+        }
+        $em->flush();
+    }
 
     /**
      * @Given /^I am a valid admin$/
      */
     public function iAmAValidAdmin()
     {
-        $this->getDefaultUser(array("role"=>"ROLE_ADMIN"));
+        $this->getDefaultUser(array(
+            "role" => "ROLE_ADMIN"
+        ));
     }
 
     /**
@@ -145,15 +156,15 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function iShouldSeeAEmailWithRecipient($recipient)
     {
         /* @var $collector MessageDataCollector */
-      /* @var $message \Swift_Message */
-      $profile = $this->getSymfonyProfile();
+        /* @var $message \Swift_Message */
+        $profile = $this->getSymfonyProfile();
         $collector = $profile->getCollector('swiftmailer');
         foreach ($collector->getMessages() as $message) {
             if ($recipient == array_keys($message->getTo())[0]) {
                 return;
             }
         }
-        assert(false, "Didn't find ".$recipient.' in recipients.');
+        assert(false, "Didn't find " . $recipient . ' in recipients.');
     }
 
     /**
@@ -163,9 +174,9 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $url = '/pocketcode/api/reportProgram/reportProgram.json';
         $parameters = array(
-          'program' => $program_id,
-          'note' => $note,
-      );
+            'program' => $program_id,
+            'note' => $note
+        );
         $this->getClient()->request('POST', $url, $parameters);
     }
 
@@ -174,20 +185,23 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function iAmAUserWithRole($role)
     {
-        $this->insertUser(array("role"=>$role, "name"=>"generatedBehatUser"));
-
+        $this->insertUser(array(
+            "role" => $role,
+            "name" => "generatedBehatUser"
+        ));
+        
         $client = $this->getClient();
         $client->getCookieJar()->set(new Cookie(session_name(), true));
-
+        
         $session = $client->getContainer()->get('session');
-
+        
         $user = $this->getSymfonyService('fos_user.user_manager')->findUserByUsername("generatedBehatUser");
         $providerKey = $this->getSymfonyParameter('fos_user.firewall_name');
-
+        
         $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
-        $session->set('_security_'.$providerKey, serialize($token));
+        $session->set('_security_' . $providerKey, serialize($token));
         $session->save();
-
+        
         $cookie = new Cookie($session->getName(), $session->getId());
         $client->getCookieJar()->set($cookie);
     }
@@ -197,8 +211,10 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function theResponseShouldContain($needle)
     {
-      if(strpos($this->getClient()->getResponse()->getContent(),$needle)===false)
-        assert(false,$needle." not found in the response ");
+        if (strpos($this->getClient()
+            ->getResponse()
+            ->getContent(), $needle) === false)
+            assert(false, $needle . " not found in the response ");
     }
 
     /**
@@ -206,7 +222,9 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function theResponseShouldNotContain($needle)
     {
-        assertNotContains($needle,$this->getClient()->getResponse()->getContent());
+        assertNotContains($needle, $this->getClient()
+            ->getResponse()
+            ->getContent());
     }
 
     /**
@@ -214,20 +232,19 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function thereIsAFileWithSizeBytesInTheApkFolder($filename, $size)
     {
-        $this->generateFileInPath($this->getSymfonyParameter("catrobat.apk.dir"),$filename,$size);
+        $this->generateFileInPath($this->getSymfonyParameter("catrobat.apk.dir"), $filename, $size);
     }
 
     private function generateFileInPath($path, $filename, $size)
     {
-        $full_filename = $path."/".$filename;
+        $full_filename = $path . "/" . $filename;
         $dirname = dirname($full_filename);
-        if (!is_dir($dirname))
-        {
+        if (! is_dir($dirname)) {
             mkdir($dirname, 0755, true);
         }
         $fp = fopen($full_filename, 'w'); // open in write mode.
-        fseek($fp, $size-1,SEEK_CUR); // seek to SIZE-1
-        fwrite($fp,'a'); // write a dummy char at SIZE position
+        fseek($fp, $size - 1, SEEK_CUR); // seek to SIZE-1
+        fwrite($fp, 'a'); // write a dummy char at SIZE position
         fclose($fp); // close the file.
     }
 
@@ -238,7 +255,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($program_id);
-        assertEquals(Program::APK_NONE,$program->getApkStatus());
+        assertEquals(Program::APK_NONE, $program->getApkStatus());
     }
 
     /**
@@ -246,7 +263,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function thereIsAFileWithSizeBytesInTheBackupFolder($filename, $size)
     {
-        $this->generateFileInPath($this->getSymfonyParameter("catrobat.backup.dir"),$filename,$size);
+        $this->generateFileInPath($this->getSymfonyParameter("catrobat.backup.dir"), $filename, $size);
     }
 
     /**
@@ -254,7 +271,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function thereIsAFileWithSizeBytesInTheExtractedFolder($filename, $size)
     {
-        $this->generateFileInPath($this->getSymfonyParameter("catrobat.file.extract.dir"),$filename,$size);
+        $this->generateFileInPath($this->getSymfonyParameter("catrobat.file.extract.dir"), $filename, $size);
     }
 
     /**
@@ -264,7 +281,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($program_id);
-        assertEquals(null,$program->getDirectoryHash());
+        assertEquals(null, $program->getDirectoryHash());
     }
 
     /**
@@ -288,7 +305,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function iAmALoggedInAsAdmin()
     {
-      $this->iAmAUserWithRole("ROLE_ADMIN");
+        $this->iAmAUserWithRole("ROLE_ADMIN");
     }
 
     /**
@@ -304,18 +321,34 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function iPostLoginUserWithPassword($uname, $pwd)
     {
-      $csrfToken = $this->getSymfonyService('form.csrf_provider')->generateCsrfToken('authenticate');
+        $csrfToken = $this->getSymfonyService('form.csrf_provider')->generateCsrfToken('authenticate');
+        
+        $session = $this->getClient()
+            ->getContainer()
+            ->get("session");
+        $session->set('_csrf_token', $csrfToken);
+        $session->set('something', $csrfToken);
+        $session->save();
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->getClient()
+            ->getCookieJar()
+            ->set($cookie);
+        
+        $this->iHaveAParameterWithValue("_username", $uname);
+        $this->iHaveAParameterWithValue("_password", $pwd);
+        $this->iHaveAParameterWithValue("_csrf_token", $csrfToken);
+        $this->iPostTheseParametersTo("/login_check");
+    }
 
-      $session = $this->getClient()->getContainer()->get("session");
-      $session->set('_csrf_token', $csrfToken);
-      $session->set('something', $csrfToken);
-      $session->save();
-      $cookie = new Cookie($session->getName(), $session->getId());
-      $this->getClient()->getCookieJar()->set($cookie);
-
-      $this->iHaveAParameterWithValue("_username",$uname);
-      $this->iHaveAParameterWithValue("_password",$pwd);
-      $this->iHaveAParameterWithValue("_csrf_token",$csrfToken);
-      $this->iPostTheseParametersTo("/login_check");
+    /**
+     * @Given /^the LDAP server is not available$/
+     */
+    public function theLdapServerIsNotAvailable()
+    {
+        /**
+         * @var $ldap_test_driver LdapTestDriver
+         */
+        $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
+        $ldap_test_driver->setThrowExceptionOnSearch(true);
     }
 }

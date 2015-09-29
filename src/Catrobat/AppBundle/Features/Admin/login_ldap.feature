@@ -111,4 +111,14 @@ Scenario: Group-change on LDAP-Server should lead to permissions-change after lo
   And I GET "/admin/featured_program/list"
   Then the response should contain "Access Denied"
 
+Scenario: login with local account should still be possible if LDAP server is not reachable
+  Given there are LDAP-users:
+    | name                    | password  | groups                            |
+    | ldap-user               | 123456    | Webserver-Administrators          |
+  Given the LDAP server is not available
+  When I POST login with user "Catrobat" and password "123456"
+  Then the response code should be "200"
 
+
+  
+  
