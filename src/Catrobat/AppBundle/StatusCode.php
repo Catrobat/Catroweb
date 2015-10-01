@@ -14,6 +14,7 @@ class StatusCode
     const INVALID_PROGRAM = 506;
     const PROJECT_XML_MISSING = 507;
     const INVALID_XML = 508;
+    const MISSING_PROGRAM_TITLE = 509;
     const IMAGE_MISSING = 524;
     const UNEXPECTED_FILE = 525;
     const RUDE_WORD_IN_PROGRAM_NAME = 511;
@@ -21,7 +22,10 @@ class StatusCode
     const UPLOAD_UNSUPPORTED_MIME_TYPE = 516;
     const UPLOAD_UNSUPPORTED_FILE_TYPE = 517;
     const OLD_CATROBAT_LANGUAGE = 518;
-    const OLD_CATROBAT_VERSION = 519;
+    const OLD_APPLICATION_VERSION = 519;
+    
+    const PROGRAM_NAME_TOO_LONG = 526;
+    const DESCRIPTION_TOO_LONG = 527;
 
     const LOGIN_ERROR = 601;
     const REGISTRATION_ERROR = 602;

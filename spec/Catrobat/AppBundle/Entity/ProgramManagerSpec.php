@@ -54,7 +54,7 @@ class ProgramManagerSpec extends ObjectBehavior
 
     public function it_fires_an_event_when_the_program_is_invalid($request, $event_dispatcher)
     {
-        $validation_exception = new InvalidCatrobatFileException('500');
+        $validation_exception = new InvalidCatrobatFileException('500', 500);
         $event_dispatcher->dispatch('catrobat.program.before', Argument::type('Catrobat\AppBundle\Events\ProgramBeforeInsertEvent'))->willThrow($validation_exception)->shouldBeCalled();
 
         $this->shouldThrow('\Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('addProgram', array($request));

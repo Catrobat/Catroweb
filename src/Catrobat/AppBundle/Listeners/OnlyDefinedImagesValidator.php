@@ -7,6 +7,7 @@ use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\StatusCode;
+use Catrobat\AppBundle\Exceptions\Upload\MissingImageException;
 
 class OnlyDefinedImagesValidator
 {
@@ -26,7 +27,7 @@ class OnlyDefinedImagesValidator
         }
         $files = array_diff($files_in_xml, $files_in_directory);
         if (count($files) > 0) {
-            throw new InvalidCatrobatFileException('Missing image: '.implode(', ', $files).']', StatusCode::IMAGE_MISSING);
+            throw new MissingImageException('Missing image: '.implode(', ', $files).']');
         }
     }
 

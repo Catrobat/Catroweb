@@ -7,6 +7,7 @@ use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Services\RudeWordFilter;
 use Catrobat\AppBundle\StatusCode;
+use Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException;
 
 class DescriptionValidator
 {
@@ -25,7 +26,7 @@ class DescriptionValidator
     public function validate(ExtractedCatrobatFile $file)
     {
         if (strlen($file->getDescription()) > 1000) {
-            throw new InvalidCatrobatFileException('program description too long');
+            throw new DescriptionTooLongException();
         }
 
         if ($this->rudeWordFilter->containsRudeWord($file->getDescription())) {
