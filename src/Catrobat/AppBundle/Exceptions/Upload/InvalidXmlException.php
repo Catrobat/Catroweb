@@ -6,8 +6,8 @@ use Catrobat\AppBundle\StatusCode;
 
 class InvalidXmlException extends InvalidCatrobatFileException
 {
-    public function __construct()
+    public function __construct($debug = "")
     {
-        parent::__construct("errors.xml.invalid", StatusCode::INVALID_XML);
+        parent::__construct("errors.xml.invalid", StatusCode::INVALID_XML, $debug);
     }
 }

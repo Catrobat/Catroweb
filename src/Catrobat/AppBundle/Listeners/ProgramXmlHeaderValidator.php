@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\StatusCode;
+use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 
 class ProgramXmlHeaderValidator
 {
@@ -30,10 +31,10 @@ class ProgramXmlHeaderValidator
         isset($program_xml_properties->header->remixOf) &&
         isset($program_xml_properties->header->url) &&
         isset($program_xml_properties->header->userHandle))) {
-                throw new InvalidCatrobatFileException('Program XML header information missing', StatusCode::INVALID_XML);
+                throw new InvalidXmlException('Program XML header information missing');
             }
         } else {
-            throw new InvalidCatrobatFileException('No Program XML header found!', StatusCode::INVALID_XML);
+            throw new InvalidXmlException('No Program XML header found!', StatusCode::INVALID_XML);
         }
     }
 }

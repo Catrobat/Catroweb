@@ -30,7 +30,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
           $description = $description.'a';
       }
       $file->getDescription()->willReturn($description);
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException')->duringValidate($file);
   }
 
   /**

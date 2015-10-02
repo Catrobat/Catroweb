@@ -36,7 +36,7 @@ class NameValidatorSpec extends ObjectBehavior
   public function it_throws_an_exception_if_the_name_is_null($file)
   {
       $file->getName()->willReturn(null);
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\MissingProgramNameException')->duringValidate($file);
   }
 
   /**
@@ -45,7 +45,7 @@ class NameValidatorSpec extends ObjectBehavior
   public function it_throws_an_exception_if_the_name_is_empty($file)
   {
       $file->getName()->willReturn('');
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\MissingProgramNameException')->duringValidate($file);
   }
 
   /**
@@ -58,7 +58,7 @@ class NameValidatorSpec extends ObjectBehavior
           $name = $name.'a';
       }
       $file->getName()->willReturn($name);
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\NameTooLongException')->duringValidate($file);
   }
 
   /**
