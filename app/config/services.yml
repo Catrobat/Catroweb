@@ -22,6 +22,10 @@ services:
         class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
         arguments: ["@translator"]
 
+    user_authenticator:
+        class: Catrobat\AppBundle\Security\UserAuthenticator
+        arguments: ["@security.user.provider.concrete.chain_provider","@security.authentication.manager"]
+
 # =========================== Repository ===========================
 
     programrepository:
