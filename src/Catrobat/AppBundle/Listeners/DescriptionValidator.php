@@ -8,6 +8,7 @@ use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Services\RudeWordFilter;
 use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException;
+use Catrobat\AppBundle\Exceptions\Upload\RudewordInDescriptionException;
 
 class DescriptionValidator
 {
@@ -30,7 +31,7 @@ class DescriptionValidator
         }
 
         if ($this->rudeWordFilter->containsRudeWord($file->getDescription())) {
-            throw new InvalidCatrobatFileException('rude word in descritption', StatusCode::RUDE_WORD_IN_DESCRIPTION);
+            throw new RudewordInDescriptionException();
         }
     }
 }

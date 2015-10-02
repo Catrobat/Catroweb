@@ -8,6 +8,7 @@ use Catrobat\AppBundle\Services\RudeWordFilter;
 use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\MissingProgramNameException;
 use Catrobat\AppBundle\Exceptions\Upload\NameTooLongException;
+use Catrobat\AppBundle\Exceptions\Upload\RudewordInNameException;
 
 class NameValidator
 {
@@ -33,7 +34,7 @@ class NameValidator
         }
         
         if ($this->rudeWordFilter->containsRudeWord($file->getName())) {
-            throw new InvalidCatrobatFileException('rude word in name', StatusCode::RUDE_WORD_IN_PROGRAM_NAME);
+            throw new RudewordInNameException();
         }
     }
 }

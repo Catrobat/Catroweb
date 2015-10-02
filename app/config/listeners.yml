@@ -119,4 +119,12 @@ services:
           tags:
               - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
               
+      catrobat.view.programlist:
+          class:        Catrobat\AppBundle\Listeners\View\ProgramListSerializer
+          arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
+          tags:
+              - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
               
+              
+              
+ 
