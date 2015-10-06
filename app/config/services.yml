@@ -149,3 +149,14 @@ services:
           - "@router" 
           - "%jenkins%"
           
+# =========================== Controller ===========================
+
+    controller.upload:
+        class: Catrobat\AppBundle\Controller\Api\UploadController
+        arguments:
+          - "@usermanager"
+          - "@security.token_storage"
+          - "@programmanager"
+          - "@tokengenerator"
+          - "@translator"
+          

@@ -12,9 +12,36 @@ use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Catrobat\AppBundle\Exceptions\Upload\MissingChecksumException;
+use Catrobat\AppBundle\Exceptions\Upload\InvalidChecksumException;
+use Catrobat\AppBundle\Exceptions\Upload\MissingPostDataException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Translation\TranslatorInterface;
 
-class UploadController extends Controller
+/**
+ * @Route(service="controller.upload")
+ */
+class UploadController
 {
+
+    private $usermanager;
+
+    private $tokenstorage;
+
+    private $programmanager;
+
+    private $tokengenerator;
+
+    private $translator;
+
+    public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager, TokenGenerator $tokengenerator, TranslatorInterface $translator)
+    {
+        $this->usermanager = $usermanager;
+        $this->tokenstorage = $tokenstorage;
+        $this->programmanager = $programmanager;
+        $this->tokengenerator = $tokengenerator;
+        $this->translator = $translator;
+    }
 
     /**
      * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"})
@@ -22,30 +49,22 @@ class UploadController extends Controller
      */
     public function uploadAction(Request $request)
     {
-        $user_manager = $this->get('usermanager');
-        $context = $this->get('security.context');
-        $program_manager = $this->get('programmanager');
-        $tokenGenerator = $this->get('tokengenerator');
-        
         $response = array();
         if ($request->files->count() != 1) {
-            $response['statusCode'] = StatusCode::MISSING_POST_DATA;
-            $response['answer'] = $this->trans('errors.post-data');
+            throw new MissingPostDataException();
         } elseif (! $request->request->has('fileChecksum')) {
-            $response['statusCode'] = StatusCode::MISSING_CHECKSUM;
-            $response['answer'] = $this->trans('errors.checksum.missing');
+            throw new MissingChecksumException();
         } else {
             $file = array_values($request->files->all())[0];
             if (md5_file($file->getPathname()) != $request->request->get('fileChecksum')) {
-                $response['statusCode'] = StatusCode::INVALID_CHECKSUM;
-                $response['answer'] = $this->trans('errors.checksum.invalid');
+                throw new InvalidChecksumException();
             } else {
-                $add_program_request = new AddProgramRequest($context->getToken()->getUser(), $file, $request->getClientIp());
+                $user = $this->tokenstorage->getToken()->getUser();
+                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp());
                 
-                $id = $program_manager->addProgram($add_program_request)->getId();
-                $user = $context->getToken()->getUser();
-                $user->setToken($tokenGenerator->generateToken());
-                $user_manager->updateUser($user);
+                $id = $this->programmanager->addProgram($add_program_request)->getId();
+                $user->setToken($this->tokengenerator->generateToken());
+                $this->usermanager->updateUser($user);
                 
                 $response['projectId'] = $id;
                 $response['statusCode'] = StatusCode::OK;
@@ -59,8 +78,17 @@ class UploadController extends Controller
         return JsonResponse::create($response);
     }
 
+    /**
+     * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function submitAction(Request $request)
+    {
+        
+    }
+
     private function trans($message, $parameters = array())
     {
-        return $this->get('translator')->trans($message, $parameters, 'catroweb');
+        return $this->translator->trans($message, $parameters, 'catroweb');
     }
 }
