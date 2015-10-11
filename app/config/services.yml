@@ -97,8 +97,6 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
             - "@event_dispatcher"
-        tags:
-            -  { name:  "knp_paginator.injectable" }
 
     rudewordfilter:
         class: Catrobat\AppBundle\Services\RudeWordFilter

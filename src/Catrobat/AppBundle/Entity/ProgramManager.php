@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Entity;
 
 use Catrobat\AppBundle\Events\InvalidProgramUploadedEvent;
@@ -12,14 +11,21 @@ use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 
-class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface
+class ProgramManager
 {
+
     protected $file_extractor;
+
     protected $file_repository;
+
     protected $screenshot_repository;
+
     protected $event_dispatcher;
+
     protected $entity_manager;
+
     protected $program_repository;
+
     protected $pagination;
 
     public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, EventDispatcherInterface $event_dispatcher)
@@ -32,15 +38,10 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
         $this->program_repository = $program_repository;
     }
 
-    public function setPaginator(Paginator $paginator)
-    {
-        $this->pagination = $paginator;
-    }
-
     public function addProgram(AddProgramRequest $request)
     {
         $file = $request->getProgramfile();
-
+        
         $extracted_file = $this->file_extractor->extract($file);
         try {
             $event = $this->event_dispatcher->dispatch('catrobat.program.before', new ProgramBeforeInsertEvent($extracted_file));
@@ -48,18 +49,18 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
             $event = $this->event_dispatcher->dispatch('catrobat.program.invalid.upload', new InvalidProgramUploadedEvent($file, $e));
             throw $e;
         }
-
+        
         if ($event->isPropagationStopped()) {
             return;
         }
-
-    /* @var $program Program*/
-
-    $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
+        
+        /* @var $program Program*/
+        
+        $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
         if ($old_program != null) {
             $program = $old_program;
-      //it's an update
-      $program->incrementVersion();
+            // it's an update
+            $program->incrementVersion();
         } else {
             $program = new Program();
         }
@@ -76,32 +77,35 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
-
+        
         $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));
-
+        
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
-
+        
         $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program));
-
+        
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
-
+        
         if ($extracted_file->getScreenshotPath() == null) {
             // Todo: maybe for later implementations
         } else {
             $this->screenshot_repository->saveProgramAssets($extracted_file->getScreenshotPath(), $program->getId());
         }
         $this->file_repository->saveProgram($extracted_file, $program->getId());
-
+        
         $event = $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
-
+        
         return $program;
     }
 
     public function findOneByNameAndUser($program_name, $user)
     {
-        return $this->program_repository->findOneBy(array('name' => $program_name, 'user' => $user));
+        return $this->program_repository->findOneBy(array(
+            'name' => $program_name,
+            'user' => $user
+        ));
     }
 
     public function findOneByName($programName)
@@ -120,7 +124,9 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
     }
 
     /**
-     * @param $id
+     *
+     * @param
+     *            $id
      * @return \Catrobat\AppBundle\Entity\Program
      */
     public function find($id)
@@ -155,7 +161,7 @@ class ProgramManager implements \Knp\Bundle\PaginatorBundle\Definition\Paginator
 
     public function getRandomPrograms($flavor, $limit = null, $offset = null)
     {
-      return $this->program_repository->getRandomPrograms($flavor, $limit, $offset);
+        return $this->program_repository->getRandomPrograms($flavor, $limit, $offset);
     }
 
     public function search($query, $limit = 10, $offset = 0)

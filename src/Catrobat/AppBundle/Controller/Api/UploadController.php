@@ -49,6 +49,20 @@ class UploadController
      */
     public function uploadAction(Request $request)
     {
+        return $this->processUpload($request);
+    }
+
+    /**
+     * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function submitAction(Request $request)
+    {
+        return $this->processUpload($request, true);
+    }
+
+    private function processUpload(Request $request, $submission = false)
+    {
         $response = array();
         if ($request->files->count() != 1) {
             throw new MissingPostDataException();
@@ -61,11 +75,11 @@ class UploadController
             } else {
                 $user = $this->tokenstorage->getToken()->getUser();
                 $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp());
-                
+        
                 $id = $this->programmanager->addProgram($add_program_request)->getId();
                 $user->setToken($this->tokengenerator->generateToken());
                 $this->usermanager->updateUser($user);
-                
+        
                 $response['projectId'] = $id;
                 $response['statusCode'] = StatusCode::OK;
                 $response['answer'] = $this->trans('success.upload');
@@ -77,16 +91,9 @@ class UploadController
         
         return JsonResponse::create($response);
     }
-
-    /**
-     * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"})
-     * @Method({"POST"})
-     */
-    public function submitAction(Request $request)
-    {
-        
-    }
-
+    
+    
+    
     private function trans($message, $parameters = array())
     {
         return $this->translator->trans($message, $parameters, 'catroweb');

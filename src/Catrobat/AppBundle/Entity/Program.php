@@ -165,6 +165,17 @@ class Program
     protected $lego = false;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\GameJam", inversedBy="programs")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $gamejam;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    protected $accepted = false;
+    
+    /**
      * @param mixed $approved_by_user
      */
     public function setApprovedByUser($approved_by_user)
@@ -827,5 +838,53 @@ class Program
         $this->lego = $lego;
 
         return $this;
+    }
+
+    /**
+     * Set gamejam
+     *
+     * @param \Catrobat\AppBundle\Entity\GameJam $gamejam
+     *
+     * @return Program
+     */
+    public function setGamejam(\Catrobat\AppBundle\Entity\GameJam $gamejam = null)
+    {
+        $this->gamejam = $gamejam;
+
+        return $this;
+    }
+
+    /**
+     * Get gamejam
+     *
+     * @return \Catrobat\AppBundle\Entity\GameJam
+     */
+    public function getGamejam()
+    {
+        return $this->gamejam;
+    }
+
+    /**
+     * Set accepted
+     *
+     * @param boolean $accepted
+     *
+     * @return Program
+     */
+    public function setAccepted($accepted)
+    {
+        $this->accepted = $accepted;
+
+        return $this;
+    }
+
+    /**
+     * Get accepted
+     *
+     * @return boolean
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
     }
 }
