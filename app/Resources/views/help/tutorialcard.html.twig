@@ -10,56 +10,57 @@
 {% block body %}
   <h1>{{ ("help.tutorialcards.card"~page~".title")|trans({}, "catroweb") }}</h1>
 
-  <div class="tutorialcards-container size-large">
-    <p class="description">{{ ("help.tutorialcards.card"~page~".description")|trans({}, "catroweb") }}</p>
+  <div id="tutorialcard" class="tutorialcards-container size-large">
 
-    <div class="img-container">
-      <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_1.png') }}" alt="" title=""/>
-    </div>
-
-    {% for i in 1..count.get_ready %}
-      {% if(i == 1) %}
-        <div>
-          <h3>{{ ("help.tutorialcards.getReady")|trans({}, "catroweb") }}</h3>
-        </div>
-      {% endif %}
-      <div class="img-container">
-        <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_2_'~i~'.png') }}" alt="" title=""/>
+    <div class="block">
+      <div>
+        <p class="description">
+          {{ ("help.tutorialcards.card"~page~".description")|trans({}, "catroweb") }}<br>
+          {{ ("clickToDownloadProgram")|trans({
+            '%link_start%': '<a href="'~example_link~'" target="_blank">',
+            '%link_end%': '</a>'
+          }, "catroweb")|raw }}
+        </p>
       </div>
-    {% endfor %}
-
-    {% for i in 1..count.try_code %}
-      {% if(i == 1) %}
-        <div>
-          <h3>{{ ("help.tutorialcards.tryCode")|trans({}, "catroweb") }}</h3>
-        </div>
-      {% endif %}
-      <div class="img-container">
-        <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_3_'~i~'.png') }}" alt="" title=""/>
-      </div>
-    {% endfor %}
-
-    <div>
-      <h3>{{ ("help.tutorialcards.doIt")|trans({}, "catroweb") }}</h3>
-    </div>
-    <div class="img-container">
-      <img src="{{ asset('images/help/tutorialcards/cards/do_it.png') }}" alt="" title=""/>
-    </div>
-
-    {% if(count.extra_tip > 0) %}
-      {% for i in 1..count.extra_tip %}
-        {% if(i == 1) %}
-          <div>
-            <h3>{{ ("help.tutorialcards.tip")|trans({}, "catroweb") }}</h3>
-          </div>
-        {% endif %}
+      <div>
         <div class="img-container">
-          <div class="extra-text">{{ ("help.tutorialcards.card"~page~".extra"~i)|trans({}, "catroweb") }}</div>
-          <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_4_'~i~'.png') }}" alt="" title=""/>
+          <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_0.jpg') }}" alt="" title=""/>
         </div>
-      {% endfor %}
-    {% endif %}
+      </div>
+    </div>
 
+    {% for block in blocks %}
+    <div class="block">
+    <div>
+      {% set block_num = loop.index %}
+      ({{ loop.index }})
+      {%  set link = url('catrobat_web_tutorialcards') %}
+      {{ ("help.tutorialcards.card"~page~"."~block.block~"")|trans({
+        '%tutorial_card_link_1%': '<a href="'~link~'/1" target="_blank">Tutorial Card 1</a>',
+        '%tutorial_card_link_2%': '<a href="'~link~'/2" target="_blank">Tutorial Card 2</a>',
+        '%tutorial_card_link_3%': '<a href="'~link~'/3" target="_blank">Tutorial Card 3</a>',
+        '%tutorial_card_link_4%': '<a href="'~link~'/4" target="_blank">Tutorial Card 4</a>',
+        '%tutorial_card_link_5%': '<a href="'~link~'/5" target="_blank">Tutorial Card 5</a>',
+        '%tutorial_card_link_6%': '<a href="'~link~'/6" target="_blank">Tutorial Card 6</a>',
+        '%tutorial_card_link_7%': '<a href="'~link~'/7" target="_blank">Tutorial Card 7</a>',
+        '%tutorial_card_link_8%': '<a href="'~link~'/8" target="_blank">Tutorial Card 8</a>',
+        '%tutorial_card_link_9%': '<a href="'~link~'/9" target="_blank">Tutorial Card 9</a>',
+        '%tutorial_card_link_10%': '<a href="'~link~'/10" target="_blank">Tutorial Card 10</a>',
+        '%tutorial_card_link_11%': '<a href="'~link~'/11" target="_blank">Tutorial Card 11</a>',
+        '%tutorial_card_link_12%': '<a href="'~link~'/12" target="_blank">Tutorial Card 12</a>'
+      }, "catroweb")|raw }}
+    </div>
+    <div>
+      {% for i in 1..block.images %}
+      <div class="img-container">
+        <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_'~block_num~'_'~i~'.jpg') }}" alt="" title=""/>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+    {% endfor %}
+
+    <div class="clear"></div>
 
   </div>
 

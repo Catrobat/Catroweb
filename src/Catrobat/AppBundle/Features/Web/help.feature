@@ -73,7 +73,7 @@ Feature: Pocketcode help page
   Scenario: Clicking on tutorials image at help page and test navigation
     When I click "#tutorials"
     Then  I should see "TUTORIALS"
-    Then  I should see "This tutorials show you how to use effective tricks in POCKET CODE."
+    Then  I should see "These tutorials show you how to use effective tricks in Pocket Code."
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
     Given I am on "/pocketcode/tutorialcards"
@@ -82,16 +82,19 @@ Feature: Pocketcode help page
     Then I should see "<title>"
 
   Examples:
-    | id | title            |
-    | 1  | Change Size      |
-    | 2  | Change Look      |
-    | 3  | Moving Animation |
-    | 4  | Glide            |
-    | 5  | Play Sound       |
-    | 6  | Speak Something  |
-    | 7  | GSensor          |
-    | 8  | Compass          |
-    | 9  | Broadcast        |
+    | id | title               |
+    | 1  | Change Size         |
+    | 2  | Change Look         |
+    | 3  | Animation           |
+    | 4  | Glide               |
+    | 5  | Play a Sound        |
+    | 6  | Speak               |
+    | 7  | Sensor              |
+    | 8  | Compass             |
+    | 9  | Broadcast           |
+    | 10 | Show variable       |
+    | 11 | Collision detection |
+    | 12 | Face detection      |
 
   Scenario: Clicking on starters image at help page and test navigation
     Given there are users:

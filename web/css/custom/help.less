@@ -354,7 +354,7 @@
 
   .img-container {
     margin: 5px auto;
-    width: 50%;
+    width: 60%;
 
     .extra-text {
       margin-top: 55px;
@@ -368,7 +368,7 @@
   }
 
   p.description {
-    margin: 20px 0 40px 0;
+    margin: 0px 0 40px 0;
 
     strong {
       text-transform: uppercase;
@@ -389,9 +389,37 @@
     }
   }
 
+  .block {
+    overflow: auto;
+
+    > div {
+      margin: 20px auto 0 auto;
+    }
+
+    > div:nth-child(1) {
+      width: 50%;
+      float: left;
+    }
+
+    > div:nth-child(2) {
+      width: 50%;
+      float: right;
+    }
+  }
+
   @media screen and (max-width: 720px) {
     .col-2 {
       width: 100%;
+    }
+
+    .block > div:nth-child(1),
+    .block > div:nth-child(2) {
+      width: 100%;
+      float: none;
+    }
+
+    .img-container {
+      width: 50%;
     }
   }
 }
@@ -453,5 +481,12 @@
   .clickable {
     color: @special-font-color;
     font-weight: bold;
+  }
+}
+
+#tutorialcard {
+  a {
+    text-decoration: none;
+    color: #fff;
   }
 }

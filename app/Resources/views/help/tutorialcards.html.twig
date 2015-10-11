@@ -10,13 +10,12 @@
   <h1>{{ ("help.tutorialcards.title")|trans({}, "catroweb") }}</h1>
 
   <div class="tutorialcards-container size-large">
-    <p class="description">{{ ("help.tutorialcards.description1")|trans({}, "catroweb") }}
-      <strong>{{ ("help.tutorialcards.description2")|trans({}, "catroweb") }}</strong></p>
+    <p class="description">{{ ("help.tutorialcards.description1")|trans({}, "catroweb") }}</p>
 
     {% for i in 1..count %}
       <a href="{{ path('catrobat_web_tutorialcards', {'page': i}) }}">
         <div class="col-2">
-          <img src="{{ asset('images/help/tutorialcards/'~i~'.png') }}" alt="" title=""/>
+          <img src="{{ asset('images/help/tutorialcards/'~i~'.jpg') }}" alt="" title=""/>
           <span id="title-{{ i }}" class="title size-xlarge">{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>
         </div>
       </a>

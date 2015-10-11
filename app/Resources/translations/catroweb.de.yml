@@ -22,6 +22,7 @@ oldVersionError: Bitte aktualisiere auf die neueste Version von Pocket-Code!
 more: mehr
 less: weniger
 ok: OK
+clickToDownloadProgram: %link_start%Hier%link_end% kannst du das Beispielprogramm herunterladen.
 programs:
   featured: Empfohlen
   newest: Neueste Programme
@@ -382,43 +383,75 @@ help:
         text6: Lade das derzeit geöffnete Programm hoch.
   tutorialcards:
     title: Tutorials
-    description1: 'Diese Tutorials zeigen dir, wie man effektive Tricks verwendet in '
-    description2: Pocket Code.
+    description1: 'Diese Tutorials zeigen dir, wie spezielle Funktionen in Pocket Code umgesetzt werden können.'
     getReady: 'Bereite alles vor:'
     tryCode: 'Versuche diesen Code:'
     doIt: 'Tu es:'
     tip: 'Extra Tipp:'
     card1:
       title: Größe ändern
-      description: Tippe auf die Ente um ihre Größe zu verändern.
+      description: Ändere die Größe eines Objektes
+      one: Lege ein Objekt an (z.B. Tier), dessen Größe du ändern  möchtest.
+      two: Füge folgende Bausteine in „Skripte“ hinzu, um dein Objekt bei Berührung zu  verkleinern.
     card2:
       title: Aussehen ändern
-      description: Verwende diesen Trick um automatisch mitzuzählen.
+      description: Ändere das Aussehen eines Objektes.
+      one: Lege das Objekt (z.B. Tiere) an, dessen Aussehen du ändern möchtest.
+      two: Integriere anschließend in „Aussehen“ weitere Bilder.
+      three: Füge folgende Bausteine in „Skripte“ hinzu, um fortlaufend im Sekundentakt das Aussehen zu wechseln.
     card3:
       title: Bewegte Animation
-      description: Verwende diesen Trick um den Papagei fliegen zu lassen.
+      description: Bewege ein Objekt auf der Bühne.
+      one: Lege das Objekt an (z.B. Vogel), das sich bewegen soll.
+      two: Integriere in „Aussehen“ ein weiteres Bild, das die Bewegung  darstellt.
+      three: Füge nun folgende Bausteine in „Skripte“ hinzu, um die Position laufend zu ändern. Begrenze zusätzlich die Bühne, indem du  das Objekt vom Rand abprallen lässt.
     card4:
       title: Gleite
-      description: Gleite mit einem Objekt über den Bildschirm.
+      description: Lass ein Objekt über den Bildschirm gleiten.
+      one: Lege ein neues Objekt an (z.B. Flugzeug), welches über  die Bühne „gleiten“ soll.
+      two: Füge folgende Bausteine in „Skripte“ ein und lege den Bereich fest in dem die  Bewegung stattfinden soll.
     card5:
       title: Spiele einen Klang ab
-      description: Tippe auf die Trommel um den Klang abzuspielen.
-      extra1: '1. Tipp "+"'
-      extra2: '2. Wähle "Pocket Code Rekorder"'
-      extra3: 3. Tippe auf das Icon um einen Klang aufzunehmen
+      description: Spiele einen Klang ab, indem du auf das Objekt tippst.
+      one: Lege ein neues Objekt an (z.B. Hund), welches einen Ton abspielen soll.
+      two: Füge nun folgende Bausteine in „Skripte“ ein, damit das Objekt einen Ton abspielt. Du kannst dafür in „Klänge“ einen Klang  aufnehmen, einen eigenen Klang auswählen oder einen Sound aus der Pocket Code Medien Bibliothek verwenden.
     card6:
       title: Sprich etwas
-      description: Verwende diesen Code damit ein Objekt spricht.
+      description: Lasse ein Objekt sprechen.
+      one: Lege das Objekt an (z.B. Carry), das einen Text sprechen soll.
+      two: Füge nun folgende Bausteine in „Skripte“ hinzu, um deinen Text sprechen zu lassen.
     card7:
       title: GSensor
-      description: Verwende diesen Trick um ein Objekt mit Neigung deines Handys zu kontrollieren.
-      extra1: Wenn es zu heikel ist, teile es durch 10
+      description: Steuere ein Objekt mit den Neigungssensoren.
+      one: Lege das Objekt an (z.B. Gegenstand), das du über Sensoren steuern möchtest.
+      two: Füge folgende Bausteine in „Skripte“ hinzu, um das Objekt über die Sensoren deines Smartphones zu steuern. Wähle dazu im „Formel Editor“ die Sensorenwerte „x_Beschleunigung“ und „y_Beschleunigung“ aus. Setze ein Minus um die Neigung zu spiegeln. Wenn dir die  Bewegung zu schnell ist, dividiere  die Beschleunigung z.B. durch 10.
     card8:
       title: Kompass
-      description: Verwende diesen Code um einen Kompass zu erstellen.
+      description: Erstelle einen Kompass.
+      one: Lege das Objekt an (z.B. Kompassnadel), um einen Kompass zu erstellen der nach Norden zeigt.
+      two: Füge folgende Bausteine in „Skripte“ hinzu, damit sich das Objekt immer an der Kompassrichtung orientiert.
     card9:
-      title: 'Verschicke an alle:'
-      description: Schau dir diesen Code an! Er zeigt dir, wie man zwischen Objekten kommuniziert.
+      title: Verschicke an alle
+      description: Kommunikation zwischen Objekten.
+      one: Lege ein neues Objekt an (z.B. Alice), das mit dem Hintergrund kommunizieren soll. Füge zusätzlich einen zweiten Hintergrund hinzu. Dieser soll sich durch das empfangen einer Nachricht ändern.
+      two: Füge in Alice den Baustein „Versende an alle“ in „Skripte“ ein. Setze nun in einem anderen Objekt oder Hintergrund den Baustein „Wenn ich empfange“ um auf die Nachricht zu reagieren.
+      three: Der Hintergrund ändert sich, wenn das Objekt im Vordergrund angetippt wird.
+    card10:
+      title: Variable ausgeben
+      description: Gib den Wert einer Variable aus.
+      one: Lege ein Objekt an (z.B. Alex), welches du mit den Neigungs-Sensoren steuerst (siehe %tutorial_card_link_7%)
+      two: Füge nun folgende Bausteine in „Skripte“ ein, um die aktuelle „Position_x“ und „Position_y“ des Objektes in einer Variable laufend zu speichern.
+      three: Verwende im Hintergrund die Bausteine „Zeige Variable“ um diese Werte auf der Bühne ausgeben.
+    card11:
+      title: Kollisionserkennung
+      description: Lasse zwei Objekte aufeinander treffen.
+      one: Lege zwei Objekte an, die miteinander kollidieren sollen (z.B. Alex und Teddy).
+      two: Steuere Alex mit den Neigungssensoren (siehe %tutorial_card_link_7%) und speichere die „Position_x“ und „Position_y“ von Alex in einer Variable (siehe %tutorial_card_link_10%). Füge zu Teddy in „Skripte“ folgende Bausteine hinzu. In der „if-Schleife“ werden die Bedingung für die Kollision festgelegt. Dann wird überprüft ob sich die x/y-Positionen der beiden Objekte überschneiden.
+    card12:
+      title: Gesichtserkennung
+      description: Steuere ein Objekt mit Hilfe der Gesichtserkennung.
+      one: Überprüfe in den Einstellungen ob die Bausteine für die Gesichtserkennung aktiviert sind.
+      two: Lege ein neues Objekt an (z.B. Alien), das bei Erkennung eines Gesichtes angezeigt werden soll. Lege dazu folgende Bausteine in „Skripte“ fest. Überprüfe mit einer „Wenn“-Schleife, ob ein Gesicht erkannt wird. Bei einer Gesichtserkennung hat die Variable den Wert 1, ansonsten den Wert 0.
   starterPrograms:
     title: Starter Programme
     description: Probiere diese Starter Programme aus. Schau dir den Code an und verändere ihn so wie du willst.
