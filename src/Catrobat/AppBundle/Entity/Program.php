@@ -883,7 +883,7 @@ class Program
      *
      * @return boolean
      */
-    public function getAccepted()
+    public function isAccepted()
     {
         return $this->accepted;
     }

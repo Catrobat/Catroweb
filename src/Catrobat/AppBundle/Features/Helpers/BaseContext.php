@@ -48,6 +48,12 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Getter & Setter
     
+    public function getSymfonySupport()
+    {
+        return $this->symfony_support;
+    }
+   
+    
     /**
      *
      * @return \Symfony\Bundle\FrameworkBundle\Client

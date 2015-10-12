@@ -9,6 +9,7 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Catrobat\AppBundle\Entity\GameJam;
 class SymfonySupport
 {
     private $fixture_dir;
@@ -135,6 +136,14 @@ class SymfonySupport
         return $this->default_user;
     }
     
+    
+    public function getDefaultProgramFile()
+    {
+        $file = $this->fixture_dir . "/test.catrobat";
+        assertTrue(is_file($file));
+        return $file;
+    }
+    
     public function setErrorDirectory($dir)
     {
         $this->error_directory = $dir;
@@ -152,6 +161,23 @@ class SymfonySupport
         foreach ($finder as $file) {
             $filesystem->remove($file);
         }
+    }
+    
+    public function insertDefaultGamejam()
+    {
+        $gamejam = new GameJam();
+        $gamejam->setName("Behat Generated Jam");
+        $start_date = new \DateTime();
+        $start_date->sub(new \DateInterval('P10D'));
+        $end_date = new \DateTime();
+        $end_date->add(new \DateInterval('P10D'));
+        
+        $gamejam->setStart($start_date);
+        $gamejam->setEnd($end_date);
+        $gamejam->setFormUrl("https://catrob.at/url/to/form");
+        
+        $this->getManager()->persist($gamejam);
+        $this->getManager()->flush();
     }
     
     public function insertUser($config = array())
@@ -263,6 +289,27 @@ class SymfonySupport
         $parameters['fileChecksum'] = md5_file($file->getPathname());
         $client = $this->getClient();
         $client->request('POST', '/pocketcode/api/upload/upload.json', $parameters, array($file));
+        $response = $client->getResponse();
+    
+        return $response;
+    }
+    
+    public function submit($file, $user)
+    {
+        if ($user == null) {
+            $user = $this->getDefaultUser();
+        }
+    
+        if (is_string($file)) {
+            $file = new UploadedFile($file, 'uploadedFile');
+        }
+    
+        $parameters = array();
+        $parameters['username'] = $user->getUsername();
+        $parameters['token'] = $user->getUploadToken();
+        $parameters['fileChecksum'] = md5_file($file->getPathname());
+        $client = $this->getClient();
+        $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, array($file));
         $response = $client->getResponse();
     
         return $response;

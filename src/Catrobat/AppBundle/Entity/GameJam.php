@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\GameJamRepository")
  */
 class GameJam
 {
@@ -22,7 +22,7 @@ class GameJam
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=300)
+     * @ORM\Column(type="string", length=300, nullable=true)
      */
     protected $form_url;
 

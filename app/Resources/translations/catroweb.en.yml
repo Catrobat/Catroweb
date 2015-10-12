@@ -639,3 +639,6 @@ ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
+  
+gamejam:
+  nojam: Sorry, there is no game jam at this time

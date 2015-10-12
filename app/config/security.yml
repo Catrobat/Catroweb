@@ -64,6 +64,11 @@ security:
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
+        api_submit:
+            pattern: ^.*/api/gamejam/submit.json
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
             
         debug:
             pattern: ^/debug

@@ -1,3 +1,4 @@
+@wip
 Feature: Submitting games to a game jam
 
 
@@ -24,7 +25,7 @@ Scenario: Resubmitting a game
       And I already filled the google form
      When I resubmit my game
      Then It should be updated
-      And I should not get then url to the google form
+      And I should not get the url to the google form
       And My game should still be accepted
 
 

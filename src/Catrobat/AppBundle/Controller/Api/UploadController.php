@@ -17,6 +17,9 @@ use Catrobat\AppBundle\Exceptions\Upload\InvalidChecksumException;
 use Catrobat\AppBundle\Exceptions\Upload\MissingPostDataException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Translation\TranslatorInterface;
+use Catrobat\AppBundle\Entity\GameJamRepository;
+use Doctrine\ORM\EntityRepository;
+use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 
 /**
  * @Route(service="controller.upload")
@@ -30,15 +33,18 @@ class UploadController
 
     private $programmanager;
 
+    private $gamejamrepository;
+
     private $tokengenerator;
 
     private $translator;
 
-    public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager, TokenGenerator $tokengenerator, TranslatorInterface $translator)
+    public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager, GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator, TranslatorInterface $translator)
     {
         $this->usermanager = $usermanager;
         $this->tokenstorage = $tokenstorage;
         $this->programmanager = $programmanager;
+        $this->gamejamrepository = $gamejamrepository;
         $this->tokengenerator = $tokengenerator;
         $this->translator = $translator;
     }
@@ -58,10 +64,15 @@ class UploadController
      */
     public function submitAction(Request $request)
     {
-        return $this->processUpload($request, true);
+        $jam = $this->gamejamrepository->getCurrentGameJam();
+        if ($jam == null)
+        {
+            throw new NoGameJamException();
+        }
+        return $this->processUpload($request, $jam);
     }
 
-    private function processUpload(Request $request, $submission = false)
+    private function processUpload(Request $request, $gamejam = null)
     {
         $response = array();
         if ($request->files->count() != 1) {
@@ -74,16 +85,20 @@ class UploadController
                 throw new InvalidChecksumException();
             } else {
                 $user = $this->tokenstorage->getToken()->getUser();
-                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp());
-        
-                $id = $this->programmanager->addProgram($add_program_request)->getId();
+                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
+                
+                $program = $this->programmanager->addProgram($add_program_request);
                 $user->setToken($this->tokengenerator->generateToken());
                 $this->usermanager->updateUser($user);
-        
-                $response['projectId'] = $id;
+                
+                $response['projectId'] = $program->getId();
                 $response['statusCode'] = StatusCode::OK;
                 $response['answer'] = $this->trans('success.upload');
                 $response['token'] = $user->getToken();
+                if ($gamejam !== null && !$program->isAccepted())
+                {
+                    $response['form'] = $gamejam->getFormUrl();
+                }
             }
         }
         
@@ -91,9 +106,7 @@ class UploadController
         
         return JsonResponse::create($response);
     }
-    
-    
-    
+
     private function trans($message, $parameters = array())
     {
         return $this->translator->trans($message, $parameters, 'catroweb');

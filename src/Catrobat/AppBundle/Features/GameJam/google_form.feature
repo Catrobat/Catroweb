@@ -1,6 +1,6 @@
+@disabled
 Feature: On upload a google form link should be created with some parameters set
 
-@wip
 Scenario: Parameters need to be set in the form url
     
     Given The form url of the current jam is
