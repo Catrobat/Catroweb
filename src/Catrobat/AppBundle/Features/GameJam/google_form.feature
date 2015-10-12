@@ -1,17 +1,6 @@
 Feature: On upload a google form link should be created with some parameters set
 
-
-Scenario: Parameters need to be set in the form url
- 
-    Given I am "Catrobat" with email "catrobat@catrob.at"
-     When I submit a game which gets the id "1"
-     Then The following patameters should be set in the form url:
-          | Parameter   | Value              |
-          | %CAT_NAME%  | Catrobat           |
-          | %CAT_ID%    | 1                  |
-          | %CAT_MAIL%  | catrobat@catrob.at |
-
-
+@wip
 Scenario: Parameters need to be set in the form url
     
     Given The form url of the current jam is
@@ -25,6 +14,17 @@ Scenario: Parameters need to be set in the form url
           https://someurl.google.com/myform?name=Catrobat&id=1&mail=catrobat@catrob.at
           """
 
+@disabled
+Scenario: Parameters need to be set in the form url
+ 
+    Given I am "Catrobat" with email "catrobat@catrob.at"
+     When I submit a game which gets the id "1"
+     Then The following patameters should be set in the form url:
+          | Parameter   | Value              |
+          | %CAT_NAME%  | Catrobat           |
+          | %CAT_ID%    | 1                  |
+          | %CAT_MAIL%  | catrobat@catrob.at |
+          
 @external
 Scenario: On google form submission, the server must be informed.
     
