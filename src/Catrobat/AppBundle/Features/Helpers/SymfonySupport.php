@@ -163,10 +163,10 @@ class SymfonySupport
         }
     }
     
-    public function insertDefaultGamejam()
+    public function insertDefaultGamejam($config = array())
     {
         $gamejam = new GameJam();
-        $gamejam->setName("Behat Generated Jam");
+        @$gamejam->setName($config['name'] ?: "Behat Generated Jam");
         $start_date = new \DateTime();
         $start_date->sub(new \DateInterval('P10D'));
         $end_date = new \DateTime();
@@ -174,7 +174,7 @@ class SymfonySupport
         
         $gamejam->setStart($start_date);
         $gamejam->setEnd($end_date);
-        $gamejam->setFormUrl("https://catrob.at/url/to/form");
+        @$gamejam->setFormUrl($config['formurl'] ?: "https://catrob.at/url/to/form");
         
         $this->getManager()->persist($gamejam);
         $this->getManager()->flush();

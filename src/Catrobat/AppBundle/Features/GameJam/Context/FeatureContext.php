@@ -8,7 +8,8 @@ use Catrobat\AppBundle\Entity\GameJam;
 
 class FeatureContext extends BaseContext
 {
-
+    private $i;
+    
     /**
      * Initializes context with parameters from behat.yml.
      *
@@ -183,4 +184,39 @@ class FeatureContext extends BaseContext
         $file = $this->getSymfonySupport()->getDefaultProgramFile();
         $this->getSymfonySupport()->upload($file, null);
     }
+    
+    /**
+     * @Given The form url of the current jam is
+     */
+    public function theFormUrlOfTheCurrentJamIs(PyStringNode $string)
+    {
+        $this->getSymfonySupport()->insertDefaultGamejam(array("formurl" => $string->getRaw()));
+    }
+    
+    /**
+     * @Given I am :arg1 with email :arg2
+     */
+    public function iAmWithEmail($arg1, $arg2)
+    {
+        $this->i = $this->insertUser(array("name" => $arg1, "email" => "$arg2"));
+    }
+    
+    /**
+     * @When I submit a game which gets the id :arg1
+     */
+    public function iSubmitAGameWhichGetsTheId($arg1)
+    {
+        $file = $this->getSymfonySupport()->getDefaultProgramFile();
+        $this->getSymfonySupport()->submit($file, $this->i);
+    }
+    
+    /**
+     * @Then The returned url should be
+     */
+    public function theReturnedUrlShouldBe(PyStringNode $string)
+    {
+        $answer = json_decode($this->getClient()->getResponse()->getContent(), true);
+        assertEquals($string->getRaw(), $answer['form']);
+    }
+    
 }

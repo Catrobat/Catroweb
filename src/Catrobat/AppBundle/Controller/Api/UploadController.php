@@ -97,7 +97,7 @@ class UploadController
                 $response['token'] = $user->getToken();
                 if ($gamejam !== null && !$program->isAccepted())
                 {
-                    $response['form'] = $gamejam->getFormUrl();
+                    $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
                 }
             }
         }
@@ -107,6 +107,15 @@ class UploadController
         return JsonResponse::create($response);
     }
 
+    private function assembleFormUrl($gamejam, $user, $program)
+    {
+        $url = $gamejam->getFormUrl();
+        $url = str_replace("%CAT_ID%", $program->getId(), $url);
+        $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
+        $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
+        return $url;
+    }
+    
     private function trans($message, $parameters = array())
     {
         return $this->translator->trans($message, $parameters, 'catroweb');
