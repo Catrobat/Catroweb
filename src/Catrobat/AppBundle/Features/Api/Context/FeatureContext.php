@@ -40,6 +40,7 @@ class FeatureContext extends BaseContext
    */
   public function __construct($error_directory)
   {
+      parent::__construct();
       $this->setErrorDirectory($error_directory);
       $this->request_parameters = array();
       $this->files = array();

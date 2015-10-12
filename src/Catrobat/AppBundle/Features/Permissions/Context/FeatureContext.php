@@ -1,11 +1,9 @@
 <?php
-
 namespace Catrobat\AppBundle\Features\Permissions\Context;
 
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
@@ -13,28 +11,39 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends BaseContext
 {
+
+    /**
+     * Initializes context with parameters from behat.yml.
+     *
+     * @param array $parameters            
+     */
+    public function __construct($error_directory)
+    {
+        parent::__construct();
+        $this->setErrorDirectory($error_directory);
+    }
+    
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Support Functions
-
     private function getPhiroProgramFile()
     {
-        $filepath = self::FIXTUREDIR.'/GeneratedFixtures/phiro.catrobat';
+        $filepath = self::FIXTUREDIR . '/GeneratedFixtures/phiro.catrobat';
         assertTrue(file_exists($filepath), 'File not found');
-
+        
         return new UploadedFile($filepath, 'test.catrobat');
     }
 
     private function getLegoProgramFile()
     {
-        $filepath = self::FIXTUREDIR.'/GeneratedFixtures/lego.catrobat';
+        $filepath = self::FIXTUREDIR . '/GeneratedFixtures/lego.catrobat';
         assertTrue(file_exists($filepath), 'File not found');
-
+        
         return new UploadedFile($filepath, 'test.catrobat');
     }
-
+    
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ////////////////////////////////////////////
-
+    
     /**
      * @When /^I upload a catrobat program with phiro bricks$/
      */
@@ -42,7 +51,7 @@ class FeatureContext extends BaseContext
     {
         $program = $this->getPhiroProgramFile();
         $response = $this->upload($program, null);
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -52,7 +61,7 @@ class FeatureContext extends BaseContext
     {
         $program = $this->getLegoProgramFile();
         $response = $this->upload($program, null);
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**

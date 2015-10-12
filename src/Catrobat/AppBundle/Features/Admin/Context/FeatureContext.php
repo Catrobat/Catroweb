@@ -346,6 +346,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function theLdapServerIsNotAvailable()
     {
         /**
+         *
          * @var $ldap_test_driver LdapTestDriver
          */
         $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');

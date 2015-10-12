@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Features\Ci\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
@@ -11,7 +10,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\Router;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
-
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
@@ -19,45 +17,49 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends BaseContext
 {
+
     private $hostname;
+
     private $secure;
 
     /**
      * Initializes context with parameters from behat.yml.
      *
-     * @param array $parameters
+     * @param array $parameters            
      */
     public function __construct($error_directory)
     {
+        parent::__construct();
         $this->setErrorDirectory($error_directory);
         $this->hostname = 'localhost';
         $this->secure = false;
     }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Hooks
-
-    /** @BeforeScenario */
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Hooks
+    
+    /**
+     * @BeforeScenario
+     */
     public function emptyUploadFolder()
     {
         $extract_dir = $this->getSymfonyParameter('catrobat.apk.dir');
         $this->emptyDirectory($extract_dir);
     }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Support Functions
-
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Support Functions
     private function getStandardProgramFile()
     {
-        $filepath = self::FIXTUREDIR.'test.catrobat';
+        $filepath = self::FIXTUREDIR . 'test.catrobat';
         assertTrue(file_exists($filepath), 'File not found');
-
+        
         return new UploadedFile($filepath, 'test.catrobat');
     }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Steps
-
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Steps
+    
     /**
      * @Given /^the server name is "([^"]*)"$/
      */
@@ -87,7 +89,9 @@ class FeatureContext extends BaseContext
      */
     public function iHaveAProgramWithId($arg1, $arg2)
     {
-        $config = array('name' => $arg1);
+        $config = array(
+            'name' => $arg1
+        );
         $this->insertProgram(null, $config);
     }
 
@@ -113,9 +117,12 @@ class FeatureContext extends BaseContext
     public function iStartAnApkGenerationOfMyProgram()
     {
         $client = $this->getClient();
-        $client->request('GET', '/pocketcode/ci/build/1', array(), array(), array('HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure));
+        $client->request('GET', '/pocketcode/ci/build/1', array(), array(), array(
+            'HTTP_HOST' => $this->hostname,
+            'HTTPS' => $this->secure
+        ));
         $response = $client->getResponse();
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -125,7 +132,7 @@ class FeatureContext extends BaseContext
     {
         $parameter_defs = $table->getHash();
         $expected_parameters = array();
-        for ($i = 0; $i < count($parameter_defs); ++$i ) {
+        for ($i = 0; $i < count($parameter_defs); ++ $i) {
             $expected_parameters[$parameter_defs[$i]['parameter']] = $parameter_defs[$i]['value'];
         }
         $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
@@ -169,13 +176,14 @@ class FeatureContext extends BaseContext
      */
     public function jenkinsUploadsTheApkFileToTheGivenUploadUrl()
     {
-        $filepath = self::FIXTUREDIR.'/test.catrobat';
+        $filepath = self::FIXTUREDIR . '/test.catrobat';
         assertTrue(file_exists($filepath), 'File not found');
         $temppath = $this->getTempCopy($filepath);
-        $files = array(new UploadedFile($temppath, 'test.apk'));
-        $url = '/pocketcode/ci/upload/1?token=UPLOADTOKEN';
-        $parameters = array(
+        $files = array(
+            new UploadedFile($temppath, 'test.apk')
         );
+        $url = '/pocketcode/ci/upload/1?token=UPLOADTOKEN';
+        $parameters = array();
         $this->getClient()->request('POST', $url, $parameters, $files);
     }
 
@@ -196,7 +204,7 @@ class FeatureContext extends BaseContext
     public function thereArePrograms(TableNode $table)
     {
         $programs = $table->getHash();
-        for ($i = 0; $i < count($programs); ++$i ) {
+        for ($i = 0; $i < count($programs); ++ $i) {
             $apk_status = Program::APK_NONE;
             if ($programs[$i]['apk status'] === 'ready') {
                 $apk_status = Program::APK_READY;
@@ -205,18 +213,18 @@ class FeatureContext extends BaseContext
             } elseif ($programs[$i]['apk status'] === 'none') {
                 $apk_status = Program::APK_NONE;
             }
-
+            
             $config = array(
                 'name' => $programs[$i]['name'],
                 'visible' => ($programs[$i]['visible'] === 'true'),
-                'apk_status' => $apk_status,
+                'apk_status' => $apk_status
             );
             $this->insertProgram(null, $config);
-
+            
             if ($programs[$i]['apk status'] == 'ready') {
                 /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
                 $apkrepository = $this->getSymfonyService('apkrepository');
-                $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR.'/test.catrobat')), $i);
+                $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $i);
             }
         }
     }
@@ -232,8 +240,11 @@ class FeatureContext extends BaseContext
             throw new PendingException('Program not found: ' + $arg1);
         }
         $router = $this->getSymfonyService('router');
-        $url = $router->generate('ci_download', array('id' => $program->getId(), 'flavor' => 'pocketcode'));
-
+        $url = $router->generate('ci_download', array(
+            'id' => $program->getId(),
+            'flavor' => 'pocketcode'
+        ));
+        
         $this->getClient()->request('GET', $url, array(), array());
     }
 
@@ -243,7 +254,9 @@ class FeatureContext extends BaseContext
     public function iShouldReceiveTheApkFile()
     {
         $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
-        $code = $this->getClient()->getResponse()->getStatusCode();
+        $code = $this->getClient()
+            ->getResponse()
+            ->getStatusCode();
         assertEquals(200, $code);
         assertEquals('application/vnd.android.package-archive', $content_type);
     }
@@ -253,7 +266,9 @@ class FeatureContext extends BaseContext
      */
     public function theApkFileWillNotBeFound()
     {
-        $code = $this->getClient()->getResponse()->getStatusCode();
+        $code = $this->getClient()
+            ->getResponse()
+            ->getStatusCode();
         assertEquals(404, $code);
     }
 
@@ -273,7 +288,7 @@ class FeatureContext extends BaseContext
                 $program->setApkStatus(Program::APK_READY);
                 /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
                 $apkrepository = $this->getSymfonyService('apkrepository');
-                $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR.'/test.catrobat')), $program->getId());
+                $apkrepository->save(new File($this->getTempCopy(self::FIXTUREDIR . '/test.catrobat')), $program->getId());
                 break;
             default:
                 $program->setApkStatus(Program::APK_NONE);
@@ -298,7 +313,9 @@ class FeatureContext extends BaseContext
     {
         $url = '/pocketcode/ci/failed/1?token=UPLOADTOKEN';
         $this->getClient()->request('GET', $url);
-        assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
+        assertEquals(200, $this->getClient()
+            ->getResponse()
+            ->getStatusCode());
     }
 
     /**
@@ -311,7 +328,9 @@ class FeatureContext extends BaseContext
         if ($program === null) {
             throw new PendingException('last program not found');
         }
-        $file = $this->generateProgramFileWith(array('name' => $program->getName()));
+        $file = $this->generateProgramFileWith(array(
+            'name' => $program->getName()
+        ));
         $this->upload($file, null);
     }
 
