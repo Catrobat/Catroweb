@@ -775,7 +775,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-<<<<<<< HEAD
    * @Then /^the link of "([^"]*)" should open "([^"]*)"$/
    */
   public function theLinkOfShouldOpen($identifier, $url_type)

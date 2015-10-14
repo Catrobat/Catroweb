@@ -351,4 +351,16 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
         $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
         $ldap_test_driver->setThrowExceptionOnSearch(true);
     }
+
+    /**
+     * @Then /^URI from "([^"]*)" should be "([^"]*)"$/
+     */
+    public function uriFromShouldBe($arg1, $arg2)
+    {
+        $link = $this->getClient()->getCrawler()->selectLink($arg1)->link();
+
+        if(!strcmp($link->getUri(), $arg2))
+            assert(false, "expected: " . $arg2 . "  get: " . $link->getURI());
+    }
+
 }
