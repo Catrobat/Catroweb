@@ -10,14 +10,14 @@ class AddProgramRequest
     private $user;
     private $programfile;
     private $ip;
-    private $submission;
+    private $gamejam;
 
-    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $submission = false)
+    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null)
     {
         $this->user = $user;
         $this->programfile = $programfile;
         $this->ip = $ip;
-        $this->submission = $submission;
+        $this->gamejam = $gamejam;
     }
 
     public function getUser()
@@ -45,8 +45,8 @@ class AddProgramRequest
         return $this->ip;
     }
     
-    public function isSubmission()
+    public function getGamejam()
     {
-        return $this->submission;
+        return $this->gamejam;
     }
 }

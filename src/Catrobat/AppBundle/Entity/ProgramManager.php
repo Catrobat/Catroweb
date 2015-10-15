@@ -77,6 +77,10 @@ class ProgramManager
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
+        if ($program->getGamejam() == null)
+        {
+            $program->setGamejam($request->getGamejam());
+        }
         
         $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));
         

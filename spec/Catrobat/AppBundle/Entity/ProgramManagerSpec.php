@@ -4,6 +4,7 @@ namespace spec\Catrobat\AppBundle\Entity;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Catrobat\AppBundle\Entity\GameJam;
 
 class ProgramManagerSpec extends ObjectBehavior
 {
@@ -30,6 +31,7 @@ class ProgramManagerSpec extends ObjectBehavior
         $request->getProgramfile()->willReturn($file);
         $request->getUser()->willReturn($user);
         $request->getIp()->willReturn('127.0.0.1');
+        $request->getGamejam()->willReturn(null);
         $file_extractor->extract($file)->willReturn($extracted_file);
         $inserted_program->getId()->willReturn(1);
         $event_dispatcher->dispatch(Argument::any(), Argument::any())->willReturnArgument(1);
@@ -101,5 +103,12 @@ class ProgramManagerSpec extends ObjectBehavior
     {
         $this->addProgram($request)->shouldHaveType('Catrobat\AppBundle\Entity\Program');
         $event_dispatcher->dispatch('catrobat.program.successful.upload', Argument::type('Catrobat\AppBundle\Events\ProgramInsertEvent'))->shouldHaveBeenCalled();
+    }
+    
+    public function it_marks_the_game_as_gamejam_submission_if_a_jam_is_provided($request)
+    {
+        $request->getGamejam()->willReturn(new GameJam());
+        $program = $this->addProgram($request)->getWrappedObject();
+        expect($program->getGamejam())->notToBeNull();
     }
 }

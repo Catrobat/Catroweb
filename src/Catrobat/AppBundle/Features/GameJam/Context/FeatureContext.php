@@ -78,7 +78,7 @@ class FeatureContext extends BaseContext
      */
     public function iFillOutTheGoogleForm()
     {
-        $this->getClient()->request("GET", "/pocketcode/gamejam/submit/1");
+        $this->getClient()->request("GET", "/pocketcode/api/gamejam/submit/1");
         assertEquals("200", $this->getClient()->getResponse()->getStatusCode());
     }
 
@@ -105,7 +105,7 @@ class FeatureContext extends BaseContext
      */
     public function iAlreadyFilledTheGoogleForm()
     {
-        $this->getClient()->request("GET", "/pocketcode/gamejam/submit/1");
+        $this->getClient()->request("GET", "/pocketcode/api/gamejam/submit/1");
         assertEquals("200", $this->getClient()->getResponse()->getStatusCode());
     }
 

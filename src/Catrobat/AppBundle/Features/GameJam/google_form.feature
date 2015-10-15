@@ -31,4 +31,4 @@ Scenario: On google form submission, the server must be informed.
     Given The jam is on "https://share.catrob.at/pocketalice/"
       And I filled the google form for my game with id "33"
      When I submit it to google
-     Then The url "https://share.catrob.at/pocketalice/api/jam/accept/33" should be called
+     Then The url "https://share.catrob.at/pocketalice/api/gamejam/accept/33" should be called
