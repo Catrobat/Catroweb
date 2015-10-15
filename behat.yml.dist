@@ -1,4 +1,7 @@
 default:
+    gherkin:
+        filters:
+            tags: "@~disabled"
     formatters:
         pretty:   false
         progress: true
