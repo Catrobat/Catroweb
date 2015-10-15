@@ -116,6 +116,12 @@ sonata_admin:
                     - catrowebadmin.block.tools.notify
                     - catrowebadmin.block.tools.rudewords
 
+            sonata.admin.group.gamejams:
+                label:           GameJam
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-cogs"></i>'
+                items:
+                    - catrowebadmin.block.gamejam
 
     security:
         handler: sonata.admin.security.handler.acl
