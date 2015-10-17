@@ -27,6 +27,7 @@ class MediaPackageFileAdmin extends Admin
             ->add('name', 'text', array('label' => 'Name'))
             ->add('file', 'file', $file_options)
             ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory', 'required' => true))
+            ->add('flavor', 'text', array('required' => false))
             ->add('active', null, array('required' => false))
             ;
     }
@@ -47,6 +48,7 @@ class MediaPackageFileAdmin extends Admin
             ->add("name")
             ->add('file', 'string', array('template' => ':Admin:mediapackage_file.html.twig'))
             ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory'))
+            ->add('flavor', null, array('editable' => true))
             ->add('downloads')
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(

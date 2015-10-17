@@ -327,7 +327,7 @@ class DefaultController extends Controller
    * @Route("/media-library/{package_name}", name="media_package")
    * @Method({"GET"})
    */
-  public function MediaPackageAction($package_name)
+  public function MediaPackageAction($package_name, $flavor = 'pocketcode')
   {
     /**
      * @var $package \Catrobat\AppBundle\Entity\MediaPackage
@@ -346,10 +346,13 @@ class DefaultController extends Controller
     foreach($package->getCategories() as $category) {
       $files = array();
       foreach($category->getFiles() as $file) {
-        if(!$file->getActive()) {
+        $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
+        $flavors_arr = explode(",", $flavors_arr);
+        if(!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr))) {
           continue;
         }
         $files[] = array(
+          'id' => $file->getId(),
           'data' => $file,
           'downloadUrl' => $this->generateUrl('download_media', array(
             'id' => $file->getId(),

@@ -23,7 +23,7 @@ oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
 ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start%here%link_end%.'
+clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 
 programs:
   featured: Featured
@@ -448,14 +448,14 @@ help:
       card10:
         title: "Show variable"
         description: "Show the value of a variable."
-        one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7%). Additionally add a second background to which it should change when it receives a broadcast message."
+        one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
         two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
         three: "Through „Show variable“ you can display the values on stage."
       card11:
         title: "Collision detection"
         description: "Detect a collision between two objects."
-        one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7%)."
-        two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+        one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+        two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
       card12:
         title: "Face detection"
         description: "Control an object by using face detection."

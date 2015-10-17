@@ -766,12 +766,30 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^the link to "([^"]*)" should be "([^"]*)"$/
+   * @Then /^the media file "([^"]*)" must have the download url "([^"]*)"$/
    */
-  public function theLinkToShouldBe($name, $name_url)
+  public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
-    $bla = $this->getSession()->getPage()->find('css', '.program a')->getAttribute('href');
-    assertTrue(is_int(strpos($bla, $name_url)));
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id." a")->getAttribute("href");
+    assertTrue(is_int(strpos($link, $file_url)));
+  }
+
+  /**
+   * @Then /^I should see media file with id "([^"]*)"$/
+   */
+  public function iShouldSeeMediaFileWithId($id)
+  {
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id);
+    assertNotNull($link);
+  }
+
+  /**
+   * @Then /^I should not see media file with id "([^"]*)"$/
+   */
+  public function iShouldNotSeeMediaFileWithId($id)
+  {
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id);
+    assertNotNull($link);
   }
 
   /**
@@ -1187,4 +1205,5 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         fclose($myfile);
         assertTrue(false, 'No entry found in parameters.yml!');
     }
+
 }
