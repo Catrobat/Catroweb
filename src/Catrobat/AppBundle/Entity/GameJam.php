@@ -42,6 +42,22 @@ class GameJam
     protected $programs;
     
     /**
+     * @ORM\ManyToMany(targetEntity="Program")
+     * @ORM\JoinTable(name="gamejams_sampleprograms",
+     *      joinColumns={@ORM\JoinColumn(name="gamejam_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="program_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $sample_programs;
+    
+    
+    public function __construct()
+    {
+        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sample_programs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
      * Get id
      *
      * @return integer
@@ -146,13 +162,6 @@ class GameJam
     {
         return $this->end;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add program
@@ -186,5 +195,39 @@ class GameJam
     public function getPrograms()
     {
         return $this->programs;
+    }
+
+    /**
+     * Add sampleProgram
+     *
+     * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
+     *
+     * @return GameJam
+     */
+    public function addSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
+    {
+        $this->sample_programs[] = $sampleProgram;
+
+        return $this;
+    }
+
+    /**
+     * Remove sampleProgram
+     *
+     * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
+     */
+    public function removeSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
+    {
+        $this->sample_programs->removeElement($sampleProgram);
+    }
+
+    /**
+     * Get samplePrograms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSamplePrograms()
+    {
+        return $this->sample_programs;
     }
 }

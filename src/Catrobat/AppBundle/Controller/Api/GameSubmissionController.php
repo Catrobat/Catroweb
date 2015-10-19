@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Catrobat\AppBundle\Entity\GameJam;
+use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
+use Catrobat\AppBundle\Responses\ProgramListResponse;
 
 class GameSubmissionController extends Controller
 {
@@ -39,4 +43,19 @@ class GameSubmissionController extends Controller
         }
         
     }
+    
+    /**
+     * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs")
+     * @Method({"GET"})
+     */
+    public function getSampleProgramsForCurrentGamejam()
+    {
+        $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
+        if ($gamejam == null)
+        {
+            throw new NoGameJamException();
+        }
+        return new ProgramListResponse($gamejam->getSamplePrograms(), count($gamejam->getSamplePrograms()));
+    }
+    
 }
