@@ -7,12 +7,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class GameJamAdmin extends Admin
 {
     protected $baseRouteName = 'admin_gamejam';
     protected $baseRoutePattern = 'gamejam';
-
+    
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -46,7 +47,10 @@ class GameJamAdmin extends Admin
             ->add('start')
             ->add('end')
             ->add('_action', 'actions', array('actions' => array(
-                'edit' => array(), 'delete' => array(), 'show' => array()
+                'edit' => array(),
+                'delete' => array(),
+                'show' => array(),
+                'show_submissions' => array('template' => ':CRUD:list__action_show_submitted_programs.html.twig')
             )))
         ;
     }
@@ -63,4 +67,5 @@ class GameJamAdmin extends Admin
         ;
     
     }
+    
 }

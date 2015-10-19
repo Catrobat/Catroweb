@@ -97,9 +97,19 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Maintain, icon: '<i class="fa fa-cogs"></i>' }
         arguments: [null, null, AppBundle:Admin\Maintain]
 
+
+# =========================== GameJam ===========================
+
       catrowebadmin.block.gamejam:
         class: Catrobat\AppBundle\Admin\GameJamAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: GameJams }
-        arguments: [null, Catrobat\AppBundle\Entity\GameJam, null]
+        arguments: [catrowebadmin.block.gamejam, Catrobat\AppBundle\Entity\GameJam, null]
+        calls:
+          - [addChild, ["@catrowebadmin.block.gamejam.submitted"]]
       
+      catrowebadmin.block.gamejam.submitted:
+        class: Catrobat\AppBundle\Admin\GameJamSubmittedProgramsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Submittions }
+        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
