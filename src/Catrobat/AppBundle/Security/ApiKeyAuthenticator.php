@@ -18,11 +18,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
-    protected $user_provider;
+    protected $translator;
 
-    public function __construct(UserProvider $user_provider, TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator)
     {
-        $this->user_provider = $user_provider;
         $this->translator = $translator;
     }
 
@@ -40,7 +39,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
 
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
-        $user = $this->user_provider->loadUserByUsername($token->getUsername());
+        $user = $userProvider->loadUserByUsername($token->getUsername());
         if (!$user) {
             throw new AuthenticationException('No user found');
         }
