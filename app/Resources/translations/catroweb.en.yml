@@ -33,6 +33,7 @@ programs:
     downloaded: Most downloaded
   random: Random Programs
   downloads: %downloads% downloads
+  sample: Example Programs
   views: %views% views
   reportAsInappropriate: Report as inappropriate
   languageVersion: 'Catrobat Language version: %languageVersion%'

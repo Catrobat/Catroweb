@@ -43,6 +43,7 @@ class FeaturedUrlAdmin extends Admin
             'choices' => array(
               'pocketcode' => 'Pocketcode',
               'pocketphiropro' => 'pocketphiropro',
+              'pocketalice' => "Pocketalice"
             ), ))
             ->add('active', null, array('required' => false))
             ;
