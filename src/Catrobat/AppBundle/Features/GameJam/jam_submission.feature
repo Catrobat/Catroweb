@@ -1,4 +1,3 @@
-@wip
 Feature: Submitting games to a game jam
 
 

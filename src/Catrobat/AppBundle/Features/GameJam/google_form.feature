@@ -1,4 +1,3 @@
-@wip
 Feature: On upload a google form link should be created with some parameters set
 
 Scenario: Parameters need to be set in the form url

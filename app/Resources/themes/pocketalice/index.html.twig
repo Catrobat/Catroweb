@@ -19,9 +19,14 @@
     <h1>{{ "programs.sample"|trans({}, "catroweb") }}</h1>
     <div class="programs"></div>
   </div>
-
+  
+  <div id="submissions">
+    <h1>{{ "programs.submitted"|trans({}, "catroweb") }}</h1>
+    <div class="programs"></div>
+  </div>
+  
   <div id="newest">
-    <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
+    <h1>{{ "programs.uploaded"|trans({}, "catroweb") }}</h1>
     <div class="programs"></div>
   </div>
 
@@ -32,8 +37,10 @@
   <script src="{{ asset('./js/plugins/owl.carousel.min.js') }}"></script>
   <script>
     var sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}');
+    var submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}');
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
     sample.init();
     newest.init();
+    submissions.init();
   </script>
 {% endblock %}

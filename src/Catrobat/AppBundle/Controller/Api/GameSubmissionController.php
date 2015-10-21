@@ -11,6 +11,7 @@ use Catrobat\AppBundle\Entity\GameJam;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
+use Doctrine\Common\Collections\Criteria;
 
 class GameSubmissionController extends Controller
 {
@@ -56,6 +57,29 @@ class GameSubmissionController extends Controller
             throw new NoGameJamException();
         }
         return new ProgramListResponse($gamejam->getSamplePrograms(), count($gamejam->getSamplePrograms()));
+    }
+    
+    /**
+     * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions")
+     * @Method({"GET"})
+     */
+    public function getSubmissionsForCurrentGamejam(Request $request)
+    {
+        $limit = intval($request->query->get('limit', 20));
+        $offset = intval($request->query->get('offset', 0));
+        
+        $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
+        if ($gamejam == null)
+        {
+            throw new NoGameJamException();
+        }
+        $criteria_count = Criteria::create()
+            ->where(Criteria::expr()->eq("accepted", true));
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("accepted", true))
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+        return new ProgramListResponse($gamejam->getPrograms()->matching($criteria), $gamejam->getPrograms()->matching($criteria_count)->count());
     }
     
 }

@@ -77,7 +77,8 @@ class ProgramManager
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
-        if ($program->getGamejam() == null)
+
+        if ($request->getGamejam() != null)
         {
             $program->setGamejam($request->getGamejam());
         }

@@ -178,6 +178,7 @@ class SymfonySupport
         
         $this->getManager()->persist($gamejam);
         $this->getManager()->flush();
+        return $gamejam;
     }
     
     public function insertUser($config = array())
@@ -224,9 +225,20 @@ class SymfonySupport
         $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
         $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
         $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
+        $program->setAccepted(isset($config['accepted']) ? $config['accepted'] : false);
+        $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
         $em->persist($program);
+        
+        // FIXXME: why exactly do we have to do this?
+        if (isset($config['gamejam']))
+        {
+            $jam = $config['gamejam'];
+            $jam->addProgram($program);
+            $em->persist($jam);
+        }
+
         $em->flush();
-    
+        
         return $program;
     }
     

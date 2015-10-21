@@ -35,6 +35,8 @@ programs:
   downloads: %downloads% downloads
   sample: Example Programs
   views: %views% views
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
   reportAsInappropriate: Report as inappropriate
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: Please %login% to report this program as inappropriate.
