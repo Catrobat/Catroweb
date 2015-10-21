@@ -1,25 +1,25 @@
-@import 'default';
+
 
 @font-face {
   font-family: 'Roboto';
-  src: url('Roboto/Roboto-Regular-webfont.eot');
-  src: local('Roboto Regular'), local('Roboto-Regular'), url('Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto/Roboto-Regular-webfont.woff') format('woff'), url('Roboto/Roboto-Regular-webfont.ttf') format('truetype'), url('Roboto/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
+  src: url('../css/fonts/Roboto-Regular-webfont.eot');
+  src: local('Roboto Regular'), local('Roboto-Regular'), url('../css/fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../css/fonts/Roboto-Regular-webfont.woff') format('woff'), url('../css/fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('../css/fonts/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('Roboto/Roboto-Italic-webfont.eot');
-  src: local('Roboto Italic'), local('Roboto-Italic'), url('Roboto/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto/Roboto-Italic-webfont.woff') format('woff'), url('Roboto/Roboto-Italic-webfont.ttf') format('truetype'), url('Roboto/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
+  src: url('../css/fonts/Roboto-Italic-webfont.eot');
+  src: local('Roboto Italic'), local('Roboto-Italic'), url('../css/fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../css/fonts/Roboto-Italic-webfont.woff') format('woff'), url('../css/fonts/Roboto-Italic-webfont.ttf') format('truetype'), url('../css/fonts/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('Roboto/Roboto-Bold-webfont.eot');
-  src: local('Roboto Bold'), local('Roboto-Bold'), url('Roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto/Roboto-Bold-webfont.woff') format('woff'), url('Roboto/Roboto-Bold-webfont.ttf') format('truetype'), url('Roboto/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
+  src: url('../css/fonts/Roboto-Bold-webfont.eot');
+  src: local('Roboto Bold'), local('Roboto-Bold'), url('../css/fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../css/fonts/Roboto-Bold-webfont.woff') format('woff'), url('../css/fonts/Roboto-Bold-webfont.ttf') format('truetype'), url('../css/fonts/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
   font-weight: bold;
   font-style: normal;
 }
@@ -257,7 +257,7 @@ form {
   img {
     height: 84px;
     width: 84px;
-    border: 2px solid #17a5b8; /* TODO CHANGE COLORRRR TO VARIABLE */
+    border: 2px solid @program-img-color;
   }
 
   .no-programs {

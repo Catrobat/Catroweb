@@ -1,0 +1,28 @@
+
+@import 'default';
+@import 'elements';
+@import 'brain';
+@import 'footer';
+@import 'header';
+@import 'images';
+
+header {
+  nav {
+    #menu {
+      background: none;
+      
+      .btn-menu {
+        border-left: 1px solid white;
+      }
+
+      input {
+        background: @default-input-background-color;
+        border: 0;
+        padding: 8px;
+        width: 200px;
+        .rounded(2px);
+        margin-right: 8px;
+      }
+    }
+  }
+}

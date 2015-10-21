@@ -31,7 +31,8 @@ class AppExtension extends \Twig_Extension
             'checkCatrobatLanguage' => new \Twig_Function_Method($this, 'checkCatrobatLanguage'),
             'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
             'getMediaPackageImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageImageUrl'),
-            'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl')
+            'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl'),
+            'flavor' => new \Twig_Function_Method($this, 'getFlavor')
         );
     }
 
@@ -103,6 +104,13 @@ class AppExtension extends \Twig_Extension
       return true;
     }
 
+    public function getFlavor()
+    {
+        $request = $this->request_stack->getCurrentRequest();
+        return $request->attributes->get('flavor');
+    }
+    
+    
     /**
      * @param $object MediaPackageFile
      * @return null|string

@@ -7,11 +7,8 @@
   <title>Pocket Alice Website {% block title %}{% endblock %}</title>
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}" />
 
-  {% stylesheets 'css/plugins/*'
-                 'css/base/*' filter='cssrewrite,lessphp' output='compiled/base.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
-  {% endstylesheets %}
-
+  <link rel="stylesheet" href="{{ asset('css/'~flavor()~'/base.css') }}" media="screen"/>
+  
   {% javascripts 'js/plugins/*'
                  'js/base/*' output='compiled/script.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -27,7 +24,6 @@
       {% include ':Default:header.html.twig' %}
     {% endblock %}
   </header>
-
   <article>
     {% block body %}{% endblock %}
   </article>

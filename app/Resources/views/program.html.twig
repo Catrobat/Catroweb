@@ -1,9 +1,7 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets 'css/custom/program.less' filter='cssrewrite,lessphp' output='compiled/program.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" xmlns="http://www.w3.org/1999/html"/>
-    {% endstylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/'~flavor()~'/program.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}

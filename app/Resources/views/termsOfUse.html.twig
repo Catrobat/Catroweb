@@ -1,9 +1,7 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  {% stylesheets 'css/custom/termsofuse.less' filter='cssrewrite,lessphp' output='compiled/termsofuse.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" />
-  {% endstylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/'~flavor()~'/termsofuse.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}

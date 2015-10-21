@@ -132,3 +132,4 @@ knp_paginator:
 liip_theme:
     themes: ['pocketcode', 'pocketalice', 'pocketphiro']
     active_theme: 'pocketcode'
+    assetic_integration: true
