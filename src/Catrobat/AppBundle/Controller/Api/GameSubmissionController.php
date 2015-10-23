@@ -12,12 +12,13 @@ use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class GameSubmissionController extends Controller
 {
 
     /**
-     * @Route("/api/gamejam/submit/{id}", name="gamejam_form_submission")
+     * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission")
      * @Method({"GET"})
      */
     public function formSubmittedAction(Request $request, Program $program)
@@ -82,4 +83,37 @@ class GameSubmissionController extends Controller
         return new ProgramListResponse($gamejam->getPrograms()->matching($criteria), $gamejam->getPrograms()->matching($criteria_count)->count());
     }
     
+    /**
+     * @Route("/gamejam/submit/{id}", name="gamejam_web_submit")
+     * @Method({"GET"})
+     */
+    public function webSubmitAction(Request $request, Program $program)
+    {
+        $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
+        if ($gamejam == null)
+        {
+            throw new \Exception("No Game Jam!");
+        }
+        if ($program->getGamejam() != null && $program->getGamejam() != $gamejam)
+        {
+            throw new \Exception("Game was alraedy submitted to another gamejam!");
+        }
+        if ($program->isAccepted())
+        {
+            return new RedirectResponse($this->generateUrl("program", array("id" => $program->getId())));
+        }
+        $program->setGamejam($gamejam);
+        $this->getDoctrine()->getManager()->persist($program);
+        $this->getDoctrine()->getManager()->flush();
+        
+        $url = $gamejam->getFormUrl();
+        
+        if ($url != null) {
+            return new RedirectResponse($url);
+        }
+        else
+        {
+            return new RedirectResponse($this->generateUrl("program", array("id" => $program->getId())));
+        }
+    }
 }

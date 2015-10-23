@@ -144,7 +144,7 @@ services:
     app.twig_extension:
         class: Catrobat\AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack", "@mediapackagefilerepository"]
+        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository"]
         tags:
             - { name: twig.extension }
             

@@ -6,21 +6,24 @@ use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Catrobat\AppBundle\Entity\GameJamRepository;
 
 class AppExtension extends \Twig_Extension
 {
     private $request_stack;
     private $mediapackage_file_repository;
+    private $gamejamrepository;
     private $supported_languages = array(
         'en',
         'de',
     //    "zh_TW"
     );
 
-    public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo)
+    public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo, GameJamRepository $gamejamrepository)
     {
         $this->request_stack = $request_stack;
         $this->mediapackage_file_repository = $mediapackage_file_repo;
+        $this->gamejamrepository = $gamejamrepository;
     }
 
     public function getFunctions()
@@ -32,7 +35,8 @@ class AppExtension extends \Twig_Extension
             'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
             'getMediaPackageImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageImageUrl'),
             'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl'),
-            'flavor' => new \Twig_Function_Method($this, 'getFlavor')
+            'flavor' => new \Twig_Function_Method($this, 'getFlavor'),
+            'getCurrentGameJam' => new \Twig_Function_Method($this, 'getCurrentGameJam')
         );
     }
 
@@ -147,5 +151,10 @@ class AppExtension extends \Twig_Extension
             default:
                 return null;
         }
+    }
+    
+    public function getCurrentGameJam()
+    {
+        return $this->gamejamrepository->getCurrentGameJam();
     }
 }

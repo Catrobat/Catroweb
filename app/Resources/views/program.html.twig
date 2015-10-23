@@ -73,9 +73,25 @@
             </tr>
           </table>
         </button>
-
+        
       </div>
-
+      {% if program.user == app.user %}
+      {% if not program.gamejam or not program.accepted %}
+        {% set jam = getCurrentGameJam() %}
+        {% if jam %}
+        <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
+        <button id="gamejam-submittion" class="btn btn-jam download-button">
+          <table>
+            <tr>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+              <td>{{ "gamejam.submit"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
+        </a>
+        {% endif %}
+      {% endif %}
+      {% endif %}
       <br>
 
       <table id="copy-link">

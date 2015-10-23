@@ -17,7 +17,7 @@ class GameJamSubmittedProgramsAdmin extends Admin
         ->add('user')
         ->add('name')
         ->add('description')
-        ->add('accepted')
+        ->add('accepted', 'boolean', array('editable' => true))
         ;
     }
     
