@@ -11,12 +11,27 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class GameJamAdmin extends Admin
 {
+    public function getNewInstance()
+    {
+        $instance = parent::getNewInstance();
+    
+        $instance->setStart(new \DateTime());
+        $instance->setEnd(new \DateTime());
+        
+        return $instance;
+    }
+    
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $returnurl = $this->getConfigurationPool()->getContainer()->get('router')->generate('gamejam_form_submission', array("id" => 42), true);
+        $returnurl = str_replace('42', '%CAT_ID%', $returnurl);
         $formMapper
             ->add('name')
-            ->add('form_url', null, array('sonata_help' => 'Url to the google form, use %CAT_NAME%, %CAT_ID%, and %CAT_EMAIL% as placeholder'))
+            ->add('form_url', null, array('sonata_help' => '
+                Url to the google form, use <code>%CAT_NAME%</code>, <code>%CAT_ID%</code>, and <code>%CAT_EMAIL%</code> as placeholder<br>
+                Make sure this form calls <code>' . $returnurl . '</code> after completion
+                '))
             ->add('start')
             ->add('end')
             ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program'),array('admin_code' => 'catrowebadmin.block.programs.all'))
