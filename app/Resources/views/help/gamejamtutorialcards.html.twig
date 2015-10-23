@@ -1,0 +1,31 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+  <h1>{{ ("help.aliceGameJamTutorialcards.title")|trans({}, "catroweb") }}</h1>
+
+  <div id="gamejam" class="tutorialcards-container size-large">
+    <p class="description">{{ ("help.aliceGameJamTutorialcards.description")|trans({}, "catroweb") }}</p>
+
+    {% for i in 1..count %}
+      <a href="{{ path('catrobat_web_gamejamtutorialcards', {'page': i}) }}">
+        <div class="col-1">
+          <img src="{{ asset('images/help/alice/'~i~'.jpg') }}" alt="" title=""/>
+            {#<span id="title-{{ i }}" class="title size-xlarge">{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>#}
+            <div id="title-{{ i }}" class="title size-xlarge">{{ ("help.aliceGameJamTutorialcards.title"~i~"")|trans({}, "catroweb") }}</div>
+            <div id="description-{{ i }}" class="description size-medium">{{ ("help.aliceGameJamTutorialcards.description"~i~"")|trans({}, "catroweb")|nl2br }}</div>
+        </div>
+      </a>
+    {% endfor %}
+
+    <div class="clear"></div>
+
+  </div>
+
+{% endblock %}
+

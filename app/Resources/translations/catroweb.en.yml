@@ -496,6 +496,34 @@ help:
       text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
       text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
       text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
+  aliceGameJamTutorialcards:
+      title: "TITLE HERE"
+      description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+      title1: "Welcome to Wonderland"
+      description1: "Learn how to let one of your characters come to life with a simple animation and master how to make your character do something when tapping them."
+      title2: "Save Alice!"
+      description2: "Here you will learn how to control a character using the inclination sensors of your phone. We will also show you how to check if your character is touching an object falling from the sky."
+      title3: "The Hatter - Hit and Run"
+      description3: "In this tutorial you will learn how to create a scene that looks like it is moving.\nAnother thing we will show you is how to make one of your characters shoot other objects. "
+      title4: "Whack a Cheshire Cat"
+      description4: "In this tutorial you will learn how to create a scoring system."
+      title5: "A Rabbits Race"
+      description5: "Learn how to create a vertically scrolling background."
+      card1:
+        title: "Title1"
+        description: "des1"
+      card2:
+        title: "Title2"
+        description: "des2"
+      card3:
+        title: "Title3"
+        description: "des3"
+      card4:
+        title: "Title4"
+        description: "des4"
+      card5:
+        title: "Title5"
+        description: "des5"
 
 oauth:
   username_header: Thank you for signing up to Pocket Code!
