@@ -230,4 +230,9 @@ class GameJam
     {
         return $this->sample_programs;
     }
+    
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

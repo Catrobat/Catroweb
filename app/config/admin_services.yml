@@ -112,4 +112,4 @@ services:
         class: Catrobat\AppBundle\Admin\GameJamSubmittedProgramsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Submittions }
-        arguments: [null, Catrobat\AppBundle\Entity\Program, null]
+        arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\GameJamSubmittedPrograms]

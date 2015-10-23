@@ -18,11 +18,20 @@ class GameJamSubmittedProgramsAdmin extends Admin
         ->add('name')
         ->add('description')
         ->add('accepted', 'boolean', array('editable' => true))
+        ->add('_action', 'actions', array(
+            'actions' => array(
+                'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),
+                'removeFromGameJam' => array(
+                     'template' => ':CRUD:list__action_remove_from_gamejam.html.twig',
+                 )
+            )
+          ))
         ;
     }
     
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list'));
+        $collection->clearExcept(array('list','edit'));
+        $collection->add('removeFromGameJam', $this->getRouterIdParameter().'/removeFromGameJam');
     }
 }
