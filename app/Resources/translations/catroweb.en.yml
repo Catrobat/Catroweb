@@ -511,10 +511,52 @@ help:
       description5: "Learn how to create a vertically scrolling background."
       card1:
         title: "Title1"
-        description: "des1"
+        description: |
+          Hello and Welcome to this Pocket Code Turorial. In this lesson i will first show you how to let character come to live with a simple animation. Secondly i will demonstrate how to make your characters do something when tapped. So lets get started.
+
+          We have already prepared a background and a few other characters. If you like these grafics you can download them from the Pocket Code media library. As you can see here in our Example there is a 5th character missing. We want to add Alice to our Program so add her as a new Object.
+
+          To do that tap the "Plus" Symbol and select an Image for Alice. Then name the new Object and hit "ok". Press play to test the program and you will see that alice doesnt quite fit into the group yet. You will need to change her position. Tapp the "axis on" Button to have a look at the coordinate system. Now you know how you have to set alices position so she fits in.
+
+          Go back to her Scripts and tap "Plus". Add a "when progam started" Brick from the control category. Because we want to move alice when the program starts add a "Place at" Brick from the motion Category. Enter her new Position into the Brick and test the Program. If your character is not in the right Place just go back and try new values.
+
+          Now that she fits into the group we want to make her move. For that to work you have to add another look to her. Go back to her scripts and add a "Wait" with a pause of 0.2 seconds wich makes the characters look more natural. Next insert a forever loop because we want alice to keep moving for the duration of the program. Add another "wait" brick and a "next look" Brick within the "Forever" loop. Now test the program and you see that alice moves.
+
+          As you are done with the animation you should add the animation that happens when you tapp alice. We want to show a speech bubble next to alice when she is tapped. Add the bubble as a new object. You can find it in the media library. We want the bubble to be hidden when the program starts so add a "when program started" and a "hide" Brick. Also adjust the position as we already did with Alice.
+
+          As it is alice that is tapped to show the bubble go to her Scripts and add a "When tapped" brick. When alice is tapped you need to send a signal to the bubble to be displayed. Insert a "Broadcast" brick and call the signal "think". Next configure the Bubble to react to our signal.
+
+          Add a "When i receive" brick and tell it to react to your signal "think". When "think" is received the bubble will show itself. Add a wait and a Hide brick so the bubble disappears after a certain time. Check and see that when you tap alice the bubble shows and disappears again.
+
+          If you want Alice to have some friends, you can also try to animate other characters and give them special actions as you can see in our example.
       card2:
         title: "Title2"
-        description: "des2"
+        description: |
+          Hello and Welcome to this Pocket Code Tutorial. In this lesson I will first show you how to control a character by tilting your phone. Secondly i will demonstrate how to let objects fall from the sky and in the end i will tell you how you can check if two objects collide. If you like our pictures, you can find them in the Media Library. So lets get started.
+
+          You have to go to your Character, in our Case, we chose Alice. As you can see the size and position of Alice do not fit to the Background yet. So go to her Scripts. When the program starts you want her to be at the bottom of the Screen and you have to make her smaller.
+
+          Therefore you have to set the Y position of Alice to the bottom of the screen, in our case a good value is -600. You have to make her smaller by setting her size, for us 40% looks good. Try it out and see if she fits your screen perfectly if not find new values.
+
+          You need a Forever Loop because you want Alice to move until the game is over. In this forever loop you need a "Change X by" Brick to move Alice according to the inclination of your phone. You take the negative inclination_x, because you want her to move left and right. If Alice is at the edges of the Screen, we want her to bounce off. You can use the "If on edge Bounce" Brick to make that happen. Test your game and see if Alice is moving according to the inclination.
+
+          Now you need a new Object for the falling Card, you can take the picture from the Media Library. You need a forever brick again, because you want your cards to fall down until the game is over. Set your Y-Coordinate so that it fits to the castle walls.
+
+          You don't want your cards to fall from the same position every time, so you need to set the X-Coordinate to a random value that fits your screen size, then the game will get more exciting because you cannot guess where the card is falling down from.
+
+          The card is not falling down yet, so you need to let your card move downwards with the "Glide" Brick. Since you want the card to fall straight down and not shift left or right, use its "postion_x" as this is the random value set before. Then, set the Y-Coordinate to the bottom, same as you did for Alice. Try your game now and see for yourself.
+
+          As you can see nothing happens when alice hits a card. Now you have to add scripts to check for a card hitting alice. Therefore you need to go to the Alice Object and save the current position of Alice. Go to the scripts of Alice and add a "Set variable"-Brick. Give the variable a meaningful name such as Y and set it to the "position_y" and for X you choose "position_x". Now the position of Alice is saved in your Variables X and Y. Then you go to the Card Object and here you need to do the collision detection with an If-Statement Brick and the formular.
+
+          First you need to know the position of alice and the card. Then you calculate the distance between these two objects. If the distance of the x-coordinates is smaller than 120 pixels, which is the width of alice, they could touch each other vertically.And if the card is below -500 ,which is vertical position of alice, the objects are so close to each other that the card touches alice.
+
+          If the If-Condition is true, the bricks within the if block will be performed. In this case you need to send a Broadcast, which is a message to every other object, so the rest of the Game knows that alice is hit.
+
+          You want the Game to end if Alice is hit by a card. So you need a new Object for your Game Over Screen, you can find the picture in the Media Library or draw it yourself. When the Program starts you want to hide this screen, because the Game is not over yet. If Alice gets hit, the Card sends the hit message to all Objects. Then the Game Over Object reacts to this hit message within the "When I receive"-brick and shows itself. Test your new game and see what happens when alice is hit.
+
+          You see that alice keeps moving and cards are still falling down even though the game is over. Therefore you also need a "When I receive" brick in the scipts of alice and hide her if she is hit. Do the same for the card Object: Go to the Cards scripts, and add the "When I receive" Brick and hide the card. Try it out and see if the game really ends, if Alice is hit by a card.
+
+          To make the game a little bit more difficult and to get a little more action you can copy the card object. You need a second wait to let the Cards fall down at different times. You can use a waiting time of 0,5 seconds or you could try a random number. Play your new selfmade game and have fun!
       card3:
         title: "Title3"
         description: "des3"

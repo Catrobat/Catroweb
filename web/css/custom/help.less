@@ -407,6 +407,64 @@
     }
   }
 
+  .section {
+    margin: 20px 0px;
+    text-align: center;
+
+    .image_landscape {
+
+      img {
+        border: 1px solid #fff;
+        margin: 0px auto 15px auto;
+      }
+    }
+
+    .image_potrait {
+
+      img {
+        width: 40%;
+        border: 1px solid #fff;
+        margin: 0px auto 15px auto;
+      }
+    }
+  }
+
+  .col-1 {
+    float: left;
+    padding: 8px 0;
+    width: 100%;
+
+    .title, .description {
+      padding-left: 99px;
+    }
+
+    .title {
+      margin-top: -7px;
+    }
+
+    .description {
+      font-size: 15px;
+    }
+
+    img {
+      float: left;
+    }
+  }
+
+  .videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+  }
+  .videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   @media screen and (max-width: 720px) {
     .col-2 {
       width: 100%;
@@ -488,44 +546,5 @@
   a {
     text-decoration: none;
     color: #fff;
-  }
-}
-
-#gamejam {
-
-  .col-1 {
-    float: left;
-    padding: 8px 0;
-    width: 100%;
-
-    .title, .description {
-      padding-left: 99px;
-    }
-
-    .title {
-      margin-top: -7px;
-    }
-
-    .description {
-      font-size: 15px;
-    }
-
-    img {
-      float: left;
-    }
-  }
-
-  .videoWrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-  }
-  .videoWrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
   }
 }
