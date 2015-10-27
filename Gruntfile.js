@@ -13,8 +13,8 @@ module.exports = function(grunt) {
         },
         files: [
                  { "web/css/pocketcode/base.css": [
-                     "web/css/themes/pocketcode/pocketcode.less",
-                     "web/css/plugins/*"
+                     "web/css/plugins/*",
+                     "web/css/themes/pocketcode/pocketcode.less"
                      ]
                  },
                  {
@@ -37,8 +37,8 @@ module.exports = function(grunt) {
           },
           files: [
                    { "web/css/pocketalice/base.css": [
-                       "web/css/themes/pocketalice/gamejam.less",
-                       "web/css/plugins/*"
+                       "web/css/plugins/*",
+                       "web/css/themes/pocketalice/gamejam.less"
                        ]
                    },
                    {
