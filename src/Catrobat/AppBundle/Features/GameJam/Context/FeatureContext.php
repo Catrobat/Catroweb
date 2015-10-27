@@ -75,7 +75,7 @@ class FeatureContext extends BaseContext
     public function theGameIsNotYetAccepted()
     {
         $program = $this->getProgramManger()->find(1);
-        assertFalse($program->isAccepted());
+        assertFalse($program->isAcceptedForGameJam());
     }
 
     /**
@@ -95,7 +95,7 @@ class FeatureContext extends BaseContext
     public function myGameShouldBeAccepted()
     {
         $program = $this->getProgramManger()->find(1);
-        assertTrue($program->isAccepted());
+        assertTrue($program->isAcceptedForGameJam());
     }
 
     /**
@@ -154,7 +154,7 @@ class FeatureContext extends BaseContext
     public function myGameShouldStillBeAccepted()
     {
         $program = $this->getProgramManger()->find(1);
-        assertTrue($program->isAccepted());
+        assertTrue($program->isAcceptedForGameJam());
     }
 
     /**

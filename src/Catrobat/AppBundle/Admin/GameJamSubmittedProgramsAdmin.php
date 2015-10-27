@@ -17,7 +17,7 @@ class GameJamSubmittedProgramsAdmin extends Admin
         ->add('user')
         ->add('name')
         ->add('description')
-        ->add('accepted', 'boolean', array('editable' => true))
+        ->add('gamejam_submission_accepted', 'boolean', array('editable' => true))
         ->add('_action', 'actions', array(
             'actions' => array(
                 'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),

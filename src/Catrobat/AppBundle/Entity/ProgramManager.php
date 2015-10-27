@@ -81,6 +81,7 @@ class ProgramManager
         if ($request->getGamejam() != null)
         {
             $program->setGamejam($request->getGamejam());
+            $program->setGameJamSubmissionDate(new \DateTime());
         }
         
         $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));

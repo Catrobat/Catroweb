@@ -173,7 +173,12 @@ class Program
     /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
-    protected $accepted = false;
+    protected $gamejam_submission_accepted = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $gamejam_submission_date;
     
     /**
      * @param mixed $approved_by_user
@@ -871,20 +876,45 @@ class Program
      *
      * @return Program
      */
-    public function setAccepted($accepted)
+    public function setAcceptedForGameJam($accepted)
     {
-        $this->accepted = $accepted;
+        $this->gamejam_submission_accepted = $accepted;
 
         return $this;
     }
 
+    public function setGamejamSubmissionAccepted($accepted)
+    {
+        $this->gamejam_submission_accepted = $accepted;
+    }
+
+    public function getGamejamSubmissionAccepted()
+    {
+        return $this->gamejam_submission_accepted;
+    }
+    
     /**
      * Get accepted
      *
      * @return boolean
      */
-    public function isAccepted()
+    public function isAcceptedForGameJam()
     {
-        return $this->accepted;
+        return $this->gamejam_submission_accepted;
+    }
+    
+    public function setGameJamSubmissionDate($date)
+    {
+        $this->gamejam_submission_date = $date;
+    }
+    
+    public function getGameJamSubmissionDate()
+    {
+        return $this->gamejam_submission_date;
+    }
+    
+    public function getGamejam_submission_accepted()
+    {
+        return $this->gamejam_submission_accepted;
     }
 }

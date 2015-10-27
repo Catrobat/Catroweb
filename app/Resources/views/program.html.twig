@@ -76,7 +76,7 @@
         
       </div>
       {% if program.user == app.user %}
-      {% if not program.gamejam or not program.accepted %}
+      {% if not program.gamejam or not program.acceptedforgamejam %}
         {% set jam = getCurrentGameJam() %}
         {% if jam %}
         <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">

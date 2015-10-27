@@ -95,7 +95,7 @@ class UploadController
                 $response['statusCode'] = StatusCode::OK;
                 $response['answer'] = $this->trans('success.upload');
                 $response['token'] = $user->getToken();
-                if ($gamejam !== null && !$program->isAccepted())
+                if ($gamejam !== null && !$program->isAcceptedForGameJam())
                 {
                     $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
                 }

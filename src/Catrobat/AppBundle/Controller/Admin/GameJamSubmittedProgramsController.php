@@ -17,7 +17,8 @@ class GameJamSubmittedProgramsController extends CRUDController
         }
         
         $object->setGamejam(null);
-        $object->setAccepted(false);
+        $object->setAcceptedForGameJam(false);
+        $object->setGameJamSubmissionDate(null);
         
         $this->admin->update($object);
         

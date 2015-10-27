@@ -225,7 +225,7 @@ class SymfonySupport
         $program->setFlavor(isset($config['flavor']) ? $config['flavor'] : 'pocketcode');
         $program->setApkStatus(isset($config['apk_status']) ? $config['apk_status'] : Program::APK_NONE);
         $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
-        $program->setAccepted(isset($config['accepted']) ? $config['accepted'] : false);
+        $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
         $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
         $em->persist($program);
         
