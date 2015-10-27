@@ -12,9 +12,7 @@ file that was distributed with this source code.
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  {% stylesheets 'css/custom/myprofile.less' filter='cssrewrite,lessphp' output='compiled/myprofile.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" />
-  {% endstylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/'~flavor()~'/myprofile.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
