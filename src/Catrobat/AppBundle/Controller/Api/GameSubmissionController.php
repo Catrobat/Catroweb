@@ -108,7 +108,7 @@ class GameSubmissionController extends Controller
             ->getManager()
             ->flush();
         
-        $url = $gamejam->getFormUrl();
+        $url = $this->assembleFormUrl($gamejam, $program->getUser(), $program);
         
         if ($url != null) {
             return new RedirectResponse($url);
@@ -117,5 +117,14 @@ class GameSubmissionController extends Controller
                 "id" => $program->getId()
             )));
         }
+    }
+    
+    private function assembleFormUrl($gamejam, $user, $program)
+    {
+        $url = $gamejam->getFormUrl();
+        $url = str_replace("%CAT_ID%", $program->getId(), $url);
+        $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
+        $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
+        return $url;
     }
 }

@@ -31,7 +31,8 @@ class GameJamAdmin extends Admin
             ->add('form_url', null, array('sonata_help' => '
                 Url to the google form, use <code>%CAT_NAME%</code>, <code>%CAT_ID%</code>, and <code>%CAT_EMAIL%</code> as placeholder<br>
                 Make sure this form calls <code>' . $returnurl . '</code> after completion
-                '))
+                ',
+            ))
             ->add('start')
             ->add('end')
             ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program'),array('admin_code' => 'catrowebadmin.block.programs.all'))
@@ -55,7 +56,7 @@ class GameJamAdmin extends Admin
         $listMapper
             ->addIdentifier('id')
             ->add('name')
-            ->add('form_url')
+            ->add('form_url', 'html', array('truncate' => array('length' => 50)))
             ->add('start')
             ->add('end')
             ->add('_action', 'actions', array('actions' => array(
