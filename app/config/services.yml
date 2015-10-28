@@ -172,3 +172,6 @@ services:
           - "@tokengenerator"
           - "@translator"
           
+    facebook_post_service:
+        class: Catrobat\AppBundle\Services\FacebookPostService
+        arguments: ["@router", "@service_container"]

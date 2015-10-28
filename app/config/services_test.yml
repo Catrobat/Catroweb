@@ -52,3 +52,9 @@ services:
         arguments:
           - "%ldap_base_dn%"
           
+    facebook_post_service:
+        class: Catrobat\AppBundle\Features\Helpers\FakeFacebookPostService
+
+    real_facebook_post_service:
+        class: Catrobat\AppBundle\Services\FacebookPostService
+        arguments: ["@router", "@service_container"]

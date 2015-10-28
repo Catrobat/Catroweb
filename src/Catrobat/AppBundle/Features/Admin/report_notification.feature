@@ -29,4 +29,3 @@ Scenario: Email subscribed admins directly after report
   Then I should see 2 outgoing emails
   And I should see a email with recipient "admin@catrob.at"
   And I should see a email with recipient "dog2@catrob.at"
-

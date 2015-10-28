@@ -183,7 +183,7 @@ class Program
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $fb_post_id;
+    protected $fb_post_id = '';
 
     /**
      * @return mixed

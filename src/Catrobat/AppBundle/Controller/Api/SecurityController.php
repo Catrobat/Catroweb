@@ -1,11 +1,11 @@
 <?php
+
 namespace Catrobat\AppBundle\Controller\Api;
 
-use Facebook\FacebookJavaScriptLoginHelper;
-use Facebook\FacebookSession;
-use Facebook\FacebookRequest;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookRedirectLoginHelper;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Facebook;
+use Facebook\Exceptions\FacebookSDKException;
+
 use Google_Client;
 use Google_Http_Request;
 use Google_Service_Plus;
@@ -35,6 +35,8 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class SecurityController extends Controller
 {
+
+    private $facebook;
 
     /**
      * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"})
@@ -223,8 +225,8 @@ class SecurityController extends Controller
             $password = $request->request->get('registrationPassword');
             
             $user = $userManager->findUserByUsername($username);
-            
-            if (! $user) {
+
+            if(! $user) {
                 $retArray['statusCode'] = StatusCode::USER_USERNAME_INVALID;
                 $retArray['answer'] = $this->trans('errors.username.not_exists');
             } else {
@@ -501,36 +503,39 @@ class SecurityController extends Controller
         if (! $client_secret || ! $app_id || ! $application_name) {
             throw $this->createNotFoundException('Facebook app authentication data not found!');
         }
-        
+
+        $this->initializeFacebook();
+
         if ($request->request->has('mobile')) {
-            $facebook_session = $this->getFacebookSession($client_token);
+            $this->setFacebookDefaultAccessToken($client_token);
         } else {
-            $facebook_session = $this->getFacebookSession();
+            $this->setFacebookDefaultAccessToken();
+        }
+
+        try {
+            $response = $this->facebook->post('/oauth/access_token', array('grant_type' => 'fb_exchange_token',
+                'client_id' => $app_id, 'client_secret' => $client_secret, 'fb_exchange_token' => $client_token));
+            $graph_node = $response->getGraphNode();
+            $server_token = $graph_node->getField('access_token');
+        } catch (FacebookRequestException $exception) {
+            return new Response(
+                "Graph API returned an error during token exchange for 'GET', '/oauth/access_token'", 401);
+        } catch (\Exception $exception) {
+            return new Response(
+                "Error during token exchange for 'GET', '/oauth/access_token' with exception" . $exception, 401);
         }
         
         try {
-            $result = (new FacebookRequest($facebook_session, 'GET', '/oauth/access_token', array(
-                'grant_type' => 'fb_exchange_token',
-                'client_id' => $app_id,
-                'client_secret' => $client_secret,
-                'fb_exchange_token' => $client_token
-            )))->execute()->getGraphObject();
-            $server_token = $result->getProperty('access_token');
-        } catch (FacebookRequestException $exception) {
-            return new Response("Graph API returned an error during token exchange for 'GET', '/oauth/access_token'", 401);
-        } catch (\Exception $exception) {
-            return new Response("Error during token exchange for 'GET', '/oauth/access_token' with exception" . $exception, 401);
-        }
-        
-        try {
-            $result = $this->checkFacebookServerAccessTokenValidity($facebook_session, $server_token);
-            $app_id_debug = $result->getProperty('app_id');
-            $application_name_debug = $result->getProperty('application');
-            $facebookId_debug = $result->getProperty('user_id');
-        } catch (FacebookRequestException $exception) {
-            return new Response("Graph API returned an error during token exchange for 'GET', '/debug_token'", 401);
-        } catch (\Exception $exception) {
-            return new Response("Error during token exchange for 'GET', '/debug_token' with exception" . $exception, 401);
+            $token_graph_node = $this->checkFacebookServerAccessTokenValidity($server_token);
+            $app_id_debug = $token_graph_node->getField('app_id');
+            $application_name_debug = $token_graph_node->getField('application');
+            $facebookId_debug = $token_graph_node->getField('user_id');
+        } catch (FacebookResponseException $e) {
+            return new Response(
+                "Graph API returned an error during token exchange for 'GET', '/debug_token'", 401);
+        } catch (FacebookSDKException $e) {
+            return new Response(
+                "Error during token exchange for 'GET', '/debug_token' with exception" . $e, 401);
         }
         
         // Make sure the token we got is for the intended user.
@@ -542,25 +547,23 @@ class SecurityController extends Controller
         if ($app_id_debug != $app_id || $application_name_debug != $application_name) {
             return new Response("Token's client ID or app name does not match app's.", 401);
         }
-        
+
         $userManager = $this->get("usermanager");
         $user = $userManager->findUserByEmail($facebook_mail);
-        $facebook_user = $userManager->findUserBy(array(
-            'facebookUid' => $facebookId
-        ));
-        
+        $facebook_user = $userManager->findUserBy(array('facebookUid' => $facebookId));
+
         if ($facebook_user) {
             $facebook_user->setFacebookAccessToken($server_token);
-        } else 
-            if ($user) {
-                $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $facebookId, $facebook_username, $locale);
-                $user->setFacebookAccessToken($server_token);
-                $userManager->updateUser($user);
-            } else {
-                $this->registerFacebookUser($request, $userManager, $retArray, $facebookId, $facebook_username, $facebook_mail, $locale, $server_token);
-            }
-        
-        if (! array_key_exists('statusCode', $retArray) || ! $retArray['statusCode'] == StatusCode::LOGIN_ERROR) {
+            $userManager->updateUser($user);
+        } else if ($user) {
+            $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $facebookId, $facebook_username, $locale);
+            $user->setFacebookAccessToken($server_token);
+            $userManager->updateUser($user);
+        } else {
+            $this->registerFacebookUser($request, $userManager, $retArray, $facebookId, $facebook_username, $facebook_mail, $locale, $server_token);
+        }
+
+        if (!array_key_exists('statusCode', $retArray) || !$retArray['statusCode'] == StatusCode::LOGIN_ERROR) {
             $retArray['statusCode'] = 201;
             $retArray['answer'] = $this->trans("success.registration");
         }
@@ -592,21 +595,20 @@ class SecurityController extends Controller
         
         $app_token = $this->getAppToken();
         $server_token_to_check = $fb_user->getFacebookAccessToken();
-        
-        $facebook_session = $this->getFacebookSession($app_token);
-        $result = $this->checkFacebookServerAccessTokenValidity($facebook_session, $server_token_to_check);
-        
-        /*
-         * result:
+
+        $this->setFacebookDefaultAccessToken($app_token);
+        $result = $this->checkFacebookServerAccessTokenValidity($server_token_to_check);
+
+        /*result:
          * data:
-         * app_id
-         * application
-         * expires at
-         * is_valid
-         * issued_at
-         * scopes
-         * profile, email ...
-         * user_id
+         *  app_id
+         *  application
+         *  expires at
+         *  is_valid
+         *  issued_at
+         *  scopes
+         *      profile, email ...
+         *  user_id
          */
         
         $application_name = $this->container->getParameter('application_name');
@@ -647,13 +649,12 @@ class SecurityController extends Controller
         return JsonResponse::create($retArray);
     }
 
-    private function checkFacebookServerAccessTokenValidity($facebook_session, $token_to_check)
+    private function checkFacebookServerAccessTokenValidity($token_to_check)
     {
         $app_token = $this->getAppToken();
-        return (new FacebookRequest($facebook_session, 'GET', '/debug_token', array(
-            'input_token' => $token_to_check,
-            'access_token' => $app_token
-        )))->execute()->getGraphObject();
+
+        $response = $this->facebook->get('/debug_token?input_token=' . $token_to_check, $app_token);
+        return $response->getGraphNode();
     }
 
     private function getAppToken()
@@ -721,19 +722,23 @@ class SecurityController extends Controller
             
             if ($request->request->has('mobile')) {
                 $client_token = $facebook_user->getFacebookAccessToken();
-                $facebook_session = $this->getFacebookSession($client_token);
+                $this->setFacebookDefaultAccessToken($client_token);
             } else {
-                $facebook_session = $this->getFacebookSession();
+                $this->setFacebookDefaultAccessToken();
             }
-            
-            $request = new FacebookRequest($facebook_session, 'GET', '/' . $facebook_id);
-            $response = $request->execute();
-            $graphObject = $response->getGraphObject();
-            $retArray['id'] = $graphObject->getProperty('id');
-            $retArray['first_name'] = $graphObject->getProperty('first_name');
-            $retArray['last_name'] = $graphObject->getProperty('last_name');
-            $retArray['name'] = $graphObject->getProperty('name');
-            $retArray['link'] = $graphObject->getProperty('link');
+
+            try {
+                $user = $this->facebook->get('/' . $facebook_id . '?fields=id,name,first_name,last_name,link')->getGraphUser();
+                $retArray['id'] = $user['id'];
+                $retArray['first_name'] = $user['first_name'];
+                $retArray['last_name'] = $user['last_name'];
+                $retArray['name'] = $user['name'];
+                $retArray['link'] = $user['link'];
+            } catch (FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+            } catch (FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            }
         } else {
             $retArray['error'] = 'invalid id';
         }
@@ -741,39 +746,27 @@ class SecurityController extends Controller
         return JsonResponse::create($retArray);
     }
 
-    private function getFacebookSession($client_token = NULL)
+    private function setFacebookDefaultAccessToken($client_token = NULL)
     {
-        $app_id = $this->container->getParameter('facebook_app_id');
-        $client_secret = $this->container->getParameter('facebook_secret');
-        
-        if (! $client_secret || ! $app_id) {
-            throw $this->createNotFoundException('Facebook app authentication data not found!');
-        }
-        
-        FacebookSession::setDefaultApplication($app_id, $client_secret);
-        
         if ($client_token) {
-            $facebook_session = new FacebookSession($client_token);
+            $this->facebook->setDefaultAccessToken($client_token);
         } else {
-            $helper = new FacebookJavaScriptLoginHelper();
+            $helper = $this->facebook->getJavaScriptHelper();
             try {
-                $facebook_session = $helper->getSession();
-            } catch (FacebookRequestException $ex) {
-                // When Facebook returns an error
-                return new Response("Facebook Session could not be retrieved", 401);
-            } catch (\Exception $ex) {
+                $accessToken = $helper->getAccessToken();
+            } catch (FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch (FacebookSDKException $e) {
                 // When validation fails or other local issues
-                return new Response("Facebook Session could not be retrieved", 401);
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
+
+            if (isset($accessToken)) {
+                $this->facebook->setDefaultAccessToken($accessToken);
             }
         }
-        try {
-            $facebook_session->validate();
-        } catch (FacebookSDKException $ex) {
-            // session expired or invalid
-            $facebook_session = null;
-        }
-        
-        return $facebook_session;
     }
 
     /**
@@ -905,17 +898,19 @@ class SecurityController extends Controller
         if ($fb_user) {
             $this->loginOAuthUser($retArray);
             $retArray['password'] = $fb_user->getOauthPassword();
-        } else 
-            if ($user) {
-                $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $fb_id, $fb_username, $fb_mail, $locale);
-                $retArray['password'] = $user->getOauthPassword();
-            }
-        
-        $user->setUploadToken($tokenGenerator->generateToken());
-        $userManager->updateUser($user);
-        $retArray['token'] = $user->getUploadToken();
-        
-        $retArray['username'] = $user->getUsername();
+            $fb_user->setUploadToken($tokenGenerator->generateToken());
+            $userManager->updateUser($fb_user);
+            $retArray['token'] = $fb_user->getUploadToken();
+            $retArray['username'] = $fb_user->getUsername();
+        } else if ($user) {
+            $this->connectFacebookUserToExistingUserAccount($userManager, $request, $retArray, $user, $fb_id, $fb_username, $fb_mail, $locale);
+            $retArray['password'] = $user->getOauthPassword();
+            $user->setUploadToken($tokenGenerator->generateToken());
+            $userManager->updateUser($user);
+            $retArray['token'] = $user->getUploadToken();
+            $retArray['username'] = $user->getUsername();
+        }
+
         return JsonResponse::create($retArray);
     }
 
@@ -1175,5 +1170,25 @@ class SecurityController extends Controller
     private function trans($message, $parameters = array())
     {
         return $this->get('translator')->trans($message, $parameters, 'catroweb');
+    }
+
+    private function initializeFacebook()
+    {
+        if ($this->facebook != null) {
+            return;
+        }
+
+        $app_id = $this->container->getParameter('facebook_app_id');
+        $client_secret = $this->container->getParameter('facebook_secret');
+
+        if (!$client_secret || !$app_id) {
+            throw $this->createNotFoundException('Facebook app authentication data not found!');
+        }
+
+        $this->facebook = new Facebook([
+            'app_id' => $app_id,
+            'app_secret' => $client_secret,
+            'default_graph_version' => 'v2.5',
+        ]);
     }
 }

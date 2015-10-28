@@ -52,7 +52,14 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     {
         return $this->symfony_support;
     }
-   
+
+    /**
+     * @return \Catrobat\AppBundle\Services\FacebookPostService
+     */
+    public function getRealFacebookPostServiceForTests()
+    {
+        return $this->symfony_support->getRealFacebookPostServiceForTests();
+    }
     
     /**
      *

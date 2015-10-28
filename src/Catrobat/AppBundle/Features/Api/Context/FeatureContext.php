@@ -32,8 +32,11 @@ class FeatureContext extends BaseContext
     private $last_response;
     private $hostname;
     private $secure;
+    private $fb_post_program_id;
+    private $fb_post_id;
+    private $facebook_post_service;
 
-  /**
+    /**
    * Initializes context with parameters from behat.yml.
    *
    * @param array $parameters
@@ -478,7 +481,7 @@ class FeatureContext extends BaseContext
       assertTrue(is_numeric($response[$arg1]));
   }
 
-  /**
+    /**
    * @Given /^I have a file "([^"]*)"$/
    */
   public function iHaveAFile($filename)
@@ -817,5 +820,100 @@ class FeatureContext extends BaseContext
         $extracetCatrobatFile = $efr->loadProgramExtractedFile($uploaded_program);
         $progXmlProp = $extracetCatrobatFile->getProgramXmlProperties();
         assertEquals($value,$progXmlProp->header->remixOf->__toString());
+    }
+
+    /**
+     * @When /^I upload a valid program$/
+     */
+    public function iUploadAValidProgram()
+    {
+        $this->iHaveAParameterWithValue('username', 'Catrobat');
+        $this->iHaveAParameterWithValue('token', 'cccccccccc');
+        $this->iHaveAValidCatrobatFile();
+        $this->iHaveAParameterWithTheMdchecksumOf('fileChecksum', 'test.catrobat');
+        $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+        $this->iHaveAParameterWithTheReturnedProjectid('program');
+    }
+
+    /**
+     * @When /^I report the program$/
+     */
+    public function iReportTheProgram()
+    {
+        $this->iHaveAParameterWithValue('note', 'Bad Project');
+        $this->iPostTheseParametersTo('/pocketcode/api/reportProgram/reportProgram.json');
+    }
+
+
+    /**
+     * @Given /^I use the real FacebookPostService$/
+     */
+    public function iUseTheRealFacebookPostService()
+    {
+        $this->facebook_post_service = $this->getSymfonySupport()->getRealFacebookPostServiceForTests();
+    }
+
+    /**
+     * @Then /^I make a real Facebook post$/
+     */
+    public function iMakeARealFacebookPost()
+    {
+        $program_manager = $this->getSymfonySupport()->getProgramManger();
+        $program = $program_manager->find($this->fb_post_program_id);
+        $this->fb_post_id = $this->facebook_post_service->postOnFacebook($program);
+    }
+
+    /**
+     * @When /^I really delete the Facebook post$/
+     */
+    public function iReallyDeleteTheFacebookPost()
+    {
+        $this->facebook_post_service->removeFbPost($this->fb_post_id);
+    }
+
+    /**
+     * @Then /^the project should be posted to Facebook with message "([^"]*)" and the correct project ID$/
+     */
+    public function theProjectShouldBePostedToFacebookWithMessageAndTheCorrectProjectId($fb_post_message)
+    {
+        $response = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $project_id = $response['projectId'];
+
+        $program_manager = $this->getSymfonySupport()->getProgramManger();
+        $fb_response = $this->facebook_post_service->checkFacebookPostAvailable($program_manager->find($project_id)->getFbPostId())->getGraphObject();
+
+        $fb_id = $fb_response['id'];
+        $fb_message = $fb_response['message'];
+
+        $this->fb_post_id = $fb_id;
+        assertTrue($fb_id != '', "No Facebook Post ID was returned");
+        assertEquals($fb_id,  $program_manager->find($project_id)->getFbPostId(), "Facebook Post ID's do not match");
+        assertEquals($fb_post_message, $fb_message, "Facebook messages do not match");
+    }
+
+    /**
+     * @When /^I have a parameter "([^"]*)" with the returned projectId$/
+     */
+    public function iHaveAParameterWithTheReturnedProjectid($name)
+    {
+        $response = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->fb_post_program_id = $response['projectId'];
+        $this->request_parameters[$name] = $response['projectId'];
+    }
+
+    /**
+     * @Then /^the Facebook Post should be deleted$/
+     */
+    public function theFacebookPostShouldBeDeleted()
+    {
+        echo 'Delete post with Facebook ID ' . $this->fb_post_id;
+
+        $program_manager = $this->getSymfonySupport()->getProgramManger();
+        assertEmpty($program_manager->find($this->fb_post_program_id)->getFbPostId(), 'FB Post was not resetted');
+        $fb_response = $this->facebook_post_service->checkFacebookPostAvailable($this->fb_post_id);
+
+        $string = print_r($fb_response, true);
+        assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
+        assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
     }
 }

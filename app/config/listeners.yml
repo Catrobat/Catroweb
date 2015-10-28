@@ -69,12 +69,6 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
 
-      catroweb.fb_post.id:
-                  class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
-                  arguments: ["@router", "@service_container"]
-                  tags:
-                  - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
-            
       catroweb.apk.cleanup:
             class: Catrobat\AppBundle\Listeners\ApkCleanupListener
             arguments: ["@apkrepository"]
@@ -114,6 +108,19 @@ services:
                   - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
 
 
+# ======== Facebook Posts =======
+
+      catrobat.fb_post.post:
+                        class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
+                        arguments: ["@facebook_post_service"]
+                        tags:
+                            - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
+
+      catrobat.fb_post.remove:
+              class:        Catrobat\AppBundle\Listeners\FacebookRemovePostListener
+              arguments:    ["@facebook_post_service", "@doctrine.orm.entity_manager"]
+              tags:
+                  - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
 
 # ======== Logging ========
 
@@ -145,7 +152,3 @@ services:
           arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
           tags:
               - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
-              
-              
-              
- 

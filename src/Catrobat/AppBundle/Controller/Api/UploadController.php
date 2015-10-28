@@ -85,7 +85,7 @@ class UploadController
                 throw new InvalidChecksumException();
             } else {
                 $user = $this->tokenstorage->getToken()->getUser();
-                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
+                $add_program_request = new AddProgramRequest($user, $file, true, $request->getClientIp(), $gamejam);
                 
                 $program = $this->programmanager->addProgram($add_program_request);
                 $user->setToken($this->tokengenerator->generateToken());

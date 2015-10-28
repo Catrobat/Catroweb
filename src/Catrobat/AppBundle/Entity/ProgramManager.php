@@ -7,6 +7,7 @@ use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Requests\AddProgramRequest;
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
@@ -88,9 +89,9 @@ class ProgramManager
         
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
-        
-        $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program));
-        
+
+        $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program, $request->shouldPostToFacebook()));
+
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
         

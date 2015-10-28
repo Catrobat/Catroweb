@@ -98,6 +98,14 @@ class SymfonySupport
     {
         return $this->kernel->getContainer()->get('router');
     }
+
+    /**
+     * @return \Catrobat\AppBundle\Services\FacebookPostService
+     */
+    public function getRealFacebookPostServiceForTests()
+    {
+        return $this->kernel->getContainer()->get('real_facebook_post_service');
+    }
     
     /**
      * @return mixed
