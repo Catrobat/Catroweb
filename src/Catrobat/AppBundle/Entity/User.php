@@ -141,6 +141,7 @@ class User extends BaseUser implements LdapUserInterface
     public function __construct()
     {
         parent::__construct();
+        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->country = '';
     }
 

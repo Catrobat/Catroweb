@@ -84,12 +84,24 @@ default:
               - Catrobat\AppBundle\Features\Admin\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
         gamejam:
+            filters:
+              tags: ~@web
             type: symfony_bundle
             bundle: 'AppBundle'
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
             contexts:
               - Catrobat\AppBundle\Features\GameJam\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
+        gamejam_web:
+            filters:
+              tags: @web
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+            contexts:
+              - Catrobat\AppBundle\Features\GameJam\Context\WebContext:
                     error_directory: "./testreports/behat/"
 
 wip:

@@ -229,6 +229,9 @@ class SymfonySupport
         $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
         $em->persist($program);
         
+        $user->addProgram($program);
+        $em->persist($user);
+        
         // FIXXME: why exactly do we have to do this?
         if (isset($config['gamejam']))
         {
