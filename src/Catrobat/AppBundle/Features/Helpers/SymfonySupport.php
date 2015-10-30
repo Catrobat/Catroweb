@@ -92,6 +92,14 @@ class SymfonySupport
     }
     
     /**
+     * @return \Symfony\Component\Routing\Router
+     */
+    public function getRouter()
+    {
+        return $this->kernel->getContainer()->get('router');
+    }
+    
+    /**
      * @return mixed
      */
     public function getSymfonyParameter($param)

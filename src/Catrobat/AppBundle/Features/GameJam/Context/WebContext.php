@@ -134,5 +134,64 @@ class WebContext extends BaseContext
     {
     }
     
+    /**
+     * @Given /^I have a limited account$/
+     */
+    public function iHaveALimitedAccount()
+    {
+        $this->i->setLimited(true);
+        $this->getSymfonySupport()->getManager()->persist($this->i);
+        $this->getSymfonySupport()->getManager()->flush($this->i);
+    }
+    
+    /**
+     * @When /^I visit my profile$/
+     */
+    public function iVisitMyProfile()
+    {
+        $profile_url = $this->getSymfonySupport()->getRouter()->generate("profile", array("flavor" => "pocketcode"));
+        $this->response = $this->getClient()->request("GET", $profile_url);
+    }
+
+    /**
+     * @Then /^I do not see a form to edit my profile$/
+     */
+    public function iDoNotSeeAFormToEditMyProfile()
+    {
+        assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
+        assertEquals(0, $this->response->filter("#profile-form")->count());
+    }
+    
+    /**
+     * @Given /^I have a program named "([^"]*)"$/
+     */
+    public function iHaveAProgramNamed($arg1)
+    {
+        $this->getSymfonySupport()->insertProgram($this->i, array('name' => $arg1));
+    }
+    
+    /**
+     * @Then /^I see the program "([^"]*)"$/
+     */
+    public function iSeeTheProgram($arg1)
+    {
+    }
+    
+    /**
+     * @Then /^I do not see a delete button$/
+     */
+    public function iDoNotSeeADeleteButton()
+    {
+        throw new PendingException();
+    }
+    
+    /**
+     * @Then /^I do not see a button to change the profile picture$/
+     */
+    public function iDoNotSeeAButtonToChangeTheProfilePicture()
+    {
+        assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
+        assertEquals(0, $this->response->filter("#avatar-upload")->count());
+    }
     
 }
