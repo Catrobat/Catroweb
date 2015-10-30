@@ -106,6 +106,7 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
+                    - catrowebadmin.block.users.limited
 
             sonata.admin.group.tools:
                 label:           Tools
