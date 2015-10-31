@@ -19,11 +19,13 @@
 <body>
 
 <div id="wrapper">
+  <div id="header-wrapper">
   <header>
     {% block header %}
       {% include ':Default:header.html.twig' %}
     {% endblock %}
   </header>
+  </div>
   <article>
     {% block body %}{% endblock %}
   </article>
