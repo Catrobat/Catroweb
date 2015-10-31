@@ -1,65 +1,51 @@
-module.exports = function(grunt) {
-  require('jit-grunt')(grunt);
+var themes = ['pocketcode', 'pocketalice'];
 
-  grunt.initConfig({
-    less: {
-      pocketcode: {
+var lessconfig = {};
+
+for (index = 0; index < themes.length; index++) {
+    var theme = themes[index];
+    
+    var base_css_path = "web/css/" + theme + "/base.css"; 
+    
+    var base_file_config = {};
+    base_file_config[base_css_path] = ["web/css/plugins/*", "web/css/themes/" + theme + "/main.less"];
+
+    lessconfig[theme] = 
+    {
         options: {
           compress: true,
           yuicompress: true,
           optimization: 2,
           relativeUrls: true,
-          paths: ["web/css/base","web/css/themes/pocketcode"]
+          paths: ["web/css/base","web/css/themes/" + theme]
         },
         files: [
-                 { "web/css/pocketcode/base.css": [
-                     "web/css/plugins/*",
-                     "web/css/themes/pocketcode/pocketcode.less"
-                     ]
-                 },
+                 base_file_config,
                  {
                      expand: true,
                      cwd: 'web/css/custom/',
                      src: ['**/*.less'],
-                     dest: 'web/css/pocketcode/',
+                     dest: 'web/css/' + theme + '/',
                      ext: '.css',
                      extDot: 'first'
                    }
                ]
-      },
-      gamejam: {
-          options: {
-            compress: true,
-            yuicompress: true,
-            optimization: 2,
-            relativeUrls: true,
-            paths: ["web/css/base","web/css/themes/pocketalice"]
-          },
-          files: [
-                   { "web/css/pocketalice/base.css": [
-                       "web/css/plugins/*",
-                       "web/css/themes/pocketalice/gamejam.less"
-                       ]
-                   },
-                   {
-                       expand: true,
-                       cwd: 'web/css/custom/',
-                       src: ['**/*.less'],
-                       dest: 'web/css/pocketalice/',
-                       ext: '.css',
-                       extDot: 'first'
-                     }
-                 ]
-        }
-    },
+      };
+}
+
+module.exports = function(grunt) {
+  require('jit-grunt')(grunt);
+
+  grunt.initConfig({
+    less: lessconfig,
     watch: {
-      styles: {
-        files: ['web/css/**/*.less'], 
-        tasks: ['less'],
-        options: {
-          nospawn: true
+        styles: {
+          files: ['web/css/**/*.less'], 
+          tasks: ['less'],
+          options: {
+            nospawn: true
+          }
         }
-      }
     }
   });
 
