@@ -141,13 +141,17 @@ services:
         class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
         arguments: ["@translator","@time"]
 
+# =========================== Twig ===========================
+
     app.twig_extension:
         class: Catrobat\AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository"]
+        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme"]
         tags:
             - { name: twig.extension }
-            
+
+# =========================== Jenkins ===========================
+
     ci.jenkins.dispatcher:
         class: Catrobat\AppBundle\Services\Ci\JenkinsDispatcher
         arguments: 
