@@ -4,6 +4,7 @@ parameters:
         ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
         ROLE_APPROVE:       "Webserver-AppApprovers"
         ROLE_SUPER_ADMIN:   "Webserver-Administrators"
+        ROLE_GAMEJAM_ADMIN: "Webserver-GameJam-Administrators"
 
 
 security:
@@ -41,7 +42,11 @@ security:
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
             - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
             - ROLE_ADMIN
-
+        ROLE_GAMEJAM_ADMIN:
+            - ROLE_CATROWEBADMIN_BLOCK_USERS_LIMITED_ADMIN
+            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_ADMIN
+            - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_SUBMITTED_ADMIN
+            - ROLE_ADMIN
 
     providers:
         chain_provider:

@@ -65,4 +65,18 @@ class GameJamTagListenerSpec extends ObjectBehavior
         $this->checkDescriptionTag($program);
         expect($program->getDescription())->toBeLike($description);
     }
+    
+    public function it_does_not_add_the_hashtag_if_the_hashtag_is_an_empty_string()
+    {
+        $program = new Program();
+        $gameJam = new GameJam();
+        $gameJam->setHashtag("");
+        $program->setGamejam($gameJam);
+    
+        $description = 'This is a sample description, best game EVER.';
+        $program->setDescription($description);
+        $this->checkDescriptionTag($program);
+        expect($program->getDescription())->toBeLike($description);
+    }
+    
 }

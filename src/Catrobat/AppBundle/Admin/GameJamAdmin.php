@@ -33,6 +33,7 @@ class GameJamAdmin extends Admin
                 Make sure this form calls <code>' . $returnurl . '</code> after completion
                 ',
             ))
+            ->add('hashtag')
             ->add('start')
             ->add('end')
             ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program'),array('admin_code' => 'catrowebadmin.block.programs.all'))
@@ -57,6 +58,7 @@ class GameJamAdmin extends Admin
             ->addIdentifier('id')
             ->add('name')
             ->add('form_url', 'html', array('truncate' => array('length' => 50)))
+            ->add('hashtag')
             ->add('start')
             ->add('end')
             ->add('_action', 'actions', array('actions' => array(
@@ -73,6 +75,7 @@ class GameJamAdmin extends Admin
         $showMapper
         ->add('name')
         ->add('form_url')
+        ->add('hashtag')
         ->add('start')
         ->add('end')
         ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'),array('admin_code' => 'catrowebadmin.block.programs.all'))
