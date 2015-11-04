@@ -49,8 +49,12 @@ class GameJam
      *      )
      **/
     private $sample_programs;
-    
-    
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $hashtag;
+
     public function __construct()
     {
         $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
@@ -234,5 +238,21 @@ class GameJam
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHashtag()
+    {
+        return $this->hashtag;
+    }
+
+    /**
+     * @param mixed $hashtag
+     */
+    public function setHashtag($hashtag)
+    {
+        $this->hashtag = $hashtag;
     }
 }

@@ -175,6 +175,7 @@ class SymfonySupport
     {
         $gamejam = new GameJam();
         @$gamejam->setName($config['name'] ?: "Behat Generated Jam");
+        @$gamejam->setHashtag($config['hashtag'] ?: null);
         $start_date = new \DateTime();
         $start_date->sub(new \DateInterval('P10D'));
         $end_date = new \DateTime();

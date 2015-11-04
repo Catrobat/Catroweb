@@ -85,17 +85,17 @@ default:
                     error_directory: "./testreports/behat/"
         gamejam:
             filters:
-              tags: ~@web
+                tags: ~@web&&~@javascript
             type: symfony_bundle
             bundle: 'AppBundle'
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
             contexts:
-              - Catrobat\AppBundle\Features\GameJam\Context\FeatureContext:
+                - Catrobat\AppBundle\Features\GameJam\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
         gamejam_web:
             filters:
-              tags: @web
+                tags: @web
             type: symfony_bundle
             bundle: 'AppBundle'
             paths:
@@ -103,6 +103,16 @@ default:
             contexts:
               - Catrobat\AppBundle\Features\GameJam\Context\WebContext:
                     error_directory: "./testreports/behat/"
+
+        gamejam_javascript:
+            filters:
+                tags: @javascript
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+            contexts:
+                - Catrobat\AppBundle\Features\GameJam\Context\JavascriptContext: ~
 
 wip:
     gherkin:

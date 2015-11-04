@@ -53,7 +53,9 @@ class WebContext extends BaseContext
      */
     public function iVisitTheDetailsPageOfMyProgram()
     {
-        $this->getSymfonySupport()->insertProgram($this->i, array('name' => 'My Program'));
+        if ($this->my_program == null) {
+            $this->getSymfonySupport()->insertProgram($this->i, array('name' => 'My Program'));
+        }
         $this->response = $this->getSymfonySupport()->getClient()->request("GET", "/pocketcode/program/1");
     }
     
@@ -103,15 +105,29 @@ class WebContext extends BaseContext
      */
     public function iSubmittedAProgramToTheGamejam()
     {
-        $this->gamejam = $this->getSymfonySupport()->insertDefaultGamejam(array('formurl' => 'https://localhost/url/to/form'));
+        if ($this->gamejam == null) {
+            $this->gamejam = $this->getSymfonySupport()->insertDefaultGamejam(array('formurl' => 'https://localhost/url/to/form'));
+        }
         $this->my_program = $this->getSymfonySupport()->insertProgram($this->i, array('name' => 'My Program', 'gamejam' => $this->gamejam));
     }
-    
+
+    /**
+     * @Given /^I submit a program to this gamejam$/
+     */
+    public function iSubmitAProgramToThisGamejam()
+    {
+        $this->my_program = $this->getSymfonySupport()->insertProgram($this->i, array('name' => 'My Program'));
+        $this->response = $this->getSymfonySupport()->getClient()->request("GET", "/pocketcode/program/1");
+        $link = $this->response->filter("#gamejam-submittion")->parents()->link();
+        $this->response = $this->getClient()->click($link);
+    }
+
     /**
      * @Given /^I filled out the google form$/
      */
     public function iFilledOutTheGoogleForm()
     {
+        $this->my_program = $this->getProgramManger()->find(1);
         $this->my_program->setAcceptedForGameJam(true);
         $this->getManager()->persist($this->my_program);
         $this->getManager()->flush();
@@ -193,5 +209,22 @@ class WebContext extends BaseContext
         assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
         assertEquals(0, $this->response->filter("#avatar-upload")->count());
     }
-    
+
+    /**
+     * @Given /^There is an ongoing game jam with the hashtag "([^"]*)"$/
+     */
+    public function thereIsAnOngoingGameJamWithTheHashtag($hashtag)
+    {
+        $this->gamejam = $this->getSymfonySupport()->insertDefaultGamejam(array('hashtag' => $hashtag));
+    }
+
+    /**
+     * @Then /^I should see the hashtag "([^"]*)" in the program description$/
+     */
+    public function iShouldSeeTheHashtagInTheProgramDescription($hashtag)
+    {
+        assertContains($hashtag,$this->getClient()->getResponse()->getContent());
+    }
+
+
 }

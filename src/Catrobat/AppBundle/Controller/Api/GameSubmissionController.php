@@ -101,6 +101,9 @@ class GameSubmissionController extends Controller
         }
         $program->setGamejam($gamejam);
         $program->setGameJamSubmissionDate(new \DateTime());
+
+        $this->get('catroweb.gamejamtag.check')->checkDescriptionTag($program);
+
         $this->getDoctrine()
             ->getManager()
             ->persist($program);

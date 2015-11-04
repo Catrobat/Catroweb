@@ -77,6 +77,11 @@ services:
             class: Catrobat\AppBundle\Listeners\ProgramPermissionsListener
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+
+      catroweb.gamejamtag.check:
+            class: Catrobat\AppBundle\Listeners\GameJamTagListener
+            tags:
+            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
       
 # ======== Notifications =======
 
