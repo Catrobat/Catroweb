@@ -27,9 +27,11 @@ logout:
     defaults:  { _controller: AppBundle:Security\Logout:logout }
     
 sonata_user_resetting:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
+    resource: "./sonata/sonata_resetting_1.xml"
     prefix: /resetting
     prefix: /catroid/resetting #app-hack
+    
+###
 
 sonata_user_profile:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
