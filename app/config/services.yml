@@ -14,6 +14,7 @@ parameters:
       catrobat.mediapackage.path:  "resources/mediapackage/"
       catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
       catrobat.backup.dir:         "%kernel.root_dir%/../backups/"
+      catrobat.snapshot.dir:       "%kernel.root_dir%/../Resources/Snapshots"
       
 services:
 

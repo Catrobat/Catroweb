@@ -1,4 +1,4 @@
-@web @wip
+@web
 Feature: Checking hashtag in description
     
 Scenario:

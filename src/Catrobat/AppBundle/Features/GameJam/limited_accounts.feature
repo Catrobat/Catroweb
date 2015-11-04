@@ -1,4 +1,3 @@
-@wip
 Feature: Limited Accounts
 
          In a gamejam for schools, a class may use the same account for all students

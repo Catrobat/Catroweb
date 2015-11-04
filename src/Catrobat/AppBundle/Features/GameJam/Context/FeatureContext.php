@@ -52,7 +52,9 @@ class FeatureContext extends BaseContext
      */
     public function iSubmittedAGame()
     {
-        $this->getSymfonySupport()->insertDefaultGamejam();
+        if ($this->gamejam == null) {
+            $this->getSymfonySupport()->insertDefaultGamejam();
+        }
         $file = $this->getSymfonySupport()->getDefaultProgramFile();
         $this->getSymfonySupport()->submit($file, null);
     }
@@ -104,7 +106,7 @@ class FeatureContext extends BaseContext
     public function iAlreadySubmittedMyGame()
     {
         $file = $this->getSymfonySupport()->getDefaultProgramFile();
-        $this->getSymfonySupport()->submit($file, null);
+        $this->getSymfonySupport()->submit($file, $this->i);
     }
 
     /**
@@ -279,7 +281,7 @@ class FeatureContext extends BaseContext
         }
         assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
     }
-    
+
     /**
      * @Then The total number of found projects should be :arg1
      */
@@ -289,8 +291,7 @@ class FeatureContext extends BaseContext
         $responseArray = json_decode($response->getContent(), true);
         assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects']);
     }
-    
-    
+
     /**
      * @Then I should receive my program
      */
@@ -301,5 +302,4 @@ class FeatureContext extends BaseContext
         $returned_programs = $responseArray['CatrobatProjects'];
         assertEquals("test", $returned_programs[0]['ProjectName'], 'Could not find the program');
     }
-    
 }
