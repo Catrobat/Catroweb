@@ -83,6 +83,14 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
       
+# ======== Snapshots =======
+
+      catrobat.upload.snapshotlistener:
+              class:        Catrobat\AppBundle\Listeners\Upload\SaveProgramSnapshotListener
+              arguments:    ["@time","@filerepository", "%catrobat.snapshot.dir%"]
+              tags:
+                  - { name: kernel.event_listener, event: catrobat.program.after.insert, method: handleEvent }
+
 # ======== Notifications =======
 
       catrobat.core.services.uploadnotificator:

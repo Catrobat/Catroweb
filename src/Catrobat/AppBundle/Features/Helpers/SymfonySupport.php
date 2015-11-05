@@ -201,6 +201,7 @@ class SymfonySupport
         @$user->setEnabled($config['enabled'] ?: true);
         @$user->setUploadToken($config['token'] ?: 'GeneratedToken');
         @$user->setCountry($config['country'] ?: 'at');
+        @$user->setLimited($config['limited'] ?: 'false');
         @$user->addRole($config['role']?: 'ROLE_USER');
         @$user_manager->updateUser($user, true);
     

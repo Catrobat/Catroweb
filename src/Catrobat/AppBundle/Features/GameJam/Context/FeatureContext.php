@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Catrobat\AppBundle\Entity\GameJam;
 use Behat\Gherkin\Node\TableNode;
+use Symfony\Component\Finder\Finder;
 
 class FeatureContext extends BaseContext
 {
@@ -302,4 +303,33 @@ class FeatureContext extends BaseContext
         $returned_programs = $responseArray['CatrobatProjects'];
         assertEquals("test", $returned_programs[0]['ProjectName'], 'Could not find the program');
     }
+    
+    /**
+     * @Given I have a limited account
+     */
+    public function iHaveALimitedAccount()
+    {
+        $this->i = $this->getSymfonySupport()->insertUser(array('limited' => true));
+    }
+    
+    /**
+     * @When I update my program
+     */
+    public function iUpdateMyProgram()
+    {
+        $file = $this->getSymfonySupport()->getDefaultProgramFile();
+        $this->getSymfonySupport()->upload($file, $this->i);
+        $this->getSymfonySupport()->upload($file, $this->i);
+    }
+    
+    /**
+     * @Then A copy of this program will be stored on the server
+     */
+    public function aCopyOfThisProgramWillBeStoredOnTheServer()
+    {
+        $dir = $this->getSymfonyParameter("catrobat.snapshot.dir");
+        $finder = new Finder();
+        assertEquals(1, $finder->files()->in($dir)->count(), "Snapshot was not stored!");
+    }
+    
 }
