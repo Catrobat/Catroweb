@@ -103,6 +103,13 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Limited Users, icon: '<i class="fa fa-cogs"></i>' }
         arguments: [null, Catrobat\AppBundle\Entity\User, null]
 
+      catrowebadmin.block.program.snapshots:
+        class: Catrobat\AppBundle\Admin\SnapshotAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Snapshots, icon: '<i class="fa fa-cogs"></i>' }
+        arguments: [null, null, AppBundle:Admin\Snapshot]
+
+
 # =========================== GameJam ===========================
 
       catrowebadmin.block.gamejam:
