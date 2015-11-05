@@ -24,6 +24,29 @@ header {
         margin-right: 8px;
       }
     }
+    #header-right {
+      vertical-align: bottom;
+      height:60px;
+    }
+    #header-left {
+      vertical-align: bottom;
+    }
+    #header-top {
+      margin-bottom: 0;
+    }
+    #searchbar {
+      background-color: @default-background-color;
+      color: @footer-background-color;
+      border: none; 
+    }
+  }
+}
+
+@media (max-width: @responsive-width-tablet) {
+  .searchbar-visible {
+    #header-left {
+      border: none;
+    }
   }
 }
 
