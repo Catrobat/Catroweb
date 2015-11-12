@@ -1,29 +1,26 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
-  <h1>{{ ("help.aliceGameJamTutorialcards.title")|trans({}, "catroweb") }}</h1>
+    <div class="tutorialcards-container size-large">
 
-  <div class="tutorialcards-container size-large">
-    <p class="description">{{ ("help.aliceGameJamTutorialcards.description")|trans({}, "catroweb") }}</p>
+        <div id="help-container">
+            {% for i in 1..count %}
+                <a href="{{ path('catrobat_web_gamejamtutorialcards', {'page': i}) }}">
 
-    {% for i in 1..count %}
-      <a href="{{ path('catrobat_web_gamejamtutorialcards', {'page': i}) }}">
-        <div class="col-1">
-          <img src="{{ asset('images/help/alice/'~i~'.jpg') }}" alt="" title=""/>
-            {#<span id="title-{{ i }}" class="title size-xlarge">{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>#}
-            <div id="title-{{ i }}" class="title size-xlarge">{{ ("help.aliceGameJamTutorialcards.title"~i)|trans({}, "catroweb") }}</div>
-            <div id="description-{{ i }}" class="description size-medium">{{ ("help.aliceGameJamTutorialcards.description"~i)|trans({}, "catroweb")|nl2br }}</div>
+                    <div class="help-desktop"><img src="{{ asset('images/help/alice/'~i~'.png') }}" alt="" title=""/>
+                    </div>
+                    <div class="help-mobile"><img src="{{ asset('images/help/alice/'~i~'_mob.png') }}" alt="" title=""/>
+                    </div>
+                </a>
+            {% endfor %}
         </div>
-      </a>
-    {% endfor %}
+        <div class="clear"></div>
 
-    <div class="clear"></div>
-
-  </div>
+    </div>
 
 {% endblock %}
 

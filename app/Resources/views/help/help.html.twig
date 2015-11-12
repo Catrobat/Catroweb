@@ -7,11 +7,12 @@
 
 {% block body %}
     <div id="help-container">
+
       <div class="help-desktop">
-        <img id="hour-of-code-desktop" src="{{ asset('images/help/hour_of_code.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
+        <img id="alice-tut-desktop" src="{{ asset('images/help/alice_tut.png') }}" alt="Discuss" onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'" />
       </div>
       <div class="help-mobile">
-        <img id="hour-of-code-mobile" src="{{ asset('images/help/hour_of_code_mobile.png') }}" alt="HourOfCode" onclick="self.location.href='{{ url('catrobat_web_hour_of_code') }}'" />
+        <img id="alice-tut-mobile" src="{{ asset('images/help/alice_tut_mobile.png') }}" alt="Discuss" onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'" />
       </div>
       <div class="help-desktop help-special-margin">
         <img id="step-by-step-desktop" src="{{ asset('images/help/step_by_step.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
@@ -35,10 +36,6 @@
       <div class="help-mobile">
         <img id="discuss-mobile" src="{{ asset('images/help/discuss_mobile.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
       </div>
-
-      {#<div class="help-split">#}
-        {#<img id="tutorials" src="{{ asset('images/help/tutorials.png') }}" alt="Tutorials" onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'" />#}
-      {#</div>#}
     </div>
 {% endblock %}
 

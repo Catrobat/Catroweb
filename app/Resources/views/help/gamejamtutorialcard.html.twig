@@ -1,113 +1,61 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 
 {% block body %}
-  <h1>{{ ("help.aliceGameJamTutorialcards.title"~page)|trans({}, "catroweb") }}</h1>
 
-  <div class="tutorialcards-container size-large">
+    <div class="tutorialcards-container size-large">
 
-  <p class="description">{{ ("help.aliceGameJamTutorialcards.card"~page~".description")|trans({}, "catroweb")|nl2br }}</p>
-
-
-    <div class="section">
-
-      {% if blocks[0].image_orientation == 'landscape' %}
-        <div class="image_landscape">
-          {% for i in 1..blocks[0].image_count %}
-
-          <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
-
-          {% endfor %}
+        <div class="section">
+            <div class="videoWrapper">
+                <!-- Copy & Pasted from YouTube -->
+                <iframe width="560" height="315"
+                        src={{ "https://www.youtube.com/embed/"~blocks[1].video_link }} frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
 
-      {% elseif blocks[0].image_orientation == 'potrait' %}
-      <div class="image_potrait">
-        {% for i in 1..blocks[0].image_count %}
 
-          <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
+        <div class="headline">
+            <h1>{{ ("help.aliceGameJamTutorialcards.title"~page)|trans({}, "catroweb") }}</h1>
 
-        {% endfor %}
-      {% endif %}
+            <div class="subtitle">{{ ("help.aliceGameJamTutorialcards.subtitle"~page)|trans({}, "catroweb")|nl2br }}</div>
+        </div>
 
+        <p class="description">{{ ("help.aliceGameJamTutorialcards.description"~page)|trans({}, "catroweb")|nl2br }}</p>
 
+{#        <div class="section">
+            <a id="url-download" href={{ url('download', {'id': blocks[2].program_id}) }}>
+                <button id="download"
+                        class="btn btn-primary download-button">{{ "help.aliceGameJamTutorialcards.download"|trans({}, "catroweb") }}</button>
+            </a>
+        </div>#}
+
+        <div class="section">
+
+            {% if blocks[0].image_orientation == 'landscape' %}
+                <div class="image_landscape">
+                    {% for i in 1..blocks[0].image_count %}
+                        <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
+                    {% endfor %}
+                </div>
+
+            {% elseif blocks[0].image_orientation == 'potrait' %}
+                <div class="image_potrait">
+                    {% for i in 1..blocks[0].image_count %}
+
+                        <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
+
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="clear"></div>
 
     </div>
-
-
-    <div class="section">
-
-      <div class="videoWrapper">
-        <!-- Copy & Pasted from YouTube -->
-        <iframe width="560" height="315" src={{ "https://www.youtube.com/embed/"~blocks[1].video_link }} frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-
-
-  <div class="section">
-     <a id="url-download" href={{ url('download', {'id': blocks[2].program_id}) }}>
-          <button id="download" class="btn btn-primary download-button">Download the program{#{{ "download"|trans({}, "catroweb") }}#}</button>
-     </a>
-  </div>
-
-
-  </div>
-
-
-    {#<div class="block">#}
-      {#<div>#}
-        {#<p class="description">#}
-          {#{{ ("help.aliceGameJamTutorialcards.card"~page~".description")|trans({}, "catroweb") }}<br>#}
-          {#{{ ("clickToDownloadProgram")|trans({#}
-            {#'%link_start%': '<a href="'~example_link~'" target="_blank">',#}
-            {#'%link_end%': '</a>'#}
-          {#}, "catroweb")|raw }}#}
-        {#</p>#}
-      {#</div>#}
-      {#<div>#}
-        {#<div class="img-container">#}
-          {#<img src="{{ asset('images/help/tutorialcards/cards/'~page~'_0.jpg') }}" alt="" title=""/>#}
-        {#</div>#}
-      {#</div>#}
-    {#</div>#}
-
-    {#{% for block in blocks %}#}
-    {#<div class="block">#}
-    {#<div>#}
-      {#{% set block_num = loop.index %}#}
-      {#({{ loop.index }})#}
-      {#{%  set link = url('catrobat_web_tutorialcards') %}#}
-      {#{{ ("help.tutorialcards.card"~page~"."~block.block~"")|trans({#}
-        {#'%tutorial_card_link_1%': '<a href="'~link~'/1" target="_blank">Tutorial Card 1</a>',#}
-        {#'%tutorial_card_link_2%': '<a href="'~link~'/2" target="_blank">Tutorial Card 2</a>',#}
-        {#'%tutorial_card_link_3%': '<a href="'~link~'/3" target="_blank">Tutorial Card 3</a>',#}
-        {#'%tutorial_card_link_4%': '<a href="'~link~'/4" target="_blank">Tutorial Card 4</a>',#}
-        {#'%tutorial_card_link_5%': '<a href="'~link~'/5" target="_blank">Tutorial Card 5</a>',#}
-        {#'%tutorial_card_link_6%': '<a href="'~link~'/6" target="_blank">Tutorial Card 6</a>',#}
-        {#'%tutorial_card_link_7%': '<a href="'~link~'/7" target="_blank">Tutorial Card 7</a>',#}
-        {#'%tutorial_card_link_8%': '<a href="'~link~'/8" target="_blank">Tutorial Card 8</a>',#}
-        {#'%tutorial_card_link_9%': '<a href="'~link~'/9" target="_blank">Tutorial Card 9</a>',#}
-        {#'%tutorial_card_link_10%': '<a href="'~link~'/10" target="_blank">Tutorial Card 10</a>',#}
-        {#'%tutorial_card_link_11%': '<a href="'~link~'/11" target="_blank">Tutorial Card 11</a>',#}
-        {#'%tutorial_card_link_12%': '<a href="'~link~'/12" target="_blank">Tutorial Card 12</a>'#}
-      {#}, "catroweb")|raw }}#}
-    {#</div>#}
-    {#<div>#}
-      {#{% for i in 1..block.images %}#}
-      {#<div class="img-container">#}
-        {#<img src="{{ asset('images/help/tutorialcards/cards/'~page~'_'~block_num~'_'~i~'.jpg') }}" alt="" title=""/>#}
-      {#</div>#}
-      {#{% endfor %}#}
-    {#</div>#}
-    {#</div>#}
-    {#{% endfor %}#}
-
-    <div class="clear"></div>
-
-  </div>
 
 
 {% endblock %}

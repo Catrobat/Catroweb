@@ -17,7 +17,7 @@ class GameJamTutorialController extends Controller
    */
   public function tutorialcardsAction($page)
   {
-      $cards_num = 5;
+      $cards_num = 6;
 
       if ($page > $cards_num) {
           throw $this->createNotFoundException('Unable to find tutorialcard.');
@@ -35,44 +35,35 @@ class GameJamTutorialController extends Controller
       switch($page) {
         case 1:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
-            $blocks[1] = array('video_link' => "6ytY_vfsnNU");
+            $blocks[1] = array('video_link' => "tGgMFWoJDBU");
             $blocks[2] = array('program_id' => "0");
             break;
         case 2:
             $blocks[0] = array('image_orientation' => "potrait", 'image_count' => 2);
-            $blocks[1] = array('video_link' => "6ytY_vfsnNU");
+            $blocks[1] = array('video_link' => "mx2DLFIg1Rc");
             $blocks[2] = array('program_id' => "0");
             break;
         case 3:
-            $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 3);
-            $blocks[1] = array('video_link' => "6ytY_vfsnNU");
-            $blocks[2] = array('program_id' => "0");
+            $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
+            $blocks[1] = array('video_link' => "HxYr_2HdMsE");
+            $blocks[2] = array('program_id' => "4683");
             break;
         case 4:
-            $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 3);
-            $blocks[1] = array('video_link' => "6ytY_vfsnNU");
-            $blocks[2] = array('program_id' => "0");
+            $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
+            $blocks[1] = array('video_link' => "yLqhLmX9Mp4");
+            $blocks[2] = array('program_id' => "4683");
           break;
         case 5:
-            $blocks[0] = array('image_orientation' => "potrait", 'image_count' => 2);
-            $blocks[1] = array('video_link' => "6ytY_vfsnNU");
-            $blocks[2] = array('program_id' => "0");
+            $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
+            $blocks[1] = array('video_link' => "G85_vgb1Ja4");
+            $blocks[2] = array('program_id' => "4684");
           break;
-//
-//        case 9:
-//          $blocks[0] = array('block' => 'one', 'images' => 2);
-//          $blocks[2] = array('block' => 'three', 'images' => 1);
-//          break;
-//
-//        case 11:
-//          $blocks[1] = array('block' => 'two', 'images' => 2);
-//          break;
-//
-//        case 12:
-//          $blocks[1] = array('block' => 'two', 'images' => 3);
-//          break;
+        case 6:
+            $blocks[0] = array('image_orientation' => "potrait", 'image_count' => 2);
+            $blocks[1] = array('video_link' => "m97g4G49kOg");
+            $blocks[2] = array('program_id' => "4682");
+          break;
       }
-
 
       return $this->get('templating')->renderResponse(':help:gamejamtutorialcard.html.twig', array(
         'page' => $page,
