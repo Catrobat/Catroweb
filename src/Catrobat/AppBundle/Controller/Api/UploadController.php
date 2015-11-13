@@ -88,13 +88,13 @@ class UploadController
                 $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
                 
                 $program = $this->programmanager->addProgram($add_program_request);
-                $user->setToken($this->tokengenerator->generateToken());
+                $user->setUploadToken($this->tokengenerator->generateToken());
                 $this->usermanager->updateUser($user);
 
                 $response['projectId'] = $program->getId();
                 $response['statusCode'] = StatusCode::OK;
                 $response['answer'] = $this->trans('success.upload');
-                $response['token'] = $user->getToken();
+                $response['token'] = $user->getUploadToken();
                 if ($gamejam !== null && !$program->isAcceptedForGameJam())
                 {
                     $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
