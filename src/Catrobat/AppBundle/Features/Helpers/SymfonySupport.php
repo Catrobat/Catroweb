@@ -298,7 +298,7 @@ class SymfonySupport
         return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
     }
     
-    public function upload($file, $user)
+    public function upload($file, $user, $flavor = "pocketcode")
     {
         if ($user == null) {
             $user = $this->getDefaultUser();
@@ -313,7 +313,7 @@ class SymfonySupport
         $parameters['token'] = $user->getUploadToken();
         $parameters['fileChecksum'] = md5_file($file->getPathname());
         $client = $this->getClient();
-        $client->request('POST', '/pocketcode/api/upload/upload.json', $parameters, array($file));
+        $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
         $response = $client->getResponse();
     
         return $response;

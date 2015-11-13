@@ -35,16 +35,6 @@ class FeatureContext extends BaseContext
         return new UploadedFile($filepath, 'test.catrobat');
     }
 
-    private function getPhiroProProgramFile()
-    {
-        $filepath = $this->generateProgramFileWith(array(
-            'applicationName' => 'Pocket Phiro'
-        ));
-        assertTrue(file_exists($filepath), 'File not found');
-        
-        return new UploadedFile($filepath, 'program_generated.catrobat');
-    }
-    
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ////////////////////////////////////////////
     
@@ -54,8 +44,8 @@ class FeatureContext extends BaseContext
     public function iUploadACatrobatProgramWithThePhiroProApp()
     {
         $user = $this->insertUser();
-        $program = $this->getPhiroProProgramFile();
-        $response = $this->upload($program, $user);
+        $program = $this->getStandardProgramFile();
+        $response = $this->upload($program, $user, 'pocketphiro');
         assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
@@ -67,7 +57,7 @@ class FeatureContext extends BaseContext
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
         assertNotNull($program, 'No program added');
-        assertEquals('pocketphiropro', $program->getFlavor(), 'Program is NOT flagged a phiro');
+        assertEquals('pocketphiro', $program->getFlavor(), 'Program is NOT flagged a phiro');
     }
 
     /**

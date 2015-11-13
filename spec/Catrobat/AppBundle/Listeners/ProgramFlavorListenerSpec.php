@@ -4,50 +4,41 @@ namespace spec\Catrobat\AppBundle\Listeners;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Catrobat\AppBundle\Entity\Program;
 
 class ProgramFlavorListenerSpec extends ObjectBehavior
 {
+    /**
+     * @param \Symfony\Component\HttpFoundation\RequestStack $stack
+     */
+    public function let($stack)
+    {
+        $this->beConstructedWith($stack);
+    }
+    
     public function it_is_initializable()
     {
         $this->shouldHaveType('Catrobat\AppBundle\Listeners\ProgramFlavorListener');
     }
 
   /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   * @param \Catrobat\AppBundle\Entity\Program $program
+   * @param Symfony\Component\HttpFoundation\RequestStack $stack
    */
-  public function it_detects_the_pocketcode_flavor($file, $program)
+  public function it_sets_the_flavor_of_a_program_based_on_its_request_flavor($stack)
   {
-      $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__.'/base/code.xml');
-      $xml->header->applicationName = 'Pocket Code';
-      $file->getProgramXmlProperties()->willReturn($xml);
-      $program->setFlavor(Argument::exact('pocketcode'))->shouldBeCalled();
-      $this->checkFlavor($file, $program);
+      $program = new Program();
+      $request = new Request();
+      $request->attributes->set('flavor', 'pocketcode');
+      $stack->getCurrentRequest()->willReturn($request);
+      $this->checkFlavor($program);
+      expect($program->getFlavor())->toBe('pocketcode');
+      
+      $request->attributes->set('flavor', 'pocketphiro');
+      $stack->getCurrentRequest()->willReturn($request);
+      $this->checkFlavor($program);
+      expect($program->getFlavor())->toBe('pocketphiro');
   }
 
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   * @param \Catrobat\AppBundle\Entity\Program $program
-   */
-  public function it_detects_the_phiropro_flavor($file, $program)
-  {
-      $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__.'/base/code.xml');
-      $xml->header->applicationName = 'Pocket Phiro';
-      $file->getProgramXmlProperties()->willReturn($xml);
-      $program->setFlavor(Argument::exact('pocketphiropro'))->shouldBeCalled();
-      $this->checkFlavor($file, $program);
-  }
-
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   * @param \Catrobat\AppBundle\Entity\Program $program
-   */
-  public function it_throws_an_exception_if_the_flavor_is_unknown($file, $program)
-  {
-      $xml = simplexml_load_file(__SPEC_GENERATED_FIXTURES_DIR__.'/base/code.xml');
-      $xml->header->applicationName = 'Unknown Pocketcode';
-      $file->getProgramXmlProperties()->willReturn($xml);
-      $program->setFlavor(Argument::any())->shouldNotBeCalled();
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringCheckFlavor($file, $program);
-  }
 }

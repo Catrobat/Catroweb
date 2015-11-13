@@ -64,6 +64,8 @@ services:
             
       catroweb.flavor.check:
             class: Catrobat\AppBundle\Listeners\ProgramFlavorListener
+            arguments:
+                - "@request_stack"
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
             
