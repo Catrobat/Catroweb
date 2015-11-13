@@ -93,7 +93,7 @@ var ProgramLoader = function (container, url, column_max) {
           if($(self.container).hasClass('starterDownloads'))
             div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
           else
-            div = '<div>unknown</div>';
+            div = '<div>' + programs[i].Author + '</div>';
       }
 
       var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
