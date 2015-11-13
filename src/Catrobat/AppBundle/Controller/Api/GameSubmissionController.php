@@ -49,9 +49,9 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs")
      * @Method({"GET"})
      */
-    public function getSampleProgramsForCurrentGamejam()
+    public function getSampleProgramsForLatestGamejam()
     {
-        $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
+        $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
         if ($gamejam == null) {
             throw new NoGameJamException();
         }
@@ -62,12 +62,12 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions")
      * @Method({"GET"})
      */
-    public function getSubmissionsForCurrentGamejam(Request $request)
+    public function getSubmissionsForLatestGamejam(Request $request)
     {
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
         
-        $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
+        $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
         if ($gamejam == null) {
             throw new NoGameJamException();
         }

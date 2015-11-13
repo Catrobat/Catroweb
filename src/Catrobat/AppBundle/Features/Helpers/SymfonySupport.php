@@ -176,13 +176,15 @@ class SymfonySupport
         $gamejam = new GameJam();
         @$gamejam->setName($config['name'] ?: "Behat Generated Jam");
         @$gamejam->setHashtag($config['hashtag'] ?: null);
+        
         $start_date = new \DateTime();
         $start_date->sub(new \DateInterval('P10D'));
         $end_date = new \DateTime();
         $end_date->add(new \DateInterval('P10D'));
         
-        $gamejam->setStart($start_date);
-        $gamejam->setEnd($end_date);
+        @$gamejam->setStart($config['start'] ?: $start_date);
+        @$gamejam->setEnd($config['end'] ?: $end_date);
+        
         @$gamejam->setFormUrl($config['formurl'] ?: "https://catrob.at/url/to/form");
         
         $this->getManager()->persist($gamejam);

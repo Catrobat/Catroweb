@@ -11,8 +11,19 @@ class GameJamRepository extends EntityRepository
         return $qb
             ->select('e')
             ->where('e.start < :current')
-            ->where('e.end > :current')
+            ->andWhere('e.end > :current')
             ->setParameter('current', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
             ->getQuery()->getOneOrNullResult();
     }
+    
+    public function getLatestGameJam()
+    {
+        $qb = $this->createQueryBuilder('e');
+        return $qb
+        ->select('e')
+        ->orderBy('e.start', 'DESC')
+        ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
+    }
+    
 }

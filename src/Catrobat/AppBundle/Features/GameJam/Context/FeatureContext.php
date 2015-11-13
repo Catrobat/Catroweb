@@ -251,15 +251,59 @@ class FeatureContext extends BaseContext
     {
         $programs = $table->getHash();
         for ($i = 0; $i < count($programs); ++ $i) {
+            @$gamejam = $programs[$i]['GameJam'];
+            
+            if ($gamejam == null) {
+                $gamejam = $this->gamejam;
+            } else {
+                $gamejam = $this->getSymfonySupport()->getSymfonyService('gamejamrepository')->findOneByName($gamejam);
+            }
+            
             @$config = array(
                 'name' => $programs[$i]['Name'],
-                'gamejam' => ($programs[$i]['Submitted'] == "yes") ? $this->gamejam : null,
+                'gamejam' => ($programs[$i]['Submitted'] == "yes") ? $gamejam : null,
                 'accepted' => $programs[$i]['Accepted'] == "yes" ? true : false
             );
             $this->insertProgram(null, $config);
         }
     }
 
+    /**
+     * @Given There are following gamejams:
+     */
+    public function thereAreFollowingGamejams(TableNode $table)
+    {
+        $jams = $table->getHash();
+        for ($i = 0; $i < count($jams); ++ $i) {
+            $config = array('name' => $jams[$i]['Name']);
+            
+            $start = $jams[$i]['Starts in'];
+            if ($start != null)
+            {
+                $config['start'] = $this->getDateFromNow(intval($start));
+            }
+            $end = $jams[$i]['Ends in'];
+            if ($end != null)
+            {
+                $config['end'] = $this->getDateFromNow(intval($end));
+            }
+            $this->getSymfonySupport()->insertDefaultGamejam($config);
+            $this->insertProgram(null, $config);
+        }
+    }
+    
+    private function getDateFromNow($days)
+    {
+        $date = new \DateTime();
+        if ($days < 0) {
+            $days = abs($days);
+            $date->sub(new \DateInterval('P'.$days.'D'));
+        } else {
+            $date->add(new \DateInterval('P'.$days.'D'));
+        }
+        return $date;
+    }
+    
     /**
      * @When I GET :arg1
      */
