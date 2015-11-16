@@ -59,7 +59,7 @@ Scenario: The referer should work even after one failed login
   And I fill in "username" with "Catrobat"
   And I fill in "password" with "123456"
   Then I press "Login"
-  And I should see a big help image "Hour of Code"
+  And I should see a big help image "Game Design"
   
 Scenario: When visiting the page directly to the login page, after login i should be on the index page
   Given I am on "/pocketcode/login"
