@@ -44,7 +44,8 @@
         "facebook/php-sdk-v4" : "~5.0",
         "fr3d/ldap-bundle": "2.0.*@dev",
         "ircmaxell/password-compat": "~1.0",
-        "liip/theme-bundle": "dev-master"
+        "liip/theme-bundle": "dev-master",
+        "willdurand/geocoder-bundle": "@stable"
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",

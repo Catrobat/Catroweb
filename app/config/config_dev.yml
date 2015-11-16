@@ -31,6 +31,9 @@ monolog:
             type:  chromephp
             level: info
 
+bazinga_geocoder:
+   fake_ip:    88.116.169.222 #123.345.643.133
+
 assetic:
     use_controller: true
     debug:          true

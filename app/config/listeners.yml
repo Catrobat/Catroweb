@@ -152,3 +152,12 @@ services:
           arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
           tags:
               - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+              
+              
+# =========================== Download ===========================
+
+      catrobat.download.stats:
+          class: Catrobat\AppBundle\Listeners\DownloadStatisticsListener
+          arguments: ["@download_statistics"]
+          tags:
+              - { name: kernel.event_listener, event: catrobat.program.successful.download, method: onEvent }

@@ -86,7 +86,7 @@ class ProgramManager
         }
         
         $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));
-        
+
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
 

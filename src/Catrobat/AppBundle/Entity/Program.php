@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -179,7 +180,12 @@ class Program
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $gamejam_submission_date;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Catrobat\AppBundle\Entity\ProgramDownloads", mappedBy="program_downloads")
+     */
+    protected $program_downloads;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      */
@@ -942,6 +948,22 @@ class Program
     public function getGamejam_submission_accepted()
     {
         return $this->gamejam_submission_accepted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramDownloads()
+    {
+        return $this->program_downloads;
+    }
+
+    /**
+     * @param mixed $program_downloads
+     */
+    public function setProgramDownloads($program_downloads)
+    {
+        $this->program_downloads = $program_downloads;
     }
 
     /**

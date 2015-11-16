@@ -130,3 +130,27 @@ liip_theme:
     themes: ['pocketcode', 'pocketalice', 'pocketphiro']
     active_theme: 'pocketcode'
     assetic_integration: true
+
+bazinga_geocoder:
+     fake_ip:
+         enabled:              true
+         ip:                   88.116.169.222 #123.345.643.133
+         priority:             0
+     providers:
+         google_maps:
+             locale:               ~
+             region:               ~
+             use_ssl:              false
+         openstreetmap:
+             locale:               ~
+         host_ip:              []
+         #geoip:                []
+         free_geo_ip:          []
+         yandex:
+             locale:               ~
+             toponym:              ~
+         geo_ips:
+             api_key:              ~
+         geo_plugin:           []
+         chain:
+             providers:            []

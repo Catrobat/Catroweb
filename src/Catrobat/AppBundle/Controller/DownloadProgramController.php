@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller;
 
+use Catrobat\AppBundle\Events\ProgramDownloadedEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -15,15 +16,16 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class DownloadProgramController extends Controller
 {
     /**
-   * @Route("/download/{id}.catrobat", name="download", defaults={"_format": "json"})
+   * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function downloadProgramAction(Request $request, $id)
   {
       /* @var $program_manager ProgramManager */
-    $program_manager = $this->get('programmanager');
-    /* @var $file_repository ProgramFileRepository */
-    $file_repository = $this->get('filerepository');
+      $program_manager = $this->get('programmanager');
+      /* @var $file_repository ProgramFileRepository */
+      $file_repository = $this->get('filerepository');
+      $event_dispatcher = $this->get('event_dispatcher');
 
       $program = $program_manager->find($id);
       if (!$program) {
@@ -48,6 +50,10 @@ class DownloadProgramController extends Controller
            $program->getId().'.catrobat'
       );
           $response->headers->set('Content-Disposition', $d);
+
+          $ip = $request->server->get('REMOTE_ADDR');
+          echo $ip;
+          $event_dispatcher->dispatch('catrobat.program.successful.download', new ProgramDownloadedEvent($program, $ip));
 
           return $response;
       }

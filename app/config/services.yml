@@ -178,3 +178,11 @@ services:
     facebook_post_service:
         class: Catrobat\AppBundle\Services\FacebookPostService
         arguments: ["@router", "@service_container"]
+# =========================== Download ===========================
+
+    download_statistics:
+        class: Catrobat\AppBundle\Services\DownloadStatisticsService
+        arguments:
+          - "@programmanager"
+          - "@doctrine.orm.entity_manager"
+          - "@bazinga_geocoder.geocoder"

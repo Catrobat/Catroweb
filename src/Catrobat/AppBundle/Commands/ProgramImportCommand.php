@@ -32,8 +32,8 @@ class ProgramImportCommand extends Command
     {
         $this->setName('catrobat:import')
           ->setDescription('Import programs from a given directory to the application')
-          ->addArgument('directory', InputArgument::REQUIRED, 'Direcory contaning catrobat files for import')
-          ->addArgument('user', InputArgument::REQUIRED, 'User who will be the ower of these programs');
+          ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
+          ->addArgument('user', InputArgument::REQUIRED, 'User who will be the owner of these programs');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
