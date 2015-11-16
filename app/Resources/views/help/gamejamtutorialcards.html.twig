@@ -11,9 +11,9 @@
             {% for i in 1..count %}
                 <a href="{{ path('catrobat_web_gamejamtutorialcards', {'page': i}) }}">
 
-                    <div class="help-desktop"><img src="{{ asset('images/help/alice/'~i~'.png') }}" alt="" title=""/>
+                    <div class="help-desktop"><img id="tutorial-{{ i }}" src="{{ asset('images/help/alice/'~i~'.png') }}" alt="" title=""/>
                     </div>
-                    <div class="help-mobile"><img src="{{ asset('images/help/alice/'~i~'_mob.png') }}" alt="" title=""/>
+                    <div class="help-mobile"><img id="tutorial-mobile-{{ i }}" src="{{ asset('images/help/alice/'~i~'_mob.png') }}" alt="" title=""/>
                     </div>
                 </a>
             {% endfor %}

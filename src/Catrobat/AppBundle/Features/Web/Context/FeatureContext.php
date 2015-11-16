@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
+use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
@@ -257,6 +258,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             assertTrue(false);
         }
         break;
+      case 'Game Design':
+          if ($arg1 == 'big') {
+              $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
+              $path = '/images/help/alice_tut.png';
+          } elseif ($arg1 == 'small') {
+              $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
+              $path = '/images/help/alice_tut_mobile.png';
+          } else {
+              assertTrue(false);
+          }
+          break;
       case 'Step By Step':
         if ($arg1 == 'big') {
             $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
@@ -1206,4 +1218,57 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         assertTrue(false, 'No entry found in parameters.yml!');
     }
 
+    /**
+     * @Then /^I should see "([^"]*)" "([^"]*)" tutorial banners$/
+     */
+    public function iShouldSeeTutorialBanners($count, $view)
+    {
+        if($view == "desktop") {
+            for ($i = 1; ; $i++) {
+                $img = $this->getSession()->getPage()->findById('tutorial-' . $i);
+                if ($img == null)
+                    break;
+            }
+            assertEquals($count,$i-1);
+        } elseif ($view == "mobile") {
+            for ($i = 1; ; $i++) {
+                $img = $this->getSession()->getPage()->findById('tutorial-mobile-' . $i);
+                if ($img == null)
+                    break;
+            }
+            assertEquals($count,$i-1);
+        } else {
+            assertTrue(false);
+        }
+    }
+
+    /**
+     * @When /^I click on the "([^"]*)" banner$/
+     */
+    public function iClickOnTheBanner($numb)
+    {
+        switch ($numb) {
+            case 'first':
+                $this->iClick("#tutorial-1");
+                break;
+            case 'second':
+                $this->iClick("#tutorial-2");
+                break;
+            case 'third':
+                $this->iClick("#tutorial-3");
+                break;
+            case 'fourth':
+                $this->iClick("#tutorial-4");
+                break;
+            case 'fifth':
+                $this->iClick("#tutorial-5");
+                break;
+            case 'sixth':
+                $this->iClick("#tutorial-6");
+                break;
+            default:
+                assertTrue(false);
+                break;
+        }
+    }
 }
