@@ -3,12 +3,16 @@
 namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\ProgramDownloads;
+use Catrobat\AppBundle\Entity\ProgramDownloadsRepository;
 use Catrobat\AppBundle\Entity\RudeWord;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Services\DownloadStatisticsService;
+use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Services\TokenGenerator;
@@ -32,6 +36,11 @@ class FeatureContext extends BaseContext
     private $last_response;
     private $hostname;
     private $secure;
+    /**
+     * @var $download_statistics_service DownloadStatisticsService
+     * @var $program_downloads_repository ProgramDownloadsRepository
+     */
+    private $download_statistics_service;
     private $fb_post_program_id;
     private $fb_post_id;
 
@@ -656,6 +665,93 @@ class FeatureContext extends BaseContext
     {
         throw new PendingException();
     }
+
+  /**
+   * @Given /^I use the real DownloadStatisticsService$/
+   */
+  public function iUseTheRealDownloadstatisticsservice()
+  {
+      $this->download_statistics_service = $this->getSymfonySupport()->getRealDownloadStatisticsServiceForTests();
+  }
+
+  /**
+   * @When /^I have downloaded a valid program$/
+   */
+  public function iHaveDownloadedAValidProgram()
+  {
+      $this->iDownload('/pocketcode/download/1.catrobat');
+      $this->iShouldReceiveAFile();
+      $this->theResponseCodeShouldBe(200);
+  }
+
+  /**
+   * @When /^I really generate the download statistics$/
+   */
+  public function iReallyGenerateTheDownloadStatistics()
+  {
+      echo '** gen';
+      $program_manager = $this->getSymfonySupport()->getProgramManger();
+      $program = $program_manager->find(1);
+      $ip = $this->getClient()->getRequest()->server->get('REMOTE_ADDR');
+      echo '** ip' . $ip;
+      $this->download_statistics_service->createProgramDownloadStatistics($program, $ip);
+      echo '** pronto ip' . $ip;
+  }
+
+  /**
+   * @Then /^the program should have a download timestamp, street, postal code, locality, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+   */
+  public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
+  {
+      echo 'exp.';
+      echo $expected_latitude;
+      echo $expected_longitude;
+      echo '.exp';
+      $statistics = $table->getHash();
+      for ($i = 0; $i < count($statistics); ++$i ) {
+          $ip = $statistics[$i]['ip'];
+          $country_code = $statistics[$i]['country_code'];
+          $country_name = $statistics[$i]['country_name'];
+          $program_id = $statistics[$i]['program_id'];
+
+          $program_manager = $this->getSymfonySupport()->getProgramManger();
+          $program = $program_manager->find(1);
+
+          /**
+           * @var $program_download_statistics ProgramDownloads
+           */
+          $repository = $this->getManager()->getRepository('AppBundle:ProgramDownloads');
+
+          $program_download_statistics = $repository->findOneBy(
+              array('program' => $program)
+          );
+
+          assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
+          assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
+          assertEquals($country_name, $program_download_statistics->getCountryName(), "Wrong country name in download statistics");
+          assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
+
+          assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
+          assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
+          assertNotEmpty($program_download_statistics->getStreet(), "No street was written to download statistics");
+
+          $limit = 5.0;
+          $latitude = floatval($program_download_statistics->getLatitude());
+          $longitude = floatval($program_download_statistics->getLongitude());
+          echo 'lat:' . $latitude . $expected_latitude . $limit;
+          echo 'long:' . $longitude . $expected_longitude . $limit;
+          $download_time = $program_download_statistics->getDownloadedAt();
+          $current_time = new \DateTime();
+          echo '$download_time';
+          print_r($download_time);
+          echo '$current_time';
+          print_r($current_time);
+
+          assertTrue($latitude > (floatval($expected_latitude) - $limit) && $latitude < (floatval($expected_latitude) + $limit), "Latitude in download statistics not as expected");
+          assertTrue($longitude > ($expected_longitude - $limit) && $longitude < ($expected_longitude + $limit), "Longitude in download statistics not as expected");
+          assertEquals($current_time, $download_time, "Download time in download statistics not as expected");
+      }
+  }
 
     /**
      * @When /^i download "([^"]*)"$/

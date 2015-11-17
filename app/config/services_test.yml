@@ -65,3 +65,13 @@ services:
         arguments:    ["@facebook_post_service", "@doctrine.orm.entity_manager", "@programmanager"]
         tags:
             - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+
+    download_statistics:
+        class: Catrobat\AppBundle\Features\Helpers\FakeDownloadStatisticsService
+
+    real_download_statistics:
+            class: Catrobat\AppBundle\Services\DownloadStatisticsService
+            arguments:
+              - "@programmanager"
+              - "@doctrine.orm.entity_manager"
+              - "@bazinga_geocoder.geocoder"

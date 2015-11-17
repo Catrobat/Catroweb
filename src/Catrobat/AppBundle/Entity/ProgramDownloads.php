@@ -34,39 +34,39 @@ class ProgramDownloads
     protected $ip;
 
     /**
-     * @ORM\Column(type="text", options={"default":""})
+     * @ORM\Column(type="text", options={"default":""}, nullable=true)
      */
     protected $latitude;
 
     /**
-     * @ORM\Column(type="text", options={"default":""})
+     * @ORM\Column(type="text", options={"default":""}, nullable=true)
      */
     protected $longitude;
 
     /**
-     * @ORM\Column(type="text", options={"default":""})
+     * @ORM\Column(type="text", options={"default":""}, nullable=true)
      */
     protected $country_code;
 
     /**
-     * @ORM\Column(type="text", options={"default":""})
+     * @ORM\Column(type="text", options={"default":""}, nullable=true)
      */
     protected $country_name;
 
     /**
-     * @ORM\Column(type="string", options={"default":""})
+     * @ORM\Column(type="string", options={"default":""}, nullable=true)
      */
     protected $street;
 
     /**
-     * @ORM\Column(type="string", options={"default":""})
+     * @ORM\Column(type="string", options={"default":""}, nullable=true)
      */
     protected $postal_code;
 
     /**
-     * @ORM\Column(type="string", options={"default":""})
+     * @ORM\Column(type="string", options={"default":""}, nullable=true)
      */
-    protected $locality = 0;
+    protected $locality;
 
     /**
      * @return mixed

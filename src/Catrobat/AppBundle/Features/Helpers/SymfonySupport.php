@@ -66,6 +66,14 @@ class SymfonySupport
     {
         return $this->kernel->getContainer()->get('filerepository');
     }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ProgramDownloadsRepository
+     */
+    public function getProgramDownloadsRepository()
+    {
+        return $this->kernel->getContainer()->get('programdownloadsrepository');
+    }
     
     /**
      * @return \Catrobat\AppBundle\Services\ExtractedFileRepository
@@ -121,6 +129,11 @@ class SymfonySupport
     public function getSymfonyService($param)
     {
         return $this->kernel->getContainer()->get($param);
+    }
+
+    public function getRealDownloadStatisticsServiceForTests()
+    {
+        return $this->kernel->getContainer()->get('real_download_statistics');
     }
     
     /**
@@ -363,7 +376,7 @@ class SymfonySupport
             }
         }
     }
-    
+
     protected function getTempCopy($path)
     {
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
