@@ -36,12 +36,12 @@ class GameJamTutorialController extends Controller
         case 1:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
             $blocks[1] = array('video_link' => "tGgMFWoJDBU");
-            $blocks[2] = array('program_id' => "0");
+            $blocks[2] = array('program_id' => "4799");
             break;
         case 2:
             $blocks[0] = array('image_orientation' => "potrait", 'image_count' => 2);
             $blocks[1] = array('video_link' => "mx2DLFIg1Rc");
-            $blocks[2] = array('program_id' => "0");
+            $blocks[2] = array('program_id' => "4801");
             break;
         case 3:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
