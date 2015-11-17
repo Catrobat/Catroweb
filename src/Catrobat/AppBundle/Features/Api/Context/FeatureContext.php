@@ -154,6 +154,9 @@ class FeatureContext extends BaseContext
       case 'an additional image':
         $filename = 'program_with_extra_image.catrobat';
         break;
+      case 'an extra file':
+        $filename = 'program_with_too_many_files.catrobat';
+        break;
       case 'valid parameters':
         $filename = 'base.catrobat';
         break;
