@@ -2,13 +2,6 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
-use Catrobat\AppBundle\Entity\ProgramDownloads;
-use Facebook\FacebookJavaScriptLoginHelper;
-use Facebook\FacebookSession;
-use Facebook\FacebookRequest;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookRedirectLoginHelper;
-use Geocoder\Provider\FreeGeoIp;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Facebook;
 use Facebook\Exceptions\FacebookSDKException;
@@ -39,8 +32,6 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Catrobat\AppBundle\Security\UserAuthenticator;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Bazinga\Bundle\GeocoderBundle;
-use Geocoder\Model\Address;
 
 class SecurityController extends Controller
 {
@@ -1199,71 +1190,5 @@ class SecurityController extends Controller
             'app_secret' => $client_secret,
             'default_graph_version' => 'v2.5',
         ]);
-    }
-
-    /**
-     * @Route("/api/download_stat/download_stat.json", name="download_stat", options={"expose"=true}, defaults={"_format": "json"})
-     * @Method({"GET"})
-     */
-    public function createProgramDownloadStatistics() {
-
-        echo 'createProgramDownloadStatistics ...';
-
-        echo $this->container->getParameter('facebook_app_id');
-        //$ip = $request->server->get('REMOTE_ADDR');
-        $ip = '88.116.169.222';
-
-        $results = $this->container->get('bazinga_geocoder.geocoder')
-            ->using('host_ip')
-            ->geocode($ip);
-
-        echo '**';
-
-        $result = $results->first();
-
-        $retArray = array();
-        $time = date('H:i:s \O\n d/m/Y');
-        echo $time;
-        $retArray['downloaded_at'] = $time;
-        $retArray['ip'] = $ip;
-        $retArray['lat'] = $result->getLatitude();
-        $retArray['long'] = $result->getLongitude();
-        $retArray['getCountrygetName'] = $result->getCountry()->getName();
-        $retArray['getCountrygetCode'] = $result->getCountry()->getCode();
-
-
-        $results_google = $this->container->get('bazinga_geocoder.geocoder')
-            ->using('google_maps')
-            ->reverse($result->getLatitude(), $result->getLongitude());
-
-        $result = $results_google->first();
-
-        $retArray['street'] = $result->getStreetName() . $result->getStreetNumber();
-        $retArray['getPostalCode'] = $result->getPostalCode();
-        $retArray['getLocality'] = $result->getLocality();
-
-        //$program_id = $request->request->get('id');
-        $program_id = 1;
-        $program = $this->container->get('programmanager')->find($program_id);
-
-        $program_download_statistic = new ProgramDownloads();
-        $program_download_statistic->setProgram($program);
-        $program_download_statistic->setDownloadedAt(new \DateTime());
-        $program_download_statistic->setIp($ip);
-        $program_download_statistic->setLatitude($result->getLatitude());
-        $program_download_statistic->setLongitude($result->getLongitude());
-        $program_download_statistic->setCountryCode($result->getCountry()->getCode());
-        $program_download_statistic->setCountryName($result->getCountry()->getName());
-        $program_download_statistic->setStreet($result->getStreetName() . ' ' . $result->getStreetNumber());
-        $program_download_statistic->setPostalCode($result->getPostalCode());
-        $program_download_statistic->setLocality($result->getLocality());
-        $this->container->get('doctrine.orm.default_entity_manager')->persist($program_download_statistic);
-
-        //$program->setProgramDownloads($program_download_statistic);
-        //$em->persist($program);
-        $this->container->get('doctrine.orm.default_entity_manager')->flush();
-        echo $result->getLocality();
-
-        return JsonResponse::create($retArray);
     }
 }

@@ -13,6 +13,7 @@ use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Services\DownloadStatisticsService;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
+use DateTime;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Services\TokenGenerator;
@@ -79,6 +80,20 @@ class FeatureContext extends BaseContext
         $this->getSymfonyService('facebook_post_service')->useRealService(false);
         $this->theServerNameIs('localhost');
         $this->getClient()->enableReboot();
+    }
+
+    /**
+     * @BeforeScenario @RealGeocoder
+     */
+    public function activateRealGeocoderService() {
+        $this->getSymfonyService('download_statistics')->useRealService(true);
+    }
+
+    /**
+     * @AfterScenario @RealGeocoder
+     */
+    public function deactivateRealGeocoderService() {
+        $this->getSymfonyService('download_statistics')->useRealService(false);
     }
 
     private function prepareValidRegistrationParameters()
@@ -667,14 +682,6 @@ class FeatureContext extends BaseContext
     }
 
   /**
-   * @Given /^I use the real DownloadStatisticsService$/
-   */
-  public function iUseTheRealDownloadstatisticsservice()
-  {
-      $this->download_statistics_service = $this->getSymfonySupport()->getRealDownloadStatisticsServiceForTests();
-  }
-
-  /**
    * @When /^I have downloaded a valid program$/
    */
   public function iHaveDownloadedAValidProgram()
@@ -685,28 +692,10 @@ class FeatureContext extends BaseContext
   }
 
   /**
-   * @When /^I really generate the download statistics$/
-   */
-  public function iReallyGenerateTheDownloadStatistics()
-  {
-      echo '** gen';
-      $program_manager = $this->getSymfonySupport()->getProgramManger();
-      $program = $program_manager->find(1);
-      $ip = $this->getClient()->getRequest()->server->get('REMOTE_ADDR');
-      echo '** ip' . $ip;
-      $this->download_statistics_service->createProgramDownloadStatistics($program, $ip);
-      echo '** pronto ip' . $ip;
-  }
-
-  /**
-   * @Then /^the program should have a download timestamp, street, postal code, locality, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
    */
   public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
   {
-      echo 'exp.';
-      echo $expected_latitude;
-      echo $expected_longitude;
-      echo '.exp';
       $statistics = $table->getHash();
       for ($i = 0; $i < count($statistics); ++$i ) {
           $ip = $statistics[$i]['ip'];
@@ -714,17 +703,11 @@ class FeatureContext extends BaseContext
           $country_name = $statistics[$i]['country_name'];
           $program_id = $statistics[$i]['program_id'];
 
-          $program_manager = $this->getSymfonySupport()->getProgramManger();
-          $program = $program_manager->find(1);
-
           /**
            * @var $program_download_statistics ProgramDownloads
            */
           $repository = $this->getManager()->getRepository('AppBundle:ProgramDownloads');
-
-          $program_download_statistics = $repository->findOneBy(
-              array('program' => $program)
-          );
+          $program_download_statistics = $repository->find(1);
 
           assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
           assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
@@ -738,18 +721,14 @@ class FeatureContext extends BaseContext
           $limit = 5.0;
           $latitude = floatval($program_download_statistics->getLatitude());
           $longitude = floatval($program_download_statistics->getLongitude());
-          echo 'lat:' . $latitude . $expected_latitude . $limit;
-          echo 'long:' . $longitude . $expected_longitude . $limit;
           $download_time = $program_download_statistics->getDownloadedAt();
           $current_time = new \DateTime();
-          echo '$download_time';
-          print_r($download_time);
-          echo '$current_time';
-          print_r($current_time);
+
+          $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
 
           assertTrue($latitude > (floatval($expected_latitude) - $limit) && $latitude < (floatval($expected_latitude) + $limit), "Latitude in download statistics not as expected");
           assertTrue($longitude > ($expected_longitude - $limit) && $longitude < ($expected_longitude + $limit), "Longitude in download statistics not as expected");
-          assertEquals($current_time, $download_time, "Download time in download statistics not as expected");
+          assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
       }
   }
 

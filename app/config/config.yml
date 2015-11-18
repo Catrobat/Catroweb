@@ -144,7 +144,6 @@ bazinga_geocoder:
          openstreetmap:
              locale:               ~
          host_ip:              []
-         #geoip:                []
          free_geo_ip:          []
          yandex:
              locale:               ~

@@ -19,7 +19,7 @@ class ProgramDownloads
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
-     * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
      */
     protected $program;
 
@@ -226,5 +226,21 @@ class ProgramDownloads
     public function setLocality($locality)
     {
         $this->locality = $locality;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }

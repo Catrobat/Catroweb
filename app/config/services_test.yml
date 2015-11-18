@@ -60,14 +60,9 @@ services:
         class: Catrobat\AppBundle\Services\FacebookPostService
         arguments: ["@router", "@service_container"]
 
-    catrobat.fb_post.remove:
-        class:        Catrobat\AppBundle\Listeners\FacebookRemovePostListener
-        arguments:    ["@facebook_post_service", "@doctrine.orm.entity_manager", "@programmanager"]
-        tags:
-            - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
-
     download_statistics:
         class: Catrobat\AppBundle\Features\Helpers\FakeDownloadStatisticsService
+        arguments: ["@real_download_statistics"]
 
     real_download_statistics:
             class: Catrobat\AppBundle\Services\DownloadStatisticsService

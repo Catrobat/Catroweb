@@ -1,21 +1,27 @@
 <?php
 namespace Catrobat\AppBundle\Features\Helpers;
 
-use Catrobat\AppBundle\Entity\Program;
-use Symfony\Component\DependencyInjection\Container;
+use Catrobat\AppBundle\Services\DownloadStatisticsService;
 
-/**
- * @Route(service="download.statistics")
- */
 class FakeDownloadStatisticsService
 {
-    public function __construct()
+    private $geocoder_service;
+    private $use_real_service;
+
+    public function __construct(DownloadStatisticsService $geocoder_service)
     {
+        $this->geocoder_service = $geocoder_service;
     }
 
-    public function createProgramDownloadStatistics(Program $program, $ip)
+    public function createProgramDownloadStatistics($program_id, $ip)
     {
-        echo 'FAKE';
+        if ($this->use_real_service) {
+            return $this->geocoder_service->createProgramDownloadStatistics($program_id, $ip);
+        }
         return true;
+    }
+
+    public function useRealService($use_real) {
+        $this->use_real_service = $use_real;
     }
 }

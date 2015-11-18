@@ -72,6 +72,7 @@ sonata_admin:
                     - catrowebadmin.block.programs.all
                     - catrowebadmin.block.programs.approve
                     - catrowebadmin.block.programs.reported
+                    - catrowebadmin.block.programs.stats
 
             sonata.admin.group.featured:
                 label:           Special Programs

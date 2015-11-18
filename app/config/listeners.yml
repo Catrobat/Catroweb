@@ -160,4 +160,4 @@ services:
           class: Catrobat\AppBundle\Listeners\DownloadStatisticsListener
           arguments: ["@download_statistics"]
           tags:
-              - { name: kernel.event_listener, event: catrobat.program.successful.download, method: onEvent }
+              - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }

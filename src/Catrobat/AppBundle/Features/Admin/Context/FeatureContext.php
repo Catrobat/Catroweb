@@ -29,13 +29,13 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureContext
 {
-    
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Support Functions
-    
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Hooks
-    
+
     /**
      * @BeforeScenario
      */
@@ -50,11 +50,11 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function generateSessionCookie()
     {
         $client = $this->getClient();
-        
+
         $session = $this->getClient()
             ->getContainer()
             ->get("session");
-        
+
         $cookie = new Cookie($session->getName(), $session->getId());
         $client->getCookieJar()->set($cookie);
     }
@@ -65,7 +65,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function initACL()
     {
         $acl_command = new SetupAclCommand();
-        
+
         $acl_command->setContainer($this->getClient()
             ->getContainer());
         $return = $acl_command->run(new ArrayInput(array()), new NullOutput());
@@ -95,20 +95,20 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
         $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
         $ldap_test_driver->resetFixtures();
     }
-    
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Steps
-    
+
     /**
      * @Given /^there are notifications:$/
      */
     public function thereAreNotifications(TableNode $table)
     {
-        /* @var $user_manager UserManager*/
+        /* @var $user_manager UserManager */
         $user_manager = $this->getUserManager();
         $em = $this->getManager();
         $nots = $table->getHash();
-        for ($i = 0; $i < count($nots); ++ $i) {
+        for ($i = 0; $i < count($nots); ++$i) {
             $user = $user_manager->findOneBy(array(
                 'username' => $nots[$i]['user']
             ));
@@ -120,6 +120,30 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
             $em->persist($notification);
         }
         $em->flush();
+    }
+
+    /**
+     * @Given /^there are program download statistics:$/
+     */
+    public function thereAreProgramDownloadStatistics(TableNode $table)
+    {
+        $program_stats = $table->getHash();
+        for ($i = 0; $i < count($program_stats); ++$i) {
+            $program = $this->getProgramManger()->find($program_stats[$i]['program_id']);
+            @$config = array(
+                'downloaded_at' => $program_stats[$i]['downloaded_at'],
+                'ip' => $program_stats[$i]['ip'],
+                'latitude' => $program_stats[$i]['latitude'],
+                'longitude' => $program_stats[$i]['longitude'],
+                'country_code' => $program_stats[$i]['country_code'],
+                'country_name' => $program_stats[$i]['country_name'],
+                'street' => $program_stats[$i]['street'],
+                'postal_code' => @$program_stats[$i]['postal_code'],
+                'locality' => @$program_stats[$i]['locality'],
+            );
+
+            $this->insertProgramDownloadStatistics($program, $config);
+        }
     }
 
     /**
@@ -189,19 +213,19 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
             "role" => $role,
             "name" => "generatedBehatUser"
         ));
-        
+
         $client = $this->getClient();
         $client->getCookieJar()->set(new Cookie(session_name(), true));
-        
+
         $session = $client->getContainer()->get('session');
-        
+
         $user = $this->getSymfonyService('fos_user.user_manager')->findUserByUsername("generatedBehatUser");
         $providerKey = $this->getSymfonyParameter('fos_user.firewall_name');
-        
+
         $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
         $session->set('_security_' . $providerKey, serialize($token));
         $session->save();
-        
+
         $cookie = new Cookie($session->getName(), $session->getId());
         $client->getCookieJar()->set($cookie);
     }
@@ -212,9 +236,30 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function theResponseShouldContain($needle)
     {
         if (strpos($this->getClient()
-            ->getResponse()
-            ->getContent(), $needle) === false)
+                ->getResponse()
+                ->getContent(), $needle) === false
+        )
             assert(false, $needle . " not found in the response ");
+    }
+
+    /**
+     * @Then /^the response should contain the elements:$/
+     */
+    public function theResponseShouldContainTheElements(TableNode $table)
+    {
+        $program_stats = $table->getHash();
+        for ($i = 0; $i < count($program_stats); ++$i) {
+            $this->theResponseShouldContain($program_stats[$i]['id']);
+            $this->theResponseShouldContain($program_stats[$i]['downloaded_at']);
+            $this->theResponseShouldContain($program_stats[$i]['ip']);
+            $this->theResponseShouldContain($program_stats[$i]['latitude']);
+            $this->theResponseShouldContain($program_stats[$i]['longitude']);
+            $this->theResponseShouldContain($program_stats[$i]['country_code']);
+            $this->theResponseShouldContain($program_stats[$i]['country_name']);
+            $this->theResponseShouldContain($program_stats[$i]['street']);
+            $this->theResponseShouldContain($program_stats[$i]['postal_code']);
+            $this->theResponseShouldContain($program_stats[$i]['locality']);
+        }
     }
 
     /**
@@ -239,7 +284,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $full_filename = $path . "/" . $filename;
         $dirname = dirname($full_filename);
-        if (! is_dir($dirname)) {
+        if (!is_dir($dirname)) {
             mkdir($dirname, 0755, true);
         }
         $fp = fopen($full_filename, 'w'); // open in write mode.
@@ -322,7 +367,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function iPostLoginUserWithPassword($uname, $pwd)
     {
         $csrfToken = $this->getSymfonyService('form.csrf_provider')->generateCsrfToken('authenticate');
-        
+
         $session = $this->getClient()
             ->getContainer()
             ->get("session");
@@ -333,7 +378,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
         $this->getClient()
             ->getCookieJar()
             ->set($cookie);
-        
+
         $this->iHaveAParameterWithValue("_username", $uname);
         $this->iHaveAParameterWithValue("_password", $pwd);
         $this->iHaveAParameterWithValue("_csrf_token", $csrfToken);
@@ -360,8 +405,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $link = $this->getClient()->getCrawler()->selectLink($arg1)->link();
 
-        if(!strcmp($link->getUri(), $arg2))
+        if (!strcmp($link->getUri(), $arg2))
             assert(false, "expected: " . $arg2 . "  get: " . $link->getURI());
     }
-
 }

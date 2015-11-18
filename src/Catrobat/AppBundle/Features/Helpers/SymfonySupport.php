@@ -1,6 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Features\Helpers;
 
+use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -10,6 +11,8 @@ use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Catrobat\AppBundle\Entity\GameJam;
+use Symfony\Component\Validator\Constraints\DateTime;
+
 class SymfonySupport
 {
     private $fixture_dir;
@@ -68,14 +71,6 @@ class SymfonySupport
     }
 
     /**
-     * @return \Catrobat\AppBundle\Entity\ProgramDownloadsRepository
-     */
-    public function getProgramDownloadsRepository()
-    {
-        return $this->kernel->getContainer()->get('programdownloadsrepository');
-    }
-    
-    /**
      * @return \Catrobat\AppBundle\Services\ExtractedFileRepository
      */
     public function getExtractedFileRepository()
@@ -131,11 +126,6 @@ class SymfonySupport
         return $this->kernel->getContainer()->get($param);
     }
 
-    public function getRealDownloadStatisticsServiceForTests()
-    {
-        return $this->kernel->getContainer()->get('real_download_statistics');
-    }
-    
     /**
      * @return \Symfony\Component\HttpKernel\Profiler\Profiler
      */
@@ -276,6 +266,34 @@ class SymfonySupport
         $em->flush();
         
         return $program;
+    }
+
+    public function insertProgramDownloadStatistics($program, $config)
+    {
+        $em = $this->getManager();
+        /*
+         * @var $program_statistics Entity\ProgramDownloads;
+         * @var $program Entity\Program;
+         */
+        $program_statistics = new ProgramDownloads();
+        $program_statistics->setProgram($program);
+        $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
+        $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
+        $program_statistics->setLatitude(isset($config['latitude']) ? $config['latitude'] : 47.2);
+        $program_statistics->setLongitude(isset($config['longitude']) ? $config['longitude'] : 10.7);
+        $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
+        $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
+        $program_statistics->setStreet(isset($config['street']) ? $config['street'] : 'Duck Street 1');
+        $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
+        $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
+        $em->persist($program_statistics);
+
+        $program->addProgramDownloads($program_statistics);
+        $em->persist($program);
+
+        $em->flush();
+
+        return $program_statistics;
     }
     
     public function generateProgramFileWith($parameters)

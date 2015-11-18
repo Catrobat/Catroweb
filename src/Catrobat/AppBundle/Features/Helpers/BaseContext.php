@@ -216,6 +216,11 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         return $this->symfony_support->insertProgram($user, $config);
     }
 
+    public function insertProgramDownloadStatistics($program, $config)
+    {
+        return $this->symfony_support->insertProgramDownloadStatistics($program, $config);
+    }
+
     public function generateProgramFileWith($parameters)
     {
         return $this->symfony_support->generateProgramFileWith($parameters);

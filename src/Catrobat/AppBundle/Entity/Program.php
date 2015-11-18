@@ -182,9 +182,14 @@ class Program
     protected $gamejam_submission_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Catrobat\AppBundle\Entity\ProgramDownloads", mappedBy="program_downloads")
+     * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program_downloads")
      */
     protected $program_downloads;
+
+    public function __construct()
+    {
+        $this->program_downloads = new ArrayCollection();
+    }
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -951,7 +956,7 @@ class Program
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProgramDownloads()
     {
@@ -959,11 +964,12 @@ class Program
     }
 
     /**
-     * @param mixed $program_downloads
+     * @param \Catrobat\AppBundle\Entity\Program $programs $program_downloads
      */
-    public function setProgramDownloads($program_downloads)
+    public function addProgramDownloads(\Catrobat\AppBundle\Entity\ProgramDownloads $program_download)
     {
-        $this->program_downloads = $program_downloads;
+        $this->program_downloads[] = $program_download;
+        return $this->program_downloads;
     }
 
     /**

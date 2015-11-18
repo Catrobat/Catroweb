@@ -21,6 +21,12 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Reported Programs }
         arguments: [null, Catrobat\AppBundle\Entity\ProgramInappropriateReport, null]
 
+      catrowebadmin.block.programs.stats:
+        class: Catrobat\AppBundle\Admin\ProgramDownloadStatisticsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Program Download Statistics }
+        arguments: [null, Catrobat\AppBundle\Entity\ProgramDownloads, null]
+
       catrowebadmin.block.programs.categories:
         class: Catrobat\AppBundle\Admin\CategoriesAdmin
         tags:
