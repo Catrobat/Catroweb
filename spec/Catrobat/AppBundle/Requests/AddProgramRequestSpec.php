@@ -12,7 +12,7 @@ class AddProgramRequestSpec extends ObjectBehavior
    */
   public function let($user, $file)
   {
-      $this->beConstructedWith($user, $file, false);
+      $this->beConstructedWith($user, $file);
   }
 
     public function it_is_initializable()

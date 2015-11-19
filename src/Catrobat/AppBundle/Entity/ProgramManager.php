@@ -90,7 +90,7 @@ class ProgramManager
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
 
-        $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program, $request->shouldPostToFacebook()));
+        $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program));
 
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();

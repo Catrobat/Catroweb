@@ -85,7 +85,7 @@ class UploadController
                 throw new InvalidChecksumException();
             } else {
                 $user = $this->tokenstorage->getToken()->getUser();
-                $add_program_request = new AddProgramRequest($user, $file, true, $request->getClientIp(), $gamejam);
+                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
                 
                 $program = $this->programmanager->addProgram($add_program_request);
                 $user->setToken($this->tokengenerator->generateToken());
@@ -99,11 +99,14 @@ class UploadController
                 {
                     $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
                 }
+
+                $request->attributes->set('post_to_facebook', true);
+                $request->attributes->set('program_id', $program->getId());
             }
         }
         
         $response['preHeaderMessages'] = '';
-        
+
         return JsonResponse::create($response);
     }
 

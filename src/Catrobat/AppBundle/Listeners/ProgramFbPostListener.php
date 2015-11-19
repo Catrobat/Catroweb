@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
-use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
+use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
 class ProgramFbPostListener
 {
@@ -13,10 +13,12 @@ class ProgramFbPostListener
         $this->facebook_post_service = $facebook_post_service;
     }
 
-    public function onProgramAfterInsert(ProgramAfterInsertEvent $event)
+    public function onTerminateEvent(PostResponseEvent $event)
     {
-        if ($event->shouldPostToFacebook()) {
-            $this->facebook_post_service->postOnFacebook($event->getProgramEntity());
+        $attributes = $event->getRequest()->attributes;
+        if ($attributes->has('post_to_facebook') && $attributes->has('program_id')) {
+            $program_id = $attributes->get('program_id');
+            $this->facebook_post_service->postOnFacebook($program_id);
         }
     }
 }

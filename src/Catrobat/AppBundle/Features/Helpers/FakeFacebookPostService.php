@@ -11,12 +11,12 @@ class FakeFacebookPostService
     {
     }
 
-    public function removeFbPost($program)
+    public function removeFbPost($post_id)
     {
         return StatusCode::OK;
     }
 
-    public function postOnFacebook(Program $program)
+    public function postOnFacebook($program_id)
     {
         $fake_facebook_post_id = -1;
         return $fake_facebook_post_id;

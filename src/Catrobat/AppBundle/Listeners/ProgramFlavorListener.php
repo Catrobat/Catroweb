@@ -15,7 +15,7 @@ class ProgramFlavorListener
     {
         $this->request_stack = $stack;
     }
-    
+
     public function onEvent(ProgramBeforePersistEvent $event)
     {
         $this->checkFlavor($event->getProgramEntity());
@@ -24,6 +24,10 @@ class ProgramFlavorListener
     public function checkFlavor(Program $program)
     {
         $request = $this->request_stack->getCurrentRequest();
-        $program->setFlavor($request->attributes->get('flavor'));
+        if ($request == null) {
+            $program->setFlavor('pocketcode');
+        } else {
+            $program->setFlavor($request->attributes->get('flavor'));
+        }
     }
 }

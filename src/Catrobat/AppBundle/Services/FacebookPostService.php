@@ -19,7 +19,6 @@ class FacebookPostService
     private $app_secret;
     private $fb_admin_id;
     private $fb_channel_id;
-    private $fb_channel_name;
     private $fb_admin_user_token;
     private $debug;
 
@@ -40,7 +39,7 @@ class FacebookPostService
             $fb_response = $this->checkFacebookPostAvailable($post_id);
             $response_string = print_r($fb_response, true);
 
-            if (strpos($response_string,'id') == false) {
+            if (strpos($response_string, 'id') == false) {
                 if ($this->debug) {
                     echo 'Post not existing!';
                 }
@@ -68,7 +67,7 @@ class FacebookPostService
                 if (isset($accessToken)) {
 
                     try {
-                        $response = $this->facebook->delete($post_id, [], (string) $accessToken);
+                        $response = $this->facebook->delete($post_id, [], (string)$accessToken);
 
                         if ($this->debug) {
                             echo 'body:' . $response->getBody();
@@ -110,7 +109,7 @@ class FacebookPostService
             if (isset($accessToken)) {
 
                 try {
-                    $response = $this->facebook->get($post_id, (string) $accessToken);
+                    $response = $this->facebook->get($post_id, (string)$accessToken);
                     if ($this->debug) {
                         echo 'HEADERS: ' . print_r($response->getHeaders());
                         echo 'BODY: ' . $response->getBody();
@@ -125,7 +124,7 @@ class FacebookPostService
         }
     }
 
-    public function postOnFacebook(Program $program)
+    public function postOnFacebook($program_id)
     {
         $this->initializeFacebook();
         $account_access_token = $this->checkFacebookServerAccessTokenValidity();
@@ -148,14 +147,17 @@ class FacebookPostService
                 return $e->getMessage();
             }
 
-            $url = "https://share.catrob.at" . $this->router->generate('program', array('id' => $program->getId()));
+            $program_manager = $this->container->get('programmanager');
+            $program = $program_manager->find($program_id);
+
+            $url = "https://share.catrob.at" . $this->router->generate('program', array('id' => $program_id));
 
             $data = [
                 'link' => $url,
                 'message' => $program->getName(),
             ];
 
-            $response = $this->facebook->post('/me/feed', $data, (string) $accessToken);
+            $response = $this->facebook->post('/me/feed', $data, (string)$accessToken);
             $respBody = json_decode($response->getBody());
             if ($this->debug) {
                 echo $response->getBody();
@@ -179,12 +181,13 @@ class FacebookPostService
                 do {
                     foreach ($accountsEdge as $page) {
 
-                        $name = $page['name'];
                         $id = $page['id'];
-                        $account_access_token = $page['access_token'];
 
-                        if ($name == $this->fb_channel_name || $id == $this->fb_channel_id) {
+                        if ($id == $this->fb_channel_id) {
+                            $account_access_token = $page['access_token'];
+
                             if ($this->debug) {
+                                $name = $page['name'];
                                 $category = $page['category'];
                                 $perms = $page['perms'];
                                 echo 'token:' . $account_access_token;
@@ -282,22 +285,19 @@ class FacebookPostService
 
     private function setFacebookChannelConfigurationData()
     {
-        if (in_array($this->container->get('kernel')->getEnvironment(), array('test', 'dev'))) {
-            $this->app_id = $this->container->getParameter('fb_share_test_app_id');
-            $this->app_secret = $this->container->getParameter('fb_share_test_app_secret');
-            $this->fb_channel_id = '1469491976688194';
-            $this->fb_channel_name = 'Catrobat Programs Test';
-            $this->fb_admin_user_token = $this->container->getParameter('fb_share_test_access_token');
-            $this->debug = false;
-        } else {
-            $this->app_id = $this->container->getParameter('fb_share_app_id');
-            $this->app_secret = $this->container->getParameter('fb_share_app_secret');
-            $this->fb_channel_id = '1481344872175863';
-            $this->fb_channel_name = 'Catrobat Programs';
-            $this->fb_admin_user_token = $this->container->getParameter('fb_share_access_token');
-            $this->debug = false;
+        $this->app_id = $this->container->getParameter('facebook_share_app_id');
+        echo $this->app_id ;
+        $this->app_secret = $this->container->getParameter('facebook_share_app_secret');
+        $this->fb_channel_id = $this->container->getParameter('facebook_share_channel_id');
+        $this->fb_admin_user_token = $this->container->getParameter('facebook_share_access_token');
+        $this->fb_admin_id = $this->container->getParameter('facebook_share_admin_fb_id');
+        $this->debug = true;
+        if ($this->debug) {
+            echo 'App-ID: ' . $this->app_id;
+            echo 'App-Secret: ' . $this->app_secret;
+            echo 'Channel-ID: ' . $this->fb_channel_id;
+            echo 'Admin-Token: ' . $this->fb_admin_user_token;
+            echo 'Admin-ID: ' . $this->fb_admin_id;
         }
-        $this->fb_admin_id = $this->container->getParameter('fb_share_admin_fb_id');
-
     }
 }

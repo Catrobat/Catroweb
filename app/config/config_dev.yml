@@ -1,5 +1,6 @@
 imports:
     - { resource: config.yml }
+    - { resource: parameters_dev.yml }
 
 framework:
     router:
@@ -29,8 +30,6 @@ monolog:
         chromephp:
             type:  chromephp
             level: info
-
-
 
 assetic:
     use_controller: true

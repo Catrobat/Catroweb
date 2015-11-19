@@ -111,16 +111,16 @@ services:
 # ======== Facebook Posts =======
 
       catrobat.fb_post.post:
-                        class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
-                        arguments: ["@facebook_post_service"]
-                        tags:
-                            - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
+              class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
+              arguments: ["@facebook_post_service"]
+              tags:
+                  - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
       catrobat.fb_post.remove:
               class:        Catrobat\AppBundle\Listeners\FacebookRemovePostListener
-              arguments:    ["@facebook_post_service", "@doctrine.orm.entity_manager"]
+              arguments:    ["@facebook_post_service", "@doctrine.orm.entity_manager", "@programmanager"]
               tags:
-                  - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
+                  - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
 # ======== Logging ========
 

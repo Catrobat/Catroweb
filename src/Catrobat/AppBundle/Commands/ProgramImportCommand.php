@@ -60,7 +60,7 @@ class ProgramImportCommand extends Command
         foreach ($finder as $file) {
             try {
                 $output->writeln('Importing file '.$file);
-                $add_program_request = new AddProgramRequest($user, new File($file), false);
+                $add_program_request = new AddProgramRequest($user, new File($file));
                 $program = $this->program_manager->addProgram($add_program_request);
                 $output->writeln('Added Program <'.$program->getName().'>');
             } catch (InvalidCatrobatFileException $e) {

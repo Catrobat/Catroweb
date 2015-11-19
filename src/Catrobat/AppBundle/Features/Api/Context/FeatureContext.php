@@ -858,9 +858,7 @@ class FeatureContext extends BaseContext
      */
     public function iMakeARealFacebookPost()
     {
-        $program_manager = $this->getSymfonySupport()->getProgramManger();
-        $program = $program_manager->find($this->fb_post_program_id);
-        $this->fb_post_id = $this->facebook_post_service->postOnFacebook($program);
+        $this->fb_post_id = $this->facebook_post_service->postOnFacebook($this->fb_post_program_id);
     }
 
     /**
