@@ -362,9 +362,16 @@ class DefaultController extends Controller
       }
       $categories[] = array(
         'name' => $category->getName(),
-        'files' => $files
+        'files' => $files,
+        'priority' => $category->getPriority()
       );
     }
+
+    usort($categories, function($a,$b) {
+      if($a['priority'] == $b['priority'])
+        return 0;
+      return ($a['priority'] > $b['priority']) ? -1 : 1;
+    });
 
     return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
       'categories' => $categories

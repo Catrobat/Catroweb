@@ -18,6 +18,7 @@ class MediaPackageCategoriesAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Name'))
             ->add('package', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackage', 'required' => true))
+            ->add('priority')
         ;
     }
 

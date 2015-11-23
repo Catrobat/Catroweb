@@ -33,6 +33,11 @@ class MediaPackageCategory
   protected $files;
 
   /**
+   * @ORM\Column(type="integer")
+   */
+  protected $priority = 0;
+
+  /**
    * @return mixed
    */
   public function getId()
@@ -103,6 +108,22 @@ class MediaPackageCategory
       return $this->name." (".$this->package->getName().")";
     else
       return $this->name;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getPriority()
+  {
+    return $this->priority;
+  }
+
+  /**
+   * @param mixed $priority
+   */
+  public function setPriority($priority)
+  {
+    $this->priority = $priority;
   }
 
 }
