@@ -28,8 +28,8 @@ class FeaturedController extends Controller
         $limit = intval($request->query->get('limit'));
         $offset = intval($request->query->get('offset'));
         
-        $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset);
-        $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor);
+        $programs = $repository->getFeaturedItems($flavor, $limit, $offset);
+        $numbOfTotalProjects = $repository->getFeaturedItemCount($flavor);
         
         $retArray = array();
         $retArray['CatrobatProjects'] = array();
