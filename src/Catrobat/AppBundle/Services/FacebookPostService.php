@@ -8,6 +8,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 
 class FacebookPostService
@@ -150,7 +151,8 @@ class FacebookPostService
             $program_manager = $this->container->get('programmanager');
             $program = $program_manager->find($program_id);
 
-            $url = "https://share.catrob.at" . $this->router->generate('program', array('id' => $program_id));
+            $url = $this->router->generate('program', array('id' => $program_id), true);
+            echo $url;
 
             $data = [
                 'link' => $url,
@@ -291,7 +293,7 @@ class FacebookPostService
         $this->fb_channel_id = $this->container->getParameter('facebook_share_channel_id');
         $this->fb_admin_user_token = $this->container->getParameter('facebook_share_access_token');
         $this->fb_admin_id = $this->container->getParameter('facebook_share_admin_fb_id');
-        $this->debug = true;
+        $this->debug = false;
         if ($this->debug) {
             echo 'App-ID: ' . $this->app_id;
             echo 'App-Secret: ' . $this->app_secret;
