@@ -2,6 +2,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
+  <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
 {% endblock %}
 
 {% block body %}
