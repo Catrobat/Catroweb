@@ -23,9 +23,10 @@ class FacebookRemovePostListener
         $attributes = $event->getRequest()->attributes;
         if ($attributes->has('remove_post_from_facebook') && $attributes->has('program_id')) {
             $program_id = $attributes->get('program_id');
-            $status_code = $this->facebook_post_service->removeFbPost($program_id);
+            $program = $this->program_manager->find($program_id);
+
+            $status_code = $this->facebook_post_service->removeFbPost($program->getFbPostId());
             if ($status_code != StatusCode::FB_DELETE_ERROR) {
-                $program = $this->program_manager->find($program_id);
                 $program->setFbPostId('');
                 $this->entity_manager->persist($program);
                 $this->entity_manager->flush();

@@ -34,7 +34,7 @@ class FeatureContext extends BaseContext
     private $secure;
     private $fb_post_program_id;
     private $fb_post_id;
-    private $facebook_post_service;
+    private $use_real_facebook;
 
     /**
      * Initializes context with parameters from behat.yml.
@@ -54,6 +54,24 @@ class FeatureContext extends BaseContext
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Support Functions
 
+    /**
+     * @BeforeScenario @RealFacebook
+     */
+    public function activateRealFacebookService() {
+        $this->getClient()->disableReboot();
+        $this->getSymfonyService('facebook_post_service')->useRealService(true);
+        $this->theServerNameIs('share.catrob.at');
+        $this->iUseASecureConnection();
+    }
+
+    /**
+     * @AfterScenario @RealFacebook
+     */
+    public function deactivateRealFacebookService() {
+        $this->getSymfonyService('facebook_post_service')->useRealService(false);
+        $this->theServerNameIs('localhost');
+        $this->getClient()->enableReboot();
+    }
 
     private function prepareValidRegistrationParameters()
     {
@@ -306,7 +324,8 @@ class FeatureContext extends BaseContext
      */
     public function iPostTheseParametersTo($url)
     {
-        $this->getClient()->request('POST', $url, $this->request_parameters, $this->files);
+        $this->getClient()->request('POST', $url, $this->request_parameters, $this->files, array(
+            'HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure));
     }
 
     /**
@@ -844,35 +863,6 @@ class FeatureContext extends BaseContext
         $this->iPostTheseParametersTo('/pocketcode/api/reportProgram/reportProgram.json');
     }
 
-
-    /**
-     * @Given /^I use the real FacebookPostService$/
-     */
-    public function iUseTheRealFacebookPostService()
-    {
-        $this->facebook_post_service = $this->getSymfonySupport()->getRealFacebookPostServiceForTests();
-    }
-
-    /**
-     * @Then /^I make a real Facebook post$/
-     */
-    public function iMakeARealFacebookPost()
-    {
-        $context = $this->getSymfonyService('router')->getContext();
-        $context->setHost('share.catrob.at');
-        $context->setScheme('https');
-
-        $this->fb_post_id = $this->facebook_post_service->postOnFacebook($this->fb_post_program_id);
-    }
-
-    /**
-     * @When /^I really delete the Facebook post$/
-     */
-    public function iReallyDeleteTheFacebookPost()
-    {
-        $this->facebook_post_service->removeFbPost($this->fb_post_id);
-    }
-
     /**
      * @Then /^the project should be posted to Facebook with message "([^"]*)" and the correct project ID$/
      */
@@ -882,7 +872,7 @@ class FeatureContext extends BaseContext
         $project_id = $response['projectId'];
 
         $program_manager = $this->getSymfonySupport()->getProgramManger();
-        $fb_response = $this->facebook_post_service->checkFacebookPostAvailable($program_manager->find($project_id)->getFbPostId())->getGraphObject();
+        $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($program_manager->find($project_id)->getFbPostId())->getGraphObject();
 
         $fb_id = $fb_response['id'];
         $fb_message = $fb_response['message'];
@@ -912,7 +902,7 @@ class FeatureContext extends BaseContext
 
         $program_manager = $this->getSymfonySupport()->getProgramManger();
         assertEmpty($program_manager->find($this->fb_post_program_id)->getFbPostId(), 'FB Post was not resetted');
-        $fb_response = $this->facebook_post_service->checkFacebookPostAvailable($this->fb_post_id);
+        $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
 
         $string = print_r($fb_response, true);
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');

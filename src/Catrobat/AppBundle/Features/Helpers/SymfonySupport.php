@@ -39,7 +39,7 @@ class SymfonySupport
         if ($this->client == null) {
             $this->client = $this->kernel->getContainer()->get('test.client');
         }
-    
+
         return $this->client;
     }
     

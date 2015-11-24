@@ -32,7 +32,7 @@ class FacebookPostService
     public function removeFbPost($post_id)
     {
         if ($this->debug) {
-            echo 'ID:' . $post_id;
+            echo 'Post ID:' . $post_id;
         }
 
         if ($post_id != null) {
@@ -152,7 +152,6 @@ class FacebookPostService
             $program = $program_manager->find($program_id);
 
             $url = $this->router->generate('program', array('id' => $program_id), true);
-            echo $url;
 
             $data = [
                 'link' => $url,
@@ -166,14 +165,17 @@ class FacebookPostService
             }
 
             $program->setFbPostId($respBody->id);
-            echo $respBody->id;
+            $entity_manager = $this->container->get('doctrine.orm.entity_manager');
+            $entity_manager->persist($program);
+            $entity_manager->flush();
+
             return $respBody->id;
         } else {
             throw new FacebookSDKException("Invalid facebook user or page token", StatusCode::FB_POST_ERROR);
         }
     }
 
-    public function checkFacebookServerAccessTokenValidity()
+    private function checkFacebookServerAccessTokenValidity()
     {
         $is_valid = $this->debugToken($this->fb_admin_user_token);
 
@@ -215,7 +217,7 @@ class FacebookPostService
         }
     }
 
-    public function debugToken($token_to_check)
+    private function debugToken($token_to_check)
     {
         try {
             $response = $this->facebook->get('/debug_token?input_token=' . $token_to_check, $this->fb_admin_user_token);
@@ -256,13 +258,13 @@ class FacebookPostService
         return $is_valid;
     }
 
-    public function getAppToken()
+    private function getAppToken()
     {
         $app_token = $this->app_id . '|' . $this->app_secret;
         return $app_token;
     }
 
-    public function setFacebookDefaultAccessToken($client_token = NULL)
+    private function setFacebookDefaultAccessToken($client_token = NULL)
     {
         if ($client_token) {
             $this->facebook->setDefaultAccessToken($client_token);
@@ -288,7 +290,6 @@ class FacebookPostService
     private function setFacebookChannelConfigurationData()
     {
         $this->app_id = $this->container->getParameter('facebook_share_app_id');
-        echo $this->app_id ;
         $this->app_secret = $this->container->getParameter('facebook_share_app_secret');
         $this->fb_channel_id = $this->container->getParameter('facebook_share_channel_id');
         $this->fb_admin_user_token = $this->container->getParameter('facebook_share_access_token');

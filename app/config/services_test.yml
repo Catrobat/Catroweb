@@ -54,7 +54,14 @@ services:
           
     facebook_post_service:
         class: Catrobat\AppBundle\Features\Helpers\FakeFacebookPostService
+        arguments: ["@real_facebook_post_service"]
 
     real_facebook_post_service:
         class: Catrobat\AppBundle\Services\FacebookPostService
         arguments: ["@router", "@service_container"]
+
+    catrobat.fb_post.remove:
+        class:        Catrobat\AppBundle\Listeners\FacebookRemovePostListener
+        arguments:    ["@facebook_post_service", "@doctrine.orm.entity_manager", "@programmanager"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
