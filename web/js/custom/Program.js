@@ -39,7 +39,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
             console.log('pending');
             setTimeout(self.getApkStatus, 5000);
         }
-        else
+        else if (data.status == "none")
         {
             $('#apk-generate').show();
             $('#apk-generate').click(self.createApk);

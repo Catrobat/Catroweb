@@ -92,7 +92,26 @@ class FeatureContext extends BaseContext
         $config = array(
             'name' => $arg1
         );
-        $this->insertProgram(null, $config);
+        $program = $this->insertProgram(null, $config);
+
+        $file_repo = $this->getFileRepository();
+
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $program->getId());
+    }
+
+    /**
+     * @Given /^I have a program "([^"]*)" with id "([^"]*)" and a vibrator brick$/
+     */
+    public function iHaveAProgramWithIdAndAVibratorBrick($arg1, $arg2)
+    {
+        $config = array(
+            'name' => $arg1
+        );
+        $program = $this->insertProgram(null, $config);
+
+        $file_repo = $this->getFileRepository();
+
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . '/GeneratedFixtures/phiro.catrobat'), $program->getId());
     }
 
     /**

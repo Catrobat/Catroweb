@@ -95,6 +95,9 @@ services:
         class: Catrobat\AppBundle\Services\ApkRepository
         arguments: ["%catrobat.apk.dir%"]
 
+    programdevicepermissionreader:
+        class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
+
 # =========================== Manager & Stuff ===========================
 
     programmanager:
