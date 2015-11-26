@@ -34,7 +34,6 @@ class FeatureContext extends BaseContext
     private $secure;
     private $fb_post_program_id;
     private $fb_post_id;
-    private $use_real_facebook;
 
     /**
      * Initializes context with parameters from behat.yml.
@@ -871,8 +870,17 @@ class FeatureContext extends BaseContext
         $response = json_decode($this->getClient()->getResponse()->getContent(), true);
         $project_id = $response['projectId'];
 
+        /**
+         * @var $program Program
+         */
         $program_manager = $this->getSymfonySupport()->getProgramManger();
-        $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($program_manager->find($project_id)->getFbPostId())->getGraphObject();
+        $program = $program_manager->find($project_id);
+        $fb_post_id = $program->getFbPostId();
+        $fb_post_url = $program->getFbPostUrl();
+        assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
+        assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
+        echo $fb_post_id . '*' . $fb_post_url;
+        $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
 
         $fb_id = $fb_response['id'];
         $fb_message = $fb_response['message'];
@@ -901,7 +909,8 @@ class FeatureContext extends BaseContext
         echo 'Delete post with Facebook ID ' . $this->fb_post_id;
 
         $program_manager = $this->getSymfonySupport()->getProgramManger();
-        assertEmpty($program_manager->find($this->fb_post_program_id)->getFbPostId(), 'FB Post was not resetted');
+        $program = $program_manager->find($this->fb_post_program_id);
+        assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
 
         $string = print_r($fb_response, true);
