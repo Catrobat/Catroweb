@@ -3,10 +3,13 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\StatusCode;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
+use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphNode;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
@@ -68,7 +71,7 @@ class FacebookPostService
                 if (isset($accessToken)) {
 
                     try {
-                        $response = $this->facebook->delete($post_id, [], (string)$accessToken);
+                        $response = $this->facebook->delete($post_id, [], (string) $accessToken);
 
                         if ($this->debug) {
                             echo 'body:' . $response->getBody();
@@ -83,6 +86,54 @@ class FacebookPostService
             } else {
                 throw new FacebookSDKException("Invalid facebook user or page token", StatusCode::FB_DELETE_ERROR);
             }
+        }
+    }
+
+    public function getFacebookPostUrl($post_id)
+    {
+        if ($this->facebook == null) {
+            $this->initializeFacebook();
+        }
+
+        $account_access_token = $this->checkFacebookServerAccessTokenValidity();
+        $this->setFacebookDefaultAccessToken($this->getAppToken());
+        $is_valid = $this->debugToken($account_access_token);
+        if ($this->debug) {
+            echo 'valid:' . $is_valid;
+        }
+
+        if ($is_valid) {
+
+            $client = $this->facebook->getOAuth2Client();
+            try {
+                //refresh access token with long-term admin user-token
+                $accessToken = $client->getLongLivedAccessToken($account_access_token);
+            } catch (FacebookSDKException $e) {
+                return $e->getMessage();
+            }
+
+            if (isset($accessToken)) {
+
+                try {
+                    /**
+                     * @var $response FacebookResponse
+                     */
+                    $response = $this->facebook->get($post_id . '?fields=id,link,name,actions', (string)$accessToken);
+                    if ($this->debug) {
+                        echo 'HEADERS: ' . print_r($response->getHeaders());
+                        echo 'BODY: ' . $response->getBody();
+                    }
+
+                    $respBody = json_decode($response->getBody());
+                    $post_url = $respBody->actions[0]->link;
+
+                    return $post_url;
+                } catch (FacebookSDKException $e) {
+                    return StatusCode::FB_DELETE_ERROR;
+                }
+            }
+        } else {
+            throw new FacebookSDKException("Invalid facebook user or page token", StatusCode::FB_DELETE_ERROR);
         }
     }
 
@@ -148,6 +199,11 @@ class FacebookPostService
                 return $e->getMessage();
             }
 
+            /**
+             * @var $program_manager ProgramManager
+             * @var $program Program
+             * @var $response FacebookResponse
+             */
             $program_manager = $this->container->get('programmanager');
             $program = $program_manager->find($program_id);
 
@@ -158,18 +214,23 @@ class FacebookPostService
                 'message' => $program->getName(),
             ];
 
-            $response = $this->facebook->post('/me/feed', $data, (string)$accessToken);
+            $response = $this->facebook->post('/me/feed', $data, (string) $accessToken);
             $respBody = json_decode($response->getBody());
             if ($this->debug) {
                 echo $response->getBody();
             }
 
             $program->setFbPostId($respBody->id);
+            $fb_post_id = $respBody->id;
+
+            $fb_post_url = $this->getFacebookPostUrl($fb_post_id);
+            $program->setFbPostUrl($fb_post_url);
+
             $entity_manager = $this->container->get('doctrine.orm.entity_manager');
             $entity_manager->persist($program);
             $entity_manager->flush();
 
-            return $respBody->id;
+            return $fb_post_id;
         } else {
             throw new FacebookSDKException("Invalid facebook user or page token", StatusCode::FB_POST_ERROR);
         }

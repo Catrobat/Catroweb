@@ -1,4 +1,4 @@
-var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif, update_app_header, update_app_text, btn_close_popup)
+var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif, update_app_header, update_app_text, btn_close_popup, fb_post_link)
 {
     var self = this;
     
@@ -10,6 +10,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     self.update_app_header = update_app_header;
     self.update_app_text = update_app_text;
     self.btn_close_popup = btn_close_popup;
+    self.fb_post_link = fb_post_link;
     
     self.getApkStatus = function()
     {
@@ -122,5 +123,12 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
 
         return popup_background;
     };
-    
+
+    self.generateFacebookPostLink = function() {
+        if (self.fb_post_link == '' || navigator.language == 'fr-FR' || navigator.language == 'fr')  {
+            $('#facebook-post-link').hide();
+        } else {
+            $('#btn-facebook-post-link').attr('href', self.fb_post_link.replace('&amp;', '&'));
+        }
+    }
 };
