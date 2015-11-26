@@ -186,6 +186,11 @@ class Program
     protected $fb_post_id = '';
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $fb_post_url = '';
+
+    /**
      * @return mixed
      */
     public function getFbPostId()
@@ -937,5 +942,21 @@ class Program
     public function getGamejam_submission_accepted()
     {
         return $this->gamejam_submission_accepted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFbPostUrl()
+    {
+        return $this->fb_post_url;
+    }
+
+    /**
+     * @param mixed $fb_post_url
+     */
+    public function setFbPostUrl($fb_post_url)
+    {
+        $this->fb_post_url = $fb_post_url;
     }
 }

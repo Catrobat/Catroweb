@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
+use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
@@ -23,11 +24,15 @@ class FacebookRemovePostListener
         $attributes = $event->getRequest()->attributes;
         if ($attributes->has('remove_post_from_facebook') && $attributes->has('program_id')) {
             $program_id = $attributes->get('program_id');
+            /**
+             * @var $program Program
+             */
             $program = $this->program_manager->find($program_id);
 
             $status_code = $this->facebook_post_service->removeFbPost($program->getFbPostId());
             if ($status_code != StatusCode::FB_DELETE_ERROR) {
                 $program->setFbPostId('');
+                $program->setFbPostUrl('');
                 $this->entity_manager->persist($program);
                 $this->entity_manager->flush();
             }

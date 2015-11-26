@@ -372,6 +372,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
           $program->setUploadLanguage('en');
           $program->setApproved(false);
+          $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
 
           if($program->getApkStatus() == Program::APK_READY) {
             /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
@@ -1270,5 +1271,21 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
                 assertTrue(false);
                 break;
         }
+    }
+
+    /**
+     * @Then /^a link to the Facebook post should be displayed$/
+     */
+    public function aLinkToTheFacebookPostShouldBeDisplayed()
+    {
+        assertTrue($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
+    }
+
+    /**
+     * @Then /^a link to the Facebook post should not be displayed$/
+     */
+    public function aLinkToTheFacebookPostShouldNotBeDisplayed()
+    {
+        assertFalse($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
     }
 }

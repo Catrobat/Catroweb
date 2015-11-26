@@ -7,9 +7,9 @@ Feature: As a visitor I want to see a program page
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org |
       | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
-      | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
-      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             |  true   | true      |
-      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             |  true   | true      |
+      | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready | fb_post_url                                                                          |
+      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             |  true   | true      | https://www.facebook.com/permalink.php?story_fbid=424543024407491&id=403594093169051 |
+      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             |  true   | true      |                                                                                      |
 
     Scenario: Viewing program page
       Given I am on "/pocketcode/program/1"
@@ -93,3 +93,9 @@ Feature: As a visitor I want to see a program page
       Then I should receive an application file
       When I am on "/pocketcode/program/1"
       Then I should see "6 downloads"
+
+  Scenario: A link to the Facebook post should only be displayed when the program has a Facebook post URL
+    Given I am on "/pocketcode/program/1"
+    Then a link to the Facebook post should be displayed
+    When I am on "/pocketcode/program/2"
+    Then a link to the Facebook post should not be displayed

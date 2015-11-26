@@ -2,6 +2,9 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -62,9 +65,9 @@ class DefaultController extends Controller
   public function programAction(Request $request, $id, $flavor = 'pocketcode')
   {
       /**
-     * @var \Catrobat\AppBundle\Entity\User
-     * @var \Catrobat\AppBundle\Entity\Program
-     * @var \Catrobat\AppBundle\Entity\ProgramInappropriateReport
+     * @var $user User
+     * @var $program Program
+     * @var $reported_program ProgramInappropriateReport
      */
     $program = $this->get('programmanager')->find($id);
       $screenshot_repository = $this->get('screenshotrepository');
@@ -89,6 +92,7 @@ class DefaultController extends Controller
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
       'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+
     );
 
       $user = $this->getUser();
@@ -112,6 +116,7 @@ class DefaultController extends Controller
       'program_details' => $program_details,
       'my_program' => count($user_programs) > 0 ? true : false,
       'already_reported' => $isReportedByUser,
+      'fb_post_link' => $program->getFbPostUrl()
     ));
   }
 

@@ -90,7 +90,7 @@ class UploadController
                 $program = $this->programmanager->addProgram($add_program_request);
                 $user->setToken($this->tokengenerator->generateToken());
                 $this->usermanager->updateUser($user);
-                
+
                 $response['projectId'] = $program->getId();
                 $response['statusCode'] = StatusCode::OK;
                 $response['answer'] = $this->trans('success.upload');
