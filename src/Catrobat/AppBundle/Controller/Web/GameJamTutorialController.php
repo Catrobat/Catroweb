@@ -36,32 +36,32 @@ class GameJamTutorialController extends Controller
         case 1:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
             $blocks[1] = array('video_link' => "tGgMFWoJDBU");
-            $blocks[2] = array('program_id' => "4799");
+            $blocks[2] = array('download_url' => $this->generateUrl('download', array('id' => 4799, 'fname' => "Welcome to Wonderland")));
             break;
         case 2:
             $blocks[0] = array('image_orientation' => "potrait", 'image_count' => 2);
             $blocks[1] = array('video_link' => "mx2DLFIg1Rc");
-            $blocks[2] = array('program_id' => "4801");
+            $blocks[2] = array('download_url' => $this->generateUrl('download', array('id' => 4801, 'fname' => "Save Alice")));
             break;
         case 3:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
             $blocks[1] = array('video_link' => "HxYr_2HdMsE");
-            $blocks[2] = array('program_id' => "4683");
+            $blocks[2] = array('download_url' => $this->generateUrl('download', array('id' => 4683, 'fname' => "The Hatter - Hit and Run")));
             break;
         case 4:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
             $blocks[1] = array('video_link' => "yLqhLmX9Mp4");
-            $blocks[2] = array('program_id' => "4683");
+            $blocks[2] = array('download_url' => $this->generateUrl('download', array('id' => 4683, 'fname' => "The Hatter - Hit and Run")));
           break;
         case 5:
             $blocks[0] = array('image_orientation' => "landscape", 'image_count' => 2);
             $blocks[1] = array('video_link' => "G85_vgb1Ja4");
-            $blocks[2] = array('program_id' => "4684");
+            $blocks[2] = array('download_url' => $this->generateUrl('download', array('id' => 4684, 'fname' => "Whack a Cheshire Cat")));
           break;
         case 6:
             $blocks[0] = array('image_orientation' => "potrait", 'image_count' => 2);
             $blocks[1] = array('video_link' => "m97g4G49kOg");
-            $blocks[2] = array('program_id' => "4682");
+            $blocks[2] = array('download_url' => $this->generateUrl('download', array('id' => 4682, 'fname' => "A Rabbits Race")));
           break;
       }
 
