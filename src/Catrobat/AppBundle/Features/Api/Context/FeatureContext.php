@@ -879,7 +879,6 @@ class FeatureContext extends BaseContext
         $fb_post_url = $program->getFbPostUrl();
         assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
         assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
-        echo $fb_post_id . '*' . $fb_post_url;
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
 
         $fb_id = $fb_response['id'];
