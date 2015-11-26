@@ -220,7 +220,6 @@ class FacebookPostService
                 echo $response->getBody();
             }
 
-            print_r($respBody);
             $program->setFbPostId($respBody->id);
             $fb_post_id = $respBody->id;
 
