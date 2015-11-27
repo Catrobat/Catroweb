@@ -383,6 +383,15 @@ class DefaultController extends Controller
     ));
   }
 
+  /**
+   * @Route("/gamejame/submit-your-own", name="gamejam_submit_own")
+   * @Method({"GET"})
+   */
+  public function gamejamSubmitOwnAction()
+  {
+      return $this->get('templating')->renderResponse('::gamejam_submit_own.html.twig');
+  }
+  
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //// private functions
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

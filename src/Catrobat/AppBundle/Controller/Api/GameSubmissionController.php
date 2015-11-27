@@ -13,6 +13,7 @@ use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class GameSubmissionController extends Controller
 {
@@ -87,6 +88,10 @@ class GameSubmissionController extends Controller
      */
     public function webSubmitAction(Request $request, Program $program)
     {
+        if ($this->getUser() == null)
+        {
+            throw new AuthenticationException();
+        }
         $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
         if ($gamejam == null) {
             throw new \Exception("No Game Jam!");
@@ -99,6 +104,12 @@ class GameSubmissionController extends Controller
                 "id" => $program->getId()
             )));
         }
+        if ($this->getUser() != $program->getUser())
+        {
+            return new RedirectResponse($this->generateUrl("gamejam_submit_own"));
+        }
+        
+        
         $program->setGamejam($gamejam);
         $program->setGameJamSubmissionDate(new \DateTime());
 

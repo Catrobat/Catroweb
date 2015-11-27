@@ -291,4 +291,55 @@ class WebContext extends BaseContext
             ->getResponse()
             ->getContent());
     }
+    
+    /**
+     * @Given /^I am not logged in$/
+     */
+    public function iAmNotLoggedIn()
+    {
+        $this->i = $this->getSymfonySupport()->insertUser(array(
+            'name' => 'Generated',
+            'password' => 'generated'
+        ));
+    }
+    
+    /**
+     * @When /^I submit the program$/
+     */
+    public function iSubmitTheProgram()
+    {
+        $this->getClient()->followRedirects(true);
+        $link = $this->response->filter("#gamejam-submittion")
+            ->parents()
+            ->link();
+        $this->response = $this->getClient()->click($link);
+    }
+    
+    /**
+     * @When /^I login$/
+     */
+    public function iLogin()
+    {
+        $form = $this->response->selectButton('Login')->form();
+        $form['_username'] = 'Generated';
+        $form['_password'] = 'generated';
+        $this->response = $this->getClient()->submit($form);
+    }
+    
+    /**
+     * @Then /^I should be on the details page of my program$/
+     */
+    public function iShouldBeRedirectedToTheDetailsPageOfMyProgram()
+    {
+        assertEquals("/pocketcode/program/1", $this->getClient()->getRequest()->getPathInfo());
+    }
+    
+    /**
+     * @Then /^I should see the message "([^"]*)"$/
+     */
+    public function iShouldSeeAMessage($arg1)
+    {
+        assertContains($arg1, $this->getClient()->getResponse()->getContent());
+    }
+    
 }

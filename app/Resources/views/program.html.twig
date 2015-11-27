@@ -85,11 +85,14 @@
         </button>
         
       </div>
-      {% if program.user == app.user %}
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% set jam = getCurrentGameJam() %}
         {% if jam %}
-        <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
+            {% if app.user %}
+            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
+            {% else %}
+            <a href="{{ url('login') }}" title="{{ jam.name }}">
+            {% endif %}
         <button id="gamejam-submittion" class="btn btn-jam download-button">
           <table>
             <tr>
@@ -100,7 +103,6 @@
         </button>
         </a>
         {% endif %}
-      {% endif %}
       {% endif %}
       <br>
 
