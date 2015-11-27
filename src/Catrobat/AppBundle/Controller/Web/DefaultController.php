@@ -36,7 +36,7 @@ class DefaultController extends Controller
       $image_repository = $this->get('featuredimagerepository');
       $repository = $this->get('featuredrepository');
 
-      $programs = $repository->getFeaturedPrograms($request->getSession()->get('flavor'), 5, 0);
+      $programs = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
 
       $featured = array();
       foreach ($programs as $program) {
