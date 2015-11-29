@@ -115,6 +115,7 @@ sonata_admin:
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - catrowebadmin.block.tools.maintain
+                    - catrowebadmin.block.tools.logs
                     - catrowebadmin.block.tools.notify
                     - catrowebadmin.block.tools.rudewords
 
