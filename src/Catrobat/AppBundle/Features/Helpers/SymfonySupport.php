@@ -286,6 +286,7 @@ class SymfonySupport
         $program_statistics->setStreet(isset($config['street']) ? $config['street'] : 'Duck Street 1');
         $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
         $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
+        $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
         $em->persist($program_statistics);
 
         $program->addProgramDownloads($program_statistics);

@@ -40,6 +40,7 @@ class DownloadProgramController extends Controller
               $this->get('programmanager')->increaseDownloads($program);
               $downloaded[] = $program->getId();
               $request->getSession()->set('downloaded', $downloaded);
+              $request->attributes->set('download_statistics_program_id', $id);
           }
 
           $response = new BinaryFileResponse($file);
@@ -48,7 +49,6 @@ class DownloadProgramController extends Controller
            $program->getId().'.catrobat'
       );
           $response->headers->set('Content-Disposition', $d);
-          $request->attributes->set('download_statistics_program_id', $id);
 
           return $response;
       }

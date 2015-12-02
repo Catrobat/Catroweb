@@ -13,10 +13,10 @@ class FakeDownloadStatisticsService
         $this->geocoder_service = $geocoder_service;
     }
 
-    public function createProgramDownloadStatistics($program_id, $ip)
+    public function createProgramDownloadStatistics($program_id, $ip, $user_agent)
     {
         if ($this->use_real_service) {
-            return $this->geocoder_service->createProgramDownloadStatistics($program_id, $ip);
+            return $this->geocoder_service->createProgramDownloadStatistics($program_id, $ip, $user_agent);
         }
         return true;
     }

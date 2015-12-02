@@ -69,6 +69,11 @@ class ProgramDownloads
     protected $locality;
 
     /**
+     * @ORM\Column(type="string", options={"default":""}, nullable=true)
+     */
+    protected $user_agent;
+
+    /**
      * @return mixed
      */
     public function getProgram()
@@ -242,5 +247,21 @@ class ProgramDownloads
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserAgent()
+    {
+        return $this->user_agent;
+    }
+
+    /**
+     * @param mixed $user_agent
+     */
+    public function setUserAgent($user_agent)
+    {
+        $this->user_agent = $user_agent;
     }
 }

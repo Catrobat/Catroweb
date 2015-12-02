@@ -21,13 +21,17 @@ class DownloadStatisticsListener
         if ($attributes->has('download_statistics_program_id')) {
             $program_id = $attributes->get('download_statistics_program_id');
             $ip = $event->getRequest()->server->get('REMOTE_ADDR');
-            $this->createProgramDownloadStatistics($program_id, $ip);
+            $user_agent = $event->getRequest()->headers->get('User-Agent') ;
+            $this->createProgramDownloadStatistics($program_id, $ip, $user_agent);
+            $event->getRequest()->attributes->remove('download_statistics_program_id');
         }
 
     }
 
-    public function createProgramDownloadStatistics($program_id, $ip)
+    public function createProgramDownloadStatistics($program_id, $ip, $user_agent)
     {
-        $this->download_statistics_service->createProgramDownloadStatistics($program_id, $ip);
+        if (strpos($user_agent, 'okhttp') === false) {
+            $this->download_statistics_service->createProgramDownloadStatistics($program_id, $ip, $user_agent);
+        }
     }
 }

@@ -717,6 +717,7 @@ class FeatureContext extends BaseContext
           assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
           assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
           assertNotEmpty($program_download_statistics->getStreet(), "No street was written to download statistics");
+          assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
 
           $limit = 5.0;
           $latitude = floatval($program_download_statistics->getLatitude());
