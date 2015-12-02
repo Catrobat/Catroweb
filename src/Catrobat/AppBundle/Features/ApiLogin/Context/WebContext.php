@@ -3,6 +3,7 @@ namespace Catrobat\AppBundle\Features\ApiLogin\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
+use Behat\Gherkin\Node\TableNode;
 
 class WebContext extends BaseContext
 {
@@ -86,4 +87,53 @@ class WebContext extends BaseContext
             ->getContent());
         
     }
+    
+    /**
+     * @Given /^I there is a user with$/
+     */
+    public function iThereIsAUserWith(TableNode $table)
+    {
+        $values = $table->getRowsHash();
+        $this->insertUser(array(
+            'name' => $values['username'],
+            'token' => $values['token']
+        ));
+    }
+    
+    /**
+     * @Given /^I have a HTTP Request:$/
+     */
+    public function iHaveAHttpRequest(TableNode $table)
+    {
+        $values = $table->getRowsHash();
+        $this->method = $values['Method'];
+        $this->url = $values['Url'];
+    }
+    
+    /**
+     * @Given /^I use the GET parameters:$/
+     */
+    public function iUseTheGetParameters(TableNode $table)
+    {
+        $values = $table->getRowsHash();
+        $this->get_parameters = $values;
+    }
+    
+    /**
+     * @When /^I invoke the Request$/
+     */
+    public function iInvokeTheRequest()
+    {
+        $this->getClient()->request('GET', $this->url . '?' . http_build_query($this->get_parameters), array(), array(), array());
+    }
+    
+    /**
+     * @Then /^I should be on "([^"]*)"$/
+     */
+    public function iShouldBeOn($arg1)
+    {
+        $path = $this->getClient()->getRequest()->getPathInfo() . "?" . $this->getClient()->getRequest()->getQueryString(); 
+        assertEquals($arg1, $path);
+    }
+    
 }
