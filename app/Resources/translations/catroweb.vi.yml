@@ -1,587 +1,656 @@
 ---
-localLanguage: English
-username: Username
-password: Password
-aboutPocketCode: About Pocket Code
-tutorials: Tutorials
-googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
-error: Error
-cancel: Cancel
-report: Report
-download: Download as program
-description: Description
-noDescription: No description available.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
-more: more
-less: less
-ok: OK
+localLanguage: Tiếng Anh
+username: Tên đăng nhập
+password: Mật khẩu
+aboutPocketCode: Về PocketCode
+tutorials: Hướng dẫn
+googlePlay: googlePlay
+passwordsNoMatch: Mật khẩu không khớp.
+error: Lỗi
+cancel: Thoát/Hủy
+report: Báo cáo
+download: Tải xuống
+description: Mô tả
+noDescription: Không có mô tả.
+country: Quốc gia
+loginText: Đăng nhập
+privacyPolicy: Chính sách bảo mật
+imprint: Nhà xuất bản
+somethingWentWrong: Thao tác sai.
+pleaseTryAgain: Làm ơn hãy thử lại!
+oldVersionError: Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!
+more: hơn/thêm/nhiều hơn
+less: ít hơn
+ok: Đồng ý
+clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 programs:
-  featured: Featured
-  newest: Newest programs
+  featured: Nổi bật
+  newest: Chương trình mới nhất
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
-  downloads: '%downloads% downloads'
-  views: '%views% views'
-  reportAsInappropriate: Report as inappropriate
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
-  reportDialogHeader: Why do you think this program is inappropriate?
-  reportDialogReason: Enter a reason
-  reportOwnProgram: You cannot flag your own program.
-  reportAlready: "You've already flagged this program as inappropriate."
-  reportDone: You reported this program as inappropriate!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+    viewed: Xem nhiều nhất
+    downloaded: Tải về nhiều nhất
+  random: Chương trình ngẫu nhiên
+  downloads: '%downloads% Tải về'
+  sample: Example Programs
+  views: '%views% Lượng xem'
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
+  reportAsInappropriate: Báo cáo không hợp lệ
+  languageVersion: 'Ngôn ngữ phiên bản Catrobat %languageVersion%'
+  reportLoginText: 'Làm ơn %login% hãy báo cáo chương trình này là không hợp lệ.'
+  reportDialogHeader: Tại sao bạn nghĩ chương trình này không hợp lệ?
+  reportDialogReason: Nhập lý do
+  reportOwnProgram: Bạn không thể đánh dấu chương trình của chính bạn.
+  reportAlready: Bạn đã đánh dấu chương trình này không hợp lệ.
+  reportDone: Bạn đã báo cáo chương trình này không hợp lệ!
+  updateAppHeader: Cập nhật ứng dụng
+  updateAppText: Làm ơn hãy cập nhật ứng dụng của bạn lên phiên bản mới nhất để có thể tải chương trình này.
+  btnClosePopup: Đồng ý
+  checkout_this_program: Checkout this Catrobat program
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
-    Dear %username%.
+    %username% thân mến,
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Bạn đã yêu cầu thiết lập lại mật khẩu của mình trên %appplication_url% vì bạn đã quên nó. Nếu bạn không yêu cầu việc này, vui lòng bỏ qua. Yêu cầu này sẽ hết hạn và không sử dụng được trong vòng 24 giờ. 
+    Để thiết lập lại mật khẩu và tạo mật khẩu mới, vui lòng truy cập trang: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Bạn có thể dùng tên đăng nhập và mật khẩu của mình bất kể lúc nào để truy cập vào cộng đồng %appplication_url% 
+    Để làm vậy, hãy truy cập trang: %loginPage%
+    Để chỉnh sửa thông tin cá nhân, truy cập trang: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    Trân trọng,
+    Nhóm Catrobat.
 profile:
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My programs
+  saveChanges: lưu thay đổi
+  newPass: mật khẩu mới
+  repeatPass: nhắc lại mật khẩu
+  firstEmail: Email đầu tiên của tôi
+  secondEmail: Email thứ hai của tôi
+  myPrograms: Chương trình của tôi
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
-    passwordIsUsername: The password must differ from the username.
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
-  changePicture: Change picture
+    passwordTooShort: 'Mật khẩu mới phải có ít nhất %length% kí tự.'
+    passwordTooLong: 'Mật khẩu mới có nhiều nhất %length% kí tự.'
+    passwordIsUsername: Mật khẩu phải khác với tên đăng nhập.
+    emailNotValid: Địa chỉ email này không phù hợp.
+    emailMissing: Lỗi trong khi cập nhật địa chỉ email. Bạn phải có ít nhất một địa chỉ email hợp lệ.
+    emailExists: Địa chỉ email này đã tồn tại.
+    submitSuccess: đã lưu!
+  reallyDeleteProgram: Bạn có thực sự muốn xoá chương trình của mình
+  programsOf: Các chương trình của
+  changePicture: Thay đổi hình ảnh
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: Hình ảnh bạn lựa chọn quá lớn, xin vui lòng không sử dụng hình ảnh lớn hơn 5mb.
+    uploadError: Xin lỗi, đã có một vấn đề trong quá trình tải lên!
+    noSupport: Đây là loại hình ảnh không được hỗ trợ, xin vui lòng thử hình ảnh khác.
 licenseToPlay:
-  link: License to play
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: Giấy phép để chơi
+  title: 'Giấy phép để chơi - cung cấp bản quyền và chia sẻ'
+  text1: Hãy tưởng tượng rằng mỗi chương trình Catrobat là một chiếc bánh, một chiếc bánh rất đặc biệt đi kèm với công thức của nó (lập trình khối). Tất cả thành viên của cộng đồng Catrobat chia sẻ chiếc bánh cùng với công thức nấu ăn của họ. Điều này có nghĩa rằng bạn có thể thưởng thức các loại bánh và học cahcs làm thế nào để làm một chiếc bánh cho chính mình!
+  text2: 'Không có bất kỳ công thức nấu ăn bí mật nào: hướng dẫn để làm các loại bánh được mở cho bất cứ ai sử dụng, tái sử dụng, sửa đổi, và phục vụ như là nguồn cảm hứng cho những ý tưởng mới... Ý tôi là bánh.'
+  text3: 'Bạn có thể ăn các loại bánh, cũng như sao chép công thức nấu ăn của người khác để làm một chiếc cho riêng bạn, có lẽ với các thành phần khác. Sự tự do này đi kèm với hai yêu cầu đơn giản:'
+  text4: Trong việc thiết lập cộng đồng Catrobat, chúng tôi đã quyết định áp dụng phương pháp này kể từ khi chúng tôi tin rằng nó sẽ hỗ trợ quá trình học tập và sáng tạo trong cộng đồng. Bằng cách chia sẻ công thức nấu ăn và các nguyên liệu (tập lệnh và hình ảnh), người sử dụng có thể xây dựng dựa trên ý tưởng của nhau và tất cả mọi người sẽ được hưởng lợi.
+  text5: Trong việc thiết kế trang web Catrobat, chúng tôi bao gồm các tính năng để khuyến khích mọi người chia sẻ và cung cấp bản quyền cho người khác. Trên mỗi trang chương trình, bạn luôn có thể tải về các tập lệnh cho chương trình. Nếu bạn phối lại một chương trình (sửa đổi tập lệnh hoặc hình ảnh, và chia sẻ kết quả), chúng tôi khuyến khích bạn hãy cung cấp bản quyền trong Chương Trình Ghi Chú, nhắc đến người và chương trình đã truyền cảm hứng cho bạn.
+  text6: 'Tìm hiểu thêm về các điều khoản sử dụng của cộng đồng trực tuyến Catrobat trên %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: chia sẻ chiếc bánh của bạn cùng với công thức
+    item2: cung cấp bản quyền cho những người đã truyền cảm hứng cho bạn
+  version: Phiên bản 1.1, ngày 2 tháng 4 năm 2013
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  title: Điều khoản sử dụng
+  headline: Chào mừng đến với cộng đồng Catrobat!
+  text1: 'Là một phần của cộng đồng Catrobat, bạn đang chia sẻ chương trình và ý tưởng với mọi người:'
+  text2: 'Chúng tôi cần sự giúp đỡ của bạn để làm cho cộng đồng này thành một nơi hỗ trợ cho mọi thành viên. Dưới đây là cách bạn có thể giúp:'
+  text3: 'Thông qua dự án Catrobat chúng tôi muốn thúc đẩy hợp tác và cho phép kết hợp sự sáng tạo của tất cả mọi người để vì lợi ích của nhân loại. Bạn cũng có thể trở thành một thành viên tích cực của cộng đồng Catrobat bằng cách đưa chương trình của bạn cho cộng đồng như một món quà, theo cùng một cách như các thành viên hoạt động khác đang chương trình của họ cho bạn:'
+  text4: 'Món quà của chúng tôi cho bạn:'
+  text5: 'Điều khoản sử dụng và dịch vụ của chúng tôi:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: từ nhiều quốc gia và các nền văn hóa khác nhau
+    item2: ở mọi lứa tuổi (từ trẻ em đến thiếu niên và người cao tuổi)
+    item3: với tất cả các cấp kinh nghiệm
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
+    item1: Hãy tôn trọng. Khi chia sẻ chương trình, hãy nhớ rằng nhiều người với lứa tuổi và nguồn gốc khác nhau sẽ ghi nhận sự đóng góp của bạn.
+    item2: 'Cung cấp sự ghi nhận. Hãy cảm nhận sự tự do khi tạo các phiên bản sửa đổi chương trình của người khác - chỉ cần đảm bảo bạn sẽ cung cấp bản quyền cho đóng góp của họ. Một nơi để cung cấp bản quyền là trong mô tả chương trình của bạn. Xin vui lòng xem đoạn văn dưới danh sách này để biết thêm chi tiết về việc sửa đổi chương trình của người dùng khác.'
+    item3: Hãy trung thực. Đừng giả vờ là bất cứ ai ngoài chính bạn hoặc cố gắng để lừa dối cộng đồng.
+    item4: Giữ thông tin cá nhân riêng tư. Đừng chia sẻ địa chỉ email, số điện thoại hoặc thông tin liên lạc cá nhân khác.
+    item5: "Giúp giữ cho trang web thân thiện. Nếu bạn cảm thấy một chương trình hoặc nhận xét có ý đồ xấu, lăng mạ, quá bạo lực, hoặc bằng cách khác không phù hợp, chỉ cần nhấp vào nút 'báo cáo không thích hợp' và để lại một lời giải thích ngắn. Đội ngũ Catrobat sẽ xem xét báo cáo của bạn và có thể loại bỏ chương trình, bình luận, hoặc niêm yết."
   list3:
-    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Bằng cách tải lên một chương trình lên trang web của chúng tôi, bạn chấp nhận và đồng ý cho việc làm này với bản quyền miễn phí trên chương trình Catrobat. Tương tự như bản quyền miễn phí mà theo đó hệ thống Catrobat luôn sẵn sàng cho bạn, các bản quyền miễn phí này sẽ cung cấp cho tất cả mọi người quyền để học hỏi từ công việc trước đó tải lên bởi những người khác và chỉnh sửa công việc đó để xây dựng các trò chơi hấp dẫn mới, hình ảnh động, và các chương trình khác của riêng của họ. Điều này cho phép tất cả mọi người 'dựa vào vai nhau', một trong số họ là bạn! Công việc của bạn do đó sẽ mang lại lợi ích trên toàn thế giới và vẫn miễn phí cho tất cả mọi người sử dụng, một chút tương tự với văn bản và hình ảnh tự do trên Wikipedia của tình nguyện viên từ khắp nơi trên thế giới. Hãy suy nghĩ nó như là món quà của bạn tới nhân loại: bạn cung cấp cho tất cả mọi người, và những người khác tải lên công việc của họ cho bạn trên trang web của chúng tôi. Do đó một chương trình được tải lên là một món quà của giá trị tuyệt vời mà chủ nhân của nó cho bạn miễn phí, với điều kiện bạn tham gia vào cộng đồng và làm điều tương tự."
+    item2: Bạn không cần phải chấp nhận món quà; nhưng nếu bạn muốn, một số quy định áp dụng. Những lợi ích của quy định này là bạn có thể học hỏi từ công việc, và xây dựng dựa trên nó để tạo ra công cụ tuyệt vời của chính mình, cái mà bạn sau đó có thể, ví dụ như, tải lên trang web của chúng tôi như là của riêng bạn. Một lợi ích khác là với bản quyền này chắc chắn rằng bạn không phải chịu trách nhiệm về bất kỳ vấn đề phát sinh với những người khác thông qua việc họ sử dụng chương trình của bạn.
+    item3: Một trong những điều kiện quan trọng bổ sung là bạn rõ ràng đã đóng góp tới những tác giả, người đã làm việc dựa trên tác phẩm của riêng bạn. Cùng lúc đó, chúng tôi sẽ làm việc chăm chỉ để những công việc, đóng góp của bạn sẽ được trân trọng bởi những người dùng khác, bằng cách tự do lựa chọn cho mình một cái tên độc nhất sẽ đại diện cho bạn trong cộng đồng của Catrobat, và bằng cách cho những người khác cơ hội để thể hiện lòng biết ơn của họ tới bạn một cách công khai khi mà bạn cống hiến công việc của bạn để tất cả mọi người, và đặc biệt cho họ.
+    item4: 'Xin vui lòng tham khảo ý kiến %link-licenseUploaded% cho các điều kiện và điều khoản pháp lý.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: Chúng tôi cung cấp tất cả các phần mềm và tài nguyên Internet liên quan đến hệ thống Catrobat, ví dụ như, phần mềm được viết bởi đội ngũ Catrobat, trang web và tài nguyên Internet của chúng tôi, mã nguồn của riêng của chúng tôi liên quan đến hệ thống Catrobat, và bao gồm tất cả các tài nguyên khác chẳng hạn, ví dụ như, hình ảnh, âm thanh và văn bản cho bạn, bây giờ và trong tương lai dưới bản quyền miễn phí của Catrobat.
+    item2: Các bản quyền này làm cho tất cả các phần của Catrobat miễn phí cho bạn cũng như miễn phí đem lại cho bạn sự tự do để sử dụng chúng theo cách bạn muốn giữa những người sử dụng khác, với chỉ một vài hạn chế để đảm bảo, rằng hệ thống Catrobat sẽ mãi mãi duy trì miễn phí và hữu ích cho tất cả mọi người.
+    item3: 'Xin vui lòng tham khảo ý kiến %link-licenseToPlay% cho điều kiện và điều khoản pháp lý. Mã nguồn của hệ thống Catrobat cũng như nhiều tài liệu khác và tài nguyên có sẵn thông qua %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: 'Nếu bạn dưới 13 tuổi, hoặc cha mẹ bạn hoặc người giám hộ hợp pháp của bạn, hợp tác với một tổ chức nào đó tham gia vào hoặc chịu trách nhiệm cho các loại hành vi vi phạm bảo mật và/hoặc đang bị giám sát, thì bạn không được phép sử dụng các ứng dụng phần mềm và truy cập vào dịch vụ của chúng tôi. Các chi tiết chính xác của hạn chế này và các ngoại lệ nhất định được phân chia trong phần 4.a và 4.b trên %link-termsOfUse% của chúng tôi.'
+    item2: Nếu bạn là dưới 13 tuổi, sau đó bạn cần phải hỏi cha mẹ hoặc người giám hộ hợp pháp của bạn xem họ có cho phép bạn sử dụng phần mềm và dịch vụ của Catrobat hay không.
+    item3: Chúng tôi bảo lưu quyền từ chối, xóa, hoặc ẩn chương trình, tài khoản người dùng, và bất kỳ tài liệu kỹ thuật số tải lên trang web của Catrobat tại bất kỳ thời điểm nào theo quyết định duy nhất của chúng tôi, ví dụ nếu chúng tôi thấy rằng một chương trình có chứa tài liệu không phù hợp hoặc người dùng vi phạm về quyền hợp pháp của người khác.
+    item4: Tất cả các phần mềm của Catrobat và tài nguyên Internet được cung cấp với hy vọng rằng chúng sẽ hữu ích, nhưng không có bất kỳ bảo đảm.
+    item5: 'Xin vui lòng tham khảo ý kiến của chúng tôi developer.catrobat.org/terms_of_use_and_service %link-termsOfUse% về các qui định chính xác cho các điểm trên cũng như một số các điều khoản và điều kiện bổ sung hợp pháp.'
+  bottom1: Hãy ghé thăm lại tại mọi thời điểm, vì chúng tôi luôn luôn cố gắng hoàn thiện điều khoản sử dụng của mình.
+  bottom2: 'Vui lòng gửi bất cứ gợi ý nào về điều khoản sự dụng tới %email-webmaster%.'
+  version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
 help:
   hourOfCode:
-    title: Skydiving Steve
+    title: Steve Nhảy Dù
     step0:
-      title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+      title: Steve Nhảy Dù
+      description: Trong hướng dẫn các bước sau đây, bạn sẽ học cách làm thế nào để thiết lập chương trình hành động của Steve và bưu kiện. Hình ảnh dưới đây sẽ chỉ bạn cách điều khiển Steve trong trò chơi. Bạn phải di chuyển Steve vượt qua các mục tiêu và nhấn vào màn hình để thả các bưu kiện. Chúc bạn may mắn...
     step1:
-      title: 'Install "Pocket Code"'
-      description: How to install Pocket Code on your mobile device.
-      image1: 'Tap "Play Store".'
-      image2: 'Search "Pocket Code".'
-      image3: 'Tap "Install".'
+      title: 'Cài đặt "Pocket Code"'
+      description: Làm thế nào để cài đặt Pocket Code trên điện thoại di động của bạn.
+      image1: 'Nhắn "Play Store".'
+      image2: 'Tìm kiếm "Pocket Code".'
+      image3: 'Nhấn "Cài đặt".'
     step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
-      image2: Tap the banner.
-      image3: 'Download the program "Skydiving Steve".'
+      title: Tải về dự án
+      description: 'Làm thế nào để tài về chương trình cần thiết cho phép bạn thiết lập chương trình "Steve Nhảy Dù".'
+      image1: 'Nhấn "Khám phá" trong "Pocket Code" trên điện thoại của bạn.'
+      image2: Nhấn vào biểu ngữ.
+      image3: 'Tải về chương trình "Steve Nhảy Dù".'
     step3:
-      title: Open Project
-      description: Let’s look inside the program.
-      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
-      image2: 'Tap object "parachute".'
-      image3: 'Choose "Scripts".'
+      title: Mở dự án
+      description: Hãy cùng nhau khám phá chương trình.
+      image1: 'Kéo xuống danh sách và nhấn "Mở Steve Nhảy Dù".'
+      image2: Nhấn vào cái dù.
+      image3: 'Chọn "Kịch bản".'
     step4:
-      title: Add Variable
-      description: The variables x and y allow you to control the position of your parachute.
-      image1: 'Tap "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tap "Set variable".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
+      title: Thêm biến
+      description: Các biến x và y cho phép bạn điều khiển vị trí dù của bạn.
+      image1: 'Nhấn "+".'
+      image2: 'Đến mục "Biến".'
+      image3: 'Nhấn "Tạo biến".'
+      image4: 'Kéo và thả "Tạo biến"- mục dưới "Chương trình đã bắt đầu".'
     step5:
-      title: Label variables
-      description: Label the x position of your parachute.
-      image1: Add a second variable just as before.
-      image2: 'Tap "New...".'
-      image3: 'Insert "x" and tap "OK".'
+      title: Tên biến
+      description: Tạo vị trí x của chiếc dù của bạn.
+      image1: Thêm biến thứ hai giống như trước.
+      image2: 'Nhấn "Mới...".'
+      image3: 'Chèn "x" và nhấn "Đồng ý".'
     step6:
-      title: 'Set variable "y"'
-      description: Label and set the y starting position of your parachute.
-      image1: 'Label the second variable with "y".'
-      image2: 'Tap the field filled with "0.0".'
-      image3: 'Insert "-500" and tap "OK".'
+      title: 'Tạo biến "y"'
+      description: Đặt tên và tạo y vị trí bắt đầu dù của bạn.
+      image1: 'Tạo tên biến thứ hai "y".'
+      image2: 'Nhấn và điền vào phần "0.0".'
+      image3: 'Chèn "-500" và nhấn "Đồng ý".'
     step7:
-      title: Forever
-      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
-      image1: 'Tap "+".'
-      image2: 'Go to the "Control" - category.'
-      image3: 'Choose the "Forever" - brick.'
-      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
+      title: Vĩnh viễn
+      description: 'Bạn cần phải điều khiển vị trí dù của mình tại mọi thời điểm. Nhấn vào mục "Vĩnh viễn" - vòng lặp để thực hiện.'
+      image1: 'Nhấn "+".'
+      image2: 'Đi tới mục "Điều khiển".'
+      image3: 'Chọn mục "Vình viễn".'
+      image4: 'Kéo và thả "Vĩnh viễn"-mục dưới "Tạo biến".'
     step8:
-      title: Insert and modify bricks
-      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
-      image1: 'Insert the shown bricks below the "Forever" - brick.'
-      image2: 'Tap the "100" field.'
-      image3: 'Tap "Variables" and choose "x".'
-      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
+      title: Chèn và sửa đổi các mục
+      description: 'Thêm nhiều much vào vòng lặp "Vĩnh viễn" để điều khiển dù của bạn. Chèn các biến x và y vào mục "Đặt ở" để giúp bạn điều khiển vị trí dù của mình.'
+      image1: 'Nhấn vào mục đã hiện ra phía dưới "Vĩnh viễn".'
+      image2: 'Nhấn "100".'
+      image3: 'Nhấn "Biến" và chọn "x".'
+      image4: 'Nhấn "200" trong cùng mục ở đầu trang, tới phần "Biến" và nhấn "y". Xác nhận với "Đồng ý".'
     step9:
-      title: Change variables and values
-      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
+      title: Thay đổi biến và giá trị
+      description: Thay đổi biến y bởi -3 để dù của bạn lượn xuống mặt đất. Thay đổi biến x để dù của bạn di chuyển một góc nghiêng so với điện thoại di động của bạn.
       image1:
-        subtext1: 'Set the size to "20" %.'
-        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
-        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
+        subtext1: 'Thiết lập kích thước tới "20" %.'
+        subtext2: 'Thay đổi giá trị đầu tiên "Đặt biến" - tới mục "-3".'
+        subtext3: 'Tại biến thứ hai "Đặt biến" - nhấp vào trường mục "0.0".'
       image2:
-        subtext1: 'Tap on "y" and choose "x".'
-        subtext2: 'Insert "-".'
-        subtext3: 'Tap "Sensors" and choose "inclination_x".'
-      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
+        subtext1: 'Nhấp vào "y" và chọn "x".'
+        subtext2: 'Chèn "-".'
+        subtext3: 'Bấm vào "Cảm biến" và chọn "góc nghiêng_x".'
+      image3: 'Kiểm tra xem công thức được chèn vào của bạn có phù hợp với một trong ảnh chụp màn hình và xác nhận với "Đồng ý".'
     step10:
-      title: Loudness sensor
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
+      title: Cảm biến âm sắc
+      description: 'Bạn có thể kiểm soát chiều cao của dù với nút cảm biến âm lượng của điện thoại di động. Để làm như vậy, thêm và chỉnh sửa gạch "Nếu 1 là đúng thì".'
       image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
+        subtext1: 'Thêm gạch "Nếu 1 là đúng thì" và đặt nó dưới viên gạch cuối cùng "Thay đổi biến".'
+        subtext2: 'Bấm vào trường giá trị "0" trong viên gạch "Nếu 1 là đúng thì".'
       image2:
-        subtext1: 'Tap "Sensors".'
-        subtext2: 'Choose "loudness".'
-        subtext3: 'Tap "Logic".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Insert "50".'
-      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
+        subtext1: 'Bấm vào "Cảm biến".'
+        subtext2: 'Chọn "âm lượng".'
+        subtext3: 'Bấm vào "Logic".'
+        subtext4: 'Chọn ">".'
+        subtext5: 'Chèn "50".'
+      image3: 'Kiểm tra nếu công thức của bạn phù hợp với công thức trong ảnh chụp màn hình và bấm vào "Đồng ý".'
     step11:
-      title: Change some more bricks
-      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
-      image1: 'Add a "Change variable" - brick and modify the value like above.'
+      title: Thay đổi một số viên gạch khác
+      description: Khi bạn khởi động lại trò chơi, vị trí bắt đầu chiếc dù của bạn phải phù hợp với vị trí ban đầu của bạn. Đối với điều này, bạn cần phải thêm vào và sửa đổi ba viên gạch như hình minh hoạ ảnh dưới đây.
+      image1: 'Thêm một "Thay đổi biến " và sửa đổi giá trị như ở trên.'
       image2:
-        subtext1: 'Add a "When I receive" - brick.'
-        subtext2: 'Place it below the last brick ("End of loop").'
-        subtext3: 'Add two "Set variable" - bricks.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
+        subtext1: 'Thêm viên gạch "Khi tôi nhận được".'
+        subtext2: 'Đặt nó phía dưới viên gạch cuối ("Kết thúc vòng lặp").'
+        subtext3: 'Thêm hai viên gạch "Đặt biến".'
+      image3: 'Nhấp vào trường với "Tin nhắn 1", chọn "Mới..." và chèn "Khởi động lại".'
+      image4: 'Thay đổi các giá trị của hai hàm "Đặt biến" như hiển thị trong hình ở trên.'
     step12:
-      title: Back to objects
-      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
-      image1: 'Tap the "back" - button on your device.'
-      image2: 'Tap the "back" - button once more.'
-      image3: Now you should see this screen on your device.
+      title: Quay lại với đối tượng
+      description: 'Bây giờ bạn đã hoàn thành đối tượng "chiếc dù" của bạn một cách thành công! Quay về tổng quan đối tượng để tiếp tục sửa đổi đối tượng kế tiếp.'
+      image1: 'Nhấp vào nút "trở lại" trên thiết bị của bạn.'
+      image2: 'Nhấp vào nút "trở lại" một lần nữa.'
+      image3: Bây giờ bạn sẽ thấy màn hình này trên điện thoại của bạn.
     step13:
-      title: 'Object "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tap "target" and choose "Scripts".'
-      image2: Add and modify the bricks as in the screenshot above.
-      image3: Add four more bricks like shown above.
+      title: 'Đối tượng "mục tiêu"'
+      description: 'Ở đây bạn bắt đầu sửa đổi các đối tượng "mục tiêu". Thêm những viên gạch để kiểm soát vị trí và kích thước của mục tiêu của bạn.'
+      image1: 'Bấm vào "mục tiêu" và chọn "Tập lệnh".'
+      image2: Thêm và chỉnh sửa những viên gạch như trong ảnh chụp màn hình ở trên.
+      image3: Thêm bốn viên gạch giống như hiển thị ở trên.
     step14:
-      title: 'Object "target"'
-      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
-      image1: 'Tap the field "y:" and choose "New".'
-      image2: 'Insert "goalx" and confirm with "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
+      title: 'Đối tượng "mục tiêu"'
+      description: Khi bạn khởi động lại trò chơi, vị trí của mục tiêu của bạn cần phải thay đổi. Đối với bước này, đặt biến goalx và goaly với các chức năng ngẫu nhiên.
+      image1: 'Nhấp vào trường "y:" và chọn "Mới".'
+      image2: 'Chèn "goalx" và xác nhận với "Đồng ý".'
+      image3: 'Nhấp trường "0.0" và chèn công thức "ngẫu nhiên (-400, 400)".'
+      image4: 'Lặp lại các bước 1-3 cho hai viên gạch "Đặt biến", Mong muốn đặt tên biến "goaly" và đặt giá trị "ngẫu nhiên (400,-700)".'
     step15:
-      title: 'Object "target"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
-      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
-      image2: Check if your values match the ones above.
-      image3: Go back until you see this screen.
+      title: 'Đối tượng "mục tiêu"'
+      description: 'Sửa đổi của bạn "Vị trí tại" gạch để kiểm soát vị trí của mục tiêu của bạn với biến goalx và goaly.'
+      image1: 'Thay đổi các giá trị của "Vị trí tại" - gạch để "goalx" và "goaly".'
+      image2: Kiểm tra nếu giá trị của bạn phù hợp với những giá trị ở trên.
+      image3: Quay trở lại cho đến khi bạn thấy màn hình này.
     step16:
-      title: 'Object "parcel"'
-      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
-      image1: 'Tap "parcel" and choose "Scripts".'
-      image2: Add all the bricks shown above.
+      title: 'Đối tượng "bưu kiện"'
+      description: 'Ở đây bạn bắt đầu sửa đổi đối tượng của bạn "bưu kiện". Khi đối tượng "bưu kiện" nhận được tin nhắn "bắt đầu", các bưu kiện sẽ được hiển thị. Thiết lập vị trí của bưu kiện với các biến x và y.'
+      image1: 'Bấm vào "bưu kiện" và chọn "Tập lệnh".'
+      image2: Thêm tất cả những viên gạch như hiển thị ở trên.
       image3:
-        subtext1: 'Change the value of the "Set size" - brick to "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
+        subtext1: 'Thay đổi giá trị của gạch "Thiết lập kích thước " để "50".'
+        subtext2: 'Nhấp vào trường "khởi động lại" trong gạch "khi tôi nhận được" và tạo tin nhắn mới: "bắt đầu".'
+        subtext3: 'Thay đổi các giá trị của gạch "Vị trí tại" để "x" và "y".'
     step17:
-      title: 'Object "parcel"'
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Add the above shown bricks below the last "Place at" - brick.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
+      title: 'Đối tượng "bưu kiện"'
+      description: 'Để kiểm tra xem liệu các bưu kiện đã đạt mục tiêu, bạn cần gạch "Nếu 1 là đúng thì".'
+      image1: 'Thêm ở trên các gạch phía dưới gạch cuối cùng "Đặt tại".'
+      image2: 'Thay đổi giá trị trong gạch "Thay đổi Y bởi" thành "-5". Rồi bấm vào trường "1" trong "Nếu 1 là đúng thì".'
       image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"AND" is in the "Logic" category.'
+        subtext1: '"position_x" và "position_y" có thể được tìm thấy trong mục "Đối tượng".'
+        subtext2: '"goaly" và "goalx" nằm trong mục "Biến".'
+        subtext3: '"Và" là trong mục "Logic".'
     step18:
-      title: 'Object "parcel"'
-      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
+      title: 'Đối tượng "bưu kiện"'
+      description: Nếu các bưu kiện chạm mục tiêu thành công, bạn cần phải sửa đổi vị trí của các bưu kiện. Gửi tin nhắn cho các đối tượng khác để cho họ biết rằng bạn đã thắng.
       image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Add the above shown bricks and modify their values alike.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
+        subtext1: 'Thay đổi các giá trị của gạch "Vị trí tại" để "position_x" và "goaly + 100".'
+        subtext2: 'Nhấp trường "Phát sóng" và tạo ra một thông điệp mới "giành chiến thắng".'
+      image2: Thêm các viên gạch hiển thị ở trên và sửa đổi các giá trị của chúng như nhau.
+      image3: 'Quay trở lại cho đến khi bạn nhìn thấy màn hình này trên điện thoại của bạn. Đi đến các tập tệp của đối tượng "khởi động lại".'
     step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Add the above shown bricks and modify their values alike.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: Go back until you see this screen, then go to the scripts of “Background”.
+      title: 'Đối tượng "khởi động lại"'
+      description: 'Ở đây bạn sửa đổi các đối tượng "khởi động lại". Xác định vị trí và hành vi của đối tượng.'
+      image1: Thêm các viên gạch hiển thị ở trên và sửa đổi các giá trị của chúng như nhau.
+      image2: 'Thêm những viên gạch được hiển thị ở trên và thiết lập thông báo "phát sóng" để "khởi động lại".'
+      image3: 'Quay trở lại cho đến khi bạn thấy màn hình này, sau đó đi đến tập tệp "Nền".'
     step20:
-      title: 'Object "Background"'
-      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
+      title: 'Đối tượng "nền"'
+      description: 'Hoàn thành chương trình bằng cách sửa đổi đối tượng "nền". Bây giờ bạn có thể bắt đầu chơi trò chơi của bạn. Chúc vui vẻ!'
       image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: 'Tap the "Play" - button.'
-      image2: Enjoy your game.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
+        subtext1: 'Thêm những viên gạch được hiển thị ở trên và thiết lập thông báo "phát sóng" để "khởi động".'
+        subtext2: 'Bấm vào nút "Chơi".'
+      image2: Hãy thưởng thức trò chơi của bạn.
+      image3: 'Bạn đã hoàn tất các hướng dẫn "Steve Nhảy dù". Chúng tôi sẽ rất vui nếu tìm thấy các bản phối của "Steve Nhảy dù" trên share.catrob.at/pocketcode---chỉ cần thay đổi nó như bạn thích và tải lên nó một lần nữa từ tài khoản của bạn.'
     step21:
-      title: Check your scripts!
-      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
-      image1: 'Object "background"'
-      image2: 'Object "parachute"'
-      image3: 'Object "parcel"'
-      image4: 'Object "restart"'
-      image5: 'Object "target"'
+      title: Kiểm tra tập lệnh của bạn!
+      description: Click vào hình ảnh dưới đây để phóng to chúng. Xem lại các tập tệp của đối tượng của bạn nếu trò chơi của bạn không làm việc một cách chính xác.
+      image1: 'Đối tượng "nền"'
+      image2: 'Đối tượng "dù"'
+      image3: 'Đối tượng "bưu kiện"'
+      image4: 'Đối tượng "khởi động lại"'
+      image5: 'Đối tượng "mục tiêu"'
   stepByStep:
-    title: Step-by-Step Intro
-    start: 'Starting position:'
+    title: Giới thiệu từng bước
+    start: 'Vị trí bắt đầu:'
     step1:
-      title: Make a new program
+      title: Làm một chương trình mới
       detail:
-        text1: 'Tap on "New".'
-        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
+        text1: 'Nhấp vào "Mới".'
+        text2: 'Tên chương trình, chọn "Tạo chương trình trống" và nhấp "Đồng ý".'
     step2:
-      title: Create a new object
+      title: Tạo một đối tượng mới
       detail:
-        text1: 'Tap:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Draw a new look.
-        special2: Choose from gallery.
-        special3: Take a picture.
+        text1: 'Nhấp:'
+        text2: Chọn nguồn của giao diện đầu tiên của đối tượng mới của bạn.
+        text3: 'Nhập tên đối tượng và bấm vào "Đồng ý" để tạo ra các đối tượng.'
+        special1: Vẽ một giao diện mới.
+        special2: Chọn từ bộ sưu tập.
+        special3: Chụp hình.
     step3:
-      title: Start Moving
+      title: Bắt đầu di chuyển
       detail:
-        text1: 'Tap:'
-        text2: 'The first brick we use is out of the category "Motion".'
-        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text1: 'Nhấp:'
+        text2: 'Gạch đầu tiên chúng tôi sử dụng không có trong mục "Chuyển động".'
+        text3: 'Chọn gạch "Lướt". Các đối tượng sẽ di chuyển đến vị trí mới được xác định với gạch trên sân khấu.'
+        text4: Viên gạch bây giờ nổi. Để dán nó, di chuyển gạch đến vị trí mong muốn. Bạn cũng có thể di chuyển gạch đã được chèn vào bằng cách nhấp vào gạch cho đến khi nó nổi một lần nữa.
+        text5: 'Bấm vào "Chơi" để đi đến sân khấu và xem đối tượng trượt.'
+        text6: Sử dụng nút trở lại của Android để có quay trở lại từ sân khấu.
     step4:
-      title: Change Look
-      description: You can change the look of your object.
+      title: Thay đổi giao diện
+      description: Bạn có thể thay đổi giao diện của đối tượng của bạn.
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: Now you have to select the new image.
-        text6: Tap play to see the behaviour on the stage.
+        text1: 'Chọn gạch "Chuyển đổi để tìm". Với gạch này bạn có thể chọn xem hoặc tạo ra một hình mới.'
+        text2: 'Bật viên gạch bên dưới gạch "Lướt" -.'
+        text3: Nhấp vào trường thả xuống để tạo ra một giao diện mới.
+        text4: Chọn nguồn hình ảnh giống như trước.
+        text5: Bây giờ bạn phải chọn hình ảnh mới.
+        text6: Bấm vào chơi để xem các hành vi thiết lập.
     step5:
-      title: Speak
-      description: Now you will find out how to make an object talk.
+      title: Nói chuyện
+      description: Bây giờ bạn sẽ tìm hiểu làm thế nào để làm cho một đối tượng nói chuyện.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: Tap play to see the behaviour on the stage.
+        text1: 'Chọn gạch "Nói chuyện". Đối tượng đọc các văn bản, khi gạch này được thực hiện.'
+        text2: 'Nhấn vào gạch phía bên dưới gạch "Chuyển đổi để nhìn".'
+        text3: Bấm vào chơi để xem các hành vi thiết lập.
     step6:
-      title: Again and again
-      description: This step shows you how to repeat behaviour of objects.
+      title: Một lần nữa và một lần nữa
+      description: Bước này cho bạn thấy làm thế nào để lặp lại hành vi của các đối tượng.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
-        text6: Tap play to see the behaviour on the stage.
+        text1: 'Chọn gạch "Mãi mãi". Tất cả mọi thứ trong vòng lặp đi lặp lại mãi mãi.'
+        text2: 'Nhấp vào gạch "Mãi mãi" bên dưới gạch "khi chương trình bắt đầu".'
+        text3: 'Thêm gạch "Lướt".'
+        text4: 'Nhấp vào gạch "Lướt" phía trên gạch "Kết thúc vòng lặp".'
+        text5: Nhấn vào trường giá trị văn bản x và y và thiết lập thành 0.
+        text6: Bấm vào chơi để xem các hành vi thiết lập.
     step7:
-      title: Tapping is everything
-      description: You can also control the behaviour of the object when the program is running on the stage.
+      title: Bấm là tất cả mọi thứ
+      description: Bạn cũng có thể kiểm soát hành vi của đối tượng khi chương trình đang chạy trên giả lập.
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text1: 'Chọn gạch "Khi được nhấp". Mỗi viên gạch bên dưới gạch "Khi được nhấp" sẽ được thực hiện ngay khi bạn bấm vào các đối tượng trên sân khấu.'
+        text2: 'Đặt các "Khi được nhấp" bên dưới những viên gạch khác.'
+        text3: 'Chọn gạch "Rẽ phải" và nhấp nó bên dưới gạch "Khi được nhấp".'
+        text4: Bây giờ bạn có tập lệnhnày.
+        text5: Bấm vào chơi để xem các hành vi trên sân khấu. Nếu bạn hiện tại nhấn vào trên đối tượng, nó sẽ quay.
     step8:
-      title: Copy, delete or edit a brick
+      title: Sao chép, xóa hoặc chỉnh sửa một viên gạch
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: Nhấn một lần duy nhất phía bên trái của mỗi gạch mở ra trình danh sách. Ở đó bạn có thể di chuyển, sao chép, xóa hoặc chỉnh sửa các giá trị của gạch với công cụ chỉnh sửa công thức.
     step9:
-      title: Navigation in the app
+      title: Định vị trong ứng dụng
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: Sử dụng nút trở lại trong Android để định vị trong ứng dụng.
+        text2: Quay trở lại màn hình để tổng quan về đối tượng của bạn. Ở đây bạn có thể đi vào các tập lệnh cũng như các giao diện và âm thanh của các đối tượng. Ở đó, bạn có thể thay đổi tên, sao chép, thêm hoặc xóa hình và âm thanh.
+        text3: Sử dụng một lần nữa nút trở lại trên Android để có được cái nhìn để tổng quan về các đối tượng của bạn và nền của bạn.
     step10:
-      title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      title: Thay đổi nền
+      description: Đây là tổng quan về các đối tượng của bạn và nền phụ thuộc vào một chương trình.
       detail:
-        text1: The background is like an object, but you just can have on background.
-        text2: You can add scripts, sounds and look in the same way to the background object.
+        text1: Nền giống như đối tượng, nhưng bạn chỉ có thể có một nền.
+        text2: Bạn có thể thêm tập lệnh, âm thanh và giao diện t giống như đối tượng nền.
     step11:
-      title: Main Menu
-      description: Use the Android Back Button to get to this screen.
+      title: Danh sách chính
+      description: Sử dụng nút trở lại của Android để có đến màn hình này.
       detail:
-        text1: Continue with your currently opened program.
-        text2: Add a new program.
-        text3: See all your local programs.
-        text4: Go to the help site and discuss with other users.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text1: Tiếp tục với chương trình hiện đang mở của bạn.
+        text2: Thêm chương trình mới.
+        text3: Xem tất cả các chương trình địa phương của bạn.
+        text4: Truy cập trang trợ giúp và thảo luận với những người dùng khác.
+        text5: Khám phá thế giới của chương trình Pocket Code. Tải về và phối lại chương trình mà bạn thích.
+        text6: Tải lên chương trình hiện đang được mở ra.
   tutorialcards:
-    title: Tutorials
-    description1: This tutorials show you how to use effective tricks in
-    description2: Pocket Code.
-    getReady: 'Get Ready:'
-    tryCode: 'Try this code:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    title: Hướng dẫn
+    description1: Hướng dẫn này cho bạn thấy làm thế nào để sử dụng các thủ thuật một cách có hiệu quả trong
+    getReady: 'Chuẩn bị sẵn sàng:'
+    tryCode: 'Hãy thử mã này:'
+    doIt: 'Làm đi:'
+    tip: 'Thêm lời khuyên:'
     card1:
-      title: Change Size
-      description: Tap the duck to change the size.
+      title: Thay đổi kích thước
+      description: Bấm vào con vịt để thay đổi kích thước.
+      one: Add the object of which you would like to change the size, e.g. Animal.
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: Change Look
-      description: Use this trick to count automatically.
+      title: Thay đổi giao diện
+      description: Sử dụng Mẹo này để đếm tự động.
+      one: Add the object of which you would like to change its look, e.g. items.
+      two: "Include further pictures in the object's looks."
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Moving Animation
-      description: Use this trick when you want a flying parrot.
+      title: Di chuyển hình ảnh động
+      description: Sử dụng Mẹo này khi bạn muốn con vẹt bay.
+      one: Add the object you want to be moving.
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Glide
-      description: Move smoothly from one point to another.
+      title: Lướt
+      description: Di chuyển thông suốt từ một điểm tới những điểm khác.
+      one: Add the object you want to be gliding. e.g. plane.
+      two: Insert the following bricks and define the area in which the movement should happen.
     card5:
-      title: Play Sound
-      description: Tap the drum to play this sound.
-      extra1: '1. Click "+"'
-      extra2: '2. Select "Pocket Code Recorder"'
-      extra3: 3. Press icon to record your sound
+      title: Bật âm thanh
+      description: Nhấp vào trống để chơi âm thanh này.
+      one: Add the object you want to be playing a sound, e.g. dog.
+      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
-      title: Speak Something
-      description: Use this code to make an object speaking.
+      title: Hãy nói gì đó
+      description: Sử dụng mã này để làm cho đối tượng nói.
+      one: Add the object you want to be speaking, e.g. Carrie.
+      two: Insert the following bricks in order to make the voice output possible.
     card7:
       title: GSensor
-      description: Use this trick to control an object with the inclination of your device.
-      extra1: If too sensitive, divide by 10
+      description: Sử dụng Mẹo này để điều khiển một đối tượng với độ nghiêng của thiết bị của bạn.
+      one: Add the object you want to be moving on stage.
+      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
     card8:
-      title: Compass
-      description: Use this code to make a compass.
+      title: La bàn
+      description: Sử dụng mã này để làm một chiếc la bàn.
+      one: Add the object you want to point in compass direction.
+      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Broadcast
-      description: Look at this code! This shows you how to communicate between objects.
+      title: Phát sóng
+      description: Nhìn vào mã này! Nó chỉ cho bạn làm thế nào để giao tiếp giữa các đối tượng.
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
+      three: In this case the background changes when the object in the front layer is tapped.
+    card10:
+      title: Hiển thị các biến
+      description: Show the value of a variable.
+      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
+      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
+      three: Through „Show variable“ you can display the values on stage.
+    card11:
+      title: Collision detection
+      description: Detect a collision between two objects.
+      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
+      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+    card12:
+      title: Face detection
+      description: Control an object by using face detection.
+      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
+      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
   starterPrograms:
-    title: Starter Programs
-    description: Try out these starter programs. Look inside to make changes and add your ideas.
+    title: Khởi động chương trình
+    description: Hãy thử các chương trình khởi động này. Nhìn vào trong để thực hiện thay đổi và thêm vào những ý tưởng của bạn.
     categories:
-      games: Games
-      animations: Animations
-      interactive: Interactive Art and Stories
-      music: Music And Dance
+      games: Trò chơi
+      animations: Hình động
+      interactive: Nghệ thuật tương tác và câu chuyện
+      music: Âm nhạc và khiêu vũ
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
-    title1: Registration
-    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: Upload
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: Search for your program
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: Create Android app
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: Download app
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
-    title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    title: Làm thế nào để tải trò chơi Pocket Code lên trang web Game Jolt?
+    text0: 'Đầu tiên xin chúc mừng trò chơi của bạn! Bây giờ bạn có thể tải nó lên %link% để tạo ra một ứng dụng Android độc lập, sau đó bạn có thể tải lên trên trang web Game Jolt.'
+    title1: Đăng ký
+    text1: "Trước tiên, bạn cần phải tạo một tài khoản. Sau đó, bạn có thể tải lên chương trình mà bạn tạo ra. Đừng lo lắng, rất dễ dàng và tất cả những gì bạn chỉ cần là nghĩ ra tên người dùng và mật khẩu. Sau khi làm xong, bấm vào 'Đăng nhập hoặc đăng ký'. Thế thôi!"
+    title2: Tải lên
+    text2: 'Sau khi đăng ký bạn có thể tải lên trò chơi của bạn. Chỉ cần nghĩ về một cái tên và thêm mô tả. Cũng có thể thêm #AliceJam150 trong trường mô tả.'
+    title3: Tìm kiếm cho chương trình của bạn
+    text3: Đi tới hồ sơ Pocket Codecủa bạn, nơi tất cả các chương trình của bạn được liệt kê hoặc tìm kiếm trực tiếp bằng cách sử dụng tìm kiếm và tên chương trình của bạn.
+    title4: Tạo ra ứng dụng Android
+    text4: "Trực tiếp trên trang chi tiết của chương trình, bạn có thể tạo ra một ứng dụng Android. Bằng cách nhấp vào 'Chuẩn bị ứng dụng' các ứng dụng sẽ được xây dựng."
+    title5: Tải Ứng Dụng
+    text5: 'Sau quá trình xây dựng, bạn có thể tải chương trình của bạn như là một ứng dụng. Ứng dụng tải về này cần phải được tải lên một lần nữa trực tiếp trên trang web l Game Jolt để tham gia vào %link%.'
+    title6: Đăng ký/đăng nhập tại GameJolt.com
+    text6: "Truy cập %link% và bấm vào 'Đăng nhập' hoặc 'Đăng ký!' trong danh sách. Nếu bạn đã có một tài khoản chỉ cần đăng nhập, nếu không, bạn cần phải đăng ký với địa chỉ Email của bạn, tên người dùng và mật khẩu."
+    title7: Tải lên trò chơi của bạn trên trang web Game Jolt
+    text7: "Sau khi bạn đã đăng nhập, đi đến bảng điều khiển của bạn. Ở đó bạn có thể thêm trò chơi của bạn. Trước tiên, bạn phải bấm vào 'Chấp nhận quy tắc'. Sau đó điền vào các thông tin trò chơi. Tại công cụ Động cơ/Ngôn ngữ/Tạo thành, chọn 'Khác' và thêm vào mục Động cơ/Ngôn ngữ/Công cụ 'Android'. Từ trạng thái 'Phát triển' chọn 'Kết thúc/ổn định'. Hãy đảm bảo bao gồm #AliceJam150 trong mô tả để nó xuất hiện trên trang %link%."
+    text7_1: "Trước khi bạn có thể xuất bản trò chơi của mình, hãy thực hiện theo các bước tiếp theo. Bạn phải ít thêm 'ảnh thu nhỏ', thiết lập 'đánh giá', và tải lên trò chơi của bạn bằng cách nhấp vào 'xây dựng/tập tin'."
+    text7_2: "Nhấp vào 'Thêm gói' và điền vào điền đủ thông tin gói. Lưu nó và thêm việc phát hành. "
+    text7_3: Bây giờ bạn có thể tải lên apk chương trình của bạn. Bạn tìm thấy các ứng dụng đã tải về trong thư mục tải về của bạn. Tốt nhất để sử dụng dữ liệu thám hiểm (ví dụ như nhà thám hiểm dữ liệu).
+    text7_4: "Lưu ý: Nếu ứng dụng thiếu hậu tố '.apk', bạn phải thêm '.apk' theo cách thủ công. Chỉ cần đổi tên file. Bây giờ bạn có thể tải lên nó."
+    text7_5: "Sau khi tải lên nhấp vào 'Đồng ý' để xuất bản trò chơi của bạn. Điều này sau đó sẽ hiển thị link để giúp những người dùng khác tải về trò chơi của bạn."
+    text7_6: Bây giờ, bạn đã tải lên của bạn trò chơi đầu tiên trên trang web Game Jolt và đặt nó hoạt động. Chúc mừng!
+    text7_7: 'Những người khác sẽ có thể tìm thấy trò chơi của bạn và nó sẽ xuất hiện trên trang %link%.'
+  aliceGameJamTutorialcards:
+    title1: (Welcome to) Wonderland
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: Save Alice!
+    subtitle2: Use the inclination sensors and detect a collision between objects
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: 'The Hatter - Hit and Run'
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
+    title4: 'The Hatter - Hit and Run'
+    subtitle4: Let the Hatter shoot the evil cards
+    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    title5: Whack a Cheshire Cat
+    subtitle5: Create a score by using variables
+    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    title6: A Rabbits Race
+    subtitle6: Create a moving background
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: Download the program
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
+  username_header: Cảm ơn bạn đã đăng ký Pocket Code!
+  username_chooser: 'Hãy chọn tên người dùng:'
+  username_hint: Tên người dùng không nên là tên thật của bạn.
+  usernameTaken: Tên người dùng đã tồn tại, hãy chọn tên khác.
+  noReset: Người sử dụng Facebook và Google + không có mật khẩu để đặt lại.
 search:
-  dotdotdot: Search...
-  search: Search
-  results: Search Results
-  resultcount: 'Your search returned %count% results'
+  dotdotdot: Tìm kiếm...
+  search: Tìm kiếm
+  results: Kết quả tìm kiếm
+  resultcount: 'Kết quá tìm kiếm của bạn %count%'
 menu:
-  profile: My Profile
-  logout: Logout
+  profile: Hồ sơ của Tôi
+  logout: Đăng xuất
 programLoader:
-  noPrograms: There are currently no programs.
+  noPrograms: Hiện không có chương trình nào.
 login:
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  or: OR
+  passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
+  noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.
+  forgotPass: Quên mật khẩu hoặc tên người dùng?
+  recoverPass: Khôi phục mật khẩu
+  recoverPassSend: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
+  userOrEmail: Tên đăng nhập hoặc Email
+  changePass: Thay đổi mật khẩu
+  createAccount: Tạo tài khoản mới
+  or: HOẶC
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  download: Tải về ứng dụng
+  prepare: Chuẩn bị ứng dụng
+  preparing: Đang chuẩn bị ứng dụng
+  text: Quá trình có thể mất một lúc
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: Tên người dùng không được để trống
+    invalid: Tên người dùng của bạn không hợp lệ
+    exists: Tên người dùng này đã tồn tại.
+    not_exists: Tên người dùng này không tồn tại.
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: Thiếu mật khẩu.
+    short: 'Mật khẩu của bạn phải có ít nhất {{ limit }} ký tự.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: Mô tả không chứa các từ ngữ thô lỗ.
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: Thiếu tên đất nước.
+    invalid: Quốc gia không hợp lệ
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    blank: thư điện tử không được để trống
+    invalid: Email của bạn có vẻ là không hợp lệ
+    exists: Địa chỉ email này đã tồn tại.
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: Xác thực ID không được để trống
+  login: Mật khẩu hoặc tên người dùng là không chính xác.
+  post-data: Dữ liệu niêm yết là không chính xác hoặc thiếu!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: Khách hàng đã không gửi fileChecksum! Bạn đang sử dụng phiên bản lỗi thời của Pocket Code?
+    invalid: kiểm tra không hợp lệ
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: không hợp lệ mã xml
+    missing: 'lỗi không xác định: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
+    unexpected: tập tin đã được tìm thấy
+    invalid: tập tin không hợp lệ
+  image.missing: Dự án XML đề cập đến một tập tin không tồn tại trong thư mục dự án
+  unknown: lỗi không xác định
+  token: 'Xác thực thiết bị thất bại: auth mã thông báo không hợp lệ!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: Chương trình không được chứa từ ngữ thô lỗ.
   program:
-    invalid: Invalid program.
+    invalid: Chương trình không hợp lệ.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: Xin lỗi, chương trình của bạn có chứa phiên bản cũ của ngôn ngữ Catrobat! Bạn đang sử dụng phiên bản mới nhất của Pocket Code?
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: Xin lỗi, bạn đang sử dụng phiên bản cũ của Pocket Code. Hãy cập nhật các phiên bản mới nhất.
 success:
-  registration: Registration successful!
-  token: ok
-  upload: Your project was uploaded successfully!
-  report: Your report was successfully sent!
+  registration: Đăng ký thành công!
+  token: Đồng ý
+  upload: Dự án của bạn được tải lên thành công!
+  report: Báo cáo của bạn được gửi thành công!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 phút trước |{1}1 phút trước |] 1, Inf] %count% phút trước'
+  hours.ago: '{1}1 giờ trước |] 1, Inf] %count% giờ trước'
+  days.ago: '{1}1 ngày trước |] 1, Inf] %count% ngày trước'
+  months.ago: '{1}1 tháng trước |] 1, Inf] %count% tháng trước'
+  years.ago: '{1}1 năm trước |] 1, Inf] nhiều hơn một năm trước'
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
+  arabic: Ả rập
+  bulgarian: Bun-ga-ri
   catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  chinese_simplified_han: Trung Quốc (giản thể Han)
+  chinese_traditional_han: Trung Quốc (truyền thống Han)
+  croatian: Croatia
+  czech: Séc
+  danish: Đan Mạch
+  dutch: Hà Lan
+  english_united_kingdom: Tiếng Anh (Vương Quốc Anh)
+  english_united_states: Tiếng Anh (Hoa Kỳ)
+  estonian: Estonia
+  filipino: Philippines
+  finnish: Phần Lan
+  french: Pháp
+  german: Đức
+  greek: Hy Lạp
+  hebrew: Do Thái
+  hindi: Hin-đi
+  hungarian: Hungari
+  indonesian: Indonesia
+  italian: Ý
+  japanese: Nhật Bản
+  korean: Hàn Quốc
+  latvian: Latvia
+  lithuanian: Lithuania
+  malay: Mã Lai
+  norwegian: Na Uy
+  persian: Ba tư
+  polish: Ba Lan
+  portuguese_brazil: Bồ Đào Nha (Brazil)
+  portuguese_portugal: Bồ Đào Nha (Bồ Đào Nha)
+  romanian: Rumani
+  russian: Nga
+  serbian: Séc-bi
+  slovak: Slovakia
+  slovenian: Sloven
+  spanish_latin_america: Tây Ban Nha (Mỹ La tinh)
+  spanish_spain: Tây Ban Nha (Tây Ban Nha)
+  swedish: Thụy Điển
+  thai: Thái
+  turkish: Thổ Nhĩ Kỳ
+  ukrainian: Ucraina
+  vietnamese: Tiếng Việt
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Tạo ra Apk
+  pending: Đang tạo Apk
+  download: Tải về Apk
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to alice game jam
+  submitown:
+    header: be aware
+    subheader: You can only submit your own programs
+    text: |
+      But why not create your own!
+      Take part in the #AliceGameJam

@@ -1,35 +1,35 @@
 ---
-localLanguage: English
-username: Username
-password: Password
-aboutPocketCode: About Pocket Code
-tutorials: Tutorials
-googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
-error: Error
-cancel: Cancel
-report: Report
-download: Download
-description: Description
-noDescription: No description available.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
-more: more
-less: less
-ok: OK
+localLanguage: ఆంగ్లము
+username: వాడుకరి పేరు
+password: పాస్వర్డ్
+aboutPocketCode: పాకెట్ కొడ్ గురించి
+tutorials: టుటొరియల్స్
+googlePlay: గూగ్లె ప్లే
+passwordsNoMatch: పాస్వర్ద్ సరిచుసుకొండి.
+error: ఎర్రర్
+cancel: కాన్సిల్
+report: రిపొర్ట్
+download: ప్రొగ్రాం లాగ డౌన్లొడ్
+description: డిస్క్రిప్షన్
+noDescription: డిస్క్రిప్షన్ అంధుబాటులొ లెదు.
+country: దేశం
+loginText: లాగిన్
+privacyPolicy: ప్రయివసి పాలిసి
+imprint: ఇంప్రింట్
+somethingWentWrong: ఊప్స్ ఎధొ తప్పు జరిగొనది.
+pleaseTryAgain: మళ్ళి ప్రయత్నించండి!
+oldVersionError: కొత్త పాకెట్ కొడ్ వర్షెన్ కి అప్గ్రెడ్ చెసుకొండి!
+more: ఎక్కువ
+less: తక్కువ
+ok: అలాగే
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 programs:
-  featured: Featured
-  newest: Newest programs
+  featured: ఫీచర్డ్
+  newest: కొత్త ప్రొగ్రాంలు
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
+    viewed: ఎక్కువ చుడబడినవి
+    downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
+  random: యాదృచ్ఛిక ప్రొగ్రాంలు
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -245,7 +245,7 @@ help:
       image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
     step15:
       title: 'Object "target"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx and goaly.'
+      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
       image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
       image2: Check if your values match the ones above.
       image3: Go back until you see this screen.
@@ -387,57 +387,57 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: Tutorials
-    description1: These tutorials show you how to use effective tricks in
+    title: టుటొరియల్స్
+    description1: These tutorials show you how to use effective tricks in Pocket Code.
     getReady: 'Get Ready:'
     tryCode: 'Try this code:'
     doIt: 'Do it:'
     tip: 'Extra Tip:'
     card1:
       title: Change Size
-      description: Tap the duck to change the size.
+      description: Change the size of an object.
       one: Add the object of which you would like to change the size, e.g. Animal.
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
       title: Change Look
-      description: Use this trick to count automatically.
+      description: Change the looks of an object.
       one: Add the object of which you would like to change its look, e.g. items.
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Moving Animation
-      description: Use this trick when you want a flying parrot.
+      title: Animation
+      description: Animate objects
       one: Add the object you want to be moving.
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
       title: Glide
-      description: Move smoothly from one point to another.
+      description: Let your object glide over the screen.
       one: Add the object you want to be gliding. e.g. plane.
       two: Insert the following bricks and define the area in which the movement should happen.
     card5:
-      title: Play Sound
+      title: Play a Sound
       description: Play a sound by tapping on the object.
       one: Add the object you want to be playing a sound, e.g. dog.
       two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
-      title: Speak Something
-      description: Use this code to make an object speak.
+      title: Speak
+      description: Let your object speak.
       one: Add the object you want to be speaking, e.g. Carrie.
       two: Insert the following bricks in order to make the voice output possible.
     card7:
-      title: GSensor
-      description: Use this trick to control an object with the inclination of your device.
+      title: Sensor
+      description: Control an object by using the inclination sensors.
       one: Add the object you want to be moving on stage.
       two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
     card8:
       title: Compass
-      description: Use this code to make a compass.
+      description: Create you own compass
       one: Add the object you want to point in compass direction.
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
       title: Broadcast
-      description: Look at this code! This shows you how to communicate between objects.
+      description: Send messages from one object to another.
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.

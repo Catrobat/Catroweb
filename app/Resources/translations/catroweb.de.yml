@@ -22,16 +22,19 @@ oldVersionError: Bitte aktualisiere auf die neueste Version von Pocket-Code!
 more: mehr
 less: weniger
 ok: OK
-clickToDownloadProgram: %link_start%Hier%link_end% kannst du das Beispielprogramm herunterladen.
+clickToDownloadProgram: 'Um das Beispielprogramm herunterzuladen klicke %link_start% hier %link_end%.'
 programs:
   featured: Empfohlen
   newest: Neueste Programme
   most:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
-  random: Random Programs
+  random: Zufällige Programme
   downloads: '%downloads% heruntergeladen'
+  sample: Beispielprogramme
   views: '%views% gesehen'
+  submitted: Eingereichte Programme
+  uploaded: Hochgeladenen Programme
   reportAsInappropriate: Als unpassend melden
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Bitte %login% um dieses Programm als unpassend zu melden.'
@@ -40,9 +43,10 @@ programs:
   reportOwnProgram: Du kannst dein eigenes Programm nicht markieren.
   reportAlready: Du hast dieses Programm bereits als unpassend gemeldet.
   reportDone: Du hast dieses Programm als unpassend gemeldet!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: App aktualisieren
+  updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Programm herunterladen zu können.
   btnClosePopup: Ok
+  checkout_this_program: Checkout this Catrobat program
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -383,75 +387,75 @@ help:
         text6: Lade das derzeit geöffnete Programm hoch.
   tutorialcards:
     title: Tutorials
-    description1: 'Diese Tutorials zeigen dir, wie spezielle Funktionen in Pocket Code umgesetzt werden können.'
+    description1: 'Diese Tutorials zeigen dir, wie man effektive Tricks verwendet in '
     getReady: 'Bereite alles vor:'
     tryCode: 'Versuche diesen Code:'
     doIt: 'Tu es:'
     tip: 'Extra Tipp:'
     card1:
       title: Größe ändern
-      description: Ändere die Größe eines Objektes
-      one: Lege ein Objekt an (z.B. Tier), dessen Größe du ändern  möchtest.
-      two: Füge folgende Bausteine in „Skripte“ hinzu, um dein Objekt bei Berührung zu  verkleinern.
+      description: Tippe auf die Ente um ihre Größe zu verändern.
+      one: Füge das Object hinzu, von dem du die Größe ändern möchtest, z.B. Tier.
+      two: 'Füge die folgenden Bausteine in ein Skript eines Objektes ein, um es bei Berührung (um 20% seiner Originalgröße) zu verkleinern.'
     card2:
       title: Aussehen ändern
-      description: Ändere das Aussehen eines Objektes.
-      one: Lege das Objekt (z.B. Tiere) an, dessen Aussehen du ändern möchtest.
-      two: Integriere anschließend in „Aussehen“ weitere Bilder.
-      three: Füge folgende Bausteine in „Skripte“ hinzu, um fortlaufend im Sekundentakt das Aussehen zu wechseln.
+      description: Verwende diesen Trick um automatisch mitzuzählen.
+      one: Füge das Object hinzu, von dem du das Aussehen ändern möchtest, z.B. Gegenstände.
+      two: Füge weitere Bilder zum Aussehen des Objektes hinzu.
+      three: Füge die folgenden Bausteine in ein Skript eines Objektes ein, um sein Aussehen nach jeder Sekunde zu ändern.
     card3:
       title: Bewegte Animation
-      description: Bewege ein Objekt auf der Bühne.
-      one: Lege das Objekt an (z.B. Vogel), das sich bewegen soll.
-      two: Integriere in „Aussehen“ ein weiteres Bild, das die Bewegung  darstellt.
-      three: Füge nun folgende Bausteine in „Skripte“ hinzu, um die Position laufend zu ändern. Begrenze zusätzlich die Bühne, indem du  das Objekt vom Rand abprallen lässt.
+      description: Verwende diesen Trick um den Papagei fliegen zu lassen.
+      one: Füge das Objekt hinzu, das du bewegen möchtest.
+      two: Füge weiter Bilder zum Aussehen des Objekts hinzu, die eine Bewegung veranschaulichen.
+      three: Füge die folgenden Bausteine in ein Skript eines Objektes ein, um seine Position nach einer gewissen Zeit zu verändern. Zusätzlich kannst du das Feld durch Abprallen am Rand eingrenzen.
     card4:
       title: Gleite
-      description: Lass ein Objekt über den Bildschirm gleiten.
-      one: Lege ein neues Objekt an (z.B. Flugzeug), welches über  die Bühne „gleiten“ soll.
-      two: Füge folgende Bausteine in „Skripte“ ein und lege den Bereich fest in dem die  Bewegung stattfinden soll.
+      description: Gleite mit einem Objekt über den Bildschirm.
+      one: Füge das Objekt hinzu, das du gleiten lassen möchtest. z.B. Flugzeug.
+      two: Füge die folgenden Bausteine ein und definiere den Bereich in dem die Bewegung stattfinden soll.
     card5:
       title: Spiele einen Klang ab
-      description: Spiele einen Klang ab, indem du auf das Objekt tippst.
-      one: Lege ein neues Objekt an (z.B. Hund), welches einen Ton abspielen soll.
-      two: Füge nun folgende Bausteine in „Skripte“ ein, damit das Objekt einen Ton abspielt. Du kannst dafür in „Klänge“ einen Klang  aufnehmen, einen eigenen Klang auswählen oder einen Sound aus der Pocket Code Medien Bibliothek verwenden.
+      description: Tippe auf die Trommel um den Klang abzuspielen.
+      one: Füge das Objekt hinzu, das einen Ton abspielen soll. z.B. Hund.
+      two: Füge die folgenden Bausteine ein um eine Tonwiedergabe zu ermöglichen. Nimm selbst einen Ton auf, oder wähle ihn aus deiner persönlichen Bibliothek oder der Pocket Code Medienbibliothek aus.
     card6:
       title: Sprich etwas
-      description: Lasse ein Objekt sprechen.
-      one: Lege das Objekt an (z.B. Carry), das einen Text sprechen soll.
-      two: Füge nun folgende Bausteine in „Skripte“ hinzu, um deinen Text sprechen zu lassen.
+      description: Verwende diesen Code damit ein Objekt spricht.
+      one: Füge das Objekt hinzu, das eine Sprachausgabe machen soll. z.B. Carrie.
+      two: Füge die folgenden Bausteine in ein, um eine Sprachausgabe zu ermöglichen.
     card7:
       title: GSensor
-      description: Steuere ein Objekt mit den Neigungssensoren.
-      one: Lege das Objekt an (z.B. Gegenstand), das du über Sensoren steuern möchtest.
-      two: Füge folgende Bausteine in „Skripte“ hinzu, um das Objekt über die Sensoren deines Smartphones zu steuern. Wähle dazu im „Formel Editor“ die Sensorenwerte „x_Beschleunigung“ und „y_Beschleunigung“ aus. Setze ein Minus um die Neigung zu spiegeln. Wenn dir die  Bewegung zu schnell ist, dividiere  die Beschleunigung z.B. durch 10.
+      description: Verwende diesen Trick um ein Objekt mit Neigung deines Handys zu kontrollieren.
+      one: Füge das Ojekt hinzu, das sich auf der Bühne bewegen soll.
+      two: 'Füge die folgenden Bausteine ein, um das Objekt mit den Sensoren deines Gerätes zu steuern. Dafür wählst du "x und y Neigung". Um die passende Bewegung zu erhalten, setze "- Neigung". Wenn die Bewegung des Objekts zu sensibel reagiert, teile den Neigungswert z.B. durch 10.'
     card8:
       title: Kompass
-      description: Erstelle einen Kompass.
-      one: Lege das Objekt an (z.B. Kompassnadel), um einen Kompass zu erstellen der nach Norden zeigt.
-      two: Füge folgende Bausteine in „Skripte“ hinzu, damit sich das Objekt immer an der Kompassrichtung orientiert.
+      description: Verwende diesen Code um einen Kompass zu erstellen.
+      one: Füge das Objekt hinzu, das in Kompassrichtung zeigen soll.
+      two: Füge die folgenden Bausteine ein, um ein Objekt auszurichten. Füge zusätzlich eine Forever Schleife ein.
     card9:
-      title: Verschicke an alle
-      description: Kommunikation zwischen Objekten.
-      one: Lege ein neues Objekt an (z.B. Alice), das mit dem Hintergrund kommunizieren soll. Füge zusätzlich einen zweiten Hintergrund hinzu. Dieser soll sich durch das empfangen einer Nachricht ändern.
-      two: Füge in Alice den Baustein „Versende an alle“ in „Skripte“ ein. Setze nun in einem anderen Objekt oder Hintergrund den Baustein „Wenn ich empfange“ um auf die Nachricht zu reagieren.
-      three: Der Hintergrund ändert sich, wenn das Objekt im Vordergrund angetippt wird.
+      title: 'Verschicke an alle:'
+      description: Schau dir diesen Code an! Er zeigt dir, wie man zwischen Objekten kommuniziert.
+      one: Füge ein neues Objekt hinzu, z.B. Alice, das eine Broadcast Nachricht versenden soll. Füge zusätzlich einen zweiten Hintergrund zu den Aussehen des Hintergrunds hinzu. Sobald der Hintergrund eine Broadcast Nachricht erhält soll er sein Aussehen ändern.
+      two: 'Füge den Baustein "An alle senden" ein und bestimme was geschehen soll, wenn die anderen Objekte die Nachricht erhalten.'
+      three: In diesem Fall ändert sich der Hintergrund, wenn ein Objekt auf einer vorderen Ebene berührt wird.
     card10:
-      title: Variable ausgeben
-      description: Gib den Wert einer Variable aus.
-      one: Lege ein Objekt an (z.B. Alex), welches du mit den Neigungs-Sensoren steuerst (siehe %tutorial_card_link_7%)
-      two: Füge nun folgende Bausteine in „Skripte“ ein, um die aktuelle „Position_x“ und „Position_y“ des Objektes in einer Variable laufend zu speichern.
-      three: Verwende im Hintergrund die Bausteine „Zeige Variable“ um diese Werte auf der Bühne ausgeben.
+      title: Zeige Variable
+      description: Zeige den Wert der Variable.
+      one: 'Füge ein Objekt hinzu, das durch deine Telefonsensoren beweger werden soll (siehe %tutorial_card_link_7% Tutorial Karte 7 %link_end%). Füge zusätzlich einen zweiten Hintergrund hinzu, der verändert werden soll, wenn eine Broadcast Nachricht empfangen wird.'
+      two: Füge die folgenden Bausteine ein, um die aktuelle x und y Position des sich bewegenden Objektes in einer Variable zu speichern.
+      three: 'Über "Zeige Variable" kannst du die Werte auf der Bühne anzeigen.'
     card11:
       title: Kollisionserkennung
-      description: Lasse zwei Objekte aufeinander treffen.
-      one: Lege zwei Objekte an, die miteinander kollidieren sollen (z.B. Alex und Teddy).
-      two: Steuere Alex mit den Neigungssensoren (siehe %tutorial_card_link_7%) und speichere die „Position_x“ und „Position_y“ von Alex in einer Variable (siehe %tutorial_card_link_10%). Füge zu Teddy in „Skripte“ folgende Bausteine hinzu. In der „if-Schleife“ werden die Bedingung für die Kollision festgelegt. Dann wird überprüft ob sich die x/y-Positionen der beiden Objekte überschneiden.
+      description: Erkenne eine Kollision zwischen zwei Objekten.
+      one: 'Füge zwei Objekte hinzu von denen eines durch die Sensoren deines Telefons bewegt werden soll, z.B. Alex (siehe %tutorial_card_link_7% Tutorial Kare 7 %link_end%).'
+      two: 'Speichere die aktuelle "x und y Position" des sich bewegenden Objekts Alex (siehe %tutorial_card_link_10% Tutorial Karte 10 %link_end%) und füge das folgende Skript hinzu. Überprüfe kontinuierlich, ob sich die zwei Objekte überlagern. Wenn sie das tun, soll das fixierte Objekt ausgeblendet werden.'
     card12:
       title: Gesichtserkennung
-      description: Steuere ein Objekt mit Hilfe der Gesichtserkennung.
-      one: Überprüfe in den Einstellungen ob die Bausteine für die Gesichtserkennung aktiviert sind.
-      two: Lege ein neues Objekt an (z.B. Alien), das bei Erkennung eines Gesichtes angezeigt werden soll. Lege dazu folgende Bausteine in „Skripte“ fest. Überprüfe mit einer „Wenn“-Schleife, ob ein Gesicht erkannt wird. Bei einer Gesichtserkennung hat die Variable den Wert 1, ansonsten den Wert 0.
+      description: Steure ein Objekt durch Gesichtserkennung.
+      one: Stelle zuerst sicher, dass die Gesichtserkennungsbausteine aktiviert sind. Gehe dafür zu den Einstellungen.
+      two: 'Füge ein neues Objekt hinzu und füge die folgendne Bausteine ein um anzuzeigen, ob ein Gesicht erkannt wurde. Überprüfe in einer Forever Schleife, ob ein Gesicht erkannt wurde. Wenn die Kamera ein Gesicht wahrnimmt ist der Wert der Variable "WAHR", sonst ist er "FALSCH".'
   starterPrograms:
     title: Starter Programme
     description: Probiere diese Starter Programme aus. Schau dir den Code an und verändere ihn so wie du willst.
@@ -484,12 +488,36 @@ help:
     text7_5: "Klicke nach dem Upload auf 'OK', um dein Spiel zu veröffentlichen. Dadurch wird anderen Leuten ein Link angezeigt, mit dem sie dein Spiel herunterladen können."
     text7_6: Du hast jetzt dein erstes Spiel auf der Game Jolt Seite hochgeladen und aktiviert. Herzlichen Glückwunsch!
     text7_7: 'Andere Leute können dein Spiel jetzt finden und es erscheint auf der %link% Seite.'
+  aliceGameJamTutorialcards:
+    title1: Willkommen im Wunderland
+    subtitle1: "Animiere deine Figuren und erstelle ein 'Wenn angetippt' Event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: Save Alice!
+    subtitle2: Use the inclination sensors and detect a collision between objects
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: 'The Hatter - Hit and Run'
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
+    title4: 'The Hatter - Hit and Run'
+    subtitle4: Let the Hatter shoot the evil cards
+    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    title5: Whack a Cheshire Cat
+    subtitle5: Create a score by using variables
+    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    title6: A Rabbits Race
+    subtitle6: Create a moving background
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: Download the program
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
+  username_header: Danke für deine Anmeldung bei Pocket Code!
+  username_chooser: 'Bitte wähle einen Benutzernamen:'
+  username_hint: Der Benutzername sollte nicht dein richtiger Name sein.
+  usernameTaken: Benutzername bereits vergeben, bitte wähle einen anderen.
+  noReset: Facebook und Google+ Benutzer haben kein Passwort zum zurücksetzen.
 search:
   dotdotdot: Suche...
   search: Suche
@@ -508,7 +536,7 @@ login:
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   userOrEmail: Username oder Email
   changePass: Passwort ändern
-  createAccount: Create an account
+  createAccount: Erstelle ein Konto
   or: ODER
 apk:
   download: Als app herunterladen
@@ -518,9 +546,9 @@ apk:
 errors:
   username:
     blank: Benutzername darf nicht leer sein
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    invalid: Dein Benutzername ist ungültig
+    exists: Dieser Benutzername existiert bereits.
+    not_exists: Dieser Benutzername existiert nicht.
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
@@ -534,7 +562,7 @@ errors:
     invalid: Deine E-Mail Adresse scheint ungültig zu sein
     exists: Die E-Mail Adresse existiert bereits.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: Offene Authentifizierungs ID darf nicht leer sein
   login: Das Passwort oder der Username ist falsch.
   post-data: POST-Daten nicht korrekt oder fehlt!
   checksum:
@@ -617,3 +645,10 @@ ci:
   generate: Apk generieren
   pending: Generiere Apk
   download: Apk Runterladen
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Einreichen zur Alice Game Jam
+  submitown:
+    header: Achtung
+    subheader: Du kannst nur eigene Programme einreichen
+    text: 'Erstelle ein eigenes und mach mit beim #AliceGameJam!'
