@@ -44,6 +44,7 @@ monolog:
         upload:
             type: stream
             path: "%kernel.logs_dir%/upload.log"
+
             channels: [upload]
         main:
             type:  stream
@@ -54,3 +55,6 @@ security:
     firewalls:
         main: 
             http_basic: ~
+            
+bazinga_geocoder:
+   fake_ip:    88.116.169.222 #123.345.643.133

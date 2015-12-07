@@ -141,6 +141,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
                 'postal_code' => @$program_stats[$i]['postal_code'],
                 'locality' => @$program_stats[$i]['locality'],
                 'user_agent' => @$program_stats[$i]['user_agent'],
+                'username' => @$program_stats[$i]['username'],
             );
 
             $this->insertProgramDownloadStatistics($program, $config);
@@ -261,6 +262,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
             $this->theResponseShouldContain($program_stats[$i]['postal_code']);
             $this->theResponseShouldContain($program_stats[$i]['locality']);
             $this->theResponseShouldContain($program_stats[$i]['user_agent']);
+            $this->theResponseShouldContain($program_stats[$i]['user_name']);
         }
     }
 

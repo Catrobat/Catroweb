@@ -74,6 +74,11 @@ class ProgramDownloads
     protected $user_agent;
 
     /**
+     * @ORM\Column(type="string", options={"default":""}, nullable=true)
+     */
+    protected $user_name;
+
+    /**
      * @return mixed
      */
     public function getProgram()
@@ -263,5 +268,21 @@ class ProgramDownloads
     public function setUserAgent($user_agent)
     {
         $this->user_agent = $user_agent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->user_name;
+    }
+
+    /**
+     * @param mixed $user_name
+     */
+    public function setUserName($user_name)
+    {
+        $this->user_name = $user_name;
     }
 }

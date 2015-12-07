@@ -33,7 +33,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('street')
             ->add('postal_code')
             ->add('locality')
-            ->add('user_agent');
+            ->add('user_agent')
+            ->add('user_name');
     }
 
     // Fields to be shown on filter forms
@@ -47,6 +48,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('ip')
             ->add('country_name')
             ->add('user_agent')
+            ->add('user_name')
             ->add('locality');
     }
 
@@ -68,6 +70,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('program.downloads')
             ->add('program.apk_downloads')
             ->add('user_agent')
+            ->add('user_name')
             ->add('_action', 'actions', array('actions' => array(
                 'edit' => array()
             )))
@@ -76,7 +79,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
 
     public function getExportFields() {
         return array('id','program.id','program.name','program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description','downloaded_at','ip','latitude','longitude','country_code',
-            'country_name','street','postal_code','locality','user_agent');
+            'country_name','street','postal_code','locality','user_agent','user_name');
     }
 
     protected function configureRoutes(RouteCollection $collection)

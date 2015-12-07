@@ -287,6 +287,7 @@ class SymfonySupport
         $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
         $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
         $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
+        $program_statistics->setUserName(isset($config['username']) ? $config['username'] : 'cat');
         $em->persist($program_statistics);
 
         $program->addProgramDownloads($program_statistics);

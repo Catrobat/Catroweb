@@ -19,10 +19,10 @@ class DownloadStatisticsService
         $this->geocoder = $geocoder;
     }
 
-    public function createProgramDownloadStatistics($program_id, $ip, $user_agent)
+    public function createProgramDownloadStatistics($program_id, $ip, $user_agent, $user_name)
     {
         $results = $this->geocoder
-            ->using('host_ip')
+            ->using('geo_plugin')
             ->geocode($ip);
 
         $result = $results->first();
@@ -37,6 +37,7 @@ class DownloadStatisticsService
         $program_download_statistic = new ProgramDownloads();
         $program_download_statistic->setProgram($program);
         $program_download_statistic->setUserAgent($user_agent);
+        $program_download_statistic->setUserName($user_name);
         $program_download_statistic->setDownloadedAt(new \DateTime());
         $program_download_statistic->setIp($ip);
         $program_download_statistic->setLatitude($latitude);

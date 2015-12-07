@@ -131,7 +131,7 @@ liip_theme:
     active_theme: 'pocketcode'
     assetic_integration: true
 
-bazinga_geocoder:
+bazinga_geocoder: #documentation: https://github.com/geocoder-php/Geocoder
      #fake_ip:
          #enabled:              true
          #ip:                   88.116.169.222 #123.345.643.133
