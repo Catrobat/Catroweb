@@ -23,7 +23,7 @@ class GameJamTagListener
 
         $description = $program->getDescription();
         if (strpos($description, $program->getGamejam()->getHashtag()) === false) {
-            $description = $description . '\n\n' . $program->getGamejam()->getHashtag();
+            $description = $description . "\n\n" . $program->getGamejam()->getHashtag();
             $program->setDescription($description);
         }
     }
