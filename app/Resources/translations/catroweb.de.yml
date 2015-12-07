@@ -46,7 +46,7 @@ programs:
   updateAppHeader: App aktualisieren
   updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Programm herunterladen zu können.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
+  checkout_this_program: Seht Euch das Catrobat Programm an
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -494,8 +494,8 @@ help:
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
+    title2: Rette Alice!
+    subtitle2: Verwende den Neigungssensor und erkenne eine Kollision zwischen Objekten
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
     title3: 'The Hatter - Hit and Run'
     subtitle3: "Create a moving landscape and control the Hatters' movement"
@@ -506,12 +506,12 @@ help:
     title5: Whack a Cheshire Cat
     subtitle5: Create a score by using variables
     description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    title6: Ein Kaninchenrennen
+    subtitle6: Erstelle einen bewegten Hintergrund
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: Programm herunterladen
 oauth:
   username_header: Danke für deine Anmeldung bei Pocket Code!
   username_chooser: 'Bitte wähle einen Benutzernamen:'
@@ -646,7 +646,7 @@ ci:
   pending: Generiere Apk
   download: Apk Runterladen
 gamejam:
-  nojam: Sorry, there is no game jam at this time
+  nojam: Entschuldigung, es findet gerade kein game jam statt
   submit: Einreichen zur Alice Game Jam
   submitown:
     header: Achtung

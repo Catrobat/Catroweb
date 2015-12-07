@@ -288,6 +288,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $img = $this->getSession()->getPage()->findById('starters');
         $path = '/images/help/starters.png';
         break;
+      case 'Education Platform':
+          if ($arg1 == 'big') {
+              $img = $this->getSession()->getPage()->findById('edu-desktop');
+              $path = '/images/help/edu_site.png';
+          } elseif ($arg1 == 'small') {
+              $img = $this->getSession()->getPage()->findById('edu-mobile');
+              $path = '/images/help/edu_site_mobile.png';
+          } else {
+              assertTrue(false);
+          }
+          break;
       case 'Discussion':
         if ($arg1 == 'big') {
             $img = $this->getSession()->getPage()->findById('discuss-desktop');
@@ -302,8 +313,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       default:
         assertTrue(false);
         break;
-
-    }
+      }
 
       if ($img != null) {
           assertEquals($img->getTagName(), 'img');

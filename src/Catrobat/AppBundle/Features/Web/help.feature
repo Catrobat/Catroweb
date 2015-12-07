@@ -13,6 +13,7 @@ Feature: Pocketcode help page
     Then I should see a big help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
+    And I should see a big help image "Education Platform"
     And I should see a big help image "Discussion"
 
   @Mobile
@@ -22,6 +23,7 @@ Feature: Pocketcode help page
     Then I should see a small help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
+    And I should see a small help image "Education Platform"
     And I should see a small help image "Discussion"
 
 #  Scenario: Clicking on hour-of-page-desktop image at help page and test navigation
