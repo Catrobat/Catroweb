@@ -15,6 +15,11 @@ class AllProgramsAdmin extends Admin
     protected $baseRouteName = 'admin_catrobat_adminbundle_allprogramsadmin';
     protected $baseRoutePattern = 'all_programs';
 
+    protected $datagridValues = array(
+        '_sort_by' => 'id',
+        '_sort_order' => 'DESC',
+    );
+    
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -23,6 +28,7 @@ class AllProgramsAdmin extends Admin
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('downloads')
             ->add('views')
+            ->add('flavor')
             ->add('visible', null, array('required' => false))
             ->add('approved', null, array('required' => false))
         ;
@@ -32,6 +38,7 @@ class AllProgramsAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id')
             ->add('name')
             ->add('downloads')
             ->add('user')
@@ -59,6 +66,7 @@ class AllProgramsAdmin extends Admin
             ->add('user')
             ->add('name')
             ->add('description')
+            ->add('flavor', 'string', array('editable' => true))
             ->add('views')
             ->add('downloads')
             ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))

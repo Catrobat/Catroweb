@@ -1,17 +1,17 @@
 ---
-localLanguage: English
-username: Nome de usuário
-password: Senha
+localLanguage: Inglês
+username: Nome de utilizador
+password: Palavra-Passe
 aboutPocketCode: Sobre o Pocket Code
 tutorials: Tutoriais
 googlePlay: Google Play
-passwordsNoMatch: As senhas não coincidem.
+passwordsNoMatch: As palavra-passes não coincidem.
 error: Erro
 cancel: Cancelar
 report: Denunciar
-download: Baixar como programa
+download: Descarregar como programa
 description: Descrição
-noDescription: Sem descrição disponível.
+noDescription: Nenhuma descrição disponível.
 country: País
 loginText: login
 privacyPolicy: Política de Privacidade
@@ -22,15 +22,19 @@ oldVersionError: Por favor, atualize para a versão mais recente do Pocket Code!
 more: mais
 less: menos
 ok: OK
+clickToDownloadProgram: 'Para descarregar o programa de exemplo clique %link_start% aqui %link_end%.'
 programs:
   featured: Em Destaque
   newest: Programas mais recentes
   most:
     viewed: Mais vistos
-    downloaded: Mais baixados
-  random: Random Programs
-  downloads: '%downloads% downloads'
+    downloaded: Mais descarregados
+  random: Programas Aleatórios
+  downloads: '%downloads% descargas'
+  sample: Example Programs
   views: '%views% visualizações'
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
   reportAsInappropriate: Reportar como impróprio
   languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
   reportLoginText: 'Por favor, faça %login% para reportar este programa como impróprio.'
@@ -39,41 +43,42 @@ programs:
   reportOwnProgram: Você não pode sinalizar o seu próprio programa.
   reportAlready: Você já sinalizou este programa como impróprio.
   reportDone: Você reportou este programa como impróprio!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: Atualizar App
+  updateAppText: Por favor, atualize o seu aplicativo para a versão mais recente para poder descarregar este programa.
   btnClosePopup: Ok
+  checkout_this_program: Checkout this Catrobat program
 passwordRecovery:
-  subject: Recuperação de senha do Seu Catrobat
+  subject: Recuperação de palavra-passe do Seu Catrobat
   message: |
     Prezado %username%.
     
-    Você requisitou redefinir sua senha em %appplication_url% por tê-la esquecido. Caso você não tenha requisitado a redefinição de sua senha, por favor ignore-a. Ela expirará em 24 horas.
-    Para redefinir sua senha por favor acesse a seguinte página:
+    Você solicitou redefinir sua palavra-passe em %appplication_url% por tê-la esquecido. Caso você não tenha requisitado a redefinição de sua palavra-passe, por favor ignore-a. Ela expirará em 24 horas.
+    Para redefinir sua palavra-passe por favor acesse a seguinte página:
     %confirmationUrl%
     
-    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a comunidade %appplication_url%.
+    Você pode usar seu nome de utilizador e palavra-passe a qualquer momento para acessar a comunidade %appplication_url%.
     Para fazê-lo agora, visite a seguinte página: %loginPage%
     Para editar seu perfil acesse a página: %profilePage%
     
     
     Atenciosamente,
-    Equipe Seu Catrobat.
+    Sua Equipa Catrobat.
 profile:
   saveChanges: salvar alterações
-  newPass: nova senha
-  repeatPass: repita a senha
-  firstEmail: Meu primeiro email
-  secondEmail: Meu segundo email
+  newPass: nova palavra-passe
+  repeatPass: repita a palavra-passe
+  firstEmail: Meu primeiro e-mail
+  secondEmail: Meu segundo e-mail
   myPrograms: Meus programas
   form:
-    passwordTooShort: 'A nova senha deve conter no mínimo %length% caracteres.'
-    passwordTooLong: 'A nova senha deve conter no máximo %length% caracteres.'
-    passwordIsUsername: A senha deve ser diferente do nome de usuário.
+    passwordTooShort: 'A nova palavra-passe deve conter no mínimo %length% caracteres.'
+    passwordTooLong: 'A nova palavra-passe deve conter no máximo %length% caracteres.'
+    passwordIsUsername: A palavra-passe deve ser diferente do nome de utilizador.
     emailNotValid: Este endereço de e-mail não é válido.
-    emailMissing: Erro ao atualizar este endereço de email. Você deve ter ao menos um email validado.
+    emailMissing: Erro ao atualizar este endereço de e-mail. Você deve ter ao menos um e-mail validado.
     emailExists: Este endereço de e-mail já existe.
     submitSuccess: salvo!
-  reallyDeleteProgram: Você realmente quer deletar seu programa
+  reallyDeleteProgram: Você realmente quer apagar seu programa
   programsOf: Programas de
   changePicture: Alterar Imagem
   avatar:
@@ -83,58 +88,58 @@ profile:
 licenseToPlay:
   link: Licença para jogar
   title: 'Licença para jogar - Dê crédito e compartilhe'
-  text1: Imagine que cada programa do Catrobat é um bolo, um bolo muito especial que vem com a receita (blocos de programação). Todos os membros da comunidade Catrobat compartilham seus bolos juntament com as receitas. Isso significa que você pode aproveitar os bolos e aprender como fazê-los!
+  text1: Imagine que cada programa do Catrobat é um bolo, um bolo muito especial que vem com a receita (blocos de programação). Todos os membros da comunidade Catrobat compartilham seus bolos juntamente com as receitas. Isso significa que você pode aproveitar os bolos e aprender como fazê-los!
   text2: 'Não há receitas secretas: as instruções sobre como fazer os bolos estão abertas a todos para utilizar, reutilizar, modificar e servir de inspiração para novas ideias... digo, bolos.'
   text3: 'Você pode comer os bolos bem como copiar receitas de outras pessoas para fazer a sua própria, talvez com ingredientes diferentes. Esta liberdade vem com dois requisitos simples:'
   text4: Na criação da comunidade Catrobat, decidimos adotar esta abordagem pois acreditamos que ela oferece suporte à aprendizagem e criatividade dentro da Comunidade. Através do compartilhamento de receitas e ingredientes (scripts e artwork), todos podem criar com base nas ideias uns dos outros. Assim, todos podem se beneficiar.
-  text5: "Ao projetar o site Catrobat, foram incluídos recursos para incentivar as pessoas a compartilhar e dar crédito aos outros. Em cada página do programa, você sempre pode baixar os scripts originais do programa. Se você 'remixar' um programa (modificar os scripts ou artwork e compartilhar o resultado), nós encorajamos você a dar crédito em Notas do Programa, mencionando as pessoas e o programa que te inspiraram."
-  text6: 'Saiba mais sobre os termos de uso da comunidade Catrobat online em %link-termsOfUse%.'
+  text5: "Ao projetar o site Catrobat, foram incluídos recursos para incentivar as pessoas a compartilhar e dar crédito aos outros. Em cada página do programa, você sempre pode descarregar os scripts originais do programa. Se você 'remisturar' um programa (modificar os scripts ou artwork e compartilhar o resultado), nós encorajamos você a dar crédito em Notas do Programa, mencionando as pessoas e o programa que te inspiraram."
+  text6: 'Saiba mais sobre os termos de utilização da comunidade Catrobat online em %link-termsOfUse%.'
   list1:
     item1: compartilhar seus bolos juntamente com a receita
     item2: dar crédito a quem te inspirou
   version: Versão 1.1, 2 de abril de 2013
 termsOfUse:
-  title: Termos de Uso
+  title: Termos de Utilização
   headline: Bem-vindo à comunidade Catrobat!
   text1: 'Como parte da comunidade Catrobat, você está compartilhando programas e idéias com as pessoas:'
   text2: 'Precisamos de sua ajuda para fazer desta comunidade um lugar de apoio para todos os membros. Aqui está como você pode ajudar:'
   text3: 'Através do projeto Catrobat, queremos fomentar a cooperação e permitir que a criatividade de todos se combine em benefício de toda a humanidade. Você também pode se tornar um membro ativo da Comunidade Catrobat, presenteando a comunidade com seus programas, da mesma forma que outros membros ativos estão te presenteando com seus programas:'
-  text4: 'Nosso presente a você:'
-  text5: 'Nossos Termos de Uso e de Serviço:'
+  text4: 'Nossa prenda para você:'
+  text5: 'Nossos Termos de Utilização e de Serviço:'
   list1:
     item1: de muitos países e culturas diferentes
     item2: de todas as idades (de crianças a adolescentes e avós)
     item3: com todos os níveis de experiência
   list2:
     item1: Seja respeitoso. Ao compartilhar programas, lembre-se que pessoas de diferentes idades e origens verão suas contribuições.
-    item2: 'Dê crédito. Sinta-se livre para fazer versões modificadas de programas de outras pessoas - apenas certifique-se de dar-lhes crédito. Um bom lugar para dar crédito é na descrição de seu programa. Por favor, leia o parágrafo abaixo da lista pontilhada para obter detalhes sobre como modificar programas de outros usuários.'
+    item2: 'Dê crédito. Sinta-se livre para fazer versões modificadas de programas de outras pessoas - apenas certifique-se de dar-lhes crédito. Um bom lugar para dar crédito é na descrição de seu programa. Por favor, leia o parágrafo abaixo da lista pontilhada para obter detalhes sobre como modificar programas de outros utilizadores.'
     item3: Seja honesto. Não finja ser outra pessoa nem tente enganar a comunidade.
     item4: Mantenha privadas suas informações pessoais. Não compartilhe seu endereço de e-mail, número de telefone ou outras informações de contato pessoais.
-    item5: "Ajude a manter o site amigável. Se você sentir que outros achariam um programa ou comentário vil, muito violento, ofensivo ou impróprio, clique no botão 'denunciar como impróprio' e deixe uma breve explicação. A equipe do Catrobat checará sua denúncia e poderá remover o programa, comentário ou post."
+    item5: "Ajude a manter o site amigável. Se você sentir que outros achariam um programa ou comentário como insultuoso, muito violento, ofensivo ou impróprio, clique no botão 'denunciar como impróprio' e deixe uma breve explicação. A equipe do Catrobat irá verificar sua denúncia e poderá remover o programa, comentário ou post."
   list3:
-    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Ao fazer o upload de um programa para o nosso website, você aceita e concorda em por este trabalho sob certas licenças gratuitas de programas do Catrobat. Estas licenças, à semelhança das licenças gratuitas sob as quais o sistema Catrobat está disponível para você, dão a todos o direito de aprender com os trabalhos já carregados por outros utilizadores, e de adaptar e 'remisturar' esses trabalhos para criar seus próprios jogos, animações e outros programas. Isso permite que trabalhemos 'um por todos e todos por um'! Assim, seu trabalho beneficiará todo o mundo e continuará gratuito para uso, da mesma forma que textos e imagens que são disponibilizados por voluntários no Wikipédia, por exemplo. Pense que este é seu presente à humanidade: você doa à comunidade e todos os que carregarem seus trabalhos para nosso website doam a você. Logo, um programa, uma vez carregado, é um presente de grande valor que o dono dá, de graça, a você, com a condição de que você participe da comunidade nos mesmos termos."
+    item2: Você não precisa aceitar o presente. Se decidir por aceitá-lo, há algumas regras que se aplicam. Um dos benefícios dessas regras é a possibilidade de aprender com esse trabalho e usá-lo como base para criar coisas ainda mais legais, que você pode, por exemplo, carregar novamente ao nosso website, mas agora como seu programa. Um outro benefício é que essas licenças garantem que você não será responsabilizado por qualquer problema que surja decorrente do uso de seu programa por outros.
+    item3: Uma condição adicional importante é de que você dê crédito aos autores em cujos trabalhos você se baseou para criar o seu. Ao mesmo tempo, trabalharemos pesado para que seu trabalho seja igualmente apreciado por aqueles que utilizaram-no como base, por meio de crédito ao nome escolhido, livremente, por você para te representar na comunidade Catrobat; e, também, por meio da oportunidade dada aos outros de expressar gratidão a você publicamente por ter partilhado seu trabalho com a comunidade e, principalmente, com eles.
+    item4: 'Por favor, consulte %link-licenseUploaded% para termos e condições legais precisos.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: Nós oferecemos a você, sob as licenças gratuitas do Catrobat, nossos próprios software e recursos de internet relacionados ao sistema Catrobat. Por exemplo, o software escrito pelo time Catrobat, nossos recursos de website e internet, nosso próprio código fonte e todo o material adicional, como imagens, sons e textos, agora e no futuro.
+    item2: Essas licenças fazem de todo o conteúdo no Catrobat livre de custos e livre também no sentido de dar a você a liberdade de usá-los como preferir, havendo somente algumas restrições que asseguram, entre outras coisas, que o sistema Catrobat continuará sempre gratuito e útil para todos.
+    item3: 'Por favor, consulte %link-licenseToPlay% para os termos e condições legais precisos. O código-fonte do sistema Catrobat, assim como muitos outros documentos e recursos, estão disponíveis via %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+    item1: 'Se você, ou, no caso de menores de 13 anos, seus pais ou guardiões legais estão associados a alguma organização responsável por ou envolvida em violações de privacidade do tipo dragnet e/ou vigilância em massa, então você não está autorizado a usar nossos software aplicativos ou aceder nossos serviços. Os detalhes precisos dessa restrição e algumas exceções a ela estão descritos nas Seções 4.a e 4.b em nossos %link-termsOfUse%.'
+    item2: Se você tem menos de 13 anos de idade, então você precisa perguntar a seus pais ou guardiões legais se eles te autorizam a usar os Software Aplicativos e Serviços Catrobat.
+    item3: Nos reservamos ao direito de rejeitar, apagar ou ocultar programas, contas de utilizador e qualquer material digital carregado aos websites da Catrobat a qualquer momento e a nosso critério, por exemplo, se nós acharmos que um programa contem conteúdo inapropriado ou que um utilizador infringiu os direitos de outros.
+    item4: Todos os recursos de software e internet são oferecidos na esperança de que eles serão úteis, mas não há garantias.
+    item5: 'Por favor, consulte nosso %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service para formulações precisas dos pontos acima e alguns termos e condições legais adicionais.'
+  bottom1: Retorne aqui de tempos em tempos para verificar os Termos de Utilização, porque estamos sempre a aprimorá-los.
+  bottom2: 'Por favor, envie quaisquer sugestões sobre estes Termos de Utilização para %e-mail-webmaster%.'
   version: Versão 1.3, 4 de março de 2014
 help:
   hourOfCode:
     title: Skydiving Steve
     step0:
       title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
+      description: No seguinte tutorial, você aprenderá, passo a passo, como programar o comportamento de Steve e seu pacote. As imagens abaixo te mostram como controlar Steve durante o jogo. Você tem que direcionar Steve para bem acima do alvo e tocar o background para entregar o pacote. Boa sorte...
     step1:
       title: 'Instalar "Pocket Code"'
       description: Como instalar o Pocket Code no seu dispositivo móvel.
@@ -142,448 +147,513 @@ help:
       image2: 'Pesquisar "Pocket Code".'
       image3: 'Toque em "Instalar".'
     step2:
-      title: Baixar Projeto
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
-      image2: Tap the banner.
-      image3: 'Download the program "Skydiving Steve".'
+      title: Descarregar Projeto
+      description: 'Como descarregar o programa essencial para programar o "Skydiving Steve".'
+      image1: 'Toque em "Explorar" no "Pocket Code" em seu dispositivo móvel.'
+      image2: Toque o banner.
+      image3: 'Descarregue o programa "Skydiving Steve".'
     step3:
-      title: Open Project
-      description: Let’s look inside the program.
-      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
-      image2: 'Tap object "parachute".'
-      image3: 'Choose "Scripts".'
+      title: Abrir Projeto
+      description: Vamos olhar dentro do programa.
+      image1: 'Role o menu para baixo e toque em "Abrir Skydiving Steve".'
+      image2: 'Toque o objeto "pára-quedas".'
+      image3: 'Escolha "Scripts".'
     step4:
-      title: Add Variable
-      description: The variables x and y allow you to control the position of your parachute.
-      image1: 'Tap "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tap "Set variable".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
+      title: Adicionar Variável
+      description: As variáveis x e y permitem que você controle a posição de seu pára-quedas.
+      image1: 'Toque em "+".'
+      image2: 'Ir para a categoria "Variáveis".'
+      image3: 'Toque em "Definir variável".'
+      image4: 'Arraste e solte o bloco "Definir variável" abaixo do bloco "Quando o programa iniciar".'
     step5:
-      title: Label variables
-      description: Label the x position of your parachute.
-      image1: Add a second variable just as before.
-      image2: 'Tap "New...".'
-      image3: 'Insert "x" and tap "OK".'
+      title: Rotular variáveis
+      description: Rotular a posição x de seu pára-quedas.
+      image1: Adicione uma segunda variável como antes.
+      image2: 'Toque em "Novo...".'
+      image3: 'Insira "x" e toque em "OK".'
     step6:
-      title: 'Set variable "y"'
-      description: Label and set the y starting position of your parachute.
-      image1: 'Label the second variable with "y".'
-      image2: 'Tap the field filled with "0.0".'
-      image3: 'Insert "-500" and tap "OK".'
+      title: 'Defina a variável "y"'
+      description: Rotule e defina o ponto inicial y de seu pára-quedas.
+      image1: 'Rotule a segunda variável com "y".'
+      image2: 'Toque o campo preenchido com "0,0".'
+      image3: 'Insira "-500" e toque em "OK".'
     step7:
       title: Forever
-      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
-      image1: 'Tap "+".'
-      image2: 'Go to the "Control" - category.'
-      image3: 'Choose the "Forever" - brick.'
-      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
+      description: 'Você precisa controlar a posição do seu pára-quedas a todo momento. Insira um loop "Forever" para fazê-lo.'
+      image1: 'Toque em "+".'
+      image2: 'Vá para a categoria "Controle".'
+      image3: 'Escolha o bloco "Forever".'
+      image4: 'Arraste e solte o bloco "Forever" abaixo do bloco "Set variable".'
     step8:
-      title: Insert and modify bricks
-      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
-      image1: 'Insert the shown bricks below the "Forever" - brick.'
-      image2: 'Tap the "100" field.'
-      image3: 'Tap "Variables" and choose "x".'
-      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
+      title: Inserir e modificar blocos
+      description: 'Adicione mais blocos em seu loop "Forever" para controlar seu pára-quedas. Inserindo as variáveis x e y em seu bloco "Posicionar em" te permite controlar a posição de seu pára-quedas.'
+      image1: 'Insira, abaixo do bloco "Forever", os blocos mostrados.'
+      image2: 'Toque o campo "100".'
+      image3: 'Toque em "Variáveis" e escolha "x".'
+      image4: 'Toque em "200" no mesmo bloco no topo, vá para a categoria "Variáveis" e escolha "y". Confirme com "OK".'
     step9:
-      title: Change variables and values
-      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
+      title: Alterar variáveis e valores
+      description: Altere a variável y em -3 para deixar seu pára-quedas deslizar até o chão. Altere a variável x para que seu pára-quedas siga o ângulo de inclinação de seu dispositivo móvel.
       image1:
-        subtext1: 'Set the size to "20" %.'
-        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
-        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
+        subtext1: 'Definir o tamanho para "20" %.'
+        subtext2: 'Altere o valor do primeiro bloco "Definir variável" para "-3".'
+        subtext3: 'No segundo bloco "Definir variável" toque o campo "0.0".'
       image2:
-        subtext1: 'Tap on "y" and choose "x".'
-        subtext2: 'Insert "-".'
-        subtext3: 'Tap "Sensors" and choose "inclination_x".'
-      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
+        subtext1: 'Toque em "y" e escolha "x".'
+        subtext2: 'Insira "-".'
+        subtext3: 'Toque em "Sensores" e escolha "inclinação_x".'
+      image3: 'Verifique se a fórmula inserida corresponde à imagem da tela do dispositivo e confirme com "OK".'
     step10:
-      title: Loudness sensor
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
+      title: Sensor de ruído
+      description: 'Você pode controlar a altura do seu pára-quedas com o sensor de ruído de seu dispositivo móvel. Para fazer isso, adicione e modifique um bloco "Se 1 é verdadeiro, então".'
       image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
+        subtext1: 'Adicione um bloco "Se 1 é verdadeiro, então" e coloque-o abaixo do último bloco "Mudar variável".'
+        subtext2: 'Toque o campo com o valor "0" dentro do bloco "Se 1 é verdadeiro, então".'
       image2:
-        subtext1: 'Tap "Sensors".'
-        subtext2: 'Choose "loudness".'
-        subtext3: 'Tap "Logic".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Insert "50".'
-      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
+        subtext1: 'Toque em "Sensores".'
+        subtext2: 'Escolha "Ruído".'
+        subtext3: 'Toque em "Lógica".'
+        subtext4: 'Escolha ">".'
+        subtext5: 'Insira "50".'
+      image3: 'Verifique se sua fórmula coincide com a fórmula da tela do dispositivo e toque em "OK".'
     step11:
-      title: Change some more bricks
-      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
-      image1: 'Add a "Change variable" - brick and modify the value like above.'
+      title: Mudar alguns blocos mais
+      description: Quando você iniciar o jogo, a posição inicial de seu pára-quedas deve coincidir com sua posição inicial. Para isso, você precisa adicionar e modificar três blocos, conforme mostrado nas imagens abaixo.
+      image1: 'Adicione um bloco "Alterar variável" e modifique o valor como acima.'
       image2:
-        subtext1: 'Add a "When I receive" - brick.'
-        subtext2: 'Place it below the last brick ("End of loop").'
-        subtext3: 'Add two "Set variable" - bricks.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
+        subtext1: 'Adicionar um bloco "Quando eu receber".'
+        subtext2: 'Coloque-o abaixo do último bloco ("Fim do loop").'
+        subtext3: 'Adicione dois blocos "Definir variável".'
+      image3: 'Toque o campo preenchido com "Mensagem 1", escolha "Novo..." e insira "reiniciar".'
+      image4: 'Altere os valores de dois blocos "Definir variável" como mostrado na imagem acima.'
     step12:
-      title: Back to objects
-      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
-      image1: 'Tap the "back" - button on your device.'
-      image2: 'Tap the "back" - button once more.'
-      image3: Now you should see this screen on your device.
+      title: Voltar para objetos
+      description: 'Você terminou com sucesso seu objeto "pára-quedas"! Navegue de volta para a visão geral de objetos para modificar o próximo objeto.'
+      image1: 'Toque o botão "voltar" no seu dispositivo.'
+      image2: 'Toque o botão "voltar" mais uma vez.'
+      image3: Agora, você deveria ver esta tela em seu dispositivo.
     step13:
-      title: 'Object "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tap "target" and choose "Scripts".'
-      image2: Add and modify the bricks as in the screenshot above.
-      image3: Add four more bricks like shown above.
+      title: 'Objeto "alvo"'
+      description: 'Aqui, você começa modificando o objeto "alvo". Adicione blocos para controlar a posição e o tamanho de seu alvo.'
+      image1: 'Toque em "alvo" e escolha "Scripts".'
+      image2: Adicione e modifique blocos como na imagem acima.
+      image3: Adicione mais quatro blocos como mostrado acima.
     step14:
-      title: 'Object "target"'
-      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
-      image1: 'Tap the field "y:" and choose "New".'
-      image2: 'Insert "goalx" and confirm with "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
+      title: 'Objeto "alvo"'
+      description: Quando você reinicia o jogo, a posição de seu alvo precisa ser alterada. Para isso, defina as variáveis goalx e goaly utilizando a função randomizar.
+      image1: 'Toque no campo "y:" e escolha "Novo".'
+      image2: 'Insira "goalx" e confirme com "OK".'
+      image3: 'Toque no campo "0.0" e insira a fórmula "random(-400, 400)".'
+      image4: 'Repita os passos 1 a 3 para o segundo bloco "Definir variável" para nomear a variável "goaly" e definir o valor como "random(400, -700)".'
     step15:
-      title: 'Object "target"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
-      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
-      image2: Check if your values match the ones above.
-      image3: Go back until you see this screen.
+      title: 'Objeto "alvo"'
+      description: 'Modifique seu bloco "Posicionar em" para controlar a posição de seu alvo usando as variáveis goalx e goaly.'
+      image1: 'Altere os valores do bloco "Posicionar em" para "goalx" e "goaly".'
+      image2: Verifique se os seus valores correspondem aos mostrados acima.
+      image3: Retorne até que você veja esta tela.
     step16:
-      title: 'Object "parcel"'
-      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
-      image1: 'Tap "parcel" and choose "Scripts".'
-      image2: Add all the bricks shown above.
+      title: 'Objeto "pacote"'
+      description: 'Aqui, você começa a modificar seu objeto "pacote". Quando o objeto "pacote" receber a mensagem "iniciar", o pacote deve ser mostrado. Defina a posição do pacote com as variáveis x e y.'
+      image1: 'Toque em "pacote" e escolha "Scripts".'
+      image2: Adicione todos os blocos mostrados acima.
       image3:
-        subtext1: 'Change the value of the "Set size" - brick to "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
+        subtext1: 'Altere o valor do bloco "Definir tamanho" para "50".'
+        subtext2: 'Toque o campo "reiniciar" dentro do bloco "Quando eu receber" e crie a nova mensagem: "Iniciar".'
+        subtext3: 'Altere os valores do bloco "Posicionar em" para "x" e "y".'
     step17:
-      title: 'Object "parcel"'
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Add the above shown bricks below the last "Place at" - brick.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
+      title: 'Objeto "pacote"'
+      description: 'Para verificar se o pacote atingiu o alvo você precisa do bloco "Se 1 é verdadeiro, então".'
+      image1: 'Adicione os blocos mostrados acima abaixo do último bloco "Posicionar em".'
+      image2: 'Altere o valor dentro do bloco "Alterar y em" para "5". Depois, toque no campo "1" dentro de "Se 1 é verdadeiro, então".'
       image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"AND" is in the "Logic" category.'
+        subtext1: '"posicao_x" e "posicao_y" podem ser encontrados na categoria "Objeto".'
+        subtext2: '"goaly" e "goalx" estão na categoria "Variáveis".'
+        subtext3: '"E" está na categoria "Lógica".'
     step18:
-      title: 'Object "parcel"'
-      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
+      title: 'Objeto "pacote"'
+      description: Se o pacote, bem sucedidamente, atingir o alvo, você precisará modificar a posição do pacote. Envie uma mensagem aos outros objetos para avisá-los de que você venceu.
       image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Add the above shown bricks and modify their values alike.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
+        subtext1: 'Altere os valores do bloco "Posicionar em" para "posicao_x" e "goaly+100".'
+        subtext2: 'Toque o campo "Transmitir" e crie a nova mensagem "vitória".'
+      image2: Adicione os blocos mostrados acima e modifique seus valores.
+      image3: 'Retorne até ver esta tela em seu dispositivo. Vá aos scripts do objeto "restart".'
     step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Add the above shown bricks and modify their values alike.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: Go back until you see this screen, then go to the scripts of “Background”.
+      title: 'Objeto "restart"'
+      description: 'Aqui você pode modificar o objeto "restart". Defina a posição e o comportamento do objeto.'
+      image1: Adicione os blocos mostrados acima e modifique seus valores de forma semelhante.
+      image2: 'Adicione os blocos mostrados acima e defina a mensagem "Transmitir" como "reiniciar".'
+      image3: 'Retorne até ver esta tela, então vá aos scripts do "Plano de Fundo".'
     step20:
-      title: 'Object "Background"'
-      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
+      title: 'Objeto "Plano de fundo"'
+      description: 'Finalize o programa modificando o objeto "plano de fundo". Agora você já pode começar a jogar. Divirta-se!'
       image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: 'Tap the "Play" - button.'
-      image2: Enjoy your game.
+        subtext1: 'Adicione os blocos mostrados acima e defina a mensagem "Transmitir" como "iniciar".'
+        subtext2: 'Toque no botão "Play".'
+      image2: Divirta-se com seu jogo.
       image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
+        Você terminou, bem sucedidamente, o tutorial "Skydiving Steve". Ficaríamos muito gratos de achar 'remisturas' bem legais de "Skydiving Steve" em share.catrobat.at/pocketcode --- modifique como quiser e faça o upload novamente a partir de sua conta.
     step21:
-      title: Check your scripts!
-      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
-      image1: 'Object "background"'
-      image2: 'Object "parachute"'
-      image3: 'Object "parcel"'
-      image4: 'Object "restart"'
-      image5: 'Object "target"'
+      title: Verifique seus scripts!
+      description: Clique nas imagens abaixo para ampliá-las. Revise os scripts de seus objetos se seu jogo não funcionar corretamente.
+      image1: 'Objeto "plano de fundo"'
+      image2: 'Objeto "pára-quedas"'
+      image3: 'Objeto "pacote"'
+      image4: 'Objeto "restart"'
+      image5: 'Objeto "alvo"'
   stepByStep:
-    title: Step-by-Step Intro
-    start: 'Starting position:'
+    title: Introdução passo a passo
+    start: 'Posição inicial:'
     step1:
-      title: Make a new program
+      title: Fazer um novo programa
       detail:
-        text1: 'Tap on "New".'
-        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
+        text1: 'Toque em "Novo".'
+        text2: 'Entre o nome de um programa, selecione "Criar programa em branco" e toque em "OK".'
     step2:
-      title: Create a new object
+      title: Criar um objeto novo
       detail:
-        text1: 'Tap:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Draw a new look.
-        special2: Choose from gallery.
-        special3: Take a picture.
+        text1: 'Toque em:'
+        text2: Escolha a fonte da aparência de seu novo objeto.
+        text3: 'Digite um nome de objeto e toque em "OK" para criar o objeto.'
+        special1: Desenhe uma nova aparência.
+        special2: Escolher da galeria.
+        special3: Tirar uma foto.
     step3:
-      title: Start Moving
+      title: Começar a se Mover
       detail:
-        text1: 'Tap:'
-        text2: 'The first brick we use is out of the category "Motion".'
-        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text1: 'Toque em:'
+        text2: 'O primeiro bloco que utilizamos vem da categoria "Movimento".'
+        text3: 'Escolha o bloco "Deslizar". O objeto se moverá para a nova posição definida com o bloco no palco.'
+        text4: O bloco agora está flutuando. Para colá-lo, mova o bloco para a posição desejada. Você também pode mover blocos já inseridos tocando-os até que flutuem novamente.
+        text5: 'Toque em "Play" para ir ao palco e ver o objeto deslizando.'
+        text6: Use o Botão Voltar do Android para retornar do palco.
     step4:
-      title: Change Look
-      description: You can change the look of your object.
+      title: Mudar Aparência
+      description: Você pode mudar a aparência de seu objeto.
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: Now you have to select the new image.
-        text6: Tap play to see the behaviour on the stage.
+        text1: 'Selecione bloco "Alternar para aparência". Com este bloco, você pode escolher uma aparência ou criar uma nova.'
+        text2: 'Encaixe o bloco abaixo do bloco "Planar".'
+        text3: Toque no menu suspenso para criar uma aparência nova.
+        text4: Escolha a fonte da imagem, como feito anteriormente.
+        text5: Agora, você deve selecionar a nova imagem.
+        text6: Toque em play para visualizar o comportamento no palco.
     step5:
-      title: Speak
-      description: Now you will find out how to make an object talk.
+      title: Falar
+      description: Agora você descobrirá como fazer um objeto falar.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: Tap play to see the behaviour on the stage.
+        text1: 'Selecione o bloco "Falar". O objeto fala o texto quando este bloco é executado.'
+        text2: 'Encaixe o bloco abaixo do bloco "Alternar para aparência".'
+        text3: Toque em play para visualizar o comportamento no palco.
     step6:
-      title: Again and again
-      description: This step shows you how to repeat behaviour of objects.
+      title: De novo e de novo
+      description: Este passo te mostra como repetir o comportamento de objetos.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
-        text6: Tap play to see the behaviour on the stage.
+        text1: 'Selecione o bloco "Forever". Tudo no loop se repete infinitamente.'
+        text2: 'Encaixe o bloco "Forever" abaixo do bloco "Quando o programa iniciar".'
+        text3: 'Adicione outro bloco "Planar".'
+        text4: 'Encaixe o bloco "Planar" acima do bloco "Fim do loop".'
+        text5: Toque no campo de texto dos valores de x e y e defina-os como 0.
+        text6: Toque em play para visualizar o comportamento no palco.
     step7:
-      title: Tapping is everything
-      description: You can also control the behaviour of the object when the program is running on the stage.
+      title: Tapping é tudo
+      description: Você também pode controlar o comportamento do objeto quando o programa estiver rodando no palco.
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text1: 'Selecione o bloco "Quando tocado". Todos os blocos abaixo do bloco "Quando tocado" serão executados uma vez quando você tocar no objeto no palco.'
+        text2: 'Posicione o bloco "Quando tocado" abaixo dos outros blocos.'
+        text3: 'Escolha o bloco "Virar à direita" e encaixe-o abaixo do bloco "Quando tocado".'
+        text4: Agora você tem este script.
+        text5: Toque em play para ver o comportamento do objeto no palco. Se você tocá-lo agora, ele gira.
     step8:
-      title: Copy, delete or edit a brick
+      title: Copiar, excluir ou editar um bloco
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: Um toque simples no lado esquerdo de cada bloco abre o menu de contexto. Nele você pode mover, copiar, excluir ou editar os valores do bloco com o editor de fórmula.
     step9:
-      title: Navigation in the app
+      title: Navegação no apicativo
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: Use o Botão Voltar do Android para navegar no app.
+        text2: Retorne uma tela para uma visão geral de seu objeto. Aqui, você pode analisar os scripts e também uma poderosa representação das aparências e sons do objeto. Lá, você pode renomear, copiar, adicionar ou excluir aparências e sons.
+        text3: Use o Botão Voltar do Android novamente para obter uma visão geral de seus objetos e seu plano de fundo.
     step10:
-      title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      title: Alterar o plano de fundo
+      description: Esta é a visão geral de seus objetos. O plano de fundo depende de um programa.
       detail:
-        text1: The background is like an object, but you just can have on background.
-        text2: You can add scripts, sounds and look in the same way to the background object.
+        text1: O plano de fundo é como um objeto, mas você pode ter somente um plano de fundo.
+        text2: Você pode adicionar scripts, sons e aparências da mesma forma que foi feito ao objeto de fundo.
     step11:
-      title: Main Menu
-      description: Use the Android Back Button to get to this screen.
+      title: Menu Principal
+      description: Use o Botão Voltar do Android para chegar a esta tela.
       detail:
-        text1: Continue with your currently opened program.
-        text2: Add a new program.
-        text3: See all your local programs.
-        text4: Go to the help site and discuss with other users.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text1: Continue com seu programa já aberto.
+        text2: Adicionar um novo programa.
+        text3: Ver todos os seus programas locais.
+        text4: Acesse o site de ajuda e discuta com outros utilizadores.
+        text5: "Explore o mundo dos programas do Pocket Code. Descarregue e 'remisture' os programas que você gostar."
+        text6: Fazer upload do programa que está atualmente aberto.
   tutorialcards:
     title: Tutoriais
-    description1: This tutorials show you how to use effective tricks in
-    description2: Pocket Code.
-    getReady: 'Get Ready:'
-    tryCode: 'Try this code:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    description1: Estes tutoriais te mostram como usar truques eficazes
+    getReady: 'Prepare-se:'
+    tryCode: 'Tente este código:'
+    doIt: 'Faça isso:'
+    tip: 'Dica extra:'
     card1:
-      title: Change Size
-      description: Tap the duck to change the size.
+      title: Alterar tamanho
+      description: Toque o pato para alterar o tamanho.
+      one: Adicione o objeto do qual você gostaria de mudar o tamanho, por exemplo, Animal.
+      two: 'Insira os seguintes blocos nos scripts do objeto a fim de minimizá-lo (20% do seu tamanho original) quando tocado.'
     card2:
-      title: Change Look
-      description: Use this trick to count automatically.
+      title: Mudar Aparência
+      description: Use este truque para contar automaticamente.
+      one: Adicione o objeto do qual você gostaria de mudar a aparência, por exemplo, itens.
+      two: Inclua mais fotos na aparência do objeto.
+      three: Insira os seguintes blocos nos scripts do objeto a fim de alternar sua aparência continuamente após um segundo.
     card3:
-      title: Moving Animation
-      description: Use this trick when you want a flying parrot.
+      title: Animação em movimento
+      description: Use esse truque quando quiser um papagaio voador.
+      one: Adicione o objeto que você quer que tenha movimento.
+      two: Inclua uma outra foto na aparência do objeto que ilustre o seu movimento.
+      three: Insira os seguintes blocos nos scripts do objeto a fim de mudar constantemente a posição do objeto após um certo tempo. Adicionalmente, você pode delimitar o palco rebatendo o objeto caso ele chegue à margem.
     card4:
-      title: Glide
-      description: Move smoothly from one point to another.
+      title: Planar
+      description: Mover suavemente de um ponto para outro.
+      one: Adicione o objeto que deseja a deslizar. por exemplo, o avião.
+      two: Insira os seguintes blocos e defina a área em que o movimento deve acontecer.
     card5:
-      title: Play Sound
-      description: Tap the drum to play this sound.
-      extra1: '1. Click "+"'
-      extra2: '2. Select "Pocket Code Recorder"'
-      extra3: 3. Press icon to record your sound
+      title: Reproduzir som
+      description: Toque no tambor para reproduzir este som.
+      one: Adicione o objeto que você quer tocar um som, por exemplo, cão.
+      two: Insira os seguintes blocos para que a reprodução seja possível. Escolha um som de sua biblioteca pessoal, da biblioteca de mídia do Pocket Code ou grave um som.
     card6:
-      title: Speak Something
-      description: Use this code to make an object speaking.
+      title: Fale alguma coisa
+      description: Use este código para fazer um objeto que fala.
+      one: Adicione o objeto que quer a falar, por exemplo, Carrie.
+      two: Inserir os seguintes blocos para possibilitar a saída de voz.
     card7:
       title: GSensor
-      description: Use this trick to control an object with the inclination of your device.
-      extra1: If too sensitive, divide by 10
+      description: Use este truque para controlar um objeto com a inclinação do seu dispositivo.
+      one: Adicione o objeto que deseja a mover-se no palco.
+      two: 'Inserir os seguintes blocos a fim de controlar o objeto através de sensores do seu telefone. Assim, escolha a "inclinação x e y". Para obter o movimento apropriado, defina "-inclinação". Se o movimento do objeto é muito sensivel, divida a inclinação por 10, por exemplo.'
     card8:
-      title: Compass
-      description: Use this code to make a compass.
+      title: Bússola
+      description: Use este código para fazer uma bússola.
+      one: Adicione o objeto que você quer apontar na direção da bússola.
+      two: Insira os seguintes blocos a fim de definir a orientação do objeto. Além disso, inclua um loop para sempre.
     card9:
-      title: Broadcast
-      description: Look at this code! This shows you how to communicate between objects.
+      title: Transmitir
+      description: Dê uma olhada nesse código! Ele te mostra como comunicar-se entre objetos.
+      one: Adicione um novo objeto, por exemplo, Alice, que deve difundir uma mensagem. Adicione ainda uma segunda imagem ao o fundo. Assim que o fundo receber a mensagem mudará para sua próxima aparência.
+      two: 'Insira o bloco "Enviar para todos" e determine o que deve acontecer quando o outro objeto receber a mensagem.'
+      three: Neste caso o fundo mudará quando o objeto na camada frontal for tocado.
+    card10:
+      title: Mostrar variável
+      description: Mostre o valor de uma variável.
+      one: 'Adicione um objeto que deseja mover através dos sensores do seu telefone (ver %tutorial_card_link_7% Tutorial cartão 7 %link_end%). Além disso, adicione um segundo fundo que deve mudar quando receber uma mensagem de difusão.'
+      two: Insira os seguintes blocos a fim de guardar em uma variável a posição atual de x e y do objeto em movimento.
+      three: 'Através de uma "Mostrar Variável" você pode exibir os valores no palco.'
+    card11:
+      title: Detecção de colisão
+      description: Detecta uma colisão entre dois objetos.
+      one: 'Adicionar dois objetos, dos quais um deve estar em movimento através de sensores do seu telefone, por exemplo, Alex (ver %tutorial_card_link_7% Tutorial cartão 7 %link_end%).'
+      two: 'Salvar o valor atual da "posição x e y" do objeto em movimento, Alex (ver %tutorial_card_link_10% Tutorial cartão 10 %link_end%) e inserir os seguintes guiões. Continuamente, verifique se os dois objetos se sobrepõem. Se isto acontecer objeto fixo deve ser escondido neste caso.'
+    card12:
+      title: Deteção de rosto
+      description: Controle um objeto usando a deteção de rosto.
+      one: Primeiro, certifique-se que os blocos de deteção de rosto estão habilitados. Para isto, vá para as configurações.
+      two: 'Adicionar um novo objeto e inserir os seguintes blocos a fim de mostrar se um rosto foi detectado. Verifique se um rosto é detectado e colocar isso em um loop de para sempre. Se a câmera identificar um rosto o valor da variável é "TRUE", caso contrário é "FALSE".'
   starterPrograms:
-    title: Starter Programs
-    description: Try out these starter programs. Look inside to make changes and add your ideas.
+    title: Programas para iniciantes
+    description: Experimente estes programas para iniciantes. Olhe por dentro deles para fazer modificações e adicionar suas ideias.
     categories:
-      games: Games
-      animations: Animations
-      interactive: Interactive Art and Stories
-      music: Music And Dance
+      games: Jogos
+      animations: Animações
+      interactive: Arte e Histórias interativas
+      music: Música e Dança
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
-    title1: Registration
-    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: Carregar
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: Search for your program
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: Create Android app
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: Download app
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
-    title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    title: Como fazer o upload de um jogo do Pocket Code para o Site do Game Jolt?
+    text0: 'Primeiramente, parabéns pelo seu jogo! Agora, você pode carregá-lo no %link% para criar um app Android autônomo, que você pode, então, fazer o upload para o Site do Game Jolt.'
+    title1: Registro
+    text1: 'Primeiro, você precisa criar uma conta. Depois disso, você pode fazer o upload do programa criado. Não se preocupe, é fácil. Você só precisa pensar em um nome de utilizador e palavra-passe. Após completar ambos, clique em "Fazer Login ou Registrar". Só isso!'
+    title2: Fazer upload
+    text2: 'Após o processo de registro, você pode carregar o seu jogo. É só pensar em um nome e adicionar uma descrição. Adicione também #AliceJam150 no campo de descrição.'
+    title3: Buscar por seu programa
+    text3: Vá ao seu perfil do Pocket Code, onde todos os seus programas estão listados, ou busque diretamente por o seu programa usando a pesquisa e o nome do programa.
+    title4: Criar app Android
+    text4: "Você pode criar um app Android diretamente na página de detalhes do programa. Clicando em 'Preparar app', o app será construído."
+    title5: Descarregar app
+    text5: 'Após o processo de construção, você pode descarregar seu programa como um aplicativo. Este app baixado precisa ser carregado novamente direto no Site do Game Jolt para participar de %link%.'
+    title6: Registo/Login em GameJolt.com
+    text6: 'Visite %link% e clique em "Login" ou "Registrar-se" no menu. Se você já tem uma conta, é só fazer login; se não, você precisa se registrar com um Endereço de E-mail, Nome de Utilizador e Palavra-Passe.'
+    title7: Fazer o upload de seu jogo no Site do Game Jolt
+    text7: "Após fazer login, vá para seu painel principal. Lá você pode adicionar seu jogo. Primeiro, você deve clicar em 'Aceitar regras'. Depois, complete as informações sobre o programa. Como Mecanismo/Idioma/Ferramenta de Criação, escolha 'Outro'; ao campo Outro Mecanismo/Idioma/Ferramenta, adicione 'Android'. Como status de 'Desenvolvimento', escolha 'Finalizado/Estável'. Não se esqueça de incluir #AliceJam150 na descrição para que apareça na página %link%."
+    text7_1: "Antes que você posso publicar seu jogo, siga os passos a seguir. Você precisa adicionar ao menos uma 'imagem em miniatura', definir uma 'classificação indicativa' e fazer o upload de seus jogos clicando em 'construir/arquivos'."
+    text7_2: "Clique em 'Adicionar Pacote' e preencha as informações do pacote. Salve-o e adicione o lançamento. "
+    text7_3: Agora você pode fazer o upload do apk do seu programa. Você pode encontrar o app baixado em sua pasta de download. É bom usar um gerenciador de arquivos (por exemplo, ES File Explorer).
+    text7_4: "Nota: Se o app não contiver a terminação '.apk', você terá que adicionar '.apk' manualmente. É só renomear o arquivo. Agora você deve conseguir fazer o upload do app."
+    text7_5: "Após o upload, ckique em 'OK' para publicar seu jogo. Fazendo isto, logo será mostrado um link para descarregar seu jogo."
+    text7_6: Você fez o upload de seu primeiro jogo no site do Game Jolt e o definiu como ativo. Parabéns!
+    text7_7: 'Outras pessoas agora serão capazes de encontrar o seu jogo. Ele aparecerá na página %link%.'
+  aliceGameJamTutorialcards:
+    title1: (Welcome to) Wonderland
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: Save Alice!
+    subtitle2: Use the inclination sensors and detect a collision between objects
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: 'The Hatter - Hit and Run'
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
+    title4: 'The Hatter - Hit and Run'
+    subtitle4: Let the Hatter shoot the evil cards
+    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    title5: Whack a Cheshire Cat
+    subtitle5: Create a score by using variables
+    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    title6: A Rabbits Race
+    subtitle6: Create a moving background
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: Download the program
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
+  username_header: Obrigado por registrar-se no Pocket Code!
+  username_chooser: 'Por favor, escolha um nome de utilizador:'
+  username_hint: O nome de utilizador não deve ser seu nome verdadeiro.
+  usernameTaken: Nome de utilizador já existente. Por favor, escolha um outro.
+  noReset: Utilizadores do Facebook e Google+ não tem uma palavra-passe para redefinir.
 search:
-  dotdotdot: Search...
-  search: Search
-  results: Search Results
-  resultcount: 'Your search returned %count% results'
+  dotdotdot: Pesquisar...
+  search: Pesquisar
+  results: Resultados da Busca
+  resultcount: 'Sua busca retornou %count% resultados'
 menu:
-  profile: My Profile
-  logout: Logout
+  profile: Meu Perfil
+  logout: Encerrar Sessão
 programLoader:
-  noPrograms: There are currently no programs.
+  noPrograms: Não há, atualmente, nenhum programa.
 login:
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  or: OR
+  passOrUser: Sua palavra-passe ou nome de utilizador está incorreto.
+  noUsername: Seu nome de utilizador ou endereço de e-mail não foi encontrado.
+  forgotPass: Esqueceu a palavra-passe ou nome de utilizador?
+  recoverPass: Recuperar palavra-passe
+  recoverPassSend: Um e-mail foi enviado para seu endereço de e-mail. Por favor, verifique sua caixa de entrada.
+  userOrEmail: Nome de utilizador ou E-mail
+  changePass: Alterar palavra-passe
+  createAccount: Criar uma conta
+  or: OU
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  download: Descarregar como app
+  prepare: Preparar app
+  preparing: Preparando app
+  text: O processo pode demorar um pouco
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: O nome de utilizador não pode estar em branco
+    invalid: Seu nome de utilizador é inválido
+    exists: Este nome de utilizador já existe.
+    not_exists: Este nome de utilizador não existe.
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: Faltando palavra-passe.
+    short: 'Sua palavra-passe deve conter pelo menos {{ limit }} caracteres.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: A descrição não pode conter palavras de baixo calão.
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: País faltando.
+    invalid: País inválido
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: o endereço de e-mail não pode estar em branco
+    invalid: Seu e-mail parece ser inválido
     exists: Este endereço de e-mail já existe.
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: ID de Autenticação Aberta não pode estar em branco
+  login: A palavra-passe ou nome de utilizador está incorreto.
+  post-data: POST-Data não correto ou faltando!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: Cliente não enviou o arquivo Checksum! Você está usando uma versão desatualizada do Pocket Code?
+    invalid: checksum inválido
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: código xml inválido
+    missing: 'erro desconhecido: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
+    unexpected: arquivo inesperado encontrado
+    invalid: arquivo inválido
+  image.missing: Projeto XML menciona um arquivo que não existe na pasta do projeto
+  unknown: erro desconhecido
+  token: 'Autenticação de dispositivo falhou: auth-token inválido!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: O nome do programa não deve conter palavras de baixo calão.
   program:
-    invalid: Invalid program.
+    invalid: Programa inválido.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: Desculpa, o seu programa contém uma versão antiga da língua Catrobat! Você está usando a versão mais recente do Pocket Code?
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: Desculpe, você está usando uma versão antiga do Pocket Code. Por favor, atualize para a versão mais recente.
 success:
-  registration: Registration successful!
+  registration: Registo efetuado com sucesso!
   token: Ok
-  upload: Your project was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: Seu projeto foi carregado com sucesso!
+  report: Seu relatório foi enviado com sucesso!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 minuto atrás |{1}1 minuto atrás |]1, Inf] %count% minutos atrás'
+  hours.ago: '{1}1 hora atrás |]1,Inf] %count% horas atrás'
+  days.ago: '{1}1 dia atrás |]1,Inf] %count% dias atrás'
+  months.ago: '{1}1 mês |]1,Inf] %count% meses atrás'
+  years.ago: '{1}1 ano atrás |]1,Inf] mais de um ano atrás'
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
+  arabic: Árabe
+  bulgarian: Búlgaro
+  catalan: Catalão
+  chinese_simplified_han: Chinês (Simplificado)
+  chinese_traditional_han: Chinês (Tradicional)
+  croatian: Croata
+  czech: Tcheco
+  danish: Dinamarquês
+  dutch: Holandês
+  english_united_kingdom: Inglês (Reino Unido)
+  english_united_states: Inglês (Estados Unidos)
+  estonian: Estoniano
   filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  finnish: Finlandês
+  french: Francês
+  german: Alemão
+  greek: Grego
+  hebrew: Hebreu
+  hindi: Hindu
+  hungarian: Húngaro
+  indonesian: Indonésio
+  italian: Italiano
+  japanese: Japonês
+  korean: Coreano
+  latvian: Letão
+  lithuanian: Lituano
+  malay: Malaio
+  norwegian: Norueguês
+  persian: Persa
+  polish: Polonês
+  portuguese_brazil: Português (Brasil)
+  portuguese_portugal: Português (Portugal)
+  romanian: Romeno
+  russian: Russo
+  serbian: Sérvio
+  slovak: Eslovaco
+  slovenian: Esloveno
+  spanish_latin_america: Espanhol (América Latina)
+  spanish_spain: Espanhol (Espanha)
+  swedish: Sueco
+  thai: Tailandês
+  turkish: Turco
+  ukrainian: Ucraniano
+  vietnamese: Vietnamita
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Gerar Apk
+  pending: Gerando Apk
+  download: Descarregar Apk
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to alice game jam
+  submitown:
+    header: be aware
+    subheader: You can only submit your own programs
+    text: |
+      But why not create your own!
+      Take part in the #AliceGameJam

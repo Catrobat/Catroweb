@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new FR3D\LdapBundle\FR3DLdapBundle(),
             //End Sonata--Admin,
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Liip\ThemeBundle\LiipThemeBundle(),
+            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
             new Catrobat\AppBundle\AppBundle()
         );
 

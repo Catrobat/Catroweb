@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -163,6 +164,58 @@ class Program
      * @ORM\Column(type="boolean", options={"default":false})
      */
     protected $lego = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\GameJam", inversedBy="programs")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $gamejam;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    protected $gamejam_submission_accepted = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $gamejam_submission_date;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program_downloads")
+     */
+    protected $program_downloads;
+
+    public function __construct()
+    {
+        $this->program_downloads = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $fb_post_id = '';
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $fb_post_url = '';
+
+    /**
+     * @return mixed
+     */
+    public function getFbPostId()
+    {
+        return $this->fb_post_id;
+    }
+
+    /**
+     * @param mixed $fb_post_id
+     */
+    public function setFbPostId($fb_post_id)
+    {
+        $this->fb_post_id = $fb_post_id;
+    }
 
     /**
      * @param mixed $approved_by_user
@@ -423,7 +476,7 @@ class Program
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name . " (#" . $this->id . ")";
     }
 
     /**
@@ -827,5 +880,111 @@ class Program
         $this->lego = $lego;
 
         return $this;
+    }
+
+    /**
+     * Set gamejam
+     *
+     * @param \Catrobat\AppBundle\Entity\GameJam $gamejam
+     *
+     * @return Program
+     */
+    public function setGamejam(\Catrobat\AppBundle\Entity\GameJam $gamejam = null)
+    {
+        $this->gamejam = $gamejam;
+
+        return $this;
+    }
+
+    /**
+     * Get gamejam
+     *
+     * @return \Catrobat\AppBundle\Entity\GameJam
+     */
+    public function getGamejam()
+    {
+        return $this->gamejam;
+    }
+
+    /**
+     * Set accepted
+     *
+     * @param boolean $accepted
+     *
+     * @return Program
+     */
+    public function setAcceptedForGameJam($accepted)
+    {
+        $this->gamejam_submission_accepted = $accepted;
+
+        return $this;
+    }
+
+    public function setGamejamSubmissionAccepted($accepted)
+    {
+        $this->gamejam_submission_accepted = $accepted;
+    }
+
+    public function getGamejamSubmissionAccepted()
+    {
+        return $this->gamejam_submission_accepted;
+    }
+    
+    /**
+     * Get accepted
+     *
+     * @return boolean
+     */
+    public function isAcceptedForGameJam()
+    {
+        return $this->gamejam_submission_accepted;
+    }
+    
+    public function setGameJamSubmissionDate($date)
+    {
+        $this->gamejam_submission_date = $date;
+    }
+    
+    public function getGameJamSubmissionDate()
+    {
+        return $this->gamejam_submission_date;
+    }
+    
+    public function getGamejam_submission_accepted()
+    {
+        return $this->gamejam_submission_accepted;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProgramDownloads()
+    {
+        return $this->program_downloads;
+    }
+
+    /**
+     * @param \Catrobat\AppBundle\Entity\Program $programs $program_downloads
+     */
+    public function addProgramDownloads(\Catrobat\AppBundle\Entity\ProgramDownloads $program_download)
+    {
+        $this->program_downloads[] = $program_download;
+        return $this->program_downloads;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFbPostUrl()
+    {
+        return $this->fb_post_url;
+    }
+
+    /**
+     * @param mixed $fb_post_url
+     */
+    public function setFbPostUrl($fb_post_url)
+    {
+        $this->fb_post_url = $fb_post_url;
     }
 }

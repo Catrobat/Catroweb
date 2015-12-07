@@ -15,15 +15,15 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class DownloadProgramController extends Controller
 {
     /**
-   * @Route("/download/{id}.catrobat", name="download", defaults={"_format": "json"})
+   * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"})
    * @Method({"GET"})
    */
   public function downloadProgramAction(Request $request, $id)
   {
       /* @var $program_manager ProgramManager */
-    $program_manager = $this->get('programmanager');
-    /* @var $file_repository ProgramFileRepository */
-    $file_repository = $this->get('filerepository');
+      $program_manager = $this->get('programmanager');
+      /* @var $file_repository ProgramFileRepository */
+      $file_repository = $this->get('filerepository');
 
       $program = $program_manager->find($id);
       if (!$program) {
@@ -40,6 +40,7 @@ class DownloadProgramController extends Controller
               $this->get('programmanager')->increaseDownloads($program);
               $downloaded[] = $program->getId();
               $request->getSession()->set('downloaded', $downloaded);
+              $request->attributes->set('download_statistics_program_id', $id);
           }
 
           $response = new BinaryFileResponse($file);

@@ -90,11 +90,8 @@ Feature: Upload a program
     When I upload a program
     Then the uploaded program should be a remix of "1"
 
-
   Scenario: program upload with scratch url should have no RemixOf entity
     Given I have a program with "url" set to "https://scratch.mit.edu/projects/70058680"
     When I upload a program
     Then the uploaded program shouldn't have any parent entity
     And the uploaded program should have RemixOf "https://scratch.mit.edu/projects/70058680" in the xml
-    
-    

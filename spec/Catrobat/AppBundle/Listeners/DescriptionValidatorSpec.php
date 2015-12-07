@@ -30,7 +30,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
           $description = $description.'a';
       }
       $file->getDescription()->willReturn($description);
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException')->duringValidate($file);
   }
 
   /**
@@ -49,6 +49,6 @@ class DescriptionValidatorSpec extends ObjectBehavior
   {
       $file->getDescription()->willReturn('rudeword');
       $rudewordfilter->containsRudeWord(Argument::any())->willReturn(true);
-      $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
+      $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\RudewordInDescriptionException')->duringValidate($file);
   }
 }

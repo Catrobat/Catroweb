@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Entity;
 
 use FR3D\LdapBundle\Model\LdapUserInterface;
@@ -12,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser implements LdapUserInterface
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -75,7 +75,20 @@ class User extends BaseUser implements LdapUserInterface
     protected $oauth_password;
 
     /**
-     * @param mixed $facebook_access_token
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    protected $limited = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->country = '';
+    }
+
+    /**
+     *
+     * @param mixed $facebook_access_token            
      */
     public function setFacebookAccessToken($facebook_access_token)
     {
@@ -83,6 +96,7 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
+     *
      * @return mixed
      */
     public function getFacebookAccessToken()
@@ -91,7 +105,8 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
-     * @param mixed $gplus_access_token
+     *
+     * @param mixed $gplus_access_token            
      */
     public function setGplusAccessToken($gplus_access_token)
     {
@@ -99,6 +114,7 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
+     *
      * @return mixed
      */
     public function getGplusAccessToken()
@@ -107,7 +123,8 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
-     * @param mixed $gplus_id_token
+     *
+     * @param mixed $gplus_id_token            
      */
     public function setGplusIdToken($gplus_id_token)
     {
@@ -115,6 +132,7 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
+     *
      * @return mixed
      */
     public function getGplusIdToken()
@@ -123,7 +141,8 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
-     * @param mixed $gplus_refresh_token
+     *
+     * @param mixed $gplus_refresh_token            
      */
     public function setGplusRefreshToken($gplus_refresh_token)
     {
@@ -131,17 +150,12 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
+     *
      * @return mixed
      */
     public function getGplusRefreshToken()
     {
         return $this->gplus_refresh_token;
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->country = '';
     }
 
     /**
@@ -157,21 +171,21 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * Add programs.
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs
+     * @param \Catrobat\AppBundle\Entity\Program $programs            
      *
      * @return User
      */
     public function addProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
         $this->programs[] = $programs;
-
+        
         return $this;
     }
 
     /**
      * Remove programs
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs
+     * @param \Catrobat\AppBundle\Entity\Program $programs            
      */
     public function removeProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
@@ -187,7 +201,6 @@ class User extends BaseUser implements LdapUserInterface
     {
         return $this->programs;
     }
-
 
     public function getUploadToken()
     {
@@ -207,7 +220,7 @@ class User extends BaseUser implements LdapUserInterface
     public function setCountry($country)
     {
         $this->country = $country;
-
+        
         return $this;
     }
 
@@ -217,7 +230,8 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
-     * @param mixed $additional_email
+     *
+     * @param mixed $additional_email            
      */
     public function setAdditionalEmail($additional_email)
     {
@@ -225,6 +239,7 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
+     *
      * @return mixed
      */
     public function getAdditionalEmail()
@@ -240,12 +255,13 @@ class User extends BaseUser implements LdapUserInterface
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
-
+        
         return $this;
     }
 
     /**
-     * @param mixed $oauth_password
+     *
+     * @param mixed $oauth_password            
      */
     public function setOauthPassword($oauth_password)
     {
@@ -253,6 +269,7 @@ class User extends BaseUser implements LdapUserInterface
     }
 
     /**
+     *
      * @return mixed
      */
     public function getOauthPassword()
@@ -263,7 +280,8 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * Set Ldap Distinguished Name.
      *
-     * @param string $dn Distinguished Name
+     * @param string $dn
+     *            Distinguished Name
      */
     public function setDn($dn)
     {
@@ -278,6 +296,16 @@ class User extends BaseUser implements LdapUserInterface
     public function getDn()
     {
         return $this->dn;
+    }
+
+    public function isLimited()
+    {
+        return $this->limited;
+    }
+
+    public function setLimited($limited)
+    {
+        $this->limited = $limited;
     }
 }
 

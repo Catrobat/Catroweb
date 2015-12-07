@@ -1,9 +1,7 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  {% stylesheets 'css/custom/index.less' filter='cssrewrite,lessphp' output='compiled/index.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-  {% endstylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}

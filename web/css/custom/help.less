@@ -1,4 +1,4 @@
-@import '../base/default';
+@import 'default';
 
 #help-container {
   margin: 0 auto;
@@ -354,7 +354,7 @@
 
   .img-container {
     margin: 5px auto;
-    width: 50%;
+    width: 60%;
 
     .extra-text {
       margin-top: 55px;
@@ -368,7 +368,7 @@
   }
 
   p.description {
-    margin: 20px 0 40px 0;
+    margin: 0px 0 40px 0;
 
     strong {
       text-transform: uppercase;
@@ -389,9 +389,95 @@
     }
   }
 
+  .block {
+    overflow: auto;
+
+    > div {
+      margin: 20px auto 0 auto;
+    }
+
+    > div:nth-child(1) {
+      width: 50%;
+      float: left;
+    }
+
+    > div:nth-child(2) {
+      width: 50%;
+      float: right;
+    }
+  }
+
+  .section {
+    margin: 20px 0px;
+    text-align: center;
+
+    .image_landscape {
+
+      img {
+        border: 1px solid #fff;
+        margin: 0px auto 15px auto;
+        width: 100%;
+        max-width: 600px !important;
+      }
+    }
+
+    .image_potrait {
+
+      img {
+        width: 40%;
+        border: 1px solid #fff;
+        margin: 0px auto 15px auto;
+      }
+    }
+
+    .download-button {
+      //width: 215px;
+      padding: 5px 10px;
+      font-weight: normal;
+      margin-right: 10px;
+    }
+  }
+
+  .headline {
+    h1 {
+      font-size: 25px;
+      border-bottom: none;
+    }
+
+    .subtitle {
+      border-bottom: 1px solid #17a5b8;
+      font-weight: bold;
+      margin-bottom: 1em;
+    }
+  }
+
+  .videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+  }
+  .videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   @media screen and (max-width: 720px) {
     .col-2 {
       width: 100%;
+    }
+
+    .block > div:nth-child(1),
+    .block > div:nth-child(2) {
+      width: 100%;
+      float: none;
+    }
+
+    .img-container {
+      width: 50%;
     }
   }
 }
@@ -428,7 +514,7 @@
 #game-jam {
   a {
     text-decoration: none;
-    color: #fff;
+    color: @help-link-color;
   }
 
   .title {
@@ -454,4 +540,31 @@
     color: @special-font-color;
     font-weight: bold;
   }
+}
+
+#tutorialcard {
+  a {
+    text-decoration: none;
+    color:  @help-link-color;
+  }
+}
+
+.submit-own {
+  width: 100%;
+}
+
+#alice-notice {
+  font-size: 1.5em;
+  
+  h1 {
+    border: none;
+    color: white;
+    margin-bottom: 0;
+  }
+  
+  .notice {
+    color: white;
+    margin-top: 0.1em;
+  }
+  
 }

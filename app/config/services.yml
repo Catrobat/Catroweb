@@ -14,13 +14,19 @@ parameters:
       catrobat.mediapackage.path:  "resources/mediapackage/"
       catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
       catrobat.backup.dir:         "%kernel.root_dir%/../backups/"
+      catrobat.snapshot.dir:       "%kernel.root_dir%/../Resources/Snapshots"
+      catrobat.translations.dir:    "%kernel.root_dir%/Resources/translations"
       
 services:
 
 
     apikey_authenticator:
         class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
-        arguments: ["@fos_user.user_provider.username","@translator"]
+        arguments: ["@translator"]
+
+    user_authenticator:
+        class: Catrobat\AppBundle\Security\UserAuthenticator
+        arguments: ["@security.user.provider.concrete.chain_provider","@security.authentication.manager"]
 
 # =========================== Repository ===========================
 
@@ -43,6 +49,13 @@ services:
         factory_method: getRepository
         arguments:
             - "AppBundle:RudeWord"
+
+    gamejamrepository:
+        class: Catrobat\AppBundle\Entity\GameJamRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:GameJam"
 
     featuredrepository:
         class: Catrobat\AppBundle\Entity\FeaturedRepository
@@ -82,6 +95,9 @@ services:
         class: Catrobat\AppBundle\Services\ApkRepository
         arguments: ["%catrobat.apk.dir%"]
 
+    programdevicepermissionreader:
+        class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
+
 # =========================== Manager & Stuff ===========================
 
     programmanager:
@@ -93,8 +109,6 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
             - "@event_dispatcher"
-        tags:
-            -  { name:  "knp_paginator.injectable" }
 
     rudewordfilter:
         class: Catrobat\AppBundle\Services\RudeWordFilter
@@ -132,16 +146,43 @@ services:
         class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
         arguments: ["@translator","@time"]
 
+# =========================== Twig ===========================
+
     app.twig_extension:
         class: Catrobat\AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack", "@mediapackagefilerepository"]
+        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%"]
         tags:
             - { name: twig.extension }
-            
+
+# =========================== Jenkins ===========================
+
     ci.jenkins.dispatcher:
         class: Catrobat\AppBundle\Services\Ci\JenkinsDispatcher
         arguments: 
           - "@router" 
           - "%jenkins%"
           
+# =========================== Controller ===========================
+
+    controller.upload:
+        class: Catrobat\AppBundle\Controller\Api\UploadController
+        arguments:
+          - "@usermanager"
+          - "@security.token_storage"
+          - "@programmanager"
+          - "@gamejamrepository"
+          - "@tokengenerator"
+          - "@translator"
+          
+    facebook_post_service:
+        class: Catrobat\AppBundle\Services\FacebookPostService
+        arguments: ["@router", "@service_container"]
+# =========================== Download ===========================
+
+    download_statistics:
+        class: Catrobat\AppBundle\Services\DownloadStatisticsService
+        arguments:
+          - "@programmanager"
+          - "@doctrine.orm.entity_manager"
+          - "@bazinga_geocoder.geocoder"

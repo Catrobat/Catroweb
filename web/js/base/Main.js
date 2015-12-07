@@ -70,7 +70,7 @@ var Main = function (search_url) {
   };
 
   self.searchPrograms = function(string) {
-    window.location.href = self.search_url + string;
+    window.location.href = self.search_url + encodeURIComponent(string);
   };
 
   self.setLanguageSwitchListener = function() {

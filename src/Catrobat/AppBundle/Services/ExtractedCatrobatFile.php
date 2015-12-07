@@ -1,16 +1,21 @@
 <?php
-
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\Finder\Finder;
+use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
+use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 
 class ExtractedCatrobatFile
 {
+
     protected $path;
+
     protected $web_path;
+
     protected $dir_hash;
+
     protected $program_xml_properties;
 
     public function __construct($base_dir, $base_path, $dir_hash)
@@ -18,14 +23,14 @@ class ExtractedCatrobatFile
         $this->path = $base_dir;
         $this->dir_hash = $dir_hash;
         $this->web_path = $base_path;
-
-        if (!file_exists($base_dir.'code.xml')) {
-            throw new InvalidCatrobatFileException('No code.xml found!', StatusCode::PROJECT_XML_MISSING);
+        
+        if (! file_exists($base_dir . 'code.xml')) {
+            throw new MissingXmlException();
         }
-
-        $this->program_xml_properties = @simplexml_load_file($base_dir.'code.xml');
+        
+        $this->program_xml_properties = @simplexml_load_file($base_dir . 'code.xml');
         if ($this->program_xml_properties === false) {
-            throw new InvalidCatrobatFileException('code.xml is not a valid xml file!', StatusCode::INVALID_XML);
+            throw new InvalidXmlException();
         }
     }
 
@@ -52,47 +57,47 @@ class ExtractedCatrobatFile
     public function getContainingImagePaths()
     {
         $finder = new Finder();
-        $finder->files()->in($this->path.'images/');
+        $finder->files()->in($this->path . 'images/');
         $file_paths = array();
         foreach ($finder as $file) {
-            $file_paths[] = '/'.$this->web_path.'images/'.$file->getFilename();
+            $file_paths[] = '/' . $this->web_path . 'images/' . $file->getFilename();
         }
-
+        
         return $file_paths;
     }
 
     public function getContainingSoundPaths()
     {
         $finder = new Finder();
-        $finder->files()->in($this->path.'sounds/');
+        $finder->files()->in($this->path . 'sounds/');
         $file_paths = array();
         foreach ($finder as $file) {
-            $file_paths[] = '/'.$this->web_path.'sounds/'.$file->getFilename();
+            $file_paths[] = '/' . $this->web_path . 'sounds/' . $file->getFilename();
         }
-
+        
         return $file_paths;
     }
 
     public function getContainingStrings()
     {
-        $xml = file_get_contents($this->path.'code.xml');
+        $xml = file_get_contents($this->path . 'code.xml');
         $matches = array();
         preg_match_all('#>(.*[a-zA-Z].*)<#', $xml, $matches);
-
+        
         return array_unique($matches[1]);
     }
 
     public function getScreenshotPath()
     {
         $screenshot_path = null;
-        if (is_file($this->path.'screenshot.png')) {
-            $screenshot_path = $this->path.'screenshot.png';
-        } elseif (is_file($this->path.'manual_screenshot.png')) {
-            $screenshot_path = $this->path.'manual_screenshot.png';
-        } elseif (is_file($this->path.'automatic_screenshot.png')) {
-            $screenshot_path = $this->path.'automatic_screenshot.png';
+        if (is_file($this->path . 'screenshot.png')) {
+            $screenshot_path = $this->path . 'screenshot.png';
+        } elseif (is_file($this->path . 'manual_screenshot.png')) {
+            $screenshot_path = $this->path . 'manual_screenshot.png';
+        } elseif (is_file($this->path . 'automatic_screenshot.png')) {
+            $screenshot_path = $this->path . 'automatic_screenshot.png';
         }
-
+        
         return $screenshot_path;
     }
 
@@ -113,6 +118,6 @@ class ExtractedCatrobatFile
 
     public function saveProgramXmlProperties()
     {
-        $this->program_xml_properties->asXML($this->path.'code.xml');
+        $this->program_xml_properties->asXML($this->path . 'code.xml');
     }
 }

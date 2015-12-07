@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
   <meta name="robots" content="noindex,nofollow"/>
@@ -7,11 +7,8 @@
   <title>Pocket Code Website {% block title %}{% endblock %}</title>
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}" />
 
-  {% stylesheets 'css/plugins/*'
-                 'css/base/*' filter='cssrewrite,lessphp' output='compiled/base.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" media="screen"/>
-  {% endstylesheets %}
-
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
+  
   {% javascripts 'js/plugins/*'
                  'js/base/*' output='compiled/script.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>

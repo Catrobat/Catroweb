@@ -2,11 +2,17 @@ default:
     formatters:
         pretty:   false
         progress: true
+        
+    gherkin:
+        filters:
+            tags: "@~disabled&&~wip&&~external"
+        
     extensions:
         Behat\Symfony2Extension\ServiceContainer\Symfony2Extension: 
             kernel:
                 env: test
                 debug: true
+                
         Behat\MinkExtension:
               base_url: http://localhost/app_test.php/
               sessions:
@@ -27,19 +33,11 @@ default:
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
-        chartinger\Behat\TwigReportExtension\Extension:
-            templates:
-                file: default.twig
-            output:
-                file: ./testreports/behat/index.html
 
     suites:
         api:
-            filters:
-                tags: ~@disabled
             type: symfony_bundle
             bundle: 'AppBundle'
-            features:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Api/"
             contexts:
@@ -48,23 +46,22 @@ default:
         flavor:
             type: symfony_bundle
             bundle: 'AppBundle'
-            features:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Flavor/"
             contexts:
-              - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext
+              - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
         permissions:
             type: symfony_bundle
             bundle: 'AppBundle'
-            features:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Permissions/"
             contexts:
-              - Catrobat\AppBundle\Features\Permissions\Context\FeatureContext
+              - Catrobat\AppBundle\Features\Permissions\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
         ci:
             type: symfony_bundle
             bundle: 'AppBundle'
-            features:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Ci/"
             contexts:
@@ -73,7 +70,6 @@ default:
         web:
             type: symfony_bundle
             bundle: 'AppBundle'
-            features:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Web/"
             contexts:
@@ -82,9 +78,54 @@ default:
         admin:
             type: symfony_bundle
             bundle: 'AppBundle'
-            features:
             paths:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Admin/"
             contexts:
               - Catrobat\AppBundle\Features\Admin\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
+        gamejam:
+            filters:
+                tags: ~@web&&~@javascript
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+            contexts:
+                - Catrobat\AppBundle\Features\GameJam\Context\FeatureContext:
+                    error_directory: "./testreports/behat/"
+        gamejam_web:
+            filters:
+                tags: @web
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+            contexts:
+              - Catrobat\AppBundle\Features\GameJam\Context\WebContext:
+                    error_directory: "./testreports/behat/"
+
+        gamejam_javascript:
+            filters:
+                tags: @javascript
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+            contexts:
+                - Catrobat\AppBundle\Features\GameJam\Context\JavascriptContext: ~
+
+wip:
+    gherkin:
+        filters:
+            tags: "@wip"
+
+apidoc:
+    gherkin:
+        filters:
+            tags: "@apidoc"
+    extensions:
+        chartinger\Behat\TwigReportExtension\Extension:
+            templates:
+                file: default.twig
+            output:
+                file: ./testreports/behat/index.html

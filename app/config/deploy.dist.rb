@@ -19,7 +19,8 @@ set :dump_assetic_assets, true
 
 # files which are not in the git repo. When you add one, upload it yourself via ftp first
 set :shared_files,      ["app/config/parameters.yml"]
-set :shared_children,   [app_path + "/logs", web_path + "/resources", "vendor", "backups"]
+set :shared_children,   [app_path + "/logs", web_path + "/resources", "vendor", "backups", "Resources/Snapshots"]
+
 
 # Which repo to use and how
 set :repository,  "."                  # It's the path to your local repo
@@ -28,7 +29,8 @@ set :deploy_via, :rsync_with_remote_cache
 set :keep_releases,  3
 
 # permissions
-set :writable_dirs,       ["app/cache", "app/logs", "backups", "web/resources/featured", "web/resources/extract", "web/resources/programs", "web/resources/screenshots", "web/resources/thumbnails", "web/resources/apk", "web/resources/mediapackage"]
+set :writable_dirs,       ["app/cache", "app/logs", "backups", "web/resources/featured", "web/resources/extract", "web/resources/programs", "web/resources/screenshots", "web/resources/thumbnails", "web/resources/apk", "web/resources/mediapackage", "Resources/Snapshots"]
+
 set :webserver_user,      "www-data"
 set :permission_method,   :acl
 set :use_set_permissions, true

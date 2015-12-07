@@ -17,12 +17,13 @@ class ReportNotificator
 
     public function onReportInsertEvent(ReportInsertEvent $event)
     {
-
     /* @var $notification_repo \Catrobat\AppBundle\Entity\NotificationRepository */
-    $notification_repo = $this->notification_repo;
+
+        $notification_repo = $this->notification_repo;
         $all_users = $notification_repo->findAll();
         $notification = $event->getReport();
         $program = $notification->getProgram();
+
         foreach ($all_users as $user) {
             /* @var $user \Catrobat\AppBundle\Entity\Notification */
       if (!$user->getReport()) {
@@ -40,8 +41,7 @@ Note: '.$event->getNote().'
 Project Name:'.$program->getName().'
 Project Description: '.$program->getDescription().'
 
-')
-      ;
+');
 
             $this->mailer->send($message);
         }

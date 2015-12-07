@@ -33,6 +33,7 @@ function triggerFacebookLogin() {
             console.log('User cancelled login or did not fully authorize.');
         }
     }, {
+        //scope: 'public_profile,email,user_about_me,manage_pages,publish_pages', manage_pages,publish_pages are necessary when requesting new token for fb post
         scope: 'public_profile,email,user_about_me',
         return_scopes: true,
         auth_type: $('#facebook_auth_type').val() //set to 'reauthenticate' to force re-authentication of the user
@@ -150,7 +151,6 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
                 });
         });
 }
-
 
 function FacebookLogin($email, $username, $id, $locale) {
 

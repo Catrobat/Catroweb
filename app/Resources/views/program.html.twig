@@ -1,9 +1,17 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-    {% stylesheets 'css/custom/program.less' filter='cssrewrite,lessphp' output='compiled/program.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" xmlns="http://www.w3.org/1999/html"/>
-    {% endstylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
+  <meta property="og:image" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
+  <meta property="og:title" content="{{ program.name|escape('html_attr') }}" />
+  {% if program.description is empty %}
+    <meta property="og:description" content="{{ "checkout_this_program"|trans({}, "catroweb") }}" />
+  {% else %}
+    <meta property="og:description" content="{{ program.description|escape('html_attr') }}" />
+  {% endif %}
+  <meta property="og:url" content="{{ url('program', {id: program.id}) }}" />
 {% endblock %}
 
 {% block body %}
@@ -75,9 +83,27 @@
             </tr>
           </table>
         </button>
-
+        
       </div>
-
+      {% if not program.gamejam or not program.acceptedforgamejam %}
+        {% set jam = getCurrentGameJam() %}
+        {% if jam %}
+            {% if app.user %}
+            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
+            {% else %}
+            <a href="{{ url('login') }}" title="{{ jam.name }}">
+            {% endif %}
+        <button id="gamejam-submittion" class="btn btn-jam download-button">
+          <table>
+            <tr>
+              <td><img src="{{ asset('images/symbols/jam_submit.png') }}" > </td>
+              <td>{{ "gamejam.submit"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
+        </a>
+        {% endif %}
+      {% endif %}
       <br>
 
       <table id="copy-link">
@@ -94,7 +120,9 @@
         </tr>
       </table>
 
-      <br>
+      <div id="facebook-post-link">
+        <a id="btn-facebook-post-link" target="_blank" href="#"><img src="{{ asset('images/social/FB-f-Logo__blue.png') }}" alt="Facebook Post Link"></a>
+      </div>
 
       <p>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
@@ -161,9 +189,11 @@
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
       '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}','{{ asset('images/symbols/loading.gif') }}',
       '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}','{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
-      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}');
+      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}', '{{ fb_post_link }}');
     program.getApkStatus();
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
+    program.generateFacebookPostLink();
+
   </script>
 {% endblock %}

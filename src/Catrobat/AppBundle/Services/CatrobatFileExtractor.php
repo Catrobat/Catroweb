@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Catrobat\AppBundle\StatusCode;
+use Catrobat\AppBundle\Exceptions\Upload\InvalidArchiveException;
 
 class CatrobatFileExtractor
 {
@@ -34,7 +35,7 @@ class CatrobatFileExtractor
             $zip->extractTo($full_extract_dir);
             $zip->close();
         } else {
-            throw new InvalidCatrobatFileException('Error extracting catrobat file', StatusCode::INVALID_FILE);
+            throw new InvalidArchiveException();
         }
 
         return new ExtractedCatrobatFile($full_extract_dir, $full_extract_path, $temp_path);

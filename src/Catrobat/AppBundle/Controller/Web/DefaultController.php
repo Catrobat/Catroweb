@@ -2,6 +2,9 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,7 +36,7 @@ class DefaultController extends Controller
       $image_repository = $this->get('featuredimagerepository');
       $repository = $this->get('featuredrepository');
 
-      $programs = $repository->getFeaturedPrograms($request->getSession()->get('flavor'), 5, 0);
+      $programs = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
 
       $featured = array();
       foreach ($programs as $program) {
@@ -62,9 +65,9 @@ class DefaultController extends Controller
   public function programAction(Request $request, $id, $flavor = 'pocketcode')
   {
       /**
-     * @var \Catrobat\AppBundle\Entity\User
-     * @var \Catrobat\AppBundle\Entity\Program
-     * @var \Catrobat\AppBundle\Entity\ProgramInappropriateReport
+     * @var $user User
+     * @var $program Program
+     * @var $reported_program ProgramInappropriateReport
      */
     $program = $this->get('programmanager')->find($id);
       $screenshot_repository = $this->get('screenshotrepository');
@@ -89,6 +92,7 @@ class DefaultController extends Controller
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
       'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+
     );
 
       $user = $this->getUser();
@@ -112,6 +116,7 @@ class DefaultController extends Controller
       'program_details' => $program_details,
       'my_program' => count($user_programs) > 0 ? true : false,
       'already_reported' => $isReportedByUser,
+      'fb_post_link' => $program->getFbPostUrl()
     ));
   }
 
@@ -327,7 +332,7 @@ class DefaultController extends Controller
    * @Route("/media-library/{package_name}", name="media_package")
    * @Method({"GET"})
    */
-  public function MediaPackageAction($package_name)
+  public function MediaPackageAction($package_name, $flavor = 'pocketcode')
   {
     /**
      * @var $package \Catrobat\AppBundle\Entity\MediaPackage
@@ -346,10 +351,13 @@ class DefaultController extends Controller
     foreach($package->getCategories() as $category) {
       $files = array();
       foreach($category->getFiles() as $file) {
-        if(!$file->getActive()) {
+        $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
+        $flavors_arr = explode(",", $flavors_arr);
+        if(!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr))) {
           continue;
         }
         $files[] = array(
+          'id' => $file->getId(),
           'data' => $file,
           'downloadUrl' => $this->generateUrl('download_media', array(
             'id' => $file->getId(),
@@ -359,15 +367,31 @@ class DefaultController extends Controller
       }
       $categories[] = array(
         'name' => $category->getName(),
-        'files' => $files
+        'files' => $files,
+        'priority' => $category->getPriority()
       );
     }
+
+    usort($categories, function($a,$b) {
+      if($a['priority'] == $b['priority'])
+        return 0;
+      return ($a['priority'] > $b['priority']) ? -1 : 1;
+    });
 
     return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
       'categories' => $categories
     ));
   }
 
+  /**
+   * @Route("/gamejame/submit-your-own", name="gamejam_submit_own")
+   * @Method({"GET"})
+   */
+  public function gamejamSubmitOwnAction()
+  {
+      return $this->get('templating')->renderResponse('::gamejam_submit_own.html.twig');
+  }
+  
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //// private functions
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

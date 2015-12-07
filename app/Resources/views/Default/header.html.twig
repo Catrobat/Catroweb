@@ -80,8 +80,16 @@
           <div>{{ "My Profile"|trans({}, "catroweb") }}</div>
         </a>
       </div>
+      {% if is_granted('ROLE_ADMIN') %}
       <div>
-        <a href="{{ url('fos_user_security_logout') }}" id="btn-logout">
+        <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+          <div><div class="img-dashboard"></div></div>
+          <div>Admin</div>
+        </a>
+      </div>
+      {% endif %}
+      <div>
+        <a href="{{ url('logout') }}" id="btn-logout">
           <div><div class="img-logout"></div></div>
           <div>{{ "Logout"|trans({}, "catroweb") }}</div>
         </a>

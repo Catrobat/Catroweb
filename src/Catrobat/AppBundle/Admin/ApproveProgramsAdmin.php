@@ -14,6 +14,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ApproveProgramsAdmin extends Admin
 {
+    protected $baseRouteName = 'admin_approve_programs';
+    protected $baseRoutePattern = 'approve';
+    
     private $extractedProgram = null;
 
     public function createQuery($context = 'list')

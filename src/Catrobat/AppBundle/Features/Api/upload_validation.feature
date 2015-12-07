@@ -17,6 +17,7 @@ Feature: All uploaded programs have to be validated.
       """
       {"statusCode":508,"answer":"invalid code xml","preHeaderMessages":""}
       """
+     And the response code should be "200" 
 
   @disabled
   Scenario: program with missing images are rejected
@@ -33,6 +34,16 @@ Feature: All uploaded programs have to be validated.
       """
       {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
       """
+     And the response code should be "500" 
+
+  Scenario: program must not have extra files in the root directory
+    When I upload a program with an extra file
+    Then I should get the json object:
+      """
+      {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
+      """
+     And the response code should be "200" 
+
 
   Scenario: invalid catrobat program files should be rejected
     When I upload an invalid program file

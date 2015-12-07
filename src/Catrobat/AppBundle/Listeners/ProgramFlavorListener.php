@@ -7,25 +7,27 @@ use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\StatusCode;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProgramFlavorListener
 {
-    public function onEvent(ProgramBeforePersistEvent $event)
+    public function __construct(RequestStack $stack)
     {
-        $this->checkFlavor($event->getExtractedFile(), $event->getProgramEntity());
+        $this->request_stack = $stack;
     }
 
-    public function checkFlavor(ExtractedCatrobatFile $file, Program $program)
+    public function onEvent(ProgramBeforePersistEvent $event)
     {
-        $program_xml_properties = $file->getProgramXmlProperties();
-        $appName = $program_xml_properties->header->applicationName->__toString();
+        $this->checkFlavor($event->getProgramEntity());
+    }
 
-        if ($appName === 'Pocket Code') {
+    public function checkFlavor(Program $program)
+    {
+        $request = $this->request_stack->getCurrentRequest();
+        if ($request == null) {
             $program->setFlavor('pocketcode');
-        } elseif ($appName === 'Pocket Phiro') {
-            $program->setFlavor('pocketphiropro');
         } else {
-            throw new InvalidCatrobatFileException('Unknown application!', StatusCode::INTERNAL_SERVER_ERROR);
+            $program->setFlavor($request->attributes->get('flavor'));
         }
     }
 }

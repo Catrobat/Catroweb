@@ -10,12 +10,14 @@ class AddProgramRequest
     private $user;
     private $programfile;
     private $ip;
+    private $gamejam;
 
-    public function __construct(User $user, File $programfile, $ip = '127.0.0.1')
+    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null)
     {
         $this->user = $user;
         $this->programfile = $programfile;
         $this->ip = $ip;
+        $this->gamejam = $gamejam;
     }
 
     public function getUser()
@@ -41,5 +43,10 @@ class AddProgramRequest
     public function getIp()
     {
         return $this->ip;
+    }
+
+    public function getGamejam()
+    {
+        return $this->gamejam;
     }
 }

@@ -21,6 +21,12 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Reported Programs }
         arguments: [null, Catrobat\AppBundle\Entity\ProgramInappropriateReport, null]
 
+      catrowebadmin.block.programs.stats:
+        class: Catrobat\AppBundle\Admin\ProgramDownloadStatisticsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Program Download Statistics }
+        arguments: [null, Catrobat\AppBundle\Entity\ProgramDownloads, null]
+
       catrowebadmin.block.programs.categories:
         class: Catrobat\AppBundle\Admin\CategoriesAdmin
         tags:
@@ -96,4 +102,32 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, label: Maintain, icon: '<i class="fa fa-cogs"></i>' }
         arguments: [null, null, AppBundle:Admin\Maintain]
+
+      catrowebadmin.block.users.limited:
+        class: Catrobat\AppBundle\Admin\LimitedUsersAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Limited Users, icon: '<i class="fa fa-cogs"></i>' }
+        arguments: [null, Catrobat\AppBundle\Entity\User, null]
+
+      catrowebadmin.block.program.snapshots:
+        class: Catrobat\AppBundle\Admin\SnapshotAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Snapshots, icon: '<i class="fa fa-cogs"></i>' }
+        arguments: [null, null, AppBundle:Admin\Snapshot]
+
+
+# =========================== GameJam ===========================
+
+      catrowebadmin.block.gamejam:
+        class: Catrobat\AppBundle\Admin\GameJamAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: GameJams }
+        arguments: [catrowebadmin.block.gamejam, Catrobat\AppBundle\Entity\GameJam, null]
+        calls:
+          - [addChild, ["@catrowebadmin.block.gamejam.submitted"]]
       
+      catrowebadmin.block.gamejam.submitted:
+        class: Catrobat\AppBundle\Admin\GameJamSubmittedProgramsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Submittions }
+        arguments: [null, Catrobat\AppBundle\Entity\Program, AppBundle:Admin\GameJamSubmittedPrograms]

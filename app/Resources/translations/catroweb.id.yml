@@ -1,5 +1,5 @@
 ---
-localLanguage: English
+localLanguage: Bahasa Inggris
 username: Nama pengguna
 password: Kata sandi
 aboutPocketCode: Tentang Pocket Code
@@ -16,56 +16,61 @@ country: Negara
 loginText: login
 privacyPolicy: Kebijakan Privasi
 imprint: Jejak
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: Ups terdapat kesalahan.
+pleaseTryAgain: Mohon coba lagi!
+oldVersionError: Mohon perbaharui Pocket Code ke versi terbaru!
 more: lebih
 less: kurang
-ok: Ok
+ok: Oke
+clickToDownloadProgram: 'Untuk mengunduh contoh program klik %link_start% here %link_end%.'
 programs:
   featured: Fitur
-  newest: Newest programs
+  newest: Program terbaru
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
-  downloads: '%downloads% downloads'
-  views: '%views% views'
+    viewed: Paling banyak dilihat
+    downloaded: Paling banyak diunduh
+  random: Program Acak
+  downloads: '%downloads% unduhan'
+  sample: Example Programs
+  views: '%views% lihat'
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
   reportAsInappropriate: Laporkan sebagai tidak pantas
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  languageVersion: 'Versi Catrobat Language: %languageVersion%'
+  reportLoginText: 'Mohon %login% untuk melaporkan program ini sebagai tidak pantas.'
   reportDialogHeader: Menurut Anda, mengapa program ini tidak pantas?
   reportDialogReason: Masukkan alasan
   reportOwnProgram: Anda tidak dapat menandai program Anda sendiri.
   reportAlready: Anda sudah pernah menandai program ini sebagai tidak pantas.
   reportDone: Anda melaporkan program ini sebagai tidak pantas!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+  updateAppHeader: Perbaharui Aplikasi
+  updateAppText: Mohon perbaharui aplikasi Anda ke versi terbaru untuk dapat mengunduh program ini.
+  btnClosePopup: Oke
+  checkout_this_program: Checkout this Catrobat program
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
-    Dear %username%.
+    Yth. %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Anda telah diminta untuk menyetel ulang kata sandi Anda pada %appplication_url% karena Anda lupa kata sandi Anda. Jika Anda tidak meminta ini, silakan mengabaikannya. Ini akan berakhir dan menjadi tidak berguna dalam waktu 24 jam.
+    Untuk menyetel ulang kata sandi Anda dan membuat yang baru, silakan kunjungi halaman berikut: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Anda dapat menggunakan nama pengguna dan kata sandi Anda setiap saat untuk mengakses komunitas %appplication_url%.
+    Untuk melakukannya, kunjungi halaman berikut: %loginPage%
+    Untuk mengubah rincian profil Anda, pergi ke halaman ini: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    Salam hormat,
+    Tim Catrobat Anda.
 profile:
   saveChanges: Simpan perubahan
-  newPass: new password
-  repeatPass: repeat password
+  newPass: kata sandi baru
+  repeatPass: ulangi kata sandi
   firstEmail: Email pertama saya
   secondEmail: Email kedua saya
-  myPrograms: My programs
+  myPrograms: Program Saya
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordTooShort: 'Kata sandi baru harus memiliki setidaknya %length% karakter.'
+    passwordTooLong: 'Kata sandi baru dapat memiliki maksimal %length% karakter.'
     passwordIsUsername: Kata sandi harus berbeda dari nama pengguna.
     emailNotValid: Alamat email ini tidak valid.
     emailMissing: Kesalahan ketika memperbarui alamat e-mail. Anda harus memiliki minimal satu alamat e-mail divalidasi.
@@ -81,8 +86,8 @@ profile:
 licenseToPlay:
   link: Lisensi untuk bermain
   title: 'Lisensi untuk bermain - memberikan kredit dan berbagi'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text1: Bayangkan bahwa setiap program Catrobat adalah kue, kue yang sangat istimewa yang datang dengan resep nya (blok pemrograman). Semua anggota dari komunitas Catrobat berbagi kue mereka bersama dengan resep mereka. Ini berarti Anda dapat menikmati kue dan belajar bagaimana untuk membuatnya sendiri!
+  text2: 'Tidak ada resep rahasia: petunjuk tentang cara membuat kue ini terbuka bagi siapa saja untuk menggunakan, menggunakan kembali, memodifikasi, dan berfungsi sebagai inspirasi untuk ide-ide baru... Maksudku kue.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
@@ -384,7 +389,6 @@ help:
   tutorialcards:
     title: Tutorial
     description1: Tutorial ini menunjukkan kepada Anda bagaimana menggunakan trik yang efektif dalam
-    description2: Pocket Code.
     getReady: 'Bersiaplah:'
     tryCode: 'Try this code:'
     doIt: 'Lakukan:'
@@ -392,34 +396,67 @@ help:
     card1:
       title: Ubah Ukuran
       description: Ketuk bebek untuk mengubah ukuran.
+      one: Add the object of which you would like to change the size, e.g. Animal.
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
       title: Ubah Tampilan
       description: Gunakan trik ini untuk menghitung secara otomatis.
+      one: Add the object of which you would like to change its look, e.g. items.
+      two: "Include further pictures in the object's looks."
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
       title: Animasi Bergerak
       description: Gunakan trik ini bila Anda ingin burung beo terbang.
+      one: Add the object you want to be moving.
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
       title: Glide
       description: Bergerak dengan lancar dari satu tempat ke yang lain.
+      one: Add the object you want to be gliding. e.g. plane.
+      two: Insert the following bricks and define the area in which the movement should happen.
     card5:
       title: Putar suara
-      description: Tap the drum to play this sound.
-      extra1: '1. Klik "+"'
-      extra2: '2. Pilih "Perekam Pocket Code"'
-      extra3: 3. Tekan ikon untuk merekam suara Anda
+      description: Play a sound by tapping on the object.
+      one: Add the object you want to be playing a sound, e.g. dog.
+      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
       title: Katakan sesuatu
       description: Gunakan kode ini untuk membuat objek berbicara.
+      one: Add the object you want to be speaking, e.g. Carrie.
+      two: Insert the following bricks in order to make the voice output possible.
     card7:
       title: GSensor
       description: Gunakan trik ini untuk mengontrol objek dengan kecenderungan dari perangkat Anda.
-      extra1: Jika terlalu sensitif, bagi dengan 10
+      one: Add the object you want to be moving on stage.
+      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
     card8:
       title: Kompas
       description: Gunakan kode ini untuk membuat sebuah kompas.
+      one: Add the object you want to point in compass direction.
+      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
       title: Siaran
       description: Lihat kode ini! Ini menunjukkan pada Anda bagaimana untuk berkomunikasi antara objek.
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
+      three: In this case the background changes when the object in the front layer is tapped.
+    card10:
+      title: Show variable
+      description: Show the value of a variable.
+      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
+      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
+      three: Through „Show variable“ you can display the values on stage.
+    card11:
+      title: Collision detection
+      description: Detect a collision between two objects.
+      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
+      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+    card12:
+      title: Face detection
+      description: Control an object by using face detection.
+      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
+      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
   starterPrograms:
     title: Program Permulaan
     description: Coba program permulaan ini. Lihat ke dalam untuk membuat perubahan dan tambahkan ide-ide Anda.
@@ -452,6 +489,30 @@ help:
     text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
     text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
     text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+  aliceGameJamTutorialcards:
+    title1: (Welcome to) Wonderland
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: Save Alice!
+    subtitle2: Use the inclination sensors and detect a collision between objects
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: 'The Hatter - Hit and Run'
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
+    title4: 'The Hatter - Hit and Run'
+    subtitle4: Let the Hatter shoot the evil cards
+    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    title5: Whack a Cheshire Cat
+    subtitle5: Create a score by using variables
+    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    title6: A Rabbits Race
+    subtitle6: Create a moving background
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: Download the program
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
@@ -585,3 +646,12 @@ ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to alice game jam
+  submitown:
+    header: be aware
+    subheader: You can only submit your own programs
+    text: |
+      But why not create your own!
+      Take part in the #AliceGameJam

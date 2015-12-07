@@ -22,15 +22,19 @@ oldVersionError: Si prega di aggiornare alla nuova versione di Pocket Code!
 more: altro
 less: meno
 ok: Ok
+clickToDownloadProgram: 'Per scaricare il programma di esempio, fare click su %link_start% questo %link_end% link.'
 programs:
   featured: In evidenza
   newest: Programmi più recenti
   most:
     viewed: Il più visto
     downloaded: Il più scaricato
-  random: Random Programs
+  random: Programmi a caso
   downloads: '%downloads% download'
+  sample: Example Programs
   views: '%views% visualizzazioni'
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
   reportAsInappropriate: Segnala come inappropriato
   languageVersion: 'Versione del linguaggio Catrobat: %languageVersion%'
   reportLoginText: 'Effettuare la %login% per segnalare il programma come inappropriato.'
@@ -39,9 +43,10 @@ programs:
   reportOwnProgram: Non puoi segnalare il tuo programma.
   reportAlready: Hai già segnalato questo programma come inappropriato.
   reportDone: Hai segnalato questo programma come inappropriato!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: Aggiorna App
+  updateAppText: "Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente."
   btnClosePopup: Ok
+  checkout_this_program: Checkout this Catrobat program
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -414,7 +419,6 @@ help:
   tutorialcards:
     title: Tutorial
     description1: Questi tutorial mostrano come utilizzare in maniera efficace
-    description2: Pocket Code.
     getReady: 'Preparati:'
     tryCode: 'Prova questo codice:'
     doIt: 'Esegui:'
@@ -422,34 +426,70 @@ help:
     card1:
       title: Modifica le dimensioni
       description: "Tocca l'anatra per modificare le dimensioni."
+      one: "Aggiungi l'oggetto di cui desideri modificare le dimensioni, ad es. Animale."
+      two: "Inserire i seguenti mattoncini dentro gli script dell'oggetto; ogni volta che viene premuto si riduce del 20% (rispetto alla sua dimensione originale)."
     card2:
       title: Modifica aspetto
       description: Usa questo trucco per contare automaticamente.
+      one: "Aggiungi l'oggetto di cui vuoi cambiare l'aspetto, ad esempio items."
+      two: "Includi ulteriori immagini nei look dell'oggetto."
+      three: "Inserisci i seguenti mattoncini dentro gli script dell'oggetto al fine di cambiare automaticamente il suo look dopo un secondo."
     card3:
       title: Animazione in movimento
       description: Utilizza questo trucco quando vuoi un pappagallo volante.
+      one: "Aggiungi l'oggetto che desideri muovere."
+      two: "Includi un'altra immagine nei look dell'oggetto per simulare il movimento."
+      three: "Inserisci i seguenti mattoncini dentro gli script dell'oggetto al fine di cambiare automaticamente la posizione dell'oggetto dopo un certo intervallo di tempo. Inoltre si può far sì che rimanga all'interno dei margini dello stage facendolo rimbalzare quando è sul bordo."
     card4:
       title: Scivola
       description: Muovi in maniera fluida da un punto ad un altro.
+      one: "Aggiungi l'oggetto che desideri far scivolare. Ad esempio un aereo."
+      two: "Inserisci i seguenti mattoncini al fine di definire l'area in cui dovrebbe muovere."
     card5:
       title: Riproduci suono
       description: Tocca il tamburo per ascoltare il suo suono.
-      extra1: '1. fai clic su "+"'
-      extra2: '2. Seleziona "Registratore di Pocket Code"'
-      extra3: "3. Premi l'icona per registrare il suono"
+      one: "Aggiungi l'oggetto a cui desideri associare la riproduzione di un suono, ad es. un cane."
+      two: Inserisci i seguenti mattoncini al fine di rendere possibile la riproduzione del suono. Scegli un suono o dalla tua libreria personale, dalla libreria multimediale Pocket Code o, infine, registrare tu uno nuovo.
     card6:
       title: Parla di qualcosa
       description: Usa questo codice per far parlare un oggetto.
+      one: "Aggiungi l'oggetto che desideri far parlare, ad es. Carrie."
+      two: Inserisci i seguenti mattoncini al fine di rendere possibili i messaggi vocali.
     card7:
       title: Sensore di gravità
       description: "Usa questo trucco per controllare un oggetto attraverso l'inclinazione del dispositivo."
-      extra1: Se troppo sensibile, dividi per 10
+      one: "Aggiungi l'oggetto che si desideri far muovere sullo stage."
+      two: |-
+        Inserisci i seguenti mattoncini al fine di controllare l'oggetto attraverso i sensori del telefono. Quindi scegli il "inclinazione x e y". Per ottenere il movimento adatto, impostare "-inclinazione". Se il movimento dell'oggetto è troppo sensibile, dividi, per esempio, l'inclinazione per 10.
     card8:
       title: Bussola
       description: Usa questo codice per creare una bussola.
+      one: "Aggiungi l'oggetto che desideri far puntare in direzione della bussola."
+      two: |-
+        Inserisci i seguenti mattoncini al fine di impostare l'orientamento dell'oggetto. Inoltre includi un ciclo "per sempre".
     card9:
       title: Invia evento
       description: Guarda questo programma! Ti mostra come comunicare tra più oggetti.
+      one: "Aggiungi un nuovo oggetto, ad esempio Alice, che dovrebbe inviare un messaggio. E' possibile aggiungere un secondo sfondo agli aspetti dello sfondo. Appena lo sfondo riceve il messaggio, cambierà all'altro suo aspetto."
+      two: |-
+        Inserisci il mattone "Invia a tutti" e imposta che cosa dovrebbe accadere quando l'altro oggetto riceve il messaggio.
+      three: "In questo caso faremo cambiare lo sfondo quando l'oggetto in primo piano è premuto."
+    card10:
+      title: Visualizza la variabile
+      description: Mostra il valore di una variabile.
+      one: 'Aggiungi un oggetto che si vuole comandare usando i sensori del telefono (si veda %link_end% %tutorial_card_link_7% Tutorial Card 7). Inoltre è possibile aggiungere un secondo sfondo da usare quando si riceve un messaggio.'
+      two: "Inserisci i seguenti mattoncini al fine di salvare in una variabile l'attuale posizione x ed y dell'oggetto in movimento."
+      three: 'Tramite "Visualizza variabile" puoi visualizzare il suo valore sullo stage.'
+    card11:
+      title: Rilevamento della collisione (collision detection)
+      description: "Rilevare se c'è una collisione tra due oggetti."
+      one: 'Aggiungi due oggetti in cui uno dovrebbe muoversi usando un sensore del dispositivo, per es. Alex (vedi %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
+      two: "Salva la „posizione x e y“ attuale dell'oggetto Alex in movimento Alex (vedi %tutorial_card_link_10% Tutorial Card 10 %link_end%) e inserisci i seguenti script. Viene continuamente verificato se i due oggetti si sovrappongono. Se lo fanno, l'oggetto fisso, in questo caso, viene nascosto."
+    card12:
+      title: Rilevamento volti
+      description: Comandare un oggetto usando il rilevamento volti.
+      one: Per prima cosa assicurati che il rilevamento volti sia abilitato. Per farlo vai alla configurazione.
+      two: 'Aggiungi un nuovo oggetto e inserisci i seguenti mattoncini per mostrare se è rilevato un volto. Verifica se il volto è rilevato e mettilo in un ciclo senza fine ("per sempre"). Se la telecamera percepisce un viso, il valore della variabile è "VERO", altrimenti è "FALSO".'
   starterPrograms:
     title: Programmi per iniziare
     description: Per iniziare, prova questi programmi. Guarda a come sono fatti per apportare modifiche e aggiungere tue idee.
@@ -483,12 +523,36 @@ help:
     text7_5: "Dopo il caricamento fare clic su 'OK' per pubblicare il gioco. Questo mostrerà più tardi alle altre persone un link per scaricare il tuo gioco."
     text7_6: Hai caricato il tuo primo gioco sul sito Game Jolt e lo hai attivato. Congratulazioni!
     text7_7: "Gli altri saranno in grado di trovare il tuo gioco. Apparira' nella pagina %link%."
+  aliceGameJamTutorialcards:
+    title1: (Welcome to) Wonderland
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: Save Alice!
+    subtitle2: Use the inclination sensors and detect a collision between objects
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: 'The Hatter - Hit and Run'
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
+    title4: 'The Hatter - Hit and Run'
+    subtitle4: Let the Hatter shoot the evil cards
+    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    title5: Whack a Cheshire Cat
+    subtitle5: Create a score by using variables
+    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    title6: A Rabbits Race
+    subtitle6: Create a moving background
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: Download the program
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
+  username_header: Grazie per esserti registrato a Pocket Code!
+  username_chooser: 'Scegli un nome utente:'
+  username_hint: Il nome utente non dovrebbe essere il tuo vero nome.
+  usernameTaken: Nome utente già in uso, scegli uno diverso.
+  noReset: Gli utenti di Facebook e Google + non hanno una password da reimpostare.
 search:
   dotdotdot: Cerca...
   search: Cerca
@@ -507,7 +571,7 @@ login:
   recoverPassSend: Una mail è stata inviata al tuo indirizzo email. Controlla la tua casella di posta.
   userOrEmail: Nome utente o Email
   changePass: Cambia password
-  createAccount: Create an account
+  createAccount: Crea un account
   or: OR
 apk:
   download: Scarica come app
@@ -517,9 +581,9 @@ apk:
 errors:
   username:
     blank: Il nome utente non può essere vuoto
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    invalid: Il nome utente non è valido
+    exists: Il nome utente esiste già.
+    not_exists: Il nome utente non esiste.
   password:
     blank: Manca la password.
     short: 'La tua password deve avere almeno {{ limit }} caratteri.'
@@ -533,7 +597,7 @@ errors:
     invalid: La tua e-mail sembra non essere valida
     exists: "L'indirizzo e-mail è già stato usato."
   id:
-    blank: Open Authentication ID must not be blank
+    blank: Open Authentication ID non deve essere vuoto
   login: La password o il nome utente sono sbagliati.
   post-data: Dati POST non corretti o mancanti!
   checksum:
@@ -616,3 +680,12 @@ ci:
   generate: "Generare  l'Apk"
   pending: "Generazione dell'Apk"
   download: Scarica Apk
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to alice game jam
+  submitown:
+    header: be aware
+    subheader: You can only submit your own programs
+    text: |
+      But why not create your own!
+      Take part in the #AliceGameJam

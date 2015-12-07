@@ -22,15 +22,19 @@ oldVersionError: Пожалуйста, скачай последнюю верс�
 more: '&#x41A;&#x430;&#x442;&#x430;&#x43B;&#x43E;&#x43D;&#x441;&#x43A;&#x438;&#x439;'
 less: '&#x41A;&#x438;&#x442;&#x430;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x423;&#x43F;&#x440;&#x43E;&#x449;&#x435;&#x43D;&#x43D;&#x44B;&#x439;)'
 ok: ОК
+clickToDownloadProgram: 'Что бы скачать пример программы коснись %link_start% здесь %link_end%.'
 programs:
   featured: Рекомендуемые
   newest: Новые приложения
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
-  random: Random Programs
+  random: Случайные программы
   downloads: '%downloads% загрузок'
+  sample: Example Programs
   views: '%views% просмотров'
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
   reportAsInappropriate: Пожаловаться
   languageVersion: 'Версия языка Catrobat: %languageVersion%'
   reportLoginText: 'Пожалуйста, %login% для того чтобы пожаловаться на приложение.'
@@ -39,9 +43,10 @@ programs:
   reportOwnProgram: '&#x43F;&#x440;&#x43E;&#x441;&#x43C;&#x43E;&#x442;&#x440;&#x43E;&#x432;'
   reportAlready: '&#x441;&#x43A;&#x430;&#x447;&#x438;&#x432;&#x430;&#x43D;&#x438;&#x439;'
   reportDone: '&#x412;&#x44B; &#x43E;&#x442;&#x43C;&#x435;&#x442;&#x438;&#x43B;&#x438; &#x44D;&#x442;&#x43E;&#x442; &#x43F;&#x440;&#x43E;&#x435;&#x43A;&#x442; &#x43A;&#x430;&#x43A; &#x43D;&#x435;&#x443;&#x43C;&#x435;&#x441;&#x442;&#x43D;&#x44B;&#x43C;!'
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+  updateAppHeader: Обновить приложение
+  updateAppText: Пожалуйста, обновите приложение до последней версии, чтобы скачать эту программу.
+  btnClosePopup: Ок
+  checkout_this_program: Checkout this Catrobat program
 passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
@@ -75,42 +80,42 @@ profile:
     emailExists: '&#x41D;&#x435; &#x43F;&#x440;&#x430;&#x432;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x438;&#x43B;&#x438; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435;.'
     submitSuccess: Сохранено!
   reallyDeleteProgram: Вы действительно хотите удалить свою программу
-  programsOf: Programs of
+  programsOf: Программы
   changePicture: '&#x421;&#x442;&#x440;&#x430;&#x43D;&#x430;'
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
+    pictureTooLarge: Не возможно использовать данное изображение, размер данного изображения превышает 5 мб.
+    uploadError: Простите, к сожалению во время загрузки произошла ошибка!
     noSupport: '&#x412;&#x430;&#x448;&#x435; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B; &#x43E;&#x442;&#x441;&#x443;&#x442;&#x441;&#x442;&#x432;&#x443;&#x435;&#x442;.'
 licenseToPlay:
-  link: License to play
+  link: Лицензия на игру
   title: '&#x41B;&#x438;&#x446;&#x435;&#x43D;&#x437;&#x438;&#x44F; &#x434;&#x43B;&#x44F; &#x43F;&#x440;&#x43E;&#x438;&#x433;&#x440;&#x44B;&#x432;&#x430;&#x43D;&#x438;&#x44F; - &#x423;&#x43A;&#x430;&#x437;&#x44B;&#x432;&#x430;&#x439;&#x442;&#x435; &#x438;&#x441;&#x442;&#x43E;&#x447;&#x43D;&#x438;&#x43A; &#x438; &#x434;&#x435;&#x43B;&#x438;&#x442;&#x435;&#x441;&#x44C;'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text1: Вообразите, что каждая программа приготовленная на Catrobat это пирог, очень особенный пирог, приготовленный по уникальному рецепту (программными блоками). Каждый может поделиться своим своим уникальным рецептом пирога с каждым членом общества Catrobat. И это значит что каждый сможет учиться на опыте других и приготовить свой особенный пирог!
+  text2: 'Нет никаких секретов: все инструкции или рецепты для приготовления какого угодно пирога открыты для всех желающих, любой может использовать эти рецпты сколько угодно раз, менять их или готовить по ним свои собственные идеи... То есть пироги.'
+  text3: 'Вы можете есть пироги или используя рецепты других пользователей, создать свой собственный рецепт, возможно с другими ингредиентами. Это возможно благодаря двум простым требованиям:'
+  text4: В основе сообщества Catrobat, стоит этот подход, поскольку мы считаем что это помогает обучаться и творить внутри нашего сообщества. Раздавая рецепты и ингредиенты (скрипты и изображения), люди могут развивать идеи друг друга, и все останутся в выиграше.
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: 'Подробнее об условиях использования сообщества Catrobat на сайте %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: Делитесь рецептами ваших пирогов
+    item2: Отдайте тем, кто вдохновил вас
+  version: Версия 1.1, 2 Апреля 2013
 termsOfUse:
-  title: '&#x414;&#x430;&#x442;&#x441;&#x43A;&#x438;&#x439;'
-  headline: Welcome to the Catrobat Community!
+  title: Условия использования
+  headline: Добро пожаловать в сообщество Catrobat!
   text1: '&#x432;&#x441;&#x435;&#x445; &#x432;&#x43E;&#x437;&#x440;&#x430;&#x441;&#x442;&#x43E;&#x432; (&#x43E;&#x442; &#x434;&#x435;&#x442;&#x435;&#x439; &#x434;&#x43E; &#x43F;&#x43E;&#x434;&#x440;&#x43E;&#x441;&#x442;&#x43A;&#x43E;&#x432;, &#x431;&#x430;&#x431;&#x443;&#x448;&#x435;&#x43A; &#x438; &#x434;&#x435;&#x434;&#x443;&#x448;&#x435;&#x43A;)'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
+  text2: 'Нам нужна ваша помощь для того чтобы сделать это сообщество комфортным для каждого. Вот как вы можете помочь:'
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text4: 'Этот подарок вам от нас:'
+  text5: 'Наши условия использования обслуживания:'
   list1:
     item1: '&#x441;&#x43E; &#x432;&#x441;&#x435;&#x43C;&#x438; &#x443;&#x440;&#x43E;&#x432;&#x43D;&#x44F;&#x43C;&#x438; &#x43E;&#x43F;&#x44B;&#x442;&#x430;'
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item2: Для всех возрастов ( от детей и до подростков, и бабушек, и дедушек)
+    item3: С любым уровнем опыта
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: Будьте вежливы. Когда вы делитесь своими программами, помните что ваши работы могут видеть пользователи любого возраста и любого происхождения.
     item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
     item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
+    item4: Держите личную информацию при себе. Не открывайте ни кому адрес своей электронной почты, номер телефона, или другие личные данные.
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
     item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
@@ -386,43 +391,75 @@ help:
         text6: Upload the program that is currently opened.
   tutorialcards:
     title: Обучение
-    description1: This tutorials show you how to use effective tricks in
-    description2: Pocket Code.
+    description1: These tutorials show you how to use effective tricks in Pocket Code.
     getReady: 'Get Ready:'
     tryCode: 'Try this code:'
     doIt: 'Do it:'
     tip: 'Extra Tip:'
     card1:
       title: Change Size
-      description: Tap the duck to change the size.
+      description: Change the size of an object.
+      one: Add the object of which you would like to change the size, e.g. Animal.
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
       title: Change Look
-      description: Use this trick to count automatically.
+      description: Change the looks of an object.
+      one: Add the object of which you would like to change its look, e.g. items.
+      two: "Include further pictures in the object's looks."
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Moving Animation
-      description: Use this trick when you want a flying parrot.
+      title: Animation
+      description: Animate objects
+      one: Add the object you want to be moving.
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
       title: Скользить
-      description: Move smoothly from one point to another.
+      description: Let your object glide over the screen.
+      one: Add the object you want to be gliding. e.g. plane.
+      two: Insert the following bricks and define the area in which the movement should happen.
     card5:
-      title: Play Sound
-      description: Tap the drum to play this sound.
-      extra1: '1. Click "+"'
-      extra2: '2. Select "Pocket Code Recorder"'
-      extra3: 3. Press icon to record your sound
+      title: Play a Sound
+      description: Play a sound by tapping on the object.
+      one: Add the object you want to be playing a sound, e.g. dog.
+      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
-      title: Speak Something
-      description: Use this code to make an object speaking.
+      title: Говорить
+      description: Let your object speak.
+      one: Add the object you want to be speaking, e.g. Carrie.
+      two: Insert the following bricks in order to make the voice output possible.
     card7:
-      title: GSensor
-      description: Use this trick to control an object with the inclination of your device.
-      extra1: If too sensitive, divide by 10
+      title: Sensor
+      description: Control an object by using the inclination sensors.
+      one: Add the object you want to be moving on stage.
+      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
     card8:
       title: Compass
-      description: Use this code to make a compass.
+      description: Create you own compass
+      one: Add the object you want to point in compass direction.
+      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
       title: Вещать всем
-      description: Look at this code! This shows you how to communicate between objects.
+      description: Send messages from one object to another.
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
+      three: In this case the background changes when the object in the front layer is tapped.
+    card10:
+      title: Show variable
+      description: Show the value of a variable.
+      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
+      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
+      three: Through „Show variable“ you can display the values on stage.
+    card11:
+      title: Collision detection
+      description: Detect a collision between two objects.
+      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
+      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+    card12:
+      title: Face detection
+      description: Control an object by using face detection.
+      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
+      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
   starterPrograms:
     title: Starter Programs
     description: Try out these starter programs. Look inside to make changes and add your ideas.
@@ -455,6 +492,30 @@ help:
     text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
     text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
     text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+  aliceGameJamTutorialcards:
+    title1: (Welcome to) Wonderland
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: Save Alice!
+    subtitle2: Use the inclination sensors and detect a collision between objects
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: 'The Hatter - Hit and Run'
+    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
+    title4: 'The Hatter - Hit and Run'
+    subtitle4: Let the Hatter shoot the evil cards
+    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    title5: Whack a Cheshire Cat
+    subtitle5: Create a score by using variables
+    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    title6: A Rabbits Race
+    subtitle6: Create a moving background
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: Download the program
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
@@ -588,3 +649,12 @@ ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
+gamejam:
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to alice game jam
+  submitown:
+    header: be aware
+    subheader: You can only submit your own programs
+    text: |
+      But why not create your own!
+      Take part in the #AliceGameJam

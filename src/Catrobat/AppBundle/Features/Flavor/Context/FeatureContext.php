@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Features\Flavor\Context;
 
 use Behat\Gherkin\Node\TableNode;
@@ -7,7 +6,6 @@ use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
@@ -15,37 +13,40 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends BaseContext
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Support Functions
 
-  private function getStandardProgramFile()
-  {
-      $filepath = self::FIXTUREDIR.'test.catrobat';
-      assertTrue(file_exists($filepath), 'File not found');
-
-      return new UploadedFile($filepath, 'test.catrobat');
-  }
-
-    private function getPhiroProProgramFile()
+    /**
+     * Initializes context with parameters from behat.yml.
+     *
+     * @param array $parameters            
+     */
+    public function __construct($error_directory)
     {
-        $filepath = $this->generateProgramFileWith(array('applicationName' => 'Pocket Phiro'));
+        parent::__construct();
+        $this->setErrorDirectory($error_directory);
+    }
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Support Functions
+    private function getStandardProgramFile()
+    {
+        $filepath = self::FIXTUREDIR . 'test.catrobat';
         assertTrue(file_exists($filepath), 'File not found');
-
-        return new UploadedFile($filepath, 'program_generated.catrobat');
+        
+        return new UploadedFile($filepath, 'test.catrobat');
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////
-
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////
+    
     /**
      * @When /^I upload a catrobat program with the phiro app$/
      */
     public function iUploadACatrobatProgramWithThePhiroProApp()
     {
         $user = $this->insertUser();
-        $program = $this->getPhiroProProgramFile();
-        $response = $this->upload($program, $user);
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+        $program = $this->getStandardProgramFile();
+        $response = $this->upload($program, $user, 'pocketphiro');
+        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -56,7 +57,7 @@ class FeatureContext extends BaseContext
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
         assertNotNull($program, 'No program added');
-        assertEquals('pocketphiropro', $program->getFlavor(), 'Program is NOT flagged a phiro');
+        assertEquals('pocketphiro', $program->getFlavor(), 'Program is NOT flagged a phiro');
     }
 
     /**
@@ -67,7 +68,7 @@ class FeatureContext extends BaseContext
         $user = $this->insertUser();
         $program = $this->getStandardProgramFile();
         $response = $this->upload($program, $user);
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -102,14 +103,14 @@ class FeatureContext extends BaseContext
         $returned_programs = $responseArray['CatrobatProjects'];
         $expected_programs = $table->getHash();
         assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
-        for ($i = 0; $i < count($expected_programs); ++$i ) {
+        for ($i = 0; $i < count($expected_programs); ++ $i) {
             $found = false;
-            for ($j = 0; $j < count($returned_programs); ++$j ) {
+            for ($j = 0; $j < count($returned_programs); ++ $j) {
                 if ($expected_programs[$i]['name'] === $returned_programs[$j]['ProjectName']) {
                     $found = true;
                 }
             }
-            assertTrue($found, $expected_programs[$i]['name'].' was not found in the returned programs');
+            assertTrue($found, $expected_programs[$i]['name'] . ' was not found in the returned programs');
         }
     }
 
@@ -119,12 +120,12 @@ class FeatureContext extends BaseContext
     public function thereArePrograms(TableNode $table)
     {
         $programs = $table->getHash();
-        for ($i = 0; $i < count($programs); ++$i ) {
+        for ($i = 0; $i < count($programs); ++ $i) {
             $config = array(
-          'name' => $programs[$i]['name'],
-          'flavor' => $programs[$i]['flavor'],
-        );
-
+                'name' => $programs[$i]['name'],
+                'flavor' => $programs[$i]['flavor']
+            );
+            
             $this->insertProgram(null, $config);
         }
     }
@@ -134,7 +135,7 @@ class FeatureContext extends BaseContext
      */
     public function allProgramsAreFromTheSameUser()
     {
-        ///
+        // /
     }
 
     /**
@@ -142,6 +143,8 @@ class FeatureContext extends BaseContext
      */
     public function iGetTheUserSProgramsWith($url)
     {
-        $this->getClient()->request('GET', $url, array('user_id' => 1));
+        $this->getClient()->request('GET', $url, array(
+            'user_id' => 1
+        ));
     }
 }

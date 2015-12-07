@@ -24,7 +24,7 @@ class ReportController extends Controller
     /* @var $programmanager \Catrobat\AppBundle\Entity\ProgramManager */
     /* @var $program \Catrobat\AppBundle\Entity\Program */
 
-    $context = $this->get('security.context');
+      $context = $this->get('security.context');
       $programmanager = $this->get('programmanager');
       $entityManager = $this->getDoctrine()->getManager();
       $eventdispacher = $this->get('event_dispatcher');
@@ -67,6 +67,9 @@ class ReportController extends Controller
       $response = array();
       $response['answer'] = $this->trans('success.report');
       $response['statusCode'] = StatusCode::OK;
+
+      $request->attributes->set('remove_post_from_facebook', true);
+      $request->attributes->set('program_id', $program->getId());
 
       return JsonResponse::create($response);
   }

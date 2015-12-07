@@ -3,6 +3,7 @@
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
+/app/config/parameters_dev.yml
 /app/logs/*
 /build/
 /vendor/
@@ -23,3 +24,4 @@ crowdin-cli.jar
 /.rsync_cache
 Catroweb.iml
 .idea/vcs.xml
+/node_modules/

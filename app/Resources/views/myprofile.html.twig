@@ -1,9 +1,7 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  {% stylesheets 'css/custom/myprofile.less' filter='cssrewrite,lessphp' output='compiled/myprofile.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" />
-  {% endstylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/myprofile.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -15,6 +13,7 @@
     <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
     <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
     <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
+    {% if not app.user.limited %}
     <div id="avatar-upload">
       <div>
         <input type="file" name="file">
@@ -22,7 +21,9 @@
         <div class="button-show-ajax img-load-ajax"></div>
       </div>
     </div>
+    {% endif %}
   </div>
+  {% if not app.user.limited %}
   <div id="profile-form">
 
     <form>
@@ -81,8 +82,13 @@
     </form>
 
   </div>
+  {% endif %}
   <div class="clear"></div>
+  {% if not app.user.limited %}
   <div id="myprofile-programs">
+  {% else %}
+  <div id="user-programs">
+  {% endif %}
     <h1>{{ "profile.myPrograms"|trans({}, "catroweb") }}</h1>
     <div class="programs"></div>
   </div>
@@ -92,9 +98,14 @@
 {% block js %}
   <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
   <script>
+    {% if not app.user.limited %}
     var programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}');
     var profile = new MyProfile('{{ path('profile_save') }}', '{{ path('profile_delete_program') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
     programs.initProfile({{ app.user.id }});
     profile.init();
-  </script>
+    {% else %}
+    var programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}');
+    programs.initProfile({{ app.user.id }});
+    {% endif %}
+    </script>
 {% endblock %}

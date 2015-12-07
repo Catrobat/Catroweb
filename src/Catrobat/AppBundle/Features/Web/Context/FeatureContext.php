@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
+use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
@@ -257,6 +258,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             assertTrue(false);
         }
         break;
+      case 'Game Design':
+          if ($arg1 == 'big') {
+              $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
+              $path = '/images/help/alice_tut.png';
+          } elseif ($arg1 == 'small') {
+              $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
+              $path = '/images/help/alice_tut_mobile.png';
+          } else {
+              assertTrue(false);
+          }
+          break;
       case 'Step By Step':
         if ($arg1 == 'big') {
             $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
@@ -276,6 +288,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $img = $this->getSession()->getPage()->findById('starters');
         $path = '/images/help/starters.png';
         break;
+      case 'Education Platform':
+          if ($arg1 == 'big') {
+              $img = $this->getSession()->getPage()->findById('edu-desktop');
+              $path = '/images/help/edu_site.png';
+          } elseif ($arg1 == 'small') {
+              $img = $this->getSession()->getPage()->findById('edu-mobile');
+              $path = '/images/help/edu_site_mobile.png';
+          } else {
+              assertTrue(false);
+          }
+          break;
       case 'Discussion':
         if ($arg1 == 'big') {
             $img = $this->getSession()->getPage()->findById('discuss-desktop');
@@ -290,8 +313,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       default:
         assertTrue(false);
         break;
-
-    }
+      }
 
       if ($img != null) {
           assertEquals($img->getTagName(), 'img');
@@ -360,6 +382,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
           $program->setUploadLanguage('en');
           $program->setApproved(false);
+          $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
 
           if($program->getApkStatus() == Program::APK_READY) {
             /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
@@ -766,16 +789,33 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^the link to "([^"]*)" should be "([^"]*)"$/
+   * @Then /^the media file "([^"]*)" must have the download url "([^"]*)"$/
    */
-  public function theLinkToShouldBe($name, $name_url)
+  public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
-    $bla = $this->getSession()->getPage()->find('css', '.program a')->getAttribute('href');
-    assertTrue(is_int(strpos($bla, $name_url)));
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id." a")->getAttribute("href");
+    assertTrue(is_int(strpos($link, $file_url)));
   }
 
   /**
-<<<<<<< HEAD
+   * @Then /^I should see media file with id "([^"]*)"$/
+   */
+  public function iShouldSeeMediaFileWithId($id)
+  {
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id);
+    assertNotNull($link);
+  }
+
+  /**
+   * @Then /^I should not see media file with id "([^"]*)"$/
+   */
+  public function iShouldNotSeeMediaFileWithId($id)
+  {
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id);
+    assertNotNull($link);
+  }
+
+  /**
    * @Then /^the link of "([^"]*)" should open "([^"]*)"$/
    */
   public function theLinkOfShouldOpen($identifier, $url_type)
@@ -1187,5 +1227,75 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         }
         fclose($myfile);
         assertTrue(false, 'No entry found in parameters.yml!');
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" "([^"]*)" tutorial banners$/
+     */
+    public function iShouldSeeTutorialBanners($count, $view)
+    {
+        if($view == "desktop") {
+            for ($i = 1; ; $i++) {
+                $img = $this->getSession()->getPage()->findById('tutorial-' . $i);
+                if ($img == null)
+                    break;
+            }
+            assertEquals($count,$i-1);
+        } elseif ($view == "mobile") {
+            for ($i = 1; ; $i++) {
+                $img = $this->getSession()->getPage()->findById('tutorial-mobile-' . $i);
+                if ($img == null)
+                    break;
+            }
+            assertEquals($count,$i-1);
+        } else {
+            assertTrue(false);
+        }
+    }
+
+    /**
+     * @When /^I click on the "([^"]*)" banner$/
+     */
+    public function iClickOnTheBanner($numb)
+    {
+        switch ($numb) {
+            case 'first':
+                $this->iClick("#tutorial-1");
+                break;
+            case 'second':
+                $this->iClick("#tutorial-2");
+                break;
+            case 'third':
+                $this->iClick("#tutorial-3");
+                break;
+            case 'fourth':
+                $this->iClick("#tutorial-4");
+                break;
+            case 'fifth':
+                $this->iClick("#tutorial-5");
+                break;
+            case 'sixth':
+                $this->iClick("#tutorial-6");
+                break;
+            default:
+                assertTrue(false);
+                break;
+        }
+    }
+
+    /**
+     * @Then /^a link to the Facebook post should be displayed$/
+     */
+    public function aLinkToTheFacebookPostShouldBeDisplayed()
+    {
+        assertTrue($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
+    }
+
+    /**
+     * @Then /^a link to the Facebook post should not be displayed$/
+     */
+    public function aLinkToTheFacebookPostShouldNotBeDisplayed()
+    {
+        assertFalse($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
     }
 }

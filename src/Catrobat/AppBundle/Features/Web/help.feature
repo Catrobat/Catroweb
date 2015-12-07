@@ -8,44 +8,87 @@ Feature: Pocketcode help page
     Given I am on "/pocketcode/help"
 
   Scenario: Viewing the help overview at help page
-    When I should see a big help image "Hour of Code"
+#    When I should see a big help image "Hour of Code"
+    When I should see a big help image "Game Design"
     Then I should see a big help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
+    And I should see a big help image "Education Platform"
     And I should see a big help image "Discussion"
 
   @Mobile
   Scenario: Viewing the help overview at help page
-    When I should see a small help image "Hour of Code"
+#    When I should see a small help image "Hour of Code"
+    When I should see a small help image "Game Design"
     Then I should see a small help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
+    And I should see a small help image "Education Platform"
     And I should see a small help image "Discussion"
 
-  Scenario: Clicking on hour-of-page-desktop image at help page and test navigation
-    When I click "#hour-of-code-desktop"
-    Then  I should see "SKYDIVING STEVE"
-    And I should see "#0"
-    And I should not see an ".arrow.left" element
-    And I should see an ".arrow.right" element
-    And I should see "0" in the ".current" element
-    When I click ".arrow.right"
-    Then I should see "#1"
-    And I should see "Install \"Pocket Code\""
-    And I should see an ".arrow.left" element
-    And I should see an ".arrow.right" element
-    And I should see "1" in the ".current" element
-    When I go to "/pocketcode/hour-of-code/21"
-    Then I should see "#21"
-    And I should see "Check your scripts!"
-    And I should see an ".arrow.left" element
-    And I should not see an ".arrow.right" element
-    And I should see "21" in the ".current" element
+#  Scenario: Clicking on hour-of-page-desktop image at help page and test navigation
+#    When I click "#hour-of-code-desktop"
+#    Then  I should see "SKYDIVING STEVE"
+#    And I should see "#0"
+#    And I should not see an ".arrow.left" element
+#    And I should see an ".arrow.right" element
+#    And I should see "0" in the ".current" element
+#    When I click ".arrow.right"
+#    Then I should see "#1"
+#    And I should see "Install \"Pocket Code\""
+#    And I should see an ".arrow.left" element
+#    And I should see an ".arrow.right" element
+#    And I should see "1" in the ".current" element
+#    When I go to "/pocketcode/hour-of-code/21"
+#    Then I should see "#21"
+#    And I should see "Check your scripts!"
+#    And I should see an ".arrow.left" element
+#    And I should not see an ".arrow.right" element
+#    And I should see "21" in the ".current" element
+
+  Scenario Outline: Clicking on the alice game jam image at help page
+    When I click "#alice-tut-desktop"
+    Then I should see "6" "desktop" tutorial banners
+    When I click on the "<reference>" banner
+    Then I should see "<title>"
+
+  Examples:
+    | reference | title                     |
+    | first     | (WELCOME TO) WONDERLAND   |
+    | second    | SAVE ALICE!               |
+    | third     | THE HATTER - HIT AND RUN  |
+    | fourth    | THE HATTER - HIT AND RUN  |
+    | fifth     | WHACK A CHESHIRE CAT      |
+    | sixth     | A RABBITS RACE            |
+
+
+#    Then  I should see "SKYDIVING STEVE"
+#    And I should see "#0"
+#    And I should not see an ".arrow.left" element
+#    And I should see an ".arrow.right" element
+#    And I should see "0" in the ".current" element
+#    When I click ".arrow.right"
+#    Then I should see "#1"
+#    And I should see "Install \"Pocket Code\""
+#    And I should see an ".arrow.left" element
+#    And I should see an ".arrow.right" element
+#    And I should see "1" in the ".current" element
+#    When I go to "/pocketcode/hour-of-code/21"
+#    Then I should see "#21"
+#    And I should see "Check your scripts!"
+#    And I should see an ".arrow.left" element
+#    And I should not see an ".arrow.right" element
+#    And I should see "21" in the ".current" element
+
+#  @Mobile
+#  Scenario: Clicking on hour-of-page-mobile image at help page and test navigation
+#    When I click "#hour-of-code-mobile"
+#    Then  I should see "SKYDIVING STEVE"
 
   @Mobile
-  Scenario: Clicking on hour-of-page-mobile image at help page and test navigation
-    When I click "#hour-of-code-mobile"
-    Then  I should see "SKYDIVING STEVE"
+  Scenario: Clicking onthe alice game jam mobile image at help page
+    When I click "#alice-tut-mobile"
+    Then I should see "6" "mobile" tutorial banners
 
   Scenario: Clicking on step-by-step-desktop image at help page and test navigation
     When I click "#step-by-step-desktop"
@@ -73,7 +116,7 @@ Feature: Pocketcode help page
   Scenario: Clicking on tutorials image at help page and test navigation
     When I click "#tutorials"
     Then  I should see "TUTORIALS"
-    Then  I should see "This tutorials show you how to use effective tricks in POCKET CODE."
+    Then  I should see "These tutorials show you how to use effective tricks in Pocket Code."
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
     Given I am on "/pocketcode/tutorialcards"
@@ -82,16 +125,19 @@ Feature: Pocketcode help page
     Then I should see "<title>"
 
   Examples:
-    | id | title            |
-    | 1  | Change Size      |
-    | 2  | Change Look      |
-    | 3  | Moving Animation |
-    | 4  | Glide            |
-    | 5  | Play Sound       |
-    | 6  | Speak Something  |
-    | 7  | GSensor          |
-    | 8  | Compass          |
-    | 9  | Broadcast        |
+    | id | title               |
+    | 1  | Change Size         |
+    | 2  | Change Look         |
+    | 3  | Animation           |
+    | 4  | Glide               |
+    | 5  | Play a Sound        |
+    | 6  | Speak               |
+    | 7  | Sensor              |
+    | 8  | Compass             |
+    | 9  | Broadcast           |
+    | 10 | Show variable       |
+    | 11 | Collision detection |
+    | 12 | Face detection      |
 
   Scenario: Clicking on starters image at help page and test navigation
     Given there are users:

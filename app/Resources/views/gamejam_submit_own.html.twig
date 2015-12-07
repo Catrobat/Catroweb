@@ -1,0 +1,22 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+        <div id="help-container">
+            <a href="http://www.alicegamejam.com" target="_blank">
+                    <div class="help-desktop"><img class="submit-own" src="{{ asset('images/extra/submit-your-own-program-web.jpg') }}" alt="" title=""/>
+                    </div>
+                    <div class="help-mobile"><img  class="submit-own" src="{{ asset('images/extra/submit-your-own-program-mobile.jpg') }}" alt="" title=""/>
+                    </div>
+            </a>
+</div>
+<div id="alice-notice">
+                    <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
+                    <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
+                    <p>{{ ("gamejam.submitown.text")|trans({}, "catroweb")|nl2br }}</p>
+                    <p><a href="http://www.alicegamejam.com" target="_blank">www.alicegamejam.com</a></p>
+</div>
+{% endblock %}

@@ -36,7 +36,8 @@ parameters:
       catrobat.mediapackage.dir:   "%catrobat.webdir%resources_test/mediapackage/"
       catrobat.mediapackage.path:  "resources_test/mediapackage/"
       catrobat.backup.dir:         "%catrobat.webdir%resources_test/backups/"
-      
+      catrobat.snapshot.dir:         "%catrobat.webdir%resources_test/snapshots/"
+
 monolog:
     channels: ["upload"]
     handlers:
@@ -48,3 +49,8 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+            
+security:
+    firewalls:
+        main: 
+            http_basic: ~

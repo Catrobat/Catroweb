@@ -23,39 +23,14 @@ catroweb_flavored:
     resource: "routing_flavored.yml"
     prefix:   /{flavor}/
     requirements:
-      flavor:  pocketcode|pocketphiro
+      flavor:  pocketcode|pocketphiro|pocketalice
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
 
-sonata_user_resetting:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
-    prefix: /{flavor}/resetting
-    prefix: /{flavor}/catroid/resetting #app-hack
-
-sonata_user_profile:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
-    prefix: /{flavor}/profile
-
-sonata_user_register:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
-    prefix: /{flavor}/register
-
-sonata_user_change_password:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-    prefix: /{flavor}/profile
-
 sonata_user_admin_security_logout:
     pattern: /logout
     defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" } 
-
-sonata_user_profile_show:
-    pattern: /{flavor}/myprofile
-    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
-
-fos_user_profile_show:
-    pattern: /{flavor}/myprofile
-    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
 
 old_version_error:
     path: /error/oldversion
@@ -66,7 +41,3 @@ old_version_error:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-login:
-    path:      /{flavor}/login
-    defaults:  { _controller: FOSUserBundle:Security:login }
-    requirements: { "flavor": "pocketcode|pocketkodey" }

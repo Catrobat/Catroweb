@@ -25,3 +25,31 @@ login:
 logout:
     path: logout
     defaults:  { _controller: AppBundle:Security\Logout:logout }
+    
+sonata_user_resetting:
+    resource: "./sonata/sonata_resetting_1.xml"
+    prefix: /resetting
+    prefix: /catroid/resetting #app-hack
+    
+###
+
+sonata_user_profile:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
+    prefix: /profile
+
+sonata_user_register:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
+    prefix: /register
+
+sonata_user_change_password:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+    prefix: /profile
+
+sonata_user_profile_show:
+    pattern: /myprofile
+    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
+
+fos_user_profile_show:
+    pattern: /myprofile
+    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
+

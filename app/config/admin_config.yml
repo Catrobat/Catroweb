@@ -72,6 +72,7 @@ sonata_admin:
                     - catrowebadmin.block.programs.all
                     - catrowebadmin.block.programs.approve
                     - catrowebadmin.block.programs.reported
+                    - catrowebadmin.block.programs.stats
 
             sonata.admin.group.featured:
                 label:           Special Programs
@@ -106,6 +107,7 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
+                    - catrowebadmin.block.users.limited
 
             sonata.admin.group.tools:
                 label:           Tools
@@ -116,6 +118,13 @@ sonata_admin:
                     - catrowebadmin.block.tools.notify
                     - catrowebadmin.block.tools.rudewords
 
+            sonata.admin.group.gamejams:
+                label:           GameJam
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-cogs"></i>'
+                items:
+                    - catrowebadmin.block.gamejam
+                    - catrowebadmin.block.program.snapshots
 
     security:
         handler: sonata.admin.security.handler.acl

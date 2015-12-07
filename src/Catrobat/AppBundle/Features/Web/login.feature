@@ -35,16 +35,14 @@
     When I click "#pw-request"
     Then I should be on "/pocketcode/resetting/request"
     When I fill in "username" with "abcd"
-    And I press "reset_pw"
-    And I wait for a second
+    And I press "recover"
     Then I should see "Your username or email address was not found."
     When I fill in "username" with "Catrobat"
-    And I press "reset_pw"
-    And I wait for a second
+    And I press "recover"
     Then I should see "An email was sent to your email address. Please check your inbox."
     When I go to "/pocketcode/resetting/request"
     And I fill in "username" with "Catrobat"
-    And I press "reset_pw"
+    And I press "recover"
     And I wait for a second
     Then I should see "The password for this user has already been requested within the last 24 hours."
 
@@ -61,7 +59,7 @@ Scenario: The referer should work even after one failed login
   And I fill in "username" with "Catrobat"
   And I fill in "password" with "123456"
   Then I press "Login"
-  And I should see a big help image "Hour of Code"
+  And I should see a big help image "Game Design"
   
 Scenario: When visiting the page directly to the login page, after login i should be on the index page
   Given I am on "/pocketcode/login"

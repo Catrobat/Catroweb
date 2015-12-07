@@ -21,7 +21,6 @@ Feature: Report a program
       {"answer":"Your report was successfully sent!","statusCode":200}
       """
 
-
   Scenario: report program with invalid project
     Given I have a parameter "program" with value "4"
     And I have a parameter "note" with value "Bad Project"

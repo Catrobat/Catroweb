@@ -70,7 +70,7 @@ Scenario: login as AppApprover-User should give access only to ApproveProgram in
     | name                    | password  | groups                 |
     | ldap-approve            | 654321    | Webserver-AppApprovers |
   When I POST login with user "ldap-approve" and password "654321"
-  And I GET "/admin/catrobat/app/program/list"
+  And I GET "/admin/approve/list"
   Then the response should contain "Program List"
   When I GET "/admin/media_package/list"
   Then the response should contain "Forbidden"
@@ -88,7 +88,7 @@ Scenario: login as User in multiple LDAP groups should give access to multiple a
     | name                    | password  | groups                                                       |
     | ldap-approve            | 654321    | Webserver-AppApprovers,Webserver-FeaturedProgramsMaintainers |
   When I POST login with user "ldap-approve" and password "654321"
-  And I GET "/admin/catrobat/app/program/list"
+  And I GET "/admin/approve/list"
   Then the response should contain "Program List"
   When I GET "/admin/featured_program/list"
   Then the response should contain "Featured Program List"

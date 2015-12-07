@@ -25,7 +25,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
-        "doctrine/migrations": "1.0.*@dev",
+        "doctrine/migrations": "*@dev",
         "doctrine/doctrine-migrations-bundle": "1.0.*",
         "leafo/lessphp": "dev-master",
         "hwi/oauth-bundle": "*@dev",
@@ -41,9 +41,11 @@
         "ircmaxell/password-compat": "~1.0",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
         "google/apiclient": "~1.1",
-        "facebook/php-sdk-v4" : "~4.0",
+        "facebook/php-sdk-v4" : "~5.0",
         "fr3d/ldap-bundle": "2.0.*@dev",
-        "ircmaxell/password-compat": "~1.0"
+        "ircmaxell/password-compat": "~1.0",
+        "liip/theme-bundle": "dev-master",
+        "willdurand/geocoder-bundle": "@stable"
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",

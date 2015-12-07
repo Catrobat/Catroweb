@@ -29,6 +29,6 @@ class VersionValidatorSpec extends ObjectBehavior
     {
         $xml = simplexml_load_file(__SPEC_CACHE_DIR__.'/base/code.xml');
         $xml->header->catrobatLanguageVersion = '0.90';
-        $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($xml);
+        $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\OldCatrobatLanguageVersionException')->duringValidate($xml);
     }
 }

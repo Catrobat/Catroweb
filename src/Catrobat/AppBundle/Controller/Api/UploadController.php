@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -13,89 +12,115 @@ use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Catrobat\AppBundle\Exceptions\Upload\MissingChecksumException;
+use Catrobat\AppBundle\Exceptions\Upload\InvalidChecksumException;
+use Catrobat\AppBundle\Exceptions\Upload\MissingPostDataException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Translation\TranslatorInterface;
+use Catrobat\AppBundle\Entity\GameJamRepository;
+use Doctrine\ORM\EntityRepository;
+use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 
-class UploadController extends Controller
+/**
+ * @Route(service="controller.upload")
+ */
+class UploadController
 {
+
+    private $usermanager;
+
+    private $tokenstorage;
+
+    private $programmanager;
+
+    private $gamejamrepository;
+
+    private $tokengenerator;
+
+    private $translator;
+
+    public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager, GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator, TranslatorInterface $translator)
+    {
+        $this->usermanager = $usermanager;
+        $this->tokenstorage = $tokenstorage;
+        $this->programmanager = $programmanager;
+        $this->gamejamrepository = $gamejamrepository;
+        $this->tokengenerator = $tokengenerator;
+        $this->translator = $translator;
+    }
+
     /**
-   * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"})
-   * @Method({"POST"})
-   */
-  public function uploadAction(Request $request)
-  {
-      $user_manager = $this->get('usermanager');
-      $context = $this->get('security.context');
-      $program_manager = $this->get('programmanager');
-      $tokenGenerator = $this->get('tokengenerator');
+     * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function uploadAction(Request $request)
+    {
+        return $this->processUpload($request);
+    }
 
-      $response = array();
-      if ($request->files->count() != 1) {
-          $response['statusCode'] = StatusCode::MISSING_POST_DATA;
-          $response['answer'] = $this->trans('errors.post-data');
-      } elseif (!$request->request->has('fileChecksum')) {
-          $response['statusCode'] = StatusCode::MISSING_CHECKSUM;
-          $response['answer'] = $this->trans('errors.checksum.missing');
-      } else {
-          $file = array_values($request->files->all())[0];
-          if (md5_file($file->getPathname()) != $request->request->get('fileChecksum')) {
-              $response['statusCode'] = StatusCode::INVALID_CHECKSUM;
-              $response['answer'] = $this->trans('errors.checksum.invalid');
-          } else {
-              try {
-                  $add_program_request = new AddProgramRequest($context->getToken()->getUser(), $file, $request->getClientIp());
+    /**
+     * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"})
+     * @Method({"POST"})
+     */
+    public function submitAction(Request $request)
+    {
+        $jam = $this->gamejamrepository->getCurrentGameJam();
+        if ($jam == null)
+        {
+            throw new NoGameJamException();
+        }
+        return $this->processUpload($request, $jam);
+    }
 
-                  $id = $program_manager->addProgram($add_program_request)->getId();
-                  $user = $context->getToken()->getUser();
-                  $user->setToken($tokenGenerator->generateToken());
-                  $user_manager->updateUser($user);
+    private function processUpload(Request $request, $gamejam = null)
+    {
+        $response = array();
+        if ($request->files->count() != 1) {
+            throw new MissingPostDataException();
+        } elseif (! $request->request->has('fileChecksum')) {
+            throw new MissingChecksumException();
+        } else {
+            $file = array_values($request->files->all())[0];
+            if (md5_file($file->getPathname()) != $request->request->get('fileChecksum')) {
+                throw new InvalidChecksumException();
+            } else {
+                $user = $this->tokenstorage->getToken()->getUser();
+                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
+                
+                $program = $this->programmanager->addProgram($add_program_request);
+                $user->setToken($this->tokengenerator->generateToken());
+                $this->usermanager->updateUser($user);
 
-                  $response['projectId'] = $id;
-                  $response['statusCode'] = StatusCode::OK;
-                  $response['answer'] = $this->trans('success.upload');
-                  $response['token'] = $user->getToken();
-              } catch (InvalidCatrobatFileException $exception) {
-                  $response['statusCode'] = $exception->getStatusCode();
-                  switch ($exception->getStatusCode()) {
-            case StatusCode::PROJECT_XML_MISSING:
-              $response['answer'] = $this->trans('errors.xml.missing');
-              break;
-            case StatusCode::INVALID_XML:
-              $response['answer'] = $this->trans('errors.xml.invalid');
-              break;
-            case StatusCode::IMAGE_MISSING:
-              $response['answer'] = $this->trans('errors.image.missing');
-              break;
-            case StatusCode::UNEXPECTED_FILE:
-              $response['answer'] = $this->trans('errors.file.unexpected');
-              break;
-            case StatusCode::INVALID_FILE:
-              $response['answer'] = $this->trans('errors.file.invalid');
-              break;
-            case StatusCode::RUDE_WORD_IN_DESCRIPTION:
-              $response['answer'] = $this->trans('errors.description.rude');
-              break;
-            case StatusCode::RUDE_WORD_IN_PROGRAM_NAME:
-              $response['answer'] = $this->trans('errors.programname.rude');
-              break;
-            case StatusCode::OLD_CATROBAT_LANGUAGE:
-              $response['answer'] = $this->trans('errors.languageversion.tooold');
-              break;
-            case StatusCode::OLD_CATROBAT_VERSION:
-              $response['answer'] = $this->trans('errors.programversion.tooold');
-              break;
-            default:
-              $response['answer'] = $this->trans('errors.unknown');
-          }
-              }
-          }
-      }
+                $response['projectId'] = $program->getId();
+                $response['statusCode'] = StatusCode::OK;
+                $response['answer'] = $this->trans('success.upload');
+                $response['token'] = $user->getToken();
+                if ($gamejam !== null && !$program->isAcceptedForGameJam())
+                {
+                    $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
+                }
 
-      $response['preHeaderMessages'] = '';
+                $request->attributes->set('post_to_facebook', true);
+                $request->attributes->set('program_id', $program->getId());
+            }
+        }
+        
+        $response['preHeaderMessages'] = '';
 
-      return JsonResponse::create($response);
-  }
+        return JsonResponse::create($response);
+    }
 
+    private function assembleFormUrl($gamejam, $user, $program)
+    {
+        $url = $gamejam->getFormUrl();
+        $url = str_replace("%CAT_ID%", $program->getId(), $url);
+        $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
+        $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
+        return $url;
+    }
+    
     private function trans($message, $parameters = array())
     {
-        return  $this->get('translator')->trans($message, $parameters, 'catroweb');
+        return $this->translator->trans($message, $parameters, 'catroweb');
     }
 }

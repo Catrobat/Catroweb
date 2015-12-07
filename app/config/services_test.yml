@@ -52,3 +52,21 @@ services:
         arguments:
           - "%ldap_base_dn%"
           
+    facebook_post_service:
+        class: Catrobat\AppBundle\Features\Helpers\FakeFacebookPostService
+        arguments: ["@real_facebook_post_service"]
+
+    real_facebook_post_service:
+        class: Catrobat\AppBundle\Services\FacebookPostService
+        arguments: ["@router", "@service_container"]
+
+    download_statistics:
+        class: Catrobat\AppBundle\Features\Helpers\FakeDownloadStatisticsService
+        arguments: ["@real_download_statistics"]
+
+    real_download_statistics:
+            class: Catrobat\AppBundle\Services\DownloadStatisticsService
+            arguments:
+              - "@programmanager"
+              - "@doctrine.orm.entity_manager"
+              - "@bazinga_geocoder.geocoder"

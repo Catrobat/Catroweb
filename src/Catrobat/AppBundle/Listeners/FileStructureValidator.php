@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
+use Catrobat\AppBundle\Exceptions\Upload\UnexpectedFileException;
 
 class FileStructureValidator
 {
@@ -30,7 +31,7 @@ class FileStructureValidator
             foreach ($finder as $file) {
                 $list[] = $file->getRelativePathname();
             }
-            throw new InvalidCatrobatFileException('unexpected files found: '.implode(', ', $list));
+            throw new UnexpectedFileException('unexpected files found: '.implode(', ', $list));
         }
     }
 }
