@@ -22,8 +22,8 @@ class DownloadStatisticsListener
         $attributes = $event->getRequest()->attributes;
         if ($attributes->has('download_statistics_program_id')) {
             $program_id = $attributes->get('download_statistics_program_id');
-            $ip = $this->getIp($event);
-            $ip = $this->convertStreetIp($ip);
+            $ip = $event->getRequest()->getClientIp();
+            $ip = $this->getOriginalClientIp($ip);
             $user_agent = $event->getRequest()->headers->get('User-Agent');
             $user = $this->security_token_storage->getToken()->getUser();
 
@@ -45,21 +45,7 @@ class DownloadStatisticsListener
         }
     }
 
-    private function getIp(PostResponseEvent $event)
-    {
-        $server = $event->getRequest()->server;
-        if (!empty($server->get('HTTP_CLIENT_IP'))) //if from shared
-        {
-            return $server->get('HTTP_CLIENT_IP');
-        } else if (!empty($server->get('HTTP_X_FORWARDED_FOR'))) //if from a proxy
-        {
-            return $server->get('HTTP_X_FORWARDED_FOR');
-        } else {
-            return $server->get('REMOTE_ADDR');
-        }
-    }
-
-    private function convertStreetIp($ip)
+    private function getOriginalClientIp($ip)
     {
         if (strpos($ip,',') !== false) {
             $ip = substr($ip,0,strpos($ip,','));
