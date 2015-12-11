@@ -51,6 +51,7 @@ class ApproveProgramsAdmin extends Admin
           ->add('Images', null, array('template' => ':Admin:program_containing_image.html.twig'))
           ->add('Sounds', null, array('template' => ':Admin:program_containing_sound.html.twig'))
           ->add('Strings', null, array('template' => ':Admin:program_containing_strings.html.twig'))
+          ->add('Objects', null, array('template' => ':Admin:program_containing_code_objects.html.twig'))
           ->add('', null, array('template' => ':Admin:program_approve_action.html.twig'))
       ;
     }
@@ -143,6 +144,16 @@ class ApproveProgramsAdmin extends Admin
         }
 
         return $this->extractedProgram->getContainingStrings();
+    }
+
+    public function getContainingCodeObjects($object){
+        if ($this->extractedProgram == null) {
+            $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
+            $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
+            $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+        }
+
+        return $this->extractedProgram->getContainingCodeObjects();
     }
 
     protected function configureRoutes(RouteCollection $collection)

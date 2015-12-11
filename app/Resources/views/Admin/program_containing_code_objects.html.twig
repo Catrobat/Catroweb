@@ -1,0 +1,18 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+{% block field %}
+    {% set codeObjects = admin.getContainingCodeObjects(object) %}
+    <div style="">
+        {% if codeObjects|length == 0 %}
+            No Code in this project
+        {% else %}
+            {% autoescape false %}
+            {% for codeObject in codeObjects %}
+                <div style="">
+                    Object name: {{ codeObject.getName }} <br/>
+                    {{ codeObject.getCode }} <br/>
+                </div>
+            {% endfor %}
+            {% endautoescape %}
+        {% endif %}
+    </div>
+{% endblock %}
