@@ -90,10 +90,13 @@ services:
         class: Catrobat\AppBundle\Services\MediaPackageFileRepository
         arguments: ["%catrobat.mediapackage.dir%","%catrobat.mediapackage.path%"]
 
-
     apkrepository:
         class: Catrobat\AppBundle\Services\ApkRepository
         arguments: ["%catrobat.apk.dir%"]
+
+    backupfilerepository:
+        class: Catrobat\AppBundle\Services\BackupFileRepository
+        arguments: ["%catrobat.backup.dir%"]
 
     programdevicepermissionreader:
         class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader

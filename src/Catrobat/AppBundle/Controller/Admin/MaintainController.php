@@ -2,9 +2,12 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
+use Catrobat\AppBundle\Commands\CreateBackupCommand;
+use Catrobat\AppBundle\Commands\RestoreBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Catrobat\AppBundle\Commands\CleanExtractedFileCommand;
@@ -12,6 +15,7 @@ use Catrobat\AppBundle\Commands\CleanApkCommand;
 use Catrobat\AppBundle\Commands\CleanBackupsCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class MaintainController extends Controller
 {
@@ -58,7 +62,7 @@ class MaintainController extends Controller
     }
 
 
-    public function backupAction(Request $request = NULL)
+    public function deleteBackupsAction(Request $request = NULL)
     {
         if (false === $this->admin->isGranted('BACKUP')) {
             throw new AccessDeniedException();
@@ -94,6 +98,70 @@ class MaintainController extends Controller
         return new RedirectResponse($this->admin->generateUrl("list"));
     }
 
+    public function createBackupAction(Request $request = NULL)
+    {
+        if (false === $this->admin->isGranted('BACKUP'))
+        {
+            throw new AccessDeniedException();
+        }
+
+        $command = new CreateBackupCommand();
+        $command->setContainer($this->container);
+
+        try
+        {
+            $return = $command->run(new ArrayInput(array()),new NullOutput());
+            if($return == 0)
+            {
+                $this->addFlash('sonata_flash_success', 'Create Backup OK');
+            }
+        }
+        catch (\Exception $e)
+        {
+            $this->addFlash('sonata_flash_error', 'Something went wrong: '.$e->getMessage());
+        }
+
+        return new RedirectResponse($this->admin->generateUrl("list"));
+    }
+
+    public function restoreBackupAction(Request $request = NULL)
+    {
+        if (false === $this->admin->isGranted('BACKUP'))
+        {
+            throw new AccessDeniedException();
+        }
+
+        if(!$request->get("backupFile"))
+        {
+            $this->addFlash('sonata_flash_error', 'Something went wrong: No backup file!');
+        }
+        else
+        {
+            $backupFile = $request->get("backupFile");
+            $backupFolder = $this->container->getParameter("catrobat.backup.dir");
+            $backupFilePath = $backupFolder . '/' . $backupFile;
+
+            $input["file"] = $backupFilePath;
+            $command = new RestoreBackupCommand();
+            $command->setContainer($this->container);
+
+            try
+            {
+                $return = $command->run(new ArrayInput($input),new NullOutput());
+                if($return == 0)
+                {
+                    $this->addFlash('sonata_flash_success', 'Restore Backup OK');
+                }
+            }
+            catch (\Exception $e)
+            {
+                $this->addFlash('sonata_flash_error', 'Something went wrong: '.$e->getMessage());
+            }
+        }
+
+        return new RedirectResponse($this->admin->generateUrl("list"));
+    }
+
     public function listAction(Request $request = NULL)
     {
         if (false === $this->admin->isGranted('LIST')) {
@@ -112,17 +180,23 @@ class MaintainController extends Controller
 
         $description = "This will remove all generated apk-files in the 'apk'-directory and flag the programs accordingly";
         $rm = new RemoveableMemory("Generated APKs",$description);
-        $this->setSizeOfObject($rm,$this->container->getParameter("catrobat.apk.dir"),"apk");
+        $this->setSizeOfObject($rm,$this->container->getParameter("catrobat.apk.dir"),array("apk"));
         $rm->setCommandName("Delete APKs");
         $rm->setCommandLink($this->admin->generateUrl("apk"));
         $removeableObjects[] = $rm;
 
         $description = "This will remove all backups stored on this server in the 'backup'-directory (".$this->container->getParameter("catrobat.backup.dir").")";
-        $rm = new RemoveableMemory("Manual Backups",$description);
-        $this->setSizeOfObject($rm,$this->container->getParameter("catrobat.backup.dir"),"zip");
-        $rm->setCommandName("Delete Backups");
-        $rm->setCommandLink($this->admin->generateUrl("backup"));
+        $rm = new RemoveableMemory("Manual backups",$description);
+        $this->setSizeOfObject($rm,$this->container->getParameter("catrobat.backup.dir"),array("zip","tar"));
+        $rm->setCommandName("Delete backups");
+        $rm->setCommandLink($this->admin->generateUrl("delete_backups"));
         $removeableObjects[] = $rm;
+
+        $description = "This will create a backup which will be stored on this server in the 'backup'-directory (".$this->container->getParameter("catrobat.backup.dir").")";
+        $ac = new AdminCommand("Create backup",$description);
+        $ac->setCommandName("Create backup");
+        $ac->setCommandLink($this->admin->generateUrl("create_backup"));
+        $backupCommand = $ac;
 
         $freeSpace = disk_free_space("/");
         $usedSpace = disk_total_space("/")-$freeSpace;
@@ -146,6 +220,7 @@ class MaintainController extends Controller
            'programsSpace_raw' => $programsSize,
            'programsSpace' => $this->getSymbolByQuantity($programsSize),
            'ram' => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
+           'backupCommand' => $backupCommand,
        ));
     }
 
@@ -153,16 +228,19 @@ class MaintainController extends Controller
     {
         $objects = array();
         $backupFolder = $this->container->getParameter("catrobat.backup.dir");
-        $files = array_reverse(glob($backupFolder.'/*.zip')); // get all file names
+        $files = array_merge(array_reverse(glob($backupFolder.'/*.zip')),array_reverse(glob($backupFolder.'/*.tar'))); // get all file names
         foreach($files as $file) { // iterate files
             $filename = pathinfo($file, PATHINFO_BASENAME);
             $backupObject = new RemoveableMemory($filename,"created at: ".date ("d.F.Y H:i:s", filemtime($file)));
             $backupObject->setSizeRaw(filesize($file));
             $backupObject->setSize($this->getSymbolByQuantity($backupObject->size_raw));
-            $backupObject->setCommandLink($this->admin->generateUrl("backup",array("backupFile"=>$filename)));
-            $backupObject->setCommandName("Delete backup");
+            $backupObject->setCommandLink($this->admin->generateUrl("delete_backups",array("backupFile"=>$filename)));
+            $backupObject->setCommandName("Delete backups");
+            $backupObject->setDownloadLink($this->generateUrl("backup_download",array("backupFile"=>$filename)));
+            $backupObject->setExecuteLink($this->admin->generateUrl("restore_backup",array("backupFile"=>$filename)));
             $objects[]=$backupObject;
         }
+
         return $objects;
     }
 
@@ -172,7 +250,7 @@ class MaintainController extends Controller
         $count = 0;
         $dir_array = preg_grep('/^([^.])/', scandir($directory)); //no hidden files
         foreach($dir_array as $key=>$filename){
-            if($extension != null && pathinfo($filename,PATHINFO_EXTENSION) != $extension)
+            if($extension != null && !in_array(pathinfo($filename,PATHINFO_EXTENSION), $extension))
                 continue;
             if($filename!=".." && $filename!="."){
                 if(is_dir($directory."/".$filename)){
@@ -216,6 +294,8 @@ class RemoveableMemory
     public $size_raw;
     public $command_link;
     public $command_name;
+    public $download_link;
+    public $execute_link;
 
     public function __construct($name,$description)
     {
@@ -252,5 +332,48 @@ class RemoveableMemory
     {
         $this->command_name = $command;
     }
+    /**
+     * @param mixed $download_link
+     */
+    public function setDownloadLink($download_link)
+    {
+        $this->download_link = $download_link;
+    }
+    /**
+     * @param mixed $execute_link
+     */
+    public function setExecuteLink($execute_link)
+    {
+        $this->execute_link = $execute_link;
+    }
+}
 
+class AdminCommand
+{
+    public $name;
+    public $description;
+    public $command_link;
+    public $command_name;
+
+    public function __construct($name,$description)
+    {
+        $this->name = $name;
+        $this->description = $description;
+    }
+
+    /**
+     * @param mixed $command
+     */
+    public function setCommandLink($command)
+    {
+        $this->command_link = $command;
+    }
+
+    /**
+     * @param mixed $command
+     */
+    public function setCommandName($command)
+    {
+        $this->command_name = $command;
+    }
 }

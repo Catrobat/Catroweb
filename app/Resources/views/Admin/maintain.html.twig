@@ -9,7 +9,7 @@
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div class="col-md-6">
             <div class="box">
-                <h3 class="box-header">Disk maintenance</h3>
+                <h3 class="box-header">{{ "admin.maintain.diskMaintenance"|trans({}, "catroweb") }}</h3>
                 <div class="box-body">
                     <div>
                         <div id="piechart_3d" style="width: 100%; height: 300px; display: inline-block;"></div>
@@ -33,7 +33,7 @@
                         </div>
                         {% set i = i+1 %}
                     {% else %}
-                        No removable things available.
+                        {{ "admin.maintain.noRemovableObjects"|trans({}, "catroweb") }}
                     {% endfor %}
                 </div>
 
@@ -78,7 +78,7 @@
         </div>
         <div class="col-md-6">
             <div class="box">
-                <h3 class="box-header">Manual backups</h3>
+                <h3 class="box-header">{{ "admin.maintain.manualBackups"|trans({}, "catroweb") }}</h3>
                 <div class="box-body">
                     <div class="info-box">
                         <div class="info-box-icon"><i class="glyphicon glyphicon-info-sign"></i></div>
@@ -86,16 +86,32 @@
                         Be aware, this are just the manual created backups.<br/>
                         Currently (state 31.7.2015), admins of the institute are creating snapshots of the whole running machine 2 times a week.<br/>
                         So, not the right backup at hand? Go get it there.</div>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-header">
+                            <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ backupCommand.command_link }}"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>
                         </div>
+                    </div>
+
                     {% set i = 0 %}
                     {% for RemoveableObject in RemoveableBackupObjects %}
                         <div class="box">
                             <div class="box-header">
 
-                                <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
-                                <span style="margin-left: 5%;">
+                                <div>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.execute_link }}"><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a><br>
+                                </div>
+                                <div style="padding-top: 5px;">
+                                    <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>
+                                </div>
+
+                                <span style="padding-left: 0.2em;">
                                 {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
                                 </span>
+
                                 <span style="float: right">
                                     {{ RemoveableObject.description }}
                                 </span>
@@ -106,7 +122,7 @@
                     {% else %}
                     <div class="box">
                         <div class="box-header">
-                        No removable backups on this system available.
+                            {{ "admin.maintain.noRemovableBackupObjects"|trans({}, "catroweb") }}
                         </div>
                     </div>
                     {% endfor %}
