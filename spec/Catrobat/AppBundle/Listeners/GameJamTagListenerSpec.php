@@ -40,7 +40,7 @@ class GameJamTagListenerSpec extends ObjectBehavior
         $description = 'This is a sample description, best game EVER.';
         $program->setDescription($description);
         $this->checkDescriptionTag($program);
-        $expected = $description . '\n\n' . '#AliceGameJam';
+        $expected = $description . "\n\n#AliceGameJam";
         expect($program->getDescription())->toBeLike($expected);
     }
 

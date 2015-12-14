@@ -25,6 +25,7 @@ class AllProgramsAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
+            ->add('description')
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('downloads')
             ->add('views')
