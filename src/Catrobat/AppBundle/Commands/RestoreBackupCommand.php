@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -22,7 +23,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
     {
         $this->setName('catrobat:backup:restore')
             ->setDescription('Restores a backup')
-            ->addArgument('file', InputArgument::REQUIRED, 'Backupfile (*.zip)');
+            ->addArgument('file', InputArgument::REQUIRED, 'Backupfile (*.zip,*.tar)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,7 +41,21 @@ class RestoreBackupCommand extends ContainerAwareCommand
             throw new \Exception('This script only supports mysql databases');
         }
 
-        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
+        $command = new PurgeCommand();
+        $command->setContainer($this->getContainer());
+        try
+        {
+            $return = $command->run(new ArrayInput(array()),new NullOutput());
+            if($return == 0)
+            {
+                $output->writeln('Purge Command OK');
+            }
+        }
+        catch (\Exception $e)
+        {
+            $output->writeln('Something went wrong: '.$e->getMessage());
+        }
+        //$this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
 
         $sqlpath = tempnam(sys_get_temp_dir(), 'Sql');
         copy('phar://'.$backupfile.'/database.sql', $sqlpath);
