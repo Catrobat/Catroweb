@@ -24,6 +24,11 @@
     <h1>{{ "programs.submitted"|trans({}, "catroweb") }}</h1>
     <div class="programs"></div>
   </div>
+
+    <div id="related">
+    <h1>{{ "programs.related"|trans({}, "catroweb") }}</h1>
+    <div class="programs"></div>
+  </div>
   
 {% endblock %}
 
@@ -32,7 +37,9 @@
   <script>
     var sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}');
     var submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}');
+    var related = new ProgramLoader('#related', '{{ path('api_search_programs') }}?q=alice');
     sample.init();
     submissions.init();
+    related.init();
   </script>
 {% endblock %}
