@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,6 +29,9 @@ class PurgeCommand extends ContainerAwareCommand
 
             return;
         }
+
+        if ($this->getApplication() == null)
+            $this->setApplication(new Application());
 
         $output->writeln('Deleting all catrobat data');
 

@@ -3,6 +3,13 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>
+    function confirmRestoreBackup()
+    {
+        var confirmed = confirm("Are you sure to restore the backup? This will reset the current data.");
+        return confirmed;
+    }
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -92,8 +99,21 @@
                         <div class="box">
                             <div class="box-header">
 
+<<<<<<< HEAD
                                 <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
                                 <span style="margin-left: 5%;">
+=======
+                                <div>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.execute_link }}" onClick="return confirmRestoreBackup();"><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a><br>
+                                </div>
+                                <div style="padding-top: 5px;">
+                                    <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>
+                                </div>
+
+                                <span style="padding-left: 0.2em;">
+>>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
                                 {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
                                 </span>
                                 <span style="float: right">
