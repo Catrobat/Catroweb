@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
@@ -45,16 +46,19 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $command->setContainer($this->getContainer());
         try
         {
-            $return = $command->run(new ArrayInput(array()),new NullOutput());
+            $return = $command->run(new ArrayInput(array('--force' => true)),new NullOutput());
             if($return == 0)
             {
                 $output->writeln('Purge Command OK');
             }
         }
-        catch (\Exception $e)
-        {
-            $output->writeln('Something went wrong: '.$e->getMessage());
+        catch (\Exception $e) {
+            $output->writeln('Something went wrong: ' . $e->getMessage());
         }
+
+        //if ($this->getApplication() == null)
+        //    $this->setApplication(new Application());
+
         //$this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
 
         $sqlpath = tempnam(sys_get_temp_dir(), 'Sql');
@@ -84,11 +88,15 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $progress->setMessage("Extracting Featured Images");
         $progress->advance();
         $filesystem->mirror("phar://$backupfile/featured/", $this->getContainer()->getParameter('catrobat.featuredimage.dir'));
-        
+
         $progress->setMessage("Extracting Programs");
         $progress->advance();
         $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
-        
+
+        $progress->setMessage("Extracting Media Package");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/mediapackage/", $this->getContainer()->getParameter('catrobat.mediapackage.dir'));
+
         $progress->finish();
         $output->writeln('');
 
