@@ -951,11 +951,16 @@ class FeatureContext extends BaseContext
          */
         $program_manager = $this->getSymfonySupport()->getProgramManger();
         $program = $program_manager->find($project_id);
+        $user = $program->getUser();
         $fb_post_id = $program->getFbPostId();
         $fb_post_url = $program->getFbPostUrl();
+
+        $profile_url = $this->getSymfonySupport()->getRouter()->generate('profile', array('id' => $user->getId()), true);
         assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
         assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
+
+        $fb_post_message = $fb_post_message . chr(10) . 'by '  . $profile_url;
 
         $fb_id = $fb_response['id'];
         $fb_message = $fb_response['message'];

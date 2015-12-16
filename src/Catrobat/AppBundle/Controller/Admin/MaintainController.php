@@ -7,7 +7,6 @@ use Catrobat\AppBundle\Commands\RestoreBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Catrobat\AppBundle\Commands\CleanExtractedFileCommand;
@@ -15,7 +14,6 @@ use Catrobat\AppBundle\Commands\CleanApkCommand;
 use Catrobat\AppBundle\Commands\CleanBackupsCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class MaintainController extends Controller
 {
@@ -68,27 +66,24 @@ class MaintainController extends Controller
             throw new AccessDeniedException();
         }
 
-        $backupFile = null;
-        if($request->get("backupFile"))
-        {
-            $backupFile = $request->get("backupFile");
-        }
-
         $command = new CleanBackupsCommand();
         $command->setContainer($this->container);
-        $input = array();
 
-        if($backupFile != null)
+        $input = array();
+        if($request->get("backupFile"))
         {
-            $input["backupfile"] = $backupFile;
-        }else
+            $input["backupfile"] = $request->get("backupFile");
+        }
+        else
+        {
             $input["--all"]="--all";
+        }
 
         try{
-            $return = $command->run(new ArrayInput($input),new NullOutput());
+            $return = $command->run(new ArrayInput($input), new NullOutput());
             if($return == 0)
             {
-                $this->addFlash('sonata_flash_success', 'Reset Backup OK');
+                $this->addFlash('sonata_flash_success', 'Delete Backups OK');
             }
         }catch (\Exception $e)
         {
@@ -108,9 +103,15 @@ class MaintainController extends Controller
         $command = new CreateBackupCommand();
         $command->setContainer($this->container);
 
+        $input = array();
+        if($request->get("backupName"))
+        {
+            $input["backupName"] = $request->get("backupName");
+        }
+
         try
         {
-            $return = $command->run(new ArrayInput(array()),new NullOutput());
+            $return = $command->run(new ArrayInput($input), new NullOutput());
             if($return == 0)
             {
                 $this->addFlash('sonata_flash_success', 'Create Backup OK');

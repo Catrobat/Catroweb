@@ -17,6 +17,11 @@ class BackupFileRepository
     $this->directory = $directory;
   }
 
+  public function getDirectory()
+  {
+    return $this->directory;
+  }
+
   public function getBackupFile($id)
   {
     return new File($this->directory . $id);

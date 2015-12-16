@@ -22,7 +22,8 @@ class DownloadBackupController extends Controller
         $backupFileRepository = $this->get('backupfilerepository');
 
         $file = $backupFileRepository->getBackupFile($backupFile);
-        if ($file->isFile()) {
+        if ($file->isFile())
+        {
             $response = new BinaryFileResponse($file);
             $d = $response->headers->makeDisposition(
               ResponseHeaderBag::DISPOSITION_ATTACHMENT,
