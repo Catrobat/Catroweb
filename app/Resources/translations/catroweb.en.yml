@@ -32,6 +32,7 @@ programs:
     viewed: Most viewed
     downloaded: Most downloaded
   random: Random Programs
+  related: Related Programs
   downloads: %downloads% downloads
   sample: Example Programs
   views: %views% views
