@@ -3,12 +3,20 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="{{ asset('js/plugins/jquery.confirm.js') }}"></script>
     <script>
-    function confirmRestoreBackup()
-    {
-        var confirmed = confirm("Are you sure to restore the backup? This will reset the current data.");
-        return confirmed;
-    }
+        $(window).load(function(){
+            $(".confirm").confirm({
+                text: "{{ "admin.maintain.confirmationText"|trans({}, "catroweb") }}",
+                title: "{{ "admin.maintain.confirmationTitle"|trans({}, "catroweb") }}",
+                confirmButton: "{{ "admin.maintain.confirmationConfirm"|trans({}, "catroweb") }}",
+                cancelButton: "{{ "admin.maintain.confirmationCancel"|trans({}, "catroweb") }}",
+                post: true,
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-default",
+                dialogClass: "modal-dialog modal-md"
+            });
+        })
     </script>
 {% endblock %}
 
@@ -97,7 +105,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ backupCommand.command_link }}"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>
+                            <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ backupCommand.command_link }}"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>
                         </div>
                     </div>
 
@@ -107,9 +115,9 @@
                             <div class="box-header">
 
                                 <div>
-                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
-                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
-                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.execute_link }}" onClick="return confirmRestoreBackup();"><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a><br>
+                                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
+                                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
+                                    <a class="btn btn-sm btn-default confirm" style="min-width:20%;" href="{{ RemoveableObject.execute_link }}" ><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a><br>
                                 </div>
                                 <div style="padding-top: 5px;">
                                     <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>
