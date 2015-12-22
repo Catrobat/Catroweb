@@ -65,8 +65,11 @@ services:
         arguments: ["@real_download_statistics"]
 
     real_download_statistics:
-            class: Catrobat\AppBundle\Services\DownloadStatisticsService
-            arguments:
-              - "@programmanager"
-              - "@doctrine.orm.entity_manager"
-              - "@bazinga_geocoder.geocoder"
+        class: Catrobat\AppBundle\Services\DownloadStatisticsService
+        arguments:
+          - "@programmanager"
+          - "@doctrine.orm.entity_manager"
+          - "@bazinga_geocoder.geocoder"
+          - "@logger"
+        tags:
+          - { name: monolog.logger, channel: download_stats }

@@ -131,4 +131,15 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
             $('#btn-facebook-post-link').attr('href', self.fb_post_link.replace('&amp;', '&'));
         }
     }
+
+    self.create_cookie = function create_cookie(name, value, days2expire, path) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days2expire * 24 * 60 * 60 * 1000));
+        var expires = date.toUTCString();
+        document.cookie = name + '=' + value + ';' +
+            'expires=' + expires + ';' +
+            'path=' + path + ';';
+    }
+
+    self.create_cookie('referrer', document.referrer, 1, '/');
 };

@@ -186,3 +186,6 @@ services:
           - "@programmanager"
           - "@doctrine.orm.entity_manager"
           - "@bazinga_geocoder.geocoder"
+          - "@logger"
+        tags:
+          - { name: monolog.logger, channel: download_stats }

@@ -83,6 +83,8 @@ class DefaultController extends Controller
           $viewed[] = $program->getId();
           $request->getSession()->set('viewed', $viewed);
       }
+      $referrer = $request->headers->get('referer');
+      $request->getSession()->set('referer', $referrer);
 
       $program_details = array(
       'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
@@ -92,7 +94,7 @@ class DefaultController extends Controller
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
       'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
-
+      'referrer' => $referrer,
     );
 
       $user = $this->getUser();

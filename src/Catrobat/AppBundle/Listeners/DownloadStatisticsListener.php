@@ -22,31 +22,32 @@ class DownloadStatisticsListener
         $attributes = $event->getRequest()->attributes;
         if ($attributes->has('download_statistics_program_id')) {
             $program_id = $attributes->get('download_statistics_program_id');
-            $ip = $event->getRequest()->getClientIp();
-            $ip = $this->getOriginalClientIp($ip);
+            $ip = $this->getOriginalClientIp($event);
             $user_agent = $event->getRequest()->headers->get('User-Agent');
-            $user = $this->security_token_storage->getToken()->getUser();
+            $referrer = $attributes->get('referrer');
+            $session_user = $this->security_token_storage->getToken()->getUser();
 
-            if ($user === 'anon.') {
-                $user_name = $user;
+            if ($session_user === 'anon.') {
+                $user = null;
             } else {
-                $user_name = $user->getUsername();
+                $user = $session_user;
             }
 
-            $this->createProgramDownloadStatistics($program_id, $ip, $user_agent, $user_name);
+            $this->createProgramDownloadStatistics($program_id, $ip, $user_agent, $user, $referrer);
             $event->getRequest()->attributes->remove('download_statistics_program_id');
         }
     }
 
-    public function createProgramDownloadStatistics($program_id, $ip, $user_agent, $user_name)
+    public function createProgramDownloadStatistics($program_id, $ip, $user_agent, $user, $referrer)
     {
         if (strpos($user_agent, 'okhttp') === false) {
-            $this->download_statistics_service->createProgramDownloadStatistics($program_id, $ip, $user_agent, $user_name);
+            $this->download_statistics_service->createProgramDownloadStatistics($program_id, $ip, $user_agent, $user, $referrer);
         }
     }
 
-    private function getOriginalClientIp($ip)
+    private function getOriginalClientIp($event)
     {
+        $ip = $event->getRequest()->getClientIp();
         if (strpos($ip,',') !== false) {
             $ip = substr($ip,0,strpos($ip,','));
         }

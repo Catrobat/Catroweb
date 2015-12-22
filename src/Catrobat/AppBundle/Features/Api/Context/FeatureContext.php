@@ -690,7 +690,7 @@ class FeatureContext extends BaseContext
   }
 
   /**
-   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
    */
   public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
   {
@@ -700,7 +700,6 @@ class FeatureContext extends BaseContext
           $country_code = $statistics[$i]['country_code'];
           $country_name = $statistics[$i]['country_name'];
           $program_id = $statistics[$i]['program_id'];
-          $user_name = $statistics[$i]['username'];
 
           /**
            * @var $program_download_statistics ProgramDownloads
@@ -712,7 +711,7 @@ class FeatureContext extends BaseContext
           assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
           assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
           assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
-          assertEquals($user_name, $program_download_statistics->getUserName(), "Wrong username in download statistics");
+          assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
 
           assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
           assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
