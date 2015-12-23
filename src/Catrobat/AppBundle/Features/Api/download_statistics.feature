@@ -12,6 +12,6 @@ Feature: Downloaded program statistics
   @RealGeocoder
   Scenario: Download statistics should be persisted to database after successful download of a program
     When I have downloaded a valid program
-    Then the program download statistic should have a download timestamp, street, postal code, locality, latitude of approximately "47", longitude of approximately "11" and the following statistics:
+    Then the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "48", longitude of approximately "16" and the following statistics:
       | ip              | country_code | country_name | program_id |
       | 88.116.169.222  | AT           | AUSTRIA      | 1          |

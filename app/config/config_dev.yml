@@ -13,7 +13,7 @@ web_profiler:
     intercept_redirects: false
 
 monolog:
-    channels: ["upload"]
+    channels: ['upload', 'download_stats']
     handlers:
         upload:
             type: stream
@@ -30,9 +30,12 @@ monolog:
         chromephp:
             type:  chromephp
             level: info
-
-bazinga_geocoder:
-   fake_ip:    88.116.169.222 #123.345.643.133
+        download_stats:
+            type:  rotating_file
+            path:  %kernel.logs_dir%/download_stats/download_stats.log
+            level: debug
+            max_files: 20
+            channels: [download_stats]
 
 assetic:
     use_controller: true

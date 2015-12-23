@@ -74,6 +74,17 @@ class ProgramDownloads
     protected $user_agent;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     */
+    protected $user;
+
+    /**
+     * @ORM\Column(type="string", options={"default":""}, nullable=true)
+     */
+    protected $referrer;
+
+    /**
      * @return mixed
      */
     public function getProgram()
@@ -263,5 +274,37 @@ class ProgramDownloads
     public function setUserAgent($user_agent)
     {
         $this->user_agent = $user_agent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * @param mixed $referrer
+     */
+    public function setReferrer($referrer)
+    {
+        $this->referrer = $referrer;
     }
 }
