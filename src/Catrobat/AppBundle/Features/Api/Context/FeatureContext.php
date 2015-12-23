@@ -38,10 +38,8 @@ class FeatureContext extends BaseContext
     private $hostname;
     private $secure;
     /**
-     * @var $download_statistics_service DownloadStatisticsService
      * @var $program_downloads_repository ProgramDownloadsRepository
      */
-    private $download_statistics_service;
     private $fb_post_program_id;
     private $fb_post_id;
 
@@ -692,7 +690,7 @@ class FeatureContext extends BaseContext
   }
 
   /**
-   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
    */
   public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
   {
@@ -711,8 +709,9 @@ class FeatureContext extends BaseContext
 
           assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
           assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
-          assertEquals($country_name, $program_download_statistics->getCountryName(), "Wrong country name in download statistics");
+          assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
           assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
+          assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
 
           assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
           assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
@@ -720,6 +719,7 @@ class FeatureContext extends BaseContext
           assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
 
           $limit = 5.0;
+
           $latitude = floatval($program_download_statistics->getLatitude());
           $longitude = floatval($program_download_statistics->getLongitude());
           $download_time = $program_download_statistics->getDownloadedAt();

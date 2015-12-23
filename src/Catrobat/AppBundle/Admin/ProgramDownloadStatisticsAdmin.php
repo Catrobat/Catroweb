@@ -24,6 +24,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
         $formMapper
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program'), array(
                 'admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('downloaded_at')
             ->add('ip')
             ->add('latitude')
@@ -33,7 +34,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('street')
             ->add('postal_code')
             ->add('locality')
-            ->add('user_agent');
+            ->add('user_agent')
+            ->add('referrer');
     }
 
     // Fields to be shown on filter forms
@@ -42,11 +44,13 @@ class ProgramDownloadStatisticsAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('program', null, array('admin_code' => 'catrowebadmin.block.programs.all',))
+            ->add('user')
             ->add('program.gamejam_submission_accepted')
             ->add('downloaded_at')
             ->add('ip')
             ->add('country_name')
             ->add('user_agent')
+            ->add('referrer')
             ->add('locality');
     }
 
@@ -56,6 +60,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
         $listMapper
             ->addIdentifier('id')
             ->add('program', null, array('admin_code' => 'catrowebadmin.block.programs.all',))
+            ->add('user')
             ->add('downloaded_at')
             ->add('ip')
             ->add('latitude')
@@ -68,6 +73,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('program.downloads')
             ->add('program.apk_downloads')
             ->add('user_agent')
+            ->add('referrer')
             ->add('_action', 'actions', array('actions' => array(
                 'edit' => array()
             )))
@@ -76,7 +82,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
 
     public function getExportFields() {
         return array('id','program.id','program.name','program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description','downloaded_at','ip','latitude','longitude','country_code',
-            'country_name','street','postal_code','locality','user_agent');
+            'country_name','street','postal_code','locality','user_agent','user.username','referrer');
     }
 
     protected function configureRoutes(RouteCollection $collection)
