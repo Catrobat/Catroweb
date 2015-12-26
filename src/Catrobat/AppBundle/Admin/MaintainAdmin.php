@@ -16,8 +16,6 @@ class MaintainAdmin extends Admin
         $collection->clearExcept(array('list'));
         $collection->add("apk")
             ->add("extracted")
-            ->add("delete_backups")
-            ->add("create_backup")
-            ->add("restore_backup");
+            ->add("backup");
     }
 }

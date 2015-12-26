@@ -18,10 +18,6 @@ mediapackage_download:
     resource: "@AppBundle/Controller/DownloadMediaPackageController.php"
     type:     annotation
 
-backup_download:
-    resource: "@AppBundle/Controller/DownloadBackupController.php"
-    type:     annotation
-
 login:
     path:      login
     defaults:  { _controller: FOSUserBundle:Security:login }
