@@ -64,12 +64,10 @@ class MaintainController extends Controller
             throw new AccessDeniedException();
         }
 
-        $command = new CleanBackupsCommand();
-        $command->setContainer($this->container);
-
-        $input = array();
+        $backupFile = null;
         if($request->get("backupFile"))
         {
+<<<<<<< HEAD
             $input["backupfile"] = $request->get("backupFile");
         }
         else
@@ -98,26 +96,28 @@ class MaintainController extends Controller
         if (false === $this->admin->isGranted('BACKUP'))
         {
             throw new AccessDeniedException();
+=======
+            $backupFile = $request->get("backupFile");
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
         }
 
-        $command = new CreateBackupCommand();
+        $command = new CleanBackupsCommand();
         $command->setContainer($this->container);
-
         $input = array();
-        if($request->get("backupName"))
-        {
-            $input["backupName"] = $request->get("backupName");
-        }
 
-        try
+        if($backupFile != null)
         {
-            $return = $command->run(new ArrayInput($input), new NullOutput());
+            $input["backupfile"] = $backupFile;
+        }else
+            $input["--all"]="--all";
+
+        try{
+            $return = $command->run(new ArrayInput($input),new NullOutput());
             if($return == 0)
             {
-                $this->addFlash('sonata_flash_success', 'Create Backup OK');
+                $this->addFlash('sonata_flash_success', 'Reset Backup OK');
             }
-        }
-        catch (\Exception $e)
+        }catch (\Exception $e)
         {
             $this->addFlash('sonata_flash_error', 'Something went wrong: '.$e->getMessage());
         }
@@ -125,6 +125,7 @@ class MaintainController extends Controller
         return new RedirectResponse($this->admin->generateUrl("list"));
     }
 
+<<<<<<< HEAD
     public function restoreBackupAction(Request $request = NULL)
     {
         if (false === $this->admin->isGranted('BACKUP'))
@@ -164,6 +165,8 @@ class MaintainController extends Controller
     }
 
 >>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
+=======
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
     public function listAction(Request $request = NULL)
     {
         if (false === $this->admin->isGranted('LIST')) {

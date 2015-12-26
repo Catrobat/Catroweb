@@ -3,13 +3,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script>
-    function confirmRestoreBackup()
-    {
-        var confirmed = confirm("Are you sure to restore the backup? This will reset the current data.");
-        return confirmed;
-    }
-    </script>
 {% endblock %}
 
 {% block content %}
@@ -100,6 +93,7 @@
                             <div class="box-header">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
                                 <span style="margin-left: 5%;">
 =======
@@ -114,6 +108,10 @@
 
                                 <span style="padding-left: 0.2em;">
 >>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
+=======
+                                <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
+                                <span style="margin-left: 5%;">
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
                                 {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
                                 </span>
                                 <span style="float: right">

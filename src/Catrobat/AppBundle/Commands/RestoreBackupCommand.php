@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -42,6 +41,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
 =======
         $command = new PurgeCommand();
@@ -63,6 +63,9 @@ class RestoreBackupCommand extends ContainerAwareCommand
 
         //$this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
 >>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
+=======
+        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
 
         $sqlpath = tempnam(sys_get_temp_dir(), 'Sql');
         copy('phar://'.$backupfile.'/database.sql', $sqlpath);
@@ -97,12 +100,15 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         $progress->setMessage("Extracting Media Package");
         $progress->advance();
         $filesystem->mirror("phar://$backupfile/mediapackage/", $this->getContainer()->getParameter('catrobat.mediapackage.dir'));
 
 >>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
+=======
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
         $progress->finish();
         $output->writeln('');
 

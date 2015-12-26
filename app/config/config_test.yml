@@ -55,11 +55,19 @@ monolog:
             level: debug
             max_files: 20
             channels: [download_stats]
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
 security:
     firewalls:
         main: 
             http_basic: ~
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
 bazinga_geocoder:
    fake_ip:    88.116.169.222 #123.345.643.133

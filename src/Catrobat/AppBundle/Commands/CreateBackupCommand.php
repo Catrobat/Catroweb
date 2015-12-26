@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -17,9 +16,7 @@ class CreateBackupCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('catrobat:backup:create')
-             ->setDescription('Generates a backup')
-             ->addArgument('backupName', InputArgument::OPTIONAL, 'Backupname without extension');;
+        $this->setName('catrobat:backup:create')->setDescription('Generates a backup');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -39,44 +36,27 @@ class CreateBackupCommand extends ContainerAwareCommand
         $databasepassword = $this->getContainer()->getParameter('database_password');
         $this->executeShellCommand("mysqldump -u $databaseuser -p$databasepassword $databasename > $sqlpath", 'Saving SQL file');
 
-        if ($input->hasArgument('backupName') && $input->getArgument('backupName') != "")
-        {
-            $zippath = $backupdir . '/' . $input->getArgument('backupName') . '.tar';
-        }
-        else
-        {
-            $zippath = $backupdir . '/'.date('Y-m-d_His') . '.tar';
-        }
-
+        $zippath = $backupdir.'/'.date('Y-m-d_His').'.tar';
         $output->writeln('Creating archive at '.$zippath);
         $phar = new \PharData($zippath);
 
         $phar->addFile($sqlpath, 'database.sql');
 
-        $this->output->writeln('Saving Thumbnails');
-        $phar->addEmptyDir("thumbnails");
+        $this->output->writeln('Saving thumbnails');
         $dir = $this->getContainer()->getParameter('catrobat.thumbnail.dir');
         $this->addFilesToArchive($dir, 'thumbnails', $phar);
 
-        $this->output->writeln('Saving Screenshots');
-        $phar->addEmptyDir("screenshots");
+        $this->output->writeln('Saving screenshots');
         $dir = $this->getContainer()->getParameter('catrobat.screenshot.dir');
         $this->addFilesToArchive($dir, 'screenshots', $phar);
 
-        $this->output->writeln('Saving Featured Images');
-        $phar->addEmptyDir("featured");
+        $this->output->writeln('Saving featured images');
         $dir2 = $this->getContainer()->getParameter('catrobat.featuredimage.dir');
         $this->addFilesToArchive($dir2, 'featured', $phar);
 
-        $this->output->writeln('Saving Programs');
-        $phar->addEmptyDir("programs");
+        $this->output->writeln('Saving catrobat files');
         $dir = $this->getContainer()->getParameter('catrobat.file.storage.dir');
         $this->addFilesToArchive($dir, 'programs', $phar);
-
-        $this->output->writeln('Saving Media Package');
-        $phar->addEmptyDir("mediapackage");
-        $dir = $this->getContainer()->getParameter('catrobat.mediapackage.dir');
-        $this->addFilesToArchive($dir, 'mediapackage', $phar);
 
         $this->output->writeln('Saving Zip File');
         $this->output->writeln('Packing '.sprintf('%.2f', $this->totalsize / 1024 / 1024).' MB, this may take a while...');
