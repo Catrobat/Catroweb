@@ -40,32 +40,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
             throw new \Exception('This script only supports mysql databases');
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
-=======
-        $command = new PurgeCommand();
-        $command->setContainer($this->getContainer());
-        try
-        {
-            $return = $command->run(new ArrayInput(array('--force' => true)),new NullOutput());
-            if($return == 0)
-            {
-                $output->writeln('Purge Command OK');
-            }
-        }
-        catch (\Exception $e) {
-            $output->writeln('Something went wrong: ' . $e->getMessage());
-        }
-
-        //if ($this->getApplication() == null)
-        //    $this->setApplication(new Application());
-
-        //$this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
->>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
-=======
-        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
->>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
 
         $sqlpath = tempnam(sys_get_temp_dir(), 'Sql');
         copy('phar://'.$backupfile.'/database.sql', $sqlpath);
@@ -99,16 +74,6 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $progress->advance();
         $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        $progress->setMessage("Extracting Media Package");
-        $progress->advance();
-        $filesystem->mirror("phar://$backupfile/mediapackage/", $this->getContainer()->getParameter('catrobat.mediapackage.dir'));
-
->>>>>>> 19a5a3f... WEB-194_Backup-CreateAndDownload Added Behat tests for the Backup create, download and restore. Added the mediapackage folder to Backup create and restore.
-=======
->>>>>>> 0cefb7e... WEB-247 Removed DownloadBackup branch. Merged with origin dev-master.
         $progress->finish();
         $output->writeln('');
 
