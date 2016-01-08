@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 class WhenScriptStatement extends Statement
 {
-    const BEGIN_STRING = "when program started " . "<br/>";
+    const BEGIN_STRING = "when program started <br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {

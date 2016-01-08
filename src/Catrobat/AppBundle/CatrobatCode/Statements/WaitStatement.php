@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class WaitStatement extends Statement
 {
     const BEGIN_STRING = "wait (";
-    const END_STRING = ") seconds" . "<br/>";
+    const END_STRING = ") seconds<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -17,3 +17,4 @@ class WaitStatement extends Statement
 }
 
 ?>
+

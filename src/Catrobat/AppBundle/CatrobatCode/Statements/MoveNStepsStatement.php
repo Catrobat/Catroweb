@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class MoveNStepsStatement extends Statement
 {
 	const BEGIN_STRING = "move (";
-	const END_STRING = ") steps" . "<br/>";
+	const END_STRING = ") steps<br/>";
 	
 	public function __construct($statementFactory, $xmlTree, $spaces)
 	{
@@ -16,3 +16,4 @@ class MoveNStepsStatement extends Statement
 	
 }
 ?>
+

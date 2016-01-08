@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class ChangeVariableStatement extends Statement
 {
     const BEGIN_STRING = "change variable ";
-    const END_STRING = ")" . "<br/>";
+    const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -17,3 +17,4 @@ class ChangeVariableStatement extends Statement
 }
 
 ?>
+

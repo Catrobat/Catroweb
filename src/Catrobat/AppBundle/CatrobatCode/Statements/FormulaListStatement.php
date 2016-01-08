@@ -4,8 +4,6 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 class FormulaListStatement extends Statement
 {
-    const BEGIN_STRING = "";
-    const END_STRING = "";
     const X_POSITION = "X_POSITION";
     const Y_POSITION = "Y_POSITION";
 
@@ -16,8 +14,7 @@ class FormulaListStatement extends Statement
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
         parent::__construct($statementFactory, $xmlTree, $spaces - 1,
-            self::BEGIN_STRING,
-            self::END_STRING);
+            "", "");
     }
 
 
@@ -67,13 +64,16 @@ class FormulaListStatement extends Statement
     {
 
         foreach ($this->statements as $value) {
-            if ($value->getCategory() == self::X_POSITION) {
-                $this->xPosition = $value;
-            } else if ($value->getCategory() == self::Y_POSITION) {
-                $this->yPosition = $value;
+            if ($value instanceof FormulaStatement) {
+                if ($value->getCategory() == self::X_POSITION) {
+                    $this->xPosition = $value;
+                } else if ($value->getCategory() == self::Y_POSITION) {
+                    $this->yPosition = $value;
+                }
             }
         }
     }
 }
 
 ?>
+

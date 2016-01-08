@@ -4,9 +4,6 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 class FileNameStatement extends Statement
 {
-
-    const BEGIN_STRING = "";
-    const END_STRING = "";
     private $value;
 
     public function __construct($statementFactory, $xmlTree, $spaces, $value)
@@ -14,7 +11,7 @@ class FileNameStatement extends Statement
         $this->value = $value;
         parent::__construct($statementFactory, $xmlTree, $spaces,
             $value,
-            self::END_STRING);
+            "");
     }
 
     public function execute()
@@ -25,3 +22,4 @@ class FileNameStatement extends Statement
 }
 
 ?>
+

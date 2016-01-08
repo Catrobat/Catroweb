@@ -68,6 +68,7 @@ use Catrobat\AppBundle\CatrobatCode\Statements\StopAllSoundsStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\TappedScriptStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\TurnLeftStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\TurnRightStatement;
+use Catrobat\AppBundle\CatrobatCode\Statements\UnknownStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\UserListStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\UserVariableStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\ValueStatement;
@@ -157,6 +158,11 @@ class StatementFactory
     const SHOW_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.ShowTextBrick';
     const HIDE_TEXT_STMT = 'HideTextBrick';
     const HIDE_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.HideTextBrick';
+    const USER_BRICKS = 'userBricks';
+    const IS_USER_BRICK = 'inUserBrick';
+    const IS_USER_SCRIPT = 'isUserScript';
+    const ACTION = 'action';
+    const USER_VARIABLE_NAME = 'userVariableName';
 
     private $currentObject;
 
@@ -250,6 +256,19 @@ class StatementFactory
                 case self::FILE_NAME_STMT:
                     $tmpStatement = $this->generateFileNameStatement($statement, $spaces);
                     break;
+                case self::USER_BRICKS:
+                    break;
+                case self::IS_USER_BRICK:
+                    break;
+                case self::IS_USER_SCRIPT:
+                    break;
+                case self::ACTION:
+                    break;
+                case self::USER_VARIABLE_NAME:
+                    break;
+                default:
+                    $tmpStatement = new UnknownStatement($this, $statement, $spaces);
+                    break;
             }
 
             if ($tmpStatement != null) {
@@ -278,6 +297,9 @@ class StatementFactory
                 break;
             case self::BROADCAST_SCRIPT:
                 $stmt = new BroadcastScriptStatement($this, $children, $spaces);
+                break;
+            default:
+                $stmt = new UnknownStatement($this, $statement, $spaces);
                 break;
         }
         return $stmt;
@@ -444,6 +466,12 @@ class StatementFactory
             case self::HIDE_TEXT_STMT:
                 $stmt = new HideTextStatement($this, $children, $spaces);
                 break;
+            case self::USER_BRICKS:
+                break;
+            default:
+                $stmt = new UnknownStatement($this, $statement, $spaces);
+                break;
+
         }
         return $stmt;
     }
@@ -549,3 +577,4 @@ class StatementFactory
         return new FileNameStatement($this, $statement, $spaces, $message);
     }
 }
+

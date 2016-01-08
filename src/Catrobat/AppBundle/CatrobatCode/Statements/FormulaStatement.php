@@ -4,9 +4,6 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 class FormulaStatement extends Statement
 {
-    const BEGIN_STRING = "";
-    const END_STRING = "";
-
     private $leftChild;
     private $rightChild;
     private $type;
@@ -15,8 +12,7 @@ class FormulaStatement extends Statement
     public function __construct($statementFactory, $xmlTree, $spaces, $category)
     {
         parent::__construct($statementFactory, $xmlTree, $spaces,
-            self::BEGIN_STRING,
-            self::END_STRING);
+            "", "");
         $this->category = $category;
     }
 
@@ -81,3 +77,4 @@ class FormulaStatement extends Statement
 }
 
 ?>
+

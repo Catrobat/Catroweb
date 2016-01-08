@@ -6,7 +6,7 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
 {
     const BEGIN_STRING = "replace item in userlist ";
     const MIDDLE_STRING = "(";
-    const END_STRING = ")" . "<br/>";
+    const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {

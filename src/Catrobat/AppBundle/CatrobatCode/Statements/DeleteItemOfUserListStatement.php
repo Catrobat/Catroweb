@@ -6,7 +6,7 @@ class DeleteItemOfUserListStatement extends BaseUserListStatement
 {
 	const BEGIN_STRING = "delete item in userlist ";
 	const MIDDLE_STRING = "(";
-	const END_STRING = ")" . "<br/>";
+	const END_STRING = ")<br/>";
 	
 	public function __construct($statementFactory, $xmlTree, $spaces)
 	{
@@ -18,3 +18,4 @@ class DeleteItemOfUserListStatement extends BaseUserListStatement
 	
 }
 ?>
+

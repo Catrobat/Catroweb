@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class PlaceAtStatement extends Statement
 {
     const BEGIN_STRING = "place at ";
-    const END_STRING = "" . "<br/>";
+    const END_STRING = "<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -19,7 +19,9 @@ class PlaceAtStatement extends Statement
         $code = '';
 
         foreach ($this->statements as $value) {
-            $code .= $value->executePlaceAtFormula();
+            if ($value instanceof FormulaListStatement) {
+                $code .= $value->executePlaceAtFormula();
+            }
         }
 
         return $code;
@@ -27,3 +29,4 @@ class PlaceAtStatement extends Statement
 }
 
 ?>
+

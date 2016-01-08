@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class SetYStatement extends Statement
 {
     const BEGIN_STRING = "set Y to (";
-    const END_STRING = ")" . "<br/>";
+    const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {

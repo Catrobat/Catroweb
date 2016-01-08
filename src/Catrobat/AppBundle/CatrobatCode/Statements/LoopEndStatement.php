@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class LoopEndStatement extends Statement
 {
     const BEGIN_STRING = "end of loop";
-    const END_STRING = "" . "<br/>";
+    const END_STRING = "<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -17,3 +17,4 @@ class LoopEndStatement extends Statement
 }
 
 ?>
+

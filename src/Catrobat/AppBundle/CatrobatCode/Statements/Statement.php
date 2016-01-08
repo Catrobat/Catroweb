@@ -82,8 +82,6 @@ class Statement
     {
         return $this->endString;
     }
-
-
 }
 
 ?>

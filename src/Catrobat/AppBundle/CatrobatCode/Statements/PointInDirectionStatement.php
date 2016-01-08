@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class PointInDirectionStatement extends Statement
 {
     const BEGIN_STRING = "point in direction (";
-    const END_STRING = ") degrees" . "<br/>";
+    const END_STRING = ") degrees<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -17,3 +17,4 @@ class PointInDirectionStatement extends Statement
 }
 
 ?>
+

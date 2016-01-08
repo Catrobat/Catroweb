@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class BroadcastWaitStatement extends Statement
 {
     const BEGIN_STRING = "broadcast and wait ";
-    const END_STRING = "" . "<br/>";
+    const END_STRING = "<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -17,3 +17,4 @@ class BroadcastWaitStatement extends Statement
 }
 
 ?>
+

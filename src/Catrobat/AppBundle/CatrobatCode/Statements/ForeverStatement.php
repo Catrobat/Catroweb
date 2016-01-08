@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class ForeverStatement extends Statement
 {
     const BEGIN_STRING = "forever";
-    const END_STRING = "" . "<br/>";
+    const END_STRING = "<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -22,3 +22,4 @@ class ForeverStatement extends Statement
 }
 
 ?>
+

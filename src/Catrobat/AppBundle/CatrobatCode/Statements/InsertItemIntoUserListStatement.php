@@ -6,7 +6,7 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
 {
     const BEGIN_STRING = "insert item into userlist ";
     const MIDDLE_STRING = "(";
-    const END_STRING = ")" . "<br/>";
+    const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -19,3 +19,4 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
 }
 
 ?>
+

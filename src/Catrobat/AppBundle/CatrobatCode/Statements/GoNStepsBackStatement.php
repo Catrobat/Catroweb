@@ -5,7 +5,7 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 class GoNStepsBackStatement extends Statement
 {
     const BEGIN_STRING = "go back (";
-    const END_STRING = ") layers" . "<br/>";
+    const END_STRING = ") layers<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
@@ -17,3 +17,4 @@ class GoNStepsBackStatement extends Statement
 }
 
 ?>
+

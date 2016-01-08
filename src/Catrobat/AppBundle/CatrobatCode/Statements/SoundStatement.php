@@ -4,9 +4,6 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 class SoundStatement extends Statement
 {
-
-    const BEGIN_STRING = "";
-    const END_STRING = "";
     private $value;
     private $fileName;
     private $name;
@@ -16,7 +13,7 @@ class SoundStatement extends Statement
         $this->value = $value;
         parent::__construct($statementFactory, $xmlTree, $spaces,
             $value,
-            self::END_STRING);
+            "");
     }
 
     public function execute()
