@@ -25,7 +25,7 @@ function triggerGoogleLogin(){
                 'approvalprompt': $('#gplus_approval_prompt').val(), //'force' prevents auto g+-signin
                 'clientid': $appid,
                 'cookiepolicy': 'single_host_origin',
-                'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+                //'requestvisibleactions': 'http://schemas.google.com/AddActivity',
                 'redirecturi': 'postmessage',
                 'accesstype': 'offline',
                 'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
@@ -146,7 +146,18 @@ function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
                     email: $email
                 },
                 function (data, status) {
-                    submitOAuthForm(data)
+                    var $ajaxLoginRedirectUrl = Routing.generate(
+                        'catrobat_oauth_login_redirect', {flavor: 'pocketcode'}
+                    );
+
+                    $.post($ajaxLoginRedirectUrl,
+                        {
+                            gplus_id: $gplus_id
+                        }, function (data, status) {
+                            console.log(data);
+                            $url = data['url'];
+                            $(location).attr('href', $url);
+                        });
                 });
         });
 }
@@ -165,7 +176,18 @@ function GoogleLogin($email, $username, $id, $locale) {
             locale: $locale
         },
         function (data, status) {
-            submitOAuthForm(data)
+            var $ajaxLoginRedirectUrl = Routing.generate(
+                'catrobat_oauth_login_redirect', {flavor: 'pocketcode'}
+            );
+
+            $.post($ajaxLoginRedirectUrl,
+                {
+                    gplus_id: $id
+                }, function (data, status) {
+                    console.log(data);
+                    $url = data['url'];
+                    $(location).attr('href', $url);
+                });
         });
 }
 

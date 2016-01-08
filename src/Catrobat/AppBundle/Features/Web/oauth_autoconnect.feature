@@ -1,4 +1,4 @@
-@homepage @disabled
+@homepage
 Feature: Open Authentication
   I want to be able to sign in as Facebook and Google+ user
 
