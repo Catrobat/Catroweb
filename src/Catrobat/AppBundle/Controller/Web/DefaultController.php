@@ -38,15 +38,6 @@ class DefaultController extends Controller
 
       $programs = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
 
-      usort($programs, function($featuredProgram1, $featuredProgram2)
-      {
-        if ($featuredProgram1->getOrder() == $featuredProgram2->getOrder())
-        {
-          return 0;
-        }
-        return ($featuredProgram1->getOrder() < $featuredProgram2->getOrder()) ? -1 : 1;
-      });
-
       $featured = array();
       foreach ($programs as $program) {
           $info = array();
@@ -60,6 +51,9 @@ class DefaultController extends Controller
               $info['url'] = $program->getUrl();
           }
           $info['image'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
+          $info['program_id'] = $program->getProgram()->getId();
+          $info['priority'] = $program->getPriority();
+
           $featured[] = $info;
       }
 

@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20151217185232 extends AbstractMigration
+class Version20160113133619 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,7 @@ class Version20151217185232 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE featured ADD order_pos INT NOT NULL');
+        $this->addSql('ALTER TABLE featured ADD priority INT NOT NULL');
     }
 
     /**
@@ -29,6 +29,6 @@ class Version20151217185232 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE featured DROP order_pos');
+        $this->addSql('ALTER TABLE featured DROP priority');
     }
 }

@@ -298,6 +298,7 @@ class FeatureContext extends BaseContext
             $featured_entry->setProgram($program);
             $featured_entry->setActive($featured[$i]['active'] == 'yes');
             $featured_entry->setImageType('jpg');
+            $featured_entry->setPriority($featured[$i]['priority']);
             $em->persist($featured_entry);
         }
         $em->flush();

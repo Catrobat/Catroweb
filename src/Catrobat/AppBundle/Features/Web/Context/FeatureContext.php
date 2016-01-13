@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
@@ -1298,4 +1299,33 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
         assertFalse($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
     }
+
+  /**
+   * @Given /^following programs are featured:$/
+   */
+  public function followingProgramsAreFeatured(TableNode $table)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $featured = $table->getHash();
+    for ($i = 0; $i < count($featured); ++$i) {
+      $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['name']);
+      $featured_entry = new FeaturedProgram();
+      $featured_entry->setProgram($program);
+      $featured_entry->setActive($featured[$i]['active'] == 'yes');
+      $featured_entry->setImageType('jpg');
+      $featured_entry->setPriority($featured[$i]['priority']);
+      $em->persist($featured_entry);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Then /^I should see an id with the value "([^"]*)"$/
+   */
+  public function iShouldSeeAnIdWithTheValue($id_value)
+  {
+    $element = $this->getSession()->getPage()->findById($id_value);
+    assertTrue($element != null);
+  }
+
 }

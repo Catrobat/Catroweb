@@ -14,6 +14,11 @@ Feature: Pocketcode homepage
       | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
+    And following programs are featured:
+      | name        | active | priority |
+      | program 1   | no     | 1        |
+      | program 2   | yes    | 3        |
+      | program 3   | yes    | 2        |
 
   Scenario: Viewing the homepage at website root
     Given I am on homepage
@@ -32,3 +37,9 @@ Feature: Pocketcode homepage
     And I fill in "password" with "123456"
     Then I press "Login"
     Then I should be logged in
+
+  Scenario: Featured Programs
+    Given I am on homepage
+    Then I should see the featured slider
+    And I should see an id with the value "feature_2_3"
+    And I should see an id with the value "feature_3_2"

@@ -49,9 +49,9 @@ class FeaturedProgram
     protected $flavor = 'pocketcode';
 
     /**
-     * @ORM\Column(type="integer", name="order_pos")
+     * @ORM\Column(type="integer")
      */
-    protected $order;
+    protected $priority = 0;
 
     /**
      * @return mixed
@@ -159,16 +159,16 @@ class FeaturedProgram
     /**
      * @return mixed
      */
-    public function getOrder()
+    public function getPriority()
     {
-        return $this->order;
+        return $this->priority;
     }
 
     /**
-     * @param mixed $order
+     * @param mixed $priority
      */
-    public function setOrder($order)
+    public function setPriority($priority)
     {
-        $this->order = $order;
+        $this->priority = $priority;
     }
 }
