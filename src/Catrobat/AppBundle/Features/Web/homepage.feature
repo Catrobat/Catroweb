@@ -41,5 +41,4 @@ Feature: Pocketcode homepage
   Scenario: Featured Programs
     Given I am on homepage
     Then I should see the featured slider
-    And I should see an id with the value "feature_2_3"
-    And I should see an id with the value "feature_3_2"
+    And I should see the slider with the values "feature_2_3,feature_3_2"

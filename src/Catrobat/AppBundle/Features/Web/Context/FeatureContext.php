@@ -1320,12 +1320,19 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^I should see an id with the value "([^"]*)"$/
+   * @Then /^I should see the slider with the values "([^"]*)"$/
    */
-  public function iShouldSeeAnIdWithTheValue($id_value)
+  public function iShouldSeeTheSliderWithTheValues($values)
   {
-    $element = $this->getSession()->getPage()->findById($id_value);
-    assertTrue($element != null);
+    $slider_items = explode(',', $values);
+    $owl_items = $this->getSession()->getPage()->findAll('css', '.owl-item div');
+    assertEquals(count($owl_items), count($slider_items));
+
+    for ($index = 0; $index < count($owl_items); $index++)
+    {
+      $id = $owl_items[$index]->getAttribute('id');
+      assertEquals($id, $slider_items[$index]);
+    }
   }
 
 }
