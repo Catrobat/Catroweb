@@ -2,10 +2,13 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
+use DateTime;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Facebook;
 use Facebook\Exceptions\FacebookSDKException;
 
+use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphNode;
 use Google_Client;
 use Google_Http_Request;
 use Google_Service_Plus;
@@ -74,68 +77,50 @@ class SecurityController extends Controller
         $validator = $this->get('validator');
 
         $retArray = array();
-        $username = $request->request->get('registrationUsername');
 
-        /* @var $authenticator UserAuthenticator */
-        $authenticator = $this->get('user_authenticator');
-
-        $token = null;
-        $user = null;
-        try {
-            $token = $authenticator->authenticate($username, $request->request->get('registrationPassword'));
-            $retArray['statusCode'] = StatusCode::OK;
-            $retArray['token'] = $token->getUser()->getUploadToken();
-            $retArray['preHeaderMessages'] = '';
-            return JsonResponse::create($retArray);
-        } catch( UsernameNotFoundException $exception) {
-            $user = null;
-        } catch (AuthenticationException $exception) {
-            $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-            $retArray['answer'] = $this->trans('errors.login');
-            $retArray['preHeaderMessages'] = '';
+        $this->signInLdapUser($request, $retArray);
+        if (array_key_exists('statusCode', $retArray) && $retArray['statusCode'] === StatusCode::OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR) {
             return JsonResponse::create($retArray);
         }
 
-        if ($user == null) {
-            $create_request = new CreateUserRequest($request);
-            $violations = $validator->validate($create_request);
-            foreach ($violations as $violation) {
-                $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
-                switch ($violation->getMessageTemplate()) {
-                    case 'errors.password.short':
-                        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
-                        break;
-                    case 'errors.email.invalid':
-                        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
-                        break;
-                }
-                $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
-                break;
+        $create_request = new CreateUserRequest($request);
+        $violations = $validator->validate($create_request);
+        foreach ($violations as $violation) {
+            $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
+            switch ($violation->getMessageTemplate()) {
+                case 'errors.password.short':
+                    $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+                    break;
+                case 'errors.email.invalid':
+                    $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+                    break;
             }
+            $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
+            break;
+        }
 
-            if (count($violations) == 0) {
-                if ($userManager->findUserByEmail($create_request->mail) != null) {
-                    $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
-                    $retArray['answer'] = $this->trans('errors.email.exists');
+        if (count($violations) == 0) {
+            if ($userManager->findUserByEmail($create_request->mail) != null) {
+                $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
+                $retArray['answer'] = $this->trans('errors.email.exists');
+            } else {
+                $user = $userManager->createUser();
+                $user->setUsername($create_request->username);
+                $user->setEmail($create_request->mail);
+                $user->setPlainPassword($create_request->password);
+                $user->setEnabled(true);
+                $user->setUploadToken($tokenGenerator->generateToken());
+                $user->setCountry($create_request->country);
+
+                $violations = $validator->validate($user, "Registration");
+                if (count($violations) > 0) {
+                    $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+                    $retArray['answer'] = $this->trans('errors.login');
                 } else {
-                    $user = $userManager->createUser();
-                    $user->setUsername($create_request->username);
-                    $user->setEmail($create_request->mail);
-                    $user->setPlainPassword($create_request->password);
-                    $user->setEnabled(true);
-                    $user->setUploadToken($tokenGenerator->generateToken());
-                    $user->setCountry($create_request->country);
-
-                    $violations = $validator->validate($user, "Registration");
-                    if (count($violations) > 0) {
-                        $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-                        $retArray['answer'] = $this->trans('errors.login');
-                    } else {
-                        $userManager->updateUser($user);
-                        $retArray['statusCode'] = 201;
-                        $retArray['answer'] = $this->trans('success.registration');
-                        $retArray['token'] = $user->getUploadToken();
-                    }
+                    $userManager->updateUser($user);
+                    $retArray['statusCode'] = 201;
+                    $retArray['answer'] = $this->trans('success.registration');
+                    $retArray['token'] = $user->getUploadToken();
                 }
             }
         }
@@ -159,6 +144,10 @@ class SecurityController extends Controller
         $validator = $this->get("validator");
 
         $retArray = array();
+        $this->signInLdapUser($request, $retArray);
+        if (array_key_exists('statusCode', $retArray) && $retArray['statusCode'] === StatusCode::OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR) {
+            return JsonResponse::create($retArray);
+        }
 
         $create_request = new CreateUserRequest($request);
         $violations = $validator->validate($create_request);
@@ -179,11 +168,11 @@ class SecurityController extends Controller
         if (count($violations) == 0) {
             if ($userManager->findUserByEmail($create_request->mail) != null) {
                 $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
-                $retArray['answer'] = $this->trans("error.email.exists");
+                $retArray['answer'] = $this->trans("errors.email.exists");
             } else
                 if ($userManager->findUserByUsername($create_request->username) != null) {
                     $retArray['statusCode'] = StatusCode::USER_ADD_USERNAME_EXISTS;
-                    $retArray['answer'] = $this->trans("error.username.exists");
+                    $retArray['answer'] = $this->trans("errors.username.exists");
                 } else {
                     $user = $userManager->createUser();
                     $user->setUsername($create_request->username);
@@ -218,6 +207,11 @@ class SecurityController extends Controller
         $tokenGenerator = $this->get("tokengenerator");
         $retArray = array();
 
+        $this->signInLdapUser($request, $retArray);
+        if (array_key_exists('statusCode', $retArray) && $retArray['statusCode'] === StatusCode::OK || $retArray['statusCode'] === StatusCode::LOGIN_ERROR) {
+            return JsonResponse::create($retArray);
+        }
+
         $login_request = new LoginUserRequest($request);
         $violations = $validator->validate($login_request);
         foreach ($violations as $violation) {
@@ -240,7 +234,7 @@ class SecurityController extends Controller
 
             $user = $userManager->findUserByUsername($username);
 
-            if(! $user) {
+            if (!$user) {
                 $retArray['statusCode'] = StatusCode::USER_USERNAME_INVALID;
                 $retArray['answer'] = $this->trans('errors.username.not_exists');
             } else {
@@ -260,6 +254,29 @@ class SecurityController extends Controller
 
         $retArray['preHeaderMessages'] = "";
         return JsonResponse::create($retArray);
+    }
+
+    private function signInLdapUser($request, &$retArray)
+    {
+        /* @var $authenticator UserAuthenticator */
+        $authenticator = $this->get('user_authenticator');
+        $token = null;
+        $username = $request->request->get('registrationUsername');
+
+        try {
+            $token = $authenticator->authenticate($username, $request->request->get('registrationPassword'));
+            $retArray['statusCode'] = StatusCode::OK;
+            $retArray['token'] = $token->getUser()->getUploadToken();
+            $retArray['preHeaderMessages'] = '';
+            return JsonResponse::create($retArray);
+        } catch (UsernameNotFoundException $exception) {
+            $user = null;
+        } catch (AuthenticationException $exception) {
+            $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+            $retArray['answer'] = $this->trans('errors.login');
+            $retArray['preHeaderMessages'] = '';
+            return JsonResponse::create($retArray);
+        }
     }
 
     /**
@@ -394,7 +411,7 @@ class SecurityController extends Controller
         $user = $userManager->findOneBy(array(
             'username' => $username_email
         ));
-        if (! $user) {
+        if (!$user) {
             $user = $userManager->findOneBy(array(
                 'email' => $username_email
             ));
@@ -433,7 +450,7 @@ class SecurityController extends Controller
 
         // Ensure that this is no request forgery going on, and that the user
         // sending us this request is the user that was supposed to.
-        if (! $sessionState || ! $requestState || $sessionState != $requestState) {
+        if (!$sessionState || !$requestState || $sessionState != $requestState) {
             // return new Response('Invalid state parameter', 401);
             $retArray['sessionWarning'] = 'Warning: Invalid state parameter - This might be a Session Hijacking attempt!';
         }
@@ -443,7 +460,7 @@ class SecurityController extends Controller
         $client_secret = $this->container->getParameter('google_secret');
         $redirect_uri = 'postmessage';
 
-        if (! $client_secret || ! $client_id || ! $application_name) {
+        if (!$client_secret || !$client_id || !$application_name) {
             throw $this->createNotFoundException('Google app authentication data not found!');
         }
 
@@ -451,7 +468,7 @@ class SecurityController extends Controller
         $client->setApplicationName($application_name);
         $client->setClientId($client_id);
         $client->setClientSecret($client_secret);
-        if (! $request->request->has('mobile')) {
+        if (!$request->request->has('mobile')) {
             $client->setRedirectUri($redirect_uri);
         }
         $client->setScopes('https://www.googleapis.com/auth/userinfo.email');
@@ -462,7 +479,7 @@ class SecurityController extends Controller
             $token = json_decode($client->getAccessToken());
         }
 
-        if (! $token) {
+        if (!$token) {
             return new Response("Google Authentication failed.", 401);
         }
 
@@ -539,7 +556,7 @@ class SecurityController extends Controller
 
         // Ensure that this is no request forgery going on, and that the user
         // sending us this request is the user that was supposed to.
-        if (! $sessionState || ! $requestState || $sessionState != $requestState) {
+        if (!$sessionState || !$requestState || $sessionState != $requestState) {
             // return new Response('Invalid state parameter', 401);
             $retArray['sessionWarning'] = 'Warning: Invalid state parameter - This might be a Session Hijacking attempt!';
         }
@@ -548,7 +565,7 @@ class SecurityController extends Controller
         $app_id = $this->container->getParameter('facebook_app_id');
         $client_secret = $this->container->getParameter('facebook_secret');
 
-        if (! $client_secret || ! $app_id || ! $application_name) {
+        if (!$client_secret || !$app_id || !$application_name) {
             throw $this->createNotFoundException('Facebook app authentication data not found!');
         }
 
@@ -637,13 +654,15 @@ class SecurityController extends Controller
         $fb_user = $userManager->findOneBy(array(
             'facebookUid' => $facebook_id
         ));
-        if (! $fb_user) {
+        if (!$fb_user) {
             // should not happen, but who knows
             $retArray['token_invalid'] = true;
             $retArray['reason'] = 'No Facebook User with given ID in database';
             $retArray['statusCode'] = StatusCode::OK;
             return JsonResponse::create($retArray);
         }
+
+        $retArray['fb_token_TODO_remove'] = $fb_user->getFacebookAccessToken();
 
         $app_token = $this->getAppToken();
         $server_token_to_check = $fb_user->getFacebookAccessToken();
@@ -663,14 +682,29 @@ class SecurityController extends Controller
          *  user_id
          */
 
+        foreach ($result->getFieldNames() as $field) {
+            $retArray['field:' . $field] = $field;
+        }
+
+        $retArray['debug_array:'] = print_r($result, true);
+
+        if ($result->getField('error') !== null) {
+            $error = $result->getField('error');
+            $retArray['token_invalid'] = true;
+            $retArray['reason'] = 'Token data does not match application data';
+            $retArray['details'] = 'Error code: ' . $error->code . ', error subcode: ' . $error->subcode . ', error message: ' . $error->message;
+            $retArray['statusCode'] = StatusCode::OK;
+            return JsonResponse::create($retArray);
+        }
+
         $application_name = $this->container->getParameter('application_name');
         $app_id = $this->container->getParameter('facebook_app_id');
 
-        $is_valid = $result->getProperty('is_valid');
-        $expires = $result->getProperty('expires_at');
-        $app_id_debug = $result->getProperty('app_id');
-        $application_name_debug = $result->getProperty('application');
-        $facebook_id_debug = $result->getProperty('user_id');
+        $is_valid = $result->getField('is_valid');
+        $expires = $result->getField('expires_at');
+        $app_id_debug = $result->getField('app_id');
+        $application_name_debug = $result->getField('application');
+        $facebook_id_debug = $result->getField('user_id');
 
         if ($app_id_debug != $app_id || $application_name_debug != $application_name || $facebook_id_debug != $facebook_id) {
             $retArray['token_invalid'] = true;
@@ -679,21 +713,26 @@ class SecurityController extends Controller
             return JsonResponse::create($retArray);
         }
 
-        if (! $is_valid) {
+        if (!$is_valid) {
             $retArray['token_invalid'] = true;
             $retArray['reason'] = 'Token has been invalidated';
             $retArray['statusCode'] = StatusCode::OK;
             return JsonResponse::create($retArray);
         }
 
-        $current_timestamp = time();
-        $time_to_expiry = $expires - $current_timestamp;
-        $limit = 5 * 24 * 60 * 60; // 5 days
+        $current_timestamp = new DateTime();
+        $time_to_expiry = $current_timestamp->diff($expires);
+        $limit = 5; // 5 days
 
-        if ($time_to_expiry < $limit) {
+        if ($time_to_expiry->d < $limit) {
             $retArray['token_invalid'] = true;
             $retArray['statusCode'] = StatusCode::OK;
             $retArray['reason'] = 'Token will expire soon or has been expired';
+            $retArray['details'] = 'Token expires at: ' . $expires->format('Y-m-d H:i:s') .
+                ', current timestamp: ' . $current_timestamp->format('Y-m-d H:i:s') .
+                ', time to expiry (expires - current timestamp): ' .
+                $time_to_expiry->format('%R %M months, %D days, %H hours, %I minutes, %S seconds') .
+                ', expiration limit: ' . $limit;
             return JsonResponse::create($retArray);
         }
         $retArray['token_invalid'] = false;
@@ -706,6 +745,9 @@ class SecurityController extends Controller
         $app_token = $this->getAppToken();
         $this->initializeFacebook();
 
+        /**
+         * @var $response FacebookResponse
+         */
         $response = $this->facebook->get('/debug_token?input_token=' . $token_to_check, $app_token);
         return $response->getGraphNode();
     }
@@ -931,7 +973,7 @@ class SecurityController extends Controller
         $client_secret = $this->container->getParameter('google_secret');
         // $redirect_uri = 'postmessage';
 
-        if (! $client_secret || ! $client_id || ! $application_name) {
+        if (!$client_secret || !$client_id || !$application_name) {
             throw $this->createNotFoundException('Google app authentication data not found!');
         }
 
@@ -1125,7 +1167,7 @@ class SecurityController extends Controller
             $retArray['answer'] = $this->trans("success.registration");
         } else {
             $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-            $retArray['answer'] = $this->trans("error.login");
+            $retArray['answer'] = $this->trans("errors.login");
         }
     }
 
@@ -1168,7 +1210,8 @@ class SecurityController extends Controller
      * @Route("/api/loginWithTokenAndRedirect/loginWithTokenAndRedirect", name="catrobat_oauth_login_redirect", options={"expose"=true})
      * @Method({"POST"})
      */
-    public function loginWithTokenAndRedirectAction(Request $request) {
+    public function loginWithTokenAndRedirectAction(Request $request)
+    {
         /**
          * @var $userManager UserManager
          * @var $user User
