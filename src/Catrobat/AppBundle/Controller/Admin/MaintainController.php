@@ -13,6 +13,7 @@ use Catrobat\AppBundle\Commands\CleanExtractedFileCommand;
 use Catrobat\AppBundle\Commands\CleanApkCommand;
 use Catrobat\AppBundle\Commands\CleanBackupsCommand;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MaintainController extends Controller
@@ -109,18 +110,27 @@ class MaintainController extends Controller
             $input["backupName"] = $request->get("backupName");
         }
 
-        try
-        {
-            $return = $command->run(new ArrayInput($input), new NullOutput());
-            if($return == 0)
-            {
-                $this->addFlash('sonata_flash_success', 'Create Backup OK');
+        try {
+            if (count($input) > 0) {
+                $return = $command->run(new ArrayInput($input), new NullOutput());
+                if ($return == 0) {
+                    $this->addFlash('sonata_flash_success', 'Create Backup: [' . $input["backupName"] . '] OK');
+                }
+            } else {
+                $process = new Process("php ../app/console catrobat:backup:create");
+                $process->run();
+                if ($process->isSuccessful()) {
+                    $this->addFlash('sonata_flash_success', 'Create Backup OK');
+                } else {
+                    $this->addFlash('sonata_flash_error', 'Something went wrong: '. $process->getErrorOutput());
+                }
             }
         }
         catch (\Exception $e)
         {
             $this->addFlash('sonata_flash_error', 'Something went wrong: '.$e->getMessage());
         }
+
 
         return new RedirectResponse($this->admin->generateUrl("list"));
     }
@@ -210,19 +220,19 @@ class MaintainController extends Controller
         $programsSize = $this->get_dir_size($this->container->getParameter("catrobat.file.storage.dir"));
         $usedSpaceRaw -= $programsSize;
 
-       return $this->render(':Admin:maintain.html.twig', array(
-           'RemoveableObjects' => $removeableObjects,
-           'RemoveableBackupObjects' => $this->getBackupFileObjects(),
-           'wholeSpace' => $this->getSymbolByQuantity($usedSpace+$freeSpace),
-           'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
-           'usedSpace_raw' => $usedSpaceRaw,
-           'freeSpace_raw' => $freeSpace,
-           'freeSpace' =>  $this->getSymbolByQuantity($freeSpace),
-           'programsSpace_raw' => $programsSize,
-           'programsSpace' => $this->getSymbolByQuantity($programsSize),
-           'ram' => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
-           'backupCommand' => $backupCommand,
-       ));
+        return $this->render(':Admin:maintain.html.twig', array(
+          'RemoveableObjects' => $removeableObjects,
+          'RemoveableBackupObjects' => $this->getBackupFileObjects(),
+          'wholeSpace' => $this->getSymbolByQuantity($usedSpace+$freeSpace),
+          'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
+          'usedSpace_raw' => $usedSpaceRaw,
+          'freeSpace_raw' => $freeSpace,
+          'freeSpace' =>  $this->getSymbolByQuantity($freeSpace),
+          'programsSpace_raw' => $programsSize,
+          'programsSpace' => $this->getSymbolByQuantity($programsSize),
+          'ram' => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
+          'backupCommand' => $backupCommand,
+        ));
     }
 
     private function getBackupFileObjects()
@@ -284,6 +294,18 @@ class MaintainController extends Controller
         $exp = floor(log($bytes)/log(1024))>0?floor(log($bytes)/log(1024)):0;
 
         return sprintf('%.2f '.$symbol[$exp], ($bytes/pow(1024, floor($exp))));
+    }
+
+    private function executeShellCommand($command, $description, $output)
+    {
+        $output->write($description." ('".$command."') ... ");
+        $process = new Process($command);
+        $process->run();
+        if ($process->isSuccessful()) {
+            $output->writeln($description . ' OK');
+        } else {
+            $output->writeln('failed!');
+        }
     }
 }
 
