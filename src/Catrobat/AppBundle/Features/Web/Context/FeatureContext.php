@@ -962,6 +962,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     assertEquals('application/zip', $content_type);
   }
 
+  /**
+   * @When /^I should see the video available at "([^"]*)"$/
+   */
+  public function iShouldSeeElementWithIdWithSrc($url)
+  {
+      $page = $this->getSession()->getPage();
+      $video = $page->find('css', '#youtube-help-video');
+      assertTrue($video->getAttribute('src') == $url);
+  }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Getter & Setter
 

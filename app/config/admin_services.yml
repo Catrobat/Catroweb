@@ -103,6 +103,12 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Maintain, icon: '<i class="fa fa-cogs"></i>' }
         arguments: [null, null, AppBundle:Admin\Maintain]
 
+      catrowebadmin.block.tools.logs:
+        class: Catrobat\AppBundle\Admin\LogsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Logs, icon: '<i class="fa fa-cogs"></i>' }
+        arguments: [null, null, AppBundle:Admin\Logs]
+
       catrowebadmin.block.users.limited:
         class: Catrobat\AppBundle\Admin\LimitedUsersAdmin
         tags:

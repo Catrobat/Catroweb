@@ -35,27 +35,27 @@ catrobat_web_hourOfCode_index:
     path: /hourOfCode/
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: "http://www.alicegamejam.com"
+        path: "https://share.catrob.at/pocketcode/help"
 
 catrobat_web_hourOfCode:
     path: /hourOfCode/{page}
     defaults:
         page: 0
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: "http://www.alicegamejam.com"
+        path: "https://share.catrob.at/pocketcode/help"
 
 catrobat_web_hour_of_code_index:
     path: /hour-of-code/
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: "http://www.alicegamejam.com"
+        path: "https://share.catrob.at/pocketcode/help"
 
 catrobat_web_hour_of_code:
     path: /hour-of-code/{page}
     defaults:
         page: 0
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: "http://www.alicegamejam.com"
+        path: "https://share.catrob.at/pocketcode/help"
 
 sonata_user_profile:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"

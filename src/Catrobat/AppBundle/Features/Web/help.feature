@@ -8,8 +8,9 @@ Feature: Pocketcode help page
     Given I am on "/pocketcode/help"
 
   Scenario: Viewing the help overview at help page
-    When I should see a big help image "Game Design"
-    Then I should see a big help image "Step By Step"
+    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
+    And I should see a big help image "Game Design"
+    And I should see a big help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
     And I should see a big help image "Education Platform"
@@ -17,8 +18,9 @@ Feature: Pocketcode help page
 
   @Mobile
   Scenario: Viewing the help overview at help page
-    When I should see a small help image "Game Design"
-    Then I should see a small help image "Step By Step"
+    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
+    And I should see a small help image "Game Design"
+    And I should see a small help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
     And I should see a small help image "Education Platform"
@@ -41,7 +43,7 @@ Feature: Pocketcode help page
 
 
   @Mobile
-  Scenario: Clicking onthe alice game jam mobile image at help page
+  Scenario: Clicking on the alice game jam mobile image at help page
     When I click "#alice-tut-mobile"
     Then I should see "6" "mobile" tutorial banners
 
@@ -133,3 +135,7 @@ Feature: Pocketcode help page
     And I should see "5. Download app"
     And I should see "6. Register/Login at GameJolt.com"
     And I should see "7. Upload your game on the Game Jolt Site"
+
+  Scenario: /hourOfCode should redirect to help page
+    When I go to "/pocketcode/hourOfCode"
+    Then I should see a big help image "Game Design"

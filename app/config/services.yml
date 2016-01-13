@@ -177,7 +177,7 @@ services:
           
     facebook_post_service:
         class: Catrobat\AppBundle\Services\FacebookPostService
-        arguments: ["@router", "@service_container"]
+        arguments: ["@router", "@service_container", "@screenshotrepository"]
 # =========================== Download ===========================
 
     download_statistics:

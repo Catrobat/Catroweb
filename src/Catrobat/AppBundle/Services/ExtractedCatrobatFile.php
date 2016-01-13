@@ -1,6 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Services;
 
+use Catrobat\AppBundle\CatrobatCode\StatementFactory;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\Finder\Finder;
@@ -36,17 +37,17 @@ class ExtractedCatrobatFile
 
     public function getName()
     {
-        return (string) $this->program_xml_properties->header->programName;
+        return (string)$this->program_xml_properties->header->programName;
     }
 
     public function getLanguageVersion()
     {
-        return (string) $this->program_xml_properties->header->catrobatLanguageVersion;
+        return (string)$this->program_xml_properties->header->catrobatLanguageVersion;
     }
 
     public function getDescription()
     {
-        return (string) $this->program_xml_properties->header->description;
+        return (string)$this->program_xml_properties->header->description;
     }
 
     public function getDirHash()
@@ -103,7 +104,7 @@ class ExtractedCatrobatFile
 
     public function getApplicationVersion()
     {
-        return (string) $this->program_xml_properties->header->applicationVersion;
+        return (string)$this->program_xml_properties->header->applicationVersion;
     }
 
     public function getPath()
@@ -119,5 +120,44 @@ class ExtractedCatrobatFile
     public function saveProgramXmlProperties()
     {
         $this->program_xml_properties->asXML($this->path . 'code.xml');
+    }
+
+    public function getContainingCodeObjects()
+    {
+        $objects = array();
+        $objectList = $this->getCodeObjects();
+        foreach ($objectList as $object) {
+            $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
+        }
+
+        return $objectList + $objects;
+    }
+
+    public function getCodeObjects()
+    {
+        $objects = array();
+        $objectList = $this->program_xml_properties->objectList->children();
+        foreach ($objectList as $object) {
+            $newObject = $this->getObject($object);
+            if ($newObject != null) {
+                $objects[] = $newObject;
+            }
+        }
+        return $objects;
+    }
+
+    private function getObject($objectTree)
+    {
+        $factory = new StatementFactory();
+        return $factory->createObject($objectTree);
+    }
+
+    private function addObjectsToArray($objects, $objectsToAdd)
+    {
+
+        foreach ($objectsToAdd as $object) {
+            $objects[] = $object;
+        }
+        return $objects;
     }
 }

@@ -7,7 +7,7 @@
   <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
   <meta property="og:title" content="{{ program.name|escape('html_attr') }}" />
   {% if program.description is empty %}
-    <meta property="og:description" content="{{ "checkout_this_program"|trans({}, "catroweb") }}" />
+    <meta property="og:description" content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}" />
   {% else %}
     <meta property="og:description" content="{{ program.description|escape('html_attr') }}" />
   {% endif %}
@@ -83,7 +83,7 @@
             </tr>
           </table>
         </button>
-        
+
       </div>
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% set jam = getCurrentGameJam() %}

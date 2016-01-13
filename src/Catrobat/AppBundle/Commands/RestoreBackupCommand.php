@@ -69,11 +69,11 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $progress->setMessage("Extracting Featured Images");
         $progress->advance();
         $filesystem->mirror("phar://$backupfile/featured/", $this->getContainer()->getParameter('catrobat.featuredimage.dir'));
-        
+
         $progress->setMessage("Extracting Programs");
         $progress->advance();
         $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
-        
+
         $progress->finish();
         $output->writeln('');
 

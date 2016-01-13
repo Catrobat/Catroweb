@@ -5,6 +5,21 @@
   text-align: center;
   width: 100%;
 
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /*16:9*/
+    padding-top: 25px;
+    height: 0;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+  }
+
   img {
     cursor: pointer;
   }

@@ -55,11 +55,11 @@ monolog:
             level: debug
             max_files: 20
             channels: [download_stats]
-            
+
 security:
     firewalls:
         main: 
             http_basic: ~
-            
+
 bazinga_geocoder:
    fake_ip:    88.116.169.222 #123.345.643.133
