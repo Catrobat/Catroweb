@@ -15,10 +15,11 @@ Feature: Get featured programs
       | 3  | A new world  |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 4  | Soon to be   |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
     And following programs are featured:
-      | name        | active |
-      | Invaders    | yes    |
-      | A new world | yes    |
-      | Soon to be  | no     |
+      | name         | active | priority |
+      | Invaders     | yes    | 1        |
+      | A new world  | yes    | 3        |
+      | Soon to be   | yes    | 2        |
+      | Simple click | no     | 4        |
       
   Scenario: show featured programs
     Given I have a parameter "limit" with value "2"
@@ -30,21 +31,21 @@ Feature: Get featured programs
         "CatrobatInformation":
             {
                 "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":2,
+                "TotalProjects":3,
                 "ProjectsExtension":".catrobat"
             },
         "CatrobatProjects":
             [
                 {
-                    "ProjectId": 1,
-                    "ProjectName":"Invaders",
-                    "FeaturedImage": "resources_test/featured/featured_1.jpg",
-                    "Author":"Catrobat"
-                 },
-                 {
                     "ProjectId": 3,
                     "ProjectName":"A new world",
                     "FeaturedImage":"resources_test/featured/featured_2.jpg",
+                    "Author":"User1"
+                 },
+                 {
+                    "ProjectId": 4,
+                    "ProjectName":"Soon to be",
+                    "FeaturedImage": "resources_test/featured/featured_3.jpg",
                     "Author":"User1"
                  }
             ],
