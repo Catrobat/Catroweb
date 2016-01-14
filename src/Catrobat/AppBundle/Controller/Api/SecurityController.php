@@ -440,19 +440,21 @@ class SecurityController extends Controller
         $retArray = array();
         $session = $request->getSession();
         $code = $request->request->get('code');
-        $sessionState = $session->get('_csrf/authenticate');
-        $requestState = $request->request->get('state');
 
         $gPlusId = $request->request->get('id');
         $google_username = $request->request->get('username');
         $google_mail = $request->request->get('email');
         $locale = $request->request->get('locale');
 
-        // Ensure that this is no request forgery going on, and that the user
-        // sending us this request is the user that was supposed to.
-        if (!$sessionState || !$requestState || $sessionState != $requestState) {
-            // return new Response('Invalid state parameter', 401);
-            $retArray['sessionWarning'] = 'Warning: Invalid state parameter - This might be a Session Hijacking attempt!';
+        if (!$request->request->has('mobile')) {
+            $sessionState = $session->get('_csrf/authenticate');
+            $requestState = $request->request->get('state');
+            // Ensure that this is no request forgery going on, and that the user
+            // sending us this request is the user that was supposed to.
+            if (!$sessionState || !$requestState || $sessionState != $requestState) {
+                return new Response('Invalid state parameter - Session Hijacking attempt?', 401);
+                //$retArray['sessionWarning'] = 'Warning: Invalid state parameter - This might be a Session Hijacking attempt!';
+            }
         }
 
         $application_name = $this->container->getParameter('application_name');
@@ -487,6 +489,18 @@ class SecurityController extends Controller
         $req = new Google_Http_Request($reqUrl);
 
         $results = $client->execute($req);
+
+        /*
+         * TODO: update to newest G+ PHP API and enabled id token verification
+        $id_token = $request->request->get('id_token');
+        try {
+            $ticket = $client->verifyIdToken($id_token);
+            $retArray['id_token_attributes:'] = print_r($ticket->getAttributes(), true);
+            $retArray['id_token_user_id'] = print_r($ticket->getUserId(), true);
+        } catch (\Google_Auth_Exception $e) {
+            return new Response("Invalid id token: " . $e->getMessage(), 401);
+        }
+        */
 
         // Make sure the token we got is for the intended user.
         if ($results['user_id'] != $gPlusId) {
@@ -542,6 +556,7 @@ class SecurityController extends Controller
          * @var $userManager UserManager
          * @var $facebook_user User
          * @var $user User
+         * @var $response FacebookResponse
          */
         $retArray = array();
         $session = $request->getSession();
@@ -682,16 +697,18 @@ class SecurityController extends Controller
          *  user_id
          */
 
+        /*
         foreach ($result->getFieldNames() as $field) {
             $retArray['field:' . $field] = $field;
         }
 
         $retArray['debug_array:'] = print_r($result, true);
+        */
 
         if ($result->getField('error') !== null) {
             $error = $result->getField('error');
             $retArray['token_invalid'] = true;
-            $retArray['reason'] = 'Token data does not match application data';
+            $retArray['reason'] = 'There was an error during Facebook token check';
             $retArray['details'] = 'Error code: ' . $error->code . ', error subcode: ' . $error->subcode . ', error message: ' . $error->message;
             $retArray['statusCode'] = StatusCode::OK;
             return JsonResponse::create($retArray);
@@ -722,7 +739,7 @@ class SecurityController extends Controller
 
         $current_timestamp = new DateTime();
         $time_to_expiry = $current_timestamp->diff($expires);
-        $limit = 5; // 5 days
+        $limit = 3; // 3 days
 
         if ($time_to_expiry->d < $limit) {
             $retArray['token_invalid'] = true;
