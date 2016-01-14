@@ -2,13 +2,6 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/request.css') }}" media="screen"/>
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
-  {% javascripts 'js/plugins/*' 'js/base/*'
-     'js/custom/Reset.js' output='compiled/script.js' %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
 {% endblock %}
 
 {% block header %}
@@ -28,16 +21,9 @@
       <div class="error-text">{{ "login.noUsername"|trans({}, "catroweb")}}</div>
     {% endif %}
     
-    <div id="error_user_oauth" class="error-text" >
-      {{ "oauth.noReset"|trans({}, "catroweb") }}
-    </div>
-
-    <button id="_submit" name="recover" class="hidden" ></button>
-
-</form>
-
-<button id="reset_pw">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
-
+    <button id="recover">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
+    
+  </form>
 {% endblock fos_user_content %}
 
 {% endblock body %}

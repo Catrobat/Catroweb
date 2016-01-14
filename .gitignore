@@ -4,6 +4,7 @@
 /app/cache/*
 /app/config/parameters.yml
 /app/config/parameters_dev.yml
+/app/config/parameters_test.yml
 /app/logs/*
 /build/
 /vendor/

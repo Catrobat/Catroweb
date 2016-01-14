@@ -14,6 +14,7 @@ use Catrobat\AppBundle\Entity\StarterCategory;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
+use Catrobat\AppBundle\Features\Helpers\SymfonySupport;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\File;
@@ -41,10 +42,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     private $kernel;
     private $screenshot_directory;
     private $client;
+    private $use_real_oauth_javascript_code;
 
     const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
     const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
     const FIXTUREDIR = './testdata/DataFixtures/';
+    const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -59,6 +62,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       if (!is_dir($this->screenshot_directory)) {
           throw new \Exception('No screenshot directory specified!');
       }
+      $this->use_real_oauth_javascript_code = false;
+      $this->setOauthServiceParameter('0');
   }
 
   /**
@@ -71,6 +76,22 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
       $this->kernel = $kernel;
   }
+
+    /**
+     * @BeforeScenario @RealOAuth
+     */
+    public function activateRealOAuthService() {
+        $this->setOauthServiceParameter('1');
+        $this->use_real_oauth_javascript_code = true;
+    }
+
+    /**1
+     * @AfterScenario @RealOAuth
+     */
+    public function deactivateRealOAuthService() {
+        $this->setOauthServiceParameter('0');
+        $this->use_real_oauth_javascript_code = false;
+    }
 
     public static function getAcceptedSnippetType()
     {
@@ -1013,40 +1034,55 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iLogInToFacebookWithEmailAndPassword()
     {
-        $mail = $this->getParameterValue('facebook_testuser_mail');
-        $pw = $this->getParameterValue('facebook_testuser_pw');
-        echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-        $this->getSession()->wait(1000);
-        $page = $this->getSession()->getPage();
-        if($page->find('css', '#facebook') && $page->find('css', '#login_form')) {
-            echo 'facebook login form appeared' . "\n";
-            $page->fillField('email',$mail);
-            $page->fillField('pass',$pw);
-            $button = $page->findById('u_0_2');
-            assertTrue($button != null);
-            $button->press();
-        } else if($page->find('css', '#facebook') && $page->find('css', '#u_0_1')) {
-            echo 'facebook reauthentication login form appeared' . "\n";
-            $page->fillField('pass',$pw);
-            $button = $page->findById('u_0_0');
-            assertTrue($button != null);
-            $this->getSession()->wait(500);
-            $button->press();
-        } else {
-            assertTrue(false, 'No Facebook form appeared!' . "\n");
-        }
-        $this->getSession()->switchToWindow(null);
-        $this->getSession()->wait(1000);
-
-        $this->iSwitchToPopupWindow();
-        if($page->find('css', '#facebook') && $page->find('css', '._1a_q') ) {
-            echo 'facebook authentication login form appeared' . "\n";
-            $button = $page->findButton('__CONFIRM__');
-            assertTrue($button != null);
-            $this->getSession()->wait(500);
-            $button->press();
+        if($this->use_real_oauth_javascript_code) {
+            $mail = $this->getParameterValue('facebook_testuser_mail');
+            $pw = $this->getParameterValue('facebook_testuser_pw');
+            echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+            $this->getSession()->wait(1000);
+            $page = $this->getSession()->getPage();
+            if($page->find('css', '#facebook') && $page->find('css', '#login_form')) {
+                echo 'facebook login form appeared' . "\n";
+                $page->fillField('email',$mail);
+                $page->fillField('pass',$pw);
+                $button = $page->findById('u_0_2');
+                assertTrue($button != null);
+                $button->press();
+            } else if($page->find('css', '#facebook') && $page->find('css', '#u_0_1')) {
+                echo 'facebook reauthentication login form appeared' . "\n";
+                $page->fillField('pass',$pw);
+                $button = $page->findById('u_0_0');
+                assertTrue($button != null);
+                $this->getSession()->wait(500);
+                $button->press();
+            } else {
+                assertTrue(false, 'No Facebook form appeared!' . "\n");
+            }
             $this->getSession()->switchToWindow(null);
             $this->getSession()->wait(1000);
+
+            $this->iSwitchToPopupWindow();
+            if($page->find('css', '#facebook') && $page->find('css', '._1a_q') ) {
+                echo 'facebook authentication login form appeared' . "\n";
+                $button = $page->findButton('__CONFIRM__');
+                assertTrue($button != null);
+                $this->getSession()->wait(500);
+                $button->press();
+                $this->getSession()->switchToWindow(null);
+                $this->getSession()->wait(1000);
+            }
+        } else {
+            //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
+            $session = $this->getSession();
+            $session->wait(2000, '(0 === jQuery.active)');
+            $session->evaluateScript("$('#btn-facebook-testhook').removeClass('hidden');");
+            $session->evaluateScript("$('#id_oauth').val(105678789764016);");
+            $session->evaluateScript("$('#email_oauth').val('pocket_zlxacqt_tester@tfbnw.net');");
+            $session->evaluateScript("$('#locale_oauth').val('en_US');");
+
+            $page = $this->getSession()->getPage();
+            $button = $page->findButton('btn-facebook-testhook');
+            assertNotNull( $button, 'button not found');
+            $button->press();
         }
     }
 
@@ -1055,27 +1091,43 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iLogInToGoogleWithEmailAndPassword()
     {
-        $mail = $this->getParameterValue('google_testuser_mail');
-        $pw = $this->getParameterValue('google_testuser_pw');
-        echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-        $this->getSession()->wait(3000);
-        $page = $this->getSession()->getPage();
-        if($page->find('css', '#approval_container') &&
-            $page->find('css', '#submit_approve_access')) {
+        if($this->use_real_oauth_javascript_code) {
+            $mail = $this->getParameterValue('google_testuser_mail');
+            $pw = $this->getParameterValue('google_testuser_pw');
+            echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+            $this->getSession()->wait(3000);
+            $page = $this->getSession()->getPage();
+            if($page->find('css', '#approval_container') &&
+                $page->find('css', '#submit_approve_access')) {
                 $this->approveGoogleAccess();
-        } else if($page->find('css', '.google-header-bar centered') &&
-            $page->find('css', '.signin-card clearfix')) {
-            $this->signInWithGoogleEMailAndPassword($mail, $pw);
-        } else if($page->find('css', '#gaia_firstform') &&
-                  $page->find('css', '#Email') &&
-                  $page->find('css', '#Passwd-hidden')
-                  ) {
+            } else if($page->find('css', '.google-header-bar centered') &&
+                $page->find('css', '.signin-card clearfix')) {
+                $this->signInWithGoogleEMailAndPassword($mail, $pw);
+            } else if($page->find('css', '#gaia_firstform') &&
+                $page->find('css', '#Email') &&
+                $page->find('css', '#Passwd-hidden')
+            ) {
                 $this->signInWithGoogleEMail($mail, $pw);
+            }
+            else {
+                assertTrue(false, 'No Google form appeared!' . "\n");
+            }
+            $this->getSession()->wait(1000);
+        } else {
+            //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
+            $session = $this->getSession();
+            $session->wait(2000, '(0 === jQuery.active)');
+            $session->evaluateScript("$('#btn-gplus-testhook').removeClass('hidden');");
+            $session->evaluateScript("$('#id_oauth').val('105155320106786463089');");
+            $session->evaluateScript("$('#email_oauth').val('pocketcodetester@gmail.com');");
+            $session->evaluateScript("$('#locale_oauth').val('de');");
+
+            $page = $this->getSession()->getPage();
+            $button = $page->findButton('btn-gplus-testhook');
+            assertNotNull( $button, 'button not found');
+            $button->press();
         }
-        else {
-            assertTrue(false, 'No Google form appeared!' . "\n");
-        }
-        $this->getSession()->wait(1000);
+
     }
 
     private function approveGoogleAccess(){
@@ -1202,15 +1254,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
 
     /**
-     * @Then /^I choose the username '([^']*)'$/
+     * @Then /^I choose the username '([^']*)' and check button activations$/
      */
-    public function iChooseTheUsername($arg1)
+    public function iChooseTheUsernameTestingButtonEnabled($arg1)
     {
-        $this->getSession()->wait(2000);
+        $this->getSession()->wait(2500);
         $page = $this->getSession()->getPage();
 
         $button = $page->findById('btn_oauth_username');
-        assertTrue($button != null);
+        assertNotNull($button);
         assertTrue($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input',$arg1);
@@ -1224,8 +1276,33 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $page->fillField('dialog_oauth_username_input',$arg1);
         $this->getSession()->wait(400);
         $button->press();
-        $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
-        $this->getSession()->wait(2000);
+        if (!$arg1 === self::ALREADY_IN_DB_USER) {
+            $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+        }
+        $this->getSession()->wait(2500);
+    }
+
+    /**
+     * @Then /^I choose the username '([^']*)'$/
+     */
+    public function iChooseTheUsername($arg1)
+    {
+        $this->getSession()->wait(2500);
+        $page = $this->getSession()->getPage();
+
+        $button = $page->findById('btn_oauth_username');
+        assertNotNull($button);
+        assertTrue($button->hasAttribute('disabled'));
+
+        $page->fillField('dialog_oauth_username_input',$arg1);
+        $this->getSession()->wait(400);
+        assertFalse($button->hasAttribute('disabled'));
+
+        $button->press();
+        if (!$arg1 === self::ALREADY_IN_DB_USER) {
+            $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+        }
+        $this->getSession()->wait(2500);
     }
 
     private function getParameterValue($name) {
@@ -1239,6 +1316,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         }
         fclose($myfile);
         assertTrue(false, 'No entry found in parameters.yml!');
+        return false;
+    }
+
+    private function setOauthServiceParameter($value) {
+        $new_content = 'parameters:' . chr(10) . '    oauth_use_real_service: ' .  $value;
+        file_put_contents("app/config/parameters_test.yml", $new_content);
     }
 
     /**

@@ -60,6 +60,15 @@ services:
         class: Catrobat\AppBundle\Services\FacebookPostService
         arguments: ["@router", "@service_container", "@screenshotrepository"]
 
+    real_oauth_service:
+        class: Catrobat\AppBundle\Services\OAuthService
+        arguments:
+          - "@service_container"
+
+    oauth_service:
+        class: Catrobat\AppBundle\Features\Helpers\FakeOAuthService
+        arguments: ["@real_oauth_service", "@service_container"]
+
     download_statistics:
         class: Catrobat\AppBundle\Features\Helpers\FakeDownloadStatisticsService
         arguments: ["@real_download_statistics"]

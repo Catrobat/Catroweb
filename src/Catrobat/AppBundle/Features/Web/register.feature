@@ -22,11 +22,7 @@
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create my Account"
-    Then I should be on "/pocketcode/login"
-    When I fill in "username" with "CatrobatNew"
-    And I fill in "password" with "123456"
-    And I press "Login"
-    Then I should be logged in
+    Then I should be on "/pocketcode/myprofile"
     And I should see "CatrobatNew"
     When I am on "/logout"
     Then I should be logged out
@@ -94,8 +90,11 @@
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create my Account"
-    Then I should be on "/pocketcode/login"
-    When I fill in "username" with "CatrobatNew"
+    Then I should be on "/pocketcode/myprofile"
+    When I am on "/logout"
+    Then I should be logged out
+    When I click "#btn-login"
+    And I fill in "username" with "CatrobatNew"
     And I fill in "password" with "12345"
     And I press "Login"
     Then I should see "Your password or username was incorrect."

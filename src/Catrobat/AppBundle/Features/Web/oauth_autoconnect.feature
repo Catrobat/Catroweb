@@ -12,11 +12,8 @@ Feature: Open Authentication
   @javascript @insulated
   Scenario: Login as a new user from Facebook, where another user without Facebook-ID, but with same E-Mail already exists.
             Facebook account should be auto-connected to existing account.
-    Given I am on homepage
-    When I trigger Facebook login with auth_type 'reauthenticate'
-    And I click Facebook login link
-    And I switch to popup window
-    Then I log in to Facebook with valid credentials
+    Given I am on "/pocketcode/login"
+    When I log in to Facebook with valid credentials
     Then I should be logged in
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
@@ -31,11 +28,8 @@ Feature: Open Authentication
   @javascript @insulated
   Scenario: Login as a new user from Google+, where another user without Google+-ID, but with same E-Mail already exists.
             Google+ account should be auto-connected to existing account.
-    Given I am on homepage
-    When I trigger Google login with approval prompt "force"
-    And I click Google login link "twice"
-    And I switch to popup window
-    Then I log in to Google with valid credentials
+    Given I am on "/pocketcode/login"
+    When I log in to Google with valid credentials
     Then I should be logged in
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |

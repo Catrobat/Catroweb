@@ -14,7 +14,7 @@ class WebContext extends BaseContext
     /**
      * @BeforeScenario
      */
-    public function followRedreicts()
+    public function followRedirects()
     {
         $this->getClient()->followRedirects(true);
     }
