@@ -15,12 +15,12 @@ Feature: Pocketcode homepage
       | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
     And following programs are featured:
-      | id | program      | url                  | active | priority |
-      | 1  | program 1    |                      | no     | 1        |
-      | 2  | program 2    |                      | yes    | 3        |
-      | 3  | program 3    |                      | yes    | 2        |
-      | 4  |              | http://www.google.at | yes    | 5        |
-      | 5  |              | http://www.orf.at    | no     | 4        |
+      | id | program      | url                   | active | priority |
+      | 1  | program 1    |                       | no     | 1        |
+      | 2  | program 2    |                       | yes    | 3        |
+      | 3  | program 3    |                       | yes    | 2        |
+      | 4  |              | http://www.google.at/ | yes    | 5        |
+      | 5  |              | http://www.orf.at/    | no     | 4        |
 
   Scenario: Viewing the homepage at website root
     Given I am on homepage
@@ -43,4 +43,4 @@ Feature: Pocketcode homepage
   Scenario: Featured Programs and Urls
     Given I am on homepage
     Then I should see the featured slider
-    And I should see the slider with the values "feature_4_5,feature_2_3,feature_3_2"
+    And I should see the slider with the values "http://www.google.at/,program 2,program 3"

@@ -1324,7 +1324,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       if ($featured[$i]['program'] != "") {
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['program']);
         $featured_entry->setProgram($program);
-        $featured_entry->setUrl($this->kernel->getContainer()->get('router')->generate('program', array('id' => $program->getId())));
       } else {
         $url = $featured[$i]['url'];
         $featured_entry->setUrl($url);
@@ -1344,13 +1343,21 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iShouldSeeTheSliderWithTheValues($values)
   {
     $slider_items = explode(',', $values);
-    $owl_items = $this->getSession()->getPage()->findAll('css', '.owl-item div');
+    $owl_items = $this->getSession()->getPage()->findAll('css', '.owl-item div a');
     assertEquals(count($owl_items), count($slider_items));
 
     for ($index = 0; $index < count($owl_items); $index++)
     {
-      $id = $owl_items[$index]->getAttribute('id');
-      assertEquals($id, $slider_items[$index]);
+      $url = $slider_items[$index];
+      if (strpos($url, "http://") !== 0) {
+        $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($url);
+        assertNotNull($program);
+        assertNotNull($program->getId());
+        $url = $this->kernel->getContainer()->get('router')->generate('program', array('id' => $program->getId()));
+      }
+
+      $feature_url = $owl_items[$index]->getAttribute('href');
+      assertContains($url, $feature_url);
     }
   }
 

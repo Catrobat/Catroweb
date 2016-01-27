@@ -51,8 +51,6 @@ class DefaultController extends Controller
               $info['url'] = $item->getUrl();
           }
           $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
-          $info['featured_id'] = $item->getId();
-          $info['priority'] = $item->getPriority();
 
           $featured[] = $info;
       }
