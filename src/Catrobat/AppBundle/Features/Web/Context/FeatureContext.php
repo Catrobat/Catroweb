@@ -1319,9 +1319,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $featured = $table->getHash();
     for ($i = 0; $i < count($featured); ++$i) {
-      $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['name']);
       $featured_entry = new FeaturedProgram();
-      $featured_entry->setProgram($program);
+
+      if ($featured[$i]['program'] != "") {
+        $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['program']);
+        $featured_entry->setProgram($program);
+        $featured_entry->setUrl($this->kernel->getContainer()->get('router')->generate('program', array('id' => $program->getId())));
+      } else {
+        $url = $featured[$i]['url'];
+        $featured_entry->setUrl($url);
+      }
+
       $featured_entry->setActive($featured[$i]['active'] == 'yes');
       $featured_entry->setImageType('jpg');
       $featured_entry->setPriority($featured[$i]['priority']);

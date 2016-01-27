@@ -40,6 +40,7 @@ class FeaturedUrlAdmin extends Admin
             ->add('file', 'file', $file_options)
             ->add('url', 'url')
             ->add('flavor')
+            ->add('priority')
             ->add('active', null, array('required' => false))
             ;
     }
@@ -60,6 +61,7 @@ class FeaturedUrlAdmin extends Admin
             ->add('Featured Image', 'string', array('template' => ':Admin:featured_image.html.twig'))
             ->add('url', 'url')
             ->add('flavor', 'string', array('editable' => true))
+            ->add('priority', 'integer', array('editable' => true))
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
