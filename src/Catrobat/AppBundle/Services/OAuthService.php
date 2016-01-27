@@ -291,7 +291,7 @@ class OAuthService
         if ($facebook_user) {
 
             $client_token = $facebook_user->getFacebookAccessToken();
-            if (!$request->request->has('token')) {
+            if ($client_token == null && $request->request->has('token')) {
                 $client_token = $request->request->get('token');
             }
             $this->setFacebookDefaultAccessToken($client_token);
