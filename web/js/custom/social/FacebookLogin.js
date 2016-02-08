@@ -34,7 +34,7 @@ function triggerFacebookLogin() {
         }
     }, {
         //scope: 'public_profile,email,user_about_me,manage_pages,publish_pages', manage_pages,publish_pages are necessary when requesting new token for fb post
-        scope: 'public_profile,email,user_about_me',
+        scope: 'public_profile,email',
         return_scopes: true,
         auth_type: $('#facebook_auth_type').val() //set to 'reauthenticate' to force re-authentication of the user
     });
