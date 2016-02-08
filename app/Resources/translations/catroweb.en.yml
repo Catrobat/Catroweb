@@ -363,7 +363,6 @@ oauth:
   username_chooser: Please choose a username:
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 
 search:
   dotdotdot: Search...

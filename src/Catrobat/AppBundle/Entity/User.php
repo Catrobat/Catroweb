@@ -70,11 +70,6 @@ class User extends BaseUser implements LdapUserInterface
     protected $facebook_access_token;
 
     /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     */
-    protected $oauth_password;
-
-    /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
     protected $limited = false;
@@ -257,24 +252,6 @@ class User extends BaseUser implements LdapUserInterface
         $this->avatar = $avatar;
         
         return $this;
-    }
-
-    /**
-     *
-     * @param mixed $oauth_password            
-     */
-    public function setOauthPassword($oauth_password)
-    {
-        $this->oauth_password = $oauth_password;
-    }
-
-    /**
-     *
-     * @return mixed
-     */
-    public function getOauthPassword()
-    {
-        return $this->oauth_password;
     }
 
     /**

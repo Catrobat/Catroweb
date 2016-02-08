@@ -49,26 +49,13 @@ Feature: Pocketcode help page
 
   Scenario: Clicking on step-by-step-desktop image at help page and test navigation
     When I click "#step-by-step-desktop"
-    Then  I should see "1. Make a new program"
-    And I should see "1" in the ".bubbles" element
-    And I should not see an ".arrow.left" element
-    And I should see an ".arrow.right" element
-    And I should see "1" in the ".current" element
-    When I click ".arrow.right"
-    Then I should see "2. Create a new object"
-    And I should see an ".arrow.left" element
-    And I should see an ".arrow.right" element
-    And I should see "2" in the ".current" element
-    When I go to "/pocketcode/step-by-step/11"
-    Then I should see "11. Main Menu"
-    And I should see an ".arrow.left" element
-    And I should not see an ".arrow.right" element
-    And I should see "11" in the ".current" element
+    Then  I should see "STEP-BY-STEP INTRO"
+    And I should see an ".video-container" element
 
   @Mobile
   Scenario: Clicking on step-by-step-mobile image at help page and test navigation
     When I click "#step-by-step-mobile"
-    Then  I should see "1. Make a new program"
+    Then  I should see "STEP-BY-STEP INTRO"
 
   Scenario: Clicking on tutorials image at help page and test navigation
     When I click "#tutorials"

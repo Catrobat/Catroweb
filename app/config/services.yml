@@ -174,10 +174,17 @@ services:
           - "@gamejamrepository"
           - "@tokengenerator"
           - "@translator"
-          
+
+# =========================== Social ===========================
+
     facebook_post_service:
         class: Catrobat\AppBundle\Services\FacebookPostService
         arguments: ["@router", "@service_container", "@screenshotrepository"]
+
+    oauth_service:
+        class: Catrobat\AppBundle\Services\OAuthService
+        arguments:
+          - "@service_container"
 # =========================== Download ===========================
 
     download_statistics:

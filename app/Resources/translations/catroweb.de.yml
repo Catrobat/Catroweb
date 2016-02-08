@@ -517,7 +517,6 @@ oauth:
   username_chooser: 'Bitte wähle einen Benutzernamen:'
   username_hint: Der Benutzername sollte nicht dein richtiger Name sein.
   usernameTaken: Benutzername bereits vergeben, bitte wähle einen anderen.
-  noReset: Facebook und Google+ Benutzer haben kein Passwort zum zurücksetzen.
 search:
   dotdotdot: Suche...
   search: Suche

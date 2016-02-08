@@ -150,8 +150,10 @@ class SymfonySupport
     {
         if ($this->default_user == null) {
             $this->default_user = $this->insertUser();
+        } else {
+            $this->default_user = $this->getUserManager()->find($this->default_user->getId());
         }
-    
+ 
         return $this->default_user;
     }
     

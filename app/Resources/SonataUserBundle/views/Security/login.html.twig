@@ -59,16 +59,16 @@
     <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 
     <div id="login_links">
-         {#<div>#}
-             {#<a id="create_account" href="{{ path('fos_user_registration_register') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>#}
-         {#</div>#}
+         <div>
+             <a id="create_account" href="{{ path('fos_user_registration_register') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+         </div>
          <div>
              <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>
          </div>
     </div>
 </form>
 
-{#{% include ':Default:oauth_form.html.twig' %}#}
+{% include ':Default:oauth_form.html.twig' %}
 
 {% endblock fos_user_content %}
 

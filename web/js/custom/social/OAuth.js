@@ -77,13 +77,3 @@ function openDialog() {
   $('body').append(dark_background);
 
 }
-
-function submitOAuthForm(data){
-  var $username = data['username'];
-  var $password = data['password'];
-  $("#username_oauth").val($username);
-  $("#password_oauth").val($password);
-  $("#_submit_oauth").attr("disabled", false);
-  $("#_submit_oauth").click();
-  $("#_submit_oauth").attr("disabled", true);
-}

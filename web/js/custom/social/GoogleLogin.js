@@ -25,7 +25,6 @@ function triggerGoogleLogin(){
                 'approvalprompt': $('#gplus_approval_prompt').val(), //'force' prevents auto g+-signin
                 'clientid': $appid,
                 'cookiepolicy': 'single_host_origin',
-                'requestvisibleactions': 'http://schemas.google.com/AddActivity',
                 'redirecturi': 'postmessage',
                 'accesstype': 'offline',
                 'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
@@ -56,60 +55,61 @@ function getGoogleUserInfo(authResult) {
     });
 
     function getUserInfoCallback(obj) {
-        var $email = '';
-        var $username = '';
-        var $id = '';
-        var $locale = '';
-
         if (obj['email']) {
-            $email = obj['email'];
-        }
-        if (obj['name']) {
-            $username = obj['name'];
+            $("#email_oauth").val(obj['email']);
         }
         if (obj['id']) {
-            $id = obj['id'];
+            $("#id_oauth").val(obj['id']);
         }
         if (obj['locale']) {
-            $locale = obj['locale'];
+            $("#locale_oauth").val(obj['locale']);
         }
-        var $ajaxUrlCheckServerTokenAvailable = Routing.generate(
-            'catrobat_oauth_login_google_servertoken_available', {flavor: 'pocketcode'}
-        );
-        $.post($ajaxUrlCheckServerTokenAvailable,
-            {
-                id: $id
-            },
-            function (data) {
-                console.log(data);
-                var $server_token_available = data['token_available'];
-                if (!$server_token_available) {
-                    $("#id_oauth").val($id);
-                    $("#email_oauth").val($email);
-                    $("#locale_oauth").val($locale);
-
-                    var $ajaxUrlCheckEmailAvailable = Routing.generate(
-                      'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
-                    );
-                    $.post($ajaxUrlCheckEmailAvailable,
-                      {
-                          email: $email
-                      },
-                      function (data, status) {
-                          console.log(data);
-                          console.log(status);
-
-                          if(data['email_available'] == false) {
-                              getDesiredUsernameGoogle();
-                          } else {
-                              sendCodeToServer($("#access_token_oauth").val(), $id, data['username'], $email, $locale);
-                          }
-                      });
-                } else {
-                    GoogleLogin(data['email'], data['username'], $id, $locale);
-                }
-            });
+        checkGoogleCallbackDataWithServer();
     }
+}
+
+function checkGoogleCallbackDataWithServer() {
+
+    $id = $("#id_oauth").val();
+    $email = $("#email_oauth").val();
+    $locale = $("#locale_oauth").val();
+
+    var $ajaxUrlCheckServerTokenAvailable = Routing.generate(
+        'catrobat_oauth_login_google_servertoken_available', {flavor: 'pocketcode'}
+    );
+    $.post($ajaxUrlCheckServerTokenAvailable,
+        {
+            id: $id
+        },
+        function (data) {
+            console.log(data);
+            var $server_token_available = data['token_available'];
+            if (!$server_token_available) {
+                $("#id_oauth").val($id);
+                $("#email_oauth").val($email);
+                $("#locale_oauth").val($locale);
+
+                var $ajaxUrlCheckEmailAvailable = Routing.generate(
+                    'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
+                );
+                $.post($ajaxUrlCheckEmailAvailable,
+                    {
+                        email: $email
+                    },
+                    function (data, status) {
+                        console.log(data);
+                        console.log(status);
+
+                        if(data['email_available'] == false) {
+                            getDesiredUsernameGoogle();
+                        } else {
+                            sendCodeToServer($("#access_token_oauth").val(), $id, data['username'], $email, $locale);
+                        }
+                    });
+            } else {
+                GoogleLogin(data['email'], data['username'], $id, $locale);
+            }
+        });
 }
 
 function getDesiredUsernameGoogle() {
@@ -134,20 +134,9 @@ function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
             locale: $locale
         },
         function (data, status) {
-
-            $ajaxUrl = Routing.generate(
-                'catrobat_oauth_login_google', {flavor: 'pocketcode'}
-            );
-
-            $.post($ajaxUrl,
-                {
-                    username: $username,
-                    id: $gplus_id,
-                    email: $email
-                },
-                function (data, status) {
-                    submitOAuthForm(data)
-                });
+            console.log(status);
+            console.log(data);
+            GoogleLogin($email, $username, $gplus_id, $locale);
         });
 }
 
@@ -165,7 +154,18 @@ function GoogleLogin($email, $username, $id, $locale) {
             locale: $locale
         },
         function (data, status) {
-            submitOAuthForm(data)
+            var $ajaxLoginRedirectUrl = Routing.generate(
+                'catrobat_oauth_login_redirect', {flavor: 'pocketcode'}
+            );
+
+            $.post($ajaxLoginRedirectUrl,
+                {
+                    gplus_id: $id
+                }, function (data, status) {
+                    console.log(data);
+                    $url = data['url'];
+                    $(location).attr('href', $url);
+                });
         });
 }
 
