@@ -36,23 +36,21 @@ class DefaultController extends Controller
       $image_repository = $this->get('featuredimagerepository');
       $repository = $this->get('featuredrepository');
 
-      $programs = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
+      $featured_items = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
 
       $featured = array();
-      foreach ($programs as $program) {
+      foreach ($featured_items as $item) {
           $info = array();
-          if ($program->getProgram() !== null) {
+          if ($item->getProgram() !== null) {
               if ($request->get('flavor')) {
-                  $info['url'] = $this->generateUrl('program', array('id' => $program->getProgram()->getId(), 'flavor' => $request->get('flavor')));
+                  $info['url'] = $this->generateUrl('program', array('id' => $item->getProgram()->getId(), 'flavor' => $request->get('flavor')));
               } else {
-                  $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $program->getProgram()->getId()));
+                  $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $item->getProgram()->getId()));
               }
           } else {
-              $info['url'] = $program->getUrl();
+              $info['url'] = $item->getUrl();
           }
-          $info['image'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
-          $info['program_id'] = $program->getProgram()->getId();
-          $info['priority'] = $program->getPriority();
+          $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
 
           $featured[] = $info;
       }
