@@ -2,44 +2,45 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Catrobat\AppBundle\Entity\ProgramManager;
-use Catrobat\AppBundle\Services\ExtractedFileRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class CleanExtractedFileCommand extends ContainerAwareCommand
 {
-  private $extracted_file_repository;
-  private $program_manager;
   private $output;
-
-  public function __construct(ExtractedFileRepository $extracted_file_repository, ProgramManager $program_manager)
-  {
-    parent::__construct();
-    $this->extracted_file_repository = $extracted_file_repository;
-    $this->program_manager = $program_manager;
-  }
 
   protected function configure()
   {
     $this->setName('catrobat:clean:extracted')
-         ->setDescription('Delete the extracted directories');
+         ->setDescription('Delete the extracted programs and sets the directory hash to NULL');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
-    $programs = $this->program_manager->getProgramsWithExtractedDirectoryHash();
-    $this->output->writeln('There are ' . count($programs) . ' extracted directories to delete!');
 
-    foreach ($programs as $program)
-    {
-      $this->output->writeln('Program with ID: ' . $program->getId() . ', Hash: ' . $program->getExtractedDirectoryHash());
-      $this->extracted_file_repository->removeProgramExtractedFile($program);
+    $this->output->writeln('Deleting Extracted Catrobat Files');
+    $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'));
+
+    /* @var $em \Doctrine\ORM\EntityManager */
+    $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+    $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
+    $query->setParameter('hash', "null");
+    $result = $query->getSingleScalarResult();
+    $this->output->writeln('Reset the directory hash of '.$result.' projects');
+  }
+
+  private function emptyDirectory($directory)
+  {
+    $filesystem = new Filesystem();
+
+    $finder = new Finder();
+    $finder->in($directory)->depth(0);
+    foreach ($finder as $file) {
+      $filesystem->remove($file);
     }
-
-    $this->output->writeln('All extracted directories deleted!');
-    return 0;
   }
 } 
