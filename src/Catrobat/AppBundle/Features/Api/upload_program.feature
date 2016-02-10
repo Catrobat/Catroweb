@@ -95,3 +95,11 @@ Feature: Upload a program
     When I upload a program
     Then the uploaded program shouldn't have any parent entity
     And the uploaded program should have RemixOf "https://scratch.mit.edu/projects/70058680" in the xml
+    
+  Scenario: 
+    Given the next generated token will be "aabbccddee"
+      And I am "Catrobat"
+      And I upload a catrobat program
+     When I upload another program using token "aabbccddee"
+     Then It should be uploaded
+     

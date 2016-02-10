@@ -21,7 +21,6 @@
     <input type="hidden" id = "email_oauth" name="_email" />
     <input type="hidden" id = "locale_oauth" name="_locale" />
     <input type="hidden" id = "username_oauth" name="_username" />
-    <input type="hidden" id = "password_oauth" name="_password" />
     <input type="hidden" id = "access_token_oauth" name="_access_token" />
     <input type="hidden" id = "gplus_approval_prompt" value="auto" />
     <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
@@ -51,9 +50,7 @@
 
      <div id="status">
     </div>
-
-    <button id="_submit_oauth" name="_submit" class="hidden" />
-
 </form>
 
-
+<button id="btn-facebook-testhook" class="hidden" onclick="handleFacebookUserInfoResponseTrigger();"></button>
+<button id="btn-gplus-testhook" class="hidden" onclick="checkGoogleCallbackDataWithServer();"></button>

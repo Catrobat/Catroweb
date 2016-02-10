@@ -40,7 +40,7 @@
         "chartinger/behat-twig-report-extension": "dev-master@dev",
         "ircmaxell/password-compat": "~1.0",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
-        "google/apiclient": "~1.1",
+        "google/apiclient": "1.1.*",
         "facebook/php-sdk-v4" : "~5.0",
         "fr3d/ldap-bundle": "2.0.*@dev",
         "ircmaxell/password-compat": "~1.0",

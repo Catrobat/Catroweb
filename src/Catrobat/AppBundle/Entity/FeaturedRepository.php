@@ -18,6 +18,7 @@ class FeaturedRepository extends EntityRepository
             ->setParameter('flavor', $flavor)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
+            ->orderBy('e.priority', 'DESC')
             ->getQuery()->getResult();
     }
 
@@ -45,6 +46,7 @@ class FeaturedRepository extends EntityRepository
         ->setParameter('flavor', $flavor)
         ->setFirstResult($offset)
         ->setMaxResults($limit)
+        ->orderBy('e.priority', 'DESC')
         ->getQuery()->getResult();
     }
     

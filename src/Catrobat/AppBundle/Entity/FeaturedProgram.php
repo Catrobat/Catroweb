@@ -49,6 +49,11 @@ class FeaturedProgram
     protected $flavor = 'pocketcode';
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $priority = 0;
+
+    /**
      * @return mixed
      */
     public function getFlavor()
@@ -149,5 +154,21 @@ class FeaturedProgram
     public function setNewFeaturedImage(File $file)
     {
         $this->file = $file;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param mixed $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
     }
 }

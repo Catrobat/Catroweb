@@ -1,5 +1,6 @@
 imports:
     - { resource: config_dev.yml }
+    - { resource: parameters_test.yml }
     - { resource: services_test.yml }
 
 framework:
@@ -39,18 +40,27 @@ parameters:
       catrobat.snapshot.dir:         "%catrobat.webdir%resources_test/snapshots/"
 
 monolog:
-    channels: ["upload"]
+    channels: ['upload', 'download_stats']
     handlers:
         upload:
             type: stream
-            path: "%kernel.logs_dir%/upload.log"
+            path: %kernel.logs_dir%/upload.log
             channels: [upload]
         main:
             type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
-            
+        download_stats:
+            type:  rotating_file
+            path:  %kernel.logs_dir%/download_stats/download_stats.log
+            level: debug
+            max_files: 20
+            channels: [download_stats]
+
 security:
     firewalls:
         main: 
             http_basic: ~
+
+bazinga_geocoder:
+   fake_ip:    88.116.169.222 #123.345.643.133

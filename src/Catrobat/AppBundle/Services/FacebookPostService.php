@@ -18,6 +18,7 @@ class FacebookPostService
 {
     private $router;
     private $container;
+    private $screenshot_repository;
     private $facebook;
     private $app_id;
     private $app_secret;
@@ -26,10 +27,11 @@ class FacebookPostService
     private $fb_admin_user_token;
     private $debug;
 
-    public function __construct(Router $router, Container $container)
+    public function __construct(Router $router, Container $container, ScreenshotRepository $screenshot_repository)
     {
         $this->router = $router;
         $this->container = $container;
+        $this->screenshot_repository = $screenshot_repository;
     }
 
     public function removeFbPost($post_id)
@@ -208,10 +210,18 @@ class FacebookPostService
             $program = $program_manager->find($program_id);
 
             $url = $this->router->generate('program', array('id' => $program_id), true);
+            $user = $program->getUser();
+            $profile_url = $this->router->generate('profile', array('id' => $user->getId()), true);
+
+            $message = $program->getName() . chr(10) . 'by '  . $profile_url;
+
+            $program_img = $this->screenshot_repository->getScreenshotWebPath($program->getId());
+            $program_img_url = $this->router->getContext()->getHost() . '/' . $program_img;
 
             $data = [
                 'link' => $url,
-                'message' => $program->getName(),
+                'message' => $message,
+                'picture' => $program_img_url,
             ];
 
             $response = $this->facebook->post('/me/feed', $data, (string) $accessToken);

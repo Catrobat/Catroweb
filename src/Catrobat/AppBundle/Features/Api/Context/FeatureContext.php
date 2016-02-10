@@ -1,5 +1,4 @@
 <?php
-
 namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
@@ -31,24 +30,32 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends BaseContext
 {
+
     private $user;
+
     private $request_parameters;
+
     private $files;
+
     private $last_response;
+
     private $hostname;
+
     private $secure;
+
     /**
-     * @var $download_statistics_service DownloadStatisticsService
      * @var $program_downloads_repository ProgramDownloadsRepository
      */
     private $download_statistics_service;
+
     private $fb_post_program_id;
+
     private $fb_post_id;
 
     /**
      * Initializes context with parameters from behat.yml.
      *
-     * @param array $parameters
+     * @param array $parameters            
      */
     public function __construct($error_directory)
     {
@@ -59,14 +66,15 @@ class FeatureContext extends BaseContext
         $this->hostname = 'localhost';
         $this->secure = false;
     }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Support Functions
-
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Support Functions
+    
     /**
      * @BeforeScenario @RealFacebook
      */
-    public function activateRealFacebookService() {
+    public function activateRealFacebookService()
+    {
         $this->getClient()->disableReboot();
         $this->getSymfonyService('facebook_post_service')->useRealService(true);
         $this->theServerNameIs('share.catrob.at');
@@ -76,7 +84,8 @@ class FeatureContext extends BaseContext
     /**
      * @AfterScenario @RealFacebook
      */
-    public function deactivateRealFacebookService() {
+    public function deactivateRealFacebookService()
+    {
         $this->getSymfonyService('facebook_post_service')->useRealService(false);
         $this->theServerNameIs('localhost');
         $this->getClient()->enableReboot();
@@ -108,16 +117,18 @@ class FeatureContext extends BaseContext
     {
         $this->getClient()->request('POST', $url, $this->request_parameters, $this->files);
     }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////// Steps
-
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////// Steps
+    
     /**
      * @Given /^I have a program with "([^"]*)" as (name|description)$/
      */
     public function iHaveAProgramWithAsDescription($value, $header)
     {
-        $this->generateProgramFileWith(array($header => $value));
+        $this->generateProgramFileWith(array(
+            $header => $value
+        ));
     }
 
     /**
@@ -154,11 +165,11 @@ class FeatureContext extends BaseContext
     public function iDefineTheFollowingRudeWords(TableNode $table)
     {
         $words = $table->getHash();
-
+        
         $word = null;
         $em = $this->getManager();
-
-        for ($i = 0; $i < count($words); ++$i) {
+        
+        for ($i = 0; $i < count($words); ++ $i) {
             $word = new RudeWord();
             $word->setWord($words[$i]['word']);
             $em->persist($word);
@@ -171,7 +182,11 @@ class FeatureContext extends BaseContext
      */
     public function iAmAValidUser()
     {
-        $this->insertUser(array('name' => 'BehatGeneratedName', 'token' => 'BehatGeneratedToken', 'password' => 'BehatGeneratedPassword'));
+        $this->insertUser(array(
+            'name' => 'BehatGeneratedName',
+            'token' => 'BehatGeneratedToken',
+            'password' => 'BehatGeneratedPassword'
+        ));
     }
 
     /**
@@ -204,7 +219,7 @@ class FeatureContext extends BaseContext
             case 'valid parameters':
                 $filename = 'base.catrobat';
                 break;
-
+            
             default:
                 throw new PendingException('No case defined for "' . $programattribute . '"');
         }
@@ -225,14 +240,13 @@ class FeatureContext extends BaseContext
     public function thereAreUsers(TableNode $table)
     {
         $users = $table->getHash();
-        for ($i = 0; $i < count($users); ++$i) {
-            $this->insertUser(
-                @array(
-                    'name' => $users[$i]['name'],
-                    'email' => $users[$i]['email'],
-                    'token' => isset($users[$i]['token']) ? $users[$i]['token'] : "",
-                    'password' => isset($users[$i]['password']) ? $users[$i]['password'] : "",
-                ));
+        for ($i = 0; $i < count($users); ++ $i) {
+            $this->insertUser(@array(
+                'name' => $users[$i]['name'],
+                'email' => $users[$i]['email'],
+                'token' => isset($users[$i]['token']) ? $users[$i]['token'] : "",
+                'password' => isset($users[$i]['password']) ? $users[$i]['password'] : ""
+            ));
         }
     }
 
@@ -242,19 +256,19 @@ class FeatureContext extends BaseContext
     public function thereAreLdapUsers(TableNode $table)
     {
         /**
+         *
          * @var $ldap_test_driver LdapTestDriver
          * @var $user User
          */
         $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
         $users = $table->getHash();
         $ldap_test_driver->resetFixtures();
-
-        for ($i = 0; $i < count($users); ++$i) {
+        
+        for ($i = 0; $i < count($users); ++ $i) {
             $username = $users[$i]['name'];
             $pwd = $users[$i]['password'];
             $groups = array_key_exists("groups", $users[$i]) ? explode(",", $users[$i]["groups"]) : array();
-            assert($ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null),
-                "APC_store not working. Check your cli/php.ini settings, add \"apc.enabled = 1\" and \"apc.enable_cli = 1\" at the end");
+            assert($ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null), "APC_store not working. Check your cli/php.ini settings, add \"apc.enabled = 1\" and \"apc.enable_cli = 1\" at the end");
         }
     }
 
@@ -265,9 +279,9 @@ class FeatureContext extends BaseContext
     {
         $programs = $table->getHash();
         $program_manager = $this->getProgramManger();
-        for ($i = 0; $i < count($programs); ++$i) {
+        for ($i = 0; $i < count($programs); ++ $i) {
             $user = $this->getUserManager()->findOneBy(array(
-                'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : "",
+                'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : ""
             ));
             @$config = array(
                 'name' => $programs[$i]['name'],
@@ -280,9 +294,9 @@ class FeatureContext extends BaseContext
                 'directory_hash' => $programs[$i]['directory_hash'],
                 'filesize' => @$programs[$i]['FileSize'],
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
+                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null
             );
-
+            
             $this->insertProgram($user, $config);
         }
     }
@@ -294,12 +308,13 @@ class FeatureContext extends BaseContext
     {
         $em = $this->getManager();
         $featured = $table->getHash();
-        for ($i = 0; $i < count($featured); ++$i) {
+        for ($i = 0; $i < count($featured); ++ $i) {
             $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
             $featured_entry = new FeaturedProgram();
             $featured_entry->setProgram($program);
             $featured_entry->setActive($featured[$i]['active'] == 'yes');
             $featured_entry->setImageType('jpg');
+            $featured_entry->setPriority($featured[$i]['priority']);
             $em->persist($featured_entry);
         }
         $em->flush();
@@ -313,9 +328,9 @@ class FeatureContext extends BaseContext
         $em = $this->getManager();
         $file_repo = $this->getFileRepository();
         $programs = $table->getHash();
-        for ($i = 0; $i < count($programs); ++$i) {
+        for ($i = 0; $i < count($programs); ++ $i) {
             $user = $this->getUserManager()->findOneBy(array(
-                'username' => $programs[$i]['owned by'],
+                'username' => $programs[$i]['owned by']
             ));
             $config = array(
                 'name' => $programs[$i]['name'],
@@ -325,11 +340,11 @@ class FeatureContext extends BaseContext
                 'uploadtime' => $programs[$i]['upload time'],
                 'catrobatversionname' => $programs[$i]['version'],
                 'filesize' => @$programs[$i]['FileSize'],
-                'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
+                'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true
             );
-
+            
             $program = $this->insertProgram($user, $config);
-
+            
             $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $program->getId());
         }
     }
@@ -348,7 +363,9 @@ class FeatureContext extends BaseContext
     public function iPostTheseParametersTo($url)
     {
         $this->getClient()->request('POST', $url, $this->request_parameters, $this->files, array(
-            'HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure));
+            'HTTP_HOST' => $this->hostname,
+            'HTTPS' => $this->secure
+        ));
     }
 
     /**
@@ -357,7 +374,8 @@ class FeatureContext extends BaseContext
     public function iGetWithTheseParameters($url)
     {
         $this->getClient()->request('GET', $url . '?' . http_build_query($this->request_parameters), array(), $this->files, array(
-            'HTTP_HOST' => $this->hostname, 'HTTPS' => $this->secure,
+            'HTTP_HOST' => $this->hostname,
+            'HTTPS' => $this->secure
         ));
     }
 
@@ -421,7 +439,7 @@ class FeatureContext extends BaseContext
     {
         $params = array(
             'token' => $token,
-            'username' => $this->user,
+            'username' => $this->user
         );
         $this->getClient()->request('GET', $url . '?' . http_build_query($params));
     }
@@ -471,7 +489,7 @@ class FeatureContext extends BaseContext
         $returned_programs = $responseArray['CatrobatProjects'];
         $expected_programs = $table->getHash();
         assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
-        for ($i = 0; $i < count($returned_programs); ++$i) {
+        for ($i = 0; $i < count($returned_programs); ++ $i) {
             assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
         }
     }
@@ -486,10 +504,10 @@ class FeatureContext extends BaseContext
         $random_programs = $response_array['CatrobatProjects'];
         $expected_programs = $table->getHash();
         assertEquals($program_count, count($random_programs), 'Wrong number of random programs');
-
-        for ($i = 0; $i < count($random_programs); ++$i) {
+        
+        for ($i = 0; $i < count($random_programs); ++ $i) {
             $program_found = false;
-            for ($j = 0; $j < count($expected_programs); ++$j) {
+            for ($j = 0; $j < count($expected_programs); ++ $j) {
                 if (strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]['Name']) === 0)
                     $program_found = true;
             }
@@ -519,7 +537,9 @@ class FeatureContext extends BaseContext
      */
     public function theReturnedShouldBeANumber($arg1)
     {
-        $response = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $response = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
         assertTrue(is_numeric($response[$arg1]));
     }
 
@@ -540,6 +560,7 @@ class FeatureContext extends BaseContext
     {
         $filepath = self::FIXTUREDIR . 'test.catrobat';
         assertTrue(file_exists($filepath), 'File not found');
+        $this->files = array();
         $this->files[] = new UploadedFile($filepath, 'test.catrobat');
     }
 
@@ -582,11 +603,40 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @When /^I upload another program using token "([^"]*)"$/
+     */
+    public function iUploadAnotherProgramUsingToken($arg1)
+    {
+        $this->iHaveAValidCatrobatFile();
+        $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
+        $this->request_parameters['username'] = $this->user;
+        $this->request_parameters['token'] = $arg1;
+        $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+    }
+
+    /**
+     * @Then /^It should be uploaded$/
+     */
+    public function itShouldBeUploaded()
+    {
+        $json = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
+        assertEquals('200', $json['statusCode'], $this->getClient()
+            ->getResponse()
+            ->getContent());
+    }
+
+    /**
      * @When /^I upload a catrobat program with the same name$/
      */
     public function iUploadACatrobatProgramWithTheSameName()
     {
-        $this->last_response = $this->getClient()->getResponse()->getContent();
+        $user = $this->getUserManager()->findUserByUsername($this->user);
+        $this->request_parameters['token'] = $user->getUploadToken();
+        $this->last_response = $this->getClient()
+            ->getResponse()
+            ->getContent();
         $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
     }
 
@@ -596,8 +646,12 @@ class FeatureContext extends BaseContext
     public function itShouldBeUpdated()
     {
         $last_json = json_decode($this->last_response, true);
-        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
-        assertEquals($last_json['projectId'], $json['projectId']);
+        $json = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
+        assertEquals($last_json['projectId'], $json['projectId'], $this->getClient()
+            ->getResponse()
+            ->getContent());
     }
 
     /**
@@ -645,13 +699,13 @@ class FeatureContext extends BaseContext
     {
         $this->prepareValidRegistrationParameters();
         switch ($missing_parameter) {
-            case 'a country' :
+            case 'a country':
                 unset($this->request_parameters['registrationCountry']);
                 break;
-            case 'a password' :
+            case 'a password':
                 unset($this->request_parameters['registrationPassword']);
                 break;
-            default :
+            default:
                 throw new PendingException();
         }
         $this->sendPostRequest('/pocketcode/api/loginOrRegister/loginOrRegister.json');
@@ -692,7 +746,7 @@ class FeatureContext extends BaseContext
   }
 
   /**
-   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
    */
   public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
   {
@@ -711,8 +765,9 @@ class FeatureContext extends BaseContext
 
           assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
           assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
-          assertEquals($country_name, $program_download_statistics->getCountryName(), "Wrong country name in download statistics");
+          assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
           assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
+          assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
 
           assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
           assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
@@ -720,6 +775,7 @@ class FeatureContext extends BaseContext
           assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
 
           $limit = 5.0;
+
           $latitude = floatval($program_download_statistics->getLatitude());
           $longitude = floatval($program_download_statistics->getLongitude());
           $download_time = $program_download_statistics->getDownloadedAt();
@@ -774,16 +830,20 @@ class FeatureContext extends BaseContext
      */
     public function iAmUsingPocketcodeForWithVersion($platform, $version)
     {
-        $this->generateProgramFileWith(array('platform' => $platform, 'applicationVersion' => $version));
+        $this->generateProgramFileWith(array(
+            'platform' => $platform,
+            'applicationVersion' => $version
+        ));
     }
-
 
     /**
      * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
      */
     public function iHaveAProgramWithAs($key, $value)
     {
-        $this->generateProgramFileWith(array($key => $value));
+        $this->generateProgramFileWith(array(
+            $key => $value
+        ));
     }
 
     /**
@@ -799,7 +859,9 @@ class FeatureContext extends BaseContext
      */
     public function iAmUsingPocketcodeWithLanguageVersion($version)
     {
-        $this->generateProgramFileWith(array('catrobatLanguageVersion' => $version));
+        $this->generateProgramFileWith(array(
+            'catrobatLanguageVersion' => $version
+        ));
     }
 
     /**
@@ -856,7 +918,10 @@ class FeatureContext extends BaseContext
      */
     public function iGetTheMostRecentProgramsWithLimitAndOffset($limit, $offset)
     {
-        $this->getClient()->request('GET', '/pocketcode/api/projects/recent.json', array('limit' => $limit, 'offset' => $offset));
+        $this->getClient()->request('GET', '/pocketcode/api/projects/recent.json', array(
+            'limit' => $limit,
+            'offset' => $offset
+        ));
     }
 
     /**
@@ -864,7 +929,9 @@ class FeatureContext extends BaseContext
      */
     public function iUploadTheProgramWithAsName($name)
     {
-        $this->generateProgramFileWith(array('name' => $name));
+        $this->generateProgramFileWith(array(
+            'name' => $name
+        ));
         $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
     }
 
@@ -881,8 +948,10 @@ class FeatureContext extends BaseContext
      */
     public function theUploadedProgramShouldBeARemixOf($id)
     {
-        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
-
+        $json = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
+        
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($json["projectId"]);
         assertEquals($id, $uploaded_program->getRemixOf()->getId());
@@ -893,8 +962,10 @@ class FeatureContext extends BaseContext
      */
     public function theUploadedProgramShouldnTHaveAnyParentEntity()
     {
-        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
-
+        $json = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
+        
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($json["projectId"]);
         assertEquals(null, $uploaded_program->getRemixOf());
@@ -905,12 +976,16 @@ class FeatureContext extends BaseContext
      */
     public function theUploadedProgramShouldHaveRemixofInTheXml($value)
     {
-        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
-
+        $json = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
+        
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($json["projectId"]);
         $efr = $this->getExtractedFileRepository();
-        /** @var Program $uploaded_program * */
+        /**
+         * @var Program $uploaded_program *
+         */
         $extracetCatrobatFile = $efr->loadProgramExtractedFile($uploaded_program);
         $progXmlProp = $extracetCatrobatFile->getProgramXmlProperties();
         assertEquals($value, $progXmlProp->header->remixOf->__toString());
@@ -943,23 +1018,31 @@ class FeatureContext extends BaseContext
      */
     public function theProjectShouldBePostedToFacebookWithMessageAndTheCorrectProjectId($fb_post_message)
     {
-        $response = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $response = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
         $project_id = $response['projectId'];
-
+        
         /**
+         *
          * @var $program Program
          */
         $program_manager = $this->getSymfonySupport()->getProgramManger();
         $program = $program_manager->find($project_id);
+        $user = $program->getUser();
         $fb_post_id = $program->getFbPostId();
         $fb_post_url = $program->getFbPostUrl();
+
+        $profile_url = $this->getSymfonySupport()->getRouter()->generate('profile', array('id' => $user->getId()), true);
         assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
         assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
 
+        $fb_post_message = $fb_post_message . chr(10) . 'by '  . $profile_url;
+
         $fb_id = $fb_response['id'];
         $fb_message = $fb_response['message'];
-
+        
         $this->fb_post_id = $fb_id;
         assertTrue($fb_id != '', "No Facebook Post ID was returned");
         assertEquals($fb_id, $program_manager->find($project_id)->getFbPostId(), "Facebook Post ID's do not match");
@@ -971,7 +1054,9 @@ class FeatureContext extends BaseContext
      */
     public function iHaveAParameterWithTheReturnedProjectid($name)
     {
-        $response = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $response = json_decode($this->getClient()
+            ->getResponse()
+            ->getContent(), true);
         $this->fb_post_program_id = $response['projectId'];
         $this->request_parameters[$name] = $response['projectId'];
     }
@@ -982,12 +1067,12 @@ class FeatureContext extends BaseContext
     public function theFacebookPostShouldBeDeleted()
     {
         echo 'Delete post with Facebook ID ' . $this->fb_post_id;
-
+        
         $program_manager = $this->getSymfonySupport()->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);
         assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
-
+        
         $string = print_r($fb_response, true);
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
         assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');

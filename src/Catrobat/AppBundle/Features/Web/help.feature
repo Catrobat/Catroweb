@@ -8,8 +8,9 @@ Feature: Pocketcode help page
     Given I am on "/pocketcode/help"
 
   Scenario: Viewing the help overview at help page
-    When I should see a big help image "Game Design"
-    Then I should see a big help image "Step By Step"
+    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
+    And I should see a big help image "Game Design"
+    And I should see a big help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
     And I should see a big help image "Education Platform"
@@ -17,8 +18,9 @@ Feature: Pocketcode help page
 
   @Mobile
   Scenario: Viewing the help overview at help page
-    When I should see a small help image "Game Design"
-    Then I should see a small help image "Step By Step"
+    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
+    And I should see a small help image "Game Design"
+    And I should see a small help image "Step By Step"
     And I should see a help image "Tutorials"
     And I should see a help image "Starters"
     And I should see a small help image "Education Platform"
@@ -41,32 +43,19 @@ Feature: Pocketcode help page
 
 
   @Mobile
-  Scenario: Clicking onthe alice game jam mobile image at help page
+  Scenario: Clicking on the alice game jam mobile image at help page
     When I click "#alice-tut-mobile"
     Then I should see "6" "mobile" tutorial banners
 
   Scenario: Clicking on step-by-step-desktop image at help page and test navigation
     When I click "#step-by-step-desktop"
-    Then  I should see "1. Make a new program"
-    And I should see "1" in the ".bubbles" element
-    And I should not see an ".arrow.left" element
-    And I should see an ".arrow.right" element
-    And I should see "1" in the ".current" element
-    When I click ".arrow.right"
-    Then I should see "2. Create a new object"
-    And I should see an ".arrow.left" element
-    And I should see an ".arrow.right" element
-    And I should see "2" in the ".current" element
-    When I go to "/pocketcode/step-by-step/11"
-    Then I should see "11. Main Menu"
-    And I should see an ".arrow.left" element
-    And I should not see an ".arrow.right" element
-    And I should see "11" in the ".current" element
+    Then  I should see "STEP-BY-STEP INTRO"
+    And I should see an ".video-container" element
 
   @Mobile
   Scenario: Clicking on step-by-step-mobile image at help page and test navigation
     When I click "#step-by-step-mobile"
-    Then  I should see "1. Make a new program"
+    Then  I should see "STEP-BY-STEP INTRO"
 
   Scenario: Clicking on tutorials image at help page and test navigation
     When I click "#tutorials"
@@ -133,3 +122,7 @@ Feature: Pocketcode help page
     And I should see "5. Download app"
     And I should see "6. Register/Login at GameJolt.com"
     And I should see "7. Upload your game on the Game Jolt Site"
+
+  Scenario: /hourOfCode should redirect to help page
+    When I go to "/pocketcode/hourOfCode"
+    Then I should see a big help image "Game Design"

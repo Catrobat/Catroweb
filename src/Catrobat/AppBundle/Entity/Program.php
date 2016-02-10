@@ -964,7 +964,7 @@ class Program
     }
 
     /**
-     * @param \Catrobat\AppBundle\Entity\Program $programs $program_downloads
+     * @param \Catrobat\AppBundle\Entity\ProgramDownloads $program_download
      */
     public function addProgramDownloads(\Catrobat\AppBundle\Entity\ProgramDownloads $program_download)
     {

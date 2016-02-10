@@ -1,0 +1,41 @@
+{% extends base_template %}
+
+{% block list_table %}
+<div class="col-xs-12 col-md-12">
+    <div class="box box-primary">
+        <div class="box-body table-responsive no-padding">
+
+            {% for file in files %}
+                <button id={{ file|replace({".":'_'}) }} class="btn">
+                    {{ file }}
+                </button>
+            {%  endfor %}
+
+            {% for i in 0..(files|length-1)  %}
+                <div {% if i!=0 %} style='display:none' {% endif %} class='{{ files[i]|replace({".":'_'}) }} logs'>
+                    <table class="table table-bordered table-striped sonata-ba-list">
+                        <thead>
+                        {% for line in content[i] %}
+                            {% if line != "" %}
+                                <tr>
+                                    <td>{{ line|replace({"[]":''}) }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </thead>
+                    </table>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.btn').click(function() {
+        $('.logs').hide();
+        $('.'+$(this).attr('id')).show();
+    });
+</script>
+{% endblock %}
+

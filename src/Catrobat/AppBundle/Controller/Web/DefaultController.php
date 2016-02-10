@@ -36,21 +36,22 @@ class DefaultController extends Controller
       $image_repository = $this->get('featuredimagerepository');
       $repository = $this->get('featuredrepository');
 
-      $programs = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
+      $featured_items = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
 
       $featured = array();
-      foreach ($programs as $program) {
+      foreach ($featured_items as $item) {
           $info = array();
-          if ($program->getProgram() !== null) {
+          if ($item->getProgram() !== null) {
               if ($request->get('flavor')) {
-                  $info['url'] = $this->generateUrl('program', array('id' => $program->getProgram()->getId(), 'flavor' => $request->get('flavor')));
+                  $info['url'] = $this->generateUrl('program', array('id' => $item->getProgram()->getId(), 'flavor' => $request->get('flavor')));
               } else {
-                  $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $program->getProgram()->getId()));
+                  $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $item->getProgram()->getId()));
               }
           } else {
-              $info['url'] = $program->getUrl();
+              $info['url'] = $item->getUrl();
           }
-          $info['image'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
+          $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
+
           $featured[] = $info;
       }
 
@@ -83,6 +84,8 @@ class DefaultController extends Controller
           $viewed[] = $program->getId();
           $request->getSession()->set('viewed', $viewed);
       }
+      $referrer = $request->headers->get('referer');
+      $request->getSession()->set('referer', $referrer);
 
       $program_details = array(
       'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
@@ -92,7 +95,7 @@ class DefaultController extends Controller
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
       'age' => $elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
-
+      'referrer' => $referrer,
     );
 
       $user = $this->getUser();

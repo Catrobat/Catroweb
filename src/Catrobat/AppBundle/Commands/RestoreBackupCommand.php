@@ -58,6 +58,31 @@ class RestoreBackupCommand extends ContainerAwareCommand
           'Saving SQL file');
         @unlink($working_directory .'database.sql');
 
+        $progress = new ProgressBar($output, 4);
+        $progress->setFormat(' %current%/%max% [%bar%] %message%');
+        $progress->start();
+
+        $filesystem = new Filesystem();
+        
+        $progress->setMessage("Extracting Thumbnails");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/thumbnails/", $this->getContainer()->getParameter('catrobat.thumbnail.dir'));
+        
+        $progress->setMessage("Extracting Screenshots");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/screenshots/", $this->getContainer()->getParameter('catrobat.screenshot.dir'));
+        
+        $progress->setMessage("Extracting Featured Images");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/featured/", $this->getContainer()->getParameter('catrobat.featuredimage.dir'));
+        
+        $progress->setMessage("Extracting Programs");
+        $progress->advance();
+        $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
+        
+        $progress->finish();
+        $output->writeln('');
+
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");

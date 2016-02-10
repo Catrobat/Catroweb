@@ -1,150 +1,26 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 
 {% block body %}
-  <h1>{{ ("help.stepByStep.title")|trans({}, "catroweb") }}</h1>
+    <h1>{{ ("help.stepByStep.title")|trans({}, "catroweb") }}</h1>
 
-  <div class="content-container wizard">
-
-    <nav>
-      {{ knp_pagination_render(pagination) }}
-    </nav>
-
-    <div class="clear"></div>
-    <div class="title size-xxlarge">{{ page }}. {{ ("help.stepByStep.step"~page~".title")|trans({}, "catroweb") }}</div>
-
-    <div class="step-by-step-container size-large">
-      <div class="image-detail col-per-35">
-        {% if(("help.stepByStep.step"~page~".description")|trans({}, "catroweb") != "help.stepByStep.step"~page~".description") %}
-          <p>{{ ("help.stepByStep.step"~page~".description")|trans({}, "catroweb") }}</p>
-        {% endif %}
-
-        <div>{{ ("help.stepByStep.start")|trans({}, "catroweb") }}</div>
-
-        <img src="{{ asset('images/help/step_by_step/'~page~'_left.png') }}" alt="" title=""
-             data-img-id="{{ page }}"
-             data-img-type="2"/>
-
-      </div>
-      <div class="image-detail col-per-65">
-
-
-        {% for i in 1..10 %}
-
-
-
-          {% if(("help.stepByStep.step"~page~".detail.text"~i)|trans({}, "catroweb") != "help.stepByStep.step"~page~".detail.text"~i) %}
-            <p>
-              {{ ("help.stepByStep.step"~page~".detail.text"~i)|trans({}, "catroweb") }}
-            </p>
-
-            {% if(i ==2 and page == 2) %}
-            {% endif %}
-
-            <!-- plus on first position -->
-            {% if(i == 1 and (page == 2 or page == 3)) %}
-              <img class="plus" src="{{ asset('images/help/step_by_step/plus.png') }}" alt="" title=""
-                   data-img-id="{{ page }}"
-                   data-img-index="{{ i }}"
-                   data-img-type="2"/>
-
-              <!-- arrow back -->
-            {% elseif (
-            (page == 3 and i == 6) or
-            (page == 9 and (i == 1 or i == 3))
-            ) %}
-              <img class="back" src="{{ asset('images/help/step_by_step/arrow_back.png') }}" alt="" title=""
-                   data-img-id="{{ page }}"
-                   data-img-index="{{ i }}"
-                   data-img-type="2"/>
-
-              <!-- arrow right -->
-            {% elseif (
-            (page == 3 and i == 5) or
-            ((page == 4 or page == 6) and i == 6) or
-            (page == 5 and i == 3) or
-            (page == 7 and i == 5)
-            ) %}
-              <img class="play" src="{{ asset('images/help/step_by_step/play.png') }}" alt="" title=""
-                   data-img-id="{{ page }}"
-                   data-img-index="{{ i }}"
-                   data-img-type="2"/>
-
-              <!-- special on page 2 -->
-            {% elseif(page == 2 and i == 2) %}
-              <div class="special-2-left">
-                <img class="width-100" src="{{ asset('images/help/step_by_step/'~page~'_right_'~i~'.png') }}" alt=""
-                     title=""
-                     data-img-id="{{ page }}"
-                     data-img-index="{{ i }}"
-                     data-img-type="2"/>
-              </div>
-              <div class="special-2-right size-medium">
-                <div>
-                  <img class="width-7" src="{{ asset('images/help/step_by_step/'~page~'_right_'~i~'_1.png') }}" alt=""
-                       title=""
-                       data-img-id="{{ page }}"
-                       data-img-index="{{ i }}"
-                       data-img-type="2"/>
-                  <span>{{ ("help.stepByStep.step"~page~".detail.special1")|trans({}, "catroweb") }}</span>
-                </div>
-                <div>
-                  <img class="width-7" src="{{ asset('images/help/step_by_step/'~page~'_right_'~i~'_2.png') }}" alt=""
-                       title=""
-                       data-img-id="{{ page }}"
-                       data-img-index="{{ i }}"
-                       data-img-type="2"/>
-                  <span>{{ ("help.stepByStep.step"~page~".detail.special2")|trans({}, "catroweb") }}</span>
-                </div>
-                <div>
-                  <img class="width-7 no-margin-bottom" src="{{ asset('images/help/step_by_step/'~page~'_right_'~i~'_3.png') }}" alt=""
-                       title=""
-                       data-img-id="{{ page }}"
-                       data-img-index="{{ i }}"
-                       data-img-type="2"/>
-                  <span>{{ ("help.stepByStep.step"~page~".detail.special3")|trans({}, "catroweb") }}</span>
-                </div>
-              </div>
-              <div class="clear"></div>
-            {% elseif(page == 11) %}
-              <img class="width-15" src="{{ asset('images/help/step_by_step/'~page~'_right_'~i~'.png') }}" alt="" title=""
-                   data-img-id="{{ page }}"
-                   data-img-index="{{ i }}"
-                   data-img-type="2"/>
-            {% elseif((page != 3 or i != 4) and (page != 10 or i != 2)) %}
-              <img src="{{ asset('images/help/step_by_step/'~page~'_right_'~i~'.png') }}" alt="" title=""
-                   data-img-id="{{ page }}"
-                   data-img-index="{{ i }}"
-                   data-img-type="2"/>
-            {% endif %}
-
-          {% endif %}
-        {% endfor %}
-
-
-      </div>
-      <div class="clear"></div>
+    <div class="size-large">
+        <p>Here you create your first program, an interactive postcard using this following walkthrough videos. You have to follow the instructions given to you. During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated. After this guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.</p>
     </div>
-  </div>
-
-  <div id="image-overlay"></div>
-  <div id="image-popup">
-    <div id="outer-container">
-      <div></div>
+    <div class="video-container">
+        <iframe class="video" src="https://www.youtube.com/embed/WdiymNb7J2A" frameborder="0" allowfullscreen></iframe><br>
+        <iframe class="video" src="https://www.youtube.com/embed/6bPZUuKv1s0" frameborder="0" allowfullscreen></iframe><br>
+        <iframe class="video" src="https://www.youtube.com/embed/beisA81jJg8" frameborder="0" allowfullscreen></iframe><br>
+        <iframe class="video" src="https://www.youtube.com/embed/JZdInTZMuTg" frameborder="0" allowfullscreen></iframe><br>
+        <iframe class="video" src="https://www.youtube.com/embed/SBF8zAX2nu8" frameborder="0" allowfullscreen></iframe><br>
     </div>
-  </div>
+
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('js/custom/Help.js') }}"></script>
-  {#<script>#}
-    {#var help = new Help();#}
-    {#help.setImageModal("{{  asset('images/help/step_by_step/') }}");#}
-  {#</script>#}
-
+    <script src="{{ asset('js/custom/Help.js') }}"></script>
 {% endblock %}
-

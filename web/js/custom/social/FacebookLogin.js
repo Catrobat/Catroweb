@@ -34,7 +34,7 @@ function triggerFacebookLogin() {
         }
     }, {
         //scope: 'public_profile,email,user_about_me,manage_pages,publish_pages', manage_pages,publish_pages are necessary when requesting new token for fb post
-        scope: 'public_profile,email,user_about_me',
+        scope: 'public_profile,email',
         return_scopes: true,
         auth_type: $('#facebook_auth_type').val() //set to 'reauthenticate' to force re-authentication of the user
     });
@@ -57,7 +57,7 @@ function statusChangeCallback(response) {
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
-        document.getElementById('status').innerHTML = 'Please log into Facebook.';
+        document.getElementById('status').innerHTML = 'Please log into Facebook';
     }
 }
 
@@ -71,46 +71,56 @@ function getFacebookUserInfo() {
         console.log("Response ID:" + response.id);
         console.log("Country:" + response.locale);
 
-        var $ajaxUrlCheckServerTokenAvailable = Routing.generate(
-            'catrobat_oauth_login_facebook_servertoken_available', {flavor: 'pocketcode'}
-        );
+        $("#id_oauth").val(response.id);
+        $("#email_oauth").val(response.email);
+        $("#locale_oauth").val(response.locale);
 
-        $.post($ajaxUrlCheckServerTokenAvailable,
-            {
-                id: response.id
-            },
-            function (data, status) {
-                console.log(data);
-                console.log(status);
-                var $server_token_available = data['token_available'];
-                if (!$server_token_available) {
-                    $("#id_oauth").val(response.id);
-                    $("#email_oauth").val(response.email);
-                    $("#locale_oauth").val(response.locale);
-
-                    var $ajaxUrlCheckEmailAvailable = Routing.generate(
-                      'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
-                    );
-                    $.post($ajaxUrlCheckEmailAvailable,
-                      {
-                          email: response.email
-                      },
-                      function (data, status) {
-                          console.log(data);
-                          console.log(status);
-
-                          if(data['email_available'] == false) {
-                              getDesiredUsernameFB();
-                          } else {
-                            sendTokenToServer($("#access_token_oauth").val(), response.id, data['username'], response.email, response.locale)
-                          }
-                      });
-                } else {
-                    FacebookLogin(data['email'], data['username'], response.id, response.locale);
-                }
-            });
+        handleFacebookUserInfoResponseTrigger();
     });
 }
+
+var handleFacebookUserInfoResponseTrigger = function handleFacebookUserInfoResponse() {
+
+    $id = $("#id_oauth").val();
+    $email = $("#email_oauth").val();
+    $locale = $("#locale_oauth").val();
+
+    var $ajaxUrlCheckServerTokenAvailable = Routing.generate(
+        'catrobat_oauth_login_facebook_servertoken_available', {flavor: 'pocketcode'}
+    );
+
+    $.post($ajaxUrlCheckServerTokenAvailable,
+        {
+            id: $id
+        },
+        function (data, status) {
+            console.log(data);
+            console.log(status);
+            var $server_token_available = data['token_available'];
+            if (!$server_token_available) {
+
+                var $ajaxUrlCheckEmailAvailable = Routing.generate(
+                    'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
+                );
+                $.post($ajaxUrlCheckEmailAvailable,
+                    {
+                        email: $email
+                    },
+                    function (data, status) {
+                        console.log(data);
+                        console.log(status);
+
+                        if(data['email_available'] == false) {
+                            getDesiredUsernameFB();
+                        } else {
+                            sendTokenToServer($("#access_token_oauth").val(), $id, data['username'], $email, $locale)
+                        }
+                    });
+            } else {
+                FacebookLogin(data['email'], data['username'], $id, $locale);
+            }
+        });
+};
 
 function getDesiredUsernameFB() {
     $("#fb_google").val('fb');
@@ -135,20 +145,9 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
             locale: $locale
         },
         function (data, status) {
-
-            $ajaxUrl = Routing.generate(
-                'catrobat_oauth_login_facebook', {flavor: 'pocketcode'}
-            );
-
-            $.post($ajaxUrl,
-                {
-                    username: $username,
-                    id: $facebook_id,
-                    email: $email
-                },
-                function (data) {
-                    submitOAuthForm(data);
-                });
+            console.log(data);
+            console.log(status);
+            FacebookLogin($email, $username, $facebook_id, $locale);
         });
 }
 
@@ -166,7 +165,19 @@ function FacebookLogin($email, $username, $id, $locale) {
             locale: $locale
         },
         function (data, status) {
-            submitOAuthForm(data);
+            var $ajaxLoginRedirectUrl = Routing.generate(
+                'catrobat_oauth_login_redirect', {flavor: 'pocketcode'}
+            );
+
+            $.post($ajaxLoginRedirectUrl,
+                {
+                    fb_id: $id
+                }, function (data, status) {
+                    console.log(data);
+                    $url = data['url'];
+                    $(location).attr('href', $url);
+            });
+
         });
 }
 

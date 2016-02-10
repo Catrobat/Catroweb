@@ -150,8 +150,10 @@ class SymfonySupport
     {
         if ($this->default_user == null) {
             $this->default_user = $this->insertUser();
+        } else {
+            $this->default_user = $this->getUserManager()->find($this->default_user->getId());
         }
-    
+ 
         return $this->default_user;
     }
     
@@ -287,6 +289,18 @@ class SymfonySupport
         $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
         $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
         $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
+        $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
+
+        if(isset($config['username'])) {
+            $userManager = $this->getUserManager();
+            $user = $userManager->createUser();
+            $user->setUsername($config['username']);
+            $user->setEmail('dog@robat.at');
+            $user->setPassword('test');
+            $userManager->updateUser($user);
+            $program_statistics->setUser($user);
+        }
+
         $em->persist($program_statistics);
 
         $program->addProgramDownloads($program_statistics);
