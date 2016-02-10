@@ -28,10 +28,34 @@ for (index = 0; index < themes.length; index++) {
                      dest: 'web/css/' + theme + '/',
                      ext: '.css',
                      extDot: 'first'
-                   }
+                 }
                ]
-      };
+    };
 }
+
+var admin_css_path = "web/css/admin/admin.css";
+var admin_file_config = {};
+admin_file_config[admin_css_path] = ["web/css/plugins/*"];
+
+lessconfig['admin'] = {
+  options: {
+    compress: true,
+    yuicompress: true,
+    optimization: 2,
+    relativeUrls: true,
+  },
+  files: [
+    admin_file_config,
+    {
+      expand: true,
+      cwd: 'web/css/admin/',
+      src: ['**/*.less'],
+      dest: 'web/css/admin/',
+      ext: '.css',
+      extDot: 'first'
+    }
+  ]
+};
 
 module.exports = function(grunt) {
   require('jit-grunt')(grunt);
