@@ -24,91 +24,53 @@ class RestoreBackupCommand extends ContainerAwareCommand
     {
         $this->setName('catrobat:backup:restore')
             ->setDescription('Restores a backup')
-            ->addArgument('file', InputArgument::REQUIRED, 'Backupfile (*.zip,*.tar)');
+            ->addArgument('file', InputArgument::REQUIRED, 'Backupfile (*.tar.gz)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
+        $working_directory = $this->getContainer()->getParameter('catrobat.resources.dir');
 
-        $backupfile = realpath($input->getArgument('file'));
-        if (!is_file($backupfile)) {
-            throw new \Exception('File not found');
+        $backup_file = realpath($input->getArgument('file'));
+        if (!is_file($backup_file)) {
+            $backup_file = realpath($input->getFirstArgument());
+
+            if (!is_file($backup_file))
+                throw new \Exception('File not found');
         }
+        $this->output->writeln('Backup File: ' . $backup_file);
 
-        $phar = new \PharData($backupfile);
-
-        if ($this->getContainer()->getParameter('database_driver') != 'pdo_mysql') {
+        if ($this->getContainer()->getParameter('database_driver') != 'pdo_mysql')
             throw new \Exception('This script only supports mysql databases');
-        }
 
-        $command = new PurgeCommand();
-        $command->setContainer($this->getContainer());
-        try
-        {
-            $return = $command->run(new ArrayInput(array('--force' => true)),new NullOutput());
-            if($return == 0)
-            {
-                $output->writeln('Purge Command OK');
-            }
-        }
-        catch (\Exception $e) {
-            $output->writeln('Something went wrong: ' . $e->getMessage());
-        }
+        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $this->output);
 
-        //if ($this->getApplication() == null)
-        //    $this->setApplication(new Application());
+        $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $working_directory",
+          'Extract files to resources directory');
+        $this->executeShellCommand("chmod -R 0777 web/resources/",
+          'Set permission for the files');
 
-        //$this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
-
-        $sqlpath = tempnam(sys_get_temp_dir(), 'Sql');
-        copy('phar://'.$backupfile.'/database.sql', $sqlpath);
-        $databasename = $this->getContainer()->getParameter('database_name');
-        $databaseuser = $this->getContainer()->getParameter('database_user');
-        $databasepassword = $this->getContainer()->getParameter('database_password');
-        $this->executeShellCommand("mysql -u $databaseuser -p$databasepassword $databasename < $sqlpath", 'Saving SQL file');
-        unlink($sqlpath);
-
-        $output->writeln('Importing files');
-
-        $progress = new ProgressBar($output, 4);
-        $progress->setFormat(' %current%/%max% [%bar%] %message%');
-        $progress->start();
-
-        $filesystem = new Filesystem();
-        
-        $progress->setMessage("Extracting Thumbnails");
-        $progress->advance();
-        $filesystem->mirror("phar://$backupfile/thumbnails/", $this->getContainer()->getParameter('catrobat.thumbnail.dir'));
-        
-        $progress->setMessage("Extracting Screenshots");
-        $progress->advance();
-        $filesystem->mirror("phar://$backupfile/screenshots/", $this->getContainer()->getParameter('catrobat.screenshot.dir'));
-        
-        $progress->setMessage("Extracting Featured Images");
-        $progress->advance();
-        $filesystem->mirror("phar://$backupfile/featured/", $this->getContainer()->getParameter('catrobat.featuredimage.dir'));
-
-        $progress->setMessage("Extracting Programs");
-        $progress->advance();
-        $filesystem->mirror("phar://$backupfile/programs/", $this->getContainer()->getParameter('catrobat.file.storage.dir'));
-
-        $progress->setMessage("Extracting Media Package");
-        $progress->advance();
-        $filesystem->mirror("phar://$backupfile/mediapackage/", $this->getContainer()->getParameter('catrobat.mediapackage.dir'));
-
-        $progress->finish();
-        $output->writeln('');
+        $database_name = $this->getContainer()->getParameter('database_name');
+        $database_user = $this->getContainer()->getParameter('database_user');
+        $database_password = $this->getContainer()->getParameter('database_password');
+        $this->executeShellCommand("mysql -u $database_user -p$database_password $database_name < " . $working_directory . "database.sql",
+          'Saving SQL file');
+        @unlink($working_directory .'database.sql');
 
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
         $query->setParameter('status', Program::APK_NONE);
+        $result = $query->getSingleScalarResult();
+        $this->output->writeln('Reset the apk status of '.$result.' projects');
+
         $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
         $query->setParameter('hash', "null");
         $result = $query->getSingleScalarResult();
-        $output->writeln('Reset the apk status of '.$result.' projects');
-        $output->writeln('Import finished!');
+        $this->output->writeln('Reset the directory hash of '.$result.' projects');
+
+        $this->output->writeln('Import finished!');
     }
 
     private function executeShellCommand($command, $description)
@@ -119,13 +81,11 @@ class RestoreBackupCommand extends ContainerAwareCommand
         $process->run();
         if ($process->isSuccessful()) {
             $this->output->writeln('OK');
-
             return true;
-        } else {
-            $this->output->writeln('failed!');
-
-            return false;
         }
+
+        $this->output->writeln('failed!');
+        return false;
     }
 
     private function executeSymfonyCommand($command, $args, $output)

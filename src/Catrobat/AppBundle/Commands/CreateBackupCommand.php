@@ -13,7 +13,6 @@ use Symfony\Component\Process\Process;
 class CreateBackupCommand extends ContainerAwareCommand
 {
     public $output;
-    public $totalsize;
 
     protected function configure()
     {
@@ -26,90 +25,39 @@ class CreateBackupCommand extends ContainerAwareCommand
     {
         $this->output = $output;
 
-        $backupdir = realpath($this->getContainer()->getParameter('catrobat.backup.dir'));
-        $output->writeln('Using backup directory '.$backupdir);
+        $backup_dir = realpath($this->getContainer()->getParameter('catrobat.backup.dir'));
+        $output->writeln('Using backup directory '.$backup_dir);
 
-        if ($this->getContainer()->getParameter('database_driver') != 'pdo_mysql') {
+        if ($this->getContainer()->getParameter('database_driver') != 'pdo_mysql')
             throw new \Exception('This script only supports mysql databases');
+
+        if ($input->hasArgument('backupName') && $input->getArgument('backupName') != "") {
+            $zip_path = $backup_dir . '/' . $input->getArgument('backupName') . '.tar.gz';
+        } else {
+            $zip_path = $backup_dir . '/'.date('Y-m-d_His') . '.tar.gz';
         }
 
-        $sqlpath = tempnam($backupdir, 'Sql');
-        $databasename = $this->getContainer()->getParameter('database_name');
-        $databaseuser = $this->getContainer()->getParameter('database_user');
-        $databasepassword = $this->getContainer()->getParameter('database_password');
-        $this->executeShellCommand("mysqldump -u $databaseuser -p$databasepassword $databasename > $sqlpath", 'Saving SQL file');
+        $sql_path = tempnam($backup_dir, 'Sql');
+        $database_name = $this->getContainer()->getParameter('database_name');
+        $database_user = $this->getContainer()->getParameter('database_user');
+        $database_password = $this->getContainer()->getParameter('database_password');
+        $this->executeShellCommand("mysqldump -u $database_user -p$database_password $database_name > $sql_path",
+          'Saving SQL file');
 
-        if ($input->hasArgument('backupName') && $input->getArgument('backupName') != "")
-        {
-            $zippath = $backupdir . '/' . $input->getArgument('backupName') . '.tar';
-        }
-        else
-        {
-            $zippath = $backupdir . '/'.date('Y-m-d_His') . '.tar';
-        }
+        $output->writeln('Creating archive at '.$zip_path);
 
-        $output->writeln('Creating archive at '.$zippath);
-        $phar = new \PharData($zippath);
+        $thumbnail_dir = $this->getContainer()->getParameter('catrobat.thumbnail.dir');
+        $screenshot_dir = $this->getContainer()->getParameter('catrobat.screenshot.dir');
+        $featuredimage_dir = $this->getContainer()->getParameter('catrobat.featuredimage.dir');
+        $programs_dir = $this->getContainer()->getParameter('catrobat.file.storage.dir');
+        $mediapackage_dir = $this->getContainer()->getParameter('catrobat.mediapackage.dir');
 
-        $phar->addFile($sqlpath, 'database.sql');
+        $this->executeShellCommand("tar --exclude=.gitignore --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir",
+          "Create tar.gz file");
+        chmod($zip_path, 0777);
 
-        $this->output->writeln('Saving Thumbnails');
-        $phar->addEmptyDir("thumbnails");
-        $dir = $this->getContainer()->getParameter('catrobat.thumbnail.dir');
-        $this->addFilesToArchive($dir, 'thumbnails', $phar);
-
-        $this->output->writeln('Saving Screenshots');
-        $phar->addEmptyDir("screenshots");
-        $dir = $this->getContainer()->getParameter('catrobat.screenshot.dir');
-        $this->addFilesToArchive($dir, 'screenshots', $phar);
-
-        $this->output->writeln('Saving Featured Images');
-        $phar->addEmptyDir("featured");
-        $dir2 = $this->getContainer()->getParameter('catrobat.featuredimage.dir');
-        $this->addFilesToArchive($dir2, 'featured', $phar);
-
-        $this->output->writeln('Saving Programs');
-        $phar->addEmptyDir("programs");
-        $dir = $this->getContainer()->getParameter('catrobat.file.storage.dir');
-        $this->addFilesToArchive($dir, 'programs', $phar);
-
-        $this->output->writeln('Saving Media Package');
-        $phar->addEmptyDir("mediapackage");
-        $dir = $this->getContainer()->getParameter('catrobat.mediapackage.dir');
-        $this->addFilesToArchive($dir, 'mediapackage', $phar);
-
-        $this->output->writeln('Saving Zip File');
-        $this->output->writeln('Packing '.sprintf('%.2f', $this->totalsize / 1024 / 1024).' MB, this may take a while...');
-        chmod($zippath, 0600);
-        
-        unlink($sqlpath);
-        $this->output->writeln('Finished! Backupfile created at '.$zippath);
-    }
-
-    private function addFilesToArchive($src_directory, $dest_directory, $phar)
-    {
-        $finder = new Finder();
-        $files = $finder->in($src_directory)->files();
-
-        $progress = new ProgressBar($this->output, $files->count());
-        $progress->setFormat(' %current%/%max% [%bar%] %message%');
-        $progress->start();
-
-        $size = 0;
-
-        $values = array();
-        
-        foreach ($files as $file) {
-            $progress->setMessage($file->getFilename());
-            $size += $file->getSize();
-            $progress->advance();
-            $values[$dest_directory.'/'.$file->getFilename()] = $file->getPathname();
-        }
-        $phar->buildFromIterator(new \ArrayIterator($values));
-        $this->totalsize += $size;
-        $progress->setMessage(sprintf('%.2f', $size / 1024 / 1024).' MB');
-        $progress->finish();
-        $this->output->writeln('');
+        unlink($sql_path);
+        $this->output->writeln('Finished! Backupfile created at '.$zip_path);
     }
 
     private function executeShellCommand($command, $description)
@@ -120,12 +68,10 @@ class CreateBackupCommand extends ContainerAwareCommand
         $process->run();
         if ($process->isSuccessful()) {
             $this->output->writeln('OK');
-
             return true;
-        } else {
-            $this->output->writeln('failed!');
-
-            return false;
         }
+
+        $this->output->writeln('failed!');
+        return false;
     }
 }

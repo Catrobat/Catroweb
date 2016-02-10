@@ -2,21 +2,90 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <style>
+        .btn-hidden {
+            display: none;
+        }
+    </style>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="{{ asset('js/plugins/jquery.confirm.js') }}"></script>
     <script>
         $(window).load(function(){
             $(".confirm").confirm({
-                text: "{{ "admin.maintain.confirmationText"|trans({}, "catroweb") }}",
                 title: "{{ "admin.maintain.confirmationTitle"|trans({}, "catroweb") }}",
+                text: "{{ "admin.maintain.confirmationText"|trans({}, "catroweb") }}",
                 confirmButton: "{{ "admin.maintain.confirmationConfirm"|trans({}, "catroweb") }}",
                 cancelButton: "{{ "admin.maintain.confirmationCancel"|trans({}, "catroweb") }}",
                 post: true,
                 confirmButtonClass: "btn-danger",
                 cancelButtonClass: "btn-default",
-                dialogClass: "modal-dialog modal-md"
+                dialogClass: "modal-dialog modal-md",
             });
-        })
+
+            $("#btnCreateBackup").confirm({
+                title: "The backup file is currently created!",
+                text: "The process may take a while. The page will reload afterwards!",
+                confirmButton: "Ok",
+                confirmButtonClass: "btn-default",
+                cancelButtonClass: "btn-hidden",
+            });
+        });
+
+        function createBackup(element, url) {
+            // security check to prevent multiple execution
+            if(!($(element).attr('disabled') == 'disabled')) {
+                // disable the button
+                $(element).attr('disabled', 'disabled');
+                // show loader img
+                $("#img-create-backup").show();
+                // remove the ajax call from the button
+                $(element).attr('onclick', '');
+                // trigger the confirm popup
+                $(element).click();
+                // disable another confirm popup
+                $(element).off('click');
+
+                /*$.ajax({
+                    url: url,
+                    complete: function(response) {
+                        location.reload();
+                    },
+                    error: function() {
+                        location.reload();
+                    }
+                });*/
+            }
+
+            return false;
+        }
+
+        function restoreBackup(element, idx, url) {
+            // security check to prevent multiple execution
+            if(!($(element).attr('disabled') == 'disabled')) {
+                // disable the button
+                $(element).attr('disabled', 'disabled');
+                // show loader img
+                $("#img-restore-backup_" + i).show();
+                // remove the ajax call from the button
+                $(element).attr('onclick', '');
+                // trigger the confirm popup
+                $(element).click();
+                // disable another confirm popup
+                $(element).off('click');
+
+                /*$.ajax({
+                    url: url,
+                    complete: function(response) {
+                        location.reload();
+                    },
+                    error: function() {
+                        location.reload();
+                    }
+                });*/
+            }
+
+            return false;
+        }
     </script>
 {% endblock %}
 
@@ -81,7 +150,6 @@
                             pieHole: 0.4,
                         }
 
-
                         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
                         chart.draw(data_space, options_space);
 
@@ -105,7 +173,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ backupCommand.command_link }}"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>
+                            <a id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;" href="#" onClick="createBackup(this, '{{ backupCommand.command_link }}');"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>&nbsp;(~{{ backupSize }})&nbsp;<img id="img-create-backup" style="display: none;" src="{{ asset('bundles/sonataadmin/ajax-loader.gif') }}"/>
                         </div>
                     </div>
 
@@ -117,7 +185,7 @@
                                 <div>
                                     <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
                                     <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
-                                    <a class="btn btn-sm btn-default confirm" style="min-width:20%;" href="{{ RemoveableObject.execute_link }}" ><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a><br>
+                                    <a class="btn btn-sm btn-default confirm" style="min-width:20%;" href="#" onClick="restoreBackup(this, {{ i }}, '{{ RemoveableObject.execute_link }}');" ><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a>&nbsp;<img id="img-restore-backup_{{ i }}" style="display: none;" src="{{ asset('bundles/sonataadmin/ajax-loader.gif') }}"/><br>
                                 </div>
                                 <div style="padding-top: 5px;">
                                     <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>

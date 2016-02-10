@@ -2,16 +2,15 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
+use Catrobat\AppBundle\Commands\CleanApkCommand;
+use Catrobat\AppBundle\Commands\CleanExtractedFileCommand;
+use Catrobat\AppBundle\Commands\CleanBackupsCommand;
 use Catrobat\AppBundle\Commands\CreateBackupCommand;
-use Catrobat\AppBundle\Commands\RestoreBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Catrobat\AppBundle\Commands\CleanExtractedFileCommand;
-use Catrobat\AppBundle\Commands\CleanApkCommand;
-use Catrobat\AppBundle\Commands\CleanBackupsCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -23,10 +22,8 @@ class MaintainController extends Controller
         if (false === $this->admin->isGranted('EXTRACTED')) {
             throw new AccessDeniedException();
         }
-        $extractedFileRepo = $this->container->get("extractedfilerepository");
-        $programManager = $this->container->get("programmanager");
 
-        $command = new CleanExtractedFileCommand($extractedFileRepo,$programManager);
+        $command = new CleanExtractedFileCommand();
         $command->setContainer($this->container);
 
         $return = $command->run(new ArrayInput(array()),new NullOutput());
@@ -45,10 +42,8 @@ class MaintainController extends Controller
         if (false === $this->admin->isGranted('APK')) {
             throw new AccessDeniedException();
         }
-        $apkrepository = $this->container->get("apkrepository");
-        $programManager = $this->container->get("programmanager");
 
-        $command = new CleanApkCommand($apkrepository,$programManager);
+        $command = new CleanApkCommand();
         $command->setContainer($this->container);
 
         $return = $command->run(new ArrayInput(array()),new NullOutput());
@@ -118,6 +113,7 @@ class MaintainController extends Controller
                 }
             } else {
                 $process = new Process("php ../app/console catrobat:backup:create");
+                $process->setTimeout(300);
                 $process->run();
                 if ($process->isSuccessful()) {
                     $this->addFlash('sonata_flash_success', 'Create Backup OK');
@@ -151,22 +147,15 @@ class MaintainController extends Controller
             $backupFile = $request->get("backupFile");
             $backupFolder = $this->container->getParameter("catrobat.backup.dir");
             $backupFilePath = $backupFolder . '/' . $backupFile;
-
             $input["file"] = $backupFilePath;
-            $command = new RestoreBackupCommand();
-            $command->setContainer($this->container);
 
-            try
-            {
-                $return = $command->run(new ArrayInput($input),new NullOutput());
-                if($return == 0)
-                {
-                    $this->addFlash('sonata_flash_success', 'Restore Backup OK');
-                }
-            }
-            catch (\Exception $e)
-            {
-                $this->addFlash('sonata_flash_error', 'Something went wrong: '.$e->getMessage());
+            $process = new Process("php ../app/console catrobat:backup:restore $backupFilePath");
+            $process->setTimeout(300);
+            $process->run();
+            if ($process->isSuccessful()) {
+                $this->addFlash('sonata_flash_success', 'Restore Backup OK');
+            } else {
+                $this->addFlash('sonata_flash_error', 'Something went wrong: '. $process->getErrorOutput());
             }
         }
 
@@ -198,7 +187,7 @@ class MaintainController extends Controller
 
         $description = "This will remove all backups stored on this server in the 'backup'-directory (".$this->container->getParameter("catrobat.backup.dir").")";
         $rm = new RemoveableMemory("Manual backups",$description);
-        $this->setSizeOfObject($rm,$this->container->getParameter("catrobat.backup.dir"),array("zip","tar"));
+        $this->setSizeOfObject($rm,$this->container->getParameter("catrobat.backup.dir"),array("gz"));
         $rm->setCommandName("Delete backups");
         $rm->setCommandLink($this->admin->generateUrl("delete_backups"));
         $removeableObjects[] = $rm;
@@ -220,6 +209,11 @@ class MaintainController extends Controller
         $programsSize = $this->get_dir_size($this->container->getParameter("catrobat.file.storage.dir"));
         $usedSpaceRaw -= $programsSize;
 
+        $screenshotSize = $this->get_dir_size($this->container->getParameter('catrobat.screenshot.dir'));
+        $featuredImageSize = $this->get_dir_size($this->container->getParameter('catrobat.featuredimage.dir'));
+        $mediaPackageSize = $this->get_dir_size($this->container->getParameter('catrobat.mediapackage.dir'));
+        $backupSize = $programsSize + $screenshotSize + $featuredImageSize + $mediaPackageSize;
+
         return $this->render(':Admin:maintain.html.twig', array(
           'RemoveableObjects' => $removeableObjects,
           'RemoveableBackupObjects' => $this->getBackupFileObjects(),
@@ -232,6 +226,7 @@ class MaintainController extends Controller
           'programsSpace' => $this->getSymbolByQuantity($programsSize),
           'ram' => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
           'backupCommand' => $backupCommand,
+          'backupSize' => $this->getSymbolByQuantity($backupSize),
         ));
     }
 
@@ -239,7 +234,7 @@ class MaintainController extends Controller
     {
         $objects = array();
         $backupFolder = $this->container->getParameter("catrobat.backup.dir");
-        $files = array_merge(array_reverse(glob($backupFolder.'/*.zip')),array_reverse(glob($backupFolder.'/*.tar'))); // get all file names
+        $files = array_reverse(glob($backupFolder.'/*.tar.gz')); // get all file names
         foreach($files as $file) { // iterate files
             $filename = pathinfo($file, PATHINFO_BASENAME);
             $backupObject = new RemoveableMemory($filename,"created at: ".date ("d.F.Y H:i:s", filemtime($file)));
