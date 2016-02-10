@@ -20,10 +20,8 @@ class MaintainController extends Controller
         if (false === $this->admin->isGranted('EXTRACTED')) {
             throw new AccessDeniedException();
         }
-        $extractedFileRepo = $this->container->get("extractedfilerepository");
-        $programManager = $this->container->get("programmanager");
 
-        $command = new CleanExtractedFileCommand($extractedFileRepo,$programManager);
+        $command = new CleanExtractedFileCommand();
         $command->setContainer($this->container);
 
         $return = $command->run(new ArrayInput(array()),new NullOutput());
@@ -42,10 +40,8 @@ class MaintainController extends Controller
         if (false === $this->admin->isGranted('APK')) {
             throw new AccessDeniedException();
         }
-        $apkrepository = $this->container->get("apkrepository");
-        $programManager = $this->container->get("programmanager");
 
-        $command = new CleanApkCommand($apkrepository,$programManager);
+        $command = new CleanApkCommand();
         $command->setContainer($this->container);
 
         $return = $command->run(new ArrayInput(array()),new NullOutput());

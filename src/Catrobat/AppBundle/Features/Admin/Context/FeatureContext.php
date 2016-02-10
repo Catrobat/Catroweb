@@ -332,7 +332,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($program_id);
-        assertEquals(null, $program->getDirectoryHash());
+        assertEquals('null', $program->getDirectoryHash());
     }
 
     /**
