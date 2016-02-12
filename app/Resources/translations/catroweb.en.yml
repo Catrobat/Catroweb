@@ -146,6 +146,11 @@ help:
   stepByStep:
     title: "Step-by-Step Intro"
     start: "Starting position:"
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: 'Make a new program'
       detail:
