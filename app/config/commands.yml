@@ -6,7 +6,6 @@ services:
 
       catrowebadmin.command.clean.apk:
               class: Catrobat\AppBundle\Commands\CleanApkCommand
-              arguments: ["@apkrepository","@programmanager"]
               tags:
                 -  { name: console.command }
 
@@ -17,7 +16,6 @@ services:
 
       catrowebadmin.command.clean.extracted:
               class: Catrobat\AppBundle\Commands\CleanExtractedFileCommand
-              arguments: ["@extractedfilerepository","@programmanager"]
               tags:
                 -  { name: console.command }
 
