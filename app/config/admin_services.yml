@@ -45,6 +45,12 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Rudewords }
         arguments: [null, Catrobat\AppBundle\Entity\RudeWord, null]
 
+      catrowebadmin.block.tools.gcm:
+              class: Catrobat\AppBundle\Admin\GoogleCloudMessagingAdmin
+              tags:
+                - { name: sonata.admin, manager_type: orm, label: Push Notifications }
+              arguments: [null, null, AppBundle:Admin\GoogleCloudMessaging]
+
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
         tags:
