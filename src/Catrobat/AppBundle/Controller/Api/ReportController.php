@@ -68,9 +68,6 @@ class ReportController extends Controller
       $response['answer'] = $this->trans('success.report');
       $response['statusCode'] = StatusCode::OK;
 
-      $request->attributes->set('remove_post_from_facebook', true);
-      $request->attributes->set('program_id', $program->getId());
-
       return JsonResponse::create($response);
   }
 
