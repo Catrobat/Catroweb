@@ -1066,7 +1066,7 @@ class FeatureContext extends BaseContext
      */
     public function theFacebookPostShouldBeDeleted()
     {
-        echo 'Delete post with Facebook ID ' . $this->fb_post_id;
+        //echo 'Delete post with Facebook ID ' . $this->fb_post_id;
         
         $program_manager = $this->getSymfonySupport()->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);
