@@ -35,11 +35,15 @@ class FeaturedController extends Controller
         $retArray['CatrobatProjects'] = array();
         foreach ($programs as $program) {
             $new_program = array();
-            $new_program['ProjectId'] = $program->getProgram()->getId();
-            $new_program['ProjectName'] = $program->getProgram()->getName();
-            $new_program['Author'] = $program->getProgram()
-                ->getUser()
-                ->getUserName();
+            if ($program->getProgram() !== null) {
+                $new_program['ProjectId'] = $program->getProgram()->getId();
+                $new_program['ProjectName'] = $program->getProgram()->getName();
+                $new_program['Author'] = $program->getProgram()
+                  ->getUser()
+                  ->getUserName();
+            } else {
+                $new_program['Url'] = $program->getUrl();
+            }
             $new_program['FeaturedImage'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
             $retArray['CatrobatProjects'][] = $new_program;
         }
