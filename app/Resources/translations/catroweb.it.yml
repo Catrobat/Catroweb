@@ -30,11 +30,12 @@ programs:
     viewed: Il più visto
     downloaded: Il più scaricato
   random: Programmi a caso
+  related: Programmi correlati
   downloads: '%downloads% download'
-  sample: Example Programs
+  sample: Programmi di esempio
   views: '%views% visualizzazioni'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: Programmi inviati
+  uploaded: Programmi caricati
   reportAsInappropriate: Segnala come inappropriato
   languageVersion: 'Versione del linguaggio Catrobat: %languageVersion%'
   reportLoginText: 'Effettuare la %login% per segnalare il programma come inappropriato.'
@@ -46,7 +47,11 @@ programs:
   updateAppHeader: Aggiorna App
   updateAppText: "Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente."
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
+  checkout_this_program: Fai il check-out questo di programma Catrobat
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Eliminare
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -102,6 +107,10 @@ licenseToPlay:
     item1: condividi le tue torte insieme alle ricette
     item2: dai credito a chi ti ha ispirato
   version: Versione 1.1, 2 Aprile 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Termini di utilizzo
   headline: Benvenuti nella comunità di Catrobat!
@@ -139,190 +148,12 @@ termsOfUse:
   bottom2: "Sono graditi eventuali suggerimenti in merito a questi Termini d'Uso inviando una mail a %email-webmaster%."
   version: Versione 1.3, 4 marzo 2014
 help:
-  hourOfCode:
-    title: 'Skydiving Steve - Steve il paracadutista'
-    step0:
-      title: 'Skydiving Steve - Steve il paracadutista'
-      description: 'Nel seguente tutorial passo-passo imparerai a programmare il comportamento di Steve e il suo pacco. Le seguenti immagini mostrano come controllare Steve durante il gioco. Devi muore  Steve sopra il bersaglio e toccare lo sfondo per far cadere il pacco. In bocca al lupo...'
-    step1:
-      title: 'Installa "Pocket Code"'
-      description: Come installare Pocket Code sul tuo dispositivo.
-      image1: 'Premi su "Play Store".'
-      image2: 'Cerca "Pocket Code".'
-      image3: 'Premi su "Installa".'
-    step2:
-      title: Scarica il progetto
-      description: 'Come scaricare il programma, consentendoti di personalizzare "Steve il paracadutista" ("Skydiving Steve").'
-      image1: 'Premi "Esplora" di "Pocket Code" sul tuo dispositivo.'
-      image2: Tocca il banner.
-      image3: 'Scarica il programma "Skydiving Steve".'
-    step3:
-      title: Apri il progetto
-      description: "Diamo un'occhiata all'interno del programma."
-      image1: 'Scorri il menu e seleziona "Apri Skydiving Steve".'
-      image2: |-
-        Premi sull'oggetto "parachute".
-      image3: 'Scegli "Script".'
-    step4:
-      title: Aggiungi Variabile
-      description: Le variabili x e y permettono di controllare la posizione del paracadute.
-      image1: 'Premi su "+".'
-      image2: 'Vai alla categoria "Variabili".'
-      image3: 'Premi su "Imposta variabile".'
-      image4: 'Trascina il mattoncino "Imposta variabile" sotto quello "Quando il programma inizia".'
-    step5:
-      title: "Modifica l'etichetta delle variabili"
-      description: Memorizziamo la posizione x del paracadute.
-      image1: Allo stesso modo di prima, aggiungi una seconda variabile.
-      image2: 'Premi su "Nuovo...".'
-      image3: 'Inserisci "x" e premi su "OK".'
-    step6:
-      title: 'Imposta la variabile "y"'
-      description: Memorizziamo e impostiamo la posizione iniziale y del paracadute.
-      image1: 'Dai il nome "y" alla seconda variabile.'
-      image2: 'Seleziona il campo che contiene "0.0".'
-      image3: 'Inserisci "-500" e premi "OK".'
-    step7:
-      title: Per sempre
-      description: 'È necessario controllare in ogni momento la posizione del . Per farlo, inserire un ciclo "Per sempre".'
-      image1: 'Premi su "+".'
-      image2: 'Scegli la categoria "Controllo".'
-      image3: 'Scegli il mattoncino "Per sempre".'
-      image4: 'Trascina il mattoncino "Per sempre" sotto quelli "Imposta variabile".'
-    step8:
-      title: Inserisci e modifica i mattoncini
-      description: |-
-        Aggiungi più mattoncini all'interno del ciclo "Per sempre" per controllare il paracadute. Inserendo le variabili x e y nel mattoncino "Posiziona a" possiamo controllare la posizione del paracadute.
-      image1: 'Inserisci il mattoncino mostrato sotto quello "Per sempre".'
-      image2: 'Premi sul campo "100".'
-      image3: 'Scegli "Variabili" e poi "x".'
-      image4: 'Premi su "200" nello stesso mattoncino posto in alto, vai sulla categoria "Variabili" e scegli "y". Poi conferma con "OK".'
-    step9:
-      title: Modifica le variabili e i valori
-      description: "Cambiando il valore della variabile y di -3, si fa scivolare il paracadute a terra. Cambiare il valore della variabile x affinché il paracadute segua l'inclinazione del dispositivo."
-      image1:
-        subtext1: 'Imposta la dimensione al "20" %.'
-        subtext2: 'Cambia il valore dentro il primo mattoncino "Imposta variabile" a "-3".'
-        subtext3: 'Sul secondo mattoncino "Imposta variabile" premi su "0.0".'
-      image2:
-        subtext1: 'Premi su "y" e poi scegli "x".'
-        subtext2: 'Inserisci "-".'
-        subtext3: 'Premi su "Sensori" e scegli "inclinazione_x".'
-      image3: 'Controlla se la tua formula corrisponde a quella della schermata qui sotto e poi conferma con "OK".'
-    step10:
-      title: Sensore di livello sonoro
-      description: |-
-        Puoi controllare l'altezza del paracadute attraverso il sensore del livello sonoro. Per farlo aggiungere e modificare il mattoncino "Se 1 è vero allora".
-      image1:
-        subtext1: |-
-          Aggiungi un mattoncino "se 1 è vero allora" -  posizionalo sotto l'ultimo mattoncino "Cambia variabile".
-        subtext2: |-
-          Premi sul campo con valore "0" all'interno del "Se 1 è vero allora".
-      image2:
-        subtext1: 'Premi su "Sensori".'
-        subtext2: 'Scegli "livello_sonoro".'
-        subtext3: 'Premi su "Logica".'
-        subtext4: 'Scegli ">".'
-        subtext5: 'Inserisci "50".'
-      image3: 'Verifica se la formula inserita corrisponde a quella della schermata qui sotto e poi premi su "OK".'
-    step11:
-      title: Cambia qualche altro mattoncino
-      description: Quando il gioco inizia, la posizione iniziale del paracadute dovrebbe coincidere con la posizione iniziale appena impostata. Per far questo è necessario aggiungere e modificare tre mattoncini come mostrato nella figura seguente.
-      image1: 'Aggiungi un mattoncino "Cambia variabile"  e modifica il suo valore come fatto in precedenza.'
-      image2:
-        subtext1: 'Aggiungi un mattoncino "Quando ricevo".'
-        subtext2: |-
-          Posizionalo sotto l'ultimo mattoncino ("Fine del ciclo").
-        subtext3: 'Aggiungi due mattoncini "Imposta variabile".'
-      image3: 'Premi sul campo con scritto "messaggio 1" e scegli "Nuovo.."; inserisci "restart".'
-      image4: 'Cambia i valori dei due mattoncini "Imposta variabile" come mostrato nella schermata sopra.'
-    step12:
-      title: Torna agli oggetti
-      description: |-
-        Ora hai completato la gestione dell'oggetto "Paracadute"! RItorna indietro al menu che mostra gli oggetti del progetto, al fine di modificare il prossimo oggetto.
-      image1: 'Premi sul pulsante "indietro" del dispositivo.'
-      image2: 'Premi ancora una volta sul pulsante "Indietro" del dispositivo.'
-      image3: Ora dovresti vedere questa schermata.
-    step13:
-      title: 'Oggetto "target"'
-      description: |-
-        Qui inizi a modificare l'oggetto "target". Aggiungi mattoncini per controllare la posizione e la dimensione del tuo bersaglio.
-      image1: 'Scegli "target" e poi "Script".'
-      image2: Aggiungi e personalizza i mattoncini come nella schermata.
-      image3: Aggiungi altri quattro mattoncini come quelli mostrati.
-    step14:
-      title: 'Oggetto "target"'
-      description: Ogni volta che il gioco ricomincia, si vorrebbe far cambiare la posizione del target. Per questo, impostare le variabili goalx e goaly usando la funzione che genera numeri casuali.
-      image1: 'Premi su "y:" e scegli "Nuovo".'
-      image2: 'Inserisci "goalx" e, per confermarlo, premi su "OK".'
-      image3: 'Premi su "0.0" e inserisci la formula "casuale(-400, 400)".'
-      image4: 'Ripeti i passi da 1 a 3 per il secondo mattoncino "Imposta variabile" - chiamando la variabile "goaly" e impostando il suo valore a "casuale(400, -700)".'
-    step15:
-      title: 'Oggetto "target"'
-      description: |-
-        Modifica il mattoncino "Posiziona a" per impostare la posizione dell'oggetto target usando le variabili goalx e goaly.
-      image1: 'Cambia i valori del mattoncino "Posiziona a" inserendo "goalx" e poi "goaly".'
-      image2: Verifica se i valori inseriti sono uguali a quelli mostrati.
-      image3: Vai indietro finché non viene mostrata questa schermata.
-    step16:
-      title: 'Oggetto "parcel"'
-      description: |-
-        Qui inizi a personalizzare l'oggetto "parcel". Quando tale oggetto riceve il messaggio "start", il pacco dovrebbe essere mostrato. Imposta la posizione del pacco usando le variabili x ed y.
-      image1: 'Premi su "parcel" e scegli "Script".'
-      image2: Aggiungi tutti i mattoncini mostrati in figura.
-      image3:
-        subtext1: 'Cambia il valore del mattoncino "Imposta dimensione a" inserendo "50".'
-        subtext2: |-
-          Premi sul campo "restart" all'interno del mattoncino "Quando ricevi" e crea un nuovo messaggio: "start".
-        subtext3: 'Cambia i valori del mattoncino "Posiziona a" inserendo "x" e "y".'
-    step17:
-      title: 'Oggetto "parcel"'
-      description: |-
-        Per controllare se il pacco ha colpito l'obiettivo, devi far uso del mattoncino "Se 1 è vero allora".
-      image1: |-
-        Aggiungi il mattoncino mostrato sotto l'ultimo "Posiziona a".
-      image2: 'Modifica il valore dentro il mattoncino "Cambia Y di", inserendo "-5". Poi premi sul valore "1" del mattoncino "Se 1 è vero allora".'
-      image3:
-        subtext1: '"posizione_x" e "posizione_y" li trovi dentro la categoria "Oggetto".'
-        subtext2: '"goalx" e "goaly" li trovi dentro la categoria "Variabili".'
-        subtext3: '"AND" è dentro la categoria "Logica".'
-    step18:
-      title: 'Oggetto "parcel"'
-      description: "Se il pacco ha colpito l'obiettivo, hai la necessità di cambiare la posizione del pacco. Manda un messaggio agli altri oggetti per far sapere loro che hai vinto."
-      image1:
-        subtext1: 'Cambia i valori dentro il mattoncino "Posiziona a" inserendo "posizione_x" e "goaly+100".'
-        subtext2: 'Premi su "Invia evento" e crea il messaggio "win".'
-      image2: Aggiungi i mattoncini come mostrato sopra e modifica i loro valori in maniera simile.
-      image3: |-
-        Vai indietro finché non vedi questa schermata. Vai agli script dell'oggetto "restart".
-    step19:
-      title: 'Oggetto "restart"'
-      description: |-
-        Qui si personalizza l'oggetto "restart". Definiamo la posizione e il comportamento di tale oggetto.
-      image1: Aggiungi i mattoncini come mostrato sopra e modifica i loro valori in maniera simile.
-      image2: 'Aggiungi i mattoncini mostrati e poi imposta "Invia evento" scrivendo "restart".'
-      image3: |-
-        Vai indietro finché non vedi questa schermata; poi vai sugli script dell'oggetto "Backgroud".
-    step20:
-      title: 'Oggetto "Sfondo"'
-      description: |-
-        Completa il programma personalizzando l'oggetto "background". Ora puoi iniziare a giocare. Buon divertimento!
-      image1:
-        subtext1: 'Aggiungi i mattoncini mostrati e poi imposta "Invia evento" scrivendo "start".'
-        subtext2: 'Premi sul pulsante "Play".'
-      image2: Buon divertimento con il gioco.
-      image3: 'Hai completato con successo il tutorial "Steve il paracadutista". Ci piacerebbe trovare dei remix interessanti di "Steve il paracadutista" su pocketcode.org -- cambialo come ti piace e caricalo dal tuo account.'
-    step21:
-      title: Verifica i tuoi script!
-      description: "Fai clic sull'immagine sotto per allargarla. Ricontrolla il codice associato agli oggetti se il gioco non funziona correttamente."
-      image1: 'Oggetto "backgroud"'
-      image2: 'Oggetto "parachute"'
-      image3: 'Oggetto "parcel"'
-      image4: 'Oggetto "restart"'
-      image5: 'Oggetto "target"'
   stepByStep:
     title: Introduzione passo per passo
     start: 'Posizione iniziale:'
+    description: |
+      Puoi creare il primo programma, una cartolina interattiva utilizzando i video tutorial che seguono. Devi solo seguire le istruzioni. Durante la creazione della cartolina, vengono fornite le nozioni di base di Pocket Code da applicare in nuovi progetti.
+      Dopo questi video, avrete maggiori nozioni per creare progetti personali con Pocket Code.
     step1:
       title: Crea un nuovo programma
       detail:
@@ -401,7 +232,7 @@ help:
         text2: "Vai indietro di una schermata alla pagina iniziale del tuo oggetto. Da qui puoi gestire gli script ma anche gli aspetti e i suoni associati all'oggetto. Da qui puoi rinominare, copiare, aggiugere o eliminare aspetti e suoni."
         text3: Se premi ancora sul pusante indietro di Android vai ad una schermata con tutti gli oggetti e lo sfondo.
     step10:
-      title: Cambiare lo sfondo
+      title: Cambia lo sfondo
       description: Questa è una panoramica di tutti gli oggetti e dello sfondo associati ad un singolo programma.
       detail:
         text1: Lo sfondo è come un qualsiasi oggetto, ma puoi avere solo uno sfondo.
@@ -524,35 +355,34 @@ help:
     text7_6: Hai caricato il tuo primo gioco sul sito Game Jolt e lo hai attivato. Congratulazioni!
     text7_7: "Gli altri saranno in grado di trovare il tuo gioco. Apparira' nella pagina %link%."
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
-    subtitle1: "Animate Characters and create a 'when tapped' event"
+    title1: (Benvenuti nel) Paese delle meraviglie
+    subtitle1: "Anima i personaggi e creare un evento 'quando toccato'"
     description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+      Impara ad animare un personaggio e a far eseguire dei movimenti quando viene toccato. Il video ti mostra come puoi creare semplici animazioni usando diversi costumi.
+      Inoltre viene mostrato come creare un evento "quando toccato" e come inviare opportuni messaggi tra i diversi oggetti.
+    title2: Salva Alice!
+    subtitle2: Usare il sensore di inclinazione e gestire le collisioni tra oggetti
+    description2: Qui imparerai a controllare un personaggio usando il sensore di inclinazione del tuo dispositivo. Puoi controllare i movimenti di Alice inclinando il dispositivo verso sinistra o verso destra. Guarda il tutorial e fai in modo che gli oggetti cadano in maniera casuale dal cielo e impara a riconoscere quando due oggetti collidono.
+    title3: 'Il Cappellaio - Spara e corri'
+    subtitle3: Crea uno sfondo che si muove e controlla i movimenti del Cappellaio
+    description3: "In questo tutorial viene mostrato come creare simulare il movimento dello sfondo. Lo faremo muovendo gli oggetti sullo schermo, creando un'illusione di movimento. Mostra come muovere il Cappellaio inclinando il dispositivo."
+    title4: 'Il Cappellaio - Spara e corri'
+    subtitle4: Fai in modo che il Cappellaio spari le sue carte malefiche
+    description4: In questo tutorial viene mostrato come creare dei nemici che si muovono in modo casuale verso il tuo personaggio. Inoltre viene mostrato come far sì che il Cappellaio spari e come controllare se i nemici sono stati colpiti usando il rilevamento della collisione.
+    title5: Colpisci un gatto Cheshire
+    subtitle5: Gestire i punteggi usando le variabili
+    description5: "In questo tutorial viene mostrato come usare le variabili per gestire un punteggio. Il punteggio può essere usato all'interno di un qualsiasi gioco. Nell'esempio, il punteggio si riferisce a quante volte hai catturato il gatto."
+    title6: Una gara tra conigli
+    subtitle6: Come creare uno sfondo in movimento
     description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+      Questo tutorial mostra come creare uno sfondo che si sposta verticalmente, muovendo l'oggetto sfondo in un certo modo. Inoltre viene insegnato come far saltare in alto un personaggio quando questo viene toccato.
+      Per rendere il gioco un po' più difficile, viene mostrato come rallentare, man mano che passa il tempo, la velocità del personaggio.
+    download: Scarica il programma
 oauth:
   username_header: Grazie per esserti registrato a Pocket Code!
   username_chooser: 'Scegli un nome utente:'
   username_hint: Il nome utente non dovrebbe essere il tuo vero nome.
   usernameTaken: Nome utente già in uso, scegli uno diverso.
-  noReset: Gli utenti di Facebook e Google + non hanno una password da reimpostare.
 search:
   dotdotdot: Cerca...
   search: Cerca
@@ -681,11 +511,19 @@ ci:
   pending: "Generazione dell'Apk"
   download: Scarica Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
+  submit: "Proponilo all'alice game jam"
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
-    text: |
-      But why not create your own!
-      Take part in the #AliceGameJam
+    header: fai attenzione
+    subheader: È possibile inviare solo programmi originali, creati da sé
+    text: 'Ma perché non crearne uno personale! Prendi parte ad #AliceGameJam'
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Giochi
+    tag2: Animazione in movimento
+    tag3: Storia
+    tag4: Musica
+    tag5: Arte
+    tag6: Sperimentale

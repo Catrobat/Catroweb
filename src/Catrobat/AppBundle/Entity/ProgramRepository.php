@@ -105,6 +105,22 @@ class ProgramRepository extends EntityRepository
 
     public function search($query, $limit = 10, $offset = 0)
     {
+        $em = $this->getEntityManager();
+        $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+        array_shift($metadata);
+
+        $searchterm = '';
+        $i = 1;
+
+        foreach ($metadata as $language) {
+            if ($i == count($metadata)) {
+                $searchterm .= '(t.' . $language . ' LIKE :searchterm)';
+            } else {
+                $searchterm .= '(t.' . $language . ' LIKE :searchterm) OR ';
+            }
+            $i++;
+        }
+
         $dql = "SELECT e,
           (CASE
             WHEN (e.name LIKE :searchterm) THEN 10
@@ -121,14 +137,20 @@ class ProgramRepository extends EntityRepository
           (CASE
             WHEN (e.id = :searchtermint) THEN 11
             ELSE 0
+          END) +
+          (CASE
+            WHEN ($searchterm) THEN 7
+            ELSE 0
           END)
           AS weight
         FROM Catrobat\AppBundle\Entity\Program e
         LEFT JOIN e.user f
+        LEFT JOIN e.tags t
         WHERE
           (e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
+          $searchterm OR
           e.id = :searchtermint) AND
           e.visible = true
         ORDER BY weight DESC, e.uploaded_at DESC
@@ -146,23 +168,51 @@ class ProgramRepository extends EntityRepository
 
     public function searchCount($query)
     {
+
+        $em = $this->getEntityManager();
+        $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+        array_shift($metadata);
+
+        $searchterm = '';
+        foreach ($metadata as $language) {
+            $searchterm .= 't.' . $language . ' LIKE :searchterm OR ';
+        }
+
         $qb_program = $this->createQueryBuilder('e');
-        $dql = "SELECT COUNT(e.id)
+        $dql = "SELECT e.id
         FROM Catrobat\AppBundle\Entity\Program e
         LEFT JOIN e.user f
+        LEFT JOIN e.tags t
         WHERE
           (e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
+          $searchterm
           e.id = :searchtermint) AND
           e.visible = true
+          GROUP BY e.id
       ";
         $q2 = $qb_program->getEntityManager()->createQuery($dql);
         $q2->setParameter('searchterm', '%'.$query.'%');
         $q2->setParameter('searchtermint', intval($query));
-        $result = $q2->getSingleScalarResult();
+        $result = $q2->getResult();
+        return count($result);
+    }
 
-        return $result;
+    public function searchTagAndExtensionCount($query)
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        $result = $qb
+            ->select('e')
+            ->leftJoin('e.tags', 't')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('t.id', ':id'))
+            ->setParameter('id', $query)
+            ->getQuery()
+            ->getResult();
+
+        return count($result);
     }
 
     public function getUserPrograms($user_id)
@@ -213,5 +263,20 @@ class ProgramRepository extends EntityRepository
           ->where($qb->expr()->isNotNull('e.directory_hash'))
           ->getQuery()
           ->getResult();
+    }
+
+    public function getProgramsByTagId($id, $limit = 20, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('e');
+        return $qb
+            ->select('e')
+            ->leftJoin('e.tags', 'f')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('f.id', ':id'))
+            ->setParameter('id', $id)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -30,6 +30,7 @@ programs:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Izbrisati
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: podijeli svoje kolače zajedno sa receptima
     item2: daj kredit onome koji te je ispirisao
   version: Verzija 1.1, 2 travanj 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Uvjeti korištenja
   headline: Dobrodošao/la u Catrobat zajednicu!
@@ -133,174 +142,14 @@ termsOfUse:
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Verzija 1.3, 4 Ožujak 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: Kako instalirati Pocket Code na mobilnom uređaju.
-      image1: 'Pritisni na "Play Store".'
-      image2: 'Traži "Pocket Code".'
-      image3: 'Pritisni "Instaliraj".'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
-      image2: Tap the banner.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: Pogledajmo unutar programa.
-      image1: 'Povuci izbornik na prema dole i pritisni "Otvori Skydiving Steve".'
-      image2: 'Pritisni objekt "padobran".'
-      image3: 'Izaberi "Skripte".'
-    step4:
-      title: Dodaj varijablu
-      description: Varijable x i y omogućuju kontrolu položaja padobrana.
-      image1: 'Pritisni "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Pritisni "Postavi varijablu".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
-    step5:
-      title: Label variables
-      description: Označi x položaj svog padobrana.
-      image1: Dodaj drugu varijablu na isti način kao i maloprije.
-      image2: 'Pritisni "Novi...".'
-      image3: 'Umetni "x" i pritisni "OK".'
-    step6:
-      title: 'Set variable "y"'
-      description: Označi i postavi y na početni položaj svog padobrana.
-      image1: 'Označi drugu varijablu sa "y".'
-      image2: 'Pritisni na polje ispunjeno sa "0.0".'
-      image3: 'Ubaci "-500" i pritisni "OK".'
-    step7:
-      title: Ponavljaj
-      description: 'Trebaš kontrolisati položaj svog padobrana cijelo vrijeme. Ubaci "beskonačnu" petlju da bi to uspio.'
-      image1: 'Pritisni "+".'
-      image2: 'Idi na "Kontrola" - kategoriju.'
-      image3: 'Odaberi "Zauvijek" - blok.'
-      image4: 'Povuci i postavi "Zauvijek" - blok ispod "Postavi varijablu" - blokova.'
-    step8:
-      title: Insert and modify bricks
-      description: 'Dodaj još blokova u svoju "beskonačnu" petlju da bi kontrolisao padobran. Ubacivanjem varijabla x i y u svoj "Postavi na" blok, omogućeno ti je da kontrolišeš svoj padobran.'
-      image1: 'Umetni prikazane blokove ispod "Zauvijek" - bloka.'
-      image2: 'Pritisni na "100" polje.'
-      image3: 'Pritisni "Varijable" i odaberi "x".'
-      image4: 'Pritisni na "200" u istom bloku na vrhu, idi u kategoriju "Varijable" i odaberi "y". Potvrdi sa "OK".'
-    step9:
-      title: Change variables and values
-      description: Izmijeni varijablu y na -3, da bi padobran sletio na površinu. Izmijeni varijablu x, tako da tvoj padobran prati nagibni ugao tvog mobilnog uređaja.
-      image1:
-        subtext1: 'Postavi veličinu na "20" %.'
-        subtext2: 'Izmjeni vrijednost prvog "Postavi varijablu" - bloka na "-3".'
-        subtext3: 'Kod drugog "Postavi varijablu" - bloka pritisni na polje "0.0".'
-      image2:
-        subtext1: 'Pritisni na "y" i odaberi "x".'
-        subtext2: 'Umetni "-".'
-        subtext3: 'Tap "Sensors" and choose "inclination_x".'
-      image3: 'Provjeri da li se umetnuta formula podudara sa formulom na snimci zaslona i potvrdi sa "OK".'
-    step10:
-      title: Loudness sensor
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
-      image2:
-        subtext1: 'Pritisni na "Senzori".'
-        subtext2: 'Odaberi "glasnoća".'
-        subtext3: 'Pritisni na "Logika".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Ubaci "50".'
-      image3: 'Provjeri da li se tvoja formula podudara sa formulom na snimci zaslona i pritisni "OK".'
-    step11:
-      title: Change some more bricks
-      description: Kada ponovno pokreneš igricu, početni položaj padobrana mora odgovarati prvobitnom početnom položaju. Za to moraš dodati i izmijeniti tri bloka kao što je pokazano na slici ispod.
-      image1: 'Dodaj "Promjeni varijablu" - blok i izmjeni vrijednost kao što je gore.'
-      image2:
-        subtext1: 'Dodaj "Kad primim" - blok.'
-        subtext2: 'Postavi ga ispod zadnjeg bloka ("Kraj petlje").'
-        subtext3: 'Dodaj dva "Postavi varijablu" - bloka.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Promjeni vrijednosti od dva "Postavi varijablu" - bloka kao što je prikazano na snimci zaslona iznad.'
-    step12:
-      title: Back to objects
-      description: 'Objekt "padobran" je uspješno završen! Idi natrag na prikaz objekta za izmjenu sljedećeg objekta.'
-      image1: 'Pritisni "natrag" - tipku na svom uređaju.'
-      image2: 'Pritisni "natrag" - tipku još jednom.'
-      image3: Sada bi trebao/la vidjeti ovaj zaslon na svom uređaju.
-    step13:
-      title: 'Objekt "cilj"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Pritisni na "cilj" i odaberi "Skripte".'
-      image2: Dodaj i izmjeni blokove kao što je prikazano u snimci zaslona iznad.
-      image3: Dodaj još četiri bloka kao što je prikazano iznad.
-    step14:
-      title: 'Objekt "cilj"'
-      description: Kada ponovno pokreneš igricu, položaj tvog cilja se mora mijenjati. Za ovaj korak, postavi varijable goalx i goaly sa funkcijom, koja će generirati slučajne brojeve.
-      image1: 'Pritisni na polje "y:" i odaberi "Novi".'
-      image2: 'Umetni "goalx" i potvrdi sa "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
-    step15:
-      title: 'Objekt "cilj"'
-      description: 'Izmjeni svoj "Postavi na" blok za kontrolu položaja cilja sa varijablama goalx i goaly.'
-      image1: 'Promjeni vrijednosti "Postavi na" - bloka na "goalx" i "goaly".'
-      image2: Provjeri da li se tvoje vrijednosti podudaraju sa onima iznad.
-      image3: Idi natrag dok ne vidiš ovaj zaslon.
-    step16:
-      title: 'Objekt "paket"'
-      description: 'Ovdje počinješ sa izmjenom objekta "paket". Kad objekt "paket" primi poruku "start", paket se mora pojaviti. Postavi položaj paketa sa varijablama x i y.'
-      image1: 'Pritisni na "paket" i odaberi "Skripte".'
-      image2: Dodaj sve blokove prikazane iznad.
-      image3:
-        subtext1: 'Promjeni vrijednost "Postavi veličinu" - bloka na "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Promjeni vrijednosti "Postavi na" - bloka na "x" i "y".'
-    step17:
-      title: 'Objekt "paket"'
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Dodaj gore prikazane blokove ispod zadnjeg "Postavi na" - bloka.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
-      image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" i "goalx" su u kategoriji "Varijable".'
-        subtext3: '"AND" is in the "Logic" category.'
-    step18:
-      title: 'Objekt "paket"'
-      description: Ako je paket uspješno sletio na cilj, moraš izmjeniti položaj paketa.Pošalji poruku drugim objektima da bi ih obavijetio/la da si pobjedio/la.
-      image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Dodaj gore prikazane blokove i promjeni njihove vrijednosti podjednako.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
-    step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Dodaj gore prikazane blokove i promjeni njihove vrijednosti podjednako.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: 'Idi natrag dok ne vidiš ovaj zaslon, onda idi na skripte od "Pozadina".'
-    step20:
-      title: 'Object "Background"'
-      description: 'Dovrši program izmjenom objekta "pozadina". Sad možeš početi sa igranjem svoje igrice. Uživaj!'
-      image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: 'Pritisni "Reproduciraj" - tipku.'
-      image2: Uživaj u igrici.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: Klikni na slike ispod za uvećavanje. Pregledaj skripte objekata ako igrica ne radi ispravno.
-      image1: 'Objekt "pozadina"'
-      image2: 'Objekt "padobran"'
-      image3: 'Objekt "paket"'
-      image4: 'Object "restart"'
-      image5: 'Objekt "cilj"'
   stepByStep:
     title: Uvod korak po korak
     start: 'Početni položaj:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -518,7 +367,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Pretraži...
   search: Pretraga
@@ -655,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Igre
+    tag2: Pokretne animacije
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

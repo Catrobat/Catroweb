@@ -30,11 +30,12 @@ programs:
     viewed: 가장 많이 본 프로그램
     downloaded: 가장 많이 다운로드한 프로그램
   random: 무작위 프로그램
+  related: 관련 프로그램
   downloads: '%downloads% 다운로드'
-  sample: Example Programs
+  sample: 예제 프로그램
   views: '%views% 조회'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: 제출된 프로그램
+  uploaded: 업로드된 프로그램
   reportAsInappropriate: 부적합한 프로그램으로 보고
   languageVersion: 'Catrobat 언어 버전: %languageVersion%'
   reportLoginText: '%login% 부적당한 프로그램으로 보고하시기 바랍니다.'
@@ -46,7 +47,11 @@ programs:
   updateAppHeader: 응용 프로그램 업데이트
   updateAppText: 이 프로그램을 다운로드하려면 최신 버전으로 당신의 앱을 업데이트 하세요.
   btnClosePopup: 예
-  checkout_this_program: Checkout this Catrobat program
+  checkout_this_program: 이 Catrobat 프로그램을 점검하세요
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: 삭제
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
@@ -93,6 +98,10 @@ licenseToPlay:
     item1: 당신의 요리법과 함께 케이크를 공유하세요
     item2: 당신에게 영감을 준 사람들에 대한 제작과정을 설명하세요
   version: 버전 1.1, 2013년 4 월 2 일
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: 이용 약관
   headline: 오신 것을 환영 합니다 Catrobat 커뮤니티!
@@ -112,234 +121,70 @@ termsOfUse:
     item4: 개인 개인 정보를 유지하세요. 여러분의 이메일 주소, 전화 번호 또는 기타 개인 연락처 정보를 공유하지 마십시오.
     item5: "사이트를 친절하도록 유지해 주세요. 만약 프로그램이나 설명이 거칠거나, 너무 폭력적이거나, 부적절하다고 느껴지시면, '부적절 신고'를 클릭하고 간단한 설명을 남겨 주세요. Catroba 팀에서 여러분의 신고를 검토하고 프로그램과, 설명 등 관련된 것을 삭제할 수 있습니다."
   list3:
-    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "우리의 웹사이트에 프로그램을 업로드 하 여 당신은 수락 하 고 업로드 된 Catrobat 프로그램의 특정 무료 라이선스에서이 작업을 저장 하는 데 동의. 무료 라이센스는 Catrobat 시스템 자체는 당신에 게 사용할 수와 마찬가지로, 이 무료 라이센스 프로그램 모두에 게 직장에서 배울 수 있는 권리를 주고 업로드 된 Catrobat의 이전 업로드 다른 사람에 의해 그들의 자신의 새로운 매혹적인 게임, 애니메이션, 그리고 다른 프로그램을 구축 하는 작업을 리믹스 하 고 적응 하. 이로써 ' 한의 동료의 어깨에 서 서 ' 모두, 당신은 그들 중 하나! 작업 따라서 세상을 유익 하 고 모두 사용 하 여 무료, 자유롭게 세계 각 지에서 자원 봉사자에 의해 위키백과에 기여 하는 사진과 텍스트를 약간 비슷한 유지. 인류에 게 당신의 현재로 그것의 생각: 당신은 모든 사람에 게 주고 당신에 게 우리의 웹사이트에 그들의 작품을 업로드 하는 모든 다른 사람. 따라서 업로드 프로그램의 가치 그것의 소유자는 동일한 조건에 있는 지역 사회에 참여 하는 조건으로 무료, 당신에 게 주시는 선물 이다."
+    item2: 선물;을 받아들일 필요가 없습니다. 당신이 할 경우, 특정 규칙이 적용 됩니다. 이러한 규칙의 혜택은 작품에서 배울 수 있으며 빌드 더 있도록 그것에 직접 업로드할 수 있습니다, 예를 들어, 다시 당신의 자신으로 우리의 웹사이트에 있는 물건. 또 다른 이점은 이러한 라이센스 당신이 프로그램의 그들의 사용을 통해 다른 사람에 게 발생 하는 어떤 문제에 대 한 책임 개최 수 없습니다 있는지 확인입니다.
+    item3: 한 중요 한 추가 상태는 당신이 명확 하 게 누구의 작품에 당신이 자신의 작품을 기반으로 하는 저자에 게 속성을 부여입니다. 같은 시간에 우리는 열심히 작업 평가 될 것 이다 명확 하 게 다른 사람에 의해 당신에 의해, Catrobat의 지역 사회에서 당신을 대표 하는 것을 자유롭게 선택한 고유 이름 속성을 제공 하 여 그리고 다른 작업 모두에 게 부여 하는 데 대 한 공개 방법에 당신에 게 그들의 감사를 표현 하는 기회를 제공 함으로써 기여 된 데에 및 특히 그들에 게.
+    item4: '정확한 법률 용어 및 조건에 대 한 %link-licenseUploaded%를 참조 하십시오.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: 우리는 우리의 자신의 소프트웨어 및 Catrobat 시스템, 예를 들어, Catrobat 시스템에 관련 된 우리 자신의 소스 코드 Catrobat 팀, 우리의 웹 사이트와 인터넷 리소스에 의해 작성 된 소프트웨어와 관련 된 인터넷 자원 제공 및 모든 추가 포함 재료 등, 예를 들어, 그림, 소리, 및 텍스트, 현재와 미래에 Catrobat의 무료 라이선스 아래 당신에 게.
+    item2: 그러나 이러한 라이선스 Catrobat 둘 다 당신에 게 무료로, 와 같은 몇 가지 제한만 보장, 다른 가운데, Catrobat 시스템 영원히 남아 있을 것 이라는 무료 하 고 유용한 모두에 그들을 사용 하 여 자유를 주는 의미에서 자유의 모든 부분을 확인 합니다.
+    item3: '정확한 법률 용어 및 조건에 대 한 %link-licenseToPlay%를 참조 하십시오. Catrobat 시스템 뿐 아니라 다른 많은 문서 및 리소스의 소스 코드는 %link-developer%를 통해 사용할 수 있습니다.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+    item1: '만약 당신이, 이나, 나이, 귀하의 부모 또는 법적 보호자의 13 세 미만 있다면, 연결 조직에 참여 또는 담당 기자 회견 형식 개인 정보 보호 위반 또는 대량 대량 감시, 그럼 우리의 소프트웨어 응용 프로그램을 사용 하 고 우리의 서비스에 액세스할 수 없습니다. 이 제한 및 그것에 특정 예외의 정확한 세부 사항 섹션에서 delineated는 4.a 및 4.b 우리의 %link-termsOfUse%에.'
+    item2: 13 세 미만 인 경우 다음 Catrobat의 소프트웨어 응용 프로그램 및 서비스를 사용할 수 있는지 여부 귀하의 부모 또는 법적 보호자에 게 있다.
+    item3: 우리 권리를 거부, 삭제 또는 숨기기 프로그램, 사용자 계정, 예약 인스턴스 우리가 그 프로그램을 찾을 경우 부적절 한 자료를 포함 하거나 사용자의 다른 사람의 권리 침해 하는 모든 디지털 자료 언제 든 지 우리의 단독 재량에, Catrobat의 웹 사이트에 업로드 하 고 있습니다.
+    item4: Catrobat의 소프트웨어 및 인터넷 자원의 모든 희망을 그들은 도움이, 될 것입니다 하지만 어떠한 보증도 없이 제공 됩니다.
+    item5: '포인트 및 일부 추가 약관 및 조건 위에서 정확한 정립을 위한 우리의 %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service를 참조 하십시오.'
+  bottom1: 우리는 항상 우리의 이용 약관 개선 하려고 하기 때문에 시간에서 여기 다시 확인 합니다.
+  bottom2: '%email-webmaster% 이용 약관에 대 한 어떤 제안을 우송 하십시오.'
   version: 버전 1.3, 4 March 2014
 help:
-  hourOfCode:
-    title: 스카이 다이빙 Steve
-    step0:
-      title: 스카이 다이빙 Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: '"포켓 코드" 설치'
-      description: 모바일 장치에서 포켓 코드를 설치 하는 방법.
-      image1: '"플레이 스토어"를 누릅니다.'
-      image2: '"포켓 코드"를 검색합니다.'
-      image3: '"설치"를 누릅니다.'
-    step2:
-      title: 프로젝트 다운로드
-      description: '"스카이 다이빙 Steve" 를 프로그램하기 위해 기본프로그램을 다운로드해 본다. '
-      image1: '"포켓코드"에서 "탐색하기"를 터치하라.'
-      image2: 배너를 터치하라.
-      image3: '"스카이 다이빙 Steve" 프로그램을 다운로드합니다.'
-    step3:
-      title: 프로그램 열기
-      description: 프로그램의 내부를 살펴보겠습니다.
-      image1: '메뉴를 이용해 "오픈 스카이 다이빙 Steve"를 터치합니다.'
-      image2: '개체 "낙하산"를 누릅니다.'
-      image3: '"스크립트"를 선택 하십시오.'
-    step4:
-      title: 변수 추가
-      description: 변수 x와 y 낙하산의 위치를 제어할 수 있습니다.
-      image1: '탭 "+".'
-      image2: '"변수" 카테고리로 이동합니다.'
-      image3: '"변수 설정"을 누릅니다.'
-      image4: '드래그 앤 드롭 "변수 설정"-아래에서 "프로그램 시작"블록 아래에 블록을 놓는다.'
-    step5:
-      title: 변수에 이름을 붙인다
-      description: 낙하산의 x 위치 이름을 지정 합니다.
-      image1: 직전에 두 번째 변수를 추가합니다.
-      image2: '"새..."를 터치하라.'
-      image3: '"x"를 삽입하고 "확인"을 누릅니다.'
-    step6:
-      title: '변수 "y" 설정'
-      description: 낙하산이 시작하는 y좌표를 설정합니다.
-      image1: '"Y"로 두 번째 변수를 지정합니다.'
-      image2: '"0.0"으로 된 칸을 터치합니다.'
-      image3: '"-500"를 삽입하고 "확인"을 터치합니다.'
-    step7:
-      title: 무한 반복
-      description: '항상 낙하산의 위치를 항상 제어해야 합니다. "무한 반복"블록을 추가합니다.'
-      image1: '"+"를 터치합니다.'
-      image2: '"제어" 카테고리로 갑니다.'
-      image3: '"무한 반복" 블록을 선택합니다.'
-      image4: '"무한 반복" 블록을 "변수 정하기" 블록 아래에 끌어 넣습니다.'
-    step8:
-      title: 추가하고 블록을 조절합니다.
-      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
-      image1: 'Insert the shown bricks below the "Forever" - brick.'
-      image2: 'Tap the "100" field.'
-      image3: 'Tap "Variables" and choose "x".'
-      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
-    step9:
-      title: Change variables and values
-      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
-      image1:
-        subtext1: 'Set the size to "20" %.'
-        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
-        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
-      image2:
-        subtext1: '"Y"를 누르고 "x"를 선택하라.'
-        subtext2: '"-"를 삽입하라.'
-        subtext3: '"센서"를 누르고 "inclination_x"를 하라.'
-      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
-    step10:
-      title: 소음 센서
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
-      image2:
-        subtext1: 'Tap "Sensors".'
-        subtext2: 'Choose "loudness".'
-        subtext3: 'Tap "Logic".'
-        subtext4: '">"를 선택하라.'
-        subtext5: '"50"을 삽입합니다.'
-      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
-    step11:
-      title: Change some more bricks
-      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
-      image1: 'Add a "Change variable" - brick and modify the value like above.'
-      image2:
-        subtext1: 'Add a "When I receive" - brick.'
-        subtext2: 'Place it below the last brick ("End of loop").'
-        subtext3: 'Add two "Set variable" - bricks.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
-    step12:
-      title: Back to objects
-      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
-      image1: 'Tap the "back" - button on your device.'
-      image2: 'Tap the "back" - button once more.'
-      image3: Now you should see this screen on your device.
-    step13:
-      title: 'Object "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tap "target" and choose "Scripts".'
-      image2: Add and modify the bricks as in the screenshot above.
-      image3: Add four more bricks like shown above.
-    step14:
-      title: 'Object "target"'
-      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
-      image1: 'Tap the field "y:" and choose "New".'
-      image2: 'Insert "goalx" and confirm with "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
-    step15:
-      title: 'Object "target"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
-      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
-      image2: Check if your values match the ones above.
-      image3: Go back until you see this screen.
-    step16:
-      title: 'Object "parcel"'
-      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
-      image1: 'Tap "parcel" and choose "Scripts".'
-      image2: Add all the bricks shown above.
-      image3:
-        subtext1: 'Change the value of the "Set size" - brick to "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
-    step17:
-      title: 'Object "parcel"'
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Add the above shown bricks below the last "Place at" - brick.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
-      image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"AND" is in the "Logic" category.'
-    step18:
-      title: 'Object "parcel"'
-      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
-      image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Add the above shown bricks and modify their values alike.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
-    step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Add the above shown bricks and modify their values alike.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: Go back until you see this screen, then go to the scripts of “Background”.
-    step20:
-      title: 'Object "Background"'
-      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
-      image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: 'Tap the "Play" - button.'
-      image2: Enjoy your game.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
-      image1: 'Object "background"'
-      image2: 'Object "parachute"'
-      image3: 'Object "parcel"'
-      image4: 'Object "restart"'
-      image5: 'Object "target"'
   stepByStep:
-    title: Step-by-Step Intro
-    start: 'Starting position:'
+    title: 단계별 소개
+    start: '시작 위치:'
+    description: 여기 귀하의 첫 번째 프로그램 다음 연습 동영상을 사용 하 여 대화형 엽서 만들 있습니다. 당신은 당신에 게 주어진 지시를 따릅니다. 엽서의 생성 하는 동안 귀하의 미래의 프로젝트에 필요한 주머니 코드의 기초는 중재 된다. 이 가이드 동영상 후 다른 모든 활동 자신의 개인 주머니 코드 프로젝트를 만드는 더 많은 자유를 줄 것 이다.
     step1:
-      title: Make a new program
+      title: 새로운 프로그램 만들기
       detail:
-        text1: 'Tap on "New".'
-        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
+        text1: '"새로운"을 터치'
+        text2: '프로그램 이름을 입력하고, "빈 프로그램 만들기" 선택하고 "확인"을 터치하세요.'
     step2:
-      title: Create a new object
+      title: 새로운 프로그램 만들기
       detail:
-        text1: 'Tap:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Draw a new look.
-        special2: Choose from gallery.
-        special3: Take a picture.
+        text1: 터치
+        text2: 새 개체의 첫 번째 보기의 소스를 선택 합니다.
+        text3: '개체 이름을 입력하고 개체를 만드는 "확인"을 누릅니다.'
+        special1: 새 이미지 그리기
+        special2: 갤러리에서 가져오기
+        special3: 사진 찍기
     step3:
-      title: Start Moving
+      title: 이동 시작
       detail:
-        text1: 'Tap:'
-        text2: 'The first brick we use is out of the category "Motion".'
-        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text1: 터치
+        text2: '우리가 사용 하는 첫 번째 블록은 "동작" 카테고리이다.'
+        text3: '"움직이기" 블록을 선택합니다. 블록에서 정해지는 새 위치로 움직인다.'
+        text4: 블록은 현재 떠다닙니다. 고정시키기 위해 원하는 위치로 블록을 이동합니다. 이미 배치된 블록들도 터치하여 다시 이동시킬수 있습니다.
+        text5: '"실행" 버튼으로 배경에서 개체가 움직이기하는 것을 볼 수 있다.'
+        text6: 돌아가기 위해서는 스마트폰의 취소 버튼를 이용하세요.
     step4:
-      title: Change Look
-      description: You can change the look of your object.
+      title: 배경 바꾸기
+      description: 개체의 모양을 변경할 수 있습니다.
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: Now you have to select the new image.
-        text6: Tap play to see the behaviour on the stage.
+        text1: '"다음 배경" 블록을 선택합니다. 이 블록으로 배경을 선택하거나 새로 만들 수 있습니다.'
+        text2: '"움직이기"블록을 터치하세요.'
+        text3: 새로운 모양을 만들기 위해 드롭다운 입력창을 터치하세요.
+        text4: 같은 방법으로 그림을 선택하세요.
+        text5: 이제 새 그림을 선택해야 합니다.
+        text6: 화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.
     step5:
       title: 소리내기
-      description: Now you will find out how to make an object talk.
+      description: 이제 개체가 무엇을 말하는지 알 수 있을 것입니다.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: Tap play to see the behaviour on the stage.
+        text1: '"소리내기"블록을 선택하세요. 이 블록이 실행되면 개체가 글자를 읽어 줄 것입니다.'
+        text2: '"다음 배경"블록을 터치하세요.'
+        text3: 화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.
     step6:
-      title: Again and again
+      title: 다시 또 다시
       description: This step shows you how to repeat behaviour of objects.
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
@@ -347,7 +192,7 @@ help:
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
         text5: Tap into the text field of the x and y value and set to 0.
-        text6: Tap play to see the behaviour on the stage.
+        text6: 화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.
     step7:
       title: Tapping is everything
       description: You can also control the behaviour of the object when the program is running on the stage.
@@ -385,25 +230,25 @@ help:
         text6: Upload the program that is currently opened.
   tutorialcards:
     title: 튜터리얼
-    description1: These tutorials show you how to use effective tricks in Pocket Code.
-    getReady: 'Get Ready:'
-    tryCode: 'Try this code:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    description1: 이 튜터리얼에서는 포켓 코드에서 효과적인 트릭을 사용하는 방법을 보여줍니다.
+    getReady: '준비:'
+    tryCode: 이 코드를 시도해 보십시오.
+    doIt: '실행:'
+    tip: '추가 팁:'
     card1:
-      title: Change Size
-      description: Change the size of an object.
-      one: Add the object of which you would like to change the size, e.g. Animal.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      title: 다음 크기로 바꾸기
+      description: 개체의 크기를 변경 합니다.
+      one: '크기 변경하려는 개체를 추가하세요. 예: 동물.'
+      two: '(그것의 원래 크기의 20%)에 의해 그것을 최소화하기 위해 개체의 스크립트에 다음 블록을 삽입 하세요.'
     card2:
-      title: Change Look
-      description: Change the looks of an object.
-      one: Add the object of which you would like to change its look, e.g. items.
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      title: 배경 바꾸기
+      description: 개체의 모양을 변경하세요.
+      one: '크기 변경하려는 개체를 추가하세요. 예: 동물.'
+      two: 개체의 모양에 더 많은 그림을 추가해 주세요.
+      three: 개체의 스크립트에 1 초 후의 모양을 이어서 바꾸기 위해 다음 블록 삽입하세요.
     card3:
-      title: Animation
-      description: Animate objects
+      title: 애니메이션
+      description: 개체에 애니메이션 효과 주기
       one: Add the object you want to be moving.
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
@@ -515,7 +360,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: Search
@@ -544,56 +388,56 @@ apk:
 errors:
   username:
     blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    invalid: 사용자 이름이 올바르지 않습니다.
+    exists: 이름이 이미 존재합니다.
+    not_exists: 사용자 이름이 존재하지 않습니다.
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: 암호가 없습니다.
+    short: '새 암호는 적어도 %length% 문자 이상이어야 합니다.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: 설명에 무례한 단어를 포함할 수 없습니다.
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: 국가가 없습니다.
+    invalid: 잘못 된 국가
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: 이메일을 비워두면 안됩니다
+    invalid: 당신의 이메일은 유효하지 않습니다
     exists: 이 이메일 주소는 이미 존재합니다.
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: 공개용 ID는 없으면 안됩니다
+  login: 사용자 이름 또는 암호가 잘못되었습니다.
+  post-data: 관련 데이터가 바르지 않거나 없습니다!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: 클라이언트는 fileChecksum를 보내지 않았습니다! 포켓 코드의 오래된 버전을 사용하시나요?
+    invalid: 잘못 된 체크섬
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: 잘못 된 코드 xml
+    missing: '알 수 없는 오류: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
+    unexpected: 예상하지 않은 파일 발견
+    invalid: 잘못된 파일
+  image.missing: 프로젝트 XML은 프로젝트 폴더에 존재 하지 않는 파일을 언급한다
+  unknown: 알 수 없는 오류
+  token: '인증 장치 실패: 잘못 된 인증 토큰!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: 설명에 무례한 단어를 포함할 수 없습니다.
   program:
-    invalid: Invalid program.
+    invalid: 잘못 된 프로그램입니다.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: 죄송 합니다, 당신의 프로그램에 Catrobat 언어의 오래 된 버전을 포함하고 있습니다! 당신은 포켓 코드의 최신 버전을 사용하세요?
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: 죄송합니다, 오래된 포켓 코드 버전입니다. 최신 버전으로 업데이트 하세요.
 success:
-  registration: Registration successful!
-  token: ok
-  upload: Your project was uploaded successfully!
-  report: Your report was successfully sent!
+  registration: 등록 성공!
+  token: OK
+  upload: 프로젝트가 성공적으로 업로드되었습니다!
+  report: 버그 신고가 성공적으로 전송되었습니다!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 분 전에 |{1}1 분 전 |] 1, Inf] %count% 분 전'
+  hours.ago: '{1}1 시간 전 |] 1, Inf] %count% 시간 전'
+  days.ago: '{1}1 일 전 |] 1, Inf] %count% 일 전'
+  months.ago: '{1}1 달 전 |] 1, Inf] %count% 달 전'
+  years.ago: '{1}1 년 전에 |] 1, Inf] 1 년 전'
 language:
   arabic: 아랍어
   bulgarian: 불가리아어
@@ -644,11 +488,19 @@ ci:
   pending: Apk 생성중
   download: Apk 다운로드
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  nojam: 죄송합니다, 현재 게임 잼이 없습니다
+  submit: 앨리스 게임 잼에 제출
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
-    text: |
-      But why not create your own!
-      Take part in the #AliceGameJam
+    header: 알고 있어야합니다
+    subheader: 자신의 프로그램만 제출할 수 있습니다
+    text: '스스로 만드세요!  #AliceGameJam에 참여하세요'
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: 게임
+    tag2: 애니메이션
+    tag3: 스토리
+    tag4: 음악
+    tag5: 예술
+    tag6: '실험적인 기능 '

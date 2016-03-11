@@ -30,6 +30,7 @@ programs:
     viewed: Najbolj ogledano
     downloaded: Največkrat prenešeni
   random: Naključno izbrani
+  related: Related Programs
   downloads: '%downloads% prenosov'
   sample: Example Programs
   views: '%views% ogledov'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Prosimo, posodobite vašo aplikacijo na najnovejšo različico, da boste lahko sneli program.
   btnClosePopup: V redu
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Izbriši
 passwordRecovery:
   subject: Vaše geslo za Catrobat
   message: |
@@ -93,6 +98,10 @@ licenseToPlay:
     item1: delite vaše pecivo skupaj z receptom
     item2: zahvalite se ljudem pri katerih ste našli ideje
   version: Različica 1.1, 2 aprila 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Pogoji uporabe
   headline: Dobrodošli v skupnosti Catrobat!
@@ -130,173 +139,14 @@ termsOfUse:
   bottom2: 'Prosimo, da se za dodatne informacije glede pogojev uporabe obrnete na %email-webmaster%.'
   version: Različici 1.3, 4 marec 2014
 help:
-  hourOfCode:
-    title: Padalec Steve
-    step0:
-      title: Padalec Steve
-      description: V naslednjem vodiču se boste lahko korak za korakom naučili upravljati s padalcem Stevom in njegovim paketom. Spodnje slike kažejo kako upravljati s Stevom med igro. Steva je treba ohranjati nad tarčo in tapniti ozadje, da spusti paket. Veliko sreče...
-    step1:
-      title: 'Namesti "Pocket Code"'
-      description: Kako namestiti Pocket Code na vašo mobilno napravo.
-      image1: 'Tapnite "Play Store".'
-      image2: 'Išči znotraj "Pocket Code".'
-      image3: 'Tapnite "Namestiti".'
-    step2:
-      title: Prenos projekta
-      description: 'Kako prenesti program, ki vam omogoča, da sprogramirate program "Padalec Steve".'
-      image1: 'Tapnite "Razišči" v "Pocket Code" na vaši prenosni napravi.'
-      image2: Tapnite banner.
-      image3: 'Prenesite program "Padalec Steve".'
-    step3:
-      title: Odpri projekt
-      description: Poglej v notranjost programa.
-      image1: 'Potegnite menu in tapnite "Odpri Padalec Steve".'
-      image2: 'Tapnite predmet "padalo".'
-      image3: 'Izberite "Scenarij".'
-    step4:
-      title: Dodaj spremenljivko
-      description: S spremenljivkama x in y lahko spreminjate položaj padala.
-      image1: 'Tapnite "+".'
-      image2: 'Pojdi na kategorijo "Spremenljivke".'
-      image3: 'Tapnite "Nastavite spremenljivko".'
-      image4: 'Povleci in spusti blok "Nastavi spremenljivko" pod blok "ko poženeš".'
-    step5:
-      title: Oznake spremenljivk
-      description: Označi x položaj vašega padala.
-      image1: Dodaj drugo spremenljivko tako kot prej.
-      image2: 'Tapnite "novo...".'
-      image3: 'Vstavite "x" in tapnite "V redu".'
-    step6:
-      title: 'Nastavite spremenljivko "y"'
-      description: Označite in nastavite izhodiščni položaj vašega padala na y osi.
-      image1: 'Označite drugo spremenljivko z "y".'
-      image2: 'Tapnite na polje, kjer piše "0,0".'
-      image3: 'Vtipkajte "-500" in tapnite "V redu".'
-    step7:
-      title: V nedolged
-      description: 'Položaj padala morate ves čas spreminjati. Vstavite zanko "Ponavljaj (ves čas)" (ang.: "Forever").'
-      image1: 'Tapnite "+".'
-      image2: 'Pojdi v razdelek "Upravljanje" (ang: "Control").'
-      image3: 'Izberite blok "Ponavljaj (ves čas)"  (ang.: "Forever")'
-      image4: 'Povleci in spusti blok "Ponavljaj" pod blok "Nastavi spremenljivko".'
-    step8:
-      title: Vrinite in spremenite bloke
-      description: 'Dodajte več blokov za nadzor padala v blok "Ponavljaj". Če v blok "Postavi na" (ang."Place at") vstavite spremenljivki x in y, boste lahko spreminjali položaj padala.'
-      image1: 'Vstavite prikazan blok v zanko "Ponavljaj".'
-      image2: 'Tapnite polje "100".'
-      image3: 'Tapnite "Spremenljivke" in izberite "x".'
-      image4: 'Tapnite "200" v istem bloku na vrhu, pojdite v razdelek "Spremenljivke" in izberite "y". Potrdite z "V redu".'
-    step9:
-      title: Spremeni spremenljivke in vrednosti
-      description: Da bo padalo drselo k tlom, naj se spremenljivka y spreminja za -3. Spremenljivka x pa naj sledi kotu naklona vašega mobilnega telefona.
-      image1:
-        subtext1: 'Nastavite velikost "20" %.'
-        subtext2: 'Spremenite vrednost v prvem bloku "Nastavi spremenljivko" na "-3".'
-        subtext3: 'Tapnite polje "0,0" v drugem bloku "Nastavi spremenljivko".'
-      image2:
-        subtext1: 'Tapnite "y" in izberite "x".'
-        subtext2: 'Vstavite "-".'
-        subtext3: 'Tapnite "Senzorji" in izberite "inclination_x".'
-      image3: 'Če se vaša formula ujema z naslikano, potrdite z "V redu".'
-    step10:
-      title: Senzor glasnosti
-      description: 'Višino padala lahko nadzorujete tudi s senzorjem glasnosti na mobilnem telefonu. V ta namen vstavite in spremenite blok "če 1 potem".'
-      image1:
-        subtext1: 'Dodajte blok "če 1 potem" in ga postavite pod zadnjega izmed blokov "Spremeni spremenljivko".'
-        subtext2: 'Tapnite polje z vrednostjo "0" v bloku "če 1 potem".'
-      image2:
-        subtext1: 'Tapnite "Senzorji".'
-        subtext2: 'Izberite "glasnost".'
-        subtext3: 'Tapnite "Logiko".'
-        subtext4: 'Izberite ">".'
-        subtext5: 'Vstavite "50".'
-      image3: 'Preverite, če vaša formula ustreza formuli na sliki in tapnite "V redu".'
-    step11:
-      title: Še nekaj spremenjenih blokov
-      description: Ko zaženete igro, naj bo začetni položaj padala spet tak, kot je bil prvotni začetni položaj. Za to morate dodati in spremeniti tri bloke, kot je prikazano na slikah spodaj.
-      image1: 'Dodajte "Spremeni spremenljivko" in spremenite vrednost kot zgoraj.'
-      image2:
-        subtext1: 'Dodaj blok "Ko prejmem".'
-        subtext2: 'In ga postavite pod zadnji blok ("konec zanke").'
-        subtext3: 'Dodamo dva bloka "Nastavi spremenljivko".'
-      image3: 'Tapnite polje "sporočilo 1" in izberite "Novo..." ter vstavite "začni".'
-      image4: 'Spremeni vrednosti dveh blokov "Nastavi spremenljivko" kot kaže zgoraj.'
-    step12:
-      title: Nazaj na predmete
-      description: 'Svoje "padalo" ste uspešno dokončali! Pojdite na pregled predmetov in spremenite naslednji predmet.'
-      image1: 'Dotaknite se gumba "Nazaj".'
-      image2: Dotaknite se ga še enkrat.
-      image3: Zdaj bi morali zagledati ta zaslon naprave.
-    step13:
-      title: 'Predmet "tarča"'
-      description: 'Tukaj začnete spreminjati predmet "tarča". Dodajte bloke za upravljanje položaja in velikosti tarče.'
-      image1: 'Tapnite predmet "tarča" in izberite "Programi (Scenarij)" (ang.: "Scripts").'
-      image2: Dodajte in spremenite blok kot kaže zgoraj.
-      image3: Dodajte še štiri bloke kot kaže zgoraj.
-    step14:
-      title: 'Predmet "tarča"'
-      description: Ko zaženete igro, se mora položaj tarče spremeniti. Za ta korak, nastavi spremenljivke goalx in goaly s funkcijo naključno.
-      image1: 'Tapnite polje "y:" in izberite "Novo".'
-      image2: 'Vstavi "goalx" in potrdimo z "V redu".'
-      image3: 'Tapnite polje "0,0" in vstavite formulo "naključno(-400, 400)".'
-      image4: 'Ponovite korake 1-3 za drugi blok "Nastavi spremenljivko" s spremenljivko "goaly" in nastavite vrednost na »naključno(400,-700) ".'
-    step15:
-      title: 'Predmet "tarča"'
-      description: 'Spremenite blok "Postavi na" tako, da bo vseboval spremenljivki goalx in goaly.'
-      image1: 'Vrednosti nastavi na "goalx" in "goaly".'
-      image2: Preverite, če se vaše vrednosti ujemajo s tistimi zgoraj.
-      image3: Pojdite nazaj, dokler se ne prikaže tako okno.
-    step16:
-      title: 'Predmet "parcel"'
-      description: 'Tukaj začnete spreminjati predmet "paket" (ang.: "parcel"). Ko predmet "paket" prejme sporočilo "prični", se bo predmet prikazal. Nastavite položaj z uporabo spremenljivk x in y.'
-      image1: 'Tapnite predmet "parcel" in izberite "Programi (Scenarij)" (ang.: "Scripts").'
-      image2: Dodaj vse bloke, ki so prikazani zgoraj.
-      image3:
-        subtext1: 'Nastavi vrednost v bloku "Nastavi velikost" na "50".'
-        subtext2: 'Tapnite polje "restart" znotraj bloka "ko prejmem" in ustvarite novo sporočilo: "začetek".'
-        subtext3: 'V bloku "Postavi na" nato izberi "x" in "y".'
-    step17:
-      title: 'Predmet "parcel"'
-      description: 'Če želite preveriti ali je paket zadel tarčo, potem boste morali uporabiti blok "če 1 potem".'
-      image1: 'Pod zadnjega izmed "Postavi na" dodaj zgoraj prikazan blok.'
-      image2: 'V bloku "Spremeni Y za" vtipkajte vrednost "-5". Tapnite na "1" znotraj "če 1 potem".'
-      image3:
-        subtext1: '"position_x" in "position_y" najdete v kategoriji "Predmet".'
-        subtext2: '"goaly" in "goalx" najdete v razdelku "Spremenljivke".'
-        subtext3: '"In" je v razdelku "Logika".'
-    step18:
-      title: 'Predmet "parcel"'
-      description: 'Če je bila tarča zadeta, naj se spremeni položaj predmeta "parcel". Drugim predmetom dajte vedeti, da ste jih osvojili.'
-      image1:
-        subtext1: 'Spremenite vrednosti v bloku "Postavi na" na "položaj_x" in "goaly + 100".'
-        subtext2: 'Tapnite polje "Pošlji" in ustvarite novo sporočilo: "zmaga".'
-      image2: Dodajte zgoraj prikazane bloke in na enak način spremenite vrednosti.
-      image3: 'Pojdite nazaj, dokler ne vidite tega na vaši napravi. Pojdite do razdelka "Programi" pri predmetu "Začni ponovno" (ang.: "Restart").'
-    step19:
-      title: 'Predmet "Začni ponovno"'
-      description: 'Spremenite predmet "Začni ponovno". Določite njegov položaj in obnašanje.'
-      image1: Dodajte zgoraj prikazane bloke in na enak način spremenite vrednosti.
-      image2: 'Dodajte prikazane bloke in v blok "Pošlji" vstavite "znova".'
-      image3: 'Pojdite nazaj, dokler ne vidite tega na vaši napravi. Pojdite do razdelka "Programi" pri predmetu "Ozadje".'
-    step20:
-      title: 'Predmet "ozadje"'
-      description: 'Dokončajte program s spreminjanjem predmeta "ozadje". Zdaj lahko začnete igrati svojo igro. Zabavajte se!'
-      image1:
-        subtext1: 'Dodajte prikazane bloke in v blok "Pošlji" vstavite "prični".'
-        subtext2: 'Tapnite gumb "Play".'
-      image2: Uživajte v igri.
-      image3: 'Uspešno ste dokončali tutorial "Padalec Steve". Veselimo se vaših verzij (remiksov) igre "Padalec Steve" na share.catrob.at/pocketcode --- ko jo spremenite, kot želite, jo lahko iz vašega računa ponovno naložite na našo spletno stran.'
-    step21:
-      title: Preverite svoje programe!
-      description: Kliknite na spodnje slike za povečavo. Preverite programe predmetov, če vaša igra še ne deluje tako kot ste si zamislili.
-      image1: 'Predmet "ozadje"'
-      image2: 'Predmet "padalo"'
-      image3: 'Predmet "parcel"'
-      image4: 'Predmet "Začni ponovno"'
-      image5: 'Predmet "tarča"'
   stepByStep:
     title: 'Uvod "Korak za korakom"'
     start: 'Začetni položaj:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Naredite nov program
       detail:
@@ -515,7 +365,6 @@ oauth:
   username_chooser: 'Izberi uporabniško ime:'
   username_hint: Uporabniško ime ne sme biti vaše pravo ime.
   usernameTaken: Uporabniško ime že zasedeno, izberite drugo.
-  noReset: Kdor se prijavi s svojim računom na Facebook ali Google+ si ne more ponastaviti gesla.
 search:
   dotdotdot: Iskanje...
   search: Išči
@@ -652,3 +501,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Igre
+    tag2: Animacije gibanja
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

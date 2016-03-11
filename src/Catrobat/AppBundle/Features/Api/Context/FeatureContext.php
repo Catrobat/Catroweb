@@ -120,7 +120,7 @@ class FeatureContext extends BaseContext
     // //////////////////////////////////////////// Steps
     
     /**
-     * @Given /^I have a program with "([^"]*)" as (name|description)$/
+     * @Given /^I have a program with "([^"]*)" as (name|description|tags)$/
      */
     public function iHaveAProgramWithAsDescription($value, $header)
     {
@@ -130,11 +130,15 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @When /^i upload this program$/
+     * @When /^I upload this program$/
      */
     public function iUploadThisProgram()
     {
-        $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
+        if(array_key_exists('deviceLanguage', $this->request_parameters)) {
+            $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+        } else {
+            $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
+        }
     }
 
     /**
@@ -217,6 +221,9 @@ class FeatureContext extends BaseContext
             case 'valid parameters':
                 $filename = 'base.catrobat';
                 break;
+            case 'tags':
+                $filename = 'program_with_tags.catrobat';
+                break;
             
             default:
                 throw new PendingException('No case defined for "' . $programattribute . '"');
@@ -294,11 +301,31 @@ class FeatureContext extends BaseContext
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
                 'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
                 'approved' => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
+                'tags' => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
             );
             
             $this->insertProgram($user, $config);
         }
     }
+
+    /**
+     * @Given /^there are tags:$/
+     */
+    public function thereAreTags(TableNode $table)
+    {
+        $tags = $table->getHash();
+
+        foreach($tags as $tag)
+        {
+            @$config = array(
+                'id' => $tag['id'],
+                'en' => $tag['en'],
+                'de' => $tag['de']
+            );
+            $this->insertTag($config);
+        }
+    }
+
 
     /**
      * @Given /^following programs are featured:$/
@@ -352,6 +379,14 @@ class FeatureContext extends BaseContext
      * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
      */
     public function iHaveAParameterWithValue($name, $value)
+    {
+        $this->request_parameters[$name] = $value;
+    }
+
+    /**
+     * @Given /^I have a parameter "([^"]*)" with the tag id "([^"]*)"$/
+     */
+    public function iHaveAParameterWithTheTagId($name, $value)
     {
         $this->request_parameters[$name] = $value;
     }
@@ -1067,7 +1102,7 @@ class FeatureContext extends BaseContext
     {
         //echo 'Delete post with Facebook ID ' . $this->fb_post_id;
         
-        $program_manager = $this->getSymfonySupport()->getProgramManger();
+        $program_manager = $this->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);
         assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
@@ -1076,4 +1111,83 @@ class FeatureContext extends BaseContext
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
         assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
     }
+
+    /**
+     * @Given /^I want to upload a program$/
+     */
+    public function iWantToUploadAProgram(){}
+
+    /**
+     * @Given /^I have no parameters$/
+     */
+    public function iHaveNoParameters(){}
+
+        /**
+     * @When /^I GET the tag list from "([^"]*)" with these parameters$/
+     */
+    public function iGetTheTagListFromWithTheseParameters($url)
+    {
+        $this->getClient()->request('GET', $url . '?' . http_build_query($this->request_parameters), array(), $this->files, array(
+            'HTTP_HOST' => $this->hostname,
+            'HTTPS' => $this->secure
+        ));
+    }
+
+    /**
+     * @Given /^I use the "([^"]*)" app$/
+     */
+    public function iUseTheApp($language)
+    {
+
+        switch ($language) {
+            case 'english':
+                $deviceLanguage = 'en';
+                break;
+            case 'german':
+                $deviceLanguage = 'de';
+                break;
+            default:
+                $deviceLanguage = 'NotExisting';
+        }
+        
+        $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
+    }
+
+    /**
+     * @Then /^the program should be tagged with "([^"]*)" in the database$/
+     */
+    public function theProgramShouldBeTaggedWithInTheDatabase($arg1)
+    {
+        $program_tags = $this->getProgramManger()->find(2)->getTags();
+        $tags = explode(',',$arg1);
+        assertEquals(count($program_tags), count($tags), 'Too much or too less tags found!');
+
+        foreach ($program_tags as $program_tag) {
+            if (!(in_array($program_tag->getDe(), $tags) || in_array($program_tag->getEn(), $tags))) {
+                assertTrue(false, 'The tag is not found!');
+            }
+        }
+    }
+
+    /**
+     * @Then /^the program should not be tagged$/
+     */
+    public function theProgramShouldNotBeTagged()
+    {
+        $program_tags = $this->getProgramManger()->find(2)->getTags();
+        assertEquals(0, count($program_tags), 'The program is tagged but should not be tagged');
+    }
+
+    /**
+     * @When /^I upload this program again with the tags "([^"]*)"$/
+     */
+    public function iUploadThisProgramAgainWithTheTags($tags)
+    {
+        $this->generateProgramFileWith(array(
+            'tags' => $tags
+        ));
+        $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+    }
+
+
 }

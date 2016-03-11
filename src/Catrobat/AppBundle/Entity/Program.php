@@ -49,6 +49,30 @@ class Program
     protected $user;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection|Tag[]
+     *
+     * @ORM\ManyToMany(targetEntity="\Catrobat\AppBundle\Entity\Tag", inversedBy="programs")
+     * @ORM\JoinTable(
+     *  name="program_tag",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
+     *  }
+     * )
+     */
+    protected $tags;
+
+    /**
+     * @return Tag[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $views = 0;
@@ -190,6 +214,7 @@ class Program
     public function __construct()
     {
         $this->program_downloads = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -987,5 +1012,30 @@ class Program
     public function setFbPostUrl($fb_post_url)
     {
         $this->fb_post_url = $fb_post_url;
+    }
+
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag)
+    {
+        if ($this->tags->contains($tag)) {
+            return;
+        }
+        $this->tags->add($tag);
+        $tag->addProgram($this);
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag)
+    {
+        if (!$this->tags->contains($tag)) {
+            return;
+        }
+        $this->tags->removeElement($tag);
+        $tag->removeProgram($this);
     }
 }

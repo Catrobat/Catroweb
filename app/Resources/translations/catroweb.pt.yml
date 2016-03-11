@@ -30,6 +30,7 @@ programs:
     viewed: Mais vistos
     downloaded: Mais descarregados
   random: Programas Aleatórios
+  related: Related Programs
   downloads: '%downloads% descargas'
   sample: Example Programs
   views: '%views% visualizações'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Por favor, atualize o seu aplicativo para a versão mais recente para poder descarregar este programa.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Apagar
 passwordRecovery:
   subject: Recuperação de palavra-passe do Seu Catrobat
   message: |
@@ -98,6 +103,10 @@ licenseToPlay:
     item1: compartilhar seus bolos juntamente com a receita
     item2: dar crédito a quem te inspirou
   version: Versão 1.1, 2 de abril de 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Termos de Utilização
   headline: Bem-vindo à comunidade Catrobat!
@@ -135,174 +144,14 @@ termsOfUse:
   bottom2: 'Por favor, envie quaisquer sugestões sobre estes Termos de Utilização para %e-mail-webmaster%.'
   version: Versão 1.3, 4 de março de 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: No seguinte tutorial, você aprenderá, passo a passo, como programar o comportamento de Steve e seu pacote. As imagens abaixo te mostram como controlar Steve durante o jogo. Você tem que direcionar Steve para bem acima do alvo e tocar o background para entregar o pacote. Boa sorte...
-    step1:
-      title: 'Instalar "Pocket Code"'
-      description: Como instalar o Pocket Code no seu dispositivo móvel.
-      image1: 'Toque em "Play Store".'
-      image2: 'Pesquisar "Pocket Code".'
-      image3: 'Toque em "Instalar".'
-    step2:
-      title: Descarregar Projeto
-      description: 'Como descarregar o programa essencial para programar o "Skydiving Steve".'
-      image1: 'Toque em "Explorar" no "Pocket Code" em seu dispositivo móvel.'
-      image2: Toque o banner.
-      image3: 'Descarregue o programa "Skydiving Steve".'
-    step3:
-      title: Abrir Projeto
-      description: Vamos olhar dentro do programa.
-      image1: 'Role o menu para baixo e toque em "Abrir Skydiving Steve".'
-      image2: 'Toque o objeto "pára-quedas".'
-      image3: 'Escolha "Scripts".'
-    step4:
-      title: Adicionar Variável
-      description: As variáveis x e y permitem que você controle a posição de seu pára-quedas.
-      image1: 'Toque em "+".'
-      image2: 'Ir para a categoria "Variáveis".'
-      image3: 'Toque em "Definir variável".'
-      image4: 'Arraste e solte o bloco "Definir variável" abaixo do bloco "Quando o programa iniciar".'
-    step5:
-      title: Rotular variáveis
-      description: Rotular a posição x de seu pára-quedas.
-      image1: Adicione uma segunda variável como antes.
-      image2: 'Toque em "Novo...".'
-      image3: 'Insira "x" e toque em "OK".'
-    step6:
-      title: 'Defina a variável "y"'
-      description: Rotule e defina o ponto inicial y de seu pára-quedas.
-      image1: 'Rotule a segunda variável com "y".'
-      image2: 'Toque o campo preenchido com "0,0".'
-      image3: 'Insira "-500" e toque em "OK".'
-    step7:
-      title: Forever
-      description: 'Você precisa controlar a posição do seu pára-quedas a todo momento. Insira um loop "Forever" para fazê-lo.'
-      image1: 'Toque em "+".'
-      image2: 'Vá para a categoria "Controle".'
-      image3: 'Escolha o bloco "Forever".'
-      image4: 'Arraste e solte o bloco "Forever" abaixo do bloco "Set variable".'
-    step8:
-      title: Inserir e modificar blocos
-      description: 'Adicione mais blocos em seu loop "Forever" para controlar seu pára-quedas. Inserindo as variáveis x e y em seu bloco "Posicionar em" te permite controlar a posição de seu pára-quedas.'
-      image1: 'Insira, abaixo do bloco "Forever", os blocos mostrados.'
-      image2: 'Toque o campo "100".'
-      image3: 'Toque em "Variáveis" e escolha "x".'
-      image4: 'Toque em "200" no mesmo bloco no topo, vá para a categoria "Variáveis" e escolha "y". Confirme com "OK".'
-    step9:
-      title: Alterar variáveis e valores
-      description: Altere a variável y em -3 para deixar seu pára-quedas deslizar até o chão. Altere a variável x para que seu pára-quedas siga o ângulo de inclinação de seu dispositivo móvel.
-      image1:
-        subtext1: 'Definir o tamanho para "20" %.'
-        subtext2: 'Altere o valor do primeiro bloco "Definir variável" para "-3".'
-        subtext3: 'No segundo bloco "Definir variável" toque o campo "0.0".'
-      image2:
-        subtext1: 'Toque em "y" e escolha "x".'
-        subtext2: 'Insira "-".'
-        subtext3: 'Toque em "Sensores" e escolha "inclinação_x".'
-      image3: 'Verifique se a fórmula inserida corresponde à imagem da tela do dispositivo e confirme com "OK".'
-    step10:
-      title: Sensor de ruído
-      description: 'Você pode controlar a altura do seu pára-quedas com o sensor de ruído de seu dispositivo móvel. Para fazer isso, adicione e modifique um bloco "Se 1 é verdadeiro, então".'
-      image1:
-        subtext1: 'Adicione um bloco "Se 1 é verdadeiro, então" e coloque-o abaixo do último bloco "Mudar variável".'
-        subtext2: 'Toque o campo com o valor "0" dentro do bloco "Se 1 é verdadeiro, então".'
-      image2:
-        subtext1: 'Toque em "Sensores".'
-        subtext2: 'Escolha "Ruído".'
-        subtext3: 'Toque em "Lógica".'
-        subtext4: 'Escolha ">".'
-        subtext5: 'Insira "50".'
-      image3: 'Verifique se sua fórmula coincide com a fórmula da tela do dispositivo e toque em "OK".'
-    step11:
-      title: Mudar alguns blocos mais
-      description: Quando você iniciar o jogo, a posição inicial de seu pára-quedas deve coincidir com sua posição inicial. Para isso, você precisa adicionar e modificar três blocos, conforme mostrado nas imagens abaixo.
-      image1: 'Adicione um bloco "Alterar variável" e modifique o valor como acima.'
-      image2:
-        subtext1: 'Adicionar um bloco "Quando eu receber".'
-        subtext2: 'Coloque-o abaixo do último bloco ("Fim do loop").'
-        subtext3: 'Adicione dois blocos "Definir variável".'
-      image3: 'Toque o campo preenchido com "Mensagem 1", escolha "Novo..." e insira "reiniciar".'
-      image4: 'Altere os valores de dois blocos "Definir variável" como mostrado na imagem acima.'
-    step12:
-      title: Voltar para objetos
-      description: 'Você terminou com sucesso seu objeto "pára-quedas"! Navegue de volta para a visão geral de objetos para modificar o próximo objeto.'
-      image1: 'Toque o botão "voltar" no seu dispositivo.'
-      image2: 'Toque o botão "voltar" mais uma vez.'
-      image3: Agora, você deveria ver esta tela em seu dispositivo.
-    step13:
-      title: 'Objeto "alvo"'
-      description: 'Aqui, você começa modificando o objeto "alvo". Adicione blocos para controlar a posição e o tamanho de seu alvo.'
-      image1: 'Toque em "alvo" e escolha "Scripts".'
-      image2: Adicione e modifique blocos como na imagem acima.
-      image3: Adicione mais quatro blocos como mostrado acima.
-    step14:
-      title: 'Objeto "alvo"'
-      description: Quando você reinicia o jogo, a posição de seu alvo precisa ser alterada. Para isso, defina as variáveis goalx e goaly utilizando a função randomizar.
-      image1: 'Toque no campo "y:" e escolha "Novo".'
-      image2: 'Insira "goalx" e confirme com "OK".'
-      image3: 'Toque no campo "0.0" e insira a fórmula "random(-400, 400)".'
-      image4: 'Repita os passos 1 a 3 para o segundo bloco "Definir variável" para nomear a variável "goaly" e definir o valor como "random(400, -700)".'
-    step15:
-      title: 'Objeto "alvo"'
-      description: 'Modifique seu bloco "Posicionar em" para controlar a posição de seu alvo usando as variáveis goalx e goaly.'
-      image1: 'Altere os valores do bloco "Posicionar em" para "goalx" e "goaly".'
-      image2: Verifique se os seus valores correspondem aos mostrados acima.
-      image3: Retorne até que você veja esta tela.
-    step16:
-      title: 'Objeto "pacote"'
-      description: 'Aqui, você começa a modificar seu objeto "pacote". Quando o objeto "pacote" receber a mensagem "iniciar", o pacote deve ser mostrado. Defina a posição do pacote com as variáveis x e y.'
-      image1: 'Toque em "pacote" e escolha "Scripts".'
-      image2: Adicione todos os blocos mostrados acima.
-      image3:
-        subtext1: 'Altere o valor do bloco "Definir tamanho" para "50".'
-        subtext2: 'Toque o campo "reiniciar" dentro do bloco "Quando eu receber" e crie a nova mensagem: "Iniciar".'
-        subtext3: 'Altere os valores do bloco "Posicionar em" para "x" e "y".'
-    step17:
-      title: 'Objeto "pacote"'
-      description: 'Para verificar se o pacote atingiu o alvo você precisa do bloco "Se 1 é verdadeiro, então".'
-      image1: 'Adicione os blocos mostrados acima abaixo do último bloco "Posicionar em".'
-      image2: 'Altere o valor dentro do bloco "Alterar y em" para "5". Depois, toque no campo "1" dentro de "Se 1 é verdadeiro, então".'
-      image3:
-        subtext1: '"posicao_x" e "posicao_y" podem ser encontrados na categoria "Objeto".'
-        subtext2: '"goaly" e "goalx" estão na categoria "Variáveis".'
-        subtext3: '"E" está na categoria "Lógica".'
-    step18:
-      title: 'Objeto "pacote"'
-      description: Se o pacote, bem sucedidamente, atingir o alvo, você precisará modificar a posição do pacote. Envie uma mensagem aos outros objetos para avisá-los de que você venceu.
-      image1:
-        subtext1: 'Altere os valores do bloco "Posicionar em" para "posicao_x" e "goaly+100".'
-        subtext2: 'Toque o campo "Transmitir" e crie a nova mensagem "vitória".'
-      image2: Adicione os blocos mostrados acima e modifique seus valores.
-      image3: 'Retorne até ver esta tela em seu dispositivo. Vá aos scripts do objeto "restart".'
-    step19:
-      title: 'Objeto "restart"'
-      description: 'Aqui você pode modificar o objeto "restart". Defina a posição e o comportamento do objeto.'
-      image1: Adicione os blocos mostrados acima e modifique seus valores de forma semelhante.
-      image2: 'Adicione os blocos mostrados acima e defina a mensagem "Transmitir" como "reiniciar".'
-      image3: 'Retorne até ver esta tela, então vá aos scripts do "Plano de Fundo".'
-    step20:
-      title: 'Objeto "Plano de fundo"'
-      description: 'Finalize o programa modificando o objeto "plano de fundo". Agora você já pode começar a jogar. Divirta-se!'
-      image1:
-        subtext1: 'Adicione os blocos mostrados acima e defina a mensagem "Transmitir" como "iniciar".'
-        subtext2: 'Toque no botão "Play".'
-      image2: Divirta-se com seu jogo.
-      image3: |-
-        Você terminou, bem sucedidamente, o tutorial "Skydiving Steve". Ficaríamos muito gratos de achar 'remisturas' bem legais de "Skydiving Steve" em share.catrobat.at/pocketcode --- modifique como quiser e faça o upload novamente a partir de sua conta.
-    step21:
-      title: Verifique seus scripts!
-      description: Clique nas imagens abaixo para ampliá-las. Revise os scripts de seus objetos se seu jogo não funcionar corretamente.
-      image1: 'Objeto "plano de fundo"'
-      image2: 'Objeto "pára-quedas"'
-      image3: 'Objeto "pacote"'
-      image4: 'Objeto "restart"'
-      image5: 'Objeto "alvo"'
   stepByStep:
     title: Introdução passo a passo
     start: 'Posição inicial:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Fazer um novo programa
       detail:
@@ -520,7 +369,6 @@ oauth:
   username_chooser: 'Por favor, escolha um nome de utilizador:'
   username_hint: O nome de utilizador não deve ser seu nome verdadeiro.
   usernameTaken: Nome de utilizador já existente. Por favor, escolha um outro.
-  noReset: Utilizadores do Facebook e Google+ não tem uma palavra-passe para redefinir.
 search:
   dotdotdot: Pesquisar...
   search: Pesquisar
@@ -657,3 +505,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Jogos
+    tag2: Animação em movimento
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

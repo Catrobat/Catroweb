@@ -22,9 +22,29 @@ class SearchController extends Controller
         $query = $request->query->get('q');
         $limit = intval($request->query->get('limit'));
         $offset = intval($request->query->get('offset'));
-        $numbOfTotalProjects = $program_manager->searchCount($query);
+
         $programs = $program_manager->search($query, $limit, $offset);
-        
+
+        $numbOfTotalProjects = $program_manager->searchCount($query);
+
+        return new ProgramListResponse($programs, $numbOfTotalProjects);
+    }
+
+    /**
+     * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag", defaults={"_format": "json"})
+     * @Method({"GET"})
+     */
+    public function tagSearchProgramsAction(Request $request)
+    {
+        $program_manager = $this->get('programmanager');
+        $query = $request->query->get('q');
+        $limit = intval($request->query->get('limit', 20));
+        $offset = intval($request->query->get('offset', 0));
+        $numbOfTotalProjects = $program_manager->searchTagAndExtensionCount($query);
+        $programs = $program_manager->getProgramsByTagId($query, $limit, $offset);
+
+//        $numbOfTotalProjects = count($programs);
+
         return new ProgramListResponse($programs, $numbOfTotalProjects);
     }
 }

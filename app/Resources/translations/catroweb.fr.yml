@@ -30,6 +30,7 @@ programs:
     viewed: Most viewed
     downloaded: Most downloaded
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Supprimer
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: partagez vos gâteaux avec la recette
     item2: créditez ceux qui vous ont inspiré
   version: Version 1.1, 2 avril 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: "Conditions d'utilisation"
   headline: Welcome to the Catrobat Community!
@@ -133,177 +142,14 @@ termsOfUse:
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 mars 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: Installer Pocket Code sur ton appareil mobile.
-      image1: Appuyer sur « Play Store ».
-      image2: Rechercher « Pocket Code ».
-      image3: Appuyer sur « Installer ».
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: "Appuyer sur « Explorer » dans « Pocket Code » sur l'appareil mobile."
-      image2: Appuyer sur la bannière.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: Regardons sous le capot.
-      image1: Dérouler le menu et appuyer sur « Ouvrir Skydiving Steve ».
-      image2: "Appuyer sur l'objet « parachute »."
-      image3: Sélectionner « Scripts ».
-    step4:
-      title: Ajouter une Variable
-      description: Les variables x et y permettent de contrôler la position du parachute.
-      image1: Appuyer sur « + ».
-      image2: 'Go to the category "Variables".'
-      image3: Appuyer sur « Définir la variable ».
-      image4: "Glisser / déplacer l'élément « Définir la variable » en-dessous l'élément « Quand l'application a démarrée »."
-    step5:
-      title: Label variables
-      description: Désigner la coordonnée x du parachute.
-      image1: Ajouter une deuxième variable juste comme avant.
-      image2: Appuyer sur « nouveau... ».
-      image3: Entrer « x » et appuyer sur « OK ».
-    step6:
-      title: 'Set variable "y"'
-      description: Désigner et définir la coordonnée y de départ du parachute.
-      image1: Désigner la deuxième variable « y ».
-      image2: Appuyer sur le champ « 0.0 ».
-      image3: Insérer « -500 » et appuyer sur « OK ».
-    step7:
-      title: Toujours
-      description: 'Il faut contrôler la position du parachute à tout temps. Ajoute une boucle  « Répéter continuellement » pour le contrôler.'
-      image1: Appuyer sur « + ».
-      image2: Ouvrir la catégorie « Contrôle ».
-      image3: "Sélectionner l'élément « Répéter continuellement »."
-      image4: "Glisser et déposer l'élément « Répéter continuellement » en-dessous les éléments « Définir la variable »."
-    step8:
-      title: Insert and modify bricks
-      description: "Ajouter d'autres éléments à l'intérieur de la boucle « Répéter continuellement » pour contrôler le parachute. Ajouter les variables x et y dans l'élément « Place at » pour contrôler la position du parachute."
-      image1: "Ajouter les éléments indiqués en-dessous l'élément « Répéter continuellement »."
-      image2: Appuyer sur le champ « 100 ».
-      image3: Appuyer sur « Variables » et sélectionner « x ».
-      image4: Appuyer sur « 200 », dans le même élément, ouvrir la catégorie « Variables » et sélectionner « y ». Confirmer par « OK ».
-    step9:
-      title: Change variables and values
-      description: "Modifier la variable y par -3 pour faire le parachute glisser vers le sol. Modifier la variable x ainsi que le parachute suit l'angle d'inclinaison de l'appareil mobile."
-      image1:
-        subtext1: 'Définir une taille de « 20 » %.'
-        subtext2: Mettre la valeur du premier élément « Définir la variable » à « -3 ».
-        subtext3: Dans le deuxième élément « Définir la variable », appuyer sur le champ « 0.0 ».
-      image2:
-        subtext1: Appuyer sur « y » et sélectionner « x ».
-        subtext2: 'Insérer« - ».'
-        subtext3: Appuyer sur « Capteurs » et choisir « inclination_x ».
-      image3: "Vérifier si la formule insérée correspond à celui de la capture d'écran et confirmer par « OK »."
-    step10:
-      title: Loudness sensor
-      description: |-
-        Il est possible de contrôler l'altitude du parachute avec le capteur volume. Pour l'utiliser, ajouter et modifier un élément "Si 1 est vrai alors".
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: |-
-          Appuyer sur le champ avec la valeur « 0 » dans l'élément "Si 1 est vrai alors".
-      image2:
-        subtext1: Appuyer sur « Capteurs ».
-        subtext2: Sélectionner « volume ».
-        subtext3: Appuyer sur « Logique ».
-        subtext4: 'Choose ">".'
-        subtext5: Insérer « 50 ».
-      image3: "Vérifier si la formule correspond à la formule dans la capture d'écran et appuyer sur « OK »."
-    step11:
-      title: Change some more bricks
-      description: En redémarrant le jeu, la position de départ du parachute doit correspondre à la position de départ initiale. Il faut donc ajouter et modifier trois éléments comme indiqué sur les images ci-dessous.
-      image1: Ajouter un élément « Modifier la variable » et modifier la valeur comme ci-dessus.
-      image2:
-        subtext1: Ajouter un élément « Quand je reçois ».
-        subtext2: 'Placer en-dessous du dernier élément - « Fin de boucle ».'
-        subtext3: Ajouter deux éléments « Définir la variable ».
-      image3: Appuyer sur le champ « message 1 », sélectionner « Nouveau... » et insérer « redémarrer ».
-      image4: "Modifier les valeurs des éléments « Définir la variable » comme illustré dans la capture d'écran ci-dessus."
-    step12:
-      title: Back to objects
-      description: "Maintenant, l'objet « parachute » est complet. Retourner à l'aperçu d'objets pour modifier l'objet suivant."
-      image1: "Appuyer sur le bouton « retour » de l'appareil mobile."
-      image2: Appuyer sur le bouton « retour » encore une fois.
-      image3: "Les objets indiqués dans la captuer d'écran devraient être affichés."
-    step13:
-      title: Objet « target »
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: Appuyer sur « target » et sélectionner « Scripts ».
-      image2: "Ajouter et modifier les éléments comme indiqué dans la capture d'écran ci-dessus."
-      image3: Ajouter quatre nouveaux éléments comme indiqué ci-dessus.
-    step14:
-      title: Objet « target »
-      description: En redémarrant le jeu, la position de la cible doit changer. Désigner les variables goalx et goaly avec une fonction aléatoire.
-      image1: 'Appuyer sur le champ « y: » et sélectionner « Nouveau ».'
-      image2: Insérer « goalx » et confirmer par « OK ».
-      image3: Appuyer sur le champ « 0.0 » et insérer la formule « aléatoire(-400, 400) ».
-      image4: "Répéter les étapes 1-3 pour le deuxième élément « Définir la variable », à l'exception de nommer la variable « goaly » et de mettre la valeur  à « aléatoire (400, -700) »."
-    step15:
-      title: Objet « target »
-      description: "Modifier l'élément « Positionner à » pour contrôler la position de la cible avec les variables goalx et goaly."
-      image1: "Mettre les valeurs de l'élément « Positionner à » à « goalx » et « goaly »."
-      image2: Vérifier si les valeurs correspondent à celles ci-dessus.
-      image3: "Retourner à l'écran indiqué ci-dessus."
-    step16:
-      title: Objet « parcel »
-      description: "Lorsque l'objet « parcel » reçoit le message « démarrer », le colis doit être affiché. Positionner le colis avec les variables x et y."
-      image1: Appuyer sur « parcel » et sélectionner « Scripts ».
-      image2: Ajouter tous les éléments indiqués ci-dessus.
-      image3:
-        subtext1: "Modifier la valeur de l'élément « Définir la taille » à « 50 »."
-        subtext2: |-
-          Appuyer sur le champ "redémarre" dans l'élément « Quand je reçois » et créer le nouveau message: « démarrer ».
-        subtext3: "Mettre les valeurs de l'élément « Positionner à » à « x » et « y »."
-    step17:
-      title: Objet « parcel »
-      description: "L'élément « Si 1 est vrai alors » permet de vérifier si le colis a touché la cible."
-      image1: En-dessous le dernier élément « Positionner à », ajouter les éléments indiqués ci-dessus.
-      image2: "Mettre la valeur dans l'élément « Modifier y par » à  « -5 ». Puis appuyer sur le champ « 1 » de l'élément « Si 1 est vrai alors »."
-      image3:
-        subtext1: « position_x » et « position_y » se trouvent dans la catégorie « Objet ».
-        subtext2: « goaly » et « goalx » sont dans la catégorie « Variables ».
-        subtext3: « ET » est dans la catégorie « Logique ».
-    step18:
-      title: Objet « parcel »
-      description: Si le colis à touché la cible, il faut modifier la position du colis. Envoyer un message aux autres éléments pour signaler que tu as gagné.
-      image1:
-        subtext1: "Mettre les valeurs de l'élément « Positionner à » à « position_x » et « goaly + 100 »."
-        subtext2: Appuyer sur le champ « Diffuser » et créer un nouveau message « gagner ».
-      image2: Ajouter et modifier les éléments comme indiqué ci-dessus.
-      image3: "Retourner à l'écran indiqué ci-dessus. Ouvrir les scripts de l'objet « redémarrer »."
-    step19:
-      title: Objet « redémarrer »
-      description: "Modifier l'objet de « redémarrer ». Définir la position et le comportement de l'objet."
-      image1: Ajouter et modifier les éléments comme indiqué ci-dessus.
-      image2: Ajouter les éléments indiqués ci-dessus et mettre le message « Diffuser » à « redémarrer ».
-      image3: "Retourner à l'écran indiqué ci-dessus. Puis appuyer sur les scripts de « Background »."
-    step20:
-      title: 'Object "Background"'
-      description: "Compléter l'application en modifiant l'objet « Background ». Maintenant tu peux jouer le jeu. Amuse-toi !"
-      image1:
-        subtext1: Ajouter les éléments indiqués ci-dessus et mettre le message « Diffuser » à « démarrer ».
-        subtext2: Appuyer sur le bouton « Jouer ».
-      image2: Profiter du jeu.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: Cliquer sur les images ci-dessous pour les agrandir. Revoir les scripts des objets si le jeu ne fonctionne pas correctement.
-      image1: Objet « background »
-      image2: Objet « parachute »
-      image3: Objet « parcel »
-      image4: Objet « redémarrer »
-      image5: Objet « target »
   stepByStep:
     title: Intro premiers pas
     start: 'Position de départ :'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -521,7 +367,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: Rechercher
@@ -658,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Jeux
+    tag2: Animations
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

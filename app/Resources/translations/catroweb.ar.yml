@@ -30,6 +30,7 @@ programs:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: حذف
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: شارك بالكعكة الخاص بك جنبا إلى جنب مع الوصفة
     item2: إعطاء الفرصة والثقة لأولئك الذين شكلوا لك إلهاما
   version: الإصدار 1، 1، 2 أبريل 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: شروط الاستخدام
   headline: مرحبا بكم في بيئة كاتروبات!
@@ -133,174 +142,14 @@ termsOfUse:
   bottom2: 'يرجى إرسال أية اقتراحات فيما يتعلق بـ"شروط الاستخدام" الى %email-webmaster% .'
   version: الإصدار 1، 3، 4 مارس 2014
 help:
-  hourOfCode:
-    title: ستيف القافز بالمظلات
-    step0:
-      title: ستيف القافز بالمظلات
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: 'كيفية تثبيت "النص البرمجي لجهاز الجيب" على الجهاز المحمول الخاص بك.'
-      image1: 'انقر فوق "تشغيل مخزن".'
-      image2: 'البحث عن "تعليمات برمجية الجيب".'
-      image3: 'انقر فوق "تثبيت".'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'انقر فوق "استكشاف" في "قانون الجيب" على "الجهاز المحمول" الخاص بك.'
-      image2: انقر فوق الشريط.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: دعونا ننظر داخل البرنامج.
-      image1: 'إسحب القائمة الى الأسفل وانقر فوق "فتح المظلات Steve".'
-      image2: 'انقر فوق كائن "المظلة".'
-      image3: 'اختر "البرامج النصية".'
-    step4:
-      title: إضافة متغير
-      description: المتغيرات س و ص تسمح لك التحكم بموقع المظلة الخاص بك.
-      image1: 'اضغط على "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'انقر فوق "تعيين المتغير".'
-      image4: 'السحب والإفلات "تعيين المتغير"-الطوب أدناه "عند بدء تشغيل برنامج"--الطوب.'
-    step5:
-      title: Label variables
-      description: قم بتسمية الموضع س للمظلة الخاصة بك.
-      image1: إضافة متغير ثاني فقط كما كان من قبل.
-      image2: 'انقر فوق "جديد...".'
-      image3: 'إدراج "س" ثم انقر على "موافق".'
-    step6:
-      title: 'Set variable "y"'
-      description: قم بتسمية وتعيين نقطة البداية ص للمظلة الخاصة بك.
-      image1: 'تسمية المتغير الثاني مع "ص".'
-      image2: 'انقر على حقل مليئ بـ "0.0".'
-      image3: 'إدراج "-500" واضغط على "موافق".'
-    step7:
-      title: إلى الأبد
-      description: 'أنت بحاجة إلى التحكم في موقع المظلة الخاصة بك في جميع الأوقات. قم بإدراج "إلى الأبد"--حلقة للقيام بذلك.'
-      image1: 'اضغط على "+".'
-      image2: 'اذهب إلى الفئة -"التحكم".'
-      image3: 'اختر "الأبد"-الطوب.'
-      image4: 'قم بسحب وإفلات "للأبد"--الطوب تحت "تعيين المتغير".'
-    step8:
-      title: Insert and modify bricks
-      description: 'إضافة المزيد من الطوب في الحلقة الخاصة بك "إلى الأبد" للتحكم في المظلة الخاصة بك. إدراج المتغيرات س و ص في  "مكان في" الطوب تمكنك من التحكم في موقع المظلة.'
-      image1: 'قم بإدراج الطوب المعروض أدنى "إلى الأبد"-الطوب.'
-      image2: 'انقر على حقل "100".'
-      image3: 'اضغط على "المتغيرات" واختر "س".'
-      image4: 'اضغط على "200" في نفس الطوب في الأعلى، والانتقال إلى الفئة "المتغيرات" واختر "ص". تأكيد مع "موافق".'
-    step9:
-      title: Change variables and values
-      description: تغيير المتغير ص الى -3 ليجعل المظلة الخاصة بك تنزلق على الأرض. قم بتغيير المتغير س ولذلك المظلة الخاصة بك سوف تتبع زاوية الميل للجهاز المحمول الخاص بك.
-      image1:
-        subtext1: 'تعيين الحجم إلى "20" في المائة.'
-        subtext2: 'قم بتغيير قيمة الأول "تعيين المتغير "-الطوب إلى "-3".'
-        subtext3: 'في الثاني "تعيين المتغير "-الطوب أنقرعلى حقل "0.0".'
-      image2:
-        subtext1: 'اضغط على "ص" واختر "س".'
-        subtext2: 'إدراج "-".'
-        subtext3: 'انقر فوق "أجهزة الاستشعار" واختر "درجة ميول س".'
-      image3: 'تحقق فيما إذا كانت الصيغة الخاصة بك التي تم إدراجها  تطابق التي في لقطة الشاشة وتأكيد مع "موافق".'
-    step10:
-      title: Loudness sensor
-      description: 'يمكنك التحكم في ارتفاع المظلة الخاصة بك مع استشعار الصوت للجهاز المحمول الخاص بك. للقيام بذلك، قم بإضافة وتعديل "إذا كان 1 صحيحاً ثم" الطوب.'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'انقر على الحقل الذي يحتوي على القيمة "0" في "إذا كان 1 صحيحاً ثم"-الطوب.'
-      image2:
-        subtext1: 'انقر فوق "أجهزة الاستشعار".'
-        subtext2: 'اختر "صوت مرتفع".'
-        subtext3: 'اضغط على "المنطق".'
-        subtext4: 'Choose ">".'
-        subtext5: 'إدراج "50".'
-      image3: 'التحقق من ما إذا كانت الصيغة الخاصة بك تطابق الصيغة الموجودة في الصورة واضغط على "موافق".'
-    step11:
-      title: Change some more bricks
-      description: موضع البداية للمظلة الخاصة بك عند إعادة تشغيل اللعبة، يجب أن يطابق موضع البداية الأولى الخاص بك. ولهذا تحتاج لإضافة وتعديل ثلاثات طوبات كما هو موضح في الصور أدناه.
-      image1: 'إضافة "تغيير متغير"-الطوب وقم بتعديل القيمة مثل ما هو في الأعلى.'
-      image2:
-        subtext1: 'إضافة "عندما أتلقى"-الطوب.'
-        subtext2: 'قم بوضعه أسفل أخر طوبة ("نهاية الدوران").'
-        subtext3: 'إضافة اثنين "تعيين متغير "-الطوب.'
-      image3: 'أنقر على الحقل "رسالة 1"، اختر "جديد..."، وقم بإدراج "إعادة تشغيل".'
-      image4: 'قم بتغيير القيم في اثنين "تعيين المتغير"-الطوب مثل هو موضح في الصورة أعلاه.'
-    step12:
-      title: Back to objects
-      description: 'الآن أنهيت بنجاح الكائن "المظلة" الخاص بك! انتقل مرة أخرى إلى استعراض الكائن لتتمكن من تعديل الكائن التالي.'
-      image1: 'اضغط على الزر "العودة"--الموجود على الجهاز الخاص بك.'
-      image2: 'اضغط على الزر "العودة"--مرة أخرى.'
-      image3: الآن سترى هذه الشاشة على الجهاز الخاص بك.
-    step13:
-      title: 'الكائن "الهدف"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'اضغط على "الهدف" واختر "البرامج النصية".'
-      image2: إضافة وتعديل الطوب كما في الصورة أعلاه.
-      image3: 'إضافة أربعة من  الطوب إضافية مثل الموضح أعلاه.'
-    step14:
-      title: 'الكائن "الهدف"'
-      description: 'عند إعادة تشغيل اللعبة، موقع الهدف الخاص بك يحتاج إلى تغيير. بالنسبة لهذه الخطوة، قم بتعيين قيم المتغيرات goalx و goaly  بإستخدام الدالة العشوائية.'
-      image1: 'انقر فوق الحقل "ص:" واختر "جديد".'
-      image2: 'إدراج "جول س" وتأكيد مع "موافق".'
-      image3: 'انقر على حقل "0.0" وقم بإدراج الصيغة "عشوائي (-400، 400)".'
-      image4: 'كرر الخطوات 1-3 لثانية "تعيين المتغير"-الطوب، نتوقع تسمية المتغير "جول ص" وتعيين القيمة إلى "عشوائي (400،-700)".'
-    step15:
-      title: 'الكائن "الهدف"'
-      description: 'تعديل الطوب "مكان في" الخاص بك للتحكم في موضع الهدف الخاص بك بإستخدام المتغيرات goalx و goaly .'
-      image1: 'قم بتغيير قيم "المكان في"--الطوب إلى "جول س" و "جول ص".'
-      image2: تحقق إذا كانت القيم الخاص بك تطابق تلك المذكورة أعلاه.
-      image3: الذهاب إلى الوراء حتى تظهر لك هذه الشاشة.
-    step16:
-      title: 'الكائن "الطرد"'
-      description: 'هنا يمكنك البدء في تعديل الكائن الخاص بك "الطرد". عندما يتلقى الكائن الموجود في "طرد" الرسالة "بدء"، ينبغي أن تظهر الطرود. قم بتعيين موضع الطرد بإستخدام المتغيرات x و y.'
-      image1: 'اضغط على "الهدف" واختر "البرامج النصية".'
-      image2: إضافة جميع الطوب المبينة أعلاه.
-      image3:
-        subtext1: 'قم بتغيير قيمة "تعيين الحجم"-الطوب إلى "50".'
-        subtext2: 'أنقر على الحقل "إعادة تشغيل" داخل "عند تلقي"-الطوب وإنشاء رسالة جديدة: "ابدأ".'
-        subtext3: 'قم بتغيير قيم "المكان في"-الطوب إلى "س" و "ص".'
-    step17:
-      title: 'الكائن "الطرد"'
-      description: 'للتحقق فيما إذا كان الطرد قد أصاب الهدف، فإنك تحتاج "إذا كان 1 صحيحاً ثم" الطوب.'
-      image1: 'قم بإضافة الطوب الذي يظهر أعلاه تحت أخر "مكان في"--الطوب.'
-      image2: 'قم بتغيير القيمة في "تغير ص بـ" الطوب الى "5-". ثم انقر فوق الحقل "1" في "إذا كان 1 صحيحاً  ثم".'
-      image3:
-        subtext1: 'ويمكن الاطلاع على "موقع س" و "موقع ص" في فئة "الكائن".'
-        subtext2: '"جول س" و "جول ص" في فئة "المتغيرات".'
-        subtext3: '"و" هو فئة "المنطق"'
-    step18:
-      title: 'الكائن "الطرد"'
-      description: إذا كان الطرد قد ضرب الهدف بنجاح ، تحتاج إلى تعديل موقع الطرد.أرسل رسالة إلى الكائنات الأخرى ليعرفوا أنك فائز.
-      image1:
-        subtext1: 'قم بتغيير قيم "المكان في"--الطوب إلى "موقع س" و "جول ص+ 100".'
-        subtext2: 'انقر على حقل "البث"، وقم بإنشاء رسالة جديدة "الفوز".'
-      image2: قم بإضافة الطوب أعلاه وقم بتعديل القيم الخاصة بهم على حد سواء.
-      image3: 'قم بالذهاب الى الخلف حتى تشاهد هذه الشاشة على الجهاز الخاص بك. اذهب إلى البرامج النصية للكائن "إعادة التشغيل".'
-    step19:
-      title: 'الكائن "إعادة التشغيل"'
-      description: 'هنا يمكنك تعديل الكائن "إعادة التشغيل". قم بتعريف الموقع وسلوكيات الكائن.'
-      image1: قم بإضافة الطوب أعلاه وقم بتعديل القيم الخاصة بهم على حد سواء.
-      image2: 'أضف الطوب أعلاه، وقم بتعيين "بث"-رسالة الى  "إعادة تشغيل".'
-      image3: 'قم بالرجوع الى الخلف حتى ترى هذه الشاشة، ثم الانتقال إلى البرامج النصية "الخلفية".'
-    step20:
-      title: 'Object "Background"'
-      description: 'أكمل البرنامج بتعديل كائن "الخلفية". الآن يمكنك البدء في اللعبة الخاصة بك. استمتع!'
-      image1:
-        subtext1: 'قم بإضافة الطوب أعلاه، وقم بتعيين "بث"-رسالة الى  "إعادة تشغيل".'
-        subtext2: 'انقر على الزر "تشغيل".'
-      image2: الاستمتاع باللعبة.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: انقر على الصور أدناه لتكبيرها. قم بإستعراض البرامج النصية للكائنات الخاصة بك إذا كانت لعبتك لا تعمل بشكل صحيح.
-      image1: 'الكائن "الخلفية"'
-      image2: 'الكائن "المظلة"'
-      image3: 'الكائن "الطرد"'
-      image4: 'الكائن "إعادة التشغيل"'
-      image5: 'الكائن "الهدف"'
   stepByStep:
     title: مقدمة خطوة بخطوة
     start: 'موضع البداية:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -518,7 +367,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: بحث...
   search: بحث
@@ -655,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: الألعاب
+    tag2: تحريك الرسوم المتحركة
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

@@ -44,6 +44,20 @@
         {% endif %}
       </div>
 
+      {% if  program.tags|length > 0 %}
+        <div id="tag-extionsion-container">
+          <div id="tags-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
+          <div id='tags'>
+            {% for tag in program.tags %}
+              <a href="{{ url('tag_search', { q : tag.id }) }}">
+                <button id={{ tag.en }} class="btn-tags"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
+              </a>
+            {% endfor %}
+          </div>
+
+        </div>
+      {% endif %}
+
       <div class="download-container">
         <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
           <button id="download" class="btn btn-primary download-button">

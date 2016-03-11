@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\Tag;
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -60,6 +61,14 @@ class SymfonySupport
     public function getProgramManger()
     {
         return $this->kernel->getContainer()->get('programmanager');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\TagRepository
+     */
+    public function getTagRepository()
+    {
+        return $this->kernel->getContainer()->get('tagrepository');
     }
     
     /**
@@ -222,6 +231,20 @@ class SymfonySupport
     
         return $user;
     }
+
+    public function insertTag($config)
+    {
+        $em = $this->getManager();
+        $tag = new Tag();
+
+        $tag->setEn($config['en']);
+        $tag->setDe($config['de']);
+
+        $em->persist($tag);
+        $em->flush();
+
+    }
+
     
     public function insertProgram($user, $config)
     {
@@ -252,6 +275,15 @@ class SymfonySupport
         $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
         $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
         $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
+
+        if (isset($config['tags']) && $config['tags'] != null) {
+            $tags = explode(',', $config['tags']);
+            foreach ($tags as $tag_id) {
+                $tag = $this->getTagRepository()->find($tag_id);
+                $program->addTag($tag);
+            }
+        }
+
         $em->persist($program);
         
         $user->addProgram($program);
@@ -342,6 +374,9 @@ class SymfonySupport
                 case 'url':
                     $properties->header->url = $value;
                     break;
+                case 'tags':
+                    $properties->header->tags = $value;
+                    break;
     
                 default:
                     throw new PendingException('unknown xml field '.$name);
@@ -354,7 +389,7 @@ class SymfonySupport
         return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
     }
     
-    public function upload($file, $user, $flavor = "pocketcode")
+    public function upload($file, $user, $flavor = "pocketcode", $request_param = null)
     {
         if ($user == null) {
             $user = $this->getDefaultUser();
@@ -368,6 +403,11 @@ class SymfonySupport
         $parameters['username'] = $user->getUsername();
         $parameters['token'] = $user->getUploadToken();
         $parameters['fileChecksum'] = md5_file($file->getPathname());
+
+        if ($request_param['deviceLanguage'] != null) {
+            $parameters['deviceLanguage'] = $request_param['deviceLanguage'];
+        }
+
         $client = $this->getClient();
         $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
         $response = $client->getResponse();

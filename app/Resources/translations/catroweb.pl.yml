@@ -30,6 +30,7 @@ programs:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Usuń
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: dziel się swoimi ciasteczkami wraz z przepisami na nie
     item2: podziękuj tym, którzy Cię zainspirowali
   version: Wersja 1.1, 2 kwietnia 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Warunki użytkowania
   headline: Witaj w społeczności Catrobat!
@@ -133,174 +142,14 @@ termsOfUse:
   bottom2: 'Proszę, kieruj sugestie dotyczące niniejszych warunków użytkowania na  %email-webmaster%.'
   version: Wersja 1.3, 4 marca 2014
 help:
-  hourOfCode:
-    title: Steve na spadochronie
-    step0:
-      title: Steve na spadochronie
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: Jak zainstalować Pocket Code na telefonie komórkowym.
-      image1: 'Wybierz "Sklep Play".'
-      image2: 'Wyszukaj "Pocket code".'
-      image3: 'Wybierz "Zainstaluj".'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Naciśnij przycisk "Przeglądaj" w "Pocket Code" na twoim telefonie.'
-      image2: Naciśnij banner.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: Zajrzyjmy do środka programu.
-      image1: 'Przewiń menu i wybierz "Otwórz Steve na spadochronie".'
-      image2: 'Naciśnij obiekt "spadochron".'
-      image3: 'Wybierz "Skrypty".'
-    step4:
-      title: Dodaj zmienną
-      description: 'Zmienne x i y  pozwalają na kontrolowanie pozycji spadochronu.'
-      image1: 'Naciśnij przycisk "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Wybierz "Ustaw zmienną".'
-      image4: 'Przeciągnij i upuść blok "Ustaw zmienną" pod blokiem "Gdy program uruchomiony".'
-    step5:
-      title: Label variables
-      description: Oznacz położenie x spadochronu.
-      image1: Dodać drugą zmienną tak jak poprzednią.
-      image2: 'Naciśnij "Nowy...".'
-      image3: 'Wstaw "x" i naciśnij przycisk "OK".'
-    step6:
-      title: 'Set variable "y"'
-      description: Oznacz i ustaw y pozycji początkowej spadochronu.
-      image1: 'Nazwij drugą zmienną "y".'
-      image2: 'Naciśnij pole zawierające "0.0".'
-      image3: 'Wstaw "500" i naciśnij przycisk "OK".'
-    step7:
-      title: Zawsze
-      description: 'Trzeba kontrolować położenie spadochronu przez cały czas. Wstaw pętlę "Zawsze", żeby to zrobić.'
-      image1: 'Naciśnij przycisk "+".'
-      image2: 'Przejdź do kategorii "Kontrola".'
-      image3: 'Wybierz blok "Zawsze".'
-      image4: 'Przeciągnij i upuść blok "Zawsze" pod blokiem "Ustaw zmienną".'
-    step8:
-      title: Insert and modify bricks
-      description: 'Dodaj więcej bloków w pętli "Zawsze", żeby sterować spadochronem. Wstawienie zmiennych x i y w bloku "Idź do" umożliwi ci sterowanie położeniem spadochronu.'
-      image1: 'Wstaw pokazane bloki pod blokiem "Zawsze".'
-      image2: 'Naciśnij pole "100".'
-      image3: 'Naciśnij "Zmienne" i wybierz "x".'
-      image4: 'Naciśnij "200" w tym samym bloku na górze, przejdź do kategorii "Zmienne" i wybierz "y". Potwierdź przyciskiem "OK".'
-    step9:
-      title: Change variables and values
-      description: Zmieniaj zmienną y o -3, aby spadochron opadał na ziemię. Zmieniaj zmienną x, tak aby spadochron kierował się wg kąta pochylenia twojego urządzenia.
-      image1:
-        subtext1: 'Ustaw wielkość na "20" %.'
-        subtext2: 'Zmień wartość w pierwszym bloku "Ustaw zmienną" na "-3".'
-        subtext3: 'W drugim bloku "Ustaw zmienną" naciśnij pole "0.0".'
-      image2:
-        subtext1: 'Naciśnij "y" i wybierz "x".'
-        subtext2: 'Wstaw "-".'
-        subtext3: 'Naciśnij "Czujniki" i wybierz "nachylenie_x".'
-      image3: 'Sprawdź, czy wprowadzony wzór odpowiada temu na obrazku i potwierdź przyciskiem "OK".'
-    step10:
-      title: Loudness sensor
-      description: 'Możesz kontrolować wysokość spadochronu z czujnikiem głośności twojego urządzenia. Aby to zrobić, dodaj i zmodyfikuj blok "Jeśli 1 jest prawdziwe to".'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Naciśnij pole z wartością "0" w bloku "Jeśli 1 jest prawdziwe".'
-      image2:
-        subtext1: 'Wybierz "Czujniki".'
-        subtext2: 'Wybierz "głośność".'
-        subtext3: 'Naciśnij "Logika".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Wstaw "50".'
-      image3: 'Sprawdź, czy twój wzór odpowiada temu na obrazku i naciśnij "OK".'
-    step11:
-      title: Change some more bricks
-      description: Po ponownym uruchomieniu gry, pozycja wyjściowa spadochronu powinna odpowiadać twojej początkowej pozycji. Żeby to osiągnąć, trzeba dodać i zmodyfikować trzy bloki, jak pokazano na obrazkach poniżej.
-      image1: 'Dodaj blok "Zmień zmienną" i zmodyfikuj wartość jak wyżej.'
-      image2:
-        subtext1: 'Dodaj blok "Kiedy otrzymam".'
-        subtext2: 'Umieść go poniżej ostatniego bloku ("Koniec pętli").'
-        subtext3: 'Dodaj dwa bloki "Ustaw zmienną".'
-      image3: 'Naciśnij pole wypełnione "wiadomość 1", wybierz "Nowy..." i wstaw "restart".'
-      image4: 'Zmień wartości w dwóch blokach "Ustaw zmienną", jak pokazano na zrzucie ekranu powyżej.'
-    step12:
-      title: Back to objects
-      description: 'Teraz możesz zakończyć definiowanie obiektu "spadochron"! Przejdź z powrotem do przeglądu obiektów żeby modyfikować następny obiekt.'
-      image1: 'Naciśnij przycisk "Wstecz" na swoim urządzeniu.'
-      image2: 'Naciśnij przycisk "Wstecz" jeszcze raz.'
-      image3: Teraz powinien pokazać się na twoim urządzeniu ten ekran.
-    step13:
-      title: 'Obiekt "cel"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Naciśnij "cel" i wybierz "Skrypty".'
-      image2: Dodaj i zmodyfikuj bloki jak na zrzucie ekranu powyżej.
-      image3: Dodaj jeszcze cztery bloki, jak pokazano powyżej.
-    step14:
-      title: 'Obiekt "cel"'
-      description: Po ponownym uruchomieniu gry, pozycja celu powinna się zmienić. W tym kroku, ustaw zmienne celx i cely za pomocą funkcji losowej.
-      image1: 'Naciśnij pole "y:" i wybierz "Nowy".'
-      image2: 'Wstaw "celx" i potwierdź przyciskiem "OK".'
-      image3: 'Naciśnij pole "0.0" i wstaw wzór "losowa(-400, 400)".'
-      image4: 'Powtórz kroki 1-3 dla drugiego bloku "Ustaw zmienną", stosując nazwę zmiennej "cely" i ustawiając wartość na "losowa(400,-700)".'
-    step15:
-      title: 'Obiekt "cel"'
-      description: 'Zmodyfikuj swój blok "Idź do" żeby ustalić położenie celu jako zmienne celx i cely.'
-      image1: 'Zmień wartości w bloku "Idź do" na "celx" i "cely".'
-      image2: Sprawdź, czy wartości są zgodne z tymi powyżej.
-      image3: Przejdź wstecz, aż zobaczysz ten ekran.
-    step16:
-      title: 'Obiekt "paczka"'
-      description: 'Tu zaczynasz modyfikować twój obiekt "paczka". Gdy obiekt "paczka" otrzyma komunikat "start", paczka powinna stać się widoczna. Ustal pozycję paczki za pomocą zmiennych x i y.'
-      image1: 'Naciśnij "paczka" i wybierz "Skrypty".'
-      image2: Dodaj wszystkie bloki powyżej.
-      image3:
-        subtext1: 'Zmień wartość bloku "Ustaw rozmiar" na "50".'
-        subtext2: 'Naciśnij pole "restart" w bloku "Kiedy otrzymam" i utwórz nową wiadomość: "start".'
-        subtext3: 'Zmień wartości w bloku "Idź do" na "x" i "y".'
-    step17:
-      title: 'Obiekt "paczka"'
-      description: 'Żeby sprawdzić, czy paczka osiągnęła cel, potrzebujesz bloku "Jeśli 1 jest prawdziwe to".'
-      image1: 'Dodaj pokazane wyżej bloki pod ostatnim blokiem "Idź do".'
-      image2: 'Zmień wartość w bloku "Zmień Y o"na "-5". Następnie naciśnij pole "1" w bloku "Jeśli prawdą jest 1 to".'
-      image3:
-        subtext1: '"pozycja_x" i "pozycja_y" można znaleźć w kategorii "Obiekt".'
-        subtext2: '"celx" i "cely" są w kategorii "Zmienne".'
-        subtext3: '"I" znajduje się w kategorii "Logika".'
-    step18:
-      title: 'Obiekt "paczka"'
-      description: Jeśli paczka trafiła szczęśliwie w cel, to musisz zmodyfikować pozycję paczki. Wyślij komunikat do innych obiektów, żeby je powiadomić o wygranej.
-      image1:
-        subtext1: 'Zmień wartości w bloku "Idź do" na "pozycja_x" i "cely + 100".'
-        subtext2: 'Wybierz pole "Nadaj" i utwórz nową wiadomość "wygrana".'
-      image2: Dodaj pokazane wyżej bloki i zmodyfikuj odpowiednio ich wartości.
-      image3: 'Przejdź wstecz, aż zobaczysz ten ekran w swoim urządzeniu. Przejdź do skryptów obiektu "restart".'
-    step19:
-      title: 'Obiekt "restart"'
-      description: 'Tu modyfikujesz obiekt "restart". Zdefiniuj pozycję i zachowanie obiektu.'
-      image1: Dodaj pokazane wyżej bloki i zmodyfikuj odpowiednio ich wartości.
-      image2: 'Dodaj pokazane powyżej bloki i ustaw "Nadaj" wiadomość "restart".'
-      image3: 'Przejdź wstecz, aż zobaczysz ten ekran, a następnie przejdź do skryptów "Tło".'
-    step20:
-      title: 'Object "Background"'
-      description: 'Dokończ program modyfikując obiekt "tło". Teraz możesz już grać w swoją grę. Dobrej zabawy!'
-      image1:
-        subtext1: 'Dodaj pokazane powyżej bloki i ustaw "Nadaj" wiadomość "start".'
-        subtext2: 'Naciśnij przycisk "Zagraj".'
-      image2: Ciesz się swoją grą.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: Kliknij obrazki poniżej, żeby je powiększyć. Przejrzyj skrypty swoich obiektów, jeśli twoja gra nie działa prawidłowo.
-      image1: 'Obiekt "tło"'
-      image2: 'Obiekt "spadochron"'
-      image3: 'Obiekt "paczka"'
-      image4: 'Obiekt "restart"'
-      image5: 'Obiekt "cel"'
   stepByStep:
     title: Wprowadzenie krok po kroku
     start: 'Pozycja wyjściowa:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -518,7 +367,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Szukaj...
   search: Szukaj
@@ -655,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Gry
+    tag2: Animacja ruchu
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

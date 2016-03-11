@@ -30,6 +30,7 @@ programs:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
   random: Zufällige Programme
+  related: Ähnliche Programme
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprogramme
   views: '%views% gesehen'
@@ -105,7 +106,7 @@ licenseToPlay:
 teachers:
   login:
     title: Lehrerbereich
-    description: Dieser Bereich ist für die Verwendung von Lehrern gedacht.
+    description: Dieser Bereich kann von Lehrern verwendet werden.
 termsOfUse:
   title: Nutzungsbedingungen
   headline: Willkommen in der Catrobat Gemeinschaft!
@@ -143,173 +144,10 @@ termsOfUse:
   bottom2: 'Bitte sende Anregungen bezüglich dieser Nutzungsbedingungen an %email-webmaster%.'
   version: Version 1.3, 4. März 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: In der folgenden Schritt für Schritt Anleitung erfährst Du, wie Du das Verhalten von Steve und seinem Päckchen programmieren kannst. Die Bilder unten zeigen, wie Du Steve während des Spiels kontrollierst. Du musst Steve über das Ziel navigieren und den Hintergrund antippen um das Packet fallen zu lassen. Viel Glück...
-    step1:
-      title: 'Installiere "Pocket Code"'
-      description: Wie du Pocket Code auf deinem mobilen Gerät installierst.
-      image1: 'Tippe auf "Play Store".'
-      image2: 'Suche "Pocket Code".'
-      image3: 'Tippe auf "Install".'
-    step2:
-      title: Projekt herunterladen
-      description: 'Wie du das notwendige Programm herunterlädst um "Skydiving Steve" programmieren zu können.'
-      image1: 'Tippe auf deinem mobilen Gerät im "Pocket Code" auf "Durchsuchen".'
-      image2: Tippe auf das Banner.
-      image3: 'Lade das Programm "Skydiving Steve" herunter.'
-    step3:
-      title: Projekt öffnen
-      description: Lass uns ins Programm schauen.
-      image1: 'Öffne das Menü und tippe auf "Open Skydiving Steve".'
-      image2: 'Tippe auf das Objekt "Fallschirm".'
-      image3: 'Wähle "Skripte".'
-    step4:
-      title: Variable hinzufügen
-      description: Die Variablen x und y erlauben es dir deinen Fallschirm zu steuern.
-      image1: 'Tippe auf "+".'
-      image2: 'Gehen Sie zur Kategorie "Variablen".'
-      image3: 'Tippe auf "Set Variable".'
-      image4: 'Ziehe den "Set Variable" Baustein unten den "When program started" Baustein.'
-    step5:
-      title: Benenne die Variabel
-      description: Beschrifte die x Position deines Fallschirmes.
-      image1: Füge eine zweite Variable, wie zuvor, hinzu.
-      image2: 'Tippe auf "Neu...".'
-      image3: 'Füge "x" ein und drücke auf "OK".'
-    step6:
-      title: 'Setzen Sie die Variable "y"'
-      description: Beschrifte und setze die y Startposition deines Fallschirmes.
-      image1: 'Beschrifte die zweite Variable mit "y".'
-      image2: 'Tippe auf das Feld, welches mit "0.0" gefüllt ist.'
-      image3: 'Füge "-500" ein und drücke auf "OK".'
-    step7:
-      title: Wiederhole fortlaufend
-      description: 'Du musst jederzeit die Position deines Fallschirmes kontrollieren können. Füge dazu eine "Forever"- Schleife ein.'
-      image1: 'Tippe auf "+".'
-      image2: 'Gehe zur Kategorie "Kontrolle".'
-      image3: 'Wähle den "Forever" Baustein.'
-      image4: 'Ziehe den "Forever" Baustein unter den "Set variable" Baustein.'
-    step8:
-      title: Einfügen und Ändern von Bausteinen
-      description: 'Füge mehr Bausteine in deine "Forever" Schleife ein, um deinen Fallschirm zu steuern. Füge die Variablen "x" und "y" in deinem "Place at" Baustein ein, um die Position deines Fallschirms zu steuern.'
-      image1: 'Füge die gezeigten Bausteine unterhalb des "Forever" Bausteines ein.'
-      image2: 'Tippe auf das Feld "100".'
-      image3: 'Tippe auf "Variablen" und wähle "x" aus.'
-      image4: 'Tippe bei dem gleichen Baustein auf der Oberseite auf "200", gehe zur Kategorie "Variablen" und wähle "y" aus. Bestätige mit "OK".'
-    step9:
-      title: Variablen und Werte ändern
-      description: Ändere die Variable y auf -3 um deinen Fallschirm auf den Boden gleiten zu lassen. Ändere die Variable x, sodass dein Fallschirm den Neigungswinkel deines mobilen Gerätes folgt.
-      image1:
-        subtext1: 'Setze die Größe auf "20" %.'
-        subtext2: 'Ändere den Wert des ersten "Set variable" Bausteines auf "-3".'
-        subtext3: 'Beim zweiten "Set variable" Baustein tippe auf das Feld "0.0".'
-      image2:
-        subtext1: 'Tippe auf "y" und wähle "x".'
-        subtext2: 'Einfügen "-".'
-        subtext3: 'Tippe auf "Sensor" und wähle "inclination_x".'
-      image3: 'Überprüfe ob die eingefügte Formel mit der auf dem Screenshot übereinstimmt und bestätige mit "OK".'
-    step10:
-      title: Lautstärkesensor
-      description: 'Du kannst die Höhe deines Fallschirms mit dem Lautstärke Sensor deines mobilen Gerätes steuern. Dafür musst du einen "If 1 is true then" Baustein hinzufügen.'
-      image1:
-        subtext1: 'Füge einen "If 1 is true then" - Baustein hinzu und platzieren Ihn unter den letzten "Change Variable" - Baustein.'
-        subtext2: 'Tippe innerhalb des "If 1 is true then" Baustein auf das Feld mit dem Wert "0".'
-      image2:
-        subtext1: 'Tippe auf "Sensoren".'
-        subtext2: 'Wähle "Lautstärke".'
-        subtext3: 'Tippe auf "Logik".'
-        subtext4: 'Wähle ">".'
-        subtext5: 'Füge "50" ein.'
-      image3: 'Überprüfe ob deine Formel mit der Formel im Screenshot übereinstimmt und tippe auf "OK".'
-    step11:
-      title: Ändere weitere Bausteine
-      description: Wenn du das Spiel neu startest, dann sollte die Startposition deines Fallschirms mit deiner ursprünglichen Anfangsposition übereinstimmen. Dafür musst du drei Bausteine hinzufügen und verändern, wie es in den Bildern darunter gezeigt wird.
-      image1: 'Füge einen "Change variable" Baustein ein und ändere den Wert wie oben.'
-      image2:
-        subtext1: 'Füge einen "When I receive" Baustein ein.'
-        subtext2: 'Platziere es unter dem letzten Baustein ("Ende der Schleife").'
-        subtext3: 'Füge zwei "Set variable" Bausteine ein.'
-      image3: 'Tippe auf das Feld mit dem Eintrag "message 1", wähle "Neu..." und füge "Neustart" ein.'
-      image4: 'Ändere den Wert der zwei "Set Variablen" Bausteine wie im obigen Screenshot gezeigt.'
-    step12:
-      title: Zurück zu den Objekten
-      description: 'Du hast nun dein Objekt "Fallschirm" erfolgreich fertiggestellt! Navigiere zurück zur Objektübersicht um das nächste Objekt ändern zu können.'
-      image1: 'Tippe auf die "Zurück" Taste deines Gerätes.'
-      image2: 'Tippe noch einmal auf die "Zurück" Taste.'
-      image3: Nun solltest du diesen Bildschirm auf deinem Gerät sehen.
-    step13:
-      title: 'Objekt "Ziel"'
-      description: 'Hier startest du um das Objekt "Ziel" zu ändern. Füge Bausteine hinzu um die Position und die Größe deines Zielobjektes zu steuern.'
-      image1: 'Tippe auf "Ziel" und wähle "Skripte".'
-      image2: Füge und verändere den Baustein, wie in dem Screenshot oben.
-      image3: Füge vier weitere Bausteine, wie oben abgebildet, hinzu.
-    step14:
-      title: 'Objekt "Ziel"'
-      description: Wenn du das Spiel neu startest, muss die Position deines Zielobjektes geändert. werden. Für diesen Schritt setze die Variablen goalx und goaly mit einer random Funktion.
-      image1: 'Tippe auf das Feld "y:" und wähle "Neu".'
-      image2: 'Füge "goalx" hinzu und bestätige mit "OK".'
-      image3: 'Tippe auf das Feld "0.0" und füge diese Formel "random(-400,400)" ein.'
-      image4: 'Wiederhole die Schritte 1-3 für den zweiten "Set variable" Baustein, nenne diese Variable "goaly" und setze den Wert auf "random(400,-700)".'
-    step15:
-      title: 'Objekt "Ziel"'
-      description: 'Ändere deinen "Place at" Baustein um die Position deines Zielobjektes mit den Variablen goalx und goaly steuern zu können.'
-      image1: 'Ändere den Wert bei dem "Place at" Baustein auf "goalx" und "goaly".'
-      image2: Überprüfe ob deine Werte mit den obigen übereinstimmen.
-      image3: Gehe zurück, bis du diesen Bildschirm siehst.
-    step16:
-      title: 'Objekt "Paket"'
-      description: 'Hier beginnst du dein Objekt "Paket". Wenn das Objekt "Paket" die "start" Nachricht erhält, sollte das Paket angezeigt werden. Setze die Position des Paketes mit den Variablen x und y.'
-      image1: 'Tippe auf "Ziel" und wähle "Skripte".'
-      image2: Füge alle Bausteine, wie oben gezeigt, hinzu.
-      image3:
-        subtext1: 'Ändere den Wert des "Set size" Bausteines auf "50".'
-        subtext2: 'Tippe innerhalb des "When I receive" Bausteines auf das Feld "Neustart" und erstelle eine neue Nachricht: "start".'
-        subtext3: 'Ändere den Wert des "Place at" Bausteines auf "x" and "y".'
-    step17:
-      title: 'Objekt "Paket"'
-      description: 'Um zu prüfen ob das Paket das Zielobjekt getroffen hat, benötigst du einen "If 1 is true then" Baustein.'
-      image1: 'Füge den oben gezeigten Baustein unter den letzten "Place at" Bausteines.'
-      image2: 'Ändere den Wert mit dem "Change Y by" Bausteines zu "-5". Danach tippe auf das Feld "1" in der "If 1 is true then".'
-      image3:
-        subtext1: '"positon_x" und "position_y" kann man in der Kategorie "Objekt" finden.'
-        subtext2: '"goaly" und "goalx" findet man in der Kategorie "Variablen".'
-        subtext3: '"AND" ist in der "Logik" Kategorie.'
-    step18:
-      title: 'Objekt "Paket"'
-      description: Wenn das Paket erfolgreich das Zielobjekt getroffen hat, dann musst du die Position des Paketes ändern. Sende eine Nachricht an die anderen Objekte, um denen wissen zu lassen, dass du gewonnen hast.
-      image1:
-        subtext1: 'Ändere den Wert des "Place at" Bausteines zu "position_x" und "goaly+100".'
-        subtext2: 'Tippe auf das Feld "Broadcast" und erstelle eine neue Nachricht "Gewonnen".'
-      image2: Füge die oben gezeigten Bausteine hinzu und verändere ihre Werte gleichermaßen.
-      image3: 'Gehe zurück, bis du diesen Bildschirm auf deinem Gerät siehst. Gehe zu den Skripten des Objektes "Neustart".'
-    step19:
-      title: 'Objekt "Neustart"'
-      description: 'Hier änderst du das Objekt "Neustart". Definiere die Position und das Verhalten des Objektes.'
-      image1: Füge die oben gezeigten Bausteine hinzu und verändere ihre Werte gleichermaßen.
-      image2: 'Füge die oben gezeigten Bausteine hinzu und setze die "Broadcast" Nachricht auf "Neustart".'
-      image3: 'Gehe zurück, bis du diesen Bildschirm siehst, dann gehe zu den Skripten "Hintergrund".'
-    step20:
-      title: 'Objekt "Hintergrund"'
-      description: 'Vervollständige das Programm, indem du das "Hintergrund" Objekt veränderst. Jetzt kannst du dein Spiel spielen. Viel Spaß!'
-      image1:
-        subtext1: 'Füge die oben gezeigten Bausteine hinzu und setze die "Broadcast" Nachricht auf "Start".'
-        subtext2: 'Tippe auf die "Spiel" Taste.'
-      image2: Genieße dein Spiel.
-      image3: 'Du hast das Tutorial "Skydiving Steve" erfolgreich abgeschlossen. Wir würden uns freuen, wenn wir einige wirklich coole Remixes von "Skydiving Steve" bei share.catrob.at finden könnten ---ändere es wie Du es willst und lade es von Deinem Account neu hoch.'
-    step21:
-      title: Überprüfe Deine Scipts!
-      description: Klicke auf die Bilder unten, um diese zu vergrößern. Überprüfe die Skripte deines Objektes, falls dein Spiel nicht richtig funktioniert.
-      image1: 'Objekt "Hintergrund"'
-      image2: 'Objekt "Fallschirm"'
-      image3: 'Objekt "Paket"'
-      image4: 'Objekt "Neustart"'
-      image5: 'Objekt "Ziel"'
   stepByStep:
     title: Schrittweise Einführung
     start: 'Ausgangsposition:'
+    description: Hier kannst du dein erstes Programm, eine interaktive Postkarte, mit Hilfe der folgenden Tutorial Videos erstellen. Bitte folge den Anweisungen die dir gegeben werden. Während der Erstellung der Postkarte werden dir alle Grundlagen von Pocket Code, die du auch für spätere Projekte verwenden kannst, vermittelt. Nach diesem Video hast du das Wissen und die Freiheit dein persönliches Pocket Code Projekt zu erstellen.
     step1:
       title: Erstelle ein neues Program
       detail:
@@ -501,26 +339,22 @@ help:
   aliceGameJamTutorialcards:
     title1: Willkommen im Wunderland
     subtitle1: "Animiere deine Figuren und erstelle ein 'Wenn angetippt' Event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    description1: 'Lerne wie du einen deiner Charaktere mit einfachen Animationen zum Leben erwecken kannst und verstehe wie dein Charakter durch Berühung eine Aktion ausführen kann. Das Video zeigt dir, wie du deinen Charakter mit verschiedenen Aussehen einfach animieren kannst. Weiters zeigen wir dir, wie du ein "bei Berühung" Event erstellen kannst und wie dur Broadcast Nachrichten zwischen Objekten verschickst.'
     title2: Rette Alice!
     subtitle2: Verwende den Neigungssensor und erkenne eine Kollision zwischen Objekten
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
+    description2: "Hier lernst du wie du deinen Charakter mit dem Neigungssensor deines Telefons kontrollieren kannst. Du kannst Alice's Bewegungen kontorllieren indem du dein Telefon nach links oder rechts neigst. Schau dir unser Tutorial an, lasse zufällige Objekte vom Himmel fallen und lerne Kollisionen zwischen Objekten festzustellen."
+    title3: 'Der Hutmacher - Hit and Run'
+    subtitle3: Erstelle eine bewegliche Landschaft und steuere die Bewegungen des Hutmachers
+    description3: In diesem Tutorial lernst du wie du eine Landschaft, die aussieht als würde sie sich bewegen, erstellen kannst. Wir werden Objekte entlang des Bildschirms bewegen um so eine Bewegung zu simulieren. Ausserdem zeigen wir dir wie du den Hutmacher durch neigen deines Telefons bewegen kannst.
+    title4: 'Der Hutmacher - Hit and Run'
+    subtitle4: Lasse den Hutmacher die bösen Karten abschießen
+    description4: In diesem Tutorial zeigen wir dir wir du Feinde, die sich zufällig in Richtung deines Charakters bewegen, erzeugen kannst. Weiters lernst du, wie der Hutmacher Teetropfen abfeuern kann und ob diese einen der Feinde getroffen hat, indem du eine Kollisionen erkennst.
+    title5: Schlag eine Grinsekatze
+    subtitle5: Erstelle einen Spielstand indem du Variablen benützt
+    description5: In diesem Tutorial zeigen wir dir, wie du Variablen verwenden kannst, um einen Spielstand zu erstellen. Spielstände sind nützliche Elemente eines Spieles. Unser Spielstand zeigt dir, wie oft du die Grinsekatze gefangen hast.
     title6: Ein Kaninchenrennen
     subtitle6: Erstelle einen bewegten Hintergrund
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    description6: Dieses Tutorial zeigt dir wie du vertikal bewegliche Hintergründe erstellen kannst, indem du die Hintergrundgrafiken in einer bestimmten Art und Weise gleiten lässt. Weiters werden wir dir zeigen, wie du Charaktere durch Berührung nach vorne springen lassen kannst. Um das Spiel etwas schwieriger zu gestalten zeigen wir dir, wie du die Geschindigkeit deines Charkaters mit der Zeit drosseln kannst.
     download: Programm herunterladen
 oauth:
   username_header: Danke für deine Anmeldung bei Pocket Code!
@@ -661,3 +495,13 @@ gamejam:
     header: Achtung
     subheader: Du kannst nur eigene Programme einreichen
     text: 'Erstelle ein eigenes und mach mit beim #AliceGameJam!'
+tag-text: Tags
+extenstion-text: Erweiterungen
+tags:
+  constant:
+    tag1: Spiele
+    tag2: Bewegte Animation
+    tag3: Geschichte
+    tag4: Musik
+    tag5: Kunst
+    tag6: Experimentell

@@ -30,11 +30,12 @@ programs:
     viewed: Paling banyak dilihat
     downloaded: Paling banyak diunduh
   random: Program Acak
+  related: Program Terkait
   downloads: '%downloads% unduhan'
-  sample: Example Programs
+  sample: Contoh Program
   views: '%views% lihat'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: Program yang Diajukan
+  uploaded: Program yang Diunggah
   reportAsInappropriate: Laporkan sebagai tidak pantas
   languageVersion: 'Versi Catrobat Language: %languageVersion%'
   reportLoginText: 'Mohon %login% untuk melaporkan program ini sebagai tidak pantas.'
@@ -46,7 +47,11 @@ programs:
   updateAppHeader: Perbaharui Aplikasi
   updateAppText: Mohon perbaharui aplikasi Anda ke versi terbaru untuk dapat mengunduh program ini.
   btnClosePopup: Oke
-  checkout_this_program: Checkout this Catrobat program
+  checkout_this_program: Coba Program Catrobat ini
+  show_more: Selengkapnya
+  comments: Komentar
+  send: Kirim
+  delete: Hapus
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
@@ -88,17 +93,21 @@ licenseToPlay:
   title: 'Lisensi untuk bermain - memberikan kredit dan berbagi'
   text1: Bayangkan bahwa setiap program Catrobat adalah kue, kue yang sangat istimewa yang datang dengan resep nya (blok pemrograman). Semua anggota dari komunitas Catrobat berbagi kue mereka bersama dengan resep mereka. Ini berarti Anda dapat menikmati kue dan belajar bagaimana untuk membuatnya sendiri!
   text2: 'Tidak ada resep rahasia: petunjuk tentang cara membuat kue ini terbuka bagi siapa saja untuk menggunakan, menggunakan kembali, memodifikasi, dan berfungsi sebagai inspirasi untuk ide-ide baru... Maksudku kue.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text3: 'Anda dapat makan kue serta menyalin resep orang lain untuk membuat resep Anda sendiri, mungkin dengan bahan-bahan yang berbeda. Kebebasan ini dengan dua persyaratan sederhana:'
+  text4: Dalam mendirikan komunitas Catrobat, kami memutuskan untuk mengadopsi pendekatan ini karena kami percaya bahwa itu mendukung pembelajaran dan kreativitas dalam komunitas. Dengan berbagi resep dan bahan-bahan (skrip dan karya seni), orang dapat membangun berdasarkan ide-ide satu sama lain dan setiap orang akan mendapat manfaat.
+  text5: Dalam merancang situs web Catrobat, kami menyertakan fitur untuk mendorong orang untuk berbagi dan untuk memberikan kredit kepada orang lain. Pada setiap halaman program, Anda selalu dapat mendownload naskah asli program. Jika Anda meremix program (memodifikasi script atau artwork, dan berbagi hasil), kami mendorong Anda untuk memberikan kredit dalam catatan programnya, menyebutkan orang-orang dan program yang menginspirasi Anda.
+  text6: 'Pelajari lebih lanjut tentang syarat penggunaan dari komunitas online Catrobat pada %link-termsOfUse%.'
   list1:
     item1: berbagi kue Anda bersama dengan resepnya
     item2: memberikan kredit kepada mereka yang menginspirasi Anda
   version: Versi 1.1, 2 April 2013
+teachers:
+  login:
+    title: Area guru
+    description: Area ini dapat digunakan oleh guru.
 termsOfUse:
   title: Persyaratan Penggunaan
-  headline: Welcome to the Catrobat Community!
+  headline: Selamat datang di komunitas Catrobat!
   text1: 'Sebagai bagian dari komunitas Catrobat, Anda berbagi program dan ide dengan orang-orang:'
   text2: 'Kami membutuhkan bantuan Anda untuk membuat komunitas ini menjadi tempat yang mendukung untuk setiap anggota. Berikut adalah bagaimana Anda bisa membantu:'
   text3: 'Melalui proyek Catrobat kami ingin memupuk kerjasama dan memungkinkan kreativitas semua orang untuk digabungkan sehingga bermanfaat bagi segenap orang. Anda juga dapat menjadi anggota aktif dari komunitas Catrobat dengan memberikan program-program Anda kembali kepada komunitas sebagai imbalan, dengan cara yang sama sebagai anggota aktif memberikan program mereka untuk Anda:'
@@ -118,217 +127,57 @@ termsOfUse:
     item1: "Dengan meng-unggah sebuah program pada website kami, Anda menerima dan menyetujui menempatkan pekerjaan ini di bawah lisensi bebas terhadap program Catrobat yang diunggah. Mirip dengan lisensi bebas dimana sistem Catrobat itu sendiri tersedia untuk Anda, lisensi bebas terhadap program Catrobat yang diunggah memberikan semua orang hak untuk belajar dari pekerjaan sebelumnya yang diunggah oleh orang lain dan untuk beradaptasi dan mendaur-ulang pekerjaan tersebut untuk membangun permainan baru mereka sendiri yang lebih menarik, animasi, dan program lainnya. Hal ini memungkinkan setiap orang untuk 'berdiri saling bahu-membahu', salah satu dari mereka karena Anda! Pekerjaan Anda pada gilirannya menguntungkan seluruh dunia dan tetap bebas untuk semua orang untuk menggunakan, mirip dengan teks dan gambar bebas Wikipedia yang merupakan kontribusi para sukarelawan dari seluruh dunia. Anggaplah kehadiran Anda demi  kemanusiaan: Anda memberikan kepada semua orang, dan semua orang lain yang mengunggah pekerjaan mereka ke situs web kami memberikan kepada Anda. Dengan demikian program unggahan adalah imbalan bernilai besar yang pemiliknya diberikan kepada Anda secara gratis, dengan kondisi Anda turut berpartisipasi dalam komunitas pada tataran yang sama."
     item2: 'Anda tidak harus menerima imbalan; Jika Anda melakukannya, aturan-aturan tertentu berlaku. Manfaat dari aturan ini adalah bahwa Anda bisa belajar dari pekerjaan dan membangun  sesuatu yang bahkan lebih baik oleh diri sendiri, yang mana Anda dapat, misalnya, meng-unggah lagi ke situs web kami sebagai karya Anda sendiri. Manfaat lain adalah bahwa lisensi ini pastikan bahwa Anda tidak dapat dianggap bertanggung jawab untuk setiap masalah yang timbul dengan orang lain melalui penggunaan program Anda.'
     item3: Satu syarat tambahan yang penting adalah bahwa Anda jelas memberikan atribusi pada penulis terhadap karya-karya Anda berdasarkan kerja Anda sendiri. Pada saat yang sama, kami akan bekerja keras sehingga karya Anda akan jelas dihargai oleh orang lain yang mana telah Anda sumbangkan, dengan memberikan atribusi untuk nama unik Anda bebas memilih untuk mewakili Anda di Catrobat di komunitas, dan dengan memberikan orang lain kesempatan untuk mengekspresikan rasa terima kasih kepada Anda dalam cara yang umum telah memberikan Anda bekerja untuk semua orang , dan khususnya kepada mereka.
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item4: 'Silakan berkonsultasi di %link-licenseUploaded% untuk syarat dan ketentuan hukum.'
   list4:
     item1: Kami menawarkan semua perangkat lunak dan sumber daya Internet yang berkaitan dengan sistem Catrobat, misalnya, perangkat lunak yang ditulis oleh tim Catrobat, website kami dan Internet sumber daya, kode sumber kita sendiri yang berkaitan dengan sistem Catrobat, kami sendiri dan semua tambahan termasuk bahan-bahan seperti, misalnya, Gambar, suara dan teks, sekarang dan di masa depan untuk Anda di bawah lisensi bebas Catrobat.
     item2: Lisensi ini membuat semua bagian dari Catrobat gratis untuk Anda serta gratis dalam arti memberikan Anda kebebasan untuk menggunakannya bagaimanapun Anda menyukainya, dengan hanya beberapa pembatasan memastikan, antara lain, bahwa sistem Catrobat akan selamanya tetap gratis dan berguna bagi semua orang.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item3: 'Silakan berkonsultasi di %link-licenseToPlay% untuk syarat dan ketentuan hukum. Kode sumber dari sistem Catrobat serta banyak dokumen dan sumber daya lainnya tersedia melalui %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item1: 'Jika Anda, atau, jika Anda berada di bawah usia 13 tahun, orang tua atau wali hukum Anda, berhubungan dengan organisasi yang terlibat dalam atau bertanggung jawab atas pelanggaran privasi jenis Dragnet dan/atau atau surveilans massal , maka Anda tidak diizinkan untuk menggunakan aplikasi perangkat lunak kami dan untuk mengakses layanan kami. Rincian yang tepat dari pembatasan dan pengecualian tertentu itu digambarkan pada bagian 4.a dan b. pada %link-termsOfUse% kami.'
     item2: "Jika Anda berusia di bawah 13 tahun, maka Anda harus meminta orang tua atau wali Anda apakah mereka mengijinkan Anda untuk menggunakan  aplikasi perangkat lunak Catrobat's  dan layanannya."
     item3: Kami berhak untuk menolak, menghapus, atau menyembunyikan program, account pengguna, dan bahan-bahan digital yang diunggah ke situs web Catrobat setiap saat dalam kebijakannya, sebagai contoh jika kita menemukan bahwa program yang berisi materi yang tidak patut atau yang melanggar hak orang lain.
     item4: Semua Catrobat di perangkat lunak dan sumber daya Internet yang ditawarkan dengan harapan bahwa mereka akan berguna, tetapi tanpa adanya jaminan.
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+    item5: 'Silakan hubungi developer kami %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service untuk rumusan yang tepat dari poin-point di atas dan beberapa syarat dan ketentuan hukum tambahan.'
   bottom1: Periksa kembali di sini dari waktu ke waktu, karena kami selalu berusaha untuk memperbaiki syarat penggunaan kami.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  bottom2: 'Silahkan email saran-saran mengenai syarat penggunaan ke %email-webmaster%.'
   version: Versi 1.3, 4 Maret 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: Bagaimana menginstal Pocket Code di ponsel Anda.
-      image1: 'Tekan "Play Store".'
-      image2: 'Cari "Pocket kode".'
-      image3: 'Tekan "Install".'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tekan "Mengeksplorasi" di "Pocket Code" pada perangkat Mobile Anda.'
-      image2: Ketuk banner.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: Mari kita lihat di dalam program.
-      image1: 'Tarik ke bawah menu dan tekan "Buka Skydiving Steve".'
-      image2: 'Ketuk obyek "parasut".'
-      image3: 'Pilih "Script".'
-    step4:
-      title: Add Variable
-      description: Variabel x dan y yang memungkinkan Anda untuk mengontrol posisi parasut Anda.
-      image1: 'Tekan "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tekan "Set variabel".'
-      image4: 'Drag dan drop brick "Set variabel" di bawah brick "ketika program ini dimulai".'
-    step5:
-      title: Label variables
-      description: Label posisi x parasut Anda.
-      image1: Menambahkan variabel kedua hanya seperti sebelumnya.
-      image2: 'Tekan "Baru...".'
-      image3: 'Masukkan "x" dan tekan "OK".'
-    step6:
-      title: 'Set variable "y"'
-      description: Label dan mengatur posisi mulai y parasut Anda.
-      image1: 'Labeli variabel kedua dengan "y".'
-      image2: 'Ketuk bidang isikan dengan "0.0".'
-      image3: 'Masukkan "-500" dan tekan "OK".'
-    step7:
-      title: Selamanya
-      description: 'Anda perlu untuk mengontrol posisi parasut Anda setiap saat. Masukkan "Selamanya" - loop untuk melakukannya.'
-      image1: 'Tekan "+".'
-      image2: 'Pergi ke kategori "Control".'
-      image3: 'Pilih brick "Selamanya".'
-      image4: 'Drag dan drop brick "Selamanya" di bawah brick "Set variabel".'
-    step8:
-      title: Insert and modify bricks
-      description: 'Tambahkan brick lain di loop "Selamanya"  untuk mengontrol parasut Anda. Memasukkan variabel x dan y di brick "tempatkan di" memungkinkan Anda untuk mengontrol posisi parasut Anda.'
-      image1: 'Memasukkan brick yang ditunjukkan di bawah brick "Selamanya".'
-      image2: 'Ketuk kolom "100".'
-      image3: 'Tekan "Variabel" dan pilih "x".'
-      image4: 'Tekan "200" di brick yang sama di atas, pergi ke "Variabel" kategori dan memilih "y". Konfirmasikan dengan "OK".'
-    step9:
-      title: Change variables and values
-      description: Mengubah variabel y -3 untuk membiarkan parasut Anda meluncur ke tanah. Mengubah variabel x sehingga parasut Anda mengikuti sudut kemiringan perangkat mobile Anda.
-      image1:
-        subtext1: 'Mengatur ukuran menjadi "20" %.'
-        subtext2: 'Ubah nilai pertama brick "Set variabel"  menjadi "-3".'
-        subtext3: 'Di brick "Set variabel" kedua tekan bidang "0.0".'
-      image2:
-        subtext1: 'Tekan pada "y" dan pilih "x".'
-        subtext2: 'Masukkan "-".'
-        subtext3: 'Tekan "Sensor" dan pilih "inclination_x".'
-      image3: 'Periksa apakah rumus dimasukkan sesuai dengan yang ada di layar dan konfirmasi dengan "OK".'
-    step10:
-      title: Loudness sensor
-      description: 'Anda dapat mengontrol ketinggian parasut Anda dengan kenyaringan sensor dari perangkat mobile Anda. Untuk melakukannya, tambahkan dan memodifikasi brick "jika 1 benar maka".'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Ketuk kolom dengan nilai "0" dalam brick "jika 1 benar maka".'
-      image2:
-        subtext1: 'Tekan "Sensor".'
-        subtext2: 'Pilih "kenyaringan".'
-        subtext3: 'Tekan "Logika".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Masukkan "50".'
-      image3: 'Periksa apakah rumus Anda sesuai dengan rumus dalam gambar dan tekan "OK".'
-    step11:
-      title: Change some more bricks
-      description: Ketika Anda me-restart permainan, posisi awal dari parasut Anda harus sesuai posisi awal Anda. Untuk ini Anda perlu menambahkan dan memodifikasi tiga brick seperti ditunjukkan pada gambar di bawah ini.
-      image1: 'Tambahkan brick "variabel perubahan" dan ubah nilai seperti di atas.'
-      image2:
-        subtext1: 'Tambahkan brick "Ketika saya menerima".'
-        subtext2: 'Tempatkan di bawah brick yang terakhir ("akhir loop").'
-        subtext3: 'Menambahkan dua brick "Set variabel".'
-      image3: 'Tekan bidang isikan "pesan 1", pilih "Baru..." dan masukkan "restart".'
-      image4: 'Mengubah nilai dua brick "Set variabel" seperti ditunjukkan pada gambar di atas.'
-    step12:
-      title: Back to objects
-      description: 'Anda sekarang telah berhasil membuat objek "parasut"! Menavigasi kembali ke Ikhtisar objek untuk memodifikasi objek berikutnya.'
-      image1: 'Tekan "kembali" - tombol pada perangkat Anda.'
-      image2: 'Tekan "kembali" - tombol sekali lagi.'
-      image3: Sekarang Anda akan melihat layar ini pada perangkat Anda.
-    step13:
-      title: 'Objek "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tekan "target" dan pilih "Script".'
-      image2: Tambahkan dan memodifikasi brick seperti pada gambar di atas.
-      image3: Tambahkan empat brick lain seperti ditunjukkan di atas.
-    step14:
-      title: 'Objek "target"'
-      description: Ketika Anda me-restart permainan, posisi target Anda perlu berubah. Untuk langkah ini, menetapkan variabel goalx dan goaly dengan fungsi acak.
-      image1: 'Sentuh bidang "y:" dan pilih "Baru".'
-      image2: 'Masukkan "goalx" dan konfirmasi dengan "OK".'
-      image3: 'Ketuk kolom "0.0" dan masukkan formula "acak (-400, 400)".'
-      image4: 'Ulangi langkah 1-3 untuk kedua brick "Set variabel", mengharapkan penamaan variabel "goaly" dan menetapkan nilai "acak (400,-700)".'
-    step15:
-      title: 'Objek "target"'
-      description: 'Memodifikasi brick "Tempatkan di" untuk mengontrol posisi target Anda dengan variabel goalx dan goaly.'
-      image1: 'Mengubah nilai brick "Tempat di" untuk "goalx" dan "goaly".'
-      image2: Periksa jika nilai-nilai Anda cocok dengan yang di atas.
-      image3: Pergi kembali sampai Anda melihat layar ini.
-    step16:
-      title: 'Objek "paket"'
-      description: 'Di sini Anda mulai memodifikasi objek "paket" Anda. Ketika objek "paket" menerima pesan "mulai", paket harus ditampilkan. Mengatur posisi paket dengan variabel x dan y.'
-      image1: 'Tekan "paket" dan pilih "Script".'
-      image2: Tambahkan semua brick yang ditunjukkan di atas.
-      image3:
-        subtext1: 'Mengubah nilai brick "Set ukuran" menjadi "50".'
-        subtext2: 'Tekan bidang "restart" pada brick "ketika saya menerima" dan buat pesan baru: "start".'
-        subtext3: 'Mengubah nilai-nilai brick "Tempatkan di" untuk "x" dan "y".'
-    step17:
-      title: 'Objek "paket"'
-      description: 'Untuk memeriksa apakah paket telah memukul target, Anda perlu brick "jika 1 benar maka".'
-      image1: 'Tambahkan diatas brick yang tampak dibawah brick "tempatkan di".'
-      image2: 'Ubah nilai dalam brick "Perubahan Y oleh"  dengan "-5". Kemudian tekan pada bidang "1" dalam "jika 1 benar maka".'
-      image3:
-        subtext1: '"position_x" dan "position_y" dapat ditemukan dalam kategori "Objek".'
-        subtext2: '"goaly" dan "goalx" adalah dalam kategori "Variabel".'
-        subtext3: '"AND" adalah kategori "Logika".'
-    step18:
-      title: 'Objek "paket"'
-      description: Jika paket telah berhasil memukul target, Anda perlu untuk mengubah posisi paket. Kirim pesan ke objek-objek lain untuk membiarkan mereka tahu bahwa Anda telah menang.
-      image1:
-        subtext1: 'Mengubah nilai brick "Tempatkan di" untuk "position_x" dan "goaly + 100".'
-        subtext2: 'Ketuk kolom "Broadcast" dan buat pesan baru "menang".'
-      image2: Tambahkan brick yang ditampilkan di atas dan ubah nilai-nilainya menjadi sama.
-      image3: 'Pergi kembali sampai Anda melihat layar ini pada perangkat Anda. Pergi ke script objek "restart".'
-    step19:
-      title: 'Objek "restart"'
-      description: 'Di sini Anda memodifikasi objek "restart". Menentukan posisi dan perilaku objek.'
-      image1: Tambahkan brick yang ditampilkan di atas dan ubah nilai-nilainya menjadi sama.
-      image2: 'Tambahkan brick yang ditampilkankan di atas dan set pesan "Broadcast" menjadi "restart".'
-      image3: 'Pergi kembali sampai Anda melihat layar ini, kemudian pergi ke naskah untuk "Latar belakang".'
-    step20:
-      title: 'Object "Background"'
-      description: 'Menyelesaikan program dengan memodifikasi objek "latar belakang". Sekarang Anda dapat mulai bermain permainan Anda. Selamat bersenang-senang!'
-      image1:
-        subtext1: 'Tambahkan brick yang ditampilkan di atas dan set pesan "Broadcast" menjadi "start".'
-        subtext2: 'Tekan tombol "Play".'
-      image2: Selamat Menikmati permainan anda.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: Klik pada gambar di bawah untuk memperbesar mereka. Memeriksa naskah untuk objek Anda jika permainan Anda tidak bekerja dengan benar.
-      image1: 'Objek "latar belakang"'
-      image2: 'Objek "parasut"'
-      image3: 'Objek "paket"'
-      image4: 'Objek "restart"'
-      image5: 'Objek "target"'
   stepByStep:
     title: Langkah demi langkah Intro
     start: 'Posisi mulai:'
+    description: |
+      Di sini Anda membuat program pertama Anda, yaitu kartu pos interaktif menggunakan video walkthrough berikut. 
+      Anda harus mengikuti petunjuk yang diberikan kepada Anda. 
+      Selama pembuatan kartu pos, dasar-dasar Pocket Code yang Anda butuhkan untuk proyek-proyek Anda akan datang akan dimediasi. 
+      Setelah video terpandu ini, semua kegiatan lain akan memberi Anda lebih banyak kebebasan untuk membuat proyek Pocket Code pribadi Anda sendiri.
     step1:
-      title: Make a new program
+      title: Buat program baru
       detail:
         text1: 'Tekan pada "Baru".'
         text2: 'Masukkan nama progam, pilih "Buat program kosong" dan tekan "OK".'
     step2:
-      title: Create a new object
+      title: Buat objek baru
       detail:
         text1: 'Tekan:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
+        text2: Pilih sumber tampilan pertama dari obyek baru Anda.
+        text3: 'Masukkan nama objek dan tekan "OK" untuk membuat objek tersebut.'
         special1: Gambar tampilan baru.
         special2: Memilih dari galeri.
         special3: Mengambil gambar.
     step3:
-      title: Start Moving
+      title: Mulai bergerak
       detail:
         text1: 'Tekan:'
         text2: 'Brick pertama yang kami gunakan adalah dari kategori "Gerakan".'
         text3: 'Pilih brick "Meluncur". Objek akan pindah ke posisi baru ditetapkan dengan brick di atas panggung.'
         text4: Brick sekarang mengambang. Paste, pindahkan brick ke posisi yang diinginkan. Anda juga dapat memindahkan brick yang sudah dimasukkan dengan menekan brick sampai mengambang lagi.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text5: 'Tekan "Mainkan" untuk ke panggung dan melihat objek meluncur.'
         text6: Gunakan tombol kembali Android untuk kembali dari panggung.
     step4:
       title: Ubah Tampilan
       description: Anda dapat mengubah tampilan objek.
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text1: 'Pilih "Beralih untuk melihat" batu bata. Dengan bata ini Anda dapat memilih tampilan atau membuat yang baru.'
         text2: 'Letakkan brick di bawah brick "Meluncur".'
         text3: Tekan pada dropdown untuk menciptakan tampilan baru.
         text4: Pilih sumber gambar seperti sebelumnya.
@@ -338,46 +187,46 @@ help:
       title: Berbicara
       description: Sekarang Anda akan menemukan cara untuk membuat sebuah objek yang berbicara.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text1: 'Pilih bata "Bicara". Objek membaca teks, ketika bata ini dijalankan.'
         text2: 'Letakkan brick di bawah brick "Beralih untuk melihat".'
         text3: Tekan play untuk melihat perilaku di panggung.
     step6:
-      title: Again and again
+      title: Lagi dan lagi
       description: Langkah ini menunjukkan Anda bagaimana untuk mengulangi perilaku objek.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text1: 'Pilih bata "Selamanya". Semua dalam lingkaran mengulang selamanya.'
         text2: 'Letakkan brick "Selamanya" di bawah brick "saat program dimulai".'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text3: 'Tambahkan bata "Meluncur" lainnya.'
+        text4: 'Letakkan bata "Meluncur" di atas bata "Akhir putaran".'
         text5: Tekan ke dalam bidang teks x dan y nilai dan set ke 0.
         text6: Tekan play untuk melihat perilaku di panggung.
     step7:
-      title: Tapping is everything
+      title: Mengetuk adalah segalanya
       description: Anda juga dapat mengontrol perilaku objek ketika program ini berjalan di atas panggung.
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text1: 'Pilih bata "ketika diketuk". Setiap bata dibawah "ketika diketuk" akan dijalankan satu kali ketika Anda menekan objek di panggung.'
+        text2: 'Tempatkan bata "ketika diketuk" dibawah bata lainnya.'
+        text3: 'Pilih bata "Belok Kanan" dan letakkan dibawah bata "Ketika diketuk".'
         text4: Sekarang Anda memiliki script ini.
         text5: Tekan play untuk melihat perilaku di panggung. Jika Anda sekarang tekan pada objek, ia berputar.
     step8:
-      title: Copy, delete or edit a brick
+      title: Salin, hapus atau edit batu bata
       detail:
         text1: Satu Ketukan pada sisi kiri pada setiap brick akan membuka menu konteks. Disana Anda dapat memindahkan, menyalin, menghapus atau mengedit nilai-nilai brick dengan formula editor.
     step9:
-      title: Navigation in the app
+      title: Navigasi di app
       detail:
         text1: Gunakan Android tombol kembali untuk menavigasi di app.
         text2: Kembali satu layar ke Ikhtisar objek. Di sini Anda dapat pergi ke script dan juga untuk menguatkan representasi penampilan dan suara dari suatu objek. Anda dapat mengubah, menyalin serta menambah atau menghapus tampilan dan suara.
         text3: Gunakan lagi tombol kembali Android untuk melihat Ikhtisar benda-benda dan latar belakang.
     step10:
-      title: Change the background
+      title: Ubah latar belakang
       description: Ini adalah ikhtisar benda Anda dan latar belakang tergantung pada salah satu program.
       detail:
         text1: Latar belakang seperti objek, tapi Anda hanya dapat memiliki satu latar belakang.
         text2: Anda dapat menambahkan script, suara-suara dan tampilan dengan cara yang sama ke objek latar belakang.
     step11:
-      title: Main Menu
+      title: Menu utama
       description: Gunakan tombol kembali Android untuk ke layar ini.
       detail:
         text1: Melanjutkan dengan program Anda yang saat ini dibuka.
@@ -390,73 +239,73 @@ help:
     title: Tutorial
     description1: Tutorial ini menunjukkan kepada Anda bagaimana menggunakan trik yang efektif dalam
     getReady: 'Bersiaplah:'
-    tryCode: 'Try this code:'
+    tryCode: 'Coba kode ini:'
     doIt: 'Lakukan:'
     tip: 'Tip tambahan:'
     card1:
       title: Ubah Ukuran
       description: Ketuk bebek untuk mengubah ukuran.
-      one: Add the object of which you would like to change the size, e.g. Animal.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      one: Tambahkan objek yang Anda ingin rubah ukuran, misalnya hewan.
+      two: 'Masukkan batu bata berikut ke script objek untuk meminimalkannya (20% dari ukuran aslinya) ketika diketuk.'
     card2:
       title: Ubah Tampilan
       description: Gunakan trik ini untuk menghitung secara otomatis.
-      one: Add the object of which you would like to change its look, e.g. items.
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      one: Tambahkan objek yang Anda ingin rubah tampilan, misalnya item.
+      two: Masukkan gambar selanjutnya di tampilan objek.
+      three: Masukkan bata berikut ke script objek untuk terus merubah tampilannya setelah satu detik.
     card3:
       title: Animasi Bergerak
       description: Gunakan trik ini bila Anda ingin burung beo terbang.
-      one: Add the object you want to be moving.
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      one: Tambahkan objek yang Anda ingin pindah.
+      two: Masukkan gambar lain di tampilan objek yang menggambarkan gerakan.
+      three: Masukkan batu bata berikut ke script objek untuk terus mengubah posisi objek setelah waktu tertentu. Selain itu Anda dapat membatasi panggung dengan memantul jika di tepi.
     card4:
-      title: Glide
+      title: Meluncur
       description: Bergerak dengan lancar dari satu tempat ke yang lain.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      one: Tambahkan objek yang Anda ingin untuk meluncur misalnya pesawat.
+      two: Masukkan batu bata berikut dan tentukan daerah di mana gerakan harus terjadi.
     card5:
       title: Putar suara
-      description: Play a sound by tapping on the object.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      description: Mainkan suara dengan menekan pada objek.
+      one: Tambahkan objek yang Anda ingin untuk dapat memainkan suara misalnya anjing.
+      two: 'Masukkan batu bata berikut untuk memungkinkan pemutaran. Pilih suara dari librari pribadi Anda, Librari media Pocket Code atau rekam sendiri. '
     card6:
       title: Katakan sesuatu
       description: Gunakan kode ini untuk membuat objek berbicara.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      one: Tambahkan objek yang Anda ingin untuk bicara misalnya Carrie.
+      two: Masukkan batu bata berikut untuk memungkinkan hasil suara.
     card7:
       title: GSensor
       description: Gunakan trik ini untuk mengontrol objek dengan kecenderungan dari perangkat Anda.
-      one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      one: Tambahkan objek yang Anda ingin pindah.
+      two: 'Masukkan batu bata berikut untuk mengendalikan objek melalui sensor telepon. Oleh karena itu pilih "kecenderungan x dan y". Untuk mendapatkan gerakan yang cocok, atur "-kecenderungan". Jika gerakan objek terlalu masuk akal, bagi kecenderungan menjadi 10 sebagai contoh.'
     card8:
       title: Kompas
       description: Gunakan kode ini untuk membuat sebuah kompas.
-      one: Add the object you want to point in compass direction.
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      one: Tambahkan objek yang Anda ingin tunjukkan dengan arah kompas.
+      two: Masukkan batu bata berikut untuk mengatur orientasi objek. Selain itu masukkan putaran selamanya.
     card9:
       title: Siaran
       description: Lihat kode ini! Ini menunjukkan pada Anda bagaimana untuk berkomunikasi antara objek.
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      one: Tambahkan objek baru, misalnya Alice, yang harus mengirim pesan siaran. Selain itu, tambahkan latar belakang kedua di tampilan latar belakang. Segera setelah latar belakang menerima pesan siaran itu akan berubah ke tampilan yang lain.
+      two: 'Masukkan bata "Kirim ke semua" dan tentukan apa yang harus terjadi ketika objek lain menerima pesan.'
+      three: Dalam kasus ini latar belakang berubah ketika objek dalam lapisan depan diketuk.
     card10:
-      title: Show variable
-      description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      title: 'Tampilkan variabel '
+      description: Tunjukkan nilai variabel.
+      one: 'Tambahkan objek yang akan dipindahkan melalui sensor telepon Anda (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%). Selain itu tambahkan latar belakang yang kedua yang seharusnya berubah ketika menerima pesan siaran.'
+      two: Masukkan batu bata berikut untuk menyelamatkan posisi x dan y saat ini dari objek bergerak dalam variabel.
+      three: 'Melalui "Tampilkan variabel" Anda dapat menampilkan nilai di atas panggung.'
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: Deteksi tabrakan
+      description: Mendeteksi tabrakan antara dua objek.
+      one: 'Tambahkan dua objek yang harus bergerak melalui sensor telepon Anda, misalnya Alex (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
+      two: 'Selamatkan posisi "x dan y " saat ini dari objek bergerak Alex (Lihat %tutorial_card_link_10% Tutorial Card 10 %link_end%) dan masukkan tulisan berikut. Terus periksa jika dua objek itu tumpang tindih. Jika ya, objek tetap harus tersembunyi dalam peti ini.'
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: Deteksi wajah
+      description: Kendalikan sebuah objek dengan menggunakan deteksi wajah.
+      one: Pertama, pastikan bahwa bata deteksi wajah diaktifkan. Karena itu kunjungi pengaturan.
+      two: 'Tambahkan objek baru dan masukkan batu bata berikut untuk menunjukkan jika satu wajah terdeteksi. Periksa jika wajah terdeteksi dan tempatkan ini dalam sebuah loop selamanya. Jika kamera mengenali wajah nilai variabel adalah "BENAR", kalau tidak "SALAH".'
   starterPrograms:
     title: Program Permulaan
     description: Coba program permulaan ini. Lihat ke dalam untuk membuat perubahan dan tambahkan ide-ide Anda.
@@ -464,66 +313,63 @@ help:
       games: Permainan
       animations: Animasi
       interactive: Seni interaktif dan cerita
-      music: Music And Dance
+      music: Musik dan Tari
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
-    title1: Registration
-    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
+    title: Bagaimana cara meng-unggah permainan Pocket Code ke situs Game Jolt?
+    text0: 'Ucapan selamat pertama pada permainan Anda! Sekarang Anda dapat meng-unggahnya pada %link% untuk membuat aplikasi Android yang berdiri sendiri, yang Anda kemudian dapat meng-unggahnya di situs Game Jolt.'
+    title1: Pendaftaran
+    text1: "Pertama Anda perlu membuat akun. Setelah itu Anda dapat mengunggah program yang Anda buat. Jangan khawatir ini mudah dan Anda hanya perlu memikirkan nama pengguna dan sandi. Setelah mengisi keduanya, klik 'Masuk atau Daftar'. Hanya itu!"
     title2: Meng-unggah
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: Search for your program
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: Create Android app
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: Download app
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
-    title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text2: 'Setelah proses pendaftaran Anda akan dapat meng-unggah permainan Anda. Hanya pikirkan nama dan tambahkan keterangan. Juga tambahkan #AliceJam150 di bidang Deskripsi.'
+    title3: Mencari program Anda
+    text3: Pergi ke profil Pocket Code dimana semua program terdaftar atau caria langsung program Anda dengan menggunakan pencarian dan nama program Anda.
+    title4: Membuat aplikasi Android
+    text4: "Langsung pada halaman detail program Anda dapat membuat aplikasi Android. Dengan mengklik pada 'Menyiapkan app' app akan dibuat."
+    title5: Unduh aplikasi
+    text5: 'Setelah proses pembuatan Anda dapat mengunduh program Anda sebagai sebuah aplikasi. Aplikasi yang diunduh ini perlu diunggah lagi langsung di situs Game Jolt untuk berpartisipasi dalam %link%.'
+    title6: Daftar/Masuk di GameJolt.com
+    text6: "Kunjungi %link% dan klik 'Masuk' atau 'Daftar!' dalam menu. Jika Anda sudah memiliki akun Anda langsung dapat masuk, jika tidak, Anda perlu mendaftar dengan alamat Email, Nama Pengguna dan Password."
+    title7: Mengunggah permainan Anda pada situs Game Jolt
+    text7: "Setelah Anda masuk, kunjungi dashboard Anda. Disana Anda dapat menambahkan permainan Anda. Pertama Anda harus klik pada 'Menerima peraturan'. Kemudian mengisi informasi permainan. Saat Mesin/Bahasa/Penciptaan Alat pilih 'Lainnya' dan tambahkan ke bidang Mesin Lainnya/Bahasa/Alat 'Android'. Saat status 'Pembuatan' pilih 'Selesai/Stabil'. Pastikan untuk memasukkan #AliceJam150 dalam deskripsi sehingga muncul di halaman %link%."
+    text7_1: "Sebelum Anda dapat mempublikasikan permainan Anda, ikuti langkah-langkah berikutnya. Anda setidaknya harus menambahkan 'gambar thumbnail', mengatur 'nilai kedewasaan', dan mengunggah permainan Anda dengan mengklik pada 'membangun/file'."
+    text7_2: "Klik 'Tambahkan Paket' dan isi informasi paket. Simpan dan tambahkan rilis. "
+    text7_3: Sekarang Anda dapat mengunggah apk program Anda. Anda menemukan aplikasi yang diunduh di folder unduhan. Sangat baik untuk menggunakan data explorer (misalnya es data explorer).
+    text7_4: "Catatan: Jika aplikasi kekurangan akhiran '.apk', Anda harus menambahkan '.apk' secara manual. Langsung ubah nama file. Sekarang Anda harus mampu mengunggahnya."
+    text7_5: "Setelah mengunggah klik pada 'OK' untuk mempublikasikan permainan Anda. Kemudian akan muncul pada orang lain link untuk mengunduh permainan Anda."
+    text7_6: Anda sekarang sudah mengunggah permainan pertama Anda di situs Game Jolt dan mengaktifkannya. Selamat!
+    text7_7: 'Sekarang orang lain akan dapat menemukan permainan Anda dan akan muncul di halaman %link%.'
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    title1: (Selamat datang di) Wonderland
+    subtitle1: "Gerakkan karakter dan buat 'ketika diketuk'"
+    description1: 'Pelajari cara untuk menghidupkan salah satu karakter Anda dalam animasi sederhana dan menguasai cara membuat karakter Anda melakukan sesuatu ketika menekannya. Video menunjukkan kepada Anda bagaimana Anda dapat dengan mudah menghidupkan karakter Anda dengan menggunakan tampilan yang berbeda. Selanjutnya kami menunjukkan Anda bagaimana untuk membuat event "ketika mengetuk" dan bagaimana untuk mengirim pesan siaran antara objek.'
+    title2: Simpan Alice!
+    subtitle2: Gunakan sensor kehendak dan mendeteksi tabrakan antara objek
+    description2: Di sini Anda akan belajar bagaimana mengendalikan karakter dengan menggunakan sensor kehendak dari telepon Anda. Anda dapat mengontrol gerakan Alice dengan mengungkit telepon ke kiri atau kanan. Tonton tutorial kami dan biarkan benda jatuh secara acak dari langit dan dapatkan pengalaman dalam mendeteksi tabrakan dengan benda-benda lainnya.
+    title3: 'Hatter - Tabrak dan Lari'
+    subtitle3: Buat pemandangan bergerak dan mengontrol pergerakan Hatters
+    description3: Dalam tutorial ini Anda akan belajar bagaimana untuk membuat pemandangan yang tampak seperti bergerak. Kita akan melakukannya dengan menggerakkan objek sepanjang layar untuk menciptakan ilusi gerakan. Kami juga menunjukkan Anda bagaimana untuk membuat Hatter bergerak dengan memiringkan telepon Anda.
+    title4: 'Hatter - Tabrak dan Lari'
+    subtitle4: Biarkan Hatter menembak kartu evil
+    description4: Dalam tutorial ini kami akan menunjukkan kepada Anda bagaimana untuk membuat musuh yang bergerak secara acak menuju karakter Anda. Selain itu, Anda akan mempelajari cara membuat hatter menembak teadrops dan memeriksa jika musuh tertembak dengan menggunakan deteksi benturan.
+    title5: Memukul Kucing Cheshire
+    subtitle5: Buat skor dengan menggunakan variabel
+    description5: Dalam tutorial ini kami akan menunjukkan bagaimana untuk menggunakan variabel untuk membuat skor. Skor adalah unsur-unsur yang berguna dalam permainan. Skor kami menunjukkan seberapa sering Anda telah menangkap kucing.
+    title6: Perlombaan Kelinci
+    subtitle6: Buat latar belakang bergerak
     description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+      Tutorial ini menunjukkan Anda bagaimana membuat latar belakang vertikal bergulir dengan menggerakkan gambar latar belakang dengan cara tertentu. Hal lain yang kami akan ajarkan pada Anda adalah membuat karakter melompat maju dengan menekan di atasnya. 
+      Untuk membuat permainan sedikit lebih sulit kami akan menunjukkan kepada Anda bagaimana memperlambat kecepatan karakter Anda dari waktu ke waktu.
+    download: Unduh program
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
+  username_header: Terima kasih telah mendaftar pada Pocket Code!
+  username_chooser: 'Silahkan pilih satu nama pengguna:'
+  username_hint: Nama pengguna tidak boleh nama asli Anda.
+  usernameTaken: Nama pengguna ini sudah ada. Harap pilih yang lain.
 search:
-  dotdotdot: Search...
+  dotdotdot: Cari...
   search: Cari
   results: Hasil pencarian
-  resultcount: 'Your search returned %count% results'
+  resultcount: 'Pencarian Anda menemukan %count% hasil'
 menu:
   profile: Profil saya
   logout: Logout
@@ -537,66 +383,66 @@ login:
   recoverPassSend: Email dikirim ke alamat email Anda. Silakan cek inbox Anda.
   userOrEmail: Nama pengguna atau Email
   changePass: Ubah Kata Sandi
-  createAccount: Create an account
-  or: OR
+  createAccount: Buat akun
+  or: ATAU
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  download: Unduh sebagai app
+  prepare: Mempersiapkan app
+  preparing: Mempersiapkan app
+  text: Proses ini dapat berlangsung beberapa saat
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: Nama pengguna tidak boleh kosong
+    invalid: Nama pengguna tidak sah
+    exists: Nama pengguna ini sudah ada.
+    not_exists: Nama pengguna ini tidak ada.
   password:
     blank: Kata sandi hilang.
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: 'Password Anda harus memiliki setidaknya {{ limit }} karakter.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: Deskripsi tidak boleh mengandung kata kasar.
   country:
     blank: Negara hilang.
-    invalid: Invalid country
+    invalid: Negara tidak sah
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: email tidak boleh kosong
+    invalid: Email Anda tampaknya tidak sah
     exists: Alamat email ini sudah ada.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: Open Authentication ID tidak boleh kosong
   login: Sandi atau nama pengguna salah.
   post-data: POST-Data tidak benar atau hilang!
   checksum:
     missing: Client tidak mengirim fileChecksum! Apakah Anda menggunakan versi lama dari Pocket Code?
-    invalid: invalid checksum
+    invalid: checksum tidak sah
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: kode xml tidak valid
+    missing: 'kesalahan tidak dikenal: project_xml_tidak_ditemukan!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+    unexpected: file tak terduga ditemukan
+    invalid: berkas tidak sah
+  image.missing: Proyek XML menyebutkan berkas yang tidak ada dalam folder proyek
+  unknown: kesalahan tidak dikenal
   token: 'Otentikasi perangkat gagal: auth-token tidak valid!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: NamaProgram tidak boleh mengandung kata kasar.
   program:
-    invalid: Invalid program.
+    invalid: Program tidak sah.
   languageversion:
     tooold: Maaf, programm Anda berisi versi lama dari bahasa Catrobat! Apakah Anda menggunakan versi terbaru dari Pocket Code?
   programversion:
     tooold: Maaf, Anda menggunakan versi lama dari Pocket Code. Perbarui ke versi terbaru.
 success:
   registration: Registrasi berhasil!
-  token: ok
-  upload: Your project was uploaded successfully!
-  report: Your report was successfully sent!
+  token: oke
+  upload: Program Anda telah berhasil di unggah!
+  report: Laporan Anda berhasil dikirim!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 menit yang lalu |{1}1 menit yang lalu |] 1, Inf] %count% menit yang lalu'
+  hours.ago: '{1}1 jam lalu |] 1, Inf] %count% jam lalu'
+  days.ago: '{1}1 hari yang lalu |] 1, Inf] %count% hari yang lalu'
+  months.ago: '{1}1 bulan yang lalu |] 1, Inf] %count% bulan yang lalu'
+  years.ago: '{1}1 tahun yang lalu |] 1, Inf] lebih dari satu tahun yang lalu'
 language:
   arabic: Arab
   bulgarian: Bulgaria
@@ -643,15 +489,25 @@ language:
   ukrainian: Ukraina
   vietnamese: Vietnam
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Menghasilkan Apk
+  pending: Menghasilkan Apk
+  download: Unduh Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  nojam: Maaf, tidak ada kemacetan permainan saat ini
+  submit: Kirim kemacetan permainan ke alice
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: waspadalah
+    subheader: Anda hanya dapat mengirimkan program Anda sendiri
     text: |
-      But why not create your own!
-      Take part in the #AliceGameJam
+      Tapi mengapa tidak membuat punya Anda sendiri! 
+      Ambil bagian di #AliceGameJam
+tag-text: Label
+extenstion-text: Ekstensi
+tags:
+  constant:
+    tag1: Permainan
+    tag2: Animasi Bergerak
+    tag3: Cerita
+    tag4: Musik
+    tag5: Seni
+    tag6: Eksperimental

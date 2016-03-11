@@ -30,11 +30,12 @@ programs:
     viewed: Legnézettebb
     downloaded: Legtöbbször letöltött
   random: Véletlenszerű programok
+  related: Related Programs
   downloads: '%downloads% letöltések'
-  sample: Example Programs
+  sample: Példa Programok
   views: '%views% views'
   submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  uploaded: Feltöltött Programok
   reportAsInappropriate: Jelentés problémásként
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Please %login% to report this program as inappropriate.'
@@ -43,45 +44,38 @@ programs:
   reportOwnProgram: Nem jelölheted a saját programodat.
   reportAlready: Már megjelölted ezt a programot problémásként.
   reportDone: Problémásként jelentetted ezt a programot!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: App Frissítése
+  updateAppText: A program letöltéséhez frissítse az appot a legújabb verzióra.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Törlés
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
-  message: |
-    Dear %username%.
-    
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    
-    Best regards,
-    Your Catrobat Team.
+  subject: Catrobat jelszó emlékeztető
+  message: 'Kedves %username%. Jelszó emlékeztetőt kértél a %appplication_url% alkalmazáshoz, mert elfelejtetted a jelszavad. Amennyiben nem te kezdeményezted a jelszó emlékeztető küldését, kérlek hagyd ezt az üzenetet figyelmen kívül. Az üzenet 24 órán belül lejár. A jelszavad frissítéséhez látogasd meg a következő oldalt: %confirmationUrl% Felhasználóneveddel és jelszavaddal elérheted a %appplication_url% közösséget. Ehhez látogasd meg a következő oldalt: %loginPage% Profil adataid módosításához használd: %profilePage% Best regards, A Catrobat Csapat.'
 profile:
   saveChanges: módosítások mentése
   newPass: Új jelszó
-  repeatPass: repeat password
+  repeatPass: ismételje meg a jelszót
   firstEmail: Első e-mailem
   secondEmail: Második e-mailem
-  myPrograms: My programs
+  myPrograms: Programjaim
   form:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: The password must differ from the username.
     emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
+    emailMissing: Hiba az e-mail cím mentése közben. Legalább egy hitelesített e-mail címmel kell rendelkeznie.
+    emailExists: Ez az e-mail cím már létezik.
     submitSuccess: mentve!
   reallyDeleteProgram: Biztosan törölni szeretnéd a programodat
   programsOf: Programok
   changePicture: Kép módosítása
   avatar:
     pictureTooLarge: A kiválasztott kép túl nagy, ne használj 5MB-nál nagyobb képeket.
-    uploadError: Sorry, there was a problem during the upload!
+    uploadError: Probléma merült fel a feltöltés közben!
     noSupport: This image type is not supported, please try another image.
 licenseToPlay:
   link: Játékengedély
@@ -96,23 +90,27 @@ licenseToPlay:
     item1: oszd meg a süteményeket és azok receptjeit
     item2: ismerd el azokat, akik inspiráltak
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Felhasználási feltételek
   headline: Üdvözlünk a Catrobat Közösségben!
   text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
+  text2: 'A te segítségedre is szükség van hogy mindenki számára támogató közösséget alakíthassunk ki. Így segíthetsz:'
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text4: 'A mi ajándékunk:'
+  text5: 'Felhasználási feltételek:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: sok különféle országból és kultúrából
+    item2: minden korosztálynak (gyermekektől tinédzserekig és nagyszülőkig)
+    item3: minden tapasztalati szintre
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: Légy tisztelettudó. Programok megosztásánál vedd figyelembe hogy különböző hátterű és életkorú emberek fogják látni amit közzéteszel.
     item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
+    item3: Légy őszinte. Ne tettesd másvalakinek magad és ne próbáld meg becsapni a közösséget semmilyen módon.
+    item4: Tartsd biztonságban a személyes információidat. Ne oszd meg az e-mail címedet, telefonszámodat vagy más személyes adatot.
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
     item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
@@ -133,174 +131,14 @@ termsOfUse:
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 March 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: How to install Pocket Code on your mobile device.
-      image1: 'Tap "Play Store".'
-      image2: 'Search "Pocket Code".'
-      image3: 'Tap "Install".'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
-      image2: Tap the banner.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: Let’s look inside the program.
-      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
-      image2: 'Tap object "parachute".'
-      image3: 'Choose "Scripts".'
-    step4:
-      title: Változó hozzáadása
-      description: The variables x and y allow you to control the position of your parachute.
-      image1: 'Tap "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tap "Set variable".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
-    step5:
-      title: Label variables
-      description: Label the x position of your parachute.
-      image1: Add a second variable just as before.
-      image2: 'Tap "New...".'
-      image3: 'Insert "x" and tap "OK".'
-    step6:
-      title: 'Set variable "y"'
-      description: Label and set the y starting position of your parachute.
-      image1: 'Label the second variable with "y".'
-      image2: 'Tap the field filled with "0.0".'
-      image3: 'Insert "-500" and tap "OK".'
-    step7:
-      title: Mindig
-      description: 'You need to control the position of your parachute at all times. Insert a "Forever" - loop to do so.'
-      image1: 'Tap "+".'
-      image2: 'Go to the "Control" - category.'
-      image3: 'Choose the "Forever" - brick.'
-      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
-    step8:
-      title: Insert and modify bricks
-      description: 'Add more bricks in your "Forever" loop to control your parachute. Inserting the variables x and y in your "Place at" brick enables you to control the position of your parachute.'
-      image1: 'Insert the shown bricks below the "Forever" - brick.'
-      image2: 'Tap the "100" field.'
-      image3: 'Tap "Variables" and choose "x".'
-      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
-    step9:
-      title: Change variables and values
-      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
-      image1:
-        subtext1: 'Set the size to "20" %.'
-        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
-        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
-      image2:
-        subtext1: 'Tap on "y" and choose "x".'
-        subtext2: 'Insert "-".'
-        subtext3: 'Tap "Sensors" and choose "inclination_x".'
-      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
-    step10:
-      title: Loudness sensor
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
-      image2:
-        subtext1: 'Tap "Sensors".'
-        subtext2: 'Choose "loudness".'
-        subtext3: 'Tap "Logic".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Insert "50".'
-      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
-    step11:
-      title: Change some more bricks
-      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
-      image1: 'Add a "Change variable" - brick and modify the value like above.'
-      image2:
-        subtext1: 'Add a "When I receive" - brick.'
-        subtext2: 'Place it below the last brick ("End of loop").'
-        subtext3: 'Add two "Set variable" - bricks.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
-    step12:
-      title: Back to objects
-      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
-      image1: 'Tap the "back" - button on your device.'
-      image2: 'Tap the "back" - button once more.'
-      image3: Now you should see this screen on your device.
-    step13:
-      title: 'Object "target"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tap "target" and choose "Scripts".'
-      image2: Add and modify the bricks as in the screenshot above.
-      image3: Add four more bricks like shown above.
-    step14:
-      title: 'Object "target"'
-      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
-      image1: 'Tap the field "y:" and choose "New".'
-      image2: 'Insert "goalx" and confirm with "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
-    step15:
-      title: 'Object "target"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
-      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
-      image2: Check if your values match the ones above.
-      image3: Go back until you see this screen.
-    step16:
-      title: 'Object "parcel"'
-      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
-      image1: 'Tap "parcel" and choose "Scripts".'
-      image2: Add all the bricks shown above.
-      image3:
-        subtext1: 'Change the value of the "Set size" - brick to "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
-    step17:
-      title: 'Object "parcel"'
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Add the above shown bricks below the last "Place at" - brick.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
-      image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"AND" is in the "Logic" category.'
-    step18:
-      title: 'Object "parcel"'
-      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
-      image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Add the above shown bricks and modify their values alike.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
-    step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Add the above shown bricks and modify their values alike.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: Go back until you see this screen, then go to the scripts of “Background”.
-    step20:
-      title: 'Object "Background"'
-      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
-      image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: 'Tap the "Play" - button.'
-      image2: Enjoy your game.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
-      image1: 'Object "background"'
-      image2: 'Object "parachute"'
-      image3: 'Object "parcel"'
-      image4: 'Object "restart"'
-      image5: 'Object "target"'
   stepByStep:
     title: Bevezetés lépésről lépésre
     start: 'Kiindulási helyzet:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -518,7 +356,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Keresés...
   search: Keresés
@@ -561,7 +398,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Ez az e-mail cím már létezik.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
@@ -655,3 +492,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Játékok
+    tag2: Mozgó animáció
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

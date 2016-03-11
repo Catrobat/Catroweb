@@ -38,6 +38,13 @@ services:
         arguments:
             - "AppBundle:Program"
 
+    tagrepository:
+        class: Catrobat\AppBundle\Entity\TagRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:Tag"
+
     notificationrepository:
         class: Catrobat\AppBundle\Entity\NotificationRepository
         factory_service: doctrine.orm.entity_manager
@@ -112,6 +119,7 @@ services:
             - "@screenshotrepository"
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
+            - "@tagrepository"
             - "@event_dispatcher"
 
     migrationmanager:

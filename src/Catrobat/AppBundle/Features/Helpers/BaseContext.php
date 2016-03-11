@@ -90,6 +90,15 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
 
     /**
      *
+     * @return \Catrobat\AppBundle\Entity\TagRepository
+     */
+    public function getTagRepository()
+    {
+        return $this->symfony_support->getTagRepository();
+    }
+
+    /**
+     *
      * @return \Catrobat\AppBundle\Services\ProgramFileRepository
      */
     public function getFileRepository()
@@ -216,6 +225,11 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         return $this->symfony_support->insertProgram($user, $config);
     }
 
+    public function insertTag($config)
+    {
+        return $this->symfony_support->insertTag($config);
+    }
+
     public function insertProgramDownloadStatistics($program, $config)
     {
         return $this->symfony_support->insertProgramDownloadStatistics($program, $config);
@@ -226,9 +240,9 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         return $this->symfony_support->generateProgramFileWith($parameters);
     }
 
-    public function upload($file, $user, $flavor = 'pocketcode')
+    public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
     {
-        return $this->symfony_support->upload($file, $user, $flavor);
+        return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
     }
 
     protected function getTempCopy($path)

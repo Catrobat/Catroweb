@@ -528,7 +528,19 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam 
-  
+
+tag-text: Tags
+extenstion-text: Extensions
+
+tags:
+  constant:
+    tag1: Game
+    tag2: Animation
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental
+
 admin:
   maintain:
     diskMaintenance: Disk maintenance

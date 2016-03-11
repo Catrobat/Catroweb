@@ -11,6 +11,8 @@ use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\StarterCategory;
+use Catrobat\AppBundle\Entity\Tag;
+use Catrobat\AppBundle\Entity\TagRepository;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
@@ -406,6 +408,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setApproved(false);
           $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
 
+          if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
+              $tag_repo = $em->getRepository('AppBundle:Tag');
+              $tags = explode(',', $programs[$i]['tags_id']);
+              foreach ($tags as $tag_id) {
+                  $tag = $tag_repo->find($tag_id);
+                  $program->addTag($tag);
+              }
+          }
+
           if($program->getApkStatus() == Program::APK_READY) {
             /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
             $apkrepository = $this->kernel->getContainer()->get('apkrepository');
@@ -421,6 +432,26 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       }
       $em->flush();
   }
+
+    /**
+     * @Given /^there are tags:$/
+     */
+    public function thereAreTags(TableNode $table)
+    {
+        $tags = $table->getHash();
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+        foreach($tags as $tag)
+        {
+            $insert_tag = new Tag();
+
+            $insert_tag->setEn($tag['en']);
+            $insert_tag->setDe($tag['de']);
+
+            $em->persist($insert_tag);
+            $em->flush();
+        }
+    }
 
   /**
    * @When /^I click "([^"]*)"$/
@@ -1443,5 +1474,32 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       assertContains($url, $feature_url);
     }
   }
+
+    /**
+     * @When /^I press on the tag "([^"]*)"$/
+     */
+    public function iPressOnTheTag($arg1)
+    {
+        $arg1 = '#' . $arg1;
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @Given /^I search for "([^"]*)" with the searchbar$/
+     */
+    public function iSearchForWithTheSearchbar($arg1)
+    {
+
+        $this->fillField('search-input-header', $arg1);
+        $this->iClick('#search-header');
+    }
+
+
 
 }

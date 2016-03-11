@@ -30,6 +30,7 @@ programs:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: मिटायें
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: उपयोग की शर्ते
   headline: Welcome to the Catrobat Community!
@@ -133,175 +142,14 @@ termsOfUse:
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 March 2014
 help:
-  hourOfCode:
-    title: स्काइडाइविंग स्टीव
-    step0:
-      title: स्काइडाइविंग स्टीव
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: पॉकेट कोड को कैसे अपने मोबाइल यंत्र पर स्थापित करे।
-      image1: '"प्ले स्टोर" का चयन करे'
-      image2: '"पॉकेट कोड" में खोंजे।'
-      image3: '"स्थापित करें" का चयन करे |'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'अपने मोबाइल उपकरण के "पॉकेट कोड" में "अन्वेषण" का चयन करे।'
-      image2: बैनर का चयन करे।
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: चलिए प्रोग्राम को देखते हैं।
-      image1: 'विकल्प-सूची खोले और "स्काइडाइविंग स्टीव खोले" का चयन करे।'
-      image2: "वस्तु 'वायुछ्त्र' का चयन करे।"
-      image3: '"लिपियों" का चयन करें।'
-    step4:
-      title: चर जोड़ें
-      description: चर एक्स और वाई आपको अपने वायु्छत्र की स्थिति को नियंत्रित करने के लिए अनुमति देता हैं।
-      image1: '"+" का चयन करे'
-      image2: 'Go to the category "Variables".'
-      image3: '"चर अंकित करे" का चयन करें।'
-      image4: '"चर अंकित करे" वाली ईंट को "जब प्रोग्राम शुरू किया गया था" वाली ईंट के नीचे ले जाए और वहां छोड़ दे।'
-    step5:
-      title: Label variables
-      description: अपने पैराशूट की एक्स स्थिति को नाम दे |
-      image1: पहले जैसे एक दूसरा चर जोड़ें।
-      image2: '"नया..." का चयन करें।'
-      image3: '"एक्स" को जोड़े और "ठीक है" का चयन करे।'
-    step6:
-      title: 'Set variable "y"'
-      description: अपने वायुछ्त्र की वाई प्रारम्भिक स्तिथि को नामे एवम् अंक दे।
-      image1: 'दुसरे चर को "y" का नाम दे।'
-      image2: '"0.0" से भरे क्षेत्र का चयन करे।'
-      image3: '"-५००" डालें और "ठीक" का चयन करें ।'
-    step7:
-      title: हमेशा क लिए
-      description: 'आपको सभी समय पर अपने वायुछ्त्र की स्थिति को नियंत्रित करने की जरूरत है। एक "हमेशा के लिए" - ऐसा पाश डालें जो यह कर पायें।'
-      image1: '"+" का चयन करे'
-      image2: '"नियंत्रण" - श्रेणी में जायें।'
-      image3: '"हमेशा के लिए" वाली ईंट का चयन करें।'
-      image4: '"हमेशा के लिए" वाली ईंट को "सेट चर" के नीचे ले जाके डाल दें।'
-    step8:
-      title: Insert and modify bricks
-      description: 'अपने वायुछ्त्र को नियंत्रित करने के लिए "हमेशा के लिए" वाले पाश में अधिक ईंटे जोड़े। चर x और y को  "इस जगह पर रखो" वाली ईंट में डालने से वो वायुछ्त्र की स्थिति को नियंत्रित करने में सक्षम हो जाता हैं।'
-      image1: '"हमेशा के लिए" - ईंट के नीचे दिखाए गए ईंटों को सम्मिलित करें।'
-      image2: '"100" फ़ील्ड को टैप करें।'
-      image3: '"चर" टैप करें और "x" को चुनें।'
-      image4: 'ऊपर दी हुई वही ईंट में "200" पर टैप करें , "चर" श्रेणी के लिए जाए और "y" चुनें। "ठीक" पर टेप करके पुष्टि करें।'
-    step9:
-      title: Change variables and values
-      description: चर वाई को -3 द्वारा परिवर्तित करें ताकि आपका वायुछ्त्र भूमि में अच्छे से उतरे।चर x को अपने मोबाइल उपकरण के झुकाव कोण के अनुसार परिवर्तित करें।
-      image1:
-        subtext1: 'आकार को "20" % पर रखे|'
-        subtext2: 'पहले "चर ठीक करें" वाले ईंट का मान बदल के "-३" करें |'
-        subtext3: 'दुसरे "चर ठीक करें" वाले ईंट की "0.0" को टैप करें!'
-      image2:
-        subtext1: '"y" पर टैप करें और "x" को चुने |'
-        subtext2: '"-" सम्मिलित करें।'
-        subtext3: '"सेंसर" पर टैप करें और "झुकाव_x" को चुने।'
-      image3: 'यदि आपका सम्मिलित किया हुआ सूत्र स्क्रीनशॉट से मिलता है तो "ठीक" के साथ पुष्टि करें|'
-    step10:
-      title: Loudness sensor
-      description: 'आप अपने वायुछ्त्र की ऊँचाई को आपने मोबाइल उपकरण में दिए हूए प्रबलता संसाधक के साथ नियंत्रण कर सकते हैं। ऐसा करने के लिए,  "अगर 1 सच्चा है तो फिर" वाली ईंट को डाले और संशोधित करें।'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: '"अगर 1 सच्चा है तो फिर" - ईंट में "0" मान वाली फ़ील्ड को टैप करें ।'
-      image2:
-        subtext1: '"सेंसर" टैप करें।'
-        subtext2: "'लाउडनेस' का चयन करें।"
-        subtext3: '"तर्क" टैप करें।'
-        subtext4: 'Choose ">".'
-        subtext5: '"50" सम्मिलित करें।'
-      image3: 'यदि आपका सूत्र स्क्रीनशॉट में मिलता है तो "ठीक" टैप करें।'
-    step11:
-      title: Change some more bricks
-      description: जब आप इस खेल को पुनः आरंभ करते हैं, तब आपके वायुछ्त्र की आरंभिक स्थिति आपकी पहली प्रारंभिक स्थिति से मेल खानी चाहिए। इस के लिए आपको जोड़ें नीचे चित्र में दिखाए गए तीन ईंटों को डालना एवम संशोधित करने की जरूरत है।
-      image1: 'एक "परिवर्तन चर" - ईंट को जोडे और मान को ऊपर की तरह संशोधित करें|'
-      image2:
-        subtext1: '"जब मुझे प्राप्त होगा" - ईंट जोडें'
-        subtext2: 'इसे आखिरी ईंट ("लूप का अंत") के नीचे रखें| '
-        subtext3: 'दो "चर को अंक दें" - ईंट जोड़ें।'
-      image3: '"संदेश 1" से भरा हुआ फील्ड टैप करें, "नया..." चुनें और "पुनरारंभ" सम्मिलित करें।'
-      image4: 'दो "चर को अंक दें" - ईंटों के मूल्यों को ऊपर के स्क्रीनशॉट मैं दिखाया है वैसे बदलें|'
-    step12:
-      title: Back to objects
-      description: "आप अब अपने 'वायुछ्त्र' वस्तु को सफलतापूर्वक बना चुके है! अगले वस्तु को संशोधित करने के लिए वापस वस्तु अवलोकन पर जाए।"
-      image1: 'अपने डिवाइस पर "वापस" बटन टैप करें|'
-      image2: 'एक बार और "वापस" बटन टैप करें|'
-      image3: अब आपको अपने डिवाइस पर यह स्क्रीन दिखना चाहिए।
-    step13:
-      title: 'ऑब्जेक्ट "लक्ष्य"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: '"लक्ष्य" पर टैप करें और "लिपियां" चुनें।'
-      image2: 'ईंटों को जोड़े और संशोधित करें जैसा स्क्रीनशॉट में दिया है '
-      image3: ऊपर दिखाए गए की तरह चार और ईंटों को जोड़ें।
-    step14:
-      title: 'ऑब्जेक्ट "लक्ष्य"'
-      description: 'जब आप इस खेल का पुनः आरंभ करते हैं, तब आपको अपने लक्ष्य की स्थिति को  परिवर्तित करने की जरूरत है। इस कदम के लिए, चर goalx को अंक दे और goaly को यादृच्छिक फलन जैसा दर्ज करे |'
-      image1: 'फ़ील्ड ": y" टैप करें और चुनें "नया"।'
-      image2: '"Goalx" डालें और "ठीक" के साथ की पुष्टि करें।'
-      image3: '"0.0" पर टैप करें और सूत्र "रैंडम(-४००,४००)" का चयन करें'
-      image4: 'चरण 1-३ को दुसरे "चर ठीक करें" - ईंट के लिए दोहराए, चर "गोल वाई" का नामकरण रहने दे और उसके मान को "रैंडम(४००, -७००)" पर रखे'
-    step15:
-      title: 'ऑब्जेक्ट "लक्ष्य"'
-      description: 'चर गोलएक्स  और गोलवाई से अपने लक्ष्य की स्थिति को नियंत्रित करने के लिए, "इस जगह पर रखें" वाली ईंट को संशोधित करें।'
-      image1: '"इस जगह" वाली ईंट के मान को बदल कर "गोल एक्स" और "गोल वाई" करें'
-      image2: जाँच करें की आपके मान ऊपर के मूल्यों से मेल खाते हैं या नहीं |
-      image3: वापस जाएँ जब तक आपको यह स्क्रीन दिख जाए
-    step16:
-      title: "ऑब्जेक्ट 'पार्सल'"
-      description: |-
-        यहाँ आप अपने वस्तु 'गठरी' को संशोधित करेंगे। जब वस्तु 'गठरी', "प्रारंभ करें" संदेश को प्राप्त करता है, तब पार्सल दिखाया जाना चाहिए। चर एक्स और वाई के साथ गठरी की स्थिति को नियंत्रित करें।
-      image1: '"पार्सल" पर टैप करें और "लिपियां" चुनें।'
-      image2: ऊपर दिखाए गए सभी ईंटों को जोडे।
-      image3:
-        subtext1: '"आकार ठीक करे" वाली ईंट के मान को "५०" करें |'
-        subtext2: '"जब मुझे प्राप्त हुआ" वाली ईंट के अन्दर, "पुनः आरम्भ" को चुने और एक नया सन्देश "प्रारंभ" बनाए |'
-        subtext3: '"इस जगह" वाली ईंट के मूल्यों को बदल कर "एक्स" और "वाई" करें |'
-    step17:
-      title: "ऑब्जेक्ट 'पार्सल'"
-      description: 'गठरी लक्ष्य पर पहुंची है या नही, यह जांचने के लिए, आपको "अगर 1 सच्चा है तो फिर" वाली ईंट की जरूरत है ।'
-      image1: 'ऊपर दिखाई हुई ईंटे को "इस जगह" वाली ईंट के नीचे रखें !'
-      image2: '"वाई बदले" वाली ईंट के अन्दर के मूल्य को "-५" करें | फिर "अगर 1 सच्चा है तो फिर" के अंदर "1" को चुने|'
-      image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"और" "तर्क" श्रेणी में है।'
-    step18:
-      title: "ऑब्जेक्ट 'पार्सल'"
-      description: यदि गठरी को सफलतापूर्वक लक्ष्य पर पहुंचाना हैं, तो आप गठरी की स्थिति को संशोधित करे।अन्य वस्तुओं को अपनी जीत के बारे में बताने के लिए एक सन्देश भेजे।
-      image1:
-        subtext1: '"इस जगह" के मूल्यों को बदल कर "स्थान_एक्स" और "गोल वाई+१००" करें!'
-        subtext2: '"प्रसारण" को चुने और एक नया सन्देश "जीत" नाम से बनाए |'
-      image2: ऊपर दिए हुए ईंटो को डाले और उनके मूल्यों को वैसे ही बदले |
-      image3: 'पीछे जाए जब तक आपको यह स्क्रीन ना दिखे | वस्तु "पुनः आरम्भ" की लिपियो पर जाए |'
-    step19:
-      title: "ऑब्जेक्ट 'पुनः आरंभ'"
-      description: "यहाँ आप 'पुनः आरंभ' वस्तु को संशोधित करेंगे। वस्तु का व्यवहार और स्थिति को परिभाषित करे।"
-      image1: ऊपर दिए हुए ईंटो को डाले और उनके मूल्यों को वैसे ही बदले |
-      image2: 'ऊपर दिखाए गए ईंटों को जोडें और "प्रसारण"-सन्देश को "प्रारंभ" में बदल दे।'
-      image3: "वापस जाएँ जब तक आपको यह स्क्रीन दिखती है, फिर 'पृष्ठभूमि' की स्क्रिप्ट्स पर जाएँ"
-    step20:
-      title: 'Object "Background"'
-      description: '"पृष्ठभूमि" वस्तु को संशोधित करके प्रोग्राम पूरा करें। अब आप अपना खेल खेलना शुरू कर सकते हैं। आनंद लो!'
-      image1:
-        subtext1: 'ऊपर दिखाए गए ईंटों को जोडें और "प्रसारण"-सन्देश को "स्टार्ट" सेट करें।'
-        subtext2: '"प्ले" - बटन टैप करें'
-      image2: अपने खेल का आनंद लें।
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: चित्र को विस्तार से देखने के लिए उनका चयन करे। यदि आपका खेल सही ढंग से काम नहीं करता है, तो अपने वस्तुओं की लिपियों की समीक्षा करें।
-      image1: 'ऑब्जेक्ट "पृष्ठभूमि"'
-      image2: "ऑब्जेक्ट 'पैराशूट'"
-      image3: "ऑब्जेक्ट 'पार्सल'"
-      image4: "ऑब्जेक्ट 'पुनः आरंभ'"
-      image5: 'ऑब्जेक्ट "लक्ष्य"'
   stepByStep:
     title: कदम दर कदम परिचय
     start: 'शुरू करने की स्थिति:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -519,7 +367,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Search...
   search: खोजें
@@ -656,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: क्रीडाये
+    tag2: चलता हुआ एनीमेशन
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

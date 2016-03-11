@@ -30,6 +30,7 @@ programs:
     viewed: Xem nhiều nhất
     downloaded: Tải về nhiều nhất
   random: Chương trình ngẫu nhiên
+  related: Related Programs
   downloads: '%downloads% Tải về'
   sample: Example Programs
   views: '%views% Lượng xem'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Làm ơn hãy cập nhật ứng dụng của bạn lên phiên bản mới nhất để có thể tải chương trình này.
   btnClosePopup: Đồng ý
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Xóa
 passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: chia sẻ chiếc bánh của bạn cùng với công thức
     item2: cung cấp bản quyền cho những người đã truyền cảm hứng cho bạn
   version: Phiên bản 1.1, ngày 2 tháng 4 năm 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Điều khoản sử dụng
   headline: Chào mừng đến với cộng đồng Catrobat!
@@ -133,173 +142,14 @@ termsOfUse:
   bottom2: 'Vui lòng gửi bất cứ gợi ý nào về điều khoản sự dụng tới %email-webmaster%.'
   version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
 help:
-  hourOfCode:
-    title: Steve Nhảy Dù
-    step0:
-      title: Steve Nhảy Dù
-      description: Trong hướng dẫn các bước sau đây, bạn sẽ học cách làm thế nào để thiết lập chương trình hành động của Steve và bưu kiện. Hình ảnh dưới đây sẽ chỉ bạn cách điều khiển Steve trong trò chơi. Bạn phải di chuyển Steve vượt qua các mục tiêu và nhấn vào màn hình để thả các bưu kiện. Chúc bạn may mắn...
-    step1:
-      title: 'Cài đặt "Pocket Code"'
-      description: Làm thế nào để cài đặt Pocket Code trên điện thoại di động của bạn.
-      image1: 'Nhắn "Play Store".'
-      image2: 'Tìm kiếm "Pocket Code".'
-      image3: 'Nhấn "Cài đặt".'
-    step2:
-      title: Tải về dự án
-      description: 'Làm thế nào để tài về chương trình cần thiết cho phép bạn thiết lập chương trình "Steve Nhảy Dù".'
-      image1: 'Nhấn "Khám phá" trong "Pocket Code" trên điện thoại của bạn.'
-      image2: Nhấn vào biểu ngữ.
-      image3: 'Tải về chương trình "Steve Nhảy Dù".'
-    step3:
-      title: Mở dự án
-      description: Hãy cùng nhau khám phá chương trình.
-      image1: 'Kéo xuống danh sách và nhấn "Mở Steve Nhảy Dù".'
-      image2: Nhấn vào cái dù.
-      image3: 'Chọn "Kịch bản".'
-    step4:
-      title: Thêm biến
-      description: Các biến x và y cho phép bạn điều khiển vị trí dù của bạn.
-      image1: 'Nhấn "+".'
-      image2: 'Đến mục "Biến".'
-      image3: 'Nhấn "Tạo biến".'
-      image4: 'Kéo và thả "Tạo biến"- mục dưới "Chương trình đã bắt đầu".'
-    step5:
-      title: Tên biến
-      description: Tạo vị trí x của chiếc dù của bạn.
-      image1: Thêm biến thứ hai giống như trước.
-      image2: 'Nhấn "Mới...".'
-      image3: 'Chèn "x" và nhấn "Đồng ý".'
-    step6:
-      title: 'Tạo biến "y"'
-      description: Đặt tên và tạo y vị trí bắt đầu dù của bạn.
-      image1: 'Tạo tên biến thứ hai "y".'
-      image2: 'Nhấn và điền vào phần "0.0".'
-      image3: 'Chèn "-500" và nhấn "Đồng ý".'
-    step7:
-      title: Vĩnh viễn
-      description: 'Bạn cần phải điều khiển vị trí dù của mình tại mọi thời điểm. Nhấn vào mục "Vĩnh viễn" - vòng lặp để thực hiện.'
-      image1: 'Nhấn "+".'
-      image2: 'Đi tới mục "Điều khiển".'
-      image3: 'Chọn mục "Vình viễn".'
-      image4: 'Kéo và thả "Vĩnh viễn"-mục dưới "Tạo biến".'
-    step8:
-      title: Chèn và sửa đổi các mục
-      description: 'Thêm nhiều much vào vòng lặp "Vĩnh viễn" để điều khiển dù của bạn. Chèn các biến x và y vào mục "Đặt ở" để giúp bạn điều khiển vị trí dù của mình.'
-      image1: 'Nhấn vào mục đã hiện ra phía dưới "Vĩnh viễn".'
-      image2: 'Nhấn "100".'
-      image3: 'Nhấn "Biến" và chọn "x".'
-      image4: 'Nhấn "200" trong cùng mục ở đầu trang, tới phần "Biến" và nhấn "y". Xác nhận với "Đồng ý".'
-    step9:
-      title: Thay đổi biến và giá trị
-      description: Thay đổi biến y bởi -3 để dù của bạn lượn xuống mặt đất. Thay đổi biến x để dù của bạn di chuyển một góc nghiêng so với điện thoại di động của bạn.
-      image1:
-        subtext1: 'Thiết lập kích thước tới "20" %.'
-        subtext2: 'Thay đổi giá trị đầu tiên "Đặt biến" - tới mục "-3".'
-        subtext3: 'Tại biến thứ hai "Đặt biến" - nhấp vào trường mục "0.0".'
-      image2:
-        subtext1: 'Nhấp vào "y" và chọn "x".'
-        subtext2: 'Chèn "-".'
-        subtext3: 'Bấm vào "Cảm biến" và chọn "góc nghiêng_x".'
-      image3: 'Kiểm tra xem công thức được chèn vào của bạn có phù hợp với một trong ảnh chụp màn hình và xác nhận với "Đồng ý".'
-    step10:
-      title: Cảm biến âm sắc
-      description: 'Bạn có thể kiểm soát chiều cao của dù với nút cảm biến âm lượng của điện thoại di động. Để làm như vậy, thêm và chỉnh sửa gạch "Nếu 1 là đúng thì".'
-      image1:
-        subtext1: 'Thêm gạch "Nếu 1 là đúng thì" và đặt nó dưới viên gạch cuối cùng "Thay đổi biến".'
-        subtext2: 'Bấm vào trường giá trị "0" trong viên gạch "Nếu 1 là đúng thì".'
-      image2:
-        subtext1: 'Bấm vào "Cảm biến".'
-        subtext2: 'Chọn "âm lượng".'
-        subtext3: 'Bấm vào "Logic".'
-        subtext4: 'Chọn ">".'
-        subtext5: 'Chèn "50".'
-      image3: 'Kiểm tra nếu công thức của bạn phù hợp với công thức trong ảnh chụp màn hình và bấm vào "Đồng ý".'
-    step11:
-      title: Thay đổi một số viên gạch khác
-      description: Khi bạn khởi động lại trò chơi, vị trí bắt đầu chiếc dù của bạn phải phù hợp với vị trí ban đầu của bạn. Đối với điều này, bạn cần phải thêm vào và sửa đổi ba viên gạch như hình minh hoạ ảnh dưới đây.
-      image1: 'Thêm một "Thay đổi biến " và sửa đổi giá trị như ở trên.'
-      image2:
-        subtext1: 'Thêm viên gạch "Khi tôi nhận được".'
-        subtext2: 'Đặt nó phía dưới viên gạch cuối ("Kết thúc vòng lặp").'
-        subtext3: 'Thêm hai viên gạch "Đặt biến".'
-      image3: 'Nhấp vào trường với "Tin nhắn 1", chọn "Mới..." và chèn "Khởi động lại".'
-      image4: 'Thay đổi các giá trị của hai hàm "Đặt biến" như hiển thị trong hình ở trên.'
-    step12:
-      title: Quay lại với đối tượng
-      description: 'Bây giờ bạn đã hoàn thành đối tượng "chiếc dù" của bạn một cách thành công! Quay về tổng quan đối tượng để tiếp tục sửa đổi đối tượng kế tiếp.'
-      image1: 'Nhấp vào nút "trở lại" trên thiết bị của bạn.'
-      image2: 'Nhấp vào nút "trở lại" một lần nữa.'
-      image3: Bây giờ bạn sẽ thấy màn hình này trên điện thoại của bạn.
-    step13:
-      title: 'Đối tượng "mục tiêu"'
-      description: 'Ở đây bạn bắt đầu sửa đổi các đối tượng "mục tiêu". Thêm những viên gạch để kiểm soát vị trí và kích thước của mục tiêu của bạn.'
-      image1: 'Bấm vào "mục tiêu" và chọn "Tập lệnh".'
-      image2: Thêm và chỉnh sửa những viên gạch như trong ảnh chụp màn hình ở trên.
-      image3: Thêm bốn viên gạch giống như hiển thị ở trên.
-    step14:
-      title: 'Đối tượng "mục tiêu"'
-      description: Khi bạn khởi động lại trò chơi, vị trí của mục tiêu của bạn cần phải thay đổi. Đối với bước này, đặt biến goalx và goaly với các chức năng ngẫu nhiên.
-      image1: 'Nhấp vào trường "y:" và chọn "Mới".'
-      image2: 'Chèn "goalx" và xác nhận với "Đồng ý".'
-      image3: 'Nhấp trường "0.0" và chèn công thức "ngẫu nhiên (-400, 400)".'
-      image4: 'Lặp lại các bước 1-3 cho hai viên gạch "Đặt biến", Mong muốn đặt tên biến "goaly" và đặt giá trị "ngẫu nhiên (400,-700)".'
-    step15:
-      title: 'Đối tượng "mục tiêu"'
-      description: 'Sửa đổi của bạn "Vị trí tại" gạch để kiểm soát vị trí của mục tiêu của bạn với biến goalx và goaly.'
-      image1: 'Thay đổi các giá trị của "Vị trí tại" - gạch để "goalx" và "goaly".'
-      image2: Kiểm tra nếu giá trị của bạn phù hợp với những giá trị ở trên.
-      image3: Quay trở lại cho đến khi bạn thấy màn hình này.
-    step16:
-      title: 'Đối tượng "bưu kiện"'
-      description: 'Ở đây bạn bắt đầu sửa đổi đối tượng của bạn "bưu kiện". Khi đối tượng "bưu kiện" nhận được tin nhắn "bắt đầu", các bưu kiện sẽ được hiển thị. Thiết lập vị trí của bưu kiện với các biến x và y.'
-      image1: 'Bấm vào "bưu kiện" và chọn "Tập lệnh".'
-      image2: Thêm tất cả những viên gạch như hiển thị ở trên.
-      image3:
-        subtext1: 'Thay đổi giá trị của gạch "Thiết lập kích thước " để "50".'
-        subtext2: 'Nhấp vào trường "khởi động lại" trong gạch "khi tôi nhận được" và tạo tin nhắn mới: "bắt đầu".'
-        subtext3: 'Thay đổi các giá trị của gạch "Vị trí tại" để "x" và "y".'
-    step17:
-      title: 'Đối tượng "bưu kiện"'
-      description: 'Để kiểm tra xem liệu các bưu kiện đã đạt mục tiêu, bạn cần gạch "Nếu 1 là đúng thì".'
-      image1: 'Thêm ở trên các gạch phía dưới gạch cuối cùng "Đặt tại".'
-      image2: 'Thay đổi giá trị trong gạch "Thay đổi Y bởi" thành "-5". Rồi bấm vào trường "1" trong "Nếu 1 là đúng thì".'
-      image3:
-        subtext1: '"position_x" và "position_y" có thể được tìm thấy trong mục "Đối tượng".'
-        subtext2: '"goaly" và "goalx" nằm trong mục "Biến".'
-        subtext3: '"Và" là trong mục "Logic".'
-    step18:
-      title: 'Đối tượng "bưu kiện"'
-      description: Nếu các bưu kiện chạm mục tiêu thành công, bạn cần phải sửa đổi vị trí của các bưu kiện. Gửi tin nhắn cho các đối tượng khác để cho họ biết rằng bạn đã thắng.
-      image1:
-        subtext1: 'Thay đổi các giá trị của gạch "Vị trí tại" để "position_x" và "goaly + 100".'
-        subtext2: 'Nhấp trường "Phát sóng" và tạo ra một thông điệp mới "giành chiến thắng".'
-      image2: Thêm các viên gạch hiển thị ở trên và sửa đổi các giá trị của chúng như nhau.
-      image3: 'Quay trở lại cho đến khi bạn nhìn thấy màn hình này trên điện thoại của bạn. Đi đến các tập tệp của đối tượng "khởi động lại".'
-    step19:
-      title: 'Đối tượng "khởi động lại"'
-      description: 'Ở đây bạn sửa đổi các đối tượng "khởi động lại". Xác định vị trí và hành vi của đối tượng.'
-      image1: Thêm các viên gạch hiển thị ở trên và sửa đổi các giá trị của chúng như nhau.
-      image2: 'Thêm những viên gạch được hiển thị ở trên và thiết lập thông báo "phát sóng" để "khởi động lại".'
-      image3: 'Quay trở lại cho đến khi bạn thấy màn hình này, sau đó đi đến tập tệp "Nền".'
-    step20:
-      title: 'Đối tượng "nền"'
-      description: 'Hoàn thành chương trình bằng cách sửa đổi đối tượng "nền". Bây giờ bạn có thể bắt đầu chơi trò chơi của bạn. Chúc vui vẻ!'
-      image1:
-        subtext1: 'Thêm những viên gạch được hiển thị ở trên và thiết lập thông báo "phát sóng" để "khởi động".'
-        subtext2: 'Bấm vào nút "Chơi".'
-      image2: Hãy thưởng thức trò chơi của bạn.
-      image3: 'Bạn đã hoàn tất các hướng dẫn "Steve Nhảy dù". Chúng tôi sẽ rất vui nếu tìm thấy các bản phối của "Steve Nhảy dù" trên share.catrob.at/pocketcode---chỉ cần thay đổi nó như bạn thích và tải lên nó một lần nữa từ tài khoản của bạn.'
-    step21:
-      title: Kiểm tra tập lệnh của bạn!
-      description: Click vào hình ảnh dưới đây để phóng to chúng. Xem lại các tập tệp của đối tượng của bạn nếu trò chơi của bạn không làm việc một cách chính xác.
-      image1: 'Đối tượng "nền"'
-      image2: 'Đối tượng "dù"'
-      image3: 'Đối tượng "bưu kiện"'
-      image4: 'Đối tượng "khởi động lại"'
-      image5: 'Đối tượng "mục tiêu"'
   stepByStep:
     title: Giới thiệu từng bước
     start: 'Vị trí bắt đầu:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Làm một chương trình mới
       detail:
@@ -517,7 +367,6 @@ oauth:
   username_chooser: 'Hãy chọn tên người dùng:'
   username_hint: Tên người dùng không nên là tên thật của bạn.
   usernameTaken: Tên người dùng đã tồn tại, hãy chọn tên khác.
-  noReset: Người sử dụng Facebook và Google + không có mật khẩu để đặt lại.
 search:
   dotdotdot: Tìm kiếm...
   search: Tìm kiếm
@@ -654,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Trò chơi
+    tag2: Di chuyển hình ảnh động
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

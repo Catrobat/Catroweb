@@ -30,10 +30,11 @@ programs:
     viewed: Mais vistos
     downloaded: Mais baixados
   random: Programas Aleatórios
+  related: Programas Relacionados
   downloads: '%downloads% downloads'
   sample: Exemplos de programas
   views: '%views% visualizações'
-  submitted: Submitted Programs
+  submitted: Programas enviados
   uploaded: Programas carregados
   reportAsInappropriate: Reportar como impróprio
   languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
@@ -46,7 +47,11 @@ programs:
   updateAppHeader: Atualizar App
   updateAppText: Por favor, atualize o seu aplicativo para a versão mais recente para poder baixar este programa.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
+  checkout_this_program: Confira este programa do Catrobat
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Apagar
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -98,6 +103,10 @@ licenseToPlay:
     item1: compartilhar seus bolos juntamente com a receita
     item2: dar crédito a quem te inspirou
   version: Versão 1.1, 2 de abril de 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Termos de Uso
   headline: Bem-vindo à comunidade Catrobat!
@@ -135,174 +144,14 @@ termsOfUse:
   bottom2: 'Por favor, envie quaisquer sugestões sobre estes Termos de Uso para %email-webmaster%.'
   version: Versão 1.3, 4 de março de 2014
 help:
-  hourOfCode:
-    title: Skydiving Steve
-    step0:
-      title: Skydiving Steve
-      description: No seguinte tutorial, você aprenderá, passo a passo, como programar o comportamento de Steve e seu pacote. As imagens abaixo te mostram como controlar Steve durante o jogo. Você tem que direcionar Steve para bem acima do alvo e tocar o pano de fundo para entregar o pacote. Boa sorte...
-    step1:
-      title: 'Instalar "Pocket Code"'
-      description: Como instalar o Pocket Code no seu dispositivo móvel.
-      image1: 'Toque em "Play Store".'
-      image2: 'Pesquisar "Pocket Code".'
-      image3: 'Toque em "Instalar".'
-    step2:
-      title: Baixar Projeto
-      description: 'Como baixar o programa essencial para programar o "Skydiving Steve".'
-      image1: 'Toque em "Explorar" no "Pocket Code" em seu dispositivo móvel.'
-      image2: Toque o banner.
-      image3: 'Baixe o programa "Skydiving Steve".'
-    step3:
-      title: Abrir Projeto
-      description: Vamos olhar dentro do programa.
-      image1: 'Role o menu para baixo e toque em "Abrir Skydiving Steve".'
-      image2: 'Toque o objeto "pára-quedas".'
-      image3: 'Escolha "Scripts".'
-    step4:
-      title: Adicionar Variável
-      description: As variáveis x e y permitem que você controle a posição de seu pára-quedas.
-      image1: 'Toque em "+".'
-      image2: 'Ir para a categoria "Variáveis".'
-      image3: 'Toque em "Definir variável".'
-      image4: 'Arraste e solte o bloco "Definir variável" abaixo do bloco "Quando o programa iniciar".'
-    step5:
-      title: Rotular variáveis
-      description: Rotular a posição x de seu pára-quedas.
-      image1: Adicione uma segunda variável como antes.
-      image2: 'Toque em "Novo...".'
-      image3: 'Insira "x" e toque em "OK".'
-    step6:
-      title: 'Defina a variável "y"'
-      description: Rotule e defina o ponto inicial y de seu pára-quedas.
-      image1: 'Rotule a segunda variável com "y".'
-      image2: 'Toque o campo preenchido com "0,0".'
-      image3: 'Insira "-500" e toque em "OK".'
-    step7:
-      title: Sempre
-      description: 'Você precisa controlar a posição do seu pára-quedas a todo momento. Insira um loop "Sempre" para fazê-lo.'
-      image1: 'Toque em "+".'
-      image2: 'Vá para a categoria "Controle".'
-      image3: 'Escolha o bloco "Sempre".'
-      image4: 'Arraste e solte o bloco "Sempre" abaixo do bloco "Definir Variável".'
-    step8:
-      title: Inserir e modificar blocos
-      description: 'Adicione mais blocos em seu loop "Sempre" para controlar seu pára-quedas. Inserindo as variáveis x e y em seu bloco "Posicionar em" te permite controlar a posição de seu pára-quedas.'
-      image1: 'Insira, abaixo do bloco "Sempre", os blocos mostrados.'
-      image2: 'Toque o campo "100".'
-      image3: 'Toque em "Variáveis" e escolha "x".'
-      image4: 'Toque em "200" no mesmo bloco no topo, vá para a categoria "Variáveis" e escolha "y". Confirme com "OK".'
-    step9:
-      title: Alterar variáveis e valores
-      description: Altere a variável y em -3 para deixar seu pára-quedas deslizar até o chão. Altere a variável x para que seu pára-quedas siga o ângulo de inclinação de seu dispositivo móvel.
-      image1:
-        subtext1: 'Definir o tamanho para "20" %.'
-        subtext2: 'Altere o valor do primeiro bloco "Definir variável" para "-3".'
-        subtext3: 'No segundo bloco "Definir variável" toque o campo "0.0".'
-      image2:
-        subtext1: 'Toque em "y" e escolha "x".'
-        subtext2: 'Insira "-".'
-        subtext3: 'Toque em "Sensores" e escolha "inclinação_x".'
-      image3: 'Verifique se a fórmula inserida corresponde à imagem e confirme com "OK".'
-    step10:
-      title: Sensor de ruído
-      description: 'Você pode controlar a altura do seu pára-quedas com o sensor de ruído de seu dispositivo móvel. Para fazer isso, adicione e modifique um bloco "Se 1 é verdadeiro, então".'
-      image1:
-        subtext1: 'Adicione um bloco "Se 1 é verdadeiro, então" e coloque-o abaixo do último bloco "Alterar variável".'
-        subtext2: 'Toque o campo com o valor "0" dentro do bloco "Se 1 é verdadeiro, então".'
-      image2:
-        subtext1: 'Toque em "Sensores".'
-        subtext2: 'Escolha "Ruído".'
-        subtext3: 'Toque em "Lógica".'
-        subtext4: 'Escolha ">".'
-        subtext5: 'Insira "50".'
-      image3: 'Verifique se sua fórmula coincide com a fórmula da imagem e toque em "OK".'
-    step11:
-      title: Mudar alguns blocos mais
-      description: Quando você iniciar o jogo, a posição inicial de seu pára-quedas deve coincidir com sua posição inicial. Para isso, você precisa adicionar e modificar três blocos, conforme mostrado nas imagens abaixo.
-      image1: 'Adicione um bloco "Alterar variável" e modifique o valor como acima.'
-      image2:
-        subtext1: 'Adicionar um bloco "Quando receber".'
-        subtext2: 'Coloque-o abaixo do último bloco ("Fim do loop").'
-        subtext3: 'Adicione dois blocos "Definir variável".'
-      image3: 'Toque o campo preenchido com "Mensagem 1", escolha "Novo..." e insira "reiniciar".'
-      image4: 'Altere os valores de dois blocos "Definir variável" como mostrado na imagem acima.'
-    step12:
-      title: Voltar para objetos
-      description: 'Você terminou com sucesso seu objeto "pára-quedas"! Navegue de volta para a visão geral de objetos para modificar o próximo objeto.'
-      image1: 'Toque o botão "voltar" no seu dispositivo.'
-      image2: 'Toque o botão "voltar" mais uma vez.'
-      image3: Agora, você deveria ver esta tela em seu dispositivo.
-    step13:
-      title: 'Objeto "alvo"'
-      description: 'Aqui, você começa modificando o objeto "alvo". Adicione blocos para controlar a posição e o tamanho de seu alvo.'
-      image1: 'Toque em "alvo" e escolha "Scripts".'
-      image2: Adicione e modifique blocos como na imagem acima.
-      image3: Adicione mais quatro blocos como mostrado acima.
-    step14:
-      title: 'Objeto "alvo"'
-      description: Quando você reinicia o jogo, a posição de seu alvo precisa ser alterada. Para isso, defina as variáveis goalx e goaly utilizando a função randomizar.
-      image1: 'Toque no campo "y:" e escolha "Novo".'
-      image2: 'Insira "goalx" e confirme com "OK".'
-      image3: 'Toque no campo "0.0" e insira a fórmula "aleatório(-400, 400)".'
-      image4: 'Repita os passos 1 a 3 para o segundo bloco "Definir variável" para nomear a variável "goaly" e definir o valor como "aleatorio(400, -700)".'
-    step15:
-      title: 'Objeto "alvo"'
-      description: 'Modifique seu bloco "Posicionar em" para controlar a posição de seu alvo usando as variáveis goalx e goaly.'
-      image1: 'Altere os valores do bloco "Posicionar em" para "goalx" e "goaly".'
-      image2: Verifique se os seus valores correspondem aos mostrados acima.
-      image3: Retorne até que você veja esta tela.
-    step16:
-      title: 'Objeto "pacote"'
-      description: 'Aqui, você começa a modificar seu objeto "pacote". Quando o objeto "pacote" receber a mensagem "iniciar", o pacote deve ser mostrado. Defina a posição do pacote com as variáveis x e y.'
-      image1: 'Toque em "pacote" e escolha "Scripts".'
-      image2: Adicione todos os blocos mostrados acima.
-      image3:
-        subtext1: 'Altere o valor do bloco "Definir tamanho" para "50".'
-        subtext2: 'Toque o campo "reiniciar" dentro do bloco "Quando receber" e crie a nova mensagem: "Iniciar".'
-        subtext3: 'Altere os valores do bloco "Posicionar em" para "x" e "y".'
-    step17:
-      title: 'Objeto "pacote"'
-      description: 'Para verificar se o pacote atingiu o alvo você precisa do bloco "Se 1 é verdadeiro, então".'
-      image1: 'Adicione os blocos mostrados acima abaixo do último bloco "Posicionar em".'
-      image2: 'Altere o valor dentro do bloco "Alterar y em" para "5". Depois, toque no campo "1" dentro de "Se 1 é verdadeiro, então".'
-      image3:
-        subtext1: '"posição_x" e "posição_y" podem ser encontrados na categoria "Objeto".'
-        subtext2: '"goaly" e "goalx" estão na categoria "Variáveis".'
-        subtext3: '"E" está na categoria "Lógica".'
-    step18:
-      title: 'Objeto "pacote"'
-      description: Se o pacote, atingir o alvo com sucesso, você precisará modificar a posição do pacote. Envie uma mensagem aos outros objetos para avisá-los de que você venceu.
-      image1:
-        subtext1: 'Altere os valores do bloco "Posicionar em" para "posição_x" e "goaly+100".'
-        subtext2: 'Toque o campo "Enviar" e crie a nova mensagem "vitória".'
-      image2: Adicione os blocos mostrados acima e modifique seus valores.
-      image3: 'Retorne até ver esta tela em seu dispositivo. Vá aos scripts do objeto "restart".'
-    step19:
-      title: 'Objeto "restart"'
-      description: 'Aqui você pode modificar o objeto "restart". Defina a posição e o comportamento do objeto.'
-      image1: Adicione os blocos mostrados acima e modifique seus valores de forma semelhante.
-      image2: 'Adicione os blocos mostrados acima e defina a mensagem de "Enviar" como "reiniciar".'
-      image3: 'Retorne até ver esta tela, então vá aos scripts do "Pano de Fundo".'
-    step20:
-      title: 'Objeto "Pano de fundo"'
-      description: 'Finalize o programa modificando o objeto "pano de fundo". Agora você já pode começar a jogar. Divirta-se!'
-      image1:
-        subtext1: 'Adicione os blocos mostrados acima e defina a mensagem de "Enviar" como "iniciar".'
-        subtext2: 'Toque no botão "Play".'
-      image2: Divirta-se com seu jogo.
-      image3: |-
-        Você terminou, com sucesso, o tutorial "Skydiving Steve". Ficaríamos muito gratos de achar 'remixes' bem legais de "Skydiving Steve" em share.catrobat.at/pocketcode --- modifique como quiser e faça o upload novamente a partir de sua conta.
-    step21:
-      title: Verifique seus scripts!
-      description: Clique nas imagens abaixo para ampliá-las. Revise os scripts de seus objetos se seu jogo não funcionar corretamente.
-      image1: 'Objeto "pano de fundo"'
-      image2: 'Objeto "pára-quedas"'
-      image3: 'Objeto "pacote"'
-      image4: 'Objeto "restart"'
-      image5: 'Objeto "alvo"'
   stepByStep:
     title: Introdução passo a passo
     start: 'Posição inicial:'
+    description: |
+      Aqui você pode criar seu primeiro programa, um cartão postal interativo, seguindo o passo a passo apresentado nos vídeos a seguir.
+      Você deve seguir as instruções que lhe serão dadas.
+      Durante a criação do cartão postal, os conhecimentos básicos em Pocket Code, que você precisará nos seus projetos futuros, serão cobertos.
+      Após os vídeos passo a passo, as demais atividades te darão mais liberdade para criar seus próprios projetos do Pocket Code.
     step1:
       title: Fazer um novo programa
       detail:
@@ -493,34 +342,33 @@ help:
     text7_7: 'Outras pessoas agora serão capazes de encontrar o seu jogo. Ele aparecerá na página %link%.'
   aliceGameJamTutorialcards:
     title1: (Bem-vindo ao) País das Maravilhas
-    subtitle1: "Animate Characters and create a 'when tapped' event"
+    subtitle1: "Anime Personagens e crie um evento 'ao tocar'"
     description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+      Aprenda a dar vida a uma de suas personagens de uma maneira simples e saiba como fazer suas personagens se moverem ao serem tocadas. O vídeo te mostrará como animar sua personagem facilmente usando diferentes aparências.
+      Mais adiante, te mostraremos como criar um evento "ao tocar" e como enviar mensagens entre objetos.
+    title2: Salve Alice!
+    subtitle2: Use o sensor de movimento para detectar uma colisão entre objetos
+    description2: Aqui você aprenderá como controlar uma personagem usando o sensor de movimento de seu telefone. É possível controlar os movimentos da Alice ao inclinar o seu aparelho para a esquerda ou direita. Assista ao nosso tutorial e deixe objetos caírem aleatoriamente do céu para aprender a identificar colisões entre objetos.
+    title3: 'O Chapeleiro - Bater e Correr'
+    subtitle3: Crie uma paisagem que se mova e controle os movimentos do Chapeleiro
+    description3: Nesse tutorial, você aprenderá a criar uma paisagem que parece se mover. Faremos isso passando objetos ao longo da tela para criar a ilusão de movimento. Também te mostraremos como fazer o Chapeleiro se mover com a inclinação do seu telefone.
+    title4: 'O Chapeleiro - Bater e Correr'
+    subtitle4: Faça o Chapeleiro atirar as cartas do mal
+    description4: Neste tutorial, te mostraremos como criar inimigos que se movam aleatoriamente em direção à sua personagem. Além disso, você aprenderá como fazer o Chapeleiro atirar gotas de chá e verificar se os inimigos foram atingidos usando a detecção de colisão.
+    title5: Acerte o Gato de Cheshire
+    subtitle5: Crie uma contagem de pontos usando variáveis
+    description5: Neste tutorial, te mostraremos como usar variáveis para criar uma contagem de pontos. Pontuações são bastante úteis em um jogo. Os pontos mostram quantas vezes você acertou o gato.
+    title6: Uma Corrida de Coelhos
+    subtitle6: Criar um fundo em movimento
     description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+      Este tutorial te mostra como criar um fundo que se move verticalmente, deslizando os gráficos do fundo. Outra coisa que te ensinaremos é a fazer a personagem saltar à frente quando tocada.
+      Para tornar o jogo um pouco mais difícil, te mostraremos como diminuir a velocidade da personagem com o tempo.
+    download: Baixar o programa
 oauth:
   username_header: Obrigado por registrar-se no Pocket Code!
   username_chooser: 'Por favor, escolha um nome de usuário:'
   username_hint: O nome de usuário não deve ser seu nome verdadeiro.
   usernameTaken: Nome de usuário já existente. Por favor, escolha um outro.
-  noReset: Usuários do Facebook e Google+ não tem uma senha para redefinir.
 search:
   dotdotdot: Pesquisar...
   search: Pesquisar
@@ -649,11 +497,21 @@ ci:
   pending: Gerando Apk
   download: Baixar Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  nojam: Desculpe, não há game jams disponíveis
+  submit: Enviar para o game jam da Alice
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: fique atento
+    subheader: Você só pode enviar os seus programas
     text: |
-      But why not create your own!
-      Take part in the #AliceGameJam
+      Mas por que não criar o seu próprio programa?!
+      Faça parte do #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Jogos
+    tag2: Animação
+    tag3: História
+    tag4: Música
+    tag5: Arte
+    tag6: Experimental

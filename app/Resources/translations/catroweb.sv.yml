@@ -30,6 +30,7 @@ programs:
     viewed: Mest visade
     downloaded: Mest nedladdningar
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Radera
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -96,6 +101,10 @@ licenseToPlay:
     item1: Dela dina kakor tillsammans med receptet
     item2: ge kredit till dem som inspirerade dig
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Användarvillkor
   headline: Välkommen till Catrobat gemenskapen!
@@ -133,174 +142,14 @@ termsOfUse:
   bottom2: 'Maila några förslag angående dessa användarvillkor till %email-webmaster%.'
   version: Version 1.3, 4 mars 2014
 help:
-  hourOfCode:
-    title: Fallskärmshopparen Steve
-    step0:
-      title: Fallskärmshopparen Steve
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: Hur man installerar Pocket Code på din mobila enhet.
-      image1: 'Tryck på "Play Store".'
-      image2: 'Sök "Pocket Code".'
-      image3: 'Tryck på "Installera".'
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tryck på  "Utforska" i "Pocket Code" på din mobila enhet.'
-      image2: Tryck på bannern.
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: Låt oss titta inuti programmet.
-      image1: 'Scrolla ner på menyn och tryck på "Öppna fallskärmshopparen Steve".'
-      image2: 'tryck på objektet "fallskärm".'
-      image3: 'Välj "Skript".'
-    step4:
-      title: Lägg till Variabel
-      description: Variablerna x och y tillåter dig att styra placeringen av din fallskärm.
-      image1: 'Tryck på "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tryck på "Ange variabel".'
-      image4: 'Dra och släpp "Ange variabel" - Klossen nedan  "när programmet startar" - Klossen.'
-    step5:
-      title: Label variables
-      description: Sätt x-position för din fallskärm.
-      image1: Lägga till en andra variabel precis som innan.
-      image2: 'Tryck på "nytt...".'
-      image3: 'ange "x" och tryck på "OK".'
-    step6:
-      title: 'Set variable "y"'
-      description: 'Märk ettiket  och ange y startposition för din fallskärm.'
-      image1: 'Märk den andra variabeln med "y".'
-      image2: 'Tryck på fältet fylld med "0,0".'
-      image3: 'sätt in "-500" och tryck på "OK".'
-    step7:
-      title: För alltid
-      description: 'Du måste kontrollera din fallskärms position hela tiden. lägg ut en "För alltid" -  slinga för att göra detta.'
-      image1: 'Tryck på "+".'
-      image2: 'Gå till "Kontroll" - kategorin.'
-      image3: 'Välj "För alltid" - klossen.'
-      image4: 'Dra och släpp "För alltid" - klossen nedanför "Ange variabeln" - klossen.'
-    step8:
-      title: Insert and modify bricks
-      description: 'Lägg till mer klossar i din "För Alltid" slinga för att styra din fallskärm. sätt in variablerna x och y i din "Placera vid" kloss så kan du styra placeringen av din fallskärm.'
-      image1: 'sätt in dom visade klossarna nedanför  "För alltid" - klossen.'
-      image2: 'tryck på fältet "100".'
-      image3: 'tryck på "Variabler" och välj "x".'
-      image4: 'tryck på "200" i samma kloss högst upp, gå till kategorin "Variabler" och välj "y". Bekräfta med "OK".'
-    step9:
-      title: Change variables and values
-      description: 'Ändra variabel y till -3  för att låta din fallskärm glida till marken. Ändra variabeln x så din fallskärm följer lutningen på vinkeln på din mobila enhet.'
-      image1:
-        subtext1: 'Ställ in storleken till "20" %.'
-        subtext2: 'Ändra värdet för den första "Ange variabeln" - Klossen till "-3".'
-        subtext3: 'tryckpå  "0,0" på den andra "Ange variabeln" - Klossen.'
-      image2:
-        subtext1: 'Tryck på "y" och välj "x".'
-        subtext2: 'Infoga "-".'
-        subtext3: 'Tryck på  "Sensorer" och välj "inclination_x".'
-      image3: 'Kontrollera om din infogade formeln matchar den som är i skärmdumpen och bekräfta med "OK".'
-    step10:
-      title: Loudness sensor
-      description: 'Du kan Kontrollera din fallskärms höjd med Ljud sensorn i din mobila enhet. för att göra så, lägg till och ändra en "om 1 är sant då" kloss.'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tryck på fältet med värdet "0" inom  "om 1 är sant då"-klossen.'
-      image2:
-        subtext1: 'Tryck på "Sensorer".'
-        subtext2: 'Välj "högljudhet".'
-        subtext3: 'Tryck på "Logik".'
-        subtext4: 'Choose ">".'
-        subtext5: 'Infoga "50".'
-      image3: 'Kontrollera om din formel överensstämmer med formeln i skärmbilden och tryck på "OK".'
-    step11:
-      title: Change some more bricks
-      description: När du startar spelet, ska startpositionen för din fallskärm matcha din första startposition. För att göra detta måste du lägga till och ändra tre klossar så som dom visas i bilderna nedan.
-      image1: 'Lägg till en "ändra variabeln" - Kloss och ändra värdet som ovan.'
-      image2:
-        subtext1: 'Lägg till en "När jag tar emot" - kloss.'
-        subtext2: 'Placera den under den senaste Klossen ("slutet av slingan").'
-        subtext3: 'Lägg till två "Ange variabeln" - Klossar.'
-      image3: 'Tryck på fältet fylld med "meddelande 1", välj "Nytt..." och infoga "starta om".'
-      image4: 'Ändra värdena för de två "ange variabeln" - Klossarna som visas i skärmdumpen ovan.'
-    step12:
-      title: Back to objects
-      description: 'Du har nu lyckats avsluta ditt "fallskärm" objekt! gå tillbaka till objektets översikt att ändra nästa objekt.'
-      image1: 'Tryck på "tillbaka" - knappen på enheten.'
-      image2: 'Tryck på "tillbaka" - knappen en gång till.'
-      image3: Nu bör du se denna skärmen på din enhet.
-    step13:
-      title: 'Objekt "mål"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tryck på "mål" och välj "Skript".'
-      image2: Lägg till och ändra klossarna som i skärmdumpen ovan.
-      image3: Lägg till fyra mer klossar som visas ovan.
-    step14:
-      title: 'Objekt "mål"'
-      description: När du startar om spelet, måste positionen för målet ändras. för detta steg, ange variablerna goalx and goaly med funktionen slumpmässigt.
-      image1: 'Tryck på fältet "y" och välj "Nytt".'
-      image2: 'Infoga "goalx" och bekräfta med "OK".'
-      image3: 'Tryck på fältet "0,0" och infoga formeln "random (-400, 400)".'
-      image4: 'Upprepa stegen 1-3 för den andra "Ange variabeln" - klossen, men istället  namnge variabeln "goaly" och ange värdet till "random (400,-700)".'
-    step15:
-      title: 'Objekt "mål"'
-      description: 'Ändra din "Placera vid" kloss för att kontrollera placeringen av ditt mål med  variabler goalx och goaly.'
-      image1: 'Ändra värdena för "Placera vid" - klossen till "goalx" och "goaly".'
-      image2: Kontrollera om dina värden matchar dom ovan.
-      image3: Gå tillbaka tills du ser denna skärm.
-    step16:
-      title: 'Objekt "paket"'
-      description: 'Här börjar du ändra objektet "paket". När objektet "paket" får meddelandet "start", ska paketet visas. Ange position för paketet med variablerna x och y.'
-      image1: 'Tryck på "paket" och välj "Skript".'
-      image2: Lägg till alla Klossar som visas ovan.
-      image3:
-        subtext1: 'Ändra värdet för "Ange storlek" - Klossen till "50".'
-        subtext2: 'Tryck på fältet "starta om" inom  "när jag tar emot" - Klossen och skapa det nya meddelandet: "starta".'
-        subtext3: 'Ändra värdena för "Placera vid" - klossen till "x" och "y".'
-    step17:
-      title: 'Objekt "paket"'
-      description: 'För att kontrollera om paketet har nått målet, du behöver "om 1 är sant då" klossen.'
-      image1: 'Lägg till ovanstående klossar nedanför senaste "placera vid" - Klossen.'
-      image2: 'Ändra värdet i "Ändra Y med" - klossen till "-5". Tryck sedan in i fältet "1" inom  "om 1 är sant då".'
-      image3:
-        subtext1: '"position_x" och "position_y" kan hittas i kategorin "Objekt".'
-        subtext2: '"goaly" och "goalx" är i kategorin "Variabler".'
-        subtext3: '"Och" är i kategorin "Logik".'
-    step18:
-      title: 'Objekt "paket"'
-      description: 'Om paketet har lyckats nå målet, måste du ändra positionen för paketet .Skicka ett meddelande till de andra objekten för  att låta dem veta att du har vunnit.'
-      image1:
-        subtext1: 'Ändra värdena för "Placera vid" - klossen till "position_x" och "goaly+100".'
-        subtext2: 'Tryck på fältet "Sändning" och skapa ett nytt meddelande "vinna".'
-      image2: Lägg till ovanstående visade klossar och ändra deras värden lika.
-      image3: 'Gå tillbaka tills du ser denna skärm på din enhet. Gå till skripten för objektet "omstart".'
-    step19:
-      title: 'Objekt "omstart"'
-      description: 'Här ändra du objektet "starta om". Definiera positionen och uppförandet av objektet.'
-      image1: Lägg till ovanstående visade klossar och ändra deras värden lika.
-      image2: 'Lägg till ovanstående visade klossar och ange "Sändning" - meddelande till "starta om".'
-      image3: 'Gå tillbaka tills du ser denna skärm, sedan gå till Skripten av "Bakgrund".'
-    step20:
-      title: 'Object "Background"'
-      description: 'Avsluta programmet genom att ändra  "bakgrund" objektet . Nu kan du börja spela ditt spel. Ha det så kul!'
-      image1:
-        subtext1: 'Lägg till ovanstående visade klossar och ange "Sändning" - meddelande till "starta om".'
-        subtext2: 'Tryck på "Spela" - knappen.'
-      image2: Njut av ditt spel.
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: Klicka på bilderna nedan för att förstora dem. Granska klossarna om ditt spel inte fungerar korrekt.
-      image1: 'Objekt "bakgrund"'
-      image2: 'Objekt "fallskärm"'
-      image3: 'Objekt "paket"'
-      image4: 'Objekt "omstart"'
-      image5: 'Objekt "mål"'
   stepByStep:
     title: Steg för steg-Intro
     start: 'Utgångsläget:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -518,7 +367,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: Sök...
   search: Sök
@@ -655,3 +503,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Spel
+    tag2: Flyttar Animation
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

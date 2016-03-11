@@ -16,13 +16,13 @@ country: ملک
 loginText: لاگ آن
 privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: اف، کچھ غلط ہوگیا۔.
+pleaseTryAgain: برائے مہربانی دوبارہ کوشش کریں!
+oldVersionError: برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!
 more: مزید
 less: کم
 ok: ٹھيک ہے
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: 'نمونے کے پروگرام کو ڈاؤن لوڈ کرنے کے لئے %link_start% یہاں %link_end% کلک کریں۔.'
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
@@ -30,11 +30,12 @@ programs:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
   random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
-  sample: Example Programs
+  sample: نمونے کے پروگرام
   views: '%views% views'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: جمع شدہ پروگرام
+  uploaded: اپ لوڈ شدہ پروگرام
   reportAsInappropriate: رپورٹ غیرموزوں ہے
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: 'Please %login% to report this program as inappropriate.'
@@ -43,10 +44,14 @@ programs:
   reportOwnProgram: آپ اپنے پروگرام کو فلیگ نہیں کرسکتے۔
   reportAlready: آپ پہلے ہی اس پروگرام کو غیرموزوں فلیگ کرچکے ہیں۔
   reportDone: آپ نے اس پروگرام کو غیرموزوں رپورٹ کیا!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
+  updateAppHeader: پروگرام اپ ڈیٹ کریں
+  updateAppText: اس پروگرام کو ڈاؤن لوڈ کرنے کے لئے اپنے پروگرام کو اپ ڈیٹ کریں.
+  btnClosePopup: ٹھیک ہے
+  checkout_this_program: اس کیٹروبیٹ پروگرام کو چیک کریں
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: حذف کریں
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -63,16 +68,16 @@ passwordRecovery:
     Your Catrobat Team.
 profile:
   saveChanges: تبدیلیاں محفوظ کریں
-  newPass: new password
-  repeatPass: repeat password
+  newPass: نیا خفیہ کوڈ
+  repeatPass: خفیہ کوڈ دہرائیے
   firstEmail: میری پہلی ای میل
   secondEmail: میری دوسری ای میل
-  myPrograms: My programs
+  myPrograms: میرے پروگرامات
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordTooShort: 'نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.'
+    passwordTooLong: 'نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.'
     passwordIsUsername: خفیہ کوڈ صارف نام سے مختلف ہوگا۔
-    emailNotValid: This email address is not valid.
+    emailNotValid: یہ ای میل پتہ درست نہیں ہے ۔
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
     submitSuccess: محفوظ!
@@ -102,6 +107,10 @@ licenseToPlay:
     item1: اپنے کیک بمع ترکیب دوسروں کے ساتھ شریک کریں
     item2: جو لوگ آپ کی حوصلہ افزائی کریں اُن کو اعزاز دیں
   version: ورژن 1.1, 2 اپریل 2013 ء
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: استعمال کی شرائط
   headline: کاٹروبٹ گروہ میں خوش آمدید!
@@ -139,174 +148,14 @@ termsOfUse:
   bottom2: 'استعمال کی شرائط کے بارے میں تجاویز %email-webmaster% پر ارسال کریں۔'
   version: Version 1.3, 4 March 2014
 help:
-  hourOfCode:
-    title: سکائی ڈائیونگ سٹیو
-    step0:
-      title: سکائی ڈائیونگ سٹیو
-      description: In the following step-by-step tutorial you learn how to program the behavior of Steve and his parcel. The images below show you how to control Steve during the game. You have to navigate Steve above the target and tap the background to drop the parcel. Good luck...
-    step1:
-      title: 'Install "Pocket Code"'
-      description: پاکٹ کوڈ کو موبائل پر کیسے انسٹال کرتے ہیں۔
-      image1: ’پلے سٹور‘ کلک کریں۔
-      image2: ’پاکٹ کوڈ‘ تلاش کریں۔
-      image3: ’انسٹال‘ کلک کریں۔
-    step2:
-      title: Download Project
-      description: 'How to download the essential program allowing you to program "Skydiving Steve".'
-      image1: 'Tap "Explore" in "Pocket Code" on your Mobile Device.'
-      image2: بینر پر کلک کریں۔
-      image3: 'Download the program "Skydiving Steve".'
-    step3:
-      title: Open Project
-      description: آئیے! اس پروگرام کے اندر دیکھتے ہیں۔
-      image1: 'Pull down the menu and tap "Open Skydiving Steve".'
-      image2: 'Tap object "parachute".'
-      image3: 'Choose "Scripts".'
-    step4:
-      title: Add Variable
-      description: متغیر x اور y آپکو پیراشوٹ کی پوزیشن کو کنٹرول کرنے کی اجازت دیتے ہیں ۔
-      image1: 'Tap "+".'
-      image2: 'Go to the category "Variables".'
-      image3: 'Tap "Set variable".'
-      image4: 'Drag and drop the "Set variable" - brick below the "When program started" - brick.'
-    step5:
-      title: Label variables
-      description: اپنے پیراشوٹ کی پوزیشن x کو نام دیں ۔
-      image1: Add a second variable just as before.
-      image2: 'Tap "New...".'
-      image3: 'Insert "x" and tap "OK".'
-    step6:
-      title: 'Set variable "y"'
-      description: اپنے پیراشوٹ کے متغیر y کے ابتدائی پوزیشن کو نام دے کر سیٹ کریں۔
-      image1: 'Label the second variable with "y".'
-      image2: 'Tap the field filled with "0.0".'
-      image3: 'Insert "-500" and tap "OK".'
-    step7:
-      title: Forever
-      description: 'آپکو ہر وقت اپنے پیراشوٹ کی پوزیشن کنٹرول کرنے کی ضرورت ہے۔ اس کیلئے ایک "Forever" لوپ لگائیں۔'
-      image1: 'Tap "+".'
-      image2: 'Go to the "Control" - category.'
-      image3: 'Choose the "Forever" - brick.'
-      image4: 'Drag and drop the "Forever" - brick below the "Set variable" - bricks.'
-    step8:
-      title: Insert and modify bricks
-      description: 'اپنے پیراشوٹ کو کنٹرول کرنے کیلئے "Forever" لوپ میں مزید اینٹیں شامل کریں۔ اپنے "Place at" اینٹ میں متغیرات x اور y کو شامل کرنے سے آپ اپنے پیراشوٹ کی جگہ کو کنٹرول کر سکتے ہیں۔'
-      image1: 'Insert the shown bricks below the "Forever" - brick.'
-      image2: 'Tap the "100" field.'
-      image3: 'Tap "Variables" and choose "x".'
-      image4: 'Tap "200" in the same brick on the top, go to the "Variables" category and choose "y". Confirm with "OK".'
-    step9:
-      title: Change variables and values
-      description: Change the variable y by -3 to let your parachute glide to the ground. Change the variable x so your parachute follows the inclination angle of your mobile device.
-      image1:
-        subtext1: 'Set the size to "20" %.'
-        subtext2: 'Change the value of the first "Set variable" - brick to "-3".'
-        subtext3: 'At the second "Set variable" - brick tap the field "0.0".'
-      image2:
-        subtext1: 'Tap on "y" and choose "x".'
-        subtext2: 'Insert "-".'
-        subtext3: 'Tap "Sensors" and choose "inclination_x".'
-      image3: 'Check if your inserted formula matches the one in the screenshot and confirm with "OK".'
-    step10:
-      title: Loudness sensor
-      description: 'You can control the height of your parachute with the loudness sensor of your mobile device. To do so, add and modify a "If 1 is true then" brick.'
-      image1:
-        subtext1: 'Add a "If 1 is true then" - brick and place it below the last "Change variable" - brick.'
-        subtext2: 'Tap the field with the value "0" within the "If 1 is true then" - brick.'
-      image2:
-        subtext1: '"سینسر" پر کلک کریں ۔'
-        subtext2: 'Choose "loudness".'
-        subtext3: '"لاجک" پر کلک کریں۔'
-        subtext4: 'Choose ">".'
-        subtext5: 'Insert "50".'
-      image3: 'Check if your formula matches the formula in the screenshot and tap "OK".'
-    step11:
-      title: Change some more bricks
-      description: When you restart the game, the starting position of your parachute should match your initial starting position. For this you need to add and modify three bricks as shown in the pictures below.
-      image1: 'Add a "Change variable" - brick and modify the value like above.'
-      image2:
-        subtext1: 'Add a "When I receive" - brick.'
-        subtext2: 'Place it below the last brick ("End of loop").'
-        subtext3: 'Add two "Set variable" - bricks.'
-      image3: 'Tap the field filled with "message 1", choose "New…" and insert "restart".'
-      image4: 'Change the values of the two "Set variable" - bricks like shown in the screenshot above.'
-    step12:
-      title: Back to objects
-      description: 'You have now successfully finished your "parachute" object! Navigate back to the object overview to modify the next object.'
-      image1: 'Tap the "back" - button on your device.'
-      image2: 'Tap the "back" - button once more.'
-      image3: Now you should see this screen on your device.
-    step13:
-      title: 'آبجیکٹ "ہدف"'
-      description: 'Here you start modifying the object "target". Add the bricks to control the position and size of your target.'
-      image1: 'Tap "target" and choose "Scripts".'
-      image2: Add and modify the bricks as in the screenshot above.
-      image3: Add four more bricks like shown above.
-    step14:
-      title: 'آبجیکٹ "ہدف"'
-      description: When you restart the game, the position of your target needs to change. For this step, set the variables goalx and goaly with the random function.
-      image1: 'Tap the field "y:" and choose "New".'
-      image2: 'Insert "goalx" and confirm with "OK".'
-      image3: 'Tap the field "0.0" and insert the formula "random(-400, 400)".'
-      image4: 'Repeat the steps 1-3 for the second "Set variable" - brick, expect naming the variable "goaly" and setting the value to "random(400, -700)".'
-    step15:
-      title: 'آبجیکٹ "ہدف"'
-      description: 'Modify your "Place at" brick to control the position of your target with the variables goalx an goaly.'
-      image1: 'Change the values of the "Place at" - brick to "goalx" and "goaly".'
-      image2: Check if your values match the ones above.
-      image3: Go back until you see this screen.
-    step16:
-      title: "آبجیکٹ 'پارسل'"
-      description: 'Here you start modifying your object "parcel". When the object "parcel" receives the message "start", the parcel should be shown. Set the position of parcel with the variables x and y.'
-      image1: 'Tap "parcel" and choose "Scripts".'
-      image2: Add all the bricks shown above.
-      image3:
-        subtext1: 'Change the value of the "Set size" - brick to "50".'
-        subtext2: 'Tap the field "restart" within the "When I receive" - brick and create the new message: "start".'
-        subtext3: 'Change the values of the "Place at" - brick to "x" and "y".'
-    step17:
-      title: "آبجیکٹ 'پارسل'"
-      description: 'To check whether the parcel has hit the target, you need the "If 1 is true then" brick.'
-      image1: 'Add the above shown bricks below the last "Place at" - brick.'
-      image2: 'Change the value within the "Change Y by" - brick to "-5". Then tap into the field "1" within the "If 1 is true then".'
-      image3:
-        subtext1: '"position_x" and "position_y" can be found in the category "Object".'
-        subtext2: '"goaly" and "goalx" are in the "Variables" category.'
-        subtext3: '"AND" is in the "Logic" category.'
-    step18:
-      title: "آبجیکٹ 'پارسل'"
-      description: If the parcel has successfully hit the target, you need to modify the position of the parcel.Send a message to the other objects to let them know that you have won.
-      image1:
-        subtext1: 'Change the values of the "Place at" - brick to "position_x" and "goaly+100".'
-        subtext2: 'Tap the field "Broadcast" and create a new message "win".'
-      image2: Add the above shown bricks and modify their values alike.
-      image3: 'Go back until you see this screen on your device. Go to the scripts of the object "restart".'
-    step19:
-      title: 'Object "restart"'
-      description: Here you modify the object “restart”. Define the position and the behavior of the object.
-      image1: Add the above shown bricks and modify their values alike.
-      image2: 'Add the above shown bricks and set the "Broadcast" - message to "restart".'
-      image3: Go back until you see this screen, then go to the scripts of “Background”.
-    step20:
-      title: 'Object "Background"'
-      description: 'Complete the program by modifying the "background" object. Now you can start playing your game. Have fun!'
-      image1:
-        subtext1: 'Add the above shown bricks and set the "Broadcast" - message to "start".'
-        subtext2: '"کھیلیں" بٹن پر کلک کریں ۔'
-      image2: اپنے کھیل سے لطف اٹھائیے۔
-      image3: |-
-        You've successfully completed the tutorial "Skydiving Steve". We would be pleased to find some really cool remixes of "Skydiving Steve" on share.catrob.at/pocketcode --- just change it as you like and upload it again from your own account.
-    step21:
-      title: Check your scripts!
-      description: "Click on the images below to enlarge them. Review the scripts of your objects if your game doesn't work correctly."
-      image1: 'آبجیکٹ "پس منظر"'
-      image2: 'آبجیکٹ "پیراشوٹ"'
-      image3: "آبجیکٹ 'پارسل'"
-      image4: 'Object "restart"'
-      image5: 'آبجیکٹ "ہدف"'
   stepByStep:
     title: Step-by-Step Intro
     start: 'Starting position:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Make a new program
       detail:
@@ -524,7 +373,6 @@ oauth:
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
-  noReset: Facebook and Google+ users do not have a password to reset.
 search:
   dotdotdot: تلاش کریں...
   search: تلاش
@@ -661,3 +509,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: کھیل
+    tag2: Animation
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental

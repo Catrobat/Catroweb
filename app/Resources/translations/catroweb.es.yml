@@ -30,6 +30,7 @@ programs:
     viewed: Más visto
     downloaded: Más descargados
   random: Programas al azar
+  related: Related Programs
   downloads: descargas
   sample: Example Programs
   views: '%views% visitas'
@@ -47,6 +48,10 @@ programs:
   updateAppText: Por favor actualice su aplicación a la versión más reciente para poder descargar este programa.
   btnClosePopup: Está bien
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Borrar
 passwordRecovery:
   subject: Recuperación de su clave Catrobat
   message: |
@@ -100,6 +105,10 @@ licenseToPlay:
     item1: compartir tus tartas con la receta
     item2: dar reconocimiento a aquellos que te han inspirado
   version: Versión 1.1, 02 de abril de 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Términos de Uso
   headline: Bienvenido a la comunidad Catrobat!
@@ -139,173 +148,14 @@ termsOfUse:
   bottom2: 'Por favor envíenos por correo electrónico cualquier sugerencia con respecto a los Términos de uso a %email-webmaster%.'
   version: Versión 1.3, 04 de marzo de 2014
 help:
-  hourOfCode:
-    title: Steve el paracaisdista
-    step0:
-      title: Steve el paracaidista
-      description: En el siguiente tutorial aprenderá paso a paso a programar el comportamiento de Steve y su parcela. Las imágenes de abajo muestran cómo controlar Steve durante el juego. Tienes que controlar la navegación de Steve para que este sobre la diana y toque el fondo para dejar caer el paquete. Buena suerte...
-    step1:
-      title: 'Instale "Código de bolsillo"'
-      description: Cómo instalar código de bolsillo en su dispositivo móvil.
-      image1: 'Pulse "Play Store".'
-      image2: 'Busque "Pocket Code".'
-      image3: 'Pulse "Instalar".'
-    step2:
-      title: Descargar Proyecto
-      description: 'Cómo descargar el programa principal que le permite programar el juego "Steve el paracaidista".'
-      image1: 'Toque en "Explorar" en el "Pocket Code" en su dispositivo móvil.'
-      image2: Pulse el anuncio (banner).
-      image3: 'Descargar el programa "Steve el paracaidista".'
-    step3:
-      title: Abrir proyecto
-      description: Veamos dentro del código de programa.
-      image1: 'Toque el menú y seleccione hacia abajo "abrir Steve el paracaidista".'
-      image2: 'Toque el objeto "paracaídas".'
-      image3: 'Seleccione "Comandos".'
-    step4:
-      title: Añadir variable
-      description: Las variables x e y le permiten controlar la posición de su paracaídas.
-      image1: 'Toque "+".'
-      image2: 'Ir a la categoría "Variables".'
-      image3: 'Toque "Preparar variable".'
-      image4: 'Arrastrar y soltar el "Establecer variable" - ladrillo debajo de la "al programa iniciado" - ladrillo.'
-    step5:
-      title: Etiqueta las variables
-      description: Etiqueta de la posición de x de su paracaídas.
-      image1: Añade una segunda variable como antes.
-      image2: 'Toque "nuevo...".'
-      image3: 'Inserte "x" y toque "Aceptar".'
-    step6:
-      title: 'Prepare la variable "y"'
-      description: Etiquete y establezca el punto de partida de su paracaidas en la posición y.
-      image1: 'Etiquete la segunda variable con "y".'
-      image2: 'Toque el campo del cuadrante "0.0".'
-      image3: 'Inserte "-500" y toque "OK".'
-    step7:
-      title: Para siempre
-      description: 'Es necesario controlar la posición de su paracaídas en todo momento. Inserte un "para siempre" - loop para hacerlo.'
-      image1: 'Toque "+".'
-      image2: 'Vaya a "Control" - categoría.'
-      image3: 'Escoja el bloque "para siempre".'
-      image4: 'Arrastre y suelte los bloques "Para siempre" en el bloque de debajo de la "variable de ajuste".'
-    step8:
-      title: Inserte y modifique los bloques
-      description: 'Añada más bloques en su loop "Para siempre" para el control de su paracaídas. Insertar las variables x y y en el bloque "colocar" le permitira controlar la posición de su paracaídas.'
-      image1: 'Añada los bloques mostrados debajo del bloque "para siempre".'
-      image2: 'Toque en el campo "100".'
-      image3: 'Toque en "Variables" y elija "x".'
-      image4: 'Toque en "200" en el mismo bloque en la parte superior, ir a la categoría de "Variables" y elija "y". Confirme con "OK".'
-    step9:
-      title: Cambie de variables y valores
-      description: Cambie la variable y a -3 para dejar que su paracaídas se deslice hasta el suelo. Cambie la variable x para que su paracaídas siga en el ángulo de inclinación de su dispositivo móvil.
-      image1:
-        subtext1: 'Establezca el tamaño a "20" %.'
-        subtext2: 'Cambie el valor del primer bloque "Establecer variable" a "-3".'
-        subtext3: 'En el segundo bloque "Establecer variable" toque en el campo "0.0".'
-      image2:
-        subtext1: 'Toque en "y" y elija "x".'
-        subtext2: 'Inserte "-".'
-        subtext3: 'Toque en "Sensores" y elegir "inclination_x".'
-      image3: 'Compruebe si su fórmula insertada en la captura de pantalla y confirme con "OK".'
-    step10:
-      title: Sensor de volumen
-      description: 'Usted puede controlar la altura de su paracaídas con el sensor de volumen de su dispositivo móvil. Para ello, agregue y modifique un bloque "Si 1 es verdadero entonces".'
-      image1:
-        subtext1: 'Añada el bloque "Si 1 es verdadero entonces" y coloque este bloque debajo del último bloque "variable de cambio".'
-        subtext2: 'Toque en el campo con el valor "0" en e bloque "Si 1 es verdadero entonces".'
-      image2:
-        subtext1: 'Toque "Sensores".'
-        subtext2: 'Elija "vplumen".'
-        subtext3: Toque «Lógica».
-        subtext4: 'Elija ">".'
-        subtext5: 'Inserte "50".'
-      image3: 'Compruebe si su fórmula corresponde a la fórmula en la captura de pantalla y pulse "OK".'
-    step11:
-      title: Cambiar algunos bloques más
-      description: Al reiniciar el juego, la posición inicial de tu paracaídas debe coincidir con su posición inicial de partida. Para esto usted necesita agregar y modificar tres bloques como se muestra en las siguientes imágenes.
-      image1: 'Agregue un bloque "Cambio de variable" y modifique el valor como arriba.'
-      image2:
-        subtext1: 'Añada un bloque "Cuando reciba".'
-        subtext2: 'Coloque a continuación el último bloque ("fin del bucle").'
-        subtext3: 'Agregue dos bloques "Establecer variable".'
-      image3: 'Toque en el campo que pone "mensaje 1", elija "Nuevo..." e inserte "reiniciar".'
-      image4: 'Cambie los valores de los dos bloques "Establecer variable" como se muestra en la imagen superior.'
-    step12:
-      title: Vuelva a objetos
-      description: 'Ahora ha finalizado con éxito su objeto de "paracaídas". Vuelva de nuevo a la descripción del objeto para modificar el siguiente objeto.'
-      image1: 'Toque el botón "atrás" de su dispositivo.'
-      image2: Toque el botón atrás una vez más.
-      image3: Ahora debería ver esto en la pantalla del dispositivo.
-    step13:
-      title: 'Objeto "diana"'
-      description: 'Aquí empiezas a modificar el objeto "diana". Añada los bloques para controlar la posición y el tamaño de tu diana.'
-      image1: 'Toque en "parcela" y seleccione "Comandos".'
-      image2: Agregue y modifique los bloques como en la captura de pantalla anterior.
-      image3: Añada 4 bloques más como se muestra arriba.
-    step14:
-      title: 'Objeto "diana"'
-      description: Al reiniciar el juego, la posición de su diana necesita ser cambiada. Para este paso, se establecen la variables objetivolx y objetivoy con la función aleatoria.
-      image1: 'Toque en el cuadrante "y:" y elige "Nuevo".'
-      image2: 'Inserte "objetivox" y confirme con "OK".'
-      image3: 'Toque el cuadrante "0.0" e inserte la fórmula "al azar (-400, 400)".'
-      image4: 'Repita los pasos 1-3 para el segundo "Establecer variable" - ladrillo, esperen nombrar la variable "objetivoy" y el valor "al azar (400, -700)".'
-    step15:
-      title: 'Objeto "diana"'
-      description: 'Modifique su ladrillo de "Colocar" para controlar la posición de tu objetivo con la variables objetivox un objetivoy.'
-      image1: 'Cambie los valores del "Colocar"- ladrillo "obejetivox" y "objetivoy".'
-      image2: Compruebe si sus valores coinciden con los anteriores.
-      image3: Vaya hacia atrás hasta que vea esta pantalla.
-    step16:
-      title: 'Objeto "Parcela"'
-      description: 'Aquí empiezas a modificar tu objeto "parcela". Cuando el objeto de "parcela" recibe el mensaje "inico", el paquete debe ser demostrado. Establecer la posición de la parcela con las variables x e y.'
-      image1: 'Toque en "parcela" y seleccione "Comandos".'
-      image2: Añada todos los ladrillos que se muestra arriba.
-      image3:
-        subtext1: 'Cambie el valor del "Establecer tamaño " - ladrillo"50".'
-        subtext2: 'Toque el campo de "reinicio" dentro de la "Cuando yo reciba" - ladrillo y crear el nuevo mensaje: "Inicio".'
-        subtext3: 'Cambie los valores del "Colocar" - ladrillo a "x" e "y".'
-    step17:
-      title: 'Objeto "Parcela"'
-      description: 'Para comprobar si el paquete ha golpeado la diana, se necesita la "Si 1 es verdadero entonces" ladrillo.'
-      image1: 'Añada los ladrillos anteriores por debajo del ladrillos "Colocar".'
-      image2: 'Cambie el valor en el ladrillo "Cambiar Y por" a "-5". A continuación, pulse en el campo "1" en el "Si 1 es verdadero entonces".'
-      image3:
-        subtext1: '"posicion_x" y "posicion_y" se puede encontrar en la categoría de "Objeto".'
-        subtext2: '"objetivoy" y "objetivox" están en la categoría de "Variables".'
-        subtext3: '"Y" está en la categoría «Lógica».'
-    step18:
-      title: 'Objeto "Parcela"'
-      description: Si la parcela ha golpeado con éxito la diana, tienes que modificar la posición de la parcela. Envie un mensaje a los otros objetos para hacerles saber que has ganado.
-      image1:
-        subtext1: 'Cambie los valores del ladrillo "Colocar" en la "posicion_x" y "objetivoy + 100".'
-        subtext2: 'Toque en el campo "Emisión" y crea un nuevo mensaje "ganar".'
-      image2: Añada los ladrillos mostrados anteriormente y modifique sus valores por igual.
-      image3: 'Vaya hacia atrás hasta que vea esta pantalla en el dispositivo. Vaya a los comandos del objeto "reiniciar".'
-    step19:
-      title: 'Objeto "reiniciar"'
-      description: 'Aquí modifique el objeto "reiniciar". Defina la posición y el comportamiento del objeto.'
-      image1: Añada los ladrillos mostrados anteriormente y modifique sus valores por igual.
-      image2: 'Agregue los ladrillos que se muestran arriba y la "difusión" - mensaje para "reiniciar".'
-      image3: 'Vaya hacia atrás hasta que vea esta pantalla, y luego vaya a los guiones de "Fondo".'
-    step20:
-      title: 'Objeto "Fondo"'
-      description: 'Complete el programa modificando el objeto de "Fondo". Ahora puedes comenzar a jugar su juego. ¡Que te diviertas!'
-      image1:
-        subtext1: 'Agregue los ladrillos que se muestran arriba y establezca la "difusión" - mande mensaje para "iniciar".'
-        subtext2: 'Pulse el botón de "Jugar".'
-      image2: Disfrute su juego.
-      image3: 'Has completado con éxito el tutorial "Steve el paracaidista". Estaríamos encantados de encontrar muchas combinaciones interesantes de "Steve paracaidismo" en share.catrob.at/pocketcode---solo cámbielo a su gusto y subalo otra vez a su cuenta.'
-    step21:
-      title: Revisa tus comandos!
-      description: Haga clic en las imágenes para ampliarlas. Revise los comandos de los objetos si su juego no funciona correctamente.
-      image1: 'Objeto "Fondo"'
-      image2: 'Objeto "Paracaídas"'
-      image3: 'Objeto "Parcela"'
-      image4: 'Objeto "reiniciar"'
-      image5: 'Objeto "diana"'
   stepByStep:
     title: Introducción paso a paso
     start: 'Posición inicial:'
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: Haga un nuevo programa
       detail:
@@ -509,11 +359,11 @@ help:
     description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
     title4: 'The Hatter - Hit and Run'
     subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
+    description4: En este tutorial te mostramos cómo crear enemigos que se mueven al azar hacía tu personaje. Además, aprenderás cómo hacer que el Sombrerero dispare gotas de té y como averiguar si los enemigos han sido golpeados mediante el uso de detección de colisiones.
     title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
+    subtitle5: Crear un marcador mediante el uso de variables
+    description5: En este tutorial te mostramos cómo utilizar variables para crear una punctuación. Los marcadores son elementos útiles dentro de un juego. Nuestro marcador te muestra cuantas veces has atrapado al gato.
+    title6: Una carrera de conejo
     subtitle6: Create a moving background
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
@@ -524,7 +374,6 @@ oauth:
   username_chooser: 'Por favor, elija un nombre de usuario:'
   username_hint: El nombre de usuario no debe ser su nombre real.
   usernameTaken: El nombre de usuario ya existe, por favor, elija uno diferente.
-  noReset: Los usuarios de Facebook y Google+ no tienen una contraseña que restablecer.
 search:
   dotdotdot: Búscar...
   search: Búscar
@@ -661,3 +510,13 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
+tags:
+  constant:
+    tag1: Juegos
+    tag2: Animaciones con movimiento
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental
