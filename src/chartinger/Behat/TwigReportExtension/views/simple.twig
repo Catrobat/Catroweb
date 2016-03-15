@@ -1,0 +1,98 @@
+{% macro asString(result) %}
+    {% if result == 20 %}
+      PENDING
+    {% elseif result == 99 %}
+      FAILED
+    {% elseif result == 0 %}
+      PASSED
+    {% elseif result == 10 %}
+      SKIPPED
+    {% else %}
+      UNKONWN
+    {% endif %}
+    ({{ result }})
+{% endmacro %}
+{% import _self as simple %}
+<html>
+<head>
+  <title>Behat Twig Output</title>
+</head>
+<body>
+<h1>Features</h1>
+{% for feature in features %}
+    <h2>Feature: {{ feature.title }} {{ simple.asString(feature.result) }}</h2>
+          <p>{{ feature.description|nl2br }}</p>
+          {% for background in feature.backgrounds %}
+            <h3>Background: {{ background.title  }} {{ background.result }}</h3>
+            <ul>
+            {% for step in background.steps %}
+              <li> {{ step.text }} {{ simple.asString(step.result) }}</li>
+            {% endfor %}
+            </ul>
+          {% endfor %}
+          {% for scenario in feature.scenarios %}
+            <h3>Scenario: {{ scenario.title  }} {{ simple.asString(scenario.result) }}</h3>
+            <ul>
+              {% for step in scenario.steps %}
+              <li>{{ step.text }} {{ simple.asString(step.result) }}
+                {% for argument in step.arguments %}
+                  {% if argument.text %}
+                    <pre><code>{{ argument.text }}</code></pre>
+                  {% endif %}
+                  {% if argument.table %}
+                    <table>
+                    {% for row in argument.table %}
+                      <tr>
+                      {% for col in row %}
+                        {% if loop.parent.loop.first %}<th>{% else %}<td>{% endif %}
+                        {{ col }}
+                        {% if loop.parent.loop.first %}</th>{% else %}</td>{% endif %}
+                      {% endfor %}
+                      </tr>
+                    {% endfor %}
+                    </table>
+                    </div></div>
+                  {% endif %}
+                {% endfor %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% if scenario.examples %}
+            <h3>Examples</h3>
+            <table>
+              <tr><th>result</th>{% for parameter in scenario.parameters %}<th>{{ parameter }}</th>{% endfor %}</tr>
+              {% for example_result in scenario.examples %}
+              <tr>
+                <td>{{ simple.asString(example_result.result) }}</td>
+                {% for col in example_result.parameters %}
+                  <td>{{ col }}</td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </table>
+            {% endif %}
+          {% endfor %}
+{% endfor %}
+
+<h1 class="page-header">Statistics</h1>
+
+<h2>Scenarios</h2>
+<ul>
+  <li>passed: {{ statistics.scenarios.passed }}</li>
+  <li>pending: {{ statistics.scenarios.pending }}</li>
+  <li>failed: {{ statistics.scenarios.failed }}</li>
+  <li>skipped: {{ statistics.scenarios.skipped }}</li>
+  <li>total: {{ statistics.scenarios.total }}</li>
+</ul>
+
+<h2>Steps</h2>
+<ul>
+  <li>passed: {{ statistics.steps.passed }}</li>
+  <li>pending: {{ statistics.steps.pending }}</li>
+  <li>failed: {{ statistics.steps.failed }}</li>
+  <li>skipped: {{ statistics.steps.skipped }}</li>
+  <li>total: {{ statistics.steps.total }}</li>
+</ul>
+
+</body>
+</html>
