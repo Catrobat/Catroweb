@@ -25,7 +25,12 @@ When I invoke the Request
  
 Then I will get the json object:
 ```json
-{"token":"rrrrrrrrrrr","statusCode":201,"answer":"Registration successful!","preHeaderMessages":""}
+{
+  "token": "rrrrrrrrrrr",
+  "statusCode": 201,
+  "answer": "Registration successful!",
+  "preHeaderMessages": ""
+}
 ```
  
  
@@ -51,7 +56,7 @@ Then I will get the json object:
 
 ---
 
-## Retrieve the upload token of an user
+## Retrieve the upload token of a user
 > 
 
 Given I have the HTTP Request:
@@ -71,7 +76,11 @@ When I invoke the Request
  
 Then I will get the json object:
 ```json
-{"token":"cccccccccc","statusCode":200,"preHeaderMessages":""}
+{
+  "token": "cccccccccc",
+  "statusCode": 200,
+  "preHeaderMessages": ""
+}
 ```
  
  
