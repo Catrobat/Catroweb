@@ -46,6 +46,13 @@ Given There is a registration problem &lt;problem&gt;
 When I invoke the Request
  
 Then I will get the json object:
+```json
+{
+  "statusCode": "<errorcode>",
+  "answer": "<answer>",
+  "preHeaderMessages": ""
+}
+```
  
  
 
@@ -129,6 +136,9 @@ Given There is a check token problem &lt;problem&gt;
 When I invoke the Request
  
 Then I will get the json object:
+```json
+{"statusCode":"<errorcode>","answer":"<answer>","preHeaderMessages":""}
+```
  
 And The response code will be &quot;&lt;httpcode&gt;&quot;
  

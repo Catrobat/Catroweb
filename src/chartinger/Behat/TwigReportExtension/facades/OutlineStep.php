@@ -25,7 +25,23 @@ class OutlineStep implements StepInterface
 
     public function getArguments()
     {
-        return $this->stepnode->getArguments();
+        $arguments = array();
+        
+        foreach ($this->stepnode->getArguments() as $argument) {
+            $argument_array = array();
+            $argument_array["type"] = $argument->getNodeType();
+            switch ($argument->getNodeType()) {
+                case "PyString":
+                    $argument_array["text"] = $argument->getRaw();
+                    break;
+                case "Table":
+                    $argument_array["table"] = $argument->getTable();
+                    break;
+            }
+            $arguments[] = $argument_array;
+        }
+        
+        return $arguments;
     }
 
     public function getLine()
