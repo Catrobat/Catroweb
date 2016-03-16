@@ -35,6 +35,7 @@ class FeatureContext extends BaseContext
     private $url;
     private $post_parameters = array();
     private $get_parameters = array();
+    private $files = array();
     
     public function __construct()
     {
@@ -100,7 +101,7 @@ class FeatureContext extends BaseContext
             $this->getClient()->request('GET', $this->url . '?' . http_build_query($this->get_parameters), array(), array(), array());
         }
         else if ($this->method == "POST") {
-            $this->getClient()->request('POST', $this->url, $this->post_parameters, array(), array());
+            $this->getClient()->request('POST', $this->url, $this->post_parameters, $this->files, array());
         }
         else {
            throw new PendingException();
@@ -162,4 +163,22 @@ class FeatureContext extends BaseContext
     }
     
     
+
+    /**
+     * @Given /^I attach a catrobat file$/
+     */
+    public function iAttachACatrobatFile()
+    {
+        $filepath = self::FIXTUREDIR . 'test.catrobat';
+        assertTrue(file_exists($filepath), 'File not found');
+        $this->files[] = new UploadedFile($filepath, 'test.catrobat');
+    }
+
+    /**
+     * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the given file$/
+     */
+    public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
+    {
+        $this->post_parameters[$arg1] = md5_file($this->files[0]->getPathname());
+    }
 }

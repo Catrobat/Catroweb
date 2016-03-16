@@ -19,7 +19,7 @@ And I use the POST parameters:
 | registrationEmail | test@mail.com |
 | registrationCountry | at |
    
-And We assume the next generated token will be &quot;rrrrrrrrrrr&quot;
+And We assume the next generated token will be &quot;`rrrrrrrrrrr`&quot;
  
 When I invoke the Request
  
@@ -122,7 +122,7 @@ Then I will get the json object:
 }
 ```
  
-And The response code will be &quot;200&quot;
+And The response code will be &quot;`200`&quot;
  
  
 
@@ -145,7 +145,7 @@ Then I will get the json object:
 }
 ```
  
-And The response code will be &quot;&lt;httpcode&gt;&quot;
+And The response code will be &quot;`&lt;httpcode&gt;`&quot;
  
  
 
