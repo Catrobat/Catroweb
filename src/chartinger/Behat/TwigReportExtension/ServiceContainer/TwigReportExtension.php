@@ -36,7 +36,7 @@ class TwigReportExtension implements Extension
         $container->setDefinition("behat.twig_output.twig.loader", $definition);
         
         $definition = new Definition('\Twig_Environment', array(
-            new Reference("behat.twig_output.twig.loader"), array('debug' => true)
+            new Reference("behat.twig_output.twig.loader"), array('debug' => true, 'autoescape' => true)
         ));
         $definition->addMethodCall("addExtension", array(
             new \Twig_Extension_Debug()
@@ -52,6 +52,12 @@ class TwigReportExtension implements Extension
         ));
         $definition->addMethodCall("setOutputDirectory", array(
             $config["output"]["dir"]
+        ));
+        $definition->addMethodCall("setExtension", array(
+            $config["output"]["extension"]
+        ));
+        $definition->addMethodCall("setScope", array(
+            $config["output"]["scope"]
         ));
         $container->setDefinition("behat.twig_output.listener.event", $definition);
     }
@@ -69,23 +75,29 @@ class TwigReportExtension implements Extension
     {
         $builder->addDefaultsIfNotSet()
             ->children()
-            ->arrayNode('templates')
-            ->children()
-            ->scalarNode("dir")
-            ->defaultNull()
-            ->end()
-            ->scalarNode("file")
-            ->defaultValue("default.twig")
-            ->end()
-            ->end()
-            ->end()
-            ->arrayNode('output')
-            ->children()
-            ->scalarNode("dir")
-            ->isRequired()
-            ->end()
-            ->end()
-            ->end()
+                ->arrayNode('templates')
+                    ->children()
+                        ->scalarNode("dir")
+                        ->defaultNull()
+                        ->end()
+                        ->scalarNode("file")
+                        ->defaultValue("default.twig")
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('output')
+                    ->children()
+                        ->scalarNode("dir")
+                        ->isRequired()
+                        ->end()
+                        ->scalarNode("extension")
+                        ->defaultValue("html")
+                        ->end()
+                        ->scalarNode("scope")
+                        ->defaultValue("suite")
+                        ->end()
+                        ->end()
+                ->end()
             ->end()
             ->end();
     }

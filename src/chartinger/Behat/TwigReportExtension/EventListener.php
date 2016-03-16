@@ -22,6 +22,7 @@ use chartinger\Behat\TwigReportExtension\facades\Scenario;
 use chartinger\Behat\TwigReportExtension\facades\OutlineScenario;
 use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use Behat\Testwork\EventDispatcher\Event\AfterExerciseCompleted;
+use Symfony\Component\HttpFoundation\File\File;
 
 class EventListener implements EventSubscriberInterface
 {
@@ -31,6 +32,10 @@ class EventListener implements EventSubscriberInterface
     private $template;
 
     private $output_directory;
+    
+    private $extension;
+    
+    private $scope;
 
     private $features = array();
 
@@ -105,7 +110,18 @@ class EventListener implements EventSubscriberInterface
     {
         $this->updateStats("features", $event->getTestResult()
             ->getResultCode());
-        $this->features[] = new Feature($event, $this->scenarios, $this->background);
+        $feature = new Feature($event, $this->scenarios, $this->background);
+        
+        if ($this->scope == "feature") {
+            $rendered = $this->templating->render($this->template, array(
+                'feature' => $feature,
+            ));
+            $featurefile = new File($feature->getFile());
+            $filename = $featurefile->getBasename(".feature");
+            file_put_contents($this->output_directory . "/" . $filename . "." . $this->extension, $rendered);
+        }
+        
+        $this->features[] = $feature;
         $this->scenarios = array();
         $this->background = null;
     }
@@ -126,13 +142,14 @@ class EventListener implements EventSubscriberInterface
             
             $features = $this->features;
             
-            $rendered = $this->templating->render($this->template, array(
-                'features' => $features,
-                'statistics' => $this->statistics,
-                'suites' => $suite_name
-            ));
-            
-            file_put_contents($this->output_directory . "/" . $suite_name . ".html", $rendered);
+            if ($this->scope == "suite") {
+                $rendered = $this->templating->render($this->template, array(
+                    'features' => $features,
+                    'statistics' => $this->statistics,
+                    'suites' => $suite_name
+                ));
+                file_put_contents($this->output_directory . "/" . $suite_name . "." . $this->extension, $rendered);
+            }
             
             $this->features = array();
             $this->scenarios = array();
@@ -173,5 +190,15 @@ class EventListener implements EventSubscriberInterface
     public function setOutputDirectory($directory)
     {
         $this->output_directory = $directory;
+    }
+    
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+    
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
     }
 }

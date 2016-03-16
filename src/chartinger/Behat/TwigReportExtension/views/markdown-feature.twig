@@ -1,0 +1,46 @@
+# {{ feature.title }}
+> {{ feature.description }}
+
+{% for scenario in feature.scenarios %}
+## {{ scenario.title }}
+> {{ scenario.description }}
+
+{% for step in scenario.steps %}
+{{ step.text}}
+{% for argument in step.arguments %}
+{% if argument.text %}
+```json
+{{ argument.text|raw }}
+```
+{% endif %}
+{% if argument.table %}
+
+{% for row in argument.table %}
+|{% for col in row %} {{ col }} |{% endfor %}
+{% if loop.first%}
+
+|{% for col in row %} --- |{% endfor %}
+{%endif%}
+
+{% endfor %}  {# rows #}
+{% endif %}
+{% endfor %} {# arguments #}
+
+{% endfor %} {# steps #}
+
+
+{% if scenario.examples %}
+### Examples
+|{% for parameter in scenario.parameters %} {{ parameter }} |{% endfor %}
+
+|{% for parameter in scenario.parameters %} --- |{% endfor %}
+
+{% for example in scenario.examples %}
+|{% for parameter in example.parameters %} {{ parameter }} |{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+---
+
+{% endfor %}  {# scenarios #}
