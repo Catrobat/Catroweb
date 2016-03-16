@@ -30,6 +30,10 @@ class EventListener implements EventSubscriberInterface
     private $templating;
 
     private $template;
+    
+    private $index_filename;
+    
+    private $index_template;
 
     private $output_directory;
     
@@ -150,6 +154,19 @@ class EventListener implements EventSubscriberInterface
                 ));
                 file_put_contents($this->output_directory . "/" . $suite_name . "." . $this->extension, $rendered);
             }
+
+            if (($this->scope == "feature") && ($this->index_filename != null)) {
+                $feature_overviews = array();
+                foreach ($this->features as $feature) {
+                    $featurefile = new File($feature->getFile());
+                    $filename = $featurefile->getBasename(".feature") . "." . $this->extension;
+                    $feature_overviews[] = array('title' => $feature->getTitle(), 'filename' => $filename, 'description' => $feature->getDescription());
+                }
+                $rendered = $this->templating->render($this->index_template, array(
+                    'features' => $feature_overviews
+                ));
+                file_put_contents($this->output_directory . "/" . $this->index_filename . "." . $this->extension, $rendered);
+            }
             
             $this->features = array();
             $this->scenarios = array();
@@ -200,5 +217,15 @@ class EventListener implements EventSubscriberInterface
     public function setScope($scope)
     {
         $this->scope = $scope;
+    }
+    
+    public function setIndexTemplate($template)
+    {
+        $this->index_template = $template;
+    }
+    
+    public function setIndexFilename($filename)
+    {
+        $this->index_filename = $filename;
     }
 }

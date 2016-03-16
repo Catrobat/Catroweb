@@ -50,6 +50,12 @@ class TwigReportExtension implements Extension
         $definition->addMethodCall("setTemplate", array(
             $config["templates"]["file"]
         ));
+        $definition->addMethodCall("setIndexTemplate", array(
+            $config["templates"]["index"]
+        ));
+        $definition->addMethodCall("setIndexFilename", array(
+            $config["output"]["index"]
+        ));
         $definition->addMethodCall("setOutputDirectory", array(
             $config["output"]["dir"]
         ));
@@ -83,7 +89,9 @@ class TwigReportExtension implements Extension
                         ->scalarNode("file")
                         ->defaultValue("default.twig")
                         ->end()
-                    ->end()
+                        ->scalarNode("index")
+                        ->end()
+                        ->end()
                 ->end()
                 ->arrayNode('output')
                     ->children()
@@ -95,6 +103,9 @@ class TwigReportExtension implements Extension
                         ->end()
                         ->scalarNode("scope")
                         ->defaultValue("suite")
+                        ->end()
+                        ->scalarNode("index")
+                        ->defaultValue("index")
                         ->end()
                         ->end()
                 ->end()
