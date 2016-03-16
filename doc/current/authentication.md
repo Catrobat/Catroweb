@@ -106,8 +106,9 @@ Given I have the HTTP Request:
    
 And I use the POST parameters:
 
-| username | Catrobat |
+| Name | Value |
 | --- | --- |
+| username | Catrobat |
 | token | cccccccccc |
    
 When I invoke the Request
@@ -137,7 +138,11 @@ When I invoke the Request
  
 Then I will get the json object:
 ```json
-{"statusCode":"<errorcode>","answer":"<answer>","preHeaderMessages":""}
+{
+  "statusCode": "<errorcode>",
+  "answer": "<answer>",
+  "preHeaderMessages": ""
+}
 ```
  
 And The response code will be &quot;&lt;httpcode&gt;&quot;
@@ -152,3 +157,13 @@ And The response code will be &quot;&lt;httpcode&gt;&quot;
 ---
 
   
+# Background
+
+Given there are users:
+
+| name | password | token |
+| --- | --- | --- |
+| Catrobat | 12345 | cccccccccc |
+| User1 | vwxyz | aaaaaaaaaa |
+   
+ 

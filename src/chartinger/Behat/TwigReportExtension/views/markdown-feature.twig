@@ -44,3 +44,30 @@
 ---
 
 {% endfor %}  {# scenarios #}
+
+{% if feature.background %}
+# Background
+
+{% for step in feature.background.steps %}
+{{ step.text}}
+{% for argument in step.arguments %}
+{% if argument.text %}
+```json
+{{ argument.text|raw }}
+```
+{% endif %}
+{% if argument.table %}
+
+{% for row in argument.table %}
+|{% for col in row %} {{ col }} |{% endfor %}
+{% if loop.first%}
+
+|{% for col in row %} --- |{% endfor %}
+{%endif%}
+
+{% endfor %}  {# rows #}
+{% endif %}
+{% endfor %} {# arguments #}
+
+{% endfor %} {# steps #}
+{% endif %}

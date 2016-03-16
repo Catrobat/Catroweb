@@ -71,6 +71,7 @@ Feature: Authentication to the system
           | Method | POST                                  |
           | Url    | /pocketcode/api/checkToken/check.json |
       And I use the POST parameters:
+          | Name     | Value      |
           | username | Catrobat   |
           | token    | cccccccccc |
      When I invoke the Request
@@ -89,7 +90,11 @@ Feature: Authentication to the system
      When I invoke the Request
      Then I will get the json object:
           """
-          {"statusCode":"<errorcode>","answer":"<answer>","preHeaderMessages":""}
+          {
+            "statusCode": "<errorcode>",
+            "answer": "<answer>",
+            "preHeaderMessages": ""
+          }
           """
       And The response code will be "<httpcode>"
         
