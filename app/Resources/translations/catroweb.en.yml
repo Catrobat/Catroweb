@@ -50,6 +50,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+
 
 passwordRecovery:
   subject: Your Catrobat Password Recovery
