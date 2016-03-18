@@ -157,6 +157,8 @@
     </div>
   </div>
 
+
+
   <div id="program-bottom">
     <div id="icon-author">
       <div class="img-author-2 icon"></div>
@@ -180,6 +182,45 @@
     </div>
   </div>
 
+
+  <div id="program-comments">
+
+    <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
+    <div id="user-comment-wrapper">
+      <div class = 'img-avatar'></div>
+      <textarea class="msg" style="width: 100%; height: 100px"></textarea>
+      <button class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
+    </div>
+
+    <div id="comments-wrapper">
+      {% for comment in program_details.comments|slice(0, 10) %}
+        <div class = "single-comment">
+          <div class = "avatar-wrapper">
+            <div class = "img-avatar"></div>
+            <div class = "usr-name">{{ comment.username }}</div>
+          </div>
+          <p>{{ comment.text }}</p>
+        </div>
+      {% endfor %}
+
+      {% for comment in program_details.comments|slice(11, program_details.commentsLength) %}
+        <div class = "single-comment hidden">
+          <div class = "avatar-wrapper">
+            <div class = "img-avatar"></div>
+            <div class = "usr-name">{{ comment.username }}</div>
+          </div>
+          <p>{{ comment.text }}</p>
+        </div>
+      {% endfor %}
+
+      <div id = "show-more">
+        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+      </div>
+
+    </div>
+
+  </div>
+
 {% endblock %}
 
 
@@ -194,6 +235,42 @@
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
     program.generateFacebookPostLink();
+
+    counter = 10;
+
+    $('.show-more-button').click(function() {
+      counter += 10;
+
+      for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
+      {
+        $('.single-comment.hidden').first().removeClass("hidden");
+      }
+
+
+    });
+
+
+    $('.post-button').click(function() {
+      var msg = $('.msg').val();
+      var pId = {{ program_details.id }};
+      $.ajax({
+        url: "../comment",
+        type: "post",
+        data:{Message: msg, ProgramId: pId},
+        success: function(data) {
+          //alert(data);
+          if (data == "log_in")
+            window.location.href = "../login";
+          else
+          {
+            $('#comments-wrapper').load(' #comments-wrapper');
+            $('.msg').val("");
+          }
+        },
+        error: function() {
+          alert("something went terribly wrong");
+        }});
+    });
 
   </script>
 {% endblock %}

@@ -31,6 +31,7 @@ class EmailUserMessageController extends CRUDController
 
         $userManager = $this->get('usermanager');
 
+
         $user = $userManager->findUserByUsername($_GET['Username']);
 
         if(!$user)
@@ -46,6 +47,6 @@ class EmailUserMessageController extends CRUDController
         $headers = "From: webmaster@catrob.at" . "\r\n";
         mail($mailaddress, "Admin Message", $msg, $headers);
 
-        return new Response("Ok");
+        return new Response("OK");
     }
 }
