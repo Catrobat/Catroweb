@@ -50,6 +50,7 @@ programs:
   show_more: Mehr anzeigen
   comments: Kommentare
   send: Senden
+  delete: Löschen
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |

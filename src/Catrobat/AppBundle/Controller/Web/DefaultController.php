@@ -106,6 +106,7 @@ class DefaultController extends Controller
       'id' => $program->getId(),
       'comments' => $program_comments_,
       'commentsLength' =>  count($program_comments_),
+      'isAdmin' => $this->isGranted("ROLE_ADMIN"),
     );
 
       $user = $this->getUser();
@@ -153,18 +154,44 @@ class DefaultController extends Controller
   }
 
   /**
+   * @Route("/delete", name="delete")
+   * @Method({"GET"})
+   */
+  public  function deleteCommentAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user) {
+      return new Response("log_in");
+    }
+
+    if (!$this->isGranted("ROLE_ADMIN"))
+    {
+      return new Response("no_admin");
+    }
+    $em = $this->getDoctrine()->getManager();
+    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+
+    if (!$comment) {
+      throw $this->createNotFoundException(
+        'No comment found for this id '.$_GET['CommentId']
+      );
+    }
+    $em->remove($comment);
+    $em->flush();
+    return new Response("ok");
+  }
+
+  /**
    * @Route("/comment", name="comment")
    * @Method({"POST"})
    */
   public function postCommentAction(Request $request)
   {
-
-
-
     $user = $this->getUser();
     if (!$user) {
       return new Response("log_in");
     }
+
     //$this->denyAccessUnlessGranted("ROLE_USER", null, "Please login to proceed!");
 
 
@@ -172,14 +199,11 @@ class DefaultController extends Controller
     $user = $token->getUser();
     $id = $user->getId();
 
-
     /**
      * @var $user User
      * @var $program Program
      * @var $reported_program ProgramInappropriateReport
      */
-
-
 
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUsername());
