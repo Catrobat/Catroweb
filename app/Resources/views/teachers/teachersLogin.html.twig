@@ -1,0 +1,24 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+{% endblock %}
+
+
+{% block body %}
+    <h1>{{ ("teachers.login.title")|trans({}, "catroweb") }}</h1>
+
+    <div id="step-by-step-container">
+        <div class="size-large">
+            {{ ("teachers.login.description")|trans({}, "catroweb") }}
+        </div>
+        <div>
+            hello
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('js/custom/Help.js') }}"></script>
+{% endblock %}
