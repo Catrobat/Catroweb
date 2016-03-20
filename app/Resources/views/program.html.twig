@@ -198,6 +198,7 @@
           <div class = "avatar-wrapper">
             <div class = "img-avatar"></div>
             <div class = "usr-name">{{ comment.username }}</div>
+            <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
           </div>
           {% if  program_details.isAdmin  %}
            <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
@@ -211,6 +212,7 @@
           <div class = "avatar-wrapper">
             <div class = "img-avatar"></div>
             <div class = "usr-name">{{ comment.username }}</div>
+            <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
           </div>
           {% if  program_details.isAdmin  %}
             <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
