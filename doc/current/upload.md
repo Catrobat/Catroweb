@@ -20,9 +20,9 @@ And The POST parameters:
    
 And A catrobat file is attached to the request
  
-And The POST parameter &quot;`fileChecksum`&quot; contains the MD5 sum of the attached file
+And The POST parameter "`fileChecksum`" contains the MD5 sum of the attached file
  
-And We assume the next generated token will be &quot;`rrrrrrrrrrr`&quot;
+And We assume the next generated token will be "`rrrrrrrrrrr`"
  
 When The Request is invoked
  

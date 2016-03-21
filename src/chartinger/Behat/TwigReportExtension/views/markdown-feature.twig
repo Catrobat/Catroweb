@@ -6,7 +6,7 @@
 > {{ scenario.description }}
 
 {% for step in scenario.steps %}
-{{ step.text|replace({' "' : ' "`', '" ' : '`" ', '"' : '`"'}) }}
+{{ step.text|replace({' "' : ' "`', '" ' : '`" ', '"' : '`"'})|raw }}
 {% for argument in step.arguments %}
 {% if argument.text %}
 ```json

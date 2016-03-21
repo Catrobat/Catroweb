@@ -19,7 +19,7 @@ And The POST parameters:
 | registrationEmail | test@mail.com |
 | registrationCountry | at |
    
-And We assume the next generated token will be &quot;`rrrrrrrrrrr`&quot;
+And We assume the next generated token will be "`rrrrrrrrrrr`"
  
 When The Request is invoked
  
@@ -41,7 +41,7 @@ Then The returned json object will be:
 ## Troubleshooting
 > 
 
-Given The registration problem &quot;`&lt;problem&gt;`&quot;
+Given The registration problem "`<problem>`"
  
 When Such a Request is invoked
  
@@ -122,7 +122,7 @@ Then The returned json object will be:
 }
 ```
  
-And The response code will be &quot;`200`&quot;
+And The response code will be "`200`"
  
  
 
@@ -132,7 +132,7 @@ And The response code will be &quot;`200`&quot;
 ## Troubleshooting
 > 
 
-Given The check token problem &quot;`&lt;problem&gt;`&quot;
+Given The check token problem "`<problem>`"
  
 When Such a Request is invoked
  
@@ -145,7 +145,7 @@ Then The returned json object will be:
 }
 ```
  
-And The response code will be &quot;`&lt;httpcode&gt;`&quot;
+And The response code will be "`<httpcode>`"
  
  
 
