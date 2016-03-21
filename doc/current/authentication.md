@@ -4,13 +4,13 @@
 ## Registration of a new user
 > 
 
-Given I have the HTTP Request:
+Given The HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/loginOrRegister/loginOrRegister.json |
    
-And I use the POST parameters:
+And The POST parameters:
 
 | Name | Value |
 | --- | --- |
@@ -21,9 +21,9 @@ And I use the POST parameters:
    
 And We assume the next generated token will be &quot;`rrrrrrrrrrr`&quot;
  
-When I invoke the Request
+When The Request is invoked
  
-Then I will get the json object:
+Then The returned json object will be:
 ```json
 {
   "token": "rrrrrrrrrrr",
@@ -41,11 +41,11 @@ Then I will get the json object:
 ## Troubleshooting
 > 
 
-Given There is a registration problem &lt;problem&gt;
+Given The registration problem &quot;`&lt;problem&gt;`&quot;
  
-When I invoke the Request
+When Such a Request is invoked
  
-Then I will get the json object:
+Then The returned json object will be:
 ```json
 {
   "statusCode": "<errorcode>",
@@ -66,22 +66,22 @@ Then I will get the json object:
 ## Retrieve the upload token of a user
 > 
 
-Given I have the HTTP Request:
+Given The HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/loginOrRegister/loginOrRegister.json |
    
-And I use the POST parameters:
+And The POST parameters:
 
 | name | value |
 | --- | --- |
 | registrationUsername | Catrobat |
 | registrationPassword | 12345 |
    
-When I invoke the Request
+When The Request is invoked
  
-Then I will get the json object:
+Then The returned json object will be:
 ```json
 {
   "token": "cccccccccc",
@@ -98,22 +98,22 @@ Then I will get the json object:
 ## Checking a given token for its validity
 > 
 
-Given I have the HTTP Request:
+Given The HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/checkToken/check.json |
    
-And I use the POST parameters:
+And The POST parameters:
 
 | Name | Value |
 | --- | --- |
 | username | Catrobat |
 | token | cccccccccc |
    
-When I invoke the Request
+When The Request is invoked
  
-Then I will get the json object:
+Then The returned json object will be:
 ```json
 {
   "statusCode": 200,
@@ -132,11 +132,11 @@ And The response code will be &quot;`200`&quot;
 ## Troubleshooting
 > 
 
-Given There is a check token problem &lt;problem&gt;
+Given The check token problem &quot;`&lt;problem&gt;`&quot;
  
-When I invoke the Request
+When Such a Request is invoked
  
-Then I will get the json object:
+Then The returned json object will be:
 ```json
 {
   "statusCode": "<errorcode>",

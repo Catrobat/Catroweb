@@ -9,19 +9,19 @@ Feature: Upload a program to the website
       | User1    | vwxyz    | aaaaaaaaaa |
 
   Scenario: Upload program
-    Given I have the HTTP Request:
+    Given The HTTP Request:
           | Method | POST                               |
           | Url    | /pocketcode/api/upload/upload.json |
-      And I use the POST parameters:
+      And The POST parameters:
           | Name          | Value                  |
           | username      | Catrobat               |
           | token         | cccccccccc             |
           | fileChecksum  | <md5 checksum of file> |
-      And I attach a catrobat file
-      And the POST parameter "fileChecksum" contains the MD5 sum of the given file
+      And A catrobat file is attached to the request
+      And The POST parameter "fileChecksum" contains the MD5 sum of the attached file
       And We assume the next generated token will be "rrrrrrrrrrr"
-     When I invoke the Request
-     Then I will get the json object:
+     When The Request is invoked
+     Then The returned json object will be:
           """
           {
             "projectId": "1",

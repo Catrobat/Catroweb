@@ -11,18 +11,18 @@ Feature: Authentication to the system
 
 
   Scenario: Registration of a new user
-    Given I have the HTTP Request:
+    Given The HTTP Request:
           | Method | POST                                                 |
           | Url    | /pocketcode/api/loginOrRegister/loginOrRegister.json |
-      And I use the POST parameters:
+      And The POST parameters:
           | Name                 | Value                |
           | registrationUsername | newuser              |
           | registrationPassword | registrationpassword |
           | registrationEmail    | test@mail.com        |
           | registrationCountry  | at                   |
       And We assume the next generated token will be "rrrrrrrrrrr"
-     When I invoke the Request
-     Then I will get the json object:
+     When The Request is invoked
+     Then The returned json object will be:
           """
           {
             "token": "rrrrrrrrrrr",
@@ -33,9 +33,9 @@ Feature: Authentication to the system
           """
           
   Scenario Outline: Troubleshooting
-    Given There is a registration problem <problem>
-     When I invoke the Request
-     Then I will get the json object:
+    Given The registration problem "<problem>"
+     When Such a Request is invoked
+     Then The returned json object will be:
           """
           {
             "statusCode": "<errorcode>",
@@ -49,15 +49,15 @@ Feature: Authentication to the system
           | no password given | 602       | The password is missing. |
         
   Scenario: Retrieve the upload token of a user
-    Given I have the HTTP Request:
+    Given The HTTP Request:
           | Method | POST                                                 |
           | Url    | /pocketcode/api/loginOrRegister/loginOrRegister.json |
-      And I use the POST parameters:
+      And The POST parameters:
           | name                 | value                 |
           | registrationUsername | Catrobat              |
           | registrationPassword | 12345                 |
-     When I invoke the Request
-     Then I will get the json object:
+     When The Request is invoked
+     Then The returned json object will be:
           """
           {
             "token": "cccccccccc",
@@ -67,15 +67,15 @@ Feature: Authentication to the system
           """
 
   Scenario: Checking a given token for its validity
-    Given I have the HTTP Request:
+    Given The HTTP Request:
           | Method | POST                                  |
           | Url    | /pocketcode/api/checkToken/check.json |
-      And I use the POST parameters:
+      And The POST parameters:
           | Name     | Value      |
           | username | Catrobat   |
           | token    | cccccccccc |
-     When I invoke the Request
-     Then I will get the json object:
+     When The Request is invoked
+     Then The returned json object will be:
           """
           {
             "statusCode": 200,
@@ -86,9 +86,9 @@ Feature: Authentication to the system
        And The response code will be "200"
 
   Scenario Outline: Troubleshooting
-    Given There is a check token problem <problem>
-     When I invoke the Request
-     Then I will get the json object:
+    Given The check token problem "<problem>"
+     When Such a Request is invoked
+     Then The returned json object will be:
           """
           {
             "statusCode": "<errorcode>",

@@ -43,19 +43,7 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^there are users:$/
-     */
-    public function thereAreUsers(TableNode $table)
-    {
-        $users = $table->getHash();
-        
-        for ($i = 0; $i < count($users); ++ $i)
-        {
-           $this->insertUser(array('name' => $users[$i]['name'], 'token' => $users[$i]['token'], 'password' => $users[$i]['password']));
-        }
-    }
-
-    /**
+     * @Given /^The HTTP Request:$/
      * @Given /^I have the HTTP Request:$/
      */
     public function iHaveTheHttpRequest(TableNode $table)
@@ -66,6 +54,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @Given /^The POST parameters:$/
      * @Given /^I use the POST parameters:$/
      */
     public function iUseThePostParameters(TableNode $table)
@@ -75,6 +64,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @Given /^The GET parameters:$/
      * @Given /^I use the GET parameters:$/
      */
     public function iUseTheGetParameters(TableNode $table)
@@ -84,15 +74,9 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^We assume the next generated token will be "([^"]*)"$/
-     */
-    public function weAssumeTheNextGeneratedTokenWillBe($token)
-    {
-        $token_generator = $this->getSymfonyService('tokengenerator');
-        $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
-    }
-
-    /**
+     * @When /^Such a Request is invoked$/
+     * @When /^A Request is invoked$/
+     * @When /^The Request is invoked$/
      * @When /^I invoke the Request$/
      */
     public function iInvokeTheRequest()
@@ -109,6 +93,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @Then /^The returned json object will be:$/
      * @Then /^I will get the json object:$/
      */
     public function iWillGetTheJsonObject(PyStringNode $string)
@@ -127,7 +112,8 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @When /^There is a registration problem ([^"]*)$/
+     * @Given /^The registration problem "([^"]*)"$/
+     * @Given /^There is a registration problem ([^"]*)$/
      */
     public function thereIsARegistrationProblem($problem)
     {
@@ -145,6 +131,7 @@ class FeatureContext extends BaseContext
     }
     
     /**
+     * @Given /^The check token problem "([^"]*)"$/
      * @When /^There is a check token problem ([^"]*)$/
      */
     public function thereIsACheckTokenProblem($problem)
@@ -162,10 +149,30 @@ class FeatureContext extends BaseContext
         }
     }
     
-    
-
     /**
-     * @Given /^I attach a catrobat file$/
+     * @Given /^there are users:$/
+     */
+    public function thereAreUsers(TableNode $table)
+    {
+        $users = $table->getHash();
+    
+        for ($i = 0; $i < count($users); ++ $i)
+        {
+            $this->insertUser(array('name' => $users[$i]['name'], 'token' => $users[$i]['token'], 'password' => $users[$i]['password']));
+        }
+    }
+    
+    /**
+     * @Given /^We assume the next generated token will be "([^"]*)"$/
+     */
+    public function weAssumeTheNextGeneratedTokenWillBe($token)
+    {
+        $token_generator = $this->getSymfonyService('tokengenerator');
+        $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
+    }
+    
+    /**
+     * @Given /^A catrobat file is attached to the request$/
      */
     public function iAttachACatrobatFile()
     {
@@ -175,7 +182,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the given file$/
+     * @Given /^The POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
      */
     public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
     {
