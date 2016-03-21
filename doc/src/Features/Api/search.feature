@@ -1,5 +1,5 @@
 @doc
-Feature: Searching programs
+Feature: Search programs
 
   Background: 
     Given there are programs:
@@ -15,6 +15,8 @@ Feature: Searching programs
           | 9  | Webteam          |             | User1    | 100       | 33    | 01.01.2012 13:00 | 0.8.5   |
           | 10 | Fritz the Cat    |             | User1    | 112       | 33    | 01.01.2012 13:00 | 0.8.5   |
       And the current time is "01.08.2014 13:00"
+      And the server name is "pocketcode.org"
+      
 
   Scenario: Search for a program
   
@@ -32,7 +34,7 @@ Feature: Searching programs
           {
             "completeTerm": "",
             "CatrobatInformation": {
-              "BaseUrl": "http://localhost/",
+              "BaseUrl": "https://pocketcode.org/", 
               "TotalProjects": 1,
               "ProjectsExtension": ".catrobat"
             },
@@ -65,7 +67,7 @@ Feature: Searching programs
          {
            "completeTerm":"",
            "CatrobatInformation": {
-             "BaseUrl":"http:\/\/localhost\/",
+             "BaseUrl":"https://pocketcode.org/",
              "TotalProjects":0,
              "ProjectsExtension":".catrobat"
            },

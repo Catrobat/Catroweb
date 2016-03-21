@@ -36,6 +36,7 @@ class FeatureContext extends BaseContext
     private $url;
     private $post_parameters = array();
     private $get_parameters = array();
+    private $server_parameters = array('HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true);
     private $files = array();
     
     public function __construct()
@@ -84,15 +85,7 @@ class FeatureContext extends BaseContext
      */
     public function iInvokeTheRequest()
     {
-        if ($this->method == "GET") {
-            $this->getClient()->request('GET', $this->url . '?' . http_build_query($this->get_parameters), array(), array(), array());
-        }
-        else if ($this->method == "POST") {
-            $this->getClient()->request('POST', $this->url, $this->post_parameters, $this->files, array());
-        }
-        else {
-           throw new PendingException();
-        }
+        $this->getClient()->request($this->method, 'https://' . $this->server_parameters['HTTP_HOST'] . $this->url . '?' . http_build_query($this->get_parameters), $this->post_parameters, $this->files, $this->server_parameters);
     }
 
     /**
@@ -112,6 +105,14 @@ class FeatureContext extends BaseContext
     {
         $response = $this->getClient()->getResponse();
         assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+    }
+    
+    /**
+     * @Given /^the server name is "([^"]*)"$/
+     */
+    public function theServerNameIs($arg1)
+    {
+        $this->server_parameters = array('HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true, 'SERVER_NAME' => 'asdsd.org');
     }
     
     // ----------------------------------------------------------------
@@ -141,7 +142,9 @@ class FeatureContext extends BaseContext
                 'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : ""
             ));
             if ($user == null) {
-                $user = $this->insertUser(array('name' => $programs[$i]['owned by']));
+                if (isset($programs[$i]['owned by'])) {
+                    $user = $this->insertUser(array('name' => $programs[$i]['owned by']));
+                }
             }
             @$config = array(
                 'name' => $programs[$i]['name'],
@@ -159,6 +162,24 @@ class FeatureContext extends BaseContext
     
             $this->insertProgram($user, $config);
         }
+    }
+    
+    /**
+     * @Given /^following programs are featured:$/
+     */
+    public function followingProgramsAreFeatured(TableNode $table)
+    {
+        $em = $this->getManager();
+        $featured = $table->getHash();
+        for ($i = 0; $i < count($featured); ++ $i) {
+            $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
+            $featured_entry = new FeaturedProgram();
+            $featured_entry->setProgram($program);
+            $featured_entry->setActive(isset($featured[$i]['active']) ?  $featured[$i]['active'] == 'yes' : true);
+            $featured_entry->setImageType('jpg');
+            $em->persist($featured_entry);
+        }
+        $em->flush();
     }
     
     /**
@@ -241,9 +262,10 @@ class FeatureContext extends BaseContext
      */
     public function searchingFor($arg1)
     {
+        $this->method = 'GET';
         $this->url = '/pocketcode/api/projects/search.json';
         $this->get_parameters = array('q' => $arg1, 'offset' => 0, 'limit' => 10);
-        $this->getClient()->request('GET', $this->url . '?' . http_build_query($this->get_parameters), array(), array(), array());
+        $this->iInvokeTheRequest();
     }
     
     

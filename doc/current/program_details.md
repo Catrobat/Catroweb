@@ -23,7 +23,7 @@ Then The returned json object will be:
 {
     "completeTerm":"",
     "CatrobatInformation": {
-                             "BaseUrl":"http://localhost/",
+                             "BaseUrl":"https://pocketcode.org/",
                              "TotalProjects":1,
                              "ProjectsExtension":".catrobat"
                             },
@@ -95,5 +95,7 @@ Given there are programs:
 | 3 | program 3 |  | User1 | 133 | 33 | 01.01.2012 13:00 | 0.8.5 | 1337 |
    
 And the current time is &quot;01.08.2014 13:00&quot;
+ 
+And the server name is &quot;pocketcode.org&quot;
  
  
