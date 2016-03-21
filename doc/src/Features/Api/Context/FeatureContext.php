@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Features\Api\Context\FixedTokenGenerator;
+use Catrobat\AppBundle\Features\Api\Context\FixedTime;
 
 //
 // Require 3rd-party libraries here:
@@ -41,6 +42,8 @@ class FeatureContext extends BaseContext
     {
         parent::__construct();
     }
+    
+    // ----------------------------------------------------------------
     
     /**
      * @Given /^The HTTP Request:$/
@@ -111,6 +114,90 @@ class FeatureContext extends BaseContext
         assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
     
+    // ----------------------------------------------------------------
+    
+    /**
+     * @Given /^there are users:$/
+     */
+    public function thereAreUsers(TableNode $table)
+    {
+        $users = $table->getHash();
+    
+        for ($i = 0; $i < count($users); ++ $i)
+        {
+            $this->insertUser(array('name' => $users[$i]['name'], 'token' => $users[$i]['token'], 'password' => $users[$i]['password']));
+        }
+    }
+    
+    /**
+     * @Given /^there are programs:$/
+     */
+    public function thereArePrograms(TableNode $table)
+    {
+        $programs = $table->getHash();
+        $program_manager = $this->getProgramManger();
+        for ($i = 0; $i < count($programs); ++ $i) {
+            $user = $this->getUserManager()->findOneBy(array(
+                'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : ""
+            ));
+            if ($user == null) {
+                $user = $this->insertUser(array('name' => $programs[$i]['owned by']));
+            }
+            @$config = array(
+                'name' => $programs[$i]['name'],
+                'description' => $programs[$i]['description'],
+                'views' => $programs[$i]['views'],
+                'downloads' => $programs[$i]['downloads'],
+                'uploadtime' => $programs[$i]['upload time'],
+                'apk_status' => $programs[$i]['apk_status'],
+                'catrobatversionname' => $programs[$i]['version'],
+                'directory_hash' => $programs[$i]['directory_hash'],
+                'filesize' => @$programs[$i]['FileSize'],
+                'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
+                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null
+            );
+    
+            $this->insertProgram($user, $config);
+        }
+    }
+    
+    /**
+     * @Given /^the current time is "([^"]*)"$/
+     */
+    public function theCurrentTimeIs($time)
+    {
+        $date = new \DateTime($time, new \DateTimeZone('UTC'));
+        $time_service = $this->getSymfonyService('time');
+        $time_service->setTime(new FixedTime($date->getTimestamp()));
+    }
+    
+    /**
+     * @Given /^We assume the next generated token will be "([^"]*)"$/
+     */
+    public function weAssumeTheNextGeneratedTokenWillBe($token)
+    {
+        $token_generator = $this->getSymfonyService('tokengenerator');
+        $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
+    }
+    
+    /**
+     * @Given /^A catrobat file is attached to the request$/
+     */
+    public function iAttachACatrobatFile()
+    {
+        $filepath = self::FIXTUREDIR . 'test.catrobat';
+        assertTrue(file_exists($filepath), 'File not found');
+        $this->files[] = new UploadedFile($filepath, 'test.catrobat');
+    }
+
+    /**
+     * @Given /^The POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
+     */
+    public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
+    {
+        $this->post_parameters[$arg1] = md5_file($this->files[0]->getPathname());
+    }
+    
     /**
      * @Given /^The registration problem "([^"]*)"$/
      * @Given /^There is a registration problem ([^"]*)$/
@@ -150,42 +237,14 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^there are users:$/
+     * @When /^Searching for "([^"]*)"$/
      */
-    public function thereAreUsers(TableNode $table)
+    public function searchingFor($arg1)
     {
-        $users = $table->getHash();
-    
-        for ($i = 0; $i < count($users); ++ $i)
-        {
-            $this->insertUser(array('name' => $users[$i]['name'], 'token' => $users[$i]['token'], 'password' => $users[$i]['password']));
-        }
+        $this->url = '/pocketcode/api/projects/search.json';
+        $this->get_parameters = array('q' => $arg1, 'offset' => 0, 'limit' => 10);
+        $this->getClient()->request('GET', $this->url . '?' . http_build_query($this->get_parameters), array(), array(), array());
     }
     
-    /**
-     * @Given /^We assume the next generated token will be "([^"]*)"$/
-     */
-    public function weAssumeTheNextGeneratedTokenWillBe($token)
-    {
-        $token_generator = $this->getSymfonyService('tokengenerator');
-        $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
-    }
     
-    /**
-     * @Given /^A catrobat file is attached to the request$/
-     */
-    public function iAttachACatrobatFile()
-    {
-        $filepath = self::FIXTUREDIR . 'test.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
-        $this->files[] = new UploadedFile($filepath, 'test.catrobat');
-    }
-
-    /**
-     * @Given /^The POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
-     */
-    public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
-    {
-        $this->post_parameters[$arg1] = md5_file($this->files[0]->getPathname());
-    }
 }
