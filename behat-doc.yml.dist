@@ -1,0 +1,36 @@
+default:
+        
+    formatters:
+        pretty:   false
+        progress: true
+        
+    extensions:
+        Behat\Symfony2Extension\ServiceContainer\Symfony2Extension: 
+            kernel:
+                env: test
+                debug: true
+        VIPSoft\DoctrineDataFixturesExtension\Extension:
+            lifetime:    scenario
+            autoload:    false
+        chartinger\Behat\TwigReportExtension:
+            templates:
+                file: markdown-feature.twig
+                index: markdown-index.twig
+            output:
+                index: README
+                dir: ./doc/current/
+                scope: feature
+                extension: md 
+
+    autoload:
+      '': "%paths.base%/doc/src/"
+
+    suites:
+        doc:
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/doc/src/Features/Api/"
+            contexts:
+              - Features\Api\Context\FeatureContext
+        
