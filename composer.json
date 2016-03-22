@@ -37,7 +37,6 @@
         "sonata-project/user-bundle": "dev-master@dev",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master@dev",
         "sonata-project/datagrid-bundle": "dev-master@dev",
-        "ircmaxell/password-compat": "~1.0",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
         "google/apiclient": "1.1.*",
         "facebook/php-sdk-v4" : "~5.0",
