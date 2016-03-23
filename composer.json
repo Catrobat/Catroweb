@@ -51,7 +51,7 @@
         "henrikbjorn/phpspec-code-coverage": "1.0.*@dev",
         "phpunit/phpunit": "3.7.*",
         "bossa/phpspec2-expect": "dev-master",
-        "behat/behat": "3.0.*@dev",
+        "behat/behat": "~3.0.6@dev",
         "behat/symfony2-extension": "2.0.*@dev",
         "behat/mink": "1.6.*@dev",
         "behat/mink-extension": "*@dev",
