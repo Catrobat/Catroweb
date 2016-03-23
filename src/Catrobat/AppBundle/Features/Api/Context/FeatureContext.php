@@ -372,7 +372,7 @@ class FeatureContext extends BaseContext
      */
     public function iGetWithTheseParameters($url)
     {
-        $this->getClient()->request('GET', $url . '?' . http_build_query($this->request_parameters), array(), $this->files, array(
+        $this->getClient()->request('GET', 'http://' . $this->hostname . $url . '?' . http_build_query($this->request_parameters), array(), $this->files, array(
             'HTTP_HOST' => $this->hostname,
             'HTTPS' => $this->secure
         ));

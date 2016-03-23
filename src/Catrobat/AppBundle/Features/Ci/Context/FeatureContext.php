@@ -136,7 +136,7 @@ class FeatureContext extends BaseContext
     public function iStartAnApkGenerationOfMyProgram()
     {
         $client = $this->getClient();
-        $client->request('GET', '/pocketcode/ci/build/1', array(), array(), array(
+        $client->request('GET', 'http://' . $this->hostname . '/pocketcode/ci/build/1', array(), array(), array(
             'HTTP_HOST' => $this->hostname,
             'HTTPS' => $this->secure
         ));
