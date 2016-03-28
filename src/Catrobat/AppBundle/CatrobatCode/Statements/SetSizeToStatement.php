@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class SetSizeToStatement extends Statement
+class SetSizeToStatement extends BaseSetToStatement
 {
-    const BEGIN_STRING = "set size to (";
+    const BEGIN_STRING = "size";
     const END_STRING = ")%<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
