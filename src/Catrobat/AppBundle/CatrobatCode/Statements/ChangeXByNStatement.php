@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class ChangeXByNStatement extends Statement
+class ChangeXByNStatement extends BaseChangeByNStatement
 {
-    const BEGIN_STRING = "change X by (";
+    const BEGIN_STRING = "X";
     const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)

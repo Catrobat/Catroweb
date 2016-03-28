@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class SetVolumeToStatement extends Statement
+class SetVolumeToStatement extends BaseSetToStatement
 {
-    const BEGIN_STRING = "set volume to (";
+    const BEGIN_STRING = "volume";
     const END_STRING = ")%<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
