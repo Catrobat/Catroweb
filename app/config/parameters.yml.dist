@@ -56,3 +56,5 @@ parameters:
     backup_database_name: ~
     backup_database_user: ~
     backup_database_password: ~
+    
+    jspath: compiled/min/

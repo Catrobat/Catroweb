@@ -20,7 +20,7 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
-    And I should see an "#btn-logout" element
+    And I should see the logout button
     When I click the "logout" button
     Then I should not be logged in
     When I trigger Facebook login with auth_type ''
@@ -40,7 +40,7 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
-    And I should see an "#btn-logout" element
+    And I should see the logout button
     When I click the "logout" button
     Then I should not be logged in
     When I trigger Google login with approval prompt "auto"
@@ -71,8 +71,8 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
-    And I should see an "#btn-logout" element
-    And I should see an "#btn-profile" element
+    And I should see the logout button
+    And I should see the profile button
     When I click the "profile" button
     And I wait for a second
     Then I fill in "email" with "pocket_tester@tfbnw.net"
@@ -85,7 +85,7 @@ Feature: Open Authentication
     And I click Facebook login link
     And I wait for a second
     Then I should be logged in
-    And I should see an "#btn-profile" element
+    And I should see the profile button
     When I click the "profile" button
     And I wait for a second
     Then the "email" field should contain "pocket_tester@tfbnw.net"
@@ -99,8 +99,8 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
-    And I should see an "#btn-logout" element
-    And I should see an "#btn-profile" element
+    And I should see the logout button
+    And I should see the profile button
     When I click the "profile" button
     And I wait for a second
     Then I fill in "email" with "pocket-code-tester@gmail.com"
@@ -115,7 +115,7 @@ Feature: Open Authentication
     And I click Google login link "once"
     And I wait for a second
     Then I should be logged in
-    And I should see an "#btn-profile" element
+    And I should see the profile button
     When I click the "profile" button
     And I wait for a second
     Then the "email" field should contain "pocket-code-tester@gmail.com"

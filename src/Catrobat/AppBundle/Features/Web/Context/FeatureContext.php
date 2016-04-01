@@ -1409,22 +1409,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         }
     }
 
-    /**
-     * @Then /^a link to the Facebook post should be displayed$/
-     */
-    public function aLinkToTheFacebookPostShouldBeDisplayed()
-    {
-        assertTrue($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
-    }
-
-    /**
-     * @Then /^a link to the Facebook post should not be displayed$/
-     */
-    public function aLinkToTheFacebookPostShouldNotBeDisplayed()
-    {
-        assertFalse($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
-    }
-
   /**
    * @Given /^following programs are featured:$/
    */
@@ -1495,11 +1479,110 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iSearchForWithTheSearchbar($arg1)
     {
-
         $this->fillField('search-input-header', $arg1);
         $this->iClick('#search-header');
     }
 
+    /**
+     * @Then /^I should see the Facebook Like button in the header$/
+     */
+    public function iShouldSeeTheFacebookLikeButtonInTheHeader()
+    {
+        $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
+        assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
+        assertTrue($like_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+    }
 
+    /**
+     * @Then /^I should see the Google Plus 1 button in the header$/
+     */
+    public function iShouldSeeTheGoogleButtonInTheHeader()
+    {
+        $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
+        assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
+        assertTrue($plus_one_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+    }
 
+    /**
+     * @Then /^I should see the Facebook Like button on the bottom of the program page$/
+     */
+    public function iShouldSeeTheFacebookLikeButtonOnTheBottomOfTheProgramPage()
+    {
+        $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
+        assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
+        assertTrue($like_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+    }
+
+    /**
+     * @Then /^I should see the Google Plus (\d+) button on the bottom of the program page$/
+     */
+    public function iShouldSeeTheGooglePlusButtonOnTheBottomOfTheProgramPage($arg1)
+    {
+        $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
+        assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
+        assertTrue($plus_one_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+    }
+
+    /**
+     * @Then /^I should see the Facebook Share button$/
+     */
+    public function iShouldSeeTheFacebookShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-facebook');
+        assertTrue($share_button != null && $share_button->isVisible(), "The Facebook share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the Google Plus share button$/
+     */
+    public function iShouldSeeTheGooglePlusShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-gplus');
+        assertTrue($share_button != null && $share_button->isVisible(), "The Google+ share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the Twitter share button$/
+     */
+    public function iShouldSeeTheTwitterShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-twitter');
+        assertTrue($share_button != null && $share_button->isVisible(), "The Twitter share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the Mail share button$/
+     */
+    public function iShouldSeeTheMailShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-email');
+        assertTrue($share_button != null && $share_button->isVisible(), "The E-Mail share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the WhatsApp share button$/
+     */
+    public function iShouldSeeTheWhatsappShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-whatsapp');
+        assertTrue($share_button != null && $share_button->isVisible(), "The WhatsApp share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the logout button$/
+     */
+    public function iShouldSeeTheLogoutButton()
+    {
+        $logout_button = $this->getSession()->getPage()->findById('btn-logout');
+        assertTrue($logout_button != null && $logout_button->isVisible(), "The Logout button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the profile button$/
+     */
+    public function iShouldSeeTheProfileButton()
+    {
+        $profile_button = $this->getSession()->getPage()->findById('btn-profile');
+        assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
+    }
 }

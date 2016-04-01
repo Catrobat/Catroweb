@@ -7,12 +7,7 @@
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  
-  {% javascripts 
-        'js/custom/social/*'
-        output='compiled/loginscript.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
+  <script src="{{  asset( getJavascriptPath('loginscript.js') )}}"></script>
 {% endblock %}
 
 {% block header %}
@@ -68,7 +63,7 @@
     </div>
 </form>
 
-{% include ':Default:oauth_form.html.twig' %}
+{% include ':social:oauth_form.html.twig' %}
 
 {% endblock fos_user_content %}
 

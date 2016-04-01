@@ -8,11 +8,8 @@
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}" />
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
-  
-  {% javascripts 'js/plugins/*'
-                 'js/base/*' output='compiled/script.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
+
+  <script src=" {{  asset( getJavascriptPath('script.js') )}}"></script>
 
   {% block head %}{% endblock %}
 </head>

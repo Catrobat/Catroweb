@@ -4,6 +4,8 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
   <link href="/html5/player/pocketCodePlayer.css" rel="stylesheet" />
   <script src="/html5/player/pocketCodePlayer.js"></script>
+  <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+
   <meta property="og:image" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
   <meta property="og:type" content="website" />
   <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
@@ -28,11 +30,15 @@
   </div>
 
   <div id="program-middle">
-    <div id="image" class="image-container">
-      <a id="url-image" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-        <img width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
-      </a>
-    </div>
+      <div id="image" class="image-container">
+        <a id="url-image" class="url-image" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+          <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
+        </a>
+        {% if not isWebview() %}
+          {% include ':social:social_share_desktop.html.twig' %}
+        {% endif %}
+      </div>
+
     <div id="info">
       <h2>{{ "description"|trans({}, "catroweb") }}</h2>
 
@@ -150,10 +156,6 @@
         </tr>
       </table>
 
-      <div id="facebook-post-link">
-        <a id="btn-facebook-post-link" target="_blank" href="#"><img src="{{ asset('images/social/FB-f-Logo__blue.png') }}" alt="Facebook Post Link"></a>
-      </div>
-
       <p>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
       <br>
@@ -187,6 +189,10 @@
       {% endif %}
     </div>
   </div>
+
+  {% if isWebview() %}
+    {% include ':social:social_share_mobile.html.twig' %}
+  {% endif %}
 
   <div id="program-bottom">
     <div id="icon-author">
@@ -266,8 +272,11 @@
       </div>
     </div>
   </div>
-{% endblock %}
+  {% if isWebview() %}
+    {% include ':social:social_like_program_bottom.html.twig' %}
+  {% endif %}
 
+{% endblock %}
 
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
@@ -275,11 +284,10 @@
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
       '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}','{{ asset('images/symbols/loading.gif') }}',
       '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}','{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
-      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}', '{{ fb_post_link }}');
+      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}');
     program.getApkStatus();
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
-    program.generateFacebookPostLink();
 
     counter = 10;
 

@@ -1,10 +1,18 @@
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
 <nav>
   {% if not isWebview() %}
-  <div id="header-top">
+    <div id="fb-root"></div>
+    <div id="header-top">
+
+    {% include ':social:social_like_header.html.twig' %}
+
     <div><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a></div>
     <div><a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a></div>
     <div><a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a></div>
   </div>
+
   {% endif %}
 
   <div id="header-left">
