@@ -26,7 +26,6 @@ class TeacherDownloadAreaController extends Controller
     public function teachersLoginAction(Request $request)
     {
         return $this->get('templating')->renderResponse(':teachers:teachersLogin.html.twig');
-        //return new Response("Seems like you'll have to login first ;-)");
     }
 
     /**
