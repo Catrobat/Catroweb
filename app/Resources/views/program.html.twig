@@ -199,6 +199,9 @@
             <div class = "img-avatar"></div>
             <div class = "usr-name">{{ comment.username }}</div>
           </div>
+          {% if  program_details.isAdmin  %}
+           <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+          {% endif %}
           <p>{{ comment.text }}</p>
         </div>
       {% endfor %}
@@ -209,6 +212,9 @@
             <div class = "img-avatar"></div>
             <div class = "usr-name">{{ comment.username }}</div>
           </div>
+          {% if  program_details.isAdmin  %}
+            <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+          {% endif %}
           <p>{{ comment.text }}</p>
         </div>
       {% endfor %}
@@ -245,10 +251,31 @@
       {
         $('.single-comment.hidden').first().removeClass("hidden");
       }
-
-
     });
 
+    $(document).on("click", ".delete-button", function() {
+      var pId = {{ program_details.id }};
+      var commentId = $(this).data('commentid');
+      $.ajax({
+        url:"../delete",
+        type: "get",
+        data:{ProgramId: pId, CommentId: commentId},
+        success: function(data) {
+          if (data == "log_in")
+            window.location.href = "../login";
+          else if (data == "no_admin"){
+            alert("You have no admin rights. Please Log in as an Admin");
+          }
+          else {
+            $('#comments-wrapper').load(' #comments-wrapper');
+            $('.msg').val("");
+          }
+        },
+        error: function(data) {
+          //alert(data);
+          alert("something went terribly wrong");
+        }});
+    });
 
     $('.post-button').click(function() {
       var msg = $('.msg').val();
@@ -258,7 +285,6 @@
         type: "post",
         data:{Message: msg, ProgramId: pId},
         success: function(data) {
-          //alert(data);
           if (data == "log_in")
             window.location.href = "../login";
           else
@@ -271,6 +297,9 @@
           alert("something went terribly wrong");
         }});
     });
+
+
+
 
   </script>
 {% endblock %}

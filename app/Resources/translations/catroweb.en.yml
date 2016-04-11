@@ -53,6 +53,7 @@ programs:
   show_more: Show More
   comments: Comments
   send: Send
+  delete: Delete
 
 
 passwordRecovery:
