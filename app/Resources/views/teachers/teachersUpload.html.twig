@@ -9,15 +9,17 @@
     {#<h1>{{ ("teachers.login.title")|trans({}, "catroweb") }}</h1>#}
     <h1>Teachers</h1>
 
-    <form method="POST" action="teachersAuth">
+    <form method="POST" action="teachersTemplatePostUpload" enctype="multipart/form-data">
         <div id="teachers-login-container" style="text-align:center;line-height: 55px;">
             <div class="size-large">
                 {#{{ ("teachers.login.description")|trans({}, "catroweb") }}#}
-                Login is required prior to proceeding.
+                You may UPLOAD templates here. Choose a templates.zip file to proceed:
             </div>
             <div>
-                <input type="password" style="margin:auto;line-height: 25px;" name="password"/>
-                <button class="login-button" style="display: block;margin:auto" onclick="submit">Login</button>
+                <input type="file" name="templates" id="templates" onchange="javascript:this.form.submit()" />
+            </div>
+            <div class="size-large">
+                <a href="teachersLogout">Logout from teachers area</a>
             </div>
         </div>
     </form>
