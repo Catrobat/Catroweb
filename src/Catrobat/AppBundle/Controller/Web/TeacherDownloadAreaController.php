@@ -75,7 +75,7 @@ class TeacherDownloadAreaController extends Controller
      */
     public function teachersDownloadAction(Request $request)
     {
-        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.zip";
+        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.catrobat";
 
         if (file_exists($file)) {
             header('Content-Description: File Transfer');
@@ -117,7 +117,7 @@ class TeacherDownloadAreaController extends Controller
             return $this->redirectToRoute('teachersLogin'); // fos_user_security_login
         }
 
-        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.zip";
+        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.catrobat";
 
         if (move_uploaded_file($_FILES['templates']['tmp_name'], $file)) {
             return new Response("Templates have been uploaded successfully!");
