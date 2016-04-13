@@ -70,7 +70,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachersDownload", name="teachersDownload")
+     * @Route("/teachersDownload.catrobat", name="teachersDownload.catrobat")
      * @Method({"GET"})
      */
     public function teachersDownloadAction(Request $request)
