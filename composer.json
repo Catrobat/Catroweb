@@ -47,7 +47,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",
-        "phpspec/phpspec": "dev-master",
+        "phpspec/phpspec": "~2.5@dev",
         "henrikbjorn/phpspec-code-coverage": "1.0.*@dev",
         "phpunit/phpunit": "3.7.*",
         "bossa/phpspec2-expect": "dev-master",
