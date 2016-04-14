@@ -52,10 +52,17 @@ services:
               arguments: [null, null, AppBundle:Admin\GoogleCloudMessaging]
 
       catrowebadmin.block.tools.mail:
-                    class: Catrobat\AppBundle\Admin\EmailUserMessageAdmin
-                    tags:
-                      - { name: sonata.admin, manager_type: orm, label: SendMail }
-                    arguments: [null, null, AppBundle:Admin\EmailUserMessage]
+              class: Catrobat\AppBundle\Admin\EmailUserMessageAdmin
+              tags:
+                - { name: sonata.admin, manager_type: orm, label: SendMail }
+              arguments: [null, null, AppBundle:Admin\EmailUserMessage]
+
+      catrowebadmin.block.tools.reports:
+              class: Catrobat\AppBundle\Admin\ReportAdmin
+              tags:
+                - { name: sonata.admin, manager_type: orm, label: Reports }
+              arguments: [null, Catrobat\AppBundle\Entity\UserComment, AppBundle:Admin\Report]
+
 
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
