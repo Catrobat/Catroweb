@@ -27,3 +27,4 @@ Catroweb.iml
 Catroweb-Symfony.iml
 .idea/vcs.xml
 /node_modules/
+.project
