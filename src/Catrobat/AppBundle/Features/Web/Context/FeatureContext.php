@@ -161,6 +161,23 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @When /^I wait (\d+) milliseconds$/
+   */
+  public function iWaitMilliseconds($milliseconds)
+  {
+      $this->getSession()->wait($milliseconds);
+  }
+
+  /**
+   * @Then /^I should see (\d+) "([^"]*)"$/
+   */
+  public function iShouldSeeNumberOfElements($arg1, $arg2)
+  {
+      $programs = $this->getSession()->getPage()->findAll('css', $arg2);
+      assertEquals($arg1, count($programs));
+  }
+    
+  /**
    * @Then /^I should see the featured slider$/
    */
   public function iShouldSeeTheFeaturedSlider()
