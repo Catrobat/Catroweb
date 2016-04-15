@@ -11,6 +11,7 @@ var ProgramLoader = function (container, url, column_max) {
   self.visible_steps = 0;
   self.showAllPrograms = false;
   self.windowWidth = $(window).width();
+  self.counter = 0;
 
   self.init = function() {
     $.get(self.url, { limit: self.download_limit, offset: self.loaded}, function(data) {
@@ -65,6 +66,15 @@ var ProgramLoader = function (container, url, column_max) {
       self.setDefaultVisibility();
       self.windowWidth = $(window).width();
     });
+
+    var cookie_content = document.cookie.split("; ");
+    for(var i = 0; i < cookie_content.length; i++) {
+      var cookie_content_part = cookie_content[i].split("=");
+      if(cookie_content_part[0].localeCompare(self.container) == 0)
+        self.counter = cookie_content_part[1];
+    }
+    for(var i = 0; i < self.counter; i++)
+      self.showMorePrograms();
   };
 
   self.loadProgramsIntoContainer = function(data) {
@@ -162,6 +172,9 @@ var ProgramLoader = function (container, url, column_max) {
 
   self.showMoreListener = function() {
     $(self.container + ' .button-show-more').click(function() {
+
+      self.counter++;
+      document.cookie = self.container + '=' + self.counter + '; expires=0; path=/pocketcode/';
 
       if(self.visible + self.visible_steps <= self.loaded)
         self.showMorePrograms();
