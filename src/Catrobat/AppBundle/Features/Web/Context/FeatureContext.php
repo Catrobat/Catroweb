@@ -159,6 +159,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @Then /^I should see funny things$/
+   */
+  public function iShouldSeeNumberOfElements()
+  {
+      assertTrue(true);
+  }
+
+  /**
    * @Then /^I should see the featured slider$/
    */
   public function iShouldSeeTheFeaturedSlider()

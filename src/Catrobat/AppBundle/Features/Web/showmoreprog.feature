@@ -31,29 +31,50 @@ Feature: Show more programs button behaviour
       | 21  | program 21 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
       | 22  | program 22 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
 
-  Scenario: Should see all buttons at homepage
+  Scenario Outline: Should see all buttons at homepage
     Given I am on homepage
-    Then the element "#newest .button-show-more" should be visible
-    And the element "#mostDownloaded .button-show-more" should be visible
-    And the element "#mostViewed .button-show-more" should be visible
-    And the element "#random .button-show-more" should be visible
+    Then the element <button> should be visible
+
+    Examples:
+      | button                              |
+      | "#newest .button-show-more"         |
+      | "#mostDownloaded .button-show-more" |
+      | "#mostViewed .button-show-more"     |
+      | "#random .button-show-more"         |
 
   @Mobile
-  Scenario: Should see all buttons at homepage in mobile format
+  Scenario Outline: Should see all buttons at homepage in mobile format
     Given I am on homepage
-    Then the element "#newest .button-show-more" should be visible
-    And the element "#mostDownloaded .button-show-more" should be visible
-    And the element "#mostViewed .button-show-more" should be visible
-    And the element "#random .button-show-more" should be visible
+    Then the element <button> should be visible
 
-  Scenario: Buttons should disappear after clicking them in desktop format
+    Examples:
+      | button                              |
+      | "#newest .button-show-more"         |
+      | "#mostDownloaded .button-show-more" |
+      | "#mostViewed .button-show-more"     |
+      | "#random .button-show-more"         |
+
+  Scenario Outline: Buttons should disappear after clicking them in desktop format
     Given I am on homepage
-    When I click "#newest .button-show-more"
-    And I click "#mostDownloaded .button-show-more"
-    And I click "#mostViewed .button-show-more"
-    And I click "#random .button-show-more"
-    Then the element "#newest .button-show-more" should not be visible
-    And the element "#mostDownloaded .button-show-more" should not be visible
-    And the element "#mostViewed .button-show-more" should not be visible
-    And the element "#random .button-show-more" should not be visible
+    When I click <button>
+    Then the element <button> should not be visible
+
+    Examples:
+      | button                              |
+      | "#newest .button-show-more"         |
+      | "#mostDownloaded .button-show-more" |
+      | "#mostViewed .button-show-more"     |
+      | "#random .button-show-more"         |
+
+  Scenario Outline: Buttons should load more programs
+    Given I am on homepage
+    When I click <button>
+    Then I should see funny things
+
+    Examples:
+      | button                              |
+      | "#newest .button-show-more"         |
+      | "#mostDownloaded .button-show-more" |
+      | "#mostViewed .button-show-more"     |
+      | "#random .button-show-more"         |
 

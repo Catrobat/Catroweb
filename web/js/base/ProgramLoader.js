@@ -68,6 +68,7 @@ var ProgramLoader = function (container, url, column_max) {
     });
 
     var cookie_content = document.cookie.split("; ");
+    alert(cookie_content);
     for(var i = 0; i < cookie_content.length; i++) {
       var cookie_content_part = cookie_content[i].split("=");
       if(cookie_content_part[0].localeCompare(self.container) == 0)
