@@ -17,4 +17,3 @@ class ChangeSizeByNStatement extends BaseChangeByNStatement
 }
 
 ?>
-

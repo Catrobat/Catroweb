@@ -17,4 +17,3 @@ class HideStatement extends Statement
 }
 
 ?>
-

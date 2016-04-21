@@ -25,4 +25,3 @@ class ForeverStatement extends Statement
 }
 
 ?>
-

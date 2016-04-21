@@ -24,5 +24,6 @@ crowdin-cli.jar
 /.buildpath
 /.rsync_cache
 Catroweb.iml
+Catroweb-Symfony.iml
 .idea/vcs.xml
 /node_modules/

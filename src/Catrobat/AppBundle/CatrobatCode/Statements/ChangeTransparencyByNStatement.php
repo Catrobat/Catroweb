@@ -17,4 +17,3 @@ class ChangeTransparencyByNStatement extends BaseChangeByNStatement
 }
 
 ?>
-
