@@ -6,15 +6,17 @@ var ProgramLoader = function (container, url, column_max) {
   self.columns_min = 3; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
   self.columns_max = (typeof column_max === "undefined") ? 9 : column_max; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
   self.download_limit = self.default_rows * self.columns_max;
+  self.initial_download_limit = self.download_limit;
+  self.prev_visible = 0; // set if dynamically loaded
   self.loaded = 0;
   self.visible = 0;
   self.visible_steps = 0;
   self.showAllPrograms = false;
   self.windowWidth = $(window).width();
-  self.counter = 0;
 
   self.init = function() {
-    $.get(self.url, { limit: self.download_limit, offset: self.loaded}, function(data) {
+    self.setParamsWithCookie(); // sets self.prev_visible and self.initial_download_limit
+    $.get(self.url, { limit: self.initial_download_limit, offset: self.loaded}, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>'); //todo: translate
         return;
@@ -63,19 +65,10 @@ var ProgramLoader = function (container, url, column_max) {
     $(window).resize(function() {
       if(self.windowWidth == $(window).width())
         return;
+      self.resetParamsWithCookie();
       self.setDefaultVisibility();
       self.windowWidth = $(window).width();
     });
-
-    var cookie_content = document.cookie.split("; ");
-    alert(cookie_content);
-    for(var i = 0; i < cookie_content.length; i++) {
-      var cookie_content_part = cookie_content[i].split("=");
-      if(cookie_content_part[0].localeCompare(self.container) == 0)
-        self.counter = cookie_content_part[1];
-    }
-    for(var i = 0; i < self.counter; i++)
-      self.showMorePrograms();
   };
 
   self.loadProgramsIntoContainer = function(data) {
@@ -145,6 +138,31 @@ var ProgramLoader = function (container, url, column_max) {
       $(self.container).find('.button-show-more').show();
 
     self.visible = i;
+    self.setSessionCookie(self.visible);
+  };
+
+  self.resetParamsWithCookie = function() {
+    self.initial_download_limit = self.default_rows * self.columns_max;
+    self.prev_visible = 0;
+    self.setSessionCookie(0);
+  };
+
+  self.setParamsWithCookie = function() {
+    var cookie_content = document.cookie.split("; ");
+    for(var i = 0; i < cookie_content.length; i++) {
+      var cookie_content_part = cookie_content[i].split("=");
+      if(cookie_content_part[0].localeCompare(self.container) == 0) {
+        self.prev_visible = cookie_content_part[1];
+        if(cookie_content_part[1] > 0)
+          self.initial_download_limit = cookie_content_part[1];
+        else
+          self.initial_download_limit = self.download_limit
+      }
+    }
+  };
+
+  self.setSessionCookie = function(cookie_value) {
+    document.cookie = self.container + '=' + cookie_value + '; expires=0; path=/pocketcode/';
   };
 
   self.setDefaultVisibility = function() {
@@ -156,14 +174,20 @@ var ProgramLoader = function (container, url, column_max) {
     if(programs_in_row > self.columns_max) programs_in_row = self.columns_max;
 
     var programs_in_container = $(self.container).find('.program');
+    var show_programs_count = 0;
+
+    if(self.prev_visible == 0)
+      show_programs_count = self.default_rows * programs_in_row;
+    else
+      show_programs_count = self.prev_visible;
 
     $(programs_in_container).hide();
-    for(var i=0; i < self.default_rows * programs_in_row; i++) {
+    for(var i=0; i < show_count; i++) {
       $(programs_in_container[i]).show();
     }
 
     self.visible = i;
-    self.visible_steps = i;
+    self.visible_steps = self.default_rows * programs_in_row;
 
     if(self.loaded < self.visible)
       $(self.container).find('.button-show-more').hide();
@@ -173,9 +197,6 @@ var ProgramLoader = function (container, url, column_max) {
 
   self.showMoreListener = function() {
     $(self.container + ' .button-show-more').click(function() {
-
-      self.counter++;
-      document.cookie = self.container + '=' + self.counter + '; expires=0; path=/pocketcode/';
 
       if(self.visible + self.visible_steps <= self.loaded)
         self.showMorePrograms();
