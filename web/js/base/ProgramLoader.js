@@ -182,7 +182,7 @@ var ProgramLoader = function (container, url, column_max) {
       show_programs_count = self.prev_visible;
 
     $(programs_in_container).hide();
-    for(var i=0; i < show_count; i++) {
+    for(var i=0; i < show_programs_count; i++) {
       $(programs_in_container[i]).show();
     }
 
