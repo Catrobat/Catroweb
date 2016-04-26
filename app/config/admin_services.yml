@@ -45,17 +45,19 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Rudewords }
         arguments: [null, Catrobat\AppBundle\Entity\RudeWord, null]
 
+      # TODO change 2nd parameter
       catrowebadmin.block.tools.gcm:
               class: Catrobat\AppBundle\Admin\GoogleCloudMessagingAdmin
               tags:
                 - { name: sonata.admin, manager_type: orm, label: Push Notifications }
-              arguments: [null, null, AppBundle:Admin\GoogleCloudMessaging]
+              arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\GoogleCloudMessaging]
 
+      # TODO change 2nd parameter
       catrowebadmin.block.tools.mail:
                     class: Catrobat\AppBundle\Admin\EmailUserMessageAdmin
                     tags:
                       - { name: sonata.admin, manager_type: orm, label: SendMail }
-                    arguments: [null, null, AppBundle:Admin\EmailUserMessage]
+                    arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\EmailUserMessage]
 
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
@@ -109,17 +111,19 @@ services:
          - "%catrobat.file.extract.dir%"
          - "%catrobat.apk.dir%"
 
+      # TODO change 2nd parameter
       catrowebadmin.block.tools.maintain:
         class: Catrobat\AppBundle\Admin\MaintainAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Maintain, icon: '<i class="fa fa-cogs"></i>' }
-        arguments: [null, null, AppBundle:Admin\Maintain]
+        arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\Maintain]
 
+      # TODO change 2nd parameter
       catrowebadmin.block.tools.logs:
         class: Catrobat\AppBundle\Admin\LogsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Logs, icon: '<i class="fa fa-cogs"></i>' }
-        arguments: [null, null, AppBundle:Admin\Logs]
+        arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\Logs]
 
       catrowebadmin.block.users.limited:
         class: Catrobat\AppBundle\Admin\LimitedUsersAdmin
@@ -127,11 +131,12 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Limited Users, icon: '<i class="fa fa-cogs"></i>' }
         arguments: [null, Catrobat\AppBundle\Entity\User, null]
 
+      # TODO change 2nd parameter
       catrowebadmin.block.program.snapshots:
         class: Catrobat\AppBundle\Admin\SnapshotAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Snapshots, icon: '<i class="fa fa-cogs"></i>' }
-        arguments: [null, null, AppBundle:Admin\Snapshot]
+        arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\Snapshot]
 
 
 # =========================== GameJam ===========================
