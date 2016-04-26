@@ -1,7 +1,6 @@
 parameters:
       catrobat.webdir:                "%kernel.root_dir%/../web/"
       catrobat.resources.dir:         "%kernel.root_dir%/../web/resources/"
-      catrobat.backup.resources.path: "Catroweb/web/resources/"
       catrobat.file.extract.dir:      "%kernel.root_dir%/../web/resources/extract/"
       catrobat.file.extract.path:     "resources/extract/"
       catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"

@@ -9,12 +9,14 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\ArrayInput;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
+use Catrobat\AppBundle\Services\SshConnect;
 
 class RestoreBackupCommand extends ContainerAwareCommand
 {
@@ -32,8 +34,6 @@ class RestoreBackupCommand extends ContainerAwareCommand
     {
         $this->debug_output = "";
         $this->output = $output;
-        $working_directory = $this->getContainer()->getParameter('catrobat.resources.dir');
-        $backup_resources_path = $this->getContainer()->getParameter('catrobat.backup.resources.path');
 
         $backup_file = realpath($input->getArgument('file'));
         if (!is_file($backup_file)) {
@@ -44,44 +44,80 @@ class RestoreBackupCommand extends ContainerAwareCommand
         }
         $this->output->writeln('Backup File: ' . $backup_file);
 
-        if ($this->getContainer()->getParameter('database_driver') != 'pdo_mysql')
+        if ($this->getContainer()->getParameter('database_driver') !== 'pdo_mysql')
             throw new \Exception('This script only supports mysql databases');
-
-        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $this->output);
-
-        $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $working_directory --wildcards '*.sql'",
-          'Extract databse.sql to local resources directory');
 
         $backup_host_name = $this->getContainer()->getParameter('backup_host_name');
         $backup_host_user = $this->getContainer()->getParameter('backup_host_user');
         $backup_host_password = $this->getContainer()->getParameter('backup_host_password');
-        $this->executeShellCommand("gzip -dc $backup_file | sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name tar -xf - -C $backup_resources_path --exclude=database.sql --same-permissions",
-          'Extract files to server resources directory');
+        $backup_host_directory = $this->getContainer()->getParameter('backup_host_directory');
+        $backup_host_resource_directory = $this->getContainer()->getParameter('backup_host_resource_directory');
 
-        $database_name = $this->getContainer()->getParameter('backup_database_name');
-        $database_user = $this->getContainer()->getParameter('backup_database_user');
-        $database_password = $this->getContainer()->getParameter('backup_database_password');
-        $this->executeShellCommand("mysql -u $database_user -p$database_password $database_name < " . $working_directory . "database.sql",
-          'Restore SQL file');
-        @unlink($working_directory .'database.sql');
+        $backup_database_name = $this->getContainer()->getParameter('backup_database_name');
+        $backup_database_user = $this->getContainer()->getParameter('backup_database_user');
+        $backup_database_password = $this->getContainer()->getParameter('backup_database_password');
 
-        $this->executeShellCommand("mysql -u $database_user -p$database_password $database_name -e 'UPDATE program p SET p.apk_status = " . Program::APK_NONE . " WHERE p.apk_status != " . Program::APK_NONE . "'",
-          'Reset the apk status');
+        if ($backup_host_name !== '') {
+          $this->output->writeln('Restore backup on server [' . $backup_host_name . ']');
 
-        $this->executeShellCommand("mysql -u $database_user -p$database_password $database_name -e 'UPDATE program p SET p.directory_hash = \"null\" WHERE p.directory_hash != \"null\"'",
-          'Reset the directory hash');
+          $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
+            "\"php " . $backup_host_directory . "app/console catrobat:purge --env=prod --force\" ",
+            'Remove files from server resources directory');
 
-        /* @var $em \Doctrine\ORM\EntityManager */
-        /*$em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
-        $query->setParameter('status', Program::APK_NONE);
-        $result = $query->getSingleScalarResult();
-        $this->output->writeln('Reset the apk status of '.$result.' projects');
+          $this->executeShellCommand("gzip -dc $backup_file | " .
+            "sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
+            "tar -xf - -C " . $backup_host_directory . $backup_host_resource_directory . " ",
+            'Extract files to server resources directory');
 
-        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
-        $query->setParameter('hash', "null");
-        $result = $query->getSingleScalarResult();
-        $this->output->writeln('Reset the directory hash of '.$result.' projects');*/
+          $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
+            "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
+            "< " . $backup_host_directory . $backup_host_resource_directory . "database.sql\" ",
+            'Restore SQL file');
+
+          $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
+            "\"unlink " . $backup_host_directory . $backup_host_resource_directory . "database.sql\" ",
+            'Remove files from server resources directory');
+
+          $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
+            "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
+            "-e 'UPDATE program p SET p.apk_status = " . Program::APK_NONE . " WHERE p.apk_status != " . Program::APK_NONE . "'\" ",
+            'Reset the apk status');
+
+          $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
+            "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
+            "-e 'UPDATE program p SET p.directory_hash = \"null\" WHERE p.directory_hash != \"null\"'\" ",
+            'Reset the directory hash');
+        } else {
+          $this->output->writeln('Restore backup on localhost');
+
+          $local_resource_directory = $this->getContainer()->getParameter('catrobat.resources.dir');
+          $local_database_name = $this->getContainer()->getParameter('database_name');
+          $local_database_user = $this->getContainer()->getParameter('database_user');
+          $local_database_password = $this->getContainer()->getParameter('database_password');
+
+          $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $this->output);
+
+          $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $local_resource_directory ",
+            'Extract files to local resources directory');
+
+          $this->executeShellCommand("mysql -u $local_database_user -p$local_database_password $local_database_name " .
+            "< " . $local_resource_directory . "database.sql ",
+            'Restore SQL file');
+
+          @unlink($local_resource_directory .'database.sql');
+
+          /* @var $em \Doctrine\ORM\EntityManager */
+          $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+          $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
+          $query->setParameter('status', Program::APK_NONE);
+          $result = $query->getSingleScalarResult();
+          $this->output->writeln('Reset the apk status of '.$result.' projects');
+
+          $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
+          $query->setParameter('hash', 'null');
+          $result = $query->getSingleScalarResult();
+          $this->output->writeln('Reset the directory hash of '.$result.' projects');
+        }
 
         $this->output->writeln('Import finished!');
     }
