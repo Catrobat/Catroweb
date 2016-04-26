@@ -288,35 +288,41 @@ class OAuthService
             'facebookUid' => $facebook_id
         ));
 
-        if ($facebook_user) {
+        $client_token = null;
+        if ($request->request->has('token')) {
+            $client_token = $request->request->get('token');
+        }
 
+        if ($client_token == null && $facebook_user != null) {
             $client_token = $facebook_user->getFacebookAccessToken();
-            if ($client_token == null && $request->request->has('token')) {
-                $client_token = $request->request->get('token');
-            }
-            $this->setFacebookDefaultAccessToken($client_token);
+        }
 
-            try {
-                $facebook = $this->facebook;
-                $this->initializeFacebook();
-                $user = $facebook->get('/' . $facebook_id . '?fields=id,name,first_name,last_name,link,email,locale')->getGraphUser();
-                $retArray['id'] = $user->getId();
-                $retArray['first_name'] = $user->getFirstName();
-                $retArray['last_name'] = $user->getLastName();
-                $retArray['username'] = $user->getName();
-                $retArray['link'] = $user->getLink();
-                $retArray['locale'] = $user->getField('locale');
-                $retArray['email'] = $user->getEmail();
-            } catch (FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-            } catch (FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            }
-        } else {
-            $retArray['error'] = 'invalid id';
+        $this->setFacebookDefaultAccessToken($client_token);
+
+        try {
+            $facebook = $this->facebook;
+            $this->initializeFacebook();
+            $user = $facebook->get('/' . $facebook_id . '?fields=id,name,first_name,last_name,link,email,locale')->getGraphUser();
+            $retArray['id'] = $user->getId();
+            $retArray['first_name'] = $user->getFirstName();
+            $retArray['last_name'] = $user->getLastName();
+            $retArray['username'] = $user->getName();
+            $retArray['link'] = $user->getLink();
+            $retArray['locale'] = $user->getField('locale');
+            $retArray['email'] = $user->getEmail();
+        } catch (FacebookResponseException $e) {
+            return $this->returnErrorCode($e);
+        } catch (FacebookSDKException $e) {
+            return $this->returnErrorCode($e);
         }
 
         $retArray['statusCode'] = StatusCode::OK;
+        return JsonResponse::create($retArray);
+    }
+
+    private function returnErrorCode($e) {
+        $retArray['error_code'] = $e->getCode();
+        $retArray['error_description'] = $e->getMessage();
         return JsonResponse::create($retArray);
     }
 
@@ -1058,7 +1064,8 @@ class OAuthService
         return JsonResponse::create($retArray);
     }
 
-    private function revokeFacebookPermissions($user, &$retArray) {
+    private function revokeFacebookPermissions($user, &$retArray)
+    {
         /**
          * @var $facebook Facebook
          * @var $user User

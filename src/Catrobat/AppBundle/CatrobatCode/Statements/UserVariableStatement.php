@@ -2,6 +2,8 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
+
 class UserVariableStatement extends Statement
 {
 
@@ -16,6 +18,8 @@ class UserVariableStatement extends Statement
         if ($useAt) {
             $end = self::AT_END_STRING;
         }
+
+        $value = SyntaxHighlightingConstants::VARIABLES . $value . SyntaxHighlightingConstants::END;
         parent::__construct($statementFactory, $xmlTree, $spaces,
             $value,
             $end);

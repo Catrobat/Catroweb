@@ -479,7 +479,19 @@ class StatementFactory
     private function generateValueStatement(\SimpleXMLElement $statement, $spaces)
     {
         $value = (string)$statement;
-        return new ValueStatement($this, $statement, $spaces, $value);
+        $type = $this->getTypeOfValue($statement);
+        return new ValueStatement($this, $statement, $spaces, $value, $type);
+    }
+
+    private function getTypeOfValue(\SimpleXMLElement $statement)
+    {
+        $siblings = $statement->xpath('preceding-sibling::* | following-sibling::*');
+        foreach ($siblings as $element) {
+            if ($element->getName()== self::TYPE_ATTRIBUTE) {
+                return (string)$element;
+            }
+        }
+        return null;
     }
 
     private function generateUserVariableStatement(\SimpleXMLElement $statement, $spaces)
