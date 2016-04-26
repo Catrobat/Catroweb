@@ -159,11 +159,20 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^I should see funny things$/
+   * @When /^I wait (\d+) milliseconds$/
    */
-  public function iShouldSeeNumberOfElements()
+  public function iWaitMilliseconds($milliseconds)
   {
-      assertTrue(true);
+      $this->getSession()->wait($milliseconds);
+  }
+
+  /**
+   * @Then /^I should see (\d+) "([^"]*)"$/
+   */
+  public function iShouldSeeNumberOfElements($arg1, $arg2)
+  {
+      $programs = $this->getSession()->getPage()->findAll('css', $arg2);
+      assertEquals($arg1, count($programs));
   }
 
   /**

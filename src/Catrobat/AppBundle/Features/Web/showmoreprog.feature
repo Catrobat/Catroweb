@@ -67,14 +67,17 @@ Feature: Show more programs button behaviour
       | "#random .button-show-more"         |
 
   Scenario Outline: Buttons should load more programs
+    The number, of how many programs the user should see, should equal the number of programs in the database
+    and should be < 37. 36 is the current max number of programs visible after the user clicks the button once.
     Given I am on homepage
     When I click <button>
-    Then I should see funny things
+    And I wait 50 milliseconds
+    Then I should see 22 <programs>
 
     Examples:
-      | button                              |
-      | "#newest .button-show-more"         |
-      | "#mostDownloaded .button-show-more" |
-      | "#mostViewed .button-show-more"     |
-      | "#random .button-show-more"         |
+      | button                              | programs                   |
+      | "#newest .button-show-more"         | "#newest .program"         |
+      | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" |
+      | "#mostViewed .button-show-more"     | "#mostViewed .program"     |
+      | "#random .button-show-more"         | "#random .program"         |
 
