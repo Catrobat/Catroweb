@@ -18,7 +18,7 @@ class CreateBackupCommand extends ContainerAwareCommand
     {
         $this->setName('catrobat:backup:create')
              ->setDescription('Generates a backup')
-             ->addArgument('backupName', InputArgument::OPTIONAL, 'Backupname without extension');;
+             ->addArgument('backupName', InputArgument::OPTIONAL, 'Backupname without extension');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

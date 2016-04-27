@@ -30,23 +30,12 @@ class PurgeCommand extends ContainerAwareCommand
             return;
         }
 
-        if ($this->getApplication() == null)
-            $this->setApplication(new Application());
-
         $output->writeln('Deleting all catrobat data');
 
         $progress = new ProgressBar($output, 7);
         $progress->start();
 
         $suboutput = new NullOutput();
-
-        $progress->setMessage('Droping Database');
-        $this->executeSymfonyCommand('doctrine:schema:drop', array('--force' => true), $suboutput);
-        $progress->advance();
-
-        $progress->setMessage('(Re-) Creating Database');
-        $this->executeSymfonyCommand('doctrine:schema:create', array(), $suboutput);
-        $progress->advance();
 
         $progress->setMessage('Deleting Screenshots');
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'));
@@ -70,6 +59,14 @@ class PurgeCommand extends ContainerAwareCommand
 
         $progress->setMessage('Deleting APKs');
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'));
+        $progress->advance();
+
+        $progress->setMessage('Droping Database');
+        $this->executeSymfonyCommand('doctrine:schema:drop', array('--force' => true), $suboutput);
+        $progress->advance();
+
+        $progress->setMessage('(Re-) Creating Database');
+        $this->executeSymfonyCommand('doctrine:schema:create', array(), $suboutput);
         $progress->advance();
 
         $progress->finish();

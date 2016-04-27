@@ -59,7 +59,6 @@
                                 <div>
                                     <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
                                     <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
-                                    <a class="btn btn-sm btn-default restore-backup" style="min-width:20%;" href="#" onClick="restoreBackup('{{ RemoveableObject.execute_link }}');" ><i class="glyphicon glyphicon-repeat"></i> {{ "admin.maintain.btnRestoreBackup"|trans({}, "catroweb") }}</a><br>
                                 </div>
                                 <div style="padding-top: 5px;">
                                     <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>
@@ -132,8 +131,8 @@
         $(window).load(function(){
             $('#btnCreateBackup').click(function(){
                 swal({
-                    title: "Create backup file",
-                    text: "This process may take a while. The page will reload afterwards!",
+                    title: "{{ "admin.maintain.confirmationTitle"|trans({}, "catroweb") }}",
+                    text: "{{ "admin.maintain.confirmationText"|trans({}, "catroweb") }}",
                     type: "info",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -153,26 +152,6 @@
             });
         });
 
-        function restoreBackup(url) {
-            swal({
-                title: "{{ "admin.maintain.confirmationTitle"|trans({}, "catroweb") }}",
-                text: "{{ "admin.maintain.confirmationText"|trans({}, "catroweb") }}",
-                type: "warning",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            },
-            function () {
-                $.ajax({
-                    url: url,
-                    complete: function (response) {
-                        location.reload();
-                    },
-                    error: function () {
-                        location.reload();
-                    }
-                });
-            });
-        }
+
     </script>
 {% endblock %}

@@ -131,37 +131,6 @@ class MaintainController extends Controller
         return new RedirectResponse($this->admin->generateUrl("list"));
     }
 
-    public function restoreBackupAction(Request $request = NULL)
-    {
-        if (false === $this->admin->isGranted('BACKUP'))
-        {
-            throw new AccessDeniedException();
-        }
-
-        if(!$request->get("backupFile"))
-        {
-            $this->addFlash('sonata_flash_error', 'Something went wrong: No backup file!');
-        }
-        else
-        {
-            $backupFile = $request->get("backupFile");
-            $backupFolder = $this->container->getParameter("catrobat.backup.dir");
-            $backupFilePath = $backupFolder . '/' . $backupFile;
-            $input["file"] = $backupFilePath;
-
-            $process = new Process("php ../app/console catrobat:backup:restore $backupFilePath");
-            $process->setTimeout(300);
-            $process->run();
-            if ($process->isSuccessful()) {
-                $this->addFlash('sonata_flash_success', 'Restore Backup OK');
-            } else {
-                $this->addFlash('sonata_flash_error', 'Something went wrong: '. $process->getErrorOutput());
-            }
-        }
-
-        return new RedirectResponse($this->admin->generateUrl("list"));
-    }
-
     public function listAction(Request $request = NULL)
     {
         if (false === $this->admin->isGranted('LIST')) {

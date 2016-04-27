@@ -538,7 +538,7 @@ admin:
     btnDownloadBackup: Download backup
     btnRestoreBackup: Restore backup
     btnDeleteBackup: Delete backup
-    confirmationTitle: Confirmation required
-    confirmationText: Are you sure you want to restore this backup? It will reset the current data.
+    confirmationTitle: Create backup file
+    confirmationText: This process may take a while. The page will reload afterwards!
     confirmationConfirm: Yes I am
     confirmationCancel: No
