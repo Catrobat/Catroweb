@@ -154,10 +154,35 @@ class DefaultController extends Controller
   }
 
   /**
+   * @Route("/report", name="report")
+   * @Method({"GET"})
+   */
+  public function reportCommentAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user) {
+      return new Response("log_in");
+    }
+
+    $em = $this->getDoctrine()->getManager();
+    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+
+    if (!$comment) {
+      throw $this->createNotFoundException(
+        'No comment found for this id '.$_GET['CommentId']
+      );
+    }
+
+    $comment->setIsReported(true);
+    $em->flush();
+    return new Response("Comment successfully reported!");
+  }
+
+  /**
    * @Route("/delete", name="delete")
    * @Method({"GET"})
    */
-  public  function deleteCommentAction(Request $request)
+  public function deleteCommentAction(Request $request)
   {
     $user = $this->getUser();
     if (!$user) {
@@ -211,6 +236,7 @@ class DefaultController extends Controller
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgramId($_POST['ProgramId']);
     $temp_comment->setUploadDate(date_create());
+    $temp_comment->setIsReported(false);
 
     $em = $this->getDoctrine()->getManager();
     $em->persist($temp_comment);
