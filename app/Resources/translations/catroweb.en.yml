@@ -538,7 +538,5 @@ admin:
     btnDownloadBackup: Download backup
     btnRestoreBackup: Restore backup
     btnDeleteBackup: Delete backup
-    confirmationTitle: Create backup file
-    confirmationText: This process may take a while. The page will reload afterwards!
-    confirmationConfirm: Yes I am
-    confirmationCancel: No
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

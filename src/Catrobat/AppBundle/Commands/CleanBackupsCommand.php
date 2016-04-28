@@ -40,7 +40,7 @@ class CleanBackupsCommand extends ContainerAwareCommand
       $files = glob($backupdir.'/*'); // get all file names
       foreach($files as $file){ // iterate files
         $ext = pathinfo($file,PATHINFO_EXTENSION);
-        if($ext == "tar.gz" && is_file($file))
+        if($ext == "gz" && is_file($file))
           unlink($file); // delete file
       }
       $this->output->writeln('All backups deleted!');

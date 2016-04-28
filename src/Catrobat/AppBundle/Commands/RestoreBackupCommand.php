@@ -22,7 +22,6 @@ use Catrobat\AppBundle\Services\SshConnect;
 class RestoreBackupCommand extends ContainerAwareCommand
 {
     public $output;
-    public $debug_output;
 
     protected function configure()
     {
@@ -34,7 +33,6 @@ class RestoreBackupCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-      $this->debug_output = "";
       $this->output = $output;
 
       $backup_file = realpath($input->getArgument('file'));
@@ -49,20 +47,49 @@ class RestoreBackupCommand extends ContainerAwareCommand
       if ($this->getContainer()->getParameter('database_driver') !== 'pdo_mysql')
           throw new \Exception('This script only supports mysql databases');
 
-      $backup_host_name = $this->getContainer()->getParameter('backup_host_name');
-      $backup_host_user = $this->getContainer()->getParameter('backup_host_user');
-      $backup_host_password = $this->getContainer()->getParameter('backup_host_password');
-      $backup_host_directory = $this->getContainer()->getParameter('backup_host_directory');
-      $backup_host_resource_directory = $this->getContainer()->getParameter('backup_host_resource_directory');
+      if ($input->hasArgument('local') && $input->getArgument('local') === 'true') {
+        $local_resource_directory = $this->getContainer()->getParameter('catrobat.resources.dir');
+        $local_database_name = $this->getContainer()->getParameter('database_name');
+        $local_database_user = $this->getContainer()->getParameter('database_user');
+        $local_database_password = $this->getContainer()->getParameter('database_password');
 
-      $backup_database_name = $this->getContainer()->getParameter('backup_database_name');
-      $backup_database_user = $this->getContainer()->getParameter('backup_database_user');
-      $backup_database_password = $this->getContainer()->getParameter('backup_database_password');
+        $this->output->writeln('Restore backup on localhost');
 
-      if (!($input->hasArgument('local') && $input->getArgument('local') === 'true')) {
+        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $this->output);
+
+        $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $local_resource_directory ",
+          'Extract files to local resources directory');
+
+        $this->executeShellCommand("mysql -u $local_database_user -p$local_database_password $local_database_name " .
+          "< " . $local_resource_directory . "database.sql ",
+          'Restore SQL file');
+
+        @unlink($local_resource_directory .'database.sql');
+
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
+        $query->setParameter('status', Program::APK_NONE);
+        $result = $query->getSingleScalarResult();
+        $this->output->writeln('Reset the apk status of '.$result.' projects');
+
+        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
+        $query->setParameter('hash', 'null');
+        $result = $query->getSingleScalarResult();
+        $this->output->writeln('Reset the directory hash of '.$result.' projects');
+
+      } else {
+        $backup_host_name = $this->getContainer()->getParameter('backup_host_name');
+        $backup_host_user = $this->getContainer()->getParameter('backup_host_user');
+        $backup_host_password = $this->getContainer()->getParameter('backup_host_password');
+        $backup_host_directory = $this->getContainer()->getParameter('backup_host_directory');
+        $backup_host_resource_directory = $this->getContainer()->getParameter('backup_host_resource_directory');
+
+        $backup_database_name = $this->getContainer()->getParameter('backup_database_name');
+        $backup_database_user = $this->getContainer()->getParameter('backup_database_user');
+        $backup_database_password = $this->getContainer()->getParameter('backup_database_password');
+
         $this->output->writeln('Restore backup on server [' . $backup_host_name . ']');
-
-
 
         $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
           "\"php " . $backup_host_directory . "app/console catrobat:purge --env=prod --force\" ",
@@ -91,36 +118,6 @@ class RestoreBackupCommand extends ContainerAwareCommand
           "\"mysql -u $backup_database_user -p$backup_database_password $backup_database_name " .
           "-e 'UPDATE program p SET p.directory_hash = \"null\" WHERE p.directory_hash != \"null\"'\" ",
           'Reset the directory hash');
-      } else {
-        $this->output->writeln('Restore backup on localhost');
-
-        $local_resource_directory = $this->getContainer()->getParameter('catrobat.resources.dir');
-        $local_database_name = $this->getContainer()->getParameter('database_name');
-        $local_database_user = $this->getContainer()->getParameter('database_user');
-        $local_database_password = $this->getContainer()->getParameter('database_password');
-
-        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $this->output);
-
-        $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $local_resource_directory ",
-          'Extract files to local resources directory');
-
-        $this->executeShellCommand("mysql -u $local_database_user -p$local_database_password $local_database_name " .
-          "< " . $local_resource_directory . "database.sql ",
-          'Restore SQL file');
-
-        @unlink($local_resource_directory .'database.sql');
-
-        /* @var $em \Doctrine\ORM\EntityManager */
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
-        $query->setParameter('status', Program::APK_NONE);
-        $result = $query->getSingleScalarResult();
-        $this->output->writeln('Reset the apk status of '.$result.' projects');
-
-        $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
-        $query->setParameter('hash', 'null');
-        $result = $query->getSingleScalarResult();
-        $this->output->writeln('Reset the directory hash of '.$result.' projects');
       }
 
       $this->output->writeln('Import finished!');
@@ -128,14 +125,12 @@ class RestoreBackupCommand extends ContainerAwareCommand
 
     private function executeShellCommand($command, $description)
     {
-        $this->debug_output .= $description." ('".$command."') ... | ";
         $this->output->write($description." ('".$command."') ... ");
         $process = new Process($command);
         $process->setTimeout(3600);
         $process->run();
         if ($process->isSuccessful()) {
             $this->output->writeln('OK');
-            $this->debug_output .= "OK | ";
             return true;
         }
 

@@ -32,23 +32,25 @@ Scenario: As a valid admin I want to be able to remove the APKs through the back
 
   Scenario: As a valid admin I want to be able to delete all backups through the backend
     Given I am a logged in as super admin
-    And there is a file "a_backup.zip" with size "4096" bytes in the backup-folder
-    And there is a file "a_second_backup.zip" with size "4096" bytes in the backup-folder
+    And there is a file "a_backup.tar.gz" with size "4096" bytes in the backup-folder
+    And there is a file "a_second_backup.tar.gz" with size "4096" bytes in the backup-folder
     When I GET "/admin/maintain/list"
-    Then the response should contain "Manual backups (8.00 KiB)"
+    Then the response should contain "a_backup.tar.gz"
+    And the response should contain "a_second_backup.tar.gz"
+    And the response should contain "Manual backups (8.00 KiB)"
     When I GET "/admin/maintain/delete_backups"
     Then the response should contain "Manual backups (0.00 B)"
 
 
   Scenario: As a valid admin I want to be able to delete a single backup through the backend
     Given I am a logged in as super admin
-    And there is a file "a_backup.zip" with size "4096" bytes in the backup-folder
-    And there is a file "a_second_backup.zip" with size "4096" bytes in the backup-folder
+    And there is a file "a_backup.tar.gz" with size "4096" bytes in the backup-folder
+    And there is a file "a_second_backup.tar.gz" with size "4096" bytes in the backup-folder
     When I GET "/admin/maintain/list"
     Then the response should contain "Manual backups (8.00 KiB)"
-    When I GET "/admin/maintain/delete_backups?backupFile=a_backup.zip"
+    When I GET "/admin/maintain/delete_backups?backupFile=a_backup.tar.gz"
     Then the response should contain "Manual backups (4.00 KiB)"
-    And the response should contain "a_second_backup.zip"
+    And the response should contain "a_second_backup.tar.gz"
 
 
   Scenario: As a valid admin I want to be able to remove the extracted program files through the backend
@@ -69,24 +71,14 @@ Scenario: As a valid admin I want to be able to remove the APKs through the back
     And there is no file in the backup-folder
     When I GET "/admin/maintain/list"
     Then the response should contain "Create backup"
-    When I GET "create_backup"
-    Then the response should contain "Download backup"
-    And the response should contain "Restore backup"
+    When I GET "/admin/maintain/create_backup"
+    Then the response should contain "Delete backup"
+    And the response should contain "Download backup"
 
   Scenario: As a valid admin I want to be able to download a single backup through the backend
     Given I am a logged in as super admin
-    And there is a file "a_backup.tar" with size "4096" bytes in the backup-folder
+    And there is a file "a_backup.tar.gz" with size "4096" bytes in the backup-folder
     When I GET "/admin/maintain/list"
-    Then the response should contain "a_backup.tar"
-    When I GET "/pocketcode/download-backup/a_backup.tar"
-    Then the response Header should contain the key "Content-Disposition" with the value 'attachment; filename="a_backup.tar"'
-
-  Scenario: As a valid admin I want to be able to create a backup and restore it through the backend
-    Given I am a logged in as super admin
-    And there is no file in the backup-folder
-    When I GET "/admin/maintain/list"
-    Then the response should contain "Create backup"
-    When I GET "create_backup?backupName=a_backup"
-    Then the response should contain "a_backup.tar"
-    When I GET "restore_backup?backupFile=a_backup.tar"
-    And the response should contain "Restore Backup OK"
+    Then the response should contain "a_backup.tar.gz"
+    When I GET "/pocketcode/download-backup/a_backup.tar.gz"
+    Then the response Header should contain the key "Content-Disposition" with the value 'attachment; filename="a_backup.tar.gz"'

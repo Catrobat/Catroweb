@@ -106,19 +106,12 @@ class MaintainController extends Controller
         }
 
         try {
-            if (count($input) > 0) {
-                $return = $command->run(new ArrayInput($input), new NullOutput());
-                if ($return == 0) {
+            $return = $command->run(new ArrayInput($input), new NullOutput());
+            if ($return == 0) {
+                if (count($input) > 0) {
                     $this->addFlash('sonata_flash_success', 'Create Backup: [' . $input["backupName"] . '] OK');
-                }
-            } else {
-                $process = new Process("php ../app/console catrobat:backup:create");
-                $process->setTimeout(300);
-                $process->run();
-                if ($process->isSuccessful()) {
-                    $this->addFlash('sonata_flash_success', 'Create Backup OK');
                 } else {
-                    $this->addFlash('sonata_flash_error', 'Something went wrong: '. $process->getErrorOutput());
+                    $this->addFlash('sonata_flash_success', 'Create Backup OK');
                 }
             }
         }
@@ -126,7 +119,6 @@ class MaintainController extends Controller
         {
             $this->addFlash('sonata_flash_error', 'Something went wrong: '.$e->getMessage());
         }
-
 
         return new RedirectResponse($this->admin->generateUrl("list"));
     }
