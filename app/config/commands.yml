@@ -43,6 +43,12 @@ services:
               tags:
                 -  { name: console.command }
 
+      catrowebadmin.command.drop.migration:
+              class: Catrobat\AppBundle\Commands\DropMigrationCommand
+              arguments: ["@migrationmanager"]
+              tags:
+                - { name: console.command }
+
       command.reset:
               class: Catrobat\AppBundle\Commands\ResetCommand
               tags:

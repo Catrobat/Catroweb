@@ -110,6 +110,11 @@ services:
             - "@programrepository"
             - "@event_dispatcher"
 
+    migrationmanager:
+        class: Catrobat\AppBundle\Entity\MigrationManager
+        arguments:
+         - "@doctrine.orm.entity_manager"
+
     rudewordfilter:
         class: Catrobat\AppBundle\Services\RudeWordFilter
         arguments: ["@rudewordrepository"]

@@ -29,7 +29,11 @@ class ResetCommand extends ContainerAwareCommand
         }
 
         $this->executeShellCommand('php app/console doctrine:schema:drop --force', 'Dropping database', $output);
-        $this->executeShellCommand('php app/console doctrine:schema:create', 'Creating database', $output);
+
+        $this->executeShellCommand('php app/console catrobat:drop:migration', 'Dropping the migration_versions table', $output);
+        $this->executeShellCommand('php app/console doctrine:migrations:migrate', 'Exectue the migration to the latest version', $output);
+        //$this->executeShellCommand('php app/console doctrine:schema:create', 'Creating database', $output);
+
         $this->executeShellCommand('php app/console cache:clear --env=test', 'Resetting Cache', $output);
 
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'), 'Delete screenshots', $output);
