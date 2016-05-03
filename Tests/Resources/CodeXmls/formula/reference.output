@@ -1,8 +1,8 @@
     used looks: 
         Background-Tutorial4 (filename: 422ab4c672f968eca8c9149359f7d87e_Background-Tutorial4.png)
     when program started 
-        set variable global to (LOG(SQRT(RAND(0, LOUDNESS))))
-        set variable lokal to (DIVIDE(MULT(OBJECT_TRANSPARENCY, OBJECT_Y), MINUS(OBJECT_TRANSPARENCY, OBJECT_BRIGHTNESS)))
+        set global to (LOG(SQRT(RAND(0, LOUDNESS))))
+        set lokal to (DIVIDE(MULT(OBJECT_TRANSPARENCY, OBJECT_Y), MINUS(OBJECT_TRANSPARENCY, OBJECT_BRIGHTNESS)))
         forever
             if (GREATER_OR_EQUAL(global, lokal))
                 speak juhuu

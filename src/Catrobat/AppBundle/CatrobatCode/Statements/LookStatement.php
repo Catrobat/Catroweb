@@ -2,6 +2,8 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
+
 class LookStatement extends Statement
 {
 
@@ -24,7 +26,7 @@ class LookStatement extends Statement
 
         if($this->value != null)
         {
-            $code .= $this->value ;
+            $code = SyntaxHighlightingConstants::VARIABLES . $this->value . SyntaxHighlightingConstants::END;
         }
         if ($this->fileName != null) {
             $code .= ' (filename: ' . $this->fileName->execute() . ')';

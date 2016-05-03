@@ -2,15 +2,18 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
+
 class RepeatStatement extends Statement
 {
-    const BEGIN_STRING = "repeat (";
+    const BEGIN_STRING = "repeat ";
     const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
+        $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END . "(";
         parent::__construct($statementFactory, $xmlTree, $spaces,
-            self::BEGIN_STRING,
+            $stmt,
             self::END_STRING);
     }
 

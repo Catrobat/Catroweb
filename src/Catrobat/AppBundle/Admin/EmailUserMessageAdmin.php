@@ -41,9 +41,4 @@ class EmailUserMessageAdmin extends Admin
         $collection->add('send');
     }
 
-
-
-
-
-
 }

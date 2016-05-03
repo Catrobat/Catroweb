@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class ChangeTransparencyByNStatement extends Statement
+class ChangeTransparencyByNStatement extends BaseChangeByNStatement
 {
-    const BEGIN_STRING = "change transparency by (";
+    const BEGIN_STRING = "transparency";
     const END_STRING = ")%<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
