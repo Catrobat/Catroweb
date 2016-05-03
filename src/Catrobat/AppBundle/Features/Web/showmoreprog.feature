@@ -54,6 +54,7 @@ Feature: Show more programs button behaviour
       | "#mostViewed .button-show-more"     |
       | "#random .button-show-more"         |
 
+
   Scenario Outline: Buttons should disappear after clicking them in desktop format
     Given I am on homepage
     When I click <button>
