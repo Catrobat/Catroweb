@@ -210,6 +210,7 @@
             <div class = "usr-name">{{ comment.username }}</div>
             <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
           </div>
+          <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
           {% if  program_details.isAdmin  %}
            <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
           {% endif %}
@@ -224,6 +225,7 @@
             <div class = "usr-name">{{ comment.username }}</div>
             <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
           </div>
+          <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
           {% if  program_details.isAdmin  %}
             <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
           {% endif %}
@@ -310,8 +312,25 @@
         }});
     });
 
-
-
+    $(document).on("click", ".report-button", function() {
+      var commentId = $(this).data('commentid');
+      var pId = {{ program_details.id }};
+      $.ajax({
+        url:"../report",
+        type: "get",
+        data:{ProgramId: pId, CommentId: commentId},
+        success: function(data) {
+          if (data == "log_in")
+            window.location.href = "../login";
+          else {
+            alert(data);
+          }
+        },
+        error: function(data) {
+          //alert(data);
+          alert("something went terribly wrong");
+        }});
+    });
 
   </script>
 {% endblock %}

@@ -54,6 +54,7 @@ programs:
   comments: Comments
   send: Send
   delete: Delete
+  report: Report
 
 
 passwordRecovery:
