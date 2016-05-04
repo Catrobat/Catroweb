@@ -29,7 +29,11 @@ class ResetCommand extends ContainerAwareCommand
         }
 
         $this->executeShellCommand('php app/console doctrine:schema:drop --force', 'Dropping database', $output);
-        $this->executeShellCommand('php app/console doctrine:schema:create', 'Creating database', $output);
+
+        $this->executeShellCommand('php app/console catrobat:drop:migration', 'Dropping the migration_versions table', $output);
+        $this->executeShellCommand('php app/console doctrine:migrations:migrate', 'Exectue the migration to the latest version', $output);
+        //$this->executeShellCommand('php app/console doctrine:schema:create', 'Creating database', $output);
+
         $this->executeShellCommand('php app/console cache:clear --env=test', 'Resetting Cache', $output);
 
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'), 'Delete screenshots', $output);
@@ -39,7 +43,8 @@ class ResetCommand extends ContainerAwareCommand
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'),  'Delete featured images', $output);
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.mediapackage.dir'),  'Delete mediapackages', $output);
 
-        $this->executeShellCommand('php app/console init:acl', 'Init ACL', $output);
+        // already happens in doctrine:schema:create
+        //$this->executeShellCommand('php app/console init:acl', 'Init ACL', $output);
         $this->executeShellCommand('php app/console sonata:admin:setup-acl', 'Init Sonata admin ACL', $output);
         $this->executeShellCommand('php app/console sonata:admin:generate-object-acl', 'Init Sonata object ACL', $output);
 
