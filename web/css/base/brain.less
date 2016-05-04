@@ -150,7 +150,7 @@ li {
 .standard-col-text {
   .box-columns(2, 25px);
   text-align: justify;
-  padding: 25px 25px;
+  padding: 25px 0;
 }
 
 .standard-article-link {
@@ -417,6 +417,12 @@ form {
   }
 }
 
+@media (max-width: @responsive-width-content) {
+  article {
+    margin: 0 10px;
+  }
+}
+
 @media screen and (max-width: @responsive-width-tablet) {
 
   #wrapper {
@@ -431,7 +437,7 @@ form {
 
   .standard-col-text {
     .box-columns(1, 25px);
-    padding: 25px 25px;
+    padding: 25px 0;
   }
 
 }

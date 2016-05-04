@@ -2,6 +2,8 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
+
 class LoopEndStatement extends Statement
 {
     const BEGIN_STRING = "end of loop";
@@ -9,12 +11,12 @@ class LoopEndStatement extends Statement
 
     public function __construct($statementFactory, $xmlTree, $spaces)
     {
+        $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END;
         parent::__construct($statementFactory, $xmlTree, $spaces - 1,
-            self::BEGIN_STRING,
+            $stmt,
             self::END_STRING);
     }
 
 }
 
 ?>
-

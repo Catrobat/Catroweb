@@ -2,6 +2,8 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
+
 class FileNameStatement extends Statement
 {
     private $value;
@@ -16,10 +18,9 @@ class FileNameStatement extends Statement
 
     public function execute()
     {
-        $code = $this->value . $this->executeChildren();
+        $code = SyntaxHighlightingConstants::VALUE . $this->value . $this->executeChildren(). SyntaxHighlightingConstants::END;
         return $code;
     }
 }
 
 ?>
-

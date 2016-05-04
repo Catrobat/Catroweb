@@ -50,6 +50,12 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Delete
+  report: Report
+
 
 passwordRecovery:
   subject: Your Catrobat Password Recovery
@@ -105,6 +111,11 @@ licenseToPlay:
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
 
+teachers:
+  login:
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
+
 termsOfUse:
   title: Terms of Use
   headline: Welcome to the Catrobat Community!
@@ -146,6 +157,11 @@ help:
   stepByStep:
     title: "Step-by-Step Intro"
     start: "Starting position:"
+    description: |
+      Here you create your first program, an interactive postcard using the following walkthrough videos.
+      You have to follow the instructions given to you.
+      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
+      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
       title: 'Make a new program'
       detail:

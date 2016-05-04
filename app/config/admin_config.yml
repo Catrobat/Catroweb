@@ -120,6 +120,9 @@ sonata_admin:
                     - catrowebadmin.block.tools.logs
                     - catrowebadmin.block.tools.notify
                     - catrowebadmin.block.tools.rudewords
+                    - catrowebadmin.block.tools.gcm
+                    - catrowebadmin.block.tools.mail
+                    - catrowebadmin.block.tools.reports
 
             sonata.admin.group.gamejams:
                 label:           GameJam

@@ -17,4 +17,3 @@ class ClearGraphicEffectStatement extends Statement
 }
 
 ?>
-

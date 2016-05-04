@@ -19,4 +19,3 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
 }
 
 ?>
-

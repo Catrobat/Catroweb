@@ -6,18 +6,19 @@
   width: 100%;
 
   .video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /*16:9*/
-    padding-top: 25px;
-    height: 0;
+    margin: 15px 0;
   }
 
   .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 5%;
-    width: 90%;
-    height: 90%;
+    width: 900px;
+    height: 506px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .video-wrapper iframe {
+      width: 425px;
+      height: 239px;
+    }
   }
 
   img {
@@ -361,10 +362,10 @@
 }
 
 .tutorialcards-container {
-  padding: 0 10px;
+  padding: 0;
 
   h3 {
-    margin: 30px auto 0px auto;
+    margin: 25px auto 0px auto;
   }
 
   .img-container {
@@ -378,12 +379,12 @@
 
     img {
       border: 1px solid #fff;
-      margin: 0px auto 15px auto;
+      margin: 0 auto 15px auto;
     }
   }
 
   p.description {
-    margin: 0px 0 40px 0;
+    margin: 0 0 25px 0;
 
     strong {
       text-transform: uppercase;
@@ -423,7 +424,7 @@
   }
 
   .section {
-    margin: 20px 0px;
+    margin: 0 0 25px 0;
     text-align: center;
 
     .image_landscape {
@@ -446,10 +447,8 @@
     }
 
     .download-button {
-      //width: 215px;
-      padding: 5px 10px;
       font-weight: normal;
-      margin-right: 10px;
+      margin: 25px 0 ;
     }
   }
 
@@ -462,13 +461,13 @@
     .subtitle {
       border-bottom: 1px solid #17a5b8;
       font-weight: bold;
-      margin-bottom: 1em;
+      margin-bottom: 25px;
     }
   }
 
   .videoWrapper {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
+    padding-bottom: 53.5%; /* 16:9 */
     padding-top: 25px;
     height: 0;
   }
@@ -589,8 +588,12 @@
 
   .video {
     width: 100%;
-    height: 315px;
+    height: 300px;
     max-width: 530px;
-    margin: 10px auto;
+    margin-top: 25px;
   }
+}
+
+#step-by-step-container {
+  padding: 25px 0;
 }

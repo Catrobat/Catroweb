@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class SetXStatement extends Statement
+class SetXStatement extends BaseSetToStatement
 {
-    const BEGIN_STRING = "set X to (";
+    const BEGIN_STRING = "X";
     const END_STRING = ")<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)

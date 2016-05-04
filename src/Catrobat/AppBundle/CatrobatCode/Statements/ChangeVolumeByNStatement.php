@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class ChangeVolumeByNStatement extends Statement
+class ChangeVolumeByNStatement extends BaseChangeByNStatement
 {
-    const BEGIN_STRING = "change volume by (";
+    const BEGIN_STRING = "volume";
     const END_STRING = ")%<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
@@ -17,4 +17,3 @@ class ChangeVolumeByNStatement extends Statement
 }
 
 ?>
-
