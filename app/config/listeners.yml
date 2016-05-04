@@ -135,7 +135,7 @@ services:
               
       catrobat.entity.program_listener:
           class: Catrobat\AppBundle\Listeners\Entity\ProgramListener
-          arguments: ["@facebook_post_service"]
+          arguments: ["@facebook_post_service", "@logger"]
           tags:
               - { name: doctrine.orm.entity_listener }
 
