@@ -28,8 +28,8 @@ class FeaturedController extends Controller
         $limit = intval($request->query->get('limit'));
         $offset = intval($request->query->get('offset'));
         
-        $programs = $repository->getFeaturedItems($flavor, $limit, $offset);
-        $numbOfTotalProjects = $repository->getFeaturedItemCount($flavor);
+        $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset);
+        $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor);
         
         $retArray = array();
         $retArray['CatrobatProjects'] = array();
@@ -38,8 +38,9 @@ class FeaturedController extends Controller
             $new_program['ProjectId'] = $program->getProgram()->getId();
             $new_program['ProjectName'] = $program->getProgram()->getName();
             $new_program['Author'] = $program->getProgram()
-                ->getUser()
-                ->getUserName();
+              ->getUser()
+              ->getUserName();
+
             $new_program['FeaturedImage'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
             $retArray['CatrobatProjects'][] = $new_program;
         }
