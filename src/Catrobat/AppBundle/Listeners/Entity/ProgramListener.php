@@ -7,6 +7,7 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Services\FacebookPostService;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Symfony\Bridge\Monolog\Logger;
 
 class ProgramListener
 {
