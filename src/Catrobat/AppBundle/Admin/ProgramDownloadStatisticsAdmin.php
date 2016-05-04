@@ -43,8 +43,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
-            ->add('program', null, array('admin_code' => 'catrowebadmin.block.programs.all',))
-            ->add('user')
+            ->add('program.name')
+            ->add('user.username')
             ->add('program.gamejam_submission_accepted')
             ->add('downloaded_at')
             ->add('ip')

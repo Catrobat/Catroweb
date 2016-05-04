@@ -38,7 +38,7 @@ class ReportedProgramsAdmin extends Admin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
       $datagridMapper
-        ->add('reportingUser')
+        ->add('reportingUser.username')
         ->add('time')
         ->add('state')
         ->add('program.visible')

@@ -83,7 +83,7 @@ class ApproveProgramsAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('user')
+            ->add('user.username')
         ;
     }
 
