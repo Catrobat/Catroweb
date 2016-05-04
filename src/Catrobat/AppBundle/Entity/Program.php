@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\EntityListeners({"Catrobat\AppBundle\Listeners\Entity\ProgramListener"})
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="program")
  * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\ProgramRepository")
