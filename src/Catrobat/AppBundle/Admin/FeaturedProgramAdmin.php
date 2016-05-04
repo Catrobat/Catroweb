@@ -49,7 +49,7 @@ class FeaturedProgramAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('program', null, array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('program.name')
         ;
     }
 

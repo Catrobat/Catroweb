@@ -35,7 +35,7 @@ class ApkListAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('name')
-            ->add('user')
+            ->add('user.username')
             ->add('apk_request_time')
             ;
     }
