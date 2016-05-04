@@ -13,6 +13,7 @@ use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -35,6 +36,8 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Hooks
+
+    private $headers = [];
 
     /**
      * @BeforeScenario
@@ -326,6 +329,22 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     }
 
     /**
+     * @Given /^there is no file in the backup-folder$/
+     */
+    public function thereIsNoFileInTheBackupFolder()
+    {
+        $backupDirectory = $this->getSymfonyParameter("catrobat.backup.dir");
+
+        $files = glob($backupDirectory.'/*');
+        foreach($files as $file)
+        {
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+            if(($ext == "zip" || $ext == "tar") && is_file($file))
+                unlink($file);
+        }
+    }
+
+    /**
      * @Then /^program with id "([^"]*)" should have no directory_hash$/
      */
     public function programWithIdShouldHaveNoDirectoryHash($program_id)
@@ -413,5 +432,16 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
 
         if (!strcmp($link->getUri(), $arg2))
             assert(false, "expected: " . $arg2 . "  get: " . $link->getURI());
+    }
+
+    /**
+     * @Then /^the response Header should contain the key "([^"]*)" with the value '([^']*)'$/
+     */
+    public function theResponseHeadershouldContainTheKeyWithTheValue($headerKey, $headerValue)
+    {
+        $headers = $this->getClient()->getResponse()->headers;
+        assertEquals($headerValue, $headers->get($headerKey),
+          "expected: " . $headerKey . ": " . $headerValue .
+          "\nget: " . $headerKey . ": " . $headers->get($headerKey));
     }
 }

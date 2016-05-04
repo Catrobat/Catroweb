@@ -31,9 +31,9 @@ parameters:
     google_testuser_name: ~
     google_testuser_id: ~
     facebook_testuser_mail: ~
+    facebook_testuser_pw: ~
     facebook_testuser_name: ~
     facebook_testuser_id: ~
-    facebook_testuser_pw: ~
 
     ldap_host: http://localhost
     ldap_port: 636
@@ -47,3 +47,12 @@ parameters:
     facebook_share_admin_fb_id: ~
     facebook_share_access_token: ~
     facebook_share_channel_id: ~
+
+    backup_host_name: ~
+    backup_host_user: ~
+    backup_host_password: ~
+    backup_host_directory: ~
+    backup_host_resource_directory: ~
+    backup_database_name: ~
+    backup_database_user: ~
+    backup_database_password: ~

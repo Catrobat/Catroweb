@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,14 +37,6 @@ class PurgeCommand extends ContainerAwareCommand
 
         $suboutput = new NullOutput();
 
-        $progress->setMessage('Droping Database');
-        $this->executeSymfonyCommand('doctrine:schema:drop', array('--force' => true), $suboutput);
-        $progress->advance();
-
-        $progress->setMessage('(Re-) Creating Database');
-        $this->executeSymfonyCommand('doctrine:schema:create', array(), $suboutput);
-        $progress->advance();
-
         $progress->setMessage('Deleting Screenshots');
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'));
         $progress->advance();
@@ -66,6 +59,14 @@ class PurgeCommand extends ContainerAwareCommand
 
         $progress->setMessage('Deleting APKs');
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'));
+        $progress->advance();
+
+        $progress->setMessage('Droping Database');
+        $this->executeSymfonyCommand('doctrine:schema:drop', array('--force' => true), $suboutput);
+        $progress->advance();
+
+        $progress->setMessage('(Re-) Creating Database');
+        $this->executeSymfonyCommand('doctrine:schema:create', array(), $suboutput);
         $progress->advance();
 
         $progress->finish();

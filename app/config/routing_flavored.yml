@@ -18,6 +18,10 @@ mediapackage_download:
     resource: "@AppBundle/Controller/DownloadMediaPackageController.php"
     type:     annotation
 
+backup_download:
+    resource: "@AppBundle/Controller/DownloadBackupController.php"
+    type:     annotation
+
 catroweb_token_login:
     resource: "@AppBundle/Controller/Security/TokenLoginController.php"
     type:     annotation
