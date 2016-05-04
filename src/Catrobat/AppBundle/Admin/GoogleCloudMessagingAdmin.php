@@ -8,9 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-/*
- * @Route("/admin/gcm")
- */
+
 class GoogleCloudMessagingAdmin extends Admin
 {
     protected $baseRouteName = 'admin_gcm';

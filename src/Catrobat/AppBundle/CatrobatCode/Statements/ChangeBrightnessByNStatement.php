@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
-class ChangeBrightnessByNStatement extends Statement
+class ChangeBrightnessByNStatement extends BaseChangeByNStatement
 {
-    const BEGIN_STRING = "change brightness by (";
+    const BEGIN_STRING = "brightness";
     const END_STRING = ")%<br/>";
 
     public function __construct($statementFactory, $xmlTree, $spaces)
@@ -17,4 +17,3 @@ class ChangeBrightnessByNStatement extends Statement
 }
 
 ?>
-

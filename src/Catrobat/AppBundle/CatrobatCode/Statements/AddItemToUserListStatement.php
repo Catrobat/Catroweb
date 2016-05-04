@@ -18,4 +18,3 @@ class AddItemToUserListStatement extends BaseUserListStatement
 }
 
 ?>
-

@@ -12,8 +12,6 @@ class LookListStatement extends BaseListStatement
             self::BEGIN_STRING,
             "");
     }
-
 }
 
 ?>
-

@@ -5,8 +5,8 @@
     used looks: 
         Look 1 (filename: 8c12972ea29350c0bd883d9f8ff14938_Aussehen.png)
     when program started 
-        set variable b to (1.0)
+        set b to (1.0)
     used looks: 
         Look 2 (filename: 8c12972ea29350c0bd883d9f8ff14938_Aussehen.png)
     when program started 
-        set variable b to (1.0)
+        set b to (1.0)

@@ -44,12 +44,12 @@
         else
             hide variable globale variable at (0, 0)
         end if
-        set variable lokale var to (1.0)
+        set lokale var to (1.0)
         replace item in userlist lokale liste(1, 1.0)
         insert item into userlist globale liste(1, 1.0)
         delete item in userlist globale liste(1)
         add item to userlist globale liste(1.0)
-        change variable globale variable to (LOG(Z_ACCELERATION))
+        change globale variable to (LOG(Z_ACCELERATION))
         switch to look test 2
         hide
         led on

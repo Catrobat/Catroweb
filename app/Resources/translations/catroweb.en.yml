@@ -50,6 +50,12 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Delete
+  report: Report
+
 
 passwordRecovery:
   subject: Your Catrobat Password Recovery
@@ -104,6 +110,11 @@ licenseToPlay:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
+
+teachers:
+  login:
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
 
 termsOfUse:
   title: Terms of Use

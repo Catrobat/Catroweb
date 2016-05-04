@@ -1,6 +1,7 @@
 <?php
 namespace Tests;
 
+use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Translation\Translator;
@@ -90,10 +91,19 @@ class CodeExtractor extends \PHPUnit_Framework_TestCase
         {
             $code .= $object->getCode();
             $code .= $this->generateCode($object->getCodeObjects());
-
         }
+        return $this->replaceSyntaxStrings( $code);
+    }
+
+    private function replaceSyntaxStrings($code){
         $code = str_replace("&nbsp;", " ", $code);
         $code = str_replace("<br/>", PHP_EOL, $code);
+        $code = str_replace(SyntaxHighlightingConstants::LOOP, "", $code);
+        $code = str_replace(SyntaxHighlightingConstants::END, "", $code);
+        $code = str_replace(SyntaxHighlightingConstants::FUNCTIONS, "", $code);
+        $code = str_replace(SyntaxHighlightingConstants::OBJECTS, "", $code);
+        $code = str_replace(SyntaxHighlightingConstants::VALUE, "", $code);
+        $code = str_replace(SyntaxHighlightingConstants::VARIABLES, "", $code);
         return $code;
     }
 

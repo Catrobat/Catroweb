@@ -47,6 +47,12 @@ programs:
   updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Programm herunterladen zu können.
   btnClosePopup: Ok
   checkout_this_program: Seht Euch das Catrobat Programm an
+  show_more: Mehr anzeigen
+  comments: Kommentare
+  send: Senden
+  delete: Löschen
+  report: Melden
+
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -96,6 +102,10 @@ licenseToPlay:
     item1: teile Deine Kuchen und die Rezepte mit anderen
     item2: bedanke Dich bei denen, deren Rezepte Du verwendet hast und die Dich auf neue Ideen gebracht haben
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Lehrerbereich
+    description: Dieser Bereich ist für die Verwendung von Lehrern gedacht.
 termsOfUse:
   title: Nutzungsbedingungen
   headline: Willkommen in der Catrobat Gemeinschaft!

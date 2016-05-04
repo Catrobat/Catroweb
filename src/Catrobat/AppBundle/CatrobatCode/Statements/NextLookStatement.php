@@ -17,4 +17,3 @@ class NextLookStatement extends Statement
 }
 
 ?>
-
