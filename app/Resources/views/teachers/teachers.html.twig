@@ -14,9 +14,22 @@
             {#{{ ("teachers.login.description")|trans({}, "catroweb") }}#}
             You may download templates here:
         </div>
-        <div>
-            <a href="teachersDownload.catrobat" style="text-decoration: none;"><button class="login-button" style="display: block;margin:auto" onclick="window.location.href='teachersDownload.catrobat'">Download Templates</button></a>
-        </div>
+        <table style="margin: auto; border-spacing: 10px; border-collapse: separate;">
+            {% for template in templates %}
+            <tr>
+                <td style="font-size: 18px;">
+                    {{ template.friendlyName }}
+                </td>
+                <td>
+                    <div>
+                        <a href="teachersDownload/{{ template.id }}.catrobat">
+                            <button class="login-button" style="display: block;margin:auto">Download</button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
         <div class="size-large">
             <a href="teachersLogout">Logout from teachers area</a>
         </div>

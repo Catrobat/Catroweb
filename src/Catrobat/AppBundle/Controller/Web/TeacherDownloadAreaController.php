@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\TeacherTemplate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,21 +67,36 @@ class TeacherDownloadAreaController extends Controller
             return $this->redirectToRoute('teachersLogin'); // fos_user_security_login
         }
 
-        return $this->get('templating')->renderResponse(':teachers:teachers.html.twig');
+        $templates = $this->getDoctrine()
+            ->getRepository('AppBundle:TeacherTemplate')
+            ->findAll();
+
+        return $this->get('templating')->renderResponse(':teachers:teachers.html.twig', array('templates' => $templates));
     }
 
     /**
-     * @Route("/teachersDownload.catrobat", name="teachersDownload.catrobat")
+     * @Route("/teachersDownload/{program}", name="teachersDownload")
      * @Method({"GET"})
      */
-    public function teachersDownloadAction(Request $request)
+    public function teachersDownloadAction(Request $request, $program)
     {
-        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.catrobat";
+        $id = rtrim($program, ".catrobat");
+
+        $template = $this->getDoctrine()
+            ->getRepository('AppBundle:TeacherTemplate')
+            ->find($id);
+
+        if(!$template) {
+            die("No such template");
+        }
+
+        $file = $template->getFileSystemLocation();
+        //$file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.zip";
 
         if (file_exists($file)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/zip');
-            header('Content-Disposition: attachment; filename="'.basename($file).'"');
+            header('Content-Disposition: attachment; filename="'.$program.'"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
@@ -117,9 +133,31 @@ class TeacherDownloadAreaController extends Controller
             return $this->redirectToRoute('teachersLogin'); // fos_user_security_login
         }
 
-        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/templates.catrobat";
+        $file = $this->get('kernel')->getRootDir()."/../web/resources/teachers/" . basename($_FILES['templates']['tmp_name']);
 
         if (move_uploaded_file($_FILES['templates']['tmp_name'], $file)) {
+            $name = basename($file);
+            $zip = zip_open($file);
+
+            if ($zip)
+            {
+                if($zip_entry = zip_read($zip))
+                {
+                    $name = rtrim(zip_entry_name($zip_entry), "/");
+                }
+            }
+
+            zip_close($zip);
+
+            $template = new TeacherTemplate();
+            $template->setFileSystemLocation($file);
+            $template->setFriendlyName($name);
+            $template->setPriority(0);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($template);
+            $em->flush();
+
             return new Response("Templates have been uploaded successfully!");
         } else {
             return new Response("Failed to upload templates!");
