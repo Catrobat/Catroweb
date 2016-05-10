@@ -17,4 +17,3 @@ class BroadcastMessageStatement extends Statement
 }
 
 ?>
-

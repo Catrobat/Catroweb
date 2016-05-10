@@ -17,4 +17,3 @@ class GlideToStatement extends Statement
 }
 
 ?>
-

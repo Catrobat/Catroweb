@@ -17,4 +17,3 @@ class WaitStatement extends Statement
 }
 
 ?>
-

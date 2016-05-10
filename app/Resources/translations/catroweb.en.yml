@@ -54,6 +54,7 @@ programs:
   comments: Comments
   send: Send
   delete: Delete
+  report: Report
 
 
 passwordRecovery:
@@ -527,4 +528,16 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam 
-
+  
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

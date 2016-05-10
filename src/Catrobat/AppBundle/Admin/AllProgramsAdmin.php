@@ -42,7 +42,7 @@ class AllProgramsAdmin extends Admin
             ->add('id')
             ->add('name')
             ->add('downloads')
-            ->add('user')
+            ->add('user.username')
         ;
     }
 

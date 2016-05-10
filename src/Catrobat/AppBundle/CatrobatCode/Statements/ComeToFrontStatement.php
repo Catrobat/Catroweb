@@ -17,4 +17,3 @@ class ComeToFrontStatement extends Statement
 }
 
 ?>
-

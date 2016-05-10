@@ -19,4 +19,3 @@ class HideTextStatement extends Statement
 }
 
 ?>
-

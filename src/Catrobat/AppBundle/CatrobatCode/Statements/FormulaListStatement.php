@@ -76,4 +76,3 @@ class FormulaListStatement extends Statement
 }
 
 ?>
-

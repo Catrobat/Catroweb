@@ -18,4 +18,3 @@ class ChangeYByNStatement extends BaseChangeByNStatement
 }
 
 ?>
-

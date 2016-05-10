@@ -1,15 +1,10 @@
 {% extends base_template %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-{% endblock %}
-
 {% block content %}
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div class="col-md-6">
             <div class="box">
-                <h3 class="box-header">Disk maintenance</h3>
+                <h3 class="box-header">{{ "admin.maintain.diskMaintenance"|trans({}, "catroweb") }}</h3>
                 <div class="box-body">
                     <div>
                         <div id="piechart_3d" style="width: 100%; height: 300px; display: inline-block;"></div>
@@ -33,52 +28,14 @@
                         </div>
                         {% set i = i+1 %}
                     {% else %}
-                        No removable things available.
+                        {{ "admin.maintain.noRemovableObjects"|trans({}, "catroweb") }}
                     {% endfor %}
                 </div>
-
-                <script type="text/javascript">
-                    google.load("visualization", "1", {packages:["corechart"]});
-                    google.setOnLoadCallback(drawChart);
-                    function drawChart() {
-                        var data_space = google.visualization.arrayToDataTable([
-                            ['Task', 'Hours per Day'],
-                            ['Used ({{ usedSpace }})',     {{ usedSpace_raw }}],
-                            ['Programs ({{ programsSpace }})',     {{ programsSpace_raw }}],
-                            {% for RemoveableObject in RemoveableObjects %}
-                                ['{{ RemoveableObject.name }} ({{ RemoveableObject.size }})',      {{ RemoveableObject.size_raw }}],
-                            {% endfor %}
-                            ['Free ({{ freeSpace }})', {{ freeSpace_raw }}]
-                        ]);
-                        var data_mem = google.visualization.arrayToDataTable([
-                            ['Task', 'Hours per Day'],
-                            ['Free',     {{ 100-ram }}],
-                            ['Used',      {{ ram }}]
-                        ]);
-
-                        var options_space = {
-                            title: 'Disk Space ({{ wholeSpace }})',
-                            is3D: true,
-                        };
-
-                        var options_mem = {
-                            title: 'RAM',
-                            pieHole: 0.4,
-                        }
-
-
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                        chart.draw(data_space, options_space);
-
-                        var chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'));
-                        chart_mem.draw(data_mem, options_mem);
-                    }
-                </script>
             </div>
         </div>
         <div class="col-md-6">
             <div class="box">
-                <h3 class="box-header">Manual backups</h3>
+                <h3 class="box-header">{{ "admin.maintain.manualBackups"|trans({}, "catroweb") }}</h3>
                 <div class="box-body">
                     <div class="info-box">
                         <div class="info-box-icon"><i class="glyphicon glyphicon-info-sign"></i></div>
@@ -86,16 +43,31 @@
                         Be aware, this are just the manual created backups.<br/>
                         Currently (state 31.7.2015), admins of the institute are creating snapshots of the whole running machine 2 times a week.<br/>
                         So, not the right backup at hand? Go get it there.</div>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-header">
+                            <a id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;" href="#"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>&nbsp;(~{{ backupSize }})
                         </div>
+                    </div>
+
                     {% set i = 0 %}
                     {% for RemoveableObject in RemoveableBackupObjects %}
                         <div class="box">
                             <div class="box-header">
 
-                                <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
-                                <span style="margin-left: 5%;">
+                                <div>
+                                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
+                                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
+                                </div>
+                                <div style="padding-top: 5px;">
+                                    <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>
+                                </div>
+
+                                <span style="padding-left: 0.2em;">
                                 {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
                                 </span>
+
                                 <span style="float: right">
                                     {{ RemoveableObject.description }}
                                 </span>
@@ -106,7 +78,7 @@
                     {% else %}
                     <div class="box">
                         <div class="box-header">
-                        No removable backups on this system available.
+                            {{ "admin.maintain.noRemovableBackupObjects"|trans({}, "catroweb") }}
                         </div>
                     </div>
                     {% endfor %}
@@ -114,4 +86,72 @@
             </div>
         </div>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="{{ asset('js/plugins/sweetalert.min.js') }}"></script>
+    <script>
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data_space = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Used ({{ usedSpace }})',     {{ usedSpace_raw }}],
+                ['Programs ({{ programsSpace }})',     {{ programsSpace_raw }}],
+                {% for RemoveableObject in RemoveableObjects %}
+                ['{{ RemoveableObject.name }} ({{ RemoveableObject.size }})',      {{ RemoveableObject.size_raw }}],
+                {% endfor %}
+                ['Free ({{ freeSpace }})', {{ freeSpace_raw }}]
+            ]);
+            var data_mem = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Free',     {{ 100-ram }}],
+                ['Used',      {{ ram }}]
+            ]);
+
+            var options_space = {
+                title: 'Disk Space ({{ wholeSpace }})',
+                is3D: true,
+            };
+
+            var options_mem = {
+                title: 'RAM',
+                pieHole: 0.4,
+            }
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data_space, options_space);
+
+            var chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'));
+            chart_mem.draw(data_mem, options_mem);
+        }
+
+        $(window).load(function(){
+            $('#btnCreateBackup').click(function(){
+                swal({
+                    title: "{{ "admin.maintain.createBackupConfirmationTitle"|trans({}, "catroweb") }}",
+                    text: "{{ "admin.maintain.createBackupConfirmationText"|trans({}, "catroweb") }}",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                },
+                function(){
+                    $.ajax({
+                        url: '{{ backupCommand.command_link }}',
+                        complete: function(response) {
+                            location.reload();
+                        },
+                        error: function() {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+
+
+    </script>
 {% endblock %}

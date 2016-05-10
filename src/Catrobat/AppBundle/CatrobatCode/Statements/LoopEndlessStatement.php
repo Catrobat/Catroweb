@@ -21,4 +21,3 @@ class LoopEndlessStatement extends Statement
 }
 
 ?>
-

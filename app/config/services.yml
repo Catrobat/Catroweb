@@ -1,21 +1,22 @@
 parameters:
-      catrobat.webdir:             "%kernel.root_dir%/../web/"
-      catrobat.file.extract.dir:   "%kernel.root_dir%/../web/resources/extract/"
-      catrobat.file.extract.path:  "resources/extract/"
-      catrobat.file.storage.dir:   "%kernel.root_dir%/../web/resources/programs/"
-      catrobat.file.storage.path:  "resources/programs/"
-      catrobat.screenshot.dir:     "%catrobat.webdir%resources/screenshots/"
-      catrobat.screenshot.path:    "resources/screenshots/"
-      catrobat.thumbnail.dir:      "%catrobat.webdir%resources/thumbnails/"
-      catrobat.thumbnail.path:     "resources/thumbnails/"
-      catrobat.featuredimage.dir:  "%catrobat.webdir%resources/featured/"
-      catrobat.featuredimage.path: "resources/featured/"
-      catrobat.mediapackage.dir:   "%catrobat.webdir%resources/mediapackage/"
-      catrobat.mediapackage.path:  "resources/mediapackage/"
-      catrobat.apk.dir:            "%catrobat.webdir%resources/apk/"
-      catrobat.backup.dir:         "%kernel.root_dir%/../backups/"
-      catrobat.snapshot.dir:       "%kernel.root_dir%/../Resources/Snapshots"
-      catrobat.translations.dir:    "%kernel.root_dir%/Resources/translations"
+      catrobat.webdir:                "%kernel.root_dir%/../web/"
+      catrobat.resources.dir:         "%kernel.root_dir%/../web/resources/"
+      catrobat.file.extract.dir:      "%kernel.root_dir%/../web/resources/extract/"
+      catrobat.file.extract.path:     "resources/extract/"
+      catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"
+      catrobat.file.storage.path:     "resources/programs/"
+      catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
+      catrobat.screenshot.path:       "resources/screenshots/"
+      catrobat.thumbnail.dir:         "%catrobat.webdir%resources/thumbnails/"
+      catrobat.thumbnail.path:        "resources/thumbnails/"
+      catrobat.featuredimage.dir:     "%catrobat.webdir%resources/featured/"
+      catrobat.featuredimage.path:    "resources/featured/"
+      catrobat.mediapackage.dir:      "%catrobat.webdir%resources/mediapackage/"
+      catrobat.mediapackage.path:     "resources/mediapackage/"
+      catrobat.apk.dir:               "%catrobat.webdir%resources/apk/"
+      catrobat.backup.dir:            "%kernel.root_dir%/../backups/"
+      catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
+      catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
       
 services:
 
@@ -90,10 +91,13 @@ services:
         class: Catrobat\AppBundle\Services\MediaPackageFileRepository
         arguments: ["%catrobat.mediapackage.dir%","%catrobat.mediapackage.path%"]
 
-
     apkrepository:
         class: Catrobat\AppBundle\Services\ApkRepository
         arguments: ["%catrobat.apk.dir%"]
+
+    backupfilerepository:
+        class: Catrobat\AppBundle\Services\BackupFileRepository
+        arguments: ["%catrobat.backup.dir%"]
 
     programdevicepermissionreader:
         class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
@@ -109,6 +113,11 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
             - "@event_dispatcher"
+
+    migrationmanager:
+        class: Catrobat\AppBundle\Entity\MigrationManager
+        arguments:
+         - "@doctrine.orm.entity_manager"
 
     rudewordfilter:
         class: Catrobat\AppBundle\Services\RudeWordFilter

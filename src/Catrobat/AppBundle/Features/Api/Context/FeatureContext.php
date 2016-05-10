@@ -10,12 +10,10 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Services\DownloadStatisticsService;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use DateTime;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Catrobat\AppBundle\Services\TokenGenerator;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 
 //
@@ -294,7 +292,8 @@ class FeatureContext extends BaseContext
                 'directory_hash' => $programs[$i]['directory_hash'],
                 'filesize' => @$programs[$i]['FileSize'],
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null
+                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
+                'approved' => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
             );
             
             $this->insertProgram($user, $config);
@@ -1066,7 +1065,7 @@ class FeatureContext extends BaseContext
      */
     public function theFacebookPostShouldBeDeleted()
     {
-        echo 'Delete post with Facebook ID ' . $this->fb_post_id;
+        //echo 'Delete post with Facebook ID ' . $this->fb_post_id;
         
         $program_manager = $this->getSymfonySupport()->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);

@@ -26,4 +26,3 @@ class IfLogicElseStatement extends Statement
 }
 
 ?>
-

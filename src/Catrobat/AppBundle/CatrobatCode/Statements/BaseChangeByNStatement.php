@@ -16,4 +16,3 @@ class BaseChangeByNStatement extends Statement
 }
 
 ?>
-

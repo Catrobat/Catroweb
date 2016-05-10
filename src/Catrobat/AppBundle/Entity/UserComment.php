@@ -17,6 +17,21 @@ use Doctrine\ORM\Mapping as ORM;
 class UserComment
 {
     /**
+     * @return mixed
+     */
+    public function getIsReported()
+    {
+        return $this->isReported;
+    }
+
+    /**
+     * @param mixed $isReported
+     */
+    public function setIsReported($isReported)
+    {
+        $this->isReported = $isReported;
+    }
+    /**
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -140,9 +155,15 @@ class UserComment
      */
     protected $text;
 
+
   /**
    * @ORM\Column(type="string")
    */
     protected $username;
+
+  /**
+   * @ORM\Column(type="boolean")
+   */
+    protected $isReported;
 
 }

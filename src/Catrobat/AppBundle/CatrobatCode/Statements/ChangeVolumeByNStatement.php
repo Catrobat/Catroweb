@@ -17,4 +17,3 @@ class ChangeVolumeByNStatement extends BaseChangeByNStatement
 }
 
 ?>
-
