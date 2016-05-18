@@ -1,5 +1,5 @@
 <?php
-namespace chartinger\Behat\TwigReportExtension;
+namespace Catrobat\Behat\TwigReportExtension;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
@@ -15,11 +15,11 @@ use Behat\Behat\EventDispatcher\Event\AfterBackgroundTested;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\EventDispatcher\Event\OutlineTested;
 use Behat\Behat\EventDispatcher\Event\AfterOutlineTested;
-use chartinger\Behat\TwigReportExtension\facades\Step;
-use chartinger\Behat\TwigReportExtension\facades\Feature;
-use chartinger\Behat\TwigReportExtension\facades\Background;
-use chartinger\Behat\TwigReportExtension\facades\Scenario;
-use chartinger\Behat\TwigReportExtension\facades\OutlineScenario;
+use Catrobat\Behat\TwigReportExtension\facades\Step;
+use Catrobat\Behat\TwigReportExtension\facades\Feature;
+use Catrobat\Behat\TwigReportExtension\facades\Background;
+use Catrobat\Behat\TwigReportExtension\facades\Scenario;
+use Catrobat\Behat\TwigReportExtension\facades\OutlineScenario;
 use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use Behat\Testwork\EventDispatcher\Event\AfterExerciseCompleted;
 use Symfony\Component\HttpFoundation\File\File;

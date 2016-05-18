@@ -1,5 +1,5 @@
 <?php
-namespace chartinger\Behat\TwigReportExtension\facades;
+namespace Catrobat\Behat\TwigReportExtension\facades;
 
 interface StepInterface
 {

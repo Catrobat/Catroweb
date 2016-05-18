@@ -1,5 +1,5 @@
 <?php
-namespace chartinger\Behat\TwigReportExtension\facades;
+namespace Catrobat\Behat\TwigReportExtension\facades;
 
 use Behat\Behat\EventDispatcher\Event\AfterStepTested;
 use Behat\Testwork\Tester\Result\ExceptionResult;

@@ -12,7 +12,7 @@ default:
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
-        chartinger\Behat\TwigReportExtension:
+        Catrobat\Behat\TwigReportExtension:
             templates:
                 file: markdown-feature.twig
                 index: markdown-index.twig

@@ -1,5 +1,5 @@
 <?php
-namespace chartinger\Behat\TwigReportExtension\ServiceContainer;
+namespace Catrobat\Behat\TwigReportExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -43,7 +43,7 @@ class TwigReportExtension implements Extension
         ));
         $container->setDefinition("behat.twig_output.twig.templating", $definition);
         
-        $definition = new Definition('chartinger\Behat\TwigReportExtension\EventListener', array(
+        $definition = new Definition('Catrobat\Behat\TwigReportExtension\EventListener', array(
             new Reference("behat.twig_output.twig.templating")
         ));
         $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array());
