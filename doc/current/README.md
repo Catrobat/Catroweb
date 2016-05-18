@@ -2,7 +2,7 @@
 
 * [Authenticate to the system](authentication.md)
 
-* [Show featured programs](featured_programs.md)
+* [List featured programs](featured_programs.md)
 
 * [Show program details](program_details.md)
 
