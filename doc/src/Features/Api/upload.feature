@@ -1,4 +1,3 @@
-@doc
 Feature: Upload a program to the website
 
   Background:

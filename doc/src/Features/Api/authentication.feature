@@ -1,5 +1,4 @@
-@doc
-Feature: Authentication to the system
+Feature: Authenticate to the system
   How to register and login to the system
 
   Background:

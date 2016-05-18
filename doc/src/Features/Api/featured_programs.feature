@@ -1,4 +1,3 @@
-@doc
 Feature: Show featured programs
 
   Background:

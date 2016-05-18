@@ -1,6 +1,6 @@
 # API Documentation Index
 
-* [Authentication to the system](authentication.md)
+* [Authenticate to the system](authentication.md)
 
 * [Show featured programs](featured_programs.md)
 

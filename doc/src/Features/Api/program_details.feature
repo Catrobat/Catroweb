@@ -1,4 +1,3 @@
-@doc
 Feature: Show program details
 
   Background: 

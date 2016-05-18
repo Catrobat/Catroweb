@@ -1,4 +1,4 @@
-# Authentication to the system
+# Authenticate to the system
 > How to register and login to the system
 
 ## Registration of a new user

@@ -1,4 +1,3 @@
-@doc
 Feature: Search programs
 
   Background: 
