@@ -268,5 +268,38 @@ class FeatureContext extends BaseContext
         $this->iInvokeTheRequest();
     }
     
+
+    /**
+     * @Given /^the upload problem "([^"]*)"$/
+     */
+    public function theUploadProblem($problem)
+    {
+        switch ($problem)
+        {
+            case "no authentication":
+                $this->method = "POST";
+                $this->url = "/pocketcode/api/upload/upload.json";
+                break;
+            case "missing parameters":
+                $this->method = "POST";
+                $this->url = "/pocketcode/api/upload/upload.json";
+                $this->post_parameters['username'] = "Catrobat";
+                $this->post_parameters['token'] = "cccccccccc";
+                break;
+            case "invalid program file":
+                $this->method = "POST";
+                $this->url = "/pocketcode/api/upload/upload.json";
+                $this->post_parameters['username'] = "Catrobat";
+                $this->post_parameters['token'] = "cccccccccc";
+                $filepath = self::FIXTUREDIR . 'invalid_archive.catrobat';
+                assertTrue(file_exists($filepath), 'File not found');
+                $this->files[] = new UploadedFile($filepath, 'test.catrobat');
+                $this->post_parameters['fileChecksum'] = md5_file($this->files[0]->getPathname());
+                break;
+            default:
+                throw new PendingException("No implementation of case \"" . $problem . "\"");
+        }
+    }
+    
     
 }

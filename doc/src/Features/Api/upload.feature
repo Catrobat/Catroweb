@@ -31,3 +31,21 @@ Feature: Upload a program to the website
             "preHeaderMessages": ""
           }
           """
+
+  Scenario Outline: Troubleshooting
+    Given the upload problem "<problem>"
+     When such a Request is invoked
+     Then the returned json object will be:
+          """
+          {
+            "statusCode": "<errorcode>",
+            "answer": "<answer>",
+            "preHeaderMessages": ""
+          }
+          """
+        
+          Examples:
+          | problem              | errorcode | answer                                               |
+          | no authentication    | 601       | Authentication of device failed: invalid auth-token! |
+          | missing parameters   | 501       | POST-Data not correct or missing!                    |
+          | invalid program file | 505       | invalid file                                         | 

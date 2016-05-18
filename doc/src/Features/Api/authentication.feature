@@ -45,7 +45,7 @@ Feature: Authentication to the system
           """
         
           Examples:
-          | problem            | errorcode | answer                   |
+          | problem           | errorcode | answer                   |
           | no password given | 602       | The password is missing. |
         
   Scenario: Retrieve the upload token of a user
