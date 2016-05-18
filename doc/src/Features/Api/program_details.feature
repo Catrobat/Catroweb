@@ -13,14 +13,14 @@ Feature: Show program details
   
   Scenario: Show program details with a given id
   
-    Given The HTTP Request:
+    Given the HTTP Request:
           | Method | GET                                       |
           | Url    | /pocketcode/api/projects/getInfoById.json |
-      And The GET parameters:
+      And the GET parameters:
           | Name | Value |
           | id   | 2     |
-     When The Request is invoked
-     Then The returned json object will be:
+     When the Request is invoked
+     Then the returned json object will be:
       """
       {
           "completeTerm":"",
@@ -52,14 +52,14 @@ Feature: Show program details
       
   Scenario: Error if no program is found
   
-      Given The HTTP Request:
+    Given the HTTP Request:
           | Method | GET                                       |
           | Url    | /pocketcode/api/projects/getInfoById.json |
-      And The GET parameters:
+      And the GET parameters:
           | Name | Value |
           | id   | 9     |
-     When The Request is invoked
-     Then The returned json object will be:
+     When the Request is invoked
+     Then the returned json object will be:
           """
           {
             "Error": "Project not found (uploaded)",

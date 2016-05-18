@@ -17,15 +17,15 @@ Feature: Show featured programs
       
   Scenario: Show featured programs
   
-    Given The HTTP Request:
+    Given the HTTP Request:
           | Method | GET                                    |
           | Url    | /pocketcode/api/projects/featured.json |
-      And The GET parameters:
+      And the GET parameters:
           | Name   | Value |
           | limit  | 10    |
           | offset | 0     |
-     When The Request is invoked
-     Then The returned json object will be:
+     When the Request is invoked
+     Then the returned json object will be:
           """
           {
             "CatrobatInformation": {

@@ -11,18 +11,18 @@ Feature: Authentication to the system
 
 
   Scenario: Registration of a new user
-    Given The HTTP Request:
+    Given the HTTP Request:
           | Method | POST                                                 |
           | Url    | /pocketcode/api/loginOrRegister/loginOrRegister.json |
-      And The POST parameters:
+      And the POST parameters:
           | Name                 | Value                |
           | registrationUsername | newuser              |
           | registrationPassword | registrationpassword |
           | registrationEmail    | test@mail.com        |
           | registrationCountry  | at                   |
-      And We assume the next generated token will be "rrrrrrrrrrr"
-     When The Request is invoked
-     Then The returned json object will be:
+      And we assume the next generated token will be "rrrrrrrrrrr"
+     When the Request is invoked
+     Then the returned json object will be:
           """
           {
             "token": "rrrrrrrrrrr",
@@ -33,9 +33,9 @@ Feature: Authentication to the system
           """
           
   Scenario Outline: Troubleshooting
-    Given The registration problem "<problem>"
-     When Such a Request is invoked
-     Then The returned json object will be:
+    Given the registration problem "<problem>"
+     When such a Request is invoked
+     Then the returned json object will be:
           """
           {
             "statusCode": "<errorcode>",
@@ -49,15 +49,15 @@ Feature: Authentication to the system
           | no password given | 602       | The password is missing. |
         
   Scenario: Retrieve the upload token of a user
-    Given The HTTP Request:
+    Given the HTTP Request:
           | Method | POST                                                 |
           | Url    | /pocketcode/api/loginOrRegister/loginOrRegister.json |
-      And The POST parameters:
+      And the POST parameters:
           | name                 | value                 |
           | registrationUsername | Catrobat              |
           | registrationPassword | 12345                 |
-     When The Request is invoked
-     Then The returned json object will be:
+     When the Request is invoked
+     Then the returned json object will be:
           """
           {
             "token": "cccccccccc",
@@ -67,15 +67,15 @@ Feature: Authentication to the system
           """
 
   Scenario: Checking a given token for its validity
-    Given The HTTP Request:
+    Given the HTTP Request:
           | Method | POST                                  |
           | Url    | /pocketcode/api/checkToken/check.json |
-      And The POST parameters:
+      And the POST parameters:
           | Name     | Value      |
           | username | Catrobat   |
           | token    | cccccccccc |
-     When The Request is invoked
-     Then The returned json object will be:
+     When the Request is invoked
+     Then the returned json object will be:
           """
           {
             "statusCode": 200,
@@ -83,12 +83,12 @@ Feature: Authentication to the system
             "preHeaderMessages": "  \n"
           }
           """
-       And The response code will be "200"
+      And the response code will be "200"
 
   Scenario Outline: Troubleshooting
-    Given The check token problem "<problem>"
-     When Such a Request is invoked
-     Then The returned json object will be:
+    Given the check token problem "<problem>"
+     When such a Request is invoked
+     Then the returned json object will be:
           """
           {
             "statusCode": "<errorcode>",
@@ -96,7 +96,7 @@ Feature: Authentication to the system
             "preHeaderMessages": ""
           }
           """
-      And The response code will be "<httpcode>"
+      And the response code will be "<httpcode>"
         
           Examples:
           | problem            | errorcode | answer                                               | httpcode  |

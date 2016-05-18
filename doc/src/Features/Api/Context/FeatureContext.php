@@ -47,7 +47,7 @@ class FeatureContext extends BaseContext
     // ----------------------------------------------------------------
     
     /**
-     * @Given /^The HTTP Request:$/
+     * @Given /^the HTTP Request:$/
      * @Given /^I have the HTTP Request:$/
      */
     public function iHaveTheHttpRequest(TableNode $table)
@@ -58,7 +58,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Given /^The POST parameters:$/
+     * @Given /^the POST parameters:$/
      * @Given /^I use the POST parameters:$/
      */
     public function iUseThePostParameters(TableNode $table)
@@ -68,7 +68,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Given /^The GET parameters:$/
+     * @Given /^the GET parameters:$/
      * @Given /^I use the GET parameters:$/
      */
     public function iUseTheGetParameters(TableNode $table)
@@ -78,9 +78,9 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @When /^Such a Request is invoked$/
-     * @When /^A Request is invoked$/
-     * @When /^The Request is invoked$/
+     * @When /^such a Request is invoked$/
+     * @When /^a Request is invoked$/
+     * @When /^the Request is invoked$/
      * @When /^I invoke the Request$/
      */
     public function iInvokeTheRequest()
@@ -89,7 +89,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^The returned json object will be:$/
+     * @Then /^the returned json object will be:$/
      * @Then /^I will get the json object:$/
      */
     public function iWillGetTheJsonObject(PyStringNode $string)
@@ -99,7 +99,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^The response code will be "([^"]*)"$/
+     * @Then /^the response code will be "([^"]*)"$/
      */
     public function theResponseCodeWillBe($code)
     {
@@ -193,7 +193,7 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^We assume the next generated token will be "([^"]*)"$/
+     * @Given /^we assume the next generated token will be "([^"]*)"$/
      */
     public function weAssumeTheNextGeneratedTokenWillBe($token)
     {
@@ -202,7 +202,7 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^A catrobat file is attached to the request$/
+     * @Given /^a catrobat file is attached to the request$/
      */
     public function iAttachACatrobatFile()
     {
@@ -212,7 +212,7 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Given /^The POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
+     * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
      */
     public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
     {
@@ -220,8 +220,8 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^The registration problem "([^"]*)"$/
-     * @Given /^There is a registration problem ([^"]*)$/
+     * @Given /^the registration problem "([^"]*)"$/
+     * @Given /^there is a registration problem ([^"]*)$/
      */
     public function thereIsARegistrationProblem($problem)
     {
@@ -239,8 +239,8 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @Given /^The check token problem "([^"]*)"$/
-     * @When /^There is a check token problem ([^"]*)$/
+     * @Given /^the check token problem "([^"]*)"$/
+     * @When /^there is a check token problem ([^"]*)$/
      */
     public function thereIsACheckTokenProblem($problem)
     {
@@ -258,7 +258,7 @@ class FeatureContext extends BaseContext
     }
     
     /**
-     * @When /^Searching for "([^"]*)"$/
+     * @When /^searching for "([^"]*)"$/
      */
     public function searchingFor($arg1)
     {

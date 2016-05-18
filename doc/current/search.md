@@ -4,13 +4,13 @@
 ## Search for a program
 > 
 
-Given The HTTP Request:
+Given the HTTP Request:
 
 | Method | GET |
 | --- | --- |
 | Url | /pocketcode/api/projects/search.json |
    
-And The GET parameters:
+And the GET parameters:
 
 | Name | Value |
 | --- | --- |
@@ -18,9 +18,9 @@ And The GET parameters:
 | limit | 1 |
 | offset | 0 |
    
-When The Request is invoked
+When the Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "completeTerm": "",
@@ -58,9 +58,9 @@ Then The returned json object will be:
 ## No programs are found
 > 
 
-When Searching for "`NOTHINGTOBEFIOUND`"
+When searching for "`NOTHINGTOBEFIOUND`"
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "completeTerm":"",

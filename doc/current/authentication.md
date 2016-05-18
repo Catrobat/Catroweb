@@ -4,13 +4,13 @@
 ## Registration of a new user
 > 
 
-Given The HTTP Request:
+Given the HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/loginOrRegister/loginOrRegister.json |
    
-And The POST parameters:
+And the POST parameters:
 
 | Name | Value |
 | --- | --- |
@@ -19,11 +19,11 @@ And The POST parameters:
 | registrationEmail | test@mail.com |
 | registrationCountry | at |
    
-And We assume the next generated token will be "`rrrrrrrrrrr`"
+And we assume the next generated token will be "`rrrrrrrrrrr`"
  
-When The Request is invoked
+When the Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "token": "rrrrrrrrrrr",
@@ -41,11 +41,11 @@ Then The returned json object will be:
 ## Troubleshooting
 > 
 
-Given The registration problem "`<problem>`"
+Given the registration problem "`<problem>`"
  
-When Such a Request is invoked
+When such a Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "statusCode": "<errorcode>",
@@ -66,22 +66,22 @@ Then The returned json object will be:
 ## Retrieve the upload token of a user
 > 
 
-Given The HTTP Request:
+Given the HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/loginOrRegister/loginOrRegister.json |
    
-And The POST parameters:
+And the POST parameters:
 
 | name | value |
 | --- | --- |
 | registrationUsername | Catrobat |
 | registrationPassword | 12345 |
    
-When The Request is invoked
+When the Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "token": "cccccccccc",
@@ -98,22 +98,22 @@ Then The returned json object will be:
 ## Checking a given token for its validity
 > 
 
-Given The HTTP Request:
+Given the HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/checkToken/check.json |
    
-And The POST parameters:
+And the POST parameters:
 
 | Name | Value |
 | --- | --- |
 | username | Catrobat |
 | token | cccccccccc |
    
-When The Request is invoked
+When the Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "statusCode": 200,
@@ -122,7 +122,7 @@ Then The returned json object will be:
 }
 ```
  
-And The response code will be "`200`"
+And the response code will be "`200`"
  
  
 
@@ -132,11 +132,11 @@ And The response code will be "`200`"
 ## Troubleshooting
 > 
 
-Given The check token problem "`<problem>`"
+Given the check token problem "`<problem>`"
  
-When Such a Request is invoked
+When such a Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "statusCode": "<errorcode>",
@@ -145,7 +145,7 @@ Then The returned json object will be:
 }
 ```
  
-And The response code will be "`<httpcode>`"
+And the response code will be "`<httpcode>`"
  
  
 

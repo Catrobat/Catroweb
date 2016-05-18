@@ -20,16 +20,16 @@ Feature: Search programs
 
   Scenario: Search for a program
   
-    Given The HTTP Request:
+    Given the HTTP Request:
           | Method | GET                                  |
           | Url    | /pocketcode/api/projects/search.json |
-      And The GET parameters:
+      And the GET parameters:
           | Name   | Value  | 
           | q      | Galaxy |
           | limit  | 1      |
           | offset | 0      |
-     When The Request is invoked
-     Then The returned json object will be:
+     When the Request is invoked
+     Then the returned json object will be:
           """
           {
             "completeTerm": "",
@@ -61,8 +61,8 @@ Feature: Search programs
           
   Scenario: No programs are found
   
-    When Searching for "NOTHINGTOBEFIOUND"
-    Then The returned json object will be:
+    When searching for "NOTHINGTOBEFIOUND"
+    Then the returned json object will be:
          """
          {
            "completeTerm":"",

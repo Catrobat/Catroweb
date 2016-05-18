@@ -4,13 +4,13 @@
 ## Upload program
 > 
 
-Given The HTTP Request:
+Given the HTTP Request:
 
 | Method | POST |
 | --- | --- |
 | Url | /pocketcode/api/upload/upload.json |
    
-And The POST parameters:
+And the POST parameters:
 
 | Name | Value |
 | --- | --- |
@@ -18,15 +18,15 @@ And The POST parameters:
 | token | cccccccccc |
 | fileChecksum | &lt;md5 checksum of file&gt; |
    
-And A catrobat file is attached to the request
+And a catrobat file is attached to the request
  
-And The POST parameter "`fileChecksum`" contains the MD5 sum of the attached file
+And the POST parameter "`fileChecksum`" contains the MD5 sum of the attached file
  
-And We assume the next generated token will be "`rrrrrrrrrrr`"
+And we assume the next generated token will be "`rrrrrrrrrrr`"
  
-When The Request is invoked
+When the Request is invoked
  
-Then The returned json object will be:
+Then the returned json object will be:
 ```json
 {
   "projectId": "1",
