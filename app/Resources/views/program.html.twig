@@ -65,14 +65,6 @@
           </table>
         </button>
 
-        <button id="play-button" onclick="launchProject({{ program.id }})" class="btn btn-primary download-button">
-          <table>
-            <tr>
-              <td>PLAY</td>
-            </tr>
-          </table>
-        </button>
-
         <div id="apk-pending" class="btn-apk pending-container">
           <button  class="btn download-button download-pending">
             <table>
@@ -167,8 +159,6 @@
     </div>
   </div>
 
-
-
   <div id="program-bottom">
     <div id="icon-author">
       <div class="img-author-2 icon"></div>
@@ -190,55 +180,6 @@
       <div class="img-views icon"></div>
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
-  </div>
-
-
-  <div id="program-comments">
-
-    <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
-    <div id="user-comment-wrapper">
-      <div class = 'img-avatar'></div>
-      <textarea class="msg" style="width: 100%; height: 100px"></textarea>
-      <button class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
-    </div>
-
-    <div id="comments-wrapper">
-      {% for comment in program_details.comments|slice(0, 10) %}
-        <div class = "single-comment">
-          <div class = "avatar-wrapper">
-            <div class = "img-avatar"></div>
-            <div class = "usr-name">{{ comment.username }}</div>
-            <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
-          </div>
-          <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
-          {% if  program_details.isAdmin  %}
-           <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
-          {% endif %}
-          <p>{{ comment.text }}</p>
-        </div>
-      {% endfor %}
-
-      {% for comment in program_details.comments|slice(11, program_details.commentsLength) %}
-        <div class = "single-comment hidden">
-          <div class = "avatar-wrapper">
-            <div class = "img-avatar"></div>
-            <div class = "usr-name">{{ comment.username }}</div>
-            <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
-          </div>
-          <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
-          {% if  program_details.isAdmin  %}
-            <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
-          {% endif %}
-          <p>{{ comment.text }}</p>
-        </div>
-      {% endfor %}
-
-      <div id = "show-more">
-        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
-      </div>
-
-    </div>
-
   </div>
 
 {% endblock %}
