@@ -2,11 +2,9 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
-use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\AppBundle\StatusCode;
-use Symfony\Component\Finder\Finder;
-use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
+use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
+use Symfony\Component\Finder\Finder;
 
 class ExtractedCatrobatFile
 {
@@ -29,7 +27,12 @@ class ExtractedCatrobatFile
             throw new MissingXmlException();
         }
         
-        $this->program_xml_properties = @simplexml_load_file($base_dir . 'code.xml');
+        $content = file_get_contents($base_dir . 'code.xml');
+        if ($content === false) {
+            throw new InvalidXmlException();
+        }
+        $content = str_replace('&#x0;', '', $content, $count);
+        $this->program_xml_properties = @simplexml_load_string($content);
         if ($this->program_xml_properties === false) {
             throw new InvalidXmlException();
         }

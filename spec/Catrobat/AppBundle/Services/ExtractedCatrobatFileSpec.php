@@ -72,4 +72,12 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
     {
         $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__.'program_with_invalid_code_xml/', '/webpath', 'hash'));
     }
+    
+    public function it_ignores_an_invalid_0_xmlchain_the_xml()
+    {
+        $this->beConstructedWith(__SPEC_FIXTURES_DIR__.'program_with_0_xmlchar/', '/webpath', 'hash');
+        
+        $this->getProgramXmlProperties()->shouldHaveType('SimpleXMLElement');
+    }
+    
 }
