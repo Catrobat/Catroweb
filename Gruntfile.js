@@ -1,4 +1,4 @@
-var themes = ['pocketcode', 'pocketalice'];
+var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy'];
 
 var lessconfig = {};
 
