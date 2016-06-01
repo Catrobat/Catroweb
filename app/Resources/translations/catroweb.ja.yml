@@ -52,6 +52,7 @@ programs:
   comments: コメント
   send: 送信
   delete: 削除
+  report: 不適切として報告する
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
@@ -512,3 +513,15 @@ tags:
     tag4: 音楽
     tag5: アート
     tag6: 実験的
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

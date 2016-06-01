@@ -10,7 +10,6 @@ files:
     update_option: 'update_as_unapproved'
     languages_mapping:
       locale_with_underscore:
-      locale_with_underscore:
         'ar': 'ar'
         'bs': 'bs'
         'da': 'da'
@@ -19,6 +18,7 @@ files:
         'fa': 'fa'
         'fr': 'fr'
         'gu-IN': 'gu'
+        'he': 'he'
         'hi': 'hi'
         'hr': 'hr'
         'hu': 'hu'

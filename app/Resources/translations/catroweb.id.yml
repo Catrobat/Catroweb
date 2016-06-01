@@ -52,6 +52,7 @@ programs:
   comments: Komentar
   send: Kirim
   delete: Hapus
+  report: Laporkan
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
@@ -189,7 +190,7 @@ help:
       detail:
         text1: 'Pilih bata "Bicara". Objek membaca teks, ketika bata ini dijalankan.'
         text2: 'Letakkan brick di bawah brick "Beralih untuk melihat".'
-        text3: Tekan play untuk melihat perilaku di panggung.
+        text3: Tekan putar untuk melihat perilaku di panggung.
     step6:
       title: Lagi dan lagi
       description: Langkah ini menunjukkan Anda bagaimana untuk mengulangi perilaku objek.
@@ -511,3 +512,15 @@ tags:
     tag4: Musik
     tag5: Seni
     tag6: Eksperimental
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

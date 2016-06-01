@@ -22,7 +22,7 @@ oldVersionError: 'لطفا نسخه ی جدید "پاکد کد" را به روز
 more: بیشتر
 less: کمتر
 ok: تایید
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: 'برای اینکه برنامه نمومه را دانلود کنی، کلیک کن %link_start% روی %link_end%.'
 programs:
   featured:  پيشنهادي
   newest: جدیدترین برنامه ها
@@ -30,12 +30,12 @@ programs:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
   random: برنامه های تصادفی
-  related: Related Programs
+  related: برنامه های مرتبط
   downloads: '%downloads%دانلودها'
-  sample: Example Programs
+  sample: برنامه های نمونه
   views: '%views%نمایش ها'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: برنامه های ارسالی
+  uploaded: برنامه های آپلود شده
   reportAsInappropriate: به عنوان نامناسب گزارش بده
   languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
   reportLoginText: 'لطفا %login% شو تا نامناسب بودن این برنامه را گزارش بدی.'
@@ -47,11 +47,12 @@ programs:
   updateAppHeader: به روز رسانی اپلیکیشن
   updateAppText: لطفا اپلیکیشن خود را به جدیدترین نسخه به روز رسانی کن تا قادر باشی این برنامه را دانلود کنی.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  checkout_this_program: این برنامه کت ربات را وارسی کن
+  show_more: نمایش بیشتر
+  comments: نظرات
+  send: ارسال
   delete: حذف
+  report: گزارش
 passwordRecovery:
   subject: 'بازیابی رمز عبورت در "کت ربات"'
   message: |
@@ -104,8 +105,8 @@ licenseToPlay:
   version: نسخهٔ 1.1 2 آوریل 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: بخش معلمین
+    description: این بخش می تواند توسط معلمان مورد استفاده قرار گیرد.
 termsOfUse:
   title: شرایط استفاده
   headline: 'به انجمن "کت ربات" خوش آمدید!'
@@ -149,10 +150,9 @@ help:
     title: معرفی گام به گام
     start: 'موقعیت شروع:'
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      تو اینجا اولین برنامه ات را که یک کارت پستال تعاملی است، با استفاده از ویدئوهای آموزشی ایجاد می کنی. لطفا مراحل آموزشی را قدم به قدم دنبال کن.
+      در حین ایجاد کارت پستال، اصول اولیه پاکت کد، که میتوانی از آنها برای پروژه های دیگر استفاده کنی، منتقل شده اند.
+      بعد از این ویدئوهای آموزشی، بقیه ی فعالیت ها به تو آزادی بیشتری برای ساختن پروژه شخصی پاکت کد می دهند.
     step1:
       title: برنامه جدید بساز
       detail:
@@ -248,19 +248,19 @@ help:
     card1:
       title: تغییر اندازه
       description: روی اردک ضربه بزن تا اندازه اش تغییر کند.
-      one: Add the object of which you would like to change the size, e.g. Animal.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      one: شی را، که قصد داری تغییر اندازه بدهی، اضافه کن (مانند حیوان).
+      two: آجرهای زیر را به دستورات اشیاء اضافه کن به منظور اینکه وقتی ضربه زده شد، اندازه آن (با ٪۲۰ از اندازه ی اصلی) به حداقل برسد.
     card2:
       title: تغییر ظاهر
       description: از این ترفند برای شمردن خودکار استفاده کن.
-      one: Add the object of which you would like to change its look, e.g. items.
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      one: شی را، که قصد داری شکلش را عوض کنی، بچسبان مانند اشیاء.
+      two: تصاویر بیشتری برای شکل ظاهری شی اضافه کن.
+      three: آجرهای زیر را به دستور شیء اضافه کن، تا شکل ظاهری شیء بعد از هر ثانیه تغییر کند.
     card3:
       title: حرکت دادن انیمیشن
       description: وقتی یک طوطی در حال پرواز می خواهی از این ترفند استفاده کن.
-      one: Add the object you want to be moving.
-      two: "Include another picture in the object's looks which illustrates the movement."
+      one: شی را که می خواهی به حرکت دربیاری اضافه کن.
+      two: تصاویر بیشتری به شکل ظاهری شیء اضافه کن تا حالتی حرکتی به شیء بدهند.
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
       title: سر بخور
@@ -295,17 +295,17 @@ help:
       three: In this case the background changes when the object in the front layer is tapped.
     card10:
       title: نشان دادن متغیر
-      description: Show the value of a variable.
+      description: مقدار متغیر را نشان بده.
       one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
       two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
       three: Through „Show variable“ you can display the values on stage.
     card11:
-      title: Collision detection
+      title: تشخیص تصادم
       description: Detect a collision between two objects.
       one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
       two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
     card12:
-      title: Face detection
+      title: تشخیص چهره
       description: Control an object by using face detection.
       one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
       two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
@@ -343,29 +343,29 @@ help:
     text7_6: تو الان اولین بازی ات را روی سایت Game Jolt آپلود و فعال کردی. تبریک میگم!
     text7_7: 'حالا افراد دیگر قادر خواهند بود تا بازی ات را پیدا کنند و این روی صفحه %link% ظاهر خواهد شد.'
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
+    title1: سرزمین عجایب (خوش آمدید)
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
+    title2: آلیس را نجات بده!
     subtitle2: Use the inclination sensors and detect a collision between objects
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
     title3: 'The Hatter - Hit and Run'
     subtitle3: "Create a moving landscape and control the Hatters' movement"
     description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
     title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    subtitle4: اجازه بده تا کلاهدوز کارت های شرور را پرتاب کند
+    description4: در این برنامه آموزشی ما به تو نشان می دهیم که چگونه دشمن بسازی تا بصورت دلخواه به سمت کاراکترت حرکت کند. علاوه بر این، تو یاد خواهی گرفت که چگونه کلاه دوز قطرات چای پرتاب کند و با تشخیص پرتاب متوجه می شوی که قطرات به دشمن ها اصابت کرده اند یا خیر.
+    title5: گربه ی خندون را بزن
+    subtitle5: با بکار بردن متغیرها امتیاز بازی را بساز
+    description5: ما در این برنامه آموزشی به تو نشان می دهیم که چگونه از متغیرها برای ایجاد امتیاز استفاده کنی. امتیازات عناصر مفیدی در یک بازی هستند. امتیازات ما به تو نشان می دهد که چند بار گربه را گرفتی.
+    title6: مسابقه دو خرگوش
+    subtitle6: ایجاد یک پس زمینه متحرک
     description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+      این برنامه آموزشی به تو نشان می دهد که چگونه یک پس زمینه عمودی بوسیله سر دادن گرافیک پس زمینه در یک راه مشخص، ایجاد کنی. مورد دیگری که قصد آموزش آن را داریم، این است که وقتی روی کاراکتر ضربه بزنی کاراکتر به سمت جلو بپرد.
+      برای اینکه بازی را کمی سخت تر کنیم، ما به تو نشان خواهیم داد که چگونه می توانی سرعت کاراکترت را در طول زمان کم کنی.
+    download: دانلود برنامه
 oauth:
   username_header: 'برای ثبت نام در "پاکت کد" ازت ممنونیم!'
   username_chooser: 'لطفا یک نام کاربری انتخاب کن:'
@@ -444,11 +444,11 @@ success:
   upload: پروژه شما با موفقیت ارسال شد!
   report: گزارشت با موفقیت ارسال شد!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < ۱ دقیقه پیش |{1}۱ دقیقه پیش |]1,Inf] %count% دقیقه پیش'
+  hours.ago: '{1}۱ ساعت پیش |]1,Inf] %count% ساعت پیش'
+  days.ago: '{1}۱ روز پیش |]1,Inf] %count% روز پیش'
+  months.ago: '{1}۱ ماه پیش |]1,Inf] %count% ماه پیش'
+  years.ago: '{1}۱ سال پیش |]1,Inf] بیش از یک سال'
 language:
   arabic: عربی
   bulgarian: بلغاری
@@ -499,21 +499,33 @@ ci:
   pending: تولید کردن اپلیکیشن
   download: دانلود نرم افزار
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  nojam: با عرض پوزش، الان بازی جم انجام نمی شود
+  submit: ارسال به بازی آلیس
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: توجه
+    subheader: تو فقط می توانی برنامه های خودت را ارسال کنی
     text: |
-      But why not create your own!
-      Take part in the #AliceGameJam
-tag-text: Tags
-extenstion-text: Extensions
+      خودت یکی ایجاد کن!
+      در AliceGameJam# مشارکت کن
+tag-text: برچسب‌ها
+extenstion-text: پسوندها
 tags:
   constant:
     tag1: بازی‌ها
     tag2: حرکت دادن انیمیشن
-    tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
+    tag3: داستان
+    tag4: موسیقی
+    tag5: هنر
+    tag6: آزمایشی
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

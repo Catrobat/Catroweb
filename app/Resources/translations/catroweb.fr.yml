@@ -1,11 +1,11 @@
 ---
-localLanguage: English
+localLanguage: anglais
 username: "Nom d'utilisateur"
 password: Mot de passe
 aboutPocketCode: A propos de Pocket Code
 tutorials: Tutoriels
 googlePlay: Google Play
-passwordsNoMatch: "The passwords didn't match."
+passwordsNoMatch: Les mots de passe ne sont pas identiques.
 error: Erreur
 cancel: Annuler
 report: Signaler
@@ -16,42 +16,43 @@ country: Pays
 loginText: Identifiant
 privacyPolicy: Politique de confidentialité
 imprint: Mentions légales
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: "Ooooops, quelque chose s'est mal passé."
+pleaseTryAgain: Essayez à nouveau !
+oldVersionError: Veuillez mettre à jour vers la dernière version de Pocket Code !
 more: plus
 less: moins
 ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: "Pour télécharger le programme d'exemple, cliquez %link_start% ici %link_end%."
 programs:
   featured: "A l'affiche"
-  newest: Newest programs
+  newest: Nouveaux programmes
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
+    viewed: Les plus populaires
+    downloaded: Les plus téléchargés
+  random: Programmes au hasard
+  related: Programmes apparentés
+  downloads: '%downloads% téléchargements'
+  sample: Exemples de programmes
+  views: '%views% vues'
   submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  uploaded: Programmes téléchargés
   reportAsInappropriate: Signaler comme inapproprié
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportLoginText: 'Merci de vous %login% pour signaler ce programme comme étant inapproprié.'
   reportDialogHeader: "Pourquoi pensez-vous que ce programme n'est pas approprié ?"
   reportDialogReason: Indiquer un motif
   reportOwnProgram: Vous ne pouvez pas marquer votre propre programme.
   reportAlready: "Tu as déjà signalé l'appli comme étant inappropriée."
   reportDone: Vous avez déclaré ce programme comme étant inapproprié !
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: "Mettre à jour l'application"
+  updateAppText: Veuillez mettre à jour votre application pour pouvoir télécharger ce programme.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: Afficher Plus
+  comments: Commentaires
+  send: Envoyer
   delete: Supprimer
+  report: Signaler
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -68,26 +69,26 @@ passwordRecovery:
     Your Catrobat Team.
 profile:
   saveChanges: enregistrer les changements
-  newPass: new password
-  repeatPass: repeat password
+  newPass: nouveau mot de passe
+  repeatPass: confirmez le mot de passe
   firstEmail: Mon premier email
   secondEmail: Mon deuxième email
-  myPrograms: My programs
+  myPrograms: Mes programmes
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
-    passwordIsUsername: The password must differ from the username.
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
+    passwordTooShort: 'Le nouveau mot de passe doit avoir au moins %length% caractères.'
+    passwordTooLong: 'Le nouveau mot de passe peut avoir un maximum de %length% caractères.'
+    passwordIsUsername: "Le mot de passe doit être différent de l'identifiant."
+    emailNotValid: "Cette adresse e-mail n'est pas valide."
+    emailMissing: Erreur lors de la mise à jour de cette adresse e-mail. Vous devez avoir au moins une adresse e-mail validée.
+    emailExists: Cette adresse e-mail existe déjà.
     submitSuccess: enregistré!
   reallyDeleteProgram: Voulez vous vraiment effacer votre programme
   programsOf: Programmes de
   changePicture: "Changer l'image"
   avatar:
     pictureTooLarge: "L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo."
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    uploadError: Désolé, il y a eu un problème pendant le téléchargement !
+    noSupport: "Ce type d'image n'est pas pris en charge, veuillez essayer une autre image."
 licenseToPlay:
   link: Licence pour jouer
   title: 'Licence de jeu - Partagez et créditez'
@@ -96,18 +97,18 @@ licenseToPlay:
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: "En savoir plus sur les conditions d'utilisation de la communauté en ligne de Catrobat sur %link-termsOfUse%."
   list1:
     item1: partagez vos gâteaux avec la recette
     item2: créditez ceux qui vous ont inspiré
   version: Version 1.1, 2 avril 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: Espace enseignants
+    description: Cet espace peut être utilisé par les enseignants.
 termsOfUse:
   title: "Conditions d'utilisation"
-  headline: Welcome to the Catrobat Community!
+  headline: Bienvenue dans la communauté Catrobat !
   text1: 'Dans le cadre de la communauté Catrobat, tu partages des applications et des idées avec des gens :'
   text2: 'Nous avons besoin de ton aide pour créer un endroit favorable pour tous les membres de la communauté. Voici comment tu peux aider :'
   text3: "Le projet Catrobat cherche à promouvoir la coooperation et la créativité de chacun pour le bien de l'humanité. Tu peux devenir un membre actif de la communauté Catrobat en offrant tes applications à la communauté comme le font autres membres actifs :"
@@ -127,7 +128,7 @@ termsOfUse:
     item1: "En téléchargeant une appli sur notre site web, tu acceptes de soumettre ton œuvre à une licence libre. Le système Catrobat est aussi disponible sous licence libre, qui permet à chacun de consulter les applications téléchargées par les utilisateurs et de modifier et personnaliser ces applications pour créer des versions nouvelles des jeux, animations ou d'autres applis. Cela permet une collaboration sans limites. Tout le monde peut profiter de ton œuvre et chacun peut l'utiliser et améliorer. C'est un peu comme textes et images mises à disposition sur Wikipedia par des utilisateurs des quatre coins du monde. C'est un cadeau que tu offres à l'humanité: tu donnes à tout le monde et tous les autres qui téléchargent sur le site web donnent aussi leurs œuvres à toi. Ainsi une application téléchargée est un cadeau de grande valeur que son propriétaire t'offre gratuitement pourvue que toi aussi, tu fais comme cela."
     item2: "Tu n'est pas obligé à accepter ce cadeau, mais si tu veux l'accepter quelques règles s'appliquent. Ces règles te permettent d'utiliser les œuvres des autres et de les améliorer. Ensuite, tu peux télécharger ton appli sur notres site web. Un autre atout d'une licence libre est que tu n'est pas responsable pour les problèmes qui puissent se produire en utilisant tes applis."
     item3: "Si tu utilises et modifies des applis des autres utilisateurs, il faut les mentionner explicitement. Le nom que tu as sélectionné pour ton compte Catrobat sera aussi mentionné si quelqu'un utilise et modifie tes applis. Ainsi tout le monde peut profiter du travail de chacun."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item4: 'Pour les conditions juridiques précises, veuillez consulter %link-licenseUploaded%.'
   list4:
     item1: "Nous t'offrons nos applications et ressources Internet liées au système Catrobat comme par exemple des applications créees par l'équipe Catrobat, nos sites webs et ressources disponibles sur Internet, notre code source lié au système Catrobat et des matériaux supplémentaires comme par exemple des images, des sons et des texts maintenant et à l'avenir sous des licences libres de Catrobat."
     item2: "Ces licences nous permettent d'offrir Catrobat gratuitement. Grâce à ces licences, il est aussi possible d'utiliser et de modifier nos applications à ton gré. Il n'y a que quelques restrictions pour assurer que le système Catrobat reste libre et utile pour tout le monde pour toujours."
@@ -409,7 +410,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Cette adresse e-mail existe déjà.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
@@ -513,3 +514,15 @@ tags:
     tag4: Music
     tag5: Art
     tag6: Experimental
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

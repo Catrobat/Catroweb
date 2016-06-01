@@ -48,10 +48,11 @@ programs:
   updateAppText: 이 프로그램을 다운로드하려면 최신 버전으로 당신의 앱을 업데이트 하세요.
   btnClosePopup: 예
   checkout_this_program: 이 Catrobat 프로그램을 점검하세요
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: 더 보기
+  comments: 코멘트
+  send: 보내기
   delete: 삭제
+  report: 보고서
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
@@ -100,8 +101,8 @@ licenseToPlay:
   version: 버전 1.1, 2013년 4 월 2 일
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: 교사 지역
+    description: 여기는 교사에 의해 사용할 수 있습니다.
 termsOfUse:
   title: 이용 약관
   headline: 오신 것을 환영 합니다 Catrobat 커뮤니티!
@@ -185,49 +186,49 @@ help:
         text3: 화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.
     step6:
       title: 다시 또 다시
-      description: This step shows you how to repeat behaviour of objects.
+      description: 이 단계에서는 개체의 행동을 반복하는 방법을 보여 줍니다.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
+        text1: '"무한 반복" 블록을 선택합니다. 블록안의 프로그램이 무한히 반복됩니다.'
+        text2: '"프로그램을 시작할 때" 블록 아래에 "무한 반복" 블록을 끼워 넣으세요.'
+        text3: '"움직이기" 블록을 추가하세요.'
+        text4: '"움직이기" 블록을 "무한 반복의 끝" 블록 사이에 붙이세요.'
+        text5: X 와 Y의 값을 0으로 하기위해 텍스트 필드를 누릅니다.
         text6: 화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.
     step7:
-      title: Tapping is everything
-      description: You can also control the behaviour of the object when the program is running on the stage.
+      title: 터치하면 다 끝납니다.
+      description: 또한 프로그램 무대에서 실행중일 때도 개체의 행동을 제어할 수 있습니다.
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text1: '"터치할 때" 블록을 선택하라. "터치할 때"아래의 블록들은 스테이지의 개체를 터치할 때 한 번 실행 된다.'
+        text2: '다른 블록들아래에 "터치할 때" 블록을 놓습니다.'
+        text3: '"오른쪽으로 돌기" 블록을 선택하고 "터치할 때" 블록아래에 두세요.'
+        text4: 이제 이런 스크립트가 있습니다.
+        text5: 스테이지에서의 움직임을 보려면 실행을 터치하세요. 개체를 터치하면 돌기 시작합니다.
     step8:
-      title: Copy, delete or edit a brick
+      title: 블록을 복사, 삭제, 편집하세요
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: 블록의 왼쪽을 터치하여 단축메뉴를 열어 보세요. 블록을 이동, 복사, 삭제하거나 수식값을 편집할 수 있습니다.
     step9:
-      title: Navigation in the app
+      title: 응용 프로그램에서 탐색
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: 돌아가기 위해서는 스마트폰의 취소 버튼를 이용하세요.
+        text2: 개체를 다시 보려면 한 화면을 되돌아 갑니다. 여기서 스크립트와 모양, 소리로 갈 수 있습니다. 거기서 모양과 소리파일의 이름을 바꾸고, 복사, 추가 또는 삭제할 수 있다.
+        text3: 개체나 배경을 미리보려면 스마트폰의 취소버튼을 이용하세요.
     step10:
-      title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      title: 배경을 바꾸라
+      description: 하나의 프로그램의 개체와 배경을 미리 보여준다.
       detail:
-        text1: The background is like an object, but you just can have on background.
-        text2: You can add scripts, sounds and look in the same way to the background object.
+        text1: 배경은 개체와 비슷하다, 그러나 배경위에 나타낼 수 있다.
+        text2: 스크립트, 소리와 모양을 배경과 같은 방식으로 볼 수 있습니다.
     step11:
-      title: Main Menu
-      description: Use the Android Back Button to get to this screen.
+      title: 메인 메뉴
+      description: 이 화면으로 돌아가기 위해서는 스마트폰의 취소 버튼를 이용하세요.
       detail:
-        text1: Continue with your currently opened program.
-        text2: Add a new program.
-        text3: See all your local programs.
-        text4: Go to the help site and discuss with other users.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text1: 현재 열린 프로그램에 계속합니다.
+        text2: 새로운 프로그램을 추가하세요.
+        text3: 모든 로컬 프로그램을 참조하십시오.
+        text4: 도움말 사이트에 가서 다른 사용자들과 토론해 보세요.
+        text5: Pocket Code 프로그램의 세계를 탐험해 보세요. 다운로드하고 하고 싶은대로 리믹스해 보세요.
+        text6: 현재 열려있는 프로그램을 업로드하세요.
   tutorialcards:
     title: 튜터리얼
     description1: 이 튜터리얼에서는 포켓 코드에서 효과적인 트릭을 사용하는 방법을 보여줍니다.
@@ -249,145 +250,141 @@ help:
     card3:
       title: 애니메이션
       description: 개체에 애니메이션 효과 주기
-      one: Add the object you want to be moving.
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      one: 이동 하려는 개체를 추가합니다.
+      two: 개체의 모양에 움직임을 나타내려면 다른 그림을 포함시키세요.
+      three: 일정한 시간 후에 개체의 위치를 께속 변경하려면 개체의 스크립트에 다음 블록을 삽입합니다. 또한 벽에 닿으면 튕기기를 이용해 스테이지를 여유있게 활용할 수 있다.
     card4:
       title: 움직이기
-      description: Let your object glide over the screen.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      description: 개체를 스크린 위로 움직여 보자.
+      one: 예를 들어 비행기처럼 움직일 개체를 추가하세요.
+      two: 다음 블록을 추가하고 움직일 영역을 정해줍니다.
     card5:
-      title: Play a Sound
-      description: Play a sound by tapping on the object.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      title: 소리 재생
+      description: 개체를 터치하여 소리를 재생합니다.
+      one: 재생할 소리, 예를 들어 개라는 개체를 추가합니다.
+      two: 재생을 가능하게 하려면 아래 블록을 추가하세요. 개인 라이브러리 또는 포켓 코드 미디어 라이브러리에서 소리파일을 선택하거나 스스로 녹음해 보세요.
     card6:
       title: 소리내기
-      description: Let your object speak.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      description: 개체에서 소리내기를 해보세요.
+      one: 예를 들어 Carrie 비행기처럼 소리내기할 개체를 추가하세요.
+      two: 음성 출력을 가능하게 다음 블록을 추가하세요.
     card7:
-      title: Sensor
-      description: Control an object by using the inclination sensors.
-      one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      title: 센서
+      description: 기울기 센서를 사용하여 개체를 제어합니다.
+      one: 이동 하려는 개체를 추가합니다.
+      two: '스마트폰의 센서를 통해 개체를 제어하려면 다음 블록을 삽입합니다. 다음에 "x축 및 y축 기울기"를 선택합니다. 적당한 움직임을 얻으려면 "-기울기"값을 설정하세요. 개체의 움직임 너무 민감한 경우에는, 예를 들어 10으로 기울기값을 나눕니다.'
     card8:
-      title: Compass
-      description: Create you own compass
-      one: Add the object you want to point in compass direction.
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      title: 나침반
+      description: 스스로 나침반 만들기
+      one: 나침반 방향에 향하게할 개체를 추가합니다.
+      two: 개체의 방향을 설정하기 위해 다음 블록을 삽입합니다. 이어서 무한 반복 블록 사이에 추가합니다.
     card9:
       title: 방송하기
-      description: Send messages from one object to another.
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      description: 한 개채에서 다른 개체로 메시지를 보내세요.
+      one: 방송 메시지를 내보낼 예를 들어 앨리스 개체를 추가하세요. 또한, 배경의 모양에 두 번째 배경을 추가합니다. 방송된 메시지를 받는대로 배경을 바꿀 것입니다.
+      two: '"모두에게 보내기" 블록을 삽입하고 다른 개체는 메시지를 받으면 어떻게 해야 결정합니다.'
+      three: 이 경우에 배경의 앞 레이어에서 개체를 터치할 때 변경 됩니다.
     card10:
       title: 변수 보이기
-      description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      description: 변수의 값을 표시하세요.
+      one: '귀하의 스마트폰의 센서 (%tutorial_card_link_7% 자습서 카드 7 %link_end% 참조)를 통해 이동하는 개체를 추가 합니다. 또한 메시지를 받을 때 변경해야 할 두번째 배경을 추가합니다.'
+      two: 현재 x 및 y 이동 객체의 위치를 변수에 저장하려면 다음 블록을 삽입합니다.
+      three: '"변수 보이기"블록을 통해 무대에 변수값을 표시할 수 있습니다.'
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: 충돌 감지
+      description: 두 개체 간의 충돌을 감지합니다.
+      one: '알렉스의 예처럼, 스마트폰의 센서를 통해 이동해야 하는 두 개체를 추가 (%tutorial_card_link_7% 자습서 카드 7 %link_end% 참조).'
+      two: '움직이는 알렉스의  "x 및 y 위치"를 저장하라(%tutorial_card_link_10% 자습서 카드 10 %link_end% 참조). 그리고 다음 스크립트를 삽입하라. 지속적으로 두 개체가 겹치는지 확인합니다. 만약 그런 경우 고정된 개체는 숨겨져야 합니다.'
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: 얼굴 인식
+      description: 얼굴 인식를 사용하여 개체를 제어합니다.
+      one: 먼저 얼굴 인식 블록이 활성화 되어있는지 확인합니다. 따라서 설정으로 이동합니다.
+      two: '새 개체를 추가하고는 얼굴 감지 되면 보이게 하려면 다음 블록을 추가하세요. 얼굴 인식이 되고 무한 반복 사이에 넣어 확인하십시오. 카메라는 얼굴 인식하는 경우 변수의 값은 "TRUE", 그렇지 않으면 "FALSE"입니다.'
   starterPrograms:
-    title: Starter Programs
-    description: Try out these starter programs. Look inside to make changes and add your ideas.
+    title: 시작 프로그램
+    description: 이러한 시작 프로그램을 실행해 보세요. 변경하려면 자세히 보고 아이디어를 추가해 보세요.
     categories:
-      games: Games
-      animations: Animations
-      interactive: Interactive Art and Stories
-      music: Music And Dance
+      games: 게임
+      animations: 애니메이션
+      interactive: 인터랙티브 예술 및 이야기
+      music: 음악 및 무용
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
-    title1: Registration
-    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
+    title: 게임 사이트에 포켓 코드 게임을 업로드 하는 방법?
+    text0: '당신의 게임에 처음으로 축하합니다! 독립적으로 실행되는 안드로이드 app을 %link%에 업로드할 수 있습니다. 그다음 게임 사이트에 업로드할 수 있다.'
+    title1: 등록
+    text1: "먼저 계정을 생성해야 합니다. 그 후 만든 프로그램을 업로드할 수 있습니다. 그것은 쉽게 걱정할 필요가 없습니다. 사용자 이름 및 암호의 생각해 두고. 둘 다 작성 후 '로그인 또는 등록' 클릭 합니다!"
     title2: 업로드하기
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: Search for your program
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: Create Android app
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: Download app
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
-    title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text2: '등록 절차 후 게임을 업로드할 수 있습니다. 그냥 이름에 대해 생각하고 설명을 추가합니다. 또한 설명 필드에 #AliceJam150을 추가 합니다.'
+    title3: 프로그램에 대한 검색
+    text3: 검색 및 프로그램 이름을 사용하여 프로그램을 직접 찾거나 모든 프로그램이 나열된 포켓 코드 프로필로 이동합니다.
+    title4: 안드로이드 응용 프로그램을 창조하라
+    text4: "프로그램 세부 정보 페이지에서 직접 안드로이드 애플리케이션을 만들 수 있습니다. '앱 준비'를 클릭하여 응용 프로그램을 만듭니다."
+    title5: 앱 다운로드하기
+    text5: '응용프로그램으로 만든 후 프로그램을 다운로드할 수 있습니다.  %link%에 참가할 게임으로 다시 다운로드된 프로그램을 다시 업로드 할 수 있다.'
+    title6: GameJolt.com에 등록/로그인
+    text6: "%link%를 방문 하 고 ' 로그 ' 또는 ' 가입!' 메뉴에서 클릭 합니다. 만약 당신이 이미 있으면 바로 로그인 하고, 계정이 없다면, 당신은 이메일 주소, 사용자 이름 및 암호와 함께 등록을 해야 합니다."
+    title7: Game Jolt Site에 게임을 업로드
+    text7: "로그인 후, 대시보드로 이동합니다. 거기서 당신의 게임을 추가할 수 있습니다. 먼저 '규칙 적용'을 클릭 해야 합니다. 다음 게임 정보를 기입 합니다. 엔진/언어/제작 도구로서 '기타'를 선택하고 다른 엔진/언어/도구 '안드로이드' 필드에 추 합니다. '개발' 상태로 ' 완료/안정 '을 선택 합니다. #AliceJam150 %link% 페이지에 나타나는 설명에 포함되었는지 확인합니다."
+    text7_1: "당신의 게임을 게시할 수 있습니다, 다음 단계를 따르십시오.  적어도 '썸네일 이미지' 를 추가해야 하며 '평가'를 설정하고,  ' 빌드/파일 '을 클릭하여 게임을 업로드합니다."
+    text7_2: "' 추가 패키지 '에 클릭하고 패키지 정보를 작성합니다. 저장하고 추가사항을 추가하세요. "
+    text7_3: '이제 프로그램의 apk를 업로드할 수 있습니다. 당신은 다운로드 폴더에 다운로드한 애플리케이션을 찾으세요. 그것은 제일 좋은 자료 찾는 방법입니다. (예: es 데이터 탐색기)'
+    text7_4: "참고: 응용 프로그램은 없는 경우는 접미사 '. a p k', '. a p k'를 수동으로 추가해야 합니다. 그냥 파일 이름을 바꿉니다. 이제 당신이 그것을 업로드할 수 있습니다."
+    text7_5: "업로드 후 게시하려면 '확인'을 클릭하세요. 사람들이 당신의 게임의 다운로드에 대한 링크가 표시됩니다."
+    text7_6: 사이트에 첫 번째 게임을 업로드하고 활성화 되었습니다. 축하합니다!
+    text7_7: '다른 사람들이 지금 당신의 게임을 찾을 수 있고 그것은 %link% 페이지에 표시됩니다.'
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    title1: (환영) 원더랜드
+    subtitle1: "'터치할 때' 블록에 캐릭터를 움직이고 이벤트를 만드세요"
+    description1: "캐릭터가 살아 움직이는지 배우고 터치 할 때 캐릭터가 무엇을 할지 익히세요. 비디오를 통해 캐릭터가 다른 모양으로 어떻게 움직이는지 알 수 있다. 더하여 '터치할 때'블록의 이벤트와 개체사이에 방송 메시지를 어떻게 보내는지 보여준다."
+    title2: 앨리스를 저장!
+    subtitle2: 기울기 센서를 사용하여 개체 간의 충돌을 감지하라
+    description2: 스마트폰의 기울기 센서를 사 하여 문자를 제어하는 방법을 배웁니다. 왼쪽 또는 오른쪽에 귀하의 휴대 전화를 기울이기로 앨리스의 움직임을 제어할 수 있습니다. 우리의 자습서를 시청하고 개체를 임의로 하늘에서움직이고 다른 개체와의 충돌를 경험하자.
+    title3: 해 터-치고 달리기
+    subtitle3: "움직이는 배경을 만들고 Hatters' 움직임을 제어하세요"
+    description3: 이 자습서에서는 움직이는 것처럼 보이는 풍경을 만드는 방법을 배웁니다. 우리는 운동의 환상을 만들어 화면에 따라 개체를 이동할 것입니다. 스마트폰의 기울이기로 이동하게 하는 방법을 보여줍니다.
+    title4: 해 터-치고 달리기
+    subtitle4: 악마 카드를 촬영해 보자
+    description4: 이 자습서에서 임의로 캐릭터를 향해 이동하는 적을 만드는 방법을 살펴보겠습니다. 또한, 해 터 teadrops를 촬영하고 적을 충돌 감지를 사용 하여 공 하는 경우 확인 게 하는 방법을 배웁니다.
+    title5: Cheshire 고양이를 치세요
+    subtitle5: 변수를 사용하여 점수를 만들기
+    description5: 이 자습서에서는 점수를만들기 위해 변수를 사용하는 방법을 살펴보겠습니다. 점수는 게임 내에서 유용한 요소입니다. 우리의 점수를 보여줍니다.
+    title6: 토끼 레이스
+    subtitle6: 움직이는 배경을 만드세요
+    description6: 이 자습서는 특정 방식으로 배경 그래픽을 이동하여 세로로 스크롤 배경을 만드는 방법을 보여 줍니다. 또 한 가지 우리가 당신을 앞으로 점프 하는 캐릭터를 만드는 것을 가르칠 것입니다. 게임을 좀 더 어렵게 만들기 위해 시간이 지남에따라 당신의 캐릭터의 속도를 감속하는 방법을 살펴보겠습니다.
+    download: 프로그램 다운로드
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
+  username_header: 포켓코드에 가입해 주셔서 감사합니다!
+  username_chooser: 사용자명을 선택하여 주십시오.
+  username_hint: 사용자 이름은 당신의 진짜 이름을 사용할 수 없습니다.
+  usernameTaken: 이미 사용중인 사용자 이름입니다. 다른 하나를 선택하십시오!
 search:
-  dotdotdot: Search...
-  search: Search
-  results: Search Results
-  resultcount: 'Your search returned %count% results'
+  dotdotdot: 검색중...
+  search: 검색
+  results: 검색 결과
+  resultcount: '%count% 개의 검색 결과'
 menu:
-  profile: My Profile
-  logout: Logout
+  profile: 나의 프로필
+  logout: 로그아웃
 programLoader:
-  noPrograms: There are currently no programs.
+  noPrograms: 프로젝트가 없습니다.
 login:
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
+  passOrUser: 사용자 이름 또는 암호가 잘못되었습니다.
+  noUsername: 사용자 이름 또는 이메일 주소를 찾을 수 없습니다.
+  forgotPass: 아이디나 비밀번호가 잘못 되었습니다.
+  recoverPass: 비밀번호 복구
+  recoverPassSend: 이메일이 귀하의 이메일 주소로 보냈습니다. 받은 편지함을 확인하시기 바랍니다.
+  userOrEmail: 사용자명 또는 이메일
+  changePass: 비밀번호 변경하기
+  createAccount: 계정 만들기
   or: 또는
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  download: 앱 다운로드하기
+  prepare: 응용 프로그램 준비
+  preparing: 응용 프로그램 준비
+  text: 프로세스 시간이 걸릴 수 있습니다.
 errors:
   username:
-    blank: Username must not be blank
+    blank: 파일 이름을 반드시 입력해야 합니다.
     invalid: 사용자 이름이 올바르지 않습니다.
     exists: 이름이 이미 존재합니다.
     not_exists: 사용자 이름이 존재하지 않습니다.
@@ -494,8 +491,8 @@ gamejam:
     header: 알고 있어야합니다
     subheader: 자신의 프로그램만 제출할 수 있습니다
     text: '스스로 만드세요!  #AliceGameJam에 참여하세요'
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: 태그
+extenstion-text: 확장 프로그램
 tags:
   constant:
     tag1: 게임
@@ -504,3 +501,15 @@ tags:
     tag4: 음악
     tag5: 예술
     tag6: '실험적인 기능 '
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

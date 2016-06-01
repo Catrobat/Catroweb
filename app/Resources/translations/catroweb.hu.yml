@@ -52,6 +52,7 @@ programs:
   comments: Comments
   send: Send
   delete: Törlés
+  report: Jelentés
 passwordRecovery:
   subject: Catrobat jelszó emlékeztető
   message: 'Kedves %username%. Jelszó emlékeztetőt kértél a %appplication_url% alkalmazáshoz, mert elfelejtetted a jelszavad. Amennyiben nem te kezdeményezted a jelszó emlékeztető küldését, kérlek hagyd ezt az üzenetet figyelmen kívül. Az üzenet 24 órán belül lejár. A jelszavad frissítéséhez látogasd meg a következő oldalt: %confirmationUrl% Felhasználóneveddel és jelszavaddal elérheted a %appplication_url% közösséget. Ehhez látogasd meg a következő oldalt: %loginPage% Profil adataid módosításához használd: %profilePage% Best regards, A Catrobat Csapat.'
@@ -502,3 +503,15 @@ tags:
     tag4: Music
     tag5: Art
     tag6: Experimental
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

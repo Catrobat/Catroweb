@@ -1,9 +1,9 @@
 ---
-localLanguage: English
-username: Username
-password: Password
+localLanguage: Engleză
+username: Nume de utilizator
+password: Parolă
 aboutPocketCode: Despre Catroid
-tutorials: Tutorials
+tutorials: Tutoriale
 googlePlay: 'Croat&#x103;'
 passwordsNoMatch: Parolele nu se potrivesc.
 error: Eroare
@@ -12,48 +12,49 @@ report: Raport
 download: Descarca
 description: Descrierea
 noDescription: Nici o descriere disponibilă.
-country: Country
+country: Țară
 loginText: login
 privacyPolicy: 'Ceh&#x103;'
 imprint: 'Englez&#x103; (Regatul Unit)'
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: Ups... ceva nu a mers bine.
+pleaseTryAgain: Încearcă din nou!
+oldVersionError: Te rog să actualizezi cea mai nouă versiune de Pocket Code!
 more: 'Catalan&#x103;'
 less: 'Chinez&#x103; (Simplificat&#x103;)'
 ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Pentru a descărca programul de exemplu apasă %link_start% aici %link_end%.'
 programs:
   featured: Recomandate
-  newest: Newest programs
+  newest: Programele noi
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: Cele mai vizualizate
+    downloaded: Cele mai descărcate
   random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  related: Programe asemanatoare
+  downloads: '%downloads% descărcări'
+  sample: Exemplu Programe
+  views: '%views% vizualizări'
+  submitted: Programele trimise
+  uploaded: Programele încărcate
   reportAsInappropriate: Raportare ca necorespunzător
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  languageVersion: 'Versiune Catrobat Limba: %languageVersion%'
+  reportLoginText: 'Te rog să %login% pentru a raporta acest program ca fiind necorespunzător.'
   reportDialogHeader: De ce crezi că acest program este necorespunzător?
   reportDialogReason: Introduceţi un motiv
   reportOwnProgram: Nu pot semnaliza propriul program.
   reportAlready: Deja aţi semnalizat acest program ca fiind necorespunzător.
   reportDone: 'Voi a&#x21B;i reportat acest proiect ca necorespunz&#x103;tor!'
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: Actualizare a aplicației
+  updateAppText: Te rog să actualizeze aplicația la cea mai nouă versiune pentru a putea descărca acest program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
+  show_more: Arată mai mult
+  comments: Comentarii
   send: Send
   delete: Ștergere
+  report: Raport
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Recuperare parolă Catrobat
   message: |
     Dear %username%.
     
@@ -67,26 +68,26 @@ passwordRecovery:
     Best regards,
     Your Catrobat Team.
 profile:
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
+  saveChanges: salvează schimbările
+  newPass: parolă nouă
+  repeatPass: repetă parola
   firstEmail: 'Sunte&#x21B;i siguri c&#x103; dori&#x21B;i s&#x103; &#x219;terge&#x21B;i aceast&#x103; adres&#x103; de e-mail?'
   secondEmail: 'A&#x21B;i actualizat &#x21B;ara dvs. cu succes.'
-  myPrograms: My programs
+  myPrograms: Programele mele
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordTooShort: 'Noua parolă trebuie să aibă cel puţin %length% caractere.'
+    passwordTooLong: 'Noua parolă poate avea maxim %length% caractere.'
     passwordIsUsername: Parola trebuie să difere de numele de utilizator.
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailNotValid: Această adresă de e-mail nu este validă.
+    emailMissing: Eroare în timpul actualizării aceastei adrese electronice. Trebuie să ai cel puţin o adresă de e-mail validă.
     emailExists: 'Parola sau numele au fos gre&#x219;ite.'
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
+    submitSuccess: salvat!
+  reallyDeleteProgram: Într-adevăr doriţi să ştergeţi programul tău
+  programsOf: Programe de
   changePicture: '&#x21A;ara'
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
+    pictureTooLarge: Imaginea ta alese este prea mare, te rog să nu folosi imagini mai mare de 5MB.
+    uploadError: Ne pare rau, a parut o problemă în timpul încărcari!
     noSupport: 'Numele sau adresa email lipse&#x219;te.'
 licenseToPlay:
   link: Licenţă pentru a juca
@@ -111,7 +112,7 @@ termsOfUse:
   text1: 'de toate v&#xEE;rstele (de la copii mici p&#xEE;n&#x103; la adolescen&#x21B;i &#x219;i bunici)'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
+  text4: 'Cadoul nostru pentru tine:'
   text5: 'Our Terms of Use and Service:'
   list1:
     item1: 'cu toate nivelele de experien&#x21B;&#x103;'
@@ -140,7 +141,7 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Versiunea 1.3, 4 martie 2014
 help:
   stepByStep:
     title: Întroducere în Pas-cu-Pas
@@ -236,7 +237,7 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: Tutorials
+    title: Tutoriale
     description1: These tutorials show you how to use effective tricks in Pocket Code.
     getReady: 'Get Ready:'
     tryCode: 'Try this code:'
@@ -513,3 +514,15 @@ tags:
     tag4: Music
     tag5: Art
     tag6: Experimental
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

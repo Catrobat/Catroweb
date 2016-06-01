@@ -48,10 +48,11 @@ programs:
   updateAppText: "Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente."
   btnClosePopup: Ok
   checkout_this_program: Fai il check-out questo di programma Catrobat
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: Mostra altri
+  comments: Commenti
+  send: Invia
   delete: Eliminare
+  report: Report
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -109,8 +110,8 @@ licenseToPlay:
   version: Versione 1.1, 2 Aprile 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: Area insegnanti
+    description: "Quest'area può essere utilizzata dagli insegnanti."
 termsOfUse:
   title: Termini di utilizzo
   headline: Benvenuti nella comunità di Catrobat!
@@ -517,8 +518,8 @@ gamejam:
     header: fai attenzione
     subheader: È possibile inviare solo programmi originali, creati da sé
     text: 'Ma perché non crearne uno personale! Prendi parte ad #AliceGameJam'
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: Tag
+extenstion-text: Estensioni
 tags:
   constant:
     tag1: Giochi
@@ -527,3 +528,15 @@ tags:
     tag4: Musica
     tag5: Arte
     tag6: Sperimentale
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

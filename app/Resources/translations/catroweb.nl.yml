@@ -52,6 +52,7 @@ programs:
   comments: Comments
   send: Send
   delete: verwijderen
+  report: Report
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -82,12 +83,12 @@ profile:
     emailExists: This email address already exists.
     submitSuccess: saved!
   reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
+  programsOf: "Programma's van"
   changePicture: Change picture
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: Jouw gekozen afbeelding is te groot, gelieve geen afbeeldingen te gebruiken groter dan 5mb.
+    uploadError: Sorry, er is een probleem opgetreden tijden het uploaden!
+    noSupport: "Deze afbeelding's type wordt niet ondersteund. gelieve een andere afbeelding te proberen."
 licenseToPlay:
   link: Licentie om af te spelen
   title: 'License to play - Give credit and share'
@@ -100,15 +101,15 @@ licenseToPlay:
   list1:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+  version: Versie 1.1, 2 April 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: Leraren ruimte
+    description: Deze ruimte kan gebruikt worden door leraren.
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
+  title: Gebruiksvoorwaarden
+  headline: Welkom bij de Catrobat gemeenschap!
+  text1: "Als deel uitmakend van de Catrobat gemeenschap, deelt u programma's en ideeën met andere mensen:"
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
   text4: 'Our gift to you:'
@@ -140,7 +141,7 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Versie 1.3, 4 Maart 2014
 help:
   stepByStep:
     title: Step-by-Step Intro
@@ -513,3 +514,15 @@ tags:
     tag4: Music
     tag5: Art
     tag6: Experimental
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

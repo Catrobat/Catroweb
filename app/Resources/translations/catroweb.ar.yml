@@ -25,11 +25,11 @@ ok: موافق
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 programs:
   featured: خصائص
-  newest: أحدث برنامج
+  newest: أحدث البرامج
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
-  random: Random Programs
+  random: برامج عشوائية
   related: Related Programs
   downloads: '%downloads% downloads'
   sample: Example Programs
@@ -52,6 +52,7 @@ programs:
   comments: Comments
   send: Send
   delete: حذف
+  report: تقرير
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -513,3 +514,15 @@ tags:
     tag4: Music
     tag5: Art
     tag6: Experimental
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!

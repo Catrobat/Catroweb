@@ -53,7 +53,6 @@ programs:
   send: Senden
   delete: Löschen
   report: Melden
-
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -505,3 +504,15 @@ tags:
     tag4: Musik
     tag5: Kunst
     tag6: Experimentell
+admin:
+  maintain:
+    diskMaintenance: Disk maintenance
+    noRemovableObjects: No removable objects available.
+    manualBackups: Manual backups
+    noRemovableBackupObjects: No removable backup files on this server.
+    btnCreateBackup: Create backup
+    btnDownloadBackup: Download backup
+    btnRestoreBackup: Restore backup
+    btnDeleteBackup: Delete backup
+    createBackupConfirmationTitle: Create backup file
+    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
