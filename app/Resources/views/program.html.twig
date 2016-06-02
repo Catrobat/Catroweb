@@ -44,7 +44,7 @@
         {% endif %}
       </div>
 
-      {% if  program.tags|length > 0 %}
+{#      {% if  program.tags|length > 0 %}
         <div id="tag-extionsion-container">
           <div id="tags-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
           <div id='tags'>
@@ -56,7 +56,7 @@
           </div>
 
         </div>
-      {% endif %}
+      {% endif %}#}
 
       <div class="download-container">
         <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
@@ -101,8 +101,10 @@
         </button>
 
       </div>
+
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% set jam = getCurrentGameJam() %}
+
         {% if jam %}
             {% if app.user %}
             <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
