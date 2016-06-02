@@ -111,14 +111,7 @@
             {% else %}
             <a href="{{ url('login') }}" title="{{ jam.name }}">
             {% endif %}
-        <button id="gamejam-submittion" class="btn btn-jam download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/jam_submit.png') }}" > </td>
-              <td>{{ "gamejam.submit"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+              <img src= {{ asset('images/help/galaxy_gamejam/submit-button-en.png') }} >
         </a>
         {% endif %}
       {% endif %}
