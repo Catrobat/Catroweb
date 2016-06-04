@@ -133,6 +133,15 @@ class ExtractedCatrobatFile
     public function saveProgramXmlProperties()
     {
         $this->program_xml_properties->asXML($this->path . 'code.xml');
+        
+        $xml_string = file_get_contents($this->path . 'code.xml');
+        $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;ANYTHING<\/receivedMessage>/', '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);
+        $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;(.*)<\/receivedMessage>/', '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', $xml_string);
+        
+        if ($xml_string != null)
+        {
+            file_put_contents($this->path . 'code.xml', $xml_string);
+        }
     }
 
     public function getContainingCodeObjects()
