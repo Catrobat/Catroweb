@@ -80,13 +80,13 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
         $this->getProgramXmlProperties()->shouldHaveType('SimpleXMLElement');
     }
     
-    public function it_preserves_invalid_0_xmlchar_from_collisions_with_other_actors()
+    public function it_preserves_invalid_0_xmlchar_from_collissions_with_other_actors()
     {
         $filesystem = new Filesystem();
         $filesystem->mirror(__SPEC_FIXTURES_DIR__.'/program_with_0_xmlchar/', __SPEC_CACHE_DIR__.'/program_with_0_xmlchar/');
 
         $base_xml_string = file_get_contents(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/code.xml');
-        $count = substr_count($base_xml_string, "<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>");
+        $count = substr_count($base_xml_string, "<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>");
         expect($count)->toBe(1);
         
         $this->beConstructedWith(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/', '/webpath', 'hash');
@@ -94,11 +94,11 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
         $this->saveProgramXmlProperties();
 
         $base_xml_string = file_get_contents(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/code.xml');
-        $count = substr_count($base_xml_string, "<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>");
+        $count = substr_count($base_xml_string, "<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>");
         expect($count)->toBe(1);
     }
     
-    public function it_preserves_invalid_0_xmlchar_from_collisions_with_anything()
+    public function it_preserves_invalid_0_xmlchar_from_collissions_with_anything()
     {
         $filesystem = new Filesystem();
         $filesystem->mirror(__SPEC_FIXTURES_DIR__.'/program_with_0_xmlchar/', __SPEC_CACHE_DIR__.'/program_with_0_xmlchar/');
