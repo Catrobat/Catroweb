@@ -7,133 +7,427 @@
     <applicationVersion>0.9.22</applicationVersion>
     <catrobatLanguageVersion>0.99</catrobatLanguageVersion>
     <dateTimeUpload></dateTimeUpload>
-    <description></description>
-    <deviceName>Nexus 5X</deviceName>
+    <description>Shake and tilt your screen to move the cupcakes around!
+
+This is just a small demo of the new physics engine of Pocket Code version 0.9.22. 
+
+Please add comments, share, and like via https://goo.gl/Qrih8T - thanks!! </description>
+    <deviceName>SM-N9005</deviceName>
     <landscapeMode>false</landscapeMode>
-    <mediaLicense></mediaLicense>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v4</mediaLicense>
     <platform>Android</platform>
-    <platformVersion>23.0</platformVersion>
-    <programLicense></programLicense>
-    <programName>my test</programName>
-    <remixOf></remixOf>
-    <screenHeight>1794</screenHeight>
+    <platformVersion>21.0</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>Tumbling cupcakes!</programName>
+    <remixOf>/pocketcode/program/9461</remixOf>
+    <screenHeight>1920</screenHeight>
     <screenMode>STRETCH</screenMode>
     <screenWidth>1080</screenWidth>
     <tags></tags>
-    <url></url>
-    <userHandle></userHandle>
+    <url>/pocketcode/program/9461</url>
+    <userHandle>hej-wickie-hej</userHandle>
   </header>
   <objectList>
     <object name="Hintergrund">
       <lookList>
-        <look name="Hintergrund">
-          <fileName>9eb91177d3dffb4acec24ecbdbb61c3e_Hintergrund.png</fileName>
-        </look>
-      </lookList>
-      <soundList/>
-      <scriptList/>
-      <userBricks/>
-      <nfcTagList/>
-    </object>
-    <object name="Wolken1">
-      <lookList>
-        <look name="Wolken">
-          <fileName>b63017ca6c4cb9a9321f965b0d6e57e2_Hintergrund.png</fileName>
+        <look name="look">
+          <fileName>93bad50c3baac302c4a96ebd16f4d72a_look.png</fileName>
         </look>
       </lookList>
       <soundList/>
       <scriptList>
         <script type="StartScript">
           <brickList>
-            <brick type="PlaceAtBrick">
+            <brick type="HideBrick"/>
+            <brick type="ForeverBrick"/>
+            <brick type="SetGravityBrick">
               <formulaList>
-                <formula category="Y_POSITION">
-                  <type>NUMBER</type>
-                  <value>0</value>
-                </formula>
-                <formula category="X_POSITION">
-                  <type>NUMBER</type>
-                  <value>0</value>
-                </formula>
-              </formulaList>
-            </brick>
-            <brick type="GlideToBrick">
-              <formulaList>
-                <formula category="DURATION_IN_SECONDS">
-                  <type>NUMBER</type>
-                  <value>5.0</value>
-                </formula>
-                <formula category="Y_DESTINATION">
-                  <type>NUMBER</type>
-                  <value>0</value>
-                </formula>
-                <formula category="X_DESTINATION">
+                <formula category="PHYSICS_GRAVITY_Y">
+                  <leftChild>
+                    <leftChild>
+                      <rightChild>
+                        <type>NUMBER</type>
+                        <value>5</value>
+                      </rightChild>
+                      <type>OPERATOR</type>
+                      <value>MINUS</value>
+                    </leftChild>
+                    <rightChild>
+                      <type>SENSOR</type>
+                      <value>Y_INCLINATION</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MULT</value>
+                  </leftChild>
                   <rightChild>
-                    <type>NUMBER</type>
-                    <value>1080</value>
+                    <leftChild>
+                      <type>NUMBER</type>
+                      <value>500</value>
+                    </leftChild>
+                    <rightChild>
+                      <leftChild>
+                        <leftChild>
+                          <type>SENSOR</type>
+                          <value>Y_ACCELERATION</value>
+                        </leftChild>
+                        <rightChild>
+                          <type>NUMBER</type>
+                          <value>4</value>
+                        </rightChild>
+                        <type>OPERATOR</type>
+                        <value>DIVIDE</value>
+                      </leftChild>
+                      <type>FUNCTION</type>
+                      <value>ROUND</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MULT</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formula>
+                <formula category="PHYSICS_GRAVITY_X">
+                  <leftChild>
+                    <leftChild>
+                      <rightChild>
+                        <type>NUMBER</type>
+                        <value>5</value>
+                      </rightChild>
+                      <type>OPERATOR</type>
+                      <value>MINUS</value>
+                    </leftChild>
+                    <rightChild>
+                      <type>SENSOR</type>
+                      <value>X_INCLINATION</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MULT</value>
+                  </leftChild>
+                  <rightChild>
+                    <leftChild>
+                      <type>NUMBER</type>
+                      <value>500</value>
+                    </leftChild>
+                    <rightChild>
+                      <leftChild>
+                        <leftChild>
+                          <type>SENSOR</type>
+                          <value>X_ACCELERATION</value>
+                        </leftChild>
+                        <rightChild>
+                          <type>NUMBER</type>
+                          <value>4</value>
+                        </rightChild>
+                        <type>OPERATOR</type>
+                        <value>DIVIDE</value>
+                      </leftChild>
+                      <type>FUNCTION</type>
+                      <value>ROUND</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MULT</value>
                   </rightChild>
                   <type>OPERATOR</type>
                   <value>MINUS</value>
                 </formula>
               </formulaList>
             </brick>
-            <brick type="PlaceAtBrick">
-              <formulaList>
-                <formula category="Y_POSITION">
-                  <type>NUMBER</type>
-                  <value>0</value>
-                </formula>
-                <formula category="X_POSITION">
-                  <type>NUMBER</type>
-                  <value>1080</value>
-                </formula>
-              </formulaList>
-            </brick>
+            <brick type="LoopEndlessBrick"/>
           </brickList>
           <isUserScript>false</isUserScript>
         </script>
+      </scriptList>
+      <userBricks/>
+      <nfcTagList/>
+    </object>
+    <object name="cupcake1">
+      <lookList>
+        <look name="cupcake1">
+          <fileName>242d48c42c9aaccef279e3a70324a158_cupcake1.png</fileName>
+        </look>
+      </lookList>
+      <soundList/>
+      <scriptList>
         <script type="CollisionScript">
           <brickList>
-            <brick type="GlideToBrick">
+            <brick type="VibrationBrick">
               <formulaList>
-                <formula category="DURATION_IN_SECONDS">
+                <formula category="VIBRATE_DURATION_IN_SECONDS">
                   <type>NUMBER</type>
-                  <value>10.0</value>
-                </formula>
-                <formula category="Y_DESTINATION">
-                  <type>NUMBER</type>
-                  <value>0</value>
-                </formula>
-                <formula category="X_DESTINATION">
-                  <rightChild>
-                    <type>NUMBER</type>
-                    <value>1080</value>
-                  </rightChild>
-                  <type>OPERATOR</type>
-                  <value>MINUS</value>
+                  <value>0.01</value>
                 </formula>
               </formulaList>
             </brick>
-            <brick reference="../../../script/brickList/brick[3]"/>
           </brickList>
-          <receivedMessage>Wolken1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>
+          <receivedMessage>cupcake1&lt;&#x0;-&#x0;&gt;cupcake2</receivedMessage>
+        </script>
+        <script type="StartScript">
+          <brickList>
+            <brick type="TurnLeftBrick">
+              <formulaList>
+                <formula category="TURN_LEFT_DEGREES">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="PlaceAtBrick">
+              <formulaList>
+                <formula category="Y_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>800</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>800</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="X_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>400</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>400</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetPhysicsObjectTypeBrick">
+              <type>DYNAMIC</type>
+            </brick>
+            <brick type="TurnLeftSpeedBrick">
+              <formulaList>
+                <formula category="PHYSICS_TURN_LEFT_SPEED">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetVelocityBrick">
+              <formulaList>
+                <formula category="PHYSICS_VELOCITY_X">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="PHYSICS_VELOCITY_Y">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="ForeverBrick"/>
+            <brick type="IfOnEdgeBounceBrick"/>
+            <brick type="LoopEndlessBrick"/>
+          </brickList>
+          <isUserScript>false</isUserScript>
         </script>
       </scriptList>
       <userBricks/>
       <nfcTagList/>
     </object>
-    <object name="Wolken2">
+    <object name="cupcake2">
       <lookList>
-        <look reference="../../../object[2]/lookList/look"/>
+        <look name="cupcake2">
+          <fileName>17cc374c9ecf3bf81455b9edae12f318_cupcake2.png</fileName>
+        </look>
       </lookList>
       <soundList/>
       <scriptList>
+        <script type="CollisionScript">
+          <brickList>
+            <brick type="VibrationBrick">
+              <formulaList>
+                <formula category="VIBRATE_DURATION_IN_SECONDS">
+                  <type>NUMBER</type>
+                  <value>0.01</value>
+                </formula>
+              </formulaList>
+            </brick>
+          </brickList>
+          <receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>
+        </script>
         <script type="StartScript">
           <brickList>
-            <brick reference="../../../../../object[2]/scriptList/script/brickList/brick[3]"/>
+            <brick type="TurnLeftBrick">
+              <formulaList>
+                <formula category="TURN_LEFT_DEGREES">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="PlaceAtBrick">
+              <formulaList>
+                <formula category="Y_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>800</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>800</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="X_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>400</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>400</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetPhysicsObjectTypeBrick">
+              <type>DYNAMIC</type>
+            </brick>
+            <brick type="TurnLeftSpeedBrick">
+              <formulaList>
+                <formula category="PHYSICS_TURN_LEFT_SPEED">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetVelocityBrick">
+              <formulaList>
+                <formula category="PHYSICS_VELOCITY_X">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="PHYSICS_VELOCITY_Y">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
             <brick type="ForeverBrick"/>
-            <brick reference="../../../../../object[2]/scriptList/script[2]/brickList/brick"/>
-            <brick reference="../../../../../object[2]/scriptList/script/brickList/brick[3]"/>
+            <brick type="IfOnEdgeBounceBrick"/>
             <brick type="LoopEndlessBrick"/>
           </brickList>
           <isUserScript>false</isUserScript>
@@ -142,88 +436,297 @@
       <userBricks/>
       <nfcTagList/>
     </object>
-    <object name="Vogel">
+    <object name="cupcake3">
       <lookList>
-        <look name="Fügel oben">
-          <fileName>7b2b1e6fd1f4bc712b0989ac42058572_Fügel oben.png</fileName>
-        </look>
-        <look name="Flügel unten">
-          <fileName>1633005f4c6871ac6e60ced090766bb1_Flügel unten.png</fileName>
+        <look name="cupcake1">
+          <fileName>242d48c42c9aaccef279e3a70324a158_cupcake1.png</fileName>
         </look>
       </lookList>
-      <soundList>
-        <sound>
-          <fileName>47d46612ebf6507b6290492e6f73a50d_Zwitscher1.m4a</fileName>
-          <name>Zwitscher1</name>
-        </sound>
-        <sound>
-          <fileName>69ab7d679193083ba453a002dd2d6c95_Zwitscher2.m4a</fileName>
-          <name>Zwitscher2</name>
-        </sound>
-      </soundList>
+      <soundList/>
       <scriptList>
+        <script type="CollisionScript">
+          <brickList>
+            <brick type="VibrationBrick">
+              <formulaList>
+                <formula category="VIBRATE_DURATION_IN_SECONDS">
+                  <type>NUMBER</type>
+                  <value>0.01</value>
+                </formula>
+              </formulaList>
+            </brick>
+          </brickList>
+          <receivedMessage>cupcake3&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>
+        </script>
         <script type="StartScript">
           <brickList>
-            <brick type="ForeverBrick"/>
-            <brick type="GlideToBrick">
+            <brick type="TurnLeftBrick">
               <formulaList>
-                <formula category="DURATION_IN_SECONDS">
-                  <type>NUMBER</type>
-                  <value>1</value>
-                </formula>
-                <formula category="Y_DESTINATION">
+                <formula category="TURN_LEFT_DEGREES">
                   <leftChild>
-                    <type>NUMBER</type>
-                    <value>-200</value>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
                   </leftChild>
                   <rightChild>
                     <type>NUMBER</type>
-                    <value>200</value>
-                  </rightChild>
-                  <type>FUNCTION</type>
-                  <value>RAND</value>
-                </formula>
-                <formula category="X_DESTINATION">
-                  <leftChild>
-                    <type>NUMBER</type>
-                    <value>-300</value>
-                  </leftChild>
-                  <rightChild>
-                    <type>NUMBER</type>
-                    <value>300</value>
+                    <value>180</value>
                   </rightChild>
                   <type>FUNCTION</type>
                   <value>RAND</value>
                 </formula>
               </formulaList>
             </brick>
-            <brick type="LoopEndlessBrick"/>
-          </brickList>
-          <isUserScript>false</isUserScript>
-        </script>
-        <script type="StartScript">
-          <brickList>
-            <brick type="ForeverBrick"/>
-            <brick type="NextLookBrick"/>
-            <brick type="WaitBrick">
+            <brick type="PlaceAtBrick">
               <formulaList>
-                <formula category="TIME_TO_WAIT_IN_SECONDS">
-                  <type>NUMBER</type>
-                  <value>0.2</value>
+                <formula category="Y_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>800</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>800</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="X_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>400</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>400</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
                 </formula>
               </formulaList>
             </brick>
+            <brick type="SetPhysicsObjectTypeBrick">
+              <type>DYNAMIC</type>
+            </brick>
+            <brick type="TurnLeftSpeedBrick">
+              <formulaList>
+                <formula category="PHYSICS_TURN_LEFT_SPEED">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetVelocityBrick">
+              <formulaList>
+                <formula category="PHYSICS_VELOCITY_X">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="PHYSICS_VELOCITY_Y">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="ForeverBrick"/>
+            <brick type="IfOnEdgeBounceBrick"/>
             <brick type="LoopEndlessBrick"/>
           </brickList>
           <isUserScript>false</isUserScript>
         </script>
-        <script type="WhenScript">
+      </scriptList>
+      <userBricks/>
+      <nfcTagList/>
+    </object>
+    <object name="cupcake4">
+      <lookList>
+        <look name="cupcake2">
+          <fileName>17cc374c9ecf3bf81455b9edae12f318_cupcake2.png</fileName>
+        </look>
+      </lookList>
+      <soundList/>
+      <scriptList>
+        <script type="CollisionScript">
           <brickList>
-            <brick type="PlaySoundBrick">
-              <sound reference="../../../../../soundList/sound"/>
+            <brick type="VibrationBrick">
+              <formulaList>
+                <formula category="VIBRATE_DURATION_IN_SECONDS">
+                  <type>NUMBER</type>
+                  <value>0.01</value>
+                </formula>
+              </formulaList>
             </brick>
           </brickList>
-          <action>Tapped</action>
+          <receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>
+        </script>
+        <script type="StartScript">
+          <brickList>
+            <brick type="TurnLeftBrick">
+              <formulaList>
+                <formula category="TURN_LEFT_DEGREES">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="PlaceAtBrick">
+              <formulaList>
+                <formula category="Y_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>800</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>800</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="X_POSITION">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>400</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>400</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetPhysicsObjectTypeBrick">
+              <type>DYNAMIC</type>
+            </brick>
+            <brick type="TurnLeftSpeedBrick">
+              <formulaList>
+                <formula category="PHYSICS_TURN_LEFT_SPEED">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="SetVelocityBrick">
+              <formulaList>
+                <formula category="PHYSICS_VELOCITY_X">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+                <formula category="PHYSICS_VELOCITY_Y">
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>100</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formula>
+              </formulaList>
+            </brick>
+            <brick type="ForeverBrick"/>
+            <brick type="IfOnEdgeBounceBrick"/>
+            <brick type="LoopEndlessBrick"/>
+          </brickList>
+          <isUserScript>false</isUserScript>
         </script>
       </scriptList>
       <userBricks/>
@@ -232,7 +735,24 @@
   </objectList>
   <data>
     <objectListOfList/>
-    <objectVariableList/>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object[3]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[5]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[4]"/>
+        <list/>
+      </entry>
+    </objectVariableList>
     <programListOfLists/>
     <programVariableList/>
     <userBrickVariableList/>

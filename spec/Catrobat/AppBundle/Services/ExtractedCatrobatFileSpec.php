@@ -3,6 +3,7 @@
 namespace spec\Catrobat\AppBundle\Services;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ExtractedCatrobatFileSpec extends ObjectBehavior
 {
@@ -73,11 +74,47 @@ class ExtractedCatrobatFileSpec extends ObjectBehavior
         $this->shouldThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('__construct', array(__SPEC_GENERATED_FIXTURES_DIR__.'program_with_invalid_code_xml/', '/webpath', 'hash'));
     }
     
-    public function it_ignores_an_invalid_0_xmlchain_the_xml()
+    public function it_ignores_an_invalid_0_xmlchar()
     {
         $this->beConstructedWith(__SPEC_FIXTURES_DIR__.'program_with_0_xmlchar/', '/webpath', 'hash');
-        
         $this->getProgramXmlProperties()->shouldHaveType('SimpleXMLElement');
     }
+    
+    public function it_preserves_invalid_0_xmlchar_from_collissions_with_other_actors()
+    {
+        $filesystem = new Filesystem();
+        $filesystem->mirror(__SPEC_FIXTURES_DIR__.'/program_with_0_xmlchar/', __SPEC_CACHE_DIR__.'/program_with_0_xmlchar/');
+
+        $base_xml_string = file_get_contents(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/code.xml');
+        $count = substr_count($base_xml_string, "<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>");
+        expect($count)->toBe(1);
+        
+        $this->beConstructedWith(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/', '/webpath', 'hash');
+        $this->getProgramXmlProperties()->shouldHaveType('SimpleXMLElement');
+        $this->saveProgramXmlProperties();
+
+        $base_xml_string = file_get_contents(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/code.xml');
+        $count = substr_count($base_xml_string, "<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>");
+        expect($count)->toBe(1);
+    }
+    
+    public function it_preserves_invalid_0_xmlchar_from_collissions_with_anything()
+    {
+        $filesystem = new Filesystem();
+        $filesystem->mirror(__SPEC_FIXTURES_DIR__.'/program_with_0_xmlchar/', __SPEC_CACHE_DIR__.'/program_with_0_xmlchar/');
+    
+        $base_xml_string = file_get_contents(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/code.xml');
+        $count = substr_count($base_xml_string, "<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>");
+        expect($count)->toBe(1);
+    
+        $this->beConstructedWith(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/', '/webpath', 'hash');
+        $this->getProgramXmlProperties()->shouldHaveType('SimpleXMLElement');
+        $this->saveProgramXmlProperties();
+    
+        $base_xml_string = file_get_contents(__SPEC_CACHE_DIR__.'/program_with_0_xmlchar/code.xml');
+        $count = substr_count($base_xml_string, "<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>");
+        expect($count)->toBe(1);
+    }
+    
     
 }
