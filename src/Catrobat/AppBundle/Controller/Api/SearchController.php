@@ -40,10 +40,24 @@ class SearchController extends Controller
         $query = $request->query->get('q');
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
-        $numbOfTotalProjects = $program_manager->searchTagAndExtensionCount($query);
+        $numbOfTotalProjects = $program_manager->searchTagCount($query);
         $programs = $program_manager->getProgramsByTagId($query, $limit, $offset);
 
-//        $numbOfTotalProjects = count($programs);
+        return new ProgramListResponse($programs, $numbOfTotalProjects);
+    }
+
+    /**
+     * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension", defaults={"_format": "json"})
+     * @Method({"GET"})
+     */
+    public function extensionSearchProgramsAction(Request $request)
+    {
+        $program_manager = $this->get('programmanager');
+        $query = $request->query->get('q');
+        $limit = intval($request->query->get('limit', 20));
+        $offset = intval($request->query->get('offset', 0));
+        $numbOfTotalProjects = $program_manager->searchExtensionCount($query);
+        $programs = $program_manager->getProgramsByExtensionName($query, $limit, $offset);
 
         return new ProgramListResponse($programs, $numbOfTotalProjects);
     }

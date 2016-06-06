@@ -45,6 +45,13 @@ services:
         arguments:
             - "AppBundle:Tag"
 
+    extensionrepository:
+        class: Catrobat\AppBundle\Entity\ExtensionRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:Extension"
+
     notificationrepository:
         class: Catrobat\AppBundle\Entity\NotificationRepository
         factory_service: doctrine.orm.entity_manager

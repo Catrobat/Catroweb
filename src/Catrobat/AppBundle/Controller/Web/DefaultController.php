@@ -173,25 +173,7 @@ class DefaultController extends Controller
   {
       return $this->get('templating')->renderResponse('::search.html.twig', array('q' => null));
   }
-
-    /**
-     * @Route("/tag/search/{q}", name="tag_search", requirements={"q":"\d+"})
-     * @Method({"GET"})
-     */
-    public function tagSearchAction($q)
-    {
-        return $this->get('templating')->renderResponse('::tagExtensionSearch.html.twig', array('q' => $q));
-    }
-
-    /**
-     * @Route("/tag/search/", name="empty_tag_search")
-     * @Method({"GET"})
-     */
-    public function tagSearchNothingAction()
-    {
-        return $this->get('templating')->renderResponse('::search.html.twig', array('q' => null));
-    }
-
+    
   /**
    * @Route("/report", name="report")
    * @Method({"GET"})

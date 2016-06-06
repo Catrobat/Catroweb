@@ -75,8 +75,9 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
       
-      catroweb.permissions.check:
-            class: Catrobat\AppBundle\Listeners\ProgramPermissionsListener
+      catroweb.extension.check:
+            class: Catrobat\AppBundle\Listeners\ProgramExtensionListener
+            arguments: ["@extensionrepository"]
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
 

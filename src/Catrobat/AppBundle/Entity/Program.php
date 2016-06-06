@@ -65,11 +65,35 @@ class Program
     protected $tags;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection|Extension[]
+     *
+     * @ORM\ManyToMany(targetEntity="\Catrobat\AppBundle\Entity\Extension", inversedBy="programs")
+     * @ORM\JoinTable(
+     *  name="program_extension",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="extension_id", referencedColumnName="id", nullable=true)
+     *  }
+     * )
+     */
+    protected $extensions;
+
+    /**
      * @return Tag[]|\Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @return Extension[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getExtensions()
+    {
+        return $this->extensions;
     }
 
     /**
@@ -179,17 +203,7 @@ class Program
      * @ORM\Column(type="integer", options={"default":0})
      */
     protected $apk_downloads = 0;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default":false})
-     */
-    protected $phiro = false;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default":false})
-     */
-    protected $lego = false;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\GameJam", inversedBy="programs")
      * @ORM\JoinColumn(nullable=true)
@@ -215,6 +229,7 @@ class Program
     {
         $this->program_downloads = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->extensions = new ArrayCollection();
     }
 
     /**
@@ -884,30 +899,6 @@ class Program
         return $this->apk_downloads;
     }
 
-    public function getPhiro()
-    {
-        return $this->phiro;
-    }
-
-    public function setPhiro($phiro)
-    {
-        $this->phiro = $phiro;
-
-        return $this;
-    }
-
-    public function getLego()
-    {
-        return $this->lego;
-    }
-
-    public function setLego($lego)
-    {
-        $this->lego = $lego;
-
-        return $this;
-    }
-
     /**
      * Set gamejam
      *
@@ -1014,7 +1005,6 @@ class Program
         $this->fb_post_url = $fb_post_url;
     }
 
-
     /**
      * @param Tag $tag
      */
@@ -1038,4 +1028,37 @@ class Program
         $this->tags->removeElement($tag);
         $tag->removeProgram($this);
     }
+
+    /**
+     * @param Extension $extension
+     */
+    public function addExtension(Extension $extension)
+    {
+        if ($this->extensions->contains($extension)) {
+            return;
+        }
+        $this->extensions->add($extension);
+        $extension->addProgram($this);
+    }
+
+    /**
+     * @param Extension $extension
+     */
+    public function removeExtension(Extension $extension)
+    {
+        if (!$this->extensions->contains($extension)) {
+            return;
+        }
+        $this->extensions->removeElement($extension);
+        $extension->removeProgram($this);
+    }
+
+    public function removeAllExtensions()
+    {
+        foreach ($this->extensions as $extension) {
+            $this->removeExtension($extension);
+        }
+    }
+
+
 }

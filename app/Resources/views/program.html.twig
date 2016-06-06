@@ -50,16 +50,34 @@
         {% endif %}
       </div>
 
-      {% if  program.tags|length > 0 %}
-        <div id="tag-extionsion-container">
-          <div id="tags-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
-          <div id='tags'>
-            {% for tag in program.tags %}
-              <a href="{{ url('tag_search', { q : tag.id }) }}">
-                <button id={{ tag.en }} class="btn-tags"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
-              </a>
-            {% endfor %}
-          </div>
+      {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+        <div id="tag-extension-container">
+
+          {% if program.extensions|length > 0 %}
+            <div id="extension-container">
+              <div class="tags-extensions-text">{{ ("extenstion-text")|trans({}, "catroweb") }}:</div>
+                <div class="tagext">
+                  {% for extension in program.extensions %}
+                    <a href="{{ url('extension_search', { q : extension.name }) }}">
+                      <button id={{ extension.name }} class="btn-tags-extensions"> {{ extension.name }}</button>
+                    </a>
+                  {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if  program.tags|length > 0 %}
+            <div id="tag-container">
+              <div class="tags-extensions-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
+              <div class='tagext'>
+                {% for tag in program.tags %}
+                  <a href="{{ url('tag_search', { q : tag.id }) }}">
+                    <button id={{ tag.en }} class="btn-tags-extensions"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
 
         </div>
       {% endif %}

@@ -1,6 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Features\Helpers;
 
+use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -69,6 +70,14 @@ class SymfonySupport
     public function getTagRepository()
     {
         return $this->kernel->getContainer()->get('tagrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ExtensionRepository
+     */
+    public function getExtensionRepository()
+    {
+        return $this->kernel->getContainer()->get('extensionrepository');
     }
     
     /**
@@ -245,6 +254,19 @@ class SymfonySupport
 
     }
 
+    public function insertExtension($config)
+    {
+        $em = $this->getManager();
+        $extension = new Extension();
+
+        $extension->setName($config['name']);
+        $extension->setPrefix($config['prefix']);
+
+        $em->persist($extension);
+        $em->flush();
+
+    }
+
     
     public function insertProgram($user, $config)
     {
@@ -281,6 +303,14 @@ class SymfonySupport
             foreach ($tags as $tag_id) {
                 $tag = $this->getTagRepository()->find($tag_id);
                 $program->addTag($tag);
+            }
+        }
+
+        if (isset($config['extensions']) && $config['extensions'] != null) {
+            $extensions = explode(',', $config['extensions']);
+            foreach ($extensions as $extension_name) {
+                $extension = $this->getExtensionRepository()->findOneByName($extension_name);
+                $program->addExtension($extension);
             }
         }
 

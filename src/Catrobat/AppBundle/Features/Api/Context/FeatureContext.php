@@ -12,6 +12,7 @@ use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use DateTime;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -302,6 +303,7 @@ class FeatureContext extends BaseContext
                 'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
                 'approved' => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
                 'tags' => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
+                'extensions' => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
             );
             
             $this->insertProgram($user, $config);
@@ -326,6 +328,22 @@ class FeatureContext extends BaseContext
         }
     }
 
+    /**
+     * @Given /^there are extensions:$/
+     */
+    public function thereAreExtensions(TableNode $table)
+    {
+        $extensions = $table->getHash();
+
+        foreach($extensions as $extension)
+        {
+            @$config = array(
+                'name' => $extension['name'],
+                'prefix' => $extension['prefix']
+            );
+            $this->insertExtension($config);
+        }
+    }
 
     /**
      * @Given /^following programs are featured:$/
@@ -1187,6 +1205,59 @@ class FeatureContext extends BaseContext
             'tags' => $tags
         ));
         $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+    }
+
+    /**
+     * @Given /^I have a program with Arduino, Lego and Phiro extensions$/
+     */
+    public function iHaveAProgramWithArduinoLegoAndPhiroExtensions()
+    {
+        $filesystem = new Filesystem();
+        $filesystem->copy(self::FIXTUREDIR.'extensions.catrobat', sys_get_temp_dir()."/program_generated.catrobat", true);
+
+    }
+
+    /**
+     * @Then /^the program should be marked with extensions in the database$/
+     */
+    public function theProgramShouldBeMarkedWithExtensionsInTheDatabase()
+    {
+        $program_extensions = $this->getProgramManger()->find(2)->getExtensions();
+
+        assertEquals(count($program_extensions), 3, 'Too much or too less tags found!');
+
+        $ext = array("Arduino", "Lego", "Phiro");
+        foreach ($program_extensions as $program_extension) {
+            if (!(in_array($program_extension->getName(), $ext))) {
+                assertTrue(false, 'The Extension is not found!');
+            }
+        }
+    }
+
+    /**
+     * @When /^I upload the program again without extensions$/
+     */
+    public function iUploadTheProgramAgainWithoutExtensions()
+    {
+        $this->iHaveAProgramWithAs("name", "extensions");
+        $this->iUploadAProgram();
+    }
+
+    /**
+     * @Then /^the program should be marked with no extensions in the database$/
+     */
+    public function theProgramShouldBeMarkedWithNoExtensionsInTheDatabase()
+    {
+        $program_extensions = $this->getProgramManger()->find(2)->getExtensions();
+
+        assertEquals(count($program_extensions), 0, 'Too much or too less tags found!');
+
+        $ext = array("Arduino", "Lego", "Phiro");
+        foreach ($program_extensions as $program_extension) {
+            if (!(in_array($program_extension->getName(), $ext))) {
+                assertTrue(false, 'The Extension is not found!');
+            }
+        }
     }
 
 

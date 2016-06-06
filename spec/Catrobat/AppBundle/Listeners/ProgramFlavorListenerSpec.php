@@ -24,7 +24,7 @@ class ProgramFlavorListenerSpec extends ObjectBehavior
     }
 
   /**
-   * @param Symfony\Component\HttpFoundation\RequestStack $stack
+   * @param \Symfony\Component\HttpFoundation\RequestStack $stack
    */
   public function it_sets_the_flavor_of_a_program_based_on_its_request_flavor($stack)
   {
