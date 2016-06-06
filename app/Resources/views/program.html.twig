@@ -44,7 +44,7 @@
         {% endif %}
       </div>
 
-      {% if  program.tags|length > 0 %}
+{#      {% if  program.tags|length > 0 %}
         <div id="tag-extionsion-container">
           <div id="tags-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
           <div id='tags'>
@@ -56,7 +56,7 @@
           </div>
 
         </div>
-      {% endif %}
+      {% endif %}#}
 
       <div class="download-container">
         <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
@@ -101,22 +101,21 @@
         </button>
 
       </div>
-      {% if not program.gamejam or not program.acceptedforgamejam %}
+
+      {% if theme() != 'pocketcode' and (not program.gamejam or not program.acceptedforgamejam) %}
         {% set jam = getCurrentGameJam() %}
+
         {% if jam %}
             {% if app.user %}
             <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
             {% else %}
             <a href="{{ url('login') }}" title="{{ jam.name }}">
             {% endif %}
-        <button id="gamejam-submittion" class="btn btn-jam download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/jam_submit.png') }}" > </td>
-              <td>{{ "gamejam.submit"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+              {% if app.request.locale == 'de' %}
+                <img src="{{ asset('images/help/galaxy_gamejam/submit-button-de.png') }}" >
+              {% else %}
+                <img src="{{ asset('images/help/galaxy_gamejam/submit-button-en.png') }}" >
+              {% endif %}
         </a>
         {% endif %}
       {% endif %}
