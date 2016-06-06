@@ -35,8 +35,8 @@
 {% block js %}
   <script src="{{ asset('./js/plugins/owl.carousel.min.js') }}"></script>
   <script>
-    var sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}');
-    var submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}');
+    var sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam');
+    var submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam');
     var related = new ProgramLoader('#related', '{{ path('api_search_programs') }}?q=galaxy');
     sample.init();
     submissions.init();
