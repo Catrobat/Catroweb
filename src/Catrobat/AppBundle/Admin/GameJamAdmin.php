@@ -29,7 +29,7 @@ class GameJamAdmin extends Admin
         $formMapper
             ->add('name')
             ->add('form_url', null, array('sonata_help' => '
-                Url to the google form, use <code>%CAT_NAME%</code>, <code>%CAT_ID%</code>, and <code>%CAT_EMAIL%</code> as placeholder<br>
+                Url to the google form, use <code>%CAT_NAME%</code>, <code>%CAT_ID%</code>, <code>%CAT_EMAIL%</code>, and <code>%CAT_LANGUAGE%</code> as placeholder<br>
                 Make sure this form calls <code>' . $returnurl . '</code> after completion
                 ',
             ))

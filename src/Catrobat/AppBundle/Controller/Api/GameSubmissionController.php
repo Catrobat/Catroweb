@@ -139,6 +139,17 @@ class GameSubmissionController extends Controller
         $url = str_replace("%CAT_ID%", $program->getId(), $url);
         $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
         $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
+        $url = str_replace("%CAT_LANGUAGE%", getLanguageCode(), $url);
         return $url;
+    }
+
+    private function getLanguageCode() {
+        $request = $this->get('request');
+        $languageCode = strtoupper($request->getLocale());
+
+        if($languageCode != "DE")
+            $languageCode = "EN";
+
+        return $languageCode;
     }
 }
