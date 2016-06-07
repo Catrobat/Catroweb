@@ -1,3 +1,7 @@
+/*
+  Generated File by Grunt
+  Sourcepath: web/js
+*/
 var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
   var self = this;
   self.save_url = url;

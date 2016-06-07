@@ -1,3 +1,7 @@
+/*
+  Generated File by Grunt
+  Sourcepath: web/js
+*/
 var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif, update_app_header, update_app_text, btn_close_popup)
 {
     var self = this;
