@@ -6,17 +6,43 @@
 
 {% block body %}
         <div id="help-container">
-            <a href="http://www.alicegamejam.com" target="_blank">
-                    <div class="help-desktop"><img class="submit-own" src="{{ asset('images/extra/submit-your-own-program-web.jpg') }}" alt="" title=""/>
+            {% if theme() == 'pocketalice' %}
+                <a href="http://www.alicegamejam.com" target="_blank">
+                        <div class="help-desktop"><img class="submit-own" src="{{ asset('images/extra/submit-your-own-program-web.jpg') }}" alt="" title=""/>
+                        </div>
+                        <div class="help-mobile"><img  class="submit-own" src="{{ asset('images/extra/submit-your-own-program-mobile.jpg') }}" alt="" title=""/>
+                        </div>
+                </a>
+            {% elseif theme() == 'pocketgalaxy' %}
+                <a href="http://www.galaxygamejam.com" target="_blank">
+                    <div class="help-desktop">
+                        {% if app.request.locale == 'de' %}
+                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-web-DT.png') }}" alt="" title=""/>
+                        {% else %}
+                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-web.png') }}" alt="" title=""/>
+                        {%  endif %}
                     </div>
-                    <div class="help-mobile"><img  class="submit-own" src="{{ asset('images/extra/submit-your-own-program-mobile.jpg') }}" alt="" title=""/>
+                    <div class="help-mobile">
+                        {% if app.request.locale == 'de' %}
+                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-mobile-DT.png') }}" alt="" title=""/>
+                        {% else %}
+                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-mobile.png') }}" alt="" title=""/>
+                        {%  endif %}
                     </div>
-            </a>
+                </a>
+            {% endif %}
 </div>
 <div id="alice-notice">
-                    <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
-                    <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
-                    <p>{{ ("gamejam.submitown.text")|trans({}, "catroweb")|nl2br }}</p>
-                    <p><a href="http://www.alicegamejam.com" target="_blank">www.alicegamejam.com</a></p>
+    {% if theme() == 'pocketgalaxy' %}
+        <h1>{{ ("galaxyjam.submitown.header")|trans({}, "catroweb") }}</h1>
+        <p class="notice">{{ ("galaxyjam.submitown.subheader")|trans({}, "catroweb") }}</p>
+        <p>{{ ("galaxyjam.submitown.text")|trans({}, "catroweb")|nl2br }}</p>
+        <p><a href="http://www.galaxygamejam.com" target="_blank">www.galaxygamejam.com</a></p>
+    {% else %}
+        <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
+        <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
+        <p>{{ ("gamejam.submitown.text")|trans({}, "catroweb")|nl2br }}</p>
+        <p><a href="http://www.alicegamejam.com" target="_blank">www.alicegamejam.com</a></p>
+    {% endif %}
 </div>
 {% endblock %}
