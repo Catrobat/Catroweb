@@ -106,17 +106,39 @@
         {% set jam = getCurrentGameJam() %}
 
         {% if jam %}
-            {% if app.user %}
+          {% if app.user %}
             <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
-            {% else %}
+          {% else %}
             <a href="{{ url('login') }}" title="{{ jam.name }}">
-            {% endif %}
+          {% endif %}
+            {% if jam.name == 'pocketalice' and theme() == 'pocketalice' %}
+              <button id="gamejam-submittion" class="btn btn-jam download-button">
+                <table>
+                  <tr>
+                    <td><img src="{{ asset('images/symbols/jam_submit.png') }}" > </td>
+                    <td>{{ "gamejam.submit"|trans({}, "catroweb") }}</td>
+                  </tr>
+                </table>
+              </button>
+            {% elseif jam.name == 'pocketgalaxy' and theme() == 'pocketgalaxy' %}
+              {#
               {% if app.request.locale == 'de' %}
-                <img src="{{ asset('images/help/galaxy_gamejam/submit-button-de.png') }}" >
+                <img src="{{ asset('images/help/galaxyjam/submit-button-de.png') }}" >
               {% else %}
-                <img src="{{ asset('images/help/galaxy_gamejam/submit-button-en.png') }}" >
+                <img src="{{ asset('images/help/galaxyjam/submit-button-en.png') }}" >
               {% endif %}
-        </a>
+              #}
+              <button id="gamejam-submittion" class="btn btn-jam download-button">
+                <table>
+                  <tr>
+                    <td><img src="{{ asset('images/help/galaxyjam/galaxyjam_icon.png') }}" > </td>
+                    <td>{{ "galaxyjam.submit"|trans({}, "catroweb") }}</td>
+                  </tr>
+                </table>
+              </button>
+
+            {% endif %}
+            </a>
         {% endif %}
       {% endif %}
       <br>
@@ -145,6 +167,7 @@
       {{ "programs.languageVersion"|trans({ "%languageVersion%" : program_details.languageVersion }, 'catroweb') }}
       </p>
     </div>
+
     <div class="clear"></div>
     <div id="report-container" class="size-large">
       {% if app.user %}
