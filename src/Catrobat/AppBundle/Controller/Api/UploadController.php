@@ -24,7 +24,7 @@ use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 /**
  * @Route(service="controller.upload")
  */
-class UploadController extends Controller
+class UploadController
 {
 
     private $usermanager;

@@ -196,7 +196,7 @@ class SymfonySupport
     public function insertDefaultGamejam($config = array())
     {
         $gamejam = new GameJam();
-        @$gamejam->setName($config['name'] ?: "Behat Generated Jam");
+        @$gamejam->setName($config['name'] ?: "pocketalice");
         @$gamejam->setHashtag($config['hashtag'] ?: null);
         
         $start_date = new \DateTime();
