@@ -102,7 +102,7 @@
 
       </div>
 
-      {% if theme() != 'pocketcode' and (not program.gamejam or not program.acceptedforgamejam) %}
+      {% if not program.gamejam or not program.acceptedforgamejam %}
         {% set jam = getCurrentGameJam() %}
 
         {% if jam %}
@@ -111,7 +111,7 @@
           {% else %}
             <a href="{{ url('login') }}" title="{{ jam.name }}">
           {% endif %}
-            {% if jam.name == 'pocketalice' and theme() == 'pocketalice' %}
+            {% if jam.name == 'pocketalice' %}
               <button id="gamejam-submittion" class="btn btn-jam download-button">
                 <table>
                   <tr>
@@ -120,7 +120,7 @@
                   </tr>
                 </table>
               </button>
-            {% elseif jam.name == 'pocketgalaxy' and theme() == 'pocketgalaxy' %}
+            {% elseif jam.name == 'pocketgalaxy' %}
               {#
               {% if app.request.locale == 'de' %}
                 <img src="{{ asset('images/help/galaxyjam/submit-button-de.png') }}" >
