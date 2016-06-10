@@ -135,14 +135,21 @@ class GameSubmissionController extends Controller
     
     private function assembleFormUrl($gamejam, $user, $program)
     {
+        $request = $this->get('request');
+        $languageCode = strtoupper($request->getLocale());
+
+        if($languageCode != "DE")
+            $languageCode = "EN";
+
         $url = $gamejam->getFormUrl();
         $url = str_replace("%CAT_ID%", $program->getId(), $url);
         $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
         $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
-        $url = str_replace("%CAT_LANGUAGE%", getLanguageCode(), $url);
+        $url = str_replace("%CAT_LANGUAGE%", $languageCode, $url);
         return $url;
     }
 
+    # TODO: not working?
     private function getLanguageCode() {
         $request = $this->get('request');
         $languageCode = strtoupper($request->getLocale());
