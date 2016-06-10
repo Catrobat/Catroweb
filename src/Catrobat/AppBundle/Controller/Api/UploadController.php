@@ -24,7 +24,7 @@ use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 /**
  * @Route(service="controller.upload")
  */
-class UploadController
+class UploadController extends Controller
 {
 
     private $usermanager;
@@ -97,7 +97,7 @@ class UploadController
                 $response['token'] = $user->getUploadToken();
                 if ($gamejam !== null && !$program->isAcceptedForGameJam())
                 {
-                    $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
+                    $response['form'] = $this->assembleFormUrl($gamejam, $user, $program, $request);
                 }
 
                 $request->attributes->set('post_to_facebook', true);
@@ -110,13 +110,15 @@ class UploadController
         return JsonResponse::create($response);
     }
 
-    private function assembleFormUrl($gamejam, $user, $program)
+    private function assembleFormUrl($gamejam, $user, $program, $request)
     {
+        $languageCode = $this->getLanguageCode($request);
+
         $url = $gamejam->getFormUrl();
         $url = str_replace("%CAT_ID%", $program->getId(), $url);
         $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
         $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
-        $url = str_replace("%CAT_LANGUAGE%", getLanguageCode(), $url);
+        $url = str_replace("%CAT_LANGUAGE%", $languageCode, $url);
 
         return $url;
     }
@@ -126,8 +128,7 @@ class UploadController
         return $this->translator->trans($message, $parameters, 'catroweb');
     }
 
-    private function getLanguageCode() {
-        $request = $this->get('request');
+    private function getLanguageCode($request) {
         $languageCode = strtoupper($request->getLocale());
 
         if($languageCode != "DE")
