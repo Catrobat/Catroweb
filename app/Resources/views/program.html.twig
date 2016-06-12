@@ -107,9 +107,9 @@
 
         {% if jam %}
           {% if app.user %}
-            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
+            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}"></a>
           {% else %}
-            <a href="{{ url('login') }}" title="{{ jam.name }}">
+            <a href="{{ url('login') }}" title="{{ jam.name }}"></a>
           {% endif %}
             {% if jam.name == 'pocketalice' %}
               <button id="gamejam-submittion" class="btn btn-jam download-button">
@@ -223,7 +223,6 @@
 
     <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
     <div id="user-comment-wrapper">
-      <div class = 'img-avatar'></div>
       <textarea class="msg" style="width: 100%; height: 100px"></textarea>
       <button class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
     </div>
@@ -237,7 +236,7 @@
           <div class = "comment-payload-wrapper">
             <div class = "name-date-wrapper">
               <div class = "usr-name">{{ comment.username }}</div>
-              <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
+              <div class = "date">&#8226;&#32; {{ comment.uploadDate.format('Y-m-d') }}</div>
               <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
               {% if  program_details.isAdmin  %}
                 <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
@@ -258,7 +257,7 @@
           <div class = "comment-payload-wrapper">
             <div class = "name-date-wrapper">
               <div class = "usr-name">{{ comment.username }}</div>
-              <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
+              <div class = "date">'&#8226;&#32;' {{ comment.uploadDate.format('Y-m-d') }}</div>
               <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
               {% if  program_details.isAdmin  %}
                 <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
@@ -271,18 +270,10 @@
         </div>
       {% endfor %}
 
-      <div id = "show-more">
-        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
-      </div>
+      <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
 
     </div>
-
   </div>
-
-
-
-
-
 {% endblock %}
 
 
