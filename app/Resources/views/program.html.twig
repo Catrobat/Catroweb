@@ -107,9 +107,9 @@
 
         {% if jam %}
           {% if app.user %}
-            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
+            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}"></a>
           {% else %}
-            <a href="{{ url('login') }}" title="{{ jam.name }}">
+            <a href="{{ url('login') }}" title="{{ jam.name }}"></a>
           {% endif %}
             {% if jam.name == 'pocketalice' %}
               <button id="gamejam-submittion" class="btn btn-jam download-button">
@@ -218,6 +218,61 @@
     </div>
   </div>
 
+
+  <div id="program-comments">
+
+    <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
+    <div id="user-comment-wrapper">
+      <textarea class="msg" style="width: 100%; height: 100px"></textarea>
+      <button class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
+    </div>
+
+    <div id="comments-wrapper">
+      {% for comment in program_details.comments|slice(0, 10) %}
+        <div class = "single-comment">
+          <div class = "avatar-wrapper">
+            <div class = "img-avatar"></div>
+          </div>
+          <div class = "comment-payload-wrapper">
+            <div class = "name-date-wrapper">
+              <div class = "usr-name">{{ comment.username }}</div>
+              <div class = "date">&#8226;&#32; {{ comment.uploadDate.format('Y-m-d') }}</div>
+              <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+              {% if  program_details.isAdmin  %}
+                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+              {% endif %}
+            </div>
+            <div class = "comment-text">
+              <p>{{ comment.text}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% for comment in program_details.comments|slice(11, program_details.commentsLength) %}
+        <div class = "single-comment hidden">
+          <div class = "avatar-wrapper">
+            <div class = "img-avatar"></div>
+          </div>
+          <div class = "comment-payload-wrapper">
+            <div class = "name-date-wrapper">
+              <div class = "usr-name">{{ comment.username }}</div>
+              <div class = "date">'&#8226;&#32;' {{ comment.uploadDate.format('Y-m-d') }}</div>
+              <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+              {% if  program_details.isAdmin  %}
+                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+              {% endif %}
+            </div>
+            <div class = "comment-text">
+              <p>{{ comment.text}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <div class = "show-more">
+        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 
@@ -235,7 +290,7 @@
 
     counter = 10;
 
-    $('.show-more-button').click(function() {
+    $(document).on("click", ".show-more-button", function() {
       counter += 10;
 
       for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
@@ -243,6 +298,7 @@
         $('.single-comment.hidden').first().removeClass("hidden");
       }
     });
+
 
     $(document).on("click", ".delete-button", function() {
       var pId = {{ program_details.id }};
@@ -268,7 +324,7 @@
         }});
     });
 
-    $('.post-button').click(function() {
+    $(document).on("click", ".post-button", function() {
       var msg = $('.msg').val();
       var pId = {{ program_details.id }};
       $.ajax({
@@ -287,7 +343,7 @@
         error: function() {
           alert("something went terribly wrong");
         }});
-    });
+    })
 
     $(document).on("click", ".report-button", function() {
       var commentId = $(this).data('commentid');

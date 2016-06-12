@@ -213,6 +213,11 @@ table td:nth-child(1) {
 
 
 .post-button {
+  margin-bottom: 0;
+  margin-top: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  float: right;
 }
 
 #program-comments {
@@ -220,21 +225,43 @@ table td:nth-child(1) {
 }
 
 .img-avatar {
-  display: inline-block;
 }
 
-.txtarea {
-  float:inherit;
-  margin-right: 5px;
-}
-
-#user-comment-wrapper {
+.user-comment-wrapper {
   padding-bottom: 40px;
   border-bottom: 1px solid #17a5b8;
 }
 
 #comments-wrapper {
   //Todo style stuff
+  clear: both;
+  display: block;
+}
+
+.name-date-wrapper {
+  display: block;
+}
+
+.comment-payload-wrapper{
+  display: table-row;
+  float: inherit;
+}
+
+.date{
+  display: inline-block;
+  float: left;
+}
+
+.usr-name{
+  display: inline-block;
+  float: left;
+}
+
+.comment-text{
+  padding-top: 0.4em;
+  dispay: block;
+  clear: both;
+  word-break: break-all;
 }
 
 .single-comment {
@@ -244,44 +271,66 @@ table td:nth-child(1) {
   &.hidden{
     display: none;
   }
+}
+
+.show-more {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
 
 .usr-name {
   display: block;
+  padding-right: 1em;
+  font-weight: bold;
 }
 
 .avatar-wrapper {
-  padding:0.3em;
-  background: #373F42;
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+  background: #46A2B6;
   border: solid 1px black;
-  display: inline-block;
+  display: table-row;
+  float: left;
   text-align: center;
   margin-right: 2em;
 }
+
+.delete-button {
+  background: none;
+  margin: 0;
+  float: left;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.8em;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .show-more-button {
-  text-align:center;
-  background:none;
-  border:none;
-  position:relative;
-  top:50%;
-  left:40%;
-}
+  text-align: center;
+  background: none;
+  border: none;
+  position: relative;
+  top: 50%;
+  left: 40%;
 
-.delete-button {
-  margin: 1em;
-  float: right;
-  display: inline-block;
-  font-family: inherit;
-  font-size: 0.8em;
 }
 
 .report-button {
-  margin: 1em;
-  float: right;
+  background: none;
+  margin: 0;
+  float: left;
   display: inline-block;
   font-family: inherit;
   font-size: 0.8em;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 
