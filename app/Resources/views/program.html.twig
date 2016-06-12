@@ -248,7 +248,6 @@
           </div>
         </div>
       {% endfor %}
-
       {% for comment in program_details.comments|slice(11, program_details.commentsLength) %}
         <div class = "single-comment hidden">
           <div class = "avatar-wrapper">
@@ -269,9 +268,9 @@
           </div>
         </div>
       {% endfor %}
-
-      <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
-
+      <div class = "show-more">
+        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+      </div>
     </div>
   </div>
 {% endblock %}
@@ -291,7 +290,7 @@
 
     counter = 10;
 
-    $('.show-more-button').click(function() {
+    $(document).on("click", ".show-more-button", function() {
       counter += 10;
 
       for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
@@ -299,6 +298,7 @@
         $('.single-comment.hidden').first().removeClass("hidden");
       }
     });
+
 
     $(document).on("click", ".delete-button", function() {
       var pId = {{ program_details.id }};
@@ -324,7 +324,7 @@
         }});
     });
 
-    $('.post-button').click(function() {
+    $(document).on("click", ".post-button", function() {
       var msg = $('.msg').val();
       var pId = {{ program_details.id }};
       $.ajax({
@@ -343,7 +343,7 @@
         error: function() {
           alert("something went terribly wrong");
         }});
-    });
+    })
 
     $(document).on("click", ".report-button", function() {
       var commentId = $(this).data('commentid');
