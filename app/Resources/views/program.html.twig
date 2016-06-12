@@ -218,6 +218,71 @@
     </div>
   </div>
 
+
+  <div id="program-comments">
+
+    <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
+    <div id="user-comment-wrapper">
+      <div class = 'img-avatar'></div>
+      <textarea class="msg" style="width: 100%; height: 100px"></textarea>
+      <button class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
+    </div>
+
+    <div id="comments-wrapper">
+      {% for comment in program_details.comments|slice(0, 10) %}
+        <div class = "single-comment">
+          <div class = "avatar-wrapper">
+            <div class = "img-avatar"></div>
+          </div>
+          <div class = "comment-payload-wrapper">
+            <div class = "name-date-wrapper">
+              <div class = "usr-name">{{ comment.username }}</div>
+              <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
+              <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+              {% if  program_details.isAdmin  %}
+                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+              {% endif %}
+            </div>
+            <div class = "comment-text">
+              <p>{{ comment.text}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      {% for comment in program_details.comments|slice(11, program_details.commentsLength) %}
+        <div class = "single-comment hidden">
+          <div class = "avatar-wrapper">
+            <div class = "img-avatar"></div>
+          </div>
+          <div class = "comment-payload-wrapper">
+            <div class = "name-date-wrapper">
+              <div class = "usr-name">{{ comment.username }}</div>
+              <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
+              <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+              {% if  program_details.isAdmin  %}
+                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+              {% endif %}
+            </div>
+            <div class = "comment-text">
+              <p>{{ comment.text}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <div id = "show-more">
+        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
 {% endblock %}
 
 

@@ -220,7 +220,6 @@ table td:nth-child(1) {
 }
 
 .img-avatar {
-  display: inline-block;
 }
 
 .txtarea {
@@ -228,13 +227,39 @@ table td:nth-child(1) {
   margin-right: 5px;
 }
 
-#user-comment-wrapper {
+.user-comment-wrapper {
   padding-bottom: 40px;
   border-bottom: 1px solid #17a5b8;
 }
 
 #comments-wrapper {
   //Todo style stuff
+  display: block;
+}
+
+.name-date-wrapper {
+  display: block;
+}
+
+.comment-payload-wrapper{
+  display: inline-block;
+  float: inherit;
+}
+
+.date{
+  display: inline-block;
+  float: left;
+}
+
+.usr-name{
+  display: inline-block;
+  float: left;
+}
+
+.comment-text{
+  dispay: block;
+  clear: both;
+  word-break: break-all;
 }
 
 .single-comment {
@@ -250,38 +275,43 @@ table td:nth-child(1) {
 }
 
 .avatar-wrapper {
-  padding:0.3em;
-  background: #373F42;
+  padding: 0.3em;
+  background: #46A2B6;
   border: solid 1px black;
   display: inline-block;
+  float: left;
   text-align: center;
   margin-right: 2em;
 }
-}
+
+
+
 
 .show-more-button {
-  text-align:center;
-  background:none;
-  border:none;
-  position:relative;
-  top:50%;
-  left:40%;
+  text-align: center;
+  background: none;
+  border: none;
+  position: relative;
+  top: 50%;
+  left: 40%;
 }
 
 .delete-button {
-  margin: 1em;
-  float: right;
+  margin: 0;
+  float: left;
   display: inline-block;
   font-family: inherit;
   font-size: 0.8em;
+  padding: 0;
 }
 
 .report-button {
-  margin: 1em;
-  float: right;
+  margin: 0;
+  float: left;
   display: inline-block;
   font-family: inherit;
   font-size: 0.8em;
+  padding: 0;
 }
 
 
@@ -353,4 +383,4 @@ table td:nth-child(1) {
   #tags {
     width: 215px;
   }
-}
+}}
