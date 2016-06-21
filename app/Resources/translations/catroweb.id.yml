@@ -494,14 +494,14 @@ ci:
   pending: Menghasilkan Apk
   download: Unduh Apk
 gamejam:
-  nojam: Maaf, tidak ada kemacetan permainan saat ini
-  submit: Kirim kemacetan permainan ke alice
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to %gamejamname%
   submitown:
-    header: waspadalah
-    subheader: Anda hanya dapat mengirimkan program Anda sendiri
+    header: be aware
+    subheader: You can only submit your own programs
     text: |
-      Tapi mengapa tidak membuat punya Anda sendiri! 
-      Ambil bagian di #AliceGameJam
+      But why not create your own!
+      Take part in the %gamejamtag%
 tag-text: Label
 extenstion-text: Ekstensi
 tags:

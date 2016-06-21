@@ -489,19 +489,12 @@ ci:
   download: Apk Runterladen
 gamejam:
   nojam: Entschuldigung, es findet gerade kein game jam statt
-  submit: Einreichen zur Alice Game Jam
+  submit: Einreichen zur %gamejamname%
   submitown:
     header: Achtung
     subheader: Du kannst nur eigene Programme einreichen
-    text: 'Erstelle ein eigenes und mach mit beim #AliceGameJam!'
-galaxyjam:
-  nojam: Entschuldigung, es findet gerade kein game jam statt
-  submit: Einreichen zur Galaxy Game Jam
-  submitown:
-    header: achtung
-    subheader: Du kannst nur eigene Programme einreichen.
     text: |
-      Erstelle ein eigenes Spiel und mach mit beim #GalaxyGameJam
+      Erstelle ein eigenes Spiel und mach mit beim %gamejamtag%
 tag-text: Tags
 extenstion-text: Erweiterungen
 tags:

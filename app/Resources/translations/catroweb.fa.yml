@@ -499,14 +499,14 @@ ci:
   pending: تولید کردن اپلیکیشن
   download: دانلود نرم افزار
 gamejam:
-  nojam: با عرض پوزش، الان بازی جم انجام نمی شود
-  submit: ارسال به بازی آلیس
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to %gamejamname%
   submitown:
-    header: توجه
-    subheader: تو فقط می توانی برنامه های خودت را ارسال کنی
+    header: be aware
+    subheader: You can only submit your own programs
     text: |
-      خودت یکی ایجاد کن!
-      در AliceGameJam# مشارکت کن
+      But why not create your own!
+      Take part in the %gamejamtag%
 tag-text: برچسب‌ها
 extenstion-text: پسوندها
 tags:

@@ -521,23 +521,13 @@ ci:
   
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  submit: Submit to %gamejamname%
   submitown:
     header: be aware
     subheader: You can only submit your own programs
     text: |
       But why not create your own!
-      Take part in the #AliceGameJam
-
-galaxyjam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to galaxy game jam
-  submitown:
-    header: be aware
-    subheader: You can only submit your own programs
-    text: |
-      But why not create your own!
-      Take part in the #GalaxyGameJam
+      Take part in the %gamejamtag%
 
 tag-text: Tags
 extenstion-text: Extensions

@@ -122,7 +122,7 @@ class GameSubmissionController extends Controller
             ->getManager()
             ->flush();
         
-        $url = $this->assembleFormUrl($gamejam, $program->getUser(), $program);
+        $url = $this->assembleFormUrl($gamejam, $program->getUser(), $program, $request);
         
         if ($url != null) {
             return new RedirectResponse($url);
@@ -133,9 +133,9 @@ class GameSubmissionController extends Controller
         }
     }
     
-    private function assembleFormUrl($gamejam, $user, $program)
+    private function assembleFormUrl($gamejam, $user, $program, $request)
     {
-        $languageCode = $this->getLanguageCode();
+        $languageCode = $this->getLanguageCode($request);
 
         $url = $gamejam->getFormUrl();
         $url = str_replace("%CAT_ID%", $program->getId(), $url);
@@ -145,9 +145,8 @@ class GameSubmissionController extends Controller
         return $url;
     }
 
-    private function getLanguageCode() {
-        $request = $this->get('request');
-        $languageCode = strtoupper($request->getLocale());
+    private function getLanguageCode($request) {
+        $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
 
         if($languageCode != "DE")
             $languageCode = "EN";

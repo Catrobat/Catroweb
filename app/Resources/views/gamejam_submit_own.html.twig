@@ -5,47 +5,32 @@
 {% endblock %}
 
 {% block body %}
-    {% set jam = getCurrentGameJam() %}
-    {% if jam != null %}
+    {% if jam %}
+        {% set lang = app.request.locale|slice(0, 2)|lower() %}
+
         <div id="help-container">
-            {% if jam.name == 'pocketalice' %}
-                <a href="http://www.alicegamejam.com" target="_blank">
-                        <div class="help-desktop"><img class="submit-own" src="{{ asset('images/extra/submit-your-own-program-web.jpg') }}" alt="" title=""/>
-                        </div>
-                        <div class="help-mobile"><img  class="submit-own" src="{{ asset('images/extra/submit-your-own-program-mobile.jpg') }}" alt="" title=""/>
-                        </div>
-                </a>
-            {% else %}
-                <a href="http://www.galaxygamejam.com" target="_blank">
-                    <div class="help-desktop">
-                        {% if app.request.locale == 'de' %}
-                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-web-DT.png') }}" alt="" title=""/>
-                        {% else %}
-                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-web.png') }}" alt="" title=""/>
-                        {%  endif %}
-                    </div>
-                    <div class="help-mobile">
-                        {% if app.request.locale == 'de' %}
-                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-mobile-DT.png') }}" alt="" title=""/>
-                        {% else %}
-                            <img class="submit-own" src="{{ asset('images/help/galaxyjam/submit-your-own-program-mobile.png') }}" alt="" title=""/>
-                        {%  endif %}
-                    </div>
-                </a>
-            {% endif %}
+            <a href={{ jam.gamejam_url }} target="_blank">
+                <div class="help-desktop">
+                    {% if lang == 'de' %}
+                        <img class="submit-own" src="{{ asset( jam.web_de_image_url ) }}" alt="" title=""/>
+                    {% else %}
+                        <img class="submit-own" src="{{ asset( jam.web_en_image_url ) }}" alt="" title=""/>
+                    {%  endif %}
+                </div>
+                <div class="help-mobile">
+                    {% if lang == 'de' %}
+                        <img class="submit-own" src="{{ asset( jam.mobile_de_image_url ) }}" alt="" title=""/>
+                    {% else %}
+                        <img class="submit-own" src="{{ asset( jam.mobile_en_image_url ) }}" alt="" title=""/>
+                    {%  endif %}
+                </div>
+            </a>
         </div>
         <div id="alice-notice">
-            {% if theme() == 'pocketalice' %}
-                <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
-                <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
-                <p>{{ ("gamejam.submitown.text")|trans({}, "catroweb")|nl2br }}</p>
-                <p><a href="http://www.alicegamejam.com" target="_blank">www.alicegamejam.com</a></p>
-            {% else %}
-                <h1>{{ ("galaxyjam.submitown.header")|trans({}, "catroweb") }}</h1>
-                <p class="notice">{{ ("galaxyjam.submitown.subheader")|trans({}, "catroweb") }}</p>
-                <p>{{ ("galaxyjam.submitown.text")|trans({}, "catroweb")|nl2br }}</p>
-                <p><a href="http://www.galaxygamejam.com" target="_blank">www.galaxygamejam.com</a></p>
-            {% endif %}
+            <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
+            <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
+            <p>{{ ("gamejam.submitown.text")|trans({'%gamejamtag%' : jam.tag}, "catroweb")|nl2br }}</p>
+            <p><a href={{ jam.gamejam_url }} target="_blank">{{ jam.gamejam_url|replace({'http://' : ''}) }}</a></p>
         </div>
     {% endif %}
 

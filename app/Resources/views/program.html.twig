@@ -109,34 +109,20 @@
       </div>
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
-        {% set jam = getCurrentGameJam() %}
-
         {% if jam %}
           {% if app.user %}
             <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
           {% else %}
             <a href="{{ url('login') }}" title="{{ jam.name }}">
           {% endif %}
-            {% if jam.name == 'pocketalice' %}
               <button id="gamejam-submittion" class="btn btn-jam download-button">
                 <table>
                   <tr>
-                    <td><img src="{{ asset('images/symbols/jam_submit.png') }}" > </td>
-                    <td>{{ "gamejam.submit"|trans({}, "catroweb") }}</td>
+                    <td><img src="{{ asset( jam.logo_url ) }}" > </td>
+                    <td>{{ "gamejam.submit"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</td>
                   </tr>
                 </table>
               </button>
-            {% elseif jam.name == 'pocketgalaxy' %}
-              <button id="gamejam-submittion" class="btn btn-jam download-button">
-                <table>
-                  <tr>
-                    <td><img src="{{ asset('images/help/galaxyjam/galaxyjam_icon.png') }}" > </td>
-                    <td>{{ "galaxyjam.submit"|trans({}, "catroweb") }}</td>
-                  </tr>
-                </table>
-              </button>
-
-            {% endif %}
             </a>
         {% endif %}
       {% endif %}
@@ -144,7 +130,7 @@
 
       <table id="copy-link">
         <tr>
-          <td><img src="{{ asset('images/symbols/link.svg') }}" > </td>
+          <td id="copy-link-image"></td>
           <td>
             <span>Link</span>
           </td>
@@ -288,6 +274,7 @@
     program.getApkStatus();
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
+
 
     counter = 10;
 

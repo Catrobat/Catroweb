@@ -512,12 +512,14 @@ ci:
   pending: "Generazione dell'Apk"
   download: Scarica Apk
 gamejam:
-  nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
-  submit: "Proponilo all'alice game jam"
+  nojam: Sorry, there is no game jam at this time
+  submit: Submit to %gamejamname%
   submitown:
-    header: fai attenzione
-    subheader: È possibile inviare solo programmi originali, creati da sé
-    text: 'Ma perché non crearne uno personale! Prendi parte ad #AliceGameJam'
+    header: be aware
+    subheader: You can only submit your own programs
+    text: |
+      But why not create your own!
+      Take part in the %gamejamtag%
 tag-text: Tag
 extenstion-text: Estensioni
 tags:

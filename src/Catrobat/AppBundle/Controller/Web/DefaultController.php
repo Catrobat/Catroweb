@@ -72,6 +72,7 @@ class DefaultController extends Controller
      * @var $user User
      * @var $program Program
      * @var $reported_program ProgramInappropriateReport
+     * @var $gamejam GameJam
      */
     $program = $this->get('programmanager')->find($id);
       $screenshot_repository = $this->get('screenshotrepository');
@@ -125,15 +126,32 @@ class DefaultController extends Controller
           $isReportedByUser = ($user == $reported_program->getReportingUser());
       }
 
-      $program_url = $this->generateUrl('program', array('id' => $program->getId()), true);
+	  $program_url = $this->generateUrl('program', array('id' => $program->getId()), true);
       $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
+
+      $jam = null;
+      $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
+
+      if($gamejam) {
+          $logo_url = 'images/help/galaxyjam/galaxyjam_icon_white.png';
+          $display_name = 'Galaxy Game Jam';
+          if($gamejam->getName() == 'pocketalice') {
+              $logo_url = 'images/symbols/jam_submit.png';
+              $display_name = 'Alice Game Jam';
+          }
+          $jam = array(
+              'name' => $display_name,
+              'logo_url' => $logo_url,
+          );
+      }
 
       return $this->get('templating')->renderResponse('::program.html.twig', array(
       'program' => $program,
       'program_details' => $program_details,
       'my_program' => count($user_programs) > 0 ? true : false,
       'already_reported' => $isReportedByUser,
-      'shareText' => $share_text
+      'shareText' => $share_text,
+	  'jam' => $jam
   ));
   }
 
@@ -516,7 +534,42 @@ class DefaultController extends Controller
    */
   public function gamejamSubmitOwnAction()
   {
-      return $this->get('templating')->renderResponse('::gamejam_submit_own.html.twig');
+      /**
+       * @var $gamejam GameJam
+       */
+      $jam = null;
+      $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
+      //TODO: config file für gamejams or expand gamejam table?
+      if($gamejam) {
+          $mobile_en_image_url = 'images/help/galaxyjam/submit-your-own-program-mobile.png';
+          $mobile_de_image_url = 'images/help/galaxyjam/submit-your-own-program-mobile-DT.png';
+          $web_en_image_url = 'images/help/galaxyjam/submit-your-own-program-web.png';
+          $web_de_image_url = 'images/help/galaxyjam/submit-your-own-program-web-DT.png';
+          $gamejam_url = 'http://www.galaxygamejam.com';
+          $display_name = 'Galaxy Game Jam';
+          $gamejam_tag = $gamejam->getHashtag();
+          if($gamejam->getName() == 'pocketalice') {
+              $mobile_en_image_url = 'images/extra/submit-your-own-program-mobile.jpg';
+              $mobile_de_image_url = 'images/extra/submit-your-own-program-mobile.jpg';
+              $web_en_image_url = 'images/extra/submit-your-own-program-web.jpg';
+              $web_de_image_url = 'images/extra/submit-your-own-program-web.jpg';
+              $gamejam_url = 'http://www.alicegamejam.com';
+              $display_name = 'Alice Game Jam';
+          }
+          $jam = array(
+              'name' => $display_name,
+              'mobile_en_image_url' => $mobile_en_image_url,
+              'mobile_de_image_url' => $mobile_de_image_url,
+              'web_en_image_url' => $web_en_image_url,
+              'web_de_image_url' => $web_de_image_url,
+              'gamejam_url' => $gamejam_url,
+              'tag' => $gamejam_tag
+          );
+
+      }
+      return $this->get('templating')->renderResponse('::gamejam_submit_own.html.twig', array(
+          'jam' => $jam
+      ));
   }
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

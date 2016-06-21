@@ -129,7 +129,7 @@ class UploadController
     }
 
     private function getLanguageCode($request) {
-        $languageCode = strtoupper($request->getLocale());
+        $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
 
         if($languageCode != "DE")
             $languageCode = "EN";

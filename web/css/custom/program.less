@@ -103,9 +103,9 @@ a {
 
     td:nth-child(1) {
       width: 25px;
-      > img {
-        height: 20px;
-      }
+      height: 20px;
+      background-image: @default-copy-link-image;
+      background-repeat: no-repeat;
     }
 
     tr:nth-child(2) {
@@ -359,6 +359,10 @@ table td:nth-child(1) {
   padding-bottom: 0;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+.btn-jam img {
+  float: none;
 }
 
 

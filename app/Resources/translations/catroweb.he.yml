@@ -486,13 +486,13 @@ ci:
   download: הורד קובץ Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  submit: Submit to %gamejamname%
   submitown:
     header: be aware
     subheader: הינך יכול להגיש רק תוכניות שלך
     text: |
       But why not create your own!
-      Take part in the #AliceGameJam
+      Take part in the %gamejamtag%
 tag-text: תוויות
 extenstion-text: הרחבות
 tags:
