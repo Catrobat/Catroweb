@@ -48,7 +48,7 @@ a {
   #image {
     float: left;
 
-    img {
+    #img-screenshot {
       border: 4px solid #FFF;
     }
   }
@@ -144,6 +144,40 @@ a {
   }
 }
 
+#social-container {
+  display: table;
+  width: 100%;
+
+  li {
+    display: table-cell;
+    width: 20%;  /* (100 / numItems)% */
+    text-align: center;
+    white-space: nowrap;
+  };
+}
+
+#social-container-footer {
+  text-align: center;
+  vertical-align: middle;
+  margin: auto;
+  font-size: 1px; /* necessary for G+ button alignment */
+
+  #social-like {
+    margin-left: 15px;
+  }
+}
+
+#share {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.img-share {
+  margin-left: 5px;
+  width: 40px;
+  height: 40px;
+}
+
 .download-button {
   width: 215px;
   padding: 5px 10px;
@@ -205,12 +239,6 @@ table td:nth-child(1) {
   min-width: 50%;
   margin-top: 2px;
 }
-
-#facebook-post-link {
-  width: 45px;
-  margin-top: 15px;
-}
-
 
 .post-button {
   margin-bottom: 0;

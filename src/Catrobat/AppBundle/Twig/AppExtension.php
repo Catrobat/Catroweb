@@ -3,6 +3,7 @@ namespace Catrobat\AppBundle\Twig;
 
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Catrobat\AppBundle\Entity\GameJamRepository;
@@ -22,13 +23,16 @@ class AppExtension extends \Twig_Extension
 
     private $translationPath;
 
-    public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme, $translationPath)
+    private $container;
+
+    public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme, $translationPath, Container $container)
     {
         $this->translationPath = $translationPath;
         $this->request_stack = $request_stack;
         $this->mediapackage_file_repository = $mediapackage_file_repo;
         $this->gamejamrepository = $gamejamrepository;
         $this->theme = $theme;
+        $this->container = $container;
     }
 
     public function getFunctions()
@@ -42,7 +46,8 @@ class AppExtension extends \Twig_Extension
             'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl'),
             'flavor' => new \Twig_Function_Method($this, 'getFlavor'),
             'theme' => new \Twig_Function_Method($this, 'getTheme'),
-            'getCurrentGameJam' => new \Twig_Function_Method($this, 'getCurrentGameJam')
+            'getCurrentGameJam' => new \Twig_Function_Method($this, 'getCurrentGameJam'),
+            'getJavascriptPath' => new \Twig_Function_Method($this, 'getJavascriptPath')
         );
     }
 
@@ -130,7 +135,8 @@ class AppExtension extends \Twig_Extension
         $user_agent = $request->headers->get('User-Agent');
         
         // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-        return preg_match('/Catrobat/', $user_agent);
+        return preg_match('/Catrobat/', $user_agent) || strpos($user_agent, 'Android') != false ||
+               strpos($user_agent, 'iPad') != false  || strpos($user_agent, 'iPhone') != false;
     }
 
     /**
@@ -143,7 +149,7 @@ class AppExtension extends \Twig_Extension
     {
         $request = $this->request_stack->getCurrentRequest();
         $user_agent = $request->headers->get('User-Agent');
-        
+
         // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
         if (preg_match('/Catrobat/', $user_agent)) {
             $user_agent_array = explode("/", $user_agent);
@@ -213,5 +219,12 @@ class AppExtension extends \Twig_Extension
     public function getCurrentGameJam()
     {
         return $this->gamejamrepository->getCurrentGameJam();
+    }
+
+    public function getJavascriptPath($jsFile) {
+        $jsPath = $this->container->getParameter('jspath');
+        $jsPath .= $jsFile;
+        $jsPath = str_replace("//", "/", $jsPath);
+        return $jsPath;
     }
 }

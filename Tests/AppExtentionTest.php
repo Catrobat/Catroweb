@@ -16,7 +16,7 @@ class AppExtentionTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->prophet = new Prophet();
-        $this->translationPath =  __DIR__ . '/Resources/translations';
+        $this->translationPath = __DIR__ . '/Resources/translations';
     }
 
 
@@ -27,8 +27,8 @@ class AppExtentionTest extends \PHPUnit_Framework_TestCase
     {
         $short = "de";
 
-        $appExtention = $this->createAppExtension($short);
-        $list = $appExtention->getLanguageOptions();
+        $appExtension = $this->createAppExtension($short);
+        $list = $appExtension->getLanguageOptions();
         $this->assertEquals(count($list), 5);
 
         $this->assertTrue($this->inArray('Deutsch', $list));
@@ -70,8 +70,7 @@ class AppExtentionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->isSelected($notShort, $list));
     }
 
-
-    private function mockReqeustStack($locale)
+    private function mockRequestStack($locale)
     {
         $requestStack = $this->prophet->prophesize('Symfony\Component\HttpFoundation\RequestStack');
 
@@ -84,14 +83,20 @@ class AppExtentionTest extends \PHPUnit_Framework_TestCase
         return $requestStack;
     }
 
+    private function mockContainer()
+    {
+        $container = $this->prophet->prophesize('Symfony\Component\DependencyInjection\Container');
+        return $container;
+    }
 
     private function createAppExtension($locale)
     {
         $repo = $this->mockMediaPackageFileRepository();
-        $requestStack = $this->mockReqeustStack($locale);
+        $requestStack = $this->mockRequestStack($locale);
         $gamejamRepository = $this->prophet->prophesize('Catrobat\AppBundle\Entity\GameJamRepository');
         $theme = $this->prophet->prophesize('Liip\ThemeBundle\ActiveTheme');
-        return new AppExtension($requestStack->reveal(), $repo->reveal(), $gamejamRepository->reveal(), $theme->reveal(), $this->translationPath);
+        $container = $this->mockContainer();
+        return new AppExtension($requestStack->reveal(), $repo->reveal(), $gamejamRepository->reveal(), $theme->reveal(), $this->translationPath, $container->reveal());
     }
 
     private function mockMediaPackageFileRepository()
@@ -99,11 +104,9 @@ class AppExtentionTest extends \PHPUnit_Framework_TestCase
         return $this->prophet->prophesize('Catrobat\AppBundle\Services\MediaPackageFileRepository');
     }
 
-
     private function inArray($needle, $haystack)
     {
         foreach ($haystack as $value) {
-
             if (strcmp($needle, $value[1]) === 0) {
                 return true;
             }
@@ -115,7 +118,6 @@ class AppExtentionTest extends \PHPUnit_Framework_TestCase
     private function isSelected($short, $locales)
     {
         foreach ($locales as $value) {
-
             if (strcmp($short, $value[0]) === 0 && strcmp("1", $value[2]) === 0) {
                 return true;
             }

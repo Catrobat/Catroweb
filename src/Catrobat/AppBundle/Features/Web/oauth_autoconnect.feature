@@ -18,12 +18,9 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | FB-Dev            | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | at     |
-    And I should see an "#btn-logout" element
-    When I click the "logout" button
+    And I should see the logout button
+    And I click the "logout" button
     Then I should not be logged in
-    When I trigger Facebook login with auth_type ''
-    And I click Facebook login link
-    Then I should be logged in
 
   @javascript @insulated
   Scenario: Login as a new user from Google+, where another user without Google+-ID, but with same E-Mail already exists.
@@ -34,9 +31,6 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | Google-Dev        | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | at     |
-    And I should see an "#btn-logout" element
-    When I click the "logout" button
+    And I should see the logout button
+    And I click the "logout" button
     Then I should not be logged in
-    When I trigger Google login with approval prompt "auto"
-    And I click Google login link "once"
-    Then I should be logged in

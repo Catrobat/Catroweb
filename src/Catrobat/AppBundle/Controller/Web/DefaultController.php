@@ -125,13 +125,16 @@ class DefaultController extends Controller
           $isReportedByUser = ($user == $reported_program->getReportingUser());
       }
 
+      $program_url = $this->generateUrl('program', array('id' => $program->getId()), true);
+      $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
+
       return $this->get('templating')->renderResponse('::program.html.twig', array(
       'program' => $program,
       'program_details' => $program_details,
       'my_program' => count($user_programs) > 0 ? true : false,
       'already_reported' => $isReportedByUser,
-      'fb_post_link' => $program->getFbPostUrl()
-    ));
+      'shareText' => $share_text
+  ));
   }
 
 
