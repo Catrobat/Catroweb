@@ -1,7 +1,7 @@
 var jsBaseSrc = ['web/js/base/*.js', 'web/js/plugins/*.js'];
 var jsLoginSrc = ['web/js/social/*.js'];
 var jsCustomSrc = 'web/js/custom';
-var themes = ['pocketcode', 'pocketalice'];
+var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy'];
 
 var lessconfig = {};
 
@@ -106,19 +106,17 @@ module.exports = function (grunt) {
             },
             styles: {
                 files: ['web/css/**/*.less'],
-                tasks: ['less']
+                tasks: ['less'],
+                options: {
+                    nospawn: true
+                }
             },
-            baseScripts: {
-                files: jsBaseSrc,
-                tasks: ['concat:base', 'uglify:compiledFiles']
-            },
-            loginScripts: {
-                files: jsLoginSrc,
-                tasks: ['concat:login', 'uglify:compiledFiles']
-            },
-            customScripts:{
-                files: [jsCustomSrc + '/**/*.js'],
-                tasks: ['concat:custom', 'uglify:compiledFiles']
+            scripts: {
+                files: ['web/js/**/*.js'],
+                tasks: ['concat'],
+                options: {
+                    nospawn: true
+                }
             }
         }
     });
