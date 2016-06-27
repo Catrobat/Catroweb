@@ -1,3 +1,7 @@
+/*
+  Generated File by Grunt
+  Sourcepath: web/js
+*/
 var Main = function (search_url) {
     var self = this;
     self.search_url = search_url.replace(0, '');

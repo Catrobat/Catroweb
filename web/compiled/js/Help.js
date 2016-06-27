@@ -1,3 +1,7 @@
+/*
+  Generated File by Grunt
+  Sourcepath: web/js
+*/
 var Help = function () {
   var self = this;
 

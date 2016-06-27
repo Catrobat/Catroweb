@@ -474,7 +474,6 @@ function openDialog() {
 
 function triggerShareOnTwitter() {
     window.open(getTwitterShareUrl(), 'Twitter', 'width=490,height=530');
-    return false;
 }
 
 function triggerShareViaMail($programName, $programDescription, $checkoutThisProgramMessage) {
@@ -520,5 +519,4 @@ function getGooglePlusShareUrl() {
 
 function triggerShareOnGooglePlus() {
     window.open(getGooglePlusShareUrl(), 'Google+', 'width=490,height=530');
-    return false;
 }

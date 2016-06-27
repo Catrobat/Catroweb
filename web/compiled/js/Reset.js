@@ -1,3 +1,7 @@
+/*
+  Generated File by Grunt
+  Sourcepath: web/js
+*/
 $(document).ready(function () {
     $('#reset_pw').click(function() {
       var $ajaxUrl = Routing.generate(

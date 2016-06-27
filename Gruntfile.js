@@ -41,23 +41,23 @@ var admin_file_config = {};
 admin_file_config[admin_css_path] = ["web/css/plugins/*"];
 
 lessconfig['admin'] = {
-  options: {
-    compress: true,
-    yuicompress: true,
-    optimization: 2,
-    relativeUrls: true,
-  },
-  files: [
-    admin_file_config,
-    {
-      expand: true,
-      cwd: 'web/css/admin/',
-      src: ['**/*.less'],
-      dest: 'web/css/admin/',
-      ext: '.css',
-      extDot: 'first'
-    }
-  ]
+    options: {
+        compress: true,
+        yuicompress: true,
+        optimization: 2,
+        relativeUrls: true,
+    },
+    files: [
+        admin_file_config,
+        {
+            expand: true,
+            cwd: 'web/css/admin/',
+            src: ['**/*.less'],
+            dest: 'web/css/admin/',
+            ext: '.css',
+            extDot: 'first'
+        }
+    ]
 };
 
 module.exports = function (grunt) {
@@ -67,7 +67,8 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
-                separator: ';'
+                separator: ';',
+                banner: '/*\n  Generated File by Grunt\n  Sourcepath: web/js\n*/\n'
             },
             base: {
                 src: jsBaseSrc,
@@ -75,7 +76,7 @@ module.exports = function (grunt) {
             },
             login: {
                 src: jsLoginSrc,
-                dest: 'web/compiled/<%= pkg.loginJSName %>.js'
+                dest: 'web/compiled/js/<%= pkg.loginJSName %>.js'
             },
             custom: {
                 expand: true,
@@ -100,6 +101,9 @@ module.exports = function (grunt) {
 
         less: lessconfig,
         watch: {
+            options: {
+                nospawn: true
+            },
             styles: {
                 files: ['web/css/**/*.less'],
                 tasks: ['less'],
@@ -117,5 +121,6 @@ module.exports = function (grunt) {
         }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.registerTask('default', ['concat', 'less', 'watch']);
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.registerTask('default', ['concat', 'less', 'uglify', 'watch']);
 };
