@@ -489,7 +489,7 @@ ci:
   download: Apk Runterladen
 gamejam:
   nojam: Entschuldigung, es findet gerade kein game jam statt
-  submit: Einreichen zur %gamejamname%
+  submit: Einreichen zum %gamejamname%
   submitown:
     header: Achtung
     subheader: Du kannst nur eigene Programme einreichen
