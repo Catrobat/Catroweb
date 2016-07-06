@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
@@ -434,6 +435,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
               }
           }
 
+          if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
+              $extension_repo = $em->getRepository('AppBundle:Extension');
+              $extensions = explode(',', $programs[$i]['extensions']);
+              foreach ($extensions as $extension_name) {
+                  $extension = $extension_repo->findOneByName($extension_name);
+                  $program->addExtension($extension);
+              }
+          }
+
           if($program->getApkStatus() == Program::APK_READY) {
             /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
             $apkrepository = $this->kernel->getContainer()->get('apkrepository');
@@ -466,6 +476,26 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             $insert_tag->setDe($tag['de']);
 
             $em->persist($insert_tag);
+            $em->flush();
+        }
+    }
+
+    /**
+     * @Given /^there are extensions:$/
+     */
+    public function thereAreExtensions(TableNode $table)
+    {
+        $extensions = $table->getHash();
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+        foreach($extensions as $extension)
+        {
+            $insert_extension = new Extension();
+
+            $insert_extension->setName($extension['name']);
+            $insert_extension->setPrefix($extension['prefix']);
+
+            $em->persist($insert_extension);
             $em->flush();
         }
     }
@@ -1480,6 +1510,21 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      * @When /^I press on the tag "([^"]*)"$/
      */
     public function iPressOnTheTag($arg1)
+    {
+        $arg1 = '#' . $arg1;
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I press on the extension "([^"]*)"$/
+     */
+    public function iPressOnTheExtension($arg1)
     {
         $arg1 = '#' . $arg1;
         $this->assertSession()->elementExists('css', $arg1);

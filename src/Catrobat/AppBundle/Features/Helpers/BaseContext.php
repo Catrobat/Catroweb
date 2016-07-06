@@ -230,6 +230,11 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         return $this->symfony_support->insertTag($config);
     }
 
+    public function insertExtension($config)
+    {
+        return $this->symfony_support->insertExtension($config);
+    }
+
     public function insertProgramDownloadStatistics($program, $config)
     {
         return $this->symfony_support->insertProgramDownloadStatistics($program, $config);

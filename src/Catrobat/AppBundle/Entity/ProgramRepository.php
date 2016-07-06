@@ -131,6 +131,10 @@ class ProgramRepository extends EntityRepository
             ELSE 0
           END) +
           (CASE
+            WHEN (x.name LIKE :searchterm) THEN 7
+            ELSE 0
+          END) +
+          (CASE
             WHEN (e.description LIKE :searchterm) THEN 3
             ELSE 0
           END) +
@@ -146,10 +150,12 @@ class ProgramRepository extends EntityRepository
         FROM Catrobat\AppBundle\Entity\Program e
         LEFT JOIN e.user f
         LEFT JOIN e.tags t
+        LEFT JOIN e.extensions x
         WHERE
           (e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
+          x.name LIKE :searchterm OR
           $searchterm OR
           e.id = :searchtermint) AND
           e.visible = true
@@ -183,10 +189,12 @@ class ProgramRepository extends EntityRepository
         FROM Catrobat\AppBundle\Entity\Program e
         LEFT JOIN e.user f
         LEFT JOIN e.tags t
+        LEFT JOIN e.extensions x
         WHERE
           (e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
+          x.name LIKE :searchterm OR
           $searchterm
           e.id = :searchtermint) AND
           e.visible = true
@@ -196,22 +204,6 @@ class ProgramRepository extends EntityRepository
         $q2->setParameter('searchterm', '%'.$query.'%');
         $q2->setParameter('searchtermint', intval($query));
         $result = $q2->getResult();
-        return count($result);
-    }
-
-    public function searchTagAndExtensionCount($query)
-    {
-        $qb = $this->createQueryBuilder('e');
-
-        $result = $qb
-            ->select('e')
-            ->leftJoin('e.tags', 't')
-            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-            ->andWhere($qb->expr()->eq('t.id', ':id'))
-            ->setParameter('id', $query)
-            ->getQuery()
-            ->getResult();
-
         return count($result);
     }
 
@@ -278,5 +270,52 @@ class ProgramRepository extends EntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getProgramsByExtensionName($name, $limit = 20, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('e');
+        return $qb
+            ->select('e')
+            ->leftJoin('e.extensions', 'f')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('f.name', ':name'))
+            ->setParameter('name', $name)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+    
+    public function searchTagCount($query)
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        $result = $qb
+            ->select('e')
+            ->leftJoin('e.tags', 't')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('t.id', ':id'))
+            ->setParameter('id', $query)
+            ->getQuery()
+            ->getResult();
+
+        return count($result);
+    }
+
+    public function searchExtensionCount($query)
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        $result = $qb
+            ->select('e')
+            ->leftJoin('e.extensions', 't')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('t.name', ':name'))
+            ->setParameter('name', $query)
+            ->getQuery()
+            ->getResult();
+
+        return count($result);
     }
 }

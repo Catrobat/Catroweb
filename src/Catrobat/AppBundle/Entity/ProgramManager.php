@@ -265,8 +265,18 @@ class ProgramManager
         return $this->program_repository->getProgramsByTagId($id, $limit, $offset);
     }
 
-    public function searchTagAndExtensionCount($query)
+    public function getProgramsByExtensionName($name, $limit, $offset)
     {
-        return $this->program_repository->searchTagAndExtensionCount($query);
+        return $this->program_repository->getProgramsByExtensionName($name, $limit, $offset);
+    }
+
+    public function searchTagCount($query)
+    {
+        return $this->program_repository->searchTagCount($query);
+    }
+
+    public function searchExtensionCount($query)
+    {
+        return $this->program_repository->searchExtensionCount($query);
     }
 }
