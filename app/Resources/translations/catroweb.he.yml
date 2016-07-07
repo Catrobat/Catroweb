@@ -22,7 +22,7 @@ oldVersionError: נא לעדכן הגירסה החדשה ביותר של פוק�
 more: יותר
 less: פחות
 ok: אשר
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: 'כדי להוריד את תוכנית ההדגמה %link_start% לחץ %link_end% כאן.'
 programs:
   featured: Featured
   newest: תוכניות חדשות
@@ -486,7 +486,7 @@ ci:
   download: הורד קובץ Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: be aware
     subheader: הינך יכול להגיש רק תוכניות שלך

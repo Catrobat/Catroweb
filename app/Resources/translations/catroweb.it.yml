@@ -512,14 +512,12 @@ ci:
   pending: "Generazione dell'Apk"
   download: Scarica Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
+  submit: "Proponilo all'alice game jam"
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
-    text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
+    header: fai attenzione
+    subheader: È possibile inviare solo programmi originali, creati da sé
+    text: 'Ma perché non crearne uno personale! Prendi parte ad #AliceGameJam'
 tag-text: Tag
 extenstion-text: Estensioni
 tags:
@@ -532,13 +530,13 @@ tags:
     tag6: Sperimentale
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    diskMaintenance: Manutenzione del disco
+    noRemovableObjects: Non sono disponibili oggetti rimovibili.
+    manualBackups: Backup manuali
+    noRemovableBackupObjects: "Su questo server non c'è alcun file di backup rimovibile."
+    btnCreateBackup: Crea backup
+    btnDownloadBackup: Scarica backup
+    btnRestoreBackup: Ripristina backup
+    btnDeleteBackup: Elimina backup
+    createBackupConfirmationTitle: Crea file di backup
+    createBackupConfirmationText: "Questo processo potrebbe durare un po' di tempo. La pagina verrà ricaricata a breve!"

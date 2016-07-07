@@ -498,14 +498,14 @@ ci:
   pending: Gerando Apk
   download: Baixar Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  nojam: Desculpe, não há game jams disponíveis
+  submit: Enviar para o game jam da Alice
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: fique atento
+    subheader: Você só pode enviar os seus programas
     text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
+      Mas por que não criar o seu próprio programa?!
+      Faça parte do #AliceGameJam
 tag-text: Tags
 extenstion-text: Extensions
 tags:

@@ -495,7 +495,7 @@ ci:
   download: Snemi Apk na svoj računalnik
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: be aware
     subheader: You can only submit your own programs

@@ -7,22 +7,22 @@ tutorials: Tutorial
 googlePlay: Google Play
 passwordsNoMatch: Kata sandi tidak cocok.
 error: Kesalahan
-cancel: Batal
+cancel: Batalkan
 report: Laporkan
-download: Mengunduh
+download: Unduh sebagai program
 description: Keterangan
-noDescription: Deskripsi tidak tersedia.
+noDescription: Keterangan tidak tersedia.
 country: Negara
-loginText: login
+loginText: masuk
 privacyPolicy: Kebijakan Privasi
 imprint: Jejak
-somethingWentWrong: Ups terdapat kesalahan.
-pleaseTryAgain: Mohon coba lagi!
+somethingWentWrong: Ups ada kesalahan.
+pleaseTryAgain: Silahkan coba lagi!
 oldVersionError: Mohon perbaharui Pocket Code ke versi terbaru!
 more: lebih
 less: kurang
 ok: Oke
-clickToDownloadProgram: 'Untuk mengunduh contoh program klik %link_start% here %link_end%.'
+clickToDownloadProgram: 'Untuk mengunduh contoh program klik %link_start% disini %link_end%.'
 programs:
   featured: Fitur
   newest: Program terbaru
@@ -33,11 +33,11 @@ programs:
   related: Program Terkait
   downloads: '%downloads% unduhan'
   sample: Contoh Program
-  views: '%views% lihat'
+  views: '%views% dilihat'
   submitted: Program yang Diajukan
   uploaded: Program yang Diunggah
   reportAsInappropriate: Laporkan sebagai tidak pantas
-  languageVersion: 'Versi Catrobat Language: %languageVersion%'
+  languageVersion: 'Versi bahasa Catrobat: %languageVersion%'
   reportLoginText: 'Mohon %login% untuk melaporkan program ini sebagai tidak pantas.'
   reportDialogHeader: Menurut Anda, mengapa program ini tidak pantas?
   reportDialogReason: Masukkan alasan
@@ -47,7 +47,7 @@ programs:
   updateAppHeader: Perbaharui Aplikasi
   updateAppText: Mohon perbaharui aplikasi Anda ke versi terbaru untuk dapat mengunduh program ini.
   btnClosePopup: Oke
-  checkout_this_program: Coba Program Catrobat ini
+  checkout_this_program: Periksa program Catrobat ini
   show_more: Selengkapnya
   comments: Komentar
   send: Kirim
@@ -58,17 +58,17 @@ passwordRecovery:
   message: |
     Yth. %username%.
     
-    Anda telah diminta untuk menyetel ulang kata sandi Anda pada %appplication_url% karena Anda lupa kata sandi Anda. Jika Anda tidak meminta ini, silakan mengabaikannya. Ini akan berakhir dan menjadi tidak berguna dalam waktu 24 jam.
-    Untuk menyetel ulang kata sandi Anda dan membuat yang baru, silakan kunjungi halaman berikut: %confirmationUrl%
+    Anda telah diminta untuk mengatur ulang kata sandi Anda pada %appplication_url% karena Anda telah lupa kata sandi Anda. Jika Anda tidak meminta ini, mohon abaikan. Ini akan berakhir dan menjadi tidak berlaku dalam waktu 24 jam.
+    Untuk mengatur ulang kata sandi Anda dan membuat yang baru, silahkan kunjungi laman berikut: %confirmationUrl%
     
     Anda dapat menggunakan nama pengguna dan kata sandi Anda setiap saat untuk mengakses komunitas %appplication_url%.
-    Untuk melakukannya, kunjungi halaman berikut: %loginPage%
-    Untuk mengubah rincian profil Anda, pergi ke halaman ini: %profilePage%
+    Untuk melakukannya, kunjungi laman berikut: %loginPage%
+    Untuk mengubah rincian profil Anda, buka laman ini: %profilePage%
     
     Salam hormat,
     Tim Catrobat Anda.
 profile:
-  saveChanges: Simpan perubahan
+  saveChanges: simpan perubahan
   newPass: kata sandi baru
   repeatPass: ulangi kata sandi
   firstEmail: Email pertama saya
@@ -494,14 +494,14 @@ ci:
   pending: Menghasilkan Apk
   download: Unduh Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  nojam: Maaf, tidak ada kemacetan permainan saat ini
+  submit: Kirim kemacetan permainan ke alice
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: waspadalah
+    subheader: Anda hanya dapat mengirimkan program Anda sendiri
     text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
+      Tapi mengapa tidak membuat punya Anda sendiri! 
+      Ambil bagian di #AliceGameJam
 tag-text: Label
 extenstion-text: Ekstensi
 tags:
@@ -514,13 +514,13 @@ tags:
     tag6: Eksperimental
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    diskMaintenance: Pemeliharaan disk
+    noRemovableObjects: Tidak tersedia objek yang dapat dipindahkan.
+    manualBackups: Cadangan manual
+    noRemovableBackupObjects: Tidak ada berkas cadangan yang dapat dilepas pada server ini.
+    btnCreateBackup: Buat cadangan
+    btnDownloadBackup: Unduh cadangan
+    btnRestoreBackup: Kembalikan cadangan
+    btnDeleteBackup: Hapus cadangan
+    createBackupConfirmationTitle: Buat berkas cadangan
+    createBackupConfirmationText: Proses ini mungkin memakan waktu cukup lama. Halaman akan kembali sesudahnya!

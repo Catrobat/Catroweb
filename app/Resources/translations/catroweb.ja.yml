@@ -495,14 +495,14 @@ ci:
   pending: Apk を生成しています
   download: Apk をダウンロード
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  nojam: この時点で、ゲーム jam はありません。
+  submit: アリス ゲーム jam に提出
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: ご注意ください
+    subheader: 独自のプログラムのみ提出することができます
     text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
+      独自のプログラムを作成しませんか!
+      #AliceGameJam に参加してください
 tag-text: タグ
 extenstion-text: 拡張
 tags:
@@ -515,13 +515,13 @@ tags:
     tag6: 実験的
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    diskMaintenance: ディスクのメンテナンス
+    noRemovableObjects: 取り外し可能なオブジェクトはありません。
+    manualBackups: 手動バックアップ
+    noRemovableBackupObjects: このサーバーに取り外し可能バックアップ ファイルはありません。
+    btnCreateBackup: バックアップを作成
+    btnDownloadBackup: バックアップをダウンロード
+    btnRestoreBackup: バックアップを復元
+    btnDeleteBackup: バックアップを削除
+    createBackupConfirmationTitle: バックアップ ファイルを作成
+    createBackupConfirmationText: このプロセスには時間がかかることがあります。その後、ページは再読み込みされます!

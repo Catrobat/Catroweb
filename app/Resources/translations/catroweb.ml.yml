@@ -1,96 +1,96 @@
 ---
-localLanguage: Nederlands
-username: Gebruikersnaam
-password: Wachtwoord
-aboutPocketCode: Over Pocket Code
+localLanguage: English
+username: Username
+password: Password
+aboutPocketCode: About Pocket Code
 tutorials: Tutorials
 googlePlay: Google Play
-passwordsNoMatch: De wachtwoorden komen niet overeen.
-error: Fout
-cancel: Annuleren
-report: Rapporteren
-download: Downloaden
-description: Omschrijving
-noDescription: Geen beschrijving beschikbaar.
-country: Land
-loginText: inloggen
-privacyPolicy: Privacybeleid
+passwordsNoMatch: "The passwords didn't match."
+error: Error
+cancel: വേണ്ടെന്നു വയ്ക്കുക
+report: Report
+download: Download as program
+description: Description
+noDescription: No description available.
+country: Country
+loginText: login
+privacyPolicy: Privacy Policy
 imprint: Imprint
-somethingWentWrong: Oeps, er is iets fout gegaan.
-pleaseTryAgain: Probeer het opnieuw!
-oldVersionError: Gelieve bij te werken tot de nieuwste versie van Pocket Code!
-more: meer
-less: minder
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
+more: more
+less: less
 ok: OK
-clickToDownloadProgram: 'Om het voorbeeldprogramma te downloaden klik %link_start% hier %link_end%.'
+clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 programs:
-  featured: Uitgelicht
-  newest: "Nieuwste programma's"
+  featured: Featured
+  newest: Newest programs
   most:
-    viewed: Meest bekeken
-    downloaded: Meest gedownload
-  random: "Willekeurige programma's"
-  related: "Gerelateerde programma 's"
+    viewed: Most viewed
+    downloaded: Most downloaded
+  random: Random Programs
+  related: Related Programs
   downloads: '%downloads% downloads'
-  sample: "Voorbeeld Programma's"
-  views: '%views% weergaven'
-  submitted: "Opgestuurde programma's"
-  uploaded: "Geüploade programma's"
-  reportAsInappropriate: Melden als ongepast
-  languageVersion: 'Catrobat Taal versie: %languageVersion%'
-  reportLoginText: 'Gelieve %login% om dit programma als ongepast te rapporteren.'
-  reportDialogHeader: Waarom vind je dat dit programma ongepast is?
-  reportDialogReason: Geef een reden
-  reportOwnProgram: Je kan je eigen programma niet als ongepast melden.
-  reportAlready: Je hebt dit programma reeds als ongepast gemeld.
-  reportDone: U heeft dit programma als ongepast gerapporteerd!
-  updateAppHeader: App Bijwerken
-  updateAppText: Gelieve uw app tot het nieuwste versie bij te werken zodat het mogelijk is om dit programma te downloaden.
+  sample: Example Programs
+  views: '%views% views'
+  submitted: Submitted Programs
+  uploaded: Uploaded Programs
+  reportAsInappropriate: Report as inappropriate
+  languageVersion: 'Catrobat Language version: %languageVersion%'
+  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportDialogHeader: Why do you think this program is inappropriate?
+  reportDialogReason: Enter a reason
+  reportOwnProgram: You cannot flag your own program.
+  reportAlready: "You've already flagged this program as inappropriate."
+  reportDone: You reported this program as inappropriate!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
-  checkout_this_program: Neem een kijkje naar dit Catrobat programma
-  show_more: Meer tonen
-  comments: Reacties
-  send: Versturen
-  delete: verwijderen
-  report: Rapporteren
+  checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: ഒഴിവാക്കുക
+  report: Report
 passwordRecovery:
-  subject: Uw Catrobat wachtwoord herstellen
+  subject: Your Catrobat Password Recovery
   message: |
-    Geachte %username%. 
+    Dear %username%.
     
-    U heeft een aanvraag ingediend om uw wachtwoord te resetten op %appplication_url% omdat u deze bent vergeten. Als u dit niet heeft aangevraagd. kun je het negeren. Het zal verlopen en ongeldig zijn in 24 uur tijd.
-    om uw wachtwoord te resetten en een nieuwe te creëren, gelieve naar de volgende pagina te gaan: %confirmationUrl%
+    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
+    To reset your password and create a new one, please visit the following page: %confirmationUrl%
     
-    u kan uw gebruikersnaam en uw wachtwoord op eender welk moment gebruiken voor toegang tot de %appplication_url% gemeenschap.
-    om dit nu te doen, gaat u naar de volgende pagina: %loginPage%
-    om uw profiel gegevens aan te passen, gaat u naar: %profilePage%
+    You can use your username and your password at any time to access the %appplication_url% community.
+    To do so, just visit the following page: %loginPage%
+    To edit your profile details, go to this page: %profilePage%
     
-    Beste wensen,
-    Jouw Catrobat Team.
+    Best regards,
+    Your Catrobat Team.
 profile:
-  saveChanges: wijzingen opslaan
-  newPass: nieuw wachtwoord
-  repeatPass: herhaal wachtwoord
-  firstEmail: Mijn eerste e-mail
-  secondEmail: Mijn tweede e-mail
-  myPrograms: "Mijn programma's"
+  saveChanges: save changes
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: My first email
+  secondEmail: My second email
+  myPrograms: My programs
   form:
-    passwordTooShort: 'Het nieuwe wachtwoord moet ten minste %length% tekens lang zijn.'
-    passwordTooLong: 'Het nieuwe wachtwoord kan maar maximaal %length% tekens lang zijn.'
-    passwordIsUsername: Het wachtwoord moet verschillen van de gebruikersnaam.
-    emailNotValid: Dit E-mailadres is niet geldig.
+    passwordTooShort: 'The new password must have at least %length% characters.'
+    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordIsUsername: The password must differ from the username.
+    emailNotValid: This email address is not valid.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
-    submitSuccess: opgeslagen!
-  reallyDeleteProgram: Wilt u echt uw programma verwijderen
-  programsOf: "Programma's van"
+    submitSuccess: saved!
+  reallyDeleteProgram: Do you really want to delete your program
+  programsOf: Programs of
   changePicture: Change picture
   avatar:
-    pictureTooLarge: Jouw gekozen afbeelding is te groot, gelieve geen afbeeldingen te gebruiken groter dan 5mb.
-    uploadError: Sorry, er is een probleem opgetreden tijden het uploaden!
-    noSupport: "Deze afbeelding's type wordt niet ondersteund. gelieve een andere afbeelding te proberen."
+    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
+    uploadError: Sorry, there was a problem during the upload!
+    noSupport: This image type is not supported, please try another image.
 licenseToPlay:
-  link: Licentie om af te spelen
+  link: License to play
   title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
@@ -101,15 +101,15 @@ licenseToPlay:
   list1:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
-  version: Versie 1.1, 2 April 2013
+  version: Version 1.1, 2 April 2013
 teachers:
   login:
-    title: Leraren ruimte
-    description: Deze ruimte kan gebruikt worden door leraren.
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
-  title: Gebruiksvoorwaarden
-  headline: Welkom bij de Catrobat gemeenschap!
-  text1: "Als deel uitmakend van de Catrobat gemeenschap, deelt u programma's en ideeën met andere mensen:"
+  title: Terms of Use
+  headline: Welcome to the Catrobat Community!
+  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
   text4: 'Our gift to you:'
@@ -141,7 +141,7 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Versie 1.3, 4 Maart 2014
+  version: Version 1.3, 4 March 2014
 help:
   stepByStep:
     title: Step-by-Step Intro
@@ -185,7 +185,7 @@ help:
         text5: Now you have to select the new image.
         text6: Tap play to see the behaviour on the stage.
     step5:
-      title: Zeg
+      title: Speak
       description: Now you will find out how to make an object talk.
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -261,7 +261,7 @@ help:
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Glijd in
+      title: Glide
       description: Let your object glide over the screen.
       one: Add the object you want to be gliding. e.g. plane.
       two: Insert the following bricks and define the area in which the movement should happen.
@@ -271,7 +271,7 @@ help:
       one: Add the object you want to be playing a sound, e.g. dog.
       two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
-      title: Zeg
+      title: Speak
       description: Let your object speak.
       one: Add the object you want to be speaking, e.g. Carrie.
       two: Insert the following bricks in order to make the voice output possible.
@@ -286,7 +286,7 @@ help:
       one: Add the object you want to point in compass direction.
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Zend signaal
+      title: Broadcast
       description: Send messages from one object to another.
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
@@ -320,7 +320,7 @@ help:
     text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
     title1: Registration
     text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: Uploaden
+    title2: Upload
     text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
     title3: Search for your program
     text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
@@ -387,7 +387,7 @@ login:
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
-  or: OF
+  or: OR
 apk:
   download: Download as app
   prepare: Prepare app
@@ -436,61 +436,61 @@ errors:
   programversion:
     tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
 success:
-  registration: Registratie voltooid!
-  token: OK
-  upload: Je project is succesvol geupload!
+  registration: Registration successful!
+  token: ok
+  upload: Your project was uploaded successfully!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 minuut geleden |{1}1 minuten geleden |]1,Inf] %count% minuten geleden'
-  hours.ago: '{1}1 uur geleden |]1, Inf] %count% uren geleden'
-  days.ago: '{1}1 dag geleden |]1, Inf] %count% dagen geleden'
-  months.ago: '{1}1 maand geleden |]1, Inf] %count% maanden geleden'
-  years.ago: '{1}1 jaar geleden |]1, Inf] meer dan een jaar geleden'
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 language:
-  arabic: Arabisch
-  bulgarian: Bulgaars
-  catalan: Catalaans
-  chinese_simplified_han: Chinees (Vereenvoudigd Han)
-  chinese_traditional_han: Chinees (traditionele Han)
-  croatian: Kroatisch
-  czech: Tsjechisch
-  danish: Deens
-  dutch: Nederlands
-  english_united_kingdom: Engels (Verenigd Koninkrijk)
-  english_united_states: Engels (Verenigde Staten)
-  estonian: Ests
-  filipino: Filipijns
-  finnish: Fins
-  french: Frans
-  german: Duits
-  greek: Grieks
-  hebrew: Hebreeuws
+  arabic: Arabic
+  bulgarian: Bulgarian
+  catalan: Catalan
+  chinese_simplified_han: Chinese (Simplified Han)
+  chinese_traditional_han: Chinese (Traditional Han)
+  croatian: Croatian
+  czech: Czech
+  danish: Danish
+  dutch: Dutch
+  english_united_kingdom: English (United Kingdom)
+  english_united_states: English (United States)
+  estonian: Estonian
+  filipino: Filipino
+  finnish: Finnish
+  french: French
+  german: German
+  greek: Greek
+  hebrew: Hebrew
   hindi: Hindi
-  hungarian: Hongaars
-  indonesian: Indonesisch
-  italian: Italiaans
-  japanese: Japans
-  korean: Koreaans
-  latvian: Lets
-  lithuanian: Litouws
-  malay: Maleis
-  norwegian: Noors
-  persian: Perzisch
-  polish: Pools
-  portuguese_brazil: Portugees (Brazilië)
-  portuguese_portugal: Portugees (Portugal)
-  romanian: Roemeens
-  russian: Russisch
-  serbian: Servisch
-  slovak: Slowaaks
-  slovenian: Sloveens
-  spanish_latin_america: Spaans (Latijns-Amerika)
-  spanish_spain: Spaans (Spanje)
-  swedish: Zweeds
-  thai: Thais
-  turkish: Turks
-  ukrainian: Oekraïens
-  vietnamese: Vietnamees
+  hungarian: Hungarian
+  indonesian: Indonesian
+  italian: Italian
+  japanese: Japanese
+  korean: Korean
+  latvian: Latvian
+  lithuanian: Lithuanian
+  malay: Malay
+  norwegian: Norwegian
+  persian: Persian
+  polish: Polish
+  portuguese_brazil: Portuguese (Brazil)
+  portuguese_portugal: Portuguese (Portugal)
+  romanian: Romanian
+  russian: Russian
+  serbian: Serbian
+  slovak: Slovak
+  slovenian: Slovenian
+  spanish_latin_america: Spanish (Latin America)
+  spanish_spain: Spanish (Spain)
+  swedish: Swedish
+  thai: Thai
+  turkish: Turkish
+  ukrainian: Ukrainian
+  vietnamese: Vietnamese
 ci:
   generate: Generate Apk
   pending: Generating Apk

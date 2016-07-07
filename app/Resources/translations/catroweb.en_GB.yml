@@ -134,7 +134,7 @@ termsOfUse:
     item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item1: 'If you are younger than 13 years old, your parents or other legal representative are associated with an organisation involved in or responsible for privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
     item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
     item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
     item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
@@ -497,7 +497,7 @@ ci:
   download: Download Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: be aware
     subheader: You can only submit your own programs

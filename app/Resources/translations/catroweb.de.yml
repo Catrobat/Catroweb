@@ -37,7 +37,7 @@ programs:
   submitted: Eingereichte Programme
   uploaded: Hochgeladenen Programme
   reportAsInappropriate: Als unpassend melden
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'Catrobat Sprachversion: %languageVersion%'
   reportLoginText: 'Bitte %login% um dieses Programm als unpassend zu melden.'
   reportDialogHeader: Warum ist dieses Programm unpassend?
   reportDialogReason: Gib einen Grund an
@@ -47,7 +47,7 @@ programs:
   updateAppHeader: App aktualisieren
   updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Programm herunterladen zu können.
   btnClosePopup: Ok
-  checkout_this_program: Sieh dir dieses Catrobat Programm an
+  checkout_this_program: Seht Euch das Catrobat Programm an
   show_more: Mehr anzeigen
   comments: Kommentare
   send: Senden
@@ -424,7 +424,7 @@ errors:
   program:
     invalid: Ungültiges Programm.
   languageversion:
-    tooold: Tut mir leid, dein Programm enthält eine alte Version der Catrobat-Sprache! Verwenden Sie die neueste Version von Pocket-Code?
+    tooold: Dein Programm ist in einer älteren Version der Catrobat-Sprache programmiert worden. Verwendest du die neueste Version von Pocket-Code?
   programversion:
     tooold: Es tut uns Leid, du nutzt eine alte Version von Pocket Code. Bitte lade dir die aktuelle Version herunter.
 success:
@@ -489,12 +489,11 @@ ci:
   download: Apk Runterladen
 gamejam:
   nojam: Entschuldigung, es findet gerade kein game jam statt
-  submit: Einreichen zum %gamejamname%
+  submit: Einreichen zur Alice Game Jam
   submitown:
     header: Achtung
     subheader: Du kannst nur eigene Programme einreichen
-    text: |
-      Erstelle ein eigenes Spiel und mach mit beim %gamejamtag%
+    text: 'Erstelle ein eigenes und mach mit beim #AliceGameJam!'
 tag-text: Tags
 extenstion-text: Erweiterungen
 tags:
@@ -507,13 +506,13 @@ tags:
     tag6: Experimentell
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    diskMaintenance: Festplattenwartung
+    noRemovableObjects: Keine entfernbaren Objekte verfügbar.
+    manualBackups: Manuelle Sicherungen
+    noRemovableBackupObjects: Keine entfernbaren Sicherungsdateien auf diesem Server.
+    btnCreateBackup: Sicherung erstellen
+    btnDownloadBackup: Sicherung herunterladen
+    btnRestoreBackup: Sicherung wiederherstellen
+    btnDeleteBackup: Sicherung löschen
+    createBackupConfirmationTitle: Sicherungsdatei erstellen
+    createBackupConfirmationText: Dieser Vorgang kann eine Weile dauern. Die Seite wird danach neu geladen!
