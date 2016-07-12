@@ -1,0 +1,126 @@
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/codeview.css') }}" media="screen"/>
+{% endblock %}
+
+
+
+{% import _self as self %}
+
+{% macro dropbtn(object, path) %}
+    {% if object.looks|length > 0 %}
+        <img src="{{ asset('./'~path~'images/'~object['looks'][0]['look_url']) }}" class="object-icon">
+    {% else %}
+        <img src="{{ asset('./images/symbols/empty.svg') }}" class="object-icon">
+    {% endif %}
+    <div class="object-meta">
+        <div class="object-meta-name">
+            <p>Object:</p>
+            <p>Looks:</p>
+            <p>Scritps:</p>
+            <p>Sounds:</p>
+        </div>
+        <div class="object-meta-value">
+            <p>{{ object.name }}</p>
+            <p>{{ object.looks|length }}</p>
+            <p>{{ object.scripts|length }}</p>
+            <p>{{ object.sounds|length }}</p>
+        </div>
+    </div>
+    <div class="arrow">
+        <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+    </div>
+{% endmacro %}
+
+{% macro dropcontent(object, path) %}
+    {% import _self as self %}
+
+    {% if object.scripts|length > 0 %}
+        {% for script in object.scripts %}
+            <div class="script">
+                <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/1h_when_orange.png') }})">
+                    {# <img src="{{ asset('images/bricks/1h_when_orange.png') }}"> #}
+                    <div class="script-type">{{ script.type }}</div>
+                    {% if script.message is defined %}
+                        <div class="script-message">{{ script.message }}</div>
+                    {% endif %}
+                </div>
+                <div class="script-bricks-wrapper">
+                    {% for brick in script.bricks %}
+                        <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.img_file) }})">
+                            {# <img src="{{ asset('images/bricks/'~brick.img_file) }}"> #}
+                            {# <div class="brick-name">{{ brick.name }}</div> #}
+                            <div class="brick-text">{{ brick.text }}</div>
+                            {% if brick.look is defined %}
+                                <img src="{{ asset('./'~path~'images/'~brick.look) }}" class="brick-look">
+                            {% endif %}
+                            {% if brick.sound is defined %}
+                                <img src="{{ asset('images/symbols/sound.svg') }}" class="brick-sound" onclick="playSound('{{ asset('./'~path~'sounds/'~brick.sound) }}');">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="note">NO SCRIPTS</p>
+    {% endif %}
+{% endmacro %}
+
+
+
+{% block body %}
+    <div id="code-wrapper">
+
+        {% if no_code is defined %}
+            <p class="exception">CODE CAN'T BE DISPLAYED</p>
+        {% else %}
+            <div id="background-wrapper">
+                <p class="heading">BACKGROUND</p>
+                <div id="background">
+                    <div class="dropbtn">
+                        {{ self.dropbtn(background, path) }}
+                    </div>
+                    <div class="dropdown-content">
+                        {{ self.dropcontent(background, path) }}
+                    </div>
+                </div>
+            </div>
+
+            <div id="object-list-wrapper">
+                <p class="heading">OBJECTS</p>
+                {% if object_list is not empty %}
+                    {% for code_object in object_list %}
+                        <div class="object">
+                            <div class="dropbtn">
+                                {{ self.dropbtn(code_object, path) }}
+                            </div>
+                            <div class="dropdown-content">
+                                {{ self.dropcontent(code_object, path) }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="note">NO OBJECTS</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            $('.dropbtn').on("click", function() {
+                $(this).next().slideToggle(250, 'linear');
+                $(this).find('.arrow').toggleClass('rotate');
+            });
+        });
+
+        function playSound(file_name) {
+            var audio = new Audio(file_name);
+            audio.play();
+        }
+
+    </script>
+{% endblock %}

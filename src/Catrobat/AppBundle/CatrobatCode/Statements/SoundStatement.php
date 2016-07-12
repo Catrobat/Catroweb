@@ -44,6 +44,11 @@ class SoundStatement extends Statement
             }
         }
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
 }
 
 ?>

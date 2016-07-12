@@ -123,7 +123,6 @@
             </tr>
           </table>
         </button>
-
       </div>
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
@@ -197,6 +196,16 @@
   {% if isWebview() %}
     {% include ':social:social_share_mobile.html.twig' %}
   {% endif %}
+
+  <div class="show-hide-code">
+    <div class="show-hide-code-text">SHOW CODE</div>
+    <div class="show-hide-code-arrow">
+      <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+    </div>
+  </div>
+  <div class="codeview-wrapper">
+    {{ render(controller('AppBundle:Web/CodeView:codeView', {'id' : program.id})) }}
+  </div>
 
   <div id="program-bottom">
     <div id="icon-author">
@@ -319,86 +328,119 @@
 
     counter = 10;
 
-    $(document).on("click", "#show-more-button", function() {
-      counter += 10;
-      for(var i = counter - 10; i < counter; i++)
-      {
-        $('.single-comment.hidden').first().removeClass("hidden");
-      }
-      if(!$('.single-comment.hidden').length){
-        $('.show-more').hide();
-      }
-    });
+    $(document).ready(function(){
 
-    $(document).on("click", "#close-reported-popup", function() {
-      $('#comment-successfully-reported').hide();
-    });
+      $(document).on("click", ".show-more-button", function() {
+        counter += 10;
+        for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
+        {
+          $('.single-comment.hidden').first().removeClass("hidden");
+        }
+        if(!$('.single-comment.hidden').length){
+          $('.show-more').hide();
+        }
+      });
 
-    $(document).on("click", ".delete-button", function() {
-      var pId = {{ program_details.id }};
-      var commentId = $(this).data('commentid');
-      $.ajax({
-        url:"../delete",
-        type: "get",
-        data:{ProgramId: pId, CommentId: commentId},
-        success: function(data) {
-          if (data == "log_in")
-            window.location.href = "../login";
-          else if (data == "no_admin"){
-            alert("You have no admin rights. Please Log in as an Admin");
-          }
-          else {
-            $('#comments-wrapper').load(' #comments-wrapper');
-            $('.msg').val("");
-          }
-        },
-        error: function(data) {
-          //alert(data);
-          alert("something went terribly wrong");
-        }});
-    });
 
-    $(document).on("click", ".post-button", function() {
-      var msg = $('.msg').val();
-      if(msg.length == 0) {
-        return;
-      }
-      var pId = {{ program_details.id }};
-      $.ajax({
-        url: "../comment",
-        type: "post",
-        data:{Message: msg, ProgramId: pId},
-        success: function(data) {
-          if (data == "log_in")
-            window.location.href = "../login";
-          else
-          {
-            $('#comments-wrapper').load(' #comments-wrapper');
-            $('.msg').val("");
-          }
-        },
-        error: function() {
-          alert("something went terribly wrong");
-        }});
-    })
+      $(document).on("click", ".delete-button", function() {
+        var pId = {{ program_details.id }};
+        var commentId = $(this).data('commentid');
+        $.ajax({
+          url:"../delete",
+          type: "get",
+          data:{ProgramId: pId, CommentId: commentId},
+          success: function(data) {
+            if (data == "log_in")
+              window.location.href = "../login";
+            else if (data == "no_admin"){
+              alert("You have no admin rights. Please Log in as an Admin");
+            }
+            else {
+              $('#comments-wrapper').load(' #comments-wrapper');
+              $('.msg').val("");
+            }
+          },
+          error: function(data) {
+            //alert(data);
+            alert("something went terribly wrong");
+          }});
+      });
 
-    $(document).on("click", ".report-button", function() {
-      var commentId = $(this).data('commentid');
-      var pId = {{ program_details.id }};
-      $.ajax({
-        url:"../report",
-        type: "get",
-        data:{ProgramId: pId, CommentId: commentId},
-        success: function(data) {
-          if (data == "log_in")
-            window.location.href = "../login";
-          else {
-            $('#comment-successfully-reported').show();
-          }
-        },
-        error: function(data) {
-          alert("something went terribly wrong");
-        }});
+      $(document).on("click", ".post-button", function() {
+        var msg = $('.msg').val();
+        if(msg.length == 0) {
+          return;
+        }
+        var pId = {{ program_details.id }};
+        $.ajax({
+          url: "../comment",
+          type: "post",
+          data:{Message: msg, ProgramId: pId},
+          success: function(data) {
+            if (data == "log_in")
+              window.location.href = "../login";
+            else
+            {
+              $('#comments-wrapper').load(' #comments-wrapper');
+              $('.msg').val("");
+            }
+          },
+          error: function() {
+            alert("something went terribly wrong");
+          }});
+      });
+
+      $(document).on("click", ".report-button", function() {
+        var commentId = $(this).data('commentid');
+        var pId = {{ program_details.id }};
+        $.ajax({
+          url:"../report",
+          type: "get",
+          data:{ProgramId: pId, CommentId: commentId},
+          success: function(data) {
+            if (data == "log_in")
+              window.location.href = "../login";
+            else {
+              $('#comment-successfully-reported').show();
+            }
+          },
+          error: function(data) {
+            alert("something went terribly wrong");
+          }});
+      });
+
+      $(document).on("click", "#close-reported-popup", function() {
+        $('#comment-successfully-reported').hide();
+      });
+
+      $(document).on('click', '.show-hide-code', function() {
+        var text = $('.show-hide-code-text');
+        if(text.text() == 'SHOW CODE') {
+          text.addClass('showing-code');
+          $('.show-hide-code-arrow').addClass('rotate showing-code');
+          $('.show-hide-code').addClass('show-code');
+          text.text('HIDE CODE');
+          $('.codeview-wrapper').slideDown();
+        } else {
+          $('.codeview-wrapper').slideUp(400, function(){
+            text.removeClass('showing-code');
+            $('.show-hide-code-arrow').removeClass('rotate showing-code');
+            $('.show-hide-code').removeClass('show-code');
+            text.text('SHOW CODE');
+          });
+        }
+      });
+
+      /*
+      var show_hide_code_top = $('.show-hide-code').offset().top;
+      $(window).scroll(function() {
+        if ($(window).scrollTop() >= show_hide_code_top && $('.show-hide-code').hasClass('show-code')) {
+          $('.show-hide-code').addClass('fixed');
+        } else {
+          $('.show-hide-code').removeClass('fixed');
+        }
+      });
+      */
     });
 
   </script>

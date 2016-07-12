@@ -39,6 +39,14 @@ class BroadcastScriptStatement extends Statement
 
         return $code;
     }
+
+    public function getMessage()
+    {
+        if ($this->message == null) {
+            $this->message = $this->xmlTree->receivedMessage;
+        }
+        return $this->message;
+    }
 }
 
 ?>

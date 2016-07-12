@@ -14,6 +14,16 @@ class StopAllSoundsStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Sop all sounds";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_violet.png";
+    }
+
 }
 
 ?>

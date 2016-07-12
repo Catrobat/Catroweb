@@ -14,6 +14,15 @@ class ComeToFrontStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Go to front";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_blue.png";
+    }
 }
 
 ?>

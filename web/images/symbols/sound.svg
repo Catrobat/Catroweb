@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="226.667px" height="199.333px" viewBox="0 0 226.667 199.333" enable-background="new 0 0 226.667 199.333"
+	 xml:space="preserve">
+<g id="Layer_1">
+</g>
+<g id="Layer_2">
+	<g>
+		<defs>
+			<rect id="SVGID_1_" width="226.667" height="199.333"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g id="XMLID_1_" clip-path="url(#SVGID_2_)">
+			<g>
+				<g id="XMLID_2_">
+					<g>
+						<polygon fill="#FFFFFF" points="100.288,51.556 100.288,146.686 67.235,120.306 88.857,120.306 88.857,77.306 67.235,77.306 
+							99.511,51.556 						"/>
+						<rect x="67.235" y="77.306" fill="#FFFFFF" width="21.622" height="43"/>
+						<rect x="34.959" y="77.306" fill="#FFFFFF" width="32.276" height="43"/>
+					</g>
+					<g>
+						
+							<polygon fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+							67.235,77.306 88.857,77.306 88.857,120.306 67.235,120.306 34.959,120.306 34.959,77.306 						"/>
+						
+							<line fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="67.235" y1="77.306" x2="99.511" y2="51.556"/>
+						
+							<line fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="67.235" y1="120.306" x2="100.288" y2="146.686"/>
+						
+							<line fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="100.288" y1="146.686" x2="100.288" y2="51.556"/>
+						
+							<line fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="67.235" y1="77.306" x2="67.235" y2="120.306"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g clip-path="url(#SVGID_2_)">
+			<defs>
+				<polygon id="SVGID_3_" points="200.054,258.678 107.934,99.121 200.054,-60.437 384.295,-60.437 476.417,99.121 
+					384.295,258.678 				"/>
+			</defs>
+			<clipPath id="SVGID_4_">
+				<use xlink:href="#SVGID_3_"  overflow="visible"/>
+			</clipPath>
+			<g clip-path="url(#SVGID_4_)">
+				
+					<circle fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="107.307" cy="99.122" r="33.927"/>
+				
+					<circle fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="107.934" cy="100.093" r="63.247"/>
+				
+					<circle fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="107.933" cy="100.094" r="87.886"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

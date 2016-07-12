@@ -14,6 +14,15 @@ class LedOnStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Turn flashlight on";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
 }
 
 ?>

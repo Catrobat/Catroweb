@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
+use Symfony\Component\DomCrawler\Form;
 
 class Statement
 {
@@ -81,6 +82,32 @@ class Statement
     public function getEndString()
     {
         return $this->endString;
+    }
+
+    public function getXmlTree()
+    {
+        return $this->xmlTree;
+    }
+
+    public function getClassName()
+    {
+        return static::class;
+    }
+
+    protected function getLastChildStatement()
+    {
+        $child_statement_keys = array_keys($this->statements);
+        $last_child_stmt_key = $child_statement_keys[sizeof($child_statement_keys) - 1];
+        return $this->statements[$last_child_stmt_key];
+    }
+
+    protected function getFormulaListChildStatement()
+    {
+        $formula_list_stmt = null;
+        foreach ($this->statements as $child_stmt)
+            if ($child_stmt instanceof FormulaListStatement)
+                $formula_list_stmt = $child_stmt;
+        return $formula_list_stmt;
     }
 }
 

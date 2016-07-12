@@ -15,7 +15,17 @@ class HideTextStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        $variable_name = $this->xmlTree->userVariableName;
 
+        return "Hide variable " . $variable_name;
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_red.png";
+    }
 }
 
 ?>
