@@ -1,0 +1,28 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div id="code" class="panel-collapse collapse">
+                {% if codeObjects|length == 0 %}
+                    No Code in this project
+                {% else %}
+                    {% autoescape false %}
+                    {% for codeObject in codeObjects %}
+                        <div class="panel-body">
+                            Object name: {{ codeObject.getName }} <br/>
+                            {{ codeObject.getCode }} <br/>
+                        </div>
+                    {% endfor %}
+                    {% endautoescape %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

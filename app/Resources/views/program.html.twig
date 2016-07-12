@@ -105,7 +105,6 @@
             </tr>
           </table>
         </button>
-
       </div>
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
@@ -147,6 +146,10 @@
       <br>
       {{ "programs.languageVersion"|trans({ "%languageVersion%" : program_details.languageVersion }, 'catroweb') }}
       </p>
+
+      <button id="code-view-btn" class="btn code-view-btn">
+        <a href="{{ path('show_code_view', {'id': program.id }) }}">View Code</a>
+      </button>
     </div>
 
     <div class="clear"></div>

@@ -155,6 +155,21 @@ class DefaultController extends Controller
   ));
   }
 
+  /**
+   * @Route("/program/{id}/codeview", name="show_code_view", requirements={"id":".+"})
+   * @Method({"GET"})
+   */
+  public function codeViewAction($id)
+  {
+    $program = $this->get('programmanager')->find($id);
+    $extractedFileRepository = $this->get('extractedfilerepository');
+    $extractedProgram = $extractedFileRepository->loadProgramExtractedFile($program);
+
+    return $this->get('templating')->renderResponse('::codeview.html.twig', array(
+      'program' => $program,
+      'codeObjects' => $extractedProgram->getContainingCodeObjects()
+    ));
+  }
 
   /**
    * @Route("/search/{q}", name="search", requirements={"q":".+"})
