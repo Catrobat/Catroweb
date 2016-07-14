@@ -6,33 +6,84 @@
 
 {% block body %}
 
-    <div class="debug">
-        {% for codeObject in codeObjects %}
-            <div class="debug-panel">
-                {{ codeObject.getCodeObjects|length }}
-            </div>
-        {% endfor %}
+    <div id="background-wrapper">
+        <img src="{{ background['icon_url'] }}" class="object-icon">
+        <div class="object-name">{{ background['name'] }}</div>
+        <div class="object-scripts">Length of the scripts it contains: {{ background['scripts']|length }}</div>
     </div>
 
-    {#
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <div id="code" class="panel-collapse collapse">
-                {% if codeObjects|length == 0 %}
-                    No Code in this project
-                {% else %}
-                    {% autoescape false %}
-                    {% for codeObject in codeObjects %}
-                        <div class="panel-body">
-                            Object name: {{ codeObject.getName }} <br/>
-                            {{ codeObject.getCode }}
+    {% if contains_objects %}
+
+        <div id="object-list-wrapper">
+            {% for code_object in object_list %}
+
+                <div class="object">
+                    <img src="{{ code_object['icon_url'] }}" class="object-icon">
+                    <div class="object-name">{{ code_object['name'] }}</div>
+                    <div class="object-scripts">Length of the scripts it contains: {{ code_object['scripts']|length }}</div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        {#
+        <div class="debug">
+
+            {% for codeObject in debug %}
+                <div class="debug-panel">
+                    {{ codeObject.name }} <br/>
+                    {{ codeObject.getScripts|length }} <br/>
+                    {% for script in codeObject.getScripts %}
+                        <div class="script">
+                            {{ script.getStatements|length }}
                         </div>
                     {% endfor %}
-                    {% endautoescape %}
-                {% endif %}
+                </div>
+            {% endfor %}
+
+        </div>
+        #}
+
+        {#
+        <div class="debugtwo">
+            {% for codeObject in codeObjects %}
+                <div class="debugtwo-panel">
+                    {{ codeObject.name }} <br/>
+                    {{ codeObject.getScripts|length }} <br/>
+                    {% for script in codeObject.getScripts %}
+                        <div class="script">
+                            {{ script.getStatements|length }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        #}
+
+        {#
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div id="code" class="panel-collapse collapse">
+                    {% if codeObjects|length == 0 %}
+                        No Code in this project
+                    {% else %}
+                        {% autoescape false %}
+                        {% for codeObject in codeObjects %}
+                            <div class="panel-body">
+                                Object name: {{ codeObject.getName }} <br/>
+                                {{ codeObject.getCode }}
+                            </div>
+                        {% endfor %}
+                        {% endautoescape %}
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    #}
+        #}
+    {% else %}
+        <div id="no-objects-note">
+            This Program doesn't contain any objects.
+        </div>
+    {% endif %}
 
 {% endblock %}

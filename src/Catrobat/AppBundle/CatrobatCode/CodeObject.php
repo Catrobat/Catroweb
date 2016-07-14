@@ -77,4 +77,9 @@ class CodeObject
         }
         return $code;
     }
+
+    public function getScripts()
+    {
+        return $this->scripts;
+    }
 }

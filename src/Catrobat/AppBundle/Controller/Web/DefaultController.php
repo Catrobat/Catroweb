@@ -165,15 +165,46 @@ class DefaultController extends Controller
     $extractedFileRepository = $this->get('extractedfilerepository');
     $extractedProgram = $extractedFileRepository->loadProgramExtractedFile($program);
 
+    $codeObjects = $extractedProgram->getCodeObjects();
+    $twigParams = null;
+
+    if (!empty($codeObjects)) {
+      $objectList = array();
+      foreach ($codeObjects as $key => $codeObject) {
+        if ($key === 0) {
+          $background = array(
+            'name' => $codeObject->getName(),
+            'icon_url' => 'iconToDisplayURL',
+            'scripts' => $codeObject->getScripts()
+      );
+        } else {
+          $objectList[] = array(
+            'name' => $codeObject->getName(),
+            'icon_url' => 'iconToDisplayURL',
+            'scripts' => $codeObject->getScripts()
+          );
+        }
+      }
+
+      $debug = null;
+
+      $twigParams = array(
+        'contains_objects' => true,
+        'program' => $program,
+        'code_objects' => $extractedProgram->getContainingCodeObjects(),
+        'debug' => $debug,
+        'background' => $background,
+        'object_list' => $objectList
+      );
 
 
-    $debug = (string)$extractedProgram->getDescription();
+    } else {
+      $twigParams = array(
+        'containsObjects' => false
+      );
+    }
 
-    return $this->get('templating')->renderResponse('::codeview.html.twig', array(
-      'program' => $program,
-      'codeObjects' => $extractedProgram->getContainingCodeObjects(),
-      'debug' => $debug
-    ));
+    return $this->get('templating')->renderResponse('::codeview.html.twig', $twigParams);
   }
 
   /**
