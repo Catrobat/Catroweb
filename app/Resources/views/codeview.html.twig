@@ -6,6 +6,15 @@
 
 {% block body %}
 
+    <div class="debug">
+        {% for codeObject in codeObjects %}
+            <div class="debug-panel">
+                {{ codeObject.getCodeObjects|length }}
+            </div>
+        {% endfor %}
+    </div>
+
+    {#
     <div class="panel-group">
         <div class="panel panel-default">
             <div id="code" class="panel-collapse collapse">
@@ -16,7 +25,7 @@
                     {% for codeObject in codeObjects %}
                         <div class="panel-body">
                             Object name: {{ codeObject.getName }} <br/>
-                            {{ codeObject.getCode }} <br/>
+                            {{ codeObject.getCode }}
                         </div>
                     {% endfor %}
                     {% endautoescape %}
@@ -24,5 +33,6 @@
             </div>
         </div>
     </div>
+    #}
 
 {% endblock %}

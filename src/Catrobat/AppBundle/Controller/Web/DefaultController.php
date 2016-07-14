@@ -165,9 +165,14 @@ class DefaultController extends Controller
     $extractedFileRepository = $this->get('extractedfilerepository');
     $extractedProgram = $extractedFileRepository->loadProgramExtractedFile($program);
 
+
+
+    $debug = (string)$extractedProgram->getDescription();
+
     return $this->get('templating')->renderResponse('::codeview.html.twig', array(
       'program' => $program,
-      'codeObjects' => $extractedProgram->getContainingCodeObjects()
+      'codeObjects' => $extractedProgram->getContainingCodeObjects(),
+      'debug' => $debug
     ));
   }
 
