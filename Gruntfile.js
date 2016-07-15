@@ -113,7 +113,7 @@ module.exports = function (grunt) {
             },
             scripts: {
                 files: ['web/js/**/*.js'],
-                tasks: ['concat'],
+                tasks: ['concat','uglify'],
                 options: {
                     nospawn: true
                 }

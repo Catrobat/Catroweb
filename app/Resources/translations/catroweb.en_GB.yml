@@ -23,6 +23,7 @@ more: more
 less: less
 ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: 'Username or email address already in use.'
 programs:
   featured: Featured
   newest: Newest programs
