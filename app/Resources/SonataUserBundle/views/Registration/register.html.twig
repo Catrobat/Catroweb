@@ -9,6 +9,7 @@
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="{{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+    <script src="{{  asset( getJavascriptPath('registrationscript.js') )}}"></script>
 
 {% endblock %}
 
@@ -19,7 +20,7 @@
 {% block body %}
 
   {% block fos_user_content %}
-    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <form id="registration_form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
       {#{{ form_widget(form) }}#}
 
       {{ form_errors(form) }}
@@ -46,6 +47,10 @@
         </div>
 
         <input id="sonata_user_registration_form__token" type="hidden" name="sonata_user_registration_form[_token]" value="{{ csrf_token('authentication') }}" />
+      </div>
+
+      <div id="Error-Message" style="display:none">
+        <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
       </div>
 
       <div>
