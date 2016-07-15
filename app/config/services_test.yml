@@ -1,5 +1,6 @@
 parameters:
      catrobat.test.directory.source: "%kernel.root_dir%/../testdata/DataFixtures/test.catrobat"
+     catrobat.test.directory.source.extensions: "%kernel.root_dir%/../testdata/DataFixtures/extensions.catrobat"
      catrobat.test.directory.target: "%kernel.root_dir%/../testdata/DataFixtures/GeneratedFixtures/"
      jenkins:
         url: https://jenkins.catrob.at/buildByToken/buildWithParameters
@@ -12,7 +13,7 @@ parameters:
 services:
     catrobat.test.command.generatetestdata:
         class: Catrobat\AppBundle\Commands\GenerateTestDataCommand
-        arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%"]
+        arguments: ["@catrobat.test.filesystem", "@catrobat.test.extractor", "@catrobat.test.compressor", "%catrobat.test.directory.source%","%catrobat.test.directory.target%","%catrobat.test.directory.source.extensions%"]
         tags:
             -  { name: console.command }
 

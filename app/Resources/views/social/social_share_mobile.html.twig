@@ -1,0 +1,27 @@
+<ul id="social-container">
+    <div id="share">
+        <li>
+            Share on
+        </li>
+        <li id="share-facebook">
+            <a href="javascript:triggerShareOnFacebook();">
+                <img class="img-share" src="{{ asset('images/social/share/mobile/facebook.png') }}" alt="Share on Facebook" title="Share on Facebook"/>
+            </a>
+        </li>
+        <li>
+            <a id="share-gplus" href="javascript:triggerShareOnGooglePlus();">
+                <img class="img-share" src="{{ asset('images/social/share/mobile/googleplus.png') }}" alt="Share on Google+" title="Share on Google+" />
+            </a>
+        </li>
+        <li>
+            <a id="share-twitter" href="javascript:triggerShareOnTwitter() ">
+                <img class="img-share" src="{{ asset('images/social/share/mobile/twitter.png') }}" alt="Share on Twitter" title="Share on Twitter"/>
+            </a>
+        </li>
+        <li>
+            <a id="share-whatsapp" id="share-whatsapp" href="whatsapp://send?text={{ shareText }}" data-action="share/whatsapp/share">
+                <img class="img-share" src="{{ asset('images/social/share/mobile/whatsapp.png') }}" alt="Share on WhatsApp" title="Share on WhatsApp"/>
+            </a>
+        </li>
+    </div>
+</ul>

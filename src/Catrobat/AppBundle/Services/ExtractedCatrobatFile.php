@@ -58,6 +58,16 @@ class ExtractedCatrobatFile
         return $this->dir_hash;
     }
 
+    public function getTags()
+    {
+        $tags = (string)$this->program_xml_properties->header->tags;
+        if (strlen($tags) > 0)
+        {
+            return explode(',', (string)$this->program_xml_properties->header->tags);
+        }
+        return;
+    }
+
     public function getContainingImagePaths()
     {
         $finder = new Finder();

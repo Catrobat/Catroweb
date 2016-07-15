@@ -10,7 +10,7 @@ Feature: Checking for rude words
   Scenario: upload a program with a rude word in description should be rejected
     Given I am a valid user
     And I have a program with "assbite" as name
-    When i upload this program
+    When I upload this program
     Then I should get the json object:
     """
     {"statusCode":511,"answer":"Programname must not contain rude wordes.","preHeaderMessages":""}
@@ -19,7 +19,7 @@ Feature: Checking for rude words
   Scenario: upload a program with a rude word in description should be rejected
     Given I am a valid user
     And I have a program with "assbite" as description
-    When i upload this program
+    When I upload this program
     Then I should get the json object:
       """
       {"statusCode":512,"answer":"Description must not contain rude wordes.","preHeaderMessages":""}
@@ -28,7 +28,7 @@ Feature: Checking for rude words
   Scenario Outline: a program with a rude word in description should be rejected
     Given I am a valid user
     And I have a program with "<description>" as description
-    When i upload this program
+    When I upload this program
     Then the program should get <accepted or rejected>
     
     Examples:

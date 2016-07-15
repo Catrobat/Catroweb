@@ -93,9 +93,3 @@ Feature: As a visitor I want to see a program page
       Then I should receive an application file
       When I am on "/pocketcode/program/1"
       Then I should see "6 downloads"
-
-  Scenario: A link to the Facebook post should only be displayed when the program has a Facebook post URL
-    Given I am on "/pocketcode/program/1"
-    Then a link to the Facebook post should be displayed
-    When I am on "/pocketcode/program/2"
-    Then a link to the Facebook post should not be displayed

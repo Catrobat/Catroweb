@@ -15,16 +15,18 @@ class GenerateTestDataCommand extends Command
 {
     protected $filesystem;
     protected $source;
+    protected $source_extensions;
     protected $target_directory;
     protected $extractor;
     protected $extracted_source_program_directory;
     protected $compressor;
 
-    public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor, CatrobatFileCompressor $compressor, $source, $target_directory)
+    public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor, CatrobatFileCompressor $compressor, $source, $target_directory, $source_extensions)
     {
         parent::__construct();
         $this->filesystem = $filesystem;
         $this->source = $source;
+        $this->source_extensions = $source_extensions;
         $this->target_directory = realpath($target_directory).'/';
         $this->extractor = $extractor;
         $this->compressor = $compressor;
@@ -50,6 +52,7 @@ class GenerateTestDataCommand extends Command
 
             $output->writeln('<info>Generating new test data</info>');
             $this->extractBaseTestProgram('base');
+            $this->extractExtensionTestProgram('program_with_extensions');
             $this->generateProgramWithExtraImage('program_with_extra_image');
             $this->generateProgramWithMissingImage('program_with_missing_image');
             $this->generateProgramWithTooManyFiles('program_with_too_many_files');
@@ -59,7 +62,8 @@ class GenerateTestDataCommand extends Command
             $this->generateProgramWithManualScreenshot('program_with_manual_screenshot');
             $this->generateProgramWithScreenshot('program_with_screenshot');
      // $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
-      $this->generateProgramWithRudeWordInDescription('program_with_rudeword_in_description');
+            $this->generateProgramWithRudeWordInDescription('program_with_rudeword_in_description');
+            $this->generateProgramWithTags('program_with_tags');
             $this->generateProgramWithRudeWordInName('program_with_rudeword_in_name');
             $this->generatePhiroProgram('phiro');
             $this->generateLegoProgram('lego');
@@ -77,6 +81,14 @@ class GenerateTestDataCommand extends Command
         $extracted_path = $extracted->getPath();
         $this->extracted_source_program_directory = $this->target_directory.$directory;
         $this->filesystem->rename($extracted_path, $this->extracted_source_program_directory, true);
+    }
+
+    protected function extractExtensionTestProgram($directory)
+    {
+        $extracted = $this->extractor->extract(new File($this->source_extensions));
+        $extracted_path = $extracted->getPath();
+        $extracted_source_program_directory = $this->target_directory.$directory;
+        $this->filesystem->rename($extracted_path, $extracted_source_program_directory, true);
     }
 
     protected function generateProgramWithExtraImage($directory)
@@ -141,6 +153,14 @@ class GenerateTestDataCommand extends Command
         $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
         $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
         $properties->header->programName = 'FUCK YOU';
+        $properties->asXML($this->target_directory.$directory.'/code.xml');
+    }
+
+    protected function generateProgramWithTags($directory)
+    {
+        $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
+        $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
+        $properties->header->tags = 'Games,Story';
         $properties->asXML($this->target_directory.$directory.'/code.xml');
     }
 

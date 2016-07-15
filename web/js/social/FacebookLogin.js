@@ -176,7 +176,7 @@ function FacebookLogin($email, $username, $id, $locale) {
                     console.log(data);
                     $url = data['url'];
                     $(location).attr('href', $url);
-            });
+                });
 
         });
 }

@@ -10,7 +10,6 @@ files:
     update_option: 'update_as_unapproved'
     languages_mapping:
       locale_with_underscore:
-      locale_with_underscore:
         'ar': 'ar'
         'bs': 'bs'
         'da': 'da'
@@ -19,12 +18,14 @@ files:
         'fa': 'fa'
         'fr': 'fr'
         'gu-IN': 'gu'
+        'he': 'he'
         'hi': 'hi'
         'hr': 'hr'
         'hu': 'hu'
         'id': 'id'
         'it': 'it'
         'ja': 'ja'
+        'ml-IN': 'ml'
         'mk': 'mk'
         'ms': 'ms'
         'ko': 'ko'
@@ -38,6 +39,7 @@ files:
         'sd': 'sd'
         'sl': 'sl'
         'sr': 'sr'
+        'sq': 'sq'
         'sv-SE': 'sv'
         'ta': 'ta'
         'te': 'te'

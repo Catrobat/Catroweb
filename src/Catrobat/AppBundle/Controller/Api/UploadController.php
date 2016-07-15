@@ -85,7 +85,7 @@ class UploadController
                 throw new InvalidChecksumException();
             } else {
                 $user = $this->tokenstorage->getToken()->getUser();
-                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
+                $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam, $request->request->get('deviceLanguage'));
                 
                 $program = $this->programmanager->addProgram($add_program_request);
                 $user->setUploadToken($this->tokengenerator->generateToken());
@@ -97,7 +97,7 @@ class UploadController
                 $response['token'] = $user->getUploadToken();
                 if ($gamejam !== null && !$program->isAcceptedForGameJam())
                 {
-                    $response['form'] = $this->assembleFormUrl($gamejam, $user, $program);
+                    $response['form'] = $this->assembleFormUrl($gamejam, $user, $program, $request);
                 }
 
                 $request->attributes->set('post_to_facebook', true);
@@ -110,17 +110,30 @@ class UploadController
         return JsonResponse::create($response);
     }
 
-    private function assembleFormUrl($gamejam, $user, $program)
+    private function assembleFormUrl($gamejam, $user, $program, $request)
     {
+        $languageCode = $this->getLanguageCode($request);
+
         $url = $gamejam->getFormUrl();
         $url = str_replace("%CAT_ID%", $program->getId(), $url);
         $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);
         $url = str_replace("%CAT_NAME%", $user->getUsername(), $url);
+        $url = str_replace("%CAT_LANGUAGE%", $languageCode, $url);
+
         return $url;
     }
     
     private function trans($message, $parameters = array())
     {
         return $this->translator->trans($message, $parameters, 'catroweb');
+    }
+
+    private function getLanguageCode($request) {
+        $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
+
+        if($languageCode != "DE")
+            $languageCode = "EN";
+
+        return $languageCode;
     }
 }

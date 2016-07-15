@@ -24,6 +24,7 @@ more: 'more'
 less: 'less'
 ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: 'Username or email address already in use.'
 
 programs:
   featured: Featured
@@ -521,14 +522,26 @@ ci:
   
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: Submit to alice game jam
+  submit: Submit to %gamejamname%
   submitown:
     header: be aware
     subheader: You can only submit your own programs
     text: |
       But why not create your own!
-      Take part in the #AliceGameJam 
-  
+      Take part in the %gamejamtag%
+
+tag-text: Tags
+extenstion-text: Extensions
+
+tags:
+  constant:
+    tag1: Game
+    tag2: Animation
+    tag3: Story
+    tag4: Music
+    tag5: Art
+    tag6: Experimental
+
 admin:
   maintain:
     diskMaintenance: Disk maintenance

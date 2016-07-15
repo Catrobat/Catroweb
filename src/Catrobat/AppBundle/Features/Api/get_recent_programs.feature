@@ -93,7 +93,7 @@ Feature: Get the most recent programs
   Scenario: show recent programs after uploading a new program
     Given I am "Catrobat"
     And I have a program with "WebTeam" as name
-    When i upload this program
+    When I upload this program
     And I get the most recent programs
     Then I should get programs in the following order:
       | Name      |

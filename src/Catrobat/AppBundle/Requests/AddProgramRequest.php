@@ -11,13 +11,15 @@ class AddProgramRequest
     private $programfile;
     private $ip;
     private $gamejam;
+    private $language;
 
-    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null)
+    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null, $language = null)
     {
         $this->user = $user;
         $this->programfile = $programfile;
         $this->ip = $ip;
         $this->gamejam = $gamejam;
+        $this->language = $language;
     }
 
     public function getUser()
@@ -48,5 +50,15 @@ class AddProgramRequest
     public function getGamejam()
     {
         return $this->gamejam;
+    }
+
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 }

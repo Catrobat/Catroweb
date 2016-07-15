@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
@@ -11,6 +12,8 @@ use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\StarterCategory;
+use Catrobat\AppBundle\Entity\Tag;
+use Catrobat\AppBundle\Entity\TagRepository;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
@@ -158,6 +161,23 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $this->getSession()->resizeWindow(768, 1000);
   }
 
+  /**
+   * @When /^I wait (\d+) milliseconds$/
+   */
+  public function iWaitMilliseconds($milliseconds)
+  {
+      $this->getSession()->wait($milliseconds);
+  }
+
+  /**
+   * @Then /^I should see (\d+) "([^"]*)"$/
+   */
+  public function iShouldSeeNumberOfElements($arg1, $arg2)
+  {
+      $programs = $this->getSession()->getPage()->findAll('css', $arg2);
+      assertEquals($arg1, count($programs));
+  }
+    
   /**
    * @Then /^I should see the featured slider$/
    */
@@ -406,6 +426,24 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setApproved(false);
           $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
 
+          if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
+              $tag_repo = $em->getRepository('AppBundle:Tag');
+              $tags = explode(',', $programs[$i]['tags_id']);
+              foreach ($tags as $tag_id) {
+                  $tag = $tag_repo->find($tag_id);
+                  $program->addTag($tag);
+              }
+          }
+
+          if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
+              $extension_repo = $em->getRepository('AppBundle:Extension');
+              $extensions = explode(',', $programs[$i]['extensions']);
+              foreach ($extensions as $extension_name) {
+                  $extension = $extension_repo->findOneByName($extension_name);
+                  $program->addExtension($extension);
+              }
+          }
+
           if($program->getApkStatus() == Program::APK_READY) {
             /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
             $apkrepository = $this->kernel->getContainer()->get('apkrepository');
@@ -421,6 +459,46 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       }
       $em->flush();
   }
+
+    /**
+     * @Given /^there are tags:$/
+     */
+    public function thereAreTags(TableNode $table)
+    {
+        $tags = $table->getHash();
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+        foreach($tags as $tag)
+        {
+            $insert_tag = new Tag();
+
+            $insert_tag->setEn($tag['en']);
+            $insert_tag->setDe($tag['de']);
+
+            $em->persist($insert_tag);
+            $em->flush();
+        }
+    }
+
+    /**
+     * @Given /^there are extensions:$/
+     */
+    public function thereAreExtensions(TableNode $table)
+    {
+        $extensions = $table->getHash();
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+        foreach($extensions as $extension)
+        {
+            $insert_extension = new Extension();
+
+            $insert_extension->setName($extension['name']);
+            $insert_extension->setPrefix($extension['prefix']);
+
+            $em->persist($insert_extension);
+            $em->flush();
+        }
+    }
 
   /**
    * @When /^I click "([^"]*)"$/
@@ -1378,22 +1456,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         }
     }
 
-    /**
-     * @Then /^a link to the Facebook post should be displayed$/
-     */
-    public function aLinkToTheFacebookPostShouldBeDisplayed()
-    {
-        assertTrue($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
-    }
-
-    /**
-     * @Then /^a link to the Facebook post should not be displayed$/
-     */
-    public function aLinkToTheFacebookPostShouldNotBeDisplayed()
-    {
-        assertFalse($this->getSession()->getPage()->findById('facebook-post-link')->isVisible());
-    }
-
   /**
    * @Given /^following programs are featured:$/
    */
@@ -1444,4 +1506,145 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
+    /**
+     * @When /^I press on the tag "([^"]*)"$/
+     */
+    public function iPressOnTheTag($arg1)
+    {
+        $arg1 = '#' . $arg1;
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I press on the extension "([^"]*)"$/
+     */
+    public function iPressOnTheExtension($arg1)
+    {
+        $arg1 = '#' . $arg1;
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @Given /^I search for "([^"]*)" with the searchbar$/
+     */
+    public function iSearchForWithTheSearchbar($arg1)
+    {
+        $this->fillField('search-input-header', $arg1);
+        $this->iClick('#search-header');
+    }
+
+    /**
+     * @Then /^I should see the Facebook Like button in the header$/
+     */
+    public function iShouldSeeTheFacebookLikeButtonInTheHeader()
+    {
+        $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
+        assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
+        assertTrue($like_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+    }
+
+    /**
+     * @Then /^I should see the Google Plus 1 button in the header$/
+     */
+    public function iShouldSeeTheGoogleButtonInTheHeader()
+    {
+        $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
+        assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
+        assertTrue($plus_one_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+    }
+
+    /**
+     * @Then /^I should see the Facebook Like button on the bottom of the program page$/
+     */
+    public function iShouldSeeTheFacebookLikeButtonOnTheBottomOfTheProgramPage()
+    {
+        $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
+        assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
+        assertTrue($like_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+    }
+
+    /**
+     * @Then /^I should see the Google Plus (\d+) button on the bottom of the program page$/
+     */
+    public function iShouldSeeTheGooglePlusButtonOnTheBottomOfTheProgramPage($arg1)
+    {
+        $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
+        assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
+        assertTrue($plus_one_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+    }
+
+    /**
+     * @Then /^I should see the Facebook Share button$/
+     */
+    public function iShouldSeeTheFacebookShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-facebook');
+        assertTrue($share_button != null && $share_button->isVisible(), "The Facebook share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the Google Plus share button$/
+     */
+    public function iShouldSeeTheGooglePlusShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-gplus');
+        assertTrue($share_button != null && $share_button->isVisible(), "The Google+ share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the Twitter share button$/
+     */
+    public function iShouldSeeTheTwitterShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-twitter');
+        assertTrue($share_button != null && $share_button->isVisible(), "The Twitter share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the Mail share button$/
+     */
+    public function iShouldSeeTheMailShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-email');
+        assertTrue($share_button != null && $share_button->isVisible(), "The E-Mail share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the WhatsApp share button$/
+     */
+    public function iShouldSeeTheWhatsappShareButton()
+    {
+        $share_button = $this->getSession()->getPage()->findById('share-whatsapp');
+        assertTrue($share_button != null && $share_button->isVisible(), "The WhatsApp share button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the logout button$/
+     */
+    public function iShouldSeeTheLogoutButton()
+    {
+        $logout_button = $this->getSession()->getPage()->findById('btn-logout');
+        assertTrue($logout_button != null && $logout_button->isVisible(), "The Logout button is not visible!");
+    }
+
+    /**
+     * @Then /^I should see the profile button$/
+     */
+    public function iShouldSeeTheProfileButton()
+    {
+        $profile_button = $this->getSession()->getPage()->findById('btn-profile');
+        assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
+    }
 }

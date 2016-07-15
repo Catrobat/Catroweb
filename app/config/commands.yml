@@ -75,4 +75,9 @@ services:
               arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager", "@doctrine.orm.entity_manager"]
               tags:
                 -  { name: console.command }
-                
+
+      catrowebadmin.create.constant.tags:
+              class: Catrobat\AppBundle\Commands\CreateConstantTagsCommand
+              arguments: ["@doctrine.orm.entity_manager", "@translator"]
+              tags:
+                -  { name: console.command }

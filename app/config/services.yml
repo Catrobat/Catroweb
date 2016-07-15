@@ -38,6 +38,20 @@ services:
         arguments:
             - "AppBundle:Program"
 
+    tagrepository:
+        class: Catrobat\AppBundle\Entity\TagRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:Tag"
+
+    extensionrepository:
+        class: Catrobat\AppBundle\Entity\ExtensionRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:Extension"
+
     notificationrepository:
         class: Catrobat\AppBundle\Entity\NotificationRepository
         factory_service: doctrine.orm.entity_manager
@@ -112,6 +126,7 @@ services:
             - "@screenshotrepository"
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
+            - "@tagrepository"
             - "@event_dispatcher"
 
     migrationmanager:
@@ -160,7 +175,7 @@ services:
     app.twig_extension:
         class: Catrobat\AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%"]
+        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
         tags:
             - { name: twig.extension }
 
