@@ -125,6 +125,11 @@ class ExtractedCatrobatFile
         return $this->path;
     }
 
+    public function getWebPath()
+    {
+        return $this->web_path;
+    }
+
     public function getProgramXmlProperties()
     {
         return $this->program_xml_properties;

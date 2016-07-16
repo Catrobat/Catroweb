@@ -6,20 +6,65 @@
 
 {% block body %}
 
+    {#<div id="program-path">{{ path }}</div>#}
+
+    {#
+    <div id="debug-wrapper">
+
+        {% for d in debug %}
+            <div class="debug">
+                <img src="{{ path }}images/{{ d }}">
+                <img src="{{ asset('images/' ~ d) }}">
+                <div class="debug-msg">{{ d }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="debugtwo-wrapper">
+        <div class="debugtwo">
+            <div class="debugtwo-msg">{{ debugtwo }}</div>
+        </div>
+    </div>
+    #}
+
     <div id="background-wrapper">
-        <img src="{{ background['icon_url'] }}" class="object-icon">
-        <div class="object-name">{{ background['name'] }}</div>
+        {#<img src="{{ background['looks'] }}" class="object-icon">#}
+        <div class="object-name">Background Name: {{ background['name'] }}</div>
+        {% for look in background['looks'] %}
+            <div class="look">
+                <div class="object-look-name">Look Name: {{ look['look_name'] }}</div>
+                <div class="object-look-url">Look URL: {{ look['look_url'] }}</div>
+            </div>
+        {% endfor %}
+        {% for sound in background['sounds'] %}
+            <div class="sound">
+                <div class="object-sound-name">Sound Name: {{ sound['sound_name'] }}</div>
+                <div class="object-sound-url">Sound URL: {{ sound['sound_url'] }}</div>
+            </div>
+        {% endfor %}
         <div class="object-scripts">Length of the scripts it contains: {{ background['scripts']|length }}</div>
     </div>
 
-    {% if contains_objects %}
+    {% if object_list is not empty %}
 
         <div id="object-list-wrapper">
             {% for code_object in object_list %}
 
                 <div class="object">
-                    <img src="{{ code_object['icon_url'] }}" class="object-icon">
-                    <div class="object-name">{{ code_object['name'] }}</div>
+                    {#<img src="{{ code_object['looks'] }}" class="object-icon">#}
+                    <div class="object-name">Object Name: {{ code_object['name'] }}</div>
+                    {% for look in code_object['looks'] %}
+                        <div class="look">
+                            <div class="object-look-name">Look Name: {{ look['look_name'] }}</div>
+                            <div class="object-look-url">Look URL: {{ look['look_url'] }}</div>
+                        </div>
+                    {% endfor %}
+                    {% for sound in code_object['sounds'] %}
+                        <div class="sound">
+                            <div class="object-sound-name">Sound Name: {{ sound['sound_name'] }}</div>
+                            <div class="object-sound-url">Sound URL: {{ sound['sound_url'] }}</div>
+                        </div>
+                    {% endfor %}
                     <div class="object-scripts">Length of the scripts it contains: {{ code_object['scripts']|length }}</div>
                 </div>
 
@@ -80,6 +125,7 @@
             </div>
         </div>
         #}
+
     {% else %}
         <div id="no-objects-note">
             This Program doesn't contain any objects.

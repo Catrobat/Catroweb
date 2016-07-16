@@ -82,6 +82,11 @@ class Statement
     {
         return $this->endString;
     }
+
+    public function getXmlTree()
+    {
+        return $this->xmlTree;
+    }
 }
 
 ?>

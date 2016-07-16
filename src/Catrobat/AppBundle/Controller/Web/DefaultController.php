@@ -155,10 +155,11 @@ class DefaultController extends Controller
   ));
   }
 
+
   /**
-   * @Route("/program/{id}/codeview", name="show_code_view", requirements={"id":".+"})
-   * @Method({"GET"})
-   */
+   * Route("/program/{id}/codeview", name="show_code_view", requirements={"id":".+"})
+   * Method({"GET"})
+
   public function codeViewAction($id)
   {
     $program = $this->get('programmanager')->find($id);
@@ -176,7 +177,7 @@ class DefaultController extends Controller
             'name' => $codeObject->getName(),
             'icon_url' => 'iconToDisplayURL',
             'scripts' => $codeObject->getScripts()
-      );
+          );
         } else {
           $objectList[] = array(
             'name' => $codeObject->getName(),
@@ -206,6 +207,7 @@ class DefaultController extends Controller
 
     return $this->get('templating')->renderResponse('::codeview.html.twig', $twigParams);
   }
+   */
 
   /**
    * @Route("/search/{q}", name="search", requirements={"q":".+"})
