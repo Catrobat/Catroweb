@@ -1,0 +1,59 @@
+@import 'default';
+
+#code-wrapper {
+  width: 75%;
+  margin: 0 12.5%;
+
+  .object, #background {
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  .dropbtn {
+    width: 100%;
+    position: relative;
+
+    padding: 5px;
+    border-radius: 0;
+    background-color: #00475d;
+
+    img {
+      position: absolute;
+      left: 0;
+      margin: 0px 8px;
+      border: 2px solid #88c7dc;
+    }
+
+    .object-meta {
+      font-size: @default-font-size;
+      text-transform: none;
+      text-shadow: none;
+      font-weight: normal;
+      text-align: left;
+      margin-left: 90px;
+      position: relative;
+    }
+  }
+  .dropdown-content {
+    overflow: hidden; // hackly
+    font-size: 20px;
+    display: none;
+    background-color: pink;
+  }
+
+  #background {
+    padding: 0 0 5px;
+    border-bottom: 5px solid #88c7dc;
+  }
+
+  .show {
+    display: block;
+  }
+}
+
+@media (max-width: 690px) {
+  #code-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+}

@@ -43,12 +43,14 @@ class CodeViewController extends Controller
         }
       }
 
+      /*
       $debug = array();
       $debugtwo = null;
 
       $code_object = $code_objects[0];
       foreach ($code_object->getScripts() as $key => $script) {
-        /*
+      */
+      /*
         if ($script instanceof LookListStatement)
           foreach ($script->getStatements() as $statement) {
             if ($statement instanceof LookStatement)
@@ -59,14 +61,14 @@ class CodeViewController extends Controller
               }
           }
         */
-
+        /*
         if ($script instanceof LookListStatement) {
           $debugtwo = count($script->getStatements());
           foreach ($script->getStatements() as $look_statement) {
             if ($look_statement instanceof LookStatement)
               $debug[] = $look_statement->getStatements()[0]->getValue();
           }
-
+        */
           /*
           $stmt = $script->getStatements()[0];
           if ($stmt instanceof LookStatement) {
@@ -75,13 +77,13 @@ class CodeViewController extends Controller
             $debug = get_class($st);
           }
           */
-        }
-      }
+        /*}
+      }*/
 
       $twig_params = array(
         'path' => $extracted_program->getWebPath(),
-        'debug' => $debug,
-        'debugtwo' => $debugtwo,
+        // 'debug' => $debug,
+        // 'debugtwo' => $debugtwo,
         'background' => $background,
         'object_list' => $object_list
       );
@@ -95,23 +97,13 @@ class CodeViewController extends Controller
     $scripts = array();
     $sounds = array();
 
-    foreach ($code_object->getScripts() as $script) {
-      if ($script instanceof LookListStatement) {
-        foreach ($script->getStatements() as $look_statement) {
-          $looks[] = array(
-            'look_name' => $look_statement->getValue(),
-            'look_url' => $look_statement->getStatements()[0]->getValue()
-          );
-        }
-      } else if ($script instanceof SoundListStatement) {
-        foreach ($script->getStatements() as $sound_statement) {
-          $sounds[] = array(
-            'sound_name' => $sound_statement->getName(),
-            'sound_url' => $sound_statement->getStatements()[0]->getValue()
-          );
-        }
-      } else if ($script instanceof ScriptListStatement) {
-        $scripts = $script->getStatements();
+    foreach ($code_object->getScripts() as $statement) {
+      if ($statement instanceof LookListStatement) {
+        $looks = $this->formatLooks($statement);
+      } else if ($statement instanceof SoundListStatement) {
+        $sounds = $this->formatSounds($statement);
+      } else if ($statement instanceof ScriptListStatement) {
+        $scripts = $this->formatScripts($statement);
       }
     }
 
@@ -121,5 +113,33 @@ class CodeViewController extends Controller
       'scripts' => $scripts,
       'sounds' => $sounds
     );
+  }
+
+  private function formatLooks($look_list_statement) {
+    $looks = array();
+    foreach ($look_list_statement->getStatements() as $look_statement) {
+      $looks[] = array(
+        'look_name' => $look_statement->getValue(),
+        'look_url' => $look_statement->getStatements()[0]->getValue()
+      );
+    }
+    return $looks;
+  }
+
+  private function formatSounds($sound_list_statement) {
+    $sounds = array();
+    foreach ($sound_list_statement->getStatements() as $sound_statement) {
+      $sounds[] = array(
+        'sound_name' => $sound_statement->getName(),
+        'sound_url' => $sound_statement->getStatements()[0]->getValue()
+      );
+    }
+    return $sounds;
+  }
+
+  private function formatScripts($script_list_statement) {
+    $scripts = array();
+    $scripts = $script_list_statement->getStatements();
+    return $scripts;
   }
 }
