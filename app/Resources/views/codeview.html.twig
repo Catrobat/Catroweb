@@ -6,82 +6,70 @@
 
 {% block body %}
 
-    {#<div id="program-path">{{ path }}</div>#}
-
-    {#
-    <div id="debug-wrapper">
-
-        {% for d in debug %}
-            <div class="debug">
-                <img src="{{ path }}images/{{ d }}">
-                <img src="{{ asset('images/' ~ d) }}">
-                <div class="debug-msg">{{ d }}</div>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div id="debugtwo-wrapper">
-        <div class="debugtwo">
-            <div class="debugtwo-msg">{{ debugtwo }}</div>
-        </div>
-    </div>
-    #}
     <div id="code-wrapper">
-        <div id="background">
 
-            <button class="dropbtn">
-                {#<img src="{{ path }}images/{{ background['looks'][0]['look_url'] }}" class="object-icon">#}
-                <img src="http://placecage.com/65/65" class="object-icon">
-                <div class="object-meta">
-                    <div class="object-name">Background: <span>{{ background['name'] }}</span></div>
-                    <div class="looks-num">Looks: <span>{{ background['looks']|length }}</span></div>
-                    <div class="scripts-num">Scritps: <span>{{ background['scripts']|length }}</span></div>
-                    <div class="sounds-num">Sounds: <span>{{ background['sounds']|length }}</span></div>
+        <div id="background-wrapper">
+            <p class="heading">BACKGROUND</p>
+            <div id="background">
+
+                <div class="dropbtn">
+                    {#<img src="{{ path }}images/{{ background['looks'][0]['look_url'] }}" class="object-icon">#}
+                    <img src="http://fillmurray.com/65/65" class="object-icon">
+                    <div class="object-meta">
+                        <div class="object-meta-name">
+                            <p>Object:</p>
+                            <p>Looks:</p>
+                            <p>Scritps:</p>
+                            <p>Sounds:</p>
+                        </div>
+                        <div class="object-meta-value">
+                            <p>{{ background['name'] }}</p>
+                            <p>{{ background['looks']|length }}</p>
+                            <p>{{ background['scripts']|length }}</p>
+                            <p>{{ background['sounds']|length }}</p>
+                        </div>
+                    </div>
                 </div>
-            </button>
-            <div class="dropdown-content">
-                {% for look in background['looks'] %}
-                    <div class="look">
-                        <div class="object-look-name">Look Name: {{ look['look_name'] }}</div>
-                        <div class="object-look-url">Look URL: {{ look['look_url'] }}</div>
-                    </div>
-                {% endfor %}
-                {% for sound in background['sounds'] %}
-                    <div class="sound">
-                        <div class="object-sound-name">Sound Name: {{ sound['sound_name'] }}</div>
-                        <div class="object-sound-url">Sound URL: {{ sound['sound_url'] }}</div>
-                    </div>
-                {% endfor %}
+                <div class="dropdown-content">
+                    {% for script in background['scripts'] %}
+                        <div class="script">
+                            {{ script.execute }}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
         {% if object_list is not empty %}
 
             <div id="object-list-wrapper">
+                <p class="heading">OBJECTS</p>
+
                 {% for code_object in object_list %}
 
                     <div class="object">
-                        <button class="dropbtn">
+                        <div class="dropbtn">
                             {#<img src="{{ path }}images/{{ code_object['looks'][0]['look_url'] }}" class="object-icon">#}
-                            <img src="http://placecage.com/65/65" class="object-icon">
+                            <img src="http://fillmurray.com/65/65" class="object-icon">
                             <div class="object-meta">
-                                <div class="object-name">Object: {{ code_object['name'] }}</div>
-                                <div class="looks-num">Looks: {{ code_object['looks']|length }}</div>
-                                <div class="scripts-num">Scritps: {{ code_object['scripts']|length }}</div>
-                                <div class="sounds-num">Sounds: {{ code_object['sounds']|length }}</div>
-                            </div>
-                        </button>
-                        <div class="dropdown-content">
-                            {% for look in code_object['looks'] %}
-                                <div class="look">
-                                    <div class="object-look-name">Look Name: {{ look['look_name'] }}</div>
-                                    <div class="object-look-url">Look URL: {{ look['look_url'] }}</div>
+                                <div class="object-meta-name">
+                                    <p>Object:</p>
+                                    <p>Looks:</p>
+                                    <p>Scritps:</p>
+                                    <p>Sounds:</p>
                                 </div>
-                            {% endfor %}
-                            {% for sound in code_object['sounds'] %}
-                                <div class="sound">
-                                    <div class="object-sound-name">Sound Name: {{ sound['sound_name'] }}</div>
-                                    <div class="object-sound-url">Sound URL: {{ sound['sound_url'] }}</div>
+                                <div class="object-meta-value">
+                                    <p>{{ code_object['name'] }}</p>
+                                    <p>{{ code_object['looks']|length }}</p>
+                                    <p>{{ code_object['scripts']|length }}</p>
+                                    <p>{{ code_object['sounds']|length }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-content">
+                            {% for script in code_object['scripts'] %}
+                                <div class="script">
+                                    {{ script.execute }}
                                 </div>
                             {% endfor %}
                         </div>
@@ -92,7 +80,7 @@
 
         {% else %}
             <div id="no-objects-note">
-                This Program doesn't contain any objects.
+                <p>This Program doesn't contain any objects.</p>
             </div>
         {% endif %}
     </div>

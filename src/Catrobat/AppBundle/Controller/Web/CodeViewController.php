@@ -43,47 +43,8 @@ class CodeViewController extends Controller
         }
       }
 
-      /*
-      $debug = array();
-      $debugtwo = null;
-
-      $code_object = $code_objects[0];
-      foreach ($code_object->getScripts() as $key => $script) {
-      */
-      /*
-        if ($script instanceof LookListStatement)
-          foreach ($script->getStatements() as $statement) {
-            if ($statement instanceof LookStatement)
-              $statements = $statement->getStatements();
-              foreach ($statement->getStatements() as $stmt) {
-                if ($stmt instanceof FileNameStatement)
-                  $debug[] = 'FileNameStatement';
-              }
-          }
-        */
-        /*
-        if ($script instanceof LookListStatement) {
-          $debugtwo = count($script->getStatements());
-          foreach ($script->getStatements() as $look_statement) {
-            if ($look_statement instanceof LookStatement)
-              $debug[] = $look_statement->getStatements()[0]->getValue();
-          }
-        */
-          /*
-          $stmt = $script->getStatements()[0];
-          if ($stmt instanceof LookStatement) {
-
-            $st = $stmt->getStatements()[0];
-            $debug = get_class($st);
-          }
-          */
-        /*}
-      }*/
-
       $twig_params = array(
         'path' => $extracted_program->getWebPath(),
-        // 'debug' => $debug,
-        // 'debugtwo' => $debugtwo,
         'background' => $background,
         'object_list' => $object_list
       );
@@ -138,6 +99,9 @@ class CodeViewController extends Controller
   }
 
   private function formatScripts($script_list_statement) {
+
+    // TODO: Extract bricks.
+
     $scripts = array();
     $scripts = $script_list_statement->getStatements();
     return $scripts;
