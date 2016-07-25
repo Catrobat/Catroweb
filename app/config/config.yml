@@ -6,6 +6,7 @@ imports:
     - { resource: admin_services.yml }
     - { resource: admin_config.yml }
     - { resource: listeners.yml }
+    - { resource: gamejam.yml }
 
 framework:
     #esi:             ~
