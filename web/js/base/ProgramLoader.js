@@ -102,15 +102,45 @@ var ProgramLoader = function (container, url, column_max) {
 
       var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
 
-      var program = $(
-        '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
-          '<a href = \''+ program_link + '\'>'+
+
+      var stored_visits = sessionStorage.getItem("visits");
+      if(!stored_visits){
+        var program = $(
+            '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
+            '<a href = \''+ program_link + '\'>'+
             '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
             '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
-          '</a>'+
-        '</div>'
-      );
+            '</a>'+
+            '</div>'
+        );
+      }
+      else{
+        var parsed_visits = JSON.parse(stored_visits);
+        var program_id = programs[i].ProjectId.toString();
+        if($.inArray(program_id, parsed_visits)>=0) {
+          var program = $(
+            '<div class="program visited-program" id="program-'+ programs[i].ProjectId +'">'+
+              '<a href = \''+ program_link + '\' >'+
+                '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
+                '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
+                div +
+              '</a>'+
+            '</div>'
+          );
+        }
+        else{
+          var program = $(
+              '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
+              '<a href = \''+ program_link + '\'>'+
+              '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
+              '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
+              div +
+              '</a>'+
+              '</div>'
+          );
+        }
+      }
 
       $(self.container).find('.programs').append(program);
 
@@ -221,3 +251,6 @@ var ProgramLoader = function (container, url, column_max) {
     });
   };
 };
+
+
+
