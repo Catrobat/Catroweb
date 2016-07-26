@@ -277,11 +277,11 @@
         </div>
       {% endfor %}
 
-    <div class = "show-more">
-      <button id="show-more-button" {% if program_details.comments|length < 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
-    </div>
+      <div class = "show-more">
+        <button id="show-more-button" {% if program_details.comments|length < 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+      </div>
 
-  </div>
+    </div>
 
   </div>
   {% if isWebview() %}
