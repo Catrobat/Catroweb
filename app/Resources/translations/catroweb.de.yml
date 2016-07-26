@@ -54,6 +54,8 @@ programs:
   send: Senden
   delete: Löschen
   report: Melden
+  report_popup: Der Kommentar wurde erfolgreich gemeldet.
+  report_popup_header: Gemeldet
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |

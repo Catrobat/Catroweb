@@ -74,7 +74,9 @@ sonata_admin:
                     - catrowebadmin.block.programs.all
                     - catrowebadmin.block.programs.approve
                     - catrowebadmin.block.programs.reported
+                    - catrowebadmin.block.programs.comments
                     - catrowebadmin.block.programs.stats
+
 
             sonata.admin.group.featured:
                 label:           Special Programs
@@ -122,7 +124,6 @@ sonata_admin:
                     - catrowebadmin.block.tools.rudewords
                     - catrowebadmin.block.tools.gcm
                     - catrowebadmin.block.tools.mail
-                    - catrowebadmin.block.tools.reports
 
             sonata.admin.group.gamejams:
                 label:           GameJam

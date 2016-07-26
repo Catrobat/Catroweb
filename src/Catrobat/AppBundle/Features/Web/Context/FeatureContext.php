@@ -15,6 +15,7 @@ use Catrobat\AppBundle\Entity\StarterCategory;
 use Catrobat\AppBundle\Entity\Tag;
 use Catrobat\AppBundle\Entity\TagRepository;
 use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Entity\UserComment;
 use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Features\Helpers\SymfonySupport;
@@ -393,6 +394,34 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @Given /^there are admins:$/
+   */
+  public function thereAreAdmins(TableNode $table)
+  {
+    /**
+     * @var $user_manager UserManager
+     * @var $user User
+     */
+    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $users = $table->getHash();
+    $user = null;
+    for ($i = 0; $i < count($users); ++$i ) {
+      $user = $user_manager->createUser();
+      $user->setUsername($users[$i]['name']);
+      $user->setEmail($users[$i]['email']);
+      $user->setAdditionalEmail('');
+      $user->setPlainPassword($users[$i]['password']);
+      $user->setEnabled(true);
+      $user->setUploadToken($users[$i]['token']);
+      $user->setCountry('at');
+      $user->setSuperAdmin(true);
+      $user_manager->updateUser($user, false);
+    }
+    $user_manager->updateUser($user, true);
+  }
+
+
+  /**
    * @Given /^there are programs:$/
    */
   public function thereArePrograms(TableNode $table)
@@ -460,7 +489,42 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $em->flush();
   }
 
-    /**
+  /**
+   * @Given /^there are comments:$/
+   */
+  public function thereAreComments(TableNode $table)
+  {
+    /*
+    * @var $new_comment \Catrobat\AppBundle\Entity\UserComment
+    */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $comments = $table->getHash();
+
+    foreach($comments as $comment) {
+      $new_comment = new UserComment();
+
+      $new_comment->setUploadDate(new \DateTime($comment['upload_date'], new \DateTimeZone('UTC')));
+      $new_comment->setProgramId($comment['program_id']);
+      $new_comment->setUserId($comment['user_id']);
+      $new_comment->setUsername($comment['user_name']);
+      $new_comment->setIsReported(false);
+      $new_comment->setText($comment['text']);
+      $em->persist($new_comment);
+      $em->flush();
+    }
+  }
+
+  /**
+   * @Given /^I write "([^"]*)" in textbox$/
+   */
+  public function iWriteInTextbox($arg1)
+  {
+    $textarea = $this->getSession()->getPage()->find('css', '.msg');
+    $textarea->setValue($arg1);
+  }
+
+
+  /**
      * @Given /^there are tags:$/
      */
     public function thereAreTags(TableNode $table)
@@ -665,6 +729,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
                 break;
             case "forgot pw or username":
                 $button = $page->find("css", "#pw-request");
+                break;
+            case "send":
+                $button = $page->find("css",".post-button");
+                break;
+            case "show-more":
+                $button = $page->find("css", "#show-more-button");
+                break;
+            case "report-comment":
+                $button = $page->find("css", "#report-button-4");
+                break;
+            case "delete-comment":
+                $button = $page->find("css", "#delete-button-4");
                 break;
             default:
                 assertTrue(false);

@@ -221,28 +221,33 @@
     </div>
   </div>
 
+  <div id="comment-successfully-reported">
+    <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
+    <p>{{ 'programs.report_popup'|trans({}, 'catroweb') }}</p>
+    <button id="close-reported-popup">Ok</button>
+  </div>
 
   <div id="program-comments">
 
     <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
     <div id="user-comment-wrapper">
       <textarea class="msg" style="width: 100%; height: 100px"></textarea>
-      <button class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
+      <button id="post-button" class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
     </div>
 
     <div id="comments-wrapper">
       {% for comment in program_details.comments|slice(0, 10) %}
-        <div class = "single-comment">
+        <div id="comment-{{ comment.id }}" class = "single-comment">
           <div class = "avatar-wrapper">
             <div class = "img-avatar"></div>
           </div>
           <div class = "comment-payload-wrapper">
             <div class = "name-date-wrapper">
               <div class = "usr-name">{{ comment.username }}</div>
-              <div class = "date">&#8226;&#32; {{ comment.uploadDate.format('Y-m-d') }}</div>
-              <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+              <div class = "date"> {{ comment.uploadDate.format('Y-m-d') }}</div>
+              <button id="report-button-{{ comment.id }}" class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
               {% if  program_details.isAdmin  %}
-                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+                <button id="delete-button-{{ comment.id }}" class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
               {% endif %}
             </div>
             <div class = "comment-text">
@@ -251,18 +256,18 @@
           </div>
         </div>
       {% endfor %}
-      {% for comment in program_details.comments|slice(11, program_details.commentsLength) %}
-        <div class = "single-comment hidden">
+      {% for comment in program_details.comments|slice(10, program_details.comments|length) %}
+        <div id="comment-{{ comment.id }}" class = "single-comment hidden">
           <div class = "avatar-wrapper">
             <div class = "img-avatar"></div>
           </div>
           <div class = "comment-payload-wrapper">
             <div class = "name-date-wrapper">
               <div class = "usr-name">{{ comment.username }}</div>
-              <div class = "date">'&#8226;&#32;' {{ comment.uploadDate.format('Y-m-d') }}</div>
-              <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+              <div class = "date"> {{ comment.uploadDate.format('Y-m-d') }}</div>
+              <button id="report-button-{{ comment.id }}" class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
               {% if  program_details.isAdmin  %}
-                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+                <button id="delete-button-{{ comment.id }}" class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
               {% endif %}
             </div>
             <div class = "comment-text">
@@ -272,7 +277,7 @@
         </div>
       {% endfor %}
       <div class = "show-more">
-        <button class="show-more-button">{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+        <button id="show-more-button" {% if program_details.comments|length < 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
       </div>
     </div>
   </div>
@@ -296,15 +301,21 @@
 
     counter = 10;
 
-    $(document).on("click", ".show-more-button", function() {
-      counter += 10;
+    $(document).on("click", "#show-more-button", function() {
 
-      for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
+      counter += 10;
+      for(var i = counter - 10; i < counter; i++)
       {
         $('.single-comment.hidden').first().removeClass("hidden");
       }
+      if(!$('.single-comment.hidden').length){
+        $('.show-more').hide();
+      }
     });
 
+    $(document).on("click", "#close-reported-popup", function() {
+      $('#comment-successfully-reported').hide();
+    });
 
     $(document).on("click", ".delete-button", function() {
       var pId = {{ program_details.id }};
@@ -320,7 +331,7 @@
             alert("You have no admin rights. Please Log in as an Admin");
           }
           else {
-            $('#comments-wrapper').load(' #comments-wrapper');
+            $('#comments-wrapper').load('#comments-wrapper');
             $('.msg').val("");
           }
         },
@@ -362,11 +373,10 @@
           if (data == "log_in")
             window.location.href = "../login";
           else {
-            alert(data);
+            $('#comment-successfully-reported').show();
           }
         },
         error: function(data) {
-          //alert(data);
           alert("something went terribly wrong");
         }});
     });

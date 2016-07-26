@@ -54,6 +54,8 @@ programs:
   send: Send
   delete: Delete
   report: Report
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
