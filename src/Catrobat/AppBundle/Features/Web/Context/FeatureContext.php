@@ -574,10 +574,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $this->assertSession()->elementExists('css', $arg1);
 
       $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click();
+          ->getSession()
+          ->getPage()
+          ->find('css', $arg1)
+          ->click();
   }
 
   /**
@@ -1086,9 +1086,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^I click on the propgram popup button$/
+   * @Then /^I click on the program popup button$/
    */
-  public function iClickOnThePropgramPopupButton()
+  public function iClickOnTheProgramPopupButton()
   {
     $this->iClick("#btn-close-popup");
   }

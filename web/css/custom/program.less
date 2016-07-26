@@ -217,7 +217,7 @@ table td:nth-child(1) {
   background-color: #05222a;
   left: 50%;
   top: 50%;
-  border: 3px solid #17A5B8;
+  border: 3px solid @default-border-color;
   border-radius: 10px;
   padding: 20px 5px 20px 5px;
   margin: -125px 0 0 -160px;
@@ -249,14 +249,14 @@ table td:nth-child(1) {
 }
 
 #program-comments {
-  border-top: 1px solid #17a5b8;
+  border-top: 1px solid @default-border-color;
 }
 
 .img-avatar {
 }
 
-.user-comment-wrapper {
-  padding-bottom: 40px;
+#user-comment-wrapper {
+  padding-bottom: 90px;
   border-bottom: 1px solid #17a5b8;
 }
 
@@ -295,7 +295,7 @@ table td:nth-child(1) {
 .single-comment {
   padding-bottom: 10px;
   padding-top: 10px;
-  border-bottom: 1px solid #17a5b8;
+  border-bottom: 1px solid @default-border-color;
   &.hidden{
     display: none;
   }
@@ -335,7 +335,7 @@ table td:nth-child(1) {
   width: 320px;
   height: 150px;
   background-color: #05222a;
-  border: 3px solid #17A5B8;
+  border: 3px solid @default-border-color;
   border-radius: 10px;
   text-align: center;
   font-size: 15px;

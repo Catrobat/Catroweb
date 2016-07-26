@@ -271,15 +271,18 @@
               {% endif %}
             </div>
             <div class = "comment-text">
-              <p>{{ comment.text}}</p>
+              <p>{{ comment.text }}</p>
             </div>
           </div>
         </div>
       {% endfor %}
+
       <div class = "show-more">
         <button id="show-more-button" {% if program_details.comments|length < 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
       </div>
+
     </div>
+
   </div>
   {% if isWebview() %}
     {% include ':social:social_like_program_bottom.html.twig' %}
@@ -298,11 +301,25 @@
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
 
+    var download_href = document.getElementById("url-download").href;
+
+    $(document).on("click", "#url-download", function() {
+      var link = document.getElementById("url-download");
+      if(link.href != 'javascript:void(0)') {
+        link.href = 'javascript:void(0)';
+
+        setTimeout(function() {
+          link.href = download_href;
+        }, 5000);
+
+        window.location = download_href;
+      }
+      return false;
+    });
 
     counter = 10;
 
     $(document).on("click", "#show-more-button", function() {
-
       counter += 10;
       for(var i = counter - 10; i < counter; i++)
       {
@@ -331,7 +348,7 @@
             alert("You have no admin rights. Please Log in as an Admin");
           }
           else {
-            $('#comments-wrapper').load('#comments-wrapper');
+            $('#comments-wrapper').load(' #comments-wrapper');
             $('.msg').val("");
           }
         },
@@ -343,6 +360,9 @@
 
     $(document).on("click", ".post-button", function() {
       var msg = $('.msg').val();
+      if(msg.length == 0) {
+        return;
+      }
       var pId = {{ program_details.id }};
       $.ajax({
         url: "../comment",
