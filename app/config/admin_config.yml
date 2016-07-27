@@ -133,6 +133,13 @@ sonata_admin:
                     - catrowebadmin.block.gamejam
                     - catrowebadmin.block.program.snapshots
 
+            sonata.admin.group.extensions:
+                label:           Extensions
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-external-link"></i>'
+                items:
+                    - catrowebadmin.block.extensions.all
+
     security:
         handler: sonata.admin.security.handler.acl
         # acl security information

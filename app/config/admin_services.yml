@@ -144,6 +144,11 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Snapshots, icon: '<i class="fa fa-cogs"></i>' }
         arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\Snapshot]
 
+      catrowebadmin.block.extensions.all:
+        class: Catrobat\AppBundle\Admin\AllExtensionsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: All Extensions }
+        arguments: [null, Catrobat\AppBundle\Entity\Extension, null]
 
 # =========================== GameJam ===========================
 
