@@ -51,14 +51,12 @@
 
     $(document).on("click", ".program", function() {
       var clicked_program_id = this.id.replace("program-", "");
-      this.style.opacity = "0.6";
-      this.childNodes[0].style.color = "#2a85a0";
+      this.className += " visited-program";
       var stored_visits = sessionStorage.getItem("visits");
 
       if(!stored_visits){
         var new_visits = [clicked_program_id];
         sessionStorage.setItem("visits", JSON.stringify(new_visits));
-        alert(new_visits);
       }
       else{
         var parsed_visits = JSON.parse(stored_visits);
@@ -66,7 +64,6 @@
           parsed_visits.push(clicked_program_id);
           sessionStorage.setItem("visits", JSON.stringify(parsed_visits));
         }
-        alert(parsed_visits);
       }
     });
 

@@ -120,8 +120,8 @@ var ProgramLoader = function (container, url, column_max) {
         var program_id = programs[i].ProjectId.toString();
         if($.inArray(program_id, parsed_visits)>=0) {
           var program = $(
-            '<div class="program" id="program-'+ programs[i].ProjectId +'" style="opacity: 0.6">'+
-              '<a href = \''+ program_link + '\' style="color: #2a85a0">'+
+            '<div class="program visited-program" id="program-'+ programs[i].ProjectId +'">'+
+              '<a href = \''+ program_link + '\' >'+
                 '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
                 '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
                 div +
@@ -131,8 +131,8 @@ var ProgramLoader = function (container, url, column_max) {
         }
         else{
           var program = $(
-              '<div class="program" id="program-'+ programs[i].ProjectId +'" style="opacity: 0.6">'+
-              '<a href = \''+ program_link + '\' style="color: #2a85a0">'+
+              '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
+              '<a href = \''+ program_link + '\'>'+
               '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
               '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
               div +

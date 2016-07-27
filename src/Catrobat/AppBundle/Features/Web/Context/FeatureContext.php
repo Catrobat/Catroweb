@@ -688,7 +688,20 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
      }
 
-    /**
+  /**
+   * @Then /^I should see marked "([^"]*)"$/
+   */
+  public function iShouldSeeMarked($arg1)
+  {
+    $page = $this->getSession()->getPage();
+    $program = $page->find("css",$arg1);
+    if(!$program->getOuterHtml()->hasClass('visited-program')){
+      assertTrue(false);
+    }
+  }
+
+
+  /**
      * @When /^I click Facebook login link$/
      */
     public function iClickFacebookLoginLink()
