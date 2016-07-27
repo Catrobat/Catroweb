@@ -695,7 +695,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $page = $this->getSession()->getPage();
     $program = $page->find("css",$arg1);
-    if(!$program->getOuterHtml()->hasClass('visited-program')){
+    if(!$program->hasClass('visited-program')){
       assertTrue(false);
     }
   }
