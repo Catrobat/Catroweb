@@ -15,7 +15,7 @@ noDescription: Geen beschrijving beschikbaar.
 country: Land
 loginText: inloggen
 privacyPolicy: Privacybeleid
-imprint: Imprint
+imprint: 'Contact & disclaimer'
 somethingWentWrong: Oeps, er is iets fout gegaan.
 pleaseTryAgain: Probeer het opnieuw!
 oldVersionError: Gelieve bij te werken tot de nieuwste versie van Pocket Code!
@@ -23,6 +23,7 @@ more: meer
 less: minder
 ok: OK
 clickToDownloadProgram: 'Om het voorbeeldprogramma te downloaden klik %link_start% hier %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Uitgelicht
   newest: "Nieuwste programma's"
@@ -53,6 +54,8 @@ programs:
   send: Versturen
   delete: verwijderen
   report: Rapporteren
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Uw Catrobat wachtwoord herstellen
   message: |
@@ -79,12 +82,12 @@ profile:
     passwordTooLong: 'Het nieuwe wachtwoord kan maar maximaal %length% tekens lang zijn.'
     passwordIsUsername: Het wachtwoord moet verschillen van de gebruikersnaam.
     emailNotValid: Dit E-mailadres is niet geldig.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
+    emailMissing: Fout tijdens het bijwerken van dit e-mailadres. U moet ten minste één gevalideerd e-mailadres hebben.
+    emailExists: Dit e-mailadres bestaat al.
     submitSuccess: opgeslagen!
   reallyDeleteProgram: Wilt u echt uw programma verwijderen
   programsOf: "Programma's van"
-  changePicture: Change picture
+  changePicture: Afbeelding wijzigen
   avatar:
     pictureTooLarge: Jouw gekozen afbeelding is te groot, gelieve geen afbeeldingen te gebruiken groter dan 5mb.
     uploadError: Sorry, er is een probleem opgetreden tijden het uploaden!
@@ -97,7 +100,7 @@ licenseToPlay:
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: 'Leer meer over de gebruiksvoorwaarden van Catrobats online gemeenschap op %link-termsOfUse%.'
   list1:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
@@ -112,17 +115,17 @@ termsOfUse:
   text1: "Als deel uitmakend van de Catrobat gemeenschap, deelt u programma's en ideeën met andere mensen:"
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text4: 'Ons geschenk aan u:'
+  text5: 'Onze algemene gebruiksvoorwaarden:'
   list1:
     item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item2: van alle leeftijden (van jonge kinderen tot tieners en grootouders)
+    item3: met alle niveaus van ervaring
   list2:
     item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
     item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
+    item3: Wees eerlijk. Doe je niet voor als iemand anders en probeer de gemeenschap niet op andere manieren te bedriegen.
+    item4: Houd persoonlijke gegevens privaat. Maak je e-mailadres, telefoonnummer of andere contactgegevens niet bekend.
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
     item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
@@ -144,31 +147,31 @@ termsOfUse:
   version: Versie 1.3, 4 Maart 2014
 help:
   stepByStep:
-    title: Step-by-Step Intro
-    start: 'Starting position:'
+    title: Stapsgewijze Intro
+    start: 'Startpositie:'
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Make a new program
+      title: Maak een nieuw programma
       detail:
-        text1: 'Tap on "New".'
+        text1: 'Tik op "Nieuw".'
         text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
     step2:
-      title: Create a new object
+      title: Maak een nieuw object
       detail:
-        text1: 'Tap:'
+        text1: 'Tik:'
         text2: Choose the source of the first look of your new object.
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Draw a new look.
+        special1: Teken een nieuwe look.
         special2: Choose from gallery.
         special3: Take a picture.
     step3:
       title: Start Moving
       detail:
-        text1: 'Tap:'
+        text1: 'Tik:'
         text2: 'The first brick we use is out of the category "Motion".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
         text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
@@ -182,18 +185,18 @@ help:
         text2: 'Snap the brick underneath the "Glide" - brick.'
         text3: Tap into the dropdown field to create a new look.
         text4: Choose the source of the image like before.
-        text5: Now you have to select the new image.
+        text5: Nu moet je de nieuwe afbeelding selecteren.
         text6: Tap play to see the behaviour on the stage.
     step5:
       title: Zeg
-      description: Now you will find out how to make an object talk.
+      description: Nu ga je leren hoe je een object kan doen praten.
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
         text3: Tap play to see the behaviour on the stage.
     step6:
-      title: Again and again
-      description: This step shows you how to repeat behaviour of objects.
+      title: Steeds opnieuw
+      description: Deze stap toont hoe je het gedrag van objecten kan herhalen.
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
@@ -208,44 +211,44 @@ help:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
+        text4: Nu heb je dit script.
         text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
     step8:
-      title: Copy, delete or edit a brick
+      title: Kopieer, verwijder of bewerk een bouwsteen
       detail:
         text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
     step9:
       title: Navigation in the app
       detail:
         text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
+        text2: Ga één scherm terug om het overzicht van je objecten te bereiken. Van hieruit kan je dan de scripts, het uitzicht en de geluiden van je object bereiken. Hier kan je ze herbenoemen, kopiëren, bewerken of verwijderen.
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
-      title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      title: Wijzig de achtergrond
+      description: Dit is het overzicht van je objecten en de achtergrond van het programma.
       detail:
-        text1: The background is like an object, but you just can have on background.
+        text1: De achtergrond is een soort object, maar je kan slechts één achtergrondobject hebben.
         text2: You can add scripts, sounds and look in the same way to the background object.
     step11:
-      title: Main Menu
+      title: Hoofdmenu
       description: Use the Android Back Button to get to this screen.
       detail:
         text1: Continue with your currently opened program.
-        text2: Add a new program.
-        text3: See all your local programs.
+        text2: Voeg een nieuw programma toe.
+        text3: "Bekijk al je lokale programma's."
         text4: Go to the help site and discuss with other users.
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
     title: Tutorials
     description1: These tutorials show you how to use effective tricks in Pocket Code.
-    getReady: 'Get Ready:'
-    tryCode: 'Try this code:'
-    doIt: 'Do it:'
+    getReady: 'Maak je klaar:'
+    tryCode: 'Probeer deze code:'
+    doIt: 'Doe het:'
     tip: 'Extra Tip:'
     card1:
-      title: Change Size
-      description: Change the size of an object.
+      title: Wijzig Formaat
+      description: Wijzig het formaat van een object.
       one: Add the object of which you would like to change the size, e.g. Animal.
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
@@ -410,7 +413,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Dit e-mailadres bestaat al.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.

@@ -23,6 +23,7 @@ more: több
 less: kevesebb
 ok: OK
 clickToDownloadProgram: 'A példaprogram letöltéséhez kattints %link_start% ide %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Kiemelt
   newest: Legújabb programok
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Törlés
   report: Jelentés
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Catrobat jelszó emlékeztető
   message: 'Kedves %username%. Jelszó emlékeztetőt kértél a %appplication_url% alkalmazáshoz, mert elfelejtetted a jelszavad. Amennyiben nem te kezdeményezted a jelszó emlékeztető küldését, kérlek hagyd ezt az üzenetet figyelmen kívül. Az üzenet 24 órán belül lejár. A jelszavad frissítéséhez látogasd meg a következő oldalt: %confirmationUrl% Felhasználóneveddel és jelszavaddal elérheted a %appplication_url% közösséget. Ehhez látogasd meg a következő oldalt: %loginPage% Profil adataid módosításához használd: %profilePage% Best regards, A Catrobat Csapat.'

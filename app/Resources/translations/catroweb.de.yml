@@ -23,7 +23,7 @@ more: mehr
 less: weniger
 ok: OK
 clickToDownloadProgram: 'Um das Beispielprogramm herunterzuladen klicke %link_start% hier %link_end%.'
-registrationError: 'Benutzername oder Email Adresse bereits vergeben.'
+registrationError: Benutzername oder e-Mail-Adresse bereits verwendet.
 programs:
   featured: Empfohlen
   newest: Neueste Programme

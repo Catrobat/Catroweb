@@ -23,6 +23,7 @@ more: المزيد
 less: أقل
 ok: موافق
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: خصائص
   newest: أحدث البرامج
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: حذف
   report: تقرير
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |

@@ -23,6 +23,7 @@ more: hơn/thêm/nhiều hơn
 less: ít hơn
 ok: Đồng ý
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Nổi bật
   newest: Chương trình mới nhất
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Xóa
   report: Báo cáo
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
