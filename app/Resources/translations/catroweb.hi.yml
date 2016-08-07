@@ -23,6 +23,7 @@ more: अधिक
 less: कम
 ok: ठीक है।
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: विशेषताएं
   newest: सबसे नये प्रोग्राम
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: मिटायें
   report: विवरण दे
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |

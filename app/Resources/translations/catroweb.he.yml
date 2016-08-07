@@ -23,6 +23,7 @@ more: יותר
 less: פחות
 ok: אשר
 clickToDownloadProgram: 'כדי להוריד את תוכנית ההדגמה %link_start% לחץ %link_end% כאן.'
+registrationError: Username or email address already in use.
 programs:
   featured: Featured
   newest: תוכניות חדשות
@@ -53,6 +54,8 @@ programs:
   send: שלח
   delete: מחק
   report: דיווח
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: שחזור סיסמה שלך
   message: '%username% יקר. ביקשת לאפס את הסיסמה שלך על %appplication_url% כי שכחת את הסיסמה שלך. אם לא ביקשת זאת, בבקשה תתעלם מזה הבקשה תפוג ותהיה חסר תועלת תוך 24 שעות. כדי לאפס את הסיסמה שלך וליצור דבר חדש, אנא בקרו בדף הבא: %confirmationUrl% באפשרותך להשתמש שם המשתמש שלך והסיסמה שלך בכל עת כדי לגשת הקהילה %appplication_url%. כדי לעשות זאת, פשוט לבקר בדף הבא: %loginPage% כדי לערוך את פרטי הפרופיל שלך, לעבור לדף הזה: %profilePage% בברכה, צוות Catrobat שלך.'
@@ -211,7 +214,7 @@ help:
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
       title: שנה את הרקע
-      description: This is the overview of your objects and the background depends to one program.
+      description: "This is the overview of your objects and your program's background."
       detail:
         text1: The background is like an object, but you just can have on background.
         text2: באפשרותך להוסיף תסריטים, צלילים, ומראה באופן זהה לזה של אובייקט הרקע.

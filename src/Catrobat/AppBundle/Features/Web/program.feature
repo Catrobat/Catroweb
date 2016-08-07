@@ -75,7 +75,7 @@ Feature: As a visitor I want to see a program page
       And I see not the "update app" popup
       Then I click the program image
       And I see the "update app" popup
-      Then I click on the propgram popup button
+      Then I click on the program popup button
       And I see not the "update app" popup
 
     Scenario: Increasing download counter after apk download

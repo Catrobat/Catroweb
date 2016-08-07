@@ -23,6 +23,7 @@ more: mais
 less: menos
 ok: OK
 clickToDownloadProgram: 'Para baixar o programa de exemplo clique %link_start% aqui %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Em Destaque
   newest: Programas mais recentes
@@ -48,11 +49,13 @@ programs:
   updateAppText: Por favor, atualize o seu aplicativo para a versão mais recente para poder baixar este programa.
   btnClosePopup: Ok
   checkout_this_program: Confira este programa do Catrobat
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: Mostrar mais
+  comments: Comentários
+  send: Enviar
   delete: Apagar
   report: Denunciar
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -106,8 +109,8 @@ licenseToPlay:
   version: Versão 1.1, 2 de abril de 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: Área dos Professores
+    description: Esta área pode ser usada por Professores.
 termsOfUse:
   title: Termos de Uso
   headline: Bem-vindo à comunidade Catrobat!
@@ -506,8 +509,8 @@ gamejam:
     text: |
       Mas por que não criar o seu próprio programa?!
       Faça parte do #AliceGameJam
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: Marcações
+extenstion-text: Extensões
 tags:
   constant:
     tag1: Jogos
@@ -518,13 +521,13 @@ tags:
     tag6: Experimental
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    diskMaintenance: Manutenção de disco
+    noRemovableObjects: Não há objetos removíveis disponíveis.
+    manualBackups: Backups manuais
+    noRemovableBackupObjects: Não há arquivos de backup removíveis neste servidor.
+    btnCreateBackup: Criar backup
+    btnDownloadBackup: Baixar backup
+    btnRestoreBackup: Restaurar backup
+    btnDeleteBackup: Excluir backup
+    createBackupConfirmationTitle: Criar arquivo de backup
+    createBackupConfirmationText: Este processo pode demorar um pouco. A página recarregará logo após!

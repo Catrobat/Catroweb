@@ -1,50 +1,50 @@
 ---
-localLanguage: انگريزي
-username: يُوزرنانءُ
-password: ڳجھو لفظ
-aboutPocketCode: پاڪيٽ ڪوڊ جي باري ۾
-tutorials: سبق
-googlePlay: گوگل پلي
-passwordsNoMatch: ڳجھو لفظ غيردرست آهي.
-error: چُڪَ
-cancel: رد ڪريو
-report: رپورٽ درج ڪريو
-download: اتاريو
-description: تشريح
-noDescription: ڪا بہ تشريح دستياب نہ آهي.
-country: ملڪ
-loginText: لاگ اِن
-privacyPolicy: ذاتياتي پاليسي
-imprint: نشان لڳايو
-somethingWentWrong: اوه... ڪجھ ڳڙ ٻڙ ٿي وئي آهي.
-pleaseTryAgain: ٻيهر ڪوشش ڪيو!
-oldVersionError: مهرباني ڪري تازو ترين پاڪيٽ ڪوڊ کي اپڊيٽ ڪيو!
-more: وڌيڪ
-less: گھٽ
-ok: اوڪي
+localLanguage: English
+username: Username
+password: Password
+aboutPocketCode: About Pocket Code
+tutorials: Tutorials
+googlePlay: Google Play
+passwordsNoMatch: "The passwords didn't match."
+error: തെറ്റ്
+cancel: വേണ്ടെന്നു വയ്ക്കുക
+report: Report
+download: Download as program
+description: Description
+noDescription: No description available.
+country: Country
+loginText: login
+privacyPolicy: Privacy Policy
+imprint: Imprint
+somethingWentWrong: Ooooops something went wrong.
+pleaseTryAgain: Please try again!
+oldVersionError: Please update to the newest Pocket Code version!
+more: more
+less: less
+ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: Username or email address already in use.
 programs:
-  featured: خاص
-  newest: تازا ترين پروگرام
+  featured: Featured
+  newest: Newest programs
   most:
-    viewed: گھڻي ۾ گھڻو ڏٺل
-    downloaded: گھڻي ۾ گھڻو اتاريل
+    viewed: Most viewed
+    downloaded: Most downloaded
   random: Random Programs
   related: Related Programs
-  downloads: '%downloads% اُتارُون'
+  downloads: '%downloads% downloads'
   sample: Example Programs
-  views: '%views% ڏيٺُون'
+  views: '%views% views'
   submitted: Submitted Programs
   uploaded: Uploaded Programs
-  reportAsInappropriate: نامناسب هوڻ جي رپورٽ درج ڪريو
-  languageVersion: 'ڪيٽروبيٽ جي زبان جو ورزين: %languageVersion%'
-  reportLoginText: 'هن پروگرام کي نامناسب رپورٽ ڪرڻ لاءِ  %login% ٿيو.'
-  reportDialogHeader: توهان ان پروگرام کي نامناسب ڇو ٿا ڀانيو؟
-  reportDialogReason: سبب ڄاڻايو
-  reportOwnProgram: توهان پنهنجي ئي پروگرام تي جھنڊي لڳائي نہ ٿا سگھو.
-  reportAlready: ان پروگرام تي توهان اڳ ۾ ئي نامناسب هجڻ جي جھنڊي لڳائي چڪا آهيو.
-  reportDone: توهان ان پروگرام لاءِ نامناسب هجڻ جي رپورٽ درج ڪرائي ڇڏي!
+  reportAsInappropriate: Report as inappropriate
+  languageVersion: 'Catrobat Language version: %languageVersion%'
+  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  reportDialogHeader: Why do you think this program is inappropriate?
+  reportDialogReason: Enter a reason
+  reportOwnProgram: You cannot flag your own program.
+  reportAlready: "You've already flagged this program as inappropriate."
+  reportDone: You reported this program as inappropriate!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
@@ -52,12 +52,12 @@ programs:
   show_more: Show More
   comments: Comments
   send: Send
-  delete: ختم ڪيو
-  report: رپورٽ درج ڪريو
+  delete: ഒഴിവാക്കുക
+  report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
 passwordRecovery:
-  subject: اوهان جي ڪيٽروبيٽ پاسورڊ جي واپسي
+  subject: Your Catrobat Password Recovery
   message: |
     Dear %username%.
     
@@ -71,60 +71,60 @@ passwordRecovery:
     Best regards,
     Your Catrobat Team.
 profile:
-  saveChanges: تبديليون سانڍيو
-  newPass: نئون ڳجھو لفظ
-  repeatPass: ڳجھو لفظ ورجايو
-  firstEmail: منهنجي پهرين برق ٽپال
-  secondEmail: منهنجي ٻين برق ٽپال
-  myPrograms: منهنجا پروگرام
+  saveChanges: save changes
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: My first email
+  secondEmail: My second email
+  myPrograms: My programs
   form:
-    passwordTooShort: 'نئون ڳجھو لفظ گھٽ ۾ گھٽ بہ %length% اکر ڊگھو گھرجي.'
-    passwordTooLong: 'نئون ڳجھو لفظ وڌ ۾ وڌ %length% اکر ڊگھو ٿي سگھي ٿو.'
-    passwordIsUsername: ڳجھو لفظ توهان جي يوزرنانءَ کان مختلف هوڻ گھرجي.
-    emailNotValid: اهو برق ٽپال پتو ڪار ڪونهي.
+    passwordTooShort: 'The new password must have at least %length% characters.'
+    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordIsUsername: The password must differ from the username.
+    emailNotValid: This email address is not valid.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: اهو برق ٽپال پتو اڳي ئي وجود رکي ٿو.
-    submitSuccess: سانڍجي ويو!
-  reallyDeleteProgram: ڇا توهان واقعي پنهنجو پروگرام ڊاهڻ گھرو ٿا؟
-  programsOf: پروگرام از
-  changePicture: تصوير بدلايو
+    emailExists: This email address already exists.
+    submitSuccess: saved!
+  reallyDeleteProgram: Do you really want to delete your program
+  programsOf: Programs of
+  changePicture: Change picture
   avatar:
-    pictureTooLarge: توهان جي چونڊيل تصوير هيڪاندي وڏي آهي، مهرباني ڪري 5 ميگا ٻاٽڻ کان وڏا عڪس نہ استعمال ڪريو.
-    uploadError: معاف ڪندا، فائيل چاڙهيندي ڪو مسئلو درپيش اچي ويو!
-    noSupport: عڪس جو اهو فارميٽ ڪار نہ آهي، مهرباني ڪري ڪو ٻيو عڪس آزمايو.
+    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
+    uploadError: Sorry, there was a problem during the upload!
+    noSupport: This image type is not supported, please try another image.
 licenseToPlay:
   link: License to play
   title: 'License to play - Give credit and share'
-  text1: ايئن ڀانيو تہ هر ڪيٽروبيٽ پروگرام هڪڙو ڪيڪ آهي، هڪ تمام خاص ڪيڪ جنهن سان ان جي ترڪيب (پروگرامڱ بلاڪس) بہ گڏ آهي. ڪيٽروبيٽ نيات جا سمورا رڪن پنهنجا ڪيڪ ۽ انهن جون ترڪيبون ونڊيندا. ان جو مطلب تہ توهان نہ رڳو ڪيڪن جا مزا وٺندا، بلڪہ انهن کي تيار ڪرڻ جو طريقو پڻ سکندا!
+  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'آن لائين ڪيٽروبيٽ نيات جي استعمال جي شرطن شروطن بابت وڌيڪ ڄاڻو لاءِ  %link-termsOfUse% گھمو.'
+  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
-    item1: پنهنجو ڪيڪ بمع ترڪيب ونڊيو
-    item2: انهن کي مڃتا ڏيو، جن توهان کي اتساهيو
-  version: مسودو 1.1، اپريل 2، 2013ع
+    item1: share your cakes along with the recipe
+    item2: give credit to those who inspired you
+  version: Version 1.1, 2 April 2013
 teachers:
   login:
     title: Teachers area
     description: This area can be used by teachers.
 termsOfUse:
-  title: استعمال جا شرط شروط
-  headline: ڪيٽروبيٽ نيات ۾ ڀليڪار!
-  text1: 'ڪيٽروبيٽ نيات جي حصي طور، توهان هيٺين سان پنهنجا سٽاوَ ۽ خيال ونڊي رهيا آهيو:'
-  text2: 'هن نيات کي امدادي هنڌ بنائڻ لاءِ اسان کي توهان جي مدد جي ضرورت آهي. توهان هن ريت اسان جي مدد ڪري سگھو ٿا:'
+  title: Terms of Use
+  headline: Welcome to the Catrobat Community!
+  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
+  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'توهان کي اسان جو تحفو:'
-  text5: 'استعمال ۽ خدمات لاءِ اسان جا شرط:'
+  text4: 'Our gift to you:'
+  text5: 'Our Terms of Use and Service:'
   list1:
-    item1: ڪيترن ئي مختلف ملڪن ۽ ثقافتن مان
-    item2: هر عمر (نوجوان ٻارن کان ڳڀرو تائين ۽ ڏاڏن پڙڏاڏن تائين)
-    item3: هر سطح جو تجربو
+    item1: from many different countries and cultures
+    item2: of all ages (from young children to teens and grandparents)
+    item3: with all levels of experience
   list2:
     item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: 'مڃتا ڏيو. ٻين ماڻهن جي سٽاون کي ترميمڻ لاءِ توهان آزاد آهيو - رڳو ايترو ضرور ڪريو تہ کين مڃتا ڏيو. هڪڙي جاءِ توهان جي سٽاوَ جي تشريخ آهي، جتي توهان کين مڃتا ڏئي سگھو ٿا. مهرباني ڪري هن ٽٻڪن سندي فهرست جي هيٺان ٻين جا سٽاوَ ترميمڻ بابت تفصيل پڙهي وٺو.'
-    item3: ديانتداريءَ جو مظاهرو ڪندا. مهرباني ڪري پنهنجو پاڻ کي ڪو ٻيو ظاهر ڪري پنهنجي نيات سان اٽڪلون ڪرڻ جي ڪوشش نہ ڪندا.
+    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
+    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
@@ -240,7 +240,7 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: سبق
+    title: Tutorials
     description1: These tutorials show you how to use effective tricks in Pocket Code.
     getReady: 'Get Ready:'
     tryCode: 'Try this code:'
@@ -323,7 +323,7 @@ help:
     text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
     title1: Registration
     text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: اپلوڊ ڪيو
+    title2: Upload
     text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
     title3: Search for your program
     text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
@@ -374,7 +374,7 @@ oauth:
 search:
   dotdotdot: Search...
   search: Search
-  results: ڳوليل نتيجا
+  results: Search Results
   resultcount: 'Your search returned %count% results'
 menu:
   profile: My Profile
@@ -413,7 +413,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: اهو برق ٽپال پتو اڳي ئي وجود رکي ٿو.
+    exists: This email address already exists.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.

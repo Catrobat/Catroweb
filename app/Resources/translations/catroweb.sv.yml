@@ -23,6 +23,7 @@ more: mer
 less: mindre
 ok: Okej
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Dagens
   newest: Nyaste program
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Radera
   report: Rapportera
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |

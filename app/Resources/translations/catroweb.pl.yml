@@ -1,5 +1,5 @@
 ---
-localLanguage: English
+localLanguage: Polish
 username: Nazwa użytkownika
 password: Hasło
 aboutPocketCode: O Pocket Code
@@ -16,21 +16,22 @@ country: Kraj
 loginText: login
 privacyPolicy: Polityka prywatności
 imprint: Stopka
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: Ooooops coś poszło nie tak.
+pleaseTryAgain: Spróbuj ponownie!
+oldVersionError: Zaktualizuj do najnowszej wersji Pocket code!
 more: więcej
 less: mniej
 ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Aby pobrać przykładowy program kliknij %link_start% tutaj %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Polecane
   newest: Najnowsze programy
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
-  random: Random Programs
-  related: Related Programs
+  random: Losowe programy
+  related: Propozycje programów
   downloads: '%downloads% downloads'
   sample: Example Programs
   views: '%views% views'
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Usuń
   report: Zgłoś
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -292,7 +295,7 @@ help:
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.
     card10:
-      title: Show variable
+      title: Pokaż zmienną
       description: Show the value of a variable.
       one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
       two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.

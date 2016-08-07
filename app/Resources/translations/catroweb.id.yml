@@ -23,6 +23,7 @@ more: lebih
 less: kurang
 ok: Oke
 clickToDownloadProgram: 'Untuk mengunduh contoh program klik %link_start% disini %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Fitur
   newest: Program terbaru
@@ -53,6 +54,8 @@ programs:
   send: Kirim
   delete: Hapus
   report: Laporkan
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |

@@ -23,6 +23,7 @@ more: 詳細
 less: 少ない
 ok: わかりました
 clickToDownloadProgram: 'サンプルのプログラムをダウンロードするには、%link_start% ここ %link_end% をクリックしてください。'
+registrationError: Username or email address already in use.
 programs:
   featured: おすすめ
   newest: 最新のプログラム
@@ -53,6 +54,8 @@ programs:
   send: 送信
   delete: 削除
   report: 不適切として報告する
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
