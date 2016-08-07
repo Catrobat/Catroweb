@@ -23,6 +23,7 @@ more: več
 less: manj
 ok: v redu
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Na ogled
   newest: Najnovejši program
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Izbriši
   report: Prijavi
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Vaše geslo za Catrobat
   message: |

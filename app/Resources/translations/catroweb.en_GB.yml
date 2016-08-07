@@ -23,7 +23,7 @@ more: more
 less: less
 ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
+registrationError: Username or email address already in use.
 programs:
   featured: Featured
   newest: Newest programs
@@ -225,7 +225,7 @@ help:
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
       title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      description: This is the overview of your objects and the background is also part of the program.
       detail:
         text1: The background is like an object, but you just can have on background.
         text2: You can add scripts, sounds and look in the same way to the background object.

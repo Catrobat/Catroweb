@@ -23,6 +23,7 @@ more: เพิ่มเติม
 less: ย่อ
 ok: ตกลง
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: รายการเด่น
   newest: โปรแกรมใหม่ล่าสุด
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: ลบ
   report: รายงาน
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: การกู้คืนรหัสผ่าน Catrobat ของคุณ
   message: |

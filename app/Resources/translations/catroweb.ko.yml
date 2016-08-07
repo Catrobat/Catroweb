@@ -23,6 +23,7 @@ more: 더 많은
 less: 적은
 ok: 확인
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
+registrationError: Username or email address already in use.
 programs:
   featured: 추천
   newest: 최신 프로그램
@@ -53,6 +54,8 @@ programs:
   send: 보내기
   delete: 삭제
   report: 보고서
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |

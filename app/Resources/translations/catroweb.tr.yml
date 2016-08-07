@@ -23,6 +23,7 @@ more: daha fazla
 less: daha az
 ok: Tamam
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Seçme
   newest: En yeni programlar
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Sil
   report: Rapor et
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Catrobat şifre kurtarma
   message: |
@@ -225,7 +228,7 @@ help:
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
       title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      description: "This is the overview of your objects and your program's background."
       detail:
         text1: Arka plan, bir nesne gibi olmakla birlikte, sadece arka planda olabilir.
         text2: You can add scripts, sounds and look in the same way to the background object.

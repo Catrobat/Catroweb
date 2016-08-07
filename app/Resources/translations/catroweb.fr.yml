@@ -23,6 +23,7 @@ more: plus
 less: moins
 ok: OK
 clickToDownloadProgram: "Pour télécharger le programme d'exemple, cliquez %link_start% ici %link_end%."
+registrationError: Username or email address already in use.
 programs:
   featured: "A l'affiche"
   newest: Nouveaux programmes
@@ -53,6 +54,8 @@ programs:
   send: Envoyer
   delete: Supprimer
   report: Signaler
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -222,7 +225,7 @@ help:
         text3: "Appuyer encore une fois sur le bouton retour Android pour ouvrir l'aperçu des objets et de l'arrière plan."
     step10:
       title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      description: "This is the overview of your objects and your program's background."
       detail:
         text1: "L'arrière-plan est comme un objet mais il n'y a qu'un seul arrière-plan."
         text2: "Il est possible d'ajouter des scripts, sons et looks à l'arrière-plan comme pour les objets."

@@ -23,6 +23,7 @@ more: više
 less: manje
 ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Izdvojeni
   newest: Newest programs
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Izbrisati
   report: Prijavi
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -222,7 +225,7 @@ help:
         text3: Koristi opet Android-ov gumb za natrag da bi prikazao/la pregled svojih objekata i pozadine.
     step10:
       title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      description: "This is the overview of your objects and your program's background."
       detail:
         text1: Pozadina je kao objekt, ali ti možeš imati samo jednu pozadinu.
         text2: Možeš dodati skripte, zvukove i izglede na isti način na objekt pozadine.

@@ -23,6 +23,7 @@ more: altro
 less: meno
 ok: Ok
 clickToDownloadProgram: 'Per scaricare il programma di esempio, fare click su %link_start% questo %link_end% link.'
+registrationError: Username or email address already in use.
 programs:
   featured: In evidenza
   newest: Programmi più recenti
@@ -53,6 +54,8 @@ programs:
   send: Invia
   delete: Eliminare
   report: Report
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
