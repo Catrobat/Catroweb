@@ -18,6 +18,15 @@ class IfLogicEndStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "End If";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_orange.png";
+    }
 }
 
 ?>

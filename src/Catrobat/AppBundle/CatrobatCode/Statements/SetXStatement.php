@@ -13,6 +13,19 @@ class SetXStatement extends BaseSetToStatement
             self::BEGIN_STRING,
             self::END_STRING);
     }
+
+    public function getBrickText()
+    {
+        $formula_string = $this->getFormulaListChildStatement()->executeChildren();
+        $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+        return "Set X to " . $formula_string_without_markup;
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_blue.png";
+    }
 }
 
 ?>

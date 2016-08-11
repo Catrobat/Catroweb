@@ -14,6 +14,16 @@ class ShowStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Show";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
+
 }
 
 ?>

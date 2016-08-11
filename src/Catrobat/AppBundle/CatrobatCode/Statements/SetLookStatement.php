@@ -14,6 +14,16 @@ class SetLookStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Switch to look";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
+
 }
 
 ?>

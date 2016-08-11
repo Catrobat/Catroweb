@@ -14,6 +14,19 @@ class PointInDirectionStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        $formula_string = $this->getFormulaListChildStatement()->executeChildren();
+        $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+        return "Point in direction " . $formula_string_without_markup . " degrees";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_blue.png";
+    }
+
 }
 
 ?>

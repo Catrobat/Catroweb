@@ -305,7 +305,7 @@ class StatementFactory
         return $stmt;
     }
 
-    private function generateBrickStatement(\SimpleXMLElement $statement, $spaces)
+    public function generateBrickStatement(\SimpleXMLElement $statement, $spaces)
     {
         $stmt = null;
         $children = $statement;

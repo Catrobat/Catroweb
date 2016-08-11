@@ -14,6 +14,15 @@ class HideStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Hide";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
 }
 
 ?>

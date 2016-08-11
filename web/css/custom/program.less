@@ -119,6 +119,81 @@ a {
 
 }
 
+.show-hide-code {
+  position: relative;
+  margin-top: 25px;
+  border-top: 1px solid @default-text-color;
+  height: 61px;
+  z-index: 2;
+
+  .show-hide-code-text {
+    position: absolute;
+    top: 25px;
+    left: 5%;
+    height: 35px;
+    line-height: 35px;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .show-hide-code-arrow {
+    position: absolute;
+    right: 10%;
+    top: 25px;
+    height: 35px;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  .showing-code {
+    top: 10px;
+    height: 20px;
+    line-height:20px;
+  }
+
+  .rotate {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    display: inline-block;
+  }
+}
+
+.fixed {
+  margin-top: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.show-code {
+  height: 42px;
+  border-bottom: 1px solid @default-text-color;
+  background-color: @default-background-color;
+}
+
+.show-hide-code:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+
+.codeview-wrapper {
+  margin: 0;
+  display: none;
+  z-index: 0;
+}
+
+.show {
+  display: block;
+}
+
 #program-bottom {
   border-top: 1px solid @default-text-color;
   padding-top: 25px;

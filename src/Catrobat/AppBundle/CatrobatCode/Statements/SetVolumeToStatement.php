@@ -14,6 +14,19 @@ class SetVolumeToStatement extends BaseSetToStatement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        $formula_string = $this->getFormulaListChildStatement()->executeChildren();
+        $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+        return "Set volume to " . $formula_string_without_markup . "%";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_violet.png";
+    }
+
 }
 
 ?>

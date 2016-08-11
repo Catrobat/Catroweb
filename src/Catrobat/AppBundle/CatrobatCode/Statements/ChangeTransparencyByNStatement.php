@@ -14,6 +14,18 @@ class ChangeTransparencyByNStatement extends BaseChangeByNStatement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        $formula_string = $this->getFormulaListChildStatement()->executeChildren();
+        $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+        return "Change transparency by " . $formula_string_without_markup;
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
 }
 
 ?>

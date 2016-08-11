@@ -14,6 +14,16 @@ class UnknownStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Unknown Brick";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_grey.png";
+    }
+
 }
 
 ?>

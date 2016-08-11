@@ -16,14 +16,15 @@
     margin-bottom: 8px;
     margin-left: 10px;
     margin-right: 15%;
+    font-size: @default-font-size;
   }
 
   .object, #background {
     margin: 5px 0;
     width: 100%;
-    -moz-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
-    -webkit-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
-    box-shadow: 1px 2px 5px black, -1px 2px 5px black;
+    // -moz-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
+    // -webkit-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
+    // box-shadow: 1px 2px 5px black, -1px 2px 5px black;
   }
 
   .dropbtn {
@@ -33,11 +34,15 @@
     background-color: #00475d;
     border-top: solid 2px #739aa6;
     border-bottom: solid 2px black;
+    border-radius: 3px;
 
-    img {
+    .object-icon {
+      width: 65px;
+      height: 65px;
       position: absolute;
       left: 0;
-      margin: 0px 8px;
+      margin: 0 8px;
+      margin-top: 3px;
       border: 2px solid #88c7dc;
     }
 
@@ -60,7 +65,25 @@
         margin-left: 14px;
       }
     }
+
+    .arrow {
+      position: absolute;
+      width: 26px;
+      height: 15px;
+      right: 10%;
+      top: 42%;
+      transition: all 250ms ease-in-out;
+
+      img {
+        height: auto;
+        width: auto;
+        max-height: 15px;
+        margin: 0;
+        border: none;
+      }
+    }
   }
+
 
   .dropbtn:hover {
     cursor: pointer;
@@ -75,8 +98,99 @@
 
   .dropdown-content {
     display: none;
+    position: relative;
     background-color: #003149;
-    overflow: hidden // hackly
+    padding: 0;
+    height: auto;
+    color: white;
+    border-radius: 3px;
+    font-size: @default-font-size;
+
+    .script {
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+
+      .script-top-brick {
+        position: relative;
+        height: 68px;
+        overflow: hidden;
+        background-size: cover;
+
+        .script-type {
+          position: absolute;
+          top: 48%;
+          left: 50px;
+        }
+
+        .script-message {
+          position: absolute;
+          top: 48%;
+          left: 145px;
+        }
+        .script-message:before {
+          content: open-quote;
+        }
+        .script-message:after {
+          content: close-quote;
+        }
+
+
+      }
+
+      .script-bricks-wrapper {
+
+        .brick {
+          margin-top: -5px;
+          position: relative;
+          height: 48px;
+          overflow: hidden;
+          background-size: cover;
+
+          .brick-name {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: lightcoral;
+            z-index: 1;
+          }
+
+          .brick-text {
+            position: absolute;
+            top: 31%;
+            left: 50px;
+            display: inline-block;
+            z-index: 1;
+            white-space: nowrap;
+          }
+
+          .brick-look, .brick-sound {
+            width: 40px;
+            height: 40px;
+            min-height: 0;
+            position: absolute;
+            top: 5%;
+            right: 10px;
+            z-index: 1;
+          }
+
+          .brick-sound {
+            cursor: pointer;
+            cursor: hand;
+          }
+
+        }
+
+      }
+
+    }
+  }
+
+  .note {
+    text-align: center;
+    font-size: @default-font-size;
+    padding: 20px 0;
+    color: rgba(255, 255, 255, 0.4);
   }
 
   #object-list-wrapper {
@@ -86,11 +200,54 @@
   .show {
     display: block;
   }
+
+  .rotate {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    display: inline-block;
+  }
 }
 
-@media (max-width: 690px) {
+@media (max-width: 800px) {
   #code-wrapper {
     width: 100%;
     margin: 0;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .dropdown-content {
+    text-align: center;
+
+    .left-side-dropdown-content {
+      width: 100% !important;
+      display: block !important;
+      border: none !important;
+      max-width: 380px !important;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      margin-left: 50% !important;
+
+    }
+
+    .right-side-dropdown-content {
+      width: 100% !important;
+      display: block !important;
+      border: none !important;
+      max-width: 380px !important;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      margin-left: 50% !important;
+    }
   }
 }

@@ -21,6 +21,20 @@ class RepeatStatement extends Statement
     {
         return $this->spaces + 1;
     }
+
+    public function getBrickText()
+    {
+        $formula_string = $this->getFormulaListChildStatement()->executeChildren();
+        $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+        return "Repeat " . $formula_string_without_markup . " times";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_orange.png";
+    }
+
 }
 
 ?>
