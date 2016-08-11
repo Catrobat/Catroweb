@@ -5,6 +5,7 @@ namespace Catrobat\AppBundle\Controller\Web;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CodeViewController extends Controller
 {
@@ -167,7 +168,16 @@ class CodeViewController extends Controller
     $extracted_file_repository = $this->get('extractedfilerepository');
     $extracted_program = $extracted_file_repository->loadProgramExtractedFile($program);
 
-    $twig_params = $this->computeTwigParams($extracted_program);
+    try
+    {
+      $twig_params = $this->computeTwigParams($extracted_program);
+    }
+    catch (\Exception $e)
+    {
+      $twig_params = array(
+        'no_code' => true,
+      );
+    }
 
     return $this->get('templating')->renderResponse('::codeview.html.twig', $twig_params);
   }

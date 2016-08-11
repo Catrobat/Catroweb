@@ -71,35 +71,39 @@
 {% block body %}
     <div id="code-wrapper">
 
-        <div id="background-wrapper">
-            <p class="heading">BACKGROUND</p>
-            <div id="background">
-                <div class="dropbtn">
-                    {{ self.dropbtn(background, path) }}
-                </div>
-                <div class="dropdown-content">
-                    {{ self.dropcontent(background, path) }}
+        {% if no_code is defined %}
+            <p class="exception">CODE CAN'T BE DISPLAYED</p>
+        {% else %}
+            <div id="background-wrapper">
+                <p class="heading">BACKGROUND</p>
+                <div id="background">
+                    <div class="dropbtn">
+                        {{ self.dropbtn(background, path) }}
+                    </div>
+                    <div class="dropdown-content">
+                        {{ self.dropcontent(background, path) }}
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="object-list-wrapper">
-            <p class="heading">OBJECTS</p>
-            {% if object_list is not empty %}
-                {% for code_object in object_list %}
-                    <div class="object">
-                        <div class="dropbtn">
-                            {{ self.dropbtn(code_object, path) }}
+            <div id="object-list-wrapper">
+                <p class="heading">OBJECTS</p>
+                {% if object_list is not empty %}
+                    {% for code_object in object_list %}
+                        <div class="object">
+                            <div class="dropbtn">
+                                {{ self.dropbtn(code_object, path) }}
+                            </div>
+                            <div class="dropdown-content">
+                                {{ self.dropcontent(code_object, path) }}
+                            </div>
                         </div>
-                        <div class="dropdown-content">
-                            {{ self.dropcontent(code_object, path) }}
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p class="note">NO OBJECTS</p>
-            {% endif %}
-        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="note">NO OBJECTS</p>
+                {% endif %}
+            </div>
+        {% endif %}
 
     </div>
 {% endblock %}
