@@ -28,5 +28,24 @@
   <script>
     var programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}', 6);
     programs.initProfile('{{ profile.id }}');
+
+    $(document).on("click", ".program", function() {
+      var clicked_program_id = this.id.replace("program-", "");
+      this.className += " visited-program";
+      var stored_visits = sessionStorage.getItem("visits");
+
+      if(!stored_visits){
+        var new_visits = [clicked_program_id];
+        sessionStorage.setItem("visits", JSON.stringify(new_visits));
+      }
+      else{
+        var parsed_visits = JSON.parse(stored_visits);
+        if(!($.inArray(clicked_program_id, parsed_visits)>=0)){
+          parsed_visits.push(clicked_program_id);
+          sessionStorage.setItem("visits", JSON.stringify(parsed_visits));
+        }
+      }
+
+    });
   </script>
 {% endblock %}

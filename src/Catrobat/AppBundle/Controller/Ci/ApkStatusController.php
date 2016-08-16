@@ -18,17 +18,6 @@ class ApkStatusController extends Controller
     public function getApkStatusAction(Request $request, Program $program)
     {
         $result = array();
-        
-        $file_repository = $this->get('filerepository');
-        $permssion_reader = $this->get('programdevicepermissionreader');
-        $path = $file_repository->getProgramFile($program->getId());
-        if (in_array('VIBRATOR',$permssion_reader->getPermissions($path)))
-        {
-            $result['label'] = "";
-            $result['status'] = 'not allowed';
-            return JsonResponse::create($result);
-        }
-        
         switch ($program->getApkStatus()) {
             case Program::APK_READY:
                 $result['status'] = 'ready';

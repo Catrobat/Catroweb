@@ -1,3 +1,5 @@
+@import 'default';
+
 .login {
     width: 318px;
 }
@@ -33,7 +35,7 @@ hr {
   display:inline-block;
   position:relative;
   top:4px;
-  border-color: #17a5b8;
+  border-color: @default-border-color;
 }
 
 .hidden {
@@ -44,8 +46,8 @@ hr {
 }
 
 .ui-widget-header,.ui-state-default {
-  background:#17a5b8;
-  border: 3px solid #17a5b8;
+  background:@default-border-color;
+  border: 3px solid @default-border-color;
   color: #FFFFFF;
   font-weight: bold;
 }

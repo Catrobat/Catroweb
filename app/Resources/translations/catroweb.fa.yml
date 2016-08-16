@@ -23,6 +23,7 @@ more: بیشتر
 less: کمتر
 ok: تایید
 clickToDownloadProgram: 'برای اینکه برنامه نمومه را دانلود کنی، کلیک کن %link_start% روی %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured:  پيشنهادي
   newest: جدیدترین برنامه ها
@@ -53,6 +54,8 @@ programs:
   send: ارسال
   delete: حذف
   report: گزارش
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |

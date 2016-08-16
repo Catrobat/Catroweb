@@ -23,6 +23,7 @@ more: '&#x52A0;&#x8F7D;&#x4E2D;&#x3002;&#x3002;&#x3002;'
 less: '&#x60A8;&#x767B;&#x5F55;&#x4E3A;'
 ok: OK
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: '&#x89C6;&#x56FE;'
   newest: Newest programs
@@ -53,6 +54,8 @@ programs:
   send: Send
   delete: Delete
   report: Report
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -222,7 +225,7 @@ help:
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
       title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      description: "This is the overview of your objects and your program's background."
       detail:
         text1: The background is like an object, but you just can have on background.
         text2: You can add scripts, sounds and look in the same way to the background object.

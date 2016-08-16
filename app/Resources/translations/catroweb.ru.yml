@@ -23,6 +23,7 @@ more: '&#x41A;&#x430;&#x442;&#x430;&#x43B;&#x43E;&#x43D;&#x441;&#x43A;&#x438;&#x
 less: '&#x41A;&#x438;&#x442;&#x430;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x423;&#x43F;&#x440;&#x43E;&#x449;&#x435;&#x43D;&#x43D;&#x44B;&#x439;)'
 ok: ОК
 clickToDownloadProgram: 'Что бы скачать пример программы коснись %link_start% здесь %link_end%.'
+registrationError: Username or email address already in use.
 programs:
   featured: Рекомендуемые
   newest: Новые приложения
@@ -53,6 +54,8 @@ programs:
   send: Послать
   delete: Удалить
   report: Сообщить о проблеме
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
 passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
@@ -225,7 +228,7 @@ help:
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
       title: Change the background
-      description: This is the overview of your objects and the background depends to one program.
+      description: "This is the overview of your objects and your program's background."
       detail:
         text1: The background is like an object, but you just can have on background.
         text2: You can add scripts, sounds and look in the same way to the background object.
