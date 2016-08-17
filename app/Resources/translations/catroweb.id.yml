@@ -23,7 +23,7 @@ more: lebih
 less: kurang
 ok: Oke
 clickToDownloadProgram: 'Untuk mengunduh contoh program klik %link_start% disini %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: Nama pengguna atau alamat email sudah di gunakan.
 programs:
   featured: Fitur
   newest: Program terbaru
@@ -54,8 +54,8 @@ programs:
   send: Kirim
   delete: Hapus
   report: Laporkan
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: Komentar berhasil dilaporkan.
+  report_popup_header: Telah dilaporkan
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
@@ -498,13 +498,13 @@ ci:
   download: Unduh Apk
 gamejam:
   nojam: Maaf, tidak ada kemacetan permainan saat ini
-  submit: Kirim kemacetan permainan ke alice
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: waspadalah
     subheader: Anda hanya dapat mengirimkan program Anda sendiri
     text: |
       Tapi mengapa tidak membuat punya Anda sendiri! 
-      Ambil bagian di #AliceGameJam
+      Ambil bagian di %gamejamtag%
 tag-text: Label
 extenstion-text: Ekstensi
 tags:

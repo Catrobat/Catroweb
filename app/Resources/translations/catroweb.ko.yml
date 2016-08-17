@@ -489,11 +489,11 @@ ci:
   download: Apk 다운로드
 gamejam:
   nojam: 죄송합니다, 현재 게임 잼이 없습니다
-  submit: 앨리스 게임 잼에 제출
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: 알고 있어야합니다
     subheader: 자신의 프로그램만 제출할 수 있습니다
-    text: '스스로 만드세요!  #AliceGameJam에 참여하세요'
+    text: '스스로 만드세요! %gamejamtag%에 참여하세요'
 tag-text: 태그
 extenstion-text: 확장 프로그램
 tags:

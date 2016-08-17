@@ -23,7 +23,7 @@ more: 詳細
 less: 少ない
 ok: わかりました
 clickToDownloadProgram: 'サンプルのプログラムをダウンロードするには、%link_start% ここ %link_end% をクリックしてください。'
-registrationError: Username or email address already in use.
+registrationError: ユーザー名またはメール アドレスは、すでに使用されています。
 programs:
   featured: おすすめ
   newest: 最新のプログラム
@@ -54,8 +54,8 @@ programs:
   send: 送信
   delete: 削除
   report: 不適切として報告する
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: 正常にコメントを報告しました。
+  report_popup_header: 報告済
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
@@ -499,13 +499,13 @@ ci:
   download: Apk をダウンロード
 gamejam:
   nojam: この時点で、ゲーム jam はありません。
-  submit: アリス ゲーム jam に提出
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: ご注意ください
     subheader: 独自のプログラムのみ提出することができます
     text: |
       独自のプログラムを作成しませんか!
-      #AliceGameJam に参加してください
+      %gamejamtag% に参加してください
 tag-text: タグ
 extenstion-text: 拡張
 tags:
