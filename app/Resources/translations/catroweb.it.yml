@@ -516,11 +516,11 @@ ci:
   download: Scarica Apk
 gamejam:
   nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
-  submit: "Proponilo all'alice game jam"
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: fai attenzione
     subheader: È possibile inviare solo programmi originali, creati da sé
-    text: 'Ma perché non crearne uno personale! Prendi parte ad #AliceGameJam'
+    text: 'Ma perché non crearne uno personale! Prendi parte ad %gamejamtag%'
 tag-text: Tag
 extenstion-text: Estensioni
 tags:

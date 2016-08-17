@@ -12,6 +12,7 @@ files:
       locale_with_underscore:
         'ar': 'ar'
         'bs': 'bs'
+        'cs-CZ' : 'cs'
         'da': 'da'
         'de': 'de'
         'es-ES': 'es'

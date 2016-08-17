@@ -23,7 +23,7 @@ more: mais
 less: menos
 ok: OK
 clickToDownloadProgram: 'Para baixar o programa de exemplo clique %link_start% aqui %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: Este nome de usuário ou endereço de e-mail já está em uso.
 programs:
   featured: Em Destaque
   newest: Programas mais recentes
@@ -54,8 +54,8 @@ programs:
   send: Enviar
   delete: Apagar
   report: Denunciar
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: Este comentário foi denunciado com sucesso.
+  report_popup_header: Denunciado
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -502,13 +502,13 @@ ci:
   download: Baixar Apk
 gamejam:
   nojam: Desculpe, não há game jams disponíveis
-  submit: Enviar para o game jam da Alice
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: fique atento
     subheader: Você só pode enviar os seus programas
     text: |
       Mas por que não criar o seu próprio programa?!
-      Faça parte do #AliceGameJam
+      Faça parte do %gamejamtag%
 tag-text: Marcações
 extenstion-text: Extensões
 tags:
