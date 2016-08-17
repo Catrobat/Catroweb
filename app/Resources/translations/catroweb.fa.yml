@@ -501,13 +501,13 @@ ci:
   download: دانلود نرم افزار
 gamejam:
   nojam: با عرض پوزش، الان بازی جم انجام نمی شود
-  submit: ارسال به بازی آلیس
+  submit: 'Submit to %gamejamname%'
   submitown:
     header: توجه
     subheader: تو فقط می توانی برنامه های خودت را ارسال کنی
     text: |
       خودت یکی ایجاد کن!
-      در AliceGameJam# مشارکت کن
+      در %gamejamtag% مشارکت کن
 tag-text: برچسب‌ها
 extenstion-text: پسوندها
 tags:
