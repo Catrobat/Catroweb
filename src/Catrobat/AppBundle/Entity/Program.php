@@ -147,6 +147,11 @@ class Program
     protected $visible;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    protected $private;
+
+    /**
      * @ORM\Column(type="string", options={"default":"pocketcode"})
      */
     protected $flavor = 'pocketcode';
@@ -628,6 +633,30 @@ class Program
         $this->visible = $visible;
 
         return $this;
+    }
+
+    /**
+     * Set private.
+     *
+     * @param bool $private
+     *
+     * @return Program
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * Get private.
+     *
+     * @return bool
+     */
+    public function getPrivate()
+    {
+        return $this->private;
     }
 
     /**
