@@ -1,8 +1,9 @@
-var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
+var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramString, upload_url) {
   var self = this;
   self.save_url = url;
   self.delete_url = delete_url;
   self.upload_url = upload_url;
+  self.toggle_visibility_url = toggle_visibility_url;
   self.newPassword = null;
   self.repeatPassword = null;
   self.firstMail = null;
@@ -189,6 +190,11 @@ var MyProfile = function(url, delete_url, deleteProgramString, upload_url) {
     if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
       window.location.href = self.delete_url + '/' + id;
     }
+  };
+
+  self.toggleVisibility = function(id) {
+    var programName = $('#program-' + id).find('.program-name').text();
+    window.location.href = self.toggle_visibility_url + '/' + id;
   };
 
   self.setAvatarUploadListener = function() {

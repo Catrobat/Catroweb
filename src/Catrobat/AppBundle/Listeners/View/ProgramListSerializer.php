@@ -49,6 +49,7 @@ class ProgramListSerializer
                 $new_program['Version'] = $program->getCatrobatVersionName();
                 $new_program['Views'] = $program->getViews();
                 $new_program['Downloads'] = $program->getDownloads();
+                $new_program['Private'] = $program->getPrivate();
                 $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
                 $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
                     ->getTimestamp());

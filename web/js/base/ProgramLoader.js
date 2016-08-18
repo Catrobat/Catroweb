@@ -144,8 +144,10 @@ var ProgramLoader = function (container, url, column_max) {
 
       $(self.container).find('.programs').append(program);
 
-      if(self.container == '#myprofile-programs')
-        $(program).prepend('<div id="delete-'+ programs[i].ProjectId +'" class="img-delete" onclick="profile.deleteProgram('+ programs[i].ProjectId +')"></div>');
+      if(self.container == '#myprofile-programs') {
+        $(program).prepend('<div id="delete-' + programs[i].ProjectId + '" class="img-delete" onclick="profile.deleteProgram(' + programs[i].ProjectId + ')"></div>');
+        $(program).prepend('<div id="visibility-' + programs[i].ProjectId + '" class="' + (programs[i].Private ? 'img-visibility-hidden' : 'img-visibility-visible') + '" onclick="profile.toggleVisibility(' + programs[i].ProjectId + ')"></div>');
+      }
     }
     self.loaded += programs.length;
   };

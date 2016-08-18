@@ -20,6 +20,7 @@ class ProgramRepository extends EntityRepository
     ->select('e')
     ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
     ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+    ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
     ->orderBy('e.downloads', 'DESC')
     ->setParameter('flavor', $flavor)
     ->setFirstResult($offset)
@@ -36,6 +37,7 @@ class ProgramRepository extends EntityRepository
     ->select('e')
     ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
     ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+    ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
     ->orderBy('e.views', 'DESC')
     ->setParameter('flavor', $flavor)
     ->setFirstResult($offset)
@@ -52,6 +54,7 @@ class ProgramRepository extends EntityRepository
     ->select('e')
     ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
     ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+    ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
     ->orderBy('e.uploaded_at', 'DESC')
     ->setParameter('flavor', $flavor)
     ->setFirstResult($offset)
@@ -96,6 +99,7 @@ class ProgramRepository extends EntityRepository
         ->select('e.id')
         ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+        ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
         ->setParameter('flavor', $flavor)
         ->getQuery()
         ->getResult();
@@ -158,7 +162,8 @@ class ProgramRepository extends EntityRepository
           x.name LIKE :searchterm OR
           $searchterm OR
           e.id = :searchtermint) AND
-          e.visible = true
+          e.visible = true AND
+          e.private = false
         ORDER BY weight DESC, e.uploaded_at DESC
       ";
         $qb_program = $this->createQueryBuilder('e');
@@ -229,6 +234,7 @@ class ProgramRepository extends EntityRepository
           ->select('COUNT (e.id)')
           ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
           ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+          ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
           ->setParameter('flavor', $flavor)
           ->getQuery()
           ->getSingleScalarResult();
@@ -296,6 +302,7 @@ class ProgramRepository extends EntityRepository
             ->leftJoin('e.tags', 't')
             ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq('t.id', ':id'))
+            ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
             ->setParameter('id', $query)
             ->getQuery()
             ->getResult();
@@ -312,6 +319,7 @@ class ProgramRepository extends EntityRepository
             ->leftJoin('e.extensions', 't')
             ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq('t.name', ':name'))
+            ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
             ->setParameter('name', $query)
             ->getQuery()
             ->getResult();
