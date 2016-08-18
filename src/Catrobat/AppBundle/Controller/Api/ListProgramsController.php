@@ -102,9 +102,10 @@ class ListProgramsController extends Controller
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
         $user_id = intval($request->query->get('user_id', 0));
+        $max_version = $request->query->get('max_version', 0);
         
         if ($sortBy == 'downloads') {
-            $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset);
+            $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
         } elseif ($sortBy == 'views') {
             $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset);
         } elseif ($sortBy == 'user') {
@@ -120,7 +121,17 @@ class ListProgramsController extends Controller
         } else {
             $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor);
         }
-        
+
+        if($max_version !== 0) {
+            $cnt = count($programs);
+            for($i=0; $i<$cnt; $i++) {
+                $program_version = $programs[$i]->getCatrobatVersionName();
+                if(version_compare($program_version, $max_version) > 0) {
+                    unset($programs[$i]);
+                }
+            }
+        }
+
         return new ProgramListResponse($programs, $numbOfTotalProjects, $details);
     }
 }
