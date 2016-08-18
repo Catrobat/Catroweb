@@ -15,6 +15,21 @@ class DeleteItemOfUserListStatement extends BaseUserListStatement
                             self::MIDDLE_STRING,
 							self::END_STRING);
 	}
+
+	public function getBrickText()
+	{
+		$list_variable_name = $this->xmlTree->userList->name;
+
+		$formula_string = $this->getFormulaListChildStatement()->executeChildren();
+		$formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+		return "Delete item from list " . $list_variable_name . " at position " . $formula_string_without_markup;
+	}
+
+	public function getBrickColor()
+	{
+		return "1h_brick_red.png";
+	}
 	
 }
 ?>

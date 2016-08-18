@@ -158,6 +158,59 @@ class DefaultController extends Controller
 
 
   /**
+   * Route("/program/{id}/codeview", name="show_code_view", requirements={"id":".+"})
+   * Method({"GET"})
+
+  public function codeViewAction($id)
+  {
+    $program = $this->get('programmanager')->find($id);
+    $extractedFileRepository = $this->get('extractedfilerepository');
+    $extractedProgram = $extractedFileRepository->loadProgramExtractedFile($program);
+
+    $codeObjects = $extractedProgram->getCodeObjects();
+    $twigParams = null;
+
+    if (!empty($codeObjects)) {
+      $objectList = array();
+      foreach ($codeObjects as $key => $codeObject) {
+        if ($key === 0) {
+          $background = array(
+            'name' => $codeObject->getName(),
+            'icon_url' => 'iconToDisplayURL',
+            'scripts' => $codeObject->getScripts()
+          );
+        } else {
+          $objectList[] = array(
+            'name' => $codeObject->getName(),
+            'icon_url' => 'iconToDisplayURL',
+            'scripts' => $codeObject->getScripts()
+          );
+        }
+      }
+
+      $debug = null;
+
+      $twigParams = array(
+        'contains_objects' => true,
+        'program' => $program,
+        'code_objects' => $extractedProgram->getContainingCodeObjects(),
+        'debug' => $debug,
+        'background' => $background,
+        'object_list' => $objectList
+      );
+
+
+    } else {
+      $twigParams = array(
+        'containsObjects' => false
+      );
+    }
+
+    return $this->get('templating')->renderResponse('::codeview.html.twig', $twigParams);
+  }
+   */
+
+  /**
    * @Route("/search/{q}", name="search", requirements={"q":".+"})
    * @Method({"GET"})
    */

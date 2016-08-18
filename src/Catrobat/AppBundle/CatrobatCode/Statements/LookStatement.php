@@ -46,6 +46,16 @@ class LookStatement extends Statement
             }
         }
     }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
 }
 
 ?>

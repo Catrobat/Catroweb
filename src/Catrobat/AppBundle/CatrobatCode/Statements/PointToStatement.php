@@ -14,6 +14,16 @@ class PointToStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Point towards " . $this->xmlTree->pointedObject['name'];
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_blue.png";
+    }
+
 }
 
 ?>

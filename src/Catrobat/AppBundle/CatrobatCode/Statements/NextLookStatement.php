@@ -14,6 +14,16 @@ class NextLookStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Next look";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
+
 }
 
 ?>
