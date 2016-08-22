@@ -81,3 +81,9 @@ services:
               arguments: ["@doctrine.orm.entity_manager", "@translator"]
               tags:
                 -  { name: console.command }
+
+      catrowebadmin.create.program.extensions:
+              class: Catrobat\AppBundle\Commands\CreateProgramExtensionsCommand
+              arguments: ["@doctrine.orm.entity_manager", "%catrobat.file.storage.dir%", "@programrepository"]
+              tags:
+                -  { name: console.command }
