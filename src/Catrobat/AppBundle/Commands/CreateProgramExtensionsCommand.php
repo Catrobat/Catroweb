@@ -31,7 +31,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
     private $programfile_directory;
     private $program_repository;
 
-    public function __construct(EntityManager $em, $programfile_directory, $program_repo    )
+    public function __construct(EntityManager $em, $programfile_directory, $program_repo)
     {
         parent::__construct();
         $this->em = $em;

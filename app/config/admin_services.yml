@@ -150,6 +150,13 @@ services:
           - { name: sonata.admin, manager_type: orm, label: All Extensions }
         arguments: [null, Catrobat\AppBundle\Entity\Extension, null]
 
+      # TODO change 2nd parameter
+      catrowebadmin.block.extensions.create:
+        class: Catrobat\AppBundle\Admin\CreateExtensionsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Create Extensions}
+        arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\Extension]
+
 # =========================== GameJam ===========================
 
       catrowebadmin.block.gamejam:
