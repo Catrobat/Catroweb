@@ -125,7 +125,7 @@ class ListProgramsController extends Controller
         if($max_version !== 0) {
             $cnt = count($programs);
             for($i=0; $i<$cnt; $i++) {
-                $program_version = $programs[$i]->getCatrobatVersionName();
+                $program_version = $programs[$i]->getLanguageVersion();
                 if(version_compare($program_version, $max_version) > 0) {
                     unset($programs[$i]);
                 }
