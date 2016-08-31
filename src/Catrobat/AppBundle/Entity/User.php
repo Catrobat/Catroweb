@@ -68,12 +68,7 @@ class User extends BaseUser implements LdapUserInterface
      * @ORM\Column(type="string", length=300, nullable=true)
      */
     protected $facebook_access_token;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default":false})
-     */
-    protected $uploadsArePrivate;
-
+    
     /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
@@ -288,16 +283,6 @@ class User extends BaseUser implements LdapUserInterface
     public function setLimited($limited)
     {
         $this->limited = $limited;
-    }
-
-    public function setUploadsArePrivate($uploadsArePrivate)
-    {
-        $this->uploadsArePrivate = $uploadsArePrivate;
-    }
-
-    public function getUploadsArePrivate()
-    {
-        return $this->uploadsArePrivate;
     }
 }
 
