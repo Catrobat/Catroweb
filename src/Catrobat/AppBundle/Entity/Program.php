@@ -147,7 +147,7 @@ class Program
     protected $visible;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+     * @ORM\Column(type="boolean", options={"default":false})
      */
     protected $private = false;
 
