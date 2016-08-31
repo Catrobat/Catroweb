@@ -72,11 +72,6 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
-    protected $uploadsArePrivate;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default":false})
-     */
     protected $limited = false;
 
     public function __construct()
@@ -288,16 +283,6 @@ class User extends BaseUser implements LdapUserInterface
     public function setLimited($limited)
     {
         $this->limited = $limited;
-    }
-
-    public function setUploadsArePrivate($uploadsArePrivate)
-    {
-        $this->uploadsArePrivate = $uploadsArePrivate;
-    }
-
-    public function getUploadsArePrivate()
-    {
-        return $this->uploadsArePrivate;
     }
 }
 
