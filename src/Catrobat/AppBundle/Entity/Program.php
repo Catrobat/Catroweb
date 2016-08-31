@@ -147,9 +147,9 @@ class Program
     protected $visible;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":false})
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
      */
-    protected $private;
+    protected $private = false;
 
     /**
      * @ORM\Column(type="string", options={"default":"pocketcode"})

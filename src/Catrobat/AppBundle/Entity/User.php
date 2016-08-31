@@ -68,7 +68,7 @@ class User extends BaseUser implements LdapUserInterface
      * @ORM\Column(type="string", length=300, nullable=true)
      */
     protected $facebook_access_token;
-    
+
     /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
