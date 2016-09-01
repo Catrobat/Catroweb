@@ -64,7 +64,8 @@ Feature: Search programs
          "Downloads":"3",
          "ProjectUrl":"pocketcode/program/1",
          "DownloadUrl":"pocketcode/download/1.catrobat",
-         "FileSize":0
+         "FileSize":0,
+         "Private":0
      }],
     "preHeaderMessages":""
     }

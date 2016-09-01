@@ -203,9 +203,9 @@
       <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
     </div>
   </div>
-  <div class="codeview-wrapper">
+  {#<div class="codeview-wrapper">
     {{ render(controller('AppBundle:Web/CodeView:codeView', {'id' : program.id})) }}
-  </div>
+  </div>#}
 
   <div id="program-bottom">
     <div id="icon-author">
@@ -330,7 +330,7 @@
 
     $(document).ready(function(){
 
-      $(document).on("click", ".show-more-button", function() {
+      $(document).on("click", "#show-more-button", function() {
         counter += 10;
         for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
         {
@@ -361,7 +361,6 @@
             }
           },
           error: function(data) {
-            //alert(data);
             alert("something went terribly wrong");
           }});
       });

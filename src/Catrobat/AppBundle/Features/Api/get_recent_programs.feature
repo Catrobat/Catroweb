@@ -41,7 +41,8 @@ Feature: Get the most recent programs
                                 "Downloads":"33",
                                 "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"pocketcode/download/2.catrobat",
-                                "FileSize":0
+                                "FileSize":0,
+                                "Private":0
                             }],
           "preHeaderMessages":""
       }
