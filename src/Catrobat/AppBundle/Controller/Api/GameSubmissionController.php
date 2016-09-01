@@ -50,13 +50,25 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs")
      * @Method({"GET"})
      */
-    public function getSampleProgramsForLatestGamejam()
+    public function getSampleProgramsForLatestGamejam(Request $request)
     {
         $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
         if ($gamejam == null) {
             throw new NoGameJamException();
         }
-        return new ProgramListResponse($gamejam->getSamplePrograms(), count($gamejam->getSamplePrograms()));
+
+        $offset = intval($request->query->get('offset', 0));
+        $limit = intval($request->query->get('limit', 20));
+
+        $all_samples = $gamejam->getSamplePrograms();
+        $count = count($all_samples);
+        $returning_samples = null;
+
+        for($j = 0, $i = $offset; $i < $count && $i < $limit; $j++, $i++) {
+          $returning_samples[$j] = $all_samples[$i];
+        }
+
+        return new ProgramListResponse($returning_samples, $returning_samples !== null ? count($returning_samples) : 0);
     }
 
     /**
