@@ -38,33 +38,35 @@ class ProgramListSerializer
         
         $retArray = array();
         $retArray['CatrobatProjects'] = array();
-        foreach ($programs as $program) {
-            $new_program = array();
-            $new_program['ProjectId'] = $program->getId();
-            $new_program['ProjectName'] = $program->getName();
-            if ($details === true) {
-                $new_program['ProjectNameShort'] = $program->getName();
-                $new_program['Author'] = $program->getUser()->getUserName();
-                $new_program['Description'] = $program->getDescription();
-                $new_program['Version'] = $program->getCatrobatVersionName();
-                $new_program['Views'] = $program->getViews();
-                $new_program['Downloads'] = $program->getDownloads();
-                $new_program['Private'] = $program->getPrivate();
-                $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-                $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
-                    ->getTimestamp());
-                $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
-                $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
-                $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', array(
-                    'flavor' => $request->attributes->get('flavor'),
-                    'id' => $program->getId()
-                )), '/');
-                $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', array(
-                    'id' => $program->getId()
-                )), '/');
-                $new_program['FileSize'] = $program->getFilesize() / 1048576;
+        if($programs != null) {
+            foreach ($programs as $program) {
+                $new_program = array();
+                $new_program['ProjectId'] = $program->getId();
+                $new_program['ProjectName'] = $program->getName();
+                if ($details === true) {
+                    $new_program['ProjectNameShort'] = $program->getName();
+                    $new_program['Author'] = $program->getUser()->getUserName();
+                    $new_program['Description'] = $program->getDescription();
+                    $new_program['Version'] = $program->getCatrobatVersionName();
+                    $new_program['Views'] = $program->getViews();
+                    $new_program['Downloads'] = $program->getDownloads();
+                    $new_program['Private'] = $program->getPrivate();
+                    $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
+                    $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
+                        ->getTimestamp());
+                    $new_program['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($program->getId());
+                    $new_program['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($program->getId());
+                    $new_program['ProjectUrl'] = ltrim($this->generateUrl('program', array(
+                        'flavor' => $request->attributes->get('flavor'),
+                        'id' => $program->getId()
+                    )), '/');
+                    $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', array(
+                        'id' => $program->getId()
+                    )), '/');
+                    $new_program['FileSize'] = $program->getFilesize() / 1048576;
+                }
+                $retArray['CatrobatProjects'][] = $new_program;
             }
-            $retArray['CatrobatProjects'][] = $new_program;
         }
         $retArray['completeTerm'] = '';
         $retArray['preHeaderMessages'] = '';
