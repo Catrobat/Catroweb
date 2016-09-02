@@ -23,7 +23,7 @@ more: بیشتر
 less: کمتر
 ok: تایید
 clickToDownloadProgram: 'برای اینکه برنامه نمومه را دانلود کنی، کلیک کن %link_start% روی %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.
 programs:
   featured:  پيشنهادي
   newest: جدیدترین برنامه ها
@@ -54,8 +54,8 @@ programs:
   send: ارسال
   delete: حذف
   report: گزارش
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: نظرت با موفقیت گزارش شد.
+  report_popup_header: گزارش شد
 passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |
@@ -501,7 +501,8 @@ ci:
   download: دانلود نرم افزار
 gamejam:
   nojam: با عرض پوزش، الان بازی جم انجام نمی شود
-  submit: 'Submit to %gamejamname%'
+  submit: 'ارسال به %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: توجه
     subheader: تو فقط می توانی برنامه های خودت را ارسال کنی
