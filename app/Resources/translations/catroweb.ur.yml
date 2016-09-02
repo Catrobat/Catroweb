@@ -503,6 +503,7 @@ ci:
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: 'Submit to %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: خبردار
     subheader: آپ صرف اپنے ہی پروگرامات جمع کراسکتے ہیں۔

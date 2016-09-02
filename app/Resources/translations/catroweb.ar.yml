@@ -2,12 +2,12 @@
 localLanguage: English
 username: اسم المستخدم
 password: كلمة المرور
-aboutPocketCode: حول قانون الجيب
+aboutPocketCode: حول تطبيق الرسام
 tutorials: دروس للتعلم
 googlePlay: متجرجوجل
 passwordsNoMatch: لا تتطابق كلمات المرور.
 error: خطأ
-cancel: إلغاء
+cancel: موافق
 report: تقرير
 download: تحميل
 description: الوصف
@@ -501,6 +501,7 @@ ci:
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: 'Submit to %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: be aware
     subheader: You can only submit your own programs

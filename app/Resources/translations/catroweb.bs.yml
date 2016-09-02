@@ -21,7 +21,7 @@ pleaseTryAgain: Pokušajte ponovo!
 oldVersionError: Ažurirajte na najnoviju verziju Pocket Code-a!
 more: više
 less: manje
-ok: OK
+ok: Uredu
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: Username or email address already in use.
 programs:
@@ -503,6 +503,7 @@ ci:
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: 'Submit to %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: be aware
     subheader: You can only submit your own programs

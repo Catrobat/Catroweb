@@ -74,6 +74,7 @@ class GameSubmissionController extends Controller
         }
         $criteria_count = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true));
         $criteria = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true))
+            ->andWhere(Criteria::expr()->eq("visible", true))
             ->orderBy(array("gamejam_submission_date" => Criteria::DESC))
             ->setFirstResult($offset)
             ->setMaxResults($limit);
