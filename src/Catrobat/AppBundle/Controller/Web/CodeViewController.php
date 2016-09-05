@@ -213,7 +213,6 @@ class CodeViewController extends Controller
         'no_code' => true
       );
     }
-
     return $twig_params;
   }
 

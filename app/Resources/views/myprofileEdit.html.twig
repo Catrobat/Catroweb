@@ -1,0 +1,114 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/editprofile.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  <h1 id="profile-edit-header">Profil bearbeiten</h1>
+
+  <div id="profile-edit-wrapper" class="edit-wrapper">
+    <div id="profile-avatar">
+      <button id="avatar-button" class="btn btn-edit">Bearbeiten</button>
+      <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
+    </div>
+
+    <div id="username-information">
+      <button id="username-button" class="btn btn-edit">Bearbeiten</button>
+      <div class="information-header" id="username-header">Username:</div>
+      <div class="data" id="username-text">{{ username }}</div>
+    </div>
+
+    <div id="country-information">
+      <button id="country-button" class="btn btn-edit">Bearbeiten</button>
+      <div class="information-header" id="country-header">Land:</div>
+      <div class="data" id="country-text"> {{ country }} </div>
+    </div>
+
+    <div id="email-information">
+      <button id="email-button" class="btn btn-edit">Bearbeiten</button>
+      <div class="information-header" id="email-header">E-Mail:</div>
+      <div class="data" id="email-text"> {{ firstMail }} </div>
+      <div id="second-email-text"> {{ secondMail }} </div>
+    </div>
+
+    <div id="password-information">
+      <button id="password-button" class="btn btn-edit">Bearbeiten</button>
+      <div class="information-header" id="password-header">Password:</div>
+      <div class="data" id="password-placeholder">*********</div>
+    </div>
+  </div>
+
+  <button id="finished-button" class="btn btn-done">Erledigt</button>
+
+ {# {% if not app.user.limited %}
+  <div id="profile-form">
+    <form>
+    <button type="submit" name="submit" class="btn btn-primary pull-right" tabindex="6">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
+      <div>
+        <div class="input-error text-password-nomatch">{{ 'passwordsNoMatch'|trans({}, 'catroweb') }}</div>
+        <div class="input-error text-password-tooshort">{{ 'profile.form.passwordTooShort'|trans({'%length%':minPassLength}, 'catroweb') }}</div>
+        <div class="input-error text-password-toolong">{{ 'profile.form.passwordTooLong'|trans({'%length%':maxPassLength}, 'catroweb') }}</div>
+        <div class="input-error text-password-isusername">{{ 'profile.form.passwordIsUsername'|trans({}, 'catroweb') }}</div>
+        {% if not oauth_user %}
+          <div class="input-field">
+            <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" tabindex="1">
+            <div class="img-password"></div>
+          </div>
+          <div class="input-field">
+            <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" tabindex="2">
+            <div class="img-password"></div>
+          </div>
+        {% endif %}
+        <div id="select-country">
+          <div>{{ 'country'|trans({}, 'catroweb') }}</div>
+          <div>
+            <select name="country" tabindex="5">
+              <option value=""></option>
+              {% for key, country in  countriesList() %}
+                {% if app.user.country == key %}
+                  <option value="{{ key }}" selected>{{ country }}</option>
+                {% else %}
+                  <option value="{{ key }}">{{ country }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="input-error text-email-notvalid">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
+        <div class="input-error text-email-missing">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
+        <div class="input-error text-email-exists">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
+        <div class="input-field">
+          <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" tabindex="3">
+          <div class="img-mail-first"></div>
+        </div>
+        <div class="input-field">
+          <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" tabindex="4">
+          <div class="img-mail-second"></div>
+        </div>
+        <div>
+          <button type="submit" name="submit" class="btn btn-primary pull-right" tabindex="6">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
+          <div class="img-load-ajax"></div>
+          <div id="submit-done">
+            <div class="img-saved"></div>
+            <span>{{ 'profile.form.submitSuccess'|trans({}, 'catroweb') }}</span>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  {% endif %}#}
+
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
+  <script>
+    var profile = new MyProfile('{{ path('profile') }}', '{{ path('name_save') }}', '{{ path('name_edit') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
+        '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',  '{{ path('profile_save') }}', '{{ path('profile_delete_program') }}',
+        '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
+  </script>
+{% endblock %}

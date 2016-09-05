@@ -651,7 +651,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $name = trim($name);
       $not = trim($not);
 
-      $source = $this->getSession()->getPage()->find('css', '#profile-avatar > img')->getAttribute('src');
+      $source = $this->getSession()->getPage()->find('css', '#avatar-img')->getAttribute('src');
       $source = trim($source, '"');
       $styleHeader = $this->getSession()->getPage()->find('css', '#menu .img-avatar')->getAttribute('style');
       $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
@@ -742,6 +742,27 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             case "delete-comment":
                 $button = $page->find("css", "#delete-button-4");
                 break;
+            case "edit":
+              $button = $page->find("css", "#edit-icon a");
+              break;
+            case "password-edit":
+              $button = $page->find("css", "#password-button");
+              break;
+            case "email-edit":
+              $button = $page->find("css", "#email-button");
+              break;
+            case "country-edit":
+              $button = $page->find("css", "#country-button");
+              break;
+            case "name-edit":
+              $button = $page->find("css", "#username-button");
+              break;
+            case "avatar-edit":
+              $button = $page->find("css", "#avatar-button");
+              break;
+            case "save-edit":
+              $button = $page->find("css", ".save-button");
+              break;
             default:
                 assertTrue(false);
         }

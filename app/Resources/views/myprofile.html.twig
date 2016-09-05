@@ -13,76 +13,27 @@
     <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
     <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
     <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
-    {% if not app.user.limited %}
-    <div id="avatar-upload">
-      <div>
-        <input type="file" name="file">
-        <span>{{ 'profile.changePicture'|trans({}, 'catroweb') }}</span>
-        <div class="button-show-ajax img-load-ajax"></div>
-      </div>
+  </div>
+  <div id="user-information">
+
+    <div id="country-information">
+      <div id="country-header">Land:</div>
+      <div id="country"> {{ country }} </div>
     </div>
-    {% endif %}
-  </div>
-  {% if not app.user.limited %}
-  <div id="profile-form">
 
-    <form>
-      <div>
-        <div class="input-error text-password-nomatch">{{ 'passwordsNoMatch'|trans({}, 'catroweb') }}</div>
-        <div class="input-error text-password-tooshort">{{ 'profile.form.passwordTooShort'|trans({'%length%':minPassLength}, 'catroweb') }}</div>
-        <div class="input-error text-password-toolong">{{ 'profile.form.passwordTooLong'|trans({'%length%':maxPassLength}, 'catroweb') }}</div>
-        <div class="input-error text-password-isusername">{{ 'profile.form.passwordIsUsername'|trans({}, 'catroweb') }}</div>
-        {% if not oauth_user %}
-          <div class="input-field">
-            <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" tabindex="1">
-            <div class="img-password"></div>
-          </div>
-          <div class="input-field">
-            <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" tabindex="2">
-            <div class="img-password"></div>
-          </div>
-        {% endif %}
-        <div id="select-country">
-          <div>{{ 'country'|trans({}, 'catroweb') }}</div>
-          <div>
-            <select name="country" tabindex="5">
-              <option value=""></option>
-              {% for key, country in  countriesList() %}
-                {% if app.user.country == key %}
-                  <option value="{{ key }}" selected>{{ country }}</option>
-                {% else %}
-                  <option value="{{ key }}">{{ country }}</option>
-                {% endif %}
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="input-error text-email-notvalid">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
-        <div class="input-error text-email-missing">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
-        <div class="input-error text-email-exists">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
-        <div class="input-field">
-          <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" tabindex="3">
-          <div class="img-mail-first"></div>
-        </div>
-        <div class="input-field">
-          <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" tabindex="4">
-          <div class="img-mail-second"></div>
-        </div>
-        <div>
-          <button type="submit" name="submit" class="btn btn-primary pull-right" tabindex="6">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
-          <div class="img-load-ajax"></div>
-          <div id="submit-done">
-            <div class="img-saved"></div>
-            <span>{{ 'profile.form.submitSuccess'|trans({}, 'catroweb') }}</span>
-          </div>
-        </div>
-      </div>
-    </form>
-
+    <div id="email-information">
+      <div id="email-header">E-Mail:</div>
+      <div id="email"> {{ firstMail }} </div>
+      <div id="second-email"> {{ secondMail }} </div>
+    </div>
   </div>
-  {% endif %}
+
+  <div id="edit-icon">
+    <a href="{{ url('profile_edit', {id : profile.id}) }}">
+      <img src="{{ asset('images/default/edit.png') }}">
+    </a>
+  </div>
+
   <div class="clear"></div>
   {% if not app.user.limited %}
   <div id="myprofile-programs">
@@ -100,12 +51,14 @@
   <script>
     {% if not app.user.limited %}
     var programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}');
-    var profile = new MyProfile('{{ path('profile_save') }}', '{{ path('profile_delete_program') }}', '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
+    var profile = new MyProfile('{{ path('profile') }}', '{{ path('name_save') }}', '{{ path('name_edit') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
+        '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',  '{{ path('profile_save') }}', '{{ path('profile_delete_program') }}',
+        '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
     programs.initProfile({{ app.user.id }});
     profile.init();
     {% else %}
     var programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}');
     programs.initProfile({{ app.user.id }});
     {% endif %}
-    </script>
+  </script>
 {% endblock %}
