@@ -117,4 +117,11 @@ class Extension
     {
         $this->prefix = $prefix;
     }
+
+    public function removeAllPrograms()
+    {
+        foreach ($this->programs as $program) {
+            $this->removeProgram($program);
+        }
+    }
 }
