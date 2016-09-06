@@ -500,7 +500,7 @@ ci:
 gamejam:
   nojam: この時点で、ゲーム jam はありません。
   submit: '%gamejamname% に提出'
-  whats: "What's the %gamejamname%?"
+  whats: '%gamejamname% は何ですか?'
   submitown:
     header: ご注意ください
     subheader: 独自のプログラムのみ提出することができます

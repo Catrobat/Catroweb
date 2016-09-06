@@ -493,7 +493,7 @@ ci:
 gamejam:
   nojam: Entschuldigung, es findet gerade kein game jam statt
   submit: 'Einreichen zum %gamejamname%'
-  whats: 'Was ist die %gamejamname%?'
+  whats: 'Was ist der %gamejamname%?'
   submitown:
     header: Achtung
     subheader: Du kannst nur eigene Programme einreichen
