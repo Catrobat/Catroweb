@@ -33,7 +33,7 @@
 
 {% macro dropcontent(object, path) %}
     {% import _self as self %}
-
+{% set sound_counter = 0 %}
     {% if object.scripts|length > 0 %}
         {% for script in object.scripts %}
             <div class="script">
@@ -54,7 +54,11 @@
                                 <img src="{{ asset('./'~path~'images/'~brick.look) }}" class="brick-look">
                             {% endif %}
                             {% if brick.sound is defined %}
-                                <img src="{{ asset('images/symbols/sound.svg') }}" class="brick-sound" onclick="playSound('{{ asset('./'~path~'sounds/'~brick.sound) }}');">
+                                <img src="{{ asset('images/symbols/sound.svg') }}" id="sound-{{ sound_counter }}" class="brick-sound"
+                                     onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.sound) }}', {{ sound_counter }});">
+                                <img src="{{ asset('images/symbols/stop.png') }}" id="soundStop-{{ sound_counter }}" class="brick-sound" style="display:none;"
+                                     onclick="stopSound({{ sound_counter }});">
+                                {% set sound_counter = sound_counter + 1 %}
                             {% endif %}
                         </div>
                     {% endfor %}
@@ -110,6 +114,9 @@
 
 {% block js %}
     <script>
+
+        var sound_map = {};
+
         $(document).ready(function() {
             $('.dropbtn').on("click", function() {
                 $(this).next().slideToggle(250, 'linear');
@@ -117,9 +124,23 @@
             });
         });
 
-        function playSound(file_name) {
+        function initialSound(file_name, id) {
             var audio = new Audio(file_name);
             audio.play();
+            audio.addEventListener('ended',function(){
+                $("#soundStop-"+id).hide();
+                $("#sound-"+id).show();
+            });
+            sound_map[id] = audio;
+            $("#sound-"+id).hide();
+            $("#soundStop-"+id).show();
+        }
+
+        function stopSound(id){
+            sound_map[id].pause();
+            sound_map[id].currentTime = 0;
+            $("#soundStop-"+id).hide();
+            $("#sound-"+id).show();
         }
 
     </script>

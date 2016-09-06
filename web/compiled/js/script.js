@@ -292,7 +292,6 @@ var Main = function (search_url) {
   self.showMorePrograms = function() {
     var programs_in_container = $(self.container).find('.program');
 
-
     $(programs_in_container).hide();
     for(var i = 0; i < self.visible + self.visible_steps; i++) {
       if(programs_in_container[i] == undefined) {
@@ -301,6 +300,7 @@ var Main = function (search_url) {
       }
       $(programs_in_container[i]).show();
     }
+
     if(self.loaded < self.visible + self.visible_steps)
       $(self.container).find('.button-show-more').hide();
     else

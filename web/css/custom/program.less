@@ -139,12 +139,12 @@ a {
 
   .show-hide-code-arrow {
     position: absolute;
-    right: 10%;
+    right: ~"calc(26% - 5px)";
     top: 25px;
-    height: 35px;
+    height: 20px;
 
     img {
-      height: 100%;
+      height: 20px;
       width: auto;
     }
   }
@@ -174,8 +174,8 @@ a {
 }
 
 .show-code {
+  border-bottom: none;
   height: 42px;
-  border-bottom: 1px solid @default-text-color;
   background-color: @default-background-color;
 }
 
@@ -401,6 +401,7 @@ table td:nth-child(1) {
 }
 
 #comment-successfully-reported {
+  z-index: 1;
   display: none;
   padding-top: 10px;
   position: fixed;
@@ -530,3 +531,16 @@ table td:nth-child(1) {
     width: 215px;
   }
 }
+
+@media (max-width: 800px) {
+  .show-hide-code-arrow{
+    right: ~"calc(22.5% - 5px)" !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .show-hide-code-arrow{
+    right: ~"calc(10% - 5px)" !important;
+  }
+}
+
