@@ -33,7 +33,7 @@ services:
 
       catrowebadmin.command.import:
               class: Catrobat\AppBundle\Commands\ProgramImportCommand
-              arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager"]
+              arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager.remix_manipulation"]
               tags:
                 -  { name: console.command }
 
@@ -77,7 +77,12 @@ services:
 
       catrowebadmin.command.import.legacy:
               class: Catrobat\AppBundle\Commands\ImportLegacyCommand
-              arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager", "@doctrine.orm.entity_manager"]
+              arguments:
+                  - "@catrowebadmin.filesystem"
+                  - "@usermanager"
+                  - "@programmanager"
+                  - "@remixmanager"
+                  - "@doctrine.orm.entity_manager"
               tags:
                 -  { name: console.command }
 
@@ -116,3 +121,15 @@ services:
               arguments: ["@doctrine.orm.entity_manager"]
               tags:
                   -  { name: console.command }
+
+      command.remixgraph.migrate:
+              class: Catrobat\AppBundle\Commands\MigrateRemixGraphsCommand
+              arguments:
+                  - "@catrowebadmin.filesystem"
+                  - "@usermanager"
+                  - "@programmanager"
+                  - "@remixmanager"
+                  - "@doctrine.orm.entity_manager"
+                  - "%kernel.root_dir%"
+              tags:
+                -  { name: console.command }

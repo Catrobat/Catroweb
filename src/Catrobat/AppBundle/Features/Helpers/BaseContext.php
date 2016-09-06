@@ -85,7 +85,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
      */
     public function getProgramManger()
     {
-        return $this->symfony_support->getProgramManger();
+        return $this->symfony_support->getProgramManager();
     }
 
     /**
@@ -95,6 +95,39 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     public function getTagRepository()
     {
         return $this->symfony_support->getTagRepository();
+    }
+
+    /**
+     *
+     * @return \Catrobat\AppBundle\Entity\ProgramRemixRepository
+     */
+    public function getProgramRemixForwardRepository()
+    {
+        return $this->symfony_support->getProgramRemixForwardRepository();
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
+     */
+    public function getProgramRemixBackwardRepository()
+    {
+        return $this->symfony_support->getProgramRemixBackwardRepository();
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ScratchProgramRepository
+     */
+    public function getScratchProgramRepository()
+    {
+        return $this->symfony_support->getScratchProgramRepository();
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
+     */
+    public function getScratchProgramRemixRepository()
+    {
+        return $this->symfony_support->getScratchProgramRemixRepository();
     }
 
     /**
@@ -233,6 +266,21 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     public function insertExtension($config)
     {
         return $this->symfony_support->insertExtension($config);
+    }
+
+    public function insertForwardRemixRelation($config)
+    {
+        return $this->symfony_support->insertForwardRemixRelation($config);
+    }
+
+    public function insertBackwardRemixRelation($config)
+    {
+        return $this->symfony_support->insertBackwardRemixRelation($config);
+    }
+
+    public function insertScratchRemixRelation($config)
+    {
+        return $this->symfony_support->insertScratchRemixRelation($config);
     }
 
     public function insertProgramDownloadStatistics($program, $config)

@@ -30,7 +30,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class FeatureContext extends BaseContext
 {
 
-    private $user;
+    private $username;
 
     private $request_parameters;
 
@@ -51,24 +51,34 @@ class FeatureContext extends BaseContext
 
     private $fb_post_id;
 
+    private $checked_catrobat_remix_forward_ancestor_relations;
+
+    private $checked_catrobat_remix_forward_descendant_relations;
+
+    private $checked_catrobat_remix_backward_relations;
+
     /**
      * Initializes context with parameters from behat.yml.
      *
-     * @param array $parameters            
+     * @param array $parameters
      */
     public function __construct($error_directory)
     {
         parent::__construct();
         $this->setErrorDirectory($error_directory);
+        $this->username = null;
         $this->request_parameters = array();
         $this->files = array();
         $this->hostname = 'localhost';
         $this->secure = false;
+        $this->checked_catrobat_remix_forward_ancestor_relations = [];
+        $this->checked_catrobat_remix_forward_descendant_relations = [];
+        $this->checked_catrobat_remix_backward_relations = [];
     }
-    
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Support Functions
-    
+
     /**
      * @BeforeScenario @RealFacebook
      */
@@ -94,14 +104,14 @@ class FeatureContext extends BaseContext
      * @BeforeScenario @RealGeocoder
      */
     public function activateRealGeocoderService() {
-        $this->getSymfonyService('download_statistics')->useRealService(true);
+        $this->getSymfonyService('statistics')->useRealService(true);
     }
 
     /**
      * @AfterScenario @RealGeocoder
      */
     public function deactivateRealGeocoderService() {
-        $this->getSymfonyService('download_statistics')->useRealService(false);
+        $this->getSymfonyService('statistics')->useRealService(false);
     }
 
     private function prepareValidRegistrationParameters()
@@ -116,10 +126,10 @@ class FeatureContext extends BaseContext
     {
         $this->getClient()->request('POST', $url, $this->request_parameters, $this->files);
     }
-    
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////// Steps
-    
+
     /**
      * @Given /^I have a program with "([^"]*)" as (name|description|tags)$/
      */
@@ -168,10 +178,10 @@ class FeatureContext extends BaseContext
     public function iDefineTheFollowingRudeWords(TableNode $table)
     {
         $words = $table->getHash();
-        
+
         $word = null;
         $em = $this->getManager();
-        
+
         for ($i = 0; $i < count($words); ++ $i) {
             $word = new RudeWord();
             $word->setWord($words[$i]['word']);
@@ -225,7 +235,7 @@ class FeatureContext extends BaseContext
             case 'tags':
                 $filename = 'program_with_tags.catrobat';
                 break;
-            
+
             default:
                 throw new PendingException('No case defined for "' . $programattribute . '"');
         }
@@ -269,7 +279,7 @@ class FeatureContext extends BaseContext
         $ldap_test_driver = $this->getSymfonyService('fr3d_ldap.ldap_driver');
         $users = $table->getHash();
         $ldap_test_driver->resetFixtures();
-        
+
         for ($i = 0; $i < count($users); ++ $i) {
             $username = $users[$i]['name'];
             $pwd = $users[$i]['password'];
@@ -300,12 +310,12 @@ class FeatureContext extends BaseContext
                 'directory_hash' => $programs[$i]['directory_hash'],
                 'filesize' => @$programs[$i]['FileSize'],
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
                 'approved' => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
                 'tags' => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
                 'extensions' => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
+                'remix_root' => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true
             );
-            
+
             $this->insertProgram($user, $config);
         }
     }
@@ -342,6 +352,58 @@ class FeatureContext extends BaseContext
                 'prefix' => $extension['prefix']
             );
             $this->insertExtension($config);
+        }
+    }
+
+    /**
+     * @Given /^there are forward remix relations:$/
+     */
+    public function thereAreForwardRemixRelations(TableNode $table)
+    {
+        $relations = $table->getHash();
+
+        foreach($relations as $relation)
+        {
+            @$config = array(
+                'ancestor_id' => $relation['ancestor_id'],
+                'descendant_id' => $relation['descendant_id'],
+                'depth' => $relation['depth']
+            );
+            $this->insertForwardRemixRelation($config);
+        }
+    }
+
+    /**
+     * @Given /^there are backward remix relations:$/
+     */
+    public function thereAreBackwardRemixRelations(TableNode $table)
+    {
+        $backward_relations = $table->getHash();
+
+        foreach($backward_relations as $backward_relation)
+        {
+            @$config = array(
+                'parent_id' => $backward_relation['parent_id'],
+                'child_id' => $backward_relation['child_id']
+            );
+            $this->insertBackwardRemixRelation($config);
+        }
+    }
+
+    /**
+     * @Given /^there are Scratch remix relations:$/
+     */
+    public function thereAreScratchRemixRelations(TableNode $table)
+    {
+        $scratch_relations = $table->getHash();
+
+        foreach($scratch_relations as $scratch_relation)
+        {
+            @$config = array(
+                'scratch_parent_id' => $scratch_relation['scratch_parent_id'],
+                'catrobat_child_id' => $scratch_relation['catrobat_child_id']
+            );
+            $this->insertScratchRemixRelation($config);
         }
     }
 
@@ -386,9 +448,9 @@ class FeatureContext extends BaseContext
                 'filesize' => @$programs[$i]['FileSize'],
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true
             );
-            
+
             $program = $this->insertProgram($user, $config);
-            
+
             $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $program->getId());
         }
     }
@@ -436,7 +498,7 @@ class FeatureContext extends BaseContext
      */
     public function iAm($username)
     {
-        $this->user = $username;
+        $this->username = $username;
     }
 
     /**
@@ -491,7 +553,7 @@ class FeatureContext extends BaseContext
     {
         $params = array(
             'token' => $token,
-            'username' => $this->user
+            'username' => $this->username
         );
         $this->getClient()->request('GET', $url . '?' . http_build_query($params));
     }
@@ -556,7 +618,7 @@ class FeatureContext extends BaseContext
         $random_programs = $response_array['CatrobatProjects'];
         $expected_programs = $table->getHash();
         assertEquals($program_count, count($random_programs), 'Wrong number of random programs');
-        
+
         for ($i = 0; $i < count($random_programs); ++ $i) {
             $program_found = false;
             for ($j = 0; $j < count($expected_programs); ++ $j) {
@@ -649,7 +711,7 @@ class FeatureContext extends BaseContext
     {
         $this->iHaveAValidCatrobatFile();
         $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
-        $this->request_parameters['username'] = $this->user;
+        $this->request_parameters['username'] = $this->username;
         $this->request_parameters['token'] = 'cccccccccc';
         $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
     }
@@ -661,9 +723,28 @@ class FeatureContext extends BaseContext
     {
         $this->iHaveAValidCatrobatFile();
         $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
-        $this->request_parameters['username'] = $this->user;
+        $this->request_parameters['username'] = $this->username;
         $this->request_parameters['token'] = $arg1;
         $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
+    }
+
+    /**
+     * @When /^I upload another program with name set to "([^"]*)" and url set to "([^"]*)"$/
+     */
+    public function iUploadAnotherProgramWithNameSetToAndUrlSetTo($name, $url)
+    {
+        $this->iHaveAProgramWithAsTwoHeaderFields('name', $name, 'url', $url);
+        $this->iUploadAProgram();
+    }
+
+    /**
+     * @When /^I upload another program with name set to "([^"]*)", url set to "([^"]*)" and catrobatLanguageVersion set to "([^"]*)"$/
+     */
+    public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo($name, $url, $catrobat_language_version)
+    {
+        $this->iHaveAProgramWithAsMultipleHeaderFields('name', $name, 'url', $url,
+            'catrobatLanguageVersion', $catrobat_language_version);
+        $this->iUploadAProgram();
     }
 
     /**
@@ -684,7 +765,7 @@ class FeatureContext extends BaseContext
      */
     public function iUploadACatrobatProgramWithTheSameName()
     {
-        $user = $this->getUserManager()->findUserByUsername($this->user);
+        $user = $this->getUserManager()->findUserByUsername($this->username);
         $this->request_parameters['token'] = $user->getUploadToken();
         $this->last_response = $this->getClient()
             ->getResponse()
@@ -787,59 +868,59 @@ class FeatureContext extends BaseContext
         throw new PendingException();
     }
 
-  /**
-   * @When /^I have downloaded a valid program$/
-   */
-  public function iHaveDownloadedAValidProgram()
-  {
-      $this->iDownload('/pocketcode/download/1.catrobat');
-      $this->iShouldReceiveAFile();
-      $this->theResponseCodeShouldBe(200);
-  }
+    /**
+     * @When /^I have downloaded a valid program$/
+     */
+    public function iHaveDownloadedAValidProgram()
+    {
+        $this->iDownload('/pocketcode/download/1.catrobat');
+        $this->iShouldReceiveAFile();
+        $this->theResponseCodeShouldBe(200);
+    }
 
-  /**
-   * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
-   */
-  public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
-  {
-      $statistics = $table->getHash();
-      for ($i = 0; $i < count($statistics); ++$i ) {
-          $ip = $statistics[$i]['ip'];
-          $country_code = $statistics[$i]['country_code'];
-          $country_name = $statistics[$i]['country_name'];
-          $program_id = $statistics[$i]['program_id'];
+    /**
+     * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+     */
+    public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
+    {
+        $statistics = $table->getHash();
+        for ($i = 0; $i < count($statistics); ++$i ) {
+            $ip = $statistics[$i]['ip'];
+            $country_code = $statistics[$i]['country_code'];
+            $country_name = $statistics[$i]['country_name'];
+            $program_id = $statistics[$i]['program_id'];
 
-          /**
-           * @var $program_download_statistics ProgramDownloads
-           */
-          $repository = $this->getManager()->getRepository('AppBundle:ProgramDownloads');
-          $program_download_statistics = $repository->find(1);
+            /**
+             * @var $program_download_statistics ProgramDownloads
+             */
+            $repository = $this->getManager()->getRepository('AppBundle:ProgramDownloads');
+            $program_download_statistics = $repository->find(1);
 
-          assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
-          assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
-          assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
-          assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
-          assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
+            assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
+            assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
+            assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
+            assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
+            assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
 
-          assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
-          assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
-          assertNotEmpty($program_download_statistics->getStreet(), "No street was written to download statistics");
-          assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
+            assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
+            assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
+            assertNotEmpty($program_download_statistics->getStreet(), "No street was written to download statistics");
+            assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
 
-          $limit = 5.0;
+            $limit = 5.0;
 
-          $latitude = floatval($program_download_statistics->getLatitude());
-          $longitude = floatval($program_download_statistics->getLongitude());
-          $download_time = $program_download_statistics->getDownloadedAt();
-          $current_time = new \DateTime();
+            $latitude = floatval($program_download_statistics->getLatitude());
+            $longitude = floatval($program_download_statistics->getLongitude());
+            $download_time = $program_download_statistics->getDownloadedAt();
+            $current_time = new \DateTime();
 
-          $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
+            $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
 
-          assertTrue($latitude > (floatval($expected_latitude) - $limit) && $latitude < (floatval($expected_latitude) + $limit), "Latitude in download statistics not as expected");
-          assertTrue($longitude > ($expected_longitude - $limit) && $longitude < ($expected_longitude + $limit), "Longitude in download statistics not as expected");
-          assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
-      }
-  }
+            assertTrue($latitude > (floatval($expected_latitude) - $limit) && $latitude < (floatval($expected_latitude) + $limit), "Latitude in download statistics not as expected");
+            assertTrue($longitude > ($expected_longitude - $limit) && $longitude < ($expected_longitude + $limit), "Longitude in download statistics not as expected");
+            assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
+        }
+    }
 
     /**
      * @When /^i download "([^"]*)"$/
@@ -899,11 +980,35 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @Given /^I have a program with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
+     */
+    public function iHaveAProgramWithAsTwoHeaderFields($key1, $value1, $key2, $value2)
+    {
+        $this->generateProgramFileWith(array(
+            $key1 => $value1,
+            $key2 => $value2
+        ));
+    }
+
+    /**
+     * @Given /^I have a program with "([^"]*)" set to "([^"]*)", "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
+     */
+    public function iHaveAProgramWithAsMultipleHeaderFields($key1, $value1, $key2, $value2, $key3, $value3)
+    {
+        $this->generateProgramFileWith(array(
+            $key1 => $value1,
+            $key2 => $value2,
+            $key3 => $value3
+        ));
+    }
+
+    /**
      * @When /^I upload a program$/
      */
     public function iUploadAProgram()
     {
-        $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
+        $user = $this->username ? $this->getUserManager()->findUserByUsername($this->username) : null;
+        $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', $user);
     }
 
     /**
@@ -996,31 +1101,350 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^the uploaded program should be a remix of "([^"]*)"$/
+     * @Then /^the uploaded program should be a remix root$/
      */
-    public function theUploadedProgramShouldBeARemixOf($id)
+    public function theUploadedProgramShouldBeARemixRoot()
     {
-        $json = json_decode($this->getClient()
-            ->getResponse()
-            ->getContent(), true);
-        
-        $program_manager = $this->getProgramManger();
-        $uploaded_program = $program_manager->find($json["projectId"]);
-        assertEquals($id, $uploaded_program->getRemixOf()->getId());
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldBeARemixRoot($json["projectId"]);
     }
 
     /**
-     * @Then /^the uploaded program shouldn\'t have any parent entity$/
+     * @Then /^the program "([^"]*)" should be a remix root$/
      */
-    public function theUploadedProgramShouldnTHaveAnyParentEntity()
+    public function theProgramShouldBeARemixRoot($program_id)
     {
-        $json = json_decode($this->getClient()
-            ->getResponse()
-            ->getContent(), true);
-        
+        $program_manager = $this->getProgramManger();
+        $uploaded_program = $program_manager->find($program_id);
+        assertTrue($uploaded_program->isRemixRoot());
+    }
+
+    /**
+     * @Then /^the uploaded program should not be a remix root$/
+     */
+    public function theUploadedProgramShouldNotBeARemixRoot()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldNotBeARemixRoot($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the uploaded program should have remix migration date NOT NULL$/
+     */
+    public function theUploadedProgramShouldHaveMigrationDateNotNull()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($json["projectId"]);
-        assertEquals(null, $uploaded_program->getRemixOf());
+        assertNotNull($uploaded_program->getRemixMigratedAt());
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should not be a remix root$/
+     */
+    public function theProgramShouldNotBeARemixRoot($program_id)
+    {
+        $program_manager = $this->getProgramManger();
+        $uploaded_program = $program_manager->find($program_id);
+        assertFalse($uploaded_program->isRemixRoot());
+    }
+
+    /**
+     * @Given /^the uploaded program should have a Scratch parent having id "([^"]*)"$/
+     */
+    public function theUploadedProgramShouldHaveAScratchParentHavingScratchID($scratch_parent_id)
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveAScratchParentHavingScratchID($json["projectId"], $scratch_parent_id);
+    }
+
+    /**
+     * @Given /^the program "([^"]*)" should have a Scratch parent having id "([^"]*)"$/
+     */
+    public function theProgramShouldHaveAScratchParentHavingScratchID($program_id, $scratch_parent_id)
+    {
+        $direct_edge_relation = $this->getScratchProgramRemixRepository()->findOneBy([
+            'scratch_parent_id' => $scratch_parent_id,
+            'catrobat_child_id' => $program_id
+        ]);
+
+        assertNotNull($direct_edge_relation);
+        $this->checked_catrobat_remix_forward_ancestor_relations[$direct_edge_relation->getUniqueKey()] = $direct_edge_relation;
+    }
+
+    /**
+     * @Given /^the uploaded program should have no further Scratch parents$/
+     */
+    public function theUploadedProgramShouldHaveNoFurtherScratchParents()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoFurtherScratchParents($json["projectId"]);
+    }
+
+    /**
+     * @Given /^the program "([^"]*)" should have no further Scratch parents$/
+     */
+    public function theProgramShouldHaveNoFurtherScratchParents($program_id)
+    {
+        $direct_edge_relations = $this->getScratchProgramRemixRepository()->findBy([
+            'catrobat_child_id' => $program_id
+        ]);
+
+        $further_scratch_parent_relations = array_filter($direct_edge_relations,
+            function ($r) { return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations); });
+
+        assertCount(0, $further_scratch_parent_relations);
+    }
+
+    /**
+     * @Then /^the uploaded program should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
+     */
+    public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($id, $depth)
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($json["projectId"], $id, $depth);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
+     */
+    public function theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($program_id, $ancestor_program_id, $depth)
+    {
+        $forward_ancestor_relation = $this->getProgramRemixForwardRepository()->findOneBy([
+            'ancestor_id' => $ancestor_program_id,
+            'descendant_id' => $program_id,
+            'depth' => $depth
+        ]);
+
+        assertNotNull($forward_ancestor_relation);
+        $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] = $forward_ancestor_relation;
+
+        if ($program_id == $ancestor_program_id && $depth == 0) {
+            $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] = $forward_ancestor_relation;
+        }
+    }
+
+    /**
+     * @Then /^the uploaded program should have a Catrobat backward parent having id "([^"]*)"$/
+     */
+    public function theUploadedProgramShouldHaveACatrobatBackwardParentHavingId($id)
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveACatrobatBackwardParentHavingId($json["projectId"], $id);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have a Catrobat backward parent having id "([^"]*)"$/
+     */
+    public function theProgramShouldHaveACatrobatBackwardParentHavingId($program_id, $backward_parent_program_id)
+    {
+        $backward_parent_relation = $this->getProgramRemixBackwardRepository()->findOneBy([
+            'parent_id' => $backward_parent_program_id,
+            'child_id' => $program_id
+        ]);
+
+        assertNotNull($backward_parent_relation);
+        $this->checked_catrobat_remix_backward_relations[$backward_parent_relation->getUniqueKey()] = $backward_parent_relation;
+    }
+
+    /**
+     * @Then /^the uploaded program should have no Catrobat forward ancestors except self-relation$/
+     */
+    public function theUploadedProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no Catrobat forward ancestors except self-relation$/
+     */
+    public function theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($program_id)
+    {
+        $forward_ancestors_including_self_referencing_relation = $this
+            ->getProgramRemixForwardRepository()
+            ->findBy(['descendant_id' => $program_id]);
+
+        assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
+            function ($r) { return $r->getDepth() >= 1; }));
+    }
+
+    /**
+     * @Then /^the uploaded program should have no further Catrobat forward ancestors$/
+     */
+    public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardAncestors()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoFurtherCatrobatForwardAncestors($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no further Catrobat forward ancestors$/
+     */
+    public function theProgramShouldHaveNoFurtherCatrobatForwardAncestors($program_id)
+    {
+        $forward_ancestors_including_self_referencing_relation = $this
+            ->getProgramRemixForwardRepository()
+            ->findBy(['descendant_id' => $program_id]);
+
+        $further_forward_ancestor_relations = array_filter($forward_ancestors_including_self_referencing_relation,
+            function ($r) {
+                return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations);
+            });
+
+        assertCount(0, $further_forward_ancestor_relations);
+    }
+
+    /**
+     * @Then /^the uploaded program should have no Catrobat backward parents$/
+     */
+    public function theUploadedProgramShouldHaveNoCatrobatBackwardParents()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoCatrobatBackwardParents($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no Catrobat backward parents$/
+     */
+    public function theProgramShouldHaveNoCatrobatBackwardParents($program_id)
+    {
+        $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
+        assertCount(0, $backward_parent_relations);
+    }
+
+    /**
+     * @Then /^the uploaded program should have no further Catrobat backward parents$/
+     */
+    public function theUploadedProgramShouldHaveNoFurtherCatrobatBackwardParents()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoFurtherCatrobatBackwardParents($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no further Catrobat backward parents$/
+     */
+    public function theProgramShouldHaveNoFurtherCatrobatBackwardParents($program_id)
+    {
+        $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
+
+        $further_backward_parent_relations = array_filter($backward_parent_relations,
+            function ($r) { return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_backward_relations); });
+
+        assertCount(0, $further_backward_parent_relations);
+    }
+
+    /**
+     * @Then /^the uploaded program should have no Catrobat ancestors except self-relation$/
+     */
+    public function theUploadedProgramShouldHaveNoCatrobatAncestors()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoCatrobatAncestors($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no Catrobat ancestors except self-relation$/
+     */
+    public function theProgramShouldHaveNoCatrobatAncestors($program_id)
+    {
+        $this->theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($program_id);
+        $this->theProgramShouldHaveNoCatrobatBackwardParents($program_id);
+    }
+
+    /**
+     * @Then /^the uploaded program should have no Scratch parents$/
+     */
+    public function theUploadedProgramShouldHaveNoScratchParents()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoScratchParents($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no Scratch parents$/
+     */
+    public function theProgramShouldHaveNoScratchParents($program_id)
+    {
+        $scratch_parents = $this->getScratchProgramRemixRepository()->findBy(['catrobat_child_id' => $program_id]);
+        assertCount(0, $scratch_parents);
+    }
+
+    /**
+     * @Then /^the uploaded program should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
+     */
+    public function theUploadedProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($id, $depth)
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($json["projectId"], $id, $depth);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
+     */
+    public function theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($program_id, $descendant_program_id, $depth)
+    {
+        $forward_descendant_relation = $this->getProgramRemixForwardRepository()->findOneBy([
+            'ancestor_id' => $program_id,
+            'descendant_id' => $descendant_program_id,
+            'depth' => $depth
+        ]);
+
+        assertNotNull($forward_descendant_relation);
+        $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] = $forward_descendant_relation;
+
+        if ($program_id == $descendant_program_id && $depth == 0) {
+            $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] = $forward_descendant_relation;
+        }
+    }
+
+    /**
+     * @Then /^the uploaded program should have no Catrobat forward descendants except self-relation$/
+     */
+    public function theUploadedProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no Catrobat forward descendants except self-relation$/
+     */
+    public function theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($program_id)
+    {
+        $forward_ancestors_including_self_referencing_relation = $this
+            ->getProgramRemixForwardRepository()
+            ->findBy(['ancestor_id' => $program_id]);
+
+        assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
+            function ($r) { return $r->getDepth() >= 1; }));
+    }
+
+    /**
+     * @Then /^the uploaded program should have no further Catrobat forward descendants$/
+     */
+    public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardDescendants()
+    {
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveNoFurtherCatrobatForwardDescendants($json["projectId"]);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have no further Catrobat forward descendants$/
+     */
+    public function theProgramShouldHaveNoFurtherCatrobatForwardDescendants($program_id)
+    {
+        $forward_descendants_including_self_referencing_relation = $this
+            ->getProgramRemixForwardRepository()
+            ->findBy(['ancestor_id' => $program_id]);
+
+        $further_forward_descendant_relations = array_filter($forward_descendants_including_self_referencing_relation,
+            function ($r) {
+                return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations);
+            });
+
+        assertCount(0, $further_forward_descendant_relations);
     }
 
     /**
@@ -1028,18 +1452,23 @@ class FeatureContext extends BaseContext
      */
     public function theUploadedProgramShouldHaveRemixofInTheXml($value)
     {
-        $json = json_decode($this->getClient()
-            ->getResponse()
-            ->getContent(), true);
-        
+        $json = json_decode($this->getClient()->getResponse()->getContent(), true);
+        $this->theProgramShouldHaveRemixofInTheXml($json["projectId"], $value);
+    }
+
+    /**
+     * @Then /^the program "([^"]*)" should have RemixOf "([^"]*)" in the xml$/
+     */
+    public function theProgramShouldHaveRemixofInTheXml($program_id, $value)
+    {
         $program_manager = $this->getProgramManger();
-        $uploaded_program = $program_manager->find($json["projectId"]);
+        $uploaded_program = $program_manager->find($program_id);
         $efr = $this->getExtractedFileRepository();
         /**
          * @var Program $uploaded_program *
          */
-        $extracetCatrobatFile = $efr->loadProgramExtractedFile($uploaded_program);
-        $progXmlProp = $extracetCatrobatFile->getProgramXmlProperties();
+        $extractedCatrobatFile = $efr->loadProgramExtractedFile($uploaded_program);
+        $progXmlProp = $extractedCatrobatFile->getProgramXmlProperties();
         assertEquals($value, $progXmlProp->header->remixOf->__toString());
     }
 
@@ -1074,12 +1503,12 @@ class FeatureContext extends BaseContext
             ->getResponse()
             ->getContent(), true);
         $project_id = $response['projectId'];
-        
+
         /**
          *
          * @var $program Program
          */
-        $program_manager = $this->getSymfonySupport()->getProgramManger();
+        $program_manager = $this->getSymfonySupport()->getProgramManager();
         $program = $program_manager->find($project_id);
         $user = $program->getUser();
         $fb_post_id = $program->getFbPostId();
@@ -1094,7 +1523,7 @@ class FeatureContext extends BaseContext
 
         $fb_id = $fb_response['id'];
         $fb_message = $fb_response['message'];
-        
+
         $this->fb_post_id = $fb_id;
         assertTrue($fb_id != '', "No Facebook Post ID was returned");
         assertEquals($fb_id, $program_manager->find($project_id)->getFbPostId(), "Facebook Post ID's do not match");
@@ -1119,12 +1548,12 @@ class FeatureContext extends BaseContext
     public function theFacebookPostShouldBeDeleted()
     {
         //echo 'Delete post with Facebook ID ' . $this->fb_post_id;
-        
+
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);
         assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
-        
+
         $string = print_r($fb_response, true);
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
         assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
@@ -1140,7 +1569,7 @@ class FeatureContext extends BaseContext
      */
     public function iHaveNoParameters(){}
 
-        /**
+    /**
      * @When /^I GET the tag list from "([^"]*)" with these parameters$/
      */
     public function iGetTheTagListFromWithTheseParameters($url)
@@ -1167,7 +1596,7 @@ class FeatureContext extends BaseContext
             default:
                 $deviceLanguage = 'NotExisting';
         }
-        
+
         $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
     }
 
@@ -1260,5 +1689,23 @@ class FeatureContext extends BaseContext
         }
     }
 
+    /**
+     * @When /^I search similar programs for program id "([^"]*)"$/
+     */
+    public function iSearchSimilarProgramsForProgramId($id)
+    {
+        $this->iHaveAParameterWithValue('program_id', $id);
+        if (isset($this->request_parameters['limit'])) {
+            $this->iHaveAParameterWithValue('limit', $this->request_parameters['limit']);
+        } else {
+            $this->iHaveAParameterWithValue('limit', '1');
+        }
+        if (isset($this->request_parameters['offset'])) {
+            $this->iHaveAParameterWithValue('offset', $this->request_parameters['offset']);
+        } else {
+            $this->iHaveAParameterWithValue('offset', '0');
+        }
+        $this->iGetWithTheseParameters('/pocketcode/api/projects/recsys.json');
+    }
 
 }

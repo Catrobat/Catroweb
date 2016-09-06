@@ -58,10 +58,10 @@ services:
 
       catroweb.file.remix.updater:
             class: Catrobat\AppBundle\Listeners\RemixUpdater
-            arguments: ["@programrepository","@router"]
+            arguments: ["@remixmanager","@async_http_client","@router","%kernel.root_dir%"]
             tags:
             - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
-            
+
       catroweb.flavor.check:
             class: Catrobat\AppBundle\Listeners\ProgramFlavorListener
             arguments:

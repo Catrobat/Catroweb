@@ -38,6 +38,34 @@ services:
         arguments:
             - "AppBundle:Program"
 
+    programremixrepository:
+        class: Catrobat\AppBundle\Entity\ProgramRemixRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ProgramRemixRelation"
+
+    programremixbackwardrepository:
+        class: Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ProgramRemixBackwardRelation"
+
+    scratchprogramrepository:
+        class: Catrobat\AppBundle\Entity\ScratchProgramRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ScratchProgram"
+
+    scratchprogramremixrepository:
+        class: Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ScratchProgramRemixRelation"
+
     tagrepository:
         class: Catrobat\AppBundle\Entity\TagRepository
         factory_service: doctrine.orm.entity_manager
@@ -128,6 +156,45 @@ services:
             - "@programrepository"
             - "@tagrepository"
             - "@event_dispatcher"
+
+    programmanager.remix_manipulation:
+        class: Catrobat\AppBundle\Commands\RemixManipulationProgramManager
+        arguments:
+            - "@fileextractor"
+            - "@filerepository"
+            - "@screenshotrepository"
+            - "@doctrine.orm.entity_manager"
+            - "@programrepository"
+            - "@tagrepository"
+            - "@event_dispatcher"
+
+    remixmanager:
+        class: Catrobat\AppBundle\Entity\RemixManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@programrepository"
+            - "@scratchprogramrepository"
+            - "@programremixrepository"
+            - "@programremixbackwardrepository"
+            - "@scratchprogramremixrepository"
+            - "@remixgraphmanipulator"
+
+    remixgraphmanipulator:
+        class: Catrobat\AppBundle\RemixGraph\RemixGraphManipulator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@remixsubgraphmanipulator"
+            - "@programremixrepository"
+            - "@programremixbackwardrepository"
+            - "@scratchprogramremixrepository"
+
+    remixsubgraphmanipulator:
+        class: Catrobat\AppBundle\RemixGraph\RemixSubgraphManipulator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@programrepository"
+            - "@programremixrepository"
+            - "@programremixbackwardrepository"
 
     migrationmanager:
         class: Catrobat\AppBundle\Entity\MigrationManager
@@ -220,3 +287,10 @@ services:
           - "@logger"
         tags:
           - { name: monolog.logger, channel: download_stats }
+
+
+# =========================== Async HTTP Client ===========================
+    async_http_client:
+        class: Catrobat\AppBundle\Services\AsyncHttpClient
+        arguments:
+          - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }
