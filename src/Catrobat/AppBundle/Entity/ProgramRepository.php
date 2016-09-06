@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * ProgramRepository.
  *
@@ -105,6 +106,25 @@ class ProgramRepository extends EntityRepository
         ->getResult();
 
       return $result;
+    }
+
+    /**
+     * @param int[] $program_ids
+     * @return int[]
+     */
+    public function filterExistingProgramIds(array $program_ids)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $result = $qb
+            ->select(array('p.id'))
+            ->where('p.id IN (:program_ids)')
+            ->setParameter('program_ids', $program_ids)
+            ->distinct()
+            ->getQuery()
+            ->getResult();
+
+        return array_map(function ($data) { return $data['id']; }, $result);
     }
 
     public function search($query, $limit = 10, $offset = 0)
@@ -212,6 +232,31 @@ class ProgramRepository extends EntityRepository
         return count($result);
     }
 
+    public function markAllProgramsAsNotYetMigrated()
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb
+            ->update()
+            ->set('p.remix_migrated_at', ':remix_migrated_at')
+            ->setParameter(':remix_migrated_at', null)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findNext($previous_program_id)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+            ->select('min(p.id)')
+            ->where($qb->expr()->gt('p.id', ':previous_program_id'))
+            ->setParameter('previous_program_id', $previous_program_id)
+            ->distinct()
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getUserPrograms($user_id)
     {
         $qb = $this->createQueryBuilder('e');
@@ -274,6 +319,22 @@ class ProgramRepository extends EntityRepository
             ->setParameter('id', $id)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getProgramDataByIds(Array $program_ids)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+            ->select(array('p.id', 'p.name', 'p.uploaded_at', 'u.username'))
+            ->innerJoin('p.user', 'u')
+            ->where($qb->expr()->eq('p.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('p.private', $qb->expr()->literal(false)))
+            ->andWhere('p.id IN (:program_ids)')
+            ->setParameter('program_ids', $program_ids)
+            ->distinct()
             ->getQuery()
             ->getResult();
     }

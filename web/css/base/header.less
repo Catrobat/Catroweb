@@ -115,6 +115,34 @@ header {
       text-overflow: ellipsis;
     }
 
+    .user-notification-badge {
+      position:relative;
+    }
+
+    .user-notification-badge[data-badge]:after {
+      content:attr(data-badge);
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      font-size: 14px;
+      background:#ff0000;
+      color:#FFFFFF;
+      width:24px;
+      height:24px;
+      text-align:center;
+      line-height:22px;
+      border-radius:50%;
+      border: 1px solid #8b0000;
+      box-shadow:0 0 1px #333;
+    }
+
+    .user-notification-badge-large[data-badge]:after {
+      font-size: 9px !important;
+      height: 30px !important;
+      line-height: 28px !important;
+      width: 30px !important;
+    }
+
     #nav-dropdown {
       display: none;
       position: absolute;

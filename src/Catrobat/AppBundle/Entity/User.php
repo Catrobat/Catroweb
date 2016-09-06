@@ -88,7 +88,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $facebook_access_token            
+     * @param mixed $facebook_access_token
      */
     public function setFacebookAccessToken($facebook_access_token)
     {
@@ -106,7 +106,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $gplus_access_token            
+     * @param mixed $gplus_access_token
      */
     public function setGplusAccessToken($gplus_access_token)
     {
@@ -124,7 +124,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $gplus_id_token            
+     * @param mixed $gplus_id_token
      */
     public function setGplusIdToken($gplus_id_token)
     {
@@ -142,7 +142,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $gplus_refresh_token            
+     * @param mixed $gplus_refresh_token
      */
     public function setGplusRefreshToken($gplus_refresh_token)
     {
@@ -171,21 +171,21 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * Add programs.
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs            
+     * @param \Catrobat\AppBundle\Entity\Program $programs
      *
      * @return User
      */
     public function addProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
         $this->programs[] = $programs;
-        
+
         return $this;
     }
 
     /**
      * Remove programs
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs            
+     * @param \Catrobat\AppBundle\Entity\Program $programs
      */
     public function removeProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
@@ -220,7 +220,7 @@ class User extends BaseUser implements LdapUserInterface
     public function setCountry($country)
     {
         $this->country = $country;
-        
+
         return $this;
     }
 
@@ -231,7 +231,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $additional_email            
+     * @param mixed $additional_email
      */
     public function setAdditionalEmail($additional_email)
     {
@@ -255,7 +255,7 @@ class User extends BaseUser implements LdapUserInterface
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
-        
+
         return $this;
     }
 
@@ -306,4 +306,3 @@ class User extends BaseUser implements LdapUserInterface
         $this->nolb_user = $nolb_user;
     }
 }
-

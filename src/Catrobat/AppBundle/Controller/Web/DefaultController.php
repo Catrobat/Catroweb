@@ -10,100 +10,100 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-  /**
-   * @Route("/", name="index")
-   * @Method({"GET"})
-   */
-  public function indexAction(Request $request)
-  {
-      /**
-       * @var $image_repository FeaturedImageRepository
-       * @var $repository FeaturedRepository
-       */
-      $image_repository = $this->get('featuredimagerepository');
-      $repository = $this->get('featuredrepository');
-
-      $featured_items = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
-
-      $featured = array();
-      foreach ($featured_items as $item) {
-          $info = array();
-          if ($item->getProgram() !== null) {
-              if ($request->get('flavor')) {
-                  $info['url'] = $this->generateUrl('program', array('id' => $item->getProgram()->getId(), 'flavor' => $request->get('flavor')));
-              } else {
-                  $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $item->getProgram()->getId()));
-              }
-          } else {
-              $info['url'] = $item->getUrl();
-          }
-          $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
-
-          $featured[] = $info;
-      }
-
-      return $this->get('templating')->renderResponse('::index.html.twig', array('featured' => $featured));
-  }
-
-  /**
-   * @Route("/termsOfUse", name="termsOfUse")
-   * @Method({"GET"})
-   */
-  public function termsOfUseAction()
-  {
-      return $this->get('templating')->renderResponse('::termsOfUse.html.twig');
-  }
-
-  /**
-   * @Route("/licenseToPlay", name="licenseToPlay")
-   * @Method({"GET"})
-   */
-  public function licenseToPlayAction()
-  {
-      return $this->get('templating')->renderResponse('::licenseToPlay.html.twig');
-  }
-
-  /**
-   * @Route("/pocket-library/{package_name}", name="pocket_library")
-   * @Route("/media-library/{package_name}", name="media_package")
-   * @Method({"GET"})
-   */
-  public function MediaPackageAction($package_name, $flavor = 'pocketcode')
-  {
     /**
-     * @var $package \Catrobat\AppBundle\Entity\MediaPackage
-     * @var $file \Catrobat\AppBundle\Entity\MediaPackageFile
-     * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
+     * @Route("/", name="index")
+     * @Method({"GET"})
      */
-    $em = $this->getDoctrine()->getManager();
-    $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
-      ->findOneBy(array('name_url' => $package_name));
+    public function indexAction(Request $request)
+    {
+        /**
+         * @var $image_repository FeaturedImageRepository
+         * @var $repository FeaturedRepository
+         */
+        $image_repository = $this->get('featuredimagerepository');
+        $repository = $this->get('featuredrepository');
 
-    if (!$package) {
-      throw $this->createNotFoundException('Unable to find Package entity.');
+        $featured_items = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
+
+        $featured = array();
+        foreach ($featured_items as $item) {
+            $info = array();
+            if ($item->getProgram() !== null) {
+                if ($request->get('flavor')) {
+                    $info['url'] = $this->generateUrl('program', array('id' => $item->getProgram()->getId(), 'flavor' => $request->get('flavor')));
+                } else {
+                    $info['url'] = $this->generateUrl('catrobat_web_program', array('id' => $item->getProgram()->getId()));
+                }
+            } else {
+                $info['url'] = $item->getUrl();
+            }
+            $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
+
+            $featured[] = $info;
+        }
+
+        return $this->get('templating')->renderResponse('::index.html.twig', array('featured' => $featured));
     }
 
-    $categories = array();
-    foreach($package->getCategories() as $category) {
-      $files = array();
-        $files = $this->generateDownloadUrl($flavor, $category, $files);
-        $categories[] = array(
-        'name' => $category->getName(),
-        'files' => $files,
-        'priority' => $category->getPriority()
-      );
+    /**
+     * @Route("/termsOfUse", name="termsOfUse")
+     * @Method({"GET"})
+     */
+    public function termsOfUseAction()
+    {
+        return $this->get('templating')->renderResponse('::termsOfUse.html.twig');
     }
 
-    usort($categories, function($a,$b) {
-      if($a['priority'] == $b['priority'])
-        return 0;
-      return ($a['priority'] > $b['priority']) ? -1 : 1;
-    });
+    /**
+     * @Route("/licenseToPlay", name="licenseToPlay")
+     * @Method({"GET"})
+     */
+    public function licenseToPlayAction()
+    {
+        return $this->get('templating')->renderResponse('::licenseToPlay.html.twig');
+    }
 
-    return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
-      'categories' => $categories
-    ));
-  }
+    /**
+     * @Route("/pocket-library/{package_name}", name="pocket_library")
+     * @Route("/media-library/{package_name}", name="media_package")
+     * @Method({"GET"})
+     */
+    public function MediaPackageAction($package_name, $flavor = 'pocketcode')
+    {
+        /**
+         * @var $package \Catrobat\AppBundle\Entity\MediaPackage
+         * @var $file \Catrobat\AppBundle\Entity\MediaPackageFile
+         * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
+         */
+        $em = $this->getDoctrine()->getManager();
+        $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
+            ->findOneBy(array('name_url' => $package_name));
+
+        if (!$package) {
+            throw $this->createNotFoundException('Unable to find Package entity.');
+        }
+
+        $categories = array();
+        foreach($package->getCategories() as $category) {
+            $files = array();
+            $files = $this->generateDownloadUrl($flavor, $category, $files);
+            $categories[] = array(
+                'name' => $category->getName(),
+                'files' => $files,
+                'priority' => $category->getPriority()
+            );
+        }
+
+        usort($categories, function($a,$b) {
+            if($a['priority'] == $b['priority'])
+                return 0;
+            return ($a['priority'] > $b['priority']) ? -1 : 1;
+        });
+
+        return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
+            'categories' => $categories
+        ));
+    }
 
     /**
      * @param $flavor

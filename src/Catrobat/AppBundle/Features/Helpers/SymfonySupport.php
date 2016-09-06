@@ -3,6 +3,9 @@ namespace Catrobat\AppBundle\Features\Helpers;
 
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
+use Catrobat\AppBundle\Entity\ProgramRemixBackwardRelation;
+use Catrobat\AppBundle\Entity\ProgramRemixRelation;
+use Catrobat\AppBundle\Entity\ScratchProgramRemixRelation;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -59,7 +62,7 @@ class SymfonySupport
     /**
      * @return \Catrobat\AppBundle\Entity\ProgramManager
      */
-    public function getProgramManger()
+    public function getProgramManager()
     {
         return $this->kernel->getContainer()->get('programmanager');
     }
@@ -79,7 +82,39 @@ class SymfonySupport
     {
         return $this->kernel->getContainer()->get('extensionrepository');
     }
-    
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ProgramRemixRepository
+     */
+    public function getProgramRemixForwardRepository()
+    {
+        return $this->kernel->getContainer()->get('programremixrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
+     */
+    public function getProgramRemixBackwardRepository()
+    {
+        return $this->kernel->getContainer()->get('programremixbackwardrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ScratchProgramRepository
+     */
+    public function getScratchProgramRepository()
+    {
+        return $this->kernel->getContainer()->get('scratchprogramrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
+     */
+    public function getScratchProgramRemixRepository()
+    {
+        return $this->kernel->getContainer()->get('scratchprogramremixrepository');
+    }
+
     /**
      * @return \Catrobat\AppBundle\Services\ProgramFileRepository
      */
@@ -269,7 +304,43 @@ class SymfonySupport
 
     }
 
-    
+    public function insertForwardRemixRelation($config)
+    {
+        $forward_relation = new ProgramRemixRelation(
+            $this->getProgramManager()->find($config['ancestor_id']),
+            $this->getProgramManager()->find($config['descendant_id']),
+            (int) $config['depth']
+        );
+
+        $em = $this->getManager();
+        $em->persist($forward_relation);
+        $em->flush();
+    }
+
+    public function insertBackwardRemixRelation($config)
+    {
+        $forward_relation = new ProgramRemixBackwardRelation(
+            $this->getProgramManager()->find($config['parent_id']),
+            $this->getProgramManager()->find($config['child_id'])
+        );
+
+        $em = $this->getManager();
+        $em->persist($forward_relation);
+        $em->flush();
+    }
+
+    public function insertScratchRemixRelation($config)
+    {
+        $scratch_relation = new ScratchProgramRemixRelation(
+            $config['scratch_parent_id'],
+            $this->getProgramManager()->find($config['catrobat_child_id'])
+        );
+
+        $em = $this->getManager();
+        $em->persist($scratch_relation);
+        $em->flush();
+    }
+
     public function insertProgram($user, $config)
     {
         if ($user == null) {
@@ -284,12 +355,11 @@ class SymfonySupport
         $program->setViews(isset($config['views']) ? $config['views'] : 1);
         $program->setDownloads(isset($config['downloads']) ? $config['downloads'] : 1);
         $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : new \DateTime());
+        $program->setRemixMigratedAt(isset($config['remixmigratedtime']) ? new \DateTime($config['remixmigratedtime'], new \DateTimeZone('UTC')) : null);
         $program->setCatrobatVersion(isset($config['catrobatversion']) ? $config['catrobatversion'] : 1);
         $program->setCatrobatVersionName(isset($config['catrobatversionname']) ? $config['catrobatversionname'] : '0.9.1');
         $program->setLanguageVersion(isset($config['languageversion']) ? $config['languageversion'] : 1);
         $program->setUploadIp('127.0.0.1');
-        $program->setRemixCount(0);
-        $program->setRemixOf(isset($config['remixof']) ? $config['remixof'] : null);
         $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
         $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
         $program->setUploadLanguage('en');
@@ -299,6 +369,7 @@ class SymfonySupport
         $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
         $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
         $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
+        $program->setRemixRoot(isset($config['remix_root']) ? $config['remix_root'] : true);
 
         if (isset($config['tags']) && $config['tags'] != null) {
             $tags = explode(',', $config['tags']);
@@ -317,10 +388,10 @@ class SymfonySupport
         }
 
         $em->persist($program);
-        
+
         $user->addProgram($program);
         $em->persist($user);
-        
+
         // FIXXME: why exactly do we have to do this?
         if (isset($config['gamejam']))
         {
@@ -409,7 +480,7 @@ class SymfonySupport
                 case 'tags':
                     $properties->header->tags = $value;
                     break;
-    
+
                 default:
                     throw new PendingException('unknown xml field '.$name);
             }
@@ -443,7 +514,7 @@ class SymfonySupport
         $client = $this->getClient();
         $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
         $response = $client->getResponse();
-    
+
         return $response;
     }
     
