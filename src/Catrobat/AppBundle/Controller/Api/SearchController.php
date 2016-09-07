@@ -22,10 +22,21 @@ class SearchController extends Controller
         $query = $request->query->get('q');
         $limit = intval($request->query->get('limit'));
         $offset = intval($request->query->get('offset'));
+        $max_version = $request->query->get('max_version', 0);
 
         $programs = $program_manager->search($query, $limit, $offset);
 
         $numbOfTotalProjects = $program_manager->searchCount($query);
+
+        if($max_version !== 0) {
+            $cnt = count($programs);
+            for($i=0; $i<$cnt; $i++) {
+                $program_version = $programs[$i]->getLanguageVersion();
+                if(version_compare($program_version, $max_version) > 0) {
+                    unset($programs[$i]);
+                }
+            }
+        }
 
         return new ProgramListResponse($programs, $numbOfTotalProjects);
     }
