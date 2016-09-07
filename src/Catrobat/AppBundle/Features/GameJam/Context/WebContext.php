@@ -307,6 +307,17 @@ class WebContext extends BaseContext
     }
 
     /**
+     * @Given /^There is an ongoing game jam without flavor$/
+     */
+    public function thereIsAnOngoingGameJamWithoutFlavor()
+    {
+      $this->gamejam = $this->getSymfonySupport()->insertDefaultGamejam(array(
+          'flavor' => 'no flavor'
+      ));
+    }
+
+
+  /**
      * @Then /^I should see the hashtag "([^"]*)" in the program description$/
      */
     public function iShouldSeeTheHashtagInTheProgramDescription($hashtag)

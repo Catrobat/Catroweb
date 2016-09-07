@@ -52,10 +52,9 @@ class GameSubmissionController extends Controller
      */
     public function getSampleProgramsForLatestGamejam(Request $request)
     {
-        $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
-        if ($gamejam == null) {
-            throw new NoGameJamException();
-        }
+        $flavor = $request->get('flavor');
+
+        $gamejam = $this->getGameJam($flavor);
 
         $offset = intval($request->query->get('offset', 0));
         $limit = intval($request->query->get('limit', 20));
@@ -65,7 +64,7 @@ class GameSubmissionController extends Controller
         $returning_samples = null;
 
         for($j = 0, $i = $offset; $i < $count && $i < $limit; $j++, $i++) {
-          $returning_samples[$j] = $all_samples[$i];
+            $returning_samples[$j] = $all_samples[$i];
         }
 
         return new ProgramListResponse($returning_samples, $returning_samples !== null ? count($returning_samples) : 0);
@@ -79,11 +78,11 @@ class GameSubmissionController extends Controller
     {
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
-        
-        $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
-        if ($gamejam == null) {
-            throw new NoGameJamException();
-        }
+
+        $flavor = $request->get('flavor');
+
+        $gamejam = $this->getGameJam($flavor);
+
         $criteria_count = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true));
         $criteria = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true))
             ->andWhere(Criteria::expr()->eq("visible", true))
@@ -93,6 +92,19 @@ class GameSubmissionController extends Controller
         return new ProgramListResponse($gamejam->getPrograms()->matching($criteria), $gamejam->getPrograms()
             ->matching($criteria_count)
             ->count());
+    }
+
+    private function getGameJam($flavor){
+        $gamejam = $this->get("gamejamrepository")->getLatestGameJamByFlavor($flavor);
+
+        if($gamejam == null) {
+            $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
+        }
+
+        if ($gamejam == null) {
+            throw new NoGameJamException();
+        }
+        return $gamejam;
     }
 
     /**

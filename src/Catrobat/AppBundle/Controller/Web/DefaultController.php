@@ -133,19 +133,23 @@ class DefaultController extends Controller
         $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
 
         if ($gamejam) {
-            $config = $this->container->getParameter('gamejam');
-            $gamejam_id = $gamejam->getId();
-            $gamejam_config = $config[$gamejam_id];
+            $gamejam_flavor = $gamejam->getFlavor();
+            if($gamejam_flavor != null) {
+                $config = $this->container->getParameter('gamejam');
+                $gamejam_config = $config[$gamejam_flavor];
+                if ($gamejam_config) {
+                    $logo_url = $gamejam_config['logo_url'];
+                    $display_name = $gamejam_config['display_name'];
+                    $gamejam_url = $gamejam_config['gamejam_url'];
 
-            $logo_url = $gamejam_config['logo_url'];
-            $display_name = $gamejam_config['display_name'];
-            $gamejam_url = $gamejam_config['gamejam_url'];
+                    $jam = array(
+                        'name' => $display_name,
+                        'logo_url' => $logo_url,
+                        'gamejam_url' => $gamejam_url
+                    );
+                }
+            }
 
-            $jam = array(
-                'name' => $display_name,
-                'logo_url' => $logo_url,
-                'gamejam_url' => $gamejam_url
-            );
         }
 
         return $this->get('templating')->renderResponse('::program.html.twig', array(
@@ -616,28 +620,32 @@ class DefaultController extends Controller
         $gamejam = $this->get('gamejamrepository')->getCurrentGameJam();
 
         if ($gamejam) {
-            $config = $this->container->getParameter('gamejam');
-            $gamejam_id = $gamejam->getId();
-            $gamejam_config = $config[$gamejam_id];
+            $gamejam_flavor = $gamejam->getFlavor();
 
-            $display_name = $gamejam_config['display_name'];
-            $mobile_en_image_url = $gamejam_config['mobile_image_url_en'];
-            $mobile_de_image_url = $gamejam_config['mobile_image_url_de'];
-            $web_en_image_url = $gamejam_config['web_image_url_en'];
-            $web_de_image_url = $gamejam_config['web_image_url_de'];
-            $gamejam_url = $gamejam_config['gamejam_url'];
-            $gamejam_tag = $gamejam->getHashtag();
+            if($gamejam_flavor != null) {
+                $config = $this->container->getParameter('gamejam');
+                $gamejam_config = $config[$gamejam_flavor];
 
-            $jam = array(
-                'name' => $display_name,
-                'mobile_en_image_url' => $mobile_en_image_url,
-                'mobile_de_image_url' => $mobile_de_image_url,
-                'web_en_image_url' => $web_en_image_url,
-                'web_de_image_url' => $web_de_image_url,
-                'gamejam_url' => $gamejam_url,
-                'tag' => $gamejam_tag
-            );
+                if($gamejam_config != null) {
+                    $display_name = $gamejam_config['display_name'];
+                    $mobile_en_image_url = $gamejam_config['mobile_image_url_en'];
+                    $mobile_de_image_url = $gamejam_config['mobile_image_url_de'];
+                    $web_en_image_url = $gamejam_config['web_image_url_en'];
+                    $web_de_image_url = $gamejam_config['web_image_url_de'];
+                    $gamejam_url = $gamejam_config['gamejam_url'];
+                    $gamejam_tag = $gamejam->getHashtag();
 
+                    $jam = array(
+                        'name' => $display_name,
+                        'mobile_en_image_url' => $mobile_en_image_url,
+                        'mobile_de_image_url' => $mobile_de_image_url,
+                        'web_en_image_url' => $web_en_image_url,
+                        'web_de_image_url' => $web_de_image_url,
+                        'gamejam_url' => $gamejam_url,
+                        'tag' => $gamejam_tag
+                    );
+                }
+            }
         }
         return $this->get('templating')->renderResponse('::gamejam_submit_own.html.twig', array(
             'jam' => $jam
