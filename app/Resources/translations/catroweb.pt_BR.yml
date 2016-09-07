@@ -503,6 +503,7 @@ ci:
 gamejam:
   nojam: Desculpe, não há game jams disponíveis
   submit: 'Submit to %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: fique atento
     subheader: Você só pode enviar os seus programas

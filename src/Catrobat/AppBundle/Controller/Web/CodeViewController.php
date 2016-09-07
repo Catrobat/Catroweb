@@ -168,10 +168,10 @@ class CodeViewController extends Controller
   {
     $program = $this->get('programmanager')->find($id);
     $extracted_file_repository = $this->get('extractedfilerepository');
-    $extracted_program = $extracted_file_repository->loadProgramExtractedFile($program);
 
     try
     {
+      $extracted_program = $extracted_file_repository->loadProgramExtractedFile($program);
       $twig_params = $this->computeTwigParams($extracted_program);
     }
     catch (\Exception $e)

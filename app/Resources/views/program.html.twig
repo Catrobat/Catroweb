@@ -127,6 +127,7 @@
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}
+          <div id="gamejam-div">
           {% if app.user %}
             <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
           {% else %}
@@ -141,6 +142,10 @@
                 </table>
               </button>
             </a>
+          </div>
+          <div id="gamejam-whats">
+            <a href="{{ jam.gamejam_url }}">{{ "gamejam.whats"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</a>
+          </div>
         {% endif %}
       {% endif %}
       <br>
@@ -330,7 +335,7 @@
 
     $(document).ready(function(){
 
-      $(document).on("click", ".show-more-button", function() {
+      $(document).on("click", "#show-more-button", function() {
         counter += 10;
         for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
         {
@@ -361,7 +366,6 @@
             }
           },
           error: function(data) {
-            //alert(data);
             alert("something went terribly wrong");
           }});
       });

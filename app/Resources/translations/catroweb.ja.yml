@@ -499,7 +499,8 @@ ci:
   download: Apk をダウンロード
 gamejam:
   nojam: この時点で、ゲーム jam はありません。
-  submit: 'Submit to %gamejamname%'
+  submit: '%gamejamname% に提出'
+  whats: '%gamejamname% は何ですか?'
   submitown:
     header: ご注意ください
     subheader: 独自のプログラムのみ提出することができます

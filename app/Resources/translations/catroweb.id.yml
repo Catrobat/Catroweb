@@ -323,7 +323,7 @@ help:
     text0: 'Ucapan selamat pertama pada permainan Anda! Sekarang Anda dapat meng-unggahnya pada %link% untuk membuat aplikasi Android yang berdiri sendiri, yang Anda kemudian dapat meng-unggahnya di situs Game Jolt.'
     title1: Pendaftaran
     text1: "Pertama Anda perlu membuat akun. Setelah itu Anda dapat mengunggah program yang Anda buat. Jangan khawatir ini mudah dan Anda hanya perlu memikirkan nama pengguna dan sandi. Setelah mengisi keduanya, klik 'Masuk atau Daftar'. Hanya itu!"
-    title2: Meng-unggah
+    title2: Unggah
     text2: 'Setelah proses pendaftaran Anda akan dapat meng-unggah permainan Anda. Hanya pikirkan nama dan tambahkan keterangan. Juga tambahkan #AliceJam150 di bidang Deskripsi.'
     title3: Mencari program Anda
     text3: Pergi ke profil Pocket Code dimana semua program terdaftar atau caria langsung program Anda dengan menggunakan pencarian dan nama program Anda.
@@ -499,6 +499,7 @@ ci:
 gamejam:
   nojam: Maaf, tidak ada kemacetan permainan saat ini
   submit: 'Submit to %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: waspadalah
     subheader: Anda hanya dapat mengirimkan program Anda sendiri

@@ -24,12 +24,14 @@ Scenario:
     Given There is no ongoing game jam
      When I visit the details page of my program
      Then There should not be a button to submit it to the jam
+      And There should not be a div with whats the gamejam
     
 Scenario:
     Given There is an ongoing game jam
       And I am not logged in
      When I visit the details page of a program from another user
      Then There should be a button to submit it to the jam
+      And There should be a div with whats the gamejam
      
 Scenario:
     Given There is an ongoing game jam

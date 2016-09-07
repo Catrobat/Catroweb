@@ -21,9 +21,9 @@ pleaseTryAgain: Per favore riprova!
 oldVersionError: Si prega di aggiornare alla nuova versione di Pocket Code!
 more: altro
 less: meno
-ok: Ok
+ok: Va bene
 clickToDownloadProgram: 'Per scaricare il programma di esempio, fare click su %link_start% questo %link_end% link.'
-registrationError: Username or email address already in use.
+registrationError: Nome utente o indirizzo email già in uso.
 programs:
   featured: In evidenza
   newest: Programmi più recenti
@@ -54,8 +54,8 @@ programs:
   send: Invia
   delete: Eliminare
   report: Report
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: Il commento è stato segnalato correttamente.
+  report_popup_header: Segnalato
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -516,7 +516,8 @@ ci:
   download: Scarica Apk
 gamejam:
   nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
-  submit: 'Submit to %gamejamname%'
+  submit: 'Invia a %gamejamname%'
+  whats: "What's the %gamejamname%?"
   submitown:
     header: fai attenzione
     subheader: È possibile inviare solo programmi originali, creati da sé

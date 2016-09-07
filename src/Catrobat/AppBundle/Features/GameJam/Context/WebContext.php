@@ -93,6 +93,30 @@ class WebContext extends BaseContext
     }
 
     /**
+     * @Then /^There should be a div with whats the gamejam$/
+     */
+    public function thereShouldBeADivWithWhatsTheGamejam()
+    {
+        assertEquals(200, $this->getClient()
+            ->getResponse()
+            ->getStatusCode());
+        assertEquals(1, $this->response->filter("#gamejam-whats")->count());
+    }
+
+    /**
+     * @Then /^There should not be a div with whats the gamejam$/
+     */
+    public function thereShouldNotBeADivWithWhatsTheGamejam()
+    {
+        assertEquals(200, $this->getClient()
+            ->getResponse()
+            ->getStatusCode());
+        assertEquals(0, $this->response->filter("#gamejam-whats")->count());
+    }
+
+
+
+    /**
      * @When /^I submit my program to a gamejam$/
      */
     public function iSubmitMyProgramToAGamejam()

@@ -40,7 +40,8 @@ Feature: Get details for a specific program
                                 "Downloads":"333",
                                 "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"pocketcode/download/2.catrobat",
-                                "FileSize":2.5
+                                "FileSize":2.5,
+                                "Private":0
                             }],
           "preHeaderMessages":""
       }

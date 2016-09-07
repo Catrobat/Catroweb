@@ -139,10 +139,12 @@ class DefaultController extends Controller
 
             $logo_url = $gamejam_config['logo_url'];
             $display_name = $gamejam_config['display_name'];
+            $gamejam_url = $gamejam_config['gamejam_url'];
 
             $jam = array(
                 'name' => $display_name,
                 'logo_url' => $logo_url,
+                'gamejam_url' => $gamejam_url
             );
         }
 

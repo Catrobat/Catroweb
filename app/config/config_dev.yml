@@ -23,7 +23,7 @@ monolog:
         main:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
-            level: debug
+            level: info
         firephp:
             type:  firephp
             level: info
@@ -33,7 +33,7 @@ monolog:
         download_stats:
             type:  rotating_file
             path:  %kernel.logs_dir%/download_stats/download_stats.log
-            level: debug
+            level: info
             max_files: 20
             channels: [download_stats]
 
