@@ -150,9 +150,9 @@ a {
   }
 
   .showing-code {
-    top: 10px;
+    /*top: 10px;
     height: 20px;
-    line-height:20px;
+    line-height:20px;*/
   }
 
   .rotate {
@@ -174,9 +174,9 @@ a {
 }
 
 .show-code {
-  border-bottom: none;
+  /*border-bottom: none;
   height: 42px;
-  background-color: @default-background-color;
+  background-color: @default-background-color;*/
 }
 
 .show-hide-code:hover {
@@ -535,6 +535,12 @@ table td:nth-child(1) {
 @media (max-width: 800px) {
   .show-hide-code-arrow{
     right: ~"calc(22.5% - 5px)" !important;
+  }
+}
+
+@media (max-width: 790px) {
+  .show-hide-code-arrow{
+    right: ~"calc(22% - 5px)" !important;
   }
 }
 
