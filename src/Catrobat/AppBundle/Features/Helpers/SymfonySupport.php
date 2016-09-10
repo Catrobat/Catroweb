@@ -207,7 +207,9 @@ class SymfonySupport
         $gamejam = new GameJam();
         @$gamejam->setName($config['name'] ?: "pocketalice");
         @$gamejam->setHashtag($config['hashtag'] ?: null);
-        
+        @$gamejam->setFlavor($config['flavor'] == null ? "pocketalice" :
+                             $config['flavor'] != "no flavor" ?: null);
+      
         $start_date = new \DateTime();
         $start_date->sub(new \DateInterval('P10D'));
         $end_date = new \DateTime();

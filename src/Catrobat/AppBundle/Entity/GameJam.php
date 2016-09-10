@@ -55,6 +55,11 @@ class GameJam
      */
     protected $hashtag;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $flavor;
+
     public function __construct()
     {
         $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
@@ -255,4 +260,22 @@ class GameJam
     {
         $this->hashtag = $hashtag;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFlavor()
+    {
+        return $this->flavor;
+    }
+
+    /**
+     * @param mixed $flavor
+     */
+    public function setFlavor($flavor)
+    {
+        $this->flavor = $flavor;
+    }
+
+
 }

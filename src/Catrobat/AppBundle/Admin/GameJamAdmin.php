@@ -26,6 +26,7 @@ class GameJamAdmin extends Admin
     {
         $returnurl = $this->getConfigurationPool()->getContainer()->get('router')->generate('gamejam_form_submission', array("id" => 42), true);
         $returnurl = str_replace('42', '%CAT_ID%', $returnurl);
+        $flavor = $this->getFlavorOptions();
         $formMapper
             ->add('name')
             ->add('form_url', null, array('sonata_help' => '
@@ -34,11 +35,24 @@ class GameJamAdmin extends Admin
                 ',
             ))
             ->add('hashtag')
+            ->add('flavor', 'choice', array('choices' => $flavor, 'choices_as_values' => true))
             ->add('start')
             ->add('end')
             ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program'),array('admin_code' => 'catrowebadmin.block.programs.all'))
             ;
     }
+
+    private function getFlavorOptions(){
+        $flavors = $this->getConfigurationPool()->getContainer()->getParameter('gamejam');
+        $results = array();
+        $results['no flavor'] = null;
+        $keys = array_keys($flavors);
+        for ($i= 0; $i < count($keys); $i++){
+            $results[$keys[$i]] = $keys[$i];
+        }
+        return $results;
+    }
+
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -59,6 +73,7 @@ class GameJamAdmin extends Admin
             ->add('name')
             ->add('form_url', 'html', array('truncate' => array('length' => 50)))
             ->add('hashtag')
+            ->add('flavor')
             ->add('start')
             ->add('end')
             ->add('_action', 'actions', array('actions' => array(
@@ -76,6 +91,7 @@ class GameJamAdmin extends Admin
         ->add('name')
         ->add('form_url')
         ->add('hashtag')
+        ->add('flavor')
         ->add('start')
         ->add('end')
         ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'),array('admin_code' => 'catrowebadmin.block.programs.all'))

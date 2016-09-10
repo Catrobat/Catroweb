@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     gamejam:
-        1:
+        pocketalice:
             display_name: Alice Game Jam
             logo_url: images/symbols/jam_submit.png
             mobile_image_url_en: images/extra/submit-your-own-program-mobile.jpg
@@ -10,7 +10,7 @@ parameters:
             web_image_url_de: images/extra/submit-your-own-program-web.jpg
             gamejam_url: http://www.alicegamejam.com
 
-        2:
+        pocketgalaxy:
             display_name: Galaxy Game Jam
             logo_url: images/help/galaxyjam/galaxyjam_icon_white.png
             mobile_image_url_en: images/help/galaxyjam/submit-your-own-program-mobile.png

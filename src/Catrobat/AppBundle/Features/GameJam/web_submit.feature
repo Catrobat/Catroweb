@@ -53,4 +53,11 @@ Scenario:
       And I visit the details page of a program from another user
      When I submit the program
      Then I should see the message "You can only submit your own programs"
+
+Scenario: There shouldn't be a submit button when the current gamejam has no flavor set
+    Given There is an ongoing game jam without flavor
+      And I am logged in
+     When I visit the details page of my program
+     Then There should not be a button to submit it to the jam
+
       
