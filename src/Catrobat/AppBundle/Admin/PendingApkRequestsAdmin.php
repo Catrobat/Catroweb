@@ -9,6 +9,7 @@ use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Catrobat\AppBundle\Entity\Program;
 
+
 class PendingApkRequestsAdmin extends Admin
 {
     protected $baseRouteName = 'admin_catrobat_apk_pending_requests';
@@ -28,6 +29,7 @@ class PendingApkRequestsAdmin extends Admin
 
         return $query;
     }
+
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -68,8 +70,7 @@ class PendingApkRequestsAdmin extends Admin
                         'template' => ':CRUD:list__action_rebuild_apk.html.twig',
                     ),
                 ),
-            ))
-        ;
+            ));
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -77,6 +78,9 @@ class PendingApkRequestsAdmin extends Admin
         $collection->clearExcept(array('list'));
         $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
         $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
+        $collection->add('deleteAllApk');
+        $collection->add('rebuildAllApk');
+        $collection->add('resetAllApk');
     }
 
     public function getThumbnailImageUrl($object)
