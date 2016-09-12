@@ -85,6 +85,7 @@ class CodeViewController extends Controller
   const DELETE_ITEM_LIST_BRICK = 'DeleteItemOfUserListBrick';
   const INSERT_ITEM_LIST_BRICK = 'InsertItemIntoUserListBrick';
   const REPLACE_ITEM_LIST_BRICK = 'ReplaceItemInUserListBrick';
+  const WHEN_BRICK = 'WhenBrick';
   const UNKNOWN_BRICK = 'UnknownBrick';
 
   // Brick Images
@@ -528,6 +529,9 @@ class CodeViewController extends Controller
           break;
         case self::REPLACE_ITEM_LIST_BRICK:
           $resolved_brick = $this->writeReplaceItemInUserListBrick($brick);
+          break;
+        case self::WHEN_BRICK:
+          $resolved_brick = $this->writeWhenBrick($brick);
           break;
         default:
           $resolved_brick = $this->writeUnknownBrick();
@@ -1158,6 +1162,20 @@ class CodeViewController extends Controller
       'name' => self::REPLACE_ITEM_LIST_BRICK,
       'text' => "Replace item in list " . $user_list . " at position " . $formulas[self::REPLACE_ITEM_LIST_INDEX_FORMULA] . " with " . $formulas[self::REPLACE_ITEM_LIST_VALUE_FORMULA],
       'img_file' => self::DATA_BRICK_IMG
+    );
+  }
+
+  private function writeWhenBrick($brick)
+  {
+    $user_variable = null;
+    if ($brick->userVariableName == null)
+      $user_variable = $brick->userVariable;
+    else
+      $user_variable = $brick->userVariableName;
+    return array(
+        'name' => self::WHEN_BRICK,
+        'text' => "When tapped " . $user_variable,
+        'img_file' => self::CONTROL_BRICK_IMG
     );
   }
 
