@@ -1167,14 +1167,9 @@ class CodeViewController extends Controller
 
   private function writeWhenBrick($brick)
   {
-    $user_variable = null;
-    if ($brick->userVariableName == null)
-      $user_variable = $brick->userVariable;
-    else
-      $user_variable = $brick->userVariableName;
     return array(
         'name' => self::WHEN_BRICK,
-        'text' => "When tapped " . $user_variable,
+        'text' => "When tapped",
         'img_file' => self::CONTROL_BRICK_IMG
     );
   }
