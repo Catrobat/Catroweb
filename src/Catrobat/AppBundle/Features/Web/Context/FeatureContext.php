@@ -1736,4 +1736,23 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $profile_button = $this->getSession()->getPage()->findById('btn-profile');
         assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
     }
+
+    /**
+     * @Then /^the href with id "([^"]*)" should be void$/
+     */
+    public function theHrefWithIdShouldBeVoid($arg1)
+    {
+        $button = $this->getSession()->getPage()->findById($arg1);
+        assertEquals($button->getAttribute('href'), 'javascript:void(0)');
+    }
+
+    /**
+     * @Then /^the href with id "([^"]*)" should not be void$/
+     */
+    public function theHrefWithIdShouldNotBeVoid($arg1)
+    {
+        $button = $this->getSession()->getPage()->findById($arg1);
+        assertNotEquals($button->getAttribute('href'), 'javascript:void(0)');
+    }
+
 }

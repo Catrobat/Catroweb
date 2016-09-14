@@ -318,12 +318,12 @@
     var download_href = document.getElementById("url-download").href;
 
     $(document).on("click", "#url-download", function() {
-      var link = document.getElementById("url-download");
-      if(link.href != 'javascript:void(0)') {
-        link.href = 'javascript:void(0)';
+      var url_link = document.getElementById("url-download");
+      if(url_link.href != 'javascript:void(0)') {
+          url_link.href = 'javascript:void(0)';
 
         setTimeout(function() {
-          link.href = download_href;
+          url_link.href = download_href;
         }, 5000);
 
         window.location = download_href;

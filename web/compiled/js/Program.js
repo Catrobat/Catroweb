@@ -14,6 +14,8 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     self.update_app_header = update_app_header;
     self.update_app_text = update_app_text;
     self.btn_close_popup = btn_close_popup;
+    self.apk_url = null;
+    self.apk_download_timeout = false;
 
     self.getApkStatus = function()
     {
@@ -33,8 +35,19 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         $('.btn-apk').hide();
         if (data.status == 'ready')
         {
+            self.apk_url = data.url;
             $('#apk-download').show();
-            $('#apk-download').click(function() { top.location.href = data.url; });
+            $('#apk-download').click(function() {
+                if(!self.apk_download_timeout) {
+                    self.apk_download_timeout = true;
+
+                    setTimeout(function() {
+                      self.apk_download_timeout = false;
+                    }, 5000);
+
+                    top.location.href = self.apk_url;
+              }
+            });
         }
         else if (data.status == "pending") 
         {
