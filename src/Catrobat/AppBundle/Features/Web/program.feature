@@ -93,3 +93,14 @@ Feature: As a visitor I want to see a program page
       Then I should receive an application file
       When I am on "/pocketcode/program/1"
       Then I should see "6 downloads"
+
+    Scenario:
+      Given I am on "/pocketcode/program/1"
+       When I click "#url-download"
+       Then the href with id "url-download" should be void
+
+    Scenario:
+      Given I am on "/pocketcode/program/1"
+       When I click "#url-download"
+        And I wait 5000 milliseconds
+      Then the href with id "url-download" should not be void
