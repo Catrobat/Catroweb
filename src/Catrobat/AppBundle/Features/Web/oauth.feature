@@ -73,22 +73,22 @@ Feature: Open Authentication
       | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
     And I should see the logout button
     And I should see the profile button
-    When I click the "profile" button
-    And I wait for a second
-    Then I fill in "email" with "pocket_tester@tfbnw.net"
-    And I press "save changes"
+    And I am on "/pocketcode/emailEdit"
     Then I wait for the server response
-    And I should see "saved!"
+    Then I fill in "email" with "pocket_tester@tfbnw.net"
+    When I click the "save-edit" button
+    And I wait for the server response
+    Then I should be on "/pocketcode/profile/0/edit"
     When I go to "/logout"
     Then I should not be logged in
     When I trigger Facebook login with auth_type ''
     And I click Facebook login link
-    And I wait for a second
+    And I wait for the server response
     Then I should be logged in
     And I should see the profile button
     When I click the "profile" button
     And I wait for a second
-    Then the "email" field should contain "pocket_tester@tfbnw.net"
+    Then the "email-text" field should contain "pocket_tester@tfbnw.net"
 
   @javascript
   Scenario: It should be possible to change the E-Mail address on the profile page and login again with the same Google+ account
@@ -101,21 +101,18 @@ Feature: Open Authentication
       | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
     And I should see the logout button
     And I should see the profile button
-    When I click the "profile" button
-    And I wait for a second
-    Then I fill in "email" with "pocket-code-tester@gmail.com"
-    And I press "save changes"
+    And I am on "/pocketcode/emailEdit"
     Then I wait for the server response
-    And I should see "saved!"
-    When I reload the page
-    Then the "email" field should contain "pocket-code-tester@gmail.com"
+    Then I fill in "email" with "pocket-code-tester@gmail.com"
+    When I click the "save-edit" button
+    And I wait for the server response
+    Then I should be on "/pocketcode/profile/0/edit"
+    Then the "#email-text" element should contain "pocket-code-tester@gmail.com"
     When I go to "/logout"
     Then I should not be logged in
     When I trigger Google login with approval prompt "auto"
     And I click Google login link "once"
-    And I wait for a second
+    And I wait for the server response
     Then I should be logged in
-    And I should see the profile button
-    When I click the "profile" button
-    And I wait for a second
-    Then the "email" field should contain "pocket-code-tester@gmail.com"
+    And I am on "/pocketcode/emailEdit"
+    Then the "#email" element should contain "pocket-code-tester@gmail.com"

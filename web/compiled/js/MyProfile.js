@@ -2,126 +2,112 @@
   Generated File by Grunt
   Sourcepath: web/js
 */
-var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramString, upload_url) {
+var MyProfile = function(profile_url, save_name_url, name_edit_url, email_edit_url, profile_edit_url, avatar_edit_url, password_edit_url,
+                         country_edit_url, save_email_url, save_country_url, save_password_url, url, delete_url,
+                         toggle_visibility_url, deleteProgramString, upload_url) {
   var self = this;
+  self.profile_url = profile_url;
+  self.save_name_url = save_name_url;
+  self.name_edit_url = name_edit_url;
+  self.email_edit_url = email_edit_url;
+  self.profile_edit_url = profile_edit_url;
+  self.avatar_edit_url = avatar_edit_url;
+  self.password_edit_url = password_edit_url;
+  self.country_edit_url = country_edit_url;
+  self.save_email_url = save_email_url;
+  self.save_country_url = save_country_url;
+  self.save_password_url =save_password_url;
   self.save_url = url;
   self.delete_url = delete_url;
   self.upload_url = upload_url;
   self.toggle_visibility_url = toggle_visibility_url;
-  self.newPassword = null;
-  self.repeatPassword = null;
-  self.firstMail = null;
-  self.secondMail = null;
   self.country = null;
   self.regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   self.data_changed = false;
   self.deleteProgramString = deleteProgramString;
 
-  self.tmp_newPassword = null;
-  self.tmp_repeatPassword = null;
-  self.tmp_firstMail = null;
-  self.tmp_secondMail = null;
-  self.tmp_country = null;
-
   self.init = function() {
-    self.newPassword = $('#password').val();
-    self.repeatPassword = $('#repeat-password').val();
-    self.firstMail = $('#email').val();
-    self.secondMail = $('#additional-email').val();
-    self.country = $('#select-country').find('select').val();
-
-    $('#profile-form').find('form').submit(function() {
-      self.tmp_newPassword = $('#password').val();
-      self.tmp_repeatPassword = $('#repeat-password').val();
-      self.tmp_firstMail = $('#email').val();
-      self.tmp_secondMail = $('#additional-email').val();
-      self.tmp_country = $('#select-country').find('select').val();
-
-      $('.input-error').hide();
-      $('#password').parent().removeClass('password-failed');
-      $('#repeat-password').parent().removeClass('password-failed');
-      $('#email').parent().removeClass('mail-failed');
-      $('#additional-email').parent().removeClass('mail-failed');
-
-      $('#submit-done').hide();
-      if(!self.checkPasswords() || !self.checkFirstMail() || !self.checkSecondMail() || !self.checkCountry())
-        return false;
-      self.submit();
-      return false;
-    });
-
     self.setAvatarUploadListener();
   };
 
-  self.checkPasswords = function() {
-    if(self.tmp_newPassword != self.tmp_repeatPassword) {
-      $('#password').val('').parent().addClass('password-failed');
-      $('#repeat-password').val('').parent().addClass('password-failed');
-      $('.text-password-nomatch').show();
-      return false;
+  self.deleteProgram = function(id) {
+    var programName = $('#program-' + id).find('.program-name').text();
+    if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
+      window.location.href = self.delete_url + '/' + id;
     }
-    if(self.newPassword != self.tmp_newPassword) self.data_changed = true;
-    return true;
   };
 
-  self.checkFirstMail = function() {
-    var emailChanged = self.firstMail != self.tmp_firstMail;
-    if(emailChanged && self.tmp_firstMail.length > 0 && !self.regex_email.test(self.tmp_firstMail)) {
-      $('#email').val(self.firstMail).parent().addClass('mail-failed');
-      $('.text-email-notvalid').show();
-      return false;
+  self.toggleVisibility = function(id) {
+    var programName = $('#program-' + id).find('.program-name').text();
+    window.location.href = self.toggle_visibility_url + '/' + id;
+  };
+
+  $(document).on("click", ".btn-edit", function() {
+
+    $("#finished-button").hide();
+    $("#profile-edit-wrapper").hide();
+
+    switch($(this).attr('id')){
+      case "avatar-button":
+        window.location.href = self.avatar_edit_url;
+        break;
+      case "username-button":
+        window.location.href = self.name_edit_url;
+        break;
+      case "country-button":
+        window.location.href = self.country_edit_url;
+        break;
+      case "email-button":
+        window.location.href = self.email_edit_url;
+        break;
+      case "password-button":
+        window.location.href = self.password_edit_url;
+        break;
     }
-    if(self.firstMail != self.tmp_firstMail) self.data_changed = true;
-    return true;
-  };
+  });
 
-  self.checkSecondMail = function() {
-    if(self.secondMail != self.tmp_secondMail && self.tmp_secondMail != '' && !self.regex_email.test(self.tmp_secondMail)) {
-      $('#additional-email').val(self.secondMail).parent().addClass('mail-failed').addClass('additional-mail-failed');
-      $('.text-email-notvalid').show();
-      return false;
-    }
-    if(self.secondMail != self.tmp_secondMail) self.data_changed = true;
-    return true;
-  };
+  $(document).on("click", "#avatar-button-done", function () {
+    window.location.href = self.profile_edit_url;
+  });
 
-  self.checkCountry = function() {
-    if(self.country != self.tmp_country) self.data_changed = true;
-    return true;
-  };
+  $(document).on("click", "#finished-button", function () {
+    window.location.href = self.profile_url;
+  });
 
-  self.submit = function() {
-    $('.input-error').hide();
-    $('#password').val('').parent().removeClass('password-failed');
-    $('#repeat-password').val('').parent().removeClass('password-failed');
+  $(document).on("click", "#save-name", function(){
+    var new_username = $('#username').val();
+    $.post(self.save_name_url, {
+      new_user_name: new_username
+    }, function(data){
+      switch (parseInt(data.statusCode)) {
+        case 776:
+          $('.text-username-invalid').show();
+          break;
+        case 777:
+          $('.text-username-in-use').show();
+          break;
+        default:
+          window.location.href = self.profile_edit_url;
+      }
+    });
+  });
+
+  $(document).on("click", "#save-email", function(){
     $('#email').parent().removeClass('mail-failed');
     $('#additional-email').parent().removeClass('mail-failed').removeClass('additional-mail-failed');
 
-    if(!self.data_changed) return;
     $('.img-load-ajax').show();
-    $.post(self.save_url, {
-      newPassword: self.tmp_newPassword,
-      repeatPassword: self.tmp_repeatPassword,
-      firstEmail: self.tmp_firstMail,
-      secondEmail: self.tmp_secondMail,
-      country: self.tmp_country
+    var new_email = $('#email').val();
+    var additional_email = $('#additional-email').val();
+    $.post(self.save_email_url, {
+      firstEmail: new_email,
+      secondEmail:additional_email
     }, function(data) {
       switch (parseInt(data.statusCode)) {
         case 200:
           //todo: when email was changed ... show alert that email was send to validate new email adress
-          self.data_changed = false;
-          self.firstMail = self.tmp_firstMail;
-          self.secondMail = self.tmp_secondMail;
-          self.country = self.tmp_country;
+          window.location.href = self.profile_edit_url;
 
-          if(self.firstMail === '' && self.secondMail !== '') {
-            self.firstMail = self.secondMail;
-            self.secondMail = '';
-            $('#email').val(self.firstMail);
-            $('#additional-email').val(self.secondMail);
-          }
-
-          $('#submit-done').show();
           break;
 
         case 300:
@@ -136,6 +122,62 @@ var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramSt
           }
           break;
 
+        case 756:
+          // there's no email
+          $('#email').val(self.firstMail).parent().addClass('mail-failed');
+          $('.text-email-missing').show();
+          break;
+
+        case 765:
+          // invalid email
+          $('#email').val(self.firstMail).parent().addClass('mail-failed');
+          $('.text-email-notvalid').show();
+          break;
+
+        default:
+          window.location.href = self.profile_edit_url;
+      }
+      $('.img-load-ajax').hide();
+    });
+    self.data_changed = false;
+  });
+
+  $(document).on("click", "#save-country", function(){
+    $('.input-error').hide();
+
+    $('.img-load-ajax').show();
+    var country = $('#select-country').find('select').val();
+    $.post(self.save_country_url, {
+      country: country
+    }, function(data) {
+      switch (parseInt(data.statusCode)) {
+        case 766:
+          // invalid country code
+          alert('invalid country');
+          break;
+
+        default:
+          window.location.href = self.profile_edit_url;
+          break;
+      }
+      $('.img-load-ajax').hide();
+    });
+  });
+
+  $(document).on("click", "#save-password", function() {
+    $('.input-error').hide();
+    $('#password').parent().removeClass('password-failed');
+    $('#repeat-password').parent().removeClass('password-failed');
+    var new_password = $('#password').val();
+    var old_password = $('#old-password').val();
+    var repeat_password = $('#repeat-password').val();
+
+    $.post(self.save_password_url, {
+      oldPassword: old_password,
+      newPassword: new_password,
+      repeatPassword: repeat_password
+    }, function(data) {
+      switch (parseInt(data.statusCode)) {
         case 752:
           // username and password same !
           $('#password').val('').parent().addClass('password-failed');
@@ -157,23 +199,6 @@ var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramSt
           $('.text-password-toolong').show();
           break;
 
-        case 756:
-          // there's no email
-          $('#email').val(self.firstMail).parent().addClass('mail-failed');
-          $('.text-email-missing').show();
-          break;
-
-        case 765:
-          // invalid email
-          $('#email').val(self.firstMail).parent().addClass('mail-failed');
-          $('.text-email-notvalid').show();
-          break;
-
-        case 766:
-          // invalid country code
-          alert('invalid country');
-          break;
-
         case 774:
           // passwords didn't match
           $('#password').val('').parent().addClass('password-failed');
@@ -181,29 +206,23 @@ var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramSt
           $('.text-password-nomatch').show();
           break;
 
+        case 777:
+          // old password wrong
+          $('#old-password').val('').addClass('password-failed');
+          $('.text-password-wrongpassword').show();
+          break;
+
         default:
-          // ^^
+          window.location.href = self.profile_edit_url;
+          break;
       }
       $('.img-load-ajax').hide();
     });
-    self.data_changed = false;
-  };
-
-  self.deleteProgram = function(id) {
-    var programName = $('#program-' + id).find('.program-name').text();
-    if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
-      window.location.href = self.delete_url + '/' + id;
-    }
-  };
-
-  self.toggleVisibility = function(id) {
-    var programName = $('#program-' + id).find('.program-name').text();
-    window.location.href = self.toggle_visibility_url + '/' + id;
-  };
+  });
 
   self.setAvatarUploadListener = function() {
     $('#avatar-upload').find('input[type=file]').change(function(data) {
-      var avatarContainer = $('#profile-avatar');
+      var avatarContainer = $('#profile-avatar-change');
       avatarContainer.find('.avatar-error').hide();
 
       var file = data.target.files[0];
@@ -225,10 +244,10 @@ var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramSt
       reader.onload = function(evt) {
         self.filename = evt.currentTarget.result;
         $.post(self.upload_url, { image: evt.currentTarget.result }, function(data) {
-
           switch (parseInt(data.statusCode)) {
+
             case 200:
-              $('#profile-avatar').find('img').attr('src', data.image_base64);
+              $('#avatar-img').attr('src', data.image_base64);
               $('#custom-avatar').find('div').first().css('background-image', 'url('+data.image_base64+')');
               $('.img-avatar').css({
                 'background-image': 'url('+data.image_base64+')',
@@ -254,7 +273,6 @@ var MyProfile = function(url, delete_url, toggle_visibility_url, deleteProgramSt
           avatarUpload.find('.button-show-ajax').hide();
         });
       };
-
       reader.readAsDataURL(file);
     });
   };

@@ -9,11 +9,42 @@ article > div {
 }
 
 #profile-avatar {
+  width: 200px;
+  height: 200px;
   float: left;
 
   img {
+    width: 100%;
+    height: 100%;
     border: 4px solid #FFF;
   }
+}
+
+#user-information {
+  float:left;
+  margin-left: 20px;
+}
+
+#country-header {
+  font-weight: bold;
+  font-size: 135%;
+}
+
+#country-information{
+  padding-bottom: 10px;
+}
+
+
+#email-header {
+  font-weight: bold;
+  font-size: 135%;
+}
+
+
+#edit-icon {
+  position: relative;
+  float: right;
+  top: -4px;
 }
 
 #avatar-upload {
@@ -121,7 +152,7 @@ article > div {
   width: 295px;
 }
 
-.password-failed {
+/*.password-failed {
   border: 2px solid @border-color-failed !important;
   background-color: @background-color-failed !important;
 
@@ -133,7 +164,17 @@ article > div {
   > div {
     background-position: -74px -78px !important;
   }
+}*/
+
+.program {
+  height: 160px !important;
 }
+
+.programs {
+  margin: -30px auto 0 auto;
+}
+
+
 
 .mail-failed {
   border: 2px solid @border-color-failed !important;
@@ -219,36 +260,22 @@ article > div {
 
 @media screen and (max-width: 950px) {
   #profile-avatar {
-    img {
-      margin-left: 25px;
-    }
-  }
-
-  #profile-form {
-    form  {
-      > div {
-        float: none;
-        margin-right: 25px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: @responsive-width-tablet) {
-  #profile-avatar {
-    float: none;
-    text-align: center;
-
+    width: 90px;
+    height: 90px;
     img {
       margin: 0;
     }
   }
 
-  #profile-form {
-    float: none;
 
-    form > div {
-      margin: auto;
+}
+
+@media screen and (max-width: @responsive-width-tablet) {
+  #profile-avatar {
+    width: 90px;
+    height: 90px;
+    img {
+      margin: 0;
     }
   }
 }

@@ -19,11 +19,16 @@ Feature:
     And I am on "/pocketcode/profile"
 
   Scenario: changing password must work
-    Given I fill in "password" with "abcdef"
+    Given I click the "edit" button
+    And I wait for the server response
+    And I click the "password-edit" button
+    And I wait for the server response
+    And I fill in "old-password" with "123456"
+    And I fill in "password" with "abcdef"
     And I fill in "repeat-password" with "abcdef"
-    And I press "save changes"
-    Then I wait for the server response
-    And I should see "saved!"
+    And I click the "save-edit" button
+    And I wait for the server response
+    And I should be on "/pocketcode/profile/0/edit"
     When I go to "/logout"
     And I try to log in as "Catrobat" with the password "123456"
     Then I should see "Your password or username was incorrect."
@@ -31,93 +36,104 @@ Feature:
     Then I should be logged in
 
   Scenario: changing password with a typo in repeat-password should not work
-    Given I fill in "password" with "abcdef"
+    Given I am on "/pocketcode/passwordEdit"
+    And I fill in "old-password" with "123456"
+    And I fill in "password" with "abcdef"
     And I fill in "repeat-password" with "fedcba"
-    And I press "save changes"
+    And I click the "save-edit" button
+    And I wait for the server response
     Then I should see "The passwords didn't match."
 
   Scenario: a short password should not work
-    Given I fill in "password" with "abc"
+    Given I am on "/pocketcode/passwordEdit"
+    And I fill in "old-password" with "123456"
+    And I fill in "password" with "abc"
     And I fill in "repeat-password" with "abc"
-    And I press "save changes"
+    And I click the "save-edit" button
     And I wait for the server response
     Then I should see "The new password must have at least 6 characters."
 
   Scenario: too long password should not work
-    Given I fill in "password" with "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+    Given I am on "/pocketcode/passwordEdit"
+    And I fill in "old-password" with "123456"
+    And I fill in "password" with "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
     And I fill in "repeat-password" with "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
-    And I press "save changes"
+    And I click the "save-edit" button
     And I wait for the server response
     Then I should see "The new password can have a maximum of 32 characters."
 
   Scenario: changing email and additional email should work
-    Given I fill in "email" with "first@email.com"
-    And I fill in "additional-email" with "second@email.com"
-    And I press "save changes"
+    Given I click the "edit" button
     And I wait for the server response
-    Then I should see "saved!"
-    When I reload the page
-    Then the "email" field should contain "first@email.com"
-    And the "additional-email" field should contain "second@email.com"
+    And I click the "email-edit" button
+    And I wait for the server response
+    And I fill in "email" with "first@email.com"
+    And I fill in "additional-email" with "second@email.com"
+    When I click the "save-edit" button
+    And I wait for the server response
+    Then I should be on "/pocketcode/profile/0/edit"
+    And I should see "first@email.com"
+    And I should see "second@email.com"
 
   Scenario: changing email adresses with an invalid email should not work
-    Given I fill in "email" with "first"
-    And I press "save changes"
+    Given I am on "/pocketcode/emailEdit"
+    And I fill in "email" with "first"
+    When I click the "save-edit" button
+    And I wait for the server response
     Then I should see "This email address is not valid."
     When I fill in "additional-email" with "second"
-    And I press "save changes"
+    And I click the "save-edit" button
+    And I wait for the server response
     Then I should see "This email address is not valid."
     When I fill in "email" with "first@email"
-    And I press "save changes"
+    And I click the "save-edit" button
+    And I wait for the server response
     Then I should see "This email address is not valid."
     When I fill in "additional-email" with "second@email"
-    And I press "save changes"
+    And I click the "save-edit" button
+    And I wait for the server response
     Then I should see "This email address is not valid."
     When I fill in "email" with "first@email.comcomcom"
-    And I press "save changes"
+    And I click the "save-edit" button
     And I wait for the server response
     Then I should see "This email address is not valid."
     When I fill in "additional-email" with "second@email.comcomcom"
-    And I press "save changes"
+    And I click the "save-edit" button
     And I wait for the server response
     Then I should see "This email address is not valid."
 
-  Scenario: deleting addition email should work but deleting first mail without an additional email should not work
-    Given I fill in "email" with "first@email.com"
-    And I fill in "additional-email" with "second@email.com"
-    And I press "save changes"
-    And I wait for the server response
-    Then I should see "saved!"
-    When I fill in "additional-email" with ""
-    And I press "save changes"
-    And I wait for the server response
-    Then I should see "saved!"
-    When I reload the page
-    Then the "email" field should contain "first@email.com"
-    And the "additional-email" field should contain ""
+  Scenario: deleting first mail without an additional email should not work
+    Given I am on "/pocketcode/emailEdit"
     When I fill in "email" with ""
-    And I press "save changes"
+    And I click the "save-edit" button
     And I wait for the server response
     Then I should see "Error while updating this e-mail address. You must have at least one validated e-mail address."
 
   Scenario: when deleting the first mail, the additional mail should become the first mail
-    Given I fill in "email" with ""
+    Given I am on "/pocketcode/emailEdit"
+    And I fill in "email" with ""
     And I fill in "additional-email" with "second@email.com"
-    And I press "save changes"
+    And I click the "save-edit" button
     And I wait for the server response
-    Then I reload the page
-    And the "email" field should contain "second@email.com"
-    And the "additional-email" field should contain ""
+    Then I should be on "/pocketcode/profile/0/edit"
+    And the "#email-text" element should contain "second@email.com"
 
   Scenario: changing country should work
-    Given I select "Austria" from "country"
-    And I press "save changes"
+    Given I click the "edit" button
     And I wait for the server response
-    Then I should see "saved!"
-    And I reload the page
-    Then "AT" must be selected in "country"
+    And I click the "country-edit" button
+    And I wait for the server response
+    Given I select "Austria" from "country"
+    And I click the "save-edit" button
+    And I wait for the server response
+    Then I should be on "/pocketcode/profile/0/edit"
+    And the "#country-text" element should contain "Austria"
 
   Scenario: uploading avatar should work
+    Given I click the "edit" button
+    And I wait for the server response
+    And I click the "avatar-edit" button
+    And I wait for the server response
     Given I attach the avatar "logo.png" to "file"
     And I wait for the server response
     Then the avatar img tag should have the "logo.png" data url
@@ -128,13 +144,15 @@ Feature:
 
   #todo: try not to reload the page, but check if the text "This image type is not supported, ..." is visible
   Scenario: only jpg, png or gif allowed for avatar
-    Given I attach the avatar "fail.tif" to "file"
+    Given I am on "/pocketcode/avatarEdit"
+    And I attach the avatar "fail.tif" to "file"
     And I wait for the server response
     When I reload the page
     Then the avatar img tag should not have the "fail.tif" data url
 
   Scenario: max. 5MB for avatar image
-    Given I attach the avatar "galaxy_big.png" to "file"
+    Given I am on "/pocketcode/avatarEdit"
+    And I attach the avatar "galaxy_big.png" to "file"
     Then I should see "Your chosen picture is too large, please do not use images larger than 5mb."
 
   Scenario: deleting a program should work

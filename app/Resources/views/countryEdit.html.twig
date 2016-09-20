@@ -1,0 +1,35 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/editprofile.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  <h1 id="profile-edit-header">Land Ändern</h1>
+
+  <div id="change-country" class="edit-wrapper">
+    <div id="select-country">
+        <select name="country" tabindex="5">
+          <option value=""></option>
+          {% for key, country in  countriesList() %}
+            {% if app.user.country == key %}
+              <option value="{{ key }}" selected>{{ country }}</option>
+            {% else %}
+              <option value="{{ key }}">{{ country }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+    </div>
+    <button id="save-country" class="save-button">Änderungen speichern</button>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
+  <script>
+    var profile = new MyProfile('{{ path('profile') }}', '{{ path('name_save') }}', '{{ path('name_edit') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
+        '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',  '{{ path('profile_save') }}', '{{ path('profile_delete_program') }}',
+        '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
+  </script>
+{% endblock %}

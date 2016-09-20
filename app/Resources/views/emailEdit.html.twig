@@ -1,0 +1,35 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/editprofile.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  <h1 id="profile-edit-header">Email Ändern</h1>
+
+  <div id="change-email" class="edit-wrapper">
+    <div class="input-error text-email-notvalid">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
+    <div class="input-error text-email-missing">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
+    <div class="input-error text-email-exists">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
+    <div class="input-field">
+      <div class="information-header">1.Email:</div>
+      <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" tabindex="3">
+    </div>
+
+
+    <div class="input-field">
+      <div class="information-header">2.Email:</div>
+      <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" tabindex="4">
+    </div>
+    <button id="save-email" class="save-button">Änderungen speichern</button>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
+  <script>
+    var profile = new MyProfile('{{ path('profile') }}', '{{ path('name_save') }}', '{{ path('name_edit') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
+        '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',  '{{ path('profile_save') }}', '{{ path('profile_delete_program') }}',
+        '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
+  </script>
+{% endblock %}
