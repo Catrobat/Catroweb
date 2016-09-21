@@ -72,6 +72,7 @@ Feature:
     When I click the "save-edit" button
     And I wait for the server response
     Then I should be on "/pocketcode/profile/0/edit"
+    And I wait for the server response
     And I should see "first@email.com"
     And I should see "second@email.com"
 
