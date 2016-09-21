@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: كلمة المرور يجب أن تختلف عن اسم المستخدم.
+    passwordWrong: Wrong password
     emailNotValid: البريد الإلكتروني خطأ.
     emailMissing: 'حدث خطأ أثناء تحديث عنوان البريد الإلكتروني هذا. يجب أن يكون لديك على الأقل عنوان بريد إلكتروني  صحيح.'
     emailExists: عنوان البريد الإلكتروني هذا موجود بالفعل.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: الصورة التي تم اختيارها كبيرة جداً، ويرجى عدم استخدام الصور أكبر من 5 ميغا بايت.
     uploadError: عذراً، هناك مشكلة أثناء التحميل!
     noSupport: هذا النوع من الصور غير معتمد، الرجاء محاولة صورة أخرى.
+myprofile:
+  editProfile: Edit profile
+  edit: تحرير
+  done: موافق
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: ترخيص لتشغيل
   title: ترخيص للتشغيل--منح الائتمان والمشاركة

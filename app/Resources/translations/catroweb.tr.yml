@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: Şifre kullanıcı adından farklı olmalıdır.
+    passwordWrong: Wrong password
     emailNotValid: Bu e-posta adresi geçerli değil.
     emailMissing: E-posta adresinizi güncelleştirme sırasında bir hata oluştu. En az bir onaylanmış e-posta adresi olması gerekir.
     emailExists: Bu e-posta adresi mevcut.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: "Seçilen resim çok büyük, 5 mb'den büyük görüntüleri  lütfen kullanmayın."
     uploadError: Üzgünüz, yükleme sırasında bir sorun oluştu!
     noSupport: Bu resim türü desteklenmiyor, lütfen başka bir görüntü deneyin.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Oynamak için lisansınız
   title: 'Oynamak için lisans- prim ver ve paylaş'

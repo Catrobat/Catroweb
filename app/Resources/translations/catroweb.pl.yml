@@ -23,7 +23,7 @@ more: więcej
 less: mniej
 ok: OK
 clickToDownloadProgram: 'Aby pobrać przykładowy program kliknij %link_start% tutaj %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: Nazwa użytkownika lub adres e-mail jest już zajęty.
 programs:
   featured: Polecane
   newest: Najnowsze programy
@@ -32,55 +32,54 @@ programs:
     downloaded: Najczęściej pobierane
   random: Losowe programy
   related: Propozycje programów
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  downloads: '%downloads% pobrań'
+  sample: Przykładowe programy
+  views: '%views% odsłon'
+  submitted: Przesłane programy
+  uploaded: Przesłane programy
   reportAsInappropriate: Zgłoś jako niewłaściwe
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  languageVersion: 'Wersja języka Catrobat: %languageVersion%'
+  reportLoginText: 'Proszę, %login%, zgłoś ten program jako nieodpowiedni.'
   reportDialogHeader: Dlaczego uważasz, że ten program jest niewłaściwy?
   reportDialogReason: Podaj powód
   reportOwnProgram: Nie możesz oflagować własnego programu.
   reportAlready: Ten program jest już oflagowany jako nieodpowiedni.
   reportDone: Ten program został przez Ciebie zgłoszony jako nieodpowiedni!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+  updateAppHeader: Aktualizacja aplikacji
+  updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji, aby móc pobrać ten program.
+  btnClosePopup: OK
   checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: Pokaż więcej
+  comments: Komentarze
+  send: Wyślij
   delete: Usuń
   report: Zgłoś
-  report_popup: The comment was successfully reported.
+  report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Reported
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
-    Dear %username%.
+    Drogi %username%. 
+    Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna. 
+    Aby zresetować hasło i utworzyć nową, proszę odwiedzić następującą stronę: %confirmationUrl%
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    
-    Best regards,
-    Your Catrobat Team.
+    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%. 
+    Aby to zrobić, odwiedź następującą stronę: %loginPage%
+    Aby edytować swój profil, przejdź do tej strony: %profilePage% 
+    Pozdrawiamy! 
+    Twój zespół Catrobat.
 profile:
   saveChanges: zapisz zmiany
-  newPass: new password
-  repeatPass: repeat password
+  newPass: nowe hasło
+  repeatPass: powtórz hasło
   firstEmail: Mój pierwszy e-mail
   secondEmail: Mój drugi e-mail
-  myPrograms: My programs
+  myPrograms: Moje programy
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
+    passwordTooShort: 'Nowe hasło musi mieć co najmniej %length% znaków.'
+    passwordTooLong: 'Nowe hasło może mieć maksymalnie %length% znaków.'
     passwordIsUsername: Hasło musi się różnić od nazwy użytkownika.
+    passwordWrong: Wrong password
     emailNotValid: Adres e-mail jest nieprawidłowy.
     emailMissing: Błąd podczas aktualizowania tego adresu e-mail. Musisz mieć co najmniej jeden potwierdzony adres e-mail.
     emailExists: Ten adres e-mail już istnieje.
@@ -92,6 +91,17 @@ profile:
     pictureTooLarge: Wybrane zdjęcie jest za duże, proszę, nie używaj zdjęć większych niż 5MB.
     uploadError: Przepraszamy, wystąpił błąd podczas wysyłania!
     noSupport: Ten typ obrazu nie jest obsługiwany, proszę wybierz inny obraz.
+myprofile:
+  editProfile: Edit profile
+  edit: Edytuj
+  done: Zrobione
+  avatar: Avatar
+  email: E-mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licencja na korzystanie
   title: 'Licencja na korzystanie - podziękuj i podziel się'
@@ -107,8 +117,8 @@ licenseToPlay:
   version: Wersja 1.1, 2 kwietnia 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: Strefa nauczycieli
+    description: Ta strefa może być używana przez nauczycieli.
 termsOfUse:
   title: Warunki użytkowania
   headline: Witaj w społeczności Catrobat!
@@ -149,39 +159,35 @@ help:
   stepByStep:
     title: Wprowadzenie krok po kroku
     start: 'Pozycja wyjściowa:'
-    description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    description: Tutaj możesz utworzyć swój pierwszy program, pocztówkę interaktywną, korzystając z następujących filmów instruktażowych. Postępuj zgodnie z instrukcjami. Podczas tworzenia pocztówki poznasz podstawy Pocket Code, które będą potrzebne do kolejnych projektów. Dzięki tym filmom instruktażowym zdobędziesz większą swobodę podczas tworzenia własnych projektów w Pocket Code.
     step1:
-      title: Make a new program
+      title: Stwórz nowy program
       detail:
         text1: 'Naciśnij na "Nowy".'
         text2: 'Wprowadź nazwę programu, wybierz "Utwórz pusty program" i naciśnij "OK".'
     step2:
-      title: Create a new object
+      title: Utwórz nowy obiekt
       detail:
         text1: 'Naciśnij:'
-        text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
+        text2: Wybierz źródło początkowego wyglądu Twojego nowego obiektu.
+        text3: 'Wpisz nazwę obiektu i naciśnij "OK", aby utworzyć obiekt.'
         special1: Narysuj nowy wygląd.
         special2: Wybierz z galerii.
         special3: Zrób zdjęcie.
     step3:
-      title: Start Moving
+      title: Wprowadź ruch
       detail:
         text1: 'Naciśnij:'
         text2: 'Pierwszy blok, którego używamy jest z kategorii "Ruch".'
         text3: 'Wybierz blok "Leć". Obiekt przesunie się na scenie do nowej pozycji zdefiniowanej w bloku.'
         text4: Teraz blok wisi. Aby go umieścić, przesuń blok na wybrane miejsce. Możesz też przesunąć istniejące bloki przez ich naciśnięcie, aż zostaną zawieszone.
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text5: 'Naciśnij "Play", aby przejść do sceny i zobaczyć poruszający się obiekt.'
         text6: Użyj przycisku wstecz Androida, aby wrócić ze sceny.
     step4:
       title: Zmień wygląd
       description: Możesz zmienić wygląd swojego obiektu.
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text1: 'Wybierz blok "Zmień na wygląd". Za pomocą tego bloku możesz wybrać wygląd lub utworzyć nowy.'
         text2: 'Umieść blok pod blokiem "Leć".'
         text3: Naciśnij pole rozwijanej listy (trójkącik), aby utworzyć nowy wygląd.
         text4: Wybierz źródło obrazu, podobnie jak przedtem.
@@ -191,46 +197,46 @@ help:
       title: Powiedz
       description: Teraz dowiesz się jak spowodować, żeby obiekt zaczął mówić.
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text1: 'Wybierz blok "Powiedz". Obiekt mówi tekst, gdy ten blok jest wykonywany.'
         text2: 'Umieść blok pod blokiem "Przełącz się na wygląd".'
         text3: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.
     step6:
-      title: Again and again
+      title: Znowu i znowu
       description: Ten krok pokazuje, jak można powtarzać zachowanie się obiektów.
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text1: 'Wybierz blok "Zawsze". Wszystko w pętli będzie nieustannie powtarzane.'
         text2: 'Umieść blok "Zawsze" pod blokiem "Gdy program startuje".'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text3: 'Dodaj kolejny blok "Leć".'
+        text4: Umieść blok “Leć” ponad blokiem “Koniec pętli”.
         text5: 'Wybierz w polu tekstowym wartości  x i y i ustaw je na 0.'
         text6: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.
     step7:
       title: Tapping is everything
       description: Możesz również kontrolować zachowanie obiektu, gdy program już działa na scenie.
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text1: 'Wybierz blok "Kiedy naciśnięty". Każdy blok umieszczony pod nim zostanie raz wykonany, gdy naciśniesz obiekt na scenie.'
+        text2: 'Umieść blok "Kiedy naciśnięty" pod innymi klockami.'
+        text3: 'Wybierz blok "Obróć w prawo" i umieść go pod blokiem "Kiedy naciśnięty".'
         text4: Teraz masz ten skrypt.
         text5: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie. Jeśli teraz naciśniesz obiekt, to on się zakręci.
     step8:
-      title: Copy, delete or edit a brick
+      title: Kopiowanie, usuwanie lub edycja bloku
       detail:
         text1: Pojedyncze naciśnięcie każdego bloku po lewej stronie otwiera jego menu kontekstowe. Stąd możesz przesuwać, kopiować, usuwać lub edytować wartości bloku wykorzystując edytor formuł.
     step9:
-      title: Navigation in the app
+      title: Nawigacja po aplikacji
       detail:
         text1: Użyj przycisku Cofnij systemu Android, aby nawigować po aplikacji.
         text2: Cofnij o jeden ekran, aby przejrzeć swój obiekt. Stąd możesz przejść do skryptów, a także do reprezentacji wyglądów i dźwięków obiektu. W tym miejscu możesz zmienić nazwę, skopiować, dodać lub usunąć wyglądy i dźwięki.
         text3: Użyj ponownie przycisku Cofnij systemu Android, aby uzyskać omówienie obiektów i tła.
     step10:
-      title: Change the background
+      title: Zmiana tła
       description: To jest przegląd twoich obiektów i tła zależny od programu.
       detail:
         text1: Tło jest też obiektem, ale można mieć tylko jedno tło.
         text2: Do obiektu tło można dodać skrypty, dźwięki i wyglądy w ten sam sposób.
     step11:
-      title: Main Menu
+      title: Menu główne
       description: Użyj przycisku wstecz Androida, aby dostać się do tego ekranu.
       detail:
         text1: Kontynuuj pracę z obecnie otwartym programem.
@@ -243,73 +249,73 @@ help:
     title: Poradniki
     description1: Te poradniki pokazują, jak stosować skuteczne triki w
     getReady: 'Przygotuj się:'
-    tryCode: 'Try this code:'
+    tryCode: 'Wypróbuj ten kod:'
     doIt: 'Zrób to:'
     tip: 'Dodatkowa rada:'
     card1:
       title: Zmień wielkość
-      description: Naciśnij kaczkę żeby zmienić rozmiar.
-      one: Add the object of which you would like to change the size, e.g. Animal.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      description: Zmień rozmiar obiektu.
+      one: Dodaj obiekt, którego rozmiar chcesz zmienić, np. zwierzę.
+      two: 'Wstaw następujące bloczki do skryptów obiektu w celu zminimalizowania go (do 20% oryginalnego rozmiaru) gdy zostanie dotknięty.'
     card2:
       title: Zmień wygląd
-      description: Użyj tego triku, aby liczyć automatycznie.
-      one: Add the object of which you would like to change its look, e.g. items.
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      description: Zmieniaj wygląd obiektu.
+      one: Dodaj obiekt, którego wygląd chcesz zmienić, np. taki.
+      two: Dołącz kolejne obrazki do wyglądów obiektu.
+      three: Ułóż następujące bloczki do skryptów obiektu by nieustannie zmieniać jego wyglądy co sekundę.
     card3:
       title: Animacja ruchu
       description: Użyj tego tricku, jeśli chcesz żeby papuga latała.
-      one: Add the object you want to be moving.
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      one: Dodaj obiekt, który ma się poruszać.
+      two: Dołącz kolejny obrazek w wyglądzie obiektu, które zilustruje ruch.
+      three: 'Wstaw następujące bloczki do skryptu obiektu, aby nieustannie co pewien czas zmieniać wygląd i położenie obiektu. Dodatkowo możesz sprawić, że ptak nie wyleci ze sceny używając klocka "jeśli na brzegu, odbij się".'
     card4:
       title: Leć
       description: Przejdź płynnie z jednego punktu do innego.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      one: 'Dodaj obiekt, który ma latać lub ślizgać się - np. samolot.'
+      two: Wstaw następujący bloczki i określ czas lotu oraz miejsce, do którego obiekt ma zmierzać.
     card5:
       title: Zagraj dźwięk
-      description: Play a sound by tapping on the object.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      description: Odtwarzanie dźwięku po dotknięcie obiektu.
+      one: Dodaj obiekt,, który ma wydać dźwięk, np. psa.
+      two: Ułóż następujące bloczki, aby umożliwić odtwarzanie dźwięku po dotknięciu psa. Wybierz dźwięk z własnych zasobów, biblioteki multimediów Pocket Code lub nagraj samemu.
     card6:
       title: Powiedz
       description: Użyj tego kodu, żeby obiekt zaczął mówić.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      one: Dodaj obiekt, który będzie mówił, np. Carrie.
+      two: Ułóż następujące bloczki, aby dziewczynka mogła mówić.
     card7:
-      title: GSensor
+      title: Czujnik nachylenia
       description: Użyj tego tricku do kontrolowania obiektu za pomocą przechylania swojego urządzenia.
-      one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      one: Dodaj obiekt, którym chcesz poruszać na scenie.
+      two: 'Wstaw poniższe bloczki w celu kontrolowania obiektu za pośrednictwem czujników telefonu. Dlatego należy wybrać "nachylenie x i y". Aby uzyskać odpowiedni ruch, ustaw "- nachylenie". Jeśli ruchy obiektu są zbyt gwałtowne, podzielić nachylenie na przykład przez 10.'
     card8:
       title: Kompas
       description: Użyj tego kodu, aby zrobić kompas.
-      one: Add the object you want to point in compass direction.
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      one: Dodaj obiekt, który ma być igłą kompasu.
+      two: 'Ułóż następujące bloczki, aby igła kompasu ustawiła się odpowiednio. Dodatkowo można użyć pętli "zawsze".'
     card9:
       title: Nadaj
       description: Spójrz na ten kod! To pokazuje, jak obiekty mogą się komunikować.
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      one: Dodaj nowy obiekt, na przykład Alicję, która powinna wysłać wiadomość. Dodatkowo, dodaj drugie tło do wyglądów tła. Jak tylko tło odbierze komunikat, zmieni się jego wygląd.
+      two: 'Wstaw bloczek "Nadaj" i ustal, co powinno się wydarzyć, gdy inny obiekt otrzyma wiadomość.'
+      three: W tym przypadku, tło zmienia się, kiedy zostanie dotknięty obiekt na pierwszym planie.
     card10:
       title: Pokaż zmienną
-      description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      description: Pokaż wartość zmiennej.
+      one: 'Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które należy zmieni się po odebraniu wiadomości.'
+      two: Wstaw poniższe bloczki, aby w zmiennych zapisać aktualne współrzędne położenia x i y poruszającego się obiektu.
+      three: 'Poprzez "Pokaż zmienną" można wyświetlać wartości w wybranym miejscu na scenie.'
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: Wykrywanie kolizji
+      description: Wykrywanie kolizji między dwoma obiektami.
+      one: 'Dodaj dwa obiekty, z których jeden powinien być poruszany za pomocą czujników telefonu, np. Alex (zobacz %tutorial_card_link_7% samouczek 7 %link_end%).'
+      two: 'Zapisz bieżącą "pozycję x i y" poruszającego się obiektu Alex (zobacz %tutorial_card_link_10% samouczek 10 %link_end%) i wstaw następujące skrypty. Zawsze sprawdzaj, czy dwa obiekty nakładają się na siebie. Jeśli tak się stanie, obiekty powinny zostać ukryte.'
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: Wykrywanie twarzy
+      description: Kontrola obiektu za pomocą wykrywania twarzy.
+      one: Najpierw upewnij się, że bloczki wykrywania twarzy są włączone. W związku z tym przejdź do ustawień.
+      two: 'Dodaj nowy obiekt i wstaw następujące bloczki, aby pokazać go, jeśli aparat wykryje twarz. Umieść, "jeśli twarz jest wykryta" i umieścić to w pętli "zawsze". Jeśli aparat wykrywa twarz zmienna przyjmuje wartość "Prawda", w przeciwnym razie - "Fałsz".'
   starterPrograms:
     title: Programy na start
     description: Poznaj te programy na start. Zajrzyj do środka, żeby zrobić zmiany i dodać swoje pomysły.
@@ -329,10 +335,10 @@ help:
     text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
     title4: Create Android app
     text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: Download app
+    title5: Pobierz aplikację
     text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
     title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    text6: "Odwiedź %link% i kliknij na 'Zaloguj się' lub 'Zarejestruj się!' w menu. Jeśli masz już konto wystarczy zalogować się. Jeśli nie, musisz zarejestrować się, podając e-mail, nazwę użytkownika i hasło."
     title7: Upload your game on the Game Jolt Site
     text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
     text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
@@ -349,7 +355,7 @@ help:
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
     title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
+    subtitle2: Użyj czujników nachylenia i wykrywania kolizji pomiędzy obiektami
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
     title3: 'The Hatter - Hit and Run'
     subtitle3: "Create a moving landscape and control the Hatters' movement"
@@ -365,10 +371,10 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: Pobierz program
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
+  username_header: Dziękujemy za rejestrację w Pocket Code!
+  username_chooser: 'Proszę wybrać nazwę użytkownika:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
@@ -389,19 +395,19 @@ login:
   recoverPassSend: E-mail został wysłany na Twój adres. Sprawdź swoją skrzynkę odbiorczą.
   userOrEmail: Nazwa użytkownika lub e-mail
   changePass: Zmień hasło
-  createAccount: Create an account
+  createAccount: Utwórz konto
   or: lub
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
+  download: Pobierz aplikację
+  prepare: Przygotuj apkę
+  preparing: Przygotuj aplikację
   text: The process may take a while
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: Nazwa użytkownika nie może być pusta
+    invalid: Twoja nazwa użytkownika jest nieprawidłowa
+    exists: Ta nazwa użytkownika już istnieje.
+    not_exists: Ta nazwa użytkownika nie istnieje.
   password:
     blank: Brakuje hasła.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -497,17 +503,15 @@ language:
 ci:
   generate: Generate Apk
   pending: Generating Apk
-  download: Download Apk
+  download: Pobierz APK
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
+  submit: 'Przeđlij do %gamejamname%'
   whats: "What's the %gamejamname%?"
   submitown:
     header: be aware
     subheader: You can only submit your own programs
-    text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
+    text: 'Ale dlaczego nie stworzysz swojego własnego? Weź udział w %gamejamtag%'
 tag-text: Tags
 extenstion-text: Extensions
 tags:
@@ -515,9 +519,9 @@ tags:
     tag1: Gry
     tag2: Animacja ruchu
     tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
+    tag4: Muzyka
+    tag5: Sztuka
+    tag6: Eksperymentalne
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -525,7 +529,7 @@ admin:
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
+    btnDownloadBackup: Pobierz kopię zapasową
     btnRestoreBackup: Restore backup
     btnDeleteBackup: Delete backup
     createBackupConfirmationTitle: Create backup file

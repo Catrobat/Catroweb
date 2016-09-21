@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'Het nieuwe wachtwoord moet ten minste %length% tekens lang zijn.'
     passwordTooLong: 'Het nieuwe wachtwoord kan maar maximaal %length% tekens lang zijn.'
     passwordIsUsername: Het wachtwoord moet verschillen van de gebruikersnaam.
+    passwordWrong: Wrong password
     emailNotValid: Dit E-mailadres is niet geldig.
     emailMissing: Fout tijdens het bijwerken van dit e-mailadres. U moet ten minste één gevalideerd e-mailadres hebben.
     emailExists: Dit e-mailadres bestaat al.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Jouw gekozen afbeelding is te groot, gelieve geen afbeeldingen te gebruiken groter dan 5mb.
     uploadError: Sorry, er is een probleem opgetreden tijden het uploaden!
     noSupport: "Deze afbeelding's type wordt niet ondersteund. gelieve een andere afbeelding te proberen."
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licentie om af te spelen
   title: 'License to play - Give credit and share'

@@ -78,6 +78,7 @@ profile:
     passwordTooShort: 'Novo geslo mora imeti najmanj %length% znakov.'
     passwordTooLong: 'Novo geslo lahko ima največ %length% znakov.'
     passwordIsUsername: Geslo se mora razlikovati od uporabniškega imena.
+    passwordWrong: Wrong password
     emailNotValid: Ta e-poštni naslov ni veljaven.
     emailMissing: Napaka pri posodabljanju e-poštnega naslova. Imeti morate vsaj en veljaven e-poštni naslov.
     emailExists: Ta e-poštni naslov že obstaja.
@@ -89,6 +90,17 @@ profile:
     pictureTooLarge: Izbrana slika je prevelika, ne uporabljajte slik večjih od 5mb.
     uploadError: Žal je prišlo do težave med nalaganjem!
     noSupport: Ta tip slik ni podprt, poskusite z drugo sliko.
+myprofile:
+  editProfile: Edit profile
+  edit: Uredi
+  done: Dokončano
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licenca za predvajanje
   title: 'Dovoljenje za predvajanje - komu se lahko zahvalite in delite'

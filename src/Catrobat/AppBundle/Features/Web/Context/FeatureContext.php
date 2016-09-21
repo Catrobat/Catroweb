@@ -1776,4 +1776,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         assertNotEquals($button->getAttribute('href'), 'javascript:void(0)');
     }
 
+    /**
+     * @When /^I get page content$/
+     */
+    public function iGetPageContent()
+    {
+        var_dump($this->getSession()->getPage()->getContent());
+        die;
+    }
+
+
 }

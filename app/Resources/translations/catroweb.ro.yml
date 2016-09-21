@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'Noua parolă trebuie să aibă cel puţin %length% caractere.'
     passwordTooLong: 'Noua parolă poate avea maxim %length% caractere.'
     passwordIsUsername: Parola trebuie să difere de numele de utilizator.
+    passwordWrong: Wrong password
     emailNotValid: Această adresă de e-mail nu este validă.
     emailMissing: Eroare în timpul actualizării aceastei adrese electronice. Trebuie să ai cel puţin o adresă de e-mail validă.
     emailExists: 'Parola sau numele au fos gre&#x219;ite.'
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Imaginea ta alese este prea mare, te rog să nu folosi imagini mai mare de 5MB.
     uploadError: Ne pare rau, a parut o problemă în timpul încărcari!
     noSupport: 'Numele sau adresa email lipse&#x219;te.'
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licenţă pentru a juca
   title: 'Licen&#x21B;a pentru joac&#x103; - Da&#x21B;i creditul &#x219;i &#xEE;mp&#x103;r&#x21B;i&#x21B;iv&#x103;'

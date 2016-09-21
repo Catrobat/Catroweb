@@ -81,6 +81,7 @@ profile:
     passwordTooShort: '新しいパスワードは、少なくとも %length% 文字必要です。'
     passwordTooLong: '新しいパスワードは、最大 %length% 文字にすることができます。'
     passwordIsUsername: パスワードは、ユーザー名と異なる必要があります。
+    passwordWrong: Wrong password
     emailNotValid: この電子メール アドレスが無効です。
     emailMissing: この電子メール アドレスを更新中のエラーがありました。少なくとも 1 つの検証済みの電子メール アドレスが必要です。
     emailExists: このメール アドレスは既に存在します。
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: 選択した写真が大きすぎる、5 mb より大きいイメージを使用しないでください。
     uploadError: 申し訳ありませんが、アップロード中に問題があった ！
     noSupport: このタイプのイメージはサポートされていません、別の画像を試してください。
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: 完了
+  avatar: Avatar
+  email: メール
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: 再生するライセンス
   title: 'プレーするライセンス - クレジットと共有を与えます'

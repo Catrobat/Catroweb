@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'Das neue Passwort muss mindestens %length% Zeichen lang sein.'
     passwordTooLong: 'Das neue Passwort darf maximal %length% Zeichen lang sein.'
     passwordIsUsername: Passwort und Username dürfen nicht gleich sein.
+    passwordWrong: Falsches Passwort
     emailNotValid: Diese E-mail Adresse ist ungültig.
     emailMissing: Fehler beim Speicher dieser E-Mail Adresse. Du musst zumindest eine verifizierte E-Mail Adresse haben.
     emailExists: Die E-Mail Adresse existiert bereits.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Dein gewähltes Bild ist zu groß, verwende bitte keine Bilder, die größer als 5MB sind.
     uploadError: Tut mir leid, es gab ein Problem beim Hochladen!
     noSupport: Dieser Bild-Typ wird nicht unterstützt, versuche ein anderes Bild.
+myprofile:
+  editProfile: Profil bearbeiten
+  edit: Bearbeiten
+  done: Fertig
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Avatar bearbeiten
+  editUsername: Benutzernamen bearbeiten
+  editPassword: Passwort ändern
+  editCountry: Land ändern
+  editEmail: E-Mail bearbeiten
 licenseToPlay:
   link: Lizenzbedingungen
   title: 'Lizenz zum Spielen - Sag "Danke" und teile deine Programme'

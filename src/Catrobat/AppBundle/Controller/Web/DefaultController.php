@@ -348,18 +348,18 @@ class DefaultController extends Controller
       $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
       $firstMail = $user->getEmail();
       $secondMail = $user->getAdditionalEmail();
-
-
+      $nolb_user = $user->getNolbUser();
 
       return $this->get('templating')->renderResponse($twig, array(
-      'profile' => $user,
-      'program_count' => $program_count,
-      'minPassLength' => self::MIN_PASSWORD_LENGTH,
-      'maxPassLength' => self::MAX_PASSWORD_LENGTH,
-      'country' => $country,
-      'firstMail' => $firstMail,
-      'secondMail' => $secondMail,
-      'oauth_user' => $oauth_user,
+          'profile' => $user,
+          'program_count' => $program_count,
+          'minPassLength' => self::MIN_PASSWORD_LENGTH,
+          'maxPassLength' => self::MAX_PASSWORD_LENGTH,
+          'country' => $country,
+          'firstMail' => $firstMail,
+          'secondMail' => $secondMail,
+          'oauth_user' => $oauth_user,
+          'nolb_user' => $nolb_user,
     ));
   }
 
@@ -391,8 +391,7 @@ class DefaultController extends Controller
     $firstMail = $user->getEmail();
     $secondMail = $user->getAdditionalEmail();
     $username = $user->getUsername();
-
-
+    $nolb_user = $user->getNolbUser();
 
     return $this->get('templating')->renderResponse($twig, array(
         'profile' => $user,
@@ -402,6 +401,7 @@ class DefaultController extends Controller
         'firstMail' => $firstMail,
         'secondMail' => $secondMail,
         'username' => $username,
+        'nolb_user' => $nolb_user,
     ));
   }
 
@@ -410,8 +410,16 @@ class DefaultController extends Controller
    * @Method({"GET"})
    */
   public function NameEditAction(Request $request){
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
+
     $twig = '::nameEdit.html.twig';
-    return $this->get('templating')->renderResponse($twig);
+    return $this->get('templating')->renderResponse($twig, array(
+      'nolb_user' => $nolb_user,
+    ));
   }
 
 
@@ -420,8 +428,15 @@ class DefaultController extends Controller
    * @Method({"GET"})
    */
   public function EmailEditAction(Request $request){
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
     $twig = '::emailEdit.html.twig';
-    return $this->get('templating')->renderResponse($twig);
+    return $this->get('templating')->renderResponse($twig, array(
+      'nolb_user' => $nolb_user,
+    ));
   }
 
   /**
@@ -429,8 +444,15 @@ class DefaultController extends Controller
    * @Method({"GET"})
    */
   public function AvatarEditAction(Request $request){
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
     $twig = '::avatarEdit.html.twig';
-    return $this->get('templating')->renderResponse($twig);
+    return $this->get('templating')->renderResponse($twig, array(
+      'nolb_user' => $nolb_user,
+    ));
   }
 
 
@@ -439,10 +461,16 @@ class DefaultController extends Controller
    * @Method({"GET"})
    */
   public function passwordEditAction(Request $request){
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
     $twig = '::passwordEdit.html.twig';
     return $this->get('templating')->renderResponse($twig, array(
         'minPassLength' => self::MIN_PASSWORD_LENGTH,
         'maxPassLength' => self::MAX_PASSWORD_LENGTH,
+        'nolb_user' => $nolb_user,
     ));
   }
 
@@ -452,8 +480,15 @@ class DefaultController extends Controller
    * @Method({"GET"})
    */
   public function countryEditAction(Request $request){
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
     $twig = '::countryEdit.html.twig';
-    return $this->get('templating')->renderResponse($twig);
+    return $this->get('templating')->renderResponse($twig, array(
+      'nolb_user' => $nolb_user,
+    ));
   }
 
 

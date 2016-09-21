@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'نئون ڳجھو لفظ گھٽ ۾ گھٽ بہ %length% اکر ڊگھو گھرجي.'
     passwordTooLong: 'نئون ڳجھو لفظ وڌ ۾ وڌ %length% اکر ڊگھو ٿي سگھي ٿو.'
     passwordIsUsername: ڳجھو لفظ توهان جي يوزرنانءَ کان مختلف هوڻ گھرجي.
+    passwordWrong: Wrong password
     emailNotValid: اهو برق ٽپال پتو ڪار ڪونهي.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: اهو برق ٽپال پتو اڳي ئي وجود رکي ٿو.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: توهان جي چونڊيل تصوير هيڪاندي وڏي آهي، مهرباني ڪري 5 ميگا ٻاٽڻ کان وڏا عڪس نہ استعمال ڪريو.
     uploadError: معاف ڪندا، فائيل چاڙهيندي ڪو مسئلو درپيش اچي ويو!
     noSupport: عڪس جو اهو فارميٽ ڪار نہ آهي، مهرباني ڪري ڪو ٻيو عڪس آزمايو.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: License to play
   title: 'License to play - Give credit and share'
