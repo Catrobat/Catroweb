@@ -15,11 +15,12 @@
       <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
     </div>
 
-    <div id="username-information">
+   {# Code nicht löschen. UX-Team ist unentschlossen ob man Namen ändern können soll oder nicht. Bei bedarf einkommentieren.
+   <div id="username-information">
       <button id="username-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
       <div class="information-header" id="username-header">{{ 'username'|trans({}, 'catroweb') }}:</div>
       <div class="data" id="username-text">{{ username }}</div>
-    </div>
+    </div>#}
 
     <div id="country-information">
       <button id="country-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>

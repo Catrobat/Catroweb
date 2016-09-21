@@ -497,10 +497,11 @@ class DefaultController extends Controller
    * @Method({"POST"})
    */
   public function NameSaveAction(Request $request){
+    /*Code nicht löschen. UX-Team ist unentshclossen ob man Namen ändern können soll oder nicht. Bei bedarf einkommentieren.*/
     /**
      * @var $user User
      */
-    $user = $this->getUser();
+   /* $user = $this->getUser();
     if (!$user) {
       return $this->redirectToRoute('fos_user_security_login');
     }
@@ -525,7 +526,7 @@ class DefaultController extends Controller
     $em->flush();
     $user->setUsername($new_user_name);
     $this->get('usermanager')->updateUser($user);
-    return JsonResponse::create(array('statusCode' => StatusCode::OK));
+    return JsonResponse::create(array('statusCode' => StatusCode::OK));*/
   }
 
   /**
