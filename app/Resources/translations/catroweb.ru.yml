@@ -84,6 +84,7 @@ profile:
     passwordTooShort: 'Пароль должен содержать как минимум %length% символов.'
     passwordTooLong: 'Пароль должен содержать максимум %length% символов.'
     passwordIsUsername: Пароль должен отличаться от имени пользователя.
+    passwordWrong: Wrong password
     emailNotValid: Некорректный электронный адрес.
     emailMissing: Ошибка во время обновления электронного адреса. Вы должны иметь как минимум один подтвержденный электронный адрес.
     emailExists: '&#x41D;&#x435; &#x43F;&#x440;&#x430;&#x432;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x438;&#x43B;&#x438; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435;.'
@@ -95,6 +96,17 @@ profile:
     pictureTooLarge: Не возможно использовать данное изображение, размер данного изображения превышает 5 мб.
     uploadError: Простите, к сожалению во время загрузки произошла ошибка!
     noSupport: '&#x412;&#x430;&#x448;&#x435; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B; &#x43E;&#x442;&#x441;&#x443;&#x442;&#x441;&#x442;&#x432;&#x443;&#x435;&#x442;.'
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Готово
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Лицензия на игру
   title: '&#x41B;&#x438;&#x446;&#x435;&#x43D;&#x437;&#x438;&#x44F; &#x434;&#x43B;&#x44F; &#x43F;&#x440;&#x43E;&#x438;&#x433;&#x440;&#x44B;&#x432;&#x430;&#x43D;&#x438;&#x44F; - &#x423;&#x43A;&#x430;&#x437;&#x44B;&#x432;&#x430;&#x439;&#x442;&#x435; &#x438;&#x441;&#x442;&#x43E;&#x447;&#x43D;&#x438;&#x43A; &#x438; &#x434;&#x435;&#x43B;&#x438;&#x442;&#x435;&#x441;&#x44C;'

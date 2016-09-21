@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'La nuova password deve avere almeno %length% caratteri.'
     passwordTooLong: 'La nuova password può avere un massimo  di %length% caratteri.'
     passwordIsUsername: La password deve essere diversa dal nome utente.
+    passwordWrong: Wrong password
     emailNotValid: Questo indirizzo email non è valido.
     emailMissing: "Errore durante l'aggiornamento di questo indirizzo di posta elettronica. Devi avere almeno un indirizzo email convalidato."
     emailExists: "L'indirizzo e-mail è già stato usato."
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: "L'immagine selezionata è troppo grande; non utilizzare immagini di dimensioni superiori a 5mb."
     uploadError: "Spiacenti, c'è stato un problema durante il caricamento!"
     noSupport: "Questo formato di immagine non è supportato, prova un'altra immagine."
+myprofile:
+  editProfile: Edit profile
+  edit: Modifica
+  done: Fatto
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licenza per giocare
   title: 'Licenza per il gioco - Dare credito e condividere'
@@ -517,7 +529,7 @@ ci:
 gamejam:
   nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
   submit: 'Invia a %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  whats: "Che cos'è %gamejamname%?"
   submitown:
     header: fai attenzione
     subheader: È possibile inviare solo programmi originali, creati da sé

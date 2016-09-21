@@ -82,6 +82,7 @@ profile:
     passwordTooShort: 'رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.'
     passwordTooLong: 'رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.'
     passwordIsUsername: رمز عبور باید متفاوت از نام کاربری باشد.
+    passwordWrong: Wrong password
     emailNotValid: اين آدرس رايانامه معتبر نیست.
     emailMissing: خطا در حین به روز رسانی این آدرس ایمیل. تو باید حداقل یک آدرس ایمیل معتبر داشته باشی.
     emailExists: این آدرس ایمیل در حال حاضر موجود است.
@@ -93,6 +94,17 @@ profile:
     pictureTooLarge: حجم عکس انتخاب شده تان خیلی بزرگ است، لطفا عکس های بزرگتر از حجم 5 مگابایت استفاده نکنید.
     uploadError: ببخشید، یه مشکلی در حین آپلود پیش اومد!
     noSupport: این نوع تصویر پشتیبانی نمی شه، لطفا تصویر دیگری را امتحان کن.
+myprofile:
+  editProfile: Edit profile
+  edit: ويرايش
+  done: ﺍﻧﺠﺎﻡ شد
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: مجوز بازی
   title: 'مجوز بازی - اعتبار بده و به مشارکت بزار'

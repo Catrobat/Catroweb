@@ -88,7 +88,7 @@ Feature: Open Authentication
     And I should see the profile button
     When I click the "profile" button
     And I wait for a second
-    Then the "email-text" field should contain "pocket_tester@tfbnw.net"
+    Then the "#email" element should contain "pocket_tester@tfbnw.net"
 
   @javascript
   Scenario: It should be possible to change the E-Mail address on the profile page and login again with the same Google+ account

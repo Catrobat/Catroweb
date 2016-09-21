@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'Mật khẩu mới phải có ít nhất %length% kí tự.'
     passwordTooLong: 'Mật khẩu mới có nhiều nhất %length% kí tự.'
     passwordIsUsername: Mật khẩu phải khác với tên đăng nhập.
+    passwordWrong: Wrong password
     emailNotValid: Địa chỉ email này không phù hợp.
     emailMissing: Lỗi trong khi cập nhật địa chỉ email. Bạn phải có ít nhất một địa chỉ email hợp lệ.
     emailExists: Địa chỉ email này đã tồn tại.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Hình ảnh bạn lựa chọn quá lớn, xin vui lòng không sử dụng hình ảnh lớn hơn 5mb.
     uploadError: Xin lỗi, đã có một vấn đề trong quá trình tải lên!
     noSupport: Đây là loại hình ảnh không được hỗ trợ, xin vui lòng thử hình ảnh khác.
+myprofile:
+  editProfile: Edit profile
+  edit: Chỉnh sửa
+  done: Đã Thực hiện
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Giấy phép để chơi
   title: 'Giấy phép để chơi - cung cấp bản quyền và chia sẻ'

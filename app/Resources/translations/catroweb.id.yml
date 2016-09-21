@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'Kata sandi baru harus memiliki setidaknya %length% karakter.'
     passwordTooLong: 'Kata sandi baru dapat memiliki maksimal %length% karakter.'
     passwordIsUsername: Kata sandi harus berbeda dari nama pengguna.
+    passwordWrong: Wrong password
     emailNotValid: Alamat email ini tidak valid.
     emailMissing: Kesalahan ketika memperbarui alamat e-mail. Anda harus memiliki minimal satu alamat e-mail divalidasi.
     emailExists: Alamat email ini sudah ada.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Gambar pilihan Anda terlalu besar, jangan gunakan gambar yang lebih besar dari 5mb.
     uploadError: Maaf, ada masalah selama mengunggah!
     noSupport: Jenis gambar ini tidak didukung, silakan coba gambar lain.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Selesai
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Lisensi untuk bermain
   title: 'Lisensi untuk bermain - memberikan kredit dan berbagi'

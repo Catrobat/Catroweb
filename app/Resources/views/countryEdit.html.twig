@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block body %}
-  <h1 id="profile-edit-header">Land Ändern</h1>
+  <h1 id="profile-edit-header">{{ 'myprofile.editCountry'|trans({}, 'catroweb') }}</h1>
 
+  {% if not nolb_user and not app.user.limited %}
   <div id="change-country" class="edit-wrapper">
     <div id="select-country">
         <select name="country" tabindex="5">
@@ -20,9 +21,9 @@
           {% endfor %}
         </select>
     </div>
-    <button id="save-country" class="save-button">Änderungen speichern</button>
+    <button id="save-country" class="save-button">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
   </div>
-
+  {% endif %}
 {% endblock %}
 
 {% block js %}

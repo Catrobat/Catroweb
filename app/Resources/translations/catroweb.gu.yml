@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: The password must differ from the username.
+    passwordWrong: Wrong password
     emailNotValid: This email address is not valid.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: તમારૂ પસંદ કરેલ પિક્ચર ખૂબ મોટુ છે, મહેરબાની કરીને 5MB કરતાં મોટી ઇમેજ ઉપયોગ ન કરો.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: રમવા માટે નું લાયસન્સ
   title: 'License to play - Give credit and share'

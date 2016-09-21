@@ -137,8 +137,6 @@ Feature:
     Given I attach the avatar "logo.png" to "file"
     And I wait for the server response
     Then the avatar img tag should have the "logo.png" data url
-    When I reload the page
-    Then the avatar img tag should have the "logo.png" data url
 
 #todo:  Scenario: when chaning avatar, it should also appear in the header (desktop + mobile)
 

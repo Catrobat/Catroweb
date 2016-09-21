@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: Lösenordet måste skilja sig från användarnamnet.
+    passwordWrong: Wrong password
     emailNotValid: Denna e-postadress är inte giltig.
     emailMissing: Fel vid uppdatering av denna e-postadress. Du måste ha minst en verifierad e-postadress.
     emailExists: Denna e-postadress finns redan.
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Din valda bild är för stor, Använd inte bilder större än 5mb.
     uploadError: Tyvärr, var det ett problem under uppladdningen!
     noSupport: Den här bildtypen stöds inte, försök med en annan bild.
+myprofile:
+  editProfile: Edit profile
+  edit: Redigera
+  done: Färdigt
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licens för att spela
   title: 'Licens för att spela - ge kredit och dela'

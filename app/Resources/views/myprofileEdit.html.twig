@@ -5,102 +5,45 @@
 {% endblock %}
 
 {% block body %}
-  <h1 id="profile-edit-header">Profil bearbeiten</h1>
+  <h1 id="profile-edit-header">{{ 'myprofile.editProfile'|trans({}, 'catroweb') }}</h1>
+
+  {% if not nolb_user and not app.user.limited %}
 
   <div id="profile-edit-wrapper" class="edit-wrapper">
     <div id="profile-avatar">
-      <button id="avatar-button" class="btn btn-edit">Bearbeiten</button>
+      <button id="avatar-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
       <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
     </div>
 
     <div id="username-information">
-      <button id="username-button" class="btn btn-edit">Bearbeiten</button>
-      <div class="information-header" id="username-header">Username:</div>
+      <button id="username-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
+      <div class="information-header" id="username-header">{{ 'username'|trans({}, 'catroweb') }}:</div>
       <div class="data" id="username-text">{{ username }}</div>
     </div>
 
     <div id="country-information">
-      <button id="country-button" class="btn btn-edit">Bearbeiten</button>
-      <div class="information-header" id="country-header">Land:</div>
+      <button id="country-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
+      <div class="information-header" id="country-header">{{ 'country'|trans({}, 'catroweb') }}:</div>
       <div class="data" id="country-text"> {{ country }} </div>
     </div>
 
     <div id="email-information">
-      <button id="email-button" class="btn btn-edit">Bearbeiten</button>
-      <div class="information-header" id="email-header">E-Mail:</div>
+      <button id="email-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
+      <div class="information-header" id="email-header">{{ 'myprofile.email'|trans({}, 'catroweb') }}:</div>
       <div class="data" id="email-text"> {{ firstMail }} </div>
       <div id="second-email-text"> {{ secondMail }} </div>
     </div>
 
     <div id="password-information">
-      <button id="password-button" class="btn btn-edit">Bearbeiten</button>
-      <div class="information-header" id="password-header">Password:</div>
+      <button id="password-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
+      <div class="information-header" id="password-header">{{ 'password'|trans({}, 'catroweb') }}:</div>
       <div class="data" id="password-placeholder">*********</div>
     </div>
   </div>
 
-  <button id="finished-button" class="btn btn-done">Erledigt</button>
+  <button id="finished-button" class="btn btn-done">{{ 'myprofile.done'|trans({}, 'catroweb') }}</button>
 
- {# {% if not app.user.limited %}
-  <div id="profile-form">
-    <form>
-    <button type="submit" name="submit" class="btn btn-primary pull-right" tabindex="6">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
-      <div>
-        <div class="input-error text-password-nomatch">{{ 'passwordsNoMatch'|trans({}, 'catroweb') }}</div>
-        <div class="input-error text-password-tooshort">{{ 'profile.form.passwordTooShort'|trans({'%length%':minPassLength}, 'catroweb') }}</div>
-        <div class="input-error text-password-toolong">{{ 'profile.form.passwordTooLong'|trans({'%length%':maxPassLength}, 'catroweb') }}</div>
-        <div class="input-error text-password-isusername">{{ 'profile.form.passwordIsUsername'|trans({}, 'catroweb') }}</div>
-        {% if not oauth_user %}
-          <div class="input-field">
-            <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" tabindex="1">
-            <div class="img-password"></div>
-          </div>
-          <div class="input-field">
-            <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" tabindex="2">
-            <div class="img-password"></div>
-          </div>
-        {% endif %}
-        <div id="select-country">
-          <div>{{ 'country'|trans({}, 'catroweb') }}</div>
-          <div>
-            <select name="country" tabindex="5">
-              <option value=""></option>
-              {% for key, country in  countriesList() %}
-                {% if app.user.country == key %}
-                  <option value="{{ key }}" selected>{{ country }}</option>
-                {% else %}
-                  <option value="{{ key }}">{{ country }}</option>
-                {% endif %}
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="input-error text-email-notvalid">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
-        <div class="input-error text-email-missing">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
-        <div class="input-error text-email-exists">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
-        <div class="input-field">
-          <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" tabindex="3">
-          <div class="img-mail-first"></div>
-        </div>
-        <div class="input-field">
-          <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" tabindex="4">
-          <div class="img-mail-second"></div>
-        </div>
-        <div>
-          <button type="submit" name="submit" class="btn btn-primary pull-right" tabindex="6">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
-          <div class="img-load-ajax"></div>
-          <div id="submit-done">
-            <div class="img-saved"></div>
-            <span>{{ 'profile.form.submitSuccess'|trans({}, 'catroweb') }}</span>
-          </div>
-        </div>
-      </div>
-    </form>
-
-  </div>
-  {% endif %}#}
+  {% endif %}
 
 {% endblock %}
 

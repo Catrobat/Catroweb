@@ -80,6 +80,7 @@ profile:
     passwordTooShort: 'Fjalëkalimi i ri duhet të ketë së paku %length% karaktere.'
     passwordTooLong: 'Fjalëkalimi i ri mund të ketë maximum %length% karaktere.'
     passwordIsUsername: Fjalëkalimi duhet të dalloj nga emri përdoruesit.
+    passwordWrong: Wrong password
     emailNotValid: This email address is not valid.
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: This email address already exists.
@@ -91,6 +92,17 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: License to play
   title: 'License to play - Give credit and share'

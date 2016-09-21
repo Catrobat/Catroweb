@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block body %}
-  <h1 id="profile-edit-header">Namen ändern</h1>
+  <h1 id="profile-edit-header">{{ 'myprofile.editUsername'|trans({}, 'catroweb') }}</h1>
 
+  {% if not nolb_user and not app.user.limited %}
   <div id="change-name" class="edit-wrapper">
-    <div class="input-error text-username-invalid">Username invalid noob</div>
-    <div class="input-error text-username-in-use">Username already in use</div>
+    <div class="input-error text-username-invalid">{{ 'errors.username.invalid'|trans({}, 'catroweb') }}</div>
+    <div class="input-error text-username-in-use">{{ 'errors.username.exists'|trans({}, 'catroweb') }}</div>
     <input type="text" id="username" name="_username" placeholder="new name">
-    <button id="save-name" class="save-button">Änderungen speichern</button>
+    <button id="save-name" class="save-button">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
   </div>
+  {% endif %}
 
 {% endblock %}
 

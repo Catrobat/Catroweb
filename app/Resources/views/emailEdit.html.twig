@@ -5,24 +5,25 @@
 {% endblock %}
 
 {% block body %}
-  <h1 id="profile-edit-header">Email Ändern</h1>
+  <h1 id="profile-edit-header">{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}</h1>
 
+  {% if not nolb_user and not app.user.limited %}
   <div id="change-email" class="edit-wrapper">
     <div class="input-error text-email-notvalid">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
     <div class="input-error text-email-missing">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
     <div class="input-error text-email-exists">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
     <div class="input-field">
-      <div class="information-header">1.Email:</div>
+      <div class="information-header">{{ 'profile.firstEmail'|trans({}, 'catroweb') }}</div>
       <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" tabindex="3">
     </div>
 
-
     <div class="input-field">
-      <div class="information-header">2.Email:</div>
+      <div class="information-header">{{ 'profile.secondEmail'|trans({}, 'catroweb') }}</div>
       <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" tabindex="4">
     </div>
-    <button id="save-email" class="save-button">Änderungen speichern</button>
+    <button id="save-email" class="save-button">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
   </div>
+  {% endif %}
 {% endblock %}
 
 {% block js %}

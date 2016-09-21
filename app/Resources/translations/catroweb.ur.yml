@@ -77,6 +77,7 @@ profile:
     passwordTooShort: 'نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.'
     passwordTooLong: 'نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.'
     passwordIsUsername: خفیہ کوڈ صارف نام سے مختلف ہوگا۔
+    passwordWrong: Wrong password
     emailNotValid: یہ ای میل پتہ درست نہیں ہے ۔
     emailMissing: اس ای میل پتے کی تازہ کاری کے دوران نقص۔ آپ کا کم از کم ایک توثیق شدہ ای میل پتہ ہونا چاہیے ۔
     emailExists: یہ ای میل پتہ پہلے سے استعمال میں ہے.
@@ -88,6 +89,17 @@ profile:
     pictureTooLarge: آپکی منتخب کردہ تصویر بہت بڑی ہے، برائے مہربانی 5mb سے بڑے تصاویر استعمال نہ کریں۔
     uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
     noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
+myprofile:
+  editProfile: Edit profile
+  edit: تدوین کریں
+  done: مکمل ہوا
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: کھیلنے کے لئے لائسنس
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'

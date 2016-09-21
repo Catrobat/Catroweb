@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: The password must differ from the username.
+    passwordWrong: Wrong password
     emailNotValid: 電子郵件地址錯誤。
     emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
     emailExists: 這個電子信箱地址已經存在
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: 不支援這種圖檔格式,請改用其他圖片。
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: 完成
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: License to play
   title: 授權撥放或執行-同意授權並分享

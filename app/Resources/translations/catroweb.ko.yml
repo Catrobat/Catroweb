@@ -23,7 +23,7 @@ more: 더 많은
 less: 적은
 ok: 확인
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
-registrationError: Username or email address already in use.
+registrationError: 이미 사용 중인 사용자 이름 또는 이메일 주소입니다.
 programs:
   featured: 추천
   newest: 최신 프로그램
@@ -54,8 +54,8 @@ programs:
   send: 보내기
   delete: 삭제
   report: 보고서
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: 코멘트가 성공적으로 추가 되었습니다.
+  report_popup_header: 보고되었습니다
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
@@ -78,6 +78,7 @@ profile:
     passwordTooShort: '새 암호는 적어도 %length% 문자 이상이어야 합니다.'
     passwordTooLong: '새 암호는 최대로 %length% 문자 사용할 수 있습니다.'
     passwordIsUsername: 암호는 사용자 이름과는 달라야 합니다.
+    passwordWrong: Wrong password
     emailNotValid: 이 이메일 주소는 유효하지 않습니다.
     emailMissing: 이 전자 메일 주소를 업데이트 하는 동안 오류가 발생 했습니다. 유효한 전자 메일 주소가 하나 이상 있어야 합니다.
     emailExists: 이 이메일 주소는 이미 존재합니다.
@@ -89,6 +90,17 @@ profile:
     pictureTooLarge: 선택한 그림이 너무 큽니다, 5mb 보다 큰 이미지를 사용 하지 마십시오.
     uploadError: 죄송합니다, 업로드하는 동안 문제가 발생했습니다!
     noSupport: 이 이미지 형식은 지원되지 않습니다, 그리고 다른 이미지를 시도하십시오.
+myprofile:
+  editProfile: Edit profile
+  edit: 편집
+  done: 완료
+  avatar: Avatar
+  email: 이메일
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: 게임 라이센스
   title: 신용 및 공유 라이센스
@@ -489,8 +501,8 @@ ci:
   download: Apk 다운로드
 gamejam:
   nojam: 죄송합니다, 현재 게임 잼이 없습니다
-  submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  submit: '%gamejamname%에 제출'
+  whats: '%gamejamname% 이란 무엇입니까?'
   submitown:
     header: 알고 있어야합니다
     subheader: 자신의 프로그램만 제출할 수 있습니다

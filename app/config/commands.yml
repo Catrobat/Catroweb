@@ -92,3 +92,9 @@ services:
               arguments: ["@doctrine.orm.entity_manager", "%catrobat.file.storage.dir%", "@programrepository"]
               tags:
                 -  { name: console.command }
+
+      command.nolbuser:
+              class: Catrobat\AppBundle\Commands\CreateNolbUserCommand
+              arguments: ["@doctrine.orm.entity_manager"]
+              tags:
+                  -  { name: console.command }

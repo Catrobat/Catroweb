@@ -17,22 +17,24 @@
   <div id="user-information">
 
     <div id="country-information">
-      <div id="country-header">Land:</div>
+      <div id="country-header">{{ 'country'|trans({}, 'catroweb') }}:</div>
       <div id="country"> {{ country }} </div>
     </div>
 
     <div id="email-information">
-      <div id="email-header">E-Mail:</div>
+      <div id="email-header">{{ 'myprofile.email'|trans({}, 'catroweb') }}:</div>
       <div id="email"> {{ firstMail }} </div>
       <div id="second-email"> {{ secondMail }} </div>
     </div>
   </div>
 
+  {% if not nolb_user and not app.user.limited %}
   <div id="edit-icon">
     <a href="{{ url('profile_edit', {id : profile.id}) }}">
       <img src="{{ asset('images/default/edit.png') }}">
     </a>
   </div>
+  {% endif %}
 
   <div class="clear"></div>
   {% if not app.user.limited %}

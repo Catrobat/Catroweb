@@ -81,6 +81,7 @@ profile:
     passwordTooShort: 'รหัสผ่านใหม่ต้องมีอักขระอย่างน้อย %length% ตัว'
     passwordTooLong: 'รหัสผ่านใหม่สามารถมีอักขระสูงสุด %length% ตัว'
     passwordIsUsername: รหัสผ่านต้องแตกต่างจากชื่อผู้ใช้
+    passwordWrong: Wrong password
     emailNotValid: อีเมล์นี้ไม่ถูกต้อง
     emailMissing: เกิดข้อผิดพลาดขณะอัพเดตอีเมลนี้ คุณต้องมีอีเมลที่ใช้การได้อย่างน้อยหนึ่งอีเมล์
     emailExists: มีอีเมล์นี้อยู่แล้ว
@@ -92,6 +93,17 @@ profile:
     pictureTooLarge: รูปภาพของท่านมีขนาดใหญ่เกินไป กรุณาใช้ภาพที่มีขนาดเล็กกว่า 5 เมกะไบต์
     uploadError: ขออภัย มีปัญหาในการอัพโหลด
     noSupport: ไม่สนับสนุนนประเภทไฟล์ของรูปนี้ กรุณาลองใช้รูปอื่น
+myprofile:
+  editProfile: Edit profile
+  edit: แก้ไข
+  done: เสร็จสิ้น
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: ใบอนุญาตให้เล่น
   title: 'กฏการเล่น - ให้เครดิต และ ร่วมแบ่งปัน'

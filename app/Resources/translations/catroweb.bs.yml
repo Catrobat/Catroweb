@@ -83,6 +83,7 @@ profile:
     passwordTooShort: 'Nova lozinka mora imati najmanje %length% znakova.'
     passwordTooLong: 'Nova lozinka možete imati najviše %length% znakova.'
     passwordIsUsername: Lozinka se mora razlikovati od korisničkog imena.
+    passwordWrong: Wrong password
     emailNotValid: Ova email adresa nije ispravna.
     emailMissing: Greška prilikom ažuriranja ove e-mail adrese. Morate imati najmanje jednu potvrđenu e-mail adresu.
     emailExists: Ova e-mail adresa već postoji.
@@ -94,6 +95,17 @@ profile:
     pictureTooLarge: Izabrana slika je prevelika, molimo ne koristi slike veće od 5mb.
     uploadError: Nažalost, došlo je do problema prilikom upload-a!
     noSupport: Ovaj tip slike nije podržan, molimo probaj sa drugom slikom.
+myprofile:
+  editProfile: Edit profile
+  edit: Uredi
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: License to play
   title: 'License to play - Give credit and share'

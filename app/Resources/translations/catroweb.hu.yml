@@ -70,6 +70,7 @@ profile:
     passwordTooShort: 'The new password must have at least %length% characters.'
     passwordTooLong: 'The new password can have a maximum of %length% characters.'
     passwordIsUsername: The password must differ from the username.
+    passwordWrong: Wrong password
     emailNotValid: This email address is not valid.
     emailMissing: Hiba az e-mail cím mentése közben. Legalább egy hitelesített e-mail címmel kell rendelkeznie.
     emailExists: Ez az e-mail cím már létezik.
@@ -81,6 +82,17 @@ profile:
     pictureTooLarge: A kiválasztott kép túl nagy, ne használj 5MB-nál nagyobb képeket.
     uploadError: Probléma merült fel a feltöltés közben!
     noSupport: This image type is not supported, please try another image.
+myprofile:
+  editProfile: Edit profile
+  edit: Szerkesztés
+  done: Kész
+  avatar: Avatar
+  email: E-mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Játékengedély
   title: 'License to play - Give credit and share'

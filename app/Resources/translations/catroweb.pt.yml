@@ -83,6 +83,7 @@ profile:
     passwordTooShort: 'A nova palavra-passe deve conter no mínimo %length% caracteres.'
     passwordTooLong: 'A nova palavra-passe deve conter no máximo %length% caracteres.'
     passwordIsUsername: A palavra-passe deve ser diferente do nome de utilizador.
+    passwordWrong: Wrong password
     emailNotValid: Este endereço de e-mail não é válido.
     emailMissing: Erro ao atualizar este endereço de e-mail. Você deve ter ao menos um e-mail validado.
     emailExists: Este endereço de e-mail já existe.
@@ -94,6 +95,17 @@ profile:
     pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
     uploadError: Desculpe! Houve um problema durante o upload!
     noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
+myprofile:
+  editProfile: Edit profile
+  edit: Editar
+  done: Concluído
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: Licença para jogar
   title: 'Licença para jogar - Dê crédito e compartilhe'

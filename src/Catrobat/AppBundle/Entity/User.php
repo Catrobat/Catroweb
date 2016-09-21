@@ -74,6 +74,11 @@ class User extends BaseUser implements LdapUserInterface
      */
     protected $limited = false;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    protected $nolb_user = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -283,6 +288,22 @@ class User extends BaseUser implements LdapUserInterface
     public function setLimited($limited)
     {
         $this->limited = $limited;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNolbUser()
+    {
+        return $this->nolb_user;
+    }
+
+    /**
+     * @param mixed $nolb_user
+     */
+    public function setNolbUser($nolb_user)
+    {
+        $this->nolb_user = $nolb_user;
     }
 }
 

@@ -70,6 +70,7 @@ profile:
     passwordTooShort: 'הסיסמה החדשה חייב להיות לפחות %length% תווים.'
     passwordTooLong: 'הסיסמה החדשה יכול להכיל תווים באורך %length%.'
     passwordIsUsername: הסיסמה צריכה להיות שונה משם המשתמש.
+    passwordWrong: Wrong password
     emailNotValid: כתובת האמייל הזו לא תקינה.
     emailMissing: שגיאה בעת עדכון כתובת דואר אלקטרוני זו. צריכה להיות לך לפחות כתובת דואר אלקטרונית מאומתת אחת.
     emailExists: כתובת דואר אלקטרוני זו כבר קיימת.
@@ -81,6 +82,17 @@ profile:
     pictureTooLarge: התמונה שבחרת שלך גדולה מדי, אנא אל תשתמש בתמונות הגדולות מ 5 מגהבייט.
     uploadError: מצטער, שהייתה בעיה במהלך ההעלאה!
     noSupport: סוג תמונה זו אינו נתמך, אנא נסה תמונה אחרת.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: בוצע
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
   link: רשיון לשחק
   title: 'רשיון לשחק - תן קרדיט ושיתוף'
