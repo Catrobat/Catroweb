@@ -13,7 +13,7 @@ use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManager;
 use Catrobat\AppBundle\Entity\UserManager;
 
-class CreateNolbUserCommand extends ContainerAwareCommand
+class ChangeNolbUserPasswordCommand extends ContainerAwareCommand
 {
     private $em;
 
@@ -25,8 +25,8 @@ class CreateNolbUserCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('catrobat:nolb-user:create')
-            ->setDescription('Creates NOLB user from given file')
+        $this->setName('catrobat:nolb-user:change-password')
+            ->setDescription('Changes password from given nolb users')
             ->addArgument('file', InputArgument::REQUIRED, 'The file to read users.');
     }
 
@@ -43,24 +43,22 @@ class CreateNolbUserCommand extends ContainerAwareCommand
             while (($line = fgets($handle)) !== false) {
                 $username = $this->getSubstring($line, " - ", false);
                 $password = substr($line, strlen($username) + 2);
-                if($this->executeShellCommand('php app/console fos:user:create '.$username.' '.$username.'@nolb '.$password)) {
-                    $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('username' => $username));
 
-                    if (!$user) {
-                        array_push($fail_array, $username);
-                        $output->write('<error>F</error>');
-                    }
-                    else {
-                        $user->setNolbUser(true);
-                        $this->em->flush();
-                        $output->write('<info>.</info>');
-                    }
-                }
-                else {
+                $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('username' => $username));
+
+                if (!$user || !$user->getNolbUser()) {
                     array_push($fail_array, $username);
                     $output->write('<error>F</error>');
                 }
-
+                else {
+                    if($this->executeShellCommand('php app/console fos:user:change-password '.$username.' '.$password)) {
+                        $output->write('<info>.</info>');
+                    }
+                    else {
+                        array_push($fail_array, $username);
+                        $output->write('<error>F</error>');
+                    }
+                }
                 $inline_count += 1;
 
                 if($inline_count >= $line_length) {
@@ -70,10 +68,8 @@ class CreateNolbUserCommand extends ContainerAwareCommand
                     $line_count += 1;
                 }
             }
-
             fclose($handle);
             $this->printErrors($output, $fail_array);
-
         } else {
             $output->writeln('File not found!');
         }

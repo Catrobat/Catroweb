@@ -93,8 +93,20 @@ services:
               tags:
                 -  { name: console.command }
 
-      command.nolbuser:
+      command.nolbuser.create:
               class: Catrobat\AppBundle\Commands\CreateNolbUserCommand
+              arguments: ["@doctrine.orm.entity_manager"]
+              tags:
+                  -  { name: console.command }
+
+      command.nolbuser.changepassword:
+              class: Catrobat\AppBundle\Commands\ChangeNolbUserPasswordCommand
+              arguments: ["@doctrine.orm.entity_manager"]
+              tags:
+                  -  { name: console.command }
+
+      command.nolbuser.generate:
+              class: Catrobat\AppBundle\Commands\GenerateNolbUserCommand
               arguments: ["@doctrine.orm.entity_manager"]
               tags:
                   -  { name: console.command }
