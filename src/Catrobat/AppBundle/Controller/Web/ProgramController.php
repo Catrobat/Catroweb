@@ -41,7 +41,7 @@ class ProgramController extends Controller
 
         $program_comments = $this->findCommentsById($program);
         $program_details = $this->createProgramDetailsArray($screenshot_repository, $program, $elapsed_time,
-            $referrer, $program_comments);
+            $referrer, $program_comments, $request);
 
         $user = $this->getUser();
         $nolb_status = false;
@@ -201,10 +201,17 @@ class ProgramController extends Controller
      * @param $program_comments
      * @return array
      */
-    private function createProgramDetailsArray($screenshot_repository, $program, $elapsed_time, $referrer, $program_comments) {
+    private function createProgramDetailsArray($screenshot_repository, $program, $elapsed_time, $referrer, $program_comments, $request) {
+
+        $rec_from_id = intval($request->query->get('rec_from',0));
+        if ($rec_from_id > 0)
+            $url = $this->generateUrl('download', array('id' => $program->getId(), 'rec_from' => $rec_from_id,  'fname' => $program->getName()));
+        else
+            $url = $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName()));
+
         $program_details = array(
             'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
-            'downloadUrl' => $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName())),
+            'downloadUrl' => $url,
             'languageVersion' => $program->getLanguageVersion(),
             'downloads' => $program->getDownloads() + $program->getApkDownloads(),
             'views' => $program->getViews(),

@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="program_downloads")
+ * @ORM\Table(name="click_statistics")
  */
-class ProgramDownloads
+class ClickStatistic
 {
     /**
      * @ORM\Id
@@ -18,8 +18,25 @@ class ProgramDownloads
     protected $id;
 
     /**
+     * @ORM\Column(type="text", options={"default":""}, nullable=false)
+     */
+    protected $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Tag", inversedBy="tags")
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
+     */
+    protected $tag;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Extension", inversedBy="extension")
+     * @ORM\JoinColumn(name="extension_id", referencedColumnName="id", nullable=true)
+     */
+    protected $extension;
+
+    /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
-     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
      */
     protected $program;
 
@@ -32,7 +49,7 @@ class ProgramDownloads
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $downloaded_at;
+    protected $clicked_at;
 
     /**
      * @ORM\Column(type="text", options={"default":""})
@@ -120,22 +137,6 @@ class ProgramDownloads
     public function setRecommendedFromProgram($recommended_from_program)
     {
         $this->recommended_from_program = $recommended_from_program;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDownloadedAt()
-    {
-        return $this->downloaded_at;
-    }
-
-    /**
-     * @param mixed $downloaded_at
-     */
-    public function setDownloadedAt($downloaded_at)
-    {
-        $this->downloaded_at = $downloaded_at;
     }
 
     /**
@@ -328,5 +329,69 @@ class ProgramDownloads
     public function setReferrer($referrer)
     {
         $this->referrer = $referrer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
+    /**
+     * @param mixed $extension
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClickedAt()
+    {
+        return $this->clicked_at;
+    }
+
+    /**
+     * @param mixed $clicked_at
+     */
+    public function setClickedAt($clicked_at)
+    {
+        $this->clicked_at = $clicked_at;
     }
 }

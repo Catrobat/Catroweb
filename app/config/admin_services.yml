@@ -27,12 +27,6 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Reported Comments }
         arguments: [null, Catrobat\AppBundle\Entity\UserComment, AppBundle:Admin\Report]
 
-      catrowebadmin.block.programs.stats:
-        class: Catrobat\AppBundle\Admin\ProgramDownloadStatisticsAdmin
-        tags:
-          - { name: sonata.admin, manager_type: orm, label: Program Download Statistics }
-        arguments: [null, Catrobat\AppBundle\Entity\ProgramDownloads, null]
-
       catrowebadmin.block.programs.categories:
         class: Catrobat\AppBundle\Admin\CategoriesAdmin
         tags:
@@ -156,6 +150,18 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, label: Create Extensions}
         arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\Extension]
+
+      catrowebadmin.block.statistics.programs:
+        class: Catrobat\AppBundle\Admin\ProgramDownloadStatisticsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Program Download Statistics }
+        arguments: [null, Catrobat\AppBundle\Entity\ProgramDownloads, null]
+
+      catrowebadmin.block.statistics.clicks:
+        class: Catrobat\AppBundle\Admin\ClickStatisticsAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Click Statistics }
+        arguments: [null, Catrobat\AppBundle\Entity\ClickStatistic, null]
 
 # =========================== GameJam ===========================
 

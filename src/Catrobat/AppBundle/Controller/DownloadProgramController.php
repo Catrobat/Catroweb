@@ -34,6 +34,8 @@ class DownloadProgramController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $rec_from_id = intval($request->query->get('rec_from',0));
+
         $file = $file_repository->getProgramFile($id);
         if ($file->isFile()) {
             $downloaded = $request->getSession()->get('downloaded', array());
@@ -43,6 +45,8 @@ class DownloadProgramController extends Controller
                 $request->getSession()->set('downloaded', $downloaded);
                 $request->attributes->set('download_statistics_program_id', $id);
                 $request->attributes->set('referrer', $referrer);
+                if ($rec_from_id > 0)
+                    $request->attributes->set('rec_from', $rec_from_id);
             }
 
             $response = new BinaryFileResponse($file);

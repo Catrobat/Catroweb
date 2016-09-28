@@ -70,16 +70,17 @@ services:
         class: Catrobat\AppBundle\Features\Helpers\FakeOAuthService
         arguments: ["@real_oauth_service", "@service_container"]
 
-    download_statistics:
-        class: Catrobat\AppBundle\Features\Helpers\FakeDownloadStatisticsService
-        arguments: ["@real_download_statistics"]
+    statistics:
+        class: Catrobat\AppBundle\Features\Helpers\FakeStatisticsService
+        arguments: ["@real_statistics"]
 
-    real_download_statistics:
-        class: Catrobat\AppBundle\Services\DownloadStatisticsService
+    real_statistics:
+        class: Catrobat\AppBundle\Services\StatisticsService
         arguments:
           - "@programmanager"
           - "@doctrine.orm.entity_manager"
           - "@bazinga_geocoder.geocoder"
           - "@logger"
+          - "@security.token_storage"
         tags:
           - { name: monolog.logger, channel: download_stats }

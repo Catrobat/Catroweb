@@ -20,7 +20,7 @@ Feature: Searching for programs with extensions
       | 3  | myprog 3  |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | Drone       |
     And I am on "/pocketcode"
 
-  Scenario: Searching other programs wie the same extensions
+  Scenario: Searching other programs with the same extensions
     Given I am on "/pocketcode/program/1"
     And I should see "program 1"
     And I should see "Lego"

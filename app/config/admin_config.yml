@@ -75,8 +75,6 @@ sonata_admin:
                     - catrowebadmin.block.programs.approve
                     - catrowebadmin.block.programs.reported
                     - catrowebadmin.block.programs.comments
-                    - catrowebadmin.block.programs.stats
-
 
             sonata.admin.group.featured:
                 label:           Special Programs
@@ -140,6 +138,14 @@ sonata_admin:
                 items:
                     - catrowebadmin.block.extensions.all
                     - catrowebadmin.block.extensions.create
+
+            sonata.admin.group.statistics:
+                label:           Statistics
+                label_catalogue: CatrobatAppBundle
+                icon:            '<i class="fa fa-bar-chart"></i>'
+                items:
+                    - catrowebadmin.block.statistics.programs
+                    - catrowebadmin.block.statistics.clicks
 
     security:
         handler: sonata.admin.security.handler.acl
