@@ -11,8 +11,7 @@ class SnapshotController extends CRUDController
      * (non-PHPdoc)
      * @see \Sonata\AdminBundle\Controller\CRUDController::listAction()
      */
-    public function listAction(Request $request = null)
-    {
+    public function listAction(Request $request = null) {
         $finder = new Finder();
         $directory = $this->container->getParameter('catrobat.snapshot.dir');
         $files = $finder->files()->in($directory);

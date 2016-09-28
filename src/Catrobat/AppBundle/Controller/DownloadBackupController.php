@@ -16,18 +16,16 @@ class DownloadBackupController extends Controller
      * @Route("/download-backup/{backupFile}", name="backup_download")
      * @Method({"GET"})
      */
-    public function downloadBackupAction(Request $request, $backupFile)
-    {
+    public function downloadBackupAction(Request $request, $backupFile) {
         /* @var $backupFileRepository \Catrobat\AppBundle\Services\BackupFileRepository */
         $backupFileRepository = $this->get('backupfilerepository');
 
         $file = $backupFileRepository->getBackupFile($backupFile);
-        if ($file->isFile())
-        {
+        if ($file->isFile()) {
             $response = new BinaryFileResponse($file);
             $d = $response->headers->makeDisposition(
-              ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-              $backupFile
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                $backupFile
             );
             $response->headers->set('Content-Disposition', $d);
 

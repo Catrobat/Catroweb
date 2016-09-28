@@ -22,17 +22,11 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission")
      * @Method({"GET"})
      */
-    public function formSubmittedAction(Request $request, Program $program)
-    {
+    public function formSubmittedAction(Request $request, Program $program) {
         if ($program->getGamejam() != null) {
-            if (! $program->isAcceptedForGameJam()) {
+            if (!$program->isAcceptedForGameJam()) {
                 $program->setAcceptedForGameJam(true);
-                $this->getDoctrine()
-                    ->getManager()
-                    ->persist($program);
-                $this->getDoctrine()
-                    ->getManager()
-                    ->flush();
+                $this->persistAndFlush($program);
             }
             return JsonResponse::create(array(
                 "statusCode" => "200",
@@ -50,8 +44,7 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs")
      * @Method({"GET"})
      */
-    public function getSampleProgramsForLatestGamejam(Request $request)
-    {
+    public function getSampleProgramsForLatestGamejam(Request $request) {
         $flavor = $request->get('flavor');
 
         $gamejam = $this->getGameJam($flavor);
@@ -63,7 +56,7 @@ class GameSubmissionController extends Controller
         $count = count($all_samples);
         $returning_samples = null;
 
-        for($j = 0, $i = $offset; $i < $count && $i < $limit; $j++, $i++) {
+        for ($j = 0, $i = $offset; $i < $count && $i < $limit; $j++, $i++) {
             $returning_samples[$j] = $all_samples[$i];
         }
 
@@ -74,8 +67,7 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions")
      * @Method({"GET"})
      */
-    public function getSubmissionsForLatestGamejam(Request $request)
-    {
+    public function getSubmissionsForLatestGamejam(Request $request) {
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
 
@@ -94,10 +86,10 @@ class GameSubmissionController extends Controller
             ->count());
     }
 
-    private function getGameJam($flavor){
+    private function getGameJam($flavor) {
         $gamejam = $this->get("gamejamrepository")->getLatestGameJamByFlavor($flavor);
 
-        if($gamejam == null) {
+        if ($gamejam == null) {
             $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
         }
 
@@ -111,10 +103,8 @@ class GameSubmissionController extends Controller
      * @Route("/gamejam/submit/{id}", name="gamejam_web_submit")
      * @Method({"GET"})
      */
-    public function webSubmitAction(Request $request, Program $program)
-    {
-        if ($this->getUser() == null)
-        {
+    public function webSubmitAction(Request $request, Program $program) {
+        if ($this->getUser() == null) {
             throw new AuthenticationException();
         }
         $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
@@ -129,26 +119,19 @@ class GameSubmissionController extends Controller
                 "id" => $program->getId()
             )));
         }
-        if ($this->getUser() != $program->getUser())
-        {
+        if ($this->getUser() != $program->getUser()) {
             return new RedirectResponse($this->generateUrl("gamejam_submit_own"));
         }
-        
-        
+
         $program->setGamejam($gamejam);
         $program->setGameJamSubmissionDate(new \DateTime());
 
         $this->get('catroweb.gamejamtag.check')->checkDescriptionTag($program);
 
-        $this->getDoctrine()
-            ->getManager()
-            ->persist($program);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-        
+        $this->persistAndFlush($program);
+
         $url = $this->assembleFormUrl($gamejam, $program->getUser(), $program, $request);
-        
+
         if ($url != null) {
             return new RedirectResponse($url);
         } else {
@@ -157,9 +140,8 @@ class GameSubmissionController extends Controller
             )));
         }
     }
-    
-    private function assembleFormUrl($gamejam, $user, $program, $request)
-    {
+
+    private function assembleFormUrl($gamejam, $user, $program, $request) {
         $languageCode = $this->getLanguageCode($request);
 
         $url = $gamejam->getFormUrl();
@@ -183,5 +165,10 @@ class GameSubmissionController extends Controller
         }
 
         return $languageCode;
+    }
+
+    private function persistAndFlush(Program $program) {
+        $this->getDoctrine()->getManager()->persist($program);
+        $this->getDoctrine()->getManager()->flush();
     }
 }

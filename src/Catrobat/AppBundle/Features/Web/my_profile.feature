@@ -28,7 +28,7 @@ Feature:
     And I fill in "repeat-password" with "abcdef"
     And I click the "save-edit" button
     And I wait for the server response
-    And I should be on "/pocketcode/profile/0/edit"
+    And I should be on "/pocketcode/profile/edit"
     When I go to "/logout"
     And I try to log in as "Catrobat" with the password "123456"
     Then I should see "Your password or username was incorrect."
@@ -71,7 +71,7 @@ Feature:
     And I fill in "additional-email" with "second@email.com"
     When I click the "save-edit" button
     And I wait for the server response
-    Then I should be on "/pocketcode/profile/0/edit"
+    Then I should be on "/pocketcode/profile/edit"
     And I wait for the server response
     And I should see "first@email.com"
     And I should see "second@email.com"
@@ -116,7 +116,7 @@ Feature:
     And I fill in "additional-email" with "second@email.com"
     And I click the "save-edit" button
     And I wait for the server response
-    Then I should be on "/pocketcode/profile/0/edit"
+    Then I should be on "/pocketcode/profile/edit"
     And the "#email-text" element should contain "second@email.com"
 
   Scenario: changing country should work
@@ -127,7 +127,7 @@ Feature:
     Given I select "Austria" from "country"
     And I click the "save-edit" button
     And I wait for the server response
-    Then I should be on "/pocketcode/profile/0/edit"
+    Then I should be on "/pocketcode/profile/edit"
     And the "#country-text" element should contain "Austria"
 
   Scenario: uploading avatar should work

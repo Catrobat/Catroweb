@@ -78,7 +78,7 @@ Feature: Open Authentication
     Then I fill in "email" with "pocket_tester@tfbnw.net"
     When I click the "save-edit" button
     And I wait for the server response
-    Then I should be on "/pocketcode/profile/0/edit"
+    Then I should be on "/pocketcode/profile/edit"
     When I go to "/logout"
     Then I should not be logged in
     When I trigger Facebook login with auth_type ''
@@ -106,7 +106,7 @@ Feature: Open Authentication
     Then I fill in "email" with "pocket-code-tester@gmail.com"
     When I click the "save-edit" button
     And I wait for the server response
-    Then I should be on "/pocketcode/profile/0/edit"
+    Then I should be on "/pocketcode/profile/edit"
     Then the "#email-text" element should contain "pocket-code-tester@gmail.com"
     When I go to "/logout"
     Then I should not be logged in

@@ -30,8 +30,8 @@
 {% block js %}
   <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
   <script>
-    var profile = new MyProfile('{{ path('profile') }}', '{{ path('name_save') }}', '{{ path('name_edit') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
-        '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',  '{{ path('profile_save') }}', '{{ path('profile_delete_program') }}',
+    var profile = new MyProfile('{{ path('profile') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
+        '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}', '{{ path('profile_delete_program') }}',
         '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
     profile.init();
   </script>
