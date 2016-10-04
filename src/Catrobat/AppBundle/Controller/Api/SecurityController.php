@@ -225,6 +225,7 @@ class SecurityController extends Controller
                     $user->setUploadToken($tokenGenerator->generateToken());
                     $retArray['token'] = $user->getUploadToken();
                     $retArray['email'] = $user->getEmail();
+                    $retArray['nolbUser'] = $user->getNolbUser();
                     $userManager->updateUser($user);
                 } else {
                     $this->signInLdapUser($request, $retArray);
