@@ -72,7 +72,7 @@ class ProgramListSerializer
         $retArray['preHeaderMessages'] = '';
         
         $retArray['CatrobatInformation'] = array(
-            'BaseUrl' => "//" . $request->getHttpHost() . '/',
+            'BaseUrl' => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
             'TotalProjects' => $result->getTotalPrograms(),
             'ProjectsExtension' => '.catrobat'
         );
