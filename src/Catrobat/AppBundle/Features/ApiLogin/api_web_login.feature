@@ -1,4 +1,3 @@
-@wip
 Feature: In order to be logged into the webview after an upload from the app
          As an app developer
          I need the possibilty to directly login with the given upload token

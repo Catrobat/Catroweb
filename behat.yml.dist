@@ -43,6 +43,13 @@ default:
             contexts:
               - Catrobat\AppBundle\Features\Api\Context\FeatureContext:
                     error_directory: "./testreports/behat/"
+        apilogin:
+            type: symfony_bundle
+            bundle: 'AppBundle'
+            paths:
+                - "%paths.base%/src/Catrobat/AppBundle/Features/ApiLogin/"
+            contexts:
+              - Catrobat\AppBundle\Features\ApiLogin\Context\WebContext
         flavor:
             type: symfony_bundle
             bundle: 'AppBundle'
