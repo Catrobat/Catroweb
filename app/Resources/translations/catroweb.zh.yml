@@ -1,115 +1,118 @@
 ---
-localLanguage: English
-username: Username
-password: Password
-aboutPocketCode: About Pocket Code
-tutorials: Tutorials
+localLanguage: 英语
+username: 用户名
+password: 密码
+aboutPocketCode: 关于口袋编程
+tutorials: 新手向导
 googlePlay: '&#x9996;&#x9875;'
-passwordsNoMatch: "The passwords didn't match."
-error: Error
-cancel: Cancel
-report: Report
+passwordsNoMatch: 密码不对
+error: 错误
+cancel: 取消
+report: 报告
 download: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
-description: Description
-noDescription: No description available.
-country: Country
+description: 描述
+noDescription: 没有可用的描述
+country: 国家
 loginText: '&#x4E0B;&#x8F7D;'
 privacyPolicy: '&#x4E2A;&#x4EBA;&#x6863;&#x6848;'
 imprint: '&#x641C;&#x7D22;&#x9879;&#x76EE;'
-somethingWentWrong: Ooooops something went wrong.
-pleaseTryAgain: Please try again!
-oldVersionError: Please update to the newest Pocket Code version!
+somethingWentWrong: 哎呀，好像哪里错了哟！
+pleaseTryAgain: 再试一次吧！
+oldVersionError: 请更新到最新版的口袋编程！
 more: '&#x52A0;&#x8F7D;&#x4E2D;&#x3002;&#x3002;&#x3002;'
 less: '&#x60A8;&#x767B;&#x5F55;&#x4E3A;'
-ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: Username or email address already in use.
+ok: 好
+clickToDownloadProgram: '请点%link_start% 这里 %link_end%下载样例程序。'
+registrationError: 用户名或邮箱已被占用。
 programs:
   featured: '&#x89C6;&#x56FE;'
-  newest: Newest programs
+  newest: 最新版程序
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+    viewed: 看得最多的
+    downloaded: 下载得最多的
+  random: 随机程序
+  related: 关联的程序
+  downloads: '%downloads% 下载'
+  sample: 样例程序
+  views: '%views% 查看'
+  submitted: 提交的程序
+  uploaded: 上传的程序
   reportAsInappropriate: '&#x5448;&#x62A5;'
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Please %login% to report this program as inappropriate.'
+  languageVersion: 'Catrobat语言版: %languageVersion%'
+  reportLoginText: '请 %login%对程序进行报错'
   reportDialogHeader: '&#x53D6;&#x6D88;'
-  reportDialogReason: Enter a reason
+  reportDialogReason: 给个理由先
   reportOwnProgram: '&#x89C6;&#x56FE;'
   reportAlready: '&#x4E0B;&#x8F7D;'
   reportDone: '&#x60A8;&#x5448;&#x62A5;&#x8FD9;&#x9879;&#x76EE;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#xFF01;'
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  updateAppHeader: 升级
+  updateAppText: 要下载这个程序请把软件升级到最新版
+  btnClosePopup: 好
+  checkout_this_program: 检查这个Catrobat程序
+  show_more: 显示更多
+  comments: 评论
+  send: 发送
+  delete: 删除
+  report: 报告
+  report_popup: 您的评论以成功发送
+  report_popup_header: 已发送
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
-  message: |
-    Dear %username%.
+  subject: 密码找回
+  message: |2
+    亲爱的 %username%：
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    刚才有人申请重置您的密码%appplication_url%。如果不是你干的, 可以忽略这封邮件。而这个链接在24小时后就会失效。
+    如果你确实需要重置密码，可以登录以下页面: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    在任意时刻，您都可以使用您的用户名和密码登录%appplication_url% 社区。
+    登录入口: 
+    %loginPage%
+    如果要更改你的档案, 点这里: 
+    %profilePage%
+    
+    敬礼,
+     Catrobat 团队.
 profile:
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
+  saveChanges: 保存修改
+  newPass: 新密码
+  repeatPass: 重复密码
   firstEmail: '&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x5DF2;&#x6210;&#x529F;&#x66F4;&#x65B0;&#x3002;'
-  secondEmail: My second email
-  myPrograms: My programs
+  secondEmail: 第二邮箱
+  myPrograms: 我的程序
   form:
-    passwordTooShort: 'The new password must have at least %length% characters.'
-    passwordTooLong: 'The new password can have a maximum of %length% characters.'
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    passwordTooShort: '新密码至少要有%length%的字符。'
+    passwordTooLong: '新密码最多可以有%length%的字符。'
+    passwordIsUsername: 密码不可与用户名相同。
+    passwordWrong: 密码错误
+    emailNotValid: 邮箱地址不存在。
+    emailMissing: 更新邮箱地址时发生错误，你必须要有至少一个经过验证的邮箱地址。
     emailExists: '&#x5BC6;&#x7801;&#x6216;&#x7528;&#x6237;&#x540D;&#x4E0D;&#x6B63;&#x786E;&#x3002;'
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
+    submitSuccess: 已保存！
+  reallyDeleteProgram: 是否确认删除程序？
+  programsOf: 程序
   changePicture: '&#x56FD;&#x5BB6;'
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
+    pictureTooLarge: 您选择的图片体积过大，请不要使用超过5兆的图片。
+    uploadError: 对不起，上传发生错误。
     noSupport: '&#x60A8;&#x7684;&#x6635;&#x79F0;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;&#x5931;&#x8E2A;&#x3002;'
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  editProfile: 编辑档案
+  edit: 编辑
+  done: 完成
+  avatar: 头像
+  email: 邮箱
+  editAvatar: 编辑头像
+  editUsername: 编辑用户名
+  editPassword: 修改密码
+  editCountry: 修改国家
+  editEmail: 修改邮箱地址
 licenseToPlay:
-  link: License to play
+  link: 授权
   title: '&#x4F7F;&#x7528;&#x6388;&#x6743;&#x6761;&#x4F8B; - &#x5206;&#x4EAB;&#x524D;&#x8BF7;&#x6CE8;&#x660E;&#x539F;&#x8457;&#x8005;'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
+  text1: 把每一个Catrobat程序想象成一道道使用不同的菜谱（程序块）制成的美味佳肴。所有的Catrobat社区成员都可以分享他们的美食及菜谱。这就意味着你除了可以分享美食还可以通过菜谱去学习怎样去自己动手制作一份。
+  text2: 这里没有私藏：对于美味佳肴的制作方法对任何人开放，任何人都可以使用或修改这些菜谱并制成新的菜肴。
+  text3: 你可以使用别人的菜谱做你自己的菜，或许还可以使用不同的材料。而获得这些自由只需要满足两个简单的要求：
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
@@ -239,7 +242,7 @@ help:
       title: Change the background
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have on background.
+        text1: The background is like an object, but you just can have one background.
         text2: You can add scripts, sounds and look in the same way to the background object.
     step11:
       title: Main Menu
@@ -252,7 +255,7 @@ help:
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
         text6: Upload the program that is currently opened.
   tutorialcards:
-    title: Tutorials
+    title: 新手向导
     description1: These tutorials show you how to use effective tricks in Pocket Code.
     getReady: 'Get Ready:'
     tryCode: 'Try this code:'

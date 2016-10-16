@@ -81,7 +81,7 @@ profile:
     passwordTooShort: 'La nuova password deve avere almeno %length% caratteri.'
     passwordTooLong: 'La nuova password può avere un massimo  di %length% caratteri.'
     passwordIsUsername: La password deve essere diversa dal nome utente.
-    passwordWrong: Wrong password
+    passwordWrong: Password sbagliata
     emailNotValid: Questo indirizzo email non è valido.
     emailMissing: "Errore durante l'aggiornamento di questo indirizzo di posta elettronica. Devi avere almeno un indirizzo email convalidato."
     emailExists: "L'indirizzo e-mail è già stato usato."
@@ -94,16 +94,16 @@ profile:
     uploadError: "Spiacenti, c'è stato un problema durante il caricamento!"
     noSupport: "Questo formato di immagine non è supportato, prova un'altra immagine."
 myprofile:
-  editProfile: Edit profile
+  editProfile: Modifica il profilo
   edit: Modifica
   done: Fatto
   avatar: Avatar
   email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  editAvatar: Modifica avatar
+  editUsername: Modifica nome utente
+  editPassword: Cambia password
+  editCountry: Modifica paese
+  editEmail: Modifica e-mail
 licenseToPlay:
   link: Licenza per giocare
   title: 'Licenza per il gioco - Dare credito e condividere'
