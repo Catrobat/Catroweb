@@ -23,7 +23,7 @@ more: مزید
 less: کم
 ok: ٹھيک ہے
 clickToDownloadProgram: 'نمونے کے پروگرام کو ڈاؤن لوڈ کرنے کے لئے %link_start% یہاں %link_end% کلک کریں۔.'
-registrationError: Username or email address already in use.
+registrationError: صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
@@ -34,7 +34,7 @@ programs:
   related: متعلقہ پروگرامات
   downloads: '%downloads% ڈاؤن لوڈز'
   sample: نمونے کے پروگرام
-  views: '%views% views'
+  views: '%views% مرتبہ دیکھی'
   submitted: جمع شدہ پروگرام
   uploaded: اپ لوڈ شدہ پروگرام
   reportAsInappropriate: رپورٹ غیرموزوں ہے
@@ -54,8 +54,8 @@ programs:
   send: بھیجیں
   delete: حذف کریں
   report: رپورٹ
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
+  report_popup_header: اطلاعات کے مطابق
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
@@ -77,7 +77,7 @@ profile:
     passwordTooShort: 'نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.'
     passwordTooLong: 'نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.'
     passwordIsUsername: خفیہ کوڈ صارف نام سے مختلف ہوگا۔
-    passwordWrong: Wrong password
+    passwordWrong: غلط پاس ورڈ
     emailNotValid: یہ ای میل پتہ درست نہیں ہے ۔
     emailMissing: اس ای میل پتے کی تازہ کاری کے دوران نقص۔ آپ کا کم از کم ایک توثیق شدہ ای میل پتہ ہونا چاہیے ۔
     emailExists: یہ ای میل پتہ پہلے سے استعمال میں ہے.
@@ -90,16 +90,16 @@ profile:
     uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
     noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
 myprofile:
-  editProfile: Edit profile
+  editProfile: پروفائل میں ترمیم کریں
   edit: تدوین کریں
   done: مکمل ہوا
-  avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  avatar: اوتار
+  email: ای-میل
+  editAvatar: اوتار مین تبدیلی کریں
+  editUsername: صارف کے نام مین تبدیلی کریں
+  editPassword: پاس ورڈ مین تبدیلی کریں
+  editCountry: ملک تبدیل کریں
+  editEmail: ای میل تدوین کریں
 licenseToPlay:
   link: کھیلنے کے لئے لائسنس
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
@@ -133,10 +133,10 @@ termsOfUse:
   text5: 'ہماری خدمات اور استعمال کی شرائط:'
   list1:
     item1: بہت سے مختلف ممالک اور ثقافتوں سے
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item2: ہر عمر ( بچوں سے لیکر نو جوانو تک اور بزرگوں کے لیے )
+    item3: تجربہ کی تمام سطحوں کے ساتھ
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: با ادب رہیں جب آپ پروگرامز شیئر کریں ، برائے مہربانی یہ یاد رکھیں کے مختلف عمر اور نسلوں سے وابستہ لوگ آپکی شراكت دیکھیں گے .
     item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
     item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
@@ -152,16 +152,16 @@ termsOfUse:
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
     item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
+    item2: اگر آپ کی عمر 13 سال سے کم ہے، تو آپ کو اپنے والدین یا قانونی سرپرست سے پوچھنا چاہئے کہ کیا وہ آپ کو کیٹروبیٹ سافٹ ویئر ایپلی کیشنز اور وسائل استعمال کرنے کی اجازت دیتے ہیں؟.
     item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
+    item4: کیٹروبیٹ کے تمام سافٹ ویئر اور انٹرنیٹ وسائل اس امید پیش کئے جاتے ہیں کہ وہ مفید ثابت ہونگے، لیکن بغیر کسی گارنٹی کے۔
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
+  bottom1: ہم ہمیشہ ہمارے استعمال کی شرائط کو بہتر بنانے کی کوشش کر رہے ہیں لہٰذا وقتاً فوقتاً کی پڑتال کیا کریں۔
   bottom2: 'استعمال کی شرائط کے بارے میں تجاویز %email-webmaster% پر ارسال کریں۔'
-  version: Version 1.3, 4 March 2014
+  version: ورژن 1.3, 4 مارچ 2014
 help:
   stepByStep:
-    title: Step-by-Step Intro
+    title: مرحلہ وار انٹرو
     start: 'Starting position:'
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
@@ -169,37 +169,37 @@ help:
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Make a new program
+      title: ایک نیا پروگرام بنائیں
       detail:
-        text1: 'Tap on "New".'
-        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
+        text1: '"نئی" پر ٹیپ کریں ۔'
+        text2: 'پروگام نام داخل کریں، منتخب کریں "خالی پروگرام بنائیں" اور "OK" پر ٹیپ کریں ۔'
     step2:
-      title: Create a new object
+      title: ایک نیا آبجیکٹ بنائیں
       detail:
-        text1: 'Tap:'
+        text1: 'ٹیپ کریں:'
         text2: Choose the source of the first look of your new object.
-        text3: 'Enter an object name and tap "OK" to create the object.'
+        text3: 'آبجیکٹ نام داخل کریں اور آبجیکٹ بنانے کے لیے "OK" پر ٹیپ کریں ۔'
         special1: Draw a new look.
-        special2: Choose from gallery.
-        special3: Take a picture.
+        special2: گیلری سے انتخاب کریں.
+        special3: تصویر لیجیئے.
     step3:
       title: Start Moving
       detail:
-        text1: 'Tap:'
+        text1: 'ٹیپ کریں:'
         text2: 'The first brick we use is out of the category "Motion".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
         text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text6: اینڈرائڈ کا واپسی کا بٹن استعمال کر کے سٹیج سے واپس جائیں.
     step4:
       title: Change Look
-      description: You can change the look of your object.
+      description: آپ اپنے اوبجیکٹ کی دکھا واٹ بَدَل سکتے ہیں.
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
         text2: 'Snap the brick underneath the "Glide" - brick.'
         text3: Tap into the dropdown field to create a new look.
         text4: Choose the source of the image like before.
-        text5: Now you have to select the new image.
+        text5: اب آپکو نئی تصویر کا انتخاب کرنا ہو گا.
         text6: Tap play to see the behaviour on the stage.
     step5:
       title: بولیے
@@ -207,7 +207,7 @@ help:
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: Tap play to see the behaviour on the stage.
+        text3: اب آپ کو پتہ چلے گا کے کس طرح اک اوبجیکٹ سے بات کرائی جاتی ہے.
     step6:
       title: بار بار
       description: یہ مرحلہ آپ کو آبجیکٹ کے طرز عمل کو دہرانے کا طریقہ دکھاتا ہے ۔
@@ -238,10 +238,10 @@ help:
         text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
         text3: Use again the Android Back Button to get to the overview of your objects and your background.
     step10:
-      title: Change the background
+      title: پس منظر تبدیل کریں
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have on background.
+        text1: The background is like an object, but you just can have one background.
         text2: You can add scripts, sounds and look in the same way to the background object.
     step11:
       title: Main Menu
@@ -250,31 +250,31 @@ help:
         text1: Continue with your currently opened program.
         text2: Add a new program.
         text3: See all your local programs.
-        text4: Go to the help site and discuss with other users.
+        text4: ہیلپ سائٹ پر جائیں اور دوسرے صارفیں سے مشورہ کریں.
         text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text6: اِس وقت کھلے ہوئے پروگرام کو اپ لوڈ کریں.
   tutorialcards:
     title: اسباق
     description1: یہ سبق آپکو مؤثر چالوں کا استعمال سکھاتی ہے
-    getReady: 'Get Ready:'
-    tryCode: 'Try this code:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    getReady: 'تیار ہو جاؤ:'
+    tryCode: 'اِس کوڈ کو استعمال کر کے دیکھیں:'
+    doIt: 'یہ کرو:'
+    tip: 'اضافی ٹپ:'
     card1:
-      title: Change Size
+      title: سائز تبدیل کریں
       description: Change the size of an object.
-      one: Add the object of which you would like to change the size, e.g. Animal.
+      one: وہ اوبجیکٹ شامل کریں جس کا آپ سائز بدلنا چاہتے ہیں، مثلاً جانور.
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: Change Look
-      description: Change the looks of an object.
-      one: Add the object of which you would like to change its look, e.g. items.
+      title: دکھا واٹ تبدیل کریں
+      description: اوبجیکٹ کی دکھا واٹ کو تبدیل کریں.
+      one: شامل کریں وہ اوبجیکٹ جس کی دکھا واٹ آپ تبدیل کرنا چاہتے ہیں، مثلاً آئیٹمز.
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Animation
-      description: Animate objects
-      one: Add the object you want to be moving.
+      title: حرکت اندازی
+      description: آبجیکٹس کی حرکت اندازی
+      one: وہ اوبجیکٹ شامل کریں جو آپ آگے چلانا چاہتے ہیں.
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
@@ -293,24 +293,24 @@ help:
       one: Add the object you want to be speaking, e.g. Carrie.
       two: Insert the following bricks in order to make the voice output possible.
     card7:
-      title: Sensor
+      title: سینسر
       description: Control an object by using the inclination sensors.
       one: Add the object you want to be moving on stage.
       two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
     card8:
-      title: Compass
-      description: Create you own compass
+      title: قطب نما
+      description: اپنا قطب نما بنائین
       one: Add the object you want to point in compass direction.
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Broadcast
-      description: Send messages from one object to another.
+      title: نشر کرنین
+      description: ایک اوبجیکٹ سے دوسرے اوبجیکٹ کو میسیج بھجین۔
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.
     card10:
-      title: Show variable
-      description: Show the value of a variable.
+      title: ویریئبل دکھائیں
+      description: ویریئبل کی ویلیو دکھائیں.
       one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
       two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
       three: Through „Show variable“ you can display the values on stage.
@@ -320,8 +320,8 @@ help:
       one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
       two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
+      title: چہرے کی شناخت
+      description: چہرے کی شناخت سے اوبجیکٹ کو کنٹرول کریں.
       one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
       two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
   starterPrograms:
@@ -339,23 +339,23 @@ help:
     text1: "سب سے پہلے آپ کو اکاؤنٹ بنانے کی ضرورت ہے ۔ اس کے بعد آپ اپنے بنائے گئے پروگرامات اپ لوڈ کر سکتے ہیں ۔ فکر نہ کریں یہ آسان ہے۔ آپ صرف ایک صارف نام اور پاس ورڈ کا کا انتخاب کریں۔ دونوں خانے بھرنے کے بعد، 'لاگ ان یا رجسٹر پر' پر کلک کریں۔ یہ ہوگیا!"
     title2: اپ لوڈ کریں
     text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: Search for your program
+    title3: اپنے پروگرام کے لیے تلاش کریں
     text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
     title4: اینڈرائیڈ پروگرام بنائیں
     text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
     title5: پروگرام ڈاؤن لوڈ کریں
     text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
     title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
+    text6: '%link% پر جائیں اور میں مینو میں ’لوگ ان’ یا ’سائن اپ!’ پر کِلک کریں. اگر آپ کے پاس پہلے سے ہی اکاؤنٹ ہے تو صرف لوگ ان کریں، اگر نہیں، تو آپ کو رجسٹر کرنا پڑے گا آپکی ای میل، یوزر نیم اور پاسورڈ سے.'
+    title7: Game Jolt سائٹ پر اپنی گیم اپ لوڈ کریں
     text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
     text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
     text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
     text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
     text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text7_5: اپ لوڈ ہونے کے بعد اپنی گیم کو شایہ کرنے کے لیے ’او کے’ پر کِلک کریں. یہ بعد میں لوگوں کو آپکی گیم ڈائون لوڈ کرنے کی لنک دکھائے گا.
+    text7_6: اب اپنے اپنی پہلی گیم اپ لوڈ کردی ہے Game Jolt سائٹ پر اور اسے ایکٹیو کر دیا ہے. مبارک ہو!
+    text7_7: 'اب دوسرے لوگ آپکی گیم کو ڈھونڈھ سکیں گے اور یہ اِس %link% پیج پر ہوگی.'
   aliceGameJamTutorialcards:
     title1: (Welcome to) Wonderland
     subtitle1: "Animate Characters and create a 'when tapped' event"
@@ -365,26 +365,26 @@ help:
     title2: Save Alice!
     subtitle2: Use the inclination sensors and detect a collision between objects
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
+    title3: 'دی ہٹر - ضرب و فرار'
+    subtitle3: اک چلنے والی زمین بنائے اور ہٹرس کی ہلچل کو کنٹرول کریں
+    description3: اِس سبق میں آپ سیکھیں گے کے کس طرح لینڈ اسکیپ بنے گا جو ایسا لگتا ہے کے وہ چل رہا ہے. ہم اوبجیکٹس کو اسکریں کے ساتھ آگے چلا کے ہلچل کا بھرم بنائی گے. ہم آپکو یہ بھی دکھائی گے کے کس طرح ہٹر موو بنے گا آپکی فون کو جھکا کے .
+    title4: 'دی ہٹر - ضرب و فرار'
+    subtitle4: ہٹر کو برے کارڈز کو گولی مرنے دو
     description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
     title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
+    subtitle5: ویریابلیس کو استعمال کر کے سکور بنائیں
     description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
     title6: A Rabbits Race
-    subtitle6: Create a moving background
+    subtitle6: ایک حرکت پذیر پس منظر بنائیں
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: پروگرام ڈائون لوڈ کریں
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
+  username_header: پاکٹ کوڈ میں سائن اَپ کے لئے آپ کا شکریہ!
+  username_chooser: 'برائے مہربانی یوزر نیم منتخب کریں:'
+  username_hint: یوزر نیم آپکا اصلی نام نہیں ہونا چاہیے.
+  usernameTaken: صارف نام پہلے ہی لیا جا چکا ہے۔ برائے مہربانی کوئی اور منتخب کریں.
 search:
   dotdotdot: تلاش کریں...
   search: تلاش
@@ -396,67 +396,67 @@ menu:
 programLoader:
   noPrograms: اس وقت کوئی پروگرام نہیں ہے۔
 login:
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
+  passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
+  noUsername: آپکا یوزر نیم یا ای میل نہیں ملا.
   forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
   recoverPass: خفیہ کوڈ بحال کریں
   recoverPassSend: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
   userOrEmail: صارف کا نام یا ای میل
   changePass: خفیہ کوڈ تبدیل کریں
-  createAccount: Create an account
-  or: OR
+  createAccount: ایک اکاؤنٹ بنائیں
+  or: یا
 apk:
-  download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
+  prepare: ایپ تیار کریں
+  preparing: ایپ تیار کر رہا ہے
+  text: اس عمل میں کچھ وقت لگ سکتا ہے
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: صارف کا نام خالی نہیں ہونا چاہیئے
+    invalid: آپکا صارف نام غلط ہے
+    exists: یہ صارف نام پہلے سے موجود ہے۔.
+    not_exists: یہ صارف نام موجود نہیں ہے.
   password:
     blank: خفیہ کوڈ موجود نہیں۔
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: 'آپ کا خفیہ کوڈ کم از کم {{ limit }} حروف پر مشتمل ہونا چاہیئے۔'
   description:
-    rude: Description must not contain rude wordes.
+    rude: تفصیل سخت الفاظ کا حامل نہیں ہونا چاہیے ۔.
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: ملک غائب ہے۔
+    invalid: غلط ملک
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: ای میل خالی نہیں ہونا چاہیے
+    invalid: آپکی ای میل غلط لگ رہی ہے
     exists: یہ ای میل پتہ پہلے سے استعمال میں ہے.
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: کھولنے کے لیے تصدیقی آئی ڈی خالی نہیں ہونی چاہیے
+  login: صارف نام یا پاس ورڈ غلط تھا ۔
+  post-data: پوسٹ ڈیٹا سہی نہیں یا غیب ہے !
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: خریدار نئے حیض فائل نہیں بھیجی! کیا آپ پاکٹ کوڈ کا پرانا ورژن استعمال کر رہے ہیں؟
+    invalid: غلط حیض
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: غلط xml کوڈ
+    missing: 'نامعلوم غلطی: !project_xml_not_found'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
+    unexpected: غیر متوقع فائل ملی
+    invalid: غلط فائل
+  image.missing: پروجیکٹ xml میں ایک فائل کا ذکر ہے جو پروجیکٹ فولڈر میں موجود نہیں
+  unknown: نامعلوم غلطی
+  token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: پروگرام کا نام اشج الفاظ پر مشتمل نہیں ہونا چاہیے.
   program:
-    invalid: Invalid program.
+    invalid: غلط پروگرام.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: معاف کیجیے، آپکا پروگرام کیٹروبیٹ لینگویج کے پرانے ورژن پر مشتمل ہے! کیا آپ پاکٹ کوڈ کا تازہ ترین ورژن استعمال کر رہے ہیں؟
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: معاف کیجیے، آپ پاکٹ کوڈ کا پرانا ورژن استعمال کر رہے ہیں. برائے مہربانی اپ ڈیٹ کریں تازہ ترین ورژن میں.
 success:
   registration: رجسٹریشن کامیاب!
   token: ٹھيک ہے
   upload: آپکے پراجیکٹ کو کامیابی کے ساتھ اپ لوڈ کیا گیا!
-  report: Your report was successfully sent!
+  report: آپکی رپورٹ کامیابی سے بھیج دی گئی!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
@@ -466,41 +466,41 @@ time:
 language:
   arabic: عربی
   bulgarian: بلغاری
-  catalan: Catalan
+  catalan: کیٹالان
   chinese_simplified_han: چینی (آسان کردہ)
   chinese_traditional_han: چینی (روایتی)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
+  croatian: کووشین
+  czech: چیک
+  danish: ڈینش
+  dutch: ڈچ
   english_united_kingdom: انگریزی (برطانیہ)
   english_united_states: انگریزی (امریکہ)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
+  estonian: ایسٹونین
+  filipino: فلیپینو
+  finnish: فینیش
   french: فرانسیسی
   german: جرمنی
   greek: یونانی
   hebrew: عبرانی
   hindi: ہندی
-  hungarian: Hungarian
+  hungarian: ہنگرین
   indonesian: انڈونیشی
   italian: اطالوی
   japanese: جاپانی
   korean: کوریائی
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
+  latvian: لیٹوین
+  lithuanian: لتھونيئن
+  malay: مالے
+  norwegian: نارويجين
   persian: فارسی
   polish: پولستانی
   portuguese_brazil: پرتگالی (برازیل)
   portuguese_portugal: پرتگالی (پرتگال)
   romanian: رومنی
   russian: روسی
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
+  serbian: سربيئن
+  slovak: سلوواک
+  slovenian: سلووينيئن
   spanish_latin_america: ہسپانوی (لاطینی امریکہ)
   spanish_spain: ہسپانوی (سپین)
   swedish: سویڈنی
@@ -509,21 +509,21 @@ language:
   ukrainian: يوکرينيئن
   vietnamese: ویتنامی
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: 'آ  پی  کے بنائے'
+  pending: 'آ  پی  کے بن رہی ہے'
+  download: 'آ  پی  کے ڈائون لوڈ کریں'
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  whats: '%gamejamname% کیا ہے؟'
   submitown:
     header: خبردار
     subheader: آپ صرف اپنے ہی پروگرامات جمع کراسکتے ہیں۔
     text: |
       لیکن کیوں نہ آپ اپنی تخلیق کریں!
       %gamejamtag% میں شرکت کریں
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: ٹیگز
+extenstion-text: توسیعات
 tags:
   constant:
     tag1: کھیل
@@ -538,9 +538,9 @@ admin:
     noRemovableObjects: کوئی ہٹائی جانے والی اشیاء دستیاب نہیں ۔
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
+    btnCreateBackup: بیک اپ بنائیں
+    btnDownloadBackup: بیک اپ ڈائون لوڈ کریں
+    btnRestoreBackup: بیک اپ چالائین
+    btnDeleteBackup: بیک اپ حذف کریں
+    createBackupConfirmationTitle: بیک اپ فائل بنائیں
     createBackupConfirmationText: اس عمل میں کچھ وقت لگ سکتا ہے ۔ بعد ازاں صفحہ دوبارہ لوڈ ہوجائے گا!

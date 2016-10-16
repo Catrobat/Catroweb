@@ -82,7 +82,7 @@ profile:
     passwordTooShort: 'رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.'
     passwordTooLong: 'رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.'
     passwordIsUsername: رمز عبور باید متفاوت از نام کاربری باشد.
-    passwordWrong: Wrong password
+    passwordWrong: کلمه عبور اشتباه
     emailNotValid: اين آدرس رايانامه معتبر نیست.
     emailMissing: خطا در حین به روز رسانی این آدرس ایمیل. تو باید حداقل یک آدرس ایمیل معتبر داشته باشی.
     emailExists: این آدرس ایمیل در حال حاضر موجود است.
@@ -95,16 +95,16 @@ profile:
     uploadError: ببخشید، یه مشکلی در حین آپلود پیش اومد!
     noSupport: این نوع تصویر پشتیبانی نمی شه، لطفا تصویر دیگری را امتحان کن.
 myprofile:
-  editProfile: Edit profile
+  editProfile: ویرایش پروفایل
   edit: ويرايش
   done: ﺍﻧﺠﺎﻡ شد
-  avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  avatar: آواتار
+  email: ایمیل
+  editAvatar: ویرایش آواتار
+  editUsername: ویرایش نام کاربری
+  editPassword: ویرایش کلمه عبور
+  editCountry: ویرایش کشور
+  editEmail: ویرایش ایمیل
 licenseToPlay:
   link: مجوز بازی
   title: 'مجوز بازی - اعتبار بده و به مشارکت بزار'
@@ -514,7 +514,7 @@ ci:
 gamejam:
   nojam: با عرض پوزش، الان بازی جم انجام نمی شود
   submit: 'ارسال به %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  whats: '%gamejamname% چیست؟'
   submitown:
     header: توجه
     subheader: تو فقط می توانی برنامه های خودت را ارسال کنی

@@ -228,7 +228,7 @@ help:
       title: שנה את הרקע
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have on background.
+        text1: The background is like an object, but you just can have one background.
         text2: באפשרותך להוסיף תסריטים, צלילים, ומראה באופן זהה לזה של אובייקט הרקע.
     step11:
       title: תפריט ראשי

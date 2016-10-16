@@ -239,7 +239,7 @@ help:
       title: Change the background
       description: This is the overview of your objects and the background is also part of the program.
       detail:
-        text1: The background is like an object, but you just can have on background.
+        text1: The background is like an object, but it will appear behind all of the other objects.
         text2: You can add scripts, sounds and look in the same way to the background object.
     step11:
       title: Main Menu
