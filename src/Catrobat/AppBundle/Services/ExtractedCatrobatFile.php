@@ -111,7 +111,18 @@ class ExtractedCatrobatFile
         } elseif (is_file($this->path . 'automatic_screenshot.png')) {
             $screenshot_path = $this->path . 'automatic_screenshot.png';
         }
-        
+        $finder = new Finder();
+        //$finder->in($this->path->getPath())->directories()->name("automatic_screenshot.png")
+        if($screenshot_path === null)
+        {
+            $fu = $finder->in($this->path)->files()->name("automatic_screenshot.png");
+            foreach ($fu as $file)
+            {
+                $screenshot_path = $file->getPathname();
+                break;
+            }
+        }
+
         return $screenshot_path;
     }
 
