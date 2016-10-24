@@ -36,6 +36,14 @@
   </div>
   {% endif %}
 
+  {% if nolb_user and 'teacher' in app.user.username %}
+  <div id="edit-icon">
+    <a href="{{ url('profile_edit', {id : profile.id}) }}">
+      <img src="{{ asset('images/default/edit.png') }}">
+    </a>
+  </div>
+  {% endif %}
+
   <div class="clear"></div>
   {% if not app.user.limited %}
   <div id="myprofile-programs">

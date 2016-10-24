@@ -173,7 +173,7 @@ class GameSubmissionController extends Controller
     private function getLanguageCode($request) {
         $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
 
-        if($languageCode != "DE")
+        if($languageCode != ("DE" || "IT" || "PL"))
             $languageCode = "EN";
 
         return $languageCode;

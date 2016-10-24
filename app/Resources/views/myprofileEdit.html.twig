@@ -46,6 +46,16 @@
 
   {% endif %}
 
+  {% if nolb_user and 'teacher' in app.user.username%}
+    <div id="profile-edit-wrapper" class="edit-wrapper">
+      <div id="password-information">
+        <button id="password-button" class="btn btn-edit">{{ 'myprofile.edit'|trans({}, 'catroweb') }}</button>
+        <div class="information-header" id="password-header">{{ 'password'|trans({}, 'catroweb') }}:</div>
+        <div class="data" id="password-placeholder">*********</div>
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock %}
 
 {% block js %}
