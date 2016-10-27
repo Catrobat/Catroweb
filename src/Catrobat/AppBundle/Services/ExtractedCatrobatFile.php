@@ -115,7 +115,7 @@ class ExtractedCatrobatFile
         //$finder->in($this->path->getPath())->directories()->name("automatic_screenshot.png")
         if($screenshot_path === null)
         {
-            $fu = $finder->in($this->path)->files()->name("manuel_screenshot.png");
+            $fu = $finder->in($this->path)->files()->name("manual_screenshot.png");
 
             foreach ($fu as $file)
             {
