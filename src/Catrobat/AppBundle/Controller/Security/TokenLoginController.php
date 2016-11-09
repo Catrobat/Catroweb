@@ -18,12 +18,11 @@ class TokenLoginController extends Controller
      * @Route("/tokenlogin", name="token_login")
      * @Method({"GET"})
      */
-    public function tokenloginAction(Request $request)
-    {
+    public function tokenloginAction(Request $request) {
         $username = $request->query->get('username');
         $token = $request->query->get('token');
         $user = $this->get('usermanager')->findUserByUsername($username);
-        
+
         if ($user == null) {
             return $this->logout();
         }
@@ -32,17 +31,16 @@ class TokenLoginController extends Controller
         }
         $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
         $this->get("security.context")->setToken($token);
-        
+
         // now dispatch the login event
         $request = $this->get("request");
         $event = new InteractiveLoginEvent($request, $token);
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-        return $this->redirect($this->generateUrl('index').'?login');
+        return $this->redirect($this->generateUrl('index') . '?login');
     }
 
-    private function logout()
-    {
+    private function logout() {
         $this->get('security.context')->setToken(null);
-        return $this->redirect($this->generateUrl('index').'?redirect');
+        return $this->redirect($this->generateUrl('index') . '?redirect');
     }
 }

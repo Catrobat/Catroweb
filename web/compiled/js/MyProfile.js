@@ -2,13 +2,11 @@
   Generated File by Grunt
   Sourcepath: web/js
 */
-var MyProfile = function(profile_url, save_name_url, name_edit_url, email_edit_url, profile_edit_url, avatar_edit_url, password_edit_url,
-                         country_edit_url, save_email_url, save_country_url, save_password_url, url, delete_url,
+var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_edit_url, password_edit_url,
+                         country_edit_url, save_email_url, save_country_url, save_password_url, delete_url,
                          toggle_visibility_url, deleteProgramString, upload_url) {
   var self = this;
   self.profile_url = profile_url;
-  self.save_name_url = save_name_url;
-  self.name_edit_url = name_edit_url;
   self.email_edit_url = email_edit_url;
   self.profile_edit_url = profile_edit_url;
   self.avatar_edit_url = avatar_edit_url;
@@ -17,7 +15,6 @@ var MyProfile = function(profile_url, save_name_url, name_edit_url, email_edit_u
   self.save_email_url = save_email_url;
   self.save_country_url = save_country_url;
   self.save_password_url =save_password_url;
-  self.save_url = url;
   self.delete_url = delete_url;
   self.upload_url = upload_url;
   self.toggle_visibility_url = toggle_visibility_url;

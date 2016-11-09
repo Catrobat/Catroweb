@@ -27,8 +27,7 @@ class SecurityController extends Controller
      * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function checkTokenAction()
-    {
+    public function checkTokenAction() {
         return JsonResponse::create(array(
             'statusCode' => StatusCode::OK,
             'answer' => $this->trans('success.token'),
@@ -46,8 +45,7 @@ class SecurityController extends Controller
      * @deprecated
      *
      */
-    public function loginOrRegisterAction(Request $request)
-    {
+    public function loginOrRegisterAction(Request $request) {
         /**
          * @var $userManager UserManager
          * @var $user User
@@ -113,8 +111,7 @@ class SecurityController extends Controller
      * @Route("/api/register/Register.json", name="catrobat_api_register", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function registerNativeUser(Request $request)
-    {
+    public function registerNativeUser(Request $request) {
         /**
          * @var $userManager UserManager
          * @var $user User
@@ -172,8 +169,7 @@ class SecurityController extends Controller
      * @Route("/api/login/Login.json", name="catrobat_api_login", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function loginNativeUser(Request $request)
-    {
+    public function loginNativeUser(Request $request) {
         /**
          * @var $userManager UserManager
          * @var $user User
@@ -242,8 +238,7 @@ class SecurityController extends Controller
         return JsonResponse::create($retArray);
     }
 
-    private function signInLdapUser($request, &$retArray)
-    {
+    private function signInLdapUser($request, &$retArray) {
         /* @var $authenticator UserAuthenticator */
         $authenticator = $this->get('user_authenticator');
         $token = null;
@@ -270,8 +265,7 @@ class SecurityController extends Controller
      * @Route("/api/IsOAuthUser/IsOAuthUser.json", name="catrobat_is_oauth_user", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function isOAuthUser(Request $request)
-    {
+    public function isOAuthUser(Request $request) {
         return $this->getOAuthService()->isOAuthUser($request);
     }
 
@@ -279,8 +273,7 @@ class SecurityController extends Controller
      * @Route("/api/EMailAvailable/EMailAvailable.json", name="catrobat_oauth_login_email_available", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function checkEMailAvailable(Request $request)
-    {
+    public function checkEMailAvailable(Request $request) {
         return $this->getOAuthService()->checkEMailAvailable($request);
     }
 
@@ -288,8 +281,7 @@ class SecurityController extends Controller
      * @Route("/api/UsernameAvailable/UsernameAvailable.json", name="catrobat_oauth_login_username_available", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function checkUserNameAvailable(Request $request)
-    {
+    public function checkUserNameAvailable(Request $request) {
         return $this->getOAuthService()->checkUserNameAvailable($request);
     }
 
@@ -297,8 +289,7 @@ class SecurityController extends Controller
      * @Route("/api/FacebookServerTokenAvailable/FacebookServerTokenAvailable.json", name="catrobat_oauth_login_facebook_servertoken_available", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function checkFacebookServerTokenAvailable(Request $request)
-    {
+    public function checkFacebookServerTokenAvailable(Request $request) {
         return $this->getOAuthService()->checkFacebookServerTokenAvailable($request);
     }
 
@@ -306,8 +297,7 @@ class SecurityController extends Controller
      * @Route("/api/exchangeFacebookToken/exchangeFacebookToken.json", name="catrobat_oauth_login_facebook_token", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function exchangeFacebookTokenAction(Request $request)
-    {
+    public function exchangeFacebookTokenAction(Request $request) {
         return $this->getOAuthService()->exchangeFacebookTokenAction($request);
     }
 
@@ -315,8 +305,7 @@ class SecurityController extends Controller
      * @Route("/api/loginWithFacebook/loginWithFacebook.json", name="catrobat_oauth_login_facebook", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function loginWithFacebookAction(Request $request)
-    {
+    public function loginWithFacebookAction(Request $request) {
         return $this->getOAuthService()->loginWithFacebookAction($request);
     }
 
@@ -324,8 +313,7 @@ class SecurityController extends Controller
      * @Route("/api/getFacebookUserInfo/getFacebookUserInfo.json", name="catrobat_facebook_userinfo", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function getFacebookUserProfileInfo(Request $request)
-    {
+    public function getFacebookUserProfileInfo(Request $request) {
         return $this->getOAuthService()->getFacebookUserProfileInfo($request);
     }
 
@@ -333,8 +321,7 @@ class SecurityController extends Controller
      * @Route("/api/checkFacebookServerTokenValidity/checkFacebookServerTokenValidity.json", name="catrobat_oauth_facebook_server_token_validity", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function isFacebookServerAccessTokenValid(Request $request)
-    {
+    public function isFacebookServerAccessTokenValid(Request $request) {
         return $this->getOAuthService()->isFacebookServerAccessTokenValid($request);
     }
 
@@ -342,8 +329,7 @@ class SecurityController extends Controller
      * @Route("/api/GoogleServerTokenAvailable/GoogleServerTokenAvailable.json", name="catrobat_oauth_login_google_servertoken_available", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function checkGoogleServerTokenAvailable(Request $request)
-    {
+    public function checkGoogleServerTokenAvailable(Request $request) {
         return $this->getOAuthService()->checkGoogleServerTokenAvailable($request);
     }
 
@@ -351,8 +337,7 @@ class SecurityController extends Controller
      * @Route("/api/exchangeGoogleCode/exchangeGoogleCode.json", name="catrobat_oauth_login_google_code", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function exchangeGoogleCodeAction(Request $request)
-    {
+    public function exchangeGoogleCodeAction(Request $request) {
         return $this->getOAuthService()->exchangeGoogleCodeAction($request);
     }
 
@@ -360,8 +345,7 @@ class SecurityController extends Controller
      * @Route("/api/loginWithGoogle/loginWithGoogle.json", name="catrobat_oauth_login_google", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function loginWithGoogleAction(Request $request)
-    {
+    public function loginWithGoogleAction(Request $request) {
         return $this->getOAuthService()->loginWithGoogleAction($request);
     }
 
@@ -369,8 +353,7 @@ class SecurityController extends Controller
      * @Route("/api/getGoogleUserInfo/getGoogleUserInfo.json", name="catrobat_google_userinfo", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"POST"})
      */
-    public function getGoogleUserProfileInfo(Request $request)
-    {
+    public function getGoogleUserProfileInfo(Request $request) {
         return $this->getOAuthService()->getGoogleUserProfileInfo($request);
     }
 
@@ -378,8 +361,7 @@ class SecurityController extends Controller
      * @Route("/api/loginWithTokenAndRedirect/loginWithTokenAndRedirect", name="catrobat_oauth_login_redirect", options={"expose"=true})
      * @Method({"POST"})
      */
-    public function loginWithTokenAndRedirectAction(Request $request)
-    {
+    public function loginWithTokenAndRedirectAction(Request $request) {
         return $this->getOAuthService()->loginWithTokenAndRedirectAction($request);
     }
 
@@ -387,8 +369,7 @@ class SecurityController extends Controller
      * @Route("/api/getFacebookAppId/getFacebookAppId.json", name="catrobat_oauth_login_get_facebook_appid", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function getFacebookAppId()
-    {
+    public function getFacebookAppId() {
         $retArray = array();
         $retArray['fb_appid'] = $this->container->getParameter('facebook_app_id');
         return JsonResponse::create($retArray);
@@ -398,8 +379,7 @@ class SecurityController extends Controller
      * @Route("/api/getGoogleAppId/getGoogleAppId.json", name="catrobat_oauth_login_get_google_appid", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function getGoogleAppId()
-    {
+    public function getGoogleAppId() {
         $retArray = array();
         $retArray['gplus_appid'] = $this->container->getParameter('google_app_id');
         return JsonResponse::create($retArray);
@@ -409,8 +389,7 @@ class SecurityController extends Controller
      * @Route("/api/generateCsrfToken/generateCsrfToken.json", name="catrobat_oauth_register_get_csrftoken", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function generateCsrfToken()
-    {
+    public function generateCsrfToken() {
         $retArray = array();
         $retArray['csrf_token'] = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         return JsonResponse::create($retArray);
@@ -420,8 +399,7 @@ class SecurityController extends Controller
      * @Route("/api/deleteOAuthUserAccounts/deleteOAuthUserAccounts.json", name="catrobat_oauth_delete_testusers", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function deleteOAuthTestUserAccounts()
-    {
+    public function deleteOAuthTestUserAccounts() {
         return $this->getOAuthService()->deleteOAuthTestUserAccounts();
     }
 
@@ -429,8 +407,7 @@ class SecurityController extends Controller
         return $this->get("oauth_service");
     }
 
-    private function trans($message, $parameters = array())
-    {
+    private function trans($message, $parameters = array()) {
         return $this->get('translator')->trans($message, $parameters, 'catroweb');
     }
 }

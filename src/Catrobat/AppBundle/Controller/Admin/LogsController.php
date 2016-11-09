@@ -12,11 +12,11 @@ class LogLine
     public $debug_level = 0;
     public $msg = "";
 
-    public function __construct($line=null) {
-        if($line === null){
+    public function __construct($line = null) {
+        if ($line === null) {
             $this->msg = "No Logs with Loglevel";
             $this->debug_code = "No search results";
-        }else {
+        } else {
             $this->date = $this->getSubstring($line, "]", true);
             $line = substr($line, strlen($this->date) + 1);
             $this->debug_code = $this->getSubstring($line, ":");
@@ -27,23 +27,23 @@ class LogLine
         }
     }
 
-    private function getSubstring($string, $needle, $last_char=false) {
+    private function getSubstring($string, $needle, $last_char = false) {
         $pos = strpos($string, $needle);
 
-        if($pos === false) {
+        if ($pos === false) {
             return "";
         }
-        if($last_char) {
+        if ($last_char) {
             $pos = $pos + 1;
         }
         return substr($string, 0, $pos);
     }
 
-    private function getDebugLevel($string){
+    private function getDebugLevel($string) {
         $pos = strpos($string, ".");
         $extracted_string = substr($string, $pos + 1);
 
-        switch($extracted_string) {
+        switch ($extracted_string) {
             case 'INFO':
                 $debug_level = LogsController::FILTER_LEVEL_INFO;
                 break;
@@ -95,9 +95,7 @@ class LogsController extends CRUDController
      * @see \Sonata\AdminBundle\Controller\CRUDController::listAction()
      * @Method({"POST"})
      */
-    public function listAction(Request $request = null)
-
-    //public function listAction(Request $request = null, int $linecount = 20, int $filter = self::FILTER_LEVEL_DEBUG, Boolean $greater_equal_than_level = true)
+    public function listAction(Request $request = null) //public function listAction(Request $request = null, int $linecount = 20, int $filter = self::FILTER_LEVEL_DEBUG, Boolean $greater_equal_than_level = true)
     {
         $filter = self::FILTER_LEVEL_WARNING;
         $greater_equal_than_level = true;
@@ -105,11 +103,11 @@ class LogsController extends CRUDController
         /*
          * @var $finder Symfony\Component\Finder\Finder
          */
-        if($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             if ($request->query->get('count')) {
                 $linecount = $request->query->getInt('count');
             }
-            if ($request->query->get('filter') !==false) {
+            if ($request->query->get('filter') !== false) {
                 $filter = $request->query->getInt('filter');
             }
             if ($request->query->get('greaterThan')) {
@@ -121,27 +119,28 @@ class LogsController extends CRUDController
         $finder->files()->in(self::LOG_DIR)->depth(0)->name(self::LOG_PATTERN);
         $finder->sortByName();
 
-        foreach($finder as $file) {
+        foreach ($finder as $file) {
             $files[] = $file->getRelativePathname();
         }
 
         $content = [];
-        for ($i = 0; $i < count($files); $i++ ) {
-            $filename = self::LOG_DIR.$files[$i];
+        for ($i = 0; $i < count($files); $i++) {
+            $filename = self::LOG_DIR . $files[$i];
             $file = popen("tac $filename", "r");
 
             $index = 0;
-            while(($line = fgets($file)) && ($index < $linecount)) {
+            while (($line = fgets($file)) && ($index < $linecount)) {
                 $logline = new LogLine($line);
 
-                if(($greater_equal_than_level && $logline->debug_level >= $filter) ||
-                    (!$greater_equal_than_level && $logline->debug_level == $filter)) {
+                if (($greater_equal_than_level && $logline->debug_level >= $filter) ||
+                    (!$greater_equal_than_level && $logline->debug_level == $filter)
+                ) {
                     $content[$i][$index] = $logline;
 
                     $index++;
                 }
             }
-            if(!array_key_exists($i, $content) ){
+            if (!array_key_exists($i, $content)) {
                 $content[$i][0] = new LogLine();
             }
             pclose($file);

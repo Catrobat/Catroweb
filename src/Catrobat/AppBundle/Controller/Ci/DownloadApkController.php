@@ -17,8 +17,8 @@ class DownloadApkController extends Controller
      * @Route("/ci/download/{id}", name="ci_download", requirements={"id": "\d+"})
      * @Method({"GET"})
      */
-    public function downloadApkAction(Request $request, Program $program)
-    {
+    public function downloadApkAction(Request $request, Program $program) {
+        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
 
         if (!$program->isVisible()) {
             throw new NotFoundHttpException();
@@ -27,9 +27,6 @@ class DownloadApkController extends Controller
             throw new NotFoundHttpException();
         }
 
-
-
-        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
         $apkrepository = $this->get('apkrepository');
 
         try {
@@ -46,17 +43,25 @@ class DownloadApkController extends Controller
                 $request->getSession()->set('apk_downloaded', $downloaded);
             }
 
-            $response = new BinaryFileResponse($file);
-            $d = $response->headers->makeDisposition(
-                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                $program->getId().'.apk'
-            );
-            $response->headers->set('Content-Disposition', $d);
-            $response->headers->set('Content-type', 'application/vnd.android.package-archive');
-
-
+            $response = $this->createBinaryFileResponse($program, $file);
             return $response;
         }
         throw new NotFoundHttpException();
+    }
+
+    /**
+     * @param Program $program
+     * @param $file
+     * @return BinaryFileResponse
+     */
+    private function createBinaryFileResponse(Program $program, $file) {
+        $response = new BinaryFileResponse($file);
+        $d = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $program->getId() . '.apk'
+        );
+        $response->headers->set('Content-Disposition', $d);
+        $response->headers->set('Content-type', 'application/vnd.android.package-archive');
+        return $response;
     }
 }

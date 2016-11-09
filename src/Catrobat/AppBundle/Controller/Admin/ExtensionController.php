@@ -19,12 +19,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ExtensionController extends Controller
 {
 
-    public function extensionsAction()
-    {
+    public function extensionsAction() {
         if (false === $this->admin->isGranted('EXTENSIONS')) {
             throw new AccessDeniedException();
         }
-
 
         $em = $this->getDoctrine()->getManager();
         $program_repo = $this->container->get('programrepository');
@@ -32,21 +30,17 @@ class ExtensionController extends Controller
         $command = new CreateProgramExtensionsCommand($em, $this->get('kernel')->getRootDir() . "/../web/resources/programs/", $program_repo);
         $command->setContainer($this->container);
 
-        $return = $command->run(new ArrayInput(array()),new NullOutput());
-        if($return == 0)
-        {
+        $return = $command->run(new ArrayInput(array()), new NullOutput());
+        if ($return == 0) {
             $this->addFlash('sonata_flash_success', 'Creating extensions finished!');
-        }
-        else
-        {
+        } else {
             $this->addFlash('sonata_flash_error', 'Creating extensions failed!');
         }
 
         return new RedirectResponse($this->admin->generateUrl("list"));
     }
 
-    public function listAction(Request $request = NULL)
-    {
+    public function listAction(Request $request = NULL) {
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }

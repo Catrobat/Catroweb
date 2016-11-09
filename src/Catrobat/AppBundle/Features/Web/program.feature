@@ -56,26 +56,19 @@ Feature: As a visitor I want to see a program page
     Scenario: I want to download a program from the browser
       Given I am on "/pocketcode/program/1"
       Then the link of "download" should open "download"
-      And the link of "image" should open "download"
 
     Scenario: I want to download a program from the app with the correct language version
       Given I am browsing with my pocketcode app
       And I am on "/pocketcode/program/2"
       Then the link of "download" should open "download"
-      And the link of "image" should open "download"
 
     Scenario: I want to download a program from the app with an an old language version
       Given I am browsing with my pocketcode app
       And I am on "/pocketcode/program/1"
       Then the link of "download" should open "popup"
-      And the link of "image" should open "popup"
       Then I click the program download button
       And I see the "update app" popup
       Then I click on the program popup background
-      And I see not the "update app" popup
-      Then I click the program image
-      And I see the "update app" popup
-      Then I click on the program popup button
       And I see not the "update app" popup
 
     Scenario: Increasing download counter after apk download

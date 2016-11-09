@@ -15,64 +15,62 @@ use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 class ReportController extends Controller
 {
     /**
-   * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program", defaults={"_format": "json"})
-   * @Method({"POST","GET"})
-   */
-  public function reportProgramAction(Request $request)
-  {
-      /* @var $context \Symfony\Component\Security\Core\SecurityContext */
-    /* @var $programmanager \Catrobat\AppBundle\Entity\ProgramManager */
-    /* @var $program \Catrobat\AppBundle\Entity\Program */
+     * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program", defaults={"_format": "json"})
+     * @Method({"POST","GET"})
+     */
+    public function reportProgramAction(Request $request) {
+        /* @var $context \Symfony\Component\Security\Core\SecurityContext */
+        /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */
+        /* @var $program \Catrobat\AppBundle\Entity\Program */
 
-      $context = $this->get('security.context');
-      $programmanager = $this->get('programmanager');
-      $entityManager = $this->getDoctrine()->getManager();
-      $eventdispacher = $this->get('event_dispatcher');
+        $context = $this->get('security.context');
+        $program_manager = $this->get('programmanager');
+        $entity_manager = $this->getDoctrine()->getManager();
+        $event_dispatcher = $this->get('event_dispatcher');
 
-      $response = array();
-      if (!$request->get('program') || !$request->get('note')) {
-          $response['statusCode'] = StatusCode::MISSING_POST_DATA;
-          $response['answer'] = $this->trans('errors.post-data');
-          $response['preHeaderMessages'] = '';
+        $response = array();
+        if (!$request->get('program') || !$request->get('note')) {
+            $response['statusCode'] = StatusCode::MISSING_POST_DATA;
+            $response['answer'] = $this->trans('errors.post-data');
+            $response['preHeaderMessages'] = '';
 
-          return JsonResponse::create($response);
-      }
+            return JsonResponse::create($response);
+        }
 
-      $program = $programmanager->find($request->get('program'));
-      if ($program == null) {
-          $response['statusCode'] = StatusCode::INVALID_PROGRAM;
-          $response['answer'] = $this->trans('errors.program.invalid');
-          $response['preHeaderMessages'] = '';
+        $program = $program_manager->find($request->get('program'));
+        if ($program == null) {
+            $response['statusCode'] = StatusCode::INVALID_PROGRAM;
+            $response['answer'] = $this->trans('errors.program.invalid');
+            $response['preHeaderMessages'] = '';
 
-          return JsonResponse::create($response);
-      }
+            return JsonResponse::create($response);
+        }
 
-      $report = new ProgramInappropriateReport();
+        $report = new ProgramInappropriateReport();
 
-      if ($context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-          $report->setReportingUser($context->getToken()->getUser()); //could be anon
-      } else {
-          $report->setReportingUser(null); //could be anon
-      }
+        if ($context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $report->setReportingUser($context->getToken()->getUser()); //could be anon
+        } else {
+            $report->setReportingUser(null); //could be anon
+        }
 
-      $program->setVisible(false);
-      $report->setNote($request->get('note'));
-      $report->setProgram($program);
+        $program->setVisible(false);
+        $report->setNote($request->get('note'));
+        $report->setProgram($program);
 
-      $entityManager->persist($report);
-      $entityManager->flush();
+        $entity_manager->persist($report);
+        $entity_manager->flush();
 
-      $eventdispacher->dispatch('catrobat.report.insert', new ReportInsertEvent($request->get('note'), $report));
+        $event_dispatcher->dispatch('catrobat.report.insert', new ReportInsertEvent($request->get('note'), $report));
 
-      $response = array();
-      $response['answer'] = $this->trans('success.report');
-      $response['statusCode'] = StatusCode::OK;
+        $response = array();
+        $response['answer'] = $this->trans('success.report');
+        $response['statusCode'] = StatusCode::OK;
 
-      return JsonResponse::create($response);
-  }
+        return JsonResponse::create($response);
+    }
 
-    private function trans($message, $parameters = array())
-    {
-        return  $this->get('translator')->trans($message, $parameters, 'catroweb');
+    private function trans($message, $parameters = array()) {
+        return $this->get('translator')->trans($message, $parameters, 'catroweb');
     }
 }

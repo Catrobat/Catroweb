@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: catroweb
- * Date: 27.02.16
- * Time: 16:54
- */
+
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
@@ -17,33 +12,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EmailUserMessageController extends CRUDController
 {
-    public function listAction(Request $request = null)
-    {
+    public function listAction(Request $request = null) {
         return $this->render(':Admin:mail.html.twig');
     }
 
-    public  function sendAction(Request $request = null)
-    {
+    public function sendAction(Request $request = null) {
         /**
          * @var $userManager UserManager
          * @var $user User
          */
 
         $userManager = $this->get('usermanager');
-
-
         $user = $userManager->findUserByUsername($_GET['Username']);
 
-        if(!$user)
+        if (!$user)
             return new Response("User does not exist");
-
 
         $mailaddress = $user->getEmail();
 
-        $msg = wordwrap($_GET['Message'],70);
-
+        $msg = wordwrap($_GET['Message'], 70);
         //mail("someone@example.com","My subject",$msg);
-
         $headers = "From: webmaster@catrob.at" . "\r\n";
         mail($mailaddress, "Admin Message", $msg, $headers);
 

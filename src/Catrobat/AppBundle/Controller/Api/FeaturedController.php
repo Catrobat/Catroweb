@@ -16,33 +16,25 @@ class FeaturedController extends Controller
      * @Route("/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function getFeaturedProgramsAction(Request $request)
-    {
+    public function getFeaturedProgramsAction(Request $request) {
         /* @var $image_repository FeaturedImageRepository */
-        $image_repository = $this->get('featuredimagerepository');
         /* @var $repository FeaturedRepository */
+
+        $image_repository = $this->get('featuredimagerepository');
         $repository = $this->get('featuredrepository');
-        
+
         $flavor = $request->getSession()->get('flavor');
-        
+
         $limit = intval($request->query->get('limit'));
         $offset = intval($request->query->get('offset'));
-        
+
         $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset);
         $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor);
-        
+
         $retArray = array();
         $retArray['CatrobatProjects'] = array();
         foreach ($programs as $program) {
-            $new_program = array();
-            $new_program['ProjectId'] = $program->getProgram()->getId();
-            $new_program['ProjectName'] = $program->getProgram()->getName();
-            $new_program['Author'] = $program->getProgram()
-              ->getUser()
-              ->getUserName();
-
-            $new_program['FeaturedImage'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
-            $retArray['CatrobatProjects'][] = $new_program;
+            $retArray['CatrobatProjects'][] = $this->generateProgramObject($program, $image_repository);
         }
         $retArray['preHeaderMessages'] = '';
         $retArray['CatrobatInformation'] = array(
@@ -50,7 +42,24 @@ class FeaturedController extends Controller
             'TotalProjects' => $numbOfTotalProjects,
             'ProjectsExtension' => '.catrobat'
         );
-        
+
         return JsonResponse::create($retArray);
+    }
+
+    /**
+     * @param $program
+     * @param $image_repository
+     * @return array
+     */
+    private function generateProgramObject($program, $image_repository) {
+        $new_program = array();
+        $new_program['ProjectId'] = $program->getProgram()->getId();
+        $new_program['ProjectName'] = $program->getProgram()->getName();
+        $new_program['Author'] = $program->getProgram()
+            ->getUser()
+            ->getUserName();
+
+        $new_program['FeaturedImage'] = $image_repository->getWebPath($program->getId(), $program->getImageType());
+        return $new_program;
     }
 }
