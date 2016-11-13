@@ -159,6 +159,7 @@ class GameSubmissionController extends Controller
           case 'DE':
           case 'IT':
           case 'PL':
+          case 'ES':
             break;
           default:
             $languageCode = 'EN';
