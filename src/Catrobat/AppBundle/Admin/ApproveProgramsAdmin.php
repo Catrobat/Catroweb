@@ -153,7 +153,11 @@ class ApproveProgramsAdmin extends Admin
             $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
         }
 
-        return $this->extractedProgram->getContainingCodeObjects();
+        if ($this->extractedProgram->hasScenes()) {
+            return array();
+        } else {
+            return $this->extractedProgram->getContainingCodeObjects();
+        }
     }
 
     protected function configureRoutes(RouteCollection $collection)

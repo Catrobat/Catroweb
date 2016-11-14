@@ -130,7 +130,7 @@ a {
   .show-hide-code-text {
     position: absolute;
     top: 25px;
-    left: 5%;
+    left: 10%;
     height: 35px;
     line-height: 35px;
     font-size: 19px;
@@ -140,13 +140,14 @@ a {
 
   .show-hide-code-arrow {
     position: absolute;
-    right: ~"calc(26% - 5px)";
-    top: 25px;
+    right: ~"calc(21% - 5px)";
+    top: 32px;
     height: 20px;
 
     img {
       height: 20px;
       width: auto;
+      vertical-align: baseline;
     }
   }
 
@@ -163,6 +164,38 @@ a {
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
     display: inline-block;
+  }
+}
+
+@media (max-width: 992px) {
+  .show-hide-code {
+    .show-hide-code-arrow {
+      right: ~"calc(18.5% - 5px)";
+    }
+
+    .show-hide-code-text {
+      left: 8%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .show-hide-code {
+    .show-hide-code-arrow {
+      right: ~"calc(20% - 5px)";
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .show-hide-code {
+    .show-hide-code-arrow {
+      right: ~"calc(10% - 5px)";
+    }
+
+    .show-hide-code-text {
+      left: 4%;
+    }
   }
 }
 
