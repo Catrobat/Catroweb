@@ -42,7 +42,12 @@ class FacebookPostService
 
         if ($post_id != null) {
 
-            $fb_response = $this->checkFacebookPostAvailable($post_id);
+            try {
+              $fb_response = $this->checkFacebookPostAvailable($post_id);
+            } catch (FacebookSDKException $e) {
+              return StatusCode::FB_DELETE_ERROR;
+            }
+
             $response_string = print_r($fb_response, true);
 
             if (strpos($response_string, 'id') == false) {
