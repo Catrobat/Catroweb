@@ -6,9 +6,13 @@
 
 {% import _self as self %}
 
-{% macro dropbtn(object, path) %}
+{% macro dropbtn(object, path, scene_name) %}
     {% if object.looks|length > 0 %}
-        <img src="{{ asset('./'~path~'images/'~object['looks'][0]['look_url']) }}" class="object-icon">
+        {% if scene_name is null %}
+            <img src="{{ asset('./'~path~'images/'~object['looks'][0]['look_url']) }}" class="object-icon">
+        {% else %}
+            <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~object['looks'][0]['look_url']) }}" class="object-icon">
+        {% endif %}
     {% else %}
         <img src="{{ asset('./images/symbols/empty.svg') }}" class="object-icon">
     {% endif %}
@@ -31,17 +35,26 @@
     </div>
 {% endmacro %}
 
-{% macro dropcontent(object, path) %}
+{% macro dropcontent(object, path, scene_name) %}
     {% import _self as self %}
-{% set sound_counter = 0 %}
+    {% set sound_counter = 0 %}
     {% if object.scripts|length > 0 %}
         {% for script in object.scripts %}
             <div class="script">
-                <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/1h_when_orange.png') }})">
+                <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/'~script.img_file) }})">
                     {# <img src="{{ asset('images/bricks/1h_when_orange.png') }}"> #}
-                    <div class="script-type">{{ script.type }}</div>
-                    {% if script.message is defined %}
-                        <div class="script-message">{{ script.message }}</div>
+                    <div class="script-text">
+                        <span class="script-type">{{ script.type }}</span>
+                        {% if script.message is defined %}
+                            <span class="script-message">{{ script.message }}</span>
+                        {% endif %}
+                    </div>
+                    {% if script.look is defined %}
+                        {% if scene_name is null %}
+                            <img src="{{ asset('./'~path~'images/'~script.look) }}" class="brick-look script-brick-look">
+                        {% else %}
+                            <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~script.look) }}" class="brick-look script-brick-look">
+                        {% endif %}
                     {% endif %}
                 </div>
                 <div class="script-bricks-wrapper">
@@ -51,11 +64,20 @@
                             {# <div class="brick-name">{{ brick.name }}</div> #}
                             <div class="brick-text">{{ brick.text }}</div>
                             {% if brick.look is defined %}
-                                <img src="{{ asset('./'~path~'images/'~brick.look) }}" class="brick-look">
+                                {% if scene_name is null %}
+                                    <img src="{{ asset('./'~path~'images/'~brick.look) }}" class="brick-look">
+                                {% else %}
+                                    <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~brick.look) }}" class="brick-look">
+                                {% endif %}
                             {% endif %}
                             {% if brick.sound is defined %}
-                                <img src="{{ asset('images/symbols/sound.svg') }}" id="sound-{{ sound_counter }}" class="brick-sound"
-                                     onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.sound) }}', {{ sound_counter }});">
+                                {% if scene_name is null %}
+                                    <img src="{{ asset('images/symbols/sound.svg') }}" id="sound-{{ sound_counter }}" class="brick-sound"
+                                         onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.sound) }}', {{ sound_counter }});">
+                                {% else %}
+                                    <img src="{{ asset('images/symbols/sound.svg') }}" id="sound-{{ sound_counter }}" class="brick-sound"
+                                         onclick="initialSound('{{ asset('./'~path~'/'~scene_name~'/sounds/'~brick.sound) }}', {{ sound_counter }});">
+                                {% endif %}
                                 <img src="{{ asset('images/symbols/stop.png') }}" id="soundStop-{{ sound_counter }}" class="brick-sound" style="display:none;"
                                      onclick="stopSound({{ sound_counter }});">
                                 {% set sound_counter = sound_counter + 1 %}
@@ -70,43 +92,96 @@
     {% endif %}
 {% endmacro %}
 
+{% macro object(object, path, scene_name) %}
+    {% import _self as self %}
+    <div class="dropbtn">
+        {{ self.dropbtn(object, path, scene_name) }}
+    </div>
+    <div class="dropdown-content">
+        {{ self.dropcontent(object, path, scene_name) }}
+    </div>
+{% endmacro %}
 
+{% macro group(group_object, path, scene_name) %}
+    {% import _self as self %}
+    <div class="dropbtn">
+        <div class="object-meta outdented">
+            <div class="object-meta-name">
+                <p>Group:</p>
+                <p>Objects:</p>
+            </div>
+            <div class="object-meta-value">
+                <p>{{ group_object.name }}</p>
+                <p>{{ group_object.object_list|length }}</p>
+            </div>
+        </div>
+        <div class="arrow group-arrow">
+            <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+        </div>
+    </div>
+    <div class="group-dropdown-content">
+        {% if group_object.object_list is not empty %}
+            {% for object in group_object.object_list %}
+                <div class="object">
+                    {{ self.object(object, path, scene_name) }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="note">NO OBJECTS</p>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro maincontent(background, object_list, path, scene_name) %}
+    {% import _self as self %}
+    <div id="background-wrapper">
+        <p class="heading">BACKGROUND</p>
+        <div id="background">
+            {{ self.object(background, path, scene_name) }}
+        </div>
+    </div>
+
+    <div id="object-list-wrapper">
+        <p class="heading">OBJECTS</p>
+        {% if object_list is not empty %}
+            {% for code_object in object_list %}
+                <div class="object">
+                    {% if code_object.object_list is defined %}
+                        {{ self.group(code_object, path, scene_name) }}
+                    {% else %}
+                        {{ self.object(code_object, path, scene_name) }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="note">NO OBJECTS</p>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro scenes(path, scene_list) %}
+    {% import _self as self %}
+    <div class="scenes-wrapper">
+        {% for scene in scene_list %}
+            <div class="scene">
+                <p class="heading scene-heading">SCENE: <span>{{ scene.name }}</span></p>
+                <div class="scene-content">
+                    {{ self.maincontent(scene.background, scene.object_list, path, scene.name) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
 
 {% block body %}
     <div id="code-wrapper">
 
         {% if no_code is defined %}
             <p class="exception">CODE CAN'T BE DISPLAYED</p>
+        {% elseif scene_list is defined %}
+            {{ self.scenes(path, scene_list) }}
         {% else %}
-            <div id="background-wrapper">
-                <p class="heading">BACKGROUND</p>
-                <div id="background">
-                    <div class="dropbtn">
-                        {{ self.dropbtn(background, path) }}
-                    </div>
-                    <div class="dropdown-content">
-                        {{ self.dropcontent(background, path) }}
-                    </div>
-                </div>
-            </div>
-
-            <div id="object-list-wrapper">
-                <p class="heading">OBJECTS</p>
-                {% if object_list is not empty %}
-                    {% for code_object in object_list %}
-                        <div class="object">
-                            <div class="dropbtn">
-                                {{ self.dropbtn(code_object, path) }}
-                            </div>
-                            <div class="dropdown-content">
-                                {{ self.dropcontent(code_object, path) }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p class="note">NO OBJECTS</p>
-                {% endif %}
-            </div>
+            {{ self.maincontent(background, object_list, path, null) }}
         {% endif %}
 
     </div>
