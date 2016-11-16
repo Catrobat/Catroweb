@@ -204,7 +204,7 @@
     {% include ':social:social_share_mobile.html.twig' %}
   {% endif %}
 
-  <div class="show-hide-code">
+  {#<div class="show-hide-code">
     <div class="show-hide-code-text">SHOW CODE</div>
     <div class="show-hide-code-arrow">
       <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
@@ -212,7 +212,7 @@
   </div>
   <div class="codeview-wrapper">
     {{ render(controller('AppBundle:Web/CodeView:viewCode', {'id' : program.id})) }}
-  </div>
+  </div>#}
 
   <div id="program-bottom">
     <div id="icon-author">
