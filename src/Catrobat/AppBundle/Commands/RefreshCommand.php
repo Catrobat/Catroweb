@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Filesystem\Filesystem;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class RefreshCommand extends ContainerAwareCommand
 {
@@ -25,7 +26,7 @@ class RefreshCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('catrobat:refresh')
-    ->setDescription('Refresh all caches and fixtures')
+            ->setDescription('Refresh all caches and fixtures')
 //     ->addArgument('directory', InputArgument::REQUIRED, 'Direcory contaning catrobat files for import')
 //     ->addArgument('user', InputArgument::REQUIRED, 'User who will be the ower of these programs');
       ;
@@ -60,24 +61,15 @@ class RefreshCommand extends ContainerAwareCommand
         $dialog = $this->getHelperSet()->get('dialog');
 
         if ($dialog->askConfirmation($this->output, '<question>Clear Cache (Y/n)? </question>', true)) {
-            $this->executeCommand('cache:clear', array());
+            CommandHelper::executeSymfonyCommand('cache:clear', $this->getApplication(), array(), $this->output);
         }
     }
 
     protected function generateTestdata()
     {
-        $this->executeCommand('catrobat:test:generate', array());
+        CommandHelper::executeSymfonyCommand('catrobat:test:generate', $this->getApplication(), array(), $this->output);
     }
-
-    protected function executeCommand($command, $args)
-    {
-        $command = $this->getApplication()->find($command);
-        $arguments = array('command' => $command);
-        array_merge($arguments, $args);
-        $input = new ArrayInput($arguments);
-        $returnCode = $command->run($this->input, $this->output);
-    }
-
+    
     protected function deleteSqLiteDatabase()
     {
         $database_path = $this->kernel->getRootDir().'/../sqlite/behattest.sqlite';

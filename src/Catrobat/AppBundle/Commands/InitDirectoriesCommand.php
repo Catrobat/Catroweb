@@ -25,12 +25,12 @@ class InitDirectoriesCommand extends Command
 
     protected function configure()
     {
-        $this->setName('catrobat:init:directories')->setDescription('Creates directories needed by the catroweb application');
+        $this->setName('catrobat:init:directories')
+            ->setDescription('Creates directories needed by the catroweb application');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $text = '';
         if ($this->fileystem == null) {
             $output->writeln('Filesystem not initalized');
 
