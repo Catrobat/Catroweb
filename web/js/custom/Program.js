@@ -75,6 +75,11 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         $('#report, #report-cancel').click(function() { $('#report-container').toggle(); });
 
         $('#report-report').click(function() {
+          if($('#reportReason').val() == ''){
+              $('#reportReason').addClass('text-area-empty');
+              return;
+          }
+          $('#reportReason').removeClass('text-area-empty');
           $.get(report_url, {
               program : program_id,
               note : $('#reportReason').val()
