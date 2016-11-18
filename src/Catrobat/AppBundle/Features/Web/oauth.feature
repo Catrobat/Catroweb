@@ -114,5 +114,5 @@ Feature: Open Authentication
     And I click Google login link "once"
     And I wait for the server response
     Then I should be logged in
-    And I am on "/pocketcode/emailEdit"
+    And I am on "/pocketcode/profile"
     Then the "#email" element should contain "pocket-code-tester@gmail.com"
