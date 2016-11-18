@@ -1,59 +1,59 @@
 ---
-localLanguage: anglais
-username: Nom d'utilisateur
-password: Mot de passe
-aboutPocketCode: A propos de Pocket Code
-tutorials: Tutoriels
+localLanguage: Anglès
+username: Usuari
+password: Contrasenya
+aboutPocketCode: Quant a Pocket Code
+tutorials: Tutorials
 googlePlay: Google Play
-passwordsNoMatch: Les mots de passe ne sont pas identiques.
-error: Erreur
-cancel: Annuler
-report: Signaler
-download: Télécharger
-description: Description
-noDescription: Aucune description disponible.
-country: Pays
-loginText: Identifiant
-privacyPolicy: Politique de confidentialité
-imprint: Mentions légales
-somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
-pleaseTryAgain: 'Essayez à nouveau !'
-oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
-more: 'plus'
-less: 'moins'
-ok: OK
-clickToDownloadProgram: 'Pour télécharger le programme d''exemple, cliquez %link_start% ici %link_end%.'
-registrationError: 'Username or email address already in use.'
+passwordsNoMatch: Les contrasenyes no concorden.
+error: Error
+cancel: Cancel·la
+report: Informe
+download: Descarrega com a programa
+description: Descripció
+noDescription: Cap descripció disponible.
+country: País
+loginText: inicia sessió
+privacyPolicy: Política de privacitat
+imprint: Peu d'impremta
+somethingWentWrong: 'Ups... alguna cosa ha anat malament.'
+pleaseTryAgain: 'Torna-ho a intentar!'
+oldVersionError: 'Actualitza a la nova versió de Pocket Code'
+more: 'més'
+less: 'menys'
+ok: Accepta
+clickToDownloadProgram: 'Clica %link_start% aquí %link_end% per descarregar-te el programa d''exemple.'
+registrationError: 'El nom d''usuari o el correu electrònic ja existeixen.'
 programs:
-  featured: A l'affiche
-  newest: Nouveaux programmes
+  featured: Destacats
+  newest: Nous programes
   most:
-    viewed: Les plus populaires
-    downloaded: Les plus téléchargés
-  random: Programmes au hasard
-  related: Programmes apparentés
-  downloads: '%downloads% téléchargements'
-  sample: Exemples de programmes
-  views: '%views% vues'
+    viewed: Més visitats
+    downloaded: Els més descarregats
+  random: Programes a l'atzar
+  related: Programes relacionats
+  downloads: '%downloads% descàrregues'
+  sample: Programes d'exemple
+  views: '%views% vistes'
   submitted: Submitted Programs
-  uploaded: Programmes téléchargés
-  reportAsInappropriate: Signaler comme inapproprié
+  uploaded: Uploaded Programs
+  reportAsInappropriate: Report as inappropriate
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Merci de vous %login% pour signaler ce programme comme étant inapproprié.
-  reportDialogHeader: Pourquoi pensez-vous que ce programme n'est pas approprié ?
-  reportDialogReason: Indiquer un motif
-  reportOwnProgram: Vous ne pouvez pas marquer votre propre programme.
-  reportAlready: Tu as déjà signalé l'appli comme étant inappropriée.
-  reportDone: Vous avez déclaré ce programme comme étant inapproprié !
-  updateAppHeader: Mettre à jour l'application
-  updateAppText: Veuillez mettre à jour votre application pour pouvoir télécharger ce programme.
+  reportLoginText: Please %login% to report this program as inappropriate.
+  reportDialogHeader: Why do you think this program is inappropriate?
+  reportDialogReason: Enter a reason
+  reportOwnProgram: You cannot flag your own program.
+  reportAlready: You've already flagged this program as inappropriate.
+  reportDone: You reported this program as inappropriate!
+  updateAppHeader: Update App
+  updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
-  show_more: Afficher Plus
-  comments: Commentaires
-  send: Envoyer
-  delete: Supprimer
-  report: Signaler
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Delete
+  report: Informe
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
 passwordRecovery:
@@ -71,28 +71,28 @@ passwordRecovery:
     Best regards,
     Your Catrobat Team.
 profile:
-  saveChanges: enregistrer les changements
-  newPass: nouveau mot de passe
-  repeatPass: confirmez le mot de passe
-  firstEmail: Mon premier email
-  secondEmail: Mon deuxième email
-  myPrograms: Mes programmes
+  saveChanges: save changes
+  newPass: new password
+  repeatPass: repeat password
+  firstEmail: My first email
+  secondEmail: My second email
+  myPrograms: My programs
   form:
-    passwordTooShort: Le nouveau mot de passe doit avoir au moins %length% caractères.
-    passwordTooLong: Le nouveau mot de passe peut avoir un maximum de %length% caractères.
-    passwordIsUsername: Le mot de passe doit être différent de l'identifiant.
+    passwordTooShort: The new password must have at least %length% characters.
+    passwordTooLong: The new password can have a maximum of %length% characters.
+    passwordIsUsername: The password must differ from the username.
     passwordWrong: Wrong password
-    emailNotValid: Cette adresse e-mail n'est pas valide.
-    emailMissing: Erreur lors de la mise à jour de cette adresse e-mail. Vous devez avoir au moins une adresse e-mail validée.
-    emailExists: Cette adresse e-mail existe déjà.
-    submitSuccess: enregistré!
-  reallyDeleteProgram: Voulez vous vraiment effacer votre programme
-  programsOf: Programmes de
-  changePicture: Changer l'image
+    emailNotValid: This email address is not valid.
+    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailExists: This email address already exists.
+    submitSuccess: saved!
+  reallyDeleteProgram: Do you really want to delete your program
+  programsOf: Programs of
+  changePicture: Change picture
   avatar:
-    pictureTooLarge: L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo.
-    uploadError: Désolé, il y a eu un problème pendant le téléchargement !
-    noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
+    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
+    uploadError: Sorry, there was a problem during the upload!
+    noSupport: This image type is not supported, please try another image.
 myprofile:
   editProfile: Edit profile
   edit: Edit
@@ -105,62 +105,62 @@ myprofile:
   editCountry: Edit country
   editEmail: Edit E-Mail
 licenseToPlay:
-  link: 'Licence pour jouer'
-  title: 'Licence de jeu - Partagez et créditez'
+  link: 'License to play'
+  title: 'License to play - Give credit and share'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'En savoir plus sur les conditions d''utilisation de la communauté en ligne de Catrobat sur %link-termsOfUse%.'
+  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
-    item1: partagez vos gâteaux avec la recette
-    item2: créditez ceux qui vous ont inspiré
-  version: Version 1.1, 2 avril 2013
+    item1: share your cakes along with the recipe
+    item2: give credit to those who inspired you
+  version: Version 1.1, 2 April 2013
 teachers:
   login:
-    title: 'Espace enseignants'
-    description: 'Cet espace peut être utilisé par les enseignants.'
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
 termsOfUse:
-  title: Conditions d'utilisation
-  headline: Bienvenue dans la communauté Catrobat !
-  text1: 'Dans le cadre de la communauté Catrobat, tu partages des applications et des idées avec des gens :'
-  text2: "Nous avons besoin de ton aide pour créer un endroit favorable pour tous les membres de la communauté. Voici comment tu peux aider :"
-  text3: "Le projet Catrobat cherche à promouvoir la coooperation et la créativité de chacun pour le bien de l'humanité. Tu peux devenir un membre actif de la communauté Catrobat en offrant tes applications à la communauté comme le font autres membres actifs :"
-  text4: 'Un cadeau pour toi :'
-  text5: 'Conditions d''utilisation et d''entretien :'
+  title: Terms of Use
+  headline: Welcome to the Catrobat Community!
+  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
+  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
+  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
+  text4: 'Our gift to you:'
+  text5: 'Our Terms of Use and Service:'
   list1:
-    item1: de beaucoup de pays et cultures diverses
-    item2: de tous les âges (jeunes enfants, adolescents et grands-parents)
-    item3: avec tous les niveaux d'expérience
+    item1: from many different countries and cultures
+    item2: of all ages (from young children to teens and grandparents)
+    item3: with all levels of experience
   list2:
-    item1: Être respectueux. Merci de considérer que tes applications partagés sont accéssible à des personnes de tous les ages avec des expériences différentes.
-    item2: "Reconnaissance. N'hesite pas à modifier les applications des autres - il faut toutefois reconnaître leur travail. Tu peux faire cela dans la description de l'application. Merci de voir le paragraphe en-dessous cette liste pour plus d'informations sur la modification d'applications des autres utilisateurs."
-    item3: "Être honnête. Ne fais pas semblant d'être quelqu'un d'autre et n'essaye pas de tromper la communauté."
-    item4: "Ne partage pas d'informations privées. Notamment l'adesse e-mail, le numéro de téléphone ou d'autres informations de contact."
-    item5: "Contribuer à maintenir le site conviviale. Si tu penses une application ou commentaire trop insultant, méchant, sévère ou autrement inapproprié, clique sur le bouton « signaler comme inapproprié » et explique brièvement pourquoi. L'équipe Catrobat considérera le rapport et supprimera éventuellement l'application, le commentaire ou le message."
+    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
+    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
+    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
+    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
+    item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
-    item1: 'En téléchargeant une appli sur notre site web, tu acceptes de soumettre ton œuvre à une licence libre. Le système Catrobat est aussi disponible sous licence libre, qui permet à chacun de consulter les applications téléchargées par les utilisateurs et de modifier et personnaliser ces applications pour créer des versions nouvelles des jeux, animations ou d''autres applis. Cela permet une collaboration sans limites. Tout le monde peut profiter de ton œuvre et chacun peut l''utiliser et améliorer. C''est un peu comme textes et images mises à disposition sur Wikipedia par des utilisateurs des quatre coins du monde. C''est un cadeau que tu offres à l''humanité: tu donnes à tout le monde et tous les autres qui téléchargent sur le site web donnent aussi leurs œuvres à toi. Ainsi une application téléchargée est un cadeau de grande valeur que son propriétaire t''offre gratuitement pourvue que toi aussi, tu fais comme cela.'
-    item2: Tu n'est pas obligé à accepter ce cadeau, mais si tu veux l'accepter quelques règles s'appliquent. Ces règles te permettent d'utiliser les œuvres des autres et de les améliorer. Ensuite, tu peux télécharger ton appli sur notres site web. Un autre atout d'une licence libre est que tu n'est pas responsable pour les problèmes qui puissent se produire en utilisant tes applis.
-    item3: "Si tu utilises et modifies des applis des autres utilisateurs, il faut les mentionner explicitement. Le nom que tu as sélectionné pour ton compte Catrobat sera aussi mentionné si quelqu'un utilise et modifie tes applis. Ainsi tout le monde peut profiter du travail de chacun."
-    item4: 'Pour les conditions juridiques précises, veuillez consulter %link-licenseUploaded%.'
+    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
+    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
+    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
+    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
   list4:
-    item1: "Nous t'offrons nos applications et ressources Internet liées au système Catrobat comme par exemple des applications créees par l'équipe Catrobat, nos sites webs et ressources disponibles sur Internet, notre code source lié au système Catrobat et des matériaux supplémentaires comme par exemple des images, des sons et des texts maintenant et à l'avenir sous des licences libres de Catrobat."
-    item2: Ces licences nous permettent d'offrir Catrobat gratuitement. Grâce à ces licences, il est aussi possible d'utiliser et de modifier nos applications à ton gré. Il n'y a que quelques restrictions pour assurer que le système Catrobat reste libre et utile pour tout le monde pour toujours.
+    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
+    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
     item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: Si tu as moins de 13 ans, il faut demander tes parents ou ton tuteur légal si tu peux utiliser les logiciels et services Catrobat.
-    item3: "Nous nous réservons le droit de refuser, supprimer ou cacher des applications, des comptes d'utilisateur et tous les matériaux numériques téléchargés vers le site web Catrobat à tout temps à notre discretion, comme par exemple si nous encontrons des logiciels qui contienntent du matériel inapproprié ou si un utilisateur enfreint les droits d'autrui."
-    item4: "Les logiciels et ressources Internet Catrobat ont pour but d'être utiles. Pourtant, nous donnons aucune garantie."
+    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
+    item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
+    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Retourne-ici de temps en temps car nous cherchons toujours à améliorer nos conditions d'utilisation.
+  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 mars 2014
+  version: Version 1.3, 4 March 2014
 help:
   stepByStep:
-    title: "Intro premiers pas"
-    start: "Position de départ :"
+    title: "Step-by-Step Intro"
+    start: "Starting position:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
@@ -169,140 +169,140 @@ help:
     step1:
       title: 'Make a new program'
       detail:
-        text1: 'Appuyer sur  « Nouveau ».'
-        text2: 'Entrer un titre, sélectionner « Créer appli » et appuyer sur  « OK ».'
+        text1: 'Tap on "New".'
+        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
     step2:
       title: "Create a new object"
       detail:
-        text1: 'Appuyer :'
+        text1: 'Tap:'
         text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'Dessiner une nouvelle apparence.'
-        special2: 'Sélectionner dans la galerie.'
-        special3: 'Prendre une photo.'
+        special1: 'Draw a new look.'
+        special2: 'Choose from gallery.'
+        special3: 'Take a picture.'
     step3:
       title: "Start Moving"
       detail:
-        text1: 'Appuyer :'
-        text2: 'Le premier élément utilisé se trouve dans la catégorie  « Mouvement ».'
-        text3: 'Sélectionner l''élément  « Glisser ». L''objet est déplacé vers la nouvelle position définie par l''élément sur la scène.'
-        text4: 'L''élément flotte. Placer l''élément dans la position souhaité pour le coller. Il est aussi possible de déplacer des éléments insérés en appuyant sur l''élément jusqu''à ce qu''il flotte.'
+        text1: 'Tap:'
+        text2: 'The first brick we use is out of the category "Motion".'
+        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: 'Utiliser le bouton Retour Android pour retourner.'
+        text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: "Changer Look"
-      description: "Il est possible de changer l'apparence d'un objet."
+      title: "Change Look"
+      description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Placer l''élément en-dessous l''élément « Glisser » .'
-        text3: 'Appuyer sur le champ de liste déroulante pour créer une nouvelle apparence.'
-        text4: 'Sélectionner la source de l''image comme décrit avant.'
-        text5: 'Sélectionner l''image.'
-        text6: 'Appuyer sur Play pour regarder la scène.'
+        text2: 'Snap the brick underneath the "Glide" - brick.'
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'Now you have to select the new image.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Parler"
-      description: "Faire un objet parler."
+      title: "Speak"
+      description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Plasser l''élément en-dessous l''élément « Passer au style ».'
-        text3: 'Appuyer sur Play pour regarder la scène.'
+        text2: 'Snap the brick underneath the "Switch to look" brick.'
+        text3: 'Tap play to see the behaviour on the stage.'
     step6:
       title: 'Again and again'
-      description: "Les objets en action."
+      description: "This step shows you how to repeat behaviour of objects."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Placer l''élément « Répéter continuellement » en-dessous l''élément « Quand l''application a démarrée ».'
+        text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'Appuyer sur le champ de texte et mettre les valeurs de x et y à 0.'
-        text6: 'Appuyer sur Play pour regarder la scène.'
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step7:
       title: "Tapping is everything"
-      description: 'Il est aussi possible de contrôler les actions d''un objet lorsque l''appli est en cours d''exécution.'
+      description: 'You can also control the behaviour of the object when the program is running on the stage.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'Le script est complet.'
-        text5: 'Appuyer sur play pour regarder les actions. En appuyant l''objet il commence à tourner.'
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
       title: "Copy, delete or edit a brick"
       detail:
-        text1: 'Appuyer sur la gauche de chaque élément pour ouvrir le menu contextuel. L''éditeur de formule permet de déplacer, copier, supprimer ou modifier les valeur de l''élément.'
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
       title: "Navigation in the app"
       detail:
-        text1: 'Utiliser le bouton retour Android pour naviguer dans l''appli.'
-        text2: 'Retourner à l''aperçu de l''objet. D''ici, il est possible d''ouvrir les scripts, les looks et les sons de l''objet. Il est aussi possible de renommer, copier, ajouter ou supprimer les sons. '
-        text3: 'Appuyer encore une fois sur le bouton retour Android pour ouvrir l''aperçu des objets et de l''arrière plan.'
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
       title: "Change the background"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: 'L''arrière-plan est comme un objet mais il n''y a qu''un seul arrière-plan.'
-        text2: 'Il est possible d''ajouter des scripts, sons et looks à l''arrière-plan comme pour les objets.'
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
       title: "Main Menu"
-      description: "Appuyer sur le bouton retour Android pour ouvrir le menu principal."
+      description: "Use the Android Back Button to get to this screen."
       detail:
-        text1: 'Continuer avec l''application actuellement active.'
-        text2: 'Ajouter une nouvelle appli.'
-        text3: 'Afficher toutes les applications locales.'
-        text4: 'Ouvrir l''aide et discuter avec d''autres utilisateurs.'
-        text5: 'Explorer le monde d''applications Pocket Code. Télécharger et rearranger les applications à ton goût.'
-        text6: 'Télécharger l''appli actuellement active.'
+        text1: 'Continue with your currently opened program.'
+        text2: 'Add a new program.'
+        text3: 'See all your local programs.'
+        text4: 'Go to the help site and discuss with other users.'
+        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
+        text6: 'Upload the program that is currently opened.'
   tutorialcards:
-    title: Tutoriels
-    description1: Ce tutoriel te montre comment utiliser les astuces efficacement dans
-    getReady: 'Prépare-toi :'
+    title: Tutorials
+    description1: These tutorials show you how to use effective tricks in Pocket Code.
+    getReady: 'Get Ready:'
     tryCode: 'Try this code:'
-    doIt: 'Fais-le :'
-    tip: 'Tuyau pratique :'
+    doIt: 'Do it:'
+    tip: 'Extra Tip:'
     card1:
-      title: Changer la tailler
-      description: Appuyer sur le canard pour modifier la taille.
+      title: Change Size
+      description: Change the size of an object.
       one: Add the object of which you would like to change the size, e.g. Animal.
       two: Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped.
     card2:
-      title: Changer Look
-      description: Utiliser cette astuce pour compter automatiquement.
+      title: Change Look
+      description: Change the looks of an object.
       one: Add the object of which you would like to change its look, e.g. items.
       two: Include further pictures in the object's looks.
       three: Insert the following bricks into the scripts of the object in order to continually switch it's look after one second.
     card3:
-      title: Animations
-      description: Utiliser cette astuce pour faire voler un perroquet.
+      title: Animation
+      description: Animate objects
       one: Add the object you want to be moving.
       two: Include another picture in the object's looks which illustrates the movement.
       three: Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge.
     card4:
-      title: Glisser
-      description: Glisser d'un point à un autre.
+      title: Glide
+      description: Let your object glide over the screen.
       one: Add the object you want to be gliding. e.g. plane.
       two: Insert the following bricks and define the area in which the movement should happen.
     card5:
-      title: Diffuser des sons
+      title: Play a Sound
       description: Play a sound by tapping on the object.
       one: Add the object you want to be playing a sound, e.g. dog.
       two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
-      title: Parler
-      description: Utiliser le code pour faire un objet parler.
+      title: Speak
+      description: Let your object speak.
       one: Add the object you want to be speaking, e.g. Carrie.
       two: Insert the following bricks in order to make the voice output possible.
     card7:
-      title: Accéléromètre
-      description: Cette astuce permet de contrôler un objet avec l'inclinaison de l'appareil mobile.
+      title: Sensor
+      description: Control an object by using the inclination sensors.
       one: Add the object you want to be moving on stage.
       two: Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.
     card8:
-      title: Boussole
-      description: Utiliser ce code pour programmer une boussole.
+      title: Compass
+      description: Create you own compass
       one: Add the object you want to point in compass direction.
       two: Insert the following bricks in order to set the object's orientation. Additionally include a forever loop.
     card9:
-      title: Diffuser
-      description: Regarde ce code ! Il indique comment les objets peuvent communiquer les uns avec les autres.
+      title: Broadcast
+      description: Send messages from one object to another.
       one: Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look.
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.
@@ -323,19 +323,19 @@ help:
       one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
       two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
   starterPrograms:
-    title: Applications pour débuter
-    description: Essayer les applications pour débuter. Regarder sous le capot pour les modifier et ajouter des idées.
+    title: Starter Programs
+    description: Try out these starter programs. Look inside to make changes and add your ideas.
     categories:
-      games: Jeux
+      games: Games
       animations: Animations
-      interactive: Histoires et Art interactif
+      interactive: Interactive Art and Stories
       music: Music And Dance
   gameJam:
     title: How to upload a Pocket Code game to the Game Jolt Site?
     text0: First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.
     title1: Registration
     text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: Envoyer
+    title2: Upload
     text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
     title3: Search for your program
     text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
@@ -381,24 +381,24 @@ oauth:
   usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Search...
-  search: Rechercher
-  results: Résultats de recherche
+  search: Search
+  results: Search Results
   resultcount: Your search returned %count% results
 menu:
-  profile: Mon profil
-  logout: Déconnexion
+  profile: My Profile
+  logout: Logout
 programLoader:
-  noPrograms: Il n'y à aucun programme pour le moment.
+  noPrograms: There are currently no programs.
 login:
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
-  forgotPass: Identifiants oubliés?
-  recoverPass: Retrouver le mot de passe
-  recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
-  userOrEmail: Nom d'utilisateur ou email
-  changePass: Modifier le mot de passe
+  forgotPass: Forgot password or username?
+  recoverPass: Recover password
+  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  userOrEmail: Username or Email
+  changePass: Change password
   createAccount: Create an account
-  or: OU
+  or: OR
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -421,7 +421,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: Cette adresse e-mail existe déjà.
+    exists: This email address already exists.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
@@ -447,61 +447,61 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
-  registration: Enregistrement réussi.
-  token: OK
-  upload: Votre projet a été envoyé avec succès !
+  registration: Registration successful!
+  token: ok
+  upload: Your project was uploaded successfully!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0}  < il y a 1 minute |{1} il y a 1 minute |]1, Inf] il y a %count% minutes'
-  hours.ago: '{1} il y a 1 heure |]1, Inf] il y a %count% heures'
-  days.ago: '{1} il y a 1 jour |]1, Inf] il y a %count% jours'
-  months.ago: '{1} il y a 1 mois |]1, Inf] il y a %count% mois'
-  years.ago: '{1} il y a 1 an |]1, Inf] il y a plus d''un an'
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
+  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
+  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
+  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
+  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 language:
-  arabic: Arabe
-  bulgarian: Bulgare
+  arabic: Arabic
+  bulgarian: Bulgarian
   catalan: Catalan
-  chinese_simplified_han: Chinois (simplifié Han)
-  chinese_traditional_han: Chinois (traditionnel Han)
-  croatian: Croate
-  czech: Tchèque
-  danish: Danois
-  dutch: Hollandais
-  english_united_kingdom: Anglais (Royaume-Uni)
+  chinese_simplified_han: Chinese (Simplified Han)
+  chinese_traditional_han: Chinese (Traditional Han)
+  croatian: Croatian
+  czech: Czech
+  danish: Danish
+  dutch: Dutch
+  english_united_kingdom: English (United Kingdom)
   english_united_states: English (United States)
-  estonian: Estonien
+  estonian: Estonian
   filipino: Filipino
-  finnish: Finlandais
-  french: Français
-  german: Allemand
-  greek: Grec
-  hebrew: Hébreu
+  finnish: Finnish
+  french: French
+  german: German
+  greek: Greek
+  hebrew: Hebrew
   hindi: Hindi
-  hungarian: Hongrois
-  indonesian: indonésien
-  italian: Italien
-  japanese: Japonais
-  korean: Coréen
-  latvian: Letton
-  lithuanian: Lituanien
-  malay: Malaisien
-  norwegian: Norvégien
-  persian: Perse
-  polish: Polonais
-  portuguese_brazil: Portugais (Brésil)
-  portuguese_portugal: Portugais (Portugal)
-  romanian: Roumain
-  russian: Russe
-  serbian: Serbe
-  slovak: Slovaque
-  slovenian: Slovène
-  spanish_latin_america: Espagnol (Amérique Latine)
-  spanish_spain: Espagnol (Espagne)
-  swedish: Suédois
-  thai: Thaï
-  turkish: Turc
-  ukrainian: Ukrainien
-  vietnamese: Vietnamien
+  hungarian: Hungarian
+  indonesian: Indonesian
+  italian: Italian
+  japanese: Japanese
+  korean: Korean
+  latvian: Latvian
+  lithuanian: Lithuanian
+  malay: Malay
+  norwegian: Norwegian
+  persian: Persian
+  polish: Polish
+  portuguese_brazil: Portuguese (Brazil)
+  portuguese_portugal: Portuguese (Portugal)
+  romanian: Romanian
+  russian: Russian
+  serbian: Serbian
+  slovak: Slovak
+  slovenian: Slovenian
+  spanish_latin_america: Spanish (Latin America)
+  spanish_spain: Spanish (Spain)
+  swedish: Swedish
+  thai: Thai
+  turkish: Turkish
+  ukrainian: Ukrainian
+  vietnamese: Vietnamese
 ci:
   generate: Generate Apk
   pending: Generating Apk
@@ -520,8 +520,8 @@ tag-text: Tags
 extenstion-text: Extensions
 tags:
   constant:
-    tag1: Jeux
-    tag2: Animations
+    tag1: Game
+    tag2: Animation
     tag3: Story
     tag4: Music
     tag5: Art

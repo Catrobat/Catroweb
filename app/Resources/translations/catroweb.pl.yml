@@ -16,14 +16,14 @@ country: Kraj
 loginText: login
 privacyPolicy: Polityka prywatności
 imprint: Stopka
-somethingWentWrong: Ooooops coś poszło nie tak.
-pleaseTryAgain: Spróbuj ponownie!
-oldVersionError: Zaktualizuj do najnowszej wersji Pocket code!
-more: więcej
-less: mniej
+somethingWentWrong: 'Ooooops coś poszło nie tak.'
+pleaseTryAgain: 'Spróbuj ponownie!'
+oldVersionError: 'Zaktualizuj do najnowszej wersji Pocket code!'
+more: 'więcej'
+less: 'mniej'
 ok: OK
 clickToDownloadProgram: 'Aby pobrać przykładowy program kliknij %link_start% tutaj %link_end%.'
-registrationError: Nazwa użytkownika lub adres e-mail jest już zajęty.
+registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
 programs:
   featured: Polecane
   newest: Najnowsze programy
@@ -39,7 +39,7 @@ programs:
   uploaded: Przesłane programy
   reportAsInappropriate: Zgłoś jako niewłaściwe
   languageVersion: 'Wersja języka Catrobat: %languageVersion%'
-  reportLoginText: 'Proszę, %login%, zgłoś ten program jako nieodpowiedni.'
+  reportLoginText: Proszę, %login%, zgłoś ten program jako nieodpowiedni.
   reportDialogHeader: Dlaczego uważasz, że ten program jest niewłaściwy?
   reportDialogReason: Podaj powód
   reportOwnProgram: Nie możesz oflagować własnego programu.
@@ -76,8 +76,8 @@ profile:
   secondEmail: Mój drugi e-mail
   myPrograms: Moje programy
   form:
-    passwordTooShort: 'Nowe hasło musi mieć co najmniej %length% znaków.'
-    passwordTooLong: 'Nowe hasło może mieć maksymalnie %length% znaków.'
+    passwordTooShort: Nowe hasło musi mieć co najmniej %length% znaków.
+    passwordTooLong: Nowe hasło może mieć maksymalnie %length% znaków.
     passwordIsUsername: Hasło musi się różnić od nazwy użytkownika.
     passwordWrong: Niepoprawne hasło
     emailNotValid: Adres e-mail jest nieprawidłowy.
@@ -103,12 +103,12 @@ myprofile:
   editCountry: Edytuj kraj
   editEmail: Edytuj e-mail
 licenseToPlay:
-  link: Licencja na korzystanie
+  link: 'Licencja na korzystanie'
   title: 'Licencja na korzystanie - podziękuj i podziel się'
   text1: Wyobraź sobie program w Catrobat jako ciasteczko, takie specjalne ciasteczko z przepisem (blokami programu). Wszyscy uczestnicy społeczności Catrobat dzielą się tymi ciasteczkami, łącznie z przepisami na nie. Oznacza to, że możesz posmakować ciasteczka i nauczyć się jak je przygotowywać!
   text2: 'Nie ma sekretnych przepisów: instrukcje, jak zrobić ciasteczko są dostępne dla każdego, aby je wykorzystywać, modyfikować i traktować je jako inspirację dla nowych pomysłów... to znaczy ciasteczek.'
-  text3: 'Możesz zjeść ciasteczko możesz też skopiować przepisy innych, aby zrobić własne z nieco innymi składnikami. Ta swoboda pociąga za sobą dwa proste wymagania:'
-  text4: Ustalając reguły dla społeczności Catrobata zdecydowaliśmy się na takie podejście, ponieważ wierzymy, że to pomaga w uczeniu się i kreatywności. Poprzez dzielenie się przepisami i składnikami (skryptami, rysunkami, dźwiękami) ludzie mogą opierać się na pomysłach innych z korzyścią dla wszystkich.
+  text3: "Możesz zjeść ciasteczko możesz też skopiować przepisy innych, aby zrobić własne z nieco innymi składnikami. Ta swoboda pociąga za sobą dwa proste wymagania:"
+  text4: "Ustalając reguły dla społeczności Catrobata zdecydowaliśmy się na takie podejście, ponieważ wierzymy, że to pomaga w uczeniu się i kreatywności. Poprzez dzielenie się przepisami i składnikami (skryptami, rysunkami, dźwiękami) ludzie mogą opierać się na pomysłach innych z korzyścią dla wszystkich."
   text5: Projektując stronę projektu Catrobat włączyliśmy do niej elementy pomagające ludziom dzielić się projektami i wspierać innych. Na stronie każdego programu możesz zawsze pobrać oryginalne skrypty. Jeśli remiksujesz program (modyfikując skrypty, obrazki lub dźwięki i dzieląc się wynikiem), zachęcamy Cię do podziękowań w uwagach do programu i wymienienia osób lub programów, które Cię zainspirowały.
   text6: 'Dowiedz się więcej o warunkach korzystania ze społecznościowej strony projektu Catrobat na %link-termsOfUse%.'
   list1:
@@ -117,14 +117,14 @@ licenseToPlay:
   version: Wersja 1.1, 2 kwietnia 2013
 teachers:
   login:
-    title: Strefa nauczycieli
-    description: Ta strefa może być używana przez nauczycieli.
+    title: 'Strefa nauczycieli'
+    description: 'Ta strefa może być używana przez nauczycieli.'
 termsOfUse:
   title: Warunki użytkowania
   headline: Witaj w społeczności Catrobat!
   text1: 'Jako uczestnik społeczności Catrobat dzielisz się programami i pomysłami z innymi ludźmi:'
-  text2: 'Potrzebujemy Twojej pomocy, aby ta społeczność dawała wsparcie dla każdego jej członka. Oto jak możesz pomóc:'
-  text3: 'Dzięki projektowi Catrobat chcemy wspierać współpracę i umożliwić połączenie kreatywności wszystkich użytkowników na rzecz całej ludzkości. Również Ty możesz zostać aktywnym członkiem społeczności Catrobat oddając swoje programy społeczności jako prezent, w taki sam sposób, jak inni aktywni uczestnicy dają swoje programy Tobie:'
+  text2: "Potrzebujemy Twojej pomocy, aby ta społeczność dawała wsparcie dla każdego jej członka. Oto jak możesz pomóc:"
+  text3: "Dzięki projektowi Catrobat chcemy wspierać współpracę i umożliwić połączenie kreatywności wszystkich użytkowników na rzecz całej ludzkości. Również Ty możesz zostać aktywnym członkiem społeczności Catrobat oddając swoje programy społeczności jako prezent, w taki sam sposób, jak inni aktywni uczestnicy dają swoje programy Tobie:"
   text4: 'Nasz prezent dla Ciebie:'
   text5: 'Nasze warunki użytkowania i korzystania z usługi:'
   list1:
@@ -133,118 +133,119 @@ termsOfUse:
     item3: na wszystkich poziomach doświadczenia
   list2:
     item1: Miej szacunek. Podczas udostępniania programów, pamiętaj proszę, że ludzie z różnych grup wiekowych i środowisk zobaczą Twój wkład.
-    item2: 'Podziękuj. Masz swobodę przerabiania programów innych ludzi - po prostu upewnij się, że składasz im podziękowania. Jednym z miejsc podziękowań jest opis programu. Zobacz ustęp poniżej, wypunktowaną listę szczegółowych informacji na temat modyfikowania programów innych użytkowników.'
-    item3: Zachowaj uczciwość. Nie udawaj, że jesteś kimś innym i nie staraj się oszukać społeczności.
-    item4: Nie ujawniaj informacji osobistych. Nie dziel się swoim adresem e-mail, numerem telefonu lub innymi danymi osobowymi.
-    item5: 'Pomóż zachować witrynę przyjazną. Jeśli czujesz, że inni mogliby odczuć program lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk "Zgłoś jako niewłaściwe" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi Twoje zgłoszenie i może usunąć dowolny program, komentarz lub post.'
+    item2: "Podziękuj. Masz swobodę przerabiania programów innych ludzi - po prostu upewnij się, że składasz im podziękowania. Jednym z miejsc podziękowań jest opis programu. Zobacz ustęp poniżej, wypunktowaną listę szczegółowych informacji na temat modyfikowania programów innych użytkowników."
+    item3: "Zachowaj uczciwość. Nie udawaj, że jesteś kimś innym i nie staraj się oszukać społeczności."
+    item4: "Nie ujawniaj informacji osobistych. Nie dziel się swoim adresem e-mail, numerem telefonu lub innymi danymi osobowymi."
+    item5: "Pomóż zachować witrynę przyjazną. Jeśli czujesz, że inni mogliby odczuć program lub komentarz jako nieprzyjemny, obraźliwy, zbyt agresywny lub w inny sposób nieodpowiedni, po prostu kliknij na przycisk \"Zgłoś jako niewłaściwe\" i zostaw krótkie wyjaśnienie. Zespół Catrobat sprawdzi Twoje zgłoszenie i może usunąć dowolny program, komentarz lub post."
   list3:
     item1: 'Umieszczając program na naszych stronach internetowych, akceptujesz i zgadzasz się na korzystanie z Twojej pracy na wolnych  licencjach dla przesłanych programów Catrobat. Na tych samych wolnych licencjach sam system Catrobat jest dostępny dla Ciebie. Wolne licencje przesłanych programów Catrobat dają każdemu prawo do uczenia się z prac wcześniej przesłanych przez innych, a także dostosowania i remiksownia tych prac, aby budować własne nowe fascynujące gry, animacje i inne programy. To pozwala każdemu "stanąć na barkach kolegów", jednym z nich jesteś Ty! Twoja praca będzie zatem dostępna dla całego świata i wolno z niej będzie wszystkim korzystać, trochę podobnie do tekstów i zdjęć umieszczanych w Wikipedii przez wolontariuszy z całego świata. Potraktuj to jak Twój prezent dla ludzkości: dajesz go każdemu i wszyscy inni, którzy przesyłają swoje prace na nasze strony internetowe dają go Tobie. Dzięki temu umieszczony program jest darem wielkiej wartości, który jego właściciel daje Ci za darmo, pod warunkiem, że uczestniczysz we wspólnocie na tych samych warunkach.'
-    item2: 'Nie musisz przyjąć tego daru; ale jeśli przyjmiesz, obowiązują Cię pewne zasady. Korzyścią płynącą z tych zasad jest to, czego możesz się nauczyć i to że możesz budować nawet ciekawsze rzeczy samemu, aby je następnie, np., ponownie umieścić na naszych stronach internetowych jako własne. Kolejną zaletą jest to, że te licencje zapewniają, że nie ponosisz odpowiedzialności za wszelkie problemy wynikające dla innych  używających twojego programu.'
-    item3: Jeden ważny dodatkowy warunek to uznanie wkładu autorów, na których pracy został oparty Twój projekt. W tym samym czasie będziemy pracować ciężko, żeby Twoja praca została wyraźnie doceniona przez innych, jako Twój wkład, poprzez przypisanie do niego unikatowej nazwy, która została przez Ciebie wybrana do reprezentowania Ciebie w społeczności Catrobat i dając innym możliwość wyrażenia publicznie ich wdzięczności dla Ciebie za to, że Twoja praca jest dostępna dla wszystkich, a w szczególności dla nich.
+    item2: Nie musisz przyjąć tego daru; ale jeśli przyjmiesz, obowiązują Cię pewne zasady. Korzyścią płynącą z tych zasad jest to, czego możesz się nauczyć i to że możesz budować nawet ciekawsze rzeczy samemu, aby je następnie, np., ponownie umieścić na naszych stronach internetowych jako własne. Kolejną zaletą jest to, że te licencje zapewniają, że nie ponosisz odpowiedzialności za wszelkie problemy wynikające dla innych  używających twojego programu.
+    item3: "Jeden ważny dodatkowy warunek to uznanie wkładu autorów, na których pracy został oparty Twój projekt. W tym samym czasie będziemy pracować ciężko, żeby Twoja praca została wyraźnie doceniona przez innych, jako Twój wkład, poprzez przypisanie do niego unikatowej nazwy, która została przez Ciebie wybrana do reprezentowania Ciebie w społeczności Catrobat i dając innym możliwość wyrażenia publicznie ich wdzięczności dla Ciebie za to, że Twoja praca jest dostępna dla wszystkich, a w szczególności dla nich."
     item4: 'Proszę, odwiedź %link-licenseUploaded%, żeby poznać dokładne warunki i terminy prawne.'
   list4:
-    item1: Oferujemy całe nasze oprogramowanie i zasoby internetowe związane z systemem Catrobat, tj. oprogramowanie napisane przez zespół Catrobat, nasze strony internetowe i zasoby internetowe, nasz własny kod źródłowy związany z systemem Catrobat i wszelkie dodatkowe dołączone materiały, takie jak np. zdjęcia, dźwięki i teksty, teraz i w przyszłości dla Ciebie na wolnych licencjach Catrobat.
+    item1: "Oferujemy całe nasze oprogramowanie i zasoby internetowe związane z systemem Catrobat, tj. oprogramowanie napisane przez zespół Catrobat, nasze strony internetowe i zasoby internetowe, nasz własny kod źródłowy związany z systemem Catrobat i wszelkie dodatkowe dołączone materiały, takie jak np. zdjęcia, dźwięki i teksty, teraz i w przyszłości dla Ciebie na wolnych licencjach Catrobat."
     item2: Te licencje czynią wszystkie części Catrobat zarówno wolnymi od opłat, jak również wolnymi w sensie swobody korzystania z nich, jak tylko chcesz, z kilkoma tylko ograniczeniami zapewniającymi, między innymi, że system Catrobat zawsze pozostanie wolny i użyteczny dla wszystkich.
     item3: 'Aby poznać dokładne warunki i zasady prawne, skorzystaj z %link-licenseToPlay%. Kod źródłowy systemu Catrobat, a także wiele innych dokumentów oraz zasoby, są dostępne za pośrednictwem %link-developer%.'
   list5:
     item1: 'Jeśli jesteś związany (lub Twoi rodzice lub opiekunowie prawni są związani, jeśli jesteś w wieku poniżej 13 lat) z organizacją zajmującą się odpowiedzialnością za naruszenia prywatności  i/lub masową inwigilację, wtedy nie wolno Ci korzystać z naszej aplikacji i dostępu do naszych usług. Dokładne szczegóły tego ograniczenia i pewne wyjątki są określone w sekcjach 4.a i 4.b na naszych %link-termsOfUse%.'
     item2: Jeśli jesteś w wieku poniżej 13 lat, to musisz zapytać rodziców lub opiekunów prawnych, czy pozwalają Ci używać aplikacji i usług Catrobat.
-    item3: Zastrzegamy sobie prawo do odrzucenia, usunięcia lub ukrycia programów, kont użytkowników i wszelkich materiałów cyfrowych przesłanych na strony internetowe Catrobat w dowolnym czasie według własnego uznania, na przykład, jeśli zauważymy, że program zawiera nieodpowiednie materiały lub użytkownik narusza prawa innych osób.
-    item4: 'Całe oprogramowanie i zasoby internetowe Catrobat  są oferowane w nadziei, że będą one przydatne, ale bez jakiejkolwiek gwarancji.'
+    item3: "Zastrzegamy sobie prawo do odrzucenia, usunięcia lub ukrycia programów, kont użytkowników i wszelkich materiałów cyfrowych przesłanych na strony internetowe Catrobat w dowolnym czasie według własnego uznania, na przykład, jeśli zauważymy, że program zawiera nieodpowiednie materiały lub użytkownik narusza prawa innych osób."
+    item4: "Całe oprogramowanie i zasoby internetowe Catrobat  są oferowane w nadziei, że będą one przydatne, ale bez jakiejkolwiek gwarancji."
     item5: 'Po precyzyjne sformułowania powyższych punktów oraz niektóre dodatkowe warunki prawne, zajrzyj do naszego %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.'
   bottom1: Zajrzyj tutaj z powrotem od czasu do czasu, ponieważ zawsze staramy się poprawić nasze warunki korzystania z serwisu.
   bottom2: 'Proszę, kieruj sugestie dotyczące niniejszych warunków użytkowania na  %email-webmaster%.'
   version: Wersja 1.3, 4 marca 2014
 help:
   stepByStep:
-    title: Wprowadzenie krok po kroku
-    start: 'Pozycja wyjściowa:'
-    description: Tutaj możesz utworzyć swój pierwszy program, pocztówkę interaktywną, korzystając z następujących filmów instruktażowych. Postępuj zgodnie z instrukcjami. Podczas tworzenia pocztówki poznasz podstawy Pocket Code, które będą potrzebne do kolejnych projektów. Dzięki tym filmom instruktażowym zdobędziesz większą swobodę podczas tworzenia własnych projektów w Pocket Code.
+    title: "Wprowadzenie krok po kroku"
+    start: "Pozycja wyjściowa:"
+    description: |
+      Tutaj możesz utworzyć swój pierwszy program, pocztówkę interaktywną, korzystając z następujących filmów instruktażowych. Postępuj zgodnie z instrukcjami. Podczas tworzenia pocztówki poznasz podstawy Pocket Code, które będą potrzebne do kolejnych projektów. Dzięki tym filmom instruktażowym zdobędziesz większą swobodę podczas tworzenia własnych projektów w Pocket Code.
     step1:
-      title: Stwórz nowy program
+      title: 'Stwórz nowy program'
       detail:
         text1: 'Naciśnij na "Nowy".'
         text2: 'Wprowadź nazwę programu, wybierz "Utwórz pusty program" i naciśnij "OK".'
     step2:
-      title: Utwórz nowy obiekt
+      title: "Utwórz nowy obiekt"
       detail:
         text1: 'Naciśnij:'
-        text2: Wybierz źródło początkowego wyglądu Twojego nowego obiektu.
+        text2: 'Wybierz źródło początkowego wyglądu Twojego nowego obiektu.'
         text3: 'Wpisz nazwę obiektu i naciśnij "OK", aby utworzyć obiekt.'
-        special1: Narysuj nowy wygląd.
-        special2: Wybierz z galerii.
-        special3: Zrób zdjęcie.
+        special1: 'Narysuj nowy wygląd.'
+        special2: 'Wybierz z galerii.'
+        special3: 'Zrób zdjęcie.'
     step3:
-      title: Rozpocznij ruch
+      title: "Rozpocznij ruch"
       detail:
         text1: 'Naciśnij:'
         text2: 'Pierwszy blok, którego używamy jest z kategorii "Ruch".'
         text3: 'Wybierz blok "Leć". Obiekt przesunie się na scenie do nowej pozycji zdefiniowanej w bloku.'
-        text4: Teraz blok wisi. Aby go umieścić, przesuń blok na wybrane miejsce. Możesz też przesunąć istniejące bloki przez ich naciśnięcie, aż zostaną zawieszone.
+        text4: 'Teraz blok wisi. Aby go umieścić, przesuń blok na wybrane miejsce. Możesz też przesunąć istniejące bloki przez ich naciśnięcie, aż zostaną zawieszone.'
         text5: 'Naciśnij "Play", aby przejść do sceny i zobaczyć poruszający się obiekt.'
-        text6: Użyj przycisku wstecz Androida, aby wrócić ze sceny.
+        text6: 'Użyj przycisku wstecz Androida, aby wrócić ze sceny.'
     step4:
-      title: Zmień wygląd
-      description: Możesz zmienić wygląd swojego obiektu.
+      title: "Zmień wygląd"
+      description: "Możesz zmienić wygląd swojego obiektu."
       detail:
         text1: 'Wybierz blok "Zmień na wygląd". Za pomocą tego bloku możesz wybrać wygląd lub utworzyć nowy.'
         text2: 'Umieść blok pod blokiem "Leć".'
-        text3: Naciśnij pole rozwijanej listy (trójkącik), aby utworzyć nowy wygląd.
-        text4: Wybierz źródło obrazu, podobnie jak przedtem.
-        text5: Teraz musisz wybrać (lub utworzyć) nowy obraz.
-        text6: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.
+        text3: 'Naciśnij pole rozwijanej listy (trójkącik), aby utworzyć nowy wygląd.'
+        text4: 'Wybierz źródło obrazu, podobnie jak przedtem.'
+        text5: 'Teraz musisz wybrać (lub utworzyć) nowy obraz.'
+        text6: 'Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.'
     step5:
-      title: Powiedz
-      description: Teraz dowiesz się jak spowodować, żeby obiekt zaczął mówić.
+      title: "Powiedz"
+      description: "Teraz dowiesz się jak spowodować, żeby obiekt zaczął mówić."
       detail:
         text1: 'Wybierz blok "Powiedz". Obiekt mówi tekst, gdy ten blok jest wykonywany.'
         text2: 'Przyczep blok pod blokiem "Przełącz się na wygląd".'
-        text3: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.
+        text3: 'Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.'
     step6:
-      title: Znowu i znowu
-      description: Ten krok pokazuje, jak można powtarzać zachowanie się obiektów.
+      title: 'Znowu i znowu'
+      description: "Ten krok pokazuje, jak można powtarzać zachowanie się obiektów."
       detail:
         text1: 'Wybierz blok "Zawsze". Wszystko w pętli będzie nieustannie powtarzane.'
         text2: 'Przyczep blok "Zawsze" pod blokiem "Gdy program startuje".'
         text3: 'Dodaj kolejny blok "Leć".'
-        text4: Przyczep blok “Leć” ponad blokiem “Koniec pętli”.
+        text4: 'Przyczep blok “Leć” ponad blokiem “Koniec pętli”.'
         text5: 'Wybierz w polu tekstowym wartości  x i y i ustaw je na 0.'
-        text6: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.
+        text6: 'Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie.'
     step7:
-      title: Naciskanie jest wszystkim
-      description: Możesz również kontrolować zachowanie obiektu, gdy program już działa na scenie.
+      title: "Naciskanie jest wszystkim"
+      description: 'Możesz również kontrolować zachowanie obiektu, gdy program już działa na scenie.'
       detail:
         text1: 'Wybierz blok "Kiedy naciśnięty". Każdy blok umieszczony pod nim zostanie raz wykonany, gdy naciśniesz obiekt na scenie.'
         text2: 'Umieść blok "Kiedy naciśnięty" pod innymi blokami.'
         text3: 'Wybierz blok "Obróć w prawo" i umieść go pod blokiem "Kiedy naciśnięty".'
-        text4: Teraz masz ten skrypt.
-        text5: Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie. Jeśli teraz naciśniesz obiekt, to on się zakręci.
+        text4: 'Teraz masz ten skrypt.'
+        text5: 'Naciśnij odtwarzanie, aby zobaczyć co się dzieje na scenie. Jeśli teraz naciśniesz obiekt, to on się zakręci.'
     step8:
-      title: Kopiowanie, usuwanie lub edycja bloku
+      title: "Kopiowanie, usuwanie lub edycja bloku"
       detail:
-        text1: Pojedyncze naciśnięcie każdego bloku po lewej stronie otwiera jego menu kontekstowe. Stąd możesz przesuwać, kopiować, usuwać lub edytować wartości bloku wykorzystując edytor formuł.
+        text1: 'Pojedyncze naciśnięcie każdego bloku po lewej stronie otwiera jego menu kontekstowe. Stąd możesz przesuwać, kopiować, usuwać lub edytować wartości bloku wykorzystując edytor formuł.'
     step9:
-      title: Nawigacja po aplikacji
+      title: "Nawigacja po aplikacji"
       detail:
-        text1: Użyj przycisku Cofnij systemu Android, aby nawigować po aplikacji.
-        text2: Cofnij o jeden ekran, aby przejrzeć swój obiekt. Stąd możesz przejść do skryptów, a także do reprezentacji wyglądów i dźwięków obiektu. W tym miejscu możesz zmienić nazwę, skopiować, dodać lub usunąć wyglądy i dźwięki.
-        text3: Użyj ponownie przycisku Cofnij systemu Android, aby uzyskać omówienie obiektów i tła.
+        text1: 'Użyj przycisku Cofnij systemu Android, aby nawigować po aplikacji.'
+        text2: 'Cofnij o jeden ekran, aby przejrzeć swój obiekt. Stąd możesz przejść do skryptów, a także do reprezentacji wyglądów i dźwięków obiektu. W tym miejscu możesz zmienić nazwę, skopiować, dodać lub usunąć wyglądy i dźwięki.'
+        text3: 'Użyj ponownie przycisku Cofnij systemu Android, aby uzyskać omówienie obiektów i tła.'
     step10:
-      title: Zmiana tła
-      description: To jest przegląd obiektów i tła Twojego programu.
+      title: "Zmiana tła"
+      description: "To jest przegląd obiektów i tła Twojego programu."
       detail:
-        text1: Tło jest też obiektem, ale można mieć tylko jedno tło.
-        text2: Do obiektu tło można dodać skrypty, dźwięki i wyglądy w ten sam sposób.
+        text1: 'Tło jest też obiektem, ale można mieć tylko jedno tło.'
+        text2: 'Do obiektu tło można dodać skrypty, dźwięki i wyglądy w ten sam sposób.'
     step11:
-      title: Menu główne
-      description: Użyj przycisku wstecz Androida, aby dostać się do tego ekranu.
+      title: "Menu główne"
+      description: "Użyj przycisku wstecz Androida, aby dostać się do tego ekranu."
       detail:
-        text1: Kontynuuj pracę z obecnie otwartym programem.
-        text2: Dodaj nowy program.
-        text3: Zobacz wszystkie lokalne programy.
-        text4: Przejdź do witryny Pomoc i podyskutuj z innymi użytkownikami.
-        text5: Poznaj świat programów Pocket Code. Pobierz za darmo i remiksuj programy, które lubisz.
-        text6: Wyślij program, który jest obecnie otwarty.
+        text1: 'Kontynuuj pracę z obecnie otwartym programem.'
+        text2: 'Dodaj nowy program.'
+        text3: 'Zobacz wszystkie lokalne programy.'
+        text4: 'Przejdź do witryny Pomoc i podyskutuj z innymi użytkownikami.'
+        text5: 'Poznaj świat programów Pocket Code. Pobierz za darmo i remiksuj programy, które lubisz.'
+        text6: 'Wyślij program, który jest obecnie otwarty.'
   tutorialcards:
     title: Poradniki
     description1: Te poradniki pokazują, jak stosować skuteczne triki w
@@ -256,7 +257,7 @@ help:
       title: Zmień wielkość
       description: Zmień rozmiar obiektu.
       one: Dodaj obiekt, którego rozmiar chcesz zmienić, np. zwierzę.
-      two: 'Wstaw następujące bloczki do skryptów obiektu w celu zmniejszenia go (o 20% oryginalnego rozmiaru) gdy zostanie dotknięty.'
+      two: Wstaw następujące bloczki do skryptów obiektu w celu zmniejszenia go (o 20% oryginalnego rozmiaru) gdy zostanie dotknięty.
     card2:
       title: Zmień wygląd
       description: Zmieniaj wygląd obiektu.
@@ -268,11 +269,11 @@ help:
       description: Animuj obiekty
       one: Dodaj obiekt, który ma się poruszać.
       two: Dołącz kolejny obrazek w wyglądzie obiektu, który zobrazuje ruch.
-      three: 'Wstaw następujące bloczki do skryptu obiektu, aby nieustannie co pewien czas zmieniać wygląd i położenie obiektu. Dodatkowo możesz sprawić, że ptak nie wyleci ze sceny używając klocka "jeśli na brzegu, odbij się".'
+      three: Wstaw następujące bloczki do skryptu obiektu, aby nieustannie co pewien czas zmieniać wygląd i położenie obiektu. Dodatkowo możesz sprawić, że ptak nie wyleci ze sceny używając klocka "jeśli na brzegu, odbij się".
     card4:
       title: Leć
       description: Spraw żeby obiekt przemieścił się płynnie z jednego punktu do innego.
-      one: 'Dodaj obiekt, który ma latać lub ślizgać się - np. samolot.'
+      one: Dodaj obiekt, który ma latać lub ślizgać się - np. samolot.
       two: Wstaw następujące bloczki i określ czas lotu oraz miejsce, do którego obiekt ma zmierzać.
     card5:
       title: Odtwórz dźwięk
@@ -288,34 +289,34 @@ help:
       title: Czujnik nachylenia
       description: Steruj obiektem za pomocą przechylania swojego urządzenia.
       one: Dodaj obiekt, którym chcesz poruszać na scenie.
-      two: 'Wstaw poniższe bloczki w celu kontrolowania obiektu za pośrednictwem czujników telefonu. Dlatego należy wybrać "nachylenie x i y". Aby uzyskać odpowiedni ruch, ustaw "- nachylenie". Jeśli ruchy obiektu są zbyt gwałtowne, należy podzielić nachylenie na przykład przez 10.'
+      two: Wstaw poniższe bloczki w celu kontrolowania obiektu za pośrednictwem czujników telefonu. Dlatego należy wybrać "nachylenie x i y". Aby uzyskać odpowiedni ruch, ustaw "- nachylenie". Jeśli ruchy obiektu są zbyt gwałtowne, należy podzielić nachylenie na przykład przez 10.
     card8:
       title: Kompas
       description: Stwórz swój własny kompas
       one: Dodaj obiekt, który ma być igłą kompasu.
-      two: 'Wstaw następujące bloczki, aby igła kompasu ustawiła się odpowiednio. Dodatkowo użyj pętli "zawsze".'
+      two: Wstaw następujące bloczki, aby igła kompasu ustawiła się odpowiednio. Dodatkowo użyj pętli "zawsze".
     card9:
       title: Nadaj
       description: Spójrz na ten kod! To pokazuje, jak obiekty mogą się komunikować.
       one: Dodaj nowy obiekt, na przykład Alicję, która powinna wysłać wiadomość. Dodatkowo, dodaj drugie tło do wyglądów tła. Jak tylko tło odbierze komunikat, zmieni się jego wygląd.
-      two: 'Wstaw bloczek "Nadaj do wszystkich" i ustal, co powinno się wydarzyć, gdy inny obiekt otrzyma wiadomość.'
+      two: Wstaw bloczek "Nadaj do wszystkich" i ustal, co powinno się wydarzyć, gdy inny obiekt otrzyma wiadomość.
       three: W tym przypadku, tło zmienia się, kiedy zostanie dotknięty obiekt na pierwszym planie.
     card10:
       title: Pokaż zmienną
       description: Pokaż wartość zmiennej.
-      one: 'Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które należy zmieni się po odebraniu wiadomości.'
+      one: Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które należy zmieni się po odebraniu wiadomości.
       two: Wstaw poniższe bloczki, aby w zmiennych zapisać aktualne współrzędne położenia x i y poruszającego się obiektu.
-      three: 'Poprzez "Pokaż zmienną" można wyświetlać wartości w wybranym miejscu na scenie.'
+      three: Poprzez "Pokaż zmienną" można wyświetlać wartości w wybranym miejscu na scenie.
     card11:
       title: Wykrywanie kolizji
       description: Wykrywanie kolizji między dwoma obiektami.
-      one: 'Dodaj dwa obiekty, z których jeden powinien być poruszany za pomocą czujników telefonu, np. Alex (zobacz %tutorial_card_link_7% samouczek 7 %link_end%).'
-      two: 'Zapisz bieżącą "pozycję x i y" poruszającego się obiektu Alex (zobacz %tutorial_card_link_10% samouczek 10 %link_end%) i wstaw następujące skrypty. Zawsze sprawdzaj, czy dwa obiekty nakładają się na siebie. Jeśli tak się stanie, obiekty powinny zostać ukryte.'
+      one: Dodaj dwa obiekty, z których jeden powinien być poruszany za pomocą czujników telefonu, np. Alex (zobacz %tutorial_card_link_7% samouczek 7 %link_end%).
+      two: Zapisz bieżącą "pozycję x i y" poruszającego się obiektu Alex (zobacz %tutorial_card_link_10% samouczek 10 %link_end%) i wstaw następujące skrypty. Zawsze sprawdzaj, czy dwa obiekty nakładają się na siebie. Jeśli tak się stanie, obiekty powinny zostać ukryte.
     card12:
       title: Wykrywanie twarzy
       description: Kontrola obiektu za pomocą wykrywania twarzy.
       one: Najpierw upewnij się, że bloczki wykrywania twarzy są włączone. W związku z tym przejdź do ustawień.
-      two: 'Dodaj nowy obiekt i wstaw następujące bloczki, aby pokazać go, jeśli aparat wykryje twarz. Umieść, "jeśli twarz jest wykryta" i umieścić to w pętli "zawsze". Jeśli aparat wykrywa twarz zmienna przyjmuje wartość "Prawda", w przeciwnym razie - "Fałsz".'
+      two: Dodaj nowy obiekt i wstaw następujące bloczki, aby pokazać go, jeśli aparat wykryje twarz. Umieść, "jeśli twarz jest wykryta" i umieścić to w pętli "zawsze". Jeśli aparat wykrywa twarz zmienna przyjmuje wartość "Prawda", w przeciwnym razie - "Fałsz".
   starterPrograms:
     title: Programy na start
     description: Poznaj te programy na start. Zajrzyj do środka, żeby coś zmienić i dodać swoje pomysły.
@@ -326,43 +327,39 @@ help:
       music: Muzyka i taniec
   gameJam:
     title: Jak wgrać grę Pocket Code na stronę Game Jolt?
-    text0: 'Po pierwsze gratulujemy Ci stworzenia nowej gry! Teraz możesz przesłać ją na %link%, aby utworzyć samodzielną aplikację na Android, którą następnie można przesyłać na stronę Game Jolt.'
+    text0: Po pierwsze gratulujemy Ci stworzenia nowej gry! Teraz możesz przesłać ją na %link%, aby utworzyć samodzielną aplikację na Android, którą następnie można przesyłać na stronę Game Jolt.
     title1: Rejestracja
-    text1: "Najpierw musisz utworzyć konto. Następnie będziesz mógł przesłać stworzony program. Nie martw się, to proste: wystarczy wymyślić nazwę użytkownika i hasło. Po wypełnieniu obu, kliknij na 'Zaloguj albo zarejestruj się'. I gotowe!"
+    text1: 'Najpierw musisz utworzyć konto. Następnie będziesz mógł przesłać stworzony program. Nie martw się, to proste: wystarczy wymyślić nazwę użytkownika i hasło. Po wypełnieniu obu, kliknij na ''Zaloguj albo zarejestruj się''. I gotowe!'
     title2: Wyślij
     text2: 'Po zakończeniu procesu rejestracji będziesz mógł przesłać swoją grę. Wymyśl nazwę i dodaj opis - nie zapomnij dodać #Alicejam150 do opisu.'
     title3: Wyszukaj swój program
     text3: Przejdź do swojego profilu Pocket Code, gdzie znajduje się lista twoich programów, lub znajdź swój program za pomocą wyszukiwarki.
     title4: Stwórz aplikację na Android
-    text4: 'Na stronie szczegółów Twojego programu możesz stworzyć aplikację dla systemu Android (.apk). Klikając na przycisk "Przygotuj aplikację" zostanie ona wygenerowana.'
+    text4: Na stronie szczegółów Twojego programu możesz stworzyć aplikację dla systemu Android (.apk). Klikając na przycisk "Przygotuj aplikację" zostanie ona wygenerowana.
     title5: Pobierz aplikację
-    text5: 'Po wygenerowaniu aplikacji możesz pobrać swój program. Żeby uczestniczyć w %link%, pobrany plik musi być ponownie przesłany bezpośrednio na Game Jolt Site.'
+    text5: Po wygenerowaniu aplikacji możesz pobrać swój program. Żeby uczestniczyć w %link%, pobrany plik musi być ponownie przesłany bezpośrednio na Game Jolt Site.
     title6: Zarejestruj się/zaloguj na GameJolt.com
-    text6: "Odwiedź %link% i kliknij na 'Zaloguj się' lub 'Zarejestruj się!' w menu. Jeśli masz już konto wystarczy zalogować się. Jeśli nie, musisz zarejestrować się, podając e-mail, nazwę użytkownika i hasło."
+    text6: Odwiedź %link% i kliknij na 'Zaloguj się' lub 'Zarejestruj się!' w menu. Jeśli masz już konto wystarczy zalogować się. Jeśli nie, musisz zarejestrować się, podając e-mail, nazwę użytkownika i hasło.
     title7: Prześlij swoją grę na stronę Game Jolt
-    text7: |-
-      Po zalogowaniu przejdź do swojego panelu. Możesz tam dodać swoją grę. Najpierw kliknij na 'Zaakceptuj zasady'. Następnie Wypełnij informacje dotyczące gry. Jako narzędzie do Silnik/Język/Tworzenie wybierz opcję "Inne" i dodaj do pola "Inne" Silnik/Język/Narzędzie 'Android'. Zaznacz pole "Rozwój" jako "Gotowe/Stabilne'. Upewnij się, czy masz #AliceJam150 w opisie, tak żeby pojawiła się na stronie %link%.
-    text7_1: |-
-      Zanim będzie można opublikować grę, należy wykonać następujące kroki. Należy dodać obraz miniatury, ustawić 'Klasyfikację wiekową' i przesłać swoje gry klikając na "pliki kompilacji".
-    text7_2: "Kliknij na 'Dodaj pakiet' i wypełnij pakiet informacyjny. Zapisz i dodaj nową wersję. "
+    text7: 'Po zalogowaniu przejdź do swojego panelu. Możesz tam dodać swoją grę. Najpierw kliknij na ''Zaakceptuj zasady''. Następnie Wypełnij informacje dotyczące gry. Jako narzędzie do Silnik/Język/Tworzenie wybierz opcję "Inne" i dodaj do pola "Inne" Silnik/Język/Narzędzie ''Android''. Zaznacz pole "Rozwój" jako "Gotowe/Stabilne''. Upewnij się, czy masz #AliceJam150 w opisie, tak żeby pojawiła się na stronie %link%.'
+    text7_1: Zanim będzie można opublikować grę, należy wykonać następujące kroki. Należy dodać obraz miniatury, ustawić 'Klasyfikację wiekową' i przesłać swoje gry klikając na "pliki kompilacji".
+    text7_2: Kliknij na 'Dodaj pakiet' i wypełnij pakiet informacyjny. Zapisz i dodaj nową wersję. 
     text7_3: Teraz możesz przesłać APK Twojego programu. Możesz znaleźć pobraną aplikację w folderze Pobrane. Najlepiej użyć eksploratora danych (np. ES File Explorer).
-    text7_4: "Uwaga: Jeśli aplikacji brakuje rozszerzenia '.apk', trzeba dodać '.apk' ręcznie. Wystarczy zmienić nazwę pliku. Teraz będziesz w stanie go przesłać."
-    text7_5: "Po wysyłania kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry."
+    text7_4: 'Uwaga: Jeśli aplikacji brakuje rozszerzenia ''.apk'', trzeba dodać ''.apk'' ręcznie. Wystarczy zmienić nazwę pliku. Teraz będziesz w stanie go przesłać.'
+    text7_5: Po wysyłania kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry.
     text7_6: Przesłałeś swoją pierwszą grę na stronę Game Jolt i ustawiłeś ją jako aktywną. Gratulacje!
-    text7_7: 'Teraz inni ludzie będą mogli znaleźć Twoją grę i pojawi się ona na stronie %link%.'
+    text7_7: Teraz inni ludzie będą mogli znaleźć Twoją grę i pojawi się ona na stronie %link%.
   aliceGameJamTutorialcards:
     title1: Witaj w Krainie Czarów
-    subtitle1: 'Ożyw bohaterów i stwórz wydarzenie za pomocą "kiedy dotknięto"'
-    description1: |
-      Nauczysz się jak ożywić jednego z twoich bohaterów tworząc prostą animację i jak sprawić by twoje postacie coś zrobiły, gdy dotkniesz je. Film pokazuje jak łatwo można ożywić swoją postać stosując różne wyglądy.
-      Ponadto pokażemy Ci, jak stworzyć wydarzenie za pomocą "Kiedy dotknięto" i jak wysyłać wiadomości między obiektami.
+    subtitle1: Ożyw bohaterów i stwórz wydarzenie za pomocą "kiedy dotknięto"
+    description1: "Nauczysz się jak ożywić jednego z twoich bohaterów tworząc prostą animację i jak sprawić by twoje postacie coś zrobiły, gdy dotkniesz je. Film pokazuje jak łatwo można ożywić swoją postać stosując różne wyglądy.\nPonadto pokażemy Ci, jak stworzyć wydarzenie za pomocą \"Kiedy dotknięto\" i jak wysyłać wiadomości między obiektami."
     title2: Uratuj Alicję!
     subtitle2: Użyj czujników nachylenia i wykrywania kolizji pomiędzy obiektami
     description2: Tutaj dowiesz się, jak kontrolować postać za pomocą czujników nachylenia telefonu. Możesz kontrolować ruch Alicji przez przechylanie telefonu w lewo lub w prawo. Zobacz nasz poradnik i spraw, aby przedmioty spadały z nieba losowo oraz uzyskaj doświadczenie w wykrywaniu kolizji między obiektami.
-    title3: 'Kapelusznik - trafiaj i jedź'
+    title3: Kapelusznik - trafiaj i jedź
     subtitle3: Stwórz ruchomy krajobraz i steruj ruchem Kapelusznika
     description3: W tym poradniku dowiesz się jak stworzyć krajobraz, który wygląda na ruchomy. Zrobimy to poprzez przesuwanie obiektów wzdłuż ekranu, aby stworzyć iluzję ruchu. Zobaczymy, jak poruszać Kapelusznikiem przez przechylanie telefonu.
-    title4: 'Kapelusznik - Jedź i Strzelaj'
+    title4: Kapelusznik - Jedź i Strzelaj
     subtitle4: Niech Kapelusznik zestrzeli złe karty
     description4: W tym poradniku pokażemy, jak stworzyć wrogów, którzy poruszają się losowo w kierunku Twojej postaci. Ponadto dowiesz się, jak sprawić, by Kapelusznik strzelał kroplami herbaty i jak sprawdzić, czy wrogowie zostali trafieni za pomocą wykrywania kolizji.
     title5: Walnij Kota z Cheshire
@@ -381,7 +378,7 @@ search:
   dotdotdot: Szukaj...
   search: Szukaj
   results: Wyniki wyszukiwania
-  resultcount: 'Znaleziono %count% wyników wyszukiwania'
+  resultcount: Znaleziono %count% wyników wyszukiwania
 menu:
   profile: Mój profil
   logout: Wyloguj się
@@ -399,9 +396,9 @@ login:
   or: lub
 apk:
   download: Pobierz aplikację
-  prepare: Przygotuj apkę
-  preparing: Przygotuj aplikację
-  text: Proces może chwilę potrwać
+  prepare: 'Przygotuj apkę'
+  preparing: 'Przygotuj aplikację'
+  text: 'Proces może chwilę potrwać'
 errors:
   username:
     blank: Nazwa użytkownika nie może być pusta
@@ -421,7 +418,7 @@ errors:
     invalid: Twój e-mail wydaje się być nieprawidłowy
     exists: Ten adres e-mail już istnieje.
   id:
-    blank: 'Pole "Otwórz ID uwierzytelniające" nie może być puste'
+    blank: Pole "Otwórz ID uwierzytelniające" nie może być puste
   login: Hasło lub nazwa użytkownika była nieprawidłowa.
   post-data: POST-Data niepoprawne lub brak!
   checksum:
@@ -441,9 +438,9 @@ errors:
   program:
     invalid: Nieprawidłowy program.
   languageversion:
-    tooold: Przepraszamy, Twój program zawiera starą wersję języka Catrobat! Czy używasz najnowszej wersji Pocket Code?
+    tooold: 'Przepraszamy, Twój program zawiera starą wersję języka Catrobat! Czy używasz najnowszej wersji Pocket Code?'
   programversion:
-    tooold: Przepraszamy, używasz starej wersji Pocket Code. Proszę, zaktualizuj do najnowszej wersji.
+    tooold: 'Przepraszamy, używasz starej wersji Pocket Code. Proszę, zaktualizuj do najnowszej wersji.'
 success:
   registration: Rejestracja udana!
   token: OK
@@ -506,12 +503,13 @@ ci:
   download: Pobierz APK
 gamejam:
   nojam: Przepraszamy, w tym czasie nie odbywa się żaden game jam
-  submit: 'Prześlij do %gamejamname%'
-  whats: 'Co to jest %gamejamname%?'
+  submit: Prześlij do %gamejamname%
+  whats: Co to jest %gamejamname%?
   submitown:
     header: pamiętaj
     subheader: Możesz przesłać tylko własne programy
-    text: 'Ale dlaczego nie stworzysz swojego własnego? Weź udział w %gamejamtag%'
+    text: |
+      Ale dlaczego nie stworzysz swojego własnego? Weź udział w %gamejamtag%
 tag-text: Tagi
 extenstion-text: Dodatki
 tags:

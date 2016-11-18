@@ -16,14 +16,14 @@ country: ملک
 loginText: لاگ آن
 privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
-somethingWentWrong: اف، کچھ غلط ہوگیا۔.
-pleaseTryAgain: برائے مہربانی دوبارہ کوشش کریں!
-oldVersionError: برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!
-more: مزید
-less: کم
+somethingWentWrong: 'اف، کچھ غلط ہوگیا۔.'
+pleaseTryAgain: 'برائے مہربانی دوبارہ کوشش کریں!'
+oldVersionError: 'برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!'
+more: 'مزید'
+less: 'کم'
 ok: ٹھيک ہے
 clickToDownloadProgram: 'نمونے کے پروگرام کو ڈاؤن لوڈ کرنے کے لئے %link_start% یہاں %link_end% کلک کریں۔.'
-registrationError: صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔
+registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
@@ -39,7 +39,7 @@ programs:
   uploaded: اپ لوڈ شدہ پروگرام
   reportAsInappropriate: رپورٹ غیرموزوں ہے
   languageVersion: 'کاٹروبٹ زبان ورژن: %languageVersion%'
-  reportLoginText: 'برائے مہربانی اس پروگرام کو غیر موزوں رپورٹ کرنے کے لئے {*login_link*} کریں۔'
+  reportLoginText: برائے مہربانی اس پروگرام کو غیر موزوں رپورٹ کرنے کے لئے {*login_link*} کریں۔
   reportDialogHeader: آپ اس پروگرام کو غیرموزوں کیوں سمجھتے ہیں؟
   reportDialogReason: وجہ بتائیں
   reportOwnProgram: آپ اپنے پروگرام کو فلیگ نہیں کرسکتے۔
@@ -74,8 +74,8 @@ profile:
   secondEmail: میری دوسری ای میل
   myPrograms: میرے پروگرامات
   form:
-    passwordTooShort: 'نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.'
-    passwordTooLong: 'نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.'
+    passwordTooShort: نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.
+    passwordTooLong: نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.
     passwordIsUsername: خفیہ کوڈ صارف نام سے مختلف ہوگا۔
     passwordWrong: غلط پاس ورڈ
     emailNotValid: یہ ای میل پتہ درست نہیں ہے ۔
@@ -101,18 +101,12 @@ myprofile:
   editCountry: ملک تبدیل کریں
   editEmail: ای میل تدوین کریں
 licenseToPlay:
-  link: کھیلنے کے لئے لائسنس
+  link: 'کھیلنے کے لئے لائسنس'
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
-  text1: |
-    ذرا تصور کریں کہ ہر کیٹروبیٹ پروگرام ایک کیک ہے، ایک بہت ہی خاص کیک جو کہ اسکی ترکیب (پروگرامنگ بلاکس) کے ساتھ آتا ہے۔
-    کیٹروبیٹ گروہ کے تمام ارکان اپنے کیک کو بمع ترکیب کے دوسروں کیساتھ شریک کریں اس کا مطلب ہے آپ کیک کا لطف اٹھائیں اور انہیں خود بنانے کا طریقہ سیکھیں!
+  text1: "ذرا تصور کریں کہ ہر کیٹروبیٹ پروگرام ایک کیک ہے، ایک بہت ہی خاص کیک جو کہ اسکی ترکیب (پروگرامنگ بلاکس) کے ساتھ آتا ہے۔\nکیٹروبیٹ گروہ کے تمام ارکان اپنے کیک کو بمع ترکیب کے دوسروں کیساتھ شریک کریں اس کا مطلب ہے آپ کیک کا لطف اٹھائیں اور انہیں خود بنانے کا طریقہ سیکھیں!"
   text2: 'کوئی خفیہ ترکیبیں نہیں: کیک کے ساتھ کیک بنانے کی دی گئی ہدایات ہر ایک کے لیے قابل استعمال، قابل ترمیم اور نئے خیالات کا اضافہ کرنے کے لیے کھلے ہیں... میرا مطلب ہے کیک۔.'
-  text3: |
-    آپ کیک کھا بھی سکتے ہیں اور دوسروں کی ترکیبیں استعمال کرکے اپنے بنا بھی سکتے ہیں، شاید مختلف اجزاء کے ساتھ۔
-    یہ آزادی صرف دو آسان شرائط کے ساتھ مشروط ہے:
-  text4: |
-    کیٹروبیٹ گروہ قائم کرتے ہوئے ہم نے یہ نقطہ نظر اپنایا کیونکہ ہمیں یقین ہے کہ یہ گروہ کے اندر سیکھنے اور تخلیقی صلاحیتیوں کو اجاگر کرنے میں معاون ثابت ہوگا۔
-    ترکیبیں اور اجزاء بانٹنے سے لوگ ایک دوسرے کے نظریات سے نئے بنا سکتے ہیں اور جس سے ہر ایک کو فائدہ ہوگا۔.
+  text3: "آپ کیک کھا بھی سکتے ہیں اور دوسروں کی ترکیبیں استعمال کرکے اپنے بنا بھی سکتے ہیں، شاید مختلف اجزاء کے ساتھ۔\nیہ آزادی صرف دو آسان شرائط کے ساتھ مشروط ہے:"
+  text4: "کیٹروبیٹ گروہ قائم کرتے ہوئے ہم نے یہ نقطہ نظر اپنایا کیونکہ ہمیں یقین ہے کہ یہ گروہ کے اندر سیکھنے اور تخلیقی صلاحیتیوں کو اجاگر کرنے میں معاون ثابت ہوگا۔\nترکیبیں اور اجزاء بانٹنے سے لوگ ایک دوسرے کے نظریات سے نئے بنا سکتے ہیں اور جس سے ہر ایک کو فائدہ ہوگا۔."
   text5: کیٹروبیٹ ویب سائٹ ڈیزائن کرتے ہوئے ہم نے لوگوں کی حوصلہ افزائی کے لئے خصوصیات شامل کی ہیں تاکہ وہ دوسروں کیساتھ اپنے خیالات شریک کریں اور دوسروں کو اعزاز بھی دیں۔ ہر پروگرام کے صفحہ پر، آپ ہمیشہ پروگرام کا اصل سکرپٹ (نوشتہ جات) ڈاؤن لوڈ کر سکتے ہیں ۔ اگر آپ ایک پروگرام میں ترمیم کریں (مسودہ یا آرٹ ورک میں ترمیم کرکے اس کو دوسروں کیساتھ شریک کریں)، ہم پروگرام نوٹس میں اُن پروگرامز اور لوگوں (جن سے آپ متاثر ہوئے ہوں) کا ذکر کرتے ہوئے آپ کو اعزاز دے کر آپ کی حوصلہ افزائی کرتے ہیں۔.
   text6: '%link-termsOfUse% پر کیٹروبیٹ کے آن لائن گروہ کے استعمال کی شرائط کے بارے میں مزید معلومات حاصل کریں ۔'
   list1:
@@ -121,13 +115,13 @@ licenseToPlay:
   version: ورژن 1.1, 2 اپریل 2013 ء
 teachers:
   login:
-    title: اساتذہ کا علاقہ
-    description: اس علاقے کو اساتذہ استعمال کر سکتے ہیں۔
+    title: 'اساتذہ کا علاقہ'
+    description: 'اس علاقے کو اساتذہ استعمال کر سکتے ہیں۔'
 termsOfUse:
   title: استعمال کی شرائط
   headline: کاٹروبٹ گروہ میں خوش آمدید!
   text1: 'کیٹروبیٹ گروہ کے ایک رکن کی حیثیت سے، آپ پروگرامات اور نظریات لوگوں کے ساتھ شریک کر رہے ہیں:'
-  text2: اس گروہ کو تمام ممبران کیلئے ایک معاون جگہ بنانے کے لئے ہمیں آپکے تعاون کی ضرورت ہے۔ یہ تعاون آپ کس طرح کر سکتے ہیں، یہاں ہے۔
+  text2: "اس گروہ کو تمام ممبران کیلئے ایک معاون جگہ بنانے کے لئے ہمیں آپکے تعاون کی ضرورت ہے۔ یہ تعاون آپ کس طرح کر سکتے ہیں، یہاں ہے۔"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
   text4: 'ہماری طرف سے آپ کے لیے تحفہ:'
   text5: 'ہماری خدمات اور استعمال کی شرائط:'
@@ -142,7 +136,7 @@ termsOfUse:
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
-    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
@@ -154,105 +148,105 @@ termsOfUse:
     item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
     item2: اگر آپ کی عمر 13 سال سے کم ہے، تو آپ کو اپنے والدین یا قانونی سرپرست سے پوچھنا چاہئے کہ کیا وہ آپ کو کیٹروبیٹ سافٹ ویئر ایپلی کیشنز اور وسائل استعمال کرنے کی اجازت دیتے ہیں؟.
     item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: کیٹروبیٹ کے تمام سافٹ ویئر اور انٹرنیٹ وسائل اس امید پیش کئے جاتے ہیں کہ وہ مفید ثابت ہونگے، لیکن بغیر کسی گارنٹی کے۔
+    item4: "کیٹروبیٹ کے تمام سافٹ ویئر اور انٹرنیٹ وسائل اس امید پیش کئے جاتے ہیں کہ وہ مفید ثابت ہونگے، لیکن بغیر کسی گارنٹی کے۔"
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: ہم ہمیشہ ہمارے استعمال کی شرائط کو بہتر بنانے کی کوشش کر رہے ہیں لہٰذا وقتاً فوقتاً کی پڑتال کیا کریں۔
   bottom2: 'استعمال کی شرائط کے بارے میں تجاویز %email-webmaster% پر ارسال کریں۔'
   version: ورژن 1.3, 4 مارچ 2014
 help:
   stepByStep:
-    title: مرحلہ وار انٹرو
-    start: 'Starting position:'
+    title: "مرحلہ وار انٹرو"
+    start: "Starting position:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: ایک نیا پروگرام بنائیں
+      title: 'ایک نیا پروگرام بنائیں'
       detail:
         text1: '"نئی" پر ٹیپ کریں ۔'
         text2: 'پروگام نام داخل کریں، منتخب کریں "خالی پروگرام بنائیں" اور "OK" پر ٹیپ کریں ۔'
     step2:
-      title: ایک نیا آبجیکٹ بنائیں
+      title: "ایک نیا آبجیکٹ بنائیں"
       detail:
         text1: 'ٹیپ کریں:'
-        text2: Choose the source of the first look of your new object.
+        text2: 'Choose the source of the first look of your new object.'
         text3: 'آبجیکٹ نام داخل کریں اور آبجیکٹ بنانے کے لیے "OK" پر ٹیپ کریں ۔'
-        special1: Draw a new look.
-        special2: گیلری سے انتخاب کریں.
-        special3: تصویر لیجیئے.
+        special1: 'Draw a new look.'
+        special2: 'گیلری سے انتخاب کریں.'
+        special3: 'تصویر لیجیئے.'
     step3:
-      title: Start Moving
+      title: "Start Moving"
       detail:
         text1: 'ٹیپ کریں:'
         text2: 'The first brick we use is out of the category "Motion".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: اینڈرائڈ کا واپسی کا بٹن استعمال کر کے سٹیج سے واپس جائیں.
+        text6: 'اینڈرائڈ کا واپسی کا بٹن استعمال کر کے سٹیج سے واپس جائیں.'
     step4:
-      title: Change Look
-      description: آپ اپنے اوبجیکٹ کی دکھا واٹ بَدَل سکتے ہیں.
+      title: "Change Look"
+      description: "آپ اپنے اوبجیکٹ کی دکھا واٹ بَدَل سکتے ہیں."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
         text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: اب آپکو نئی تصویر کا انتخاب کرنا ہو گا.
-        text6: Tap play to see the behaviour on the stage.
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'اب آپکو نئی تصویر کا انتخاب کرنا ہو گا.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: بولیے
-      description: Now you will find out how to make an object talk.
+      title: "بولیے"
+      description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: اب آپ کو پتہ چلے گا کے کس طرح اک اوبجیکٹ سے بات کرائی جاتی ہے.
+        text3: 'اب آپ کو پتہ چلے گا کے کس طرح اک اوبجیکٹ سے بات کرائی جاتی ہے.'
     step6:
-      title: بار بار
-      description: یہ مرحلہ آپ کو آبجیکٹ کے طرز عمل کو دہرانے کا طریقہ دکھاتا ہے ۔
+      title: 'بار بار'
+      description: "یہ مرحلہ آپ کو آبجیکٹ کے طرز عمل کو دہرانے کا طریقہ دکھاتا ہے ۔"
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
-        text6: Tap play to see the behaviour on the stage.
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step7:
-      title: Tapping is everything
-      description: You can also control the behaviour of the object when the program is running on the stage.
+      title: "Tapping is everything"
+      description: 'You can also control the behaviour of the object when the program is running on the stage.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
-      title: Copy, delete or edit a brick
+      title: "Copy, delete or edit a brick"
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
-      title: Navigation in the app
+      title: "Navigation in the app"
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
-      title: پس منظر تبدیل کریں
+      title: "پس منظر تبدیل کریں"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have one background.
-        text2: You can add scripts, sounds and look in the same way to the background object.
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: Main Menu
-      description: Use the Android Back Button to get to this screen.
+      title: "Main Menu"
+      description: "Use the Android Back Button to get to this screen."
       detail:
-        text1: Continue with your currently opened program.
-        text2: Add a new program.
-        text3: See all your local programs.
-        text4: ہیلپ سائٹ پر جائیں اور دوسرے صارفیں سے مشورہ کریں.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: اِس وقت کھلے ہوئے پروگرام کو اپ لوڈ کریں.
+        text1: 'Continue with your currently opened program.'
+        text2: 'Add a new program.'
+        text3: 'See all your local programs.'
+        text4: 'ہیلپ سائٹ پر جائیں اور دوسرے صارفیں سے مشورہ کریں.'
+        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
+        text6: 'اِس وقت کھلے ہوئے پروگرام کو اپ لوڈ کریں.'
   tutorialcards:
     title: اسباق
     description1: یہ سبق آپکو مؤثر چالوں کا استعمال سکھاتی ہے
@@ -264,19 +258,19 @@ help:
       title: سائز تبدیل کریں
       description: Change the size of an object.
       one: وہ اوبجیکٹ شامل کریں جس کا آپ سائز بدلنا چاہتے ہیں، مثلاً جانور.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      two: Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped.
     card2:
       title: دکھا واٹ تبدیل کریں
       description: اوبجیکٹ کی دکھا واٹ کو تبدیل کریں.
       one: شامل کریں وہ اوبجیکٹ جس کی دکھا واٹ آپ تبدیل کرنا چاہتے ہیں، مثلاً آئیٹمز.
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      two: Include further pictures in the object's looks.
+      three: Insert the following bricks into the scripts of the object in order to continually switch it's look after one second.
     card3:
       title: حرکت اندازی
       description: آبجیکٹس کی حرکت اندازی
       one: وہ اوبجیکٹ شامل کریں جو آپ آگے چلانا چاہتے ہیں.
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      two: Include another picture in the object's looks which illustrates the movement.
+      three: Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge.
     card4:
       title: Glide
       description: Let your object glide over the screen.
@@ -296,29 +290,29 @@ help:
       title: سینسر
       description: Control an object by using the inclination sensors.
       one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      two: Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.
     card8:
       title: قطب نما
       description: اپنا قطب نما بنائین
       one: Add the object you want to point in compass direction.
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      two: Insert the following bricks in order to set the object's orientation. Additionally include a forever loop.
     card9:
       title: نشر کرنین
       description: ایک اوبجیکٹ سے دوسرے اوبجیکٹ کو میسیج بھجین۔
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      one: Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look.
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.
     card10:
       title: ویریئبل دکھائیں
       description: ویریئبل کی ویلیو دکھائیں.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
+      one: Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.
       two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
       three: Through „Show variable“ you can display the values on stage.
     card11:
       title: Collision detection
       description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      one: Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).
+      two: Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.
     card12:
       title: چہرے کی شناخت
       description: چہرے کی شناخت سے اوبجیکٹ کو کنٹرول کریں.
@@ -334,9 +328,9 @@ help:
       music: موسیقی اور رقص
   gameJam:
     title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    text0: First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.
     title1: رجسٹریشن
-    text1: "سب سے پہلے آپ کو اکاؤنٹ بنانے کی ضرورت ہے ۔ اس کے بعد آپ اپنے بنائے گئے پروگرامات اپ لوڈ کر سکتے ہیں ۔ فکر نہ کریں یہ آسان ہے۔ آپ صرف ایک صارف نام اور پاس ورڈ کا کا انتخاب کریں۔ دونوں خانے بھرنے کے بعد، 'لاگ ان یا رجسٹر پر' پر کلک کریں۔ یہ ہوگیا!"
+    text1: سب سے پہلے آپ کو اکاؤنٹ بنانے کی ضرورت ہے ۔ اس کے بعد آپ اپنے بنائے گئے پروگرامات اپ لوڈ کر سکتے ہیں ۔ فکر نہ کریں یہ آسان ہے۔ آپ صرف ایک صارف نام اور پاس ورڈ کا کا انتخاب کریں۔ دونوں خانے بھرنے کے بعد، 'لاگ ان یا رجسٹر پر' پر کلک کریں۔ یہ ہوگیا!
     title2: اپ لوڈ کریں
     text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
     title3: اپنے پروگرام کے لیے تلاش کریں
@@ -344,31 +338,29 @@ help:
     title4: اینڈرائیڈ پروگرام بنائیں
     text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
     title5: پروگرام ڈاؤن لوڈ کریں
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    text5: After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.
     title6: Register/Login at GameJolt.com
     text6: '%link% پر جائیں اور میں مینو میں ’لوگ ان’ یا ’سائن اپ!’ پر کِلک کریں. اگر آپ کے پاس پہلے سے ہی اکاؤنٹ ہے تو صرف لوگ ان کریں، اگر نہیں، تو آپ کو رجسٹر کرنا پڑے گا آپکی ای میل، یوزر نیم اور پاسورڈ سے.'
     title7: Game Jolt سائٹ پر اپنی گیم اپ لوڈ کریں
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7: 'After you''re logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose ''Other'' and add to the field Other Engine/Language/Tool ''Android''. As ''Development'' status choose ''Finished/Stable''. Make sure to include #AliceJam150 in the description so it appears on the %link% page.'
     text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_2: Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. 
     text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
     text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
     text7_5: اپ لوڈ ہونے کے بعد اپنی گیم کو شایہ کرنے کے لیے ’او کے’ پر کِلک کریں. یہ بعد میں لوگوں کو آپکی گیم ڈائون لوڈ کرنے کی لنک دکھائے گا.
     text7_6: اب اپنے اپنی پہلی گیم اپ لوڈ کردی ہے Game Jolt سائٹ پر اور اسے ایکٹیو کر دیا ہے. مبارک ہو!
-    text7_7: 'اب دوسرے لوگ آپکی گیم کو ڈھونڈھ سکیں گے اور یہ اِس %link% پیج پر ہوگی.'
+    text7_7: اب دوسرے لوگ آپکی گیم کو ڈھونڈھ سکیں گے اور یہ اِس %link% پیج پر ہوگی.
   aliceGameJamTutorialcards:
     title1: (Welcome to) Wonderland
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    subtitle1: Animate Characters and create a 'when tapped' event
+    description1: "Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.\nFurther we show you how to create a \"when tapped\" event and how to send broadcast messages between objects."
     title2: Save Alice!
     subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'دی ہٹر - ضرب و فرار'
+    description2: Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects.
+    title3: دی ہٹر - ضرب و فرار
     subtitle3: اک چلنے والی زمین بنائے اور ہٹرس کی ہلچل کو کنٹرول کریں
     description3: اِس سبق میں آپ سیکھیں گے کے کس طرح لینڈ اسکیپ بنے گا جو ایسا لگتا ہے کے وہ چل رہا ہے. ہم اوبجیکٹس کو اسکریں کے ساتھ آگے چلا کے ہلچل کا بھرم بنائی گے. ہم آپکو یہ بھی دکھائی گے کے کس طرح ہٹر موو بنے گا آپکی فون کو جھکا کے .
-    title4: 'دی ہٹر - ضرب و فرار'
+    title4: دی ہٹر - ضرب و فرار
     subtitle4: ہٹر کو برے کارڈز کو گولی مرنے دو
     description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
     title5: Whack a Cheshire Cat
@@ -376,9 +368,7 @@ help:
     description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
     title6: A Rabbits Race
     subtitle6: ایک حرکت پذیر پس منظر بنائیں
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    description6: "This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.\nTo make the game a little bit more difficult we will show you how to slow down the speed of your character over time."
     download: پروگرام ڈائون لوڈ کریں
 oauth:
   username_header: پاکٹ کوڈ میں سائن اَپ کے لئے آپ کا شکریہ!
@@ -389,7 +379,7 @@ search:
   dotdotdot: تلاش کریں...
   search: تلاش
   results: تلاش کے نتائج
-  resultcount: 'آپ کی تلاش نے %count% نتائج لوٹائے'
+  resultcount: آپ کی تلاش نے %count% نتائج لوٹائے
 menu:
   profile: میری پروفائل
   logout: لاگ آؤٹ
@@ -407,9 +397,9 @@ login:
   or: یا
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
-  prepare: ایپ تیار کریں
-  preparing: ایپ تیار کر رہا ہے
-  text: اس عمل میں کچھ وقت لگ سکتا ہے
+  prepare: 'ایپ تیار کریں'
+  preparing: 'ایپ تیار کر رہا ہے'
+  text: 'اس عمل میں کچھ وقت لگ سکتا ہے'
 errors:
   username:
     blank: صارف کا نام خالی نہیں ہونا چاہیئے
@@ -449,9 +439,9 @@ errors:
   program:
     invalid: غلط پروگرام.
   languageversion:
-    tooold: معاف کیجیے، آپکا پروگرام کیٹروبیٹ لینگویج کے پرانے ورژن پر مشتمل ہے! کیا آپ پاکٹ کوڈ کا تازہ ترین ورژن استعمال کر رہے ہیں؟
+    tooold: 'معاف کیجیے، آپکا پروگرام کیٹروبیٹ لینگویج کے پرانے ورژن پر مشتمل ہے! کیا آپ پاکٹ کوڈ کا تازہ ترین ورژن استعمال کر رہے ہیں؟'
   programversion:
-    tooold: معاف کیجیے، آپ پاکٹ کوڈ کا پرانا ورژن استعمال کر رہے ہیں. برائے مہربانی اپ ڈیٹ کریں تازہ ترین ورژن میں.
+    tooold: 'معاف کیجیے، آپ پاکٹ کوڈ کا پرانا ورژن استعمال کر رہے ہیں. برائے مہربانی اپ ڈیٹ کریں تازہ ترین ورژن میں.'
 success:
   registration: رجسٹریشن کامیاب!
   token: ٹھيک ہے
@@ -509,12 +499,12 @@ language:
   ukrainian: يوکرينيئن
   vietnamese: ویتنامی
 ci:
-  generate: 'آ  پی  کے بنائے'
-  pending: 'آ  پی  کے بن رہی ہے'
-  download: 'آ  پی  کے ڈائون لوڈ کریں'
+  generate: آ  پی  کے بنائے
+  pending: آ  پی  کے بن رہی ہے
+  download: آ  پی  کے ڈائون لوڈ کریں
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
+  submit: Submit to %gamejamname%
   whats: '%gamejamname% کیا ہے؟'
   submitown:
     header: خبردار
