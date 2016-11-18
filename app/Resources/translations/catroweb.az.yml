@@ -2,12 +2,12 @@
 localLanguage: English
 username: Username
 password: Password
-aboutPocketCode: O Pocket Code
+aboutPocketCode: About Pocket Code
 tutorials: Tutorials
 googlePlay: Google Play
 passwordsNoMatch: "The passwords didn't match."
-error: Chyba
-cancel: Zrušit
+error: Səhv
+cancel: İmtina et
 report: Report
 download: Download as program
 description: Description
@@ -52,7 +52,7 @@ programs:
   show_more: Show More
   comments: Comments
   send: Send
-  delete: Smazat
+  delete: Sil
   report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
@@ -200,7 +200,7 @@ help:
         text5: Now you have to select the new image.
         text6: Tap play to see the behaviour on the stage.
     step5:
-      title: Vyslovit
+      title: Speak
       description: Now you will find out how to make an object talk.
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -276,7 +276,7 @@ help:
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Hýbat
+      title: Glide
       description: Let your object glide over the screen.
       one: Add the object you want to be gliding. e.g. plane.
       two: Insert the following bricks and define the area in which the movement should happen.
@@ -286,7 +286,7 @@ help:
       one: Add the object you want to be playing a sound, e.g. dog.
       two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
     card6:
-      title: Vyslovit
+      title: Speak
       description: Let your object speak.
       one: Add the object you want to be speaking, e.g. Carrie.
       two: Insert the following bricks in order to make the voice output possible.
@@ -301,7 +301,7 @@ help:
       one: Add the object you want to point in compass direction.
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Vysílat
+      title: Broadcast
       description: Send messages from one object to another.
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
@@ -335,7 +335,7 @@ help:
     text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
     title1: Registration
     text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: Nahrát
+    title2: Upload
     text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
     title3: Search for your program
     text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
