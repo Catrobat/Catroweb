@@ -272,13 +272,29 @@ class CodeViewController extends Controller
   {
     $objects = array();
     foreach ($program_xml_tree->objectList->object as $object_xml) {
+
       if ($object_xml[self::NAME_ATTRIBUTE] != null) {
+
         $objects[] = $object_xml;
         $pointed_objects = $object_xml->xpath('scriptList//' . self::POINTED_OBJECT_TAG);
         foreach ($pointed_objects as $pointed_obj)
           if ($pointed_obj[self::NAME_ATTRIBUTE] != null)
             $objects[] = $pointed_obj;
+          elseif (count($pointed_obj->name) != 0)
+            $objects[] = $pointed_obj;
+
+      } elseif (count($object_xml->name) != 0) {
+
+        $objects[] = $object_xml;
+        $pointed_objects = $object_xml->xpath('scriptList//' . self::POINTED_OBJECT_TAG);
+        foreach ($pointed_objects as $pointed_obj)
+          if ($pointed_obj[self::NAME_ATTRIBUTE] != null)
+            $objects[] = $pointed_obj;
+          else if (count($object_xml->name) != 0)
+            $objects[] = $pointed_obj;
+
       }
+
     }
 
     return $objects;
@@ -355,8 +371,13 @@ class CodeViewController extends Controller
 
   private function retrieveObjectFromXml($object)
   {
+    $name = null;
+    if ($object[self::NAME_ATTRIBUTE] != null)
+      $name = $object[self::NAME_ATTRIBUTE];
+    else
+      $name = $object->name;
     return array(
-      'name' => $object[self::NAME_ATTRIBUTE],
+      'name' => $name,
       'looks' => $this->retrieveLooksFromXml($object->lookList),
       'sounds' => $this->retrieveSoundsFromXml($object->soundList),
       'scripts' => $this->retrieveScriptsFromXml($object->scriptList)

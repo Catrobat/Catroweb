@@ -12,19 +12,34 @@
     .scene {
       margin-bottom: 15px;
 
-      .scene-heading {
-        margin: 0 10px;
-        color: rgba(255, 255, 255, 0.4);
-        border-bottom: 1px solid @default-text-color;
+      .scene-dropbtn {
+        position: relative;
 
-        span {
-          margin-left: 8px;
-          color: white;
-          font-size: 16px;
+        .scene-arrow {
+          right: 16.7%;
+          bottom: 10px;
+          top: auto;
         }
+
+        .scene-heading {
+          margin: 0 10px;
+          color: rgba(255, 255, 255, 0.4);
+          border-bottom: 1px solid @default-text-color;
+
+          span {
+            margin-left: 8px;
+            color: white;
+            font-size: 16px;
+          }
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        cursor: hand;
       }
 
       .scene-content {
+        display: none;
         margin: 15px 8.5% 0;
       }
 
@@ -58,6 +73,28 @@
     // -moz-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
     // -webkit-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
     // box-shadow: 1px 2px 5px black, -1px 2px 5px black;
+  }
+
+  .arrow {
+    position: absolute;
+    width: 26px;
+    height: 15px;
+    right: 10%;
+    top: 42%;
+    transition: all 250ms ease-in-out;
+
+    &.group-arrow {
+      top: 30%;
+    }
+
+    img {
+      height: auto;
+      width: auto;
+      max-height: 15px;
+      margin: 0;
+      border: none;
+      vertical-align: baseline;
+    }
   }
 
   .dropbtn {
@@ -100,28 +137,6 @@
       .object-meta-value {
         display: inline-block;
         margin-left: 14px;
-      }
-    }
-
-    .arrow {
-      position: absolute;
-      width: 26px;
-      height: 15px;
-      right: 10%;
-      top: 42%;
-      transition: all 250ms ease-in-out;
-
-      &.group-arrow {
-        top: 30%;
-      }
-
-      img {
-        height: auto;
-        width: auto;
-        max-height: 15px;
-        margin: 0;
-        border: none;
-        vertical-align: baseline;
       }
     }
   }
@@ -232,10 +247,8 @@
     display: none;
     margin-left: 30px;
 
-    .dropbtn {
-      .arrow {
-        right: 10.5%;
-      }
+    .arrow {
+      right: ~"calc(10% + 3px)";
     }
   }
 
@@ -304,6 +317,14 @@
           margin-left: 0;
           margin-right: 0;
         }
+
+        .scene-dropbtn {
+
+          .scene-arrow {
+            right: 10%;
+          }
+        }
+
       }
     }
   }
