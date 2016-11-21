@@ -94,7 +94,7 @@
 
 {% macro object(object, path, scene_name) %}
     {% import _self as self %}
-    <div class="dropbtn">
+    <div class="dropbtn collapse-btn">
         {{ self.dropbtn(object, path, scene_name) }}
     </div>
     <div class="dropdown-content">
@@ -104,7 +104,7 @@
 
 {% macro group(group_object, path, scene_name) %}
     {% import _self as self %}
-    <div class="dropbtn">
+    <div class="dropbtn collapse-btn">
         <div class="object-meta outdented">
             <div class="object-meta-name">
                 <p>Group:</p>
@@ -164,7 +164,12 @@
     <div class="scenes-wrapper">
         {% for scene in scene_list %}
             <div class="scene">
-                <p class="heading scene-heading">SCENE: <span>{{ scene.name }}</span></p>
+                <div class="scene-dropbtn collapse-btn">
+                    <p class="heading scene-heading">SCENE: <span>{{ scene.name }}</span></p>
+                    <div class="arrow scene-arrow">
+                        <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+                    </div>
+                </div>
                 <div class="scene-content">
                     {{ self.maincontent(scene.background, scene.object_list, path, scene.name) }}
                 </div>
@@ -193,7 +198,7 @@
         var sound_map = {};
 
         $(document).ready(function() {
-            $('.dropbtn').on("click", function() {
+            $('.collapse-btn').on("click", function() {
                 $(this).next().slideToggle(250, 'linear');
                 $(this).find('.arrow').toggleClass('rotate');
             });
