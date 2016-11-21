@@ -44,6 +44,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('program.name')
+            ->add('program.id')
             ->add('user.username')
             ->add('program.gamejam_submission_accepted')
             ->add('downloaded_at')
