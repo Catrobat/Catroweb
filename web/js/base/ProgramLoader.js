@@ -13,6 +13,7 @@ var ProgramLoader = function (container, url, column_max) {
   self.visible_steps = 0;
   self.showAllPrograms = false;
   self.windowWidth = $(window).width();
+  self.query = "";
 
   self.init = function() {
     self.setParamsWithCookie(); // sets self.prev_visible and self.initial_download_limit
@@ -37,6 +38,7 @@ var ProgramLoader = function (container, url, column_max) {
   };
 
   self.initSearch = function(query) {
+    self.query = query;
     $.get(self.url, { q: query, limit: self.download_limit*2, offset: self.loaded }, function(data) {
       var searchResultsText = $('#search-results-text');
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
@@ -237,17 +239,35 @@ var ProgramLoader = function (container, url, column_max) {
         $(self.container).find('.button-show-more').hide();
         $(self.container).find('.button-show-ajax').show();
         // on loadUserPrograms... set user_id as parameter
-        $.get(self.url, { limit: self.download_limit, offset: self.loaded }, function(data) {
-          if((data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) && self.loaded <= self.visible) {
+
+        if (self.query != "")
+        {
+          $.get(self.url, { q: self.query, limit: self.download_limit, offset: self.loaded }, function(data) {
+            if((data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) && self.loaded <= self.visible) {
+              $(self.container).find('.button-show-ajax').hide();
+              return;
+            }
+
+            self.loadProgramsIntoContainer(data);
+            self.showMorePrograms();
+
             $(self.container).find('.button-show-ajax').hide();
-            return;
-          }
+          });
 
-          self.loadProgramsIntoContainer(data);
-          self.showMorePrograms();
+        }
+        else {
+          $.get(self.url, { limit: self.download_limit, offset: self.loaded }, function(data) {
+            if((data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) && self.loaded <= self.visible) {
+              $(self.container).find('.button-show-ajax').hide();
+              return;
+            }
 
-          $(self.container).find('.button-show-ajax').hide();
-        });
+            self.loadProgramsIntoContainer(data);
+            self.showMorePrograms();
+
+            $(self.container).find('.button-show-ajax').hide();
+          });
+        }
       }
 
     });
