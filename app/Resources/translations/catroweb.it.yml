@@ -16,14 +16,14 @@ country: Paese
 loginText: login
 privacyPolicy: Informativa sulla privacy
 imprint: Imprint
-somethingWentWrong: Ooooops qualcosa è andato storto.
-pleaseTryAgain: Per favore riprova!
-oldVersionError: Si prega di aggiornare alla nuova versione di Pocket Code!
-more: altro
-less: meno
+somethingWentWrong: 'Ooooops qualcosa è andato storto.'
+pleaseTryAgain: 'Per favore riprova!'
+oldVersionError: 'Si prega di aggiornare alla nuova versione di Pocket Code!'
+more: 'altro'
+less: 'meno'
 ok: Va bene
 clickToDownloadProgram: 'Per scaricare il programma di esempio, fare click su %link_start% questo %link_end% link.'
-registrationError: Nome utente o indirizzo email già in uso.
+registrationError: 'Nome utente o indirizzo email già in uso.'
 programs:
   featured: In evidenza
   newest: Programmi più recenti
@@ -39,14 +39,14 @@ programs:
   uploaded: Programmi caricati
   reportAsInappropriate: Segnala come inappropriato
   languageVersion: 'Versione del linguaggio Catrobat: %languageVersion%'
-  reportLoginText: 'Effettuare la %login% per segnalare il programma come inappropriato.'
+  reportLoginText: Effettuare la %login% per segnalare il programma come inappropriato.
   reportDialogHeader: Perché pensi che questo programma sia inappropriato?
   reportDialogReason: Inserire un motivo
   reportOwnProgram: Non puoi segnalare il tuo programma.
   reportAlready: Hai già segnalato questo programma come inappropriato.
   reportDone: Hai segnalato questo programma come inappropriato!
   updateAppHeader: Aggiorna App
-  updateAppText: "Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente."
+  updateAppText: Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente.
   btnClosePopup: Ok
   checkout_this_program: Fai il check-out questo di programma Catrobat
   show_more: Mostra altri
@@ -74,25 +74,25 @@ profile:
   saveChanges: salva le modifiche
   newPass: nuova password
   repeatPass: riscrivi la password
-  firstEmail: "L'email principale"
+  firstEmail: L'email principale
   secondEmail: La mia seconda email
   myPrograms: I miei programmi
   form:
-    passwordTooShort: 'La nuova password deve avere almeno %length% caratteri.'
-    passwordTooLong: 'La nuova password può avere un massimo  di %length% caratteri.'
+    passwordTooShort: La nuova password deve avere almeno %length% caratteri.
+    passwordTooLong: La nuova password può avere un massimo  di %length% caratteri.
     passwordIsUsername: La password deve essere diversa dal nome utente.
     passwordWrong: Password sbagliata
     emailNotValid: Questo indirizzo email non è valido.
-    emailMissing: "Errore durante l'aggiornamento di questo indirizzo di posta elettronica. Devi avere almeno un indirizzo email convalidato."
-    emailExists: "L'indirizzo e-mail è già stato usato."
+    emailMissing: Errore durante l'aggiornamento di questo indirizzo di posta elettronica. Devi avere almeno un indirizzo email convalidato.
+    emailExists: L'indirizzo e-mail è già stato usato.
     submitSuccess: salvato!
   reallyDeleteProgram: Vuoi davvero eliminare il programma
   programsOf: Programmi di
   changePicture: Cambia foto
   avatar:
-    pictureTooLarge: "L'immagine selezionata è troppo grande; non utilizzare immagini di dimensioni superiori a 5mb."
-    uploadError: "Spiacenti, c'è stato un problema durante il caricamento!"
-    noSupport: "Questo formato di immagine non è supportato, prova un'altra immagine."
+    pictureTooLarge: L'immagine selezionata è troppo grande; non utilizzare immagini di dimensioni superiori a 5mb.
+    uploadError: Spiacenti, c'è stato un problema durante il caricamento!
+    noSupport: Questo formato di immagine non è supportato, prova un'altra immagine.
 myprofile:
   editProfile: Modifica il profilo
   edit: Modifica
@@ -105,33 +105,27 @@ myprofile:
   editCountry: Modifica paese
   editEmail: Modifica e-mail
 licenseToPlay:
-  link: Licenza per giocare
+  link: 'Licenza per giocare'
   title: 'Licenza per il gioco - Dare credito e condividere'
-  text1: |
-    Immagina che ciascun programma del progetto Catrobat sia una torta, una torta molto speciale che viene fornita con la sua ricetta (blocchi di programmazione).
-    Tutti i membri della comunità di Catrobat condividono le loro torte insieme alle relative ricette. Questo significa che puoi godere di tutte le torte e, allo stesso tempo, imparare a come crearne di nuove!
+  text1: "Immagina che ciascun programma del progetto Catrobat sia una torta, una torta molto speciale che viene fornita con la sua ricetta (blocchi di programmazione).\nTutti i membri della comunità di Catrobat condividono le loro torte insieme alle relative ricette. Questo significa che puoi godere di tutte le torte e, allo stesso tempo, imparare a come crearne di nuove!"
   text2: 'Non ci sono ricette segrete: le istruzioni su come creare ciascuna torta sono rese fruibili per chiunque per essere usate, riusate, modificate e possono servire come ispirazione per nuove idee... pardon, torte.'
-  text3: |
-    Puoi mangiare le torte come pure copiare le ricette altrui per farne di nuove, anche con nuovi ingredienti.
-    Questa libertà viene garantita da due semplici requisiti:
-  text4: |
-    Nel creare la comunità Catrobat, abbiamo deciso di adottare questo approccio in quanto crediamo che esso supporti la creatività e l'apprendimento all'interno della comunità.
-    Condividendo le ricette e gli ingredienti (script e opere multimediali), le persone possono costruire appoggiandosi su le idee altri e, in definitiva, crescere tutti insieme.
+  text3: "Puoi mangiare le torte come pure copiare le ricette altrui per farne di nuove, anche con nuovi ingredienti.\nQuesta libertà viene garantita da due semplici requisiti:"
+  text4: "Nel creare la comunità Catrobat, abbiamo deciso di adottare questo approccio in quanto crediamo che esso supporti la creatività e l'apprendimento all'interno della comunità.\nCondividendo le ricette e gli ingredienti (script e opere multimediali), le persone possono costruire appoggiandosi su le idee altri e, in definitiva, crescere tutti insieme."
   text5: Nel progettare il sito web di Catrobat, abbiamo pensato a funzionalità che incoraggino le persone a condividere le proprie idee e dar credito agli altri. In ciascuna pagina dedicata ai diversi programmi, puoi sempre scaricare gli script originali del programma. Se modifichi script o altre opere multimediali di un programma esistente, vi incoraggiamo a dare credito al programma originale direttamente nelle note del programma, menzionando sia il creatore sia il programma che ha ispirato il vostro.
-  text6: "Ulteriori informazioni sui termini d'uso relativi alla comunità online di Catrobat li trovi alla pagina %link-termsOfUse%."
+  text6: 'Ulteriori informazioni sui termini d''uso relativi alla comunità online di Catrobat li trovi alla pagina %link-termsOfUse%.'
   list1:
     item1: condividi le tue torte insieme alle ricette
     item2: dai credito a chi ti ha ispirato
   version: Versione 1.1, 2 Aprile 2013
 teachers:
   login:
-    title: Area insegnanti
-    description: "Quest'area può essere utilizzata dagli insegnanti."
+    title: 'Area insegnanti'
+    description: 'Quest''area può essere utilizzata dagli insegnanti.'
 termsOfUse:
   title: Termini di utilizzo
   headline: Benvenuti nella comunità di Catrobat!
   text1: 'Come parte della comunità Catrobat, condividi programmi e idee con altre persone:'
-  text2: 'Abbiamo bisogno del tuo aiuto per rendere questa comunità un luogo di condivisione per ogni membro. Ecco come puoi aiutarci:'
+  text2: "Abbiamo bisogno del tuo aiuto per rendere questa comunità un luogo di condivisione per ogni membro. Ecco come puoi aiutarci:"
   text3: "Attraverso il progetto Catrobat vogliamo promuovere la cooperazione e permettere che la creatività  di tutti possa contribuire al miglioramento di tutta l'umanità. Puoi diventare anche un membro attivo della comunità Catrobat condividendo, come un dono, i tuoi programmi allo stesso modo in cui altri membri attivi stanno dando i loro programmi a te:"
   text4: 'Il nostro regalo per te:'
   text5: 'I nostri termini di utilizzo e di servizio:'
@@ -141,128 +135,120 @@ termsOfUse:
     item3: con tutti i livelli di esperienza
   list2:
     item1: Sii rispettoso. Quando condividi applicazioni, ricordati che persone di diverse età e provenienza vedranno i tuoi contributi.
-    item2: 'Dai il giusto credito. Sentiti libero di fare modifiche ai programmi altrui - basta fare in modo di dare loro credito. Un luogo per dare credito è nella descrizione del tuo programma. Leggi il paragrafo sotto questo elenco puntato per informazioni dettagliate sulla modifica dei programmi di altri utenti.'
-    item3: Sii onesto. Non fingere di essere qualcun altro e non tentare di ingannare la comunità.
-    item4: Mantieni privati i dati personali. Non condividere il tuo indirizzo email, numero di telefono o altre informazioni di contatto personali.
+    item2: "Dai il giusto credito. Sentiti libero di fare modifiche ai programmi altrui - basta fare in modo di dare loro credito. Un luogo per dare credito è nella descrizione del tuo programma. Leggi il paragrafo sotto questo elenco puntato per informazioni dettagliate sulla modifica dei programmi di altri utenti."
+    item3: "Sii onesto. Non fingere di essere qualcun altro e non tentare di ingannare la comunità."
+    item4: "Mantieni privati i dati personali. Non condividere il tuo indirizzo email, numero di telefono o altre informazioni di contatto personali."
     item5: "Aiuta a mantenere il sito amichevole. Se ti senti che altri potrebbero trovare un programma o un commento insultante, troppo violento o comunque inappropriato, semplicemente clicca il pulsante 'segnala come inappropriato' e lascia una breve spiegazione. Il team di Catrobat controllerà il tuo rapporto e potrebbe rimuovere un qualsiasi programma, commento o un post."
   list3:
-    item1: "Caricando il tuo programma su uno dei nostri siti web, acconsenti a rilasciarlo secondo le licenze libere con cui vengono rilasciati i programmi caricati su Catrobat. Tali licenze sono simili a quelle con cui il sistema Catrobat è esso stesso rilasciato; con queste licenze si acconsente che chiunque abbia il diritto di imparare dal lavoro altrui precedentemente pubblicato, come pure il diritto a modificarlo e a utilizzarlo per propri programmi come giochi, animazioni e altro. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Il tuo lavoro potrà beneficare l'intera comunità mondiale e rimarrà libera per essere usata da tutti, un po' come i testi e le foto inviate volontariamente a Wikipedia. Pensalo come il tuo regalo all'umanità: doni a tutti il tuo lavoro, e tutti gli altri che pubblicheranno il loro lavoro sui nostri siti ti rifarà un regale. Pertanto un programma inviato è un dono dal grande valore, donato anche a te dal suo creatore, purché anche tu partecipi alla comunità allo stesso modo."
-    item2: "Non sei obbligato ad accettare il dono; ma se lo fai dovrai accettare anche certe regole. I benefici di tali regole sono che tu puoi imparare dai lavori precedenti e costruirci sopra cose ancora più belle che, se vuoi, potrai imviare nuovamente sui nostri siti come tue. Un alro beneficio è che queste licenze ti assicurano che nessuno potrà ritenerti responsabile per l'uso che fa qualcun altro del tuo programma."
+    item1: 'Caricando il tuo programma su uno dei nostri siti web, acconsenti a rilasciarlo secondo le licenze libere con cui vengono rilasciati i programmi caricati su Catrobat. Tali licenze sono simili a quelle con cui il sistema Catrobat è esso stesso rilasciato; con queste licenze si acconsente che chiunque abbia il diritto di imparare dal lavoro altrui precedentemente pubblicato, come pure il diritto a modificarlo e a utilizzarlo per propri programmi come giochi, animazioni e altro. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Il tuo lavoro potrà beneficare l''intera comunità mondiale e rimarrà libera per essere usata da tutti, un po'' come i testi e le foto inviate volontariamente a Wikipedia. Pensalo come il tuo regalo all''umanità: doni a tutti il tuo lavoro, e tutti gli altri che pubblicheranno il loro lavoro sui nostri siti ti rifarà un regale. Pertanto un programma inviato è un dono dal grande valore, donato anche a te dal suo creatore, purché anche tu partecipi alla comunità allo stesso modo.'
+    item2: Non sei obbligato ad accettare il dono; ma se lo fai dovrai accettare anche certe regole. I benefici di tali regole sono che tu puoi imparare dai lavori precedenti e costruirci sopra cose ancora più belle che, se vuoi, potrai imviare nuovamente sui nostri siti come tue. Un alro beneficio è che queste licenze ti assicurano che nessuno potrà ritenerti responsabile per l'uso che fa qualcun altro del tuo programma.
     item3: "Un'importante ulteriore condizione è che tu citi chiaramente gli autori dai quali deriva il tuo lavoro. Allo stesso tempo, noi faremo il possibile affinché il tuo lavoro sia apprezzato dagli altri per il contributo da te dato, usando il nome univoco da te scelto per rappresentarti all'interno della comunità di Catrobat, dando l'opportunità a chiunque di esprimerti pubblicamente la propria gratitudine per il tuo lavoro dato agli altri."
     item4: 'Per i dettagli dei termini legali e delle condizioni, consultare %link-licenseUploaded%.'
   list4:
-    item1: Noi offriamo tutti i nostri software e le nostre risorse Internet legate al progetto Catrobat secondo licenze libere. Questo vale per tutto il software scritto dal team di Catrobat, per i siti web e le risorse Internet, il codice sorgente e tutto il materiale aggiuntivo come, per esempio, immagini, suoni, testi. Questo vale ora e varrà anche per il futuro.
-    item2: "Queste licenze permettono di rendere dsponibili tutte le parti di Catrobat libere sia nel senso di gratuite sia nel senso di darti la libertà di utilizzarle come meglio credi, con poche restrizioni legate, per lo più, al fatto di assicurarci che l'intero sistema Catrobat rimanga per sempre libero e utile a tutti."
+    item1: "Noi offriamo tutti i nostri software e le nostre risorse Internet legate al progetto Catrobat secondo licenze libere. Questo vale per tutto il software scritto dal team di Catrobat, per i siti web e le risorse Internet, il codice sorgente e tutto il materiale aggiuntivo come, per esempio, immagini, suoni, testi. Questo vale ora e varrà anche per il futuro."
+    item2: Queste licenze permettono di rendere dsponibili tutte le parti di Catrobat libere sia nel senso di gratuite sia nel senso di darti la libertà di utilizzarle come meglio credi, con poche restrizioni legate, per lo più, al fatto di assicurarci che l'intero sistema Catrobat rimanga per sempre libero e utile a tutti.
     item3: 'Per i dettagli dei termini legali e delle condizioni, consultare %link-licenseToPlay%. Il codice sorgente del sistema Catrobat, insieme a molti altri documenti e risorse, è disponibile sul sito %link-developer%.'
   list5:
-    item1: "Se tu o, nel caso tu abbia meno di 13 anni, i tuoi genitori o il tuo tutore legale, siete coinvolti in organizzazioni che hanno violato la privacy in maniera sistematica, o coinvolte in sorveglianza di massa, non vi è permesso l'uso del nostro software e di accedere ai nostri servizi. I termini precisi di tale restrizione e alcune eccezioni sono illustrate nelle sezioni 4.a e 4.b dei %link-termsOfUse%."
+    item1: 'Se tu o, nel caso tu abbia meno di 13 anni, i tuoi genitori o il tuo tutore legale, siete coinvolti in organizzazioni che hanno violato la privacy in maniera sistematica, o coinvolte in sorveglianza di massa, non vi è permesso l''uso del nostro software e di accedere ai nostri servizi. I termini precisi di tale restrizione e alcune eccezioni sono illustrate nelle sezioni 4.a e 4.b dei %link-termsOfUse%.'
     item2: Se non hai ancora compiuto i 13 anni, devi chiedere ai tuoi genitori o ai tuoi tutori legali se ti permettono di usare il software applicativo di Catrobat e i suoi servizi.
-    item3: Ci riserviamo il diritto di rifiutare, cancellare o nascondere i programmi, gli account utente, e qualsiasi materiale digitale caricato sui siti web di Catrobat in qualsiasi momento a nostra sola discrezione; questo può accadere se, per esempio, troviamo che un programma contiene materiale inappropriato o che un utente violi i diritti di altre persone.
-    item4: Tutti i software di Catrobat e le risorse Internet sono offerti nella speranza che siano utili, ma senza alcuna garanzia.
+    item3: "Ci riserviamo il diritto di rifiutare, cancellare o nascondere i programmi, gli account utente, e qualsiasi materiale digitale caricato sui siti web di Catrobat in qualsiasi momento a nostra sola discrezione; questo può accadere se, per esempio, troviamo che un programma contiene materiale inappropriato o che un utente violi i diritti di altre persone."
+    item4: "Tutti i software di Catrobat e le risorse Internet sono offerti nella speranza che siano utili, ma senza alcuna garanzia."
     item5: 'Consultare la pagina %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service per  le condizioni sopracitate ma espresse in maniera formale, insieme ad ulteriori termini e condizioni legali aggiuntive.'
-  bottom1: "Di volta in volta riontrollate queste condizioni, perché le nostre condizioni d'uso sono sempre soggette a miglioramenti e modifiche."
-  bottom2: "Sono graditi eventuali suggerimenti in merito a questi Termini d'Uso inviando una mail a %email-webmaster%."
+  bottom1: Di volta in volta riontrollate queste condizioni, perché le nostre condizioni d'uso sono sempre soggette a miglioramenti e modifiche.
+  bottom2: 'Sono graditi eventuali suggerimenti in merito a questi Termini d''Uso inviando una mail a %email-webmaster%.'
   version: Versione 1.3, 4 marzo 2014
 help:
   stepByStep:
-    title: Introduzione passo per passo
-    start: 'Posizione iniziale:'
+    title: "Introduzione passo per passo"
+    start: "Posizione iniziale:"
     description: |
       Puoi creare il primo programma, una cartolina interattiva utilizzando i video tutorial che seguono. Devi solo seguire le istruzioni. Durante la creazione della cartolina, vengono fornite le nozioni di base di Pocket Code da applicare in nuovi progetti.
       Dopo questi video, avrete maggiori nozioni per creare progetti personali con Pocket Code.
     step1:
-      title: Crea un nuovo programma
+      title: 'Crea un nuovo programma'
       detail:
         text1: 'Premi su "Nuovo".'
         text2: 'Scrivi il nome del programma, seleziona "Crea programma vuoto" e premi "OK".'
     step2:
-      title: Crea un nuovo oggetto
+      title: "Crea un nuovo oggetto"
       detail:
         text1: 'Tocca lo schermo:'
-        text2: "Scegli l'origine del primo aspetto del nuovo oggetto."
-        text3: |-
-          Immetti il nome dell'oggetto e tocca "OK" per crearlo.
-        special1: Disegna un nuovo aspetto.
-        special2: Scegli dalla galleria.
-        special3: Scatta una foto.
+        text2: 'Scegli l''origine del primo aspetto del nuovo oggetto.'
+        text3: 'Immetti il nome dell''oggetto e tocca "OK" per crearlo.'
+        special1: 'Disegna un nuovo aspetto.'
+        special2: 'Scegli dalla galleria.'
+        special3: 'Scatta una foto.'
     step3:
-      title: Inizia a muoverlo
+      title: "Inizia a muoverlo"
       detail:
         text1: 'Tocca lo schermo:'
-        text2: |-
-          Il primo mattoncino da usare è all'interno della categoria "Movimento".
-        text3: |-
-          Seleziona il mattoncino "Scivola". L'oggetto si sposterà sulla scena nella nuova posizione definita dal mattoncino.
-        text4: Il mattoncino ora è sganciato. Per incollarlo, spostarlo alla posizione desiderata. Puoi anche spostare mattoncini già inseriti toccando il mattoncino finché non risulta sganciato.
-        text5: |-
-          Premi "Play" per mostrare lo stage e vedere l'oggetto che scivola.
-        text6: Utilizza il pulsante indietro di Android per chiudere la scena.
+        text2: 'Il primo mattoncino da usare è all''interno della categoria "Movimento".'
+        text3: 'Seleziona il mattoncino "Scivola". L''oggetto si sposterà sulla scena nella nuova posizione definita dal mattoncino.'
+        text4: 'Il mattoncino ora è sganciato. Per incollarlo, spostarlo alla posizione desiderata. Puoi anche spostare mattoncini già inseriti toccando il mattoncino finché non risulta sganciato.'
+        text5: 'Premi "Play" per mostrare lo stage e vedere l''oggetto che scivola.'
+        text6: 'Utilizza il pulsante indietro di Android per chiudere la scena.'
     step4:
-      title: Modifica aspetto
+      title: "Modifica aspetto"
       description: "Puoi cambiare l'aspetto dell'oggetto."
       detail:
-        text1: |-
-          Scegli il mattoncino "Passa all'aspetto"; con esso puoi scegliere uno degli aspetti esistenti o crearne uno nuovo.
+        text1: 'Scegli il mattoncino "Passa all''aspetto"; con esso puoi scegliere uno degli aspetti esistenti o crearne uno nuovo.'
         text2: 'Scegli il mattoncino sotto il mattoncino "Scivola".'
-        text3: "Tocca dentro l'elenco a discesa per creare un nuovo aspetto."
-        text4: "Scegli, come prima, la sorgente dell'immagine."
-        text5: Ora devi selezionare la nuova immagine.
-        text6: Tocca play per vedere in azione le modifiche.
+        text3: 'Tocca dentro l''elenco a discesa per creare un nuovo aspetto.'
+        text4: 'Scegli, come prima, la sorgente dell''immagine.'
+        text5: 'Ora devi selezionare la nuova immagine.'
+        text6: 'Tocca play per vedere in azione le modifiche.'
     step5:
-      title: Parla
-      description: Ora scoprirai il modo di far parlare un oggetto.
+      title: "Parla"
+      description: "Ora scoprirai il modo di far parlare un oggetto."
       detail:
-        text1: |-
-          Scegli il mattoncino "Parla". L'oggetto pronuncerà il testo, quando viene eseguito questo mattoncino.
-        text2: |-
-          Metti il mattoncino sotto il mattoncino "Passa all'aspetto".
-        text3: Tocca play per vedere in azione le modifiche.
+        text1: 'Scegli il mattoncino "Parla". L''oggetto pronuncerà il testo, quando viene eseguito questo mattoncino.'
+        text2: 'Metti il mattoncino sotto il mattoncino "Passa all''aspetto".'
+        text3: 'Tocca play per vedere in azione le modifiche.'
     step6:
-      title: Ancora e ancora
-      description: Qui si illustra come far ripetere agli oggetti un certo comportamento.
+      title: 'Ancora e ancora'
+      description: "Qui si illustra come far ripetere agli oggetti un certo comportamento."
       detail:
         text1: 'Scegli il mattoncino "Per sempre". Tutto ciò che viene messo dentro il ciclo si ripete per sempre.'
         text2: 'Porta il mattoncino "Per sempre" sotto il mattoncino "Quando il programma inizia".'
         text3: 'Aggiungere un altro mattoncino "Scivola".'
         text4: 'Sposta il mattoncino "Scivola" sopra "Fine del ciclo".'
-        text5: Premi sulla casella di testo di x e poi quella di y e scrivi il valore 0.
-        text6: Tocca play per vedere in azione le modifiche.
+        text5: 'Premi sulla casella di testo di x e poi quella di y e scrivi il valore 0.'
+        text6: 'Tocca play per vedere in azione le modifiche.'
     step7:
-      title: Premere è tutto
-      description: "Puoi anche controllare il comportamento dell'oggetto sulla scena quando il programma è in esecuzione."
+      title: "Premere è tutto"
+      description: 'Puoi anche controllare il comportamento dell''oggetto sulla scena quando il programma è in esecuzione.'
       detail:
-        text1: |-
-          Scegli il mattoncino "Quando premuto". Ciascun mattoncino messo sotto "Quando premuto" verrà eseguito ogni volta che si tocca l'oggetto sulla scena.
+        text1: 'Scegli il mattoncino "Quando premuto". Ciascun mattoncino messo sotto "Quando premuto" verrà eseguito ogni volta che si tocca l''oggetto sulla scena.'
         text2: 'Posiziona "Quando premuto" sotto gli altri mattoncini.'
         text3: 'Scegli il mattoncino "Gira a destra" e posizionalo sotto il mattoncino "Quando premuto".'
-        text4: Ora lo script è pronto.
-        text5: "Tocca play per vedere in azione le modifiche. Se ora premi sull'oggetto, esso si gira."
+        text4: 'Ora lo script è pronto.'
+        text5: 'Tocca play per vedere in azione le modifiche. Se ora premi sull''oggetto, esso si gira.'
     step8:
-      title: 8. Copiare, eliminare o modificare un mattoncino
+      title: "8. Copiare, eliminare o modificare un mattoncino"
       detail:
-        text1: "Premendo una sola volta sulla parte sinistra di un qualunque mattoncino si apre un menu contestuale. Da lì puoi muovere, copiare, eliminare o modificare i valori all'interno del mattoncino usando l'editor di formule."
+        text1: 'Premendo una sola volta sulla parte sinistra di un qualunque mattoncino si apre un menu contestuale. Da lì puoi muovere, copiare, eliminare o modificare i valori all''interno del mattoncino usando l''editor di formule.'
     step9:
       title: "Navigazione nell'app"
       detail:
-        text1: "Usa il pulsante Indietro di Android per navigare nell'app."
-        text2: "Vai indietro di una schermata alla pagina iniziale del tuo oggetto. Da qui puoi gestire gli script ma anche gli aspetti e i suoni associati all'oggetto. Da qui puoi rinominare, copiare, aggiugere o eliminare aspetti e suoni."
-        text3: Se premi ancora sul pusante indietro di Android vai ad una schermata con tutti gli oggetti e lo sfondo.
+        text1: 'Usa il pulsante Indietro di Android per navigare nell''app.'
+        text2: 'Vai indietro di una schermata alla pagina iniziale del tuo oggetto. Da qui puoi gestire gli script ma anche gli aspetti e i suoni associati all''oggetto. Da qui puoi rinominare, copiare, aggiugere o eliminare aspetti e suoni.'
+        text3: 'Se premi ancora sul pusante indietro di Android vai ad una schermata con tutti gli oggetti e lo sfondo.'
     step10:
-      title: Cambia lo sfondo
-      description: Questa è una panoramica di tutti gli oggetti e dello sfondo associati ad un singolo programma.
+      title: "Cambia lo sfondo"
+      description: "Questa è una panoramica di tutti gli oggetti e dello sfondo associati ad un singolo programma."
       detail:
-        text1: Lo sfondo è come un qualsiasi oggetto, ma puoi avere solo uno sfondo.
-        text2: Anche allo sfondo puoi aggiungere script suoni e aspetti nello stesso modo che faresti con un qualsiasi altro oggetto.
+        text1: 'Lo sfondo è come un qualsiasi oggetto, ma puoi avere solo uno sfondo.'
+        text2: 'Anche allo sfondo puoi aggiungere script suoni e aspetti nello stesso modo che faresti con un qualsiasi altro oggetto.'
     step11:
-      title: Menu principale
-      description: Usa il pulsante indiero di Android per ottenere questa schermata.
+      title: "Menu principale"
+      description: "Usa il pulsante indiero di Android per ottenere questa schermata."
       detail:
-        text1: Continua con il programma attualmente aperto.
-        text2: Aggiungi un nuovo programma.
-        text3: Vedi tutti i tuoi programmi locali.
-        text4: Vai al sito di aiuto e discuti con altri utenti.
-        text5: Esplora il mondo dei programmi di Pocket Code. Scarica e modifica i programmi che ti piacciono.
-        text6: Invia il programma attualmente aperto.
+        text1: 'Continua con il programma attualmente aperto.'
+        text2: 'Aggiungi un nuovo programma.'
+        text3: 'Vedi tutti i tuoi programmi locali.'
+        text4: 'Vai al sito di aiuto e discuti con altri utenti.'
+        text5: 'Esplora il mondo dei programmi di Pocket Code. Scarica e modifica i programmi che ti piacciono.'
+        text6: 'Invia il programma attualmente aperto.'
   tutorialcards:
     title: Tutorial
     description1: Questi tutorial mostrano come utilizzare in maniera efficace
@@ -272,71 +258,68 @@ help:
     tip: 'Ulteriore suggerimento:'
     card1:
       title: Modifica le dimensioni
-      description: "Tocca l'anatra per modificare le dimensioni."
-      one: "Aggiungi l'oggetto di cui desideri modificare le dimensioni, ad es. Animale."
-      two: "Inserire i seguenti mattoncini dentro gli script dell'oggetto; ogni volta che viene premuto si riduce del 20% (rispetto alla sua dimensione originale)."
+      description: Tocca l'anatra per modificare le dimensioni.
+      one: Aggiungi l'oggetto di cui desideri modificare le dimensioni, ad es. Animale.
+      two: Inserire i seguenti mattoncini dentro gli script dell'oggetto; ogni volta che viene premuto si riduce del 20% (rispetto alla sua dimensione originale).
     card2:
       title: Modifica aspetto
       description: Usa questo trucco per contare automaticamente.
-      one: "Aggiungi l'oggetto di cui vuoi cambiare l'aspetto, ad esempio items."
-      two: "Includi ulteriori immagini nei look dell'oggetto."
-      three: "Inserisci i seguenti mattoncini dentro gli script dell'oggetto al fine di cambiare automaticamente il suo look dopo un secondo."
+      one: Aggiungi l'oggetto di cui vuoi cambiare l'aspetto, ad esempio items.
+      two: Includi ulteriori immagini nei look dell'oggetto.
+      three: Inserisci i seguenti mattoncini dentro gli script dell'oggetto al fine di cambiare automaticamente il suo look dopo un secondo.
     card3:
       title: Animazione in movimento
       description: Utilizza questo trucco quando vuoi un pappagallo volante.
-      one: "Aggiungi l'oggetto che desideri muovere."
-      two: "Includi un'altra immagine nei look dell'oggetto per simulare il movimento."
-      three: "Inserisci i seguenti mattoncini dentro gli script dell'oggetto al fine di cambiare automaticamente la posizione dell'oggetto dopo un certo intervallo di tempo. Inoltre si può far sì che rimanga all'interno dei margini dello stage facendolo rimbalzare quando è sul bordo."
+      one: Aggiungi l'oggetto che desideri muovere.
+      two: Includi un'altra immagine nei look dell'oggetto per simulare il movimento.
+      three: Inserisci i seguenti mattoncini dentro gli script dell'oggetto al fine di cambiare automaticamente la posizione dell'oggetto dopo un certo intervallo di tempo. Inoltre si può far sì che rimanga all'interno dei margini dello stage facendolo rimbalzare quando è sul bordo.
     card4:
       title: Scivola
       description: Muovi in maniera fluida da un punto ad un altro.
-      one: "Aggiungi l'oggetto che desideri far scivolare. Ad esempio un aereo."
-      two: "Inserisci i seguenti mattoncini al fine di definire l'area in cui dovrebbe muovere."
+      one: Aggiungi l'oggetto che desideri far scivolare. Ad esempio un aereo.
+      two: Inserisci i seguenti mattoncini al fine di definire l'area in cui dovrebbe muovere.
     card5:
       title: Riproduci suono
       description: Tocca il tamburo per ascoltare il suo suono.
-      one: "Aggiungi l'oggetto a cui desideri associare la riproduzione di un suono, ad es. un cane."
+      one: Aggiungi l'oggetto a cui desideri associare la riproduzione di un suono, ad es. un cane.
       two: Inserisci i seguenti mattoncini al fine di rendere possibile la riproduzione del suono. Scegli un suono o dalla tua libreria personale, dalla libreria multimediale Pocket Code o, infine, registrare tu uno nuovo.
     card6:
       title: Parla di qualcosa
       description: Usa questo codice per far parlare un oggetto.
-      one: "Aggiungi l'oggetto che desideri far parlare, ad es. Carrie."
+      one: Aggiungi l'oggetto che desideri far parlare, ad es. Carrie.
       two: Inserisci i seguenti mattoncini al fine di rendere possibili i messaggi vocali.
     card7:
       title: Sensore di gravità
-      description: "Usa questo trucco per controllare un oggetto attraverso l'inclinazione del dispositivo."
-      one: "Aggiungi l'oggetto che si desideri far muovere sullo stage."
-      two: |-
-        Inserisci i seguenti mattoncini al fine di controllare l'oggetto attraverso i sensori del telefono. Quindi scegli il "inclinazione x e y". Per ottenere il movimento adatto, impostare "-inclinazione". Se il movimento dell'oggetto è troppo sensibile, dividi, per esempio, l'inclinazione per 10.
+      description: Usa questo trucco per controllare un oggetto attraverso l'inclinazione del dispositivo.
+      one: Aggiungi l'oggetto che si desideri far muovere sullo stage.
+      two: Inserisci i seguenti mattoncini al fine di controllare l'oggetto attraverso i sensori del telefono. Quindi scegli il "inclinazione x e y". Per ottenere il movimento adatto, impostare "-inclinazione". Se il movimento dell'oggetto è troppo sensibile, dividi, per esempio, l'inclinazione per 10.
     card8:
       title: Bussola
       description: Usa questo codice per creare una bussola.
-      one: "Aggiungi l'oggetto che desideri far puntare in direzione della bussola."
-      two: |-
-        Inserisci i seguenti mattoncini al fine di impostare l'orientamento dell'oggetto. Inoltre includi un ciclo "per sempre".
+      one: Aggiungi l'oggetto che desideri far puntare in direzione della bussola.
+      two: Inserisci i seguenti mattoncini al fine di impostare l'orientamento dell'oggetto. Inoltre includi un ciclo "per sempre".
     card9:
       title: Invia evento
       description: Guarda questo programma! Ti mostra come comunicare tra più oggetti.
-      one: "Aggiungi un nuovo oggetto, ad esempio Alice, che dovrebbe inviare un messaggio. E' possibile aggiungere un secondo sfondo agli aspetti dello sfondo. Appena lo sfondo riceve il messaggio, cambierà all'altro suo aspetto."
-      two: |-
-        Inserisci il mattone "Invia a tutti" e imposta che cosa dovrebbe accadere quando l'altro oggetto riceve il messaggio.
-      three: "In questo caso faremo cambiare lo sfondo quando l'oggetto in primo piano è premuto."
+      one: Aggiungi un nuovo oggetto, ad esempio Alice, che dovrebbe inviare un messaggio. E' possibile aggiungere un secondo sfondo agli aspetti dello sfondo. Appena lo sfondo riceve il messaggio, cambierà all'altro suo aspetto.
+      two: Inserisci il mattone "Invia a tutti" e imposta che cosa dovrebbe accadere quando l'altro oggetto riceve il messaggio.
+      three: In questo caso faremo cambiare lo sfondo quando l'oggetto in primo piano è premuto.
     card10:
       title: Visualizza la variabile
       description: Mostra il valore di una variabile.
-      one: 'Aggiungi un oggetto che si vuole comandare usando i sensori del telefono (si veda %link_end% %tutorial_card_link_7% Tutorial Card 7). Inoltre è possibile aggiungere un secondo sfondo da usare quando si riceve un messaggio.'
-      two: "Inserisci i seguenti mattoncini al fine di salvare in una variabile l'attuale posizione x ed y dell'oggetto in movimento."
-      three: 'Tramite "Visualizza variabile" puoi visualizzare il suo valore sullo stage.'
+      one: Aggiungi un oggetto che si vuole comandare usando i sensori del telefono (si veda %link_end% %tutorial_card_link_7% Tutorial Card 7). Inoltre è possibile aggiungere un secondo sfondo da usare quando si riceve un messaggio.
+      two: Inserisci i seguenti mattoncini al fine di salvare in una variabile l'attuale posizione x ed y dell'oggetto in movimento.
+      three: Tramite "Visualizza variabile" puoi visualizzare il suo valore sullo stage.
     card11:
       title: Rilevamento della collisione (collision detection)
-      description: "Rilevare se c'è una collisione tra due oggetti."
-      one: 'Aggiungi due oggetti in cui uno dovrebbe muoversi usando un sensore del dispositivo, per es. Alex (vedi %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: "Salva la „posizione x e y“ attuale dell'oggetto Alex in movimento Alex (vedi %tutorial_card_link_10% Tutorial Card 10 %link_end%) e inserisci i seguenti script. Viene continuamente verificato se i due oggetti si sovrappongono. Se lo fanno, l'oggetto fisso, in questo caso, viene nascosto."
+      description: Rilevare se c'è una collisione tra due oggetti.
+      one: Aggiungi due oggetti in cui uno dovrebbe muoversi usando un sensore del dispositivo, per es. Alex (vedi %tutorial_card_link_7% Tutorial Card 7 %link_end%).
+      two: Salva la „posizione x e y“ attuale dell'oggetto Alex in movimento Alex (vedi %tutorial_card_link_10% Tutorial Card 10 %link_end%) e inserisci i seguenti script. Viene continuamente verificato se i due oggetti si sovrappongono. Se lo fanno, l'oggetto fisso, in questo caso, viene nascosto.
     card12:
       title: Rilevamento volti
       description: Comandare un oggetto usando il rilevamento volti.
       one: Per prima cosa assicurati che il rilevamento volti sia abilitato. Per farlo vai alla configurazione.
-      two: 'Aggiungi un nuovo oggetto e inserisci i seguenti mattoncini per mostrare se è rilevato un volto. Verifica se il volto è rilevato e mettilo in un ciclo senza fine ("per sempre"). Se la telecamera percepisce un viso, il valore della variabile è "VERO", altrimenti è "FALSO".'
+      two: Aggiungi un nuovo oggetto e inserisci i seguenti mattoncini per mostrare se è rilevato un volto. Verifica se il volto è rilevato e mettilo in un ciclo senza fine ("per sempre"). Se la telecamera percepisce un viso, il valore della variabile è "VERO", altrimenti è "FALSO".
   starterPrograms:
     title: Programmi per iniziare
     description: Per iniziare, prova questi programmi. Guarda a come sono fatti per apportare modifiche e aggiungere tue idee.
@@ -347,52 +330,47 @@ help:
       music: Musica e danza
   gameJam:
     title: Come si carica un gioco Pocket Code nel sito Game Jolt?
-    text0: "Congratulazioni per il tuo nuovo gioco! Puoi caricarlo ora su %link% in modo da generare un' app Android, che potrai caricare sul sito Game Jolt."
+    text0: Congratulazioni per il tuo nuovo gioco! Puoi caricarlo ora su %link% in modo da generare un' app Android, che potrai caricare sul sito Game Jolt.
     title1: Regisrazione
-    text1: "Devi prima creare un account. Successivamente potrai caricare il tuo codice. Non preoccuparti: e' facile, basta che ti inventi un username e una password. Dopo averli inseriti entrambi, fai click su 'Login o registrati'. E' tutto!"
+    text1: 'Devi prima creare un account. Successivamente potrai caricare il tuo codice. Non preoccuparti: e'' facile, basta che ti inventi un username e una password. Dopo averli inseriti entrambi, fai click su ''Login o registrati''. E'' tutto!'
     title2: Carica
     text2: 'Dopo il processo di registrazione sarai in grado di caricare il tuo gioco. Basta pensare a un nome e aggiungere una descrizione. Devi aggiungere #AliceJam150 nel campo Descrizione.'
     title3: Cerca il tuo programma
     text3: Vai al tuo profilo Pocket Code, dove sono elencati tutti i programmi oppure cerca direttamente il tuo programma utilizzando la ricerca e il nome del programma.
-    title4: "Crea un' app Android"
-    text4: "Direttamente sulla pagina di dettaglio del programma è possibile creare un'applicazione Android. Cliccando su 'Prepare app', verra' generata l'app."
-    title5: "Scarica un' app"
-    text5: 'Dopo il processo di costruzione è possibile scaricare il programma come un app. Questa app scaricata deve essere caricata di nuovo direttamente sul sito di Game Jolt, al fine di partecipare a %link%.'
+    title4: Crea un' app Android
+    text4: Direttamente sulla pagina di dettaglio del programma è possibile creare un'applicazione Android. Cliccando su 'Prepare app', verra' generata l'app.
+    title5: Scarica un' app
+    text5: Dopo il processo di costruzione è possibile scaricare il programma come un app. Questa app scaricata deve essere caricata di nuovo direttamente sul sito di Game Jolt, al fine di partecipare a %link%.
     title6: Registrati/fai Login sul sito GameJolt.com
-    text6: "Visita %link% e fai clic su 'Log In' o 'Sign Up!' nel menu. Se hai già un account, basta fare login, altrimenti e' necessario registrarsi con il tuo indirizzo Email, nome utente e Password."
+    text6: Visita %link% e fai clic su 'Log In' o 'Sign Up!' nel menu. Se hai già un account, basta fare login, altrimenti e' necessario registrarsi con il tuo indirizzo Email, nome utente e Password.
     title7: Caricare il gioco sul sito Game Jolt
-    text7: "Dopo che sei entrato, vai al tuo dashboard. Puoi aggiungere il tuo gioco. In primo luogo è necessario fare clic su 'Accetta regole'. Quindi compilare le informazioni sul gioco. Come strumento motore/lingua/creazione devi scegliere 'Altro' e aggiungere 'Android' al campo altri: strumento/motore/lingua. Come stato di 'Sviluppo' scegliere 'Finito/stabile'. Assicurati di includere #AliceJam150 nella descrizione, in modo che appaia nella pagina %link%."
-    text7_1: "Prima di poter pubblicare il tuo gioco, devi completare i passi successivi. Devi aggiungere una 'miniatura', impostare una 'valutazione di' maturità' e caricare il gioco cliccando su 'file/compila'."
-    text7_2: "Clicca su 'Aggiungi pacchetto' e compila le informazioni sul pacchetto. Salva il file e aggiungi la versione. "
-    text7_3: |-
-      Ora è possibile caricare l'apk del tuo programma. Trovi l'applicazione scaricata nella cartella download. È preferibile utilizzare un visualizzatore di dati (per esempio "data explorer").
-    text7_4: "Nota: Se l'app non contiene il suffisso '. apk', è necessario aggiungere manualmente '. apk'. Basta rinominare il file. Ora dovresti essere in grado di caricarlo."
-    text7_5: "Dopo il caricamento fare clic su 'OK' per pubblicare il gioco. Questo mostrerà più tardi alle altre persone un link per scaricare il tuo gioco."
+    text7: 'Dopo che sei entrato, vai al tuo dashboard. Puoi aggiungere il tuo gioco. In primo luogo è necessario fare clic su ''Accetta regole''. Quindi compilare le informazioni sul gioco. Come strumento motore/lingua/creazione devi scegliere ''Altro'' e aggiungere ''Android'' al campo altri: strumento/motore/lingua. Come stato di ''Sviluppo'' scegliere ''Finito/stabile''. Assicurati di includere #AliceJam150 nella descrizione, in modo che appaia nella pagina %link%.'
+    text7_1: Prima di poter pubblicare il tuo gioco, devi completare i passi successivi. Devi aggiungere una 'miniatura', impostare una 'valutazione di' maturità' e caricare il gioco cliccando su 'file/compila'.
+    text7_2: Clicca su 'Aggiungi pacchetto' e compila le informazioni sul pacchetto. Salva il file e aggiungi la versione. 
+    text7_3: Ora è possibile caricare l'apk del tuo programma. Trovi l'applicazione scaricata nella cartella download. È preferibile utilizzare un visualizzatore di dati (per esempio "data explorer").
+    text7_4: 'Nota: Se l''app non contiene il suffisso ''. apk'', è necessario aggiungere manualmente ''. apk''. Basta rinominare il file. Ora dovresti essere in grado di caricarlo.'
+    text7_5: Dopo il caricamento fare clic su 'OK' per pubblicare il gioco. Questo mostrerà più tardi alle altre persone un link per scaricare il tuo gioco.
     text7_6: Hai caricato il tuo primo gioco sul sito Game Jolt e lo hai attivato. Congratulazioni!
-    text7_7: "Gli altri saranno in grado di trovare il tuo gioco. Apparira' nella pagina %link%."
+    text7_7: Gli altri saranno in grado di trovare il tuo gioco. Apparira' nella pagina %link%.
   aliceGameJamTutorialcards:
     title1: (Benvenuti nel) Paese delle meraviglie
-    subtitle1: "Anima i personaggi e creare un evento 'quando toccato'"
-    description1: |
-      Impara ad animare un personaggio e a far eseguire dei movimenti quando viene toccato. Il video ti mostra come puoi creare semplici animazioni usando diversi costumi.
-      Inoltre viene mostrato come creare un evento "quando toccato" e come inviare opportuni messaggi tra i diversi oggetti.
+    subtitle1: Anima i personaggi e creare un evento 'quando toccato'
+    description1: "Impara ad animare un personaggio e a far eseguire dei movimenti quando viene toccato. Il video ti mostra come puoi creare semplici animazioni usando diversi costumi.\nInoltre viene mostrato come creare un evento \"quando toccato\" e come inviare opportuni messaggi tra i diversi oggetti."
     title2: Salva Alice!
     subtitle2: Usare il sensore di inclinazione e gestire le collisioni tra oggetti
     description2: Qui imparerai a controllare un personaggio usando il sensore di inclinazione del tuo dispositivo. Puoi controllare i movimenti di Alice inclinando il dispositivo verso sinistra o verso destra. Guarda il tutorial e fai in modo che gli oggetti cadano in maniera casuale dal cielo e impara a riconoscere quando due oggetti collidono.
-    title3: 'Il Cappellaio - Spara e corri'
+    title3: Il Cappellaio - Spara e corri
     subtitle3: Crea uno sfondo che si muove e controlla i movimenti del Cappellaio
-    description3: "In questo tutorial viene mostrato come creare simulare il movimento dello sfondo. Lo faremo muovendo gli oggetti sullo schermo, creando un'illusione di movimento. Mostra come muovere il Cappellaio inclinando il dispositivo."
-    title4: 'Il Cappellaio - Spara e corri'
+    description3: In questo tutorial viene mostrato come creare simulare il movimento dello sfondo. Lo faremo muovendo gli oggetti sullo schermo, creando un'illusione di movimento. Mostra come muovere il Cappellaio inclinando il dispositivo.
+    title4: Il Cappellaio - Spara e corri
     subtitle4: Fai in modo che il Cappellaio spari le sue carte malefiche
     description4: In questo tutorial viene mostrato come creare dei nemici che si muovono in modo casuale verso il tuo personaggio. Inoltre viene mostrato come far sì che il Cappellaio spari e come controllare se i nemici sono stati colpiti usando il rilevamento della collisione.
     title5: Colpisci un gatto Cheshire
     subtitle5: Gestire i punteggi usando le variabili
-    description5: "In questo tutorial viene mostrato come usare le variabili per gestire un punteggio. Il punteggio può essere usato all'interno di un qualsiasi gioco. Nell'esempio, il punteggio si riferisce a quante volte hai catturato il gatto."
+    description5: In questo tutorial viene mostrato come usare le variabili per gestire un punteggio. Il punteggio può essere usato all'interno di un qualsiasi gioco. Nell'esempio, il punteggio si riferisce a quante volte hai catturato il gatto.
     title6: Una gara tra conigli
     subtitle6: Come creare uno sfondo in movimento
-    description6: |
-      Questo tutorial mostra come creare uno sfondo che si sposta verticalmente, muovendo l'oggetto sfondo in un certo modo. Inoltre viene insegnato come far saltare in alto un personaggio quando questo viene toccato.
-      Per rendere il gioco un po' più difficile, viene mostrato come rallentare, man mano che passa il tempo, la velocità del personaggio.
+    description6: "Questo tutorial mostra come creare uno sfondo che si sposta verticalmente, muovendo l'oggetto sfondo in un certo modo. Inoltre viene insegnato come far saltare in alto un personaggio quando questo viene toccato.\nPer rendere il gioco un po' più difficile, viene mostrato come rallentare, man mano che passa il tempo, la velocità del personaggio."
     download: Scarica il programma
 oauth:
   username_header: Grazie per esserti registrato a Pocket Code!
@@ -403,12 +381,12 @@ search:
   dotdotdot: Cerca...
   search: Cerca
   results: Risultati della ricerca
-  resultcount: 'La tua ricerca ha ottenuto %count% risultati'
+  resultcount: La tua ricerca ha ottenuto %count% risultati
 menu:
   profile: Il mio profilo
   logout: Logout
 programLoader:
-  noPrograms: "Attualmente non c'è alcun programma."
+  noPrograms: Attualmente non c'è alcun programma.
 login:
   passOrUser: Password o nome utente errati.
   noUsername: Non è stato trovato il tuo nome utente o indirizzo email.
@@ -421,9 +399,9 @@ login:
   or: OR
 apk:
   download: Scarica come app
-  prepare: "Prepara l'app"
-  preparing: App in preparazione
-  text: "L'attività potrebbe richiedere un po' di tempo"
+  prepare: 'Prepara l''app'
+  preparing: 'App in preparazione'
+  text: 'L''attività potrebbe richiedere un po'' di tempo'
 errors:
   username:
     blank: Il nome utente non può essere vuoto
@@ -439,9 +417,9 @@ errors:
     blank: Manca la nazione.
     invalid: Nazione non valida
   email:
-    blank: "L'e-mail non può essere vuota"
+    blank: L'e-mail non può essere vuota
     invalid: La tua e-mail sembra non essere valida
-    exists: "L'indirizzo e-mail è già stato usato."
+    exists: L'indirizzo e-mail è già stato usato.
   id:
     blank: Open Authentication ID non deve essere vuoto
   login: La password o il nome utente sono sbagliati.
@@ -455,7 +433,7 @@ errors:
   file:
     unexpected: trovato file inatteso
     invalid: file non valido
-  image.missing: "Nel file XML del progetto si menziona un file che non c'è nella cartella del progetto"
+  image.missing: Nel file XML del progetto si menziona un file che non c'è nella cartella del progetto
   unknown: errore sconosciuto
   token: 'Autenticazione del dispositivo non riuscita: auth-token non valido!'
   programname:
@@ -463,9 +441,9 @@ errors:
   program:
     invalid: Programma non valido.
   languageversion:
-    tooold: "Spiacenti, il tuo programma contiene una vecchia versione del linguaggio Catrobat! Stai usando l'ultima versione di Pocket Code?"
+    tooold: 'Spiacenti, il tuo programma contiene una vecchia versione del linguaggio Catrobat! Stai usando l''ultima versione di Pocket Code?'
   programversion:
-    tooold: "Spiacenti ma stai usando una versione obsoleta di Pocket Code. Si raccomanda di passare all'ultima versione."
+    tooold: 'Spiacenti ma stai usando una versione obsoleta di Pocket Code. Si raccomanda di passare all''ultima versione.'
 success:
   registration: Registrazione effettuata con successo!
   token: ok
@@ -523,17 +501,18 @@ language:
   ukrainian: Ucraino
   vietnamese: Vietnamese
 ci:
-  generate: "Generare  l'Apk"
-  pending: "Generazione dell'Apk"
+  generate: Generare  l'Apk
+  pending: Generazione dell'Apk
   download: Scarica Apk
 gamejam:
-  nojam: "Siamo spiacenti, non c'è nessun concorso in questo momento"
-  submit: 'Invia a %gamejamname%'
-  whats: "Che cos'è %gamejamname%?"
+  nojam: Siamo spiacenti, non c'è nessun concorso in questo momento
+  submit: Invia a %gamejamname%
+  whats: Che cos'è %gamejamname%?
   submitown:
     header: fai attenzione
     subheader: È possibile inviare solo programmi originali, creati da sé
-    text: 'Ma perché non crearne uno personale! Prendi parte ad %gamejamtag%'
+    text: |
+      Ma perché non crearne uno personale! Prendi parte ad %gamejamtag%
 tag-text: Tag
 extenstion-text: Estensioni
 tags:
@@ -549,10 +528,10 @@ admin:
     diskMaintenance: Manutenzione del disco
     noRemovableObjects: Non sono disponibili oggetti rimovibili.
     manualBackups: Backup manuali
-    noRemovableBackupObjects: "Su questo server non c'è alcun file di backup rimovibile."
+    noRemovableBackupObjects: Su questo server non c'è alcun file di backup rimovibile.
     btnCreateBackup: Crea backup
     btnDownloadBackup: Scarica backup
     btnRestoreBackup: Ripristina backup
     btnDeleteBackup: Elimina backup
     createBackupConfirmationTitle: Crea file di backup
-    createBackupConfirmationText: "Questo processo potrebbe durare un po' di tempo. La pagina verrà ricaricata a breve!"
+    createBackupConfirmationText: Questo processo potrebbe durare un po' di tempo. La pagina verrà ricaricata a breve!

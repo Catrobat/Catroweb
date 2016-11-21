@@ -16,14 +16,14 @@ country: Shteti
 loginText: lidhu
 privacyPolicy: Privatësia
 imprint: Ngulit
-somethingWentWrong: Uuuuups diçka shkoj keq.
-pleaseTryAgain: Ju lutemi provoni përsëri!
-oldVersionError: Ju lutem merrni verionin më të ri të Pocket Code!
-more: më shumë
-less: më pak
+somethingWentWrong: 'Uuuuups diçka shkoj keq.'
+pleaseTryAgain: 'Ju lutemi provoni përsëri!'
+oldVersionError: 'Ju lutem merrni verionin më të ri të Pocket Code!'
+more: 'më shumë'
+less: 'më pak'
 ok: OK
 clickToDownloadProgram: 'Për të shkarkuar programin "shembull" kliko %link_start% këtu %link_end%.'
-registrationError: Përdoruesi ose adresa E-mail janë në përdorim.
+registrationError: 'Përdoruesi ose adresa E-mail janë në përdorim.'
 programs:
   featured: E përzgjedhur
   newest: Programet më të reja
@@ -38,8 +38,8 @@ programs:
   submitted: Programet e dorëzuara
   uploaded: Programet e Ngarkuara
   reportAsInappropriate: Raparto si të papërshtatshëm
-  languageVersion: 'Versioni i gjuhës Catrobat %languageVersion%'
-  reportLoginText: 'Ju lutem, %login% për ta raportuar këtë program si të papërshtatshëm.'
+  languageVersion: Versioni i gjuhës Catrobat %languageVersion%
+  reportLoginText: Ju lutem, %login% për ta raportuar këtë program si të papërshtatshëm.
   reportDialogHeader: Pse është ky program i papërshtatshëm?
   reportDialogReason: Shkruaj një arsye
   reportOwnProgram: Nuk mund ta etiketoni programin e juaj.
@@ -77,8 +77,8 @@ profile:
   secondEmail: Emaili im i dytë
   myPrograms: Programet e mia
   form:
-    passwordTooShort: 'Fjalëkalimi i ri duhet të ketë së paku %length% karaktere.'
-    passwordTooLong: 'Fjalëkalimi i ri mund të ketë maximum %length% karaktere.'
+    passwordTooShort: Fjalëkalimi i ri duhet të ketë së paku %length% karaktere.
+    passwordTooLong: Fjalëkalimi i ri mund të ketë maximum %length% karaktere.
     passwordIsUsername: Fjalëkalimi duhet të dalloj nga emri përdoruesit.
     passwordWrong: Fjalëkalim i gabuar
     emailNotValid: E-mail adresa nuk eshte valide.
@@ -104,7 +104,7 @@ myprofile:
   editCountry: Modifiko shtetin
   editEmail: Modifiko E-Mail
 licenseToPlay:
-  link: Licencë për të luajtur
+  link: 'Licencë për të luajtur'
   title: 'Licencë për të luajtur - Jepni kredi dhe ndajeni'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
@@ -118,8 +118,8 @@ licenseToPlay:
   version: Version 1.1, 2 Prill 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
 termsOfUse:
   title: Kushtet e përdorimit
   headline: Welcome to the Catrobat Community!
@@ -139,7 +139,7 @@ termsOfUse:
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
-    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
@@ -158,98 +158,98 @@ termsOfUse:
   version: Version 1.3, 4 Mars 2014
 help:
   stepByStep:
-    title: Intro hap pas hapi
-    start: 'Pozicioni fillestar:'
+    title: "Intro hap pas hapi"
+    start: "Pozicioni fillestar:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Krijo një program të ri
+      title: 'Krijo një program të ri'
       detail:
         text1: 'Prek "I ri".'
         text2: 'Shkruani një emër të programit, zgjedh "Krijo program të zbrazur" dhe prek "OK".'
     step2:
-      title: Krijo një objekt të ri
+      title: "Krijo një objekt të ri"
       detail:
         text1: 'Prek:'
-        text2: Zgjidhni burimin e dukjes së parë të objektit tuaj të ri.
+        text2: 'Zgjidhni burimin e dukjes së parë të objektit tuaj të ri.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Vizato pamje të re.
-        special2: Zgjidhni nga galeria.
-        special3: Bëj një foto.
+        special1: 'Vizato pamje të re.'
+        special2: 'Zgjidhni nga galeria.'
+        special3: 'Bëj një foto.'
     step3:
-      title: Fillo Lëvizjen
+      title: "Fillo Lëvizjen"
       detail:
         text1: 'Prek:'
         text2: 'The first brick we use is out of the category "Motion".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: Ndrysho Pamjen
-      description: You can change the look of your object.
+      title: "Ndrysho Pamjen"
+      description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
         text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: Zgjidhni imazhin e ri.
-        text6: Prekni luaj, për ti parë lëvizjet në skenë.
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'Zgjidhni imazhin e ri.'
+        text6: 'Prekni luaj, për ti parë lëvizjet në skenë.'
     step5:
-      title: Flisni
-      description: Tash do ta gjeni si të bëni një objekt të flasë.
+      title: "Flisni"
+      description: "Tash do ta gjeni si të bëni një objekt të flasë."
       detail:
         text1: 'Zgjidhni tullën "Flisni". Objekti thotë titullin, kur tulla te egzekutohet.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: Prekni luaj, për ti parë lëvizjet në skenë.
+        text3: 'Prekni luaj, për ti parë lëvizjet në skenë.'
     step6:
-      title: Vazhdimisht
-      description: This step shows you how to repeat behaviour of objects.
+      title: 'Vazhdimisht'
+      description: "This step shows you how to repeat behaviour of objects."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
-        text6: Prekni luaj, për ti parë lëvizjet në skenë.
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Prekni luaj, për ti parë lëvizjet në skenë.'
     step7:
-      title: Prekja është gjithçka
-      description: You can also control the behaviour of the object when the program is running on the stage.
+      title: "Prekja është gjithçka"
+      description: 'You can also control the behaviour of the object when the program is running on the stage.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
-      title: Kopjo, fshije ose modifiko një tullë
+      title: "Kopjo, fshije ose modifiko një tullë"
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
-      title: Navigation in the app
+      title: "Navigation in the app"
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
-      title: Change the background
+      title: "Change the background"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have one background.
-        text2: You can add scripts, sounds and look in the same way to the background object.
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: Menyja kryesore
-      description: Use the Android Back Button to get to this screen.
+      title: "Menyja kryesore"
+      description: "Use the Android Back Button to get to this screen."
       detail:
-        text1: Continue with your currently opened program.
-        text2: Shto një program të ri.
-        text3: See all your local programs.
-        text4: Go to the help site and discuss with other users.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text1: 'Continue with your currently opened program.'
+        text2: 'Shto një program të ri.'
+        text3: 'See all your local programs.'
+        text4: 'Go to the help site and discuss with other users.'
+        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
+        text6: 'Upload the program that is currently opened.'
   tutorialcards:
     title: Tutoriale
     description1: These tutorials show you how to use effective tricks in Pocket Code.
@@ -261,19 +261,19 @@ help:
       title: Ndrysho madhësinë
       description: Ndrysho madhësinë e një objekti.
       one: Add the object of which you would like to change the size, e.g. Animal.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      two: Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped.
     card2:
       title: Ndrysho Pamjen
       description: Ndrysho pamjen e një objekti.
       one: Shto objektin të cilit do të i ndryshoni pamjen, p.sh artikujt.
       two: Përfshijë piktura të tjera në dukjen e objektit.
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      three: Insert the following bricks into the scripts of the object in order to continually switch it's look after one second.
     card3:
       title: Animacioni
       description: Animo objektet
       one: Add the object you want to be moving.
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      two: Include another picture in the object's looks which illustrates the movement.
+      three: Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge.
     card4:
       title: Glide
       description: Let your object glide over the screen.
@@ -293,29 +293,29 @@ help:
       title: Sensor
       description: Control an object by using the inclination sensors.
       one: Shto objektin që doni ta lëvizni në skenë.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      two: Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.
     card8:
       title: Busull
       description: Krijo busullën tuaj
       one: Add the object you want to point in compass direction.
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      two: Insert the following bricks in order to set the object's orientation. Additionally include a forever loop.
     card9:
       title: Transmeto
       description: Dërgo mesazh prej një objekti tek tjetri.
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      one: Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look.
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.
     card10:
       title: Trego variablen
       description: Trego vlerën e variables.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
+      one: Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.
       two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
       three: Through „Show variable“ you can display the values on stage.
     card11:
       title: Detekto konflikte
       description: Detekto një konflikt ndërmjet dy objekteve.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      one: Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).
+      two: Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.
     card12:
       title: Detektimi i fytyrës
       description: Kontrollo një objekt duke përdorur Detiktimin e fytyrës.
@@ -331,7 +331,7 @@ help:
       music: Muzikë dhe Vallëzim
   gameJam:
     title: Si ta ngarkoni një lojë Pocket Code tek faqja Game JoIt?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    text0: First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.
     title1: Regjistrimi
     text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
     title2: Ngarkimi
@@ -341,31 +341,29 @@ help:
     title4: Krijo aplikacion Android
     text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
     title5: Shkarko aplikacionin
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    text5: After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.
     title6: Regjistrimi/Kyqja në GameJoIt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    text6: Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password.
     title7: Upload your game on the Game Jolt Site
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7: 'After you''re logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose ''Other'' and add to the field Other Engine/Language/Tool ''Android''. As ''Development'' status choose ''Finished/Stable''. Make sure to include #AliceJam150 in the description so it appears on the %link% page.'
     text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_2: Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. 
     text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
     text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
     text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
     text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text7_7: Other people will now be able to find your game and it will appear on the %link% page.
   aliceGameJamTutorialcards:
     title1: (Welcome to) Wonderland
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    subtitle1: Animate Characters and create a 'when tapped' event
+    description1: "Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.\nFurther we show you how to create a \"when tapped\" event and how to send broadcast messages between objects."
     title2: Save Alice!
     subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description2: Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects.
+    title3: The Hatter - Hit and Run
+    subtitle3: Create a moving landscape and control the Hatters' movement
     description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
+    title4: The Hatter - Hit and Run
     subtitle4: Let the Hatter shoot the evil cards
     description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
     title5: Whack a Cheshire Cat
@@ -373,9 +371,7 @@ help:
     description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
     title6: A Rabbits Race
     subtitle6: Create a moving background
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    description6: "This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.\nTo make the game a little bit more difficult we will show you how to slow down the speed of your character over time."
     download: Shkarko programin
 oauth:
   username_header: Faleminderit që regjistruat Pocket Code!
@@ -386,7 +382,7 @@ search:
   dotdotdot: Kërkim...
   search: Kërkoni
   results: Rezultatet e kërkimit
-  resultcount: 'Kërkimi juaj solli %count% rezultate'
+  resultcount: Kërkimi juaj solli %count% rezultate
 menu:
   profile: Profili im
   logout: Dil
@@ -404,9 +400,9 @@ login:
   or: OSE
 apk:
   download: Shkarko si aplikacion
-  prepare: Përgatit aplikacionin
-  preparing: Duke përgatitur aplikacionin
-  text: Procesi mund të zgjatë
+  prepare: 'Përgatit aplikacionin'
+  preparing: 'Duke përgatitur aplikacionin'
+  text: 'Procesi mund të zgjatë'
 errors:
   username:
     blank: Emri i përdoruesit nuk duhet të jetë i zbrazur
@@ -446,9 +442,9 @@ errors:
   program:
     invalid: Invalid program.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
   registration: Registration successful!
   token: ok
@@ -511,8 +507,8 @@ ci:
   download: Shkarko Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: be aware
     subheader: You can only submit your own programs
