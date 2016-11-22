@@ -11,13 +11,16 @@ files:
     languages_mapping:
       locale_with_underscore:
         'ar': 'ar'
+        'az': 'az'
         'bs': 'bs'
-        'cs-CZ' : 'cs'
+        'ca': 'ca'
+        'cs': 'cs'
         'da': 'da'
         'de': 'de'
         'es-ES': 'es'
         'fa': 'fa'
         'fr': 'fr'
+        'gl': 'gl'
         'gu-IN': 'gu'
         'he': 'he'
         'hi': 'hi'

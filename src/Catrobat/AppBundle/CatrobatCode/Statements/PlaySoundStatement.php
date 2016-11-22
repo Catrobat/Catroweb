@@ -14,6 +14,16 @@ class PlaySoundStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Start sound";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_violet.png";
+    }
+
 }
 
 ?>

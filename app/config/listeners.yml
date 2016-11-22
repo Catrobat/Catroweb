@@ -34,10 +34,10 @@ services:
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-      catroweb.file.validator.filestructure:
-            class: Catrobat\AppBundle\Listeners\FileStructureValidator
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
+#      catroweb.file.validator.filestructure:
+#            class: Catrobat\AppBundle\Listeners\FileStructureValidator
+#            tags:
+#            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
 
 #      catroweb.file.validator.definedimages:
 #            class: Catrobat\AppBundle\Listeners\OnlyDefinedImagesValidator

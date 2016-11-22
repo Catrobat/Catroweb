@@ -41,11 +41,11 @@ class RefreshCommand extends ContainerAwareCommand
         $this->kernel = $kernel;
 
         switch ($env) {
-      case 'test':
-        $this->generateTestdata();
-        $this->deleteSqLiteDatabase();
-      break;
-    }
+          case 'test':
+            $this->generateTestdata();
+            $this->deleteSqLiteDatabase();
+          break;
+        }
         $this->clearCache();
 
         $output->writeln('<info>');

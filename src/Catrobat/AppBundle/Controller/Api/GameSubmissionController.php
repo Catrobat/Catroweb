@@ -22,17 +22,11 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission")
      * @Method({"GET"})
      */
-    public function formSubmittedAction(Request $request, Program $program)
-    {
+    public function formSubmittedAction(Request $request, Program $program) {
         if ($program->getGamejam() != null) {
-            if (! $program->isAcceptedForGameJam()) {
+            if (!$program->isAcceptedForGameJam()) {
                 $program->setAcceptedForGameJam(true);
-                $this->getDoctrine()
-                    ->getManager()
-                    ->persist($program);
-                $this->getDoctrine()
-                    ->getManager()
-                    ->flush();
+                $this->persistAndFlush($program);
             }
             return JsonResponse::create(array(
                 "statusCode" => "200",
@@ -50,30 +44,40 @@ class GameSubmissionController extends Controller
      * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs")
      * @Method({"GET"})
      */
-    public function getSampleProgramsForLatestGamejam()
-    {
-        $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
-        if ($gamejam == null) {
-            throw new NoGameJamException();
+    public function getSampleProgramsForLatestGamejam(Request $request) {
+        $flavor = $request->get('flavor');
+
+        $gamejam = $this->getGameJam($flavor);
+
+        $offset = intval($request->query->get('offset', 0));
+        $limit = intval($request->query->get('limit', 20));
+
+        $all_samples = $gamejam->getSamplePrograms();
+        $count = count($all_samples);
+        $returning_samples = null;
+
+        for ($j = 0, $i = $offset; $i < $count && $i < $limit; $j++, $i++) {
+            $returning_samples[$j] = $all_samples[$i];
         }
-        return new ProgramListResponse($gamejam->getSamplePrograms(), count($gamejam->getSamplePrograms()));
+
+        return new ProgramListResponse($returning_samples, $returning_samples !== null ? count($returning_samples) : 0);
     }
 
     /**
      * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions")
      * @Method({"GET"})
      */
-    public function getSubmissionsForLatestGamejam(Request $request)
-    {
+    public function getSubmissionsForLatestGamejam(Request $request) {
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
-        
-        $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
-        if ($gamejam == null) {
-            throw new NoGameJamException();
-        }
+
+        $flavor = $request->get('flavor');
+
+        $gamejam = $this->getGameJam($flavor);
+
         $criteria_count = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true));
         $criteria = Criteria::create()->where(Criteria::expr()->eq("gamejam_submission_accepted", true))
+            ->andWhere(Criteria::expr()->eq("visible", true))
             ->orderBy(array("gamejam_submission_date" => Criteria::DESC))
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -82,14 +86,25 @@ class GameSubmissionController extends Controller
             ->count());
     }
 
+    private function getGameJam($flavor) {
+        $gamejam = $this->get("gamejamrepository")->getLatestGameJamByFlavor($flavor);
+
+        if ($gamejam == null) {
+            $gamejam = $this->get("gamejamrepository")->getLatestGameJam();
+        }
+
+        if ($gamejam == null) {
+            throw new NoGameJamException();
+        }
+        return $gamejam;
+    }
+
     /**
      * @Route("/gamejam/submit/{id}", name="gamejam_web_submit")
      * @Method({"GET"})
      */
-    public function webSubmitAction(Request $request, Program $program)
-    {
-        if ($this->getUser() == null)
-        {
+    public function webSubmitAction(Request $request, Program $program) {
+        if ($this->getUser() == null) {
             throw new AuthenticationException();
         }
         $gamejam = $this->get("gamejamrepository")->getCurrentGameJam();
@@ -104,26 +119,19 @@ class GameSubmissionController extends Controller
                 "id" => $program->getId()
             )));
         }
-        if ($this->getUser() != $program->getUser())
-        {
+        if ($this->getUser() != $program->getUser()) {
             return new RedirectResponse($this->generateUrl("gamejam_submit_own"));
         }
-        
-        
+
         $program->setGamejam($gamejam);
         $program->setGameJamSubmissionDate(new \DateTime());
 
         $this->get('catroweb.gamejamtag.check')->checkDescriptionTag($program);
 
-        $this->getDoctrine()
-            ->getManager()
-            ->persist($program);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-        
+        $this->persistAndFlush($program);
+
         $url = $this->assembleFormUrl($gamejam, $program->getUser(), $program, $request);
-        
+
         if ($url != null) {
             return new RedirectResponse($url);
         } else {
@@ -132,9 +140,8 @@ class GameSubmissionController extends Controller
             )));
         }
     }
-    
-    private function assembleFormUrl($gamejam, $user, $program, $request)
-    {
+
+    private function assembleFormUrl($gamejam, $user, $program, $request) {
         $languageCode = $this->getLanguageCode($request);
 
         $url = $gamejam->getFormUrl();
@@ -148,9 +155,21 @@ class GameSubmissionController extends Controller
     private function getLanguageCode($request) {
         $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
 
-        if($languageCode != "DE")
-            $languageCode = "EN";
+        switch($languageCode){
+          case 'DE':
+          case 'IT':
+          case 'PL':
+          case 'ES':
+            break;
+          default:
+            $languageCode = 'EN';
+        }
 
         return $languageCode;
+    }
+
+    private function persistAndFlush(Program $program) {
+        $this->getDoctrine()->getManager()->persist($program);
+        $this->getDoctrine()->getManager()->flush();
     }
 }

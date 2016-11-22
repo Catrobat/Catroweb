@@ -17,6 +17,15 @@ class LoopEndStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "End of loop";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_orange.png";
+    }
 }
 
 ?>

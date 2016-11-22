@@ -66,73 +66,12 @@ class TutorialController extends Controller
       }
 
       if ($page == -1) {
-        return $this->get('templating')->renderResponse(':help:tutorialcards.html.twig', array('count' => $cards_num));
+          return $this->get('templating')->renderResponse(':help:tutorialcards.html.twig', array('count' => $cards_num));
       }
 
-      $blocks = array();
-      $blocks[0] = array('block' => 'one', 'images' => 1);
-      $blocks[1] = array('block' => 'two', 'images' => 1);
+      $blocks = $this->generateBlocks($page);
 
-      switch($page) {
-        case 2:
-        case 3:
-        case 10:
-          $blocks[2] = array('block' => 'three', 'images' => 1);
-          break;
-
-        case 9:
-          $blocks[0] = array('block' => 'one', 'images' => 2);
-          $blocks[2] = array('block' => 'three', 'images' => 1);
-          break;
-
-        case 11:
-          $blocks[1] = array('block' => 'two', 'images' => 2);
-          break;
-
-        case 12:
-          $blocks[1] = array('block' => 'two', 'images' => 3);
-          break;
-      }
-
-      $example_link = null;
-      switch($page) {
-        case 1:
-          $example_link = $this->generateUrl('program', array('id' => 3983));
-          break;
-        case 2:
-          $example_link = $this->generateUrl('program', array('id' => 3984));
-          break;
-        case 3:
-          $example_link = $this->generateUrl('program', array('id' => 3985));
-          break;
-        case 4:
-          $example_link = $this->generateUrl('program', array('id' => 3986));
-          break;
-        case 5:
-          $example_link = $this->generateUrl('program', array('id' => 3987));
-          break;
-        case 6:
-          $example_link = $this->generateUrl('program', array('id' => 3988));
-          break;
-        case 7:
-          $example_link = $this->generateUrl('program', array('id' => 3990));
-          break;
-        case 8:
-          $example_link = $this->generateUrl('program', array('id' => 3991));
-          break;
-        case 9:
-          $example_link = $this->generateUrl('program', array('id' => 3992));
-          break;
-        case 10:
-          $example_link = $this->generateUrl('program', array('id' => 3979));
-          break;
-        case 11:
-          $example_link = $this->generateUrl('program', array('id' => 3981));
-          break;
-        case 12:
-          $example_link = $this->generateUrl('program', array('id' => 3982));
-          break;
-      }
+      $example_link = $this->setExampleLink($page);
 
       return $this->get('templating')->renderResponse(':help:tutorialcard.html.twig', array(
         'page' => $page,
@@ -154,14 +93,7 @@ class TutorialController extends Controller
 
       $categories = $em->getRepository('AppBundle:StarterCategory')->findBy(array(), array('order' => 'asc'));
 
-      $categories_twig = array();
-
-      foreach ($categories as $category) {
-          $categories_twig[] = array(
-        'id' => $category->getId(),
-        'alias' => $category->getAlias(),
-      );
-      }
+      $categories_twig = $this->generateCategoryArray($categories);
 
       return $this->get('templating')->renderResponse(':help:starterPrograms.html.twig', array(
       'categories' => $categories_twig,
@@ -182,22 +114,7 @@ class TutorialController extends Controller
 
       $screenshot_repository = $this->get('screenshotrepository');
 
-      $retArray = array(
-      'CatrobatProjects' => array(),
-    );
-
-      foreach ($programs as $program) {
-          $retArray['CatrobatProjects'][] = array(
-        'ProjectId' => $program->getId(),
-        'ProjectName' => $program->getName(),
-        'Downloads' => $program->getDownloads(),
-        'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
-        'ProjectUrl' => ltrim($this->generateUrl('program', array(
-          'flavor' => $request->attributes->get('flavor'),
-          'id' => $program->getId(),
-        )), '/'),
-      );
-      }
+      $retArray = $this->receiveCategoryPrograms($request, $programs, $screenshot_repository);
 
       $retArray['CatrobatInformation'] = array(
       'BaseUrl' => ($request->isSecure() ? 'https://' : 'http://').$request->getHttpHost().'/',
@@ -216,4 +133,125 @@ class TutorialController extends Controller
   {
       return $this->get('templating')->renderResponse(':help:gamejam.html.twig');
   }
+
+    /**
+     * @param $page
+     * @return array
+     */
+    private function generateBlocks($page) {
+        $blocks = array();
+        $blocks[0] = array('block' => 'one', 'images' => 1);
+        $blocks[1] = array('block' => 'two', 'images' => 1);
+
+        switch ($page) {
+            case 2:
+            case 3:
+            case 10:
+                $blocks[2] = array('block' => 'three', 'images' => 1);
+                break;
+
+            case 9:
+                $blocks[0] = array('block' => 'one', 'images' => 2);
+                $blocks[2] = array('block' => 'three', 'images' => 1);
+                break;
+
+            case 11:
+                $blocks[1] = array('block' => 'two', 'images' => 2);
+                break;
+
+            case 12:
+                $blocks[1] = array('block' => 'two', 'images' => 3);
+                break;
+        }
+        return $blocks;
+    }
+
+    /**
+     * @param $page
+     * @return null|string
+     */
+    private function setExampleLink($page) {
+        $example_link = null;
+        switch ($page) {
+            case 1:
+                $example_link = $this->generateUrl('program', array('id' => 3983));
+                break;
+            case 2:
+                $example_link = $this->generateUrl('program', array('id' => 3984));
+                break;
+            case 3:
+                $example_link = $this->generateUrl('program', array('id' => 3985));
+                break;
+            case 4:
+                $example_link = $this->generateUrl('program', array('id' => 3986));
+                break;
+            case 5:
+                $example_link = $this->generateUrl('program', array('id' => 3987));
+                break;
+            case 6:
+                $example_link = $this->generateUrl('program', array('id' => 3988));
+                break;
+            case 7:
+                $example_link = $this->generateUrl('program', array('id' => 3990));
+                break;
+            case 8:
+                $example_link = $this->generateUrl('program', array('id' => 3991));
+                break;
+            case 9:
+                $example_link = $this->generateUrl('program', array('id' => 3992));
+                break;
+            case 10:
+                $example_link = $this->generateUrl('program', array('id' => 3979));
+                break;
+            case 11:
+                $example_link = $this->generateUrl('program', array('id' => 3981));
+                break;
+            case 12:
+                $example_link = $this->generateUrl('program', array('id' => 3982));
+                break;
+        }
+        return $example_link;
+    }
+
+    /**
+     * @param $categories
+     * @return array
+     */
+    private function generateCategoryArray($categories) {
+        $categories_twig = array();
+
+        foreach ($categories as $category) {
+            $categories_twig[] = array(
+                'id' => $category->getId(),
+                'alias' => $category->getAlias(),
+            );
+        }
+        return $categories_twig;
+    }
+
+    /**
+     * @param Request $request
+     * @param $programs
+     * @param $screenshot_repository
+     * @return array
+     */
+    private function receiveCategoryPrograms(Request $request, $programs, $screenshot_repository) {
+        $retArray = array(
+            'CatrobatProjects' => array(),
+        );
+
+        foreach ($programs as $program) {
+            $retArray['CatrobatProjects'][] = array(
+                'ProjectId' => $program->getId(),
+                'ProjectName' => $program->getName(),
+                'Downloads' => $program->getDownloads(),
+                'ScreenshotSmall' => $screenshot_repository->getThumbnailWebPath($program->getId()),
+                'ProjectUrl' => ltrim($this->generateUrl('program', array(
+                    'flavor' => $request->attributes->get('flavor'),
+                    'id' => $program->getId(),
+                )), '/'),
+            );
+        }
+        return $retArray;
+    }
 }

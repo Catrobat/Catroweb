@@ -23,6 +23,15 @@ class IfLogicElseStatement extends Statement
         return $this->spaces + 1;
     }
 
+    public function getBrickText()
+    {
+        return "Else";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_orange.png";
+    }
 }
 
 ?>

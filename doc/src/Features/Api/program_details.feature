@@ -41,6 +41,7 @@ Feature: Show program details
                                 "Version":"0.8.5",
                                 "Views":"9",
                                 "Downloads":"333",
+                                "Private": false,
                                 "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"pocketcode/download/2.catrobat",
                                 "FileSize":2.5

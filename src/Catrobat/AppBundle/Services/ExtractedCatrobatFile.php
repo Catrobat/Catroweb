@@ -71,24 +71,40 @@ class ExtractedCatrobatFile
     public function getContainingImagePaths()
     {
         $finder = new Finder();
-        $finder->files()->in($this->path . 'images/');
         $file_paths = array();
-        foreach ($finder as $file) {
-            $file_paths[] = '/' . $this->web_path . 'images/' . $file->getFilename();
+
+        if ($this->hasScenes()) {
+            $finder->files()->in($this->path . '/*/images/');
+            foreach ($finder as $file) {
+                $parts = explode($this->dir_hash . '/', $file->getRealPath());
+                $file_paths[] = '/' . $this->web_path . $parts[1];
+            }
+        } else {
+            $finder->files()->in($this->path . 'images/');
+            foreach ($finder as $file) {
+                $file_paths[] = '/' . $this->web_path . 'images/' . $file->getFilename();
+            }
         }
-        
         return $file_paths;
     }
 
     public function getContainingSoundPaths()
     {
         $finder = new Finder();
-        $finder->files()->in($this->path . 'sounds/');
         $file_paths = array();
-        foreach ($finder as $file) {
-            $file_paths[] = '/' . $this->web_path . 'sounds/' . $file->getFilename();
+
+        if ($this->hasScenes()) {
+            $finder->files()->in($this->path . '/*/sounds/');
+            foreach ($finder as $file) {
+                $parts = explode($this->dir_hash . '/', $file->getRealPath());
+                $file_paths[] = '/' . $this->web_path . $parts[1];
+            }
+        } else {
+            $finder->files()->in($this->path . 'sounds/');
+            foreach ($finder as $file) {
+                $file_paths[] = '/' . $this->web_path . 'sounds/' . $file->getFilename();
+            }
         }
-        
         return $file_paths;
     }
 
@@ -111,7 +127,28 @@ class ExtractedCatrobatFile
         } elseif (is_file($this->path . 'automatic_screenshot.png')) {
             $screenshot_path = $this->path . 'automatic_screenshot.png';
         }
-        
+        $finder = new Finder();
+        //$finder->in($this->path->getPath())->directories()->name("automatic_screenshot.png")
+        if($screenshot_path === null)
+        {
+            $fu = $finder->in($this->path)->files()->name("manual_screenshot.png");
+
+            foreach ($fu as $file)
+            {
+                $screenshot_path = $file->getPathname();
+                break;
+            }
+        }
+        if($screenshot_path === null) {
+            $fu = $finder->in($this->path)->files()->name("automatic_screenshot.png");
+
+            foreach ($fu as $file)
+            {
+                $screenshot_path = $file->getPathname();
+                break;
+            }
+        }
+
         return $screenshot_path;
     }
 
@@ -123,6 +160,11 @@ class ExtractedCatrobatFile
     public function getPath()
     {
         return $this->path;
+    }
+
+    public function getWebPath()
+    {
+        return $this->web_path;
     }
 
     public function getProgramXmlProperties()
@@ -181,5 +223,10 @@ class ExtractedCatrobatFile
             $objects[] = $object;
         }
         return $objects;
+    }
+
+    public function hasScenes()
+    {
+        return count($this->program_xml_properties->xpath('//scenes')) != 0;
     }
 }

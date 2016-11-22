@@ -25,8 +25,7 @@ class TaggingController extends Controller
      * @Route("/api/tags/getTags.json", name="api_get_tags", defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function taggingAction(Request $request)
-    {
+    public function taggingAction(Request $request) {
         $tags_repo = $this->get('tagrepository');
 
         $em = $this->getDoctrine()->getManager();
@@ -37,14 +36,13 @@ class TaggingController extends Controller
         $tags['constantTags'] = array();
 
         $language = $request->query->get('language');
-        if(!in_array($language, $metadata)) {
+        if (!in_array($language, $metadata)) {
             $language = 'en';
             $tags['statusCode'] = 404;
         }
         $results = $tags_repo->getConstantTags($language);
 
-        foreach($results as $tag)
-        {
+        foreach ($results as $tag) {
             array_push($tags['constantTags'], $tag[$language]);
         }
         return JsonResponse::create($tags);

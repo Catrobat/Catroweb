@@ -26,6 +26,32 @@ class PlaceAtStatement extends Statement
 
         return $code;
     }
+
+    public function getBrickText()
+    {
+        foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
+            if ($statement instanceof FormulaStatement) {
+                switch($statement->getCategory()) {
+                    case 'Y_POSITION':
+                        $formula_y_dest = $statement->execute();
+                        break;
+                    case 'X_POSITION':
+                        $formula_x_dest = $statement->execute();
+                        break;
+                }
+            }
+        }
+
+        $formula_x_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_x_dest);
+        $formula_y_dest_no_markup = preg_replace("#<[^>]*>#", '', $formula_y_dest);
+
+        return "Place at X: " . $formula_x_dest_no_markup . " Y: " . $formula_y_dest_no_markup;
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_blue.png";
+    }
 }
 
 ?>

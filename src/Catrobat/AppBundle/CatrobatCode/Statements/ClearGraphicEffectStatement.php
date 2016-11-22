@@ -14,6 +14,15 @@ class ClearGraphicEffectStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Clear graphic effects";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_green.png";
+    }
 }
 
 ?>

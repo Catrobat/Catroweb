@@ -14,6 +14,19 @@ class VibrationStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        $formula_string = $this->getFormulaListChildStatement()->executeChildren();
+        $formula_string_without_markup = preg_replace("#<[^>]*>#", '', $formula_string);
+
+        return "Vibrate for " . $formula_string_without_markup ." second(s)";
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_blue.png";
+    }
+
 }
 
 ?>

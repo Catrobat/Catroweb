@@ -1,6 +1,6 @@
 ---
 localLanguage: anglais
-username: "Nom d'utilisateur"
+username: Nom d'utilisateur
 password: Mot de passe
 aboutPocketCode: A propos de Pocket Code
 tutorials: Tutoriels
@@ -16,16 +16,16 @@ country: Pays
 loginText: Identifiant
 privacyPolicy: Politique de confidentialité
 imprint: Mentions légales
-somethingWentWrong: "Ooooops, quelque chose s'est mal passé."
-pleaseTryAgain: Essayez à nouveau !
-oldVersionError: Veuillez mettre à jour vers la dernière version de Pocket Code !
-more: plus
-less: moins
+somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
+pleaseTryAgain: 'Essayez à nouveau !'
+oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
+more: 'plus'
+less: 'moins'
 ok: OK
-clickToDownloadProgram: "Pour télécharger le programme d'exemple, cliquez %link_start% ici %link_end%."
-registrationError: Username or email address already in use.
+clickToDownloadProgram: 'Pour télécharger le programme d''exemple, cliquez %link_start% ici %link_end%.'
+registrationError: 'Username or email address already in use.'
 programs:
-  featured: "A l'affiche"
+  featured: A l'affiche
   newest: Nouveaux programmes
   most:
     viewed: Les plus populaires
@@ -39,13 +39,13 @@ programs:
   uploaded: Programmes téléchargés
   reportAsInappropriate: Signaler comme inapproprié
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: 'Merci de vous %login% pour signaler ce programme comme étant inapproprié.'
-  reportDialogHeader: "Pourquoi pensez-vous que ce programme n'est pas approprié ?"
+  reportLoginText: Merci de vous %login% pour signaler ce programme comme étant inapproprié.
+  reportDialogHeader: Pourquoi pensez-vous que ce programme n'est pas approprié ?
   reportDialogReason: Indiquer un motif
   reportOwnProgram: Vous ne pouvez pas marquer votre propre programme.
-  reportAlready: "Tu as déjà signalé l'appli comme étant inappropriée."
+  reportAlready: Tu as déjà signalé l'appli comme étant inappropriée.
   reportDone: Vous avez déclaré ce programme comme étant inapproprié !
-  updateAppHeader: "Mettre à jour l'application"
+  updateAppHeader: Mettre à jour l'application
   updateAppText: Veuillez mettre à jour votre application pour pouvoir télécharger ce programme.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
@@ -78,49 +78,61 @@ profile:
   secondEmail: Mon deuxième email
   myPrograms: Mes programmes
   form:
-    passwordTooShort: 'Le nouveau mot de passe doit avoir au moins %length% caractères.'
-    passwordTooLong: 'Le nouveau mot de passe peut avoir un maximum de %length% caractères.'
-    passwordIsUsername: "Le mot de passe doit être différent de l'identifiant."
-    emailNotValid: "Cette adresse e-mail n'est pas valide."
+    passwordTooShort: Le nouveau mot de passe doit avoir au moins %length% caractères.
+    passwordTooLong: Le nouveau mot de passe peut avoir un maximum de %length% caractères.
+    passwordIsUsername: Le mot de passe doit être différent de l'identifiant.
+    passwordWrong: Wrong password
+    emailNotValid: Cette adresse e-mail n'est pas valide.
     emailMissing: Erreur lors de la mise à jour de cette adresse e-mail. Vous devez avoir au moins une adresse e-mail validée.
     emailExists: Cette adresse e-mail existe déjà.
     submitSuccess: enregistré!
   reallyDeleteProgram: Voulez vous vraiment effacer votre programme
   programsOf: Programmes de
-  changePicture: "Changer l'image"
+  changePicture: Changer l'image
   avatar:
-    pictureTooLarge: "L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo."
+    pictureTooLarge: L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo.
     uploadError: Désolé, il y a eu un problème pendant le téléchargement !
-    noSupport: "Ce type d'image n'est pas pris en charge, veuillez essayer une autre image."
+    noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
+myprofile:
+  editProfile: Edit profile
+  edit: Edit
+  done: Done
+  avatar: Avatar
+  email: E-Mail
+  editAvatar: Edit avatar
+  editUsername: Edit username
+  editPassword: Edit password
+  editCountry: Edit country
+  editEmail: Edit E-Mail
 licenseToPlay:
-  link: Licence pour jouer
+  link: 'Licence pour jouer'
   title: 'Licence de jeu - Partagez et créditez'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: "En savoir plus sur les conditions d'utilisation de la communauté en ligne de Catrobat sur %link-termsOfUse%."
+  text6: 'En savoir plus sur les conditions d''utilisation de la communauté en ligne de Catrobat sur %link-termsOfUse%.'
   list1:
     item1: partagez vos gâteaux avec la recette
     item2: créditez ceux qui vous ont inspiré
   version: Version 1.1, 2 avril 2013
 teachers:
   login:
-    title: Espace enseignants
-    description: Cet espace peut être utilisé par les enseignants.
+    title: 'Espace enseignants'
+    description: 'Cet espace peut être utilisé par les enseignants.'
 termsOfUse:
-  title: "Conditions d'utilisation"
+  title: Conditions d'utilisation
   headline: Bienvenue dans la communauté Catrobat !
   text1: 'Dans le cadre de la communauté Catrobat, tu partages des applications et des idées avec des gens :'
-  text2: 'Nous avons besoin de ton aide pour créer un endroit favorable pour tous les membres de la communauté. Voici comment tu peux aider :'
+  text2: "Nous avons besoin de ton aide pour créer un endroit favorable pour tous les membres de la communauté. Voici comment tu peux aider :"
   text3: "Le projet Catrobat cherche à promouvoir la coooperation et la créativité de chacun pour le bien de l'humanité. Tu peux devenir un membre actif de la communauté Catrobat en offrant tes applications à la communauté comme le font autres membres actifs :"
   text4: 'Un cadeau pour toi :'
-  text5: "Conditions d'utilisation et d'entretien :"
+  text5: 'Conditions d''utilisation et d''entretien :'
   list1:
     item1: de beaucoup de pays et cultures diverses
     item2: de tous les âges (jeunes enfants, adolescents et grands-parents)
-    item3: "avec tous les niveaux d'expérience"
+    item3: avec tous les niveaux d'expérience
   list2:
     item1: Être respectueux. Merci de considérer que tes applications partagés sont accéssible à des personnes de tous les ages avec des expériences différentes.
     item2: "Reconnaissance. N'hesite pas à modifier les applications des autres - il faut toutefois reconnaître leur travail. Tu peux faire cela dans la description de l'application. Merci de voir le paragraphe en-dessous cette liste pour plus d'informations sur la modification d'applications des autres utilisateurs."
@@ -128,13 +140,13 @@ termsOfUse:
     item4: "Ne partage pas d'informations privées. Notamment l'adesse e-mail, le numéro de téléphone ou d'autres informations de contact."
     item5: "Contribuer à maintenir le site conviviale. Si tu penses une application ou commentaire trop insultant, méchant, sévère ou autrement inapproprié, clique sur le bouton « signaler comme inapproprié » et explique brièvement pourquoi. L'équipe Catrobat considérera le rapport et supprimera éventuellement l'application, le commentaire ou le message."
   list3:
-    item1: "En téléchargeant une appli sur notre site web, tu acceptes de soumettre ton œuvre à une licence libre. Le système Catrobat est aussi disponible sous licence libre, qui permet à chacun de consulter les applications téléchargées par les utilisateurs et de modifier et personnaliser ces applications pour créer des versions nouvelles des jeux, animations ou d'autres applis. Cela permet une collaboration sans limites. Tout le monde peut profiter de ton œuvre et chacun peut l'utiliser et améliorer. C'est un peu comme textes et images mises à disposition sur Wikipedia par des utilisateurs des quatre coins du monde. C'est un cadeau que tu offres à l'humanité: tu donnes à tout le monde et tous les autres qui téléchargent sur le site web donnent aussi leurs œuvres à toi. Ainsi une application téléchargée est un cadeau de grande valeur que son propriétaire t'offre gratuitement pourvue que toi aussi, tu fais comme cela."
-    item2: "Tu n'est pas obligé à accepter ce cadeau, mais si tu veux l'accepter quelques règles s'appliquent. Ces règles te permettent d'utiliser les œuvres des autres et de les améliorer. Ensuite, tu peux télécharger ton appli sur notres site web. Un autre atout d'une licence libre est que tu n'est pas responsable pour les problèmes qui puissent se produire en utilisant tes applis."
+    item1: 'En téléchargeant une appli sur notre site web, tu acceptes de soumettre ton œuvre à une licence libre. Le système Catrobat est aussi disponible sous licence libre, qui permet à chacun de consulter les applications téléchargées par les utilisateurs et de modifier et personnaliser ces applications pour créer des versions nouvelles des jeux, animations ou d''autres applis. Cela permet une collaboration sans limites. Tout le monde peut profiter de ton œuvre et chacun peut l''utiliser et améliorer. C''est un peu comme textes et images mises à disposition sur Wikipedia par des utilisateurs des quatre coins du monde. C''est un cadeau que tu offres à l''humanité: tu donnes à tout le monde et tous les autres qui téléchargent sur le site web donnent aussi leurs œuvres à toi. Ainsi une application téléchargée est un cadeau de grande valeur que son propriétaire t''offre gratuitement pourvue que toi aussi, tu fais comme cela.'
+    item2: Tu n'est pas obligé à accepter ce cadeau, mais si tu veux l'accepter quelques règles s'appliquent. Ces règles te permettent d'utiliser les œuvres des autres et de les améliorer. Ensuite, tu peux télécharger ton appli sur notres site web. Un autre atout d'une licence libre est que tu n'est pas responsable pour les problèmes qui puissent se produire en utilisant tes applis.
     item3: "Si tu utilises et modifies des applis des autres utilisateurs, il faut les mentionner explicitement. Le nom que tu as sélectionné pour ton compte Catrobat sera aussi mentionné si quelqu'un utilise et modifie tes applis. Ainsi tout le monde peut profiter du travail de chacun."
     item4: 'Pour les conditions juridiques précises, veuillez consulter %link-licenseUploaded%.'
   list4:
     item1: "Nous t'offrons nos applications et ressources Internet liées au système Catrobat comme par exemple des applications créees par l'équipe Catrobat, nos sites webs et ressources disponibles sur Internet, notre code source lié au système Catrobat et des matériaux supplémentaires comme par exemple des images, des sons et des texts maintenant et à l'avenir sous des licences libres de Catrobat."
-    item2: "Ces licences nous permettent d'offrir Catrobat gratuitement. Grâce à ces licences, il est aussi possible d'utiliser et de modifier nos applications à ton gré. Il n'y a que quelques restrictions pour assurer que le système Catrobat reste libre et utile pour tout le monde pour toujours."
+    item2: Ces licences nous permettent d'offrir Catrobat gratuitement. Grâce à ces licences, il est aussi possible d'utiliser et de modifier nos applications à ton gré. Il n'y a que quelques restrictions pour assurer que le système Catrobat reste libre et utile pour tout le monde pour toujours.
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
     item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
@@ -142,103 +154,103 @@ termsOfUse:
     item3: "Nous nous réservons le droit de refuser, supprimer ou cacher des applications, des comptes d'utilisateur et tous les matériaux numériques téléchargés vers le site web Catrobat à tout temps à notre discretion, comme par exemple si nous encontrons des logiciels qui contienntent du matériel inapproprié ou si un utilisateur enfreint les droits d'autrui."
     item4: "Les logiciels et ressources Internet Catrobat ont pour but d'être utiles. Pourtant, nous donnons aucune garantie."
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: "Retourne-ici de temps en temps car nous cherchons toujours à améliorer nos conditions d'utilisation."
+  bottom1: Retourne-ici de temps en temps car nous cherchons toujours à améliorer nos conditions d'utilisation.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 mars 2014
 help:
   stepByStep:
-    title: Intro premiers pas
-    start: 'Position de départ :'
+    title: "Intro premiers pas"
+    start: "Position de départ :"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Make a new program
+      title: 'Make a new program'
       detail:
         text1: 'Appuyer sur  « Nouveau ».'
         text2: 'Entrer un titre, sélectionner « Créer appli » et appuyer sur  « OK ».'
     step2:
-      title: Create a new object
+      title: "Create a new object"
       detail:
         text1: 'Appuyer :'
-        text2: Choose the source of the first look of your new object.
+        text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: Dessiner une nouvelle apparence.
-        special2: Sélectionner dans la galerie.
-        special3: Prendre une photo.
+        special1: 'Dessiner une nouvelle apparence.'
+        special2: 'Sélectionner dans la galerie.'
+        special3: 'Prendre une photo.'
     step3:
-      title: Start Moving
+      title: "Start Moving"
       detail:
         text1: 'Appuyer :'
         text2: 'Le premier élément utilisé se trouve dans la catégorie  « Mouvement ».'
-        text3: "Sélectionner l'élément  « Glisser ». L'objet est déplacé vers la nouvelle position définie par l'élément sur la scène."
-        text4: "L'élément flotte. Placer l'élément dans la position souhaité pour le coller. Il est aussi possible de déplacer des éléments insérés en appuyant sur l'élément jusqu'à ce qu'il flotte."
+        text3: 'Sélectionner l''élément  « Glisser ». L''objet est déplacé vers la nouvelle position définie par l''élément sur la scène.'
+        text4: 'L''élément flotte. Placer l''élément dans la position souhaité pour le coller. Il est aussi possible de déplacer des éléments insérés en appuyant sur l''élément jusqu''à ce qu''il flotte.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Utiliser le bouton Retour Android pour retourner.
+        text6: 'Utiliser le bouton Retour Android pour retourner.'
     step4:
-      title: Changer Look
+      title: "Changer Look"
       description: "Il est possible de changer l'apparence d'un objet."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: "Placer l'élément en-dessous l'élément « Glisser » ."
-        text3: Appuyer sur le champ de liste déroulante pour créer une nouvelle apparence.
-        text4: "Sélectionner la source de l'image comme décrit avant."
-        text5: "Sélectionner l'image."
-        text6: Appuyer sur Play pour regarder la scène.
+        text2: 'Placer l''élément en-dessous l''élément « Glisser » .'
+        text3: 'Appuyer sur le champ de liste déroulante pour créer une nouvelle apparence.'
+        text4: 'Sélectionner la source de l''image comme décrit avant.'
+        text5: 'Sélectionner l''image.'
+        text6: 'Appuyer sur Play pour regarder la scène.'
     step5:
-      title: Parler
-      description: Faire un objet parler.
+      title: "Parler"
+      description: "Faire un objet parler."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: "Plasser l'élément en-dessous l'élément « Passer au style »."
-        text3: Appuyer sur Play pour regarder la scène.
+        text2: 'Plasser l''élément en-dessous l''élément « Passer au style ».'
+        text3: 'Appuyer sur Play pour regarder la scène.'
     step6:
-      title: Again and again
-      description: Les objets en action.
+      title: 'Again and again'
+      description: "Les objets en action."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: "Placer l'élément « Répéter continuellement » en-dessous l'élément « Quand l'application a démarrée »."
+        text2: 'Placer l''élément « Répéter continuellement » en-dessous l''élément « Quand l''application a démarrée ».'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Appuyer sur le champ de texte et mettre les valeurs de x et y à 0.
-        text6: Appuyer sur Play pour regarder la scène.
+        text5: 'Appuyer sur le champ de texte et mettre les valeurs de x et y à 0.'
+        text6: 'Appuyer sur Play pour regarder la scène.'
     step7:
-      title: Tapping is everything
-      description: "Il est aussi possible de contrôler les actions d'un objet lorsque l'appli est en cours d'exécution."
+      title: "Tapping is everything"
+      description: 'Il est aussi possible de contrôler les actions d''un objet lorsque l''appli est en cours d''exécution.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Le script est complet.
-        text5: "Appuyer sur play pour regarder les actions. En appuyant l'objet il commence à tourner."
+        text4: 'Le script est complet.'
+        text5: 'Appuyer sur play pour regarder les actions. En appuyant l''objet il commence à tourner.'
     step8:
-      title: Copy, delete or edit a brick
+      title: "Copy, delete or edit a brick"
       detail:
-        text1: "Appuyer sur la gauche de chaque élément pour ouvrir le menu contextuel. L'éditeur de formule permet de déplacer, copier, supprimer ou modifier les valeur de l'élément."
+        text1: 'Appuyer sur la gauche de chaque élément pour ouvrir le menu contextuel. L''éditeur de formule permet de déplacer, copier, supprimer ou modifier les valeur de l''élément.'
     step9:
-      title: Navigation in the app
+      title: "Navigation in the app"
       detail:
-        text1: "Utiliser le bouton retour Android pour naviguer dans l'appli."
-        text2: "Retourner à l'aperçu de l'objet. D'ici, il est possible d'ouvrir les scripts, les looks et les sons de l'objet. Il est aussi possible de renommer, copier, ajouter ou supprimer les sons. "
-        text3: "Appuyer encore une fois sur le bouton retour Android pour ouvrir l'aperçu des objets et de l'arrière plan."
+        text1: 'Utiliser le bouton retour Android pour naviguer dans l''appli.'
+        text2: 'Retourner à l''aperçu de l''objet. D''ici, il est possible d''ouvrir les scripts, les looks et les sons de l''objet. Il est aussi possible de renommer, copier, ajouter ou supprimer les sons. '
+        text3: 'Appuyer encore une fois sur le bouton retour Android pour ouvrir l''aperçu des objets et de l''arrière plan.'
     step10:
-      title: Change the background
+      title: "Change the background"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: "L'arrière-plan est comme un objet mais il n'y a qu'un seul arrière-plan."
-        text2: "Il est possible d'ajouter des scripts, sons et looks à l'arrière-plan comme pour les objets."
+        text1: 'L''arrière-plan est comme un objet mais il n''y a qu''un seul arrière-plan.'
+        text2: 'Il est possible d''ajouter des scripts, sons et looks à l''arrière-plan comme pour les objets.'
     step11:
-      title: Main Menu
-      description: Appuyer sur le bouton retour Android pour ouvrir le menu principal.
+      title: "Main Menu"
+      description: "Appuyer sur le bouton retour Android pour ouvrir le menu principal."
       detail:
-        text1: "Continuer avec l'application actuellement active."
-        text2: Ajouter une nouvelle appli.
-        text3: Afficher toutes les applications locales.
-        text4: "Ouvrir l'aide et discuter avec d'autres utilisateurs."
-        text5: "Explorer le monde d'applications Pocket Code. Télécharger et rearranger les applications à ton goût."
-        text6: "Télécharger l'appli actuellement active."
+        text1: 'Continuer avec l''application actuellement active.'
+        text2: 'Ajouter une nouvelle appli.'
+        text3: 'Afficher toutes les applications locales.'
+        text4: 'Ouvrir l''aide et discuter avec d''autres utilisateurs.'
+        text5: 'Explorer le monde d''applications Pocket Code. Télécharger et rearranger les applications à ton goût.'
+        text6: 'Télécharger l''appli actuellement active.'
   tutorialcards:
     title: Tutoriels
     description1: Ce tutoriel te montre comment utiliser les astuces efficacement dans
@@ -250,22 +262,22 @@ help:
       title: Changer la tailler
       description: Appuyer sur le canard pour modifier la taille.
       one: Add the object of which you would like to change the size, e.g. Animal.
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      two: Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped.
     card2:
       title: Changer Look
       description: Utiliser cette astuce pour compter automatiquement.
       one: Add the object of which you would like to change its look, e.g. items.
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      two: Include further pictures in the object's looks.
+      three: Insert the following bricks into the scripts of the object in order to continually switch it's look after one second.
     card3:
       title: Animations
       description: Utiliser cette astuce pour faire voler un perroquet.
       one: Add the object you want to be moving.
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      two: Include another picture in the object's looks which illustrates the movement.
+      three: Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge.
     card4:
       title: Glisser
-      description: "Glisser d'un point à un autre."
+      description: Glisser d'un point à un autre.
       one: Add the object you want to be gliding. e.g. plane.
       two: Insert the following bricks and define the area in which the movement should happen.
     card5:
@@ -280,31 +292,31 @@ help:
       two: Insert the following bricks in order to make the voice output possible.
     card7:
       title: Accéléromètre
-      description: "Cette astuce permet de contrôler un objet avec l'inclinaison de l'appareil mobile."
+      description: Cette astuce permet de contrôler un objet avec l'inclinaison de l'appareil mobile.
       one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      two: Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.
     card8:
       title: Boussole
       description: Utiliser ce code pour programmer une boussole.
       one: Add the object you want to point in compass direction.
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      two: Insert the following bricks in order to set the object's orientation. Additionally include a forever loop.
     card9:
       title: Diffuser
       description: Regarde ce code ! Il indique comment les objets peuvent communiquer les uns avec les autres.
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      one: Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look.
       two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
       three: In this case the background changes when the object in the front layer is tapped.
     card10:
       title: Show variable
       description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
+      one: Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.
       two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
       three: Through „Show variable“ you can display the values on stage.
     card11:
       title: Collision detection
       description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      one: Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).
+      two: Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.
     card12:
       title: Face detection
       description: Control an object by using face detection.
@@ -320,7 +332,7 @@ help:
       music: Music And Dance
   gameJam:
     title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
+    text0: First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.
     title1: Registration
     text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
     title2: Envoyer
@@ -330,31 +342,29 @@ help:
     title4: Create Android app
     text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
     title5: Download app
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
+    text5: After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.
     title6: Register/Login at GameJolt.com
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
+    text6: Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password.
     title7: Upload your game on the Game Jolt Site
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7: 'After you''re logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose ''Other'' and add to the field Other Engine/Language/Tool ''Android''. As ''Development'' status choose ''Finished/Stable''. Make sure to include #AliceJam150 in the description so it appears on the %link% page.'
     text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
+    text7_2: Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. 
     text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
     text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
     text7_5: After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game.
     text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text7_7: Other people will now be able to find your game and it will appear on the %link% page.
   aliceGameJamTutorialcards:
     title1: (Welcome to) Wonderland
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    subtitle1: Animate Characters and create a 'when tapped' event
+    description1: "Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.\nFurther we show you how to create a \"when tapped\" event and how to send broadcast messages between objects."
     title2: Save Alice!
     subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
+    description2: Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects.
+    title3: The Hatter - Hit and Run
+    subtitle3: Create a moving landscape and control the Hatters' movement
     description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
+    title4: The Hatter - Hit and Run
     subtitle4: Let the Hatter shoot the evil cards
     description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
     title5: Whack a Cheshire Cat
@@ -362,9 +372,7 @@ help:
     description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
     title6: A Rabbits Race
     subtitle6: Create a moving background
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    description6: "This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.\nTo make the game a little bit more difficult we will show you how to slow down the speed of your character over time."
     download: Download the program
 oauth:
   username_header: Thank you for signing up to Pocket Code!
@@ -375,27 +383,27 @@ search:
   dotdotdot: Search...
   search: Rechercher
   results: Résultats de recherche
-  resultcount: 'Your search returned %count% results'
+  resultcount: Your search returned %count% results
 menu:
   profile: Mon profil
   logout: Déconnexion
 programLoader:
-  noPrograms: "Il n'y à aucun programme pour le moment."
+  noPrograms: Il n'y à aucun programme pour le moment.
 login:
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Identifiants oubliés?
   recoverPass: Retrouver le mot de passe
   recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
-  userOrEmail: "Nom d'utilisateur ou email"
+  userOrEmail: Nom d'utilisateur ou email
   changePass: Modifier le mot de passe
   createAccount: Create an account
   or: OU
 apk:
   download: Download as app
-  prepare: Prepare app
-  preparing: Preparing app
-  text: The process may take a while
+  prepare: 'Prepare app'
+  preparing: 'Preparing app'
+  text: 'The process may take a while'
 errors:
   username:
     blank: Username must not be blank
@@ -435,9 +443,9 @@ errors:
   program:
     invalid: Invalid program.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
   registration: Enregistrement réussi.
   token: OK
@@ -448,7 +456,7 @@ time:
   hours.ago: '{1} il y a 1 heure |]1, Inf] il y a %count% heures'
   days.ago: '{1} il y a 1 jour |]1, Inf] il y a %count% jours'
   months.ago: '{1} il y a 1 mois |]1, Inf] il y a %count% mois'
-  years.ago: "{1} il y a 1 an |]1, Inf] il y a plus d'un an"
+  years.ago: '{1} il y a 1 an |]1, Inf] il y a plus d''un an'
 language:
   arabic: Arabe
   bulgarian: Bulgare
@@ -500,7 +508,8 @@ ci:
   download: Download Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: be aware
     subheader: You can only submit your own programs

@@ -18,12 +18,12 @@ class DownloadProgramController extends Controller
      * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"})
      * @Method({"GET"})
      */
-    public function downloadProgramAction(Request $request, $id)
-    {
-        $referrer = $request->getSession()->get('referer');
+    public function downloadProgramAction(Request $request, $id) {
         /* @var $program_manager ProgramManager */
-        $program_manager = $this->get('programmanager');
         /* @var $file_repository ProgramFileRepository */
+
+        $referrer = $request->getSession()->get('referer');
+        $program_manager = $this->get('programmanager');
         $file_repository = $this->get('filerepository');
 
         $program = $program_manager->find($id);

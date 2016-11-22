@@ -42,6 +42,7 @@ Then the returned json object will be:
     "Version": "0.8.5",
     "Views": "12",
     "Downloads": "3",
+    "Private": false,
     "ProjectUrl": "pocketcode/program/1",
     "DownloadUrl": "pocketcode/download/1.catrobat",
     "FileSize": 0

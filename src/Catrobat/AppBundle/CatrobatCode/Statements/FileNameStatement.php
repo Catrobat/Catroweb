@@ -21,6 +21,11 @@ class FileNameStatement extends Statement
         $code = SyntaxHighlightingConstants::VALUE . $this->value . $this->executeChildren(). SyntaxHighlightingConstants::END;
         return $code;
     }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
 }
 
 ?>

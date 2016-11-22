@@ -2,8 +2,8 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
-  <link href="/html5/player/pocketCodePlayer.css" rel="stylesheet" />
-  <script src="/html5/player/pocketCodePlayer.js"></script>
+  <link href="https://share.catrob.at/html5/player/pocketCodePlayer.css" rel="stylesheet" />
+  <script src="https://share.catrob.at/html5/player/pocketCodePlayer.js"></script>
   <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
@@ -31,8 +31,10 @@
 
   <div id="program-middle">
       <div id="image" class="image-container">
-        <a id="url-image" class="url-image" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
           <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
+{#
+          <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});"> <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64"> <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z"></path> <polygon class="pc-svgPlayerIconSymbol" points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934"></polygon> </svg> </button>
+#}
         </a>
         {% if not isWebview() %}
           {% include ':social:social_share_desktop.html.twig' %}
@@ -123,11 +125,11 @@
             </tr>
           </table>
         </button>
-
       </div>
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}
+          <div id="gamejam-div">
           {% if app.user %}
             <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
           {% else %}
@@ -142,6 +144,10 @@
                 </table>
               </button>
             </a>
+          </div>
+          <div id="gamejam-whats">
+            <a href="{{ jam.gamejam_url }}">{{ "gamejam.whats"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</a>
+          </div>
         {% endif %}
       {% endif %}
       <br>
@@ -196,6 +202,18 @@
 
   {% if isWebview() %}
     {% include ':social:social_share_mobile.html.twig' %}
+  {% endif %}
+
+  {% if program_details.languageVersion >= 0.97 %}
+    <div class="show-hide-code">
+      <div class="show-hide-code-text">SHOW CODE</div>
+      <div class="show-hide-code-arrow">
+        <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+      </div>
+    </div>
+    <div class="codeview-wrapper">
+      {{ render(controller('AppBundle:Web/CodeView:viewCode', {'id' : program.id})) }}
+    </div>
   {% endif %}
 
   <div id="program-bottom">
@@ -278,7 +296,7 @@
       {% endfor %}
 
       <div class = "show-more">
-        <button id="show-more-button" {% if program_details.comments|length < 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
+        <button id="show-more-button" {% if program_details.comments|length <= 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
       </div>
 
     </div>
@@ -304,12 +322,12 @@
     var download_href = document.getElementById("url-download").href;
 
     $(document).on("click", "#url-download", function() {
-      var link = document.getElementById("url-download");
-      if(link.href != 'javascript:void(0)') {
-        link.href = 'javascript:void(0)';
+      var url_link = document.getElementById("url-download");
+      if(url_link.href != 'javascript:void(0)') {
+          url_link.href = 'javascript:void(0)';
 
         setTimeout(function() {
-          link.href = download_href;
+          url_link.href = download_href;
         }, 5000);
 
         window.location = download_href;
@@ -319,86 +337,118 @@
 
     counter = 10;
 
-    $(document).on("click", "#show-more-button", function() {
-      counter += 10;
-      for(var i = counter - 10; i < counter; i++)
-      {
-        $('.single-comment.hidden').first().removeClass("hidden");
-      }
-      if(!$('.single-comment.hidden').length){
-        $('.show-more').hide();
-      }
-    });
+    $(document).ready(function(){
 
-    $(document).on("click", "#close-reported-popup", function() {
-      $('#comment-successfully-reported').hide();
-    });
+      $(document).on("click", "#show-more-button", function() {
+        counter += 10;
+        for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
+        {
+          $('.single-comment.hidden').first().removeClass("hidden");
+        }
+        if(!$('.single-comment.hidden').length){
+          $('.show-more').hide();
+        }
+      });
 
-    $(document).on("click", ".delete-button", function() {
-      var pId = {{ program_details.id }};
-      var commentId = $(this).data('commentid');
-      $.ajax({
-        url:"../delete",
-        type: "get",
-        data:{ProgramId: pId, CommentId: commentId},
-        success: function(data) {
-          if (data == "log_in")
-            window.location.href = "../login";
-          else if (data == "no_admin"){
-            alert("You have no admin rights. Please Log in as an Admin");
-          }
-          else {
-            $('#comments-wrapper').load(' #comments-wrapper');
-            $('.msg').val("");
-          }
-        },
-        error: function(data) {
-          //alert(data);
-          alert("something went terribly wrong");
-        }});
-    });
 
-    $(document).on("click", ".post-button", function() {
-      var msg = $('.msg').val();
-      if(msg.length == 0) {
-        return;
-      }
-      var pId = {{ program_details.id }};
-      $.ajax({
-        url: "../comment",
-        type: "post",
-        data:{Message: msg, ProgramId: pId},
-        success: function(data) {
-          if (data == "log_in")
-            window.location.href = "../login";
-          else
-          {
-            $('#comments-wrapper').load(' #comments-wrapper');
-            $('.msg').val("");
-          }
-        },
-        error: function() {
-          alert("something went terribly wrong");
-        }});
-    })
+      $(document).on("click", ".delete-button", function() {
+        var pId = {{ program_details.id }};
+        var commentId = $(this).data('commentid');
+        $.ajax({
+          url:"../delete",
+          type: "get",
+          data:{ProgramId: pId, CommentId: commentId},
+          success: function(data) {
+            if (data == "log_in")
+              window.location.href = "../login";
+            else if (data == "no_admin"){
+              alert("You have no admin rights. Please Log in as an Admin");
+            }
+            else {
+              $('#comments-wrapper').load(' #comments-wrapper');
+              $('.msg').val("");
+            }
+          },
+          error: function(data) {
+            alert("something went terribly wrong");
+          }});
+      });
 
-    $(document).on("click", ".report-button", function() {
-      var commentId = $(this).data('commentid');
-      var pId = {{ program_details.id }};
-      $.ajax({
-        url:"../report",
-        type: "get",
-        data:{ProgramId: pId, CommentId: commentId},
-        success: function(data) {
-          if (data == "log_in")
-            window.location.href = "../login";
-          else {
-            $('#comment-successfully-reported').show();
-          }
-        },
-        error: function(data) {
-          alert("something went terribly wrong");
-        }});
+      $(document).on("click", ".post-button", function() {
+        var msg = $('.msg').val();
+        if(msg.length == 0) {
+          return;
+        }
+        var pId = {{ program_details.id }};
+        $.ajax({
+          url: "../comment",
+          type: "post",
+          data:{Message: msg, ProgramId: pId},
+          success: function(data) {
+            if (data == "log_in")
+              window.location.href = "../login";
+            else
+            {
+              $('#comments-wrapper').load(' #comments-wrapper');
+              $('.msg').val("");
+            }
+          },
+          error: function() {
+            alert("something went terribly wrong");
+          }});
+      });
+
+      $(document).on("click", ".report-button", function() {
+        var commentId = $(this).data('commentid');
+        var pId = {{ program_details.id }};
+        $.ajax({
+          url:"../report",
+          type: "get",
+          data:{ProgramId: pId, CommentId: commentId},
+          success: function(data) {
+            if (data == "log_in")
+              window.location.href = "../login";
+            else {
+              $('#comment-successfully-reported').show();
+            }
+          },
+          error: function(data) {
+            alert("something went terribly wrong");
+          }});
+      });
+
+      $(document).on("click", "#close-reported-popup", function() {
+        $('#comment-successfully-reported').hide();
+      });
+
+      $(document).on('click', '.show-hide-code', function() {
+        var text = $('.show-hide-code-text');
+        if(text.text() == 'SHOW CODE') {
+          text.addClass('showing-code');
+          $('.show-hide-code-arrow').addClass('rotate showing-code');
+          $('.show-hide-code').addClass('show-code');
+          text.text('HIDE CODE');
+          $('.codeview-wrapper').slideDown();
+        } else {
+          $('.codeview-wrapper').slideUp(400, function(){
+            text.removeClass('showing-code');
+            $('.show-hide-code-arrow').removeClass('rotate showing-code');
+            $('.show-hide-code').removeClass('show-code');
+            text.text('SHOW CODE');
+          });
+        }
+      });
+
+      /*
+      var show_hide_code_top = $('.show-hide-code').offset().top;
+      $(window).scroll(function() {
+        if ($(window).scrollTop() >= show_hide_code_top && $('.show-hide-code').hasClass('show-code')) {
+          $('.show-hide-code').addClass('fixed');
+        } else {
+          $('.show-hide-code').removeClass('fixed');
+        }
+      });
+      */
     });
 
   </script>

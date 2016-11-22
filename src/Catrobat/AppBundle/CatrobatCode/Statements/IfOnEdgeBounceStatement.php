@@ -13,6 +13,15 @@ class IfOnEdgeBounceStatement extends Statement
 							self::BEGIN_STRING,
 							self::END_STRING);
 	}
-	
+
+	public function getBrickText()
+	{
+		return "If on edge, bounce";
+	}
+
+	public function getBrickColor()
+	{
+		return "1h_brick_blue.png";
+	}
 }
 ?>

@@ -15,8 +15,7 @@ class ApkStatusController extends Controller
      * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"}, requirements={"id": "\d+"})
      * @Method({"GET"})
      */
-    public function getApkStatusAction(Request $request, Program $program)
-    {
+    public function getApkStatusAction(Request $request, Program $program) {
         $result = array();
         switch ($program->getApkStatus()) {
             case Program::APK_READY:
@@ -32,7 +31,6 @@ class ApkStatusController extends Controller
                 $result['label'] = $this->get('translator')->trans('ci.generate', array(), 'catroweb');
                 $result['status'] = 'none';
         }
-
         return JsonResponse::create($result);
     }
 }

@@ -20,6 +20,12 @@ a {
   text-decoration: none;
 }
 
+
+.text-area-empty {
+  border-width: medium;
+  border-color: red;
+}
+
 #program-top {
   overflow: auto;
 
@@ -47,6 +53,7 @@ a {
 #program-middle {
   #image {
     float: left;
+    position: relative;
 
     #img-screenshot {
       border: 4px solid #FFF;
@@ -117,6 +124,114 @@ a {
     width: 100%;
   }
 
+}
+
+.show-hide-code {
+  position: relative;
+  margin-top: 25px;
+  border-top: 1px solid @default-text-color;
+  height: 61px;
+  z-index: 2;
+
+  .show-hide-code-text {
+    position: absolute;
+    top: 25px;
+    left: 10%;
+    height: 35px;
+    line-height: 35px;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .show-hide-code-arrow {
+    position: absolute;
+    right: ~"calc(22% - 4px)";
+    top: 32px;
+    height: 20px;
+
+    img {
+      height: 20px;
+      width: auto;
+      vertical-align: baseline;
+    }
+  }
+
+  .showing-code {
+    /*top: 10px;
+    height: 20px;
+    line-height:20px;*/
+  }
+
+  .rotate {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    display: inline-block;
+  }
+}
+
+@media (max-width: 992px) {
+  .show-hide-code {
+    .show-hide-code-arrow {
+      right: ~"calc(19.5% - 5px)";
+    }
+
+    .show-hide-code-text {
+      left: 8%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .show-hide-code {
+    .show-hide-code-arrow {
+      right: ~"calc(20% - 5px)";
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .show-hide-code {
+    .show-hide-code-arrow {
+      right: ~"calc(10% - 5px)";
+    }
+
+    .show-hide-code-text {
+      left: 4%;
+    }
+  }
+}
+
+.fixed {
+  margin-top: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.show-code {
+  /*border-bottom: none;
+  height: 42px;
+  background-color: @default-background-color;*/
+}
+
+.show-hide-code:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+
+.codeview-wrapper {
+  margin: 0;
+  display: none;
+  z-index: 0;
+}
+
+.show {
+  display: block;
 }
 
 #program-bottom {
@@ -289,7 +404,7 @@ table td:nth-child(1) {
   padding-top: 0.4em;
   dispay: block;
   clear: both;
-  word-break: break-all;
+  word-break: normal;
 }
 
 .single-comment {
@@ -326,6 +441,7 @@ table td:nth-child(1) {
 }
 
 #comment-successfully-reported {
+  z-index: 1;
   display: none;
   padding-top: 10px;
   position: fixed;
@@ -359,9 +475,8 @@ table td:nth-child(1) {
   background: none;
   border: none;
   position: relative;
-  top: 50%;
-  left: 40%;
-
+  left:50%;
+  transform: translate(-50% ,0);
 }
 
 .report-button {
@@ -381,6 +496,44 @@ table td:nth-child(1) {
   float: none;
 }
 
+.pc-startButton, .pc-startButton:active {
+  background: none;
+  border: medium none;
+  color: #a9dcf1;
+  cursor: pointer;
+  fill: #a9dcf1;
+  height: 300px;
+  margin: 0;
+  outline: medium none;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+.pc-startButton svg {
+  height: 50%;
+  left: 25%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 25%;
+  width: 50%;
+}
+
+.pc-startButton:hover {
+  fill: #ffffff;
+}
+.pc-startButton:active {
+  fill: #17a5b8;
+  margin: 0;
+  padding: 0;
+}
+.pc-startButton:disabled {
+  fill: #A5A5A5;
+  cursor: default;
+}
 
 @media screen and (max-width: @responsive-width-tablet) {
   #program-user{
@@ -440,9 +593,18 @@ table td:nth-child(1) {
   padding: 5px 5px 5px 0px;
 }
 
+#gamejam-div {
+  overflow: auto;
+}
+
 @media screen and (max-width: 534px) {
   #tag-extension-container {
     width: 215px;
+  }
+
+  .report-button {
+    clear: left;
+    padding-left: 0em;
   }
 }
 

@@ -80,9 +80,9 @@ sonata_user_change_password:
 
 sonata_user_profile_show:
     pattern: /myprofile
-    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
+    defaults: { _controller: "AppBundle:Web/Profile:profile", "id": 0 }
 
 fos_user_profile_show:
     pattern: /myprofile
-    defaults: { _controller: "AppBundle:Web\Default:profile", "id": 0 }
+    defaults: { _controller: "AppBundle:Web/Profile:profile", "id": 0 }
 

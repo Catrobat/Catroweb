@@ -14,6 +14,15 @@ class BroadcastStatement extends Statement
             self::END_STRING);
     }
 
+    public function getBrickText()
+    {
+        return "Broadcast " . $this->xmlTree->broadcastMessage;
+    }
+
+    public function getBrickColor()
+    {
+        return "1h_brick_orange.png";
+    }
 }
 
 ?>

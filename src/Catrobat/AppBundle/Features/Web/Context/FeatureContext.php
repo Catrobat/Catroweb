@@ -651,7 +651,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $name = trim($name);
       $not = trim($not);
 
-      $source = $this->getSession()->getPage()->find('css', '#profile-avatar > img')->getAttribute('src');
+      $source = $this->getSession()->getPage()->find('css', '#avatar-img')->getAttribute('src');
       $source = trim($source, '"');
       $styleHeader = $this->getSession()->getPage()->find('css', '#menu .img-avatar')->getAttribute('style');
       $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
@@ -742,6 +742,27 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             case "delete-comment":
                 $button = $page->find("css", "#delete-button-4");
                 break;
+            case "edit":
+              $button = $page->find("css", "#edit-icon a");
+              break;
+            case "password-edit":
+              $button = $page->find("css", "#password-button");
+              break;
+            case "email-edit":
+              $button = $page->find("css", "#email-button");
+              break;
+            case "country-edit":
+              $button = $page->find("css", "#country-button");
+              break;
+            case "name-edit":
+              $button = $page->find("css", "#username-button");
+              break;
+            case "avatar-edit":
+              $button = $page->find("css", "#avatar-button");
+              break;
+            case "save-edit":
+              $button = $page->find("css", ".save-button");
+              break;
             default:
                 assertTrue(false);
         }
@@ -782,8 +803,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iClickFacebookLoginLink()
     {
-      $this->clickLink('btn-login_facebook');
-      $this->getSession()->wait(2000);
+        if ($this->use_real_oauth_javascript_code) {
+            $this->clickLink('btn-login_facebook');
+            $this->getSession()->wait(2000);
+        } else {
+            $this->setFacebookFakeData();
+            $this->clickFacebookFakeButton();
+        }
     }
 
     /**
@@ -808,11 +834,16 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iClickGoogleLoginLink($arg1)
     {
-        $this->clickLink('btn-login_google');
-        $this->getSession()->wait(1500);
-        if($arg1 == 'twice') {
+        if ($this->use_real_oauth_javascript_code) {
             $this->clickLink('btn-login_google');
-            $this->getSession()->wait(2500);
+            $this->getSession()->wait(1500);
+            if($arg1 == 'twice') {
+                $this->clickLink('btn-login_google');
+                $this->getSession()->wait(2500);
+            }
+        } else {
+            $this->setGooglePlusFakeData();
+            $this->clickGooglePlusFakeButton();
         }
     }
 
@@ -1239,17 +1270,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             }
         } else {
             //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
-            $session = $this->getSession();
-            $session->wait(2000, '(0 === jQuery.active)');
-            $session->evaluateScript("$('#btn-facebook-testhook').removeClass('hidden');");
-            $session->evaluateScript("$('#id_oauth').val(105678789764016);");
-            $session->evaluateScript("$('#email_oauth').val('pocket_zlxacqt_tester@tfbnw.net');");
-            $session->evaluateScript("$('#locale_oauth').val('en_US');");
-
-            $page = $this->getSession()->getPage();
-            $button = $page->findButton('btn-facebook-testhook');
-            assertNotNull( $button, 'button not found');
-            $button->press();
+            $this->setFacebookFakeData();
+            $this->clickFacebookFakeButton();
         }
     }
 
@@ -1281,18 +1303,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             }
             $this->getSession()->wait(1000);
         } else {
-            //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
-            $session = $this->getSession();
-            $session->wait(2000, '(0 === jQuery.active)');
-            $session->evaluateScript("$('#btn-gplus-testhook').removeClass('hidden');");
-            $session->evaluateScript("$('#id_oauth').val('105155320106786463089');");
-            $session->evaluateScript("$('#email_oauth').val('pocketcodetester@gmail.com');");
-            $session->evaluateScript("$('#locale_oauth').val('de');");
-
-            $page = $this->getSession()->getPage();
-            $button = $page->findButton('btn-gplus-testhook');
-            assertNotNull( $button, 'button not found');
-            $button->press();
+            $this->setGooglePlusFakeData();
+            $this->clickGooglePlusFakeButton();
         }
 
     }
@@ -1351,6 +1363,40 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             $page->find('css', '#submit_approve_access')) {
             $this->approveGoogleAccess();
         }
+    }
+
+    private function setFacebookFakeData() {
+        //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
+        $session = $this->getSession();
+        $session->wait(2000, '(0 === jQuery.active)');
+        $session->evaluateScript("$('#btn-facebook-testhook').removeClass('hidden');");
+        $session->evaluateScript("$('#id_oauth').val(105678789764016);");
+        $session->evaluateScript("$('#email_oauth').val('pocket_zlxacqt_tester@tfbnw.net');");
+        $session->evaluateScript("$('#locale_oauth').val('en_US');");
+    }
+
+    private function clickFacebookFakeButton() {
+        $page = $this->getSession()->getPage();
+        $button = $page->findButton('btn-facebook-testhook');
+        assertNotNull( $button, 'button not found');
+        $button->press();
+    }
+
+    private function setGooglePlusFakeData() {
+        //simulate Google+ login by faking Javascript code and server responses from FakeOAuthService
+        $session = $this->getSession();
+        $session->wait(2000, '(0 === jQuery.active)');
+        $session->evaluateScript("$('#btn-gplus-testhook').removeClass('hidden');");
+        $session->evaluateScript("$('#id_oauth').val('105155320106786463089');");
+        $session->evaluateScript("$('#email_oauth').val('pocketcodetester@gmail.com');");
+        $session->evaluateScript("$('#locale_oauth').val('de');");
+    }
+
+    private function clickGooglePlusFakeButton() {
+        $page = $this->getSession()->getPage();
+        $button = $page->findButton('btn-gplus-testhook');
+        assertNotNull( $button, 'button not found');
+        $button->press();
     }
 
     /**
@@ -1735,5 +1781,32 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
         $profile_button = $this->getSession()->getPage()->findById('btn-profile');
         assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
+    }
+
+    /**
+     * @Then /^the href with id "([^"]*)" should be void$/
+     */
+    public function theHrefWithIdShouldBeVoid($arg1)
+    {
+        $button = $this->getSession()->getPage()->findById($arg1);
+        assertEquals($button->getAttribute('href'), 'javascript:void(0)');
+    }
+
+    /**
+     * @Then /^the href with id "([^"]*)" should not be void$/
+     */
+    public function theHrefWithIdShouldNotBeVoid($arg1)
+    {
+        $button = $this->getSession()->getPage()->findById($arg1);
+        assertNotEquals($button->getAttribute('href'), 'javascript:void(0)');
+    }
+
+    /**
+     * @When /^I get page content$/
+     */
+    public function iGetPageContent()
+    {
+        var_dump($this->getSession()->getPage()->getContent());
+        die;
     }
 }

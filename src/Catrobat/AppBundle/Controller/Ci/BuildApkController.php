@@ -18,11 +18,11 @@ class BuildApkController extends Controller
      * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"}, requirements={"id": "\d+"})
      * @Method({"GET"})
      */
-    public function createApkAction(Request $request, Program $program)
-    {
+    public function createApkAction(Request $request, Program $program) {
         if (!$program->isVisible()) {
             throw $this->createNotFoundException();
         }
+
         if ($program->getApkStatus() === Program::APK_READY) {
             return JsonResponse::create(array('status' => 'ready'));
         } elseif ($program->getApkStatus() === Program::APK_PENDING) {
@@ -43,8 +43,9 @@ class BuildApkController extends Controller
      * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"}, requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
-    public function uploadApkAction(Request $request, Program $program)
-    {
+    public function uploadApkAction(Request $request, Program $program) {
+        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+
         $config = $this->container->getParameter('jenkins');
         if ($request->query->get('token') !== $config['uploadtoken']) {
             throw new AccessDeniedException();
@@ -52,7 +53,6 @@ class BuildApkController extends Controller
             throw new BadRequestHttpException('Wrong number of files: ' + $request->files->count());
         } else {
             $file = array_values($request->files->all())[0];
-            /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
             $apkrepository = $this->get('apkrepository');
             $apkrepository->save($file, $program->getId());
             $program->setApkStatus(Program::APK_READY);
@@ -66,8 +66,7 @@ class BuildApkController extends Controller
      * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, requirements={"id": "\d+"})
      * @Method({"GET"})
      */
-    public function failedApkAction(Request $request, Program $program)
-    {
+    public function failedApkAction(Request $request, Program $program) {
         $config = $this->container->getParameter('jenkins');
         if ($request->query->get('token') !== $config['uploadtoken']) {
             throw new AccessDeniedException();
