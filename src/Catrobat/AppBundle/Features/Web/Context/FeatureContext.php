@@ -142,6 +142,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function resetSession()
   {
       $this->getSession()->getDriver()->reset();
+      $this->getSession()->getDriver()->reset();
   }
 
   /**
@@ -396,6 +397,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $user->setEnabled(true);
           $user->setUploadToken($users[$i]['token']);
           $user->setCountry('at');
+          $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
           $user_manager->updateUser($user, false);
       }
       $user_manager->updateUser($user, true);

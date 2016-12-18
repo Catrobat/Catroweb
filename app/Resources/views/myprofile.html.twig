@@ -38,7 +38,7 @@
 
   {% if nolb_user and 'teacher' in app.user.username %}
   <div id="edit-icon">
-    <a href="{{ url('profile_edit', {id : profile.id}) }}">
+    <a href="{{ url('profile_edit') }}">
       <img src="{{ asset('images/default/edit.png') }}">
     </a>
   </div>

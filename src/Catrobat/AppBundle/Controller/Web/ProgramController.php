@@ -44,6 +44,14 @@ class ProgramController extends Controller
             $referrer, $program_comments);
 
         $user = $this->getUser();
+        $nolb_status = false;
+        $user_name = "";
+
+        if($user != null){
+            $nolb_status = $user->getNolbUser();
+            $user_name = $user->getUsername();
+        }
+
         $user_programs = $this->findUserPrograms($user, $program);
 
         $isReportedByUser = $this->checkReportedByUser($program, $user);
@@ -52,17 +60,18 @@ class ProgramController extends Controller
         $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
 
         $jam = $this->extractGameJamConfig();
-
         return $this->get('templating')->renderResponse('::program.html.twig', array(
             'program' => $program,
             'program_details' => $program_details,
             'my_program' => count($user_programs) > 0 ? true : false,
             'already_reported' => $isReportedByUser,
             'shareText' => $share_text,
-            'jam' => $jam
+            'program_url' => $program_url,
+            'jam' => $jam,
+            'nolb_status' => $nolb_status,
+            'user_name' => $user_name,
         ));
     }
-
 
     /**
      * @Route("/search/{q}", name="search", requirements={"q":".+"})
