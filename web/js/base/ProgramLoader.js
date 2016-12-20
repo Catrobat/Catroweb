@@ -16,7 +16,7 @@ var ProgramLoader = function (container, url, column_max) {
   self.query = "";
 
   self.init = function() {
-    self.setParamsWithCookie(); // sets self.prev_visible and self.initial_download_limit
+    self.setParamsWithSessionStorage(); // sets self.prev_visible and self.initial_download_liit
     $.get(self.url, { limit: self.initial_download_limit, offset: self.loaded}, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>'); //todo: translate
@@ -67,7 +67,7 @@ var ProgramLoader = function (container, url, column_max) {
     $(window).resize(function() {
       if(self.windowWidth == $(window).width())
         return;
-      self.resetParamsWithCookie();
+      self.resetParamsInSessionStorage();
       self.setDefaultVisibility();
       self.windowWidth = $(window).width();
     });
@@ -172,31 +172,28 @@ var ProgramLoader = function (container, url, column_max) {
       $(self.container).find('.button-show-more').show();
 
     self.visible = i;
-    self.setSessionCookie(self.visible);
+    self.setSessionStorage(self.visible);
   };
 
-  self.resetParamsWithCookie = function() {
+  self.resetParamsInSessionStorage = function() {
     self.initial_download_limit = self.default_rows * self.columns_max;
     self.prev_visible = 0;
-    self.setSessionCookie(0);
+    self.setSessionStorage(0);
   };
 
-  self.setParamsWithCookie = function() {
-    var cookie_content = document.cookie.split("; ");
-    for(var i = 0; i < cookie_content.length; i++) {
-      var cookie_content_part = cookie_content[i].split("=");
-      if(cookie_content_part[0].localeCompare(self.container) == 0) {
-        self.prev_visible = cookie_content_part[1];
-        if(cookie_content_part[1] > 0)
-          self.initial_download_limit = cookie_content_part[1];
-        else
-          self.initial_download_limit = self.download_limit
-      }
+  self.setParamsWithSessionStorage = function() {
+    var stored_visible = sessionStorage.getItem(self.container);
+    if (stored_visible) {
+      self.prev_visible = stored_visible;
+      if (stored_visible > 0)
+        self.initial_download_limit = stored_visible;
+      else
+        self.initial_download_limit = self.download_limit;
     }
   };
 
-  self.setSessionCookie = function(cookie_value) {
-    document.cookie = self.container + '=' + cookie_value + '; expires=0; path=/pocketcode/';
+  self.setSessionStorage = function(value) {
+    sessionStorage.setItem(self.container, value);
   };
 
   self.setDefaultVisibility = function() {

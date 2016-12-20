@@ -121,6 +121,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @When /^I click browser's back button$/
+   */
+  public function iClickBrowsersBackButton()
+  {
+    $this->getSession()->back();
+  }
+
+  /**
    * @BeforeScenario
    */
   public function setup()
