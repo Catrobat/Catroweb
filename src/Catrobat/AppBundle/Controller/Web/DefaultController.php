@@ -75,6 +75,13 @@ class DefaultController extends Controller
      * @var $file \Catrobat\AppBundle\Entity\MediaPackageFile
      * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
      */
+
+    // https://jira.catrob.at/browse/WEB-304
+    if(strpos($package_name, "backgrounds-") !== false) {
+        $category_name = explode("-", $package_name)[1];
+        $package_name = "backgrounds";
+    }
+
     $em = $this->getDoctrine()->getManager();
     $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
       ->findOneBy(array('name_url' => $package_name));
@@ -85,6 +92,10 @@ class DefaultController extends Controller
 
     $categories = array();
     foreach($package->getCategories() as $category) {
+      if(isset($category_name) && strcmp($category_name, strtolower($category->getName())) !== 0) {
+        continue;
+      }
+
       $files = array();
         $files = $this->generateDownloadUrl($flavor, $category, $files);
         $categories[] = array(

@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Entity;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -78,6 +79,12 @@ class User extends BaseUser implements LdapUserInterface
      * @ORM\Column(type="boolean", options={"default":false})
      */
     protected $nolb_user = false;
+
+    /**
+     * @var string
+     * @Assert\Regex(pattern="/@/", match=false)
+     */
+    protected $username;
 
     public function __construct()
     {
