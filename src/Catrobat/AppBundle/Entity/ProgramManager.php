@@ -32,7 +32,8 @@ class ProgramManager
 
     protected $tag_repository;
 
-    public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, EventDispatcherInterface $event_dispatcher)
+    public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager,
+                                $program_repository, $tag_repository, EventDispatcherInterface $event_dispatcher)
     {
         $this->file_extractor = $file_extractor;
         $this->event_dispatcher = $event_dispatcher;
@@ -69,6 +70,7 @@ class ProgramManager
             $program->incrementVersion();
         } else {
             $program = new Program();
+            $program->setRemixRoot(true);
         }
         $program->setName($extracted_file->getName());
         $program->setDescription($extracted_file->getDescription());
@@ -77,12 +79,12 @@ class ProgramManager
         $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
         $program->setLanguageVersion($extracted_file->getLanguageVersion());
         $program->setUploadIp($request->getIp());
-        $program->setRemixCount(0);
         $program->setFilesize($file->getSize());
         $program->setVisible(true);
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
+        $program->setRemixMigratedAt(null);
         $this->addTags($program, $extracted_file, $request->getLanguage());
 
         if ($request->getGamejam() != null)
@@ -90,11 +92,12 @@ class ProgramManager
             $program->setGamejam($request->getGamejam());
             $program->setGameJamSubmissionDate(new \DateTime());
         }
-        
+
         $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));
 
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
+        $this->entity_manager->refresh($program);
 
         $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program));
 
@@ -152,6 +155,11 @@ class ProgramManager
             $program->removeTag($tag);
     }
 
+    public function markAllProgramsAsNotYetMigrated()
+    {
+        $this->program_repository->markAllProgramsAsNotYetMigrated();
+    }
+
     public function findOneByNameAndUser($program_name, $user)
     {
         return $this->program_repository->findOneBy(array(
@@ -165,6 +173,15 @@ class ProgramManager
         return $this->program_repository->findOneByName($programName);
     }
 
+    /**
+     * @param $remix_migrated_at
+     * @return Program|null
+     */
+    public function findOneByRemixMigratedAt($remix_migrated_at)
+    {
+        return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
+    }
+
     public function getUserPrograms($user_id)
     {
         return $this->program_repository->getUserPrograms($user_id);
@@ -173,6 +190,11 @@ class ProgramManager
     public function findAll()
     {
         return $this->program_repository->findAll();
+    }
+
+    public function findNext($previous_program_id)
+    {
+        return $this->program_repository->findNext($previous_program_id);
     }
 
     /**

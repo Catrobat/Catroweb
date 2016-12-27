@@ -20,6 +20,8 @@ class Program
 
     const APK_READY = 2;
 
+    const INITIAL_VERSION = 1;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -40,7 +42,7 @@ class Program
     /**
      * @ORM\Column(type="integer", options={"default" = 1})
      */
-    protected $version = 1;
+    protected $version = self::INITIAL_VERSION;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User", inversedBy="programs")
@@ -167,15 +169,69 @@ class Program
     protected $filesize;
 
     /**
-     * @ORM\Column(type="integer", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":true})
      */
-    protected $remix_count;
+    protected $remix_root;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Program")
-     * @ORM\JoinColumn(name="remix_id", referencedColumnName="id")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $remix_of;
+    protected $remix_migrated_at;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramRemixRelation",
+     *     mappedBy="descendant",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramRemixRelation[]
+     */
+    protected $catrobat_remix_ancestor_relations;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramRemixBackwardRelation",
+     *     mappedBy="child",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramRemixBackwardRelation[]
+     */
+    protected $catrobat_remix_backward_parent_relations;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramRemixRelation",
+     *     mappedBy="ancestor",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramRemixRelation[]
+     */
+    protected $catrobat_remix_descendant_relations;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramRemixBackwardRelation",
+     *     mappedBy="parent",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramRemixBackwardRelation[]
+     */
+    protected $catrobat_remix_backward_child_relations;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ScratchProgramRemixRelation",
+     *     mappedBy="catrobat_child",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ScratchProgramRemixRelation[]
+     */
+    protected $scratch_remix_parent_relations;
 
     /**
      * @ORM\Column(type="boolean", options={"default":false})
@@ -235,6 +291,10 @@ class Program
         $this->program_downloads = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->extensions = new ArrayCollection();
+        $this->catrobat_remix_ancestor_relations = new ArrayCollection();
+        $this->catrobat_remix_backward_parent_relations = new ArrayCollection();
+        $this->catrobat_remix_descendant_relations = new ArrayCollection();
+        $this->remix_migrated_at = null;
     }
 
     /**
@@ -303,7 +363,12 @@ class Program
      */
     public function setInitialVersion()
     {
-        $this->version = 1;
+        $this->version = self::INITIAL_VERSION;
+    }
+
+    public function isInitialVersion()
+    {
+        return $this->version == self::INITIAL_VERSION;
     }
 
     /**
@@ -494,6 +559,25 @@ class Program
     public function getLastModifiedAt()
     {
         return $this->last_modified_at;
+    }
+
+    /**
+     * @param \DateTime $remix_migrated_at
+     * @return Program
+     */
+    public function setRemixMigratedAt($remix_migrated_at)
+    {
+        $this->remix_migrated_at = $remix_migrated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRemixMigratedAt()
+    {
+        return $this->remix_migrated_at;
     }
 
     /**
@@ -715,54 +799,6 @@ class Program
     public function getFilesize()
     {
         return $this->filesize;
-    }
-
-    /**
-     * Set remix_count.
-     *
-     * @param int $remixCount
-     *
-     * @return Program
-     */
-    public function setRemixCount($remixCount)
-    {
-        $this->remix_count = $remixCount;
-
-        return $this;
-    }
-
-    /**
-     * Get remix_count.
-     *
-     * @return int
-     */
-    public function getRemixCount()
-    {
-        return $this->remix_count;
-    }
-
-    /**
-     * Set remix_of.
-     *
-     * @param \Catrobat\AppBundle\Entity\Program $remixOf
-     *
-     * @return Program
-     */
-    public function setRemixOf(\Catrobat\AppBundle\Entity\Program $remixOf = null)
-    {
-        $this->remix_of = $remixOf;
-
-        return $this;
-    }
-
-    /**
-     * Get remix_of.
-     *
-     * @return \Catrobat\AppBundle\Entity\Program
-     */
-    public function getRemixOf()
-    {
-        return $this->remix_of;
     }
 
     /**
@@ -1011,6 +1047,7 @@ class Program
 
     /**
      * @param \Catrobat\AppBundle\Entity\ProgramDownloads $program_download
+     * @return ProgramDownloads[]|\Doctrine\Common\Collections\Collection
      */
     public function addProgramDownloads(\Catrobat\AppBundle\Entity\ProgramDownloads $program_download)
     {
@@ -1089,5 +1126,74 @@ class Program
         }
     }
 
+    /**
+     * Set as remix root.
+     *
+     * @param bool $is_remix_root
+     *
+     * @return Program
+     */
+    public function setRemixRoot($is_remix_root)
+    {
+        $this->remix_root = $is_remix_root;
+
+        return $this;
+    }
+
+    /**
+     * Get remix root.
+     *
+     * @return bool
+     */
+    public function isRemixRoot()
+    {
+        return $this->remix_root;
+    }
+
+    /**
+     * @return ProgramRemixRelation[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getCatrobatRemixAncestorRelations()
+    {
+        return ($this->catrobat_remix_ancestor_relations != null)
+            ? $this->catrobat_remix_ancestor_relations
+            : new ArrayCollection();
+    }
+
+    /**
+     * @return ProgramRemixBackwardRelation[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getCatrobatRemixBackwardParentRelations()
+    {
+        return ($this->catrobat_remix_backward_parent_relations != null)
+            ? $this->catrobat_remix_backward_parent_relations
+            : new ArrayCollection();
+    }
+
+    /**
+     * @return ProgramRemixRelation[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getCatrobatRemixDescendantRelations()
+    {
+        return ($this->catrobat_remix_descendant_relations != null)
+            ? $this->catrobat_remix_descendant_relations
+            : new ArrayCollection();
+    }
+
+    public function getCatrobatRemixDescendantIds()
+    {
+        $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
+        return array_unique(array_map(function($r) { return $r->getDescendantId(); }, $relations));
+    }
+
+    /**
+     * @return ScratchProgramRemixRelation[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getScratchRemixParentRelations()
+    {
+        return ($this->scratch_remix_parent_relations != null)
+            ? $this->scratch_remix_parent_relations
+            : new ArrayCollection();
+    }
 
 }
