@@ -163,6 +163,13 @@ services:
           - { name: sonata.admin, manager_type: orm, label: Click Statistics }
         arguments: [null, Catrobat\AppBundle\Entity\ClickStatistic, null]
 
+      catrowebadmin.block.programs.templates:
+          class: Catrobat\AppBundle\Admin\TemplateAdmin
+          tags:
+            - { name: sonata.admin, manager_type: orm, label: Template Programs }
+          arguments: [null, Catrobat\AppBundle\Entity\Template, AppBundle:Admin\Template]
+
+
 # =========================== GameJam ===========================
 
       catrowebadmin.block.gamejam:

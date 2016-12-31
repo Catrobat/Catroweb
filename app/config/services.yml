@@ -5,10 +5,16 @@ parameters:
       catrobat.file.extract.path:     "resources/extract/"
       catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"
       catrobat.file.storage.path:     "resources/programs/"
+      catrobat.template.storage.dir:  "%kernel.root_dir%/../web/resources/templates/"
+      catrobat.template.storage.path: "resources/templates/"
       catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
       catrobat.screenshot.path:       "resources/screenshots/"
+      catrobat.template.screenshot.dir:        "%catrobat.webdir%resources/templates/screenshots/"
+      catrobat.template.screenshot.path:       "resources/templates/screenshots/"
       catrobat.thumbnail.dir:         "%catrobat.webdir%resources/thumbnails/"
       catrobat.thumbnail.path:        "resources/thumbnails/"
+      catrobat.template.thumbnail.dir:         "%catrobat.webdir%resources/templates/thumbnails/"
+      catrobat.template.thumbnail.path:        "resources/templates/thumbnails/"
       catrobat.featuredimage.dir:     "%catrobat.webdir%resources/featured/"
       catrobat.featuredimage.path:    "resources/featured/"
       catrobat.mediapackage.dir:      "%catrobat.webdir%resources/mediapackage/"
@@ -29,6 +35,11 @@ services:
         class: Catrobat\AppBundle\Security\UserAuthenticator
         arguments: ["@security.user.provider.concrete.chain_provider","@security.authentication.manager"]
 
+
+    template_service:
+        class: Catrobat\AppBundle\Services\TemplateService
+        arguments:
+          - "@templatemanager"
 # =========================== Repository ===========================
 
     programrepository:
@@ -97,6 +108,10 @@ services:
         class: Catrobat\AppBundle\Services\ScreenshotRepository
         arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
 
+    templatescreenshotrepository:
+            class: Catrobat\AppBundle\Services\ScreenshotRepository
+            arguments: ["%catrobat.template.screenshot.dir%","%catrobat.template.screenshot.path%","%catrobat.template.thumbnail.dir%","%catrobat.template.thumbnail.path%"]
+
     featuredimagerepository:
         class: Catrobat\AppBundle\Services\FeaturedImageRepository
         arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
@@ -116,6 +131,16 @@ services:
     programdevicepermissionreader:
         class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
 
+    templaterepository:
+        class: Catrobat\AppBundle\Entity\TemplateRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:Template"
+
+    templatefilerepository:
+            class: Catrobat\AppBundle\Services\TemplateFileRepository
+            arguments: ["%catrobat.template.storage.dir%","%catrobat.template.storage.path%", "@filecompressor"]
 # =========================== Manager & Stuff ===========================
 
     programmanager:
@@ -128,6 +153,16 @@ services:
             - "@programrepository"
             - "@tagrepository"
             - "@event_dispatcher"
+
+
+    templatemanager:
+        class: Catrobat\AppBundle\Entity\TemplateManager
+        arguments:
+            - "@templatefilerepository"
+            - "@templatescreenshotrepository"
+            - "@doctrine.orm.entity_manager"
+            - "@templaterepository"
+
 
     migrationmanager:
         class: Catrobat\AppBundle\Entity\MigrationManager
