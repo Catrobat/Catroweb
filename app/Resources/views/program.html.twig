@@ -512,7 +512,7 @@
         }
       });
 
-      $(document).one('click', ".rec-programs", function() {
+      $(document).one('click', ".rec-programs", function(event) {
 
         event.preventDefault();
 
@@ -539,7 +539,7 @@
           if (data == 'error')
             console.log("No click statistic is created!");
         }).fail(function (data) {
-            console.log("Connection problem!");
+            console.log(data);
         });
 
         window.location.href = href;
