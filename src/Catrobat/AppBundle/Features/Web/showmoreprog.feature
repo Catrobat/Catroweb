@@ -81,3 +81,18 @@ Feature: Show more programs button behaviour
       | "#mostViewed .button-show-more"     | "#mostViewed .program"     |
       | "#random .button-show-more"         | "#random .program"         |
 
+  Scenario Outline: Loaded programs should still be visible within the same session, when the user navigates
+    back to the homepage.
+    Given I am on homepage
+    When I click <button>
+    And I click "#program-1"
+    And I click browser's back button
+    Then I should see 22 <programs>
+
+  Examples:
+    | button                              | programs                   |
+    | "#newest .button-show-more"         | "#newest .program"         |
+    | "#mostDownloaded .button-show-more" | "#mostDownloaded .program" |
+    | "#mostViewed .button-show-more"     | "#mostViewed .program"     |
+    | "#random .button-show-more"         | "#random .program"         |
+
