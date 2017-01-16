@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use ClassesWithParents\E;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -192,6 +193,7 @@ class CodeViewController extends Controller
 
   const OPERATOR_FORMULA_TYPE = 'OPERATOR';
   const FUNCTION_FORMULA_TYPE = 'FUNCTION';
+  const BRACKET_FORMULA_TYPE = 'BRACKET';
 
   const PLUS_OPERATOR = 'PLUS';
   const MINUS_OPERATOR = 'MINUS';
@@ -217,7 +219,6 @@ class CodeViewController extends Controller
   {
     $program = $this->get('programmanager')->find($id);
     $extracted_file_repository = $this->get('extractedfilerepository');
-
 
     try
     {
@@ -271,33 +272,42 @@ class CodeViewController extends Controller
   private function getObjectsAsXml($program_xml_tree) // fixed
   {
     $objects = array();
+
     foreach ($program_xml_tree->objectList->object as $object_xml) {
+      $dereferenced_object_xml = $this->resolveReferences($object_xml);
 
-      if ($object_xml[self::NAME_ATTRIBUTE] != null) {
+      if ($this->hasName($dereferenced_object_xml)) {
+        $objects[] = $dereferenced_object_xml;
 
-        $objects[] = $object_xml;
-        $pointed_objects = $object_xml->xpath('scriptList//' . self::POINTED_OBJECT_TAG);
-        foreach ($pointed_objects as $pointed_obj)
-          if ($pointed_obj[self::NAME_ATTRIBUTE] != null)
-            $objects[] = $pointed_obj;
-          elseif (count($pointed_obj->name) != 0)
-            $objects[] = $pointed_obj;
+        $pointed_objects = $dereferenced_object_xml->xpath('scriptList//' . self::POINTED_OBJECT_TAG);
+        foreach ($pointed_objects as $pointed_obj) {
+          $dereferenced_pointed_obj = $this->resolveReferences($pointed_obj);
 
-      } elseif (count($object_xml->name) != 0) {
-
-        $objects[] = $object_xml;
-        $pointed_objects = $object_xml->xpath('scriptList//' . self::POINTED_OBJECT_TAG);
-        foreach ($pointed_objects as $pointed_obj)
-          if ($pointed_obj[self::NAME_ATTRIBUTE] != null)
-            $objects[] = $pointed_obj;
-          else if (count($object_xml->name) != 0)
-            $objects[] = $pointed_obj;
-
+          if ($this->hasName($dereferenced_pointed_obj))
+            $objects[] = $dereferenced_pointed_obj;
+        }
       }
-
     }
 
     return $objects;
+  }
+
+  private function resolveReferences($object_xml)
+  {
+    $resolved_object_xml = null;
+
+    if ($object_xml[self::REFERENCE_ATTRIBUTE] != null) {
+      $resolved_object_xml = $this->resolveReferences($object_xml->xpath($object_xml[self::REFERENCE_ATTRIBUTE])[0]);
+    } else {
+      $resolved_object_xml = $object_xml;
+    }
+
+    return $resolved_object_xml;
+  }
+
+  private function hasName($object_xml)
+  {
+    return ($object_xml[self::NAME_ATTRIBUTE] != null) or (count($object_xml->name) != 0);
   }
 
   private function retrieveSceneFromXml($scene_xml)
@@ -1816,12 +1826,20 @@ class CodeViewController extends Controller
         case self::FUNCTION_FORMULA_TYPE:
           $resolved_formula = $this->resolveFormulaCaseFunction($formula);
           break;
+        case self::BRACKET_FORMULA_TYPE:
+          $resolved_formula = $this->resolveFormulaCaseBracket($formula);
+          break;
         default:
           $resolved_formula = $formula->value;
           break;
       }
     }
     return $resolved_formula;
+  }
+
+  private function resolveFormulaCaseBracket($formula)
+  {
+    return "(" . $this->resolveFormula($formula->rightChild) . ")";
   }
 
   private function resolveFormulaCaseOperator($formula)
