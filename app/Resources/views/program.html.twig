@@ -2,6 +2,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://share.catrob.at/html5/player/pocketCodePlayer.css" rel="stylesheet" />
   <script src="https://share.catrob.at/html5/player/pocketCodePlayer.js"></script>
   <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
@@ -85,7 +86,8 @@
       {% endif %}
 
       <div class="download-container">
-        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}
+                    {{ program_details.downloadUrl }} {% else %} javascript:program.showUpdateAppPopup(); {% endif %}">
           <button id="download" class="btn btn-primary download-button">
             <table>
               <tr>
@@ -127,14 +129,34 @@
         </button>
       </div>
 
+      {% if nolb_status and program.user == app.user.username and (('teacher' in app.user.username) or ('test' in app.user.username))%}
+        <button id="nolb-project-button" class="btn download-button">
+          <table>
+            <tr>
+              <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}" > </td>
+              <td>NOLB SUBMIT BUTTON</td>
+            </tr>
+          </table>
+        </button>
+
+        <div id="nolb-submission-box">
+          <h2> Submission </h2>
+          <button id="nolb-submission-box-cancel"><i class="fa fa-close"></i></button>
+          <p> You are about to submit your project. Please
+          enter the project code and click send</p>
+          <div class="input-field">
+            <input type="number" id="nolb-submission-project-id" name="NOLB-submission-id" placeholder="Your project ID">
+          </div>
+          <button id="nolb-submission-button" class="btn">
+            <p>Submit</p>
+          </button>
+        </div>
+      {% endif %}
+
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}
           <div id="gamejam-div">
-          {% if app.user %}
-            <a href="{{ url('gamejam_web_submit', { "id": program.id }) }}" title="{{ jam.name }}">
-          {% else %}
-            <a href="{{ url('login') }}" title="{{ jam.name }}">
-          {% endif %}
+            <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id })  }}{% else %}{{ url('login') }}{% endif %}"  title="{{ jam.name }}">
               <button id="gamejam-submittion" class="btn btn-jam download-button">
                 <table>
                   <tr>
@@ -350,6 +372,40 @@
         }
       });
 
+      $(document).on("click", "#nolb-submission-button", function(){
+         var username = "{{ user_name }}";
+         var programURL = "{{ program_url }}";
+         var projectID = $('#nolb-submission-project-id').val();
+
+         var xhr = $.ajax({
+             type: "POST",
+             crossDomain: true,
+             headers: {
+                  'Access-Control-Allow-Headers' : 'x-requested-with',
+             },
+             url: "http://138.4.10.212/nolb/web/index.php?r=service/upload_program",
+             data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
+             success: function(data){
+                // var a = JSON.parse(data);
+                 alert('success ');
+             },
+             error: function(data) {
+              //   var a = JSON.parse(data);
+                 alert('error ');
+             }
+         });
+         console.log(xhr);
+         $('#nolb-submission-box').hide();
+
+      });
+
+      $(document).on("click", "#nolb-project-button", function(){
+          $('#nolb-submission-box').show();
+      });
+
+      $(document).on("click", "#nolb-submission-box-cancel", function(){
+          $('#nolb-submission-box').hide();
+      });
 
       $(document).on("click", ".delete-button", function() {
         var pId = {{ program_details.id }};

@@ -68,6 +68,7 @@ class ResetCommand extends ContainerAwareCommand
     {
         $output->write($description." ('".$command."') ... ");
         $process = new Process($command);
+        $process->setTimeout(120);
         $process->run();
         if ($process->isSuccessful()) {
             $output->writeln('OK');

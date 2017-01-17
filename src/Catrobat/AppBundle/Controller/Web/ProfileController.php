@@ -25,7 +25,6 @@ class ProfileController extends Controller
      */
     public function profileAction(Request $request, $id)
     {
-
         /**
          * @var $user User
          */

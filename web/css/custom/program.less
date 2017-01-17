@@ -440,6 +440,62 @@ table td:nth-child(1) {
   margin-right: 2em;
 }
 
+#nolb-project-button {
+  padding-top: 5px;
+  background: linear-gradient(#EE225A, #AA154B);
+  img {
+    height: auto;
+  }
+}
+
+#nolb-submission-box {
+  z-index: 10;
+  padding: 10px;
+  position: fixed;
+  display: none;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  background-color: #05222a;
+  border: 3px solid @default-border-color;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  max-width: 400px;
+  width: 80%;
+}
+
+#nolb-submission-box-cancel {
+  line-height: 0;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+#nolb-submission-button {
+  max-height: 50px;
+  max-width: 200px;
+  margin: 10px;
+  padding: 0px 10px;
+  line-height: 10px;
+}
+
+.btn {
+  min-height: 64px;
+  line-height: normal;
+}
+
 #comment-successfully-reported {
   z-index: 1;
   display: none;
