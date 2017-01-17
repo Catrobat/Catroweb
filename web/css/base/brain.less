@@ -323,11 +323,13 @@ form {
 .button-show-placeholder {
   margin: 0px auto 30px auto;
   min-height: 32px;
+  display: flex;
+  justify-content: center;
 }
 
-.button-show-more, .button-show-ajax {
+.button-show-more, .button-show-ajax, .button-show-less {
   text-align: center;
-  margin: auto;
+  margin: 0 15px;
 }
 
 .button-show-more {
@@ -336,6 +338,11 @@ form {
 
 .button-show-ajax {
   display: none;
+}
+
+.button-show-less {
+  display: none;
+  cursor: pointer;
 }
 
 .btn {
