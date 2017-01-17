@@ -71,7 +71,7 @@ Feature: Show more programs button behaviour
     and should be < 37. 36 is the current max number of programs visible after the user clicks the button once.
     Given I am on homepage
     When I click <button>
-    And I wait 50 milliseconds
+    And I wait for a second
     Then I should see 22 <programs>
 
     Examples:
