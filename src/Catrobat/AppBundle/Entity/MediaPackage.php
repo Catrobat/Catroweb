@@ -28,7 +28,7 @@ class MediaPackage
   protected $name_url;
 
   /**
-   * @ORM\OneToMany(targetEntity="MediaPackageCategory", mappedBy="package")
+   * @ORM\ManyToMany(targetEntity="MediaPackageCategory", mappedBy="package")
    */
   protected $categories;
 
