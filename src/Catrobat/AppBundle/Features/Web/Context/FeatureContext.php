@@ -958,7 +958,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_category = new MediaPackageCategory();
       $new_category->setName($category['name']);
       $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(array('name' => $category['package']));
-      $new_category->setPackage($package);
+      $new_category->setPackage(array($package));
       $em->persist($new_category);
     }
     $em->flush();

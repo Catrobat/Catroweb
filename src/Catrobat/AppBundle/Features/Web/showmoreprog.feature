@@ -72,6 +72,7 @@ Feature: Show more programs button behaviour
     Given I am on homepage
     When I click <button>
     And I wait for a second
+    And I wait for a second
     Then I should see 22 <programs>
 
     Examples:
