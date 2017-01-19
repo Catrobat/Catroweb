@@ -283,7 +283,8 @@
           </div>
           <div class = "comment-payload-wrapper">
             <div class = "name-date-wrapper">
-              <div class = "usr-name">{{ comment.username }}</div>
+              <a href="{{ url('profile', { id : comment.userId }) }}">
+                <div id="profile-comment-user-id-{{ comment.userId }}" class = "usr-name">{{ comment.username }}</div></a>
               <div class = "date"> {{ comment.uploadDate.format('Y-m-d') }}</div>
               <button id="report-button-{{ comment.id }}" class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
               {% if  program_details.isAdmin  %}
@@ -303,7 +304,8 @@
           </div>
           <div class = "comment-payload-wrapper">
             <div class = "name-date-wrapper">
-              <div class = "usr-name">{{ comment.username }}</div>
+              <a href="{{ url('profile', { id : comment.userId }) }}">
+                <div id="profile-comment-user-id-{{ comment.userId }}"  class = "usr-name">{{ comment.username }}</div></a>
               <div class = "date"> {{ comment.uploadDate.format('Y-m-d') }}</div>
               <button id="report-button-{{ comment.id }}" class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
               {% if  program_details.isAdmin  %}
