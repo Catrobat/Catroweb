@@ -1819,4 +1819,58 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         var_dump($this->getSession()->getPage()->getContent());
         die;
     }
+
+    /**
+     * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
+     */
+    public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id)
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
+        assertEquals(1,count($clicks), "No databse entry found!");
+
+        $click = $clicks[0];
+
+        assertEquals($type_name, $click->getType());
+
+        switch ($name_id) {
+            case "tag_id":
+                assertEquals($id, $click->getTag()->getId());
+                break;
+            case "extension_id":
+                assertEquals($id, $click->getExtension()->getId());
+                break;
+            case "program_id":
+                assertEquals($id, $click->getProgram()->getId());
+                break;
+            default:
+                assertTrue(false);
+        }
+    }
+
+    /**
+     * Wait for AJAX to finish.
+     *
+     * @Given /^I wait for AJAX to finish$/
+     */
+    public function iWaitForAjaxToFinish() {
+        $this->getSession()->wait(10000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
+    }
+
+    /**
+     * @When /^I click on the first recommended program$/
+     */
+    public function iClickOnTheFirstRecommendedProgram()
+    {
+        $arg1 = '#program-2 .rec-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+
 }
