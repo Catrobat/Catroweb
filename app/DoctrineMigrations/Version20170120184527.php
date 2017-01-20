@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170110184527 extends AbstractMigration
+class Version20170120184527 extends AbstractMigration
 {
     /**
      * @param Schema $schema
