@@ -1123,6 +1123,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->iClick("#url-download");
   }
 
+
   /**
    * @Then /^I click the program image$/
    */

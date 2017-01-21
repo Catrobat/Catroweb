@@ -261,7 +261,7 @@
     </div>
   </div>
 
-  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+{#  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
   <div id="recommendations">
     <div id="recsys-headline">
       <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
@@ -270,7 +270,7 @@
 
   </div>
 
-  {% endif %}
+  {% endif %}#}
 
   <div id="comment-successfully-reported">
     <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
@@ -370,9 +370,9 @@
       return false;
     });
 
-    var undefined;
+   /* var undefined;
     var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}',undefined, {{ program.id }});
-    recs.initRecsys();
+    recs.initRecsys();*/
 
     counter = 10;
 
