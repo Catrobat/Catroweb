@@ -41,22 +41,14 @@ class TemplateListSerializer
         $retArray['CatrobatTemplates'] = array();
         if($templates != null) {
             foreach ($templates as $template) {
-                $new_template = array();
-                $new_template['id'] = $template->getId();
-                $new_template['name'] = $template->getName();
-                $new_template['thumbnail'] = $this->screenshot_repository->getThumbnailWebPath($template->getId());
-                $new_template['landscape'] = $this->generateUrl($template->getId());
-                $new_template['portrait'] = $this->generateUrl($template->getId(), false);
-                $retArray['CatrobatTemplates'][] = $new_template;
+                $new_template = $this->generateTemplateArray($template);
+                if($new_template != null){
+                    $retArray['CatrobatTemplates'][] = $new_template;
+                }
             }
         }
-        $retArray['completeTerm'] = '';
-        $retArray['preHeaderMessages'] = '';
-        
-        $retArray['CatrobatInformation'] = array(
-            'BaseUrl' => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
-            'ProjectsExtension' => '.catrobat'
-        );
+        $retArray['BaseUrl'] = ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/';
+        $retArray['ProjectsExtension'] = '.catrobat';
         
         $event->setResponse(JsonResponse::create($retArray));
     }
@@ -67,5 +59,27 @@ class TemplateListSerializer
         if($landscape)
             $prefix = TemplateManager::LANDSCAPE_PREFIX;
         return ltrim($this->template_path . $prefix . $id . '.catrobat', '/');
+    }
+
+    /**
+     * @param $template
+     * @return array
+     */
+    public function generateTemplateArray($template)
+    {
+        $landscape = $this->generateUrl($template->getId());
+        $portrait = $this->generateUrl($template->getId(), false);
+
+        if(!file_exists($landscape) || !file_exists($portrait)){
+            return null;
+        }
+
+        $new_template = array();
+        $new_template['id'] = $template->getId();
+        $new_template['name'] = $template->getName();
+        $new_template['thumbnail'] = $this->screenshot_repository->getThumbnailWebPath($template->getId());
+        $new_template['landscape'] = $this->generateUrl($template->getId());
+        $new_template['portrait'] = $this->generateUrl($template->getId(), false);
+        return $new_template;
     }
 }

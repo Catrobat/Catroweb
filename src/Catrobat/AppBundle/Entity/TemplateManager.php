@@ -1,9 +1,10 @@
 <?php
 namespace Catrobat\AppBundle\Entity;
 
+use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Catrobat\AppBundle\Requests\TemplateRequest;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Services\ScreenshotRepository;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class TemplateManager
 {
@@ -59,7 +60,7 @@ class TemplateManager
     }
 
     public function saveTemplateFiles(Template $template){
-        if($template->getId() != null){
+        if($template->getId() != null) {
             $this->saveThumbnail($template);
             $this->savePortraitProgram($template);
             $this->saveLandscapeProgram($template);
@@ -84,5 +85,7 @@ class TemplateManager
     public function deleteTemplateFiles($id){
         $this->file_repository->deleteTemplateFiles(self::LANDSCAPE_PREFIX . $id);
         $this->file_repository->deleteTemplateFiles(self::PORTRAIT_PREFIX . $id);
+        $this->screenshot_repository->deleteThumbnail($id);
+        $this->screenshot_repository->deleteScreenshot($id);
     }
 }
