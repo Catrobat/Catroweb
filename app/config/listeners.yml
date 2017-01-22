@@ -158,6 +158,6 @@ services:
 
       catrobat.download.stats:
           class: Catrobat\AppBundle\Listeners\DownloadStatisticsListener
-          arguments: ["@download_statistics", "@security.token_storage"]
+          arguments: ["@statistics", "@security.token_storage"]
           tags:
               - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }

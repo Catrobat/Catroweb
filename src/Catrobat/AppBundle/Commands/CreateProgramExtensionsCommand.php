@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -71,6 +72,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
         foreach ($finder as $element) {
 
             $zip = new \ZipArchive();
+
             $open = $zip->open($this->programfile_directory . $element->getFilename());
 
             if( $open !== true ){
@@ -87,9 +89,19 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $xml = @simplexml_load_string($zip->getFromName("code.xml"));
+            $content = $zip->getFromName("code.xml");
 
-            $nodes = $xml->xpath($xpath);
+            if ($content === false) {
+                throw new InvalidXmlException();
+            }
+            $content = str_replace('&#x0;', '', $content, $count);
+
+            $xml = simplexml_load_string($content);
+
+            if ($xml === false)
+                $this->writeln("Cant load code.xml from: "  . $element->getFilename());
+            else
+                $nodes = $xml->xpath($xpath);
 
             if (!empty($nodes)) {
 

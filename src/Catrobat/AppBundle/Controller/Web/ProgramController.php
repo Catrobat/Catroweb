@@ -68,12 +68,20 @@ class ProgramController extends Controller
 
         $program_comments = $this->findCommentsById($program);
         $program_details = $this->createProgramDetailsArray($screenshot_repository, $program, $elapsed_time,
-            $referrer, $program_comments);
+            $referrer, $program_comments, $request);
 
         // TODO: temporary parameter to show remix graph! will be removed by next Pull Request (Ralph)
         $program_details['showGraph'] = $show_graph;
 
         $user = $this->getUser();
+        $nolb_status = false;
+        $user_name = "";
+
+        if($user != null){
+            $nolb_status = $user->getNolbUser();
+            $user_name = $user->getUsername();
+        }
+
         $user_programs = $this->findUserPrograms($user, $program);
 
         $isReportedByUser = $this->checkReportedByUser($program, $user);
@@ -82,17 +90,18 @@ class ProgramController extends Controller
         $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
 
         $jam = $this->extractGameJamConfig();
-
         return $this->get('templating')->renderResponse('::program.html.twig', array(
             'program' => $program,
             'program_details' => $program_details,
             'my_program' => count($user_programs) > 0 ? true : false,
             'already_reported' => $isReportedByUser,
             'shareText' => $share_text,
-            'jam' => $jam
+            'program_url' => $program_url,
+            'jam' => $jam,
+            'nolb_status' => $nolb_status,
+            'user_name' => $user_name,
         ));
     }
-
 
     /**
      * @Route("/search/{q}", name="search", requirements={"q":".+"})
@@ -222,10 +231,17 @@ class ProgramController extends Controller
      * @param $program_comments
      * @return array
      */
-    private function createProgramDetailsArray($screenshot_repository, $program, $elapsed_time, $referrer, $program_comments) {
+    private function createProgramDetailsArray($screenshot_repository, $program, $elapsed_time, $referrer, $program_comments, $request) {
+
+        $rec_from_id = intval($request->query->get('rec_from',0));
+        if ($rec_from_id > 0)
+            $url = $this->generateUrl('download', array('id' => $program->getId(), 'rec_from' => $rec_from_id,  'fname' => $program->getName()));
+        else
+            $url = $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName()));
+
         $program_details = array(
             'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
-            'downloadUrl' => $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName())),
+            'downloadUrl' => $url,
             'languageVersion' => $program->getLanguageVersion(),
             'downloads' => $program->getDownloads() + $program->getApkDownloads(),
             'views' => $program->getViews(),
