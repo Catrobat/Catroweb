@@ -24,6 +24,12 @@ class ProgramDownloads
     protected $program;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
+     * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
+     */
+    protected $recommended_from_program;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $downloaded_at;
@@ -98,6 +104,22 @@ class ProgramDownloads
     public function setProgram($program)
     {
         $this->program = $program;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecommendedFromProgram()
+    {
+        return $this->recommended_from_program;
+    }
+
+    /**
+     * @param mixed $recommended_from_program
+     */
+    public function setRecommendedFromProgram($recommended_from_program)
+    {
+        $this->recommended_from_program = $recommended_from_program;
     }
 
     /**

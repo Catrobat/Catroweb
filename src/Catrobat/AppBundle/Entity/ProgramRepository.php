@@ -316,6 +316,7 @@ class ProgramRepository extends EntityRepository
             ->leftJoin('e.tags', 'f')
             ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq('f.id', ':id'))
+            ->orderBy('e.uploaded_at', 'DESC')
             ->setParameter('id', $id)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
@@ -347,6 +348,7 @@ class ProgramRepository extends EntityRepository
             ->leftJoin('e.extensions', 'f')
             ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq('f.name', ':name'))
+            ->orderBy('e.uploaded_at', 'DESC')
             ->setParameter('name', $name)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
@@ -386,5 +388,116 @@ class ProgramRepository extends EntityRepository
             ->getResult();
 
         return count($result);
+    }
+
+
+    public function getRecommendedProgramsCount($id, $flavor = 'pocketcode')
+    {
+        $qb_tags = $this->createQueryBuilder('e');
+
+        $result = $qb_tags
+            ->select('t.id')
+            ->leftJoin('e.tags', 't')
+            ->where($qb_tags->expr()->eq('e.id', ':id'))
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+        $qb_extensions = $this->createQueryBuilder('e');
+
+        $result_2 = $qb_extensions
+            ->select('x.id')
+            ->leftJoin('e.extensions', 'x')
+            ->where($qb_tags->expr()->eq('e.id', ':id'))
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+        $tag_ids = array_map('current', $result);
+        $extensions_id = array_map('current', $result_2);
+
+        $dql = "SELECT COUNT(e.id) cnt, e.id
+          FROM Catrobat\AppBundle\Entity\Program e
+          LEFT JOIN e.tags t
+          LEFT JOIN e.extensions x
+          WHERE t.id IN (
+            :tag_ids
+          )
+          OR x.id IN (
+            :extension_ids
+          )
+          AND e.flavor = :flavor
+          AND e.id != :id
+          AND e.visible = true
+          GROUP BY e.id
+          ORDER BY cnt DESC
+        ";
+
+        $qb_program = $this->createQueryBuilder('e');
+        $q2 = $qb_program->getEntityManager()->createQuery($dql);
+        $q2->setParameters(array( 'id' => $id, 'tag_ids' => $tag_ids, 'extension_ids' => $extensions_id, 'flavor' => $flavor));
+
+        return count($q2->getResult());
+
+    }
+
+    public function getRecommendedProgramsById($id, $flavor = 'pocketcode', $limit, $offset)
+    {
+
+        $qb_tags = $this->createQueryBuilder('e');
+
+        $result = $qb_tags
+            ->select('t.id')
+            ->leftJoin('e.tags', 't')
+            ->where($qb_tags->expr()->eq('e.id', ':id'))
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+        $qb_extensions = $this->createQueryBuilder('e');
+
+        $result_2 = $qb_extensions
+            ->select('x.id')
+            ->leftJoin('e.extensions', 'x')
+            ->where($qb_tags->expr()->eq('e.id', ':id'))
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+        $tag_ids = array_map('current', $result);
+        $extensions_id = array_map('current', $result_2);
+
+        $dql = "SELECT COUNT(e.id) cnt, e.id
+          FROM Catrobat\AppBundle\Entity\Program e
+          LEFT JOIN e.tags t
+          LEFT JOIN e.extensions x
+          WHERE (t.id IN (
+            :tag_ids
+          )
+          OR x.id IN (
+            :extension_ids
+          ))
+          AND e.flavor = :flavor
+          AND e.id != :pid
+          AND e.visible = TRUE 
+          GROUP BY e.id
+          ORDER BY cnt DESC
+        ";
+
+        $qb_program = $this->createQueryBuilder('e');
+        $q2 = $qb_program->getEntityManager()->createQuery($dql);
+        $q2->setParameters(array( 'pid' => $id, 'tag_ids' => $tag_ids, 'extension_ids' => $extensions_id, 'flavor' => $flavor));
+
+        $q2->setFirstResult($offset);
+        $q2->setMaxResults($limit);
+        $id_list = array_map(function($value){return $value['id'];},$q2->getResult());
+
+        $programs = array();
+        foreach ($id_list as $id) {
+            array_push($programs, $this->find($id));
+        }
+
+        return $programs;
+
     }
 }

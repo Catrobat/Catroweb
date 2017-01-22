@@ -23,7 +23,7 @@
     "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-watch": "^0.6.1",
     "jit-grunt": "^0.9.1",
-    "grunt-contrib-concat": "~1.0.0",
-    "grunt-contrib-uglify": "~1.0.1"
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-uglify": "~2.0.0"
   }
 }

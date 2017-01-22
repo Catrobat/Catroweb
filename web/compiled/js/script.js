@@ -135,10 +135,11 @@ var Main = function (search_url) {
 
 
 };
-;var ProgramLoader = function (container, url, column_max) {
+;var ProgramLoader = function (container, url, column_max, id) {
   var self = this;
   self.container = container;
   self.url = url;
+  self.program_id = id;
   self.default_rows = 2;
   self.columns_min = 3; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
   self.columns_max = (typeof column_max === "undefined") ? 9 : column_max; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
@@ -153,10 +154,26 @@ var Main = function (search_url) {
   self.query = "";
 
   self.init = function() {
-    self.setParamsWithCookie(); // sets self.prev_visible and self.initial_download_limit
+    self.setParamsWithSessionStorage(); // sets self.prev_visible and self.initial_download_liit
     $.get(self.url, { limit: self.initial_download_limit, offset: self.loaded}, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>'); //todo: translate
+        return;
+      }
+      self.setup(data);
+    });
+  };
+
+  self.initRecsys = function() {
+
+    if(!($(self.container).length > 0))
+      return;
+
+    self.setParamsWithCookie(); // sets self.prev_visible and self.initial_download_limit
+    $.get(self.url, { program_id: self.program_id,}, function(data) {
+      if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
+        $(self.container).hide();
+        // $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
         return;
       }
       self.setup(data);
@@ -204,7 +221,7 @@ var Main = function (search_url) {
     $(window).resize(function() {
       if(self.windowWidth == $(window).width())
         return;
-      self.resetParamsWithCookie();
+      self.resetParamsInSessionStorage();
       self.setDefaultVisibility();
       self.windowWidth = $(window).width();
     });
@@ -232,6 +249,9 @@ var Main = function (search_url) {
         case '#mostViewed':
           div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
           break;
+        case '#recommendations':
+          div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
+          break;
         default:
           if($(self.container).hasClass('starterDownloads'))
             div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
@@ -239,14 +259,16 @@ var Main = function (search_url) {
             div = '<div>' + programs[i].Author + '</div>';
       }
 
-      var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
-
+      if (self.container == "#recommendations")
+        var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_from=" + self.program_id;
+      else
+        var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
 
       var stored_visits = sessionStorage.getItem("visits");
       if(!stored_visits){
         var program = $(
             '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
-            '<a href = \''+ program_link + '\'>'+
+            '<a class="rec-programs" href = \''+ program_link + '\'>'+
             '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
             '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
@@ -260,7 +282,7 @@ var Main = function (search_url) {
         if($.inArray(program_id, parsed_visits)>=0) {
           var program = $(
             '<div class="program visited-program" id="program-'+ programs[i].ProjectId +'">'+
-              '<a href = \''+ program_link + '\' >'+
+              '<a class="rec-programs" href = \''+ program_link + '\' >'+
                 '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
                 '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
                 div +
@@ -271,7 +293,7 @@ var Main = function (search_url) {
         else{
           var program = $(
               '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
-              '<a href = \''+ program_link + '\'>'+
+              '<a class="rec-programs" href = \''+ program_link + '\'>'+
               '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
               '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
               div +
@@ -309,31 +331,28 @@ var Main = function (search_url) {
       $(self.container).find('.button-show-more').show();
 
     self.visible = i;
-    self.setSessionCookie(self.visible);
+    self.setSessionStorage(self.visible);
   };
 
-  self.resetParamsWithCookie = function() {
+  self.resetParamsInSessionStorage = function() {
     self.initial_download_limit = self.default_rows * self.columns_max;
     self.prev_visible = 0;
-    self.setSessionCookie(0);
+    self.setSessionStorage(0);
   };
 
-  self.setParamsWithCookie = function() {
-    var cookie_content = document.cookie.split("; ");
-    for(var i = 0; i < cookie_content.length; i++) {
-      var cookie_content_part = cookie_content[i].split("=");
-      if(cookie_content_part[0].localeCompare(self.container) == 0) {
-        self.prev_visible = cookie_content_part[1];
-        if(cookie_content_part[1] > 0)
-          self.initial_download_limit = cookie_content_part[1];
-        else
-          self.initial_download_limit = self.download_limit
-      }
+  self.setParamsWithSessionStorage = function() {
+    var stored_visible = sessionStorage.getItem(self.container);
+    if (stored_visible) {
+      self.prev_visible = stored_visible;
+      if (stored_visible > 0)
+        self.initial_download_limit = stored_visible;
+      else
+        self.initial_download_limit = self.download_limit;
     }
   };
 
-  self.setSessionCookie = function(cookie_value) {
-    document.cookie = self.container + '=' + cookie_value + '; expires=0; path=/pocketcode/';
+  self.setSessionStorage = function(value) {
+    sessionStorage.setItem(self.container, value);
   };
 
   self.setDefaultVisibility = function() {

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -104,6 +105,32 @@ class DefaultController extends Controller
       'categories' => $categories
     ));
   }
+
+    /**
+     * @Route("/click-statistic", name="stats")
+     * @Method({"POST"})
+     */
+    public function makeClickStatisticAction(Request $request)
+    {
+        $type = $_POST['type'];
+        $referrer = $request->headers->get('referer');
+        $statistics = $this->get('statistics');
+        if($type == 'programs') {
+            $rec_from_id = $_POST['recFromID'];
+            $rec_program_id = $_POST['recID'];
+            $statistics->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, null, null, $referrer);
+            return new Response('ok');
+        } else if ($type == 'tags') {
+            $tag_id = $_POST['recID'];
+            $statistics->createClickStatistics($request, $type, null, null, $tag_id, null, $referrer);
+            return new Response('ok');
+        } else if ($type == 'extensions') {
+            $extension_name = $_POST['recID'];
+            $statistics->createClickStatistics($request, $type, null, null, null, $extension_name, $referrer);
+            return new Response('ok');
+        } else
+            return new Response('error');
+    }
 
     /**
      * @param $flavor

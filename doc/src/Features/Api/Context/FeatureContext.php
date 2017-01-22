@@ -10,7 +10,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Services\DownloadStatisticsService;
+use Catrobat\AppBundle\Services\StatisticsService;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use DateTime;
 use Symfony\Component\HttpFoundation\File\File;
