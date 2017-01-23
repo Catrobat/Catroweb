@@ -129,12 +129,12 @@
         </button>
       </div>
 
-      {% if nolb_status and program.user == app.user.username and (('teacher' in app.user.username) or ('test' in app.user.username))%}
+      {% if nolb_status and program.user == app.user.username and 'test' in app.user.username %}
         <button id="nolb-project-button" class="btn download-button">
           <table>
             <tr>
               <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}" > </td>
-              <td>NOLB SUBMIT BUTTON</td>
+              <td>Submit your project</td>
             </tr>
           </table>
         </button>
