@@ -32,7 +32,7 @@ var ProgramLoader = function (container, url, column_max, id) {
     if(!($(self.container).length > 0))
       return;
 
-    self.setParamsWithCookie(); // sets self.prev_visible and self.initial_download_limit
+    self.setParamsWithSessionStorage(); // sets self.prev_visible and self.initial_download_limit
     $.get(self.url, { program_id: self.program_id,}, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).hide();

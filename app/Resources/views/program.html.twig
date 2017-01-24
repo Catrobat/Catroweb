@@ -141,12 +141,12 @@
         </button>
       </div>
 
-      {% if nolb_status and program.user == app.user.username and (('teacher' in app.user.username) or ('test' in app.user.username))%}
+      {% if nolb_status and program.user == app.user.username and 'test' in app.user.username %}
         <button id="nolb-project-button" class="btn download-button">
           <table>
             <tr>
               <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}" > </td>
-              <td>NOLB SUBMIT BUTTON</td>
+              <td>Submit your project</td>
             </tr>
           </table>
         </button>
@@ -290,7 +290,7 @@
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
 
-{#  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
   <div id="recommendations">
     <div id="recsys-headline">
       <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
@@ -299,7 +299,7 @@
 
   </div>
 
-  {% endif %}#}
+  {% endif %}
 
   <div id="comment-successfully-reported">
     <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
@@ -403,9 +403,9 @@
       return false;
     });
 
-   /* var undefined;
+    var undefined;
     var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}',undefined, {{ program.id }});
-    recs.initRecsys();*/
+    recs.initRecsys();
 
     counter = 10;
     var cachedRemixData = null;
