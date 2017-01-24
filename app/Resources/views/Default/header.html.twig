@@ -34,7 +34,7 @@
       </div>
 
       {% if app.user %}
-        <div class="btn btn-menu logged-in show-nav-dropdown">
+        <div class="btn btn-menu logged-in show-nav-dropdown user-notification-badge">
           <div class="img-avatar" {%  if app.user.avatar is not empty %}style="background-size:cover; background-position:center; outline: 1px solid #FFFFFF; background-image:url({{ app.user.avatar }});"{%  endif %}></div>
         </div>
         <div class="btn btn-username show-nav-dropdown">{{ app.user.username }}</div>
@@ -59,13 +59,13 @@
       <div class="margin-spacer"></div>
       {% if app.user %}
         {% if app.user.avatar is not empty %}
-          <div id="custom-avatar" class="btn btn-menu show-nav-dropdown">
+          <div id="custom-avatar" class="btn btn-menu show-nav-dropdown user-notification-badge">
             <div style="background-image:url({{ app.user.avatar }});">
               <div class="img-dropdownArrow-mobile"></div>
             </div>
           </div>
         {% else %}
-          <div class="btn btn-menu show-nav-dropdown">
+          <div class="btn btn-menu show-nav-dropdown user-notification-badge">
             <div class="img-avatar"></div>
           </div>
         {% endif %}
@@ -82,6 +82,12 @@
 
   {% if app.user %}
     <div id="nav-dropdown" class="img-nav-dropdown">
+      <div id="nav-menu-item-user-notifications" style="border-bottom: 1px #FFFFFF solid">
+        <a href="{{ path('user_notifications') }}">
+          <div><div class="img-dashboard user-notification-badge"></div></div>
+          <div>{{ "notifications"|trans({}, "catroweb") }}</div>
+        </a>
+      </div>
       <div>
         <a href="{{ url('profile') }}" id="btn-profile">
           <div><div class="img-author-big"></div></div>
@@ -103,5 +109,38 @@
         </a>
       </div>
     </div>
+    <div id="user-notification-center"></div>
   {% endif %}
 </nav>
+
+{% if app.user %}
+    <script>
+        function fetchUserNotifications() {
+            $.ajax({
+                url: "{{ path('user_notifications_count') }}",
+                type: "get",
+                success: function(data) {
+                    var numOfNotifications = data.count;
+                    $(".user-notification-badge").removeAttr("data-badge");
+
+                    if (numOfNotifications > 0) {
+                        var labelTitle = (numOfNotifications <= 1000) ? numOfNotifications.toString() : "1000+";
+
+                        if (labelTitle.length >= 3) {
+                            $(".user-notification-badge").addClass("user-notification-badge-large");
+                        } else {
+                            $(".user-notification-badge").removeClass("user-notification-badge-large");
+                        }
+                        $(".user-notification-badge").attr("data-badge", labelTitle);
+                    }
+                    setTimeout(fetchUserNotifications, 10000);
+                },
+                error: function() { console.error("Unable to fetch user notifications!"); }
+            });
+        }
+
+        $(document).ready(function() {
+            fetchUserNotifications();
+        });
+    </script>
+{% endif %}

@@ -1,0 +1,105 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}" />
+{% endblock %}
+
+{% block body %}
+<h1>{{ "notifications"|trans({}, "catroweb") }}</h1>
+<p>&nbsp;</p>
+
+<div id="notifications">
+    {% for originalProgramId, data in unseenRemixesGrouped %}
+    <div class="remixed-programs">
+        <div id="search-results-text">
+            <strong>
+            {{ "programs.newRemixesNotificationTitle"|transchoice(data.remixes|length, {
+                '%programName%' : data.originalProgramName,
+                '%remixes%' : data.remixes|length
+            }, "catroweb") }}
+            </strong>
+        </div>
+
+        <div class="programs">
+            {% for remixData in data.remixes %}
+                <div class="program" id="program-{{ remixData.remixProgramId }}" style="display:block;">
+                    <a href="{{ url('see_user_notification', {
+                        'ancestor_id' : remixData.originalProgramId,
+                        'descendant_id' : remixData.remixProgramId
+                    }) }}" class="notification-link">
+                    <div><img src="{{ remixData.thumbnail }}"></div>
+                    <div class="program-name"><b>{{ remixData.remixProgramName }}</b></div>
+                    <div><div class="img-time-small"></div>{{ remixData.age }}</div></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="clear"></div>
+
+<div>
+    <button id="mark-all-as-seen" class="btn btn-primary download-button"><i class="fa fa-check" aria-hidden="true"></i>
+        {{ "clearAllNotificationsButtonTitle"|trans({}, "catroweb") }}
+    </button>
+</div>
+
+<div id="error" class="no-notifications-placeholder">
+    <i class="fa fa-check fa-6" style="font-size:16em" aria-hidden="true"></i>
+    <p><b>{{ "wellDone"|trans({}, "catroweb") }}</b><br />{{ "notificationsReadMessage"|trans({}, "catroweb") }}</p>
+</div>
+
+{% endblock %}
+
+{% block js %}
+  <script>
+      function markUserNotificationAsSeen() {
+          $.ajax({
+              url: "{{ url('user_notifications_seen') }}",
+              type: "get",
+              success: function(data) {
+                  if (!data.success) {
+                      swal("{{ "somethingWentWrong"|trans({}, "catroweb") }}", "{{ "notificationsClearError"|trans({}, "catroweb") }}", "error");
+                      return;
+                  }
+
+                  $("#notifications").children().remove();
+                  $("#mark-all-as-seen").hide();
+                  $(".user-notification-badge").removeAttr("data-badge");
+                  $(".no-notifications-placeholder").show();
+                  swal("{{ "done"|trans({}, "catroweb") }}", "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}", "success");
+              },
+              error: function() {
+                  swal("{{ "somethingWentWrong"|trans({}, "catroweb") }}", "{{ "notificationsClearError"|trans({}, "catroweb") }}", "error");
+              }
+          });
+      }
+      $(document).ready(function() {
+          var totalNumOfRemixes = {{ unseenRemixesGrouped|length }};
+          if (totalNumOfRemixes == 0) {
+              $("#mark-all-as-seen").hide();
+              $(".no-notifications-placeholder").show();
+          } else {
+              $(".no-notifications-placeholder").hide();
+          }
+          $("#mark-all-as-seen").click(markUserNotificationAsSeen);
+          $(".notification-link").click(function () {
+              var programLayer = $(this).parent(".program");
+              var parentProgramsLayer = programLayer.parent(".programs");
+              var remixedProgramsLayer = parentProgramsLayer.parent(".remixed-programs");
+              programLayer.remove();
+
+              if (parentProgramsLayer.children().length == 0) {
+                  remixedProgramsLayer.remove();
+                  if ($("#notifications").children().length == 0) {
+                      $("#mark-all-as-seen").hide();
+                      $(".no-notifications-placeholder").show();
+                  }
+              }
+              window.location = $(this).attr("href");
+              return true;
+          });
+      });
+  </script>
+{% endblock %}

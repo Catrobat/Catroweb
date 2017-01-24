@@ -10,10 +10,36 @@ use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProgramController extends Controller
 {
+    /**
+     * @Route("/program/remixgraph/{id}", name="program_remix_graph", requirements={"id":"\d+"})
+     * @Method({"GET"})
+     */
+    public function programRemixGraphAction($id)
+    {
+        $remix_graph_data = $this->get('remixmanager')->getFullRemixGraph($id);
+        $screenshot_repository = $this->get('screenshotrepository');
+
+        $catrobat_program_thumbnails = [];
+        foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
+            if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData'])) {
+                $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
+                continue;
+            }
+            $catrobat_program_thumbnails[$node_id] = '/' . $screenshot_repository->getThumbnailWebPath($node_id);
+        }
+
+        return new JsonResponse([
+            'id' => $id,
+            'remixGraph' => $remix_graph_data,
+            'catrobatProgramThumbnails' => $catrobat_program_thumbnails,
+        ]);
+    }
+
     /**
      * @Route("/program/{id}", name="program", requirements={"id":"\d+"})
      * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"})
@@ -29,6 +55,7 @@ class ProgramController extends Controller
         $program = $this->get('programmanager')->find($id);
         $screenshot_repository = $this->get('screenshotrepository');
         $elapsed_time = $this->get('elapsedtime');
+        $show_graph = in_array($request->query->get('show_graph'), [0, 1]) ? (bool)$request->query->get('show_graph') : false;
 
         if (!$program || !$program->isVisible()) {
             throw $this->createNotFoundException('Unable to find Project entity.');
@@ -42,6 +69,9 @@ class ProgramController extends Controller
         $program_comments = $this->findCommentsById($program);
         $program_details = $this->createProgramDetailsArray($screenshot_repository, $program, $elapsed_time,
             $referrer, $program_comments, $request);
+
+        // TODO: temporary parameter to show remix graph! will be removed by next Pull Request (Ralph)
+        $program_details['showGraph'] = $show_graph;
 
         $user = $this->getUser();
         $nolb_status = false;
@@ -221,6 +251,7 @@ class ProgramController extends Controller
             'id' => $program->getId(),
             'comments' => $program_comments,
             'commentsLength' => count($program_comments),
+            'remixesLength' => $this->get('remixmanager')->remixCount($program->getId()),
             'isAdmin' => $this->isGranted("ROLE_ADMIN"),
         );
         return $program_details;

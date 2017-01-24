@@ -1,0 +1,81 @@
+#remix-graph-modal {
+    margin:0;
+}
+
+#remix-graph-layer {
+    width: 100%;
+    height: 100vh;
+}
+
+div.close-remix-graph-modal {
+    width: 52px;
+    height: 52px;
+    margin: 12px 12px 0;
+    position: absolute;
+    text-align: left;
+    z-index: 1;
+}
+
+.close-button:hover {
+    transform: rotate(90deg);
+    outline: none;
+}
+
+.close-button {
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+    cursor: pointer;
+    outline: none;
+}
+
+.overlay {
+    background-color: rgba(255, 255, 255, 0.01);
+    bottom: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 20000;
+}
+
+.context-menu-item {
+    font-size: 16px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.context-menu-item-title {
+    padding: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 18px;
+    width: 220px;
+}
+
+.context-menu-item-subtitle {
+    padding: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 16px;
+    width: 220px;
+}
+
+.context-menu-separator {
+    padding: 0;
+    padding-top: 10px;
+    margin: 0;
+}
+
+.context-menu-icon.context-menu-icon--fa::before {
+    color: #000000 !important;
+}
+
+.context-menu-icon.context-menu-icon--fa.context-menu-hover::before {
+    color: #FFFFFF !important;
+}
+
