@@ -38,7 +38,7 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('./js/plugins/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('./js/globalPlugins/owl.carousel.min.js') }}"></script>
   <script>
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
     var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}');
