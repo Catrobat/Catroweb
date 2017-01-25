@@ -16,10 +16,10 @@ Feature: Search extensions programs
       | 4  | Phiro        | PHIRO     |
       | 5  | Raspberry Pi | RASPI     |
     And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version | RemixOf  | extensions |
-      | 1  | Minions   | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | null     | Lego,Phiro |
-      | 2  | Galaxy    | p2          | User1    | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | null     | Lego,Drone |
-      | 3  | Alone     | p3          | User1    | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | null     |            |
+      | id | name      | description | owned by | downloads | views | upload time      | version | extensions |
+      | 1  | Minions   | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro |
+      | 2  | Galaxy    | p2          | User1    | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone |
+      | 3  | Alone     | p3          | User1    | 5         | 1     | 01.03.2013 12:00 | 0.8.5   |            |
 
 
   Scenario: A request must have specific parameters to succeed with the extension search

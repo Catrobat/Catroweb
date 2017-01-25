@@ -7,7 +7,7 @@
 
 
 {% block js %}
-  <script src="{{ asset('./js/plugins/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('./js/globalPlugins/owl.carousel.min.js') }}"></script>
   <script>
     var sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}');
     var submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}');

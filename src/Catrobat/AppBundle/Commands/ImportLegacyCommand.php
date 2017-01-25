@@ -2,6 +2,9 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Entity\RemixManager;
+use Catrobat\AppBundle\Listeners\RemixUpdater;
+use Catrobat\AppBundle\Services\AsyncHttpClient;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,6 +23,7 @@ use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Helper\ProgressBar;
 
+
 class ImportLegacyCommand extends ContainerAwareCommand
 {
     const RESOURCE_CONTAINER_FILE = 'resources.tar';
@@ -32,6 +36,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private $fileystem;
     private $user_manager;
     private $program_manager;
+    /**
+     * @var RemixManager
+     */
+    private $remix_manager;
     private $output;
 
     private $importdir;
@@ -43,12 +51,14 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private $screenshot_repository;
     private $catrobat_file_repository;
 
-    public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager, EntityManager $em)
+    public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager,
+                                RemixManager $remix_manager, EntityManager $em)
     {
         parent::__construct();
         $this->fileystem = $filesystem;
         $this->user_manager = $user_manager;
         $this->program_manager = $program_manager;
+        $this->remix_manager = $remix_manager;
         $this->em = $em;
     }
 
@@ -146,6 +156,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program->setDescription($description);
                     $program->setUploadedAt(new \DateTime($data[4], new \DateTimeZone('UTC')));
                     $program->setUploadIp($data[5]);
+                    $program->setRemixMigratedAt(null);
                     $program->setDownloads($data[6]);
                     $program->setViews($data[7]);
                     $program->setVisible($data[8] === 't');
@@ -161,10 +172,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
                         $program->setLanguageVersion($language_version);
                     }
 
-                    $program->setRemixCount($data[19]);
                     $program->setApproved($data[20] === 't');
                     $program->setCatrobatVersion(1);
                     $program->setFlavor('pocketcode');
+                    $program->setRemixRoot(true);
                     $this->em->persist($program);
                 } else {
                     break;
@@ -297,31 +308,19 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private function importProgramfile($id)
     {
         $filepath = $this->importdir.'/resources/projects/'."$id".'.catrobat';
+        $async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
 
         if (file_exists($filepath)) {
             /* @var $fileextractor CatrobatFileExtractor*/
             $fileextractor = $this->getContainer()->get('fileextractor');
             $router = $this->getContainer()->get('router');
-            $extractedfile = $fileextractor->extract(new File($filepath));
-            $xmlprops = $extractedfile->getProgramXmlProperties();
+            $extracted_catrobat_file = $fileextractor->extract(new File($filepath));
 
-            $xmlprops->header->url = $router->generate('program', array('id' => $id));
+            $program = $this->program_manager->find($id);
+            $remix_updater = new RemixUpdater($this->remix_manager, $async_http_client, $router);
+            $remix_updater->update($extracted_catrobat_file, $program);
 
-            $matches = array();
-            preg_match("/([\d]+)$/", $xmlprops->header->remixOf->__toString(), $matches);
-            if (isset($matches[1])) {
-                $remix_program_id = intval($matches[1]);
-                if ($remix_program_id != '') {
-                    $xmlprops->header->remixOf = $router->generate('program', array('id' => $remix_program_id));
-                    $parent = $this->program_manager->find($remix_program_id);
-                    if ($parent != null) {
-                        $program = $this->program_manager->find($id);
-                        $program->setRemixOf($parent);
-                    } else {
-                        $this->writeln('Could not set remix info: program not in database ('.$remix_program_id.')');
-                    }
-                }
-            }
+            $this->catrobat_file_repository->saveProgram($extracted_catrobat_file, $id);
             $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
         }
     }

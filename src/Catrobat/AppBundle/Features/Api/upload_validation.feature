@@ -1,4 +1,4 @@
-@api
+@api @upload
 Feature: All uploaded programs have to be validated.
 
   Background: 

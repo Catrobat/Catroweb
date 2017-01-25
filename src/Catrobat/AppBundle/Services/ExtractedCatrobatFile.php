@@ -1,14 +1,28 @@
 <?php
 namespace Catrobat\AppBundle\Services;
 
+use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
 use Symfony\Component\Finder\Finder;
 
+class RemixUrlParsingState
+{
+    const STARTING = 0;
+    const BETWEEN = 1;
+    const TOKEN = 2;
+}
+
+class RemixUrlIndicator
+{
+    const PREFIX_INDICATOR = '[';
+    const SUFFIX_INDICATOR = ']';
+    const SEPARATOR = ',';
+}
+
 class ExtractedCatrobatFile
 {
-
     protected $path;
 
     protected $web_path;
@@ -26,7 +40,7 @@ class ExtractedCatrobatFile
         if (! file_exists($base_dir . 'code.xml')) {
             throw new MissingXmlException();
         }
-        
+
         $content = file_get_contents($base_dir . 'code.xml');
         if ($content === false) {
             throw new InvalidXmlException();
@@ -157,6 +171,16 @@ class ExtractedCatrobatFile
         return (string)$this->program_xml_properties->header->applicationVersion;
     }
 
+    public function getRemixUrlsString()
+    {
+        return trim((string)$this->program_xml_properties->header->url);
+    }
+
+    public function getRemixMigrationUrlsString()
+    {
+        return trim((string)$this->program_xml_properties->header->remixOf);
+    }
+
     public function getPath()
     {
         return $this->path;
@@ -175,15 +199,91 @@ class ExtractedCatrobatFile
     public function saveProgramXmlProperties()
     {
         $this->program_xml_properties->asXML($this->path . 'code.xml');
-        
+
         $xml_string = file_get_contents($this->path . 'code.xml');
-        $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;ANYTHING<\/receivedMessage>/', '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);
-        $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;(.*)<\/receivedMessage>/', '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', $xml_string);
-        
+
+        $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;ANYTHING<\/receivedMessage>/',
+            '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);
+
+        $xml_string = preg_replace('/<receivedMessage>(.*)&lt;-&gt;(.*)<\/receivedMessage>/',
+            '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', $xml_string);
+
         if ($xml_string != null)
         {
             file_put_contents($this->path . 'code.xml', $xml_string);
         }
+    }
+
+    /**
+     * based on: http://stackoverflow.com/a/27295688
+     * @param int $program_id
+     * @param boolean $is_initial_version
+     * @param bool $migration_mode
+     * @return RemixData[]
+     */
+    public function getRemixesData($program_id, $is_initial_version, $migration_mode=false)
+    {
+        $remixes_string = $migration_mode ? $this->getRemixMigrationUrlsString() : $this->getRemixUrlsString();
+        $state = RemixUrlParsingState::STARTING;
+        $extracted_remixes = array();
+        $temp = '';
+
+        for ($index = 0; $index < strlen($remixes_string); $index++) {
+            $current_character = $remixes_string[$index];
+
+            if ($current_character == RemixUrlIndicator::PREFIX_INDICATOR) {
+                if ($state == RemixUrlParsingState::STARTING) {
+                    $state = RemixUrlParsingState::BETWEEN;
+                } else if ($state == RemixUrlParsingState::TOKEN) {
+                    $temp = '';
+                    $state = RemixUrlParsingState::BETWEEN;
+                }
+            } else if ($current_character == RemixUrlIndicator::SUFFIX_INDICATOR) {
+                if ($state == RemixUrlParsingState::TOKEN) {
+                    $extracted_url = trim($temp);
+                    if (strpos($extracted_url, RemixUrlIndicator::SEPARATOR) === false && strlen($extracted_url) > 0) {
+                        $extracted_remixes[] = new RemixData($extracted_url);
+                    }
+                    $temp = '';
+                    $state = RemixUrlParsingState::BETWEEN;
+                }
+            } else {
+                $state = RemixUrlParsingState::TOKEN;
+                $temp .= $current_character;
+            }
+        }
+
+        if (count($extracted_remixes) == 0 && strlen($remixes_string) > 0 &&
+            strpos($remixes_string, RemixUrlIndicator::SEPARATOR) === false)
+        {
+            $extracted_remixes[] = new RemixData($remixes_string);
+        }
+
+        $unique_remixes = array();
+        foreach ($extracted_remixes as $remix_data) {
+            if ($remix_data->getProgramId() <= 0) {
+                continue;
+            }
+
+            if (!$remix_data->isScratchProgram()) {
+                // case initial version: ignore parents having same or lower ID as the child-program itself!
+                if ($is_initial_version && $remix_data->getProgramId() >= $program_id) {
+                    continue;
+                }
+
+                // case higher version: ignore parents having same ID as the child-program itself!
+                if (!$is_initial_version && $remix_data->getProgramId() == $program_id) {
+                    continue;
+                }
+            }
+
+            $unique_key = $remix_data->getProgramId(). '_' . $remix_data->isScratchProgram();
+            if (!array_key_exists($unique_key, $unique_remixes)) {
+                $unique_remixes[$unique_key] = $remix_data;
+            }
+        }
+
+        return array_values($unique_remixes);
     }
 
     public function getContainingCodeObjects()

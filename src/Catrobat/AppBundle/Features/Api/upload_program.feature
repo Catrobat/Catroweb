@@ -1,4 +1,4 @@
-@api
+@api @upload
 Feature: Upload a program 
 
   Background: 
@@ -7,10 +7,10 @@ Feature: Upload a program
       | Catrobat | 12345    | cccccccccc |
       | User1    | vwxyz    | aaaaaaaaaa |
     And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version | RemixOf  |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | null     |
-      | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | null     |
-      | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | 2        |
+      | id | name      | description | owned by | downloads | views | upload time      | version |
+      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
+      | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
   Scenario: program upload with valid data
     Given I have a parameter "username" with value "Catrobat"
@@ -85,21 +85,9 @@ Feature: Upload a program
       {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
       """
 
-  Scenario: program upload with url should result in remix information
-    Given I have a program with "url" set to "https://share.catrob.at/pocketcode/program/1"
-    When I upload a program
-    Then the uploaded program should be a remix of "1"
-
-  Scenario: program upload with scratch url should have no RemixOf entity
-    Given I have a program with "url" set to "https://scratch.mit.edu/projects/70058680"
-    When I upload a program
-    Then the uploaded program shouldn't have any parent entity
-    And the uploaded program should have RemixOf "https://scratch.mit.edu/projects/70058680" in the xml
-    
   Scenario: 
     Given the next generated token will be "aabbccddee"
       And I am "Catrobat"
       And I upload a catrobat program
      When I upload another program using token "aabbccddee"
      Then It should be uploaded
-     
