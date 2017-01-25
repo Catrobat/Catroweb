@@ -235,6 +235,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the selected language should be "([^"]*)"$/
+   * @Given /^the selected language is "([^"]*)"$/
    */
   public function theSelectedLanguageShouldBe($arg1)
   {
@@ -267,6 +268,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       case 'Deutsch':
         $this->getSession()->setCookie('hl', 'de');
         break;
+      case 'Russisch':
+          $this->getSession()->setCookie('hl', 'ru');
+          break;
       default:
         assertTrue(false);
     }

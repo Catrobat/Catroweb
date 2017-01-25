@@ -290,16 +290,18 @@
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
 
-  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
-  <div id="recommendations">
-    <div id="recsys-headline">
-      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
-    </div>
-    <div class="programs"></div>
+    {% if app.request.locale != "ru" %}
+      {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+      <div id="recommendations">
+        <div id="recsys-headline">
+          <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+        </div>
+        <div class="programs"></div>
 
-  </div>
+      </div>
 
-  {% endif %}
+      {% endif %}
+    {% endif %}
 
   <div id="comment-successfully-reported">
     <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
