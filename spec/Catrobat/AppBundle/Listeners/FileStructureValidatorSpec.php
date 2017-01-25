@@ -19,22 +19,4 @@ class FileStructureValidatorSpec extends ObjectBehavior
         $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__.'/base');
         $this->shouldNotThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
     }
-
-    /**
-     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-     */
-    public function it_throws_an_exception_if_there_are_too_many_files($file)
-    {
-        $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__.'/program_with_too_many_files');
-        $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\UnexpectedFileException')->duringValidate($file);
-    }
-
-    /**
-     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-     */
-    public function it_throws_an_exception_if_there_are_too_many_folders($file)
-    {
-        $file->getPath()->willReturn(__SPEC_GENERATED_FIXTURES_DIR__.'/program_with_too_many_folders');
-        $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\UnexpectedFileException')->duringValidate($file);
-    }
 }

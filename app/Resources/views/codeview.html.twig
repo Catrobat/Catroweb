@@ -184,7 +184,11 @@
         {% if no_code is defined %}
             <p class="exception">CODE CAN'T BE DISPLAYED</p>
         {% elseif scene_list is defined %}
-            {{ self.scenes(path, scene_list) }}
+            {% if scene_list|length > 1 %}
+                {{ self.scenes(path, scene_list) }}
+            {% else %}
+                {{ self.maincontent(scene_list[0].background, scene_list[0].object_list, path, scene_list[0].name) }}
+            {% endif %}
         {% else %}
             {{ self.maincontent(background, object_list, path, null) }}
         {% endif %}

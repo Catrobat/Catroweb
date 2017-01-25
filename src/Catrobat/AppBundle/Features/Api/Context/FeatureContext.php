@@ -94,14 +94,14 @@ class FeatureContext extends BaseContext
      * @BeforeScenario @RealGeocoder
      */
     public function activateRealGeocoderService() {
-        $this->getSymfonyService('download_statistics')->useRealService(true);
+        $this->getSymfonyService('statistics')->useRealService(true);
     }
 
     /**
      * @AfterScenario @RealGeocoder
      */
     public function deactivateRealGeocoderService() {
-        $this->getSymfonyService('download_statistics')->useRealService(false);
+        $this->getSymfonyService('statistics')->useRealService(false);
     }
 
     private function prepareValidRegistrationParameters()
@@ -1260,5 +1260,23 @@ class FeatureContext extends BaseContext
         }
     }
 
+    /**
+     * @When /^I search similar programs for program id "([^"]*)"$/
+     */
+    public function iSearchSimilarProgramsForProgramId($id)
+    {
+        $this->iHaveAParameterWithValue('program_id', $id);
+        if (isset($this->request_parameters['limit'])) {
+            $this->iHaveAParameterWithValue('limit', $this->request_parameters['limit']);
+        } else {
+            $this->iHaveAParameterWithValue('limit', '1');
+        }
+        if (isset($this->request_parameters['offset'])) {
+            $this->iHaveAParameterWithValue('offset', $this->request_parameters['offset']);
+        } else {
+            $this->iHaveAParameterWithValue('offset', '0');
+        }
+        $this->iGetWithTheseParameters('/pocketcode/api/projects/recsys.json');
+    }
 
 }

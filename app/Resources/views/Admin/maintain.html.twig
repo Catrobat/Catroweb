@@ -47,7 +47,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <a id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;" href="#"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>&nbsp;(~{{ backupSize }})
+                            <a id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;" href="{{ backupCommand.command_link }}"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>&nbsp;(~{{ backupSize }})
                         </div>
                     </div>
 
@@ -129,27 +129,6 @@
         }
 
         $(window).load(function(){
-            $('#btnCreateBackup').click(function(){
-                swal({
-                    title: "{{ "admin.maintain.createBackupConfirmationTitle"|trans({}, "catroweb") }}",
-                    text: "{{ "admin.maintain.createBackupConfirmationText"|trans({}, "catroweb") }}",
-                    type: "info",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                },
-                function(){
-                    $.ajax({
-                        url: '{{ backupCommand.command_link }}',
-                        complete: function(response) {
-                            location.reload();
-                        },
-                        error: function() {
-                            location.reload();
-                        }
-                    });
-                });
-            });
         });
 
 

@@ -23,7 +23,7 @@ class MediaPackageCategory
   protected $name;
 
   /**
-   * @ORM\ManyToOne(targetEntity="MediaPackage", inversedBy="categories")
+   * @ORM\ManyToMany(targetEntity="MediaPackage", inversedBy="categories")
    **/
   protected $package;
 
@@ -104,8 +104,21 @@ class MediaPackageCategory
 
   public function __toString()
   {
-    if($this->package)
-      return $this->name." (".$this->package->getName().")";
+    if(count($this->package)) {
+      $string = $this->name." (";
+      $count = count($this->package);
+
+      for($it = 0; $it < $count; $it++) {
+        $string .= $this->package[$it];
+
+        if($it < ($count-1)) {
+            $string .= ", ";
+        }
+      }
+      $string .= ")";
+
+      return $string;
+    }
     else
       return $this->name;
   }

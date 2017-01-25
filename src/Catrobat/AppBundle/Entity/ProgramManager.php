@@ -165,6 +165,11 @@ class ProgramManager
         return $this->program_repository->findOneByName($programName);
     }
 
+    public function findBy($array)
+    {
+        return $this->program_repository->findBy($array);
+    }
+
     public function getUserPrograms($user_id)
     {
         return $this->program_repository->getUserPrograms($user_id);
@@ -278,5 +283,15 @@ class ProgramManager
     public function searchExtensionCount($query)
     {
         return $this->program_repository->searchExtensionCount($query);
+    }
+
+    public function getRecommendedProgramsById($id, $flavor, $limit, $offset)
+    {
+        return $this->program_repository->getRecommendedProgramsById($id, $flavor, $limit, $offset);
+    }
+
+    public function getRecommendedProgramsCount($id, $flavor)
+    {
+        return $this->program_repository->getRecommendedProgramsCount($id, $flavor);
     }
 }
