@@ -9,6 +9,8 @@ parameters:
       catrobat.template.storage.path: "resources/templates/"
       catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
       catrobat.screenshot.path:       "resources/screenshots/"
+      catrobat.template.dir:          "%catrobat.webdir%resources/templates/"
+      catrobat.template.path:         "resources/templates/"
       catrobat.template.screenshot.dir:        "%catrobat.webdir%resources/templates/screenshots/"
       catrobat.template.screenshot.path:       "resources/templates/screenshots/"
       catrobat.thumbnail.dir:         "%catrobat.webdir%resources/thumbnails/"

@@ -44,6 +44,7 @@ class ResetCommand extends ContainerAwareCommand
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'),  'Delete extracted programs', $output);
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'),  'Delete featured images', $output);
         $this->emptyDirectory($this->getContainer()->getParameter('catrobat.mediapackage.dir'),  'Delete mediapackages', $output);
+        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.template.dir'),  'Delete templates', $output);
 
         // already happens in doctrine:schema:create
         //$this->executeShellCommand('php app/console init:acl', 'Init ACL', $output);

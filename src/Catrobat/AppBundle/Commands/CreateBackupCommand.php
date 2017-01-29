@@ -51,8 +51,9 @@ class CreateBackupCommand extends ContainerAwareCommand
         $featuredimage_dir = $this->getContainer()->getParameter('catrobat.featuredimage.dir');
         $programs_dir = $this->getContainer()->getParameter('catrobat.file.storage.dir');
         $mediapackage_dir = $this->getContainer()->getParameter('catrobat.mediapackage.dir');
+        $template_dir = $this->getContainer()->getParameter('catrobat.template.dir');
 
-        $this->executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir",
+        $this->executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
             "Create tar.gz file");
         $this->executeShellCommand("chmod 777 ".$zip_path, "Set permissions");
 
