@@ -152,7 +152,12 @@ services:
           arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
           tags:
               - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
-              
+      catrobat.view.templatelist:
+          class:        Catrobat\AppBundle\Listeners\View\TemplateListSerializer
+          arguments: ["@request_stack","%catrobat.template.storage.path%","@templatescreenshotrepository","@elapsedtime"]
+          tags:
+              - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+
               
 # =========================== Download ===========================
 
