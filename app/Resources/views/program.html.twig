@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/pocketcode/remixgraph.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
 
   <script src="https://share.catrob.at/html5/player/pocketCodePlayer.js"></script>
   <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('LoadingAnimation.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('jquery.contextMenu.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('jquery.ui.position.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('animatedModal.min.js') )}}"></script>
@@ -113,7 +115,7 @@
         <button id="apk-generate" class="btn btn-apk download-button">
           <table>
             <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
               <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
             </tr>
           </table>
@@ -123,7 +125,7 @@
           <button  class="btn download-button download-pending">
             <table>
               <tr>
-                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
                 <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
@@ -134,7 +136,7 @@
         <button id="apk-download" class="btn btn-apk download-button">
           <table>
             <tr>
-              <td><i class="fa fa-sitemap" aria-hidden="true"></i></td>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
               <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
             </tr>
           </table>
@@ -434,21 +436,27 @@
       open: "{{ "remixgraph.open"|trans({}, "catroweb") }}",
       showPaths: "{{ "remixgraph.showPaths"|trans({}, "catroweb") }}",
       programNotAvailableErrorTitle: "{{ "remixgraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
-      programNotAvailableErrorDescription: "{{ "remixgraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}"
+      programNotAvailableErrorDescription: "{{ "remixgraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}",
+      programNotAvailable: "{{ "remixgraph.programNotAvailable"|trans({}, "catroweb") }}",
+      programUnknownUser: "{{ "remixgraph.programUnknownUser"|trans({}, "catroweb") }}"
     };
 
     $(document).ready(function() {
+      var loadingAnimation = new LoadingAnimation('#FFFFFF', "{{ "pleaseWait"|trans({}, "catroweb") }}");
+      var remixGraph = RemixGraph.getInstance();
+      remixGraph.init("remix-graph-modal", "remix-graph-layer", "close-button", "{{ program_details_url_template }}", remixGraphTranslations);
+
       $("#remix-graph-modal-link").animatedModal({
         modalTarget: 'remix-graph-modal',
         animatedIn: 'zoomInUp',
         animatedOut: 'bounceOutDown',
         color: '#177f8d',
         beforeOpen: function() {
-          destroyNetwork();
+          remixGraph.destroy();
           if (cachedRemixData != null) {
             document.addEventListener('gesturestart', blockEventListener);
             document.ontouchmove = blockEventListener;
-            render("remix-graph-modal", "remix-graph-layer", "close-button", cachedRemixData, remixGraphTranslations);
+            remixGraph.render(cachedRemixData, loadingAnimation);
           } else {
             $.ajax({
               url: "{{ path('program_remix_graph', { 'id' : program.id }) }}",
@@ -457,7 +465,7 @@
                 cachedRemixData = remixData;
                 document.addEventListener('gesturestart', blockEventListener);
                 document.ontouchmove = blockEventListener;
-                render("remix-graph-modal", "remix-graph-layer", "close-button", remixData, remixGraphTranslations);
+                remixGraph.render(remixData, loadingAnimation);
               },
               error: function(data) {
                 alert("Unable to fetch remix-graph!");
@@ -471,6 +479,7 @@
         },
         beforeClose: function() {
           console.log("The animation was called");
+          loadingAnimation.hide();
         },
         afterClose: function() {
           console.log("The animation is completed");

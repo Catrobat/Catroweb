@@ -54,6 +54,7 @@ class ProgramController extends Controller
          */
         $program = $this->get('programmanager')->find($id);
         $screenshot_repository = $this->get('screenshotrepository');
+        $router = $this->get('router');
         $elapsed_time = $this->get('elapsedtime');
         $show_graph = in_array($request->query->get('show_graph'), [0, 1]) ? (bool)$request->query->get('show_graph') : false;
 
@@ -91,6 +92,7 @@ class ProgramController extends Controller
 
         $jam = $this->extractGameJamConfig();
         return $this->get('templating')->renderResponse('::program.html.twig', array(
+            'program_details_url_template' => $router->generate('program', array('id' => 0)),
             'program' => $program,
             'program_details' => $program_details,
             'my_program' => count($user_programs) > 0 ? true : false,

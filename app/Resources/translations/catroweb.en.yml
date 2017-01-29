@@ -32,6 +32,7 @@ notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
 
 programs:
   featured: Featured
@@ -68,13 +69,14 @@ programs:
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
 
-
 remixgraph:
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 
 
 passwordRecovery:

@@ -31,6 +31,8 @@ notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
+pleaseWait: "Bitte warten..."
+
 programs:
   featured: Empfohlen
   newest: Neueste Programme
@@ -71,6 +73,8 @@ remixgraph:
   showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
+  programNotAvailable: 'Nicht verfügbar'
+  programUnknownUser: 'Unbekannter User'
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |

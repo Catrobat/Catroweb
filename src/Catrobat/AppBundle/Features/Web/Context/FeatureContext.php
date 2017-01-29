@@ -11,6 +11,7 @@ use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramManager;
+use Catrobat\AppBundle\Entity\ProgramRemixRelation;
 use Catrobat\AppBundle\Entity\StarterCategory;
 use Catrobat\AppBundle\Entity\Tag;
 use Catrobat\AppBundle\Entity\TagRepository;
@@ -187,7 +188,35 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $programs = $this->getSession()->getPage()->findAll('css', $arg2);
       assertEquals($arg1, count($programs));
   }
-    
+
+  /**
+   * @Then /^I should see a node with id "([^"]*)" having name "([^"]*)" and username "([^"]*)"$/
+   */
+  public function iShouldSeeANodeWithNameAndUsername($node_id, $expected_node_name, $expected_username)
+  {
+      $result = $this->getSession()->evaluateScript("
+            return { nodeName: RemixGraph.getInstance().getNodes().get('" . $node_id . "').name,
+                     username: RemixGraph.getInstance().getNodes().get('" . $node_id . "').username };
+      ");
+      $actual_node_name = implode('', $result['nodeName']);
+      $actual_username = $result['username'];
+      assertEquals($expected_node_name, $actual_node_name);
+      assertEquals($expected_username, $actual_username);
+  }
+
+  /**
+   * @Then /^I should see an edge from "([^"]*)" to "([^"]*)"$/
+   */
+  public function iShouldSeeAnEdgeFromTo($from_id, $to_id)
+  {
+      $result = $this->getSession()->evaluateScript("
+            return RemixGraph.getInstance().getEdges().get().filter(function (edge) { return edge.from === '" . $from_id . "' && edge.to === '" . $to_id . "'; });
+      ");
+      assertCount(1, $result);
+      assertEquals($from_id, $result[0]['from']);
+      assertEquals($to_id, $result[0]['to']);
+  }
+
   /**
    * @Then /^I should see the featured slider$/
    */
@@ -529,7 +558,29 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
-  /**
+    /**
+     * @Given /^there are forward remix relations:$/
+     */
+    public function thereAreForwardRemixRelations(TableNode $table)
+    {
+        /*
+        * @var $em \Doctrine\ORM\EntityManager
+        */
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $relations = $table->getHash();
+
+        foreach($relations as $relation)
+        {
+            $ancestor_program = $em->getRepository('AppBundle:Program')->find($relation['ancestor_id']);
+            $descendant_program = $em->getRepository('AppBundle:Program')->find($relation['descendant_id']);
+
+            $forward_relation = new ProgramRemixRelation($ancestor_program, $descendant_program, intval($relation['depth']));
+            $em->persist($forward_relation);
+        }
+        $em->flush();
+    }
+
+    /**
    * @Given /^I write "([^"]*)" in textbox$/
    */
   public function iWriteInTextbox($arg1)
