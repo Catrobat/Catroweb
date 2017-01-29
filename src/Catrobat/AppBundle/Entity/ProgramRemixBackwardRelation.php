@@ -27,7 +27,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     protected $parent_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="catrobat_remix_backward_parent_relations", fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="catrobat_remix_backward_child_relations", fetch="LAZY")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * @var \Catrobat\AppBundle\Entity\Program
      */
@@ -40,7 +40,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     protected $child_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="catrobat_remix_descendant_relations", fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="catrobat_remix_backward_parent_relations", fetch="LAZY")
      * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
      * @var \Catrobat\AppBundle\Entity\Program
      */
