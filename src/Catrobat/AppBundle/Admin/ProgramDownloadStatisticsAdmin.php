@@ -61,6 +61,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
         $listMapper
             ->addIdentifier('id')
             ->add('program', null, array('admin_code' => 'catrowebadmin.block.programs.all',))
+            ->add('recommended_from_program', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('user')
             ->add('downloaded_at')
             ->add('ip')
@@ -82,8 +83,10 @@ class ProgramDownloadStatisticsAdmin extends Admin
     }
 
     public function getExportFields() {
-        return array('id','program.id','program.name','program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description','downloaded_at','ip','latitude','longitude','country_code',
-            'country_name','street','postal_code','locality','user_agent','user.username','referrer');
+        return array('id','program.id','program.name','recommended_from_program.id','recommended_from_program.name',
+            'program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description',
+            'downloaded_at','ip','latitude','longitude','country_code','country_name','street','postal_code',
+            'locality','user_agent','user.username','referrer');
     }
 
     protected function configureRoutes(RouteCollection $collection)

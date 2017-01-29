@@ -4,8 +4,20 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://share.catrob.at/html5/player/pocketCodePlayer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/pocketcode/remixgraph.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
+
   <script src="https://share.catrob.at/html5/player/pocketCodePlayer.js"></script>
   <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('jquery.contextMenu.min.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('jquery.ui.position.min.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('animatedModal.min.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('vis.min.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('remixgraph.js') )}}"></script>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
   <meta property="og:type" content="website" />
@@ -122,19 +134,19 @@
         <button id="apk-download" class="btn btn-apk download-button">
           <table>
             <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+              <td><i class="fa fa-sitemap" aria-hidden="true"></i></td>
               <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
             </tr>
           </table>
         </button>
       </div>
 
-      {% if nolb_status and program.user == app.user.username and (('teacher' in app.user.username) or ('test' in app.user.username))%}
+      {% if nolb_status and program.user == app.user.username and 'test' in app.user.username %}
         <button id="nolb-project-button" class="btn download-button">
           <table>
             <tr>
               <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}" > </td>
-              <td>NOLB SUBMIT BUTTON</td>
+              <td>Submit your project</td>
             </tr>
           </table>
         </button>
@@ -259,18 +271,37 @@
       <div class="img-views icon"></div>
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
-  </div>
-
-{#  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
-  <div id="recommendations">
-    <div id="recsys-headline">
-      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+    {% if program_details.showGraph %}
+    <div id="icon-remix">
+      <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
+      <span class="icon-text">
+        <a id="remix-graph-modal-link" href="#remix-graph-modal">
+          {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+        </a>
+      </span>
     </div>
-    <div class="programs"></div>
-
+    {% endif %}
   </div>
 
-  {% endif %}#}
+  <div id="remix-graph-modal">
+    <div class="close-remix-graph-modal">
+      <img class="close-button" src="{{ asset('images/symbols/close_button.svg') }}" />
+    </div>
+    <div id="remix-graph-layer" class="modal-content"></div>
+  </div>
+
+    {% if app.request.locale != "ru" %}
+      {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+      <div id="recommendations">
+        <div id="recsys-headline">
+          <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+        </div>
+        <div class="programs"></div>
+
+      </div>
+
+      {% endif %}
+    {% endif %}
 
   <div id="comment-successfully-reported">
     <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
@@ -356,6 +387,10 @@
 
     var download_href = document.getElementById("url-download").href;
 
+    function blockEventListener(event) {
+      event.preventDefault();
+    }
+
     $(document).on("click", "#url-download", function() {
       var url_link = document.getElementById("url-download");
       if(url_link.href != 'javascript:void(0)') {
@@ -370,14 +405,62 @@
       return false;
     });
 
-   /* var undefined;
+    var undefined;
     var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}',undefined, {{ program.id }});
-    recs.initRecsys();*/
+    recs.initRecsys();
 
     counter = 10;
+    var cachedRemixData = null;
+    var remixGraphTranslations = {
+      ok: "{{ "ok"|trans({}, "catroweb") }}",
+      by: "{{ "remixgraph.by"|trans({}, "catroweb") }}",
+      open: "{{ "remixgraph.open"|trans({}, "catroweb") }}",
+      showPaths: "{{ "remixgraph.showPaths"|trans({}, "catroweb") }}",
+      programNotAvailableErrorTitle: "{{ "remixgraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
+      programNotAvailableErrorDescription: "{{ "remixgraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}"
+    };
 
-    $(document).ready(function(){
-
+    $(document).ready(function() {
+      $("#remix-graph-modal-link").animatedModal({
+        modalTarget: 'remix-graph-modal',
+        animatedIn: 'zoomInUp',
+        animatedOut: 'bounceOutDown',
+        color: '#177f8d',
+        beforeOpen: function() {
+          destroyNetwork();
+          if (cachedRemixData != null) {
+            document.addEventListener('gesturestart', blockEventListener);
+            document.ontouchmove = blockEventListener;
+            render("remix-graph-modal", "remix-graph-layer", "close-button", cachedRemixData, remixGraphTranslations);
+          } else {
+            $.ajax({
+              url: "{{ path('program_remix_graph', { 'id' : program.id }) }}",
+              type: "get",
+              success: function(remixData) {
+                cachedRemixData = remixData;
+                document.addEventListener('gesturestart', blockEventListener);
+                document.ontouchmove = blockEventListener;
+                render("remix-graph-modal", "remix-graph-layer", "close-button", remixData, remixGraphTranslations);
+              },
+              error: function(data) {
+                alert("Unable to fetch remix-graph!");
+              }
+            });
+          }
+          console.log("The animation was called");
+        },
+        afterOpen: function() {
+          console.log("The animation is completed");
+        },
+        beforeClose: function() {
+          console.log("The animation was called");
+        },
+        afterClose: function() {
+          console.log("The animation is completed");
+          document.removeEventListener('gesturestart', blockEventListener);
+          document.ontouchmove = null;
+        }
+      });
       $(document).on("click", "#show-more-button", function() {
         counter += 10;
         for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)

@@ -14,10 +14,10 @@ Feature: Search tagged programs
       | 2  | Story     | Geschichte  |
       | 3  | Single    | Allein      |
     And there are programs:
-      | id | name      | description | owned by | downloads | views | upload time      | version | RemixOf  | tags_id |
-      | 1  | Minions   | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | null     | 1,2     |
-      | 2  | Galaxy    | p2          | User1    | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | null     | 2       |
-      | 3  | Alone     | p3          | User1    | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | null     | 3       |
+      | id | name      | description | owned by | downloads | views | upload time      | version | tags_id |
+      | 1  | Minions   | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 1,2     |
+      | 2  | Galaxy    | p2          | User1    | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | 2       |
+      | 3  | Alone     | p3          | User1    | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | 3       |
 
 
   Scenario: A request must have specific parameters to succeed with the tag search

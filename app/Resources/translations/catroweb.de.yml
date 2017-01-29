@@ -24,6 +24,14 @@ less: 'weniger'
 ok: OK
 clickToDownloadProgram: 'Um das Beispielprogramm herunterzuladen klicke %link_start% hier %link_end%.'
 registrationError: 'Benutzername oder e-Mail-Adresse bereits verwendet.'
+notifications: 'Benachrichtigungen'
+wellDone: "Gut gemacht!"
+done: "Erledigt!"
+notificationsReadMessage: "Du hast alle Benachrichtigungen schon gelesen."
+notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
+clearAllNotificationsButtonTitle: "Alle als gelesen markieren"
+notificationsClearError: "Die Benachrichtigungen können nicht als gelesen markiert werden!"
+
 programs:
   featured: Empfohlen
   newest: Neueste Programme
@@ -35,6 +43,8 @@ programs:
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprogramme
   views: '%views% gesehen'
+  remixes: '{0}0 Remixe |{1}1 Remix |]1,Inf] %remixes% Remixe'
+  newRemixesNotificationTitle: '|{1}"%programName%" hat 1 neuen Remix: |]1,Inf] "%programName%" hat %remixes% neue Remixe:'
   submitted: Eingereichte Programme
   uploaded: Hochgeladenen Programme
   reportAsInappropriate: Als unpassend melden
@@ -56,6 +66,12 @@ programs:
   report: Melden
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
+remixgraph:
+  by: 'von'
+  open: 'Öffnen'
+  showPaths: 'Zeige Pfade'
+  programNotAvailableErrorTitle: 'Es tut uns leid...'
+  programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |

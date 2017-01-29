@@ -91,7 +91,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="{{ asset('js/plugins/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
     <script>
         google.load("visualization", "1", {packages:["corechart"]});
         google.setOnLoadCallback(drawChart);

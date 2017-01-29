@@ -2,8 +2,8 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -15,16 +15,18 @@ class ResetCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('catrobat:reset')
-    ->setDescription('Resets everything to base values')
-    ->addOption('hard');
+        $this
+            ->setName('catrobat:reset')
+            ->setDescription('Resets everything to base values')
+            ->addOption('hard')
+            ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED, 'Generates remix graph based on given layout',
+                ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('hard')) {
             $output->writeln("This command will reset everything, use with caution! Use '--hard' option if you are sure.");
-
             return;
         }
 
@@ -59,8 +61,14 @@ class ResetCommand extends ContainerAwareCommand
         $filesystem->remove($temp_dir);
         $filesystem->mkdir($temp_dir);
         $this->downloadPrograms($temp_dir, $output);
-        $this->executeShellCommand("php app/console catrobat:import $temp_dir catroweb", 'Importing Projects', $output);
-        $this->executeSymfonyCommand('catrobat:import', array('directory' => $temp_dir, 'user' => 'catroweb'), $output);
+        $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
+        $this->executeShellCommand("php app/console catrobat:import $temp_dir catroweb $remix_layout_option",
+            'Importing Projects', $output);
+        $this->executeSymfonyCommand('catrobat:import', array(
+            'directory' => $temp_dir,
+            'user' => 'catroweb',
+            '--remix-layout' => intval($input->getOption('remix-layout'))
+        ), $output);
         $filesystem->remove($temp_dir);
     }
 

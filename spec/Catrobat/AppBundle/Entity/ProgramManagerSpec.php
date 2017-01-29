@@ -13,19 +13,19 @@ class ProgramManagerSpec extends ObjectBehavior
 
     /**
      *
-     * @param \Catrobat\AppBundle\Services\CatrobatFileExtractor $file_extractor            
-     * @param \Catrobat\AppBundle\Services\ProgramFileRepository $file_repository            
-     * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository            
+     * @param \Catrobat\AppBundle\Services\CatrobatFileExtractor $file_extractor
+     * @param \Catrobat\AppBundle\Services\ProgramFileRepository $file_repository
+     * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository
      * @param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository
      * @param \Catrobat\AppBundle\Entity\TagRepository $tag_repository
-     * @param \Doctrine\ORM\EntityManager $entity_manager            
-     * @param \Symfony\Component\HttpFoundation\File\File $file            
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher            
-     * @param \Catrobat\AppBundle\Entity\User $user            
-     * @param \Catrobat\AppBundle\Requests\AddProgramRequest $request            
-     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $extracted_file            
-     * @param \Catrobat\AppBundle\Entity\Program $inserted_program            
-     * @param \Symfony\Component\EventDispatcher\Event $event            
+     * @param \Doctrine\ORM\EntityManager $entity_manager
+     * @param \Symfony\Component\HttpFoundation\File\File $file
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
+     * @param \Catrobat\AppBundle\Entity\User $user
+     * @param \Catrobat\AppBundle\Requests\AddProgramRequest $request
+     * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $extracted_file
+     * @param \Catrobat\AppBundle\Entity\Program $inserted_program
+     * @param \Symfony\Component\EventDispatcher\Event $event
      * @param \Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception
      * @param \Doctrine\ORM\Mapping\ClassMetadata $metadata
      */
@@ -51,8 +51,9 @@ class ProgramManagerSpec extends ObjectBehavior
     {
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
-        $entity_manager->persist(Argument::any())->shouldBecalled();
+        $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
         $entity_manager->flush()->shouldBecalled();
+        $entity_manager->refresh(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
         $this->addProgram($request)->shouldHaveType('Catrobat\AppBundle\Entity\Program');
     }
 
@@ -61,16 +62,17 @@ class ProgramManagerSpec extends ObjectBehavior
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-        $entity_manager->persist(Argument::any())->will(function ($args) {
+        $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
             $args[0]->setId(1);
             return $args[0];
         });
-        $entity_manager->flush()->shouldBeCalled();
-    
+        $entity_manager->flush()->shouldBecalled();
+        $entity_manager->refresh(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
+
         $this->addProgram($request);
         $file_repository->saveProgram($extracted_file, 1)->shouldHaveBeenCalled();
     }
-    
+
     public function it_saves_the_screenshots_to_the_screenshot_repository($request, $entity_manager, $extracted_file, $screenshot_repository, $metadata)
     {
         $metadata->getFieldNames()->willReturn(array('id'));
@@ -82,27 +84,29 @@ class ProgramManagerSpec extends ObjectBehavior
         $extracted_file->getApplicationVersion()->willReturn(null);
         $extracted_file->getLanguageVersion()->willReturn(null);
         $extracted_file->getTags()->willReturn(null);
-        
-        $entity_manager->persist(Argument::any())->will(function ($args) {
+
+        $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
             $args[0]->setId(1);
             return $args[0];
         });
-        $entity_manager->flush()->shouldBeCalled();
-        
+        $entity_manager->flush()->shouldBecalled();
+        $entity_manager->refresh(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
+
         $this->addProgram($request);
         $screenshot_repository->saveProgramAssets('./path/to/screenshot', 1)->shouldHaveBeenCalled();
     }
-    
+
     public function it_fires_an_event_before_inserting_a_program($request, $event_dispatcher, $metadata, $entity_manager)
     {
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-        $entity_manager->persist(Argument::any())->will(function ($args) {
+        $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
             $args[0]->setId(1);
             return $args[0];
         });
-        $entity_manager->flush()->shouldBeCalled();
+        $entity_manager->flush()->shouldBecalled();
+        $entity_manager->refresh(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
 
         $this->addProgram($request)->shouldHaveType('Catrobat\AppBundle\Entity\Program');
         $event_dispatcher->dispatch('catrobat.program.before', Argument::type('Catrobat\AppBundle\Events\ProgramBeforeInsertEvent'))->shouldHaveBeenCalled();
@@ -114,11 +118,11 @@ class ProgramManagerSpec extends ObjectBehavior
         $event_dispatcher->dispatch('catrobat.program.before', Argument::type('Catrobat\AppBundle\Events\ProgramBeforeInsertEvent'))
             ->willThrow($validation_exception)
             ->shouldBeCalled();
-        
+
         $this->shouldThrow('\Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->during('addProgram', array(
             $request
         ));
-        
+
         $event_dispatcher->dispatch('catrobat.program.invalid.upload', Argument::type('Catrobat\AppBundle\Events\InvalidProgramUploadedEvent'))->shouldHaveBeenCalled();
     }
 
@@ -127,26 +131,28 @@ class ProgramManagerSpec extends ObjectBehavior
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-        $entity_manager->persist(Argument::any())->will(function ($args) {
+        $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
             $args[0]->setId(1);
             return $args[0];
         });
-        $entity_manager->flush()->shouldBeCalled();
+        $entity_manager->flush()->shouldBecalled();
+        $entity_manager->refresh(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
 
         $this->addProgram($request)->shouldHaveType('Catrobat\AppBundle\Entity\Program');
         $event_dispatcher->dispatch('catrobat.program.successful.upload', Argument::type('Catrobat\AppBundle\Events\ProgramInsertEvent'))->shouldHaveBeenCalled();
     }
-    
+
     public function it_marks_the_game_as_gamejam_submission_if_a_jam_is_provided($request, $metadata, $entity_manager)
     {
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-        $entity_manager->persist(Argument::any())->will(function ($args) {
+        $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
             $args[0]->setId(1);
             return $args[0];
         });
         $entity_manager->flush()->shouldBeCalled();
+        $entity_manager->refresh(Argument::type('\Catrobat\AppBundle\Entity\Program'))->shouldBecalled();
 
         $request->getGamejam()->willReturn(new GameJam());
         $program = $this->addProgram($request)->getWrappedObject();

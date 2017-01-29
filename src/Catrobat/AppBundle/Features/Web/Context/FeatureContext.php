@@ -235,6 +235,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the selected language should be "([^"]*)"$/
+   * @Given /^the selected language is "([^"]*)"$/
    */
   public function theSelectedLanguageShouldBe($arg1)
   {
@@ -267,6 +268,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       case 'Deutsch':
         $this->getSession()->setCookie('hl', 'de');
         break;
+      case 'Russisch':
+          $this->getSession()->setCookie('hl', 'ru');
+          break;
       default:
         assertTrue(false);
     }
@@ -454,16 +458,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setApkDownloads($programs[$i]['apk_downloads']);
           $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
           $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+          $program->setRemixMigratedAt(null);
           $program->setCatrobatVersion(1);
           $program->setCatrobatVersionName($programs[$i]['version']);
           $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
           $program->setUploadIp('127.0.0.1');
-          $program->setRemixCount(0);
           $program->setFilesize(0);
           $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
           $program->setUploadLanguage('en');
           $program->setApproved(false);
           $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
+          $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
 
           if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
               $tag_repo = $em->getRepository('AppBundle:Tag');
@@ -899,15 +904,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setViews($programs[$i]['views']);
           $program->setDownloads($programs[$i]['downloads']);
           $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+          $program->setRemixMigratedAt(null);
           $program->setCatrobatVersion(1);
           $program->setCatrobatVersionName($programs[$i]['version']);
           $program->setLanguageVersion(1);
           $program->setUploadIp('127.0.0.1');
-          $program->setRemixCount(0);
           $program->setFilesize(0);
           $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
           $program->setUploadLanguage('en');
           $program->setApproved(false);
+          $program->setRemixRoot(true);
+          $program->setRemixMigratedAt(new \DateTime());
           $em->persist($program);
 
           $starter->addProgram($program);
