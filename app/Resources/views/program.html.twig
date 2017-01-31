@@ -163,6 +163,27 @@
             <p>Submit</p>
           </button>
         </div>
+
+
+        <div id="nolb-submission-successful">
+          <h2> Submission </h2>
+          <p> Your program upload was successful.</p>
+          <button id="nolb-submission-successful-ok" class="btn">
+            <p>Ok</p>
+          </button>
+        </div>
+
+        <div id="nolb-submission-failed">
+          <h2> Submission </h2>
+          <p> Program upload failed.</p>
+          <button id="nolb-submission-failed-ok" class="btn">
+            <p>Ok</p>
+          </button>
+        </div>
+
+
+
+
       {% endif %}
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
@@ -483,18 +504,31 @@
              url: "https://130.206.122.81/nolb/web/index.php?r=service/upload_program",
              data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
              success: function(data){
-                // var a = JSON.parse(data);
-                 alert('success ');
+               var response = JSON.parse(data);
+               if(response.code){
+                 $('#nolb-submission-successful').show();
+               }
+               else{
+                 $('#nolb-submission-failed').show();
+               }
+
              },
              error: function(data) {
-              //   var a = JSON.parse(data);
-                 alert('error ');
              }
          });
-         console.log(xhr);
          $('#nolb-submission-box').hide();
-
       });
+
+
+      $(document).on("click", "#nolb-submission-successful-ok", function(){
+        $('#nolb-submission-successful').hide();
+      });
+
+      $(document).on("click", "#nolb-submission-failed-ok", function(){
+        $('#nolb-submission-failed').hide();
+      });
+
+
 
       $(document).on("click", "#nolb-project-button", function(){
           $('#nolb-submission-box').show();
