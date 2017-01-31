@@ -16,14 +16,21 @@ country: Negara
 loginText: masuk
 privacyPolicy: Kebijakan Privasi
 imprint: Jejak
-somethingWentWrong: Ups ada kesalahan.
-pleaseTryAgain: Silahkan coba lagi!
-oldVersionError: Mohon perbaharui Pocket Code ke versi terbaru!
-more: lebih
-less: kurang
+somethingWentWrong: 'Ups ada kesalahan.'
+pleaseTryAgain: 'Silahkan coba lagi!'
+oldVersionError: 'Mohon perbaharui Pocket Code ke versi terbaru!'
+more: 'lebih'
+less: 'kurang'
 ok: Oke
 clickToDownloadProgram: 'Untuk mengunduh contoh program klik %link_start% disini %link_end%.'
-registrationError: Nama pengguna atau alamat email sudah di gunakan.
+registrationError: 'Nama pengguna atau alamat email sudah di gunakan.'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: Fitur
   newest: Program terbaru
@@ -35,11 +42,13 @@ programs:
   downloads: '%downloads% unduhan'
   sample: Contoh Program
   views: '%views% dilihat'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Program yang Diajukan
   uploaded: Program yang Diunggah
   reportAsInappropriate: Laporkan sebagai tidak pantas
   languageVersion: 'Versi bahasa Catrobat: %languageVersion%'
-  reportLoginText: 'Mohon %login% untuk melaporkan program ini sebagai tidak pantas.'
+  reportLoginText: Mohon %login% untuk melaporkan program ini sebagai tidak pantas.
   reportDialogHeader: Menurut Anda, mengapa program ini tidak pantas?
   reportDialogReason: Masukkan alasan
   reportOwnProgram: Anda tidak dapat menandai program Anda sendiri.
@@ -56,6 +65,12 @@ programs:
   report: Laporkan
   report_popup: Komentar berhasil dilaporkan.
   report_popup_header: Telah dilaporkan
+remixgraph:
+  by: 'oleh'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
@@ -78,8 +93,8 @@ profile:
   secondEmail: Email kedua saya
   myPrograms: Program Saya
   form:
-    passwordTooShort: 'Kata sandi baru harus memiliki setidaknya %length% karakter.'
-    passwordTooLong: 'Kata sandi baru dapat memiliki maksimal %length% karakter.'
+    passwordTooShort: Kata sandi baru harus memiliki setidaknya %length% karakter.
+    passwordTooLong: Kata sandi baru dapat memiliki maksimal %length% karakter.
     passwordIsUsername: Kata sandi harus berbeda dari nama pengguna.
     passwordWrong: Wrong password
     emailNotValid: Alamat email ini tidak valid.
@@ -105,12 +120,12 @@ myprofile:
   editCountry: Edit country
   editEmail: Edit E-Mail
 licenseToPlay:
-  link: Lisensi untuk bermain
+  link: 'Lisensi untuk bermain'
   title: 'Lisensi untuk bermain - memberikan kredit dan berbagi'
   text1: Bayangkan bahwa setiap program Catrobat adalah kue, kue yang sangat istimewa yang datang dengan resep nya (blok pemrograman). Semua anggota dari komunitas Catrobat berbagi kue mereka bersama dengan resep mereka. Ini berarti Anda dapat menikmati kue dan belajar bagaimana untuk membuatnya sendiri!
   text2: 'Tidak ada resep rahasia: petunjuk tentang cara membuat kue ini terbuka bagi siapa saja untuk menggunakan, menggunakan kembali, memodifikasi, dan berfungsi sebagai inspirasi untuk ide-ide baru... Maksudku kue.'
-  text3: 'Anda dapat makan kue serta menyalin resep orang lain untuk membuat resep Anda sendiri, mungkin dengan bahan-bahan yang berbeda. Kebebasan ini dengan dua persyaratan sederhana:'
-  text4: Dalam mendirikan komunitas Catrobat, kami memutuskan untuk mengadopsi pendekatan ini karena kami percaya bahwa itu mendukung pembelajaran dan kreativitas dalam komunitas. Dengan berbagi resep dan bahan-bahan (skrip dan karya seni), orang dapat membangun berdasarkan ide-ide satu sama lain dan setiap orang akan mendapat manfaat.
+  text3: "Anda dapat makan kue serta menyalin resep orang lain untuk membuat resep Anda sendiri, mungkin dengan bahan-bahan yang berbeda. Kebebasan ini dengan dua persyaratan sederhana:"
+  text4: "Dalam mendirikan komunitas Catrobat, kami memutuskan untuk mengadopsi pendekatan ini karena kami percaya bahwa itu mendukung pembelajaran dan kreativitas dalam komunitas. Dengan berbagi resep dan bahan-bahan (skrip dan karya seni), orang dapat membangun berdasarkan ide-ide satu sama lain dan setiap orang akan mendapat manfaat."
   text5: Dalam merancang situs web Catrobat, kami menyertakan fitur untuk mendorong orang untuk berbagi dan untuk memberikan kredit kepada orang lain. Pada setiap halaman program, Anda selalu dapat mendownload naskah asli program. Jika Anda meremix program (memodifikasi script atau artwork, dan berbagi hasil), kami mendorong Anda untuk memberikan kredit dalam catatan programnya, menyebutkan orang-orang dan program yang menginspirasi Anda.
   text6: 'Pelajari lebih lanjut tentang syarat penggunaan dari komunitas online Catrobat pada %link-termsOfUse%.'
   list1:
@@ -119,14 +134,14 @@ licenseToPlay:
   version: Versi 1.1, 2 April 2013
 teachers:
   login:
-    title: Area guru
-    description: Area ini dapat digunakan oleh guru.
+    title: 'Area guru'
+    description: 'Area ini dapat digunakan oleh guru.'
 termsOfUse:
   title: Persyaratan Penggunaan
   headline: Selamat datang di komunitas Catrobat!
   text1: 'Sebagai bagian dari komunitas Catrobat, Anda berbagi program dan ide dengan orang-orang:'
-  text2: 'Kami membutuhkan bantuan Anda untuk membuat komunitas ini menjadi tempat yang mendukung untuk setiap anggota. Berikut adalah bagaimana Anda bisa membantu:'
-  text3: 'Melalui proyek Catrobat kami ingin memupuk kerjasama dan memungkinkan kreativitas semua orang untuk digabungkan sehingga bermanfaat bagi segenap orang. Anda juga dapat menjadi anggota aktif dari komunitas Catrobat dengan memberikan program-program Anda kembali kepada komunitas sebagai imbalan, dengan cara yang sama sebagai anggota aktif memberikan program mereka untuk Anda:'
+  text2: "Kami membutuhkan bantuan Anda untuk membuat komunitas ini menjadi tempat yang mendukung untuk setiap anggota. Berikut adalah bagaimana Anda bisa membantu:"
+  text3: "Melalui proyek Catrobat kami ingin memupuk kerjasama dan memungkinkan kreativitas semua orang untuk digabungkan sehingga bermanfaat bagi segenap orang. Anda juga dapat menjadi anggota aktif dari komunitas Catrobat dengan memberikan program-program Anda kembali kepada komunitas sebagai imbalan, dengan cara yang sama sebagai anggota aktif memberikan program mereka untuk Anda:"
   text4: 'Hadiah kami kepada Anda:'
   text5: 'Syarat penggunaan dan layanan kami:'
   list1:
@@ -135,247 +150,248 @@ termsOfUse:
     item3: dengan semua tingkat pengalaman
   list2:
     item1: Saling menghormati. Ketika berbagi program, harap diingat bahwa orang-orang dari banyak berbagai usia dan latar belakang akan melihat kontribusi Anda.
-    item2: 'Memberikan kredit. Merasa bebas untuk membuat versi modifikasi dari program orang lain - pastikan untuk memberikan mereka kredit. Salah satu tempat untuk memberikan kredit adalah dalam deskripsi program Anda. Silakan lihat paragraf di bawah daftar ini dihiasi untuk rincian tentang memodifikasi program pengguna lain.'
-    item3: 'Bersikaplah jujur. Jangan berpura-pura menjadi orang lain selain pribadi Anda  yang sesungguhnya atau mencoba untuk menipu komunitas.'
-    item4: Menyimpan informasi pribadi. Tidak berbagi alamat email, nomor telepon, atau informasi kontak pribadi lainnya.
+    item2: "Memberikan kredit. Merasa bebas untuk membuat versi modifikasi dari program orang lain - pastikan untuk memberikan mereka kredit. Salah satu tempat untuk memberikan kredit adalah dalam deskripsi program Anda. Silakan lihat paragraf di bawah daftar ini dihiasi untuk rincian tentang memodifikasi program pengguna lain."
+    item3: "Bersikaplah jujur. Jangan berpura-pura menjadi orang lain selain pribadi Anda  yang sesungguhnya atau mencoba untuk menipu komunitas."
+    item4: "Menyimpan informasi pribadi. Tidak berbagi alamat email, nomor telepon, atau informasi kontak pribadi lainnya."
     item5: "Membantu menjaga situs tetap nyaman. Jika Anda merasa orang lain akan menemukan sebuah program atau komentar berarti, menghina, terlalu keras atau tidak pantas, cukup klik tombol 'Laporkan sebagai tidak pantas' dan meninggalkan penjelasan singkat. Tim Catrobat akan meninjau laporan Anda dan dapat menghapus program apapun, komentar, atau posting."
   list3:
-    item1: "Dengan meng-unggah sebuah program pada website kami, Anda menerima dan menyetujui menempatkan pekerjaan ini di bawah lisensi bebas terhadap program Catrobat yang diunggah. Mirip dengan lisensi bebas dimana sistem Catrobat itu sendiri tersedia untuk Anda, lisensi bebas terhadap program Catrobat yang diunggah memberikan semua orang hak untuk belajar dari pekerjaan sebelumnya yang diunggah oleh orang lain dan untuk beradaptasi dan mendaur-ulang pekerjaan tersebut untuk membangun permainan baru mereka sendiri yang lebih menarik, animasi, dan program lainnya. Hal ini memungkinkan setiap orang untuk 'berdiri saling bahu-membahu', salah satu dari mereka karena Anda! Pekerjaan Anda pada gilirannya menguntungkan seluruh dunia dan tetap bebas untuk semua orang untuk menggunakan, mirip dengan teks dan gambar bebas Wikipedia yang merupakan kontribusi para sukarelawan dari seluruh dunia. Anggaplah kehadiran Anda demi  kemanusiaan: Anda memberikan kepada semua orang, dan semua orang lain yang mengunggah pekerjaan mereka ke situs web kami memberikan kepada Anda. Dengan demikian program unggahan adalah imbalan bernilai besar yang pemiliknya diberikan kepada Anda secara gratis, dengan kondisi Anda turut berpartisipasi dalam komunitas pada tataran yang sama."
-    item2: 'Anda tidak harus menerima imbalan; Jika Anda melakukannya, aturan-aturan tertentu berlaku. Manfaat dari aturan ini adalah bahwa Anda bisa belajar dari pekerjaan dan membangun  sesuatu yang bahkan lebih baik oleh diri sendiri, yang mana Anda dapat, misalnya, meng-unggah lagi ke situs web kami sebagai karya Anda sendiri. Manfaat lain adalah bahwa lisensi ini pastikan bahwa Anda tidak dapat dianggap bertanggung jawab untuk setiap masalah yang timbul dengan orang lain melalui penggunaan program Anda.'
-    item3: Satu syarat tambahan yang penting adalah bahwa Anda jelas memberikan atribusi pada penulis terhadap karya-karya Anda berdasarkan kerja Anda sendiri. Pada saat yang sama, kami akan bekerja keras sehingga karya Anda akan jelas dihargai oleh orang lain yang mana telah Anda sumbangkan, dengan memberikan atribusi untuk nama unik Anda bebas memilih untuk mewakili Anda di Catrobat di komunitas, dan dengan memberikan orang lain kesempatan untuk mengekspresikan rasa terima kasih kepada Anda dalam cara yang umum telah memberikan Anda bekerja untuk semua orang , dan khususnya kepada mereka.
+    item1: 'Dengan meng-unggah sebuah program pada website kami, Anda menerima dan menyetujui menempatkan pekerjaan ini di bawah lisensi bebas terhadap program Catrobat yang diunggah. Mirip dengan lisensi bebas dimana sistem Catrobat itu sendiri tersedia untuk Anda, lisensi bebas terhadap program Catrobat yang diunggah memberikan semua orang hak untuk belajar dari pekerjaan sebelumnya yang diunggah oleh orang lain dan untuk beradaptasi dan mendaur-ulang pekerjaan tersebut untuk membangun permainan baru mereka sendiri yang lebih menarik, animasi, dan program lainnya. Hal ini memungkinkan setiap orang untuk ''berdiri saling bahu-membahu'', salah satu dari mereka karena Anda! Pekerjaan Anda pada gilirannya menguntungkan seluruh dunia dan tetap bebas untuk semua orang untuk menggunakan, mirip dengan teks dan gambar bebas Wikipedia yang merupakan kontribusi para sukarelawan dari seluruh dunia. Anggaplah kehadiran Anda demi  kemanusiaan: Anda memberikan kepada semua orang, dan semua orang lain yang mengunggah pekerjaan mereka ke situs web kami memberikan kepada Anda. Dengan demikian program unggahan adalah imbalan bernilai besar yang pemiliknya diberikan kepada Anda secara gratis, dengan kondisi Anda turut berpartisipasi dalam komunitas pada tataran yang sama.'
+    item2: Anda tidak harus menerima imbalan; Jika Anda melakukannya, aturan-aturan tertentu berlaku. Manfaat dari aturan ini adalah bahwa Anda bisa belajar dari pekerjaan dan membangun  sesuatu yang bahkan lebih baik oleh diri sendiri, yang mana Anda dapat, misalnya, meng-unggah lagi ke situs web kami sebagai karya Anda sendiri. Manfaat lain adalah bahwa lisensi ini pastikan bahwa Anda tidak dapat dianggap bertanggung jawab untuk setiap masalah yang timbul dengan orang lain melalui penggunaan program Anda.
+    item3: "Satu syarat tambahan yang penting adalah bahwa Anda jelas memberikan atribusi pada penulis terhadap karya-karya Anda berdasarkan kerja Anda sendiri. Pada saat yang sama, kami akan bekerja keras sehingga karya Anda akan jelas dihargai oleh orang lain yang mana telah Anda sumbangkan, dengan memberikan atribusi untuk nama unik Anda bebas memilih untuk mewakili Anda di Catrobat di komunitas, dan dengan memberikan orang lain kesempatan untuk mengekspresikan rasa terima kasih kepada Anda dalam cara yang umum telah memberikan Anda bekerja untuk semua orang , dan khususnya kepada mereka."
     item4: 'Silakan berkonsultasi di %link-licenseUploaded% untuk syarat dan ketentuan hukum.'
   list4:
-    item1: Kami menawarkan semua perangkat lunak dan sumber daya Internet yang berkaitan dengan sistem Catrobat, misalnya, perangkat lunak yang ditulis oleh tim Catrobat, website kami dan Internet sumber daya, kode sumber kita sendiri yang berkaitan dengan sistem Catrobat, kami sendiri dan semua tambahan termasuk bahan-bahan seperti, misalnya, Gambar, suara dan teks, sekarang dan di masa depan untuk Anda di bawah lisensi bebas Catrobat.
+    item1: "Kami menawarkan semua perangkat lunak dan sumber daya Internet yang berkaitan dengan sistem Catrobat, misalnya, perangkat lunak yang ditulis oleh tim Catrobat, website kami dan Internet sumber daya, kode sumber kita sendiri yang berkaitan dengan sistem Catrobat, kami sendiri dan semua tambahan termasuk bahan-bahan seperti, misalnya, Gambar, suara dan teks, sekarang dan di masa depan untuk Anda di bawah lisensi bebas Catrobat."
     item2: Lisensi ini membuat semua bagian dari Catrobat gratis untuk Anda serta gratis dalam arti memberikan Anda kebebasan untuk menggunakannya bagaimanapun Anda menyukainya, dengan hanya beberapa pembatasan memastikan, antara lain, bahwa sistem Catrobat akan selamanya tetap gratis dan berguna bagi semua orang.
     item3: 'Silakan berkonsultasi di %link-licenseToPlay% untuk syarat dan ketentuan hukum. Kode sumber dari sistem Catrobat serta banyak dokumen dan sumber daya lainnya tersedia melalui %link-developer%.'
   list5:
     item1: 'Jika Anda, atau, jika Anda berada di bawah usia 13 tahun, orang tua atau wali hukum Anda, berhubungan dengan organisasi yang terlibat dalam atau bertanggung jawab atas pelanggaran privasi jenis Dragnet dan/atau atau surveilans massal , maka Anda tidak diizinkan untuk menggunakan aplikasi perangkat lunak kami dan untuk mengakses layanan kami. Rincian yang tepat dari pembatasan dan pengecualian tertentu itu digambarkan pada bagian 4.a dan b. pada %link-termsOfUse% kami.'
-    item2: "Jika Anda berusia di bawah 13 tahun, maka Anda harus meminta orang tua atau wali Anda apakah mereka mengijinkan Anda untuk menggunakan  aplikasi perangkat lunak Catrobat's  dan layanannya."
-    item3: Kami berhak untuk menolak, menghapus, atau menyembunyikan program, account pengguna, dan bahan-bahan digital yang diunggah ke situs web Catrobat setiap saat dalam kebijakannya, sebagai contoh jika kita menemukan bahwa program yang berisi materi yang tidak patut atau yang melanggar hak orang lain.
-    item4: Semua Catrobat di perangkat lunak dan sumber daya Internet yang ditawarkan dengan harapan bahwa mereka akan berguna, tetapi tanpa adanya jaminan.
+    item2: Jika Anda berusia di bawah 13 tahun, maka Anda harus meminta orang tua atau wali Anda apakah mereka mengijinkan Anda untuk menggunakan  aplikasi perangkat lunak Catrobat's  dan layanannya.
+    item3: "Kami berhak untuk menolak, menghapus, atau menyembunyikan program, account pengguna, dan bahan-bahan digital yang diunggah ke situs web Catrobat setiap saat dalam kebijakannya, sebagai contoh jika kita menemukan bahwa program yang berisi materi yang tidak patut atau yang melanggar hak orang lain."
+    item4: "Semua Catrobat di perangkat lunak dan sumber daya Internet yang ditawarkan dengan harapan bahwa mereka akan berguna, tetapi tanpa adanya jaminan."
     item5: 'Silakan hubungi developer kami %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service untuk rumusan yang tepat dari poin-point di atas dan beberapa syarat dan ketentuan hukum tambahan.'
   bottom1: Periksa kembali di sini dari waktu ke waktu, karena kami selalu berusaha untuk memperbaiki syarat penggunaan kami.
   bottom2: 'Silahkan email saran-saran mengenai syarat penggunaan ke %email-webmaster%.'
   version: Versi 1.3, 4 Maret 2014
 help:
   stepByStep:
-    title: Langkah demi langkah Intro
-    start: 'Posisi mulai:'
+    title: "Langkah demi langkah Intro"
+    start: "Posisi mulai:"
     description: |
       Di sini Anda membuat program pertama Anda, yaitu kartu pos interaktif menggunakan video walkthrough berikut. 
       Anda harus mengikuti petunjuk yang diberikan kepada Anda. 
       Selama pembuatan kartu pos, dasar-dasar Pocket Code yang Anda butuhkan untuk proyek-proyek Anda akan datang akan dimediasi. 
       Setelah video terpandu ini, semua kegiatan lain akan memberi Anda lebih banyak kebebasan untuk membuat proyek Pocket Code pribadi Anda sendiri.
     step1:
-      title: Buat program baru
+      title: 'Buat program baru'
       detail:
         text1: 'Tekan pada "Baru".'
         text2: 'Masukkan nama progam, pilih "Buat program kosong" dan tekan "OK".'
     step2:
-      title: Buat objek baru
+      title: "Buat objek baru"
       detail:
         text1: 'Tekan:'
-        text2: Pilih sumber tampilan pertama dari obyek baru Anda.
+        text2: 'Pilih sumber tampilan pertama dari obyek baru Anda.'
         text3: 'Masukkan nama objek dan tekan "OK" untuk membuat objek tersebut.'
-        special1: Gambar tampilan baru.
-        special2: Memilih dari galeri.
-        special3: Mengambil gambar.
+        special1: 'Gambar tampilan baru.'
+        special2: 'Memilih dari galeri.'
+        special3: 'Mengambil gambar.'
     step3:
-      title: Mulai bergerak
+      title: "Mulai bergerak"
       detail:
         text1: 'Tekan:'
         text2: 'Brick pertama yang kami gunakan adalah dari kategori "Gerakan".'
         text3: 'Pilih brick "Meluncur". Objek akan pindah ke posisi baru ditetapkan dengan brick di atas panggung.'
-        text4: Brick sekarang mengambang. Paste, pindahkan brick ke posisi yang diinginkan. Anda juga dapat memindahkan brick yang sudah dimasukkan dengan menekan brick sampai mengambang lagi.
+        text4: 'Brick sekarang mengambang. Paste, pindahkan brick ke posisi yang diinginkan. Anda juga dapat memindahkan brick yang sudah dimasukkan dengan menekan brick sampai mengambang lagi.'
         text5: 'Tekan "Mainkan" untuk ke panggung dan melihat objek meluncur.'
-        text6: Gunakan tombol kembali Android untuk kembali dari panggung.
+        text6: 'Gunakan tombol kembali Android untuk kembali dari panggung.'
     step4:
-      title: Ubah Tampilan
-      description: Anda dapat mengubah tampilan objek.
+      title: "Ubah Tampilan"
+      description: "Anda dapat mengubah tampilan objek."
       detail:
         text1: 'Pilih "Beralih untuk melihat" batu bata. Dengan bata ini Anda dapat memilih tampilan atau membuat yang baru.'
         text2: 'Letakkan brick di bawah brick "Meluncur".'
-        text3: Tekan pada dropdown untuk menciptakan tampilan baru.
-        text4: Pilih sumber gambar seperti sebelumnya.
-        text5: Sekarang Anda harus memilih gambar baru.
-        text6: Tekan play untuk melihat perilaku di panggung.
+        text3: 'Tekan pada dropdown untuk menciptakan tampilan baru.'
+        text4: 'Pilih sumber gambar seperti sebelumnya.'
+        text5: 'Sekarang Anda harus memilih gambar baru.'
+        text6: 'Tekan play untuk melihat perilaku di panggung.'
     step5:
-      title: Berbicara
-      description: Sekarang Anda akan menemukan cara untuk membuat sebuah objek yang berbicara.
+      title: "Berbicara"
+      description: "Sekarang Anda akan menemukan cara untuk membuat sebuah objek yang berbicara."
       detail:
         text1: 'Pilih bata "Bicara". Objek membaca teks, ketika bata ini dijalankan.'
         text2: 'Letakkan brick di bawah brick "Beralih untuk melihat".'
-        text3: Tekan putar untuk melihat perilaku di panggung.
+        text3: 'Tekan putar untuk melihat perilaku di panggung.'
     step6:
-      title: Lagi dan lagi
-      description: Langkah ini menunjukkan Anda bagaimana untuk mengulangi perilaku objek.
+      title: 'Lagi dan lagi'
+      description: "Langkah ini menunjukkan Anda bagaimana untuk mengulangi perilaku objek."
       detail:
         text1: 'Pilih bata "Selamanya". Semua dalam lingkaran mengulang selamanya.'
         text2: 'Letakkan brick "Selamanya" di bawah brick "saat program dimulai".'
         text3: 'Tambahkan bata "Meluncur" lainnya.'
         text4: 'Letakkan bata "Meluncur" di atas bata "Akhir putaran".'
-        text5: Tekan ke dalam bidang teks x dan y nilai dan set ke 0.
-        text6: Tekan play untuk melihat perilaku di panggung.
+        text5: 'Tekan ke dalam bidang teks x dan y nilai dan set ke 0.'
+        text6: 'Tekan play untuk melihat perilaku di panggung.'
     step7:
-      title: Mengetuk adalah segalanya
-      description: Anda juga dapat mengontrol perilaku objek ketika program ini berjalan di atas panggung.
+      title: "Mengetuk adalah segalanya"
+      description: 'Anda juga dapat mengontrol perilaku objek ketika program ini berjalan di atas panggung.'
       detail:
         text1: 'Pilih bata "ketika diketuk". Setiap bata dibawah "ketika diketuk" akan dijalankan satu kali ketika Anda menekan objek di panggung.'
         text2: 'Tempatkan bata "ketika diketuk" dibawah bata lainnya.'
         text3: 'Pilih bata "Belok Kanan" dan letakkan dibawah bata "Ketika diketuk".'
-        text4: Sekarang Anda memiliki script ini.
-        text5: Tekan play untuk melihat perilaku di panggung. Jika Anda sekarang tekan pada objek, ia berputar.
+        text4: 'Sekarang Anda memiliki script ini.'
+        text5: 'Tekan play untuk melihat perilaku di panggung. Jika Anda sekarang tekan pada objek, ia berputar.'
     step8:
-      title: Salin, hapus atau edit batu bata
+      title: "Salin, hapus atau edit batu bata"
       detail:
-        text1: Satu Ketukan pada sisi kiri pada setiap brick akan membuka menu konteks. Disana Anda dapat memindahkan, menyalin, menghapus atau mengedit nilai-nilai brick dengan formula editor.
+        text1: 'Satu Ketukan pada sisi kiri pada setiap brick akan membuka menu konteks. Disana Anda dapat memindahkan, menyalin, menghapus atau mengedit nilai-nilai brick dengan formula editor.'
     step9:
-      title: Navigasi di app
+      title: "Navigasi di app"
       detail:
-        text1: Gunakan Android tombol kembali untuk menavigasi di app.
-        text2: Kembali satu layar ke Ikhtisar objek. Di sini Anda dapat pergi ke script dan juga untuk menguatkan representasi penampilan dan suara dari suatu objek. Anda dapat mengubah, menyalin serta menambah atau menghapus tampilan dan suara.
-        text3: Gunakan lagi tombol kembali Android untuk melihat Ikhtisar benda-benda dan latar belakang.
+        text1: 'Gunakan Android tombol kembali untuk menavigasi di app.'
+        text2: 'Kembali satu layar ke Ikhtisar objek. Di sini Anda dapat pergi ke script dan juga untuk menguatkan representasi penampilan dan suara dari suatu objek. Anda dapat mengubah, menyalin serta menambah atau menghapus tampilan dan suara.'
+        text3: 'Gunakan lagi tombol kembali Android untuk melihat Ikhtisar benda-benda dan latar belakang.'
     step10:
-      title: Ubah latar belakang
-      description: Ini adalah ikhtisar benda Anda dan latar belakang tergantung pada salah satu program.
+      title: "Ubah latar belakang"
+      description: "Ini adalah ikhtisar benda Anda dan latar belakang tergantung pada salah satu program."
       detail:
-        text1: Latar belakang seperti objek, tapi Anda hanya dapat memiliki satu latar belakang.
-        text2: Anda dapat menambahkan script, suara-suara dan tampilan dengan cara yang sama ke objek latar belakang.
+        text1: 'Latar belakang seperti objek, tapi Anda hanya dapat memiliki satu latar belakang.'
+        text2: 'Anda dapat menambahkan script, suara-suara dan tampilan dengan cara yang sama ke objek latar belakang.'
     step11:
-      title: Menu utama
-      description: Gunakan tombol kembali Android untuk ke layar ini.
+      title: "Menu utama"
+      description: "Gunakan tombol kembali Android untuk ke layar ini."
       detail:
-        text1: Melanjutkan dengan program Anda yang saat ini dibuka.
-        text2: Menambahkan program baru.
-        text3: Lihat semua program-program lokal Anda.
-        text4: Pergi ke situs bantuan dan diskusikan dengan pengguna lain.
-        text5: Jelajahi dunia program Pocket Code. Unduh dan remix program-program yang Anda suka.
-        text6: Meng-unggah program yang sedang dibuka.
+        text1: 'Melanjutkan dengan program Anda yang saat ini dibuka.'
+        text2: 'Menambahkan program baru.'
+        text3: 'Lihat semua program-program lokal Anda.'
+        text4: 'Pergi ke situs bantuan dan diskusikan dengan pengguna lain.'
+        text5: 'Jelajahi dunia program Pocket Code. Unduh dan remix program-program yang Anda suka.'
+        text6: 'Meng-unggah program yang sedang dibuka.'
   tutorialcards:
-    title: Tutorial
-    description1: Tutorial ini menunjukkan kepada Anda bagaimana menggunakan trik yang efektif dalam
-    getReady: 'Bersiaplah:'
-    tryCode: 'Coba kode ini:'
-    doIt: 'Lakukan:'
-    tip: 'Tip tambahan:'
+    title: "Tutorial"
+    description1: "Tutorial ini menunjukkan kepada Anda bagaimana menggunakan trik yang efektif dalam"
+    getReady: "Bersiaplah:"
+    tryCode: "Coba kode ini:"
+    doIt: "Lakukan:"
+    tip: "Tip tambahan:"
     card1:
-      title: Ubah Ukuran
-      description: Ketuk bebek untuk mengubah ukuran.
-      one: Tambahkan objek yang Anda ingin rubah ukuran, misalnya hewan.
-      two: 'Masukkan batu bata berikut ke script objek untuk meminimalkannya (20% dari ukuran aslinya) ketika diketuk.'
+      title: "Ubah Ukuran"
+      description: "Ketuk bebek untuk mengubah ukuran."
+      one: "Tambahkan objek yang Anda ingin rubah ukuran, misalnya hewan."
+      two: "Masukkan batu bata berikut ke script objek untuk meminimalkannya (20% dari ukuran aslinya) ketika diketuk."
     card2:
-      title: Ubah Tampilan
-      description: Gunakan trik ini untuk menghitung secara otomatis.
-      one: Tambahkan objek yang Anda ingin rubah tampilan, misalnya item.
-      two: Masukkan gambar selanjutnya di tampilan objek.
-      three: Masukkan bata berikut ke script objek untuk terus merubah tampilannya setelah satu detik.
+      title: "Ubah Tampilan"
+      description: "Gunakan trik ini untuk menghitung secara otomatis."
+      one: "Tambahkan objek yang Anda ingin rubah tampilan, misalnya item."
+      two: "Masukkan gambar selanjutnya di tampilan objek."
+      three: "Masukkan bata berikut ke script objek untuk terus merubah tampilannya setelah satu detik."
     card3:
-      title: Animasi Bergerak
-      description: Gunakan trik ini bila Anda ingin burung beo terbang.
-      one: Tambahkan objek yang Anda ingin pindah.
-      two: Masukkan gambar lain di tampilan objek yang menggambarkan gerakan.
-      three: Masukkan batu bata berikut ke script objek untuk terus mengubah posisi objek setelah waktu tertentu. Selain itu Anda dapat membatasi panggung dengan memantul jika di tepi.
+      title: "Animasi Bergerak"
+      description: "Gunakan trik ini bila Anda ingin burung beo terbang."
+      one: "Tambahkan objek yang Anda ingin pindah."
+      two: "Masukkan gambar lain di tampilan objek yang menggambarkan gerakan."
+      three: "Masukkan batu bata berikut ke script objek untuk terus mengubah posisi objek setelah waktu tertentu. Selain itu Anda dapat membatasi panggung dengan memantul jika di tepi."
     card4:
-      title: Meluncur
-      description: Bergerak dengan lancar dari satu tempat ke yang lain.
-      one: Tambahkan objek yang Anda ingin untuk meluncur misalnya pesawat.
-      two: Masukkan batu bata berikut dan tentukan daerah di mana gerakan harus terjadi.
+      title: "Meluncur"
+      description: "Bergerak dengan lancar dari satu tempat ke yang lain."
+      one: "Tambahkan objek yang Anda ingin untuk meluncur misalnya pesawat."
+      two: "Masukkan batu bata berikut dan tentukan daerah di mana gerakan harus terjadi."
     card5:
-      title: Putar suara
-      description: Mainkan suara dengan menekan pada objek.
-      one: Tambahkan objek yang Anda ingin untuk dapat memainkan suara misalnya anjing.
-      two: 'Masukkan batu bata berikut untuk memungkinkan pemutaran. Pilih suara dari librari pribadi Anda, Librari media Pocket Code atau rekam sendiri. '
+      title: "Putar suara"
+      description: "Mainkan suara dengan menekan pada objek."
+      one: "Tambahkan objek yang Anda ingin untuk dapat memainkan suara misalnya anjing."
+      two: "Masukkan batu bata berikut untuk memungkinkan pemutaran. Pilih suara dari librari pribadi Anda, Librari media Pocket Code atau rekam sendiri. "
     card6:
-      title: Katakan sesuatu
-      description: Gunakan kode ini untuk membuat objek berbicara.
-      one: Tambahkan objek yang Anda ingin untuk bicara misalnya Carrie.
-      two: Masukkan batu bata berikut untuk memungkinkan hasil suara.
+      title: "Katakan sesuatu"
+      description: "Gunakan kode ini untuk membuat objek berbicara."
+      one: "Tambahkan objek yang Anda ingin untuk bicara misalnya Carrie."
+      two: "Masukkan batu bata berikut untuk memungkinkan hasil suara."
     card7:
-      title: GSensor
-      description: Gunakan trik ini untuk mengontrol objek dengan kecenderungan dari perangkat Anda.
-      one: Tambahkan objek yang Anda ingin pindah.
-      two: 'Masukkan batu bata berikut untuk mengendalikan objek melalui sensor telepon. Oleh karena itu pilih "kecenderungan x dan y". Untuk mendapatkan gerakan yang cocok, atur "-kecenderungan". Jika gerakan objek terlalu masuk akal, bagi kecenderungan menjadi 10 sebagai contoh.'
+      title: "GSensor"
+      description: "Gunakan trik ini untuk mengontrol objek dengan kecenderungan dari perangkat Anda."
+      one: "Tambahkan objek yang Anda ingin pindah."
+      two: "Masukkan batu bata berikut untuk mengendalikan objek melalui sensor telepon. Oleh karena itu pilih \"kecenderungan x dan y\". Untuk mendapatkan gerakan yang cocok, atur \"-kecenderungan\". Jika gerakan objek terlalu masuk akal, bagi kecenderungan menjadi 10 sebagai contoh."
     card8:
-      title: Kompas
-      description: Gunakan kode ini untuk membuat sebuah kompas.
-      one: Tambahkan objek yang Anda ingin tunjukkan dengan arah kompas.
-      two: Masukkan batu bata berikut untuk mengatur orientasi objek. Selain itu masukkan putaran selamanya.
+      title: "Kompas"
+      description: "Gunakan kode ini untuk membuat sebuah kompas."
+      one: "Tambahkan objek yang Anda ingin tunjukkan dengan arah kompas."
+      two: "Masukkan batu bata berikut untuk mengatur orientasi objek. Selain itu masukkan putaran selamanya."
     card9:
-      title: Siaran
-      description: Lihat kode ini! Ini menunjukkan pada Anda bagaimana untuk berkomunikasi antara objek.
-      one: Tambahkan objek baru, misalnya Alice, yang harus mengirim pesan siaran. Selain itu, tambahkan latar belakang kedua di tampilan latar belakang. Segera setelah latar belakang menerima pesan siaran itu akan berubah ke tampilan yang lain.
-      two: 'Masukkan bata "Kirim ke semua" dan tentukan apa yang harus terjadi ketika objek lain menerima pesan.'
-      three: Dalam kasus ini latar belakang berubah ketika objek dalam lapisan depan diketuk.
+      title: "Siaran"
+      description: "Lihat kode ini! Ini menunjukkan pada Anda bagaimana untuk berkomunikasi antara objek."
+      one: "Tambahkan objek baru, misalnya Alice, yang harus mengirim pesan siaran. Selain itu, tambahkan latar belakang kedua di tampilan latar belakang. Segera setelah latar belakang menerima pesan siaran itu akan berubah ke tampilan yang lain."
+      two: "Masukkan bata \"Kirim ke semua\" dan tentukan apa yang harus terjadi ketika objek lain menerima pesan."
+      three: "Dalam kasus ini latar belakang berubah ketika objek dalam lapisan depan diketuk."
     card10:
-      title: 'Tampilkan variabel '
-      description: Tunjukkan nilai variabel.
-      one: 'Tambahkan objek yang akan dipindahkan melalui sensor telepon Anda (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%). Selain itu tambahkan latar belakang yang kedua yang seharusnya berubah ketika menerima pesan siaran.'
-      two: Masukkan batu bata berikut untuk menyelamatkan posisi x dan y saat ini dari objek bergerak dalam variabel.
-      three: 'Melalui "Tampilkan variabel" Anda dapat menampilkan nilai di atas panggung.'
+      title: "Tampilkan variabel "
+      description: "Tunjukkan nilai variabel."
+      one: "Tambahkan objek yang akan dipindahkan melalui sensor telepon Anda (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%). Selain itu tambahkan latar belakang yang kedua yang seharusnya berubah ketika menerima pesan siaran."
+      two: "Masukkan batu bata berikut untuk menyelamatkan posisi x dan y saat ini dari objek bergerak dalam variabel."
+      three: "Melalui \"Tampilkan variabel\" Anda dapat menampilkan nilai di atas panggung."
     card11:
-      title: Deteksi tabrakan
-      description: Mendeteksi tabrakan antara dua objek.
-      one: 'Tambahkan dua objek yang harus bergerak melalui sensor telepon Anda, misalnya Alex (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Selamatkan posisi "x dan y " saat ini dari objek bergerak Alex (Lihat %tutorial_card_link_10% Tutorial Card 10 %link_end%) dan masukkan tulisan berikut. Terus periksa jika dua objek itu tumpang tindih. Jika ya, objek tetap harus tersembunyi dalam peti ini.'
+      title: "Deteksi tabrakan"
+      description: "Mendeteksi tabrakan antara dua objek."
+      one: "Tambahkan dua objek yang harus bergerak melalui sensor telepon Anda, misalnya Alex (Lihat %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Selamatkan posisi \"x dan y \" saat ini dari objek bergerak Alex (Lihat %tutorial_card_link_10% Tutorial Card 10 %link_end%) dan masukkan tulisan berikut. Terus periksa jika dua objek itu tumpang tindih. Jika ya, objek tetap harus tersembunyi dalam peti ini."
     card12:
-      title: Deteksi wajah
-      description: Kendalikan sebuah objek dengan menggunakan deteksi wajah.
-      one: Pertama, pastikan bahwa bata deteksi wajah diaktifkan. Karena itu kunjungi pengaturan.
-      two: 'Tambahkan objek baru dan masukkan batu bata berikut untuk menunjukkan jika satu wajah terdeteksi. Periksa jika wajah terdeteksi dan tempatkan ini dalam sebuah loop selamanya. Jika kamera mengenali wajah nilai variabel adalah "BENAR", kalau tidak "SALAH".'
+      title: "Deteksi wajah"
+      description: "Kendalikan sebuah objek dengan menggunakan deteksi wajah."
+      one: "Pertama, pastikan bahwa bata deteksi wajah diaktifkan. Karena itu kunjungi pengaturan."
+      two: "Tambahkan objek baru dan masukkan batu bata berikut untuk menunjukkan jika satu wajah terdeteksi. Periksa jika wajah terdeteksi dan tempatkan ini dalam sebuah loop selamanya. Jika kamera mengenali wajah nilai variabel adalah \"BENAR\", kalau tidak \"SALAH\"."
   starterPrograms:
-    title: Program Permulaan
-    description: Coba program permulaan ini. Lihat ke dalam untuk membuat perubahan dan tambahkan ide-ide Anda.
+    title: "Program Permulaan"
+    description: "Coba program permulaan ini. Lihat ke dalam untuk membuat perubahan dan tambahkan ide-ide Anda."
     categories:
-      games: Permainan
-      animations: Animasi
-      interactive: Seni interaktif dan cerita
-      music: Musik dan Tari
+      games: "Permainan"
+      animations: "Animasi"
+      interactive: "Seni interaktif dan cerita"
+      music: "Musik dan Tari"
   gameJam:
-    title: Bagaimana cara meng-unggah permainan Pocket Code ke situs Game Jolt?
-    text0: 'Ucapan selamat pertama pada permainan Anda! Sekarang Anda dapat meng-unggahnya pada %link% untuk membuat aplikasi Android yang berdiri sendiri, yang Anda kemudian dapat meng-unggahnya di situs Game Jolt.'
-    title1: Pendaftaran
+    title: "Bagaimana cara meng-unggah permainan Pocket Code ke situs Game Jolt?"
+    text0: "Ucapan selamat pertama pada permainan Anda! Sekarang Anda dapat meng-unggahnya pada %link% untuk membuat aplikasi Android yang berdiri sendiri, yang Anda kemudian dapat meng-unggahnya di situs Game Jolt."
+    title1: "Pendaftaran"
     text1: "Pertama Anda perlu membuat akun. Setelah itu Anda dapat mengunggah program yang Anda buat. Jangan khawatir ini mudah dan Anda hanya perlu memikirkan nama pengguna dan sandi. Setelah mengisi keduanya, klik 'Masuk atau Daftar'. Hanya itu!"
-    title2: Unggah
-    text2: 'Setelah proses pendaftaran Anda akan dapat meng-unggah permainan Anda. Hanya pikirkan nama dan tambahkan keterangan. Juga tambahkan #AliceJam150 di bidang Deskripsi.'
-    title3: Mencari program Anda
-    text3: Pergi ke profil Pocket Code dimana semua program terdaftar atau caria langsung program Anda dengan menggunakan pencarian dan nama program Anda.
-    title4: Membuat aplikasi Android
+    title2: "Unggah"
+    text2: "Setelah proses pendaftaran Anda akan dapat meng-unggah permainan Anda. Hanya pikirkan nama dan tambahkan keterangan. Juga tambahkan #AliceJam150 di bidang Deskripsi."
+    title3: "Mencari program Anda"
+    text3: "Pergi ke profil Pocket Code dimana semua program terdaftar atau caria langsung program Anda dengan menggunakan pencarian dan nama program Anda."
+    title4: "Membuat aplikasi Android"
     text4: "Langsung pada halaman detail program Anda dapat membuat aplikasi Android. Dengan mengklik pada 'Menyiapkan app' app akan dibuat."
-    title5: Unduh aplikasi
-    text5: 'Setelah proses pembuatan Anda dapat mengunduh program Anda sebagai sebuah aplikasi. Aplikasi yang diunduh ini perlu diunggah lagi langsung di situs Game Jolt untuk berpartisipasi dalam %link%.'
-    title6: Daftar/Masuk di GameJolt.com
+    title5: "Unduh aplikasi"
+    text5: "Setelah proses pembuatan Anda dapat mengunduh program Anda sebagai sebuah aplikasi. Aplikasi yang diunduh ini perlu diunggah lagi langsung di situs Game Jolt untuk berpartisipasi dalam %link%."
+    title6: "Daftar/Masuk di GameJolt.com"
     text6: "Kunjungi %link% dan klik 'Masuk' atau 'Daftar!' dalam menu. Jika Anda sudah memiliki akun Anda langsung dapat masuk, jika tidak, Anda perlu mendaftar dengan alamat Email, Nama Pengguna dan Password."
-    title7: Mengunggah permainan Anda pada situs Game Jolt
+    title7: "Mengunggah permainan Anda pada situs Game Jolt"
     text7: "Setelah Anda masuk, kunjungi dashboard Anda. Disana Anda dapat menambahkan permainan Anda. Pertama Anda harus klik pada 'Menerima peraturan'. Kemudian mengisi informasi permainan. Saat Mesin/Bahasa/Penciptaan Alat pilih 'Lainnya' dan tambahkan ke bidang Mesin Lainnya/Bahasa/Alat 'Android'. Saat status 'Pembuatan' pilih 'Selesai/Stabil'. Pastikan untuk memasukkan #AliceJam150 dalam deskripsi sehingga muncul di halaman %link%."
     text7_1: "Sebelum Anda dapat mempublikasikan permainan Anda, ikuti langkah-langkah berikutnya. Anda setidaknya harus menambahkan 'gambar thumbnail', mengatur 'nilai kedewasaan', dan mengunggah permainan Anda dengan mengklik pada 'membangun/file'."
     text7_2: "Klik 'Tambahkan Paket' dan isi informasi paket. Simpan dan tambahkan rilis. "
-    text7_3: Sekarang Anda dapat mengunggah apk program Anda. Anda menemukan aplikasi yang diunduh di folder unduhan. Sangat baik untuk menggunakan data explorer (misalnya es data explorer).
-    text7_4: "Catatan: Jika aplikasi kekurangan akhiran '.apk', Anda harus menambahkan '.apk' secara manual. Langsung ubah nama file. Sekarang Anda harus mampu mengunggahnya."
+    text7_3: "Sekarang Anda dapat mengunggah apk program Anda. Anda menemukan aplikasi yang diunduh di folder unduhan. Sangat baik untuk menggunakan data explorer (misalnya es data explorer)."
+    text7_4: 'Catatan: Jika aplikasi kekurangan akhiran ''.apk'', Anda harus menambahkan ''.apk'' secara manual. Langsung ubah nama file. Sekarang Anda harus mampu mengunggahnya.'
     text7_5: "Setelah mengunggah klik pada 'OK' untuk mempublikasikan permainan Anda. Kemudian akan muncul pada orang lain link untuk mengunduh permainan Anda."
-    text7_6: Anda sekarang sudah mengunggah permainan pertama Anda di situs Game Jolt dan mengaktifkannya. Selamat!
-    text7_7: 'Sekarang orang lain akan dapat menemukan permainan Anda dan akan muncul di halaman %link%.'
+    text7_6: "Anda sekarang sudah mengunggah permainan pertama Anda di situs Game Jolt dan mengaktifkannya. Selamat!"
+    text7_7: "Sekarang orang lain akan dapat menemukan permainan Anda dan akan muncul di halaman %link%."
   aliceGameJamTutorialcards:
-    title1: (Selamat datang di) Wonderland
+    title1: "(Selamat datang di) Wonderland"
     subtitle1: "Gerakkan karakter dan buat 'ketika diketuk'"
-    description1: 'Pelajari cara untuk menghidupkan salah satu karakter Anda dalam animasi sederhana dan menguasai cara membuat karakter Anda melakukan sesuatu ketika menekannya. Video menunjukkan kepada Anda bagaimana Anda dapat dengan mudah menghidupkan karakter Anda dengan menggunakan tampilan yang berbeda. Selanjutnya kami menunjukkan Anda bagaimana untuk membuat event "ketika mengetuk" dan bagaimana untuk mengirim pesan siaran antara objek.'
-    title2: Simpan Alice!
-    subtitle2: Gunakan sensor kehendak dan mendeteksi tabrakan antara objek
-    description2: Di sini Anda akan belajar bagaimana mengendalikan karakter dengan menggunakan sensor kehendak dari telepon Anda. Anda dapat mengontrol gerakan Alice dengan mengungkit telepon ke kiri atau kanan. Tonton tutorial kami dan biarkan benda jatuh secara acak dari langit dan dapatkan pengalaman dalam mendeteksi tabrakan dengan benda-benda lainnya.
-    title3: 'Hatter - Tabrak dan Lari'
-    subtitle3: Buat pemandangan bergerak dan mengontrol pergerakan Hatters
-    description3: Dalam tutorial ini Anda akan belajar bagaimana untuk membuat pemandangan yang tampak seperti bergerak. Kita akan melakukannya dengan menggerakkan objek sepanjang layar untuk menciptakan ilusi gerakan. Kami juga menunjukkan Anda bagaimana untuk membuat Hatter bergerak dengan memiringkan telepon Anda.
-    title4: 'Hatter - Tabrak dan Lari'
-    subtitle4: Biarkan Hatter menembak kartu evil
-    description4: Dalam tutorial ini kami akan menunjukkan kepada Anda bagaimana untuk membuat musuh yang bergerak secara acak menuju karakter Anda. Selain itu, Anda akan mempelajari cara membuat hatter menembak teadrops dan memeriksa jika musuh tertembak dengan menggunakan deteksi benturan.
-    title5: Memukul Kucing Cheshire
-    subtitle5: Buat skor dengan menggunakan variabel
-    description5: Dalam tutorial ini kami akan menunjukkan bagaimana untuk menggunakan variabel untuk membuat skor. Skor adalah unsur-unsur yang berguna dalam permainan. Skor kami menunjukkan seberapa sering Anda telah menangkap kucing.
-    title6: Perlombaan Kelinci
-    subtitle6: Buat latar belakang bergerak
+    description1: |
+      Pelajari cara untuk menghidupkan salah satu karakter Anda dalam animasi sederhana dan menguasai cara membuat karakter Anda melakukan sesuatu ketika menekannya. Video menunjukkan kepada Anda bagaimana Anda dapat dengan mudah menghidupkan karakter Anda dengan menggunakan tampilan yang berbeda. Selanjutnya kami menunjukkan Anda bagaimana untuk membuat event "ketika mengetuk" dan bagaimana untuk mengirim pesan siaran antara objek.
+    title2: "Simpan Alice!"
+    subtitle2: "Gunakan sensor kehendak dan mendeteksi tabrakan antara objek"
+    description2: "Di sini Anda akan belajar bagaimana mengendalikan karakter dengan menggunakan sensor kehendak dari telepon Anda. Anda dapat mengontrol gerakan Alice dengan mengungkit telepon ke kiri atau kanan. Tonton tutorial kami dan biarkan benda jatuh secara acak dari langit dan dapatkan pengalaman dalam mendeteksi tabrakan dengan benda-benda lainnya."
+    title3: "Hatter - Tabrak dan Lari"
+    subtitle3: "Buat pemandangan bergerak dan mengontrol pergerakan Hatters"
+    description3: "Dalam tutorial ini Anda akan belajar bagaimana untuk membuat pemandangan yang tampak seperti bergerak. Kita akan melakukannya dengan menggerakkan objek sepanjang layar untuk menciptakan ilusi gerakan. Kami juga menunjukkan Anda bagaimana untuk membuat Hatter bergerak dengan memiringkan telepon Anda."
+    title4: "Hatter - Tabrak dan Lari"
+    subtitle4: "Biarkan Hatter menembak kartu evil"
+    description4: "Dalam tutorial ini kami akan menunjukkan kepada Anda bagaimana untuk membuat musuh yang bergerak secara acak menuju karakter Anda. Selain itu, Anda akan mempelajari cara membuat hatter menembak teadrops dan memeriksa jika musuh tertembak dengan menggunakan deteksi benturan."
+    title5: "Memukul Kucing Cheshire"
+    subtitle5: "Buat skor dengan menggunakan variabel"
+    description5: "Dalam tutorial ini kami akan menunjukkan bagaimana untuk menggunakan variabel untuk membuat skor. Skor adalah unsur-unsur yang berguna dalam permainan. Skor kami menunjukkan seberapa sering Anda telah menangkap kucing."
+    title6: "Perlombaan Kelinci"
+    subtitle6: "Buat latar belakang bergerak"
     description6: |
       Tutorial ini menunjukkan Anda bagaimana membuat latar belakang vertikal bergulir dengan menggerakkan gambar latar belakang dengan cara tertentu. Hal lain yang kami akan ajarkan pada Anda adalah membuat karakter melompat maju dengan menekan di atasnya. 
       Untuk membuat permainan sedikit lebih sulit kami akan menunjukkan kepada Anda bagaimana memperlambat kecepatan karakter Anda dari waktu ke waktu.
-    download: Unduh program
+    download: "Unduh program"
 oauth:
   username_header: Terima kasih telah mendaftar pada Pocket Code!
   username_chooser: 'Silahkan pilih satu nama pengguna:'
@@ -385,7 +401,7 @@ search:
   dotdotdot: Cari...
   search: Cari
   results: Hasil pencarian
-  resultcount: 'Pencarian Anda menemukan %count% hasil'
+  resultcount: Pencarian Anda menemukan %count% hasil
 menu:
   profile: Profil saya
   logout: Logout
@@ -403,9 +419,9 @@ login:
   or: ATAU
 apk:
   download: Unduh sebagai app
-  prepare: Mempersiapkan app
-  preparing: Mempersiapkan app
-  text: Proses ini dapat berlangsung beberapa saat
+  prepare: 'Mempersiapkan app'
+  preparing: 'Mempersiapkan app'
+  text: 'Proses ini dapat berlangsung beberapa saat'
 errors:
   username:
     blank: Nama pengguna tidak boleh kosong
@@ -445,9 +461,9 @@ errors:
   program:
     invalid: Program tidak sah.
   languageversion:
-    tooold: Maaf, programm Anda berisi versi lama dari bahasa Catrobat! Apakah Anda menggunakan versi terbaru dari Pocket Code?
+    tooold: 'Maaf, programm Anda berisi versi lama dari bahasa Catrobat! Apakah Anda menggunakan versi terbaru dari Pocket Code?'
   programversion:
-    tooold: Maaf, Anda menggunakan versi lama dari Pocket Code. Perbarui ke versi terbaru.
+    tooold: 'Maaf, Anda menggunakan versi lama dari Pocket Code. Perbarui ke versi terbaru.'
 success:
   registration: Registrasi berhasil!
   token: oke
@@ -510,8 +526,8 @@ ci:
   download: Unduh Apk
 gamejam:
   nojam: Maaf, tidak ada kemacetan permainan saat ini
-  submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: waspadalah
     subheader: Anda hanya dapat mengirimkan program Anda sendiri
@@ -540,3 +556,17 @@ admin:
     btnDeleteBackup: Hapus cadangan
     createBackupConfirmationTitle: Buat berkas cadangan
     createBackupConfirmationText: Proses ini mungkin memakan waktu cukup lama. Halaman akan kembali sesudahnya!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code

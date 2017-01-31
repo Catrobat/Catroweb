@@ -26,12 +26,11 @@ clickToDownloadProgram: 'Um das Beispielprogramm herunterzuladen klicke %link_st
 registrationError: 'Benutzername oder e-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
 wellDone: "Gut gemacht!"
-done: "Erledigt!"
-notificationsReadMessage: "Du hast alle Benachrichtigungen schon gelesen."
+done: "Fertig!"
+notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
-clearAllNotificationsButtonTitle: "Alle als gelesen markieren"
-notificationsClearError: "Die Benachrichtigungen können nicht als gelesen markiert werden!"
-
+clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
+notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
 programs:
   featured: Empfohlen
   newest: Neueste Programme
@@ -43,8 +42,8 @@ programs:
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprogramme
   views: '%views% gesehen'
-  remixes: '{0}0 Remixe |{1}1 Remix |]1,Inf] %remixes% Remixe'
-  newRemixesNotificationTitle: '|{1}"%programName%" hat 1 neuen Remix: |]1,Inf] "%programName%" hat %remixes% neue Remixe:'
+  remixes: '{0}0 Remixe |{1}1 Remix |] 1, Inf]%remixes% Remixe'
+  newRemixesNotificationTitle: '|{1} "%programName%" hat 1 neuen Remix: |] 1, Inf] "%programName%" hat %remixes% neue Remixe:'
   submitted: Eingereichte Programme
   uploaded: Hochgeladenen Programme
   reportAsInappropriate: Als unpassend melden
@@ -67,10 +66,10 @@ programs:
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
 remixgraph:
-  by: 'von'
+  by: 'um'
   open: 'Öffnen'
-  showPaths: 'Zeige Pfade'
-  programNotAvailableErrorTitle: 'Es tut uns leid...'
+  showPaths: 'Wege anzeigen'
+  programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
@@ -265,128 +264,130 @@ help:
         text5: 'Entdecke die Welt der Pocket Code Programme. Lade und vermische Programme, wie du möchtest.'
         text6: 'Lade das derzeit geöffnete Programm hoch.'
   tutorialcards:
-    title: Tutorials
-    description1: Diese Tutorials zeigen dir, wie man effektive Tricks verwendet in 
-    getReady: 'Bereite alles vor:'
-    tryCode: 'Versuche diesen Code:'
-    doIt: 'Tu es:'
-    tip: 'Extra Tipp:'
+    title: "Tutorials"
+    description1: "Diese Tutorials zeigen dir, wie man effektive Tricks verwendet in "
+    getReady: "Bereite alles vor:"
+    tryCode: "Versuche diesen Code:"
+    doIt: "Tu es:"
+    tip: "Extra Tipp:"
     card1:
-      title: Größe ändern
-      description: Tippe auf die Ente um ihre Größe zu verändern.
-      one: Füge das Object hinzu, von dem du die Größe ändern möchtest, z.B. Tier.
-      two: Füge die folgenden Bausteine in ein Skript eines Objektes ein, um es bei Berührung (um 20% seiner Originalgröße) zu verkleinern.
+      title: "Größe ändern"
+      description: "Tippe auf die Ente um ihre Größe zu verändern."
+      one: "Füge das Object hinzu, von dem du die Größe ändern möchtest, z.B. Tier."
+      two: "Füge die folgenden Bausteine in ein Skript eines Objektes ein, um es bei Berührung (um 20% seiner Originalgröße) zu verkleinern."
     card2:
-      title: Aussehen ändern
-      description: Verwende diesen Trick um automatisch mitzuzählen.
-      one: Füge das Object hinzu, von dem du das Aussehen ändern möchtest, z.B. Gegenstände.
-      two: Füge weitere Bilder zum Aussehen des Objektes hinzu.
-      three: Füge die folgenden Bausteine in ein Skript eines Objektes ein, um sein Aussehen nach jeder Sekunde zu ändern.
+      title: "Aussehen ändern"
+      description: "Verwende diesen Trick um automatisch mitzuzählen."
+      one: "Füge das Object hinzu, von dem du das Aussehen ändern möchtest, z.B. Gegenstände."
+      two: "Füge weitere Bilder zum Aussehen des Objektes hinzu."
+      three: "Füge die folgenden Bausteine in ein Skript eines Objektes ein, um sein Aussehen nach jeder Sekunde zu ändern."
     card3:
-      title: Bewegte Animation
-      description: Verwende diesen Trick um den Papagei fliegen zu lassen.
-      one: Füge das Objekt hinzu, das du bewegen möchtest.
-      two: Füge weiter Bilder zum Aussehen des Objekts hinzu, die eine Bewegung veranschaulichen.
-      three: Füge die folgenden Bausteine in ein Skript eines Objektes ein, um seine Position nach einer gewissen Zeit zu verändern. Zusätzlich kannst du das Feld durch Abprallen am Rand eingrenzen.
+      title: "Bewegte Animation"
+      description: "Verwende diesen Trick um den Papagei fliegen zu lassen."
+      one: "Füge das Objekt hinzu, das du bewegen möchtest."
+      two: "Füge weiter Bilder zum Aussehen des Objekts hinzu, die eine Bewegung veranschaulichen."
+      three: "Füge die folgenden Bausteine in ein Skript eines Objektes ein, um seine Position nach einer gewissen Zeit zu verändern. Zusätzlich kannst du das Feld durch Abprallen am Rand eingrenzen."
     card4:
-      title: Gleite
-      description: Gleite mit einem Objekt über den Bildschirm.
-      one: Füge das Objekt hinzu, das du gleiten lassen möchtest. z.B. Flugzeug.
-      two: Füge die folgenden Bausteine ein und definiere den Bereich in dem die Bewegung stattfinden soll.
+      title: "Gleite"
+      description: "Gleite mit einem Objekt über den Bildschirm."
+      one: "Füge das Objekt hinzu, das du gleiten lassen möchtest. z.B. Flugzeug."
+      two: "Füge die folgenden Bausteine ein und definiere den Bereich in dem die Bewegung stattfinden soll."
     card5:
-      title: Spiele einen Klang ab
-      description: Tippe auf die Trommel um den Klang abzuspielen.
-      one: Füge das Objekt hinzu, das einen Ton abspielen soll. z.B. Hund.
-      two: Füge die folgenden Bausteine ein um eine Tonwiedergabe zu ermöglichen. Nimm selbst einen Ton auf, oder wähle ihn aus deiner persönlichen Bibliothek oder der Pocket Code Medienbibliothek aus.
+      title: "Spiele einen Klang ab"
+      description: "Tippe auf die Trommel um den Klang abzuspielen."
+      one: "Füge das Objekt hinzu, das einen Ton abspielen soll. z.B. Hund."
+      two: "Füge die folgenden Bausteine ein um eine Tonwiedergabe zu ermöglichen. Nimm selbst einen Ton auf, oder wähle ihn aus deiner persönlichen Bibliothek oder der Pocket Code Medienbibliothek aus."
     card6:
-      title: Sprich etwas
-      description: Verwende diesen Code damit ein Objekt spricht.
-      one: Füge das Objekt hinzu, das eine Sprachausgabe machen soll. z.B. Carrie.
-      two: Füge die folgenden Bausteine in ein, um eine Sprachausgabe zu ermöglichen.
+      title: "Sprich etwas"
+      description: "Verwende diesen Code damit ein Objekt spricht."
+      one: "Füge das Objekt hinzu, das eine Sprachausgabe machen soll. z.B. Carrie."
+      two: "Füge die folgenden Bausteine in ein, um eine Sprachausgabe zu ermöglichen."
     card7:
-      title: GSensor
-      description: Verwende diesen Trick um ein Objekt mit Neigung deines Handys zu kontrollieren.
-      one: Füge das Ojekt hinzu, das sich auf der Bühne bewegen soll.
-      two: Füge die folgenden Bausteine ein, um das Objekt mit den Sensoren deines Gerätes zu steuern. Dafür wählst du "x und y Neigung". Um die passende Bewegung zu erhalten, setze "- Neigung". Wenn die Bewegung des Objekts zu sensibel reagiert, teile den Neigungswert z.B. durch 10.
+      title: "GSensor"
+      description: "Verwende diesen Trick um ein Objekt mit Neigung deines Handys zu kontrollieren."
+      one: "Füge das Ojekt hinzu, das sich auf der Bühne bewegen soll."
+      two: "Füge die folgenden Bausteine ein, um das Objekt mit den Sensoren deines Gerätes zu steuern. Dafür wählst du \"x und y Neigung\". Um die passende Bewegung zu erhalten, setze \"- Neigung\". Wenn die Bewegung des Objekts zu sensibel reagiert, teile den Neigungswert z.B. durch 10."
     card8:
-      title: Kompass
-      description: Verwende diesen Code um einen Kompass zu erstellen.
-      one: Füge das Objekt hinzu, das in Kompassrichtung zeigen soll.
-      two: Füge die folgenden Bausteine ein, um ein Objekt auszurichten. Füge zusätzlich eine Forever Schleife ein.
+      title: "Kompass"
+      description: "Verwende diesen Code um einen Kompass zu erstellen."
+      one: "Füge das Objekt hinzu, das in Kompassrichtung zeigen soll."
+      two: "Füge die folgenden Bausteine ein, um ein Objekt auszurichten. Füge zusätzlich eine Forever Schleife ein."
     card9:
-      title: 'Verschicke an alle:'
-      description: Schau dir diesen Code an! Er zeigt dir, wie man zwischen Objekten kommuniziert.
-      one: Füge ein neues Objekt hinzu, z.B. Alice, das eine Broadcast Nachricht versenden soll. Füge zusätzlich einen zweiten Hintergrund zu den Aussehen des Hintergrunds hinzu. Sobald der Hintergrund eine Broadcast Nachricht erhält soll er sein Aussehen ändern.
-      two: Füge den Baustein "An alle senden" ein und bestimme was geschehen soll, wenn die anderen Objekte die Nachricht erhalten.
-      three: In diesem Fall ändert sich der Hintergrund, wenn ein Objekt auf einer vorderen Ebene berührt wird.
+      title: "Verschicke an alle:"
+      description: "Schau dir diesen Code an! Er zeigt dir, wie man zwischen Objekten kommuniziert."
+      one: "Füge ein neues Objekt hinzu, z.B. Alice, das eine Broadcast Nachricht versenden soll. Füge zusätzlich einen zweiten Hintergrund zu den Aussehen des Hintergrunds hinzu. Sobald der Hintergrund eine Broadcast Nachricht erhält soll er sein Aussehen ändern."
+      two: "Füge den Baustein \"An alle senden\" ein und bestimme was geschehen soll, wenn die anderen Objekte die Nachricht erhalten."
+      three: "In diesem Fall ändert sich der Hintergrund, wenn ein Objekt auf einer vorderen Ebene berührt wird."
     card10:
-      title: Zeige Variable
-      description: Zeige den Wert der Variable.
-      one: Füge ein Objekt hinzu, das durch deine Telefonsensoren beweger werden soll (siehe %tutorial_card_link_7% Tutorial Karte 7 %link_end%). Füge zusätzlich einen zweiten Hintergrund hinzu, der verändert werden soll, wenn eine Broadcast Nachricht empfangen wird.
-      two: Füge die folgenden Bausteine ein, um die aktuelle x und y Position des sich bewegenden Objektes in einer Variable zu speichern.
-      three: Über "Zeige Variable" kannst du die Werte auf der Bühne anzeigen.
+      title: "Zeige Variable"
+      description: "Zeige den Wert der Variable."
+      one: "Füge ein Objekt hinzu, das durch deine Telefonsensoren beweger werden soll (siehe %tutorial_card_link_7% Tutorial Karte 7 %link_end%). Füge zusätzlich einen zweiten Hintergrund hinzu, der verändert werden soll, wenn eine Broadcast Nachricht empfangen wird."
+      two: "Füge die folgenden Bausteine ein, um die aktuelle x und y Position des sich bewegenden Objektes in einer Variable zu speichern."
+      three: "Über \"Zeige Variable\" kannst du die Werte auf der Bühne anzeigen."
     card11:
-      title: Kollisionserkennung
-      description: Erkenne eine Kollision zwischen zwei Objekten.
-      one: Füge zwei Objekte hinzu von denen eines durch die Sensoren deines Telefons bewegt werden soll, z.B. Alex (siehe %tutorial_card_link_7% Tutorial Kare 7 %link_end%).
-      two: Speichere die aktuelle "x und y Position" des sich bewegenden Objekts Alex (siehe %tutorial_card_link_10% Tutorial Karte 10 %link_end%) und füge das folgende Skript hinzu. Überprüfe kontinuierlich, ob sich die zwei Objekte überlagern. Wenn sie das tun, soll das fixierte Objekt ausgeblendet werden.
+      title: "Kollisionserkennung"
+      description: "Erkenne eine Kollision zwischen zwei Objekten."
+      one: "Füge zwei Objekte hinzu von denen eines durch die Sensoren deines Telefons bewegt werden soll, z.B. Alex (siehe %tutorial_card_link_7% Tutorial Kare 7 %link_end%)."
+      two: "Speichere die aktuelle \"x und y Position\" des sich bewegenden Objekts Alex (siehe %tutorial_card_link_10% Tutorial Karte 10 %link_end%) und füge das folgende Skript hinzu. Überprüfe kontinuierlich, ob sich die zwei Objekte überlagern. Wenn sie das tun, soll das fixierte Objekt ausgeblendet werden."
     card12:
-      title: Gesichtserkennung
-      description: Steure ein Objekt durch Gesichtserkennung.
-      one: Stelle zuerst sicher, dass die Gesichtserkennungsbausteine aktiviert sind. Gehe dafür zu den Einstellungen.
-      two: Füge ein neues Objekt hinzu und füge die folgendne Bausteine ein um anzuzeigen, ob ein Gesicht erkannt wurde. Überprüfe in einer Forever Schleife, ob ein Gesicht erkannt wurde. Wenn die Kamera ein Gesicht wahrnimmt ist der Wert der Variable "WAHR", sonst ist er "FALSCH".
+      title: "Gesichtserkennung"
+      description: "Steure ein Objekt durch Gesichtserkennung."
+      one: "Stelle zuerst sicher, dass die Gesichtserkennungsbausteine aktiviert sind. Gehe dafür zu den Einstellungen."
+      two: "Füge ein neues Objekt hinzu und füge die folgendne Bausteine ein um anzuzeigen, ob ein Gesicht erkannt wurde. Überprüfe in einer Forever Schleife, ob ein Gesicht erkannt wurde. Wenn die Kamera ein Gesicht wahrnimmt ist der Wert der Variable \"WAHR\", sonst ist er \"FALSCH\"."
   starterPrograms:
-    title: Starter Programme
-    description: Probiere diese Starter Programme aus. Schau dir den Code an und verändere ihn so wie du willst.
+    title: "Starter Programme"
+    description: "Probiere diese Starter Programme aus. Schau dir den Code an und verändere ihn so wie du willst."
     categories:
-      games: Spiele
-      animations: Animationen
-      interactive: Interaktive Kunst und Geschichten
-      music: Musik und Tanz
+      games: "Spiele"
+      animations: "Animationen"
+      interactive: "Interaktive Kunst und Geschichten"
+      music: "Musik und Tanz"
   gameJam:
-    title: Wie du ein Pocket Code Spiel auf die Game Jolt Seite hochladen kannst?
-    text0: Herzlichen Glückwunsch zu deinem Spiel! Du kannst es nun auf %link% hochladen, um eine eigenständige Android App zu erstellen. Diese kannst du dann auf der Game Jolt Seite hochladen.
-    title1: Anmeldung
-    text1: Zuerst musst du ein Konto erstellen. Danach kannst du dein erstelltes Programm hochladen. Keine Angst, es ist nicht schwer. Überlege dir einfach einen Benutzernamen und ein Passwort. Nachdem du beides ausgefüllt hast, klicke auf 'Login oder Anmeldung'. Das war's!
-    title2: Hochladen
-    text2: 'Nachdem du dich angemeldet hast, kannst du dein Spiel hochladen. Überlege dir einen Namen und eine Beschreibung. Füge #AliceJam150 zur Beschreibung hinzu.'
-    title3: Suche nach deinem Program
-    text3: Öffne dein Pocket Code Profil in dem all deine Programme aufgelistet sind, oder suche dein Programm direkt indem du die Suche und den Namen deines Programmes verwendest.
-    title4: Erstelle eine Android App
-    text4: Eine Android App kannst du direkt auf der Programm Detailseite erstellen. Ein Klick auf 'App vorbereiten' erstellt eine App.
-    title5: App herunterladen
-    text5: Nach dem Erstellungsprozess kannst du dein Programm als App herunterladen. Um an %link% teilnehmen zu können, muss die heruntergeladene App direkt auf der Game Jolt Seite hochgeladen werden.
-    title6: Anmelden/Einloggen bei GameJolt.com
-    text6: Besuche %link% und klicke im Menü auf 'Einloggen' oder 'Anmelden!'. Wenn du schon einen Account besitzt, log dich ein, wenn nicht musst du dich mit deiner Email Adresse, dem Benutzernamen und einem Passwort anmelden.
-    title7: Lade dein Spiel auf der Game Jolt Seite hoch
-    text7: 'Nachdem du angemeldet bist, gehe zu deinem Dashboard. Dort kannst du dein erstes Spiel hinzufügen. Zuerst musst du auf ''Regeln akzeptieren'' klicken. Dann füllst du die Informationen zu deinem Spiel aus. Als Motor/Sprache/Kreation Werkzeug wähle ''Sonstige'' aus und füge zu dem Feld Sonstige Motor/Sprache/Werkzeug ''Android'' hinzu. Als ''Entwicklung'' Status wähle ''Fertig/Stabil''. Versichere dich, dass du #AliceJam150 in der Beschreibung hinzugefügt hast, damit es auf %link% erscheint.'
-    text7_1: Bevor du dein Spiel veröffentlichen kannst musst du die folgenden Schritte durchführen. Du musst zumindest ein 'Miniaturbild' hinzugefügt, eine 'Reifebewertung' angelegt und dein Spiel durch klicken von 'Erstellen/Dateien' hochgeladen haben.
-    text7_2: Klicke auf 'Paket hinzufügen' und fülle die Informationen zum Paket aus. Speichere jetzt und füge dann den Release hinzu. 
-    text7_3: Jetzt kannst du die apk-Datei deines Programmes hochladen. Du findest die heruntergeladene App im Download-Ordner. Am besten verwendest du einen Datei-Explorer (z.B. data explorer).
+    title: "Wie du ein Pocket Code Spiel auf die Game Jolt Seite hochladen kannst?"
+    text0: "Herzlichen Glückwunsch zu deinem Spiel! Du kannst es nun auf %link% hochladen, um eine eigenständige Android App zu erstellen. Diese kannst du dann auf der Game Jolt Seite hochladen."
+    title1: "Anmeldung"
+    text1: "Zuerst musst du ein Konto erstellen. Danach kannst du dein erstelltes Programm hochladen. Keine Angst, es ist nicht schwer. Überlege dir einfach einen Benutzernamen und ein Passwort. Nachdem du beides ausgefüllt hast, klicke auf 'Login oder Anmeldung'. Das war's!"
+    title2: "Hochladen"
+    text2: "Nachdem du dich angemeldet hast, kannst du dein Spiel hochladen. Überlege dir einen Namen und eine Beschreibung. Füge #AliceJam150 zur Beschreibung hinzu."
+    title3: "Suche nach deinem Program"
+    text3: "Öffne dein Pocket Code Profil in dem all deine Programme aufgelistet sind, oder suche dein Programm direkt indem du die Suche und den Namen deines Programmes verwendest."
+    title4: "Erstelle eine Android App"
+    text4: "Eine Android App kannst du direkt auf der Programm Detailseite erstellen. Ein Klick auf 'App vorbereiten' erstellt eine App."
+    title5: "App herunterladen"
+    text5: "Nach dem Erstellungsprozess kannst du dein Programm als App herunterladen. Um an %link% teilnehmen zu können, muss die heruntergeladene App direkt auf der Game Jolt Seite hochgeladen werden."
+    title6: "Anmelden/Einloggen bei GameJolt.com"
+    text6: "Besuche %link% und klicke im Menü auf 'Einloggen' oder 'Anmelden!'. Wenn du schon einen Account besitzt, log dich ein, wenn nicht musst du dich mit deiner Email Adresse, dem Benutzernamen und einem Passwort anmelden."
+    title7: "Lade dein Spiel auf der Game Jolt Seite hoch"
+    text7: "Nachdem du angemeldet bist, gehe zu deinem Dashboard. Dort kannst du dein erstes Spiel hinzufügen. Zuerst musst du auf 'Regeln akzeptieren' klicken. Dann füllst du die Informationen zu deinem Spiel aus. Als Motor/Sprache/Kreation Werkzeug wähle 'Sonstige' aus und füge zu dem Feld Sonstige Motor/Sprache/Werkzeug 'Android' hinzu. Als 'Entwicklung' Status wähle 'Fertig/Stabil'. Versichere dich, dass du #AliceJam150 in der Beschreibung hinzugefügt hast, damit es auf %link% erscheint."
+    text7_1: "Bevor du dein Spiel veröffentlichen kannst musst du die folgenden Schritte durchführen. Du musst zumindest ein 'Miniaturbild' hinzugefügt, eine 'Reifebewertung' angelegt und dein Spiel durch klicken von 'Erstellen/Dateien' hochgeladen haben."
+    text7_2: "Klicke auf 'Paket hinzufügen' und fülle die Informationen zum Paket aus. Speichere jetzt und füge dann den Release hinzu. "
+    text7_3: "Jetzt kannst du die apk-Datei deines Programmes hochladen. Du findest die heruntergeladene App im Download-Ordner. Am besten verwendest du einen Datei-Explorer (z.B. data explorer)."
     text7_4: 'Hinweis: Wenn die App nicht mit ''.apk'' endet, musst du ''.apk'' manuell zum Namen hinzufügen. Ändere dazu einfach den Namen der Datei. Jetzt sollte es dir möglich sein die App hochzuladen.'
-    text7_5: Klicke nach dem Upload auf 'OK', um dein Spiel zu veröffentlichen. Dadurch wird anderen Leuten ein Link angezeigt, mit dem sie dein Spiel herunterladen können.
-    text7_6: Du hast jetzt dein erstes Spiel auf der Game Jolt Seite hochgeladen und aktiviert. Herzlichen Glückwunsch!
-    text7_7: Andere Leute können dein Spiel jetzt finden und es erscheint auf der %link% Seite.
+    text7_5: "Klicke nach dem Upload auf 'OK', um dein Spiel zu veröffentlichen. Dadurch wird anderen Leuten ein Link angezeigt, mit dem sie dein Spiel herunterladen können."
+    text7_6: "Du hast jetzt dein erstes Spiel auf der Game Jolt Seite hochgeladen und aktiviert. Herzlichen Glückwunsch!"
+    text7_7: "Andere Leute können dein Spiel jetzt finden und es erscheint auf der %link% Seite."
   aliceGameJamTutorialcards:
-    title1: Willkommen im Wunderland
-    subtitle1: Animiere deine Figuren und erstelle ein 'Wenn angetippt' Event
-    description1: Lerne wie du einen deiner Charaktere mit einfachen Animationen zum Leben erwecken kannst und verstehe wie dein Charakter durch Berühung eine Aktion ausführen kann. Das Video zeigt dir, wie du deinen Charakter mit verschiedenen Aussehen einfach animieren kannst. Weiters zeigen wir dir, wie du ein "bei Berühung" Event erstellen kannst und wie dur Broadcast Nachrichten zwischen Objekten verschickst.
-    title2: Rette Alice!
-    subtitle2: Verwende den Neigungssensor und erkenne eine Kollision zwischen Objekten
-    description2: Hier lernst du wie du deinen Charakter mit dem Neigungssensor deines Telefons kontrollieren kannst. Du kannst Alice's Bewegungen kontorllieren indem du dein Telefon nach links oder rechts neigst. Schau dir unser Tutorial an, lasse zufällige Objekte vom Himmel fallen und lerne Kollisionen zwischen Objekten festzustellen.
-    title3: Der Hutmacher - Hit and Run
-    subtitle3: Erstelle eine bewegliche Landschaft und steuere die Bewegungen des Hutmachers
-    description3: In diesem Tutorial lernst du wie du eine Landschaft, die aussieht als würde sie sich bewegen, erstellen kannst. Wir werden Objekte entlang des Bildschirms bewegen um so eine Bewegung zu simulieren. Ausserdem zeigen wir dir wie du den Hutmacher durch neigen deines Telefons bewegen kannst.
-    title4: Der Hutmacher - Hit and Run
-    subtitle4: Lasse den Hutmacher die bösen Karten abschießen
-    description4: In diesem Tutorial zeigen wir dir wir du Feinde, die sich zufällig in Richtung deines Charakters bewegen, erzeugen kannst. Weiters lernst du, wie der Hutmacher Teetropfen abfeuern kann und ob diese einen der Feinde getroffen hat, indem du eine Kollisionen erkennst.
-    title5: Schlag eine Grinsekatze
-    subtitle5: Erstelle einen Spielstand indem du Variablen benützt
-    description5: In diesem Tutorial zeigen wir dir, wie du Variablen verwenden kannst, um einen Spielstand zu erstellen. Spielstände sind nützliche Elemente eines Spieles. Unser Spielstand zeigt dir, wie oft du die Grinsekatze gefangen hast.
-    title6: Ein Kaninchenrennen
-    subtitle6: Erstelle einen bewegten Hintergrund
-    description6: Dieses Tutorial zeigt dir wie du vertikal bewegliche Hintergründe erstellen kannst, indem du die Hintergrundgrafiken in einer bestimmten Art und Weise gleiten lässt. Weiters werden wir dir zeigen, wie du Charaktere durch Berührung nach vorne springen lassen kannst. Um das Spiel etwas schwieriger zu gestalten zeigen wir dir, wie du die Geschindigkeit deines Charkaters mit der Zeit drosseln kannst.
-    download: Programm herunterladen
+    title1: "Willkommen im Wunderland"
+    subtitle1: "Animiere deine Figuren und erstelle ein 'Wenn angetippt' Event"
+    description1: |
+      Lerne wie du einen deiner Charaktere mit einfachen Animationen zum Leben erwecken kannst und verstehe wie dein Charakter durch Berühung eine Aktion ausführen kann. Das Video zeigt dir, wie du deinen Charakter mit verschiedenen Aussehen einfach animieren kannst. Weiters zeigen wir dir, wie du ein "bei Berühung" Event erstellen kannst und wie dur Broadcast Nachrichten zwischen Objekten verschickst.
+    title2: "Rette Alice!"
+    subtitle2: "Verwende den Neigungssensor und erkenne eine Kollision zwischen Objekten"
+    description2: "Hier lernst du wie du deinen Charakter mit dem Neigungssensor deines Telefons kontrollieren kannst. Du kannst Alice's Bewegungen kontorllieren indem du dein Telefon nach links oder rechts neigst. Schau dir unser Tutorial an, lasse zufällige Objekte vom Himmel fallen und lerne Kollisionen zwischen Objekten festzustellen."
+    title3: "Der Hutmacher - Hit and Run"
+    subtitle3: "Erstelle eine bewegliche Landschaft und steuere die Bewegungen des Hutmachers"
+    description3: "In diesem Tutorial lernst du wie du eine Landschaft, die aussieht als würde sie sich bewegen, erstellen kannst. Wir werden Objekte entlang des Bildschirms bewegen um so eine Bewegung zu simulieren. Ausserdem zeigen wir dir wie du den Hutmacher durch neigen deines Telefons bewegen kannst."
+    title4: "Der Hutmacher - Hit and Run"
+    subtitle4: "Lasse den Hutmacher die bösen Karten abschießen"
+    description4: "In diesem Tutorial zeigen wir dir wir du Feinde, die sich zufällig in Richtung deines Charakters bewegen, erzeugen kannst. Weiters lernst du, wie der Hutmacher Teetropfen abfeuern kann und ob diese einen der Feinde getroffen hat, indem du eine Kollisionen erkennst."
+    title5: "Schlag eine Grinsekatze"
+    subtitle5: "Erstelle einen Spielstand indem du Variablen benützt"
+    description5: "In diesem Tutorial zeigen wir dir, wie du Variablen verwenden kannst, um einen Spielstand zu erstellen. Spielstände sind nützliche Elemente eines Spieles. Unser Spielstand zeigt dir, wie oft du die Grinsekatze gefangen hast."
+    title6: "Ein Kaninchenrennen"
+    subtitle6: "Erstelle einen bewegten Hintergrund"
+    description6: |
+      Dieses Tutorial zeigt dir wie du vertikal bewegliche Hintergründe erstellen kannst, indem du die Hintergrundgrafiken in einer bestimmten Art und Weise gleiten lässt. Weiters werden wir dir zeigen, wie du Charaktere durch Berührung nach vorne springen lassen kannst. Um das Spiel etwas schwieriger zu gestalten zeigen wir dir, wie du die Geschindigkeit deines Charkaters mit der Zeit drosseln kannst.
+    download: "Programm herunterladen"
 oauth:
   username_header: Danke für deine Anmeldung bei Pocket Code!
   username_chooser: 'Bitte wähle einen Benutzernamen:'
@@ -550,3 +551,17 @@ admin:
     btnDeleteBackup: Sicherung löschen
     createBackupConfirmationTitle: Sicherungsdatei erstellen
     createBackupConfirmationText: Dieser Vorgang kann eine Weile dauern. Die Seite wird danach neu geladen!
+recommender:
+  similarPrograms: Ähnliche Programme
+pmd:
+  submitBtn: Projekt abgeben
+  submitBox:
+    header: Abgabe
+    text: Sie sind im begriff ihr Projekt abzugeben. Bitte geben Sie den Projektcode ein.
+    btnText: Abgeben
+  successful:
+    text: Ihr Programm-Upload war erfolgreich.
+  failed:
+    text: Programm-Upload fehlgeschlagen.
+codeview:
+  showText: Code anzeigen

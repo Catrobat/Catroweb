@@ -591,3 +591,17 @@ admin:
 
 recommender:
   similarPrograms: Similar programs
+
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+
+codeview:
+  showText: Show code

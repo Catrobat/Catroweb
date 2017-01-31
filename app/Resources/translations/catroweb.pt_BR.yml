@@ -24,6 +24,13 @@ less: 'menos'
 ok: OK
 clickToDownloadProgram: 'Para baixar o programa de exemplo clique %link_start% aqui %link_end%.'
 registrationError: 'Este nome de usuário ou endereço de e-mail já está em uso.'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: Em Destaque
   newest: Programas mais recentes
@@ -35,6 +42,8 @@ programs:
   downloads: '%downloads% downloads'
   sample: Exemplos de programas
   views: '%views% visualizações'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Programas enviados
   uploaded: Programas carregados
   reportAsInappropriate: Reportar como impróprio
@@ -56,6 +65,12 @@ programs:
   report: Denunciar
   report_popup: Este comentário foi denunciado com sucesso.
   report_popup_header: Denunciado
+remixgraph:
+  by: 'por'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -254,128 +269,132 @@ help:
         text5: 'Explore o mundo dos programas do Pocket Code. Baixe e ''remixe'' os programas que você gostar.'
         text6: 'Fazer upload do programa que está atualmente aberto.'
   tutorialcards:
-    title: Tutoriais
-    description1: Estes tutoriais te mostram como usar truques eficazes
-    getReady: 'Prepare-se:'
-    tryCode: 'Tente este código:'
-    doIt: 'Faça isso:'
-    tip: 'Dica extra:'
+    title: "Tutoriais"
+    description1: "Estes tutoriais te mostram como usar truques eficazes"
+    getReady: "Prepare-se:"
+    tryCode: "Tente este código:"
+    doIt: "Faça isso:"
+    tip: "Dica extra:"
     card1:
-      title: Alterar tamanho
-      description: Altere o tamanho de um objeto.
-      one: Adicione o objeto do qual você gostaria de mudar o tamanho, por exemplo, Animal.
-      two: Insira os seguintes blocos nos scripts do objeto a fim de minimizá-lo (20% do seu tamanho original) quando tocado.
+      title: "Alterar tamanho"
+      description: "Altere o tamanho de um objeto."
+      one: "Adicione o objeto do qual você gostaria de mudar o tamanho, por exemplo, Animal."
+      two: "Insira os seguintes blocos nos scripts do objeto a fim de minimizá-lo (20% do seu tamanho original) quando tocado."
     card2:
-      title: Mudar Aparência
-      description: Mude a aparência de um objeto.
-      one: Adicione o objeto do qual você gostaria de mudar a aparência, por exemplo, itens.
-      two: Inclua mais fotos na aparência do objeto.
-      three: Insira os seguintes blocos nos scripts do objeto a fim de alternar sua aparência continuamente após um segundo.
+      title: "Mudar Aparência"
+      description: "Mude a aparência de um objeto."
+      one: "Adicione o objeto do qual você gostaria de mudar a aparência, por exemplo, itens."
+      two: "Inclua mais fotos na aparência do objeto."
+      three: "Insira os seguintes blocos nos scripts do objeto a fim de alternar sua aparência continuamente após um segundo."
     card3:
-      title: Animação
-      description: Animar objetos
-      one: Adicione o objeto que você quer que tenha movimento.
-      two: Inclua uma outra foto na aparência do objeto que ilustre o seu movimento.
-      three: Insira os seguintes blocos nos scripts do objeto a fim de mudar constantemente a posição do objeto após um certo tempo. Adicionalmente, você pode delimitar o palco rebatendo o objeto caso ele chegue à margem.
+      title: "Animação"
+      description: "Animar objetos"
+      one: "Adicione o objeto que você quer que tenha movimento."
+      two: "Inclua uma outra foto na aparência do objeto que ilustre o seu movimento."
+      three: "Insira os seguintes blocos nos scripts do objeto a fim de mudar constantemente a posição do objeto após um certo tempo. Adicionalmente, você pode delimitar o palco rebatendo o objeto caso ele chegue à margem."
     card4:
-      title: Deslizar
-      description: Deixe seu objeto deslizar sobre a tela.
-      one: Adicione o objeto que deseja a deslizar. por exemplo, o avião.
-      two: Insira os seguintes blocos e defina a área em que o movimento deve acontecer.
+      title: "Deslizar"
+      description: "Deixe seu objeto deslizar sobre a tela."
+      one: "Adicione o objeto que deseja a deslizar. por exemplo, o avião."
+      two: "Insira os seguintes blocos e defina a área em que o movimento deve acontecer."
     card5:
-      title: Reproduzir som
-      description: Tocar um som tocando no objeto.
-      one: Adicione o objeto que você quer tocar um som, por exemplo, cão.
-      two: Insira os seguintes blocos para que a reprodução seja possível. Escolha um som de sua biblioteca pessoal, da biblioteca de mídia do Pocket Code ou grave um som.
+      title: "Reproduzir som"
+      description: "Tocar um som tocando no objeto."
+      one: "Adicione o objeto que você quer tocar um som, por exemplo, cão."
+      two: "Insira os seguintes blocos para que a reprodução seja possível. Escolha um som de sua biblioteca pessoal, da biblioteca de mídia do Pocket Code ou grave um som."
     card6:
-      title: Falar
-      description: Permite que o seu objeto fale.
-      one: Adicione o objeto que quer a falar, por exemplo, Carrie.
-      two: Inserir os seguintes blocos para possibilitar a saída de voz.
+      title: "Falar"
+      description: "Permite que o seu objeto fale."
+      one: "Adicione o objeto que quer a falar, por exemplo, Carrie."
+      two: "Inserir os seguintes blocos para possibilitar a saída de voz."
     card7:
-      title: Sensor
-      description: Controle um objeto usando os sensores de inclinação.
-      one: Adicione o objeto que deseja a mover-se no palco.
-      two: Inserir os seguintes blocos a fim de controlar o objeto através de sensores do seu telefone. Assim, escolha a "inclinação x e y". Para obter o movimento apropriado, defina "-inclinação". Se o movimento do objeto é muito sensivel, divida a inclinação por 10, por exemplo.
+      title: "Sensor"
+      description: "Controle um objeto usando os sensores de inclinação."
+      one: "Adicione o objeto que deseja a mover-se no palco."
+      two: "Inserir os seguintes blocos a fim de controlar o objeto através de sensores do seu telefone. Assim, escolha a \"inclinação x e y\". Para obter o movimento apropriado, defina \"-inclinação\". Se o movimento do objeto é muito sensivel, divida a inclinação por 10, por exemplo."
     card8:
-      title: Bússola
-      description: Crie sua própria bússola
-      one: Adicione o objeto que você quer apontar na direção da bússola.
-      two: Insira os seguintes blocos a fim de definir a orientação do objeto. Além disso, inclua um loop Sempre.
+      title: "Bússola"
+      description: "Crie sua própria bússola"
+      one: "Adicione o objeto que você quer apontar na direção da bússola."
+      two: "Insira os seguintes blocos a fim de definir a orientação do objeto. Além disso, inclua um loop Sempre."
     card9:
-      title: Enviar
-      description: Envie mensagens de um objeto para outro.
-      one: Adicione um novo objeto, por exemplo, Alice, que deve enviar uma mensagem. Adicione ainda uma segunda imagem ao pano de fundo. Assim que o pano de fundo receber a mensagem mudará para sua próxima aparência.
-      two: Insira o bloco "Enviar para todos" e determine o que deve acontecer quando o outro objeto receber a mensagem.
-      three: Neste caso o pano de fundo muda quando o objeto na camada frontal é tocado.
+      title: "Enviar"
+      description: "Envie mensagens de um objeto para outro."
+      one: "Adicione um novo objeto, por exemplo, Alice, que deve enviar uma mensagem. Adicione ainda uma segunda imagem ao pano de fundo. Assim que o pano de fundo receber a mensagem mudará para sua próxima aparência."
+      two: "Insira o bloco \"Enviar para todos\" e determine o que deve acontecer quando o outro objeto receber a mensagem."
+      three: "Neste caso o pano de fundo muda quando o objeto na camada frontal é tocado."
     card10:
-      title: Mostrar variável
-      description: Mostre o valor de uma variável.
-      one: Adicione um objeto que deseja mover através dos sensores do seu telefone (ver %tutorial_card_link_7% Tutorial cartão 7 %link_end%). Além disso, adicione um segundo pano de fundo que deve mudar quando receber uma mensagem enviada.
-      two: Insira os seguintes blocos a fim de guardar em uma variável a posição atual de x e y do objeto em movimento.
-      three: Através de uma "Mostrar Variável" você pode exibir os valores no palco.
+      title: "Mostrar variável"
+      description: "Mostre o valor de uma variável."
+      one: "Adicione um objeto que deseja mover através dos sensores do seu telefone (ver %tutorial_card_link_7% Tutorial cartão 7 %link_end%). Além disso, adicione um segundo pano de fundo que deve mudar quando receber uma mensagem enviada."
+      two: "Insira os seguintes blocos a fim de guardar em uma variável a posição atual de x e y do objeto em movimento."
+      three: "Através de uma \"Mostrar Variável\" você pode exibir os valores no palco."
     card11:
-      title: Detecção de colisão
-      description: Detecta uma colisão entre dois objetos.
-      one: Adicionar dois objetos, dos quais um deve estar em movimento através de sensores do seu telefone, por exemplo, Alex (ver %tutorial_card_link_7% Tutorial cartão 7 %link_end%).
-      two: Salvar o valor atual da "posição x e y" do objeto em movimento, Alex (ver %tutorial_card_link_10% Tutorial cartão 10 %link_end%) e inserir os seguintes scripts. Continuamente, verifique se os dois objetos se sobrepõem. Se isto acontecer objeto fixo deve ser escondido neste caso.
+      title: "Detecção de colisão"
+      description: "Detecta uma colisão entre dois objetos."
+      one: "Adicionar dois objetos, dos quais um deve estar em movimento através de sensores do seu telefone, por exemplo, Alex (ver %tutorial_card_link_7% Tutorial cartão 7 %link_end%)."
+      two: "Salvar o valor atual da \"posição x e y\" do objeto em movimento, Alex (ver %tutorial_card_link_10% Tutorial cartão 10 %link_end%) e inserir os seguintes scripts. Continuamente, verifique se os dois objetos se sobrepõem. Se isto acontecer objeto fixo deve ser escondido neste caso."
     card12:
-      title: Deteção de rosto
-      description: Controle um objeto usando a deteção de rosto.
-      one: Primeiro, certifique-se que os blocos de deteção de rosto estão habilitados. Para isto, vá para as configurações.
-      two: Adicione um novo objeto e insIra os seguintes blocos a fim de mostrar se um rosto foi detectado. Verifique se um rosto é detectado e coloque isso em um loop Sempre. Se a câmera identificar um rosto o valor da variável é "VERDADEIRO", caso contrário é "FALSO".
+      title: "Deteção de rosto"
+      description: "Controle um objeto usando a deteção de rosto."
+      one: "Primeiro, certifique-se que os blocos de deteção de rosto estão habilitados. Para isto, vá para as configurações."
+      two: "Adicione um novo objeto e insIra os seguintes blocos a fim de mostrar se um rosto foi detectado. Verifique se um rosto é detectado e coloque isso em um loop Sempre. Se a câmera identificar um rosto o valor da variável é \"VERDADEIRO\", caso contrário é \"FALSO\"."
   starterPrograms:
-    title: Programas para iniciantes
-    description: Experimente estes programas para iniciantes. Olhe por dentro deles para fazer modificações e adicionar suas ideias.
+    title: "Programas para iniciantes"
+    description: "Experimente estes programas para iniciantes. Olhe por dentro deles para fazer modificações e adicionar suas ideias."
     categories:
-      games: Jogos
-      animations: Animações
-      interactive: Arte e Histórias interativas
-      music: Música e Dança
+      games: "Jogos"
+      animations: "Animações"
+      interactive: "Arte e Histórias interativas"
+      music: "Música e Dança"
   gameJam:
-    title: Como fazer o upload de um jogo do Pocket Code para o Site do Game Jolt?
-    text0: Primeiramente, parabéns pelo seu jogo! Agora, você pode carregá-lo no %link% para criar um app Android autônomo, que você pode, então, fazer o upload para o Site do Game Jolt.
-    title1: Cadastro
-    text1: Primeiro, você precisa criar uma conta. Depois disso, você pode fazer o upload do programa criado. Não se preocupe, é fácil. Você só precisa pensar em um nome de usuário e senha. Após completar ambos, clique em "Fazer Login ou Registrar". Só isso!
-    title2: Fazer upload
-    text2: 'Após o processo de registro, você pode carregar o seu jogo. É só pensar em um nome e adicionar uma descrição. Adicione também #AliceJam150 no campo de descrição.'
-    title3: Buscar por seu programa
-    text3: Vá ao seu perfil do Pocket Code, onde todos os seus programas estão listados, ou busque diretamente por o seu programa usando a pesquisa e o nome do programa.
-    title4: Criar app Android
-    text4: Você pode criar um app Android diretamente na página de detalhes do programa. Clicando em 'Preparar app', o app será construído.
-    title5: Baixar app
-    text5: Após o processo de construção, você pode baixar seu programa como um aplicativo. Este app baixado precisa ser carregado novamente direto no Site do Game Jolt para participar de %link%.
-    title6: Registro/Login em GameJolt.com
-    text6: Visite %link% e clique em "Login" ou "Registrar-se" no menu. Se você já tem uma conta, é só fazer login; se não, você precisa se registrar com um Endereço de E-mail, Nome de Usuário e Senha.
-    title7: Fazer o upload de seu jogo no Site do Game Jolt
-    text7: 'Após fazer login, vá para seu painel principal. Lá você pode adicionar seu jogo. Primeiro, você deve clicar em ''Aceitar regras''. Depois, complete as informações sobre o programa. Como Motor/Idioma/Ferramenta de Criação, escolha ''Outro''; ao campo Outro Motor/Idioma/Ferramenta, adicione ''Android''. Como status de ''Desenvolvimento'', escolha ''Finalizado/Estável''. Não se esqueça de incluir #AliceJam150 na descrição para que apareça na página %link%.'
-    text7_1: Antes que você possa publicar seu jogo, siga os passos a seguir. Você precisa adicionar ao menos uma 'imagem em miniatura', definir uma 'classificação indicativa' e fazer o upload de seus jogos clicando em 'construir/arquivos'.
-    text7_2: Clique em 'Adicionar Pacote' e preencha as informações do pacote. Salve-o e adicione a release. 
-    text7_3: Agora você pode fazer o upload do apk do seu programa. Você pode encontrar o app baixado em sua pasta de download. É bom usar um gerenciador de arquivos (por exemplo, ES File Explorer).
+    title: "Como fazer o upload de um jogo do Pocket Code para o Site do Game Jolt?"
+    text0: "Primeiramente, parabéns pelo seu jogo! Agora, você pode carregá-lo no %link% para criar um app Android autônomo, que você pode, então, fazer o upload para o Site do Game Jolt."
+    title1: "Cadastro"
+    text1: "Primeiro, você precisa criar uma conta. Depois disso, você pode fazer o upload do programa criado. Não se preocupe, é fácil. Você só precisa pensar em um nome de usuário e senha. Após completar ambos, clique em \"Fazer Login ou Registrar\". Só isso!"
+    title2: "Fazer upload"
+    text2: "Após o processo de registro, você pode carregar o seu jogo. É só pensar em um nome e adicionar uma descrição. Adicione também #AliceJam150 no campo de descrição."
+    title3: "Buscar por seu programa"
+    text3: "Vá ao seu perfil do Pocket Code, onde todos os seus programas estão listados, ou busque diretamente por o seu programa usando a pesquisa e o nome do programa."
+    title4: "Criar app Android"
+    text4: "Você pode criar um app Android diretamente na página de detalhes do programa. Clicando em 'Preparar app', o app será construído."
+    title5: "Baixar app"
+    text5: "Após o processo de construção, você pode baixar seu programa como um aplicativo. Este app baixado precisa ser carregado novamente direto no Site do Game Jolt para participar de %link%."
+    title6: "Registro/Login em GameJolt.com"
+    text6: "Visite %link% e clique em \"Login\" ou \"Registrar-se\" no menu. Se você já tem uma conta, é só fazer login; se não, você precisa se registrar com um Endereço de E-mail, Nome de Usuário e Senha."
+    title7: "Fazer o upload de seu jogo no Site do Game Jolt"
+    text7: "Após fazer login, vá para seu painel principal. Lá você pode adicionar seu jogo. Primeiro, você deve clicar em 'Aceitar regras'. Depois, complete as informações sobre o programa. Como Motor/Idioma/Ferramenta de Criação, escolha 'Outro'; ao campo Outro Motor/Idioma/Ferramenta, adicione 'Android'. Como status de 'Desenvolvimento', escolha 'Finalizado/Estável'. Não se esqueça de incluir #AliceJam150 na descrição para que apareça na página %link%."
+    text7_1: "Antes que você possa publicar seu jogo, siga os passos a seguir. Você precisa adicionar ao menos uma 'imagem em miniatura', definir uma 'classificação indicativa' e fazer o upload de seus jogos clicando em 'construir/arquivos'."
+    text7_2: "Clique em 'Adicionar Pacote' e preencha as informações do pacote. Salve-o e adicione a release. "
+    text7_3: "Agora você pode fazer o upload do apk do seu programa. Você pode encontrar o app baixado em sua pasta de download. É bom usar um gerenciador de arquivos (por exemplo, ES File Explorer)."
     text7_4: 'Nota: Se o app não contiver a terminação ''.apk'', você terá que adicionar ''.apk'' manualmente. É só renomear o arquivo. Agora você deve conseguir fazer o upload do app.'
-    text7_5: Após o upload, clique em 'OK' para publicar seu jogo. Fazendo isto, logo será mostrado um link para baixar seu jogo.
-    text7_6: Você fez o upload de seu primeiro jogo no site do Game Jolt e o definiu como ativo. Parabéns!
-    text7_7: Outras pessoas agora serão capazes de encontrar o seu jogo. Ele aparecerá na página %link%.
+    text7_5: "Após o upload, clique em 'OK' para publicar seu jogo. Fazendo isto, logo será mostrado um link para baixar seu jogo."
+    text7_6: "Você fez o upload de seu primeiro jogo no site do Game Jolt e o definiu como ativo. Parabéns!"
+    text7_7: "Outras pessoas agora serão capazes de encontrar o seu jogo. Ele aparecerá na página %link%."
   aliceGameJamTutorialcards:
-    title1: (Bem-vindo ao) País das Maravilhas
-    subtitle1: Anime Personagens e crie um evento 'ao tocar'
-    description1: "Aprenda a dar vida a uma de suas personagens de uma maneira simples e saiba como fazer suas personagens se moverem ao serem tocadas. O vídeo te mostrará como animar sua personagem facilmente usando diferentes aparências.\nMais adiante, te mostraremos como criar um evento \"ao tocar\" e como enviar mensagens entre objetos."
-    title2: Salve Alice!
-    subtitle2: Use o sensor de movimento para detectar uma colisão entre objetos
-    description2: Aqui você aprenderá como controlar uma personagem usando o sensor de movimento de seu telefone. É possível controlar os movimentos da Alice ao inclinar o seu aparelho para a esquerda ou direita. Assista ao nosso tutorial e deixe objetos caírem aleatoriamente do céu para aprender a identificar colisões entre objetos.
-    title3: O Chapeleiro - Bater e Correr
-    subtitle3: Crie uma paisagem que se mova e controle os movimentos do Chapeleiro
-    description3: Nesse tutorial, você aprenderá a criar uma paisagem que parece se mover. Faremos isso passando objetos ao longo da tela para criar a ilusão de movimento. Também te mostraremos como fazer o Chapeleiro se mover com a inclinação do seu telefone.
-    title4: O Chapeleiro - Bater e Correr
-    subtitle4: Faça o Chapeleiro atirar as cartas do mal
-    description4: Neste tutorial, te mostraremos como criar inimigos que se movam aleatoriamente em direção à sua personagem. Além disso, você aprenderá como fazer o Chapeleiro atirar gotas de chá e verificar se os inimigos foram atingidos usando a detecção de colisão.
-    title5: Acerte o Gato de Cheshire
-    subtitle5: Crie uma contagem de pontos usando variáveis
-    description5: Neste tutorial, te mostraremos como usar variáveis para criar uma contagem de pontos. Pontuações são bastante úteis em um jogo. Os pontos mostram quantas vezes você acertou o gato.
-    title6: Uma Corrida de Coelhos
-    subtitle6: Criar um fundo em movimento
-    description6: "Este tutorial te mostra como criar um fundo que se move verticalmente, deslizando os gráficos do fundo. Outra coisa que te ensinaremos é a fazer a personagem saltar à frente quando tocada.\nPara tornar o jogo um pouco mais difícil, te mostraremos como diminuir a velocidade da personagem com o tempo."
-    download: Baixar o programa
+    title1: "(Bem-vindo ao) País das Maravilhas"
+    subtitle1: "Anime Personagens e crie um evento 'ao tocar'"
+    description1: |
+      Aprenda a dar vida a uma de suas personagens de uma maneira simples e saiba como fazer suas personagens se moverem ao serem tocadas. O vídeo te mostrará como animar sua personagem facilmente usando diferentes aparências.
+      Mais adiante, te mostraremos como criar um evento "ao tocar" e como enviar mensagens entre objetos.
+    title2: "Salve Alice!"
+    subtitle2: "Use o sensor de movimento para detectar uma colisão entre objetos"
+    description2: "Aqui você aprenderá como controlar uma personagem usando o sensor de movimento de seu telefone. É possível controlar os movimentos da Alice ao inclinar o seu aparelho para a esquerda ou direita. Assista ao nosso tutorial e deixe objetos caírem aleatoriamente do céu para aprender a identificar colisões entre objetos."
+    title3: "O Chapeleiro - Bater e Correr"
+    subtitle3: "Crie uma paisagem que se mova e controle os movimentos do Chapeleiro"
+    description3: "Nesse tutorial, você aprenderá a criar uma paisagem que parece se mover. Faremos isso passando objetos ao longo da tela para criar a ilusão de movimento. Também te mostraremos como fazer o Chapeleiro se mover com a inclinação do seu telefone."
+    title4: "O Chapeleiro - Bater e Correr"
+    subtitle4: "Faça o Chapeleiro atirar as cartas do mal"
+    description4: "Neste tutorial, te mostraremos como criar inimigos que se movam aleatoriamente em direção à sua personagem. Além disso, você aprenderá como fazer o Chapeleiro atirar gotas de chá e verificar se os inimigos foram atingidos usando a detecção de colisão."
+    title5: "Acerte o Gato de Cheshire"
+    subtitle5: "Crie uma contagem de pontos usando variáveis"
+    description5: "Neste tutorial, te mostraremos como usar variáveis para criar uma contagem de pontos. Pontuações são bastante úteis em um jogo. Os pontos mostram quantas vezes você acertou o gato."
+    title6: "Uma Corrida de Coelhos"
+    subtitle6: "Criar um fundo em movimento"
+    description6: |
+      Este tutorial te mostra como criar um fundo que se move verticalmente, deslizando os gráficos do fundo. Outra coisa que te ensinaremos é a fazer a personagem saltar à frente quando tocada.
+      Para tornar o jogo um pouco mais difícil, te mostraremos como diminuir a velocidade da personagem com o tempo.
+    download: "Baixar o programa"
 oauth:
   username_header: Obrigado por registrar-se no Pocket Code!
   username_chooser: 'Por favor, escolha um nome de usuário:'
@@ -540,3 +559,17 @@ admin:
     btnDeleteBackup: Excluir backup
     createBackupConfirmationTitle: Criar arquivo de backup
     createBackupConfirmationText: Este processo pode demorar um pouco. A página recarregará logo após!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code

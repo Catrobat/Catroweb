@@ -16,14 +16,21 @@ country: Država
 loginText: prijava
 privacyPolicy: Pravilnik o zasebnosti
 imprint: Imprint
-somethingWentWrong: Ojej, nekaj ni šlo prav.
-pleaseTryAgain: Prosimo, poskusite znova!
-oldVersionError: Prosimo, posodobite na najnovejšo različico Pocket Code!
-more: več
-less: manj
+somethingWentWrong: 'Ojej, nekaj ni šlo prav.'
+pleaseTryAgain: 'Prosimo, poskusite znova!'
+oldVersionError: 'Prosimo, posodobite na najnovejšo različico Pocket Code!'
+more: 'več'
+less: 'manj'
 ok: v redu
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: 'Username or email address already in use.'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: Na ogled
   newest: Najnovejši program
@@ -35,11 +42,13 @@ programs:
   downloads: '%downloads% prenosov'
   sample: Example Programs
   views: '%views% ogledov'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Prijavi neprimerno vsebino
   languageVersion: 'Catrobat jezikovna verzija: %languageVersion%'
-  reportLoginText: 'Prosimo %login% za prijavo programa kot neprimernega.'
+  reportLoginText: Prosimo %login% za prijavo programa kot neprimernega.
   reportDialogHeader: Zakaj meniš, da je ta program neprimeren?
   reportDialogReason: Vnesite razlog
   reportOwnProgram: Ni mogoče označiti svojega programa.
@@ -56,6 +65,12 @@ programs:
   report: Prijavi
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+remixgraph:
+  by: 'by'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: Vaše geslo za Catrobat
   message: |
@@ -75,8 +90,8 @@ profile:
   secondEmail: Moj drugi email
   myPrograms: Moji programi
   form:
-    passwordTooShort: 'Novo geslo mora imeti najmanj %length% znakov.'
-    passwordTooLong: 'Novo geslo lahko ima največ %length% znakov.'
+    passwordTooShort: Novo geslo mora imeti najmanj %length% znakov.
+    passwordTooLong: Novo geslo lahko ima največ %length% znakov.
     passwordIsUsername: Geslo se mora razlikovati od uporabniškega imena.
     passwordWrong: Wrong password
     emailNotValid: Ta e-poštni naslov ni veljaven.
@@ -102,12 +117,12 @@ myprofile:
   editCountry: Edit country
   editEmail: Edit E-Mail
 licenseToPlay:
-  link: Licenca za predvajanje
+  link: 'Licenca za predvajanje'
   title: 'Dovoljenje za predvajanje - komu se lahko zahvalite in delite'
   text1: Predstavljajte si, da je vsak program na Catrobat kot torta s prav posebnim receptom (to so bloki za programiranje). Vsi člani skupnosti Catrobat delijo svoje pecivo skupaj z recepti. To pomeni, da se lahko naučite kako jih izdelati sami!
   text2: 'Ni nobenih skrivnih receptov: navodila o tem, kako narediti torte so na voljo vsakomur za uporabo, spreminjanje in navdih za nove ideje... hočem reči - torte.'
-  text3: 'Lahko kopirate recepte drugih in naredite lastne, morda z drugačnimi sestavinami. Ta svoboda je posledica dveh preprostih pogojev:'
-  text4: Pri vzpostavljanju skupnosti Catrobat smo se odločili, da sprejmemo ta pristop, saj smo prepričani, da podpira učenje in ustvarjalnost v skupnosti. Z delitvijo receptov in sestavin (skript in slik) lahko ljudje nadgrajujejo ideje drug drugega in vsi pridobijo.
+  text3: "Lahko kopirate recepte drugih in naredite lastne, morda z drugačnimi sestavinami. Ta svoboda je posledica dveh preprostih pogojev:"
+  text4: "Pri vzpostavljanju skupnosti Catrobat smo se odločili, da sprejmemo ta pristop, saj smo prepričani, da podpira učenje in ustvarjalnost v skupnosti. Z delitvijo receptov in sestavin (skript in slik) lahko ljudje nadgrajujejo ideje drug drugega in vsi pridobijo."
   text5: Na spletni strani Catrobat spodbujamo k delitvi idej in izražanju zahval za ideje. Pri vsakem programu lahko prenesete tudi izvirni scenarij za program. Če ste uporabili program in mu spremenili skripte ali slike, svetujemo, da omenite od koga ste dobili sestavine.
   text6: 'Več o pogojih uporabe spletne skupnosti Catrobat na %link-termsOfUse%.'
   list1:
@@ -116,14 +131,14 @@ licenseToPlay:
   version: Različica 1.1, 2 aprila 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
 termsOfUse:
   title: Pogoji uporabe
   headline: Dobrodošli v skupnosti Catrobat!
   text1: 'Kot del skupnosti Catrobat, imate v skupni rabi programe in ideje:'
-  text2: 'Potrebujemo vašo pomoč, da bi bila ta skupnost podporno mesto za vsakega člana. Evo, kako lahko pomagate:'
-  text3: 'S Catrobat projektom želimo spodbujati sodelovanje in omogočati ustvarjalnost vsakemu posamezniku v korist vsem. Tudi vi lahko postanete aktiven član skupnosti tako, da svoje programe vračate v skupnost kot darilo, na enak način kot drugi dejavni člani to delajo za vas:'
+  text2: "Potrebujemo vašo pomoč, da bi bila ta skupnost podporno mesto za vsakega člana. Evo, kako lahko pomagate:"
+  text3: "S Catrobat projektom želimo spodbujati sodelovanje in omogočati ustvarjalnost vsakemu posamezniku v korist vsem. Tudi vi lahko postanete aktiven član skupnosti tako, da svoje programe vračate v skupnost kot darilo, na enak način kot drugi dejavni člani to delajo za vas:"
   text4: 'Naše darilo za vas:'
   text5: 'Naše pogoje uporabe in storitev:'
   list1:
@@ -132,250 +147,249 @@ termsOfUse:
     item3: vseh ravni izkušenj
   list2:
     item1: Bodite spoštljivi. Ko delite programe v skupnosti, prosimo, upoštevajte, da jih bodo lahko videli ljudje različnih starosti in iz različnih okolij.
-    item2: 'Zahvalite se. Spreminjajte programe, ki so jih naredili drugi uporabniki, le ne pozabite se jim zahvaliti - na primer v opisu vašega programa. Prosimo, glejte odstavek s podrobnostmi o spreminjanju programov drugih uporabnikov.'
-    item3: Bodite iskreni. Ne izdajajte se za osebo za katero veste, da že obstaja. Ne slepite skupnosti.
-    item4: Ne izdajajte osebnih podatkov. Ne objavljajte e-poštnega naslova, telefonske številke ali drugih podatkov.
-    item5: 'Ohranite to spletno mesto prijazno. Če menite, da bi kak program ali komentar koga užalil, kliknite "Prijavi kot neprimerno" in pustite kratko obrazložitev. Catrobat ekipa bo pregledala vašo prijav in odstranila žaljiv program, komentar, ali objavo.'
+    item2: "Zahvalite se. Spreminjajte programe, ki so jih naredili drugi uporabniki, le ne pozabite se jim zahvaliti - na primer v opisu vašega programa. Prosimo, glejte odstavek s podrobnostmi o spreminjanju programov drugih uporabnikov."
+    item3: "Bodite iskreni. Ne izdajajte se za osebo za katero veste, da že obstaja. Ne slepite skupnosti."
+    item4: "Ne izdajajte osebnih podatkov. Ne objavljajte e-poštnega naslova, telefonske številke ali drugih podatkov."
+    item5: "Ohranite to spletno mesto prijazno. Če menite, da bi kak program ali komentar koga užalil, kliknite \"Prijavi kot neprimerno\" in pustite kratko obrazložitev. Catrobat ekipa bo pregledala vašo prijav in odstranila žaljiv program, komentar, ali objavo."
   list3:
     item1: 'Z nalaganjem programa na naše spletne strani se strinjate s tem, da bodo objavljeni pod dovoljenjem za prosto uporabo, ki velja za Catrobat skupnost. Pod podobnim dovoljenjem, pod katerim je na voljo sam sistem Catrobat, dajejo le-ta vsakomur pravico do učenja iz predhodno naloženih programov in za njihovo prilagajanje (remix) za izdelavo nove igre, animacije in drugega programa. To omogoča vsakomur, da »stoji na ramenih svojih vrstnikov«, drugi pa na vaših! Vaše delo bo tako koristilo vsem in bo na voljo podobno kot velja za Wikipedijo. Pomislite na to kot na darilo človeštvu: daš vsem, in vsi drugi, ki so svoje delo naložili na naše spletne strani dajejo vam. Tako naložen program je darilo velike vrednosti, ki jo njegov lastnik daje brezplačno, s pogojem, da boste sodelovali v skupnosti pod enakimi pogoji.'
     item2: Ni vam treba sprejeti darila; če pa ga boste, veljajo določena pravila. Prednosti teh pravil je, da se lahko učite od dela drugih in svoje nalagate na naše spletne strani. Druga korist je, da vas te licence odvezujejo odgovornosti za kakršne koli težave, ki izhajajo iz uporabe vaših programov.
-    item3: Pomemben dodatni pogoj je, da podate jasno Priznanje avtorstva vsem avtorjem, na katerih delu temelji vaše delo. Istočasno bo vaše delo cenjeno s strani drugih.
+    item3: "Pomemben dodatni pogoj je, da podate jasno Priznanje avtorstva vsem avtorjem, na katerih delu temelji vaše delo. Istočasno bo vaše delo cenjeno s strani drugih."
     item4: 'Za natančne pravne pogoje se obrnite na %link-licenseUploaded%.'
   list4:
-    item1: V uporabo ponujamo programsko opremo in vire povezane s sistemom Catrobat, npr., našo izvorno kodo, povezano z Catrobatom in vse dodatne materiale, kot so npr., slike, zvoki in besedila, zdaj in v prihodnosti pod prostim dovoljem.
+    item1: "V uporabo ponujamo programsko opremo in vire povezane s sistemom Catrobat, npr., našo izvorno kodo, povezano z Catrobatom in vse dodatne materiale, kot so npr., slike, zvoki in besedila, zdaj in v prihodnosti pod prostim dovoljem."
     item2: Te licence zagotavljajo brezplačnost Catrobata kot tudi prostost v smislu, da ga lahko prosto uporabljate, vendar z nekaj omejitvami, ki zagotavljajo, med drugim, da bo Catrobat sistem za vedno ostal prost za vsakogar.
     item3: 'Za natančne pravne pogoje se obrnite na %link-licenseToPlay%. Izvorno kodo Catrobat sistema, kot tudi mnoge druge dokumenti in viri so na voljo prek %link-developer%.'
   list5:
     item1: 'Če ste vpleteni, ali če ste stari 13 let ali manj, so vpleteni vaši starši ali skrbniki, v organizacije odgovorne za kršitev zasebnosti in/ali množični nadzor, potem ne smete uporabljati naše programske aplikacije in dostopati do naših storitev. Podrobnosti so v razdelkih 4.a in 4.b na naših %link-termsOfUse%.'
     item2: Če ste mlajši od 13 let, potem morate imeti dovoljenje staršev ali zakonitih skrbnikov za uporabo Catrobat aplikacij in storitev.
-    item3: Pridržujemo si pravico, da zavrnemo, izbrišemo ali skrijemo programe, uporabniške račune, in vse digitalno gradivo naloženo na spletne strani Catrobat v vsakem trenutku, po naši lastni presoji, za primer, če bi ugotovili, da program vsebuje neprimeren material ali uporabnik krši pravice drugih oseb.
-    item4: Vsa programska oprema in Internetni viri so na voljo v upanju, da bodo uporabni, vendar brez garancije.
+    item3: "Pridržujemo si pravico, da zavrnemo, izbrišemo ali skrijemo programe, uporabniške račune, in vse digitalno gradivo naloženo na spletne strani Catrobat v vsakem trenutku, po naši lastni presoji, za primer, če bi ugotovili, da program vsebuje neprimeren material ali uporabnik krši pravice drugih oseb."
+    item4: "Vsa programska oprema in Internetni viri so na voljo v upanju, da bodo uporabni, vendar brez garancije."
     item5: 'Za natančne formulacije zgornjih točk ter nekaj dodatnih pravnih pravil in pogojev, se obrnite na naše %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.'
   bottom1: Preverite to stran od časa do časa, saj se vedno trudimo za izboljšavo naših pogojev uporabe.
   bottom2: 'Prosimo, da se za dodatne informacije glede pogojev uporabe obrnete na %email-webmaster%.'
   version: Različici 1.3, 4 marec 2014
 help:
   stepByStep:
-    title: 'Uvod "Korak za korakom"'
-    start: 'Začetni položaj:'
+    title: "Uvod \"Korak za korakom\""
+    start: "Začetni položaj:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Naredite nov program
+      title: 'Naredite nov program'
       detail:
         text1: 'Tapnite na "Nov".'
         text2: 'Vnesite ime programa in izberite "Ustvari prazen program" ter tapnite "V redu".'
     step2:
-      title: Ustvarite nov predmet
+      title: "Ustvarite nov predmet"
       detail:
         text1: 'Tapnite:'
-        text2: Kako naj sprva izgleda nov predmet.
-        text3: Vnesite ime predmeta in tapnite »V redu«, če želite ustvariti predmet.
-        special1: Narišite novo podobo.
-        special2: Izberite iz galerije.
-        special3: Fotografirajte.
+        text2: 'Kako naj sprva izgleda nov predmet.'
+        text3: 'Vnesite ime predmeta in tapnite »V redu«, če želite ustvariti predmet.'
+        special1: 'Narišite novo podobo.'
+        special2: 'Izberite iz galerije.'
+        special3: 'Fotografirajte.'
     step3:
-      title: Začni s premikanjem
+      title: "Začni s premikanjem"
       detail:
         text1: 'Tapnite:'
         text2: 'Prvi blok, ki ga bomo uporabili, je iz razdelka "Premikanje".'
         text3: 'Izberite blok "Drsi". Predmet bo drsel do položaja navedenega v tem bloku.'
-        text4: Blok zdaj lebdi. Prilepite ga tako, da ga postavite na želeno mesto. Že postavljen blok lahko prestavite tako, da tapkate nanj, dokler ne začne lebdeti.
+        text4: 'Blok zdaj lebdi. Prilepite ga tako, da ga postavite na želeno mesto. Že postavljen blok lahko prestavite tako, da tapkate nanj, dokler ne začne lebdeti.'
         text5: 'Tapnite "Predvajaj" (ang.: "Play") za ogled delovanja programa.'
         text6: 'Z Androidovim gumbom "Nazaj" se vrnete nazaj k programiranju.'
     step4:
-      title: Sprememba videza
-      description: Videz predmeta se lahko spreminja.
+      title: "Sprememba videza"
+      description: "Videz predmeta se lahko spreminja."
       detail:
         text1: 'Izberite blok "Uporabi videz". S tem blokom lahko predmetom izberete videz ali ustvarite novega.'
         text2: 'Pripni ta blok pod blok "Drsi".'
-        text3: S spustnim poljem ustvarite nov videz.
-        text4: Izberite vir slike tako kot prej.
-        text5: Zdaj morate izbrati novo sliko.
+        text3: 'S spustnim poljem ustvarite nov videz.'
+        text4: 'Izberite vir slike tako kot prej.'
+        text5: 'Zdaj morate izbrati novo sliko.'
         text6: 'Tapnite "Predvajaj" za ogled delovanja.'
     step5:
-      title: Govori
-      description: Sedaj se boste naučili kako predmet spregovori.
+      title: "Govori"
+      description: "Sedaj se boste naučili kako predmet spregovori."
       detail:
         text1: 'Izberite blok "Reci" (ang.: "Speak"). Predmet bo izgovoril besedilo, ko bo na vrsti ta blok.'
         text2: 'Postavi ta blok pod blok "Nastavi videz na" (ang.:"Switch to look").'
         text3: 'Tapnite "Predvajaj" za ogled delovanja.'
     step6:
-      title: Znova in znova
-      description: Ta korak vam pokaže, kako dosežete, da se določeni ukazi večkrat ponavljajo.
+      title: 'Znova in znova'
+      description: "Ta korak vam pokaže, kako dosežete, da se določeni ukazi večkrat ponavljajo."
       detail:
         text1: 'Izberite blok "Ponavljaj (ves čas" (ang.: "Forever"). Vse, kar je v taki zanki, se ves čas ponavlja.'
         text2: 'Pod blok "ko se požene" dodaj blok "Ponavljaj".'
         text3: 'Dodaj še en blok "Drsi".'
         text4: 'Pripni "Drsi" tik nad "Konec zanke".'
-        text5: Tapnite besedilno polje x in y in nastavite na 0.
+        text5: 'Tapnite besedilno polje x in y in nastavite na 0.'
         text6: 'Tapnite "Predvajaj" za ogled delovanja.'
     step7:
-      title: Vse je v dotiku
-      description: Obnašanje predmeta lahko nadzorujete tudi medtem, ko se program že izvaja na odru.
+      title: "Vse je v dotiku"
+      description: 'Obnašanje predmeta lahko nadzorujete tudi medtem, ko se program že izvaja na odru.'
       detail:
         text1: 'Izberite blok "Ko je tapnjen". Vse, kar bo pod tem blokom, se bo izvršilo vsakič, ko boste tapnili predmet.'
         text2: 'Postavite blok "Ko je tapnjen" pod ostale bloke.'
         text3: 'Izberite "Obrni se desno". Ta blok zdaj dajte pod "Ko je tapnjen".'
-        text4: Zdaj imate ta skript.
+        text4: 'Zdaj imate ta skript.'
         text5: 'Tapnite "Predvajaj" za ogled delovanja na odru.'
     step8:
-      title: Kopiranje, brisanje ali urejanje blokov
+      title: "Kopiranje, brisanje ali urejanje blokov"
       detail:
-        text1: Enojni tap na levi strani vsakega bloka odpre Kontekstni meni. Tako lahko premikiate, kopirate, brišete ali z urejevalnikom formul urejate vrednosti v blokih.
+        text1: 'Enojni tap na levi strani vsakega bloka odpre Kontekstni meni. Tako lahko premikiate, kopirate, brišete ali z urejevalnikom formul urejate vrednosti v blokih.'
     step9:
-      title: Navigacija v app-ih
+      title: "Navigacija v app-ih"
       detail:
         text1: 'Uporabite Androidov gumb "Nazaj" za navigacijo v app-ih.'
-        text2: Vrnite se nazaj za en zaslon za ogled predmeta. Tu lahko za predmet izberete skripte, videze in zvoke ter jih kopirate, dodajate ali jih brišete.
+        text2: 'Vrnite se nazaj za en zaslon za ogled predmeta. Tu lahko za predmet izberete skripte, videze in zvoke ter jih kopirate, dodajate ali jih brišete.'
         text3: 'S ponovnim klikom na Androidov gumb "Nazaj" se odpre pregled vseh predmetov in ozadij, ki jih imate trenutno v programu.'
     step10:
-      title: Spreminjanje ozadja
-      description: To je pregled vseh predmetov in ozadij, ki jih imate trenutno v programu.
+      title: "Spreminjanje ozadja"
+      description: "To je pregled vseh predmetov in ozadij, ki jih imate trenutno v programu."
       detail:
-        text1: Ozadje je kot predmet, ampak lahko imate le eno ozadje.
-        text2: Tudi ozadju lahko dodate skripte, zvoke in videze.
+        text1: 'Ozadje je kot predmet, ampak lahko imate le eno ozadje.'
+        text2: 'Tudi ozadju lahko dodate skripte, zvoke in videze.'
     step11:
-      title: Glavni meni
-      description: 'Z Androidovom "Nazaj" pridete na ta zaslon.'
+      title: "Glavni meni"
+      description: "Z Androidovom \"Nazaj\" pridete na ta zaslon."
       detail:
-        text1: Nadaljujte s trenutno odprtim programom.
-        text2: Dodaj nov program.
-        text3: Oglejte si vse vaše lokalne programe.
-        text4: Pojdite na stran za pomoč in razpravljajte z drugimi uporabniki.
-        text5: Raziščite svet programov na Pocket Code. Snemite na svojo napravo ali remiksajte programe, ki so vam všeč.
-        text6: Prenesite program, ki je trenutno odprt.
+        text1: 'Nadaljujte s trenutno odprtim programom.'
+        text2: 'Dodaj nov program.'
+        text3: 'Oglejte si vse vaše lokalne programe.'
+        text4: 'Pojdite na stran za pomoč in razpravljajte z drugimi uporabniki.'
+        text5: 'Raziščite svet programov na Pocket Code. Snemite na svojo napravo ali remiksajte programe, ki so vam všeč.'
+        text6: 'Prenesite program, ki je trenutno odprt.'
   tutorialcards:
-    title: Vaje
-    description1: Vaje vam pokažejo, kako učinkovito uporabljati trike v
-    getReady: 'Pripravite se:'
-    tryCode: 'Poskusite to kodo:'
-    doIt: 'Naredite to:'
-    tip: 'Poseben namig:'
+    title: "Vaje"
+    description1: "Vaje vam pokažejo, kako učinkovito uporabljati trike v"
+    getReady: "Pripravite se:"
+    tryCode: "Poskusite to kodo:"
+    doIt: "Naredite to:"
+    tip: "Poseben namig:"
     card1:
-      title: Spremeni velikost
-      description: Tapnite raco za spremembo velikosti.
-      one: Add the object of which you would like to change the size, e.g. Animal.
+      title: "Spremeni velikost"
+      description: "Tapnite raco za spremembo velikosti."
+      one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: Sprememba videza
-      description: Uporabite ta trik za samodejno štetje.
-      one: Add the object of which you would like to change its look, e.g. items.
+      title: "Sprememba videza"
+      description: "Uporabite ta trik za samodejno štetje."
+      one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Animacije gibanja
-      description: Uporabite ta trik, ko želite, da papiga poleti.
-      one: Add the object you want to be moving.
+      title: "Animacije gibanja"
+      description: "Uporabite ta trik, ko želite, da papiga poleti."
+      one: "Add the object you want to be moving."
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Drsni
-      description: Gladko drsi od ene točke do druge.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      title: "Drsni"
+      description: "Gladko drsi od ene točke do druge."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "Insert the following bricks and define the area in which the movement should happen."
     card5:
-      title: Predvajaj zvok
-      description: Tapnite boben za predvajanje taga zvoka.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      title: "Predvajaj zvok"
+      description: "Tapnite boben za predvajanje taga zvoka."
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: Recite kaj
-      description: Uporabite to kodo, da bo predmet govoril.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      title: "Recite kaj"
+      description: "Uporabite to kodo, da bo predmet govoril."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: GSensor
-      description: Uporabite ta trik za upravljanje predmeta z naklonom vaše naprave.
-      one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      title: "GSensor"
+      description: "Uporabite ta trik za upravljanje predmeta z naklonom vaše naprave."
+      one: "Add the object you want to be moving on stage."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: Kompas
-      description: Uporabite to kodo za izdelavo kompasa.
-      one: Add the object you want to point in compass direction.
+      title: "Kompas"
+      description: "Uporabite to kodo za izdelavo kompasa."
+      one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Oddaja
-      description: Oglejte si to kodo! Pokazala vam bo kako lahko predmeti pošiljajo sporočila.
+      title: "Oddaja"
+      description: "Oglejte si to kodo! Pokazala vam bo kako lahko predmeti pošiljajo sporočila."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: Pokaži spremenljivko
-      description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      title: "Pokaži spremenljivko"
+      description: "Show the value of a variable."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: "Collision detection"
+      description: "Detect a collision between two objects."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: "Face detection"
+      description: "Control an object by using face detection."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: Začetniški programi
-    description: Preizkusite začetniške programe. Oglejte si notranjost in vnesite v programe lastne ideje.
+    title: "Začetniški programi"
+    description: "Preizkusite začetniške programe. Oglejte si notranjost in vnesite v programe lastne ideje."
     categories:
-      games: Igre
-      animations: Animacije
-      interactive: Interaktivna umetnost in pripovedovanje zgodb
-      music: Glasba in ples
+      games: "Igre"
+      animations: "Animacije"
+      interactive: "Interaktivna umetnost in pripovedovanje zgodb"
+      music: "Glasba in ples"
   gameJam:
-    title: Kako svojo igro naložite na Game Jolt Site?
-    text0: 'Čestitamo za izdelavo vaše lastne igre! Lahko jo naložite na %link% s čimer ustvarite samostojno Android aplikacijo, ki jo nato lahko naložite na Game Jolt.'
-    title1: Registracija
-    text1: 'Najprej boste morali ustvariti račun. Po tem lahko naložite ustvarjen program. Ne skrbite, to je enostavno, potrebujete le uporabniško ime in geslo. Ko izpolnite oba, kliknite na "Prijava ali registracija". To je to!'
-    title2: Upload
-    text2: 'Po postopku registracije lahko naložite vašo igro. Izmislite si ime zanjo in dodajte še opis. Dodajte tudi #AliceJam150 v polje Opis.'
-    title3: Poiščite svoj program
-    text3: Pojdite na vaš profil na Pocket Code, kjer so navedeni vsi vaši programi ali pa poiščite program z uporabo iskanja po imenu programa.
-    title4: Ustvarite Android app
-    text4: 'Neposredno na strani s podrobnostmi o programu lahko ustvarite Android app. S klikom na "Prepare app" se bo izdelala vaša aplikacija.'
-    title5: Snemi aplikacijo
-    text5: 'Po izdelavi si lahko program prenesete kot aplikacijo, ki jo ponovno naložite neposredno na Game Jolt, če želite sodelovati v %link%.'
-    title6: Registracija/prijava na GameJolt.com
-    text6: 'Obiščite %link% in kliknite na "Prijava" ali "Sign Up!" v meniju. Če že imate račun, se prijavite, če ne, se registrirajte.'
-    title7: Naložite svojo igro na spletno stran Game Jolt
-    text7: |-
-      Ko ste prijavljeni, pojdite na armaturno ploščo. Tam lahko dodate svojo igro. Najprej morate klikniti na "Sprejmi pravila". Nato izpolnite informacije o igri. Kot orodje za ustvarjanje/jezik izberite "Other" in vstavite tja "Android". Kot "Development' status izberite 'Finished/Stable'. Poskrbite, da v opisu vsebuje tudi #AliceJam150 zato, da se bo pojavil na %link%.
-    text7_1: Preden objavite svojo igro, sledijo naslednji koraki. Morate dodati vsaj predogledno sličico (thumbnail) in določiti ‘maturity rating’, Nato naložite vaše igre s klikom na ‘build/files’.
-    text7_2: 'Kliknite na ‘Add Package’ in vnesite informacijo. Shranite in vnesite izdajo. '
-    text7_3: Zdaj si lahko naložite apk vašega programa. Prenesešeno aplikacijo boste našli v svoji mapi prenosov.
+    title: "Kako svojo igro naložite na Game Jolt Site?"
+    text0: "Čestitamo za izdelavo vaše lastne igre! Lahko jo naložite na %link% s čimer ustvarite samostojno Android aplikacijo, ki jo nato lahko naložite na Game Jolt."
+    title1: "Registracija"
+    text1: "Najprej boste morali ustvariti račun. Po tem lahko naložite ustvarjen program. Ne skrbite, to je enostavno, potrebujete le uporabniško ime in geslo. Ko izpolnite oba, kliknite na \"Prijava ali registracija\". To je to!"
+    title2: "Upload"
+    text2: "Po postopku registracije lahko naložite vašo igro. Izmislite si ime zanjo in dodajte še opis. Dodajte tudi #AliceJam150 v polje Opis."
+    title3: "Poiščite svoj program"
+    text3: "Pojdite na vaš profil na Pocket Code, kjer so navedeni vsi vaši programi ali pa poiščite program z uporabo iskanja po imenu programa."
+    title4: "Ustvarite Android app"
+    text4: "Neposredno na strani s podrobnostmi o programu lahko ustvarite Android app. S klikom na \"Prepare app\" se bo izdelala vaša aplikacija."
+    title5: "Snemi aplikacijo"
+    text5: "Po izdelavi si lahko program prenesete kot aplikacijo, ki jo ponovno naložite neposredno na Game Jolt, če želite sodelovati v %link%."
+    title6: "Registracija/prijava na GameJolt.com"
+    text6: "Obiščite %link% in kliknite na \"Prijava\" ali \"Sign Up!\" v meniju. Če že imate račun, se prijavite, če ne, se registrirajte."
+    title7: "Naložite svojo igro na spletno stran Game Jolt"
+    text7: "Ko ste prijavljeni, pojdite na armaturno ploščo. Tam lahko dodate svojo igro. Najprej morate klikniti na \"Sprejmi pravila\". Nato izpolnite informacije o igri. Kot orodje za ustvarjanje/jezik izberite \"Other\" in vstavite tja \"Android\". Kot \"Development' status izberite 'Finished/Stable'. Poskrbite, da v opisu vsebuje tudi #AliceJam150 zato, da se bo pojavil na %link%."
+    text7_1: "Preden objavite svojo igro, sledijo naslednji koraki. Morate dodati vsaj predogledno sličico (thumbnail) in določiti ‘maturity rating’, Nato naložite vaše igre s klikom na ‘build/files’."
+    text7_2: "Kliknite na ‘Add Package’ in vnesite informacijo. Shranite in vnesite izdajo. "
+    text7_3: "Zdaj si lahko naložite apk vašega programa. Prenesešeno aplikacijo boste našli v svoji mapi prenosov."
     text7_4: 'Opomba: Če manjka pripona ".apk", jo morate dodati ročno tako, da izberete preimenovanje in jo vnesete. Potem jo lahko naložite.'
-    text7_5: Po nalaganju, kliknite OK, če želite objaviti svojo igro. Drugi bodo lahko sneli vašo igro na svojo naprovo prek povezave.
-    text7_6: Zdaj ste naložili vašo prvo igro na Game Jolt. Čestitamo!
-    text7_7: 'Drugi lahko zdaj najdejo vašo igro, ki se bo prikazala na strani %link%.'
+    text7_5: "Po nalaganju, kliknite OK, če želite objaviti svojo igro. Drugi bodo lahko sneli vašo igro na svojo naprovo prek povezave."
+    text7_6: "Zdaj ste naložili vašo prvo igro na Game Jolt. Čestitamo!"
+    text7_7: "Drugi lahko zdaj najdejo vašo igro, ki se bo prikazala na strani %link%."
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
+    title1: "(Welcome to) Wonderland"
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
+    title2: "Save Alice!"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
+    title3: "The Hatter - Hit and Run"
     subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
+    title4: "The Hatter - Hit and Run"
+    subtitle4: "Let the Hatter shoot the evil cards"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "Create a score by using variables"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "Create a moving background"
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: "Download the program"
 oauth:
   username_header: Hvala, ker ste se vpisali v Pocket Code!
   username_chooser: 'Izberi uporabniško ime:'
@@ -385,7 +399,7 @@ search:
   dotdotdot: Iskanje...
   search: Išči
   results: Rezultati iskanja
-  resultcount: 'Našel sem %count% zadetkov'
+  resultcount: Našel sem %count% zadetkov
 menu:
   profile: Moj profil
   logout: Odjavi se
@@ -403,9 +417,9 @@ login:
   or: OR
 apk:
   download: Snemite kot aplikacijo
-  prepare: Pripravi app
-  preparing: Priprava poteka
-  text: To lahko traja nekaj časa
+  prepare: 'Pripravi app'
+  preparing: 'Priprava poteka'
+  text: 'To lahko traja nekaj časa'
 errors:
   username:
     blank: Uporabniško ime ne sme biti prazno
@@ -427,9 +441,9 @@ errors:
   id:
     blank: Open ID preverjanje pristnosti ne sme biti prazno
   login: Uporabniško ime ali geslo je napačno.
-  post-data: 'POST - podatki niso pravilni ali pa manjkajo!'
+  post-data: POST - podatki niso pravilni ali pa manjkajo!
   checksum:
-    missing: 'Client ni poslal fileChecksum! Ali uporabljate zastarelo verzijo aplikacije "Pocket Code"?'
+    missing: Client ni poslal fileChecksum! Ali uporabljate zastarelo verzijo aplikacije "Pocket Code"?
     invalid: neveljaven checksum
   xml:
     invalid: Neveljaven code xml
@@ -445,9 +459,9 @@ errors:
   program:
     invalid: Neveljaven program.
   languageversion:
-    tooold: Ta program žal vsebuje staro verzijo Catrobatovega jezika! Ali uporabljate najnovejšo različico Pocket Code?
+    tooold: 'Ta program žal vsebuje staro verzijo Catrobatovega jezika! Ali uporabljate najnovejšo različico Pocket Code?'
   programversion:
-    tooold: Žal, uporabljate staro različico. Prosimo, posodobite jo z najnovejšo različico.
+    tooold: 'Žal, uporabljate staro različico. Prosimo, posodobite jo z najnovejšo različico.'
 success:
   registration: Registracija uspešna!
   token: v redu
@@ -510,8 +524,8 @@ ci:
   download: Snemi Apk na svoj računalnik
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: be aware
     subheader: You can only submit your own programs
@@ -540,3 +554,17 @@ admin:
     btnDeleteBackup: Delete backup
     createBackupConfirmationTitle: Create backup file
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code

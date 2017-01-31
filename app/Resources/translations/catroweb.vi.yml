@@ -16,14 +16,21 @@ country: Quốc gia
 loginText: Đăng nhập
 privacyPolicy: Chính sách bảo mật
 imprint: Nhà xuất bản
-somethingWentWrong: Thao tác sai.
-pleaseTryAgain: Làm ơn hãy thử lại!
-oldVersionError: Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!
-more: hơn/thêm/nhiều hơn
-less: ít hơn
+somethingWentWrong: 'Thao tác sai.'
+pleaseTryAgain: 'Làm ơn hãy thử lại!'
+oldVersionError: 'Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!'
+more: 'hơn/thêm/nhiều hơn'
+less: 'ít hơn'
 ok: Đồng ý
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: Username or email address already in use.
+registrationError: 'Username or email address already in use.'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: Nổi bật
   newest: Chương trình mới nhất
@@ -35,11 +42,13 @@ programs:
   downloads: '%downloads% Tải về'
   sample: Example Programs
   views: '%views% Lượng xem'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Báo cáo không hợp lệ
-  languageVersion: 'Ngôn ngữ phiên bản Catrobat %languageVersion%'
-  reportLoginText: 'Làm ơn %login% hãy báo cáo chương trình này là không hợp lệ.'
+  languageVersion: Ngôn ngữ phiên bản Catrobat %languageVersion%
+  reportLoginText: Làm ơn %login% hãy báo cáo chương trình này là không hợp lệ.
   reportDialogHeader: Tại sao bạn nghĩ chương trình này không hợp lệ?
   reportDialogReason: Nhập lý do
   reportOwnProgram: Bạn không thể đánh dấu chương trình của chính bạn.
@@ -56,6 +65,12 @@ programs:
   report: Báo cáo
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+remixgraph:
+  by: 'bởi'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
@@ -78,8 +93,8 @@ profile:
   secondEmail: Email thứ hai của tôi
   myPrograms: Chương trình của tôi
   form:
-    passwordTooShort: 'Mật khẩu mới phải có ít nhất %length% kí tự.'
-    passwordTooLong: 'Mật khẩu mới có nhiều nhất %length% kí tự.'
+    passwordTooShort: Mật khẩu mới phải có ít nhất %length% kí tự.
+    passwordTooLong: Mật khẩu mới có nhiều nhất %length% kí tự.
     passwordIsUsername: Mật khẩu phải khác với tên đăng nhập.
     passwordWrong: Wrong password
     emailNotValid: Địa chỉ email này không phù hợp.
@@ -105,12 +120,12 @@ myprofile:
   editCountry: Edit country
   editEmail: Edit E-Mail
 licenseToPlay:
-  link: Giấy phép để chơi
+  link: 'Giấy phép để chơi'
   title: 'Giấy phép để chơi - cung cấp bản quyền và chia sẻ'
   text1: Hãy tưởng tượng rằng mỗi chương trình Catrobat là một chiếc bánh, một chiếc bánh rất đặc biệt đi kèm với công thức của nó (lập trình khối). Tất cả thành viên của cộng đồng Catrobat chia sẻ chiếc bánh cùng với công thức nấu ăn của họ. Điều này có nghĩa rằng bạn có thể thưởng thức các loại bánh và học cahcs làm thế nào để làm một chiếc bánh cho chính mình!
   text2: 'Không có bất kỳ công thức nấu ăn bí mật nào: hướng dẫn để làm các loại bánh được mở cho bất cứ ai sử dụng, tái sử dụng, sửa đổi, và phục vụ như là nguồn cảm hứng cho những ý tưởng mới... Ý tôi là bánh.'
-  text3: 'Bạn có thể ăn các loại bánh, cũng như sao chép công thức nấu ăn của người khác để làm một chiếc cho riêng bạn, có lẽ với các thành phần khác. Sự tự do này đi kèm với hai yêu cầu đơn giản:'
-  text4: Trong việc thiết lập cộng đồng Catrobat, chúng tôi đã quyết định áp dụng phương pháp này kể từ khi chúng tôi tin rằng nó sẽ hỗ trợ quá trình học tập và sáng tạo trong cộng đồng. Bằng cách chia sẻ công thức nấu ăn và các nguyên liệu (tập lệnh và hình ảnh), người sử dụng có thể xây dựng dựa trên ý tưởng của nhau và tất cả mọi người sẽ được hưởng lợi.
+  text3: "Bạn có thể ăn các loại bánh, cũng như sao chép công thức nấu ăn của người khác để làm một chiếc cho riêng bạn, có lẽ với các thành phần khác. Sự tự do này đi kèm với hai yêu cầu đơn giản:"
+  text4: "Trong việc thiết lập cộng đồng Catrobat, chúng tôi đã quyết định áp dụng phương pháp này kể từ khi chúng tôi tin rằng nó sẽ hỗ trợ quá trình học tập và sáng tạo trong cộng đồng. Bằng cách chia sẻ công thức nấu ăn và các nguyên liệu (tập lệnh và hình ảnh), người sử dụng có thể xây dựng dựa trên ý tưởng của nhau và tất cả mọi người sẽ được hưởng lợi."
   text5: Trong việc thiết kế trang web Catrobat, chúng tôi bao gồm các tính năng để khuyến khích mọi người chia sẻ và cung cấp bản quyền cho người khác. Trên mỗi trang chương trình, bạn luôn có thể tải về các tập lệnh cho chương trình. Nếu bạn phối lại một chương trình (sửa đổi tập lệnh hoặc hình ảnh, và chia sẻ kết quả), chúng tôi khuyến khích bạn hãy cung cấp bản quyền trong Chương Trình Ghi Chú, nhắc đến người và chương trình đã truyền cảm hứng cho bạn.
   text6: 'Tìm hiểu thêm về các điều khoản sử dụng của cộng đồng trực tuyến Catrobat trên %link-termsOfUse%.'
   list1:
@@ -119,14 +134,14 @@ licenseToPlay:
   version: Phiên bản 1.1, ngày 2 tháng 4 năm 2013
 teachers:
   login:
-    title: Teachers area
-    description: This area can be used by teachers.
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
 termsOfUse:
   title: Điều khoản sử dụng
   headline: Chào mừng đến với cộng đồng Catrobat!
   text1: 'Là một phần của cộng đồng Catrobat, bạn đang chia sẻ chương trình và ý tưởng với mọi người:'
-  text2: 'Chúng tôi cần sự giúp đỡ của bạn để làm cho cộng đồng này thành một nơi hỗ trợ cho mọi thành viên. Dưới đây là cách bạn có thể giúp:'
-  text3: 'Thông qua dự án Catrobat chúng tôi muốn thúc đẩy hợp tác và cho phép kết hợp sự sáng tạo của tất cả mọi người để vì lợi ích của nhân loại. Bạn cũng có thể trở thành một thành viên tích cực của cộng đồng Catrobat bằng cách đưa chương trình của bạn cho cộng đồng như một món quà, theo cùng một cách như các thành viên hoạt động khác đang chương trình của họ cho bạn:'
+  text2: "Chúng tôi cần sự giúp đỡ của bạn để làm cho cộng đồng này thành một nơi hỗ trợ cho mọi thành viên. Dưới đây là cách bạn có thể giúp:"
+  text3: "Thông qua dự án Catrobat chúng tôi muốn thúc đẩy hợp tác và cho phép kết hợp sự sáng tạo của tất cả mọi người để vì lợi ích của nhân loại. Bạn cũng có thể trở thành một thành viên tích cực của cộng đồng Catrobat bằng cách đưa chương trình của bạn cho cộng đồng như một món quà, theo cùng một cách như các thành viên hoạt động khác đang chương trình của họ cho bạn:"
   text4: 'Món quà của chúng tôi cho bạn:'
   text5: 'Điều khoản sử dụng và dịch vụ của chúng tôi:'
   list1:
@@ -135,249 +150,249 @@ termsOfUse:
     item3: với tất cả các cấp kinh nghiệm
   list2:
     item1: Hãy tôn trọng. Khi chia sẻ chương trình, hãy nhớ rằng nhiều người với lứa tuổi và nguồn gốc khác nhau sẽ ghi nhận sự đóng góp của bạn.
-    item2: 'Cung cấp sự ghi nhận. Hãy cảm nhận sự tự do khi tạo các phiên bản sửa đổi chương trình của người khác - chỉ cần đảm bảo bạn sẽ cung cấp bản quyền cho đóng góp của họ. Một nơi để cung cấp bản quyền là trong mô tả chương trình của bạn. Xin vui lòng xem đoạn văn dưới danh sách này để biết thêm chi tiết về việc sửa đổi chương trình của người dùng khác.'
-    item3: Hãy trung thực. Đừng giả vờ là bất cứ ai ngoài chính bạn hoặc cố gắng để lừa dối cộng đồng.
-    item4: Giữ thông tin cá nhân riêng tư. Đừng chia sẻ địa chỉ email, số điện thoại hoặc thông tin liên lạc cá nhân khác.
+    item2: "Cung cấp sự ghi nhận. Hãy cảm nhận sự tự do khi tạo các phiên bản sửa đổi chương trình của người khác - chỉ cần đảm bảo bạn sẽ cung cấp bản quyền cho đóng góp của họ. Một nơi để cung cấp bản quyền là trong mô tả chương trình của bạn. Xin vui lòng xem đoạn văn dưới danh sách này để biết thêm chi tiết về việc sửa đổi chương trình của người dùng khác."
+    item3: "Hãy trung thực. Đừng giả vờ là bất cứ ai ngoài chính bạn hoặc cố gắng để lừa dối cộng đồng."
+    item4: "Giữ thông tin cá nhân riêng tư. Đừng chia sẻ địa chỉ email, số điện thoại hoặc thông tin liên lạc cá nhân khác."
     item5: "Giúp giữ cho trang web thân thiện. Nếu bạn cảm thấy một chương trình hoặc nhận xét có ý đồ xấu, lăng mạ, quá bạo lực, hoặc bằng cách khác không phù hợp, chỉ cần nhấp vào nút 'báo cáo không thích hợp' và để lại một lời giải thích ngắn. Đội ngũ Catrobat sẽ xem xét báo cáo của bạn và có thể loại bỏ chương trình, bình luận, hoặc niêm yết."
   list3:
-    item1: "Bằng cách tải lên một chương trình lên trang web của chúng tôi, bạn chấp nhận và đồng ý cho việc làm này với bản quyền miễn phí trên chương trình Catrobat. Tương tự như bản quyền miễn phí mà theo đó hệ thống Catrobat luôn sẵn sàng cho bạn, các bản quyền miễn phí này sẽ cung cấp cho tất cả mọi người quyền để học hỏi từ công việc trước đó tải lên bởi những người khác và chỉnh sửa công việc đó để xây dựng các trò chơi hấp dẫn mới, hình ảnh động, và các chương trình khác của riêng của họ. Điều này cho phép tất cả mọi người 'dựa vào vai nhau', một trong số họ là bạn! Công việc của bạn do đó sẽ mang lại lợi ích trên toàn thế giới và vẫn miễn phí cho tất cả mọi người sử dụng, một chút tương tự với văn bản và hình ảnh tự do trên Wikipedia của tình nguyện viên từ khắp nơi trên thế giới. Hãy suy nghĩ nó như là món quà của bạn tới nhân loại: bạn cung cấp cho tất cả mọi người, và những người khác tải lên công việc của họ cho bạn trên trang web của chúng tôi. Do đó một chương trình được tải lên là một món quà của giá trị tuyệt vời mà chủ nhân của nó cho bạn miễn phí, với điều kiện bạn tham gia vào cộng đồng và làm điều tương tự."
+    item1: 'Bằng cách tải lên một chương trình lên trang web của chúng tôi, bạn chấp nhận và đồng ý cho việc làm này với bản quyền miễn phí trên chương trình Catrobat. Tương tự như bản quyền miễn phí mà theo đó hệ thống Catrobat luôn sẵn sàng cho bạn, các bản quyền miễn phí này sẽ cung cấp cho tất cả mọi người quyền để học hỏi từ công việc trước đó tải lên bởi những người khác và chỉnh sửa công việc đó để xây dựng các trò chơi hấp dẫn mới, hình ảnh động, và các chương trình khác của riêng của họ. Điều này cho phép tất cả mọi người ''dựa vào vai nhau'', một trong số họ là bạn! Công việc của bạn do đó sẽ mang lại lợi ích trên toàn thế giới và vẫn miễn phí cho tất cả mọi người sử dụng, một chút tương tự với văn bản và hình ảnh tự do trên Wikipedia của tình nguyện viên từ khắp nơi trên thế giới. Hãy suy nghĩ nó như là món quà của bạn tới nhân loại: bạn cung cấp cho tất cả mọi người, và những người khác tải lên công việc của họ cho bạn trên trang web của chúng tôi. Do đó một chương trình được tải lên là một món quà của giá trị tuyệt vời mà chủ nhân của nó cho bạn miễn phí, với điều kiện bạn tham gia vào cộng đồng và làm điều tương tự.'
     item2: Bạn không cần phải chấp nhận món quà; nhưng nếu bạn muốn, một số quy định áp dụng. Những lợi ích của quy định này là bạn có thể học hỏi từ công việc, và xây dựng dựa trên nó để tạo ra công cụ tuyệt vời của chính mình, cái mà bạn sau đó có thể, ví dụ như, tải lên trang web của chúng tôi như là của riêng bạn. Một lợi ích khác là với bản quyền này chắc chắn rằng bạn không phải chịu trách nhiệm về bất kỳ vấn đề phát sinh với những người khác thông qua việc họ sử dụng chương trình của bạn.
-    item3: Một trong những điều kiện quan trọng bổ sung là bạn rõ ràng đã đóng góp tới những tác giả, người đã làm việc dựa trên tác phẩm của riêng bạn. Cùng lúc đó, chúng tôi sẽ làm việc chăm chỉ để những công việc, đóng góp của bạn sẽ được trân trọng bởi những người dùng khác, bằng cách tự do lựa chọn cho mình một cái tên độc nhất sẽ đại diện cho bạn trong cộng đồng của Catrobat, và bằng cách cho những người khác cơ hội để thể hiện lòng biết ơn của họ tới bạn một cách công khai khi mà bạn cống hiến công việc của bạn để tất cả mọi người, và đặc biệt cho họ.
+    item3: "Một trong những điều kiện quan trọng bổ sung là bạn rõ ràng đã đóng góp tới những tác giả, người đã làm việc dựa trên tác phẩm của riêng bạn. Cùng lúc đó, chúng tôi sẽ làm việc chăm chỉ để những công việc, đóng góp của bạn sẽ được trân trọng bởi những người dùng khác, bằng cách tự do lựa chọn cho mình một cái tên độc nhất sẽ đại diện cho bạn trong cộng đồng của Catrobat, và bằng cách cho những người khác cơ hội để thể hiện lòng biết ơn của họ tới bạn một cách công khai khi mà bạn cống hiến công việc của bạn để tất cả mọi người, và đặc biệt cho họ."
     item4: 'Xin vui lòng tham khảo ý kiến %link-licenseUploaded% cho các điều kiện và điều khoản pháp lý.'
   list4:
-    item1: Chúng tôi cung cấp tất cả các phần mềm và tài nguyên Internet liên quan đến hệ thống Catrobat, ví dụ như, phần mềm được viết bởi đội ngũ Catrobat, trang web và tài nguyên Internet của chúng tôi, mã nguồn của riêng của chúng tôi liên quan đến hệ thống Catrobat, và bao gồm tất cả các tài nguyên khác chẳng hạn, ví dụ như, hình ảnh, âm thanh và văn bản cho bạn, bây giờ và trong tương lai dưới bản quyền miễn phí của Catrobat.
+    item1: "Chúng tôi cung cấp tất cả các phần mềm và tài nguyên Internet liên quan đến hệ thống Catrobat, ví dụ như, phần mềm được viết bởi đội ngũ Catrobat, trang web và tài nguyên Internet của chúng tôi, mã nguồn của riêng của chúng tôi liên quan đến hệ thống Catrobat, và bao gồm tất cả các tài nguyên khác chẳng hạn, ví dụ như, hình ảnh, âm thanh và văn bản cho bạn, bây giờ và trong tương lai dưới bản quyền miễn phí của Catrobat."
     item2: Các bản quyền này làm cho tất cả các phần của Catrobat miễn phí cho bạn cũng như miễn phí đem lại cho bạn sự tự do để sử dụng chúng theo cách bạn muốn giữa những người sử dụng khác, với chỉ một vài hạn chế để đảm bảo, rằng hệ thống Catrobat sẽ mãi mãi duy trì miễn phí và hữu ích cho tất cả mọi người.
     item3: 'Xin vui lòng tham khảo ý kiến %link-licenseToPlay% cho điều kiện và điều khoản pháp lý. Mã nguồn của hệ thống Catrobat cũng như nhiều tài liệu khác và tài nguyên có sẵn thông qua %link-developer%.'
   list5:
     item1: 'Nếu bạn dưới 13 tuổi, hoặc cha mẹ bạn hoặc người giám hộ hợp pháp của bạn, hợp tác với một tổ chức nào đó tham gia vào hoặc chịu trách nhiệm cho các loại hành vi vi phạm bảo mật và/hoặc đang bị giám sát, thì bạn không được phép sử dụng các ứng dụng phần mềm và truy cập vào dịch vụ của chúng tôi. Các chi tiết chính xác của hạn chế này và các ngoại lệ nhất định được phân chia trong phần 4.a và 4.b trên %link-termsOfUse% của chúng tôi.'
     item2: Nếu bạn là dưới 13 tuổi, sau đó bạn cần phải hỏi cha mẹ hoặc người giám hộ hợp pháp của bạn xem họ có cho phép bạn sử dụng phần mềm và dịch vụ của Catrobat hay không.
-    item3: Chúng tôi bảo lưu quyền từ chối, xóa, hoặc ẩn chương trình, tài khoản người dùng, và bất kỳ tài liệu kỹ thuật số tải lên trang web của Catrobat tại bất kỳ thời điểm nào theo quyết định duy nhất của chúng tôi, ví dụ nếu chúng tôi thấy rằng một chương trình có chứa tài liệu không phù hợp hoặc người dùng vi phạm về quyền hợp pháp của người khác.
-    item4: Tất cả các phần mềm của Catrobat và tài nguyên Internet được cung cấp với hy vọng rằng chúng sẽ hữu ích, nhưng không có bất kỳ bảo đảm.
+    item3: "Chúng tôi bảo lưu quyền từ chối, xóa, hoặc ẩn chương trình, tài khoản người dùng, và bất kỳ tài liệu kỹ thuật số tải lên trang web của Catrobat tại bất kỳ thời điểm nào theo quyết định duy nhất của chúng tôi, ví dụ nếu chúng tôi thấy rằng một chương trình có chứa tài liệu không phù hợp hoặc người dùng vi phạm về quyền hợp pháp của người khác."
+    item4: "Tất cả các phần mềm của Catrobat và tài nguyên Internet được cung cấp với hy vọng rằng chúng sẽ hữu ích, nhưng không có bất kỳ bảo đảm."
     item5: 'Xin vui lòng tham khảo ý kiến của chúng tôi developer.catrobat.org/terms_of_use_and_service %link-termsOfUse% về các qui định chính xác cho các điểm trên cũng như một số các điều khoản và điều kiện bổ sung hợp pháp.'
   bottom1: Hãy ghé thăm lại tại mọi thời điểm, vì chúng tôi luôn luôn cố gắng hoàn thiện điều khoản sử dụng của mình.
   bottom2: 'Vui lòng gửi bất cứ gợi ý nào về điều khoản sự dụng tới %email-webmaster%.'
   version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
 help:
   stepByStep:
-    title: Giới thiệu từng bước
-    start: 'Vị trí bắt đầu:'
+    title: "Giới thiệu từng bước"
+    start: "Vị trí bắt đầu:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: Làm một chương trình mới
+      title: 'Làm một chương trình mới'
       detail:
         text1: 'Nhấp vào "Mới".'
         text2: 'Tên chương trình, chọn "Tạo chương trình trống" và nhấp "Đồng ý".'
     step2:
-      title: Tạo một đối tượng mới
+      title: "Tạo một đối tượng mới"
       detail:
         text1: 'Nhấp:'
-        text2: Chọn nguồn của giao diện đầu tiên của đối tượng mới của bạn.
+        text2: 'Chọn nguồn của giao diện đầu tiên của đối tượng mới của bạn.'
         text3: 'Nhập tên đối tượng và bấm vào "Đồng ý" để tạo ra các đối tượng.'
-        special1: Vẽ một giao diện mới.
-        special2: Chọn từ bộ sưu tập.
-        special3: Chụp hình.
+        special1: 'Vẽ một giao diện mới.'
+        special2: 'Chọn từ bộ sưu tập.'
+        special3: 'Chụp hình.'
     step3:
-      title: Bắt đầu di chuyển
+      title: "Bắt đầu di chuyển"
       detail:
         text1: 'Nhấp:'
         text2: 'Gạch đầu tiên chúng tôi sử dụng không có trong mục "Chuyển động".'
         text3: 'Chọn gạch "Lướt". Các đối tượng sẽ di chuyển đến vị trí mới được xác định với gạch trên sân khấu.'
-        text4: Viên gạch bây giờ nổi. Để dán nó, di chuyển gạch đến vị trí mong muốn. Bạn cũng có thể di chuyển gạch đã được chèn vào bằng cách nhấp vào gạch cho đến khi nó nổi một lần nữa.
+        text4: 'Viên gạch bây giờ nổi. Để dán nó, di chuyển gạch đến vị trí mong muốn. Bạn cũng có thể di chuyển gạch đã được chèn vào bằng cách nhấp vào gạch cho đến khi nó nổi một lần nữa.'
         text5: 'Bấm vào "Chơi" để đi đến sân khấu và xem đối tượng trượt.'
-        text6: Sử dụng nút trở lại của Android để có quay trở lại từ sân khấu.
+        text6: 'Sử dụng nút trở lại của Android để có quay trở lại từ sân khấu.'
     step4:
-      title: Thay đổi giao diện
-      description: Bạn có thể thay đổi giao diện của đối tượng của bạn.
+      title: "Thay đổi giao diện"
+      description: "Bạn có thể thay đổi giao diện của đối tượng của bạn."
       detail:
         text1: 'Chọn gạch "Chuyển đổi để tìm". Với gạch này bạn có thể chọn xem hoặc tạo ra một hình mới.'
         text2: 'Bật viên gạch bên dưới gạch "Lướt" -.'
-        text3: Nhấp vào trường thả xuống để tạo ra một giao diện mới.
-        text4: Chọn nguồn hình ảnh giống như trước.
-        text5: Bây giờ bạn phải chọn hình ảnh mới.
-        text6: Bấm vào chơi để xem các hành vi thiết lập.
+        text3: 'Nhấp vào trường thả xuống để tạo ra một giao diện mới.'
+        text4: 'Chọn nguồn hình ảnh giống như trước.'
+        text5: 'Bây giờ bạn phải chọn hình ảnh mới.'
+        text6: 'Bấm vào chơi để xem các hành vi thiết lập.'
     step5:
-      title: Nói chuyện
-      description: Bây giờ bạn sẽ tìm hiểu làm thế nào để làm cho một đối tượng nói chuyện.
+      title: "Nói chuyện"
+      description: "Bây giờ bạn sẽ tìm hiểu làm thế nào để làm cho một đối tượng nói chuyện."
       detail:
         text1: 'Chọn gạch "Nói chuyện". Đối tượng đọc các văn bản, khi gạch này được thực hiện.'
         text2: 'Nhấn vào gạch phía bên dưới gạch "Chuyển đổi để nhìn".'
-        text3: Bấm vào chơi để xem các hành vi thiết lập.
+        text3: 'Bấm vào chơi để xem các hành vi thiết lập.'
     step6:
-      title: Một lần nữa và một lần nữa
-      description: Bước này cho bạn thấy làm thế nào để lặp lại hành vi của các đối tượng.
+      title: 'Một lần nữa và một lần nữa'
+      description: "Bước này cho bạn thấy làm thế nào để lặp lại hành vi của các đối tượng."
       detail:
         text1: 'Chọn gạch "Mãi mãi". Tất cả mọi thứ trong vòng lặp đi lặp lại mãi mãi.'
         text2: 'Nhấp vào gạch "Mãi mãi" bên dưới gạch "khi chương trình bắt đầu".'
         text3: 'Thêm gạch "Lướt".'
         text4: 'Nhấp vào gạch "Lướt" phía trên gạch "Kết thúc vòng lặp".'
-        text5: Nhấn vào trường giá trị văn bản x và y và thiết lập thành 0.
-        text6: Bấm vào chơi để xem các hành vi thiết lập.
+        text5: 'Nhấn vào trường giá trị văn bản x và y và thiết lập thành 0.'
+        text6: 'Bấm vào chơi để xem các hành vi thiết lập.'
     step7:
-      title: Bấm là tất cả mọi thứ
-      description: Bạn cũng có thể kiểm soát hành vi của đối tượng khi chương trình đang chạy trên giả lập.
+      title: "Bấm là tất cả mọi thứ"
+      description: 'Bạn cũng có thể kiểm soát hành vi của đối tượng khi chương trình đang chạy trên giả lập.'
       detail:
         text1: 'Chọn gạch "Khi được nhấp". Mỗi viên gạch bên dưới gạch "Khi được nhấp" sẽ được thực hiện ngay khi bạn bấm vào các đối tượng trên sân khấu.'
         text2: 'Đặt các "Khi được nhấp" bên dưới những viên gạch khác.'
         text3: 'Chọn gạch "Rẽ phải" và nhấp nó bên dưới gạch "Khi được nhấp".'
-        text4: Bây giờ bạn có tập lệnhnày.
-        text5: Bấm vào chơi để xem các hành vi trên sân khấu. Nếu bạn hiện tại nhấn vào trên đối tượng, nó sẽ quay.
+        text4: 'Bây giờ bạn có tập lệnhnày.'
+        text5: 'Bấm vào chơi để xem các hành vi trên sân khấu. Nếu bạn hiện tại nhấn vào trên đối tượng, nó sẽ quay.'
     step8:
-      title: Sao chép, xóa hoặc chỉnh sửa một viên gạch
+      title: "Sao chép, xóa hoặc chỉnh sửa một viên gạch"
       detail:
-        text1: Nhấn một lần duy nhất phía bên trái của mỗi gạch mở ra trình danh sách. Ở đó bạn có thể di chuyển, sao chép, xóa hoặc chỉnh sửa các giá trị của gạch với công cụ chỉnh sửa công thức.
+        text1: 'Nhấn một lần duy nhất phía bên trái của mỗi gạch mở ra trình danh sách. Ở đó bạn có thể di chuyển, sao chép, xóa hoặc chỉnh sửa các giá trị của gạch với công cụ chỉnh sửa công thức.'
     step9:
-      title: Định vị trong ứng dụng
+      title: "Định vị trong ứng dụng"
       detail:
-        text1: Sử dụng nút trở lại trong Android để định vị trong ứng dụng.
-        text2: Quay trở lại màn hình để tổng quan về đối tượng của bạn. Ở đây bạn có thể đi vào các tập lệnh cũng như các giao diện và âm thanh của các đối tượng. Ở đó, bạn có thể thay đổi tên, sao chép, thêm hoặc xóa hình và âm thanh.
-        text3: Sử dụng một lần nữa nút trở lại trên Android để có được cái nhìn để tổng quan về các đối tượng của bạn và nền của bạn.
+        text1: 'Sử dụng nút trở lại trong Android để định vị trong ứng dụng.'
+        text2: 'Quay trở lại màn hình để tổng quan về đối tượng của bạn. Ở đây bạn có thể đi vào các tập lệnh cũng như các giao diện và âm thanh của các đối tượng. Ở đó, bạn có thể thay đổi tên, sao chép, thêm hoặc xóa hình và âm thanh.'
+        text3: 'Sử dụng một lần nữa nút trở lại trên Android để có được cái nhìn để tổng quan về các đối tượng của bạn và nền của bạn.'
     step10:
-      title: Thay đổi nền
-      description: Đây là tổng quan về các đối tượng của bạn và nền phụ thuộc vào một chương trình.
+      title: "Thay đổi nền"
+      description: "Đây là tổng quan về các đối tượng của bạn và nền phụ thuộc vào một chương trình."
       detail:
-        text1: Nền giống như đối tượng, nhưng bạn chỉ có thể có một nền.
-        text2: Bạn có thể thêm tập lệnh, âm thanh và giao diện t giống như đối tượng nền.
+        text1: 'Nền giống như đối tượng, nhưng bạn chỉ có thể có một nền.'
+        text2: 'Bạn có thể thêm tập lệnh, âm thanh và giao diện t giống như đối tượng nền.'
     step11:
-      title: Danh sách chính
-      description: Sử dụng nút trở lại của Android để có đến màn hình này.
+      title: "Danh sách chính"
+      description: "Sử dụng nút trở lại của Android để có đến màn hình này."
       detail:
-        text1: Tiếp tục với chương trình hiện đang mở của bạn.
-        text2: Thêm chương trình mới.
-        text3: Xem tất cả các chương trình địa phương của bạn.
-        text4: Truy cập trang trợ giúp và thảo luận với những người dùng khác.
-        text5: Khám phá thế giới của chương trình Pocket Code. Tải về và phối lại chương trình mà bạn thích.
-        text6: Tải lên chương trình hiện đang được mở ra.
+        text1: 'Tiếp tục với chương trình hiện đang mở của bạn.'
+        text2: 'Thêm chương trình mới.'
+        text3: 'Xem tất cả các chương trình địa phương của bạn.'
+        text4: 'Truy cập trang trợ giúp và thảo luận với những người dùng khác.'
+        text5: 'Khám phá thế giới của chương trình Pocket Code. Tải về và phối lại chương trình mà bạn thích.'
+        text6: 'Tải lên chương trình hiện đang được mở ra.'
   tutorialcards:
-    title: Hướng dẫn
-    description1: Hướng dẫn này cho bạn thấy làm thế nào để sử dụng các thủ thuật một cách có hiệu quả trong
-    getReady: 'Chuẩn bị sẵn sàng:'
-    tryCode: 'Hãy thử mã này:'
-    doIt: 'Làm đi:'
-    tip: 'Thêm lời khuyên:'
+    title: "Hướng dẫn"
+    description1: "Hướng dẫn này cho bạn thấy làm thế nào để sử dụng các thủ thuật một cách có hiệu quả trong"
+    getReady: "Chuẩn bị sẵn sàng:"
+    tryCode: "Hãy thử mã này:"
+    doIt: "Làm đi:"
+    tip: "Thêm lời khuyên:"
     card1:
-      title: Thay đổi kích thước
-      description: Bấm vào con vịt để thay đổi kích thước.
-      one: Add the object of which you would like to change the size, e.g. Animal.
+      title: "Thay đổi kích thước"
+      description: "Bấm vào con vịt để thay đổi kích thước."
+      one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: Thay đổi giao diện
-      description: Sử dụng Mẹo này để đếm tự động.
-      one: Add the object of which you would like to change its look, e.g. items.
+      title: "Thay đổi giao diện"
+      description: "Sử dụng Mẹo này để đếm tự động."
+      one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: Di chuyển hình ảnh động
-      description: Sử dụng Mẹo này khi bạn muốn con vẹt bay.
-      one: Add the object you want to be moving.
+      title: "Di chuyển hình ảnh động"
+      description: "Sử dụng Mẹo này khi bạn muốn con vẹt bay."
+      one: "Add the object you want to be moving."
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Lướt
-      description: Di chuyển thông suốt từ một điểm tới những điểm khác.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      title: "Lướt"
+      description: "Di chuyển thông suốt từ một điểm tới những điểm khác."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "Insert the following bricks and define the area in which the movement should happen."
     card5:
-      title: Bật âm thanh
-      description: Nhấp vào trống để chơi âm thanh này.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      title: "Bật âm thanh"
+      description: "Nhấp vào trống để chơi âm thanh này."
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: Hãy nói gì đó
-      description: Sử dụng mã này để làm cho đối tượng nói.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      title: "Hãy nói gì đó"
+      description: "Sử dụng mã này để làm cho đối tượng nói."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: GSensor
-      description: Sử dụng Mẹo này để điều khiển một đối tượng với độ nghiêng của thiết bị của bạn.
-      one: Add the object you want to be moving on stage.
-      two: 'Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.'
+      title: "GSensor"
+      description: "Sử dụng Mẹo này để điều khiển một đối tượng với độ nghiêng của thiết bị của bạn."
+      one: "Add the object you want to be moving on stage."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: La bàn
-      description: Sử dụng mã này để làm một chiếc la bàn.
-      one: Add the object you want to point in compass direction.
+      title: "La bàn"
+      description: "Sử dụng mã này để làm một chiếc la bàn."
+      one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: Phát sóng
-      description: Nhìn vào mã này! Nó chỉ cho bạn làm thế nào để giao tiếp giữa các đối tượng.
+      title: "Phát sóng"
+      description: "Nhìn vào mã này! Nó chỉ cho bạn làm thế nào để giao tiếp giữa các đối tượng."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: Hiển thị các biến
-      description: Show the value of a variable.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      title: "Hiển thị các biến"
+      description: "Show the value of a variable."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: "Collision detection"
+      description: "Detect a collision between two objects."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: Face detection
-      description: Control an object by using face detection.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: "Face detection"
+      description: "Control an object by using face detection."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: Khởi động chương trình
-    description: Hãy thử các chương trình khởi động này. Nhìn vào trong để thực hiện thay đổi và thêm vào những ý tưởng của bạn.
+    title: "Khởi động chương trình"
+    description: "Hãy thử các chương trình khởi động này. Nhìn vào trong để thực hiện thay đổi và thêm vào những ý tưởng của bạn."
     categories:
-      games: Trò chơi
-      animations: Hình động
-      interactive: Nghệ thuật tương tác và câu chuyện
-      music: Âm nhạc và khiêu vũ
+      games: "Trò chơi"
+      animations: "Hình động"
+      interactive: "Nghệ thuật tương tác và câu chuyện"
+      music: "Âm nhạc và khiêu vũ"
   gameJam:
-    title: Làm thế nào để tải trò chơi Pocket Code lên trang web Game Jolt?
-    text0: 'Đầu tiên xin chúc mừng trò chơi của bạn! Bây giờ bạn có thể tải nó lên %link% để tạo ra một ứng dụng Android độc lập, sau đó bạn có thể tải lên trên trang web Game Jolt.'
-    title1: Đăng ký
+    title: "Làm thế nào để tải trò chơi Pocket Code lên trang web Game Jolt?"
+    text0: "Đầu tiên xin chúc mừng trò chơi của bạn! Bây giờ bạn có thể tải nó lên %link% để tạo ra một ứng dụng Android độc lập, sau đó bạn có thể tải lên trên trang web Game Jolt."
+    title1: "Đăng ký"
     text1: "Trước tiên, bạn cần phải tạo một tài khoản. Sau đó, bạn có thể tải lên chương trình mà bạn tạo ra. Đừng lo lắng, rất dễ dàng và tất cả những gì bạn chỉ cần là nghĩ ra tên người dùng và mật khẩu. Sau khi làm xong, bấm vào 'Đăng nhập hoặc đăng ký'. Thế thôi!"
-    title2: Tải lên
-    text2: 'Sau khi đăng ký bạn có thể tải lên trò chơi của bạn. Chỉ cần nghĩ về một cái tên và thêm mô tả. Cũng có thể thêm #AliceJam150 trong trường mô tả.'
-    title3: Tìm kiếm cho chương trình của bạn
-    text3: Đi tới hồ sơ Pocket Codecủa bạn, nơi tất cả các chương trình của bạn được liệt kê hoặc tìm kiếm trực tiếp bằng cách sử dụng tìm kiếm và tên chương trình của bạn.
-    title4: Tạo ra ứng dụng Android
+    title2: "Tải lên"
+    text2: "Sau khi đăng ký bạn có thể tải lên trò chơi của bạn. Chỉ cần nghĩ về một cái tên và thêm mô tả. Cũng có thể thêm #AliceJam150 trong trường mô tả."
+    title3: "Tìm kiếm cho chương trình của bạn"
+    text3: "Đi tới hồ sơ Pocket Codecủa bạn, nơi tất cả các chương trình của bạn được liệt kê hoặc tìm kiếm trực tiếp bằng cách sử dụng tìm kiếm và tên chương trình của bạn."
+    title4: "Tạo ra ứng dụng Android"
     text4: "Trực tiếp trên trang chi tiết của chương trình, bạn có thể tạo ra một ứng dụng Android. Bằng cách nhấp vào 'Chuẩn bị ứng dụng' các ứng dụng sẽ được xây dựng."
-    title5: Tải Ứng Dụng
-    text5: 'Sau quá trình xây dựng, bạn có thể tải chương trình của bạn như là một ứng dụng. Ứng dụng tải về này cần phải được tải lên một lần nữa trực tiếp trên trang web l Game Jolt để tham gia vào %link%.'
-    title6: Đăng ký/đăng nhập tại GameJolt.com
+    title5: "Tải Ứng Dụng"
+    text5: "Sau quá trình xây dựng, bạn có thể tải chương trình của bạn như là một ứng dụng. Ứng dụng tải về này cần phải được tải lên một lần nữa trực tiếp trên trang web l Game Jolt để tham gia vào %link%."
+    title6: "Đăng ký/đăng nhập tại GameJolt.com"
     text6: "Truy cập %link% và bấm vào 'Đăng nhập' hoặc 'Đăng ký!' trong danh sách. Nếu bạn đã có một tài khoản chỉ cần đăng nhập, nếu không, bạn cần phải đăng ký với địa chỉ Email của bạn, tên người dùng và mật khẩu."
-    title7: Tải lên trò chơi của bạn trên trang web Game Jolt
+    title7: "Tải lên trò chơi của bạn trên trang web Game Jolt"
     text7: "Sau khi bạn đã đăng nhập, đi đến bảng điều khiển của bạn. Ở đó bạn có thể thêm trò chơi của bạn. Trước tiên, bạn phải bấm vào 'Chấp nhận quy tắc'. Sau đó điền vào các thông tin trò chơi. Tại công cụ Động cơ/Ngôn ngữ/Tạo thành, chọn 'Khác' và thêm vào mục Động cơ/Ngôn ngữ/Công cụ 'Android'. Từ trạng thái 'Phát triển' chọn 'Kết thúc/ổn định'. Hãy đảm bảo bao gồm #AliceJam150 trong mô tả để nó xuất hiện trên trang %link%."
     text7_1: "Trước khi bạn có thể xuất bản trò chơi của mình, hãy thực hiện theo các bước tiếp theo. Bạn phải ít thêm 'ảnh thu nhỏ', thiết lập 'đánh giá', và tải lên trò chơi của bạn bằng cách nhấp vào 'xây dựng/tập tin'."
     text7_2: "Nhấp vào 'Thêm gói' và điền vào điền đủ thông tin gói. Lưu nó và thêm việc phát hành. "
-    text7_3: Bây giờ bạn có thể tải lên apk chương trình của bạn. Bạn tìm thấy các ứng dụng đã tải về trong thư mục tải về của bạn. Tốt nhất để sử dụng dữ liệu thám hiểm (ví dụ như nhà thám hiểm dữ liệu).
-    text7_4: "Lưu ý: Nếu ứng dụng thiếu hậu tố '.apk', bạn phải thêm '.apk' theo cách thủ công. Chỉ cần đổi tên file. Bây giờ bạn có thể tải lên nó."
+    text7_3: "Bây giờ bạn có thể tải lên apk chương trình của bạn. Bạn tìm thấy các ứng dụng đã tải về trong thư mục tải về của bạn. Tốt nhất để sử dụng dữ liệu thám hiểm (ví dụ như nhà thám hiểm dữ liệu)."
+    text7_4: 'Lưu ý: Nếu ứng dụng thiếu hậu tố ''.apk'', bạn phải thêm ''.apk'' theo cách thủ công. Chỉ cần đổi tên file. Bây giờ bạn có thể tải lên nó.'
     text7_5: "Sau khi tải lên nhấp vào 'Đồng ý' để xuất bản trò chơi của bạn. Điều này sau đó sẽ hiển thị link để giúp những người dùng khác tải về trò chơi của bạn."
-    text7_6: Bây giờ, bạn đã tải lên của bạn trò chơi đầu tiên trên trang web Game Jolt và đặt nó hoạt động. Chúc mừng!
-    text7_7: 'Những người khác sẽ có thể tìm thấy trò chơi của bạn và nó sẽ xuất hiện trên trang %link%.'
+    text7_6: "Bây giờ, bạn đã tải lên của bạn trò chơi đầu tiên trên trang web Game Jolt và đặt nó hoạt động. Chúc mừng!"
+    text7_7: "Những người khác sẽ có thể tìm thấy trò chơi của bạn và nó sẽ xuất hiện trên trang %link%."
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
+    title1: "(Welcome to) Wonderland"
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
+    title2: "Save Alice!"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
+    title3: "The Hatter - Hit and Run"
     subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
+    title4: "The Hatter - Hit and Run"
+    subtitle4: "Let the Hatter shoot the evil cards"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "Create a score by using variables"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "Create a moving background"
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: "Download the program"
 oauth:
   username_header: Cảm ơn bạn đã đăng ký Pocket Code!
   username_chooser: 'Hãy chọn tên người dùng:'
@@ -387,7 +402,7 @@ search:
   dotdotdot: Tìm kiếm...
   search: Tìm kiếm
   results: Kết quả tìm kiếm
-  resultcount: 'Kết quá tìm kiếm của bạn %count%'
+  resultcount: Kết quá tìm kiếm của bạn %count%
 menu:
   profile: Hồ sơ của Tôi
   logout: Đăng xuất
@@ -405,9 +420,9 @@ login:
   or: HOẶC
 apk:
   download: Tải về ứng dụng
-  prepare: Chuẩn bị ứng dụng
-  preparing: Đang chuẩn bị ứng dụng
-  text: Quá trình có thể mất một lúc
+  prepare: 'Chuẩn bị ứng dụng'
+  preparing: 'Đang chuẩn bị ứng dụng'
+  text: 'Quá trình có thể mất một lúc'
 errors:
   username:
     blank: Tên người dùng không được để trống
@@ -447,9 +462,9 @@ errors:
   program:
     invalid: Chương trình không hợp lệ.
   languageversion:
-    tooold: Xin lỗi, chương trình của bạn có chứa phiên bản cũ của ngôn ngữ Catrobat! Bạn đang sử dụng phiên bản mới nhất của Pocket Code?
+    tooold: 'Xin lỗi, chương trình của bạn có chứa phiên bản cũ của ngôn ngữ Catrobat! Bạn đang sử dụng phiên bản mới nhất của Pocket Code?'
   programversion:
-    tooold: Xin lỗi, bạn đang sử dụng phiên bản cũ của Pocket Code. Hãy cập nhật các phiên bản mới nhất.
+    tooold: 'Xin lỗi, bạn đang sử dụng phiên bản cũ của Pocket Code. Hãy cập nhật các phiên bản mới nhất.'
 success:
   registration: Đăng ký thành công!
   token: Đồng ý
@@ -512,8 +527,8 @@ ci:
   download: Tải về Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: be aware
     subheader: You can only submit your own programs
@@ -542,3 +557,17 @@ admin:
     btnDeleteBackup: Delete backup
     createBackupConfirmationTitle: Create backup file
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code

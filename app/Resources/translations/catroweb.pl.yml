@@ -24,6 +24,13 @@ less: 'mniej'
 ok: OK
 clickToDownloadProgram: 'Aby pobrać przykładowy program kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: Polecane
   newest: Najnowsze programy
@@ -35,6 +42,8 @@ programs:
   downloads: '%downloads% pobrań'
   sample: Przykładowe programy
   views: '%views% odsłon'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Przesłane programy
   uploaded: Przesłane programy
   reportAsInappropriate: Zgłoś jako niewłaściwe
@@ -56,6 +65,12 @@ programs:
   report: Zgłoś
   report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Zgłoszono
+remixgraph:
+  by: 'o'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
@@ -247,128 +262,131 @@ help:
         text5: 'Poznaj świat programów Pocket Code. Pobierz za darmo i remiksuj programy, które lubisz.'
         text6: 'Wyślij program, który jest obecnie otwarty.'
   tutorialcards:
-    title: Poradniki
-    description1: Te poradniki pokazują, jak stosować skuteczne triki w
-    getReady: 'Przygotuj się:'
-    tryCode: 'Wypróbuj ten kod:'
-    doIt: 'Zrób to:'
-    tip: 'Dodatkowa rada:'
+    title: "Poradniki"
+    description1: "Te poradniki pokazują, jak stosować skuteczne triki w"
+    getReady: "Przygotuj się:"
+    tryCode: "Wypróbuj ten kod:"
+    doIt: "Zrób to:"
+    tip: "Dodatkowa rada:"
     card1:
-      title: Zmień wielkość
-      description: Zmień rozmiar obiektu.
-      one: Dodaj obiekt, którego rozmiar chcesz zmienić, np. zwierzę.
-      two: Wstaw następujące bloczki do skryptów obiektu w celu zmniejszenia go (o 20% oryginalnego rozmiaru) gdy zostanie dotknięty.
+      title: "Zmień wielkość"
+      description: "Zmień rozmiar obiektu."
+      one: "Dodaj obiekt, którego rozmiar chcesz zmienić, np. zwierzę."
+      two: "Wstaw następujące bloczki do skryptów obiektu w celu zmniejszenia go (o 20% oryginalnego rozmiaru) gdy zostanie dotknięty."
     card2:
-      title: Zmień wygląd
-      description: Zmieniaj wygląd obiektu.
-      one: Dodaj obiekt, którego wygląd chcesz zmienić, np. taki.
-      two: Dołącz kolejne obrazki do wyglądów obiektu.
-      three: Ułóż następujące bloczki do skryptów obiektu by nieustannie zmieniać jego wygląd co sekundę.
+      title: "Zmień wygląd"
+      description: "Zmieniaj wygląd obiektu."
+      one: "Dodaj obiekt, którego wygląd chcesz zmienić, np. taki."
+      two: "Dołącz kolejne obrazki do wyglądów obiektu."
+      three: "Ułóż następujące bloczki do skryptów obiektu by nieustannie zmieniać jego wygląd co sekundę."
     card3:
-      title: Animacja ruchu
-      description: Animuj obiekty
-      one: Dodaj obiekt, który ma się poruszać.
-      two: Dołącz kolejny obrazek w wyglądzie obiektu, który zobrazuje ruch.
-      three: Wstaw następujące bloczki do skryptu obiektu, aby nieustannie co pewien czas zmieniać wygląd i położenie obiektu. Dodatkowo możesz sprawić, że ptak nie wyleci ze sceny używając klocka "jeśli na brzegu, odbij się".
+      title: "Animacja ruchu"
+      description: "Animuj obiekty"
+      one: "Dodaj obiekt, który ma się poruszać."
+      two: "Dołącz kolejny obrazek w wyglądzie obiektu, który zobrazuje ruch."
+      three: "Wstaw następujące bloczki do skryptu obiektu, aby nieustannie co pewien czas zmieniać wygląd i położenie obiektu. Dodatkowo możesz sprawić, że ptak nie wyleci ze sceny używając klocka \"jeśli na brzegu, odbij się\"."
     card4:
-      title: Leć
-      description: Spraw żeby obiekt przemieścił się płynnie z jednego punktu do innego.
-      one: Dodaj obiekt, który ma latać lub ślizgać się - np. samolot.
-      two: Wstaw następujące bloczki i określ czas lotu oraz miejsce, do którego obiekt ma zmierzać.
+      title: "Leć"
+      description: "Spraw żeby obiekt przemieścił się płynnie z jednego punktu do innego."
+      one: "Dodaj obiekt, który ma latać lub ślizgać się - np. samolot."
+      two: "Wstaw następujące bloczki i określ czas lotu oraz miejsce, do którego obiekt ma zmierzać."
     card5:
-      title: Odtwórz dźwięk
-      description: Odtwarzanie dźwięku po dotknięciu obiektu.
-      one: Dodaj obiekt,, który ma wydać dźwięk, np. psa.
-      two: Ułóż następujące bloczki, aby umożliwić odtwarzanie dźwięku po dotknięciu psa. Wybierz dźwięk z własnych zasobów, biblioteki multimediów Pocket Code lub nagraj samemu.
+      title: "Odtwórz dźwięk"
+      description: "Odtwarzanie dźwięku po dotknięciu obiektu."
+      one: "Dodaj obiekt,, który ma wydać dźwięk, np. psa."
+      two: "Ułóż następujące bloczki, aby umożliwić odtwarzanie dźwięku po dotknięciu psa. Wybierz dźwięk z własnych zasobów, biblioteki multimediów Pocket Code lub nagraj samemu."
     card6:
-      title: Powiedz
-      description: Użyj tego kodu, żeby obiekt zaczął mówić.
-      one: Dodaj obiekt, który będzie mówił, np. Carrie.
-      two: Wstaw następujące bloczki, aby dziewczynka mogła mówić.
+      title: "Powiedz"
+      description: "Użyj tego kodu, żeby obiekt zaczął mówić."
+      one: "Dodaj obiekt, który będzie mówił, np. Carrie."
+      two: "Wstaw następujące bloczki, aby dziewczynka mogła mówić."
     card7:
-      title: Czujnik nachylenia
-      description: Steruj obiektem za pomocą przechylania swojego urządzenia.
-      one: Dodaj obiekt, którym chcesz poruszać na scenie.
-      two: Wstaw poniższe bloczki w celu kontrolowania obiektu za pośrednictwem czujników telefonu. Dlatego należy wybrać "nachylenie x i y". Aby uzyskać odpowiedni ruch, ustaw "- nachylenie". Jeśli ruchy obiektu są zbyt gwałtowne, należy podzielić nachylenie na przykład przez 10.
+      title: "Czujnik nachylenia"
+      description: "Steruj obiektem za pomocą przechylania swojego urządzenia."
+      one: "Dodaj obiekt, którym chcesz poruszać na scenie."
+      two: "Wstaw poniższe bloczki w celu kontrolowania obiektu za pośrednictwem czujników telefonu. Dlatego należy wybrać \"nachylenie x i y\". Aby uzyskać odpowiedni ruch, ustaw \"- nachylenie\". Jeśli ruchy obiektu są zbyt gwałtowne, należy podzielić nachylenie na przykład przez 10."
     card8:
-      title: Kompas
-      description: Stwórz swój własny kompas
-      one: Dodaj obiekt, który ma być igłą kompasu.
-      two: Wstaw następujące bloczki, aby igła kompasu ustawiła się odpowiednio. Dodatkowo użyj pętli "zawsze".
+      title: "Kompas"
+      description: "Stwórz swój własny kompas"
+      one: "Dodaj obiekt, który ma być igłą kompasu."
+      two: "Wstaw następujące bloczki, aby igła kompasu ustawiła się odpowiednio. Dodatkowo użyj pętli \"zawsze\"."
     card9:
-      title: Nadaj
-      description: Spójrz na ten kod! To pokazuje, jak obiekty mogą się komunikować.
-      one: Dodaj nowy obiekt, na przykład Alicję, która powinna wysłać wiadomość. Dodatkowo, dodaj drugie tło do wyglądów tła. Jak tylko tło odbierze komunikat, zmieni się jego wygląd.
-      two: Wstaw bloczek "Nadaj do wszystkich" i ustal, co powinno się wydarzyć, gdy inny obiekt otrzyma wiadomość.
-      three: W tym przypadku, tło zmienia się, kiedy zostanie dotknięty obiekt na pierwszym planie.
+      title: "Nadaj"
+      description: "Spójrz na ten kod! To pokazuje, jak obiekty mogą się komunikować."
+      one: "Dodaj nowy obiekt, na przykład Alicję, która powinna wysłać wiadomość. Dodatkowo, dodaj drugie tło do wyglądów tła. Jak tylko tło odbierze komunikat, zmieni się jego wygląd."
+      two: "Wstaw bloczek \"Nadaj do wszystkich\" i ustal, co powinno się wydarzyć, gdy inny obiekt otrzyma wiadomość."
+      three: "W tym przypadku, tło zmienia się, kiedy zostanie dotknięty obiekt na pierwszym planie."
     card10:
-      title: Pokaż zmienną
-      description: Pokaż wartość zmiennej.
-      one: Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które należy zmieni się po odebraniu wiadomości.
-      two: Wstaw poniższe bloczki, aby w zmiennych zapisać aktualne współrzędne położenia x i y poruszającego się obiektu.
-      three: Poprzez "Pokaż zmienną" można wyświetlać wartości w wybranym miejscu na scenie.
+      title: "Pokaż zmienną"
+      description: "Pokaż wartość zmiennej."
+      one: "Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które należy zmieni się po odebraniu wiadomości."
+      two: "Wstaw poniższe bloczki, aby w zmiennych zapisać aktualne współrzędne położenia x i y poruszającego się obiektu."
+      three: "Poprzez \"Pokaż zmienną\" można wyświetlać wartości w wybranym miejscu na scenie."
     card11:
-      title: Wykrywanie kolizji
-      description: Wykrywanie kolizji między dwoma obiektami.
-      one: Dodaj dwa obiekty, z których jeden powinien być poruszany za pomocą czujników telefonu, np. Alex (zobacz %tutorial_card_link_7% samouczek 7 %link_end%).
-      two: Zapisz bieżącą "pozycję x i y" poruszającego się obiektu Alex (zobacz %tutorial_card_link_10% samouczek 10 %link_end%) i wstaw następujące skrypty. Zawsze sprawdzaj, czy dwa obiekty nakładają się na siebie. Jeśli tak się stanie, obiekty powinny zostać ukryte.
+      title: "Wykrywanie kolizji"
+      description: "Wykrywanie kolizji między dwoma obiektami."
+      one: "Dodaj dwa obiekty, z których jeden powinien być poruszany za pomocą czujników telefonu, np. Alex (zobacz %tutorial_card_link_7% samouczek 7 %link_end%)."
+      two: "Zapisz bieżącą \"pozycję x i y\" poruszającego się obiektu Alex (zobacz %tutorial_card_link_10% samouczek 10 %link_end%) i wstaw następujące skrypty. Zawsze sprawdzaj, czy dwa obiekty nakładają się na siebie. Jeśli tak się stanie, obiekty powinny zostać ukryte."
     card12:
-      title: Wykrywanie twarzy
-      description: Kontrola obiektu za pomocą wykrywania twarzy.
-      one: Najpierw upewnij się, że bloczki wykrywania twarzy są włączone. W związku z tym przejdź do ustawień.
-      two: Dodaj nowy obiekt i wstaw następujące bloczki, aby pokazać go, jeśli aparat wykryje twarz. Umieść, "jeśli twarz jest wykryta" i umieścić to w pętli "zawsze". Jeśli aparat wykrywa twarz zmienna przyjmuje wartość "Prawda", w przeciwnym razie - "Fałsz".
+      title: "Wykrywanie twarzy"
+      description: "Kontrola obiektu za pomocą wykrywania twarzy."
+      one: "Najpierw upewnij się, że bloczki wykrywania twarzy są włączone. W związku z tym przejdź do ustawień."
+      two: "Dodaj nowy obiekt i wstaw następujące bloczki, aby pokazać go, jeśli aparat wykryje twarz. Umieść, \"jeśli twarz jest wykryta\" i umieścić to w pętli \"zawsze\". Jeśli aparat wykrywa twarz zmienna przyjmuje wartość \"Prawda\", w przeciwnym razie - \"Fałsz\"."
   starterPrograms:
-    title: Programy na start
-    description: Poznaj te programy na start. Zajrzyj do środka, żeby coś zmienić i dodać swoje pomysły.
+    title: "Programy na start"
+    description: "Poznaj te programy na start. Zajrzyj do środka, żeby coś zmienić i dodać swoje pomysły."
     categories:
-      games: Gry
-      animations: Animacje
-      interactive: Interaktywna sztuka i historyjki
-      music: Muzyka i taniec
+      games: "Gry"
+      animations: "Animacje"
+      interactive: "Interaktywna sztuka i historyjki"
+      music: "Muzyka i taniec"
   gameJam:
-    title: Jak wgrać grę Pocket Code na stronę Game Jolt?
-    text0: Po pierwsze gratulujemy Ci stworzenia nowej gry! Teraz możesz przesłać ją na %link%, aby utworzyć samodzielną aplikację na Android, którą następnie można przesyłać na stronę Game Jolt.
-    title1: Rejestracja
-    text1: 'Najpierw musisz utworzyć konto. Następnie będziesz mógł przesłać stworzony program. Nie martw się, to proste: wystarczy wymyślić nazwę użytkownika i hasło. Po wypełnieniu obu, kliknij na ''Zaloguj albo zarejestruj się''. I gotowe!'
-    title2: Wyślij
-    text2: 'Po zakończeniu procesu rejestracji będziesz mógł przesłać swoją grę. Wymyśl nazwę i dodaj opis - nie zapomnij dodać #Alicejam150 do opisu.'
-    title3: Wyszukaj swój program
-    text3: Przejdź do swojego profilu Pocket Code, gdzie znajduje się lista twoich programów, lub znajdź swój program za pomocą wyszukiwarki.
-    title4: Stwórz aplikację na Android
-    text4: Na stronie szczegółów Twojego programu możesz stworzyć aplikację dla systemu Android (.apk). Klikając na przycisk "Przygotuj aplikację" zostanie ona wygenerowana.
-    title5: Pobierz aplikację
-    text5: Po wygenerowaniu aplikacji możesz pobrać swój program. Żeby uczestniczyć w %link%, pobrany plik musi być ponownie przesłany bezpośrednio na Game Jolt Site.
-    title6: Zarejestruj się/zaloguj na GameJolt.com
-    text6: Odwiedź %link% i kliknij na 'Zaloguj się' lub 'Zarejestruj się!' w menu. Jeśli masz już konto wystarczy zalogować się. Jeśli nie, musisz zarejestrować się, podając e-mail, nazwę użytkownika i hasło.
-    title7: Prześlij swoją grę na stronę Game Jolt
-    text7: 'Po zalogowaniu przejdź do swojego panelu. Możesz tam dodać swoją grę. Najpierw kliknij na ''Zaakceptuj zasady''. Następnie Wypełnij informacje dotyczące gry. Jako narzędzie do Silnik/Język/Tworzenie wybierz opcję "Inne" i dodaj do pola "Inne" Silnik/Język/Narzędzie ''Android''. Zaznacz pole "Rozwój" jako "Gotowe/Stabilne''. Upewnij się, czy masz #AliceJam150 w opisie, tak żeby pojawiła się na stronie %link%.'
-    text7_1: Zanim będzie można opublikować grę, należy wykonać następujące kroki. Należy dodać obraz miniatury, ustawić 'Klasyfikację wiekową' i przesłać swoje gry klikając na "pliki kompilacji".
-    text7_2: Kliknij na 'Dodaj pakiet' i wypełnij pakiet informacyjny. Zapisz i dodaj nową wersję. 
-    text7_3: Teraz możesz przesłać APK Twojego programu. Możesz znaleźć pobraną aplikację w folderze Pobrane. Najlepiej użyć eksploratora danych (np. ES File Explorer).
+    title: "Jak wgrać grę Pocket Code na stronę Game Jolt?"
+    text0: "Po pierwsze gratulujemy Ci stworzenia nowej gry! Teraz możesz przesłać ją na %link%, aby utworzyć samodzielną aplikację na Android, którą następnie można przesyłać na stronę Game Jolt."
+    title1: "Rejestracja"
+    text1: "Najpierw musisz utworzyć konto. Następnie będziesz mógł przesłać stworzony program. Nie martw się, to proste: wystarczy wymyślić nazwę użytkownika i hasło. Po wypełnieniu obu, kliknij na 'Zaloguj albo zarejestruj się'. I gotowe!"
+    title2: "Wyślij"
+    text2: "Po zakończeniu procesu rejestracji będziesz mógł przesłać swoją grę. Wymyśl nazwę i dodaj opis - nie zapomnij dodać #Alicejam150 do opisu."
+    title3: "Wyszukaj swój program"
+    text3: "Przejdź do swojego profilu Pocket Code, gdzie znajduje się lista twoich programów, lub znajdź swój program za pomocą wyszukiwarki."
+    title4: "Stwórz aplikację na Android"
+    text4: "Na stronie szczegółów Twojego programu możesz stworzyć aplikację dla systemu Android (.apk). Klikając na przycisk \"Przygotuj aplikację\" zostanie ona wygenerowana."
+    title5: "Pobierz aplikację"
+    text5: "Po wygenerowaniu aplikacji możesz pobrać swój program. Żeby uczestniczyć w %link%, pobrany plik musi być ponownie przesłany bezpośrednio na Game Jolt Site."
+    title6: "Zarejestruj się/zaloguj na GameJolt.com"
+    text6: "Odwiedź %link% i kliknij na 'Zaloguj się' lub 'Zarejestruj się!' w menu. Jeśli masz już konto wystarczy zalogować się. Jeśli nie, musisz zarejestrować się, podając e-mail, nazwę użytkownika i hasło."
+    title7: "Prześlij swoją grę na stronę Game Jolt"
+    text7: "Po zalogowaniu przejdź do swojego panelu. Możesz tam dodać swoją grę. Najpierw kliknij na 'Zaakceptuj zasady'. Następnie Wypełnij informacje dotyczące gry. Jako narzędzie do Silnik/Język/Tworzenie wybierz opcję \"Inne\" i dodaj do pola \"Inne\" Silnik/Język/Narzędzie 'Android'. Zaznacz pole \"Rozwój\" jako \"Gotowe/Stabilne'. Upewnij się, czy masz #AliceJam150 w opisie, tak żeby pojawiła się na stronie %link%."
+    text7_1: "Zanim będzie można opublikować grę, należy wykonać następujące kroki. Należy dodać obraz miniatury, ustawić 'Klasyfikację wiekową' i przesłać swoje gry klikając na \"pliki kompilacji\"."
+    text7_2: "Kliknij na 'Dodaj pakiet' i wypełnij pakiet informacyjny. Zapisz i dodaj nową wersję. "
+    text7_3: "Teraz możesz przesłać APK Twojego programu. Możesz znaleźć pobraną aplikację w folderze Pobrane. Najlepiej użyć eksploratora danych (np. ES File Explorer)."
     text7_4: 'Uwaga: Jeśli aplikacji brakuje rozszerzenia ''.apk'', trzeba dodać ''.apk'' ręcznie. Wystarczy zmienić nazwę pliku. Teraz będziesz w stanie go przesłać.'
-    text7_5: Po wysyłania kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry.
-    text7_6: Przesłałeś swoją pierwszą grę na stronę Game Jolt i ustawiłeś ją jako aktywną. Gratulacje!
-    text7_7: Teraz inni ludzie będą mogli znaleźć Twoją grę i pojawi się ona na stronie %link%.
+    text7_5: "Po wysyłania kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry."
+    text7_6: "Przesłałeś swoją pierwszą grę na stronę Game Jolt i ustawiłeś ją jako aktywną. Gratulacje!"
+    text7_7: "Teraz inni ludzie będą mogli znaleźć Twoją grę i pojawi się ona na stronie %link%."
   aliceGameJamTutorialcards:
-    title1: Witaj w Krainie Czarów
-    subtitle1: Ożyw bohaterów i stwórz wydarzenie za pomocą "kiedy dotknięto"
-    description1: "Nauczysz się jak ożywić jednego z twoich bohaterów tworząc prostą animację i jak sprawić by twoje postacie coś zrobiły, gdy dotkniesz je. Film pokazuje jak łatwo można ożywić swoją postać stosując różne wyglądy.\nPonadto pokażemy Ci, jak stworzyć wydarzenie za pomocą \"Kiedy dotknięto\" i jak wysyłać wiadomości między obiektami."
-    title2: Uratuj Alicję!
-    subtitle2: Użyj czujników nachylenia i wykrywania kolizji pomiędzy obiektami
-    description2: Tutaj dowiesz się, jak kontrolować postać za pomocą czujników nachylenia telefonu. Możesz kontrolować ruch Alicji przez przechylanie telefonu w lewo lub w prawo. Zobacz nasz poradnik i spraw, aby przedmioty spadały z nieba losowo oraz uzyskaj doświadczenie w wykrywaniu kolizji między obiektami.
-    title3: Kapelusznik - trafiaj i jedź
-    subtitle3: Stwórz ruchomy krajobraz i steruj ruchem Kapelusznika
-    description3: W tym poradniku dowiesz się jak stworzyć krajobraz, który wygląda na ruchomy. Zrobimy to poprzez przesuwanie obiektów wzdłuż ekranu, aby stworzyć iluzję ruchu. Zobaczymy, jak poruszać Kapelusznikiem przez przechylanie telefonu.
-    title4: Kapelusznik - Jedź i Strzelaj
-    subtitle4: Niech Kapelusznik zestrzeli złe karty
-    description4: W tym poradniku pokażemy, jak stworzyć wrogów, którzy poruszają się losowo w kierunku Twojej postaci. Ponadto dowiesz się, jak sprawić, by Kapelusznik strzelał kroplami herbaty i jak sprawdzić, czy wrogowie zostali trafieni za pomocą wykrywania kolizji.
-    title5: Walnij Kota z Cheshire
-    subtitle5: Tworzenie punktacji za pomocą zmiennych
-    description5: W tym poradniku pokażemy, jak używać zmiennych w celu stworzenia punktacji. Punkty są przydatnym elementem gry. Nasz wynik pokazuje, jak często trafiłeś kota.
-    title6: Pogoń za Białym Królikiem
-    subtitle6: Stwórz ruchome tło
-    description6: Ten poradnik pokazuje, jak utworzyć przewijane w pionie tło przez przesuwanie grafiki tła w określony sposób. Inną rzeczą, której cię nauczymy jest, skakanie postaci do przodu, gdy naciskasz na nią. Aby gra była nieco trudniejsza, pokażemy jak spowolnić swoją postać w miarę upływu czasu.
-    download: Pobierz program
+    title1: "Witaj w Krainie Czarów"
+    subtitle1: "Ożyw bohaterów i stwórz wydarzenie za pomocą \"kiedy dotknięto\""
+    description1: |
+      Nauczysz się jak ożywić jednego z twoich bohaterów tworząc prostą animację i jak sprawić by twoje postacie coś zrobiły, gdy dotkniesz je. Film pokazuje jak łatwo można ożywić swoją postać stosując różne wyglądy.
+      Ponadto pokażemy Ci, jak stworzyć wydarzenie za pomocą "Kiedy dotknięto" i jak wysyłać wiadomości między obiektami.
+    title2: "Uratuj Alicję!"
+    subtitle2: "Użyj czujników nachylenia i wykrywania kolizji pomiędzy obiektami"
+    description2: "Tutaj dowiesz się, jak kontrolować postać za pomocą czujników nachylenia telefonu. Możesz kontrolować ruch Alicji przez przechylanie telefonu w lewo lub w prawo. Zobacz nasz poradnik i spraw, aby przedmioty spadały z nieba losowo oraz uzyskaj doświadczenie w wykrywaniu kolizji między obiektami."
+    title3: "Kapelusznik - trafiaj i jedź"
+    subtitle3: "Stwórz ruchomy krajobraz i steruj ruchem Kapelusznika"
+    description3: "W tym poradniku dowiesz się jak stworzyć krajobraz, który wygląda na ruchomy. Zrobimy to poprzez przesuwanie obiektów wzdłuż ekranu, aby stworzyć iluzję ruchu. Zobaczymy, jak poruszać Kapelusznikiem przez przechylanie telefonu."
+    title4: "Kapelusznik - Jedź i Strzelaj"
+    subtitle4: "Niech Kapelusznik zestrzeli złe karty"
+    description4: "W tym poradniku pokażemy, jak stworzyć wrogów, którzy poruszają się losowo w kierunku Twojej postaci. Ponadto dowiesz się, jak sprawić, by Kapelusznik strzelał kroplami herbaty i jak sprawdzić, czy wrogowie zostali trafieni za pomocą wykrywania kolizji."
+    title5: "Walnij Kota z Cheshire"
+    subtitle5: "Tworzenie punktacji za pomocą zmiennych"
+    description5: "W tym poradniku pokażemy, jak używać zmiennych w celu stworzenia punktacji. Punkty są przydatnym elementem gry. Nasz wynik pokazuje, jak często trafiłeś kota."
+    title6: "Pogoń za Białym Królikiem"
+    subtitle6: "Stwórz ruchome tło"
+    description6: |
+      Ten poradnik pokazuje, jak utworzyć przewijane w pionie tło przez przesuwanie grafiki tła w określony sposób. Inną rzeczą, której cię nauczymy jest, skakanie postaci do przodu, gdy naciskasz na nią. Aby gra była nieco trudniejsza, pokażemy jak spowolnić swoją postać w miarę upływu czasu.
+    download: "Pobierz program"
 oauth:
   username_header: Dziękujemy za rejestrację w Pocket Code!
   username_chooser: 'Proszę wybrać nazwę użytkownika:'
@@ -532,3 +550,17 @@ admin:
     btnDeleteBackup: Usuń kopię zapasową
     createBackupConfirmationTitle: Tworzenie kopii zapasowej
     createBackupConfirmationText: Ten proces może trochę potrwać. Następnie strona zostanie odświeżona!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Zgłoszenie
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code
