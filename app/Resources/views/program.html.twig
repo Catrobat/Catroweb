@@ -480,9 +480,6 @@
          var xhr = $.ajax({
              type: "POST",
              crossDomain: true,
-             headers: {
-                  'Access-Control-Allow-Headers' : 'x-requested-with',
-             },
              url: "https://130.206.122.81/nolb/web/index.php?r=service/upload_program",
              data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
              success: function(data){
