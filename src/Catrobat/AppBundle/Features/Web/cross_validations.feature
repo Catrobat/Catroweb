@@ -35,7 +35,7 @@ Feature: Cross validation for recommendation system
     And the element "#recommendations" should be visible
     When I switch the language to "Russisch"
     Then I should not see "Similar Programs"
-    And the element "#recommendations" should not be visible
+    And I should not see "#recommendations"
 
 
 

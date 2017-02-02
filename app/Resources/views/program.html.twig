@@ -307,7 +307,7 @@
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
 
-    {% if app.request.locale != "ru" %}
+    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
       {% if  program.tags|length > 0  or program.extensions|length > 0 %}
       <div id="recommendations">
         <div id="recsys-headline">
