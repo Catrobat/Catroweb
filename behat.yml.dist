@@ -5,7 +5,7 @@ default:
         
     gherkin:
         filters:
-            tags: "@~disabled&&~wip&&~external&&~RealOAuth"
+            tags: "@~disabled&&~wip&&~external&&~RealOAuth&&~RealFacebook"
         
     extensions:
         Behat\Symfony2Extension\ServiceContainer\Symfony2Extension: 
