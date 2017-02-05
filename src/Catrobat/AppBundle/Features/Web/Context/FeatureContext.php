@@ -1931,5 +1931,43 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             ->click();
     }
 
+    /**
+     * @When /^I click on the first recommended homepage program$/
+     */
+    public function iClickOnTheFirstRecommendedHomepageProgram()
+    {
+        $arg1 = '#program-1 .homepage-recommended-programs';
+        $this->assertSession()->elementExists('css', $arg1);
 
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @Then /^I should see a recommended homepage program having ID "([^"]*)" and name "([^"]*)"$/
+     */
+    public function iShouldSeeARecommendedHomepageProgramHavingIdAndName($program_id, $program_name)
+    {
+        $arg1 = '#program-' . $program_id . ' .homepage-recommended-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $arg2 = '#program-' . $program_id . ' .homepage-recommended-programs .program-name';
+        assertEquals($program_name, $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg2)
+            ->getText());
+    }
+
+    /**
+     * @Then /^I should not see any recommended homepage programs$/
+     */
+    public function iShouldNotSeeAnyRecommendedHomepagePrograms()
+    {
+        $arg1 = '.homepage-recommended-programs';
+        $this->assertSession()->elementNotExists('css', $arg1);
+    }
 }

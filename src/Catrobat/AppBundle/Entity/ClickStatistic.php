@@ -37,8 +37,14 @@ class ClickStatistic
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
      * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+     * @var Program
      */
     protected $program;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $scratch_program_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
@@ -108,7 +114,7 @@ class ClickStatistic
     protected $referrer;
 
     /**
-     * @return mixed
+     * @return Program
      */
     public function getProgram()
     {
@@ -116,7 +122,7 @@ class ClickStatistic
     }
 
     /**
-     * @param mixed $program
+     * @param Program $program
      */
     public function setProgram($program)
     {
@@ -124,7 +130,23 @@ class ClickStatistic
     }
 
     /**
-     * @return mixed
+     * @return int
+     */
+    public function getScratchProgramId()
+    {
+        return $this->scratch_program_id;
+    }
+
+    /**
+     * @param int $scratch_program_id
+     */
+    public function setScratchProgramId($scratch_program_id)
+    {
+        $this->scratch_program_id = $scratch_program_id;
+    }
+
+    /**
+     * @return Program
      */
     public function getRecommendedFromProgram()
     {
@@ -132,7 +154,7 @@ class ClickStatistic
     }
 
     /**
-     * @param mixed $recommended_from_program
+     * @param Program $recommended_from_program
      */
     public function setRecommendedFromProgram($recommended_from_program)
     {

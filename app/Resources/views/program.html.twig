@@ -112,6 +112,18 @@
           </button>
         </a>
 
+        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+            {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+          <button id="remix-graph-button" class="btn btn-primary download-button">
+            <table>
+              <tr>
+                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                <td>{{ "remixgraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
+        {% endif %}
+
         <button id="apk-generate" class="btn btn-apk download-button">
           <table>
             <tr>
@@ -290,15 +302,16 @@
       <div class="img-views icon"></div>
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
-    {% if program_details.showGraph %}
-    <div id="icon-remix">
-      <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
-      <span class="icon-text">
+    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+      {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+      <div id="icon-remix">
+        <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
+        <span class="icon-text">
         <a id="remix-graph-modal-link" href="#remix-graph-modal">
           {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
         </a>
       </span>
-    </div>
+      </div>
     {% endif %}
   </div>
 
@@ -425,7 +438,8 @@
     });
 
     var undefined;
-    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}',undefined, {{ program.id }});
+    var programID = {{ program.id }};
+    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}',undefined, programID);
     recs.initRecsys();
 
     counter = 10;
@@ -443,8 +457,10 @@
 
     $(document).ready(function() {
       var loadingAnimation = new LoadingAnimation('#FFFFFF', "{{ "pleaseWait"|trans({}, "catroweb") }}");
+      var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
       var remixGraph = RemixGraph.getInstance();
-      remixGraph.init("remix-graph-modal", "remix-graph-layer", "close-button", "{{ program_details_url_template }}", remixGraphTranslations);
+      remixGraph.init(programID, recommendedByPageId, "remix-graph-modal", "remix-graph-layer", "close-button",
+          "{{ program_details_url_template }}", "../click-statistic", remixGraphTranslations);
 
       $("#remix-graph-modal-link").animatedModal({
         modalTarget: 'remix-graph-modal',
@@ -496,6 +512,10 @@
         if(!$('.single-comment.hidden').length){
           $('.show-more').hide();
         }
+      });
+
+      $(document).on("click", "#remix-graph-button", function(){
+          $("#remix-graph-modal-link").click();
       });
 
       $(document).on("click", "#nolb-submission-button", function(){

@@ -35,6 +35,7 @@ pleaseWait: "Bitte warten..."
 
 programs:
   featured: Empfohlen
+  recommended: Interessante Programme
   newest: Neueste Programme
   most:
     viewed: meist gesehen
@@ -68,7 +69,8 @@ programs:
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
 remixgraph:
-  by: 'um'
+  showRemixGraph: 'Remix Graph anzeigen'
+  by: 'von'
   open: 'Öffnen'
   showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'

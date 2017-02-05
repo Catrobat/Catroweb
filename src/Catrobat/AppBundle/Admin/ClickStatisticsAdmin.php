@@ -25,6 +25,7 @@ class ClickStatisticsAdmin extends Admin
             ->add('type')
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program'), array(
                 'admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('scratch_program_id')
             ->add('recommended_from_program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program'), array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('clicked_at')
@@ -47,6 +48,7 @@ class ClickStatisticsAdmin extends Admin
             ->add('id')
             ->add('type')
             ->add('program.name')
+            ->add('scratch_program_id')
             ->add('recommended_from_program.name')
             ->add('user.username')
             ->add('ip')
@@ -64,6 +66,7 @@ class ClickStatisticsAdmin extends Admin
             ->add('type')
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('program', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('scratch_program_id')
             ->add('recommended_from_program', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('tag.en', null, array(
                 'label' => 'Tag'))
@@ -87,8 +90,8 @@ class ClickStatisticsAdmin extends Admin
     }
 
     public function getExportFields() {
-        return array('id','user.username','program.id','program.name','recommended_from_program.id','recommended_from_program.name',
-            'tag.en','extension.name','clicked_at','ip','latitude','longitude','country_code',
+        return array('id','user.username','program.id','program.name','scratch_program_id','recommended_from_program.id',
+            'recommended_from_program.name','tag.en','extension.name','clicked_at','ip','latitude','longitude','country_code',
             'country_name','street','postal_code','locality','user_agent','referrer');
     }
 

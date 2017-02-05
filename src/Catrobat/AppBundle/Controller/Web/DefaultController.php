@@ -115,10 +115,15 @@ class DefaultController extends Controller
         $type = $_POST['type'];
         $referrer = $request->headers->get('referer');
         $statistics = $this->get('statistics');
-        if($type == 'programs') {
+        if (in_array($type, ['programs', 'rec_homepage', 'remix_graph'])) {
             $rec_from_id = $_POST['recFromID'];
             $rec_program_id = $_POST['recID'];
-            $statistics->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, null, null, $referrer);
+            $is_recommended_program_a_scratch_program = (($type == 'remix_graph') && isset($_POST['isScratchProgram']))
+                                                      ? (bool) $_POST['isScratchProgram']
+                                                      : false;
+
+            $statistics->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, null, null,
+                $referrer, $is_recommended_program_a_scratch_program);
             return new Response('ok');
         } else if ($type == 'tags') {
             $tag_id = $_POST['recID'];

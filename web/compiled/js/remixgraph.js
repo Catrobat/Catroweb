@@ -4,6 +4,12 @@
 */
 String.prototype.trunc = String.prototype.trunc || function(n){ return (this.length > n) ? this.substr(0,n-1)+'...' : this; };
 
+var SCRATCH_PROJECT_BASE_URL = 'https://scratch.mit.edu/projects/';
+var SCRATCH_BASE_IMAGE_URL_TEMPLATE = 'https://cdn2.scratch.mit.edu/get_image/project/{}_140x140.png';
+var IMAGE_NOT_AVAILABLE_URL = '/images/default/not_available.png';
+var CATROBAT_NODE_PREFIX = 'catrobat';
+var SCRATCH_NODE_PREFIX = 'scratch';
+
 var RemixGraph = (function () {
     var instance = null;
 
@@ -19,6 +25,8 @@ var RemixGraph = (function () {
 
 var _InternalRemixGraph = function () {
     var self = this;
+    self.programID = 0;
+    self.recommendedByPageID = 0;
     self.remixGraphLayerId = null;
     self.clusterIndex = 0;
     self.clusters = [];
@@ -29,14 +37,19 @@ var _InternalRemixGraph = function () {
     self.edges = null;
     self.unavailableNodes = [];
     self.closeButtonSelector = null;
-    self.remixGraphTranslations = null;
     self.programDetailsUrlTemplate = null;
+    self.clickStatisticUrl = null;
+    self.remixGraphTranslations = null;
 
-    self.init = function (modalLayerId, remixGraphLayerId, closeButtonClassName, programDetailsUrlTemplate, remixGraphTranslations) {
+    self.init = function (programID, recommendedByPageID, modalLayerId, remixGraphLayerId, closeButtonClassName,
+                          programDetailsUrlTemplate, clickStatisticUrl, remixGraphTranslations) {
         self.reset();
+        self.programID = programID;
+        self.recommendedByPageID = recommendedByPageID;
         self.remixGraphLayerId = remixGraphLayerId;
         self.closeButtonSelector = $("." + closeButtonClassName);
         self.remixGraphTranslations = remixGraphTranslations;
+        self.clickStatisticUrl = clickStatisticUrl;
         self.programDetailsUrlTemplate = programDetailsUrlTemplate;
         $('<div id="context-menu" class="context-menu-trigger" style="display:none;"></div>').appendTo("#" + modalLayerId);
     };
@@ -67,8 +80,6 @@ var _InternalRemixGraph = function () {
     self.render = function (remixData, loadingAnimation) {
         loadingAnimation.show();
         $("body").css("overflow", "hidden");
-
-        var scratchBaseImageUrl = 'https://cdn2.scratch.mit.edu/get_image/project/{}_140x140.png';
         var nodesData = [];
         var edgesData = [];
         var hasGraphCycles = (remixData.remixGraph.catrobatBackwardEdgeRelations.length > 0);
@@ -76,7 +87,7 @@ var _InternalRemixGraph = function () {
         for (var nodeIndex = 0; nodeIndex < remixData.remixGraph.catrobatNodes.length; nodeIndex++) {
             var nodeId = parseInt(remixData.remixGraph.catrobatNodes[nodeIndex]);
             var nodeData = {
-                id: "catrobat_" + nodeId,
+                id: CATROBAT_NODE_PREFIX + "_" + nodeId,
                 //value: (nodeId == remixData.id) ? 3 : 2,
                 borderWidth: (nodeId == remixData.id) ? 6 : 3,
                 size: (nodeId == remixData.id) ? 60 : 30,
@@ -98,15 +109,15 @@ var _InternalRemixGraph = function () {
             var nodeId = parseInt(remixData.remixGraph.scratchNodes[nodeIndex]);
             var unavailableProgramData = { name: remixGraphTranslations.programNotAvailable, username: remixGraphTranslations.programUnknownUser };
             var programData = unavailableProgramData;
-            var programImageUrl = '/images/default/not_available.png';
+            var programImageUrl = IMAGE_NOT_AVAILABLE_URL;
 
             if (nodeId in remixData.remixGraph.scratchNodesData) {
                 programData = remixData.remixGraph.scratchNodesData[nodeId];
-                programImageUrl = scratchBaseImageUrl.replace("{}", nodeId);
+                programImageUrl = SCRATCH_BASE_IMAGE_URL_TEMPLATE.replace("{}", nodeId);
             }
 
             nodesData.push({
-                id: "scratch_" + nodeId,
+                id: SCRATCH_NODE_PREFIX + "_" + nodeId,
                 label: "[Scratch] " + programData.name.trunc(10),
                 name: programData.name.trunc(20),
                 username: programData.username,
@@ -118,8 +129,8 @@ var _InternalRemixGraph = function () {
         for (var edgeIndex = 0; edgeIndex < remixData.remixGraph.catrobatForwardEdgeRelations.length; ++edgeIndex) {
             var edgeData = remixData.remixGraph.catrobatForwardEdgeRelations[edgeIndex];
             edgesData.push({
-                from: "catrobat_" + edgeData.ancestor_id,
-                to: "catrobat_" + edgeData.descendant_id//,
+                from: CATROBAT_NODE_PREFIX + "_" + edgeData.ancestor_id,
+                to: CATROBAT_NODE_PREFIX + "_" + edgeData.descendant_id//,
 //            value: (edgeData.ancestor_id == remixData.id || edgeData.descendant_id == remixData.id) ? 2 : 1
             });
         }
@@ -127,8 +138,8 @@ var _InternalRemixGraph = function () {
         for (var edgeIndex = 0; edgeIndex < remixData.remixGraph.catrobatBackwardEdgeRelations.length; ++edgeIndex) {
             var edgeData = remixData.remixGraph.catrobatBackwardEdgeRelations[edgeIndex];
             edgesData.push({
-                from: "catrobat_" + edgeData.ancestor_id,
-                to: "catrobat_" + edgeData.descendant_id//,
+                from: CATROBAT_NODE_PREFIX + "_" + edgeData.ancestor_id,
+                to: CATROBAT_NODE_PREFIX + "_" + edgeData.descendant_id//,
 //            value: (edgeData.ancestor_id == remixData.id || edgeData.descendant_id == remixData.id) ? 2 : 1
             });
         }
@@ -136,8 +147,8 @@ var _InternalRemixGraph = function () {
         for (var edgeIndex = 0; edgeIndex < remixData.remixGraph.scratchEdgeRelations.length; ++edgeIndex) {
             var edgeData = remixData.remixGraph.scratchEdgeRelations[edgeIndex];
             edgesData.push({
-                from: "scratch_" + edgeData.ancestor_id,
-                to: "catrobat_" + edgeData.descendant_id//,
+                from: SCRATCH_NODE_PREFIX + "_" + edgeData.ancestor_id,
+                to: CATROBAT_NODE_PREFIX + "_" + edgeData.descendant_id//,
 //            value: (edgeData.ancestor_id == remixData.id || edgeData.descendant_id == remixData.id) ? 2 : 1
             });
         }
@@ -224,7 +235,7 @@ var _InternalRemixGraph = function () {
         self.network = new vis.Network(document.getElementById(self.remixGraphLayerId), data, options);
         self.network.setData(data);
 
-        self.nodes.update([{ id: "catrobat_" + remixData.id, color: { border: '#FFFF00' } }]);
+        self.nodes.update([{ id: CATROBAT_NODE_PREFIX + "_" + remixData.id, color: { border: '#FFFF00' } }]);
 
         var clusterOptionsByData = {
             processProperties: function(clusterOptions, childNodes) {
@@ -317,7 +328,7 @@ var _InternalRemixGraph = function () {
             clusterOptionsByData = {
                 joinCondition: function (childOptions) {
                     var parts = childOptions.id.split("_");
-                    if (parts[0] == 'scratch') {
+                    if (parts[0] == SCRATCH_NODE_PREFIX) {
                         return false;
                     }
                     return parseInt(parts[1]) >= 100; // the color is fully defined in the node.
@@ -441,13 +452,63 @@ var _InternalRemixGraph = function () {
          function() {
          closeButtonSelector.click();
          swal("Loading...", "Please wait!", "info");
-         var newUrlPrefix = (idParts[0] == 'catrobat')
+         var newUrlPrefix = (idParts[0] == CATROBAT_NODE_PREFIX)
          ? detailsUrlTemplate.replace('0', '')
-         : 'https://scratch.mit.edu/projects/';
+         : SCRATCH_PROJECT_BASE_URL;
          window.location = newUrlPrefix + nodeId;
          }); */
 
         $.contextMenu('destroy');
+        var contextMenuItems = {
+            "title": {
+                name: "<b>" + selectedNodeData["name"] + "</b>",
+                isHtmlName: true,
+                className: 'context-menu-item-title context-menu-not-selectable'
+            },
+            "subtitle": {
+                name: self.remixGraphTranslations.by + " " + selectedNodeData["username"],
+                isHtmlName: true,
+                className: 'context-menu-item-subtitle context-menu-not-selectable'
+            }
+        };
+
+        if (self.edges.length > 0) {
+            contextMenuItems["sep1"] = "---------";
+        }
+
+        if (nodeId != self.programID) {
+            contextMenuItems["open"] = {
+                name: self.remixGraphTranslations.open,
+                    icon: "fa-external-link",
+                    callback: function () {
+                    self.performClickStatisticRequest(nodeId, (idParts[0] != CATROBAT_NODE_PREFIX));
+                    self.closeButtonSelector.click();
+
+                    var newUrlPrefix = (idParts[0] == CATROBAT_NODE_PREFIX)
+                        ? self.programDetailsUrlTemplate.replace('0', '')
+                        : SCRATCH_PROJECT_BASE_URL;
+
+                    window.location = newUrlPrefix + nodeId + "?rec_by_page_id=" + self.recommendedByPageID + "&rec_by_program_id=" + self.programID;
+                }
+            };
+        }
+
+        if (self.edges.length > 0) {
+            contextMenuItems["edges"] = {
+                name: self.remixGraphTranslations.showPaths,
+                icon: "fa-retweet", // fa-level-down
+                callback: function() {
+                    self.edges.forEach(function (edgeData) {
+                        if (selectedEdges.indexOf(edgeData.id) == -1) {
+                            self.edges.update([{ id: edgeData.id, color: { opacity: 0.1 } }]);
+                        } else {
+                            self.edges.update([{ id: edgeData.id, color: { opacity: 1.0 } }]);
+                        }
+                    });
+                }
+            };
+        }
+
         $.contextMenu({
             selector: '.context-menu-trigger',
             trigger: 'left',
@@ -478,45 +539,21 @@ var _InternalRemixGraph = function () {
                     });
                 }
             },
-            items: {
-                "title": {
-                    name: "<b>" + selectedNodeData["name"] + "</b>",
-                    isHtmlName: true,
-                    className: 'context-menu-item-title context-menu-not-selectable'
-                },
-                "subtitle": {
-                    name: self.remixGraphTranslations.by + " " + selectedNodeData["username"],
-                    isHtmlName: true,
-                    className: 'context-menu-item-subtitle context-menu-not-selectable'
-                },
-                "sep1": "---------",
-                "open": {
-                    name: self.remixGraphTranslations.open,
-                    icon: "fa-external-link",
-                    callback: function () {
-                        self.closeButtonSelector.click();
-                        var newUrlPrefix = (idParts[0] == 'catrobat')
-                            ? self.programDetailsUrlTemplate.replace('0', '')
-                            : 'https://scratch.mit.edu/projects/';
-                        window.location = newUrlPrefix + nodeId;
-                    }
-                },
-                "edges": {
-                    name: self.remixGraphTranslations.showPaths,
-                    icon: "fa-retweet", // fa-level-down
-                    callback: function() {
-                        self.edges.forEach(function (edgeData) {
-                            if (selectedEdges.indexOf(edgeData.id) == -1) {
-                                self.edges.update([{ id: edgeData.id, color: { opacity: 0.1 } }]);
-                            } else {
-                                self.edges.update([{ id: edgeData.id, color: { opacity: 1.0 } }]);
-                            }
-                        });
-                    }
-                }
-            }
+            items: contextMenuItems
         });
         $("#context-menu").click();
+    };
+
+    self.performClickStatisticRequest = function (recommendedProgramID, isScratchProgram) {
+        var type = "remix_graph";
+        var params = { type: type, recFromID: self.programID, recID: recommendedProgramID, isScratchProgram: (isScratchProgram ? 1 : 0) };
+        $.ajaxSetup({ async: false });
+        $.post(self.clickStatisticUrl, params, function (data) {
+            if (data == 'error')
+                console.log("No click statistic is created!");
+        }).fail(function (data) {
+            console.log(data);
+        });
     };
 
     //----------------------------------------------------------------------------------------------------------------------

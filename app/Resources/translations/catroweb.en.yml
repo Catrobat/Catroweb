@@ -37,6 +37,7 @@ pleaseWait: "Please wait..."
 programs:
   featured: Featured
   newest: Newest programs
+  recommended: Recommended programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -70,6 +71,7 @@ programs:
   report_popup_header: Reported
 
 remixgraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'

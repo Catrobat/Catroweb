@@ -308,6 +308,16 @@ class ProgramManager
         return $this->program_repository->getRecommendedProgramsCount($id, $flavor);
     }
 
+    public function getMostRemixedPrograms($flavor, $limit, $offset)
+    {
+        return $this->program_repository->getMostRemixedPrograms($flavor, $limit, $offset);
+    }
+
+    public function getTotalRemixedPrograms($flavor)
+    {
+        return $this->program_repository->getTotalRemixedPrograms($flavor);
+    }
+
     /**
      * @param $remix_migrated_at
      * @return Program|null

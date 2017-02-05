@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProgramRepository extends EntityRepository
 {
+    private $cached_most_remixed_programs_full_result = null;
+
     public function getMostDownloadedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
     {
         $qb = $this->createQueryBuilder('e');
@@ -45,6 +47,74 @@ class ProgramRepository extends EntityRepository
     ->setMaxResults($limit)
     ->getQuery()
     ->getResult();
+    }
+
+    private function generateUnionSqlStatementForMostRemixedPrograms($limit, $offset)
+    {
+        //--------------------------------------------------------------------------------------------------------------
+        // ATTENTION: since Doctrine does not support UNION queries, the following query is a native MySQL/SQLite query
+        //--------------------------------------------------------------------------------------------------------------
+        $limit_clause = intval($limit) > 0 ? 'LIMIT ' . intval($limit) : '';
+        $offset_clause = intval($offset) > 0 ? 'OFFSET ' . intval($offset) : '';
+
+        return "
+            SELECT sum(remixes_count) AS total_remixes_count, id FROM (
+                    SELECT p.id AS id, COUNT(p.id) AS remixes_count
+                    FROM program p
+                    INNER JOIN program_remix_relation r
+                    ON p.id = r.ancestor_id
+                    WHERE p.visible = 1
+                    AND p.flavor = :flavor
+                    AND p.private = 0 AND r.depth = 1 GROUP BY p.id
+                UNION ALL
+                    SELECT p.id AS id, COUNT(p.id) AS remixes_count
+                    FROM program p
+                    INNER JOIN program_remix_backward_relation b
+                    ON p.id = b.parent_id
+                    WHERE p.visible = 1
+                    AND p.flavor = :flavor
+                    AND p.private = 0
+                    GROUP BY p.id
+            ) t
+            GROUP BY id
+            ORDER BY remixes_count DESC
+            $limit_clause
+            $offset_clause
+        ";
+    }
+
+    public function getMostRemixedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
+    {
+        if ($this->cached_most_remixed_programs_full_result == null) {
+            $connection = $this->getEntityManager()->getConnection();
+            $statement = $connection->prepare($this->generateUnionSqlStatementForMostRemixedPrograms($limit, $offset));
+            $statement->bindValue('flavor', $flavor);
+            $statement->execute();
+            $results = $statement->fetchAll();
+        } else {
+            $results = array_slice($this->cached_most_remixed_programs_full_result, $offset, $limit);
+        }
+
+        $programs = [];
+        foreach ($results as $result) {
+            $programs[] = $this->find($result['id']);
+        }
+        return $programs;
+    }
+
+    public function getTotalRemixedPrograms($flavor = 'pocketcode')
+    {
+        if ($this->cached_most_remixed_programs_full_result != null) {
+            return count($this->cached_most_remixed_programs_full_result);
+        }
+
+        $connection = $this->getEntityManager()->getConnection();
+        $statement = $connection->prepare($this->generateUnionSqlStatementForMostRemixedPrograms(0, 0));
+        $statement->bindValue('flavor', $flavor);
+        $statement->execute();
+
+        $this->cached_most_remixed_programs_full_result = $statement->fetchAll();
+        return count($this->cached_most_remixed_programs_full_result);
     }
 
     public function getRecentPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)

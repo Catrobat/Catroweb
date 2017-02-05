@@ -1,7 +1,7 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -19,6 +19,14 @@
     <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
     <div class="programs"></div>
   </div>
+
+  {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+    {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+    <div id="recommended">
+      <h1>{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
+  {% endif %}
 
   <div id="mostDownloaded">
       <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
@@ -41,10 +49,13 @@
   <script src="{{ asset('./js/globalPlugins/owl.carousel.min.js') }}"></script>
   <script>
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
+    var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
+    var recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_remixed_programs') }}', undefined, undefined, recommendedByPageId);
     var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}');
     var mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}');
     var random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
     newest.init();
+    recommended.init();
     mostDownloaded.init();
     mostViewed.init();
     random.init();
@@ -65,6 +76,24 @@
           sessionStorage.setItem("visits", JSON.stringify(parsed_visits));
         }
       }
+    });
+
+    $(document).one('click', ".homepage-recommended-programs", function(event) {
+        event.preventDefault();
+
+        var type = "rec_homepage";
+        var href = $(this).attr('href');
+        var recommendedProgramID = ((href.indexOf("program") > 0) ? (href.split("program")[1].match(/[0-9]+/))[0] : 0);
+
+        $.ajaxSetup({ async: false });
+        var params = { type: type, recFromID: 0, recID: recommendedProgramID, isScratchProgram: 0 };
+        $.post("click-statistic", params, function (data) {
+            if (data == 'error')
+                console.log("No click statistic is created!");
+        }).fail(function (data) {
+            console.log(data);
+        });
+        window.location.href = href;
     });
 
   </script>

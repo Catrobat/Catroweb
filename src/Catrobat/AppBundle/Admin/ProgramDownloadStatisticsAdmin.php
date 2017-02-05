@@ -25,6 +25,11 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program'), array(
                 'admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
+            ->add('recommended_by_page_id')
+            ->add('recommended_by_program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program'), array(
+                'admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('recommended_from_program_via_tag', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program'), array(
+                'admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('downloaded_at')
             ->add('ip')
             ->add('latitude')
@@ -45,6 +50,11 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('id')
             ->add('program.name')
             ->add('program.id')
+            ->add('recommended_by_page_id')
+            ->add('recommended_by_program.name')
+            ->add('recommended_by_program.id')
+            ->add('recommended_from_program_via_tag.name')
+            ->add('recommended_from_program_via_tag.id')
             ->add('user.username')
             ->add('program.gamejam_submission_accepted')
             ->add('downloaded_at')
@@ -61,7 +71,9 @@ class ProgramDownloadStatisticsAdmin extends Admin
         $listMapper
             ->addIdentifier('id')
             ->add('program', null, array('admin_code' => 'catrowebadmin.block.programs.all',))
-            ->add('recommended_from_program', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('recommended_by_page_id')
+            ->add('recommended_by_program', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
+            ->add('recommended_from_program_via_tag', 'entity', array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('user')
             ->add('downloaded_at')
             ->add('ip')
@@ -83,7 +95,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
     }
 
     public function getExportFields() {
-        return array('id','program.id','program.name','recommended_from_program.id','recommended_from_program.name',
+        return array('id','program.id','recommended_by_page_id','program.name','recommended_by_program.id',
+            'recommended_by_program.name','recommended_from_program_via_tag.id','recommended_from_program_via_tag.name',
             'program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description',
             'downloaded_at','ip','latitude','longitude','country_code','country_name','street','postal_code',
             'locality','user_agent','user.username','referrer');

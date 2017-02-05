@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserComment;
+use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -56,7 +57,6 @@ class ProgramController extends Controller
         $screenshot_repository = $this->get('screenshotrepository');
         $router = $this->get('router');
         $elapsed_time = $this->get('elapsedtime');
-        $show_graph = in_array($request->query->get('show_graph'), [0, 1]) ? (bool)$request->query->get('show_graph') : false;
 
         if (!$program || !$program->isVisible()) {
             throw $this->createNotFoundException('Unable to find Project entity.');
@@ -70,9 +70,6 @@ class ProgramController extends Controller
         $program_comments = $this->findCommentsById($program);
         $program_details = $this->createProgramDetailsArray($screenshot_repository, $program, $elapsed_time,
             $referrer, $program_comments, $request);
-
-        // TODO: temporary parameter to show remix graph! will be removed by next Pull Request (Ralph)
-        $program_details['showGraph'] = $show_graph;
 
         $user = $this->getUser();
         $nolb_status = false;
@@ -234,12 +231,31 @@ class ProgramController extends Controller
      * @return array
      */
     private function createProgramDetailsArray($screenshot_repository, $program, $elapsed_time, $referrer, $program_comments, $request) {
+        $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
+        $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
 
-        $rec_from_id = intval($request->query->get('rec_from',0));
-        if ($rec_from_id > 0)
-            $url = $this->generateUrl('download', array('id' => $program->getId(), 'rec_from' => $rec_from_id,  'fname' => $program->getName()));
-        else
-            $url = $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName()));
+        $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
+
+        if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
+            // all recommendations (except tag-recommendations -> see below) should generate this download link!
+            // At the moment only recommendations based on remixes are supported!
+            $url = $this->generateUrl('download', [
+                'id' => $program->getId(),
+                'rec_by_page_id' => $rec_by_page_id,
+                'rec_by_program_id' => $rec_by_program_id,
+                'fname' => $program->getName()
+            ]);
+        } else if ($rec_tag_by_program_id > 0) {
+            // tag-recommendations should generate this download link!
+            $url = $this->generateUrl('download', [
+                'id' => $program->getId(),
+                'rec_from' => $rec_tag_by_program_id,
+                'fname' => $program->getName()
+            ]);
+        } else {
+            // case: NO recommendation
+            $url = $this->generateUrl('download', ['id' => $program->getId(), 'fname' => $program->getName()]);
+        }
 
         $program_details = array(
             'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
