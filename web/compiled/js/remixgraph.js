@@ -545,7 +545,7 @@ var _InternalRemixGraph = function () {
     };
 
     self.performClickStatisticRequest = function (recommendedProgramID, isScratchProgram) {
-        var type = "remix_graph";
+        var type = "rec_remix_graph";
         var params = { type: type, recFromID: self.programID, recID: recommendedProgramID, isScratchProgram: (isScratchProgram ? 1 : 0) };
         $.ajaxSetup({ async: false });
         $.post(self.clickStatisticUrl, params, function (data) {

@@ -115,7 +115,7 @@ class DefaultController extends Controller
         $type = $_POST['type'];
         $referrer = $request->headers->get('referer');
         $statistics = $this->get('statistics');
-        if (in_array($type, ['programs', 'rec_homepage', 'remix_graph'])) {
+        if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification'])) {
             $rec_from_id = $_POST['recFromID'];
             $rec_program_id = $_POST['recID'];
             $is_recommended_program_a_scratch_program = (($type == 'remix_graph') && isset($_POST['isScratchProgram']))

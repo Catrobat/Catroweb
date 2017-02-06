@@ -140,7 +140,7 @@ class StatisticsService
         $this->logger->addDebug('Received geocoded data - latitude: ' . $latitude . ', longitude: ' . $longitude .
             ', country code: ' . $country_code . ', country name: ' . $country_name);
 
-        if (in_array($type, ['programs', 'rec_homepage', 'remix_graph'])) {
+        if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification'])) {
             $click_statistics = new ClickStatistic();
             $click_statistics->setType($type);
             $click_statistics->setUserAgent($user_agent);

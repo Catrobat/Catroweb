@@ -1,5 +1,5 @@
 @homepage
-Feature: Creating click statistics by clicking on tags, extensions and recommendet programs
+Feature: Creating click statistics by clicking on tags, extensions and recommended programs
 
   Background:
     Given there are users:

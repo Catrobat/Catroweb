@@ -124,8 +124,7 @@
       {% endif %}
 
       <div class="download-container">
-        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}
-                    {{ program_details.downloadUrl }} {% else %} javascript:program.showUpdateAppPopup(); {% endif %}">
+        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
           <button id="download" class="btn btn-primary download-button">
             <table>
               <tr>
@@ -572,7 +571,7 @@
           var type = $(this).attr("data-like-type");
           var username = "{{ user_name }}";
           if (username == "") {
-              window.location = url + "?type=" + type;
+              window.location.href = url + "?type=" + type;
               return;
           }
 

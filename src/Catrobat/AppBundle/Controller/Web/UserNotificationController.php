@@ -2,11 +2,14 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\ProgramLike;
+use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserNotificationController extends Controller
 {
@@ -83,7 +86,7 @@ class UserNotificationController extends Controller
      *        requirements={"ancestor_id":"\d+", "descendant_id":"\d+"})
      * @Method({"GET"})
      */
-    public function seeUserNotificationAction($ancestor_id, $descendant_id)
+    public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id)
     {
         $user = $this->getUser();
         if (!$user) {
@@ -99,7 +102,16 @@ class UserNotificationController extends Controller
                 . 'because you do not own the parent program.');
         }
 
+        $statistics = $this->get('statistics');
+        $referrer = $request->headers->get('referer');
+        $statistics->createClickStatistics($request, 'rec_remix_notification', $ancestor_id, $descendant_id, null, null,
+            $referrer, false);
+
         $remix_manager->markRemixRelationAsSeen($remix_relation);
-        return $this->redirectToRoute('program', ['id' => $descendant_id]);
+        return $this->redirectToRoute('program', [
+            'id' => $descendant_id,
+            'rec_by_page_id' => RecommendedPageId::NOTIFICATION_CENTER_PAGE,
+            'rec_by_program_id' => $ancestor_id
+        ]);
     }
 }

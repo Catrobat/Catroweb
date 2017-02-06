@@ -1,5 +1,5 @@
 @homepage
-Feature: A/B testing for recommendation system
+Feature: A/B testing for recommendation system & remix graph
 
   Background:
     Given there are users:
@@ -27,3 +27,16 @@ Feature: A/B testing for recommendation system
     When I switch the language to "Russisch"
     Then I should not see "Recommended programs"
     And I should not see "#recommended"
+
+  Scenario: User with selected russian language cannot see the remix graph button and details on program page
+    Given I am on "/pocketcode/program/1"
+    And the selected language is "English"
+    And I should see "Show Remix Graph"
+    And I should see "1 remix"
+    And the element "#remix-graph-button" should be visible
+    And the element "#remix-graph-modal-link" should be visible
+    When I switch the language to "Russisch"
+    Then I should not see "Show Remix Graph"
+    And I should not see "1 remix"
+    And I should not see "#remix-graph-button"
+    And the element "#remix-graph-modal-link" should not be visible
