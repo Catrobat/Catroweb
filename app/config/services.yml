@@ -51,6 +51,13 @@ services:
         arguments:
             - "AppBundle:Program"
 
+    programlikerepository:
+        class: Catrobat\AppBundle\Entity\ProgramLikeRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ProgramLike"
+
     programremixrepository:
         class: Catrobat\AppBundle\Entity\ProgramRemixRepository
         factory_service: doctrine.orm.entity_manager
@@ -182,6 +189,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
             - "@tagrepository"
+            - "@programlikerepository"
             - "@event_dispatcher"
 
 
@@ -202,6 +210,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
             - "@tagrepository"
+            - "@programlikerepository"
             - "@event_dispatcher"
 
     remixmanager:

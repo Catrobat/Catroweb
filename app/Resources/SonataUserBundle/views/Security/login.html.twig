@@ -31,7 +31,12 @@
       <div class="img-password"></div>
     </div>
 
-    {% if ("/login" in app.request.headers.get('referer')) %}
+    {% if (app.session.get("catroweb_login_redirect") is not empty) %}
+        <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}" />
+        {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
+        {{ app.session.set("catroweb_login_redirect", "") }}
+
+    {% elseif ("/login" in app.request.headers.get('referer')) %}
 
         {% if app.session.has("catroweb_login_referer") %}
             <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer")  }}#login" />

@@ -234,6 +234,17 @@ class Program
     protected $scratch_remix_parent_relations;
 
     /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramLike",
+     *     mappedBy="program",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramLike[]
+     */
+    protected $likes;
+
+    /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
     protected $approved;
@@ -295,6 +306,7 @@ class Program
         $this->catrobat_remix_backward_parent_relations = new ArrayCollection();
         $this->catrobat_remix_descendant_relations = new ArrayCollection();
         $this->remix_migrated_at = null;
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -1194,6 +1206,22 @@ class Program
         return ($this->scratch_remix_parent_relations != null)
             ? $this->scratch_remix_parent_relations
             : new ArrayCollection();
+    }
+
+    /**
+     * @return ProgramLike[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ProgramLike[]|\Doctrine\Common\Collections\Collection $likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
     }
 
 }

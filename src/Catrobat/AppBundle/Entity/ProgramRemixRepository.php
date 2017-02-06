@@ -4,7 +4,6 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\DBAL\Types\Type;
 
 
 /**

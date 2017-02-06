@@ -32,8 +32,10 @@ class ProgramManager
 
     protected $tag_repository;
 
-    public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager,
-                                $program_repository, $tag_repository, EventDispatcherInterface $event_dispatcher)
+    protected $program_like_repository;
+
+    public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository,
+                                $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher)
     {
         $this->file_extractor = $file_extractor;
         $this->event_dispatcher = $event_dispatcher;
@@ -42,6 +44,7 @@ class ProgramManager
         $this->entity_manager = $entity_manager;
         $this->program_repository = $program_repository;
         $this->tag_repository = $tag_repository;
+        $this->program_like_repository = $program_like_repository;
     }
 
     public function addProgram(AddProgramRequest $request)
@@ -114,6 +117,45 @@ class ProgramManager
         $event = $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
 
         return $program;
+    }
+
+    public function findUserLike($program_id, $user_id)
+    {
+        return $this->program_like_repository->findOneBy(['program_id' => $program_id, 'user_id' => $user_id]);
+    }
+
+    public function toggleLike(Program $program, User $user, $type, $no_unlike)
+    {
+        $existing_program_like = $this->program_like_repository->findOneBy(['program_id' => $program->getId(), 'user_id' => $user->getId()]);
+        if ($existing_program_like != null) {
+            $existing_program_like_type = $existing_program_like->getType();
+            $this->entity_manager->remove($existing_program_like);
+
+            // case: unlike
+            if ($existing_program_like_type == $type) {
+                if ($no_unlike) {
+                    return $type;
+                }
+                $this->entity_manager->flush();
+                return ProgramLike::TYPE_NONE;
+            }
+        }
+
+        // case: like
+        $program_like = new ProgramLike($program, $user, $type);
+        $this->entity_manager->persist($program_like);
+        $this->entity_manager->flush();
+        return $type;
+    }
+
+    public function likeTypeCount($program_id, $type)
+    {
+        return $this->program_like_repository->likeTypeCount($program_id, $type);
+    }
+
+    public function totalLikeCount($program_id)
+    {
+        return $this->program_like_repository->totalLikeCount($program_id);
     }
 
     public function addTags($program, $extracted_file, $language)
