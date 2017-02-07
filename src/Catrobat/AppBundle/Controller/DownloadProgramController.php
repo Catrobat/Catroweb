@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller;
 
+use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,7 +35,10 @@ class DownloadProgramController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $rec_from_id = intval($request->query->get('rec_from',0));
+        $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
+        $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
+
+        $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
 
         $file = $file_repository->getProgramFile($id);
         if ($file->isFile()) {
@@ -45,8 +49,15 @@ class DownloadProgramController extends Controller
                 $request->getSession()->set('downloaded', $downloaded);
                 $request->attributes->set('download_statistics_program_id', $id);
                 $request->attributes->set('referrer', $referrer);
-                if ($rec_from_id > 0)
-                    $request->attributes->set('rec_from', $rec_from_id);
+
+                if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
+                    // all recommendations (except tag-recommendations -> see below)
+                    $request->attributes->set('rec_by_page_id', $rec_by_page_id);
+                    $request->attributes->set('rec_by_program_id', $rec_by_program_id);
+                } else if ($rec_tag_by_program_id > 0) {
+                    // tag-recommendations
+                    $request->attributes->set('rec_from', $rec_tag_by_program_id);
+                }
             }
 
             $response = new BinaryFileResponse($file);

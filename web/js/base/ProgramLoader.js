@@ -1,8 +1,9 @@
-var ProgramLoader = function (container, url, column_max, id) {
+var ProgramLoader = function (container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
   var self = this;
   self.container = container;
   self.url = url;
-  self.program_id = id;
+  self.recommended_by_program_id = (typeof recommended_by_program_id === "undefined") ? null : recommended_by_program_id;
+  self.recommended_by_page_id = (typeof recommended_by_page_id === "undefined") ? null : recommended_by_page_id;
   self.default_rows = 2;
   self.columns_min = 3; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
   self.columns_max = (typeof column_max === "undefined") ? 9 : column_max; // before changing these values, have a look at '.programs{.program{width:.%}}' in 'brain.less' first
@@ -33,7 +34,7 @@ var ProgramLoader = function (container, url, column_max, id) {
       return;
 
     self.setParamsWithSessionStorage(); // sets self.prev_visible and self.initial_download_limit
-    $.get(self.url, { program_id: self.program_id,}, function(data) {
+    $.get(self.url, { program_id: self.recommended_by_program_id,}, function(data) {
       if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
         $(self.container).hide();
         // $(self.container).find('.programs').append('<div class="no-programs">There are currently no programs.</div>');
@@ -94,9 +95,10 @@ var ProgramLoader = function (container, url, column_max, id) {
     var programs = data.CatrobatProjects;
     for(var i=0; i < programs.length; i++) {
       var div = null;
+      var additionalLinkCssClass = null;
 
       // Extend this for new containers...
-      switch(self.container) {
+      switch (self.container) {
         case '#newest':
         case '#search-results':
         case "#random":
@@ -115,6 +117,10 @@ var ProgramLoader = function (container, url, column_max, id) {
         case '#recommendations':
           div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
           break;
+        case '#recommended':
+          div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
+          additionalLinkCssClass = "homepage-recommended-programs";
+          break;
         default:
           if($(self.container).hasClass('starterDownloads'))
             div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
@@ -122,16 +128,21 @@ var ProgramLoader = function (container, url, column_max, id) {
             div = '<div>' + programs[i].Author + '</div>';
       }
 
-      if (self.container == "#recommendations")
-        var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_from=" + self.program_id;
-      else
+      if (self.container == "#recommendations") {
+        var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_from=" + self.recommended_by_program_id;
+      } else if (self.container == "#recommended") {
+        var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_by_page_id=" + self.recommended_by_page_id;
+        program_link += (self.recommended_by_program_id != null) ? "&rec_by_program_id=" + self.recommended_by_program_id : "";
+      } else {
         var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
+      }
 
       var stored_visits = sessionStorage.getItem("visits");
+      var linkCssClasses = "rec-programs" + ((additionalLinkCssClass != null) ? (" " + additionalLinkCssClass) : "");
       if(!stored_visits){
         var program = $(
             '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
-            '<a class="rec-programs" href = \''+ program_link + '\'>'+
+            '<a class="' + linkCssClasses + '" href = \''+ program_link + '\'>'+
             '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
             '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
             div +
@@ -145,7 +156,7 @@ var ProgramLoader = function (container, url, column_max, id) {
         if($.inArray(program_id, parsed_visits)>=0) {
           var program = $(
             '<div class="program visited-program" id="program-'+ programs[i].ProjectId +'">'+
-              '<a class="rec-programs" href = \''+ program_link + '\' >'+
+              '<a class="' + linkCssClasses + '" href = \''+ program_link + '\' >'+
                 '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
                 '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
                 div +
@@ -156,7 +167,7 @@ var ProgramLoader = function (container, url, column_max, id) {
         else{
           var program = $(
               '<div class="program" id="program-'+ programs[i].ProjectId +'">'+
-              '<a class="rec-programs" href = \''+ program_link + '\'>'+
+              '<a class="' + linkCssClasses + '" href = \''+ program_link + '\'>'+
               '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall +'"></div>'+
               '<div class="program-name"><b>'+ programs[i].ProjectName +'</b></div>'+
               div +

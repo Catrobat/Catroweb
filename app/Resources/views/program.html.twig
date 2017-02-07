@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/pocketcode/remixgraph.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
 
   <script src="https://share.catrob.at/html5/player/pocketCodePlayer.js"></script>
   <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('LoadingAnimation.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('jquery.contextMenu.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('jquery.ui.position.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('animatedModal.min.js') )}}"></script>
@@ -43,16 +45,40 @@
   </div>
 
   <div id="program-middle">
-      <div id="image" class="image-container">
-          <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
+    <div id="image" class="image-container">
+      <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}" />
 {#
           <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});"> <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64"> <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z"></path> <polygon class="pc-svgPlayerIconSymbol" points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934"></polygon> </svg> </button>
 #}
-        </a>
-        {% if not isWebview() %}
-          {% include ':social:social_share_desktop.html.twig' %}
-        {% endif %}
+      <div id="program-like-container">
+        <div>
+          <div id="program-like-buttons-container">
+            <a id="program-like-thumbs-up" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}">
+              <img class="img-share" src="{{ asset('images/social/like/thumbs_up.png') }}" alt="Thumbs up!" title="Thumbs up!"/>
+              <span class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span class="plural">{{ "programs.likeThumbsUpDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+            </a>
+            <a id="program-like-smile" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_SMILE') }}">
+              <img class="img-share" src="{{ asset('images/social/like/smile.png') }}" alt="Smile!" title="Smile!"/>
+              <span class="singular">{{ "programs.likeSmileDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span class="plural">{{ "programs.likeSmileDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+            </a>
+            <a id="program-like-love" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_LOVE') }}">
+              <img class="img-share" src="{{ asset('images/social/like/love.png') }}" alt="Love!" title="Love!"/>
+              <span class="singular">{{ "programs.likeLoveDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span class="plural">{{ "programs.likeLoveDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+            </a>
+            <a id="program-like-wow" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_WOW') }}">
+              <img class="img-share" src="{{ asset('images/social/like/wow.png') }}" alt="Wooow!" title="Wooow!"/>
+              <span class="singular">{{ "programs.likeWowDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span class="plural">{{ "programs.likeWowDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+            </a>
+            <span id="program-like-counter" class="program-like-counter"></span>
+          </div>
+        </div>
+        <div id="program-like-detail-container">&nbsp;</div>
       </div>
+    </div>
 
     <div id="info">
       <h2>{{ "description"|trans({}, "catroweb") }}</h2>
@@ -98,8 +124,7 @@
       {% endif %}
 
       <div class="download-container">
-        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}
-                    {{ program_details.downloadUrl }} {% else %} javascript:program.showUpdateAppPopup(); {% endif %}">
+        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
           <button id="download" class="btn btn-primary download-button">
             <table>
               <tr>
@@ -110,10 +135,22 @@
           </button>
         </a>
 
+        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+            {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+          <button id="remix-graph-button" class="btn btn-primary download-button">
+            <table>
+              <tr>
+                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                <td>{{ "remixgraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
+        {% endif %}
+
         <button id="apk-generate" class="btn btn-apk download-button">
           <table>
             <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
               <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
             </tr>
           </table>
@@ -123,7 +160,7 @@
           <button  class="btn download-button download-pending">
             <table>
               <tr>
-                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" > </td>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
                 <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
@@ -134,7 +171,7 @@
         <button id="apk-download" class="btn btn-apk download-button">
           <table>
             <tr>
-              <td><i class="fa fa-sitemap" aria-hidden="true"></i></td>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
               <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
             </tr>
           </table>
@@ -201,7 +238,7 @@
           </div>
         {% endif %}
       {% endif %}
-      <br>
+      <br />
 
       <table id="copy-link">
         <tr>
@@ -216,6 +253,10 @@
           </td>
         </tr>
       </table>
+
+      {% if not isWebview() %}
+          {% include ':social:social_share_desktop.html.twig' %}
+      {% endif %}
 
       <p>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
@@ -288,15 +329,16 @@
       <div class="img-views icon"></div>
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
-    {% if program_details.showGraph %}
-    <div id="icon-remix">
-      <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
-      <span class="icon-text">
+    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+      {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+      <div id="icon-remix">
+        <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
+        <span class="icon-text">
         <a id="remix-graph-modal-link" href="#remix-graph-modal">
           {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
         </a>
       </span>
-    </div>
+      </div>
     {% endif %}
   </div>
 
@@ -423,7 +465,8 @@
     });
 
     var undefined;
-    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}',undefined, {{ program.id }});
+    var programID = {{ program.id }};
+    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', undefined, programID);
     recs.initRecsys();
 
     counter = 10;
@@ -434,21 +477,49 @@
       open: "{{ "remixgraph.open"|trans({}, "catroweb") }}",
       showPaths: "{{ "remixgraph.showPaths"|trans({}, "catroweb") }}",
       programNotAvailableErrorTitle: "{{ "remixgraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
-      programNotAvailableErrorDescription: "{{ "remixgraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}"
+      programNotAvailableErrorDescription: "{{ "remixgraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}",
+      programNotAvailable: "{{ "remixgraph.programNotAvailable"|trans({}, "catroweb") }}",
+      programUnknownUser: "{{ "remixgraph.programUnknownUser"|trans({}, "catroweb") }}"
     };
 
+    var PROGRAM_LIKE_TYPE_NONE = {{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_NONE') }};
+
+    function updateLikeCount(likeType, likeTypeCount, totalLikeCount) {
+        $("a.program-like-button").removeClass("selected");
+        $("#program-like-buttons-container > .program-like-counter").text(totalLikeCount);
+        if (likeType == PROGRAM_LIKE_TYPE_NONE) {
+            $("#program-like-detail-container").html("&nbsp;");
+            return;
+        }
+        var likeTypeButton = $("a.program-like-button[data-like-type=" + likeType + "]");
+        likeTypeButton.addClass("selected");
+        var singularOrPlural = (likeTypeCount == 1) ? true : false;
+        var translatedDetailSpanTextTemplate = likeTypeButton.children(singularOrPlural ? ".singular" : ".plural")[0];
+        var replaceCount = '<span class="program-like-counter">' + likeTypeCount + '<span>';
+        var translatedDetailText = translatedDetailSpanTextTemplate.innerHTML.replace((singularOrPlural ? "1" : "2"), replaceCount);
+        $("#program-like-detail-container").html(translatedDetailText);
+    }
+
     $(document).ready(function() {
+      var loadingAnimation = new LoadingAnimation('#FFFFFF', "{{ "pleaseWait"|trans({}, "catroweb") }}");
+      var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
+      var remixGraph = RemixGraph.getInstance();
+      remixGraph.init(programID, recommendedByPageId, "remix-graph-modal", "remix-graph-layer", "close-button",
+          "{{ program_details_url_template }}", "../click-statistic", remixGraphTranslations);
+
+      updateLikeCount({{ program_details.likeType }}, {{ program_details.likeTypeCount }}, {{ program_details.totalLikeCount }});
+
       $("#remix-graph-modal-link").animatedModal({
         modalTarget: 'remix-graph-modal',
         animatedIn: 'zoomInUp',
         animatedOut: 'bounceOutDown',
         color: '#177f8d',
         beforeOpen: function() {
-          destroyNetwork();
+          remixGraph.destroy();
           if (cachedRemixData != null) {
             document.addEventListener('gesturestart', blockEventListener);
             document.ontouchmove = blockEventListener;
-            render("remix-graph-modal", "remix-graph-layer", "close-button", cachedRemixData, remixGraphTranslations);
+            remixGraph.render(cachedRemixData, loadingAnimation);
           } else {
             $.ajax({
               url: "{{ path('program_remix_graph', { 'id' : program.id }) }}",
@@ -457,7 +528,7 @@
                 cachedRemixData = remixData;
                 document.addEventListener('gesturestart', blockEventListener);
                 document.ontouchmove = blockEventListener;
-                render("remix-graph-modal", "remix-graph-layer", "close-button", remixData, remixGraphTranslations);
+                remixGraph.render(remixData, loadingAnimation);
               },
               error: function(data) {
                 alert("Unable to fetch remix-graph!");
@@ -471,6 +542,7 @@
         },
         beforeClose: function() {
           console.log("The animation was called");
+          loadingAnimation.hide();
         },
         afterClose: function() {
           console.log("The animation is completed");
@@ -489,7 +561,49 @@
         }
       });
 
-      $(document).on("click", "#nolb-submission-button", function(){
+      $(document).on("click", "#remix-graph-button", function() {
+          $("#remix-graph-modal-link").click();
+      });
+
+      $(document).on("click", "a.program-like-button", function(event) {
+          event.preventDefault();
+          var url = "{{ path('program_like', { 'id' : program.id }) }}";
+          var type = $(this).attr("data-like-type");
+          var username = "{{ user_name }}";
+          if (username == "") {
+              window.location.href = url + "?type=" + type;
+              return;
+          }
+
+          $("#program-like-detail-container").text("{{ "pleaseWait"|trans({}, "catroweb") }}");
+          $("a.program-like-button").removeClass("selected");
+          $(this).addClass("selected");
+
+          $.ajax({
+              url: url,
+              type: "get",
+              data: { type: type },
+              success: function(data) {
+                  if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
+                      if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
+                          window.location.href = "{{ path('login') }}";
+                          return;
+                      }
+                      alert("something went wrong");
+                      $(this).removeClass("selected");
+                      return;
+                  }
+                  updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount);
+              },
+              error: function(data) {
+                  alert("something went terribly wrong");
+                  $(this).removeClass("selected");
+              }
+          });
+          return false;
+      });
+
+      $(document).on("click", "#nolb-submission-button", function() {
          var username = "{{ user_name }}";
          var programURL = "{{ program_url }}";
          var projectID = $('#nolb-submission-project-id').val();

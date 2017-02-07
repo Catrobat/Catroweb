@@ -32,10 +32,12 @@ notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
 
 programs:
   featured: Featured
   newest: Newest programs
+  recommended: Recommended programs
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -44,6 +46,10 @@ programs:
   downloads: %downloads% downloads
   sample: Example Programs
   views: %views% views
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
@@ -68,13 +74,15 @@ programs:
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
 
-
 remixgraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 
 
 passwordRecovery:

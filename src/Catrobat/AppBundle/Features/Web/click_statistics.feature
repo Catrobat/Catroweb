@@ -1,5 +1,5 @@
 @homepage
-Feature: Creating click statistics by clicking on tags, extensions and recommendet programs
+Feature: Creating click statistics by clicking on tags, extensions and recommended programs
 
   Background:
     Given there are users:
@@ -20,13 +20,23 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 4  | Music        | Musik       |
       | 5  | Art          | Kunst       |
       | 6  | Experimental | Experimental|
+
     And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions | tags_id |
-      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 |
-      | 2  | Galaxy    | p2          | Catrobat | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   |
-      | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     |
-      | 4  | Trolol    | p5          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       |
-      | 5  | Nothing   | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
+      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions | tags_id | remix_root |
+      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 | true       |
+      | 2  | Galaxy    | p2          | Catrobat | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   | false      |
+      | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     | true       |
+      | 4  | Trolol    | p5          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       | true       |
+      | 5  | Nothing   | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       | true       |
+
+    And there are forward remix relations:
+      | ancestor_id | descendant_id | depth |
+      | 1           | 1             | 0     |
+      | 1           | 2             | 1     |
+      | 2           | 2             | 0     |
+      | 3           | 3             | 0     |
+      | 4           | 4             | 0     |
+      | 5           | 5             | 0     |
 
   @javascript
   Scenario: Create one statistic entry from tags
@@ -51,3 +61,13 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     And I wait for AJAX to finish
     Then There should be one database entry with type is "programs" and "program_id" is "2"
     And I should see "p2"
+
+  @javascript
+  Scenario: Create one statistic entry from recommended programs on homepage
+    Given I am on "/pocketcode"
+    Then I wait for AJAX to finish
+    When I click on the first recommended homepage program
+    And I wait for AJAX to finish
+    Then There should be one database entry with type is "rec_homepage" and "program_id" is "1"
+    And I should see "Minions"
+    And I should see "p1"

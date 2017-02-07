@@ -31,8 +31,11 @@ notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
+pleaseWait: "Bitte warten..."
+
 programs:
   featured: Empfohlen
+  recommended: Interessante Programme
   newest: Neueste Programme
   most:
     viewed: meist gesehen
@@ -42,6 +45,10 @@ programs:
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprogramme
   views: '%views% gesehen'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 Remixe |{1}1 Remix |] 1, Inf]%remixes% Remixe'
   newRemixesNotificationTitle: '|{1} "%programName%" hat 1 neuen Remix: |] 1, Inf] "%programName%" hat %remixes% neue Remixe:'
   submitted: Eingereichte Programme
@@ -66,11 +73,14 @@ programs:
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
 remixgraph:
-  by: 'um'
+  showRemixGraph: 'Remix Graph anzeigen'
+  by: 'von'
   open: 'Öffnen'
   showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
+  programNotAvailable: 'Nicht verfügbar'
+  programUnknownUser: 'Unbekannter User'
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |

@@ -18,6 +18,7 @@ class ProgramManagerSpec extends ObjectBehavior
      * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository
      * @param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository
      * @param \Catrobat\AppBundle\Entity\TagRepository $tag_repository
+     * @param \Catrobat\AppBundle\Entity\ProgramLikeRepository $program_like_repository
      * @param \Doctrine\ORM\EntityManager $entity_manager
      * @param \Symfony\Component\HttpFoundation\File\File $file
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
@@ -29,9 +30,9 @@ class ProgramManagerSpec extends ObjectBehavior
      * @param \Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception
      * @param \Doctrine\ORM\Mapping\ClassMetadata $metadata
      */
-    public function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_program, $tag_repository)
+    public function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_program, $tag_repository, $program_like_repository)
     {
-        $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, $event_dispatcher);
+        $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, $program_like_repository, $event_dispatcher);
         $request->getProgramfile()->willReturn($file);
         $request->getUser()->willReturn($user);
         $request->getIp()->willReturn('127.0.0.1');

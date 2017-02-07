@@ -50,6 +50,17 @@ class User extends BaseUser implements LdapUserInterface
     protected $programs;
 
     /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramLike",
+     *     mappedBy="user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramLike[]
+     */
+    protected $likes;
+
+    /**
      * @ORM\Column(type="string", length=300, nullable=true)
      */
     protected $gplus_access_token;
@@ -304,5 +315,21 @@ class User extends BaseUser implements LdapUserInterface
     public function setNolbUser($nolb_user)
     {
         $this->nolb_user = $nolb_user;
+    }
+
+    /**
+     * @return ProgramLike[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ProgramLike[]|\Doctrine\Common\Collections\Collection $likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
     }
 }
