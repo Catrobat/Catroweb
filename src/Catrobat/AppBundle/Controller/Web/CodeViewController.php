@@ -124,6 +124,12 @@ class CodeViewController extends Controller
   const SET_PEN_COLOR_BRICK = 'SetPenColorBrick';
   const STAMP_BRICK = 'StampBrick';
   const CLEAR_BACKGROUND_BRICK = 'ClearBackgroundBrick';
+  const LEGO_EV3_MOTOR_STOP_BRICK = 'LegoEv3MotorStopBrick';
+  const LEGO_EV3_MOTOR_MOVE_BRICK = 'LegoEv3MotorMoveBrick';
+  const LEGO_EV3_MOTOR_PLAY_TONE_BRICK = 'LegoEv3PlayToneBrick';
+  const LEGO_EV3_MOTOR_TURN_ANGLE_BRICK = 'LegoEv3MotorTurnAngleBrick';
+  const LEGO_EV3_SET_LED_BRICK = 'LegoEv3SetLedBrick';
+  const ASK_SPEECH_BRICK = 'AskSpeechBrick';
 
   // Brick Images
   const EVENT_SCRIPT_IMG = '1h_when_brown.png';
@@ -135,6 +141,7 @@ class CodeViewController extends Controller
   const LOOKS_BRICK_IMG = '1h_brick_green.png';
   const DATA_BRICK_IMG = '1h_brick_red.png';
   const PEN_BRICK_IMG = '1h_brick_darkgreen.png';
+  const LEGO_EV3_BRICK_IMG = '1h_brick_yellow.png';
   const UNKNOWN_SCRIPT_IMG = '1h_when_grey.png';
   const UNKNOWN_BRICK_IMG = '1h_brick_grey.png';
 
@@ -185,11 +192,18 @@ class CodeViewController extends Controller
   const REPLACE_ITEM_LIST_INDEX_FORMULA = 'REPLACE_ITEM_IN_USERLIST_INDEX';
   const REPEAT_UNTIL_CONDITION_FORMULA = 'REPEAT_UNTIL_CONDITION';
   const ASK_QUESTION_FORMULA = 'ASK_QUESTION';
+  const ASK_SPEECH_QUESTION_FORMULA = 'ASK_SPEECH_QUESTION';
   const STRING_FORMULA = 'STRING';
   const PEN_SIZE_FORMULA = 'PEN_SIZE';
   const PEN_COLOR_RED_FORMULA = 'PHIRO_LIGHT_RED';
   const PEN_COLOR_BLUE_FORMULA = 'PHIRO_LIGHT_BLUE';
   const PEN_COLOR_GREEN_FORMULA = 'PHIRO_LIGHT_GREEN';
+  const LEGO_EV3_POWER_FORMULA = 'LEGO_EV3_POWER';
+  const LEGO_EV3_PERIOD_IN_SECONDS_FORMULA = 'LEGO_EV3_PERIOD_IN_SECONDS';
+  const LEGO_EV3_DURATION_IN_SECONDS_FORMULA = 'LEGO_EV3_DURATION_IN_SECONDS';
+  const LEGO_EV3_VOLUME_FORMULA = 'LEGO_EV3_VOLUME';
+  const LEGO_EV3_FREQUENCY_FORMULA = 'LEGO_EV3_FREQUENCY';
+  const LEGO_EV3_DEGREES_FORMULA = 'LEGO_EV3_DEGREES';
 
   const OPERATOR_FORMULA_TYPE = 'OPERATOR';
   const FUNCTION_FORMULA_TYPE = 'FUNCTION';
@@ -893,6 +907,9 @@ class CodeViewController extends Controller
       case self::SPEAK_WAIT_BRICK:
         $resolved_brick = $this->writeSpeakWaitBrick($brick);
         break;
+      case self::ASK_SPEECH_BRICK:
+        $resolved_brick = $this->writeAskSpeechBrick($brick);
+        break;
 
       // LOOK Bricks
       case self::SET_LOOK_BRICK:
@@ -1012,6 +1029,23 @@ class CodeViewController extends Controller
         break;
       case self::CLEAR_BACKGROUND_BRICK:
         $resolved_brick = $this->writeClearBackgroundBrick();
+        break;
+
+      // LEGO EV3 Bricks
+      case self::LEGO_EV3_MOTOR_STOP_BRICK:
+        $resolved_brick = $this->writeLegoEV3MotorStopBrick($brick);
+        break;
+      case self::LEGO_EV3_MOTOR_MOVE_BRICK:
+        $resolved_brick = $this->writeLegoEV3MotorMoveBrick($brick);
+        break;
+      case self::LEGO_EV3_MOTOR_PLAY_TONE_BRICK:
+        $resolved_brick = $this->writeLegoEV3MotorPlayToneBrick($brick);
+        break;
+      case self::LEGO_EV3_MOTOR_TURN_ANGLE_BRICK:
+        $resolved_brick = $this->writeLegoEV3MotorTurnAngleBrick($brick);
+        break;
+      case self::LEGO_EV3_SET_LED_BRICK:
+        $resolved_brick = $this->writeLegoEV3SetLedBrick($brick);
         break;
 
       // OTHER Bricks
@@ -1538,6 +1572,21 @@ class CodeViewController extends Controller
     );
   }
 
+  private function writeAskSpeechBrick($brick)
+  {
+    $variable = null;
+    if ($brick->userVariable[self::REFERENCE_ATTRIBUTE] != null)
+      $variable = $brick->userVariable->xpath($brick->userVariable[self::REFERENCE_ATTRIBUTE])[0];
+    else
+      $variable = $brick->userVariable;
+    return array(
+      'name' => self::ASK_SPEECH_BRICK,
+      'text' => "Ask \"" . $this->retrieveFormulasFromXml($brick->formulaList)[self::ASK_SPEECH_QUESTION_FORMULA] .
+        "\" and store written answer in " . $variable,
+      'img_file' => self::SOUND_BRICK_IMG
+    );
+  }
+
   private function writeSetLookBrick($brick)
   {
     $look_file_name = null;
@@ -1945,6 +1994,57 @@ class CodeViewController extends Controller
       'name' => self::CLEAR_BACKGROUND_BRICK,
       'text' => "Clear",
       'img_file' => self::PEN_BRICK_IMG
+    );
+  }
+
+  private function writeLegoEV3MotorStopBrick($brick)
+  {
+    return array(
+      'name' => self::LEGO_EV3_MOTOR_STOP_BRICK,
+      'text' => "Stop EV3 motor " . $brick->motor,
+      'img_file' => self::LEGO_EV3_BRICK_IMG
+    );
+  }
+
+  private function writeLegoEV3MotorMoveBrick($brick)
+  {
+    $formulas = $this->retrieveFormulasFromXml($brick->formulaList);
+    return array(
+      'name' => self::LEGO_EV3_MOTOR_MOVE_BRICK,
+      'text' => "Set EV3 motor " . $brick->motor . " to "
+        . $formulas[self::LEGO_EV3_POWER_FORMULA] . "% Power for "
+        . $formulas[self::LEGO_EV3_PERIOD_IN_SECONDS_FORMULA] . " seconds",
+      'img_file' => self::LEGO_EV3_BRICK_IMG
+    );
+  }
+
+  private function writeLegoEV3MotorPlayToneBrick($brick)
+  {
+    $formulas = $this->retrieveFormulasFromXml($brick->formulaList);
+    return array(
+      'name' => self::LEGO_EV3_MOTOR_PLAY_TONE_BRICK,
+      'text' => "Play EV3 tone for " . $formulas[self::LEGO_EV3_DURATION_IN_SECONDS_FORMULA] . " seconds - Frequency: "
+        . $formulas[self::LEGO_EV3_FREQUENCY_FORMULA] . " x100Hz - Volume: "
+        . $formulas[self::LEGO_EV3_VOLUME_FORMULA] . " %",
+      'img_file' => self::LEGO_EV3_BRICK_IMG
+    );
+  }
+
+  private function writeLegoEV3MotorTurnAngleBrick($brick)
+  {
+    return array(
+      'name' => self::LEGO_EV3_MOTOR_TURN_ANGLE_BRICK,
+      'text' => "Turn EV3 motor " . $brick->motor . " by " . $this->retrieveFormulasFromXml($brick->formulaList)[self::LEGO_EV3_DEGREES_FORMULA] . "°",
+      'img_file' => self::LEGO_EV3_BRICK_IMG
+    );
+  }
+
+  private function writeLegoEV3SetLedBrick($brick)
+  {
+    return array(
+      'name' => self::LEGO_EV3_SET_LED_BRICK,
+      'text' => "Set EV3 LED Status " . $brick->ledStatus,
+      'img_file' => self::LEGO_EV3_BRICK_IMG
     );
   }
 
