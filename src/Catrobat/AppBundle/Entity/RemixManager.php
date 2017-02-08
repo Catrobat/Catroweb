@@ -312,6 +312,10 @@ class RemixManager
             ->program_remix_repository
             ->getDirectEdgeRelationsBetweenProgramIds($catrobat_ids_of_whole_graph, $catrobat_ids_of_whole_graph);
 
+        $catrobat_forward_relations = $this
+            ->program_remix_repository
+            ->getDescendantRelations($catrobat_ids_of_whole_graph);
+
         $catrobat_forward_edge_data = array_map(function ($r) {
             return [
                 'ancestor_id' => $r->getAncestorId(),
@@ -319,6 +323,14 @@ class RemixManager
                 'depth' => $r->getDepth()
             ];
         }, $catrobat_forward_edge_relations);
+
+        $catrobat_forward_data = array_map(function ($r) {
+            return [
+                'ancestor_id' => $r->getAncestorId(),
+                'descendant_id' => $r->getDescendantId(),
+                'depth' => $r->getDepth()
+            ];
+        }, $catrobat_forward_relations);
 
         $scratch_edge_relations = $this->scratch_program_remix_repository->getDirectEdgeRelationsOfProgramIds($catrobat_ids_of_whole_graph);
         $scratch_node_ids = array_values(array_unique(array_map(function ($r) { return $r->getScratchParentId(); }, $scratch_edge_relations)));
@@ -361,6 +373,7 @@ class RemixManager
             'scratchNodesData' => $scratch_nodes_data,
             'catrobatForwardEdgeRelations' => $catrobat_forward_edge_data,
             'catrobatBackwardEdgeRelations' => $catrobat_backward_edge_data,
+            'catrobatForwardRelations' => $catrobat_forward_data,
             'scratchEdgeRelations' => $scratch_edge_data
         ];
     }

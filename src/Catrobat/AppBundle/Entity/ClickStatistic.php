@@ -98,6 +98,11 @@ class ClickStatistic
     protected $locality;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $locale;
+
+    /**
      * @ORM\Column(type="string", options={"default":""}, nullable=true)
      */
     protected $user_agent;
@@ -287,6 +292,22 @@ class ClickStatistic
     public function setLocality($locality)
     {
         $this->locality = $locality;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     /**
