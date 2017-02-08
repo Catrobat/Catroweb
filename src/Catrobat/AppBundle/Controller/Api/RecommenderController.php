@@ -33,7 +33,7 @@ class RecommenderController extends Controller
     }
 
     /**
-     * @Route("/api/projects/recsys_remixed_programs.json", name="api_recsys_remixed_programs", defaults={"_format": "json"})
+     * @Route("/api/projects/recsys_recommended_programs.json", name="api_recsys_recommended_programs", defaults={"_format": "json"})
      * @Method({"GET"})
      */
     public function listRecsysRemixedProgramsAction(Request $request)

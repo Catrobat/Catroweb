@@ -13,7 +13,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProgramRepository extends EntityRepository
 {
-    private $cached_most_remixed_programs_full_result = null;
+    private $cached_most_remixed_programs_full_result = [];
+    private $cached_most_liked_programs_full_result = [];
 
     public function getMostDownloadedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
     {
@@ -63,17 +64,25 @@ class ProgramRepository extends EntityRepository
                     FROM program p
                     INNER JOIN program_remix_relation r
                     ON p.id = r.ancestor_id
+                    INNER JOIN program rp
+                    ON r.descendant_id = rp.id
                     WHERE p.visible = 1
                     AND p.flavor = :flavor
-                    AND p.private = 0 AND r.depth = 1 GROUP BY p.id
+                    AND p.private = 0
+                    AND r.depth = 1
+                    AND p.user_id <> rp.user_id
+                    GROUP BY p.id
                 UNION ALL
                     SELECT p.id AS id, COUNT(p.id) AS remixes_count
                     FROM program p
                     INNER JOIN program_remix_backward_relation b
                     ON p.id = b.parent_id
+                    INNER JOIN program rp
+                    ON b.child_id = rp.id
                     WHERE p.visible = 1
                     AND p.flavor = :flavor
                     AND p.private = 0
+                    AND p.user_id <> rp.user_id
                     GROUP BY p.id
             ) t
             GROUP BY id
@@ -85,14 +94,14 @@ class ProgramRepository extends EntityRepository
 
     public function getMostRemixedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
     {
-        if ($this->cached_most_remixed_programs_full_result == null) {
+        if (!isset($this->cached_most_remixed_programs_full_result[$flavor])) {
             $connection = $this->getEntityManager()->getConnection();
             $statement = $connection->prepare($this->generateUnionSqlStatementForMostRemixedPrograms($limit, $offset));
             $statement->bindValue('flavor', $flavor);
             $statement->execute();
             $results = $statement->fetchAll();
         } else {
-            $results = array_slice($this->cached_most_remixed_programs_full_result, $offset, $limit);
+            $results = array_slice($this->cached_most_remixed_programs_full_result[$flavor], $offset, $limit);
         }
 
         $programs = [];
@@ -104,8 +113,8 @@ class ProgramRepository extends EntityRepository
 
     public function getTotalRemixedPrograms($flavor = 'pocketcode')
     {
-        if ($this->cached_most_remixed_programs_full_result != null) {
-            return count($this->cached_most_remixed_programs_full_result);
+        if (isset($this->cached_most_remixed_programs_full_result[$flavor])) {
+            return count($this->cached_most_remixed_programs_full_result[$flavor]);
         }
 
         $connection = $this->getEntityManager()->getConnection();
@@ -113,8 +122,8 @@ class ProgramRepository extends EntityRepository
         $statement->bindValue('flavor', $flavor);
         $statement->execute();
 
-        $this->cached_most_remixed_programs_full_result = $statement->fetchAll();
-        return count($this->cached_most_remixed_programs_full_result);
+        $this->cached_most_remixed_programs_full_result[$flavor] = $statement->fetchAll();
+        return count($this->cached_most_remixed_programs_full_result[$flavor]);
     }
 
     public function getRecentPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)

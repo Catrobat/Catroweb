@@ -50,7 +50,7 @@
   <script>
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
     var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-    var recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_remixed_programs') }}', undefined, undefined, recommendedByPageId);
+    var recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_recommended_programs') }}', undefined, undefined, recommendedByPageId);
     var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}');
     var mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}');
     var random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')

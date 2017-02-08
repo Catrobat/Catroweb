@@ -562,12 +562,12 @@
 
       $(document).on("click", "a.program-like-button", function(event) {
           event.preventDefault();
-          var url = "{{ path('program_like', { 'id' : program.id }) }}";
           var type = $(this).attr("data-like-type");
+          var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type;
           var username = "{{ user_name }}";
           if (username == "") {
-              window.location.href = url + "?type=" + type;
-              return;
+              window.location.href = url;
+              return false;
           }
 
           $("#program-like-detail-container").text("{{ "pleaseWait"|trans({}, "catroweb") }}");
@@ -580,8 +580,8 @@
               data: { type: type },
               success: function(data) {
                   if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
-                      if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
-                          window.location.href = "{{ path('login') }}";
+                      if (data.statusCode == {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
+                          window.location.href = url;
                           return;
                       }
                       alert("something went wrong");
