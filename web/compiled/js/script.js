@@ -147,6 +147,7 @@ var Main = function (search_url) {
   self.download_limit = self.default_rows * self.columns_max;
   self.initial_download_limit = self.download_limit;
   self.prev_visible = 0; // set if dynamically loaded
+  self.prev_step = 0; // set when button-load-more clicked
   self.loaded = 0;
   self.visible = 0;
   self.visible_steps = 0;
@@ -214,10 +215,16 @@ var Main = function (search_url) {
         '<div class="button-show-placeholder">' +
           '<div class="button-show-more img-load-more"></div>' +
           '<div class="button-show-ajax img-load-ajax"></div>' +
+          '<div class="button-show-less img-load-less"></div>' +
         '</div>');
+
+      if (self.initial_download_limit > self.download_limit)
+        $(self.container).find('.button-show-less').show();
+
     }
     self.loadProgramsIntoContainer(data);
     self.showMoreListener();
+    self.showLessListener();
     self.setDefaultVisibility();
     $(window).resize(function() {
       if(self.windowWidth == $(window).width())
@@ -341,8 +348,36 @@ var Main = function (search_url) {
     else
       $(self.container).find('.button-show-more').show();
 
+    self.prev_step = i - self.visible;
     self.visible = i;
     self.setSessionStorage(self.visible);
+
+    // Show button-show-less if more than initially visible programs are visible
+    if (self.visible <= self.visible_steps)
+      $(self.container).find('.button-show-less').hide();
+    else
+      $(self.container).find('.button-show-less').show();
+  };
+
+  self.showLessPrograms = function() {
+    var programs_in_container = $(self.container).find('.program');
+
+    $(programs_in_container).hide();
+    for (var i = 0; i < self.visible - self.prev_step; i++) {
+      $(programs_in_container[i]).show();
+    }
+
+    $(self.container).find('.button-show-more').show();
+
+    self.prev_step = self.visible_steps; // reset prev_step in case button-show-less is clicked more than once in a row
+    self.visible = i;
+    self.setSessionStorage(self.visible);
+
+    // Show button-show-less if more than initially visible programs are visible
+    if (self.visible <= self.visible_steps)
+      $(self.container).find('.button-show-less').hide();
+    else
+      $(self.container).find('.button-show-less').show();
   };
 
   self.resetParamsInSessionStorage = function() {
@@ -395,6 +430,12 @@ var Main = function (search_url) {
       $(self.container).find('.button-show-more').hide();
     else
       $(self.container).find('.button-show-more').show();
+
+    // Show button-show-less if more than initially visible programs are visible
+    if (self.visible <= self.visible_steps)
+      $(self.container).find('.button-show-less').hide();
+    else
+      $(self.container).find('.button-show-less').show();
   };
 
   self.showMoreListener = function() {
@@ -436,6 +477,14 @@ var Main = function (search_url) {
           });
         }
       }
+
+    });
+  };
+
+  self.showLessListener = function() {
+    $(self.container + ' .button-show-less').on('click', function() {
+
+      self.showLessPrograms();
 
     });
   };
