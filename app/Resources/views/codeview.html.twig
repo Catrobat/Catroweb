@@ -132,7 +132,7 @@
     </div>
 {% endmacro %}
 
-{% macro maincontent(background, object_list, path, scene_name) %}
+{% macro object_list(background, object_list, path, scene_name) %}
     {% import _self as self %}
     <div id="background-wrapper">
         <p class="heading">BACKGROUND</p>
@@ -171,29 +171,132 @@
                     </div>
                 </div>
                 <div class="scene-content">
-                    {{ self.maincontent(scene.background, scene.object_list, path, scene.name) }}
+                    {{ self.object_list(scene.background, scene.object_list, path, scene.name) }}
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endmacro %}
 
-{% block body %}
-    <div id="code-wrapper">
-
-        {% if no_code is defined %}
-            <p class="exception">CODE CAN'T BE DISPLAYED</p>
-        {% elseif scene_list is defined %}
-            {% if scene_list|length > 1 %}
-                {{ self.scenes(path, scene_list) }}
-            {% else %}
-                {{ self.maincontent(scene_list[0].background, scene_list[0].object_list, path, scene_list[0].name) }}
-            {% endif %}
-        {% else %}
-            {{ self.maincontent(background, object_list, path, null) }}
-        {% endif %}
-
+{% macro brick_statistic(statistic) %}
+    <div class="flex-container">
+        <div class="flex-left">
+            <p class="light">Total:</p>
+            <p class="light">Different:</p>
+        </div>
+        <div class="flex-right">
+            <p class="heavy">{{ statistic.numTotal }}</p>
+            <p class="heavy">{{ statistic.numDifferent }}</p>
+        </div>
     </div>
+{% endmacro %}
+
+{% macro statistic(program_statistic) %}
+    {% import _self as self %}
+    <div class="statistic-content">
+        <div class="total-statistic">
+            <div class="flex-container">
+                <div class="flex-left">
+                    <p class="light">Total number of <span class="brick-stat-heading">scripts</span>:</p>
+                    <p class="light">Total number of <span class="brick-stat-heading">bricks</span>:</p>
+                    <p class="light">Total number of <span class="brick-stat-heading">objects</span>:</p>
+                    <p class="light">Total number of <span class="brick-stat-heading">looks</span>:</p>
+                    <p class="light">Total number of <span class="brick-stat-heading">sounds</span>:</p>
+                    {% if program_statistic.totalNumGlobalVars is not null %}
+                        <p class="light">Total number of <span class="brick-stat-heading">globals</span>:</p>
+                    {% endif %}
+                    {% if program_statistic.totalNumLocalVars is not null %}
+                        <p class="light">Total number of <span class="brick-stat-heading">locals</span>:</p>
+                    {% endif %}
+                </div>
+                <div class="flex-right">
+                    <p class="heavy">{{ program_statistic.totalNumScripts }}</p>
+                    <p class="heavy">{{ program_statistic.totalNumBricks }}</p>
+                    <p class="heavy">{{ program_statistic.totalNumObjects }}</p>
+                    <p class="heavy">{{ program_statistic.totalNumLooks }}</p>
+                    <p class="heavy">{{ program_statistic.totalNumSounds }}</p>
+                    {% if program_statistic.totalNumGlobalVars is not null %}
+                        <p class="heavy">{{ program_statistic.totalNumGlobalVars }}</p>
+                    {% endif %}
+                    {% if program_statistic.totalNumLocalVars is not null %}
+                        <p class="heavy">{{ program_statistic.totalNumLocalVars }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="brick-statistics">
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Event Bricks:</p>
+                {{ self.brick_statistic(program_statistic.eventBricks) }}
+            </div>
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Control Bricks:</p>
+                {{ self.brick_statistic(program_statistic.controlBricks) }}
+            </div>
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Motion Bricks:</p>
+                {{ self.brick_statistic(program_statistic.motionBricks) }}
+            </div>
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Sound Bricks:</p>
+                {{ self.brick_statistic(program_statistic.soundBricks) }}
+            </div>
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Looks Bricks:</p>
+                {{ self.brick_statistic(program_statistic.looksBricks) }}
+            </div>
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Pen Bricks:</p>
+                {{ self.brick_statistic(program_statistic.penBricks) }}
+            </div>
+            <div class="brick-statistic-block">
+                <p class="brick-stat-heading">Data Bricks:</p>
+                {{ self.brick_statistic(program_statistic.dataBricks) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% block body %}
+
+    <div class="show-hide-code-statistic">
+        <div class="show-hide-code-statistic-text">SHOW CODE STATISTIC</div>
+        <div class="show-hide-code-statistic-arrow">
+            <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+        </div>
+    </div>
+    <div id="statistic">
+        {% if no_code is defined %}
+            <p class="exception">STATISTIC CAN'T BE DISPLAYED</p>
+        {% else %}
+            {{ self.statistic(program_statistic) }}
+        {% endif %}
+    </div>
+
+    <div class="show-hide-code">
+        <div class="show-hide-code-text">SHOW CODE</div>
+        <div class="show-hide-code-arrow">
+            <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
+        </div>
+    </div>
+    <div class="codeview-wrapper">
+        <div id="code-wrapper">
+            {% if no_code is defined %}
+                <p class="exception">CODE CAN'T BE DISPLAYED</p>
+            {% else %}
+                {% if scene_list is defined %}
+                    {% if scene_list|length > 1 %}
+                        {{ self.scenes(path, scene_list) }}
+                    {% else %}
+                        {{ self.object_list(scene_list[0].background, scene_list[0].object_list, path, scene_list[0].name) }}
+                    {% endif %}
+                {% else %}
+                    {{ self.object_list(background, object_list, path, null) }}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block js %}

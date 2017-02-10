@@ -296,16 +296,11 @@
     {% include ':social:social_share_mobile.html.twig' %}
   {% endif %}
 
+  {#
+   # CODEVIEW
+   #}
   {% if program_details.languageVersion >= 0.97 %}
-    <div class="show-hide-code">
-      <div class="show-hide-code-text">SHOW CODE</div>
-      <div class="show-hide-code-arrow">
-        <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
-      </div>
-    </div>
-    <div class="codeview-wrapper">
-      {{ render(controller('AppBundle:Web/CodeView:viewCode', {'id' : program.id})) }}
-    </div>
+    {{ render(controller('AppBundle:Web/CodeView:viewCode', {'id' : program.id})) }}
   {% endif %}
 
   <div id="program-bottom">
@@ -734,6 +729,25 @@
             text.text('SHOW CODE');
           });
         }
+      });
+
+      $(document).on('click', '.show-hide-code-statistic', function() {
+        var text = $('.show-hide-code-statistic-text');
+        if(text.text() == 'SHOW CODE STATISTIC') {
+          text.addClass('showing-code');
+          $('.show-hide-code-statistic-arrow').addClass('rotate showing-code');
+          $('.show-hide-code-statistic').addClass('show-code');
+          text.text('HIDE CODE STATISTIC');
+          $('#statistic').slideDown();
+        } else {
+          $('#statistic').slideUp(400, function(){
+            text.removeClass('showing-code');
+            $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code');
+            $('.show-hide-code-statistic').removeClass('show-code');
+            text.text('SHOW CODE STATISTIC');
+          });
+        }
+        console.log('huhu');
       });
 
       $(document).one('click', ".rec-programs", function(event) {

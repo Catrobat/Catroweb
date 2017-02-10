@@ -126,6 +126,7 @@ a {
 
 }
 
+.show-hide-code-statistic,
 .show-hide-code {
   position: relative;
   margin-top: 25px;
@@ -133,6 +134,7 @@ a {
   height: 61px;
   z-index: 2;
 
+  .show-hide-code-statistic-text,
   .show-hide-code-text {
     position: absolute;
     top: 25px;
@@ -145,6 +147,7 @@ a {
     text-transform: uppercase;
   }
 
+  .show-hide-code-statistic-arrow,
   .show-hide-code-arrow {
     position: absolute;
     right: ~"calc(22% - 4px)";
@@ -175,11 +178,14 @@ a {
 }
 
 @media (max-width: 992px) {
+  .show-hide-code-statistic,
   .show-hide-code {
+    .show-hide-code-statistic-arrow,
     .show-hide-code-arrow {
       right: ~"calc(19.5% - 5px)";
     }
 
+    .show-hide-code-statistic-text,
     .show-hide-code-text {
       left: 8%;
     }
@@ -187,7 +193,9 @@ a {
 }
 
 @media (max-width: 768px) {
+  .show-hide-code-statistic,
   .show-hide-code {
+    .show-hide-code-statistic-arrow,
     .show-hide-code-arrow {
       right: ~"calc(20% - 5px)";
     }
@@ -195,11 +203,14 @@ a {
 }
 
 @media (max-width: 640px) {
+  .show-hide-code-statistic,
   .show-hide-code {
+    .show-hide-code-statistic-arrow,
     .show-hide-code-arrow {
       right: ~"calc(10% - 5px)";
     }
 
+    .show-hide-code-statistic-text,
     .show-hide-code-text {
       left: 4%;
     }
@@ -220,6 +231,7 @@ a {
   background-color: @default-background-color;*/
 }
 
+.show-hide-code-statistic:hover,
 .show-hide-code:hover {
   cursor: hand;
   cursor: pointer;

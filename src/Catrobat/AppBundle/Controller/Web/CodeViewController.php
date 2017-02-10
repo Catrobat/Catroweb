@@ -212,6 +212,148 @@ class CodeViewController extends Controller
   const POINTED_OBJECT_TAG = 'pointedObject';
 
 
+  private $program_statistic = [];
+  private $brick_type_register = [];
+
+  private function initProgramStatistic()
+  {
+    $this->program_statistic = array(
+      'totalNumScripts' => 0,
+      'totalNumBricks' => 0,
+      'eventBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'controlBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'motionBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'soundBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'looksBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'penBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'dataBricks' => array(
+        'numTotal' => 0,
+        'numDifferent' => 0
+      ),
+      'totalNumObjects' => 0,
+      'totalNumLooks' => 0,
+      'totalNumSounds' => 0,
+      'totalNumGlobalVars' => null,
+      'totalNumLocalVars' => null,
+    );
+
+    $this->brick_type_register = array(
+      'eventBricks' => array(),
+      'controlBricks' => array(),
+      'motionBricks' => array(),
+      'soundBricks' => array(),
+      'looksBricks' => array(),
+      'penBricks' => array(),
+      'dataBricks' => array()
+    );
+  }
+
+  private function updateProgramStatistic($statID, $brick_img_file = null, $brick_type = null)
+  {
+    $this->program_statistic[$statID]++;
+
+    if ($brick_img_file)
+    {
+      switch($brick_img_file) {
+        // Normal Bricks
+        case self::EVENT_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'eventBricks');
+          break;
+        case self::CONTROL_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'controlBricks');
+          break;
+        case self::MOTION_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'motionBricks');
+          break;
+        case self::SOUND_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'soundBricks');
+          break;
+        case self::LOOKS_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'looksBricks');
+          break;
+        case self::PEN_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'penBricks');
+          break;
+        case self::DATA_BRICK_IMG:
+          $this->updateBrickStatistic($brick_type, 'dataBricks');
+          break;
+
+        // Script Bricks
+        case self::EVENT_SCRIPT_IMG:
+          $this->updateBrickStatistic($brick_type, 'eventBricks');
+          break;
+        case self::CONTROL_SCRIPT_IMG:
+          $this->updateBrickStatistic($brick_type, 'controlBricks');
+          break;
+      }
+    }
+  }
+
+  private function updateBrickStatistic($brick_type, $brick_category)
+  {
+    $this->program_statistic[$brick_category]['numTotal']++;
+    if (!in_array($brick_type, $this->brick_type_register[$brick_category]))
+    {
+      $this->program_statistic[$brick_category]['numDifferent']++;
+      $this->brick_type_register[$brick_category][] = $brick_type;
+    }
+  }
+
+  private function computeVariableStatistic($extracted_program)
+  {
+    $program_xml_tree = $extracted_program->getProgramXmlProperties();
+
+    $this->updateNumGlobalVariables($program_xml_tree);
+    $this->updateNumLocalVariables($program_xml_tree);
+  }
+
+  private function updateNumGlobalVariables($program_xml_tree)
+  {
+    try
+    {
+      $this->program_statistic['totalNumGlobalVars'] =
+        count($program_xml_tree->xpath('//programVariableList//userVariable')) +
+        count($program_xml_tree->xpath('//programListOfLists//userVariable'));
+    }
+    catch(\Exception $e)
+    {
+      $this->program_statistic['totalNumGlobalVars'] = null;
+    }
+
+  }
+
+  private function updateNumLocalVariables($program_xml_tree)
+  {
+    try
+    {
+      $this->program_statistic['totalNumLocalVars'] =
+        count($program_xml_tree->xpath('//objectListOfList//userVariable')) +
+        count($program_xml_tree->xpath('//objectVariableList//userVariable'));
+    }
+    catch(\Exception $e)
+    {
+      $this->program_statistic['totalNumLocalVars'] = null;
+    }
+  }
+
   /**
    * @Method({"GET"})
    */
@@ -220,10 +362,15 @@ class CodeViewController extends Controller
     $program = $this->get('programmanager')->find($id);
     $extracted_file_repository = $this->get('extractedfilerepository');
 
+    $this->initProgramStatistic();
+
     try
     {
       $extracted_program = $extracted_file_repository->loadProgramExtractedFile($program);
       $twig_params = $this->computeTwigParams($extracted_program);
+
+      $this->computeVariableStatistic($extracted_program);
+      $twig_params['program_statistic'] = $this->program_statistic;
     }
     catch (\Exception $e)
     {
@@ -386,6 +533,9 @@ class CodeViewController extends Controller
       $name = $object[self::NAME_ATTRIBUTE];
     else
       $name = $object->name;
+
+    $this->updateProgramStatistic('totalNumObjects');
+
     return array(
       'name' => $name,
       'looks' => $this->retrieveLooksFromXml($object->lookList),
@@ -412,6 +562,9 @@ class CodeViewController extends Controller
         'look_name' => $look_name,
         'look_url' => $look_url
       );
+
+      $this->updateProgramStatistic('totalNumLooks');
+
     }
     return $looks;
   }
@@ -434,6 +587,9 @@ class CodeViewController extends Controller
         'sound_name' => $sound_name,
         'sound_url' => $sound_url
       );
+
+      $this->updateProgramStatistic('totalNumSounds');
+
     }
     return $sounds;
   }
@@ -460,6 +616,7 @@ class CodeViewController extends Controller
 
       $scripts[] = $resolved_script;
 
+      $this->updateProgramStatistic('totalNumScripts', $resolved_script['img_file'], $resolved_script['type']);
     }
     return $scripts;
   }
@@ -561,6 +718,8 @@ class CodeViewController extends Controller
         $resolved_brick['img_file'] = self::UNKNOWN_BRICK_IMG;
 
       $bricks[] = $resolved_brick;
+
+      $this->updateProgramStatistic('totalNumBricks', $resolved_brick['img_file'], $resolved_brick['name']);
     }
 
     return $bricks;
