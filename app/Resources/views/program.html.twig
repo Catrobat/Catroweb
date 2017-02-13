@@ -606,7 +606,7 @@
          var xhr = $.ajax({
              type: "POST",
              crossDomain: true,
-             url: "https://130.206.122.81/nolb/web/index.php?r=service/upload_program",
+             url: "https://www.pmdnolb.cloud/?r=service/upload_program",
              data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
              success: function(data){
                var response = JSON.parse(data);
