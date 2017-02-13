@@ -32,7 +32,58 @@ span.brick-stat-heading {
   color: rgba(255, 255, 255, 0.4);
 }
 
-#statistic {
+.show-hide-code-statistic,
+.show-hide-code {
+  position: relative;
+  margin-top: 25px;
+  border-top: 1px solid @default-text-color;
+  height: 61px;
+  z-index: 2;
+
+  .show-hide-code-statistic-text,
+  .show-hide-code-text {
+    position: absolute;
+    top: 25px;
+    left: 10%;
+    height: 35px;
+    line-height: 35px;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .show-hide-code-statistic-arrow,
+  .show-hide-code-arrow {
+    position: absolute;
+    right: ~"calc(22% - 4px)";
+    top: 32px;
+    height: 20px;
+
+    img {
+      height: 20px;
+      width: auto;
+      vertical-align: baseline;
+    }
+  }
+
+  .rotate {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    display: inline-block;
+  }
+}
+
+.show-hide-code-statistic:hover,
+.show-hide-code:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+
+#codestatistic-wrapper {
   width: 100%;
   padding: 0 15% 0 15%;
   display: none;
@@ -94,10 +145,12 @@ span.brick-stat-heading {
 
 }
 
-#code-wrapper {
+#codeview-wrapper {
+  margin: 0;
+  display: none;
+  z-index: 0;
   width: 100%;
   padding: 0 15% 0 15%;
-  // margin: 0 20%;
   margin-top: 15px;
 
   .scenes-wrapper {
@@ -156,9 +209,6 @@ span.brick-stat-heading {
   .object, #background {
     margin: 5px 0;
     width: 100%;
-    // -moz-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
-    // -webkit-box-shadow: 1px 2px 5px black, -1px 2px 5px black;
-    // box-shadow: 1px 2px 5px black, -1px 2px 5px black;
   }
 
   .arrow {
@@ -188,7 +238,6 @@ span.brick-stat-heading {
   }
 
   .dropbtn {
-    // width: 100%;
     position: relative;
     padding: 5px;
     background-color: #00475d;
@@ -268,13 +317,6 @@ span.brick-stat-heading {
           position: absolute;
           top: 48%;
           left: 50px;
-        }
-
-        .script-message:before {
-          content: open-quote;
-        }
-        .script-message:after {
-          content: close-quote;
         }
 
         .script-brick-look,
@@ -368,8 +410,21 @@ span.brick-stat-heading {
 }
 
 @media (max-width: 992px) {
-  #statistic,
-  #code-wrapper {
+  .show-hide-code-statistic,
+  .show-hide-code {
+    .show-hide-code-statistic-arrow,
+    .show-hide-code-arrow {
+      right: ~"calc(19.5% - 5px)";
+    }
+
+    .show-hide-code-statistic-text,
+    .show-hide-code-text {
+      left: 8%;
+    }
+  }
+
+  #codestatistic-wrapper,
+  #codeview-wrapper {
     padding: 0 12% 0 12%;
 
     .scenes-wrapper {
@@ -379,37 +434,32 @@ span.brick-stat-heading {
 }
 
 @media (max-width: 768px) {
-  #code-wrapper {
-    padding: 0 5% 0 5%;
+  .show-hide-code-statistic,
+  .show-hide-code {
+    .show-hide-code-statistic-arrow,
+    .show-hide-code-arrow {
+      right: ~"calc(13.8% - 5px)";
+    }
+  }
+
+  #codeview-wrapper {
+    padding: 0;
 
     .scenes-wrapper {
       margin: 0;
     }
-  }
-
-  #statistic {
-    padding: 0 5% 0 5%;
-
-    .total-statistic {
-      max-width: 50%;
-    }
-  }
-}
-
-@media (max-width: 640px) {
-
-  #code-wrapper {
-    width: 100%;
-    padding: 0;
 
     .scenes-wrapper {
       .scene {
         .scene-content {
-          margin-left: 0;
-          margin-right: 0;
+          margin-left: 5%;
+          margin-right: 5%;
         }
 
         .scene-dropbtn {
+
+          margin-left: 5%;
+          margin-right: 5%;
 
           .scene-arrow {
             right: 10%;
@@ -420,7 +470,57 @@ span.brick-stat-heading {
     }
   }
 
-  #statistic {
+  #codestatistic-wrapper {
+    padding: 0 5% 0 5%;
+
+    .total-statistic {
+      max-width: 50%;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+
+  .show-hide-code-statistic,
+  .show-hide-code {
+    .show-hide-code-statistic-arrow,
+    .show-hide-code-arrow {
+      right: ~"calc(10% - 5px)";
+    }
+
+    .show-hide-code-statistic-text,
+    .show-hide-code-text {
+      left: 4%;
+    }
+  }
+
+  #codeview-wrapper {
+    width: 100%;
+    padding: 0;
+
+
+    .scenes-wrapper {
+      .scene {
+        .scene-content {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        .scene-dropbtn {
+
+          margin-left: 0;
+          margin-right: 0;
+
+          .scene-arrow {
+            right: 10%;
+          }
+        }
+
+      }
+    }
+  }
+
+  #codestatistic-wrapper {
     width: 100%;
     padding: 0;
 

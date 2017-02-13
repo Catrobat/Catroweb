@@ -1,0 +1,116 @@
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+CollisionScript
+When physical collision with "Collision-Object<	-	>	ANYTHING	"
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+WhenScript
+When tapped
+1h_when_brown.png
+---
+BroadcastScript
+When I receive "message 1"
+1h_when_brown.png
+---
+CollisionScript
+When physical collision with "Motion-Object ANYTHING;"
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+WhenScript
+When tapped
+1h_when_brown.png
+---
+CollisionScript
+When physical collision with "Control-Object<	-	>	ANYTHING	"
+1h_when_brown.png
+---
+BroadcastScript
+When I receive "message 1"
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+WhenScript
+When tapped
+1h_when_brown.png
+---
+WhenTouchDownScript
+When screen is touched
+1h_when_brown.png
+---
+BroadcastScript
+When I receive "Motion-Object ANYTHING"
+1h_when_brown.png
+---
+WhenTouchDownScript
+When screen is touched
+1h_when_brown.png
+---
+CollisionScript
+When physical collision with "Event-Object ANYTHING"
+1h_when_brown.png
+---
+WhenBackgroundChangesScript
+When background changes to
+1h_when_brown.png
+---
+WhenClonedScript
+When I start as a clone
+1h_when_orange.png
+---
+WhenClonedScript
+When I start as a clone
+1h_when_orange.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
+WhenBackgroundChangesScript
+When background changes to
+1h_brick_grey.png
+---
+StartScript
+When program started
+1h_when_brown.png
+---
