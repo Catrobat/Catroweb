@@ -39,6 +39,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('street')
             ->add('postal_code')
             ->add('locality')
+            ->add('locale')
             ->add('user_agent')
             ->add('referrer');
     }
@@ -62,7 +63,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('country_name')
             ->add('user_agent')
             ->add('referrer')
-            ->add('locality');
+            ->add('locality')
+            ->add('locale');
     }
 
     // Fields to be shown on lists
@@ -84,6 +86,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('street')
             ->add('postal_code')
             ->add('locality')
+            ->add('locale')
             ->add('program.downloads')
             ->add('program.apk_downloads')
             ->add('user_agent')
@@ -99,7 +102,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
             'recommended_by_program.name','recommended_from_program_via_tag.id','recommended_from_program_via_tag.name',
             'program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description',
             'downloaded_at','ip','latitude','longitude','country_code','country_name','street','postal_code',
-            'locality','user_agent','user.username','referrer');
+            'locality','locale','user_agent','user.username','referrer');
     }
 
     protected function configureRoutes(RouteCollection $collection)

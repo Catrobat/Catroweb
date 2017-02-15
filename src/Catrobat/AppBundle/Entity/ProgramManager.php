@@ -355,9 +355,29 @@ class ProgramManager
         return $this->program_repository->getMostRemixedPrograms($flavor, $limit, $offset);
     }
 
-    public function getTotalRemixedPrograms($flavor)
+    public function getTotalRemixedProgramsCount($flavor)
     {
-        return $this->program_repository->getTotalRemixedPrograms($flavor);
+        return $this->program_repository->getTotalRemixedProgramsCount($flavor);
+    }
+
+    public function getMostLikedPrograms($flavor, $limit, $offset)
+    {
+        return $this->program_repository->getMostLikedPrograms($flavor, $limit, $offset);
+    }
+
+    public function getTotalLikedProgramsCount($flavor)
+    {
+        return $this->program_repository->getTotalLikedProgramsCount($flavor);
+    }
+
+    public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $program, $limit, $offset, $is_test_environment)
+    {
+        return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $program, $limit, $offset, $is_test_environment);
+    }
+
+    public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount($flavor, $program, $is_test_environment)
+    {
+        return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount($flavor, $program, $is_test_environment);
     }
 
     /**

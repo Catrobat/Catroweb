@@ -182,6 +182,11 @@ var Main = function (search_url) {
     });
   };
 
+  self.initSpecificRecsys = function() {
+    $(self.container).hide();
+    self.init();
+  };
+
   self.initProfile = function(user_id) {
     self.showAllPrograms = true;
     $.get(self.url, { limit: self.download_limit, offset: self.loaded, user_id: user_id }, function(data) {
@@ -265,6 +270,9 @@ var Main = function (search_url) {
           div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
           additionalLinkCssClass = "homepage-recommended-programs";
           break;
+        case '#specific-programs-recommendations':
+            div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
+            break;
         default:
           if($(self.container).hasClass('starterDownloads'))
             div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
@@ -274,7 +282,7 @@ var Main = function (search_url) {
 
       if (self.container == "#recommendations") {
         var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_from=" + self.recommended_by_program_id;
-      } else if (self.container == "#recommended") {
+      } else if ((self.container == "#recommended") || (self.container == "#specific-programs-recommendations")) {
         var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_by_page_id=" + self.recommended_by_page_id;
         program_link += (self.recommended_by_program_id != null) ? "&rec_by_program_id=" + self.recommended_by_program_id : "";
       } else {
@@ -322,6 +330,7 @@ var Main = function (search_url) {
       }
 
       $(self.container).find('.programs').append(program);
+      $(self.container).show();
 
       if(self.container == '#myprofile-programs') {
         $(program).prepend('<div id="delete-' + programs[i].ProjectId + '" class="img-delete" onclick="profile.deleteProgram(' + programs[i].ProjectId + ')"></div>');

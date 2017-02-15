@@ -26,6 +26,7 @@ class DownloadStatisticsListener
         if ($attributes->has('download_statistics_program_id')) {
             $program_id = $attributes->get('download_statistics_program_id');
             $referrer = $attributes->get('referrer');
+            $locale = strtolower($request->getLocale());
 
             $rec_by_page_id = null;
             $rec_by_program_id = 0;
@@ -43,15 +44,15 @@ class DownloadStatisticsListener
                 $rec_tag_by_program_id = $attributes->get('rec_from');
             }
 
-            $this->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id);
+            $this->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale);
             $event->getRequest()->attributes->remove('download_statistics_program_id');
         }
     }
 
-    public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id)
+    public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale)
     {
-        if (strpos($request->headers->get('User-Agent'), 'okhttp') === false) {
-            $this->statistics_service->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id);
+        if ((strpos($request->headers->get('User-Agent'), 'okhttp') === false) || ($rec_by_page_id != null)) {
+            $this->statistics_service->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale);
         }
     }
 }

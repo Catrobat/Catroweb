@@ -33,6 +33,13 @@ clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
 pleaseWait: "Bitte warten..."
 
+indexPage:
+  recommendedSection:
+    info:
+      title: 'Was sind interessante Programme?'
+      description_B_VersionTest: 'Je mehr Remixe dein Programm hat, umso interessanter wird dein Programm.'
+      description_C_VersionTest: 'Je mehr "Gefällt mir" Bewertungen (dazu zählen "Daumen hoch", "Lächeln", "Lieben" und "Woow!") dein Programm erhält, umso interessanter wird dein Programm.'
+
 programs:
   featured: Empfohlen
   recommended: Interessante Programme
@@ -563,6 +570,7 @@ admin:
     createBackupConfirmationText: Dieser Vorgang kann eine Weile dauern. Die Seite wird danach neu geladen!
 recommender:
   similarPrograms: Ähnliche Programme
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: User, die dieses Programm heruntergeladen haben, haben auch folgendes heruntergeladen
 pmd:
   submitBtn: Projekt abgeben
   submitBox:

@@ -5,12 +5,13 @@ Feature: Recommendations on homepage (a.k.a. index page)
     Given there are users:
       | name     | password | token       | email               |
       | Catrobat | 123456   | cccccccccc  | dev1@pocketcode.org |
+      | OtherUser| 123456   | dddddddddd  | dev2@pocketcode.org |
 
-  Scenario: User with selected russian language cannot see the recommendations on homepage (a.k.a. index page)
+  Scenario: Recommended programs on homepage (a.k.a. index page)
     Given there are programs:
       | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | remix_root |
       | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
-      | 2  | Galaxy    | p2          | Catrobat | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | false      |
+      | 2  | Galaxy    | p2          | OtherUser| 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | false      |
       | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   | true       |
 
     And there are forward remix relations:
@@ -26,11 +27,11 @@ Feature: Recommendations on homepage (a.k.a. index page)
     And the element "#recommended" should be visible
     Then I should see a recommended homepage program having ID "1" and name "Minions"
 
-  Scenario: User with selected russian language cannot see the recommendations on homepage (a.k.a. index page)
+  Scenario: No recommended programs on homepage (a.k.a. index page)
     Given there are programs:
       | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | remix_root |
       | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
-      | 2  | Galaxy    | p2          | Catrobat | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | true       |
+      | 2  | Galaxy    | p2          | OtherUser| 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | true       |
       | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   | true       |
 
     And there are forward remix relations:

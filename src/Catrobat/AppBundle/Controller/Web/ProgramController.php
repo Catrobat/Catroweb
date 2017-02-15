@@ -150,7 +150,7 @@ class ProgramController extends Controller
             } else {
                 $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
                     'program_like', ['id' => $id, 'type' => $type, 'no_unlike' => 1]));
-                return $this->redirectToRoute('fos_user_security_login');
+                return $this->redirectToRoute('login');
             }
         }
 

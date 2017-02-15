@@ -19,7 +19,9 @@
   <script src=" {{  asset( getJavascriptPath('jquery.ui.position.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('animatedModal.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('vis.min.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('remixgraph.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('remixgraph.configuration.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('remixgraph.builder.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('remixgraph.visualization.js') )}}"></script>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
   <meta property="og:type" content="website" />
@@ -141,7 +143,7 @@
             <table>
               <tr>
                 <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                <td>{{ "remixgraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
           </button>
@@ -357,6 +359,16 @@
       {% endif %}
     {% endif %}
 
+    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+      {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+      <div id="specific-programs-recommendations">
+        <div id="recsys-specific-programs-headline">
+          <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
+        </div>
+        <div class="programs"></div>
+      </div>
+    {% endif %}
+
   <div id="comment-successfully-reported">
     <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
     <p>{{ 'programs.report_popup'|trans({}, 'catroweb') }}</p>
@@ -464,24 +476,38 @@
     var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', undefined, programID);
     recs.initRecsys();
 
+    var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
+    var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', undefined, programID, recommendedByPageId);
+    specificRecommender.initSpecificRecsys();
+
     counter = 10;
     var cachedRemixData = null;
     var remixGraphTranslations = {
       ok: "{{ "ok"|trans({}, "catroweb") }}",
-      by: "{{ "remixgraph.by"|trans({}, "catroweb") }}",
-      open: "{{ "remixgraph.open"|trans({}, "catroweb") }}",
-      showPaths: "{{ "remixgraph.showPaths"|trans({}, "catroweb") }}",
-      programNotAvailableErrorTitle: "{{ "remixgraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
-      programNotAvailableErrorDescription: "{{ "remixgraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}",
-      programNotAvailable: "{{ "remixgraph.programNotAvailable"|trans({}, "catroweb") }}",
-      programUnknownUser: "{{ "remixgraph.programUnknownUser"|trans({}, "catroweb") }}"
+      by: "{{ "remixGraph.by"|trans({}, "catroweb") }}",
+      open: "{{ "remixGraph.open"|trans({}, "catroweb") }}",
+      showPaths: "{{ "remixGraph.showPaths"|trans({}, "catroweb") }}",
+      programNotAvailableErrorTitle: "{{ "remixGraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
+      programNotAvailableErrorDescription: "{{ "remixGraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}",
+      programNotAvailable: "{{ "remixGraph.programNotAvailable"|trans({}, "catroweb") }}",
+      programUnknownUser: "{{ "remixGraph.programUnknownUser"|trans({}, "catroweb") }}"
     };
 
     var PROGRAM_LIKE_TYPE_NONE = {{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_NONE') }};
 
+    function convertToHumanFriendlyNumberText(number) {
+        if (number >= 10000) {
+            return (number / 1000.0).toFixed(0) + "k";
+        } else if (number >= 1000) {
+            return (number / 1000.0).toFixed(1).replace(".0", "") + "k";
+        } else {
+            return number;
+        }
+    }
+
     function updateLikeCount(likeType, likeTypeCount, totalLikeCount) {
         $("a.program-like-button").removeClass("selected");
-        $("#program-like-buttons-container > .program-like-counter").text(totalLikeCount);
+        $("#program-like-buttons-container > .program-like-counter").text(convertToHumanFriendlyNumberText(totalLikeCount));
         if (likeType == PROGRAM_LIKE_TYPE_NONE) {
             $("#program-like-detail-container").html("&nbsp;");
             return;
@@ -490,17 +516,18 @@
         likeTypeButton.addClass("selected");
         var singularOrPlural = (likeTypeCount == 1) ? true : false;
         var translatedDetailSpanTextTemplate = likeTypeButton.children(singularOrPlural ? ".singular" : ".plural")[0];
-        var replaceCount = '<span class="program-like-counter">' + likeTypeCount + '<span>';
+        var replaceCount = '<span class="program-like-counter">' + convertToHumanFriendlyNumberText(likeTypeCount) + '<span>';
         var translatedDetailText = translatedDetailSpanTextTemplate.innerHTML.replace((singularOrPlural ? "1" : "2"), replaceCount);
         $("#program-like-detail-container").html(translatedDetailText);
     }
 
     $(document).ready(function() {
       var loadingAnimation = new LoadingAnimation('#FFFFFF', "{{ "pleaseWait"|trans({}, "catroweb") }}");
-      var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
+      var recommendedByRemixGraphPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
+      var networkDirector = new NetworkDirector();
       var remixGraph = RemixGraph.getInstance();
-      remixGraph.init(programID, recommendedByPageId, "remix-graph-modal", "remix-graph-layer", "close-button",
-          "{{ program_details_url_template }}", "../click-statistic", remixGraphTranslations);
+      remixGraph.init(programID, recommendedByRemixGraphPageId, "remix-graph-modal", "remix-graph-layer", "close-button",
+          "{{ program_details_url_template }}", "{{ path('click_stats') }}", remixGraphTranslations);
 
       updateLikeCount({{ program_details.likeType }}, {{ program_details.likeTypeCount }}, {{ program_details.totalLikeCount }});
 
@@ -514,7 +541,9 @@
           if (cachedRemixData != null) {
             document.addEventListener('gesturestart', blockEventListener);
             document.ontouchmove = blockEventListener;
-            remixGraph.render(cachedRemixData, loadingAnimation);
+            var networkBuilder = new NetworkBuilder(programID, "remix-graph-layer", remixGraphTranslations, cachedRemixData);
+            var networkDescription = networkDirector.construct(networkBuilder);
+            remixGraph.render(loadingAnimation, networkDescription);
           } else {
             $.ajax({
               url: "{{ path('program_remix_graph', { 'id' : program.id }) }}",
@@ -523,7 +552,9 @@
                 cachedRemixData = remixData;
                 document.addEventListener('gesturestart', blockEventListener);
                 document.ontouchmove = blockEventListener;
-                remixGraph.render(remixData, loadingAnimation);
+                var networkBuilder = new NetworkBuilder(programID, "remix-graph-layer", remixGraphTranslations, remixData);
+                var networkDescription = networkDirector.construct(networkBuilder);
+                remixGraph.render(loadingAnimation, networkDescription);
               },
               error: function(data) {
                 alert("Unable to fetch remix-graph!");
@@ -533,6 +564,7 @@
           console.log("The animation was called");
         },
         afterOpen: function() {
+          loadingAnimation.show();
           console.log("The animation is completed");
         },
         beforeClose: function() {
@@ -562,12 +594,12 @@
 
       $(document).on("click", "a.program-like-button", function(event) {
           event.preventDefault();
-          var url = "{{ path('program_like', { 'id' : program.id }) }}";
           var type = $(this).attr("data-like-type");
+          var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type;
           var username = "{{ user_name }}";
           if (username == "") {
-              window.location.href = url + "?type=" + type;
-              return;
+              window.location.href = url;
+              return false;
           }
 
           $("#program-like-detail-container").text("{{ "pleaseWait"|trans({}, "catroweb") }}");
@@ -580,8 +612,8 @@
               data: { type: type },
               success: function(data) {
                   if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
-                      if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
-                          window.location.href = "{{ path('login') }}";
+                      if (data.statusCode == {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
+                          window.location.href = url;
                           return;
                       }
                       alert("something went wrong");
@@ -770,10 +802,15 @@
         else if (href.indexOf("program") > 0) {
           type = "programs";
           additions = (href.match(/[0-9]+/))[0];
+
+          var containerElement = $(this).parent(".program").parent(".programs").parent();
+          if (containerElement.attr("id") == "specific-programs-recommendations") {
+              type = "rec_specific_programs";
+          }
         }
 
         $.ajaxSetup({async: false});
-        $.post( "../click-statistic", {type: type, recFromID: {{ program.id }}, recID: additions}, function( data ) {
+        $.post("{{ path('click_stats') }}", {type: type, recFromID: {{ program.id }}, recID: additions}, function( data ) {
           if (data == 'error')
             console.log("No click statistic is created!");
         }).fail(function (data) {

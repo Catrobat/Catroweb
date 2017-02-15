@@ -34,6 +34,13 @@ clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
 
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+
 programs:
   featured: Featured
   newest: Newest programs
@@ -74,7 +81,7 @@ programs:
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
 
-remixgraph:
+remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'by'
   open: 'Open'
@@ -599,6 +606,7 @@ admin:
 
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 
 pmd:
   submitBtn: Submit your project

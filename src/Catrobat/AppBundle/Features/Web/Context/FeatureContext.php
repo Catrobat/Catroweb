@@ -10,6 +10,8 @@ use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramDownloads;
+use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\ProgramRemixRelation;
 use Catrobat\AppBundle\Entity\StarterCategory;
@@ -198,7 +200,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             return { nodeName: RemixGraph.getInstance().getNodes().get('" . $node_id . "').name,
                      username: RemixGraph.getInstance().getNodes().get('" . $node_id . "').username };
       ");
-      $actual_node_name = implode('', $result['nodeName']);
+      $actual_node_name = is_array($result['nodeName']) ? implode('', $result['nodeName']) : $result['nodeName'];
       $actual_username = $result['username'];
       assertEquals($expected_node_name, $actual_node_name);
       assertEquals($expected_username, $actual_username);
@@ -554,6 +556,26 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_comment->setIsReported(false);
       $new_comment->setText($comment['text']);
       $em->persist($new_comment);
+      $em->flush();
+    }
+  }
+
+  /**
+   * @Given /^there are likes:$/
+   */
+  public function thereAreLikes(TableNode $table)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $likes = $table->getHash();
+
+    foreach($likes as $like) {
+      $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $like['username']]);
+      $program = $this->kernel->getContainer()->get('programrepository')->find($like['program_id']);
+
+      $program_like = new ProgramLike($program, $user, $like['type']);
+      $program_like->setCreatedAt(new \DateTime($like['created at'], new \DateTimeZone('UTC')));
+
+      $em->persist($program_like);
       $em->flush();
     }
   }
@@ -1050,7 +1072,60 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em->flush();
   }
 
-  /**
+    /**
+     * @Given /^there are program download statistics:$/
+     */
+    public function thereAreProgramDownloadStatistics(TableNode $table)
+    {
+        /**
+         * @var $em EntityManager
+         */
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $program_stats = $table->getHash();
+        for ($i = 0; $i < count($program_stats); ++$i) {
+            $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
+            @$config = array(
+                'downloaded_at' => $program_stats[$i]['downloaded_at'],
+                'ip' => $program_stats[$i]['ip'],
+                'latitude' => $program_stats[$i]['latitude'],
+                'longitude' => $program_stats[$i]['longitude'],
+                'country_code' => $program_stats[$i]['country_code'],
+                'country_name' => $program_stats[$i]['country_name'],
+                'street' => $program_stats[$i]['street'],
+                'postal_code' => @$program_stats[$i]['postal_code'],
+                'locality' => @$program_stats[$i]['locality'],
+                'user_agent' => @$program_stats[$i]['user_agent'],
+                'username' => @$program_stats[$i]['username'],
+                'referrer' => @$program_stats[$i]['referrer'],
+            );
+            $program_statistics = new ProgramDownloads();
+            $program_statistics->setProgram($program);
+            $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
+            $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
+            $program_statistics->setLatitude(isset($config['latitude']) ? $config['latitude'] : 47.2);
+            $program_statistics->setLongitude(isset($config['longitude']) ? $config['longitude'] : 10.7);
+            $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
+            $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
+            $program_statistics->setStreet(isset($config['street']) ? $config['street'] : 'Duck Street 1');
+            $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
+            $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
+            $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
+            $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
+
+            if(isset($config['username'])) {
+                $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $config['username']]);
+                $program_statistics->setUser($user);
+            }
+
+            $em->persist($program_statistics);
+
+            $program->addProgramDownloads($program_statistics);
+            $em->persist($program);
+        }
+        $em->flush();
+    }
+
+    /**
    * @When /^I download "([^"]*)"$/
    */
   public function iDownload($arg1)
@@ -1944,6 +2019,39 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             ->getPage()
             ->find('css', $arg1)
             ->click();
+    }
+
+    /**
+     * @When /^I click on the first recommended specific program$/
+     */
+    public function iClickOnTheFirstRecommendedSpecificProgram()
+    {
+        $arg1 = '#specific-programs-recommendations .programs #program-3 .rec-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @Then /^There should be recommended specific programs$/
+     */
+    public function thereShouldBeRecommendedSpecificPrograms()
+    {
+        $arg1 = '#specific-programs-recommendations .programs .rec-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+    }
+
+    /**
+     * @Then /^There should be no recommended specific programs$/
+     */
+    public function thereShouldBeNoRecommendedSpecificPrograms()
+    {
+        $arg1 = '#specific-programs-recommendations .programs .rec-programs';
+        $this->assertSession()->elementNotExists('css', $arg1);
     }
 
     /**

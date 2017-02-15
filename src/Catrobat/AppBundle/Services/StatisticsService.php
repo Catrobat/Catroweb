@@ -9,6 +9,7 @@ use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Geocoder\Exception\CollectionIsEmpty;
 use Symfony\Bridge\Monolog\Logger;
 use Catrobat\AppBundle\Entity\ProgramManager;
+use Symfony\Component\HttpFoundation\Request;
 
 class StatisticsService
 {
@@ -27,7 +28,7 @@ class StatisticsService
         $this->security_token_storage = $security_token_storage;
     }
 
-    public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id)
+    public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale)
     {
         $ip = $this->getOriginalClientIp($request);
         $user_agent = $this->getUserAgent($request);
@@ -74,6 +75,7 @@ class StatisticsService
         $program_download_statistic->setLongitude($longitude);
         $program_download_statistic->setCountryCode($country_code);
         $program_download_statistic->setCountryName($country_name);
+        $program_download_statistic->setLocale($locale);
 
         if ($rec_by_page_id != null && RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
             // all recommendations (except tag-recommendations -> see below)
@@ -106,7 +108,7 @@ class StatisticsService
     }
 
     public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name,
-                                          $referrer, $is_recommended_program_a_scratch_program = false)
+                                          $referrer, $locale = null, $is_recommended_program_a_scratch_program = false)
     {
         $ip = $this->getOriginalClientIp($request);
         $user_agent = $this->getUserAgent($request);
@@ -140,7 +142,7 @@ class StatisticsService
         $this->logger->addDebug('Received geocoded data - latitude: ' . $latitude . ', longitude: ' . $longitude .
             ', country code: ' . $country_code . ', country name: ' . $country_name);
 
-        if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification'])) {
+        if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs'])) {
             $click_statistics = new ClickStatistic();
             $click_statistics->setType($type);
             $click_statistics->setUserAgent($user_agent);
@@ -152,6 +154,7 @@ class StatisticsService
             $click_statistics->setLongitude($longitude);
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
+            $click_statistics->setLocale($locale);
 
             if ($rec_from_id > 0) {
                 $recommended_from = $this->programmanager->find($rec_from_id);
@@ -186,6 +189,7 @@ class StatisticsService
             $click_statistics->setLongitude($longitude);
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
+            $click_statistics->setLocale($locale);
 
             $this->entity_manager->persist($click_statistics);
             $this->entity_manager->flush();
@@ -214,6 +218,7 @@ class StatisticsService
             $click_statistics->setLongitude($longitude);
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
+            $click_statistics->setLocale($locale);
 
             $this->entity_manager->persist($click_statistics);
             $this->entity_manager->flush();

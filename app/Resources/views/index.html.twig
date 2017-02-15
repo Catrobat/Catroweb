@@ -2,6 +2,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen" />
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
 {% endblock %}
 
 {% block body %}
@@ -22,8 +23,18 @@
 
   {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
     {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-    <div id="recommended">
-      <h1>{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
+      <div id="recommended">
+          <div class="help-headline">
+              <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
+              <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
+                   data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
+                   {% if not ("DE" in app.request.locale) and not ("de" in app.request.locale) %}
+                   data-help-description="{{ "indexPage.recommendedSection.info.description_B_VersionTest"|trans({}, "catroweb") }}"
+                   {% else %}
+                   data-help-description="{{ "indexPage.recommendedSection.info.description_C_VersionTest"|trans({}, "catroweb") }}"
+                   {% endif %}
+                   width="30" height="30" />
+      </div>
       <div class="programs"></div>
     </div>
   {% endif %}
@@ -50,7 +61,7 @@
   <script>
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
     var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-    var recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_remixed_programs') }}', undefined, undefined, recommendedByPageId);
+    var recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId);
     var mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}');
     var mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}');
     var random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
@@ -87,13 +98,25 @@
 
         $.ajaxSetup({ async: false });
         var params = { type: type, recFromID: 0, recID: recommendedProgramID, isScratchProgram: 0 };
-        $.post("click-statistic", params, function (data) {
+        $.post("{{ path('click_stats') }}", params, function (data) {
             if (data == 'error')
                 console.log("No click statistic is created!");
         }).fail(function (data) {
             console.log(data);
         });
         window.location.href = href;
+    });
+
+    $(document).on("click", ".help-icon", function() {
+        swal({
+                title: $(this).attr("data-help-title"),
+                text: $(this).attr("data-help-description"),
+                showCancelButton: false,
+                confirmButtonText: "{{ "ok"|trans({}, "catroweb") }}",
+                closeOnConfirm: true
+            },
+            function() {}
+        );
     });
 
   </script>
