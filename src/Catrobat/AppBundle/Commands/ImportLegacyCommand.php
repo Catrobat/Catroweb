@@ -22,6 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 
 class ImportLegacyCommand extends ContainerAwareCommand
@@ -46,8 +47,6 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private $finder;
     private $filesystem;
 
-    private $thumbnaildir;
-    private $screenshotdir;
     private $screenshot_repository;
     private $catrobat_file_repository;
 
@@ -77,7 +76,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
         $this->screenshot_repository = $this->getContainer()->get('screenshotrepository');
         $this->catrobat_file_repository = $this->getContainer()->get('filerepository');
 
-        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
+        CommandHelper::executeSymfonyCommand('catrobat:purge', $this->getApplication(), array('--force' => true), $output);
 
         $backup_file = $input->getArgument('backupfile');
 
@@ -85,10 +84,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
         $this->writeln('Using Temp directory '.$this->importdir);
 
         $temp_dir = $this->importdir;
-        $this->executeShellCommand("tar xfz $backup_file --directory $temp_dir", 'Extracting backupfile');
-        $this->executeShellCommand("tar xf $temp_dir/".self::SQL_CONTAINER_FILE." --directory $temp_dir", 'Extracting SQL files');
-        $this->executeShellCommand("tar xfz $temp_dir/".self::SQL_WEB_CONTAINER_FILE." --directory $temp_dir", 'Extracting Catroweb SQL files');
-        $this->executeShellCommand("tar xf $temp_dir/".self::RESOURCE_CONTAINER_FILE." --directory $temp_dir", 'Extracting resource files');
+        CommandHelper::executeShellCommand("tar xfz $backup_file --directory $temp_dir", array('timeout' => 3600), 'Extracting backupfile', $output);
+        CommandHelper::executeShellCommand("tar xf $temp_dir/".self::SQL_CONTAINER_FILE." --directory $temp_dir", array('timeout' => 3600), 'Extracting SQL files', $output);
+        CommandHelper::executeShellCommand("tar xfz $temp_dir/".self::SQL_WEB_CONTAINER_FILE." --directory $temp_dir", array('timeout' => 3600), 'Extracting Catroweb SQL files', $output);
+        CommandHelper::executeShellCommand("tar xf $temp_dir/".self::RESOURCE_CONTAINER_FILE." --directory $temp_dir", array('timeout' => 3600), 'Extracting resource files', $output);
 
         $this->importUsers($this->importdir.'/'.self::TSV_USERS_FILE);
         $this->importPrograms($this->importdir.'/'.self::TSV_PROGRAMS_FILE);
@@ -322,38 +321,6 @@ class ImportLegacyCommand extends ContainerAwareCommand
 
             $this->catrobat_file_repository->saveProgram($extracted_catrobat_file, $id);
             $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
-        }
-    }
-
-    private function executeSymfonyCommand($command, $args, $output)
-    {
-        $command = $this->getApplication()->find($command);
-        $args['command'] = $command;
-        $input = new ArrayInput($args);
-        $command->run($input, $output);
-    }
-
-    private function executeShellCommand($command, $description)
-    {
-        $this->write($description." ('".$command."') ... ");
-        $process = new Process($command);
-        $process->setTimeout(3600);
-        $process->run();
-        if ($process->isSuccessful()) {
-            $this->writeln('OK');
-
-            return true;
-        } else {
-            $this->writeln('failed!');
-
-            return false;
-        }
-    }
-
-    private function write($string)
-    {
-        if ($this->output != null) {
-            $this->output->write($string);
         }
     }
 

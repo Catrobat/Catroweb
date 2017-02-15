@@ -55,9 +55,9 @@ services:
                 -  { name: console.command }
 
       command.import.webshare:
-                    class: Catrobat\AppBundle\Commands\WebShareProgramImport
-                    tags:
-                      -  { name: console.command }
+              class: Catrobat\AppBundle\Commands\WebShareProgramImport
+              tags:
+                -  { name: console.command }
 
       command.purge:
               class: Catrobat\AppBundle\Commands\PurgeCommand

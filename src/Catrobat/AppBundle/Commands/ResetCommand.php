@@ -2,6 +2,8 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,12 +17,12 @@ class ResetCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('catrobat:reset')
+        $this->setName('catrobat:reset')
             ->setDescription('Resets everything to base values')
             ->addOption('hard')
             ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED, 'Generates remix graph based on given layout',
                 ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT);
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -30,31 +32,30 @@ class ResetCommand extends ContainerAwareCommand
             return;
         }
 
-        $this->executeShellCommand('php app/console doctrine:schema:drop --force', 'Dropping database', $output);
+        CommandHelper::executeShellCommand('php app/console doctrine:schema:drop --force', array(), 'Dropping database', $output);
 
-        $this->executeShellCommand('php app/console catrobat:drop:migration', 'Dropping the migration_versions table', $output);
-        $this->executeShellCommand('php app/console doctrine:migrations:migrate', 'Exectue the migration to the latest version', $output);
-        //$this->executeShellCommand('php app/console doctrine:schema:create', 'Creating database', $output);
-        $this->executeShellCommand('php app/console catrobat:create:tags', 'Creating constant tags', $output);
-        $this->executeShellCommand('php app/console cache:clear --env=test', 'Resetting Cache', $output);
+        CommandHelper::executeShellCommand('php app/console catrobat:drop:migration',  array(), 'Dropping the migration_versions table', $output);
+        CommandHelper::executeShellCommand('php app/console doctrine:migrations:migrate',  array(), 'Execute the migration to the latest version', $output);
+        CommandHelper::executeShellCommand('php app/console catrobat:create:tags',  array(), 'Creating constant tags', $output);
+        CommandHelper::executeShellCommand('php app/console cache:clear --env=test',  array('timeout' => 120), 'Resetting Cache', $output);
 
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'), 'Delete screenshots', $output);
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'),  'Delete thumnails', $output);
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.storage.dir'),  'Delete programs', $output);
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'),  'Delete extracted programs', $output);
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'),  'Delete featured images', $output);
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.mediapackage.dir'),  'Delete mediapackages', $output);
-        $this->emptyDirectory($this->getContainer()->getParameter('catrobat.template.dir'),  'Delete templates', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'), 'Delete screenshots', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'),  'Delete thumnails', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.storage.dir'),  'Delete programs', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'),  'Delete extracted programs', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.featuredimage.dir'),  'Delete featured images', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.mediapackage.dir'),  'Delete mediapackages', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.dir'),  'Delete templates', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.screenshot.dir'),  'Delete templates-screenshots', $output);
+        CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.thumbnail.dir'),  'Delete templates-thumbnails', $output);
 
-        // already happens in doctrine:schema:create
-        //$this->executeShellCommand('php app/console init:acl', 'Init ACL', $output);
-        $this->executeShellCommand('php app/console sonata:admin:setup-acl', 'Init Sonata admin ACL', $output);
-        $this->executeShellCommand('php app/console sonata:admin:generate-object-acl', 'Init Sonata object ACL', $output);
+        CommandHelper::executeShellCommand('php app/console sonata:admin:setup-acl', array(),'Init Sonata admin ACL', $output);
+        CommandHelper::executeShellCommand('php app/console sonata:admin:generate-object-acl', array(),'Init Sonata object ACL', $output);
 
-        $this->executeShellCommand('php app/console catrobat:test:generate --env=test', 'Generating test data', $output);
-        $this->executeShellCommand('php app/console cache:clear --no-warmup', 'Clearing cache', $output);
+        CommandHelper::executeShellCommand('php app/console catrobat:test:generate --env=test', array(),'Generating test data', $output);
+        CommandHelper::executeShellCommand('php app/console cache:clear --no-warmup', array(),'Clearing cache', $output);
 
-        $this->executeShellCommand('php app/console fos:user:create catroweb catroweb@localhost catroweb --super-admin', 'Create default admin user', $output);
+        CommandHelper::executeShellCommand('php app/console fos:user:create catroweb catroweb@localhost catroweb --super-admin', array(),'Create default admin user', $output);
 
         $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';
 
@@ -63,54 +64,16 @@ class ResetCommand extends ContainerAwareCommand
         $filesystem->mkdir($temp_dir);
         $this->downloadPrograms($temp_dir, $output);
         $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
-        $this->executeShellCommand("php app/console catrobat:import $temp_dir catroweb $remix_layout_option",
-            'Importing Projects', $output);
-        $this->executeSymfonyCommand('catrobat:import', array(
+        CommandHelper::executeShellCommand("php app/console catrobat:import $temp_dir catroweb $remix_layout_option",
+            array(), 'Importing Projects', $output);
+        CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), array(
             'directory' => $temp_dir,
             'user' => 'catroweb',
             '--remix-layout' => intval($input->getOption('remix-layout'))
         ), $output);
         $filesystem->remove($temp_dir);
-    }
 
-    private function executeShellCommand($command, $description, $output)
-    {
-        $output->write($description." ('".$command."') ... ");
-        $process = new Process($command);
-        $process->setTimeout(120);
-        $process->run();
-        if ($process->isSuccessful()) {
-            $output->writeln('OK');
-        } else {
-            $output->writeln('failed!');
-        }
-    }
-
-    private function emptyDirectory($directory, $description, $output)
-    {
-        $output->write($description." ('".$directory."') ... ");
-        if ($directory == '') {
-            $output->writeln('failed');
-
-            return;
-        }
-
-        $filesystem = new Filesystem();
-
-        $finder = new Finder();
-        $finder->in($directory)->depth(0);
-        foreach ($finder as $file) {
-            $filesystem->remove($file);
-        }
-        $output->writeln('OK');
-    }
-
-    private function executeSymfonyCommand($command, $args, $output)
-    {
-        $command = $this->getApplication()->find($command);
-        $args['command'] = $command;
-        $input = new ArrayInput($args);
-        $command->run($input, $output);
+        CommandHelper::executeShellCommand('chmod o+w -R web/resources', array(), 'Setting permissions', $output);
     }
 
     private function downloadPrograms($dir, OutputInterface $output)

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Process\Process;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class CreateBackupCommand extends ContainerAwareCommand
 {
@@ -41,8 +42,8 @@ class CreateBackupCommand extends ContainerAwareCommand
         $database_name = $this->getContainer()->getParameter('database_name');
         $database_user = $this->getContainer()->getParameter('database_user');
         $database_password = $this->getContainer()->getParameter('database_password');
-        $this->executeShellCommand("mysqldump -u $database_user -p$database_password $database_name > $sql_path",
-          'Saving SQL file');
+        CommandHelper::executeShellCommand("mysqldump -u $database_user -p$database_password $database_name > $sql_path",
+          array('timeout' => 7200), 'Saving SQL file', $output);
 
         $output->writeln('Creating archive at '.$zip_path);
 
@@ -53,27 +54,12 @@ class CreateBackupCommand extends ContainerAwareCommand
         $mediapackage_dir = $this->getContainer()->getParameter('catrobat.mediapackage.dir');
         $template_dir = $this->getContainer()->getParameter('catrobat.template.dir');
 
-        $this->executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
-            "Create tar.gz file");
-        $this->executeShellCommand("chmod 777 ".$zip_path, "Set permissions");
+        CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
+            array('timeout' => 7200), "Create tar.gz file", $output);
+        CommandHelper::executeShellCommand("chmod 777 ".$zip_path, array(), "Set permissions", $output);
 
 
         unlink($sql_path);
         $this->output->writeln('Finished! Backupfile created at '.$zip_path);
-    }
-
-    private function executeShellCommand($command, $description)
-    {
-        $this->output->write($description." ('".$command."') ... ");
-        $process = new Process($command);
-        $process->setTimeout(7200);
-        $process->run();
-        if ($process->isSuccessful()) {
-            $this->output->writeln('OK');
-            return true;
-        }
-
-        $this->output->writeln('failed!');
-        return false;
     }
 }

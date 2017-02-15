@@ -6,8 +6,7 @@ use Catrobat\AppBundle\Entity\Program;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class CleanApkCommand extends ContainerAwareCommand
 {
@@ -24,7 +23,7 @@ class CleanApkCommand extends ContainerAwareCommand
     $this->output = $output;
 
     $this->output->writeln('Deleting APKs');
-    $this->emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'));
+    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.apk.dir'), 'Emptying apk directory', $output);
 
     /* @var $em \Doctrine\ORM\EntityManager */
     $em = $this->getContainer()->get('doctrine.orm.entity_manager');
@@ -32,16 +31,5 @@ class CleanApkCommand extends ContainerAwareCommand
     $query->setParameter('status', Program::APK_NONE);
     $result = $query->getSingleScalarResult();
     $this->output->writeln('Reset the apk status of '.$result.' projects');
-  }
-
-  private function emptyDirectory($directory)
-  {
-    $filesystem = new Filesystem();
-
-    $finder = new Finder();
-    $finder->in($directory)->depth(0);
-    foreach ($finder as $file) {
-      $filesystem->remove($file);
-    }
   }
 } 

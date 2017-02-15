@@ -12,6 +12,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManager;
 use Catrobat\AppBundle\Entity\UserManager;
+use Catrobat\AppBundle\Commands\Helpers\ConsoleProgressIndicator;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class ChangeNolbUserPasswordCommand extends ContainerAwareCommand
 {
@@ -34,94 +36,35 @@ class ChangeNolbUserPasswordCommand extends ContainerAwareCommand
     {
         $filename = $input->getArgument('file');
         $handle = fopen($filename, "r");
-        $fail_array = [];
-        $inline_count = 0;
-        $line_count = 1;
-        $line_length = 80;
+        $indicator = new ConsoleProgressIndicator($output, true);
 
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
-                $username = $this->getSubstring($line, " - ", false);
+                $username = CommandHelper::getSubstring($line, " - ", false);
                 $password = substr($line, strlen($username) + 2);
 
                 $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('username' => $username));
 
                 if (!$user || !$user->getNolbUser()) {
-                    array_push($fail_array, $username);
-                    $output->write('<error>F</error>');
+                    $indicator->isFailure();
+                    $indicator->addError($username);
                 }
                 else {
-                    if($this->executeShellCommand('php app/console fos:user:change-password '.$username.' '.$password)) {
-                        $output->write('<info>.</info>');
+                    if(CommandHelper::executeShellCommand('php app/console fos:user:change-password '.$username.' '.$password)) {
+                        $indicator->isSuccess();
                     }
                     else {
-                        array_push($fail_array, $username);
-                        $output->write('<error>F</error>');
+                        $indicator->isFailure();
+                        $indicator->addError($username);
                     }
-                }
-                $inline_count += 1;
-
-                if($inline_count >= $line_length) {
-                    $number = $line_length * $line_count;
-                    $output->writeln(' '.$number);
-                    $inline_count = 0;
-                    $line_count += 1;
                 }
             }
             fclose($handle);
-            $this->printErrors($output, $fail_array);
+
+            $indicator->printErrors();
         } else {
             $output->writeln('File not found!');
         }
 
-    }
-
-    private function getSubstring($string, $needle, $last_char=false) {
-        $pos = strpos($string, $needle);
-
-        if($pos === false) {
-            return "";
-        }
-        if($last_char) {
-            $pos = $pos + 1;
-        }
-        return substr($string, 0, $pos);
-    }
-
-    private function executeShellCommand($command)
-    {
-        $process = new Process($command);
-        $process->run();
-        if ($process->isSuccessful()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function printErrors($output, $errors) {
-
-        $output->writeln('');
-        $error_count = count($errors);
-        if($error_count == 0) {
-            $output->writeln('Successfully executed command. There were no errors.');
-        }
-        else {
-            $output->writeln('Command executed. There were '.$error_count.' errors.');
-            $output->writeln('Errors happened with the following users:');
-
-            for($i = 0; $i < $error_count; $i++) {
-                if ($i >= 50) {
-                    $output->writeln('...');
-                    break;
-                }
-                if (($i + 1) != $error_count) {
-                    $output->write($errors[$i].', ');
-                }
-                else {
-                    $output->writeln($errors[$i]);
-                }
-            }
-        }
     }
 }
