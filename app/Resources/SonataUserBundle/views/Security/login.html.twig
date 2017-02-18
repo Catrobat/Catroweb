@@ -60,7 +60,7 @@
 
     <div id="login_links">
          <div>
-             <a id="create_account" href="{{ path('fos_user_registration_register') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+             <a id="create_account" href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
          </div>
          <div>
              <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>
