@@ -212,7 +212,7 @@
         </div>
 
         <div id="nolb-submission-failed">
-          <h2> {{ "pmd.submit-box.header"|trans({}, "catroweb") }} </h2>
+          <h2> {{ "pmd.submitBox.header"|trans({}, "catroweb") }} </h2>
           <p>{{ "pmd.failed.text"|trans({}, "catroweb") }}</p>
           <button id="nolb-submission-failed-ok" class="btn">
             <p>{{ "ok"|trans({}, "catroweb") }}</p>
@@ -642,10 +642,10 @@
              data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
              success: function(data){
                var response = JSON.parse(data);
-               if(response.code){
+               if(response.code == 1) {
                  $('#nolb-submission-successful').show();
                }
-               else{
+               else {
                  $('#nolb-submission-failed').show();
                }
 
