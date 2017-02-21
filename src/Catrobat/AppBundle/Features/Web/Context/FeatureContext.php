@@ -302,6 +302,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       case 'Russisch':
           $this->getSession()->setCookie('hl', 'ru');
           break;
+      case 'French':
+          $this->getSession()->setCookie('hl', 'fr');
+          break;
       default:
         assertTrue(false);
     }
@@ -598,6 +601,32 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
             $forward_relation = new ProgramRemixRelation($ancestor_program, $descendant_program, intval($relation['depth']));
             $em->persist($forward_relation);
+        }
+        $em->flush();
+    }
+
+    /**
+     * @Given /^there are featured programs:$/
+     */
+    public function thereAreFeaturedPrograms(TableNode $table)
+    {
+        /*
+        * @var $em \Doctrine\ORM\EntityManager
+        */
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $relations = $table->getHash();
+
+        foreach($relations as $relation)
+        {
+            $program = $em->getRepository('AppBundle:Program')->find($relation['program_id']);
+
+            $featured_program = new FeaturedProgram();
+            $featured_program->setProgram($program);
+            $featured_program->setImageType($relation['imagetype']);
+            $featured_program->setActive(intval($relation['active']));
+            $featured_program->setFlavor($relation['flavor']);
+            $featured_program->setPriority(intval($relation['priority']));
+            $em->persist($featured_program);
         }
         $em->flush();
     }
@@ -1957,11 +1986,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     /**
      * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
      */
-    public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id)
+    public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id_or_value)
     {
         $em = $this->kernel->getContainer()->get('doctrine')->getManager();
         $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
-        assertEquals(1,count($clicks), "No databse entry found!");
+        assertEquals(1,count($clicks), "No database entry found!");
 
         $click = $clicks[0];
 
@@ -1969,17 +1998,53 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
         switch ($name_id) {
             case "tag_id":
-                assertEquals($id, $click->getTag()->getId());
+                assertEquals($id_or_value, $click->getTag()->getId());
                 break;
             case "extension_id":
-                assertEquals($id, $click->getExtension()->getId());
+                assertEquals($id_or_value, $click->getExtension()->getId());
                 break;
             case "program_id":
-                assertEquals($id, $click->getProgram()->getId());
+                assertEquals($id_or_value, $click->getProgram()->getId());
+                break;
+            case "user_specific_recommendation":
+                assertEquals(($id_or_value == 'true') ? true : false, $click->getUserSpecificRecommendation());
                 break;
             default:
                 assertTrue(false);
         }
+    }
+
+    /**
+     * @Then /^There should be no recommended click statistic database entry$/
+     */
+    public function thereShouldBeNoRecommendedClickStatisticDatabaseEntry()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
+        assertEquals(0, count($clicks), "Unexpected database entry found!");
+    }
+
+    /**
+     * @Then /^There should be one homepage click database entry with type is "([^"]*)" and program id is "([^"]*)"$/
+     */
+    public function thereShouldBeOneHomepageClickDatabaseEntryWithTypeIsAndIs($type_name, $id)
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
+        assertEquals(1, count($clicks), "No database entry found!");
+        $click = $clicks[0];
+        assertEquals($type_name, $click->getType());
+        assertEquals($id, $click->getProgram()->getId());
+    }
+
+    /**
+     * @Then /^There should be no homepage click statistic database entry$/
+     */
+    public function thereShouldBeNoHomepageClickStatisticDatabaseEntry()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
+        assertEquals(0, count($clicks), "Unexpected database entry found!");
     }
 
     /**
@@ -2012,6 +2077,81 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     public function iClickOnTheFirstRecommendedHomepageProgram()
     {
         $arg1 = '#program-1 .homepage-recommended-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I click on the first featured homepage program$/
+     */
+    public function iClickOnAFeaturedHomepageProgram()
+    {
+        $arg1 = '.owl-item > div > a:first-child';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I click on a newest homepage program having program id "([^"]*)"$/
+     */
+    public function iClickOnANewestHomepageProgram($program_id)
+    {
+        $arg1 = '#newest .programs #program-' . $program_id . ' .rec-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
+     */
+    public function iClickOnAMostDownloadedHomepageProgram($program_id)
+    {
+        $arg1 = '#mostDownloaded .programs #program-' . $program_id . ' .rec-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
+     */
+    public function iClickOnAMostViewedHomepageProgram($program_id)
+    {
+        $arg1 = '#mostViewed .programs #program-' . $program_id . ' .rec-programs';
+        $this->assertSession()->elementExists('css', $arg1);
+
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', $arg1)
+            ->click();
+    }
+
+    /**
+     * @When /^I click on a random homepage program having program id "([^"]*)"$/
+     */
+    public function iClickOnARandomHomepageProgram($program_id)
+    {
+        $arg1 = '#random .programs #program-' . $program_id . ' .rec-programs';
         $this->assertSession()->elementExists('css', $arg1);
 
         $this

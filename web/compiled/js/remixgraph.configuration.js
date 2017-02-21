@@ -17,7 +17,7 @@ var NETWORK_OPTIONS = {
         labelHighlightBold: false,
         borderWidth: 3,
         borderWidthSelected: 3,
-        size: 30,
+        size: 20,
         color: {
             border: '#CCCCCC',
             background: '#FFFFFF',
@@ -48,7 +48,7 @@ var NETWORK_OPTIONS = {
         smooth: {
 //            type: 'straightCross'
 //            type: 'dynamic'
-            type: 'horizontal'
+            type: 'dynamic'
         },
         arrows: { to: true }
     },

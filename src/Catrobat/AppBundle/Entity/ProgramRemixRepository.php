@@ -246,4 +246,51 @@ class ProgramRemixRepository extends EntityRepository
 
         return count($result);
     }
+
+    /**
+     * @param $user_id
+     * @return ProgramRemixRelation[]
+     */
+    public function getDirectParentRelationDataOfUser($user_id)
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        return $qb
+            ->select('r.ancestor_id', 'r.descendant_id')
+            ->innerJoin('r.descendant', 'p', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.descendant_id = p.id')
+            ->where($qb->expr()->eq('IDENTITY(p.user)', ':user_id'))
+            ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
+            ->setParameter('user_id', $user_id)
+            ->distinct()
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param int $user_ids
+     * @return Program
+     */
+    public function getDirectParentRelationsOfUsersRemixes($user_ids, $exclude_user_id, $exclude_program_ids, $flavor)
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        return $qb
+            ->select('r')
+            ->innerJoin('r.ancestor', 'pa', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.ancestor_id = pa.id')
+            ->innerJoin('r.descendant', 'pd', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.descendant_id = pd.id')
+            ->where($qb->expr()->in('IDENTITY(pd.user)', ':user_ids'))
+            ->andWhere($qb->expr()->neq('IDENTITY(pa.user)', ':exclude_user_id'))
+            ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
+            ->andWhere($qb->expr()->notIn('r.ancestor_id', ':exclude_program_ids'))
+            ->andWhere($qb->expr()->eq('pa.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('pa.flavor', ':flavor'))
+            ->andWhere($qb->expr()->eq('pa.private', $qb->expr()->literal(false)))
+            ->setParameter('user_ids', $user_ids)
+            ->setParameter('exclude_user_id', $exclude_user_id)
+            ->setParameter('exclude_program_ids', $exclude_program_ids)
+            ->setParameter('flavor', $flavor)
+            ->distinct()
+            ->getQuery()
+            ->getResult();
+    }
 }

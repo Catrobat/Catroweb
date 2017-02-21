@@ -25,9 +25,16 @@ Feature: A/B testing for recommendation system & remix graph
     And the selected language is "English"
     And I should see "Recommended programs"
     And the element "#recommended" should be visible
+    And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "Russisch"
     Then I should not see "Recommended programs"
     And I should not see "#recommended"
+    When I switch the language to "French"
+    Then I should see "Recommended programs"
+    And the element "#recommended" should be visible
+    And I should see a recommended homepage program having ID "1" and name "Minions"
+    And I should see a recommended homepage program having ID "2" and name "Galaxy"
+    And I should see a recommended homepage program having ID "3" and name "Alone"
 
   Scenario: User with selected russian language cannot see the remix graph button and details on program page
     Given I am on "/pocketcode/program/1"

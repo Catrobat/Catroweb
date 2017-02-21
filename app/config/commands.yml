@@ -133,3 +133,13 @@ services:
                   - "%kernel.root_dir%"
               tags:
                 -  { name: console.command }
+
+      command.recommender.compute:
+              class: Catrobat\AppBundle\Commands\RecommenderUserSimilaritiesCommand
+              arguments:
+                  - "@usermanager"
+                  - "@recommendermanager"
+                  - "@doctrine.orm.entity_manager"
+                  - "%kernel.root_dir%"
+              tags:
+                -  { name: console.command }

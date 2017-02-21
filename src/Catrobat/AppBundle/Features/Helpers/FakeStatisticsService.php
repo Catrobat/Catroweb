@@ -26,6 +26,11 @@ class FakeStatisticsService
         return $this->geocoder_service->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name, $referrer);
     }
 
+    public function createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale)
+    {
+        return $this->geocoder_service->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);
+    }
+
     public function useRealService($use_real) {
         $this->use_real_service = $use_real;
     }

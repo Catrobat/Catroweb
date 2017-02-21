@@ -53,6 +53,11 @@ class ClickStatistic
     protected $recommended_from_program;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+     */
+    protected $user_specific_recommendation = false;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $clicked_at;
@@ -164,6 +169,22 @@ class ClickStatistic
     public function setRecommendedFromProgram($recommended_from_program)
     {
         $this->recommended_from_program = $recommended_from_program;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUserSpecificRecommendation()
+    {
+        return $this->user_specific_recommendation;
+    }
+
+    /**
+     * @param bool $is_user_specific_recommendation
+     */
+    public function setUserSpecificRecommendation($is_user_specific_recommendation)
+    {
+        $this->user_specific_recommendation = $is_user_specific_recommendation;
     }
 
     /**

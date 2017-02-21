@@ -321,6 +321,57 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @Given /^there are like similar users:$/
+     */
+    public function thereAreLikeSimilarUsers(TableNode $table)
+    {
+        $similarities = $table->getHash();
+
+        for ($i = 0; $i < count($similarities); ++$i)
+        {
+            $this->insertUserLikeSimilarity(array(
+                'first_user_id' => $similarities[$i]['first_user_id'],
+                'second_user_id' => $similarities[$i]['second_user_id'],
+                'similarity' => $similarities[$i]['similarity']
+            ));
+        }
+    }
+
+    /**
+     * @Given /^there are remix similar users:$/
+     */
+    public function thereAreRemixSimilarUsers(TableNode $table)
+    {
+        $similarities = $table->getHash();
+
+        for ($i = 0; $i < count($similarities); ++$i)
+        {
+            $this->insertUserRemixSimilarity(array(
+                'first_user_id' => $similarities[$i]['first_user_id'],
+                'second_user_id' => $similarities[$i]['second_user_id'],
+                'similarity' => $similarities[$i]['similarity']
+            ));
+        }
+    }
+
+    /**
+     * @Given /^there are likes:$/
+     */
+    public function thereAreLikes(TableNode $table)
+    {
+        $likes = $table->getHash();
+
+        foreach($likes as $like) {
+            $this->insertProgramLike(array(
+                'username' => $like['username'],
+                'program_id' => $like['program_id'],
+                'type' => $like['type'],
+                'created at' => $like['created at']
+            ));
+        }
+    }
+
+    /**
      * @Given /^there are tags:$/
      */
     public function thereAreTags(TableNode $table)
@@ -494,6 +545,22 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @When /^I compute all like similarities between users$/
+     */
+    public function iComputeAllLikeSimilaritiesBetweenUsers()
+    {
+        $this->computeAllLikeSimilaritiesBetweenUsers();
+    }
+
+    /**
+     * @When /^I compute all remix similarities between users$/
+     */
+    public function iComputeAllRemixSimilaritiesBetweenUsers()
+    {
+        $this->computeAllRemixSimilaritiesBetweenUsers();
+    }
+
+    /**
      * @Given /^I am "([^"]*)"$/
      */
     public function iAm($username)
@@ -528,6 +595,27 @@ class FeatureContext extends BaseContext
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
         assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects'], 'Wrong number of total projects');
+    }
+
+    /**
+     * @Then /^I should get user-specific recommended projects$/
+     */
+    public function iShouldGetUserSpecificRecommendedProjects()
+    {
+        $response = $this->getClient()->getResponse();
+        $responseArray = json_decode($response->getContent(), true);
+        assertTrue(isset($responseArray['isUserSpecificRecommendation']), 'No isUserSpecificRecommendation parameter found in response!');
+        assertTrue($responseArray['isUserSpecificRecommendation'], 'isUserSpecificRecommendation parameter has wrong value. Is false, but should be true!');
+    }
+
+    /**
+     * @Then /^I should get no user-specific recommended projects$/
+     */
+    public function iShouldGetNoUserSpecificRecommendedProjects()
+    {
+        $response = $this->getClient()->getResponse();
+        $responseArray = json_decode($response->getContent(), true);
+        assertFalse(isset($responseArray['isUserSpecificRecommendation']), 'Unexpected isUserSpecificRecommendation parameter found in response!');
     }
 
     /**
@@ -635,6 +723,42 @@ class FeatureContext extends BaseContext
     public function iShouldGetFollowingPrograms(TableNode $table)
     {
         $this->iShouldGetProgramsInTheFollowingOrder($table);
+    }
+
+    /**
+     * @Then /^I should get following like similarities:$/
+     */
+    public function iShouldGetFollowingLikePrograms(TableNode $table)
+    {
+        $all_like_similarities = $this->getAllLikeSimilaritiesBetweenUsers();
+        $expected_like_similarities = $table->getHash();
+        assertEquals(count($expected_like_similarities), count($all_like_similarities), 'Wrong number of returned similarity entries');
+        for ($i = 0; $i < count($all_like_similarities); ++$i) {
+            assertEquals($expected_like_similarities[$i]['first_user_id'], $all_like_similarities[$i]->getFirstUserId(),
+                'Wrong value for first_user_id or wrong order of results');
+            assertEquals($expected_like_similarities[$i]['second_user_id'], $all_like_similarities[$i]->getSecondUserId(),
+                'Wrong value for second_user_id');
+            assertEquals(round($expected_like_similarities[$i]['similarity'], 3), round($all_like_similarities[$i]->getSimilarity(), 3),
+                'Wrong value for similarity');
+        }
+    }
+
+    /**
+     * @Then /^I should get following remix similarities:$/
+     */
+    public function iShouldGetFollowingRemixPrograms(TableNode $table)
+    {
+        $all_remix_similarities = $this->getAllRemixSimilaritiesBetweenUsers();
+        $expected_remix_similarities = $table->getHash();
+        assertEquals(count($expected_remix_similarities), count($all_remix_similarities), 'Wrong number of returned similarity entries');
+        for ($i = 0; $i < count($all_remix_similarities); ++$i) {
+            assertEquals($expected_remix_similarities[$i]['first_user_id'], $all_remix_similarities[$i]->getFirstUserId(),
+                'Wrong value for first_user_id or wrong order of results');
+            assertEquals($expected_remix_similarities[$i]['second_user_id'], $all_remix_similarities[$i]->getSecondUserId(),
+                'Wrong value for second_user_id');
+            assertEquals(round($expected_remix_similarities[$i]['similarity'], 3), round($all_remix_similarities[$i]->getSimilarity(), 3),
+                'Wrong value for similarity');
+        }
     }
 
     /**

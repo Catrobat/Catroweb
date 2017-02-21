@@ -26,6 +26,7 @@
       <div id="recommended">
           <div class="help-headline">
               <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
+              {% if not ("FR" in app.request.locale) and not ("fr" in app.request.locale) %}
               <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
                    data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
                    {% if not ("DE" in app.request.locale) and not ("de" in app.request.locale) %}
@@ -34,6 +35,7 @@
                    data-help-description="{{ "indexPage.recommendedSection.info.description_C_VersionTest"|trans({}, "catroweb") }}"
                    {% endif %}
                    width="30" height="30" />
+              {% endif %}
       </div>
       <div class="programs"></div>
     </div>
@@ -59,6 +61,7 @@
 {% block js %}
   <script src="{{ asset('./js/globalPlugins/owl.carousel.min.js') }}"></script>
   <script>
+    Array.prototype.contains = function(element){ return this.indexOf(element) > -1; };
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
     var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
     var recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId);
@@ -70,6 +73,31 @@
     mostDownloaded.init();
     mostViewed.init();
     random.init();
+
+    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
+        var url = "{{ path('click_stats') }}";
+        var params = {};
+
+        if (!isRecommendedProgram) {
+            url = "{{ path('homepage_click_stats') }}";
+            if (!["featured", "newest", "mostDownloaded", "mostViewed", "random"].contains(type)) {
+                alert("You clicked at a program of an unknown section!");
+                return;
+            }
+            params = { type: type, programID: programID };
+        } else {
+            params = { type: type, recFromID: 0, recID: programID, isScratchProgram: 0, recIsUserSpecific: userSpecificRecommendation };
+        }
+
+        $.ajaxSetup({ async: false });
+        $.post(url, params, function (data) {
+            if (data == 'error')
+                console.log("No click statistic is created!");
+        }).fail(function (data) {
+            console.log(data);
+        });
+        window.location.href = href;
+    }
 
     $(document).on("click", ".program", function() {
       var clicked_program_id = this.id.replace("program-", "");
@@ -89,22 +117,22 @@
       }
     });
 
-    $(document).one('click', ".homepage-recommended-programs", function(event) {
+    $(document).one('click', ".owl-item > div > a", function(event) {
         event.preventDefault();
+        var href = $(this).attr('href');
+        var programID = ((href.indexOf("program") > 0) ? (href.split("program")[1].match(/[0-9]+/))[0] : 0);
+        var type = "featured";
+        performClickStatisticRequest(href, type, false, 0, programID);
+    });
 
-        var type = "rec_homepage";
+    $(document).one('click', ".rec-programs", function(event) {
+        event.preventDefault();
+        var isRecommendedProgram = $(this).hasClass("homepage-recommended-programs");
+        var type = (isRecommendedProgram ? "rec_homepage" : $(this).parent(".program").parent(".programs").parent().attr("id"));
         var href = $(this).attr('href');
         var recommendedProgramID = ((href.indexOf("program") > 0) ? (href.split("program")[1].match(/[0-9]+/))[0] : 0);
-
-        $.ajaxSetup({ async: false });
-        var params = { type: type, recFromID: 0, recID: recommendedProgramID, isScratchProgram: 0 };
-        $.post("{{ path('click_stats') }}", params, function (data) {
-            if (data == 'error')
-                console.log("No click statistic is created!");
-        }).fail(function (data) {
-            console.log(data);
-        });
-        window.location.href = href;
+        var userSpecificRecommendation = ((href.indexOf("rec_user_specific=") > 0) ? parseInt((href.split("rec_user_specific=")[1].match(/[0-9]+/))[0]) : 0);
+        performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID);
     });
 
     $(document).on("click", ".help-icon", function() {

@@ -86,6 +86,20 @@ services:
         arguments:
             - "AppBundle:ScratchProgramRemixRelation"
 
+    userlikesimilarityrelationrepository:
+        class: Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:UserLikeSimilarityRelation"
+
+    userremixsimilarityrelationrepository:
+        class: Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:UserRemixSimilarityRelation"
+
     tagrepository:
         class: Catrobat\AppBundle\Entity\TagRepository
         factory_service: doctrine.orm.entity_manager
@@ -245,6 +259,17 @@ services:
         class: Catrobat\AppBundle\Entity\MigrationManager
         arguments:
          - "@doctrine.orm.entity_manager"
+
+    recommendermanager:
+        class: Catrobat\AppBundle\RecommenderSystem\RecommenderManager
+        arguments:
+         - "@doctrine.orm.entity_manager"
+         - "@usermanager"
+         - "@userlikesimilarityrelationrepository"
+         - "@userremixsimilarityrelationrepository"
+         - "@programlikerepository"
+         - "@programremixrepository"
+         - "@programremixbackwardrepository"
 
     rudewordfilter:
         class: Catrobat\AppBundle\Services\RudeWordFilter

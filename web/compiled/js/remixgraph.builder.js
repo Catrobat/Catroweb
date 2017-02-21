@@ -119,7 +119,7 @@ var NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslati
                 id: CATROBAT_NODE_PREFIX + "_" + nodeId,
                 //value: (nodeId == remixData.id) ? 3 : 2,
                 borderWidth: (nodeId == self.programID) ? 6 : 3,
-                size: (nodeId == self.programID) ? 60 : 30,
+                size: (nodeId == self.programID) ? 40 : 20,
                 shape: 'circularImage',
                 image: self.catrobatProgramThumbnails[nodeId]
             };

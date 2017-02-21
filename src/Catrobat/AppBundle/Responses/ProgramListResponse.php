@@ -10,11 +10,14 @@ class ProgramListResponse
 
     private $show_details;
 
-    public function __construct($programs, $total_programs, $show_details = true)
+    private $is_user_specific_recommendation;
+
+    public function __construct($programs, $total_programs, $show_details = true, $is_user_specific_recommendation = false)
     {
         $this->programs = $programs;
         $this->total_programs = $total_programs;
         $this->show_details = $show_details;
+        $this->is_user_specific_recommendation = $is_user_specific_recommendation;
     }
 
     public function getPrograms()
@@ -30,5 +33,10 @@ class ProgramListResponse
     public function getShowDetails()
     {
         return $this->show_details;
+    }
+
+    public function isIsUserSpecificRecommendation()
+    {
+        return $this->is_user_specific_recommendation;
     }
 }

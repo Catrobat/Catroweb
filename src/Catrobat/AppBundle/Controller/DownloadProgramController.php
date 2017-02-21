@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Controller;
 
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -37,6 +38,7 @@ class DownloadProgramController extends Controller
 
         $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
         $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
+        $rec_user_specific = intval($request->query->get('rec_user_specific', 0)) == 1 ? true : false;
 
         $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
 
@@ -54,6 +56,7 @@ class DownloadProgramController extends Controller
                     // all recommendations (except tag-recommendations -> see below)
                     $request->attributes->set('rec_by_page_id', $rec_by_page_id);
                     $request->attributes->set('rec_by_program_id', $rec_by_program_id);
+                    $request->attributes->set('rec_user_specific', $rec_user_specific);
                 } else if ($rec_tag_by_program_id > 0) {
                     // tag-recommendations
                     $request->attributes->set('rec_from', $rec_tag_by_program_id);

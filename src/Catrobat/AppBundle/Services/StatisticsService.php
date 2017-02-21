@@ -3,6 +3,7 @@ namespace Catrobat\AppBundle\Services;
 
 use Behat\Mink\Exception\Exception;
 use Catrobat\AppBundle\Entity\ClickStatistic;
+use Catrobat\AppBundle\Entity\HomepageClickStatistic;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
@@ -28,7 +29,8 @@ class StatisticsService
         $this->security_token_storage = $security_token_storage;
     }
 
-    public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale)
+    public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id,
+                                                    $rec_by_program_id, $locale, $is_user_specific_recommendation = false)
     {
         $ip = $this->getOriginalClientIp($request);
         $user_agent = $this->getUserAgent($request);
@@ -81,6 +83,7 @@ class StatisticsService
             // all recommendations (except tag-recommendations -> see below)
             $program_download_statistic->setRecommendedByPageId($rec_by_page_id);
             $rec_by_program = ($rec_by_program_id != null) ? $this->programmanager->find($rec_by_program_id) : null;
+            $program_download_statistic->setUserSpecificRecommendation($is_user_specific_recommendation);
 
             if ($rec_by_program != null) {
                 $program_download_statistic->setRecommendedByProgram($rec_by_program);
@@ -108,7 +111,8 @@ class StatisticsService
     }
 
     public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name,
-                                          $referrer, $locale = null, $is_recommended_program_a_scratch_program = false)
+                                          $referrer, $locale = null, $is_recommended_program_a_scratch_program = false,
+                                          $is_user_specific_recommendation = false)
     {
         $ip = $this->getOriginalClientIp($request);
         $user_agent = $this->getUserAgent($request);
@@ -142,7 +146,7 @@ class StatisticsService
         $this->logger->addDebug('Received geocoded data - latitude: ' . $latitude . ', longitude: ' . $longitude .
             ', country code: ' . $country_code . ', country name: ' . $country_name);
 
-        if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs'])) {
+        if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph'])) {
             $click_statistics = new ClickStatistic();
             $click_statistics->setType($type);
             $click_statistics->setUserAgent($user_agent);
@@ -155,6 +159,7 @@ class StatisticsService
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
             $click_statistics->setLocale($locale);
+            $click_statistics->setUserSpecificRecommendation($is_user_specific_recommendation);
 
             if ($rec_from_id > 0) {
                 $recommended_from = $this->programmanager->find($rec_from_id);
@@ -226,6 +231,41 @@ class StatisticsService
             $this->addGoogleMapsGeocodeData($latitude, $longitude, $click_statistics);
         }
 
+        return true;
+    }
+
+    public function createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale)
+    {
+        $ip = $this->getOriginalClientIp($request);
+        $user_agent = $this->getUserAgent($request);
+        $session_user = $this->getSessionUser();
+
+        if ($session_user === 'anon.') {
+            $user = null;
+        } else {
+            $user = $session_user;
+        }
+
+        $this->logger->addDebug('create click stats for program id: ' . $program_id . ', ip: ' . $ip .
+            ', user agent: ' . $user_agent . ', referrer: ' . $referrer);
+        if ($user !== null) {
+            $this->logger->addDebug('user: ' . $user->getUsername());
+        } else {
+            $this->logger->addDebug('user: anon.');
+        }
+
+        $homepage_click_statistics = new HomepageClickStatistic();
+        $homepage_click_statistics->setType($type);
+        $homepage_click_statistics->setUserAgent($user_agent);
+        $homepage_click_statistics->setUser($user);
+        $homepage_click_statistics->setReferrer($referrer);
+        $homepage_click_statistics->setClickedAt(new \DateTime());
+        $homepage_click_statistics->setIp($ip);
+        $homepage_click_statistics->setLocale($locale);
+        $program = $this->programmanager->find($program_id);
+        $homepage_click_statistics->setProgram($program);
+        $this->entity_manager->persist($homepage_click_statistics);
+        $this->entity_manager->flush();
         return true;
     }
 

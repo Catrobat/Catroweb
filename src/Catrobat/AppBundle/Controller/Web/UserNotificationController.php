@@ -104,8 +104,9 @@ class UserNotificationController extends Controller
 
         $statistics = $this->get('statistics');
         $referrer = $request->headers->get('referer');
+        $locale = strtolower($request->getLocale());
         $statistics->createClickStatistics($request, 'rec_remix_notification', $ancestor_id, $descendant_id, null, null,
-            $referrer, false);
+            $referrer, $locale, false);
 
         $remix_manager->markRemixRelationAsSeen($remix_relation);
         return $this->redirectToRoute('program', [
