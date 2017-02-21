@@ -1,0 +1,40 @@
+<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#warn-user-{{ object.id }}-modal">
+    <i class="glyphicon glyphicon-alert"></i> Warn User
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="warn-user-{{ object.id }}-modal" tabindex="-1" role="dialog" aria-labelledby="warn-user-{{ object.id }}-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="Warn user?">Confirm warn of user</h4>
+            </div>
+            <form action="{{ admin.generateObjectUrl('warn', object) }}">
+                <input type="hidden" name="id" value="{{ object.id }}">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            You are about to warn the user {{ object.getUsername() }}. You can use the User admin view
+                            to check if the user has already been warned before. After continuous
+                            violations against our ToS you should ban the user. Please confirm your decision.
+                        </div>
+                        {#
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label"> Reason for the ban:</label>
+                                <textarea name="reason" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                        #}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {#<button type="submit" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-alert"></i> Ban User</button>#}
+                    <a class="btn btn-sm btn-warning" href="{{ admin.generateObjectUrl('warn', object) }}"><i class="glyphicon glyphicon-alert"></i> Warn User</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

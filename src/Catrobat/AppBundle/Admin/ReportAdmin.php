@@ -49,6 +49,8 @@ class ReportAdmin extends Admin
       ->add('_action', 'actions', array('actions' => array(
         'delete' => array('template' => ':CRUD:list__action_delete_comment.html.twig'),
         'unreport' => array('template' => ':CRUD:list__action_unreport.html.twig'),
+        'warn' => array('template' => ':CRUD:list__action_warn.html.twig'),
+        'bann' => array('template' => ':CRUD:list__action_bann.html.twig'),
       )))
     ;
   }
@@ -58,6 +60,8 @@ class ReportAdmin extends Admin
   {
     $collection->add('deleteComment');
     $collection->add('unreport');
+    $collection->add('bann');
+    $collection->add('warn');
   }
 
 

@@ -623,3 +623,10 @@ pmd:
 
 codeview:
   showText: Show code
+
+mail_messages:
+  banned_user:
+    subject: Your PocketCode account has been banned.
+    text_1_day: We are sorry to tell you that your PocketCode account has been banned for 24 hours because you violated our terms of service. If you violate our terms of service again your next bann will last a whole week. The third bann will be permanent. The reason for your bann is:
+    text_1_week: We are sorry to tell you that your PocketCode account has been banned for 1 week because you violated our terms of service. If you violate our terms of service again your next bann will be permanent. The reason for your bann is:
+    text_perm: We are sorry to tell you that your PocketCode account has been permanently banned. The reason for your bann is:

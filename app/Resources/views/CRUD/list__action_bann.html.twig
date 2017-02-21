@@ -1,0 +1,38 @@
+<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ban-user-{{ object.id }}-modal">
+    <i class="glyphicon glyphicon-alert"></i> Ban User
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ban-user-{{ object.id }}-modal" tabindex="-1" role="dialog" aria-labelledby="ban-user-{{ object.id }}-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="Ban user?">Confirm ban of user</h4>
+            </div>
+            <form action="{{ admin.generateObjectUrl('bann', object) }}">
+                <input type="hidden" name="id" value="{{ object.id }}">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            You are about to ban the user {{ object.getUsername() }}. Please confirm your decision.
+                        </div>
+                        {#
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label"> Reason for the ban:</label>
+                                <textarea name="reason" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                        #}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {#<button type="submit" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-alert"></i> Ban User</button>#}
+                    <a class="btn btn-sm btn-danger" href="{{ admin.generateObjectUrl('bann', object) }}"><i class="glyphicon glyphicon-alert"></i> Ban User</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

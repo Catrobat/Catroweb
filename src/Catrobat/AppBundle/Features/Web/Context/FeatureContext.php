@@ -441,8 +441,44 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       }
       $user_manager->updateUser($user, true);
   }
+    /**
+     * @Given /^there are banned users:$/
+     */
+    public function thereAreBannedUsers(TableNode $table)
+    {
+        /**
+         * @var $user_manager UserManager
+         * @var $user User
+         */
+        $user_manager = $this->kernel->getContainer()->get('usermanager');
+        $users = $table->getHash();
+        $user = null;
+        for ($i = 0; $i < count($users); ++$i ) {
+            $user = $user_manager->createUser();
+            $user->setUsername($users[$i]['name']);
+            $user->setEmail($users[$i]['email']);
+            $user->setAdditionalEmail('');
+            $user->setPlainPassword($users[$i]['password']);
+            $user->setEnabled(true);
+            $user->setUploadToken($users[$i]['token']);
+            $user->setCountry('at');
+            $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
+            $user->setLocked($users[$i]['locked']);
+            if ($users[$i]['banned_until'] == 'null')
+            {
+                $user->setBannedUntil(null);
+            }
+            else
+            {
+                $user->setBannedUntil(new \DateTime($users[$i]['banned_until']));
+            }
+            $user->setTimesBanned($users[$i]['times_banned']);
+            $user_manager->updateUser($user, false);
+        }
+        $user_manager->updateUser($user, true);
+    }
 
-  /**
+    /**
    * @Given /^there are admins:$/
    */
   public function thereAreAdmins(TableNode $table)
@@ -469,6 +505,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $user_manager->updateUser($user, true);
   }
 
+    /**
+     * @Then /^There should be a new user "([^"]*)"$/
+     */
+    public function thereShouldBeANewUser($arg1)
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('username' => $arg1));
+        assertEquals($arg1, $user->getUsername(), "New user " . $arg1 . " not found!");
+    }
 
   /**
    * @Given /^there are programs:$/
