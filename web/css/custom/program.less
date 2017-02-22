@@ -516,45 +516,55 @@ table td:nth-child(1) {
   font-size: 15px;
   max-width: 400px;
   width: 80%;
-}
 
+  h2 {
+    margin: 6px;
+  }
+
+  p,
+  input,
+  #nolb-submission-button {
+    margin: 10px 0 0 0;
+  }
+
+  #nolb-submission-button {
+    max-height: 50px;
+    max-width: 200px;
+    padding: 0px 10px;
+    line-height: 10px;
+    p {
+      display: inline;
+    }
+  }
+
+  #nolb-submission-box-cancel {
+    line-height: 0;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
 
 #nolb-submission-failed-ok,
 #nolb-submission-successful-ok{
-  margin: 0px;
+  margin: 10px 0 0 0;
   min-height: 26px;
-  p{
-    margin: 0;
+  p {
+    display: inline;
   }
-
-}
-
-
-
-#nolb-submission-box-cancel {
-  line-height: 0;
-  padding: 10px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+  box-sizing : border-box;
   margin: 0;
 }
 
 input[type='number'] {
   -moz-appearance:textfield;
-}
-
-#nolb-submission-button {
-  max-height: 50px;
-  max-width: 200px;
-  margin: 10px;
-  padding: 0px 10px;
-  line-height: 10px;
+  box-sizing : border-box;
 }
 
 .btn {
@@ -741,6 +751,12 @@ input[type='number'] {
   .report-button {
     clear: left;
     padding-left: 0em;
+  }
+}
+
+@media screen and (max-width: 282px) {
+  #nolb-submission-box input {
+    width: 100%;
   }
 }
 

@@ -617,6 +617,7 @@ class CodeViewController extends Controller
       $scripts[] = $resolved_script;
 
       $this->updateProgramStatistic('totalNumScripts', $resolved_script['img_file'], $resolved_script['type']);
+      $this->updateProgramStatistic('totalNumBricks');
     }
     return $scripts;
   }
