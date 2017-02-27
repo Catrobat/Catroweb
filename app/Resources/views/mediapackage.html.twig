@@ -21,6 +21,11 @@
             <div>
               <img src="{{ asset(image) }}">
             </div>
+              {% if file.data.author %}
+                <div>
+                  {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
+                </div>
+              {% endif %}
             {% endif %}
 
             {% if sound %}
@@ -41,7 +46,12 @@
             <div>
               <b>{{ file.data.name }}</b>
             </div>
-            <div>
+                {% if file.data.author %}
+                  <div>
+                    {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
+                  </div>
+                {% endif %}
+              <div>
               Download
             </div>
             {% endif %}
