@@ -2,9 +2,11 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
+use Catrobat\AppBundle\Commands\ArchiveLogsCommand;
 use Catrobat\AppBundle\Commands\CleanApkCommand;
 use Catrobat\AppBundle\Commands\CleanExtractedFileCommand;
 use Catrobat\AppBundle\Commands\CleanBackupsCommand;
+use Catrobat\AppBundle\Commands\CleanLogsCommand;
 use Catrobat\AppBundle\Commands\CreateBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -28,6 +30,38 @@ class MaintainController extends Controller
         $return = $command->run(new ArrayInput(array()), new NullOutput());
         if ($return == 0) {
             $this->addFlash('sonata_flash_success', 'Reset extracted files OK');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl("list"));
+    }
+
+    public function archiveLogsAction() {
+        if ($this->admin->isGranted('EXTRACTED') === false) {
+            throw new AccessDeniedException();
+        }
+
+        $command = new ArchiveLogsCommand();
+        $command->setContainer($this->container);
+
+        $return = $command->run(new ArrayInput(array()), new NullOutput());
+        if ($return == 0) {
+            $this->addFlash('sonata_flash_success', 'Archive log files OK');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl("list"));
+    }
+
+    public function deleteLogsAction() {
+        if ($this->admin->isGranted('EXTRACTED') === false) {
+            throw new AccessDeniedException();
+        }
+
+        $command = new CleanLogsCommand();
+        $command->setContainer($this->container);
+
+        $return = $command->run(new ArrayInput(array()), new NullOutput());
+        if ($return == 0) {
+            $this->addFlash('sonata_flash_success', 'Reset log files OK');
         }
 
         return new RedirectResponse($this->admin->generateUrl("list"));
@@ -141,6 +175,15 @@ class MaintainController extends Controller
         $ac->setCommandName("Create backup");
         $ac->setCommandLink($this->admin->generateUrl("create_backup"));
         $backupCommand = $ac;
+
+        $description = "This will remove all log files.";
+        $rm = new RemoveableMemory("Logs", $description);
+        $this->setSizeOfObject($rm, $this->container->getParameter("catrobat.logs.dir"));
+        $rm->setCommandName("Delete log files");
+        $rm->setCommandLink($this->admin->generateUrl("delete_logs"));
+        $rm->setArchiveCommandLink($this->admin->generateUrl("archive_logs"));
+        $rm->setArchiveCommandName("Archive logs files");
+        $removeableObjects[] = $rm;
 
         $freeSpace = disk_free_space("/");
         $usedSpace = disk_total_space("/") - $freeSpace;
@@ -259,6 +302,8 @@ class RemoveableMemory
     public $command_name;
     public $download_link;
     public $execute_link;
+    public $archive_command_link;
+    public $archive_command_name;
 
     public function __construct($name, $description) {
         $this->name = $name;
@@ -298,6 +343,38 @@ class RemoveableMemory
      */
     public function setDownloadLink($download_link) {
         $this->download_link = $download_link;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArchiveCommandLink()
+    {
+        return $this->archive_command_link;
+    }
+
+    /**
+     * @param mixed $archive_command_link
+     */
+    public function setArchiveCommandLink($archive_command_link)
+    {
+        $this->archive_command_link = $archive_command_link;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArchiveCommandName()
+    {
+        return $this->archive_command_name;
+    }
+
+    /**
+     * @param mixed $archive_command_name
+     */
+    public function setArchiveCommandName($archive_command_name)
+    {
+        $this->archive_command_name = $archive_command_name;
     }
 
     /**

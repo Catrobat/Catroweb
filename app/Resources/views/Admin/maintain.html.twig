@@ -14,8 +14,12 @@
                     {% for RemoveableObject in RemoveableObjects %}
                         <div class="box">
                             <div class="box-header">
-
+                                {% if RemoveableObject.archive_command_link != null %}
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
+                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.archive_command_link }}"><i class="glyphicon glyphicon-briefcase"></i> {{ RemoveableObject.archive_command_name }}</a>
+                                {% else %}
                                 <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
+                                {% endif %}
                                 <span style="margin-left: 5%;">
                                 {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
                                 </span>
