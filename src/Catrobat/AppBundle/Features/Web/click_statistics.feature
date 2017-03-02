@@ -39,6 +39,10 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 4           | 4             | 0     |
       | 5           | 5             | 0     |
 
+    And there are featured programs:
+      | program_id | imagetype | active | flavor     | priority |
+      | 2          | jpeg      | 1      | pocketcode | 0        |
+
   @javascript
   Scenario: Create one statistic entry from tags
     Given I am on "/pocketcode/program/1"
@@ -64,12 +68,69 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     And I should see "p2"
 
   @javascript
+  Scenario: Create one statistic entry from featured programs on homepage
+    Given I am on "/pocketcode"
+    Then I wait for AJAX to finish
+    When I click on the first featured homepage program
+    And I wait for AJAX to finish
+    Then There should be one homepage click database entry with type is "featured" and program id is "2"
+    And There should be no recommended click statistic database entry
+    And I should see "Galaxy"
+    And I should see "p2"
+
+  @javascript
+  Scenario: Create one statistic entry from newest programs on homepage
+    Given I am on "/pocketcode"
+    Then I wait for AJAX to finish
+    When I click on a newest homepage program having program id "2"
+    And I wait for AJAX to finish
+    Then There should be one homepage click database entry with type is "newest" and program id is "2"
+    And There should be no recommended click statistic database entry
+    And I should see "Galaxy"
+    And I should see "p2"
+
+  @javascript
+  Scenario: Create one statistic entry from most downloaded programs on homepage
+    Given I am on "/pocketcode"
+    Then I wait for AJAX to finish
+    When I click on a most downloaded homepage program having program id "3"
+    And I wait for AJAX to finish
+    Then There should be one homepage click database entry with type is "mostDownloaded" and program id is "3"
+    And There should be no recommended click statistic database entry
+    And I should see "Alone"
+    And I should see "p3"
+
+  @javascript
+  Scenario: Create one statistic entry from most viewed programs on homepage
+    Given I am on "/pocketcode"
+    Then I wait for AJAX to finish
+    When I click on a most viewed homepage program having program id "4"
+    And I wait for AJAX to finish
+    Then There should be one homepage click database entry with type is "mostViewed" and program id is "4"
+    And There should be no recommended click statistic database entry
+    And I should see "Trolol"
+    And I should see "p5"
+
+  @javascript
+  Scenario: Create one statistic entry from random programs on homepage
+    Given I am on "/pocketcode"
+    Then I wait for AJAX to finish
+    When I click on a random homepage program having program id "2"
+    And I wait for AJAX to finish
+    Then There should be one homepage click database entry with type is "random" and program id is "2"
+    And There should be no recommended click statistic database entry
+    And I should see "Galaxy"
+    And I should see "p2"
+
+  @javascript
   Scenario: Create one statistic entry from recommended programs on homepage
     Given I am on "/pocketcode"
     Then I wait for AJAX to finish
     When I click on the first recommended homepage program
     And I wait for AJAX to finish
     Then There should be one database entry with type is "rec_homepage" and "program_id" is "1"
+    Then There should be one database entry with type is "rec_homepage" and "user_specific_recommendation" is "false"
+    And There should be no homepage click statistic database entry
     And I should see "Minions"
     And I should see "p1"
 
@@ -89,7 +150,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     And I should see "p3"
 
   @javascript
-  Scenario: No recommendable program that has been also downloaded by users that downloaded this program
+  Scenario: No recommendable program that has been also downloaded by *other* users that downloaded this program
     Given there are program download statistics:
       | id | program_id | downloaded_at        | ip             | latitude      |  longitude  | country_code  | country_name | street              | postal_code      |  locality   | user_agent | username  | referrer |
       | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | Catrobat  | Facebook |

@@ -120,12 +120,13 @@ class DefaultController extends Controller
         if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs'])) {
             $rec_from_id = $_POST['recFromID'];
             $rec_program_id = $_POST['recID'];
+            $is_user_specific_recommendation = isset($_POST['recIsUserSpecific']) ? (bool) $_POST['recIsUserSpecific'] : false;
             $is_recommended_program_a_scratch_program = (($type == 'rec_remix_graph') && isset($_POST['isScratchProgram']))
                                                       ? (bool) $_POST['isScratchProgram']
                                                       : false;
 
             $statistics->createClickStatistics($request, $type, $rec_from_id, $rec_program_id, null, null,
-                $referrer, $locale, $is_recommended_program_a_scratch_program);
+                $referrer, $locale, $is_recommended_program_a_scratch_program, $is_user_specific_recommendation);
             return new Response('ok');
         } else if ($type == 'tags') {
             $tag_id = $_POST['recID'];
@@ -134,6 +135,25 @@ class DefaultController extends Controller
         } else if ($type == 'extensions') {
             $extension_name = $_POST['recID'];
             $statistics->createClickStatistics($request, $type, null, null, null, $extension_name, $referrer, $locale);
+            return new Response('ok');
+        } else
+            return new Response('error');
+    }
+
+    /**
+     * @Route("/homepage-click-statistic", name="homepage_click_stats")
+     * @Method({"POST"})
+     */
+    public function makeNonRecommendedProgramClickStatisticAction(Request $request)
+    {
+        $type = $_POST['type'];
+        $referrer = $request->headers->get('referer');
+        $statistics = $this->get('statistics');
+        $locale = strtolower($request->getLocale());
+
+        if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random'])) {
+            $program_id = $_POST['programID'];
+            $statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);
             return new Response('ok');
         } else
             return new Response('error');

@@ -285,6 +285,7 @@ var Main = function (search_url) {
       } else if ((self.container == "#recommended") || (self.container == "#specific-programs-recommendations")) {
         var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_by_page_id=" + self.recommended_by_page_id;
         program_link += (self.recommended_by_program_id != null) ? "&rec_by_program_id=" + self.recommended_by_program_id : "";
+        program_link += "&rec_user_specific=" + (("isUserSpecificRecommendation" in data) && data.isUserSpecificRecommendation ? 1 : 0);
       } else {
         var program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
       }

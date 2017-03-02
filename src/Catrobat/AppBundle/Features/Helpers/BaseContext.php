@@ -253,6 +253,41 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         return $this->symfony_support->insertUser($config);
     }
 
+    public function computeAllLikeSimilaritiesBetweenUsers()
+    {
+        return $this->symfony_support->computeAllLikeSimilaritiesBetweenUsers();
+    }
+
+    public function getAllLikeSimilaritiesBetweenUsers()
+    {
+        return $this->symfony_support->getUserLikeSimilarityRelationRepository()->findAll();
+    }
+
+    public function computeAllRemixSimilaritiesBetweenUsers()
+    {
+        return $this->symfony_support->computeAllRemixSimilaritiesBetweenUsers();
+    }
+
+    public function getAllRemixSimilaritiesBetweenUsers()
+    {
+        return $this->symfony_support->getUserRemixSimilarityRelationRepository()->findAll();
+    }
+
+    public function insertUserLikeSimilarity($config = array())
+    {
+        return $this->symfony_support->insertUserLikeSimilarity($config);
+    }
+
+    public function insertUserRemixSimilarity($config = array())
+    {
+        return $this->symfony_support->insertUserRemixSimilarity($config);
+    }
+
+    public function insertProgramLike($config = array())
+    {
+        return $this->symfony_support->insertProgramLike($config);
+    }
+
     public function insertProgram($user, $config)
     {
         return $this->symfony_support->insertProgram($user, $config);

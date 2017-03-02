@@ -570,7 +570,7 @@ admin:
     createBackupConfirmationText: Dieser Vorgang kann eine Weile dauern. Die Seite wird danach neu geladen!
 recommender:
   similarPrograms: Ähnliche Programme
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: User, die dieses Programm heruntergeladen haben, haben auch folgendes heruntergeladen
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: User, die dieses Programm heruntergeladen haben, haben auch folgende Programme heruntergeladen
 pmd:
   submitBtn: Projekt abgeben
   submitBox:

@@ -1213,7 +1213,7 @@ class Program
      */
     public function getLikes()
     {
-        return $this->likes;
+        return ($this->likes != null) ? $this->likes : new ArrayCollection();
     }
 
     /**

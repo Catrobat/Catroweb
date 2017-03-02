@@ -225,11 +225,11 @@ var _InternalRemixGraph = function () {
             var toId = parseInt(edgeData.to.split("_")[1]);
 
             if (edgeData.from.startsWith(CATROBAT_NODE_PREFIX) && edgeData.to.startsWith(CATROBAT_NODE_PREFIX)) {
-                var isFromIdConnectingAncestorOrDescendant = (($.inArray(fromId, self.relationAncestorMap[nodeId]) != -1) || ($.inArray(fromId, self.relationDescendantMap[nodeId]) != -1));
-                var isToIdConnectingAncestorOrDescendant = (($.inArray(toId, self.relationAncestorMap[nodeId]) != -1) || ($.inArray(toId, self.relationDescendantMap[nodeId]) != -1));
+                isFromIdConnectingAncestorOrDescendant = (($.inArray(fromId, self.relationAncestorMap[nodeId]) != -1) || ($.inArray(fromId, self.relationDescendantMap[nodeId]) != -1));
+                isToIdConnectingAncestorOrDescendant = (($.inArray(toId, self.relationAncestorMap[nodeId]) != -1) || ($.inArray(toId, self.relationDescendantMap[nodeId]) != -1));
             } else if (edgeData.from.startsWith(SCRATCH_NODE_PREFIX) && edgeData.to.startsWith(CATROBAT_NODE_PREFIX)) {
-                var isFromIdConnectingAncestorOrDescendant = true;
-                var isToIdConnectingAncestorOrDescendant = (($.inArray(toId, self.relationAncestorMap[nodeId]) != -1) || ($.inArray(toId, self.relationDescendantMap[nodeId]) != -1));
+                isFromIdConnectingAncestorOrDescendant = true;
+                isToIdConnectingAncestorOrDescendant = (($.inArray(toId, self.relationAncestorMap[nodeId]) != -1) || ($.inArray(toId, self.relationDescendantMap[nodeId]) != -1));
             }
 
             if (isFromIdConnectingAncestorOrDescendant && isToIdConnectingAncestorOrDescendant) {

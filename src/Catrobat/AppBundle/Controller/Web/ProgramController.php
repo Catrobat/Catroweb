@@ -24,7 +24,7 @@ class ProgramController extends Controller
      * @Route("/program/remixgraph/{id}", name="program_remix_graph", requirements={"id":"\d+"})
      * @Method({"GET"})
      */
-    public function programRemixGraphAction($id)
+    public function programRemixGraphAction(Request $request, $id)
     {
         $remix_graph_data = $this->get('remixmanager')->getFullRemixGraph($id);
         $screenshot_repository = $this->get('screenshotrepository');
@@ -37,6 +37,11 @@ class ProgramController extends Controller
             }
             $catrobat_program_thumbnails[$node_id] = '/' . $screenshot_repository->getThumbnailWebPath($node_id);
         }
+
+        $statistics = $this->get('statistics');
+        $locale = strtolower($request->getLocale());
+        $referrer = $request->headers->get('referer');
+        $statistics->createClickStatistics($request, 'show_remix_graph', 0, $id, null, null, $referrer, $locale, false, false);
 
         return new JsonResponse([
             'id' => $id,
@@ -302,6 +307,7 @@ class ProgramController extends Controller
                                                $total_like_count, $elapsed_time, $referrer, $program_comments, $request) {
         $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
         $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
+        $rec_user_specific = intval($request->query->get('rec_user_specific', 0));
 
         $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
 
@@ -312,6 +318,7 @@ class ProgramController extends Controller
                 'id' => $program->getId(),
                 'rec_by_page_id' => $rec_by_page_id,
                 'rec_by_program_id' => $rec_by_program_id,
+                'rec_user_specific' => $rec_user_specific,
                 'fname' => $program->getName()
             ]);
         } else if ($rec_tag_by_program_id > 0) {

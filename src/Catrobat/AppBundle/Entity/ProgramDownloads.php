@@ -36,6 +36,11 @@ class ProgramDownloads
     protected $recommended_by_program;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+     */
+    protected $user_specific_recommendation = false;
+
+    /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
      * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
      */
@@ -385,6 +390,22 @@ class ProgramDownloads
     public function setRecommendedByProgram($recommended_by_program)
     {
         $this->recommended_by_program = $recommended_by_program;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUserSpecificRecommendation()
+    {
+        return $this->user_specific_recommendation;
+    }
+
+    /**
+     * @param bool $is_user_specific_recommendation
+     */
+    public function setUserSpecificRecommendation($is_user_specific_recommendation)
+    {
+        $this->user_specific_recommendation = $is_user_specific_recommendation;
     }
 
     /**

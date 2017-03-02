@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 
 /**
@@ -52,5 +53,31 @@ class ProgramLikeRepository extends EntityRepository
             ->getResult();
 
         return count($result);
+    }
+
+    /**
+     * @param int $user_ids
+     * @return ProgramLike
+     */
+    public function getLikesOfUsers($user_ids, $exclude_user_id, $exclude_program_ids, $flavor)
+    {
+        $qb = $this->createQueryBuilder('l');
+
+        return $qb
+            ->select('l')
+            ->innerJoin('AppBundle:Program', 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program'))
+            ->where($qb->expr()->in('l.user_id', ':user_ids'))
+            ->andWhere($qb->expr()->neq('IDENTITY(p.user)', ':exclude_user_id'))
+            ->andWhere($qb->expr()->notIn('p.id', ':exclude_program_ids'))
+            ->andWhere($qb->expr()->eq('p.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('p.flavor', ':flavor'))
+            ->andWhere($qb->expr()->eq('p.private', $qb->expr()->literal(false)))
+            ->setParameter('user_ids', $user_ids)
+            ->setParameter('exclude_user_id', $exclude_user_id)
+            ->setParameter('exclude_program_ids', $exclude_program_ids)
+            ->setParameter('flavor', $flavor)
+            ->distinct()
+            ->getQuery()
+            ->getResult();
     }
 }

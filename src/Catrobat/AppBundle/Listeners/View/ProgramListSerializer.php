@@ -70,7 +70,11 @@ class ProgramListSerializer
         }
         $retArray['completeTerm'] = '';
         $retArray['preHeaderMessages'] = '';
-        
+
+        if ($result->isIsUserSpecificRecommendation()) {
+            $retArray['isUserSpecificRecommendation'] = true;
+        }
+
         $retArray['CatrobatInformation'] = array(
             'BaseUrl' => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
             'TotalProjects' => $result->getTotalPrograms(),
