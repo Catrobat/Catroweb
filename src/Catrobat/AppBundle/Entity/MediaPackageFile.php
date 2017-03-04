@@ -58,6 +58,11 @@ class MediaPackageFile
    */
   protected $flavor = 'pocketcode';
 
+    /**
+     * @ORM\Column(type="string", options={"default":"null"}, nullable=true)
+     */
+    protected $author = null;
+
   /**
    * @return boolean
    */
@@ -243,5 +248,23 @@ class MediaPackageFile
   {
     $this->flavor = $flavor;
   }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+
 
 }
