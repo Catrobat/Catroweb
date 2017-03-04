@@ -15,7 +15,7 @@
     Then I should be on "/pocketcode/login"
     And I should see an "#header-logo" element
     When I follow "Create an account"
-    Then I should be on "/pocketcode/register/"
+    Then I should be on "/pocketcode/register"
     And I should see an "#header-logo" element
     And I fill in "sonata_user_registration_form_username" with "CatrobatNew"
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
@@ -34,14 +34,14 @@
     Then I should be on "/pocketcode/login"
     And I should see an "#header-logo" element
     When I follow "Create an account"
-    Then I should be on "/pocketcode/register/"
+    Then I should be on "/pocketcode/register"
     And I should see an "#header-logo" element
     And I fill in "sonata_user_registration_form_username" with "CatrobatNew"
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "12345"
     Then I press "Create my Account"
-    Then I should be on "/pocketcode/register/"
+    Then I should be on "/pocketcode/register"
 
   Scenario: Trying to register with an existing username should fail
     Given I am on homepage
@@ -50,30 +50,46 @@
     Then I should be on "/pocketcode/login"
     And I should see an "#header-logo" element
     When I follow "Create an account"
-    Then I should be on "/pocketcode/register/"
+    Then I should be on "/pocketcode/register"
     And I should see an "#header-logo" element
     And I fill in "sonata_user_registration_form_username" with "Catrobat"
     And I fill in "sonata_user_registration_form[email]" with "Catrobat@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create my Account"
-    Then I should be on "/pocketcode/register/"
+    Then I should be on "/pocketcode/register"
 
-    Scenario: Trying to register with an existing e-mail-address should fail
-      Given I am on homepage
-      Then I should see an "#btn-login" element
-      When I click "#btn-login"
-      Then I should be on "/pocketcode/login"
-      And I should see an "#header-logo" element
-      When I follow "Create an account"
-      Then I should be on "/pocketcode/register/"
-      And I should see an "#header-logo" element
-      And I fill in "sonata_user_registration_form_username" with "CatrobatNew"
-      And I fill in "sonata_user_registration_form[email]" with "dev1@pocketcode.org"
-      And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
-      And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
-      Then I press "Create my Account"
-      Then I should be on "/pocketcode/register/"
+  Scenario: Trying to register with an existing e-mail-address should fail
+    Given I am on homepage
+    Then I should see an "#btn-login" element
+    When I click "#btn-login"
+    Then I should be on "/pocketcode/login"
+    And I should see an "#header-logo" element
+    When I follow "Create an account"
+    Then I should be on "/pocketcode/register"
+    And I should see an "#header-logo" element
+    And I fill in "sonata_user_registration_form_username" with "CatrobatNew"
+    And I fill in "sonata_user_registration_form[email]" with "dev1@pocketcode.org"
+    And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
+    And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
+    Then I press "Create my Account"
+    Then I should be on "/pocketcode/register"
+
+  Scenario: Trying to register with an e-mail address as username should fail
+    Given I am on homepage
+    Then I should see an "#btn-login" element
+    When I click "#btn-login"
+    Then I should be on "/pocketcode/login"
+    And I should see an "#header-logo" element
+    When I follow "Create an account"
+    Then I should be on "/pocketcode/register"
+    And I should see an "#header-logo" element
+    And I fill in "sonata_user_registration_form_username" with "catro@bat.org"
+    And I fill in "sonata_user_registration_form[email]" with "dev1337@pocketcode.org"
+    And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
+    And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
+    Then I press "Create my Account"
+    Then I should be on "/pocketcode/register"
 
 
   Scenario: Registering and login with the registered user but wrong password should not work
@@ -83,7 +99,7 @@
     Then I should be on "/pocketcode/login"
     And I should see an "#header-logo" element
     When I follow "Create an account"
-    Then I should be on "/pocketcode/register/"
+    Then I should be on "/pocketcode/register"
     And I should see an "#header-logo" element
     And I fill in "sonata_user_registration_form_username" with "CatrobatNew"
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
