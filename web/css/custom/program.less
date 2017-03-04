@@ -126,6 +126,7 @@ a {
 
 }
 
+.show-hide-code-statistic,
 .show-hide-code {
   position: relative;
   margin-top: 25px;
@@ -133,6 +134,7 @@ a {
   height: 61px;
   z-index: 2;
 
+  .show-hide-code-statistic-text,
   .show-hide-code-text {
     position: absolute;
     top: 25px;
@@ -142,8 +144,10 @@ a {
     font-size: 19px;
     font-weight: bold;
     color: white;
+    text-transform: uppercase;
   }
 
+  .show-hide-code-statistic-arrow,
   .show-hide-code-arrow {
     position: absolute;
     right: ~"calc(22% - 4px)";
@@ -174,11 +178,14 @@ a {
 }
 
 @media (max-width: 992px) {
+  .show-hide-code-statistic,
   .show-hide-code {
+    .show-hide-code-statistic-arrow,
     .show-hide-code-arrow {
       right: ~"calc(19.5% - 5px)";
     }
 
+    .show-hide-code-statistic-text,
     .show-hide-code-text {
       left: 8%;
     }
@@ -186,7 +193,9 @@ a {
 }
 
 @media (max-width: 768px) {
+  .show-hide-code-statistic,
   .show-hide-code {
+    .show-hide-code-statistic-arrow,
     .show-hide-code-arrow {
       right: ~"calc(20% - 5px)";
     }
@@ -194,11 +203,14 @@ a {
 }
 
 @media (max-width: 640px) {
+  .show-hide-code-statistic,
   .show-hide-code {
+    .show-hide-code-statistic-arrow,
     .show-hide-code-arrow {
       right: ~"calc(10% - 5px)";
     }
 
+    .show-hide-code-statistic-text,
     .show-hide-code-text {
       left: 4%;
     }
@@ -219,6 +231,7 @@ a {
   background-color: @default-background-color;*/
 }
 
+.show-hide-code-statistic:hover,
 .show-hide-code:hover {
   cursor: hand;
   cursor: pointer;
@@ -242,7 +255,7 @@ a {
 
   > div {
     display: table-cell;
-    width: 25%;
+    width: 20%;
 
     > .icon {
       float: left;
@@ -279,6 +292,44 @@ a {
 
   #social-like {
     margin-left: 15px;
+  }
+}
+
+#program-like-container {
+  margin-top: 18px;
+  margin-bottom: 0px;
+
+  #program-like-buttons-container {
+    text-align: center;
+
+    a {
+      margin-right: 3px;
+      padding: 0;
+      &.selected {
+        filter: brightness(0) invert(1);
+        -webkit-filter: brightness(0) invert(1);
+      }
+      .singular, .plural {
+        display: none;
+      }
+    }
+
+    #program-like-counter {
+      margin-left: 15px;
+      font-size: 28px;
+      vertical-align: middle;
+    }
+  }
+
+  #program-like-detail-container {
+    margin-top: 16px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .program-like-counter {
+    color: #FFFFFF;
+    font-weight: bold;
   }
 }
 
@@ -448,6 +499,8 @@ table td:nth-child(1) {
   }
 }
 
+#nolb-submission-successful,
+#nolb-submission-failed,
 #nolb-submission-box {
   z-index: 10;
   padding: 10px;
@@ -463,32 +516,55 @@ table td:nth-child(1) {
   font-size: 15px;
   max-width: 400px;
   width: 80%;
+
+  h2 {
+    margin: 6px;
+  }
+
+  p,
+  input,
+  #nolb-submission-button {
+    margin: 10px 0 0 0;
+  }
+
+  #nolb-submission-button {
+    max-height: 50px;
+    max-width: 200px;
+    padding: 0px 10px;
+    line-height: 10px;
+    p {
+      display: inline;
+    }
+  }
+
+  #nolb-submission-box-cancel {
+    line-height: 0;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 }
 
-#nolb-submission-box-cancel {
-  line-height: 0;
-  padding: 10px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+#nolb-submission-failed-ok,
+#nolb-submission-successful-ok{
+  margin: 10px 0 0 0;
+  min-height: 26px;
+  p {
+    display: inline;
+  }
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+  box-sizing : border-box;
   margin: 0;
 }
 
 input[type='number'] {
   -moz-appearance:textfield;
-}
-
-#nolb-submission-button {
-  max-height: 50px;
-  max-width: 200px;
-  margin: 10px;
-  padding: 0px 10px;
-  line-height: 10px;
+  box-sizing : border-box;
 }
 
 .btn {
@@ -630,11 +706,11 @@ input[type='number'] {
   margin-bottom: 20px;
 }
 
-#recommendations {
+#recommendations, #specific-programs-recommendations {
   border-top: 1px solid #17a5b8;
 }
 
-#recsys-headline {
+#recsys-headline, #recsys-specific-programs-headline {
   margin-top: 10px;
 }
 
@@ -661,6 +737,12 @@ input[type='number'] {
   overflow: auto;
 }
 
+@media screen and (max-width: 767px) {
+  #program-like-container {
+    margin-bottom: 60px;
+  }
+}
+
 @media screen and (max-width: 534px) {
   #tag-extension-container {
     width: 215px;
@@ -669,6 +751,12 @@ input[type='number'] {
   .report-button {
     clear: left;
     padding-left: 0em;
+  }
+}
+
+@media screen and (max-width: 282px) {
+  #nolb-submission-box input {
+    width: 100%;
   }
 }
 

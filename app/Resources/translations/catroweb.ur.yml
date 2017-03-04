@@ -24,6 +24,13 @@ less: 'کم'
 ok: ٹھيک ہے
 clickToDownloadProgram: 'نمونے کے پروگرام کو ڈاؤن لوڈ کرنے کے لئے %link_start% یہاں %link_end% کلک کریں۔.'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
@@ -35,6 +42,8 @@ programs:
   downloads: '%downloads% ڈاؤن لوڈز'
   sample: نمونے کے پروگرام
   views: '%views% مرتبہ دیکھی'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: جمع شدہ پروگرام
   uploaded: اپ لوڈ شدہ پروگرام
   reportAsInappropriate: رپورٹ غیرموزوں ہے
@@ -56,6 +65,12 @@ programs:
   report: رپورٹ
   report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
   report_popup_header: اطلاعات کے مطابق
+remixgraph:
+  by: 'by'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
@@ -248,128 +263,132 @@ help:
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
         text6: 'اِس وقت کھلے ہوئے پروگرام کو اپ لوڈ کریں.'
   tutorialcards:
-    title: اسباق
-    description1: یہ سبق آپکو مؤثر چالوں کا استعمال سکھاتی ہے
-    getReady: 'تیار ہو جاؤ:'
-    tryCode: 'اِس کوڈ کو استعمال کر کے دیکھیں:'
-    doIt: 'یہ کرو:'
-    tip: 'اضافی ٹپ:'
+    title: "اسباق"
+    description1: "یہ سبق آپکو مؤثر چالوں کا استعمال سکھاتی ہے"
+    getReady: "تیار ہو جاؤ:"
+    tryCode: "اِس کوڈ کو استعمال کر کے دیکھیں:"
+    doIt: "یہ کرو:"
+    tip: "اضافی ٹپ:"
     card1:
-      title: سائز تبدیل کریں
-      description: Change the size of an object.
-      one: وہ اوبجیکٹ شامل کریں جس کا آپ سائز بدلنا چاہتے ہیں، مثلاً جانور.
-      two: Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped.
+      title: "سائز تبدیل کریں"
+      description: "Change the size of an object."
+      one: "وہ اوبجیکٹ شامل کریں جس کا آپ سائز بدلنا چاہتے ہیں، مثلاً جانور."
+      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: دکھا واٹ تبدیل کریں
-      description: اوبجیکٹ کی دکھا واٹ کو تبدیل کریں.
-      one: شامل کریں وہ اوبجیکٹ جس کی دکھا واٹ آپ تبدیل کرنا چاہتے ہیں، مثلاً آئیٹمز.
-      two: Include further pictures in the object's looks.
-      three: Insert the following bricks into the scripts of the object in order to continually switch it's look after one second.
+      title: "دکھا واٹ تبدیل کریں"
+      description: "اوبجیکٹ کی دکھا واٹ کو تبدیل کریں."
+      one: "شامل کریں وہ اوبجیکٹ جس کی دکھا واٹ آپ تبدیل کرنا چاہتے ہیں، مثلاً آئیٹمز."
+      two: "Include further pictures in the object's looks."
+      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: حرکت اندازی
-      description: آبجیکٹس کی حرکت اندازی
-      one: وہ اوبجیکٹ شامل کریں جو آپ آگے چلانا چاہتے ہیں.
-      two: Include another picture in the object's looks which illustrates the movement.
-      three: Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge.
+      title: "حرکت اندازی"
+      description: "آبجیکٹس کی حرکت اندازی"
+      one: "وہ اوبجیکٹ شامل کریں جو آپ آگے چلانا چاہتے ہیں."
+      two: "Include another picture in the object's looks which illustrates the movement."
+      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: Glide
-      description: Let your object glide over the screen.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: Insert the following bricks and define the area in which the movement should happen.
+      title: "Glide"
+      description: "Let your object glide over the screen."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "Insert the following bricks and define the area in which the movement should happen."
     card5:
-      title: آواز چلائیں
-      description: آواز چلانے کے لئے آبجیکٹ پر ٹیپ کریں۔
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself.
+      title: "آواز چلائیں"
+      description: "آواز چلانے کے لئے آبجیکٹ پر ٹیپ کریں۔"
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: بولیے
-      description: Let your object speak.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      title: "بولیے"
+      description: "Let your object speak."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: سینسر
-      description: Control an object by using the inclination sensors.
-      one: Add the object you want to be moving on stage.
-      two: Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example.
+      title: "سینسر"
+      description: "Control an object by using the inclination sensors."
+      one: "Add the object you want to be moving on stage."
+      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: قطب نما
-      description: اپنا قطب نما بنائین
-      one: Add the object you want to point in compass direction.
-      two: Insert the following bricks in order to set the object's orientation. Additionally include a forever loop.
+      title: "قطب نما"
+      description: "اپنا قطب نما بنائین"
+      one: "Add the object you want to point in compass direction."
+      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: نشر کرنین
-      description: ایک اوبجیکٹ سے دوسرے اوبجیکٹ کو میسیج بھجین۔
-      one: Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look.
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      title: "نشر کرنین"
+      description: "ایک اوبجیکٹ سے دوسرے اوبجیکٹ کو میسیج بھجین۔"
+      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: ویریئبل دکھائیں
-      description: ویریئبل کی ویلیو دکھائیں.
-      one: Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      title: "ویریئبل دکھائیں"
+      description: "ویریئبل کی ویلیو دکھائیں."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
     card11:
-      title: Collision detection
-      description: Detect a collision between two objects.
-      one: Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).
-      two: Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.
+      title: "Collision detection"
+      description: "Detect a collision between two objects."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: چہرے کی شناخت
-      description: چہرے کی شناخت سے اوبجیکٹ کو کنٹرول کریں.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: "چہرے کی شناخت"
+      description: "چہرے کی شناخت سے اوبجیکٹ کو کنٹرول کریں."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: ابتدائی پروگرامز
-    description: ان ابتدائی پروگرامات کی مشق کریں۔ انکے اندر تبدیلی کرکے اپنے خیالات کا اضافہ کریں۔
+    title: "ابتدائی پروگرامز"
+    description: "ان ابتدائی پروگرامات کی مشق کریں۔ انکے اندر تبدیلی کرکے اپنے خیالات کا اضافہ کریں۔"
     categories:
-      games: کھیل
-      animations: حرکت اندازی
-      interactive: متعامل آرٹ اور کہانیاں
-      music: موسیقی اور رقص
+      games: "کھیل"
+      animations: "حرکت اندازی"
+      interactive: "متعامل آرٹ اور کہانیاں"
+      music: "موسیقی اور رقص"
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.
-    title1: رجسٹریشن
-    text1: سب سے پہلے آپ کو اکاؤنٹ بنانے کی ضرورت ہے ۔ اس کے بعد آپ اپنے بنائے گئے پروگرامات اپ لوڈ کر سکتے ہیں ۔ فکر نہ کریں یہ آسان ہے۔ آپ صرف ایک صارف نام اور پاس ورڈ کا کا انتخاب کریں۔ دونوں خانے بھرنے کے بعد، 'لاگ ان یا رجسٹر پر' پر کلک کریں۔ یہ ہوگیا!
-    title2: اپ لوڈ کریں
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: اپنے پروگرام کے لیے تلاش کریں
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: اینڈرائیڈ پروگرام بنائیں
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: پروگرام ڈاؤن لوڈ کریں
-    text5: After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.
-    title6: Register/Login at GameJolt.com
-    text6: '%link% پر جائیں اور میں مینو میں ’لوگ ان’ یا ’سائن اپ!’ پر کِلک کریں. اگر آپ کے پاس پہلے سے ہی اکاؤنٹ ہے تو صرف لوگ ان کریں، اگر نہیں، تو آپ کو رجسٹر کرنا پڑے گا آپکی ای میل، یوزر نیم اور پاسورڈ سے.'
-    title7: Game Jolt سائٹ پر اپنی گیم اپ لوڈ کریں
-    text7: 'After you''re logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose ''Other'' and add to the field Other Engine/Language/Tool ''Android''. As ''Development'' status choose ''Finished/Stable''. Make sure to include #AliceJam150 in the description so it appears on the %link% page.'
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. 
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
+    title: "How to upload a Pocket Code game to the Game Jolt Site?"
+    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
+    title1: "رجسٹریشن"
+    text1: "سب سے پہلے آپ کو اکاؤنٹ بنانے کی ضرورت ہے ۔ اس کے بعد آپ اپنے بنائے گئے پروگرامات اپ لوڈ کر سکتے ہیں ۔ فکر نہ کریں یہ آسان ہے۔ آپ صرف ایک صارف نام اور پاس ورڈ کا کا انتخاب کریں۔ دونوں خانے بھرنے کے بعد، 'لاگ ان یا رجسٹر پر' پر کلک کریں۔ یہ ہوگیا!"
+    title2: "اپ لوڈ کریں"
+    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
+    title3: "اپنے پروگرام کے لیے تلاش کریں"
+    text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
+    title4: "اینڈرائیڈ پروگرام بنائیں"
+    text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "پروگرام ڈاؤن لوڈ کریں"
+    text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "Register/Login at GameJolt.com"
+    text6: "%link% پر جائیں اور میں مینو میں ’لوگ ان’ یا ’سائن اپ!’ پر کِلک کریں. اگر آپ کے پاس پہلے سے ہی اکاؤنٹ ہے تو صرف لوگ ان کریں، اگر نہیں، تو آپ کو رجسٹر کرنا پڑے گا آپکی ای میل، یوزر نیم اور پاسورڈ سے."
+    title7: "Game Jolt سائٹ پر اپنی گیم اپ لوڈ کریں"
+    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
+    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
+    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
     text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: اپ لوڈ ہونے کے بعد اپنی گیم کو شایہ کرنے کے لیے ’او کے’ پر کِلک کریں. یہ بعد میں لوگوں کو آپکی گیم ڈائون لوڈ کرنے کی لنک دکھائے گا.
-    text7_6: اب اپنے اپنی پہلی گیم اپ لوڈ کردی ہے Game Jolt سائٹ پر اور اسے ایکٹیو کر دیا ہے. مبارک ہو!
-    text7_7: اب دوسرے لوگ آپکی گیم کو ڈھونڈھ سکیں گے اور یہ اِس %link% پیج پر ہوگی.
+    text7_5: "اپ لوڈ ہونے کے بعد اپنی گیم کو شایہ کرنے کے لیے ’او کے’ پر کِلک کریں. یہ بعد میں لوگوں کو آپکی گیم ڈائون لوڈ کرنے کی لنک دکھائے گا."
+    text7_6: "اب اپنے اپنی پہلی گیم اپ لوڈ کردی ہے Game Jolt سائٹ پر اور اسے ایکٹیو کر دیا ہے. مبارک ہو!"
+    text7_7: "اب دوسرے لوگ آپکی گیم کو ڈھونڈھ سکیں گے اور یہ اِس %link% پیج پر ہوگی."
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
-    subtitle1: Animate Characters and create a 'when tapped' event
-    description1: "Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.\nFurther we show you how to create a \"when tapped\" event and how to send broadcast messages between objects."
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
-    description2: Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects.
-    title3: دی ہٹر - ضرب و فرار
-    subtitle3: اک چلنے والی زمین بنائے اور ہٹرس کی ہلچل کو کنٹرول کریں
-    description3: اِس سبق میں آپ سیکھیں گے کے کس طرح لینڈ اسکیپ بنے گا جو ایسا لگتا ہے کے وہ چل رہا ہے. ہم اوبجیکٹس کو اسکریں کے ساتھ آگے چلا کے ہلچل کا بھرم بنائی گے. ہم آپکو یہ بھی دکھائی گے کے کس طرح ہٹر موو بنے گا آپکی فون کو جھکا کے .
-    title4: دی ہٹر - ضرب و فرار
-    subtitle4: ہٹر کو برے کارڈز کو گولی مرنے دو
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: ویریابلیس کو استعمال کر کے سکور بنائیں
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: ایک حرکت پذیر پس منظر بنائیں
-    description6: "This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.\nTo make the game a little bit more difficult we will show you how to slow down the speed of your character over time."
-    download: پروگرام ڈائون لوڈ کریں
+    title1: "(Welcome to) Wonderland"
+    subtitle1: "Animate Characters and create a 'when tapped' event"
+    description1: |
+      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
+      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+    title2: "Save Alice!"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
+    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    title3: "دی ہٹر - ضرب و فرار"
+    subtitle3: "اک چلنے والی زمین بنائے اور ہٹرس کی ہلچل کو کنٹرول کریں"
+    description3: "اِس سبق میں آپ سیکھیں گے کے کس طرح لینڈ اسکیپ بنے گا جو ایسا لگتا ہے کے وہ چل رہا ہے. ہم اوبجیکٹس کو اسکریں کے ساتھ آگے چلا کے ہلچل کا بھرم بنائی گے. ہم آپکو یہ بھی دکھائی گے کے کس طرح ہٹر موو بنے گا آپکی فون کو جھکا کے ."
+    title4: "دی ہٹر - ضرب و فرار"
+    subtitle4: "ہٹر کو برے کارڈز کو گولی مرنے دو"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "ویریابلیس کو استعمال کر کے سکور بنائیں"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "ایک حرکت پذیر پس منظر بنائیں"
+    description6: |
+      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
+      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
+    download: "پروگرام ڈائون لوڈ کریں"
 oauth:
   username_header: پاکٹ کوڈ میں سائن اَپ کے لئے آپ کا شکریہ!
   username_chooser: 'برائے مہربانی یوزر نیم منتخب کریں:'
@@ -534,3 +553,17 @@ admin:
     btnDeleteBackup: بیک اپ حذف کریں
     createBackupConfirmationTitle: بیک اپ فائل بنائیں
     createBackupConfirmationText: اس عمل میں کچھ وقت لگ سکتا ہے ۔ بعد ازاں صفحہ دوبارہ لوڈ ہوجائے گا!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code

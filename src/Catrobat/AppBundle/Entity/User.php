@@ -1,6 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -50,6 +51,61 @@ class User extends BaseUser implements LdapUserInterface
     protected $programs;
 
     /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\ProgramLike",
+     *     mappedBy="user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|ProgramLike[]
+     */
+    protected $likes;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\UserLikeSimilarityRelation",
+     *     mappedBy="first_user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|UserLikeSimilarityRelation[]
+     */
+    protected $relations_of_similar_users_based_on_likes;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\UserLikeSimilarityRelation",
+     *     mappedBy="second_user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|UserLikeSimilarityRelation[]
+     */
+    protected $reverse_relations_of_similar_users_based_on_likes;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\UserRemixSimilarityRelation",
+     *     mappedBy="first_user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|UserRemixSimilarityRelation[]
+     */
+    protected $relations_of_similar_users_based_on_remixes;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="\Catrobat\AppBundle\Entity\UserRemixSimilarityRelation",
+     *     mappedBy="second_user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     * @var \Doctrine\Common\Collections\Collection|UserRemixSimilarityRelation[]
+     */
+    protected $reverse_relations_of_similar_users_based_on_remixes;
+
+    /**
      * @ORM\Column(type="string", length=300, nullable=true)
      */
     protected $gplus_access_token;
@@ -88,7 +144,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $facebook_access_token            
+     * @param mixed $facebook_access_token
      */
     public function setFacebookAccessToken($facebook_access_token)
     {
@@ -106,7 +162,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $gplus_access_token            
+     * @param mixed $gplus_access_token
      */
     public function setGplusAccessToken($gplus_access_token)
     {
@@ -124,7 +180,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $gplus_id_token            
+     * @param mixed $gplus_id_token
      */
     public function setGplusIdToken($gplus_id_token)
     {
@@ -142,7 +198,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $gplus_refresh_token            
+     * @param mixed $gplus_refresh_token
      */
     public function setGplusRefreshToken($gplus_refresh_token)
     {
@@ -171,21 +227,21 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * Add programs.
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs            
+     * @param \Catrobat\AppBundle\Entity\Program $programs
      *
      * @return User
      */
     public function addProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
         $this->programs[] = $programs;
-        
+
         return $this;
     }
 
     /**
      * Remove programs
      *
-     * @param \Catrobat\AppBundle\Entity\Program $programs            
+     * @param \Catrobat\AppBundle\Entity\Program $programs
      */
     public function removeProgram(\Catrobat\AppBundle\Entity\Program $programs)
     {
@@ -220,7 +276,7 @@ class User extends BaseUser implements LdapUserInterface
     public function setCountry($country)
     {
         $this->country = $country;
-        
+
         return $this;
     }
 
@@ -231,7 +287,7 @@ class User extends BaseUser implements LdapUserInterface
 
     /**
      *
-     * @param mixed $additional_email            
+     * @param mixed $additional_email
      */
     public function setAdditionalEmail($additional_email)
     {
@@ -255,7 +311,7 @@ class User extends BaseUser implements LdapUserInterface
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
-        
+
         return $this;
     }
 
@@ -305,5 +361,20 @@ class User extends BaseUser implements LdapUserInterface
     {
         $this->nolb_user = $nolb_user;
     }
-}
 
+    /**
+     * @return ProgramLike[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getLikes()
+    {
+        return ($this->likes != null) ? $this->likes : new ArrayCollection();
+    }
+
+    /**
+     * @param ProgramLike[]|\Doctrine\Common\Collections\Collection $likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+    }
+}

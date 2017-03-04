@@ -4,6 +4,8 @@ namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class ScreenshotRepository
 {
@@ -96,5 +98,23 @@ class ScreenshotRepository
         }
 
         return $this->imagick;
+    }
+
+    public  function deleteThumbnail($id)
+    {
+        $this->deleteFiles($this->thumbnail_dir, $id);
+    }
+
+    public  function deleteScreenshot($id)
+    {
+        $this->deleteFiles($this->screenshot_dir, $id);
+    }
+
+    private function deleteFiles($directory, $id){
+        try {
+            $file = new File($directory.$this->generateFileNameFromId($id));
+            unlink($file->getPathname());
+        } catch (FileNotFoundException $e) {
+        }
     }
 }

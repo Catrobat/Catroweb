@@ -2,6 +2,9 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Entity\RemixManager;
+use Catrobat\AppBundle\Listeners\RemixUpdater;
+use Catrobat\AppBundle\Services\AsyncHttpClient;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,6 +22,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
+
 
 class ImportLegacyCommand extends ContainerAwareCommand
 {
@@ -32,23 +37,27 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private $fileystem;
     private $user_manager;
     private $program_manager;
+    /**
+     * @var RemixManager
+     */
+    private $remix_manager;
     private $output;
 
     private $importdir;
     private $finder;
     private $filesystem;
 
-    private $thumbnaildir;
-    private $screenshotdir;
     private $screenshot_repository;
     private $catrobat_file_repository;
 
-    public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager, EntityManager $em)
+    public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager,
+                                RemixManager $remix_manager, EntityManager $em)
     {
         parent::__construct();
         $this->fileystem = $filesystem;
         $this->user_manager = $user_manager;
         $this->program_manager = $program_manager;
+        $this->remix_manager = $remix_manager;
         $this->em = $em;
     }
 
@@ -67,7 +76,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
         $this->screenshot_repository = $this->getContainer()->get('screenshotrepository');
         $this->catrobat_file_repository = $this->getContainer()->get('filerepository');
 
-        $this->executeSymfonyCommand('catrobat:purge', array('--force' => true), $output);
+        CommandHelper::executeSymfonyCommand('catrobat:purge', $this->getApplication(), array('--force' => true), $output);
 
         $backup_file = $input->getArgument('backupfile');
 
@@ -75,10 +84,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
         $this->writeln('Using Temp directory '.$this->importdir);
 
         $temp_dir = $this->importdir;
-        $this->executeShellCommand("tar xfz $backup_file --directory $temp_dir", 'Extracting backupfile');
-        $this->executeShellCommand("tar xf $temp_dir/".self::SQL_CONTAINER_FILE." --directory $temp_dir", 'Extracting SQL files');
-        $this->executeShellCommand("tar xfz $temp_dir/".self::SQL_WEB_CONTAINER_FILE." --directory $temp_dir", 'Extracting Catroweb SQL files');
-        $this->executeShellCommand("tar xf $temp_dir/".self::RESOURCE_CONTAINER_FILE." --directory $temp_dir", 'Extracting resource files');
+        CommandHelper::executeShellCommand("tar xfz $backup_file --directory $temp_dir", array('timeout' => 3600), 'Extracting backupfile', $output);
+        CommandHelper::executeShellCommand("tar xf $temp_dir/".self::SQL_CONTAINER_FILE." --directory $temp_dir", array('timeout' => 3600), 'Extracting SQL files', $output);
+        CommandHelper::executeShellCommand("tar xfz $temp_dir/".self::SQL_WEB_CONTAINER_FILE." --directory $temp_dir", array('timeout' => 3600), 'Extracting Catroweb SQL files', $output);
+        CommandHelper::executeShellCommand("tar xf $temp_dir/".self::RESOURCE_CONTAINER_FILE." --directory $temp_dir", array('timeout' => 3600), 'Extracting resource files', $output);
 
         $this->importUsers($this->importdir.'/'.self::TSV_USERS_FILE);
         $this->importPrograms($this->importdir.'/'.self::TSV_PROGRAMS_FILE);
@@ -146,6 +155,7 @@ class ImportLegacyCommand extends ContainerAwareCommand
                     $program->setDescription($description);
                     $program->setUploadedAt(new \DateTime($data[4], new \DateTimeZone('UTC')));
                     $program->setUploadIp($data[5]);
+                    $program->setRemixMigratedAt(null);
                     $program->setDownloads($data[6]);
                     $program->setViews($data[7]);
                     $program->setVisible($data[8] === 't');
@@ -161,10 +171,10 @@ class ImportLegacyCommand extends ContainerAwareCommand
                         $program->setLanguageVersion($language_version);
                     }
 
-                    $program->setRemixCount($data[19]);
                     $program->setApproved($data[20] === 't');
                     $program->setCatrobatVersion(1);
                     $program->setFlavor('pocketcode');
+                    $program->setRemixRoot(true);
                     $this->em->persist($program);
                 } else {
                     break;
@@ -297,64 +307,20 @@ class ImportLegacyCommand extends ContainerAwareCommand
     private function importProgramfile($id)
     {
         $filepath = $this->importdir.'/resources/projects/'."$id".'.catrobat';
+        $async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
 
         if (file_exists($filepath)) {
             /* @var $fileextractor CatrobatFileExtractor*/
             $fileextractor = $this->getContainer()->get('fileextractor');
             $router = $this->getContainer()->get('router');
-            $extractedfile = $fileextractor->extract(new File($filepath));
-            $xmlprops = $extractedfile->getProgramXmlProperties();
+            $extracted_catrobat_file = $fileextractor->extract(new File($filepath));
 
-            $xmlprops->header->url = $router->generate('program', array('id' => $id));
+            $program = $this->program_manager->find($id);
+            $remix_updater = new RemixUpdater($this->remix_manager, $async_http_client, $router);
+            $remix_updater->update($extracted_catrobat_file, $program);
 
-            $matches = array();
-            preg_match("/([\d]+)$/", $xmlprops->header->remixOf->__toString(), $matches);
-            if (isset($matches[1])) {
-                $remix_program_id = intval($matches[1]);
-                if ($remix_program_id != '') {
-                    $xmlprops->header->remixOf = $router->generate('program', array('id' => $remix_program_id));
-                    $parent = $this->program_manager->find($remix_program_id);
-                    if ($parent != null) {
-                        $program = $this->program_manager->find($id);
-                        $program->setRemixOf($parent);
-                    } else {
-                        $this->writeln('Could not set remix info: program not in database ('.$remix_program_id.')');
-                    }
-                }
-            }
+            $this->catrobat_file_repository->saveProgram($extracted_catrobat_file, $id);
             $this->catrobat_file_repository->saveProgramfile(new File($filepath), $id);
-        }
-    }
-
-    private function executeSymfonyCommand($command, $args, $output)
-    {
-        $command = $this->getApplication()->find($command);
-        $args['command'] = $command;
-        $input = new ArrayInput($args);
-        $command->run($input, $output);
-    }
-
-    private function executeShellCommand($command, $description)
-    {
-        $this->write($description." ('".$command."') ... ");
-        $process = new Process($command);
-        $process->setTimeout(3600);
-        $process->run();
-        if ($process->isSuccessful()) {
-            $this->writeln('OK');
-
-            return true;
-        } else {
-            $this->writeln('failed!');
-
-            return false;
-        }
-    }
-
-    private function write($string)
-    {
-        if ($this->output != null) {
-            $this->output->write($string);
         }
     }
 

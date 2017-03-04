@@ -5,10 +5,18 @@ parameters:
       catrobat.file.extract.path:     "resources/extract/"
       catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"
       catrobat.file.storage.path:     "resources/programs/"
+      catrobat.template.storage.dir:  "%kernel.root_dir%/../web/resources/templates/"
+      catrobat.template.storage.path: "resources/templates/"
       catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
       catrobat.screenshot.path:       "resources/screenshots/"
+      catrobat.template.dir:          "%catrobat.webdir%resources/templates/"
+      catrobat.template.path:         "resources/templates/"
+      catrobat.template.screenshot.dir:        "%catrobat.webdir%resources/templates/screenshots/"
+      catrobat.template.screenshot.path:       "resources/templates/screenshots/"
       catrobat.thumbnail.dir:         "%catrobat.webdir%resources/thumbnails/"
       catrobat.thumbnail.path:        "resources/thumbnails/"
+      catrobat.template.thumbnail.dir:         "%catrobat.webdir%resources/templates/thumbnails/"
+      catrobat.template.thumbnail.path:        "resources/templates/thumbnails/"
       catrobat.featuredimage.dir:     "%catrobat.webdir%resources/featured/"
       catrobat.featuredimage.path:    "resources/featured/"
       catrobat.mediapackage.dir:      "%catrobat.webdir%resources/mediapackage/"
@@ -29,6 +37,11 @@ services:
         class: Catrobat\AppBundle\Security\UserAuthenticator
         arguments: ["@security.user.provider.concrete.chain_provider","@security.authentication.manager"]
 
+
+    template_service:
+        class: Catrobat\AppBundle\Services\TemplateService
+        arguments:
+          - "@templatemanager"
 # =========================== Repository ===========================
 
     programrepository:
@@ -37,6 +50,55 @@ services:
         factory_method: getRepository
         arguments:
             - "AppBundle:Program"
+
+    programlikerepository:
+        class: Catrobat\AppBundle\Entity\ProgramLikeRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ProgramLike"
+
+    programremixrepository:
+        class: Catrobat\AppBundle\Entity\ProgramRemixRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ProgramRemixRelation"
+
+    programremixbackwardrepository:
+        class: Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ProgramRemixBackwardRelation"
+
+    scratchprogramrepository:
+        class: Catrobat\AppBundle\Entity\ScratchProgramRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ScratchProgram"
+
+    scratchprogramremixrepository:
+        class: Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:ScratchProgramRemixRelation"
+
+    userlikesimilarityrelationrepository:
+        class: Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:UserLikeSimilarityRelation"
+
+    userremixsimilarityrelationrepository:
+        class: Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:UserRemixSimilarityRelation"
 
     tagrepository:
         class: Catrobat\AppBundle\Entity\TagRepository
@@ -97,6 +159,10 @@ services:
         class: Catrobat\AppBundle\Services\ScreenshotRepository
         arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
 
+    templatescreenshotrepository:
+            class: Catrobat\AppBundle\Services\ScreenshotRepository
+            arguments: ["%catrobat.template.screenshot.dir%","%catrobat.template.screenshot.path%","%catrobat.template.thumbnail.dir%","%catrobat.template.thumbnail.path%"]
+
     featuredimagerepository:
         class: Catrobat\AppBundle\Services\FeaturedImageRepository
         arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
@@ -116,6 +182,16 @@ services:
     programdevicepermissionreader:
         class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
 
+    templaterepository:
+        class: Catrobat\AppBundle\Entity\TemplateRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:Template"
+
+    templatefilerepository:
+            class: Catrobat\AppBundle\Services\TemplateFileRepository
+            arguments: ["%catrobat.template.storage.dir%","%catrobat.template.storage.path%", "@filecompressor"]
 # =========================== Manager & Stuff ===========================
 
     programmanager:
@@ -127,12 +203,73 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
             - "@tagrepository"
+            - "@programlikerepository"
             - "@event_dispatcher"
+
+
+    templatemanager:
+        class: Catrobat\AppBundle\Entity\TemplateManager
+        arguments:
+            - "@templatefilerepository"
+            - "@templatescreenshotrepository"
+            - "@doctrine.orm.entity_manager"
+            - "@templaterepository"
+
+    programmanager.remix_manipulation:
+        class: Catrobat\AppBundle\Commands\RemixManipulationProgramManager
+        arguments:
+            - "@fileextractor"
+            - "@filerepository"
+            - "@screenshotrepository"
+            - "@doctrine.orm.entity_manager"
+            - "@programrepository"
+            - "@tagrepository"
+            - "@programlikerepository"
+            - "@event_dispatcher"
+
+    remixmanager:
+        class: Catrobat\AppBundle\Entity\RemixManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@programrepository"
+            - "@scratchprogramrepository"
+            - "@programremixrepository"
+            - "@programremixbackwardrepository"
+            - "@scratchprogramremixrepository"
+            - "@remixgraphmanipulator"
+
+    remixgraphmanipulator:
+        class: Catrobat\AppBundle\RemixGraph\RemixGraphManipulator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@remixsubgraphmanipulator"
+            - "@programremixrepository"
+            - "@programremixbackwardrepository"
+            - "@scratchprogramremixrepository"
+
+    remixsubgraphmanipulator:
+        class: Catrobat\AppBundle\RemixGraph\RemixSubgraphManipulator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@programrepository"
+            - "@programremixrepository"
+            - "@programremixbackwardrepository"
 
     migrationmanager:
         class: Catrobat\AppBundle\Entity\MigrationManager
         arguments:
          - "@doctrine.orm.entity_manager"
+
+    recommendermanager:
+        class: Catrobat\AppBundle\RecommenderSystem\RecommenderManager
+        arguments:
+         - "@doctrine.orm.entity_manager"
+         - "@usermanager"
+         - "@userlikesimilarityrelationrepository"
+         - "@userremixsimilarityrelationrepository"
+         - "@programlikerepository"
+         - "@programremixrepository"
+         - "@programremixbackwardrepository"
 
     rudewordfilter:
         class: Catrobat\AppBundle\Services\RudeWordFilter
@@ -221,3 +358,10 @@ services:
           - "@security.token_storage"
         tags:
           - { name: monolog.logger, channel: download_stats }
+
+
+# =========================== Async HTTP Client ===========================
+    async_http_client:
+        class: Catrobat\AppBundle\Services\AsyncHttpClient
+        arguments:
+          - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }

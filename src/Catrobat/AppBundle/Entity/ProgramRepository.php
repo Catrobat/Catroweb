@@ -3,6 +3,8 @@
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
+
 
 /**
  * ProgramRepository.
@@ -12,6 +14,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProgramRepository extends EntityRepository
 {
+    private $cached_most_remixed_programs_full_result = [];
+    private $cached_most_liked_programs_full_result = [];
+    private $cached_most_downloaded_other_programs_full_result = [];
+
     public function getMostDownloadedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
     {
         $qb = $this->createQueryBuilder('e');
@@ -44,6 +50,183 @@ class ProgramRepository extends EntityRepository
     ->setMaxResults($limit)
     ->getQuery()
     ->getResult();
+    }
+
+    private function generateUnionSqlStatementForMostRemixedPrograms($limit, $offset)
+    {
+        //--------------------------------------------------------------------------------------------------------------
+        // ATTENTION: since Doctrine does not support UNION queries, the following query is a native MySQL/SQLite query
+        //--------------------------------------------------------------------------------------------------------------
+        $limit_clause = intval($limit) > 0 ? 'LIMIT ' . intval($limit) : '';
+        $offset_clause = intval($offset) > 0 ? 'OFFSET ' . intval($offset) : '';
+
+        return "
+            SELECT sum(remixes_count) AS total_remixes_count, id FROM (
+                    SELECT p.id AS id, COUNT(p.id) AS remixes_count
+                    FROM program p
+                    INNER JOIN program_remix_relation r
+                    ON p.id = r.ancestor_id
+                    INNER JOIN program rp
+                    ON r.descendant_id = rp.id
+                    WHERE p.visible = 1
+                    AND p.flavor = :flavor
+                    AND p.private = 0
+                    AND r.depth = 1
+                    AND p.user_id <> rp.user_id
+                    GROUP BY p.id
+                UNION ALL
+                    SELECT p.id AS id, COUNT(p.id) AS remixes_count
+                    FROM program p
+                    INNER JOIN program_remix_backward_relation b
+                    ON p.id = b.parent_id
+                    INNER JOIN program rp
+                    ON b.child_id = rp.id
+                    WHERE p.visible = 1
+                    AND p.flavor = :flavor
+                    AND p.private = 0
+                    AND p.user_id <> rp.user_id
+                    GROUP BY p.id
+            ) t
+            GROUP BY id
+            ORDER BY remixes_count DESC
+            $limit_clause
+            $offset_clause
+        ";
+    }
+
+    public function getMostRemixedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
+    {
+        if (!isset($this->cached_most_remixed_programs_full_result[$flavor])) {
+            $connection = $this->getEntityManager()->getConnection();
+            $statement = $connection->prepare($this->generateUnionSqlStatementForMostRemixedPrograms($limit, $offset));
+            $statement->bindValue('flavor', $flavor);
+            $statement->execute();
+            $results = $statement->fetchAll();
+        } else {
+            $results = array_slice($this->cached_most_remixed_programs_full_result[$flavor], $offset, $limit);
+        }
+
+        $programs = [];
+        foreach ($results as $result) {
+            $programs[] = $this->find($result['id']);
+        }
+        return $programs;
+    }
+
+    public function getTotalRemixedProgramsCount($flavor = 'pocketcode')
+    {
+        if (isset($this->cached_most_remixed_programs_full_result[$flavor])) {
+            return count($this->cached_most_remixed_programs_full_result[$flavor]);
+        }
+
+        $connection = $this->getEntityManager()->getConnection();
+        $statement = $connection->prepare($this->generateUnionSqlStatementForMostRemixedPrograms(0, 0));
+        $statement->bindValue('flavor', $flavor);
+        $statement->execute();
+
+        $this->cached_most_remixed_programs_full_result[$flavor] = $statement->fetchAll();
+        return count($this->cached_most_remixed_programs_full_result[$flavor]);
+    }
+
+    public function getMostLikedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
+    {
+        if (isset($this->cached_most_liked_programs_full_result[$flavor])) {
+            return array_slice($this->cached_most_liked_programs_full_result[$flavor], $offset, $limit);
+        }
+
+        $qb = $this->createQueryBuilder('e');
+
+        $qb
+            ->select(['e as program', 'COUNT(e.id) as like_count'])
+            ->innerJoin('AppBundle:ProgramLike', 'l', Join::WITH, $qb->expr()->eq('e.id', 'l.program_id'))
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+            ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+            ->having($qb->expr()->gt('like_count', $qb->expr()->literal(1)))
+            ->groupBy('e.id')
+            ->orderBy('like_count', 'DESC')
+            ->setParameter('flavor', $flavor)
+            ->distinct();
+
+        if (intval($offset) > 0) {
+            $qb->setFirstResult($offset);
+        }
+
+        if (intval($limit) > 0) {
+            $qb->setMaxResults($limit);
+        }
+
+        $results = $qb->getQuery()->getResult();
+        return array_map(function ($r) { return $r['program']; }, $results);
+    }
+
+    public function getTotalLikedProgramsCount($flavor = 'pocketcode')
+    {
+        if (isset($this->cached_most_liked_programs_full_result[$flavor])) {
+            return count($this->cached_most_liked_programs_full_result[$flavor]);
+        }
+
+        $this->cached_most_liked_programs_full_result[$flavor] = $this->getMostLikedPrograms($flavor, 0, 0);
+        return count($this->cached_most_liked_programs_full_result[$flavor]);
+    }
+
+    public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $program, $limit, $offset, $is_test_environment)
+    {
+        $cache_key = $flavor.'_'.$program->getId();
+        if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key])) {
+            return array_slice($this->cached_most_downloaded_other_programs_full_result[$cache_key], $offset, $limit);
+        }
+
+        $time_frame_length = 600; // in seconds
+        $qb = $this->createQueryBuilder('e');
+
+        $qb
+            ->select(['e as program', 'COUNT(e.id) as user_download_count'])
+            ->innerJoin('AppBundle:ProgramDownloads', 'd1', Join::WITH, $qb->expr()->eq('e.id', 'd1.program'))
+            ->innerJoin('AppBundle:ProgramDownloads', 'd2', Join::WITH, $qb->expr()->eq('d1.user', 'd2.user'))
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+            ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
+            ->andWhere($qb->expr()->isNotNull('d1.user'))
+            ->andWhere($qb->expr()->neq('d1.user', ':user'))
+            ->andWhere($qb->expr()->neq('d1.program', 'd2.program'))
+            ->andWhere($qb->expr()->eq('d2.program', ':program'));
+
+        if (!$is_test_environment) {
+            $qb->andWhere($qb->expr()->between('TIME_DIFF(d1.downloaded_at, d2.downloaded_at, \'second\')',
+                $qb->expr()->literal($time_frame_length/2 * (-1)), $qb->expr()->literal($time_frame_length/2)));
+        }
+
+        $qb
+            ->groupBy('e.id')
+            ->orderBy('user_download_count', 'DESC')
+            ->setParameter('flavor', $flavor)
+            ->setParameter('user', $program->getUser())
+            ->setParameter('program', $program)
+            ->distinct();
+
+        if (intval($offset) > 0) {
+            $qb->setFirstResult($offset);
+        }
+
+        if (intval($limit) > 0) {
+            $qb->setMaxResults($limit);
+        }
+
+        $results = $qb->getQuery()->getResult();
+        return array_map(function ($r) { return $r['program']; }, $results);
+    }
+
+    public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount($flavor = 'pocketcode', $program, $is_test_environment)
+    {
+        $cache_key = $flavor.'_'.$program->getId();
+        if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key])) {
+            return count($this->cached_most_downloaded_other_programs_full_result[$cache_key]);
+        }
+
+        $result = $this->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $program, 0, 0, $is_test_environment);
+        $this->cached_most_downloaded_other_programs_full_result[$cache_key] = $result;
+        return count($this->cached_most_downloaded_other_programs_full_result[$cache_key]);
     }
 
     public function getRecentPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
@@ -105,6 +288,25 @@ class ProgramRepository extends EntityRepository
         ->getResult();
 
       return $result;
+    }
+
+    /**
+     * @param int[] $program_ids
+     * @return int[]
+     */
+    public function filterExistingProgramIds(array $program_ids)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $result = $qb
+            ->select(array('p.id'))
+            ->where('p.id IN (:program_ids)')
+            ->setParameter('program_ids', $program_ids)
+            ->distinct()
+            ->getQuery()
+            ->getResult();
+
+        return array_map(function ($data) { return $data['id']; }, $result);
     }
 
     public function search($query, $limit = 10, $offset = 0)
@@ -212,6 +414,31 @@ class ProgramRepository extends EntityRepository
         return count($result);
     }
 
+    public function markAllProgramsAsNotYetMigrated()
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb
+            ->update()
+            ->set('p.remix_migrated_at', ':remix_migrated_at')
+            ->setParameter(':remix_migrated_at', null)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findNext($previous_program_id)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+            ->select('min(p.id)')
+            ->where($qb->expr()->gt('p.id', ':previous_program_id'))
+            ->setParameter('previous_program_id', $previous_program_id)
+            ->distinct()
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getUserPrograms($user_id)
     {
         $qb = $this->createQueryBuilder('e');
@@ -275,6 +502,22 @@ class ProgramRepository extends EntityRepository
             ->setParameter('id', $id)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getProgramDataByIds(Array $program_ids)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+            ->select(array('p.id', 'p.name', 'p.uploaded_at', 'u.username'))
+            ->innerJoin('p.user', 'u')
+            ->where($qb->expr()->eq('p.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('p.private', $qb->expr()->literal(false)))
+            ->andWhere('p.id IN (:program_ids)')
+            ->setParameter('program_ids', $program_ids)
+            ->distinct()
             ->getQuery()
             ->getResult();
     }

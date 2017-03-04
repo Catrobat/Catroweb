@@ -16,14 +16,21 @@ country: מדינה
 loginText: כניסה
 privacyPolicy: מדיניות פרטיות
 imprint: Imprint
-somethingWentWrong: Ooooops משהו השתבש.
-pleaseTryAgain: אנא נסה שנית!
-oldVersionError: נא לעדכן הגירסה החדשה ביותר של פוקטקוד!
-more: יותר
-less: פחות
+somethingWentWrong: 'Ooooops משהו השתבש.'
+pleaseTryAgain: 'אנא נסה שנית!'
+oldVersionError: 'נא לעדכן הגירסה החדשה ביותר של פוקטקוד!'
+more: 'יותר'
+less: 'פחות'
 ok: אשר
 clickToDownloadProgram: 'כדי להוריד את תוכנית ההדגמה %link_start% לחץ %link_end% כאן.'
-registrationError: Username or email address already in use.
+registrationError: 'Username or email address already in use.'
+notifications: 'Notifications'
+wellDone: "Well done!"
+done: "Done!"
+notificationsReadMessage: "You have read all notifications."
+notificationsClearedMessage: "All notifications have been marked as read."
+clearAllNotificationsButtonTitle: "Mark all as read"
+notificationsClearError: "Unable to mark notifications as read!"
 programs:
   featured: Featured
   newest: תוכניות חדשות
@@ -35,11 +42,13 @@ programs:
   downloads: '%downloads% הורדות'
   sample: תכניות לדוגמא
   views: '%views% ניצפה'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: תוכניות שהוגשו
   uploaded: תוכניות שהועלו
   reportAsInappropriate: דווח כבלתי חשובות
   languageVersion: 'גירסת שפה Catrobat: %languageVersion%'
-  reportLoginText: 'אנא %login% לדווח על תוכנית זו כלא הולמת.'
+  reportLoginText: אנא %login% לדווח על תוכנית זו כלא הולמת.
   reportDialogHeader: מדוע לדעתך תוכנית זו אינה ראויה?
   reportDialogReason: הזן סיבה
   reportOwnProgram: אין אפשרות לסמן תכנית שלך.
@@ -56,9 +65,16 @@ programs:
   report: דיווח
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+remixgraph:
+  by: 'by'
+  open: 'Open'
+  showPaths: 'Show Paths'
+  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
 passwordRecovery:
   subject: שחזור סיסמה שלך
-  message: '%username% יקר. ביקשת לאפס את הסיסמה שלך על %appplication_url% כי שכחת את הסיסמה שלך. אם לא ביקשת זאת, בבקשה תתעלם מזה הבקשה תפוג ותהיה חסר תועלת תוך 24 שעות. כדי לאפס את הסיסמה שלך וליצור דבר חדש, אנא בקרו בדף הבא: %confirmationUrl% באפשרותך להשתמש שם המשתמש שלך והסיסמה שלך בכל עת כדי לגשת הקהילה %appplication_url%. כדי לעשות זאת, פשוט לבקר בדף הבא: %loginPage% כדי לערוך את פרטי הפרופיל שלך, לעבור לדף הזה: %profilePage% בברכה, צוות Catrobat שלך.'
+  message: |
+    %username% יקר. ביקשת לאפס את הסיסמה שלך על %appplication_url% כי שכחת את הסיסמה שלך. אם לא ביקשת זאת, בבקשה תתעלם מזה הבקשה תפוג ותהיה חסר תועלת תוך 24 שעות. כדי לאפס את הסיסמה שלך וליצור דבר חדש, אנא בקרו בדף הבא: %confirmationUrl% באפשרותך להשתמש שם המשתמש שלך והסיסמה שלך בכל עת כדי לגשת הקהילה %appplication_url%. כדי לעשות זאת, פשוט לבקר בדף הבא: %loginPage% כדי לערוך את פרטי הפרופיל שלך, לעבור לדף הזה: %profilePage% בברכה, צוות Catrobat שלך.
 profile:
   saveChanges: שמור שינויים
   newPass: סיסמה חדשה
@@ -67,8 +83,8 @@ profile:
   secondEmail: המייל המשני שלי
   myPrograms: התוכניות שלי
   form:
-    passwordTooShort: 'הסיסמה החדשה חייב להיות לפחות %length% תווים.'
-    passwordTooLong: 'הסיסמה החדשה יכול להכיל תווים באורך %length%.'
+    passwordTooShort: הסיסמה החדשה חייב להיות לפחות %length% תווים.
+    passwordTooLong: הסיסמה החדשה יכול להכיל תווים באורך %length%.
     passwordIsUsername: הסיסמה צריכה להיות שונה משם המשתמש.
     passwordWrong: Wrong password
     emailNotValid: כתובת האמייל הזו לא תקינה.
@@ -94,7 +110,7 @@ myprofile:
   editCountry: Edit country
   editEmail: Edit E-Mail
 licenseToPlay:
-  link: רשיון לשחק
+  link: 'רשיון לשחק'
   title: 'רשיון לשחק - תן קרדיט ושיתוף'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
   text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
@@ -108,13 +124,13 @@ licenseToPlay:
   version: Version 1.1, 2 April 2013
 teachers:
   login:
-    title: אזור המורים
-    description: אזור זה ניתן לשימושם של מורים.
+    title: 'אזור המורים'
+    description: 'אזור זה ניתן לשימושם של מורים.'
 termsOfUse:
   title: תנאי שימוש
   headline: ברוכים הבאים לקהילת Catrobat!
   text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
-  text2: 'אנחנו צריכים את העזרה שלך כדי להפוך את הקהילה הזאת למקום תומך עבור כל חבר. קרא איך אתה יכול לעזור:'
+  text2: "אנחנו צריכים את העזרה שלך כדי להפוך את הקהילה הזאת למקום תומך עבור כל חבר. קרא איך אתה יכול לעזור:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
   text4: 'המתנה שלנו בשבילך:'
   text5: 'שלנו תנאי שימוש ושירות:'
@@ -124,12 +140,12 @@ termsOfUse:
     item3: עם כל רמות ניסיון
   list2:
     item1: תהיה מנומס בעת שיתוף תוכניות, אנא זכרו כי אנשים רבים ממדינות שונות, בגילאים ומתרבויות שונות יראו את התרומות שלך.
-    item2: 'תן קרדיט. אל תהסס ליצור גרסאות אחרות של תוכניות של אנשים אחרים - רק תוודא לתת להם קרדיט. אחד מהמקומות לתת קרדיט הוא תיאור של התוכנית שלך. ראה את הפסקה מתחת שם רשימה ממוקדת על אודות שינוי תוכניות של משתמשים אחרים.'
-    item3: תהיה כנים. אל תתחזו ותנסו להערים ולרמות את הקהילה.
-    item4: 'שמור את המידע האישי שלך. אל תשתף את כתובת הדוא"ל שלך, מספר הטלפון או פרטים ליצירת קשר אישי אחרים.'
+    item2: "תן קרדיט. אל תהסס ליצור גרסאות אחרות של תוכניות של אנשים אחרים - רק תוודא לתת להם קרדיט. אחד מהמקומות לתת קרדיט הוא תיאור של התוכנית שלך. ראה את הפסקה מתחת שם רשימה ממוקדת על אודות שינוי תוכניות של משתמשים אחרים."
+    item3: "תהיה כנים. אל תתחזו ותנסו להערים ולרמות את הקהילה."
+    item4: "שמור את המידע האישי שלך. אל תשתף את כתובת הדוא\"ל שלך, מספר הטלפון או פרטים ליצירת קשר אישי אחרים."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
-    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
@@ -148,225 +164,225 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 help:
   stepByStep:
-    title: Step-by-Step Intro
-    start: 'Starting position:'
+    title: "Step-by-Step Intro"
+    start: "Starting position:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: צור תכנית חדשה
+      title: 'צור תכנית חדשה'
       detail:
         text1: 'הקש על "חדש".'
         text2: 'הזן שם תוכנית, בחר "צור תוכנית ריקה" והקש "אישור".'
     step2:
-      title: Create a new object
+      title: "Create a new object"
       detail:
         text1: 'Tap:'
-        text2: Choose the source of the first look of your new object.
+        text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: צייר מראה חדש.
-        special2: בחר מתוך הגלריה.
-        special3: צלם תמונה.
+        special1: 'צייר מראה חדש.'
+        special2: 'בחר מתוך הגלריה.'
+        special3: 'צלם תמונה.'
     step3:
-      title: התחל תזוזה
+      title: "התחל תזוזה"
       detail:
         text1: 'Tap:'
         text2: 'הלבנה הראשונה שאנו משתמשים הוא מתוך הקטגוריה "תנועה".'
         text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.
+        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: Use the Android Back Button to get back from the stage.
+        text6: 'Use the Android Back Button to get back from the stage.'
     step4:
-      title: שינוי מראה
-      description: באפשרותך לשנות את המראה של האובייקט שלך.
+      title: "שינוי מראה"
+      description: "באפשרותך לשנות את המראה של האובייקט שלך."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
         text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: Tap into the dropdown field to create a new look.
-        text4: Choose the source of the image like before.
-        text5: עכשיו אתה צריך לבחור תמונה חדשה.
-        text6: Tap play to see the behaviour on the stage.
+        text3: 'Tap into the dropdown field to create a new look.'
+        text4: 'Choose the source of the image like before.'
+        text5: 'עכשיו אתה צריך לבחור תמונה חדשה.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: דבר
-      description: עכשיו תוכלו לגלות כיצד לגרום לאובייקט לדבר.
+      title: "דבר"
+      description: "עכשיו תוכלו לגלות כיצד לגרום לאובייקט לדבר."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: הקש על הפעל כדי לראות את ההתנהגות על הבמה.
+        text3: 'הקש על הפעל כדי לראות את ההתנהגות על הבמה.'
     step6:
-      title: שוב ושוב
-      description: This step shows you how to repeat behaviour of objects.
+      title: 'שוב ושוב'
+      description: "This step shows you how to repeat behaviour of objects."
       detail:
         text1: 'בחר את הלבנה "לעולמים". כדי ליצור לולאה אין סופית.'
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
         text3: 'הוסף לבנה "גלוש" נוספת.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: Tap into the text field of the x and y value and set to 0.
-        text6: Tap play to see the behaviour on the stage.
+        text5: 'Tap into the text field of the x and y value and set to 0.'
+        text6: 'Tap play to see the behaviour on the stage.'
     step7:
-      title: Tapping is everything
-      description: ניתן גם לשלוט על ההתנהגותו של האובייקט כאשר התוכנית פועלת על הבמה.
+      title: "Tapping is everything"
+      description: 'ניתן גם לשלוט על ההתנהגותו של האובייקט כאשר התוכנית פועלת על הבמה.'
       detail:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: Now you have this script.
-        text5: Tap play to see the behaviour on the stage. If you now tap on the object, it spins.
+        text4: 'Now you have this script.'
+        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
-      title: העתק, מחק או לערוך לבנה
+      title: "העתק, מחק או לערוך לבנה"
       detail:
-        text1: Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
-      title: ניווט באפליקציה
+      title: "ניווט באפליקציה"
       detail:
-        text1: Use the Android Back Button to navigate in the app.
-        text2: Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.
-        text3: Use again the Android Back Button to get to the overview of your objects and your background.
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
-      title: שנה את הרקע
+      title: "שנה את הרקע"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: The background is like an object, but you just can have one background.
-        text2: באפשרותך להוסיף תסריטים, צלילים, ומראה באופן זהה לזה של אובייקט הרקע.
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'באפשרותך להוסיף תסריטים, צלילים, ומראה באופן זהה לזה של אובייקט הרקע.'
     step11:
-      title: תפריט ראשי
-      description: Use the Android Back Button to get to this screen.
+      title: "תפריט ראשי"
+      description: "Use the Android Back Button to get to this screen."
       detail:
-        text1: Continue with your currently opened program.
-        text2: הוסף תוכנית חדשה.
-        text3: צפה בכל התוכניות המקומיות.
-        text4: Go to the help site and discuss with other users.
-        text5: Explore the world of the Pocket Code programs. Download and remix programs you like.
-        text6: Upload the program that is currently opened.
+        text1: 'Continue with your currently opened program.'
+        text2: 'הוסף תוכנית חדשה.'
+        text3: 'צפה בכל התוכניות המקומיות.'
+        text4: 'Go to the help site and discuss with other users.'
+        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
+        text6: 'Upload the program that is currently opened.'
   tutorialcards:
-    title: הדרכות
-    description1: These tutorials show you how to use effective tricks in Pocket Code.
-    getReady: 'Get Ready:'
-    tryCode: 'נסה קוד זה:'
-    doIt: 'Do it:'
-    tip: 'Extra Tip:'
+    title: "הדרכות"
+    description1: "These tutorials show you how to use effective tricks in Pocket Code."
+    getReady: "Get Ready:"
+    tryCode: "נסה קוד זה:"
+    doIt: "Do it:"
+    tip: "Extra Tip:"
     card1:
-      title: שנה גודל
-      description: שנה את גודל האובייקט.
-      one: Add the object of which you would like to change the size, e.g. Animal.
+      title: "שנה גודל"
+      description: "שנה את גודל האובייקט."
+      one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: שינוי מראה
-      description: שנה את המראה של האובייקט.
-      one: Add the object of which you would like to change its look, e.g. items.
+      title: "שינוי מראה"
+      description: "שנה את המראה של האובייקט."
+      one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
-      three: הכנס את הלבנים הבאים לתסריט של האובייקט על מנת לשנות את צורתו לאחר שניה אחת.
+      three: "הכנס את הלבנים הבאים לתסריט של האובייקט על מנת לשנות את צורתו לאחר שניה אחת."
     card3:
-      title: הנפשה
-      description: הנפשת אובייקט
-      one: הוסף את האובייקט שברצונך להזיז.
+      title: "הנפשה"
+      description: "הנפשת אובייקט"
+      one: "הוסף את האובייקט שברצונך להזיז."
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: גלוש
-      description: תן לאובייקט שלך לגלוש על המסך.
-      one: Add the object you want to be gliding. e.g. plane.
-      two: הוסף את הלבנים הבאים ולהגדיר את האזור שבו התנועה צריך להתבצע.
+      title: "גלוש"
+      description: "תן לאובייקט שלך לגלוש על המסך."
+      one: "Add the object you want to be gliding. e.g. plane."
+      two: "הוסף את הלבנים הבאים ולהגדיר את האזור שבו התנועה צריך להתבצע."
     card5:
-      title: נגן צליל
-      description: נגן צליל על-ידי הקשה על האובייקט.
-      one: Add the object you want to be playing a sound, e.g. dog.
-      two: הכנס את הלבנים הבאים על מנת להפוך את ההשמעה לאפשרית. בחור צליל מהספרייה האישית שלך, מספריית המדיה של פוקטקוד או הקליט צליל בעצמך.
+      title: "נגן צליל"
+      description: "נגן צליל על-ידי הקשה על האובייקט."
+      one: "Add the object you want to be playing a sound, e.g. dog."
+      two: "הכנס את הלבנים הבאים על מנת להפוך את ההשמעה לאפשרית. בחור צליל מהספרייה האישית שלך, מספריית המדיה של פוקטקוד או הקליט צליל בעצמך."
     card6:
-      title: דבר
-      description: תן את האובייקט שלך לדבר.
-      one: Add the object you want to be speaking, e.g. Carrie.
-      two: Insert the following bricks in order to make the voice output possible.
+      title: "דבר"
+      description: "תן את האובייקט שלך לדבר."
+      one: "Add the object you want to be speaking, e.g. Carrie."
+      two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: חיישן
-      description: שלוט באובייקט בעזרת חיישני הנטייה.
-      one: הוסף את האובייקט שברצונך להזיז על הבמה.
-      two: 'הכנס את הלבנים הבאים על מנת לשלוט האובייקט באמצעות החיישנים של הטלפון שלך. לכן בחר בערכים "x ו- y לנטייה". כדי לקבל את התנועה המתאימה, הגדר "-הנטייה". אם התנועה של האובייקט הוא לא הגיונית, נסה לחלק את הנטייה ב-10 לדוגמה.'
+      title: "חיישן"
+      description: "שלוט באובייקט בעזרת חיישני הנטייה."
+      one: "הוסף את האובייקט שברצונך להזיז על הבמה."
+      two: "הכנס את הלבנים הבאים על מנת לשלוט האובייקט באמצעות החיישנים של הטלפון שלך. לכן בחר בערכים \"x ו- y לנטייה\". כדי לקבל את התנועה המתאימה, הגדר \"-הנטייה\". אם התנועה של האובייקט הוא לא הגיונית, נסה לחלק את הנטייה ב-10 לדוגמה."
     card8:
-      title: מצפן
-      description: צור מצפן משלך
-      one: הוסף את האובייקט שברצונך לכוון לכיוון המצפן.
-      two: הכנס את הלבנים הבאים כדי להגדיר את הכיוון של האובייקט. בנוסף הוסף לולאה אין סופית.
+      title: "מצפן"
+      description: "צור מצפן משלך"
+      one: "הוסף את האובייקט שברצונך לכוון לכיוון המצפן."
+      two: "הכנס את הלבנים הבאים כדי להגדיר את הכיוון של האובייקט. בנוסף הוסף לולאה אין סופית."
     card9:
-      title: שדר
-      description: שלוח מסר מאובייקט אחד למשנהו.
+      title: "שדר"
+      description: "שלוח מסר מאובייקט אחד למשנהו."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: Insert the brick „Send to all“ and determine what should happen when the other object receives the message.
-      three: In this case the background changes when the object in the front layer is tapped.
+      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
+      three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: הצג משתנה
-      description: הצג את הערך של המשתנה.
-      one: 'Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message.'
-      two: Insert the following bricks in order to save the current x and y position of the moving object in a variable.
-      three: Through „Show variable“ you can display the values on stage.
+      title: "הצג משתנה"
+      description: "הצג את הערך של המשתנה."
+      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
+      three: "Through „Show variable“ you can display the values on stage."
     card11:
-      title: Collision detection
-      description: זוהתה התנגשות בין 2 עצמים (אובייקטים).
-      one: 'Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%).'
-      two: 'Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case.'
+      title: "Collision detection"
+      description: "זוהתה התנגשות בין 2 עצמים (אובייקטים)."
+      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
+      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: זיהוי פנים
-      description: שליטה באובייקט באמצעות זיהוי פנים.
-      one: First make sure that the face detection bricks are enabled. Therefore go to the settings.
-      two: Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“.
+      title: "זיהוי פנים"
+      description: "שליטה באובייקט באמצעות זיהוי פנים."
+      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: תוכניות ראשונות
-    description: Try out these starter programs. Look inside to make changes and add your ideas.
+    title: "תוכניות ראשונות"
+    description: "Try out these starter programs. Look inside to make changes and add your ideas."
     categories:
-      games: משחקים
-      animations: אנימציות
-      interactive: אומנות אינטראקטיבית וסיפור
-      music: מחול ומוסיקה
+      games: "משחקים"
+      animations: "אנימציות"
+      interactive: "אומנות אינטראקטיבית וסיפור"
+      music: "מחול ומוסיקה"
   gameJam:
-    title: How to upload a Pocket Code game to the Game Jolt Site?
-    text0: 'First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site.'
-    title1: רישום
-    text1: First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!
-    title2: העלה
-    text2: 'After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field.'
-    title3: חיפוש עבור התוכנית שלך
-    text3: Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name.
-    title4: יצירת האפליקציית אנדרואיד
-    text4: Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built.
-    title5: הורדת אפליקצייה
-    text5: 'After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%.'
-    title6: Register/Login at GameJolt.com
+    title: "How to upload a Pocket Code game to the Game Jolt Site?"
+    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
+    title1: "רישום"
+    text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title2: "העלה"
+    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
+    title3: "חיפוש עבור התוכנית שלך"
+    text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
+    title4: "יצירת האפליקציית אנדרואיד"
+    text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
+    title5: "הורדת אפליקצייה"
+    text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
+    title6: "Register/Login at GameJolt.com"
     text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: Upload your game on the Game Jolt Site
+    title7: "Upload your game on the Game Jolt Site"
     text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’.
-    text7_2: 'Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. '
-    text7_3: Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer).
+    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
+    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
     text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
     text7_5: "לאחר ההעלאה לחץ על 'אישור' כדי לפרסם את המשחק שלך.. יותר מאוחר אנשים יוכלו להוריד את המשחק שלך."
-    text7_6: You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!
-    text7_7: 'Other people will now be able to find your game and it will appear on the %link% page.'
+    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
+    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
   aliceGameJamTutorialcards:
-    title1: (Welcome to) Wonderland
+    title1: "(Welcome to) Wonderland"
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: Save Alice!
-    subtitle2: Use the inclination sensors and detect a collision between objects
+    title2: "Save Alice!"
+    subtitle2: "Use the inclination sensors and detect a collision between objects"
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: 'The Hatter - Hit and Run'
+    title3: "The Hatter - Hit and Run"
     subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone.
-    title4: 'The Hatter - Hit and Run'
-    subtitle4: Let the Hatter shoot the evil cards
-    description4: In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection.
-    title5: Whack a Cheshire Cat
-    subtitle5: Create a score by using variables
-    description5: In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat.
-    title6: A Rabbits Race
-    subtitle6: Create a moving background
+    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
+    title4: "The Hatter - Hit and Run"
+    subtitle4: "Let the Hatter shoot the evil cards"
+    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    title5: "Whack a Cheshire Cat"
+    subtitle5: "Create a score by using variables"
+    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
+    title6: "A Rabbits Race"
+    subtitle6: "Create a moving background"
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: Download the program
+    download: "Download the program"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
@@ -376,7 +392,7 @@ search:
   dotdotdot: חפש...
   search: חפש
   results: תוצאות חיפוש
-  resultcount: 'החיפוש שלך החזיר את התוצאות %count%'
+  resultcount: החיפוש שלך החזיר את התוצאות %count%
 menu:
   profile: הפרופיל שלי
   logout: התנתק
@@ -394,9 +410,9 @@ login:
   or: או
 apk:
   download: הורד כיישום (apps)
-  prepare: הכנת ישום
-  preparing: הכנת הישום
-  text: התהליך עשוי לקחת קצת זמן
+  prepare: 'הכנת ישום'
+  preparing: 'הכנת הישום'
+  text: 'התהליך עשוי לקחת קצת זמן'
 errors:
   username:
     blank: שם משתמש אינו יכול להיות ריק
@@ -436,14 +452,14 @@ errors:
   program:
     invalid: תוכנית לא חוקית.
   languageversion:
-    tooold: Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?
+    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: Sorry, you are using an old version of Pocket Code. Please update to the lastest version.
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
   registration: ההרשמה בוצעה בהצלחה!
   token: ok
   upload: הפרויקט שלך הועלה בהצלחה!
-  report: 'הדו"ח שלך נשלחה בהצלחה!'
+  report: הדו"ח שלך נשלחה בהצלחה!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
@@ -457,7 +473,7 @@ language:
   chinese_simplified_han: סינית (מפושטת האן)
   chinese_traditional_han: סינית (מסורתית האן)
   croatian: קוראטית
-  czech: "צ'כית"
+  czech: צ'כית
   danish: דנית
   dutch: הולנדית
   english_united_kingdom: אנגלית (בריטניה)
@@ -501,8 +517,8 @@ ci:
   download: הורד קובץ Apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
-  submit: 'Submit to %gamejamname%'
-  whats: "What's the %gamejamname%?"
+  submit: Submit to %gamejamname%
+  whats: What's the %gamejamname%?
   submitown:
     header: be aware
     subheader: הינך יכול להגיש רק תוכניות שלך
@@ -531,3 +547,17 @@ admin:
     btnDeleteBackup: Delete backup
     createBackupConfirmationTitle: Create backup file
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+recommender:
+  similarPrograms: Similar programs
+pmd:
+  submitBtn: Submit your project
+  submitBox:
+    header: Submission
+    text: You are about to submit your project. Please enter the project code and click send.
+    btnText: Submit
+  successful:
+    text: Your program upload was successful.
+  failed:
+    text: Program upload failed.
+codeview:
+  showText: Show code

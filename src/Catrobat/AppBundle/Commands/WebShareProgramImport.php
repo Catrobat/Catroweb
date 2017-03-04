@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -30,29 +31,9 @@ class WebShareProgramImport extends ContainerAwareCommand
         $filesystem->remove($temp_dir);
         $filesystem->mkdir($temp_dir);
         $this->downloadPrograms($temp_dir, $output, $amount);
-        $this->executeShellCommand("php app/console catrobat:import $temp_dir catroweb", 'Importing Projects', $output);
-        $this->executeSymfonyCommand('catrobat:import', array('directory' => $temp_dir, 'user' => 'catroweb'), $output);
+        CommandHelper::executeShellCommand("php app/console catrobat:import $temp_dir catroweb", array(), 'Importing Projects', $output);
+        CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), array('directory' => $temp_dir, 'user' => 'catroweb'), $output);
         $filesystem->remove($temp_dir);
-    }
-
-    private function executeShellCommand($command, $description, $output)
-    {
-        $output->write($description." ('".$command."') ... ");
-        $process = new Process($command);
-        $process->run();
-        if ($process->isSuccessful()) {
-            $output->writeln('OK');
-        } else {
-            $output->writeln('failed!');
-        }
-    }
-
-    private function executeSymfonyCommand($command, $args, $output)
-    {
-        $command = $this->getApplication()->find($command);
-        $args['command'] = $command;
-        $input = new ArrayInput($args);
-        $command->run($input, $output);
     }
 
     private function downloadPrograms($dir, OutputInterface $output, $limit=20)

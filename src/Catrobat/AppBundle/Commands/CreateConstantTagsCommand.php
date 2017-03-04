@@ -64,16 +64,16 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
                 }
 
             } else {
-
+                
                 $tag = new Tag();
 
                 for($j = 1; $j < count($metadata); $j++) {
                     $language = 'set'.$metadata[$j];
                     $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
                 }
+
                 $this->em->persist($tag);;
                 $this->em->flush();
-
             }
         }
     }
@@ -82,19 +82,5 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
     {
         $parameters = array();
         return $this->translator->trans($message, $parameters, 'catroweb', $locale);
-    }
-
-    private function write($string)
-    {
-        if ($this->output != null) {
-            $this->output->write($string);
-        }
-    }
-
-    private function writeln($string)
-    {
-        if ($this->output != null) {
-            $this->output->writeln($string);
-        }
     }
 }

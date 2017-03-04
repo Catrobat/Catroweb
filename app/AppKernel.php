@@ -32,7 +32,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Liip\ThemeBundle\LiipThemeBundle(),
             new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
-            new Catrobat\AppBundle\AppBundle()
+            new Catrobat\AppBundle\AppBundle(),
+            new EightPoints\Bundle\GuzzleBundle\GuzzleBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

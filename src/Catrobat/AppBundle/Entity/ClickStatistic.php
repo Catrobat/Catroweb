@@ -37,14 +37,25 @@ class ClickStatistic
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
      * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+     * @var Program
      */
     protected $program;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $scratch_program_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
      * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
      */
     protected $recommended_from_program;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+     */
+    protected $user_specific_recommendation = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -92,6 +103,11 @@ class ClickStatistic
     protected $locality;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $locale;
+
+    /**
      * @ORM\Column(type="string", options={"default":""}, nullable=true)
      */
     protected $user_agent;
@@ -108,7 +124,7 @@ class ClickStatistic
     protected $referrer;
 
     /**
-     * @return mixed
+     * @return Program
      */
     public function getProgram()
     {
@@ -116,7 +132,7 @@ class ClickStatistic
     }
 
     /**
-     * @param mixed $program
+     * @param Program $program
      */
     public function setProgram($program)
     {
@@ -124,7 +140,23 @@ class ClickStatistic
     }
 
     /**
-     * @return mixed
+     * @return int
+     */
+    public function getScratchProgramId()
+    {
+        return $this->scratch_program_id;
+    }
+
+    /**
+     * @param int $scratch_program_id
+     */
+    public function setScratchProgramId($scratch_program_id)
+    {
+        $this->scratch_program_id = $scratch_program_id;
+    }
+
+    /**
+     * @return Program
      */
     public function getRecommendedFromProgram()
     {
@@ -132,11 +164,27 @@ class ClickStatistic
     }
 
     /**
-     * @param mixed $recommended_from_program
+     * @param Program $recommended_from_program
      */
     public function setRecommendedFromProgram($recommended_from_program)
     {
         $this->recommended_from_program = $recommended_from_program;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUserSpecificRecommendation()
+    {
+        return $this->user_specific_recommendation;
+    }
+
+    /**
+     * @param bool $is_user_specific_recommendation
+     */
+    public function setUserSpecificRecommendation($is_user_specific_recommendation)
+    {
+        $this->user_specific_recommendation = $is_user_specific_recommendation;
     }
 
     /**
@@ -265,6 +313,22 @@ class ClickStatistic
     public function setLocality($locality)
     {
         $this->locality = $locality;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     /**

@@ -23,7 +23,8 @@ class StatusCode
     const UPLOAD_UNSUPPORTED_FILE_TYPE = 517;
     const OLD_CATROBAT_LANGUAGE = 518;
     const OLD_APPLICATION_VERSION = 519;
-    
+    const INVALID_PARAM = 520;
+
     const PROGRAM_NAME_TOO_LONG = 526;
     const DESCRIPTION_TOO_LONG = 527;
 

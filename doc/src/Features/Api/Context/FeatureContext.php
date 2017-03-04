@@ -157,9 +157,9 @@ class FeatureContext extends BaseContext
                 'directory_hash' => $programs[$i]['directory_hash'],
                 'filesize' => @$programs[$i]['FileSize'],
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-                'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null
+                'remix_root' => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true
             );
-    
+
             $this->insertProgram($user, $config);
         }
     }
@@ -300,6 +300,5 @@ class FeatureContext extends BaseContext
                 throw new PendingException("No implementation of case \"" . $problem . "\"");
         }
     }
-    
-    
+
 }

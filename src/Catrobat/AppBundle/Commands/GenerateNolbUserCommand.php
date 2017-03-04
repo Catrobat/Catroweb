@@ -2,11 +2,13 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Doctrine\ORM\EntityManager;
+use Catrobat\AppBundle\Commands\Helpers\ConsoleProgressIndicator;
 
 class GenerateNolbUserCommand extends ContainerAwareCommand
 {
@@ -36,15 +38,17 @@ class GenerateNolbUserCommand extends ContainerAwareCommand
         $end = $input->getArgument('end');
 
         $output_file = fopen($identifier.'.txt', 'w');
+        $indicator = new ConsoleProgressIndicator($output);
 
         for(; $start <= $end; $start++) {
             $password = substr(str_shuffle(str_repeat($this->charset, $this->password_length)), 0, $this->password_length);
             $line_str = $identifier.str_pad($start, 4, '0', STR_PAD_LEFT).' - '.$password;
             fwrite($output_file, $line_str."\n");
+            $indicator->isSuccess();
         }
 
         fclose($output_file);
 
-        $output->writeln('File successfully created.');
+        $output->writeln("\nFile successfully created.");
     }
 }

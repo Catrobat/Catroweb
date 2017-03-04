@@ -3,6 +3,14 @@ namespace Catrobat\AppBundle\Features\Helpers;
 
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
+use Catrobat\AppBundle\Entity\ProgramLike;
+use Catrobat\AppBundle\Entity\ProgramRemixBackwardRelation;
+use Catrobat\AppBundle\Entity\ProgramRemixRelation;
+use Catrobat\AppBundle\Entity\ScratchProgramRemixRelation;
+use Catrobat\AppBundle\Entity\UserLikeSimilarityRelation;
+use Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository;
+use Catrobat\AppBundle\Entity\UserRemixSimilarityRelation;
+use Catrobat\AppBundle\RecommenderSystem\RecommenderManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -59,7 +67,7 @@ class SymfonySupport
     /**
      * @return \Catrobat\AppBundle\Entity\ProgramManager
      */
-    public function getProgramManger()
+    public function getProgramManager()
     {
         return $this->kernel->getContainer()->get('programmanager');
     }
@@ -79,7 +87,39 @@ class SymfonySupport
     {
         return $this->kernel->getContainer()->get('extensionrepository');
     }
-    
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ProgramRemixRepository
+     */
+    public function getProgramRemixForwardRepository()
+    {
+        return $this->kernel->getContainer()->get('programremixrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
+     */
+    public function getProgramRemixBackwardRepository()
+    {
+        return $this->kernel->getContainer()->get('programremixbackwardrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ScratchProgramRepository
+     */
+    public function getScratchProgramRepository()
+    {
+        return $this->kernel->getContainer()->get('scratchprogramrepository');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
+     */
+    public function getScratchProgramRemixRepository()
+    {
+        return $this->kernel->getContainer()->get('scratchprogramremixrepository');
+    }
+
     /**
      * @return \Catrobat\AppBundle\Services\ProgramFileRepository
      */
@@ -105,13 +145,37 @@ class SymfonySupport
     }
     
     /**
+     * @return RecommenderManager
+     */
+    public function getRecommenderManager()
+    {
+        return $this->kernel->getContainer()->get('recommendermanager');
+    }
+
+    /**
+     * @return UserLikeSimilarityRelationRepository
+     */
+    public function getUserLikeSimilarityRelationRepository()
+    {
+        return $this->kernel->getContainer()->get('userlikesimilarityrelationrepository');
+    }
+
+    /**
+     * @return UserLikeSimilarityRelationRepository
+     */
+    public function getUserRemixSimilarityRelationRepository()
+    {
+        return $this->kernel->getContainer()->get('userremixsimilarityrelationrepository');
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityManager
      */
     public function getManager()
     {
         return $this->kernel->getContainer()->get('doctrine')->getManager();
     }
-    
+
     /**
      * @return \Symfony\Component\Routing\Router
      */
@@ -243,6 +307,51 @@ class SymfonySupport
         return $user;
     }
 
+    public function computeAllLikeSimilaritiesBetweenUsers()
+    {
+        $this->getRecommenderManager()->computeUserLikeSimilarities(null);
+    }
+
+    public function computeAllRemixSimilaritiesBetweenUsers()
+    {
+        $this->getRecommenderManager()->computeUserRemixSimilarities(null);
+    }
+
+    public function insertUserLikeSimilarity($config = array())
+    {
+        $em = $this->getManager();
+        $user_manager = $this->getUserManager();
+        $first_user = $user_manager->find($config['first_user_id']);
+        $second_user = $user_manager->find($config['second_user_id']);
+        $em->persist(new UserLikeSimilarityRelation($first_user, $second_user, $config['similarity']));
+        $em->flush();
+    }
+
+    public function insertUserRemixSimilarity($config = array())
+    {
+        $em = $this->getManager();
+        $user_manager = $this->getUserManager();
+        $first_user = $user_manager->find($config['first_user_id']);
+        $second_user = $user_manager->find($config['second_user_id']);
+        $em->persist(new UserRemixSimilarityRelation($first_user, $second_user, $config['similarity']));
+        $em->flush();
+    }
+
+    public function insertProgramLike($config = array())
+    {
+        $em = $this->getManager();
+        $user_manager = $this->getUserManager();
+        $program_manager = $this->getProgramManager();
+        $user = $user_manager->findOneBy(['username' => $config['username']]);
+        $program = $program_manager->find($config['program_id']);
+
+        $program_like = new ProgramLike($program, $user, $config['type']);
+        $program_like->setCreatedAt(new \DateTime($config['created at'], new \DateTimeZone('UTC')));
+
+        $em->persist($program_like);
+        $em->flush();
+    }
+
     public function insertTag($config)
     {
         $em = $this->getManager();
@@ -269,7 +378,43 @@ class SymfonySupport
 
     }
 
-    
+    public function insertForwardRemixRelation($config)
+    {
+        $forward_relation = new ProgramRemixRelation(
+            $this->getProgramManager()->find($config['ancestor_id']),
+            $this->getProgramManager()->find($config['descendant_id']),
+            (int) $config['depth']
+        );
+
+        $em = $this->getManager();
+        $em->persist($forward_relation);
+        $em->flush();
+    }
+
+    public function insertBackwardRemixRelation($config)
+    {
+        $forward_relation = new ProgramRemixBackwardRelation(
+            $this->getProgramManager()->find($config['parent_id']),
+            $this->getProgramManager()->find($config['child_id'])
+        );
+
+        $em = $this->getManager();
+        $em->persist($forward_relation);
+        $em->flush();
+    }
+
+    public function insertScratchRemixRelation($config)
+    {
+        $scratch_relation = new ScratchProgramRemixRelation(
+            $config['scratch_parent_id'],
+            $this->getProgramManager()->find($config['catrobat_child_id'])
+        );
+
+        $em = $this->getManager();
+        $em->persist($scratch_relation);
+        $em->flush();
+    }
+
     public function insertProgram($user, $config)
     {
         if ($user == null) {
@@ -284,12 +429,11 @@ class SymfonySupport
         $program->setViews(isset($config['views']) ? $config['views'] : 1);
         $program->setDownloads(isset($config['downloads']) ? $config['downloads'] : 1);
         $program->setUploadedAt(isset($config['uploadtime']) ? new \DateTime($config['uploadtime'], new \DateTimeZone('UTC')) : new \DateTime());
+        $program->setRemixMigratedAt(isset($config['remixmigratedtime']) ? new \DateTime($config['remixmigratedtime'], new \DateTimeZone('UTC')) : null);
         $program->setCatrobatVersion(isset($config['catrobatversion']) ? $config['catrobatversion'] : 1);
         $program->setCatrobatVersionName(isset($config['catrobatversionname']) ? $config['catrobatversionname'] : '0.9.1');
         $program->setLanguageVersion(isset($config['languageversion']) ? $config['languageversion'] : 1);
         $program->setUploadIp('127.0.0.1');
-        $program->setRemixCount(0);
-        $program->setRemixOf(isset($config['remixof']) ? $config['remixof'] : null);
         $program->setFilesize(isset($config['filesize']) ? $config['filesize'] : 0);
         $program->setVisible(isset($config['visible']) ? boolval($config['visible']) : true);
         $program->setUploadLanguage('en');
@@ -299,6 +443,7 @@ class SymfonySupport
         $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
         $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
         $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
+        $program->setRemixRoot(isset($config['remix_root']) ? $config['remix_root'] : true);
 
         if (isset($config['tags']) && $config['tags'] != null) {
             $tags = explode(',', $config['tags']);
@@ -317,10 +462,10 @@ class SymfonySupport
         }
 
         $em->persist($program);
-        
+
         $user->addProgram($program);
         $em->persist($user);
-        
+
         // FIXXME: why exactly do we have to do this?
         if (isset($config['gamejam']))
         {
@@ -409,7 +554,7 @@ class SymfonySupport
                 case 'tags':
                     $properties->header->tags = $value;
                     break;
-    
+
                 default:
                     throw new PendingException('unknown xml field '.$name);
             }
@@ -443,7 +588,7 @@ class SymfonySupport
         $client = $this->getClient();
         $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
         $response = $client->getResponse();
-    
+
         return $response;
     }
     

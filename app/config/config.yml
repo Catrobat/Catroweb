@@ -64,6 +64,11 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        dql:
+            numeric_functions:
+                time_diff: DQL\TimeDiff
+                time_add: DQL\TimeAdd
+                time_sub: DQL\TimeSub
 
 # Swiftmailer Configuration
 swiftmailer:
