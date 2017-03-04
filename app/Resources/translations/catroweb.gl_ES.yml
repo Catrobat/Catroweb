@@ -24,16 +24,24 @@ less: 'menos'
 ok: OK
 clickToDownloadProgram: 'Para descargar o programa de exemplo fai clic %link_start% aquí %link_end%.'
 registrationError: 'O usuario ou a dirección de correo electrónico xa está en uso.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
+notifications: 'Notificacións'
+wellDone: "¡Moi ben!"
+done: "¡Listo!"
+notificationsReadMessage: "Liches todas as notificacións."
+notificationsClearedMessage: "Marcáronse todas as notificacións como lidas."
+clearAllNotificationsButtonTitle: "Marcar todo como lido"
+notificationsClearError: "¡Non foi posible marcar as notificacións como lidas!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Destacados
   newest: Últimos programas
+  recommended: Recommended programs
   most:
     viewed: Os máis vistos
     downloaded: Os máis descargados
@@ -42,22 +50,26 @@ programs:
   downloads: '%downloads% descargas'
   sample: Exemplos de programas
   views: '%views% visualizacións'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  remixes: '{0}0 remesturas | {1}1 remestura |]1,Inf]%remixes% remesturas'
+  newRemixesNotificationTitle: '|{1}"%programName%" ten unha nova remestura: |]1,Inf] "%programName%" ten %remixes% novas remesturas:'
   submitted: Programas enviados
   uploaded: Programas subidos
   reportAsInappropriate: Reportar como inadecuado
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'Versión da linguaxe Catrobat: %languageVersion%'
   reportLoginText: Faga %login% para reportar este programa como inadecuado.
   reportDialogHeader: Por que pensas que este programa é inadecuado?
   reportDialogReason: Insire unha razón
-  reportOwnProgram: You cannot flag your own program.
-  reportAlready: You've already flagged this program as inappropriate.
+  reportOwnProgram: Non podes marcar o teu propio programa.
+  reportAlready: Xa marcaches este programa como inadecuado.
   reportDone: Reportaches este programa como inadecuado!
   updateAppHeader: Actualizar aplicación
   updateAppText: Actualiza a túa aplicación á última versión para descargar este programa.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
+  checkout_this_program: Proba este programa Catrobat
   show_more: Mostrar máis
   comments: Comentarios
   send: Enviar
@@ -65,12 +77,15 @@ programs:
   report: Reportar
   report_popup: O comentario foi reportado correctamente.
   report_popup_header: Reportado
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Recuperación do teu contrasinal
   message: |
@@ -153,8 +168,8 @@ termsOfUse:
     item4: "Mantén a túa información persoal privada. Non compartas o teu enderezo de correo electrónico, número de teléfono ou outra información de contacto persoal."
     item5: "Axuda a manter unha comunidade respectuosa. Se sentes que outros usuarios poderían considerar un programa ou comentario cruel, ofensivo, demasiado violento ou inadecuado, fai clic no botón de 'reportar como inadecuado' e deixa unha breve explicación. O equipo Catrobat revisarao e quizais elimine o programa, comentario ou publicación."
   list3:
-    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
+    item1: 'Se sobes un programa ás nosas páxinas web aceptas e estás de acordo en poñelo baixo certas licenzas libres dos programas Catrobat. Do mesmo xeito que as licenzas libres grazas ás cales o propio sistema Catrobat está dispoñible para ti, estas licenzas libres dos programas Catrobat autorizan á toda a comunidade a aprender do traballo creado por outros e adaptalo e remesturalo para construír os seus propios xogos, animacións e outros programas alucinantes. Isto permite que todos poidan apoiarse nos ombros dos seus colegas, ¡e un deles es ti! Polo tanto, o teu traballo beneficiará ao mundo enteiro e poderá ser empregado por todos, ao igual que os textos e imaxes aportados por voluntarios de todo o mundo á Wikipedia. Considérao un agasallo para a humanidade: regalas a todo o mundo, e todos os que soben o seu traballo ás nosas páxinas web regálanche a ti. Deste xeito, un programa subido é un agasallo de gran valor que o seu creador está entregándoche de maneira gratuíta coa condición de que ti participes na comunidade baixo os mesmos termos.'
+    item2: Non tes que aceptar o agasallo, pero, se o fas, aplicaranse certas normas. Os beneficios destas normas son que podes aprender do traballo doutros e desenrolalo para facer ti mesmo cousas máis chulas, e despois podes, por exemplo, subilas de novo como se foran propias ás nosas páxinas web. Outro beneficio é que estas licenzas aseguran que non serás responsable de ningún problema xurdido cando outros empreguen o teu programa.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
   list4:
@@ -169,11 +184,11 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Versión 1.3, 4 marzo de 2014
 help:
   stepByStep:
     title: "Step-by-Step Intro"
-    start: "Starting position:"
+    start: "Posición inicial:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
@@ -185,7 +200,7 @@ help:
         text1: 'Tap on "New".'
         text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
     step2:
-      title: "Create a new object"
+      title: "Crea un novo obxecto"
       detail:
         text1: 'Tap:'
         text2: 'Choose the source of the first look of your new object.'
@@ -427,6 +442,7 @@ errors:
     invalid: Your username is invalid
     exists: This username already exists.
     not_exists: This username does not exist.
+    not_email: The username must not be an email address.
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -557,6 +573,7 @@ admin:
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
   submitBox:

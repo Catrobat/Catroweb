@@ -24,16 +24,24 @@ less: 'mniej'
 ok: OK
 clickToDownloadProgram: 'Aby pobrać przykładowy program kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
+notifications: 'Powiadomienia'
+wellDone: "Świetnie!"
+done: "Gotowe!"
+notificationsReadMessage: "Przeczytałeś wszystkie powiadomienia."
+notificationsClearedMessage: "Wszystkie powiadomienia zostały oznaczone jako przeczytane."
+clearAllNotificationsButtonTitle: "Oznacz wszystkie jako przeczytane"
+notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Polecane
   newest: Najnowsze programy
+  recommended: Recommended programs
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
@@ -42,8 +50,12 @@ programs:
   downloads: '%downloads% pobrań'
   sample: Przykładowe programy
   views: '%views% odsłon'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  remixes: '{0}0 remiksów |{1}1 remiks |]1,Inf]%remixes% remiksów'
+  newRemixesNotificationTitle: '|{1}"%programName%" ma 1 nowy remiks: |]1,Inf] "%programName%" ma %remixes% nowych remiksów:'
   submitted: Przesłane programy
   uploaded: Przesłane programy
   reportAsInappropriate: Zgłoś jako niewłaściwe
@@ -65,12 +77,15 @@ programs:
   report: Zgłoś
   report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Zgłoszono
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'o'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
@@ -319,7 +334,7 @@ help:
     card10:
       title: "Pokaż zmienną"
       description: "Pokaż wartość zmiennej."
-      one: "Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które należy zmieni się po odebraniu wiadomości."
+      one: "Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które zmieni się po odebraniu wiadomości."
       two: "Wstaw poniższe bloczki, aby w zmiennych zapisać aktualne współrzędne położenia x i y poruszającego się obiektu."
       three: "Poprzez \"Pokaż zmienną\" można wyświetlać wartości w wybranym miejscu na scenie."
     card11:
@@ -423,6 +438,7 @@ errors:
     invalid: Twoja nazwa użytkownika jest nieprawidłowa
     exists: Ta nazwa użytkownika już istnieje.
     not_exists: Ta nazwa użytkownika nie istnieje.
+    not_email: The username must not be an email address.
   password:
     blank: Brakuje hasła.
     short: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
@@ -551,16 +567,17 @@ admin:
     createBackupConfirmationTitle: Tworzenie kopii zapasowej
     createBackupConfirmationText: Ten proces może trochę potrwać. Następnie strona zostanie odświeżona!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: Podobne programy
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: Prześlij swój projekt
   submitBox:
     header: Zgłoszenie
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    text: Masz zamiar wysłać swój projekt. Proszę wpisać kod projektu i kliknij wyślij.
+    btnText: Wyślij
   successful:
-    text: Your program upload was successful.
+    text: Program został wysłany pomyślnie.
   failed:
-    text: Program upload failed.
+    text: Przesyłanie programu nie powiodło się.
 codeview:
-  showText: Show code
+  showText: Pokaż kod

@@ -24,16 +24,24 @@ less: '少ない'
 ok: わかりました
 clickToDownloadProgram: 'サンプルのプログラムをダウンロードするには、%link_start% ここ %link_end% をクリックしてください。'
 registrationError: 'ユーザー名またはメール アドレスは、すでに使用されています。'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
+notifications: '通知'
+wellDone: "よくできました!"
+done: "完了!"
+notificationsReadMessage: "すべての通知を読んでいます。"
+notificationsClearedMessage: "すべての通知が、既読です。"
+clearAllNotificationsButtonTitle: "すべて既読にする"
+notificationsClearError: "通知を既読にできません!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: おすすめ
   newest: 最新のプログラム
+  recommended: Recommended programs
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
@@ -42,8 +50,12 @@ programs:
   downloads: '%downloads% ダウンロード'
   sample: サンプル プログラム
   views: '%views% ビュー'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  remixes: '{0}0 リミックス |{1}1 リミックス |]1,Inf]%remixes% リミックス'
+  newRemixesNotificationTitle: '|{1}"%programName%" は 1 つの新しいリミックスがあります: |]1,Inf] "%programName%" は %remixes% つの新しいリミックスがあります:'
   submitted: 提出されたプログラム
   uploaded: アップロードされたプログラム
   reportAsInappropriate: 不適切として報告します。
@@ -65,12 +77,15 @@ programs:
   report: 不適切として報告する
   report_popup: 正常にコメントを報告しました。
   report_popup_header: 報告済
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'によって'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
@@ -428,6 +443,7 @@ errors:
     invalid: あなたのユーザー名は有効ではありません
     exists: このユーザー名は既に存在します。
     not_exists: このユーザー名は存在しません。
+    not_email: The username must not be an email address.
   password:
     blank: パスワードがありません。
     short: 'パスワードは、少なくとも {{ limit }} 文字必要です。'
@@ -557,16 +573,17 @@ admin:
     createBackupConfirmationTitle: バックアップ ファイルを作成
     createBackupConfirmationText: このプロセスには時間がかかることがあります。その後、ページは再読み込みされます!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: 類似のプログラム
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: プロジェクトを送信
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: 送信
+    text: プロジェクトを送信しようとしています。プロジェクト コードを入力して、送信をクリックしてください。
+    btnText: 送信
   successful:
-    text: Your program upload was successful.
+    text: プログラムのアップロードに成功しました。
   failed:
-    text: Program upload failed.
+    text: プログラムのアップロードに失敗しました。
 codeview:
-  showText: Show code
+  showText: コードを表示

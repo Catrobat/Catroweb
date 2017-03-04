@@ -31,9 +31,17 @@ notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
+  recommended: Recommended programs
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -42,6 +50,10 @@ programs:
   downloads: '%downloads% ڈاؤن لوڈز'
   sample: نمونے کے پروگرام
   views: '%views% مرتبہ دیکھی'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: جمع شدہ پروگرام
@@ -65,12 +77,15 @@ programs:
   report: رپورٹ
   report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
   report_popup_header: اطلاعات کے مطابق
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
@@ -425,6 +440,7 @@ errors:
     invalid: آپکا صارف نام غلط ہے
     exists: یہ صارف نام پہلے سے موجود ہے۔.
     not_exists: یہ صارف نام موجود نہیں ہے.
+    not_email: The username must not be an email address.
   password:
     blank: خفیہ کوڈ موجود نہیں۔
     short: 'آپ کا خفیہ کوڈ کم از کم {{ limit }} حروف پر مشتمل ہونا چاہیئے۔'
@@ -555,6 +571,7 @@ admin:
     createBackupConfirmationText: اس عمل میں کچھ وقت لگ سکتا ہے ۔ بعد ازاں صفحہ دوبارہ لوڈ ہوجائے گا!
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
   submitBox:

@@ -31,9 +31,17 @@ notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: E përzgjedhur
   newest: Programet më të reja
+  recommended: Recommended programs
   most:
     viewed: Më të shikuarat
     downloaded: Më të shkarkuarat
@@ -42,6 +50,10 @@ programs:
   downloads: '%downloads% shkarkimet'
   sample: Programe për shembull
   views: '%views% shikime'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Programet e dorëzuara
@@ -65,12 +77,15 @@ programs:
   report: Raport
   report_popup: Komenti u raportua me sukses.
   report_popup_header: Raportuar
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'nga'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Rigjenerimi Fjalëkalimit tuaj
   message: |
@@ -428,6 +443,7 @@ errors:
     invalid: Emri përdoruesit nuk është valid
     exists: This username already exists.
     not_exists: This username does not exist.
+    not_email: The username must not be an email address.
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -558,6 +574,7 @@ admin:
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
   submitBox:
