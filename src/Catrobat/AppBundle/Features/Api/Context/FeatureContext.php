@@ -690,7 +690,13 @@ class FeatureContext extends BaseContext
         $responseArray = json_decode($response->getContent(), true);
         $returned_programs = $responseArray['CatrobatProjects'];
         $expected_programs = $table->getHash();
-        assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
+        /* // if you want to check which programs are missing use this
+        if (count($expected_programs) != count($returned_programs))
+        {
+          print_r($returned_programs);
+          assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
+        }
+        */
         for ($i = 0; $i < count($returned_programs); ++ $i) {
             assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
         }

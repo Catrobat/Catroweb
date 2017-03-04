@@ -17,6 +17,8 @@ var ProgramLoader = function (container, url, column_max, recommended_by_program
   self.showAllPrograms = false;
   self.windowWidth = $(window).width();
   self.query = "";
+  self.searchTerms = Object(null);
+  self.programsFound = 0;
 
   self.init = function() {
     self.setParamsWithSessionStorage(); // sets self.prev_visible and self.initial_download_liit
@@ -70,10 +72,43 @@ var ProgramLoader = function (container, url, column_max, recommended_by_program
         searchResultsText.find('span').text(0);
         return;
       }
+      console.log(data);
       searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects);
+      self.programsFound = data.CatrobatInformation.TotalProjects;
       self.setup(data);
       self.showMorePrograms();
       self.searchPageLoadDone = true; // fix for search.feature: 'I press enter "#searchbar"'
+    });
+  };
+
+  self.repeatableSearch = function(search_term) {
+    self.query = search_term;
+    var current_loaded = 0;
+    if (search_term in self.searchTerms)
+    {
+      current_loaded = self.searchTerms[search_term];
+    }
+    else
+    {
+      self.searchTerms[search_term] = 0;
+    }
+    $.get(self.url, { q: search_term, limit: self.download_limit*2, offset: current_loaded }, function(data) {
+        var searchResultsText = $('#search-results-text');
+        if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
+          if (self.programsFound == 0)
+          {
+              searchResultsText.addClass('no-results');
+              searchResultsText.find('span').text(0);
+              return;
+          }
+          return;
+        }
+        self.programsFound += data.CatrobatInformation.TotalProjects;
+        self.searchTerms[search_term] += data.CatrobatInformation.TotalProjects;
+        searchResultsText.find('span').text(self.programsFound);
+        self.setup(data);
+        self.showMorePrograms();
+        self.searchPageLoadDone = true; // fix for search.feature: 'I press enter "#searchbar"'
     });
   };
 

@@ -309,23 +309,69 @@ class ProgramRepository extends EntityRepository
         return array_map(function ($data) { return $data['id']; }, $result);
     }
 
+    public function getAppendableSqlStringForEveryTerm($search_terms, $metadata)
+    {
+      $sql = '';
+      $parameter_index = 0;
+      $i = 1;
+      $end = count($metadata);
+
+      foreach ($search_terms as $search_term)
+      {
+        $parameter = ":st" . $parameter_index;
+        $parameter_index++;
+        $tag_string = '';
+        foreach ($metadata as $language) {
+          if ($i == $end) {
+            $tag_string .= '(t.' . $language . ' LIKE '. $parameter . ')';
+          } else {
+            $tag_string .= '(t.' . $language . ' LIKE '. $parameter . ') OR ';
+          }
+          $i++;
+        }
+        $i = 1;
+
+
+        $sql .= "OR 
+          ((e.name LIKE " . $parameter . " OR
+          f.username LIKE " . $parameter . " OR
+          e.description LIKE " . $parameter . " OR
+          x.name LIKE " . $parameter . " OR
+          " . $tag_string . " OR
+          e.id = " . $parameter . "int" . ") AND
+          e.visible = true AND
+          e.private = false) ";
+      }
+      return $sql;
+    }
+
     public function search($query, $limit = 10, $offset = 0)
     {
         $em = $this->getEntityManager();
         $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
         array_shift($metadata);
 
-        $searchterm = '';
+        $query_addition_for_tags = '';
         $i = 1;
+        $end = count($metadata);
 
         foreach ($metadata as $language) {
-            if ($i == count($metadata)) {
-                $searchterm .= '(t.' . $language . ' LIKE :searchterm)';
+            if ($i == $end) {
+                $query_addition_for_tags .= '(t.' . $language . ' LIKE :searchterm)';
             } else {
-                $searchterm .= '(t.' . $language . ' LIKE :searchterm) OR ';
+                $query_addition_for_tags .= '(t.' . $language . ' LIKE :searchterm) OR ';
             }
             $i++;
         }
+
+      $search_terms = explode(" ", $query);
+      $appendable_sql_string = '';
+      $more_than_one_search_term = false;
+      if (count($search_terms) > 1)
+      {
+        $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms, $metadata);
+        $more_than_one_search_term = true;
+      }
 
         $dql = "SELECT e,
           (CASE
@@ -349,7 +395,7 @@ class ProgramRepository extends EntityRepository
             ELSE 0
           END) +
           (CASE
-            WHEN ($searchterm) THEN 7
+            WHEN ($query_addition_for_tags) THEN 7
             ELSE 0
           END)
           AS weight
@@ -358,22 +404,34 @@ class ProgramRepository extends EntityRepository
         LEFT JOIN e.tags t
         LEFT JOIN e.extensions x
         WHERE
-          (e.name LIKE :searchterm OR
+          ((e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
           x.name LIKE :searchterm OR
-          $searchterm OR
+          $query_addition_for_tags OR
           e.id = :searchtermint) AND
           e.visible = true AND
-          e.private = false
+          e.private = false) " . $appendable_sql_string . "
         ORDER BY weight DESC, e.uploaded_at DESC
       ";
         $qb_program = $this->createQueryBuilder('e');
         $q2 = $qb_program->getEntityManager()->createQuery($dql);
         $q2->setFirstResult($offset);
         $q2->setMaxResults($limit);
-        $q2->setParameter('searchterm', '%'.$query.'%');
+        $q2->setParameter('searchterm', '%' . $query . '%');
         $q2->setParameter('searchtermint', intval($query));
+        if ($more_than_one_search_term)
+        {
+          $parameter_index = 0;
+          foreach ($search_terms as $search_term)
+          {
+            $parameter = ":st" . $parameter_index;
+            $parameter_index++;
+            $q2->setParameter($parameter, '%' . $search_term . '%');
+            $q2->setParameter($parameter . 'int', intval($search_term));
+          }
+        }
+
         $result = $q2->getResult();
 
         return array_map(function ($element) {return $element[0];}, $result);
@@ -386,10 +444,19 @@ class ProgramRepository extends EntityRepository
         $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
         array_shift($metadata);
 
-        $searchterm = '';
+        $query_addition_for_tags = '';
         foreach ($metadata as $language) {
-            $searchterm .= 't.' . $language . ' LIKE :searchterm OR ';
+            $query_addition_for_tags .= 't.' . $language . ' LIKE :searchterm OR ';
         }
+
+      $search_terms = explode(" ", $query);
+      $appendable_sql_string = '';
+      $more_than_one_search_term = false;
+      if (count($search_terms) > 1)
+      {
+        $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms, $metadata);
+        $more_than_one_search_term = true;
+      }
 
         $qb_program = $this->createQueryBuilder('e');
         $dql = "SELECT e.id
@@ -398,18 +465,30 @@ class ProgramRepository extends EntityRepository
         LEFT JOIN e.tags t
         LEFT JOIN e.extensions x
         WHERE
-          (e.name LIKE :searchterm OR
+          ((e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
           x.name LIKE :searchterm OR
-          $searchterm
+          $query_addition_for_tags
           e.id = :searchtermint) AND
-          e.visible = true
+          e.visible = true AND 
+          e.private = false) " . $appendable_sql_string . "
           GROUP BY e.id
       ";
         $q2 = $qb_program->getEntityManager()->createQuery($dql);
-        $q2->setParameter('searchterm', '%'.$query.'%');
+        $q2->setParameter('searchterm', '%' . $query . '%');
         $q2->setParameter('searchtermint', intval($query));
+        if ($more_than_one_search_term)
+        {
+          $parameter_index = 0;
+          foreach ($search_terms as $search_term)
+          {
+            $parameter = ":st" . $parameter_index;
+            $parameter_index++;
+            $q2->setParameter($parameter, '%' . $search_term . '%');
+            $q2->setParameter($parameter . 'int', intval($search_term));
+          }
+        }
         $result = $q2->getResult();
         return count($result);
     }
