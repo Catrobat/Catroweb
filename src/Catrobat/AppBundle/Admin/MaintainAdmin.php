@@ -18,6 +18,8 @@ class MaintainAdmin extends Admin
             ->add("extracted")
             ->add("delete_backups")
             ->add("create_backup")
-            ->add("restore_backup");
+            ->add("restore_backup")
+            ->add("archive_logs")
+            ->add("delete_logs");
     }
 }
