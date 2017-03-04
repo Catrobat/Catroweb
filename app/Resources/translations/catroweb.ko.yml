@@ -24,16 +24,24 @@ less: '적은'
 ok: 확인
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
 registrationError: '이미 사용 중인 사용자 이름 또는 이메일 주소입니다.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
+notifications: '알림'
+wellDone: "완료!"
+done: "끝!"
+notificationsReadMessage: "모든 알림을 읽으셨습니다."
+notificationsClearedMessage: "모든 알림이 읽은 상태로 표시되었습니다."
+clearAllNotificationsButtonTitle: "모두 읽음으로 표시"
+notificationsClearError: "알림을 읽음으로 표시할 수 없습니다!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: 추천
   newest: 최신 프로그램
+  recommended: Recommended programs
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 가장 많이 다운로드한 프로그램
@@ -42,6 +50,10 @@ programs:
   downloads: '%downloads% 다운로드'
   sample: 예제 프로그램
   views: '%views% 조회'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: 제출된 프로그램
@@ -65,12 +77,15 @@ programs:
   report: 보고서
   report_popup: 코멘트가 성공적으로 추가 되었습니다.
   report_popup_header: 보고되었습니다
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: '만큼'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
@@ -421,6 +436,7 @@ errors:
     invalid: 사용자 이름이 올바르지 않습니다.
     exists: 이름이 이미 존재합니다.
     not_exists: 사용자 이름이 존재하지 않습니다.
+    not_email: The username must not be an email address.
   password:
     blank: 암호가 없습니다.
     short: '새 암호는 적어도 %length% 문자 이상이어야 합니다.'
@@ -549,16 +565,17 @@ admin:
     createBackupConfirmationTitle: 백업 파일 만들기
     createBackupConfirmationText: 이 프로세스는 시간이 걸릴 수 있습니다. 페이지는 나중에 다시 로드됩니다!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: 유사한 프로그램
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: 프로그램을 제출하세요
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: 제출
+    text: 프로그램을제출하려고 합니다. 프로그램 코드를 입력하고 보내기를 클릭 하십시오.
+    btnText: 제출하기
   successful:
-    text: Your program upload was successful.
+    text: 프로그램 업로드에 성공했습니다.
   failed:
-    text: Program upload failed.
+    text: 프로그램 업로드하지 못했습니다.
 codeview:
-  showText: Show code
+  showText: 코드 표시

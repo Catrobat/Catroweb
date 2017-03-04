@@ -24,16 +24,24 @@ less: 'meno'
 ok: Va bene
 clickToDownloadProgram: 'Per scaricare il programma di esempio, fare click su %link_start% questo %link_end% link.'
 registrationError: 'Nome utente o indirizzo email già in uso.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
+notifications: 'Notifiche'
+wellDone: "Ottimo lavoro!"
+done: "Fatto!"
+notificationsReadMessage: "Hai letto tutte le notifiche."
+notificationsClearedMessage: "Tutte le notifiche sono state segnate come lette."
+clearAllNotificationsButtonTitle: "Segna tutte come già lette"
+notificationsClearError: "Impossibile segnare le notifiche come lette!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: In evidenza
   newest: Programmi più recenti
+  recommended: Recommended programs
   most:
     viewed: Il più visto
     downloaded: Il più scaricato
@@ -42,8 +50,12 @@ programs:
   downloads: '%downloads% download'
   sample: Programmi di esempio
   views: '%views% visualizzazioni'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  remixes: '{0}0 remixes |{1}1 remix |] 1, Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1} "%programName%" ha 1 nuovo remix: |] 1, Inf] "%programName%" ha %remixes% nuovi remix:'
   submitted: Programmi inviati
   uploaded: Programmi caricati
   reportAsInappropriate: Segnala come inappropriato
@@ -65,12 +77,15 @@ programs:
   report: Report
   report_popup: Il commento è stato segnalato correttamente.
   report_popup_header: Segnalato
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'di'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -427,6 +442,7 @@ errors:
     invalid: Il nome utente non è valido
     exists: Il nome utente esiste già.
     not_exists: Il nome utente non esiste.
+    not_email: The username must not be an email address.
   password:
     blank: Manca la password.
     short: 'La tua password deve avere almeno {{ limit }} caratteri.'
@@ -555,16 +571,17 @@ admin:
     createBackupConfirmationTitle: Crea file di backup
     createBackupConfirmationText: Questo processo potrebbe durare un po' di tempo. La pagina verrà ricaricata a breve!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: Programmi simili
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: Invia il tuo progetto
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: Invio
+    text: Si sta per inviare il progetto. Si prega di inserire il codice del progetto e fare clic su Invia.
+    btnText: Invia
   successful:
-    text: Your program upload was successful.
+    text: Il caricamento del programma è avvenuto con successo.
   failed:
-    text: Program upload failed.
+    text: Caricamento fallito.
 codeview:
-  showText: Show code
+  showText: Mostra codice

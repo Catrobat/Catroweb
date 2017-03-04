@@ -31,19 +31,17 @@ notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
-pleaseWait: "Bitte warten..."
-
+pleaseWait: "Please wait..."
 indexPage:
   recommendedSection:
     info:
-      title: 'Was sind interessante Programme?'
-      description_B_VersionTest: 'Je mehr Remixe dein Programm hat, umso interessanter wird dein Programm.'
-      description_C_VersionTest: 'Je mehr "Gefällt mir" Bewertungen (dazu zählen "Daumen hoch", "Lächeln", "Lieben" und "Woow!") dein Programm erhält, umso interessanter wird dein Programm.'
-
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Empfohlen
-  recommended: Interessante Programme
   newest: Neueste Programme
+  recommended: Recommended programs
   most:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
@@ -79,15 +77,15 @@ programs:
   report: Melden
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
-remixgraph:
-  showRemixGraph: 'Remix Graph anzeigen'
-  by: 'von'
-  open: 'Öffnen'
-  showPaths: 'Wege anzeigen'
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
+  by: 'um'
+  open: 'Open'
+  showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
-  programNotAvailable: 'Nicht verfügbar'
-  programUnknownUser: 'Unbekannter User'
+  programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -441,6 +439,7 @@ errors:
     invalid: Dein Benutzername ist ungültig
     exists: Dieser Benutzername existiert bereits.
     not_exists: Dieser Benutzername existiert nicht.
+    not_email: The username must not be an email address.
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
@@ -570,7 +569,7 @@ admin:
     createBackupConfirmationText: Dieser Vorgang kann eine Weile dauern. Die Seite wird danach neu geladen!
 recommender:
   similarPrograms: Ähnliche Programme
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: User, die dieses Programm heruntergeladen haben, haben auch folgende Programme heruntergeladen
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Projekt abgeben
   submitBox:

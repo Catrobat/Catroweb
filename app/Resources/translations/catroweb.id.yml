@@ -31,9 +31,17 @@ notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Fitur
   newest: Program terbaru
+  recommended: Recommended programs
   most:
     viewed: Paling banyak dilihat
     downloaded: Paling banyak diunduh
@@ -42,6 +50,10 @@ programs:
   downloads: '%downloads% unduhan'
   sample: Contoh Program
   views: '%views% dilihat'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Program yang Diajukan
@@ -65,12 +77,15 @@ programs:
   report: Laporkan
   report_popup: Komentar berhasil dilaporkan.
   report_popup_header: Telah dilaporkan
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'oleh'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
@@ -428,6 +443,7 @@ errors:
     invalid: Nama pengguna tidak sah
     exists: Nama pengguna ini sudah ada.
     not_exists: Nama pengguna ini tidak ada.
+    not_email: The username must not be an email address.
   password:
     blank: Kata sandi hilang.
     short: 'Password Anda harus memiliki setidaknya {{ limit }} karakter.'
@@ -558,6 +574,7 @@ admin:
     createBackupConfirmationText: Proses ini mungkin memakan waktu cukup lama. Halaman akan kembali sesudahnya!
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
   submitBox:

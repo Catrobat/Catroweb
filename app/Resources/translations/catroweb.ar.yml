@@ -1,5 +1,5 @@
 ---
-localLanguage: English
+localLanguage: اللغة الإنجليزية
 username: اسم المستخدم
 password: كلمة المرور
 aboutPocketCode: حول تطبيق الرسام
@@ -7,7 +7,7 @@ tutorials: دروس للتعلم
 googlePlay: متجرجوجل
 passwordsNoMatch: لا تتطابق كلمات المرور.
 error: خطأ
-cancel: موافق
+cancel: إلغاء
 report: تقرير
 download: تحميل
 description: الوصف
@@ -16,87 +16,102 @@ country: البلد
 loginText: تسجيل الدخول
 privacyPolicy: سياسة الخصوصية
 imprint: بصمة
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
+somethingWentWrong: 'عذرا, هنالك شيء خاطئ.'
+pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
+oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
 less: 'أقل'
 ok: موافق
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
+clickToDownloadProgram: 'لتحميل مثال عن البرنامج اضغط %link_start% هنا %link_end%.'
+registrationError: 'اسم المستخدم أو عنوان البريد الإلكتروني قيد الاستخدام بالفعل.'
+notifications: 'الاشعارات'
+wellDone: "أحسنت صنعاً!"
+done: "تم!"
+notificationsReadMessage: "ليس لديك أي تنبيهات جديدة."
+notificationsClearedMessage: "جميع التنبيهات تم تحديدها كـ مقروءة."
+clearAllNotificationsButtonTitle: "تحديد الكل كمقروء"
+notificationsClearError: "غير قادر على تحديد الإشعارات كـ مقروءة!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: خصائص
   newest: أحدث البرامج
+  recommended: Recommended programs
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
   random: برامج عشوائية
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
-  reportAsInappropriate: تقرير غير مناسب
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this program as inappropriate.
+  related: برامج ذات صلة
+  downloads: '%downloads% التحميلات'
+  sample: أمثلة عن البرامج
+  views: '%views% المشاهدات'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  remixes: '{0}0 رِمكسات(عناصر مُدمجة)|{1}1 رِمكس(عنصر مُدمج)|]1,Inf]%remixes% رِمكسات(عناصر مُدمجة)'
+  newRemixesNotificationTitle: '|{1}"%programName%" يتكون من عنصر مُدمج واحد: |]1,Inf] "%programName%" يتكون من %remixes% عناصر مُدمجة جديدة:'
+  submitted: برامج مقترحة
+  uploaded: برامج مُحملة
+  reportAsInappropriate: تبليغ كـ محتوى غير مناسب
+  languageVersion: 'إصدار لغة كاتروبات: %languageVersion%'
+  reportLoginText: الرجاء%login% للابلاغ عن هذا البرنامج كـ غير لائق.
   reportDialogHeader: لماذا تعتقد أن هذا البرنامج غير مناسب؟
   reportDialogReason: أدخل السبب
   reportOwnProgram: لا يمكنك وضع علامة للبرنامج الخاص بك.
   reportAlready: لقد قمت بتأشير علامة على هذا البرنامج بأنه غير مناسب.
   reportDone: لقد قمت بالابلاغ بأن هذا البرنامج غير مناسب !
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  updateAppHeader: تحديث التطبيق
+  updateAppText: الرجاء تحديث التطبيق الخاص بك الإصدار الأحدث لتتمكن من تحميل هذا البرنامج.
+  btnClosePopup: موافق
+  checkout_this_program: تفحص هذا البرنامج
+  show_more: مشاهدة المزيد
+  comments: التعليقات
+  send: أرسل
   delete: حذف
   report: تقرير
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-remixgraph:
+  report_popup: تم الإبلاغ بنجاح عن التعليق.
+  report_popup_header: تم الإبلاغ
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'إلى'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: استعادة كلمة سر كاتروبات الخاصة بك
   message: |
-    Dear %username%.
+    عزيز(ت) ي %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    لقد تقدمت بطلب لتغيير كلمة السر الخاصة بك على %appplication_url% لأنك ربما تكون قد نسيتها. إذا لم تقم بذلك, يرجى تجاهل هذه الرسالة, سوف تنتهي صلاحيتها وتصبح عديمة الفائدة خلال مدة 24 ساعة.
+    لإعادة تعيين كلمة السر الخاصة بك, يرجى زيارة الرابط التالي: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    يمكنك دوماً استخدام اسم المستخدم وكلمة السر الخاصين بك للولوج إلى مجتمعنا %appplication_url%.
+    للقيام بذلك, يرجى زيارة الرابط التالي: %loginPage%
+    لتعديل بيانات ملفك الشخصي, قم بالذهاب الى الرابط التالي: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    أطيب التحيات,
+    فريق كاتروبات.
 profile:
   saveChanges: حفظ التغييرات؟
-  newPass: new password
-  repeatPass: repeat password
+  newPass: كلمة المرور الجديدة
+  repeatPass: تكرار كلمة المرور
   firstEmail: بريدي الإلكتروني الأول
   secondEmail: البريد الإلكتروني الثاني الخاص بي
-  myPrograms: My programs
+  myPrograms: البرامج الخاصة بي
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
+    passwordTooShort: كلمة السر الجديدة يجب أن تحتوي على الأقل %length% أحرف.
+    passwordTooLong: كلمة السر الجديدة يجب أن تكون على الأكثر %length% أحرف.
     passwordIsUsername: كلمة المرور يجب أن تختلف عن اسم المستخدم.
-    passwordWrong: Wrong password
+    passwordWrong: كلمة سر خاطئة
     emailNotValid: البريد الإلكتروني خطأ.
     emailMissing: حدث خطأ أثناء تحديث عنوان البريد الإلكتروني هذا. يجب أن يكون لديك على الأقل عنوان بريد إلكتروني  صحيح.
     emailExists: عنوان البريد الإلكتروني هذا موجود بالفعل.
@@ -109,16 +124,16 @@ profile:
     uploadError: عذراً، هناك مشكلة أثناء التحميل!
     noSupport: هذا النوع من الصور غير معتمد، الرجاء محاولة صورة أخرى.
 myprofile:
-  editProfile: Edit profile
+  editProfile: تحرير الملف الشخصي
   edit: تحرير
   done: موافق
-  avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  avatar: الصورة الرمزية
+  email: البريد الإلكتروني
+  editAvatar: تحرير الصورة الرمزية
+  editUsername: تعديل اسم المستخدم
+  editPassword: تغيير كلمة المرور
+  editCountry: تحرير البلد
+  editEmail: تعديل البريد الالكتروني
 licenseToPlay:
   link: 'ترخيص لتشغيل'
   title: 'ترخيص للتشغيل--منح الائتمان والمشاركة'
@@ -134,8 +149,8 @@ licenseToPlay:
   version: الإصدار 1، 1، 2 أبريل 2013
 teachers:
   login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+    title: 'نطاق المعلمين'
+    description: 'هذا النطاق يمكن أن يستخدمه فقط المعلمون.'
 termsOfUse:
   title: شروط الاستخدام
   headline: مرحبا بكم في بيئة كاتروبات!
@@ -177,38 +192,37 @@ help:
     title: "مقدمة خطوة بخطوة"
     start: "موضع البداية:"
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      هنا تستطيع إنشاء برنامجك الأول, بطاقات بريدية تفاعلية مستخدماً الفيديوهات التفصيلية التالية.
+      يجب عليك اتباع التعليمات المعطاة لك. أثناء عملية إنشاء البطاقات البريدية, الأساسيات التي تحتاجها لصنع مشاريعك المستقبلية على "بوكت كوود" باستخدام لغة كاتروبات.
+      بعد هذه الفيديوهات التعليمية, معظم باقي الأنشطة سوف تمنحك المزيد من الحرية لإنشاء مشاريعك الشخصية الخاصة على "بوكت كوود".
     step1:
-      title: 'Make a new program'
+      title: 'إنشاء برنامج جديد'
       detail:
         text1: 'اضغط على "جديد".'
         text2: 'قم بإدخال اسم البرنامج، حدد "إنشاء البرنامج فارغة" واضغط على "موافق".'
     step2:
-      title: "Create a new object"
+      title: "إنشاء كائن جديد"
       detail:
         text1: 'اضغط على:'
-        text2: 'Choose the source of the first look of your new object.'
-        text3: 'Enter an object name and tap "OK" to create the object.'
+        text2: 'اختر مصدر أول مظهر للكائن الجديد الخاص بك.'
+        text3: 'ادخل اسم الكائن واضغط على " موافق" لإنشاء الكائن.'
         special1: 'أرسم مظهر جديد.'
         special2: 'اختر من المعرض.'
         special3: 'التقاط صورة.'
     step3:
-      title: "Start Moving"
+      title: "بدء الحركة"
       detail:
         text1: 'اضغط على:'
         text2: 'أول طوبة نستخدم هي خارج فئة "الحركة".'
         text3: 'اختر الطوب "المنزلق". سيتم نقل الكائن إلى الموضع الجديد المعرف بطوبة في المرحلة.'
         text4: 'يتحرك الآن الطوب. للصقه، أنقل الطوب إلى الموضع المطلوب. يمكنك أيضا نقل الطوب الذي تم إدراجه مسبقاً بالضغط على الطوبة  حتى تتحرك مرة أخرى.'
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
+        text5: 'انقر على "تشغيل" للذهاب إلى المرحلة ورؤية الكائن وهو ينزلق.'
         text6: 'استخدم "الزر الخلفي  لأندرويد" للعودة من المرحلة.'
     step4:
       title: "تغيير مظهر"
       description: "يمكنك تغيير مظهر الكائن الخاص بك."
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
+        text1: 'اختر طوبة "التبديل للمظهر". مع هذه الطوبة يمكنك اختيار مظهر أو إنشاء مظهر جديد.'
         text2: 'انجذاب الطوب تحت "الانزلاق"-الطوب.'
         text3: 'انقر فوق القائمة المنسدلة للحقل لإنشاء مشهد جديد.'
         text4: 'اختر مصدر الصورة .'
@@ -218,46 +232,46 @@ help:
       title: "تَحدّث"
       description: "الآن سوف تجد كيف يمكنك جعل الكائن يتحدث."
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text1: 'اختر طوبة "الكلام". الكائن سوف يقرأ النص, عندما يتم تنفيذ الطوبة.'
         text2: 'انجذاب الطوبة تحت "التبديل للمشهد" للطوبة.'
         text3: 'انقر فوق تشغيل لمشاهدة السلوك على المنصة.'
     step6:
-      title: 'Again and again'
+      title: 'مراراً وتكراراً'
       description: "هذه الخطوة توضح لك كيفية تكرار سلوك الكائنات."
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
+        text1: 'اختر الطوب "إلى الأبد". كل شيء في الحلقة سوف يُكرر إلى الأبد.'
         text2: 'انجذاب الطوب "إلى الأبد" تحت "عند بدء تشغيل برنامج"--الطوب.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
+        text3: 'إضافة آخر طوبة "الانزلاق".'
+        text4: 'التقط طوبة "الانزلاق" وقم بتغيير موضعها أعلى طوبة "نهاية حلقة التكرار".'
         text5: 'انقر في حقل النص x والقيمة y وتعيينها إلى 0.'
         text6: 'انقر فوق تشغيل لمشاهدة السلوك على المنصة.'
     step7:
-      title: "Tapping is everything"
+      title: "النقر كل شيء"
       description: 'يمكنك أيضا التحكم في سلوك الكائن عندما يتم تشغيل البرنامج في المرحلة.'
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
+        text1: 'اختر طوبة"عند النقر". كل طوبة اسفلها سوف يتم تنفيذها مرة واحدة عندما تنقر على الكائن في المرحلة.'
+        text2: 'قم بتغيير موضع طوبة "عند النقر" تحت الطوبات الأُخرى.'
+        text3: 'قم باختيار طوبة "تشغيل الضوء" و ثبتها اسفل طوبة "عند النقر".'
         text4: 'الآن لديك هذا البرنامج النصي.'
         text5: 'انقر فوق تشغيل لمشاهدة السلوك في المرحلة. إذا كنت تضغط الأن على الكائن، فإنه يدور.'
     step8:
-      title: "Copy, delete or edit a brick"
+      title: "نسخ, حذف او تعديل طوبة"
       detail:
         text1: 'ضغطه واحدة على الجانب الأيسر من كل طوبة يفتح قائمة السياق. يمكنك نقل، نسخ، حذف أو تحرير قيم الطوب بإستخدام محرر الصيغة.'
     step9:
-      title: "Navigation in the app"
+      title: "التنقل في التطبيق"
       detail:
         text1: 'استخدم "الزر الخلفي لأندرويد" للتنقل في التطبيق.'
         text2: 'العودة بشاشة واحدة للإطلاع على للكائن الخاص بك. هنا يمكنك الذهاب إلى البرامج النصية، وأيضا لتمثيل قوي لمشاهد واصوات الكائن. يمكنك إعادة تسمية، نسخ إضافة أو حذف مشاهد وأصوات.'
         text3: 'استخدم "الزر الخلفي لأندرويد" مرة أخرى للحصول على نظرة عامة حول الكائنات الخاصة بك والخلفية الخاصة بك.'
     step10:
-      title: "Change the background"
+      title: "تغيير الخلفية"
       description: "هذه هي نظرة عامة على الكائنات الخاصة بك والخلفية ويعتمد على برنامج واحد."
       detail:
         text1: 'الخلفية مثل كائن، ولكن يمكنك فقط الحصول على الخلفية.'
         text2: 'يمكنك إضافة البرامج النصية، الأصوات ومناظر بنفس الطريقة إلى كائن الخلفية.'
     step11:
-      title: "Main Menu"
+      title: "القائمة الرئيسية"
       description: "استخدم \"الزر الخلفي  لأندرويد\" للحصول على هذه الشاشة."
       detail:
         text1: 'إستمر مع برنامجك المفتوح حاليا.'
@@ -270,73 +284,73 @@ help:
     title: "دروس للتعلم"
     description1: "هذه الدروس تظهر لك كيفية استخدام الحيل الفعالة في"
     getReady: "استعد:"
-    tryCode: "Try this code:"
+    tryCode: "جرب هذا النص البرمجي:"
     doIt: "افعلها:"
     tip: "نصيحة إضافية:"
     card1:
       title: "تغيير الحجم"
       description: "اضغط على البطة لتغيير الحجم."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      one: "قم بإضافة الكائن الذي ترغب بتغيير حجمه, مثلاً حيوان."
+      two: "قم بإدراج الطُوب التالية ضمن السكريبت الخاص بالعنصر بغية التقليل إلى الحد الأدنى (بنسبة 20% من الحجم الأصلي) عند النقر."
     card2:
       title: "تغيير مظهر"
       description: "استخدام هذه الحيلة للعد تلقائياً."
-      one: "Add the object of which you would like to change its look, e.g. items."
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      one: "قم بإضافة الكائن الذي ترغب بتغيير مظهره, مثال عنصر."
+      two: "قم بإدراج العديد من الصور داخل طوبة مظهر العنصر."
+      three: "قم بإدراج الطُوب التالية ضمن سكريبت الكائنات من أجل التبديل المستمر لمظهرها كل ثانية."
     card3:
       title: "تحريك الرسوم المتحركة"
       description: "استخدم هذه الحيلة عندما تريد ببغاء يطير."
-      one: "Add the object you want to be moving."
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      one: "قم بإضافة الكائن الذي تريد تحريكه."
+      two: "قم بإدراج صورة أُخرى ضمن طوبة مظهر الكائن بحيث توضح الحركة."
+      three: "قم بإدراج الطُوب التالية ضمن سكريبت الكائن من أجل التبديل المستمر لموضع الكائن بعد فترة معينة من الزمن. بالإضافة إلى ذلك يمكنك تحديد هوامش المرحلة لدى الارتداد عند الجوانب."
     card4:
       title: "إنزلق خلال"
       description: "الانتقال بسلاسة من نقطة واحدة إلى أخرى."
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
+      one: "قم بإضافة الكائن الذي تريد انزلاقه, مثلاً طائرة."
+      two: "قم بإضافة الطُوب التالية وقم بتحديد مجال الحركة لها."
     card5:
       title: "شغل الصوت"
-      description: "Play a sound by tapping on the object."
-      one: "Add the object you want to be playing a sound, e.g. dog."
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+      description: "تشغيل صوت عند النقر على العنصر."
+      one: "قم بإضافة العنصر الذي تريده, ليتم تشغيل صوت عند النقر عليه, مثلاً كلب."
+      two: "قم بإضافة الطُوب التالية حتى تجعل عملية الإعادة ممكنة. قم بإختيار ملف صوتي من مكتبتك الشخصية, مكتبة الوسائط الخاصة بـ\"بوكت كوود\" أو قم بتسجيل ملف صوتي جديد."
     card6:
       title: "تحدث بشيء"
       description: "استخدم هذه التعليمة البرمجية لجعل الكائن يتحدث."
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
+      one: "قم بإضافة الكائن الذي تريده ان يتكلم, مثلاً كاري."
+      two: "قم بإدراج الطُوب التالية من أجل تمكين الإخراج الصوتي."
     card7:
       title: "جسينسور"
       description: "استخدام هذه الحيلة للتحكم في الكائن مع الميل للجهاز الخاص بك."
-      one: "Add the object you want to be moving on stage."
-      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
+      one: "قم بإضافة الكائن الذي تريده ليتم تحريكه في المرحلة."
+      two: "قم بإدراج الطُوب التالية من أجل التحكم بالكائنات من خلال أجهزة استشعار الهاتف.\nثم قم باختيار \"احداثيات الميل س و ص\". للحصول على حركة مناسبة, قم بتعيين \"الميل\".\nاذا كانت حركة الكائنات حساسة جداً, قم بتقسيم قيمة الميل مثلاً على 10."
     card8:
       title: "بوصلة"
       description: "استخدم هذه التعليمة البرمجية لإنشاء بوصلة."
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      one: "قم بإضافة الكائن الذي تريده لأجل توجيهه في اتجاه البوصلة."
+      two: "قم بإدراج الطُوب التالية لأجل تعيين اتجاه الكائن. بالإضافة لذلك قم بتضمين حلقة تكرار متواصلة."
     card9:
       title: "بث رسالة"
       description: "انظروا إلى هذا الرمز! يوضح لك كيفية التواصل بين الكائنات."
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
+      one: "قم بإضافة كائن جديد, الذي ينبغي أن يرسل رسالة بث, مثل أليس. بالإضافة إلى ذلك, قم بإضافة خلفية ثانية إلى طوبة مناظر الخلفية. حالما تتلقى الخلفية رسالة البث سوف تتغير إلى منظر آخر."
+      two: "قم بإدراج طوبة \"ارسال للكل\" وقم بتحديد ما ينبغي حدوثه عندما تتلقى باقي العناصر الرسالة."
+      three: "في هذه الحالة سوف تتغير الخلفية عندما يتم النقر على الكائن الموجود في الطبقة الأمامية."
     card10:
       title: "إظهار متغير"
-      description: "Show the value of a variable."
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
+      description: "إظهار قيمة المتغير."
+      one: "قم بإضافة الكائن الذي تريد تحريكه خلال أجهزة استشعار هاتفك (القي نظرة على %tutorial_card_link_7% البطاقة التعليمية السابعة %link_end%). بالإضافة إلى ذلك, قم بإضافة خلفية ثانية التي يجب أن تتغير عندما تتلقى رسالة البث."
+      two: "قم بإضافة الطُوب التالية من أجل حفظ قيمة إحداثيات س و ص للكائن المتحرك في متغير."
+      three: "من خلال طوبة \"عرض المتغير\" يمكنك إظهار قيمة المتغير في المرحلة."
     card11:
-      title: "Collision detection"
-      description: "Detect a collision between two objects."
-      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+      title: "اكتشاف التصادم"
+      description: "اكتشاف التصادم بين كائنين."
+      one: "قم بإضافة كائنين اثنين, واحد منهما ينبغي ان تتم حركته عبر أجهزة استشعار هاتفك, مثلاً أليس (قم بإلقاء نظرة على %tutorial_card_link_7% البطاقة التعليمية السابعة %link_end%)."
+      two: "قم بحفظ \"الاحداثيات الحالية س و ص\" للعنصر المتحرك أليكس (قم بإلقاء نظرة على %tutorial_card_link_10% البطاقة التعليمية العاشرة %link_end%) ثم قم بإدراج السكريبتات التالية. التحقق بشكل دائم ما إذا تم تشابك العنصرين. اذا تم التشابك يجب أن يكون الكائن المثبت مخفي عند هذه الحالة."
     card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
+      title: "اكتشاف الوجه"
+      description: "التحكم بكائن باستخدام خاصية اكتشاف الوجه."
+      one: "أولاً قم بالتأكد من تفعيل طوبة إكتشاف الوجه. ثم انتقل إلى الإعدادات."
+      two: "قم بإضافة كائن جديد وقم بإدراج الطُوب التالية من أجل إظهارها في حال تم اكتشاف الوجه. قم بالتحقق من أنه تم اكتشاف الوجه وقم بوضع الكائن الجديد ضمن حلقة تكرار متواصلة. اذا الكاميرا تتعرف على وجه ستكون القيمة عندها \"TRUE\" خلافاً لذلك ستكون القيمة \"FALSE\"."
   starterPrograms:
     title: "البرامج المبدئة"
     description: "جرب هذه البرامج المبتدئة. انظر من الداخل للقيام بإجراء تغييرات وإضافة الأفكار الخاصة بك."
@@ -344,60 +358,59 @@ help:
       games: "الألعاب"
       animations: "الرسوم المتحركة"
       interactive: " القصص و الفن التفاعلي"
-      music: "Music And Dance"
+      music: "الموسيقى والرقص"
   gameJam:
-    title: "How to upload a Pocket Code game to the Game Jolt Site?"
-    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registration"
-    text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
+    title: "كيف يتم تحميل لعبة \"بوكت كوود\" الى موقع \"Game Jolt \"؟"
+    text0: "بداية أود تهنئتك على لعبتك! الأن يمكنك رفعها على %link% من أجل إنشائها كـ تطبيق أندرويد منفصل, ثم يمكنك فيما بعد رفع لعبتك على موقع \"Game Jolt\"."
+    title1: "تسجيل"
+    text1: "أولاً تحتاج لإنشاء حساب جديد. بعد ذلك يمكنك رفع تطبيقاتك التي قمت بإنشائها. لا تقلق انها عملية سهلة ولا تحتاج اكثر من التفكير باسم المستخدم وكلمة المرور. بعد ملء حقل اسم المستخدم وكلمة المرور, قم بالنقر على\"تسجيل الدخول أو التسجيل\". هذا كل شيء!"
     title2: "تحميل"
-    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your program"
-    text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
-    title4: "Create Android app"
-    text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Download app"
-    text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Register/Login at GameJolt.com"
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: "Upload your game on the Game Jolt Site"
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
-    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
-    text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
-    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
-    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
-    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
+    text2: "بعد الانتهاء من عملية التسجيل ستكون قادراً على رفع لعبتك. فقط قم بالتفكير في اسم للعبة و قم بإضافة وصف مناسب. أيضا قم بإضافة #AliceJam150 في حقل الوصف."
+    title3: "بحث عن برنامجك"
+    text3: "انتقل الى ملفك الشخصي على\"بوكت كوود\" حيث يتم سرد جميع برامجك أو قم بالبحث مباشرة عن اسم برنامجك باستخدام محرك البحث."
+    title4: "إنشاء تطبيق أندرويد"
+    text4: "مباشرة على صفحة تفاصيل البرنامج يمكنك انشاء لعبتك كتطبيق أندرويد. من خلال الضغط على \"تجهيز التطبيق\" سوف يتم بناء التطبيق."
+    title5: "تنزيل التطبيق"
+    text5: "بعد انتهاء عملية بناء التطبيق يمكنك تنزيل برنامجك كـ تطبيق اندرويد منفصل. هذا التطبيق الذي تم تنزيله يحتاج لإعادة رفعه مباشرة على موقع Game Jolt من أجل المشاركة في %link%."
+    title6: "التسجيل/ تسجيل الدخول على GameJolt.com"
+    text6: "قم بزيارة %link% وقم بالنقر في القائمة على \"تسجيل الدخول\" أو \"التسجيل\". اذا كان لديك حساب فقط قم بتسجيل الدخول, إذا لم يكن لديك حساب, سوف تحتاج للتسجيل باستخدام بريدك الالكتروني, اسم مستخدم وكلمة سر."
+    title7: "قم برفع لعبتك على موقع Game Jolt"
+    text7: "بعد ان تقوم بتسجيل الدخول, توجه الى لوحة إعداداتك\"dashboard\". هناك يمكنك إضافة لعبتك. أولا يجب عليك النقر على أوافق على الشروط \"Accept rules\". ثم قم باختيار 'Complete/Stable' ثم قم بتعبئة معلومات اللعبة. عند حقل الأدوات Engine/Language/Creation قم باختيار 'Other' ثم قم بكتابة 'Android'. قم بالتأكد من تضمين الهاشتاق #AliceJam150 في حقل الوصف حتى تظهر على الرابط التالي %link%."
+    text7_1: "قبل ان تتمكن من نشر لعبتك, قم باتباع الخطوات التالية. يجب عليك على الأقل إضافة صورة مصغرة ‘thumbnail image’, ثم تعيين الفئة العمرية \"Age Rating\" ثم رفع ألعابك بالنقر على بناء الملفات ‘build/files’."
+    text7_2: "قم بالنقر على إضافة حزمة ‘Add Package’ ثم قم بتعبئة معلومات الحزمة. قم بالحفظ ثم أضف رقم الإصدار. "
+    text7_3: "الأن يمكنك رفع ملف apk لـ تطبيقك. يمكنك العثور على التطبيق الذي تم تنزيله ضمن مجلد التحميل الخاص بك. من الأفضل استخدام متصفح ملفات مثل (es data explorer)."
+    text7_4: 'ملاحظة: اذا التطبيق يفقد لاحقته الـ "apk.", يجب عليك إضافتها يدوياً "apk.". فقط قم بإعادة تسمية الملف وأضف اللاحقة مثلاً "animal.apk". الآن يجب أن تكون قادراً على التحميل.'
+    text7_5: "بعد الانتهاء من عملية الرفع انقر على موافق \"OK\" لنشر لعبتك. هذه العملية سوف تظهر للمجتمع رابط مباشر لـ تحميل لعبتك."
+    text7_6: "لقد قمت برفع لعبتك الأولى على موقع Game Jolt, قم بتعيينها كـ نشط \"Active\".\nمبروك-تهانينا!"
+    text7_7: "الأشخاص الآخرون سوف يتمكنون الأن من إيجاد لعبتك وسوف تظهر على الرابط التالي %link%."
   aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
-    subtitle1: "Animate Characters and create a 'when tapped' event"
+    title1: "(مرحبا بكم) بلاد العجائب"
+    subtitle1: "قم بتنشيط حركة الشخصيات وانشاء حدث \"عند النقر\""
     description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: "Save Alice!"
-    subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: "The Hatter - Hit and Run"
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
-    title4: "The Hatter - Hit and Run"
-    subtitle4: "Let the Hatter shoot the evil cards"
-    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
-    title5: "Whack a Cheshire Cat"
-    subtitle5: "Create a score by using variables"
-    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
-    title6: "A Rabbits Race"
-    subtitle6: "Create a moving background"
+      تعلم كيفية السماح لواحد من الشخصيات الخاصة بك القدوم للحياة مع حركة بسيطة وقم بالتحكم بكيفية فعل المثل للشخصيات الأخرى عند الضغط عليهم. الفيديو يُظهر لك بسهولة كيفية تحريك شخصياتك باستخدام مظاهر مختلفة. كذلك نحن نُظهر لك كيفية إنشاء حدث "عند الضغط" وكيفية ارسال رسائل بث بين العناصر.
+    title2: "حفظ أليس!"
+    subtitle2: "استخدام أجهزة استشعار الميل والكشف عن تصادم بين العناصر"
+    description2: "هنا سوف تتعلم كيفية التحكم بشخصية باستخدام أجهزة استشعار الميل في هاتفك. يمكنك التحكم بحركة أليس بإمالة هاتفك لليسار أو لليمين. شاهد ملفنا التعليمي ودع العناصر تسقط عشوائياً من السماء لتصبح خبيرا في الكشف عن تصادم العناصر الأخرى."
+    title3: "بائع القبعات - الكر والفر"
+    subtitle3: "قم بإنشاء منظر متحرك وقم بالتحكم في حركة بائع القبعات"
+    description3: "في هذا البرنامج التعليمي سوف تتعلم كيفية إنشاء منظر طبيعي والذي يبدو وكأنه يتحرك. سوف نفعل ذلك بتحريك الكائنات على الشاشة لخلق وهم الحركة. أيضاً سوف نُظهر لك كيفية جعل القبعات تتحرك بإمالة هاتفك."
+    title4: "بائع القبعات - الكر والفر"
+    subtitle4: "اسمحوا لـ بائع القبعات برمي كروت الشيطان"
+    description4: "في هذا البرنامج التعليمي سوف نُظهر لكم كيفية إنشاء أعداء الذين يتحركون بشكل عشوائي نحو الشخصية الخاصة بك. علاوة على ذلك, سوف تتعلم كيفية جعل بائع القبعات يُطلق الدموع و التحقق ما إذا كان الأعداء تم ضربهم بكشف التصادم."
+    title5: "إضرب قط تشيشير"
+    subtitle5: "إنشاء نتيجة بإستخدام المتغيرات"
+    description5: "في هذا الملف التعليمي سوف نُظهر لك كيفية استخدام المتغيرات لأجل إنشاء نتيجة. النتائج مقومات مساعدة ضمن اللعبة. نتيجتنا تظهر لك كم غالباً قُمت بالتقاط القطة."
+    title6: "سباق الأرانب"
+    subtitle6: "إنشاء خلفية متحركة"
     description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the program"
+      هذا الملف التعليمي يُظهر لك كيفية إنشاء خلفية تمرير عمودية بواسطة إنزلاق رسومات الخلفية بطريقة معينة. شيءٌ أخر سوف نعلمك اياه وهو جعل الشخصية تقفز للأمام عند النقر عليها.
+      لجعل اللعبة معقدة قليلاً سوف نُظهر لك كيفية إبطاء حركة شخصياتك مع مرور الوقت.
+    download: "تحميل البرنامج"
 oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
+  username_header: شكراً لك للتسجيل في "بوكت كوود"!
+  username_chooser: 'من فضلك قم باختيار اسم مستخدم:'
+  username_hint: يجب أن لا يكون اسم المستخدم هو اسمك الحقيقي.
+  usernameTaken: اسم المستخدم هذا موجود بالفعل, من فضلك قم باختيار اسم مستخدم آخر.
 search:
   dotdotdot: بحث...
   search: بحث
@@ -416,51 +429,52 @@ login:
   recoverPassSend: تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني الخاص بك. الرجاء التحقق من علبة البريد الخاصة بك.
   userOrEmail: إسم المستخدم أو البريد الإلكتروني
   changePass: تغيير كلمة السر
-  createAccount: Create an account
+  createAccount: إنشاء حساب
   or: أو
 apk:
-  download: Download as app
-  prepare: 'Prepare app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: تنزيل كـ تطبيق
+  prepare: 'إعداد التطبيق'
+  preparing: 'جاري إعداد التطبيق'
+  text: 'العملية قد تستغرق بعض الوقت'
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: يجب أن لا يكون اسم المستخدم فارغ
+    invalid: اسم المستخدم غير صالح
+    exists: اسم المستخدم موجود بالفعل.
+    not_exists: اسم المستخدم هذا غير موجود.
+    not_email: The username must not be an email address.
   password:
     blank: كلمة المرور غير موجودة.
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: 'يجب أن تكون كلمة المرور على الأقل{{ limit }} حروف.'
   description:
-    rude: Description must not contain rude wordes.
+    rude: لا يجب أن يتضمن الوصف كلمات وقحة.
   country:
     blank: اسم الدولة غير موجود.
-    invalid: Invalid country
+    invalid: اسم الدولة غير صحيح
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: يجب ان لا يكون البريد الالكتروني فارغ
+    invalid: البريد الالكتروني الخاص بك غير صحيح
     exists: عنوان البريد الإلكتروني هذا موجود بالفعل.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: المصادقة المفتوحة لـ المعرف الشخصي يجب أن لا تكون فارغة
   login: كلمة المرور أو اسم المستخدم غير صحيح.
   post-data: البيانات المرسلة غير صحيحة أو مفقودة!
   checksum:
     missing: لم يرسل العميل ملف تشيكسوم! هل أنت تستخدم نسخة قديمة ؟
-    invalid: invalid checksum
+    invalid: قيمة التحقق(checksum) غير صحيحة
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: كود xml غير صحيح
+    missing: 'خطأ غير معروف: لم يتم العثور على مشروع_xml!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+    unexpected: تم العثور على ملف غير متوقع
+    invalid: الملف غير صحيح
+  image.missing: يشير مشروع XML إلى ملف غير موجود في مجلد المشروع
+  unknown: خطأ غير معروف
   token: 'لقد فشل التحقق من الجهاز : رمز مميز غير صالح!'
   programname:
-    rude: Programname must not contain rude wordes.
+    rude: يجب أن لا يحتوي اسم البرنامج على كلمات وقحة.
   program:
-    invalid: Invalid program.
+    invalid: برنامج غير صالح.
   languageversion:
     tooold: 'عذراً، البرنامج الخاص بك يحتوي على إصدار قديم من لغة كاتروبات! هل تستخدم أحدث نسخة من "النص البرمجي لجهاز الجيب"؟'
   programversion:
@@ -469,13 +483,13 @@ success:
   registration: تم التسجيل بنجاح
   token: موافق
   upload: لقد تم تحميل مشروعك بنجاح!
-  report: Your report was successfully sent!
+  report: تم إرسال تقريرك بنجاح!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < منذ 1 دقيقة |{1} منذ 1 دقيقة |]1,Inf] %count% منذ دقائق ماضية'
+  hours.ago: '{1}منذ 1 ساعة |]1,Inf] %count% منذ ساعات ماضية'
+  days.ago: '{1}منذ 1 يوم |]1,Inf] %count% منذ أيام ماضية'
+  months.ago: '{1} منذ 1 شهر |]1,Inf] %count% أشهر ماضية'
+  years.ago: '{1}منذ 1 عام |]1,Inf] منذ أكثر من عام'
 language:
   arabic: العربية
   bulgarian: البلغارية
@@ -522,52 +536,53 @@ language:
   ukrainian: الأوكرانية
   vietnamese: فيتنامية
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: إنشاء كـ Apk
+  pending: تتم الآن عملية إنشاء Apk
+  download: تنزيل كـ Apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
+  nojam: عذراً, لا يوجد في الوقت الحالي لعبة الازدحام
+  submit: تقديم الى %gamejamname%
+  whats: ما هو %gamejamname%؟
   submitown:
-    header: be aware
-    subheader: You can only submit your own programs
+    header: كن حذراً
+    subheader: يمكنك التقدم فقط لبرامجك الخاصة
     text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
+      لماذا لم تنشئ برنامجك الخاص!
+      قم بالمشاركة في %gamejamtag%
+tag-text: وسوم
+extenstion-text: الإضافات
 tags:
   constant:
     tag1: الألعاب
     tag2: تحريك الرسوم المتحركة
-    tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
+    tag3: القصة
+    tag4: موسيقى
+    tag5: الفن
+    tag6: إصدار تجريبي
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
+    diskMaintenance: صيانة القرص
+    noRemovableObjects: لا يوجد كائنات قابلة للإزالة.
+    manualBackups: إجراء نُسخ احتياطية يدوية
+    noRemovableBackupObjects: لا يوجد ملفات نسخ احتياطية قابلة للإزالة على هذا الخادم.
+    btnCreateBackup: إنشاء نسخة إحتياطية
+    btnDownloadBackup: تنزيل النسخة الاحتياطية
+    btnRestoreBackup: استعادة النسخة الاحتياطية
+    btnDeleteBackup: مسح النسخة الاحتياطية
+    createBackupConfirmationTitle: إنشاء ملف النسخ الاحتياطي
+    createBackupConfirmationText: قد تستغرق هذه العملية بعض الوقت. سيتم تحديث الصفحة بعد ذلك!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: برامج مشابهة
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: تقديم مشروعك
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: تقديم
+    text: أنت على وشك تقديم مشروعك. الرجاء إدخال رمز المشروع وانقر فوق إرسال.
+    btnText: نشر
   successful:
-    text: Your program upload was successful.
+    text: تم تحميل البرنامج الخاص بك بنجاح.
   failed:
-    text: Program upload failed.
+    text: فشلت عملية تحميل البرنامج.
 codeview:
-  showText: Show code
+  showText: إظهار الشِفرة البرمجية(الكود)

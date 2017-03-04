@@ -31,9 +31,17 @@ notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Рекомендуемые
   newest: Новые приложения
+  recommended: Recommended programs
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
@@ -42,6 +50,10 @@ programs:
   downloads: '%downloads% загрузок'
   sample: Примеры программ
   views: '%views% просмотров'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Отправленные программы
@@ -65,12 +77,15 @@ programs:
   report: Сообщить о проблеме
   report_popup: Комментарий добавлен.
   report_popup_header: Сообщение доставлено.
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'на'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
@@ -432,6 +447,7 @@ errors:
     invalid: Ваше имя пользователя не действительно
     exists: Это имя пользователя уже существует.
     not_exists: Такого имени пользователя не существует.
+    not_email: The username must not be an email address.
   password:
     blank: '&#x41F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x434;&#x43E;&#x43B;&#x436;&#x435;&#x43D; &#x43E;&#x442;&#x43B;&#x438;&#x447;&#x430;&#x442;&#x44C;&#x441;&#x44F; &#x43E;&#x442; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x430;.'
     short: 'Ваш пароль должен содержать как минимум {{ limit }} символов.'
@@ -561,6 +577,7 @@ admin:
     createBackupConfirmationText: Этот процесс может занять некоторое время. Страница будет перезагружена позже!
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
   submitBox:

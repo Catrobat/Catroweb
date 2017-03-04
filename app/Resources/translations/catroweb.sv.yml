@@ -1,5 +1,5 @@
 ---
-localLanguage: English
+localLanguage: Engelska
 username: Användarnamn
 password: Lösenord
 aboutPocketCode: Om Pocket Code
@@ -17,7 +17,7 @@ loginText: Logga in
 privacyPolicy: Sekretesspolicy
 imprint: Avtryck
 somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
+pleaseTryAgain: 'Försök igen!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'mer'
 less: 'mindre'
@@ -25,23 +25,35 @@ ok: Okej
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
+wellDone: "Bra gjort!"
+done: "Klar!"
 notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
+clearAllNotificationsButtonTitle: "Markera alla som lästa"
 notificationsClearError: "Unable to mark notifications as read!"
+pleaseWait: "Please wait..."
+indexPage:
+  recommendedSection:
+    info:
+      title: 'What programs are recommended here?'
+      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Dagens
   newest: Nyaste program
+  recommended: Recommended programs
   most:
     viewed: Mest visade
     downloaded: Mest nedladdningar
-  random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
+  random: Slumpmässiga program
+  related: Relaterade program
+  downloads: '%downloads% nedladdningar'
   sample: Example Programs
-  views: '%views% views'
+  views: '%views% visningar'
+  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
@@ -54,23 +66,26 @@ programs:
   reportOwnProgram: Du kan inte flagga ditt eget program.
   reportAlready: Du har redan flaggat detta program som olämpligt.
   reportDone: Du rapporterade detta program som olämpligt!
-  updateAppHeader: Update App
+  updateAppHeader: Uppdatera app
   updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+  btnClosePopup: OK
   checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: Visa mer
+  comments: Kommentarer
+  send: Skicka
   delete: Radera
   report: Rapportera
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
-remixgraph:
+remixGraph:
+  showRemixGraph: 'Show Remix Graph'
   by: 'med'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailable: 'Not available'
+  programUnknownUser: 'Unknown User'
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -87,11 +102,11 @@ passwordRecovery:
     Your Catrobat Team.
 profile:
   saveChanges: Spara ändringar
-  newPass: new password
-  repeatPass: repeat password
+  newPass: nytt lösenord
+  repeatPass: upprepa lösenord
   firstEmail: Min första e-post
   secondEmail: Min andra e-post
-  myPrograms: My programs
+  myPrograms: Mina program
   form:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
@@ -109,16 +124,16 @@ profile:
     uploadError: Tyvärr, var det ett problem under uppladdningen!
     noSupport: Den här bildtypen stöds inte, försök med en annan bild.
 myprofile:
-  editProfile: Edit profile
+  editProfile: Redigera profil
   edit: Redigera
   done: Färdigt
   avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  email: E-post
+  editAvatar: Redigera avatar
+  editUsername: Redigera användarnamn
+  editPassword: Redigera lösenord
+  editCountry: Redigera land
+  editEmail: Redigera e-post
 licenseToPlay:
   link: 'Licens för att spela'
   title: 'Licens för att spela - ge kredit och dela'
@@ -182,12 +197,12 @@ help:
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: 'Make a new program'
+      title: 'Gör ett nytt program'
       detail:
         text1: 'Klicka på "Nya".'
         text2: 'Ange ett progam namn, välj "Skapa tomma program" och tryck "OK".'
     step2:
-      title: "Create a new object"
+      title: "Skapa ett nytt objekt"
       detail:
         text1: 'tryck på:'
         text2: 'Choose the source of the first look of your new object.'
@@ -196,7 +211,7 @@ help:
         special2: 'Välj från Galleri.'
         special3: 'Ta en bild.'
     step3:
-      title: "Start Moving"
+      title: "Börja flytta"
       detail:
         text1: 'tryck på:'
         text2: 'Den första kloss som vi använder är av kategorin "Rörelser".'
@@ -257,7 +272,7 @@ help:
         text1: 'Bakgrunden är som ett objekt, men du bara kan ha en bakgrund.'
         text2: 'Du kan lägga till skript, ljud och utseenden på samma sätt till objektet bakgrund.'
     step11:
-      title: "Main Menu"
+      title: "Huvudmeny"
       description: "Använd Android tillbaka knappen för att komma till denna skärm."
       detail:
         text1: 'Fortsätt med det för närvarande öppnade programmet.'
@@ -270,7 +285,7 @@ help:
     title: "Handledningar"
     description1: "Denna handledning visar dig hur du kan använda effektiva tricks i"
     getReady: "Gör dig beredd:"
-    tryCode: "Try this code:"
+    tryCode: "Prova denna kod:"
     doIt: "Gör det:"
     tip: "Extra tips:"
     card1:
@@ -322,8 +337,8 @@ help:
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
       three: "In this case the background changes when the object in the front layer is tapped."
     card10:
-      title: "Show variable"
-      description: "Show the value of a variable."
+      title: "Visa variabel"
+      description: "Visa värdet på en variabel."
       one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
       two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
       three: "Through „Show variable“ you can display the values on stage."
@@ -333,7 +348,7 @@ help:
       one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
       two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
     card12:
-      title: "Face detection"
+      title: "Ansiktsigenkänning"
       description: "Control an object by using face detection."
       one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
@@ -344,19 +359,19 @@ help:
       games: "Spel"
       animations: "Animationer"
       interactive: "Interaktiv konst och berättelser"
-      music: "Music And Dance"
+      music: "Musik och dans"
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registration"
+    title1: "Registrering"
     text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
     title2: "Ladda upp"
     text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your program"
+    title3: "Sök efter ditt program"
     text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
-    title4: "Create Android app"
+    title4: "Skapa Android-app"
     text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Download app"
+    title5: "Ladda ner app"
     text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
     title6: "Register/Login at GameJolt.com"
     text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
@@ -370,7 +385,7 @@ help:
     text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
     text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
   aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
+    title1: "(Välkommen till) Wonderland"
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
@@ -392,10 +407,10 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the program"
+    download: "Ladda ner programmet"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
+  username_chooser: 'Välj ett användarnamn:'
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
@@ -416,19 +431,20 @@ login:
   recoverPassSend: Ett e-postmeddelande skickades till din e-postadress. Vänligen kontrollera din inkorg.
   userOrEmail: Användarnamn eller email
   changePass: Ändra lösenord
-  createAccount: Create an account
+  createAccount: Skapa ett konto
   or: ELLER
 apk:
-  download: Download as app
-  prepare: 'Prepare app'
-  preparing: 'Preparing app'
+  download: Ladda ner som app
+  prepare: 'Förbered app'
+  preparing: 'Förbereder app'
   text: 'The process may take a while'
 errors:
   username:
     blank: Username must not be blank
-    invalid: Your username is invalid
+    invalid: Ditt användarnamn är ogiltig
     exists: This username already exists.
     not_exists: This username does not exist.
+    not_email: The username must not be an email address.
   password:
     blank: Lösenord saknas.
     short: 'Your password must have at least {{ limit }} characters.'
@@ -436,10 +452,10 @@ errors:
     rude: Description must not contain rude wordes.
   country:
     blank: Landet saknas.
-    invalid: Invalid country
+    invalid: Ogiltigt land
   email:
     blank: email must not be blank
-    invalid: Your email seems to be invalid
+    invalid: Din e-post verkar vara ogiltig
     exists: Denna e-postadress finns redan.
   id:
     blank: Open Authentication ID must not be blank
@@ -447,20 +463,20 @@ errors:
   post-data: Efter Data saknas eller inte korrekt!
   checksum:
     missing: Klienten skickade inte fileChecksum! Använder du en gammal version av Pocket Code?
-    invalid: invalid checksum
+    invalid: felaktig kontrollsumma
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: ogiltig kod-xml
+    missing: 'okänt fel: project_xml_not_found!'
   file:
     unexpected: unexpected file found
-    invalid: invalid file
+    invalid: ogiltig fil
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: 'Autentisering av enhet misslyckades: Ogiltig auth-token!'
   programname:
     rude: Programname must not contain rude wordes.
   program:
-    invalid: Invalid program.
+    invalid: Ogiltigt program.
   languageversion:
     tooold: 'Tyvärr, innehåller ditt program en gammal version av Catrobat språket! Använder du den senaste versionen av Pocket Code?'
   programversion:
@@ -522,9 +538,9 @@ language:
   ukrainian: Ukrainska
   vietnamese: Vietnamesiska
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Generera APK
+  pending: Genererar APK
+  download: Hämta APK
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: Submit to %gamejamname%
@@ -535,30 +551,31 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: Taggar
+extenstion-text: Tillägg
 tags:
   constant:
     tag1: Spel
     tag2: Flyttar Animation
     tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
+    tag4: Musik
+    tag5: Konst
+    tag6: Experimentell
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    noRemovableObjects: No removable objects available.
-    manualBackups: Manual backups
+    diskMaintenance: Diskunderhåll
+    noRemovableObjects: Ingen borttagningsbara objekt tillgängliga.
+    manualBackups: Manuella säkerhetskopieringar
     noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
+    btnCreateBackup: Skapa säkerhetskopia
+    btnDownloadBackup: Ladda ner säkerhetskopia
     btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
+    btnDeleteBackup: Ta bort säkerhetskopia
+    createBackupConfirmationTitle: Skapa säkerhetskopiefil
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar programs
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
   submitBox:
@@ -570,4 +587,4 @@ pmd:
   failed:
     text: Program upload failed.
 codeview:
-  showText: Show code
+  showText: Visa kod
