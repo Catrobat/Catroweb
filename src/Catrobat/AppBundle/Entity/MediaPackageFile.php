@@ -59,9 +59,9 @@ class MediaPackageFile
   protected $flavor = 'pocketcode';
 
     /**
-     * @ORM\Column(type="string", options={"default":"null"}, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $author = null;
+    protected $author;
 
   /**
    * @return boolean

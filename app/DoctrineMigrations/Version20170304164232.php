@@ -18,7 +18,7 @@ class Version20170304164232 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE media_package_file ADD author VARCHAR(255) DEFAULT \'null\'');
+        $this->addSql('ALTER TABLE media_package_file ADD author VARCHAR(255) DEFAULT NULL');
     }
 
     /**

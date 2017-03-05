@@ -14,7 +14,7 @@
         {% for file in category.files %}
           {% set sound = getMediaPackageSoundUrl(file.data) %}
           {% set image = getMediaPackageImageUrl(file.data) %}
-          <div class="program mediafile-{{ file.id }}">
+          <div class="program mediafile mediafile-{{ file.id }}">
 
             <a href="{{ file.downloadUrl }}" onclick="onDownload(this)">
             {% if image %}
