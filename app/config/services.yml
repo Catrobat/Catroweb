@@ -193,6 +193,14 @@ services:
     templatefilerepository:
             class: Catrobat\AppBundle\Services\TemplateFileRepository
             arguments: ["%catrobat.template.storage.dir%","%catrobat.template.storage.path%", "@filecompressor"]
+
+    nolbexamplerepository:
+        class: Catrobat\AppBundle\Entity\NolbExampleRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle:NolbExampleProgram"
+
 # =========================== Manager & Stuff ===========================
 
     programmanager:

@@ -1,6 +1,7 @@
 <?php
 
 namespace Catrobat\AppBundle\Controller\Web;
+use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -20,6 +21,7 @@ class DefaultController extends Controller
       /**
        * @var $image_repository FeaturedImageRepository
        * @var $repository FeaturedRepository
+       * @var $user User
        */
       $image_repository = $this->get('featuredimagerepository');
       $repository = $this->get('featuredrepository');
@@ -43,7 +45,17 @@ class DefaultController extends Controller
           $featured[] = $info;
       }
 
-      return $this->get('templating')->renderResponse('::index.html.twig', array('featured' => $featured));
+      $user = $this->getUser();
+      $nolb = false;
+
+      if ($user) {
+        $nolb = $user->getNolbUser();
+      }
+
+      return $this->get('templating')->renderResponse('::index.html.twig', array(
+        'featured' => $featured,
+        'nolb' => $nolb
+      ));
   }
 
   /**
@@ -151,7 +163,7 @@ class DefaultController extends Controller
         $statistics = $this->get('statistics');
         $locale = strtolower($request->getLocale());
 
-        if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random'])) {
+        if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random', 'nolb-example'])) {
             $program_id = $_POST['programID'];
             $statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);
             return new Response('ok');
