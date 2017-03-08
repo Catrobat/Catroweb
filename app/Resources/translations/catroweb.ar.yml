@@ -31,17 +31,17 @@ notificationsReadMessage: "ليس لديك أي تنبيهات جديدة."
 notificationsClearedMessage: "جميع التنبيهات تم تحديدها كـ مقروءة."
 clearAllNotificationsButtonTitle: "تحديد الكل كمقروء"
 notificationsClearError: "غير قادر على تحديد الإشعارات كـ مقروءة!"
-pleaseWait: "Please wait..."
+pleaseWait: "يرجى الانتظار..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'ما هي البرامج المُوصى بها هنا؟'
+      description_B_VersionTest: 'أغلب الظن أن برنامجك مُدمج مُعدل, الأعلى سيظهر ضمن هذه القائمة.'
+      description_C_VersionTest: 'الإعجابات الأكثر التي يتلقاها برنامجك ( متضمنة " أعجبني", "الضحك","الحب"و "رائع!"), الأعلى منها سيظهر ضمن هذه القائمة.'
 programs:
   featured: خصائص
   newest: أحدث البرامج
-  recommended: Recommended programs
+  recommended: برامج مُوصى بها
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
@@ -50,10 +50,10 @@ programs:
   downloads: '%downloads% التحميلات'
   sample: أمثلة عن البرامج
   views: '%views% المشاهدات'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likeThumbsUpDetailText: '{0}0 أشخاص أُعجبوا بهذا |{1}1 شخص أُعجب بهذا |]1,Inf]%persons% أشخاص أُعجبوا بهذا'
+  likeSmileDetailText: '{0}0 أشخاص أضحكهم هذا |{1}1 شخص أضحكه هذا |]1,Inf]%persons% أشخاص أضحكهم هذا'
+  likeLoveDetailText: '{0}0 أشخاص يُحبون هذا |{1}1 شخص يُحب هذا |]1,Inf]%persons% أشخاص يُحبون هذا'
+  likeWowDetailText: '{0}0 أشخاص قالوا "رائع!" على هذا |{1}1 شخص قال "رائع!" على هذا |]1,Inf]%persons% أشخاص قالوا "رائع!" على هذا'
   remixes: '{0}0 رِمكسات(عناصر مُدمجة)|{1}1 رِمكس(عنصر مُدمج)|]1,Inf]%remixes% رِمكسات(عناصر مُدمجة)'
   newRemixesNotificationTitle: '|{1}"%programName%" يتكون من عنصر مُدمج واحد: |]1,Inf] "%programName%" يتكون من %remixes% عناصر مُدمجة جديدة:'
   submitted: برامج مقترحة
@@ -77,15 +77,16 @@ programs:
   report: تقرير
   report_popup: تم الإبلاغ بنجاح عن التعليق.
   report_popup_header: تم الإبلاغ
+  nolb_example: Example programs
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'إظهار مخطط الدمج المُعدل'
   by: 'إلى'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'فتح'
+  showPaths: 'إظهار المسارات'
+  programNotAvailableErrorTitle: 'عذراً...'
+  programNotAvailableErrorDescription: 'البرنامج غير متوفر بعد الأن!'
+  programNotAvailable: 'غير متوفر'
+  programUnknownUser: 'مستخدم غير معروف'
 passwordRecovery:
   subject: استعادة كلمة سر كاتروبات الخاصة بك
   message: |
@@ -278,7 +279,7 @@ help:
         text2: 'إضافة برنامج جديد.'
         text3: 'شاهد جميع برامجك المحلية.'
         text4: 'انتقل إلى موقع المساعدة وناقش مع المستخدمين الآخرين.'
-        text5: 'استكشاف عالم برامج "النص البرمجي لجهاز الجيب". تحميل البرامج التي تريد.'
+        text5: 'استكشاف عالم برامج "بوكت كوود". قم بتنزيل وقم بالدمج المُعدل للبرامج التي تريد.'
         text6: 'قم بتحميل البرنامج الذي تم فتحه الأن.'
   tutorialcards:
     title: "دروس للتعلم"
@@ -442,7 +443,7 @@ errors:
     invalid: اسم المستخدم غير صالح
     exists: اسم المستخدم موجود بالفعل.
     not_exists: اسم المستخدم هذا غير موجود.
-    not_email: The username must not be an email address.
+    not_email: اسم المستخدم لا يمكن أن يكون بريد إلكتروني.
   password:
     blank: كلمة المرور غير موجودة.
     short: 'يجب أن تكون كلمة المرور على الأقل{{ limit }} حروف.'
@@ -573,7 +574,7 @@ admin:
     createBackupConfirmationText: قد تستغرق هذه العملية بعض الوقت. سيتم تحديث الصفحة بعد ذلك!
 recommender:
   similarPrograms: برامج مشابهة
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: المستخدمين الذين قاموا بتحميل هذا البرنامج قاموا ايضاً بتحميل
 pmd:
   submitBtn: تقديم مشروعك
   submitBox:

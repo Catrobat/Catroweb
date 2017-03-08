@@ -31,17 +31,17 @@ notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
-pleaseWait: "Please wait..."
+pleaseWait: "Bitte warten..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
+      title: 'Welche Programme werden hier empfohlen?'
       description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
       description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Empfohlen
   newest: Neueste Programme
-  recommended: Recommended programs
+  recommended: Empfohlene Programme
   most:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
@@ -77,15 +77,16 @@ programs:
   report: Melden
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
+  nolb_example: Beispielprogramme
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
-  by: 'um'
-  open: 'Open'
-  showPaths: 'Show Paths'
+  by: 'von'
+  open: 'Öffnen'
+  showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
+  programNotAvailable: 'Nicht verfügbar'
+  programUnknownUser: 'Unbekannter Benutzer'
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -439,7 +440,7 @@ errors:
     invalid: Dein Benutzername ist ungültig
     exists: Dieser Benutzername existiert bereits.
     not_exists: Dieser Benutzername existiert nicht.
-    not_email: The username must not be an email address.
+    not_email: Ihr Username darf keine E-Mail-Adresse sein.
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'

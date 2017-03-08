@@ -77,6 +77,7 @@ programs:
   report: Report
   report_popup: Il commento è stato segnalato correttamente.
   report_popup_header: Segnalato
+  nolb_example: Example programs
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'di'

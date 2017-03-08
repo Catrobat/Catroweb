@@ -22,42 +22,42 @@ oldVersionError: 'مهرباني ڪري تازو ترين پاڪيٽ ڪوڊ کي
 more: 'وڌيڪ'
 less: 'گھٽ'
 ok: اوڪي
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+clickToDownloadProgram: 'مثال پروگرام ڊائونلوڊ ڪرڻ لاءِ ٽڙڪ%link_start% هتي%link_end%.'
+registrationError: 'يوزر نالو يا ايميل اڳي ئي استعمال هيٺ آهي.'
+notifications: 'اطلاع'
+wellDone: "ڏاڍو سٺو!"
+done: "ٿي ويو!"
+notificationsReadMessage: "توهان سڀ اطلاع پڙهي ڇڏيا آهن."
+notificationsClearedMessage: "سڀ اطلاع پڙهيل طور نشان لڳايا ويا آهن."
+clearAllNotificationsButtonTitle: "سڀ پڙهيل طور نشان لڳايو"
+notificationsClearError: "اطلاعن کي پڙهيل طور نشان نٿو لڳائي سگهجي!"
+pleaseWait: "مهرباني ڪري ترسو..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'هتي ڪهڙن پروگرامن جي صلاح ڏني وڃي ٿي؟'
+      description_B_VersionTest: 'گهڻي کان گهڻو توهان جو پروگرام ريمڪس ٿيندو، اوترو ئي وڌيڪ لسٽ تي مٿي نظر ايندو.'
+      description_C_VersionTest: 'وڌيڪ لائڪس (بشمول ”تمس اپ“، ”کل“، ”پيار”، ۽ ”ووئو!“) توهان جو پروگرام حاصل ڪندو، اهو لسٽ ۾ مٿي ظاهر ٿيندو.'
 programs:
   featured: خاص
   newest: تازا ترين پروگرام
-  recommended: Recommended programs
+  recommended: صلاح ڏنل پروگرام
   most:
     viewed: گھڻي ۾ گھڻو ڏٺل
     downloaded: گھڻي ۾ گھڻو اتاريل
-  random: Random Programs
-  related: Related Programs
+  random: اوچتا پروگرام
+  related: لاڳاپيل پروگرام
   downloads: '%downloads% اُتارُون'
-  sample: Example Programs
+  sample: مثال پروگرام
   views: '%views% ڏيٺُون'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeThumbsUpDetailText: '{0} هن تي 0 ماڻهن ٿمس اپ ڏنا | {1}1 ماڻهوءَ هن تي ٿمس اپ ڏنا |]1,Inf]%persons% ماڻهن هن تي ٿمس اپ ڏنا'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
   likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
   likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
+  submitted: جمع ڪرايل پروگرام
+  uploaded: اپلوڊ ڪيل پروگرامَ
   reportAsInappropriate: نامناسب هوڻ جي رپورٽ درج ڪريو
   languageVersion: 'ڪيٽروبيٽ جي زبان جو ورزين: %languageVersion%'
   reportLoginText: هن پروگرام کي نامناسب رپورٽ ڪرڻ لاءِ  %login% ٿيو.
@@ -66,40 +66,42 @@ programs:
   reportOwnProgram: توهان پنهنجي ئي پروگرام تي جھنڊي لڳائي نہ ٿا سگھو.
   reportAlready: ان پروگرام تي توهان اڳ ۾ ئي نامناسب هجڻ جي جھنڊي لڳائي چڪا آهيو.
   reportDone: توهان ان پروگرام لاءِ نامناسب هجڻ جي رپورٽ درج ڪرائي ڇڏي!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  updateAppHeader: ايپ کي اپڊيت ڪريو
+  updateAppText: مهرباني ڪري پنهنجي ايپ کي نئين ورزن تي اپديٽ ڪريو تہ جيئن هي پروگرام ڊائونلوڊ ڪري سگهجي.
+  btnClosePopup: اوڪي
+  checkout_this_program: هي ڪيٽروبيٽ پروگرام جاچي ڏسو
+  show_more: وڌيڪ ڏيکاريو
+  comments: رايا
+  send: موڪليو
   delete: ختم ڪيو
   report: رپورٽ درج ڪريو
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: رايو ڪاميابي سان رپورٽ ڪيو ويو.
+  report_popup_header: رپورٽ ڪيو ويو
+  nolb_example: Example programs
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
-  by: 'by'
-  open: 'Open'
+  showRemixGraph: 'ريمڪس گراف ڏيکاريو'
+  by: 'کان'
+  open: 'کوليو'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programNotAvailableErrorTitle: 'معاف ڪجو...'
+  programNotAvailableErrorDescription: 'وڌيڪ جي لاءِ پروگرام موجود نہ آهي!'
+  programNotAvailable: 'موجود نہ آهي'
+  programUnknownUser: 'اڻ ڄاڻ يوزر'
 passwordRecovery:
   subject: اوهان جي ڪيٽروبيٽ پاسورڊ جي واپسي
   message: |
-    Dear %username%.
+    عزيز %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    توهان پنهنجو پاسورڊ ٻيهر ٺاهڻ جي لاءِ عرض ڪيو آهي %appplication_url% تي ڇاڪاڻ جو توهان پنهنجو پاسورڊ وساري ويٺا آهيو. جيڪڏهن توهان هي عرض نہ ڪيو آهي، مهرباني ڪري هن کي اڻ ڏٺو ڪري ڇڏيو. هي 24 ڪلاڪن جي وقت ۾ پورو ٿي ۽ استعمال جي لائق نہ رهندو.
+    توهان پنهنجو پاسورڊ ٻيهر ٺاهي ۽ نئون جوڙڻ لاءِ، مهرباني ڪري هي پيج گهمو:
+    %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    توهان پنهنجو يوزر نالو ۽ پاسورڊ ڪنهن بہ وقت هن %appplication_url% ڪميونٽي تي پهچ حاصل ڪري سگهو ٿا.
+    اهو ڪرڻ لاءِ، صرف هي پيج گهمو: %loginPage%
+    پنهنجي پروفائل جا تفصيل تصحيح ڪرڻ لاءِ، هن پيج تي وڃو: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    نيڪ تمنائون،
+    توهان جي ڪيٽروبيٽ سٿ.
 profile:
   saveChanges: تبديليون سانڍيو
   newPass: نئون ڳجھو لفظ
@@ -111,9 +113,9 @@ profile:
     passwordTooShort: نئون ڳجھو لفظ گھٽ ۾ گھٽ بہ %length% اکر ڊگھو گھرجي.
     passwordTooLong: نئون ڳجھو لفظ وڌ ۾ وڌ %length% اکر ڊگھو ٿي سگھي ٿو.
     passwordIsUsername: ڳجھو لفظ توهان جي يوزرنانءَ کان مختلف هوڻ گھرجي.
-    passwordWrong: Wrong password
+    passwordWrong: غلط پاسورڊ
     emailNotValid: اهو برق ٽپال پتو ڪار ڪونهي.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailMissing: ايميل پتو اپڊيٽ ڪندي غلطي اچي وئي. توهان وٽ گهٽ ۾ گهٽ هڪ تصديق ٿيل اي ميل پتو هجڻ ضروري آهي.
     emailExists: اهو برق ٽپال پتو اڳي ئي وجود رکي ٿو.
     submitSuccess: سانڍجي ويو!
   reallyDeleteProgram: ڇا توهان واقعي پنهنجو پروگرام ڊاهڻ گھرو ٿا؟
@@ -124,21 +126,21 @@ profile:
     uploadError: معاف ڪندا، فائيل چاڙهيندي ڪو مسئلو درپيش اچي ويو!
     noSupport: عڪس جو اهو فارميٽ ڪار نہ آهي، مهرباني ڪري ڪو ٻيو عڪس آزمايو.
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
+  editProfile: پروفائل تصحيح ڪريو
+  edit: تصحيح
   done: پورو ٿيو
-  avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  avatar: اوتار
+  email: اي ميل
+  editAvatar: اوتار تصحيح ڪريو
+  editUsername: يوزر نالو تصحيح ڪريو
+  editPassword: پاسورڊ تصحيح ڪريو
+  editCountry: ملڪ تصحيح ڪريو
+  editEmail: اي ميل تصحيح ڪريو
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
+  link: 'کيڏڻ جو اجازت نامو'
+  title: 'کيڏڻ جو اجازت نامو - شاباش ڏيو ۽ ونڊيو'
   text1: ايئن ڀانيو تہ هر ڪيٽروبيٽ پروگرام هڪڙو ڪيڪ آهي، هڪ تمام خاص ڪيڪ جنهن سان ان جي ترڪيب (پروگرامڱ بلاڪس) بہ گڏ آهي. ڪيٽروبيٽ نيات جا سمورا رڪن پنهنجا ڪيڪ ۽ انهن جون ترڪيبون ونڊيندا. ان جو مطلب تہ توهان نہ رڳو ڪيڪن جا مزا وٺندا، بلڪہ انهن کي تيار ڪرڻ جو طريقو پڻ سکندا!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text2: 'هتي ڪي بہ ڳجها ٽوٽڪا نہ آهن: ڪيڪَ ڪيئن ٺاهبا جون هدايتون هر هڪ لاءِاستعمال لاءِ کليل آهن، ٻيهر استعمال، ڦيرڦار، ۽ بطور خدمت نون اساه خيالن لاءِ... منهنجو مطلب ڪيڪَ.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
@@ -149,7 +151,7 @@ licenseToPlay:
   version: مسودو 1.1، اپريل 2، 2013ع
 teachers:
   login:
-    title: 'Teachers area'
+    title: 'استادن جوعلائقو'
     description: 'This area can be used by teachers.'
 termsOfUse:
   title: استعمال جا شرط شروط

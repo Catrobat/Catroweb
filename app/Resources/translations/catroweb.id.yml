@@ -77,6 +77,7 @@ programs:
   report: Laporkan
   report_popup: Komentar berhasil dilaporkan.
   report_popup_header: Telah dilaporkan
+  nolb_example: Example programs
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'oleh'

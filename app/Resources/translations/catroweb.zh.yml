@@ -77,6 +77,7 @@ programs:
   report: 报告
   report_popup: 您的评论以成功发送
   report_popup_header: 已发送
+  nolb_example: Example programs
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'by'

@@ -31,17 +31,17 @@ notificationsReadMessage: "Przeczytałeś wszystkie powiadomienia."
 notificationsClearedMessage: "Wszystkie powiadomienia zostały oznaczone jako przeczytane."
 clearAllNotificationsButtonTitle: "Oznacz wszystkie jako przeczytane"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
-pleaseWait: "Please wait..."
+pleaseWait: "Proszę czekać..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'Jakie programy są tutaj polecane?'
+      description_B_VersionTest: 'Im częściej Twój program został zremiksowany, tym wyżej znajdzie się na liście.'
+      description_C_VersionTest: 'Im więcej polubień (w tym "Kciuk do góry", "Uśmiech", "Miłość" i "wow!") program otrzyma, tym wyżej znajdzie się na liście.'
 programs:
   featured: Polecane
   newest: Najnowsze programy
-  recommended: Recommended programs
+  recommended: Polecane programy
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
@@ -50,10 +50,10 @@ programs:
   downloads: '%downloads% pobrań'
   sample: Przykładowe programy
   views: '%views% odsłon'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likeThumbsUpDetailText: '{0}0 ludzi polubiło to |{1}1 osoba polubiła to |] 1, Inf]%persons% ludzi polubiło to'
+  likeSmileDetailText: '{0}0 ludzi uśmiecha się do tego |{1}1 osoba uśmiecha się do tego |] 1, Inf]%persons% ludzi uśmiecha się do tego'
+  likeLoveDetailText: '{0}0 ludzi kocha to |{1}1 człowiek kocha to |] 1, Inf]%persons% ludzi kocha to'
+  likeWowDetailText: '{0}0 ludzi mówi o tym "wow!" |{1}1 osoba mówi o tym "wow!" |] 1, Inf]%persons% ludzi mówi o tym "wow!"'
   remixes: '{0}0 remiksów |{1}1 remiks |]1,Inf]%remixes% remiksów'
   newRemixesNotificationTitle: '|{1}"%programName%" ma 1 nowy remiks: |]1,Inf] "%programName%" ma %remixes% nowych remiksów:'
   submitted: Przesłane programy
@@ -77,15 +77,16 @@ programs:
   report: Zgłoś
   report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Zgłoszono
+  nolb_example: Example programs
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'Pokaż Drzewo Remiksów'
   by: 'o'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'Otwórz'
+  showPaths: 'Pokaż ścieżki'
+  programNotAvailableErrorTitle: 'Przepraszamy...'
+  programNotAvailableErrorDescription: 'Program jest już niedostępny!'
+  programNotAvailable: 'Niedostępny'
+  programUnknownUser: 'Nieznany użytkownik'
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
@@ -438,7 +439,7 @@ errors:
     invalid: Twoja nazwa użytkownika jest nieprawidłowa
     exists: Ta nazwa użytkownika już istnieje.
     not_exists: Ta nazwa użytkownika nie istnieje.
-    not_email: The username must not be an email address.
+    not_email: Twoja nazwa użytkownika nie może być adresem e-mail.
   password:
     blank: Brakuje hasła.
     short: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
@@ -568,7 +569,7 @@ admin:
     createBackupConfirmationText: Ten proces może trochę potrwać. Następnie strona zostanie odświeżona!
 recommender:
   similarPrograms: Podobne programy
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Użytkownicy, którzy pobrali ten program, pobrali również
 pmd:
   submitBtn: Prześlij swój projekt
   submitBox:

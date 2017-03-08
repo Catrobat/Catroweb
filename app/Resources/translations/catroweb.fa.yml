@@ -77,6 +77,7 @@ programs:
   report: گزارش
   report_popup: نظرت با موفقیت گزارش شد.
   report_popup_header: گزارش شد
+  nolb_example: Example programs
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'به وسیله'
