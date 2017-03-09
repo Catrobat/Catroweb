@@ -8,6 +8,7 @@
 /build/
 /vendor/
 /bin/
+!/bin/recsys-similarity-computation-service.jar
 /composer.phar
 /coverage
 /phpspec.yml
