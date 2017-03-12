@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: catroweb
- * Date: 3/10/17
- * Time: 10:45 AM
- */
 
 namespace Tests;
-
 
 use Catrobat\AppBundle\Entity\NolbExampleProgram;
 use Catrobat\AppBundle\Entity\Program;

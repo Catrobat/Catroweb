@@ -62,27 +62,3 @@ Feature: Testcases for nolb user
     And I am on "/pocketcode/"
     Then I should see 1 "#nolb-example"
     And I should see 2 "#nolb-example .programs .program"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
