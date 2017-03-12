@@ -9,6 +9,7 @@ use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
+use Catrobat\AppBundle\Entity\NolbExampleProgram;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Catrobat\AppBundle\Entity\ProgramLike;
@@ -539,6 +540,31 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @Given /^there are nolb example programs:$/
+   */
+  public function thereAreNolbExamplePrograms(TableNode $table)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $examples = $table->getHash();
+
+    foreach($examples as $example) {
+      $new_example = new NolbExampleProgram();
+
+      $program_id = intval($example['program']);
+      $program = $em->getRepository('AppBundle:Program')->find($program_id);
+
+      $new_example->setProgram($program);
+      $new_example->setActive(isset($example['active']) ? $example['active'] == 'true' : true);
+      $new_example->setIsForFemale(isset($example['for_female']) ? $example['for_female'] == 'true' : false);
+      $new_example->setDownloadsFromFemale(intval($example['female_counter']));
+      $new_example->setDownloadsFromMale(intval($example['male_counter']));
+      $em->persist($new_example);
+    }
+    $em->flush();
+  }
+
+
+  /**
    * @Given /^there are comments:$/
    */
   public function thereAreComments(TableNode $table)
@@ -642,26 +668,48 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
 
   /**
-     * @Given /^there are tags:$/
-     */
-    public function thereAreTags(TableNode $table)
+   * @Given /^there are tags:$/
+   */
+  public function thereAreTags(TableNode $table)
+  {
+      $tags = $table->getHash();
+      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+      foreach($tags as $tag)
+      {
+          $insert_tag = new Tag();
+
+          $insert_tag->setEn($tag['en']);
+          $insert_tag->setDe($tag['de']);
+
+          $em->persist($insert_tag);
+          $em->flush();
+      }
+  }
+
+  /**
+   * @Given /^the nolb example program (\d+) has "([^"]*)" set to (\d+)$/
+   */
+  public function theNolbExampleProgramHasSetTo($arg1, $arg2, $arg3)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $example_program = $em->getRepository('AppBundle:NolbExampleProgram')->find($arg1);
+    $counter = 0;
+
+    switch($arg2)
     {
-        $tags = $table->getHash();
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-
-        foreach($tags as $tag)
-        {
-            $insert_tag = new Tag();
-
-            $insert_tag->setEn($tag['en']);
-            $insert_tag->setDe($tag['de']);
-
-            $em->persist($insert_tag);
-            $em->flush();
-        }
+      case "female_counter":
+        $counter = $example_program->getDownloadsFromFemale();
+        break;
+      default:
+        $counter = $example_program->getDownloadsFromMale();
     }
 
-    /**
+    assertEquals($arg3, $counter, "$arg2 not same");
+  }
+
+
+  /**
      * @Given /^there are extensions:$/
      */
     public function thereAreExtensions(TableNode $table)

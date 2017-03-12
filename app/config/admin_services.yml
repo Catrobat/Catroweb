@@ -169,6 +169,12 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Template Programs }
           arguments: [null, Catrobat\AppBundle\Entity\Template, AppBundle:Admin\Template]
 
+      catrowebadmin.block.nolb.examples:
+        class: Catrobat\AppBundle\Admin\NolbExampleAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: Nolb Example Programs}
+        arguments: [null, Catrobat\AppBundle\Entity\NolbExampleProgram, null]
+
 
 # =========================== GameJam ===========================
 

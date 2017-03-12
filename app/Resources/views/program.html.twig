@@ -634,6 +634,12 @@
          var programURL = "{{ program_url }}";
          var projectID = $('#nolb-submission-project-id').val();
 
+        if(projectID == ''){
+          $('#nolb-submission-project-id').addClass('text-area-empty');
+          return;
+        }
+        $('#nolb-submission-project-id').removeClass('text-area-empty');
+
          var xhr = $.ajax({
              type: "POST",
              crossDomain: true,
@@ -663,8 +669,6 @@
       $(document).on("click", "#nolb-submission-failed-ok", function(){
         $('#nolb-submission-failed').hide();
       });
-
-
 
       $(document).on("click", "#nolb-project-button", function(){
           $('#nolb-submission-box').show();
