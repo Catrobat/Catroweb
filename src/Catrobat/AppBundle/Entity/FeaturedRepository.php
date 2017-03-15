@@ -61,5 +61,21 @@ class FeaturedRepository extends EntityRepository
         ->setParameter('flavor', $flavor)
         ->getQuery()->getSingleScalarResult();
     }
+
+    public function isFeatured($program)
+    {
+        /* @var \Catrobat\AppBundle\Entity\Program $program */
+        $qb = $this->createQueryBuilder('e');
+        $qb
+            ->where($qb->expr()->eq('e.program', ':program'))
+            ->setParameter('program', $program);
+        ;
+        $result = $qb->getQuery()->getOneOrNullResult();
+        if ($result == null)
+        {
+            return false;
+        }
+        return true;
+    }
     
 }

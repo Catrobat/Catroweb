@@ -427,7 +427,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $user_manager = $this->kernel->getContainer()->get('usermanager');
       $users = $table->getHash();
       $user = null;
-      for ($i = 0; $i < count($users); ++$i ) {
+      $count = count($users);
+      for ($i = 0; $i < $count; ++$i ) {
           $user = $user_manager->createUser();
           $user->setUsername($users[$i]['name']);
           $user->setEmail($users[$i]['email']);
@@ -454,7 +455,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
     $user = null;
-    for ($i = 0; $i < count($users); ++$i ) {
+    $count = count($users);
+    for ($i = 0; $i < $count; ++$i ) {
       $user = $user_manager->createUser();
       $user->setUsername($users[$i]['name']);
       $user->setEmail($users[$i]['email']);
@@ -480,7 +482,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
       $programs = $table->getHash();
-      for ($i = 0; $i < count($programs); ++$i ) {
+      $count = count($programs);
+      for ($i = 0; $i < $count; ++$i ) {
           $user = $em->getRepository('AppBundle:User')->findOneBy(array(
         'username' => $programs[$i]['owned by'],
       ));
@@ -585,8 +588,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_comment->setIsReported(false);
       $new_comment->setText($comment['text']);
       $em->persist($new_comment);
-      $em->flush();
     }
+    $em->flush();
   }
 
   /**
@@ -605,8 +608,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program_like->setCreatedAt(new \DateTime($like['created at'], new \DateTimeZone('UTC')));
 
       $em->persist($program_like);
-      $em->flush();
     }
+    $em->flush();
   }
 
     /**
@@ -683,8 +686,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $insert_tag->setDe($tag['de']);
 
           $em->persist($insert_tag);
-          $em->flush();
       }
+    $em->flush();
   }
 
   /**
@@ -725,8 +728,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             $insert_extension->setPrefix($extension['prefix']);
 
             $em->persist($insert_extension);
-            $em->flush();
         }
+      $em->flush();
     }
 
   /**
@@ -1043,7 +1046,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $starter->setOrder(1);
 
       $programs = $table->getHash();
-      for ($i = 0; $i < count($programs); ++$i ) {
+      $count = count($programs);
+      for ($i = 0; $i < $count; ++$i ) {
           $user = $em->getRepository('AppBundle:User')->findOneBy(array(
         'username' => $programs[$i]['owned by'],
       ));
@@ -1160,7 +1164,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
          */
         $em = $this->kernel->getContainer()->get('doctrine')->getManager();
         $program_stats = $table->getHash();
-        for ($i = 0; $i < count($program_stats); ++$i) {
+        $count = count($program_stats);
+        for ($i = 0; $i < $count; ++$i) {
             $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
             @$config = array(
                 'downloaded_at' => $program_stats[$i]['downloaded_at'],
@@ -1203,7 +1208,76 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $em->flush();
     }
 
-    /**
+  /**
+   * @Given /^there are reportable programs:$/
+   */
+  public function thereAreReportablePrograms(TableNode $table)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $programs = $table->getHash();
+    $count = count($programs);
+    for ($i = 0; $i < $count; ++$i ) {
+      $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+        'username' => $programs[$i]['owned by'],
+      ));
+      $program = new Program();
+      $program->setUser($user);
+      $program->setName($programs[$i]['name']);
+      $program->setDescription("Default Description");
+      $program->setViews(1337);
+      $program->setDownloads(1337);
+      $program->setApkDownloads(1337);
+      $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
+      $program->setUploadedAt(new \DateTime("01.01.2013 12:00", new \DateTimeZone('UTC')));
+      $program->setRemixMigratedAt(null);
+      $program->setCatrobatVersion(1);
+      $program->setCatrobatVersionName("0.8.5");
+      $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
+      $program->setUploadIp('127.0.0.1');
+      $program->setFilesize(0);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
+      $program->setUploadLanguage('en');
+      $program->setApproved(false);
+      $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
+      $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
+
+      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
+        $tag_repo = $em->getRepository('AppBundle:Tag');
+        $tags = explode(',', $programs[$i]['tags_id']);
+        foreach ($tags as $tag_id) {
+          $tag = $tag_repo->find($tag_id);
+          $program->addTag($tag);
+        }
+      }
+
+      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
+        $extension_repo = $em->getRepository('AppBundle:Extension');
+        $extensions = explode(',', $programs[$i]['extensions']);
+        foreach ($extensions as $extension_name) {
+          $extension = $extension_repo->findOneByName($extension_name);
+          $program->addExtension($extension);
+        }
+      }
+
+      if($program->getApkStatus() == Program::APK_READY) {
+        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+        $apkrepository = $this->kernel->getContainer()->get('apkrepository');
+        $temppath = tempnam(sys_get_temp_dir(), 'apktest');
+        copy(self::FIXTUREDIR.'test.catrobat', $temppath);
+        $apkrepository->save(new File($temppath), $i);
+
+        $file_repo = $this->kernel->getContainer()->get('filerepository');
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR.'test.catrobat'), $i);
+      }
+
+      $em->persist($program);
+    }
+    $em->flush();
+  }
+
+
+
+  /**
    * @When /^I download "([^"]*)"$/
    */
   public function iDownload($arg1)
@@ -1632,7 +1706,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $user_manager = $this->kernel->getContainer()->get('usermanager');
         $users = $table->getHash();
         $user = null;
-        for($i = 0; $i < count($users); $i++)
+        $count = count($users);
+        for($i = 0; $i < $count; $i++)
         {
             $user = $user_manager->findUserByUsername($users[$i]["name"]);
             assertNotNull($user);
