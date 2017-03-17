@@ -16,7 +16,6 @@ class CatrobatCodeParser
         {
             $parsed_program = null;
         }
-        
         return $parsed_program;
     }
 

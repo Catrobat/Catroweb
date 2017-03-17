@@ -7,6 +7,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CodeStatistic
 {
+    private $total_num_scenes;
     private $total_num_scripts;
     private $total_num_bricks;
     private $total_num_objects;
@@ -20,6 +21,7 @@ class CodeStatistic
 
     public function __construct()
     {
+        $this->total_num_scenes = 0;
         $this->total_num_scripts = 0;
         $this->total_num_bricks = 0;
         $this->total_num_objects = 0;
@@ -31,31 +33,52 @@ class CodeStatistic
         $this->brick_type_statistic = array(
           'eventBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+                'numDifferent' => 0,
+                'listDifferent' => array()
+            )
           ),
           'controlBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'motionBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'soundBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'looksBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'penBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'dataBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           )
         );
 
@@ -72,6 +95,9 @@ class CodeStatistic
 
     public function update(ParsedObjectsContainer $object_list_container)
     {
+        if($object_list_container instanceof ParsedScene)
+            $this->updateSceneStatistic();
+
         $objects = array_merge(array($object_list_container->getBackground()), $object_list_container->getObjects());
 
         foreach($objects as $object) {
@@ -81,6 +107,11 @@ class CodeStatistic
             else
                 $this->updateObjectStatistic($object);
         }
+    }
+
+    protected function updateSceneStatistic()
+    {
+        $this->total_num_scenes++;
     }
 
     protected function updateObjectStatistic(ParsedObject $object)
@@ -157,7 +188,8 @@ class CodeStatistic
         $this->brick_type_statistic[$brick_category]['numTotal']++;
         if (!in_array($brick_type, $this->brick_type_register[$brick_category]))
         {
-            $this->brick_type_statistic[$brick_category]['numDifferent']++;
+            $this->brick_type_statistic[$brick_category]['different']['numDifferent']++;
+            $this->brick_type_statistic[$brick_category]['different']['listDifferent'][] = $brick_type;
             $this->brick_type_register[$brick_category][] = $brick_type;
         }
     }
@@ -195,6 +227,11 @@ class CodeStatistic
         {
             $this->total_num_local_vars = null;
         }
+    }
+
+    public function getSceneStatistic()
+    {
+        return $this->total_num_scenes;
     }
 
     public function getScriptStatistic()

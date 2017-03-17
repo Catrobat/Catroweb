@@ -173,15 +173,22 @@
 {% endmacro %}
 
 {% macro brick_statistic(statistic) %}
-    <div class="flex-container">
-        <div class="flex-left">
-            <p class="light">Total:</p>
-            <p class="light">Different:</p>
-        </div>
-        <div class="flex-right">
-            <p class="heavy">{{ statistic.numTotal }}</p>
-            <p class="heavy">{{ statistic.numDifferent }}</p>
-        </div>
+    <div class="specific-brick-stats">
+        <span class="light">Total:</span><span class="heavy specific-stat-num">{{ statistic.numTotal }}</span>
+    </div>
+    <div class="specific-brick-stats">
+        <span class="light">Different:</span><span class="heavy specific-stat-num">{{ statistic.different.numDifferent }}</span>
+    </div>
+    <div class="different-statistic-dropcontent">
+        <div class="exit-btn"><img src="{{ asset('./images/symbols/exit_cross.svg') }}"></div>
+        <span class="separation-line"></span>
+        {% if statistic.different.listDifferent|length == 0 %}
+            <p class="light no-brick-type-note">NO BRICKS</p>
+        {% else %}
+            {% for different_brick_type in statistic.different.listDifferent %}
+                <p class="heavy different-brick-type">{{ different_brick_type|decamelize }}</p>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endmacro %}
 
@@ -190,6 +197,9 @@
     <div class="total-statistic">
         <div class="flex-container">
             <div class="flex-left">
+                {% if program_statistic.getSceneStatistic() > 0 %}
+                    <p class="light">Total number of <span class="brick-stat-heading">scenes</span>:</p>
+                {% endif %}
                 <p class="light">Total number of <span class="brick-stat-heading">scripts</span>:</p>
                 <p class="light">Total number of <span class="brick-stat-heading">bricks</span>:</p>
                 <p class="light">Total number of <span class="brick-stat-heading">objects</span>:</p>
@@ -203,6 +213,9 @@
                 {% endif %}
             </div>
             <div class="flex-right">
+                {% if program_statistic.getSceneStatistic() > 0 %}
+                    <p class="heavy">{{ program_statistic.getSceneStatistic() }}</p>
+                {% endif %}
                 <p class="heavy">{{ program_statistic.getScriptStatistic() }}</p>
                 <p class="heavy">{{ program_statistic.getBrickStatistic() }}</p>
                 <p class="heavy">{{ program_statistic.getObjectStatistic() }}</p>
@@ -295,6 +308,7 @@
     <script>
 
         var sound_map = {};
+        var current_brick_stat_block = null;
 
         $(document).ready(function() {
             $('.collapse-btn').on("click", function() {
@@ -327,6 +341,22 @@
                         $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code');
                         text.text('SHOW CODE STATISTIC');
                     });
+                }
+            });
+
+            $(document).on('click', '.brick-statistic-block', function() {
+                if (current_brick_stat_block !== null) {
+                    current_brick_stat_block.find('.different-statistic-dropcontent').fadeToggle(150);
+                    current_brick_stat_block.toggleClass('active');
+                    console.log('hi');
+                }
+
+                if ($(this).is(current_brick_stat_block)) {
+                    current_brick_stat_block = null;
+                } else {
+                    $(this).find('.different-statistic-dropcontent').fadeToggle(150);
+                    $(this).toggleClass('active');
+                    current_brick_stat_block = $(this);
                 }
             });
         });
