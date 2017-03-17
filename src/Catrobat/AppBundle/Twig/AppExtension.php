@@ -35,6 +35,21 @@ class AppExtension extends \Twig_Extension
         $this->container = $container;
     }
 
+    public function getFilters()
+    {
+        return array(
+            'decamelize' => new \Twig_Filter_Method($this, 'decamelizeFilter')
+        );
+    }
+
+    public function decamelizeFilter($input)
+    {
+        if (!is_string($input))
+            return $input;
+
+        return preg_replace('/(?<!^)[A-Z]/', ' $0', $input);
+    }
+
     public function getFunctions()
     {
         return array(

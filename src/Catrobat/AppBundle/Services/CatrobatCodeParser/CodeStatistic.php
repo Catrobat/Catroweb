@@ -31,31 +31,52 @@ class CodeStatistic
         $this->brick_type_statistic = array(
           'eventBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+                'numDifferent' => 0,
+                'listDifferent' => array()
+            )
           ),
           'controlBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'motionBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'soundBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'looksBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'penBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           ),
           'dataBricks' => array(
             'numTotal' => 0,
-            'numDifferent' => 0
+            'different' => array(
+              'numDifferent' => 0,
+              'listDifferent' => array()
+            )
           )
         );
 
@@ -157,7 +178,8 @@ class CodeStatistic
         $this->brick_type_statistic[$brick_category]['numTotal']++;
         if (!in_array($brick_type, $this->brick_type_register[$brick_category]))
         {
-            $this->brick_type_statistic[$brick_category]['numDifferent']++;
+            $this->brick_type_statistic[$brick_category]['different']['numDifferent']++;
+            $this->brick_type_statistic[$brick_category]['different']['listDifferent'][] = $brick_type;
             $this->brick_type_register[$brick_category][] = $brick_type;
         }
     }

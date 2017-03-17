@@ -5,11 +5,13 @@ p {
   margin: 0;
 }
 
-p.light {
+p.light,
+span.light {
   color: rgba(255, 255, 255, 0.6);
 }
 
-p.heavy {
+p.heavy,
+span.heavy {
   font-weight: 700;
 }
 
@@ -105,9 +107,29 @@ span.brick-stat-heading {
         text-align: right;
       }
     }
+
+
+  }
+
+  img.diff-statistic-arrow {
+    position: absolute;
+    bottom: 6px;
+    left: -15px;
+    height: auto;
+    width: auto;
+    max-height: 6px;
+    margin: 0;
+    border: none;
+    transform: rotate(-90deg);
+
+    &:hover {
+      cursor: pointer;
+      cursor: hand;
+    }
   }
 
   .brick-statistics {
+    padding: 0 40px;
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -115,15 +137,120 @@ span.brick-stat-heading {
   }
 
   .brick-statistic-block {
+    position: relative;
     margin: 8px;
     min-width: 20%;
+    height: 62px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    border-radius: 4px;
+    transition: all 0.15s ease;
 
     div:nth-child(2) {
       margin-left: 12px;
+    }
+
+    .specific-brick-stats {
+      margin-left: 10px;
+      text-align: right;
+      position: relative;
+      width: 100px;
+      color: white;
+
+      .specific-stat-num {
+        margin-left: 12px;
+      }
+    }
+
+    .different-statistic-dropcontent {
+      z-index: 10;
+      display: none;
+      width: ~"calc(100% + 100px)";
+      position: absolute;
+      top: -25px;
+      left: -50px;
+      color: rgba(255,255,255,.9);
+      background-color: rgba(14,14,14,.9);
+      border-radius: 5px;
+      text-align: center;
+      padding: 97px 5px 25px;
+
+      .no-brick-type-note {
+        font-size: 13px;
+        margin-top: 10px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.3);
+      }
+
+      .different-brick-type {
+        position: relative;
+
+        &:first-of-type {
+          margin-top: 10px;
+        }
+      }
+
+      .separation-line {
+        display: inline-block;
+        height: 2px;
+        width: 40px;
+        background-color: rgba(255,255,255,.7);
+      }
+
+      .exit-btn {
+        border-radius: 50%;
+        background-color: rgba(14,14,14,.9);
+        position: absolute;
+        right: -7.5px;
+        top: -7.5px;
+        width: 25px;
+        height: 25px;
+
+        img {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+
+    &.active {
+      background-color: rgba(14,14,14,.9);
+
+      .brick-stat-heading {
+        z-index: 15;
+        color: white;
+      }
+
+      .specific-brick-stats {
+        z-index: 15;
+
+        span.light {
+          color: rgba(255,255,255,0.9);
+        }
+
+        span.heavy {
+          color: @default-text-color;
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      cursor: hand;
+
+      .brick-stat-heading {
+        color: white;
+      }
+
+      span.light {
+        color: rgba(255,255,255,0.9);
+      }
+
+      span.heavy {
+        color: @default-text-color;
+      }
     }
   }
 
@@ -140,6 +267,10 @@ span.brick-stat-heading {
 
     .flex-right {
       margin-left: 5%;
+    }
+
+    .flex-left {
+      position: relative;
     }
   }
 
