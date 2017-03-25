@@ -24,13 +24,11 @@ Feature: Testcases for nolb user
   Scenario: Nolb user cannot edit their profile
     Given I log in as "nolbmuser" with the password "123456"
     And I am on "/pocketcode/profile"
-    And I wait for a second
     Then I should see 0 "#edit-icon"
 
   Scenario: Nolb teacher can only edit their password
     Given I log in as "nolbteacher" with the password "654321"
     And I am on "/pocketcode/profile"
-    And I wait for a second
     Then the element "#edit-icon" should be visible
     When I click the "edit" button
     Then the element "#password-information" should be visible
