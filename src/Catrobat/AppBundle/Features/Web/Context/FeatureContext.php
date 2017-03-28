@@ -752,8 +752,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
       if ($arg1 == 'in') {
           $this->assertPageNotContainsText('Your password or username was incorrect.');
-          $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
-          $this->getSession()->wait(1000);
+          $this->getSession()->wait(2000, 'window.location.href.search("login") == -1');
           $this->assertElementOnPage('#logo');
           $this->assertElementNotOnPage('#btn-login');
           $this->assertElementOnPage('#nav-dropdown');
@@ -761,8 +760,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $this->assertElementOnPage('#nav-dropdown');
       }
       if ($arg1 == 'out') {
-          $this->getSession()->wait(10000, 'window.location.href.search("profile") == -1');
-          $this->getSession()->wait(1000);
+          $this->getSession()->wait(2000, 'window.location.href.search("profile") == -1');
           $this->assertElementOnPage('#btn-login');
           $this->assertElementNotOnPage('#nav-dropdown');
       }
@@ -970,7 +968,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
         if ($this->use_real_oauth_javascript_code) {
             $this->clickLink('btn-login_facebook');
-            $this->getSession()->wait(2000);
         } else {
             $this->setFacebookFakeData();
             $this->clickFacebookFakeButton();
@@ -1001,10 +998,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
         if ($this->use_real_oauth_javascript_code) {
             $this->clickLink('btn-login_google');
-            $this->getSession()->wait(1500);
             if($arg1 == 'twice') {
                 $this->clickLink('btn-login_google');
-                $this->getSession()->wait(2500);
             }
         } else {
             $this->setGooglePlusFakeData();
@@ -1435,7 +1430,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSwitchToPopupWindow()
   {
-      $this->getSession()->wait(6000);
       $page = $this->getSession()->getPage();
       $window_names = $this->getSession()->getDriver()->getWindowNames();
       foreach ($window_names as $name) {
@@ -1446,7 +1440,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           }
           $this->getSession()->switchToWindow($name);
       }
-      $this->getSession()->wait(1000);
   }
 
     /**
@@ -1458,7 +1451,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             $mail = $this->getParameterValue('facebook_testuser_mail');
             $pw = $this->getParameterValue('facebook_testuser_pw');
             echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-            $this->getSession()->wait(1000);
             $page = $this->getSession()->getPage();
             if($page->find('css', '#facebook') && $page->find('css', '#login_form')) {
                 echo 'facebook login form appeared' . "\n";
@@ -1472,23 +1464,19 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
                 $page->fillField('pass',$pw);
                 $button = $page->findById('u_0_0');
                 assertTrue($button != null);
-                $this->getSession()->wait(500);
                 $button->press();
             } else {
                 assertTrue(false, 'No Facebook form appeared!' . "\n");
             }
             $this->getSession()->switchToWindow(null);
-            $this->getSession()->wait(1000);
 
             $this->iSwitchToPopupWindow();
             if($page->find('css', '#facebook') && $page->find('css', '._1a_q') ) {
                 echo 'facebook authentication login form appeared' . "\n";
                 $button = $page->findButton('__CONFIRM__');
                 assertTrue($button != null);
-                $this->getSession()->wait(500);
                 $button->press();
                 $this->getSession()->switchToWindow(null);
-                $this->getSession()->wait(1000);
             }
         } else {
             //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
@@ -1506,7 +1494,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             $mail = $this->getParameterValue('google_testuser_mail');
             $pw = $this->getParameterValue('google_testuser_pw');
             echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-            $this->getSession()->wait(3000);
             $page = $this->getSession()->getPage();
             if($page->find('css', '#approval_container') &&
                 $page->find('css', '#submit_approve_access')) {
@@ -1523,7 +1510,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             else {
                 assertTrue(false, 'No Google form appeared!' . "\n");
             }
-            $this->getSession()->wait(1000);
         } else {
             $this->setGooglePlusFakeData();
             $this->clickGooglePlusFakeButton();
@@ -1536,7 +1522,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $page = $this->getSession()->getPage();
         $button = $page->findById('submit_approve_access');
         assertTrue($button != null);
-        $this->getSession()->wait(1500);
         $button->press();
         $this->getSession()->switchToWindow(null);
     }
@@ -1550,7 +1535,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $button = $page->findById('signIn');
         assertTrue($button != null);
         $button->press();
-        $this->getSession()->wait(2000);
 
         $this->approveGoogleAccess();
     }
@@ -1563,7 +1547,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $button = $page->findById('next');
         assertTrue($button != null);
         $button->press();
-        $this->getSession()->wait(2000);
         if($page->find('css', '#gaia_firstform') &&
             $page->find('css', '#Email-hidden') &&
             $page->find('css', '#Passwd')
@@ -1580,7 +1563,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $button = $page->findById('signIn');
         assertTrue($button != null);
         $button->press();
-        $this->getSession()->wait(2000);
         if($page->find('css', '#approval_container') &&
             $page->find('css', '#submit_approve_access')) {
             $this->approveGoogleAccess();
@@ -1673,8 +1655,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iShouldNotBeLoggedIn()
     {
-        $this->getSession()->wait(10000, 'window.location.href.search("profile") == -1');
-        $this->getSession()->wait(1000);
+        $this->getSession()->wait(1000, 'window.location.href.search("profile") == -1');
         $this->assertElementOnPage("#logo");
         $this->assertElementOnPage("#btn-login");
         $this->assertElementNotOnPage("#nav-dropdown");
@@ -1693,7 +1674,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iChooseTheUsernameTestingButtonEnabled($arg1)
     {
-        $this->getSession()->wait(2500);
+        $this->getSession()->wait(300);
         $page = $this->getSession()->getPage();
 
         $button = $page->findById('btn_oauth_username');
@@ -1701,20 +1682,16 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         assertTrue($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input',$arg1);
-        $this->getSession()->wait(400);
         assertFalse($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input','');
-        $this->getSession()->wait(400);
         assertTrue($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input',$arg1);
-        $this->getSession()->wait(400);
         $button->press();
         if (!$arg1 === self::ALREADY_IN_DB_USER) {
-            $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+            $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
         }
-        $this->getSession()->wait(2500);
     }
 
     /**
@@ -1722,7 +1699,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     public function iChooseTheUsername($arg1)
     {
-        $this->getSession()->wait(2500);
+        $this->getSession()->wait(300);
         $page = $this->getSession()->getPage();
 
         $button = $page->findById('btn_oauth_username');
@@ -1730,14 +1707,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         assertTrue($button->hasAttribute('disabled'));
 
         $page->fillField('dialog_oauth_username_input',$arg1);
-        $this->getSession()->wait(400);
         assertFalse($button->hasAttribute('disabled'));
 
         $button->press();
         if (!$arg1 === self::ALREADY_IN_DB_USER) {
-            $this->getSession()->wait(10000, 'window.location.href.search("login") == -1');
+            $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
         }
-        $this->getSession()->wait(2500);
+        $this->getSession()->wait(500);
     }
 
     private function getParameterValue($name) {
@@ -2102,7 +2078,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      * @Given /^I wait for AJAX to finish$/
      */
     public function iWaitForAjaxToFinish() {
-        $this->getSession()->wait(10000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
+        $this->getSession()->wait(5000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
     }
 
     /**
