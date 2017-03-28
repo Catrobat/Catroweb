@@ -38,7 +38,7 @@ class DownloadStatisticsListener
                 // all recommendations (except tag-recommendations -> see below)
                 $rec_by_page_id = $attributes->get('rec_by_page_id');
                 if ($attributes->has('rec_by_program_id')) {
-                    $rec_by_program_id = (bool) $attributes->get('rec_by_program_id');
+                    $rec_by_program_id = $attributes->get('rec_by_program_id');
                 }
                 if ($attributes->has('rec_user_specific')) {
                     $rec_user_specific = (bool) $attributes->get('rec_user_specific');
