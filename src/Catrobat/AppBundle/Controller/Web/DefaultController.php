@@ -96,7 +96,6 @@ class DefaultController extends Controller
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
 
-
     $user = $this->getUser();
     $nolb = false;
     if ($user) {
@@ -107,15 +106,7 @@ class DefaultController extends Controller
     foreach($package->getCategories() as $category) {
       $files = array();
       $files = $this->generateDownloadUrl($flavor, $category, $files);
-      if(strpos($category->getName(), 'Nolb') !== false && $nolb)
-      {
-        $categories[] = array(
-            'name' => $category->getName(),
-            'files' => $files,
-            'priority' => $category->getPriority()
-        );
-      }
-      else if (strpos($category->getName(), 'Nolb') == false)
+      if(!(strpos($category->getName(), 'Nolb') !== false && !$nolb))
       {
         $categories[] = array(
             'name' => $category->getName(),
