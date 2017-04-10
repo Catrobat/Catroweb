@@ -1,0 +1,998 @@
+NextLookBrick
+Next look
+1h_brick_green.png
+---
+PreviousLookBrick
+Previous look
+1h_brick_green.png
+---
+SetBackgroundBrick
+Set background
+1h_brick_green.png
+---
+SetBackgroundBrick
+Set background
+1h_brick_green.png
+---
+SetMassBrick
+Set mass to 1.0 kilogram
+1h_brick_blue.png
+---
+SetVelocityBrick
+Set velocity to X: 0.0 Y: 0.0 steps/second
+1h_brick_blue.png
+---
+SetBounceBrick
+Set bounce factor to 80.0%
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to DYNAMIC
+1h_brick_blue.png
+---
+SetMassBrick
+Set mass to 1.0 kilogram
+1h_brick_blue.png
+---
+SetFrictionBrick
+Set friction to 20.0%
+1h_brick_blue.png
+---
+PlaySoundBrick
+Start sound
+1h_brick_violet.png
+---
+SetVariableBrick
+Set variable var1 to 1.0
+1h_brick_red.png
+---
+ChangeVariableBrick
+Change variable var1 by 1.0
+1h_brick_red.png
+---
+ShowTextBrick
+Show variable var1 at X: 100 Y: 200
+1h_brick_red.png
+---
+HideTextBrick
+Hide variable var1
+1h_brick_red.png
+---
+AddItemToUserListBrick
+Add 1.0 to list list1
+1h_brick_red.png
+---
+DeleteItemOfUserListBrick
+Delete item from list list1 at position 1
+1h_brick_red.png
+---
+InsertItemIntoUserListBrick
+Insert 1.0 into list list1 at position 1
+1h_brick_red.png
+---
+ReplaceItemInUserListBrick
+Replace item in list list1 at position 1 with 1.0
+1h_brick_red.png
+---
+SetLookBrick
+Switch to look
+1h_brick_green.png
+---
+NextLookBrick
+Next look
+1h_brick_green.png
+---
+CameraBrick
+Turn camera on
+1h_brick_green.png
+---
+CameraBrick
+Turn camera off
+1h_brick_green.png
+---
+ChooseCameraBrick
+Use camera front
+1h_brick_green.png
+---
+ChooseCameraBrick
+Use camera back
+1h_brick_green.png
+---
+SetSizeToBrick
+Set size to 60.0%
+1h_brick_green.png
+---
+ChangeSizeByNBrick
+Change size by 10.0
+1h_brick_green.png
+---
+HideBrick
+Hide
+1h_brick_green.png
+---
+ShowBrick
+Show
+1h_brick_green.png
+---
+SetTransparencyBrick
+Set transparency to 50.0%
+1h_brick_green.png
+---
+ChangeTransparencyByNBrick
+Change transparency by 25.0
+1h_brick_green.png
+---
+SetBrightnessBrick
+Set brightness to 50.0%
+1h_brick_green.png
+---
+ChangeBrightnessByNBrick
+Change brightness by 25.0
+1h_brick_green.png
+---
+SetColorBrick
+Set color to 0.0%
+1h_brick_green.png
+---
+ChangeColorByNBrick
+Change color by 25.0
+1h_brick_green.png
+---
+ClearGraphicEffectBrick
+Clear graphic effects
+1h_brick_green.png
+---
+FlashBrick
+Turn flashlight on
+1h_brick_green.png
+---
+FlashBrick
+Turn flashlight off
+1h_brick_green.png
+---
+PlaySoundBrick
+Start sound
+1h_brick_violet.png
+---
+StopAllSoundsBrick
+Stop all sounds
+1h_brick_violet.png
+---
+ChangeVariableBrick
+Change variable var1 by 1.0
+1h_brick_red.png
+---
+SetVolumeToBrick
+Set volume to 60.0%
+1h_brick_violet.png
+---
+ChangeVolumeByNBrick
+Change volume by  - 10.0
+1h_brick_violet.png
+---
+SpeakBrick
+Speak "Hello!"
+1h_brick_violet.png
+---
+PlaceAtBrick
+Place at X: 100 Y: 200
+1h_brick_blue.png
+---
+SetXBrick
+Set X to 100
+1h_brick_blue.png
+---
+SetYBrick
+Set Y to 200
+1h_brick_blue.png
+---
+ChangeXByNBrick
+Change X by 10
+1h_brick_blue.png
+---
+ChangeYByNBrick
+Change Y by 10
+1h_brick_blue.png
+---
+IfOnEdgeBounceBrick
+If on edge bounce
+1h_brick_blue.png
+---
+MoveNStepsBrick
+Move 10.0 steps
+1h_brick_blue.png
+---
+TurnLeftBrick
+Turn left 15.0 degrees
+1h_brick_blue.png
+---
+TurnRightBrick
+Turn right 15.0 degrees
+1h_brick_blue.png
+---
+PointInDirectionBrick
+Point in direction 90.0 degrees
+1h_brick_blue.png
+---
+GlideToBrick
+Glide 1.0 second(s) to X: 100 Y: 200
+1h_brick_blue.png
+---
+GoNStepsBackBrick
+Go back 1 layer
+1h_brick_blue.png
+---
+ComeToFrontBrick
+Go to front
+1h_brick_blue.png
+---
+VibrationBrick
+Vibrate for 1.0 second(s)
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to DYNAMIC
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to FIXED
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to NONE
+1h_brick_blue.png
+---
+SetVelocityBrick
+Set velocity to X: 0.0 Y: 0.0 steps/second
+1h_brick_blue.png
+---
+TurnLeftSpeedBrick
+Rotate left 15.0 degrees/second
+1h_brick_blue.png
+---
+TurnRightSpeedBrick
+Rotate right 15.0 degrees/second
+1h_brick_blue.png
+---
+SetGravityBrick
+Set gravity for all objects to X: 0.0 Y:  - 10.0 steps/second²
+1h_brick_blue.png
+---
+SetMassBrick
+Set mass to 1.0 kilogram
+1h_brick_blue.png
+---
+SetBounceBrick
+Set bounce factor to 80.0%
+1h_brick_blue.png
+---
+SetFrictionBrick
+Set friction to 20.0%
+1h_brick_blue.png
+---
+PointToBrick
+Point towards 
+1h_brick_blue.png
+---
+PointToBrick
+Point towards Control-Object
+1h_brick_blue.png
+---
+WaitBrick
+Wait 1.0 second(s)
+1h_brick_orange.png
+---
+NoteBrick
+Note add comment here…
+1h_brick_orange.png
+---
+ForeverBrick
+Forever
+1h_brick_orange.png
+---
+IfLogicBeginBrick
+If 1 < 2 is true then
+1h_brick_orange.png
+---
+IfLogicElseBrick
+Else
+1h_brick_orange.png
+---
+RepeatBrick
+Repeat 10 times
+1h_brick_orange.png
+---
+LoopEndBrick
+End of loop
+1h_brick_orange.png
+---
+IfLogicEndBrick
+End If
+1h_brick_orange.png
+---
+LoopEndlessBrick
+End of loop
+1h_brick_orange.png
+---
+BroadcastBrick
+Broadcast "message 1"
+1h_brick_brown.png
+---
+BroadcastWaitBrick
+Broadcast and wait "message 1"
+1h_brick_brown.png
+---
+BroadcastBrick
+Broadcast "Motion-Object ANYTHING"
+1h_brick_brown.png
+---
+BroadcastWaitBrick
+Broadcast and wait "Motion-Object ANYTHING"
+1h_brick_brown.png
+---
+IfLogicBeginBrick
+If 1 < 2 is true then
+1h_brick_orange.png
+---
+IfLogicElseBrick
+Else
+1h_brick_orange.png
+---
+IfLogicEndBrick
+End If
+1h_brick_orange.png
+---
+IfLogicBeginBrick
+If 0255466155.564 is true then
+1h_brick_orange.png
+---
+IfLogicEndBrick
+End If
+1h_brick_orange.png
+---
+WaitUntilBrick
+Wait until 1 < 2 is true
+1h_brick_orange.png
+---
+RepeatUntilBrick
+Repeat until 1 < 2 is true
+1h_brick_orange.png
+---
+LoopEndBrick
+End of loop
+1h_brick_orange.png
+---
+StopScriptBrick
+Stop this script
+1h_brick_orange.png
+---
+StopScriptBrick
+Stop all scripts
+1h_brick_orange.png
+---
+StopScriptBrick
+Stop other scripts of this object
+1h_brick_orange.png
+---
+SceneStartBrick
+Start scene Scene-tobe-continued
+1h_brick_orange.png
+---
+SceneStartBrick
+Start scene Scene-tobe-continued
+1h_brick_orange.png
+---
+CloneBrick
+Create clone of Bricks Juli2016
+1h_brick_orange.png
+---
+DeleteThisCloneBrick
+Delete this
+1h_brick_orange.png
+---
+CloneBrick
+Create clone of myself
+1h_brick_orange.png
+---
+SceneTransitionBrick
+Continue scene Scene-tobe-continued
+1h_brick_orange.png
+---
+WaitBrick
+Wait 1.0 second(s)
+1h_brick_grey.png
+---
+GoToBrick
+Go to Touch position
+1h_brick_blue.png
+---
+GoToBrick
+Go to Random position
+1h_brick_blue.png
+---
+GoToBrick
+Go to Control-Object
+1h_brick_blue.png
+---
+SetRotationStyleBrick
+Set rotation style left-right only
+1h_brick_blue.png
+---
+SetRotationStyleBrick
+Set rotation style all-around
+1h_brick_blue.png
+---
+SetRotationStyleBrick
+Set rotation style don't rotate
+1h_brick_blue.png
+---
+PlaySoundAndWaitBrick
+Start sound and wait
+1h_brick_violet.png
+---
+SpeakAndWaitBrick
+Speak "Hello!" and wait
+1h_brick_violet.png
+---
+PreviousLookBrick
+Previous look
+1h_brick_green.png
+---
+AskBrick
+Ask "'What's your name?'" and store written answer in var1
+1h_brick_green.png
+---
+AskBrick
+Ask "'What's your name?'" and store written answer in blubbli
+1h_brick_green.png
+---
+SayBubbleBrick
+Say "Hello!"
+1h_brick_green.png
+---
+SayForBubbleBrick
+Say "Hello!" for 1.0 second/s
+1h_brick_green.png
+---
+ThinkBubbleBrick
+Think "Hmmmm!"
+1h_brick_green.png
+---
+ThinkForBubbleBrick
+Think "Hmmmm!" for 1.0 second/s
+1h_brick_green.png
+---
+SetBackgroundBrick
+Set background
+1h_brick_green.png
+---
+SetBackgroundAndWaitBrick
+Set background and wait
+1h_brick_green.png
+---
+PenDownBrick
+Pen down
+1h_brick_darkgreen.png
+---
+PenUpBrick
+Pen up
+1h_brick_darkgreen.png
+---
+SetPenSizeBrick
+Set pen size to 4
+1h_brick_darkgreen.png
+---
+SetPenColorBrick
+Set pen color to Red: 0 Green: 0 Blue: 255
+1h_brick_darkgreen.png
+---
+StampBrick
+Stamp
+1h_brick_darkgreen.png
+---
+ClearBackgroundBrick
+Clear
+1h_brick_darkgreen.png
+---
+NextLookBrick
+Next look
+1h_brick_green.png
+---
+PreviousLookBrick
+Previous look
+1h_brick_green.png
+---
+SetBackgroundBrick
+Set background
+1h_brick_green.png
+---
+SetBackgroundBrick
+Set background
+1h_brick_green.png
+---
+SetMassBrick
+Set mass to 1.0 kilogram
+1h_brick_blue.png
+---
+SetVelocityBrick
+Set velocity to X: 0.0 Y: 0.0 steps/second
+1h_brick_blue.png
+---
+SetBounceBrick
+Set bounce factor to 80.0%
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to DYNAMIC
+1h_brick_blue.png
+---
+SetMassBrick
+Set mass to 1.0 kilogram
+1h_brick_blue.png
+---
+SetFrictionBrick
+Set friction to 20.0%
+1h_brick_blue.png
+---
+PlaySoundBrick
+Start sound
+1h_brick_violet.png
+---
+SetVariableBrick
+Set variable var1 to 1.0
+1h_brick_red.png
+---
+ChangeVariableBrick
+Change variable var1 by 1.0
+1h_brick_red.png
+---
+ShowTextBrick
+Show variable var1 at X: 100 Y: 200
+1h_brick_red.png
+---
+HideTextBrick
+Hide variable var1
+1h_brick_red.png
+---
+AddItemToUserListBrick
+Add 1.0 to list list1
+1h_brick_red.png
+---
+DeleteItemOfUserListBrick
+Delete item from list 
+                    
+                   at position 1
+1h_brick_red.png
+---
+InsertItemIntoUserListBrick
+Insert 1.0 into list 
+                    
+                   at position 1
+1h_brick_red.png
+---
+ReplaceItemInUserListBrick
+Replace item in list 
+                    
+                   at position 1 with 1.0
+1h_brick_red.png
+---
+SetLookBrick
+Switch to look
+1h_brick_green.png
+---
+NextLookBrick
+Next look
+1h_brick_green.png
+---
+CameraBrick
+Turn camera on
+1h_brick_green.png
+---
+CameraBrick
+Turn camera off
+1h_brick_green.png
+---
+ChooseCameraBrick
+Use camera front
+1h_brick_green.png
+---
+ChooseCameraBrick
+Use camera back
+1h_brick_green.png
+---
+SetSizeToBrick
+Set size to 60.0%
+1h_brick_green.png
+---
+ChangeSizeByNBrick
+Change size by 10.0
+1h_brick_green.png
+---
+HideBrick
+Hide
+1h_brick_green.png
+---
+ShowBrick
+Show
+1h_brick_green.png
+---
+SetTransparencyBrick
+Set transparency to 50.0%
+1h_brick_green.png
+---
+ChangeTransparencyByNBrick
+Change transparency by 25.0
+1h_brick_green.png
+---
+SetBrightnessBrick
+Set brightness to 50.0%
+1h_brick_green.png
+---
+ChangeBrightnessByNBrick
+Change brightness by 25.0
+1h_brick_green.png
+---
+SetColorBrick
+Set color to 0.0%
+1h_brick_green.png
+---
+ChangeColorByNBrick
+Change color by 25.0
+1h_brick_green.png
+---
+ClearGraphicEffectBrick
+Clear graphic effects
+1h_brick_green.png
+---
+FlashBrick
+Turn flashlight on
+1h_brick_green.png
+---
+FlashBrick
+Turn flashlight off
+1h_brick_green.png
+---
+PlaySoundBrick
+Start sound
+1h_brick_violet.png
+---
+StopAllSoundsBrick
+Stop all sounds
+1h_brick_violet.png
+---
+ChangeVariableBrick
+Change variable var1 by 1.0
+1h_brick_red.png
+---
+SetVolumeToBrick
+Set volume to 60.0%
+1h_brick_violet.png
+---
+ChangeVolumeByNBrick
+Change volume by  - 10.0
+1h_brick_violet.png
+---
+SpeakBrick
+Speak "Hello!"
+1h_brick_violet.png
+---
+PlaceAtBrick
+Place at X: 100 Y: 200
+1h_brick_blue.png
+---
+SetXBrick
+Set X to 100
+1h_brick_blue.png
+---
+SetYBrick
+Set Y to 200
+1h_brick_blue.png
+---
+ChangeXByNBrick
+Change X by 10
+1h_brick_blue.png
+---
+ChangeYByNBrick
+Change Y by 10
+1h_brick_blue.png
+---
+IfOnEdgeBounceBrick
+If on edge bounce
+1h_brick_blue.png
+---
+MoveNStepsBrick
+Move 10.0 steps
+1h_brick_blue.png
+---
+TurnLeftBrick
+Turn left 15.0 degrees
+1h_brick_blue.png
+---
+TurnRightBrick
+Turn right 15.0 degrees
+1h_brick_blue.png
+---
+PointInDirectionBrick
+Point in direction 90.0 degrees
+1h_brick_blue.png
+---
+GlideToBrick
+Glide 1.0 second(s) to X: 100 Y: 200
+1h_brick_blue.png
+---
+GoNStepsBackBrick
+Go back 1 layer
+1h_brick_blue.png
+---
+ComeToFrontBrick
+Go to front
+1h_brick_blue.png
+---
+VibrationBrick
+Vibrate for 1.0 second(s)
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to DYNAMIC
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to FIXED
+1h_brick_blue.png
+---
+SetPhysicsObjectTypeBrick
+Set motion type to NONE
+1h_brick_blue.png
+---
+SetVelocityBrick
+Set velocity to X: 0.0 Y: 0.0 steps/second
+1h_brick_blue.png
+---
+TurnLeftSpeedBrick
+Rotate left 15.0 degrees/second
+1h_brick_blue.png
+---
+TurnRightSpeedBrick
+Rotate right 15.0 degrees/second
+1h_brick_blue.png
+---
+SetGravityBrick
+Set gravity for all objects to X: 0.0 Y:  - 10.0 steps/second²
+1h_brick_blue.png
+---
+SetMassBrick
+Set mass to 1.0 kilogram
+1h_brick_blue.png
+---
+SetBounceBrick
+Set bounce factor to 80.0%
+1h_brick_blue.png
+---
+SetFrictionBrick
+Set friction to 20.0%
+1h_brick_blue.png
+---
+PointToBrick
+Point towards 
+1h_brick_blue.png
+---
+PointToBrick
+Point towards Control-Object
+1h_brick_blue.png
+---
+WaitBrick
+Wait 1.0 second(s)
+1h_brick_orange.png
+---
+NoteBrick
+Note add comment here…
+1h_brick_orange.png
+---
+ForeverBrick
+Forever
+1h_brick_orange.png
+---
+IfLogicBeginBrick
+If 1 < 2 is true then
+1h_brick_orange.png
+---
+IfLogicElseBrick
+Else
+1h_brick_orange.png
+---
+RepeatBrick
+Repeat 10 times
+1h_brick_orange.png
+---
+LoopEndBrick
+End of loop
+1h_brick_orange.png
+---
+IfLogicEndBrick
+End If
+1h_brick_orange.png
+---
+LoopEndlessBrick
+End of loop
+1h_brick_orange.png
+---
+BroadcastBrick
+Broadcast "message 1"
+1h_brick_brown.png
+---
+BroadcastWaitBrick
+Broadcast and wait "message 1"
+1h_brick_brown.png
+---
+BroadcastBrick
+Broadcast "Motion-Object ANYTHING"
+1h_brick_brown.png
+---
+BroadcastWaitBrick
+Broadcast and wait "Motion-Object ANYTHING"
+1h_brick_brown.png
+---
+IfLogicBeginBrick
+If 1 < 2 is true then
+1h_brick_orange.png
+---
+IfLogicElseBrick
+Else
+1h_brick_orange.png
+---
+IfLogicEndBrick
+End If
+1h_brick_orange.png
+---
+IfLogicBeginBrick
+If 0255466155.564 is true then
+1h_brick_orange.png
+---
+IfLogicEndBrick
+End If
+1h_brick_orange.png
+---
+WaitUntilBrick
+Wait until 1 < 2 is true
+1h_brick_orange.png
+---
+RepeatUntilBrick
+Repeat until 1 < 2 is true
+1h_brick_orange.png
+---
+LoopEndBrick
+End of loop
+1h_brick_orange.png
+---
+StopScriptBrick
+Stop this script
+1h_brick_orange.png
+---
+StopScriptBrick
+Stop all scripts
+1h_brick_orange.png
+---
+StopScriptBrick
+Stop other scripts of this object
+1h_brick_orange.png
+---
+SceneStartBrick
+Start scene Scene-tobe-continued
+1h_brick_orange.png
+---
+SceneStartBrick
+Start scene Scene-tobe-continued
+1h_brick_orange.png
+---
+CloneBrick
+Create clone of Bricks Juli2016
+1h_brick_orange.png
+---
+DeleteThisCloneBrick
+Delete this
+1h_brick_orange.png
+---
+CloneBrick
+Create clone of myself
+1h_brick_orange.png
+---
+SceneTransitionBrick
+Continue scene Scene-tobe-continued
+1h_brick_orange.png
+---
+WaitBrick
+Wait 1.0 second(s)
+1h_brick_grey.png
+---
+GoToBrick
+Go to Touch position
+1h_brick_blue.png
+---
+GoToBrick
+Go to Random position
+1h_brick_blue.png
+---
+GoToBrick
+Go to Control-Object
+1h_brick_blue.png
+---
+SetRotationStyleBrick
+Set rotation style left-right only
+1h_brick_blue.png
+---
+SetRotationStyleBrick
+Set rotation style all-around
+1h_brick_blue.png
+---
+SetRotationStyleBrick
+Set rotation style don't rotate
+1h_brick_blue.png
+---
+PlaySoundAndWaitBrick
+Start sound and wait
+1h_brick_violet.png
+---
+SpeakAndWaitBrick
+Speak "Hello!" and wait
+1h_brick_violet.png
+---
+PreviousLookBrick
+Previous look
+1h_brick_green.png
+---
+AskBrick
+Ask "'What's your name?'" and store written answer in var1
+1h_brick_green.png
+---
+AskBrick
+Ask "'What's your name?'" and store written answer in blubbli
+1h_brick_green.png
+---
+SayBubbleBrick
+Say "Hello!"
+1h_brick_green.png
+---
+SayForBubbleBrick
+Say "Hello!" for 1.0 second/s
+1h_brick_green.png
+---
+ThinkBubbleBrick
+Think "Hmmmm!"
+1h_brick_green.png
+---
+ThinkForBubbleBrick
+Think "Hmmmm!" for 1.0 second/s
+1h_brick_green.png
+---
+SetBackgroundBrick
+Set background
+1h_brick_green.png
+---
+SetBackgroundAndWaitBrick
+Set background and wait
+1h_brick_green.png
+---
+PenDownBrick
+Pen down
+1h_brick_darkgreen.png
+---
+PenUpBrick
+Pen up
+1h_brick_darkgreen.png
+---
+SetPenSizeBrick
+Set pen size to 4
+1h_brick_darkgreen.png
+---
+SetPenColorBrick
+Set pen color to Red: 0 Green: 0 Blue: 255
+1h_brick_darkgreen.png
+---
+StampBrick
+Stamp
+1h_brick_darkgreen.png
+---
+ClearBackgroundBrick
+Clear
+1h_brick_darkgreen.png
+---

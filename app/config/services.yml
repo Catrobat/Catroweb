@@ -316,6 +316,9 @@ services:
         class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
         arguments: ["@translator","@time"]
 
+    catrobat_code_parser:
+        class: Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser
+
 # =========================== Twig ===========================
 
     app.twig_extension:

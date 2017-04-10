@@ -7,11 +7,11 @@
 {% import _self as self %}
 
 {% macro dropbtn(object, path, scene_name) %}
-    {% if object.looks|length > 0 %}
+    {% if object.getLooks()|length > 0 %}
         {% if scene_name is null %}
-            <img src="{{ asset('./'~path~'images/'~object['looks'][0]['look_url']) }}" class="object-icon">
+            <img src="{{ asset('./'~path~'images/'~object.getLooks()[0].getFileName()) }}" class="object-icon">
         {% else %}
-            <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~object['looks'][0]['look_url']) }}" class="object-icon">
+            <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~object.getLooks()[0].getFileName) }}" class="object-icon">
         {% endif %}
     {% else %}
         <img src="{{ asset('./images/symbols/empty.svg') }}" class="object-icon">
@@ -20,14 +20,14 @@
         <div class="object-meta-name">
             <p>Object:</p>
             <p>Looks:</p>
-            <p>Scripts:</p>
             <p>Sounds:</p>
+            <p>Scripts:</p>
         </div>
         <div class="object-meta-value">
-            <p>{{ object.name }}</p>
-            <p>{{ object.looks|length }}</p>
-            <p>{{ object.scripts|length }}</p>
-            <p>{{ object.sounds|length }}</p>
+            <p>{{ object.getName() }}</p>
+            <p>{{ object.getLooks()|length }}</p>
+            <p>{{ object.getSounds()|length }}</p>
+            <p>{{ object.getScripts()|length }}</p>
         </div>
     </div>
     <div class="arrow">
@@ -38,45 +38,39 @@
 {% macro dropcontent(object, path, scene_name) %}
     {% import _self as self %}
     {% set sound_counter = 0 %}
-    {% if object.scripts|length > 0 %}
-        {% for script in object.scripts %}
+    {% if object.getScripts()|length > 0 %}
+        {% for script in object.getScripts() %}
             <div class="script">
-                <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/'~script.img_file) }})">
-                    {# <img src="{{ asset('images/bricks/1h_when_orange.png') }}"> #}
+                <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/'~script.getImgFile) }})">
                     <div class="script-text">
-                        <span class="script-type">{{ script.type }}</span>
-                        {% if script.message is defined %}
-                            <span class="script-message">{{ script.message }}</span>
-                        {% endif %}
+                        <span class="script-type">{{ script.getCaption() }}</span>
                     </div>
-                    {% if script.look is defined %}
+                    {% if script.getLookFileName() is defined %}
                         {% if scene_name is null %}
-                            <img src="{{ asset('./'~path~'images/'~script.look) }}" class="brick-look script-brick-look">
+                            <img src="{{ asset('./'~path~'images/'~script.getLookFileName()) }}" class="brick-look script-brick-look">
                         {% else %}
-                            <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~script.look) }}" class="brick-look script-brick-look">
+                            <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~script.getLookFileName()) }}" class="brick-look script-brick-look">
                         {% endif %}
                     {% endif %}
                 </div>
                 <div class="script-bricks-wrapper">
-                    {% for brick in script.bricks %}
-                        <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.img_file) }})">
-                            {# <img src="{{ asset('images/bricks/'~brick.img_file) }}"> #}
-                            {# <div class="brick-name">{{ brick.name }}</div> #}
-                            <div class="brick-text">{{ brick.text }}</div>
-                            {% if brick.look is defined %}
+                    {% for brick in script.getBricks() %}
+                        <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.getImgFile()) }})">
+                            <div class="brick-text">{{ brick.getCaption() }}</div>
+                            {% if brick.getLookFileName() is defined %}
                                 {% if scene_name is null %}
-                                    <img src="{{ asset('./'~path~'images/'~brick.look) }}" class="brick-look">
+                                    <img src="{{ asset('./'~path~'images/'~brick.getLookFileName()) }}" class="brick-look">
                                 {% else %}
-                                    <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~brick.look) }}" class="brick-look">
+                                    <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~brick.getLookFileName()) }}" class="brick-look">
                                 {% endif %}
                             {% endif %}
-                            {% if brick.sound is defined %}
+                            {% if brick.getSoundFileName() is defined %}
                                 {% if scene_name is null %}
                                     <img src="{{ asset('images/symbols/sound.svg') }}" id="sound-{{ sound_counter }}" class="brick-sound"
-                                         onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.sound) }}', {{ sound_counter }});">
+                                         onclick="initialSound('{{ asset('./'~path~'sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }});">
                                 {% else %}
                                     <img src="{{ asset('images/symbols/sound.svg') }}" id="sound-{{ sound_counter }}" class="brick-sound"
-                                         onclick="initialSound('{{ asset('./'~path~'/'~scene_name~'/sounds/'~brick.sound) }}', {{ sound_counter }});">
+                                         onclick="initialSound('{{ asset('./'~path~'/'~scene_name~'/sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }});">
                                 {% endif %}
                                 <img src="{{ asset('images/symbols/stop.png') }}" id="soundStop-{{ sound_counter }}" class="brick-sound" style="display:none;"
                                      onclick="stopSound({{ sound_counter }});">
@@ -102,7 +96,7 @@
     </div>
 {% endmacro %}
 
-{% macro group(group_object, path, scene_name) %}
+{% macro group(object_group, path, scene_name) %}
     {% import _self as self %}
     <div class="dropbtn collapse-btn">
         <div class="object-meta outdented">
@@ -111,8 +105,8 @@
                 <p>Objects:</p>
             </div>
             <div class="object-meta-value">
-                <p>{{ group_object.name }}</p>
-                <p>{{ group_object.object_list|length }}</p>
+                <p>{{ object_group.getName() }}</p>
+                <p>{{ object_group.getObjects()|length }}</p>
             </div>
         </div>
         <div class="arrow group-arrow">
@@ -120,8 +114,8 @@
         </div>
     </div>
     <div class="group-dropdown-content">
-        {% if group_object.object_list is not empty %}
-            {% for object in group_object.object_list %}
+        {% if object_group.getObjects() is not empty %}
+            {% for object in object_group.getObjects() %}
                 <div class="object">
                     {{ self.object(object, path, scene_name) }}
                 </div>
@@ -146,7 +140,7 @@
         {% if object_list is not empty %}
             {% for code_object in object_list %}
                 <div class="object">
-                    {% if code_object.object_list is defined %}
+                    {% if code_object.isGroup() %}
                         {{ self.group(code_object, path, scene_name) }}
                     {% else %}
                         {{ self.object(code_object, path, scene_name) }}
@@ -165,13 +159,13 @@
         {% for scene in scene_list %}
             <div class="scene">
                 <div class="scene-dropbtn collapse-btn">
-                    <p class="heading scene-heading">SCENE: <span>{{ scene.name }}</span></p>
+                    <p class="heading scene-heading">SCENE: <span>{{ scene.getName() }}</span></p>
                     <div class="arrow scene-arrow">
                         <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
                     </div>
                 </div>
                 <div class="scene-content">
-                    {{ self.object_list(scene.background, scene.object_list, path, scene.name) }}
+                    {{ self.object_list(scene.getBackground(), scene.getObjects(), path, scene.getName()) }}
                 </div>
             </div>
         {% endfor %}
@@ -193,66 +187,64 @@
 
 {% macro statistic(program_statistic) %}
     {% import _self as self %}
-    <div class="statistic-content">
-        <div class="total-statistic">
-            <div class="flex-container">
-                <div class="flex-left">
-                    <p class="light">Total number of <span class="brick-stat-heading">scripts</span>:</p>
-                    <p class="light">Total number of <span class="brick-stat-heading">bricks</span>:</p>
-                    <p class="light">Total number of <span class="brick-stat-heading">objects</span>:</p>
-                    <p class="light">Total number of <span class="brick-stat-heading">looks</span>:</p>
-                    <p class="light">Total number of <span class="brick-stat-heading">sounds</span>:</p>
-                    {% if program_statistic.totalNumGlobalVars is not null %}
-                        <p class="light">Total number of <span class="brick-stat-heading">globals</span>:</p>
-                    {% endif %}
-                    {% if program_statistic.totalNumLocalVars is not null %}
-                        <p class="light">Total number of <span class="brick-stat-heading">locals</span>:</p>
-                    {% endif %}
-                </div>
-                <div class="flex-right">
-                    <p class="heavy">{{ program_statistic.totalNumScripts }}</p>
-                    <p class="heavy">{{ program_statistic.totalNumBricks }}</p>
-                    <p class="heavy">{{ program_statistic.totalNumObjects }}</p>
-                    <p class="heavy">{{ program_statistic.totalNumLooks }}</p>
-                    <p class="heavy">{{ program_statistic.totalNumSounds }}</p>
-                    {% if program_statistic.totalNumGlobalVars is not null %}
-                        <p class="heavy">{{ program_statistic.totalNumGlobalVars }}</p>
-                    {% endif %}
-                    {% if program_statistic.totalNumLocalVars is not null %}
-                        <p class="heavy">{{ program_statistic.totalNumLocalVars }}</p>
-                    {% endif %}
-                </div>
+    <div class="total-statistic">
+        <div class="flex-container">
+            <div class="flex-left">
+                <p class="light">Total number of <span class="brick-stat-heading">scripts</span>:</p>
+                <p class="light">Total number of <span class="brick-stat-heading">bricks</span>:</p>
+                <p class="light">Total number of <span class="brick-stat-heading">objects</span>:</p>
+                <p class="light">Total number of <span class="brick-stat-heading">looks</span>:</p>
+                <p class="light">Total number of <span class="brick-stat-heading">sounds</span>:</p>
+                {% if program_statistic.getGlobalVarStatistic() is not null %}
+                    <p class="light">Total number of <span class="brick-stat-heading">globals</span>:</p>
+                {% endif %}
+                {% if program_statistic.getLocalVarStatistic() is not null %}
+                    <p class="light">Total number of <span class="brick-stat-heading">locals</span>:</p>
+                {% endif %}
+            </div>
+            <div class="flex-right">
+                <p class="heavy">{{ program_statistic.getScriptStatistic() }}</p>
+                <p class="heavy">{{ program_statistic.getBrickStatistic() }}</p>
+                <p class="heavy">{{ program_statistic.getObjectStatistic() }}</p>
+                <p class="heavy">{{ program_statistic.getLookStatistic() }}</p>
+                <p class="heavy">{{ program_statistic.getSoundStatistic() }}</p>
+                {% if program_statistic.getGlobalVarStatistic() is not null %}
+                    <p class="heavy">{{ program_statistic.getGlobalVarStatistic() }}</p>
+                {% endif %}
+                {% if program_statistic.getLocalVarStatistic() is not null %}
+                    <p class="heavy">{{ program_statistic.getLocalVarStatistic() }}</p>
+                {% endif %}
             </div>
         </div>
-        <div class="brick-statistics">
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Event Bricks:</p>
-                {{ self.brick_statistic(program_statistic.eventBricks) }}
-            </div>
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Control Bricks:</p>
-                {{ self.brick_statistic(program_statistic.controlBricks) }}
-            </div>
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Motion Bricks:</p>
-                {{ self.brick_statistic(program_statistic.motionBricks) }}
-            </div>
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Sound Bricks:</p>
-                {{ self.brick_statistic(program_statistic.soundBricks) }}
-            </div>
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Looks Bricks:</p>
-                {{ self.brick_statistic(program_statistic.looksBricks) }}
-            </div>
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Pen Bricks:</p>
-                {{ self.brick_statistic(program_statistic.penBricks) }}
-            </div>
-            <div class="brick-statistic-block">
-                <p class="brick-stat-heading">Data Bricks:</p>
-                {{ self.brick_statistic(program_statistic.dataBricks) }}
-            </div>
+    </div>
+    <div class="brick-statistics">
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Event Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().eventBricks) }}
+        </div>
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Control Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().controlBricks) }}
+        </div>
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Motion Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().motionBricks) }}
+        </div>
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Sound Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().soundBricks) }}
+        </div>
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Looks Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().looksBricks) }}
+        </div>
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Pen Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().penBricks) }}
+        </div>
+        <div class="brick-statistic-block">
+            <p class="brick-stat-heading">Data Bricks:</p>
+            {{ self.brick_statistic(program_statistic.getBrickTypeStatistic().dataBricks) }}
         </div>
     </div>
 {% endmacro %}
@@ -265,11 +257,11 @@
             <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
         </div>
     </div>
-    <div id="statistic">
-        {% if no_code is defined %}
+    <div id="codestatistic-wrapper">
+        {% if parsed_program is null %}
             <p class="exception">STATISTIC CAN'T BE DISPLAYED</p>
         {% else %}
-            {{ self.statistic(program_statistic) }}
+            {{ self.statistic(parsed_program.getCodeStatistic()) }}
         {% endif %}
     </div>
 
@@ -279,22 +271,22 @@
             <img src="{{ asset('./images/symbols/codeview_arrow_down.png') }}">
         </div>
     </div>
-    <div class="codeview-wrapper">
-        <div id="code-wrapper">
-            {% if no_code is defined %}
-                <p class="exception">CODE CAN'T BE DISPLAYED</p>
-            {% else %}
-                {% if scene_list is defined %}
-                    {% if scene_list|length > 1 %}
-                        {{ self.scenes(path, scene_list) }}
-                    {% else %}
-                        {{ self.object_list(scene_list[0].background, scene_list[0].object_list, path, scene_list[0].name) }}
-                    {% endif %}
+    <div id="codeview-wrapper">
+        {% if parsed_program is null %}
+            <p class="exception">CODE CAN'T BE DISPLAYED</p>
+        {% else %}
+            {% if parsed_program.hasScenes() %}
+                {% if parsed_program.getScenes()|length > 1 %}
+                    {{ self.scenes(path, parsed_program.getScenes()) }}
                 {% else %}
-                    {{ self.object_list(background, object_list, path, null) }}
+                    {{ self.object_list(parsed_program.getScenes()[0].getBackground(),
+                        parsed_program.getScenes()[0].getObjects(), path,
+                        parsed_program.getScenes()[0].getName()) }}
                 {% endif %}
+            {% else %}
+                {{ self.object_list(parsed_program.getBackground(), parsed_program.getObjects(), path, null) }}
             {% endif %}
-        </div>
+        {% endif %}
     </div>
 
 {% endblock %}
@@ -308,6 +300,34 @@
             $('.collapse-btn').on("click", function() {
                 $(this).next().slideToggle(250, 'linear');
                 $(this).find('.arrow').toggleClass('rotate');
+            });
+
+            $(document).on('click', '.show-hide-code', function() {
+                var text = $('.show-hide-code-text');
+                if(text.text() == 'SHOW CODE') {
+                    $('.show-hide-code-arrow').addClass('rotate showing-code');
+                    text.text('HIDE CODE');
+                    $('#codeview-wrapper').slideDown();
+                } else {
+                    $('#codeview-wrapper').slideUp(400, function(){
+                        $('.show-hide-code-arrow').removeClass('rotate showing-code');
+                        text.text('SHOW CODE');
+                    });
+                }
+            });
+
+            $(document).on('click', '.show-hide-code-statistic', function() {
+                var text = $('.show-hide-code-statistic-text');
+                if(text.text() == 'SHOW CODE STATISTIC') {
+                    $('.show-hide-code-statistic-arrow').addClass('rotate showing-code');
+                    text.text('HIDE CODE STATISTIC');
+                    $('#codestatistic-wrapper').slideDown();
+                } else {
+                    $('#codestatistic-wrapper').slideUp(400, function(){
+                        $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code');
+                        text.text('SHOW CODE STATISTIC');
+                    });
+                }
             });
         });
 
