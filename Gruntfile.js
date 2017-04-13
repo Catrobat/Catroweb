@@ -90,7 +90,19 @@ module.exports = function (grunt) {
                 cwd: jsCustomSrc,
                 src: '**/*.js',
                 dest: 'web/compiled/js/'
-            }
+            },
+            bootstrapcss: {
+                expand: true,
+                cwd: 'vendor/twbs/bootstrap/dist/css',
+                src: 'bootstrap.min.css',
+                dest: 'web/compiled/bootstrap/'
+            },
+            bootstrapjs: {
+                expand: true,
+                cwd: 'vendor/twbs/bootstrap/dist/js',
+                src: 'bootstrap.min.js',
+                dest: 'web/compiled/bootstrap/'
+            },
         },
         uglify: {
             options: {
@@ -105,7 +117,17 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'web/css/bootstrap_yeti/',
+                    src: 'bootstrap_yeti.css',
+                    dest: 'web/compiled/bootstrap/',
+                    ext: '.min.css',
+                }]
+            }
+        },
         less: lessconfig,
         watch: {
             options: {
@@ -129,5 +151,6 @@ module.exports = function (grunt) {
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.registerTask('default', ['concat', 'less', 'uglify', 'watch']);
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.registerTask('default', ['concat', 'less', 'uglify', 'cssmin', 'watch']);
 };
