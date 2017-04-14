@@ -103,6 +103,12 @@ module.exports = function (grunt) {
                 src: 'bootstrap.min.js',
                 dest: 'web/compiled/bootstrap/'
             },
+            jquery: {
+                expand: true,
+                cwd: 'node_modules/jquery/dist',
+                src: 'jquery.min.js',
+                dest: 'web/compiled/bootstrap/'
+            },
         },
         uglify: {
             options: {
