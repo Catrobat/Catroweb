@@ -34,22 +34,15 @@ class DefaultController extends Controller
     $featured_items = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
 
     $featured = [];
-    foreach ($featured_items as $item)
-    {
+    foreach ($featured_items as $item) {
       $info = [];
-      if ($item->getProgram() !== null)
-      {
-        if ($request->get('flavor'))
-        {
+      if ($item->getProgram() !== null) {
+        if ($request->get('flavor')) {
           $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId(), 'flavor' => $request->get('flavor')]);
-        }
-        else
-        {
+        } else {
           $info['url'] = $this->generateUrl('catrobat_web_program', ['id' => $item->getProgram()->getId()]);
         }
-      }
-      else
-      {
+      } else {
         $info['url'] = $item->getUrl();
       }
       $info['image'] = $image_repository->getWebPath($item->getId(), $item->getImageType());
@@ -60,14 +53,13 @@ class DefaultController extends Controller
     $user = $this->getUser();
     $nolb = false;
 
-    if ($user)
-    {
+    if ($user) {
       $nolb = $user->getNolbUser();
     }
 
     return $this->get('templating')->renderResponse('::index.html.twig', [
       'featured' => $featured,
-      'nolb'     => $nolb,
+      'nolb' => $nolb,
     ]);
   }
 
@@ -101,7 +93,7 @@ class DefaultController extends Controller
      * @var $file     \Catrobat\AppBundle\Entity\MediaPackageFile
      * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
      */
-    if($request->query->get('username') && $request->query->get('token')){
+    if ($request->query->get('username') && $request->query->get('token')) {
       $username = $request->query->get('username');
       $user = $this->get('usermanager')->findUserByUsername($username);
       $token_check = $request->query->get('token');
@@ -119,37 +111,31 @@ class DefaultController extends Controller
     $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
       ->findOneBy(['name_url' => $package_name]);
 
-    if (!$package)
-    {
+    if (!$package) {
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
 
     $user = $this->getUser();
     $nolb = false;
-    if ($user)
-    {
+    if ($user) {
       $nolb = $user->getNolbUser();
     }
 
     $categories = [];
-    foreach ($package->getCategories() as $category)
-    {
+    foreach ($package->getCategories() as $category) {
       $files = [];
       $files = $this->generateDownloadUrl($flavor, $category, $files);
-      if (!(strpos($category->getName(), 'Nolb') !== false && !$nolb))
-      {
+      if (!(strpos($category->getName(), 'Nolb') !== false && !$nolb)) {
         $categories[] = [
-          'name'     => $category->getName(),
-          'files'    => $files,
+          'name' => $category->getName(),
+          'files' => $files,
           'priority' => $category->getPriority(),
         ];
       }
     }
 
-    usort($categories, function ($a, $b)
-    {
-      if ($a['priority'] == $b['priority'])
-      {
+    usort($categories, function ($a, $b) {
+      if ($a['priority'] == $b['priority']) {
         return 0;
       }
 
@@ -162,6 +148,16 @@ class DefaultController extends Controller
   }
 
   /**
+   * @Route("/bootstrap", name="bootstrap_template")
+   * @Method({"GET"})
+   */
+  public function bootstrapTemplate(Request $request)
+  {
+    return $this->get('templating')->renderResponse('::bootstrap_template.html.twig');
+  }
+
+
+  /**
    * @Route("/click-statistic", name="click_stats")
    * @Method({"POST"})
    */
@@ -172,8 +168,7 @@ class DefaultController extends Controller
     $statistics = $this->get('statistics');
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs']))
-    {
+    if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs'])) {
       $rec_from_id = $_POST['recFromID'];
       $rec_program_id = $_POST['recID'];
       $is_user_specific_recommendation = isset($_POST['recIsUserSpecific']) ? (bool)$_POST['recIsUserSpecific'] : false;
@@ -185,32 +180,25 @@ class DefaultController extends Controller
         $referrer, $locale, $is_recommended_program_a_scratch_program, $is_user_specific_recommendation);
 
       return new Response('ok');
-    }
-    else
-    {
-      if ($type == 'tags')
-      {
+    } else {
+      if ($type == 'tags') {
         $tag_id = $_POST['recID'];
         $statistics->createClickStatistics($request, $type, null, null, $tag_id, null, $referrer, $locale);
 
         return new Response('ok');
-      }
-      else
-      {
-        if ($type == 'extensions')
-        {
+      } else {
+        if ($type == 'extensions') {
           $extension_name = $_POST['recID'];
           $statistics->createClickStatistics($request, $type, null, null, null, $extension_name, $referrer, $locale);
 
           return new Response('ok');
-        }
-        else
-        {
+        } else {
           return new Response('error');
         }
       }
     }
   }
+
 
   /**
    * @Route("/homepage-click-statistic", name="homepage_click_stats")
@@ -223,15 +211,12 @@ class DefaultController extends Controller
     $statistics = $this->get('statistics');
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random', 'nolb-example']))
-    {
+    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random', 'nolb-example'])) {
       $program_id = $_POST['programID'];
       $statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);
 
       return new Response('ok');
-    }
-    else
-    {
+    } else {
       return new Response('error');
     }
   }
@@ -245,19 +230,17 @@ class DefaultController extends Controller
    */
   private function generateDownloadUrl($flavor, $category, $files)
   {
-    foreach ($category->getFiles() as $file)
-    {
+    foreach ($category->getFiles() as $file) {
       $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
       $flavors_arr = explode(",", $flavors_arr);
-      if (!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr)))
-      {
+      if (!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr))) {
         continue;
       }
       $files[] = [
-        'id'          => $file->getId(),
-        'data'        => $file,
+        'id' => $file->getId(),
+        'data' => $file,
         'downloadUrl' => $this->generateUrl('download_media', [
-          'id'    => $file->getId(),
+          'id' => $file->getId(),
           'fname' => $file->getName(),
         ]),
       ];

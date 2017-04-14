@@ -37,13 +37,15 @@
   {% endblock %}
 </footer>
 
+<script src=" {{  asset('compiled/bootstrap/jquery.min.js')}}">
+</script>
 <script src="{{  asset( getJavascriptPath('script.js') )}}">
+
 </script>
 
 <script>
-  new Main('{{ path('search', {'q': 0 } ) }}');
+new Main('{{ path('search', {'q': 0 } ) }}');
 </script>
-<script src=" {{  asset('compiled/bootstrap/jquery.min.js')}}"></script>
 <script src=" {{  asset('compiled/bootstrap/bootstrap.min.js')}}"></script>
 
 {% block js %}{% endblock %}
