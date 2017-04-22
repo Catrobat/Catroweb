@@ -93,12 +93,6 @@ module.exports = function(grunt)
         src   : '**/*.js',
         dest  : 'web/compiled/js/'
       },
-      bootstrapcss: {
-        expand: true,
-        cwd   : 'vendor/twbs/bootstrap/dist/css',
-        src   : 'bootstrap.min.css',
-        dest  : 'web/compiled/bootstrap/'
-      },
       bootstrapjs : {
         expand: true,
         cwd   : 'vendor/twbs/bootstrap/dist/js',
@@ -115,13 +109,6 @@ module.exports = function(grunt)
     cssmin: {
       target: {
         files: [
-          {
-            expand: true,
-            cwd   : 'web/css/bootstrap_yeti/',
-            src   : 'bootstrap_yeti.css',
-            dest  : 'web/compiled/bootstrap/',
-            ext   : '.min.css',
-          },
           {
             expand: true,
             cwd   : 'web/css/bootstrap_yeti/',
