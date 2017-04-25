@@ -2,21 +2,21 @@
 localLanguage: اللغة الإنجليزية
 username: اسم المستخدم
 password: كلمة المرور
-aboutPocketCode: حول تطبيق الرسام
+aboutPocketCode: حول تطبيق بوكت بينت
 tutorials: دروس للتعلم
 googlePlay: متجرجوجل
 passwordsNoMatch: لا تتطابق كلمات المرور.
 error: خطأ
 cancel: إلغاء
 report: تقرير
-download: تحميل
+download: تحميل كـ برنامج
 description: الوصف
 noDescription: لا يوجد أي وصف .
 country: البلد
 loginText: تسجيل الدخول
 privacyPolicy: سياسة الخصوصية
 imprint: بصمة
-somethingWentWrong: 'عذرا, هنالك شيء خاطئ.'
+somethingWentWrong: 'عذرا, هناك شيء خاطئ.'
 pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
@@ -77,7 +77,7 @@ programs:
   report: تقرير
   report_popup: تم الإبلاغ بنجاح عن التعليق.
   report_popup_header: تم الإبلاغ
-  nolb_example: Example programs
+  nolb_example: أمثلة عن البرامج
 remixGraph:
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
   by: 'إلى'

@@ -31,17 +31,17 @@ notificationsReadMessage: "모든 알림을 읽으셨습니다."
 notificationsClearedMessage: "모든 알림이 읽은 상태로 표시되었습니다."
 clearAllNotificationsButtonTitle: "모두 읽음으로 표시"
 notificationsClearError: "알림을 읽음으로 표시할 수 없습니다!"
-pleaseWait: "Please wait..."
+pleaseWait: "잠시 기다려 주십시오..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: '어떤 프로그램 권장하세요?'
+      description_B_VersionTest: '여러분의 프로그램이 리믹스 될수록 리스트의 위에 나타납니다.'
+      description_C_VersionTest: '더 많은 ''좋아요''("최고야", "웃음", "사랑"과 "와우!"를 포함하여)를 받으면, 리스트의 위에 나타납니다.'
 programs:
   featured: 추천
   newest: 최신 프로그램
-  recommended: Recommended programs
+  recommended: 추천된 프로그램
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 가장 많이 다운로드한 프로그램
@@ -77,16 +77,16 @@ programs:
   report: 보고서
   report_popup: 코멘트가 성공적으로 추가 되었습니다.
   report_popup_header: 보고되었습니다
-  nolb_example: Example programs
+  nolb_example: 예제 프로그램
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: '리믹스 그래프 표시'
   by: '만큼'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: '열기'
+  showPaths: '경로 표시'
+  programNotAvailableErrorTitle: '죄송합니다..'
+  programNotAvailableErrorDescription: '프로그램은 더 이상 사용할 수 없습니다!'
+  programNotAvailable: '사용할수 없음'
+  programUnknownUser: '알 수 없는 사용자'
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
@@ -437,7 +437,7 @@ errors:
     invalid: 사용자 이름이 올바르지 않습니다.
     exists: 이름이 이미 존재합니다.
     not_exists: 사용자 이름이 존재하지 않습니다.
-    not_email: The username must not be an email address.
+    not_email: 사용자 이름으로 메일 주소를 사용할 수 없습니다.
   password:
     blank: 암호가 없습니다.
     short: '새 암호는 적어도 %length% 문자 이상이어야 합니다.'
@@ -567,7 +567,7 @@ admin:
     createBackupConfirmationText: 이 프로세스는 시간이 걸릴 수 있습니다. 페이지는 나중에 다시 로드됩니다!
 recommender:
   similarPrograms: 유사한 프로그램
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 이 프로그램을 다운로드하면 같이 다운로드됩니다
 pmd:
   submitBtn: 프로그램을 제출하세요
   submitBox:
