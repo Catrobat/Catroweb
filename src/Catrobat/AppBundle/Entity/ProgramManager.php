@@ -6,6 +6,9 @@ use Catrobat\AppBundle\Events\InvalidProgramUploadedEvent;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ProgramFileRepository;
+use Catrobat\AppBundle\Services\ScreenshotRepository;
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Catrobat\AppBundle\Entity\UserManager;
@@ -13,6 +16,7 @@ use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 use Catrobat\AppBundle\Entity\TagRepository;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class ProgramManager
 {
@@ -38,7 +42,8 @@ class ProgramManager
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository,
                               $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher)
   {
-    /** @var $program_repository ProgramRepository */
+    /* @var $screenshot_repository ScreenshotRepository */
+    /* @var $file_repository ProgramFileRepository */
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
@@ -52,6 +57,7 @@ class ProgramManager
   public function addProgram(AddProgramRequest $request)
   {
     $file = $request->getProgramfile();
+    /* @var $extracted_file ExtractedCatrobatFile */
 
     $extracted_file = $this->file_extractor->extract($file);
     try
@@ -65,11 +71,10 @@ class ProgramManager
 
     if ($event->isPropagationStopped())
     {
-      return;
+      return null;
     }
 
     /* @var $program Program */
-
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if ($old_program != null)
     {
@@ -112,8 +117,38 @@ class ProgramManager
 
     $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program));
 
-    $this->entity_manager->persist($program);
-    $this->entity_manager->flush();
+
+    try
+    {
+      if ($extracted_file->getScreenshotPath() == null)
+      {
+        // Todo: maybe for later implementations
+      }
+      else
+      {
+        $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
+      }
+
+      $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
+    } catch (\Exception $e)
+    {
+      $program_id = $program->getId();
+      $this->entity_manager->remove($program);
+      $this->entity_manager->flush();
+      try
+      {
+        $this->screenshot_repository->deleteTempFilesForProgram($program_id);
+      }
+      catch (IOException $error)
+      {
+
+        throw $error;
+      }
+      throw $e;
+
+      return null;
+    }
+
 
     if ($extracted_file->getScreenshotPath() == null)
     {
@@ -121,9 +156,14 @@ class ProgramManager
     }
     else
     {
-      $this->screenshot_repository->saveProgramAssets($extracted_file->getScreenshotPath(), $program->getId());
+      $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
     }
-    $this->file_repository->saveProgram($extracted_file, $program->getId());
+    $this->file_repository->makeTempProgramPerm($program->getId());
+
+
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($program);
 
     $event = $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
 
@@ -242,9 +282,9 @@ class ProgramManager
     return $this->program_repository->findBy($array);
   }
 
-  public function getUserPrograms($user_id, $max_version = 0)
+  public function getUserPrograms($user_id)
   {
-    return $this->program_repository->getUserPrograms($user_id, $max_version);
+    return $this->program_repository->getUserPrograms($user_id);
   }
 
   public function findAll()
@@ -279,34 +319,34 @@ class ProgramManager
     return $this->program_repository->getProgramsWithExtractedDirectoryHash();
   }
 
-  public function getRecentPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getRecentPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getRecentPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getRecentPrograms($flavor, $limit, $offset);
   }
 
-  public function getMostViewedPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getMostViewedPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getMostViewedPrograms($flavor, $limit, $offset);
   }
 
-  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getMostDownloadedPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getMostDownloadedPrograms($flavor, $limit, $offset);
   }
 
-  public function getRandomPrograms($flavor, $limit = null, $offset = null, $max_version = 0)
+  public function getRandomPrograms($flavor, $limit = null, $offset = null)
   {
-    return $this->program_repository->getRandomPrograms($flavor, $limit, $offset, $max_version);
+    return $this->program_repository->getRandomPrograms($flavor, $limit, $offset);
   }
 
-  public function search($query, $limit = 10, $offset = 0, $max_version = 0)
+  public function search($query, $limit = 10, $offset = 0)
   {
-    return $this->program_repository->search($query, $limit, $offset, $max_version);
+    return $this->program_repository->search($query, $limit, $offset);
   }
 
-  public function searchCount($query, $max_version = 0)
+  public function searchCount($query)
   {
-    return $this->program_repository->searchCount($query, $max_version);
+    return $this->program_repository->searchCount($query);
   }
 
   public function searchCountUserPrograms($user_id)
@@ -314,9 +354,9 @@ class ProgramManager
     return $this->program_repository->searchCountUserPrograms($user_id);
   }
 
-  public function getTotalPrograms($flavor, $max_version = 0)
+  public function getTotalPrograms($flavor)
   {
-    return $this->program_repository->getTotalPrograms($flavor, $max_version);
+    return $this->program_repository->getTotalPrograms($flavor);
   }
 
   public function increaseViews(Program $program)
