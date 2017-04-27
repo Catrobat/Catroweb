@@ -414,7 +414,6 @@ search:
   search: Suche
   results: Suchergebnisse
   resultcount: Ihre Suche brachte %count% Ergebnisse
-  invalidsearch: Ihr Suchtext ist ungültig
 menu:
   profile: Mein Profil
   logout: Ausloggen

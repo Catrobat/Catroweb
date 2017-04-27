@@ -429,10 +429,13 @@ class ProgramRepository extends EntityRepository
     }
 
     $search_terms = explode(" ", $query);
+
     $appendable_sql_string = '';
     $more_than_one_search_term = false;
+
     if (count($search_terms) > 1)
     {
+
       $appendable_sql_string = $this->getAppendableSqlStringForEveryTerm($search_terms, $metadata);
       $more_than_one_search_term = true;
     }
@@ -512,7 +515,6 @@ class ProgramRepository extends EntityRepository
 
   public function searchCount($query, $max_version = 0)
   {
-
     $em = $this->getEntityManager();
     $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
     array_shift($metadata);
@@ -713,6 +715,8 @@ class ProgramRepository extends EntityRepository
 
   public function searchTagCount($query)
   {
+    $query = str_replace("yahoo", "", $query);
+
     $qb = $this->createQueryBuilder('e');
 
     $result = $qb

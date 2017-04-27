@@ -435,7 +435,6 @@ search:
   search: Search
   results: Search Results
   resultcount: Your search returned %count% results
-  invalidsearch: Your searchtext is invalid
 
 menu:
   profile: My Profile

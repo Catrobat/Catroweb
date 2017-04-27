@@ -42,17 +42,17 @@ Feature: Searching for programs
     And I press enter in the search bar
     Then I should see "Your search returned 4 results"
 
-  Scenario: search for yahoo should be invalid
-    Given I fill in "search-input-header" with "yahoo.com"
+  Scenario: search for yahoo myprog should search for all
+    Given I fill in "search-input-header" with "yahoo myprog"
     And I click "#search-header"
-    Then I should see "Your searchtext is invalid"
+    Then I should see "Your search returned 2 results"
 
-  Scenario: search for gmail should be invalid
-    Given I fill in "search-input-header" with "gmail.com"
+  Scenario: search for gmail should search for all
+    Given I fill in "search-input-header" with "gmail"
     And I click "#search-header"
-    Then I should see "Your searchtext is invalid"
+    Then I should see "Your search returned 4 results"
 
-  Scenario: search for gmx should be invalid
+  Scenario: search for gmx should search for all
     Given I fill in "search-input-header" with "gmx.at"
     And I click "#search-header"
-    Then I should see "Your searchtext is invalid"
+    Then I should see "Your search returned 0 results"

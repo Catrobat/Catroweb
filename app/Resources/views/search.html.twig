@@ -25,7 +25,7 @@
     for (var index = 0; index < search_terms.length; ++index) {
         search.repeatableSearch(search_terms[index]);
     }*/
-    search.initSearch('{{ q }}', ' {{ "search.invalidsearch"|trans({}, "catroweb") }}');
+    search.initSearch('{{ q }}');
 
     $('.input-search').val('{{ q }}');
   </script>

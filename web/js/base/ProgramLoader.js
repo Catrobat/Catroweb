@@ -1,6 +1,3 @@
-var SEARCHTEXT_FILTER_YAHOO = "yahoo";
-var SEARCHTEXT_FILTER_GMAIL = "gmail";
-var SEARCHTEXT_FILTER_GMX = "gmx";
 
 var ProgramLoader = function (container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
   var self = this;
@@ -67,21 +64,12 @@ var ProgramLoader = function (container, url, column_max, recommended_by_program
     });
   };
 
-  self.initSearch = function(query, invalidsearchtext) {
+  self.initSearch = function(query) {
       self.query = query;
       $.get(self.url, { q: query, limit: self.download_limit*2, offset: self.loaded }, function(data) {
           var searchResultsText = $('#search-results-text');
 
-          if(query.toString().indexOf(SEARCHTEXT_FILTER_YAHOO) > -1 ||
-              query.toString().indexOf(SEARCHTEXT_FILTER_GMAIL) > -1 ||
-              query.toString().indexOf(SEARCHTEXT_FILTER_GMX) > -1) {
-
-              searchResultsText.addClass('no-results');
-
-              searchResultsText.text(invalidsearchtext);
-              return;
-          }
-          else if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
+          if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
               searchResultsText.addClass('no-results');
               searchResultsText.find('span').text(0);
               return;
