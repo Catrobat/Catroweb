@@ -86,7 +86,6 @@ class UploadController
 
     private function assembleFormUrl($gamejam, $user, $program, $request) {
         $languageCode = $this->getLanguageCode($request);
-
         $url = $gamejam->getFormUrl();
         $url = str_replace("%CAT_ID%", $program->getId(), $url);
         $url = str_replace("%CAT_MAIL%", $user->getEmail(), $url);

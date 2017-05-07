@@ -9,6 +9,9 @@ use Catrobat\AppBundle\Services\FeaturedImageRepository;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+
 
 class DefaultController extends Controller
 {
@@ -92,18 +95,16 @@ class DefaultController extends Controller
       $username = $request->query->get('username');
       $user = $this->get('usermanager')->findUserByUsername($username);
       $token_check = $request->query->get('token');
-      if ($user->getUploadToken() != $token_check) {
-        return $this->logout();
+      if ($user->getUploadToken() == $token_check) {
+        $user = $this->get('usermanager')->findUserByUsername($username);
+        $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
+        $this->get("security.context")->setToken($token);
+        // now dispatch the login event
+        $request = $this->get("request");
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
       }
-      $user = $this->get('usermanager')->findUserByUsername($username);
-      $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
-      $this->get("security.context")->setToken($token);
-      // now dispatch the login event
-      $request = $this->get("request");
-      $event = new InteractiveLoginEvent($request, $token);
-      $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
     }
-
     $em = $this->getDoctrine()->getManager();
     $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
       ->findOneBy(array('name_url' => $package_name));
