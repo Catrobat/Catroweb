@@ -81,13 +81,29 @@ class DefaultController extends Controller
    * @Route("/media-library/{package_name}", name="media_package")
    * @Method({"GET"})
    */
-  public function MediaPackageAction($package_name, $flavor = 'pocketcode')
+  public function MediaPackageAction(Request $request, $package_name, $flavor = 'pocketcode')
   {
     /**
      * @var $package \Catrobat\AppBundle\Entity\MediaPackage
      * @var $file \Catrobat\AppBundle\Entity\MediaPackageFile
      * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
      */
+    if($request->query->get('username') && $request->query->get('token')){
+      $username = $request->query->get('username');
+      $user = $this->get('usermanager')->findUserByUsername($username);
+      $token_check = $request->query->get('token');
+      if ($user->getUploadToken() != $token_check) {
+        return $this->logout();
+      }
+      $user = $this->get('usermanager')->findUserByUsername($username);
+      $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
+      $this->get("security.context")->setToken($token);
+      // now dispatch the login event
+      $request = $this->get("request");
+      $event = new InteractiveLoginEvent($request, $token);
+      $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+    }
+
     $em = $this->getDoctrine()->getManager();
     $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')
       ->findOneBy(array('name_url' => $package_name));
