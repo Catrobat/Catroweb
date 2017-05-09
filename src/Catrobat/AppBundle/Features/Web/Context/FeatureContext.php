@@ -814,9 +814,27 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $name = trim($name);
       $not = trim($not);
 
-      $source = $this->getSession()->getPage()->find('css', '#avatar-img')->getAttribute('src');
+      $pre_source = $this->getSession()->getPage()->find('css', '#avatar-img');
+      $source = 0;
+      if (!is_null($pre_source))
+      {
+        $source = $pre_source->getAttribute('src');
+      }
+      else
+      {
+        assert(false, "Couldn't find avatar in #avatar-img");
+      }
       $source = trim($source, '"');
-      $styleHeader = $this->getSession()->getPage()->find('css', '#menu .img-avatar')->getAttribute('style');
+      $pre_style_header = $this->getSession()->getPage()->find('css', '#menu .img-avatar');
+      $styleHeader = 0;
+      if (!is_null($pre_style_header))
+      {
+        $styleHeader = $pre_style_header->getAttribute('style');
+      }
+      else
+      {
+        assert(false, "Couldn't find avatar in menu");
+      }
       $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
       $sourceHeader = trim($sourceHeader, '"');
 
