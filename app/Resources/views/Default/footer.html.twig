@@ -1,50 +1,62 @@
 {% block footer %}
-  <div id="footer-menu-desktop" class="footer-padding">
-    <div id="footer-menu-desktop-left">
-      <div>
-        <div><a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a></div>
-        <div><a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a></div>
-        <div><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a></div>
-        <div><a href="{{ url('licenseToPlay') }}">{{ "licenseToPlay.link"|trans({}, "catroweb") }}</a></div>
+  <footer class="footer">
+    <div class="container">
+
+      <div class="content">
+        <div class="row">
+          <div class="col-md-2">
+            <h4>Usefull Links</h4>
+            <ul class="list-vertical">
+              <li>
+                <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <h4>Legalities</h4>
+            <ul class="list-vertical">
+              <li>
+                <a href="{{ url('licenseToPlay') }}">{{ "licenseToPlay.link"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="http://developer.catrobat.org/privacy_policy" target="_blank">{{ "privacyPolicy"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="http://developer.catrobat.org/imprint" target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a>
+              </li>
+            </ul>
+          </div>
+
+
+          <div class="col-md-offset-4 col-md-4">
+            <h4>Community Stats</h4>
+            <h4 class="text-muted">20.312 <small>programs</small></h4>
+            <h4>1.211.073 <small>downloads</small></h4>
+          </div>
+        </div>
       </div>
-      <div>
-        <div><a href="http://developer.catrobat.org/privacy_policy" target="_blank">{{ "privacyPolicy"|trans({}, "catroweb") }}</a></div>
-        <div><a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a></div>
-        <div><a href="http://developer.catrobat.org/imprint" target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a></div>
+
+      <hr>
+      <div class="copyright pull-left">
+        <select id="switch-language" autocomplete="off">
+            {% set countries = getLanguageOptions() %}
+            {% for country in countries %}
+              <option value="{{ country[0] }}" {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="copyright pull-right">
+        Copyright &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.
       </div>
     </div>
-    <div id="footer-menu-desktop-right">
-      <div id="search-footer" class="img-magnifying-glass"></div>
-      <input id="search-input-footer" class="input-search" type="search" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}"/>
-    </div>
-  </div>
-
-  <div id="footer-menu-bottom" class="footer-padding">
-    <div>
-      <select id="switch-language" autocomplete="off">
-        {% set countries = getLanguageOptions() %}
-        {% for country in countries %}
-        <option value="{{ country[0] }}" {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div id="footer-copyright">
-      <a href="http://www.catrobat.org" target="_blank">&copy; Catrobat</a>
-    </div>
-    <div id="footer-more-less">
-      <span id="footer-button-more"><span class="img-more"></span> {{ "more"|trans({}, "catroweb") }}</span>
-      <span id="footer-button-less"><span class="img-less"></span> {{ "less"|trans({}, "catroweb") }}</span>
-    </div>
-  </div>
-
-  <div id="footer-menu-mobile">
-    <div><a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a></div>
-    <div><a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a></div>
-    <div><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a></div>
-    <div><a href="{{ url('licenseToPlay') }}">{{ "licenseToPlay.link"|trans({}, "catroweb") }}</a></div>
-    <div><a href="http://developer.catrobat.org/privacy_policy" target="_blank">{{ "privacyPolicy"|trans({}, "catroweb") }}</a></div>
-    <div><a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a></div>
-    <div><a href="http://developer.catrobat.org/imprint" target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a></div>
-  </div>
-
+  </footer>
 {% endblock %}

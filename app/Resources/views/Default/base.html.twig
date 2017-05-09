@@ -30,11 +30,9 @@
     </article>
 </div>
 
-<footer>
-    {% block footer %}
-        {% include ':Default:footer.html.twig' %}
-    {% endblock %}
-</footer>
+{% block footer %}
+    {% include ':Default:footer.html.twig' %}
+{% endblock %}
 
 <script src=" {{ asset('compiled/bootstrap/jquery.min.js') }}">
 </script>
