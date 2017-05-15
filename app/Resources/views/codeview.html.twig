@@ -197,6 +197,9 @@
     <div class="total-statistic">
         <div class="flex-container">
             <div class="flex-left">
+                {% if program_statistic.getSceneStatistic() > 0 %}
+                    <p class="light">Total number of <span class="brick-stat-heading">scenes</span>:</p>
+                {% endif %}
                 <p class="light">Total number of <span class="brick-stat-heading">scripts</span>:</p>
                 <p class="light">Total number of <span class="brick-stat-heading">bricks</span>:</p>
                 <p class="light">Total number of <span class="brick-stat-heading">objects</span>:</p>
@@ -210,6 +213,9 @@
                 {% endif %}
             </div>
             <div class="flex-right">
+                {% if program_statistic.getSceneStatistic() > 0 %}
+                    <p class="heavy">{{ program_statistic.getSceneStatistic() }}</p>
+                {% endif %}
                 <p class="heavy">{{ program_statistic.getScriptStatistic() }}</p>
                 <p class="heavy">{{ program_statistic.getBrickStatistic() }}</p>
                 <p class="heavy">{{ program_statistic.getObjectStatistic() }}</p>

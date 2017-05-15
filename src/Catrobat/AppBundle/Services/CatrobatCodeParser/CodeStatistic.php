@@ -7,6 +7,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CodeStatistic
 {
+    private $total_num_scenes;
     private $total_num_scripts;
     private $total_num_bricks;
     private $total_num_objects;
@@ -20,6 +21,7 @@ class CodeStatistic
 
     public function __construct()
     {
+        $this->total_num_scenes = 0;
         $this->total_num_scripts = 0;
         $this->total_num_bricks = 0;
         $this->total_num_objects = 0;
@@ -93,6 +95,9 @@ class CodeStatistic
 
     public function update(ParsedObjectsContainer $object_list_container)
     {
+        if($object_list_container instanceof ParsedScene)
+            $this->updateSceneStatistic();
+
         $objects = array_merge(array($object_list_container->getBackground()), $object_list_container->getObjects());
 
         foreach($objects as $object) {
@@ -102,6 +107,11 @@ class CodeStatistic
             else
                 $this->updateObjectStatistic($object);
         }
+    }
+
+    protected function updateSceneStatistic()
+    {
+        $this->total_num_scenes++;
     }
 
     protected function updateObjectStatistic(ParsedObject $object)
@@ -217,6 +227,11 @@ class CodeStatistic
         {
             $this->total_num_local_vars = null;
         }
+    }
+
+    public function getSceneStatistic()
+    {
+        return $this->total_num_scenes;
     }
 
     public function getScriptStatistic()
