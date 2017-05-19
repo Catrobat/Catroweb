@@ -135,7 +135,8 @@ var Main = function (search_url) {
 
 
 };
-;var ProgramLoader = function (container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
+;
+var ProgramLoader = function (container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
   var self = this;
   self.container = container;
   self.url = url;
@@ -201,21 +202,21 @@ var Main = function (search_url) {
   };
 
   self.initSearch = function(query) {
-    self.query = query;
-    $.get(self.url, { q: query, limit: self.download_limit*2, offset: self.loaded }, function(data) {
-      var searchResultsText = $('#search-results-text');
-      if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
-        searchResultsText.addClass('no-results');
-        searchResultsText.find('span').text(0);
-        return;
-      }
-      console.log(data);
-      searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects);
-      self.programsFound = data.CatrobatInformation.TotalProjects;
-      self.setup(data);
-      self.showMorePrograms();
-      self.searchPageLoadDone = true; // fix for search.feature: 'I press enter "#searchbar"'
-    });
+      self.query = query;
+      $.get(self.url, { q: query, limit: self.download_limit*2, offset: self.loaded }, function(data) {
+          var searchResultsText = $('#search-results-text');
+
+          if(data.CatrobatProjects.length == 0 || data.CatrobatProjects == undefined) {
+              searchResultsText.addClass('no-results');
+              searchResultsText.find('span').text(0);
+              return;
+          }
+
+          searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects);
+          self.setup(data);
+          self.showMorePrograms();
+          self.searchPageLoadDone = true; // fix for search.feature: 'I press enter "#searchbar"'
+      });
   };
 
   self.repeatableSearch = function(search_term) {
