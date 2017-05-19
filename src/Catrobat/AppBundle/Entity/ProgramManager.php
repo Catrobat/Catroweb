@@ -6,6 +6,9 @@ use Catrobat\AppBundle\Events\InvalidProgramUploadedEvent;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ProgramFileRepository;
+use Catrobat\AppBundle\Services\ScreenshotRepository;
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Catrobat\AppBundle\Entity\UserManager;
@@ -13,6 +16,7 @@ use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 use Catrobat\AppBundle\Entity\TagRepository;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class ProgramManager
 {
@@ -36,9 +40,11 @@ class ProgramManager
   protected $program_like_repository;
 
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository,
-                              $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher)
+                              $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher, $max_version = 0)
   {
     /** @var $program_repository ProgramRepository */
+    /** @var $screenshot_repository ScreenshotRepository */
+    /** @var $file_repository ProgramFileRepository */
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
@@ -47,11 +53,13 @@ class ProgramManager
     $this->program_repository = $program_repository;
     $this->tag_repository = $tag_repository;
     $this->program_like_repository = $program_like_repository;
+    $this->max_version = $max_version;
   }
 
   public function addProgram(AddProgramRequest $request)
   {
     $file = $request->getProgramfile();
+    /* @var $extracted_file ExtractedCatrobatFile */
 
     $extracted_file = $this->file_extractor->extract($file);
     try
@@ -65,11 +73,10 @@ class ProgramManager
 
     if ($event->isPropagationStopped())
     {
-      return;
+      return null;
     }
 
-    /* @var $program Program */
-
+    /** @var $program Program */
     $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if ($old_program != null)
     {
@@ -97,6 +104,17 @@ class ProgramManager
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
     $this->addTags($program, $extracted_file, $request->getLanguage());
+// after merge
+//    $version = $program->getCatrobatVersionName();
+//    $max_version = $this->max_version;
+//    if (version_compare($version, $max_version, ">"))
+//    {
+//      $program->setPrivate(true);
+//    }
+//    else
+//    {
+//      $program->setPrivate(false);
+//    }
 
     if ($request->getGamejam() != null)
     {
@@ -112,8 +130,35 @@ class ProgramManager
 
     $this->event_dispatcher->dispatch('catrobat.program.after.insert', new ProgramAfterInsertEvent($extracted_file, $program));
 
-    $this->entity_manager->persist($program);
-    $this->entity_manager->flush();
+
+    try
+    {
+      if ($extracted_file->getScreenshotPath() == null)
+      {
+        // Todo: maybe for later implementations
+      }
+      else
+      {
+        $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
+      }
+
+      $this->file_repository->saveProgramTemp($extracted_file, $program->getId());
+    } catch (\Exception $e)
+    {
+      $program_id = $program->getId();
+      $this->entity_manager->remove($program);
+      $this->entity_manager->flush();
+      try
+      {
+        $this->screenshot_repository->deleteTempFilesForProgram($program_id);
+      } catch (IOException $error)
+      {
+
+        throw $error;
+      }
+      return null;
+    }
+
 
     if ($extracted_file->getScreenshotPath() == null)
     {
@@ -121,9 +166,14 @@ class ProgramManager
     }
     else
     {
-      $this->screenshot_repository->saveProgramAssets($extracted_file->getScreenshotPath(), $program->getId());
+      $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
     }
-    $this->file_repository->saveProgram($extracted_file, $program->getId());
+    $this->file_repository->makeTempProgramPerm($program->getId());
+
+
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($program);
 
     $event = $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
 
