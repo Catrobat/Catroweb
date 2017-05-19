@@ -21,6 +21,12 @@ class SearchController extends Controller
   {
     $program_manager = $this->get('programmanager');
     $query = $request->query->get('q');
+
+    $query = str_replace("yahoo", "", $query);
+    $query = str_replace("gmail", "", $query);
+    $query = str_replace("gmx", "", $query);
+    $query = trim($query);
+
     $limit = intval($request->query->get('limit'));
     $offset = intval($request->query->get('offset'));
     $max_version = $request->query->get('max_version', 0);
