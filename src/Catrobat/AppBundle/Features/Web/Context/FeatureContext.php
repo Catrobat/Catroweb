@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
@@ -67,7 +68,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function __construct($screenshot_directory)
   {
     $this->screenshot_directory = preg_replace('/([^\/]+)$/', '$1/', $screenshot_directory);
-    if (!is_dir($this->screenshot_directory)) {
+    if (!is_dir($this->screenshot_directory))
+    {
       throw new \Exception('No screenshot directory specified!');
     }
     $this->use_real_oauth_javascript_code = false;
@@ -111,8 +113,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   private function deleteScreens()
   {
     $files = glob($this->screenshot_directory . '*');
-    foreach ($files as $file) {
-      if (is_file($file)) {
+    foreach ($files as $file)
+    {
+      if (is_file($file))
+      {
         unlink($file);
       }
     }
@@ -156,7 +160,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function makeScreenshot(AfterStepScope $scope)
   {
-    if (!$scope->getTestResult()->isPassed()) {
+    if (!$scope->getTestResult()->isPassed())
+    {
       $this->saveScreenshot(null, $this->screenshot_directory);
     }
   }
@@ -238,7 +243,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $arg1 = trim($arg1);
 
-    switch ($arg1) {
+    switch ($arg1)
+    {
       case 'some':
         $this->assertSession()->elementExists('css', '.program');
         break;
@@ -273,10 +279,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theSelectedLanguageShouldBe($arg1)
   {
-    switch ($arg1) {
+    switch ($arg1)
+    {
       case 'English':
         $cookie = $this->getSession()->getCookie('hl');
-        if (!empty($cookie)) {
+        if (!empty($cookie))
+        {
           $this->assertSession()->cookieEquals('hl', 'en');
         }
         break;
@@ -295,7 +303,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSwitchTheLanguageTo($arg1)
   {
-    switch ($arg1) {
+    switch ($arg1)
+    {
       case 'English':
         $this->getSession()->setCookie('hl', 'en');
         break;
@@ -324,52 +333,75 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->assertSession()->responseContains('help-desktop');
     $this->assertSession()->responseContains('help-mobile');
 
-    if ($arg1 == 'big') {
+    if ($arg1 == 'big')
+    {
       assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
       assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    } elseif ($arg1 == 'small') {
+    }
+    elseif ($arg1 == 'small')
+    {
       assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
       assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    } elseif ($arg1 == '') {
+    }
+    elseif ($arg1 == '')
+    {
       assertTrue($this->getSession()->getPage()->find('css', '.help-split-desktop')->isVisible());
-    } else {
+    }
+    else
+    {
       assertTrue(false);
     }
 
     $img = null;
     $path = null;
 
-    switch ($arg2) {
+    switch ($arg2)
+    {
       case 'Hour of Code':
-        if ($arg1 == 'big') {
+        if ($arg1 == 'big')
+        {
           $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
           $path = '/images/help/hour_of_code.png';
-        } elseif ($arg1 == 'small') {
+        }
+        elseif ($arg1 == 'small')
+        {
           $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
           $path = '/images/help/hour_of_code_mobile.png';
-        } else {
+        }
+        else
+        {
           assertTrue(false);
         }
         break;
       case 'Game Design':
-        if ($arg1 == 'big') {
+        if ($arg1 == 'big')
+        {
           $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
           $path = '/images/help/alice_tut.png';
-        } elseif ($arg1 == 'small') {
+        }
+        elseif ($arg1 == 'small')
+        {
           $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
           $path = '/images/help/alice_tut_mobile.png';
-        } else {
+        }
+        else
+        {
           assertTrue(false);
         }
         break;
       case 'Step By Step':
-        if ($arg1 == 'big') {
+        if ($arg1 == 'big')
+        {
           $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
           $path = '/images/help/step_by_step.png';
-        } elseif ($arg1 == 'small') {
+        }
+        elseif ($arg1 == 'small')
+        {
           $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
           $path = '/images/help/step_by_step_mobile.png';
-        } else {
+        }
+        else
+        {
           assertTrue(false);
         }
         break;
@@ -382,24 +414,34 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $path = '/images/help/starters.png';
         break;
       case 'Education Platform':
-        if ($arg1 == 'big') {
+        if ($arg1 == 'big')
+        {
           $img = $this->getSession()->getPage()->findById('edu-desktop');
           $path = '/images/help/edu_site.png';
-        } elseif ($arg1 == 'small') {
+        }
+        elseif ($arg1 == 'small')
+        {
           $img = $this->getSession()->getPage()->findById('edu-mobile');
           $path = '/images/help/edu_site_mobile.png';
-        } else {
+        }
+        else
+        {
           assertTrue(false);
         }
         break;
       case 'Discussion':
-        if ($arg1 == 'big') {
+        if ($arg1 == 'big')
+        {
           $img = $this->getSession()->getPage()->findById('discuss-desktop');
           $path = '/images/help/discuss.png';
-        } elseif ($arg1 == 'small') {
+        }
+        elseif ($arg1 == 'small')
+        {
           $img = $this->getSession()->getPage()->findById('discuss-mobile');
           $path = '/images/help/discuss_mobile.png';
-        } else {
+        }
+        else
+        {
           assertTrue(false);
         }
         break;
@@ -408,11 +450,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         break;
     }
 
-    if ($img != null) {
+    if ($img != null)
+    {
       assertEquals($img->getTagName(), 'img');
       assertEquals($img->getAttribute('src'), $path);
       assertTrue($img->isVisible());
-    } else {
+    }
+    else
+    {
       assertTrue(false);
     }
   }
@@ -424,23 +469,24 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var $user_manager UserManager
-     * @var $user User
+     * @var $user         User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
     $user = null;
     $count = count($users);
-    for ($i = 0; $i < $count; ++$i ) {
-        $user = $user_manager->createUser();
-        $user->setUsername($users[$i]['name']);
-        $user->setEmail($users[$i]['email']);
-        $user->setAdditionalEmail('');
-        $user->setPlainPassword($users[$i]['password']);
-        $user->setEnabled(true);
-        $user->setUploadToken($users[$i]['token']);
-        $user->setCountry('at');
-        $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
-        $user_manager->updateUser($user, false);
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $user_manager->createUser();
+      $user->setUsername($users[$i]['name']);
+      $user->setEmail($users[$i]['email']);
+      $user->setAdditionalEmail('');
+      $user->setPlainPassword($users[$i]['password']);
+      $user->setEnabled(true);
+      $user->setUploadToken($users[$i]['token']);
+      $user->setCountry('at');
+      $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
+      $user_manager->updateUser($user, false);
     }
     $user_manager->updateUser($user, true);
   }
@@ -452,13 +498,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var $user_manager UserManager
-     * @var $user User
+     * @var $user         User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
     $user = null;
     $count = count($users);
-    for ($i = 0; $i < $count; ++$i ) {
+    for ($i = 0; $i < $count; ++$i)
+    {
       $user = $user_manager->createUser();
       $user->setUsername($users[$i]['name']);
       $user->setEmail($users[$i]['email']);
@@ -473,6 +520,53 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $user_manager->updateUser($user, true);
   }
 
+  /**
+   * @Given /^there are catro notifications:$/
+   */
+  public function thereAreCatroNotifications(TableNode $table)
+  {
+    /** @var EntityManager $em */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $notifications = $table->getHash();
+
+    foreach ($notifications as $notification)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
+        'username' => $notification['user'],
+      ]);
+      if ($user == null)
+      {
+        assert(false, "user is null");
+      }
+      switch ($notification['type'])
+      {
+        case "default":
+          $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
+          $em->persist($to_create);
+          break;
+        default:
+          $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
+          $em->persist($to_create);
+          break;
+      }
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Then /^I click on the first "([^"]*)" button$/
+   */
+  public function iClickOnTheFirstButton($arg1)
+  {
+    $this->assertSession()->elementExists('css', $arg1);
+
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+    $this->getSession()->wait(500);
+  }
 
   /**
    * @Given /^there are programs:$/
@@ -483,12 +577,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    * @var $program \Catrobat\AppBundle\Entity\Program
    */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-      $programs = $table->getHash();
-      $count = count($programs);
-      for ($i = 0; $i < $count; ++$i ) {
-          $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+    $programs = $table->getHash();
+    $count = count($programs);
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
         'username' => $programs[$i]['owned by'],
-      ));
+      ]);
       $program = new Program();
       $program->setUser($user);
       $program->setName($programs[$i]['name']);
@@ -510,25 +605,30 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
 
-      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
+      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
+      {
         $tag_repo = $em->getRepository('AppBundle:Tag');
         $tags = explode(',', $programs[$i]['tags_id']);
-        foreach ($tags as $tag_id) {
+        foreach ($tags as $tag_id)
+        {
           $tag = $tag_repo->find($tag_id);
           $program->addTag($tag);
         }
       }
 
-      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
+      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null)
+      {
         $extension_repo = $em->getRepository('AppBundle:Extension');
         $extensions = explode(',', $programs[$i]['extensions']);
-        foreach ($extensions as $extension_name) {
+        foreach ($extensions as $extension_name)
+        {
           $extension = $extension_repo->findOneByName($extension_name);
           $program->addExtension($extension);
         }
       }
 
-      if ($program->getApkStatus() == Program::APK_READY) {
+      if ($program->getApkStatus() == Program::APK_READY)
+      {
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
         $apkrepository = $this->kernel->getContainer()->get('apkrepository');
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
@@ -552,7 +652,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $examples = $table->getHash();
 
-    foreach ($examples as $example) {
+    foreach ($examples as $example)
+    {
       $new_example = new NolbExampleProgram();
 
       $program_id = intval($example['program']);
@@ -580,7 +681,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $comments = $table->getHash();
 
-    foreach ($comments as $comment) {
+    foreach ($comments as $comment)
+    {
       $new_comment = new UserComment();
 
       $new_comment->setUploadDate(new \DateTime($comment['upload_date'], new \DateTimeZone('UTC')));
@@ -602,7 +704,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $likes = $table->getHash();
 
-    foreach ($likes as $like) {
+    foreach ($likes as $like)
+    {
       $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $like['username']]);
       $program = $this->kernel->getContainer()->get('programrepository')->find($like['program_id']);
 
@@ -625,7 +728,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $relations = $table->getHash();
 
-    foreach ($relations as $relation) {
+    foreach ($relations as $relation)
+    {
       $ancestor_program = $em->getRepository('AppBundle:Program')->find($relation['ancestor_id']);
       $descendant_program = $em->getRepository('AppBundle:Program')->find($relation['descendant_id']);
 
@@ -646,7 +750,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $relations = $table->getHash();
 
-    foreach ($relations as $relation) {
+    foreach ($relations as $relation)
+    {
       $program = $em->getRepository('AppBundle:Program')->find($relation['program_id']);
 
       $featured_program = new FeaturedProgram();
@@ -678,7 +783,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $tags = $table->getHash();
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
-    foreach ($tags as $tag) {
+    foreach ($tags as $tag)
+    {
       $insert_tag = new Tag();
 
       $insert_tag->setEn($tag['en']);
@@ -697,7 +803,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $example_program = $em->getRepository('AppBundle:NolbExampleProgram')->find($arg1);
 
-    switch ($arg2) {
+    switch ($arg2)
+    {
       case "female_counter":
         $counter = $example_program->getDownloadsFromFemale();
         break;
@@ -717,14 +824,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $extensions = $table->getHash();
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
-    foreach ($extensions as $extension) {
+    foreach ($extensions as $extension)
+    {
       $insert_extension = new Extension();
 
       $insert_extension->setName($extension['name']);
       $insert_extension->setPrefix($extension['prefix']);
 
       $em->persist($insert_extension);
-      }
+    }
     $em->flush();
   }
 
@@ -749,7 +857,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldBeLoggedIn($arg1)
   {
-    if ($arg1 == 'in') {
+    if ($arg1 == 'in')
+    {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2000, 'window.location.href.search("login") == -1');
       $this->assertElementOnPage('#logo');
@@ -757,7 +866,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $this->assertElementOnPage('#btn-logout');
       $this->getSession()->getPage()->find('css', '.dropdown-toggle')->click();
     }
-    if ($arg1 == 'out') {
+    if ($arg1 == 'out')
+    {
       $this->getSession()->wait(2000, 'window.location.href.search("profile") == -1');
       $this->assertElementOnPage('#btn-login');
       $this->assertElementNotOnPage('#nav-dropdown');
@@ -773,7 +883,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->fillField('username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
-    if ($arg1 == 'try to') {
+    if ($arg1 == 'try to')
+    {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
     }
   }
@@ -814,23 +925,30 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     $pre_source = $this->getSession()->getPage()->find('css', '#avatar-img');
     $source = 0;
-    if (!is_null($pre_source)) {
+    if (!is_null($pre_source))
+    {
       $source = $pre_source->getAttribute('src');
-    } else {
+    }
+    else
+    {
       assert(false, "Couldn't find avatar in #avatar-img");
     }
     $source = trim($source, '"');
     $pre_style_header = $this->getSession()->getPage()->find('css', '#menu .img-avatar');
     $styleHeader = 0;
-    if (!is_null($pre_style_header)) {
+    if (!is_null($pre_style_header))
+    {
       $styleHeader = $pre_style_header->getAttribute('style');
-    } else {
+    }
+    else
+    {
       //assert(false, "Couldn't find avatar in menu");
     }
     $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
     $sourceHeader = trim($sourceHeader, '"');
 
-    switch ($name) {
+    switch ($name)
+    {
       case 'logo.png':
         $logoUrl = 'data:image/png;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'logo.png'));
         //$isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
@@ -888,13 +1006,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $page = $this->getSession()->getPage();
     $button = null;
 
-    switch ($arg1) {
+    switch ($arg1)
+    {
       case "login":
         $button = $page->find("css", "#btn-login");
         break;
       case "logout":
         $url = $this->getSession()->getCurrentUrl();
-        if (strpos($url, 'profile') != false) {
+        if (strpos($url, 'profile') != false)
+        {
           $page->find("css", ".show-nav-dropdown")->click();
         }
         $button = $page->find("css", "#btn-logout");
@@ -966,7 +1086,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $page = $this->getSession()->getPage();
     $program = $page->find("css", $arg1);
-    if (!$program->hasClass('visited-program')) {
+    if (!$program->hasClass('visited-program'))
+    {
       assertTrue(false);
     }
   }
@@ -977,9 +1098,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iClickFacebookLoginLink()
   {
-    if ($this->use_real_oauth_javascript_code) {
+    if ($this->use_real_oauth_javascript_code)
+    {
       $this->clickLink('btn-login_facebook');
-    } else {
+    }
+    else
+    {
       $this->setFacebookFakeData();
       $this->clickFacebookFakeButton();
     }
@@ -1006,12 +1130,16 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iClickGoogleLoginLink($arg1)
   {
-    if ($this->use_real_oauth_javascript_code) {
+    if ($this->use_real_oauth_javascript_code)
+    {
       $this->clickLink('btn-login_google');
-      if ($arg1 == 'twice') {
+      if ($arg1 == 'twice')
+      {
         $this->clickLink('btn-login_google');
       }
-    } else {
+    }
+    else
+    {
       $this->setGooglePlusFakeData();
       $this->clickGooglePlusFakeButton();
     }
@@ -1047,12 +1175,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $starter->setAlias('games');
     $starter->setOrder(1);
 
-      $programs = $table->getHash();
-      $count = count($programs);
-      for ($i = 0; $i < $count; ++$i ) {
-          $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+    $programs = $table->getHash();
+    $count = count($programs);
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
         'username' => $programs[$i]['owned by'],
-      ));
+      ]);
       $program = new Program();
       $program->setUser($user);
       $program->setName($programs[$i]['name']);
@@ -1098,7 +1227,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $packages = $table->getHash();
-    foreach ($packages as $package) {
+    foreach ($packages as $package)
+    {
       $new_package = new MediaPackage();
       $new_package->setName($package['name']);
       $new_package->setNameUrl($package['name_url']);
@@ -1117,11 +1247,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $categories = $table->getHash();
-    foreach ($categories as $category) {
+    foreach ($categories as $category)
+    {
       $new_category = new MediaPackageCategory();
       $new_category->setName($category['name']);
-      $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(array('name' => $category['package']));
-      $new_category->setPackage(array($package));
+      $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(['name' => $category['package']]);
+      $new_category->setPackage([$package]);
       $em->persist($new_category);
     }
     $em->flush();
@@ -1133,19 +1264,20 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereAreMediapackageFiles(TableNode $table)
   {
     /**
-     * @var $em EntityManager
+     * @var $em        EntityManager
      * @var $file_repo MediaPackageFileRepository
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $file_repo = $this->kernel->getContainer()->get('mediapackagefilerepository');
     $files = $table->getHash();
-    foreach ($files as $file) {
+    foreach ($files as $file)
+    {
       $new_file = new MediaPackageFile();
       $new_file->setName($file['name']);
       $new_file->setDownloads(0);
       $new_file->setExtension($file['extension']);
       $new_file->setActive($file['active']);
-      $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(array('name' => $file['category']));
+      $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(['name' => $file['category']]);
       $new_file->setCategory($category);
       $new_file->setAuthor($file['author']);
 
@@ -1167,22 +1299,23 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $program_stats = $table->getHash();
     $count = count($program_stats);
-    for ($i = 0; $i < $count; ++$i) {
+    for ($i = 0; $i < $count; ++$i)
+    {
       $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
-      @$config = array(
-          'downloaded_at' => $program_stats[$i]['downloaded_at'],
-          'ip' => $program_stats[$i]['ip'],
-          'latitude' => $program_stats[$i]['latitude'],
-          'longitude' => $program_stats[$i]['longitude'],
-          'country_code' => $program_stats[$i]['country_code'],
-          'country_name' => $program_stats[$i]['country_name'],
-          'street' => $program_stats[$i]['street'],
-          'postal_code' => @$program_stats[$i]['postal_code'],
-          'locality' => @$program_stats[$i]['locality'],
-          'user_agent' => @$program_stats[$i]['user_agent'],
-          'username' => @$program_stats[$i]['username'],
-          'referrer' => @$program_stats[$i]['referrer'],
-      );
+      @$config = [
+        'downloaded_at' => $program_stats[$i]['downloaded_at'],
+        'ip'            => $program_stats[$i]['ip'],
+        'latitude'      => $program_stats[$i]['latitude'],
+        'longitude'     => $program_stats[$i]['longitude'],
+        'country_code'  => $program_stats[$i]['country_code'],
+        'country_name'  => $program_stats[$i]['country_name'],
+        'street'        => $program_stats[$i]['street'],
+        'postal_code'   => @$program_stats[$i]['postal_code'],
+        'locality'      => @$program_stats[$i]['locality'],
+        'user_agent'    => @$program_stats[$i]['user_agent'],
+        'username'      => @$program_stats[$i]['username'],
+        'referrer'      => @$program_stats[$i]['referrer'],
+      ];
       $program_statistics = new ProgramDownloads();
       $program_statistics->setProgram($program);
       $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
@@ -1197,9 +1330,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
       $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
 
-      if(isset($config['username'])) {
-          $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $config['username']]);
-          $program_statistics->setUser($user);
+      if (isset($config['username']))
+      {
+        $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $config['username']]);
+        $program_statistics->setUser($user);
       }
 
       $em->persist($program_statistics);
@@ -1218,10 +1352,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     $count = count($programs);
-    for ($i = 0; $i < $count; ++$i ) {
-      $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
         'username' => $programs[$i]['owned by'],
-      ));
+      ]);
       $program = new Program();
       $program->setUser($user);
       $program->setName($programs[$i]['name']);
@@ -1243,40 +1378,44 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
 
-      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
+      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
+      {
         $tag_repo = $em->getRepository('AppBundle:Tag');
         $tags = explode(',', $programs[$i]['tags_id']);
-        foreach ($tags as $tag_id) {
+        foreach ($tags as $tag_id)
+        {
           $tag = $tag_repo->find($tag_id);
           $program->addTag($tag);
         }
       }
 
-      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
+      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null)
+      {
         $extension_repo = $em->getRepository('AppBundle:Extension');
         $extensions = explode(',', $programs[$i]['extensions']);
-        foreach ($extensions as $extension_name) {
+        foreach ($extensions as $extension_name)
+        {
           $extension = $extension_repo->findOneByName($extension_name);
           $program->addExtension($extension);
         }
       }
 
-      if($program->getApkStatus() == Program::APK_READY) {
+      if ($program->getApkStatus() == Program::APK_READY)
+      {
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
         $apkrepository = $this->kernel->getContainer()->get('apkrepository');
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
-        copy(self::FIXTUREDIR.'test.catrobat', $temppath);
+        copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
         $apkrepository->save(new File($temppath), $i);
 
         $file_repo = $this->kernel->getContainer()->get('filerepository');
-        $file_repo->saveProgramfile(new File(self::FIXTUREDIR.'test.catrobat'), $i);
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
       }
 
       $em->persist($program);
     }
     $em->flush();
   }
-
 
 
   /**
@@ -1337,7 +1476,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theLinkOfShouldOpen($identifier, $url_type)
   {
-    switch ($identifier) {
+    switch ($identifier)
+    {
       case "image":
         $class_name = "image-container";
         break;
@@ -1351,7 +1491,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     assertTrue(strlen($class_name) > 0);
 
-    switch ($url_type) {
+    switch ($url_type)
+    {
       case "download":
         $url_text = "pocketcode/download";
         break;
@@ -1375,7 +1516,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSeeThePopup($arg1)
   {
-    switch ($arg1) {
+    switch ($arg1)
+    {
       case "update app":
         $this->assertElementOnPage("#popup-info");
         $this->assertElementOnPage("#popup-background");
@@ -1391,7 +1533,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSeeNotThePopup($arg1)
   {
-    switch ($arg1) {
+    switch ($arg1)
+    {
       case "update app":
         $this->assertElementNotOnPage("#popup-info");
         $this->assertElementNotOnPage("#popup-background");
@@ -1450,12 +1593,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $pm = $this->kernel->getContainer()->get('programmanager');
     $program = $pm->findOneByName($arg1);
-    if ($program === null) {
+    if ($program === null)
+    {
       throw new \Exception('Program not found: ' + $arg1);
     }
     $router = $this->kernel->getContainer()->get('router');
-    $url = $router->generate('ci_download', array('id' => $program->getId(), 'flavor' => 'pocketcode'));
-    $this->getClient()->request('GET', $url, array(), array());
+    $url = $router->generate('ci_download', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+    $this->getClient()->request('GET', $url, [], []);
   }
 
   /**
@@ -1499,7 +1643,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function getClient()
   {
-    if ($this->client == null) {
+    if ($this->client == null)
+    {
       $this->client = $this->kernel->getContainer()->get('test.client');
     }
 
@@ -1513,11 +1658,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $page = $this->getSession()->getPage();
     $window_names = $this->getSession()->getDriver()->getWindowNames();
-    foreach ($window_names as $name) {
+    foreach ($window_names as $name)
+    {
       echo $name;
       if ($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')
         || $page->find('css', '#approval_container') || $page->find('css', '#gaia_firstform')
-      ) {
+      )
+      {
         break;
       }
       $this->getSession()->switchToWindow($name);
@@ -1529,38 +1676,50 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iLogInToFacebookWithEmailAndPassword()
   {
-    if ($this->use_real_oauth_javascript_code) {
+    if ($this->use_real_oauth_javascript_code)
+    {
       $mail = $this->getParameterValue('facebook_testuser_mail');
       $pw = $this->getParameterValue('facebook_testuser_pw');
       echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
       $page = $this->getSession()->getPage();
-      if ($page->find('css', '#facebook') && $page->find('css', '#login_form')) {
+      if ($page->find('css', '#facebook') && $page->find('css', '#login_form'))
+      {
         echo 'facebook login form appeared' . "\n";
         $page->fillField('email', $mail);
         $page->fillField('pass', $pw);
         $button = $page->findById('u_0_2');
         assertTrue($button != null);
         $button->press();
-      } else if ($page->find('css', '#facebook') && $page->find('css', '#u_0_1')) {
-        echo 'facebook reauthentication login form appeared' . "\n";
-        $page->fillField('pass', $pw);
-        $button = $page->findById('u_0_0');
-        assertTrue($button != null);
-        $button->press();
-      } else {
-        assertTrue(false, 'No Facebook form appeared!' . "\n");
+      }
+      else
+      {
+        if ($page->find('css', '#facebook') && $page->find('css', '#u_0_1'))
+        {
+          echo 'facebook reauthentication login form appeared' . "\n";
+          $page->fillField('pass', $pw);
+          $button = $page->findById('u_0_0');
+          assertTrue($button != null);
+          $button->press();
+        }
+        else
+        {
+          assertTrue(false, 'No Facebook form appeared!' . "\n");
+        }
       }
       $this->getSession()->switchToWindow(null);
 
       $this->iSwitchToPopupWindow();
-      if ($page->find('css', '#facebook') && $page->find('css', '._1a_q')) {
+      if ($page->find('css', '#facebook') && $page->find('css', '._1a_q'))
+      {
         echo 'facebook authentication login form appeared' . "\n";
         $button = $page->findButton('__CONFIRM__');
         assertTrue($button != null);
         $button->press();
         $this->getSession()->switchToWindow(null);
       }
-    } else {
+    }
+    else
+    {
       //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
       $this->setFacebookFakeData();
       $this->clickFacebookFakeButton();
@@ -1572,28 +1731,44 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iLogInToGoogleWithEmailAndPassword()
   {
-    if ($this->use_real_oauth_javascript_code) {
+    if ($this->use_real_oauth_javascript_code)
+    {
       $mail = $this->getParameterValue('google_testuser_mail');
       $pw = $this->getParameterValue('google_testuser_pw');
       echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
       $page = $this->getSession()->getPage();
       if ($page->find('css', '#approval_container') &&
         $page->find('css', '#submit_approve_access')
-      ) {
+      )
+      {
         $this->approveGoogleAccess();
-      } else if ($page->find('css', '.google-header-bar centered') &&
-        $page->find('css', '.signin-card clearfix')
-      ) {
-        $this->signInWithGoogleEMailAndPassword($mail, $pw);
-      } else if ($page->find('css', '#gaia_firstform') &&
-        $page->find('css', '#Email') &&
-        $page->find('css', '#Passwd-hidden')
-      ) {
-        $this->signInWithGoogleEMail($mail, $pw);
-      } else {
-        assertTrue(false, 'No Google form appeared!' . "\n");
       }
-    } else {
+      else
+      {
+        if ($page->find('css', '.google-header-bar centered') &&
+          $page->find('css', '.signin-card clearfix')
+        )
+        {
+          $this->signInWithGoogleEMailAndPassword($mail, $pw);
+        }
+        else
+        {
+          if ($page->find('css', '#gaia_firstform') &&
+            $page->find('css', '#Email') &&
+            $page->find('css', '#Passwd-hidden')
+          )
+          {
+            $this->signInWithGoogleEMail($mail, $pw);
+          }
+          else
+          {
+            assertTrue(false, 'No Google form appeared!' . "\n");
+          }
+        }
+      }
+    }
+    else
+    {
       $this->setGooglePlusFakeData();
       $this->clickGooglePlusFakeButton();
     }
@@ -1623,42 +1798,44 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->approveGoogleAccess();
   }
 
+  /**
+   * @Then /^there is a user in the database:$/
+   */
+  public function thereIsAUserInTheDatabase(TableNode $table)
+  {
     /**
-     * @Then /^there is a user in the database:$/
+     * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
      */
-    public function thereIsAUserInTheDatabase(TableNode $table)
+    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $users = $table->getHash();
+    $user = null;
+    $count = count($users);
+    for ($i = 0; $i < $count; $i++)
     {
-        /**
-         * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
-         */
-        $user_manager = $this->kernel->getContainer()->get('usermanager');
-        $users = $table->getHash();
-        $user = null;
-        $count = count($users);
-        for($i = 0; $i < $count; $i++)
-        {
-            $user = $user_manager->findUserByUsername($users[$i]["name"]);
-            assertNotNull($user);
-            assertTrue($user->getUsername() == $users[$i]["name"],
-                'Name wrong' . $users[$i]["name"] . 'expected, but ' . $user->getUsername() . ' found.');
-            assertTrue($user->getEmail() == $users[$i]["email"],
-                'E-Mail wrong' . $users[$i]["email"] . 'expected, but ' . $user->getEmail() . ' found.');
-            assertTrue($user->getCountry() == $users[$i]["country"],
-                'Country wrong' . $users[$i]["country"] . 'expected, but ' . $user->getCountry() . ' found.');
-            if($user->getFacebookUid() != ''){
-                assertTrue($user->getFacebookAccessToken() != '', 'no Facebook access token present');
-                assertTrue($user->getFacebookUid() == $users[$i]["facebook_uid"], 'Facebook UID wrong');
-                assertTrue($user->getFacebookName() == $users[$i]["facebook_name"], 'Facebook name wrong');
-            }
-            if($user->getGplusUid() != ''){
-                assertTrue($user->getGplusAccessToken() != '', 'no GPlus access token present');
-                assertTrue($user->getGplusIdToken() != '', 'no GPlus id token present');
-                assertTrue($user->getGplusRefreshToken() != '', 'no GPlus refresh token present');
-                assertTrue($user->getGplusUid() == $users[$i]["google_uid"], 'Google UID wrong');
-                assertTrue($user->getGplusName() == $users[$i]["google_name"], 'Google name wrong');
-            }
-        }
+      $user = $user_manager->findUserByUsername($users[$i]["name"]);
+      assertNotNull($user);
+      assertTrue($user->getUsername() == $users[$i]["name"],
+        'Name wrong' . $users[$i]["name"] . 'expected, but ' . $user->getUsername() . ' found.');
+      assertTrue($user->getEmail() == $users[$i]["email"],
+        'E-Mail wrong' . $users[$i]["email"] . 'expected, but ' . $user->getEmail() . ' found.');
+      assertTrue($user->getCountry() == $users[$i]["country"],
+        'Country wrong' . $users[$i]["country"] . 'expected, but ' . $user->getCountry() . ' found.');
+      if ($user->getFacebookUid() != '')
+      {
+        assertTrue($user->getFacebookAccessToken() != '', 'no Facebook access token present');
+        assertTrue($user->getFacebookUid() == $users[$i]["facebook_uid"], 'Facebook UID wrong');
+        assertTrue($user->getFacebookName() == $users[$i]["facebook_name"], 'Facebook name wrong');
+      }
+      if ($user->getGplusUid() != '')
+      {
+        assertTrue($user->getGplusAccessToken() != '', 'no GPlus access token present');
+        assertTrue($user->getGplusIdToken() != '', 'no GPlus id token present');
+        assertTrue($user->getGplusRefreshToken() != '', 'no GPlus refresh token present');
+        assertTrue($user->getGplusUid() == $users[$i]["google_uid"], 'Google UID wrong');
+        assertTrue($user->getGplusName() == $users[$i]["google_name"], 'Google name wrong');
+      }
     }
+  }
 
   private function signInWithGoogleEMail($mail, $pw)
   {
@@ -1672,7 +1849,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     if ($page->find('css', '#gaia_firstform') &&
       $page->find('css', '#Email-hidden') &&
       $page->find('css', '#Passwd')
-    ) {
+    )
+    {
       $this->signInWithGooglePassword($pw);
     }
   }
@@ -1688,7 +1866,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $button->press();
     if ($page->find('css', '#approval_container') &&
       $page->find('css', '#submit_approve_access')
-    ) {
+    )
+    {
       $this->approveGoogleAccess();
     }
   }
@@ -1781,7 +1960,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     $page->fillField('dialog_oauth_username_input', $arg1);
     $button->press();
-    if (!$arg1 === self::ALREADY_IN_DB_USER) {
+    if (!$arg1 === self::ALREADY_IN_DB_USER)
+    {
       $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
     }
   }
@@ -1802,7 +1982,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     assertFalse($button->hasAttribute('disabled'));
 
     $button->press();
-    if (!$arg1 === self::ALREADY_IN_DB_USER) {
+    if (!$arg1 === self::ALREADY_IN_DB_USER)
+    {
       $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
     }
     $this->getSession()->wait(500);
@@ -1811,15 +1992,19 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   private function getParameterValue($name)
   {
     $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
-    while (!feof($myfile)) {
+    while (!feof($myfile))
+    {
       $line = fgets($myfile);
-      if (strpos($line, $name) != false) {
+      if (strpos($line, $name) != false)
+      {
         fclose($myfile);
+
         return substr(trim($line), strpos(trim($line), ':') + 2);
       }
     }
     fclose($myfile);
     assertTrue(false, 'No entry found in parameters.yml!');
+
     return false;
   }
 
@@ -1834,21 +2019,32 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeTutorialBanners($count, $view)
   {
-    if ($view == "desktop") {
-      for ($i = 1; ; $i++) {
+    if ($view == "desktop")
+    {
+      for ($i = 1; ; $i++)
+      {
         $img = $this->getSession()->getPage()->findById('tutorial-' . $i);
         if ($img == null)
+        {
           break;
+        }
       }
       assertEquals($count, $i - 1);
-    } elseif ($view == "mobile") {
-      for ($i = 1; ; $i++) {
+    }
+    elseif ($view == "mobile")
+    {
+      for ($i = 1; ; $i++)
+      {
         $img = $this->getSession()->getPage()->findById('tutorial-mobile-' . $i);
         if ($img == null)
+        {
           break;
+        }
       }
       assertEquals($count, $i - 1);
-    } else {
+    }
+    else
+    {
       assertTrue(false);
     }
   }
@@ -1858,7 +2054,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iClickOnTheBanner($numb)
   {
-    switch ($numb) {
+    switch ($numb)
+    {
       case 'first':
         $this->iClick("#tutorial-1");
         break;
@@ -1890,13 +2087,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $featured = $table->getHash();
-    for ($i = 0; $i < count($featured); ++$i) {
+    for ($i = 0; $i < count($featured); ++$i)
+    {
       $featured_entry = new FeaturedProgram();
 
-      if ($featured[$i]['program'] != "") {
+      if ($featured[$i]['program'] != "")
+      {
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['program']);
         $featured_entry->setProgram($program);
-      } else {
+      }
+      else
+      {
         $url = $featured[$i]['url'];
         $featured_entry->setUrl($url);
       }
@@ -1904,7 +2105,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $featured_entry->setActive($featured[$i]['active'] == 'yes');
       $featured_entry->setImageType('jpg');
       $featured_entry->setPriority($featured[$i]['priority']);
-      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ?  $featured[$i]['ios_only'] == 'yes' : false);
+      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ? $featured[$i]['ios_only'] == 'yes' : false);
       $em->persist($featured_entry);
     }
     $em->flush();
@@ -1919,13 +2120,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $owl_items = $this->getSession()->getPage()->findAll('css', '.owl-item div a');
     assertEquals(count($owl_items), count($slider_items));
 
-    for ($index = 0; $index < count($owl_items); $index++) {
+    for ($index = 0; $index < count($owl_items); $index++)
+    {
       $url = $slider_items[$index];
-      if (strpos($url, "http://") !== 0) {
+      if (strpos($url, "http://") !== 0)
+      {
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($url);
         assertNotNull($program);
         assertNotNull($program->getId());
-        $url = $this->kernel->getContainer()->get('router')->generate('program', array('id' => $program->getId()));
+        $url = $this->kernel->getContainer()->get('router')->generate('program', ['id' => $program->getId()]);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -2115,7 +2318,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     assertEquals($type_name, $click->getType());
 
-    switch ($name_id) {
+    switch ($name_id)
+    {
       case "tag_id":
         assertEquals($id_or_value, $click->getTag()->getId());
         break;

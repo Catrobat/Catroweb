@@ -6,35 +6,49 @@
 {% endblock %}
 
 {% block body %}
-<h1>{{ "notifications"|trans({}, "catroweb") }}</h1>
-<p>&nbsp;</p>
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{ "notifications"|trans({}, "catroweb") }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="notifications">
+            {% for originalProgramId, data in unseenRemixesGrouped %}
+                <div class="remixed-programs">
+                    <div id="search-results-text">
+                        <strong>
+                            {{ "programs.newRemixesNotificationTitle"|transchoice(data.remixes|length, {
+                                '%programName%' : data.originalProgramName,
+                                '%remixes%' : data.remixes|length
+                            }, "catroweb") }}
+                        </strong>
+                    </div>
 
-<div id="notifications">
-    {% for originalProgramId, data in unseenRemixesGrouped %}
-    <div class="remixed-programs">
-        <div id="search-results-text">
-            <strong>
-            {{ "programs.newRemixesNotificationTitle"|transchoice(data.remixes|length, {
-                '%programName%' : data.originalProgramName,
-                '%remixes%' : data.remixes|length
-            }, "catroweb") }}
-            </strong>
-        </div>
-
-        <div class="programs">
-            {% for remixData in data.remixes %}
-                <div class="program" id="program-{{ remixData.remixProgramId }}" style="display:block;">
-                    <a href="{{ url('see_user_notification', {
-                        'ancestor_id' : remixData.originalProgramId,
-                        'descendant_id' : remixData.remixProgramId
-                    }) }}" class="notification-link">
-                    <div><img src="{{ remixData.thumbnail }}"></div>
-                    <div class="program-name"><b>{{ remixData.remixProgramName }}</b></div>
-                    <div><div class="img-time-small"></div>{{ remixData.age }}</div></a>
+                    <div class="programs">
+                        {% for remixData in data.remixes %}
+                            <div class="program" id="program-{{ remixData.remixProgramId }}" style="display:block;">
+                                <a href="{{ url('see_user_notification', {
+                                    'ancestor_id' : remixData.originalProgramId,
+                                    'descendant_id' : remixData.remixProgramId
+                                }) }}" class="notification-link">
+                                    <div><img src="{{ remixData.thumbnail }}"></div>
+                                    <div class="program-name"><b>{{ remixData.remixProgramName }}</b></div>
+                                    <div><div class="img-time-small"></div>{{ remixData.age }}</div></a>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+</div>
+
+<div id="catro-notification-container" class="row">
+    {% for notification in catroUserNotifications %}
+        <div class="col-md-12">
+            {{ include(notification.getTwigTemplate) }}
+        </div>
     {% endfor %}
 </div>
 <div class="clear"></div>
@@ -65,18 +79,71 @@
                   }
 
                   $("#notifications").children().remove();
+                  $("#catro-notification-container").children().remove();
                   $("#mark-all-as-seen").hide();
                   $(".user-notification-badge").removeAttr("data-badge");
                   $(".no-notifications-placeholder").show();
-                  swal("{{ "done"|trans({}, "catroweb") }}", "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}", "success");
+                swal(
+                  {
+                    title: "{{ "done"|trans({}, "catroweb") }}",
+                    text: "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}",
+                    type: "success",
+                    confirmButtonClass: 'btn btn-success',
+                    confirmButtonColor: ''
+                  }
+                );
               },
               error: function() {
                   swal("{{ "somethingWentWrong"|trans({}, "catroweb") }}", "{{ "notificationsClearError"|trans({}, "catroweb") }}", "error");
               }
           });
       }
+      function markAsRead(id)
+      {
+        $.ajax({
+          url    : "{{ url('catro_notification_mark_as_read') }}" + "/" + id,
+          type   : "get",
+          success: function(data)
+          {
+            if (data.success)
+            {
+              var current_number = $('.user-notification-badge').data("badge");
+              if (current_number > 1)
+              {
+                $('.user-notification-badge').data("badge", current_number - 1);
+              }
+              $('#catro-notification-' + id).fadeOut(function()
+              {
+                $('#catro-notification-' + id).parent().remove();
+                if ($('#catro-notification-container').children().length === 0)
+                {
+                  $("#catro-notification-container").children().remove();
+                  $("#mark-all-as-seen").hide();
+                  $(".user-notification-badge").removeAttr("data-badge");
+                  $(".no-notifications-placeholder").show();
+                  swal(
+                    {
+                      title: "{{ "done"|trans({}, "catroweb") }}",
+                      text: "{{ "notificationsClearedMessage"|trans({}, "catroweb") }}",
+                      type: "success",
+                      confirmButtonClass: 'btn btn-success',
+                      confirmButtonColor: ''
+                    }
+                  );
+                }
+              });
+            }
+            else
+            {
+              console.error(data.message);
+            }
+          }
+        });
+      }
+
       $(document).ready(function() {
           var totalNumOfRemixes = {{ unseenRemixesGrouped|length }};
+          totalNumOfRemixes += {{ catroUserNotifications|length }};
           if (totalNumOfRemixes == 0) {
               $("#mark-all-as-seen").hide();
               $(".no-notifications-placeholder").show();
