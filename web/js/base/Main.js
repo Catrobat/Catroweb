@@ -73,11 +73,13 @@ var Main = function (search_url) {
       navDropdown.css('left', newPosition).toggle();
     });
 
-    $('#copy-link').click(function() {
-      $(this).find('tr').first().hide();
-      $(this).find('tr').last().show();
+    $('#copy-link-firstrow').click(function() {
+      $('#copy-link').find('tr').first().hide();
+      $('#copy-link').find('tr').last().show();
       $('#url-link').focus().select();
     });
+
+    $('#url-link').focus(function() { $(this).select(); });
 
     self.setSearchBtnListener();
     self.setLanguageSwitchListener();
