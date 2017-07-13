@@ -19,10 +19,11 @@ class ProgramFileRepository
     {
       throw new InvalidStorageDirectoryException($directory . ' is not a valid directory');
     }
-    if (!is_dir($tmp_dir))
+    if ($tmp_dir && !is_dir($tmp_dir))
     {
-      throw new InvalidStorageDirectoryException($directory . ' is not a valid directory');
+      throw new InvalidStorageDirectoryException($tmp_dir . ' is not a valid directory');
     }
+
     $this->directory = $directory;
     $this->webpath = $webpath;
     $this->tmp_dir = $tmp_dir;
@@ -37,13 +38,17 @@ class ProgramFileRepository
 
   public function saveProgramTemp(ExtractedCatrobatFile $extracted, $id)
   {
-    $this->file_compressor->compress($extracted->getPath(), $this->tmp_dir, $id);
+    if ($this->tmp_dir) {
+      $this->file_compressor->compress($extracted->getPath(), $this->tmp_dir, $id);
+    }
   }
 
   public function makeTempProgramPerm($id)
   {
-    $this->filesystem->copy($this->tmp_dir . $id . ".catrobat", $this->directory . $id . ".catrobat", true);
-    $this->filesystem->remove($this->tmp_dir . $id . ".catrobat");
+    if ($this->tmp_dir) {
+      $this->filesystem->copy($this->tmp_dir . $id . ".catrobat", $this->directory . $id . ".catrobat", true);
+      $this->filesystem->remove($this->tmp_dir . $id . ".catrobat");
+    }
   }
 
   public function saveProgramfile(File $file, $id)

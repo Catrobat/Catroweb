@@ -62,7 +62,7 @@ class CreateBackupCommand extends ContainerAwareCommand
         $progress->setMessage('Saving SQL file');
 
         CommandHelper::executeShellCommand("mysqldump -u $database_user -p$database_password $database_name > $sql_path",
-          array('timeout' => 7200));
+          array('timeout' => 14400));
 
         $progress->advance();
         $progress->setMessage('Database dump completed.' . " Creating archive at " . $zip_path);
@@ -78,7 +78,7 @@ class CreateBackupCommand extends ContainerAwareCommand
         $progress->setMessage('Compression started');
 
         CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
-            array('timeout' => 7200));
+            array('timeout' => 14400));
         $progress->advance();
         $progress->setMessage('Compression finished. Setting permissions.');
 
