@@ -1,13 +1,91 @@
-@import "../../../vendor/twbs/bootstrap/less/bootstrap.less";
+@import "../bootstrap_vendor/less/bootstrap.less";
 @import "../../bootswatch_less/variables.less";
 @import "../../bootswatch_less/bootswatch.less";
-@import "../../../vendor/twbs/bootstrap/less/bootstrap.less";
-@import "../../bootswatch_less/variables.less";
-@import "../../bootswatch_less/bootswatch.less";
+
+
+//################## Header ####################
+
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+
+header
+{
+  padding: 0;
+
+  .navbar-header
+  {
+    display: flex;
+    align-items: center;
+
+    h3
+    {
+      color: white;
+      margin: 0;
+    }
+
+    .navbar-toggle
+    {
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: auto;
+
+      #menu-icon
+      {
+        font-size: 1.7em;
+        color: white;
+      }
+    }
+  }
+
+  #bs-navbar-collapse
+  {
+    //margin-bottom: 15px;
+    max-height: none;
+
+    .navbar-nav
+    {
+      margin: 0;
+
+      .navbar-form
+      {
+        margin: 0;
+      }
+
+      li
+      {
+        a
+        {
+          display: flex;
+          align-items: center;
+
+          span
+          {
+            font-size: 2em;
+          }
+
+          h4
+          {
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+}
 
 //################## Footer ####################
 @padding: 15px;
 @margin-adjustment: -5px;
+
 footer
 {
   background-color: rgba(0, 0, 0, .1);
@@ -88,6 +166,9 @@ footer
   }
 }
 //################## Footer End ####################
+
+
+
 // can/should be used for uniform width of page containers
 .content
 {
@@ -104,7 +185,43 @@ footer
 {
   #logo
   {
-    width: 275px !important;
-    margin-top: -18px !important;
+    height: 63px;
+  }
+}
+
+@media screen and (min-width: @screen-sm)
+{
+  .navbar-nav
+  {
+    align-items: center;
+    display: flex;
+    padding-top: 30px;
+
+    li
+    {
+      padding: 5px;
+
+      a
+      {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      ul {
+        padding: 5px;
+
+        a
+        {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+
+        span
+        {
+          margin-right: 10px;
+        }
+      }
+
+    }
   }
 }

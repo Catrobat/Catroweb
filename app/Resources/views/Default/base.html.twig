@@ -12,22 +12,23 @@
     <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
     <link rel="stylesheet" href="{{ asset('css/'~theme()~'/catro_bootstrap.css') }}" media="screen"/>
     <link rel="stylesheet" href="{{ asset('compiled/bootstrap/bootstrap_yeti_adjustments.min.css') }}"/>
-
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
     {% block head %}{% endblock %}
 </head>
 <body>
 
 <div id="wrapper">
-    <header>
-        {% block header %}
-            {% include ':Default:header.html.twig' %}
-        {% endblock %}
-    </header>
+  <header>
+    {% block header %}
+        {% include ':Default:header.html.twig' %}
+    {% endblock %}
+  </header>
 
-    <article>
-        {% block body %}{% endblock %}
-    </article>
+  <article>
+      {% block body %}{% endblock %}
+  </article>
 </div>
 
 {% block footer %}

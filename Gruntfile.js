@@ -47,7 +47,7 @@ lessconfig['admin'] = {
     compress    : true,
     yuicompress : true,
     optimization: 2,
-    relativeUrls: true,
+    relativeUrls: true
   },
   files  : [
     admin_file_config,
@@ -68,6 +68,14 @@ module.exports = function(grunt)
   
   grunt.initConfig({
     pkg   : grunt.file.readJSON('package.json'),
+    copy: {
+      bootstrap_vendor: {
+        expand: true,
+        cwd: 'vendor/twbs/bootstrap/',
+        src: '**',
+        dest: 'web/css/bootstrap_vendor/'
+      }
+    },
     concat: {
       options     : {
         separator: ';',
@@ -104,7 +112,7 @@ module.exports = function(grunt)
         cwd   : 'node_modules/jquery/dist',
         src   : 'jquery.min.js',
         dest  : 'web/compiled/bootstrap/'
-      },
+      }
     },
     cssmin: {
       target: {
@@ -114,7 +122,7 @@ module.exports = function(grunt)
             cwd   : 'web/css/bootstrap_yeti/',
             src   : 'bootstrap_yeti_adjustments.css',
             dest  : 'web/compiled/bootstrap/',
-            ext   : '.min.css',
+            ext   : '.min.css'
           }
         ]
       }
@@ -155,8 +163,9 @@ module.exports = function(grunt)
       }
     }
   });
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('default', ['concat', 'less', 'cssmin', 'uglify', 'watch']);
+  grunt.registerTask('default', ['copy','concat', 'less', 'cssmin', 'uglify', 'watch']);
 };
