@@ -3,7 +3,6 @@
 @import "../../bootswatch_less/bootswatch.less";
 
 
-
 .white-icon
 {
   font-size: 2em;
@@ -23,12 +22,12 @@
   padding-left: 10px;
 }
 
-#navbar-small
+.navbar-small
 {
-  display: block;
+  display: inherit;
 }
 
-#navbar-big
+.navbar-big
 {
   display: none;
 }
@@ -59,9 +58,13 @@ header
 
   #bs-navbar-collapse
   {
-    padding-top: 15px;
-    padding-bottom: 15px;
     max-height: none;
+
+    .navbar-small
+    {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
 
     .navbar-nav
     {
@@ -198,53 +201,55 @@ footer
 
 @media screen and (min-width: @screen-sm)
 {
-  #navbar-small
+  .navbar-small
   {
     display: none;
   }
 
-  #navbar-big
+  .navbar-big
   {
-    display: block;
+    display: inherit;
   }
 
-  #bs-navbar-collapse {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-
-    .navbar-nav {
+  #bs-navbar-collapse
+  {
+    .navbar-nav
+    {
       align-items: center;
       display: flex;
       padding-top: 25px;
 
-
-
-      li {
+      li
+      {
         padding: 5px;
 
-        a {
+        a
+        {
           padding-top: 0;
           padding-bottom: 0;
         }
 
-        span {
+        span
+        {
           margin-right: 10px;
         }
 
-        ul {
+        ul
+        {
           padding: 5px;
           min-width: 210px;
 
-          a {
+          a
+          {
             padding-top: 0;
             padding-bottom: 0;
           }
 
-          span {
+          span
+          {
             margin-right: 10px;
           }
         }
-
       }
     }
   }

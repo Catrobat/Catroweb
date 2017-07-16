@@ -8,9 +8,9 @@
             <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
           </a>
           <h3 id="page-name">Home</h3>
-          <div class="right-inline">
-            <input type="text" id="search-input-header" class="form-control input-search hidden" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-            <a id="search-icon-header" class="glyphicon glyphicon-search white-icon medium-icon" href="#"></a>
+          <div class="right-inline navbar-small">
+            <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+            <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-navbar-collapse">
@@ -44,7 +44,7 @@
               </form>
             </li>
 #}
-            <div id="navbar-small">
+            <div class="navbar-small">
               <ul class="nav navbar-nav navbar-right">
               {% if app.user %}
                 <li>
@@ -85,9 +85,13 @@
               </ul>
             </div>
 
-            <div id="navbar-big">
+            <div class="navbar-big">
               <ul class="nav navbar-nav navbar-right">
               {% if app.user %}
+                <li>
+                  <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+                  <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+                </li>
                 <li class="dropdown" id="navbar-dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
                     <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
@@ -228,13 +232,13 @@
 </script>
 <script>
   $(document).ready(function () {
-    $('#search-icon-header').on('click', function () {
-      $('#search-icon-header').hide();
+    $('.search-icon-header').on('click', function () {
+      $('.search-icon-header').hide();
       if($(window).width() <= 430)
       {
         $('#page-name').hide();
       }
-      $('#search-input-header').removeClass('hidden');
+      $('.search-input-header').removeClass('hidden');
     });
   });
 
