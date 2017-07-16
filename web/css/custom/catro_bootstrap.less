@@ -3,19 +3,37 @@
 @import "../../bootswatch_less/bootswatch.less";
 
 
+
+.white-icon
+{
+  font-size: 2em;
+  color: white;
+}
+
+.medium-icon
+{
+  font-size: 1.7em;
+}
+
+.right-inline
+{
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 10px;
+}
+
+#navbar-small
+{
+  display: block;
+}
+
+#navbar-big
+{
+  display: none;
+}
+
 //################## Header ####################
-
-
-.dropdown-submenu {
-  position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-}
-
 
 header
 {
@@ -36,19 +54,13 @@ header
     {
       margin-top: 0;
       margin-bottom: 0;
-      margin-left: auto;
-
-      #menu-icon
-      {
-        font-size: 1.7em;
-        color: white;
-      }
     }
   }
 
   #bs-navbar-collapse
   {
-    //margin-bottom: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     max-height: none;
 
     .navbar-nav
@@ -66,11 +78,6 @@ header
         {
           display: flex;
           align-items: center;
-
-          span
-          {
-            font-size: 2em;
-          }
 
           h4
           {
@@ -191,37 +198,54 @@ footer
 
 @media screen and (min-width: @screen-sm)
 {
-  .navbar-nav
+  #navbar-small
   {
-    align-items: center;
-    display: flex;
-    padding-top: 30px;
+    display: none;
+  }
 
-    li
-    {
-      padding: 5px;
+  #navbar-big
+  {
+    display: block;
+  }
 
-      a
-      {
-        padding-top: 0;
-        padding-bottom: 0;
-      }
+  #bs-navbar-collapse {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 
-      ul {
+    .navbar-nav {
+      align-items: center;
+      display: flex;
+      padding-top: 25px;
+
+
+
+      li {
         padding: 5px;
 
-        a
-        {
+        a {
           padding-top: 0;
           padding-bottom: 0;
         }
 
-        span
-        {
+        span {
           margin-right: 10px;
         }
-      }
 
+        ul {
+          padding: 5px;
+          min-width: 210px;
+
+          a {
+            padding-top: 0;
+            padding-bottom: 0;
+          }
+
+          span {
+            margin-right: 10px;
+          }
+        }
+
+      }
     }
   }
 }
