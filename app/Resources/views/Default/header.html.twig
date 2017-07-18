@@ -49,35 +49,35 @@
               {% if app.user %}
                 <li>
                   <a href="{{ path('user_notifications') }}">
-                    <span id="login-icon" class="glyphicon glyphicon-bell white-icon"></span>
+                    <span class="glyphicon glyphicon-bell white-icon"></span>
                     <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
                   </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                   <a href="{{ url('profile') }}" id="btn-profile">
-                    <span id="login-icon" class="glyphicon glyphicon-user white-icon"></span>
+                    <span class="glyphicon glyphicon-user white-icon"></span>
                     <h4>My Profile</h4>
                   </a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}
                   <li>
                     <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                      <span id="login-icon" class="glyphicon glyphicon-dashboard white-icon"></span>
+                      <span class="glyphicon glyphicon-dashboard white-icon"></span>
                       <h4>Admin</h4>
                     </a>
                   </li>
                 {% endif %}
                 <li>
                   <a href="{{ url('logout') }}" id="btn-logout">
-                    <span id="login-icon" class="glyphicon glyphicon-log-out white-icon"></span>
+                    <span class="glyphicon glyphicon-log-out white-icon"></span>
                     <h4>Logout</h4>
                   </a>
                 </li>
               {% else %}
                 <li>
-                  <a href="{{ url('login') }}" id="btn-login">
-                    <span id="login-icon" class="glyphicon glyphicon-log-in white-icon"></span>
+                  <a href="{{ url('login') }}" id="btn-login-small">
+                    <span class="glyphicon glyphicon-log-in white-icon"></span>
                     <h4>Log in</h4>
                   </a>
                 </li>
@@ -87,11 +87,11 @@
 
             <div class="navbar-big">
               <ul class="nav navbar-nav navbar-right">
-              {% if app.user %}
                 <li>
                   <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
                   <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
                 </li>
+              {% if app.user %}
                 <li class="dropdown" id="navbar-dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
                     <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
@@ -100,26 +100,26 @@
                   <ul class="dropdown-menu" role="menu">
                     <li>
                       <a href="{{ path('user_notifications') }}">
-                        <span id="login-icon" class="glyphicon glyphicon-bell white-icon"></span>
+                        <span class="glyphicon glyphicon-bell white-icon"></span>
                         <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
                       </a>
                     </li>
                     <li><a href="{{ url('profile') }}" id="btn-profile">
-                        <span id="login-icon" class="glyphicon glyphicon-user white-icon"></span>
+                        <span class="glyphicon glyphicon-user white-icon"></span>
                         <h4>My Profile</h4>
                       </a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                       <li>
                         <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                          <span id="login-icon" class="glyphicon glyphicon-dashboard white-icon"></span>
+                          <span class="glyphicon glyphicon-dashboard white-icon"></span>
                           <h4>Admin</h4>
                         </a>
                       </li>
                     {% endif %}
                     <li>
                       <a href="{{ url('logout') }}" id="btn-logout">
-                        <span id="login-icon" class="glyphicon glyphicon-log-out white-icon"></span>
+                        <span class="glyphicon glyphicon-log-out white-icon"></span>
                         <h4>Logout</h4>
                       </a>
                     </li>
@@ -132,7 +132,7 @@
               {% else %}
                 <li>
                   <a href="{{ url('login') }}" id="btn-login">
-                    <span id="login-icon" class="glyphicon glyphicon-log-in white-icon"></span>
+                    <span class="glyphicon glyphicon-log-in white-icon"></span>
                     <h4>Log in</h4>
                   </a>
                 </li>
@@ -228,8 +228,7 @@
   </div>
 
 </nav>
-<script src=" {{ asset('compiled/bootstrap/jquery.min.js') }}">
-</script>
+
 <script>
   $(document).ready(function () {
     $('.search-icon-header').on('click', function () {

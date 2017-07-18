@@ -1,13 +1,11 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.css') }}">
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
-  
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-  <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
-  <script src="{{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+
+  <script src="{{ asset('js/jquery-ui/jquery-ui.js') }}"></script>
+  <script src="{{ asset( getJavascriptPath('loginscript.js') )}}"></script>
 
 {% endblock %}
 
