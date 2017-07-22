@@ -19,7 +19,7 @@ Feature: Sharing and Liking of programs
   Scenario: In a mobile browser the Facebook like button and the Google+ +1 button should be visible on the bottom of the program page
     Given I am browsing with my pocketcode app
     And I am on "/pocketcode/program/1"
-    And I wait for a second
+    And I wait 200 milliseconds
     Then I should see "program 1"
     And I should see the Facebook Like button on the bottom of the program page
 

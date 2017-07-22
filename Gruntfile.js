@@ -1,6 +1,7 @@
-var jsBaseSrc = ['web/js/base/*.js', 'web/js/plugins/*.js'];
+var jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
 var jsLoginSrc = ['web/js/social/*.js'];
 var jsCustomSrc = 'web/js/custom';
+var jsLocalPluginSrc = 'web/js/localPlugins';
 var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy'];
 
 var lessconfig = {};
@@ -77,6 +78,12 @@ module.exports = function (grunt) {
             login: {
                 src: jsLoginSrc,
                 dest: 'web/compiled/js/<%= pkg.loginJSName %>.js'
+            },
+            localPlugins: {
+                expand: true,
+                cwd: jsLocalPluginSrc,
+                src: '**/*.js',
+                dest: 'web/compiled/js/'
             },
             custom: {
                 expand: true,

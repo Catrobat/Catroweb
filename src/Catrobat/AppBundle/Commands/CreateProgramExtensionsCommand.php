@@ -132,14 +132,6 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
         return $this->program_repository->find($id[0]);
     }
 
-
-    private function write($string)
-    {
-        if ($this->output != null) {
-            $this->output->write($string);
-        }
-    }
-
     private function writeln($string)
     {
         if ($this->output != null) {

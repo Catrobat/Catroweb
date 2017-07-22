@@ -20,14 +20,31 @@ class ProgramDownloads
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
      * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
+     * @var Program
      */
     protected $program;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $recommended_by_page_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
+     * @ORM\JoinColumn(name="recommended_by_program_id", referencedColumnName="id", nullable=true)
+     */
+    protected $recommended_by_program;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
+     */
+    protected $user_specific_recommendation = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
      * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
      */
-    protected $recommended_from_program;
+    protected $recommended_from_program_via_tag;
 
     /**
      * @ORM\Column(type="datetime")
@@ -75,6 +92,11 @@ class ProgramDownloads
     protected $locality;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $locale;
+
+    /**
      * @ORM\Column(type="string", options={"default":""}, nullable=true)
      */
     protected $user_agent;
@@ -109,17 +131,17 @@ class ProgramDownloads
     /**
      * @return mixed
      */
-    public function getRecommendedFromProgram()
+    public function getRecommendedFromProgramViaTag()
     {
-        return $this->recommended_from_program;
+        return $this->recommended_from_program_via_tag;
     }
 
     /**
-     * @param mixed $recommended_from_program
+     * @param mixed $recommended_from_program_via_tag
      */
-    public function setRecommendedFromProgram($recommended_from_program)
+    public function setRecommendedFromProgramViaTag($recommended_from_program_via_tag)
     {
-        $this->recommended_from_program = $recommended_from_program;
+        $this->recommended_from_program_via_tag = $recommended_from_program_via_tag;
     }
 
     /**
@@ -269,6 +291,22 @@ class ProgramDownloads
     /**
      * @return mixed
      */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
@@ -320,6 +358,54 @@ class ProgramDownloads
     public function getReferrer()
     {
         return $this->referrer;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRecommendedByPageId()
+    {
+        return $this->recommended_by_page_id;
+    }
+
+    /**
+     * @param int $recommended_by_page_id
+     */
+    public function setRecommendedByPageId($recommended_by_page_id)
+    {
+        $this->recommended_by_page_id = $recommended_by_page_id;
+    }
+
+    /**
+     * @return Program
+     */
+    public function getRecommendedByProgram()
+    {
+        return $this->recommended_by_program;
+    }
+
+    /**
+     * @param Program $recommended_by_program
+     */
+    public function setRecommendedByProgram($recommended_by_program)
+    {
+        $this->recommended_by_program = $recommended_by_program;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUserSpecificRecommendation()
+    {
+        return $this->user_specific_recommendation;
+    }
+
+    /**
+     * @param bool $is_user_specific_recommendation
+     */
+    public function setUserSpecificRecommendation($is_user_specific_recommendation)
+    {
+        $this->user_specific_recommendation = $is_user_specific_recommendation;
     }
 
     /**

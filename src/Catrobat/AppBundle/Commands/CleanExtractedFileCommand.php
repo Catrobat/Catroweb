@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class CleanExtractedFileCommand extends ContainerAwareCommand
 {
@@ -23,7 +24,7 @@ class CleanExtractedFileCommand extends ContainerAwareCommand
     $this->output = $output;
 
     $this->output->writeln('Deleting Extracted Catrobat Files');
-    $this->emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'));
+    CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.file.extract.dir'), 'Emptying extracted directory', $output);
 
     /* @var $em \Doctrine\ORM\EntityManager */
     $em = $this->getContainer()->get('doctrine.orm.entity_manager');
@@ -31,16 +32,5 @@ class CleanExtractedFileCommand extends ContainerAwareCommand
     $query->setParameter('hash', "null");
     $result = $query->getSingleScalarResult();
     $this->output->writeln('Reset the directory hash of '.$result.' projects');
-  }
-
-  private function emptyDirectory($directory)
-  {
-    $filesystem = new Filesystem();
-
-    $finder = new Finder();
-    $finder->in($directory)->depth(0);
-    foreach ($finder as $file) {
-      $filesystem->remove($file);
-    }
   }
 } 

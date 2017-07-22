@@ -31,7 +31,12 @@
       <div class="img-password"></div>
     </div>
 
-    {% if ("/login" in app.request.headers.get('referer')) %}
+    {% if (app.session.get("catroweb_login_redirect") is not empty) %}
+        <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}" />
+        {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
+        {{ app.session.set("catroweb_login_redirect", "") }}
+
+    {% elseif ("/login" in app.request.headers.get('referer')) %}
 
         {% if app.session.has("catroweb_login_referer") %}
             <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer")  }}#login" />
@@ -55,7 +60,7 @@
 
     <div id="login_links">
          <div>
-             <a id="create_account" href="{{ path('fos_user_registration_register') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+             <a id="create_account" href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
          </div>
          <div>
              <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>

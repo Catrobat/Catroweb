@@ -47,7 +47,7 @@
   background-repeat: no-repeat;
 }
 
-.img-load-more {
+.img-load-more, .img-load-less {
   width: 35px;
   height: 35px;
   background-image: @default-sprite-url;
@@ -58,6 +58,10 @@
   width: 32px;
   height: 32px;
   background-image: url('../../images/symbols/ajax-loader-dark.gif');
+}
+
+.img-load-less {
+  transform: rotate(180deg);
 }
 
 .img-time-small {

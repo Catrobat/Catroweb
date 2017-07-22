@@ -43,7 +43,6 @@
     When I go to "/pocketcode/resetting/request"
     And I fill in "username" with "Catrobat"
     And I press "recover"
-    And I wait for a second
     Then I should see "The password for this user has already been requested within the last 24 hours."
 
 Scenario: The referer should work even after one failed login

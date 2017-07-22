@@ -41,7 +41,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/pocketcode/program/1"
     And I write "hello" in textbox
     And I click the "send" button
-    And I wait for a second
+    And I wait 200 milliseconds
     Then I should be on "/pocketcode/login"
 
   Scenario: I should be able to write a comment when I am logged in
@@ -88,7 +88,7 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: When I click the report button, I should be redirected to the login page
     Given I am on "/pocketcode/program/2"
     When I click the "report-comment" button
-    And I wait for a second
+    And I wait 200 milliseconds
     Then I should be on "/pocketcode/login"
 
   Scenario: When I am logged in as an admin, I should see a delete button

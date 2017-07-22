@@ -2,18 +2,54 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Buzz\Message\Response;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
+use Catrobat\AppBundle\Entity\ProgramLike;
+use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserComment;
+use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
+use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProgramController extends Controller
 {
+    /**
+     * @Route("/program/remixgraph/{id}", name="program_remix_graph", requirements={"id":"\d+"})
+     * @Method({"GET"})
+     */
+    public function programRemixGraphAction(Request $request, $id)
+    {
+        $remix_graph_data = $this->get('remixmanager')->getFullRemixGraph($id);
+        $screenshot_repository = $this->get('screenshotrepository');
+
+        $catrobat_program_thumbnails = [];
+        foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
+            if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData'])) {
+                $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
+                continue;
+            }
+            $catrobat_program_thumbnails[$node_id] = '/' . $screenshot_repository->getThumbnailWebPath($node_id);
+        }
+
+        $statistics = $this->get('statistics');
+        $locale = strtolower($request->getLocale());
+        $referrer = $request->headers->get('referer');
+        $statistics->createClickStatistics($request, 'show_remix_graph', 0, $id, null, null, $referrer, $locale, false, false);
+
+        return new JsonResponse([
+            'id' => $id,
+            'remixGraph' => $remix_graph_data,
+            'catrobatProgramThumbnails' => $catrobat_program_thumbnails,
+        ]);
+    }
+
     /**
      * @Route("/program/{id}", name="program", requirements={"id":"\d+"})
      * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"})
@@ -26,8 +62,10 @@ class ProgramController extends Controller
          * @var $reported_program ProgramInappropriateReport
          * @var $gamejam GameJam
          */
-        $program = $this->get('programmanager')->find($id);
+        $program_manager = $this->get('programmanager');
+        $program = $program_manager->find($id);
         $screenshot_repository = $this->get('screenshotrepository');
+        $router = $this->get('router');
         $elapsed_time = $this->get('elapsedtime');
 
         if (!$program || !$program->isVisible()) {
@@ -39,18 +77,26 @@ class ProgramController extends Controller
         $referrer = $request->headers->get('referer');
         $request->getSession()->set('referer', $referrer);
 
-        $program_comments = $this->findCommentsById($program);
-        $program_details = $this->createProgramDetailsArray($screenshot_repository, $program, $elapsed_time,
-            $referrer, $program_comments, $request);
-
         $user = $this->getUser();
         $nolb_status = false;
         $user_name = "";
+        $like_type = ProgramLike::TYPE_NONE;
+        $like_type_count = 0;
 
-        if($user != null){
+        if($user != null) {
             $nolb_status = $user->getNolbUser();
             $user_name = $user->getUsername();
+            $like = $program_manager->findUserLike($program->getId(), $user->getId());
+            if ($like != null) {
+                $like_type = $like->getType();
+                $like_type_count = $program_manager->likeTypeCount($program->getId(), $like_type);
+            }
         }
+
+        $total_like_count = $program_manager->totalLikeCount($program->getId());
+        $program_comments = $this->findCommentsById($program);
+        $program_details = $this->createProgramDetailsArray($screenshot_repository, $program, $like_type, $like_type_count,
+            $total_like_count, $elapsed_time, $referrer, $program_comments, $request);
 
         $user_programs = $this->findUserPrograms($user, $program);
 
@@ -61,6 +107,7 @@ class ProgramController extends Controller
 
         $jam = $this->extractGameJamConfig();
         return $this->get('templating')->renderResponse('::program.html.twig', array(
+            'program_details_url_template' => $router->generate('program', array('id' => 0)),
             'program' => $program,
             'program_details' => $program_details,
             'my_program' => count($user_programs) > 0 ? true : false,
@@ -71,6 +118,61 @@ class ProgramController extends Controller
             'nolb_status' => $nolb_status,
             'user_name' => $user_name,
         ));
+    }
+
+    /**
+     * @Route("/program/like/{id}", name="program_like", requirements={"id":"\d+"})
+     * @Method({"GET"})
+     */
+    public function programLikeAction(Request $request, $id)
+    {
+        $type = intval($request->query->get('type', ProgramLike::TYPE_THUMBS_UP));
+        $no_unlike = (bool)$request->query->get('no_unlike', false);
+
+        if (!ProgramLike::isValidType($type)) {
+            if ($request->isXmlHttpRequest()) {
+                return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM, 'message' => 'Invalid like type given!']);
+            } else {
+                throw $this->createAccessDeniedException('Invalid like-type for program given!');
+            }
+        }
+
+        /** @var ProgramManager $program_manager */
+        $program_manager = $this->get('programmanager');
+        $program = $program_manager->find($id);
+        if ($program == null) {
+            if ($request->isXmlHttpRequest()) {
+                return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM, 'message' => 'Program with given ID does not exist!']);
+            } else {
+                throw $this->createNotFoundException('Program with given ID does not exist!');
+            }
+        }
+
+        $user = $this->getUser();
+        if (!$user) {
+            if ($request->isXmlHttpRequest()) {
+                return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR]);
+            } else {
+                $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
+                    'program_like', ['id' => $id, 'type' => $type, 'no_unlike' => 1]));
+                return $this->redirectToRoute('login');
+            }
+        }
+
+        $new_type = $program_manager->toggleLike($program, $user, $type, $no_unlike);
+        $like_type_count = $program_manager->likeTypeCount($program->getId(), $type);
+        $total_like_count = $program_manager->totalLikeCount($program->getId());
+
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('program', ['id' => $id]);
+        }
+
+        return new JsonResponse(['statusCode' => StatusCode::OK, 'data' => [
+            'id' => $id,
+            'likeType' => $new_type,
+            'likeTypeCount' => $like_type_count,
+            'totalLikeCount' => $total_like_count
+        ]]);
     }
 
     /**
@@ -201,13 +303,35 @@ class ProgramController extends Controller
      * @param $program_comments
      * @return array
      */
-    private function createProgramDetailsArray($screenshot_repository, $program, $elapsed_time, $referrer, $program_comments, $request) {
+    private function createProgramDetailsArray($screenshot_repository, $program, $like_type, $like_type_count,
+                                               $total_like_count, $elapsed_time, $referrer, $program_comments, $request) {
+        $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
+        $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
+        $rec_user_specific = intval($request->query->get('rec_user_specific', 0));
 
-        $rec_from_id = intval($request->query->get('rec_from',0));
-        if ($rec_from_id > 0)
-            $url = $this->generateUrl('download', array('id' => $program->getId(), 'rec_from' => $rec_from_id,  'fname' => $program->getName()));
-        else
-            $url = $this->generateUrl('download', array('id' => $program->getId(), 'fname' => $program->getName()));
+        $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
+
+        if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
+            // all recommendations (except tag-recommendations -> see below) should generate this download link!
+            // At the moment only recommendations based on remixes are supported!
+            $url = $this->generateUrl('download', [
+                'id' => $program->getId(),
+                'rec_by_page_id' => $rec_by_page_id,
+                'rec_by_program_id' => $rec_by_program_id,
+                'rec_user_specific' => $rec_user_specific,
+                'fname' => $program->getName()
+            ]);
+        } else if ($rec_tag_by_program_id > 0) {
+            // tag-recommendations should generate this download link!
+            $url = $this->generateUrl('download', [
+                'id' => $program->getId(),
+                'rec_from' => $rec_tag_by_program_id,
+                'fname' => $program->getName()
+            ]);
+        } else {
+            // case: NO recommendation
+            $url = $this->generateUrl('download', ['id' => $program->getId(), 'fname' => $program->getName()]);
+        }
 
         $program_details = array(
             'screenshotBig' => $screenshot_repository->getScreenshotWebPath($program->getId()),
@@ -221,7 +345,11 @@ class ProgramController extends Controller
             'id' => $program->getId(),
             'comments' => $program_comments,
             'commentsLength' => count($program_comments),
-            'isAdmin' => $this->isGranted("ROLE_ADMIN"),
+            'remixesLength' => $this->get('remixmanager')->remixCount($program->getId()),
+            'likeType' => $like_type,
+            'likeTypeCount' => $like_type_count,
+            'totalLikeCount' => $total_like_count,
+            'isAdmin' => $this->isGranted("ROLE_ADMIN")
         );
         return $program_details;
     }

@@ -7,6 +7,7 @@
 {% block body %}
 
   {% for category in categories %}
+
     <div>
       <h1>{{ category.name }}</h1>
       <div class="programs">
@@ -14,13 +15,18 @@
         {% for file in category.files %}
           {% set sound = getMediaPackageSoundUrl(file.data) %}
           {% set image = getMediaPackageImageUrl(file.data) %}
-          <div class="program mediafile-{{ file.id }}">
+          <div class="program mediafile mediafile-{{ file.id }}">
 
             <a href="{{ file.downloadUrl }}" onclick="onDownload(this)">
             {% if image %}
             <div>
               <img src="{{ asset(image) }}">
             </div>
+              {% if file.data.author %}
+                <div>
+                  {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
+                </div>
+              {% endif %}
             {% endif %}
 
             {% if sound %}
@@ -41,7 +47,12 @@
             <div>
               <b>{{ file.data.name }}</b>
             </div>
-            <div>
+                {% if file.data.author %}
+                  <div>
+                    {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
+                  </div>
+                {% endif %}
+              <div>
               Download
             </div>
             {% endif %}

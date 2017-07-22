@@ -257,7 +257,6 @@ form {
   img {
     height: 84px;
     width: 84px;
-    border: 2px solid @program-img-color;
   }
 
   .no-programs {
@@ -275,7 +274,7 @@ form {
 
     > div, a {
       margin: auto;
-      width: 84px;
+      width: 96px;
       cursor: pointer;
       text-decoration: none;
       display: block;
@@ -318,16 +317,23 @@ form {
       width: 100/3%; /* 3 in a row */
     }
   }
+
+  > .mediafile {
+    height: 116px;
+    padding-bottom: 0;
+  }
 }
 
 .button-show-placeholder {
   margin: 0px auto 30px auto;
   min-height: 32px;
+  display: flex;
+  justify-content: center;
 }
 
-.button-show-more, .button-show-ajax {
+.button-show-more, .button-show-ajax, .button-show-less {
   text-align: center;
-  margin: auto;
+  margin: 0 15px;
 }
 
 .button-show-more {
@@ -336,6 +342,11 @@ form {
 
 .button-show-ajax {
   display: none;
+}
+
+.button-show-less {
+  display: none;
+  cursor: pointer;
 }
 
 .btn {

@@ -16,13 +16,11 @@ Feature: Pocketcode homepage visited programs
     And I should see 1 "#newest #program-1"
     When I click "#newest #program-1"
     And I am on homepage
-    And I wait for a second
     Then I should see marked "#newest #program-1"
 
   Scenario: Visited programs should be marked on the entire page.
     Given I am on "/pocketcode"
     And I should see 1 "#newest #program-1"
     When I click "#newest #program-1"
-    And I wait for a second
     And I am on "/pocketcode/profile/1"
     Then I should see marked "#program-1"

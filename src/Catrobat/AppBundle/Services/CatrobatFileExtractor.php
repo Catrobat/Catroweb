@@ -40,4 +40,14 @@ class CatrobatFileExtractor
 
         return new ExtractedCatrobatFile($full_extract_dir, $full_extract_path, $temp_path);
     }
+
+    public function getExtractDir()
+    {
+        return $this->extract_dir;
+    }
+
+    public function getExtractPath()
+    {
+        return $this->extract_path;
+    }
 }

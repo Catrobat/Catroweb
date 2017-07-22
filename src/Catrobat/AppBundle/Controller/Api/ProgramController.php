@@ -13,23 +13,27 @@ use Catrobat\AppBundle\Responses\ProgramListResponse;
 
 class ProgramController extends Controller
 {
-    /**
-     * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"})
-     * @Method({"GET"})
-     */
-    public function showProgramAction(Request $request) {
-        $id = intval($request->query->get('id'));
-        $program_manager = $this->get('programmanager');
+  /**
+   * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"})
+   * @Method({"GET"})
+   */
+  public function showProgramAction(Request $request)
+  {
+    $id = intval($request->query->get('id'));
+    $program_manager = $this->get('programmanager');
 
-        $programs = array();
-        $program = $program_manager->find($id);
-        if ($program == null) {
-            return JsonResponse::create(array('Error' => 'Project not found (uploaded)', 'preHeaderMessages' => ''));
-        } else {
-            $numbOfTotalProjects = 1;
-            $programs[] = $program;
-        }
-
-        return new ProgramListResponse($programs, $numbOfTotalProjects);
+    $programs = [];
+    $program = $program_manager->find($id);
+    if ($program == null)
+    {
+      return JsonResponse::create(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }
+    else
+    {
+      $numbOfTotalProjects = 1;
+      $programs[] = $program;
+    }
+
+    return new ProgramListResponse($programs, $numbOfTotalProjects);
+  }
 }
