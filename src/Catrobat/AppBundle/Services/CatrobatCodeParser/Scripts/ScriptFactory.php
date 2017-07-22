@@ -35,6 +35,9 @@ class ScriptFactory
             case Constants::WHEN_CLONED_SCRIPT:
                 $generated_script = new WhenClonedScript($script_xml_properties);
                 break;
+            case Constants::WHEN_GAME_PAD_BUTTON_SCRIPT:
+                $generated_script = new WhenGamepadButtonScript($script_xml_properties);
+                break;
             default:
                 $generated_script = new UnknownScript($script_xml_properties);
                 break;
