@@ -64,12 +64,16 @@ class ProgramController extends Controller
          */
         $program_manager = $this->get('programmanager');
         $program = $program_manager->find($id);
+        $featured_repository = $this->get('featuredrepository');
         $screenshot_repository = $this->get('screenshotrepository');
         $router = $this->get('router');
         $elapsed_time = $this->get('elapsedtime');
 
         if (!$program || !$program->isVisible()) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
+            if (!$featured_repository->isFeatured($program))
+            {
+                throw $this->createNotFoundException('Unable to find Project entity.');
+            }
         }
 
         $viewed = $request->getSession()->get('viewed', array());
