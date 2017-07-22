@@ -5,6 +5,8 @@ parameters:
       catrobat.file.extract.path:     "resources/extract/"
       catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"
       catrobat.file.storage.path:     "resources/programs/"
+      catrobat.upload.temp.dir:       "%catrobat.webdir%resources/tmp/uploads/"
+      catrobat.upload.temp.path:      "resources/tmp/uploads/"
       catrobat.template.storage.dir:  "%kernel.root_dir%/../web/resources/templates/"
       catrobat.template.storage.path: "resources/templates/"
       catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
@@ -26,7 +28,7 @@ parameters:
       catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
       catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
       catrobat.logs.dir:              "%kernel.root_dir%/logs/"
-      
+
 services:
 
 
@@ -144,7 +146,7 @@ services:
 
     filerepository:
         class: Catrobat\AppBundle\Services\ProgramFileRepository
-        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%", "@filecompressor"]
+        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%", "@filecompressor", "%catrobat.upload.temp.dir%"]
 
     extractedfilerepository:
         class: Catrobat\AppBundle\Services\ExtractedFileRepository
@@ -158,11 +160,11 @@ services:
 
     screenshotrepository:
         class: Catrobat\AppBundle\Services\ScreenshotRepository
-        arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%"]
+        arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%","%catrobat.upload.temp.dir%","%catrobat.upload.temp.path%"]
 
     templatescreenshotrepository:
-            class: Catrobat\AppBundle\Services\ScreenshotRepository
-            arguments: ["%catrobat.template.screenshot.dir%","%catrobat.template.screenshot.path%","%catrobat.template.thumbnail.dir%","%catrobat.template.thumbnail.path%"]
+        class: Catrobat\AppBundle\Services\ScreenshotRepository
+        arguments: ["%catrobat.template.screenshot.dir%","%catrobat.template.screenshot.path%","%catrobat.template.thumbnail.dir%","%catrobat.template.thumbnail.path%","%catrobat.upload.temp.dir%","%catrobat.upload.temp.path%"]
 
     featuredimagerepository:
         class: Catrobat\AppBundle\Services\FeaturedImageRepository
@@ -214,6 +216,7 @@ services:
             - "@tagrepository"
             - "@programlikerepository"
             - "@event_dispatcher"
+      #      - "%catrobat.max_version%"
 
 
     templatemanager:
@@ -315,6 +318,9 @@ services:
     elapsedtime:
         class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
         arguments: ["@translator","@time"]
+
+    catrobat_code_parser:
+        class: Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser
 
 # =========================== Twig ===========================
 

@@ -10,7 +10,10 @@ use Catrobat\AppBundle\Commands\CleanLogsCommand;
 use Catrobat\AppBundle\Commands\CreateBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -390,6 +393,7 @@ class AdminCommand
     public $name;
     public $description;
     public $command_link;
+    public $progress_link;
     public $command_name;
 
     public function __construct($name, $description) {
@@ -410,4 +414,22 @@ class AdminCommand
     public function setCommandName($command) {
         $this->command_name = $command;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProgressLink()
+    {
+        return $this->progress_link;
+    }
+
+    /**
+     * @param mixed $progress_link
+     */
+    public function setProgressLink($progress_link)
+    {
+        $this->progress_link = $progress_link;
+    }
+
+
 }

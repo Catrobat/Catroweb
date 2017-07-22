@@ -1,172 +1,168 @@
 ---
-localLanguage: English
-username: Username
-password: Password
+localLanguage: Engelsk
+username: Brukernavn
+password: Passord
 aboutPocketCode: Om Pocket Code
-tutorials: Tutorials
+tutorials: Opplæring
 googlePlay: Google Play
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-download: Download as program
-description: Description
-noDescription: No description available.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
-ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+passwordsNoMatch: Passordene samsvarer ikke.
+error: Feil
+cancel: Avbryt
+report: Rapporter
+download: Last ned program
+description: Beskrivelse
+noDescription: Ingen beskrivelse tilgjengelig.
+country: Land
+loginText: logg på
+privacyPolicy: Personvern
+imprint: Avtrykk
+somethingWentWrong: 'Ooops, noe gikk galt.'
+pleaseTryAgain: 'Vennligst prøv igjen!'
+oldVersionError: 'Oppdater til den nyeste versjonen av Pocket Code!'
+more: 'mer'
+less: 'mindre'
+ok: Ok
+clickToDownloadProgram: 'For å laste ned program eksempel, klikk %link_start% her %link_end%.'
+registrationError: 'Brukernavn eller e-postadresse er allerede i bruk.'
+notifications: 'Varsler'
+wellDone: "Godt gjort!"
+done: "Ferdig!"
+notificationsReadMessage: "Du har lest alle meldinger."
+notificationsClearedMessage: "Alle meldinger er merket som lest."
+clearAllNotificationsButtonTitle: "Merk alle som lest"
+notificationsClearError: "Kan ikke markere meldinger som lest!"
+pleaseWait: "Vennligst vent..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'Hvilke programmer er anbefalt her?'
+      description_B_VersionTest: 'Jo oftere programmet ditt er remikset, jo høyere vises den i denne listen.'
+      description_C_VersionTest: 'Jo flere likes (inkludert "Tommel opp", "Latter", "elsker" og "wow!") programmet mottar, jo høyere den vises i denne listen.'
 programs:
-  featured: Featured
-  newest: Newest programs
-  recommended: Recommended programs
+  featured: Anbefalt
+  newest: Nyeste programmer
+  recommended: Anbefalte programmer
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
-  reportAsInappropriate: Report as inappropriate
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this program as inappropriate.
-  reportDialogHeader: Why do you think this program is inappropriate?
-  reportDialogReason: Enter a reason
-  reportOwnProgram: You cannot flag your own program.
-  reportAlready: You've already flagged this program as inappropriate.
-  reportDone: You reported this program as inappropriate!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+    viewed: Mest Sett
+    downloaded: Mest nedlastet
+  random: Tilfeldige programmer
+  related: Relaterte programmer
+  downloads: '%downloads% nedlastinger'
+  sample: Program eksempler
+  views: '%views% visninger'
+  likeThumbsUpDetailText: '{0}0 folk gir tommelen opp på denne |{1}1 person gir tommelen på denne |]1,Inf]%persons% folk gir tommelen opp på denne'
+  likeSmileDetailText: '{0}0 folk smiler til dette |{1}1 person smiler til dette |]1,Inf]%persons% folk smiler til dette'
+  likeLoveDetailText: '{0}0 folk elsker dette |{1}1 person elsker dette |]1,Inf]%persons% folk elsker dette'
+  likeWowDetailText: '{0}0 folk sier "Oi!" til denne |{1}1 person sier "Oi!" til denne |]1,Inf]%persons% folk sier "Oi!" på dette'
+  remixes: '{0}0 remikser |{1}1 remiks |]1,Inf]%remixes% remikser'
+  newRemixesNotificationTitle: '|{1} "%programName%" har 1 ny remiks: |] 1 Inf] "%programName%" har %remixes% nye remikser:'
+  submitted: Innsendte programmer
+  uploaded: Opplastede programmer
+  reportAsInappropriate: Rapporter som upassende
+  languageVersion: 'Catrobat språk versjon: %languageVersion%'
+  reportLoginText: Vennligst %login% for å rapportere dette som upassende.
+  reportDialogHeader: Hvorfor tror du at dette programmet er upassende?
+  reportDialogReason: Angi en årsak
+  reportOwnProgram: Du kan ikke flagge ditt eget program.
+  reportAlready: Du har allerede flagget dette programmet som upassende.
+  reportDone: Du rapporterte dette programmet som upassende!
+  updateAppHeader: Oppdater app
+  updateAppText: Oppdater din app til den nyeste versjonen for å kunne laste ned dette programmet.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
+  checkout_this_program: Sjekk dette Catrobat programmet
+  show_more: Vis mer
+  comments: Kommentarer
   send: Send
   delete: Slett
-  report: Report
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  nolb_example: Example programs
+  report: Rapporter
+  report_popup: Kommentaren ble vellykket rapportert.
+  report_popup_header: Rapportert
+  nolb_example: Program eksempler
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
-  by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  showRemixGraph: 'Vis Remiks graf'
+  by: 'av'
+  open: 'Åpne'
+  showPaths: 'Vis baner'
+  programNotAvailableErrorTitle: 'Beklager...'
+  programNotAvailableErrorDescription: 'Programmet er ikke tilgjengelig lenger!'
+  programNotAvailable: 'Ikke tilgjengelig'
+  programUnknownUser: 'Ukjent bruker'
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Din Catrobat passordgjenoppretting
   message: |
-    Dear %username%.
+    Kjære %username%. Du har bedt om å tilbakestille passordet på %appplication_url% fordi du har glemt det. Hvis du ikke har bedt om dette, vennligst ignorer denne henvendelsen. Forespørselen vil utløpe og blir ugyldig etter 24 timer. 
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    For å tilbakestille passordet og opprette et nytt, kan du gå til følgende side: %confirmationUrl% 
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    Du kan bruke brukernavnet og passordet ditt til å få tilgang til %appplication_url% samfunnet. For å gjøre dette, gå til følgende side: %loginPage% 
     
-    Best regards,
-    Your Catrobat Team.
+    For å redigere dine profildetaljer, gå til denne siden: %profilePage% hilsen, Catrobat Team.
 profile:
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My programs
+  saveChanges: lagre endringer
+  newPass: nytt passord
+  repeatPass: gjenta passord
+  firstEmail: Min første e-post
+  secondEmail: Min andre e-post
+  myPrograms: Mine programmer
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
-  changePicture: Change picture
+    passwordTooShort: Det nye passordet må ha minst %length% tegn.
+    passwordTooLong: Det nye passordet kan ha maksimalt %length% tegn.
+    passwordIsUsername: Passordet må være forskjellig fra brukernavnet.
+    passwordWrong: Feil passord
+    emailNotValid: Denne e-postadressen er ikke gyldig.
+    emailMissing: Feil under oppdatering av denne e-postadressen. Du må ha minst én validert e-postadresse.
+    emailExists: Denne e-postadressen finnes allerede.
+    submitSuccess: lagret!
+  reallyDeleteProgram: Vil du virkelig slette programmet
+  programsOf: Programmer av
+  changePicture: Endre bilde
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: Valgte bildet er for stort, du kan ikke bruke bilder som er større enn 5mb.
+    uploadError: Beklager, det oppstod et problem under opplasting!
+    noSupport: Denne bildetypen støttes ikke, prøv et annet bilde.
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
+  editProfile: Rediger profil
+  edit: Rediger
+  done: Utført
   avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  email: E-post
+  editAvatar: Redigere avatar
+  editUsername: Rediger brukernavn
+  editPassword: Redigere passord
+  editCountry: Redigere land
+  editEmail: Redigere e-post
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: 'Lisens til å spille'
+  title: 'Lisens til å spille - gi anerkjennelse og del'
+  text1: Tenk deg at hver Catrobat program er en kake, en veldig spesiell kake som har sin oppskrift (programmering blokker). Alle medlemmer av Catrobat samfunnet deler sine kaker og deres oppskrifter. Dette betyr at du kan nyte kakene og lære å bake dem selv!
+  text2: 'Det er ingen hemmelige oppskrifter: instruksjoner om hvordan man baker kakene er tilgjengelig for alle å bruke, endre og fungerer som inspirasjon til nye ideer... Jeg mener kaker.'
+  text3: "Du kan spise kakene og kopiere andres oppskrifter for å lage din egen, kanskje med forskjellige ingredienser. Denne friheten kommer med to enkle krav:"
+  text4: "Når vi startet Catrobat samfunnet, bestemte vi oss for denne tilnærmingen fordi vi tror på at den fremmer læring og kreativitet i samfunnet. Ved å dele oppskrifter og ingredienser (skript og kunstverk), kan folk bygge og dra nytte av hverandres ideer."
+  text5: Catrobat nettsiden er utviklet med funksjoner for å oppmuntre folk til å dele og gi hverandre anerkjennelse. På hver program side, kan du alltid laste ned originale skript. Hvis du remikser et program (endre skript eller kunstverk og dele resultatet), oppfordrer vi deg til å gi anerkjennelse i dine merknader og nevne folk og programmer som inspirerte deg.
+  text6: 'Lær mer om vilkårene for bruk av Catrobat online-samfunnet på %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: del dine kaker sammen med oppskrifter
+    item2: gi anerkjennelse til dem som inspirerte deg
+  version: Versjon 1.1, 2 April 2013
 teachers:
   login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+    title: 'Lærernes område'
+    description: 'Dette området kan brukes av lærere.'
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  title: Vilkår for bruk
+  headline: Velkommen til Catrobat samfunnet!
+  text1: 'Som en del av Catrobat samfunnet deler du programmer og ideer med folk:'
+  text2: "Vi trenger din hjelp for at fellesskapet skal kunne støtte alle medlemmer. Her er hvordan du kan hjelpe:"
+  text3: "Gjennom Catrobat prosjektet ønsker vi å fremme samarbeid og samle all kreativitet til fordel for hele menneskeheten. Du kan også bli en aktiv medlem av Catrobat samfunnet ved å gi programmene tilbake til samfunnet som en gave, på samme måte som andre medlemmer gir sine programmer til deg:"
+  text4: 'Vår gave til deg:'
+  text5: 'Våre vilkår for bruk og Service:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: fra mange forskjellige land og kulturer
+    item2: i alle aldre (fra små barn til tenåringer og besteforeldre)
+    item3: med alle nivåer av erfaring
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
+    item1: Vis respekt. Ved deling av programmer, husk at folk med ulike aldre og bakgrunn vil se dine bidrag.
+    item2: "Gi anerkjennelse. Lag gjerne modifiserte versjoner av andres programmer - Husk å gi dem anerkjennelse. Ett sted å gi anerkjennelse er i programmets beskrivelse. Se avsnittet nedenfor den prikkede listen for detaljer om hvordan du endrer andres programmer."
     item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
@@ -231,7 +227,7 @@ help:
         text5: 'Now you have to select the new image.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Speak"
+      title: "Snakk"
       description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -283,7 +279,7 @@ help:
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
         text6: 'Upload the program that is currently opened.'
   tutorialcards:
-    title: "Tutorials"
+    title: "Opplæring"
     description1: "These tutorials show you how to use effective tricks in Pocket Code."
     getReady: "Get Ready:"
     tryCode: "Try this code:"
@@ -307,7 +303,7 @@ help:
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: "Glide"
+      title: "Gli"
       description: "Let your object glide over the screen."
       one: "Add the object you want to be gliding. e.g. plane."
       two: "Insert the following bricks and define the area in which the movement should happen."
@@ -317,7 +313,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Speak"
+      title: "Snakk"
       description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -332,7 +328,7 @@ help:
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "Broadcast"
+      title: "Kringkast"
       description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
@@ -433,7 +429,7 @@ login:
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
-  or: OR
+  or: ELLER
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -457,7 +453,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Denne e-postadressen finnes allerede.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.

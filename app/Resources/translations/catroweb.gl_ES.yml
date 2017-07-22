@@ -31,7 +31,7 @@ notificationsReadMessage: "Liches todas as notificacións."
 notificationsClearedMessage: "Marcáronse todas as notificacións como lidas."
 clearAllNotificationsButtonTitle: "Marcar todo como lido"
 notificationsClearError: "¡Non foi posible marcar as notificacións como lidas!"
-pleaseWait: "Please wait..."
+pleaseWait: "Agarda..."
 indexPage:
   recommendedSection:
     info:
@@ -41,7 +41,7 @@ indexPage:
 programs:
   featured: Destacados
   newest: Últimos programas
-  recommended: Recommended programs
+  recommended: Programas recomendados
   most:
     viewed: Os máis vistos
     downloaded: Os máis descargados
@@ -77,16 +77,16 @@ programs:
   report: Reportar
   report_popup: O comentario foi reportado correctamente.
   report_popup_header: Reportado
-  nolb_example: Example programs
+  nolb_example: Exemplos de programas
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
-  by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  by: 'por'
+  open: 'Abrir'
+  showPaths: 'Mostrar rutas'
+  programNotAvailableErrorTitle: 'Sentímolo...'
+  programNotAvailableErrorDescription: 'Este programa xa non está dispoñíbel.'
+  programNotAvailable: 'Non dispoñible'
+  programUnknownUser: 'Usuario descoñecido'
 passwordRecovery:
   subject: Recuperación do teu contrasinal
   message: |
@@ -271,7 +271,7 @@ help:
         text1: 'The background is like an object, but you just can have one background.'
         text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
-      title: "Main Menu"
+      title: "Menú principal"
       description: "Use the Android Back Button to get to this screen."
       detail:
         text1: 'Continue with your currently opened program.'

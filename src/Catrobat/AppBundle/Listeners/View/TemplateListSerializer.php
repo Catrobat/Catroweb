@@ -70,7 +70,7 @@ class TemplateListSerializer
         $landscape = $this->generateUrl($template->getId());
         $portrait = $this->generateUrl($template->getId(), false);
 
-        if(!file_exists($landscape) || !file_exists($portrait)){
+        if(!file_exists($landscape) && !file_exists($portrait)){
             return null;
         }
 
@@ -78,8 +78,13 @@ class TemplateListSerializer
         $new_template['id'] = $template->getId();
         $new_template['name'] = $template->getName();
         $new_template['thumbnail'] = $this->screenshot_repository->getThumbnailWebPath($template->getId());
-        $new_template['landscape'] = $this->generateUrl($template->getId());
-        $new_template['portrait'] = $this->generateUrl($template->getId(), false);
+
+        if(file_exists($landscape))
+          $new_template['landscape'] = $landscape;
+
+        if(file_exists($portrait))
+          $new_template['portrait'] = $portrait;
+
         return $new_template;
     }
 }

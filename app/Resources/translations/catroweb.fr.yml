@@ -23,25 +23,25 @@ more: 'plus'
 less: 'moins'
 ok: OK
 clickToDownloadProgram: 'Pour télécharger le programme d''exemple, cliquez %link_start% ici %link_end%.'
-registrationError: 'Username or email address already in use.'
+registrationError: 'Nom d’utilisateur ou adresse e-mail déjà en cours d’utilisation.'
 notifications: 'Notifications'
-wellDone: "Well done!"
+wellDone: "Bien joué !"
 done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+notificationsReadMessage: "Vous n'avez aucune nouvelle notification."
+notificationsClearedMessage: "Toutes les notifications ont été marquées comme lues."
+clearAllNotificationsButtonTitle: "Tout marquer comme lu"
+notificationsClearError: "Impossible de marquer les notifications comme lues !"
+pleaseWait: "Merci de patienter..."
 indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      description_B_VersionTest: 'Plus votre programme est remixé, plus il apparaît en haut de la liste.'
       description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: A l'affiche
   newest: Nouveaux programmes
-  recommended: Recommended programs
+  recommended: Programmes recommandés
   most:
     viewed: Les plus populaires
     downloaded: Les plus téléchargés
@@ -52,11 +52,11 @@ programs:
   views: '%views% vues'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
+  likeLoveDetailText: '{0}0 personne aime |{1}1 personne aime |] 1, Inf]%persons% personnes aiment'
   likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Programs
+  submitted: Programmes soumis
   uploaded: Programmes téléchargés
   reportAsInappropriate: Signaler comme inapproprié
   languageVersion: 'Catrobat Language version: %languageVersion%'
@@ -77,18 +77,18 @@ programs:
   report: Signaler
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
-  nolb_example: Example programs
+  nolb_example: Exemples de programmes
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'par'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'Ouvrir'
+  showPaths: 'Afficher les chemins d''accès'
+  programNotAvailableErrorTitle: 'Désolés...'
+  programNotAvailableErrorDescription: 'Le programme n’est plus disponible !'
+  programNotAvailable: 'Non disponible'
+  programUnknownUser: 'Utilisateur inconnu'
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Votre récupération de mot de passe Catrobat
   message: |
     Dear %username%.
     
@@ -112,7 +112,7 @@ profile:
     passwordTooShort: Le nouveau mot de passe doit avoir au moins %length% caractères.
     passwordTooLong: Le nouveau mot de passe peut avoir un maximum de %length% caractères.
     passwordIsUsername: Le mot de passe doit être différent de l'identifiant.
-    passwordWrong: Wrong password
+    passwordWrong: Mauvais mot de passe
     emailNotValid: Cette adresse e-mail n'est pas valide.
     emailMissing: Erreur lors de la mise à jour de cette adresse e-mail. Vous devez avoir au moins une adresse e-mail validée.
     emailExists: Cette adresse e-mail existe déjà.
@@ -125,16 +125,16 @@ profile:
     uploadError: Désolé, il y a eu un problème pendant le téléchargement !
     noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
+  editProfile: Éditer le profil
+  edit: Éditer
+  done: Terminé
   avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  email: E-mail
+  editAvatar: Modifier l'avatar
+  editUsername: Modifier le nom d’utilisateur
+  editPassword: Modifier le mot de passe
+  editCountry: Modifier le pays
+  editEmail: Modifier l'adresse mail
 licenseToPlay:
   link: 'Licence pour jouer'
   title: 'Licence de jeu - Partagez et créditez'

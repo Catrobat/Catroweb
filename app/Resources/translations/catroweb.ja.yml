@@ -77,7 +77,7 @@ programs:
   report: 不適切として報告する
   report_popup: 正常にコメントを報告しました。
   report_popup_header: 報告済
-  nolb_example: Example programs
+  nolb_example: サンプル プログラム
 remixGraph:
   showRemixGraph: 'リミックスのグラフを表示'
   by: 'によって'

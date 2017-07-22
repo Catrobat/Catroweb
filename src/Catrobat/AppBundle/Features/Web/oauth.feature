@@ -25,7 +25,6 @@ Feature: Open Authentication
     Then I should not be logged in
     When I trigger Facebook login with auth_type ''
     And I click Facebook login link
-    And I wait for a second
     Then I should be logged in
 
   @javascript @insulated @RealOAuth
@@ -45,7 +44,6 @@ Feature: Open Authentication
     Then I should not be logged in
     When I trigger Google login with approval prompt "auto"
     And I click Google login link "once"
-    And I wait for a second
     Then I should be logged in
 
   @javascript
@@ -53,6 +51,7 @@ Feature: Open Authentication
     Given I am on "/pocketcode/login"
     When I log in to Facebook with valid credentials
     And I choose the username 'AlreadyinDB' and check button activations
+    And I wait 300 milliseconds
     Then I should see "Username already taken, please choose a different one."
 
   @javascript

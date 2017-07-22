@@ -77,7 +77,7 @@ programs:
   report: Zgłoś
   report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Zgłoszono
-  nolb_example: Example programs
+  nolb_example: Przykładowe programy
 remixGraph:
   showRemixGraph: 'Pokaż Drzewo Remiksów'
   by: 'o'

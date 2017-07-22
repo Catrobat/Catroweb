@@ -1,5 +1,30 @@
 {% extends base_template %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            -webkit-animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div class="col-md-6">
@@ -51,7 +76,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <a id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;" href="{{ backupCommand.command_link }}"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</a>&nbsp;(~{{ backupSize }})
+                            <button id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</button>&nbsp;(~{{ backupSize }})
                         </div>
                     </div>
 
@@ -89,6 +114,38 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="backup-modal" tabindex="-1" role="dialog" aria-labelledby="backup-modal" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="backup-modal-title">Backup in progress</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    The backup is being created. Please wait until the process is finished.
+                                </p>
+                                <p>
+                                    You will automatically be forwarded after your request has been executed.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="
+                            col-xs-4 col-xs-offset-4
+                            col-sm-4 col-sm-offset-4
+                            col-md-4 col-md-offset-4
+                            col-lg-4 col-lg-offset-4">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
 
@@ -96,6 +153,38 @@
     {{ parent() }}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
+    <script type="text/javascript">
+        backup_create_link = "{{ backupCommand.command_link }}";
+
+        function initBackupProgress()
+        {
+            $("#backup-modal").modal('show')
+        }
+
+        // https://api.jquery.com/ready/
+        $(function()
+        {
+            $('#btnCreateBackup').click(function(){
+                $('#btnCreateBackup').prop('disabled', true);
+                $('#btnCreateBackup').text('Backup started...');
+                $.ajax
+                ({
+                    type: 'GET',
+                    url: backup_create_link,
+
+                    success: function (data)
+                    {
+                        window.location.reload();
+                    },
+                    error: function(jqXHR, error)
+                    {
+                        window.location.reload();
+                    }
+                });
+                initBackupProgress();
+            });
+        });
+    </script>
     <script>
         google.load("visualization", "1", {packages:["corechart"]});
         google.setOnLoadCallback(drawChart);

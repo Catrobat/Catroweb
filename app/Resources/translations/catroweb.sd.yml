@@ -128,7 +128,7 @@ profile:
 myprofile:
   editProfile: پروفائل تصحيح ڪريو
   edit: تصحيح
-  done: پورو ٿيو
+  done: ٺيڪ آهي
   avatar: اوتار
   email: اي ميل
   editAvatar: اوتار تصحيح ڪريو
@@ -232,7 +232,7 @@ help:
         text5: 'Now you have to select the new image.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Speak"
+      title: "ڳالهايو"
       description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -318,7 +318,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Speak"
+      title: "ڳالهايو"
       description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."

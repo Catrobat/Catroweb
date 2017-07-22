@@ -93,7 +93,7 @@ class ClickStatisticsAdmin extends Admin
     }
 
     public function getExportFields() {
-        return array('id','user.username','program.id','program.name','scratch_program_id','recommended_from_program.id',
+        return array('id','type','user.username','program.id','program.name','scratch_program_id','recommended_from_program.id',
             'recommended_from_program.name','tag.en','extension.name','clicked_at','ip','latitude','longitude','country_code',
             'country_name','street','postal_code','locality','locale','user_agent','referrer');
     }

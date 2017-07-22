@@ -47,9 +47,16 @@
 
   <div id="program-middle">
     <div id="image" class="image-container">
-      <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}" />
+      {% if isWebview() %}
+        <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+          <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}" />
+        </a>
+      {% endif %}
 
-      <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});"> <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64"> <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z"></path> <polygon class="pc-svgPlayerIconSymbol" points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934"></polygon> </svg> </button>
+      {% if not isWebview() %}
+        <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}" />
+        <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});"> <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64"> <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z"></path> <polygon class="pc-svgPlayerIconSymbol" points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934"></polygon> </svg> </button>
+      {% endif %}
 
       <div id="program-like-container">
         <div>
@@ -748,43 +755,6 @@
         $('#comment-successfully-reported').hide();
       });
 
-      $(document).on('click', '.show-hide-code', function() {
-        var text = $('.show-hide-code-text');
-        if(text.text() == 'SHOW CODE') {
-          text.addClass('showing-code');
-          $('.show-hide-code-arrow').addClass('rotate showing-code');
-          $('.show-hide-code').addClass('show-code');
-          text.text('HIDE CODE');
-          $('.codeview-wrapper').slideDown();
-        } else {
-          $('.codeview-wrapper').slideUp(400, function(){
-            text.removeClass('showing-code');
-            $('.show-hide-code-arrow').removeClass('rotate showing-code');
-            $('.show-hide-code').removeClass('show-code');
-            text.text('SHOW CODE');
-          });
-        }
-      });
-
-      $(document).on('click', '.show-hide-code-statistic', function() {
-        var text = $('.show-hide-code-statistic-text');
-        if(text.text() == 'SHOW CODE STATISTIC') {
-          text.addClass('showing-code');
-          $('.show-hide-code-statistic-arrow').addClass('rotate showing-code');
-          $('.show-hide-code-statistic').addClass('show-code');
-          text.text('HIDE CODE STATISTIC');
-          $('#statistic').slideDown();
-        } else {
-          $('#statistic').slideUp(400, function(){
-            text.removeClass('showing-code');
-            $('.show-hide-code-statistic-arrow').removeClass('rotate showing-code');
-            $('.show-hide-code-statistic').removeClass('show-code');
-            text.text('SHOW CODE STATISTIC');
-          });
-        }
-        console.log('huhu');
-      });
-
       $(document).one('click', ".rec-programs", function(event) {
 
         event.preventDefault();
@@ -836,18 +806,6 @@
         {#});#}
 
       });
-
-
-      /*
-      var show_hide_code_top = $('.show-hide-code').offset().top;
-      $(window).scroll(function() {
-        if ($(window).scrollTop() >= show_hide_code_top && $('.show-hide-code').hasClass('show-code')) {
-          $('.show-hide-code').addClass('fixed');
-        } else {
-          $('.show-hide-code').removeClass('fixed');
-        }
-      });
-      */
     });
 
   </script>

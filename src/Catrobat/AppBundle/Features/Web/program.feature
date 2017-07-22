@@ -95,15 +95,15 @@ Feature: As a visitor I want to see a program page
       When I am on "/pocketcode/program/1"
       Then I should see "6 downloads"
 
-    Scenario:
+    Scenario: Clicking the download button should deactivate the download button for 5 seconds
       Given I am on "/pocketcode/program/1"
        When I click "#url-download"
        Then the href with id "url-download" should be void
 
-    Scenario:
+    Scenario: Clicking the download button again after 5 seconds should work
       Given I am on "/pocketcode/program/1"
-       When I click "#url-download"
-        And I wait 5000 milliseconds
+      When I click "#url-download"
+      And I wait 5000 milliseconds
       Then the href with id "url-download" should not be void
 
     Scenario: Clicking on a reported featured program should still show its page

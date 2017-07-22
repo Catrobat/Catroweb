@@ -26,8 +26,8 @@ class TemplateAdmin extends Admin
         $isNew = $this->getSubject()->getId() == null;
         $formMapper
             ->add('name', 'text', array('label' => 'Program name'))
-            ->add('landscape_program_file', 'file', array('required' => $isNew))
-            ->add('portrait_program_file', 'file', array('required' => $isNew))
+            ->add('landscape_program_file', 'file', array('required' => false))
+            ->add('portrait_program_file', 'file', array('required' => false))
             ->add('thumbnail', 'file', array('required' => $isNew))
             ->add('active', null, array('required' => false))
         ;

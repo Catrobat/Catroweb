@@ -2,6 +2,10 @@
 namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Exception\Exception;
+use Catrobat\AppBundle\Entity\MediaPackage;
+use Catrobat\AppBundle\Entity\MediaPackageCategory;
+use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Catrobat\AppBundle\Entity\ProgramDownloadsRepository;
 use Catrobat\AppBundle\Entity\RudeWord;
@@ -10,8 +14,10 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use DateTime;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -56,6 +62,8 @@ class FeatureContext extends BaseContext
     private $checked_catrobat_remix_forward_descendant_relations;
 
     private $checked_catrobat_remix_backward_relations;
+
+    const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
 
     /**
      * Initializes context with parameters from behat.yml.
@@ -544,7 +552,19 @@ class FeatureContext extends BaseContext
         ));
     }
 
-    /**
+  /**
+   * @When /^I GET from the api "([^"]*)"$/
+   */
+  public function iGetFromTheApi($url)
+  {
+    $this->getClient()->request('GET', 'http://' . $this->hostname . $url, array(), $this->files, array(
+      'HTTP_HOST' => $this->hostname,
+      'HTTPS' => $this->secure
+    ));
+  }
+
+
+  /**
      * @When /^I compute all like similarities between users$/
      */
     public function iComputeAllLikeSimilaritiesBetweenUsers()
@@ -1837,5 +1857,86 @@ class FeatureContext extends BaseContext
         }
         $this->iGetWithTheseParameters('/pocketcode/api/projects/recsys.json');
     }
+
+  /**
+   * @Given /^there are mediapackages:$/
+   */
+  public function thereAreMediapackages(TableNode $table)
+  {
+    /**
+     * @var $em EntityManager
+     */
+    $em = $this->getManager();
+    $packages = $table->getHash();
+    foreach($packages as $package) {
+      $new_package = new MediaPackage();
+      $new_package->setName($package['name']);
+      $new_package->setNameUrl($package['name_url']);
+      $em->persist($new_package);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Given /^there are mediapackage categories:$/
+   */
+  public function thereAreMediapackageCategories(TableNode $table)
+  {
+    /**
+     * @var $em EntityManager
+     */
+    $em = $this->getManager();
+    $categories = $table->getHash();
+    foreach($categories as $category) {
+      $new_category = new MediaPackageCategory();
+      $new_category->setName($category['name']);
+      $package = $em->getRepository('AppBundle:MediaPackage')->findOneBy(array('name' => $category['package']));
+      if ($package == null)
+        assert(false, "Fatal error package not found");
+      $new_category->setPackage(array($package));
+      $current_categories = $package->getCategories();
+      $current_categories = $current_categories == null ? [] : $current_categories;
+      array_push($current_categories, $new_category);
+      $package->setCategories($current_categories);
+      $em->persist($new_category);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Given /^there are mediapackage files:$/
+   */
+  public function thereAreMediapackageFiles(TableNode $table)
+  {
+    /**
+     * @var $em EntityManager
+     * @var $file_repo MediaPackageFileRepository
+     */
+    $em = $this->getManager();
+    $file_repo = $this->getMediaPackageFileRepository();
+    $files = $table->getHash();
+    foreach($files as $file) {
+      $new_file = new MediaPackageFile();
+      $new_file->setName($file['name']);
+      $new_file->setDownloads(0);
+      $new_file->setExtension($file['extension']);
+      $new_file->setActive($file['active']);
+      $category = $em->getRepository('AppBundle:MediaPackageCategory')->findOneBy(array('name' => $file['category']));
+      if ($category == null)
+        assert(false, "Fatal error category not found");
+      $new_file->setCategory($category);
+      $old_files = $category->getFiles();
+      $old_files = $old_files == null ? [] : $old_files;
+      array_push($old_files, $new_file);
+      $category->setFiles($old_files);
+
+      $new_file->setAuthor($file['author']);
+
+      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR.$file['id'].'.'.$file['extension']), $file['id'], $file['extension']);
+
+      $em->persist($new_file);
+    }
+    $em->flush();
+  }
 
 }
