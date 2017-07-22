@@ -108,7 +108,7 @@ When program started
 ---
 WhenBackgroundChangesScript
 When background changes to
-1h_brick_grey.png
+1h_when_grey.png
 ---
 StartScript
 When program started
