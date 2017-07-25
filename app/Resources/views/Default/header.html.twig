@@ -21,29 +21,6 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-
-          {#
-          {% if not isWebview() %}
-              <ul class="nav navbar-nav navbar-left">
-                  <li><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a></li>
-                  <li><a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a></li>
-                  <li><a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a></li>
-              </ul>
-              {% if false %}
-                  {% include ':social:social_like_header.html.twig' %}
-              {% endif %}
-          {% endif %}#}
-
-{#
-            <li>
-              <form id="nav-search" class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                  <input type="text" id="search-input-header" class="form-control input-search" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-                </div>
-                <button type="button" class="btn btn-default btn-search">{{ "search.dotdotdot"|trans({}, "catroweb") }}</button>
-              </form>
-            </li>
-#}
             <div class="navbar-small">
               <ul class="nav navbar-nav navbar-right">
               {% if app.user %}
@@ -139,89 +116,6 @@
               {% endif %}
               </ul>
             </div>
-            {#
-
-            {% if app.user %}
-
-              {%  if false %}
-              <li class="dropdown" id="navbar-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                  <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
-                  <span class="glyphicon glyphicon-chevron-down"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="{{ path('user_notifications') }}">
-                      <span id="login-icon" class="glyphicon glyphicon-bell"></span>
-                      <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
-                    </a>
-                  </li>
-                  <li><a href="{{ url('profile') }}" id="btn-profile">
-                      <span id="login-icon" class="glyphicon glyphicon-user"></span>
-                      <h4>My Profile</h4>
-                    </a>
-                  </li>
-                  {% if is_granted('ROLE_ADMIN') %}
-                    <li>
-                      <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                        <span id="login-icon" class="glyphicon glyphicon-dashboard"></span>
-                        <h4>Admin</h4>
-                      </a>
-                    </li>
-                  {% endif %}
-                  <li>
-                    <a href="{{ url('logout') }}" id="btn-logout">
-                      <span id="login-icon" class="glyphicon glyphicon-log-out"></span>
-                      <h4>Logout</h4>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <div class="btn btn-menu logged-in show-nav-dropdown user-notification-badge">
-
-              </div>
-
-              {% else %}
-
-              <li>
-                <a href="{{ path('user_notifications') }}">
-                  <span id="login-icon" class="glyphicon glyphicon-bell"></span>
-                  <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
-                </a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="{{ url('profile') }}" id="btn-profile">
-                  <span id="login-icon" class="glyphicon glyphicon-user"></span>
-                  <h4>My Profile</h4>
-                </a>
-              </li>
-              {% if is_granted('ROLE_ADMIN') %}
-                <li>
-                  <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                    <span id="login-icon" class="glyphicon glyphicon-dashboard"></span>
-                    <h4>Admin</h4>
-                  </a>
-                </li>
-              {% endif %}
-              <li>
-                <a href="{{ url('logout') }}" id="btn-logout">
-                  <span id="login-icon" class="glyphicon glyphicon-log-out"></span>
-                  <h4>Logout</h4>
-                </a>
-              </li>
-                {% endif %}
-
-            {% else %}
-              <li>
-                <a href="{{ url('login') }}" id="btn-login">
-                  <span id="login-icon" class="glyphicon glyphicon-log-in"></span>
-                  <h4>Log in</h4>
-                </a>
-              </li>
-
-            {% endif %}
-            #}
         </div>
       </div>
     </div>

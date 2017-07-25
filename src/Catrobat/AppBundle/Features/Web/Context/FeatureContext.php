@@ -139,7 +139,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function setup()
   {
-    $this->getSession()->resizeWindow(1280, 1000);
+    $this->getSession()->resizeWindow(1980, 1024);
   }
 
   /**
@@ -888,7 +888,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     switch ($arg1) {
       case "login":
-        $button = $page->find("css", ".btn-login");
+        $button = $page->find("css", "#btn-login");
         break;
       case "logout":
         $url = $this->getSession()->getCurrentUrl();
