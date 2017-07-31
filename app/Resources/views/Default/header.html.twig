@@ -10,7 +10,7 @@
           <h3 id="page-name">Home</h3>
           <div class="right-inline navbar-small">
             <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-            <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+            <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-navbar-collapse">
@@ -66,7 +66,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-                  <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+                  <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
                 </li>
               {% if app.user %}
                 <li class="dropdown" id="navbar-dropdown">

@@ -16,6 +16,10 @@ button, .button {
   padding-right: 25px;
 }
 
+body{
+  color: black;
+}
+
 a {
   text-decoration: none;
 }
@@ -26,7 +30,6 @@ a {
 }
 
 #program-top {
-  overflow: auto;
 
   #program-name {
     float: left;
@@ -50,6 +53,10 @@ a {
   }
 }
 
+h2{
+  margin: 0px;
+}
+
 #program-middle {
   #image {
     float: left;
@@ -63,6 +70,7 @@ a {
   #info {
     overflow: auto;
     padding: 0 25px;
+
   }
 
   #description {
@@ -304,6 +312,10 @@ table td:nth-child(1) {
 .img-avatar {
 }
 
+.h1 {
+  border-bottom: none;
+}
+
 #user-comment-wrapper {
   padding-bottom: 90px;
   border-bottom: 1px solid #17a5b8;
@@ -342,6 +354,7 @@ table td:nth-child(1) {
 }
 
 .single-comment {
+  min-height: 80px;
   padding-bottom: 10px;
   padding-top: 10px;
   border-bottom: 1px solid @default-border-color;
@@ -550,6 +563,8 @@ input[type='number'] {
   cursor: default;
 }
 
+
+
 @media screen and (max-width: @responsive-width-tablet) {
   #program-user{
     display: none;
@@ -559,7 +574,6 @@ input[type='number'] {
     #image {
       text-align: center;
       float: none;
-      margin-bottom: 25px;
     }
 
     #report-container {
@@ -622,7 +636,6 @@ input[type='number'] {
 
 @media screen and (max-width: 767px) {
   #program-like-container {
-    margin-bottom: 60px;
   }
 }
 

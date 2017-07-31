@@ -10,11 +10,6 @@ Feature: Sharing and Liking of programs
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready | fb_post_url                                                                          |
       | 1  | program 1 | my superman description | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             |  true   | true      | https://www.facebook.com/permalink.php?story_fbid=424543024407491&id=403594093169051 |
 
-  Scenario: In a non-mobile browser the Facebook like button and Google+1 button should be visible in the header
-      Given I am on "/pocketcode/program/1"
-      Then I should see "program 1"
-      And I should see the Facebook Like button in the header
-      And I should see the Google Plus 1 button in the header
 
   Scenario: In a mobile browser the Facebook like button and the Google+ +1 button should be visible on the bottom of the program page
     Given I am browsing with my pocketcode app

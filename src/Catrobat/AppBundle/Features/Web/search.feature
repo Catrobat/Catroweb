@@ -15,29 +15,5 @@ Feature: Searching for programs
     And I am on "/pocketcode"
 
   Scenario: search for programs should work
-    Given I fill in "search-input-header" with "prog"
-    And I click "#search-header"
-    Then I should see "Your search returned 4 results"
-    And the "search-input-header" field should contain "prog"
-    And the "search-input-footer" field should contain "prog"
-    And the "searchbar" field should contain "prog"
-
-
-  Scenario: footer search should work too
-    Given I fill in "search-input-footer" with "mypro"
-    And I click "#search-footer"
-    Then I should see "Your search returned 2 results"
-    And the "search-input-header" field should contain "mypro"
-    And the "search-input-footer" field should contain "mypro"
-    And the "searchbar" field should contain "mypro"
-
-  @Mobile
-  Scenario: search on mobile view
-    Given the element "#search-header-mobile" should be visible
-    And the element "#searchbar" should not be visible
-    When I click "#search-header-mobile"
-    Then the element "#search-header-mobile" should not be visible
-    And the element "#searchbar" should be visible
-    When I fill in "searchbar" with "prog"
-    And I press enter in the search bar
+    Given I am on "/pocketcode/search/prog"
     Then I should see "Your search returned 4 results"
