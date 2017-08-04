@@ -25,30 +25,19 @@
     <input type="hidden" id = "gplus_approval_prompt" value="auto" />
     <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
 
-    <span id="separator">
-        <br>
-        <hr/>
-        <span id="or">
-            {{ 'login.or'|trans({}, 'catroweb') }}
-        </span>
-        <hr/>
-        <br>
-        <p></p>
-    </span>
-
     <div id="fb-root"></div>
     <div id ="googleLoginButton">
-            <!--
-                Google Login Button is a 2 click button, where image is removed at first click, second click triggers login because of data privacy - see:
-                http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons
-            -->
-    <a id="btn-login_google" href="#" onclick="triggerGoogleLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-google.png') }}" alt="Google Login"></a>
+        <!--
+            Google Login Button is a 2 click button, where image is removed at first click, second click triggers login because of data privacy - see:
+            http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons
+        -->
+        <a id="btn-login_google" href="#" onclick="triggerGoogleLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-google.png') }}" alt="Google Login"></a>
     </div>
     <div id ="facebookLoginButton">
-    <a id="btn-login_facebook" href="#" onclick="triggerFacebookLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
+        <a id="btn-login_facebook" href="#" onclick="triggerFacebookLogin();"><img class="img-socialLogin" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
     </div>
 
-     <div id="status">
+    <div id="status">
     </div>
 </form>
 

@@ -9,8 +9,11 @@
 
 {% block body %}
 
-{% block fos_user_content %}
-  <div class="notification-text">{{ "login.recoverPassSend"|trans({}, "catroweb") }}</div>
-{% endblock %}
+  {% block fos_user_content %}
+    <div class="alert alert-success"  style="margin-top: 15px">
+      {{ "login.recoverPassSend"|trans({}, "catroweb") }}
+    </div>
+
+  {% endblock %}
 
 {% endblock body %}
