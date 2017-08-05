@@ -139,7 +139,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function setup()
   {
-    $this->getSession()->resizeWindow(1980, 1024);
+    $this->getSession()->resizeWindow(1240, 1024);
   }
 
   /**

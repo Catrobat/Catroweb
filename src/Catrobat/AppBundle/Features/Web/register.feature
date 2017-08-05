@@ -21,7 +21,7 @@
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create my Account"
+    Then I press "Create an account"
     Then I should be on "/pocketcode/myprofile"
     And I should see "CatrobatNew"
     When I am on "/logout"
@@ -40,7 +40,7 @@
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "12345"
-    Then I press "Create my Account"
+    Then I press "Create an account"
     Then I should be on "/pocketcode/register"
 
   Scenario: Trying to register with an existing username should fail
@@ -56,7 +56,7 @@
     And I fill in "sonata_user_registration_form[email]" with "Catrobat@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create my Account"
+    Then I press "Create an account"
     Then I should be on "/pocketcode/register"
 
   Scenario: Trying to register with an existing e-mail-address should fail
@@ -72,7 +72,7 @@
     And I fill in "sonata_user_registration_form[email]" with "dev1@pocketcode.org"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create my Account"
+    Then I press "Create an account"
     Then I should be on "/pocketcode/register"
 
   Scenario: Trying to register with an e-mail address as username should fail
@@ -88,7 +88,7 @@
     And I fill in "sonata_user_registration_form[email]" with "dev1337@pocketcode.org"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create my Account"
+    Then I press "Create an account"
     Then I should be on "/pocketcode/register"
 
 
@@ -105,7 +105,7 @@
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create my Account"
+    Then I press "Create an account"
     Then I should be on "/pocketcode/myprofile"
     When I am on "/logout"
     Then I should be logged out
