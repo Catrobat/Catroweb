@@ -31,7 +31,7 @@
   {% if not nolb_user and not app.user.limited %}
   <div id="edit-icon">
     <a href="{{ url('profile_edit', {id : profile.id}) }}">
-      <img src="{{ asset('images/default/edit.png') }}">
+      <span><i class="glyphicon glyphicon-pencil medium-icon"></i></span>
     </a>
   </div>
   {% endif %}
@@ -39,7 +39,7 @@
   {% if nolb_user and 'teacher' in app.user.username %}
   <div id="edit-icon">
     <a href="{{ url('profile_edit') }}">
-      <img src="{{ asset('images/default/edit.png') }}">
+      <span><i class="glyphicon glyphicon-pencil medium-icon"></i></span>
     </a>
   </div>
   {% endif %}

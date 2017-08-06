@@ -21,69 +21,71 @@
 
   {% block fos_user_content %}
 
-    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <div class="panel-title">Sign Up</div>
-        </div>
-        <div style="padding: 30px 30px 0 30px" class="panel-body">
-          <form id="registration_form" action="{{ path('register_check') }}" {{ form_enctype(form) }} method="POST" role="form" class="fos_user_registration_register form-horizontal">
-            <div id="signupalert" style="display:none" class="alert alert-danger">
-              {{ form_errors(form) }}
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                {{ form_widget(form.username, {'required': false, 'attr': {'placeholder': 'Username', 'class': 'form-control' } }) }}
+    <div class="container-fluid">
+      <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div class="panel-title">Sign Up</div>
+          </div>
+          <div style="padding: 30px 30px 0 30px" class="panel-body">
+            <form id="registration_form" action="{{ path('register_check') }}" {{ form_enctype(form) }} method="POST" role="form" class="fos_user_registration_register form-horizontal">
+              <div id="signupalert" style="display:none" class="alert alert-danger">
+                {{ form_errors(form) }}
               </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                {{ form_widget(form.email, {'required': false, 'attr': {'placeholder': 'Email', 'class': 'form-control' } }) }}
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                {{ form_widget(form.plainPassword.first, {'required': false, 'attr': {'placeholder': 'Password', 'class': 'form-control' } }) }}
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                {{ form_widget(form.plainPassword.second, {'required': false, 'attr': {'placeholder': 'Password Confirm', 'class': 'form-control' } }) }}
-              </div>
-            </div>
-            <input id="sonata_user_registration_form__token" type="hidden" name="sonata_user_registration_form[_token]" value="{{ csrf_token('authentication') }}" />
-            {% for flash_message in app.session.flashBag.get('catroweb_error_message') %}
-              <div id="Error-Message" style="display:block">
-                <p>{{ flash_message|trans({}, "catroweb") }}</p>
-              </div>
-            {% endfor %}
-            <div id="Error-Message" style="display:none">
-              <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
-            </div>
-            <div class="form-group">
-              <div class="col-md-12" style="padding: 0">
-                <button id="_submit" type="submit" class="btn btn-success"><i class="icon-hand-right"></i>{{ "login.createAccount"|trans({}, "catroweb") }}</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-12 control">
-                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                  {{ "login.forgotPass"|trans({}, "catroweb") }}
-                  <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}"> Click here</a>
-                </div>
-                <div style="padding-top:15px; font-size:85%">
-                  Already having an account?
-                  <a id="create_account"
-                     href="{{ path('login') }}">Log in</a>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  {{ form_widget(form.username, {'required': false, 'attr': {'placeholder': 'Username', 'class': 'form-control' } }) }}
                 </div>
               </div>
-            </div>
-            {{ form_rest(form) }}
-          </form>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  {{ form_widget(form.email, {'required': false, 'attr': {'placeholder': 'Email', 'class': 'form-control' } }) }}
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  {{ form_widget(form.plainPassword.first, {'required': false, 'attr': {'placeholder': 'Password', 'class': 'form-control' } }) }}
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  {{ form_widget(form.plainPassword.second, {'required': false, 'attr': {'placeholder': 'Password Confirm', 'class': 'form-control' } }) }}
+                </div>
+              </div>
+              <input id="sonata_user_registration_form__token" type="hidden" name="sonata_user_registration_form[_token]" value="{{ csrf_token('authentication') }}" />
+              {% for flash_message in app.session.flashBag.get('catroweb_error_message') %}
+                <div id="Error-Message" style="display:block">
+                  <p>{{ flash_message|trans({}, "catroweb") }}</p>
+                </div>
+              {% endfor %}
+              <div id="Error-Message" style="display:none">
+                <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12" style="padding: 0">
+                  <button id="_submit" type="submit" class="btn btn-success"><i class="icon-hand-right"></i>{{ "login.createAccount"|trans({}, "catroweb") }}</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12 control">
+                  <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                    {{ "login.forgotPass"|trans({}, "catroweb") }}
+                    <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}"> Click here</a>
+                  </div>
+                  <div style="padding-top:15px; font-size:85%">
+                    Already having an account?
+                    <a id="create_account"
+                       href="{{ path('login') }}">Log in</a>
+                  </div>
+                </div>
+              </div>
+              {{ form_rest(form) }}
+            </form>
+          </div>
         </div>
       </div>
     </div>

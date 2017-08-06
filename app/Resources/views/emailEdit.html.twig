@@ -8,21 +8,39 @@
   <h1 id="profile-edit-header">{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}</h1>
 
   {% if not nolb_user and not app.user.limited %}
-  <div id="change-email" class="edit-wrapper">
-    <div class="input-error text-email-notvalid">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
-    <div class="input-error text-email-missing">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
-    <div class="input-error text-email-exists">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
-    <div class="input-field">
-      <div class="information-header">{{ 'profile.firstEmail'|trans({}, 'catroweb') }}</div>
-      <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" tabindex="3">
+    <div id="change-email" class="edit-wrapper">
+      <div class="panel panel-info">
+        <div style="padding-top:30px" class="panel-body">
+
+          <div class="hide text-email-notvalid alert alert-danger col-sm-12">{{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}</div>
+          <div class="hide text-email-missing alert alert-danger col-sm-12">{{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}</div>
+          <div class="hide text-email-exists alert alert-danger col-sm-12">{{ 'profile.form.emailExists'|trans({}, 'catroweb') }}</div>
+
+          <div id="form_fos" class="form-horizontal">
+
+            <h4>{{ 'profile.firstEmail'|trans({}, 'catroweb') }}</h4>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <input type="text" id="email" class="email-field form-control" name="_email" value="{{ app.user.email }}" tabindex="1">
+            </div>
+
+            <h4>{{ 'profile.secondEmail'|trans({}, 'catroweb') }}</h4>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <input type="text" id="additional-email" class="email-field form-control" name="_additional-email" value="{{ app.user.additionalemail }}" tabindex="2">
+            </div>
+
+            <div style="margin-top:10px" class="form-group">
+              <!-- Button -->
+              <div class="col-sm-12 controls">
+                <button id="save-email" class="btn btn-success save-button">{{ 'myprofile.done'|trans({}, 'catroweb') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="input-field">
-      <div class="information-header">{{ 'profile.secondEmail'|trans({}, 'catroweb') }}</div>
-      <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" tabindex="4">
-    </div>
-    <button id="save-email" class="save-button">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
-  </div>
   {% endif %}
 {% endblock %}
 
