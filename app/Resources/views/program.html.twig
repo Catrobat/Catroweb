@@ -35,7 +35,6 @@
 {% endblock %}
 
 {% block body %}
-
   <div id="program-top" class="h1">
     <div id="program-name">{{ program.name }}</div>
     <div id="program-user">
@@ -132,58 +131,36 @@
       {% endif %}
 
       <div class="download-container">
-        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-          <button id="download" class="btn btn-primary download-button">
-            <table>
-              <tr>
-                <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
-                <td>{{ "download"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
-        </a>
 
-        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-            {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-          <button id="remix-graph-button" class="btn btn-primary download-button">
-            <table>
-              <tr>
-                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
-        {% endif %}
-
-        <button id="apk-generate" class="btn btn-apk download-button btn-primary">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-              <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
-
-        <div id="apk-pending" class="btn-apk pending-container">
-          <button  class="btn download-button download-pending">
-            <table>
-              <tr>
-                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-                <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
-          <img class="pending-icon" src="{{ asset('images/symbols/loading.gif') }}" >
+        <div class="backdrop"></div>
+        <div class="fab child" data-subitem="1">
+          <span>
+            <div>
+              <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
+              <img id="apk-pending" src="{{ asset('images/symbols/apk_download.svg') }}" />
+              <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
+            </div>
+          </span>
         </div>
-
-        <button id="apk-download" class="btn btn-apk download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-              <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+        <div class="fab child" data-subitem="2">
+          <span>
+                <div>
+                  <i id="remix-graph-button" class="fa fa-sitemap" aria-hidden="true"></i>
+                </div>
+          </span>
+        </div>
+        {% endif %}
+        <div class="fab child" data-subitem="3">
+          <span>
+            <div>
+              <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+              <img src="{{ asset('images/symbols/download.svg') }}" >
+              </a>
+            </div>
+          </span>
+        </div>
+        <div class="fab" id="masterfab"><span>+</span></div>
       </div>
 
       {% if nolb_status and program.user == app.user.username %}
@@ -791,5 +768,33 @@
       });
     });
 
+
+    $(function(){
+        $(".fab,.backdrop").click(function(){
+            if($(".backdrop").is(":visible")){
+                $(".backdrop").fadeOut(125);
+                $(".fab.child")
+                    .stop()
+                    .animate({
+                        bottom  : $("#masterfab").css("bottom"),
+                        opacity : 0
+                    },125,function(){
+                        $(this).hide();
+                    });
+            }else{
+                $(".backdrop").fadeIn(125);
+                $(".fab.child").each(function(){
+                    $(this)
+                        .stop()
+                        .show()
+                        .animate({
+                            bottom  : (parseInt($("#masterfab").css("bottom")) + parseInt($("#masterfab").outerHeight())
+                            + 70 * $(this).data("subitem") - $(".fab.child").outerHeight()) + "px",
+                            opacity : 1
+                        },125);
+                });
+            }
+        });
+    });
   </script>
 {% endblock %}

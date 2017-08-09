@@ -8,6 +8,69 @@ article {
   }
 }
 
+
+
+@fab-color: #03A9F4;
+@fab-size: 64px;
+@fab-margin: 1 / 4 * 3 * @fab-size;
+@fab-child-size: 1 / 3 * 2 * @fab-size;
+@fab-child-margin: (@fab-size - @fab-child-size) / 2 + @fab-margin;
+
+.fab{
+  z-index: 9999;
+  background: @fab-color;
+  width: @fab-size;
+  height: @fab-size;
+  border-radius: 50%;
+  text-align:center;
+  color: #FFF;
+  box-shadow:0px 0px 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25);
+  position: fixed;
+  bottom: @fab-margin;
+  right: @fab-margin;
+  font-size: 2.6667em;
+  display: inline-block;
+  cursor: default;
+}
+
+.fab span{
+  vertical-align:middle;
+}
+
+.fab.child{
+  right: @fab-child-margin;
+  width: @fab-child-size;
+  height: @fab-child-size;
+  display: none;
+  opacity: 0;
+  font-size: 2em;
+
+  span img, span i{
+    width: 60%;
+    height: 60%;
+    font-size: 28px;
+  }
+}
+
+.black() when (lightness(@fab-color) > 50%){
+  .fab{
+    color: #000;
+  }
+}
+
+.black();
+
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ECECEC;
+  opacity: 0.9;
+  display: none;
+}
+
 button, .button {
   margin-top: 0px;
   margin-bottom: 12px;
@@ -271,9 +334,9 @@ table td:nth-child(1) {
   position: fixed;
   width: 320px;
   height: 250px;
-  background-color: #05222a;
   left: 50%;
   top: 50%;
+  background-color: floralwhite;
   border: 3px solid @default-border-color;
   border-radius: 10px;
   padding: 20px 5px 20px 5px;
@@ -294,7 +357,8 @@ table td:nth-child(1) {
 
 .btn-close-popup {
   min-width: 50%;
-  margin-top: 2px;
+  margin-top: 10px;
+  min-height: 10px !important;
 }
 
 .post-button {
