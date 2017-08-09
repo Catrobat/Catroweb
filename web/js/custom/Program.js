@@ -20,7 +20,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     
     self.createApk = function()
     {
-        $('.btn-apk').hide();
+        $('#apk-generate').hide();
         $('#apk-pending').show().css("display", "inline-block");
         $.get(self.create_url, null, self.onResult);
         self.showPreparingApkPopup();
@@ -28,7 +28,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
 
     self.onResult = function(data)
     {
-        $('.btn-apk').hide();
+        $('#apk-pending').hide();
         if (data.status == 'ready')
         {
             self.apk_url = data.url;
