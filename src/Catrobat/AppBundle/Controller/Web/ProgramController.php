@@ -228,35 +228,45 @@ class ProgramController extends Controller
      * @Method({"GET"})
      */
     public function toggleProgramVisibilityAction($id) {
-        /*
-         * @var $user \Catrobat\AppBundle\Entity\User
-         * @var $program \Catrobat\AppBundle\Entity\Program
-         */
+      /*
+       * @var $user \Catrobat\AppBundle\Entity\User
+       * @var $program \Catrobat\AppBundle\Entity\Program
+       */
 
-        if ($id == 0) {
-            return $this->redirectToRoute('profile');
-        }
+      if ($id == 0) {
+          return $this->redirectToRoute('profile');
+      }
 
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
 
-        $programs = $user->getPrograms()->matching(Criteria::create()
-            ->where(Criteria::expr()->eq('id', $id)));
 
-        $program = $programs[0];
-        if (!$program) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
-        }
+      $user = $this->getUser();
+      if (!$user) {
+          return $this->redirectToRoute('fos_user_security_login');
+      }
 
-        $program->setPrivate(!$program->getPrivate());
+      $programs = $user->getPrograms()->matching(Criteria::create()
+          ->where(Criteria::expr()->eq('id', $id)));
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($program);
-        $em->flush();
+      $program = $programs[0];
 
+      if (!$program) {
+        throw $this->createNotFoundException('Unable to find Project entity.');
+      }
+
+      $version = $program->getLanguageVersion();
+      $max_version = $this->container->get('kernel')->getContainer()->getParameter("catrobat.max_version");
+      if (version_compare($version, $max_version, ">"))
+      {
         return $this->redirectToRoute('profile');
+      }
+
+      $program->setPrivate(!$program->getPrivate());
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($program);
+      $em->flush();
+
+      return $this->redirectToRoute('profile');
     }
 
     /**
