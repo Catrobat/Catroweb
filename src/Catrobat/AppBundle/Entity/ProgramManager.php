@@ -104,7 +104,7 @@ class ProgramManager
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
     $this->addTags($program, $extracted_file, $request->getLanguage());
-    $version = $program->getCatrobatVersionName();
+    $version = $program->getLanguageVersion();
     $max_version = $this->max_version;
 
     if (version_compare($version, $max_version, ">"))
