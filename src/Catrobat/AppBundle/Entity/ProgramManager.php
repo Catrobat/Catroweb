@@ -104,17 +104,17 @@ class ProgramManager
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
     $this->addTags($program, $extracted_file, $request->getLanguage());
-// after merge
-//    $version = $program->getCatrobatVersionName();
-//    $max_version = $this->max_version;
-//    if (version_compare($version, $max_version, ">"))
-//    {
-//      $program->setPrivate(true);
-//    }
-//    else
-//    {
-//      $program->setPrivate(false);
-//    }
+    $version = $program->getCatrobatVersionName();
+    $max_version = $this->max_version;
+
+    if (version_compare($version, $max_version, ">"))
+    {
+      $program->setPrivate(true);
+    }
+    else
+    {
+      $program->setPrivate(false);
+    }
 
     if ($request->getGamejam() != null)
     {

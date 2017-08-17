@@ -579,8 +579,7 @@ class SymfonySupport
     }
     if ($properties->header->catrobatLanguageVersion == null || $properties->header->catrobatLanguageVersion == "")
     {
-      // after merge
-      //$properties->header->catrobatLanguageVersion = $this->getSymfonyParameter("catrobat.max_version");
+      $properties->header->catrobatLanguageVersion = $this->getSymfonyParameter("catrobat.max_version");
     }
 
     $properties->asXML($new_program_dir . '/code.xml');
