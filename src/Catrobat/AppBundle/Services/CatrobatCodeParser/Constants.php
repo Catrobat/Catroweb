@@ -23,10 +23,12 @@ class Constants
     const WHEN_CONDITION_SCRIPT = 'WhenConditionScript';
     const COLLISION_SCRIPT = 'CollisionScript';
     const WHEN_BG_CHANGE_SCRIPT = 'WhenBackgroundChangesScript';
+    const WHEN_GAME_PAD_BUTTON_SCRIPT = 'WhenGamepadButtonScript';
     const WHEN_CLONED_SCRIPT = 'WhenClonedScript';
     const UNKNOWN_SCRIPT = "UnknownScript";
 
     // Bricks
+    const SET_LOOK_BY_INDEX_BRICK = 'SetLookByIndexBrick';
     const WAIT_BRICK = 'WaitBrick';
     const NOTE_BRICK = 'NoteBrick';
     const FOREVER_BRICK = 'ForeverBrick';
@@ -193,6 +195,9 @@ class Constants
     const PEN_COLOR_RED_FORMULA = 'PHIRO_LIGHT_RED';
     const PEN_COLOR_BLUE_FORMULA = 'PHIRO_LIGHT_BLUE';
     const PEN_COLOR_GREEN_FORMULA = 'PHIRO_LIGHT_GREEN';
+    const PEN_COLOR_RED_NEW_FORMULA = 'PEN_COLOR_RED';
+    const PEN_COLOR_BLUE_NEW_FORMULA = 'PEN_COLOR_BLUE';
+    const PEN_COLOR_GREEN_NEW_FORMULA = 'PEN_COLOR_GREEN';
     const LEGO_EV3_POWER_FORMULA = 'LEGO_EV3_POWER';
     const LEGO_EV3_PERIOD_IN_SECONDS_FORMULA = 'LEGO_EV3_PERIOD_IN_SECONDS';
     const LEGO_EV3_DURATION_IN_SECONDS_FORMULA = 'LEGO_EV3_DURATION_IN_SECONDS';
@@ -219,4 +224,5 @@ class Constants
     const OR_OPERATOR = 'LOGICAL_OR';
 
     const POINTED_OBJECT_TAG = 'pointedObject';
+    const LOOK_INDEX = "LOOK_INDEX";
 }

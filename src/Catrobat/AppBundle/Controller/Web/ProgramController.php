@@ -64,12 +64,16 @@ class ProgramController extends Controller
          */
         $program_manager = $this->get('programmanager');
         $program = $program_manager->find($id);
+        $featured_repository = $this->get('featuredrepository');
         $screenshot_repository = $this->get('screenshotrepository');
         $router = $this->get('router');
         $elapsed_time = $this->get('elapsedtime');
 
         if (!$program || !$program->isVisible()) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
+            if (!$featured_repository->isFeatured($program))
+            {
+                throw $this->createNotFoundException('Unable to find Project entity.');
+            }
         }
 
         $viewed = $request->getSession()->get('viewed', array());
@@ -224,35 +228,45 @@ class ProgramController extends Controller
      * @Method({"GET"})
      */
     public function toggleProgramVisibilityAction($id) {
-        /*
-         * @var $user \Catrobat\AppBundle\Entity\User
-         * @var $program \Catrobat\AppBundle\Entity\Program
-         */
+      /*
+       * @var $user \Catrobat\AppBundle\Entity\User
+       * @var $program \Catrobat\AppBundle\Entity\Program
+       */
 
-        if ($id == 0) {
-            return $this->redirectToRoute('profile');
-        }
+      if ($id == 0) {
+          return $this->redirectToRoute('profile');
+      }
 
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
 
-        $programs = $user->getPrograms()->matching(Criteria::create()
-            ->where(Criteria::expr()->eq('id', $id)));
 
-        $program = $programs[0];
-        if (!$program) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
-        }
+      $user = $this->getUser();
+      if (!$user) {
+          return $this->redirectToRoute('fos_user_security_login');
+      }
 
-        $program->setPrivate(!$program->getPrivate());
+      $programs = $user->getPrograms()->matching(Criteria::create()
+          ->where(Criteria::expr()->eq('id', $id)));
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($program);
-        $em->flush();
+      $program = $programs[0];
 
+      if (!$program) {
+        throw $this->createNotFoundException('Unable to find Project entity.');
+      }
+
+      $version = $program->getLanguageVersion();
+      $max_version = $this->container->get('kernel')->getContainer()->getParameter("catrobat.max_version");
+      if (version_compare($version, $max_version, ">"))
+      {
         return $this->redirectToRoute('profile');
+      }
+
+      $program->setPrivate(!$program->getPrivate());
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($program);
+      $em->flush();
+
+      return $this->redirectToRoute('profile');
     }
 
     /**

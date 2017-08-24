@@ -72,7 +72,7 @@ abstract class Script
     
     private function commentOut()
     {
-        $this->img_file = Constants::UNKNOWN_BRICK_IMG;
+        $this->img_file = Constants::UNKNOWN_SCRIPT_IMG;
     }
 
     public function getBricks()

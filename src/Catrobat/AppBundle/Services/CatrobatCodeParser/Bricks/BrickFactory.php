@@ -250,6 +250,9 @@ class BrickFactory
             case Constants::SET_BACKGROUND_WAIT_BRICK:
                 $generated_brick = new SetBackgroundWaitBrick($brick_xml_properties);
                 break;
+            case Constants::SET_LOOK_BY_INDEX_BRICK:
+                $generated_brick = new SetLookByIndexBrick($brick_xml_properties);
+                break;
 
             // DATA Bricks
             case Constants::SET_VARIABLE_BRICK:

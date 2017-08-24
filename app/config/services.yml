@@ -28,6 +28,7 @@ parameters:
       catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
       catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
       catrobat.logs.dir:              "%kernel.root_dir%/logs/"
+      catrobat.max_version:           "0.993"
 
 services:
 
@@ -216,7 +217,7 @@ services:
             - "@tagrepository"
             - "@programlikerepository"
             - "@event_dispatcher"
-      #      - "%catrobat.max_version%"
+            - "%catrobat.max_version%"
 
 
     templatemanager:
