@@ -3,7 +3,7 @@
   Sourcepath: web/js
 */
 var LoadingAnimation = function (color, loaderText) {
-    color = typeof color !== 'undefined' ? color : '#FFFFFF';
+    color = typeof color !== 'undefined' ? color : '#177f8d';
     var self = this;
 
     self.spinnerLayer = $('<div id="loader"></div>');
