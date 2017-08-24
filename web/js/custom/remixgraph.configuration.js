@@ -35,10 +35,10 @@ var NETWORK_OPTIONS = {
     edges: {
         labelHighlightBold: false,
         color: {
-            color: '#ffffff',
-            highlight: '#ffffff',
+            color: '#000000',
+            highlight: '#000000',
             //highlight: '#000000',
-            hover: '#ffffff',
+            hover: '#000000',
             opacity: 1.0
         },
         smooth: {
