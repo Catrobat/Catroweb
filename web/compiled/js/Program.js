@@ -118,7 +118,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         var popup_background = self.createPopupBackgroundDiv();
         var popup_div = self.createPopupDiv();
 
-        popup_div.append("<h2>" + self.apk_preparing + " <span class='blink-one'>.</span> <span class='blink-two'>.</span> <span class='blink-three'>.</span> </h2><br>");
+        popup_div.append("<h2>" + self.apk_preparing + "</h2><br>");
         popup_div.append('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">');
         popup_div.append("<p>" + self.apk_text + "</p>");
 
