@@ -15,7 +15,7 @@ article {
 @fab-child-margin: (@fab-size - @fab-child-size) / 2 + @fab-margin;
 
 .fab{
-  z-index: 9999;
+  z-index: 9998;
   background: @fab-color;
   width: @fab-size;
   height: @fab-size;
@@ -34,6 +34,7 @@ article {
 .fab span{
   vertical-align:middle;
 }
+
 
 .fab.child{
   right: @fab-child-margin;
@@ -436,6 +437,7 @@ table td:nth-child(1) {
 }
 
 .avatar-wrapper {
+  border-radius: 50%;
   padding-top: 0.9em;
   padding-bottom: 0.9em;
   padding-left: 1.3em;

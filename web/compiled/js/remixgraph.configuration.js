@@ -20,7 +20,7 @@ var NETWORK_OPTIONS = {
         size: 20,
         color: {
             border: '#CCCCCC',
-            background: '#FFFFFF',
+            background: '#000000',
             highlight: {
                 border: '#FFFF00'//,
                 //background: '#000000'
@@ -28,7 +28,7 @@ var NETWORK_OPTIONS = {
         },
         font: {
             size: 10,
-            color:'#CCCCCC'//,
+            color:'#000000'//,
 //                background: '#FFFFFF'
         },
         shapeProperties: {

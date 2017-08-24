@@ -132,6 +132,18 @@
 
       <div class="download-container">
 
+        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+        {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+          <button id="remix-graph-button" class="btn btn-primary download-button">
+            <table>
+              <tr>
+                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                </tr>
+            </table>
+          </button>
+        {% endif %}
+
         <div class="backdrop"></div>
         <div class="fab child" data-subitem="1">
           <span>
@@ -142,16 +154,8 @@
             </div>
           </span>
         </div>
-        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+
         <div class="fab child" data-subitem="2">
-          <span>
-                <div>
-                  <i id="remix-graph-button" class="fa fa-sitemap" aria-hidden="true"></i>
-                </div>
-          </span>
-        </div>
-        {% endif %}
-        <div class="fab child" data-subitem="3">
           <span>
             <div>
               <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
@@ -160,7 +164,7 @@
             </div>
           </span>
         </div>
-        <div class="fab" id="masterfab"><span>+</span></div>
+        <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
       </div>
 
       {% if nolb_status and program.user == app.user.username %}
@@ -488,7 +492,7 @@
     }
 
     $(document).ready(function() {
-      var loadingAnimation = new LoadingAnimation('#FFFFFF', "{{ "pleaseWait"|trans({}, "catroweb") }}");
+      var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}");
       var recommendedByRemixGraphPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
       var networkDirector = new NetworkDirector();
       var remixGraph = RemixGraph.getInstance();
@@ -773,6 +777,8 @@
         $(".fab,.backdrop").click(function(){
             if($(".backdrop").is(":visible")){
                 $(".backdrop").fadeOut(125);
+                $("#action-arrow").removeClass("fa-angle-down");
+                $("#action-arrow").addClass("fa-angle-up");
                 $(".fab.child")
                     .stop()
                     .animate({
@@ -783,6 +789,8 @@
                     });
             }else{
                 $(".backdrop").fadeIn(125);
+                $("#action-arrow").removeClass("fa-angle-up");
+                $("#action-arrow").addClass("fa-angle-down");
                 $(".fab.child").each(function(){
                     $(this)
                         .stop()
