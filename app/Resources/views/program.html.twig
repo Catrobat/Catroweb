@@ -143,17 +143,14 @@
           </button>
         </a>
 
-        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-            {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-          <button id="remix-graph-button" class="btn btn-primary download-button">
-            <table>
-              <tr>
-                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
-        {% endif %}
+        <button id="remix-graph-button" class="btn btn-primary download-button">
+          <table>
+            <tr>
+              <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+              <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
 
         <button id="apk-generate" class="btn btn-apk download-button">
           <table>
@@ -332,17 +329,14 @@
       <div class="img-views icon"></div>
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
-    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-      {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-      <div id="icon-remix">
-        <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
-        <span class="icon-text">
-        <a id="remix-graph-modal-link" href="#remix-graph-modal">
-          {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
-        </a>
-      </span>
-      </div>
-    {% endif %}
+    <div id="icon-remix">
+      <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
+      <span class="icon-text">
+      <a id="remix-graph-modal-link" href="#remix-graph-modal">
+        {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+      </a>
+    </span>
+    </div>
   </div>
 
   <div id="remix-graph-modal">
@@ -365,15 +359,12 @@
       {% endif %}
     {% endif %}
 
-    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-      {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-      <div id="specific-programs-recommendations">
-        <div id="recsys-specific-programs-headline">
-          <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
-        </div>
-        <div class="programs"></div>
-      </div>
-    {% endif %}
+  <div id="specific-programs-recommendations">
+    <div id="recsys-specific-programs-headline">
+      <h2>{{ 'recommender.mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms'|trans({}, 'catroweb') }}</h2>
+    </div>
+    <div class="programs"></div>
+  </div>
 
   <div id="comment-successfully-reported">
     <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>

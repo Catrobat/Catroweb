@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: '어떤 프로그램 권장하세요?'
-      description_B_VersionTest: '여러분의 프로그램이 리믹스 될수록 리스트의 위에 나타납니다.'
       description_C_VersionTest: '더 많은 ''좋아요''("최고야", "웃음", "사랑"과 "와우!"를 포함하여)를 받으면, 리스트의 위에 나타납니다.'
 programs:
   featured: 추천
