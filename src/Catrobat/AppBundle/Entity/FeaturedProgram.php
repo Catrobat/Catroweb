@@ -44,7 +44,7 @@ class FeaturedProgram
     protected $active;
 
     /**
-     * @ORM\Column(type="string", options={"default":"pocketcode"})
+     * @ORM\Column(type="string", options={"default": "pocketcode"})
      */
     protected $flavor = 'pocketcode';
 
@@ -52,6 +52,11 @@ class FeaturedProgram
      * @ORM\Column(type="integer")
      */
     protected $priority = 0;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    protected $for_ios = false;
 
     /**
      * @return mixed
@@ -170,5 +175,21 @@ class FeaturedProgram
     public function setPriority($priority)
     {
         $this->priority = $priority;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getForIos()
+    {
+      return $this->for_ios;
+    }
+
+    /**
+     * @param mixed $for_ios
+     */
+    public function setForIos($for_ios)
+    {
+      $this->for_ios = $for_ios;
     }
 }

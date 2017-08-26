@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
+use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Model\Metadata;
 
 class FeaturedProgramAdmin extends Admin
@@ -41,6 +42,7 @@ class FeaturedProgramAdmin extends Admin
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'required' => true), array('admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('flavor')
             ->add('priority')
+            ->add('for_ios', null, array('label' => 'iOS only', 'required' => false, 'help' => 'Toggle for iOS featured programs api call.'))
             ->add('active', null, array('required' => false))
             ;
     }
@@ -62,6 +64,7 @@ class FeaturedProgramAdmin extends Admin
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'route' => array('name' => 'show'), 'admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('flavor', 'string', array('editable' => true))
             ->add('priority', 'integer', array('editable' => true))
+            ->add('for_ios', null, array('label' => 'iOS only', 'editable' => true))
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
