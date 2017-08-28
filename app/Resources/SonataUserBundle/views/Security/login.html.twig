@@ -8,93 +8,109 @@
 
 {% endblock %}
 
+
 {% block header %}
-  {% include ':Default:headerLogo.html.twig' %}
 {% endblock header %}
 
 {% block body %}
 
   {% block fos_user_content %}
 
-
     <div class="container-fluid">
-      <div id="loginbox" style="margin-top:50px;" class="mainbox col col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <div class="panel-title">Sign In</div>
+        <div class="row">
+          <div class="col-sm-12">
+              <img class="center-block img-responsive" id="logo"  src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
           </div>
-
-          <div style="padding-top:30px" class="panel-body">
-
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
             {% if error %}
               <div id="login-alert"
                    class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
             {% endif %}
-
-
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
             <form id="loginform form_fos" class="form-horizontal" role="form"
                   action="{{ path("fos_user_security_check") }}" method="post">
               <input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token }}"/>
 
-              <div style="margin-bottom: 25px" class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}"
-                       placeholder="{{ "username"|trans({}, "catroweb") }}"/>
-              </div>
-
-              <div style="margin-bottom: 25px" class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input id="password" class="form-control" type="password" name="_password"
-                       placeholder="{{ "password"|trans({}, "catroweb") }}">
-              </div>
-
-              {% if (app.session.get("catroweb_login_redirect") is not empty) %}
-                <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}"/>
-                {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
-                {{ app.session.set("catroweb_login_redirect", "") }}
-
-              {% elseif ("/login" in app.request.headers.get('referer')) %}
-
-                {% if app.session.has("catroweb_login_referer") %}
-                  <input type="hidden" name="_target_path"
-                         value="{{ app.session.get("catroweb_login_referer") }}#login"/>
-                {% else %}
-                  <input type="hidden" name="_target_path" value="{{ path("index") }}#login"/>
-                {% endif %}
-              {% else %}
-                {% if (app.request.headers.get('referer') is not empty) %}
-                  <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login"/>
-                  {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
-                {% else %}
-                  <input type="hidden" name="_target_path" value="index"/>
-                {% endif %}
-              {% endif %}
-
-              <div style="margin-top:10px" class="form-group">
-                <!-- Button -->
-                <div class="col-sm-12 controls">
-                  <button id="_submit" href="#" class="login btn btn-success"
-                          name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+              <div class="row">
+                <div class="col">
+                  <div class="group">
+                    <input type="text" id="username" name="_username" required/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label><span class="span-input">{{ "username"|trans({}, "catroweb") }}</span></label>
+                  </div>
                 </div>
               </div>
 
-              <div class="form-group">
-                <div class="col-md-12 control">
-                  <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                    {{ "login.forgotPass"|trans({}, "catroweb") }}
-                    <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}"> Click here</a>
+              <div class="row">
+                <div class="col">
+                  <div class="group">
+                    <input id="password" type="password" name="_password" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
                   </div>
-                  <div style="padding-top:15px; font-size:85%">
-                    Don't have an account!
-                    <a id="create_account"
-                       href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div style="padding-top:15px; font-size:85%; float:right">
+                    <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}">Forgot Password?</a>
+                </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  {% if (app.session.get("catroweb_login_redirect") is not empty) %}
+                    <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}"/>
+                    {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
+                    {{ app.session.set("catroweb_login_redirect", "") }}
+
+                  {% elseif ("/login" in app.request.headers.get('referer')) %}
+
+                    {% if app.session.has("catroweb_login_referer") %}
+                      <input type="hidden" name="_target_path"
+                             value="{{ app.session.get("catroweb_login_referer") }}#login"/>
+                    {% else %}
+                      <input type="hidden" name="_target_path" value="{{ path("index") }}#login"/>
+                    {% endif %}
+                  {% else %}
+                    {% if (app.request.headers.get('referer') is not empty) %}
+                      <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login"/>
+                      {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
+                    {% else %}
+                      <input type="hidden" name="_target_path" value="index"/>
+                    {% endif %}
+                  {% endif %}
+
+                  <div style="margin-top:10px" class="form-group">
+                    <!-- Button -->
+                    <div class="col-sm-12 controls">
+                      <button id="_submit" href="#" class="login btn-primary"
+                              name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12 control">
+                      <div style="padding-top:15px; font-size:85%">
+                        Don't have an account!
+                        <a id="create_account"
+                           href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </form>
           </div>
         </div>
-      </div>
     </div>
 
     {% include ':social:oauth_form.html.twig' %}
