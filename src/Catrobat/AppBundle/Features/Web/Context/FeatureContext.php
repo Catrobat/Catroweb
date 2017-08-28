@@ -1885,6 +1885,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $featured_entry->setActive($featured[$i]['active'] == 'yes');
       $featured_entry->setImageType('jpg');
       $featured_entry->setPriority($featured[$i]['priority']);
+      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ?  $featured[$i]['ios_only'] == 'yes' : false);
       $em->persist($featured_entry);
     }
     $em->flush();

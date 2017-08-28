@@ -27,16 +27,53 @@ class FeaturedController extends Controller
 
     $flavor = $request->getSession()->get('flavor');
 
-    $limit = intval($request->query->get('limit'));
-    $offset = intval($request->query->get('offset'));
+    $limit = intval($request->query->get('limit', 20));
+    $offset = intval($request->query->get('offset', 0));
     $max_version = $request->query->get('max_version', 0);
 
-
-    $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset, $max_version);
-    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $max_version);
+    $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset, $max_version, false);
+    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $max_version, false);
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
+    foreach ($programs as $program)
+    {
+      $retArray['CatrobatProjects'][] = $this->generateProgramObject($program, $image_repository);
+    }
+    $retArray['preHeaderMessages'] = '';
+    $retArray['CatrobatInformation'] = [
+      'BaseUrl'           => ($request->isSecure() ? 'https://' : 'http://') . $request->getHttpHost() . '/',
+      'TotalProjects'     => $numbOfTotalProjects,
+      'ProjectsExtension' => '.catrobat',
+    ];
+
+    return JsonResponse::create($retArray);
+  }
+
+  /**
+   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs", defaults={"_format": "json"})
+   * @Method({"GET"})
+   */
+  public function getFeaturedIOSProgramsAction(Request $request)
+  {
+    /* @var $image_repository FeaturedImageRepository */
+    /* @var $repository FeaturedRepository */
+
+    $image_repository = $this->get('featuredimagerepository');
+    $repository = $this->get('featuredrepository');
+
+    $flavor = $request->getSession()->get('flavor');
+
+    $limit = intval($request->query->get('limit', 20));
+    $offset = intval($request->query->get('offset', 0));
+    $max_version = $request->query->get('max_version', 0);
+
+    $programs = $repository->getFeaturedPrograms($flavor, $limit, $offset, $max_version, true);
+    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $max_version, true);
+
+    $retArray = [];
+    $retArray['CatrobatProjects'] = [];
+
     foreach ($programs as $program)
     {
       $retArray['CatrobatProjects'][] = $this->generateProgramObject($program, $image_repository);

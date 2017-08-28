@@ -41,6 +41,7 @@ class FeaturedUrlAdmin extends Admin
             ->add('url', 'url')
             ->add('flavor')
             ->add('priority')
+            ->add('for_ios', null, array('label' => 'iOS only', 'required' => false, 'help' => 'Toggle for iOS featured url api call.'))
             ->add('active', null, array('required' => false))
             ;
     }
@@ -62,6 +63,7 @@ class FeaturedUrlAdmin extends Admin
             ->add('url', 'url')
             ->add('flavor', 'string', array('editable' => true))
             ->add('priority', 'integer', array('editable' => true))
+            ->add('for_ios', null, array('label' => 'iOS only', 'editable' => true))
             ->add('active', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
