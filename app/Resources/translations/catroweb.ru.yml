@@ -496,6 +496,8 @@ time:
   days.ago: '{1}1 день назад |[2,4] %count% дня назад |]4,Inf] %count% дней назад'
   months.ago: '{1}1 месяц назад |[2,4] %count% месяца назад |]4,Inf] %count% месяцев назад'
   years.ago: '{1}1 год назад |]1,Inf] более года назад'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Арабский
   bulgarian: Болгарский
@@ -591,3 +593,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

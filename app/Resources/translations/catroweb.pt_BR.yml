@@ -31,17 +31,17 @@ notificationsReadMessage: "Todas as notificações foram lidas."
 notificationsClearedMessage: "Todas as notificações foram marcadas como lidas."
 clearAllNotificationsButtonTitle: "Marcar todos como lidos"
 notificationsClearError: "Não foi possível marcar as notificações como lidas!"
-pleaseWait: "Please wait..."
+pleaseWait: "Por favor, espere..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'Que programas são recomendados aqui?'
+      description_B_VersionTest: 'Quanto mais vezes o seu programa for remisturado, mais perto do topo surgirá nesta lista.'
+      description_C_VersionTest: 'Quanto mais Gostos (incluindo «Polegares para cima», «Riso», «Amor» e «Uau!») o seu programa receber, mais perto do topo surgirá nesta lista.'
 programs:
   featured: Em Destaque
   newest: Programas mais recentes
-  recommended: Recommended programs
+  recommended: Programas recomendados
   most:
     viewed: Mais vistos
     downloaded: Mais baixados
@@ -50,10 +50,10 @@ programs:
   downloads: '%downloads% downloads'
   sample: Exemplos de programas
   views: '%views% visualizações'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likeThumbsUpDetailText: '{0}0 pessoas deram polegar para cima a isto |{1}1 pessoa deu polegar para cima a isto |]1,Inf]%persons% pessoas deram polegar para cima a isto'
+  likeSmileDetailText: '{0}0 pessoas deram um sorriso a isto |{1}1 pessoa deu um sorriso a isto |]1,Inf]%persons% pessoas deram um sorriso a isto'
+  likeLoveDetailText: '{0}0 pessoas gostaram disto |{1}1 pessoa gostou disto |]1,Inf]%persons% pessoas gostaram disto'
+  likeWowDetailText: '{0}0 pessoas disseram «Uau!» a isto |{1}1 pessoa disse «Uau!» a isto |]1,Inf]%persons% pessoas disseram «Uau!» a isto'
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" tem 1 novo remix: |]1,Inf] "%programName%" tem %remixes% novos remixes:'
   submitted: Programas enviados
@@ -77,16 +77,16 @@ programs:
   report: Denunciar
   report_popup: Este comentário foi denunciado com sucesso.
   report_popup_header: Denunciado
-  nolb_example: Example programs
+  nolb_example: Exemplos de programas
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'Mostrar Grafo de Remistura'
   by: 'por'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'Abrir'
+  showPaths: 'Mostrar Caminhos'
+  programNotAvailableErrorTitle: 'Perdão...'
+  programNotAvailableErrorDescription: 'Este programa já não está disponível!'
+  programNotAvailable: 'Indisponível'
+  programUnknownUser: 'Utilizador Desconhecido'
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -447,7 +447,7 @@ errors:
     invalid: Seu nome de usuário é inválido
     exists: Este nome de usuário já existe.
     not_exists: Este nome de usuário não existe.
-    not_email: The username must not be an email address.
+    not_email: O nome de utilizador não deve ser um endereço de correio electrónico.
   password:
     blank: Faltando a senha.
     short: 'Sua senha deve conter pelo menos {{ limit }} caracteres.'
@@ -495,6 +495,8 @@ time:
   days.ago: '{1}1 dia atrás |]1,Inf] %count% dias atrás'
   months.ago: '{1}1 mês |]1,Inf] %count% meses atrás'
   years.ago: '{1}1 ano atrás |]1,Inf] mais de um ano atrás'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Árabe
   bulgarian: Búlgaro
@@ -578,7 +580,7 @@ admin:
     createBackupConfirmationText: Este processo pode demorar um pouco. A página recarregará logo após!
 recommender:
   similarPrograms: Programas similares
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Os Utilizadores Que Descarregaram Este Programa Também Descarregaram
 pmd:
   submitBtn: Enviar seu projeto
   submitBox:
@@ -591,3 +593,9 @@ pmd:
     text: Falha no upload do programa.
 codeview:
   showText: Mostrar código
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

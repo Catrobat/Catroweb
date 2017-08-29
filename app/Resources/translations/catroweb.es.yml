@@ -31,17 +31,17 @@ notificationsReadMessage: "Has leído todas las notificaciónes."
 notificationsClearedMessage: "Todas las notificaciónes estaban marcando leído."
 clearAllNotificationsButtonTitle: "Marcar todas las notificaciónes leído"
 notificationsClearError: "¡No se puede marcar las notificaciónes como leído!"
-pleaseWait: "Please wait..."
+pleaseWait: "Espera..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
+      title: '¿Qué programas se recomiendan?'
+      description_B_VersionTest: 'Cuantos más remixes se hagan de tu programa, más alto aparecerá en la lista.'
       description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Destacados
   newest: Los más nuevos
-  recommended: Recommended programs
+  recommended: Programas recomendados
   most:
     viewed: Más visto
     downloaded: Más descargados
@@ -50,10 +50,10 @@ programs:
   downloads: descargas
   sample: Programas de ejemplo
   views: '%views% visitas'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+  likeThumbsUpDetailText: 'A {0}0 personas les ha gustado esto | A {1}1 persona le ha gustado esto |A ]1,Inf]%persons% personas les ha gustado esto'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likeLoveDetailText: 'A {0}0 personas les encantó esto |A {1}1 persona le encantó esto |A ]1,Inf]%persons% personas les encantó esto'
+  likeWowDetailText: 'A {0}0 personas les asombró esto |A {1}1 persona le asombró esto |A ]1,Inf]%persons% personas les asombró esto'
   remixes: '{0}0 remixes | remix{1}1 |] 1, Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1} "%programName%" tiene 1 remix nuevo: |] 1, Inf] "%programName%" tiene nuevos remixes de %remixes%:'
   submitted: Programas Enviados
@@ -77,16 +77,16 @@ programs:
   report: Informe
   report_popup: El comentario fue reportado con éxito.
   report_popup_header: Reportado
-  nolb_example: Example programs
+  nolb_example: Ejemplos de programas
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'Mostrar gráfico de remixes'
   by: 'por'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'Abrir'
+  showPaths: 'Mostrar rutas'
+  programNotAvailableErrorTitle: 'Lo sentimos...'
+  programNotAvailableErrorDescription: 'Este programa ya no está disponible.'
+  programNotAvailable: 'No disponible'
+  programUnknownUser: 'Usuario desconocido'
 passwordRecovery:
   subject: Recuperación de su clave Catrobat
   message: |
@@ -441,7 +441,7 @@ errors:
     invalid: El nombre de usuario es inválido
     exists: El nombre de usuario ya existe.
     not_exists: El nombre de usuario no existe.
-    not_email: The username must not be an email address.
+    not_email: El nombre de usuario no puede ser una dirección de correo electrónico.
   password:
     blank: Falta la contraseña.
     short: 'Su contraseña debe tener al menos {{ limit }} caracteres.'
@@ -489,6 +489,8 @@ time:
   days.ago: '{1}hace 1 día |]1,Inf] hace %count% días'
   months.ago: '{1}hace 1 mes |]1,Inf] hace %count% meses'
   years.ago: '{1}hace 1 año |]1,Inf] hace más de un año'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Árabe
   bulgarian: Búlgaro
@@ -571,7 +573,7 @@ admin:
     createBackupConfirmationText: Este proceso puede tardar un tiempo. ¡La página volverá a cargar luego!
 recommender:
   similarPrograms: Programas iguales
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Los usuarios que descargaron este programa también descargaron
 pmd:
   submitBtn: Enviar tu proyecto
   submitBox:
@@ -584,3 +586,9 @@ pmd:
     text: Subida de programa falló.
 codeview:
   showText: Mostrar código
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

@@ -2,10 +2,10 @@
 localLanguage: Inglés
 username: Usuario
 password: Contrasinal
-aboutPocketCode: Acerca de Pocket Code
+aboutPocketCode: Sobre Pocket Code
 tutorials: Titoriais
 googlePlay: Google Play
-passwordsNoMatch: As contrasinais non coinciden.
+passwordsNoMatch: Os contrasinais non coinciden.
 error: Erro
 cancel: Cancelar
 report: Reportar
@@ -23,7 +23,7 @@ more: 'máis'
 less: 'menos'
 ok: OK
 clickToDownloadProgram: 'Para descargar o programa de exemplo fai clic %link_start% aquí %link_end%.'
-registrationError: 'O usuario ou a dirección de correo electrónico xa está en uso.'
+registrationError: 'Username or email address already in use.'
 notifications: 'Notificacións'
 wellDone: "¡Moi ben!"
 done: "¡Listo!"
@@ -148,8 +148,8 @@ licenseToPlay:
   version: Versión 1.1, 2 abril 2013
 teachers:
   login:
-    title: 'Área para mestres'
-    description: 'Este área pode ser empregado polos mestres.'
+    title: 'Teachers area'
+    description: 'This area can be used by teachers.'
 termsOfUse:
   title: Condicións de uso
   headline: Benvido á comunidade Catrobat!
@@ -325,12 +325,12 @@ help:
       one: "Add the object you want to be moving on stage."
       two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: "Compass"
-      description: "Create you own compass"
+      title: "Compás"
+      description: "Crea o teu propio compás"
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "Broadcast"
+      title: "Transmitir mensaxe"
       description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
@@ -362,7 +362,7 @@ help:
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registration"
+    title1: "Rexistro"
     text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
     title2: "Upload"
     text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
@@ -491,6 +491,8 @@ time:
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabic
   bulgarian: Bulgarian
@@ -576,14 +578,20 @@ recommender:
   similarPrograms: Similar programs
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: Envía o teu proxecto
   submitBox:
-    header: Submission
+    header: Envío
     text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    btnText: Enviar
   successful:
     text: Your program upload was successful.
   failed:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

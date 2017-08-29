@@ -81,9 +81,9 @@ programs:
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'med'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
+  open: 'Öppna'
+  showPaths: 'Visa sökvägar'
+  programNotAvailableErrorTitle: 'Tyvärr...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
   programNotAvailable: 'Not available'
   programUnknownUser: 'Unknown User'
@@ -238,7 +238,7 @@ help:
         text2: 'Fäst klossen under "byt utseende till" tegel.'
         text3: 'tryck på play för att se uppträdandet på scenen.'
     step6:
-      title: 'Again and again'
+      title: 'Igen och igen'
       description: "Detta steg visar hur du upprepar beteendet hos objekten."
       detail:
         text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
@@ -493,6 +493,8 @@ time:
   days.ago: '{1}1 dag sedan |]1,Inf] %count% dagar sedan'
   months.ago: '{1}1 månad sedan |]1,Inf] %count% månader sedan'
   years.ago: '{1}1 år sedan |]1,Inf] mer än ett år sedan'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabiska
   bulgarian: Bulgariska
@@ -547,7 +549,7 @@ gamejam:
   submit: Submit to %gamejamname%
   whats: What's the %gamejamname%?
   submitown:
-    header: be aware
+    header: var medveten om
     subheader: You can only submit your own programs
     text: |
       But why not create your own!
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Visa kod
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

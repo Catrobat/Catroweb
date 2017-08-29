@@ -626,3 +626,10 @@ pmd:
 
 codeview:
   showText: Show code
+
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

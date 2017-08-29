@@ -127,7 +127,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Gereed
   avatar: Avatar
   email: E-Mail
   editAvatar: Edit avatar
@@ -493,6 +493,8 @@ time:
   days.ago: '{1}1 dag geleden |]1, Inf] %count% dagen geleden'
   months.ago: '{1}1 maand geleden |]1, Inf] %count% maanden geleden'
   years.ago: '{1}1 jaar geleden |]1, Inf] meer dan een jaar geleden'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabisch
   bulgarian: Bulgaars
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

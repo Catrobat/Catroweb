@@ -493,6 +493,8 @@ time:
   days.ago: '{1}1 ngày trước |] 1, Inf] %count% ngày trước'
   months.ago: '{1}1 tháng trước |] 1, Inf] %count% tháng trước'
   years.ago: '{1}1 năm trước |] 1, Inf] nhiều hơn một năm trước'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Ả rập
   bulgarian: Bun-ga-ri
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

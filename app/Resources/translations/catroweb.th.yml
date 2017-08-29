@@ -493,6 +493,8 @@ time:
   days.ago: '{1}1 วันที่ผ่านมา |] 1, Inf]  %count% วันที่ผ่านมา'
   months.ago: '{1}1 เดือนที่ผ่านมา |] 1, Inf] %count% เดือนที่ผ่านมา'
   years.ago: '{1}1 ปี |] 1, Inf] เกินกว่าหนึ่งปีแล้ว'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: ภาษาอาหรับ
   bulgarian: ภาษาบัลแกเรีย
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

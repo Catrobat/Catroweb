@@ -24,14 +24,14 @@ less: 'daha az'
 ok: Tamam
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
+notifications: 'Bildirimler'
+wellDone: "Tebrikler!"
 done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
+notificationsReadMessage: "Bütün bildirimleri okudunuz."
+notificationsClearedMessage: "Bütün bildirimleri okunmuş olarak işaretlendi."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "Lütfen bekleyiniz..."
 indexPage:
   recommendedSection:
     info:
@@ -41,12 +41,12 @@ indexPage:
 programs:
   featured: Seçme
   newest: En yeni programlar
-  recommended: Recommended programs
+  recommended: Önerilen programlar
   most:
     viewed: En çok İzlenenler
     downloaded: En çok indirilen
   random: Gelişigüzel programlar
-  related: Related Programs
+  related: İlgili programlar
   downloads: '%kere indirildi% kere indirildi'
   sample: Örnek Program
   views: '%kez bakıldı% kez bakıldı'
@@ -70,9 +70,9 @@ programs:
   updateAppText: Lütfen programinizi yeni sürümüyle güncelleştirin.
   btnClosePopup: Tamam
   checkout_this_program: Bu Catrobat programına gözat
-  show_more: Show More
+  show_more: Daha Fazlasını Göster
   comments: Comments
-  send: Send
+  send: Gönder
   delete: Sil
   report: Rapor et
   report_popup: The comment was successfully reported.
@@ -112,7 +112,7 @@ profile:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
     passwordIsUsername: Şifre kullanıcı adından farklı olmalıdır.
-    passwordWrong: Wrong password
+    passwordWrong: Yanlış şifre
     emailNotValid: Bu e-posta adresi geçerli değil.
     emailMissing: E-posta adresinizi güncelleştirme sırasında bir hata oluştu. En az bir onaylanmış e-posta adresi olması gerekir.
     emailExists: Bu e-posta adresi mevcut.
@@ -125,21 +125,21 @@ profile:
     uploadError: Üzgünüz, yükleme sırasında bir sorun oluştu!
     noSupport: Bu resim türü desteklenmiyor, lütfen başka bir görüntü deneyin.
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
+  editProfile: Profili düzenle
+  edit: Düzenle
+  done: Tamam
   avatar: Avatar
-  email: E-Mail
+  email: E-Posta
   editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
+  editUsername: Kullanıcı adını düzenle
+  editPassword: Şifreyi düzenle
   editCountry: Edit country
-  editEmail: Edit E-Mail
+  editEmail: E-Postayı düzenle
 licenseToPlay:
   link: 'Oynamak için lisansınız'
   title: 'Oynamak için lisans- prim ver ve paylaş'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text2: 'Gizli olan hiçbir tarif yok: Bu pastaların nasıl yapılacağını açıklayan bilgileri herkes kullanır, yeniden kullanır, değiştirir ya da yeni fikirler için ilham kaynağı olarak yararlanır... Yani yeni pastalar için.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
@@ -187,7 +187,7 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Sürüm 1.3, 4 Mart 2014
 help:
   stepByStep:
     title: "Adım adım tanıtım"
@@ -198,15 +198,15 @@ help:
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: 'Make a new program'
+      title: 'Yeni bir program yapın'
       detail:
         text1: '"Yeni"''ye dokunun.'
         text2: 'Program adı girin, "boş program oluştur"''u seçin ve "OK"ye dokunun.'
     step2:
-      title: "Create a new object"
+      title: "Yeni bir nesne oluştur"
       detail:
         text1: 'Dokunun:'
-        text2: 'Choose the source of the first look of your new object.'
+        text2: 'Yeni nesnenizin ilk görünümü için kaynak seçin.'
         text3: 'Enter an object name and tap "OK" to create the object.'
         special1: 'Yeni bir görünüm çizin.'
         special2: 'Galeriden seçin.'
@@ -493,6 +493,8 @@ time:
   days.ago: '{1} 1 gün önce |]1, INF] %rakam% gün önce'
   months.ago: '{1} 1 ay önce |]1, INF] %rakam% ay önce'
   years.ago: '{1} 1 yıl önce |]1, INF] bir yıldan fazla'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arapça
   bulgarian: Bulgarca
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
