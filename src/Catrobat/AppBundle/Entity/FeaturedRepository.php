@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class FeaturedRepository extends EntityRepository
 {
-  public function getFeaturedPrograms($flavor, $limit = 20, $offset = 0, $max_version = 0, $for_ios = false)
+  public function getFeaturedPrograms($flavor, $limit = 20, $offset = 0, $for_ios = false)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -21,20 +21,12 @@ class FeaturedRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
-    }
-
     $qb->orderBy('e.priority', 'DESC');
 
     return $qb->getQuery()->getResult();
   }
 
-  public function getFeaturedProgramCount($flavor, $max_version = 0, $for_ios = false)
+  public function getFeaturedProgramCount($flavor, $for_ios = false)
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -46,13 +38,7 @@ class FeaturedRepository extends EntityRepository
       ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
       ->setParameter('flavor', $flavor)
       ->setParameter('for_ios', $for_ios);
-    if ($max_version !== 0)
-    {
-      $qb
-        ->andWhere($qb
-          ->expr()->lte('e.language_version', ':max_version'))
-        ->setParameter('max_version', $max_version);
-    }
+
     return $qb->getQuery()->getSingleScalarResult();
   }
 
