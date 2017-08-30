@@ -27,7 +27,7 @@ registrationError: 'Benutzername oder e-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
 wellDone: "Gut gemacht!"
 done: "Fertig!"
-notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
+notificationsReadMessage: "Du hast alle Mitteilungen gelesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
@@ -488,6 +488,8 @@ time:
   days.ago: '{1} vor 1 Tag |]1, Inf] vor %count% Tagen'
   months.ago: '{1} vor 1 Monat |]1, Inf] vor %count% Monaten'
   years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabisch
   bulgarian: Bulgarisch
@@ -575,7 +577,7 @@ pmd:
   submitBtn: Projekt abgeben
   submitBox:
     header: Abgabe
-    text: Sie sind im begriff ihr Projekt abzugeben. Bitte geben Sie den Projektcode ein.
+    text: Du bist im begriff dein Projekt abzugeben. Bitte gib den Projektcode ein.
     btnText: Abgeben
   successful:
     text: Ihr Programm-Upload war erfolgreich.
@@ -583,3 +585,9 @@ pmd:
     text: Programm-Upload fehlgeschlagen.
 codeview:
   showText: Code anzeigen
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

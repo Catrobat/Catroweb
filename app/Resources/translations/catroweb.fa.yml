@@ -25,13 +25,13 @@ ok: تایید
 clickToDownloadProgram: 'برای اینکه برنامه نمومه را دانلود کنی، کلیک کن %link_start% روی %link_end%.'
 registrationError: 'این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.'
 notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
+wellDone: "آفرین!"
+done: "انجام شد!"
 notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
+clearAllNotificationsButtonTitle: "علامتگذاری همه بعنوان خوانده شده"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "لطفا صبر کن..."
 indexPage:
   recommendedSection:
     info:
@@ -41,7 +41,7 @@ indexPage:
 programs:
   featured: ' پيشنهادي'
   newest: جدیدترین برنامه ها
-  recommended: Recommended programs
+  recommended: برنامه های توصیه شده
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
@@ -77,16 +77,16 @@ programs:
   report: گزارش
   report_popup: نظرت با موفقیت گزارش شد.
   report_popup_header: گزارش شد
-  nolb_example: Example programs
+  nolb_example: برنامه های نمونه
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'به وسیله'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'باز کن'
+  showPaths: 'نمایش مسیر'
+  programNotAvailableErrorTitle: 'متأسفم...'
+  programNotAvailableErrorDescription: 'این برنامه بهیچ وجه در دسترس نیست!'
+  programNotAvailable: 'در دسترس نیست'
+  programUnknownUser: 'کاربر ناشناس'
 passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |
@@ -444,7 +444,7 @@ errors:
     invalid: نام کاربری تو نامعتبر است
     exists: در حال حاضراین نام کاربری وجود دارد.
     not_exists: این نام کاربری وجود ندارد.
-    not_email: The username must not be an email address.
+    not_email: نام کاربری نباید آدرس ایمیل باشه.
   password:
     blank: تو رمزعبوری وارد نکردی.
     short: 'رمز عبورت باید حداقل  {{ limit }} نویسه داشته باشه.'
@@ -492,6 +492,8 @@ time:
   days.ago: '{1}۱ روز پیش |]1,Inf] %count% روز پیش'
   months.ago: '{1}۱ ماه پیش |]1,Inf] %count% ماه پیش'
   years.ago: '{1}۱ سال پیش |]1,Inf] بیش از یک سال'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: عربی
   bulgarian: بلغاری
@@ -574,12 +576,12 @@ admin:
     createBackupConfirmationTitle: ایجاد فایل پشتیبان
     createBackupConfirmationText: این فرایند ممکن است طول بکشد. پس از آن صفحه دوباره بارگذاری خواهد شد!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: برنامه های مشابه
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
-  submitBtn: Submit your project
+  submitBtn: پروژه ات را ارسال کن
   submitBox:
-    header: Submission
+    header: ارسال
     text: You are about to submit your project. Please enter the project code and click send.
     btnText: Submit
   successful:
@@ -588,3 +590,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

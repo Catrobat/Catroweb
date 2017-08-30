@@ -5,7 +5,7 @@
       <div class="content">
         <div class="row">
           <div class="col-md-2">
-            <h4>Usefull Links</h4>
+            <h4>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h4>
             <ul class="list-vertical">
               <li>
                 <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
@@ -19,7 +19,7 @@
             </ul>
           </div>
           <div class="col-md-2">
-            <h4>Legalities</h4>
+            <h4>{{ "footer.legalities"|trans({}, "catroweb") }}</h4>
             <ul class="list-vertical">
               <li>
                 <a href="{{ url('licenseToPlay') }}">{{ "licenseToPlay.link"|trans({}, "catroweb") }}</a>
@@ -38,9 +38,9 @@
 
 
           <div class="col-md-offset-4 col-md-4">
-            <h4>Community Stats</h4>
-            <h4>20.312 <small>programs</small></h4>
-            <h4>1.211.073 <small>downloads</small></h4>
+            <h4>{{ "footer.communityStats"|trans({}, "catroweb") }}</h4>
+            <h4>~36.738 <small>{{ "footer.programs"|trans({}, "catroweb") }}</small></h4>
+            <h4>~624.589 <small>{{ "footer.downloads"|trans({}, "catroweb") }}</small></h4>
           </div>
         </div>
       </div>

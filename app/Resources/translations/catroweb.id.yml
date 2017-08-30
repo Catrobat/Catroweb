@@ -492,6 +492,8 @@ time:
   days.ago: '{1}1 hari yang lalu |] 1, Inf] %count% hari yang lalu'
   months.ago: '{1}1 bulan yang lalu |] 1, Inf] %count% bulan yang lalu'
   years.ago: '{1}1 tahun yang lalu |] 1, Inf] lebih dari satu tahun yang lalu'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arab
   bulgarian: Bulgaria
@@ -588,3 +590,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

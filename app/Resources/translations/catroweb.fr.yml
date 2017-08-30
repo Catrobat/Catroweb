@@ -493,6 +493,8 @@ time:
   days.ago: '{1} il y a 1 jour |]1, Inf] il y a %count% jours'
   months.ago: '{1} il y a 1 mois |]1, Inf] il y a %count% mois'
   years.ago: '{1} il y a 1 an |]1, Inf] il y a plus d''un an'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabe
   bulgarian: Bulgare
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

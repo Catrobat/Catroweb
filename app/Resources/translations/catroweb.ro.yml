@@ -493,6 +493,8 @@ time:
   days.ago: '{1}1 zi în urmă |]1,Inf] %count% zile în urmă'
   months.ago: '{1} 1 lună în urmă |]1, Inf] %count% luni în urmă'
   years.ago: '{1}1 an în urmă |]1, Inf] mai mult de un an în urmă'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: 'Arab&#x103;'
   bulgarian: 'Bulgar&#x103;'
@@ -589,3 +591,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

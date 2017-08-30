@@ -491,6 +491,8 @@ time:
   days.ago: '{1}منذ 1 يوم |]1,Inf] %count% منذ أيام ماضية'
   months.ago: '{1} منذ 1 شهر |]1,Inf] %count% أشهر ماضية'
   years.ago: '{1}منذ 1 عام |]1,Inf] منذ أكثر من عام'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: العربية
   bulgarian: البلغارية
@@ -587,3 +589,9 @@ pmd:
     text: فشلت عملية تحميل البرنامج.
 codeview:
   showText: إظهار الشِفرة البرمجية(الكود)
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

@@ -492,6 +492,8 @@ time:
   days.ago: '{1}1 日前 |]1,Inf] %count% 日前'
   months.ago: '{1}1 ヶ月前 |]1,Inf] %count% ヶ月前'
   years.ago: '{1}1 年前 |]1,Inf] 1 年以上前'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: '&#x30A2;&#x30E9;&#x30D3;&#x30A2;&#x8A9E;'
   bulgarian: '&#x30D6;&#x30EB;&#x30AC;&#x30EA;&#x30A2;&#x8A9E;'
@@ -588,3 +590,9 @@ pmd:
     text: プログラムのアップロードに失敗しました。
 codeview:
   showText: コードを表示
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

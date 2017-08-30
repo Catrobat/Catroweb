@@ -483,6 +483,8 @@ time:
   days.ago: '{1}1 napja|]1,Inf] %count% napja'
   months.ago: '{1}1 hónapja |]1,Inf] %count% hónapja'
   years.ago: '{1}1 éve |]1,Inf] több, mint egy éve'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arab
   bulgarian: Bolgár
@@ -579,3 +581,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

@@ -495,6 +495,8 @@ time:
   days.ago: '{1} prije jedan dan|]1,Inf] prije %count% dana'
   months.ago: '{1} prije jedan mjesec|]1,Inf] prije %count% mjeseci'
   years.ago: '{1} prije jednu godinu|]1,Inf] prije više od godinu dana'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arapski
   bulgarian: Bugarski
@@ -591,3 +593,9 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs

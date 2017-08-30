@@ -487,6 +487,8 @@ time:
   days.ago: '{1}1 dzień temu |]1,Inf] %count% dni temu'
   months.ago: '{1}1 miesiąc temu |]1,Inf] %count% miesiące(cy) temu'
   years.ago: '{1}1 rok temu |]1,Inf] ponad rok temu'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabski
   bulgarian: Bułgarski
@@ -582,3 +584,9 @@ pmd:
     text: Przesyłanie programu nie powiodło się.
 codeview:
   showText: Pokaż kod
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
