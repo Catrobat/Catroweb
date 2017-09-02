@@ -76,7 +76,6 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
         $('#visibility-' + id).toggleClass('img-visibility-visible');
       }
       else if (data == "false"){
-        alert("Hallo?");
         $('#program-cannot-be-toggled').show();
       }
     })
