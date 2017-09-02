@@ -12,6 +12,30 @@ article > h1 {
   margin-bottom: 25px;
 }
 
+#close-toggled-popup {
+  min-width: 30%;
+  margin-top: 2px;
+  max-height: 50px;
+  max-width: 50%;
+}
+
+#program-cannot-be-toggled {
+  z-index: 9001;
+  display: none;
+  padding-top: 10px;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  width: 320px;
+  height: 200px;
+  background-color: #05222a;
+  border: 3px solid @default-border-color;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
 #profile-avatar {
   width: 200px;
   height: 200px;
