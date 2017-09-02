@@ -39,6 +39,8 @@ class ProgramManager
 
   protected $program_like_repository;
 
+  protected $max_version;
+
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository,
                               $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher, $max_version = 0)
   {
@@ -107,13 +109,9 @@ class ProgramManager
     $version = $program->getLanguageVersion();
     $max_version = $this->max_version;
 
-    if (version_compare($version, $max_version, ">"))
+    if (version_compare($version, "0.993", ">"))
     {
       $program->setPrivate(true);
-    }
-    else
-    {
-      $program->setPrivate(false);
     }
 
     if ($request->getGamejam() != null)
