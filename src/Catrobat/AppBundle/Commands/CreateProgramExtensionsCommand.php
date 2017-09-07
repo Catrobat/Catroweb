@@ -69,6 +69,8 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
 
         $this->writeln("Searching for extensions ...");
 
+        $die = false;
+
         foreach ($finder as $element) {
 
             $zip = new \ZipArchive();
@@ -112,6 +114,18 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
                     if (in_array($extension->getPrefix(), $prefixes )) {
                         $program->addExtension($extension);
                         $program_with_extensiones = true;
+                    }
+
+                    if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0) {
+                      $is_cast = $xml->xpath('header/isCastProject');
+
+                      if(!empty($is_cast)) {
+                        $cast_value = ((array) $is_cast[0]);
+                        if(strcmp($cast_value[0], 'true') == 0) {
+                          $program->addExtension($extension);
+                          $program_with_extensiones = true;
+                        }
+                      }
                     }
                 }
 
