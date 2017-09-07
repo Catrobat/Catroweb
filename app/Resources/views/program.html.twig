@@ -131,41 +131,95 @@
       {% endif %}
 
       <div class="download-container">
+        {% if not isWebview() %}
+          <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+            <button id="download" class="btn btn-primary download-button">
+              <table>
+                <tr>
+                  <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
+                  <td>{{ "download"|trans({}, "catroweb") }}</td>
+                </tr>
+              </table>
+            </button>
+          </a>
 
-        {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-        {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-          <button id="remix-graph-button" class="btn btn-primary download-button">
+          {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+            {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+            <button id="remix-graph-button" class="btn btn-primary download-button">
+              <table>
+                <tr>
+                  <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                  <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                </tr>
+              </table>
+            </button>
+          {% endif %}
+
+          <button id="apk-generate" class="btn  btn-primary btn-apk download-button">
             <table>
               <tr>
-                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-                </tr>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
+                <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
+
+          <button id="apk-pending" class="btn  btn-primary download-button">
+            <table>
+              <tr>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
+                <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
+
+          <button id="apk-download" class="btn btn-apk btn-primary download-button">
+            <table>
+              <tr>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
+                <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
+              </tr>
             </table>
           </button>
         {% endif %}
 
-        <div class="backdrop"></div>
-        <div class="fab child" data-subitem="1">
-          <span>
-            <div>
-              <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
-              <img id="apk-pending"  src="{{ asset('images/symbols/apk_download.svg') }}" />
-              <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
-            </div>
-          </span>
-        </div>
+        {% if isWebview() %}
+          {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
+          {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
+            <button id="remix-graph-button" class="btn btn-primary download-button">
+              <table>
+                <tr>
+                  <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                  <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                  </tr>
+              </table>
+            </button>
+          {% endif %}
 
-        <div class="fab child" data-subitem="2">
-          <span>
-            <div>
-              <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-              <img src="{{ asset('images/symbols/download.svg') }}" >
-              </a>
-            </div>
-          </span>
+          <div class="backdrop"></div>
+          <div class="fab child" data-subitem="1">
+            <span>
+              <div>
+                <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
+                <img id="apk-pending"  src="{{ asset('images/symbols/apk_download.svg') }}" />
+                <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
+              </div>
+            </span>
+          </div>
+
+          <div class="fab child" data-subitem="2">
+            <span>
+              <div>
+                <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+                <img src="{{ asset('images/symbols/download.svg') }}" >
+                </a>
+              </div>
+            </span>
+          </div>
+          <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
         </div>
-        <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
-      </div>
+      {% endif %}
+
 
       {% if nolb_status and program.user == app.user.username %}
         <button id="nolb-project-button" class="btn download-button">
