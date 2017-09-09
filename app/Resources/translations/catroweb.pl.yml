@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'Jakie programy są tutaj polecane?'
-      description_B_VersionTest: 'Im częściej Twój program został zremiksowany, tym wyżej znajdzie się na liście.'
       description_C_VersionTest: 'Im więcej polubień (w tym "Kciuk do góry", "Uśmiech", "Miłość" i "wow!") program otrzyma, tym wyżej znajdzie się na liście.'
 programs:
   featured: Polecane

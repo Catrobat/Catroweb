@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'هتي ڪهڙن پروگرامن جي صلاح ڏني وڃي ٿي؟'
-      description_B_VersionTest: 'گهڻي کان گهڻو توهان جو پروگرام ريمڪس ٿيندو، اوترو ئي وڌيڪ لسٽ تي مٿي نظر ايندو.'
       description_C_VersionTest: 'وڌيڪ لائڪس (بشمول ”تمس اپ“، ”کل“، ”پيار”، ۽ ”ووئو!“) توهان جو پروگرام حاصل ڪندو، اهو لسٽ ۾ مٿي ظاهر ٿيندو.'
 programs:
   featured: خاص

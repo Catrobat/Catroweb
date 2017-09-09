@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'Programy, které jsou zde doporučeny?'
-      description_B_VersionTest: 'Čím častěji je váš program zamíchán, tím výše je uveden v tomto seznamu.'
       description_C_VersionTest: 'Více podobných (včetně "Palec nahoru", "Smích", "Láska" a "Páni!") vašich programů obdrží, tím výše je uveden v tomto seznamu.'
 programs:
   featured: Nabízený

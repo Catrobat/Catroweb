@@ -63,52 +63,29 @@ class RecommenderController extends Controller
     {
         $is_test_environment = ($this->get('kernel')->getEnvironment() == 'test');
         $test_user_id_for_like_recommendation = $is_test_environment ? intval($request->query->get('test_user_id_for_like_recommendation', 0)) : 0;
-        $test_user_id_for_remix_recommendation = $is_test_environment ? intval($request->query->get('test_user_id_for_remix_recommendation', 0)) : 0;
         $limit = intval($request->query->get('limit', 20));
         $offset = intval($request->query->get('offset', 0));
 
         $program_manager = $this->get('programmanager');
         $flavor = $request->getSession()->get('flavor');
 
-        $locale = strtolower($request->getLocale());
         $programs_count = 0;
         $programs = [];
         $is_user_specific_recommendation = false;
 
-        if (substr($locale, 0, 2) == 'de' || $test_user_id_for_like_recommendation > 0) {
-            $user = ($test_user_id_for_like_recommendation == 0) ? $this->getUser() : $this->get('usermanager')->find($test_user_id_for_like_recommendation);
-            if ($user != null) {
-                $recommender_manager = $this->get('recommendermanager');
-                $all_programs = $recommender_manager->recommendProgramsOfLikeSimilarUsers($user, $flavor);
-                $programs_count = count($all_programs);
-                $programs = array_slice($all_programs, $offset, $limit);
-            }
+        $user = ($test_user_id_for_like_recommendation == 0) ? $this->getUser() : $this->get('usermanager')->find($test_user_id_for_like_recommendation);
+        if ($user != null) {
+            $recommender_manager = $this->get('recommendermanager');
+            $all_programs = $recommender_manager->recommendProgramsOfLikeSimilarUsers($user, $flavor);
+            $programs_count = count($all_programs);
+            $programs = array_slice($all_programs, $offset, $limit);
+        }
 
-            if (($user == null) || ($programs_count == 0)) {
-                $programs_count = $program_manager->getTotalLikedProgramsCount($flavor);
-                $programs = $program_manager->getMostLikedPrograms($flavor, $limit, $offset);
-            } else {
-                $is_user_specific_recommendation = true;
-            }
-        } else if (substr($locale, 0, 2) == 'fr') {
-            $programs_count = count($program_manager->getTotalPrograms($flavor));
-            $programs = $program_manager->getRandomPrograms($flavor, $limit, $offset);
+        if (($user == null) || ($programs_count == 0)) {
+            $programs_count = $program_manager->getTotalLikedProgramsCount($flavor);
+            $programs = $program_manager->getMostLikedPrograms($flavor, $limit, $offset);
         } else {
-            $user = ($test_user_id_for_remix_recommendation == 0) ? $this->getUser() : $this->get('usermanager')->find($test_user_id_for_remix_recommendation);
-
-            if ($user != null) {
-                $recommender_manager = $this->get('recommendermanager');
-                $all_programs = $recommender_manager->recommendProgramsOfRemixSimilarUsers($user, $flavor);
-                $programs_count = count($all_programs);
-                $programs = array_slice($all_programs, $offset, $limit);
-            }
-
-            if (($user == null) || ($programs_count == 0)) {
-                $programs_count = $program_manager->getTotalRemixedProgramsCount($flavor);
-                $programs = $program_manager->getMostRemixedPrograms($flavor, $limit, $offset);
-            } else {
-                $is_user_specific_recommendation = true;
-            }
+            $is_user_specific_recommendation = true;
         }
 
         return new ProgramListResponse($programs, $programs_count, true, $is_user_specific_recommendation);

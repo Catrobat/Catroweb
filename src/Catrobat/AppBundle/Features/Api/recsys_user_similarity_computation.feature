@@ -1,4 +1,4 @@
-@api @rec
+@api
 Feature: Computes user similarities by analyzing common likes and remixes between users
          (user-based Collaborative Filtering using Jaccard distance as similarity measure)
 
