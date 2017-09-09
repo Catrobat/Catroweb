@@ -143,3 +143,13 @@ services:
                   - "%kernel.root_dir%"
               tags:
                 -  { name: console.command }
+
+      command.recommender.export:
+              class: Catrobat\AppBundle\Commands\CSVUserSimilaritiesCommand
+              arguments:
+                  - "@programremixrepository"
+                  - "@programlikerepository"
+                  - "@doctrine.orm.entity_manager"
+                  - "%kernel.root_dir%"
+              tags:
+                -  { name: console.command }
