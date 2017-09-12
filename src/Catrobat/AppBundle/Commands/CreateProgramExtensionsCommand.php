@@ -69,8 +69,6 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
 
         $this->writeln("Searching for extensions ...");
 
-        $die = false;
-
         foreach ($finder as $element) {
 
             $zip = new \ZipArchive();
