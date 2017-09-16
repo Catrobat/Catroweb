@@ -7,14 +7,14 @@
 
   <meta name="robots" content="noindex,nofollow"/>
   <meta name='viewport' content='width=device-width, user-scalable=no'/>
-  <title>Pocket Code Website {% block title %}{% endblock %}</title>
+  <title>{% block title %}Pocket Code Website{% endblock %}</title>
 
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/catro_bootstrap.css') }}" media="screen"/>
 
-  <script src=" {{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
+  <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
   <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
   <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
 

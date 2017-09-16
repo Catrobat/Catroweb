@@ -50,16 +50,8 @@ class DefaultController extends Controller
       $featured[] = $info;
     }
 
-    $user = $this->getUser();
-    $nolb = false;
-
-    if ($user) {
-      $nolb = $user->getNolbUser();
-    }
-
     return $this->get('templating')->renderResponse('::index.html.twig', [
       'featured' => $featured,
-      'nolb' => $nolb,
     ]);
   }
 
