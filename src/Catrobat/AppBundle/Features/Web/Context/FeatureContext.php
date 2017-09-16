@@ -904,7 +904,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $button = $page->find("css", "#pw-request");
         break;
       case "send":
-        $button = $page->find("css", ".post-button");
+        $button = $page->find("css", "#post-button");
         break;
       case "show-more":
         $button = $page->find("css", "#show-more-button");

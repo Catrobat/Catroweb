@@ -22,6 +22,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     {
         $('#apk-generate').hide();
         $('#apk-pending').show().css("display", "inline-block");
+        $('#replace-me').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">');
         $.get(self.create_url, null, self.onResult);
         self.showPreparingApkPopup();
     };
@@ -48,6 +49,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         else if (data.status == "pending") 
         {
             $('#apk-pending').show().css("display", "inline-block");
+            $('#replace-me').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">');
             console.log('pending');
             setTimeout(self.getApkStatus, 5000);
         }

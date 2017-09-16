@@ -38,7 +38,6 @@
   <div id="program-top" class="h1">
     <div id="program-name">{{ program.name }}</div>
     <div id="program-user">
-      <span class="img-author"></span>
       <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
     <div class="clear"></div>
@@ -165,9 +164,9 @@
           </button>
 
           <button id="apk-pending" class="btn  btn-primary download-button">
-            <table>
+            <table id="pending-table">
               <tr>
-                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
+                <td id="replace-me"><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
                 <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
@@ -281,11 +280,12 @@
           </div>
         {% endif %}
       {% endif %}
-      <br />
-
+      <div class="clear"></div>
       <table id="copy-link">
         <tr>
-          <td id="copy-link-image"></td>
+          <td>
+            <div class="glyphicon glyphicon-link medium-icon"></div>
+          </td>
           <td>
             <span>Link</span>
           </td>
@@ -296,7 +296,6 @@
           </td>
         </tr>
       </table>
-      <p>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
     </div>
 
@@ -726,7 +725,7 @@
           }});
       });
 
-      $(document).on("click", ".post-button", function() {
+      $(document).on("click", "#post-button", function() {
         var msg = $('.msg').val();
         if(msg.length == 0) {
           return;
