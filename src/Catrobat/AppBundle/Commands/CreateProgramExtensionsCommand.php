@@ -113,7 +113,7 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
                         $program->addExtension($extension);
                         $program_with_extensiones = true;
 
-                        if ($extension->getPrefix() == '') {
+                        if ($extension->getPrefix() == 'PHIRO') {
                           $program->setFlavor('phirocode');
                         }
                     }
