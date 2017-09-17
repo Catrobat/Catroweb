@@ -2,7 +2,7 @@ var jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
 var jsLoginSrc = ['web/js/social/*.js'];
 var jsCustomSrc = 'web/js/custom';
 var jsLocalPluginSrc = 'web/js/localPlugins';
-var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode'];
+var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'lunacat'];
 
 var lessconfig = {};
 
@@ -73,7 +73,7 @@ module.exports = function(grunt)
         expand: true,
         cwd: 'vendor/twbs/bootstrap/',
         src: '**',
-        dest: 'web/css/bootstrap_vendor/'
+        dest: 'web/bootstrap_vendor/'
       }
     },
     concat: {
