@@ -2,7 +2,7 @@ var jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
 var jsLoginSrc = ['web/js/social/*.js'];
 var jsCustomSrc = 'web/js/custom';
 var jsLocalPluginSrc = 'web/js/localPlugins';
-var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'create@school'];
+var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode'];
 
 var lessconfig = {};
 
