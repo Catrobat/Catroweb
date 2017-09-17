@@ -37,7 +37,7 @@ indexPage:
     info:
       title: '¿Qué programas se recomiendan?'
       description_B_VersionTest: 'Cuantos más remixes se hagan de tu programa, más alto aparecerá en la lista.'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description_C_VersionTest: 'Mientras más Me gusta (incluyendo "Pulgar arriba", "Risa", "Me encanta", y "Wow!") reciba tu programa, más arriba aparece en esta lista.'
 programs:
   featured: Destacados
   newest: Los más nuevos
@@ -51,7 +51,7 @@ programs:
   sample: Programas de ejemplo
   views: '%views% visitas'
   likeThumbsUpDetailText: 'A {0}0 personas les ha gustado esto | A {1}1 persona le ha gustado esto |A ]1,Inf]%persons% personas les ha gustado esto'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
+  likeSmileDetailText: '{0}0 personas sonríen al ver esto |{1}1 persona sonríe al ver esto |]1,Inf]%persons% personas sonríen al ver esto'
   likeLoveDetailText: 'A {0}0 personas les encantó esto |A {1}1 persona le encantó esto |A ]1,Inf]%persons% personas les encantó esto'
   likeWowDetailText: 'A {0}0 personas les asombró esto |A {1}1 persona le asombró esto |A ]1,Inf]%persons% personas les asombró esto'
   remixes: '{0}0 remixes | remix{1}1 |] 1, Inf]%remixes% remixes'
@@ -490,7 +490,7 @@ time:
   months.ago: '{1}hace 1 mes |]1,Inf] hace %count% meses'
   years.ago: '{1}hace 1 año |]1,Inf] hace más de un año'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: Hubo un error mientras se subía tu app.
 language:
   arabic: Árabe
   bulgarian: Búlgaro
@@ -587,8 +587,8 @@ pmd:
 codeview:
   showText: Mostrar código
 footer:
-  usefulLinks: Useful Links
-  legalities: Legalities
-  communityStats: Community Stats
-  downloads: downloads
-  programs: programs
+  usefulLinks: Hipervínculos que te servirán
+  legalities: Aspectos legales
+  communityStats: Estadísticas de la comunidad
+  downloads: descargas
+  programs: programas

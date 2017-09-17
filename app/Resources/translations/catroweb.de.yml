@@ -586,8 +586,10 @@ pmd:
 codeview:
   showText: Code anzeigen
 footer:
-  usefulLinks: Useful Links
-  legalities: Legalities
-  communityStats: Community Stats
-  downloads: downloads
-  programs: programs
+  usefulLinks: Nützliche Links
+  legalities: Gesetzmäßigkeiten
+  communityStats: Community Statistiken
+  downloads: Downloads
+  programs: Programme
+  downloads_count: 624.589
+  programs_count: 36.738

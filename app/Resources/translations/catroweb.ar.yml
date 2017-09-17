@@ -492,7 +492,7 @@ time:
   months.ago: '{1} منذ 1 شهر |]1,Inf] %count% أشهر ماضية'
   years.ago: '{1}منذ 1 عام |]1,Inf] منذ أكثر من عام'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: حدث خطأ أثناء رفع التطبيق الخاص بك.
 language:
   arabic: العربية
   bulgarian: البلغارية
@@ -590,8 +590,8 @@ pmd:
 codeview:
   showText: إظهار الشِفرة البرمجية(الكود)
 footer:
-  usefulLinks: Useful Links
-  legalities: Legalities
-  communityStats: Community Stats
-  downloads: downloads
-  programs: programs
+  usefulLinks: روابط مفيدة
+  legalities: الجوانب القانونية
+  communityStats: إحصائيات المجتمع
+  downloads: التنزيلات
+  programs: البرامج
