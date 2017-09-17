@@ -5,7 +5,7 @@
         <div class="navbar-header">
 
           <a class="navbar-brand" href="{{ path('index') }}">
-            <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
+            {% block logoImage %}{% endblock %}
           </a>
           <h3 id="page-name">Home</h3>
           <div class="right-inline navbar-small">

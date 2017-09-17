@@ -26,9 +26,6 @@
 </head>
 <body>
 
-{% set overrideEventLink %}
-  {% block eventLink %}{% endblock %}
-{% endset %}
 {% set overrideLogoImage %}
   {% block logoImage %}{% endblock %}
 {% endset %}
@@ -36,53 +33,28 @@
 
 <div id="wrapper">
   <div id="header-wrapper">
-  <header>
-    {% block header %}
-      {% embed ':Default:header.html.twig' %}
-        {% block eventLink %} {{ overrideEventLink }}{% endblock %}
-        {% block logoImage %} {{ overrideLogoImage }}{% endblock %}
-      {% endembed %}
-    {% endblock %}
-  </header>
+    <header>
+      {% block header %}
+        {% embed ':Default:header.html.twig' %}
+          {% block logoImage %} {{ overrideLogoImage }}{% endblock %}
+        {% endembed %}
+      {% endblock %}
+    </header>
   </div>
   <article>
 
-      {% block body %}
+    {% block body %}
 
-          <div id="featuredPrograms">
-              <h1>{{ "programs.featured"|trans({}, "catroweb") }}</h1>
-              <div id="feature-slider" class="owl-carousel">
-                  {% for feature in featured %}
-                      <div><a href="{{ feature.url }}"><img src="{{ asset(feature.image) }}" /></a></div>
-                  {% endfor %}
-              </div>
-          </div>
-
-          <div id="submissions">
-              <h1>{{ "programs.submitted"|trans({}, "catroweb") }}</h1>
-              <div class="programs"></div>
-          </div>
-
-          <div id="sample">
-              <h1>{{ "programs.sample"|trans({}, "catroweb") }}</h1>
-              <div class="programs"></div>
-          </div>
-
-          <div id="related">
-              <h1>{{ "programs.related"|trans({}, "catroweb") }}</h1>
-              <div class="programs"></div>
-          </div>
-
-      {% endblock %}
+    {% endblock %}
   </article>
 </div>
 
 <div id="footer-wrapper">
-<footer>
-  {% block footer %}
+  <footer>
+    {% block footer %}
       {% include ':Default:footer.html.twig' %}
-  {% endblock %}
-</footer>
+    {% endblock %}
+  </footer>
 </div>
 
 <script>
@@ -92,8 +64,8 @@
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-42270417-5', 'auto');

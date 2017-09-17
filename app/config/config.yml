@@ -133,7 +133,7 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 liip_theme:
-    themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'pocketphiro']
+    themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'pocketphiro', 'phirocode']
     active_theme: 'pocketcode'
     assetic_integration: true
 

@@ -21,13 +21,6 @@
     <div class="programs"></div>
   </div>
 
-  {% if nolb %}
-    <div id="nolb-example">
-      <h1>{{ "programs.nolb_example"|trans({}, "catroweb") }}</h1>
-      <div class="programs"></div>
-    </div>
-  {% endif %}
-
   {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
     {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
       <div id="recommended">
@@ -81,11 +74,6 @@
     mostDownloaded.init();
     mostViewed.init();
     random.init();
-
-    {% if nolb %}
-      var nolbExample = new ProgramLoader('#nolb-example', '{{ path('api_nolb_examples') }}');
-      nolbExample.init();
-    {% endif %}
 
     function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
         var url = "{{ path('click_stats') }}";
