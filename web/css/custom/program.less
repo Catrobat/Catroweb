@@ -59,11 +59,18 @@ article {
     opacity: 0;
     font-size: 2em;
 
-    span img, span i{
+    span img {
       width: 50%;
       height: 50%;
       font-size: 20px;
       padding-bottom: 8px;
+    }
+
+    span i {
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 2rem;
     }
   }
 
@@ -123,11 +130,16 @@ article {
     opacity: 0;
     font-size: 2em;
 
-    span img, span i{
+    span img{
       width: 60%;
       height: 60%;
       font-size: 28px;
       padding-bottom: 19px;
+    }
+
+    span i {
+      font-size: 18px;
+      top: -12.9px;
     }
   }
 
@@ -140,6 +152,7 @@ article {
   .black();
 
   .backdrop{
+    z-index: 2000;
     position: fixed;
     top: 0;
     left: 0;
