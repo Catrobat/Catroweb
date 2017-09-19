@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'Que programas são recomendados aqui?'
-      description_B_VersionTest: 'Quanto mais vezes o seu programa for remisturado, mais perto do topo surgirá nesta lista.'
       description_C_VersionTest: 'Quanto mais Gostos (incluindo «Polegares para cima», «Riso», «Amor» e «Uau!») o seu programa receber, mais perto do topo surgirá nesta lista.'
 programs:
   featured: Em Destaque
@@ -599,3 +598,5 @@ footer:
   communityStats: Community Stats
   downloads: downloads
   programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'

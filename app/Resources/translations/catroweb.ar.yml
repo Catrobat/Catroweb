@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'ما هي البرامج المُوصى بها هنا؟'
-      description_B_VersionTest: 'أغلب الظن أن برنامجك مُدمج مُعدل, الأعلى سيظهر ضمن هذه القائمة.'
       description_C_VersionTest: 'الإعجابات الأكثر التي يتلقاها برنامجك ( متضمنة " أعجبني", "الضحك","الحب"و "رائع!"), الأعلى منها سيظهر ضمن هذه القائمة.'
 programs:
   featured: خصائص
@@ -595,3 +594,5 @@ footer:
   communityStats: إحصائيات المجتمع
   downloads: التنزيلات
   programs: البرامج
+  downloads_count: '624,589'
+  programs_count: '36,738'

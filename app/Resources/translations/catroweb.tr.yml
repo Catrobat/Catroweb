@@ -58,7 +58,7 @@ programs:
   submitted: Gönderilen programlar
   uploaded: Yüklenen programlar
   reportAsInappropriate: Uygunsuz olarak rapor et
-  languageVersion: 'Catrobat dil sürümü: %dilVersiyonu%'
+  languageVersion: 'Catrobat dil sürümü: %languageVersion%'
   reportLoginText: Please %login% to report this program as inappropriate.
   reportDialogHeader: Bu programı neden uygunsuz buldunuz?
   reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne
@@ -417,7 +417,7 @@ search:
   dotdotdot: Search...
   search: Ara
   results: Sonuçlarda Ara
-  resultcount: Your search returned %count% results
+  resultcount: '%count% sonuç bulundu'
 menu:
   profile: Benim profilim
   logout: Çıkış Yap
@@ -487,10 +487,10 @@ success:
   upload: Proje başarıyla yüklendi!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 dakika önce |{1} 1 dakika önce|]1, INF] %rakam% dakika önce'
-  hours.ago: '{1} 1 saat önce |]1, INF] %rakam% saat önce'
-  days.ago: '{1} 1 gün önce |]1, INF] %rakam% gün önce'
-  months.ago: '{1} 1 ay önce |]1, INF] %rakam% ay önce'
+  minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1, INF] %count% dakika önce'
+  hours.ago: '{1}1 saat önce |]1, INF] %count% saat önce'
+  days.ago: '{1}1 gün önce |]1, INF] %count% gün önce'
+  months.ago: '{1}1 ay önce |]1, INF] %count% ay önce'
   years.ago: '{1} 1 yıl önce |]1, INF] bir yıldan fazla'
 failure:
   upload: There was an error during the upload of your app.
@@ -596,3 +596,5 @@ footer:
   communityStats: Community Stats
   downloads: downloads
   programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'

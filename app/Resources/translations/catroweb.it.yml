@@ -35,8 +35,8 @@ pleaseWait: "Attendere prego..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'Quali programmi sono stati raccomandati?'
+      description_C_VersionTest: 'Più sono i Like (tra cui "Thumbs up", "Ridere", "Love" e "Woow!") ricevuti dal programma, più in alto appare in questo elenco.'
 programs:
   featured: In evidenza
   newest: Programmi più recenti
@@ -593,3 +593,5 @@ footer:
   communityStats: Community Stats
   downloads: downloads
   programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'
