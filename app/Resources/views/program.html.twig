@@ -357,12 +357,12 @@
     {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
       {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
       <div id="icon-remix">
-        <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
-        <span class="icon-text">
         <a id="remix-graph-modal-link" href="#remix-graph-modal">
-          {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+          <img src="{{ asset('images/symbols/remix.png') }}"/>
+          <span class="icon-text">
+            {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+          </span>
         </a>
-      </span>
       </div>
     {% endif %}
   </div>
