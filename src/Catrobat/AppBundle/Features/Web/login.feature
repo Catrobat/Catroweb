@@ -30,7 +30,6 @@
 
   Scenario: Request password should work for an existing user and just once in 24 hours
     Given I am on "/pocketcode/login"
-    Then I should see "Your password or username was incorrect."
     When I click "#pw-request"
     Then I should be on "/pocketcode/resetting/request"
     When I fill in "username" with "abcd"
