@@ -953,7 +953,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->assertElementOnPage('#btn-login');
     $this->iClickTheButton('login');
     $this->assertPageAddress('/pocketcode/login');
-    $this->assertElementOnPage('#header-logo');
     $this->assertElementOnPage('#btn-login_facebook');
     $this->getSession()->executeScript('document.getElementById("facebook_auth_type").type = "text";');
     $this->getSession()->getPage()->findById('facebook_auth_type')->setValue($arg1);
@@ -996,7 +995,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->iClickTheButton('login');
     $this->assertPageAddress('/pocketcode/login');
     $this->getSession()->wait(200);
-    $this->assertElementOnPage('#header-logo');
     $this->assertElementOnPage('#btn-login_google');
     $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
     $this->getSession()->wait(200);

@@ -13,7 +13,6 @@
     Then I should see an "#btn-login" element
     When I click "#btn-login"
     Then I should be on "/pocketcode/login"
-    And I should see an "#header-logo" element
     And I fill in "username" with "Catrobat"
     And I fill in "password" with "123456"
     Then I press "Login"
@@ -31,7 +30,7 @@
 
   Scenario: Request password should work for an existing user and just once in 24 hours
     Given I am on "/pocketcode/login"
-    Then I should see "Forgot password or username?"
+    Then I should see "Your password or username was incorrect."
     When I click "#pw-request"
     Then I should be on "/pocketcode/resetting/request"
     When I fill in "username" with "abcd"
@@ -50,7 +49,6 @@
     Then I should see an "#btn-login" element
     When I click "#btn-login"
     Then I should be on "/pocketcode/login"
-    And I should see an "#header-logo" element
     And I fill in "username" with "Catrobat"
     And I fill in "password" with "123"
     Then I press "Login"
