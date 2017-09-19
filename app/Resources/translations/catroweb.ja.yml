@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'ここはどのようなプログラムが推奨されていますか?'
-      description_B_VersionTest: 'より頻繁にリミックスされたプログラムが、一覧の上位に表示されます。'
       description_C_VersionTest: 'たくさんいいね (「サムズアップ」、「スマイル」、「ラブ」、「ワオ！」を含む) されたプログラムが、この一覧の上位に表示されます。'
 programs:
   featured: おすすめ

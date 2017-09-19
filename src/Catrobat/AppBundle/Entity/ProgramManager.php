@@ -39,6 +39,8 @@ class ProgramManager
 
   protected $program_like_repository;
 
+  protected $max_version;
+
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository,
                               $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher, $max_version = 0)
   {
@@ -104,17 +106,13 @@ class ProgramManager
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
     $this->addTags($program, $extracted_file, $request->getLanguage());
-// after merge
-//    $version = $program->getCatrobatVersionName();
-//    $max_version = $this->max_version;
-//    if (version_compare($version, $max_version, ">"))
-//    {
-//      $program->setPrivate(true);
-//    }
-//    else
-//    {
-//      $program->setPrivate(false);
-//    }
+    $version = $program->getLanguageVersion();
+    $max_version = $this->max_version;
+
+    if (version_compare($version, "0.994", ">"))
+    {
+      $program->setPrivate(true);
+    }
 
     if ($request->getGamejam() != null)
     {

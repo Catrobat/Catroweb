@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description_B_VersionTest: 'Plus votre programme est remixé, plus il apparaît en haut de la liste.'
       description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: A l'affiche

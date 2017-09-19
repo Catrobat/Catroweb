@@ -11,7 +11,6 @@ use Catrobat\AppBundle\Entity\ScratchProgramRemixRelation;
 use Catrobat\AppBundle\Entity\UserLikeSimilarityRelation;
 use Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository;
 use Catrobat\AppBundle\Entity\UserRemixSimilarityRelation;
-use Catrobat\AppBundle\RecommenderSystem\RecommenderManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -319,12 +318,42 @@ class SymfonySupport
 
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
-    $this->getRecommenderManager()->computeUserLikeSimilarities(null);
+    //$this->getRecommenderManager()->computeUserLikeSimilarities(null);
+    $catroweb_dir = $this->kernel->getRootDir() . '/..';
+    $similarity_computation_service = $catroweb_dir . '/bin/recsys-similarity-computation-service.jar';
+    $output_dir = $catroweb_dir;
+    $sqlite_db_path = "$catroweb_dir/sqlite/behattest.sqlite";
+
+    shell_exec("$catroweb_dir/app/console catrobat:recommender:export --env=test");
+    shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_like_similarity_relation $catroweb_dir $output_dir");
+    shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_likes.sql') as file:\\n  for line in file:" .
+        "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
+        "/usr/bin/env python2 > $catroweb_dir/import_likes_output.sql");
+    shell_exec("/usr/bin/env cat $catroweb_dir/import_likes_output.sql | /usr/bin/env sqlite3 $sqlite_db_path");
+    @unlink("$catroweb_dir/data_likes");
+    @unlink("$catroweb_dir/data_remixes");
+    @unlink("$catroweb_dir/import_likes.sql");
+    @unlink("$catroweb_dir/import_likes_output.sql");
   }
 
   public function computeAllRemixSimilaritiesBetweenUsers()
   {
-    $this->getRecommenderManager()->computeUserRemixSimilarities(null);
+    //$this->getRecommenderManager()->computeUserRemixSimilarities(null);
+    $catroweb_dir = $this->kernel->getRootDir() . '/..';
+    $similarity_computation_service = $catroweb_dir . '/bin/recsys-similarity-computation-service.jar';
+    $output_dir = $catroweb_dir;
+    $sqlite_db_path = "$catroweb_dir/sqlite/behattest.sqlite";
+
+    shell_exec("$catroweb_dir/app/console catrobat:recommender:export --env=test");
+    shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_remix_similarity_relation $catroweb_dir $output_dir");
+    shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_remixes.sql') as file:\\n  for line in file:" .
+      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
+      "/usr/bin/env python2 > $catroweb_dir/import_remixes_output.sql");
+    shell_exec("/usr/bin/env cat $catroweb_dir/import_remixes_output.sql | /usr/bin/env sqlite3 $sqlite_db_path");
+    @unlink("$catroweb_dir/data_likes");
+    @unlink("$catroweb_dir/data_remixes");
+    @unlink("$catroweb_dir/import_remixes.sql");
+    @unlink("$catroweb_dir/import_remixes_output.sql");
   }
 
   public function insertUserLikeSimilarity($config = [])
@@ -579,8 +608,7 @@ class SymfonySupport
     }
     if ($properties->header->catrobatLanguageVersion == null || $properties->header->catrobatLanguageVersion == "")
     {
-      // after merge
-      //$properties->header->catrobatLanguageVersion = $this->getSymfonyParameter("catrobat.max_version");
+      $properties->header->catrobatLanguageVersion = $this->getSymfonyParameter("catrobat.max_version");
     }
 
     $properties->asXML($new_program_dir . '/code.xml');

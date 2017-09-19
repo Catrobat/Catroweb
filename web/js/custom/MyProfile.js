@@ -30,11 +30,6 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
     }
   };
 
-  self.toggleVisibility = function(id) {
-    var programName = $('#program-' + id).find('.program-name').text();
-    window.location.href = self.toggle_visibility_url + '/' + id;
-  };
-
   $(document).on("click", ".btn-edit", function() {
 
     $("#finished-button").hide();
@@ -65,6 +60,25 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
 
   $(document).on("click", "#finished-button", function () {
     window.location.href = self.profile_url;
+  });
+
+
+  self.toggleVisibility = function(id) {
+    var programName = $('#program-' + id).find('.program-name').text();
+    $.get(self.toggle_visibility_url + '/' + id, {
+    }, function(data){
+      if(data == "true"){
+        $('#visibility-' + id).toggleClass('img-visibility-hidden');
+        $('#visibility-' + id).toggleClass('img-visibility-visible');
+      }
+      else if (data == "false"){
+        $('#program-cannot-be-toggled').show();
+      }
+    })
+  };
+
+  $(document).on("click", "#close-toggled-popup", function () {
+    $('#program-cannot-be-toggled').hide();
   });
 
   $(document).on("click", "#save-name", function(){

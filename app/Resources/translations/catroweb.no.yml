@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'Hvilke programmer er anbefalt her?'
-      description_B_VersionTest: 'Jo oftere programmet ditt er remikset, jo høyere vises den i denne listen.'
       description_C_VersionTest: 'Jo flere likes (inkludert "Tommel opp", "Latter", "elsker" og "wow!") programmet mottar, jo høyere den vises i denne listen.'
 programs:
   featured: Anbefalt

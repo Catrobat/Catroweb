@@ -10,6 +10,14 @@ Feature: As a visitor I want to see a program page
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready | fb_post_url                                                                          |
       | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             |  true   | true      | https://www.facebook.com/permalink.php?story_fbid=424543024407491&id=403594093169051 |
       | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             |  true   | true      |                                                                                      |
+    And there are reportable programs:
+      | id | name      | owned by | visible | reported |
+      | 4  | Dap       | Gregor   | true    | false    |
+      | 5  | Dapier    | Gregor   | true    | false    |
+      | 6  | Dapiest   | Gregor   | false   | true     |
+    And following programs are featured:
+      | id | program      | url                   | active | priority |
+      | 1  | Dapiest      |                       | yes    | 1        |
 
     Scenario: Viewing program page
       Given I am on "/pocketcode/program/1"
@@ -97,3 +105,9 @@ Feature: As a visitor I want to see a program page
       When I click "#url-download"
       And I wait 5000 milliseconds
       Then the href with id "url-download" should not be void
+
+    Scenario: Clicking on a reported featured program should still show its page
+      Given I am on homepage
+      Then I should see the featured slider
+      When I click on the first featured homepage program
+      Then I should see "Dapiest"

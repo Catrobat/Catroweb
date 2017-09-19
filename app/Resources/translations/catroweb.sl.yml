@@ -36,7 +36,6 @@ indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description_B_VersionTest: 'The more often your program is remixed, the higher it appears in this list.'
       description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Na ogled

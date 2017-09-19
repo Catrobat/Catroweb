@@ -35,9 +35,8 @@ pleaseWait: "Espera..."
 indexPage:
   recommendedSection:
     info:
-      title: '¿Qué programas se recomiendan?'
-      description_B_VersionTest: 'Cuantos más remixes se hagan de tu programa, más alto aparecerá en la lista.'
-      description_C_VersionTest: 'Mientras más Me gusta (incluyendo "Pulgar arriba", "Risa", "Me encanta", y "Wow!") reciba tu programa, más arriba aparece en esta lista.'
+      title: 'What programs are recommended here?'
+      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   featured: Destacados
   newest: Los más nuevos
