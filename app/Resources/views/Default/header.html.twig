@@ -7,7 +7,9 @@
           <a class="navbar-brand" href="{{ path('index') }}">
             <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
           </a>
-          <h3 id="page-name">Home</h3>
+          <a class="navbar-brand" href="{{ path('index') }}">
+            <h3 id="page-name">Home</h3>
+          </a>
           <div class="right-inline navbar-small">
             <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
             <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>

@@ -25,9 +25,7 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
 
   self.deleteProgram = function(id) {
     var programName = $('#program-' + id).find('.program-name').text();
-    if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
-      window.location.href = self.delete_url + '/' + id;
-    }
+    window.location.href = self.delete_url + '/' + id;
   };
 
   $(document).on("click", ".btn-edit", function() {
