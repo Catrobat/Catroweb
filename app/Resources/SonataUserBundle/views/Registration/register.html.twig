@@ -121,14 +121,15 @@
     $(document).ready(function() {
       $('#registration_form').submit(function(){
         register_agree_pressed = true;
-          return agree;
+        return agree;
       })
     });
 
     $('#agreeButton').click(function () {
-      agree = true;
-      if(register_agree_pressed)
+      if(register_agree_pressed) {
+        agree = true;
         $('#registration_form').submit();
+      }
     });
   </script>
 {% endblock js %}
