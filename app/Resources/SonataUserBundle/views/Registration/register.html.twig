@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block header %}
-  {% include ':Default:headerLogo.html.twig' %}
 {% endblock header%}
 
 {% block body %}
@@ -65,9 +64,30 @@
               <div id="Error-Message" style="display:none">
                 <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
               </div>
+
+              <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="Terms and conditions" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">Terms and conditions</h3>
+                    </div>
+
+                    <div class="modal-body">
+                      <p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
+                      <p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" id="agreeButton" data-dismiss="modal">Agree</button>
+                      <button type="button" class="btn btn-default" id="disagreeButton" data-dismiss="modal">Disagree</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="form-group">
                 <div class="col-md-12" style="padding: 0">
-                  <button id="_submit" type="submit" class="btn btn-success"><i class="icon-hand-right"></i>{{ "login.createAccount"|trans({}, "catroweb") }}</button>
+                  <button id="_submit" type="submit" class="btn btn-success " data-toggle="modal" data-target="#termsModal"><i class="icon-hand-right"></i>{{ "login.createAccount"|trans({}, "catroweb") }}</button>
                 </div>
               </div>
               <div class="form-group">
@@ -93,3 +113,22 @@
   {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script>
+    var agree = false;
+    var register_agree_pressed = false;
+    $(document).ready(function() {
+      $('#registration_form').submit(function(){
+        register_agree_pressed = true;
+          return agree;
+      })
+    });
+
+    $('#agreeButton').click(function () {
+      agree = true;
+      if(register_agree_pressed)
+        $('#registration_form').submit();
+    });
+  </script>
+{% endblock js %}

@@ -32,10 +32,10 @@
             Google Login Button is a 2 click button, where image is removed at first click, second click triggers login because of data privacy - see:
             http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons
         -->
-        <a id="btn-login_google" href="#" onclick="triggerGoogleLogin();"><img class="img-socialLogin social-button-effects" src="{{ asset('images/social/btn_google_signin_light_normal_web2x.png') }}" alt="Google Login"></a>
+        <a id="btn-login_google" href="#" data-toggle="modal" data-target="#termsModal" onclick="triggerGoogleLogin();"><img class="img-socialLogin social-button-effects" src="{{ asset('images/social/btn_google_signin_light_normal_web2x.png') }}" alt="Google Login"></a>
     </div>
     <div id ="facebookLoginButton">
-        <a id="btn-login_facebook" href="#" onclick="triggerFacebookLogin();"><img class="img-socialLogin social-button-effects" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
+        <a id="btn-login_facebook" href="#" data-toggle="modal" data-target="#termsModal" onclick="triggerFacebookLogin();"><img class="img-socialLogin social-button-effects" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
     </div>
 
     <div id="status">
