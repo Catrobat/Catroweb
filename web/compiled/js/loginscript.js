@@ -2,9 +2,6 @@
   Generated File by Grunt
   Sourcepath: web/js
 */
-var agree_facebook = false;
-var facebook_login_triggered = false;
-
 $(document).ready(function () {
     $.ajaxSetup({ cache: true });
     $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
@@ -30,24 +27,12 @@ $(document).ready(function () {
     });
     $("#_submit_oauth").attr("disabled", true);
 
-    $('#agreeButton').on('click', function () {
-      if(facebook_login_triggered) {
-        console.log('facebook_agree');
-        agree_facebook = true;
-        triggerFacebookLogin();
-      }
+    $(document).on("click", "#btn-login_facebook", function() {
+      agree_button = "facebook_login";
     });
 });
 
 function triggerFacebookLogin() {
-  facebook_login_triggered = true;
-
-  if(!agree_facebook)
-    return false;
-
-  facebook_login_triggered = false;
-  agree_facebook = false;
-
   FB.login(function(response) {
     if (response.authResponse) {
       console.log('Facebook Login successful');
@@ -214,40 +199,35 @@ function FacebookLogout() {
     }
   }, true);
 }
-;var agree_google = false;
-var google_triggered = false;
-
-$(document).ready(function () {
-    var po = document.createElement('script');
+;$(document).ready(function () {
+/*    var po = document.createElement('script');
     po.type = 'text/javascript';
     po.async = true;
     po.src = 'https://apis.google.com/js/client:plusone.js';
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(po, s);
+    console.log('script added once');
+ */
+
     $('#logout').click(function () {
         GoogleLogout();
     });
 
-  $('#agreeButton').on('click', function () {
-    if(google_triggered) {
-      console.log('google_agree');
-      agree_google = true;
-      triggerGoogleLogin();
+  $(document).on("click", "#btn-login_google", function() {
+    if(!agree) {
+      $('#btn-google-modal-trigger').click();
     }
+    agree_button = "google_login";
   });
 });
 
 function triggerGoogleLogin(){
+  console.log('triggerGoogleLogin');
   var $appid = '';
-  google_triggered = true;
-  if(!agree_google)
-    return false;
 
   var $ajaxGetGoogleAppId = Routing.generate(
     'catrobat_oauth_login_get_google_appid', {flavor: 'pocketcode'}
   );
-  google_triggered = false;
-  agree_google = false;
   $.get($ajaxGetGoogleAppId,
     function (data) {
       console.log(data);
@@ -265,6 +245,7 @@ function triggerGoogleLogin(){
 }
 
 function signinCallback(authResult) {
+  console.log('signinCallback');
   if (authResult['code']) {
     $("#access_token_oauth").val(authResult['code']);
     console.log('auth: ' + authResult['code']);
@@ -278,11 +259,13 @@ function signinCallback(authResult) {
       console.log('error:' + authResult['error']);
     }
   }
+  $('#googleLoginButton').click();
 }
 
 
 
 function getGoogleUserInfo(authResult) {
+  console.log('getGoogleUserInfo');
   gapi.client.load('oauth2', 'v2', function () {
     var request = gapi.client.oauth2.userinfo.get();
     request.execute(getUserInfoCallback);
@@ -303,6 +286,7 @@ function getGoogleUserInfo(authResult) {
 }
 
 function checkGoogleCallbackDataWithServer() {
+  console.log('checkGoogleCallbackDataWithServer');
 
   $id = $("#id_oauth").val();
   $email = $("#email_oauth").val();
@@ -347,12 +331,13 @@ function checkGoogleCallbackDataWithServer() {
 }
 
 function getDesiredUsernameGoogle() {
+  console.log('getDesiredUsernameGoogle');
   $("#fb_google").val('g+');
   openDialog();
 }
 
 function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
-
+  console.log('sendCodeToServer');
   var $state = $('#csrf_token').val();
   var $ajaxUrl = Routing.generate(
     'catrobat_oauth_login_google_code', {flavor: 'pocketcode'}
@@ -375,6 +360,7 @@ function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
 }
 
 function GoogleLogin($email, $username, $id, $locale) {
+  console.log('GoogleLogin');
 
   var $ajaxUrl = Routing.generate(
     'catrobat_oauth_login_google', {flavor: 'pocketcode'}
@@ -404,6 +390,7 @@ function GoogleLogin($email, $username, $id, $locale) {
 }
 
 function GoogleLogout() {
+  console.log('GoogleLogout');
   var $appid = '';
   var $ajaxGetGoogleAppId = Routing.generate(
     'catrobat_oauth_login_get_google_appid', {flavor: 'pocketcode'}

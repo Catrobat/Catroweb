@@ -1,6 +1,3 @@
-var agree_facebook = false;
-var facebook_login_triggered = false;
-
 $(document).ready(function () {
     $.ajaxSetup({ cache: true });
     $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
@@ -26,24 +23,12 @@ $(document).ready(function () {
     });
     $("#_submit_oauth").attr("disabled", true);
 
-    $('#agreeButton').on('click', function () {
-      if(facebook_login_triggered) {
-        console.log('facebook_agree');
-        agree_facebook = true;
-        triggerFacebookLogin();
-      }
+    $(document).on("click", "#btn-login_facebook", function() {
+      agree_button = "facebook_login";
     });
 });
 
 function triggerFacebookLogin() {
-  facebook_login_triggered = true;
-
-  if(!agree_facebook)
-    return false;
-
-  facebook_login_triggered = false;
-  agree_facebook = false;
-
   FB.login(function(response) {
     if (response.authResponse) {
       console.log('Facebook Login successful');
