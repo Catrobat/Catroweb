@@ -47,7 +47,7 @@ function triggerFacebookLogin() {
 
   facebook_login_triggered = false;
   agree_facebook = false;
-  
+
   FB.login(function(response) {
     if (response.authResponse) {
       console.log('Facebook Login successful');
@@ -247,6 +247,7 @@ function triggerGoogleLogin(){
     'catrobat_oauth_login_get_google_appid', {flavor: 'pocketcode'}
   );
   google_triggered = false;
+  agree_google = false;
   $.get($ajaxGetGoogleAppId,
     function (data) {
       console.log(data);
