@@ -1,6 +1,6 @@
 var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_edit_url, password_edit_url,
                          country_edit_url, save_email_url, save_country_url, save_password_url, delete_url,
-                         toggle_visibility_url, deleteProgramString, upload_url) {
+                         toggle_visibility_url, deleteProgramString, upload_url, delete_account_url) {
   var self = this;
   self.profile_url = profile_url;
   self.email_edit_url = email_edit_url;
@@ -18,6 +18,7 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
   self.regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   self.data_changed = false;
   self.deleteProgramString = deleteProgramString;
+  self.delete_account_url = delete_account_url;
 
   self.init = function() {
     self.setAvatarUploadListener();
@@ -77,6 +78,15 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
 
   $(document).on("click", "#close-toggled-popup", function () {
     $('#program-cannot-be-toggled').hide();
+  });
+
+  $(document).on("click", "#delete-account-yes", function(){
+    $.post(self.delete_account_url, null, function(data){
+      switch (parseInt(data.statusCode)) {
+        case 200:
+          alert("success");
+      }
+    });
   });
 
   $(document).on("click", "#save-name", function(){

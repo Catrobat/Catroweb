@@ -332,6 +332,30 @@ class ProfileController extends Controller
         ));
     }
 
+  /**
+   * @Route("/deleteAccount", name="profile_delete_account")
+   * @Method({"POST"})
+   */
+  public function deleteAccountAction(Request $request)
+  {
+    /*
+     * @var $user \Catrobat\AppBundle\Entity\User
+     */
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    // TODO: do stuff
+    $em = $this->getDoctrine()->getManager();
+    $em->remove($user);
+    $em->flush();
+
+    return JsonResponse::create(array(
+      'statusCode' => StatusCode::OK
+    ));
+  }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// private functions
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

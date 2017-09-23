@@ -46,6 +46,12 @@
                 <div class="data" id="password-placeholder">*********</div>
               </div>
             </li>
+
+            <li class="list-group-item">
+              <div id="delete-information">
+                <button id="delete-button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">{{ 'myprofile.deleteAccount'|trans({}, 'catroweb') }}</button>
+              </div>
+            </li>
           </ul>
 
         </div>
@@ -73,6 +79,27 @@
     </div>
   {% endif %}
 
+  <div id="delete-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{ 'myprofile.deleteAccount'|trans({}, 'catroweb') }}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{ 'myprofile.deleteAccountText'|trans({}, 'catroweb') }}</p>
+        </div>
+        <div class="modal-footer">
+          <button id="delete-account-yes" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button class="btn btn-info" data-dismiss="modal">No</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block js %}
@@ -80,6 +107,7 @@
   <script>
     var profile = new MyProfile('{{ path('profile') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
         '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}', '{{ path('profile_delete_program') }}',
-        '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
+        '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}',
+        '{{ path('profile_delete_account') }}');
   </script>
 {% endblock %}
