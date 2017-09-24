@@ -346,13 +346,23 @@ class ProfileController extends Controller
       return $this->redirectToRoute('fos_user_security_login');
     }
 
-    // TODO: do stuff
     $em = $this->getDoctrine()->getManager();
+
+    $user_id = $user->getId();
+    $user_comments = $this->getDoctrine()
+      ->getRepository('AppBundle:UserComment')
+      ->findBy(array('userId' => $user_id), array('id' => 'DESC'));
+
+    foreach ($user_comments as $comment) {
+      $em->remove($comment);
+    }
+
     $em->remove($user);
     $em->flush();
 
     return JsonResponse::create(array(
-      'statusCode' => StatusCode::OK
+      'statusCode' => StatusCode::OK,
+      'count' => count($user_comments)
     ));
   }
 
