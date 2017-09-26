@@ -17,6 +17,7 @@
   {% block fos_user_content %}
 
     <div class="container-fluid">
+      <a href="{{ path('index') }}">
         <div class="row">
           <div class="col-sm-12">
               <img class="center-block img-responsive" id="logo"  src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
@@ -25,11 +26,16 @@
         <div class="row">
           <div class="col-sm-12" align="center">
             <p>
-              <span style="color:#17A6B7; font-size:40px; font-weight: 800;">POCKET</span>
+              {% if theme() == 'lunacat' %}
+                <span style="color:#8A78A8; font-size:40px; font-weight: 800;">POCKET</span>
+              {% else %}
+                <span style="color:#17A6B7; font-size:40px; font-weight: 800;">POCKET</span>
+              {% endif %}
               <span style="color:	#FF7701;font-size:40px; font-weight: 800;">CODE</span>
             </p>
           </div>
         </div>
+      </a>
         <div class="row">
           <div class="col-sm-4 col-sm-offset-4">
             {% if error %}
