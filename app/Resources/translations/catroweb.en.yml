@@ -637,6 +637,7 @@ footer:
   programs_count: '36,738'
 
 privacy-policy:
+  header: Privacy Policy
   version: Version 2.0, 20 September 2017
   text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
