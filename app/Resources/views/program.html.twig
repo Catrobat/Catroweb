@@ -130,7 +130,7 @@
       {% endif %}
 
       <div class="download-container">
-        {% if not isWebview() %}
+{#        {% if not isWebview() %}#}
           <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
             <button id="download" class="btn btn-primary download-button">
               <table>
@@ -177,9 +177,9 @@
               </tr>
             </table>
           </button>
-        {% endif %}
+{#        {% endif %}#}
 
-        {% if isWebview() %}
+{#        {% if isWebview() %}
           <button id="remix-graph-button" class="btn btn-primary download-button">
             <table>
               <tr>
@@ -210,7 +210,7 @@
             </span>
           </div>
           <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
-      {% endif %}
+      {% endif %}#}
       </div>
 
       {% if nolb_status and program.user == app.user.username %}
