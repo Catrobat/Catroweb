@@ -84,7 +84,7 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
     $.post(self.delete_account_url, null, function(data){
       switch (parseInt(data.statusCode)) {
         case 200:
-          window.location.href = '../../';
+          window.location.href = '/';
       }
     });
   });
