@@ -26,6 +26,7 @@
     And I should see "CatrobatNew"
     When I am on "/logout"
     Then I should be logged out
+    And There should be a new user "CatrobatNew"
 
   Scenario: Trying to register with different passwords should fail
     Given I am on homepage

@@ -32,7 +32,6 @@ parameters:
 
 services:
 
-
     apikey_authenticator:
         class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
         arguments: ["@translator"]
@@ -381,3 +380,7 @@ services:
         class: Catrobat\AppBundle\Services\AsyncHttpClient
         arguments:
           - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }
+
+    security.user_checker:
+        class: Catrobat\AppBundle\Security\UserChecker
+        arguments: ['@doctrine.orm.entity_manager']
