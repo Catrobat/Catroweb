@@ -246,7 +246,7 @@
       <br />
 
       <table id="copy-link">
-        <tr>
+        <tr id="copy-link-firstrow">
           <td id="copy-link-image"></td>
           <td>
             <span>Link</span>
@@ -254,7 +254,7 @@
         </tr>
         <tr>
           <td colspan="2">
-              <input name="copy-link" id="url-link" value="{{ url('program', { id : program.id }) }}">
+              <input name="copy-link" type="url" id="url-link" value="{{ url('program', { id : program.id }) }}">
           </td>
         </tr>
       </table>
