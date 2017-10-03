@@ -153,3 +153,9 @@ services:
                   - "%kernel.root_dir%"
               tags:
                 -  { name: console.command }
+
+      catrowebadmin.reflavor.extension:
+              class: Catrobat\AppBundle\Commands\ReflavorExtensionCommand
+              arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
+              tags:
+                -  { name: console.command }
