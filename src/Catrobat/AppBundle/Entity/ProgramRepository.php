@@ -711,6 +711,22 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  public function getProgramsFromNolbUser($limit = 20, $offset = 0)
+  {
+    $qb = $this->createQueryBuilder('e');
+
+    return $qb
+      ->select('e')
+      ->leftJoin('e.user', 'u')
+      //->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+      ->where($qb->expr()->eq('u.nolb_user', $qb->expr()->literal(true)))
+      ->orderBy('e.uploaded_at', 'DESC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+      ->getQuery()
+      ->getResult();
+  }
+
   public function searchTagCount($query)
   {
     $qb = $this->createQueryBuilder('e');

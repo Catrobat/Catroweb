@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class ReflavorExtensionCommand extends ContainerAwareCommand
+class ReflavorNolbCommand extends ContainerAwareCommand
 {
     private $em;
     private $program_repository;
@@ -23,20 +23,21 @@ class ReflavorExtensionCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('catrobat:reflavor:extension')
-            ->setDescription('Reflavor programs with the given extension')
-            ->addArgument('extension', InputArgument::REQUIRED, 'Extension')
+        $this->setName('catrobat:reflavor:nolb')
+            ->setDescription('Reflavor programs from nolb users')
             ->addArgument('flavor', InputArgument::REQUIRED, 'Flavor');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-      $extension = $input->getArgument('extension');
+      /*
+       * @var $program Program
+       */
       $flavor = $input->getArgument('flavor');
 
       $offset = 0;
       $limit = 20;
-      $programs = $this->program_repository->getProgramsByExtensionName($extension, $limit, $offset);
+      $programs = $this->program_repository->getProgramsFromNolbUser($limit, $offset);
       $count = count($programs);
 
       $progress_indicator = new ConsoleProgressIndicator($output);
@@ -51,7 +52,7 @@ class ReflavorExtensionCommand extends ContainerAwareCommand
         $this->em->flush();
 
         $offset = $index * $limit;
-        $programs = $this->program_repository->getProgramsByExtensionName($extension, $limit, $offset);
+        $programs = $this->program_repository->getProgramsFromNolbUser($limit, $offset);
         $count = count($programs);
       }
 

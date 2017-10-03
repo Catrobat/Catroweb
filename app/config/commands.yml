@@ -159,3 +159,9 @@ services:
               arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
               tags:
                 -  { name: console.command }
+
+      catrowebadmin.reflavor.nolb:
+              class: Catrobat\AppBundle\Commands\ReflavorNolbCommand
+              arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
+              tags:
+                -  { name: console.command }
