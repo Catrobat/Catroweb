@@ -108,11 +108,39 @@ class ListProgramsController extends Controller
 
     if ($sortBy == 'downloads')
     {
-      $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
+      $programs_for_flavor = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
+      $count = count($programs_for_flavor);
+      $numbOfTotalProjectsForFlavor = $program_manager->getTotalPrograms($flavor, $max_version);
+
+      if($offset > $numbOfTotalProjectsForFlavor){
+        $newoffset = $offset - $numbOfTotalProjectsForFlavor;
+      }
+      else{
+        $newoffset = 0;
+      }
+      $newlimit = $limit - $count;
+
+      if($flavor != 'pocketcode'){
+       $programs = array_merge($programs_for_flavor, $program_manager->getMostDownloadedPrograms('pocketcode', $newlimit, $newoffset, $max_version));
+      }
     }
     elseif ($sortBy == 'views')
     {
-      $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
+      $programs_for_flavor = $program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
+      $count = count($programs_for_flavor);
+      $numbOfTotalProjectsForFlavor = $program_manager->getTotalPrograms($flavor, $max_version);
+
+      if($offset > $numbOfTotalProjectsForFlavor){
+        $newoffset = $offset - $numbOfTotalProjectsForFlavor;
+      }
+      else{
+        $newoffset = 0;
+      }
+      $newlimit = $limit - $count;
+
+      if($flavor != 'pocketcode'){
+        $programs = array_merge($programs_for_flavor, $program_manager->getMostViewedPrograms('pocketcode', $newlimit, $newoffset, $max_version));
+      }
     }
     elseif ($sortBy == 'user')
     {
@@ -120,11 +148,40 @@ class ListProgramsController extends Controller
     }
     elseif ($sortBy == 'random')
     {
-      $programs = $program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
+      $programs_for_flavor = $program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
+      $count = count($programs_for_flavor);
+      $numbOfTotalProjectsForFlavor = $program_manager->getTotalPrograms($flavor, $max_version);
+
+      if($offset > $numbOfTotalProjectsForFlavor){
+        $newoffset = $offset - $numbOfTotalProjectsForFlavor;
+      }
+      else{
+        $newoffset = 0;
+      }
+      $newlimit = $limit - $count;
+
+      if($flavor != 'pocketcode'){
+        $programs = array_merge($programs_for_flavor, $program_manager->getRandomPrograms('pocketcode', $newlimit, $newoffset, $max_version));
+      }
     }
     else
     {
-      $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
+      $programs_for_flavor = $program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
+      $count = count($programs_for_flavor);
+
+      $numbOfTotalProjectsForFlavor = $program_manager->getTotalPrograms($flavor, $max_version);
+
+      if($offset > $numbOfTotalProjectsForFlavor){
+        $newoffset = $offset - $numbOfTotalProjectsForFlavor;
+      }
+      else{
+        $newoffset = 0;
+      }
+      $newlimit = $limit - $count;
+
+      if($flavor != 'pocketcode'){
+        $programs = array_merge($programs_for_flavor, $program_manager->getRecentPrograms('pocketcode', $newlimit, $newoffset, $max_version));
+      }
     }
 
     if ($sortBy == 'user')
@@ -134,6 +191,9 @@ class ListProgramsController extends Controller
     else
     {
       $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor, $max_version);
+      if($flavor != 'pocketcode') {
+        $numbOfTotalProjects += $program_manager->getTotalPrograms('pocketcode', $max_version);
+      }
     }
 
     return new ProgramListResponse($programs, $numbOfTotalProjects, $details);
