@@ -40,6 +40,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $request->getIp()->willReturn('127.0.0.1');
     $request->getGamejam()->willReturn(null);
     $request->getLanguage()->willReturn('en');
+    $request->getFlavor()->willReturn('pocketcode');
     $file_extractor->extract($file)->willReturn($extracted_file);
     $inserted_program->getId()->willReturn(1);
     $event_dispatcher->dispatch(Argument::any(), Argument::any())->willReturnArgument(1);
