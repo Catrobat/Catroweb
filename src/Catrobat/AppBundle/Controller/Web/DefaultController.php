@@ -31,14 +31,21 @@ class DefaultController extends Controller
     $image_repository = $this->get('featuredimagerepository');
     $repository = $this->get('featuredrepository');
 
-    $featured_items = $repository->getFeaturedItems($request->getSession()->get('flavor'), 5, 0);
+    $flavor = $request->get('flavor');
+
+    if($flavor == 'phirocode') {
+      $featured_items = $repository->getFeaturedItems('pocketcode', 5, 0);
+    }
+    else {
+      $featured_items = $repository->getFeaturedItems($flavor, 5, 0);
+    }
 
     $featured = [];
     foreach ($featured_items as $item) {
       $info = [];
       if ($item->getProgram() !== null) {
-        if ($request->get('flavor')) {
-          $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId(), 'flavor' => $request->get('flavor')]);
+        if ($flavor) {
+          $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId(), 'flavor' => $flavor]);
         } else {
           $info['url'] = $this->generateUrl('catrobat_web_program', ['id' => $item->getProgram()->getId()]);
         }
