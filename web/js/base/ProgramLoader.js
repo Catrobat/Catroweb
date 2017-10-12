@@ -72,7 +72,6 @@ var ProgramLoader = function (container, url, column_max, recommended_by_program
         searchResultsText.find('span').text(0);
         return;
       }
-      console.log(data);
       searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects);
       self.programsFound = data.CatrobatInformation.TotalProjects;
       self.setup(data);

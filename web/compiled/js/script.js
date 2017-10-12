@@ -240,7 +240,6 @@ var Main = function(search_url)
         searchResultsText.find('span').text(0);
         return;
       }
-      console.log(data);
       searchResultsText.find('span').text(data.CatrobatInformation.TotalProjects);
       self.programsFound = data.CatrobatInformation.TotalProjects;
       self.setup(data);

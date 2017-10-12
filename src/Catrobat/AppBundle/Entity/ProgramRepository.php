@@ -637,16 +637,21 @@ class ProgramRepository extends EntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getTotalPrograms($flavor = 'pocketcode', $max_version = 0)
+  public function getTotalPrograms($flavor = null, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
 
     $qb
       ->select('COUNT (e.id)')
       ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
-      ->setParameter('flavor', $flavor);
+      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
+
+    if ($flavor) {
+      $qb
+        ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
+        ->setParameter('flavor', $flavor);
+    }
+
     if ($max_version !== 0)
     {
       $qb

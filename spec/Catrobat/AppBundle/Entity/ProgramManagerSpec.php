@@ -14,7 +14,6 @@ class ProgramManagerSpec extends ObjectBehavior
 {
 
   /**
-   *
    * @param \Catrobat\AppBundle\Services\CatrobatFileExtractor $file_extractor
    * @param \Catrobat\AppBundle\Services\ProgramFileRepository $file_repository
    * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository
