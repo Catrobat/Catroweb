@@ -17,25 +17,31 @@ Feature: Filtering programs with specific flavor
     
     When I get the most viewed programs with "pocketcode/api/projects/mostViewed.json"
     Then I should get following programs:
-    | name        |
-    | Invaders    |
-    | A new world |
+      | name         |
+      | Invaders     |
+      | A new world  |
+      | Simple click |
+      | Soon to be   |
 
   Scenario: Get most downloaded programs of flavor
 
     When I get the most downloaded programs with "pocketcode/api/projects/mostDownloaded.json"
     Then I should get following programs:
-      | name        |
-      | Invaders    |
-      | A new world |
+      | name         |
+      | Invaders     |
+      | A new world  |
+      | Simple click |
+      | Soon to be   |
 
   Scenario: Get recent programs of flavor
 
     When I get the recent programs with "pocketcode/api/projects/recent.json"
     Then I should get following programs:
-      | name        |
-      | Invaders    |
-      | A new world |
+      | name         |
+      | Invaders     |
+      | A new world  |
+      | Simple click |
+      | Soon to be   |
 
   Scenario: Get all programs of a user no matter the flavor
 
