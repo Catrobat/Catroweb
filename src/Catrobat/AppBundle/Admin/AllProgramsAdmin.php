@@ -71,8 +71,8 @@ class AllProgramsAdmin extends Admin
             ->add('views')
             ->add('downloads')
             ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
-            ->add('approved')
-            ->add('visible')
+            ->add('approved', null, array('editable' => true))
+            ->add('visible', null, array('editable' => true))
             ->add('_action', 'actions', array('actions' => array(
                 'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),
                 'edit' => array(),

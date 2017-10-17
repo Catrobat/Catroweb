@@ -20,10 +20,12 @@
   "homepage": "https://github.com/Catrobat/Catroweb-Symfony#readme",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-less": "^1.0.1",
-    "grunt-contrib-watch": "^0.6.1",
-    "jit-grunt": "^0.9.1",
     "grunt-contrib-concat": "~1.0.1",
-    "grunt-contrib-uglify": "~2.0.0"
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.0.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-uglify": "~2.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jit-grunt": "^0.9.1"
   }
 }

@@ -41,7 +41,22 @@ class ProgramExtensionListener
         foreach ($extensions as $extension) {
             if (in_array($extension->getPrefix(), $prefixes )) {
                 $program->addExtension($extension);
+
+              if ($extension->getPrefix() == 'PHIRO') {
+                $program->setFlavor('phirocode');
+              }
             }
+
+          if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0) {
+            $is_cast = $xml->xpath('header/isCastProject');
+
+            if(!empty($is_cast)) {
+              $cast_value = ((array) $is_cast[0]);
+              if(strcmp($cast_value[0], 'true') == 0) {
+                $program->addExtension($extension);
+              }
+            }
+          }
         }
     }
 }

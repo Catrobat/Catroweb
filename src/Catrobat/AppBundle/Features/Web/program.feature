@@ -25,7 +25,6 @@ Feature: As a visitor I want to see a program page
       And I should see "Superman"
       And I should see "my superman description"
       And I should see "Report as inappropriate"
-      And I should see "Catrobat Language version: 0.94"
       And I should see "more than one year ago"
       And I should see "0.00 MB"
       And I should see "5 downloads"
@@ -72,12 +71,7 @@ Feature: As a visitor I want to see a program page
 
     Scenario: I want to download a program from the app with an an old language version
       Given I am browsing with my pocketcode app
-      And I am on "/pocketcode/program/1"
-      Then the link of "download" should open "popup"
-      Then I click the program download button
-      And I see the "update app" popup
-      Then I click on the program popup background
-      And I see not the "update app" popup
+      And I download "/pocketcode/download/1.catrobat"
 
     Scenario: Increasing download counter after apk download
       Given I am on "/pocketcode/program/1"

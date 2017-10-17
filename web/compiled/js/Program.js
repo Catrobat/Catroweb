@@ -24,15 +24,16 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     
     self.createApk = function()
     {
-        $('.btn-apk').hide();
+        $('#apk-generate').hide();
         $('#apk-pending').show().css("display", "inline-block");
+        $('#replace-me').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">');
         $.get(self.create_url, null, self.onResult);
         self.showPreparingApkPopup();
     };
 
     self.onResult = function(data)
     {
-        $('.btn-apk').hide();
+        $('#apk-pending').hide();
         if (data.status == 'ready')
         {
             self.apk_url = data.url;
@@ -52,6 +53,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         else if (data.status == "pending") 
         {
             $('#apk-pending').show().css("display", "inline-block");
+            $('#replace-me').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">');
             console.log('pending');
             setTimeout(self.getApkStatus, 5000);
         }
@@ -118,8 +120,8 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         var popup_background = self.createPopupBackgroundDiv();
         var popup_div = self.createPopupDiv();
 
-        popup_div.append("<h2>" + self.apk_preparing + " <span class='blink-one'>.</span> <span class='blink-two'>.</span> <span class='blink-three'>.</span> </h2><br>");
-        popup_div.append('<img class="pending-icon" src="' + waiting_gif + '">');
+        popup_div.append("<h2>" + self.apk_preparing + "</h2><br>");
+        popup_div.append('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">');
         popup_div.append("<p>" + self.apk_text + "</p>");
 
         var close_popup_button = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btn_close_popup + '</button>';

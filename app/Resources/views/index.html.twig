@@ -21,32 +21,16 @@
     <div class="programs"></div>
   </div>
 
-  {% if nolb %}
-    <div id="nolb-example">
-      <h1>{{ "programs.nolb_example"|trans({}, "catroweb") }}</h1>
-      <div class="programs"></div>
-    </div>
-  {% endif %}
-
-  {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-    {# NOTE: A/B testing -> this section is NOT shown to Russian users at the moment #}
-      <div id="recommended">
-          <div class="help-headline">
-              <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
-              {% if not ("FR" in app.request.locale) and not ("fr" in app.request.locale) %}
-              <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
-                   data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-                   {% if not ("DE" in app.request.locale) and not ("de" in app.request.locale) %}
-                   data-help-description="{{ "indexPage.recommendedSection.info.description_B_VersionTest"|trans({}, "catroweb") }}"
-                   {% else %}
-                   data-help-description="{{ "indexPage.recommendedSection.info.description_C_VersionTest"|trans({}, "catroweb") }}"
-                   {% endif %}
-                   width="30" height="30" />
-              {% endif %}
+  <div id="recommended">
+      <div class="help-headline">
+          <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
+          <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
+               data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
+               data-help-description="{{ "indexPage.recommendedSection.info.description_C_VersionTest"|trans({}, "catroweb") }}"
+               width="30" height="30" />
       </div>
       <div class="programs"></div>
-    </div>
-  {% endif %}
+  </div>
 
   <div id="mostDownloaded">
       <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
@@ -81,11 +65,6 @@
     mostDownloaded.init();
     mostViewed.init();
     random.init();
-
-    {% if nolb %}
-      var nolbExample = new ProgramLoader('#nolb-example', '{{ path('api_nolb_examples') }}');
-      nolbExample.init();
-    {% endif %}
 
     function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
         var url = "{{ path('click_stats') }}";

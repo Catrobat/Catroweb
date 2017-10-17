@@ -32,7 +32,9 @@ abstract class ParsedObjectsContainer
                         $current_group = new ParsedObjectGroup($object_xml_properties);
                         break;
                     case Constants::GROUP_ITEM_SPRITE_TYPE:
-                        $current_group->addObject(new ParsedObject($object_xml_properties));
+                        if($current_group) {
+                          $current_group->addObject(new ParsedObject($object_xml_properties));
+                        }
                         break;
                     default:
                         $this->addCurrentGroup($current_group);

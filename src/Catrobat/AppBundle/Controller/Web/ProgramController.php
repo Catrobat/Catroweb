@@ -2,13 +2,11 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
-use Buzz\Message\Response;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Entity\UserComment;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
@@ -16,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProgramController extends Controller
@@ -234,7 +233,7 @@ class ProgramController extends Controller
        */
 
       if ($id == 0) {
-          return $this->redirectToRoute('profile');
+        return new Response("false");
       }
 
 
@@ -257,7 +256,7 @@ class ProgramController extends Controller
       $max_version = $this->container->get('kernel')->getContainer()->getParameter("catrobat.max_version");
       if (version_compare($version, $max_version, ">"))
       {
-        return $this->redirectToRoute('profile');
+        return new Response("false");
       }
 
       $program->setPrivate(!$program->getPrivate());
@@ -265,8 +264,7 @@ class ProgramController extends Controller
       $em = $this->getDoctrine()->getManager();
       $em->persist($program);
       $em->flush();
-
-      return $this->redirectToRoute('profile');
+      return new Response("true");
     }
 
     /**

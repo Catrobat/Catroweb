@@ -143,3 +143,25 @@ services:
                   - "%kernel.root_dir%"
               tags:
                 -  { name: console.command }
+
+      command.recommender.export:
+              class: Catrobat\AppBundle\Commands\CSVUserSimilaritiesCommand
+              arguments:
+                  - "@programremixrepository"
+                  - "@programlikerepository"
+                  - "@doctrine.orm.entity_manager"
+                  - "%kernel.root_dir%"
+              tags:
+                -  { name: console.command }
+
+      catrowebadmin.reflavor.extension:
+              class: Catrobat\AppBundle\Commands\ReflavorExtensionCommand
+              arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
+              tags:
+                -  { name: console.command }
+
+      catrowebadmin.reflavor.nolb:
+              class: Catrobat\AppBundle\Commands\ReflavorNolbCommand
+              arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
+              tags:
+                -  { name: console.command }

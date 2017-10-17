@@ -39,6 +39,8 @@ class ProgramManager
 
   protected $program_like_repository;
 
+  protected $max_version;
+
   public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository,
                               $tag_repository, $program_like_repository, EventDispatcherInterface $event_dispatcher, $max_version = 0)
   {
@@ -103,17 +105,14 @@ class ProgramManager
     $program->setUploadLanguage('en');
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
+    $program->setFlavor($request->getFlavor());
     $this->addTags($program, $extracted_file, $request->getLanguage());
     $version = $program->getLanguageVersion();
     $max_version = $this->max_version;
 
-    if (version_compare($version, $max_version, ">"))
+    if (version_compare($version, "0.994", ">"))
     {
       $program->setPrivate(true);
-    }
-    else
-    {
-      $program->setPrivate(false);
     }
 
     if ($request->getGamejam() != null)
@@ -121,6 +120,7 @@ class ProgramManager
       $program->setGamejam($request->getGamejam());
       $program->setGameJamSubmissionDate(new \DateTime());
     }
+
 
     $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));
 

@@ -23,7 +23,7 @@ catroweb_flavored:
     resource: "routing_flavored.yml"
     prefix:   /{flavor}/
     requirements:
-      flavor:  pocketcode|pocketphiro|pocketalice|pocketgalaxy
+      flavor:  pocketcode|pocketphiro|pocketalice|pocketgalaxy|phirocode|lunacat|create@school
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"

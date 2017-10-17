@@ -9,7 +9,6 @@
 
 <div id="user-avatar">
   <img id="user-image" src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"> </img>
-
   <div id="user-information">
     <p><strong>Amount of programs: {{ program_count }}</strong></p>
     <p><strong>Country: {{ country }}</strong></p>

@@ -36,7 +36,7 @@ class ClickStatistic
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
-     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @var Program
      */
     protected $program;
@@ -48,7 +48,7 @@ class ClickStatistic
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
-     * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $recommended_from_program;
 
@@ -114,7 +114,7 @@ class ClickStatistic
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $user;
 

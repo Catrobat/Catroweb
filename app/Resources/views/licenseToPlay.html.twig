@@ -7,7 +7,7 @@
 {% block body %}
   <h1>{{ "licenseToPlay.title"|trans({}, "catroweb") }}</h1>
   <div class="standard-col-text size-large">
-    {{ "licenseToPlay.text1"|trans({}, "catroweb") }}
+    <p>{{ "licenseToPlay.text1"|trans({}, "catroweb") }}</p>
     <p>{{ "licenseToPlay.text2"|trans({}, "catroweb") }}</p>
     <p>
       <b>{{ "licenseToPlay.text3"|trans({}, "catroweb") }}</b>
@@ -16,7 +16,6 @@
         <li>{{ "licenseToPlay.list1.item2"|trans({}, "catroweb") }}</li>
       </ul>
     </p>
-    <br /><br />
     <p>{{ "licenseToPlay.text4"|trans({}, "catroweb") }}</p>
     <p>{{ "licenseToPlay.text5"|trans({}, "catroweb") }}</p>
     <p>{{ "licenseToPlay.text6"|trans({'%link-termsOfUse%': '<a class="standard-article-link" href="' ~ url('termsOfUse') ~ '">' ~ url('termsOfUse') ~ '</a>'}, "catroweb")|raw }}

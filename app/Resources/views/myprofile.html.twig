@@ -30,8 +30,8 @@
 
   {% if not nolb_user and not app.user.limited %}
   <div id="edit-icon">
-    <a href="{{ url('profile_edit', {id : profile.id}) }}">
-      <img src="{{ asset('images/default/edit.png') }}">
+    <a href="{{ url('profile_edit') }}">
+      <span><i class="glyphicon glyphicon-pencil medium-icon"></i></span>
     </a>
   </div>
   {% endif %}
@@ -39,7 +39,7 @@
   {% if nolb_user and 'teacher' in app.user.username %}
   <div id="edit-icon">
     <a href="{{ url('profile_edit') }}">
-      <img src="{{ asset('images/default/edit.png') }}">
+      <span><i class="glyphicon glyphicon-pencil medium-icon"></i></span>
     </a>
   </div>
   {% endif %}
@@ -52,6 +52,12 @@
   {% endif %}
     <h1>{{ "profile.myPrograms"|trans({}, "catroweb") }}</h1>
     <div class="programs"></div>
+  </div>
+
+  <div id="program-cannot-be-toggled">
+    <h3>Can not change visibility</h3>
+    <p>The language version of your program is too high and thus it can not be set to visible.</p>
+    <button id="close-toggled-popup">Ok</button>
   </div>
 
 {% endblock %}

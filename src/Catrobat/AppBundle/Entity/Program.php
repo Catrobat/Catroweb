@@ -293,7 +293,7 @@ class Program
     protected $gamejam_submission_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program_downloads")
+     * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program", cascade={"remove"})
      */
     protected $program_downloads;
 

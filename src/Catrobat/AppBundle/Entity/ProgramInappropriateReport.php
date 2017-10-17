@@ -30,7 +30,7 @@ class ProgramInappropriateReport
      * @var \Catrobat\AppBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $reportingUser;
 
@@ -59,7 +59,7 @@ class ProgramInappropriateReport
      * @var \Catrobat\AppBundle\Entity\Program
      *
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program")
-     * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $program;
 

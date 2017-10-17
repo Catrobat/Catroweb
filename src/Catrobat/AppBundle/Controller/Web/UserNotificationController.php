@@ -43,8 +43,12 @@ class UserNotificationController extends Controller
             $unseen_remixes_grouped[$original_program_id]['remixes'][] = $remix_data;
         }
 
+        $nr = $this->get("catro_notification_repository");
+        $catro_user_notifications = $nr->findByUser($user);
+
         $response = $this->get('templating')->renderResponse('::usernotifications.html.twig', array(
-            'unseenRemixesGrouped' => $unseen_remixes_grouped
+            'unseenRemixesGrouped' => $unseen_remixes_grouped,
+            'catroUserNotifications' => $catro_user_notifications
         ));
 
         $response->headers->set('Cache-Control', 'no-store, must-revalidate, max-age=0');
@@ -63,8 +67,10 @@ class UserNotificationController extends Controller
         if (!$user) {
             return JsonResponse::create(array('statusCode' => StatusCode::LOGIN_ERROR));
         }
+      $nr = $this->get("catro_notification_repository");
+      $catro_user_notifications = $nr->findByUser($user);
         $unseen_remixed_program_data = $this->get('remixmanager')->getUnseenRemixProgramsDataOfUser($user);
-        return new JsonResponse(['count' => count($unseen_remixed_program_data)]);
+        return new JsonResponse(['count' => count($unseen_remixed_program_data) + count($catro_user_notifications)]);
     }
 
     /**
@@ -77,6 +83,10 @@ class UserNotificationController extends Controller
         if (!$user) {
             return JsonResponse::create(array('statusCode' => StatusCode::LOGIN_ERROR));
         }
+      $nr = $this->get("catro_notification_repository");
+      $ns = $this->get("catro_notification_service");
+      $catro_user_notifications = $nr->findByUser($user);
+      $ns->deleteNotifications($catro_user_notifications);
         $this->get('remixmanager')->markAllUnseenRemixRelationsOfUserAsSeen($user);
         return new JsonResponse(['success' => true]);
     }
@@ -114,5 +124,28 @@ class UserNotificationController extends Controller
             'rec_by_page_id' => RecommendedPageId::NOTIFICATION_CENTER_PAGE,
             'rec_by_program_id' => $ancestor_id
         ]);
+    }
+
+  /**
+   * @Route("/user/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
+   *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null})
+   * @Method({"GET"})
+   */
+    public function markCatroNotificationAsRead($notification_id)
+    {
+      $user = $this->getUser();
+      if (!$user) {
+        return JsonResponse::create(['success' => false, "message" => "User not logged in"]);
+      }
+      $ns = $this->get("catro_notification_service");
+      $nr = $this->get("catro_notification_repository");
+      $notification_to_delete = $nr->findOneBy(["id" => $notification_id, "user" => $user]);
+      if ($notification_to_delete === null)
+      {
+        return new JsonResponse(["success" => false, "message" => "Notification not found or doesnt belong to user"]);
+      }
+      $ns->deleteNotifications([$notification_to_delete]);
+      return new JsonResponse(['success' => true]);
+
     }
 }

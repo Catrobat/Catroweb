@@ -20,7 +20,7 @@ var NETWORK_OPTIONS = {
         size: 20,
         color: {
             border: '#CCCCCC',
-            background: '#FFFFFF',
+            background: '#000000',
             highlight: {
                 border: '#FFFF00'//,
                 //background: '#000000'
@@ -28,7 +28,7 @@ var NETWORK_OPTIONS = {
         },
         font: {
             size: 10,
-            color:'#CCCCCC'//,
+            color:'#000000'//,
 //                background: '#FFFFFF'
         },
         shapeProperties: {
@@ -39,10 +39,10 @@ var NETWORK_OPTIONS = {
     edges: {
         labelHighlightBold: false,
         color: {
-            color: '#ffffff',
-            highlight: '#ffffff',
+            color: '#000000',
+            highlight: '#000000',
             //highlight: '#000000',
-            hover: '#ffffff',
+            hover: '#000000',
             opacity: 1.0
         },
         smooth: {

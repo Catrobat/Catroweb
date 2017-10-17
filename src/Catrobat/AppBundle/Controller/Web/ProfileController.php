@@ -332,6 +332,40 @@ class ProfileController extends Controller
         ));
     }
 
+  /**
+   * @Route("/deleteAccount", name="profile_delete_account")
+   * @Method({"POST"})
+   */
+  public function deleteAccountAction(Request $request)
+  {
+    /*
+     * @var $user \Catrobat\AppBundle\Entity\User
+     */
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $em = $this->getDoctrine()->getManager();
+
+    $user_id = $user->getId();
+    $user_comments = $this->getDoctrine()
+      ->getRepository('AppBundle:UserComment')
+      ->findBy(array('userId' => $user_id), array('id' => 'DESC'));
+
+    foreach ($user_comments as $comment) {
+      $em->remove($comment);
+    }
+
+    $em->remove($user);
+    $em->flush();
+
+    return JsonResponse::create(array(
+      'statusCode' => StatusCode::OK,
+      'count' => count($user_comments)
+    ));
+  }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// private functions
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

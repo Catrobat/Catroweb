@@ -5,7 +5,7 @@
     More info at: http://lesselements.com
   ---------------------------------------------------*/
 
-.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
+.gradient(@color: 000, @start: #000, @stop: #000) {
   background: @color;
   background: -webkit-gradient(linear,
                                left bottom,
@@ -22,7 +22,7 @@
                                  @start);
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
 }
-.bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
+.bw-gradient(@color: #000, @start: 0, @stop: 255) {
   background: @color;
   background: -webkit-gradient(linear,
                                left bottom,
@@ -39,7 +39,7 @@
                                  rgb(@start,@start,@start));
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgb(@stop,@stop,@stop),rgb(@start,@start,@start)));
 }
-.bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE) {
+.bordered(@top-color: #000, @right-color: #000, @bottom-color: #000, @left-color: #000) {
   border-top: solid 1px @top-color;
   border-left: solid 1px @left-color;
   border-right: solid 1px @right-color;
@@ -128,7 +128,7 @@
   -ms-user-select: @argument;
   user-select: @argument;
 }
-.columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: #EEE, @columnRuleStyle: solid, @columnRuleWidth: 1px) {
+.columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: #000, @columnRuleStyle: solid, @columnRuleWidth: 1px) {
   -moz-column-width: @colwidth;
   -moz-column-count: @colcount;
   -moz-column-gap: @colgap;

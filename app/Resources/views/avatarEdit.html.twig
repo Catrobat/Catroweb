@@ -15,13 +15,13 @@
     <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
     <img id="avatar-img" width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
     <div id="avatar-upload">
-      <div>
+      <div style="background-color: white">
         <input type="file" name="file">
         <span>{{ 'profile.changePicture'|trans({}, 'catroweb') }}</span>
         <div class="button-show-ajax img-load-ajax"></div>
       </div>
     </div>
-    <button id="avatar-button-done" class="save-button">{{ 'myprofile.done'|trans({}, 'catroweb') }}</button>
+    <button id="avatar-button-done" class="btn btn-success save-button">{{ 'myprofile.done'|trans({}, 'catroweb') }}</button>
   </div>
   {% endif %}
 
