@@ -117,6 +117,18 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
                           $program->setFlavor('phirocode');
                         }
                     }
+
+                    if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0) {
+                      $is_cast = $xml->xpath('header/isCastProject');
+
+                      if(!empty($is_cast)) {
+                        $cast_value = ((array) $is_cast[0]);
+                        if(strcmp($cast_value[0], 'true') == 0) {
+                          $program->addExtension($extension);
+                          $program_with_extensiones = true;
+                        }
+                      }
+                    }
                 }
 
                 if ($program_with_extensiones == true) {
