@@ -15,12 +15,14 @@
     Then I should be on "/pocketcode/login"
     When I follow "Create an account"
     Then I should be on "/pocketcode/register"
-    And I should see an "#header-logo" element
     And I fill in "sonata_user_registration_form_username" with "CatrobatNew"
     And I fill in "sonata_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create an account"
+    Then I should see a "#termsModal" element
+    Then I wait 500 milliseconds
+    Then I click "#agreeButton"
     Then I should be on "/pocketcode/myprofile"
     And I should see "CatrobatNew"
     When I am on "/logout"
@@ -95,6 +97,9 @@
     And I fill in "sonata_user_registration_form_plainPassword_first" with "123456"
     And I fill in "sonata_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create an account"
+    Then I should see a "#termsModal" element
+    Then I wait 500 milliseconds
+    Then I click "#agreeButton"
     Then I should be on "/pocketcode/myprofile"
     When I am on "/logout"
     Then I should be logged out

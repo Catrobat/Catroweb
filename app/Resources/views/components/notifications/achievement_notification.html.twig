@@ -1,0 +1,12 @@
+<div class="catro-notification" id="catro-notification-{{ notification.id }}">
+    <div class="title">
+        {{ notification.title }}
+    </div>
+    <div class="message">
+        {{ notification.message }}
+    </div>
+    <div class="image">
+        {{ notification.image_path }}
+    </div>
+    <button class="catro-notification-read" onclick="markAsRead({{ notification.id }})">Mark as read</button>
+</div>

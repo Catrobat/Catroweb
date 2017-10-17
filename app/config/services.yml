@@ -46,6 +46,10 @@ services:
         class: Catrobat\AppBundle\Services\TemplateService
         arguments:
           - "@templatemanager"
+
+    catro_notification_service:
+        class: Catrobat\AppBundle\Services\CatroNotificationService
+        arguments: ["@doctrine.orm.entity_manager"]
 # =========================== Repository ===========================
 
     programrepository:
@@ -203,6 +207,14 @@ services:
         factory_method: getRepository
         arguments:
             - "AppBundle:NolbExampleProgram"
+
+    catro_notification_repository:
+      class: Catrobat\AppBundle\Entity\CatroNotificationRepository
+      factory_service: doctrine.orm.entity_manager
+      factory_method: getRepository
+      arguments:
+        - "AppBundle:CatroNotification"
+
 
 # =========================== Manager & Stuff ===========================
 
