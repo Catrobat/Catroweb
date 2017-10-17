@@ -87,12 +87,17 @@ class UploadController
       throw new InvalidChecksumException();
     }
 
+    $user = $this->tokenstorage->getToken()->getUser();
+
     $flavor = 'pocketcode';
+    if ($user->getNolbUser()) {
+        $flavor = 'create@school';
+    }
     if ($request->request->has('flavor')) {
       $flavor = $request->request->get('flavor');
     }
 
-    $user = $this->tokenstorage->getToken()->getUser();
+
     $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam, $request->request->get('deviceLanguage'), $flavor);
 
     $program = $this->programmanager->addProgram($add_program_request);
