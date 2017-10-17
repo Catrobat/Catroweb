@@ -1,6 +1,6 @@
 project_identifier: catrobat
 api_key: #ask the crowdin coordinator for key
-base_url: http://api.crowdin.net
+base_url: https://api.crowdin.com
 preserve_hierarchy: true
 
 files:

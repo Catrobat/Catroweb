@@ -64,14 +64,14 @@ input:-webkit-autofill {
 }
 
 html {
-  height: 100%;
+  min-height: 100%;
   font-size: @default-font-size;
 }
 
 body {
   background: @default-background-color;
   font-family: 'Roboto', Arial, sans-serif;
-  height: 100%;
+  min-height: 100%;
 }
 
 img {
@@ -103,21 +103,16 @@ h2, .h2 {
 }
 
 
-#wrapper, footer {
+#wrapper{
   margin: 0 auto;
   width: 100%; /* 1024px; */
-  max-width: 1024px;
-  min-width: 320px;
-}
-
-#wrapper {
-  min-height: 100%;
-  padding-bottom: @footer-height-desktop + @footer-height-bottom + @footer-height-padding; /* footer height */
-
+  min-height: 60%;
+  height: auto;
   article {
     clear: both;
   }
 }
+
 
 .size-small {
   font-size: @default-font-size - 4;
@@ -436,10 +431,6 @@ form {
 
 @media screen and (max-width: @responsive-width-tablet) {
 
-  #wrapper {
-    padding-bottom: @footer-height-bottom + @footer-height-padding; /* TODO: ändern (keine fixgröße->variabel)!!! */
-  }
-
   .footer-expand {
     #wrapper {
       padding-bottom: @footer-height-bottom + @footer-height-mobile + @footer-height-padding;
@@ -456,4 +447,17 @@ form {
 /* mouse grab icon */
 .grabbing { 
     cursor:url(../images/symbols/grabbing.png) 8 8, move;
+}
+
+.catro-notification {
+  margin-bottom: 20px;
+  .title
+  {
+    font-size:2em;
+    border-bottom: 1px solid;
+  }
+  .prize
+  {
+    font-weight:bold;
+  }
 }

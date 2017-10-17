@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
@@ -47,15 +48,15 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
-    private $kernel;
-    private $screenshot_directory;
-    private $client;
-    private $use_real_oauth_javascript_code;
+  private $kernel;
+  private $screenshot_directory;
+  private $client;
+  private $use_real_oauth_javascript_code;
 
-    const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
-    const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
-    const FIXTUREDIR = './testdata/DataFixtures/';
-    const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
+  const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
+  const FIXTUREDIR = './testdata/DataFixtures/';
+  const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -66,12 +67,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function __construct($screenshot_directory)
   {
-      $this->screenshot_directory = preg_replace('/([^\/]+)$/', '$1/', $screenshot_directory);
-      if (!is_dir($this->screenshot_directory)) {
-          throw new \Exception('No screenshot directory specified!');
-      }
-      $this->use_real_oauth_javascript_code = false;
-      $this->setOauthServiceParameter('0');
+    $this->screenshot_directory = preg_replace('/([^\/]+)$/', '$1/', $screenshot_directory);
+    if (!is_dir($this->screenshot_directory))
+    {
+      throw new \Exception('No screenshot directory specified!');
+    }
+    $this->use_real_oauth_javascript_code = false;
+    $this->setOauthServiceParameter('0');
   }
 
   /**
@@ -82,46 +84,50 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function setKernel(KernelInterface $kernel)
   {
-      $this->kernel = $kernel;
+    $this->kernel = $kernel;
   }
 
-    /**
-     * @BeforeScenario @RealOAuth
-     */
-    public function activateRealOAuthService() {
-        $this->setOauthServiceParameter('1');
-        $this->use_real_oauth_javascript_code = true;
-    }
+  /**
+   * @BeforeScenario @RealOAuth
+   */
+  public function activateRealOAuthService()
+  {
+    $this->setOauthServiceParameter('1');
+    $this->use_real_oauth_javascript_code = true;
+  }
 
-    /**1
-     * @AfterScenario @RealOAuth
-     */
-    public function deactivateRealOAuthService() {
-        $this->setOauthServiceParameter('0');
-        $this->use_real_oauth_javascript_code = false;
-    }
+  /**1
+   * @AfterScenario @RealOAuth
+   */
+  public function deactivateRealOAuthService()
+  {
+    $this->setOauthServiceParameter('0');
+    $this->use_real_oauth_javascript_code = false;
+  }
 
-    public static function getAcceptedSnippetType()
+  public static function getAcceptedSnippetType()
+  {
+    return 'regex';
+  }
+
+  private function deleteScreens()
+  {
+    $files = glob($this->screenshot_directory . '*');
+    foreach ($files as $file)
     {
-        return 'regex';
+      if (is_file($file))
+      {
+        unlink($file);
+      }
     }
-
-    private function deleteScreens()
-    {
-        $files = glob($this->screenshot_directory.'*');
-        foreach ($files as $file) {
-            if (is_file($file)) {
-                unlink($file);
-            }
-        }
-    }
+  }
 
   /**
    * @When /^I go to the website root$/
    */
   public function iGoToTheWebsiteRoot()
   {
-      $this->getSession()->visit(self::BASE_URL);
+    $this->getSession()->visit(self::BASE_URL);
   }
 
   /**
@@ -137,7 +143,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function setup()
   {
-      $this->getSession()->resizeWindow(1280, 1000);
+    $this->getSession()->resizeWindow(1240, 1024);
   }
 
   /**
@@ -145,8 +151,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function resetSession()
   {
-      $this->getSession()->getDriver()->reset();
-      $this->getSession()->getDriver()->reset();
+    $this->getSession()->getDriver()->reset();
+    $this->getSession()->getDriver()->reset();
   }
 
   /**
@@ -154,9 +160,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function makeScreenshot(AfterStepScope $scope)
   {
-      if (!$scope->getTestResult()->isPassed()) {
-          $this->saveScreenshot(null, $this->screenshot_directory);
-      }
+    if (!$scope->getTestResult()->isPassed())
+    {
+      $this->saveScreenshot(null, $this->screenshot_directory);
+    }
   }
 
   /**
@@ -164,7 +171,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function resizeWindowMobile()
   {
-      $this->getSession()->resizeWindow(320, 1000);
+    $this->getSession()->resizeWindow(320, 1000);
   }
 
   /**
@@ -172,7 +179,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function resizeWindowTablet()
   {
-      $this->getSession()->resizeWindow(768, 1000);
+    $this->getSession()->resizeWindow(768, 1000);
   }
 
   /**
@@ -180,7 +187,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iWaitMilliseconds($milliseconds)
   {
-      $this->getSession()->wait($milliseconds);
+    $this->getSession()->wait($milliseconds);
   }
 
   /**
@@ -188,8 +195,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeNumberOfElements($arg1, $arg2)
   {
-      $programs = $this->getSession()->getPage()->findAll('css', $arg2);
-      assertEquals($arg1, count($programs));
+    $programs = $this->getSession()->getPage()->findAll('css', $arg2);
+    assertEquals($arg1, count($programs));
   }
 
   /**
@@ -197,14 +204,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeANodeWithNameAndUsername($node_id, $expected_node_name, $expected_username)
   {
-      $result = $this->getSession()->evaluateScript("
+    $result = $this->getSession()->evaluateScript("
             return { nodeName: RemixGraph.getInstance().getNodes().get('" . $node_id . "').name,
                      username: RemixGraph.getInstance().getNodes().get('" . $node_id . "').username };
       ");
-      $actual_node_name = is_array($result['nodeName']) ? implode('', $result['nodeName']) : $result['nodeName'];
-      $actual_username = $result['username'];
-      assertEquals($expected_node_name, $actual_node_name);
-      assertEquals($expected_username, $actual_username);
+    $actual_node_name = is_array($result['nodeName']) ? implode('', $result['nodeName']) : $result['nodeName'];
+    $actual_username = $result['username'];
+    assertEquals($expected_node_name, $actual_node_name);
+    assertEquals($expected_username, $actual_username);
   }
 
   /**
@@ -212,12 +219,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeAnEdgeFromTo($from_id, $to_id)
   {
-      $result = $this->getSession()->evaluateScript("
+    $result = $this->getSession()->evaluateScript("
             return RemixGraph.getInstance().getEdges().get().filter(function (edge) { return edge.from === '" . $from_id . "' && edge.to === '" . $to_id . "'; });
       ");
-      assertCount(1, $result);
-      assertEquals($from_id, $result[0]['from']);
-      assertEquals($to_id, $result[0]['to']);
+    assertCount(1, $result);
+    assertEquals($from_id, $result[0]['from']);
+    assertEquals($to_id, $result[0]['to']);
   }
 
   /**
@@ -225,8 +232,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeTheFeaturedSlider()
   {
-      $this->assertSession()->responseContains('featured');
-      assertTrue($this->getSession()->getPage()->findById('featuredPrograms')->isVisible());
+    $this->assertSession()->responseContains('featured');
+    assertTrue($this->getSession()->getPage()->findById('featuredPrograms')->isVisible());
   }
 
   /**
@@ -234,9 +241,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeePrograms($arg1)
   {
-      $arg1 = trim($arg1);
+    $arg1 = trim($arg1);
 
-      switch ($arg1) {
+    switch ($arg1)
+    {
       case 'some':
         $this->assertSession()->elementExists('css', '.program');
         break;
@@ -271,11 +279,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theSelectedLanguageShouldBe($arg1)
   {
-      switch ($arg1) {
+    switch ($arg1)
+    {
       case 'English':
         $cookie = $this->getSession()->getCookie('hl');
-        if (!empty($cookie)) {
-            $this->assertSession()->cookieEquals('hl', 'en');
+        if (!empty($cookie))
+        {
+          $this->assertSession()->cookieEquals('hl', 'en');
         }
         break;
 
@@ -293,7 +303,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSwitchTheLanguageTo($arg1)
   {
-      switch ($arg1) {
+    switch ($arg1)
+    {
       case 'English':
         $this->getSession()->setCookie('hl', 'en');
         break;
@@ -301,15 +312,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $this->getSession()->setCookie('hl', 'de');
         break;
       case 'Russisch':
-          $this->getSession()->setCookie('hl', 'ru');
-          break;
+        $this->getSession()->setCookie('hl', 'ru');
+        break;
       case 'French':
-          $this->getSession()->setCookie('hl', 'fr');
-          break;
+        $this->getSession()->setCookie('hl', 'fr');
+        break;
       default:
         assertTrue(false);
     }
-      $this->reload();
+    $this->reload();
   }
 
   /**
@@ -317,58 +328,81 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeAHelpImage($arg1, $arg2)
   {
-      $arg1 = trim($arg1);
+    $arg1 = trim($arg1);
 
-      $this->assertSession()->responseContains('help-desktop');
-      $this->assertSession()->responseContains('help-mobile');
+    $this->assertSession()->responseContains('help-desktop');
+    $this->assertSession()->responseContains('help-mobile');
 
-      if ($arg1 == 'big') {
-          assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
-          assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-      } elseif ($arg1 == 'small') {
-          assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
-          assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-      } elseif ($arg1 == '') {
-          assertTrue($this->getSession()->getPage()->find('css', '.help-split-desktop')->isVisible());
-      } else {
-          assertTrue(false);
-      }
+    if ($arg1 == 'big')
+    {
+      assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
+      assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
+    }
+    elseif ($arg1 == 'small')
+    {
+      assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
+      assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
+    }
+    elseif ($arg1 == '')
+    {
+      assertTrue($this->getSession()->getPage()->find('css', '.help-split-desktop')->isVisible());
+    }
+    else
+    {
+      assertTrue(false);
+    }
 
-      $img = null;
-      $path = null;
+    $img = null;
+    $path = null;
 
-      switch ($arg2) {
+    switch ($arg2)
+    {
       case 'Hour of Code':
-        if ($arg1 == 'big') {
-            $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
-            $path = '/images/help/hour_of_code.png';
-        } elseif ($arg1 == 'small') {
-            $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
-            $path = '/images/help/hour_of_code_mobile.png';
-        } else {
-            assertTrue(false);
+        if ($arg1 == 'big')
+        {
+          $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
+          $path = '/images/help/hour_of_code.png';
+        }
+        elseif ($arg1 == 'small')
+        {
+          $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
+          $path = '/images/help/hour_of_code_mobile.png';
+        }
+        else
+        {
+          assertTrue(false);
         }
         break;
       case 'Game Design':
-          if ($arg1 == 'big') {
-              $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
-              $path = '/images/help/alice_tut.png';
-          } elseif ($arg1 == 'small') {
-              $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
-              $path = '/images/help/alice_tut_mobile.png';
-          } else {
-              assertTrue(false);
-          }
-          break;
+        if ($arg1 == 'big')
+        {
+          $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
+          $path = '/images/help/alice_tut.png';
+        }
+        elseif ($arg1 == 'small')
+        {
+          $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
+          $path = '/images/help/alice_tut_mobile.png';
+        }
+        else
+        {
+          assertTrue(false);
+        }
+        break;
       case 'Step By Step':
-        if ($arg1 == 'big') {
-            $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
-            $path = '/images/help/step_by_step.png';
-        } elseif ($arg1 == 'small') {
-            $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
-            $path = '/images/help/step_by_step_mobile.png';
-        } else {
-            assertTrue(false);
+        if ($arg1 == 'big')
+        {
+          $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
+          $path = '/images/help/step_by_step.png';
+        }
+        elseif ($arg1 == 'small')
+        {
+          $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
+          $path = '/images/help/step_by_step_mobile.png';
+        }
+        else
+        {
+          assertTrue(false);
         }
         break;
       case 'Tutorials':
@@ -380,39 +414,52 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $path = '/images/help/starters.png';
         break;
       case 'Education Platform':
-          if ($arg1 == 'big') {
-              $img = $this->getSession()->getPage()->findById('edu-desktop');
-              $path = '/images/help/edu_site.png';
-          } elseif ($arg1 == 'small') {
-              $img = $this->getSession()->getPage()->findById('edu-mobile');
-              $path = '/images/help/edu_site_mobile.png';
-          } else {
-              assertTrue(false);
-          }
-          break;
+        if ($arg1 == 'big')
+        {
+          $img = $this->getSession()->getPage()->findById('edu-desktop');
+          $path = '/images/help/edu_site.png';
+        }
+        elseif ($arg1 == 'small')
+        {
+          $img = $this->getSession()->getPage()->findById('edu-mobile');
+          $path = '/images/help/edu_site_mobile.png';
+        }
+        else
+        {
+          assertTrue(false);
+        }
+        break;
       case 'Discussion':
-        if ($arg1 == 'big') {
-            $img = $this->getSession()->getPage()->findById('discuss-desktop');
-            $path = '/images/help/discuss.png';
-        } elseif ($arg1 == 'small') {
-            $img = $this->getSession()->getPage()->findById('discuss-mobile');
-            $path = '/images/help/discuss_mobile.png';
-        } else {
-            assertTrue(false);
+        if ($arg1 == 'big')
+        {
+          $img = $this->getSession()->getPage()->findById('discuss-desktop');
+          $path = '/images/help/discuss.png';
+        }
+        elseif ($arg1 == 'small')
+        {
+          $img = $this->getSession()->getPage()->findById('discuss-mobile');
+          $path = '/images/help/discuss_mobile.png';
+        }
+        else
+        {
+          assertTrue(false);
         }
         break;
       default:
         assertTrue(false);
         break;
-      }
+    }
 
-      if ($img != null) {
-          assertEquals($img->getTagName(), 'img');
-          assertEquals($img->getAttribute('src'), $path);
-          assertTrue($img->isVisible());
-      } else {
-          assertTrue(false);
-      }
+    if ($img != null)
+    {
+      assertEquals($img->getTagName(), 'img');
+      assertEquals($img->getAttribute('src'), $path);
+      assertTrue($img->isVisible());
+    }
+    else
+    {
+      assertTrue(false);
+    }
   }
 
   /**
@@ -420,27 +467,28 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function thereAreUsers(TableNode $table)
   {
-      /**
+    /**
      * @var $user_manager UserManager
-     * @var $user User
+     * @var $user         User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
-      $users = $table->getHash();
-      $user = null;
-      $count = count($users);
-      for ($i = 0; $i < $count; ++$i ) {
-          $user = $user_manager->createUser();
-          $user->setUsername($users[$i]['name']);
-          $user->setEmail($users[$i]['email']);
-          $user->setAdditionalEmail('');
-          $user->setPlainPassword($users[$i]['password']);
-          $user->setEnabled(true);
-          $user->setUploadToken($users[$i]['token']);
-          $user->setCountry('at');
-          $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
-          $user_manager->updateUser($user, false);
-      }
-      $user_manager->updateUser($user, true);
+    $users = $table->getHash();
+    $user = null;
+    $count = count($users);
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $user_manager->createUser();
+      $user->setUsername($users[$i]['name']);
+      $user->setEmail($users[$i]['email']);
+      $user->setAdditionalEmail('');
+      $user->setPlainPassword($users[$i]['password']);
+      $user->setEnabled(true);
+      $user->setUploadToken($users[$i]['token']);
+      $user->setCountry('at');
+      $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
+      $user_manager->updateUser($user, false);
+    }
+    $user_manager->updateUser($user, true);
   }
 
   /**
@@ -450,13 +498,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var $user_manager UserManager
-     * @var $user User
+     * @var $user         User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
     $user = null;
     $count = count($users);
-    for ($i = 0; $i < $count; ++$i ) {
+    for ($i = 0; $i < $count; ++$i)
+    {
       $user = $user_manager->createUser();
       $user->setUsername($users[$i]['name']);
       $user->setEmail($users[$i]['email']);
@@ -471,75 +520,128 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $user_manager->updateUser($user, true);
   }
 
+  /**
+   * @Given /^there are catro notifications:$/
+   */
+  public function thereAreCatroNotifications(TableNode $table)
+  {
+    /** @var EntityManager $em */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $notifications = $table->getHash();
+
+    foreach ($notifications as $notification)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
+        'username' => $notification['user'],
+      ]);
+      if ($user == null)
+      {
+        assert(false, "user is null");
+      }
+      switch ($notification['type'])
+      {
+        case "default":
+          $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
+          $em->persist($to_create);
+          break;
+        default:
+          $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
+          $em->persist($to_create);
+          break;
+      }
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Then /^I click on the first "([^"]*)" button$/
+   */
+  public function iClickOnTheFirstButton($arg1)
+  {
+    $this->assertSession()->elementExists('css', $arg1);
+
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+    $this->getSession()->wait(500);
+  }
 
   /**
    * @Given /^there are programs:$/
    */
   public function thereArePrograms(TableNode $table)
   {
-      /*
-     * @var $program \Catrobat\AppBundle\Entity\Program
-     */
+    /*
+   * @var $program \Catrobat\AppBundle\Entity\Program
+   */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-      $programs = $table->getHash();
-      $count = count($programs);
-      for ($i = 0; $i < $count; ++$i ) {
-          $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+    $programs = $table->getHash();
+    $count = count($programs);
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
         'username' => $programs[$i]['owned by'],
-      ));
-          $program = new Program();
-          $program->setUser($user);
-          $program->setName($programs[$i]['name']);
-          $program->setDescription($programs[$i]['description']);
-          $program->setViews($programs[$i]['views']);
-          $program->setDownloads($programs[$i]['downloads']);
-          $program->setApkDownloads($programs[$i]['apk_downloads']);
-          $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
-          $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
-          $program->setRemixMigratedAt(null);
-          $program->setCatrobatVersion(1);
-          $program->setCatrobatVersionName($programs[$i]['version']);
-          $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
-          $program->setUploadIp('127.0.0.1');
-          $program->setFilesize(0);
-          $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
-          $program->setUploadLanguage('en');
-          $program->setApproved(false);
-          $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
-          $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
+      ]);
+      $program = new Program();
+      $program->setUser($user);
+      $program->setName($programs[$i]['name']);
+      $program->setDescription($programs[$i]['description']);
+      $program->setViews($programs[$i]['views']);
+      $program->setDownloads($programs[$i]['downloads']);
+      $program->setApkDownloads($programs[$i]['apk_downloads']);
+      $program->setApkStatus(isset($programs[$i]['apk_ready']) ? ($programs[$i]['apk_ready'] === 'true' ? Program::APK_READY : Program::APK_NONE) : Program::APK_NONE);
+      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setRemixMigratedAt(null);
+      $program->setCatrobatVersion(1);
+      $program->setCatrobatVersionName($programs[$i]['version']);
+      $program->setLanguageVersion(isset($programs[$i]['language version']) ? $programs[$i]['language version'] : 1);
+      $program->setUploadIp('127.0.0.1');
+      $program->setFilesize(0);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
+      $program->setUploadLanguage('en');
+      $program->setApproved(false);
+      $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
+      $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
 
-          if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
-              $tag_repo = $em->getRepository('AppBundle:Tag');
-              $tags = explode(',', $programs[$i]['tags_id']);
-              foreach ($tags as $tag_id) {
-                  $tag = $tag_repo->find($tag_id);
-                  $program->addTag($tag);
-              }
-          }
-
-          if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
-              $extension_repo = $em->getRepository('AppBundle:Extension');
-              $extensions = explode(',', $programs[$i]['extensions']);
-              foreach ($extensions as $extension_name) {
-                  $extension = $extension_repo->findOneByName($extension_name);
-                  $program->addExtension($extension);
-              }
-          }
-
-          if($program->getApkStatus() == Program::APK_READY) {
-            /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
-            $apkrepository = $this->kernel->getContainer()->get('apkrepository');
-            $temppath = tempnam(sys_get_temp_dir(), 'apktest');
-            copy(self::FIXTUREDIR.'test.catrobat', $temppath);
-            $apkrepository->save(new File($temppath), $i);
-
-            $file_repo = $this->kernel->getContainer()->get('filerepository');
-            $file_repo->saveProgramfile(new File(self::FIXTUREDIR.'test.catrobat'), $i);
-          }
-
-          $em->persist($program);
+      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
+      {
+        $tag_repo = $em->getRepository('AppBundle:Tag');
+        $tags = explode(',', $programs[$i]['tags_id']);
+        foreach ($tags as $tag_id)
+        {
+          $tag = $tag_repo->find($tag_id);
+          $program->addTag($tag);
+        }
       }
-      $em->flush();
+
+      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null)
+      {
+        $extension_repo = $em->getRepository('AppBundle:Extension');
+        $extensions = explode(',', $programs[$i]['extensions']);
+        foreach ($extensions as $extension_name)
+        {
+          $extension = $extension_repo->findOneByName($extension_name);
+          $program->addExtension($extension);
+        }
+      }
+
+      if ($program->getApkStatus() == Program::APK_READY)
+      {
+        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+        $apkrepository = $this->kernel->getContainer()->get('apkrepository');
+        $temppath = tempnam(sys_get_temp_dir(), 'apktest');
+        copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
+        $apkrepository->save(new File($temppath), $i);
+
+        $file_repo = $this->kernel->getContainer()->get('filerepository');
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
+      }
+
+      $em->persist($program);
+    }
+    $em->flush();
   }
 
   /**
@@ -550,7 +652,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $examples = $table->getHash();
 
-    foreach($examples as $example) {
+    foreach ($examples as $example)
+    {
       $new_example = new NolbExampleProgram();
 
       $program_id = intval($example['program']);
@@ -578,7 +681,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $comments = $table->getHash();
 
-    foreach($comments as $comment) {
+    foreach ($comments as $comment)
+    {
       $new_comment = new UserComment();
 
       $new_comment->setUploadDate(new \DateTime($comment['upload_date'], new \DateTimeZone('UTC')));
@@ -600,7 +704,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $likes = $table->getHash();
 
-    foreach($likes as $like) {
+    foreach ($likes as $like)
+    {
       $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $like['username']]);
       $program = $this->kernel->getContainer()->get('programrepository')->find($like['program_id']);
 
@@ -612,55 +717,55 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em->flush();
   }
 
-    /**
-     * @Given /^there are forward remix relations:$/
-     */
-    public function thereAreForwardRemixRelations(TableNode $table)
+  /**
+   * @Given /^there are forward remix relations:$/
+   */
+  public function thereAreForwardRemixRelations(TableNode $table)
+  {
+    /*
+    * @var $em \Doctrine\ORM\EntityManager
+    */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $relations = $table->getHash();
+
+    foreach ($relations as $relation)
     {
-        /*
-        * @var $em \Doctrine\ORM\EntityManager
-        */
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $relations = $table->getHash();
+      $ancestor_program = $em->getRepository('AppBundle:Program')->find($relation['ancestor_id']);
+      $descendant_program = $em->getRepository('AppBundle:Program')->find($relation['descendant_id']);
 
-        foreach($relations as $relation)
-        {
-            $ancestor_program = $em->getRepository('AppBundle:Program')->find($relation['ancestor_id']);
-            $descendant_program = $em->getRepository('AppBundle:Program')->find($relation['descendant_id']);
-
-            $forward_relation = new ProgramRemixRelation($ancestor_program, $descendant_program, intval($relation['depth']));
-            $em->persist($forward_relation);
-        }
-        $em->flush();
+      $forward_relation = new ProgramRemixRelation($ancestor_program, $descendant_program, intval($relation['depth']));
+      $em->persist($forward_relation);
     }
+    $em->flush();
+  }
 
-    /**
-     * @Given /^there are featured programs:$/
-     */
-    public function thereAreFeaturedPrograms(TableNode $table)
+  /**
+   * @Given /^there are featured programs:$/
+   */
+  public function thereAreFeaturedPrograms(TableNode $table)
+  {
+    /*
+    * @var $em \Doctrine\ORM\EntityManager
+    */
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $relations = $table->getHash();
+
+    foreach ($relations as $relation)
     {
-        /*
-        * @var $em \Doctrine\ORM\EntityManager
-        */
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $relations = $table->getHash();
+      $program = $em->getRepository('AppBundle:Program')->find($relation['program_id']);
 
-        foreach($relations as $relation)
-        {
-            $program = $em->getRepository('AppBundle:Program')->find($relation['program_id']);
-
-            $featured_program = new FeaturedProgram();
-            $featured_program->setProgram($program);
-            $featured_program->setImageType($relation['imagetype']);
-            $featured_program->setActive(intval($relation['active']));
-            $featured_program->setFlavor($relation['flavor']);
-            $featured_program->setPriority(intval($relation['priority']));
-            $em->persist($featured_program);
-        }
-        $em->flush();
+      $featured_program = new FeaturedProgram();
+      $featured_program->setProgram($program);
+      $featured_program->setImageType($relation['imagetype']);
+      $featured_program->setActive(intval($relation['active']));
+      $featured_program->setFlavor($relation['flavor']);
+      $featured_program->setPriority(intval($relation['priority']));
+      $em->persist($featured_program);
     }
+    $em->flush();
+  }
 
-    /**
+  /**
    * @Given /^I write "([^"]*)" in textbox$/
    */
   public function iWriteInTextbox($arg1)
@@ -675,18 +780,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function thereAreTags(TableNode $table)
   {
-      $tags = $table->getHash();
-      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $tags = $table->getHash();
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
-      foreach($tags as $tag)
-      {
-          $insert_tag = new Tag();
+    foreach ($tags as $tag)
+    {
+      $insert_tag = new Tag();
 
-          $insert_tag->setEn($tag['en']);
-          $insert_tag->setDe($tag['de']);
+      $insert_tag->setEn($tag['en']);
+      $insert_tag->setDe($tag['de']);
 
-          $em->persist($insert_tag);
-      }
+      $em->persist($insert_tag);
+    }
     $em->flush();
   }
 
@@ -697,9 +802,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $example_program = $em->getRepository('AppBundle:NolbExampleProgram')->find($arg1);
-    $counter = 0;
 
-    switch($arg2)
+    switch ($arg2)
     {
       case "female_counter":
         $counter = $example_program->getDownloadsFromFemale();
@@ -713,39 +817,39 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
 
   /**
-     * @Given /^there are extensions:$/
-     */
-    public function thereAreExtensions(TableNode $table)
+   * @Given /^there are extensions:$/
+   */
+  public function thereAreExtensions(TableNode $table)
+  {
+    $extensions = $table->getHash();
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+    foreach ($extensions as $extension)
     {
-        $extensions = $table->getHash();
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+      $insert_extension = new Extension();
 
-        foreach($extensions as $extension)
-        {
-            $insert_extension = new Extension();
+      $insert_extension->setName($extension['name']);
+      $insert_extension->setPrefix($extension['prefix']);
 
-            $insert_extension->setName($extension['name']);
-            $insert_extension->setPrefix($extension['prefix']);
-
-            $em->persist($insert_extension);
-        }
-      $em->flush();
+      $em->persist($insert_extension);
     }
+    $em->flush();
+  }
 
   /**
    * @When /^I click "([^"]*)"$/
    */
   public function iClick($arg1)
   {
-      $arg1 = trim($arg1);
+    $arg1 = trim($arg1);
 
-      $this->assertSession()->elementExists('css', $arg1);
+    $this->assertSession()->elementExists('css', $arg1);
 
-      $this
-          ->getSession()
-          ->getPage()
-          ->find('css', $arg1)
-          ->click();
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
   }
 
   /**
@@ -753,20 +857,21 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldBeLoggedIn($arg1)
   {
-      if ($arg1 == 'in') {
-          $this->assertPageNotContainsText('Your password or username was incorrect.');
-          $this->getSession()->wait(2000, 'window.location.href.search("login") == -1');
-          $this->assertElementOnPage('#logo');
-          $this->assertElementNotOnPage('#btn-login');
-          $this->assertElementOnPage('#nav-dropdown');
-          $this->getSession()->getPage()->find('css', '.show-nav-dropdown')->click();
-          $this->assertElementOnPage('#nav-dropdown');
-      }
-      if ($arg1 == 'out') {
-          $this->getSession()->wait(2000, 'window.location.href.search("profile") == -1');
-          $this->assertElementOnPage('#btn-login');
-          $this->assertElementNotOnPage('#nav-dropdown');
-      }
+    if ($arg1 == 'in')
+    {
+      $this->assertPageNotContainsText('Your password or username was incorrect.');
+      $this->getSession()->wait(2000, 'window.location.href.search("login") == -1');
+      $this->assertElementOnPage('#logo');
+      $this->assertElementNotOnPage('#btn-login');
+      $this->assertElementOnPage('#btn-logout');
+      $this->getSession()->getPage()->find('css', '.dropdown-toggle')->click();
+    }
+    if ($arg1 == 'out')
+    {
+      $this->getSession()->wait(2000, 'window.location.href.search("profile") == -1');
+      $this->assertElementOnPage('#btn-login');
+      $this->assertElementNotOnPage('#nav-dropdown');
+    }
   }
 
   /**
@@ -774,13 +879,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
-      $this->visitPath('/pocketcode/login');
-      $this->fillField('username', $arg2);
-      $this->fillField('password', $arg3);
-      $this->pressButton('Login');
-      if ($arg1 == 'try to') {
-          $this->assertPageNotContainsText('Your password or username was incorrect.');
-      }
+    $this->visitPath('/pocketcode/login');
+    $this->fillField('username', $arg2);
+    $this->fillField('password', $arg3);
+    $this->pressButton('Login');
+    if ($arg1 == 'try to')
+    {
+      $this->assertPageNotContainsText('Your password or username was incorrect.');
+    }
   }
 
   /**
@@ -788,7 +894,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iWaitForTheServerResponse()
   {
-      $this->getSession()->wait(5000, '(0 === jQuery.active)');
+    $this->getSession()->wait(5000, '(0 === jQuery.active)');
   }
 
   /**
@@ -796,8 +902,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function mustBeSelectedIn($country, $select)
   {
-      $field = $this->getSession()->getPage()->findField($select);
-      assertTrue($country == $field->getValue());
+    $field = $this->getSession()->getPage()->findField($select);
+    assertTrue($country == $field->getValue());
   }
 
   /**
@@ -805,8 +911,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function attachFileToField($field, $path)
   {
-      $field = $this->fixStepArgument($field);
-      $this->getSession()->getPage()->attachFileToField($field, realpath(self::AVATAR_DIR.$path));
+    $field = $this->fixStepArgument($field);
+    $this->getSession()->getPage()->attachFileToField($field, realpath(self::AVATAR_DIR . $path));
   }
 
   /**
@@ -814,25 +920,46 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theAvatarImgTagShouldHaveTheDataUrl($not, $name)
   {
-      $name = trim($name);
-      $not = trim($not);
+    $name = trim($name);
+    $not = trim($not);
 
-      $source = $this->getSession()->getPage()->find('css', '#avatar-img')->getAttribute('src');
-      $source = trim($source, '"');
-      $styleHeader = $this->getSession()->getPage()->find('css', '#menu .img-avatar')->getAttribute('style');
-      $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
-      $sourceHeader = trim($sourceHeader, '"');
+    $pre_source = $this->getSession()->getPage()->find('css', '#avatar-img');
+    $source = 0;
+    if (!is_null($pre_source))
+    {
+      $source = $pre_source->getAttribute('src');
+    }
+    else
+    {
+      assert(false, "Couldn't find avatar in #avatar-img");
+    }
+    $source = trim($source, '"');
+    $pre_style_header = $this->getSession()->getPage()->find('css', '#menu .img-avatar');
+    $styleHeader = 0;
+    if (!is_null($pre_style_header))
+    {
+      $styleHeader = $pre_style_header->getAttribute('style');
+    }
+    else
+    {
+      //assert(false, "Couldn't find avatar in menu");
+    }
+    $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
+    $sourceHeader = trim($sourceHeader, '"');
 
-      switch ($name) {
+    switch ($name)
+    {
       case 'logo.png':
-        $logoUrl = 'data:image/png;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'logo.png'));
-        $isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
+        $logoUrl = 'data:image/png;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'logo.png'));
+        //$isSame = (($source == $logoUrl) && ($sourceHeader == $logoUrl));
+        $isSame = ($source == $logoUrl);
         $not == 'not' ? assertFalse($isSame) : assertTrue($isSame);
         break;
 
       case 'fail.tif':
-        $failUrl = 'data:image/tiff;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'fail.tif'));
-        $isSame = (($source == $failUrl) && ($sourceHeader == $failUrl));
+        $failUrl = 'data:image/tiff;base64,' . base64_encode(file_get_contents(self::AVATAR_DIR . 'fail.tif'));
+        //$isSame = (($source == $failUrl) && ($sourceHeader == $failUrl));
+        $isSame = ($source == $failUrl);
         $not == 'not' ? assertFalse($isSame) : assertTrue($isSame);
         break;
 
@@ -846,9 +973,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theElementShouldBeVisible($element)
   {
-      $element = $this->getSession()->getPage()->find('css', $element);
-      assertNotNull($element);
-      assertTrue($element->isVisible());
+    $element = $this->getSession()->getPage()->find('css', $element);
+    assertNotNull($element);
+    assertTrue($element->isVisible());
   }
 
   /**
@@ -856,9 +983,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theElementShouldNotBeVisible($element)
   {
-      $element = $this->getSession()->getPage()->find('css', $element);
-      assertNotNull($element);
-      assertFalse($element->isVisible());
+    $element = $this->getSession()->getPage()->find('css', $element);
+    assertNotNull($element);
+    assertFalse($element->isVisible());
   }
 
   /**
@@ -866,90 +993,91 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iPressEnterInTheSearchBar()
   {
-      $this->getSession()->evaluateScript("$('#searchbar').trigger($.Event( 'keypress', { which: 13 } ))");
-      $this->getSession()->wait(5000, '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)');
+    $this->getSession()->evaluateScript("$('#searchbar').trigger($.Event( 'keypress', { which: 13 } ))");
+    $this->getSession()->wait(5000, '(typeof window.search != "undefined") && (window.search.searchPageLoadDone == true)');
   }
 
-    /**
-     * @When /^I click the "([^"]*)" button$/
-     */
-    public function iClickTheButton($arg1)
-    {
-        $arg1 = trim($arg1);
-        $page = $this->getSession()->getPage();
-        $button = null;
+  /**
+   * @When /^I click the "([^"]*)" button$/
+   */
+  public function iClickTheButton($arg1)
+  {
+    $arg1 = trim($arg1);
+    $page = $this->getSession()->getPage();
+    $button = null;
 
-        switch($arg1) {
-            case "login":
-                $button = $page->find("css", "#btn-login");
-                break;
-            case "logout":
-                $url = $this->getSession()->getCurrentUrl();
-                if(strpos($url, 'profile') != false) {
-                    $page->find("css", ".show-nav-dropdown")->click();
-                }
-                $button = $page->find("css", "#btn-logout");
-                break;
-            case "profile":
-                $button = $page->find("css", "#btn-profile");
-                break;
-            case "forgot pw or username":
-                $button = $page->find("css", "#pw-request");
-                break;
-            case "send":
-                $button = $page->find("css",".post-button");
-                break;
-            case "show-more":
-                $button = $page->find("css", "#show-more-button");
-                break;
-            case "report-comment":
-                $button = $page->find("css", "#report-button-4");
-                break;
-            case "delete-comment":
-                $button = $page->find("css", "#delete-button-4");
-                break;
-            case "edit":
-              $button = $page->find("css", "#edit-icon a");
-              break;
-            case "password-edit":
-              $button = $page->find("css", "#password-button");
-              break;
-            case "email-edit":
-              $button = $page->find("css", "#email-button");
-              break;
-            case "country-edit":
-              $button = $page->find("css", "#country-button");
-              break;
-            case "name-edit":
-              $button = $page->find("css", "#username-button");
-              break;
-            case "avatar-edit":
-              $button = $page->find("css", "#avatar-button");
-              break;
-            case "save-edit":
-              $button = $page->find("css", ".save-button");
-              break;
-            default:
-                assertTrue(false);
+    switch ($arg1)
+    {
+      case "login":
+        $button = $page->find("css", "#btn-login");
+        break;
+      case "logout":
+        $url = $this->getSession()->getCurrentUrl();
+        if (strpos($url, 'profile') != false)
+        {
+          $page->find("css", ".show-nav-dropdown")->click();
         }
-        $button->click();
-
+        $button = $page->find("css", "#btn-logout");
+        break;
+      case "profile":
+        $button = $page->find("css", "#btn-profile");
+        break;
+      case "forgot pw or username":
+        $button = $page->find("css", "#pw-request");
+        break;
+      case "send":
+        $button = $page->find("css", "#post-button");
+        break;
+      case "show-more":
+        $button = $page->find("css", "#show-more-button");
+        break;
+      case "report-comment":
+        $button = $page->find("css", "#report-button-4");
+        break;
+      case "delete-comment":
+        $button = $page->find("css", "#delete-button-4");
+        break;
+      case "edit":
+        $button = $page->find("css", "#edit-icon a");
+        break;
+      case "password-edit":
+        $button = $page->find("css", "#password-button");
+        break;
+      case "email-edit":
+        $button = $page->find("css", "#email-button");
+        break;
+      case "country-edit":
+        $button = $page->find("css", "#country-button");
+        break;
+      case "name-edit":
+        $button = $page->find("css", "#username-button");
+        break;
+      case "avatar-edit":
+        $button = $page->find("css", "#avatar-button");
+        break;
+      case "save-edit":
+        $button = $page->find("css", ".save-button");
+        break;
+      default:
+        assertTrue(false);
     }
+    $button->click();
 
-    /**
-     * @When /^I trigger Facebook login with auth_type '([^']*)'$/
-     */
-    public function iTriggerFacebookLogin($arg1)
-    {
-      $this->assertElementOnPage('#btn-login');
-      $this->iClickTheButton('login');
-      $this->assertPageAddress('/pocketcode/login');
-      $this->assertElementOnPage('#header-logo');
-      $this->assertElementOnPage('#btn-login_facebook');
-      $this->getSession()->executeScript('document.getElementById("facebook_auth_type").type = "text";');
-      $this->getSession()->getPage()->findById('facebook_auth_type')->setValue($arg1);
+  }
 
-     }
+  /**
+   * @When /^I trigger Facebook login with auth_type '([^']*)'$/
+   */
+  public function iTriggerFacebookLogin($arg1)
+  {
+    $this->assertElementOnPage('#btn-login');
+    $this->iClickTheButton('login');
+    $this->assertPageAddress('/pocketcode/login');
+    $this->assertElementOnPage('#btn-login_facebook');
+    $this->getSession()->executeScript('document.getElementById("facebook_auth_type").type = "text";');
+    $this->getSession()->getPage()->findById('facebook_auth_type')->setValue($arg1);
+
+  }
 
   /**
    * @Then /^I should see marked "([^"]*)"$/
@@ -957,71 +1085,78 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iShouldSeeMarked($arg1)
   {
     $page = $this->getSession()->getPage();
-    $program = $page->find("css",$arg1);
-    if(!$program->hasClass('visited-program')){
+    $program = $page->find("css", $arg1);
+    if (!$program->hasClass('visited-program'))
+    {
       assertTrue(false);
     }
   }
 
 
   /**
-     * @When /^I click Facebook login link$/
-     */
-    public function iClickFacebookLoginLink()
+   * @When /^I click Facebook login link$/
+   */
+  public function iClickFacebookLoginLink()
+  {
+    if ($this->use_real_oauth_javascript_code)
     {
-        if ($this->use_real_oauth_javascript_code) {
-            $this->clickLink('btn-login_facebook');
-        } else {
-            $this->setFacebookFakeData();
-            $this->clickFacebookFakeButton();
-        }
+      $this->clickLink('btn-login_facebook');
     }
-
-    /**
-     * @When /^I trigger Google login with approval prompt "([^"]*)"$/
-     */
-
-    public function iTriggerGoogleLogin($arg1)
+    else
     {
-        $this->assertElementOnPage('#btn-login');
-        $this->iClickTheButton('login');
-        $this->assertPageAddress('/pocketcode/login');
-        $this->getSession()->wait(200);
-        $this->assertElementOnPage('#header-logo');
-        $this->assertElementOnPage('#btn-login_google');
-        $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
-        $this->getSession()->wait(200);
-        $this->getSession()->getPage()->findById('gplus_approval_prompt')->setValue($arg1);
+      $this->setFacebookFakeData();
+      $this->clickFacebookFakeButton();
     }
+  }
 
-    /**
-     * @When /^I click Google login link "([^"]*)"$/
-     */
-    public function iClickGoogleLoginLink($arg1)
+  /**
+   * @When /^I trigger Google login with approval prompt "([^"]*)"$/
+   */
+
+  public function iTriggerGoogleLogin($arg1)
+  {
+    $this->assertElementOnPage('#btn-login');
+    $this->iClickTheButton('login');
+    $this->assertPageAddress('/pocketcode/login');
+    $this->getSession()->wait(200);
+    $this->assertElementOnPage('#btn-login_google');
+    $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
+    $this->getSession()->wait(200);
+    $this->getSession()->getPage()->findById('gplus_approval_prompt')->setValue($arg1);
+  }
+
+  /**
+   * @When /^I click Google login link "([^"]*)"$/
+   */
+  public function iClickGoogleLoginLink($arg1)
+  {
+    if ($this->use_real_oauth_javascript_code)
     {
-        if ($this->use_real_oauth_javascript_code) {
-            $this->clickLink('btn-login_google');
-            if($arg1 == 'twice') {
-                $this->clickLink('btn-login_google');
-            }
-        } else {
-            $this->setGooglePlusFakeData();
-            $this->clickGooglePlusFakeButton();
-        }
+      $this->clickLink('btn-login_google');
+      if ($arg1 == 'twice')
+      {
+        $this->clickLink('btn-login_google');
+      }
     }
+    else
+    {
+      $this->setGooglePlusFakeData();
+      $this->clickGooglePlusFakeButton();
+    }
+  }
 
   /**
    * @Then /^there should be "([^"]*)" programs in the database$/
    */
   public function thereShouldBeProgramsInTheDatabase($arg1)
   {
-      /**
+    /**
      * @var \Catrobat\AppBundle\Entity\ProgramManager
      */
     $program_manager = $this->kernel->getContainer()->get('programmanager');
-      $programs = $program_manager->findAll();
+    $programs = $program_manager->findAll();
 
-      assertEquals($arg1, count($programs));
+    assertEquals($arg1, count($programs));
   }
 
   /**
@@ -1029,48 +1164,49 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function thereAreStarterPrograms(TableNode $table)
   {
-      /*
-     * @var $program \Catrobat\AppBundle\Entity\Program
-     * @var $starter \Catrobat\AppBundle\Entity\StarterCategory
-     */
+    /*
+   * @var $program \Catrobat\AppBundle\Entity\Program
+   * @var $starter \Catrobat\AppBundle\Entity\StarterCategory
+   */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
-      $starter = new StarterCategory();
-      $starter->setName('Games');
-      $starter->setAlias('games');
-      $starter->setOrder(1);
+    $starter = new StarterCategory();
+    $starter->setName('Games');
+    $starter->setAlias('games');
+    $starter->setOrder(1);
 
-      $programs = $table->getHash();
-      $count = count($programs);
-      for ($i = 0; $i < $count; ++$i ) {
-          $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+    $programs = $table->getHash();
+    $count = count($programs);
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
         'username' => $programs[$i]['owned by'],
-      ));
-          $program = new Program();
-          $program->setUser($user);
-          $program->setName($programs[$i]['name']);
-          $program->setDescription($programs[$i]['description']);
-          $program->setViews($programs[$i]['views']);
-          $program->setDownloads($programs[$i]['downloads']);
-          $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
-          $program->setRemixMigratedAt(null);
-          $program->setCatrobatVersion(1);
-          $program->setCatrobatVersionName($programs[$i]['version']);
-          $program->setLanguageVersion(1);
-          $program->setUploadIp('127.0.0.1');
-          $program->setFilesize(0);
-          $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
-          $program->setUploadLanguage('en');
-          $program->setApproved(false);
-          $program->setRemixRoot(true);
-          $program->setRemixMigratedAt(new \DateTime());
-          $em->persist($program);
+      ]);
+      $program = new Program();
+      $program->setUser($user);
+      $program->setName($programs[$i]['name']);
+      $program->setDescription($programs[$i]['description']);
+      $program->setViews($programs[$i]['views']);
+      $program->setDownloads($programs[$i]['downloads']);
+      $program->setUploadedAt(new \DateTime($programs[$i]['upload time'], new \DateTimeZone('UTC')));
+      $program->setRemixMigratedAt(null);
+      $program->setCatrobatVersion(1);
+      $program->setCatrobatVersionName($programs[$i]['version']);
+      $program->setLanguageVersion(1);
+      $program->setUploadIp('127.0.0.1');
+      $program->setFilesize(0);
+      $program->setVisible(isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true);
+      $program->setUploadLanguage('en');
+      $program->setApproved(false);
+      $program->setRemixRoot(true);
+      $program->setRemixMigratedAt(new \DateTime());
+      $em->persist($program);
 
-          $starter->addProgram($program);
-      }
+      $starter->addProgram($program);
+    }
 
-      $em->persist($starter);
-      $em->flush();
+    $em->persist($starter);
+    $em->flush();
   }
 
   /**
@@ -1078,7 +1214,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theCopyLinkShouldBe($url)
   {
-      assertEquals($this->getSession()->getPage()->findField('copy-link')->getValue(), $this->locatePath($url));
+    assertEquals($this->getSession()->getPage()->findField('copy-link')->getValue(), $this->locatePath($url));
   }
 
   /**
@@ -1091,7 +1227,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $packages = $table->getHash();
-    foreach($packages as $package) {
+    foreach ($packages as $package)
+    {
       $new_package = new MediaPackage();
       $new_package->setName($package['name']);
       $new_package->setNameUrl($package['name_url']);
@@ -1110,11 +1247,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $categories = $table->getHash();
-    foreach($categories as $category) {
+    foreach ($categories as $category)
+    {
       $new_category = new MediaPackageCategory();
       $new_category->setName($category['name']);
-      $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(array('name' => $category['package']));
-      $new_category->setPackage(array($package));
+      $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(['name' => $category['package']]);
+      $new_category->setPackage([$package]);
       $em->persist($new_category);
     }
     $em->flush();
@@ -1126,82 +1264,85 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereAreMediapackageFiles(TableNode $table)
   {
     /**
-     * @var $em EntityManager
+     * @var $em        EntityManager
      * @var $file_repo MediaPackageFileRepository
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $file_repo = $this->kernel->getContainer()->get('mediapackagefilerepository');
     $files = $table->getHash();
-    foreach($files as $file) {
+    foreach ($files as $file)
+    {
       $new_file = new MediaPackageFile();
       $new_file->setName($file['name']);
       $new_file->setDownloads(0);
       $new_file->setExtension($file['extension']);
       $new_file->setActive($file['active']);
-      $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(array('name' => $file['category']));
+      $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(['name' => $file['category']]);
       $new_file->setCategory($category);
       $new_file->setAuthor($file['author']);
 
-      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR.$file['id'].'.'.$file['extension']), $file['id'], $file['extension']);
+      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' . $file['extension']), $file['id'], $file['extension']);
 
       $em->persist($new_file);
     }
     $em->flush();
   }
 
+  /**
+   * @Given /^there are program download statistics:$/
+   */
+  public function thereAreProgramDownloadStatistics(TableNode $table)
+  {
     /**
-     * @Given /^there are program download statistics:$/
+     * @var $em EntityManager
      */
-    public function thereAreProgramDownloadStatistics(TableNode $table)
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $program_stats = $table->getHash();
+    $count = count($program_stats);
+    for ($i = 0; $i < $count; ++$i)
     {
-        /**
-         * @var $em EntityManager
-         */
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $program_stats = $table->getHash();
-        $count = count($program_stats);
-        for ($i = 0; $i < $count; ++$i) {
-            $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
-            @$config = array(
-                'downloaded_at' => $program_stats[$i]['downloaded_at'],
-                'ip' => $program_stats[$i]['ip'],
-                'latitude' => $program_stats[$i]['latitude'],
-                'longitude' => $program_stats[$i]['longitude'],
-                'country_code' => $program_stats[$i]['country_code'],
-                'country_name' => $program_stats[$i]['country_name'],
-                'street' => $program_stats[$i]['street'],
-                'postal_code' => @$program_stats[$i]['postal_code'],
-                'locality' => @$program_stats[$i]['locality'],
-                'user_agent' => @$program_stats[$i]['user_agent'],
-                'username' => @$program_stats[$i]['username'],
-                'referrer' => @$program_stats[$i]['referrer'],
-            );
-            $program_statistics = new ProgramDownloads();
-            $program_statistics->setProgram($program);
-            $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
-            $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
-            $program_statistics->setLatitude(isset($config['latitude']) ? $config['latitude'] : 47.2);
-            $program_statistics->setLongitude(isset($config['longitude']) ? $config['longitude'] : 10.7);
-            $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
-            $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
-            $program_statistics->setStreet(isset($config['street']) ? $config['street'] : 'Duck Street 1');
-            $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
-            $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
-            $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
-            $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
+      $program = $this->kernel->getContainer()->get('programmanager')->find($program_stats[$i]['program_id']);
+      @$config = [
+        'downloaded_at' => $program_stats[$i]['downloaded_at'],
+        'ip'            => $program_stats[$i]['ip'],
+        'latitude'      => $program_stats[$i]['latitude'],
+        'longitude'     => $program_stats[$i]['longitude'],
+        'country_code'  => $program_stats[$i]['country_code'],
+        'country_name'  => $program_stats[$i]['country_name'],
+        'street'        => $program_stats[$i]['street'],
+        'postal_code'   => @$program_stats[$i]['postal_code'],
+        'locality'      => @$program_stats[$i]['locality'],
+        'user_agent'    => @$program_stats[$i]['user_agent'],
+        'username'      => @$program_stats[$i]['username'],
+        'referrer'      => @$program_stats[$i]['referrer'],
+      ];
+      $program_statistics = new ProgramDownloads();
+      $program_statistics->setProgram($program);
+      $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
+      $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
+      $program_statistics->setLatitude(isset($config['latitude']) ? $config['latitude'] : 47.2);
+      $program_statistics->setLongitude(isset($config['longitude']) ? $config['longitude'] : 10.7);
+      $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
+      $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
+      $program_statistics->setStreet(isset($config['street']) ? $config['street'] : 'Duck Street 1');
+      $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
+      $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
+      $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
+      $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
 
-            if(isset($config['username'])) {
-                $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $config['username']]);
-                $program_statistics->setUser($user);
-            }
+      if (isset($config['username']))
+      {
+        $user = $this->kernel->getContainer()->get('usermanager')->findOneBy(['username' => $config['username']]);
+        $program_statistics->setUser($user);
+      }
 
-            $em->persist($program_statistics);
+      $em->persist($program_statistics);
 
-            $program->addProgramDownloads($program_statistics);
-            $em->persist($program);
-        }
-        $em->flush();
+      $program->addProgramDownloads($program_statistics);
+      $em->persist($program);
     }
+    $em->flush();
+  }
 
   /**
    * @Given /^there are reportable programs:$/
@@ -1211,10 +1352,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     $count = count($programs);
-    for ($i = 0; $i < $count; ++$i ) {
-      $user = $em->getRepository('AppBundle:User')->findOneBy(array(
+    for ($i = 0; $i < $count; ++$i)
+    {
+      $user = $em->getRepository('AppBundle:User')->findOneBy([
         'username' => $programs[$i]['owned by'],
-      ));
+      ]);
       $program = new Program();
       $program->setUser($user);
       $program->setName($programs[$i]['name']);
@@ -1236,40 +1378,44 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
 
-      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
+      if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
+      {
         $tag_repo = $em->getRepository('AppBundle:Tag');
         $tags = explode(',', $programs[$i]['tags_id']);
-        foreach ($tags as $tag_id) {
+        foreach ($tags as $tag_id)
+        {
           $tag = $tag_repo->find($tag_id);
           $program->addTag($tag);
         }
       }
 
-      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null) {
+      if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null)
+      {
         $extension_repo = $em->getRepository('AppBundle:Extension');
         $extensions = explode(',', $programs[$i]['extensions']);
-        foreach ($extensions as $extension_name) {
+        foreach ($extensions as $extension_name)
+        {
           $extension = $extension_repo->findOneByName($extension_name);
           $program->addExtension($extension);
         }
       }
 
-      if($program->getApkStatus() == Program::APK_READY) {
+      if ($program->getApkStatus() == Program::APK_READY)
+      {
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
         $apkrepository = $this->kernel->getContainer()->get('apkrepository');
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
-        copy(self::FIXTUREDIR.'test.catrobat', $temppath);
+        copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
         $apkrepository->save(new File($temppath), $i);
 
         $file_repo = $this->kernel->getContainer()->get('filerepository');
-        $file_repo->saveProgramfile(new File(self::FIXTUREDIR.'test.catrobat'), $i);
+        $file_repo->saveProgramfile(new File(self::FIXTUREDIR . 'test.catrobat'), $i);
       }
 
       $em->persist($program);
     }
     $em->flush();
   }
-
 
 
   /**
@@ -1286,7 +1432,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iShouldReceiveAFile($extension)
   {
     $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
-    assertEquals('image/'.$extension, $content_type);
+    assertEquals('image/' . $extension, $content_type);
   }
 
   /**
@@ -1295,7 +1441,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function theResponseCodeShouldBe($code)
   {
     $response = $this->getClient()->getResponse();
-    assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
+    assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
   /**
@@ -1303,7 +1449,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id." a")->getAttribute("href");
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id . " a")->getAttribute("href");
     assertTrue(is_int(strpos($link, $file_url)));
   }
 
@@ -1312,7 +1458,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeMediaFileWithId($id)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id);
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id);
     assertNotNull($link);
   }
 
@@ -1321,7 +1467,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldNotSeeMediaFileWithId($id)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-".$id);
+    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id);
     assertNotNull($link);
   }
 
@@ -1330,7 +1476,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theLinkOfShouldOpen($identifier, $url_type)
   {
-    switch ($identifier) {
+    switch ($identifier)
+    {
       case "image":
         $class_name = "image-container";
         break;
@@ -1344,7 +1491,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     assertTrue(strlen($class_name) > 0);
 
-    switch ($url_type) {
+    switch ($url_type)
+    {
       case "download":
         $url_text = "pocketcode/download";
         break;
@@ -1368,7 +1516,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSeeThePopup($arg1)
   {
-    switch($arg1) {
+    switch ($arg1)
+    {
       case "update app":
         $this->assertElementOnPage("#popup-info");
         $this->assertElementOnPage("#popup-background");
@@ -1384,7 +1533,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSeeNotThePopup($arg1)
   {
-    switch($arg1) {
+    switch ($arg1)
+    {
       case "update app":
         $this->assertElementNotOnPage("#popup-info");
         $this->assertElementNotOnPage("#popup-background");
@@ -1436,19 +1586,20 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->getMink()->setDefaultSessionName("mobile");
   }
 
-    /**
-    * @When /^I want to download the apk file of "([^"]*)"$/
-    */
+  /**
+   * @When /^I want to download the apk file of "([^"]*)"$/
+   */
   public function iWantToDownloadTheApkFileOf($arg1)
   {
     $pm = $this->kernel->getContainer()->get('programmanager');
     $program = $pm->findOneByName($arg1);
-    if ($program === null) {
+    if ($program === null)
+    {
       throw new \Exception('Program not found: ' + $arg1);
     }
     $router = $this->kernel->getContainer()->get('router');
-    $url = $router->generate('ci_download', array('id' => $program->getId(), 'flavor' => 'pocketcode'));
-    $this->getClient()->request('GET', $url, array(), array());
+    $url = $router->generate('ci_download', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+    $this->getClient()->request('GET', $url, [], []);
   }
 
   /**
@@ -1478,9 +1629,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeElementWithIdWithSrc($url)
   {
-      $page = $this->getSession()->getPage();
-      $video = $page->find('css', '#youtube-help-video');
-      assertTrue($video->getAttribute('src') == $url);
+    $page = $this->getSession()->getPage();
+    $video = $page->find('css', '#youtube-help-video');
+    assertTrue($video->getAttribute('src') == $url);
   }
 
 
@@ -1492,377 +1643,442 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function getClient()
   {
-    if ($this->client == null) {
+    if ($this->client == null)
+    {
       $this->client = $this->kernel->getContainer()->get('test.client');
     }
 
     return $this->client;
   }
 
-    /**
+  /**
    * @When /^I switch to popup window$/
    */
   public function iSwitchToPopupWindow()
   {
-      $page = $this->getSession()->getPage();
-      $window_names = $this->getSession()->getDriver()->getWindowNames();
-      foreach ($window_names as $name) {
-          echo $name;
-          if($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')
-              || $page->find('css', '#approval_container') || $page->find('css', '#gaia_firstform')) {
-              break;
-          }
-          $this->getSession()->switchToWindow($name);
+    $page = $this->getSession()->getPage();
+    $window_names = $this->getSession()->getDriver()->getWindowNames();
+    foreach ($window_names as $name)
+    {
+      echo $name;
+      if ($page->find('css', '#facebook') || $page->find('css', '.google-header-bar centered')
+        || $page->find('css', '#approval_container') || $page->find('css', '#gaia_firstform')
+      )
+      {
+        break;
       }
+      $this->getSession()->switchToWindow($name);
+    }
   }
 
-    /**
-     * @Then /^I log in to Facebook with valid credentials$/
-     */
-    public function iLogInToFacebookWithEmailAndPassword()
+  /**
+   * @Then /^I log in to Facebook with valid credentials$/
+   */
+  public function iLogInToFacebookWithEmailAndPassword()
+  {
+    if ($this->use_real_oauth_javascript_code)
     {
-        if($this->use_real_oauth_javascript_code) {
-            $mail = $this->getParameterValue('facebook_testuser_mail');
-            $pw = $this->getParameterValue('facebook_testuser_pw');
-            echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-            $page = $this->getSession()->getPage();
-            if($page->find('css', '#facebook') && $page->find('css', '#login_form')) {
-                echo 'facebook login form appeared' . "\n";
-                $page->fillField('email',$mail);
-                $page->fillField('pass',$pw);
-                $button = $page->findById('u_0_2');
-                assertTrue($button != null);
-                $button->press();
-            } else if($page->find('css', '#facebook') && $page->find('css', '#u_0_1')) {
-                echo 'facebook reauthentication login form appeared' . "\n";
-                $page->fillField('pass',$pw);
-                $button = $page->findById('u_0_0');
-                assertTrue($button != null);
-                $button->press();
-            } else {
-                assertTrue(false, 'No Facebook form appeared!' . "\n");
-            }
-            $this->getSession()->switchToWindow(null);
-
-            $this->iSwitchToPopupWindow();
-            if($page->find('css', '#facebook') && $page->find('css', '._1a_q') ) {
-                echo 'facebook authentication login form appeared' . "\n";
-                $button = $page->findButton('__CONFIRM__');
-                assertTrue($button != null);
-                $button->press();
-                $this->getSession()->switchToWindow(null);
-            }
-        } else {
-            //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
-            $this->setFacebookFakeData();
-            $this->clickFacebookFakeButton();
+      $mail = $this->getParameterValue('facebook_testuser_mail');
+      $pw = $this->getParameterValue('facebook_testuser_pw');
+      echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+      $page = $this->getSession()->getPage();
+      if ($page->find('css', '#facebook') && $page->find('css', '#login_form'))
+      {
+        echo 'facebook login form appeared' . "\n";
+        $page->fillField('email', $mail);
+        $page->fillField('pass', $pw);
+        $button = $page->findById('u_0_2');
+        assertTrue($button != null);
+        $button->press();
+      }
+      else
+      {
+        if ($page->find('css', '#facebook') && $page->find('css', '#u_0_1'))
+        {
+          echo 'facebook reauthentication login form appeared' . "\n";
+          $page->fillField('pass', $pw);
+          $button = $page->findById('u_0_0');
+          assertTrue($button != null);
+          $button->press();
         }
-    }
-
-    /**
-     * @Then /^I log in to Google with valid credentials$/
-     */
-    public function iLogInToGoogleWithEmailAndPassword()
-    {
-        if($this->use_real_oauth_javascript_code) {
-            $mail = $this->getParameterValue('google_testuser_mail');
-            $pw = $this->getParameterValue('google_testuser_pw');
-            echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
-            $page = $this->getSession()->getPage();
-            if($page->find('css', '#approval_container') &&
-                $page->find('css', '#submit_approve_access')) {
-                $this->approveGoogleAccess();
-            } else if($page->find('css', '.google-header-bar centered') &&
-                $page->find('css', '.signin-card clearfix')) {
-                $this->signInWithGoogleEMailAndPassword($mail, $pw);
-            } else if($page->find('css', '#gaia_firstform') &&
-                $page->find('css', '#Email') &&
-                $page->find('css', '#Passwd-hidden')
-            ) {
-                $this->signInWithGoogleEMail($mail, $pw);
-            }
-            else {
-                assertTrue(false, 'No Google form appeared!' . "\n");
-            }
-        } else {
-            $this->setGooglePlusFakeData();
-            $this->clickGooglePlusFakeButton();
+        else
+        {
+          assertTrue(false, 'No Facebook form appeared!' . "\n");
         }
+      }
+      $this->getSession()->switchToWindow(null);
 
-    }
-
-    private function approveGoogleAccess(){
-        echo 'Google Approve Access form appeared' . "\n";
-        $page = $this->getSession()->getPage();
-        $button = $page->findById('submit_approve_access');
+      $this->iSwitchToPopupWindow();
+      if ($page->find('css', '#facebook') && $page->find('css', '._1a_q'))
+      {
+        echo 'facebook authentication login form appeared' . "\n";
+        $button = $page->findButton('__CONFIRM__');
         assertTrue($button != null);
         $button->press();
         $this->getSession()->switchToWindow(null);
+      }
     }
+    else
+    {
+      //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
+      $this->setFacebookFakeData();
+      $this->clickFacebookFakeButton();
+    }
+  }
 
-    private function signInWithGoogleEMailAndPassword($mail, $pw){
-        echo 'Google login form with E-Mail and Password appeared' . "\n";
-        $page = $this->getSession()->getPage();
-
-        $page->fillField('Email',$mail);
-        $page->fillField('Passwd',$pw);
-        $button = $page->findById('signIn');
-        assertTrue($button != null);
-        $button->press();
-
+  /**
+   * @Then /^I log in to Google with valid credentials$/
+   */
+  public function iLogInToGoogleWithEmailAndPassword()
+  {
+    if ($this->use_real_oauth_javascript_code)
+    {
+      $mail = $this->getParameterValue('google_testuser_mail');
+      $pw = $this->getParameterValue('google_testuser_pw');
+      echo 'Login with mail address ' . $mail . ' and pw ' . $pw . "\n";
+      $page = $this->getSession()->getPage();
+      if ($page->find('css', '#approval_container') &&
+        $page->find('css', '#submit_approve_access')
+      )
+      {
         $this->approveGoogleAccess();
-    }
-
-    private function signInWithGoogleEMail($mail, $pw){
-        echo 'Google Signin with E-Mail form appeared' . "\n";
-        $page = $this->getSession()->getPage();
-
-        $page->fillField('Email',$mail);
-        $button = $page->findById('next');
-        assertTrue($button != null);
-        $button->press();
-        if($page->find('css', '#gaia_firstform') &&
-            $page->find('css', '#Email-hidden') &&
-            $page->find('css', '#Passwd')
-        ) {
-            $this->signInWithGooglePassword($pw);
-        }
-    }
-
-    private function signInWithGooglePassword($pw){
-        echo 'Google Signin with Password form appeared' . "\n";
-        $page = $this->getSession()->getPage();
-
-        $page->fillField('Passwd',$pw);
-        $button = $page->findById('signIn');
-        assertTrue($button != null);
-        $button->press();
-        if($page->find('css', '#approval_container') &&
-            $page->find('css', '#submit_approve_access')) {
-            $this->approveGoogleAccess();
-        }
-    }
-
-    private function setFacebookFakeData() {
-        //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
-        $session = $this->getSession();
-        $session->wait(2000, '(0 === jQuery.active)');
-        $session->evaluateScript("$('#btn-facebook-testhook').removeClass('hidden');");
-        $session->evaluateScript("$('#id_oauth').val(105678789764016);");
-        $session->evaluateScript("$('#email_oauth').val('pocket_zlxacqt_tester@tfbnw.net');");
-        $session->evaluateScript("$('#locale_oauth').val('en_US');");
-    }
-
-    private function clickFacebookFakeButton() {
-        $page = $this->getSession()->getPage();
-        $button = $page->findButton('btn-facebook-testhook');
-        assertNotNull( $button, 'button not found');
-        $button->press();
-    }
-
-    private function setGooglePlusFakeData() {
-        //simulate Google+ login by faking Javascript code and server responses from FakeOAuthService
-        $session = $this->getSession();
-        $session->wait(2000, '(0 === jQuery.active)');
-        $session->evaluateScript("$('#btn-gplus-testhook').removeClass('hidden');");
-        $session->evaluateScript("$('#id_oauth').val('105155320106786463089');");
-        $session->evaluateScript("$('#email_oauth').val('pocketcodetester@gmail.com');");
-        $session->evaluateScript("$('#locale_oauth').val('de');");
-    }
-
-    private function clickGooglePlusFakeButton() {
-        $page = $this->getSession()->getPage();
-        $button = $page->findButton('btn-gplus-testhook');
-        assertNotNull( $button, 'button not found');
-        $button->press();
-    }
-
-    /**
-     * @Then /^there is a user in the database:$/
-     */
-    public function thereIsAUserInTheDatabase(TableNode $table)
-    {
-        /**
-         * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
-         */
-        $user_manager = $this->kernel->getContainer()->get('usermanager');
-        $users = $table->getHash();
-        $user = null;
-        $count = count($users);
-        for($i = 0; $i < $count; $i++)
+      }
+      else
+      {
+        if ($page->find('css', '.google-header-bar centered') &&
+          $page->find('css', '.signin-card clearfix')
+        )
         {
-            $user = $user_manager->findUserByUsername($users[$i]["name"]);
-            assertNotNull($user);
-            assertTrue($user->getUsername() == $users[$i]["name"],
-                'Name wrong' . $users[$i]["name"] . 'expected, but ' . $user->getUsername() . ' found.');
-            assertTrue($user->getEmail() == $users[$i]["email"],
-                'E-Mail wrong' . $users[$i]["email"] . 'expected, but ' . $user->getEmail() . ' found.');
-            assertTrue($user->getCountry() == $users[$i]["country"],
-                'Country wrong' . $users[$i]["country"] . 'expected, but ' . $user->getCountry() . ' found.');
-            if($user->getFacebookUid() != ''){
-                assertTrue($user->getFacebookAccessToken() != '', 'no Facebook access token present');
-                assertTrue($user->getFacebookUid() == $users[$i]["facebook_uid"], 'Facebook UID wrong');
-                assertTrue($user->getFacebookName() == $users[$i]["facebook_name"], 'Facebook name wrong');
-            }
-            if($user->getGplusUid() != ''){
-                assertTrue($user->getGplusAccessToken() != '', 'no GPlus access token present');
-                assertTrue($user->getGplusIdToken() != '', 'no GPlus id token present');
-                assertTrue($user->getGplusRefreshToken() != '', 'no GPlus refresh token present');
-                assertTrue($user->getGplusUid() == $users[$i]["google_uid"], 'Google UID wrong');
-                assertTrue($user->getGplusName() == $users[$i]["google_name"], 'Google name wrong');
-            }
+          $this->signInWithGoogleEMailAndPassword($mail, $pw);
         }
-    }
-
-    /**
-     * @When /^I logout$/
-     */
-    public function iLogout()
-    {
-        $this->getSession()->getPage()->find("css", ".btn show-nav-dropdown")->click();
-        $this->assertElementOnPage(".img-author-big");
-        $this->getSession()->getPage()->find("css", ".img-author-big")->click();
-
-    }
-
-    /**
-     * @Then /^I should not be logged in$/
-     */
-    public function iShouldNotBeLoggedIn()
-    {
-        $this->getSession()->wait(1000, 'window.location.href.search("profile") == -1');
-        $this->assertElementOnPage("#logo");
-        $this->assertElementOnPage("#btn-login");
-        $this->assertElementNotOnPage("#nav-dropdown");
-    }
-
-    /**
-     * @When /^I wait for a second$/
-     */
-    public function iWaitForASecond()
-    {
-        $this->getSession()->wait(1000);
-    }
-
-    /**
-     * @Then /^I choose the username '([^']*)' and check button activations$/
-     */
-    public function iChooseTheUsernameTestingButtonEnabled($arg1)
-    {
-        $this->getSession()->wait(300);
-        $page = $this->getSession()->getPage();
-
-        $button = $page->findById('btn_oauth_username');
-        assertNotNull($button);
-        assertTrue($button->hasAttribute('disabled'));
-
-        $page->fillField('dialog_oauth_username_input',$arg1);
-        assertFalse($button->hasAttribute('disabled'));
-
-        $page->fillField('dialog_oauth_username_input','');
-        assertTrue($button->hasAttribute('disabled'));
-
-        $page->fillField('dialog_oauth_username_input',$arg1);
-        $button->press();
-        if (!$arg1 === self::ALREADY_IN_DB_USER) {
-            $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
+        else
+        {
+          if ($page->find('css', '#gaia_firstform') &&
+            $page->find('css', '#Email') &&
+            $page->find('css', '#Passwd-hidden')
+          )
+          {
+            $this->signInWithGoogleEMail($mail, $pw);
+          }
+          else
+          {
+            assertTrue(false, 'No Google form appeared!' . "\n");
+          }
         }
+      }
     }
-
-    /**
-     * @Then /^I choose the username '([^']*)'$/
-     */
-    public function iChooseTheUsername($arg1)
+    else
     {
-        $this->getSession()->wait(300);
-        $page = $this->getSession()->getPage();
-
-        $button = $page->findById('btn_oauth_username');
-        assertNotNull($button);
-        assertTrue($button->hasAttribute('disabled'));
-
-        $page->fillField('dialog_oauth_username_input',$arg1);
-        assertFalse($button->hasAttribute('disabled'));
-
-        $button->press();
-        if (!$arg1 === self::ALREADY_IN_DB_USER) {
-            $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
-        }
-        $this->getSession()->wait(500);
+      $this->setGooglePlusFakeData();
+      $this->clickGooglePlusFakeButton();
     }
 
-    private function getParameterValue($name) {
-        $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
-        while(!feof($myfile)) {
-            $line = fgets($myfile);
-            if(strpos($line, $name) != false) {
-                fclose($myfile);
-                return substr(trim($line), strpos(trim($line), ':') + 2);
-            }
-        }
+  }
+
+  private function approveGoogleAccess()
+  {
+    echo 'Google Approve Access form appeared' . "\n";
+    $page = $this->getSession()->getPage();
+    $button = $page->findById('submit_approve_access');
+    assertTrue($button != null);
+    $button->press();
+    $this->getSession()->switchToWindow(null);
+  }
+
+  private function signInWithGoogleEMailAndPassword($mail, $pw)
+  {
+    echo 'Google login form with E-Mail and Password appeared' . "\n";
+    $page = $this->getSession()->getPage();
+
+    $page->fillField('Email', $mail);
+    $page->fillField('Passwd', $pw);
+    $button = $page->findById('signIn');
+    assertTrue($button != null);
+    $button->press();
+    $this->approveGoogleAccess();
+  }
+
+  /**
+   * @Then /^there is a user in the database:$/
+   */
+  public function thereIsAUserInTheDatabase(TableNode $table)
+  {
+    /**
+     * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
+     */
+    $user_manager = $this->kernel->getContainer()->get('usermanager');
+    $users = $table->getHash();
+    $user = null;
+    $count = count($users);
+    for ($i = 0; $i < $count; $i++)
+    {
+      $user = $user_manager->findUserByUsername($users[$i]["name"]);
+      assertNotNull($user);
+      assertTrue($user->getUsername() == $users[$i]["name"],
+        'Name wrong' . $users[$i]["name"] . 'expected, but ' . $user->getUsername() . ' found.');
+      assertTrue($user->getEmail() == $users[$i]["email"],
+        'E-Mail wrong' . $users[$i]["email"] . 'expected, but ' . $user->getEmail() . ' found.');
+      assertTrue($user->getCountry() == $users[$i]["country"],
+        'Country wrong' . $users[$i]["country"] . 'expected, but ' . $user->getCountry() . ' found.');
+      if ($user->getFacebookUid() != '')
+      {
+        assertTrue($user->getFacebookAccessToken() != '', 'no Facebook access token present');
+        assertTrue($user->getFacebookUid() == $users[$i]["facebook_uid"], 'Facebook UID wrong');
+        assertTrue($user->getFacebookName() == $users[$i]["facebook_name"], 'Facebook name wrong');
+      }
+      if ($user->getGplusUid() != '')
+      {
+        assertTrue($user->getGplusAccessToken() != '', 'no GPlus access token present');
+        assertTrue($user->getGplusIdToken() != '', 'no GPlus id token present');
+        assertTrue($user->getGplusRefreshToken() != '', 'no GPlus refresh token present');
+        assertTrue($user->getGplusUid() == $users[$i]["google_uid"], 'Google UID wrong');
+        assertTrue($user->getGplusName() == $users[$i]["google_name"], 'Google name wrong');
+      }
+    }
+  }
+
+  private function signInWithGoogleEMail($mail, $pw)
+  {
+    echo 'Google Signin with E-Mail form appeared' . "\n";
+    $page = $this->getSession()->getPage();
+
+    $page->fillField('Email', $mail);
+    $button = $page->findById('next');
+    assertTrue($button != null);
+    $button->press();
+    if ($page->find('css', '#gaia_firstform') &&
+      $page->find('css', '#Email-hidden') &&
+      $page->find('css', '#Passwd')
+    )
+    {
+      $this->signInWithGooglePassword($pw);
+    }
+  }
+
+  private function signInWithGooglePassword($pw)
+  {
+    echo 'Google Signin with Password form appeared' . "\n";
+    $page = $this->getSession()->getPage();
+
+    $page->fillField('Passwd', $pw);
+    $button = $page->findById('signIn');
+    assertTrue($button != null);
+    $button->press();
+    if ($page->find('css', '#approval_container') &&
+      $page->find('css', '#submit_approve_access')
+    )
+    {
+      $this->approveGoogleAccess();
+    }
+  }
+
+  private function setFacebookFakeData()
+  {
+    //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
+    $session = $this->getSession();
+    $session->wait(2000, '(0 === jQuery.active)');
+    $session->evaluateScript("$('#btn-facebook-testhook').removeClass('hidden');");
+    $session->evaluateScript("$('#id_oauth').val(105678789764016);");
+    $session->evaluateScript("$('#email_oauth').val('pocket_zlxacqt_tester@tfbnw.net');");
+    $session->evaluateScript("$('#locale_oauth').val('en_US');");
+  }
+
+  private function clickFacebookFakeButton()
+  {
+    $page = $this->getSession()->getPage();
+    $button = $page->findButton('btn-facebook-testhook');
+    assertNotNull($button, 'button not found');
+    $button->press();
+  }
+
+  private function setGooglePlusFakeData()
+  {
+    //simulate Google+ login by faking Javascript code and server responses from FakeOAuthService
+    $session = $this->getSession();
+    $session->wait(2000, '(0 === jQuery.active)');
+    $session->evaluateScript("$('#btn-gplus-testhook').removeClass('hidden');");
+    $session->evaluateScript("$('#id_oauth').val('105155320106786463089');");
+    $session->evaluateScript("$('#email_oauth').val('pocketcodetester@gmail.com');");
+    $session->evaluateScript("$('#locale_oauth').val('de');");
+  }
+
+  private function clickGooglePlusFakeButton()
+  {
+    $page = $this->getSession()->getPage();
+    $button = $page->findButton('btn-gplus-testhook');
+    assertNotNull($button, 'button not found');
+    $button->press();
+  }
+
+  /**
+   * @When /^I logout$/
+   */
+  public function iLogout()
+  {
+    $this->getSession()->getPage()->find("css", ".btn show-nav-dropdown")->click();
+    $this->assertElementOnPage(".img-author-big");
+    $this->getSession()->getPage()->find("css", ".img-author-big")->click();
+
+  }
+
+  /**
+   * @Then /^I should not be logged in$/
+   */
+  public function iShouldNotBeLoggedIn()
+  {
+    $this->getSession()->wait(1000, 'window.location.href.search("profile") == -1');
+    $this->assertElementOnPage("#logo");
+    $this->assertElementOnPage("#btn-login");
+    $this->assertElementNotOnPage("#nav-dropdown");
+  }
+
+  /**
+   * @When /^I wait for a second$/
+   */
+  public function iWaitForASecond()
+  {
+    $this->getSession()->wait(1000);
+  }
+
+  /**
+   * @Then /^I choose the username '([^']*)' and check button activations$/
+   */
+  public function iChooseTheUsernameTestingButtonEnabled($arg1)
+  {
+    $this->getSession()->wait(300);
+    $page = $this->getSession()->getPage();
+
+    $button = $page->findById('btn_oauth_username');
+    assertNotNull($button);
+    assertTrue($button->hasAttribute('disabled'));
+
+    $page->fillField('dialog_oauth_username_input', $arg1);
+    assertFalse($button->hasAttribute('disabled'));
+
+    $page->fillField('dialog_oauth_username_input', '');
+    assertTrue($button->hasAttribute('disabled'));
+
+    $page->fillField('dialog_oauth_username_input', $arg1);
+    $button->press();
+    if (!$arg1 === self::ALREADY_IN_DB_USER)
+    {
+      $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
+    }
+  }
+
+  /**
+   * @Then /^I choose the username '([^']*)'$/
+   */
+  public function iChooseTheUsername($arg1)
+  {
+    $this->getSession()->wait(300);
+    $page = $this->getSession()->getPage();
+
+    $button = $page->findById('btn_oauth_username');
+    assertNotNull($button);
+    assertTrue($button->hasAttribute('disabled'));
+
+    $page->fillField('dialog_oauth_username_input', $arg1);
+    assertFalse($button->hasAttribute('disabled'));
+
+    $button->press();
+    if (!$arg1 === self::ALREADY_IN_DB_USER)
+    {
+      $this->getSession()->wait(1000, 'window.location.href.search("login") == -1');
+    }
+    $this->getSession()->wait(500);
+  }
+
+  private function getParameterValue($name)
+  {
+    $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
+    while (!feof($myfile))
+    {
+      $line = fgets($myfile);
+      if (strpos($line, $name) != false)
+      {
         fclose($myfile);
-        assertTrue(false, 'No entry found in parameters.yml!');
-        return false;
-    }
 
-    private function setOauthServiceParameter($value) {
-        $new_content = 'parameters:' . chr(10) . '    oauth_use_real_service: ' .  $value;
-        file_put_contents("app/config/parameters_test.yml", $new_content);
+        return substr(trim($line), strpos(trim($line), ':') + 2);
+      }
     }
+    fclose($myfile);
+    assertTrue(false, 'No entry found in parameters.yml!');
 
-    /**
-     * @Then /^I should see "([^"]*)" "([^"]*)" tutorial banners$/
-     */
-    public function iShouldSeeTutorialBanners($count, $view)
+    return false;
+  }
+
+  private function setOauthServiceParameter($value)
+  {
+    $new_content = 'parameters:' . chr(10) . '    oauth_use_real_service: ' . $value;
+    file_put_contents("app/config/parameters_test.yml", $new_content);
+  }
+
+  /**
+   * @Then /^I should see "([^"]*)" "([^"]*)" tutorial banners$/
+   */
+  public function iShouldSeeTutorialBanners($count, $view)
+  {
+    if ($view == "desktop")
     {
-        if($view == "desktop") {
-            for ($i = 1; ; $i++) {
-                $img = $this->getSession()->getPage()->findById('tutorial-' . $i);
-                if ($img == null)
-                    break;
-            }
-            assertEquals($count,$i-1);
-        } elseif ($view == "mobile") {
-            for ($i = 1; ; $i++) {
-                $img = $this->getSession()->getPage()->findById('tutorial-mobile-' . $i);
-                if ($img == null)
-                    break;
-            }
-            assertEquals($count,$i-1);
-        } else {
-            assertTrue(false);
+      for ($i = 1; ; $i++)
+      {
+        $img = $this->getSession()->getPage()->findById('tutorial-' . $i);
+        if ($img == null)
+        {
+          break;
         }
+      }
+      assertEquals($count, $i - 1);
     }
-
-    /**
-     * @When /^I click on the "([^"]*)" banner$/
-     */
-    public function iClickOnTheBanner($numb)
+    elseif ($view == "mobile")
     {
-        switch ($numb) {
-            case 'first':
-                $this->iClick("#tutorial-1");
-                break;
-            case 'second':
-                $this->iClick("#tutorial-2");
-                break;
-            case 'third':
-                $this->iClick("#tutorial-3");
-                break;
-            case 'fourth':
-                $this->iClick("#tutorial-4");
-                break;
-            case 'fifth':
-                $this->iClick("#tutorial-5");
-                break;
-            case 'sixth':
-                $this->iClick("#tutorial-6");
-                break;
-            default:
-                assertTrue(false);
-                break;
+      for ($i = 1; ; $i++)
+      {
+        $img = $this->getSession()->getPage()->findById('tutorial-mobile-' . $i);
+        if ($img == null)
+        {
+          break;
         }
+      }
+      assertEquals($count, $i - 1);
     }
+    else
+    {
+      assertTrue(false);
+    }
+  }
+
+  /**
+   * @When /^I click on the "([^"]*)" banner$/
+   */
+  public function iClickOnTheBanner($numb)
+  {
+    switch ($numb)
+    {
+      case 'first':
+        $this->iClick("#tutorial-1");
+        break;
+      case 'second':
+        $this->iClick("#tutorial-2");
+        break;
+      case 'third':
+        $this->iClick("#tutorial-3");
+        break;
+      case 'fourth':
+        $this->iClick("#tutorial-4");
+        break;
+      case 'fifth':
+        $this->iClick("#tutorial-5");
+        break;
+      case 'sixth':
+        $this->iClick("#tutorial-6");
+        break;
+      default:
+        assertTrue(false);
+        break;
+    }
+  }
 
   /**
    * @Given /^following programs are featured:$/
@@ -1871,13 +2087,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $featured = $table->getHash();
-    for ($i = 0; $i < count($featured); ++$i) {
+    for ($i = 0; $i < count($featured); ++$i)
+    {
       $featured_entry = new FeaturedProgram();
 
-      if ($featured[$i]['program'] != "") {
+      if ($featured[$i]['program'] != "")
+      {
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($featured[$i]['program']);
         $featured_entry->setProgram($program);
-      } else {
+      }
+      else
+      {
         $url = $featured[$i]['url'];
         $featured_entry->setUrl($url);
       }
@@ -1885,7 +2105,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $featured_entry->setActive($featured[$i]['active'] == 'yes');
       $featured_entry->setImageType('jpg');
       $featured_entry->setPriority($featured[$i]['priority']);
-      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ?  $featured[$i]['ios_only'] == 'yes' : false);
+      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ? $featured[$i]['ios_only'] == 'yes' : false);
       $em->persist($featured_entry);
     }
     $em->flush();
@@ -1903,11 +2123,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     for ($index = 0; $index < count($owl_items); $index++)
     {
       $url = $slider_items[$index];
-      if (strpos($url, "http://") !== 0) {
+      if (strpos($url, "http://") !== 0)
+      {
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($url);
         assertNotNull($program);
         assertNotNull($program->getId());
-        $url = $this->kernel->getContainer()->get('router')->generate('program', array('id' => $program->getId()));
+        $url = $this->kernel->getContainer()->get('router')->generate('program', ['id' => $program->getId()]);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -1915,408 +2136,410 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
-    /**
-     * @When /^I press on the tag "([^"]*)"$/
-     */
-    public function iPressOnTheTag($arg1)
+  /**
+   * @When /^I press on the tag "([^"]*)"$/
+   */
+  public function iPressOnTheTag($arg1)
+  {
+    $arg1 = '#' . $arg1;
+    $this->assertSession()->elementExists('css', $arg1);
+
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
+
+  /**
+   * @When /^I press on the extension "([^"]*)"$/
+   */
+  public function iPressOnTheExtension($arg1)
+  {
+    $arg1 = '#' . $arg1;
+    $this->assertSession()->elementExists('css', $arg1);
+
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
+
+  /**
+   * @Given /^I search for "([^"]*)" with the searchbar$/
+   */
+  public function iSearchForWithTheSearchbar($arg1)
+  {
+    $this->fillField('search-input-header', $arg1);
+    $this->iClick('#search-header');
+  }
+
+  /**
+   * @Then /^I should see the Facebook Like button in the header$/
+   */
+  public function iShouldSeeTheFacebookLikeButtonInTheHeader()
+  {
+    $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
+    assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
+    assertTrue($like_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+  }
+
+  /**
+   * @Then /^I should see the Google Plus 1 button in the header$/
+   */
+  public function iShouldSeeTheGoogleButtonInTheHeader()
+  {
+    $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
+    assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
+    assertTrue($plus_one_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
+  }
+
+  /**
+   * @Then /^I should see the Facebook Like button on the bottom of the program page$/
+   */
+  public function iShouldSeeTheFacebookLikeButtonOnTheBottomOfTheProgramPage()
+  {
+    $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
+    assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
+    assertTrue($like_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+  }
+
+  /**
+   * @Then /^I should see the Google Plus (\d+) button on the bottom of the program page$/
+   */
+  public function iShouldSeeTheGooglePlusButtonOnTheBottomOfTheProgramPage($arg1)
+  {
+    $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
+    assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
+    assertTrue($plus_one_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
+  }
+
+  /**
+   * @Then /^I should see the Facebook Share button$/
+   */
+  public function iShouldSeeTheFacebookShareButton()
+  {
+    $share_button = $this->getSession()->getPage()->findById('share-facebook');
+    assertTrue($share_button != null && $share_button->isVisible(), "The Facebook share button is not visible!");
+  }
+
+  /**
+   * @Then /^I should see the Google Plus share button$/
+   */
+  public function iShouldSeeTheGooglePlusShareButton()
+  {
+    $share_button = $this->getSession()->getPage()->findById('share-gplus');
+    assertTrue($share_button != null && $share_button->isVisible(), "The Google+ share button is not visible!");
+  }
+
+  /**
+   * @Then /^I should see the Twitter share button$/
+   */
+  public function iShouldSeeTheTwitterShareButton()
+  {
+    $share_button = $this->getSession()->getPage()->findById('share-twitter');
+    assertTrue($share_button != null && $share_button->isVisible(), "The Twitter share button is not visible!");
+  }
+
+  /**
+   * @Then /^I should see the Mail share button$/
+   */
+  public function iShouldSeeTheMailShareButton()
+  {
+    $share_button = $this->getSession()->getPage()->findById('share-email');
+    assertTrue($share_button != null && $share_button->isVisible(), "The E-Mail share button is not visible!");
+  }
+
+  /**
+   * @Then /^I should see the WhatsApp share button$/
+   */
+  public function iShouldSeeTheWhatsappShareButton()
+  {
+    $share_button = $this->getSession()->getPage()->findById('share-whatsapp');
+    assertTrue($share_button != null && $share_button->isVisible(), "The WhatsApp share button is not visible!");
+  }
+
+  /**
+   * @Then /^I should see the logout button$/
+   */
+  public function iShouldSeeTheLogoutButton()
+  {
+    $logout_button = $this->getSession()->getPage()->findById('btn-logout');
+    assertTrue($logout_button != null && $logout_button->isVisible(), "The Logout button is not visible!");
+  }
+
+  /**
+   * @Then /^I should see the profile button$/
+   */
+  public function iShouldSeeTheProfileButton()
+  {
+    $profile_button = $this->getSession()->getPage()->findById('btn-profile');
+    assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
+  }
+
+  /**
+   * @Then /^the href with id "([^"]*)" should be void$/
+   */
+  public function theHrefWithIdShouldBeVoid($arg1)
+  {
+    $button = $this->getSession()->getPage()->findById($arg1);
+    assertEquals($button->getAttribute('href'), 'javascript:void(0)');
+  }
+
+  /**
+   * @Then /^the href with id "([^"]*)" should not be void$/
+   */
+  public function theHrefWithIdShouldNotBeVoid($arg1)
+  {
+    $button = $this->getSession()->getPage()->findById($arg1);
+    assertNotEquals($button->getAttribute('href'), 'javascript:void(0)');
+  }
+
+  /**
+   * @When /^I get page content$/
+   */
+  public function iGetPageContent()
+  {
+    var_dump($this->getSession()->getPage()->getContent());
+    die;
+  }
+
+  /**
+   * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
+   */
+  public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id_or_value)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
+    assertEquals(1, count($clicks), "No database entry found!");
+
+    $click = $clicks[0];
+
+    assertEquals($type_name, $click->getType());
+
+    switch ($name_id)
     {
-        $arg1 = '#' . $arg1;
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
+      case "tag_id":
+        assertEquals($id_or_value, $click->getTag()->getId());
+        break;
+      case "extension_id":
+        assertEquals($id_or_value, $click->getExtension()->getId());
+        break;
+      case "program_id":
+        assertEquals($id_or_value, $click->getProgram()->getId());
+        break;
+      case "user_specific_recommendation":
+        assertEquals(($id_or_value == 'true') ? true : false, $click->getUserSpecificRecommendation());
+        break;
+      default:
+        assertTrue(false);
     }
+  }
 
-    /**
-     * @When /^I press on the extension "([^"]*)"$/
-     */
-    public function iPressOnTheExtension($arg1)
-    {
-        $arg1 = '#' . $arg1;
-        $this->assertSession()->elementExists('css', $arg1);
+  /**
+   * @Then /^There should be no recommended click statistic database entry$/
+   */
+  public function thereShouldBeNoRecommendedClickStatisticDatabaseEntry()
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
+    assertEquals(0, count($clicks), "Unexpected database entry found!");
+  }
 
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
+  /**
+   * @Then /^There should be one homepage click database entry with type is "([^"]*)" and program id is "([^"]*)"$/
+   */
+  public function thereShouldBeOneHomepageClickDatabaseEntryWithTypeIsAndIs($type_name, $id)
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
+    assertEquals(1, count($clicks), "No database entry found!");
+    $click = $clicks[0];
+    assertEquals($type_name, $click->getType());
+    assertEquals($id, $click->getProgram()->getId());
+  }
 
-    /**
-     * @Given /^I search for "([^"]*)" with the searchbar$/
-     */
-    public function iSearchForWithTheSearchbar($arg1)
-    {
-        $this->fillField('search-input-header', $arg1);
-        $this->iClick('#search-header');
-    }
+  /**
+   * @Then /^There should be no homepage click statistic database entry$/
+   */
+  public function thereShouldBeNoHomepageClickStatisticDatabaseEntry()
+  {
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
+    assertEquals(0, count($clicks), "Unexpected database entry found!");
+  }
 
-    /**
-     * @Then /^I should see the Facebook Like button in the header$/
-     */
-    public function iShouldSeeTheFacebookLikeButtonInTheHeader()
-    {
-        $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
-        assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
-        assertTrue($like_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
-    }
+  /**
+   * Wait for AJAX to finish.
+   *
+   * @Given /^I wait for AJAX to finish$/
+   */
+  public function iWaitForAjaxToFinish()
+  {
+    $this->getSession()->wait(5000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
+  }
 
-    /**
-     * @Then /^I should see the Google Plus 1 button in the header$/
-     */
-    public function iShouldSeeTheGoogleButtonInTheHeader()
-    {
-        $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
-        assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
-        assertTrue($plus_one_button->getParent()->getParent()->getParent()->getTagName() == 'nav', "Parent is not header element");
-    }
+  /**
+   * @When /^I click on the first recommended program$/
+   */
+  public function iClickOnTheFirstRecommendedProgram()
+  {
+    $arg1 = '#program-2 .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^I should see the Facebook Like button on the bottom of the program page$/
-     */
-    public function iShouldSeeTheFacebookLikeButtonOnTheBottomOfTheProgramPage()
-    {
-        $like_button = $this->getSession()->getPage()->find('css', '.fb-like');
-        assertTrue($like_button != null && $like_button->isVisible(), "The Facebook Like Button is not visible!");
-        assertTrue($like_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
-    }
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-    /**
-     * @Then /^I should see the Google Plus (\d+) button on the bottom of the program page$/
-     */
-    public function iShouldSeeTheGooglePlusButtonOnTheBottomOfTheProgramPage($arg1)
-    {
-        $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
-        assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
-        assertTrue($plus_one_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
-    }
+  /**
+   * @When /^I click on the first recommended homepage program$/
+   */
+  public function iClickOnTheFirstRecommendedHomepageProgram()
+  {
+    $arg1 = '#program-1 .homepage-recommended-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^I should see the Facebook Share button$/
-     */
-    public function iShouldSeeTheFacebookShareButton()
-    {
-        $share_button = $this->getSession()->getPage()->findById('share-facebook');
-        assertTrue($share_button != null && $share_button->isVisible(), "The Facebook share button is not visible!");
-    }
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-    /**
-     * @Then /^I should see the Google Plus share button$/
-     */
-    public function iShouldSeeTheGooglePlusShareButton()
-    {
-        $share_button = $this->getSession()->getPage()->findById('share-gplus');
-        assertTrue($share_button != null && $share_button->isVisible(), "The Google+ share button is not visible!");
-    }
+  /**
+   * @When /^I click on the first featured homepage program$/
+   */
+  public function iClickOnAFeaturedHomepageProgram()
+  {
+    $arg1 = '.owl-item > div > a:first-child';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^I should see the Twitter share button$/
-     */
-    public function iShouldSeeTheTwitterShareButton()
-    {
-        $share_button = $this->getSession()->getPage()->findById('share-twitter');
-        assertTrue($share_button != null && $share_button->isVisible(), "The Twitter share button is not visible!");
-    }
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-    /**
-     * @Then /^I should see the Mail share button$/
-     */
-    public function iShouldSeeTheMailShareButton()
-    {
-        $share_button = $this->getSession()->getPage()->findById('share-email');
-        assertTrue($share_button != null && $share_button->isVisible(), "The E-Mail share button is not visible!");
-    }
+  /**
+   * @When /^I click on a newest homepage program having program id "([^"]*)"$/
+   */
+  public function iClickOnANewestHomepageProgram($program_id)
+  {
+    $arg1 = '#newest .programs #program-' . $program_id . ' .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^I should see the WhatsApp share button$/
-     */
-    public function iShouldSeeTheWhatsappShareButton()
-    {
-        $share_button = $this->getSession()->getPage()->findById('share-whatsapp');
-        assertTrue($share_button != null && $share_button->isVisible(), "The WhatsApp share button is not visible!");
-    }
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-    /**
-     * @Then /^I should see the logout button$/
-     */
-    public function iShouldSeeTheLogoutButton()
-    {
-        $logout_button = $this->getSession()->getPage()->findById('btn-logout');
-        assertTrue($logout_button != null && $logout_button->isVisible(), "The Logout button is not visible!");
-    }
+  /**
+   * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
+   */
+  public function iClickOnAMostDownloadedHomepageProgram($program_id)
+  {
+    $arg1 = '#mostDownloaded .programs #program-' . $program_id . ' .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^I should see the profile button$/
-     */
-    public function iShouldSeeTheProfileButton()
-    {
-        $profile_button = $this->getSession()->getPage()->findById('btn-profile');
-        assertTrue($profile_button != null && $profile_button->isVisible(), "The profile button is not visible!");
-    }
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-    /**
-     * @Then /^the href with id "([^"]*)" should be void$/
-     */
-    public function theHrefWithIdShouldBeVoid($arg1)
-    {
-        $button = $this->getSession()->getPage()->findById($arg1);
-        assertEquals($button->getAttribute('href'), 'javascript:void(0)');
-    }
+  /**
+   * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
+   */
+  public function iClickOnAMostViewedHomepageProgram($program_id)
+  {
+    $arg1 = '#mostViewed .programs #program-' . $program_id . ' .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^the href with id "([^"]*)" should not be void$/
-     */
-    public function theHrefWithIdShouldNotBeVoid($arg1)
-    {
-        $button = $this->getSession()->getPage()->findById($arg1);
-        assertNotEquals($button->getAttribute('href'), 'javascript:void(0)');
-    }
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-    /**
-     * @When /^I get page content$/
-     */
-    public function iGetPageContent()
-    {
-        var_dump($this->getSession()->getPage()->getContent());
-        die;
-    }
+  /**
+   * @When /^I click on a random homepage program having program id "([^"]*)"$/
+   */
+  public function iClickOnARandomHomepageProgram($program_id)
+  {
+    $arg1 = '#random .programs #program-' . $program_id . ' .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
-     */
-    public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id_or_value)
-    {
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
-        assertEquals(1,count($clicks), "No database entry found!");
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-        $click = $clicks[0];
+  /**
+   * @When /^I click on the first recommended specific program$/
+   */
+  public function iClickOnTheFirstRecommendedSpecificProgram()
+  {
+    $arg1 = '#specific-programs-recommendations .programs #program-3 .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-        assertEquals($type_name, $click->getType());
+    $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg1)
+      ->click();
+  }
 
-        switch ($name_id) {
-            case "tag_id":
-                assertEquals($id_or_value, $click->getTag()->getId());
-                break;
-            case "extension_id":
-                assertEquals($id_or_value, $click->getExtension()->getId());
-                break;
-            case "program_id":
-                assertEquals($id_or_value, $click->getProgram()->getId());
-                break;
-            case "user_specific_recommendation":
-                assertEquals(($id_or_value == 'true') ? true : false, $click->getUserSpecificRecommendation());
-                break;
-            default:
-                assertTrue(false);
-        }
-    }
+  /**
+   * @Then /^There should be recommended specific programs$/
+   */
+  public function thereShouldBeRecommendedSpecificPrograms()
+  {
+    $arg1 = '#specific-programs-recommendations .programs .rec-programs';
+    $this->assertSession()->elementExists('css', $arg1);
+  }
 
-    /**
-     * @Then /^There should be no recommended click statistic database entry$/
-     */
-    public function thereShouldBeNoRecommendedClickStatisticDatabaseEntry()
-    {
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
-        assertEquals(0, count($clicks), "Unexpected database entry found!");
-    }
+  /**
+   * @Then /^There should be no recommended specific programs$/
+   */
+  public function thereShouldBeNoRecommendedSpecificPrograms()
+  {
+    $arg1 = '#specific-programs-recommendations .programs .rec-programs';
+    $this->assertSession()->elementNotExists('css', $arg1);
+  }
 
-    /**
-     * @Then /^There should be one homepage click database entry with type is "([^"]*)" and program id is "([^"]*)"$/
-     */
-    public function thereShouldBeOneHomepageClickDatabaseEntryWithTypeIsAndIs($type_name, $id)
-    {
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
-        assertEquals(1, count($clicks), "No database entry found!");
-        $click = $clicks[0];
-        assertEquals($type_name, $click->getType());
-        assertEquals($id, $click->getProgram()->getId());
-    }
+  /**
+   * @Then /^I should see a recommended homepage program having ID "([^"]*)" and name "([^"]*)"$/
+   */
+  public function iShouldSeeARecommendedHomepageProgramHavingIdAndName($program_id, $program_name)
+  {
+    $arg1 = '#program-' . $program_id . ' .homepage-recommended-programs';
+    $this->assertSession()->elementExists('css', $arg1);
 
-    /**
-     * @Then /^There should be no homepage click statistic database entry$/
-     */
-    public function thereShouldBeNoHomepageClickStatisticDatabaseEntry()
-    {
-        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
-        assertEquals(0, count($clicks), "Unexpected database entry found!");
-    }
+    $arg2 = '#program-' . $program_id . ' .homepage-recommended-programs .program-name';
+    assertEquals($program_name, $this
+      ->getSession()
+      ->getPage()
+      ->find('css', $arg2)
+      ->getText());
+  }
 
-    /**
-     * Wait for AJAX to finish.
-     *
-     * @Given /^I wait for AJAX to finish$/
-     */
-    public function iWaitForAjaxToFinish() {
-        $this->getSession()->wait(5000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
-    }
-
-    /**
-     * @When /^I click on the first recommended program$/
-     */
-    public function iClickOnTheFirstRecommendedProgram()
-    {
-        $arg1 = '#program-2 .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on the first recommended homepage program$/
-     */
-    public function iClickOnTheFirstRecommendedHomepageProgram()
-    {
-        $arg1 = '#program-1 .homepage-recommended-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on the first featured homepage program$/
-     */
-    public function iClickOnAFeaturedHomepageProgram()
-    {
-        $arg1 = '.owl-item > div > a:first-child';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on a newest homepage program having program id "([^"]*)"$/
-     */
-    public function iClickOnANewestHomepageProgram($program_id)
-    {
-        $arg1 = '#newest .programs #program-' . $program_id . ' .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
-     */
-    public function iClickOnAMostDownloadedHomepageProgram($program_id)
-    {
-        $arg1 = '#mostDownloaded .programs #program-' . $program_id . ' .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
-     */
-    public function iClickOnAMostViewedHomepageProgram($program_id)
-    {
-        $arg1 = '#mostViewed .programs #program-' . $program_id . ' .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on a random homepage program having program id "([^"]*)"$/
-     */
-    public function iClickOnARandomHomepageProgram($program_id)
-    {
-        $arg1 = '#random .programs #program-' . $program_id . ' .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @When /^I click on the first recommended specific program$/
-     */
-    public function iClickOnTheFirstRecommendedSpecificProgram()
-    {
-        $arg1 = '#specific-programs-recommendations .programs #program-3 .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg1)
-            ->click();
-    }
-
-    /**
-     * @Then /^There should be recommended specific programs$/
-     */
-    public function thereShouldBeRecommendedSpecificPrograms()
-    {
-        $arg1 = '#specific-programs-recommendations .programs .rec-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-    }
-
-    /**
-     * @Then /^There should be no recommended specific programs$/
-     */
-    public function thereShouldBeNoRecommendedSpecificPrograms()
-    {
-        $arg1 = '#specific-programs-recommendations .programs .rec-programs';
-        $this->assertSession()->elementNotExists('css', $arg1);
-    }
-
-    /**
-     * @Then /^I should see a recommended homepage program having ID "([^"]*)" and name "([^"]*)"$/
-     */
-    public function iShouldSeeARecommendedHomepageProgramHavingIdAndName($program_id, $program_name)
-    {
-        $arg1 = '#program-' . $program_id . ' .homepage-recommended-programs';
-        $this->assertSession()->elementExists('css', $arg1);
-
-        $arg2 = '#program-' . $program_id . ' .homepage-recommended-programs .program-name';
-        assertEquals($program_name, $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $arg2)
-            ->getText());
-    }
-
-    /**
-     * @Then /^I should not see any recommended homepage programs$/
-     */
-    public function iShouldNotSeeAnyRecommendedHomepagePrograms()
-    {
-        $arg1 = '.homepage-recommended-programs';
-        $this->assertSession()->elementNotExists('css', $arg1);
-    }
+  /**
+   * @Then /^I should not see any recommended homepage programs$/
+   */
+  public function iShouldNotSeeAnyRecommendedHomepagePrograms()
+  {
+    $arg1 = '.homepage-recommended-programs';
+    $this->assertSession()->elementNotExists('css', $arg1);
+  }
 }

@@ -70,8 +70,6 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
-    And I should see the logout button
-    And I should see the profile button
     And I am on "/pocketcode/emailEdit"
     Then I wait for the server response
     Then I fill in "email" with "pocket_tester@tfbnw.net"
@@ -84,8 +82,7 @@ Feature: Open Authentication
     And I click Facebook login link
     And I wait for the server response
     Then I should be logged in
-    And I should see the profile button
-    When I click the "profile" button
+    When I go to "/pocketcode/profile"
     And I wait for a second
     Then the "#email" element should contain "pocket_tester@tfbnw.net"
 
@@ -98,8 +95,6 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
-    And I should see the logout button
-    And I should see the profile button
     And I am on "/pocketcode/emailEdit"
     Then I wait for the server response
     Then I fill in "email" with "pocket-code-tester@gmail.com"

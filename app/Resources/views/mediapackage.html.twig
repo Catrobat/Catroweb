@@ -31,14 +31,14 @@
 
             {% if sound %}
             <div>
-              <audio controls preload="none">
-                <source src="{{ asset(sound) }}" type="audio/wav">
+              <audio controls preload="none" controlsList="nodownload">
+                <source src="{{ asset(sound) }}" type="audio/mpeg">
 
                 <object>
                   <param name="autostart" value="false">
                   <param name="src" value="{{ sound }}">
                   <param name="controller" value="true">
-                  <embed src="{{ asset(sound) }}" controller="true" autostart="false" type="audio/wav"></embed>
+                  <embed src="{{ asset(sound) }}" controller="true" autostart="false" type="audio/mpeg"></embed>
                   Update your Browser
                 </object>
               </audio>

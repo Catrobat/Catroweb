@@ -105,6 +105,7 @@ class ProgramManager
     $program->setUploadLanguage('en');
     $program->setUploadedAt(new \DateTime());
     $program->setRemixMigratedAt(null);
+    $program->setFlavor($request->getFlavor());
     $this->addTags($program, $extracted_file, $request->getLanguage());
     $version = $program->getLanguageVersion();
     $max_version = $this->max_version;
@@ -119,6 +120,7 @@ class ProgramManager
       $program->setGamejam($request->getGamejam());
       $program->setGameJamSubmissionDate(new \DateTime());
     }
+
 
     $this->event_dispatcher->dispatch('catrobat.program.before.persist', new ProgramBeforePersistEvent($extracted_file, $program));
 

@@ -21,13 +21,6 @@
     <div class="programs"></div>
   </div>
 
-  {% if nolb %}
-    <div id="nolb-example">
-      <h1>{{ "programs.nolb_example"|trans({}, "catroweb") }}</h1>
-      <div class="programs"></div>
-    </div>
-  {% endif %}
-
   <div id="recommended">
       <div class="help-headline">
           <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
@@ -72,11 +65,6 @@
     mostDownloaded.init();
     mostViewed.init();
     random.init();
-
-    {% if nolb %}
-      var nolbExample = new ProgramLoader('#nolb-example', '{{ path('api_nolb_examples') }}');
-      nolbExample.init();
-    {% endif %}
 
     function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
         var url = "{{ path('click_stats') }}";

@@ -27,16 +27,13 @@ Feature: Searching for programs with extensions
     And I should see "Phiro"
     When I press on the extension "Lego"
     Then I should see "Your search returned 2 results"
-    And I should see "program 1"
+    Then I should see "program 1"
     And I should see "program 2"
     And I should not see "myprog 3"
 
   Scenario: search for programs should work
-    When I search for "Lego" with the searchbar
+    When I am on "/pocketcode/search/Lego"
     Then I should see "Your search returned 2 results"
-    And the "search-input-header" field should contain "Lego"
-    And the "search-input-footer" field should contain "Lego"
-    And the "searchbar" field should contain "Lego"
     And I should see "program 1"
     And I should see "program 2"
     And I should not see "myprog 3"

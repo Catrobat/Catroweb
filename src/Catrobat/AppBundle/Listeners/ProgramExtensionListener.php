@@ -41,6 +41,10 @@ class ProgramExtensionListener
         foreach ($extensions as $extension) {
             if (in_array($extension->getPrefix(), $prefixes )) {
                 $program->addExtension($extension);
+
+/*              if ($extension->getPrefix() == 'PHIRO') {
+                $program->setFlavor('phirocode');
+              }*/
             }
         }
     }

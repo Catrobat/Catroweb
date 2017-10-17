@@ -31,16 +31,16 @@ notificationsReadMessage: "Has leído todas las notificaciónes."
 notificationsClearedMessage: "Todas las notificaciónes estaban marcando leído."
 clearAllNotificationsButtonTitle: "Marcar todas las notificaciónes leído"
 notificationsClearError: "¡No se puede marcar las notificaciónes como leído!"
-pleaseWait: "Please wait..."
+pleaseWait: "Espera..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: '¿Qué programas se recomiendan?'
+      description_C_VersionTest: 'Mientras más Me gusta (incluyendo "Pulgar arriba", "Risa", "Me encanta", y "Wow!") reciba tu programa, más arriba aparece en esta lista.'
 programs:
   featured: Destacados
   newest: Los más nuevos
-  recommended: Recommended programs
+  recommended: Programas recomendados
   most:
     viewed: Más visto
     downloaded: Más descargados
@@ -49,10 +49,10 @@ programs:
   downloads: descargas
   sample: Programas de ejemplo
   views: '%views% visitas'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likeThumbsUpDetailText: 'A {0}0 personas les ha gustado esto | A {1}1 persona le ha gustado esto |A ]1,Inf]%persons% personas les ha gustado esto'
+  likeSmileDetailText: '{0}0 personas sonríen al ver esto |{1}1 persona sonríe al ver esto |]1,Inf]%persons% personas sonríen al ver esto'
+  likeLoveDetailText: 'A {0}0 personas les encantó esto |A {1}1 persona le encantó esto |A ]1,Inf]%persons% personas les encantó esto'
+  likeWowDetailText: 'A {0}0 personas les asombró esto |A {1}1 persona le asombró esto |A ]1,Inf]%persons% personas les asombró esto'
   remixes: '{0}0 remixes | remix{1}1 |] 1, Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1} "%programName%" tiene 1 remix nuevo: |] 1, Inf] "%programName%" tiene nuevos remixes de %remixes%:'
   submitted: Programas Enviados
@@ -76,16 +76,16 @@ programs:
   report: Informe
   report_popup: El comentario fue reportado con éxito.
   report_popup_header: Reportado
-  nolb_example: Example programs
+  nolb_example: Ejemplos de programas
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: 'Mostrar gráfico de remixes'
   by: 'por'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  open: 'Abrir'
+  showPaths: 'Mostrar rutas'
+  programNotAvailableErrorTitle: 'Lo sentimos...'
+  programNotAvailableErrorDescription: 'Este programa ya no está disponible.'
+  programNotAvailable: 'No disponible'
+  programUnknownUser: 'Usuario desconocido'
 passwordRecovery:
   subject: Recuperación de su clave Catrobat
   message: |
@@ -440,7 +440,7 @@ errors:
     invalid: El nombre de usuario es inválido
     exists: El nombre de usuario ya existe.
     not_exists: El nombre de usuario no existe.
-    not_email: The username must not be an email address.
+    not_email: El nombre de usuario no puede ser una dirección de correo electrónico.
   password:
     blank: Falta la contraseña.
     short: 'Su contraseña debe tener al menos {{ limit }} caracteres.'
@@ -488,6 +488,8 @@ time:
   days.ago: '{1}hace 1 día |]1,Inf] hace %count% días'
   months.ago: '{1}hace 1 mes |]1,Inf] hace %count% meses'
   years.ago: '{1}hace 1 año |]1,Inf] hace más de un año'
+failure:
+  upload: Hubo un error mientras se subía tu app.
 language:
   arabic: Árabe
   bulgarian: Búlgaro
@@ -570,7 +572,7 @@ admin:
     createBackupConfirmationText: Este proceso puede tardar un tiempo. ¡La página volverá a cargar luego!
 recommender:
   similarPrograms: Programas iguales
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Los usuarios que descargaron este programa también descargaron
 pmd:
   submitBtn: Enviar tu proyecto
   submitBox:
@@ -583,3 +585,21 @@ pmd:
     text: Subida de programa falló.
 codeview:
   showText: Mostrar código
+footer:
+  usefulLinks: Hipervínculos que te servirán
+  legalities: Aspectos legales
+  communityStats: Estadísticas de la comunidad
+  downloads: descargas
+  programs: programas
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

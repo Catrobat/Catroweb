@@ -30,11 +30,8 @@ Feature: Searching for programs with tags
     And I should not see "myprog 3"
 
   Scenario: search for programs should work
-    When I search for "Animation" with the searchbar
+    When I am on "/pocketcode/search/Animation"
     Then I should see "Your search returned 2 results"
-    And the "search-input-header" field should contain "Animation"
-    And the "search-input-footer" field should contain "Animation"
-    And the "searchbar" field should contain "Animation"
     And I should see "program 1"
     And I should see "program 2"
     And I should not see "myprog 3"

@@ -24,14 +24,14 @@ less: 'më pak'
 ok: OK
 clickToDownloadProgram: 'Për të shkarkuar programin "shembull" kliko %link_start% këtu %link_end%.'
 registrationError: 'Përdoruesi ose adresa E-mail janë në përdorim.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+notifications: 'Lajmërimet'
+wellDone: "Të lumtë!"
+done: "U krye!"
+notificationsReadMessage: "I keni lexuar të gjitha lajmërimet."
+notificationsClearedMessage: "Të gjitha lajmërimet janë shënuar si të lexuara."
+clearAllNotificationsButtonTitle: "Shëno të gjitha si të lexuara"
+notificationsClearError: "E pamundur të shënohen lamerimet si të lexuara!"
+pleaseWait: "Ju lutem prisni..."
 indexPage:
   recommendedSection:
     info:
@@ -40,7 +40,7 @@ indexPage:
 programs:
   featured: E përzgjedhur
   newest: Programet më të reja
-  recommended: Recommended programs
+  recommended: Programet e rekomanduara
   most:
     viewed: Më të shikuarat
     downloaded: Më të shkarkuarat
@@ -80,12 +80,12 @@ programs:
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'nga'
-  open: 'Open'
+  open: 'Hape'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programNotAvailableErrorTitle: 'Na vjen keq...'
+  programNotAvailableErrorDescription: 'Programi nuk është në dispozicion!'
+  programNotAvailable: 'Jo i disponueshëm'
+  programUnknownUser: 'Perdorues i paidentifikuar'
 passwordRecovery:
   subject: Rigjenerimi Fjalëkalimit tuaj
   message: |
@@ -148,7 +148,7 @@ licenseToPlay:
   version: Version 1.1, 2 Prill 2013
 teachers:
   login:
-    title: 'Teachers area'
+    title: 'Zona Mësuesve'
     description: 'This area can be used by teachers.'
 termsOfUse:
   title: Kushtet e përdorimit
@@ -451,7 +451,7 @@ errors:
     rude: Description must not contain rude wordes.
   country:
     blank: Mungon shteti.
-    invalid: Invalid country
+    invalid: Shteti i pavlefshëm
   email:
     blank: e-mail nuk duhet të jetë i zbrazur
     invalid: Your email seems to be invalid
@@ -470,7 +470,7 @@ errors:
     unexpected: unexpected file found
     invalid: invalid file
   image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+  unknown: gabim i panjohur
   token: 'Authentication of device failed: invalid auth-token!'
   programname:
     rude: Programname must not contain rude wordes.
@@ -491,6 +491,8 @@ time:
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabisht
   bulgarian: Bullgarisht
@@ -550,8 +552,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: Etiketat
+extenstion-text: Shtesat
 tags:
   constant:
     tag1: Loja
@@ -562,7 +564,7 @@ tags:
     tag6: Eksperimental
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
+    diskMaintenance: Mirëmbajtja e diskut
     noRemovableObjects: No removable objects available.
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
@@ -580,10 +582,28 @@ pmd:
   submitBox:
     header: Submission
     text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    btnText: Dërgo
   successful:
     text: Your program upload was successful.
   failed:
     text: Program upload failed.
 codeview:
-  showText: Show code
+  showText: Shfaq codin
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

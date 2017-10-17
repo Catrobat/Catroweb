@@ -27,7 +27,7 @@ registrationError: 'Benutzername oder e-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
 wellDone: "Gut gemacht!"
 done: "Fertig!"
-notificationsReadMessage: "Sie haben alle Mitteilungen lesen."
+notificationsReadMessage: "Du hast alle Mitteilungen gelesen."
 notificationsClearedMessage: "Alle Benachrichtigungen wurden als gelesen markiert."
 clearAllNotificationsButtonTitle: "Alles als gelesen markieren"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
@@ -487,6 +487,8 @@ time:
   days.ago: '{1} vor 1 Tag |]1, Inf] vor %count% Tagen'
   months.ago: '{1} vor 1 Monat |]1, Inf] vor %count% Monaten'
   years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabisch
   bulgarian: Bulgarisch
@@ -574,7 +576,7 @@ pmd:
   submitBtn: Projekt abgeben
   submitBox:
     header: Abgabe
-    text: Sie sind im begriff ihr Projekt abzugeben. Bitte geben Sie den Projektcode ein.
+    text: Du bist im begriff dein Projekt abzugeben. Bitte gib den Projektcode ein.
     btnText: Abgeben
   successful:
     text: Ihr Programm-Upload war erfolgreich.
@@ -582,3 +584,21 @@ pmd:
     text: Programm-Upload fehlgeschlagen.
 codeview:
   showText: Code anzeigen
+footer:
+  usefulLinks: Nützliche Links
+  legalities: Gesetzmäßigkeiten
+  communityStats: Community Statistiken
+  downloads: Downloads
+  programs: Programme
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

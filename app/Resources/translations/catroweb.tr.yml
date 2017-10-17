@@ -24,14 +24,14 @@ less: 'daha az'
 ok: Tamam
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
+notifications: 'Bildirimler'
+wellDone: "Tebrikler!"
 done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
+notificationsReadMessage: "Bütün bildirimleri okudunuz."
+notificationsClearedMessage: "Bütün bildirimleri okunmuş olarak işaretlendi."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "Lütfen bekleyiniz..."
 indexPage:
   recommendedSection:
     info:
@@ -40,12 +40,12 @@ indexPage:
 programs:
   featured: Seçme
   newest: En yeni programlar
-  recommended: Recommended programs
+  recommended: Önerilen programlar
   most:
     viewed: En çok İzlenenler
     downloaded: En çok indirilen
   random: Gelişigüzel programlar
-  related: Related Programs
+  related: İlgili programlar
   downloads: '%kere indirildi% kere indirildi'
   sample: Örnek Program
   views: '%kez bakıldı% kez bakıldı'
@@ -58,7 +58,7 @@ programs:
   submitted: Gönderilen programlar
   uploaded: Yüklenen programlar
   reportAsInappropriate: Uygunsuz olarak rapor et
-  languageVersion: 'Catrobat dil sürümü: %dilVersiyonu%'
+  languageVersion: 'Catrobat dil sürümü: %languageVersion%'
   reportLoginText: Please %login% to report this program as inappropriate.
   reportDialogHeader: Bu programı neden uygunsuz buldunuz?
   reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne
@@ -69,9 +69,9 @@ programs:
   updateAppText: Lütfen programinizi yeni sürümüyle güncelleştirin.
   btnClosePopup: Tamam
   checkout_this_program: Bu Catrobat programına gözat
-  show_more: Show More
+  show_more: Daha Fazlasını Göster
   comments: Comments
-  send: Send
+  send: Gönder
   delete: Sil
   report: Rapor et
   report_popup: The comment was successfully reported.
@@ -111,7 +111,7 @@ profile:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
     passwordIsUsername: Şifre kullanıcı adından farklı olmalıdır.
-    passwordWrong: Wrong password
+    passwordWrong: Yanlış şifre
     emailNotValid: Bu e-posta adresi geçerli değil.
     emailMissing: E-posta adresinizi güncelleştirme sırasında bir hata oluştu. En az bir onaylanmış e-posta adresi olması gerekir.
     emailExists: Bu e-posta adresi mevcut.
@@ -124,21 +124,21 @@ profile:
     uploadError: Üzgünüz, yükleme sırasında bir sorun oluştu!
     noSupport: Bu resim türü desteklenmiyor, lütfen başka bir görüntü deneyin.
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
+  editProfile: Profili düzenle
+  edit: Düzenle
+  done: Tamam
   avatar: Avatar
-  email: E-Mail
+  email: E-Posta
   editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
+  editUsername: Kullanıcı adını düzenle
+  editPassword: Şifreyi düzenle
   editCountry: Edit country
-  editEmail: Edit E-Mail
+  editEmail: E-Postayı düzenle
 licenseToPlay:
   link: 'Oynamak için lisansınız'
   title: 'Oynamak için lisans- prim ver ve paylaş'
   text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
+  text2: 'Gizli olan hiçbir tarif yok: Bu pastaların nasıl yapılacağını açıklayan bilgileri herkes kullanır, yeniden kullanır, değiştirir ya da yeni fikirler için ilham kaynağı olarak yararlanır... Yani yeni pastalar için.'
   text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
@@ -186,7 +186,7 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Sürüm 1.3, 4 Mart 2014
 help:
   stepByStep:
     title: "Adım adım tanıtım"
@@ -197,15 +197,15 @@ help:
       During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
       After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
     step1:
-      title: 'Make a new program'
+      title: 'Yeni bir program yapın'
       detail:
         text1: '"Yeni"''ye dokunun.'
         text2: 'Program adı girin, "boş program oluştur"''u seçin ve "OK"ye dokunun.'
     step2:
-      title: "Create a new object"
+      title: "Yeni bir nesne oluştur"
       detail:
         text1: 'Dokunun:'
-        text2: 'Choose the source of the first look of your new object.'
+        text2: 'Yeni nesnenizin ilk görünümü için kaynak seçin.'
         text3: 'Enter an object name and tap "OK" to create the object.'
         special1: 'Yeni bir görünüm çizin.'
         special2: 'Galeriden seçin.'
@@ -417,7 +417,7 @@ search:
   dotdotdot: Search...
   search: Ara
   results: Sonuçlarda Ara
-  resultcount: Your search returned %count% results
+  resultcount: '%count% sonuç bulundu'
 menu:
   profile: Benim profilim
   logout: Çıkış Yap
@@ -487,11 +487,13 @@ success:
   upload: Proje başarıyla yüklendi!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 dakika önce |{1} 1 dakika önce|]1, INF] %rakam% dakika önce'
-  hours.ago: '{1} 1 saat önce |]1, INF] %rakam% saat önce'
-  days.ago: '{1} 1 gün önce |]1, INF] %rakam% gün önce'
-  months.ago: '{1} 1 ay önce |]1, INF] %rakam% ay önce'
+  minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1, INF] %count% dakika önce'
+  hours.ago: '{1}1 saat önce |]1, INF] %count% saat önce'
+  days.ago: '{1}1 gün önce |]1, INF] %count% gün önce'
+  months.ago: '{1}1 ay önce |]1, INF] %count% ay önce'
   years.ago: '{1} 1 yıl önce |]1, INF] bir yıldan fazla'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arapça
   bulgarian: Bulgarca
@@ -588,3 +590,21 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

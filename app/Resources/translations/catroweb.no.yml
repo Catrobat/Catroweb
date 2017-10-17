@@ -162,11 +162,11 @@ termsOfUse:
   list2:
     item1: Vis respekt. Ved deling av programmer, husk at folk med ulike aldre og bakgrunn vil se dine bidrag.
     item2: "Gi anerkjennelse. Lag gjerne modifiserte versjoner av andres programmer - Husk å gi dem anerkjennelse. Ett sted å gi anerkjennelse er i programmets beskrivelse. Se avsnittet nedenfor den prikkede listen for detaljer om hvordan du endrer andres programmer."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
+    item3: "Vær ærlig. Ikke lat som du er noen andre enn den du er eller prøv å lure samfunnet."
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
-    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
+    item1: 'Ved å laste et program til våre nettsteder, så aksepterer du og gir du samtykke til å sette dette arbeidet under visse gratis lisenser som et opplastet Catrobat program. Lignende på gratis lisensene som Catrobat systemet selv er tilgjengelig under, gir disse gratis lisensene alle rett til å lære fra andre opplastede program og til å forandre og blande til å lage sine egne fasinere spill, animasjon, og andre program. Dette gjør at alle kan stå ''på skuldrene'' til andre og du er en av de andre! Arbeidet ditt kommer derfor til å være til nytte for alle i hele verden og forbli tilgjengelig slik at alle kan bruke det, litt lignende på bildene og teksten på Wikipedia som er bidratt av frivillige fra hele verden. Se det som din gave til menneskeheten: du gir til alle andre, og alle andre som laster opp arbeidet sitt til våre nettsteder gir til deg. På den måten er et opplastet program en verdifull gave som eieren gir deg gratis, med den forutsetningen at du deltar i samfunnet under de samme vilkårene.'
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
@@ -488,6 +488,8 @@ time:
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabic
   bulgarian: Bulgarian
@@ -584,3 +586,21 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

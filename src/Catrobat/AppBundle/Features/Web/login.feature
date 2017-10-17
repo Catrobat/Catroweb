@@ -13,7 +13,6 @@
     Then I should see an "#btn-login" element
     When I click "#btn-login"
     Then I should be on "/pocketcode/login"
-    And I should see an "#header-logo" element
     And I fill in "username" with "Catrobat"
     And I fill in "password" with "123456"
     Then I press "Login"
@@ -31,7 +30,6 @@
 
   Scenario: Request password should work for an existing user and just once in 24 hours
     Given I am on "/pocketcode/login"
-    Then I should see "Forgot password or username?"
     When I click "#pw-request"
     Then I should be on "/pocketcode/resetting/request"
     When I fill in "username" with "abcd"
@@ -45,24 +43,23 @@
     And I press "recover"
     Then I should see "The password for this user has already been requested within the last 24 hours."
 
-Scenario: The referer should work even after one failed login
-  Given I am on "/pocketcode/help"
-  Then I should see an "#btn-login" element
-  When I click "#btn-login"
-  Then I should be on "/pocketcode/login"
-  And I should see an "#header-logo" element
-  And I fill in "username" with "Catrobat"
-  And I fill in "password" with "123"
-  Then I press "Login"
-  Then I should see "Your password or username was incorrect."
-  And I fill in "username" with "Catrobat"
-  And I fill in "password" with "123456"
-  Then I press "Login"
-  And I should see a big help image "Game Design"
-  
-Scenario: When visiting the page directly to the login page, after login i should be on the index page
-  Given I am on "/pocketcode/login"
-  And I fill in "username" with "Catrobat"
-  And I fill in "password" with "123456"
-  When I press "Login"
-  Then I should see "Newest"
+  Scenario: The referer should work even after one failed login
+    Given I am on "/pocketcode/help"
+    Then I should see an "#btn-login" element
+    When I click "#btn-login"
+    Then I should be on "/pocketcode/login"
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123"
+    Then I press "Login"
+    Then I should see "Your password or username was incorrect."
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123456"
+    Then I press "Login"
+    And I should see a big help image "Game Design"
+
+  Scenario: When visiting the page directly to the login page, after login i should be on the index page
+    Given I am on "/pocketcode/login"
+    And I fill in "username" with "Catrobat"
+    And I fill in "password" with "123456"
+    When I press "Login"
+    Then I should see "Newest"

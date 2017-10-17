@@ -35,11 +35,9 @@
 {% endblock %}
 
 {% block body %}
-
   <div id="program-top" class="h1">
     <div id="program-name">{{ program.name }}</div>
     <div id="program-user">
-      <span class="img-author"></span>
       <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
     <div class="clear"></div>
@@ -132,55 +130,87 @@
       {% endif %}
 
       <div class="download-container">
-        <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-          <button id="download" class="btn btn-primary download-button">
+{#        {% if not isWebview() %}#}
+          <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+            <button id="download" class="btn btn-primary download-button">
+              <table>
+                <tr>
+                  <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
+                  <td>{{ "download"|trans({}, "catroweb") }}</td>
+                </tr>
+              </table>
+            </button>
+          </a>
+
+          <button id="remix-graph-button" class="btn btn-primary download-button">
             <table>
               <tr>
-                <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
-                <td>{{ "download"|trans({}, "catroweb") }}</td>
+                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
           </button>
-        </a>
 
-        <button id="remix-graph-button" class="btn btn-primary download-button">
-          <table>
-            <tr>
-              <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-              <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
-
-        <button id="apk-generate" class="btn btn-apk download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-              <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
-
-        <div id="apk-pending" class="btn-apk pending-container">
-          <button  class="btn download-button download-pending">
+          <button id="apk-generate" class="btn  btn-primary btn-apk download-button">
             <table>
               <tr>
                 <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
+                <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
+
+          <button id="apk-pending" class="btn  btn-primary download-button">
+            <table id="pending-table">
+              <tr>
+                <td id="replace-me"><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
                 <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
           </button>
-          <img class="pending-icon" src="{{ asset('images/symbols/loading.gif') }}" >
-        </div>
 
-        <button id="apk-download" class="btn btn-apk download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-              <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+          <button id="apk-download" class="btn btn-apk btn-primary download-button">
+            <table>
+              <tr>
+                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
+                <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
+              </tr>
+            </table>
+          </button>
+{#        {% endif %}#}
+
+{#        {% if isWebview() %}
+          <button id="remix-graph-button" class="btn btn-primary download-button">
+            <table>
+              <tr>
+                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                </tr>
+            </table>
+          </button>
+
+          <div class="backdrop"></div>
+          <div class="fab child" data-subitem="1">
+            <span>
+              <div>
+                <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
+                <i id="apk-pending" class="fa fa-refresh fa-spin fa-inverse" aria-hidden="true"></i>
+                <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
+              </div>
+            </span>
+          </div>
+
+          <div class="fab child" data-subitem="2">
+            <span>
+              <div>
+                <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+                <img src="{{ asset('images/symbols/download.svg') }}" >
+                </a>
+              </div>
+            </span>
+          </div>
+          <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
+      {% endif %}#}
       </div>
 
       {% if nolb_status and program.user == app.user.username %}
@@ -243,11 +273,12 @@
           </div>
         {% endif %}
       {% endif %}
-      <br />
-
+      <div class="clear"></div>
       <table id="copy-link">
         <tr>
-          <td id="copy-link-image"></td>
+          <td>
+            <div class="glyphicon glyphicon-link medium-icon"></div>
+          </td>
           <td>
             <span>Link</span>
           </td>
@@ -258,16 +289,7 @@
           </td>
         </tr>
       </table>
-
-      {% if not isWebview() %}
-          {% include ':social:social_share_desktop.html.twig' %}
-      {% endif %}
-
-      <p>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
-      <br>
-      {{ "programs.languageVersion"|trans({ "%languageVersion%" : program_details.languageVersion }, 'catroweb') }}
-      </p>
     </div>
 
     <div class="clear"></div>
@@ -296,10 +318,6 @@
       {% endif %}
     </div>
   </div>
-
-  {% if isWebview() %}
-    {% include ':social:social_share_mobile.html.twig' %}
-  {% endif %}
 
   {#
    # CODEVIEW
@@ -330,12 +348,12 @@
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
     <div id="icon-remix">
-      <span><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 26px"></i></span>
-      <span class="icon-text">
       <a id="remix-graph-modal-link" href="#remix-graph-modal">
-        {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+        <img src="{{ asset('images/symbols/remix.png') }}"/>
+        <span class="icon-text">
+          {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
+        </span>
       </a>
-    </span>
     </div>
   </div>
 
@@ -346,18 +364,14 @@
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
 
-    {% if not ("RU" in app.request.locale) and not ("ru" in app.request.locale) %}
-      {% if  program.tags|length > 0  or program.extensions|length > 0 %}
-      <div id="recommendations">
-        <div id="recsys-headline">
-          <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
-        </div>
-        <div class="programs"></div>
-
-      </div>
-
-      {% endif %}
-    {% endif %}
+  {% if  program.tags|length > 0  or program.extensions|length > 0 %}
+  <div id="recommendations">
+    <div id="recsys-headline">
+      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+    </div>
+    <div class="programs"></div>
+  </div>
+  {% endif %}
 
   <div id="specific-programs-recommendations">
     <div id="recsys-specific-programs-headline">
@@ -377,7 +391,7 @@
     <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
     <div id="user-comment-wrapper">
       <textarea class="msg" style="width: 100%; height: 100px"></textarea>
-      <button id="post-button" class="post-button">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
+      <button id="post-button" class="btn btn-primary">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
     </div>
 
     <div id="comments-wrapper">
@@ -427,13 +441,8 @@
       <div class = "show-more">
         <button id="show-more-button" {% if program_details.comments|length <= 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
       </div>
-
     </div>
-
   </div>
-  {% if isWebview() %}
-    {% include ':social:social_like_program_bottom.html.twig' %}
-  {% endif %}
 
 {% endblock %}
 
@@ -519,7 +528,7 @@
     }
 
     $(document).ready(function() {
-      var loadingAnimation = new LoadingAnimation('#FFFFFF', "{{ "pleaseWait"|trans({}, "catroweb") }}");
+      var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}");
       var recommendedByRemixGraphPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
       var networkDirector = new NetworkDirector();
       var remixGraph = RemixGraph.getInstance();
@@ -699,7 +708,7 @@
           }});
       });
 
-      $(document).on("click", ".post-button", function() {
+      $(document).on("click", "#post-button", function() {
         var msg = $('.msg').val();
         if(msg.length == 0) {
           return;
@@ -799,5 +808,37 @@
       });
     });
 
+
+    $(function(){
+        $(".fab,.backdrop").click(function(){
+            if($(".backdrop").is(":visible")){
+                $(".backdrop").fadeOut(125);
+                $("#action-arrow").removeClass("fa-angle-down");
+                $("#action-arrow").addClass("fa-angle-up");
+                $(".fab.child")
+                    .stop()
+                    .animate({
+                        bottom  : $("#masterfab").css("bottom"),
+                        opacity : 0
+                    },125,function(){
+                        $(this).hide();
+                    });
+            }else{
+                $(".backdrop").fadeIn(125);
+                $("#action-arrow").removeClass("fa-angle-up");
+                $("#action-arrow").addClass("fa-angle-down");
+                $(".fab.child").each(function(){
+                    $(this)
+                        .stop()
+                        .show()
+                        .animate({
+                            bottom  : (parseInt($("#masterfab").css("bottom")) + parseInt($("#masterfab").outerHeight())
+                            + 70 * $(this).data("subitem") - $(".fab.child").outerHeight()) + "px",
+                            opacity : 1
+                        },125);
+                });
+            }
+        });
+    });
   </script>
 {% endblock %}

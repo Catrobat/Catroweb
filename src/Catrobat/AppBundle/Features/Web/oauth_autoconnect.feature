@@ -18,8 +18,7 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | FB-Dev            | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | at     |
-    And I should see the logout button
-    And I click the "logout" button
+    And I go to "/logout"
     Then I should not be logged in
 
   @javascript @insulated
@@ -31,6 +30,5 @@ Feature: Open Authentication
     And there is a user in the database:
       | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
       | Google-Dev        | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | at     |
-    And I should see the logout button
-    And I click the "logout" button
+    And I go to "/logout"
     Then I should not be logged in

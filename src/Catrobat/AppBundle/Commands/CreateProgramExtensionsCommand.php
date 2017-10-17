@@ -112,6 +112,10 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
                     if (in_array($extension->getPrefix(), $prefixes )) {
                         $program->addExtension($extension);
                         $program_with_extensiones = true;
+
+                        if ($extension->getPrefix() == 'PHIRO') {
+                          $program->setFlavor('phirocode');
+                        }
                     }
                 }
 

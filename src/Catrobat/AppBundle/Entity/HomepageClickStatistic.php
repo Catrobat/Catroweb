@@ -24,7 +24,7 @@ class HomepageClickStatistic
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
-     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @var Program
      */
     protected $program;
@@ -51,7 +51,7 @@ class HomepageClickStatistic
 
     /**
      * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $user;
 

@@ -2,10 +2,10 @@
 localLanguage: 영어
 username: 아이디
 password: 비밀번호
-aboutPocketCode: 포켓코드에 대하여
+aboutPocketCode: 포켓 코드에 대하여
 tutorials: 튜터리얼
 googlePlay: 구글 플레이
-passwordsNoMatch: 비밀번호가 일치하지 않습니다
+passwordsNoMatch: 비밀번호가 일치하지 않습니다.
 error: 오류
 cancel: 취소
 report: 보고서
@@ -16,12 +16,12 @@ country: 국가
 loginText: 로그인
 privacyPolicy: 개인정보 보호방침
 imprint: 표시하기
-somethingWentWrong: '뭔가 이상합니다'
-pleaseTryAgain: '다시 시도하세요'
+somethingWentWrong: '죄송합니다. 오류가 발생했습니다.'
+pleaseTryAgain: '다시 시도하세요!'
 oldVersionError: '포켓코드를 최신 버전으로 업데이트 하시기 바랍니다!'
-more: '더 많은'
-less: '적은'
-ok: 확인
+more: '자세히'
+less: '간단히'
+ok: OK
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
 registrationError: '이미 사용 중인 사용자 이름 또는 이메일 주소입니다.'
 notifications: '알림'
@@ -44,17 +44,17 @@ programs:
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 가장 많이 다운로드한 프로그램
-  random: 무작위 프로그램
+  random: 랜덤 프로그램
   related: 관련 프로그램
   downloads: '%downloads% 다운로드'
   sample: 예제 프로그램
   views: '%views% 조회'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  likeThumbsUpDetailText: '{0}0 사람 엄지손가락 표시 |{1}1 사람 엄지손가락 표시 |] 1, Inf]%persons% 사람들 엄지손가락 표시'
+  likeSmileDetailText: '{0}0 사람 스마일 표시 |{1}1 사람 스마일 표시 |] 1, Inf]%persons% 사람들 스마일 표시'
+  likeLoveDetailText: '{0}0 사람 좋아요 표시 |{1}1 사람 좋아요 표시 |] 1, Inf]%persons% 사람들 좋아요 표시'
+  likeWowDetailText: '{0}0 사람 최고! 표시 |{1}1 사람 최고!  표시 |] 1, Inf]%persons% 사람들 최고!  표시'
+  remixes: '{0}0 리믹스 |{1}1 리믹스 |] 1, Inf]%remixes% 리믹스'
+  newRemixesNotificationTitle: '|{1} "%programName%" 1 새로운 리믹스: |] 1, Inf] "%programName%" 새로운 리믹스 %remixes%  :'
   submitted: 제출된 프로그램
   uploaded: 업로드된 프로그램
   reportAsInappropriate: 부적합한 프로그램으로 보고
@@ -89,10 +89,10 @@ remixGraph:
 passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
-    친애 하는 %username%.  당신은 비밀 번호를 잊어버려서 %appplication_url%에 비밀 번호 재설정을 요청 했습니다. 요청하지 않은 경우에는 무시하시기 바랍니다. 해지되어 24시간이내에 사용할 수 없게 될 것입니이다. 비밀 번호를 재설정 하고 새로운 비밀번호를 만들려면, 다음 페이지를 방문 하십시오: %confirmationUrl%
+    친애 하는 %username%.  당신은 비밀 번호를 잊어버려서 %appplication_url%에 비밀 번호 재설정을 요청 했습니다. 요청하지 않은 경우에는 무시하시기 바랍니다. 해지되어 24시간이내에 사용할 수 없게 될 것입니다. 비밀 번호를 재설정하고 새로운 비밀번호를 만들려면, 다음 페이지를 방문 하세오: %confirmationUrl%
     
     당신은  %appplication_url% 커뮤니티에 언제라도 사용하기 위해서  사용자 이름과 비밀 번호를 사용할 수 있습니다.
-    그렇게 하려면 그냥 다음 페이지를 방문 하십시오: %loginPage%
+    그렇게 하려면 다음 페이지를 방문하십시오: %loginPage%
     당신의 프로필 세부 정보를 편집하려면 이 페이지로 이동: %profilePage% 
     
     안녕하세요, 
@@ -106,7 +106,7 @@ profile:
   myPrograms: 내 프로그램
   form:
     passwordTooShort: 새 암호는 적어도 %length% 문자 이상이어야 합니다.
-    passwordTooLong: 새 암호는 최대로 %length% 문자 사용할 수 있습니다.
+    passwordTooLong: 새 암호는 최대 %length% 문자 사용할 수 있습니다.
     passwordIsUsername: 암호는 사용자 이름과는 달라야 합니다.
     passwordWrong: 잘못된 비밀번호
     emailNotValid: 이 이메일 주소는 유효하지 않습니다.
@@ -134,11 +134,11 @@ myprofile:
 licenseToPlay:
   link: '게임 라이센스'
   title: '신용 및 공유 라이센스'
-  text1: 각 Catrobat 프로그램을 제조법(프로그래밍 블럭)과 함께 제공되는 아주 특별한 케이크라고 상상해 보세요. Catrobat 공동체의 모든 구성원이 그들의 조리법과 함께 케이크를 공유합니다. 즉, 당신이 케이크를 즐길 수 있고 그들 스스로 만드는 방법을 배울 수 있다는 것을 의미합니다.
+  text1: 각 Catrobat 프로그램을 제조법(프로그래밍 블록)과 함께 제공되는 아주 특별한 케이크라고 상상해 보세요. Catrobat 공동체의 모든 구성원이 그들의 조리법과 함께 케이크를 공유합니다. 즉, 당신이 케이크를 즐길 수 있고 그들 스스로 만드는 방법을 배울 수 있다는 것을 의미합니다.
   text2: '특별한 비밀 요리법은 없습니다:이 케이크를 만드는 방법에 대 한 지침 사용, 재사용, 수정, 및 새로운 아이디어에 대한 영감으로 봉사하는 것 등이 누구에게나 열려 있습니다... 나는 케이크를 의미 한다.'
   text3: "여러분들은 다른 재료를 사용해 다른 사람들의 요리법을 복사할 뿐만 아니라 스스로 만들어 먹을 수도 있다. 이렇게 자유롭게 하려면 두가지가 필요하다:"
   text4: "Catrobat 커뮤니티를 만들면서 우리는 이 방법이 커뮤니티안에서 학습과 창조성을 돕는다고 믿어 사용하기로 결정하였다. 조리법과 재료(스크립트와 작품들)을 공유함으로서, 다른 사람의 아이디어위에 새롭게 만들어 서로에게 이익이 된다."
-  text5: Catrobat 웹사이트를 디자인하면서, 우리는 사람들이 공유하고 서로에게 도움이 될 수 있도록 모양을 만들었다. 각각의 프로그램 페이지에서는, 여러분들은 프로그램의 원본 스크립트를 항상 다운로드할 수 있다. 여러분들이 프로그램을 재구성했다면(스크립트나 모양을 바꾸고, 결과를 공유하며), 우리는 여러분들이 프로그램의 설명에 제작과정을 밝히기를 권장하며, 여러분에게 영감을 준 사람과 프로그램에 대해 밝혀주기를 바란다.
+  text5: Catrobat 웹사이트를 디자인하면서, 우리는 사람들이 공유하고 서로에게 도움이 될 수 있도록 모양을 만들었다. 각각의 프로그램 페이지에서는, 여러분들은 프로그램의 원본 스크립트를 항상 다운로드할 수 있다. 여러분들이 프로그램을 재구성했다면(스크립트나 모양을 바꾸고, 결과를 공유하며), 우리는 여러분들이 프로그램의 설명에 제작과정을 밝히기를 권장하며, 여러분에게 영감을 준 사람과 프로그램에 대해 밝혀주기를 바랍니다.
   text6: '온라인 커뮤니티 %link-termsOfUse%에 있는 Catrobat의 이용 약관에 대해 자세히 알아보세요.'
   list1:
     item1: 당신의 요리법과 함께 케이크를 공유하세요
@@ -147,13 +147,13 @@ licenseToPlay:
 teachers:
   login:
     title: '교사 지역'
-    description: '여기는 교사에 의해 사용할 수 있습니다.'
+    description: '여기는 교사용입니다.'
 termsOfUse:
   title: 이용 약관
   headline: 오신 것을 환영 합니다 Catrobat 커뮤니티!
   text1: 'Catrobat 커뮤니티의 일환으로, 사람들과 프로그램과 아이디어를 공유할 수 있습니다 :'
   text2: "이 커뮤니티가 모두에게 도움이 되기위해서는 여러분들의 도움이 필요하다. 여기 당신이 도울 방법이 있다:"
-  text3: "Catrobat 프로젝트를 통해 협력을 촉진하고 모든 인류의 이익을 위해 결합하여 모든 사람의 창의력을 허용합니다. 다른 활동하는 구성원이 그들의 프로그램을 당신에게 주었던 것처럼, 여러분들 또한 선물처럼 커뮤니티에 당신의 프로그램을 공유하여 캣로밧 커뮤니티의 활동하는 구성원이 될 수 있습니다:"
+  text3: "Catrobat 프로그램를 통해 협력을 촉진하고 모든 인류의 이익을 위해 결합하여 모든 사람의 창의력을 허용합니다. 다른 활동하는 구성원이 그들의 프로그램을 당신에게 주었던 것처럼, 여러분들 또한 선물처럼 커뮤니티에 당신의 프로그램을 공유하여 캣로밧 커뮤니티의 활동하는 구성원이 될 수 있습니다:"
   text4: '당신에게 선물로 주고 싶다.'
   text5: '사용과 서비스 약관:'
   list1:
@@ -162,7 +162,7 @@ termsOfUse:
     item3: 경험의 모든 수준을 가지고
   list2:
     item1: 존경받도록 하세요. 프로그램을 공유할 때, 여러 나이의 다른 배경의 많은 사람들이 당신의 기여를 볼 것이라는 것을 기억하세요.
-    item2: "제작참여과정을 보여 주세요. 다른 사람의 프로그램을 변형하는 버전을 만드는 것을 자유롭게 느끼도록 제작참여과정을 꼭 만들어 보여 주세요. 프로그램 설명이 제작참여과정을 위한 공간입니다. 다른 제작자의 프로그램의 변형에 대한 점선 리스트 아래 문구를 보아 주세요."
+    item2: "제작참여 과정을 보여주세요. 다른 사람의 프로그램을 변형하는 버전을 만드는 것을 자유롭게 느끼도록 제작참여 과정을 꼭 만들어 보여 주세요. 프로그램 설명이 제작참여 과정을 위한 공간입니다. 다른 제작자의 프로그램의 변형에 대한 점선 리스트 아래 문구를 보아 주세요."
     item3: "정직 하게 하세요. 다른 사람인 것처럼 하거나 커뮤니티를 속이려 하지 마세요."
     item4: "개인 개인 정보를 유지하세요. 여러분의 이메일 주소, 전화 번호 또는 기타 개인 연락처 정보를 공유하지 마십시오."
     item5: "사이트를 친절하도록 유지해 주세요. 만약 프로그램이나 설명이 거칠거나, 너무 폭력적이거나, 부적절하다고 느껴지시면, '부적절 신고'를 클릭하고 간단한 설명을 남겨 주세요. Catroba 팀에서 여러분의 신고를 검토하고 프로그램과, 설명 등 관련된 것을 삭제할 수 있습니다."
@@ -172,8 +172,8 @@ termsOfUse:
     item3: "한 중요 한 추가 상태는 당신이 명확 하 게 누구의 작품에 당신이 자신의 작품을 기반으로 하는 저자에 게 속성을 부여입니다. 같은 시간에 우리는 열심히 작업 평가 될 것 이다 명확 하 게 다른 사람에 의해 당신에 의해, Catrobat의 지역 사회에서 당신을 대표 하는 것을 자유롭게 선택한 고유 이름 속성을 제공 하 여 그리고 다른 작업 모두에 게 부여 하는 데 대 한 공개 방법에 당신에 게 그들의 감사를 표현 하는 기회를 제공 함으로써 기여 된 데에 및 특히 그들에 게."
     item4: '정확한 법률 용어 및 조건에 대 한 %link-licenseUploaded%를 참조 하십시오.'
   list4:
-    item1: "우리는 우리의 자신의 소프트웨어 및 Catrobat 시스템, 예를 들어, Catrobat 시스템에 관련 된 우리 자신의 소스 코드 Catrobat 팀, 우리의 웹 사이트와 인터넷 리소스에 의해 작성 된 소프트웨어와 관련 된 인터넷 자원 제공 및 모든 추가 포함 재료 등, 예를 들어, 그림, 소리, 및 텍스트, 현재와 미래에 Catrobat의 무료 라이선스 아래 당신에 게."
-    item2: 그러나 이러한 라이선스 Catrobat 둘 다 당신에 게 무료로, 와 같은 몇 가지 제한만 보장, 다른 가운데, Catrobat 시스템 영원히 남아 있을 것 이라는 무료 하 고 유용한 모두에 그들을 사용 하 여 자유를 주는 의미에서 자유의 모든 부분을 확인 합니다.
+    item1: "우리는 우리의 자신의 소프트웨어 및 Catrobat 시스템, 예를 들어, Catrobat 시스템에 관련 된 Catrobat 팀, 우리의 웹 사이트와 인터넷 리소스에 의해 작성된 소프트웨어와 관련된 인터넷 자원 제공 및 모든 추가 포함 재료 등, 예를 들어, 그림, 소리, 및 텍스트, 현재와 미래에 Catrobat의 무료 라이선스를 제공합니다."
+    item2: 이러한 라이선스는 Catrobat과 여러분들에게 무료로 계속 남을 수 있게 만듭니다.
     item3: '정확한 법률 용어 및 조건에 대 한 %link-licenseToPlay%를 참조 하십시오. Catrobat 시스템 뿐 아니라 다른 많은 문서 및 리소스의 소스 코드는 %link-developer%를 통해 사용할 수 있습니다.'
   list5:
     item1: '만약 당신이, 이나, 나이, 귀하의 부모 또는 법적 보호자의 13 세 미만 있다면, 연결 조직에 참여 또는 담당 기자 회견 형식 개인 정보 보호 위반 또는 대량 대량 감시, 그럼 우리의 소프트웨어 응용 프로그램을 사용 하 고 우리의 서비스에 액세스할 수 없습니다. 이 제한 및 그것에 특정 예외의 정확한 세부 사항 섹션에서 delineated는 4.a 및 4.b 우리의 %link-termsOfUse%에.'
@@ -189,7 +189,7 @@ help:
     title: "단계별 소개"
     start: "시작 위치:"
     description: |
-      여기 귀하의 첫 번째 프로그램 다음 연습 동영상을 사용 하 여 대화형 엽서 만들 있습니다. 당신은 당신에 게 주어진 지시를 따릅니다. 엽서의 생성 하는 동안 귀하의 미래의 프로젝트에 필요한 주머니 코드의 기초는 중재 된다. 이 가이드 동영상 후 다른 모든 활동 자신의 개인 주머니 코드 프로젝트를 만드는 더 많은 자유를 줄 것 이다.
+      여기 귀하의 첫 번째 프로그램 다음 연습 동영상을 사용하여 대화형 엽서를 만들 수 있습니다. 당신은 당신에게 주어진 지시를 따르세요. 엽서를 생성하는 동안 귀하의 미래의 프로그램에 필요한 포켓 코드의 기초는 중재된다. 이 가이드 동영상은 포켓코드 프로그램를 만드는 더 많은 자유를 줄 것 이다.
     step1:
       title: '새로운 프로그램 만들기'
       detail:
@@ -199,8 +199,8 @@ help:
       title: "새로운 프로그램 만들기"
       detail:
         text1: '터치'
-        text2: '새 개체의 첫 번째 보기의 소스를 선택 합니다.'
-        text3: '개체 이름을 입력하고 개체를 만드는 "확인"을 누릅니다.'
+        text2: '오브젝트의 첫 번째 모양의 소스를 선택하세요.'
+        text3: '오브젝트 이름을 입력하고  "확인"을 터치하세요.'
         special1: '새 이미지 그리기'
         special2: '갤러리에서 가져오기'
         special3: '사진 찍기'
@@ -208,62 +208,62 @@ help:
       title: "이동 시작"
       detail:
         text1: '터치'
-        text2: '우리가 사용하는 첫 번째 블럭은 "동작" 카테고리이다.'
-        text3: '"움직이기" 블럭을 선택합니다. 블럭에서 정해지는 새 위치로 움직인다.'
-        text4: '블럭은 현재 떠다닙니다. 고정시키기 위해 원하는 위치로 블럭을 이동합니다. 이미 배치된 블럭들도 터치하여 다시 이동시킬수 있습니다.'
-        text5: '"실행" 버튼으로 배경에서 개체가 움직이기하는 것을 볼 수 있다.'
+        text2: '우리가 사용하는 첫 번째 블록은 "동작" 카테고리이다.'
+        text3: '"움직이기" 블록을 선택합니다. 블록에서 정해지는 새 위치로 움직인다.'
+        text4: '블록은 현재 떠다닙니다. 고정시키기 위해 원하는 위치로 블록을 이동합니다. 이미 배치된 블록들도 터치하여 다시 이동시킬수 있습니다.'
+        text5: '"실행" 버튼으로 배경에서 오브젝트가 움직이기하는 것을 볼 수 있어요.'
         text6: '돌아가기 위해서는 스마트폰의 취소 버튼를 이용하세요.'
     step4:
       title: "배경 바꾸기"
-      description: "개체의 모양을 변경할 수 있습니다."
+      description: "오브젝트의 모양을 변경할 수 있어요."
       detail:
-        text1: '"다음 배경" 블럭을 선택합니다. 이 블럭으로 배경을 선택하거나 새로 만들 수 있습니다.'
-        text2: '"움직이기"블럭을 터치하세요.'
+        text1: '"다음 배경" 블록을 선택합니다. 이 블록으로 배경을 선택하거나 새로 만들 수 있습니다.'
+        text2: '"움직이기"블록을 터치하세요.'
         text3: '새로운 모양을 만들기 위해 드롭다운 입력창을 터치하세요.'
         text4: '같은 방법으로 그림을 선택하세요.'
         text5: '이제 새 그림을 선택해야 합니다.'
         text6: '화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.'
     step5:
       title: "소리내기"
-      description: "이제 개체가 무엇을 말하는지 알 수 있을 것입니다."
+      description: "이제 오브젝트가 무엇을 말하는지 알 수 있어요."
       detail:
-        text1: '"소리내기" 블럭을 선택하세요. 이 블럭이 실행되면 개체가 글자를 읽어 줄 것입니다.'
-        text2: '"다음 배경" 블럭을 터치하세요.'
+        text1: '"소리내기" 블록을 선택하세요. 이 블록이 실행되면 오브젝트가 글자를 읽어 줄 것입니다.'
+        text2: '"다음 배경" 블록을 터치하세요.'
         text3: '화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.'
     step6:
       title: '다시 또 다시'
-      description: "이 단계에서는 개체의 행동을 반복하는 방법을 보여 줍니다."
+      description: "이 단계에서는 오브젝트의 행동을 반복하는 방법을 보여 줍니다."
       detail:
-        text1: '"무한 반복" 블럭을 선택합니다. 블럭안의 프로그램이 무한히 반복됩니다.'
-        text2: '"프로그램을 시작할 때" 블럭 아래에 "무한 반복" 블럭을 끼워 넣으세요.'
-        text3: '"움직이기" 블럭을 추가하세요.'
-        text4: '"움직이기" 블럭을 "무한 반복의 끝" 블럭 사이에 붙이세요.'
+        text1: '"계속 반복" 블록을 선택합니다. 블록안의 프로그램이 계속 반복됩니다.'
+        text2: '"프로그램을 시작할 때" 블록 아래에 "무한 반복" 블록을 끼워 넣으세요.'
+        text3: '"움직이기" 블록을 추가하세요.'
+        text4: '"움직이기" 블록을 "계속 반복의 끝" 블록 사이에 붙이세요.'
         text5: 'X 와 Y의 값을 0으로 하기위해 텍스트 필드를 누릅니다.'
         text6: '화면에서 어떻게 움직이는지 보기위해 실행 버튼을 터치하세요.'
     step7:
       title: "터치하면 다 끝납니다."
-      description: '또한 프로그램 무대에서 실행중일 때도 개체의 행동을 제어할 수 있습니다.'
+      description: '또한 프로그램 무대에서 실행중일 때도 오브젝트의 행동을 제어할 수 있습니다.'
       detail:
-        text1: '"터치할 때" 블럭을 선택하세요. "터치할 때" 아래의 블럭들은 스테이지의 개체를 터치할 때 한 번 실행됩니다.'
-        text2: '다른 블럭아래에 "터치할 때" 블럭을 놓습니다.'
-        text3: '"오른쪽으로 돌기" 블럭을 선택하고 "터치할 때" 블럭아래에 두세요.'
-        text4: '이제 이런 스크립트가 있습니다.'
-        text5: '스테이지에서의 움직임을 보려면 실행을 터치하세요. 개체를 터치하면 돌기 시작합니다.'
+        text1: '"터치할 때" 블록을 선택하세요. "터치할 때" 아래의 블록들은 스테이지의 오브젝트를 터치할 때 한 번 실행됩니다.'
+        text2: '다른 블록아래에 "터치할 때" 블록을 놓습니다.'
+        text3: '"오른쪽으로 돌기" 블록을 선택하고 "터치할 때" 블록아래에 두세요.'
+        text4: '이제 스크립트가 있어요.'
+        text5: '스테이지에서의 움직임을 보려면 실행을 터치하세요. 오브젝트를 터치하면 돌기 시작합니다.'
     step8:
-      title: "블럭을 복사, 삭제, 편집하세요"
+      title: "블록을 복사, 삭제, 편집하세요"
       detail:
-        text1: '블럭의 왼쪽을 터치하여 단축메뉴를 열어 보세요. 블럭을 이동, 복사, 삭제하거나 수식값을 편집할 수 있습니다.'
+        text1: '블록의 왼쪽을 터치하여 단축메뉴를 열어 보세요. 블록을 이동, 복사, 삭제하거나 수식값을 편집할 수 있습니다.'
     step9:
       title: "응용 프로그램에서 탐색"
       detail:
         text1: '돌아가기 위해서는 스마트폰의 취소 버튼를 이용하세요.'
-        text2: '개체를 다시 보려면 한 화면을 되돌아 갑니다. 여기서 스크립트와 모양, 소리로 갈 수 있습니다. 거기서 모양과 소리파일의 이름을 바꾸고, 복사, 추가 또는 삭제할 수 있다.'
-        text3: '개체나 배경을 미리보려면 스마트폰의 취소버튼을 이용하세요.'
+        text2: '오브젝트를 다시 보려면 한 화면을 되돌아 갑니다. 여기서 스크립트와 모양, 소리로 갈 수 있습니다. 거기서 모양과 소리파일의 이름을 바꾸고, 복사, 추가 또는 삭제할 수 있습니다.'
+        text3: '오브젝트나 배경을 미리보려면 스마트폰의 취소버튼을 이용하세요.'
     step10:
       title: "배경을 바꾸라"
-      description: "하나의 프로그램의 개체와 배경을 미리 보여준다."
+      description: "하나의 프로그램의 오브젝트와 배경을 미리 보여준다."
       detail:
-        text1: '배경은 개체와 비슷하다, 그러나 배경위에 나타낼 수 있다.'
+        text1: '배경은 오브젝트와 비슷하다, 그러나 배경위에 나타낼 수 있다.'
         text2: '스크립트, 소리와 모양을 배경과 같은 방식으로 볼 수 있습니다.'
     step11:
       title: "메인 메뉴"
@@ -284,68 +284,68 @@ help:
     tip: "추가 팁:"
     card1:
       title: "다음 크기로 바꾸기"
-      description: "개체의 크기를 변경 합니다."
-      one: "크기 변경하려는 개체를 추가하세요. 예: 동물."
-      two: "(그것의 원래 크기의 20%)에 의해 그것을 최소화하기 위해 개체의 스크립트에 다음 블럭을 삽입하세요."
+      description: "오브젝트의 크기를 변경 합니다."
+      one: "크기 변경하려는 오브젝트를 추가하세요. 예: 동물."
+      two: "(그것의 원래 크기의 20%)에 의해 그것을 최소화하기 위해 오브젝트의 스크립트에 다음 블록을 삽입하세요."
     card2:
       title: "배경 바꾸기"
-      description: "개체의 모양을 변경하세요."
-      one: "크기 변경하려는 개체를 추가하세요. 예: 동물."
-      two: "개체의 모양에 더 많은 그림을 추가해 주세요."
-      three: "개체의 스크립트에 1 초 후의 모양을 이어서 바꾸기 위해 다음 블럭을 삽입하세요."
+      description: "오브젝트의 모양을 변경하세요."
+      one: "크기 변경하려는 오브젝트를 추가하세요. 예: 동물."
+      two: "오브젝트의 모양에 더 많은 그림을 추가해 주세요."
+      three: "오브젝트의 스크립트에 1 초 후의 모양을 이어서 바꾸기 위해 다음 블록을 삽입하세요."
     card3:
       title: "애니메이션"
-      description: "개체에 애니메이션 효과 주기"
-      one: "이동 하려는 개체를 추가합니다."
-      two: "개체의 모양에 움직임을 나타내려면 다른 그림을 포함시키세요."
-      three: "일정한 시간 후에 개체의 위치를 계속 변경하려면 개체의 스크립트에 다음 블럭을 삽입합니다. 또한 벽에 닿으면 튕기기를 이용해 스테이지를 여유있게 활용할 수 있습니다."
+      description: "오브젝트에 애니메이션 효과 주기"
+      one: "이동 하려는 오브젝트를 추가합니다."
+      two: "오브젝트의 모양에 움직임을 나타내려면 다른 그림을 포함시키세요."
+      three: "일정한 시간 후에 오브젝트의 위치를 계속 변경하려면 오브젝트의 스크립트에 다음 블록을 추가하세요. 또한 벽에 닿으면 튕기기를 이용해 스테이지를 여유있게 활용할 수 있습니다."
     card4:
       title: "움직이기"
-      description: "개체를 스크린 위로 움직여 보자."
-      one: "예를 들어 비행기처럼 움직일 개체를 추가하세요."
-      two: "다음 블럭을 추가하고 움직일 영역을 정해줍니다."
+      description: "오브젝트를 스크린 위로 움직여 보자."
+      one: "예를 들어 비행기처럼 움직일 오브젝트를 추가하세요."
+      two: "다음 블록을 추가하고 움직일 영역을 정해줍니다."
     card5:
       title: "소리 재생"
-      description: "개체를 터치하여 소리를 재생합니다."
-      one: "재생할 소리, 예를 들어 개라는 개체를 추가합니다."
-      two: "재생을 가능하게 하려면 아래 블럭을 추가하세요. 개인 라이브러리 또는 포켓코드 미디어 라이브러리에서 소리파일을 선택하거나 스스로 녹음해 보세요."
+      description: "오브젝트를 터치하여 소리를 재생합니다."
+      one: "재생할 소리, 예를 들어 개라는 오브젝트를 추가합니다."
+      two: "재생을 가능하게 하려면 아래 블록을 추가하세요. 개인 라이브러리 또는 포켓코드 미디어 라이브러리에서 소리파일을 선택하거나 스스로 녹음해 보세요."
     card6:
       title: "소리내기"
-      description: "개체에서 소리내기를 해보세요."
-      one: "예를 들어 Carrie 비행기처럼 소리내기할 개체를 추가하세요."
-      two: "음성 출력을 가능하게 다음 블럭을 추가하세요."
+      description: "오브젝트에서 소리내기를 해보세요."
+      one: "예를 들어 Carrie 비행기처럼 소리내기할 오브젝트를 추가하세요."
+      two: "음성 출력을 가능하게 다음 블록을 추가하세요."
     card7:
       title: "센서"
-      description: "기울기 센서를 사용하여 개체를 제어합니다."
-      one: "이동 하려는 개체를 추가합니다."
-      two: "스마트폰의 센서를 통해 개체를 제어하려면 다음 블럭을 삽입합니다. 다음에 \"x축 및 y축 기울기\"를 선택합니다. 적당한 움직임을 얻으려면 \"-기울기\"값을 설정하세요. 개체의 움직임 너무 민감한 경우에는, 예를 들어 10으로 기울기값을 나눕니다."
+      description: "기울기 센서를 사용하여 오브젝트를 제어합니다."
+      one: "이동 하려는 오브젝트를 추가합니다."
+      two: "스마트폰의 센서를 통해 오브젝트를 제어하려면 다음 블록을 삽입합니다. 다음에 \"x축 및 y축 기울기\"를 선택합니다. 적당한 움직임을 얻으려면 \"-기울기\"값을 설정하세요. 오브젝트의 움직임 너무 민감한 경우에는, 예를 들어 10으로 기울기값을 나눕니다."
     card8:
       title: "나침반"
       description: "스스로 나침반 만들기"
-      one: "나침반 방향에 향하게할 개체를 추가합니다."
-      two: "개체의 방향을 설정하기 위해 다음 블럭을 삽입하세요. 이어서 무한 반복 블럭 사이에 추가합니다."
+      one: "나침반 방향에 향하게할 오브젝트를 추가합니다."
+      two: "오브젝트의 방향을 설정하기 위해 다음 블록을 삽입하세요. 이어서 계속 반복 블록 사이에 추가합니다."
     card9:
-      title: "방송하기"
-      description: "한 개채에서 다른 개체로 메시지를 보내세요."
-      one: "방송 메시지를 내보낼 예를 들어 앨리스 개체를 추가하세요. 또한, 배경의 모양에 두 번째 배경을 추가합니다. 방송된 메시지를 받는대로 배경을 바꿀 것입니다."
-      two: "\"모두에게 보내기\" 블럭을 삽입하고 다른 개체는 메시지를 받으면 어떻게 해야 결정합니다."
-      three: "이 경우에 배경의 앞 레이어에서 개체를 터치할 때 변경 됩니다."
+      title: "신호 보내기"
+      description: "한 오브젝트에서 다른 오브젝트로 신호를 보내세요."
+      one: "신호를 내보낼 예를 들어 앨리스 오브젝트를 추가하세요. 또한, 배경의 모양에 두 번째 배경을 추가합니다. 신호를 받는대로 배경을 바꿀 것입니다."
+      two: "\"모두에게 보내기\" 블록을 삽입하고 다른 오브젝트는 신호를 받으면 어떻게 해야 결정합니다."
+      three: "이 경우에 배경의 앞 레이어에서 오브젝트를 터치할 때 변경 됩니다."
     card10:
       title: "변수 보이기"
       description: "변수의 값을 표시하세요."
-      one: "귀하의 스마트폰의 센서 (%tutorial_card_link_7% 자습서 카드 7 %link_end% 참조)를 통해 이동하는 개체를 추가 합니다. 또한 메시지를 받을 때 변경해야 할 두번째 배경을 추가합니다."
-      two: "현재 x축 및 y축 이동 스프라이트의 위치를 변수에 저장하려면 다음 블럭을 삽입합니다."
+      one: "스마트폰의 센서 (%tutorial_card_link_7% 자습서 카드 7 %link_end% 참조)를 통해 이동하는 오브젝트를 추가합니다. 또한 신호를 받을 때 변경해야 할 두번째 배경을 추가합니다."
+      two: "현재 x축 및 y축 이동 오브젝트의 위치를 변수에 저장하려면 다음 블록을 추가합니다."
       three: "\"변수 보이기\"블록을 통해 무대에 변수값을 표시할 수 있습니다."
     card11:
       title: "충돌 감지"
-      description: "두 개체 간의 충돌을 감지합니다."
-      one: "알렉스의 예처럼, 스마트폰의 센서를 통해 이동해야 하는 두 개체를 추가 (%tutorial_card_link_7% 자습서 카드 7 %link_end% 참조)."
-      two: "움직이는 알렉스의  \"x 및 y 위치\"를 저장하라(%tutorial_card_link_10% 자습서 카드 10 %link_end% 참조). 그리고 다음 스크립트를 삽입하라. 지속적으로 두 개체가 겹치는지 확인합니다. 만약 그런 경우 고정된 개체는 숨겨져야 합니다."
+      description: "두 오브젝트 간의 충돌을 감지합니다."
+      one: "알렉스의 예처럼, 스마트폰의 센서를 통해 이동해야 하는 두 오브젝트를 추가 (%tutorial_card_link_7% 자습서 카드 7 %link_end% 참조)."
+      two: "움직이는 알렉스의  \"x 및 y 위치\"를 저장하라(%tutorial_card_link_10% 자습서 카드 10 %link_end% 참조). 그리고 다음 스크립트를 삽입하라. 지속적으로 두 오브젝트가 겹치는지 확인합니다. 만약 그런 경우 고정된 오브젝트는 숨겨져야 합니다."
     card12:
       title: "얼굴 인식"
-      description: "얼굴 인식를 사용하여 개체를 제어합니다."
-      one: "먼저 얼굴 인식 블럭이 활성화 되어있는지 확인합니다. 설정으로 이동합니다."
-      two: "새 스프라이트를 추가하고는 얼굴 감지 되면 보이게 하려면 다음 블럭을 추가하세요. 얼굴 인식이 되고 무한 반복 사이에 넣어 확인하세요. 카메라는 얼굴 인식하는 경우 변수의 값은 \"TRUE\", 그렇지 않으면 \"FALSE\"입니다."
+      description: "얼굴 인식를 사용하여 오브젝트를 제어합니다."
+      one: "먼저 얼굴 인식 블록이 활성화 되어있는지 확인합니다. 설정으로 이동합니다."
+      two: "새 오브젝트를 추가하고 얼굴이 감지 되면 보이게 하려면 다음 블록을 추가하세요. 얼굴 인식이 되고 무한 반복 사이에 넣어 확인하세요. 카메라는 얼굴 인식하는 경우 변수의 값은 \"참\", 그렇지 않으면 \"거짓\"입니다."
   starterPrograms:
     title: "시작 프로그램"
     description: "이러한 시작 프로그램을 실행해 보세요. 변경하려면 자세히 보고 아이디어를 추가해 보세요."
@@ -382,13 +382,13 @@ help:
     title1: "(환영) 원더랜드"
     subtitle1: "'터치할 때' 블록에 캐릭터를 움직이고 이벤트를 만드세요"
     description1: |
-      캐릭터가 살아 움직이는지 배우고 터치 할 때 캐릭터가 무엇을 할지 익히세요. 비디오를 통해 캐릭터가 다른 모양으로 어떻게 움직이는지 알 수 있다. 더하여 '터치할 때'블록의 이벤트와 개체사이에 방송 메시지를 어떻게 보내는지 보여준다.
+      캐릭터가 살아 움직이는지 배우고 터치 할 때 캐릭터가 무엇을 할지 익히세요. 비디오를 통해 캐릭터가 다른 모양으로 어떻게 움직이는지 알 수 있다. 더하여 '터치할 때'블록의 이벤트와 오브젝트사이에 신호를 어떻게 보내는지 보여준줍니다.
     title2: "앨리스를 저장!"
-    subtitle2: "기울기 센서를 사용하여 개체 간의 충돌을 감지하라"
-    description2: "스마트폰의 기울기 센서를 사 하여 문자를 제어하는 방법을 배웁니다. 왼쪽 또는 오른쪽에 귀하의 휴대 전화를 기울이기로 앨리스의 움직임을 제어할 수 있습니다. 우리의 자습서를 시청하고 개체를 임의로 하늘에서움직이고 다른 개체와의 충돌를 경험하자."
+    subtitle2: "기울기 센서를 사용하여 오브젝트 간의 충돌을 감지하라"
+    description2: "스마트폰의 기울기 센서를 사 하여 문자를 제어하는 방법을 배웁니다. 왼쪽 또는 오른쪽에 귀하의 휴대 전화를 기울이기로 앨리스의 움직임을 제어할 수 있습니다. 우리의 자습서를 시청하고 오브젝트를 임의로 하늘에서움직이고 다른 오브젝트와의 충돌를 경험하자."
     title3: "해 터-치고 달리기"
     subtitle3: "움직이는 배경을 만들고 Hatters' 움직임을 제어하세요"
-    description3: "이 자습서에서는 움직이는 것처럼 보이는 풍경을 만드는 방법을 배웁니다. 우리는 운동의 환상을 만들어 화면에 따라 개체를 이동할 것입니다. 스마트폰의 기울이기로 이동하게 하는 방법을 보여줍니다."
+    description3: "이 자습서에서는 움직이는 것처럼 보이는 풍경을 만드는 방법을 배웁니다. 우리는 운동의 환상을 만들어 화면에 따라 오브젝트를 이동할 것입니다. 스마트폰의 기울이기로 이동하게 하는 방법을 보여줍니다."
     title4: "해 터-치고 달리기"
     subtitle4: "악마 카드를 촬영해 보자"
     description4: "이 자습서에서 임의로 캐릭터를 향해 이동하는 적을 만드는 방법을 살펴보겠습니다. 또한, 해 터 teadrops를 촬영하고 적을 충돌 감지를 사용 하여 공 하는 경우 확인 게 하는 방법을 배웁니다."
@@ -414,7 +414,7 @@ menu:
   profile: 나의 프로필
   logout: 로그아웃
 programLoader:
-  noPrograms: 프로젝트가 없습니다.
+  noPrograms: 프로그램가 없습니다.
 login:
   passOrUser: 사용자 이름 또는 암호가 잘못되었습니다.
   noUsername: 사용자 이름 또는 이메일 주소를 찾을 수 없습니다.
@@ -462,7 +462,7 @@ errors:
   file:
     unexpected: 예상하지 않은 파일 발견
     invalid: 잘못된 파일
-  image.missing: 프로젝트 XML은 프로젝트 폴더에 존재 하지 않는 파일을 언급한다
+  image.missing: 프로그램 XML은 프로그램 폴더에 존재 하지 않는 파일을 언급한다
   unknown: 알 수 없는 오류
   token: '인증 장치 실패: 잘못 된 인증 토큰!'
   programname:
@@ -476,7 +476,7 @@ errors:
 success:
   registration: 등록 성공!
   token: OK
-  upload: 프로젝트가 성공적으로 업로드되었습니다!
+  upload: 프로그램가 성공적으로 업로드되었습니다!
   report: 버그 신고가 성공적으로 전송되었습니다!
 time:
   minutes.ago: '{0} < 1 분 전에 |{1}1 분 전 |] 1, Inf] %count% 분 전'
@@ -484,6 +484,8 @@ time:
   days.ago: '{1}1 일 전 |] 1, Inf] %count% 일 전'
   months.ago: '{1}1 달 전 |] 1, Inf] %count% 달 전'
   years.ago: '{1}1 년 전에 |] 1, Inf] 1 년 전'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: 아랍어
   bulgarian: 불가리아어
@@ -555,7 +557,7 @@ tags:
 admin:
   maintain:
     diskMaintenance: 유지 보수 필요
-    noRemovableObjects: 삭제할 개체가 없음.
+    noRemovableObjects: 삭제할 오브젝트가 없음.
     manualBackups: 수동 백업
     noRemovableBackupObjects: 서버에 삭제할 수 있는 백업파일 없음.
     btnCreateBackup: 백업 만들기
@@ -579,3 +581,21 @@ pmd:
     text: 프로그램 업로드하지 못했습니다.
 codeview:
   showText: 코드 표시
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

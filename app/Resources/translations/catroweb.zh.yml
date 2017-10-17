@@ -25,13 +25,13 @@ ok: 好
 clickToDownloadProgram: '请点%link_start% 这里 %link_end%下载样例程序。'
 registrationError: '用户名或邮箱已被占用。'
 notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
+wellDone: "做的好！"
+done: "已完成！"
+notificationsReadMessage: "您已经阅读了所有通知。"
+notificationsClearedMessage: "所有通知都已被标记为已读。"
+clearAllNotificationsButtonTitle: "标记所有为已读"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "请等待..."
 indexPage:
   recommendedSection:
     info:
@@ -76,16 +76,16 @@ programs:
   report: 报告
   report_popup: 您的评论以成功发送
   report_popup_header: 已发送
-  nolb_example: Example programs
+  nolb_example: 示例程序
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
-  by: 'by'
-  open: 'Open'
+  by: ' '
+  open: '打开'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorTitle: '抱歉...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programNotAvailable: '暂不可用'
+  programUnknownUser: '未知用户'
 passwordRecovery:
   subject: 密码找回
   message: |2
@@ -233,7 +233,7 @@ help:
         text5: 'Now you have to select the new image.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Speak"
+      title: "读出"
       description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -309,7 +309,7 @@ help:
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: "Glide"
+      title: "滑行"
       description: "Let your object glide over the screen."
       one: "Add the object you want to be gliding. e.g. plane."
       two: "Insert the following bricks and define the area in which the movement should happen."
@@ -319,7 +319,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Speak"
+      title: "读出"
       description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -334,7 +334,7 @@ help:
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "Broadcast"
+      title: "广播"
       description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
@@ -435,7 +435,7 @@ login:
   userOrEmail: Username or Email
   changePass: '&#x6635;&#x79F0;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;'
   createAccount: Create an account
-  or: OR
+  or: 或
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -495,6 +495,8 @@ time:
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+failure:
+  upload: There was an error during the upload of your app.
 language:
   arabic: Arabic
   bulgarian: Bulgarian
@@ -591,3 +593,21 @@ pmd:
     text: Program upload failed.
 codeview:
   showText: Show code
+footer:
+  usefulLinks: Useful Links
+  legalities: Legalities
+  communityStats: Community Stats
+  downloads: downloads
+  programs: programs
+  downloads_count: '624,589'
+  programs_count: '36,738'
+privacy-policy:
+  version: Version 2.0, 20 September 2017
+  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
+  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
+  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
+  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
+  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
+  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).

@@ -46,7 +46,7 @@ class User extends BaseUser implements LdapUserInterface
     protected $dn;
 
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Program", mappedBy="user", fetch="EXTRA_LAZY", cascade={"remove"})
      */
     protected $programs;
 

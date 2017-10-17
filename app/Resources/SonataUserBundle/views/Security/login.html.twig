@@ -1,75 +1,225 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.css') }}">
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
-  
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="{{  asset( getJavascriptPath('loginscript.js') )}}"></script>
+  <script src="{{ asset('js/jquery-ui/jquery-ui.js') }}"></script>
+  <script src="{{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
+
 {% endblock %}
 
+
 {% block header %}
-    {% include ':Default:headerLogo.html.twig' %}
-{% endblock header%}
+{% endblock header %}
 
 {% block body %}
 
-{% block fos_user_content %}
+  {% block fos_user_content %}
 
-<form id ="form_fos" action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" id = "csrf_token" name="_csrf_token" value="{{ csrf_token }}" />
+    <div class="container-fluid">
+      <a href="{{ path('index') }}">
+        <div class="row">
+          <div class="col-sm-12">
+              <img class="center-block img-responsive" id="logo"  src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12" align="center">
+            <p>
+              {% if theme() == 'lunacat' %}
+                <span style="color:#8A78A8; font-size:40px; font-weight: 800;">POCKET</span>
+              {% else %}
+                <span style="color:#17A6B7; font-size:40px; font-weight: 800;">POCKET</span>
+              {% endif %}
+              <span style="color:	#FF7701;font-size:40px; font-weight: 800;">CODE</span>
+            </p>
+          </div>
+        </div>
+      </a>
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            {% if error %}
+              <div id="login-alert"
+                   class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            <form id="loginform form_fos" class="form-horizontal" role="form"
+                  action="{{ path("fos_user_security_check") }}" method="post">
+              <input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token }}"/>
 
-    <div class="input-field">
-      <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ "username"|trans({}, "catroweb") }}" />
-      <div class="img-login"></div>
+              <div class="row">
+                <div class="col">
+                  <div class="group">
+                    <input type="text" id="username" name="_username" required/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label><span class="span-input">{{ "username"|trans({}, "catroweb") }}</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="group">
+                    <input id="password" type="password" name="_password" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label><span class="span-input">{{ "password"|trans({}, "catroweb") }}</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div style="padding-top:15px; font-size:85%; float:right">
+                    <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}">Forgot Password?</a>
+                </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  {% if (app.session.get("catroweb_login_redirect") is not empty) %}
+                    <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}"/>
+                    {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
+                    {{ app.session.set("catroweb_login_redirect", "") }}
+
+                  {% elseif ("/login" in app.request.headers.get('referer')) %}
+
+                    {% if app.session.has("catroweb_login_referer") %}
+                      <input type="hidden" name="_target_path"
+                             value="{{ app.session.get("catroweb_login_referer") }}#login"/>
+                    {% else %}
+                      <input type="hidden" name="_target_path" value="{{ path("index") }}#login"/>
+                    {% endif %}
+                  {% else %}
+                    {% if (app.request.headers.get('referer') is not empty) %}
+                      <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login"/>
+                      {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
+                    {% else %}
+                      <input type="hidden" name="_target_path" value="index"/>
+                    {% endif %}
+                  {% endif %}
+
+                  <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="Terms and conditions" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</h3>
+                        </div>
+
+                        <div class="modal-body">
+                          <p>{{ 'privacy-policy.version'|trans({}, 'catroweb') }}</p>
+                          <p class="align_start">{{ 'privacy-policy.text1'|trans({}, 'catroweb') }}</p>
+                          <ul>
+                            <li><p class="align_start">{{ 'privacy-policy.text2'|trans({}, 'catroweb') }}</p></li>
+                            <li><p class="align_start">{{ 'privacy-policy.text3'|trans({}, 'catroweb') }}</p></li>
+                            <li><p class="align_start">{{ 'privacy-policy.text4'|trans({}, 'catroweb') }}</p></li>
+                            <li><p class="align_start">{{ 'privacy-policy.text5'|trans({}, 'catroweb') }}</p></li>
+                            <li><p class="align_start">{{ 'privacy-policy.text6'|trans({}, 'catroweb') }}</p></li>
+                            <li><p class="align_start">{{ 'privacy-policy.text7'|trans({}, 'catroweb') }}</p></li>
+                          </ul>
+                          <p class="align_start">{{ 'privacy-policy.text8'|trans({}, 'catroweb') }}</p>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" id="agreeButton" data-dismiss="modal">Agree</button>
+                          <button type="button" class="btn btn-default" id="disagreeButton" data-dismiss="modal" data-toggle="modal" data-target="#disagreeModal">Disagree</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="disagreeModal" tabindex="-1" role="dialog" aria-labelledby="Terms and conditions" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</h3>
+                        </div>
+
+                        <div class="modal-body">
+                          <p>{{ 'privacy-policy.disagree-text'|trans({}, 'catroweb') }}</p>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:10px" class="form-group">
+                    <!-- Button -->
+                    <div class="col-sm-12 controls">
+                      <button id="_submit" href="#" class="login btn-primary"
+                              name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12 control">
+                      <div style="padding-top:15px; font-size:85%">
+                        Don't have an account!
+                        <a id="create_account"
+                           href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            <div class="row">
+              <div class="col-xs-5">
+                <hr/>
+              </div>
+              <div class="col-xs-2">
+                <div class="pull-left" id="seperator-text">
+                  {{ 'login.or'|trans({}, 'catroweb') }}
+                </div>
+              </div>
+              <div class="col-xs-5">
+                <hr/>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 
-    <div class="input-field">
-      <input type="password" id="password" name="_password" placeholder="{{ "password"|trans({}, "catroweb") }}" />
-      <div class="img-password"></div>
-    </div>
+    {% include ':social:oauth_form.html.twig' %}
 
-    {% if (app.session.get("catroweb_login_redirect") is not empty) %}
-        <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}" />
-        {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
-        {{ app.session.set("catroweb_login_redirect", "") }}
+    <div id="spacer"></div>
 
-    {% elseif ("/login" in app.request.headers.get('referer')) %}
-
-        {% if app.session.has("catroweb_login_referer") %}
-            <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer")  }}#login" />
-        {% else %}
-            <input type="hidden" name="_target_path" value="{{ path("index") }}#login" />
-        {% endif %}
-    {% else %}
-        {% if (app.request.headers.get('referer') is not empty) %}
-            <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login" />
-            {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
-        {% else %}
-            <input type="hidden" name="_target_path" value="index" />
-        {% endif %}
-    {% endif %}
-
-    {% if error %}
-      <div class="error-text">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
-    {% endif %}
-
-    <button id="_submit" class="login" name="_submit" >{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
-
-    <div id="login_links">
-         <div>
-             <a id="create_account" href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
-         </div>
-         <div>
-             <a href="{{ path("sonata_user_resetting_request") }}" id="pw-request">{{ "login.forgotPass"|trans({}, "catroweb") }}</a>
-         </div>
-    </div>
-</form>
-
-{% include ':social:oauth_form.html.twig' %}
-
-{% endblock fos_user_content %}
+  {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script>
+    var agree_button = "";
+    var agree = false;
+
+    $(document).ready(function() {
+      $(document).on("click", "#agreeButton", function() {
+        agree = true;
+        switch (agree_button) {
+          case 'google_login':
+            console.log('agree_google_login');
+            triggerGoogleLogin();
+            break;
+          case 'facebook_login':
+            console.log('agree_facebook_login');
+            triggerFacebookLogin();
+            break;
+        }
+      });
+    });
+
+
+  </script>
+{% endblock %}

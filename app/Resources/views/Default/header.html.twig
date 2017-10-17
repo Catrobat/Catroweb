@@ -1,146 +1,140 @@
-<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-9">
+      <div class="container-fluid">
+        <div class="navbar-header">
 
-<nav>
-  {% if not isWebview() %}
-    <div id="fb-root"></div>
-    <div id="header-top">
+          <a class="navbar-brand" href="{{ path('index') }}">
+            <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
+          </a>
+          <a class="navbar-brand" href="{{ path('index') }}">
+            <h3 id="page-name">Home</h3>
+          </a>
+          <div class="right-inline navbar-small">
+            <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+            <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
 
-    {% include ':social:social_like_header.html.twig' %}
-
-    <div><a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a></div>
-    <div><a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a></div>
-    <div><a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a></div>
-  </div>
-
-  {% endif %}
-
-  <div id="header-left">
-    <div id="logo">
-      <a href="{{ path('index') }}">
-        <img src="{{ asset('images/logo/logo_text.png') }}" alt="Pocket Code Logo" />
-      </a>
-    </div>
-    <input id="searchbar" class="input-search" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-  </div>
-
-  <div id="header-right">
-    <div id="menu">
-      <div class="btn btn-search">
-        <div id="search-header" class="img-magnifying-glass"></div>
-      </div>
-      <div>
-        <input id="search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}" class="size-large input-search">
-      </div>
-
-      {% if app.user %}
-        <div class="btn btn-menu logged-in show-nav-dropdown user-notification-badge">
-          <div class="img-avatar" {%  if app.user.avatar is not empty %}style="background-size:cover; background-position:center; outline: 1px solid #FFFFFF; background-image:url({{ app.user.avatar }});"{%  endif %}></div>
-        </div>
-        <div class="btn btn-username show-nav-dropdown">{{ app.user.username }}</div>
-        <div class="btn show-nav-dropdown">
-          <div class="img-dropdownArrow"></div>
-        </div>
-      {% else %}
-        <a href="{{ url('login') }}" id="btn-login">
-          <div class="btn btn-menu">
-            <div class="img-avatar"></div>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span id="menu-icon" class="glyphicon glyphicon-option-vertical white-icon medium-icon"></span>
+            </button>
           </div>
-        </a>
-      {% endif %}
+        </div>
 
-    </div>
-
-    <div id="menu-mobile">
-      <div class="btn btn-search">
-        <div id="search-header-mobile" class="img-magnifying-glass"></div>
-        <div class="img-undo-search"></div>
-      </div>
-      <div class="margin-spacer"></div>
-      {% if app.user %}
-        {% if app.user.avatar is not empty %}
-          <div id="custom-avatar" class="btn btn-menu show-nav-dropdown user-notification-badge">
-            <div style="background-image:url({{ app.user.avatar }});">
-              <div class="img-dropdownArrow-mobile"></div>
+        <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+            <div class="navbar-small">
+              <ul class="nav navbar-nav navbar-right">
+              {% if app.user %}
+                <li>
+                  <a href="{{ path('user_notifications') }}">
+                    <span class="glyphicon glyphicon-bell white-icon"></span>
+                    <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="{{ url('profile') }}" id="btn-profile">
+                    <span class="glyphicon glyphicon-user white-icon"></span>
+                    <h4>My Profile</h4>
+                  </a>
+                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                  <li>
+                    <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                      <span class="glyphicon glyphicon-dashboard white-icon"></span>
+                      <h4>Admin</h4>
+                    </a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a href="{{ url('logout') }}" id="btn-logout">
+                    <span class="glyphicon glyphicon-log-out white-icon"></span>
+                    <h4>Logout</h4>
+                  </a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="{{ url('login') }}" id="btn-login-small">
+                    <span class="glyphicon glyphicon-log-in white-icon"></span>
+                    <h4>Log in</h4>
+                  </a>
+                </li>
+              {% endif %}
+              </ul>
             </div>
-          </div>
-        {% else %}
-          <div class="btn btn-menu show-nav-dropdown user-notification-badge">
-            <div class="img-avatar"></div>
-          </div>
-        {% endif %}
-      {% else %}
-      <a href="{{ url('login') }}" id="btn-login">
-        <div class="btn btn-menu">
-          <div class="img-avatar"></div>
-        </div>
-      </a>
-      {% endif %}
-    </div>
 
+            <div class="navbar-big">
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+                  <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+                </li>
+              {% if app.user %}
+                <li class="dropdown" id="navbar-dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                    <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
+                    <span class="glyphicon glyphicon-chevron-down white-icon"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a href="{{ path('user_notifications') }}">
+                        <span class="glyphicon glyphicon-bell white-icon"></span>
+                        <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
+                      </a>
+                    </li>
+                    <li><a href="{{ url('profile') }}" id="btn-profile">
+                        <span class="glyphicon glyphicon-user white-icon"></span>
+                        <h4>My Profile</h4>
+                      </a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                      <li>
+                        <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                          <span class="glyphicon glyphicon-dashboard white-icon"></span>
+                          <h4>Admin</h4>
+                        </a>
+                      </li>
+                    {% endif %}
+                    <li>
+                      <a href="{{ url('logout') }}" id="btn-logout">
+                        <span class="glyphicon glyphicon-log-out white-icon"></span>
+                        <h4>Logout</h4>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <div class="btn btn-menu logged-in show-nav-dropdown user-notification-badge">
+
+                </div>
+
+              {% else %}
+                <li>
+                  <a href="{{ url('login') }}" id="btn-login">
+                    <span class="glyphicon glyphicon-log-in white-icon"></span>
+                    <h4>Log in</h4>
+                  </a>
+                </li>
+              {% endif %}
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  {% if app.user %}
-    <div id="nav-dropdown" class="img-nav-dropdown">
-      <div id="nav-menu-item-user-notifications" style="border-bottom: 1px #FFFFFF solid">
-        <a href="{{ path('user_notifications') }}">
-          <div><div class="img-dashboard user-notification-badge"></div></div>
-          <div>{{ "notifications"|trans({}, "catroweb") }}</div>
-        </a>
-      </div>
-      <div>
-        <a href="{{ url('profile') }}" id="btn-profile">
-          <div><div class="img-author-big"></div></div>
-          <div>{{ "My Profile"|trans({}, "catroweb") }}</div>
-        </a>
-      </div>
-      {% if is_granted('ROLE_ADMIN') %}
-      <div>
-        <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-          <div><div class="img-dashboard"></div></div>
-          <div>Admin</div>
-        </a>
-      </div>
-      {% endif %}
-      <div>
-        <a href="{{ url('logout') }}" id="btn-logout">
-          <div><div class="img-logout"></div></div>
-          <div>{{ "Logout"|trans({}, "catroweb") }}</div>
-        </a>
-      </div>
-    </div>
-    <div id="user-notification-center"></div>
-  {% endif %}
 </nav>
 
-{% if app.user %}
-    <script>
-        function fetchUserNotifications() {
-            $.ajax({
-                url: "{{ path('user_notifications_count') }}",
-                type: "get",
-                success: function(data) {
-                    var numOfNotifications = data.count;
-                    $(".user-notification-badge").removeAttr("data-badge");
+<script>
+  $(document).ready(function () {
+    $('.search-icon-header').on('click', function () {
+      $('.search-icon-header').hide();
+      if($(window).width() <= 430)
+      {
+        $('#page-name').hide();
+      }
+      $('.search-input-header').removeClass('hidden');
+    });
+  });
 
-                    if (numOfNotifications > 0) {
-                        var labelTitle = (numOfNotifications <= 1000) ? numOfNotifications.toString() : "1000+";
-
-                        if (labelTitle.length >= 3) {
-                            $(".user-notification-badge").addClass("user-notification-badge-large");
-                        } else {
-                            $(".user-notification-badge").removeClass("user-notification-badge-large");
-                        }
-                        $(".user-notification-badge").attr("data-badge", labelTitle);
-                    }
-                    setTimeout(fetchUserNotifications, 10000);
-                },
-                error: function() { console.error("Unable to fetch user notifications!"); }
-            });
-        }
-
-        $(document).ready(function() {
-            fetchUserNotifications();
-        });
-    </script>
-{% endif %}
+</script>

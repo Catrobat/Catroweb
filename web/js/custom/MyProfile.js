@@ -1,6 +1,6 @@
 var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_edit_url, password_edit_url,
                          country_edit_url, save_email_url, save_country_url, save_password_url, delete_url,
-                         toggle_visibility_url, deleteProgramString, upload_url) {
+                         toggle_visibility_url, deleteProgramString, upload_url, delete_account_url) {
   var self = this;
   self.profile_url = profile_url;
   self.email_edit_url = email_edit_url;
@@ -18,6 +18,7 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
   self.regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   self.data_changed = false;
   self.deleteProgramString = deleteProgramString;
+  self.delete_account_url = delete_account_url;
 
   self.init = function() {
     self.setAvatarUploadListener();
@@ -25,9 +26,7 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
 
   self.deleteProgram = function(id) {
     var programName = $('#program-' + id).find('.program-name').text();
-    if(confirm(self.deleteProgramString + ' \'' + programName + '\'?')) {
-      window.location.href = self.delete_url + '/' + id;
-    }
+    window.location.href = self.delete_url + '/' + id;
   };
 
   $(document).on("click", ".btn-edit", function() {
@@ -81,6 +80,15 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
     $('#program-cannot-be-toggled').hide();
   });
 
+  $(document).on("click", "#delete-account-yes", function(){
+    $.post(self.delete_account_url, null, function(data){
+      switch (parseInt(data.statusCode)) {
+        case 200:
+          window.location.href = '../../';
+      }
+    });
+  });
+
   $(document).on("click", "#save-name", function(){
     var new_username = $('#username').val();
     $.post(self.save_name_url, {
@@ -121,24 +129,24 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
           // email already exists
           if(parseInt(data.email) == 1) {
             $('#email').val(self.firstMail).parent().addClass('mail-failed');
-            $('.text-email-exists').show();
+            $('.text-email-exists').removeClass('hide');
           }
           if(parseInt(data.email) == 2) {
             $('#additional-email').val(self.secondMail).parent().addClass('mail-failed');
-            $('.text-email-exists').show();
+            $('.text-email-exists').removeClass('hide');
           }
           break;
 
         case 756:
           // there's no email
           $('#email').val(self.firstMail).parent().addClass('mail-failed');
-          $('.text-email-missing').show();
+          $('.text-email-missing').removeClass('hide');
           break;
 
         case 765:
           // invalid email
           $('#email').val(self.firstMail).parent().addClass('mail-failed');
-          $('.text-email-notvalid').show();
+          $('.text-email-notvalid').removeClass('hide');
           break;
 
         default:
@@ -189,34 +197,34 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
           // username and password same !
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-isusername').show();
+          $('.text-password-isusername').removeClass('hide');
           break;
 
         case 753:
           // password too short
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-tooshort').show();
+          $('.text-password-tooshort').removeClass('hide');
           break;
 
         case 754:
           // password too long
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-toolong').show();
+          $('.text-password-toolong').removeClass('hide');
           break;
 
         case 774:
           // passwords didn't match
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-nomatch').show();
+          $('.text-password-nomatch').removeClass('hide');
           break;
 
         case 777:
           // old password wrong
           $('#old-password').val('').addClass('password-failed');
-          $('.text-password-wrongpassword').show();
+          $('.text-password-wrongpassword').removeClass('hide');
           break;
 
         default:
