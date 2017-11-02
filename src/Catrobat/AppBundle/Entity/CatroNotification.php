@@ -44,7 +44,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorMap({
  *   "default" = "CatroNotification",
  *   "anniversary" = "AnniversaryNotification",
- *   "achievement" = "AchievementNotification"
+ *   "achievement" = "AchievementNotification",
+ *   "comment" = "CommentNotification"
  * })
  */
 class CatroNotification
@@ -67,7 +68,7 @@ class CatroNotification
   /**
    * @var User
    *
-   * @ORM\OneToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
+   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
    */
   private $user;

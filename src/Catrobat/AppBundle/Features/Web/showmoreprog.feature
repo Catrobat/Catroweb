@@ -56,6 +56,7 @@ Feature: Show more programs button behaviour
 
   Scenario Outline: Buttons should disappear after clicking them in desktop format
     Given I am on homepage
+    Then I wait 300 milliseconds
     When I click <button>
     Then the element <button> should not be visible
 

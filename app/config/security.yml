@@ -65,6 +65,12 @@ security:
             simple_preauth:
                 authenticator: apikey_authenticator
 
+        api_check_notifications:
+            pattern: ^.*/api/notifications/get.json
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
+
         api_upload:
             pattern: ^.*/api/upload/upload.json
             stateless: true
