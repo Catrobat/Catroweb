@@ -50,6 +50,10 @@ services:
     catro_notification_service:
         class: Catrobat\AppBundle\Services\CatroNotificationService
         arguments: ["@doctrine.orm.entity_manager"]
+
+    community_statistics_service:
+        class: Catrobat\AppBundle\Services\CommunityStatisticsService
+        arguments: ["@doctrine.orm.entity_manager"]
 # =========================== Repository ===========================
 
     programrepository:
