@@ -28,6 +28,8 @@ parameters:
       catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
       catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
       catrobat.logs.dir:              "%kernel.root_dir%/logs/"
+
+      # TODO check max_version usage and use it so only one value has to be changed
       catrobat.max_version:           "0.994"
 
 services:

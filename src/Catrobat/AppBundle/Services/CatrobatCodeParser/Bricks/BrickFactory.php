@@ -317,6 +317,96 @@ class BrickFactory
                 $generated_brick = new LegoEV3SetLedBrick($brick_xml_properties);
                 break;
 
+            // AR DRONE BRICKS
+            case Constants::AR_DRONE_EMERGENCY_BRICK:
+                $generated_brick = new DroneEmergencyBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_MOVE_BACKWARD_BRICK:
+                $generated_brick = new DroneMoveBackwardBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_MOVE_DOWN_BRICK:
+                $generated_brick = new DroneMoveDownBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_MOVE_FOWARD_BRICK:
+                $generated_brick = new DroneMoveFowardBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_MOVE_LEFT_BRICK:
+                $generated_brick = new DroneMoveLeftBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_MOVE_RIGHT_BRICK:
+                $generated_brick = new DroneMoveRightBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_MOVE_UP_BRICK:
+                $generated_brick = new DroneMoveUpBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_SWITCH_CAMERA_BRICK:
+                $generated_brick = new DroneSwitchCameraBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_TAKE_OFF_LAND_BRICK:
+                $generated_brick = new DroneTakeOffLandBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_TURN_LEFT_BRICK:
+                $generated_brick = new DroneTurnLeftBrick($brick_xml_properties);
+                break;
+
+            case Constants::AR_DRONE_TURN_RIGHT_BRICK:
+                $generated_brick = new DroneTurnRightBrick($brick_xml_properties);
+                break;
+
+            // Jumping Sumo
+            case Constants::JUMP_SUMO_ANIMATIONS_BRICK:
+                $generated_brick = new JumpingSumoAnimationBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_JUMP_HIGH_BRICK:
+                $generated_brick = new JumpingSumoJumpHighBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_JUMP_LONG_BRICK:
+                $generated_brick = new JumpingSumoJumpLongBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_MOVE_BACKWARD_BRICK:
+                $generated_brick = new JumpingSumoMoveBackwardBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_MOVE_FOWARD_BRICK:
+                $generated_brick = new JumpingSumoMoveFowardBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_NO_SOUND_BRICK:
+                $generated_brick = new JumpingSumoNoSoundBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_ROTATE_LEFT_BRICK:
+                $generated_brick = new JumpingSumoRotateLeftBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_ROTATE_RIGHT_BRICK:
+                $generated_brick = new JumpingSumoRotateRightBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_SOUND_BRICK:
+                $generated_brick = new JumpingSumoSoundBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_TAKING_PICTURE_BRICK:
+                $generated_brick = new JumpingSumoTakingPictureBrick($brick_xml_properties);
+                break;
+
+            case Constants::JUMP_SUMO_TURN_BRICK:
+                $generated_brick = new JumpingSumoTurnBrick($brick_xml_properties);
+                break;
+
             // OTHER Bricks
             default:
                 $generated_brick = new UnknownBrick($brick_xml_properties);
