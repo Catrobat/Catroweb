@@ -108,7 +108,7 @@ class ProgramManager
     $program->setFlavor($request->getFlavor());
     $this->addTags($program, $extracted_file, $request->getLanguage());
     $version = $program->getLanguageVersion();
-    $max_version = $this->max_version;
+    //$max_version = $this->max_version;
 
     if (version_compare($version, "0.994", ">"))
     {
