@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Catrobat\AppBundle\Entity\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 
 class AppExtension extends \Twig_Extension
 {
@@ -62,7 +63,8 @@ class AppExtension extends \Twig_Extension
             'flavor' => new \Twig_Function_Method($this, 'getFlavor'),
             'theme' => new \Twig_Function_Method($this, 'getTheme'),
             'getCurrentGameJam' => new \Twig_Function_Method($this, 'getCurrentGameJam'),
-            'getJavascriptPath' => new \Twig_Function_Method($this, 'getJavascriptPath')
+            'getJavascriptPath' => new \Twig_Function_Method($this, 'getJavascriptPath'),
+            'getCommunityStats' => new \Twig_Function_Method($this, 'getCommunityStats')
         );
     }
 
@@ -241,5 +243,29 @@ class AppExtension extends \Twig_Extension
         $jsPath .= $jsFile;
         $jsPath = str_replace("//", "/", $jsPath);
         return $jsPath;
+    }
+
+  /**
+   * Twig extension to provide a function to retrieve the community statistics in any view.
+   * Needed to render the footer.
+   *
+   * See the fetchStatistics implementation of AppBundle\Services\CommunityStatisticsService.php
+   *                                           for details.
+   * @return array|mixed
+   */
+  public function getCommunityStats()
+    {
+      $cms_s = $this->container->get("community_statistics_service");
+      $stats = $cms_s->fetchStatistics();
+
+      /* Numberformatter could be used to apply the locale. However this requires the intl extension to be fully working.
+
+      $nf = new NumberFormatter($this->request_stack->getCurrentRequest()->getLocale(), 1);
+      foreach ($stats as $key => $value)
+      {
+        $stats[$key] = $nf->format($value);
+      }
+      */
+      return $stats;
     }
 }
