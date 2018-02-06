@@ -9,14 +9,14 @@
 
 <div id="user-avatar">
   <img id="user-image" src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"> </img>
-  <div id="user-information">
+  <div id="user-information" dir="ltr">
     <p><strong>Amount of programs: {{ program_count }}</strong></p>
     <p><strong>Country: {{ country }}</strong></p>
   </div>
 </div>
 <div id="user-programs">
   <h1>{{ "profile.programsOf"|trans({}, "catroweb")  }} {{ profile.username }}</h1>
-  <div class="programs"></div>
+  <div class="programs" dir="ltr"></div>
 </div>
 
 <div class="clear"></div>

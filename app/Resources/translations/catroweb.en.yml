@@ -33,6 +33,10 @@ notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
+myProfile: "My Profile"
+adminArea: "Admin"
+login: "Login"
+logout: "Logout"
 
 indexPage:
   recommendedSection:

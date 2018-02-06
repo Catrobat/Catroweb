@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-offset-2 col-lg-9">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header" dir="ltr">
 
           <a class="navbar-brand" href="{{ path('index') }}">
             <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
@@ -36,28 +36,28 @@
                 <li>
                   <a href="{{ url('profile') }}" id="btn-profile">
                     <span class="glyphicon glyphicon-user white-icon"></span>
-                    <h4>My Profile</h4>
+                    <h4>{{ "myProfile"|trans({}, "catroweb")}}</h4>
                   </a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}
                   <li>
                     <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
                       <span class="glyphicon glyphicon-dashboard white-icon"></span>
-                      <h4>Admin</h4>
+                      <h4>{{ "adminArea"|trans({}, "catroweb") }}</h4>
                     </a>
                   </li>
                 {% endif %}
                 <li>
                   <a href="{{ url('logout') }}" id="btn-logout">
                     <span class="glyphicon glyphicon-log-out white-icon"></span>
-                    <h4>Logout</h4>
+                    <h4>{{ "logout"|trans({}, "catroweb")}}</h4>
                   </a>
                 </li>
               {% else %}
                 <li>
                   <a href="{{ url('login') }}" id="btn-login-small">
                     <span class="glyphicon glyphicon-log-in white-icon"></span>
-                    <h4>Log in</h4>
+                    <h4>{{ "login"|trans({}, "catroweb")}}</h4>
                   </a>
                 </li>
               {% endif %}
