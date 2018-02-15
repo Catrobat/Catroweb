@@ -17,3 +17,15 @@ Feature: Searching for programs
   Scenario: search for programs should work
     Given I am on "/pocketcode/search/prog"
     Then I should see "Your search returned 4 results"
+
+  Scenario: search for yahoo myprog should search for all
+    Given I am on "/pocketcode/search/yahoo%20myprog"
+    Then I should see "Your search returned 2 results"
+
+  Scenario: search for gmail should search for all
+    Given I am on "/pocketcode/search/gmail"
+    Then I should see "Your search returned 4 results"
+
+  Scenario: search for gmx should search for all
+    Given I am on "/pocketcode/search/gmx.at"
+    Then I should see "Your search returned 0 results"
