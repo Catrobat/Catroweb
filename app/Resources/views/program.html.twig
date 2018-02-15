@@ -43,7 +43,7 @@
     <div class="clear"></div>
   </div>
 
-  <div id="program-middle">
+  <div id="program-middle" dir="ltr">
     <div id="image" class="image-container">
       {% if isWebview() %}
         <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
@@ -365,7 +365,7 @@
   </div>
 
   {% if  program.tags|length > 0  or program.extensions|length > 0 %}
-  <div id="recommendations">
+  <div id="recommendations" dir="ltr">
     <div id="recsys-headline">
       <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
     </div>
@@ -386,7 +386,7 @@
     <button id="close-reported-popup">Ok</button>
   </div>
 
-  <div id="program-comments">
+  <div id="program-comments" dir="ltr">
 
     <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
     <div id="user-comment-wrapper">
@@ -394,7 +394,7 @@
       <button id="post-button" class="btn btn-primary">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
     </div>
 
-    <div id="comments-wrapper">
+    <div id="comments-wrapper" dir="ltr">
       {% for comment in program_details.comments|slice(0, 10) %}
         <div id="comment-{{ comment.id }}" class = "single-comment">
           <div class = "avatar-wrapper">
