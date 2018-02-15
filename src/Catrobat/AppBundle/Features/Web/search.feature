@@ -19,16 +19,13 @@ Feature: Searching for programs
     Then I should see "Your search returned 4 results"
 
   Scenario: search for yahoo myprog should search for all
-    Given I fill in "search-input-header" with "yahoo myprog"
-    And I click "#search-header"
+    Given I am on "/pocketcode/search/yahoo%20myprog"
     Then I should see "Your search returned 2 results"
 
   Scenario: search for gmail should search for all
-    Given I fill in "search-input-header" with "gmail"
-    And I click "#search-header"
+    Given I am on "/pocketcode/search/gmail"
     Then I should see "Your search returned 4 results"
 
   Scenario: search for gmx should search for all
-    Given I fill in "search-input-header" with "gmx.at"
-    And I click "#search-header"
+    Given I am on "/pocketcode/search/gmx.at"
     Then I should see "Your search returned 0 results"
