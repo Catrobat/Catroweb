@@ -1,17 +1,24 @@
-
-@import 'default';
 @import 'elements';
 @import 'brain';
 @import 'footer';
 @import 'header';
 @import 'images';
+
+@import 'default';
+
+@import "../../../bootstrap_vendor/less/bootstrap.less";
+@import "variables.less";
+
+// your color/variable changes here
+
+@import "bootswatch";
 @import "catro_bootstrap";
 
 header {
   nav {
     #menu {
       background: none;
-      
+
       .btn-menu {
         border-left: 1px solid white;
       }
@@ -34,11 +41,14 @@ header {
     }
     #header-top {
       margin-bottom: 0;
+      a {
+        color: #FFFFFF !important;
+      }
     }
     #searchbar {
       background-color: @default-background-color;
       color: @footer-background-color;
-      border: none; 
+      border: none;
     }
   }
 }
@@ -52,6 +62,7 @@ header {
 }
 
 #wrapper {
+  background-image: @galaxy-background-image;
   max-width: none;
 }
 
@@ -64,22 +75,19 @@ header {
   margin-bottom: 10px;
 }
 
-#header-wrapper a {
-  color:#FFF;
-}
 #footer-wrapper, #header-wrapper
 {
   background-color: @footer-background-color;
 }
 #header-wrapper {
-    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5);
 }
 #footer-menu-desktop
 {
   border-bottom: 1px solid @default-background-color;
 }
 #footer-menu-bottom select {
-    background-color: @footer-background-color;
+  background-color: @footer-background-color;
 }
 
 #footer-menu-mobile {
@@ -88,4 +96,28 @@ header {
 
 .owl-theme .owl-controls .owl-page span {
   background: @footer-background-color;
+}
+
+#wrapper a {
+  color: @content-default-link-color
+}
+
+#program-user a {
+  color: #FFFFFF !important;
+}
+
+.program a {
+  color: #FFFFFF !important;
+}
+
+.img-nav-dropdown {
+  background-image: @galaxy-menu-upper-border;
+}
+
+header nav #nav-dropdown {
+  padding-top: 21px !important;
+}
+
+textarea {
+  color: black;
 }
