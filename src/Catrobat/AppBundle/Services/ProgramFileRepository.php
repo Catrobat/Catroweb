@@ -51,6 +51,11 @@ class ProgramFileRepository
     }
   }
 
+  public function deleteProgramFile($id)
+  {
+    $this->filesystem->remove($this->directory . $id . ".catrobat");
+  }
+
   public function saveProgramfile(File $file, $id)
   {
     $this->filesystem->copy($file->getPathname(), $this->directory . $id . '.catrobat');

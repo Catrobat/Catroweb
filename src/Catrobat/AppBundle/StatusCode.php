@@ -29,6 +29,8 @@ class StatusCode
   const MEDIA_LIB_PACKAGE_NOT_FOUND = 523;
   const PROGRAM_NAME_TOO_LONG = 526;
   const DESCRIPTION_TOO_LONG = 527;
+  // upload failed but program still in DB
+  const INVALID_FILE_UPLOAD = 528;
 
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;
