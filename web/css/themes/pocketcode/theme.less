@@ -1,11 +1,19 @@
-@import "default";
-@import 'brain';
 @import 'elements';
+@import 'brain';
 @import 'footer';
 @import 'header';
 @import 'images';
+
+@import 'default';
+
+@import "../../../bootstrap_vendor/less/bootstrap.less";
+@import "variables.less";
+
+// your color/variable changes here
+
+@import "bootswatch";
 @import "catro_bootstrap";
 
-#gamejam-submittion {
+#gamejam-submission {
   .gradient(@galaxy-button-background-color, @galaxy-button-background-color, @galaxy-button-background-color) !important;
 }

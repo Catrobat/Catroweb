@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
 
   <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
-  <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
   <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
+  <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
 
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
@@ -31,9 +31,9 @@
     {% endblock %}
   </header>
 
-  <article>
+  <div class="container">
     {% block body %}{% endblock %}
-  </article>
+  </div>
 </div>
 
 {% block footer %}

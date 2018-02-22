@@ -1,124 +1,124 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="row">
-    <div class="col-lg-offset-2 col-lg-9">
-      <div class="container-fluid">
-        <div class="navbar-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+          <div class="navbar-header">
 
-          <a class="navbar-brand" href="{{ path('index') }}">
-            <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
-          </a>
-          <a class="navbar-brand" href="{{ path('index') }}">
-            <h3 id="page-name">Home</h3>
-          </a>
-          <div class="right-inline navbar-small">
-            <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-            <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+            <a class="navbar-brand" href="{{ path('index') }}">
+              <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
+            </a>
+            <a class="navbar-brand" href="{{ path('index') }}">
+              <h3 id="page-name">Home</h3>
+            </a>
+            <div class="right-inline navbar-small">
+              <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+              <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span id="menu-icon" class="glyphicon glyphicon-option-vertical white-icon medium-icon"></span>
-            </button>
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                      data-target="#bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span id="menu-icon" class="glyphicon glyphicon-option-vertical white-icon medium-icon"></span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-            <div class="navbar-small">
-              <ul class="nav navbar-nav navbar-right">
-              {% if app.user %}
-                <li>
-                  <a href="{{ path('user_notifications') }}">
-                    <span class="glyphicon glyphicon-bell white-icon"></span>
-                    <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
-                  </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <a href="{{ url('profile') }}" id="btn-profile">
-                    <span class="glyphicon glyphicon-user white-icon"></span>
-                    <h4>My Profile</h4>
-                  </a>
-                </li>
-                {% if is_granted('ROLE_ADMIN') %}
+          <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+              <div class="navbar-small">
+                <ul class="nav navbar-nav navbar-right">
+                {% if app.user %}
                   <li>
-                    <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                      <span class="glyphicon glyphicon-dashboard white-icon"></span>
-                      <h4>Admin</h4>
+                    <a href="{{ path('user_notifications') }}">
+                      <span class="glyphicon glyphicon-bell white-icon"></span>
+                      <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="{{ url('profile') }}" id="btn-profile">
+                      <span class="glyphicon glyphicon-user white-icon"></span>
+                      <h4>My Profile</h4>
+                    </a>
+                  </li>
+                  {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                      <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                        <span class="glyphicon glyphicon-dashboard white-icon"></span>
+                        <h4>Admin</h4>
+                      </a>
+                    </li>
+                  {% endif %}
+                  <li>
+                    <a href="{{ url('logout') }}" id="btn-logout">
+                      <span class="glyphicon glyphicon-log-out white-icon"></span>
+                      <h4>Logout</h4>
+                    </a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="{{ url('login') }}" id="btn-login-small">
+                      <span class="glyphicon glyphicon-log-in white-icon"></span>
+                      <h4>Log in</h4>
                     </a>
                   </li>
                 {% endif %}
-                <li>
-                  <a href="{{ url('logout') }}" id="btn-logout">
-                    <span class="glyphicon glyphicon-log-out white-icon"></span>
-                    <h4>Logout</h4>
-                  </a>
-                </li>
-              {% else %}
-                <li>
-                  <a href="{{ url('login') }}" id="btn-login-small">
-                    <span class="glyphicon glyphicon-log-in white-icon"></span>
-                    <h4>Log in</h4>
-                  </a>
-                </li>
-              {% endif %}
-              </ul>
-            </div>
+                </ul>
+              </div>
 
-            <div class="navbar-big">
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-                  <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
-                </li>
-              {% if app.user %}
-                <li class="dropdown" id="navbar-dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                    <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
-                    <span class="glyphicon glyphicon-chevron-down white-icon"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li>
-                      <a href="{{ path('user_notifications') }}">
-                        <span class="glyphicon glyphicon-bell white-icon"></span>
-                        <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
-                      </a>
-                    </li>
-                    <li><a href="{{ url('profile') }}" id="btn-profile">
-                        <span class="glyphicon glyphicon-user white-icon"></span>
-                        <h4>My Profile</h4>
-                      </a>
-                    </li>
-                    {% if is_granted('ROLE_ADMIN') %}
+              <div class="navbar-big">
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+                    <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+                  </li>
+                {% if app.user %}
+                  <li class="dropdown" id="navbar-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                      <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
+                      <span class="glyphicon glyphicon-chevron-down white-icon"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                          <span class="glyphicon glyphicon-dashboard white-icon"></span>
-                          <h4>Admin</h4>
+                        <a href="{{ path('user_notifications') }}">
+                          <span class="glyphicon glyphicon-bell white-icon"></span>
+                          <h4>{{ "notifications"|trans({}, "catroweb") }}</h4>
                         </a>
                       </li>
-                    {% endif %}
-                    <li>
-                      <a href="{{ url('logout') }}" id="btn-logout">
-                        <span class="glyphicon glyphicon-log-out white-icon"></span>
-                        <h4>Logout</h4>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <div class="btn btn-menu logged-in show-nav-dropdown user-notification-badge">
+                      <li><a href="{{ url('profile') }}" id="btn-profile">
+                          <span class="glyphicon glyphicon-user white-icon"></span>
+                          <h4>My Profile</h4>
+                        </a>
+                      </li>
+                      {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                          <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                            <span class="glyphicon glyphicon-dashboard white-icon"></span>
+                            <h4>Admin</h4>
+                          </a>
+                        </li>
+                      {% endif %}
+                      <li>
+                        <a href="{{ url('logout') }}" id="btn-logout">
+                          <span class="glyphicon glyphicon-log-out white-icon"></span>
+                          <h4>Logout</h4>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <div class="btn btn-menu logged-in show-nav-dropdown user-notification-badge">
 
-                </div>
+                  </div>
 
-              {% else %}
-                <li>
-                  <a href="{{ url('login') }}" id="btn-login">
-                    <span class="glyphicon glyphicon-log-in white-icon"></span>
-                    <h4>Log in</h4>
-                  </a>
-                </li>
-              {% endif %}
-              </ul>
-            </div>
-        </div>
+                {% else %}
+                  <li>
+                    <a href="{{ url('login') }}" id="btn-login">
+                      <span class="glyphicon glyphicon-log-in white-icon"></span>
+                      <h4>Log in</h4>
+                    </a>
+                  </li>
+                {% endif %}
+                </ul>
+              </div>
+          </div>
       </div>
     </div>
   </div>

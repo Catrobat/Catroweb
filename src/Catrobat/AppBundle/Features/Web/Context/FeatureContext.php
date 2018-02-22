@@ -1210,14 +1210,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^the copy link should be "([^"]*)"$/
-   */
-  public function theCopyLinkShouldBe($url)
-  {
-    assertEquals($this->getSession()->getPage()->findField('copy-link')->getValue(), $this->locatePath($url));
-  }
-
-  /**
    * @Given /^there are mediapackages:$/
    */
   public function thereAreMediapackages(TableNode $table)

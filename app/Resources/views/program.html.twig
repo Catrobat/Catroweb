@@ -18,6 +18,7 @@
   <script src=" {{  asset( getJavascriptPath('jquery.ui.position.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('animatedModal.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('vis.min.js') )}}"></script>
+  <script src=" {{  asset( getJavascriptPath('clipboard.min.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('remixgraph.configuration.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('remixgraph.builder.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('remixgraph.visualization.js') )}}"></script>
@@ -258,7 +259,7 @@
         {% if jam %}
           <div id="gamejam-div">
             <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id })  }}{% else %}{{ url('login') }}{% endif %}"  title="{{ jam.name }}">
-              <button id="gamejam-submittion" class="btn btn-jam download-button">
+              <button id="gamejam-submission" class="btn btn-jam download-button">
                 <table>
                   <tr>
                     <td><img src="{{ asset( jam.logo_url ) }}" > </td>
@@ -274,21 +275,12 @@
         {% endif %}
       {% endif %}
       <div class="clear"></div>
-      <table id="copy-link">
-        <tr>
-          <td>
-            <div class="glyphicon glyphicon-link medium-icon"></div>
-          </td>
-          <td>
-            <span>Link</span>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-              <input name="copy-link" id="url-link" value="{{ url('program', { id : program.id }) }}">
-          </td>
-        </tr>
-      </table>
+      <button type="button" class="btn btn-lg btn-link btn-copy"
+              data-clipboard-text="{{ url('program', { id : program.id }) }}"
+              style="text-shadow: none;">
+        <span class="fa fa-link" aria-hidden="true"></span>
+        Link
+      </button>
       <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
     </div>
 
@@ -449,6 +441,46 @@
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
   <script>
+    $(function()
+    {
+      var copy_button = $('.btn-copy');
+
+      copy_button.tooltip({
+        trigger: 'manual',
+        placement: 'right'
+      });
+
+      copy_button.on('shown.bs.tooltip', function()
+      {
+        console.log("Shown");
+        setTimeout(function() {
+          console.log("Hiding");
+          copy_button.tooltip('hide');
+        }, 1000);
+      });
+
+      var cb = new Clipboard('.btn-copy');
+      cb.on('success', function(e) {
+        console.log("scucess");
+        copy_button
+        .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')
+        .addClass('tooltip-success')
+        .removeClass('tooltip-danger');
+        copy_button.tooltip('show');
+        $('.btn-copy +.tooltip .tooltip-inner').prepend("<i class='fa fa-check' style='padding-right: 1em'></i>");
+      });
+
+      cb.on('error', function(e) {
+        copy_button
+        .attr('data-original-title', '{{ "clipboard.fail"|trans({}, "catroweb") }}')
+        .addClass('tooltip-danger')
+        .removeClass('tooltip-success');
+        copy_button.tooltip('show');
+        $('.btn-copy +.tooltip .tooltip-inner').prepend("<i class='fa fa-close' style='padding-right: 1em'></i>");
+      });
+
+    });
+
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
       '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}','{{ asset('images/symbols/loading.gif') }}',
       '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}','{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
