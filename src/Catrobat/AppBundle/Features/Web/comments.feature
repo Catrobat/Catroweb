@@ -103,5 +103,17 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for a second
     Then I should see 0 "#comment-4"
 
+  Scenario: I should be able to write a comment when I am logged in and it should notify the owner
+    Given I log in as "Gregor" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    And I write "hello" in textbox
+    And I click the "send" button
+    And I wait for a second
+    Then I should see "hello"
+    Then I log in as "Superman" with the password "123456"
+    And I am on "/pocketcode/user/notifications"
+    Then I should see an ".catro-notification" element
+    Then I should see "Gregor"
+
 
 

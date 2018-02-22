@@ -679,6 +679,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     * @var $new_comment \Catrobat\AppBundle\Entity\UserComment
     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $pm = $this->kernel->getContainer()->get('programmanager');
     $comments = $table->getHash();
 
     foreach ($comments as $comment)
@@ -686,6 +687,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_comment = new UserComment();
 
       $new_comment->setUploadDate(new \DateTime($comment['upload_date'], new \DateTimeZone('UTC')));
+      $new_comment->setProgram($pm->find($comment['program_id']));
       $new_comment->setProgramId($comment['program_id']);
       $new_comment->setUserId($comment['user_id']);
       $new_comment->setUsername($comment['user_name']);

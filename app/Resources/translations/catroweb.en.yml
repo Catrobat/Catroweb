@@ -646,6 +646,11 @@ privacy-policy:
   text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
   text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  comment:
+    title: New comment for program %program_name%!
+    messagePart1: User
+    messagePart2: commented on your program
 
 clipboard:
   success: Link to program copied to clipboard!
