@@ -1,0 +1,323 @@
+@import "../../../bootstrap_vendor/less/bootstrap.less";
+@import "variables.less";
+@import "bootswatch.less";
+
+html, body
+{
+  margin: 0;
+  height: 100%;
+}
+
+#logo
+{
+  height: 63px;
+}
+
+.white-icon
+{
+  font-size: 2em;
+  color: white;
+}
+
+.medium-icon
+{
+  font-size: 1.7em;
+}
+
+.right-inline
+{
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 10px;
+}
+
+.navbar-small
+{
+  display: inherit;
+}
+
+.navbar-big
+{
+  display: none;
+}
+
+.help-headline {
+  border-bottom: 1px solid #9583B2 !important;
+}
+
+.group {
+  input {
+    border-bottom: 1px solid rgba(138,120,168,0.3) !important;
+    color: rgb(138,120,168) !important;
+  }
+
+  label {
+    color: rgb(138,120,168) !important;
+  }
+}
+
+.bar:after, .bar:before {
+  background: rgba(138,120,168,0.7) !important;
+}
+
+hr {
+  border-color: #8A78A8 !important;
+}
+
+.panel-info {
+  border-color: #8A78A8;
+  > .panel-heading {
+    border-color: #8A78A8;
+    background-color: #8A78A8;
+  }
+}
+
+#program-comments {
+  border-top: 1px solid #8A78A8 !important;
+}
+
+#user-comment-wrapper {
+  border-bottom: 1px solid #8A78A8 !important;
+}
+
+.pc-startButton {
+  color: #8a78a8 !important;
+  fill: #8a78a8 !important;
+}
+
+#recommendations, #specific-programs-recommendations {
+  border-top: 1px solid #8A78A8 !important;
+}
+
+.img-visibility-visible {
+  background-color: #8A78A8 !important;
+}
+
+.btn-info {
+  border-color: #8A78A8 !important;
+  background-color: #8A78A8 !important;
+}
+
+//################## Header ####################
+
+header
+{
+  padding: 0;
+
+  .navbar-header
+  {
+    display: flex;
+    align-items: center;
+
+    h3
+    {
+      color: white;
+      margin: 0;
+    }
+
+    .navbar-toggle
+    {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  #bs-navbar-collapse
+  {
+    max-height: none;
+
+    .navbar-small
+    {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .navbar-nav
+    {
+      margin: 0;
+
+      .navbar-form
+      {
+        margin: 0;
+      }
+
+      li
+      {
+        a
+        {
+          display: flex;
+          visibility: visible;
+          align-items: center;
+          h4
+          {
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+//################## Footer ####################
+@padding: 15px;
+@margin-adjustment: -5px;
+
+footer
+{
+  background-color: #E1E2E1;
+  padding: @padding 0;
+  ul
+  {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+
+    li
+    {
+      display: inline-block;
+
+      a
+      {
+        color: inherit;
+        font-weight: 500;
+        font-size: 12px;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        position: relative;
+        padding: @padding;
+        display: block;
+
+        border-radius: 3px;
+        &:hover
+        {
+          text-decoration: none;
+        }
+      }
+
+      .btn
+      {
+        margin: 0;
+      }
+    }
+
+    &.list-horizontal
+    {
+      &:first-child a
+      {
+        padding-left: 0;
+      }
+
+      &:last-child a
+      {
+        padding-right: 0;
+      }
+    }
+
+    &.list-vertical
+    {
+      li
+      {
+        margin-left: @margin-adjustment;
+        margin-right: @margin-adjustment;
+        display: block;
+
+        a
+        {
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  .pull-center
+  {
+    display: inline-block;
+    float: none;
+  }
+  h4
+  {
+    font-weight: 500;
+    color: #000000;
+  }
+}
+//################## Footer End ####################
+
+
+
+// can/should be used for uniform width of page containers
+.content
+{
+  height: 100%;
+}
+.navbar-brand #logo
+{
+  margin-top: -25px;
+}
+
+@navbar-collapse-width:    ~"only screen and (max-width: 823px)";
+
+@media @navbar-collapse-width
+{
+  #logo
+  {
+    height: 63px;
+  }
+}
+
+@media screen and (min-width: @screen-sm)
+{
+  .navbar-small
+  {
+    display: none;
+  }
+
+  .navbar-big
+  {
+    display: inherit;
+  }
+
+  #bs-navbar-collapse
+  {
+    .navbar-nav
+    {
+      align-items: center;
+      display: flex;
+      padding-top: 25px;
+
+      li
+      {
+        padding: 5px;
+
+        a
+        {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+
+        span
+        {
+          margin-right: 10px;
+        }
+
+        ul
+        {
+          padding: 5px;
+          min-width: 210px;
+
+          a
+          {
+            padding-top: 0;
+            padding-bottom: 0;
+          }
+
+          span
+          {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
