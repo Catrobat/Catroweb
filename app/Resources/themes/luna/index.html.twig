@@ -23,16 +23,10 @@
   <div id="recommended">
     <div class="help-headline">
       <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
-      {% if not ("FR" in app.request.locale) and not ("fr" in app.request.locale) %}
         <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
              data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-          {% if not ("DE" in app.request.locale) and not ("de" in app.request.locale) %}
-            data-help-description="{{ "indexPage.recommendedSection.info.description_B_VersionTest"|trans({}, "catroweb") }}"
-          {% else %}
-            data-help-description="{{ "indexPage.recommendedSection.info.description_C_VersionTest"|trans({}, "catroweb") }}"
-          {% endif %}
+             data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}"
              width="30" height="30" />
-      {% endif %}
     </div>
     <div class="programs"></div>
   </div>
