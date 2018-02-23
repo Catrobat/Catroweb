@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Element\NodeElement;
 use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -2165,8 +2166,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSearchForWithTheSearchbar($arg1)
   {
+    $this->iClick('.search-icon-header');
     $this->fillField('search-input-header', $arg1);
-    $this->iClick('#search-header');
+    $this->iClick('.catro-search-button');
   }
 
   /**
@@ -2557,4 +2559,55 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
+  /**
+   * @Then /^I click the currently visible search icon$/
+   */
+  public function iClickTheCurrentlyVisibleSearchIcon()
+  {
+    $icons = $this->getSession()->getPage()->findAll("css", ".search-icon-header");
+    foreach ($icons as $icon)
+    {
+      /** @var NodeElement $icon */
+      if ($icon->isVisible())
+      {
+        $icon->click();
+        return;
+      }
+    }
+    assertTrue(false, "Tried to click .search-icon-header but no visible element was found.");
+  }
+
+  /**
+   * @Then /^at least one "([^"]*)" element should be visible$/
+   */
+  public function atLeastOneElementShouldBeVisible($arg1)
+  {
+    $elements = $this->getSession()->getPage()->findAll("css", $arg1);
+    foreach ($elements as $element)
+    {
+      /** @var NodeElement $element */
+      if ($element->isVisible())
+      {
+        return;
+      }
+    }
+    assertTrue(false, "No $arg1 element currently visible.");
+  }
+
+  /**
+   * @Then /^no "([^"]*)" element should be visible$/
+   */
+  public function atLeastOneElementShouldNotBeVisible($arg1)
+  {
+    $elements = $this->getSession()->getPage()->findAll("css", $arg1);
+    foreach ($elements as $element)
+    {
+      /** @var NodeElement $element */
+      if ($element->isVisible())
+      {
+        assertTrue(false, "Found visible $arg1 element.");
+      }
+    }
+  }
 }
+
