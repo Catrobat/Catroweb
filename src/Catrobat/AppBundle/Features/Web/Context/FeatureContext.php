@@ -2536,4 +2536,25 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $arg1 = '.homepage-recommended-programs';
     $this->assertSession()->elementNotExists('css', $arg1);
   }
+
+  /**
+   * @Then /^I should see the image "([^"]*)"$/
+   */
+  public function iShouldSeeTheImage($arg1)
+  {
+    $img = $this->getSession()->getPage()->findById('logo');
+
+    if ($img != null)
+    {
+      assertEquals($img->getTagName(), 'img');
+      $src = $img->getAttribute('src');
+      assertTrue(strpos($src, $arg1) !== false, "<$src> does not contain $arg1");
+      assertTrue($img->isVisible(), "Image is not visible.");
+    }
+    else
+    {
+      assertTrue(false, "#logo not found!");
+    }
+  }
+
 }

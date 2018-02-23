@@ -38,7 +38,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 
 programs:
   featured: Featured
