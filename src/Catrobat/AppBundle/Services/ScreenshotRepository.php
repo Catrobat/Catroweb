@@ -199,6 +199,13 @@ class ScreenshotRepository
       ]);
   }
 
+  public function deletePermProgramAssets($id)
+  {
+    $this->deleteScreenshot($id);
+    $this->deleteThumbnail($id);
+    $this->deleteTempFilesForProgram($id);
+  }
+
   /**
    * @desc This function empties the tmp folder.
    *       When this function is used while a user is

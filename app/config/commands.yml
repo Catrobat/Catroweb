@@ -19,6 +19,16 @@ services:
               tags:
                 -  { name: console.command }
 
+      catrowebadmin.command.clean.invalid:
+              class: Catrobat\AppBundle\Commands\InvalidFileUploadCleanupCommand
+              tags:
+                -  { name: console.command }
+
+      catrowebadmin.command.clean.invalid.revert:
+              class: Catrobat\AppBundle\Commands\InvalidFileUploadCleanupCommand
+              tags:
+                -  { name: console.command }
+
       catrowebadmin.command.init:
               class: Catrobat\AppBundle\Commands\InitDirectoriesCommand
               arguments: ["@catrowebadmin.filesystem","%catrobat.file.storage.dir%"]
