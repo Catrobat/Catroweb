@@ -42,28 +42,28 @@
                 <li>
                   <a href="{{ url('profile') }}" id="btn-profile">
                     <span class="glyphicon glyphicon-user white-icon"></span>
-                    <h4>My Profile</h4>
+                    <h4>{{ 'menu.profile'|trans({}, "catroweb") }}</h4>
                   </a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}
                   <li>
                     <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
                       <span class="glyphicon glyphicon-dashboard white-icon"></span>
-                      <h4>Admin</h4>
+                      <h4>{{ 'menu.admin'|trans({}, "catroweb") }}</h4>
                     </a>
                   </li>
                 {% endif %}
                 <li>
                   <a href="{{ url('logout') }}" id="btn-logout">
                     <span class="glyphicon glyphicon-log-out white-icon"></span>
-                    <h4>Logout</h4>
+                    <h4>{{ 'menu.logout'|trans({}, "catroweb") }}</h4>
                   </a>
                 </li>
               {% else %}
                 <li>
                   <a href="{{ url('login') }}" id="btn-login-small">
                     <span class="glyphicon glyphicon-log-in white-icon"></span>
-                    <h4>Log in</h4>
+                    <h4>{{ 'menu.login'|trans({}, "catroweb") }}</h4>
                   </a>
                 </li>
               {% endif %}
@@ -97,21 +97,21 @@
                     </li>
                     <li><a href="{{ url('profile') }}" id="btn-profile">
                         <span class="glyphicon glyphicon-user white-icon"></span>
-                        <h4>My Profile</h4>
+                        <h4>{{ 'menu.profile'|trans({}, "catroweb") }}</h4>
                       </a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                       <li>
                         <a href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
                           <span class="glyphicon glyphicon-dashboard white-icon"></span>
-                          <h4>Admin</h4>
+                          <h4>{{ 'menu.admin'|trans({}, "catroweb") }}</h4>
                         </a>
                       </li>
                     {% endif %}
                     <li>
                       <a href="{{ url('logout') }}" id="btn-logout">
                         <span class="glyphicon glyphicon-log-out white-icon"></span>
-                        <h4>Logout</h4>
+                        <h4>{{ 'menu.logout'|trans({}, "catroweb") }}</h4>
                       </a>
                     </li>
                   </ul>
@@ -124,7 +124,7 @@
                 <li>
                   <a href="{{ url('login') }}" id="btn-login">
                     <span class="glyphicon glyphicon-log-in white-icon"></span>
-                    <h4>Log in</h4>
+                    <h4>{{ 'menu.login'|trans({}, "catroweb") }}</h4>
                   </a>
                 </li>
               {% endif %}

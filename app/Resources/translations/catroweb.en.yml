@@ -438,7 +438,9 @@ search:
 
 menu:
   profile: My Profile
+  login: Login
   logout: Logout
+  admin: Admin
 
 programLoader:
   noPrograms: There are currently no programs.
