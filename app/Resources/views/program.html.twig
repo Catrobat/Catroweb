@@ -452,16 +452,13 @@
 
       copy_button.on('shown.bs.tooltip', function()
       {
-        console.log("Shown");
         setTimeout(function() {
-          console.log("Hiding");
           copy_button.tooltip('hide');
         }, 1000);
       });
 
       var cb = new Clipboard('.btn-copy');
       cb.on('success', function(e) {
-        console.log("scucess");
         copy_button
         .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')
         .addClass('tooltip-success')

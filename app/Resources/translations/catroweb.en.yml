@@ -435,6 +435,7 @@ search:
   search: Search
   results: Search Results
   resultcount: Your search returned %count% results
+  fail: Please enter at least a single search term
 
 menu:
   profile: My Profile

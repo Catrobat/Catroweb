@@ -103,19 +103,33 @@ var Main = function(search_url)
   
   self.setSearchBtnListener = function()
   {
+    
     // search enter pressed
-    $('.input-search').keypress(function(event)
+    $(".input-search").keypress(function(event)
     {
       if (event.which == 13)
       {
-        self.searchPrograms($(this).val());
+        var search_term = $(this).val();
+        if (!search_term)
+        {
+          $(this).tooltip('show');
+          return;
+        }
+        self.searchPrograms(search_term);
       }
     });
     
     // search button clicked (header)
     $('.btn-search').click(function()
     {
-      self.searchPrograms($('.input-search').val());
+      var search_field = $(this).parent().find('.input-search');
+      var search_term = search_field.val();
+      if (!search_term)
+      {
+        search_field.tooltip('show');
+        return;
+      }
+      self.searchPrograms(search_term);
     });
     
     // search button clicked (footer)

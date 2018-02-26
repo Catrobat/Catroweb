@@ -39,3 +39,19 @@ Feature: Searching for programs
     Then no ".search-icon-header" element should be visible
     Then at least one ".search-input-header" element should be visible
     Then at least one ".catro-search-button" element should be visible
+
+  Scenario: consecutive searches should lead to different results
+    Given I am on "/pocketcode"
+    And I click the currently visible search icon
+    Then I enter "prog" into the currently visible search input
+    And I click the currently visible search button
+    Then I should be on "/pocketcode/search/prog"
+    And I should see "Your search returned 4 results"
+    And at least one ".search-input-header" element should be visible
+    And at least one ".catro-search-button" element should be visible
+    Then I enter "yahoo myprog" into the currently visible search input
+    And I click the currently visible search button
+    Then I should be on "/pocketcode/search/yahoo%20myprog"
+    Then I should see "Your search returned 2 results"
+    And at least one ".search-input-header" element should be visible
+    And at least one ".catro-search-button" element should be visible

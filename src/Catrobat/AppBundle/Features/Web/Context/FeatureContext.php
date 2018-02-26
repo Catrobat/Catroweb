@@ -2609,5 +2609,42 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       }
     }
   }
+
+  /**
+   * @Then /^I click the currently visible search button$/
+   */
+  public function iClickTheCurrentlyVisibleSearchButton()
+  {
+    $icons = $this->getSession()->getPage()->findAll("css", ".btn-search");
+    foreach ($icons as $icon)
+    {
+      /** @var NodeElement $icon */
+      if ($icon->isVisible())
+      {
+        $icon->click();
+        return;
+      }
+    }
+    assertTrue(false, "Tried to click .btn-search but no visible element was found.");
+  }
+
+  /**
+   * @Then /^I enter "([^"]*)" into the currently visible search input$/
+   */
+  public function iEnterIntoTheCurrentlyVisibleSearchInput($arg1)
+  {
+    $fields = $this->getSession()->getPage()->findAll("css", ".input-search");
+    foreach ($fields as $field)
+    {
+      /** @var NodeElement $field */
+      if ($field->isVisible())
+      {
+        $field->setValue($arg1);
+        return;
+      }
+    }
+    assertTrue(false, "Tried to click .btn-search but no visible element was found.");
+  }
+
 }
 
