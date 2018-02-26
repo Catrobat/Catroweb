@@ -65,6 +65,42 @@ header
       margin-bottom: 0;
     }
   }
+  .catro-search-button
+  {
+    height: 39px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+    &:focus, &:active, &:hover, &:active:focus
+    {
+      background-color: rgba(0, 0, 0, 0.1) !important;
+      border: 1px rgba(0, 0, 0, 0.2) solid;
+      border-left: none;
+    }
+  }
+  .search-input-header
+  {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: white;
+
+    &::placeholder
+    {
+      color: white !important;
+    }
+    &:focus
+    {
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 1px rgba(0, 0, 0, 0.2) solid;
+      & + .catro-search-button
+      {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
 
   #bs-navbar-collapse
   {
@@ -87,6 +123,7 @@ header
 
       li
       {
+        display: flex;
         a
         {
           display: flex;
@@ -206,6 +243,7 @@ footer
   #logo
   {
     height: 63px;
+    max-width: none !important;
   }
 }
 

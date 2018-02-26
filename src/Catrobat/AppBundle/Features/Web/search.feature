@@ -29,3 +29,13 @@ Feature: Searching for programs
   Scenario: search for gmx should search for all
     Given I am on "/pocketcode/search/gmx.at"
     Then I should see "Your search returned 0 results"
+
+  Scenario: pressing the search icon should spawn the search bar
+    Given I am on "/pocketcode"
+    Then at least one ".search-icon-header" element should be visible
+    Then no ".search-input-header" element should be visible
+    Then no ".catro-search-button" element should be visible
+    And I click the currently visible search icon
+    Then no ".search-icon-header" element should be visible
+    Then at least one ".search-input-header" element should be visible
+    Then at least one ".catro-search-button" element should be visible

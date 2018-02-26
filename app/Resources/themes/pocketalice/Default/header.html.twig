@@ -1,23 +1,28 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="row">
-    <div class="col-lg-offset-2 col-lg-9">
-      <div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
         <div class="navbar-header">
 
           <a class="navbar-brand" href="{{ path('index') }}">
-            <img id="logo" class="logo" src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
+            {% block logoImage %}{% endblock %}
           </a>
           <a class="navbar-brand" href="{{ path('index') }}">
             <h3 id="page-name">Home</h3>
           </a>
           <div class="right-inline navbar-small">
-            <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-            <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+            <input type="text" class="form-control input-search search-input-header hidden"
+                   placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+            <button class="btn btn-default btn-search hidden catro-search-button">
+              <i class="fa fa-inverse fa-search"></i>
+            </button>
+            <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
-              <span id="menu-icon" class="glyphicon glyphicon-option-vertical white-icon medium-icon"></span>
+              <span id="menu-icon"
+                    class="glyphicon glyphicon-option-vertical white-icon medium-icon"></span>
             </button>
           </div>
         </div>
@@ -67,12 +72,18 @@
           <div class="navbar-big">
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <input type="text" class="form-control input-search hidden search-input-header" placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-                <a id="search-header" class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+                <input type="text" class="form-control input-search search-input-header hidden"
+                       placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+                <button class="btn btn-default btn-search hidden catro-search-button">
+                  <i class="fa fa-inverse fa-search"></i>
+                </button>
+                <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header"
+                   href="#"></a>
               </li>
               {% if app.user %}
                 <li class="dropdown" id="navbar-dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                     aria-expanded="true">
                     <h4 style="margin-right: 10.5px">{{ app.user.username }}</h4>
                     <span class="glyphicon glyphicon-chevron-down white-icon"></span>
                   </a>
@@ -125,14 +136,18 @@
 </nav>
 
 <script>
-  $(document).ready(function () {
-    $('.search-icon-header').on('click', function () {
+  $(document).ready(function()
+  {
+    $('.search-icon-header').on('click', function()
+    {
       $('.search-icon-header').hide();
-      if($(window).width() <= 430)
+      if ($(window).width() <= 430)
       {
         $('#page-name').hide();
       }
       $('.search-input-header').removeClass('hidden');
+      $('.catro-search-button').removeClass('hidden');
+      $('#page-name').parent().addClass('hidden');
     });
   });
 

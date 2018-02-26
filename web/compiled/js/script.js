@@ -119,7 +119,7 @@ var Main = function(search_url)
     // search button clicked (header)
     $('.btn-search').click(function()
     {
-      self.searchPrograms($(this).prev().find('input').val());
+      self.searchPrograms($('.input-search').val());
     });
     
     // search button clicked (footer)
