@@ -2,6 +2,12 @@
   Generated File by Grunt
   Sourcepath: web/js
 */
+//
+// This file contains the classes for the 
+//  * Event tracking and  
+//  * YouTube video tracking
+//
+
 
 (function ($, window, document, undefined) {
 
@@ -113,6 +119,8 @@
          * param{string} text - input parameter
         */
         isNullOrWhitespace: function(text) {
+			if(text === undefined || typeof(text) !== "string") return undefined;
+			
             return(!text || text.trim() === "");
         },
 
@@ -328,7 +336,7 @@
         * @return {boolean} - true if a subselector exits, else false
         */
         TrackingObject.prototype.hasSubSelector = function () {
-            return ( (this.subSelector.length > 0) ? true : false ); 
+            return ( (this.subSelector.length > 0) ? true : false );
         };
 
         /**
@@ -540,6 +548,7 @@
             }
 
             if( AnalyticsTracker.isSending === true ) {
+                debugger;
                 // execute tracking code
                 AnalyticsTracker.trackingFunction('event', eventParameter.Action, mapped);
             }
@@ -578,7 +587,7 @@
             }
             else {
                 jQuery(trackingObject.baseSelector)
-                    .on('click', 
+                    .on('click',
                         { eventParameter : trackingObject.getEventParameter() }, AnalyticsTracker.resolve);
             }
         },
@@ -651,7 +660,7 @@
 	     * @param {string} baseSelector - the base selector
          * @return {boolean}
 	    */
-        isBaseSeletorValid() : function (baseSelector) {
+        isBaseSeletorValid : function (baseSelector) {
             var isValid = false;
             // Chech if the tracked object exits on the page
             if ( $(baseSelector).length ) {
@@ -814,7 +823,6 @@
             });
         },
 
-
         /*
 	     * Method to track changes in the Youtube video player
 	     * @method checkStateChange
@@ -880,7 +888,6 @@
         /*
 	     * Function to stop the interval, if not already stopped
 	     * @method stopChecking
-	     * @param {event} event - Youtube video event
 	    */
         stopChecking: function () {
             // check if not already stopped
@@ -1034,12 +1041,11 @@
 
 })(window.jQuery, window, document);
 
-
 (function ($, window, document, configCustom, undefined) {
 
     'use strict';
 
-    // set default Google Analytics Id
+    // initializes the configCustom as copy of configCustom or as empty object
     configCustom = configCustom || {};
 
     /**
@@ -1047,25 +1053,32 @@
     * @param {String} UaId - Google Analytics tracking id
     */
     var configDefault = {
-        'UaId': 'UA-109261939-1',
+        'UaId': 'UA-42270417-5',
         'validDownloadExtensions': /\.*.(zip|rar|mp\\d+|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff*|avi|svg)/,
         'GoogleAnalyticsUri' : 'https://www.googletagmanager.com/gtag/js?id=',
         'DebugOutput' : false,
 
         'UrlMapping': [
             {
-                // removes the paramete from the program url
+                // removes the parameters from the program url
                 // origin:  https://share.catrob.at/pocketcode/program/44132
                 // cleaned: https://share.catrob.at/pocketcode/program/
                 'RegEx' : /(.*program\/)(\d+)/,
                 'ValueIndex' : 1,
             },
             {
+                // removes the parameters from the search url
+                // origin:  http://127.0.0.1/pocketcode/search/test
+                // cleaned: http://127.0.0.1/pocketcode/search/
+                'RegEx' : /(.*search\/)(\w+)/,
+                'ValueIndex' : 1,
+            },
+            {
                 // removes the query parameters from every url
                 // origin:  /pocketcode/?username=sonicjack2007&token=b1889b23f0f77ece495f5b2f9b358289
                 // cleaned: /pocketcode/
-                'RegEx' : /(.*\/)(\?.*)/,
-                'ValueIndex' : 0,
+                'RegEx' : /(.*\/?)(\?.*)/,
+                'ValueIndex' : 1,
             }
         ],
 
@@ -1595,16 +1608,6 @@
                     /**
                      * Tracks the click love button
                      */
-                    'BaseSelector' : '#program-like-love',
-                    'Category' : 'engagement',
-                    'Action' : 'socialEngagement - program',
-                    'Label': window.location.pathname,
-                    'Value': 10,
-                },
-                {
-                    /**
-                     * Tracks the click love button
-                     */
                     'BaseSelector' : '#program-like-wow',
                     'Category' : 'engagement',
                     'Action' : 'socialEngagement - program',
@@ -1630,20 +1633,22 @@
             AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction);
 
         }
-        else if (window.location.pathname.indexOf('/pocketcode/search') >= 0 ) {
+        else if (window.location.pathname.indexOf('/search') >= 0 ) {
 
             var searchCategory = 'search page';
+            var actionSubstring = ( (window.location.pathname.indexOf('/tag/search') >= 0) ? "tag" : "program" );
+
             var elementList = [
                 {
                     /**
                      * Tracks the clicks on a searched program
                      */
-                    'BaseSelector' : '#search-results > div.programs',
-                    'SubSelector' : 'a.rec-programs',
+                    'BaseSelector' : '.programs',
+                    'SubSelector' : 'a',
                     'Category' : searchCategory,
-                    'Action' : 'click - searched program',
-                    'Label': function () {
-                        return window.location.pathname;
+                    'Action' : 'click - searched ' + actionSubstring,
+                    'Label': function (e) {
+                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
                     },
                 },
                 {
@@ -1653,7 +1658,7 @@
                     'BaseSelector' : '#search-results',
                     'SubSelector' : '.button-show-more',
                     'Category' : searchCategory,
-                    'Action' : 'click - searched program - more',
+                    'Action' : 'click - searched ' + actionSubstring + ' - more',
                 },
                 {
                     /**
@@ -1662,7 +1667,7 @@
                     'BaseSelector' : '#search-results',
                     'SubSelector' : '.button-show-less',
                     'Category' : searchCategory,
-                    'Action' : 'click - searched program - less',
+                    'Action' : 'click - searched ' + actionSubstring + ' - less',
                 },
             ];
 
