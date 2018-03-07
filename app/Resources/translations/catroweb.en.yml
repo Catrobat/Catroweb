@@ -658,3 +658,5 @@ catro-notifications:
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(
+next: Next
+previous: Previous
