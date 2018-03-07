@@ -157,6 +157,7 @@
             $.each(mappings, function (j, map) {
                 if(map.RegEx.test(url)) {
                     url = url.match(map.RegEx)[map.ValueIndex];
+                    return url;
                 }
             });
 
@@ -185,10 +186,10 @@
      */
     var TrackingObjectFactory = {
         /*
-		 * Function to create trackingObjects from plain object
-		 * @method trackingObjectFactoryArray
-		 * @param {Array[Object]} trackingObjectArray - Source Array for the trackingObjects
-		 * @return {Array[TrackingObject]} - Array of trackingObjects
+         * Function to create trackingObjects from plain object
+         * @method trackingObjectFactoryArray
+         * @param {Array[Object]} trackingObjectArray - Source Array for the trackingObjects
+         * @return {Array[TrackingObject]} - Array of trackingObjects
 		*/
         createArray: function(trackingObjectArray) {
 
@@ -202,11 +203,11 @@
         },
 
         /*
-		 * Function to create a trackingObject from plain object
-		 * @method trackingObjectFactoryObj
-		 * @param {Object} obj - Source for the trackingObject
-		 * @return {TrackingObject} - TrackingObjects
-		*/
+         * Function to create a trackingObject from plain object
+         * @method trackingObjectFactoryObj
+         * @param {Object} obj - Source for the trackingObject
+         * @return {TrackingObject} - TrackingObjects
+         */
         createObj: function(obj) {
 
             var trackingObject = new TrackingObject();
@@ -371,61 +372,61 @@
     'use strict';
 
     /**
-	 * Contains methods to create tracking objects and
-	 * add click event handlers to html elements
-	 *
-	 * @module Tracker
-	 * @class AnalyticsTracker
-	 * @memberof Tracker
-	 * @requires jQuery
-	 * @static
-	 */
+     * Contains methods to create tracking objects and
+     * add click event handlers to html elements
+     *
+     * @module Tracker
+     * @class AnalyticsTracker
+     * @memberof Tracker
+     * @requires jQuery
+     * @static
+     */
     var AnalyticsTracker;
 
     AnalyticsTracker = {
 
         /**
-	     * Indicates if the send event should be displayed
-	     * @property debugOutput
-	     * @type boolean
-	    */
+         * Indicates if the send event should be displayed
+         * @property debugOutput
+         * @type boolean
+         */
         debugOutput: false,
 
         /**
-	     * Indicates if the event is send
-	     * @property isSending
-	     * @type boolean
-	    */
+         * Indicates if the event is send
+         * @property isSending
+         * @type boolean
+         */
         isSending: true,
 
         /**
-	     * Contains the tracking function of the analytics system
-	     * @property trackingFunction
-	     * @type function
-	    */
+         * Contains the tracking function of the analytics system
+         * @property trackingFunction
+         * @type function
+         */
         trackingFunction : undefined,
 
         /**
-	     * Contains the filter for the valid download extensions
-	     * @property validDownloadExtensions
-	     * @type string
-	    */
+         * Contains the filter for the valid download extensions
+         * @property validDownloadExtensions
+         * @type string
+         */
         validDownloadExtensions : [],
 
         /**
-	     * Contains the mapping of the tracking actions
-	     * @property trackingVarMap
-	     * @type Array
-	    */
+         * Contains the mapping of the tracking actions
+         * @property trackingVarMap
+         * @type Array
+         */
         trackingVarMap : [],
 
         /**
-	     * initializes the AnalyticsTracker withe the tracking function
-	     * @method initialize
-	     * @param {function} trackingFunction - the tracking function
+         * initializes the AnalyticsTracker withe the tracking function
+         * @method initialize
+         * @param {function} trackingFunction - the tracking function
          * @param {array} map - the mapping of the tracking actions
          * @param {array} validDownloadExtensions - valid download extions for the event tracking
-	    */
+         */
         initialize: function(trackingFunction, map, validDownloadExtensions) {
             AnalyticsTracker.trackingFunction = trackingFunction;
             AnalyticsTracker.trackingVarMap = map;
@@ -433,21 +434,21 @@
         },
 
         /**
-	     * adds the data.eventParameter to the object
-	     * @method addEventParameter
-	     * @param {object} obj - the object
-		 * @param {object} eventParameter - event parameter to add
-	    */
+         * adds the data.eventParameter to the object
+         * @method addEventParameter
+         * @param {object} obj - the object
+         * @param {object} eventParameter - event parameter to add
+         */
         addEventParameter: function(obj, eventParameter) {
             obj.data = obj.data || {};
             obj.data.eventParameter = eventParameter;
         },
 
         /*
-	     * Function to track all email links on the web page
-	     * @method trackEmails
-	     * @param {object} parameter - contains the parameter for the tracking
-	    */
+         * Function to track all email links on the web page
+         * @method trackEmails
+         * @param {object} parameter - contains the parameter for the tracking
+         */
         trackEmails: function(parameter) {
             parameter.BaseSelector = 'a[href^="mailto"]';
             var trackingObject = TrackingObjectFactory.createObj(parameter);
@@ -456,10 +457,10 @@
         },
 
         /*
-	     * Function to track the field by keypress enter
-	     * @method trackOnKeyPressEnter
-	     * @param {string} parameter - parameter for tracking
-	    */
+         * Function to track the field by keypress enter
+         * @method trackOnKeyPressEnter
+         * @param {string} parameter - parameter for tracking
+         */
         trackOnKeyPressEnter: function(parameter) {
             var trackingObject = TrackingObjectFactory.createObj(parameter);
 
@@ -474,10 +475,10 @@
         },
 
         /*
-	     * Function to interpret the trackingobject parameters and send the Google Analytics event
-	     * @method resolve
-	     * @param {event} event - click event send from jQuery
-	    */
+         * Function to interpret the trackingobject parameters and send the Google Analytics event
+         * @method resolve
+         * @param {event} event - click event send from jQuery
+         */
         resolve: function (event) {
             // gets the event parameters
             var params = event.data.eventParameter;
@@ -496,11 +497,11 @@
         },
 
         /*
-	     * Function to map the event parameters accordingly to the tracking Var Map
-	     * @method mapEventParameter
-	     * @param {object} actions - parameters to map
+         * Function to map the event parameters accordingly to the tracking Var Map
+         * @method mapEventParameter
+         * @param {object} actions - parameters to map
          * @return {object} - mapped parameters
-	    */
+         */
         mapEventParameter : function (actions) {
 
             var mapped = {};
@@ -528,11 +529,11 @@
         },
 
         /*
-	     * Function to send tracking event to the analytics system
-	     * @method sendEvent
-	     * @param {HTMLElement} element - element which triggered the click
-	     * @param {Object} eventParameter  - event Parameter to send
-	    */
+         * Function to send tracking event to the analytics system
+         * @method sendEvent
+         * @param {HTMLElement} element - element which triggered the click
+         * @param {Object} eventParameter  - event Parameter to send
+        */
         sendEvent: function(element, eventParameter) {
 
             var mapped = AnalyticsTracker.mapEventParameter(eventParameter);
@@ -551,10 +552,10 @@
         },
 
         /*
-	     * Function to track all JavaScript executed navigation
-	     * @method trackOnClickJavaScript
-	     * @param {TrackingObject} trackingObject - the selector for the tracked element
-	    */
+         * Function to track all JavaScript executed navigation
+         * @method trackOnClickJavaScript
+         * @param {TrackingObject} trackingObject - the selector for the tracked element
+        */
         trackOnClickJavaScript: function(trackingObject) {
 
             jQuery(trackingObject.baseSelector).each( function() {
@@ -571,10 +572,10 @@
         },
 
         /*
-	     * Function to add the click event handler to the elements to track
-	     * @method trackOnClickEvent
-	     * @param {TrackingObject} element - Element to track
-	    */
+         * Function to add the click event handler to the elements to track
+         * @method trackOnClickEvent
+         * @param {TrackingObject} element - Element to track
+        */
         trackOnClickEvent: function(trackingObject) {
             if(trackingObject.hasSubSelector() ) {
                 jQuery(trackingObject.baseSelector)
@@ -589,10 +590,10 @@
         },
 
         /*
-	     * Function to register the TrackingObjects for Click tracking
-	     * @method registerElementsForClickTracking
-	     * @param  {Array[TrackingObject]} trackingList - Array of trackingObjects
-	    */
+         * Function to register the TrackingObjects for Click tracking
+         * @method registerElementsForClickTracking
+         * @param  {Array[TrackingObject]} trackingList - Array of trackingObjects
+         */
         registerElementsForClickTracking: function(trackingList) {
 
             jQuery.each(trackingList, function (index, trackingObjectToTrack) {
@@ -601,11 +602,11 @@
         },
 
         /*
-	     * Function to add click event handler to all outbound links and
-	     * to all internal downloads
-	     * @method trackOutboundAndDownloads
-	     * @param {Object} parameter - contains the extensions for the tracked internal downloads
-	    */
+         * Function to add click event handler to all outbound links and
+         * to all internal downloads
+         * @method trackOutboundAndDownloads
+         * @param {Object} parameter - contains the extensions for the tracked internal downloads
+         */
         trackOutboundAndDownloads: function (parameter) {
             // select all a with are not beginning with '#'
             jQuery("a:not([href^='#'])").filter(function () {
@@ -650,12 +651,12 @@
         },
 
         /*
-	     * Function to check if the base selector is valid
-	     * on the current page
-	     * @method isBaseSeletorValid
-	     * @param {string} baseSelector - the base selector
+         * Function to check if the base selector is valid
+         * on the current page
+         * @method isBaseSeletorValid
+         * @param {string} baseSelector - the base selector
          * @return {boolean}
-	    */
+         */
         isBaseSeletorValid : function (baseSelector) {
             var isValid = false;
             // Chech if the tracked object exits on the page
@@ -671,11 +672,11 @@
         },
 
         /*
-	     * Function to print the parameter of an objects as string
-	     * @method printObjectParameter
-	     * @param {object} obj - the object
+         * Function to print the parameter of an objects as string
+         * @method printObjectParameter
+         * @param {object} obj - the object
          * @return {string}
-	    */
+        */
         printObjectParameter : function(obj) {
 
             var output = "";
@@ -696,71 +697,71 @@
 
 (function ($, window, document, undefined) {
     /**
-	 * YoutubeTracker
-	 * contains function to track Youtoube videos
-	 *
-	 * @module Tracker
-	 * @class YoutubeTracker
-	 * @memberof Tracker
-	 * @requires jQuery
-	 * @static
-	 */
+     * YoutubeTracker
+     * contains function to track Youtoube videos
+     *
+     * @module Tracker
+     * @class YoutubeTracker
+     * @memberof Tracker
+     * @requires jQuery
+     * @static
+     */
     var YoutubeTracker;
 
     YoutubeTracker = {
 
         /**
-	     * Contains the reference to the AnalyticsTracker
-	     * @property analyticsTracker
-	     * @type AnalyticsTracker
-	    */
+         * Contains the reference to the AnalyticsTracker
+         * @property analyticsTracker
+         * @type AnalyticsTracker
+         */
         analyticsTracker: undefined,
 
         /**
-	     * Defines the percentage of the video video content in which tracking events are send
-	     * @property percentageToTrack
-	     * @type Array[interger]
-	    */
+         * Defines the percentage of the video video content in which tracking events are send
+         * @property percentageToTrack
+         * @type Array[interger]
+         */
         percentageToTrack: [25, 50, 75],
 
         /**
-	     * Contains all Youtoube Players
-	     * @property playerArray
-	     * @type Array[YT.Player]
-	    */
+         * Contains all Youtoube Players
+         * @property playerArray
+         * @type Array[YT.Player]
+         */
         playerArray: [],
 
         /**
-	     * Internal array to store currently playing videos
-	     * @property players
-	     * @type Array[YT.Player]
-	    */
+         * Internal array to store currently playing videos
+         * @property players
+         * @type Array[YT.Player]
+         */
         players: [],
 
         /**
-	     * Contains handle of the intervall thread
-	     * @property intervalId
-	     * @type integer
-	    */
+         * Contains handle of the intervall thread
+         * @property intervalId
+         * @type integer
+         */
         intervalId: 0,
 
         /*
-	     * Function initializes the YoutubeTracker
-	     * to all internal downloads
-	     * @method initialize
-	     * @param {AnalyticsTracker} analyticsTracker - contains a reference to the AnalyticsTracker
-	    */
+         * Function initializes the YoutubeTracker
+         * to all internal downloads
+         * @method initialize
+         * @param {AnalyticsTracker} analyticsTracker - contains a reference to the AnalyticsTracker
+         */
         initialize: function (analyticsTracker) {
             YoutubeTracker.analyticsTracker = analyticsTracker;
         },
 
         /*
-	     * Function to get the percentage viewed for each video
-	     * creates new if not exists
-	     * @method getPercentage
-	     * @param {string} id - ID if the video
-	     * @return {integer} tracked percent of the video
-	    */
+         * Function to get the percentage viewed for each video
+         * creates new if not exists
+         * @method getPercentage
+         * @param {string} id - ID if the video
+         * @return {integer} tracked percent of the video
+         */
         getPercentage: function (id) {
             if (YoutubeTracker.players[id] === undefined) {
                 YoutubeTracker.players[id] = {};
@@ -774,12 +775,12 @@
         },
 
         /*
-	     * Function to set the percentage tracked for each video
-	     * creates new if not exists
-	     * @method setPercentage
-	     * @param {string} id - ID if the video
-	     * @param {integer} value - percentage viewed
-	    */
+         * Function to set the percentage tracked for each video
+         * creates new if not exists
+         * @method setPercentage
+         * @param {string} id - ID if the video
+         * @param {integer} value - percentage viewed
+         */
         setPercentage: function (id, value) {
             if (YoutubeTracker.players[id] === undefined) {
                 YoutubeTracker.players[id] = {};
@@ -789,19 +790,19 @@
         },
 
         /*
-	     * Get the id of the Youtube video
-	     * @method getId
-	     * @param {event} event - youtube video event
-	     * @return {string} id of the video
-	    */
+         * Get the id of the Youtube video
+         * @method getId
+         * @param {event} event - youtube video event
+         * @return {string} id of the video
+        */
         getId: function(event) {
             return event.getVideoData().video_id;
         },
 
         /*
-	     * Registers the YoutubeVideos on the web page for the viewing
-	     * @method registerYoutubeVideos
-	    */
+         * Registers the YoutubeVideos on the web page for the viewing
+         * @method registerYoutubeVideos
+        */
         registerYoutubeVideos: function() {
 
             var regex = /(http)?s?\:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/;
@@ -820,10 +821,10 @@
         },
 
         /*
-	     * Method to track changes in the Youtube video player
-	     * @method checkStateChange
-	     * @param {event} event - Youtube video event
-	    */
+         * Method to track changes in the Youtube video player
+         * @method checkStateChange
+         * @param {event} event - Youtube video event
+        */
         checkStateChange: function (event) {
 
             var player = event.target;
@@ -855,11 +856,11 @@
         },
 
         /*
-	     * Function to start the tracking thread
-	     * for the tracking of the video players
-	     * @method startChecking
-	     * @param {YoutubePlayer} player - Youtube video player
-	    */
+         * Function to start the tracking thread
+         * for the tracking of the video players
+         * @method startChecking
+         * @param {YoutubePlayer} player - Youtube video player
+        */
         startChecking: function (player) {
 
             // check if not already started
@@ -882,9 +883,9 @@
         },
 
         /*
-	     * Function to stop the interval, if not already stopped
-	     * @method stopChecking
-	    */
+         * Function to stop the interval, if not already stopped
+         * @method stopChecking
+         */
         stopChecking: function () {
             // check if not already stopped
             if (YoutubeTracker.intervalId !== 0) {
@@ -894,10 +895,10 @@
         },
 
         /*
-	     * Interall Function to check periodicaly the states of the plying youtube videos
-	     * and sends a tracking event if a tracked percentage is reached
-	     * @method checkPercentage
-	    */
+         * Interall Function to check periodicaly the states of the plying youtube videos
+         * and sends a tracking event if a tracked percentage is reached
+         * @method checkPercentage
+         */
         checkPercentage: function () {
 
             var anyPlaying = false;
@@ -937,12 +938,12 @@
         },
 
         /*
-	     * Function to create YT.Palyers object and and adds the to the monitored videos
-	     * add EventHanlder to the onReady and onStateChange events
-	     * @method onYouTubeIframeAPIReady
-	     * @param {Youtube video element} element - Youtube video element
-	     * @param {string} id - id of the video
-	    */
+         * Function to create YT.Palyers object and and adds the to the monitored videos
+         * add EventHanlder to the onReady and onStateChange events
+         * @method onYouTubeIframeAPIReady
+         * @param {Youtube video element} element - Youtube video element
+         * @param {string} id - id of the video
+         */
         onYouTubeIframeAPIReady: function (element, id) {
             if(YoutubeTracker.playerArray[id] === undefined) {
                 YoutubeTracker.playerArray[id] = new YT.Player(element, {
@@ -955,30 +956,30 @@
         },
 
         /*
-	     * Event handler function for the onReady event of the Youtube player
-	     * @method onPlayerReady
-	     * @param {Youtube video element} event - Youtube video event
-	    */
+         * Event handler function for the onReady event of the Youtube player
+         * @method onPlayerReady
+         * @param {Youtube video element} event - Youtube video event
+         */
         onPlayerReady: function (event) { },
 
         /*
-	     * Event handler function for the onStateChange event of the Youtube player
-	     * @method onPlayerStateChange
-	     * @param {Youtube video element} event - Youtube video event
-	    */
+         * Event handler function for the onStateChange event of the Youtube player
+         * @method onPlayerStateChange
+         * @param {Youtube video element} event - Youtube video event
+         */
         onPlayerStateChange: function (event) {
             YoutubeTracker.checkStateChange(event);
         },
 
         /*
-	     * Function to enable the Youtoube tracking api
-	     * adds the parameter
-	     * * enablejsapi = 1
-	     * * origin = current website domain
-	     * to the uri of the video
-	     * and loads the tracking api
-	     * @method addTrackingApiToYoutoubeVideos
-	    */
+         * Function to enable the Youtoube tracking api
+         * adds the parameter
+         * * enablejsapi = 1
+         * * origin = current website domain
+         * to the uri of the video
+         * and loads the tracking api
+         * @method addTrackingApiToYoutoubeVideos
+         */
         addTrackingApiToYoutoubeVideos: function() {
 
             // Enable JSAPI if it's not already on the URL
@@ -996,13 +997,13 @@
         },
 
         /*
-	     * Sends the event to the Analytics tracker
-	     * @method trackEvent
-	     * @param {event} event - Youtube video event
-	     * @param {string} id - id of the youtube video
-	     * @param {string} action - action of the event
-	     * @param {string} label - label of the event
-	    */
+         * Sends the event to the Analytics tracker
+         * @method trackEvent
+         * @param {event} event - Youtube video event
+         * @param {string} id - id of the youtube video
+         * @param {string} action - action of the event
+         * @param {string} label - label of the event
+         */
         trackEvent: function (event, id, action, label) {
 
             var videoName = event.getVideoData().title;
@@ -1018,10 +1019,10 @@
         },
 
         /*
-	     * Function to send the analytics event
-	     * @method sendEvent
-	     * @param {Object} parameter - event parameter of the event
-	    */
+         * Function to send the analytics event
+         * @method sendEvent
+         * @param {Object} parameter - event parameter of the event
+        */
         sendEvent: function (parameter) {
 
             if(YoutubeTracker.analyticsTracker === undefined) {
@@ -1059,14 +1060,20 @@
                 // removes the parameters from the program url
                 // origin:  https://share.catrob.at/pocketcode/program/44132
                 // cleaned: https://share.catrob.at/pocketcode/program/
-                'RegEx' : /(.*program\/)(\d+)/,
+                'RegEx' : /(.*\/program\/)(\d+)/,
                 'ValueIndex' : 1,
             },
             {
-                // removes the parameters from the search url
+                // removes the parameters from the search and tag search url
                 // origin:  http://127.0.0.1/pocketcode/search/test
                 // cleaned: http://127.0.0.1/pocketcode/search/
-                'RegEx' : /(.*search\/)(\w+)/,
+                // or
+                // https://share.catrob.at/pocketcode/search/test%20der%20test
+                // https://share.catrob.at/pocketcode/search/
+                // or
+                // https://share.catrob.at/pocketcode/tag/search/1
+                // https://share.catrob.at/pocketcode/tag/search/
+                'RegEx' : /(.*\/search\/)(.*)/,
                 'ValueIndex' : 1,
             },
             {
