@@ -3,8 +3,8 @@
   Sourcepath: web/js
 */
 //
-// This file contains the classes for the 
-//  * Event tracking and  
+// This file contains the classes for the
+//  * Event tracking and
 //  * YouTube video tracking
 //
 
@@ -120,9 +120,24 @@
         */
         isNullOrWhitespace: function(text) {
 			if(text === undefined || typeof(text) !== "string") return undefined;
-			
+
             return(!text || text.trim() === "");
         },
+
+        /* Returns the the query parameter from the given url
+         * @method getParameterByName
+         * @param{String} name - the query parameter
+         * @param{String} url - the url
+         * @return{String} - the query value
+        */
+        getParameterByName : function (name, url) {
+
+            if(name === undefined || typeof(name) !== "string") return "";
+            if(url === undefined || typeof(url) !== "string") return "";
+
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        }
 
     };
 
@@ -549,30 +564,9 @@
             }
 
             if( AnalyticsTracker.isSending === true ) {
-                debugger;
                 // execute tracking code
                 AnalyticsTracker.trackingFunction('event', eventParameter.Action, mapped);
             }
-        },
-
-        /*
-         * Function to track all JavaScript executed navigation
-         * @method trackOnClickJavaScript
-         * @param {TrackingObject} trackingObject - the selector for the tracked element
-        */
-        trackOnClickJavaScript: function(trackingObject) {
-
-            jQuery(trackingObject.baseSelector).each( function() {
-                $(this).attr('data-href', $(this).attr('href') );
-            });
-
-            jQuery(trackingObject.baseSelector).on('click', function(e) {
-
-                var tracking_copy = trackingObject.copy();
-                AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
-                AnalyticsTracker.resolve(e);
-            });
-
         },
 
         /*
@@ -581,15 +575,22 @@
          * @param {TrackingObject} element - Element to track
         */
         trackOnClickEvent: function(trackingObject) {
+
             if(trackingObject.hasSubSelector() ) {
-                jQuery(trackingObject.baseSelector)
-                    .on('click', trackingObject.subSelector,
-                        { eventParameter : trackingObject.getEventParameter() }, AnalyticsTracker.resolve);
+                jQuery(trackingObject.baseSelector).on('click', trackingObject.subSelector, function(e) {
+
+                    var tracking_copy = trackingObject.copy();
+                    AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
+                    AnalyticsTracker.resolve(e);
+                });
             }
             else {
-                jQuery(trackingObject.baseSelector)
-                    .on('click',
-                        { eventParameter : trackingObject.getEventParameter() }, AnalyticsTracker.resolve);
+                jQuery(trackingObject.baseSelector).on('click', function(e) {
+
+                    var tracking_copy = trackingObject.copy();
+                    AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
+                    AnalyticsTracker.resolve(e);
+                });
             }
         },
 
@@ -599,6 +600,8 @@
          * @param  {Array[TrackingObject]} trackingList - Array of trackingObjects
          */
         registerElementsForClickTracking: function(trackingList) {
+
+            var test = typeof(trackingList);
 
             jQuery.each(trackingList, function (index, trackingObjectToTrack) {
                 AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack);
@@ -644,7 +647,7 @@
                         return AnalyticsTracker.validDownloadExtensions.test(this.href);
                     }).each(function () {
                         jQuery(this).on("click", function (sender) {
-                            debugger;
+                            
                             var trackingObject = TrackingObjectFactory.createObj(parameter.Downloads);
                             AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter());
                             AnalyticsTracker.resolve(sender);
@@ -1681,21 +1684,30 @@
             var trackingObjectList = TrackingObjectFactory.createArray(elementList);
             AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
         }
+        else if (window.location.pathname.indexOf('/pocketcode/pocket-library') >= 0 ) {
 
-        // tracks the internal downloads
-        var internalDownload = TrackingObjectFactory.createObj(
-            {
-                'BaseSelector': 'a[onclick^="onDownload',
-                'Category': 'download',
-                'Action': window.location.pathname,
-                'Label': function (e) {
-                    var element = $(e).closest('a');
-                    return element.attr('data-href'); },
-            }
-        );
 
-        AnalyticsTracker.trackOnClickJavaScript(internalDownload);
+            // tracks the internal downloads
+            var libraryDownload = TrackingObjectFactory.createObj(
+                {
+                    'BaseSelector': 'a[onclick^="onDownload',
+                    'Category': 'download',
+                    'Action': 'click - ' + window.location.pathname,
+                    'Label': function (e) {
+                        var dataHref = $(e).attr('data-href');
+                        return HelperFunctions.getParameterByName('fname', dataHref);
+                    }
+                });
 
+            jQuery(libraryDownload.baseSelector).each( function() {
+                $(this).attr('data-href', $(this).attr('href') );
+            });
+
+            var libraryDownloadList = [];
+            libraryDownloadList.push(libraryDownload);
+            AnalyticsTracker.registerElementsForClickTracking(libraryDownloadList);
+
+        }
         // end of tracked events
     });
 
