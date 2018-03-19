@@ -602,3 +602,8 @@ privacy-policy:
   text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
   text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
   text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).
+catro-notifications:
+  comment:
+    title: Neues Kommentar für dein Programm %program_name%!
+    messagePart1: Benutzer
+    messagePart2: hinterließ ein Kommentar für dein Program

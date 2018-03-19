@@ -3,7 +3,7 @@ var jsLoginSrc = ['web/js/social/*.js'];
 var jsCustomSrc = 'web/js/custom';
 var jsAnalyticsSrc = 'web/js/analytics';
 var jsLocalPluginSrc = 'web/js/localPlugins';
-var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'lunacat', 'create@school'];
+var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school'];
 
 var lessconfig = {};
 
@@ -14,7 +14,7 @@ for (index = 0; index < themes.length; index++)
   var base_css_path = "web/css/" + theme + "/base.css";
   
   var base_file_config = {};
-  base_file_config[base_css_path] = ["web/css/plugins/*", "web/css/themes/" + theme + "/main.less"];
+  base_file_config[base_css_path] = ["web/css/plugins/*", "web/css/themes/" + theme + "/theme.less"];
   
   lessconfig[theme] =
     {
@@ -75,6 +75,12 @@ module.exports = function(grunt)
         cwd: 'vendor/twbs/bootstrap/',
         src: '**',
         dest: 'web/bootstrap_vendor/'
+      },
+      clipboard_js: {
+        expand: true,
+        cwd: 'node_modules/clipboard/dist/',
+        src: 'clipboard.min.js',
+        dest: 'web/js/localPlugins/'
       }
     },
     concat: {

@@ -17,3 +17,41 @@ Feature: Searching for programs
   Scenario: search for programs should work
     Given I am on "/pocketcode/search/prog"
     Then I should see "Your search returned 4 results"
+
+  Scenario: search for yahoo myprog should search for all
+    Given I am on "/pocketcode/search/yahoo%20myprog"
+    Then I should see "Your search returned 2 results"
+
+  Scenario: search for gmail should search for all
+    Given I am on "/pocketcode/search/gmail"
+    Then I should see "Your search returned 4 results"
+
+  Scenario: search for gmx should search for all
+    Given I am on "/pocketcode/search/gmx.at"
+    Then I should see "Your search returned 0 results"
+
+  Scenario: pressing the search icon should spawn the search bar
+    Given I am on "/pocketcode"
+    Then at least one ".search-icon-header" element should be visible
+    Then no ".search-input-header" element should be visible
+    Then no ".catro-search-button" element should be visible
+    And I click the currently visible search icon
+    Then no ".search-icon-header" element should be visible
+    Then at least one ".search-input-header" element should be visible
+    Then at least one ".catro-search-button" element should be visible
+
+  Scenario: consecutive searches should lead to different results
+    Given I am on "/pocketcode"
+    And I click the currently visible search icon
+    Then I enter "prog" into the currently visible search input
+    And I click the currently visible search button
+    Then I should be on "/pocketcode/search/prog"
+    And I should see "Your search returned 4 results"
+    And at least one ".search-input-header" element should be visible
+    And at least one ".catro-search-button" element should be visible
+    Then I enter "yahoo myprog" into the currently visible search input
+    And I click the currently visible search button
+    Then I should be on "/pocketcode/search/yahoo%20myprog"
+    Then I should see "Your search returned 2 results"
+    And at least one ".search-input-header" element should be visible
+    And at least one ".catro-search-button" element should be visible

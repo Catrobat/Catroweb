@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
 
   <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
-  <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
   <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
+  <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
 
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
@@ -39,9 +39,9 @@
     {% endblock %}
   </header>
 
-  <article>
+  <div class="container">
     {% block body %}{% endblock %}
-  </article>
+  </div>
 </div>
 
 {% block footer %}
@@ -49,47 +49,75 @@
 {% endblock %}
 
 <script>
+  var search_input = $('.input-search');
+
+  search_input.tooltip({
+    trigger  : 'manual',
+    placement: 'bottom'
+  });
+
+  search_input
+  .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
+  .addClass('tooltip-danger');
+
+
+  search_input.on('shown.bs.tooltip', function()
+  {
+    setTimeout(function()
+    {
+      search_input.tooltip('hide');
+    }, 1000);
+  });
   var client = new Main('{{ path('search', {'q': 0 } ) }}');
 </script>
 
 {% block js %}{% endblock %}
 
+
 {% if app.user %}
   <script>
-    function fetchUserNotifications() {
+    function fetchUserNotifications()
+    {
       $.ajax({
-        url: "{{ path('user_notifications_count') }}",
-        type: "get",
-        success: function (data) {
+        url    : "{{ path('user_notifications_count') }}",
+        type   : "get",
+        success: function(data)
+        {
           var numOfNotifications = data.count;
           $(".user-notification-badge").removeAttr("data-badge");
 
-          if (numOfNotifications > 0) {
+          if (numOfNotifications > 0)
+          {
             var labelTitle = (numOfNotifications <= 1000) ? numOfNotifications.toString() : "1000+";
 
-            if (labelTitle.length >= 3) {
+            if (labelTitle.length >= 3)
+            {
               $(".user-notification-badge").addClass("user-notification-badge-large");
             }
-            else {
+            else
+            {
               $(".user-notification-badge").removeClass("user-notification-badge-large");
             }
             $(".user-notification-badge").attr("data-badge", labelTitle);
           }
           setTimeout(fetchUserNotifications, 10000);
         },
-        error: function () {
+        error  : function()
+        {
           console.error("Unable to fetch user notifications!");
         }
       });
     }
 
-    $(document).ready(function () {
+    $(document).ready(function()
+    {
       fetchUserNotifications();
     });
   </script>
 {% endif %}
 <script>
-  $("#nav-search").submit(function (e) {
+  $("#nav-search").submit(function(e)
+  {
     e.preventDefault();
   });
 </script>

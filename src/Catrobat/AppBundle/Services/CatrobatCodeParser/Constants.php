@@ -128,6 +128,32 @@ class Constants
     const LEGO_EV3_SET_LED_BRICK = 'LegoEv3SetLedBrick';
     const ASK_SPEECH_BRICK = 'AskSpeechBrick';
 
+    // Ar Drone Bricks
+    const AR_DRONE_TAKE_OFF_LAND_BRICK = 'DroneTakeOffLandBrick';
+    const AR_DRONE_EMERGENCY_BRICK = 'DroneEmergencyBrick';
+    const AR_DRONE_MOVE_UP_BRICK = 'DroneMoveUpBrick';
+    const AR_DRONE_MOVE_DOWN_BRICK = 'DroneMoveDownBrick';
+    const AR_DRONE_MOVE_LEFT_BRICK = 'DroneMoveLeftBrick';
+    const AR_DRONE_MOVE_RIGHT_BRICK = 'DroneMoveRightBrick';
+    const AR_DRONE_MOVE_FOWARD_BRICK = 'DroneMoveForwardBrick';
+    const AR_DRONE_MOVE_BACKWARD_BRICK = 'DroneMoveBackwardBrick';
+    const AR_DRONE_TURN_LEFT_BRICK = 'DroneTurnLeftBrick';
+    const AR_DRONE_TURN_RIGHT_BRICK = 'DroneTurnRightBrick';
+    const AR_DRONE_SWITCH_CAMERA_BRICK= 'DroneSwitchCameraBrick';
+
+    // Jump Sumo
+    const JUMP_SUMO_MOVE_FOWARD_BRICK = 'JumpingSumoMoveForwardBrick';
+    const JUMP_SUMO_MOVE_BACKWARD_BRICK = 'JumpingSumoMoveBackwardBrick';
+    const JUMP_SUMO_ANIMATIONS_BRICK = 'JumpingSumoAnimationsBrick';
+    const JUMP_SUMO_SOUND_BRICK = 'JumpingSumoSoundBrick';
+    const JUMP_SUMO_NO_SOUND_BRICK = 'JumpingSumoNoSoundBrick';
+    const JUMP_SUMO_JUMP_LONG_BRICK = 'JumpingSumoJumpLongBrick';
+    const JUMP_SUMO_JUMP_HIGH_BRICK = 'JumpingSumoJumpHighBrick';
+    const JUMP_SUMO_ROTATE_LEFT_BRICK = 'JumpingSumoRotateLeftBrick';
+    const JUMP_SUMO_ROTATE_RIGHT_BRICK = 'JumpingSumoRotateRightBrick';
+    const JUMP_SUMO_TURN_BRICK = 'JumpingSumoTurnBrick';
+    const JUMP_SUMO_TAKING_PICTURE_BRICK = 'JumpingSumoTakingPictureBrick';
+    
     // Brick Images
     const EVENT_SCRIPT_IMG = '1h_when_brown.png';
     const EVENT_BRICK_IMG = '1h_brick_brown.png';
@@ -141,6 +167,8 @@ class Constants
     const LEGO_EV3_BRICK_IMG = '1h_brick_yellow.png';
     const UNKNOWN_SCRIPT_IMG = '1h_when_grey.png';
     const UNKNOWN_BRICK_IMG = '1h_brick_grey.png';
+    const AR_DRONE_BRICK_IMG = '1h_brick_yellow.png';
+    const JUMPING_SUMO_BRICK_IMG = '1h_brick_blue.png';
 
     // Formula Categories
     const TIME_TO_WAIT_IN_SECONDS_FORMULA = 'TIME_TO_WAIT_IN_SECONDS';
@@ -204,6 +232,15 @@ class Constants
     const LEGO_EV3_VOLUME_FORMULA = 'LEGO_EV3_VOLUME';
     const LEGO_EV3_FREQUENCY_FORMULA = 'LEGO_EV3_FREQUENCY';
     const LEGO_EV3_DEGREES_FORMULA = 'LEGO_EV3_DEGREES';
+
+    // AR DRONE FORMULA
+    const AR_DRONE_TIME_TO_FLY_IN_SECONDS = 'DRONE_TIME_TO_FLY_IN_SECONDS';
+    const AR_DRONE_POWER_IN_PERCENT = 'DRONE_POWER_IN_PERCENT';
+
+    // JUMP SUMO FORMULA
+    const JUMP_SUMO_SPEED = 'JUMPING_SUMO_SPEED';
+    const JUMPING_SUMO_TIME_TO_DRIVE_IN_SECONDS = 'JUMPING_SUMO_TIME_TO_DRIVE_IN_SECONDS';
+    const JUMPING_SUMO_ROTATE = 'JUMPING_SUMO_ROTATE';
 
     const OPERATOR_FORMULA_TYPE = 'OPERATOR';
     const FUNCTION_FORMULA_TYPE = 'FUNCTION';

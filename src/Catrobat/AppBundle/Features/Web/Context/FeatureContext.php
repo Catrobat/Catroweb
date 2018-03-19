@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Element\NodeElement;
 use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -679,6 +680,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     * @var $new_comment \Catrobat\AppBundle\Entity\UserComment
     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $pm = $this->kernel->getContainer()->get('programmanager');
     $comments = $table->getHash();
 
     foreach ($comments as $comment)
@@ -686,6 +688,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_comment = new UserComment();
 
       $new_comment->setUploadDate(new \DateTime($comment['upload_date'], new \DateTimeZone('UTC')));
+      $new_comment->setProgram($pm->find($comment['program_id']));
       $new_comment->setProgramId($comment['program_id']);
       $new_comment->setUserId($comment['user_id']);
       $new_comment->setUsername($comment['user_name']);
@@ -1207,14 +1210,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     $em->persist($starter);
     $em->flush();
-  }
-
-  /**
-   * @Then /^the copy link should be "([^"]*)"$/
-   */
-  public function theCopyLinkShouldBe($url)
-  {
-    assertEquals($this->getSession()->getPage()->findField('copy-link')->getValue(), $this->locatePath($url));
   }
 
   /**
@@ -2171,8 +2166,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iSearchForWithTheSearchbar($arg1)
   {
+    $this->iClick('.search-icon-header');
     $this->fillField('search-input-header', $arg1);
-    $this->iClick('#search-header');
+    $this->iClick('.catro-search-button');
   }
 
   /**
@@ -2542,4 +2538,113 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $arg1 = '.homepage-recommended-programs';
     $this->assertSession()->elementNotExists('css', $arg1);
   }
+
+  /**
+   * @Then /^I should see the image "([^"]*)"$/
+   */
+  public function iShouldSeeTheImage($arg1)
+  {
+    $img = $this->getSession()->getPage()->findById('logo');
+
+    if ($img != null)
+    {
+      assertEquals($img->getTagName(), 'img');
+      $src = $img->getAttribute('src');
+      assertTrue(strpos($src, $arg1) !== false, "<$src> does not contain $arg1");
+      assertTrue($img->isVisible(), "Image is not visible.");
+    }
+    else
+    {
+      assertTrue(false, "#logo not found!");
+    }
+  }
+
+  /**
+   * @Then /^I click the currently visible search icon$/
+   */
+  public function iClickTheCurrentlyVisibleSearchIcon()
+  {
+    $icons = $this->getSession()->getPage()->findAll("css", ".search-icon-header");
+    foreach ($icons as $icon)
+    {
+      /** @var NodeElement $icon */
+      if ($icon->isVisible())
+      {
+        $icon->click();
+        return;
+      }
+    }
+    assertTrue(false, "Tried to click .search-icon-header but no visible element was found.");
+  }
+
+  /**
+   * @Then /^at least one "([^"]*)" element should be visible$/
+   */
+  public function atLeastOneElementShouldBeVisible($arg1)
+  {
+    $elements = $this->getSession()->getPage()->findAll("css", $arg1);
+    foreach ($elements as $element)
+    {
+      /** @var NodeElement $element */
+      if ($element->isVisible())
+      {
+        return;
+      }
+    }
+    assertTrue(false, "No $arg1 element currently visible.");
+  }
+
+  /**
+   * @Then /^no "([^"]*)" element should be visible$/
+   */
+  public function atLeastOneElementShouldNotBeVisible($arg1)
+  {
+    $elements = $this->getSession()->getPage()->findAll("css", $arg1);
+    foreach ($elements as $element)
+    {
+      /** @var NodeElement $element */
+      if ($element->isVisible())
+      {
+        assertTrue(false, "Found visible $arg1 element.");
+      }
+    }
+  }
+
+  /**
+   * @Then /^I click the currently visible search button$/
+   */
+  public function iClickTheCurrentlyVisibleSearchButton()
+  {
+    $icons = $this->getSession()->getPage()->findAll("css", ".btn-search");
+    foreach ($icons as $icon)
+    {
+      /** @var NodeElement $icon */
+      if ($icon->isVisible())
+      {
+        $icon->click();
+        return;
+      }
+    }
+    assertTrue(false, "Tried to click .btn-search but no visible element was found.");
+  }
+
+  /**
+   * @Then /^I enter "([^"]*)" into the currently visible search input$/
+   */
+  public function iEnterIntoTheCurrentlyVisibleSearchInput($arg1)
+  {
+    $fields = $this->getSession()->getPage()->findAll("css", ".input-search");
+    foreach ($fields as $field)
+    {
+      /** @var NodeElement $field */
+      if ($field->isVisible())
+      {
+        $field->setValue($arg1);
+        return;
+      }
+    }
+    assertTrue(false, "Tried to click .btn-search but no visible element was found.");
+  }
+
 }
+

@@ -78,7 +78,7 @@ class WebContext extends BaseContext
         assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(1, $this->response->filter("#gamejam-submittion")->count());
+        assertEquals(1, $this->response->filter("#gamejam-submission")->count());
     }
 
     /**
@@ -89,7 +89,7 @@ class WebContext extends BaseContext
         assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(0, $this->response->filter("#gamejam-submittion")->count());
+        assertEquals(0, $this->response->filter("#gamejam-submission")->count());
     }
 
     /**
@@ -138,7 +138,7 @@ class WebContext extends BaseContext
         $this->response = $this->getSymfonySupport()
             ->getClient()
             ->request("GET", "/pocketcode/program/1");
-        $link = $this->response->filter("#gamejam-submittion")
+        $link = $this->response->filter("#gamejam-submission")
             ->parents()
             ->link();
         $this->response = $this->getClient()->click($link);
@@ -184,7 +184,7 @@ class WebContext extends BaseContext
         $this->response = $this->getSymfonySupport()
             ->getClient()
             ->request("GET", "/pocketcode/program/1");
-        $link = $this->response->filter("#gamejam-submittion")
+        $link = $this->response->filter("#gamejam-submission")
             ->parents()
             ->link();
         $this->response = $this->getClient()->click($link);
@@ -344,7 +344,7 @@ class WebContext extends BaseContext
     public function iSubmitTheProgram()
     {
         $this->getClient()->followRedirects(true);
-        $link = $this->response->filter("#gamejam-submittion")
+        $link = $this->response->filter("#gamejam-submission")
             ->parents()
             ->link();
         $this->response = $this->getClient()->click($link);

@@ -54,11 +54,7 @@ Feature: As a visitor I want to see a program page
 
     Scenario: I want a link to this program
       Given I am on "/pocketcode/program/1"
-      Then the element "#copy-link input" should not be visible
-      When I click "#copy-link"
-      Then the element "#copy-link input" should be visible
-      And the element "#copy-link tr:nth-child(1)" should not be visible
-      And the copy link should be "pocketcode/program/1"
+      Then the element ".btn-copy" should be visible
 
     Scenario: I want to download a program from the browser
       Given I am on "/pocketcode/program/1"

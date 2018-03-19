@@ -108,9 +108,9 @@ class ProgramManager
     $program->setFlavor($request->getFlavor());
     $this->addTags($program, $extracted_file, $request->getLanguage());
     $version = $program->getLanguageVersion();
-    $max_version = $this->max_version;
+    //$max_version = $this->max_version;
 
-    if (version_compare($version, "0.994", ">"))
+    if (version_compare($version, "0.995", ">"))
     {
       $program->setPrivate(true);
     }
@@ -159,17 +159,34 @@ class ProgramManager
       return null;
     }
 
-
-    if ($extracted_file->getScreenshotPath() == null)
+    try
     {
-      // Todo: maybe for later implementations
+      if ($extracted_file->getScreenshotPath() == null)
+      {
+        // Todo: maybe for later implementations
+      }
+      else
+      {
+        $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
+      }
+      $this->file_repository->makeTempProgramPerm($program->getId());
     }
-    else
+    catch (\Exception $e)
     {
-      $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
+      $program_id = $program->getId();
+      $this->entity_manager->remove($program);
+      $this->entity_manager->flush();
+      try
+      {
+        $this->screenshot_repository->deletePermProgramAssets($program_id);
+        $this->file_repository->deleteProgramFile($program_id);
+      }
+      catch (IOException $error)
+      {
+        throw $error;
+      }
+      return null;
     }
-    $this->file_repository->makeTempProgramPerm($program->getId());
-
 
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();

@@ -27,5 +27,8 @@
     "grunt-contrib-uglify": "~2.0.0",
     "grunt-contrib-watch": "^0.6.1",
     "jit-grunt": "^0.9.1"
+  },
+  "dependencies": {
+    "clipboard": "^1.7.1"
   }
 }

@@ -38,7 +38,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 
 programs:
   featured: Featured
@@ -435,10 +435,13 @@ search:
   search: Search
   results: Search Results
   resultcount: Your search returned %count% results
+  fail: Please enter at least a single search term
 
 menu:
   profile: My Profile
+  login: Login
   logout: Logout
+  admin: Admin
 
 programLoader:
   noPrograms: There are currently no programs.
@@ -633,8 +636,6 @@ footer:
   communityStats: Community Stats
   downloads: downloads
   programs: programs
-  downloads_count: '624,589'
-  programs_count: '36,738'
 
 privacy-policy:
   header: Privacy Policy
@@ -648,3 +649,12 @@ privacy-policy:
   text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
   text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  comment:
+    title: New comment for program %program_name%!
+    messagePart1: User
+    messagePart2: commented on your program
+
+clipboard:
+  success: Link to program copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
