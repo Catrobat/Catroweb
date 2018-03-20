@@ -19,13 +19,13 @@
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
   
-    <script>
+  <script>
     var configGA = { 
       'UaId' : 'UA-42270417-5'
-    }
+    };
   </script>
 
-  <script async src="{{ asset('compiled/js/analytics.js') }}"></script>
+  <script async src="{{ asset(getJavascriptPath('analytics.js')) }}"></script>
 
   {% block head %}
     <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>

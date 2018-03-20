@@ -133,6 +133,51 @@
 
             var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
             return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        },
+        
+        /* Returns an array of 3 elements for the tracking of 
+         * a link
+         * a more button
+         * a less button
+         * @method createTripleElementProgram
+         * @param{String} ident - the HTML ID
+         * @param{String} descriptor - the name of the action
+         * @param{String} category - the category
+         * @return{Array} - an array of three elements
+        */
+        createTripleElementProgram : function (ident, descriptor, category) {
+        
+            var tripleList = [{
+                    /*
+                     * Tracks the clicks on the programs
+                    */
+                    'BaseSelector' : '#' + ident,
+                    'SubSelector' : 'a',
+                    'Category' : category,
+                    'Action' : 'click - ' + descriptor + ' programs',
+                    'Label': function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')); },
+                },
+                {
+                    /*
+                     * Tracks the clicks on the more button
+                    */
+                    'BaseSelector' : '#' + ident,
+                    'SubSelector' : '.button-show-more',
+                    'Category' : category,
+                    'Action' : 'click - ' + descriptor + ' programs - more',
+                },
+                {
+                    /*
+                     * Tracks the clicks on the less button
+                     */
+                    'BaseSelector' : '#' + ident,
+                    'SubSelector' : '.button-show-less',
+                    'Category' : category,
+                    'Action' : 'click - ' + descriptor + ' programs - less',
+                },
+            ];
+            
+            return tripleList;
         }
 
     };
@@ -555,8 +600,7 @@
 
             // prints the tracking parameter
             if(AnalyticsTracker.debugOutput === true) {
-                console.log("send event:");
-                console.log(AnalyticsTracker.printObjectParameter(mapped));
+                console.log("event send : \r\n" + AnalyticsTracker.printObjectParameter(mapped));
             }
 
             if( AnalyticsTracker.isSending === true ) {
@@ -596,12 +640,15 @@
          * @param  {Array[TrackingObject]} trackingList - Array of trackingObjects
          */
         registerElementsForClickTracking: function(trackingList) {
-
-            var test = typeof(trackingList);
-
-            jQuery.each(trackingList, function (index, trackingObjectToTrack) {
-                AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack);
-            });
+            
+            if( Array.isArray(trackingList) ) {
+                jQuery.each(trackingList, function (index, trackingObjectToTrack) {
+                    AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack);
+                });
+            }
+            else {
+                AnalyticsTracker.trackOnClickEvent(trackingList);
+            }
         },
 
         /*
@@ -854,7 +901,12 @@
             if (event.data == YT.PlayerState.ENDED) {
                 player.lastPlayerState = YT.PlayerState.ENDED;
                 YoutubeTracker.setPercentage(id, 0);
-                YoutubeTracker.trackEvent(player, id, 'watched-100%', '');
+                YoutubeTracker.trackEvent(player, id, 'ended', '');
+            }
+            // track buffering
+            if (event.data == YT.PlayerState.BUFFERING) {
+                player.lastPlayerState = YT.PlayerState.BUFFERING;
+                YoutubeTracker.trackEvent(player, id, 'buffering', '');
             }
         },
 
@@ -989,7 +1041,6 @@
             $('iframe').each(function(i, elem) {
                 if(/youtube.com\/embed/.test(elem.src)) {
                     if(elem.src.indexOf('enablejsapi=') === -1) {
-                        //&origin=http%3a%2f%2fwww.mroma.net.
                         elem.src += (elem.src.indexOf('?') === -1 ? '?':'&') + 'enablejsapi=1&origin=' + window.location.origin;
                     }
                 }
@@ -1152,6 +1203,19 @@
             'Label' : function (e) { return e.href.replace(/^mailto\:/i, ''); },
         });
 
+        // track the search input
+        // the input button
+        var searchButton = TrackingObjectFactory.createObj({
+            'BaseSelector' : 'nav button.btn-search.catro-search-button',
+            'Category' : "engagement",
+            'Action' : "search",
+            'Label' : function (e) { return e.previousElementSibling.value; },
+            'search_term': function (e) { return e.previousElementSibling.value; },
+        });
+
+        AnalyticsTracker.registerElementsForClickTracking(searchButton);
+
+        // 
         // tracks the search input
         AnalyticsTracker.trackOnKeyPressEnter( {
             'BaseSelector' : 'nav input.search-input-header',
@@ -1179,12 +1243,12 @@
             },
         });
 
-        if(window.location.pathname === '/pocketcode/') {
+        if(/^(\/[a-zA-Z@]+\/)(?![a-zA-Z]+)(.*)/.test(window.location.pathname)) {
 
             // sets the category name of the branch
 
             var homepageCategory = 'home page';
-
+            
             var elementList = [
                 {
                     /**
@@ -1195,173 +1259,38 @@
                     'SubSelector' : 'a',
                     'Category' : homepageCategory,
                     'Action' : 'click - featured programs',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
+                    'Label': function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')); },
                 },
                 {
                     /*
-                     * Newest programs section
-                     * Tracks the clicks on the newest programs
+                     * Tracks the clicks on the help button
                      */
-                    'BaseSelector' : '#newest',
-                    'SubSelector' : 'a',
+                    'BaseSelector' : '#recommended .help-icon',
                     'Category' : homepageCategory,
-                    'Action' : 'click - newest programs',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-                },
-                {
-                    /*
-                     * Tracks the clicks on the more button
-                    */
-                    'BaseSelector' : '#newest',
-                    'SubSelector' : '.button-show-more',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - newest programs - more',
-                },
-                {
-                    /*
-                     * Tracks the clicks on the less button
-                     */
-                    'BaseSelector' : '#newest',
-                    'SubSelector' : '.button-show-less',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - newest programs - less',
-                },
-                {
-                    /*
-                     * Recommended programs section
-                     * Tracks the clicks on the recommended programs
-                     */
-                    'BaseSelector' : '#recommended',
-                    'SubSelector' : 'a',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - recommended programs',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-
-                },
-                {
-                    /*
-                     * Tracks the clicks on the more button
-                     */
-                    'BaseSelector' : '#recommended',
-                    'SubSelector' : '.button-show-more',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - recommended programs - more',
-                },
-                {
-                    /*
-                     * Tracks the clicks on the less button
-                     */
-                    'BaseSelector' : '#recommended',
-                    'SubSelector' : '.button-show-less',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - recommended programs - less',
-                },
-                {
-                    /*
-                     * Most downloaded programs section
-                     * Tracks the clicks on the most downloaded programs
-                     */
-                    'BaseSelector' : '#mostDownloaded',
-                    'SubSelector' : 'a',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - most downloaded programs',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-
-                },
-                {
-                    /*
-                     * Tracks the clicks on the more button
-                     */
-                    'BaseSelector' : '#mostDownloaded',
-                    'SubSelector' : '.button-show-more',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - most downloaded programs - more',
-                },
-                {
-                    /*
-                     * Tracks the clicks on the less button
-                     */
-                    'BaseSelector' : '#mostDownloaded',
-                    'SubSelector' : '.button-show-less',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - most downloaded programs - less',
-                },
-                {
-                    /*
-                     * Most viewed programs section
-                     * Tracks the clicks on the most viewed programs
-                     */
-                    'BaseSelector' : '#mostViewed',
-                    'SubSelector' : 'a',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - most viewed programs',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-                },
-                {
-                    /*
-                     * Tracks the clicks on the more button
-                     */
-                    'BaseSelector' : '#mostViewed',
-                    'SubSelector' : '.button-show-more',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - most viewed programs - more',
-                },
-                {
-                    /*
-                     * Tracks the clicks on the less button
-                     */
-                    'BaseSelector' : '#mostViewed',
-                    'SubSelector' : '.button-show-less',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - most viewed programs - less',
-                },
-                {
-                    /*
-                     * Random programs section
-                     * Tracks the clicks on the random programs
-                     */
-                    'BaseSelector' : '#random',
-                    'SubSelector' : 'a',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - random programs',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-                },
-                {
-                    /*
-                     * Tracks the clicks on the more button
-                     */
-                    'BaseSelector' : '#random',
-                    'SubSelector' : '.button-show-more',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - random programs - more',
-                },
-                {
-                    /*
-                     * Tracks the clicks on the less button
-                     */
-                    'BaseSelector' : '#random',
-                    'SubSelector' : '.button-show-less',
-                    'Category' : homepageCategory,
-                    'Action' : 'click - random programs - less',
-                },
+                    'Action' : 'click - recommended programs - help',
+                }
             ];
+
+            if(/\/(pocketalice|pocketgalaxy)\/.*/.test(window.location.pathname) ) {
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('submissions', 'submissions', homepageCategory));
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('sample', 'sample', homepageCategory));
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('related', 'related', homepageCategory));
+            }
+            else
+            {
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('newest', 'newest', homepageCategory));
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('recommended', 'recommended', homepageCategory));
+                elementList.push.apply(elementList, 
+                    HelperFunctions.createTripleElementProgram('mostDownloaded', 'most Downloaded', homepageCategory));
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('mostViewed', 'most viewed', homepageCategory));
+                elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory));
+            }
 
             var trackingObjectList = TrackingObjectFactory.createArray(elementList);
             AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
         }
-        else if(window.location.pathname === '/pocketcode/login') {
+        
+        if( /.*\/login.*/.test(window.location.pathname) ) {
 
             /**
              * Login page tracking code
@@ -1404,7 +1333,8 @@
             var trackingObjectList = TrackingObjectFactory.createArray(elementList);
             AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
         }
-        else if (window.location.pathname.indexOf('/pocketcode/program') >= 0 ) {
+        
+        if ( /.*\/program.*/.test( window.location.pathname ) ) {
 
             var programCategory = 'program page';
 
@@ -1449,7 +1379,8 @@
                     /**
                      * Tracks the apk download
                      */
-                    'BaseSelector' : 'button#apk-generate',
+                    'BaseSelector' : 'div.download-container',
+                    'SubSelector' : 'button#apk-generate',
                     'Category' : programCategory,
                     'Action' : 'click - download apk',
                     'Label': function (e) {
@@ -1458,9 +1389,32 @@
                 },
                 {
                     /**
+                     * Tracks the apk download
+                     */
+                    'BaseSelector' : 'div.download-container',
+                    'SubSelector' : 'button#apk-pending',
+                    'Category' : programCategory,
+                    'Action' : 'click - download apk pending',
+                    'Label': function (e) {
+                        return window.location.pathname;
+                    },
+                },
+                {
+                    /**
                      * Tracks the display of the remix graph
                      */
-                    'BaseSelector' : 'button#remix-graph-button',
+                    'BaseSelector' : '#remix-graph-button',
+                    'Category' : programCategory,
+                    'Action' : 'click - show remix graph',
+                    'Label': function (e) {
+                        return window.location.pathname;
+                    },
+                },
+                {
+                    /**
+                     * Tracks the display of the remix graph by link
+                     */
+                    'BaseSelector' : '#remix-graph-modal-link',
                     'Category' : programCategory,
                     'Action' : 'click - show remix graph',
                     'Label': function (e) {
@@ -1514,69 +1468,13 @@
                     'Label': function (e) {
                         return window.location.pathname;
                     },
-                },
-                {
-                    /**
-                     * Tracks the click on similar programs
-                     */
-                    'BaseSelector' : '#recommendations > div.programs',
-                    'SubSelector' : 'a.rec-programs',
-                    'Category' : programCategory,
-                    'Action' : 'click - similar program',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-                },
-                {
-                    /**
-                     * Tracks the click on more button of similar programs
-                     */
-                    'BaseSelector' : '#recommendations',
-                    'SubSelector' : 'div.button-show-more',
-                    'Category' : programCategory,
-                    'Action' : 'click - similar program - show more',
-                },
-                {
-                    /**
-                     * Tracks the click on less button of similar programs
-                     */
-                    'BaseSelector' : '#recommendations',
-                    'SubSelector' : 'div.button-show-less',
-                    'Category' : programCategory,
-                    'Action' : 'click - similar program - show less',
-                },
-                {
-                    /**
-                     * Tracks the click on recommended programs
-                     */
-                    'BaseSelector' : '#specific-programs-recommendations > div.programs',
-                    'SubSelector' : 'a.rec-programs',
-                    'Category' : programCategory,
-                    'Action' : 'click - recommended download',
-                    'Label': function (e) {
-                        return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
-                    },
-                },
-                {
-                    /**
-                     * Tracks the click click on more button of recommended programs
-                     */
-                    'BaseSelector' : '#specific-programs-recommendations',
-                    'SubSelector' : 'div.button-show-more',
-                    'Category' : programCategory,
-                    'Action' : 'click - recommended download - show more',
-                },
-                {
-                    /**
-                     * Tracks the click on less button of recommended programs
-                     */
-                    'BaseSelector' : '#specific-programs-recommendations',
-                    'SubSelector' : 'div.button-show-less',
-                    'Category' : programCategory,
-                    'Action' : 'click - recommended download - show less',
-                },
-
+                }
             ];
+            
+            elementList.push.apply(elementList, 
+                HelperFunctions.createTripleElementProgram('recommendations', 'similar', programCategory));
+            elementList.push.apply(elementList, 
+                HelperFunctions.createTripleElementProgram('specific-programs-recommendations', 'recommended', programCategory));
 
             // Social interactions
             var socialInteraction = [
@@ -1639,7 +1537,8 @@
             AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction);
 
         }
-        else if (window.location.pathname.indexOf('/search') >= 0 ) {
+        
+        if( /.*\/search.*/.test( window.location.pathname ) ) {
 
             var searchCategory = 'search page';
             var actionSubstring = ( (window.location.pathname.indexOf('/tag/search') >= 0) ? "tag" : "program" );
@@ -1680,7 +1579,8 @@
             var trackingObjectList = TrackingObjectFactory.createArray(elementList);
             AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
         }
-        else if (window.location.pathname.indexOf('/pocketcode/pocket-library') >= 0 ) {
+        
+        if( /.*\/pocket-library.*/.test( window.location.pathname ) ) {
 
 
             // tracks the internal downloads
@@ -1699,10 +1599,48 @@
                 $(this).attr('data-href', $(this).attr('href') );
             });
 
-            var libraryDownloadList = [];
-            libraryDownloadList.push(libraryDownload);
-            AnalyticsTracker.registerElementsForClickTracking(libraryDownloadList);
+            //var libraryDownloadList = [];
+            //libraryDownloadList.push(libraryDownload);
+            AnalyticsTracker.registerElementsForClickTracking(libraryDownload);
 
+        }
+        
+        if( /.*\/profile.*/.test( window.location.pathname ) ) {
+            
+            var profileCategory = 'profile page';
+            var profileElements = [
+                {
+                /**
+                 * Tracks the click on the delete button
+                 */
+                 'BaseSelector' : '#myprofile-programs',
+                 'SubSelector' : '.img-delete',
+                 'Category' : profileCategory,
+                 'Action' : 'click - delete own program',
+                 },
+                 {
+                /**
+                 * Tracks the click on the make invisible button
+                 */
+                 'BaseSelector' : '#myprofile-programs',
+                 'SubSelector' : '.img-visibility-visible',
+                 'Category' : profileCategory,
+                 'Action' : 'click - set invisible own program',
+                 },
+                 {
+                /**
+                 * Tracks the click on the make visible button
+                 */
+                 'BaseSelector' : '#myprofile-programs',
+                 'SubSelector' : '.img-visibility-hidden',
+                 'Category' : profileCategory,
+                 'Action' : 'click - set visible own program',
+                 }
+             ];
+             
+            var profileObjectList = TrackingObjectFactory.createArray(profileElements);
+            AnalyticsTracker.registerElementsForClickTracking(profileObjectList);
+        
         }
         // end of tracked events
     });

@@ -22,11 +22,12 @@
   
     <script>
     var configGA = { 
-      'UaId' : 'UA-42270417-5'
-    }
+      'UaId' : 'UA-42270417-5',
+      //'DebugOutput' : true,
+    };
   </script>
 
-  <script async src="{{ asset('compiled/js/analytics.js') }}"></script>
+  <script async src="{{ asset(getJavascriptPath('analytics.js')) }}"></script>
 
   {% block head %}
     <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
