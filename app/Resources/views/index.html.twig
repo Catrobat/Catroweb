@@ -7,6 +7,40 @@
 
 {% block body %}
 
+  {% if not app.user and not isWebview() %}
+    <div id="welcomeSection">
+      <h3>{{ "programs.welcome.title"|trans({}, "catroweb") }}</h3>
+      <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
+      <div class="row">
+        <div class="col-md-8">
+          <img src="{{ asset('images/help/starters.png') }}" height="200px" width="33%" onclick="self.location.href='{{ url('catrobat_web_starter') }}'" />
+          <img src="{{ asset('images/help/tutorials.png') }}" height="200px" width="33%" onclick="self.location.href='{{ url('catrobat_web_tutorialcards') }}'" />
+          <img src="{{ asset('images/help/step_by_step_mobile.png') }}" height="200px" width="33%" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
+        </div>
+        <div class="col-md-4">
+            <iframe id="youtube-help-video" height="200px" width="100%" src="https://www.youtube.com/embed/BHe2r2WU-T8" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 d-block inline">
+          {{ "programs.welcome.download"|trans({}, "catroweb") }}
+          <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+        </div>
+        <div class="col-md-6 d-block text-right inline">
+          {# todo add link to new statistic page #}
+          {% set stats = getCommunityStats()  %}
+            {{ stats['program_count'] | number_format(0, ",", ".") }} {{ "footer.programs"|trans({}, "catroweb") }}
+            <a href="{{ path('homepage_click_stats') }}">{{ "programs.welcome.statistics"|trans({}, "catroweb") }}</a>
+        </div>
+      </div>
+  </div>
+  {% endif %}
+
+  <div id="test123">
+
+  </div>
+
   <div id="featuredPrograms">
     <h1>{{ "programs.featured"|trans({}, "catroweb") }}</h1>
     <div id="feature-slider" class="owl-carousel">
