@@ -41,6 +41,11 @@ indexPage:
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 
 programs:
+  welcome:
+    title: Welcome to Catrobat's Pocket Code
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More Statistics
   featured: Featured
   newest: Newest programs
   recommended: Recommended programs
