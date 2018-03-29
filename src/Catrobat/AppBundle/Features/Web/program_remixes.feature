@@ -87,12 +87,12 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
       And I should see "0.00 MB"
       And I should see "336 downloads"
       And I should see "10 views"
-      And I should see "0 remixes"
+      And I should see "1 remix"
 
     Scenario: Viewing remix graph of program 8
       Given I am on "/pocketcode/program/8?show_graph=1"
       When I click "#remix-graph-modal-link"
-      When I wait 800 milliseconds
+      When I wait 1200 milliseconds
       And I should see a node with id "catrobat_8" having name "program 8" and username "Gangster"
       And I should see a node with id "catrobat_9" having name "program 9" and username "Superman"
       And I should see an edge from "catrobat_8" to "catrobat_9"
@@ -100,7 +100,19 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     Scenario: Viewing remix graph of program 9
       Given I am on "/pocketcode/program/9?show_graph=1"
       When I click "#remix-graph-modal-link"
-      When I wait 800 milliseconds
+      When I wait 1200 milliseconds
       And I should see a node with id "catrobat_8" having name "program 8" and username "Gangster"
       And I should see a node with id "catrobat_9" having name "program 9" and username "Superman"
       And I should see an edge from "catrobat_8" to "catrobat_9"
+
+    Scenario: Viewing details of program 1 and number of remixes
+      Given I am on "/pocketcode/program/1?show_graph=1"
+      Then I should see "program 1"
+      And I should see "Superman"
+      And I should see "6 remixes"
+
+    Scenario: Viewing details of program 2 and number of remixes
+      Given I am on "/pocketcode/program/2?show_graph=1"
+      Then I should see "program 2"
+      And I should see "Gangster"
+      And I should see "6 remixes"
