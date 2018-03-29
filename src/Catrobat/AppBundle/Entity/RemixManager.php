@@ -489,7 +489,16 @@ class RemixManager
      */
     public function remixCount($program_id)
     {
-        return $this->program_remix_repository->remixCount($program_id)
-               + $this->program_remix_backward_repository->remixCount($program_id);
+      $result = $this->getFullRemixGraph($program_id);
+
+      if($result == null) {
+        return 0;
+      }
+
+      if($result["catrobatNodes"] == null){
+        return 0;
+      }
+
+      return count($result["catrobatNodes"]) - 1;
     }
 }
