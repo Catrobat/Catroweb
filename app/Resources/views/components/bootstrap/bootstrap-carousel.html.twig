@@ -1,0 +1,43 @@
+<div id="{{ carousel.id }}" class="carousel slide {{ carousel.classes }}" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {% for i in 0..carousel.slideCount - 1 %}
+      {% if i == 0 %}
+        <li data-target="#{{ carousel.id }}" data-slide-to="{{ i }}" class="active"></li>
+      {% else %}
+        <li data-target="#{{ carousel.id }}" data-slide-to="{{ i }}"></li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {% for slide in carousel.slides %}
+      {% if loop.first %}
+        <div class="item active">
+          <a href="{{ slide.url }}">
+            <img src="{{ asset(slide.image) }}" alt="featured program">
+          </a>
+        </div>
+      {% else %}
+        <div class="item">
+          <a href="{{ slide.url }}">
+            <img src="{{ asset(slide.image) }}" alt="featured program">
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if carousel.controls %}
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#{{ carousel.id }}" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">{{ "previous"|trans({}, "catroweb") }}</span>
+  </a>
+  <a class="right carousel-control" href="#{{ carousel.id }}" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">{{ "next"|trans({}, "catroweb") }}</span>
+  </a>
+  {% endif %}
+</div>

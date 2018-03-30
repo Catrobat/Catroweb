@@ -1,8 +1,8 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen" />
-  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,7 @@
     <h1>{{ "programs.featured"|trans({}, "catroweb") }}</h1>
     <div id="feature-slider" class="owl-carousel">
       {% for feature in featured %}
-        <div><a href="{{ feature.url }}"><img src="{{ asset(feature.image) }}" /></a></div>
+        <div><a href="{{ feature.url }}"><img src="{{ asset(feature.image) }}"/></a></div>
       {% endfor %}
     </div>
   </div>
@@ -23,10 +23,10 @@
   <div id="recommended">
     <div class="help-headline">
       <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
-        <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
-             data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-             data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}"
-             width="30" height="30" />
+      <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
+           data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
+           data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}"
+           width="30" height="30"/>
     </div>
     <div class="programs"></div>
   </div>
@@ -48,7 +48,6 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('./js/globalPlugins/owl.carousel.min.js') }}"></script>
   <script>
     var newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}');
     var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
@@ -63,50 +62,69 @@
     mostViewed.init();
     random.init();
 
-    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
+    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID)
+    {
       var url = "{{ path('click_stats') }}";
       var params = {};
 
-      if (!isRecommendedProgram) {
+      if (!isRecommendedProgram)
+      {
         url = "{{ path('homepage_click_stats') }}";
-        if (!["featured", "newest", "mostDownloaded", "mostViewed", "random", "nolb-example"].contains(type)) {
+        if (!["featured", "newest", "mostDownloaded", "mostViewed", "random", "nolb-example"].contains(type))
+        {
           alert("You clicked at a program of an unknown section!");
           return;
         }
-        params = { type: type, programID: programID };
-      } else {
-        params = { type: type, recFromID: 0, recID: programID, isScratchProgram: 0, recIsUserSpecific: userSpecificRecommendation };
+        params = {type: type, programID: programID};
+      }
+      else
+      {
+        params = {type     : type,
+          recFromID        : 0,
+          recID            : programID,
+          isScratchProgram : 0,
+          recIsUserSpecific: userSpecificRecommendation
+        };
       }
 
-      $.ajaxSetup({ async: false });
-      $.post(url, params, function (data) {
+      $.ajaxSetup({async: false});
+      $.post(url, params, function(data)
+      {
         if (data == 'error')
+        {
           console.log("No click statistic is created!");
-      }).fail(function (data) {
+        }
+      }).fail(function(data)
+      {
         console.log(data);
       });
       window.location.href = href;
     }
 
-    $(document).on("click", ".program", function() {
+    $(document).on("click", ".program", function()
+    {
       var clicked_program_id = this.id.replace("program-", "");
       this.className += " visited-program";
       var stored_visits = sessionStorage.getItem("visits");
 
-      if(!stored_visits){
+      if (!stored_visits)
+      {
         var new_visits = [clicked_program_id];
         sessionStorage.setItem("visits", JSON.stringify(new_visits));
       }
-      else{
+      else
+      {
         var parsed_visits = JSON.parse(stored_visits);
-        if(!($.inArray(clicked_program_id, parsed_visits)>=0)){
+        if (!($.inArray(clicked_program_id, parsed_visits) >= 0))
+        {
           parsed_visits.push(clicked_program_id);
           sessionStorage.setItem("visits", JSON.stringify(parsed_visits));
         }
       }
     });
 
-    $(document).one('click', ".owl-item > div > a", function(event) {
+    $(document).one('click', ".owl-item > div > a", function(event)
+    {
       event.preventDefault();
       var href = $(this).attr('href');
       var programID = ((href.indexOf("program") > 0) ? (href.split("program")[1].match(/[0-9]+/))[0] : 0);
@@ -114,7 +132,8 @@
       performClickStatisticRequest(href, type, false, 0, programID);
     });
 
-    $(document).one('click', ".rec-programs", function(event) {
+    $(document).one('click', ".rec-programs", function(event)
+    {
       event.preventDefault();
       var isRecommendedProgram = $(this).hasClass("homepage-recommended-programs");
       var type = (isRecommendedProgram ? "rec_homepage" : $(this).parent(".program").parent(".programs").parent().attr("id"));
@@ -124,15 +143,18 @@
       performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID);
     });
 
-    $(document).on("click", ".help-icon", function() {
+    $(document).on("click", ".help-icon", function()
+    {
       swal({
-          title: $(this).attr("data-help-title"),
-          text: $(this).attr("data-help-description"),
-          showCancelButton: false,
+          title            : $(this).attr("data-help-title"),
+          text             : $(this).attr("data-help-description"),
+          showCancelButton : false,
           confirmButtonText: "{{ "ok"|trans({}, "catroweb") }}",
-          closeOnConfirm: true
+          closeOnConfirm   : true
         },
-        function() {}
+        function()
+        {
+        }
       );
     });
 

@@ -234,7 +234,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iShouldSeeTheFeaturedSlider()
   {
     $this->assertSession()->responseContains('featured');
-    assertTrue($this->getSession()->getPage()->findById('featuredPrograms')->isVisible());
+    assertTrue($this->getSession()->getPage()->findById('feature-slider')->isVisible());
   }
 
   /**
@@ -2112,7 +2112,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iShouldSeeTheSliderWithTheValues($values)
   {
     $slider_items = explode(',', $values);
-    $owl_items = $this->getSession()->getPage()->findAll('css', '.owl-item div a');
+    $owl_items = $this->getSession()->getPage()->findAll('css', 'div.item > a');
     assertEquals(count($owl_items), count($slider_items));
 
     for ($index = 0; $index < count($owl_items); $index++)
@@ -2411,7 +2411,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iClickOnAFeaturedHomepageProgram()
   {
-    $arg1 = '.owl-item > div > a:first-child';
+    $arg1 = '#feature-slider > div > div:first-child > a';
     $this->assertSession()->elementExists('css', $arg1);
 
     $this

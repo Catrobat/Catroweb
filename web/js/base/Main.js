@@ -7,13 +7,6 @@ var Main = function(search_url)
   {
     self.setClickListener();
     self.setWindowResizeListener();
-    
-    $("#feature-slider").owlCarousel({
-      responsive: true,
-      items     : 1,
-      singleItem: true,
-      autoPlay  : 5000
-    });
   });
   $(document).ready(function()
   {
