@@ -1,18 +1,72 @@
 {% extends ':Default:base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen" />
-  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
 {% endblock %}
 
 {% block body %}
+
+  {% if not app.user and not isWebview() %}
+    <div id="welcomeSection">
+      <h3>{{ "programs.welcome.title"|trans({}, "catroweb") }}</h3>
+      <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
+      <div class="row">
+        <div class="row col-md-8 col-sm-8">
+          <div class="col-md-4 col-sm-4">
+            <a href="{{ path('catrobat_web_starter') }}">
+              <img src="{{ asset('images/help/starters.png') }}" height="200px"/>
+            </a>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <a href="{{ path('catrobat_web_tutorialcards') }}">
+              <img src="{{ asset('images/help/tutorials.png') }}" height="200px"/>
+            </a>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <a href="{{ path('catrobat_web_stepByStep') }}">
+              <img src="{{ asset('images/help/step_by_step_mobile.png') }}" height="200px"/>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 pull-right">
+          <iframe id="youtube-help-video" height="200px" width="100%" src="https://www.youtube.com/embed/BHe2r2WU-T8"
+                  frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          {{ "programs.welcome.download"|trans({}, "catroweb") }}
+          <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid"
+             target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+        </div>
+        <div class="col-md-6 text-right">
+          {# todo add link to new statistic page #}
+          {% set stats = getCommunityStats() %}
+          {{ stats['program_count'] | number_format(0, ",", ".") }} {{ "footer.programs"|trans({}, "catroweb") }}
+          {# <a href="{{ path('homepage_click_stats') }}">{{ "programs.welcome.statistics"|trans({}, "catroweb") }}</a> #}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
   <div id="featuredPrograms">
     <h1>{{ "programs.featured"|trans({}, "catroweb") }}</h1>
-    <div id="feature-slider" class="owl-carousel">
-      {% for feature in featured %}
-        <div><a href="{{ feature.url }}"><img src="{{ asset(feature.image) }}" /></a></div>
-      {% endfor %}
-    </div>
+
+    {% if featured|length > 0 %}
+      {{ include(':components/bootstrap:bootstrap-carousel.html.twig',
+      { 'carousel' :
+        {
+          'id' : 'feature-slider',
+          'slideCount' : featured|length,
+          'slides' : featured,
+          'classes' : '',
+          'controls' : false
+        }
+      }
+      ) }}
+    {% endif %}
   </div>
 
   <div id="newest">
@@ -26,12 +80,12 @@
       {% if not ("FR" in app.request.locale) and not ("fr" in app.request.locale) %}
         <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
              data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-          {% if not ("DE" in app.request.locale) and not ("de" in app.request.locale) %}
-            data-help-description="{{ "indexPage.recommendedSection.info.description_B_VersionTest"|trans({}, "catroweb") }}"
-          {% else %}
-            data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}"
-          {% endif %}
-             width="30" height="30" />
+            {% if not ("DE" in app.request.locale) and not ("de" in app.request.locale) %}
+              data-help-description="{{ "indexPage.recommendedSection.info.description_B_VersionTest"|trans({}, "catroweb") }}"
+            {% else %}
+              data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}"
+            {% endif %}
+             width="30" height="30"/>
       {% endif %}
     </div>
     <div class="programs"></div>
@@ -68,50 +122,73 @@
     mostViewed.init();
     random.init();
 
-    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID) {
+    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID)
+    {
       var url = "{{ path('click_stats') }}";
       var params = {};
 
-      if (!isRecommendedProgram) {
+      if (!isRecommendedProgram)
+      {
         url = "{{ path('homepage_click_stats') }}";
-        if (!["featured", "newest", "mostDownloaded", "mostViewed", "random", "nolb-example"].contains(type)) {
+        if (["featured", "newest", "mostDownloaded", "mostViewed", "random", "nolb-example"].indexOf(type) === -1)
+        {
           alert("You clicked at a program of an unknown section!");
           return;
         }
-        params = { type: type, programID: programID };
-      } else {
-        params = { type: type, recFromID: 0, recID: programID, isScratchProgram: 0, recIsUserSpecific: userSpecificRecommendation };
+        params = {type: type, programID: programID};
+      }
+      else
+      {
+        params = {
+          type             : type,
+          recFromID        : 0,
+          recID            : programID,
+          isScratchProgram : 0,
+          recIsUserSpecific: userSpecificRecommendation
+        };
       }
 
-      $.ajaxSetup({ async: false });
-      $.post(url, params, function (data) {
+      $.post(url, params, function(data)
+      {
         if (data == 'error')
+        {
           console.log("No click statistic is created!");
-      }).fail(function (data) {
+        }
+      }).always(function(data)
+      {
+        window.location.href = href;
+      })
+      .fail(function(data)
+      {
         console.log(data);
       });
-      window.location.href = href;
+
     }
 
-    $(document).on("click", ".program", function() {
+    $(document).on("click", ".program", function()
+    {
       var clicked_program_id = this.id.replace("program-", "");
       this.className += " visited-program";
       var stored_visits = sessionStorage.getItem("visits");
 
-      if(!stored_visits){
+      if (!stored_visits)
+      {
         var new_visits = [clicked_program_id];
         sessionStorage.setItem("visits", JSON.stringify(new_visits));
       }
-      else{
+      else
+      {
         var parsed_visits = JSON.parse(stored_visits);
-        if(!($.inArray(clicked_program_id, parsed_visits)>=0)){
+        if (!($.inArray(clicked_program_id, parsed_visits) >= 0))
+        {
           parsed_visits.push(clicked_program_id);
           sessionStorage.setItem("visits", JSON.stringify(parsed_visits));
         }
       }
     });
 
-    $(document).one('click', ".owl-item > div > a", function(event) {
+    $(document).one('click', "#feature-slider > div > div > a", function(event)
+    {
       event.preventDefault();
       var href = $(this).attr('href');
       var programID = ((href.indexOf("program") > 0) ? (href.split("program")[1].match(/[0-9]+/))[0] : 0);
@@ -119,7 +196,8 @@
       performClickStatisticRequest(href, type, false, 0, programID);
     });
 
-    $(document).one('click', ".rec-programs", function(event) {
+    $(document).one('click', ".rec-programs", function(event)
+    {
       event.preventDefault();
       var isRecommendedProgram = $(this).hasClass("homepage-recommended-programs");
       var type = (isRecommendedProgram ? "rec_homepage" : $(this).parent(".program").parent(".programs").parent().attr("id"));
@@ -129,15 +207,18 @@
       performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID);
     });
 
-    $(document).on("click", ".help-icon", function() {
+    $(document).on("click", ".help-icon", function()
+    {
       swal({
-          title: $(this).attr("data-help-title"),
-          text: $(this).attr("data-help-description"),
-          showCancelButton: false,
+          title            : $(this).attr("data-help-title"),
+          text             : $(this).attr("data-help-description"),
+          showCancelButton : false,
           confirmButtonText: "{{ "ok"|trans({}, "catroweb") }}",
-          closeOnConfirm: true
+          closeOnConfirm   : true
         },
-        function() {}
+        function()
+        {
+        }
       );
     });
 

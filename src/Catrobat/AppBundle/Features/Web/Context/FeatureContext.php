@@ -238,6 +238,23 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @Then /^I should see the welcome section$/
+   */
+  public function iShouldSeeTheWelcomeSection()
+  {
+    assertTrue($this->getSession()->getPage()->findById('welcomeSection')->isVisible());
+  }
+
+
+  /**
+   * @Then /^I should not see the welcome section$/
+   */
+  public function iShouldNotSeeTheWelcomeSection()
+  {
+    assertNull($this->getSession()->getPage()->findById('welcomeSection'));
+  }
+
+  /**
    * @Then /^I should see ([^"]*) programs$/
    */
   public function iShouldSeePrograms($arg1)
