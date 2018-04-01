@@ -100,4 +100,5 @@ Feature: As a visitor I want to see a program page
       Given I am on homepage
       Then I should see the featured slider
       When I click on the first featured homepage program
+      Then I wait 500 milliseconds
       Then I should see "Dapiest"
