@@ -665,3 +665,16 @@ clipboard:
   fail: Failed to copy link to clipboard! :(
 next: Next
 previous: Previous
+
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: Tutorials
+    stepbystep: Step by Step
+    getinvolved: Get involved
+  text:
+    starters: Try out and remix with
+    tutorials: Effective tricks in
+    stepbystep: Do 10 easy steps in
+    getinvolved_1: Download
+    getinvolved_2: now from Google Play and get started!
