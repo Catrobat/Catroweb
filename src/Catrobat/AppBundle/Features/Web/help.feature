@@ -8,6 +8,7 @@ Feature: Pocketcode help page
     Given I am on "/pocketcode/help"
 
   Scenario: Viewing the help overview at help page
+    Then I wait for a second
     Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
     And I should see a big help image "Game Design"
     And I should see a big help image "Step By Step"

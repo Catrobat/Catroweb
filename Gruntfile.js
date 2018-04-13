@@ -1,6 +1,7 @@
 var jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
 var jsLoginSrc = ['web/js/social/*.js'];
 var jsCustomSrc = 'web/js/custom';
+var jsAnalyticsSrc = 'web/js/analytics';
 var jsLocalPluginSrc = 'web/js/localPlugins';
 var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school'];
 
@@ -104,6 +105,12 @@ module.exports = function(grunt)
       custom      : {
         expand: true,
         cwd   : jsCustomSrc,
+        src   : '**/*.js',
+        dest  : 'web/compiled/js/'
+      },
+      analytics   : {
+        expand: true,
+        cwd   : jsAnalyticsSrc,
         src   : '**/*.js',
         dest  : 'web/compiled/js/'
       },

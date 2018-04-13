@@ -1643,7 +1643,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $page = $this->getSession()->getPage();
     $video = $page->find('css', '#youtube-help-video');
-    assertTrue($video->getAttribute('src') == $url);
+    assertTrue($video->getAttribute('src') == $url + "&origin=http://localhost");
   }
 
 
