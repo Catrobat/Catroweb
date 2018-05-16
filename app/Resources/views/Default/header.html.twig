@@ -137,19 +137,26 @@
 </nav>
 
 <script>
-  $(document).ready(function()
-  {
-    $('.search-icon-header').on('click', function()
+    $(document).ready(function()
     {
-      $('.search-icon-header').hide();
-      if ($(window).width() <= 430)
-      {
-        $('#page-name').hide();
-      }
-      $('.search-input-header').removeClass('hidden');
-      $('.catro-search-button').removeClass('hidden');
-      $('#page-name').parent().addClass('hidden');
+        $('.search-icon-header').on('click', function()
+        {
+            $(this).hide();
+            var page_name = $('#page-name');
+            var search_header = $('.search-input-header');
+            if ($(window).width() <= 430)
+            {
+                page_name.hide();
+            }
+            var val = search_header.val();
+            search_header
+                .removeClass('hidden')
+                .focus()
+                .val("")
+                .val(val);
+            $('.catro-search-button').removeClass('hidden');
+            page_name.parent().addClass('hidden');
+        });
     });
-  });
 
 </script>
