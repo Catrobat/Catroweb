@@ -5,7 +5,7 @@ var jsAnalyticsSrc = 'web/js/analytics';
 var jsLocalPluginSrc = 'web/js/localPlugins';
 var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school'];
 
-var lessconfig = {};
+var sassconfig = {};
 
 for (index = 0; index < themes.length; index++)
 {
@@ -14,27 +14,26 @@ for (index = 0; index < themes.length; index++)
   var base_css_path = "web/css/" + theme + "/base.css";
   
   var base_file_config = {};
-  base_file_config[base_css_path] = ["web/css/plugins/*", "web/css/themes/" + theme + "/theme.less"];
+  base_file_config[base_css_path] = ["web/css/themes/" + theme + "/" + theme +".scss", "web/css/plugins/*" ];
   
-  lessconfig[theme] =
+  sassconfig[theme] =
     {
       options: {
-        compress    : true,
-        yuicompress : true,
-        optimization: 2,
-        relativeUrls: true,
-        paths       : ["web/css/base", "web/css/themes/" + theme]
+        loadPath    : ["web/css/base", "web/css/themes/" + theme],
+        style: "compressed",
+        sourcemap: 'none'
       },
       files  : [
         base_file_config,
         {
           expand: true,
           cwd   : 'web/css/custom/',
-          src   : ['**/*.less'],
+          src   : ['**/*.scss'],
           dest  : 'web/css/' + theme + '/',
           ext   : '.css',
           extDot: 'first'
         }
+
       ]
     };
 }
@@ -43,19 +42,13 @@ var admin_css_path = "web/css/admin/admin.css";
 var admin_file_config = {};
 admin_file_config[admin_css_path] = ["web/css/plugins/*"];
 
-lessconfig['admin'] = {
-  options: {
-    compress    : true,
-    yuicompress : true,
-    optimization: 2,
-    relativeUrls: true
-  },
+sassconfig['admin'] = {
   files  : [
     admin_file_config,
     {
       expand: true,
       cwd   : 'web/css/admin/',
-      src   : ['**/*.less'],
+      src   : ['**/*.scss'],
       dest  : 'web/css/admin/',
       ext   : '.css',
       extDot: 'first'
@@ -72,7 +65,7 @@ module.exports = function(grunt)
     copy: {
       bootstrap_vendor: {
         expand: true,
-        cwd: 'vendor/twbs/bootstrap/',
+        cwd: 'node_modules/bootstrap/',
         src: '**',
         dest: 'web/bootstrap_vendor/'
       },
@@ -81,6 +74,10 @@ module.exports = function(grunt)
         cwd: 'node_modules/clipboard/dist/',
         src: 'clipboard.min.js',
         dest: 'web/js/localPlugins/'
+      },
+      bootstrap_js: {
+        src: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+        dest: 'web/compiled/bootstrap/bootstrap.min.js'
       }
     },
     concat: {
@@ -119,6 +116,10 @@ module.exports = function(grunt)
         cwd   : 'node_modules/jquery/dist',
         src   : 'jquery.min.js',
         dest  : 'web/compiled/bootstrap/'
+      },
+      css : {
+        expand: true,
+        cwd: ''
       }
     },
     uglify: {
@@ -136,14 +137,14 @@ module.exports = function(grunt)
         ]
       }
     },
-    less  : lessconfig,
+    sass  : sassconfig,
     watch : {
       options: {
         nospawn: true
       },
       styles : {
-        files  : ['web/css/**/*.less'],
-        tasks  : ['less'],
+        files  : ['web/css/**/*.scss'],
+        tasks  : ['sass'],
         options: {
           nospawn: true
         }
@@ -160,5 +161,6 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('default', ['copy','concat', 'less', 'uglify', 'watch']);
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.registerTask('default', ['copy','concat', 'sass', 'uglify', 'watch']);
 };

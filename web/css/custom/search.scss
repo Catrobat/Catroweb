@@ -1,0 +1,12 @@
+@import 'theme_settings';
+
+#search-results-text {
+  font-size: $default-font-size + 4;
+  padding-top: 10px;
+}
+
+#search-results-text.no-results {
+  text-align: center;
+  font-size: $default-font-size + 8;
+  font-weight: bold;
+}

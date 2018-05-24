@@ -1,0 +1,72 @@
+@import '../../base/elements';
+@import '../../base/brain';
+@import '../../base/footer';
+@import '../../base/header';
+@import '../../base/images';
+
+@import 'theme_settings';
+
+@import "../../base/variables";
+
+// your color/variable changes here
+$primary:          #8a78a8;
+
+
+@import "../../base/catro_bootstrap";
+
+.help-headline {
+  border-bottom: 1px solid #9583B2 !important;
+}
+
+.group {
+  input {
+    border-bottom: 1px solid rgba(138,120,168,0.3) !important;
+    color: rgb(138,120,168) !important;
+  }
+
+  label {
+    color: rgb(138,120,168) !important;
+  }
+}
+
+.bar:after, .bar:before {
+  background: rgba(138,120,168,0.7) !important;
+}
+
+hr {
+  border-color: $primary !important;
+}
+
+.panel-info {
+  border-color: $primary;
+  > .panel-heading {
+    border-color: $primary;
+    background-color: $primary;
+  }
+}
+
+#program-comments {
+  border-top: 1px solid $primary !important;
+}
+
+#user-comment-wrapper {
+  border-bottom: 1px solid $primary !important;
+}
+
+.pc-startButton {
+  color: $primary !important;
+  fill: $primary !important;
+}
+
+#recommendations, #specific-programs-recommendations {
+  border-top: 1px solid $primary !important;
+}
+
+.img-visibility-visible {
+  background-color: $primary !important;
+}
+
+.btn-info {
+  border-color: $primary !important;
+  background-color: $primary !important;
+}

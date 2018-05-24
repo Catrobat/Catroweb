@@ -1,0 +1,94 @@
+@import 'elements';
+
+#remix-graph-modal {
+    margin:0;
+}
+
+#remix-graph-layer {
+    width: 100%;
+    height: 100vh;
+}
+
+div.close-remix-graph-modal {
+    width: 70px;
+    height: 70px;
+    margin: 22px 18px 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: left;
+    z-index: 1;
+}
+
+.close-button {
+    width: 70px;
+    height: 70px;
+    border: none;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+@include user-select(none);
+    transition: all 0.2s;
+    outline: none;
+
+    &:hover {
+        transform: rotate(90deg);
+    }
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.01);
+    bottom: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 20000;
+}
+
+.context-menu-item {
+    font-size: 20px !important;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 2.6em;
+}
+
+.context-menu-item-title {
+    padding: 0 0.6em 0 0.6em;
+    font-size: 26px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.context-menu-item-subtitle {
+    padding: 0 0.6em 0 1.1em;
+    font-size: 16px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.context-menu-separator {
+    padding: 10px 0 0 0;
+    margin: 0;
+}
+
+.context-menu-icon.context-menu-icon--fa::before {
+    color: #000000 !important;
+    padding-left: 0.7em;
+}
+
+.context-menu-icon.context-menu-icon--fa.context-menu-hover::before {
+    color: #FFFFFF !important;
+}
+
+body.modal-open {
+    overflow: visible;
+    position: absolute;
+    width: 100%;
+    height:100%;
+}

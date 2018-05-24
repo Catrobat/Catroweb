@@ -37,11 +37,11 @@
           </div>
 
 
-          <div class="col-md-offset-4 col-md-4">
+          <div class="offset-md-4 col-md-4">
             <h4>{{ "footer.communityStats"|trans({}, "catroweb") }}</h4>
             {% set stats = getCommunityStats()  %}
-            <h4>{{ stats['program_count'] | number_format(0, ",", ".") }} <small>{{ "footer.programs"|trans({}, "catroweb") }}</small></h4>
-            <h4>{{ stats['downloads'] | number_format(0, ",", ".") }} <small>{{ "footer.downloads"|trans({}, "catroweb") }}</small></h4>
+            <h4>{{ stats['program_count'] | number_format(0, ",", ".") }} <small class="text-muted">{{ "footer.programs"|trans({}, "catroweb") }}</small></h4>
+            <h4>{{ stats['downloads'] | number_format(0, ",", ".") }} <small class="text-muted">{{ "footer.downloads"|trans({}, "catroweb") }}</small></h4>
           </div>
         </div>
       </div>
