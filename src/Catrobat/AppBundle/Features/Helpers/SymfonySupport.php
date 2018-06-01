@@ -534,13 +534,8 @@ class SymfonySupport
     $program_statistics->setProgram($program);
     $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
     $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
-    $program_statistics->setLatitude(isset($config['latitude']) ? $config['latitude'] : 47.2);
-    $program_statistics->setLongitude(isset($config['longitude']) ? $config['longitude'] : 10.7);
     $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
     $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
-    $program_statistics->setStreet(isset($config['street']) ? $config['street'] : 'Duck Street 1');
-    $program_statistics->setPostalCode(isset($config['postal_code']) ? $config['postal_code'] : '1234');
-    $program_statistics->setLocality(isset($config['locality']) ? $config['locality'] : 'Entenhausen');
     $program_statistics->setUserAgent(isset($config['user_agent']) ? $config['user_agent'] : 'okhttp');
     $program_statistics->setReferrer(isset($config['referrer']) ? $config['referrer'] : 'Facebook');
 

@@ -1030,9 +1030,9 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^the program download statistic should have a download timestamp, street, postal code, locality, an anonimous user, latitude of approximately "([^"]*)", longitude of approximately "([^"]*)" and the following statistics:$/
+     * @Then /^the program download statistic should have a download timestamp, an anonimous user and the following statistics:$/
      */
-    public function theProgramShouldHaveADownloadTimestampStreetPostalCodeLocalityLatitudeOfApproximatelyLongitudeOfApproximatelyAndTheFollowingStatistics($expected_latitude, $expected_longitude, TableNode $table)
+    public function theProgramShouldHaveADownloadTimestampAndTheFollowingStatistics(TableNode $table)
     {
         $statistics = $table->getHash();
         for ($i = 0; $i < count($statistics); ++$i ) {
@@ -1052,23 +1052,15 @@ class FeatureContext extends BaseContext
             assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
             assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
             assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
-
-            assertNotEmpty($program_download_statistics->getLocality(), "No locality was written to download statistics");
-            assertNotEmpty($program_download_statistics->getPostalCode(), "No postal code was written to download statistics");
-            assertNotEmpty($program_download_statistics->getStreet(), "No street was written to download statistics");
             assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
 
             $limit = 5.0;
 
-            $latitude = floatval($program_download_statistics->getLatitude());
-            $longitude = floatval($program_download_statistics->getLongitude());
             $download_time = $program_download_statistics->getDownloadedAt();
             $current_time = new \DateTime();
 
             $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
 
-            assertTrue($latitude > (floatval($expected_latitude) - $limit) && $latitude < (floatval($expected_latitude) + $limit), "Latitude in download statistics not as expected");
-            assertTrue($longitude > ($expected_longitude - $limit) && $longitude < ($expected_longitude + $limit), "Longitude in download statistics not as expected");
             assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
         }
     }

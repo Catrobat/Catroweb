@@ -30,13 +30,8 @@ class ClickStatisticsAdmin extends Admin
             ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
             ->add('clicked_at')
             ->add('ip')
-            ->add('latitude')
-            ->add('longitude')
             ->add('country_code')
             ->add('country_name')
-            ->add('street')
-            ->add('postal_code')
-            ->add('locality')
             ->add('locale')
             ->add('user_agent')
             ->add('referrer');
@@ -56,7 +51,6 @@ class ClickStatisticsAdmin extends Admin
             ->add('country_name')
             ->add('user_agent')
             ->add('referrer')
-            ->add('locality')
             ->add('locale');
     }
 
@@ -76,13 +70,8 @@ class ClickStatisticsAdmin extends Admin
                 'label' => 'Extension'))
             ->add('clicked_at')
             ->add('ip')
-            ->add('latitude')
-            ->add('longitude')
             ->add('country_code')
             ->add('country_name')
-            ->add('street')
-            ->add('postal_code')
-            ->add('locality')
             ->add('locale')
             ->add('user_agent')
             ->add('referrer')
@@ -94,8 +83,8 @@ class ClickStatisticsAdmin extends Admin
 
     public function getExportFields() {
         return array('id','type','user.username','program.id','program.name','scratch_program_id','recommended_from_program.id',
-            'recommended_from_program.name','tag.en','extension.name','clicked_at','ip','latitude','longitude','country_code',
-            'country_name','street','postal_code','locality','locale','user_agent','referrer');
+            'recommended_from_program.name','tag.en','extension.name','clicked_at','ip','country_code',
+            'country_name','locale','user_agent','referrer');
     }
 
     protected function configureRoutes(RouteCollection $collection)
