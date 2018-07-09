@@ -1,0 +1,34 @@
+.navbar {
+
+    .dropdown-item,
+    .nav-link {
+        font-size: 14px;
+    }
+
+    i.material-icons {
+        font-size: inherit;
+    }
+}
+
+$nav-logo-dim: 32px;
+.nav-logo {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    margin-right: 8px;
+}
+.nav-catrobat {
+    padding: .5rem 1rem;
+}
+
+@media (min-width: 768px) {
+    .d-md-list-item {
+        display: list-item !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .w-sm-100 {
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,63 @@
+
+// BS4
+$yiq-contrasted-threshold:190;
+$yiq-text-dark: rgba(0,0,0,0.87);
+$yiq-text-light: #fff;
+@function color-yiq($color) {
+    $r: red($color);
+    $g: green($color);
+    $b: blue($color);
+
+    $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+    @if ($yiq >= $yiq-contrasted-threshold) {
+        @return $yiq-text-dark;
+    } @else {
+        @return $yiq-text-light;
+    }
+}
+
+// CUSTOM
+$mapped-color-names: (
+        catrobat: cyan
+);
+
+$color-map: (
+        cyan: (
+                50: #e0f7fa,
+                100: #b2ebf2,
+                200: #80deea,
+                300: #4dd0e1,
+                400: #26c6da,
+                500: #00bcd4,
+                600: #00acc1,
+                700: #0097a7,
+                800: #00838f,
+                900: #006064,
+                a100: #84ffff,
+                a200: #18ffff,
+                a400: #00e5ff,
+                a700: #00b8d4
+        )
+);
+@function color-mapper($color-name) {
+    @if map-has-key($mapped-color-names, $color-name) {
+        @return map-get($mapped-color-names, $color-name);
+    }
+    @return $color-name;
+}
+
+@function custom-color($color-name, $color-variant: null) {
+
+    $color-name: color-mapper($color-name);
+
+    @if not map-has-key($color-map, $color-name) {
+        @error "No color found for #{$color-name}";
+    }
+
+    @if ($color-variant != null) {
+        @return map-get(map-get($color-map, $color-name), $color-variant);
+    } @else {
+        @return map-get(map-get($color-map, $color-name), 500);
+    }
+}

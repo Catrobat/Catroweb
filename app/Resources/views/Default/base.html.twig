@@ -12,6 +12,8 @@
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
 
   <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
   <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
@@ -36,7 +38,7 @@
 <div id="wrapper">
   <header>
     {% block header %}
-      {% include ':Default:header.html.twig' %}
+      {% include ':Default:header_bs4.html.twig' %}
     {% endblock %}
   </header>
 

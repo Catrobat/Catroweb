@@ -1,0 +1,156 @@
+<nav class="navbar nav-catrobat navbar-expand-md navbar-dark bg-catrobat">
+  <div class="container">
+    <div class="d-inline-flex align-items-center">
+      <a class="nav-logo" href="{{ path('index') }}">
+        <img src="{{ asset('images/logo/catroweb/logo-catroweb.svg') }}"
+             alt="Pocket Code Logo"
+        />
+      </a>
+      <a class="navbar-brand mt-1" href="{{ path('index') }}">Home</a>
+    </div>
+
+    <div class="d-inline-flex ml-auto align-items-center">
+      {# START: Searchfield #}
+      <input type="text" class="form-control input-search search-input-header hidden"
+             placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
+      <button class="btn btn-default btn-search hidden catro-search-button">
+        <i class="material-icons">
+          search
+        </i>
+      </button>
+      <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+      {# END: Searchfield #}
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <ul class="navbar-nav d-none d-md-flex">
+        {% if app.user %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-inline-flex align-items-center" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons mr-1">
+              account_circle
+            </i>
+            <span class="mr-1">{{ app.user.username }}</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{{ path('user_notifications') }}">
+              <i class="material-icons mr-1">
+                notifications
+              </i>
+                {{ "notifications"|trans({}, "catroweb") }}
+            </a>
+            <a class="dropdown-item" href="{{ url('profile') }}" id="btn-profile">
+              <i class="material-icons mr-1">
+                account_circle
+              </i>
+              {{ 'menu.profile'|trans({}, "catroweb") }}
+            </a>
+              {% if is_granted('ROLE_ADMIN') %}
+                <a class="dropdown-item" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                  <i class="material-icons mr-1">
+                    person
+                  </i>
+                  {{ 'menu.admin'|trans({}, "catroweb") }}
+                </a>
+              {% endif %}
+            <a class="dropdown-item" href="{{ url('logout') }}" id="btn-logout">
+              <i class="material-icons mr-1">
+                power_settings_new
+              </i>
+                {{ 'menu.logout'|trans({}, "catroweb") }}
+            </a>
+          </div>
+        </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link d-inline-flex align-items-center" href="{{ url('login') }}" id="btn-login-small">
+              <i class="material-icons mr-1">
+                exit_to_app
+              </i>
+                {{ 'menu.login'|trans({}, "catroweb") }}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="d-md-none w-100">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mt-2">
+            {% if app.user %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('user_notifications') }}">
+                  <i class="material-icons mr-1">
+                    notifications
+                  </i>
+                  {{ "notifications"|trans({}, "catroweb") }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
+                  <i class="material-icons mr-1">
+                    account_circle
+                  </i>
+                  {{ 'menu.profile'|trans({}, "catroweb") }}
+                </a>
+              </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                      <i class="material-icons mr-1">
+                        person
+                      </i>
+                      {{ 'menu.admin'|trans({}, "catroweb") }}
+                    </a>
+                  </li>
+                {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
+                  <i class="material-icons mr-1">
+                    power_settings_new
+                  </i>
+                    {{ 'menu.logout'|trans({}, "catroweb") }}
+                </a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('login') }}" id="btn-login-small">
+                  <i class="material-icons mr-1">
+                    exit_to_app
+                  </i>
+                    {{ 'menu.login'|trans({}, "catroweb") }}
+                </a>
+              </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $(document).ready(function()
+    {
+        $('.search-icon-header').on('click', function()
+        {
+            $(this).hide();
+            var page_name = $('#page-name');
+            var search_header = $('.search-input-header');
+            if ($(window).width() <= 430)
+            {
+                page_name.hide();
+            }
+            var val = search_header.val();
+            search_header
+                .removeClass('hidden')
+                .focus()
+                .val("")
+                .val(val);
+            $('.catro-search-button').removeClass('hidden');
+            page_name.parent().addClass('hidden');
+        });
+    });
+
+</script>

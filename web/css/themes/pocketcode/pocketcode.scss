@@ -1,8 +1,10 @@
+@import '../../base/colors';
 @import '../../base/elements';
 @import '../../base/brain';
 @import '../../base/footer';
 @import '../../base/header';
 @import '../../base/images';
+@import '../../base/navbar';
 
 @import 'theme_settings';
 
@@ -15,3 +17,12 @@
 #gamejam-submission {
   @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
 }
+
+
+.bg-catrobat {
+  background-color: custom-color(catrobat);
+}
+.text-catrobat {
+  color: custom-color(catrobat);
+}
+
