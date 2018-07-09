@@ -15,7 +15,7 @@ noDescription: Žádný popis není k dispozici
 country: Stát
 loginText: Přihlásit
 privacyPolicy: Nastavení soukromí
-imprint: Tisk
+imprint: Tiráž
 somethingWentWrong: 'Ooooops něco se pokazilo.'
 pleaseTryAgain: 'Prosím, zkuste to znovu!'
 oldVersionError: 'Aktualizujte na nejnovější verzi Pocket Code!'
@@ -36,8 +36,13 @@ indexPage:
   recommendedSection:
     info:
       title: 'Programy, které jsou zde doporučeny?'
-      description_C_VersionTest: 'Více podobných (včetně "Palec nahoru", "Smích", "Láska" a "Páni!") vašich programů obdrží, tím výše je uveden v tomto seznamu.'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
+  welcome:
+    title: Welcome to Catrobat's Pocket Code
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More Statistics
   featured: Nabízený
   newest: Nejnovější programy
   recommended: Doporučené programy
@@ -98,45 +103,47 @@ profile:
   secondEmail: Můj druhý e-mail
   myPrograms: Moje programy
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your program
-  programsOf: Programs of
-  changePicture: Change picture
+    passwordTooShort: Nové heslo musí mít alespoň %length% znaků.
+    passwordTooLong: Nové heslo může mít maximálně %length% znaků.
+    passwordIsUsername: Heslo se musí lišit od uživatelského jména.
+    passwordWrong: Nesprávné heslo
+    emailNotValid: Tato e-mailová adresa není platná.
+    emailMissing: Chyba při aktualizaci této e-mailové adresy. Musíš mít alespoň jednu ověřenou e-mailovou adresu.
+    emailExists: Tato e-mailová adresa je již zaregistrována.
+    submitSuccess: Uloženo!
+  reallyDeleteProgram: Opravdu chceš odstranit tento program
+  programsOf: Programy
+  changePicture: Změnit obrázek
   avatar:
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    pictureTooLarge: Zvolený obrázek je příliš velký, nepoužívejte prosím obrázky větší než 5 MB.
+    uploadError: Omlouváme se, ale došlo k potížím během odesílání!
+    noSupport: Tento typ obrázku není podporován, zkus prosím jiný obrázek.
 myprofile:
-  editProfile: Edit profile
+  editProfile: Upravit profil
   edit: Úpravy
   done: Hotovo
-  avatar: Avatar
+  avatar: Obrázek
   email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  editAvatar: Upravit obrázek
+  editUsername: Upravit uživatelské jméno
+  editPassword: Změnit heslo
+  editCountry: Změnit stát
+  editEmail: Změnit E-Mail
+  deleteAccount: Smazat účet
+  deleteAccountText: Opravdu chceš smazat svůj účet? Tím smažeš všechny nahrané programy a komentáře!
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: 'Licence'
+  title: 'Licence k hraní - cituj zdroje a sdílej'
+  text1: Představ si, že každý Catrobat program je dort, velmi speciální dort, který je dodáván se svým receptem (programovacími bloky). Všichni členové Catrobat komunity se dělí o své dorty spolu s jejich recepty. To znamená, že si můžeš vychutnávat dortíky a naučit se je i péct!
+  text2: 'Neexistují žádné tajné recepty: návody jak upéct tyto dortíky jsou otevřeny pro každého, k použití, předělání, úpravě a slouží jako inspirace pro nové nápady... Mám na mysli dortíky.'
+  text3: "Můžeš jíst tyto dortíky, stejně jako kopírovat recepty jiných lidí k vytvoření vlastního, možná s jinými přísadami. Tato svoboda je podmíněna dvěma malými požadavky:"
+  text4: "Při zakládání komunity Catrobat jsme se rozhodli přijmout tento přístup, protože jsme přesvědčeni, že podporuje učení a tvořivost v rámci komunity. Sdílením receptů a ingrediencí (skriptů a kreseb) mohou lidé stavět na nápadech jiných a prospěch z toho budou mít všichni."
+  text5: Při navrhování internetových stránek Catrobat jsme zde zařadili funkce k povzbuzení lidí ke sdílení a citování ostatních. Na každé stránce programu lze vždy stáhnout výchozí skripty programu. Pokud remixuješ program (upravuješ skripty nebo kresby a sdílíš výsledek), cituj prosím v poznámkách programu osobu a program, který tě inspiroval.
+  text6: 'Další informace o podmínkách použití on-line komunity Catrobat nalezneš na %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: sdílej své dortíky spolu s receptem
+    item2: cituj ty, kteří tě inspirovali
+  version: Verze 1.1, 2. dubna 2013
 teachers:
   login:
     title: 'Teachers area'
@@ -160,7 +167,7 @@ termsOfUse:
     item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
     item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
   list3:
-    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
+    item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
@@ -179,13 +186,10 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 help:
   stepByStep:
-    title: "Step-by-Step Intro"
+    title: "Úvod krok za krokem"
     start: "Starting position:"
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      Zde si vytvoříš s použitím následujících instrukčních videí svůj první program - interaktivní pohlednici. Postupuj podle pokynů. Při vytváření pohlednice ti ukážeme základy Pocket Code, které budeš potřebovat pro své budoucí projekty. Po těchto tutoriálech si budeš schopen vytvářet svoje vlastní projekty v Pocket Code.
     step1:
       title: 'Make a new program'
       detail:
@@ -220,7 +224,7 @@ help:
         text5: 'Now you have to select the new image.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Vyslovit"
+      title: "Mluvení"
       description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
@@ -273,83 +277,83 @@ help:
         text6: 'Upload the program that is currently opened.'
   tutorialcards:
     title: "Tutoriál"
-    description1: "These tutorials show you how to use effective tricks in Pocket Code."
+    description1: "Tyto tutoriály ti ukážou, jak používat účinné triky v Pocket Code."
     getReady: "Get Ready:"
     tryCode: "Try this code:"
     doIt: "Do it:"
     tip: "Extra Tip:"
     card1:
-      title: "Change Size"
-      description: "Change the size of an object."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      title: "Změnit velikost"
+      description: "Změň velikost objektu."
+      one: "Vlož objekt, kterého chceš změnit velikost, např. Animal."
+      two: "Vlož následující kostky do skriptů objektu, abys ho zmenšil (na 20 % původní velikosti) po poklepání."
     card2:
-      title: "Change Look"
-      description: "Change the looks of an object."
-      one: "Add the object of which you would like to change its look, e.g. items."
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      title: "Změna vzhledu"
+      description: "Změň vzhled objektu."
+      one: "Vlož objekt, kterému chceš změnit vzhled, např. items."
+      two: "Vlož další obrázky do vzhledu objektu."
+      three: "Vlož následující kostky do skriptů objektu, aby neustále měnil svůj vzhled po jedné sekundě."
     card3:
-      title: "Animation"
-      description: "Animate objects"
-      one: "Add the object you want to be moving."
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      title: "Animace"
+      description: "Animace objektů"
+      one: "Přidej objekt, který chceš, aby se pohyboval."
+      two: "Vlož další obrázek, který bude představovat pohyb, do vzhledu objektu."
+      three: "Vlož následující kostky do skriptů objektu, abys neustále měnil polohu objektu po určité době. Navíc můžeš zajistit, aby se odrážel po dotyku okraje obrazovky."
     card4:
       title: "Hýbat"
-      description: "Let your object glide over the screen."
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
+      description: "Nech svůj objekt proplouvat obrazovkou."
+      one: "Přidej objekt, který chceš, aby se pohyboval na obrazovce, např. plane."
+      two: "Vlož následující kostky a urči oblast, v které by se měl objekt pohybovat."
     card5:
-      title: "Play a Sound"
-      description: "Play a sound by tapping on the object."
-      one: "Add the object you want to be playing a sound, e.g. dog."
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+      title: "Přehrát zvuk"
+      description: "Přehraj zvuk klepnutím na objekt."
+      one: "Přidej objekt, který chceš, aby přehrál zvuk."
+      two: "Vlož následující kostky, abys přehrál zvuk. Vyber zvuk ze své knihovny, knihovny médií Pocket Code nebo nahraj vlastní zvuk."
     card6:
-      title: "Vyslovit"
-      description: "Let your object speak."
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
+      title: "Mluvení"
+      description: "Nech svůj objekt promluvit."
+      one: "Přidej objekt, který chceš, aby mluvil, např. Carrie."
+      two: "Vlož následující kostky, abys mohl spustit zvuk."
     card7:
-      title: "Sensor"
-      description: "Control an object by using the inclination sensors."
-      one: "Add the object you want to be moving on stage."
-      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
+      title: "Senzory"
+      description: "Ovládej objekt pomocí senzoru náklonu."
+      one: "Přidej objekt, který chceš, aby se pohyboval na obrazovce."
+      two: "Vlož následující kostky, abys ovládal objekt pomocí senzorů tvého telefonu. Proto vyber \"sklon_x\" a \"sklon_y\". Abys posunul objektem o náklon telefonu, přidej \"-sklon_x\" a \"-sklon_y\" k souřadnicím objektu. Jestliže je pohyb objektu příliš citlivý na náklon, vyděl sklon například 10."
     card8:
-      title: "Compass"
-      description: "Create you own compass"
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      title: "Kompas"
+      description: "Vytvoř si svůj vlastní kompas"
+      one: "Přidej objekt, který bude znázorňovat střelku kompasu."
+      two: "Vlož následující kostky, abys nastavil orientaci objektu. Poté vlož nekonečnou smyčku."
     card9:
-      title: "Vysílat"
-      description: "Send messages from one object to another."
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
+      title: "Přenos zpráv"
+      description: "Posílej zprávy z jednoho objektu do druhého."
+      one: "Přidej nový objekt, např. Alice, který by měl vyslat zprávu. Potom přidej druhé pozadí ke vzhledu pozadí. Jakmile toto pozadí příjme vyslanou zprávu, změní svůj vzhled."
+      two: "Přidej kostku \"Vysílat\" a urči, co by se mělo stát, když ten druhý objekt příjme zprávu."
+      three: "V tomto případě se pozadí změní, když klepneš na objekt v přední vrstvě."
     card10:
-      title: "Show variable"
-      description: "Show the value of a variable."
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
+      title: "Zobrazit proměnnou"
+      description: "Zobraz hodnotu proměnné."
+      one: "Přidej objekt, který chceš, aby se pohyboval pomocí senzorů tvého telefonu (podívej se na %tutorial_card_link_7% Tutoriál č. 7 %link_end%). Poté přidej druhé pozadí, na které by se mělo změnit, když příjme vyslanou zprávu."
+      two: "Vlož následující kostky, aby se aktuální pozice x a y pohybujícího se objektu vložily do proměnných."
+      three: "Pomocí \"Show variable\" můžeš zobrazit hodnoty proměnných na obrazovce."
     card11:
-      title: "Collision detection"
-      description: "Detect a collision between two objects."
-      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+      title: "Detekce srážky"
+      description: "Detekuj srážku dvou objektů."
+      one: "Přidej dva objekty, z nichž jeden, např. Alex, by se měl pohybovat pomocí senzorů telefonu. (podívej se na %tutorial_card_link_7% Tutoriál č.7 %link_end%)."
+      two: "Ulož aktuální pozici x a y pohybujícího se objektu Alex (podívej se na %tutorial_card_link_10% Tutoriál č. 10 %link_end%) a vlož následující skripty. Sleduj, až se objekty začnou překrývat. V tomto případě by měl nepohyblivý objekt zmizet."
     card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
+      title: "Rozpoznávání tváře"
+      description: "Ovládání objektu pomocí funkce rozpoznávání tváře."
+      one: "Nejprve se v Nastavení ujisti, že je funkce detekce obličeje zapnutá."
+      two: "Přidej nový objekt a vlož následující kostky, aby se po rozeznání tváře tento objekt ukázal. Přidej funkci rozpoznávání tváře do nekonečné smyčky. Pokud kamera rozpozná obličej, hodnota proměnné je \"TRUE\", jinak je \"FALSE\"."
   starterPrograms:
-    title: "Starter Programs"
-    description: "Try out these starter programs. Look inside to make changes and add your ideas."
+    title: "Jednoduché programy"
+    description: "Vyzkoušej si tyto jednoduché programy. Rozklikni si je, abys je mohl změnit a přidat své nápady."
     categories:
-      games: "Games"
-      animations: "Animations"
-      interactive: "Interactive Art and Stories"
-      music: "Music And Dance"
+      games: "Hry"
+      animations: "Animace"
+      interactive: "Interaktivní umění a příběhy"
+      music: "Hudba a tanec"
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
@@ -370,13 +374,13 @@ help:
     text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
     text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
     text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
+    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
     text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
     text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
     text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
   aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
-    subtitle1: "Animate Characters and create a 'when tapped' event"
+    title1: "Vítej ve světě pohádek"
+    subtitle1: "Animuj postavičky a ovládej je poklepnutím"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
@@ -404,13 +408,16 @@ oauth:
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
-  dotdotdot: Search...
-  search: Search
-  results: Search Results
-  resultcount: Your search returned %count% results
+  dotdotdot: Hledat...
+  search: Hledat
+  results: Výsledky vyhledávání
+  resultcount: Bylo nalezeno %count% výsledků
+  fail: Please enter at least a single search term
 menu:
-  profile: My Profile
-  logout: Logout
+  profile: Můj profil
+  login: Přihlásit se
+  logout: Odhlásit se
+  admin: Admin
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -446,7 +453,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Tato e-mailová adresa je již zaregistrována.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
@@ -477,11 +484,11 @@ success:
   upload: Your project was uploaded successfully!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: 'Před {0} < 1 minutou |Před {1}1 |] 1, Inf] %count% min'
+  hours.ago: 'Před {1}1 hodinou|] 1, Inf] %count% hodinami'
+  days.ago: 'Před {1}1 dnem |]1,Inf] %count% dny'
+  months.ago: 'Před {1}1 měsícem |]1,Inf] %count% měsíci'
+  years.ago: 'Před {1}1 rokem |] 1, Inf] více než 1 rokem'
 failure:
   upload: There was an error during the upload of your app.
 language:
@@ -548,7 +555,7 @@ extenstion-text: Extensions
 tags:
   constant:
     tag1: Game
-    tag2: Animation
+    tag2: Animace
     tag3: Story
     tag4: Music
     tag5: Art
@@ -566,7 +573,7 @@ admin:
     createBackupConfirmationTitle: Create backup file
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
-  similarPrograms: Similar programs
+  similarPrograms: Podobné programy
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
 pmd:
   submitBtn: Submit your project
@@ -579,22 +586,45 @@ pmd:
   failed:
     text: Program upload failed.
 codeview:
-  showText: Show code
+  showText: Zobrazit zdrojový kód
 footer:
-  usefulLinks: Useful Links
-  legalities: Legalities
-  communityStats: Community Stats
-  downloads: downloads
-  programs: programs
-  downloads_count: '624,589'
-  programs_count: '36,738'
+  usefulLinks: Užitečné odkazy
+  legalities: Právní věci
+  communityStats: Statistika webu
+  downloads: stažení
+  programs: programů
 privacy-policy:
-  version: Version 2.0, 20 September 2017
-  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
-  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
-  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
-  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
-  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
-  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).
+  header: Ochrana soukromí
+  version: Version 2.1, 25 June 2018
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  comment:
+    title: New comment for program %program_name%!
+    messagePart1: User
+    messagePart2: commented on your program
+clipboard:
+  success: Link to program copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: Další
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: Tutoriál
+    stepbystep: Step by Step
+    getinvolved: Get involved
+  text:
+    starters: Try out and remix with
+    tutorials: Effective tricks in
+    stepbystep: Do 10 easy steps in
+    getinvolved_1: Stáhnout
+    getinvolved_2: now from Google Play and get started!

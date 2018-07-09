@@ -36,8 +36,13 @@ indexPage:
   recommendedSection:
     info:
       title: 'Que programas são recomendados aqui?'
-      description_C_VersionTest: 'Quanto mais Gostos (incluindo «Polegares para cima», «Riso», «Amor» e «Uau!») o seu programa receber, mais perto do topo surgirá nesta lista.'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
+  welcome:
+    title: Welcome to Catrobat's Pocket Code
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More Statistics
   featured: Em Destaque
   newest: Programas mais recentes
   recommended: Programas recomendados
@@ -136,6 +141,8 @@ myprofile:
   editPassword: Alterar senha
   editCountry: Alterar país
   editEmail: Alterar E-Mail
+  deleteAccount: Delete Account
+  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
 licenseToPlay:
   link: 'Licença para jogar'
   title: 'Licença para jogar - Dê crédito e compartilhe'
@@ -172,7 +179,7 @@ termsOfUse:
     item4: "Mantenha privadas suas informações pessoais. Não compartilhe seu endereço de e-mail, número de telefone ou outras informações de contato pessoais."
     item5: "Ajude a manter o site amigável. Se você sentir que outros achariam um programa ou comentário vil, muito violento, ofensivo ou impróprio, clique no botão 'denunciar como impróprio' e deixe uma breve explicação. A equipe do Catrobat checará sua denúncia e poderá remover o programa, comentário ou post."
   list3:
-    item1: 'Ao fazer o upload de um programa para o nosso website, você aceita e concorda em por este trabalho sob certas licenças gratuitas de programas do Catrobat. Estas licenças, à semelhança das licenças gratuitas sob as quais o sistema Catrobat está disponível para você, dão a todos o direito de aprender com os trabalhos já carregados por outros usuários, e de adaptar e ''remixar'' esses trabalhos para criar seus próprios jogos, animações e outros programas. Isso permite que trabalhemos ''um por todos e todos por um''! Assim, seu trabalho beneficiará todo o mundo e continuará gratuito para uso, da mesma forma que textos e imagens que são disponibilizados por voluntários no Wikipédia, por exemplo. Pense que este é seu presente à humanidade: você doa à comunidade e todos os que carregarem seus trabalhos para nosso website doam a você. Logo, um programa, uma vez carregado, é um presente de grande valor que o dono dá, de graça, a você, com a condição de que você participe da comunidade nos mesmos termos.'
+    item1: "Ao fazer o upload de um programa para o nosso website, você aceita e concorda em por este trabalho sob certas licenças gratuitas de programas do Catrobat. Estas licenças, à semelhança das licenças gratuitas sob as quais o sistema Catrobat está disponível para você, dão a todos o direito de aprender com os trabalhos já carregados por outros usuários, e de adaptar e 'remixar' esses trabalhos para criar seus próprios jogos, animações e outros programas. Isso permite que trabalhemos 'um por todos e todos por um'! Assim, seu trabalho beneficiará todo o mundo e continuará gratuito para uso, da mesma forma que textos e imagens que são disponibilizados por voluntários no Wikipédia, por exemplo. Pense que este é seu presente à humanidade: você doa à comunidade e todos os que carregarem seus trabalhos para nosso website doam a você. Logo, um programa, uma vez carregado, é um presente de grande valor que o dono dá, de graça, a você, com a condição de que você participe da comunidade nos mesmos termos."
     item2: Você não precisa aceitar o presente. Se decidir por aceitá-lo, há algumas regras que se aplicam. Um dos benefícios dessas regras é a possibilidade de aprender com esse trabalho e usá-lo como base para criar coisas ainda mais legais, que você pode, por exemplo, carregar novamente ao nosso website, mas agora como seu programa. Um outro benefício é que essas licenças garantem que você não será responsabilizado por qualquer problema que surja decorrente do uso de seu programa por outros.
     item3: "Uma condição adicional importante é de que você dê crédito aos autores em cujos trabalhos você se baseou para criar o seu. Ao mesmo tempo, trabalharemos pesado para que seu trabalho seja igualmente apreciado por aqueles que utilizaram-no como base, por meio de crédito ao nome escolhido, livremente, por você para te representar na comunidade Catrobat; e, também, por meio da oportunidade dada aos outros de expressar gratidão a você publicamente por ter partilhado seu trabalho com a comunidade e, principalmente, com eles."
     item4: 'Por favor, consulte %link-licenseUploaded% para termos e condições legais precisos.'
@@ -382,7 +389,7 @@ help:
     text7_1: "Antes que você possa publicar seu jogo, siga os passos a seguir. Você precisa adicionar ao menos uma 'imagem em miniatura', definir uma 'classificação indicativa' e fazer o upload de seus jogos clicando em 'construir/arquivos'."
     text7_2: "Clique em 'Adicionar Pacote' e preencha as informações do pacote. Salve-o e adicione a release. "
     text7_3: "Agora você pode fazer o upload do apk do seu programa. Você pode encontrar o app baixado em sua pasta de download. É bom usar um gerenciador de arquivos (por exemplo, ES File Explorer)."
-    text7_4: 'Nota: Se o app não contiver a terminação ''.apk'', você terá que adicionar ''.apk'' manualmente. É só renomear o arquivo. Agora você deve conseguir fazer o upload do app.'
+    text7_4: "Nota: Se o app não contiver a terminação '.apk', você terá que adicionar '.apk' manualmente. É só renomear o arquivo. Agora você deve conseguir fazer o upload do app."
     text7_5: "Após o upload, clique em 'OK' para publicar seu jogo. Fazendo isto, logo será mostrado um link para baixar seu jogo."
     text7_6: "Você fez o upload de seu primeiro jogo no site do Game Jolt e o definiu como ativo. Parabéns!"
     text7_7: "Outras pessoas agora serão capazes de encontrar o seu jogo. Ele aparecerá na página %link%."
@@ -420,9 +427,12 @@ search:
   search: Pesquisar
   results: Resultados da Busca
   resultcount: Sua busca retornou %count% resultados
+  fail: Please enter at least a single search term
 menu:
   profile: Meu Perfil
+  login: Login
   logout: Encerrar Sessão
+  admin: Admin
 programLoader:
   noPrograms: Não há, atualmente, nenhum programa.
 login:
@@ -598,15 +608,38 @@ footer:
   communityStats: Community Stats
   downloads: downloads
   programs: programs
-  downloads_count: '624,589'
-  programs_count: '36,738'
 privacy-policy:
-  version: Version 2.0, 20 September 2017
-  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
-  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
-  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
-  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
-  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
-  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).
+  header: Política de Privacidade
+  version: Version 2.1, 25 June 2018
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  comment:
+    title: New comment for program %program_name%!
+    messagePart1: User
+    messagePart2: commented on your program
+clipboard:
+  success: Link to program copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: Next
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: Tutoriais
+    stepbystep: Step by Step
+    getinvolved: Get involved
+  text:
+    starters: Try out and remix with
+    tutorials: Effective tricks in
+    stepbystep: Do 10 easy steps in
+    getinvolved_1: Baixar
+    getinvolved_2: now from Google Play and get started!
