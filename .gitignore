@@ -28,3 +28,4 @@ Catroweb-Symfony.iml
 .idea/vcs.xml
 /node_modules/
 .project
+crowdin.yml
