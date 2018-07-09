@@ -58,9 +58,9 @@ Feature: A/B testing for recommendation system & remix graph
   @rec2
   Scenario: User with selected russian language sees the recommended programs that have been downloaded by other users on program page
     Given there are program download statistics:
-      | id | program_id | downloaded_at        | ip             | latitude      |  longitude  | country_code  | country_name | street              | postal_code      |  locality   | user_agent | username  | referrer |
-      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | OtherUser | Facebook |
-      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | OtherUser | Facebook |
+      | id | program_id | downloaded_at        | ip             |  country_code  | country_name | user_agent | username  | referrer |
+      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 |  AT            | Austria      | okhttp     | OtherUser | Facebook |
+      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 |  AT            | Austria      | okhttp     | OtherUser | Facebook |
 
     And I am on "/pocketcode/program/1"
     When the selected language is "English"

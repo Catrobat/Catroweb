@@ -136,18 +136,12 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
             @$config = array(
                 'downloaded_at' => $program_stats[$i]['downloaded_at'],
                 'ip' => $program_stats[$i]['ip'],
-                'latitude' => $program_stats[$i]['latitude'],
-                'longitude' => $program_stats[$i]['longitude'],
                 'country_code' => $program_stats[$i]['country_code'],
                 'country_name' => $program_stats[$i]['country_name'],
-                'street' => $program_stats[$i]['street'],
-                'postal_code' => @$program_stats[$i]['postal_code'],
-                'locality' => @$program_stats[$i]['locality'],
                 'user_agent' => @$program_stats[$i]['user_agent'],
                 'username' => @$program_stats[$i]['username'],
                 'referrer' => @$program_stats[$i]['referrer'],
             );
-
             $this->insertProgramDownloadStatistics($program, $config);
         }
     }
@@ -258,13 +252,8 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
             $this->theResponseShouldContain($program_stats[$i]['id']);
             $this->theResponseShouldContain($program_stats[$i]['downloaded_at']);
             $this->theResponseShouldContain($program_stats[$i]['ip']);
-            $this->theResponseShouldContain($program_stats[$i]['latitude']);
-            $this->theResponseShouldContain($program_stats[$i]['longitude']);
             $this->theResponseShouldContain($program_stats[$i]['country_code']);
             $this->theResponseShouldContain($program_stats[$i]['country_name']);
-            $this->theResponseShouldContain($program_stats[$i]['street']);
-            $this->theResponseShouldContain($program_stats[$i]['postal_code']);
-            $this->theResponseShouldContain($program_stats[$i]['locality']);
             $this->theResponseShouldContain($program_stats[$i]['user_agent']);
             $this->theResponseShouldContain($program_stats[$i]['user']);
             $this->theResponseShouldContain($program_stats[$i]['referrer']);

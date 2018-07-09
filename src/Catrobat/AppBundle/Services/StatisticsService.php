@@ -73,8 +73,6 @@ class StatisticsService
         $program_download_statistic->setReferrer($referrer);
         $program_download_statistic->setDownloadedAt(new \DateTime());
         $program_download_statistic->setIp($ip);
-        $program_download_statistic->setLatitude($latitude);
-        $program_download_statistic->setLongitude($longitude);
         $program_download_statistic->setCountryCode($country_code);
         $program_download_statistic->setCountryName($country_name);
         $program_download_statistic->setLocale($locale);
@@ -101,7 +99,6 @@ class StatisticsService
             $program->addProgramDownloads($program_download_statistic);
             $this->entity_manager->persist($program);
             $this->entity_manager->flush();
-            $this->addGoogleMapsGeocodeData($latitude, $longitude, $program_download_statistic);
         } catch (\Exception $e) {
             $this->logger->addError($e->getMessage());
             return false;
@@ -138,13 +135,10 @@ class StatisticsService
 
         $result = $results->first();
 
-        $latitude = $result->getLatitude();
-        $longitude = $result->getLongitude();
         $country_code = $result->getCountry()->getCode();
         $country_name = $result->getCountry()->getName();
 
-        $this->logger->addDebug('Received geocoded data - latitude: ' . $latitude . ', longitude: ' . $longitude .
-            ', country code: ' . $country_code . ', country name: ' . $country_name);
+        $this->logger->addDebug('Received geocoded data - , country code: ' . $country_code . ', country name: ' . $country_name);
 
         if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph'])) {
             $click_statistics = new ClickStatistic();
@@ -154,8 +148,6 @@ class StatisticsService
             $click_statistics->setReferrer($referrer);
             $click_statistics->setClickedAt(new \DateTime());
             $click_statistics->setIp($ip);
-            $click_statistics->setLatitude($latitude);
-            $click_statistics->setLongitude($longitude);
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
             $click_statistics->setLocale($locale);
@@ -175,8 +167,6 @@ class StatisticsService
             $this->entity_manager->persist($click_statistics);
             $this->entity_manager->flush();
 
-            $this->addGoogleMapsGeocodeData($latitude, $longitude, $click_statistics);
-
         } else if ($type == "tags") {
 
             $tag_repo = $this->entity_manager->getRepository("\Catrobat\AppBundle\Entity\Tag");
@@ -190,8 +180,6 @@ class StatisticsService
             $click_statistics->setReferrer($referrer);
             $click_statistics->setClickedAt(new \DateTime());
             $click_statistics->setIp($ip);
-            $click_statistics->setLatitude($latitude);
-            $click_statistics->setLongitude($longitude);
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
             $click_statistics->setLocale($locale);
@@ -199,7 +187,6 @@ class StatisticsService
             $this->entity_manager->persist($click_statistics);
             $this->entity_manager->flush();
 
-            $this->addGoogleMapsGeocodeData($latitude, $longitude, $click_statistics);
 
         } else if ($type == "extensions") {
 
@@ -219,16 +206,12 @@ class StatisticsService
             $click_statistics->setReferrer($referrer);
             $click_statistics->setClickedAt(new \DateTime());
             $click_statistics->setIp($ip);
-            $click_statistics->setLatitude($latitude);
-            $click_statistics->setLongitude($longitude);
             $click_statistics->setCountryCode($country_code);
             $click_statistics->setCountryName($country_name);
             $click_statistics->setLocale($locale);
 
             $this->entity_manager->persist($click_statistics);
             $this->entity_manager->flush();
-
-            $this->addGoogleMapsGeocodeData($latitude, $longitude, $click_statistics);
         }
 
         return true;
@@ -286,34 +269,5 @@ class StatisticsService
             $ip = substr($ip,0,strpos($ip,','));
         }
         return $ip;
-    }
-
-    private function addGoogleMapsGeocodeData($latitude, $longitude, $some_statistic) {
-
-        $results_google = $this->geocoder
-            ->using('google_maps')
-            ->reverse($latitude, $longitude);
-
-        try {
-            $result = $results_google->first();
-
-        } catch (CollectionIsEmpty $collectionIsEmpty) {
-            return;
-        }
-
-        $street = $result->getStreetName() . ' ' . $result->getStreetNumber();
-        $postal_code = $result->getPostalCode();
-        $locality = $result->getLocality();
-
-        $this->logger->addDebug('Received Google Maps data - street: ' . $street . ', postal code: ' . $postal_code .
-            ', locality: ' . $locality);
-
-        $some_statistic->setStreet($street);
-        $some_statistic->setPostalCode($postal_code);
-        $some_statistic->setLocality($locality);
-
-        $this->entity_manager->persist($some_statistic);
-        $this->entity_manager->flush();
-
     }
 }
