@@ -11,7 +11,6 @@ class CreateUserRequest
     {
         $this->username = $request->request->get('registrationUsername');
         $this->password = $request->request->get('registrationPassword');
-        $this->country = strtoupper($request->request->get('registrationCountry'));
         $this->mail = $request->request->get('registrationEmail');
     }
 
@@ -32,10 +31,4 @@ class CreateUserRequest
    * @Assert\Length(min = "6", minMessage = "errors.password.short")
    */
   public $password;
-
-  /**
-   * @Assert\NotBlank(message = "errors.country.blank")
-   * @Assert\Country(message = "errors.country.invalid")
-   */
-  public $country;
 }

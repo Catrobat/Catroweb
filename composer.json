@@ -45,7 +45,8 @@
         "liip/theme-bundle": "dev-master",
         "willdurand/geocoder-bundle": "@stable",
         "eightpoints/guzzle-bundle": "^5.1",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "zircote/swagger-php": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",

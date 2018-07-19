@@ -5,6 +5,7 @@ namespace Catrobat\AppBundle;
 class StatusCode
 {
   const OK = 200;
+  const CREATED = 201;
   const INTERNAL_SERVER_ERROR = 500;
   const MISSING_POST_DATA = 501;
   const UPLOAD_EXCEEDING_FILESIZE = 502;

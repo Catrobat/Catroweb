@@ -1,0 +1,63 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Security API",
+        "version": "1.0"
+    },
+    "host": "share.catrob.at",
+    "paths": {
+        "/api/register/Register.json": {
+            "post": {
+                "summary": "Register a native user",
+                "operationId": "registerNativeUser",
+                "parameters": [
+                    {
+                        "name": "registrationUsername",
+                        "in": "header",
+                        "description": "The name of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "registrationEmail",
+                        "in": "header",
+                        "description": "The email of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "registrationPassword",
+                        "in": "header",
+                        "description": "The password of the user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "601": {
+                        "description": "The password or username was incorrect."
+                    },
+                    "602": {
+                        "description": "The password is missing."
+                    },
+                    "753": {
+                        "description": "Your password must have at least 6 characters."
+                    },
+                    "765": {
+                        "description": "Your email seems to be invalid"
+                    },
+                    "757": {
+                        "description": "This email address already exists."
+                    },
+                    "777": {
+                        "description": "This username already exists."
+                    },
+                    "201": {
+                        "description": "Registration successful!"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
