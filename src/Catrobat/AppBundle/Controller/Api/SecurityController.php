@@ -20,19 +20,21 @@ use Catrobat\AppBundle\Requests\CreateOAuthUserRequest;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Catrobat\AppBundle\Security\UserAuthenticator;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-
+use Swagger\Annotations as SWG;
 
 /**
  * Class SecurityController
  * @package Catrobat\AppBundle\Controller\Api
  *
  * @SWG\Swagger(
- *   host="share.catrob.at"
+ *   host="share.catrob.at",
+ *   basePath="/pocketcode",
+ *   schemes={"https"}
  *   )
  *
  * @SWG\Info(
  *   title="Security API",
- *   version="1.0"
+ *   version="1.0",
  * )
  */
 class SecurityController extends Controller
@@ -40,6 +42,16 @@ class SecurityController extends Controller
   /**
    * @Route("/api/checkToken/check.json", name="catrobat_api_check_token", defaults={"_format": "json"})
    * @Method({"POST"})
+   *
+   * @SWG\Post(
+   *   path="/api/checkToken/check.json",
+   *   summary="Check a token",
+   *   @SWG\Response(
+   *      response=200,
+   *      description="ok"
+   * )
+   * )
+   * TODO: Why the fuck does this exist??
    */
   public function checkTokenAction()
   {
@@ -146,21 +158,21 @@ class SecurityController extends Controller
    *   operationId="registerNativeUser",
    *   @SWG\Parameter(
    *    name="registrationUsername",
-   *    in="header",
+   *    in="formData",
    *    description="The name of the user.",
    *    required=true,
    *    type="string"
    *   ),
    *   @SWG\Parameter(
    *    name="registrationEmail",
-   *    in="header",
+   *    in="formData",
    *    description="The email of the user.",
    *    required=true,
    *    type="string"
    *   ),
    *   @SWG\Parameter(
    *    name="registrationPassword",
-   *    in="header",
+   *    in="formData",
    *    description="The password of the user.",
    *    required=true,
    *    type="string"
@@ -264,6 +276,50 @@ class SecurityController extends Controller
   /**
    * @Route("/api/login/Login.json", name="catrobat_api_login", options={"expose"=true}, defaults={"_format": "json"})
    * @Method({"POST"})
+   *
+   * @SWG\Post(
+   *   path="/api/login/Login.json",
+   *   summary="Login a native user",
+   *   operationId="loginNativeUser",
+   *   @SWG\Parameter(
+   *    name="loginUsername",
+   *    in="formData",
+   *    description="The name of the user.",
+   *    required=true,
+   *    type="string"
+   *   ),
+   *   @SWG\Parameter(
+   *    name="loginPassword",
+   *    in="formData",
+   *    description="The password of the user.",
+   *    required=true,
+   *    type="string"
+   *   ),
+   * @SWG\Response(
+   *    response=601,
+   *    description="The password or username was incorrect.",
+   *   ),
+   * @SWG\Response(
+   *    response=751,
+   *    description="The password is missing.",
+   *   ),
+   * @SWG\Response(
+   *    response=762,
+   *    description="Username must not be blank",
+   *   ),
+   * @SWG\Response(
+   *    response=753,
+   *    description="Your password must have at least 6 characters."
+   *   ),
+   * @SWG\Response(
+   *    response=200,
+   *    description="OK"
+   *   ),
+   * @SWG\Response(
+   *    response=764,
+   *    description="This username does not exist."
+   *   ),
+   * )
    */
   public function loginNativeUser(Request $request)
   {
@@ -284,11 +340,11 @@ class SecurityController extends Controller
       $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
       switch ($violation->getMessageTemplate())
       {
-        case 'errors.password.short':
-          $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+        case 'errors.password.blank':
+          $retArray['statusCode'] = StatusCode::USER_PASSWORD_MISSING;
           break;
-        case 'errors.email.invalid':
-          $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+        case 'errors.username.blank':
+          $retArray['statusCode'] = StatusCode::USER_USERNAME_MISSING;
           break;
       }
       $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
@@ -304,8 +360,8 @@ class SecurityController extends Controller
 
     if (count($violations) == 0)
     {
-      $username = $request->request->get('registrationUsername');
-      $password = $request->request->get('registrationPassword');
+      $username = $request->request->get('loginUsername');
+      $password = $request->request->get('loginPassword');
 
       $user = $userManager->findUserByUsername($username);
 

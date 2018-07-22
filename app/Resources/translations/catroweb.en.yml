@@ -469,7 +469,7 @@ apk:
   text: 'The process may take a while'
 
 #api
-#API strings MUST also be updated in their corresponding controllers
+#API strings MUST also be updated in their corresponding controllers annotations
 errors:
   username:
     blank: Username must not be blank

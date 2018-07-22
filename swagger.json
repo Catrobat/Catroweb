@@ -5,7 +5,21 @@
         "version": "1.0"
     },
     "host": "share.catrob.at",
+    "basePath": "/pocketcode",
+    "schemes": [
+        "https"
+    ],
     "paths": {
+        "/api/checkToken/check.json": {
+            "post": {
+                "summary": "Check a token",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
+        },
         "/api/register/Register.json": {
             "post": {
                 "summary": "Register a native user",
@@ -13,21 +27,21 @@
                 "parameters": [
                     {
                         "name": "registrationUsername",
-                        "in": "header",
+                        "in": "formData",
                         "description": "The name of the user.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "registrationEmail",
-                        "in": "header",
+                        "in": "formData",
                         "description": "The email of the user.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "registrationPassword",
-                        "in": "header",
+                        "in": "formData",
                         "description": "The password of the user.",
                         "required": true,
                         "type": "string"
@@ -54,6 +68,48 @@
                     },
                     "201": {
                         "description": "Registration successful!"
+                    }
+                }
+            }
+        },
+        "/api/login/Login.json": {
+            "post": {
+                "summary": "Login a native user",
+                "operationId": "loginNativeUser",
+                "parameters": [
+                    {
+                        "name": "loginUsername",
+                        "in": "formData",
+                        "description": "The name of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "loginPassword",
+                        "in": "formData",
+                        "description": "The password of the user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "601": {
+                        "description": "The password or username was incorrect."
+                    },
+                    "751": {
+                        "description": "The password is missing."
+                    },
+                    "762": {
+                        "description": "Username must not be blank"
+                    },
+                    "753": {
+                        "description": "Your password must have at least 6 characters."
+                    },
+                    "200": {
+                        "description": "OK"
+                    },
+                    "764": {
+                        "description": "This username does not exist."
                     }
                 }
             }
