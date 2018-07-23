@@ -63,7 +63,7 @@ class StatusCode
   const USER_NAME_IS_EMAIL_ADDRESS = 775;
   const USER_AVATAR_UPLOAD_ERROR = 776;
   const USER_ADD_USERNAME_EXISTS = 777;
-
+  const USER_EMAIL_MISSING = 778;
   const NO_GAME_JAM = 900;
 
   const FB_POST_ERROR = 790;

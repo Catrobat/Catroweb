@@ -199,7 +199,7 @@ class SecurityController extends Controller
    *    description="The password or username was incorrect.",
    *   ),
    * @SWG\Response(
-   *    response=602,
+   *    response=751,
    *    description="The password is missing."
    *   ),
    * @SWG\Response(
@@ -211,12 +211,24 @@ class SecurityController extends Controller
    *    description="Your email seems to be invalid"
    *   ),
    * @SWG\Response(
+   *    response=778,
+   *    description="Email must not be blank!"
+   *   ),
+   * @SWG\Response(
    *    response=757,
    *    description="This email address already exists."
    *   ),
    * @SWG\Response(
    *    response=777,
    *    description="This username already exists."
+   *   ),
+   * @SWG\Response(
+   *    response=762,
+   *    description="Username must not be blank",
+   *   ),
+   * @SWG\Response(
+   *    response=763,
+   *    description="The username is invalid.",
    *   ),
    * @SWG\Response(
    *    response=201,
@@ -243,8 +255,20 @@ class SecurityController extends Controller
       $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
       switch ($violation->getMessageTemplate())
       {
+        case 'errors.username.blank':
+          $retArray['statusCode'] = StatusCode::USER_USERNAME_MISSING;
+          break;
+        case 'errors.username.invalid':
+          $retArray['statusCode'] = StatusCode::USER_USERNAME_INVALID;
+          break;
+        case 'errors.password.blank':
+          $retArray['statusCode'] = StatusCode::USER_PASSWORD_MISSING;
+          break;
         case 'errors.password.short':
           $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+          break;
+        case 'errors.email.blank':
+          $retArray['statusCode'] = StatusCode::USER_EMAIL_MISSING;
           break;
         case 'errors.email.invalid':
           $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
@@ -276,7 +300,6 @@ class SecurityController extends Controller
           $user->setPlainPassword($create_request->password);
           $user->setEnabled(true);
           $user->setUploadToken($tokenGenerator->generateToken());
-          $user->setCountry($create_request->country);
 
           $userManager->updateUser($user);
           $retArray['statusCode'] = StatusCode::CREATED;

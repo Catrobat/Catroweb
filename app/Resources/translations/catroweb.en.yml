@@ -472,8 +472,8 @@ apk:
 #API strings MUST also be updated in their corresponding controllers annotations
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
+    blank: Username must not be blank.
+    invalid: Your username is invalid.
     exists: This username already exists.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
@@ -486,8 +486,8 @@ errors:
     blank: The country is missing.
     invalid: Invalid country
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: Email must not be blank!
+    invalid: Your email seems to be invalid.
     exists: This email address already exists.
   id:
     blank: Open Authentication ID must not be blank
