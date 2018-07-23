@@ -12,20 +12,15 @@ Feature: Checking a user's token validity
       | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
 
-  Scenario Outline: Checking the current token
-    Given I have a parameter "username" with value "<username>"
-    And I have a parameter "token" with value "<token>"
+  Scenario: Checking the current token
+    Given I have a parameter "username" with value "Catrobat"
+    And I have a parameter "token" with value "cccccccccc"
     When I POST these parameters to "/pocketcode/api/checkToken/check.json"
     Then I should get the json object:
       """
       {"statusCode":200,"answer":"ok","preHeaderMessages":"  \n"}
       """
     And the response code should be "200"
-    
-    Examples:
-      | username | token      |
-      | Catrobat | cccccccccc |
-      | User1    | aaaaaaaaaa |
 
   Scenario: Checking an invalid token
     Given I have a parameter "username" with value "Catrobat"

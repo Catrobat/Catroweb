@@ -45,13 +45,30 @@ class SecurityController extends Controller
    *
    * @SWG\Post(
    *   path="/api/checkToken/check.json",
-   *   summary="Check a token",
+   *   summary="Check if a token of a user is still valid",
+   *   @SWG\Parameter(
+   *    name="username",
+   *    in="formData",
+   *    description="The name of the user.",
+   *    required=true,
+   *    type="string"
+   *   ),
+   *   @SWG\Parameter(
+   *    name="token",
+   *    in="formData",
+   *    description="The token of the user.",
+   *    required=true,
+   *    type="string"
+   *   ),
    *   @SWG\Response(
    *      response=200,
    *      description="ok"
+   *   ),
+   *   @SWG\Response(
+   *      response=601,
+   *      description="Authentication of device failed: invalid auth-token!"
+   *   )
    * )
-   * )
-   * TODO: Why the fuck does this exist??
    */
   public function checkTokenAction()
   {

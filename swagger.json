@@ -12,10 +12,29 @@
     "paths": {
         "/api/checkToken/check.json": {
             "post": {
-                "summary": "Check a token",
+                "summary": "Check if a token of a user is still valid",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "The name of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "token",
+                        "in": "formData",
+                        "description": "The token of the user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "ok"
+                    },
+                    "601": {
+                        "description": "Authentication of device failed: invalid auth-token!"
                     }
                 }
             }
