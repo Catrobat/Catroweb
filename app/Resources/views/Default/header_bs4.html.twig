@@ -6,19 +6,21 @@
              alt="Pocket Code Logo"
         />
       </a>
-      <a class="navbar-brand mt-1" href="{{ path('index') }}">Home</a>
+      <a id="page-name" class="navbar-brand mt-1" href="{{ path('index') }}">Home</a>
     </div>
 
-    <div class="d-inline-flex ml-auto align-items-center">
+    <div class="d-inline-flex ml-auto align-items-center my-auto">
       {# START: Searchfield #}
-      <input type="text" class="form-control input-search search-input-header hidden"
+      <input type="text" class="form-control input-search search-input-header d-none"
              placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-      <button class="btn btn-default btn-search hidden catro-search-button">
+      <button class="btn btn-default btn-search catro-search-button d-none">
         <i class="material-icons">
           search
         </i>
       </button>
-      <a class="glyphicon glyphicon-search white-icon medium-icon search-icon-header" href="#"></a>
+      <a class="navbar-nav search-icon-header nav-item " href="#">
+        <i class="material-icons nav-link">search</i>
+      </a>
       {# END: Searchfield #}
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +38,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{{ path('user_notifications') }}">
-              <i class="material-icons mr-1">
+              <i class="material-icons mr-1 my-auto">
                 notifications
               </i>
                 {{ "notifications"|trans({}, "catroweb") }}
@@ -65,7 +67,7 @@
         </li>
         {% else %}
           <li class="nav-item">
-            <a class="nav-link d-inline-flex align-items-center" href="{{ url('login') }}" id="btn-login-small">
+            <a class="nav-link d-inline-flex align-items-center" href="{{ url('login') }}" id="btn-login">
               <i class="material-icons mr-1">
                 exit_to_app
               </i>
@@ -81,7 +83,7 @@
         <ul class="navbar-nav mt-2">
             {% if app.user %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ path('user_notifications') }}">
+                <a class="nav-link user-notification-badge" href="{{ path('user_notifications') }}">
                   <i class="material-icons mr-1">
                     notifications
                   </i>
@@ -116,7 +118,7 @@
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('login') }}" id="btn-login-small">
+                <a class="nav-link" href="{{ url('login') }}" id="btn-login">
                   <i class="material-icons mr-1">
                     exit_to_app
                   </i>
@@ -138,18 +140,17 @@
             $(this).hide();
             var page_name = $('#page-name');
             var search_header = $('.search-input-header');
-            if ($(window).width() <= 430)
+            if ($(window).width() <= 400)
             {
                 page_name.hide();
             }
             var val = search_header.val();
             search_header
-                .removeClass('hidden')
+                .removeClass('d-none')
                 .focus()
                 .val("")
                 .val(val);
-            $('.catro-search-button').removeClass('hidden');
-            page_name.parent().addClass('hidden');
+            $('.catro-search-button').removeClass('d-none');
         });
     });
 

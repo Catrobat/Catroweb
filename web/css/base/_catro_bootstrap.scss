@@ -68,7 +68,6 @@ header
   }
   .catro-search-button
   {
-    height: 39px;
     background-color: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.1);
     border-top-right-radius: 5px;
@@ -546,4 +545,11 @@ footer
     margin-top: 1.5em;
     min-height: 195px;
   }
+}
+
+.search-icon-header
+{
+  color: $navbar-dark-color !important;
+  text-decoration: none !important;
+  font-size: 2.0em;
 }

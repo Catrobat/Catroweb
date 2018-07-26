@@ -1081,6 +1081,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       default:
         assertTrue(false);
     }
+    assertTrue(false);
     $button->click();
 
   }
