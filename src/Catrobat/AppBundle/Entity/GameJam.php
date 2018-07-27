@@ -277,5 +277,10 @@ class GameJam
         $this->flavor = $flavor;
     }
 
+    public function isNull()
+    {
+        return null === $this;
+    }
+
 
 }

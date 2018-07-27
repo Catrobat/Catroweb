@@ -45,7 +45,9 @@
         "liip/theme-bundle": "dev-master",
         "willdurand/geocoder-bundle": "@stable",
         "eightpoints/guzzle-bundle": "^5.1",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "behat/mink": "1.7",
+        "dmore/behat-chrome-extension": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",
@@ -55,7 +57,6 @@
         "bossa/phpspec2-expect": "dev-master",
         "behat/behat": "~3.0.6@dev",
         "behat/symfony2-extension": "2.0.*@dev",
-        "behat/mink": "1.6.*@dev",
         "behat/mink-extension": "*@dev",
         "behat/mink-browserkit-driver": "*@dev",
         "behat/mink-goutte-driver": "*@dev",

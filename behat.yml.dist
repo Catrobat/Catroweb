@@ -12,23 +12,16 @@ default:
             kernel:
                 env: test
                 debug: true
-                
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
         Behat\MinkExtension:
               base_url: http://localhost/app_test.php/
               sessions:
                 default:
-                  selenium2:
-                    wd_host: "http://localhost:8643/wd/hub"
-                    capabilities:
-                      extra_capabilities:
-                        phantomjs.page.customHeaders.Accept-Language: 'en'
+                  chrome:
+                    api_url: "http://localhost:9222"
                 mobile:
-                  selenium2:
-                    wd_host: "http://localhost:8643/wd/hub"
-                    capabilities:
-                      extra_capabilities:
-                        phantomjs.page.customHeaders.Accept-Language: 'en'
-                        phantomjs.page.settings.userAgent: 'Catrobat/0.93 PocketCode/0.9.14 Platform/Android WebKit'
+                  chrome:
+                    api_url: "http://localhost:9222"
                     
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario

@@ -11,6 +11,7 @@ use FR3D\LdapBundle\Driver\LdapDriverException;
 use FR3D\LdapBundle\Driver\LdapDriverInterface;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Catrobat\AppBundle\Services\TestEnv\ApcReplace;
 
 class LdapTestDriver implements LdapDriverInterface
 {
@@ -118,7 +119,7 @@ class LdapTestDriver implements LdapDriverInterface
 
     public function resetFixtures()
     {
-        return apc_delete($this::$APC_OBJECTS);
+        return ApcReplace::Instance()->apc_delete($this::$APC_OBJECTS);
     }
 
     public function addTestUser($username, $password, $groups = array(), $mail = null)
@@ -163,7 +164,7 @@ class LdapTestDriver implements LdapDriverInterface
         ];
         array_push($this->objects, $user_entity);
         
-        return apc_store($this::$APC_OBJECTS, $this->objects);
+        return ApcReplace::Instance()->apc_store($this::$APC_OBJECTS, $this->objects);
     }
 
     private function extractKeys($string)
@@ -183,8 +184,8 @@ class LdapTestDriver implements LdapDriverInterface
     {
         if (! is_array($this->objects)) {
             $this->objects = array();
-            if (apc_fetch($this::$APC_OBJECTS) != false)
-                $this->objects = apc_fetch($this::$APC_OBJECTS);
+            if (ApcReplace::Instance()->apc_fetch($this::$APC_OBJECTS) != false)
+                $this->objects = ApcReplace::Instance()->apc_fetch($this::$APC_OBJECTS);
         }
     }
 

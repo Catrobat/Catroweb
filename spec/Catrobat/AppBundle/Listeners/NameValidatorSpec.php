@@ -4,7 +4,6 @@ namespace spec\Catrobat\AppBundle\Listeners;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Validator\Constraints\True;
 
 class NameValidatorSpec extends ObjectBehavior
 {

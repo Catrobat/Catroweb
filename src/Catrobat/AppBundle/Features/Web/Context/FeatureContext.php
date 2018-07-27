@@ -5,6 +5,8 @@ namespace Catrobat\AppBundle\Features\Web\Context;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -791,6 +793,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iWriteInTextbox($arg1)
   {
     $textarea = $this->getSession()->getPage()->find('css', '.msg');
+    assertNotNull($textarea, "Textarea not found");
     $textarea->setValue($arg1);
   }
 
@@ -1081,7 +1084,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       default:
         assertTrue(false);
     }
-    assertTrue(false);
+    assertNotNull($button, "button " . $arg1 . " not found");
     $button->click();
 
   }
@@ -1462,7 +1465,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id . " a")->getAttribute("href");
+    $mediafile = $this->getSession()->getPage()->find("css", ".mediafile-" . $id . " a");
+    assertNotNull($mediafile, "Mediafile not found!");
+    $link = $mediafile->getAttribute("href");
     assertTrue(is_int(strpos($link, $file_url)));
   }
 
@@ -1644,6 +1649,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     $page = $this->getSession()->getPage();
     $video = $page->find('css', '#youtube-help-video');
+    assertNotNull($video, "Video not found on tutorial page!");
     assertTrue($video->getAttribute('src') == $url + "&origin=http://localhost");
   }
 
