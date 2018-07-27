@@ -661,7 +661,7 @@ class ProgramRepository extends EntityRepository
           ->expr()->lte('e.language_version', ':max_version'))
         ->setParameter('max_version', $max_version);
     }
-    return $qb->getQuery()->getSingleScalarResult();
+    return intval($qb->getQuery()->getSingleScalarResult());
   }
 
   public function getProgramsWithApkStatus($apk_status)

@@ -98,6 +98,7 @@ class ListProgramsController extends Controller
 
   private function listSortedPrograms(Request $request, $sortBy, $details = true)
   {
+    /* @var $program_manager ProgramManager */
     $program_manager = $this->get('programmanager');
     $flavor = $request->getSession()->get('flavor');
 

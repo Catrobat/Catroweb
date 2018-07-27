@@ -39,7 +39,7 @@ class FeaturedRepository extends EntityRepository
       ->setParameter('flavor', $flavor)
       ->setParameter('for_ios', $for_ios);
 
-    return $qb->getQuery()->getSingleScalarResult();
+    return intval($qb->getQuery()->getSingleScalarResult());
   }
 
   public function getFeaturedItems($flavor, $limit = 20, $offset = 0)
@@ -70,20 +70,20 @@ class FeaturedRepository extends EntityRepository
       ->setParameter('flavor', $flavor)
       ->getQuery()->getSingleScalarResult();
   }
-  
-   public function isFeatured($program)
+
+  public function isFeatured($program)
+  {
+    /* @var \Catrobat\AppBundle\Entity\Program $program */
+    $qb = $this->createQueryBuilder('e');
+    $qb
+      ->where($qb->expr()->eq('e.program', ':program'))
+      ->setParameter('program', $program);;
+    $result = $qb->getQuery()->getOneOrNullResult();
+    if ($result == null)
     {
-        /* @var \Catrobat\AppBundle\Entity\Program $program */
-        $qb = $this->createQueryBuilder('e');
-        $qb
-            ->where($qb->expr()->eq('e.program', ':program'))
-            ->setParameter('program', $program);
-        ;
-        $result = $qb->getQuery()->getOneOrNullResult();
-        if ($result == null)
-        {
-            return false;
-        }
-        return true;
+      return false;
     }
+
+    return true;
+  }
 }
