@@ -508,7 +508,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
       $user_manager->updateUser($user, false);
     }
-    $user_manager->updateUser($user, true);
+    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $em->flush();
   }
 
   /**
@@ -917,7 +918,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iWaitForTheServerResponse()
   {
-    $this->getSession()->wait(5000, '(0 === jQuery.active)');
+    $this->getSession()->wait(5000);
   }
 
   /**
@@ -2669,6 +2670,23 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     assertTrue(false, "Tried to click .btn-search but no visible element was found.");
   }
+
+    /**
+     * @Then /^I ensure pop ups work$/
+     */
+    public function iEnsurePopUpsWork()
+    {
+      try
+      {
+        $this->getSession()->getDriver()->executeScript("window.confirm = function(){return true;}");
+      } catch (UnsupportedDriverActionException $e)
+      {
+        assertTrue(false, "Driver doesn't support JS injection. For Chrome this is needed since it cant deal with pop ups");
+      } catch (DriverException $e)
+      {
+        assertTrue(false, "Driver may not support JS injection. For Chrome this is needed since it cant deal with pop ups");
+      }
+    }
 
 }
 

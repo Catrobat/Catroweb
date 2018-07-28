@@ -35,7 +35,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Api/"
             contexts:
               - Catrobat\AppBundle\Features\Api\Context\FeatureContext:
-                    error_directory: "./testreports/behat/"
+                    error_directory: "%paths.base%/testreports/behat/"
         apilogin:
             type: symfony_bundle
             bundle: 'AppBundle'
@@ -50,7 +50,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Flavor/"
             contexts:
               - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext:
-                    error_directory: "./testreports/behat/"
+                    error_directory: "%paths.base%/testreports/behat/"
         ci:
             type: symfony_bundle
             bundle: 'AppBundle'
@@ -58,7 +58,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Ci/"
             contexts:
               - Catrobat\AppBundle\Features\Ci\Context\FeatureContext:
-                    error_directory: "./testreports/behat/"
+                    error_directory: "%paths.base%/testreports/behat/"
         web:
             type: symfony_bundle
             bundle: 'AppBundle'
@@ -66,7 +66,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Web/"
             contexts:
               - Catrobat\AppBundle\Features\Web\Context\FeatureContext:
-                    screenshot_directory: "./testreports/screens/"
+                    screenshot_directory: "%paths.base%/testreports/screens/"
         admin:
             type: symfony_bundle
             bundle: 'AppBundle'
@@ -74,7 +74,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Admin/"
             contexts:
               - Catrobat\AppBundle\Features\Admin\Context\FeatureContext:
-                    error_directory: "./testreports/behat/"
+                    error_directory: "%paths.base%/testreports/behat/"
         gamejam:
             filters:
                 tags: ~@web&&~@javascript
@@ -84,7 +84,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
             contexts:
                 - Catrobat\AppBundle\Features\GameJam\Context\FeatureContext:
-                    error_directory: "./testreports/behat/"
+                    error_directory: "%paths.base%/testreports/behat/"
         gamejam_web:
             filters:
                 tags: @web
@@ -94,7 +94,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
             contexts:
               - Catrobat\AppBundle\Features\GameJam\Context\WebContext:
-                    error_directory: "./testreports/behat/"
+                    error_directory: "%paths.base%/testreports/behat/"
 
         gamejam_javascript:
             filters:
@@ -120,4 +120,4 @@ apidoc:
             templates:
                 file: default.twig
             output:
-                file: ./testreports/behat/index.html
+                file: %paths.base%/testreports/behat/index.html

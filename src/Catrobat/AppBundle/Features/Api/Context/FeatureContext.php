@@ -292,7 +292,7 @@ class FeatureContext extends BaseContext
             $username = $users[$i]['name'];
             $pwd = $users[$i]['password'];
             $groups = array_key_exists("groups", $users[$i]) ? explode(",", $users[$i]["groups"]) : array();
-            assert($ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null), "APC_store not working. Check your cli/php.ini settings, add \"apc.enabled = 1\" and \"apc.enable_cli = 1\" at the end");
+            $ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null);
         }
     }
 

@@ -1,4 +1,4 @@
-<div class="card bg-primary mb-4">
+<div class="catro-notification card bg-primary mb-4" id="catro-notification-{{ notification.id }}">
   <div class="card-header">
     <h3 class="text-white mb-0">
       {{ 'catro-notifications.comment.title'|trans({'%program_name%' : notification.comment.program.name}, 'catroweb') }}
@@ -6,10 +6,13 @@
   </div>
   <div class="card-body bg-white">
     <div class="row">
-      <div class="col-lg-12 card-text">{{ 'catro-notifications.comment.messagePart1'|trans({}, 'catroweb') }}
+      <div class="col-lg-12 card-text">
+
+        {{ 'catro-notifications.comment.messagePart1'|trans({}, 'catroweb') }}
         <a href="{{ path('profile', {'id': notification.comment.userid}) }}">{{ notification.comment.username }}</a>
         {{ 'catro-notifications.comment.messagePart2'|trans({}, 'catroweb') }}
         <a href="{{ path('program', {'id': notification.comment.program.id}) }}">{{ notification.comment.program.name }}</a>!
+
       </div>
     </div>
     <button class="btn btn-primary" onclick="markAsRead({{ notification.id }})">Mark as read</button>

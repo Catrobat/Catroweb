@@ -91,6 +91,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
     Scenario: Viewing remix graph of program 8
       Given I am on "/pocketcode/program/8?show_graph=1"
+      Then I ensure pop ups work
       When I click "#remix-graph-modal-link"
       When I wait 1200 milliseconds
       And I should see a node with id "catrobat_8" having name "program 8" and username "Gangster"
@@ -99,6 +100,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
     Scenario: Viewing remix graph of program 9
       Given I am on "/pocketcode/program/9?show_graph=1"
+      Then I ensure pop ups work
       When I click "#remix-graph-modal-link"
       When I wait 1200 milliseconds
       And I should see a node with id "catrobat_8" having name "program 8" and username "Gangster"
