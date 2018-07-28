@@ -201,34 +201,34 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
           // username and password same !
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-isusername').removeClass('hide');
+          $('.text-password-isusername').removeClass('d-none');
           break;
 
         case 753:
           // password too short
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-tooshort').removeClass('hide');
+          $('.text-password-tooshort').removeClass('d-none');
           break;
 
         case 754:
           // password too long
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-toolong').removeClass('hide');
+          $('.text-password-toolong').removeClass('d-none');
           break;
 
         case 774:
           // passwords didn't match
           $('#password').val('').parent().addClass('password-failed');
           $('#repeat-password').val('').parent().addClass('password-failed');
-          $('.text-password-nomatch').removeClass('hide');
+          $('.text-password-nomatch').removeClass('d-none');
           break;
 
         case 777:
           // old password wrong
           $('#old-password').val('').addClass('password-failed');
-          $('.text-password-wrongpassword').removeClass('hide');
+          $('.text-password-wrongpassword').removeClass('d-none');
           break;
 
         default:

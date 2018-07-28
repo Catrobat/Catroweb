@@ -13,15 +13,13 @@
 
 {% endblock %}
 
-{% block header %}
-{% endblock header%}
-
 {% block body %}
 
   {% block fos_user_content %}
 
-    <div class="container-fluid">
-      <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+    <div class="row">
+      <div id="signupbox" style="margin-top:50px" class="mainbox col-md-4 mx-auto">
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="panel-title">Sign Up</div>
@@ -136,6 +134,7 @@
         </div>
       </div>
     </div>
+
     {% include ':social:oauth_form.html.twig' %}
   {% endblock fos_user_content %}
 
