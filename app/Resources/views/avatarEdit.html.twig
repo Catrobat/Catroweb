@@ -5,25 +5,32 @@
 {% endblock %}
 
 {% block body %}
-  <h1 id="profile-edit-header">{{ 'myprofile.editAvatar'|trans({}, 'catroweb') }}</h1>
-
-  {% if not nolb_user and not app.user.limited %}
-  <div id="profile-avatar-change" class="edit-wrapper">
-    <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
-    <div class="avatar-error text-avatar-uploadError">{{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}</div>
-    <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
-    <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
-    <img id="avatar-img" width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
-    <div id="avatar-upload">
-      <div style="background-color: white">
-        <input type="file" name="file">
-        <span>{{ 'profile.changePicture'|trans({}, 'catroweb') }}</span>
-        <div class="button-show-ajax img-load-ajax"></div>
-      </div>
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h1 id="profile-edit-header">{{ 'myprofile.editAvatar'|trans({}, 'catroweb') }}</h1>
     </div>
-    <button id="avatar-button-done" class="btn btn-success save-button">{{ 'myprofile.done'|trans({}, 'catroweb') }}</button>
+    <div class="col-md-4 mx-auto">
+      {% if not nolb_user and not app.user.limited %}
+        <div id="profile-avatar-change" class="edit-wrapper">
+          <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
+          <div class="avatar-error text-avatar-uploadError">{{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}</div>
+          <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
+          <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
+          <img id="avatar-img" width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
+          <div id="avatar-upload">
+            <div style="background-color: white">
+              <input type="file" name="file">
+              <span>{{ 'profile.changePicture'|trans({}, 'catroweb') }}</span>
+              <div class="button-show-ajax img-load-ajax"></div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
+  <div class="row mb-5">
+    <div class="col-md-4 mx-auto"><button id="avatar-button-done" class="btn btn-success save-button">{{ 'myprofile.done'|trans({}, 'catroweb') }}</button></div>
+  </div>
 
 {% endblock %}
 

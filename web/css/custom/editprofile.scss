@@ -13,13 +13,6 @@ $border-color-failed: #800;
   }
 }
 
-.edit-wrapper {
-  position: relative;
-  left: 50% !important;
-  transform: translate(-50%, 0%);
-  max-width: 600px;
-}
-
 #profile-edit-wrapper {
   border-radius: 10px;
   border: 2px solid $default-border-color;
@@ -146,11 +139,6 @@ $border-color-failed: #800;
   width: 100%;
   font-size: medium;
   font-weight: normal;
-}
-
-#change-password {
-  display: block;
-  text-align: center;
 }
 
 .password-field {

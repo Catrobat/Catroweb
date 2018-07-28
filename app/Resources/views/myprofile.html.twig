@@ -5,44 +5,54 @@
 {% endblock %}
 
 {% block body %}
-  <h1>{{ app.user.username }}</h1>
-
-  <div id="profile-avatar">
-    <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
-    <div class="avatar-error text-avatar-uploadError">{{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}</div>
-    <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
-    <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
-    <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
-  </div>
-  <div id="user-information">
-
-    <div id="country-information">
-      <div id="country-header">{{ 'country'|trans({}, 'catroweb') }}:</div>
-      <div id="country"> {{ country }} </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{ app.user.username }}</h1>
     </div>
+    <div class="col-md-3">
+      <div id="profile-avatar">
+        <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
+        <div class="avatar-error text-avatar-uploadError">{{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}</div>
+        <div class="avatar-error text-avatar-noImage">{{ 'profile.avatar.noImage'|trans({}, 'catroweb') }}</div>
+        <div class="avatar-error text-avatar-noSupport">{{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}</div>
+        <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
+      </div>
+    </div>
+    <div class="col-md-4">
+        <div id="user-information">
+          <div id="country-information">
+            <div id="country-header">{{ 'country'|trans({}, 'catroweb') }}:</div>
+            <div id="country"> {{ country }} </div>
+          </div>
 
-    <div id="email-information">
-      <div id="email-header">{{ 'myprofile.email'|trans({}, 'catroweb') }}:</div>
-      <div id="email"> {{ firstMail }} </div>
-      <div id="second-email"> {{ secondMail }} </div>
+          <div id="email-information">
+            <div id="email-header">{{ 'myprofile.email'|trans({}, 'catroweb') }}:</div>
+            <div id="email"> {{ firstMail }} </div>
+            <div id="second-email"> {{ secondMail }} </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-1 ml-auto">
+        {% if not nolb_user and not app.user.limited %}
+        <div id="edit-icon">
+          <a href="{{ url('profile_edit') }}">
+            <span><i class="material-icons">edit</i></span>
+          </a>
+        </div>
+        {% endif %}
+
+        {% if nolb_user and 'teacher' in app.user.username %}
+        <div id="edit-icon">
+          <a href="{{ url('profile_edit') }}">
+            <span><i class="material-icons">edit</i></span>
+          </a>
+        </div>
+        {% endif %}
     </div>
   </div>
 
-  {% if not nolb_user and not app.user.limited %}
-  <div id="edit-icon">
-    <a href="{{ url('profile_edit') }}">
-      <span><i class="glyphicon glyphicon-pencil medium-icon"></i></span>
-    </a>
-  </div>
-  {% endif %}
 
-  {% if nolb_user and 'teacher' in app.user.username %}
-  <div id="edit-icon">
-    <a href="{{ url('profile_edit') }}">
-      <span><i class="glyphicon glyphicon-pencil medium-icon"></i></span>
-    </a>
-  </div>
-  {% endif %}
+
 
   <div class="clear"></div>
   {% if not app.user.limited %}
