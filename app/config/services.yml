@@ -256,6 +256,8 @@ services:
             - "@tagrepository"
             - "@programlikerepository"
             - "@event_dispatcher"
+            - "%catrobat.max_version%"
+
 
     remixmanager:
         class: Catrobat\AppBundle\Entity\RemixManager
@@ -342,19 +344,19 @@ services:
 
 # =========================== Twig ===========================
 
-#    app.twig_extension:
-#        class: Catrobat\AppBundle\Twig\AppExtension
-#        public: false
-#        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
-#        tags:
-#            - { name: twig.extension }
-
     app.twig_extension:
-        class: Catrobat\AppBundle\Twig\CustomExtension
+        class: Catrobat\AppBundle\Twig\AppExtension
         public: false
         arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
         tags:
             - { name: twig.extension }
+
+#    app.twig_extension:
+#        class: Catrobat\AppBundle\Twig\CustomExtension
+#        public: false
+#        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
+#        tags:
+#            - { name: twig.extension }
 
 # =========================== Jenkins ===========================
 

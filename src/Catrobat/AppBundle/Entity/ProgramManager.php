@@ -111,7 +111,7 @@ class ProgramManager
 
     $version = $program->getLanguageVersion();
 
-    $max_version = "$this->max_version";
+    $max_version = $this->max_version;
     if (version_compare($version, $max_version, ">"))
     {
       $program->setPrivate(true);
