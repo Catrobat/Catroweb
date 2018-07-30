@@ -124,8 +124,20 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   @javascript
   Scenario: Create one statistic entry from recommended programs on homepage
+    Given there are programs:
+      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
+      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | Galaxy    | p2          | OtherUser| 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
+      | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
+
+    And there are likes:
+      | username  | program_id | type | created at       |
+      | Catrobat  | 1          | 1    | 01.01.2017 12:00 |
+      | Catrobat  | 2          | 2    | 01.01.2017 12:00 |
+      | OtherUser | 1          | 4    | 01.01.2017 12:00 |
     Given I am on "/pocketcode"
     Then I wait 500 milliseconds
+    Then I should see a recommended homepage program having ID "1" and name "Minions"
     When I click on the first recommended homepage program
     And I wait 500 milliseconds
     Then There should be one database entry with type is "rec_homepage" and "program_id" is "1"
@@ -137,9 +149,9 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   @javascript
   Scenario: Create one statistic entry from recommended program that has been also downloaded by users that downloaded this program
     Given there are program download statistics:
-      | id | program_id | downloaded_at        | ip             | latitude      |  longitude  | country_code  | country_name | street              | postal_code      |  locality   | user_agent | username  | referrer |
-      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | OtherUser | Facebook |
-      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | OtherUser | Facebook |
+      | id | program_id | downloaded_at        | ip             | country_code  | country_name | user_agent | username  | referrer |
+      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | AT            | Austria      | okhttp     | OtherUser | Facebook |
+      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | AT            | Austria      | okhttp     | OtherUser | Facebook |
 
     And I am on "/pocketcode/program/1"
     Then There should be recommended specific programs
@@ -152,9 +164,9 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   @javascript
   Scenario: No recommendable program that has been also downloaded by *other* users that downloaded this program
     Given there are program download statistics:
-      | id | program_id | downloaded_at        | ip             | latitude      |  longitude  | country_code  | country_name | street              | postal_code      |  locality   | user_agent | username  | referrer |
-      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | Catrobat  | Facebook |
-      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | 47.2          | 10.7        | AT            | Austria      | Duck Street 1       | 1234             | Entenhausen | okhttp     | Catrobat  | Facebook |
+      | id | program_id | downloaded_at        | ip             | country_code  | country_name | user_agent | username  | referrer |
+      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | AT            | Austria      | okhttp     | Catrobat  | Facebook |
+      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | AT            | Austria      | okhttp     | Catrobat  | Facebook |
 
     And I am on "/pocketcode/program/1"
     Then There should be no recommended specific programs

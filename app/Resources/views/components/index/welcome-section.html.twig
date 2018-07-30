@@ -91,11 +91,5 @@
       <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid"
          target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
     </div>
-    <div class="col-md-6 text-right">
-      {# todo add link to new statistic page #}
-      {% set stats = getCommunityStats() %}
-      {{ stats['program_count'] | number_format(0, ",", ".") }} {{ "footer.programs"|trans({}, "catroweb") }}
-      {# <a href="{{ path('homepage_click_stats') }}">{{ "programs.welcome.statistics"|trans({}, "catroweb") }}</a> #}
-    </div>
   </div>
 </div>

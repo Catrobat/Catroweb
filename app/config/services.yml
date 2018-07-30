@@ -29,9 +29,7 @@ parameters:
       catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
       catrobat.logs.dir:              "%kernel.root_dir%/logs/"
       catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
-
-      # TODO check max_version usage and use it so only one value has to be changed
-      catrobat.max_version:           "0.995"
+      catrobat.max_version:           "0.996"
 
 services:
 
@@ -344,8 +342,15 @@ services:
 
 # =========================== Twig ===========================
 
+#    app.twig_extension:
+#        class: Catrobat\AppBundle\Twig\AppExtension
+#        public: false
+#        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
+#        tags:
+#            - { name: twig.extension }
+
     app.twig_extension:
-        class: Catrobat\AppBundle\Twig\AppExtension
+        class: Catrobat\AppBundle\Twig\CustomExtension
         public: false
         arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
         tags:

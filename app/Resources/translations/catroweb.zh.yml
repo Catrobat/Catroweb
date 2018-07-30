@@ -4,43 +4,48 @@ username: 用户名
 password: 密码
 aboutPocketCode: 关于口袋编程
 tutorials: 新手向导
-googlePlay: '&#x9996;&#x9875;'
+googlePlay: 谷歌游戏
 passwordsNoMatch: 密码不对
 error: 错误
 cancel: 取消
 report: 报告
-download: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
+download: 作为程序下载
 description: 描述
 noDescription: 没有可用的描述
 country: 国家
-loginText: '&#x4E0B;&#x8F7D;'
-privacyPolicy: '&#x4E2A;&#x4EBA;&#x6863;&#x6848;'
-imprint: '&#x641C;&#x7D22;&#x9879;&#x76EE;'
+loginText: 登录
+privacyPolicy: 隐私条款
+imprint: 版权信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
 pleaseTryAgain: '再试一次吧！'
 oldVersionError: '请更新到最新版的口袋编程！'
-more: '&#x52A0;&#x8F7D;&#x4E2D;&#x3002;&#x3002;&#x3002;'
-less: '&#x60A8;&#x767B;&#x5F55;&#x4E3A;'
+more: '更多'
+less: '更少'
 ok: 好
 clickToDownloadProgram: '请点%link_start% 这里 %link_end%下载样例程序。'
 registrationError: '用户名或邮箱已被占用。'
-notifications: 'Notifications'
+notifications: '通知'
 wellDone: "做的好！"
 done: "已完成！"
 notificationsReadMessage: "您已经阅读了所有通知。"
 notificationsClearedMessage: "所有通知都已被标记为已读。"
 clearAllNotificationsButtonTitle: "标记所有为已读"
-notificationsClearError: "Unable to mark notifications as read!"
+notificationsClearError: "无法将通知标记为已读 ！"
 pleaseWait: "请等待..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description_C_VersionTest: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: '这里推荐了什么程序？'
+      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
-  featured: '&#x89C6;&#x56FE;'
+  welcome:
+    title: Welcome to Catrobat's Pocket Code
+    subtitle: Create stories, games and more...
+    download: Download the app
+    statistics: More Statistics
+  featured: 经典程序
   newest: 最新版程序
-  recommended: Recommended programs
+  recommended: 推荐的程序
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
@@ -49,22 +54,22 @@ programs:
   downloads: '%downloads% 下载'
   sample: 样例程序
   views: '%views% 查看'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  likeThumbsUpDetailText: '{0}0人为此点赞 |{1}1人为此点赞 |]1，Inf]%persons%人为此点赞'
+  likeSmileDetailText: '{0}0人送上笑脸 |{1}1人送上笑脸 |]1，Inf]%persons%人送上笑脸'
+  likeLoveDetailText: '{0}0人喜爱这个 |{1}1人喜爱这个 |]1，Inf]%persons%人喜爱这个'
+  likeWowDetailText: '{0}0人对此说"哇！" |{1}1人对此说"哇！" |]1，Inf]%persons%人对此说"哇！"'
+  remixes: '{0}0 调制 |{1}1 调制 |]1，Inf]%remixes% 调制'
+  newRemixesNotificationTitle: '|{1}"%programName%"有 1 个新调制: |]1，Inf]"%programName%"有 %remixes% 个新调制：'
   submitted: 提交的程序
   uploaded: 上传的程序
-  reportAsInappropriate: '&#x5448;&#x62A5;'
+  reportAsInappropriate: 举报为不适当
   languageVersion: 'Catrobat语言版: %languageVersion%'
   reportLoginText: 请 %login%对程序进行报错
-  reportDialogHeader: '&#x53D6;&#x6D88;'
+  reportDialogHeader: 你为什么认为这个程序是不合适的？
   reportDialogReason: 给个理由先
-  reportOwnProgram: '&#x89C6;&#x56FE;'
-  reportAlready: '&#x4E0B;&#x8F7D;'
-  reportDone: '&#x60A8;&#x5448;&#x62A5;&#x8FD9;&#x9879;&#x76EE;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#xFF01;'
+  reportOwnProgram: 您不能标记您自己的程序。
+  reportAlready: 你早已标记了这是一个不恰当的程序。
+  reportDone: 你报告过这是一个不恰当的程序 ！
   updateAppHeader: 升级
   updateAppText: 要下载这个程序请把软件升级到最新版
   btnClosePopup: 好
@@ -78,12 +83,12 @@ programs:
   report_popup_header: 已发送
   nolb_example: 示例程序
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
+  showRemixGraph: '显示调制关系图'
   by: ' '
   open: '打开'
-  showPaths: 'Show Paths'
+  showPaths: '显示路径'
   programNotAvailableErrorTitle: '抱歉...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
+  programNotAvailableErrorDescription: '不再提供对该程序的访问！'
   programNotAvailable: '暂不可用'
   programUnknownUser: '未知用户'
 passwordRecovery:
@@ -107,7 +112,7 @@ profile:
   saveChanges: 保存修改
   newPass: 新密码
   repeatPass: 重复密码
-  firstEmail: '&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x5DF2;&#x6210;&#x529F;&#x66F4;&#x65B0;&#x3002;'
+  firstEmail: 我的第一封邮件
   secondEmail: 第二邮箱
   myPrograms: 我的程序
   form:
@@ -117,15 +122,15 @@ profile:
     passwordWrong: 密码错误
     emailNotValid: 邮箱地址不存在。
     emailMissing: 更新邮箱地址时发生错误，你必须要有至少一个经过验证的邮箱地址。
-    emailExists: '&#x5BC6;&#x7801;&#x6216;&#x7528;&#x6237;&#x540D;&#x4E0D;&#x6B63;&#x786E;&#x3002;'
+    emailExists: 此电子邮件地址早已存在。
     submitSuccess: 已保存！
   reallyDeleteProgram: 是否确认删除程序？
   programsOf: 程序
-  changePicture: '&#x56FD;&#x5BB6;'
+  changePicture: 更改图片
   avatar:
     pictureTooLarge: 您选择的图片体积过大，请不要使用超过5兆的图片。
     uploadError: 对不起，上传发生错误。
-    noSupport: '&#x60A8;&#x7684;&#x6635;&#x79F0;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;&#x5931;&#x8E2A;&#x3002;'
+    noSupport: 不支持此图像类型，请尝试其他图像。
 myprofile:
   editProfile: 编辑档案
   edit: 编辑
@@ -137,275 +142,275 @@ myprofile:
   editPassword: 修改密码
   editCountry: 修改国家
   editEmail: 修改邮箱地址
+  deleteAccount: 删除帐户
+  deleteAccountText: 您确定要删除您的账户么？这将删除您之前上传的程序和您的所有评论 ！
 licenseToPlay:
   link: '授权'
-  title: '&#x4F7F;&#x7528;&#x6388;&#x6743;&#x6761;&#x4F8B; - &#x5206;&#x4EAB;&#x524D;&#x8BF7;&#x6CE8;&#x660E;&#x539F;&#x8457;&#x8005;'
+  title: '授权执行-评分并分享'
   text1: 把每一个Catrobat程序想象成一道道使用不同的菜谱（程序块）制成的美味佳肴。所有的Catrobat社区成员都可以分享他们的美食及菜谱。这就意味着你除了可以分享美食还可以通过菜谱去学习怎样去自己动手制作一份。
-  text2: 这里没有私藏：对于美味佳肴的制作方法对任何人开放，任何人都可以使用或修改这些菜谱并制成新的菜肴。
+  text2: '这里没有私藏：对于美味佳肴的制作方法对任何人开放，任何人都可以使用或修改这些菜谱并制成新的菜肴。'
   text3: "你可以使用别人的菜谱做你自己的菜，或许还可以使用不同的材料。而获得这些自由只需要满足两个简单的要求："
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text4: "在设置 Catrobat 社区时，我们决定采取这种方式，因为我们相信它支持学习和社区内的创造力。通过分享秘诀和原料（脚本和艺术作品），人们可以将工作建立在彼此的思想上并使每个人都受益。"
+  text5: 在设计Catrobat 网站时，我们设计了如下特性，鼓励人们分享成果并给予他人积极评价。在每个程序页上，您总是可以下载该程序的原始脚本。如果您调制 （修改脚本或艺术品，并分享了这个结果） 了一个程序，我们鼓励您在程序说明中给出评价，提及激励您的人和程序。
+  text6: '了解更多关于 %link-termsOfUse% 的Catrobat 在线社区使用条款。'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: 和蛋糕一起分析您的秘方
+    item2: 给那些激励您的用户好的评价
+  version: 版本 1.1，2013 年 4 月 2 日
 teachers:
   login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+    title: '教师地带'
+    description: '老师们可以使用这个区域。'
 termsOfUse:
-  title: '&#x641C;&#x7D22;'
-  headline: Welcome to the Catrobat Community!
-  text1: '&#x5404;&#x5E74;&#x9F84;&#x6BB5;&#xFF08;&#x4ECE;&#x5E7C;&#x513F;&#x5230;&#x9752;&#x5C11;&#x5E74;&#x548C;&#x7956;&#x7236;&#x6BCD;&#xFF09;'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  title: 使用条款
+  headline: 欢迎来到 Catrobat 社区 ！
+  text1: '作为 Catrobat 社区的一份子，您正与其他人分享程序与思想：'
+  text2: "我们需要你的帮助，让这个社区很好地支持每个成员。这里是你如何能帮助我们："
+  text3: "通过 Catrobat 项目，我们要培养合作精神，让每个人的创造力与全人类的福祉结合起来。您可以成为 Catrobat 社区的活跃成员，通过回馈您的程序给社区作为礼物，同样其他活跃的成员也将他们的程序分享给您："
+  text4: '我们给您的礼物：'
+  text5: '使用与服务条例：'
   list1:
-    item1: '&#x6709;&#x5404;&#x7EA7;&#x7684;&#x7ECF;&#x9A8C;'
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: 来自许多不同的国家与文化环境
+    item2: 所有年龄 （从幼年到青少年以至于祖父母）
+    item3: 应用所有级别的经验
   list2:
-    item1: Be respectful. When sharing programs, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's programs - just make sure to give them credit. One place to give credit is in your program's description. Please see the paragraph below this dotted list for details about modifying programs of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a program or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any program, comment, or post."
+    item1: 被人尊重。当共享程序时，请记住许多不同年龄和背景的人们会看到您的贡献。
+    item2: "给出赞赏。请坦然地修改别人的应用以创造自己的新版本-请不要忘记在自己程序的注释中赞赏原作者。请查看以下关于修改其他人程序的详细说明。"
+    item3: "请诚实。不要冒充其他人或做出其他戏弄社区的事情。"
+    item4: "请保护好您的隐私信息。请不要公开您的电子邮件，电话号码或其他个人联系信息。"
+    item5: "请帮助保持社区网站友好的交互性。如果您觉得其他人会感觉到某个应用程序或评论低俗，有侮辱性或有攻击性，或有其他不合适的地方，请点击\"举报为不合适\"按钮并留下简短的说明。Catrobat团队将检查您的报告并及时移除相关的程序，评论或帖子。"
   list3:
-    item1: 'By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to ''stand on the shoulders of one''s peers'', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms.'
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "当您上传程序到我们网站时，您默认接受了关于上传Catrobat程序的开放协议，这个协议和我们将Catrobat系统提供给您时所遵守的协议类似。这个协议允许您学习别人以前上传的程序并采用和调制成自己的引人入胜的游戏，动画或其他应用程序。这可以让包括您在内的所有人都\"可以站在其他人的肩膀上\"。这样您的程序可以让全世界收益，每个人都能自由使用它，就像我们可以自由使用维基百科上由全世界志愿者上传的文字或图片资料。你可以把它想像成给全人类的礼物:您把它分享给所有人，所有人也把他们的作品馈赠与您，这样每个上传到网站的应用都是作者免费赠予您的珍贵礼物，前提是您也加入我们的社区并遵守相同的承诺。"
+    item2: 您不一定需要接受系统提供的礼物;如果您接受了，一些规则随后生效。这些规则带来的好处是您可以学习这些应用并在它们的基础上开发属于自己的炫酷应用。另一个好处是如果其他人在使用您的应用时发生了问题您不必为这些问题负责。
+    item3: "有一个重要的附加条件:如果您的作品是基于其他人的作品设计的，您必须在自己的项目中明确标明原项目的作者。同时我们也会努力工作以确保其他受益于您项目的作者对您表达明确的赞赏，通过在他们的应用中明确标明您在Catrobat社区中自由选择的用户名。通过这种方式可以提供给其他人机会，让他们因为把您的作品传播给所有人，特别是他们自己对您表达公开的感谢。"
+    item4: '请参阅 %link-licenseUploaded%了解精确的法律条款和条件。'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "我们将在Catrobat开源许可证的授权下向您提供和Catrobat项目相关的现存和未来将包含的所有软件和网络资源，包括Catrobat团队开发的所有软件，我们的网站和所有网络资源，以及Catrobat系统相关的所有源代码和包括图片，语音，文字在内的一切额外资源。"
+    item2: 这些许可证确保了Catrobat中的每一部分您都可以免费使用，并获得按您的爱好使用它们的自由，只要大家都遵守一些规定，我们就可以保证Catrobat系统永久免费并且对大家都有用。
+    item3: '请查询%link-licenseToPlay%获得精确的法律条款和条件。通过%link-developer%可以访问Catrobat系统的源码，文档和其他资源。'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: '如果您，或者您的年龄小于13岁，您的父母或监护人与如下组织有关联，这些组织被牵涉进或为大规模侵权或大规模监视负责，那么您将被禁止使用我们的软件或访问我们的服务。关于这些限制和相关例外我们将在%link-termsOfUse%的4.a和4.b部分详细描述。'
+    item2: 如果您的年龄在 13 岁以下，您必须咨询您的父母或法定监护人是否允许您使用 Catrobat 的应用程序和服务。
+    item3: "如果我们发现某个应用程序包含了不合适的内容或者某个用户损害了其他用户的权益，我们保留在任何时间单方面拒绝，删除或隐藏相关的应用程序，用户资料或任何上传到Catrobat网站的数字资料的权利。"
+    item4: "我们希望所有Catrobat 的软件和互联网资源都对大家有用，但我们无法做出任何担保。"
+    item5: '请咨询%link-termsOfUse% developer.catrobat.org/terms_of_use_and_service 了解对上述几点的精确描述和一些附加的法律条款和条件。'
+  bottom1: 经常回到这里进行检查，因为我们一直在尝试改进我们的使用条款。
+  bottom2: '请发邮件到 %email-webmaster%反馈关于本使用条款的任何意见。'
+  version: 版本 1.3，2014 年 3 月 4 日
 help:
   stepByStep:
-    title: "Step-by-Step Intro"
-    start: "Starting position:"
+    title: "分步骤介绍"
+    start: "开始位置:"
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      现在您可以创建您的第一个应用程序了，通过学习玩法视频制作一张交互式明信片。您必须按照接收到的指令操作，在创建这张明信片的过程中，您将学习到创建更多的口袋编程应用程序的基本技能。
+      在这些引导视频之后，会有更多的活动能帮助您在创建自己的口袋编程应用程序时变得十分自如。
     step1:
-      title: 'Make a new program'
+      title: '新建一个程序'
       detail:
-        text1: 'Tap on "New".'
-        text2: 'Enter a progam name, select "Create empty program" and tap "OK".'
+        text1: '点击"新建"。'
+        text2: '输入程序名称，选择"创建空程序"，点击"OK"。'
     step2:
-      title: "Create a new object"
+      title: "创建一个新的对象"
       detail:
-        text1: 'Tap:'
-        text2: 'Choose the source of the first look of your new object.'
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'Draw a new look.'
-        special2: 'Choose from gallery.'
-        special3: 'Take a picture.'
+        text1: '点击：'
+        text2: '请选择您创建的最新对象的外观的来源。'
+        text3: '请输入对象名称并点击"确定"以创建该对象。'
+        special1: '绘制一个新的造型。'
+        special2: '从图库中选择。'
+        special3: '拍张照片。'
     step3:
-      title: "Start Moving"
+      title: "开始移动"
       detail:
-        text1: 'Tap:'
-        text2: 'The first brick we use is out of the category "Motion".'
-        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: 'Use the Android Back Button to get back from the stage.'
+        text1: '点击：'
+        text2: '我们使用的第一个积木来自类别"运动"。'
+        text3: '选择"滑行"积木，该对象将移动到在积木中定义的舞台上新位置。'
+        text4: '积木现在处于浮动状态。如果要将它粘贴，请移动到需要的位置。您还可以通过轻击已进被插入的积木使它再次处于浮动状态。'
+        text5: '点击"开始"按钮来到舞台观看滑翔的对象。'
+        text6: '使用安卓后退按钮从舞台返回。'
     step4:
-      title: "Change Look"
-      description: "You can change the look of your object."
+      title: "更改外观"
+      description: "您可以更改对象的外观。"
       detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: 'Tap into the dropdown field to create a new look.'
-        text4: 'Choose the source of the image like before.'
-        text5: 'Now you have to select the new image.'
-        text6: 'Tap play to see the behaviour on the stage.'
+        text1: '选择"切换为外观"积木。使用此积木可以选择外观或创建一个新的外观。'
+        text2: '将此积木拼接在"滑翔"积木下面。'
+        text3: '点击进入下拉区域以创建一个新的外观。'
+        text4: '选择喜欢的图像的来源。'
+        text5: '现在您必须选择新的图像。'
+        text6: '点击"开始"观看舞台上的表演。'
     step5:
       title: "读出"
-      description: "Now you will find out how to make an object talk."
+      description: "现在您将学到如何使让一个角色说话。"
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: 'Tap play to see the behaviour on the stage.'
+        text1: '选择"读出"积木。执行这个积木时，角色会读出指定的文本。'
+        text2: '将此积木拼接在"切换为外观"积木下面。'
+        text3: '点击"开始"观看舞台上的表演。'
     step6:
-      title: 'Again and again'
-      description: "This step shows you how to repeat behaviour of objects."
+      title: '一次接一次'
+      description: "此步骤显示如何重复角色的行为。"
       detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'Tap into the text field of the x and y value and set to 0.'
-        text6: 'Tap play to see the behaviour on the stage.'
+        text1: '选择"无限重复"积木。积木中被包含的任何脚本都将被持久重复执行。'
+        text2: '将"无限重复"积木拼接到"当程序启动"积木下方。'
+        text3: '添加另一个"滑翔"积木。'
+        text4: '将"滑翔"积木拼接到"重复执行结束"上方。'
+        text5: '点击进入x 和 y的文本区域并将值都设置为 0。'
+        text6: '点击开始可以看到舞台上的表现。'
     step7:
-      title: "Tapping is everything"
-      description: 'You can also control the behaviour of the object when the program is running on the stage.'
+      title: "点击就是一切"
+      description: '当程序在舞台上运行时，您也可以控制角色的行为。'
       detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'Now you have this script.'
-        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
+        text1: '选择"当被点击"积木。当您点击舞台上的对象时，拼接在"当被点击"积木下方的任何积木都会被执行一次。'
+        text2: '把"当被点击"积木放在其他积木下面。'
+        text3: '选择"右转"积木并将它拼接到"当被点击"积木下方。'
+        text4: '现在你写好这段脚本了。'
+        text5: '点击"开始"观看舞台上的表演。如果您现在点击对象，它会旋转。'
     step8:
-      title: "Copy, delete or edit a brick"
+      title: "复制、 删除或编辑一块积木"
       detail:
-        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
+        text1: '单击每一块积木的左侧打开上下文菜单。在那里您可以移动、 复制、 删除积木或通过公式编辑器编辑积木的参数值。'
     step9:
-      title: "Navigation in the app"
+      title: "应用导航"
       detail:
-        text1: 'Use the Android Back Button to navigate in the app.'
-        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
-        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
+        text1: '使用安卓后退按钮开始应用导航。'
+        text2: '回退一个页面浏览对象的全面描述。在这里您可以进入脚本，也可以查看强大的外观展示或欣赏对象的声音。您可以重命名，复制或删除外观或声音。'
+        text3: '再次使用Android的后退按钮来得到你的对象和背景。'
     step10:
-      title: "Change the background"
-      description: "This is the overview of your objects and your program's background."
+      title: "改变背景。"
+      description: "这就是你的对象和程序背景的简要信息。"
       detail:
-        text1: 'The background is like an object, but you just can have one background.'
-        text2: 'You can add scripts, sounds and look in the same way to the background object.'
+        text1: '背景就像一个对象，但是它们之间的不同是我们只可以拥有一个背景'
+        text2: '您可以用相同的方法向背景对象添加脚本、声音和外观。'
     step11:
-      title: "Main Menu"
-      description: "Use the Android Back Button to get to this screen."
+      title: "主菜单"
+      description: "使用安卓后退按钮返回这个界面。"
       detail:
-        text1: 'Continue with your currently opened program.'
-        text2: 'Add a new program.'
-        text3: 'See all your local programs.'
-        text4: 'Go to the help site and discuss with other users.'
-        text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
-        text6: 'Upload the program that is currently opened.'
+        text1: '继续当前打开的程序。'
+        text2: '新建一个程序。'
+        text3: '查看所有本地程序。'
+        text4: '转到帮助站点并与其他用户讨论。'
+        text5: '探索口袋编程程序的世界，下载和改编你喜欢的程序。'
+        text6: '上传当前打开的程序。'
   tutorialcards:
     title: "新手向导"
-    description1: "These tutorials show you how to use effective tricks in Pocket Code."
-    getReady: "Get Ready:"
-    tryCode: "Try this code:"
-    doIt: "Do it:"
-    tip: "Extra Tip:"
+    description1: "这些教程向您展示如何在口袋编程中使用有效的技巧。"
+    getReady: "准备好："
+    tryCode: "试试这段代码:"
+    doIt: "做吧："
+    tip: "额外提示："
     card1:
-      title: "Change Size"
-      description: "Change the size of an object."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      title: "更改大小"
+      description: "更改对象的大小。"
+      one: "添加想要更改其大小的对象, 例如, 动物。"
+      two: "将下面的积木插入到对象的脚本中, 当它被点击时会使其最小化 (它的原始大小的 20%) 。"
     card2:
-      title: "Change Look"
-      description: "Change the looks of an object."
-      one: "Add the object of which you would like to change its look, e.g. items."
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
+      title: "更改外观"
+      description: "更改对象的外观。"
+      one: "添加想要更改其外观的对象。"
+      two: "在对象的外观中添加更多图片。"
+      three: "将下面的积木插入到对象的脚本中, 以便以一秒钟的间隔连续地切换它的外观。"
     card3:
-      title: "Animation"
-      description: "Animate objects"
-      one: "Add the object you want to be moving."
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      title: "动画"
+      description: "动画对象"
+      one: "添加要移动的对象。"
+      two: "在对象的外观中添加另一张能展示移动效果的图片。"
+      three: "将下面的积木插入到对象的脚本中, 以便以一段时间为间隔不断地改变对象的位置。此外, 你可以通过“碰到边缘反弹\"积木围绕舞台边缘运动。"
     card4:
       title: "滑行"
-      description: "Let your object glide over the screen."
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
+      description: "让您的对象在屏幕上滑动。"
+      one: "添加要滑翔的对象。例如飞机。"
+      two: "插入下面的积木, 并定义该运动应该发生的区域。"
     card5:
-      title: "Play a Sound"
-      description: "Play a sound by tapping on the object."
-      one: "Add the object you want to be playing a sound, e.g. dog."
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+      title: "播放声音"
+      description: "通过敲击对象来播放声音。"
+      one: "添加要播放声音的对象, 例如, 狗。"
+      two: "插入以下积木以使回放成为可能。从您的个人目录、口袋编程媒体库或您自己的录音记录中选择一个声音。"
     card6:
       title: "读出"
-      description: "Let your object speak."
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
+      description: "让你的对象说话。"
+      one: "添加要讲话的对象, 如嘉莉。"
+      two: "插入以下积木以使声音输出成为可能。"
     card7:
-      title: "Sensor"
-      description: "Control an object by using the inclination sensors."
-      one: "Add the object you want to be moving on stage."
-      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
+      title: "传感器"
+      description: "使用倾角传感器控制对象。"
+      one: "添加要在舞台上移动的对象。"
+      two: "插入以下积木, 以便通过手机的传感器控制对象。因此选择 \"x 和 y 倾角\"。为了得到适当的运动, 设置 \"-倾角\"。如果物体的运动过于灵敏， 可以采用将倾角除以10等处理方式。"
     card8:
-      title: "Compass"
-      description: "Create you own compass"
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
+      title: "罗盘"
+      description: "创建您自己的罗盘"
+      one: "添加要指向罗盘方向的对象。"
+      two: "插入以下积木以设置对象的方向。另外包含一个永久循环。"
     card9:
       title: "广播"
-      description: "Send messages from one object to another."
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
+      description: "从一个对象向另一个对象发送消息。"
+      one: "添加一个新对象, 如 Alice, 她将会发送广播消息。此外, 为背景的外观添加第二个背景图像。一旦背景接收到广播消息, 它就会改变成它的其他外观。"
+      two: "插入积木 \"广播消息\", 并确定当其他对象收到消息时的操作。"
+      three: "在这种情况下, 背景会在上一层中的对象被敲击时发生改变。"
     card10:
-      title: "Show variable"
-      description: "Show the value of a variable."
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
+      title: "显示变量"
+      description: "显示变量的值。"
+      one: "添加要通过手机传感器移动的对象 (请参阅%tutorial_card_link_7% 教程卡 7 %link_end%)。另外添加第二个背景, 当它接收到广播消息时会发生更改。"
+      two: "插入以下积木可以将移动对象的当前 x 和 y 位置保存至一个变量中。"
+      three: "通过 \"显示变量\", 您可以在舞台上显示变量的值。"
     card11:
-      title: "Collision detection"
-      description: "Detect a collision between two objects."
-      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+      title: "碰撞检测"
+      description: "检测两个对象之间的碰撞。"
+      one: "添加两个对象, 其中一个应该通过您的手机的传感器移动，如亚历克斯 (见%tutorial_card_link_7% 教程卡 7 %link_end%)。"
+      two: "保存移动对象亚历克斯的当前 \"x 和 y 位置\"(参见%tutorial_card_link_10% 教程卡 10 %link_end%) 并插入以下脚本。连续检查两个对象是否重叠。如果发生这种情况应该隐藏固定对象。"
     card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
+      title: "人脸检测"
+      description: "使用 \"人脸检测\" 控制对象。"
+      one: "首先要确保人脸检测积木已启用。然后进行设置。"
+      two: "添加一个新的对象, 并插入下面的积木，如果一个人脸被检测该对象会被显示。检查是否检测到人脸, 并将其置于一个永久循环中。如果摄像头探测到一张人脸, 变量的值为 \"真\", 否则为 \"假\"。"
   starterPrograms:
-    title: "Starter Programs"
-    description: "Try out these starter programs. Look inside to make changes and add your ideas."
+    title: "初学者程序"
+    description: "试用这些初学者程序。查看内容并修改它们以添加你的创意。"
     categories:
-      games: "Games"
-      animations: "Animations"
-      interactive: "Interactive Art and Stories"
-      music: "Music And Dance"
+      games: "游戏"
+      animations: "动画"
+      interactive: "互动艺术与故事"
+      music: "音乐和舞蹈"
   gameJam:
-    title: "How to upload a Pocket Code game to the Game Jolt Site?"
-    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registration"
-    text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Upload"
-    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your program"
-    text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
-    title4: "Create Android app"
-    text4: "Directly on the program detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Download app"
-    text5: "After the building process you can download your program as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Register/Login at GameJolt.com"
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: "Upload your game on the Game Jolt Site"
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
-    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
+    title: "如何上传一个口袋编程游戏到Game Jolt网站？"
+    text0: "首先恭喜你的游戏! 现在你可以上传它在 %link%, 以创建一个独立的 Android 应用程序, 然后你可以将它上传Game Jolt网站。"
+    title1: "注册"
+    text1: "首先, 您需要创建一个帐户。之后, 您可以上传您创建的程序。不要担心，这很容易, 您只需要考虑一个用户名和密码。填写后, 点击 ' 登录或注册 '。就是这样！"
+    title2: "上传"
+    text2: "注册过程后, 您可以上传您的游戏。只要想一个名字, 并添加一个描述。还可以在 \"说明\" 字段中添加 #AliceJam150。"
+    title3: "查找您的程序"
+    text3: "访问您的口袋编程描述页， 您所有程序都在那里被列出，或通过程序名称直接搜索您的程序。"
+    title4: "创建 Android 应用程序"
+    text4: "直接在程序的详细信息页面，您可以创建一个Android应用程序。通过点击“准备应用程序”，应用程序将被建立"
+    title5: "下载程序"
+    text5: "构建过程后，您可以下载程序作为一个应用程序。这个下载的应用程序需要再次直接上传到游戏颠簸网站才能参与%link%"
+    title6: "在GameJolt.com注册/登录"
+    text6: "访问%link%并点击“登录”或“注册！在菜单中。如果您已经登录了一个账户，如果没有，您需要注册您的电子邮件地址，用户名和密码。"
+    title7: "请在游戏惊震站（Game Jolt Site) 上传你的游戏"
+    text7: "在你登录之后，请前往到你的概要面板。你可以在那里添加你的游戏。首先，你必须点击“接受条款”的按键。然后请填写你的游戏资料。如果是引擎/语言/创造性工具，请点选“其他”并添加到其他引擎/语言/工具“安卓”。如果是“开发性物品或工具”的性质，请点选“已完成/稳定”。请确保你已在你的叙述中包括了#Alicm Jam150以让它能出现在%link%的页面。"
+    text7_1: "在您能发布您的游戏之前，请遵照接下来的指示步骤。你必须至少添加一个“缩略图”，设置一个“成熟度评级”，并点击”构建/文件“以上传你的游戏。"
+    text7_2: "点击“添加包裹”并填写包裹资料。请保存之后再添加发布版本。 "
     text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: 'Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it.'
+    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
     text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
     text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
     text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
   aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
+    title1: "(欢迎来到) 仙境"
     subtitle1: "Animate Characters and create a 'when tapped' event"
     description1: |
       Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
       Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: "Save Alice!"
+    title2: "快救爱丽丝！"
     subtitle2: "Use the inclination sensors and detect a collision between objects"
     description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: "The Hatter - Hit and Run"
+    title3: "帽子击中和奔跑"
     subtitle3: "Create a moving landscape and control the Hatters' movement"
     description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
-    title4: "The Hatter - Hit and Run"
-    subtitle4: "Let the Hatter shoot the evil cards"
+    title4: "帽子击中和奔跑"
+    subtitle4: "让帽子射下邪恶的牌"
     description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
-    title5: "Whack a Cheshire Cat"
+    title5: "捶柴郡猫"
     subtitle5: "Create a score by using variables"
     description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
-    title6: "A Rabbits Race"
+    title6: "兔子赛跑"
     subtitle6: "Create a moving background"
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
@@ -415,54 +420,57 @@ oauth:
   username_header: Thank you for signing up to Pocket Code!
   username_chooser: 'Please choose a username:'
   username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
+  usernameTaken: 用户名已经存在，请选择另一个名称。
 search:
   dotdotdot: Search...
-  search: '&#x516B;&#x6708;'
-  results: '&#x641C;&#x7D22;&#x7ED3;&#x679C;'
-  resultcount: Your search returned %count% results
+  search: 搜索​​​​
+  results: 搜索结果
+  resultcount: 搜索未返回%count%个结果
+  fail: Please enter at least a single search term
 menu:
-  profile: '&#x6839;&#x6362;&#x5BC6;&#x7801;'
-  logout: '&#x4E00;&#x5929;&#x524D;'
+  profile: 我的个人资料
+  login: 登录
+  logout: 登出
+  admin: Admin
 programLoader:
   noPrograms: There are currently no programs.
 login:
-  passOrUser: '&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;&#x65E0;&#x6548;&#x3002;'
+  passOrUser: 您的密码或用户名不正确。
   noUsername: Your username or email address was not found.
-  forgotPass: '&#x767B;&#x5F55;'
-  recoverPass: '&#x8F93;&#x5165;&#x60A8;&#x7684;&#x6635;&#x79F0;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;'
+  forgotPass: 忘记了密码或用户名？
+  recoverPass: 找回密码
   recoverPassSend: An email was sent to your email address. Please check your inbox.
-  userOrEmail: Username or Email
-  changePass: '&#x6635;&#x79F0;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;'
-  createAccount: Create an account
+  userOrEmail: 用户名或电子邮件已存在
+  changePass: 更改密码
+  createAccount: 创建账户
   or: 或
 apk:
-  download: Download as app
-  prepare: 'Prepare app'
-  preparing: 'Preparing app'
+  download: 下载程序
+  prepare: '准备应用程序'
+  preparing: '准备应用程序'
   text: 'The process may take a while'
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: 用户名不能为空
+    invalid: 用户名无效
+    exists: 此名称已存在。
+    not_exists: 此用户不存在
     not_email: The username must not be an email address.
   password:
-    blank: '&#x5BC6;&#x7801;&#x4E0E;&#x6635;&#x79F0;&#x5FC5;&#x987B;&#x4E0D;&#x540C;&#x3002;'
+    blank: 密码空缺
     short: 'Your password must have at least {{ limit }} characters.'
   description:
     rude: Description must not contain rude wordes.
   country:
-    blank: '&#x7535;&#x8DEF;&#x677F;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;&#x3002;'
+    blank: 缺少国别。
     invalid: Invalid country
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: '&#x5BC6;&#x7801;&#x6216;&#x7528;&#x6237;&#x540D;&#x4E0D;&#x6B63;&#x786E;&#x3002;'
+    exists: 此电子邮件地址早已存在。
   id:
     blank: Open Authentication ID must not be blank
-  login: 'MediaWiki&#x7684;API&#x53CD;&#x5E94;&#x4E0D;&#x6B63;&#x786E;&#x3002;'
+  login: 密码或用户名不正确。
   post-data: POST-Data not correct or missing!
   checksum:
     missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
@@ -475,7 +483,7 @@ errors:
     invalid: invalid file
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
-  token: '&#x8BBE;&#x5907;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;&#xFF1A;&#x65E0;&#x6548;&#x7684;auth-token&#xFF01;'
+  token: '设备验证失败： 无效的验证标记！'
   programname:
     rude: Programname must not contain rude wordes.
   program:
@@ -485,7 +493,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
-  registration: 'BOARD &#x6CE8;&#x518C;&#x6210;&#x529F;'
+  registration: 注册成功！
   token: ok
   upload: Your project was uploaded successfully!
   report: Your report was successfully sent!
@@ -501,27 +509,27 @@ language:
   arabic: Arabic
   bulgarian: Bulgarian
   catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
+  chinese_simplified_han: 中文(简体)
+  chinese_traditional_han: 中文(繁体)
+  croatian: 克罗地亚文
+  czech: 捷克文
+  danish: 丹麦文
+  dutch: 荷兰文
+  english_united_kingdom: 英文（英国）
+  english_united_states: 英语(美国)
+  estonian: 爱斯托尼亚语
+  filipino: 菲律宾语
+  finnish: 芬兰语
+  french: 法语
+  german: 德语
+  greek: 希腊语
+  hebrew: 希伯来语
+  hindi: 印地语
+  hungarian: 匈牙利语
+  indonesian: 印度尼西亚文
+  italian: 意大利语
+  japanese: 日文
+  korean: 韩文
   latvian: Latvian
   lithuanian: Lithuanian
   malay: Malay
@@ -561,7 +569,7 @@ extenstion-text: Extensions
 tags:
   constant:
     tag1: Game
-    tag2: Animation
+    tag2: 动画
     tag3: Story
     tag4: Music
     tag5: Art
@@ -599,15 +607,38 @@ footer:
   communityStats: Community Stats
   downloads: downloads
   programs: programs
-  downloads_count: '624,589'
-  programs_count: '36,738'
 privacy-policy:
-  version: Version 2.0, 20 September 2017
-  text1: To offer you all collaborative benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To use your account in our systems, and to inform you about necessary changes about your account (e.g., updates/violation of our Use of Terms of Use and Service or of community rules) or our policies, we will store your username and, if provided by you, your E-Mail address. If you’ve connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text3: To avoid misuse of our services (e.g., through user contributed uploads or comments) for illegal purposes, the user generated public data will be stored internally in a database, together with a timestamp and the used IP address.
-  text4: To improve our services (apps and websites) and to do scientific research on ICT and STEM education, we use Google Analytics, Crashlytics and Firebase by Google Inc. to get metadata about the usage (e.g., timestamps, visited pages/screens, used operating system, and information about the network provider). This analysis and the collected data is not linked to your profile and does not contain any personal information.
-  text5: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will only be used for statistical and research purposes by us and can be removed at any time in your profile settings.
-  text6: 'You can withdraw the usage of this data at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting or liking. Also all provided content linked to your account, e.g. uploaded programs, comments, will get deleted.'
-  text7: All Services are provided by the non-profit free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software (Graz, Austria). To get in touch with us, please send an E-Mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Inffeldgasse 16b/II, 8010 Graz, Austria.
-  text8: In case you are below the age of 16, this policy must be accepted by a legal guardian (usually parents).
+  header: 隐私条款
+  version: Version 2.1, 25 June 2018
+  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
+  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
+  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
+  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
+  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
+  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
+  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+catro-notifications:
+  comment:
+    title: New comment for program %program_name%!
+    messagePart1: User
+    messagePart2: commented on your program
+clipboard:
+  success: Link to program copied to clipboard!
+  fail: Failed to copy link to clipboard! :(
+next: 下一步
+previous: Previous
+help-cards:
+  headings:
+    starters: Starters
+    tutorials: 新手向导
+    stepbystep: Step by Step
+    getinvolved: Get involved
+  text:
+    starters: Try out and remix with
+    tutorials: Effective tricks in
+    stepbystep: Do 10 easy steps in
+    getinvolved_1: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
+    getinvolved_2: now from Google Play and get started!

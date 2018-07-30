@@ -107,10 +107,12 @@ class ProgramManager
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $this->addTags($program, $extracted_file, $request->getLanguage());
-    $version = $program->getLanguageVersion();
-    //$max_version = $this->max_version;
 
-    if (version_compare($version, "0.995", ">"))
+
+    $version = $program->getLanguageVersion();
+
+    $max_version = "$this->max_version";
+    if (version_compare($version, $max_version, ">"))
     {
       $program->setPrivate(true);
     }
@@ -156,6 +158,7 @@ class ProgramManager
 
         throw $error;
       }
+
       return null;
     }
 
@@ -170,8 +173,7 @@ class ProgramManager
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
       $this->file_repository->makeTempProgramPerm($program->getId());
-    }
-    catch (\Exception $e)
+    } catch (\Exception $e)
     {
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
@@ -180,11 +182,11 @@ class ProgramManager
       {
         $this->screenshot_repository->deletePermProgramAssets($program_id);
         $this->file_repository->deleteProgramFile($program_id);
-      }
-      catch (IOException $error)
+      } catch (IOException $error)
       {
         throw $error;
       }
+
       return null;
     }
 

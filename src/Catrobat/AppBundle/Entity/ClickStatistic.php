@@ -70,37 +70,12 @@ class ClickStatistic
     /**
      * @ORM\Column(type="text", options={"default":""}, nullable=true)
      */
-    protected $latitude;
-
-    /**
-     * @ORM\Column(type="text", options={"default":""}, nullable=true)
-     */
-    protected $longitude;
-
-    /**
-     * @ORM\Column(type="text", options={"default":""}, nullable=true)
-     */
     protected $country_code;
 
     /**
      * @ORM\Column(type="text", options={"default":""}, nullable=true)
      */
     protected $country_name;
-
-    /**
-     * @ORM\Column(type="string", options={"default":""}, nullable=true)
-     */
-    protected $street;
-
-    /**
-     * @ORM\Column(type="string", options={"default":""}, nullable=true)
-     */
-    protected $postal_code;
-
-    /**
-     * @ORM\Column(type="string", options={"default":""}, nullable=true)
-     */
-    protected $locality;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -222,22 +197,6 @@ class ClickStatistic
     /**
      * @return mixed
      */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * @param mixed $longitude
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCountryCode()
     {
         return $this->country_code;
@@ -265,54 +224,6 @@ class ClickStatistic
     public function setCountryName($country_name)
     {
         $this->country_name = $country_name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * @param mixed $street
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPostalCode()
-    {
-        return $this->postal_code;
-    }
-
-    /**
-     * @param mixed $postal_code
-     */
-    public function setPostalCode($postal_code)
-    {
-        $this->postal_code = $postal_code;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLocality()
-    {
-        return $this->locality;
-    }
-
-    /**
-     * @param mixed $locality
-     */
-    public function setLocality($locality)
-    {
-        $this->locality = $locality;
     }
 
     /**

@@ -32,13 +32,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
                 'admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('downloaded_at')
             ->add('ip')
-            ->add('latitude')
-            ->add('longitude')
             ->add('country_code')
             ->add('country_name')
-            ->add('street')
-            ->add('postal_code')
-            ->add('locality')
             ->add('locale')
             ->add('user_agent')
             ->add('referrer');
@@ -63,7 +58,6 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('country_name')
             ->add('user_agent')
             ->add('referrer')
-            ->add('locality')
             ->add('locale');
     }
 
@@ -79,13 +73,8 @@ class ProgramDownloadStatisticsAdmin extends Admin
             ->add('user')
             ->add('downloaded_at')
             ->add('ip')
-            ->add('latitude')
-            ->add('longitude')
             ->add('country_code')
             ->add('country_name')
-            ->add('street')
-            ->add('postal_code')
-            ->add('locality')
             ->add('locale')
             ->add('program.downloads')
             ->add('program.apk_downloads')
@@ -101,8 +90,7 @@ class ProgramDownloadStatisticsAdmin extends Admin
         return array('id','program.id','recommended_by_page_id','program.name','recommended_by_program.id',
             'recommended_by_program.name','recommended_from_program_via_tag.id','recommended_from_program_via_tag.name',
             'program.gamejam_submission_accepted','program.downloads','program.apk_downloads','program.description',
-            'downloaded_at','ip','latitude','longitude','country_code','country_name','street','postal_code',
-            'locality','locale','user_agent','user.username','referrer');
+            'downloaded_at','ip','country_code','country_name','locale','user_agent','user.username','referrer');
     }
 
     protected function configureRoutes(RouteCollection $collection)

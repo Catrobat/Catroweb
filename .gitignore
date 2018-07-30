@@ -37,3 +37,4 @@ Catroweb-Symfony.iml
 
 # End of https://www.gitignore.io/api/sass
 /web/bootstrap_vendor
+crowdin.yml
