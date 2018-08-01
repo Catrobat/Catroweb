@@ -25,7 +25,7 @@
             <div class="panel-title">Sign Up</div>
           </div>
           <div style="padding: 30px 30px 0 30px" class="panel-body">
-            <form id="registration_form" action="{{ path('register_check') }}" {{ form_enctype(form) }} method="POST" role="form" class="fos_user_registration_register form-horizontal">
+            <form id="registration_form" action="{{ path('register_check') }}" {{ form_start(form) }} method="POST" role="form" class="fos_user_registration_register form-horizontal">
               <div id="signupalert" style="display:none" class="alert alert-danger">
                 {{ form_errors(form) }}
               </div>
@@ -129,7 +129,7 @@
                   </div>
                 </div>
               </div>
-              {{ form_rest(form) }}
+              {{ form_end(form) }}
             </form>
           </div>
         </div>
