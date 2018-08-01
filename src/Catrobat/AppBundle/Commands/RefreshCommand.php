@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Filesystem;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
@@ -58,9 +59,10 @@ class RefreshCommand extends ContainerAwareCommand
 
     protected function clearCache()
     {
-        $dialog = $this->getHelperSet()->get('dialog');
+        $dialog = $this->getHelperSet()->get('question');
+        $question = new Question('<question>Clear Cache (Y/n)? </question>', true);
 
-        if ($dialog->askConfirmation($this->output, '<question>Clear Cache (Y/n)? </question>', true)) {
+        if ($dialog->doAsk($this->output, $question)) {
             CommandHelper::executeSymfonyCommand('cache:clear', $this->getApplication(), array(), $this->output);
         }
     }

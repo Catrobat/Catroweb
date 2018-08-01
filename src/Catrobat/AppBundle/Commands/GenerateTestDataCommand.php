@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Commands;
 
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -39,9 +40,10 @@ class GenerateTestDataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
+        $dialog = $this->getHelperSet()->get('question');
+        $question = new Question('<question>Generate test data in ' . $this->target_directory . ' (Y/n)?</question>', true);
 
-        if ($dialog->askConfirmation($output, '<question>Generate test data in '.$this->target_directory.' (Y/n)?</question>', true)) {
+        if ($dialog->askConfirmation($output, $question)) {
             $output->writeln('<info>Deleting old test data in '.$this->target_directory.'</info>');
 
             $finder = new Finder();
