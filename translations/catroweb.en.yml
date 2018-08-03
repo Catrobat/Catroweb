@@ -682,6 +682,10 @@ catro-notifications:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
 
 clipboard:
   success: Link to program copied to clipboard!

@@ -2,6 +2,9 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\CatroNotification;
+use Catrobat\AppBundle\Entity\LikeNotification;
+use Catrobat\AppBundle\Services\CatroNotificationService;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\ProgramLike;
@@ -112,7 +115,7 @@ class ProgramController extends Controller
 
     $isReportedByUser = $this->checkReportedByUser($program, $user);
 
-    $program_url = $this->generateUrl('program', ['id' => $program->getId(), 'flavor' => $flavor], UrlGeneratorInterface::ABSOLUTE_URL);
+    $program_url = $this->generateUrl('program', ['id' => $program->getId()], true);
     $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
 
     $jam = $this->extractGameJamConfig();
@@ -170,6 +173,7 @@ class ProgramController extends Controller
       }
     }
 
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -189,6 +193,32 @@ class ProgramController extends Controller
     $new_type = $program_manager->toggleLike($program, $user, $type, $no_unlike);
     $like_type_count = $program_manager->likeTypeCount($program->getId(), $type);
     $total_like_count = $program_manager->totalLikeCount($program->getId());
+
+    $send_notification = true;
+    $nr = $this->get("catro_notification_repository");
+    $notifications = $nr->findBy(["user" => $program->getUser()]);
+    /** @var CatroNotification $notification */
+    foreach ($notifications as $notification)
+    {
+      if ($notification instanceof LikeNotification)
+      {
+        if ($notification->getLikeFrom()->getId() === $user->getId())
+        {
+          $send_notification = false;
+          break;
+        }
+      }
+    }
+
+    if ($send_notification)
+    {
+      /** @var CatroNotificationService $notification_service */
+      $notification_service = $this->get("catro_notification_service");
+
+      $notification = new LikeNotification($program->getUser(), "Like gained", "You received a new like", $user, $program);
+      $notification_service->addNotification($notification);
+    }
+
 
     if (!$request->isXmlHttpRequest())
     {
@@ -496,7 +526,7 @@ class ProgramController extends Controller
    */
   private function findUserPrograms($user, $program)
   {
-    $user_programs = [];
+    $user_programs = null;
     if ($user)
     {
       $user_programs = $user->getPrograms()->matching(Criteria::create()
