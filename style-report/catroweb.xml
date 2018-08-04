@@ -67,7 +67,7 @@
 	<test name="protectedFunctionNaming" regexp="/^[a-z][a-zA-Z]*$/" level="error" />
 
 	<!-- Check Private Function Naming -->
-	<test name="privateFunctionNaming" regexp="/^[a-z][a-zA-Z]*$/" level="error" />
+	<test name="privateFunctionNaming" regexp="/^[a-z][a-zA-Z0-9]*$/" level="error" />
 
 	<!-- Checks the constuctor naming -->
 	<!-- old = old style (constructor = name of the class) -->
@@ -95,6 +95,8 @@
 		<exception value="x" />
 		<exception value="y" />
 		<exception value="e" /> <!-- for exception $e -->
+		<exception value="em" />
+		<exception value="id" />
 	</test>
 
 	<!-- **************** -->

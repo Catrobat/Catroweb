@@ -7,10 +7,25 @@
 {% block body %}
 <h1> {{ profile.username }} </h1>
 
+  {% if app.user.id != profile.id %}
+    <div id="follow-icon">
+      {% if profile.hasFollower(app.user) %}
+        <a id="follow-btn" class="pull-right" href="{{ url('unfollow_user', { id : profile.id }) }}" data-toggle="tooltip" title="Unfollow this user!">
+          <i class="fa fa-user-times"></i>
+        </a>
+      {% else %}
+        <a id="follow-btn" class="pull-right" href="{{ url('follow_user', { id : profile.id }) }}" data-toggle="tooltip" title="Follow this user!">
+          <i class="fa fa-user-plus"></i>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+
 <div id="user-avatar">
-  <img id="user-image" src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"> </img>
+  <img id="user-image" src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}" />
   <div id="user-information">
     <p><strong>Amount of programs: {{ program_count }}</strong></p>
+    <p><strong>Followers: {{ follower_count }}</strong></p>
     <p><strong>Country: {{ country }}</strong></p>
   </div>
 </div>
@@ -20,6 +35,8 @@
 </div>
 
 <div class="clear"></div>
+<h1>{{ "profile.follower"|trans({}, "catroweb") }} ({{ profile.followers|length }})</h1>
+<div id="list-follower"></div>
 
 {% endblock %}
 
@@ -46,5 +63,10 @@
       }
 
     });
+  </script>
+  <script src="{{ asset('js/custom/ProfileLoader.js') }}"></script>
+  <script>
+      var follower = new ProfileLoader({{ profile.id }} ,'{{ path('list_follow', { type: 'follower' }) }}', '{{ path('profile') }}', "#list-follower", '{{ asset('images/default/avatar_default.png') }}');
+      follower.init();
   </script>
 {% endblock %}

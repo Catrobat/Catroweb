@@ -83,22 +83,6 @@ class Program
   protected $extensions;
 
   /**
-   * @return Tag[]|\Doctrine\Common\Collections\Collection
-   */
-  public function getTags()
-  {
-    return $this->tags;
-  }
-
-  /**
-   * @return Extension[]|\Doctrine\Common\Collections\Collection
-   */
-  public function getExtensions()
-  {
-    return $this->extensions;
-  }
-
-  /**
    * @ORM\Column(type="integer")
    */
   protected $views = 0;
@@ -1235,5 +1219,19 @@ class Program
   {
     $this->likes = $likes;
   }
+  /**
+   * @return Tag[]|\Doctrine\Common\Collections\Collection
+   */
+  public function getTags()
+  {
+    return $this->tags;
+  }
 
+  /**
+   * @return Extension[]|\Doctrine\Common\Collections\Collection
+   */
+  public function getExtensions()
+  {
+    return $this->extensions;
+  }
 }

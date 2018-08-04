@@ -70,6 +70,14 @@
     <button id="close-toggled-popup">Ok</button>
   </div>
 
+  <div class="clear"></div>
+  <h1>{{ "profile.follows"|trans({}, "catroweb") }} ({{ app.user.following|length }})</h1>
+  <div id="list-follows"></div>
+
+  <div class="clear"></div>
+  <h1>{{ "profile.follower"|trans({}, "catroweb") }} ({{ app.user.followers|length }})</h1>
+  <div id="list-follower"></div>
+
 {% endblock %}
 
 {% block js %}
@@ -89,5 +97,12 @@
     var programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}');
     programs.initProfile({{ app.user.id }});
     {% endif %}
+  </script>
+  <script src="{{ asset('js/custom/ProfileLoader.js') }}"></script>
+  <script>
+    var follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}', '{{ path('profile') }}', "#list-follows", '{{ asset('images/default/avatar_default.png') }}');
+    follows.init();
+    var follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}', '{{ path('profile') }}', "#list-follower", '{{ asset('images/default/avatar_default.png') }}');
+    follower.init();
   </script>
 {% endblock %}

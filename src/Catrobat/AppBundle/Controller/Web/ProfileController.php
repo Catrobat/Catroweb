@@ -2,8 +2,11 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\FollowNotification;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\StatusCode;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +21,14 @@ class ProfileController extends Controller
   const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
   const MAX_AVATAR_SIZE = 300;
 
+
   /**
    * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $id
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function profileAction(Request $request, $id)
   {
@@ -29,7 +38,7 @@ class ProfileController extends Controller
     $twig = 'profile.html.twig';
     $program_count = 0;
 
-    if ($id == 0)
+    if ($id === 0)
     {
       $user = $this->getUser();
       $twig = 'myprofile.html.twig';
@@ -52,25 +61,30 @@ class ProfileController extends Controller
     $firstMail = $user->getEmail();
     $secondMail = $user->getAdditionalEmail();
     $nolb_user = $user->getNolbUser();
+    $followerCount = $user->getFollowers()->count();
 
     return $this->get('templating')->renderResponse($twig, [
-      'profile'       => $user,
-      'program_count' => $program_count,
-      'country'       => $country,
-      'firstMail'     => $firstMail,
-      'secondMail'    => $secondMail,
-      'oauth_user'    => $oauth_user,
-      'nolb_user'     => $nolb_user,
+      'profile'        => $user,
+      'program_count'  => $program_count,
+      'follower_count' => $followerCount,
+      'country'        => $country,
+      'firstMail'      => $firstMail,
+      'secondMail'     => $secondMail,
+      'oauth_user'     => $oauth_user,
+      'nolb_user'      => $nolb_user,
     ]);
   }
 
 
   /**
    * @Route("/profile/edit", name="profile_edit", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function profileEditAction(Request $request)
   {
-
     /**
      * @var $user User
      */
@@ -102,11 +116,19 @@ class ProfileController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/emailEdit", name="email_edit", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public function EmailEditAction(Request $request)
+  public function emailEditAction()
   {
+    /**
+     * @var $user User
+     */
     $user = $this->getUser();
     if (!$user)
     {
@@ -120,11 +142,19 @@ class ProfileController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/avatarEdit", name="avatar_edit", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public function AvatarEditAction(Request $request)
+  public function avatarEditAction()
   {
+    /**
+     * @var $user User
+     */
     $user = $this->getUser();
     if (!$user)
     {
@@ -141,9 +171,16 @@ class ProfileController extends Controller
 
   /**
    * @Route("/passwordEdit", name="password_edit", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public function passwordEditAction(Request $request)
+  public function passwordEditAction()
   {
+    /**
+     * @var $user User
+     */
     $user = $this->getUser();
     if (!$user)
     {
@@ -162,9 +199,16 @@ class ProfileController extends Controller
 
   /**
    * @Route("/countryEdit", name="country_edit", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public function countryEditAction(Request $request)
+  public function countryEditAction()
   {
+    /**
+     * @var $user User
+     */
     $user = $this->getUser();
     if (!$user)
     {
@@ -180,6 +224,10 @@ class ProfileController extends Controller
 
   /**
    * @Route("/countrySave", name="country_save", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function countrySaveAction(Request $request)
   {
@@ -200,18 +248,26 @@ class ProfileController extends Controller
       $this->validateCountryCode($country);
     } catch (\Exception $e)
     {
-      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+      return JsonResponse::create([
+        'statusCode' => $e->getMessage()
+      ]);
     }
 
     $user->setCountry($country);
 
     $this->get('usermanager')->updateUser($user);
 
-    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+    return JsonResponse::create([
+      'statusCode' => StatusCode::OK
+    ]);
   }
 
   /**
    * @Route("/passwordSave", name="password_save", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function passwordSaveAction(Request $request)
   {
@@ -235,7 +291,9 @@ class ProfileController extends Controller
 
     if (!$bool)
     {
-      return JsonResponse::create(['statusCode' => "777",]);
+      return JsonResponse::create([
+        'statusCode' => "777"
+      ]);
     }
 
     $newPassword = $request->request->get('newPassword');
@@ -246,7 +304,9 @@ class ProfileController extends Controller
       $this->validateUserPassword($newPassword, $repeatPassword);
     } catch (\Exception $e)
     {
-      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+      return JsonResponse::create([
+        'statusCode' => $e->getMessage()
+      ]);
     }
 
     if ($newPassword !== '')
@@ -256,12 +316,19 @@ class ProfileController extends Controller
 
     $this->get('usermanager')->updateUser($user);
 
-    return JsonResponse::create(['statusCode' => StatusCode::OK, 'saved_password' => "supertoll"]);
+    return JsonResponse::create([
+      'statusCode' => StatusCode::OK,
+      'saved_password' => "supertoll"
+    ]);
   }
 
 
   /**
    * @Route("/emailSave", name="email_save", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function emailSaveAction(Request $request)
   {
@@ -300,11 +367,11 @@ class ProfileController extends Controller
       return JsonResponse::create(['statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 2]);
     }
 
-    if ($firstMail !== '' && $firstMail != $user->getEmail())
+    if ($firstMail !== '' && $firstMail !== $user->getEmail())
     {
       $user->setEmail($firstMail);
     }
-    if ($firstMail !== '' && $secondMail !== '' && $secondMail != $user->getAdditionalEmail())
+    if ($firstMail !== '' && $secondMail !== '' && $secondMail !== $user->getAdditionalEmail())
     {
       $user->setAdditionalEmail($secondMail);
     }
@@ -325,18 +392,23 @@ class ProfileController extends Controller
 
     $this->get('usermanager')->updateUser($user);
 
-    return JsonResponse::create(['statusCode' => StatusCode::OK]);
-
-
+    return JsonResponse::create([
+      'statusCode' => StatusCode::OK
+    ]);
   }
+
 
   /**
    * @Route("/profileUploadAvatar", name="profile_upload_avatar", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function uploadAvatarAction(Request $request)
   {
-    /*
-     * @var $user \Catrobat\AppBundle\Entity\User
+    /**
+     * @var $user User
      */
     $user = $this->getUser();
     if (!$user)
@@ -363,13 +435,18 @@ class ProfileController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public function deleteAccountAction(Request $request)
+  public function deleteAccountAction()
   {
-    /*
-     * @var $user \Catrobat\AppBundle\Entity\User
+    /**
+     * @var $user User
      */
     $user = $this->getUser();
     if (!$user)
@@ -398,14 +475,142 @@ class ProfileController extends Controller
     ]);
   }
 
+
+  /**
+   * @Route("/followUser/{id}", name="follow_user", methods = {"GET"}, requirements={"id":"\d+"}, defaults={"id" = 0})
+   *
+   * @param Request $request
+   * @param         $id
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   */
+  public function followUser($id)
+  {
+    /**
+     * @var User $user
+     */
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    if ($id === 0 || $id === $user->getId())
+    {
+      return $this->redirectToRoute('profile');
+    }
+
+    /**
+     * @var $userToFollow User
+     */
+    $userToFollow = $this->get('usermanager')->find($id);
+    $user->addFollowing($userToFollow);
+    $this->get('usermanager')->updateUser($user);
+
+    $notification_service = $this->get("catro_notification_service");
+    $notification = new FollowNotification(
+      $userToFollow,
+      "Follow notification",
+      "follows you now",
+      $user
+    );
+    $notification_service->addNotification($notification);
+
+    return $this->redirectToRoute('profile', ['id' => $id]);
+  }
+
+
+  /**
+   * @Route("/unfollowUser/{id}", name="unfollow_user", methods = {"GET"},requirements={"id":"\d+"}, defaults={"id" = 0})
+   *
+   * @param Request $request
+   * @param         $id
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   */
+  public function unfollowUser($id)
+  {
+
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    if ($id === 0)
+    {
+      return $this->redirectToRoute('profile');
+    }
+
+    /**
+     * @var $userToUnfollow User
+     */
+    $userToUnfollow = $this->get('usermanager')->find($id);
+    $user->removeFollowing($userToUnfollow);
+    $this->get('usermanager')->updateUser($user);
+
+    return $this->redirectToRoute('profile', ['id' => $id]);
+  }
+
+
+  /**
+   * @Route("/follow/{type}", name="list_follow", methods = {"POST"}, defaults={"_format": "json"}, requirements={"type":"follower|follows"})
+   *
+   * @param Request $request
+   * @param         $type
+   *
+   * @return JsonResponse
+   */
+  public function listFollow(Request $request, $type)
+  {
+    $criteria = Criteria::create()
+      ->orderBy(["username" => Criteria::ASC])
+      ->setFirstResult($request->get("page") * $request->get("pageSize"))
+      ->setMaxResults($request->get("pageSize"));
+
+    /**
+     * @var User            $user
+     * @var ArrayCollection $followCollection
+     * @var User[]          $users
+     */
+    $user = $this->get('usermanager')->find($request->get("id"));
+    switch ($type)
+    {
+      case "follower":
+        $followCollection = $user->getFollowers();
+        break;
+      case "follows":
+        $followCollection = $user->getFollowing();
+        break;
+    }
+    $length = $followCollection->count();
+    $followCollection->first();
+    $users = $followCollection->matching($criteria)->toArray();
+
+    $data = [];
+    foreach ($users as $user)
+    {
+      array_push($data, [
+        "username" => $user->getUsername(),
+        "id"       => $user->getId(),
+        "avatar"   => $user->getAvatar(),
+      ]);
+    }
+
+    return JsonResponse::create(["profiles" => $data, "maximum" => $length]);
+  }
+
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //// private functions
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  /*
-   * @param string $username
-   * @param int $pass1
-   * @param int $pass2
+
+  /**
+   * @param $pass1
+   * @param $pass2
+   *
+   * @throws \Exception
    */
   private function validateUserPassword($pass1, $pass2)
   {
@@ -414,24 +619,27 @@ class ProfileController extends Controller
       throw new \Exception(StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
     }
 
-    if (strcasecmp($this->getUser()->getUsername(), $pass1) == 0)
+    if (strcasecmp($this->getUser()->getUsername(), $pass1) === 0)
     {
       throw new \Exception(StatusCode::USER_USERNAME_PASSWORD_EQUAL);
     }
 
-    if ($pass1 != '' && strlen($pass1) < self::MIN_PASSWORD_LENGTH)
+    if ($pass1 !== '' && strlen($pass1) < self::MIN_PASSWORD_LENGTH)
     {
       throw new \Exception(StatusCode::USER_PASSWORD_TOO_SHORT);
     }
 
-    if ($pass1 != '' && strlen($pass1) > self::MAX_PASSWORD_LENGTH)
+    if ($pass1 !== '' && strlen($pass1) > self::MAX_PASSWORD_LENGTH)
     {
       throw new \Exception(StatusCode::USER_PASSWORD_TOO_LONG);
     }
   }
 
-  /*
-   * @param string $email
+
+  /**
+   * @param $email
+   *
+   * @throws \Exception
    */
   private function validateEmail($email)
   {
@@ -446,8 +654,11 @@ class ProfileController extends Controller
     }
   }
 
-  /*
-   * @param string $country
+
+  /**
+   * @param $country
+   *
+   * @throws \Exception
    */
   private function validateCountryCode($country)
   {
@@ -458,8 +669,10 @@ class ProfileController extends Controller
     }
   }
 
-  /*
-   * @param string $email
+
+  /**
+   * @param $email
+   *
    * @return bool
    */
   private function checkEmailExists($email)
@@ -472,7 +685,7 @@ class ProfileController extends Controller
     $userWithFirstMail = $this->get('usermanager')->findOneBy(['email' => $email]);
     $userWithSecondMail = $this->get('usermanager')->findOneBy(['additional_email' => $email]);
 
-    if ($userWithFirstMail != null && $userWithFirstMail != $this->getUser() || $userWithSecondMail != null && $userWithSecondMail != $this->getUser())
+    if ($userWithFirstMail !== null && $userWithFirstMail !== $this->getUser() || $userWithSecondMail !== null && $userWithSecondMail !== $this->getUser())
     {
       return true;
     }
@@ -480,9 +693,15 @@ class ProfileController extends Controller
     return false;
   }
 
+  /**
+   * @param      $code
+   * @param null $locale
+   *
+   * @return string
+   */
   public function country($code, $locale = null)
   {
-    $countries = Intl::getRegionBundle()->getCountryNames($locale ?: $this->localeDetector->getLocale());
+    $countries = Intl::getRegionBundle()->getCountryNames($locale ? : $this->localeDetector->getLocale());
     if (array_key_exists($code, $countries))
     {
       return $this->fixCharset($countries[$code]);
@@ -543,7 +762,7 @@ class ProfileController extends Controller
     $width = imagesx($image);
     $height = imagesy($image);
 
-    if ($width == 0 || $height == 0)
+    if ($width === 0 || $height === 0)
     {
       throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
     }

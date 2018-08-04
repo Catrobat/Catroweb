@@ -4,11 +4,14 @@ namespace Catrobat\AppBundle\Controller\Web;
 
 use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\CommentNotification;
+use Catrobat\AppBundle\Entity\FollowNotification;
 use Catrobat\AppBundle\Entity\LikeNotification;
+use Catrobat\AppBundle\Entity\NewProgramNotification;
 use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
+use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -57,35 +60,41 @@ class UserNotificationController extends Controller
     /** @var $notification CatroNotification */
     foreach ($catro_user_notifications as $notification)
     {
+      /**
+       * @var   $user User
+       */
+      $user = null;
       if ($notification instanceof LikeNotification)
       {
-        $avatar = $notification->getLikeFrom()->getAvatar();
-        if ($avatar)
-        {
-          $avatars[$notification->getId()] = $avatar;
-        }
+        $user = $notification->getLikeFrom();
       }
-
-      if ($notification instanceof CommentNotification)
+      elseif ($notification instanceof CommentNotification)
       {
         /**
          * @var   $em   \Doctrine\ORM\EntityManager
-         * @var   $user \Catrobat\AppBundle\Entity\User
          */
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy([
           'id' => $notification->getComment()->getUserId(),
         ]);
-        if ($user !== null)
+
+      }
+      elseif ($notification instanceof NewProgramNotification)
+      {
+        $user = $notification->getProgram()->getUser();
+      }
+      elseif ($notification instanceof FollowNotification)
+      {
+        $user = $notification->getFollower();
+      }
+      if ($user !== null)
+      {
+        $avatar = $user->getAvatar();
+        if ($avatar)
         {
-          $avatar = $user->getAvatar();
-          if ($avatar)
-          {
-            $avatars[$notification->getId()] = $avatar;
-          }
+          $avatars[$notification->getId()] = $avatar;
         }
       }
-
     }
 
     $logger->warning("screens", $avatars);

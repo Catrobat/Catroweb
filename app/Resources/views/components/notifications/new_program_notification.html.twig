@@ -1,24 +1,27 @@
 <div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
   <h5 class="card-header notification-header">
-    {{ 'catro-notifications.like.title'|trans({'%program_name%' : notification.program.name}, 'catroweb') }}
+    {{ 'catro-notifications.program-follow.title'|trans({}, 'catroweb') }}
   </h5>
   <div class="card-body">
+
     <div class="row">
-      {#//$avatar = "asset('images/default/avatar_default.png')";#}
       <div class="notification-avatar">
         <img class="notification-round"
              src="{% if avatars[notification.id] is defined %}{{ avatars[notification.id] }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
              alt="Card image">
       </div>
+
       <div class="notification-body">
+
         <div class="row mb-4">
           <p class="card-text">
-            {{ 'catro-notifications.like.messagePart1'|trans({}, 'catroweb') }}
-            <a href="{{ path('profile', {'id': notification.getLikeFrom.id}) }}">{{ notification.getLikeFrom.getUserName }}</a>
-            {{ 'catro-notifications.like.messagePart2'|trans({}, 'catroweb') }}
-            <a href="{{ path('program', {'id': notification.program.id}) }}">{{ notification.program.name }}</a>!
+            <a href="{{ path('profile', {'id': notification.program.user.id}) }}">{{ notification.program.user.username }}</a>
+            {{ 'catro-notifications.program-follow.messagePart1'|trans({}, 'catroweb') }}
+            <a href="{{ path('program', {'id': notification.program.id}) }}">{{ notification.program.name }}</a>
+            {{ 'catro-notifications.program-follow.messagePart2'|trans({}, 'catroweb') }}
           </p>
         </div>
+
         <div class="row">
           <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
                   onclick="notifications.markAsRead({{ notification.id }})">
@@ -28,4 +31,5 @@
       </div>
     </div>
   </div>
+
 </div>
