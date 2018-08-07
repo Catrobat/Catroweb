@@ -29,7 +29,7 @@ class ReportController extends Controller
         $event_dispatcher = $this->get('event_dispatcher');
 
         $response = array();
-        if (!$request->get('program') || !$request->get('note')) {
+        if (!$request->get('program') || !$request->get('category') || !$request->get('note')) {
             $response['statusCode'] = StatusCode::MISSING_POST_DATA;
             $response['answer'] = $this->trans('errors.post-data');
             $response['preHeaderMessages'] = '';
@@ -55,13 +55,15 @@ class ReportController extends Controller
         }
 
         $program->setVisible(false);
+        $report->setCategory($request->get('category'));
         $report->setNote($request->get('note'));
         $report->setProgram($program);
 
         $entity_manager->persist($report);
         $entity_manager->flush();
 
-        $event_dispatcher->dispatch('catrobat.report.insert', new ReportInsertEvent($request->get('note'), $report));
+        $event_dispatcher->dispatch('catrobat.report.insert',
+            new ReportInsertEvent($request->get('category'), $request->get('note'), $report));
 
         $response = array();
         $response['answer'] = $this->trans('success.report');

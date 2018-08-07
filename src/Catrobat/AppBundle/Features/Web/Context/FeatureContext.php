@@ -872,7 +872,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       ->click();
   }
 
-  /**
+    /**
+     * @Then /^I click the "([^"]*)" RadioButton$/
+     */
+    public function iClickTheRadiobutton($arg1)
+    {
+        $page = $this->getSession()->getPage();
+        $radioButton = $page->find('css', $arg1);
+        $radioButton->click();
+    }
+
+
+    /**
    * @Then /^I should be logged ([^"]*)?$/
    */
   public function iShouldBeLoggedIn($arg1)
