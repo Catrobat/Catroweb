@@ -2,180 +2,135 @@
 
 {% block head %}
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
 
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="{{  asset( getJavascriptPath('loginscript.js') )}}"></script>
-  <script src="{{  asset( getJavascriptPath('registrationscript.js') )}}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script src="{{ asset('js/jquery-ui/jquery-ui.js') }}"></script>
+<script src="{{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
 
 {% endblock %}
 
-{% block header %}
-{% endblock header%}
+{% block header "" %}
 
 {% block body %}
 
   {% block fos_user_content %}
 
     <div class="container-fluid">
-      <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <div class="panel-title">Sign Up</div>
+
+      {% include ':components/login:login_logo.html.twig' %}
+
+
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-center">
+          <div>
+            {% for errorItem in form.username.vars.errors %}
+              <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+            {% endfor %}
+            {% for errorItem in form.email.vars.errors %}
+              <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('catroweb_error_message') %}
+              <div id="Error-Message" class="alert alert-danger col-sm-12" style="display:block">
+                <p>{{ flash_message|trans({}, "catroweb") }}</p>
+              </div>
+            {% endfor %}
+            <div id="Error-Message" class="alert alert-danger col-sm-12" style="display:none">
+              <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
+            </div>
           </div>
-          <div style="padding: 30px 30px 0 30px" class="panel-body">
-            <form id="registration_form" action="{{ path('register_check') }}" {{ form_enctype(form) }} method="POST" role="form" class="fos_user_registration_register form-horizontal">
-              <div id="signupalert" style="display:none" class="alert alert-danger">
-                {{ form_errors(form) }}
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  {{ form_widget(form.username, {'required': false, 'attr': {'placeholder': 'Username', 'class': 'form-control' } }) }}
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                  {{ form_widget(form.email, {'required': false, 'attr': {'placeholder': 'Email', 'class': 'form-control' } }) }}
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                  {{ form_widget(form.plainPassword.first, {'required': false, 'attr': {'placeholder': 'Password', 'class': 'form-control' } }) }}
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                  {{ form_widget(form.plainPassword.second, {'required': false, 'attr': {'placeholder': 'Password Confirm', 'class': 'form-control' } }) }}
-                </div>
-              </div>
-              <input id="sonata_user_registration_form__token" type="hidden" name="sonata_user_registration_form[_token]" value="{{ csrf_token('authentication') }}" />
-              {% for flash_message in app.session.flashBag.get('catroweb_error_message') %}
-                <div id="Error-Message" style="display:block">
-                  <p>{{ flash_message|trans({}, "catroweb") }}</p>
-                </div>
-              {% endfor %}
-              <div id="Error-Message" style="display:none">
-                <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+
+            <form id="registration_form" action="{{ path('register_check') }}" {{ form_enctype(form) }} method="POST"
+                  role="form" class="fos_user_registration_register form-horizontal">
+
+              <div class="group">
+                {{ form_widget(form.username) }}
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="span-input">{{ 'login.username'|trans({}, 'catroweb') }}</span></label>
               </div>
 
-              <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="Terms and conditions" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h3 class="modal-title">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</h3>
-                    </div>
+              <div class="group">
+                {{ form_widget(form.email) }}
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="span-input">{{ 'login.email'|trans({}, 'catroweb') }}</span></label>
+              </div>
 
-                    <div class="modal-body">
-                      <p>{{ 'privacy-policy.version'|trans({}, 'catroweb') }}</p>
-                      <p class="align_start">{{ 'privacy-policy.text1'|trans({}, 'catroweb') }}</p>
-                      <ul>
-                        <li><p class="align_start">{{ 'privacy-policy.text2'|trans({}, 'catroweb') }}</p></li>
-                        <li><p class="align_start">{{ 'privacy-policy.text3'|trans({}, 'catroweb') }}</p></li>
-                        <li><p class="align_start">{{ 'privacy-policy.text4'|trans({}, 'catroweb') }}</p></li>
-                        <li><p class="align_start">{{ 'privacy-policy.text5'|trans({}, 'catroweb') }}</p></li>
-                        <li><p class="align_start">{{ 'privacy-policy.text6'|trans({}, 'catroweb') }}</p></li>
-                        <li><p class="align_start">{{ 'privacy-policy.text7'|trans({}, 'catroweb') }}</p></li>
-                        <li><p class="align_start">{{ 'privacy-policy.text8'|trans({}, 'catroweb') }}</p></li>
-                      </ul>
-                      <p class="align_start">{{ 'privacy-policy.text9'|trans({}, 'catroweb') }}</p>
-                    </div>
+              <div class="group">
+                {{ form_widget(form.plainPassword.first) }}
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="span-input">{{ 'login.passwordFirst'|trans({}, 'catroweb') }}</span></label>
+              </div>
 
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" id="agreeButton" data-dismiss="modal">Agree</button>
-                      <button type="button" class="btn btn-default" id="disagreeButton" data-dismiss="modal" data-toggle="modal" data-target="#disagreeModal">Disagree</button>
+              <div class="group">
+                {{ form_widget(form.plainPassword.second) }}
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="span-input">{{ 'login.passwordSecond'|trans({}, 'catroweb') }}</span></label>
+              </div>
+
+              <input id="sonata_user_registration_form__token" type="hidden"
+                     name="sonata_user_registration_form[_token]" value="{{ csrf_token('authentication') }}" />
+
+              <!-- Policy -->
+              {% include ':privacy_policy:policy.html.twig' %}
+
+              <!-- Button -->
+              <div style="margin-top:30px; margin-bottom:30px" class="form-group">
+                <div class="col-sm-12 controls">
+                  <button id="_submit" type="submit" style="width: 100%;" data-toggle="modal" data-target="#termsModal"
+                          class="login btn-primary"
+                          name="_create">{{ "login.createAccount"|trans({}, "catroweb") }}</button>
+                </div>
+              </div>
+
+              <!-- Redirects -->
+              <div>
+                <div class="form-group">
+                  <div class="col-md-12 control">
+                    <div style="padding-top:15px; font-size:85%">
+                      {{ 'login.forgotPass'|trans({}, 'catroweb') }}
+                      <a id="pw-request"
+                         href="{{ path("sonata_user_resetting_request") }}">
+                        {{ 'login.recoverPass'|trans({}, 'catroweb') }}</a>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="modal fade" id="disagreeModal" tabindex="-1" role="dialog" aria-labelledby="Terms and conditions" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h3 class="modal-title">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</h3>
-                    </div>
-
-                    <div class="modal-body">
-                      <p>{{ 'privacy-policy.disagree-text'|trans({}, 'catroweb') }}</p>
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                <div class="form-group">
+                  <div class="col-md-12 control">
+                    <div style="font-size:85%">
+                      {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
+                      <a id="create_account" href="{{ path('login') }}">Log in</a>
                     </div>
                   </div>
                 </div>
+                {% include ':components/login:or_line.html.twig' %}
               </div>
 
-              <div class="form-group">
-                <div class="col-md-12" style="padding: 0">
-                  <button id="_submit" type="submit" class="btn btn-success " data-toggle="modal" data-target="#termsModal"><i class="icon-hand-right"></i>{{ "login.createAccount"|trans({}, "catroweb") }}</button>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-12 control">
-                  <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                    {{ "login.forgotPass"|trans({}, "catroweb") }}
-                    <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}"> Click here</a>
-                  </div>
-                  <div style="padding-top:15px; font-size:85%">
-                    Already having an account?
-                    <a id="create_account"
-                       href="{{ path('login') }}">Log in</a>
-                  </div>
-                </div>
-              </div>
               {{ form_rest(form) }}
             </form>
           </div>
         </div>
       </div>
-    </div>
+    <div id="spacer1" style="margin-bottom: 30px"></div>
     {% include ':social:oauth_form.html.twig' %}
+    <div id="spacer2" style="margin-bottom: 30px"></div>
+
   {% endblock fos_user_content %}
 
 {% endblock body %}
 
 {% block js %}
-  <script>
-    var agree_button = "";
-    var agree = false;
-
-    $(document).ready(function() {
-      $('#registration_form').submit(function(){
-        agree_button = "registration_form";
-        return agree;
-      })
-
-      $(document).on("click", "#agreeButton", function() {
-        agree = true;
-        switch (agree_button) {
-          case 'registration_form':
-            console.log('agree_form_registration');
-            $('#registration_form').submit();
-            agree_button = "";
-            break;
-          case 'google_login':
-            console.log('agree_google_login');
-            triggerGoogleLogin();
-            console.log('google click');
-            agree_button = "";
-            break;
-          case 'facebook_login':
-            console.log('agree_facebook_login');
-            triggerFacebookLogin();
-            agree_button = "";
-            break;
-        }
-      });
-    });
-
-
-  </script>
+  <script src="{{ asset('js/custom/register.js') }}"></script>
 {% endblock js %}

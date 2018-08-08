@@ -1,19 +1,69 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
+
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
+  <script src="{{ asset('js/jquery-ui/jquery-ui.js') }}"></script>
+  <script src="{{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
+
 {% endblock %}
 
-{% block header %}
-  {% include ':Default:headerLogo.html.twig' %}
-{% endblock header%}
+{% block header "" %}
 
 {% block body %}
 
   {% block fos_user_content %}
-    <div class="alert alert-success"  style="margin-top: 15px">
-      {{ "login.recoverPassSend"|trans({}, "catroweb") }}
-    </div>
 
-  {% endblock %}
+    <div class="container-fluid" style="width:100%">
+
+      {% include ':components/login:login_logo.html.twig' %}
+
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-center">
+
+          <div class="alert alert-success" style="margin-top: 15px">
+            {{ "login.recoverPassSend"|trans({}, "catroweb") }}
+          </div>
+
+          <!-- Policy -->
+          {% include ':privacy_policy:policy.html.twig' %}
+
+          <!-- Redirects -->
+          <div>
+            <div class="form-group">
+              <div class="col-md-12 control">
+                <div style="padding-top:15px; font-size:85%">
+                  {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
+                  <a id="create_account" href="{{ path('login') }}">Log in</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-12 control">
+                <div style="font-size:85%">
+                  {{ 'login.noAccount'|trans({}, 'catroweb') }}
+                  <a id="create_account"
+                     href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                </div>
+              </div>
+            </div>
+
+            {% include ':components/login:or_line.html.twig' %}
+          </div>
+
+        </div>
+      </div>
+
+    <div id="spacer1" style="margin-bottom: 30px"></div>
+    {% include ':social:oauth_form.html.twig' %}
+    <div id="spacer2" style="margin-bottom: 30px"></div>
+
+
+  {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script src="{{ asset('js/custom/social.js') }}"></script>
+{% endblock %}
