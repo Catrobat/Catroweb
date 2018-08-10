@@ -219,6 +219,11 @@ class ProfileController extends Controller
 
         $encoded_password = $encoder->encodePassword($old_password, $salt);
 
+        $logger = $this->get('logger');
+        $logger->info('I just got the logger');
+        $logger->info($user->getPassword() . " ---|--- " . $encoded_password);
+        $logger->info('ENDE');
+
         if ($encoded_password !== $user->getPassword()) {
             return JsonResponse::create(array('statusCode' => "777",));
         }

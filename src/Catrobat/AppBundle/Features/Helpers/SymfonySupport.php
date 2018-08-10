@@ -274,7 +274,7 @@ class SymfonySupport
     }
   }
 
-  public function insertDefaultGamejam($config = [])
+  public function insertDefaultGamejam($config = array())
   {
     $gamejam = new GameJam();
     @$gamejam->setName($config['name'] ?: "pocketalice");
@@ -298,7 +298,7 @@ class SymfonySupport
     return $gamejam;
   }
 
-  public function insertUser($config = [])
+  public function insertUser($config = array())
   {
     ++$this->test_user_count;
     $user_manager = $this->getUserManager();
@@ -356,7 +356,7 @@ class SymfonySupport
     @unlink("$catroweb_dir/import_remixes_output.sql");
   }
 
-  public function insertUserLikeSimilarity($config = [])
+  public function insertUserLikeSimilarity($config = array())
   {
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -366,7 +366,7 @@ class SymfonySupport
     $em->flush();
   }
 
-  public function insertUserRemixSimilarity($config = [])
+  public function insertUserRemixSimilarity($config = array())
   {
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -376,12 +376,12 @@ class SymfonySupport
     $em->flush();
   }
 
-  public function insertProgramLike($config = [])
+  public function insertProgramLike($config = array())
   {
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
     $program_manager = $this->getProgramManager();
-    $user = $user_manager->findOneBy(['username' => $config['username']]);
+    $user = $user_manager->findOneBy(array('username' => $config['username']));
     $program = $program_manager->find($config['program_id']);
 
     $program_like = new ProgramLike($program, $user, $config['type']);
@@ -621,10 +621,15 @@ class SymfonySupport
 
     if (is_string($file))
     {
-      $file = new UploadedFile($file, 'uploadedFile');
+        try {
+            $file = new UploadedFile($file, 'uploadedFile');
+        }
+        catch (\Exception $e) {
+            throw new PendingException('No case defined for ' . $e);
+        }
     }
 
-    $parameters = [];
+    $parameters = array();
     $parameters['username'] = $user->getUsername();
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
@@ -635,7 +640,7 @@ class SymfonySupport
     }
 
     $client = $this->getClient();
-    $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, [$file]);
+    $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
     $response = $client->getResponse();
 
     return $response;
@@ -653,12 +658,12 @@ class SymfonySupport
       $file = new UploadedFile($file, 'uploadedFile');
     }
 
-    $parameters = [];
+    $parameters = array();
     $parameters['username'] = $user->getUsername();
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
     $client = $this->getClient();
-    $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, [$file]);
+    $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, array($file));
     $response = $client->getResponse();
 
     return $response;

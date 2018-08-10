@@ -18,6 +18,7 @@ use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use http\Exception\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

@@ -1642,7 +1642,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $page = $this->getSession()->getPage();
     $video = $page->find('css', '#youtube-help-video');
     assertNotNull($video, "Video not found on tutorial page!");
-    assertTrue($video->getAttribute('src') == $url + "&origin=http://localhost");
+    assertTrue(strpos($video->getAttribute('src'), $url) !== false &&
+        strpos ($video->getAttribute('src'),"&origin=http://localhost") !== false);
   }
 
 
