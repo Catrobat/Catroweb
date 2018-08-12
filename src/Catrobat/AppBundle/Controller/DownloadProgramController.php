@@ -8,7 +8,6 @@ use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidFileUploadException;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
-use Monolog\Logger;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +31,7 @@ class DownloadProgramController extends Controller
   {
     /* @var $program_manager ProgramManager */
     /* @var $file_repository ProgramFileRepository */
-    /* @var $logger Logger*/
+
     $referrer = $request->getSession()->get('referer');
     $program_manager = $this->get('programmanager');
     $file_repository = $this->get('filerepository');
@@ -58,7 +57,7 @@ class DownloadProgramController extends Controller
     catch (FileNotFoundException $e)
     {
       $logger = $this->get('logger');
-      $logger->error('[FILE] failed to get program file with id: ' . $id);
+      $logger->err('[FILE] failed to get program file with id: ' . $id);
       return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
     }
 
