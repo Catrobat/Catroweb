@@ -26,6 +26,7 @@ file that was distributed with this source code.
 
                     <button type="submit" name="submit" class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>
                 </form>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -36,7 +37,7 @@ file that was distributed with this source code.
             </div>
             <div class="panel-body">
                 {% render url("sonata_user_change_password") %}
-<form action="{{ path('sonata_user_change_password') }}" {{ form_enctype(form) }} method="POST" class="fos_user_change_password form-horizontal">
+<form action="{{ path('sonata_user_change_password') }}" {{ form_start(form) }} method="POST" class="fos_user_change_password form-horizontal">
   {{ form_widget(form.current_password, {'required': false, 'attr': {'placeholder': 'old Password...' } }) }}
   {{ form_widget(form.email, {'required': false, 'attr': {'placeholder': 'E-Mail...' } }) }}
   <button type="submit" class="btn btn-danger pull-right"><i class="icon-lock icon-white glyphicon glyphicon-lock"></i>&nbsp;{{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}</button>
