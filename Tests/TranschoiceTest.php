@@ -2,6 +2,7 @@
 namespace Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
@@ -43,7 +44,7 @@ class TranschoiceTest extends \PHPUnit_Framework_TestCase
     public function language_provider()
     {
         $directory = self::LANGUAGE_DIR;
-        
+
         $translator = new Translator('en', new MessageSelector());
         $translator->addLoader('yaml', new YamlFileLoader());
         
@@ -59,8 +60,9 @@ class TranschoiceTest extends \PHPUnit_Framework_TestCase
         $translator->setFallbackLocales(array(
             'en'
         ));
-        
-        $messages = $translator->getMessages('en');
+
+        $catalogue = $translator->getCatalogue('en');
+        $messages = $catalogue->all();
         $message_ids = array_keys($messages['catroweb']);
         
         $data = array();
