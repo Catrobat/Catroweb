@@ -30,7 +30,7 @@ class ReportNotificator
           continue;
       }
 
-            $message = \Swift_Message::newInstance()
+            $message = (new \Swift_Message())
       ->setSubject('[Pocketcode] reported project!')
       ->setFrom('noreply@catrob.at')
       ->setTo($user->getUser()->getEmail())

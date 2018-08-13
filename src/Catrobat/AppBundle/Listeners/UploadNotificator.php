@@ -28,7 +28,7 @@ class UploadNotificator
       }
             $program = $event->getProgramEntity();
 
-            $message = \Swift_Message::newInstance()
+            $message = (new \Swift_Message())
       ->setSubject('[Pocketcode] Project upload')
       ->setFrom('noreply@catrob.at')
       ->setTo($user->getUser()->getEmail())
