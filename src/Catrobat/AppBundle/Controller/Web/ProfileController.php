@@ -447,7 +447,7 @@ class ProfileController extends Controller
 
     public function country($code, $locale = null)
     {
-        $countries = Locale::getDisplayCountries($locale ?: $this->localeDetector->getLocale());
+      $countries = Intl::getRegionBundle()->getCountryNames($locale ?: $this->localeDetector->getLocale());
         if (array_key_exists($code, $countries)) {
             return $this->fixCharset($countries[$code]);
         }
