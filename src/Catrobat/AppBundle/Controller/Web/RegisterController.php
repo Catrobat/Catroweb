@@ -41,7 +41,7 @@ class RegisterController extends Controller
     {
       return $this->redirectToRoute('register_form');
     }
-
+    
     $response = $this->forward('SonataUserBundle:RegistrationFOSUser1:register');
     return $response;
   }

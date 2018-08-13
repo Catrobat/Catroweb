@@ -112,7 +112,7 @@ class ProgramController extends Controller
 
     $isReportedByUser = $this->checkReportedByUser($program, $user);
 
-    $program_url = $this->generateUrl('program', ['id' => $program->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+    $program_url = $this->generateUrl('program', ['id' => $program->getId(), 'flavor' => $flavor], UrlGeneratorInterface::ABSOLUTE_URL);
     $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
 
     $jam = $this->extractGameJamConfig();

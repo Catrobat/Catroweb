@@ -16,21 +16,22 @@
         ]
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=7.1",
         "symfony/symfony": "2.8.*",
+
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
-        "twig/extensions": "~1.2",
+        "doctrine/doctrine-fixtures-bundle": "^2.4",
+        "doctrine/data-fixtures": "dev-master",
+        "doctrine/migrations": "*@dev",
+        "doctrine/doctrine-migrations-bundle": "1.0.*",
+
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "doctrine/data-fixtures": "dev-master",
-        "doctrine/migrations": "*@dev",
-        "doctrine/doctrine-migrations-bundle": "1.0.*",
         "leafo/lessphp": "dev-master",
         "hwi/oauth-bundle": "*@dev",
         "knplabs/knp-paginator-bundle": "dev-master",
@@ -52,7 +53,9 @@
         "twbs/bootstrap": "^3.3",
         "behat/mink": "1.7",
         "dmore/behat-chrome-extension": "^1.2",
-        "symfony/polyfill-iconv": "^1.8"
+        "symfony/polyfill-iconv": "^1.8",
+        "ext-json": "^1.5"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*",

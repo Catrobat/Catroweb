@@ -2140,7 +2140,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $program = $this->kernel->getContainer()->get('programmanager')->findOneByName($url);
         assertNotNull($program);
         assertNotNull($program->getId());
-        $url = $this->kernel->getContainer()->get('router')->generate('program', ['id' => $program->getId()]);
+        $url = $this->kernel->getContainer()->get('router')->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');

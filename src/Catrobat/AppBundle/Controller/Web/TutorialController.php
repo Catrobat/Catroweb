@@ -174,40 +174,40 @@ class TutorialController extends Controller
         $example_link = null;
         switch ($page) {
             case 1:
-                $example_link = $this->generateUrl('program', array('id' => 3983));
+                $example_link = $this->generateUrl('program', array('id' => 3983, 'flavor' => 'pocketcode'));
                 break;
             case 2:
-                $example_link = $this->generateUrl('program', array('id' => 3984));
+                $example_link = $this->generateUrl('program', array('id' => 3984, 'flavor' => 'pocketcode'));
                 break;
             case 3:
-                $example_link = $this->generateUrl('program', array('id' => 3985));
+                $example_link = $this->generateUrl('program', array('id' => 3985, 'flavor' => 'pocketcode'));
                 break;
             case 4:
-                $example_link = $this->generateUrl('program', array('id' => 3986));
+                $example_link = $this->generateUrl('program', array('id' => 3986, 'flavor' => 'pocketcode'));
                 break;
             case 5:
-                $example_link = $this->generateUrl('program', array('id' => 3987));
+                $example_link = $this->generateUrl('program', array('id' => 3987, 'flavor' => 'pocketcode'));
                 break;
             case 6:
-                $example_link = $this->generateUrl('program', array('id' => 3988));
+                $example_link = $this->generateUrl('program', array('id' => 3988, 'flavor' => 'pocketcode'));
                 break;
             case 7:
-                $example_link = $this->generateUrl('program', array('id' => 3990));
+                $example_link = $this->generateUrl('program', array('id' => 3990, 'flavor' => 'pocketcode'));
                 break;
             case 8:
-                $example_link = $this->generateUrl('program', array('id' => 3991));
+                $example_link = $this->generateUrl('program', array('id' => 3991, 'flavor' => 'pocketcode'));
                 break;
             case 9:
-                $example_link = $this->generateUrl('program', array('id' => 3992));
+                $example_link = $this->generateUrl('program', array('id' => 3992, 'flavor' => 'pocketcode'));
                 break;
             case 10:
-                $example_link = $this->generateUrl('program', array('id' => 3979));
+                $example_link = $this->generateUrl('program', array('id' => 3979, 'flavor' => 'pocketcode'));
                 break;
             case 11:
-                $example_link = $this->generateUrl('program', array('id' => 3981));
+                $example_link = $this->generateUrl('program', array('id' => 3981, 'flavor' => 'pocketcode'));
                 break;
             case 12:
-                $example_link = $this->generateUrl('program', array('id' => 3982));
+                $example_link = $this->generateUrl('program', array('id' => 3982, 'flavor' => 'pocketcode'));
                 break;
         }
         return $example_link;

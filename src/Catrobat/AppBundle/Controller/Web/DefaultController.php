@@ -28,10 +28,14 @@ class DefaultController extends Controller
      * @var $repository       FeaturedRepository
      * @var $user             User
      */
+
+
     $image_repository = $this->get('featuredimagerepository');
     $repository = $this->get('featuredrepository');
 
     $flavor = $request->get('flavor');
+
+      $this->get('logger')->info("defcon1: " . $flavor);
 
     if ($flavor == 'phirocode')
     {
@@ -41,6 +45,9 @@ class DefaultController extends Controller
     {
       $featured_items = $repository->getFeaturedItems($flavor, 5, 0);
     }
+
+    $this->get('logger')->info("defcon2: " . json_encode($featured_items));
+
 
     $featured = [];
     foreach ($featured_items as $item)
@@ -65,6 +72,10 @@ class DefaultController extends Controller
 
       $featured[] = $info;
     }
+
+
+      $this->get('logger')->info("defcon3: ");
+
 
     return $this->get('templating')->renderResponse('::index.html.twig', [
       'featured' => $featured,

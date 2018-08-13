@@ -11,6 +11,8 @@ use Catrobat\AppBundle\Entity\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class AppExtension extends \Twig_Extension
 {
@@ -40,7 +42,7 @@ class AppExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'decamelize' => new \Twig_Filter_Method($this, 'decamelizeFilter')
+            new TwigFilter('decamelize', array($this, 'decamelizeFilter'))
         );
     }
 
@@ -55,17 +57,17 @@ class AppExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'countriesList' => new \Twig_Function_Method($this, 'getCountriesList'),
-            'isWebview' => new \Twig_Function_Method($this, 'isWebview'),
-            'checkCatrobatLanguage' => new \Twig_Function_Method($this, 'checkCatrobatLanguage'),
-            'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
-            'getMediaPackageImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageImageUrl'),
-            'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl'),
-            'flavor' => new \Twig_Function_Method($this, 'getFlavor'),
-            'theme' => new \Twig_Function_Method($this, 'getTheme'),
-            'getCurrentGameJam' => new \Twig_Function_Method($this, 'getCurrentGameJam'),
-            'getJavascriptPath' => new \Twig_Function_Method($this, 'getJavascriptPath'),
-            'getCommunityStats' => new \Twig_Function_Method($this, 'getCommunityStats')
+            new TwigFunction('countriesList', array($this, 'getCountriesList')),
+            new TwigFunction('isWebview', array($this, 'isWebview')),
+            new TwigFunction('checkCatrobatLanguage', array($this, 'checkCatrobatLanguage')),
+            new TwigFunction('getLanguageOptions', array($this, 'getLanguageOptions')),
+            new TwigFunction('getMediaPackageImageUrl', array($this, 'getMediaPackageImageUrl')),
+            new TwigFunction('getMediaPackageSoundUrl', array($this, 'getMediaPackageSoundUrl')),
+            new TwigFunction('flavor', array($this, 'getFlavor')),
+            new TwigFunction('theme', array($this, 'getTheme')),
+            new TwigFunction('getCurrentGameJam', array($this, 'getCurrentGameJam')),
+            new TwigFunction('getJavascriptPath', array($this, 'getJavascriptPath')),
+            new TwigFunction('getCommunityStats', array($this, 'getCommunityStats'))
         );
     }
 
