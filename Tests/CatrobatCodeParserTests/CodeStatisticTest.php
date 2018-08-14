@@ -5,7 +5,7 @@ namespace Tests\CatrobatCodeParserTests;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\CodeStatistic;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedScene;
 
-class CodeStatisticTest extends \PHPUnit_Framework_TestCase
+class CodeStatisticTest extends \PHPUnit\Framework\TestCase
 {
     protected $xml_properties;
 

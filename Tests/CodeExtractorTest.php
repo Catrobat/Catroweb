@@ -9,7 +9,7 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Finder\Finder;
 
-class CodeExtractor extends \PHPUnit_Framework_TestCase
+class CodeExtractor extends \PHPUnit\Framework\TestCase
 {
 
     /**

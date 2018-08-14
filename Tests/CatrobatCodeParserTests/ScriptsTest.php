@@ -5,7 +5,7 @@ namespace Tests\CatrobatCodeParserTests;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts\ScriptFactory;
 
-class ScriptsTest extends \PHPUnit_Framework_TestCase
+class ScriptsTest extends \PHPUnit\Framework\TestCase
 {
     const TYPE = 'type';
     const CAPTION = 'caption';

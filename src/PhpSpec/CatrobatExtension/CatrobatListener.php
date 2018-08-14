@@ -4,7 +4,7 @@ namespace PhpSpec\CatrobatExtension;
 
 use PhpSpec\Event\SuiteEvent;
 use Symfony\Component\Filesystem\Filesystem;
-use PhpSpec\Console\IO;
+use PhpSpec\Console\ConsoleIO;
 use PhpSpec\Event\ExampleEvent;
 use Symfony\Component\Finder\Finder;
 

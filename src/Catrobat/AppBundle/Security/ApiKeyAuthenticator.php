@@ -14,9 +14,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Catrobat\AppBundle\StatusCode;
+use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ApiKeyAuthenticator implements SimpleAuthenticatorInterface, AuthenticationFailureHandlerInterface
+class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
     protected $translator;
 

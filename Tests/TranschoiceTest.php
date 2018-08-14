@@ -8,7 +8,7 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Finder\Finder;
 
-class TranschoiceTest extends \PHPUnit_Framework_TestCase
+class TranschoiceTest extends \PHPUnit\Framework\TestCase
 {
 
     const LANGUAGE_DIR = './app/Resources/translations/';

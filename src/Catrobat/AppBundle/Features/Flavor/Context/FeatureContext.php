@@ -6,7 +6,7 @@ use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-require_once 'PHPUnit/Framework/Assert/Functions.php';
+
 
 /**
  * Feature context.

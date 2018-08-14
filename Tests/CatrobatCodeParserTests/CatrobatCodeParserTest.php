@@ -5,7 +5,7 @@ namespace Tests\CatrobatCodeParserTests;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 
-class CatrobatCodeParserTest extends \PHPUnit_Framework_TestCase
+class CatrobatCodeParserTest extends \PHPUnit\Framework\TestCase
 {
     protected $parser;
 

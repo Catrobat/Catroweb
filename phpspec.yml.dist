@@ -1,8 +1,8 @@
 formatter.name: pretty
 extensions:
-  - PhpSpec\CatrobatExtension\Extension
-#  - PhpSpec\Extension\CodeCoverageExtension
-  
+  PhpSpec\CatrobatExtension\Extension: ~
+  # PhpSpec\Extension\CodeCoverageExtension: ~
+
 code_coverage:
     whitelist:
       - "src/Catrobat/AppBundle/"

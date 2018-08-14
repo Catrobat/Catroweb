@@ -4,7 +4,7 @@ namespace Tests\CatrobatCodeParserTests;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedSimpleProgram;
 
-class ParsedSimpleProgramTest extends \PHPUnit_Framework_TestCase
+class ParsedSimpleProgramTest extends \PHPUnit\Framework\TestCase
 {
     protected $program;
 

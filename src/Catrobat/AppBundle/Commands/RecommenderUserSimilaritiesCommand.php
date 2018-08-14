@@ -135,7 +135,7 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
     }
 }
 
-class CronjobProgressWriter extends ProgressBar
+class CronjobProgressWriter #extends ProgressBar
 {
     /**
      * @var OutputInterface
@@ -145,7 +145,7 @@ class CronjobProgressWriter extends ProgressBar
     public function __construct(OutputInterface $output, $max = 0)
     {
         $this->_output = $output;
-        parent::__construct($output, $max);
+        #parent::__construct($output, $max);
     }
 
     public function clear() {}

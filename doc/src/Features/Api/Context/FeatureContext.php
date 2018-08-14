@@ -19,13 +19,9 @@ use Catrobat\AppBundle\Services\TokenGenerator;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Features\Api\Context\FixedTokenGenerator;
 use Catrobat\AppBundle\Features\Api\Context\FixedTime;
+use PHPUnit\Framework\Assert;
 
-//
-// Require 3rd-party libraries here:
-//
-// require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
+
 
 /**
  * Feature context.
@@ -95,7 +91,7 @@ class FeatureContext extends BaseContext
     public function iWillGetTheJsonObject(PyStringNode $string)
     {
         $response = $this->getClient()->getResponse();
-        assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
+        Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
     }
 
     /**
@@ -104,7 +100,7 @@ class FeatureContext extends BaseContext
     public function theResponseCodeWillBe($code)
     {
         $response = $this->getClient()->getResponse();
-        assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+        Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
     
     /**
@@ -207,7 +203,7 @@ class FeatureContext extends BaseContext
     public function iAttachACatrobatFile()
     {
         $filepath = self::FIXTUREDIR . 'test.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         $this->files[] = new UploadedFile($filepath, 'test.catrobat');
     }
 
@@ -292,7 +288,7 @@ class FeatureContext extends BaseContext
                 $this->post_parameters['username'] = "Catrobat";
                 $this->post_parameters['token'] = "cccccccccc";
                 $filepath = self::FIXTUREDIR . 'invalid_archive.catrobat';
-                assertTrue(file_exists($filepath), 'File not found');
+                Assert::assertTrue(file_exists($filepath), 'File not found');
                 $this->files[] = new UploadedFile($filepath, 'test.catrobat');
                 $this->post_parameters['fileChecksum'] = md5_file($this->files[0]->getPathname());
                 break;

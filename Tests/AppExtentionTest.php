@@ -1,12 +1,11 @@
 <?php
 namespace Tests;
 
-
 use Catrobat\AppBundle\Twig\AppExtension;
 use Prophecy\Prophet;
 use Doctrine\ORM\EntityRepository;
 
-class AppExtentionTest extends \PHPUnit_Framework_TestCase
+class AppExtentionTest extends \PHPUnit\Framework\TestCase
 {
     private $prophet;
 

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\Router;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
-require_once 'PHPUnit/Framework/Assert/Functions.php';
+use PHPUnit\Framework\Assert;
 
 /**
  * Feature context.
@@ -52,7 +52,7 @@ class FeatureContext extends BaseContext
     private function getStandardProgramFile()
     {
         $filepath = self::FIXTUREDIR . 'test.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         
         return new UploadedFile($filepath, 'test.catrobat');
     }
@@ -141,7 +141,7 @@ class FeatureContext extends BaseContext
             'HTTPS' => $this->secure
         ));
         $response = $client->getResponse();
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+        Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -156,7 +156,7 @@ class FeatureContext extends BaseContext
         }
         $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
         $parameters = $dispatcher->getLastParameters();
-        assertEquals($expected_parameters, $parameters);
+        Assert::assertEquals($expected_parameters, $parameters);
     }
 
     /**
@@ -169,13 +169,13 @@ class FeatureContext extends BaseContext
         $program = $pm->find(1);
         switch ($arg1) {
             case 'pending':
-                assertEquals(Program::APK_PENDING, $program->getApkStatus());
+                Assert::assertEquals(Program::APK_PENDING, $program->getApkStatus());
                 break;
             case 'ready':
-                assertEquals(Program::APK_READY, $program->getApkStatus());
+                Assert::assertEquals(Program::APK_READY, $program->getApkStatus());
                 break;
             case 'none':
-                assertEquals(Program::APK_NONE, $program->getApkStatus());
+                Assert::assertEquals(Program::APK_NONE, $program->getApkStatus());
                 break;
             default:
                 throw new PendingException('Unknown state: ' + $arg1);
@@ -196,7 +196,7 @@ class FeatureContext extends BaseContext
     public function jenkinsUploadsTheApkFileToTheGivenUploadUrl()
     {
         $filepath = self::FIXTUREDIR . '/test.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         $temppath = $this->getTempCopy($filepath);
         $files = array(
             new UploadedFile($temppath, 'test.apk')
@@ -214,7 +214,7 @@ class FeatureContext extends BaseContext
         $directory = $this->getSymfonyParameter('catrobat.apk.dir');
         $finder = new Finder();
         $finder->in($directory)->depth(0);
-        assertEquals(1, $finder->count());
+        Assert::assertEquals(1, $finder->count());
     }
 
     /**
@@ -276,8 +276,8 @@ class FeatureContext extends BaseContext
         $code = $this->getClient()
             ->getResponse()
             ->getStatusCode();
-        assertEquals(200, $code);
-        assertEquals('application/vnd.android.package-archive', $content_type);
+        Assert::assertEquals(200, $code);
+        Assert::assertEquals('application/vnd.android.package-archive', $content_type);
     }
 
     /**
@@ -288,7 +288,7 @@ class FeatureContext extends BaseContext
         $code = $this->getClient()
             ->getResponse()
             ->getStatusCode();
-        assertEquals(404, $code);
+        Assert::assertEquals(404, $code);
     }
 
     /**
@@ -322,7 +322,7 @@ class FeatureContext extends BaseContext
     {
         $dispatcher = $this->getSymfonyService('ci.jenkins.dispatcher');
         $parameters = $dispatcher->getLastParameters();
-        assertNull($parameters);
+        Assert::assertNull($parameters);
     }
 
     /**
@@ -332,7 +332,7 @@ class FeatureContext extends BaseContext
     {
         $url = '/pocketcode/ci/failed/1?token=UPLOADTOKEN';
         $this->getClient()->request('GET', $url);
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
     }
@@ -361,7 +361,7 @@ class FeatureContext extends BaseContext
         $directory = $this->getSymfonyParameter('catrobat.apk.dir');
         $finder = new Finder();
         $finder->in($directory)->depth(0);
-        assertEquals(0, $finder->count());
+        Assert::assertEquals(0, $finder->count());
     }
 
     /**
@@ -378,7 +378,7 @@ class FeatureContext extends BaseContext
     public function willGetTheFollowingJson(PyStringNode $string)
     {
         $response = $this->getClient()->getResponse();
-        assertEquals(200, $response->getStatusCode());
-        assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent());
+        Assert::assertEquals(200, $response->getStatusCode());
+        Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent());
     }
 }

@@ -23,9 +23,9 @@
   <script src=" {{  asset( getJavascriptPath('remixgraph.builder.js') )}}"></script>
   <script src=" {{  asset( getJavascriptPath('remixgraph.visualization.js') )}}"></script>
 
-  <meta property="og:image" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
+  <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}" />
   <meta property="og:type" content="website" />
-  <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig, absolute=true) }}" />
+  <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}" />
   <meta property="og:title" content="{{ program.name|escape('html_attr') }}" />
   {% if program.description is empty %}
     <meta property="og:description" content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}" />

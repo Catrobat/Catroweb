@@ -5,7 +5,7 @@ namespace Tests\CatrobatCodeParserTests;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObject;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectGroup;
 
-class ParsedObjectGroupTest extends \PHPUnit_Framework_TestCase
+class ParsedObjectGroupTest extends \PHPUnit\Framework\TestCase
 {
     protected $group;
 

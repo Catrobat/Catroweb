@@ -59,98 +59,84 @@ services:
 
     programrepository:
         class: Catrobat\AppBundle\Entity\ProgramRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:Program"
 
     programlikerepository:
         class: Catrobat\AppBundle\Entity\ProgramLikeRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:ProgramLike"
 
     programremixrepository:
         class: Catrobat\AppBundle\Entity\ProgramRemixRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:ProgramRemixRelation"
 
     programremixbackwardrepository:
         class: Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:ProgramRemixBackwardRelation"
 
     scratchprogramrepository:
         class: Catrobat\AppBundle\Entity\ScratchProgramRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:ScratchProgram"
 
     scratchprogramremixrepository:
         class: Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:ScratchProgramRemixRelation"
 
     userlikesimilarityrelationrepository:
         class: Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:UserLikeSimilarityRelation"
 
     userremixsimilarityrelationrepository:
         class: Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:UserRemixSimilarityRelation"
 
     tagrepository:
         class: Catrobat\AppBundle\Entity\TagRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:Tag"
 
     extensionrepository:
         class: Catrobat\AppBundle\Entity\ExtensionRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:Extension"
 
     notificationrepository:
         class: Catrobat\AppBundle\Entity\NotificationRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ["AppBundle:Notification"]
 
     rudewordrepository:
         class: Catrobat\AppBundle\Entity\RudeWordsRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:RudeWord"
 
     gamejamrepository:
         class: Catrobat\AppBundle\Entity\GameJamRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:GameJam"
 
     featuredrepository:
         class: Catrobat\AppBundle\Entity\FeaturedRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:FeaturedProgram"
 
@@ -197,8 +183,7 @@ services:
 
     templaterepository:
         class: Catrobat\AppBundle\Entity\TemplateRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:Template"
 
@@ -208,15 +193,13 @@ services:
 
     nolbexamplerepository:
         class: Catrobat\AppBundle\Entity\NolbExampleRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:NolbExampleProgram"
 
     catro_notification_repository:
       class: Catrobat\AppBundle\Entity\CatroNotificationRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method: getRepository
+      factory: ['@doctrine.orm.entity_manager', getRepository]
       arguments:
         - "AppBundle:CatroNotification"
 
@@ -225,7 +208,7 @@ services:
 
     programmanager:
         class: Catrobat\AppBundle\Entity\ProgramManager
-        arguments: 
+        arguments:
             - "@fileextractor"
             - "@filerepository"
             - "@screenshotrepository"
@@ -315,7 +298,7 @@ services:
         class: Catrobat\AppBundle\Entity\UserLDAPManager
         arguments:
             - "@fr3d_ldap.ldap_driver"
-            - "@fr3d_ldap.user_manager"
+            - "@usermanager"
             - %fr3d_ldap.ldap_manager.parameters%
             - %ldap_role_mappings%
             - %ldap_group_filter%
@@ -362,10 +345,10 @@ services:
 
     ci.jenkins.dispatcher:
         class: Catrobat\AppBundle\Services\Ci\JenkinsDispatcher
-        arguments: 
-          - "@router" 
+        arguments:
+          - "@router"
           - "%jenkins%"
-          
+
 # =========================== Controller ===========================
 
     controller.upload:

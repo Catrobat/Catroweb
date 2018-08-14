@@ -33,7 +33,7 @@ class TokenGeneratorSpec extends ObjectBehavior
         $generated_token->shouldHaveLength(32);
     }
 
-    public function getMatchers()
+    public function getMatchers() : array
     {
         return [
       'haveLength' => function ($subject, $key) {

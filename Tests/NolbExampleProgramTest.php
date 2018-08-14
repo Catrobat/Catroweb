@@ -7,7 +7,7 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\User;
 
 
-class NolbExampleProgramTest extends \PHPUnit_Framework_TestCase
+class NolbExampleProgramTest extends \PHPUnit\Framework\TestCase
 {
   private $user;
   private $program;

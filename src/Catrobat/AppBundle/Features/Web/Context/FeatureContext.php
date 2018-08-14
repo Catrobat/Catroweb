@@ -37,13 +37,9 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 
-require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 //
 // Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
 /**

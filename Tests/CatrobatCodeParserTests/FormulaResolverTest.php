@@ -6,7 +6,7 @@ namespace Tests\CatrobatCodeParserTests;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
-class FormulaResolverTest extends \PHPUnit_Framework_TestCase
+class FormulaResolverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

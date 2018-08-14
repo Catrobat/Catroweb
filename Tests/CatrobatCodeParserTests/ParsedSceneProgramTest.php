@@ -4,7 +4,7 @@ namespace Tests\CatrobatCodeParserTests;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedSceneProgram;
 
-class ParsedSceneProgramTest extends \PHPUnit_Framework_TestCase
+class ParsedSceneProgramTest extends \PHPUnit\Framework\TestCase
 {
     protected $program;
 

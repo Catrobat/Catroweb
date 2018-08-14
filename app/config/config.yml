@@ -11,6 +11,7 @@ imports:
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
+    serializer: { enable_annotations: true }
     translator: { fallback: en }
     secret:          %secret%
     router:
@@ -122,14 +123,14 @@ fr3d_ldap:
 #       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
 
     user:
-        baseDn: %ldap_base_dn%
-        filter: (&(ObjectClass=person))
-        attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
-           - { ldap_attr: cn,  user_method: setUsername } # Default
-           - { ldap_attr: mail,  user_method: setEmail } # Default
-    service:
-        user_manager: usermanager          # Overrides default user manager
-        ldap_manager: usermanager.ldap      # Overrides default ldap manager
+        baseDn: ou=users, dc=host, dc=foo
+        filter: (&(ObjectClass=Person))
+        #       usernameAttribute: uid # Optional
+        attributes:
+#   service:
+#       user_hydrator: fr3d_ldap.user_hydrator.default # Overrides default user hydrator
+#       ldap_manager: fr3d_ldap.ldap_manager.default   # Overrides default ldap manager
+#       ldap_driver: fr3d_ldap.ldap_driver.zend        # Overrides default ldap driver
 
 knp_paginator:
     page_range: 3                      # default page range used in pagination control
@@ -147,25 +148,20 @@ liip_theme:
     active_theme: 'pocketcode'
     assetic_integration: true
 
-bazinga_geocoder: #documentation: https://github.com/geocoder-php/Geocoder
-     #fake_ip:
-         #enabled:              true
-         #ip:                   88.116.169.222 #123.345.643.133
-         #priority:             0
-     providers:
-         google_maps:
-             locale:               ~
-             region:               ~
-             use_ssl:              false
-         openstreetmap:
-             locale:               ~
-         host_ip:              []
-         free_geo_ip:          []
-         yandex:
-             locale:               ~
-             toponym:              ~
-         geo_ips:
-             api_key:              ~
-         geo_plugin:           []
-         chain:
-             providers:            []
+#bazinga_geocoder: #documentation: https://github.com/geocoder-php/Geocoder
+#     #fake_ip:
+#         #enabled:              true
+#         #ip:                   88.116.169.222 #123.345.643.133
+#         #priority:             0
+#     providers:
+#         google_maps:
+#             locale:               ~
+#         openstreetmap:
+#             locale:               ~
+#         host_ip:              []
+#         free_geo_ip:          []
+#         yandex:
+#             locale:               ~
+#         geo_ips:
+#         geo_plugin:           []
+#         chain:

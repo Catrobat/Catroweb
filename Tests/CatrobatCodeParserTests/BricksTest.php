@@ -5,7 +5,7 @@ namespace Tests\CatrobatCodeParserTests;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks\BrickFactory;
 
-class BricksTest extends \PHPUnit_Framework_TestCase
+class BricksTest extends \PHPUnit\Framework\TestCase
 {
     const TYPE = 'type';
     const CAPTION = 'caption';

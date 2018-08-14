@@ -4,7 +4,7 @@ namespace Tests\CatrobatCodeParserTests;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectAsset;
 
-class ParsedObjectAssetTest extends \PHPUnit_Framework_TestCase
+class ParsedObjectAssetTest extends \PHPUnit\Framework\TestCase
 {
     protected $assets;
 

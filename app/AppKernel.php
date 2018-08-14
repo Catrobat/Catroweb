@@ -16,24 +16,32 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             //Begin Sonata--Admin
+
+            // Sonata --
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            // ...
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\UserBundle\SonataUserBundle(),
+            // ...
+
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Sonata\UserBundle\SonataUserBundle(),
-            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+
             new FR3D\LdapBundle\FR3DLdapBundle(),
             //End Sonata--Admin,
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Liip\ThemeBundle\LiipThemeBundle(),
-            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
+            new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
             new Catrobat\AppBundle\AppBundle(),
-            new EightPoints\Bundle\GuzzleBundle\GuzzleBundle()
+            new EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundle(),
+
+            new FOS\RestBundle\FOSRestBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

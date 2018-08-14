@@ -12,7 +12,6 @@ use Symfony\Component\Finder\Finder;
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Catrobat\AppBundle\Entity\ProgramManager;
-require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
  * Feature context.

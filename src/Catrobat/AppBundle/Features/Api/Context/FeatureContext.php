@@ -23,13 +23,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
+use PHPUnit\Framework\Assert;
 
-//
-// Require 3rd-party libraries here:
-//
-// require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
 
 /**
  * Feature context.
@@ -171,10 +166,10 @@ class FeatureContext extends BaseContext
         $code = $response_array['statusCode'];
         switch ($result) {
             case 'accepted':
-                assertEquals(200, $code, 'Program was rejected (Status code 200)');
+                Assert::assertEquals(200, $code, 'Program was rejected (Status code 200)');
                 break;
             case 'rejected':
-                assertNotEquals(200, $code, 'Program was NOT rejected');
+                Assert::assertNotEquals(200, $code, 'Program was NOT rejected');
                 break;
             default:
                 new PendingException();
@@ -616,7 +611,7 @@ class FeatureContext extends BaseContext
     {
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
-        assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects'], 'Wrong number of total projects');
+        Assert::assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects'], 'Wrong number of total projects');
     }
 
     /**
@@ -626,8 +621,8 @@ class FeatureContext extends BaseContext
     {
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
-        assertTrue(isset($responseArray['isUserSpecificRecommendation']), 'No isUserSpecificRecommendation parameter found in response!');
-        assertTrue($responseArray['isUserSpecificRecommendation'], 'isUserSpecificRecommendation parameter has wrong value. Is false, but should be true!');
+        Assert::assertTrue(isset($responseArray['isUserSpecificRecommendation']), 'No isUserSpecificRecommendation parameter found in response!');
+        Assert::assertTrue($responseArray['isUserSpecificRecommendation'], 'isUserSpecificRecommendation parameter has wrong value. Is false, but should be true!');
     }
 
     /**
@@ -637,7 +632,7 @@ class FeatureContext extends BaseContext
     {
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
-        assertFalse(isset($responseArray['isUserSpecificRecommendation']), 'Unexpected isUserSpecificRecommendation parameter found in response!');
+        Assert::assertFalse(isset($responseArray['isUserSpecificRecommendation']), 'Unexpected isUserSpecificRecommendation parameter found in response!');
     }
 
     /**
@@ -674,7 +669,7 @@ class FeatureContext extends BaseContext
     public function iShouldGetTheJsonObject(PyStringNode $string)
     {
         $response = $this->getClient()->getResponse();
-        assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
+        Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
     }
 
     /**
@@ -687,7 +682,7 @@ class FeatureContext extends BaseContext
         $expectedArray = json_decode($string->getRaw(), true);
         $responseArray['token'] = '';
         $expectedArray['token'] = '';
-        assertEquals($expectedArray, $responseArray);
+        Assert::assertEquals($expectedArray, $responseArray);
     }
 
     /**
@@ -700,7 +695,7 @@ class FeatureContext extends BaseContext
         $expectedArray = json_decode($string->getRaw(), true);
         $responseArray[$arg1] = $expectedArray[$arg1] = '';
         $responseArray[$arg2] = $expectedArray[$arg2] = '';
-        assertEquals($expectedArray, $responseArray, $response);
+        Assert::assertEquals($expectedArray, $responseArray, $response);
     }
 
     /**
@@ -716,11 +711,11 @@ class FeatureContext extends BaseContext
         if (count($expected_programs) != count($returned_programs))
         {
           print_r($returned_programs);
-          assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
+          Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
         }
         */
         for ($i = 0; $i < count($returned_programs); ++ $i) {
-            assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
+            Assert::assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
         }
     }
 
@@ -733,7 +728,7 @@ class FeatureContext extends BaseContext
         $response_array = json_decode($response->getContent(), true);
         $random_programs = $response_array['CatrobatProjects'];
         $expected_programs = $table->getHash();
-        assertEquals($program_count, count($random_programs), 'Wrong number of random programs');
+        Assert::assertEquals($program_count, count($random_programs), 'Wrong number of random programs');
 
         for ($i = 0; $i < count($random_programs); ++ $i) {
             $program_found = false;
@@ -741,7 +736,7 @@ class FeatureContext extends BaseContext
                 if (strcmp($random_programs[$i]['ProjectName'], $expected_programs[$j]['Name']) === 0)
                     $program_found = true;
             }
-            assertEquals($program_found, true, 'Program does not exist in the database');
+            Assert::assertEquals($program_found, true, 'Program does not exist in the database');
         }
     }
 
@@ -760,13 +755,13 @@ class FeatureContext extends BaseContext
     {
         $all_like_similarities = $this->getAllLikeSimilaritiesBetweenUsers();
         $expected_like_similarities = $table->getHash();
-        assertEquals(count($expected_like_similarities), count($all_like_similarities), 'Wrong number of returned similarity entries');
+        Assert::assertEquals(count($expected_like_similarities), count($all_like_similarities), 'Wrong number of returned similarity entries');
         for ($i = 0; $i < count($all_like_similarities); ++$i) {
-            assertEquals($expected_like_similarities[$i]['first_user_id'], $all_like_similarities[$i]->getFirstUserId(),
+            Assert::assertEquals($expected_like_similarities[$i]['first_user_id'], $all_like_similarities[$i]->getFirstUserId(),
                 'Wrong value for first_user_id or wrong order of results');
-            assertEquals($expected_like_similarities[$i]['second_user_id'], $all_like_similarities[$i]->getSecondUserId(),
+            Assert::assertEquals($expected_like_similarities[$i]['second_user_id'], $all_like_similarities[$i]->getSecondUserId(),
                 'Wrong value for second_user_id');
-            assertEquals(round($expected_like_similarities[$i]['similarity'], 3), round($all_like_similarities[$i]->getSimilarity(), 3),
+            Assert::assertEquals(round($expected_like_similarities[$i]['similarity'], 3), round($all_like_similarities[$i]->getSimilarity(), 3),
                 'Wrong value for similarity');
         }
     }
@@ -778,13 +773,13 @@ class FeatureContext extends BaseContext
     {
         $all_remix_similarities = $this->getAllRemixSimilaritiesBetweenUsers();
         $expected_remix_similarities = $table->getHash();
-        assertEquals(count($expected_remix_similarities), count($all_remix_similarities), 'Wrong number of returned similarity entries');
+        Assert::assertEquals(count($expected_remix_similarities), count($all_remix_similarities), 'Wrong number of returned similarity entries');
         for ($i = 0; $i < count($all_remix_similarities); ++$i) {
-            assertEquals($expected_remix_similarities[$i]['first_user_id'], $all_remix_similarities[$i]->getFirstUserId(),
+            Assert::assertEquals($expected_remix_similarities[$i]['first_user_id'], $all_remix_similarities[$i]->getFirstUserId(),
                 'Wrong value for first_user_id or wrong order of results');
-            assertEquals($expected_remix_similarities[$i]['second_user_id'], $all_remix_similarities[$i]->getSecondUserId(),
+            Assert::assertEquals($expected_remix_similarities[$i]['second_user_id'], $all_remix_similarities[$i]->getSecondUserId(),
                 'Wrong value for second_user_id');
-            assertEquals(round($expected_remix_similarities[$i]['similarity'], 3), round($all_remix_similarities[$i]->getSimilarity(), 3),
+            Assert::assertEquals(round($expected_remix_similarities[$i]['similarity'], 3), round($all_remix_similarities[$i]->getSimilarity(), 3),
                 'Wrong value for similarity');
         }
     }
@@ -795,7 +790,7 @@ class FeatureContext extends BaseContext
     public function theResponseCodeShouldBe($code)
     {
         $response = $this->getClient()->getResponse();
-        assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+        Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -806,7 +801,7 @@ class FeatureContext extends BaseContext
         $response = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertTrue(is_numeric($response[$arg1]));
+        Assert::assertTrue(is_numeric($response[$arg1]));
     }
 
     /**
@@ -815,7 +810,7 @@ class FeatureContext extends BaseContext
     public function iHaveAFile($filename)
     {
         $filepath = './src/Catrobat/ApiBundle/Features/Fixtures/' . $filename;
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         $this->files[] = new UploadedFile($filepath, $filename);
     }
 
@@ -825,7 +820,7 @@ class FeatureContext extends BaseContext
     public function iHaveAValidCatrobatFile()
     {
         $filepath = self::FIXTUREDIR . 'test.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         $this->files = array();
         $this->files[] = new UploadedFile($filepath, 'test.catrobat');
     }
@@ -836,7 +831,7 @@ class FeatureContext extends BaseContext
     public function iHaveACatrobatFileWithAnRudeWordInTheDescription()
     {
         $filepath = self::FIXTUREDIR . 'GeneratedFixtures/program_with_rudeword_in_description.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         $this->files[] = new UploadedFile($filepath, 'program_with_rudeword_in_description.catrobat');
     }
 
@@ -907,7 +902,7 @@ class FeatureContext extends BaseContext
         $json = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertEquals('200', $json['statusCode'], $this->getClient()
+        Assert::assertEquals('200', $json['statusCode'], $this->getClient()
             ->getResponse()
             ->getContent());
     }
@@ -934,7 +929,7 @@ class FeatureContext extends BaseContext
         $json = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertEquals($last_json['projectId'], $json['projectId'], $this->getClient()
+        Assert::assertEquals($last_json['projectId'], $json['projectId'], $this->getClient()
             ->getResponse()
             ->getContent());
     }
@@ -1048,12 +1043,12 @@ class FeatureContext extends BaseContext
             $repository = $this->getManager()->getRepository('AppBundle:ProgramDownloads');
             $program_download_statistics = $repository->find(1);
 
-            assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
-            assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
-            assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
-            assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
-            assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
-            assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
+            Assert::assertEquals($ip, $program_download_statistics->getIp(), "Wrong IP in download statistics");
+            Assert::assertEquals($country_code, $program_download_statistics->getCountryCode(), "Wrong country code in download statistics");
+            Assert::assertEquals($country_name, strtoUpper($program_download_statistics->getCountryName()), "Wrong country name in download statistics");
+            Assert::assertEquals($program_id, $program_download_statistics->getProgram()->getId(), "Wrong program ID in download statistics");
+            Assert::assertNull($program_download_statistics->getUser(), "Wrong username in download statistics");
+            Assert::assertNotEmpty($program_download_statistics->getUserAgent(), "No user agent was written to download statistics");
 
             $limit = 5.0;
 
@@ -1062,7 +1057,7 @@ class FeatureContext extends BaseContext
 
             $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
 
-            assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
+            Assert::assertTrue($time_delta < $limit, "Download time difference in download statistics too high");
         }
     }
 
@@ -1080,7 +1075,7 @@ class FeatureContext extends BaseContext
     public function iShouldReceiveAFile()
     {
         $content_type = $this->getClient()->getResponse()->headers->get('Content-Type');
-        assertEquals('application/zip', $content_type);
+        Assert::assertEquals('application/zip', $content_type);
     }
 
     /**
@@ -1172,7 +1167,7 @@ class FeatureContext extends BaseContext
     {
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
-        assertEquals(200, $responseArray['statusCode']);
+        Assert::assertEquals(200, $responseArray['statusCode']);
     }
 
     /**
@@ -1260,7 +1255,7 @@ class FeatureContext extends BaseContext
     {
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($program_id);
-        assertTrue($uploaded_program->isRemixRoot());
+        Assert::assertTrue($uploaded_program->isRemixRoot());
     }
 
     /**
@@ -1280,7 +1275,7 @@ class FeatureContext extends BaseContext
         $json = json_decode($this->getClient()->getResponse()->getContent(), true);
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($json["projectId"]);
-        assertNotNull($uploaded_program->getRemixMigratedAt());
+        Assert::assertNotNull($uploaded_program->getRemixMigratedAt());
     }
 
     /**
@@ -1290,7 +1285,7 @@ class FeatureContext extends BaseContext
     {
         $program_manager = $this->getProgramManger();
         $uploaded_program = $program_manager->find($program_id);
-        assertFalse($uploaded_program->isRemixRoot());
+        Assert::assertFalse($uploaded_program->isRemixRoot());
     }
 
     /**
@@ -1312,7 +1307,7 @@ class FeatureContext extends BaseContext
             'catrobat_child_id' => $program_id
         ]);
 
-        assertNotNull($direct_edge_relation);
+        Assert::assertNotNull($direct_edge_relation);
         $this->checked_catrobat_remix_forward_ancestor_relations[$direct_edge_relation->getUniqueKey()] = $direct_edge_relation;
     }
 
@@ -1337,7 +1332,7 @@ class FeatureContext extends BaseContext
         $further_scratch_parent_relations = array_filter($direct_edge_relations,
             function ($r) { return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations); });
 
-        assertCount(0, $further_scratch_parent_relations);
+        Assert::assertCount(0, $further_scratch_parent_relations);
     }
 
     /**
@@ -1360,7 +1355,7 @@ class FeatureContext extends BaseContext
             'depth' => $depth
         ]);
 
-        assertNotNull($forward_ancestor_relation);
+        Assert::assertNotNull($forward_ancestor_relation);
         $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] = $forward_ancestor_relation;
 
         if ($program_id == $ancestor_program_id && $depth == 0) {
@@ -1387,7 +1382,7 @@ class FeatureContext extends BaseContext
             'child_id' => $program_id
         ]);
 
-        assertNotNull($backward_parent_relation);
+        Assert::assertNotNull($backward_parent_relation);
         $this->checked_catrobat_remix_backward_relations[$backward_parent_relation->getUniqueKey()] = $backward_parent_relation;
     }
 
@@ -1409,7 +1404,7 @@ class FeatureContext extends BaseContext
             ->getProgramRemixForwardRepository()
             ->findBy(['descendant_id' => $program_id]);
 
-        assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
+        Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
             function ($r) { return $r->getDepth() >= 1; }));
     }
 
@@ -1436,7 +1431,7 @@ class FeatureContext extends BaseContext
                 return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations);
             });
 
-        assertCount(0, $further_forward_ancestor_relations);
+        Assert::assertCount(0, $further_forward_ancestor_relations);
     }
 
     /**
@@ -1454,7 +1449,7 @@ class FeatureContext extends BaseContext
     public function theProgramShouldHaveNoCatrobatBackwardParents($program_id)
     {
         $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
-        assertCount(0, $backward_parent_relations);
+        Assert::assertCount(0, $backward_parent_relations);
     }
 
     /**
@@ -1476,7 +1471,7 @@ class FeatureContext extends BaseContext
         $further_backward_parent_relations = array_filter($backward_parent_relations,
             function ($r) { return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_backward_relations); });
 
-        assertCount(0, $further_backward_parent_relations);
+        Assert::assertCount(0, $further_backward_parent_relations);
     }
 
     /**
@@ -1512,7 +1507,7 @@ class FeatureContext extends BaseContext
     public function theProgramShouldHaveNoScratchParents($program_id)
     {
         $scratch_parents = $this->getScratchProgramRemixRepository()->findBy(['catrobat_child_id' => $program_id]);
-        assertCount(0, $scratch_parents);
+        Assert::assertCount(0, $scratch_parents);
     }
 
     /**
@@ -1535,7 +1530,7 @@ class FeatureContext extends BaseContext
             'depth' => $depth
         ]);
 
-        assertNotNull($forward_descendant_relation);
+        Assert::assertNotNull($forward_descendant_relation);
         $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] = $forward_descendant_relation;
 
         if ($program_id == $descendant_program_id && $depth == 0) {
@@ -1561,7 +1556,7 @@ class FeatureContext extends BaseContext
             ->getProgramRemixForwardRepository()
             ->findBy(['ancestor_id' => $program_id]);
 
-        assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
+        Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
             function ($r) { return $r->getDepth() >= 1; }));
     }
 
@@ -1588,7 +1583,7 @@ class FeatureContext extends BaseContext
                 return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations);
             });
 
-        assertCount(0, $further_forward_descendant_relations);
+        Assert::assertCount(0, $further_forward_descendant_relations);
     }
 
     /**
@@ -1613,7 +1608,7 @@ class FeatureContext extends BaseContext
          */
         $extractedCatrobatFile = $efr->loadProgramExtractedFile($uploaded_program);
         $progXmlProp = $extractedCatrobatFile->getProgramXmlProperties();
-        assertEquals($value, $progXmlProp->header->remixOf->__toString());
+        Assert::assertEquals($value, $progXmlProp->header->remixOf->__toString());
     }
 
     /**
@@ -1659,8 +1654,8 @@ class FeatureContext extends BaseContext
         $fb_post_url = $program->getFbPostUrl();
 
         $profile_url = $this->getSymfonySupport()->getRouter()->generate('profile', array('id' => $user->getId()), true);
-        assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
-        assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
+        Assert::assertTrue($fb_post_id != '', "No Facebook Post ID was persisted");
+        Assert::assertTrue($fb_post_url != '', "No Facebook Post URL was persisted");
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($fb_post_id)->getGraphObject();
 
         $fb_post_message = $fb_post_message . chr(10) . 'by '  . $profile_url;
@@ -1669,9 +1664,9 @@ class FeatureContext extends BaseContext
         $fb_message = $fb_response['message'];
 
         $this->fb_post_id = $fb_id;
-        assertTrue($fb_id != '', "No Facebook Post ID was returned");
-        assertEquals($fb_id, $program_manager->find($project_id)->getFbPostId(), "Facebook Post ID's do not match");
-        assertEquals($fb_post_message, $fb_message, "Facebook messages do not match");
+        Assert::assertTrue($fb_id != '', "No Facebook Post ID was returned");
+        Assert::assertEquals($fb_id, $program_manager->find($project_id)->getFbPostId(), "Facebook Post ID's do not match");
+        Assert::assertEquals($fb_post_message, $fb_message, "Facebook messages do not match");
     }
 
     /**
@@ -1695,12 +1690,12 @@ class FeatureContext extends BaseContext
 
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);
-        assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
+        Assert::assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
 
         $string = print_r($fb_response, true);
-        assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
-        assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
+        Assert::assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
+        Assert::assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
     }
 
     /**
@@ -1751,11 +1746,11 @@ class FeatureContext extends BaseContext
     {
         $program_tags = $this->getProgramManger()->find(2)->getTags();
         $tags = explode(',',$arg1);
-        assertEquals(count($program_tags), count($tags), 'Too much or too less tags found!');
+        Assert::assertEquals(count($program_tags), count($tags), 'Too much or too less tags found!');
 
         foreach ($program_tags as $program_tag) {
             if (!(in_array($program_tag->getDe(), $tags) || in_array($program_tag->getEn(), $tags))) {
-                assertTrue(false, 'The tag is not found!');
+                Assert::assertTrue(false, 'The tag is not found!');
             }
         }
     }
@@ -1766,7 +1761,7 @@ class FeatureContext extends BaseContext
     public function theProgramShouldNotBeTagged()
     {
         $program_tags = $this->getProgramManger()->find(2)->getTags();
-        assertEquals(0, count($program_tags), 'The program is tagged but should not be tagged');
+        Assert::assertEquals(0, count($program_tags), 'The program is tagged but should not be tagged');
     }
 
     /**
@@ -1797,12 +1792,12 @@ class FeatureContext extends BaseContext
     {
         $program_extensions = $this->getProgramManger()->find(2)->getExtensions();
 
-        assertEquals(count($program_extensions), 3, 'Too much or too less tags found!');
+        Assert::assertEquals(count($program_extensions), 3, 'Too much or too less tags found!');
 
         $ext = array("Arduino", "Lego", "Phiro");
         foreach ($program_extensions as $program_extension) {
             if (!(in_array($program_extension->getName(), $ext))) {
-                assertTrue(false, 'The Extension is not found!');
+                Assert::assertTrue(false, 'The Extension is not found!');
             }
         }
     }
@@ -1823,12 +1818,12 @@ class FeatureContext extends BaseContext
     {
         $program_extensions = $this->getProgramManger()->find(2)->getExtensions();
 
-        assertEquals(count($program_extensions), 0, 'Too much or too less tags found!');
+        Assert::assertEquals(count($program_extensions), 0, 'Too much or too less tags found!');
 
         $ext = array("Arduino", "Lego", "Phiro");
         foreach ($program_extensions as $program_extension) {
             if (!(in_array($program_extension->getName(), $ext))) {
-                assertTrue(false, 'The Extension is not found!');
+                Assert::assertTrue(false, 'The Extension is not found!');
             }
         }
     }
@@ -1886,7 +1881,7 @@ class FeatureContext extends BaseContext
       $new_category->setName($category['name']);
       $package = $em->getRepository('AppBundle:MediaPackage')->findOneBy(array('name' => $category['package']));
       if ($package == null)
-        assert(false, "Fatal error package not found");
+        Assert::assert(false, "Fatal error package not found");
       $new_category->setPackage(array($package));
       $current_categories = $package->getCategories();
       $current_categories = $current_categories == null ? [] : $current_categories;
@@ -1917,7 +1912,7 @@ class FeatureContext extends BaseContext
       $new_file->setActive($file['active']);
       $category = $em->getRepository('AppBundle:MediaPackageCategory')->findOneBy(array('name' => $file['category']));
       if ($category == null)
-        assert(false, "Fatal error category not found");
+        Assert::assert(false, "Fatal error category not found");
       $new_file->setCategory($category);
       $old_files = $category->getFiles();
       $old_files = $old_files == null ? [] : $old_files;
