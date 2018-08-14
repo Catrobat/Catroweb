@@ -1,19 +1,21 @@
 <?php
 namespace Catrobat\AppBundle\Controller\Resetting;
 
-use Sonata\UserBundle\Controller\ResettingFOSUser1Controller;
+use Sonata\UserBundle\Controller\AdminResettingController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class ResettingController extends ResettingFOSUser1Controller
+class ResettingController extends AdminResettingController
 {
 
     /**
-     * Request reset user password: submit form and send email
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function sendEmailAction() {
+    public function sendEmailAction(Request $request) {
         /**
          * @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface
          * @var $user UserInterface
@@ -23,13 +25,13 @@ class ResettingController extends ResettingFOSUser1Controller
         $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
 
         if (null === $user) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine(), array(
+            return $this->container->get('templating')->renderResponse('@FOSUser/Resetting/request.html.' . $this->getEngine(), array(
                 'invalid_username' => $username
             ));
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:passwordAlreadyRequested.html.' . $this->getEngine());
+            return $this->container->get('templating')->renderResponse('@FOSUser/Resetting/passwordAlreadyRequested.html.' . $this->getEngine());
         }
 
         if ($user->isLimited()) {

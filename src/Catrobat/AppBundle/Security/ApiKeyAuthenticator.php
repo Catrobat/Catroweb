@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Security;
 
-use Symfony\Component\Security\Core\Authentication\SimplePreAuthenticatorInterface;
+use Symfony\Component\Security\Core\Authentication\SimpleAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
+class ApiKeyAuthenticator implements SimpleAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
     protected $translator;
 

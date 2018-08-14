@@ -69,6 +69,11 @@ doctrine:
                 time_diff: DQL\TimeDiff
                 time_add: DQL\TimeAdd
                 time_sub: DQL\TimeSub
+#        entity_managers:
+#            default:
+#                mappings:
+#                    SonataUserBundle: ~
+#                    FOSUserBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -94,6 +99,11 @@ fos_user:
 
     from_email:
         address: noreply@catrob.at
+        sender_name: "No Reply"
+
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
 
 fr3d_ldap:
     driver:

@@ -1,16 +1,3 @@
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
-
-admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
-
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
-
 catrobat_web_index:
     path: /
     defaults:
@@ -25,13 +12,6 @@ catroweb_flavored:
     requirements:
       flavor:  pocketcode|pocketphiro|pocketalice|pocketgalaxy|phirocode|luna|create@school
 
-sonata_user_security:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
-
-sonata_user_admin_security_logout:
-    pattern: /logout
-    defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" } 
-
 old_version_error:
     path: /error/oldversion
     defaults:
@@ -41,3 +21,31 @@ old_version_error:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+sonata_user_admin_security:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+sonata_user_admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+
+
+## ToDo needed?
+sonata_user_admin_security_logout:
+    path: /logout
+    defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+#sonata_user_security:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"

@@ -439,7 +439,7 @@ class ProgramController extends Controller
    */
   private function findUserPrograms($user, $program)
   {
-    $user_programs = null;
+    $user_programs = [];
     if ($user)
     {
       $user_programs = $user->getPrograms()->matching(Criteria::create()

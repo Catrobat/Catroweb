@@ -9,9 +9,7 @@ parameters:
 
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface:
-          algorithm: bcrypt
-          cost:      11
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
 #        # for convenience, I decided to gather Sonata roles here
@@ -86,17 +84,33 @@ security:
             pattern: ^/debug
             security: false
 
+        # -> custom firewall for the admin area of the URL
+        admin:
+            pattern:            /admin(.*)
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                failure_path:   null
+            logout:
+                path:           /admin/logout
+                target:         /admin/login
+            anonymous:          true
+
         main:
-            pattern: ^/
+            pattern:      .*
             fr3d_ldap:  ~
             form_login:
-                provider: fos_userbundle
-                csrf_provider: security.csrf.token_manager
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
                 failure_path: login
-            logout:
-                path:   /logout
-                target: index
-                invalidate_session: false
+            logout: true
+#                path:   /logout
+#                target: index
+#                invalidate_session: false
             anonymous:    true
             remember_me:
                 name: remember_me
