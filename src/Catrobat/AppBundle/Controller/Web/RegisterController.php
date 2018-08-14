@@ -52,7 +52,7 @@ class RegisterController extends Controller
    */
   public function showRegistrationForm(Request $request)
   {
-    $response = $this->forward('SonataUserBundle:RegistrationFOSUser1:register');
+    $response = $this->forward('FOSUserBundle:Registration:registerAction');
     return $response;
   }
 }

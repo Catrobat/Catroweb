@@ -18,7 +18,7 @@ class ProgramDownloads
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
+     * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program_downloads")
      * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
      * @var Program
      */
