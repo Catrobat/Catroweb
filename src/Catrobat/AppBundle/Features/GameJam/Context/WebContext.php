@@ -7,6 +7,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Catrobat\AppBundle\Entity\GameJam;
 use Behat\Gherkin\Node\TableNode;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use PHPUnit\Framework\Assert;
 
 class WebContext extends BaseContext
 {
@@ -75,10 +76,10 @@ class WebContext extends BaseContext
      */
     public function thereShouldBeAButtonToSubmitItToTheJam()
     {
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(1, $this->response->filter("#gamejam-submission")->count());
+        Assert::assertEquals(1, $this->response->filter("#gamejam-submission")->count());
     }
 
     /**
@@ -86,10 +87,10 @@ class WebContext extends BaseContext
      */
     public function thereShouldNotBeAButtonToSubmitItToTheJam()
     {
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(0, $this->response->filter("#gamejam-submission")->count());
+        Assert::assertEquals(0, $this->response->filter("#gamejam-submission")->count());
     }
 
     /**
@@ -97,10 +98,10 @@ class WebContext extends BaseContext
      */
     public function thereShouldBeADivWithWhatsTheGamejam()
     {
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(1, $this->response->filter("#gamejam-whats")->count());
+        Assert::assertEquals(1, $this->response->filter("#gamejam-whats")->count());
     }
 
     /**
@@ -108,10 +109,10 @@ class WebContext extends BaseContext
      */
     public function thereShouldNotBeADivWithWhatsTheGamejam()
     {
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(0, $this->response->filter("#gamejam-whats")->count());
+        Assert::assertEquals(0, $this->response->filter("#gamejam-whats")->count());
     }
 
 
@@ -149,8 +150,8 @@ class WebContext extends BaseContext
      */
     public function iShouldBeRedirectedToTheGoogleForm()
     {
-        assertTrue($this->getClient()->getResponse() instanceof RedirectResponse);
-        assertEquals("https://localhost/url/to/form", $this->getClient()->getResponse()->headers->get('location'));
+        Assert::assertTrue($this->getClient()->getResponse() instanceof RedirectResponse);
+        Assert::assertEquals("https://localhost/url/to/form", $this->getClient()->getResponse()->headers->get('location'));
     }
 
     /**
@@ -255,10 +256,10 @@ class WebContext extends BaseContext
      */
     public function iDoNotSeeAFormToEditMyProfile()
     {
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(0, $this->response->filter("#profile-form")->count());
+        Assert::assertEquals(0, $this->response->filter("#profile-form")->count());
     }
 
     /**
@@ -290,10 +291,10 @@ class WebContext extends BaseContext
      */
     public function iDoNotSeeAButtonToChangeTheProfilePicture()
     {
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode());
-        assertEquals(0, $this->response->filter("#avatar-upload")->count());
+        Assert::assertEquals(0, $this->response->filter("#avatar-upload")->count());
     }
 
     /**
@@ -322,7 +323,7 @@ class WebContext extends BaseContext
      */
     public function iShouldSeeTheHashtagInTheProgramDescription($hashtag)
     {
-        assertContains($hashtag, $this->getClient()
+        Assert::assertContains($hashtag, $this->getClient()
             ->getResponse()
             ->getContent());
     }
@@ -366,7 +367,7 @@ class WebContext extends BaseContext
      */
     public function iShouldBeRedirectedToTheDetailsPageOfMyProgram()
     {
-        assertEquals("/pocketcode/program/1", $this->getClient()->getRequest()->getPathInfo());
+        Assert::assertEquals("/pocketcode/program/1", $this->getClient()->getRequest()->getPathInfo());
     }
     
     /**
@@ -374,7 +375,7 @@ class WebContext extends BaseContext
      */
     public function iShouldSeeAMessage($arg1)
     {
-        assertContains($arg1, $this->getClient()->getResponse()->getContent());
+        Assert::assertContains($arg1, $this->getClient()->getResponse()->getContent());
     }
     
 }

@@ -32,28 +32,28 @@ Feature: Get featured programs
     Then I should get the json object:
       """
       {
-        "CatrobatInformation":
-            {
-                "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":3,
-                "ProjectsExtension":".catrobat"
-            },
         "CatrobatProjects":
             [
                 {
                     "ProjectId": 3,
                     "ProjectName":"A new world",
-                    "FeaturedImage":"resources_test/featured/featured_2.jpg",
-                    "Author":"User1"
+                    "Author":"User1",
+                    "FeaturedImage":"resources_test/featured/featured_2.jpg"
                  },
                  {
                     "ProjectId": 4,
                     "ProjectName":"Soon to be",
-                    "FeaturedImage": "resources_test/featured/featured_3.jpg",
-                    "Author":"User1"
+                    "Author":"User1",
+                    "FeaturedImage": "resources_test/featured/featured_3.jpg"
                  }
             ],
-         "preHeaderMessages":""
+         "preHeaderMessages":"",
+         "CatrobatInformation":
+            {
+                "BaseUrl":"https://pocketcode.org/",
+                "TotalProjects":"3",
+                "ProjectsExtension":".catrobat"
+            }
       }
       """
 
@@ -62,34 +62,34 @@ Feature: Get featured programs
     Then I should get the json object:
       """
       {
-        "CatrobatInformation":
-            {
-                "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":3,
-                "ProjectsExtension":".catrobat"
-            },
         "CatrobatProjects":
             [
                 {
                     "ProjectId": 3,
                     "ProjectName":"A new world",
-                    "FeaturedImage":"resources_test/featured/featured_2.jpg",
-                    "Author":"User1"
+                    "Author":"User1",
+                    "FeaturedImage":"resources_test/featured/featured_2.jpg"
                  },
                  {
                     "ProjectId": 4,
                     "ProjectName":"Soon to be",
-                    "FeaturedImage": "resources_test/featured/featured_3.jpg",
-                    "Author":"User1"
+                    "Author":"User1",
+                    "FeaturedImage": "resources_test/featured/featured_3.jpg"
                  },
                  {
                     "ProjectId": 1,
                     "ProjectName":"Invaders",
-                    "FeaturedImage": "resources_test/featured/featured_1.jpg",
-                    "Author":"Catrobat"
+                    "Author":"Catrobat",
+                    "FeaturedImage": "resources_test/featured/featured_1.jpg"
                  }
             ],
-         "preHeaderMessages":""
+         "preHeaderMessages":"",
+         "CatrobatInformation":
+            {
+                "BaseUrl":"https://pocketcode.org/",
+                "TotalProjects":"3",
+                "ProjectsExtension":".catrobat"
+            }
       }
       """
 
@@ -98,21 +98,21 @@ Feature: Get featured programs
     Then I should get the json object:
       """
       {
-        "CatrobatInformation":
-            {
-                "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":1,
-                "ProjectsExtension":".catrobat"
-            },
         "CatrobatProjects":
             [
                 {
                     "ProjectId": 5,
                     "ProjectName":"IOS test",
-                    "FeaturedImage":"resources_test/featured/featured_5.jpg",
-                    "Author":"User1"
+                    "Author":"User1",
+                    "FeaturedImage":"resources_test/featured/featured_5.jpg"
                  }
             ],
-         "preHeaderMessages":""
+         "preHeaderMessages":"",
+         "CatrobatInformation":
+            {
+                "BaseUrl":"https://pocketcode.org/",
+                "TotalProjects":"1",
+                "ProjectsExtension":".catrobat"
+            }
       }
       """

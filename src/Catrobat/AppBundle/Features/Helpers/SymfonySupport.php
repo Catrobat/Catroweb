@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Catrobat\AppBundle\Entity\GameJam;
 use Symfony\Component\Validator\Constraints\DateTime;
+use PHPUnit\Framework\Assert;
 
 class SymfonySupport
 {
@@ -248,7 +249,7 @@ class SymfonySupport
   public function getDefaultProgramFile()
   {
     $file = $this->fixture_dir . "/test.catrobat";
-    assertTrue(is_file($file));
+    Assert::assertTrue(is_file($file));
 
     return $file;
   }

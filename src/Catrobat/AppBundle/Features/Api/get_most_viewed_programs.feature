@@ -20,31 +20,31 @@ Feature: Get the most downloaded programs
     Then I should get the json object:
       """
       {
-          "completeTerm":"",
-          "CatrobatInformation": {
-                                   "BaseUrl":"http://localhost\/",
-                                   "TotalProjects":3,
-                                   "ProjectsExtension":".catrobat"
-                                  },
           "CatrobatProjects":[{
                                 "ProjectId": 2,
                                 "ProjectName":"program 2",
                                 "ProjectNameShort":"program 2",
-                                "ScreenshotBig":"images/default/screenshot.png",
-                                "ScreenshotSmall":"images/default/thumbnail.png",
                                 "Author":"Catrobat",
                                 "Description":"",
-                                "Uploaded": 1359723600,
-                                "UploadedString":"1 year ago",
                                 "Version":"0.8.5",
                                 "Views":"90",
                                 "Downloads":"333",
+                                "Private":false,
+                                "Uploaded": 1359723600,
+                                "UploadedString":"1 year ago",
+                                "ScreenshotBig":"images/default/screenshot.png",
+                                "ScreenshotSmall":"images/default/thumbnail.png",
                                 "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"pocketcode/download/2.catrobat",
-                                "FileSize":"0",
-                                "Private":0
+                                "FileSize":0
                             }],
-          "preHeaderMessages":""
+          "completeTerm":"",
+          "preHeaderMessages":"",
+          "CatrobatInformation": {
+                                   "BaseUrl":"http://localhost\/",
+                                   "TotalProjects":"3",
+                                   "ProjectsExtension":".catrobat"
+                                  }
       }
       """
 
@@ -55,17 +55,17 @@ Feature: Get the most downloaded programs
     Then I should get the json object:
       """
       {
-          "completeTerm":"",
-          "CatrobatInformation": {
-                                   "BaseUrl":"http://localhost\/",
-                                   "TotalProjects":3,
-                                   "ProjectsExtension":".catrobat"
-                                  },
           "CatrobatProjects":[{
                                 "ProjectId": 2,
                                 "ProjectName":"program 2"
                             }],
-          "preHeaderMessages":""
+          "completeTerm":"",
+          "preHeaderMessages":"",
+          "CatrobatInformation": {
+                                   "BaseUrl":"http://localhost\/",
+                                   "TotalProjects":"3",
+                                   "ProjectsExtension":".catrobat"
+                                  }
       }
       """
       

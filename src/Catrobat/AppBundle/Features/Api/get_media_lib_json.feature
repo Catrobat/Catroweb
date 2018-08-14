@@ -44,7 +44,7 @@ Feature: Get data from the media library in json format
           "flavor": "pocketcode",
           "package": "Sounds",
           "category": "Fantasy",
-          "author": null,
+          "author": "",
           "extension": "mpga",
           "url": null,
           "download_url": "\/pocketcode\/download-media\/2"
@@ -66,7 +66,7 @@ Feature: Get data from the media library in json format
           "flavor": "pocketcode",
           "package": "Looks",
           "category": "Animals",
-          "author": null,
+          "author": "",
           "extension": "png",
           "url": null,
           "download_url": "\/pocketcode\/download-media\/4"
@@ -77,7 +77,7 @@ Feature: Get data from the media library in json format
           "flavor": "pocketcode",
           "package": "Looks",
           "category": "Animals",
-          "author": null,
+          "author": "",
           "extension": "png",
           "url": null,
           "download_url": "\/pocketcode\/download-media\/5"
@@ -117,7 +117,7 @@ Feature: Get data from the media library in json format
         "flavor": "pocketcode",
         "package": "Looks",
         "category": "Animals",
-        "author": null,
+        "author": "",
         "extension": "png",
         "url": null,
         "download_url": "\/pocketcode\/download-media\/4"
@@ -128,7 +128,7 @@ Feature: Get data from the media library in json format
         "flavor": "pocketcode",
         "package": "Looks",
         "category": "Animals",
-        "author": null,
+        "author": "",
         "extension": "png",
         "url": null,
         "download_url": "\/pocketcode\/download-media\/5"
@@ -168,7 +168,7 @@ Feature: Get data from the media library in json format
         "flavor": "pocketcode",
         "package": "Sounds",
         "category": "Fantasy",
-        "author": null,
+        "author": "",
         "extension": "mpga",
         "url": null,
         "download_url": "\/pocketcode\/download-media\/2"

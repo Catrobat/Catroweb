@@ -7,6 +7,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Catrobat\AppBundle\Entity\GameJam;
 use Behat\Gherkin\Node\TableNode;
 use Symfony\Component\Finder\Finder;
+use PHPUnit\Framework\Assert;
 
 class FeatureContext extends BaseContext
 {
@@ -68,8 +69,8 @@ class FeatureContext extends BaseContext
         $answer = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertArrayHasKey('form', $answer);
-        assertEquals("https://catrob.at/url/to/form", $answer['form']);
+        Assert::assertArrayHasKey('form', $answer);
+        Assert::assertEquals("https://catrob.at/url/to/form", $answer['form']);
     }
 
     /**
@@ -78,7 +79,7 @@ class FeatureContext extends BaseContext
     public function theGameIsNotYetAccepted()
     {
         $program = $this->getProgramManger()->find(1);
-        assertFalse($program->isAcceptedForGameJam());
+        Assert::assertFalse($program->isAcceptedForGameJam());
     }
 
     /**
@@ -87,7 +88,7 @@ class FeatureContext extends BaseContext
     public function iFillOutTheGoogleForm()
     {
         $this->getClient()->request("GET", "/pocketcode/api/gamejam/finalize/1");
-        assertEquals("200", $this->getClient()
+        Assert::assertEquals("200", $this->getClient()
             ->getResponse()
             ->getStatusCode());
     }
@@ -98,7 +99,7 @@ class FeatureContext extends BaseContext
     public function myGameShouldBeAccepted()
     {
         $program = $this->getProgramManger()->find(1);
-        assertTrue($program->isAcceptedForGameJam());
+        Assert::assertTrue($program->isAcceptedForGameJam());
     }
 
     /**
@@ -116,7 +117,7 @@ class FeatureContext extends BaseContext
     public function iAlreadyFilledTheGoogleForm()
     {
         $this->getClient()->request("GET", "/pocketcode/api/gamejam/finalize/1");
-        assertEquals("200", $this->getClient()
+        Assert::assertEquals("200", $this->getClient()
             ->getResponse()
             ->getStatusCode());
     }
@@ -135,7 +136,7 @@ class FeatureContext extends BaseContext
      */
     public function itShouldBeUpdated()
     {
-        assertEquals("200", $this->getClient()
+        Assert::assertEquals("200", $this->getClient()
             ->getResponse()
             ->getStatusCode());
     }
@@ -148,7 +149,7 @@ class FeatureContext extends BaseContext
         $answer = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertArrayNotHasKey('form', $answer);
+        Assert::assertArrayNotHasKey('form', $answer);
     }
 
     /**
@@ -157,7 +158,7 @@ class FeatureContext extends BaseContext
     public function myGameShouldStillBeAccepted()
     {
         $program = $this->getProgramManger()->find(1);
-        assertTrue($program->isAcceptedForGameJam());
+        Assert::assertTrue($program->isAcceptedForGameJam());
     }
 
     /**
@@ -180,7 +181,7 @@ class FeatureContext extends BaseContext
         $answer = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertNotEquals("200", $answer['statusCode']);
+        Assert::assertNotEquals("200", $answer['statusCode']);
     }
 
     /**
@@ -191,7 +192,7 @@ class FeatureContext extends BaseContext
         $answer = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertEquals($string->getRaw(), $answer['answer']);
+        Assert::assertEquals($string->getRaw(), $answer['answer']);
     }
 
     /**
@@ -241,7 +242,7 @@ class FeatureContext extends BaseContext
         $answer = json_decode($this->getClient()
             ->getResponse()
             ->getContent(), true);
-        assertEquals($string->getRaw(), $answer['form']);
+        Assert::assertEquals($string->getRaw(), $answer['form']);
     }
 
     /**
@@ -322,9 +323,9 @@ class FeatureContext extends BaseContext
         $returned_programs = $responseArray['CatrobatProjects'];
         $expected_programs = $table->getHash();
         for ($i = 0; $i < count($returned_programs); ++ $i) {
-            assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
+            Assert::assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
         }
-        assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
+        Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
     }
 
     /**
@@ -334,7 +335,7 @@ class FeatureContext extends BaseContext
     {
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
-        assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects']);
+        Assert::assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects']);
     }
 
     /**
@@ -345,7 +346,7 @@ class FeatureContext extends BaseContext
         $response = $this->getClient()->getResponse();
         $responseArray = json_decode($response->getContent(), true);
         $returned_programs = $responseArray['CatrobatProjects'];
-        assertEquals("test", $returned_programs[0]['ProjectName'], 'Could not find the program');
+        Assert::assertEquals("test", $returned_programs[0]['ProjectName'], 'Could not find the program');
     }
     
     /**
@@ -373,7 +374,7 @@ class FeatureContext extends BaseContext
     {
         $dir = $this->getSymfonyParameter("catrobat.snapshot.dir");
         $finder = new Finder();
-        assertEquals(1, $finder->files()->in($dir)->count(), "Snapshot was not stored!");
+        Assert::assertEquals(1, $finder->files()->in($dir)->count(), "Snapshot was not stored!");
     }
     
 }

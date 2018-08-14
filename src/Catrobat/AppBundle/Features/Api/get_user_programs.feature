@@ -31,49 +31,49 @@ Feature: Get users programs
     Then I should get the json object:
     """
       {
-          "completeTerm":"",
-          "CatrobatInformation": {
-                                   "BaseUrl":"http://localhost/",
-                                   "TotalProjects":2,
-                                   "ProjectsExtension":".catrobat"
-                                  },
           "CatrobatProjects":[{
                                 "ProjectId": 2,
                                 "ProjectName":"Minions",
                                 "ProjectNameShort":"Minions",
-                                "ScreenshotBig":"images/default/screenshot.png",
-                                "ScreenshotSmall":"images/default/thumbnail.png",
                                 "Author":"Catrobat",
                                 "Description":"",
-                                "Uploaded": 1359723600,
-                                "UploadedString":"1 year ago",
                                 "Version":"0.8.5",
                                 "Views":"9",
                                 "Downloads":"33",
+                                "Private":false,
+                                "Uploaded": 1359723600,
+                                "UploadedString":"1 year ago",
+                                "ScreenshotBig":"images/default/screenshot.png",
+                                "ScreenshotSmall":"images/default/thumbnail.png",
                                 "ProjectUrl":"pocketcode/program/2",
                                 "DownloadUrl":"pocketcode/download/2.catrobat",
-                                "FileSize":0,
-                                "Private":0
+                                "FileSize":0
                             },
                             {
                                 "ProjectId": 6,
                                 "ProjectName":"Whack the Marko",
                                 "ProjectNameShort":"Whack the Marko",
-                                "ScreenshotBig":"images/default/screenshot.png",
-                                "ScreenshotSmall":"images/default/thumbnail.png",
                                 "Author":"Catrobat",
                                 "Description":"Universe",
-                                "Uploaded": 1328101200,
-                                "UploadedString":"more than one year ago",
                                 "Version":"0.8.5",
                                 "Views":"33",
                                 "Downloads":"2",
+                                "Private":false,
+                                "Uploaded": 1328101200,
+                                "UploadedString":"more than one year ago",
+                                "ScreenshotBig":"images/default/screenshot.png",
+                                "ScreenshotSmall":"images/default/thumbnail.png",
                                 "ProjectUrl":"pocketcode/program/6",
                                 "DownloadUrl":"pocketcode/download/6.catrobat",
-                                "FileSize":0,
-                                "Private":0
+                                "FileSize":0
                             }],
-          "preHeaderMessages":""
+          "completeTerm":"",
+          "preHeaderMessages":"",
+          "CatrobatInformation": {
+                                   "BaseUrl":"http://localhost/",
+                                   "TotalProjects":2,
+                                   "ProjectsExtension":".catrobat"
+                                  }
       }
       """
 

@@ -43,31 +43,31 @@ Feature: Search programs
     Then I should get the json object:
     """
     {
-      "completeTerm":"",
-      "CatrobatInformation": {
-         "BaseUrl":"http://localhost/",
-         "TotalProjects":1,
-         "ProjectsExtension":".catrobat"
-     },
      "CatrobatProjects":[{
          "ProjectId":1,
          "ProjectName":"Galaxy War",
          "ProjectNameShort":"Galaxy War",
-         "ScreenshotBig":"images/default/screenshot.png",
-         "ScreenshotSmall":"images/default/thumbnail.png",
          "Author":"User1",
          "Description":"p1",
-         "Uploaded":1357041600,
-         "UploadedString":"more than one year ago",
          "Version":"0.8.5",
          "Views":"12",
          "Downloads":"3",
+         "Private":false,
+         "Uploaded":1357041600,
+         "UploadedString":"more than one year ago",
+         "ScreenshotBig":"images/default/screenshot.png",
+         "ScreenshotSmall":"images/default/thumbnail.png",
          "ProjectUrl":"pocketcode/program/1",
          "DownloadUrl":"pocketcode/download/1.catrobat",
-         "FileSize":0,
-         "Private":0
+         "FileSize":0
      }],
-    "preHeaderMessages":""
+     "completeTerm":"",
+     "preHeaderMessages":"",
+     "CatrobatInformation": {
+         "BaseUrl":"http://localhost/",
+         "TotalProjects":1,
+         "ProjectsExtension":".catrobat"
+     }
     }
     """
 

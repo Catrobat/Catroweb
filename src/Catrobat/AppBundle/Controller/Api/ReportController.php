@@ -19,7 +19,6 @@ class ReportController extends Controller
      * @Method({"POST","GET"})
      */
     public function reportProgramAction(Request $request) {
-        /* @var $context \Symfony\Component\Security\Core\SecurityContext */
         /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */
         /* @var $program \Catrobat\AppBundle\Entity\Program */
 

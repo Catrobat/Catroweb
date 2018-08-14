@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Features\ApiLogin\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\TableNode;
+use PHPUnit\Framework\Assert;
 
 class WebContext extends BaseContext
 {
@@ -43,7 +44,7 @@ class WebContext extends BaseContext
             'token' => $this->token
         );
         $this->getClient()->request('GET', $uri . '?' . http_build_query($parameters));
-        assertEquals(200, $this->getClient()
+        Assert::assertEquals(200, $this->getClient()
             ->getResponse()
             ->getStatusCode(), $this->getClient()->getResponse());
     }
@@ -53,8 +54,8 @@ class WebContext extends BaseContext
      */
     public function iShouldBeLoggedIn()
     {
-        assertEquals(0, $this->getClient()->getCrawler()->filter('#btn-login')->count());
-        assertContains('TokenUser', $this->getClient()
+        Assert::assertEquals(0, $this->getClient()->getCrawler()->filter('#btn-login')->count());
+        Assert::assertContains('TokenUser', $this->getClient()
             ->getResponse()
             ->getContent());
     }
@@ -81,8 +82,8 @@ class WebContext extends BaseContext
      */
     public function iShouldBeLoggedOut()
     {
-        assertGreaterThanOrEqual(1, $this->getClient()->getCrawler()->filter('#btn-login')->count());
-        assertNotContains('TokenUser', $this->getClient()
+        Assert::assertGreaterThanOrEqual(1, $this->getClient()->getCrawler()->filter('#btn-login')->count());
+        Assert::assertNotContains('TokenUser', $this->getClient()
             ->getResponse()
             ->getContent());
         
@@ -133,7 +134,7 @@ class WebContext extends BaseContext
     public function iShouldBeOn($arg1)
     {
         $path = $this->getClient()->getRequest()->getPathInfo() . "?" . $this->getClient()->getRequest()->getQueryString(); 
-        assertEquals($arg1, $path);
+        Assert::assertEquals($arg1, $path);
     }
     
 }

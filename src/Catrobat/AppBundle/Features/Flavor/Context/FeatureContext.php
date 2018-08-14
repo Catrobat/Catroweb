@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use PHPUnit\Framework\Assert;
 
 
 /**
@@ -30,7 +31,7 @@ class FeatureContext extends BaseContext
     private function getStandardProgramFile()
     {
         $filepath = self::FIXTUREDIR . 'test.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
+        Assert::assertTrue(file_exists($filepath), 'File not found');
         
         return new UploadedFile($filepath, 'test.catrobat');
     }
@@ -46,7 +47,7 @@ class FeatureContext extends BaseContext
         $user = $this->insertUser();
         $program = $this->getStandardProgramFile();
         $response = $this->upload($program, $user, 'pocketphiro');
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+        Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -56,8 +57,8 @@ class FeatureContext extends BaseContext
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
-        assertNotNull($program, 'No program added');
-        assertEquals('pocketphiro', $program->getFlavor(), 'Program is NOT flagged a phiro');
+        Assert::assertNotNull($program, 'No program added');
+        Assert::assertEquals('pocketphiro', $program->getFlavor(), 'Program is NOT flagged a phiro');
     }
 
     /**
@@ -68,7 +69,7 @@ class FeatureContext extends BaseContext
         $user = $this->insertUser();
         $program = $this->getStandardProgramFile();
         $response = $this->upload($program, $user);
-        assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+        Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
     }
 
     /**
@@ -78,8 +79,8 @@ class FeatureContext extends BaseContext
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find(1);
-        assertNotNull($program, 'No program added');
-        assertNotEquals('pocketphiropro', $program->getFlavor(), 'Program is flagged a phiro');
+        Assert::assertNotNull($program, 'No program added');
+        Assert::assertNotEquals('pocketphiropro', $program->getFlavor(), 'Program is flagged a phiro');
     }
 
     /**
@@ -98,11 +99,11 @@ class FeatureContext extends BaseContext
     public function iShouldGetFollowingPrograms(TableNode $table)
     {
         $response = $this->getClient()->getResponse();
-        assertEquals(200, $response->getStatusCode());
+        Assert::assertEquals(200, $response->getStatusCode());
         $responseArray = json_decode($response->getContent(), true);
         $returned_programs = $responseArray['CatrobatProjects'];
         $expected_programs = $table->getHash();
-        assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
+        Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
         for ($i = 0; $i < count($expected_programs); ++ $i) {
             $found = false;
             for ($j = 0; $j < count($returned_programs); ++ $j) {
@@ -110,7 +111,7 @@ class FeatureContext extends BaseContext
                     $found = true;
                 }
             }
-            assertTrue($found, $expected_programs[$i]['name'] . ' was not found in the returned programs');
+            Assert::assertTrue($found, $expected_programs[$i]['name'] . ' was not found in the returned programs');
         }
     }
 
