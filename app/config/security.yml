@@ -101,8 +101,8 @@ security:
 
         main:
             pattern:     ^/
-            # Using the FOSUserBundle provider to find the users...
-            provider: chain_provider
+#            # Using the FOSUserBundle provider to find the users...
+#            provider: chain_provider
             fr3d_ldap:  ~
             form_login:
                 login_path: /login
@@ -121,9 +121,16 @@ security:
                 secure: false
                 httponly: false
 
+        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            fr3d_ldap:  ~
             security: false
+            form_login:
+                always_use_default_target_path: true
+                default_target_path: /profile
+            logout:       true
+            anonymous:    true
 
 
     access_control:
