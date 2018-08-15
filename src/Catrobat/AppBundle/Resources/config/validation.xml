@@ -5,7 +5,6 @@
 
   <class name="Catrobat\AppBundle\Entity\User">
     <constraint name="FR3D\LdapBundle\Validator\Unique">
-      <option name="property">username</option>
       <option name="message">fr3d_ldap.username.already_used</option>
       <option name="groups">
         <value>Registration</value>

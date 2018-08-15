@@ -13,7 +13,7 @@ framework:
     #translator:      { fallback: %locale% }
     serializer: { enable_annotations: true }
     translator: { fallback: en }
-    secret:          %secret%
+    secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
@@ -24,18 +24,18 @@ framework:
         engines: ['twig']
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
-    trusted_proxies: %proxies%
+    trusted_proxies: "%proxies%"
     session:         ~
     fragments:       ~
 
 # Twig Configuration
 twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
 
 # Assetic Configuration
 assetic:
-    debug:          %kernel.debug%
+    debug:          "%kernel.debug%"
     use_controller: false
     bundles:        [ AppBundle, FOSUserBundle, SonataUserBundle ]
     #java: /usr/bin/java
@@ -49,12 +49,12 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
         charset:  UTF8
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: %kernel.root_dir%/data/data.db3
@@ -63,7 +63,7 @@ doctrine:
             json: Sonata\Doctrine\Types\JsonType
 
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         dql:
             numeric_functions:
@@ -78,10 +78,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
     encryption: ssl
     auth_mode: plain
     spool: { type: memory }
@@ -108,12 +108,12 @@ sonata_user:
 
 fr3d_ldap:
     driver:
-        host:                %ldap_host%
-        port:                %ldap_port%    # Optional
-        username:            %ldap_user%    # Optional
-        password:            %ldap_password%    # Optional
+        host:               "%ldap_host%"
+        port:               "%ldap_port%"    # Optional
+        username:            "%ldap_user%"    # Optional
+        password:           "%ldap_password%"    # Optional
         bindRequiresDn:      true   # Optional
-        baseDn:              %ldap_base_dn%   # Optional
+        baseDn:              "%ldap_base_dn%"   # Optional
         accountFilterFormat: (cn=%s) # Optional. sprintf format %s will be the username
 #       optReferrals:        false  # Optional
         useSsl:              true   # Enable SSL negotiation. Optional

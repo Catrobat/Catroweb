@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class GenerateTestDataCommand extends Command
 {
@@ -40,10 +41,11 @@ class GenerateTestDataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('question');
-        $question = new Question('<question>Generate test data in ' . $this->target_directory . ' (Y/n)?</question>', true);
+        $dialog = $this->getHelper('question');
+        $question = new ConfirmationQuestion('<question>Generate test data in ' . $this->target_directory . ' (Y/n)?</question>', true);
+        // $question = new Question('<question>Generate test data in ' . $this->target_directory . ' (Y/n)?</question>', true);
 
-        if ($dialog->askConfirmation($output, $question)) {
+        if ($dialog->ask($input, $output, $question)) {
             $output->writeln('<info>Deleting old test data in '.$this->target_directory.'</info>');
 
             $finder = new Finder();
