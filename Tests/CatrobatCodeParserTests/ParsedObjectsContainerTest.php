@@ -70,6 +70,8 @@ class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
 
         $xml_properties = simplexml_load_file(__DIR__
             . '/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml');
+
+        var_export("\n\n".$xml_properties->xpath('//scene')[0]."\n\n");
         
         new ParsedScene($xml_properties->xpath('//scene')[0]);
     }

@@ -101,11 +101,12 @@ security:
 
         main:
             pattern:     ^/
+            # Using the FOSUserBundle provider to find the users...
+            provider: chain_provider
             fr3d_ldap:  ~
             form_login:
-                provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
-                failure_path: login
+                login_path: /login
+                check_path: fos_user_security_check
             logout: true
 #                path:   /logout
 #                target: index
