@@ -63,4 +63,6 @@ security:
             http_basic: ~
 
 bazinga_geocoder:
-   fake_ip:    88.116.169.222 #123.345.643.133
+   fake_ip:
+     enabled:              true
+     ip:                   88.116.169.222 #123.345.643.133

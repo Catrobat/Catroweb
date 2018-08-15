@@ -35,8 +35,6 @@ class DefaultController extends Controller
 
     $flavor = $request->get('flavor');
 
-      $this->get('logger')->info("defcon1: " . $flavor);
-
     if ($flavor == 'phirocode')
     {
       $featured_items = $repository->getFeaturedItems('pocketcode', 5, 0);
@@ -45,9 +43,6 @@ class DefaultController extends Controller
     {
       $featured_items = $repository->getFeaturedItems($flavor, 5, 0);
     }
-
-    $this->get('logger')->info("defcon2: " . json_encode($featured_items));
-
 
     $featured = [];
     foreach ($featured_items as $item)
@@ -72,10 +67,6 @@ class DefaultController extends Controller
 
       $featured[] = $info;
     }
-
-
-      $this->get('logger')->info("defcon3: ");
-
 
     return $this->get('templating')->renderResponse('::index.html.twig', [
       'featured' => $featured,

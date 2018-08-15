@@ -148,20 +148,13 @@ liip_theme:
     active_theme: 'pocketcode'
     assetic_integration: true
 
-#bazinga_geocoder: #documentation: https://github.com/geocoder-php/Geocoder
-#     #fake_ip:
-#         #enabled:              true
-#         #ip:                   88.116.169.222 #123.345.643.133
-#         #priority:             0
-#     providers:
-#         google_maps:
-#             locale:               ~
-#         openstreetmap:
-#             locale:               ~
-#         host_ip:              []
-#         free_geo_ip:          []
-#         yandex:
-#             locale:               ~
-#         geo_ips:
-#         geo_plugin:           []
-#         chain:
+bazinga_geocoder:
+#    fake_ip:   # -> only activated in test env
+#        enabled:              true
+#        ip:                   88.116.169.222 #123.345.643.133
+    providers:
+        # ...
+        acme:
+            # https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/Resources/doc/services.md  All factories
+            # factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory   # no ips only street codes
+            factory: Bazinga\GeocoderBundle\ProviderFactory\HostIpFactory

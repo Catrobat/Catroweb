@@ -1,6 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Services;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Exception\Exception;
 use Catrobat\AppBundle\Entity\ClickStatistic;
 use Catrobat\AppBundle\Entity\HomepageClickStatistic;
@@ -50,14 +51,12 @@ class StatisticsService
             $this->logger->addDebug('user: anon.');
         }
 
-        $results = $this->geocoder
-            ->using('geo_plugin')
-            ->geocode($ip);
+        $results = $this->geocoder->geocode($ip);
 
         $result = $results->first();
 
-        $latitude = $result->getLatitude();
-        $longitude = $result->getLongitude();
+        $latitude = $result->getCoordinates()->getLatitude();
+        $longitude = $result->getCoordinates()->getLongitude();
         $country_code = $result->getCountry()->getCode();
         $country_name = $result->getCountry()->getName();
 
@@ -129,9 +128,7 @@ class StatisticsService
             $this->logger->addDebug('user: anon.');
         }
 
-        $results = $this->geocoder
-            ->using('geo_plugin')
-            ->geocode($ip);
+        $results = $this->geocoder->geocode($ip);
 
         $result = $results->first();
 
