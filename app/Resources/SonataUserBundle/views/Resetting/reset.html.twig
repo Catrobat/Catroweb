@@ -1,0 +1,93 @@
+{% extends ":Default:base.html.twig" %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
+{% endblock %}
+
+{% block header %}
+{% endblock header%}
+
+{% block body %}
+
+  {% block fos_user_content %}
+
+    <div class="container" style="width:100%">
+      <div id="reset-box" style="margin-top:50px;" class="mainbox col col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div class="panel-title">Reset password</div>
+          </div>
+
+          <div style="padding-top:30px" class="panel-body">
+
+            {% if form_errors(form.new.first) %}
+              <div id="reset-alert"
+                   class="alert alert-danger col-sm-12">{{ "passwordsNoMatch"|trans({}, "catroweb") }}</div>
+            {% endif %}
+
+            <form id="reset-form form_fos" class="form-horizontal" role="form"
+                  action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_start(form) }} method="post">
+
+              <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]" value="{{ form.children._token.vars.value }}">
+
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="password" id="fos_user_resetting_form_new_first" class="form-control" name="fos_user_resetting_form[new][first]" placeholder="{{ "profile.newPass"|trans({}, "catroweb") }}" />
+              </div>
+
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" id="fos_user_resetting_form_new_second" class="form-control" name="fos_user_resetting_form[new][second]" placeholder="{{ "profile.repeatPass"|trans({}, "catroweb") }}" />
+              </div>
+
+              <input type="hidden" name="_target_path" value="{{ path('index') }}" />
+
+              <div style="margin-top:10px" class="form-group">
+                <!-- Button -->
+                <div class="col-sm-12 controls">
+                  <button id="_submit" class="btn btn-success" name="_submit" >{{ 'login.changePass'|trans({}, 'catroweb') }}</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-12 control">
+                  <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                    {{ "login.forgotPass"|trans({}, "catroweb") }}
+                    <a id="pw-request" href="{{ path("sonata_user_resetting_request") }}"> Click here</a>
+                  </div>
+                  <div style="padding-top:15px; font-size:85%">
+                    Don't have an account!
+                    <a id="create_account"
+                       href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {#    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_start(form) }} method="post">
+          <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]" value="{{ form.children._token.vars.value }}">
+          <div class="input-field">
+            <input type="password" id="fos_user_resetting_form_new_first" name="fos_user_resetting_form[new][first]" placeholder="{{ "profile.newPass"|trans({}, "catroweb") }}" />
+            <div class="img-password"></div>
+          </div>
+
+          <div class="input-field">
+            <input type="password" id="fos_user_resetting_form_new_second" name="fos_user_resetting_form[new][second]" placeholder="{{ "profile.repeatPass"|trans({}, "catroweb") }}" />
+            <div class="img-password"></div>
+          </div>
+
+          {% if form_errors(form.new.first) %}
+            <div class="error-text">{{ "passwordsNoMatch"|trans({}, "catroweb") }}</div>
+          {% endif %}
+          <input type="hidden" name="_target_path" value="{{ path('index') }}" />
+          <button id="_submit" class="login" name="_submit" >{{ 'login.changePass'|trans({}, 'catroweb') }}</button>
+        </form>#}
+
+  {% endblock fos_user_content %}
+
+{% endblock body %}

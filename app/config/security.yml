@@ -100,12 +100,11 @@ security:
             anonymous:          true
 
         main:
-            pattern:      .*
+            pattern:     ^/
             fr3d_ldap:  ~
             form_login:
-                login_path:     /login
-                use_forward:    false
-                check_path:     /login_check
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
                 failure_path: login
             logout: true
 #                path:   /logout

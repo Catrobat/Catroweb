@@ -391,7 +391,7 @@ class SecurityController extends Controller
      */
     public function generateCsrfToken() {
         $retArray = array();
-        $retArray['csrf_token'] = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
+        $retArray['csrf_token'] = $this->container->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
         return JsonResponse::create($retArray);
     }
 

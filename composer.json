@@ -24,6 +24,7 @@
         "symfony/monolog-bundle": "^3.3",
 
         "friendsofsymfony/user-bundle": "^2.1",
+        "friendsofsymfony/rest-bundle": "^2.3",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "sonata-project/user-bundle": "^4.2",
         "sonata-project/admin-bundle": "^3.37",
@@ -35,11 +36,11 @@
         "sensio/framework-extra-bundle": "^5.2",
         "incenteev/composer-parameter-handler": "^2.1",
 
-        "ext-json": "^1.5",
         "facebook/graph-sdk": "^5.6",
         "symfony/assetic-bundle": "^2.8",
         "google/apiclient": "^2.2",
         "willdurand/geocoder-bundle": "^5.1",
+        "geocoder-php/host-ip-provider": "^4.0",
         "eightpoints/guzzle-bundle": "^7.3",
 
         "doctrine/doctrine-bundle": "^1.9",
@@ -53,16 +54,14 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "braincrafted/bootstrap-bundle": "dev-master",
         "twitter/bootstrap": "2.3.*",
-
         "ircmaxell/password-compat": "~1.0",
         "liip/theme-bundle": "dev-master",
         "twbs/bootstrap": "^3.3",
-
         "dmore/behat-chrome-extension": "^1.2",
         "symfony/polyfill-iconv": "^1.8",
-        "ext-SimpleXML": "^7.1",
-        "friendsofsymfony/rest-bundle": "^2.3",
-        "geocoder-php/host-ip-provider": "^4.0"
+
+        "ext-json": "^1.5",
+        "ext-SimpleXML": "^7.1"
     },
     "require-dev": {
         "behat/behat": "^3.5",

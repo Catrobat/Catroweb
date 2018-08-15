@@ -1,0 +1,87 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/myprofile.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  {% block sonata_page_breadcrumb %}
+    {% if breadcrumb_context is not defined %}
+      {% set breadcrumb_context = 'user_index' %}
+    {% endif %}
+  {% endblock %}
+
+  {% block sonata_profile_content %}
+
+    <h1>{{ app.user.username }}</h1>
+
+    <div>
+      <div id="profile-avatar">
+        <img src="" width="300" height="300">
+      </div>
+      <div id="profile-form">
+
+        <form action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
+
+          {#{{ form_widget(form) }}#}
+
+        <div>
+          <div class="input-field">
+            <input type="text" id="email" name="_email" placeholder="{{ 'profile.firstEmail'|trans({}, 'catroweb') }}" value="{{ app.user.email }}" />
+            <div class="img-mail-first"></div>
+          </div>
+          <div class="input-field">
+            <input type="text" id="additional-email" name="_additional-email" placeholder="{{ 'profile.secondEmail'|trans({}, 'catroweb') }}" value="{{ app.user.additionalemail }}" />
+            <div class="img-mail-second"></div>
+          </div>
+          <div>
+            <button type="submit" name="submit" class="btn btn-primary pull-right">{{ 'profile.saveChanges'|trans({}, 'catroweb') }}</button>
+          </div>
+        </div>
+        <div>
+          <div class="input-field">
+            <input type="password" id="password" name="_password" placeholder="{{ 'profile.newPass'|trans({}, 'catroweb') }}" />
+            <div class="img-password"></div>
+          </div>
+          <div class="input-field">
+            <input type="password" id="repeat-password" name="_repeat-password" placeholder="{{ 'profile.repeatPass'|trans({}, 'catroweb') }}" />
+            <div class="img-password"></div>
+          </div>
+          <div id="select-country">
+            <div>{{ 'country'|trans({}, 'catroweb') }}</div>
+            <div>
+              <select>
+                {{ app.request.locale }}
+                {% for key, country in  countriesList() %}
+                  {% if app.user.country == key %}
+                    <option value="{{ key }}" selected>{{ country }}</option>
+                  {% else %}
+                    <option value="{{ key }}">{{ country }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div id="user-programs">
+      user programs...
+    </div>
+
+  {% endblock %}
+{% endblock %}
