@@ -200,7 +200,7 @@
             ]);
             var data_mem = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
-                ['Free',     {{ 100-ram }}],
+                ['Free',    100 - {{ ram }}],
                 ['Used',      {{ ram }}]
             ]);
 
@@ -212,7 +212,7 @@
             var options_mem = {
                 title: 'RAM',
                 pieHole: 0.4,
-            }
+            };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
             chart.draw(data_space, options_space);
