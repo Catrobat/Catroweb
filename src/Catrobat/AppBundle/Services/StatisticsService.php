@@ -135,6 +135,9 @@ class StatisticsService
         $country_code = $result->getCountry()->getCode();
         $country_name = $result->getCountry()->getName();
 
+//        $country_code = "AT";
+//        $country_name = "Austria";
+
         $this->logger->addDebug('Received geocoded data - , country code: ' . $country_code . ', country name: ' . $country_name);
 
         if (in_array($type, ['programs', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph'])) {

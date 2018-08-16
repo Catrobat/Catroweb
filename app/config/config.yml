@@ -177,4 +177,5 @@ bazinga_geocoder:
         acme:
             # https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/Resources/doc/services.md  All factories
             # factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory   # no ips only street codes
-            factory: Bazinga\GeocoderBundle\ProviderFactory\HostIpFactory
+            # factory: Bazinga\GeocoderBundle\ProviderFactory\HostIpFactory       # no ipv6
+            factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoFactory

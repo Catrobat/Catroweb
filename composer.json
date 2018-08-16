@@ -61,7 +61,8 @@
         "symfony/polyfill-iconv": "^1.8",
 
         "ext-json": "^1.5",
-        "ext-SimpleXML": "^7.1"
+        "ext-SimpleXML": "^7.1",
+        "geocoder-php/ip-info-provider": "^0.1.0"
     },
     "require-dev": {
         "behat/behat": "^3.5",
