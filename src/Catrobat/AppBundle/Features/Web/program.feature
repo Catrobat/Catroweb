@@ -24,7 +24,7 @@ Feature: As a visitor I want to see a program page
       Then I should see "program 1"
       And I should see "Superman"
       And I should see "my superman description"
-      And I should see "Report as inappropriate"
+      And I should see "Report program"
       And I should see "more than one year ago"
       And I should see "0.00 MB"
       And I should see "5 downloads"
@@ -35,10 +35,10 @@ Feature: As a visitor I want to see a program page
       And I click "#program-user a"
       Then I should be on "/pocketcode/profile/1"
 
-    Scenario: report as inapropriate
+    Scenario: report as inappropriate
       Given I am on "/pocketcode/program/1"
       And I click "#report"
-      Then I should see "Please login to report this program as inappropriate."
+      Then I should see "Please login to report this program."
       When I click "#report-container a"
       Then I should be on "/pocketcode/login"
       And I fill in "username" with "Gregor"
@@ -46,11 +46,67 @@ Feature: As a visitor I want to see a program page
       And I press "Login"
       Then I should be on "/pocketcode/program/1#login"
       When I click "#report"
-      Then I should see "Why do you think this program is inappropriate?"
+      Then I should see "Why do you want to report this program?"
+      And I click the "#report-inappropriate" RadioButton
       And I fill in "reportReason" with "I do not like this program ... hehe"
       When I click "#report-report"
-#      And I wait for the server response
-#      Then I should see "You reported this program as inappropriate!"
+      And I wait for the server response
+      Then I should see "You reported this program!"
+
+  Scenario: report as copyright infringement
+    Given I am on "/pocketcode/program/1"
+    And I click "#report"
+    Then I should see "Please login to report this program."
+    When I click "#report-container a"
+    Then I should be on "/pocketcode/login"
+    And I fill in "username" with "Gregor"
+    And I fill in "password" with "123456"
+    And I press "Login"
+    Then I should be on "/pocketcode/program/1#login"
+    When I click "#report"
+    Then I should see "Why do you want to report this program?"
+    And I click the "#report-copyright" RadioButton
+    And I fill in "reportReason" with "That was my idea!!!"
+    When I click "#report-report"
+    And I wait for the server response
+    Then I should see "You reported this program!"
+
+
+  Scenario: report as spam
+    Given I am on "/pocketcode/program/1"
+    And I click "#report"
+    Then I should see "Please login to report this program."
+    When I click "#report-container a"
+    Then I should be on "/pocketcode/login"
+    And I fill in "username" with "Gregor"
+    And I fill in "password" with "123456"
+    And I press "Login"
+    Then I should be on "/pocketcode/program/1#login"
+    When I click "#report"
+    Then I should see "Why do you want to report this program?"
+    And I click the "#report-spam" RadioButton
+    And I fill in "reportReason" with "This is spam :D"
+    When I click "#report-report"
+    And I wait for the server response
+    Then I should see "You reported this program!"
+
+  Scenario: report as dislike
+    Given I am on "/pocketcode/program/1"
+    And I click "#report"
+    Then I should see "Please login to report this program."
+    When I click "#report-container a"
+    Then I should be on "/pocketcode/login"
+    And I fill in "username" with "Gregor"
+    And I fill in "password" with "123456"
+    And I press "Login"
+    Then I should be on "/pocketcode/program/1#login"
+    When I click "#report"
+    Then I should see "Why do you want to report this program?"
+    And I click the "#report-dislike" RadioButton
+    And I fill in "reportReason" with "I do not like this program ... hehe"
+    When I click "#report-report"
+    And I wait for the server response
+    Then I should see "You reported this program!"
 
     Scenario: I want a link to this program
       Given I am on "/pocketcode/program/1"

@@ -112,7 +112,7 @@ class DefaultController extends Controller
       {
         $user = $this->get('usermanager')->findUserByUsername($username);
         $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
-        $this->get("security.context")->setToken($token);
+        $this->get('security.token_storage')->setToken($token);
         // now dispatch the login event
         $request = $this->get("request");
         $event = new InteractiveLoginEvent($request, $token);

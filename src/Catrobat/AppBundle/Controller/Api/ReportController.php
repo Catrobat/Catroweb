@@ -22,13 +22,12 @@ class ReportController extends Controller
         /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */
         /* @var $program \Catrobat\AppBundle\Entity\Program */
 
-        $context = $this->get('security.authorization_checker');
         $program_manager = $this->get('programmanager');
         $entity_manager = $this->getDoctrine()->getManager();
         $event_dispatcher = $this->get('event_dispatcher');
 
         $response = array();
-        if (!$request->get('program') || !$request->get('note')) {
+        if (!$request->get('program') || !$request->get('category') || !$request->get('note')) {
             $response['statusCode'] = StatusCode::MISSING_POST_DATA;
             $response['answer'] = $this->trans('errors.post-data');
             $response['preHeaderMessages'] = '';
@@ -47,20 +46,22 @@ class ReportController extends Controller
 
         $report = new ProgramInappropriateReport();
 
-        if ($context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $report->setReportingUser($context->getToken()->getUser()); //could be anon
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $report->setReportingUser($this->get('security.token_storage')->getToken()->getUser()); //could be anon
         } else {
             $report->setReportingUser(null); //could be anon
         }
 
         $program->setVisible(false);
+        $report->setCategory($request->get('category'));
         $report->setNote($request->get('note'));
         $report->setProgram($program);
 
         $entity_manager->persist($report);
         $entity_manager->flush();
 
-        $event_dispatcher->dispatch('catrobat.report.insert', new ReportInsertEvent($request->get('note'), $report));
+        $event_dispatcher->dispatch('catrobat.report.insert',
+            new ReportInsertEvent($request->get('category'), $request->get('note'), $report));
 
         $response = array();
         $response['answer'] = $this->trans('success.report');

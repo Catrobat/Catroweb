@@ -281,7 +281,7 @@
         <span class="fa fa-link" aria-hidden="true"></span>
         Link
       </button>
-      <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
+      <span id="report">{{ "programs.reportProgram"|trans({}, 'catroweb') }}</span>
     </div>
 
     <div class="clear"></div>
@@ -295,10 +295,31 @@
           <span id="report-form">
             {{ "programs.reportDialogHeader"|trans({}, "catroweb") }}
             <br>
-          <textarea id="reportReason" placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}"></textarea>
-          <br>
-          <button id="report-cancel" class="btn-white">{{ "cancel"|trans({}, "catroweb") }}</button>
-          <button id="report-report" class="btn-green">{{ "report"|trans({}, "catroweb") }}</button>
+              <div class="row justify-content-center mt-4">
+                <div class="col-6 text-left">
+                  <div class="radio">
+                    <label><input type="radio" id="report-inappropriate" name="reportCategory" value="inappropriate" checked>
+                        {{ "programs.reportRadioButtonInappropriate"|trans({}, "catroweb") }}</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio"  id="report-copyright" name="reportCategory" value="copyright infringement">
+                        {{ "programs.reportRadioButtonCopyright"|trans({}, "catroweb") }}</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio"  id="report-spam" name="reportCategory" value="spam">
+                        {{ "programs.reportRadioButtonSpam"|trans({}, "catroweb") }}</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio" id="report-dislike" name="reportCategory" value="dislike">
+                        {{ "programs.reportRadioButtonDislike"|trans({}, "catroweb") }}</label>
+                  </div>
+                </div>
+            </div>
+
+            <textarea id="reportReason" placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}"></textarea>
+            <br>
+            <button id="report-cancel" class="btn-white">{{ "cancel"|trans({}, "catroweb") }}</button>
+            <button id="report-report" class="btn-green">{{ "report"|trans({}, "catroweb") }}</button>
           </span>
           <span id="report-done">
             {{ "programs.reportDone"|trans({}, "catroweb") }}

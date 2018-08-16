@@ -73,7 +73,9 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
 
     self.setReportListener = function(program_id, report_url)
     {
-        $('#report, #report-cancel').click(function() { $('#report-container').toggle(); });
+        $('#report, #report-cancel').click(function() {
+            $('#report-container').toggle();
+        });
 
         $('#report-report').click(function() {
           if($('#reportReason').val() == ''){
@@ -83,12 +85,13 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
           $('#reportReason').removeClass('text-area-empty');
           $.get(report_url, {
               program : program_id,
+              category: $('input[name=reportCategory]:checked').val(),
               note : $('#reportReason').val()
           }).success(function() {
               $('#report-form').hide();
               $('#report-done').show();
-          }).fail(function() {
-              alert('ERROR'); // display better error message
+          }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("Error: " + errorThrown);
           });
         });
     };

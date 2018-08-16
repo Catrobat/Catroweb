@@ -191,13 +191,14 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     }
 
     /**
-     * @When /^I report program (\d+) with note "([^"]*)"$/
+     * @When /^I report program (\d+) with category "([^"]*)" and note "([^"]*)"$/
      */
-    public function iReportProgramWithNote($program_id, $note)
+    public function iReportProgramWithNote($program_id, $category, $note)
     {
         $url = '/pocketcode/api/reportProgram/reportProgram.json';
         $parameters = array(
             'program' => $program_id,
+            'category' => $category,
             'note' => $note
         );
         $this->getClient()->request('POST', $url, $parameters);

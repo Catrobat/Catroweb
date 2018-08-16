@@ -950,7 +950,7 @@ class OAuthService
             $retArray['user'] = true;
             $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
             $retArray['token'] = $token;
-            $this->container->get("security.context")->setToken($token);
+            $this->container->get('security.token_storage')->setToken($token);
 
             // now dispatch the login event
             $request = $this->container->get("request");

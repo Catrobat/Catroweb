@@ -66,13 +66,18 @@ programs:
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Report as inappropriate
+  reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this program as inappropriate.
-  reportDialogHeader: Why do you think this program is inappropriate?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: You cannot flag your own program.
-  reportAlready: You've already flagged this program as inappropriate.
-  reportDone: You reported this program as inappropriate!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok

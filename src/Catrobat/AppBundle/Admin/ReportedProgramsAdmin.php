@@ -24,7 +24,7 @@ class ReportedProgramsAdmin extends Admin
 //
 //    if($old_program["approved"] == false && $program->getApproved() == true)
 //    {
-//      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser());
+//      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser());
 //      $this->getModelManager()->update($program);
 //    }elseif($old_program["approved"] == true && $program->getApproved() == false)
 //    {

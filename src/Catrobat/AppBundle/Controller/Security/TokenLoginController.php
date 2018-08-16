@@ -30,7 +30,7 @@ class TokenLoginController extends Controller
             return $this->logout();
         }
         $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
-        $this->get("security.context")->setToken($token);
+        $this->get('security.token_storage')->setToken($token);
 
         // now dispatch the login event
         $request = $this->get("request");
@@ -40,7 +40,7 @@ class TokenLoginController extends Controller
     }
 
     private function logout() {
-        $this->get('security.context')->setToken(null);
+        $this->get('security.token_storage')->setToken(null);
         return $this->redirect($this->generateUrl('index') . '?redirect');
     }
 }
