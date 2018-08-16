@@ -20,7 +20,7 @@ Feature: Get the APK status of a program
         """
         { 
           "status" : "ready",
-          "url" : "http://localhost/pocketcode/ci/download/1?fname=My+little+program",
+          "url" : "http://localhost/pocketcode/ci/download/1?fname=My%20little%20program",
           "label" : "Download Apk"
         }
         """

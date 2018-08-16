@@ -22,7 +22,7 @@ class ReportController extends Controller
         /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */
         /* @var $program \Catrobat\AppBundle\Entity\Program */
 
-        $context = $this->get('security.context');
+        $context = $this->get('security.authorization_checker');
         $program_manager = $this->get('programmanager');
         $entity_manager = $this->getDoctrine()->getManager();
         $event_dispatcher = $this->get('event_dispatcher');

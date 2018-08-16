@@ -33,7 +33,6 @@ parameters:
 
 services:
 
-
     apikey_authenticator:
         class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
         arguments: ["@translator"]
