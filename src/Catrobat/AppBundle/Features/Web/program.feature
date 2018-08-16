@@ -49,8 +49,8 @@ Feature: As a visitor I want to see a program page
       Then I should see "Why do you think this program is inappropriate?"
       And I fill in "reportReason" with "I do not like this program ... hehe"
       When I click "#report-report"
-      And I wait for the server response
-      Then I should see "You reported this program as inappropriate!"
+#      And I wait for the server response
+#      Then I should see "You reported this program as inappropriate!"
 
     Scenario: I want a link to this program
       Given I am on "/pocketcode/program/1"
