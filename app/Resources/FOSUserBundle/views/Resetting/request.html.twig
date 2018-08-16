@@ -1,55 +1,86 @@
 {% extends ":Default:base.html.twig" %}
 
 {% block head %}
+
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
+  <script src="{{ asset('js/jquery-ui/jquery-ui.js') }}"></script>
+  <script src="{{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
+
 {% endblock %}
 
+{% block header "" %}
 
 {% block body %}
 
   {% block fos_user_content %}
 
+    <div class="container-fluid" style="width:100%">
 
-    <div id="request-box" style="margin-top:50px;" class="mainbox col-md-4 mx-auto my-5">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <div class="panel-title">Reset password</div>
-        </div>
+      {% include ':components/login:login_logo.html.twig' %}
 
-        <div style="padding-top:30px" class="panel-body">
-
+      <div class="row justify-content-center">
+        <div class="col-md-5">
           {% if invalid_username is defined %}
             <div id="request-alert"
-                 class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb")}}</div>
+                 class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb") }}
+            </div>
           {% endif %}
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+
+          <!-- Policy -->
+          {% include ':privacy_policy:policy.html.twig' %}
 
           <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
                 action="{{ path('fos_user_resetting_send_email') }}" method="post">
 
-            <div style="margin-bottom: 25px" class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="text" id="username" class="form-control" name="username" placeholder="{{ "login.userOrEmail"|trans({}, "catroweb") }}" />
-            </div>
+            <div class="row">
+              <div class="col">
 
-            <div style="margin-top:10px" class="form-group">
-              <!-- Button -->
-              <div class="col-sm-12 controls">
-                <button id="recover" class="btn btn-success" name="recover">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
-              </div>
-            </div>
+                <div class="group">
+                  <input type="text" id="username" name="username" required/>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label><span
+                        class="span-input">{{ "login.userOrEmail"|trans({}, "catroweb") }}</span></label>
+                </div>
 
-            <div class="form-group">
-              <div class="col-md-12 control">
-                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                  Already having an account?
-                  <a id="create_account"
-                     href="{{ path('login') }}">Log in</a>
+                <!-- Button -->
+                <div style="margin-top:30px; margin-bottom:30px" class="form-group">
+                  <div class="col-sm-12 controls">
+                    <button id="recover" style="width: 100%;" class="login btn-primary"
+                            name="recover">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
+                  </div>
                 </div>
-                <div style="padding-top:15px; font-size:85%">
-                  Don't have an account!
-                  <a id="create_account"
-                     href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+
+                <!-- Redirects -->
+                <div>
+                  <div class="form-group">
+                    <div class="col-md-12 control">
+                      <div style="padding-top:15px; font-size:85%">
+                        {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
+                        <a id="create_account" href="{{ path('login') }}">Log in</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12 control">
+                      <div style="font-size:85%">
+                        {{ 'login.noAccount'|trans({}, 'catroweb') }}
+                        <a id="create_account"
+                           href="{{ path('fos_user_registration_register') }}">
+                            {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% include ':components/login:or_line.html.twig' %}
                 </div>
+
               </div>
             </div>
           </form>
@@ -57,7 +88,14 @@
       </div>
     </div>
 
+    <div id="spacer1" style="margin-bottom: 30px"></div>
+    {% include ':social:oauth_form.html.twig' %}
+    <div id="spacer2" style="margin-bottom: 30px"></div>
 
   {% endblock fos_user_content %}
 
 {% endblock body %}
+
+{% block js %}
+  <script src="{{ asset('js/custom/social.js') }}"></script>
+{% endblock %}

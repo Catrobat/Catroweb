@@ -21,8 +21,8 @@
       <div class="row justify-content-center">
         <div class="col-md-5 text-center">
 
-          <div class="alert alert-danger" style="margin-top: 15px">
-            {{ 'resetting.password_already_requested'|trans({}, 'FOSUserBundle') }}
+          <div class="alert alert-success" style="margin-top: 15px">
+            {{ "login.recoverPassSend"|trans({}, "catroweb") }}
           </div>
 
           <!-- Policy -->
@@ -66,7 +66,5 @@
 {% endblock body %}
 
 {% block js %}
-
   <script src="{{ asset('js/custom/social.js') }}"></script>
-
 {% endblock %}
