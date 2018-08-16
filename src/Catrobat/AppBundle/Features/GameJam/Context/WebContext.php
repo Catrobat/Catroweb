@@ -356,7 +356,8 @@ class WebContext extends BaseContext
      */
     public function iLogin()
     {
-        $form = $this->response->selectButton('Login')->form();
+        $loginButton = $this->response;
+        $form = $loginButton->selectButton('Login')->form();
         $form['_username'] = 'Generated';
         $form['_password'] = 'generated';
         $this->response = $this->getClient()->submit($form);

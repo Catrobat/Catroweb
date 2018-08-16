@@ -457,6 +457,7 @@ programLoader:
   noPrograms: There are currently no programs.
 
 login:
+  login: Login
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?

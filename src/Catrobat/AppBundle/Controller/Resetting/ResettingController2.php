@@ -1,14 +1,25 @@
 <?php
 namespace Catrobat\AppBundle\Controller\Resetting;
 
-use Sonata\UserBundle\Controller\AdminResettingController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class ResettingController extends AdminResettingController
+class ResettingController2 extends Controller
 {
+
+    /**
+     * @Route("/resetting/request", name="resetting_request")
+     * @Method({"GET"})
+     */
+    public function requestAction()
+    {
+        return $this->render('@FOSUser/Resetting/request.html.twig');
+    }
 
     /**
      * @param Request $request

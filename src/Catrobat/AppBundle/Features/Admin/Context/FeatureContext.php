@@ -17,12 +17,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use PHPUnit\Framework\Assert;
 
-//
-// Require 3rd-party libraries here:
-//
-// require_once 'PHPUnit/Autoload.php';
-//
 
 /**
  * Feature context.
@@ -170,7 +166,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $profile = $this->getSymfonyProfile();
         $collector = $profile->getCollector('swiftmailer');
-        assertEquals($email_amount, $collector->getMessageCount());
+        Assert::assertEquals($email_amount, $collector->getMessageCount());
     }
 
     /**
@@ -265,7 +261,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function theResponseShouldNotContain($needle)
     {
-        assertNotContains($needle, $this->getClient()
+        Assert::assertNotContains($needle, $this->getClient()
             ->getResponse()
             ->getContent());
     }
@@ -298,7 +294,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($program_id);
-        assertEquals(Program::APK_NONE, $program->getApkStatus());
+        Assert::assertEquals(Program::APK_NONE, $program->getApkStatus());
     }
 
     /**
@@ -340,7 +336,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     {
         $program_manager = $this->getProgramManger();
         $program = $program_manager->find($program_id);
-        assertEquals('null', $program->getDirectoryHash());
+        Assert::assertEquals('null', $program->getDirectoryHash());
     }
 
     /**
@@ -380,7 +376,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
      */
     public function iPostLoginUserWithPassword($uname, $pwd)
     {
-        $csrfToken = $this->getSymfonyService('form.csrf_provider')->generateCsrfToken('authenticate');
+        $csrfToken = $this->getSymfonyService('security.csrf.token_manager')->getToken('authenticate')->getValue();
 
         $session = $this->getClient()
             ->getContainer()
@@ -429,7 +425,7 @@ class FeatureContext extends \Catrobat\AppBundle\Features\Api\Context\FeatureCon
     public function theResponseHeadershouldContainTheKeyWithTheValue($headerKey, $headerValue)
     {
         $headers = $this->getClient()->getResponse()->headers;
-        assertEquals($headerValue, $headers->get($headerKey),
+        Assert::assertEquals($headerValue, $headers->get($headerKey),
           "expected: " . $headerKey . ": " . $headerValue .
           "\nget: " . $headerKey . ": " . $headers->get($headerKey));
     }

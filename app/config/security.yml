@@ -91,6 +91,7 @@ security:
             fr3d_ldap:  ~
             form_login:
                 login_path: /login
+                # csrf_token_generator: security.csrf.token_manager
                 check_path: fos_user_security_check
             logout: true
 #                path:   /logout

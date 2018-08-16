@@ -34,10 +34,10 @@ logout:
     path: logout
     defaults:  { _controller: AppBundle:Security\Logout:logout }
     
-sonata_user_resetting:
-    resource: "./sonata/sonata_resetting_1.xml"
-    prefix: /resetting
-    prefix: /catroid/resetting #app-hack
+#sonata_user_resetting:
+#    resource: "./sonata/sonata_resetting_1.xml"
+#    prefix: /resetting
+#    prefix: /catroid/resetting #app-hack
     
 catrobat_web_hourOfCode_index:
     path: /hourOfCode/

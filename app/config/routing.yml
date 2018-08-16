@@ -18,12 +18,6 @@ old_version_error:
         _controller: FrameworkBundle:Template:template
         template:    :Error:oldversion.html.twig
 
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
 sonata_user_admin_security:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
@@ -32,11 +26,14 @@ sonata_user_admin_resetting:
     resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
     prefix: /admin/resetting
 
-
-## ToDo needed?
 sonata_user_admin_security_logout:
     path: /logout
     defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
+
+
+#sonata_user_security:
+#    resource: "@SonataUserBundle/Resources/config/routing/admin_security.xml"
+
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
@@ -47,5 +44,15 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
-sonata_user_security:
-    resource: "@SonataUserBundle/Resources/config/routing/admin_security.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix: /{flavor}
+
+fos_user_security_login:
+    path: /login
+    defaults:  { _controller: fos_user.security.controller:loginAction }
+

@@ -8,19 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-# use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\Request;
 
 class RegisterController extends Controller
 {
-    /**
-     * @Route("/register", name="user_register")
-     */
-    public function registerAction() {
-
-    }
-
 
 //    public function registerAction(Request $request)
 //    {
@@ -89,7 +81,7 @@ class RegisterController extends Controller
 // */
 //  public function checkRegistration(Request $request)
 //  {
-//    $route = 'fos_user_registration_register';
+//    $route = 'register_form';
 //    $error = false;
 //
 //    $username = $request->request->get('fos_user_registration_form')['username'];
@@ -128,7 +120,8 @@ class RegisterController extends Controller
    */
   public function showRegistrationForm(Request $request)
   {
-      return $this->redirect($this->generateUrl('fos_user_registration_register'));
+      $response = $this->forward('fos_user.registration.controller:registerAction', array());
+      return $response;
   }
 }
 

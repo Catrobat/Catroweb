@@ -87,7 +87,7 @@ default:
                     error_directory: "%paths.base%/testreports/behat/"
         gamejam_web:
             filters:
-                tags: web
+                tags: "@web"
             type: symfony_bundle
             bundle: 'AppBundle'
             paths:
@@ -98,7 +98,7 @@ default:
 
         gamejam_javascript:
             filters:
-                tags: javascript
+                tags: "@javascript"
             type: symfony_bundle
             bundle: 'AppBundle'
             paths:

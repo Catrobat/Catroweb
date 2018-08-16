@@ -97,7 +97,7 @@
                 <div style="margin-top:10px" class="form-group">
                   <div class="col-sm-12 controls">
                     <button id="_submit" value="Login" href="#" class="login btn-primary"
-                            name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                            name="_submit">{{ 'login.login'|trans({}, 'catroweb') }}</button>
                   </div>
                 </div>
 
@@ -108,7 +108,7 @@
                       <div style="padding-top:15px; font-size:85%">
                         Don't have an account!
                         <a id="create_account"
-                           href="{{ path('fos_user_registration_register') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                           href="{{ path('register_form') }}">{{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
                       </div>
                     </div>
                   </div>
