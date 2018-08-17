@@ -4,15 +4,14 @@ namespace spec\Catrobat\AppBundle\Services\Formatter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Translation\TranslatorInterface;
+use \Catrobat\AppBundle\Services\Time;
 
 class ElapsedTimeStringFormatterSpec extends ObjectBehavior
 {
     protected $testTime;
-  /**
-   * @param \Symfony\Component\Translation\TranslatorInterface $translator
-   * @param \Catrobat\AppBundle\Services\Time $time
-   */
-  public function let($translator, $time)
+
+  public function let(TranslatorInterface $translator, Time $time)
   {
       $this->testTime = 9999999999999;
       $time->getTime()->willReturn($this->testTime);

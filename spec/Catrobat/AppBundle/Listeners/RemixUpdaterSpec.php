@@ -3,26 +3,23 @@
 namespace spec\Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramRepository;
 use Catrobat\AppBundle\Entity\RemixManager;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Filesystem\Filesystem;
 
+use Catrobat\AppBundle\Services\AsyncHttpClient;
+use Symfony\Component\Routing\Router;
+use Catrobat\AppBundle\Entity\User ;
+
+
 
 class RemixUpdaterSpec extends ObjectBehavior
 {
-    /**
-     * @param \Catrobat\AppBundle\Entity\RemixManager $remix_manager
-     * @param \Catrobat\AppBundle\Services\AsyncHttpClient $async_http_client
-     * @param \Symfony\Component\Routing\Router $router
-     * @param \Catrobat\AppBundle\Entity\Program $program_entity
-     * @param \Catrobat\AppBundle\Entity\User $user
-     * @internal param \Catrobat\AppBundle\Entity\Program $program_entity
-     * @internal param \Catrobat\AppBundle\Entity\RemixManager $remix_manager
-     * @internal param \Catrobat\AppBundle\Services\AsyncHttpClient $async_http_client
-     */
-    public function let($remix_manager, $async_http_client, $router, $program_entity, $user)
+    public function let(RemixManager $remix_manager, AsyncHttpClient $async_http_client, Router $router,
+                        Program $program_entity, User $user)
     {
         $this->beConstructedWith($remix_manager, $async_http_client, $router, '.');
 
@@ -47,7 +44,8 @@ class RemixUpdaterSpec extends ObjectBehavior
         $this->shouldHaveType('Catrobat\AppBundle\Listeners\RemixUpdater');
     }
 
-    public function it_saves_the_new_url_to_xml($program_entity, $async_http_client, $remix_manager)
+    public function it_saves_the_new_url_to_xml(Program $program_entity, AsyncHttpClient $async_http_client,
+                                                RemixManager $remix_manager)
     {
         $expected_url = 'http://share.catrob.at/details/3571';
         $xml = simplexml_load_file(__SPEC_CACHE_DIR__.'/base/code.xml');
@@ -78,7 +76,7 @@ class RemixUpdaterSpec extends ObjectBehavior
     }
 
     public function it_call_fetches_scratch_program_details_and_add_scratch_program_method_if_catrobat_language_version_is_0993(
-        $program_entity, $remix_manager, $async_http_client)
+        Program $program_entity, RemixManager $remix_manager, AsyncHttpClient $async_http_client)
     {
         $new_program_id = 3571;
         $first_expected_scratch_id = 118499611;
@@ -129,7 +127,7 @@ class RemixUpdaterSpec extends ObjectBehavior
 
 
     public function it_ignores_multiple_remix_parents_if_catrobat_language_version_is_0992_or_lower(
-        $program_entity, $remix_manager, $async_http_client)
+        Program $program_entity, RemixManager $remix_manager, AsyncHttpClient $async_http_client)
     {
         $new_program_id = 3571;
         $first_expected_scratch_id = 118499611;
@@ -166,8 +164,9 @@ class RemixUpdaterSpec extends ObjectBehavior
         $this->update($file, $program_entity);
     }
 
-    public function it_call_fetches_only_details_of_not_yet_existing_scratch_programs($program_entity, $remix_manager,
-                                                                                      $async_http_client)
+    public function it_call_fetches_only_details_of_not_yet_existing_scratch_programs(Program $program_entity,
+                                                                                      RemixManager $remix_manager,
+                                                                                      AsyncHttpClient $async_http_client)
     {
         $new_program_id = 3571;
         $first_expected_scratch_id = 118499611;
@@ -214,8 +213,9 @@ class RemixUpdaterSpec extends ObjectBehavior
         $this->update($file, $program_entity);
     }
 
-    public function it_call_add_remixes_method_of_remix_manager_with_correct_remixes_data($program_entity, $remix_manager,
-                                                                                          $async_http_client)
+    public function it_call_add_remixes_method_of_remix_manager_with_correct_remixes_data(Program $program_entity,
+                                                                                          RemixManager $remix_manager,
+                                                                                          AsyncHttpClient $async_http_client)
     {
         $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
         $second_expected_url = '/pocketcode/program/3570';
@@ -282,7 +282,7 @@ class RemixUpdaterSpec extends ObjectBehavior
         $this->update($file, $program_entity);
     }
 
-    public function it_saves_the_old_url_to_remixOf($program_entity)
+    public function it_saves_the_old_url_to_remixOf(Program $program_entity)
     {
         $current_url = 'http://share.catrob.at/details/3570';
         $new_url = 'http://share.catrob.at/details/3571';
@@ -302,7 +302,8 @@ class RemixUpdaterSpec extends ObjectBehavior
         expect($xml->header->remixOf)->toBeLike($current_url);
     }
 
-    public function it_saves_the_scratch_url_to_remixOf($program_entity, $async_http_client, $remix_manager)
+    public function it_saves_the_scratch_url_to_remixOf(Program $program_entity, AsyncHttpClient $async_http_client,
+                                                        RemixManager $remix_manager)
     {
         $expected_scratch_program_id = 70058680;
         $current_url = 'https://scratch.mit.edu/projects/' . $expected_scratch_program_id;
@@ -333,7 +334,9 @@ class RemixUpdaterSpec extends ObjectBehavior
         expect($xml->header->remixOf)->toBeLike($current_url);
     }
 
-    public function it_saves_remix_of_multiple_scratch_urls_to_remixOf($program_entity, $async_http_client, $remix_manager)
+    public function it_saves_remix_of_multiple_scratch_urls_to_remixOf(Program $program_entity,
+                                                                       AsyncHttpClient $async_http_client,
+                                                                       RemixManager $remix_manager)
     {
         $first_expected_scratch_id = 118499611;
         $second_expected_scratch_id = 70058680;
@@ -370,12 +373,8 @@ class RemixUpdaterSpec extends ObjectBehavior
         expect($xml->header->remixOf)->toBeLike($current_url);
     }
 
-    /**
-     * @param \Catrobat\AppBundle\Entity\Program $program_entity
-     * @param \Catrobat\AppBundle\Entity\Program $parent_entity
-     * @param \Catrobat\AppBundle\Entity\ProgramRepository $programRepository
-     */
-    public function it_update_the_remixOf_of_the_entity($program_entity, $parent_entity, $programRepository)
+    public function it_update_the_remixOf_of_the_entity(Program $program_entity, Program $parent_entity,
+                                                        ProgramRepository $programRepository)
     {
       $current_url = 'http://share.catrob.at/details/3570';
       $programRepository->find(3570)->willReturn($parent_entity);
