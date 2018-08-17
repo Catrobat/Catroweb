@@ -2,6 +2,9 @@
 
 namespace spec\Catrobat\AppBundle\Listeners;
 
+use Catrobat\AppBundle\Entity\Extension;
+use Catrobat\AppBundle\Entity\ExtensionRepository;
+use Catrobat\AppBundle\Entity\Program;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Filesystem\Filesystem;
@@ -12,11 +15,7 @@ class ProgramExtensionListenerSpec extends ObjectBehavior
     public $extracted_catrobat_file_with_extensions;
     public $extracted_catrobat_file_without_extensions;
 
-    /**
-     * @param \Catrobat\AppBundle\Entity\ExtensionRepository $repo
-     * @param \Catrobat\AppBundle\Entity\Extension $extension
-     */
-    public function let($repo, $extension)
+    public function let(ExtensionRepository $repo, Extension $extension)
     {
         $extension->getPrefix()->willReturn("PHIRO");
         $repo->findAll()->willReturn(array($extension));
@@ -35,19 +34,13 @@ class ProgramExtensionListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Catrobat\AppBundle\Listeners\ProgramExtensionListener');
     }
 
-    /**
-     * @param \Catrobat\AppBundle\Entity\Program $program
-     */
-    public function it_flags_a_program_if_extension_bricks_are_used($program, $extension)
+    public function it_flags_a_program_if_extension_bricks_are_used(Program $program, Extension $extension)
     {
         $this->checkExtension($this->extracted_catrobat_file_with_extensions, $program);
         $program->addExtension($extension)->shouldHaveBeenCalled();
     }
 
-    /**
-     * @param \Catrobat\AppBundle\Entity\Program $program
-     */
-    public function it_does_not_flags_a_program_if_no_extension_bricks_are_used($program, $extension)
+    public function it_does_not_flags_a_program_if_no_extension_bricks_are_used(Program $program, Extension $extension)
     {
         $this->checkExtension($this->extracted_catrobat_file_without_extensions, $program);
         $program->addExtension($extension)->shouldNotHaveBeenCalled();

@@ -2,36 +2,31 @@
 
 namespace spec\Catrobat\AppBundle\Entity;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramLikeRepository;
+use Catrobat\AppBundle\Entity\ProgramRepository;
+use Catrobat\AppBundle\Entity\TagRepository;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\AppBundle\Requests\AddProgramRequest;
+use Catrobat\AppBundle\Services\CatrobatFileExtractor;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Services\ProgramFileRepository;
+use Catrobat\AppBundle\Services\ScreenshotRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Catrobat\AppBundle\Entity\GameJam;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProgramManagerSpec extends ObjectBehavior
 {
 
-  /**
-   * @param \Catrobat\AppBundle\Services\CatrobatFileExtractor $file_extractor
-   * @param \Catrobat\AppBundle\Services\ProgramFileRepository $file_repository
-   * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository
-   * @param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository
-   * @param \Catrobat\AppBundle\Entity\TagRepository $tag_repository
-   * @param \Catrobat\AppBundle\Entity\ProgramLikeRepository $program_like_repository
-   * @param \Doctrine\ORM\EntityManager $entity_manager
-   * @param \Symfony\Component\HttpFoundation\File\File $file
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
-   * @param \Catrobat\AppBundle\Entity\User $user
-   * @param \Catrobat\AppBundle\Requests\AddProgramRequest $request
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $extracted_file
-   * @param \Catrobat\AppBundle\Entity\Program $inserted_program
-   * @param \Symfony\Component\EventDispatcher\Event $event
-   * @param \Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception
-   * @param \Doctrine\ORM\Mapping\ClassMetadata $metadata
-   */
-  public function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_program, $tag_repository, $program_like_repository)
+  public function let(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository, ScreenshotRepository $screenshot_repository, EntityManager $entity_manager, ProgramRepository $program_repository, EventDispatcherInterface $event_dispatcher, AddProgramRequest $request, File $file, User $user, ExtractedCatrobatFile $extracted_file, Program $inserted_program, TagRepository $tag_repository, ProgramLikeRepository $program_like_repository)
   {
     $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, $program_like_repository, $event_dispatcher);
     $request->getProgramfile()->willReturn($file);
@@ -50,7 +45,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $this->shouldHaveType('Catrobat\AppBundle\Entity\ProgramManager');
   }
 
-  public function it_returns_the_program_after_successfully_adding_a_program($request, $entity_manager, $metadata)
+  public function it_returns_the_program_after_successfully_adding_a_program(AddProgramRequest $request, EntityManager $entity_manager, ClassMetadata $metadata)
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -60,7 +55,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $this->addProgram($request)->shouldHaveType('Catrobat\AppBundle\Entity\Program');
   }
 
-  public function it_saves_the_program_to_the_file_repository_if_the_upload_succeeded($request, $entity_manager, $extracted_file, $file_repository, $metadata)
+  public function it_saves_the_program_to_the_file_repository_if_the_upload_succeeded(AddProgramRequest $request, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file, ProgramFileRepository $file_repository, ClassMetadata $metadata)
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -79,7 +74,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $file_repository->makeTempProgramPerm(1)->shouldHaveBeenCalled();
   }
 
-  public function it_saves_the_screenshots_to_the_screenshot_repository($request, $entity_manager, $extracted_file, $screenshot_repository, $metadata)
+  public function it_saves_the_screenshots_to_the_screenshot_repository(AddProgramRequest $request, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file, ScreenshotRepository $screenshot_repository, ClassMetadata $metadata)
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -105,7 +100,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $screenshot_repository->makeTempProgramAssetsPerm(1)->shouldHaveBeenCalled();
   }
 
-  public function it_fires_an_event_before_inserting_a_program($request, $event_dispatcher, $metadata, $entity_manager)
+  public function it_fires_an_event_before_inserting_a_program(AddProgramRequest $request, EventDispatcherInterface $event_dispatcher, ClassMetadata $metadata, EntityManager $entity_manager)
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -123,7 +118,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $event_dispatcher->dispatch('catrobat.program.before', Argument::type('Catrobat\AppBundle\Events\ProgramBeforeInsertEvent'))->shouldHaveBeenCalled();
   }
 
-  public function it_fires_an_event_when_the_program_is_invalid($request, $event_dispatcher)
+  public function it_fires_an_event_when_the_program_is_invalid(AddProgramRequest $request, EventDispatcherInterface $event_dispatcher)
   {
     $validation_exception = new InvalidCatrobatFileException('500', 500);
     $event_dispatcher->dispatch('catrobat.program.before', Argument::type('Catrobat\AppBundle\Events\ProgramBeforeInsertEvent'))
@@ -137,7 +132,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $event_dispatcher->dispatch('catrobat.program.invalid.upload', Argument::type('Catrobat\AppBundle\Events\InvalidProgramUploadedEvent'))->shouldHaveBeenCalled();
   }
 
-  public function it_fires_an_event_when_the_program_is_stored($request, $event_dispatcher, $metadata, $entity_manager)
+  public function it_fires_an_event_when_the_program_is_stored(AddProgramRequest $request, EventDispatcherInterface $event_dispatcher, ClassMetadata $metadata, EntityManager $entity_manager)
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -155,7 +150,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $event_dispatcher->dispatch('catrobat.program.successful.upload', Argument::type('Catrobat\AppBundle\Events\ProgramInsertEvent'))->shouldHaveBeenCalled();
   }
 
-  public function it_marks_the_game_as_gamejam_submission_if_a_jam_is_provided($request, $metadata, $entity_manager)
+  public function it_marks_the_game_as_gamejam_submission_if_a_jam_is_provided(AddProgramRequest $request, ClassMetadata $metadata, EntityManager $entity_manager)
   {
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);

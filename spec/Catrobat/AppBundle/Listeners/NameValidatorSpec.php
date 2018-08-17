@@ -2,15 +2,15 @@
 
 namespace spec\Catrobat\AppBundle\Listeners;
 
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\RudeWordFilter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class NameValidatorSpec extends ObjectBehavior
 {
-    /**
-   * @param \Catrobat\AppBundle\Services\RudeWordFilter $rudewordfilter
-   */
-  public function let($rudewordfilter)
+
+  public function let(RudeWordFilter $rudewordfilter)
   {
       $this->beConstructedWith($rudewordfilter);
   }
@@ -20,37 +20,25 @@ class NameValidatorSpec extends ObjectBehavior
         $this->shouldHaveType('Catrobat\AppBundle\Listeners\NameValidator');
     }
 
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   */
-  public function it_makes_sure_the_given_program_name_is_valid($file)
+  public function it_makes_sure_the_given_program_name_is_valid(ExtractedCatrobatFile $file)
   {
       $file->getName()->willReturn('Jhon Doe');
       $this->shouldNotThrow('Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException')->duringValidate($file);
   }
 
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   */
-  public function it_throws_an_exception_if_the_name_is_null($file)
+  public function it_throws_an_exception_if_the_name_is_null(ExtractedCatrobatFile $file)
   {
       $file->getName()->willReturn(null);
       $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\MissingProgramNameException')->duringValidate($file);
   }
 
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   */
-  public function it_throws_an_exception_if_the_name_is_empty($file)
+  public function it_throws_an_exception_if_the_name_is_empty(ExtractedCatrobatFile $file)
   {
       $file->getName()->willReturn('');
       $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\MissingProgramNameException')->duringValidate($file);
   }
 
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   */
-  public function it_throws_an_exception_if_the_name_is_too_long($file)
+  public function it_throws_an_exception_if_the_name_is_too_long(ExtractedCatrobatFile $file)
   {
       $name = '';
       for ($i = 0; $i <= 200; ++$i) {
@@ -60,10 +48,7 @@ class NameValidatorSpec extends ObjectBehavior
       $this->shouldThrow('Catrobat\AppBundle\Exceptions\Upload\NameTooLongException')->duringValidate($file);
   }
 
-  /**
-   * @param \Catrobat\AppBundle\Services\ExtractedCatrobatFile $file
-   */
-  public function it_throws_an_exception_if_the_name_contains_a_rude_word($file, $rudewordfilter)
+  public function it_throws_an_exception_if_the_name_contains_a_rude_word(ExtractedCatrobatFile $file, RudeWordFilter $rudewordfilter)
   {
       $file->getName()->willReturn('rudeword');
       $rudewordfilter->containsRudeWord(Argument::any())->willReturn(true);

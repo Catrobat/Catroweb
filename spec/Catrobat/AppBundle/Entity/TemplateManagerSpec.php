@@ -1,29 +1,25 @@
 <?php
 namespace spec\Catrobat\AppBundle\Entity;
 
+use Catrobat\AppBundle\Entity\Template;
+use Catrobat\AppBundle\Entity\TemplateRepository;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
+use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
+use Catrobat\AppBundle\Services\ProgramFileRepository;
+use Catrobat\AppBundle\Services\ScreenshotRepository;
+use Catrobat\AppBundle\Services\TemplateFileRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Catrobat\AppBundle\Entity\GameJam;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\HttpFoundation\File\File;
 
 class TemplateManagerSpec extends ObjectBehavior
 {
-    /**
-     *
-     * @param \Catrobat\AppBundle\Services\TemplateFileRepository $file_repository
-     * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository            
-     * @param \Catrobat\AppBundle\Entity\TemplateRepository $template_repository
-     * @param \Doctrine\ORM\EntityManager $entity_manager
-     * @param \Symfony\Component\HttpFoundation\File\File $file
-     * @param \Symfony\Component\HttpFoundation\File\File $screenshot
-     * @param \Catrobat\AppBundle\Entity\Template $template
-     * @param \Catrobat\AppBundle\Entity\Template $inserted_template
-     * @param \Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception
-     * @param \Doctrine\ORM\Mapping\ClassMetadata $metadata
-     */
-    public function let($file_repository, $screenshot_repository, $entity_manager, $template_repository, $template, $file, $screenshot, $inserted_template)
+
+    public function let(TemplateFileRepository $file_repository, ScreenshotRepository $screenshot_repository, EntityManager $entity_manager, TemplateRepository $template_repository, Template $template, File $file, File $screenshot, Template $inserted_template)
     {
         $this->beConstructedWith($file_repository, $screenshot_repository, $entity_manager, $template_repository);
 
@@ -40,7 +36,7 @@ class TemplateManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Catrobat\AppBundle\Entity\TemplateManager');
     }
 
-    public function it_saves_template_to_the_file_repository($template, $entity_manager, $file, $file_repository, $metadata)
+    public function it_saves_template_to_the_file_repository(Template $template, EntityManager $entity_manager, File $file, ProgramFileRepository $file_repository, ClassMetadata $metadata)
     {
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
@@ -56,7 +52,7 @@ class TemplateManagerSpec extends ObjectBehavior
         $file_repository->saveProgramfile($file, 'l_1')->shouldHaveBeenCalled();
     }
     
-    public function it_saves_the_screenshots_to_the_screenshot_repository($template, $entity_manager, $extracted_file, $screenshot_repository, $metadata)
+    public function it_saves_the_screenshots_to_the_screenshot_repository(Template $template, EntityManager $entity_manager, ExtractedCatrobatFile $extracted_file, ScreenshotRepository $screenshot_repository, ClassMetadata $metadata)
     {
         $metadata->getFieldNames()->willReturn(array('id'));
         $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);

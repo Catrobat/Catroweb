@@ -2,35 +2,25 @@
 namespace spec\Catrobat\AppBundle\Entity;
 
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository;
 use Catrobat\AppBundle\Entity\ProgramRemixRelation;
+use Catrobat\AppBundle\Entity\ProgramRemixRepository;
+use Catrobat\AppBundle\Entity\ProgramRepository;
 use Catrobat\AppBundle\Entity\ScratchProgramRemixRelation;
+use Catrobat\AppBundle\Entity\ScratchProgramRemixRepository;
+use Catrobat\AppBundle\Entity\ScratchProgramRepository;
+use Catrobat\AppBundle\RemixGraph\RemixGraphManipulator;
 use Catrobat\AppBundle\Services\RemixData;
+use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use \Doctrine\Common\Collections\ArrayCollection;
 
 class RemixManagerSpec extends ObjectBehavior
 {
-    /**
-     * @param \Doctrine\ORM\EntityManager $entity_manager
-     * @param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository
-     * @param \Catrobat\AppBundle\Entity\ScratchProgramRepository $scratch_program_repository
-     * @param \Catrobat\AppBundle\Entity\ProgramRemixRepository $program_remix_repository
-     * @param \Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository $program_remix_backward_repository
-     * @param \Catrobat\AppBundle\Entity\ScratchProgramRemixRepository $scratch_program_remix_repository
-     * @param \Catrobat\AppBundle\RemixGraph\RemixGraphManipulator $remix_graph_manipulator
-     * @param \Catrobat\AppBundle\Entity\Program $program_entity
-     * @internal param \Symfony\Component\EventDispatcher\Event $event
-     * @internal param \Doctrine\ORM\EntityManager $entity_manager
-     * @internal param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository
-     * @internal param \Catrobat\AppBundle\Entity\ProgramRemixRepository $program_remix_repository
-     * @internal param \Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository $program_remix_backward_repository
-     * @internal param \Catrobat\AppBundle\Entity\ScratchProgramRemixRepository $scratch_program_remix_repository
-     * @internal param \Catrobat\AppBundle\Entity\Program $program_entity
-     * @internal param Sonata\CoreBundle\Model\Metadata $metadata
-     */
-    public function let($entity_manager, $program_repository, $scratch_program_repository, $program_remix_repository,
-                        $program_remix_backward_repository, $scratch_program_remix_repository, $remix_graph_manipulator,
+
+    public function let(EntityManager $entity_manager, ProgramRepository $program_repository, ScratchProgramRepository $scratch_program_repository, ProgramRemixRepository $program_remix_repository,
+                        ProgramRemixBackwardRepository $program_remix_backward_repository, ScratchProgramRemixRepository $scratch_program_remix_repository, RemixGraphManipulator $remix_graph_manipulator,
                         Program $program_entity)
     {
         $this->beConstructedWith($entity_manager, $program_repository, $scratch_program_repository,
@@ -43,7 +33,7 @@ class RemixManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Catrobat\AppBundle\Entity\RemixManager');
     }
 
-    public function it_add_single_scratch_program($entity_manager, $scratch_program_repository)
+    public function it_add_single_scratch_program(EntityManager $entity_manager, ScratchProgramRemixRepository $scratch_program_repository)
     {
         $expected_id_of_first_program = 123;
         $expected_name_of_first_program = 'Test program';
@@ -80,7 +70,7 @@ class RemixManagerSpec extends ObjectBehavior
         $this->addScratchPrograms($scratch_info_data);
     }
 
-    public function it_add_single_scratch_program_with_missing_data($entity_manager, $scratch_program_repository)
+    public function it_add_single_scratch_program_with_missing_data(EntityManager $entity_manager, ScratchProgramRemixRepository $scratch_program_repository)
     {
         $expected_id_of_first_program = 123;
         $scratch_info_data = [$expected_id_of_first_program => []];
@@ -107,7 +97,7 @@ class RemixManagerSpec extends ObjectBehavior
         $this->addScratchPrograms($scratch_info_data);
     }
 
-    public function it_add_multiple_scratch_programs($entity_manager, $scratch_program_repository)
+    public function it_add_multiple_scratch_programs(EntityManager $entity_manager, ScratchProgramRemixRepository $scratch_program_repository)
     {
         $expected_id_of_first_program = 123;
         $expected_name_of_first_program = 'Test program';
@@ -167,8 +157,8 @@ class RemixManagerSpec extends ObjectBehavior
         $this->addScratchPrograms($scratch_info_data);
     }
 
-    public function testRemixRelations($program_entity, $parent_data, $expected_relations, $program_repository,
-                                       $program_remix_repository, $entity_manager)
+    public function testRemixRelations(Program $program_entity, $parent_data, $expected_relations, ProgramRepository $program_repository,
+                                       ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         $expected_relations_map = [];
         $expected_catrobat_relations = [];
@@ -238,7 +228,7 @@ class RemixManagerSpec extends ObjectBehavior
     }
 
     public function it_set_program_as_root_and_dont_add_remix_relations_when_no_parents_are_given(
-        $program_repository, $program_remix_repository, $entity_manager)
+        ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         $program_entity = new Program();
         $program_entity->setId(123);
@@ -256,7 +246,7 @@ class RemixManagerSpec extends ObjectBehavior
     }
 
     public function it_set_program_as_root_and_dont_add_remix_relations_for_non_existing_parents(
-        $program_repository, $program_remix_repository, $entity_manager)
+        ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         $program_entity = new Program();
         $program_entity->setId(123);
@@ -292,8 +282,8 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(true);
     }
 
-    public function it_set_program_as_root_if_only_has_scratch_parents($program_repository, $program_remix_repository,
-                                                                       $entity_manager)
+    public function it_set_program_as_root_if_only_has_scratch_parents(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+                                                                       EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -338,8 +328,8 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(true);
     }
 
-    public function it_add_remix_relations_for_only_one_existing_parent($program_repository, $program_remix_repository,
-                                                                        $entity_manager)
+    public function it_add_remix_relations_for_only_one_existing_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+                                                                        EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -384,8 +374,8 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_existing_parents($program_repository, $program_remix_repository,
-                                                                $entity_manager)
+    public function it_add_remix_relations_for_existing_parents(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+                                                                EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -431,8 +421,8 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_existing_parents_sharing_same_parent($program_repository, $program_remix_repository,
-                                                                                    $entity_manager)
+    public function it_add_remix_relations_for_existing_parents_sharing_same_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+                                                                                    EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //                       (1)
@@ -494,8 +484,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_existing_parents_having_different_parent($program_repository, $program_remix_repository,
-                                                                                        $entity_manager)
+    public function it_add_remix_relations_for_existing_parents_having_different_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //                    (1)    (2)
@@ -561,8 +550,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_scratch_parent($program_repository, $program_remix_repository,
-                                                              $entity_manager)
+    public function it_add_remix_relations_for_scratch_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //                    (1) (SCRATCH)
@@ -633,8 +621,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_1($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_1(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -704,8 +691,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_2($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_2(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -793,8 +779,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_3($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_3(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -880,8 +865,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_4($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_4(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -981,8 +965,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_5($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_5(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -1084,8 +1067,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_6($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_6(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
@@ -1180,8 +1162,7 @@ class RemixManagerSpec extends ObjectBehavior
         expect($program_entity)->isRemixRoot()->shouldReturn(false);
     }
 
-    public function it_add_remix_relations_for_more_complex_graph_7($program_repository, $program_remix_repository,
-                                                                    $entity_manager)
+    public function it_add_remix_relations_for_more_complex_graph_7(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
     {
         //--------------------------------------------------------------------------------------------------------------
         //
