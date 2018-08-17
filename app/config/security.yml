@@ -91,19 +91,18 @@ security:
             fr3d_ldap:  ~
             form_login:
                 login_path: /login
-                # csrf_token_generator: security.csrf.token_manager
                 check_path: fos_user_security_check
+#                always_use_default_target_path: true
+#                default_target_path: /
+                # csrf_token_generator: security.csrf.token_manager # destroys login
             logout: true
-#                path:   /logout
-#                target: index
-#                invalidate_session: false
             anonymous:    true
             remember_me:
                 name: remember_me
-                secret:      "%secret%"
+                secret: "%secret%"
                 lifetime: 31536000 # 365 days in seconds
-                path:     /
-                domain:   ~ # Defaults to the current domain from $_SERVER
+                path: /
+                domain: ~ # Defaults to the current domain from $_SERVER
                 secure: false
                 httponly: false
 

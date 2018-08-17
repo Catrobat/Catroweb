@@ -56,3 +56,6 @@ fos_user_security_login:
     path: /login
     defaults:  { _controller: fos_user.security.controller:loginAction }
 
+#redirect the user after a successfully registration
+fos_user_registration_confirmed:
+    path: /{flavor}/profile

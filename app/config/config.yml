@@ -128,7 +128,6 @@ fr3d_ldap:
         filter: (&(ObjectClass=person))
 
 
-
 #fr3d_ldap:
 #    driver:
 #        host:                %ldap_host%

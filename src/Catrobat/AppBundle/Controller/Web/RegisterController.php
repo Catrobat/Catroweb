@@ -114,14 +114,14 @@ class RegisterController extends Controller
 //    return $response;
 //  }
 
-  /**
-   * @Route("/register", name="register_form")
-   * @Method({"GET"})
-   */
-  public function showRegistrationForm(Request $request)
-  {
-      $response = $this->forward('fos_user.registration.controller:registerAction', array());
-      return $response;
-  }
+//  /**
+//   * @Route("/register", name="register_form")
+//   * @Method({"GET"})
+//   */
+//  public function showRegistrationForm(Request $request)
+//  {
+//      $response = $this->forward('fos_user.registration.controller:registerAction', array());
+//      return $response;
+//  }
 }
 
