@@ -5,14 +5,15 @@ namespace spec\Catrobat\AppBundle\Listeners;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramRepository;
 use Catrobat\AppBundle\Entity\RemixManager;
+use Symfony\Component\Routing\Router;
+use Catrobat\AppBundle\Entity\User;
+
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Filesystem\Filesystem;
 
 use Catrobat\AppBundle\Services\AsyncHttpClient;
-use Symfony\Component\Routing\Router;
-use Catrobat\AppBundle\Entity\User ;
 
 
 
@@ -29,11 +30,11 @@ class RemixUpdaterSpec extends ObjectBehavior
         $user->getUsername()->willReturn('catroweb');
 
         $router
-            ->generate(Argument::exact('program'), Argument::exact(array('id' => 3571)))
+            ->generate(Argument::exact('program'), Argument::exact(array('id' => 3571, 'flavor' => 'pocketcode')))
             ->willReturn('http://share.catrob.at/details/3571');
 
         $router
-            ->generate(Argument::exact('program'), Argument::exact(array('id' => 3572)))
+            ->generate(Argument::exact('program'), Argument::exact(array('id' => 3572, 'flavor' => 'pocketcode')))
             ->willReturn('http://share.catrob.at/details/3572');
 
         $program_entity->getUser()->willReturn($user);
