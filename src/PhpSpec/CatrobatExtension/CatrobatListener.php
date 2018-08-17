@@ -37,7 +37,7 @@ class CatrobatListener implements \Symfony\Component\EventDispatcher\EventSubscr
         $this->emptyDirectory($this->cache_dir);
     }
 
-    public function setIO(IO $io)
+    public function setIO(ConsoleIO $io)
     {
         $this->io = $io;
     }

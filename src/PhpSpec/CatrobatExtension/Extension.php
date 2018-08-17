@@ -13,6 +13,6 @@ class Extension implements \PhpSpec\Extension
       $listener->setIo($container->get('console.io'));
 
       return $listener;
-    });
+    },['event_dispatcher.listeners']);
     }
 }
