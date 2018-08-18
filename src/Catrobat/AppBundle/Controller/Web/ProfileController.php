@@ -204,27 +204,23 @@ class ProfileController extends Controller
     public function passwordSaveAction(Request $request)
     {
         /**
-         * @var \Catrobat\AppBundle\Entity\User
+         * @var \Catrobat\AppBundle\Entity\User $user
+         * @var \Catrobat\AppBundle\Entity\UserManager $userManager
          */
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('fos_user_security_login');
         }
 
-        $encoder_factory = $this->get('security.encoder_factory');
-
-        $encoder = $encoder_factory->getEncoder($user);
-        $salt = $user->getSalt();
         $old_password = $request->request->get('oldPassword');
 
-        $encoded_password = $encoder->encodePassword($old_password, $salt);
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
 
-        $logger = $this->get('logger');
-        $logger->info('I just got the logger');
-        $logger->info($user->getPassword() . " ---|--- " . $encoded_password);
-        $logger->info('ENDE');
+        $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
 
-        if ($encoded_password !== $user->getPassword()) {
+
+        if (!$bool) {
             return JsonResponse::create(array('statusCode' => "777",));
         }
 
