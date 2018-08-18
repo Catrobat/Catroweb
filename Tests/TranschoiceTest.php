@@ -2,6 +2,7 @@
 namespace Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Translation\Formatter\MessageFormatter;
 use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\MessageSelector;
@@ -17,7 +18,7 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
      * @test
      * @dataProvider language_provider
      */
-    public function all_transchoice_entries_should_have_a_correct_syntax($translator, $language_code, $message_ids)
+    public function all_transchoice_entries_should_have_a_correct_syntax(Translator $translator, $language_code, $message_ids)
     {
        // $this->assertTrue(1==1);
         foreach ($message_ids as $message_id) {
@@ -25,6 +26,7 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
             $translator->transChoice($message_id, 2, array(), 'catroweb', $language_code);
             $translator->transChoice($message_id, 10, array(), 'catroweb', $language_code);
         }
+        $this->assertTrue(true);
     }
 
     /**
@@ -46,7 +48,7 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
     {
         $directory = self::LANGUAGE_DIR;
 
-        $translator = new Translator('en', new MessageSelector());
+        $translator = new Translator('en', new MessageFormatter());
         $translator->addLoader('yaml', new YamlFileLoader());
         
         $finder = new Finder();

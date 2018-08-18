@@ -54,9 +54,9 @@ programs:
     downloaded: Most downloaded
   random: Random Programs
   related: Related Programs
-  downloads: %downloads% downloads
+  downloads: '%downloads% downloads'
   sample: Example Programs
-  views: %views% views
+  views: '%views% views'
   likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
   likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
