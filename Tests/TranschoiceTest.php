@@ -20,7 +20,6 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
      */
     public function all_transchoice_entries_should_have_a_correct_syntax(Translator $translator, $language_code, $message_ids)
     {
-       // $this->assertTrue(1==1);
         foreach ($message_ids as $message_id) {
             $translator->transChoice($message_id, 1, array(), 'catroweb', $language_code);
             $translator->transChoice($message_id, 2, array(), 'catroweb', $language_code);
