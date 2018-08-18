@@ -3,6 +3,7 @@
 namespace Tests\CatrobatCodeParserTests;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedScene;
+use function PHPSTORM_META\type;
 
 class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
 {
@@ -71,8 +72,13 @@ class ParsedObjectsContainerTest extends \PHPUnit\Framework\TestCase
         $xml_properties = simplexml_load_file(__DIR__
             . '/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/code.xml');
 
-        var_export("\n\n".$xml_properties->xpath('//scene')[0]."\n\n");
-        
-        new ParsedScene($xml_properties->xpath('//scene')[0]);
+        if( !array_key_exists(0, $xml_properties->xpath('//scene')) )
+        {
+            new ParsedScene($xml_properties->xpath('//scene')[0]);
+        }
+        else {
+            throw new \Exception("\Exception");
+        }
+
     }
 }

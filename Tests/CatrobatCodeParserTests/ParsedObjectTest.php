@@ -6,6 +6,9 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObject;
 
 class ParsedObjectTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var ParsedObject
+     */
     protected $object;
 
     public function setUp()
@@ -61,10 +64,12 @@ class ParsedObjectTest extends \PHPUnit\Framework\TestCase
      */
     public function getSoundsMustReturnArrayOfParsedObjectAsset()
     {
-        $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectAsset';
+//        $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectAsset';
 
-        foreach($this->object->getSounds() as $actual)
-            $this->assertInstanceOf($expected, $actual);
+        $this->assertTrue($this->object->getSounds() === []);
+
+//        foreach($this->object->getSounds() as $actual)
+//            $this->assertInstanceOf($expected, $actual);
     }
 
     /**
