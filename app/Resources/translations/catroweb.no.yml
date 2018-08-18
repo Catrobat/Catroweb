@@ -59,7 +59,7 @@ programs:
   likeLoveDetailText: '{0}0 folk elsker dette |{1}1 person elsker dette |]1,Inf]%persons% folk elsker dette'
   likeWowDetailText: '{0}0 folk sier "Oi!" til denne |{1}1 person sier "Oi!" til denne |]1,Inf]%persons% folk sier "Oi!" på dette'
   remixes: '{0}0 remikser |{1}1 remiks |]1,Inf]%remixes% remikser'
-  newRemixesNotificationTitle: '|{1} "%programName%" har 1 ny remiks: |] 1 Inf] "%programName%" har %remixes% nye remikser:'
+  newRemixesNotificationTitle: '|{1}"%programName%" har 1 ny remiks: |]1,Inf] "%programName%" har %remixes% nye remikser:'
   submitted: Innsendte programmer
   uploaded: Opplastede programmer
   reportAsInappropriate: Rapporter som upassende
