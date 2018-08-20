@@ -34,6 +34,7 @@ Feature: Cross validation for recommendation system
     And I should see "Similar Programs"
     And the element "#recommendations" should be visible
     When I switch the language to "Russisch"
+    And I wait 250 milliseconds
     Then I should not see "Similar Programs"
     And I should not see "#recommendations"
 

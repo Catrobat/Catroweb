@@ -389,3 +389,14 @@ services:
         class: Catrobat\AppBundle\Services\AsyncHttpClient
         arguments:
           - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }
+
+
+# =========================== FOS User bundle =============================
+    resetting_send_email_initialize:
+        class: Catrobat\AppBundle\EventListener\ResettingSendEmailInitializeSubscriber
+        autowire: true
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+

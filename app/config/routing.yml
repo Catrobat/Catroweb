@@ -44,6 +44,10 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+    # new annotations -> ToDo for all instead of Sensio Annotations
+app:
+    resource: "@AppBundle/Controller/Resetting"
+    type:     annotation
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

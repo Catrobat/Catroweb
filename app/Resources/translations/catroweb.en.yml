@@ -463,6 +463,7 @@ login:
   forgotPass: Forgot password or username?
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account

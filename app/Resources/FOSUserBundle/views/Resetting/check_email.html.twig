@@ -21,9 +21,15 @@
       <div class="row justify-content-center">
         <div class="col-md-5 text-center">
 
+          {% if already_reset is defined %}
+          <div class="alert alert-danger" style="margin-top: 15px">
+            {{ "login.alreadyReset"|trans({}, "catroweb") }}
+          </div>
+          {% else %}
           <div class="alert alert-success" style="margin-top: 15px">
             {{ "login.recoverPassSend"|trans({}, "catroweb") }}
           </div>
+          {% endif %}
 
           <!-- Policy -->
           {% include ':privacy_policy:policy.html.twig' %}
