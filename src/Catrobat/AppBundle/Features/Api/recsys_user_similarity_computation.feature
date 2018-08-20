@@ -5,25 +5,28 @@ Feature: Computes user similarities by analyzing common likes and remixes betwee
     The results of the computed similarities are later used by the recommendation algorithm.
     See tests: get_recommended_programs_homepage.feature
 
-  Background:
-    Given there are users:
-      | id | name      | password | token      |
-      | 1  | Catrobat1 | 12345    | cccccccccc |
-      | 2  | Catrobat2 | 12345    | cccccccccc |
-      | 3  | Catrobat3 | 12345    | cccccccccc |
-      | 4  | Catrobat4 | 12345    | cccccccccc |
-    And there are programs:
-      | id | name      | description | owned by  | downloads | views | upload time      | version | remix_root |
-      | 1  | Game      | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | true       |
-      | 2  | Minions   | p1          | Catrobat1 | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
-      | 3  | Galaxy    | p2          | Catrobat2 | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | false      |
-      | 4  | Other     | p3          | Catrobat3 | 12        | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 5  | Other2    | p5          | Catrobat2 | 3         | 9     | 01.02.2013 12:00 | 0.8.5   | false      |
-      | 6  | Other3    | p6          | Catrobat1 | 1         | 1     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 7  | Other4    | p7          | Catrobat4 | 2         | 10    | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 8  | Other5    | p7          | Catrobat3 | 1         | 2     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 9  | Other6    | p7          | Catrobat2 | 2         | 1     | 01.02.2013 12:00 | 0.8.5   | true       |
+  Scenario: We don't have the import_*.sql files anymore
+  Then We can't test anything here
 
+#  Background:
+#    Given there are users:
+#      | id | name      | password | token      |
+#      | 1  | Catrobat1 | 12345    | cccccccccc |
+#      | 2  | Catrobat2 | 12345    | cccccccccc |
+#      | 3  | Catrobat3 | 12345    | cccccccccc |
+#      | 4  | Catrobat4 | 12345    | cccccccccc |
+#    And there are programs:
+#      | id | name      | description | owned by  | downloads | views | upload time      | version | remix_root |
+#      | 1  | Game      | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | true       |
+#      | 2  | Minions   | p1          | Catrobat1 | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
+#      | 3  | Galaxy    | p2          | Catrobat2 | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | false      |
+#      | 4  | Other     | p3          | Catrobat3 | 12        | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
+#      | 5  | Other2    | p5          | Catrobat2 | 3         | 9     | 01.02.2013 12:00 | 0.8.5   | false      |
+#      | 6  | Other3    | p6          | Catrobat1 | 1         | 1     | 01.02.2013 12:00 | 0.8.5   | true       |
+#      | 7  | Other4    | p7          | Catrobat4 | 2         | 10    | 01.02.2013 12:00 | 0.8.5   | true       |
+#      | 8  | Other5    | p7          | Catrobat3 | 1         | 2     | 01.02.2013 12:00 | 0.8.5   | true       |
+#      | 9  | Other6    | p7          | Catrobat2 | 2         | 1     | 01.02.2013 12:00 | 0.8.5   | true       |
+#
 #  Scenario: Example #1, only one like-similarity
 #    Given there are likes:
 #      | username  | program_id | type | created at       |

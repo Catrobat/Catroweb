@@ -62,6 +62,7 @@ class SecurityController extends Controller
         }
 
         $create_request = new CreateUserRequest($request);
+
         $violations = $validator->validate($create_request);
         foreach ($violations as $violation) {
             $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
@@ -90,7 +91,7 @@ class SecurityController extends Controller
                 $user->setUploadToken($tokenGenerator->generateToken());
                 $user->setCountry($create_request->country);
 
-                $violations = $validator->validate($user, "Registration");
+                $violations = $validator->validate($user);
                 if (count($violations) > 0) {
                     $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
                     $retArray['answer'] = $this->trans('errors.login');
@@ -104,7 +105,6 @@ class SecurityController extends Controller
         }
         $retArray['preHeaderMessages'] = '';
         return JsonResponse::create($retArray);
-
     }
 
     /**

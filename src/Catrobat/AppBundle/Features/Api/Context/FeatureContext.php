@@ -1928,4 +1928,12 @@ class FeatureContext extends BaseContext
     $em->flush();
   }
 
+    /**
+     * @Then /^We can\'t test anything here$/
+     */
+    public function weCantTestAnythingHere()
+    {
+        throw new \Exception(":(");
+    }
+
 }

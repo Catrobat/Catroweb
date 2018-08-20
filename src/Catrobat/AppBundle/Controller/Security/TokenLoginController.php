@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Assetic\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+
 class TokenLoginController extends Controller
 {
 
@@ -33,7 +34,6 @@ class TokenLoginController extends Controller
         $this->get('security.token_storage')->setToken($token);
 
         // now dispatch the login event
-        $request = $this->get("request");
         $event = new InteractiveLoginEvent($request, $token);
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
         return $this->redirect($this->generateUrl('index') . '?login');

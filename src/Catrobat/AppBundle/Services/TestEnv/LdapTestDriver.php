@@ -93,6 +93,7 @@ class LdapTestDriver implements LdapDriverInterface
         foreach ($this->objects as $object) {
             $isOk = true;
             foreach ($searchRequirements as $reqKey => $reqVal) {
+                var_export("\nKey: ".$reqKey ."\nVal: " .$reqVal);
                 if (is_array($object[$reqKey]) && in_array($reqVal, $object[$reqKey])) {
                     continue;
                 } else 
@@ -162,6 +163,7 @@ class LdapTestDriver implements LdapDriverInterface
                 $username . "@generated.at"
             )
         ];
+
         array_push($this->objects, $user_entity);
         
         return ApcReplace::Instance()->apc_store($this::$APC_OBJECTS, $this->objects);
