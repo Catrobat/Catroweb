@@ -1,6 +1,11 @@
 #@homepage
-#Feature: Open Authentication
-#  I want to be able to sign in as Facebook and Google+ user
+Feature: Open Authentication
+  I want to be able to sign in as Facebook and Google+ user
+
+
+  Scenario: Oauth and oauth_autoconnect not working
+  Then we have to rework it
+
 #
 #  Background:
 #    Given there are users:

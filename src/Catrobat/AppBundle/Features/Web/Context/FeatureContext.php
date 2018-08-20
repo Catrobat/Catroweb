@@ -2687,5 +2687,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         }
     }
 
+    /**
+     * @Then /^we have to rework it$/
+     */
+    public function weHaveToReworkIt()
+    {
+        throw new PendingException("Google and FB oauth has to be reworked");
+    }
 }
 
