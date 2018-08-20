@@ -27,11 +27,13 @@ Feature: A/B testing for recommendation system & remix graph
     And I wait for a second
     And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "Russisch"
+    And I wait 250 milliseconds
     And I should see "Recommended programs"
     And the element "#recommended" should be visible
     And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "French"
-    And I should see "Recommended programs"
+    And I wait 250 milliseconds
+    And I should see "Programmes recommandés"
     And the element "#recommended" should be visible
     And I should see a recommended homepage program having ID "1" and name "Minions"
 
@@ -50,6 +52,7 @@ Feature: A/B testing for recommendation system & remix graph
     And the element "#remix-graph-button" should be visible
     And the element "#remix-graph-modal-link" should be visible
     When I switch the language to "Russisch"
+    And I wait 250 milliseconds
     And I should see "Show Remix Graph"
     And I should see "1 remix"
     And the element "#remix-graph-button" should be visible
@@ -67,5 +70,6 @@ Feature: A/B testing for recommendation system & remix graph
     Then There should be recommended specific programs
     And the element "#specific-programs-recommendations" should be visible
     When I switch the language to "Russisch"
+    And I wait 250 milliseconds
     Then There should be recommended specific programs
     And the element "#specific-programs-recommendations" should be visible
