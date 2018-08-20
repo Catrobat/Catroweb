@@ -80,9 +80,6 @@
                 <label><span class="span-input">{{ 'login.passwordSecond'|trans({}, 'catroweb') }}</span></label>
               </div>
 
-              <input id="sonata_user_registration_form__token" type="hidden"
-                     name="sonata_user_registration_form[_token]" value="{{ csrf_token('authentication') }}" />
-
               <!-- Policy -->
               {% include ':privacy_policy:policy.html.twig' %}
 

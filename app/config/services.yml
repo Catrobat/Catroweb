@@ -293,11 +293,14 @@ services:
         class: Catrobat\AppBundle\Entity\UserManager
         arguments: ["@fos_user.util.password_updater", "@fos_user.util.canonical_fields_updater", "@fos_user.object_manager","%fos_user.model.user.class%"]
 
+    ldap.user_hydrator:
+        class: Catrobat\AppBundle\Ldap\UserHydrator
+
     usermanager.ldap:
         class: Catrobat\AppBundle\Entity\UserLDAPManager
         arguments:
             - "@fr3d_ldap.ldap_driver"
-            - "@usermanager"
+            - "@fr3d_ldap.user_hydrator"
             - %fr3d_ldap.ldap_manager.parameters%
             - %ldap_role_mappings%
             - %ldap_group_filter%

@@ -1,6 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Entity;
 
+use Catrobat\AppBundle\Ldap\UserHydrator;
 use FR3D\LdapBundle\Driver\LdapDriverException;
 use FR3D\LdapBundle\Ldap\LdapManager;
 use FR3D\LdapBundle\Driver\LdapDriverInterface;
@@ -19,7 +20,7 @@ class UserLDAPManager extends LdapManager
 
     protected $logger;
 
-    public function __construct(LdapDriverInterface $driver, UserManager $userManager, array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
+    public function __construct(LdapDriverInterface $driver, UserHydrator $userManager, array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
     {
         $this->role_mappings = $role_mappings;
         $this->group_filter = $group_filter;
@@ -33,7 +34,7 @@ class UserLDAPManager extends LdapManager
     {
         try {
             $filter = $this->buildFilter($criteria);
-            $entries = $this->driver->search($this->params['baseDn'], $filter, $this->ldapAttributes);
+            $entries = $this->driver->search($this->params['baseDn'], $filter, $this->params['attributes']);
             if ($entries['count'] > 1) {
                 throw new \Exception('This search can only return a single user');
             }
