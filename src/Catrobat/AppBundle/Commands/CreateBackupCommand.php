@@ -55,7 +55,7 @@ class CreateBackupCommand extends ContainerAwareCommand
         $progress->advance();
         $progress->setMessage('Database driver set, Outputpath specified as ' . $zip_path);
 
-        $sql_path = tempnam($backup_dir, 'Sql');
+        $sql_path = @tempnam($backup_dir, 'Sql');
         $database_name = $this->getContainer()->getParameter('database_name');
         $database_user = $this->getContainer()->getParameter('database_user');
         $database_password = $this->getContainer()->getParameter('database_password');
