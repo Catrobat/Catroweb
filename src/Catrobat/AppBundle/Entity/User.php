@@ -111,7 +111,7 @@ class User extends BaseUser implements LdapUserInterface
     protected $gplus_access_token;
 
     /**
-     * @ORM\Column(type="string", length=300, nullable=true)
+     * @ORM\Column(type="string", length=5000, nullable=true)
      */
     protected $gplus_id_token;
 

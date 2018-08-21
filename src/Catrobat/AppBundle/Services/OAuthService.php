@@ -582,111 +582,162 @@ class OAuthService
          */
 
         $retArray = array();
-        $session = $request->getSession();
-        $code = $request->request->get('code');
 
-        $gPlusId = $request->request->get('id');
-        $google_username = $request->request->get('username');
-        $google_mail = $request->request->get('email');
-        $locale = $request->request->get('locale');
-
-        if (!$request->request->has('mobile')) {
-            $sessionState = $session->get('_csrf/authenticate');
-            $requestState = $request->request->get('state');
-            // Ensure that this is no request forgery going on, and that the user
-            // sending us this request is the user that was supposed to.
-            if (!$sessionState || !$requestState || $sessionState != $requestState) {
-                //return new Response('Invalid state parameter - Session Hijacking attempt?', 401);
-                $retArray['sessionWarning'] = 'Warning: Invalid state parameter - This might be a Session Hijacking attempt!';
-            }
-        }
-
-        $application_name = $this->container->getParameter('application_name');
         $client_id = $this->container->getParameter('google_app_id');
-        $client_secret = $this->container->getParameter('google_secret');
-        $redirect_uri = 'postmessage';
-
-        if (!$client_secret || !$client_id || !$application_name) {
-            return new Response('Google app authentication data not found!', 401);
-        }
-
-        $client = new Google_Client();
-        $client->setApplicationName($application_name);
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        if (!$request->request->has('mobile')) {
-            $client->setRedirectUri($redirect_uri);
-        }
-        $client->setScopes('https://www.googleapis.com/auth/userinfo.email');
-
-        $token = '';
-        if ($code) {
-            $client->authenticate($code);
-            $token = json_decode($client->getAccessToken());
-        }
-
-        if (!$token) {
-            return new Response("Google Authentication failed.", 401);
-        }
-
-        $reqUrl = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' . $token->access_token;
-        $req = new Google_Http_Request($reqUrl);
-
-        $results = $client->execute($req);
-
-        /*
-         * TODO: update to newest G+ PHP API and enabled id token verification
         $id_token = $request->request->get('id_token');
-        try {
-            $ticket = $client->verifyIdToken($id_token);
-            $retArray['id_token_attributes:'] = print_r($ticket->getAttributes(), true);
-            $retArray['id_token_user_id'] = print_r($ticket->getUserId(), true);
-        } catch (\Google_Auth_Exception $e) {
-            return new Response("Invalid id token: " . $e->getMessage(), 401);
+        $username = $request->request->get('username');
+
+        $client = new Google_Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
+        $payload = $client->verifyIdToken($id_token);
+        if ($payload) {
+            $gPlusId = $payload['sub'];
+            $gEmail = $payload['email'];
+            $gName = $payload['name'];
+            $gLocale = $payload['locale'];
+        } else {
+            return new Response('Token invalid', 777);
         }
-        */
-
-        // Make sure the token we got is for the intended user.
-
-        if ($results['user_id'] != $gPlusId) {
-            return new Response("Token's user ID doesn't match given user ID", 401);
-        }
-
-        // Make sure the token we got is for our app.
-        if ($results['audience'] != $client_id) {
-            return new Response("Token's client ID does not match app's.", 401);
-        }
-
-        $access_token = $token->access_token;
-        $id_token = $token->id_token;
-        $refresh_token = '';
-        if (property_exists($token, 'refresh_token')) {
-            $refresh_token = $token->refresh_token;
-        }
-
-        // Store the token in the session for later use.
-        // 'Succesfully connected with token: ' . print_r($token, true);
 
         $userManager = $this->container->get("usermanager");
-        $user = $userManager->findUserByEmail($google_mail);
+        if ($gEmail) {
+            $user = $userManager->findUserByUsernameOrEmail($gEmail);
+        }
+        else {
+            $user = null;
+        }
         $google_user = $userManager->findUserBy(array(
             'gplusUid' => $gPlusId
         ));
+
         if ($google_user) {
-            $this->setGoogleTokens($userManager, $google_user, $access_token, $refresh_token, $id_token);
-        } else
+            $this->setGoogleTokens($userManager, $google_user, null, null, $id_token);
+        }
+        else {
             if ($user) {
-                $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $gPlusId, $google_username, $locale);
-                $this->setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token);
+                $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $gPlusId, $username, $gLocale);
+                $this->setGoogleTokens($userManager, $user, null, null, $id_token);
             } else {
-                $this->registerGoogleUser($request, $userManager, $retArray, $gPlusId, $google_username, $google_mail, $locale, $access_token, $refresh_token, $id_token);
+                $this->registerGoogleUser($request, $userManager, $retArray, $gPlusId, $username, $gEmail, $gLocale,
+                    null, null, $id_token);
                 $retArray['statusCode'] = 201;
             }
-
-        if (!array_key_exists('statusCode', $retArray) || !$retArray['statusCode'] == StatusCode::LOGIN_ERROR) {
-            $retArray['statusCode'] = 201;
-            $retArray['answer'] = $this->trans("success.registration");
         }
+
+//
+//        if (!array_key_exists('statusCode', $retArray) || !$retArray['statusCode'] == StatusCode::LOGIN_ERROR) {
+//            $retArray['statusCode'] = 201;
+//            $retArray['answer'] = $this->trans("success.registration");
+//        }
+
+
+
+//        $session = $request->getSession();
+//        $code = $request->request->get('code');
+//
+//        $gPlusId = $request->request->get('id');
+//        $google_username = $request->request->get('username');
+//        $google_mail = $request->request->get('email');
+//        $locale = $request->request->get('locale');
+//
+//        if (!$request->request->has('mobile')) {
+//            $sessionState = $session->get('_csrf/authenticate');
+//            $requestState = $request->request->get('state');
+//            // Ensure that this is no request forgery going on, and that the user
+//            // sending us this request is the user that was supposed to.
+//            if (!$sessionState || !$requestState || $sessionState != $requestState) {
+//                //return new Response('Invalid state parameter - Session Hijacking attempt?', 401);
+//                $retArray['sessionWarning'] = 'Warning: Invalid state parameter - This might be a Session Hijacking attempt!';
+//            }
+//        }
+//
+//        $application_name = $this->container->getParameter('application_name');
+//        $client_id = $this->container->getParameter('google_app_id');
+//        $client_secret = $this->container->getParameter('google_secret');
+//        $redirect_uri = 'postmessage';
+//
+//        if (!$client_secret || !$client_id || !$application_name) {
+//            return new Response('Google app authentication data not found!', 401);
+//        }
+
+//        $client = new Google_Client();
+//        $client->setApplicationName($application_name);
+//        $client->setClientId($client_id);
+//        $client->setClientSecret($client_secret);
+//        if (!$request->request->has('mobile')) {
+//            $client->setRedirectUri($redirect_uri);
+//        }
+//        $client->setScopes('https://www.googleapis.com/auth/userinfo.email');
+//
+//        $token = '';
+//        if ($code) {
+//            $client->authenticate($code);
+//            $token = json_decode($client->getAccessToken());
+//        }
+//
+//        if (!$token) {
+//            return new Response("Google Authentication failed.", 401);
+//        }
+//
+//        $reqUrl = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' . $token->access_token;
+//        $req = new Google_Http_Request($reqUrl);
+//
+//        $results = $client->execute($req);
+
+//        /*
+//         * TODO: update to newest G+ PHP API and enabled id token verification
+//         *
+//         */
+//        $id_token = $request->request->get('id_token');
+//        try {
+//            $ticket = $client->verifyIdToken($id_token);
+//            $retArray['id_token_attributes:'] = print_r($ticket->getAttributes(), true);
+//            $retArray['id_token_user_id'] = print_r($ticket->getUserId(), true);
+//        } catch (\Google_Auth_Exception $e) {
+//            return new Response("Invalid id token: " . $e->getMessage(), 401);
+//        }
+
+
+        // Make sure the token we got is for the intended user.
+
+//        if ($results['user_id'] != $gPlusId) {
+//            return new Response("Token's user ID doesn't match given user ID", 401);
+//        }
+//
+//        // Make sure the token we got is for our app.
+//        if ($results['audience'] != $client_id) {
+//            return new Response("Token's client ID does not match app's.", 401);
+//        }
+//
+//        $access_token = $token->access_token;
+//        $id_token = $token->id_token;
+//        $refresh_token = '';
+//        if (property_exists($token, 'refresh_token')) {
+//            $refresh_token = $token->refresh_token;
+//        }
+//
+//        // Store the token in the session for later use.
+//        // 'Succesfully connected with token: ' . print_r($token, true);
+//
+//        $userManager = $this->container->get("usermanager");
+//        $user = $userManager->findUserByEmail($google_mail);
+//        $google_user = $userManager->findUserBy(array(
+//            'gplusUid' => $gPlusId
+//        ));
+//        if ($google_user) {
+//            $this->setGoogleTokens($userManager, $google_user, $access_token, $refresh_token, $id_token);
+//        } else
+//            if ($user) {
+//                $this->connectGoogleUserToExistingUserAccount($userManager, $request, $retArray, $user, $gPlusId, $google_username, $locale);
+//                $this->setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token);
+//            } else {
+//                $this->registerGoogleUser($request, $userManager, $retArray, $gPlusId, $google_username, $google_mail, $locale, $access_token, $refresh_token, $id_token);
+//                $retArray['statusCode'] = 201;
+//            }
+//
+//        if (!array_key_exists('statusCode', $retArray) || !$retArray['statusCode'] == StatusCode::LOGIN_ERROR) {
+//            $retArray['statusCode'] = 201;
+//            $retArray['answer'] = $this->trans("success.registration");
+//        }
 
         return JsonResponse::create($retArray);
     }
@@ -813,26 +864,25 @@ class OAuthService
         $retArray['violations'] = count($violations);
         if (count($violations) == 0) {
             $user = $userManager->createUser();
-            $user->setUsername($googleUsername);
             $user->setGplusUid($googleId);
+            $user->setUsername($googleUsername);
             $user->setEmail($googleEmail);
+            $user->setPlainPassword($this->randomPassword());
+            $user->setEnabled(true);
             $user->setCountry($locale);
-
-            $password = $this->generateOAuthPassword($user);
-            $user->setPlainPassword($password);
-
-            if ($access_token) {
-                $user->setGplusAccessToken($access_token);
-            }
-            if ($refresh_token) {
-                $user->setGplusRefreshToken($refresh_token);
-            }
             if ($id_token) {
                 $user->setGplusIdToken($id_token);
             }
 
-            $user->setEnabled(true);
+//            if ($access_token) {
+//                $user->setGplusAccessToken($access_token);
+//            }
+//            if ($refresh_token) {
+//                $user->setGplusRefreshToken($refresh_token);
+//            }
+
             $userManager->updateUser($user);
+
             $retArray['statusCode'] = 201;
             $retArray['answer'] = $this->trans("success.registration");
         }
@@ -953,7 +1003,6 @@ class OAuthService
             $this->container->get('security.token_storage')->setToken($token);
 
             // now dispatch the login event
-            $request = $this->container->get("request");
             $event = new InteractiveLoginEvent($request, $token);
             $this->container->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
@@ -965,15 +1014,15 @@ class OAuthService
         return JsonResponse::create($retArray);
     }
 
-    private function generateOAuthPassword($user)
-    {
-        /**
-         * @var $user User
-         */
-        $generator = new SecureRandom();
-        $password = bin2hex($generator->nextBytes(16));
-        $user->setPlainPassword($password);
-        return $password;
+    function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
 
     private function setLoginOAuthUserStatusCode(&$retArray)

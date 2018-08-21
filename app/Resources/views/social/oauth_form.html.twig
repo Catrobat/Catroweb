@@ -25,24 +25,45 @@
     <input type="hidden" id = "gplus_approval_prompt" value="auto" />
     <input type="hidden" id = "facebook_auth_type" value=""/> <!-- can be set to reauthenticate to force re-authentication of the user -->
 
-
     <div id="fb-root"></div>
+
+    {# [googleLogin] is needed for an easy initialization of the google services #}
+    <div id="googleLogin" class="g-signin2" data-onsuccess="onSignIn" style="display: none"></div>
+
     <div id ="googleLoginButton">
-        <!--
-            Google Login Button is a 2 click button, where image is removed at first click, second click triggers login because of data privacy - see:
-            http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons
-        -->
-        <a id="btn-login_google" href="#" {#data-toggle="modal" data-target="#termsModal"#} {#onclick="triggerGoogleLogin();"#}><img class="img-socialLogin social-button-effects" src="{{ asset('images/social/btn_google_signin_light_normal_web2x.png') }}" alt="Google Login"></a>
+        <!-- Google Login Button is a 2 click button, where image is removed at first click,
+             second click triggers login because of data privacy - see:
+             http://extensions.joomla.org/extensions/extension/social-web/social-share/2-click-social-buttons -->
+        <a id="btn-login_google" href="#" data-toggle="modal" data-target="#termsModal">
+            <img class="img-socialLogin social-button-effects"
+                 src="{{ asset('images/social/btn_google_signin_light_normal_web2x.png') }}"
+                 alt="Google Login"></a>
     </div>
-    <div class="btn btn-primary btn-lg" id="btn-google-modal-trigger" style="display: none" data-toggle="modal" data-target="#termsModal"></div>
+
+
+    <div class="btn btn-primary btn-lg" id="btn-google-modal-trigger"
+         style="display: none" data-toggle="modal" data-target="#termsModal">
+    </div>
 
     <div id ="facebookLoginButton">
-        <a id="btn-login_facebook" href="#" data-toggle="modal" data-target="#termsModal" {#onclick="triggerFacebookLogin();"#}><img class="img-socialLogin social-button-effects" src="{{ asset('images/social/sign-in-with-facebook.png') }}" alt="Facebook Login"></a>
+        <a id="btn-login_facebook" href="#" data-toggle="modal" data-target="#termsModal">
+            <img class="img-socialLogin social-button-effects"
+                    src="{{ asset('images/social/sign-in-with-facebook.png') }}"
+                    alt="Facebook Login"></a>
     </div>
 
-    <div id="status">
-    </div>
+    <div id="status"></div>
 </form>
+
 
 <button id="btn-facebook-testhook" class="hidden" onclick="handleFacebookUserInfoResponseTrigger();"></button>
 <button id="btn-gplus-testhook" class="hidden" onclick="checkGoogleCallbackDataWithServer();"></button>
+
+
+{# needed for Google Sign #}
+<head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+

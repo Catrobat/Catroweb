@@ -2686,13 +2686,5 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
             Assert::assertTrue(false, "Driver may not support JS injection. For Chrome this is needed since it cant deal with pop ups");
         }
     }
-
-    /**
-     * @Then /^we have to rework it$/
-     */
-    public function weHaveToReworkIt()
-    {
-        throw new PendingException("Google and FB oauth has to be reworked");
-    }
 }
 
