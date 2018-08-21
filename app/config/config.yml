@@ -151,6 +151,11 @@ fr3d_ldap:
         - { ldap_attr: cn,  user_method: setUsername } # Default
         - { ldap_attr: mail,  user_method: setEmail } # Default
 
+    service:
+        user_hydrator: ldap.user_hydrator      # Overrides default user hydrator
+        ldap_manager: usermanager.ldap   # Overrides default ldap manager
+#       ldap_driver: fr3d_ldap.ldap_driver.zend        # Overrides default ldap driver
+
 
 #fr3d_ldap:
 #    driver:
