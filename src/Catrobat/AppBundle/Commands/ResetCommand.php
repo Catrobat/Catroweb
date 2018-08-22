@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Finder\Finder;
@@ -91,7 +90,7 @@ class ResetCommand extends ContainerAwareCommand
       {
         file_put_contents($name, file_get_contents($url));
       }
-      catch (ContextErrorException $e)
+      catch (\ErrorException $e)
       {
         $output->writeln("File <" . $url . "> returned error 500, continuing...");
         continue;

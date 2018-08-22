@@ -31,6 +31,12 @@ parameters:
       catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
       catrobat.max_version:           "0.996"
 
+#      This can drastically improve DX by reducing the time to load classes
+      container.dumper.inline_class_loader: true
+
+#      remove when updated to symfony > 4.0
+      container.autowiring.strict_mode: true
+
 services:
 
     apikey_authenticator:
