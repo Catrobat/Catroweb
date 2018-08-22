@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\Admin\Blocks;
 use Symfony\Component\HttpFoundation\Response;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\AbstractBlockService;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class StatisticBlockService extends AbstractBlockService

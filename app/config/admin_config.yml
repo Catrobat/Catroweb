@@ -211,3 +211,9 @@ sonata_user:
     class:
         user:   Catrobat\AppBundle\Entity\User
         group:  Catrobat\AppBundle\Entity\Group
+
+
+sonata_core:
+    form:
+        mapping:
+            enabled: false

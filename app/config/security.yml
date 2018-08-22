@@ -96,9 +96,6 @@ security:
             form_login:
                 login_path: /login
                 check_path: fos_user_security_check
-#                always_use_default_target_path: true
-#                default_target_path: /
-                # csrf_token_generator: security.csrf.token_manager # destroys login
             logout: true
             anonymous:    true
             remember_me:
