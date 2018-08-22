@@ -11,8 +11,7 @@ use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +20,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class ProgramController extends Controller
 {
   /**
-   * @Route("/program/remixgraph/{id}", name="program_remix_graph", requirements={"id":"\d+"})
-   * @Method({"GET"})
+   * @Route("/program/remixgraph/{id}", name="program_remix_graph", requirements={"id":"\d+"}, methods={"GET"})
    */
   public function programRemixGraphAction(Request $request, $id)
   {
@@ -54,8 +52,7 @@ class ProgramController extends Controller
 
   /**
    * @Route("/program/{id}", name="program", requirements={"id":"\d+"})
-   * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"})
-   * @Method({"GET"})
+   * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"}, methods={"GET"})
    */
   public function programAction(Request $request, $id, $flavor = 'pocketcode')
   {
@@ -132,8 +129,7 @@ class ProgramController extends Controller
   }
 
   /**
-   * @Route("/program/like/{id}", name="program_like", requirements={"id":"\d+"})
-   * @Method({"GET"})
+   * @Route("/program/like/{id}", name="program_like", requirements={"id":"\d+"}, methods={"GET"})
    */
   public function programLikeAction(Request $request, $id)
   {
@@ -201,9 +197,8 @@ class ProgramController extends Controller
   }
 
   /**
-   * @Route("/search/{q}", name="search", requirements={"q":".+"})
-   * @Route("/search/", name="empty_search", defaults={"q":null})
-   * @Method({"GET"})
+   * @Route("/search/{q}", name="search", requirements={"q":".+"}, methods={"GET"})
+   * @Route("/search/", name="empty_search", defaults={"q":null}, methods={"GET"})
    */
   public function searchAction($q)
   {
@@ -211,8 +206,7 @@ class ProgramController extends Controller
   }
 
   /**
-   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+"}, defaults={"id" = 0})
-   * @Method({"GET"})
+   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
    */
   public function deleteProgramAction($id)
   {
@@ -251,8 +245,7 @@ class ProgramController extends Controller
 
   /**
    * @Route("/profileToggleProgramVisibility/{id}", name="profile_toggle_program_visibility",
-   *                                                requirements={"id":"\d+"}, defaults={"id" = 0})
-   * @Method({"GET"})
+   *                                                requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
    */
   public function toggleProgramVisibilityAction($id)
   {

@@ -9,13 +9,13 @@
 namespace Catrobat\AppBundle\Admin;
 
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class EmailUserMessageAdmin extends Admin
+class EmailUserMessageAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_mail';
     protected $baseRoutePattern = 'mail';

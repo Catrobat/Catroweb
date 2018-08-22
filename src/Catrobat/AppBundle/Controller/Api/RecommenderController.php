@@ -5,15 +5,13 @@ use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 
 class RecommenderController extends Controller
 {
     /**
-     * @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"})
-     * @Method({"GET"})
+     * @Route("/api/projects/recsys.json", name="api_recsys_programs", defaults={"_format": "json"}, methods={"GET"})
      */
     public function listRecsysProgramAction(Request $request)
     {
@@ -32,8 +30,7 @@ class RecommenderController extends Controller
     }
 
     /**
-     * @Route("/api/projects/recsys_specific_programs/{id}.json", name="api_recsys_specific_programs", defaults={"_format": "json"}, requirements={"id":"\d+"})
-     * @Method({"GET"})
+     * @Route("/api/projects/recsys_specific_programs/{id}.json", name="api_recsys_specific_programs", defaults={"_format": "json"}, requirements={"id":"\d+"}, methods={"GET"})
      */
     public function listRecsysSpecificProgramsAction(Request $request, $id)
     {
@@ -56,8 +53,7 @@ class RecommenderController extends Controller
     }
 
     /**
-     * @Route("/api/projects/recsys_general_programs.json", name="api_recsys_general_programs", defaults={"_format": "json"})
-     * @Method({"GET"})
+     * @Route("/api/projects/recsys_general_programs.json", name="api_recsys_general_programs", defaults={"_format": "json"}, methods={"GET"})
      */
     public function listRecsysGeneralProgramsAction(Request $request)
     {

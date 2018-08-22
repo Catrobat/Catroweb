@@ -5,8 +5,7 @@ namespace Catrobat\AppBundle\Controller\Web;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Intl\Intl;
@@ -20,8 +19,7 @@ class ProfileController extends Controller
     const MAX_AVATAR_SIZE = 300;
 
     /**
-     * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0})
-     * @Method({"GET"})
+     * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
      */
     public function profileAction(Request $request, $id)
     {
@@ -64,8 +62,7 @@ class ProfileController extends Controller
 
 
     /**
-     * @Route("/profile/edit", name="profile_edit")
-     * @Method({"GET"})
+     * @Route("/profile/edit", name="profile_edit", methods={"GET"})
      */
     public function profileEditAction(Request $request)
     {
@@ -101,8 +98,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/emailEdit", name="email_edit")
-     * @Method({"GET"})
+     * @Route("/emailEdit", name="email_edit", methods={"GET"})
      */
     public function EmailEditAction(Request $request){
         $user = $this->getUser();
@@ -117,8 +113,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/avatarEdit", name="avatar_edit")
-     * @Method({"GET"})
+     * @Route("/avatarEdit", name="avatar_edit", methods={"GET"})
      */
     public function AvatarEditAction(Request $request){
         $user = $this->getUser();
@@ -134,8 +129,7 @@ class ProfileController extends Controller
 
 
     /**
-     * @Route("/passwordEdit", name="password_edit")
-     * @Method({"GET"})
+     * @Route("/passwordEdit", name="password_edit", methods={"GET"})
      */
     public function passwordEditAction(Request $request){
         $user = $this->getUser();
@@ -153,8 +147,7 @@ class ProfileController extends Controller
 
 
     /**
-     * @Route("/countryEdit", name="country_edit")
-     * @Method({"GET"})
+     * @Route("/countryEdit", name="country_edit", methods={"GET"})
      */
     public function countryEditAction(Request $request){
         $user = $this->getUser();
@@ -169,8 +162,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/countrySave", name="country_save")
-     * @Method({"POST"})
+     * @Route("/countrySave", name="country_save", methods={"POST"})
      */
     public function countrySaveAction(Request $request){
         /**
@@ -198,8 +190,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/passwordSave", name="password_save")
-     * @Method({"POST"})
+     * @Route("/passwordSave", name="password_save", methods={"POST"})
      */
     public function passwordSaveAction(Request $request)
     {
@@ -244,8 +235,7 @@ class ProfileController extends Controller
 
 
     /**
-     * @Route("/emailSave", name="email_save")
-     * @Method({"POST"})
+     * @Route("/emailSave", name="email_save", methods={"POST"})
      */
     public function emailSaveAction(Request $request){
         /**
@@ -303,8 +293,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/profileUploadAvatar", name="profile_upload_avatar")
-     * @Method({"POST"})
+     * @Route("/profileUploadAvatar", name="profile_upload_avatar", methods={"POST"})
      */
     public function uploadAvatarAction(Request $request)
     {
@@ -334,8 +323,7 @@ class ProfileController extends Controller
     }
 
   /**
-   * @Route("/deleteAccount", name="profile_delete_account")
-   * @Method({"POST"})
+   * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
    */
   public function deleteAccountAction(Request $request)
   {

@@ -3,14 +3,12 @@
 namespace Catrobat\AppBundle\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 
 class GameJamController extends Controller
 {
     /**
-     * @Route("/gamejame/submit-your-own", name="gamejam_submit_own")
-     * @Method({"GET"})
+     * @Route("/gamejame/submit-your-own", name="gamejam_submit_own", methods={"GET"})
      */
     public function gamejamSubmitOwnAction()
     {
@@ -35,8 +33,7 @@ class GameJamController extends Controller
     }
 
     /**
-     * @Route("/gaming-tutorials/{page}", name="catrobat_web_gamejamtutorialcards", defaults={"page" = -1}, requirements={"page":"\d+"})
-     * @Method({"GET"})
+     * @Route("/gaming-tutorials/{page}", name="catrobat_web_gamejamtutorialcards", defaults={"page" = -1}, requirements={"page":"\d+"}, methods={"GET"})
      */
     public function tutorialcardsAction($page)
     {

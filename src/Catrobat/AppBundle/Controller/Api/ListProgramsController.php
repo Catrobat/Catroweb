@@ -7,16 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\AppBundle\Services\ScreenshotRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 
 class ListProgramsController extends Controller
 {
 
   /**
-   * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listProgramsAction(Request $request)
   {
@@ -24,8 +22,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listProgramIdsAction(Request $request)
   {
@@ -33,8 +30,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listMostDownloadedProgramsAction(Request $request)
   {
@@ -42,9 +38,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format":
-   *                                                "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listMostDownloadedProgramIdsAction(Request $request)
   {
@@ -52,8 +46,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listMostViewedProgramsAction(Request $request)
   {
@@ -61,8 +54,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listMostViewedProgramIdsAction(Request $request)
   {
@@ -70,8 +62,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/randomPrograms.json", name="api_random_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/randomPrograms.json", name="api_random_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listRandomProgramsAction(Request $request)
   {
@@ -79,8 +70,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listRandomProgramIdsAction(Request $request)
   {
@@ -88,8 +78,7 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/userPrograms.json", name="api_user_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/userPrograms.json", name="api_user_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function listUserProgramsAction(Request $request)
   {

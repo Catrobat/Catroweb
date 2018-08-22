@@ -3,8 +3,7 @@
 namespace Catrobat\AppBundle\Controller\Ci;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,8 +13,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class DownloadApkController extends Controller
 {
     /**
-     * @Route("/ci/download/{id}", name="ci_download", requirements={"id": "\d+"})
-     * @Method({"GET"})
+     * @Route("/ci/download/{id}", name="ci_download", requirements={"id": "\d+"}, methods={"GET"})
      */
     public function downloadApkAction(Request $request, Program $program) {
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */

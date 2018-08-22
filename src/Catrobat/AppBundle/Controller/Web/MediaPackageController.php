@@ -34,15 +34,13 @@ use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MediaPackageController extends Controller
 {
   /**
-   * @Route("/api/media/json", name="api_media_lib", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/media/json", name="api_media_lib", defaults={"_format": "json"}, methods={"GET"})
    */
   public function getMediaLib()
   {
@@ -70,8 +68,7 @@ class MediaPackageController extends Controller
 
   /**
    * @Route("/api/media/category/{category}/json", name="api_media_lib_category", requirements={"category":"\w+"},
-   *                                               defaults={"_format": "json"})
-   * @Method({"GET"})
+   *                                               defaults={"_format": "json"}, methods={"GET"})
    */
   public function getMediaFilesForCategory($category)
   {
@@ -106,8 +103,7 @@ class MediaPackageController extends Controller
 
   /**
    * @Route("/api/media/package/{package}/json", name="api_media_lib_package", requirements={"package":"\w+"},
-   *                                             defaults={"_format": "json"})
-   * @Method({"GET"})
+   *                                             defaults={"_format": "json"}, methods={"GET"})
    */
   public function getMediaFilesForPackage($package)
   {
@@ -151,8 +147,7 @@ class MediaPackageController extends Controller
   /**
    * @Route("/api/media/package/{package}/{category}/json", name="api_media_lib_package_category",
    *                                                        requirements={"package":"\w+", "category":"\w+"},
-   *                                                        defaults={"_format": "json"})
-   * @Method({"GET"})
+   *                                                        defaults={"_format": "json"}, methods={"GET"})
    */
   public function getMediaFilesForPackageAndCategory($package, $category)
   {
@@ -217,8 +212,7 @@ class MediaPackageController extends Controller
 
   /**
    * @Route("/api/media/file/{id}/json", name="api_media_lib_file", requirements={"id":"\d+"}, defaults={"id" = 0,
-   *                                     "_format": "json"})
-   * @Method({"GET"})
+   *                                     "_format": "json"}, methods={"GET"})
    */
   public function getSingleMediaFile($id)
   {

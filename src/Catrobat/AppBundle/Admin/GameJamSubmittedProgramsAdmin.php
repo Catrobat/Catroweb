@@ -1,11 +1,11 @@
 <?php
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class GameJamSubmittedProgramsAdmin extends Admin
+class GameJamSubmittedProgramsAdmin extends AbstractAdmin
 {
     protected $parentAssociationMapping = 'gamejam';
     

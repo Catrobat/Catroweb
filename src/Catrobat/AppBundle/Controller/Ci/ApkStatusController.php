@@ -4,8 +4,7 @@ namespace Catrobat\AppBundle\Controller\Ci;
 
 use Catrobat\AppBundle\Controller\Web\DefaultController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,8 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class ApkStatusController extends Controller
 {
   /**
-   * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"}, requirements={"id": "\d+"})
-   * @Method({"GET"})
+   * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"}, requirements={"id": "\d+"}, methods={"GET"})
    */
   public function getApkStatusAction(Request $request, Program $program)
   {

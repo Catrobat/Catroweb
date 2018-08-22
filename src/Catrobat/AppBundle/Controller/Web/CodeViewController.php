@@ -3,13 +3,12 @@
 namespace Catrobat\AppBundle\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CodeViewController extends Controller
 {
-  /**
-   * @Method({"GET"})
+  /**  ToDo?? no route?
+   * , methods={"GET"}
    */
   public function viewCodeAction($id)
   {

@@ -2,13 +2,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ProgramDownloadStatisticsAdmin extends Admin
+class ProgramDownloadStatisticsAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_catrobat_adminbundle_programdownloadstatisticsadmin';
     protected $baseRoutePattern = 'download_stats';

@@ -2,14 +2,14 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 
-class GoogleCloudMessagingAdmin extends Admin
+class GoogleCloudMessagingAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_gcm';
     protected $baseRoutePattern = 'gcm';

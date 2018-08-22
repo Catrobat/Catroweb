@@ -4,15 +4,13 @@ namespace Catrobat\AppBundle\Controller\Web;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TutorialController extends Controller
 {
     /**
-   * @Route("/help", name="catrobat_web_help")
-   * @Method({"GET"})
+   * @Route("/help", name="catrobat_web_help", methods={"GET"})
    */
   public function helpAction()
   {
@@ -20,9 +18,8 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page" = 1}, requirements={"page":"\d+"})
-   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1}, requirements={"page":"\d+"})
-   * @Method({"GET"})
+   * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page" = 1}, requirements={"page":"\d+"}, methods={"GET"})
+   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1}, requirements={"page":"\d+"}, methods={"GET"})
    */
   public function stepByStepAction($page)
   {
@@ -54,8 +51,7 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page" = -1}, requirements={"page":"\d+"})
-   * @Method({"GET"})
+   * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page" = -1}, requirements={"page":"\d+"}, methods={"GET"})
    */
   public function tutorialcardsAction($page)
   {
@@ -81,8 +77,7 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/starter-programs", name="catrobat_web_starter")
-   * @Method({"GET"})
+   * @Route("/starter-programs", name="catrobat_web_starter", methods={"GET"})
    */
   public function starterProgramsAction()
   {
@@ -101,8 +96,7 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", requirements={"id":"\d+"})
-   * @Method({"GET"})
+   * @Route("/category-programs/{id}", name="catrobat_web_category_programs", requirements={"id":"\d+"}, methods={"GET"})
    */
   public function categoryProgramsAction(Request $request, $id)
   {
@@ -126,8 +120,7 @@ class TutorialController extends Controller
   }
 
   /**
-   * @Route("/pocket-game-jam", name="catrobat_web_game_jam")
-   * @Method({"GET"})
+   * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
    */
   public function gameJamAction()
   {

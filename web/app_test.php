@@ -16,8 +16,6 @@ $loader->register(true);
 //require_once __DIR__.'/../app/AppCache.php';
 
 $kernel = new AppKernel('test', false);
-$kernel->loadClassCache();
-//$kernel = new AppCache($kernel);
 Request::enableHttpMethodParameterOverride();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);

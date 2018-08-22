@@ -9,8 +9,7 @@ use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Services\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\AppBundle\StatusCode;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Exceptions\Upload\MissingChecksumException;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidChecksumException;
 use Catrobat\AppBundle\Exceptions\Upload\MissingPostDataException;
@@ -19,9 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Catrobat\AppBundle\Entity\GameJamRepository;
 use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 
-/**
- * @Route(service="controller.upload")
- */
+
 class UploadController
 {
   private $usermanager;
@@ -36,7 +33,9 @@ class UploadController
 
   private $translator;
 
-  public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager, GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator, TranslatorInterface $translator)
+  public function __construct(UserManager $usermanager, TokenStorage $tokenstorage, ProgramManager $programmanager,
+                              GameJamRepository $gamejamrepository, TokenGenerator $tokengenerator,
+                              TranslatorInterface $translator)
   {
     $this->usermanager = $usermanager;
     $this->tokenstorage = $tokenstorage;
@@ -47,8 +46,7 @@ class UploadController
   }
 
   /**
-   * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"})
-   * @Method({"POST"})
+   * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"}, methods={"POST"})
    */
   public function uploadAction(Request $request)
   {
@@ -56,8 +54,7 @@ class UploadController
   }
 
   /**
-   * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"})
-   * @Method({"POST"})
+   * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"}, methods={"POST"})
    */
   public function submitAction(Request $request)
   {

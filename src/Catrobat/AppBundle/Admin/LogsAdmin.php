@@ -1,10 +1,10 @@
 <?php
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class LogsAdmin extends Admin
+class LogsAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'logs';
     protected $baseRouteName = 'logs';

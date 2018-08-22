@@ -19,13 +19,14 @@ class UploadExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         if ($event->getException() instanceof InvalidCatrobatFileException) {
+            $event->allowCustomResponseCode();
             $event->setResponse(JsonResponse::create(array(
                 "statusCode" => $event->getException()
                     ->getStatusCode(),
                 "answer" => $this->translator->trans($event->getException()
                     ->getMessage(), array(), "catroweb"),
                 "preHeaderMessages" => ""
-            ), 200, array(
+            ), 200,  array(
                 'X-Status-Code' => 200
             )));
         }

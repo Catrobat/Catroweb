@@ -2,14 +2,14 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
 use Sonata\CoreBundle\Model\Metadata;
 
-class MediaPackageFileAdmin extends Admin
+class MediaPackageFileAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'adminmedia_package_file';
     protected $baseRoutePattern = 'media_package_file';

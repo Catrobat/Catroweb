@@ -13,11 +13,14 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
             //Begin Sonata--Admin
 
             // Sonata --
@@ -35,13 +38,15 @@ class AppKernel extends Kernel
 
             new FR3D\LdapBundle\FR3DLdapBundle(),
             //End Sonata--Admin,
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+
             new Liip\ThemeBundle\LiipThemeBundle(),
             new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
             new Catrobat\AppBundle\AppBundle(),
             new EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundle(),
 
-            new FOS\RestBundle\FOSRestBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

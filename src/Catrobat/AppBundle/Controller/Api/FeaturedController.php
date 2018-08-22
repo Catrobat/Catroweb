@@ -4,8 +4,7 @@ namespace Catrobat\AppBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
@@ -14,16 +13,14 @@ class FeaturedController extends Controller
 {
 
   /**
-   * @Route("/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function getFeaturedProgramsAction(Request $request) {
     return $this->getFeaturedPrograms($request, false);
   }
 
   /**
-   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function getFeaturedIOSProgramsAction(Request $request) {
     return $this->getFeaturedPrograms($request, true);

@@ -2,12 +2,12 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class NolbExampleAdmin extends Admin
+class NolbExampleAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'adminnolb_example_program';
     protected $baseRoutePattern = 'nolb_example_program';

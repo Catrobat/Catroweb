@@ -4,8 +4,7 @@ namespace Catrobat\AppBundle\Controller\Api;
 use Catrobat\AppBundle\Entity\NolbExampleProgram;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\NolbExampleRepository;
 
@@ -13,8 +12,7 @@ class NolbExampleController extends Controller
 {
 
     /**
-     * @Route("/api/nolb/example.json", name="api_nolb_examples")
-     * @Method({"GET"})
+     * @Route("/api/nolb/example.json", name="api_nolb_examples", methods={"GET"})
      */
     public function getNolbExampleProgramsAction(Request $request) {
         /* @var $repository NolbExampleRepository

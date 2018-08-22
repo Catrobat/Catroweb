@@ -5,8 +5,7 @@ namespace Catrobat\AppBundle\Controller\Api;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 
@@ -14,8 +13,7 @@ class SearchController extends Controller
 {
 
   /**
-   * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"}, methods={"GET"})
    */
   public function searchProgramsAction(Request $request)
   {
@@ -43,8 +41,7 @@ class SearchController extends Controller
   }
 
   /**
-   * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag", defaults={"_format": "json"}, methods={"GET"})
    */
   public function tagSearchProgramsAction(Request $request)
   {
@@ -60,8 +57,7 @@ class SearchController extends Controller
   }
 
   /**
-   * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension", defaults={"_format": "json"}, methods={"GET"})
    */
   public function extensionSearchProgramsAction(Request $request)
   {

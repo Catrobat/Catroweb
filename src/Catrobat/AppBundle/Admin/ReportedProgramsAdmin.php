@@ -2,13 +2,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\Program; use Sonata\AdminBundle\Route\RouteCollection;
 
-class ReportedProgramsAdmin extends Admin
+class ReportedProgramsAdmin extends AbstractAdmin
 {
     public function createQuery($context = 'list')
     {

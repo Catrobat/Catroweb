@@ -4,10 +4,10 @@ namespace Catrobat\AppBundle\Admin\Blocks;
 use Symfony\Component\HttpFoundation\Response;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\BaseBlockService;
+use Sonata\BlockBundle\Block\AbstractBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class StatisticBlockService extends  BaseBlockService
+class StatisticBlockService extends AbstractBlockService
 {
 
     private $extraced_path;

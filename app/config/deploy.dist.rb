@@ -15,7 +15,6 @@ set :use_sudo,    false
 set :use_composer, true
 set :symfony_env_prod, "prod"
 set :model_manager, "doctrine"
-set :dump_assetic_assets, true
 
 # files which are not in the git repo. When you add one, upload it yourself via ftp first
 set :shared_files,      ["app/config/parameters.yml"]

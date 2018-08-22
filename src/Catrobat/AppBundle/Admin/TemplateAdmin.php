@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -10,7 +10,7 @@ use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Model\Metadata;
 
-class TemplateAdmin extends Admin
+class TemplateAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_catrobat_adminbundle_templateadmin';
     protected $baseRoutePattern = 'template';

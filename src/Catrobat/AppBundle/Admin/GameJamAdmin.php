@@ -2,14 +2,14 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class GameJamAdmin extends Admin
+class GameJamAdmin extends AbstractAdmin
 {
     public function getNewInstance()
     {
@@ -35,7 +35,7 @@ class GameJamAdmin extends Admin
                 ',
             ))
             ->add('hashtag')
-            ->add('flavor', 'choice', array('choices' => $flavor, 'choices_as_values' => true))
+            ->add('flavor', 'choice', array('choices' => $flavor))
             ->add('start')
             ->add('end')
             ->add('sample_programs',null,array('class' => 'Catrobat\AppBundle\Entity\Program'),array('admin_code' => 'catrowebadmin.block.programs.all'))

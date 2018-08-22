@@ -7,16 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\AppBundle\StatusCode;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 
 class ReportController extends Controller
 {
     /**
-     * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program", defaults={"_format": "json"})
-     * @Method({"POST","GET"})
+     * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program", defaults={"_format": "json"}, methods={"POST", "GET"})
      */
     public function reportProgramAction(Request $request) {
         /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */

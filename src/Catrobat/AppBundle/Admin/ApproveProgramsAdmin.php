@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\Admin;
 
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Services\ExtractedFileRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ApproveProgramsAdmin extends Admin
+class ApproveProgramsAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_approve_programs';
     protected $baseRoutePattern = 'approve';

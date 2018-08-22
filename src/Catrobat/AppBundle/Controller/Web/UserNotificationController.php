@@ -7,15 +7,13 @@ use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserNotificationController extends Controller
 {
   /**
-   * @Route("/user/notifications", name="user_notifications")
-   * @Method({"GET"})
+   * @Route("/user/notifications", name="user_notifications", methods={"GET"})
    */
   public function userNotificationsAction()
   {
@@ -62,8 +60,7 @@ class UserNotificationController extends Controller
   }
 
   /**
-   * @Route("/user/notifications/count", name="user_notifications_count")
-   * @Method({"GET"})
+   * @Route("/user/notifications/count", name="user_notifications_count", methods={"GET"})
    */
   public function userNotificationsCountAction()
   {
@@ -83,8 +80,7 @@ class UserNotificationController extends Controller
   }
 
   /**
-   * @Route("/user/notifications/seen", name="user_notifications_seen")
-   * @Method({"GET"})
+   * @Route("/user/notifications/seen", name="user_notifications_seen", methods={"GET"})
    */
   public function userNotificationsSeenAction()
   {
@@ -104,8 +100,7 @@ class UserNotificationController extends Controller
 
   /**
    * @Route("/user/notification/ancestor/{ancestor_id}/descendant/{descendant_id}", name="see_user_notification",
-   *        requirements={"ancestor_id":"\d+", "descendant_id":"\d+"})
-   * @Method({"GET"})
+   *        requirements={"ancestor_id":"\d+", "descendant_id":"\d+"}, methods={"GET"})
    */
   public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id)
   {
@@ -143,8 +138,7 @@ class UserNotificationController extends Controller
 
   /**
    * @Route("/user/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
-   *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null})
-   * @Method({"GET"})
+   *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
    */
   public function markCatroNotificationAsRead($notification_id)
   {

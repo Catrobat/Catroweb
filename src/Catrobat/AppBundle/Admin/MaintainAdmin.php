@@ -2,10 +2,10 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class MaintainAdmin extends Admin
+class MaintainAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'maintain';
     protected $baseRouteName = 'maintain';

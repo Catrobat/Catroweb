@@ -8,16 +8,14 @@ use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserComment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CommentsController extends Controller
 {
   /**
-   * @Route("/report", name="report")
-   * @Method({"GET"})
+   * @Route("/report", name="report", methods={"GET"})
    */
   public function reportCommentAction(Request $request)
   {
@@ -44,8 +42,7 @@ class CommentsController extends Controller
   }
 
   /**
-   * @Route("/delete", name="delete")
-   * @Method({"GET"})
+   * @Route("/delete", name="delete", methods={"GET"})
    */
   public function deleteCommentAction(Request $request)
   {
@@ -75,8 +72,7 @@ class CommentsController extends Controller
   }
 
   /**
-   * @Route("/comment", name="comment")
-   * @Method({"POST"})
+   * @Route("/comment", name="comment", methods={"POST"})
    */
   public function postCommentAction(Request $request)
   {

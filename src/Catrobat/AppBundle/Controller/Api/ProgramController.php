@@ -7,15 +7,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\AppBundle\Services\ScreenshotRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 
 class ProgramController extends Controller
 {
   /**
-   * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"})
-   * @Method({"GET"})
+   * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"}, methods={"GET"})
    */
   public function showProgramAction(Request $request)
   {

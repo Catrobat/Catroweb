@@ -3,8 +3,7 @@
 namespace Catrobat\AppBundle\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Intl\Intl;
@@ -15,8 +14,7 @@ class TagExtensionController extends Controller
 {
 
     /**
-     * @Route("/tag/search/{q}", name="tag_search", requirements={"q":"\d+"})
-     * @Method({"GET"})
+     * @Route("/tag/search/{q}", name="tag_search", requirements={"q":"\d+"}, methods={"GET"})
      */
     public function tagSearchAction($q)
     {
@@ -24,8 +22,7 @@ class TagExtensionController extends Controller
     }
 
     /**
-     * @Route("/tag/search/", name="empty_tag_search")
-     * @Method({"GET"})
+     * @Route("/tag/search/", name="empty_tag_search", methods={"GET"})
      */
     public function tagSearchNothingAction()
     {
@@ -33,8 +30,7 @@ class TagExtensionController extends Controller
     }
 
     /**
-     * @Route("/extension/search/{q}", name="extension_search", requirements={"q":".+"})
-     * @Method({"GET"})
+     * @Route("/extension/search/{q}", name="extension_search", requirements={"q":".+"}, methods={"GET"})
      */
     public function extensionSearchAction($q)
     {
@@ -42,8 +38,7 @@ class TagExtensionController extends Controller
     }
 
     /**
-     * @Route("/extension/search/", name="empty_extension_search")
-     * @Method({"GET"})
+     * @Route("/extension/search/", name="empty_extension_search", methods={"GET"})
      */
     public function extensionSearchNothingAction()
     {

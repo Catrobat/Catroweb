@@ -2,14 +2,14 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Catrobat\AppBundle\Entity\Program;
 
-class ApkListAdmin extends Admin
+class ApkListAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_catrobat_apk_list';
     protected $baseRoutePattern = 'apk_list';

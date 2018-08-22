@@ -2,12 +2,12 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CategoriesAdmin extends Admin
+class CategoriesAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'admin_catrobat_adminbundle_categoriesadmin';
     protected $baseRoutePattern = 'categories';

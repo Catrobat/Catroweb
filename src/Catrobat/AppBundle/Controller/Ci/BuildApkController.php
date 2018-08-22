@@ -3,8 +3,7 @@
 namespace Catrobat\AppBundle\Controller\Ci;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,8 +14,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class BuildApkController extends Controller
 {
     /**
-     * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"}, requirements={"id": "\d+"})
-     * @Method({"GET"})
+     * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"}, requirements={"id": "\d+"}, methods={"GET"})
      */
     public function createApkAction(Request $request, Program $program) {
         if (!$program->isVisible()) {
@@ -40,8 +38,7 @@ class BuildApkController extends Controller
     }
 
     /**
-     * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"}, requirements={"id": "\d+"})
-     * @Method({"GET", "POST"})
+     * @Route("/ci/upload/{id}", name="ci_upload_apk", defaults={"_format": "json"}, requirements={"id": "\d+"}, methods={"GET", "POST"})
      */
     public function uploadApkAction(Request $request, Program $program) {
         /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
@@ -50,7 +47,7 @@ class BuildApkController extends Controller
         if ($request->query->get('token') !== $config['uploadtoken']) {
             throw new AccessDeniedException();
         } elseif ($request->files->count() != 1) {
-            throw new BadRequestHttpException('Wrong number of files: ' + $request->files->count());
+            throw new BadRequestHttpException('Wrong number of files: ' . $request->files->count());
         } else {
             $file = array_values($request->files->all())[0];
             $apkrepository = $this->get('apkrepository');
@@ -63,8 +60,7 @@ class BuildApkController extends Controller
     }
 
     /**
-     * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, requirements={"id": "\d+"})
-     * @Method({"GET"})
+     * @Route("/ci/failed/{id}", name="ci_failed_apk", defaults={"_format": "json"}, requirements={"id": "\d+"}, methods={"GET"})
      */
     public function failedApkAction(Request $request, Program $program) {
         $config = $this->container->getParameter('jenkins');

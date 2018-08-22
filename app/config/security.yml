@@ -58,36 +58,40 @@ security:
             
     firewalls:
         api_checktoken:
+            provider: chain_provider
             pattern: ^.*/api/checkToken/check.json
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
 
         api_check_notifications:
+            provider: chain_provider
             pattern: ^.*/api/notifications/get.json
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
 
         api_upload:
+            provider: chain_provider
             pattern: ^.*/api/upload/upload.json
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
         api_submit:
+            provider: chain_provider
             pattern: ^.*/api/gamejam/submit.json
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator
             
         debug:
+            provider: chain_provider
             pattern: ^/debug
             security: false
 
         main:
             pattern:     ^/
-#            # Using the FOSUserBundle provider to find the users...
-#            provider: chain_provider
+            provider: chain_provider
             fr3d_ldap:  ~
             form_login:
                 login_path: /login
@@ -105,10 +109,12 @@ security:
                 domain: ~ # Defaults to the current domain from $_SERVER
                 secure: false
                 httponly: false
+            logout_on_user_change: true # remove when symfony 4
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
+            provider: chain_provider
             fr3d_ldap:  ~
             security: false
             form_login:

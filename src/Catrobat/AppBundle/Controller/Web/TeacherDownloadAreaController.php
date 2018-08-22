@@ -6,8 +6,7 @@ use Catrobat\AppBundle\Entity\TeacherTemplate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
@@ -20,8 +19,7 @@ class TeacherDownloadAreaController extends Controller
 {
     const PASSWORD = "1234";
     /**
-     * @Route("/teachersLogin", name="teachersLogin")
-     * @Method({"GET"})
+     * @Route("/teachersLogin", name="teachersLogin", methods={"GET"})
      */
     public function teachersLoginAction(Request $request)
     {
@@ -32,8 +30,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachersLogout", name="teachersLogout")
-     * @Method({"GET"})
+     * @Route("/teachersLogout", name="teachersLogout", methods={"GET"})
      */
     public function teachersLogoutAction(Request $request)
     {
@@ -43,8 +40,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachersAuth", name="teachersAuth")
-     * @Method({"POST"})
+     * @Route("/teachersAuth", name="teachersAuth", methods={"POST"})
      */
     public function teachersLoginPostAction(Request $request)
     {
@@ -57,8 +53,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachers", name="teachers")
-     * @Method({"GET"})
+     * @Route("/teachers", name="teachers", methods={"GET"})
      */
     public function teachersInternalSectionAction(Request $request)
     {
@@ -75,8 +70,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachersDownload/{program}", name="teachersDownload")
-     * @Method({"GET"})
+     * @Route("/teachersDownload/{program}", name="teachersDownload", methods={"GET"})
      */
     public function teachersDownloadAction(Request $request, $program)
     {
@@ -109,8 +103,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachersTemplateUpload", name="teachersTemplateUpload")
-     * @Method({"GET"})
+     * @Route("/teachersTemplateUpload", name="teachersTemplateUpload", methods={"GET"})
      */
     public function teachersUploadAction(Request $request)
     {
@@ -123,8 +116,7 @@ class TeacherDownloadAreaController extends Controller
     }
 
     /**
-     * @Route("/teachersTemplatePostUpload", name="teachersTemplatePostUpload")
-     * @Method({"POST"})
+     * @Route("/teachersTemplatePostUpload", name="teachersTemplatePostUpload", methods={"POST"})
      */
     public function teachersUploadPostAction(Request $request)
     {

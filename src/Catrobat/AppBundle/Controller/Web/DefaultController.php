@@ -4,8 +4,7 @@ namespace Catrobat\AppBundle\Controller\Web;
 
 use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,8 +17,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class DefaultController extends Controller
 {
   /**
-   * @Route("/", name="index")
-   * @Method({"GET"})
+   * @Route("/", name="index", methods={"GET"})
    */
   public function indexAction(Request $request)
   {
@@ -74,8 +72,7 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/termsOfUse", name="termsOfUse")
-   * @Method({"GET"})
+   * @Route("/termsOfUse", name="termsOfUse", methods={"GET"})
    */
   public function termsOfUseAction()
   {
@@ -83,8 +80,7 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/licenseToPlay", name="licenseToPlay")
-   * @Method({"GET"})
+   * @Route("/licenseToPlay", name="licenseToPlay", methods={"GET"})
    */
   public function licenseToPlayAction()
   {
@@ -92,9 +88,8 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/pocket-library/{package_name}", name="pocket_library")
-   * @Route("/media-library/{package_name}", name="media_package")
-   * @Method({"GET"})
+   * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
+   * @Route("/media-library/{package_name}", name="media_package", methods={"GET"})
    */
   public function MediaPackageAction(Request $request, $package_name, $flavor = 'pocketcode')
   {
@@ -165,8 +160,7 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/bootstrap", name="bootstrap_template")
-   * @Method({"GET"})
+   * @Route("/bootstrap", name="bootstrap_template", methods={"GET"})
    */
   public function bootstrapTemplate(Request $request)
   {
@@ -175,8 +169,7 @@ class DefaultController extends Controller
 
 
   /**
-   * @Route("/click-statistic", name="click_stats")
-   * @Method({"POST"})
+   * @Route("/click-statistic", name="click_stats", methods={"POST"})
    */
   public function makeClickStatisticAction(Request $request)
   {
@@ -227,8 +220,7 @@ class DefaultController extends Controller
 
 
   /**
-   * @Route("/homepage-click-statistic", name="homepage_click_stats")
-   * @Method({"POST"})
+   * @Route("/homepage-click-statistic", name="homepage_click_stats", methods={"POST"})
    */
   public function makeNonRecommendedProgramClickStatisticAction(Request $request)
   {

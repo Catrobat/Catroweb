@@ -60,29 +60,3 @@ catrobat_web_hour_of_code:
         _controller: FrameworkBundle:Redirect:urlRedirect
         path: "https://share.catrob.at/pocketcode/help"
 
-
-#sonata_user_resetting:
-#    resource: "./sonata/sonata_resetting_1.xml"
-#    prefix: /resetting
-#    prefix: /catroid/resetting #app-hack
-
-#sonata_user_profile:
-#    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
-#    prefix: /profile
-
-#sonata_user_register:
-#    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
-#    prefix: /middleware_register
-
-#sonata_user_change_password:
-#    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-#    prefix: /profile
-
-#sonata_user_profile_show:
-#    path: /myprofile
-#    defaults: { _controller: "AppBundle:Web/Profile:profile", "id": 0 }
-#
-#fos_user_profile_show:
-#    path: /myprofile
-#    defaults: { _controller: "AppBundle:Web/Profile:profile", "id": 0 }
-

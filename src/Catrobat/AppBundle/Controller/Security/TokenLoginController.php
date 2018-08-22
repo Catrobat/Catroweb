@@ -1,14 +1,13 @@
 <?php
 namespace Catrobat\AppBundle\Controller\Security;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Assetic\Exception\Exception;
+//use Assetic\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
@@ -16,8 +15,7 @@ class TokenLoginController extends Controller
 {
 
     /**
-     * @Route("/tokenlogin", name="token_login")
-     * @Method({"GET"})
+     * @Route("/tokenlogin", name="token_login", methods={"GET"})
      */
     public function tokenloginAction(Request $request) {
         $username = $request->query->get('username');

@@ -1,12 +1,12 @@
 <?php
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
-class LimitedUsersAdmin extends Admin
+class LimitedUsersAdmin extends AbstractAdmin
 {
 
     protected $baseRouteName = 'admin_limited_users';

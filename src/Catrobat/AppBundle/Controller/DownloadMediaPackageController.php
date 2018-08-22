@@ -7,16 +7,14 @@ use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Catrobat\AppBundle\Services\ProgramFileRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class DownloadMediaPackageController extends Controller
 {
     /**
-     * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"})
-     * @Method({"GET"})
+     * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"}, methods={"GET"})
      */
     public function downloadMediaPackageAction(Request $request, $id) {
         /**

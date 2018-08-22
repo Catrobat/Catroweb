@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -11,7 +11,7 @@ use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class FeaturedProgramAdmin extends Admin
+class FeaturedProgramAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'adminfeatured_program';
     protected $baseRoutePattern = 'featured_program';

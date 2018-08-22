@@ -17,12 +17,12 @@ monolog:
     handlers:
         upload:
             type: stream
-            path: %kernel.logs_dir%/upload.log
+            path: '%kernel.logs_dir%/upload.log'
             level: error
             channels: [upload]
         main:
             type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
+            path:  '%kernel.logs_dir%/%kernel.environment%.log'
             level: info
         firephp:
             type:  firephp
@@ -32,14 +32,14 @@ monolog:
             level: info
         download_stats:
             type:  rotating_file
-            path:  %kernel.logs_dir%/download_stats/download_stats.log
+            path:  '%kernel.logs_dir%/download_stats/download_stats.log'
             level: info
             max_files: 20
             channels: [download_stats]
 
-assetic:
-    use_controller: true
-    debug:          true
+#assetic:
+#    use_controller: true
+#    debug:          true
     
 #bc_bootstrap:
 #    less_filter: lessphp

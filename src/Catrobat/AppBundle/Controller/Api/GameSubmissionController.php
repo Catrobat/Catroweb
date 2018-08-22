@@ -1,8 +1,7 @@
 <?php
 namespace Catrobat\AppBundle\Controller\Api;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
@@ -19,8 +18,7 @@ class GameSubmissionController extends Controller
 {
 
     /**
-     * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission")
-     * @Method({"GET"})
+     * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission", methods={"GET"})
      */
     public function formSubmittedAction(Request $request, Program $program) {
         if ($program->getGamejam() != null) {
@@ -41,8 +39,7 @@ class GameSubmissionController extends Controller
     }
 
     /**
-     * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs")
-     * @Method({"GET"})
+     * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs", methods={"GET"})
      */
     public function getSampleProgramsForLatestGamejam(Request $request) {
         $flavor = $request->get('flavor');
@@ -64,8 +61,7 @@ class GameSubmissionController extends Controller
     }
 
     /**
-     * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions")
-     * @Method({"GET"})
+     * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions", methods={"GET"})
      */
     public function getSubmissionsForLatestGamejam(Request $request) {
         $limit = intval($request->query->get('limit', 20));
@@ -100,8 +96,7 @@ class GameSubmissionController extends Controller
     }
 
     /**
-     * @Route("/gamejam/submit/{id}", name="gamejam_web_submit")
-     * @Method({"GET"})
+     * @Route("/gamejam/submit/{id}", name="gamejam_web_submit", methods={"GET"})
      */
     public function webSubmitAction(Request $request, Program $program) {
         if ($this->getUser() == null) {

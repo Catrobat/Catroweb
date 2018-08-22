@@ -39,6 +39,33 @@ parameters:
 
 services:
 
+#    # default configuration for services in *this* file
+#    _defaults:
+#        autowire: true      # Automatically injects dependencies in your services.
+#        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+#        public: false       # Allows optimizing the container by removing unused services; this also means
+#                            # fetching services directly from the container via $container->get() won't work.
+#                            # The best practice is to be explicit about your dependencies anyway.
+#
+#    # toDo change for symfony 4
+#
+#    # makes classes in src/AppBundle available to be used as services
+#    # this creates a service per class whose id is the fully-qualified class name
+#    AppBundle\:
+#        resource: '../../src/Catrobat/AppBundle/*'
+#        # you can exclude directories or files
+#        # but if a service is unused, it's removed anyway
+#        exclude: '../../src/CatrobatAppBundle/{Entity,Repository}'
+#
+#    # controllers are imported separately to make sure they're public
+#    # and have a tag that allows actions to type-hint services
+#    AppBundle\Controller\:
+#        resource: '../../src/AppBundle/Controller'
+#        tags: ['controller.service_arguments']
+#
+##    end todo
+
+
     apikey_authenticator:
         class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
         arguments: ["@translator"]
@@ -138,12 +165,14 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:GameJam"
+        public: true
 
     featuredrepository:
         class: Catrobat\AppBundle\Entity\FeaturedRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - "AppBundle:FeaturedProgram"
+        public: true
 
     filerepository:
         class: Catrobat\AppBundle\Services\ProgramFileRepository
@@ -170,6 +199,7 @@ services:
     featuredimagerepository:
         class: Catrobat\AppBundle\Services\FeaturedImageRepository
         arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
+        public: true
 
     mediapackagefilerepository:
         class: Catrobat\AppBundle\Services\MediaPackageFileRepository
@@ -298,6 +328,7 @@ services:
     usermanager:
         class: Catrobat\AppBundle\Entity\UserManager
         arguments: ["@fos_user.util.password_updater", "@fos_user.util.canonical_fields_updater", "@fos_user.object_manager","%fos_user.model.user.class%"]
+        public: true
 
     ldap.user_hydrator:
         class: Catrobat\AppBundle\Ldap\UserHydrator
@@ -307,9 +338,9 @@ services:
         arguments:
             - "@fr3d_ldap.ldap_driver"
             - "@fr3d_ldap.user_hydrator"
-            - %fr3d_ldap.ldap_manager.parameters%
-            - %ldap_role_mappings%
-            - %ldap_group_filter%
+            - '%fr3d_ldap.ldap_manager.parameters%'
+            - '%ldap_role_mappings%'
+            - '%ldap_group_filter%'
             - "@tokengenerator"
             - "@logger"
 
@@ -361,6 +392,7 @@ services:
 
     controller.upload:
         class: Catrobat\AppBundle\Controller\Api\UploadController
+        autowire: false
         arguments:
           - "@usermanager"
           - "@security.token_storage"
@@ -368,6 +400,9 @@ services:
           - "@gamejamrepository"
           - "@tokengenerator"
           - "@translator"
+
+    # alias
+    Catrobat\AppBundle\Controller\Api\UploadController: '@controller.upload'
 
 # =========================== Social ===========================
 
