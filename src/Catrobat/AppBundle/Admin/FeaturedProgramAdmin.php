@@ -65,7 +65,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('Featured Image', 'string', array('template' => ':Admin:featured_image.html.twig'))
+            ->add('Featured Image', 'string', array('template' => 'Admin/featured_image.html.twig'))
             ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'route' => array('name' => 'show'), 'admin_code' => 'catrowebadmin.block.programs.all'))
             ->add('flavor', 'string')
             ->add('priority', 'integer')

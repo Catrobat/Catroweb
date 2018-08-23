@@ -83,7 +83,7 @@ class CatroNotification
    */
   private $message;
 
-  private $twig_template = ":components/notifications:catro_notification.html.twig";
+  private $twig_template = "components/notifications/catro_notification.html.twig";
 
   /**
    * CatroNotification constructor.

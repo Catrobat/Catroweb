@@ -37,7 +37,7 @@ class CommentNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = ":components/notifications:comment_notification.html.twig";
+  private $twig_template = "components/notifications/comment_notification.html.twig";
 
   /**
    * CommentNotification constructor.
@@ -54,7 +54,7 @@ class CommentNotification extends CatroNotification
     $this->comment = $comment;
     /* if you didn't forget to set the member variable to default above
        you don't need the following line */
-    $this->twig_template = ":components/notifications:comment_notification.html.twig";
+    $this->twig_template = "components/notifications/comment_notification.html.twig";
   }
 
   /**

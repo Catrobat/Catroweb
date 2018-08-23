@@ -59,7 +59,7 @@ class FeaturedUrlAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('Featured Image', 'string', array('template' => ':Admin:featured_image.html.twig'))
+            ->add('Featured Image', 'string', array('template' => 'Admin/featured_image.html.twig'))
             ->add('url', 'url')
             ->add('flavor', 'string', array('editable' => true))
             ->add('priority', 'integer', array('editable' => true))

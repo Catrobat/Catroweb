@@ -203,7 +203,7 @@ class MaintainController extends Controller
         $mediaPackageSize = $this->get_dir_size($this->container->getParameter('catrobat.mediapackage.dir'));
         $backupSize = $programsSize + $screenshotSize + $featuredImageSize + $mediaPackageSize;
 
-        return $this->render(':Admin:maintain.html.twig', array(
+        return $this->render('Admin/maintain.html.twig', array(
             'RemoveableObjects' => $removeableObjects,
             'RemoveableBackupObjects' => $this->getBackupFileObjects(),
             'wholeSpace' => $this->getSymbolByQuantity($usedSpace + $freeSpace),

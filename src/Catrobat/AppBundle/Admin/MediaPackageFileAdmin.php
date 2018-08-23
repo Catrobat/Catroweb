@@ -47,7 +47,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id')
             ->add("name")
-            ->add('file', 'string', array('template' => ':Admin:mediapackage_file.html.twig'))
+            ->add('file', 'string', array('template' => 'Admin/mediapackage_file.html.twig'))
             ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory'))
             ->add('author', null, array('editable' => true))
             ->add('flavor', null, array('editable' => true))

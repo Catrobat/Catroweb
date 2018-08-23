@@ -40,7 +40,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
           /*
            * The default option is to just display the value as text (for boolean this will be 1 or 0)
            */
-          ->add('Thumbnail', null, array('template' => ':Admin:program_thumbnail_image.html.twig'))
+          ->add('Thumbnail', null, array('template' => 'Admin/program_thumbnail_image.html.twig'))
           ->add('id')
           ->add('Name')
           ->add('Description')
@@ -48,11 +48,11 @@ class ApproveProgramsAdmin extends AbstractAdmin
           ->add('user', 'entity', array('class' => 'Catrobat\AppBundle\Entity\User'))
           ->add('upload_ip')
           ->add('visible', 'boolean')
-          ->add('Images', null, array('template' => ':Admin:program_containing_image.html.twig'))
-          ->add('Sounds', null, array('template' => ':Admin:program_containing_sound.html.twig'))
-          ->add('Strings', null, array('template' => ':Admin:program_containing_strings.html.twig'))
-          ->add('Objects', null, array('template' => ':Admin:program_containing_code_objects.html.twig'))
-          ->add('', null, array('template' => ':Admin:program_approve_action.html.twig'))
+          ->add('Images', null, array('template' => 'Admin/program_containing_image.html.twig'))
+          ->add('Sounds', null, array('template' => 'Admin/program_containing_sound.html.twig'))
+          ->add('Strings', null, array('template' => 'Admin/program_containing_strings.html.twig'))
+          ->add('Objects', null, array('template' => 'Admin/program_containing_code_objects.html.twig'))
+          ->add('', null, array('template' => 'Admin/program_approve_action.html.twig'))
       ;
     }
 

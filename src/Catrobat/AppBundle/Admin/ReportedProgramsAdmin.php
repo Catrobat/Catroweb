@@ -58,7 +58,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
         ->add('program', 'entity', array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all', 'editable' => false))
         ->add('program.visible', 'boolean', array('editable' => true))
         ->add('_action', 'actions', array('actions' => array(
-                'show' => array('template' => ':CRUD:list__action_show_reported_program_details.html.twig'),
+                'show' => array('template' => 'CRUD/list__action_show_reported_program_details.html.twig'),
                 'edit' => array(),
             )))
     ;

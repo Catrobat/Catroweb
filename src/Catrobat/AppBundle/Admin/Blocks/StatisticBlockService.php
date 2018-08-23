@@ -54,7 +54,7 @@ class StatisticBlockService extends AbstractBlockService
         $resolver->setDefaults(array(
             'url'      => false,
             'title'    => 'Server Information',
-            'template' => ':Admin:block_statistic.html.twig',
+            'template' => 'Admin/block_statistic.html.twig',
         ));
     }
 

@@ -26,12 +26,12 @@ class ProfileController extends Controller
         /**
          * @var $user User
          */
-        $twig = '::profile.html.twig';
+        $twig = 'profile.html.twig';
         $program_count = 0;
 
         if ($id == 0) {
             $user = $this->getUser();
-            $twig = '::myprofile.html.twig';
+            $twig = 'myprofile.html.twig';
         } else {
             $user = $this->get('usermanager')->find($id);
             $program_count = count($this->get('programmanager')->getUserPrograms($id));
@@ -70,7 +70,7 @@ class ProfileController extends Controller
         /**
          * @var $user User
          */
-        $twig = '::myprofileEdit.html.twig';
+        $twig = 'myprofileEdit.html.twig';
 
         $user = $this->getUser();
 
@@ -106,7 +106,7 @@ class ProfileController extends Controller
             return $this->redirectToRoute('fos_user_security_login');
         }
         $nolb_user = $user->getNolbUser();
-        $twig = '::emailEdit.html.twig';
+        $twig = 'emailEdit.html.twig';
         return $this->get('templating')->renderResponse($twig, array(
             'nolb_user' => $nolb_user,
         ));
@@ -121,7 +121,7 @@ class ProfileController extends Controller
             return $this->redirectToRoute('fos_user_security_login');
         }
         $nolb_user = $user->getNolbUser();
-        $twig = '::avatarEdit.html.twig';
+        $twig = 'avatarEdit.html.twig';
         return $this->get('templating')->renderResponse($twig, array(
             'nolb_user' => $nolb_user,
         ));
@@ -137,7 +137,7 @@ class ProfileController extends Controller
             return $this->redirectToRoute('fos_user_security_login');
         }
         $nolb_user = $user->getNolbUser();
-        $twig = '::passwordEdit.html.twig';
+        $twig = 'passwordEdit.html.twig';
         return $this->get('templating')->renderResponse($twig, array(
             'minPassLength' => self::MIN_PASSWORD_LENGTH,
             'maxPassLength' => self::MAX_PASSWORD_LENGTH,
@@ -155,7 +155,7 @@ class ProfileController extends Controller
             return $this->redirectToRoute('fos_user_security_login');
         }
         $nolb_user = $user->getNolbUser();
-        $twig = '::countryEdit.html.twig';
+        $twig = 'countryEdit.html.twig';
         return $this->get('templating')->renderResponse($twig, array(
             'nolb_user' => $nolb_user,
         ));

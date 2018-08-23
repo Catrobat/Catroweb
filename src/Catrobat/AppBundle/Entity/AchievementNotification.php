@@ -36,7 +36,7 @@ class AchievementNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = ":components/notifications:achievement_notification.html.twig";
+  private $twig_template = "components/notifications/achievement_notification.html.twig";
 
   /**
    * AchievementNotification constructor.
@@ -53,7 +53,7 @@ class AchievementNotification extends CatroNotification
     $this->image_path = $image_path;
     /* if you didn't forget to set the member variable to default above
        you don't need the following line */
-    $this->twig_template = ":components/notifications:achievement_notification.html.twig";
+    $this->twig_template = "components/notifications/achievement_notification.html.twig";
   }
 
   /**

@@ -66,7 +66,7 @@ class DefaultController extends Controller
       $featured[] = $info;
     }
 
-    return $this->get('templating')->renderResponse('::index.html.twig', [
+    return $this->get('templating')->renderResponse('index.html.twig', [
       'featured' => $featured,
     ]);
   }
@@ -76,7 +76,7 @@ class DefaultController extends Controller
    */
   public function termsOfUseAction()
   {
-    return $this->get('templating')->renderResponse('::termsOfUse.html.twig');
+    return $this->get('templating')->renderResponse('termsOfUse.html.twig');
   }
 
   /**
@@ -84,7 +84,7 @@ class DefaultController extends Controller
    */
   public function licenseToPlayAction()
   {
-    return $this->get('templating')->renderResponse('::licenseToPlay.html.twig');
+    return $this->get('templating')->renderResponse('licenseToPlay.html.twig');
   }
 
   /**
@@ -154,7 +154,7 @@ class DefaultController extends Controller
       return ($a['priority'] > $b['priority']) ? -1 : 1;
     });
 
-    return $this->get('templating')->renderResponse('::mediapackage.html.twig', [
+    return $this->get('templating')->renderResponse('mediapackage.html.twig', [
       'categories' => $categories,
     ]);
   }
@@ -164,7 +164,7 @@ class DefaultController extends Controller
    */
   public function bootstrapTemplate(Request $request)
   {
-    return $this->get('templating')->renderResponse('::bootstrap_template.html.twig');
+    return $this->get('templating')->renderResponse('bootstrap_template.html.twig');
   }
 
 

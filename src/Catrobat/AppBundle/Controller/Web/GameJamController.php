@@ -27,7 +27,7 @@ class GameJamController extends Controller
                 $jam = $this->configureSubmitYourOwn($gamejam_config, $gamejam);
             }
         }
-        return $this->get('templating')->renderResponse('::gamejam_submit_own.html.twig', array(
+        return $this->get('templating')->renderResponse('gamejam_submit_own.html.twig', array(
             'jam' => $jam
         ));
     }
@@ -44,7 +44,7 @@ class GameJamController extends Controller
         }
 
         if ($page == -1) {
-            return $this->get('templating')->renderResponse(':help:gamejamtutorialcards.html.twig', array('count' => $cards_num));
+            return $this->get('templating')->renderResponse('help/gamejamtutorialcards.html.twig', array('count' => $cards_num));
         }
 
         $blocks = array();
@@ -85,7 +85,7 @@ class GameJamController extends Controller
                 break;
         }
 
-        return $this->get('templating')->renderResponse(':help:gamejamtutorialcard.html.twig', array(
+        return $this->get('templating')->renderResponse('help/gamejamtutorialcard.html.twig', array(
             'page' => $page,
             'blocks' => $blocks,
         ));

@@ -79,7 +79,7 @@ class GameJamAdmin extends AbstractAdmin
             ->add('_action', 'actions', array('actions' => array(
                 'edit' => array(),
                 'delete' => array(),
-                'show_submissions' => array('template' => ':CRUD:list__action_show_submitted_programs.html.twig')
+                'show_submissions' => array('template' => 'CRUD/list__action_show_submitted_programs.html.twig')
             )))
         ;
     }

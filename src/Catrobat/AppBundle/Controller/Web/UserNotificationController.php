@@ -47,7 +47,7 @@ class UserNotificationController extends Controller
     $nr = $this->get("catro_notification_repository");
     $catro_user_notifications = $nr->findByUser($user);
 
-    $response = $this->get('templating')->renderResponse('::usernotifications.html.twig', [
+    $response = $this->get('templating')->renderResponse('usernotifications.html.twig', [
       'unseenRemixesGrouped'   => $unseen_remixes_grouped,
       'catroUserNotifications' => $catro_user_notifications,
     ]);

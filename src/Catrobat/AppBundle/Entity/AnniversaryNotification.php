@@ -17,7 +17,7 @@ class AnniversaryNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = ":components/notifications:anniversary_notification.html.twig";
+  private $twig_template = "components/notifications/anniversary_notification.html.twig";
 
   /**
    * AnniversaryNotification constructor.
@@ -33,7 +33,7 @@ class AnniversaryNotification extends CatroNotification
     $this->prize = $prize;
     /* if you didn't forget to set the member variable to default above
        you don't need the following line */
-    $this->twig_template = ":components/notifications:anniversary_notification.html.twig";
+    $this->twig_template = "components/notifications/anniversary_notification.html.twig";
   }
 
   /**

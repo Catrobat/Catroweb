@@ -56,7 +56,7 @@ class TemplateAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id')
             ->add('name')
-            ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
+            ->add('thumbnail', 'string', array('template' => 'Admin/program_thumbnail_image_list.html.twig'))
             ->add('active', 'boolean', array('editable' => true))
             ->add('_action', 'actions', array('actions' => array(
                 'edit' => array(),

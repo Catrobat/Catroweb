@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class GoogleCloudMessagingController extends CRUDController
 {
     public function listAction(Request $request = null) {
-        return $this->render(':Admin:gcm.html.twig');
+        return $this->render('Admin/gcm.html.twig');
     }
 
     public function sendAction(Request $request = null) {

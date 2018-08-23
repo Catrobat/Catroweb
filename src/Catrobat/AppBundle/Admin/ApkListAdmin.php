@@ -52,7 +52,7 @@ class ApkListAdmin extends AbstractAdmin
             ))
             ->add('name')
             ->add('apk_request_time')
-            ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
+            ->add('thumbnail', 'string', array('template' => 'Admin/program_thumbnail_image_list.html.twig'))
             ->add('apk_status', 'choice', array(
             'choices' => array(
                   Program::APK_NONE => 'none',
@@ -62,10 +62,10 @@ class ApkListAdmin extends AbstractAdmin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'Rebuild' => array(
-                        'template' => ':CRUD:list__action_rebuild_apk.html.twig',
+                        'template' => 'CRUD/list__action_rebuild_apk.html.twig',
                     ),
                     'Delete Apk' => array(
-                        'template' => ':CRUD:list__action_delete_apk.html.twig',
+                        'template' => 'CRUD/list__action_delete_apk.html.twig',
                     ),
                 ),
             ))

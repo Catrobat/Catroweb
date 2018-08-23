@@ -31,6 +31,6 @@ class CodeViewController extends Controller
       'path' => $web_path
     );
 
-    return $this->get('templating')->renderResponse('::codeview.html.twig', $code_view_twig_params);
+    return $this->get('templating')->renderResponse('codeview.html.twig', $code_view_twig_params);
   }
 }

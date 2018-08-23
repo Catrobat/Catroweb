@@ -26,7 +26,7 @@ class TeacherDownloadAreaController extends Controller
         if($this->isAuthenticatedAsTeacher()) {
             return $this->redirectToRoute('teachers');
         }
-        return $this->get('templating')->renderResponse(':teachers:teachersLogin.html.twig');
+        return $this->get('templating')->renderResponse('teachers/teachersLogin.html.twig');
     }
 
     /**
@@ -66,7 +66,7 @@ class TeacherDownloadAreaController extends Controller
             ->getRepository('AppBundle:TeacherTemplate')
             ->findAll();
 
-        return $this->get('templating')->renderResponse(':teachers:teachers.html.twig', array('templates' => $templates));
+        return $this->get('templating')->renderResponse('teachers/teachers.html.twig', array('templates' => $templates));
     }
 
     /**
@@ -112,7 +112,7 @@ class TeacherDownloadAreaController extends Controller
             return $this->redirectToRoute('teachersLogin'); // fos_user_security_login
         }
 
-        return $this->get('templating')->renderResponse(':teachers:teachersUpload.html.twig');
+        return $this->get('templating')->renderResponse('teachers/teachersUpload.html.twig');
     }
 
     /**

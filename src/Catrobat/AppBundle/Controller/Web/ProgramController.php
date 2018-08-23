@@ -114,7 +114,7 @@ class ProgramController extends Controller
 
     $jam = $this->extractGameJamConfig();
 
-    return $this->get('templating')->renderResponse('::program.html.twig', [
+    return $this->get('templating')->renderResponse('program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
       'program_details'              => $program_details,
@@ -202,7 +202,7 @@ class ProgramController extends Controller
    */
   public function searchAction($q)
   {
-    return $this->get('templating')->renderResponse('::search.html.twig', ['q' => $q]);
+    return $this->get('templating')->renderResponse('search.html.twig', ['q' => $q]);
   }
 
   /**

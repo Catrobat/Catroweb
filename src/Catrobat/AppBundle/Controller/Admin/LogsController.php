@@ -75,7 +75,7 @@ class LogsController extends CRUDController
             pclose($file);
         }
 
-        return $this->render(':Admin:logs.html.twig', array(
+        return $this->render('Admin/logs.html.twig', array(
             'files' => $files,
             'content' => $content
         ));

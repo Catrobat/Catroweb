@@ -14,7 +14,7 @@ class TutorialController extends Controller
    */
   public function helpAction()
   {
-      return $this->get('templating')->renderResponse(':help:help.html.twig');
+      return $this->get('templating')->renderResponse('help/help.html.twig');
   }
 
   /**
@@ -42,9 +42,9 @@ class TutorialController extends Controller
       1/*limit per page*/
     );
 
-      $pagination->setTemplate(':help:paginationStart1.html.twig');
+      $pagination->setTemplate('help/paginationStart1.html.twig');
 
-      return $this->get('templating')->renderResponse(':help:stepByStep.html.twig', array(
+      return $this->get('templating')->renderResponse('help/stepByStep.html.twig', array(
       'page' => $page,
       'pagination' => $pagination,
     ));
@@ -62,14 +62,14 @@ class TutorialController extends Controller
       }
 
       if ($page == -1) {
-          return $this->get('templating')->renderResponse(':help:tutorialcards.html.twig', array('count' => $cards_num));
+          return $this->get('templating')->renderResponse('help/tutorialcards.html.twig', array('count' => $cards_num));
       }
 
       $blocks = $this->generateBlocks($page);
 
       $example_link = $this->setExampleLink($page);
 
-      return $this->get('templating')->renderResponse(':help:tutorialcard.html.twig', array(
+      return $this->get('templating')->renderResponse('help/tutorialcard.html.twig', array(
         'page' => $page,
         'blocks' => $blocks,
         'example_link' => $example_link
@@ -90,7 +90,7 @@ class TutorialController extends Controller
 
       $categories_twig = $this->generateCategoryArray($categories);
 
-      return $this->get('templating')->renderResponse(':help:starterPrograms.html.twig', array(
+      return $this->get('templating')->renderResponse('help/starterPrograms.html.twig', array(
       'categories' => $categories_twig,
     ));
   }
@@ -124,7 +124,7 @@ class TutorialController extends Controller
    */
   public function gameJamAction()
   {
-      return $this->get('templating')->renderResponse(':help:gamejam.html.twig');
+      return $this->get('templating')->renderResponse('help/gamejam.html.twig');
   }
 
     /**

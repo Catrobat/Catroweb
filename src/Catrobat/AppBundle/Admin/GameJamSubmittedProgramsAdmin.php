@@ -21,9 +21,9 @@ class GameJamSubmittedProgramsAdmin extends AbstractAdmin
         ->add('gamejam_submission_accepted', 'boolean', array('editable' => true))
         ->add('_action', 'actions', array(
             'actions' => array(
-                'show' => array('template' => ':CRUD:list__action_show_program_details.html.twig'),
+                'show' => array('template' => 'CRUD/list__action_show_program_details.html.twig'),
                 'removeFromGameJam' => array(
-                     'template' => ':CRUD:list__action_remove_from_gamejam.html.twig',
+                     'template' => 'CRUD/list__action_remove_from_gamejam.html.twig',
                  )
             )
           ))

@@ -54,7 +54,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
             ))
             ->add('name')
             ->add('apk_request_time')
-            ->add('thumbnail', 'string', array('template' => ':Admin:program_thumbnail_image_list.html.twig'))
+            ->add('thumbnail', 'string', array('template' => 'Admin/program_thumbnail_image_list.html.twig'))
             ->add('apk_status', 'choice', array(
             'choices' => array(
                   Program::APK_NONE => 'none',
@@ -64,10 +64,10 @@ class PendingApkRequestsAdmin extends AbstractAdmin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'Reset' => array(
-                        'template' => ':CRUD:list__action_reset_status.html.twig',
+                        'template' => 'CRUD/list__action_reset_status.html.twig',
                     ),
                     'Rebuild' => array(
-                        'template' => ':CRUD:list__action_rebuild_apk.html.twig',
+                        'template' => 'CRUD/list__action_rebuild_apk.html.twig',
                     ),
                 ),
             ));

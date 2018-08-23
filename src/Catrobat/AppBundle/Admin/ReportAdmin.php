@@ -47,8 +47,8 @@ class ReportAdmin extends AbstractAdmin
       ->add('text')
       ->add('username')
       ->add('_action', 'actions', array('actions' => array(
-        'delete' => array('template' => ':CRUD:list__action_delete_comment.html.twig'),
-        'unreport' => array('template' => ':CRUD:list__action_unreport.html.twig'),
+        'delete' => array('template' => 'CRUD/list__action_delete_comment.html.twig'),
+        'unreport' => array('template' => 'CRUD/list__action_unreport.html.twig'),
       )))
     ;
   }

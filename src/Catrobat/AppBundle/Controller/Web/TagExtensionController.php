@@ -18,7 +18,7 @@ class TagExtensionController extends Controller
      */
     public function tagSearchAction($q)
     {
-        return $this->get('templating')->renderResponse('::tagSearch.html.twig', array('q' => $q));
+        return $this->get('templating')->renderResponse('tagSearch.html.twig', array('q' => $q));
     }
 
     /**
@@ -26,7 +26,7 @@ class TagExtensionController extends Controller
      */
     public function tagSearchNothingAction()
     {
-        return $this->get('templating')->renderResponse('::search.html.twig', array('q' => null));
+        return $this->get('templating')->renderResponse('search.html.twig', array('q' => null));
     }
 
     /**
@@ -34,7 +34,7 @@ class TagExtensionController extends Controller
      */
     public function extensionSearchAction($q)
     {
-        return $this->get('templating')->renderResponse('::extensionSearch.html.twig', array('q' => $q));
+        return $this->get('templating')->renderResponse('extensionSearch.html.twig', array('q' => $q));
     }
 
     /**
@@ -42,6 +42,6 @@ class TagExtensionController extends Controller
      */
     public function extensionSearchNothingAction()
     {
-        return $this->get('templating')->renderResponse('::search.html.twig', array('q' => null));
+        return $this->get('templating')->renderResponse('search.html.twig', array('q' => null));
     }
 }
