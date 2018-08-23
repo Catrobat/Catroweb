@@ -12,7 +12,7 @@ use Symfony\Component\Finder\Finder;
 class TranschoiceTest extends \PHPUnit\Framework\TestCase
 {
 
-    const LANGUAGE_DIR = './app/Resources/translations/';
+    const LANGUAGE_DIR = './translations/';
 
     /**
      * @test

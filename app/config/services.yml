@@ -26,7 +26,7 @@ parameters:
       catrobat.apk.dir:               "%catrobat.webdir%resources/apk/"
       catrobat.backup.dir:            "%kernel.root_dir%/../backups/"
       catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
-      catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
+      catrobat.translations.dir:      "%kernel.root_dir%/../translations"
       catrobat.logs.dir:              "%kernel.root_dir%/logs/"
       catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
       catrobat.max_version:           "0.996"

@@ -12,3 +12,14 @@
 // your color/variable changes here
 
 @import "../../base/catro_bootstrap";
+
+#gamejam-submission {
+  @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
+}
+
+.bg-catrobat {
+  background-color: custom-color(catrobat);
+}
+.text-catrobat {
+  color: custom-color(catrobat);
+}

@@ -23,105 +23,105 @@
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
   <script>
-    var configGA = { 
-      'UaId' : 'UA-42270417-5',
-      //'DebugOutput' : true,
-    };
+      var configGA = {
+          'UaId' : 'UA-42270417-5',
+          //'DebugOutput' : true,
+      };
   </script>
 
   <script async src="{{ asset(getJavascriptPath('analytics.js')) }}"></script>
 
-  {% block head %}{% endblock %}
+    {% block head %}{% endblock %}
 </head>
 <body>
 
 <div id="wrapper">
   <header>
-    {% block header %}
-      {% include ':Default:header_bs4.html.twig' %}
-    {% endblock %}
+      {% block header %}
+          {% include ':Default:header.html.twig' %}
+      {% endblock %}
   </header>
 
   <div class="container">
-    {% block body %}{% endblock %}
+      {% block body %}{% endblock %}
   </div>
 </div>
 
 {% block footer %}
-  {% include ':Default:footer.html.twig' %}
+    {% include ':Default:footer.html.twig' %}
 {% endblock %}
 
 <script>
-  var search_input = $('.input-search');
+    var search_input = $('.input-search');
 
-  search_input.tooltip({
-    trigger  : 'manual',
-    placement: 'bottom'
-  });
+    search_input.tooltip({
+        trigger  : 'manual',
+        placement: 'bottom'
+    });
 
-  search_input
-  .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
-  .addClass('tooltip-danger');
+    search_input
+        .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
+        .addClass('tooltip-danger');
 
 
-  search_input.on('shown.bs.tooltip', function()
-  {
-    setTimeout(function()
+    search_input.on('shown.bs.tooltip', function()
     {
-      search_input.tooltip('hide');
-    }, 1000);
-  });
-  var client = new Main('{{ path('search', {'q': 0 } ) }}');
+        setTimeout(function()
+        {
+            search_input.tooltip('hide');
+        }, 1000);
+    });
+    var client = new Main('{{ path('search', {'q': 0 } ) }}');
 </script>
 
 {% block js %}{% endblock %}
 
 {% if app.user %}
   <script>
-    function fetchUserNotifications()
-    {
-      $.ajax({
-        url    : "{{ path('user_notifications_count') }}",
-        type   : "get",
-        success: function(data)
-        {
-          var numOfNotifications = data.count;
-          $(".user-notification-badge").removeAttr("data-badge");
+      function fetchUserNotifications()
+      {
+          $.ajax({
+              url    : "{{ path('user_notifications_count') }}",
+              type   : "get",
+              success: function(data)
+              {
+                  var numOfNotifications = data.count;
+                  $(".user-notification-badge").removeAttr("data-badge");
 
-          if (numOfNotifications > 0)
-          {
-            var labelTitle = (numOfNotifications <= 1000) ? numOfNotifications.toString() : "1000+";
+                  if (numOfNotifications > 0)
+                  {
+                      var labelTitle = (numOfNotifications <= 1000) ? numOfNotifications.toString() : "1000+";
 
-            if (labelTitle.length >= 3)
-            {
-              $(".user-notification-badge").addClass("user-notification-badge-large");
-            }
-            else
-            {
-              $(".user-notification-badge").removeClass("user-notification-badge-large");
-            }
-            $(".user-notification-badge").attr("data-badge", labelTitle);
-          }
-          setTimeout(fetchUserNotifications, 10000);
-        },
-        error  : function()
-        {
-          console.error("Unable to fetch user notifications!");
-        }
+                      if (labelTitle.length >= 3)
+                      {
+                          $(".user-notification-badge").addClass("user-notification-badge-large");
+                      }
+                      else
+                      {
+                          $(".user-notification-badge").removeClass("user-notification-badge-large");
+                      }
+                      $(".user-notification-badge").attr("data-badge", labelTitle);
+                  }
+                  setTimeout(fetchUserNotifications, 10000);
+              },
+              error  : function()
+              {
+                  console.error("Unable to fetch user notifications!");
+              }
+          });
+      }
+
+      $(document).ready(function()
+      {
+          fetchUserNotifications();
       });
-    }
-
-    $(document).ready(function()
-    {
-      fetchUserNotifications();
-    });
   </script>
 {% endif %}
 <script>
-  $("#nav-search").submit(function(e)
-  {
-    e.preventDefault();
-  });
+    $("#nav-search").submit(function(e)
+    {
+        e.preventDefault();
+    });
 </script>
 
 </body>

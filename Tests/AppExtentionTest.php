@@ -15,7 +15,7 @@ class AppExtentionTest extends \PHPUnit\Framework\TestCase
     {
         parent::setUp();
         $this->prophet = new Prophet();
-        $this->translationPath = __DIR__ . '/Resources/translations';
+        $this->translationPath = __DIR__ . '/../translations';
     }
 
 
@@ -28,7 +28,7 @@ class AppExtentionTest extends \PHPUnit\Framework\TestCase
 
         $appExtension = $this->createAppExtension($short);
         $list = $appExtension->getLanguageOptions();
-        $this->assertEquals(count($list), 5);
+        $this->assertEquals(count($list), 50);
 
         $this->assertTrue($this->inArray('Deutsch', $list));
         $this->assertTrue($this->inArray('English', $list));
