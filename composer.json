@@ -1,10 +1,66 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
     "type": "project",
-    "license": [
-        "MIT"
-    ],
+    "license": "proprietary",
+
+    "require": {
+        "php": ">=7.1",
+        "ext-SimpleXML": "^7.1",
+        "ext-json": "^1.5",
+        "doctrine/data-fixtures": "^1.3",
+        "doctrine/doctrine-bundle": "^1.9",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "doctrine/doctrine-migrations-bundle": "^1.3",
+        "doctrine/migrations": "^1.8",
+        "doctrine/orm": "^2.6",
+        "eightpoints/guzzle-bundle": "^7.3",
+        "facebook/graph-sdk": "^5.6",
+        "fr3d/ldap-bundle": "^3.0",
+        "friendsofsymfony/jsrouting-bundle": "^2.2",
+        "friendsofsymfony/rest-bundle": "^2.3",
+        "friendsofsymfony/user-bundle": "^2.1",
+        "geocoder-php/ip-info-provider": "^0.1.0",
+        "google/apiclient": "^2.2",
+        "incenteev/composer-parameter-handler": "^2.1",
+        "knplabs/knp-paginator-bundle": "^2.8",
+        "liip/theme-bundle": "dev-master",
+        "php-http/message": "^1.7",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^5.2",
+        "sonata-project/admin-bundle": "^3.37",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.6",
+        "sonata-project/user-bundle": "^4.2",
+        "symfony/acl-bundle": "^1.0",
+        "symfony/console": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/monolog-bundle": "^3.3",
+        "symfony/polyfill-iconv": "^1.8",
+        "symfony/swiftmailer-bundle": "^3.2",
+        "symfony/yaml": "*",
+        "twbs/bootstrap": "^4.1",
+        "willdurand/geocoder-bundle": "^5.1"
+    },
+    "require-dev": {
+        "behat/behat": "^3.5",
+        "behat/mink-extension": "^2.3",
+        "behat/symfony2-extension": "^2.1",
+        "bossa/phpspec2-expect": "^3.0",
+        "dmore/behat-chrome-extension": "^1.2",
+        "leanphp/phpspec-code-coverage": "^4.2",
+        "phpspec/phpspec": "^4.0",
+        "phpunit/phpunit": "^7.3",
+        "symfony/dotenv": "*",
+        "symfony/maker-bundle": "^1.6",
+        "symfony/phpunit-bridge": "*",
+        "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev"
+    },
+
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+
     "autoload": {
         "psr-0": {
             "": "src/",
@@ -15,70 +71,14 @@
             "app/AppCache.php"
         ]
     },
-    "require": {
-        "php": ">=7.1",
-        "symfony/symfony": "3.4.*",
 
-        "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/monolog-bundle": "^3.3",
-        "symfony/polyfill-iconv": "^1.8",
-
-        "incenteev/composer-parameter-handler": "^2.1",
-
-        "friendsofsymfony/user-bundle": "^2.1",
-        "friendsofsymfony/rest-bundle": "^2.3",
-        "friendsofsymfony/jsrouting-bundle": "^2.2",
-        "sonata-project/user-bundle": "^4.2",
-        "sonata-project/admin-bundle": "^3.37",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.6",
-
-        "fr3d/ldap-bundle": "^3.0",
-
-        "facebook/graph-sdk": "^5.6",
-        "google/apiclient": "^2.2",
-
-        "eightpoints/guzzle-bundle": "^7.3",
-        "php-http/message": "^1.7",
-
-        "willdurand/geocoder-bundle": "^5.1",
-        "geocoder-php/ip-info-provider": "^0.1.0",
-
-        "doctrine/doctrine-bundle": "^1.9",
-        "doctrine/doctrine-migrations-bundle": "^1.3",
-        "doctrine/orm": "^2.6",
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "doctrine/data-fixtures": "^1.3",
-        "doctrine/migrations": "^1.8",
-
-        "knplabs/knp-paginator-bundle": "^2.8",
-
-        "liip/theme-bundle": "dev-master",
-
-        "twbs/bootstrap": "^4.1",
-
-        "ext-json": "^1.5",
-        "ext-SimpleXML": "^7.1",
-
-        "sensio/distribution-bundle": "^5.0",
-        "sensio/framework-extra-bundle": "^5.2",
-        "symfony/acl-bundle": "^1.0"
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php56": "*"
     },
-    "require-dev": {
-        "behat/behat": "^3.5",
-        "behat/symfony2-extension": "^2.1",
-        "dmore/behat-chrome-extension": "^1.2",
-        "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
-        "behat/mink-extension": "^2.3",
 
-        "symfony/phpunit-bridge": "*",
-        "phpunit/phpunit": "^7.3",
-
-        "phpspec/phpspec": "^4.0",
-        "bossa/phpspec2-expect": "^3.0",
-        "leanphp/phpspec-code-coverage": "^4.2",
-
-        "sensio/generator-bundle": "^3.1"
-    },
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
@@ -100,10 +100,12 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ]
     },
-    "config": {
-        "bin-dir": "bin"
-    },
+
     "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "3.4.*"
+        },
         "symfony-web-dir": "web",
         "symfony-app-dir": "app",
         "incenteev-parameters": {
