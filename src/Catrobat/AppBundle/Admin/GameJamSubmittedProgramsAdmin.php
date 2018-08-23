@@ -7,8 +7,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class GameJamSubmittedProgramsAdmin extends AbstractAdmin
 {
-    protected $parentAssociationMapping = 'gamejam';
-    
+
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {

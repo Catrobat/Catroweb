@@ -184,7 +184,7 @@ services:
           - { name: sonata.admin, manager_type: orm, label: GameJams }
         arguments: [catrowebadmin.block.gamejam, Catrobat\AppBundle\Entity\GameJam, null]
         calls:
-          - [addChild, ["@catrowebadmin.block.gamejam.submitted"]]
+          - [addChild, ["@catrowebadmin.block.gamejam.submitted", 'NAME_OF_PARENT']]
       
       catrowebadmin.block.gamejam.submitted:
         class: Catrobat\AppBundle\Admin\GameJamSubmittedProgramsAdmin
