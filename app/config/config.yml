@@ -88,6 +88,15 @@ sonata_user:
     manager_type: orm
 
 
+sensio_framework_extra:
+    router:      { annotations: false }  # use symfony annotations!
+    request:     { converters: true, auto_convert: true }
+    view:        { annotations: true }
+    cache:       { annotations: true }
+    security:    { annotations: true }
+    psr_message: { enabled: false }
+
+
 # # working testserver
 #fr3d_ldap:
 #    driver:
