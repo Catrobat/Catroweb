@@ -48,7 +48,7 @@ class MediaPackageController extends Controller
     $media_package_files = $em->getRepository('AppBundle:MediaPackageFile')
       ->findAll();
     $json_response_array = [];
-    if (count($media_package_files) < 1)
+    if ($media_package_files == null || empty($media_package_files))
     {
       return JsonResponse::create(
         $json_response_array
@@ -86,8 +86,9 @@ class MediaPackageController extends Controller
     foreach ($media_package_categories as $media_package_category)
     {
       /** @var array|MediaPackageFile $media_package_files */
+      /** @var array|MediaPackageCategory $media_package_category */
       $media_package_files = $media_package_category->getFiles();
-      if (count($media_package_files) > 0)
+      if ($media_package_files != null && count($media_package_files) > 0)
       {
         foreach ($media_package_files as $media_package_file)
         {
@@ -120,7 +121,7 @@ class MediaPackageController extends Controller
     $json_response_array = [];
     /** @var array|MediaPackageCategory $media_package_categories */
     $media_package_categories = $media_package->getCategories();
-    if (count($media_package_categories) < 1)
+    if ($media_package_categories == null || empty($media_package_categories))
     {
       return JsonResponse::create(
         $json_response_array
@@ -130,7 +131,7 @@ class MediaPackageController extends Controller
     {
       /** @var array|MediaPackageFile $media_package_files */
       $media_package_files = $media_package_category->getFiles();
-      if (count($media_package_files) > 0)
+      if ($media_package_files != null && count($media_package_files) > 0)
       {
         foreach ($media_package_files as $media_package_file)
         {
@@ -165,7 +166,7 @@ class MediaPackageController extends Controller
     $category_not_found = true;
     /** @var array|MediaPackageCategory $media_package_categories */
     $media_package_categories = $media_package->getCategories();
-    if (count($media_package_categories) < 1)
+    if ($media_package_categories == null || empty($media_package_categories))
     {
       return JsonResponse::create(
         [
@@ -185,7 +186,7 @@ class MediaPackageController extends Controller
         $category_not_found = false;
         /** @var array|MediaPackageFile $media_package_files */
         $media_package_files = $media_package_category->getFiles();
-        if (count($media_package_files) > 0)
+        if ($media_package_files != null && count($media_package_files) > 0)
         {
           foreach ($media_package_files as $media_package_file)
           {

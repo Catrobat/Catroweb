@@ -1,4 +1,4 @@
-{% extends ':Default:base.html.twig' %}
+{% extends 'Default/base.html.twig' %}
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
@@ -8,14 +8,14 @@
 {% block body %}
 
   {% if not app.user and not isWebview() %}
-    {{ include(':components/index:welcome-section.html.twig') }}
+    {{ include('components/index/welcome-section.html.twig') }}
   {% endif %}
 
   <div id="featuredPrograms">
     <h1>{{ "programs.featured"|trans({}, "catroweb") }}</h1>
 
     {% if featured|length > 0 %}
-      {{ include(':components/bootstrap:bootstrap-carousel.html.twig',
+      {{ include('components/bootstrap/bootstrap-carousel.html.twig',
       { 'carousel' :
         {
           'id' : 'feature-slider',
