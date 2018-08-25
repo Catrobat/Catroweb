@@ -1,4 +1,6 @@
-@import "elements";
+@import '../../base/elements';
+
+$primary:          #442a66;
 
 $default-font-size: 13px;
 $default-background-color: #FFFCF4;
@@ -7,8 +9,8 @@ $default-input-padding: 5px;
 $default-input-size: 18px;
 $default-button-size: 26px;
 $default-button-padding: 10px;
-$default-text-color: #9583B2;
-$default-sprite-url: url('../../images/symbols/sprite_icons_web.png');
+$default-text-color: $primary;
+$default-sprite-url: url('../../../images/symbols/sprite_icons_web.png');
 $default-copy-link-image: url('../../../images/symbols/link.svg');
 $default-border-color: #17a5b8;
 
@@ -36,8 +38,8 @@ $font-size-h2: 20px;
 
 $avatar-img-size: 31px;
 
-$special-font-color: #8a78a8;
+$special-font-color: $primary;
 
-$button-gradient-1: #9583B2;
-$button-gradient-2: #9583B2;
-$button-gradient-3: #8070A0;
+$button-gradient-1: $primary;
+$button-gradient-2: $primary;
+$button-gradient-3: $primary;

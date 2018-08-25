@@ -1,4 +1,4 @@
-@import "elements";
+@import '../../base/elements';
 
 $default-font-size: 13px;
 $default-background-color: #FFFCF4;
@@ -8,10 +8,10 @@ $default-input-size: 18px;
 $default-button-size: 26px;
 $default-button-padding: 10px;
 $default-text-color: #FFF;
-$default-sprite-url: url('../../images/symbols/sprite_icons_web_white.png');
+$default-sprite-url: url('../../../images/symbols/sprite_icons_web_white.png');
 $default-copy-link-image: url('../../../images/help/galaxyjam/yellow_link.svg');
-$galaxy-background-image: url('../../images/help/galaxyjam/galaxy_gamejam_background.png');
-$galaxy-menu-upper-border: url('../../images/help/galaxyjam/galaxyjam_menu_upper_border.png');
+$galaxy-background-image: url('../../../images/help/galaxyjam/galaxy_gamejam_background.png');
+$galaxy-menu-upper-border: url('../../../images/help/galaxyjam/galaxyjam_menu_upper_border.png');
 $default-border-color: #17a5b8;
 
 $help-link-color: #000000;

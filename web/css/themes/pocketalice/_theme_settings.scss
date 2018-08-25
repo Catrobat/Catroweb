@@ -1,4 +1,5 @@
-@import "elements";
+@import '../../base/elements';
+
 
 $default-font-size: 13px;
 $default-background-color: #FFFCF4;
@@ -8,7 +9,7 @@ $default-input-size: 18px;
 $default-button-size: 26px;
 $default-button-padding: 10px;
 $default-text-color: #9583B2;
-$default-sprite-url: url('../../images/symbols/sprite_icons_web.png');
+$default-sprite-url: url('../../../images/symbols/sprite_icons_web.png');
 $default-copy-link-image: url('../../../images/symbols/link.svg');
 $default-border-color: #17a5b8;
 
