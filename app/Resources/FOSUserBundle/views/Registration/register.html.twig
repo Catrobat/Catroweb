@@ -22,35 +22,27 @@
 
       {% include 'components/login/login_logo.html.twig' %}
 
-
-      <div class="row justify-content-center">
-        <div class="col-md-5 text-center">
-          <div>
-            {% for errorItem in form.username.vars.errors %}
-              <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
-            {% endfor %}
-            {% for errorItem in form.email.vars.errors %}
-              <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
-            {% endfor %}
-            {% for flash_message in app.session.flashBag.get('catroweb_error_message') %}
-              <div id="Error-Message" class="alert alert-danger col-sm-12" style="display:block">
-                <p>{{ flash_message|trans({}, "catroweb") }}</p>
-              </div>
-            {% endfor %}
-            <div id="Error-Message" class="alert alert-danger col-sm-12" style="display:none">
-              <p>{{ 'registrationError'|trans({}, 'catroweb') }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
       <div class="row justify-content-center">
         <div class="col-md-5">
 
             <form id="registration_form" action="{{ path('fos_user_registration_register') }}"
                   method="POST" role="form" class="fos_user_registration_register form-horizontal">
                 {{ form_start(form) }}
+
+              <div>
+                  {% for errorItem in form.username.vars.errors %}
+                    <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+                  {% endfor %}
+                  {% for errorItem in form.email.vars.errors %}
+                    <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+                  {% endfor %}
+                  {% for errorItem in form.plainPassword.first.vars.errors %}
+                    <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+                  {% endfor %}
+                  {% for errorItem in form.plainPassword.second.vars.errors %}
+                    <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+                  {% endfor %}
+              </div>
 
               <div class="group">
                 {{ form_widget(form.username) }}
@@ -109,7 +101,7 @@
                   <div class="col-md-12 control">
                     <div style="font-size:85%">
                       {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
-                      <a id="create_account" href="{{ path('login') }}">Log in</a>
+                      <a id="create_account" href="{{ path('login') }}" rel="noreferrer">Log in</a>
                     </div>
                   </div>
                 </div>

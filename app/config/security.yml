@@ -96,6 +96,7 @@ security:
             form_login:
                 login_path: /login
                 check_path: fos_user_security_check
+                default_target_path: /
             logout: true
             anonymous:    true
             remember_me:

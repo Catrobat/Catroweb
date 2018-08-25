@@ -13,4 +13,24 @@
     </constraint>
   </class>
 
+  <class name="FOS\UserBundle\Model\User">
+    <property name="plainPassword">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>Registration</value>
+          <value>Profile</value>
+        </option>
+      </constraint>
+
+      <constraint name="Length">
+        <option name="min">6</option>
+        <option name="minMessage">fos_user.password.short</option>
+        <option name="groups">
+          <value>Registration</value>
+          <value>Profile</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
 </constraint-mapping>
