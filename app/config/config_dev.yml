@@ -37,6 +37,11 @@ monolog:
             max_files: 20
             channels: [download_stats]
 
+bazinga_geocoder:
+    fake_ip:
+        enabled:              true
+        ip:                   88.116.169.222
+
 #assetic:
 #    use_controller: true
 #    debug:          true

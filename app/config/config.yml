@@ -155,7 +155,6 @@ liip_theme:
 
 
 bazinga_geocoder:
-#    fake_ip:   # -> only activated in test env
     providers:
         acme:
             # https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/Resources/doc/services.md  All factories
