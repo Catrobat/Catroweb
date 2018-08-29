@@ -11,16 +11,18 @@
     }
 }
 
-$nav-logo-dim: 32px;
+$nav-logo-dim: 4rem;
 .nav-logo {
     display: inline-block;
-    width: 50px;
-    height: 50px;
-    padding: 1px;
-    margin-right: 8px;
+    width: $nav-logo-dim;
+    height: $nav-logo-dim;;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
 }
 .nav-catrobat {
-    padding: .5rem 1rem;
+    padding: 1rem 0.5rem;
+    margin-bottom: 2rem;
 }
 
 @media (min-width: 768px) {

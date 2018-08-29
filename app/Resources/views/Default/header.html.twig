@@ -1,11 +1,12 @@
 <nav class="navbar nav-catrobat navbar-expand-md navbar-dark bg-catrobat">
+
   <div class="container">
-    <div class="d-inline-flex align-items-center">
+    {#<div class="d-inline-flex align-items-center">#}
       <a class="nav-logo " href="{{ path('index') }}">
-        <img id="logo" {% include 'Default/headerLogo.html.twig' %}/>
+        <img {% include 'Default/headerLogo.html.twig' %}/>
       </a>
       <a id="page-name" class="navbar-brand mt-1" href="{{ path('index') }}">Home</a>
-    </div>
+    {#</div>#}
 
     <div class="d-inline-flex ml-auto align-items-center my-auto">
         {# START: Searchfield #}
