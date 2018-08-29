@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5893b53c658d10f15a25e7c9251e5496",
+    "content-hash": "5bc054b539848e13ea92d44a1eedc4d0",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -6863,6 +6863,51 @@
             ],
             "description": "Library for handling version information and constraints",
             "time": "2018-07-08T19:19:57+00:00"
+        },
+        {
+            "name": "phpcheckstyle/phpcheckstyle",
+            "version": "V0.14.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPCheckstyle/phpcheckstyle.git",
+                "reference": "86fbbac419468c52d000fe0e0743c555fac8a42a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPCheckstyle/phpcheckstyle/zipball/86fbbac419468c52d000fe0e0743c555fac8a42a",
+                "reference": "86fbbac419468c52d000fe0e0743c555fac8a42a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "bin": [
+                "phpcheckstyle"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPCheckstyle\\": "src/"
+                },
+                "files": [
+                    "src/PHPCheckstyle/_Constants.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-2.1"
+            ],
+            "description": "PHPCheckstyle is an open-source tool that helps PHP programmers adhere to certain coding conventions",
+            "homepage": "https://github.com/phpcheckstyle/phpcheckstyle/",
+            "keywords": [
+                "checkstyle",
+                "convention",
+                "standard"
+            ],
+            "time": "2018-08-10T07:47:28+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
