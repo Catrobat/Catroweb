@@ -13,7 +13,8 @@ class SearchController extends Controller
 {
 
   /**
-   * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/search.json", name="api_search_programs", defaults={"_format": "json"},
+   *                                     methods={"GET"})
    */
   public function searchProgramsAction(Request $request)
   {
@@ -25,23 +26,22 @@ class SearchController extends Controller
     $query = str_replace("gmx", "", $query);
     $query = trim($query);
 
-    $limit = intval($request->query->get('limit'));
-    $offset = intval($request->query->get('offset'));
+    $limit = intval($request->query->get('limit', 20));
+    $offset = intval($request->query->get('offset', 0));
     $max_version = $request->query->get('max_version', 0);
 
     $programs = $program_manager->search($query, $limit, $offset, $max_version);
     // we can't count the results since we apply limit and offset.
     // so we indeed have to use a seperate query that ignores
     // limit and offset to get the number of results.
-//    $numbOfTotalProjects = count($programs);
-
     $numbOfTotalProjects = $program_manager->searchCount($query, $max_version);
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
 
   /**
-   * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/search/tagPrograms.json", name="api_search_tag", defaults={"_format":
+   *                                                 "json"}, methods={"GET"})
    */
   public function tagSearchProgramsAction(Request $request)
   {
@@ -57,7 +57,9 @@ class SearchController extends Controller
   }
 
   /**
-   * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/search/extensionPrograms.json", name="api_search_extension",
+   *                                                       defaults={"_format": "json"},
+   *                                                       methods={"GET"})
    */
   public function extensionSearchProgramsAction(Request $request)
   {

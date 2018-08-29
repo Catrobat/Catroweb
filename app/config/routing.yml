@@ -22,10 +22,18 @@ catroweb_flavored:
     flavor:  pocketcode|pocketphiro|pocketalice|pocketgalaxy|phirocode|luna|create@school
 
 
-# ===== FOS User Bundle =====
+# ===== Fos Js Routing =====
 fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+  resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+translate_word:
+  path:  /translate/{word}/{domain}
+  defaults: { _controller: Catrobat\AppBundle\Controller\TranslationController:translateAction }
+  options:
+    expose: true
+
+
+# ===== FOS User Bundle =====
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     prefix: /{flavor}
@@ -39,7 +47,7 @@ fos_user_registration_confirmed:
     path: /{flavor}/profile
 
 
-# ===== Sonata Admin Bundle =====   ToDo: All needed?
+# ===== Sonata Admin Bundle =====
 
 sonata_user_admin_security:
   resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'

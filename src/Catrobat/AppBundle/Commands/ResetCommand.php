@@ -20,6 +20,7 @@ class ResetCommand extends ContainerAwareCommand
     $this->setName('catrobat:reset')
       ->setDescription('Resets everything to base values')
       ->addOption('hard')
+      ->addOption('more')
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED, 'Generates remix graph based on given layout',
         ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT);
 
@@ -63,7 +64,14 @@ class ResetCommand extends ContainerAwareCommand
     $filesystem = new Filesystem();
     $filesystem->remove($temp_dir);
     $filesystem->mkdir($temp_dir);
-    $this->downloadPrograms($temp_dir, $output);
+    if ($input->getOption('more'))
+    {
+      $this->downloadMorePrograms($temp_dir, $output);
+    }
+    else
+    {
+      $this->downloadPrograms($temp_dir, $output);
+    }
     $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
     CommandHelper::executeShellCommand("php app/console catrobat:import $temp_dir catroweb $remix_layout_option",
       [], 'Importing Projects', $output);
@@ -89,12 +97,35 @@ class ResetCommand extends ContainerAwareCommand
       try
       {
         file_put_contents($name, file_get_contents($url));
-      }
-      catch (\ErrorException $e)
+      } catch (\ErrorException $e)
       {
         $output->writeln("File <" . $url . "> returned error 500, continuing...");
         continue;
       }
     }
+  }
+
+  private function downloadMorePrograms($dir, OutputInterface $output)
+  {
+    for ($i = 0; $i < 10; $i++)
+    {
+      $server_json = json_decode(file_get_contents('https://share.catrob.at/pocketcode/api/projects/randomPrograms.json'), true);
+      $base_url = $server_json['CatrobatInformation']['BaseUrl'];
+      foreach ($server_json['CatrobatProjects'] as $program)
+      {
+        $url = $base_url . $program['DownloadUrl'];
+        $name = $dir . intval($program['ProjectId']) . '.catrobat';
+        $output->writeln('Saving <' . $url . '> to <' . $name . '>');
+        try
+        {
+          file_put_contents($name, file_get_contents($url));
+        } catch (\ErrorException $e)
+        {
+          $output->writeln("File <" . $url . "> returned error 500, continuing...");
+          continue;
+        }
+      }
+    }
+
   }
 }

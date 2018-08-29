@@ -4,7 +4,7 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ProgramRepository.
@@ -29,7 +29,8 @@ class ProgramRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($flavor) {
+    if ($flavor)
+    {
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
@@ -39,7 +40,7 @@ class ProgramRepository extends EntityRepository
     {
       $qb
         ->andWhere($qb
-        ->expr()->lte('e.language_version', ':max_version'))
+          ->expr()->lte('e.language_version', ':max_version'))
         ->setParameter('max_version', $max_version);
     }
 
@@ -58,7 +59,8 @@ class ProgramRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($flavor) {
+    if ($flavor)
+    {
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
@@ -191,8 +193,7 @@ class ProgramRepository extends EntityRepository
 
     $results = $qb->getQuery()->getResult();
 
-    return array_map(function ($r)
-    {
+    return array_map(function ($r) {
       return $r['program'];
     }, $results);
   }
@@ -258,8 +259,7 @@ class ProgramRepository extends EntityRepository
 
     $results = $qb->getQuery()->getResult();
 
-    return array_map(function ($r)
-    {
+    return array_map(function ($r) {
       return $r['program'];
     }, $results);
   }
@@ -290,7 +290,8 @@ class ProgramRepository extends EntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit);
 
-    if ($flavor) {
+    if ($flavor)
+    {
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
@@ -344,7 +345,8 @@ class ProgramRepository extends EntityRepository
       ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
       ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
 
-    if ($flavor) {
+    if ($flavor)
+    {
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
@@ -357,6 +359,7 @@ class ProgramRepository extends EntityRepository
           ->expr()->lte('e.language_version', ':max_version'))
         ->setParameter('max_version', $max_version);
     }
+
     return $qb->getQuery()->getResult();
   }
 
@@ -377,8 +380,7 @@ class ProgramRepository extends EntityRepository
       ->getQuery()
       ->getResult();
 
-    return array_map(function ($data)
-    {
+    return array_map(function ($data) {
       return $data['id'];
     }, $result);
   }
@@ -507,11 +509,11 @@ class ProgramRepository extends EntityRepository
     $dql .= " ORDER BY weight DESC, e.uploaded_at DESC";
 
     $qb_program = $this->createQueryBuilder('e');
-    $q2 = $qb_program->getEntityManager()->createQuery($dql);
-    $q2->setFirstResult($offset);
-    $q2->setMaxResults($limit);
-    $q2->setParameter('searchterm', '%' . $query . '%');
-    $q2->setParameter('searchtermint', intval($query));
+    $final_query = $qb_program->getEntityManager()->createQuery($dql);
+    $final_query->setFirstResult($offset);
+    $final_query->setMaxResults($limit);
+    $final_query->setParameter('searchterm', '%' . $query . '%');
+    $final_query->setParameter('searchtermint', intval($query));
     if ($more_than_one_search_term)
     {
       $parameter_index = 0;
@@ -519,15 +521,15 @@ class ProgramRepository extends EntityRepository
       {
         $parameter = ":st" . $parameter_index;
         $parameter_index++;
-        $q2->setParameter($parameter, '%' . $search_term . '%');
-        $q2->setParameter($parameter . 'int', intval($search_term));
+        $final_query->setParameter($parameter, '%' . $search_term . '%');
+        $final_query->setParameter($parameter . 'int', intval($search_term));
       }
     }
 
-    $result = $q2->getResult();
+    $paginator = new Paginator($final_query, $fetchJoinCollection = true);
+    $result = $paginator->getIterator()->getArrayCopy();
 
-    return array_map(function ($element)
-    {
+    return array_map(function ($element) {
       return $element[0];
     }, $result);
   }
@@ -648,7 +650,8 @@ class ProgramRepository extends EntityRepository
       ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
       ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)));
 
-    if ($flavor) {
+    if ($flavor)
+    {
       $qb
         ->andWhere($qb->expr()->eq('e.flavor', ':flavor'))
         ->setParameter('flavor', $flavor);
@@ -661,6 +664,7 @@ class ProgramRepository extends EntityRepository
           ->expr()->lte('e.language_version', ':max_version'))
         ->setParameter('max_version', $max_version);
     }
+
     return $qb->getQuery()->getSingleScalarResult();
   }
 
@@ -889,8 +893,7 @@ class ProgramRepository extends EntityRepository
 
     $q2->setFirstResult($offset);
     $q2->setMaxResults($limit);
-    $id_list = array_map(function ($value)
-    {
+    $id_list = array_map(function ($value) {
       return $value['id'];
     }, $q2->getResult());
 

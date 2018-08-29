@@ -6,7 +6,8 @@
   "description": "Catroweb =========",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard 'web/js/base/*'",
+    "fix": "standard --fix 'web/js/base/*'"
   },
   "repository": {
     "type": "git",
@@ -28,10 +29,14 @@
     "grunt-contrib-uglify": "~2.0.0",
     "grunt-contrib-watch": "^0.6.1",
     "jit-grunt": "^0.9.1",
-    "sass": "^1.9.0"
+    "sass": "^1.9.0",
+    "standard": "^12.0.0"
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
     "clipboard": "^1.7.1"
+  },
+  "standard": {
+    "globals": ["$"]
   }
 }
