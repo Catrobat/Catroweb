@@ -49,6 +49,7 @@ programs:
   featured: Featured
   newest: Newest programs
   recommended: Recommended programs
+  noPrograms: There are currently no programs.
   most:
     viewed: Most viewed
     downloaded: Most downloaded

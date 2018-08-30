@@ -248,7 +248,9 @@ form {
   }
   > .program {
     float: left;
-    width: percentage((100 / 9) / 100); /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in 'ProgramLoader.js' before changing the width! */
+    /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in
+    'ProgramLoader.js' before changing the width! */
+    width: percentage((100 / 9) / 100);
     padding-bottom: 20px;
 
     > div, a {
@@ -277,23 +279,24 @@ form {
       }
     }
 
-    @media (max-width: 975px) {
-      width: 100/8%; /* 8 in a row */
+
+    @media screen and (max-width: 1200px) {
+      width: percentage((100 / 8) / 100); /* 8 in a row */
     }
-    @media (max-width: 865px) {
-      width: 100/7%; /* 7 in a row */
+    @media screen and (max-width: 992px) {
+      width: percentage((100 / 7) / 100); /* 7 in a row */
     }
-    @media (max-width: 755px) {
-      width: 100/6%; /* 6 in a row */
+    @media screen and (max-width: 800px) {
+      width: percentage((100 / 6) / 100); /* 6 in a row */
     }
-    @media (max-width: 645px) {
-      width: 100/5%; /* 5 in a row */
+    @media screen and (max-width: 768px) {
+      width: percentage((100 / 5) / 100); /* 5 in a row */
     }
-    @media (max-width: 535px) {
-      width: 100/4%; /* 4 in a row */
+    @media screen and (max-width: 576px) {
+      width: percentage((100 / 4) / 100); /* 4 in a row */
     }
-    @media (max-width: 425px) {
-      width: 100/3%; /* 3 in a row */
+    @media screen and (max-width: 425px) {
+      width: percentage((100 / 3) / 100); /* 3 in a row */
     }
   }
 
