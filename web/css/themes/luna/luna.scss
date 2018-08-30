@@ -11,72 +11,87 @@
 @import "../../base/variables";
 
 // your color/variable changes here
-$primary:          #442a66;
-
+$primary:                               #442a66;
+$theme-logo-luna-color-primary:         #8A78A8;
+$theme-logo-luna-color-secondary:       #d19fc1;
 
 @import "../../base/catro_bootstrap";
 
-//.help-headline {
-//  border-bottom: 1px solid $primary !important;
-//}
-//
-//.group {
-//  input {
-//    border-bottom: 1px solid rgba(68,42,102,0.3) !important;
-//    color: $primary !important;
-//  }
-//
-//  label {
-//    color: $primary !important;
-//  }
-//}
-//
-//.bar:after, .bar:before {
-//  background: rgba(68,42,102,0.7) !important;
-//}
-//
-//hr {
-//  border-color: $primary !important;
-//}
-//
-//.panel-info {
-//  border-color: $primary;
-//  > .panel-heading {
-//    border-color: $primary;
-//    background-color: $primary;
-//  }
-//}
-//
-//#program-comments {
-//  border-top: 1px solid $primary !important;
-//}
-//
-//#user-comment-wrapper {
-//  border-bottom: 1px solid $primary !important;
-//}
-//
-//.pc-startButton {
-//  color: $primary !important;
-//  fill: $primary !important;
-//}
-//
-//#recommendations, #specific-programs-recommendations {
-//  border-top: 1px solid $primary !important;
-//}
-//
-//.img-visibility-visible {
-//  background-color: $primary !important;
-//}
-//
-//.btn-info {
-//  border-color: $primary !important;
-//  background-color: $primary !important;
-//}
+.help-headline {
+  border-bottom: 1px solid $primary !important;
+}
+
+.group {
+  input {
+    border-bottom: 1px solid rgba(68,42,102,0.3) !important;
+    color: $primary !important;
+  }
+
+  label {
+    color: $primary !important;
+  }
+}
+
+.bar:after, .bar:before {
+  background: rgba(68,42,102,0.7) !important;
+}
+
+hr {
+  border-color: $primary !important;
+}
+
+.panel-info {
+  border-color: $primary;
+  > .panel-heading {
+    border-color: $primary;
+    background-color: $primary;
+  }
+}
+
+#program-comments {
+  border-top: 1px solid $primary !important;
+}
+
+#user-comment-wrapper {
+  border-bottom: 1px solid $primary !important;
+}
+
+.pc-startButton {
+  color: $primary !important;
+  fill: $primary !important;
+}
+
+#recommendations, #specific-programs-recommendations {
+  border-top: 1px solid $primary !important;
+}
+
+.img-visibility-visible {
+  background-color: $primary !important;
+}
+
+.btn-info {
+  border-color: $primary !important;
+  background-color: $primary !important;
+}
 
 .bg-catrobat {
-  background-color: #442a66 !important;
+  background-color: $primary !important;
 }
 
 .text-catrobat {
-  color: #442a66 !important;
+  color: $primary !important;
 }
+
+.theme-logo-title {
+  font-size: $theme-logo-font-size;
+  font-weight: $theme-logo-font-weight;
+}
+
+.title-color-left {
+  color: $theme-logo-luna-color-primary;
+}
+
+.title-color-right {
+  color: $theme-logo-luna-color-secondary;
+}
+

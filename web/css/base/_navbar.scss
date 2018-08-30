@@ -15,7 +15,7 @@ $nav-logo-dim: 4rem;
 .nav-logo {
     display: inline-block;
     width: $nav-logo-dim;
-    height: $nav-logo-dim;;
+    max-width: $nav-logo-dim;
     margin-right: 0.5rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;

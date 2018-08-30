@@ -1,20 +1,42 @@
 <!---  Logo --->
 <a href="{{ path('index') }}">
     <div class="row justify-content-center">
-        <div class="col-sm-12 mt-4" align="center">
-            <img class="center-block img-responsive" id="logo"  src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"/>
+        <div class="col-sm-12 mt-4" style="max-width: 11em" align="center">
+            <img class="center-block img-responsive" id="logo"
+                {% if theme() == 'luna' %}
+                    src="{{ asset('images/logo/logo_luna.png') }}" alt="Luna Code Logo"
+                {% elseif theme() == 'phirocode' %}
+                    src="{{ asset('images/logo/logo_phirocode.png') }}" alt="PhiroCode Logo"
+                {% elseif theme() == 'create@school' %}
+                    src="{{ asset('images/logo/logo_create_at_school_icon.png') }}" alt="Create@School Logo"
+                {% else  %}
+                    src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"
+                {% endif %}
+            />
         </div>
     </div>
 
     <div class="row justify-content-center">
         <div class="col-sm-12" align="center">
             <p>
+                <span class="theme-logo-title title-color-left">
                 {% if theme() == 'luna' %}
-                    <span style="color:#8A78A8; font-size:40px; font-weight: 800;">POCKET</span>
+                    LUNA
+                {% elseif theme() == 'phirocode' %}
+                    PHIRO
+                {% elseif theme() == 'create@school' %}
+                    CREATE @
                 {% else %}
-                    <span style="color:#17A6B7; font-size:40px; font-weight: 800;">POCKET</span>
+                    POCKET
                 {% endif %}
-                <span style="color:	#FF7701;font-size:40px; font-weight: 800;">CODE</span>
+
+                </span><span class="theme-logo-title title-color-right">
+                {% if theme() == 'create@school' %}
+                    SCHOOL
+                {% else %}
+                    CODE
+                {% endif %}
+                </span>
             </p>
         </div>
     </div>
