@@ -37,6 +37,13 @@ class ProgramInappropriateReport
     /**
      * @var string
      *
+     * @ORM\Column(name="category", type="text", length=256)
+     */
+    private $category;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="note", type="text")
      */
     private $note;
@@ -130,6 +137,30 @@ class ProgramInappropriateReport
     public function getReportingUser()
     {
         return $this->reportingUser;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param string $category
+     *
+     * @return ProgramInappropriateReport
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

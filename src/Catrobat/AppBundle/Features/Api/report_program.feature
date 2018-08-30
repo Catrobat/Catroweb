@@ -14,6 +14,7 @@ Feature: Report a program
 
   Scenario: report program with valid data
     Given I have a parameter "program" with value "1"
+    And I have a parameter "category" with value "spam"
     And I have a parameter "note" with value "Bad Project"
     When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
@@ -23,6 +24,7 @@ Feature: Report a program
 
   Scenario: report program with invalid project
     Given I have a parameter "program" with value "4"
+    And I have a parameter "category" with value "Bad Project"
     And I have a parameter "note" with value "Bad Project"
     When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
@@ -32,7 +34,8 @@ Feature: Report a program
 
   Scenario: report program with missing parameter
     Given I have a parameter "program" with value ""
-    And I have a parameter "note" with value ""
+    And I have a parameter "category" with value ""
+    And I have a parameter "note" with value "Bad project"
     When I POST these parameters to "/pocketcode/api/reportProgram/reportProgram.json"
     Then I should get the json object:
     """

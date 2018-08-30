@@ -25,7 +25,7 @@ Scenario: Email subscribed admins directly after report
     |User2    |0        |true   | 0       |
   And I activate the Profiler
 
-  When I report program 1 with note "Bad Program"
+  When I report program 1 with category "spam" and note "Bad Program"
   Then I should see 2 outgoing emails
   And I should see a email with recipient "admin@catrob.at"
   And I should see a email with recipient "dog2@catrob.at"
