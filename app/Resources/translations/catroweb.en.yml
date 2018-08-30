@@ -460,7 +460,13 @@ login:
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: Username
+  email: Email
+  passwordFirst: Password
+  passwordSecond: Password Confirm
 
 apk:
   download: Download as app
