@@ -3,6 +3,10 @@ services:
               class: Symfony\Component\Filesystem\Filesystem
               public: false
 
+      catrowebadmin.command.clean.oldapk:
+              class: Catrobat\AppBundle\Commands\CleanOldApkCommand
+              tags:
+              -  { name: console.command }
 
       catrowebadmin.command.clean.apk:
               class: Catrobat\AppBundle\Commands\CleanApkCommand
