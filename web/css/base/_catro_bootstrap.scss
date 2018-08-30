@@ -225,20 +225,9 @@ footer
   height: 100%;
 }
 
-.navbar-brand #logo
-{
-  margin-top: -25px;
-}
 
 
-@media only screen and (max-width: 823px)
-        {
-          #logo
-          {
-            height: 63px;
-            max-width: none !important;
-          }
-        }
+
 
 @media screen and (min-width: map-get($grid-breakpoints, sm))
 {
