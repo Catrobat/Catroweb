@@ -11,6 +11,9 @@
 @import "../../base/variables";
 
 // your color/variable changes here
+//$primary:                               #442a66;
+$theme-logo-create-at-school-color-primary:         #ee225a;
+$theme-logo-create-at-school-color-secondary:       #aa154b;
 
 @import "../../base/catro_bootstrap";
 
@@ -23,4 +26,17 @@
 }
 .text-catrobat {
   color: custom-color(catrobat);
+}
+
+.theme-logo-title {
+  font-size: $theme-logo-font-size;
+  font-weight: $theme-logo-font-weight;
+}
+
+.title-color-left {
+  color: $theme-logo-create-at-school-color-primary;
+}
+
+.title-color-right {
+  color: $theme-logo-create-at-school-color-secondary;
 }
