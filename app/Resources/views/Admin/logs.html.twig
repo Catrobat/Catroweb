@@ -13,7 +13,7 @@
 
             <div id="logFiles">
                 {% for file in files %}
-                    <button id="{{ file|replace({".":'_'}) }}" class="btn files">
+                    <button id="{{ file|replace({"/":'_', ".":"_"}) }}" class="btn files">
                         {{ file }}
                     </button>
                 {%  endfor %}
@@ -63,7 +63,7 @@
             <div id="outerLogContainer">
                 <div id="innerLogContainer">
                     {% for i in 0..(files|length-1)  %}
-                    <div {% if i!=0 %} style='display:none' {% endif %} class='{{ files[i]|replace({".":'_'}) }} logs'>
+                    <div {% if i!=0 %} style='display:none' {% endif %} class='{{ files[i]|replace({"/":'_', ".":"_"}) }} logs'>
 
                         {% for j in 0..(content[i]|length-1) %}
                             {% if content[i][j] != "" %}

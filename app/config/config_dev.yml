@@ -16,14 +16,16 @@ monolog:
     channels: ['upload', 'download_stats']
     handlers:
         upload:
-            type: stream
-            path: '%kernel.logs_dir%/upload.log'
+            type: rotating_file
+            path: '%kernel.logs_dir%/upload/upload.log'
             level: error
+            max_files: 30
             channels: [upload]
         main:
-            type:  stream
-            path:  '%kernel.logs_dir%/%kernel.environment%.log'
+            type:  rotating_file
+            path:  '%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log'
             level: info
+            max_files: 30
         firephp:
             type:  firephp
             level: info
@@ -34,21 +36,13 @@ monolog:
             type:  rotating_file
             path:  '%kernel.logs_dir%/download_stats/download_stats.log'
             level: info
-            max_files: 20
+            max_files: 30
             channels: [download_stats]
 
 bazinga_geocoder:
     fake_ip:
         enabled:              true
         ip:                   88.116.169.222
-
-#assetic:
-#    use_controller: true
-#    debug:          true
-    
-#bc_bootstrap:
-#    less_filter: lessphp
-#    jquery_path: "%kernel.root_dir%/Resources/public/js/jquery-1.10.1.js"
 
 #swiftmailer:
 #    delivery_address: me@example.com
