@@ -73,6 +73,9 @@
 {% endblock %}
 
 {% block js %}
+  {#<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>#}
+    <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
+  <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
   <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
   <script>
     {% if not app.user.limited %}

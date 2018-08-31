@@ -50,6 +50,12 @@ programs:
   newest: Newest programs
   recommended: Recommended programs
   noPrograms: There are currently no programs.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   most:
     viewed: Most viewed
     downloaded: Most downloaded

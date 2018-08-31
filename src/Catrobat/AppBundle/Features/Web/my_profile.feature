@@ -139,7 +139,7 @@ Feature:
     And I wait for the server response
     Then the avatar img tag should have the "logo.png" data url
 
-#todo:  Scenario: when chaning avatar, it should also appear in the header (desktop + mobile)
+#todo:  Scenario: when changing avatar, it should also appear in the header (desktop + mobile)
 
   #todo: try not to reload the page, but check if the text "This image type is not supported, ..." is visible
   Scenario: only jpg, png or gif allowed for avatar
@@ -170,3 +170,16 @@ Feature:
     Given I go to "/pocketcode/profileDeleteProgram/3"
     Then I should see "Ooooops something went wrong."
 
+  Scenario: check deletion PopUp
+    And I am on "/pocketcode/profile"
+    And I should see "program 1"
+    And I should see "program 2"
+    When I click "#delete-1"
+    And I wait 100 milliseconds
+    Then I should see "delete it"
+    When I click ".swal2-cancel"
+    Then I should see "program 1"
+    When I click "#delete-1"
+    And I wait 100 milliseconds
+    And I click ".swal2-confirm"
+    Then I should not see "program 1"
