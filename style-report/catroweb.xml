@@ -130,7 +130,6 @@
 		<property name="testParam" value="true" />
 		<property name="testThrow" value="true" />
 		<exception value="__toString" />
-		<exception>
 	</test>
 
 	<!-- Check for the presence of a mandatory header (licence for exemple) -->
