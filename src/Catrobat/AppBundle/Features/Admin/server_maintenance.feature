@@ -4,30 +4,30 @@ Feature: Admin Server Maintenance
   As Admin
   I want to be able to delete Extracted Catrobatfiles/APKs and Backups in the Backend
 
-Scenario: As a valid admin I want to be able to see the Maintain menu
-  Given I am a logged in as super admin
-  When I GET "/admin/dashboard"
-  Then the response should contain "Maintain"
+  Scenario: As a valid admin I want to be able to see the Maintain menu
+    Given I am a logged in as super admin
+    When I GET "/admin/dashboard"
+    Then the response should contain "Maintain"
 
-Scenario: As a valid admin I want to be able to delete the resources
-  Given I am a logged in as super admin
-  When I GET "/admin/maintain/list"
-  Then the response should contain "Delete APKs"
-  And the response should contain "Delete extracted files"
-  And the response should contain "Delete backups"
+  Scenario: As a valid admin I want to be able to delete the resources
+    Given I am a logged in as super admin
+    When I GET "/admin/maintain/list"
+    Then the response should contain "Delete APKs"
+    And the response should contain "Delete extracted files"
+    And the response should contain "Delete backups"
 
-Scenario: As a valid admin I want to be able to remove the APKs through the backend
+  Scenario: As a valid admin I want to be able to remove the APKs through the backend
   which should result in deleting apk from disk and reset entity state
-  Given I am a logged in as super admin
-  And there are programs:
-    | id | name      |  apk_status  | directory_hash  |
-    | 1  | program 1 |  2           | null            |
-  And there is a file "1.apk" with size "4096" bytes in the APK-folder
-  When I GET "/admin/maintain/list"
-  Then the response should contain "Generated APKs (4.00 KiB)"
-  When I GET "/admin/maintain/apk"
-  Then the response should contain "Generated APKs (0.00 B)"
-  And program with id "1" should have no apk
+    Given I am a logged in as super admin
+    And there are programs:
+      | id | name      | apk_status | directory_hash |
+      | 1  | program 1 | 2          | null           |
+    And there is a file "1.apk" with size "4096" bytes in the APK-folder
+    When I GET "/admin/maintain/list"
+    Then the response should contain "Generated APKs (4.00 KiB)"
+    When I GET "/admin/maintain/apk"
+    Then the response should contain "Generated APKs (0.00 B)"
+    And program with id "1" should have no apk
 
 
   Scenario: As a valid admin I want to be able to delete all backups through the backend
@@ -57,8 +57,8 @@ Scenario: As a valid admin I want to be able to remove the APKs through the back
   which should result in deleting resources from disk and reset entity state
     Given I am a logged in as super admin
     And there are programs:
-      | id | name      |  apk_status  | directory_hash  |
-      | 1  | program   |  0           | generated_hash  |
+      | id | name    | apk_status | directory_hash |
+      | 1  | program | 0          | generated_hash |
     And there is a file "generated_hash/code.xml" with size "4096" bytes in the extracted-folder
     When I GET "/admin/maintain/list"
     Then the response should contain "Extracted Catrobatfiles (4.00 KiB)"

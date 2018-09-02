@@ -1,7 +1,7 @@
 @api
 Feature: Get the most downloaded programs
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -12,7 +12,7 @@ Feature: Get the most downloaded programs
       | 2  | program 2 |             | Catrobat | 333       | 90    | 01.02.2013 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   |
     And the current time is "01.08.2014 13:00"
-      
+
   Scenario: show most viewed programs
     Given I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
@@ -68,7 +68,7 @@ Feature: Get the most downloaded programs
                                   }
       }
       """
-      
+
 
   Scenario: show most downloaded programs with limit and offset
     Given I have a parameter "limit" with value "2"

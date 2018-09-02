@@ -1,7 +1,7 @@
 @api
 Feature: Download programs
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -14,11 +14,11 @@ Feature: Download programs
     When i download "/pocketcode/download/1.catrobat"
     Then i should receive a file
     And the response code should be "200"
-    
+
   Scenario:
     When i download "/pocketcode/download/2.catrobat"
     Then the response code should be "404"
-    
+
   Scenario:
     When i download "/pocketcode/download/999.catrobat"
     Then the response code should be "404"

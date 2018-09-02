@@ -6,24 +6,28 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
 class PlaySoundWaitBrick extends Brick
 {
-    private $sound_file_name;
+  private $sound_file_name;
 
-    protected function create()
+  protected function create()
+  {
+    $this->type = Constants::PLAY_SOUND_WAIT_BRICK;
+    $this->caption = "Start sound and wait";
+
+    if ($this->brick_xml_properties->sound[Constants::REFERENCE_ATTRIBUTE] != null)
     {
-        $this->type = Constants::PLAY_SOUND_WAIT_BRICK;
-        $this->caption = "Start sound and wait";
-
-        if ($this->brick_xml_properties->sound[Constants::REFERENCE_ATTRIBUTE] != null)
-            $this->sound_file_name = $this->brick_xml_properties->sound
-              ->xpath($this->brick_xml_properties->sound[Constants::REFERENCE_ATTRIBUTE])[0]->fileName;
-        else
-            $this->sound_file_name = $this->brick_xml_properties->sound->fileName;
-        
-        $this->setImgFile(Constants::SOUND_BRICK_IMG);
+      $this->sound_file_name = $this->brick_xml_properties->sound
+        ->xpath($this->brick_xml_properties->sound[Constants::REFERENCE_ATTRIBUTE])[0]->fileName;
+    }
+    else
+    {
+      $this->sound_file_name = $this->brick_xml_properties->sound->fileName;
     }
 
-    public function getSoundFileName()
-    {
-        return $this->sound_file_name;
-    }
+    $this->setImgFile(Constants::SOUND_BRICK_IMG);
+  }
+
+  public function getSoundFileName()
+  {
+    return $this->sound_file_name;
+  }
 }

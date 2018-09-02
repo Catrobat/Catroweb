@@ -54,7 +54,8 @@ class UploadController
   }
 
   /**
-   * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"}, methods={"POST"})
+   * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"},
+   *                                    methods={"POST"})
    */
   public function submitAction(Request $request)
   {
@@ -87,10 +88,12 @@ class UploadController
     $user = $this->tokenstorage->getToken()->getUser();
 
     $flavor = 'pocketcode';
-    if ($user->getNolbUser()) {
-        $flavor = 'create@school';
+    if ($user->getNolbUser())
+    {
+      $flavor = 'create@school';
     }
-    if ($request->request->has('flavor')) {
+    if ($request->request->has('flavor'))
+    {
       $flavor = $request->request->get('flavor');
     }
 
@@ -142,10 +145,10 @@ class UploadController
 
   /**
    * @param Request $request
-   * @param $gamejam
-   * @param $user
-   * @param $program
-   * @param $response
+   * @param         $gamejam
+   * @param         $user
+   * @param         $program
+   * @param         $response
    *
    * @return mixed
    */

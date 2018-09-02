@@ -6,15 +6,15 @@ Feature: Filtering programs with specific flavor
 
   Background:
     Given there are programs:
-    | name         | flavor      |
-    | Invaders     | pocketcode  |
-    | Simple click | pocketphiropro |
-    | A new world  | pocketcode  |
-    | Soon to be   | pocketphiropro |
+      | name         | flavor         |
+      | Invaders     | pocketcode     |
+      | Simple click | pocketphiropro |
+      | A new world  | pocketcode     |
+      | Soon to be   | pocketphiropro |
 
 
   Scenario: Get most viewed programs of flavor
-    
+
     When I get the most viewed programs with "pocketcode/api/projects/mostViewed.json"
     Then I should get following programs:
       | name         |
@@ -48,9 +48,9 @@ Feature: Filtering programs with specific flavor
     Given All programs are from the same user
     When I get the user's programs with "pocketcode/api/projects/userPrograms.json"
     Then I should get following programs:
-      | name          |
-      | Invaders      |
-      | Simple click  |
-      | A new world   |
-      | Soon to be    |
+      | name         |
+      | Invaders     |
+      | Simple click |
+      | A new world  |
+      | Soon to be   |
     

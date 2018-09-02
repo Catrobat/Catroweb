@@ -180,8 +180,8 @@ class MediaPackageController extends Controller
     {
       // case insensitive:
       if (strcasecmp($media_package_category->getName(), $category) == 0)
-      // case sensitive:
-      // if ($media_package_category->getName() == $category)
+        // case sensitive:
+        // if ($media_package_category->getName() == $category)
       {
         $category_not_found = false;
         /** @var array|MediaPackageFile $media_package_files */

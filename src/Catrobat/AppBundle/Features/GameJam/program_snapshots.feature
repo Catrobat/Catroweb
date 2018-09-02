@@ -1,9 +1,9 @@
 Feature: To avoid accidental losing program files due to overriding on limited accounts
-         A Snapshot will be created on every update.
-         
+  A Snapshot will be created on every update.
 
-Scenario:
+
+  Scenario:
     Given I have a limited account
-     When I update my program
-     Then A copy of this program will be stored on the server
+    When I update my program
+    Then A copy of this program will be stored on the server
      

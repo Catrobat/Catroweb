@@ -13,74 +13,78 @@ use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class RefreshCommand extends ContainerAwareCommand
 {
-    protected $input;
-    protected $output;
-    protected $filesystem;
-    protected $kernel;
+  protected $input;
+  protected $output;
+  protected $filesystem;
+  protected $kernel;
 
-    public function __construct(Filesystem $filesystem)
-    {
-        parent::__construct();
-        $this->filesystem = $filesystem;
-    }
+  public function __construct(Filesystem $filesystem)
+  {
+    parent::__construct();
+    $this->filesystem = $filesystem;
+  }
 
-    protected function configure()
-    {
-        $this->setName('catrobat:refresh')
-            ->setDescription('Refresh all caches and fixtures')
+  protected function configure()
+  {
+    $this->setName('catrobat:refresh')
+      ->setDescription('Refresh all caches and fixtures')
 //     ->addArgument('directory', InputArgument::REQUIRED, 'Direcory contaning catrobat files for import')
 //     ->addArgument('user', InputArgument::REQUIRED, 'User who will be the ower of these programs');
-      ;
-    }
+    ;
+  }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+    $this->input = $input;
+    $this->output = $output;
+
+    $kernel = $this->getContainer()->get('kernel');
+    $env = $kernel->getEnvironment();
+    $this->kernel = $kernel;
+
+    switch ($env)
     {
-        $this->input = $input;
-        $this->output = $output;
-
-        $kernel = $this->getContainer()->get('kernel');
-        $env = $kernel->getEnvironment();
-        $this->kernel = $kernel;
-
-        switch ($env) {
-          case 'test':
-            $this->generateTestdata();
-            $this->deleteSqLiteDatabase();
-          break;
-        }
-        $this->clearCache();
-
-        $output->writeln('<info>');
-        $output->writeln('Make sure to run this command in all environments!');
-        $output->writeln($this->getName().' --env=test');
-        $output->writeln($this->getName().' --env=prod');
-        $output->writeln('</info>');
+      case 'test':
+        $this->generateTestdata();
+        $this->deleteSqLiteDatabase();
+        break;
     }
+    $this->clearCache();
 
-    protected function clearCache()
+    $output->writeln('<info>');
+    $output->writeln('Make sure to run this command in all environments!');
+    $output->writeln($this->getName() . ' --env=test');
+    $output->writeln($this->getName() . ' --env=prod');
+    $output->writeln('</info>');
+  }
+
+  protected function clearCache()
+  {
+    $dialog = $this->getHelperSet()->get('question');
+    $question = new Question('<question>Clear Cache (Y/n)? </question>', true);
+
+    if ($dialog->doAsk($this->output, $question))
     {
-        $dialog = $this->getHelperSet()->get('question');
-        $question = new Question('<question>Clear Cache (Y/n)? </question>', true);
+      CommandHelper::executeSymfonyCommand('cache:clear', $this->getApplication(), [], $this->output);
+    }
+  }
 
-        if ($dialog->doAsk($this->output, $question)) {
-            CommandHelper::executeSymfonyCommand('cache:clear', $this->getApplication(), array(), $this->output);
-        }
-    }
+  protected function generateTestdata()
+  {
+    CommandHelper::executeSymfonyCommand('catrobat:test:generate', $this->getApplication(), [], $this->output);
+  }
 
-    protected function generateTestdata()
+  protected function deleteSqLiteDatabase()
+  {
+    $database_path = $this->kernel->getRootDir() . '/../sqlite/behattest.sqlite';
+    $this->output->write('Deleting SQLite database (' . $database_path . ')... ');
+    try
     {
-        CommandHelper::executeSymfonyCommand('catrobat:test:generate', $this->getApplication(), array(), $this->output);
-    }
-    
-    protected function deleteSqLiteDatabase()
+      $this->filesystem->remove($database_path);
+      $this->output->writeln(' done!');
+    } catch (IOExceptionInterface $e)
     {
-        $database_path = $this->kernel->getRootDir().'/../sqlite/behattest.sqlite';
-        $this->output->write('Deleting SQLite database ('.$database_path.')... ');
-        try {
-            $this->filesystem->remove($database_path);
-            $this->output->writeln(' done!');
-        } catch (IOExceptionInterface $e) {
-            $this->output->writeln('Could not delete '.$e->getPath());
-        }
+      $this->output->writeln('Could not delete ' . $e->getPath());
     }
+  }
 }

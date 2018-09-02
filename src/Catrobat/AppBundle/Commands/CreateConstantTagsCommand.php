@@ -26,61 +26,68 @@ use Catrobat\AppBundle\Entity\TagRepository;
 class CreateConstantTagsCommand extends ContainerAwareCommand
 {
 
-    private $output;
-    private $translator;
-    private $tag_repository;
+  private $output;
+  private $translator;
+  private $tag_repository;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator)
+  public function __construct(EntityManager $em, TranslatorInterface $translator)
+  {
+    parent::__construct();
+    $this->em = $em;
+    $this->translator = $translator;
+  }
+
+  protected function configure()
+  {
+    $this->setName('catrobat:create:tags')
+      ->setDescription('Creating constant tags in supported languages');
+  }
+
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+    $this->output = $output;
+    $this->tag_repository = $this->getContainer()->get('tagrepository');
+    $metadata = $this->em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+
+    for ($i = 1; $i <= 6; $i++)
     {
-        parent::__construct();
-        $this->em = $em;
-        $this->translator = $translator;
-    }
+      $tag = $this->tag_repository->find($i);
 
-    protected function configure()
-    {
-        $this->setName('catrobat:create:tags')
-            ->setDescription('Creating constant tags in supported languages');
-    }
+      if ($tag != null)
+      {
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->output = $output;
-        $this->tag_repository = $this->getContainer()->get('tagrepository');
-        $metadata = $this->em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+        for ($j = 1; $j < count($metadata); $j++)
+        {
+          $language = 'set' . $metadata[$j];
 
-        for($i = 1; $i <= 6; $i++ ) {
-            $tag = $this->tag_repository->find($i);
+          $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
 
-            if($tag != null) {
-
-                for($j = 1; $j < count($metadata); $j++) {
-                    $language = 'set'.$metadata[$j];
-
-                    $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
-
-                    $this->em->persist($tag);;
-                    $this->em->flush();
-                }
-
-            } else {
-                
-                $tag = new Tag();
-
-                for($j = 1; $j < count($metadata); $j++) {
-                    $language = 'set'.$metadata[$j];
-                    $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
-                }
-
-                $this->em->persist($tag);;
-                $this->em->flush();
-            }
+          $this->em->persist($tag);;
+          $this->em->flush();
         }
-    }
 
-    private function trans($message, $locale)
-    {
-        $parameters = array();
-        return $this->translator->trans($message, $parameters, 'catroweb', $locale);
+      }
+      else
+      {
+
+        $tag = new Tag();
+
+        for ($j = 1; $j < count($metadata); $j++)
+        {
+          $language = 'set' . $metadata[$j];
+          $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
+        }
+
+        $this->em->persist($tag);;
+        $this->em->flush();
+      }
     }
+  }
+
+  private function trans($message, $locale)
+  {
+    $parameters = [];
+
+    return $this->translator->trans($message, $parameters, 'catroweb', $locale);
+  }
 }

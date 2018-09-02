@@ -24,11 +24,11 @@ class ReportAdmin extends AbstractAdmin
   {
     $query = parent::createQuery($context);
     $query->andWhere(
-      $query->expr()->eq($query->getRootAlias().'.isReported', $query->expr()->literal(true))
+      $query->expr()->eq($query->getRootAlias() . '.isReported', $query->expr()->literal(true))
     );
+
     return $query;
   }
-
 
 
   // Fields to be shown on filter forms
@@ -46,11 +46,10 @@ class ReportAdmin extends AbstractAdmin
       ->add('uploadDate')
       ->add('text')
       ->add('username')
-      ->add('_action', 'actions', array('actions' => array(
-        'delete' => array('template' => 'CRUD/list__action_delete_comment.html.twig'),
-        'unreport' => array('template' => 'CRUD/list__action_unreport.html.twig'),
-      )))
-    ;
+      ->add('_action', 'actions', ['actions' => [
+        'delete'   => ['template' => 'CRUD/list__action_delete_comment.html.twig'],
+        'unreport' => ['template' => 'CRUD/list__action_unreport.html.twig'],
+      ]]);
   }
 
 

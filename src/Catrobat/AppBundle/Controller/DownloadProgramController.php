@@ -24,13 +24,14 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class DownloadProgramController extends Controller
 {
   /**
-   * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"},
+   *                                   methods={"GET"})
    */
   public function downloadProgramAction(Request $request, $id)
   {
     /* @var $program_manager ProgramManager */
     /* @var $file_repository ProgramFileRepository */
-    /* @var $logger Logger*/
+    /* @var $logger Logger */
     $referrer = $request->getSession()->get('referer');
     $program_manager = $this->get('programmanager');
     $file_repository = $this->get('filerepository');
@@ -52,11 +53,11 @@ class DownloadProgramController extends Controller
     try
     {
       $file = $file_repository->getProgramFile($id);
-    }
-    catch (FileNotFoundException $e)
+    } catch (FileNotFoundException $e)
     {
       $logger = $this->get('logger');
       $logger->error('[FILE] failed to get program file with id: ' . $id);
+
       return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
     }
 

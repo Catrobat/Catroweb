@@ -9,88 +9,115 @@ use Symfony\Component\Process\Process;
 
 class CommandHelper
 {
-    public static function getSubstring($string, $needle, $last_char=false) {
-        $pos = strpos($string, $needle);
+  public static function getSubstring($string, $needle, $last_char = false)
+  {
+    $pos = strpos($string, $needle);
 
-        if($pos === false) {
-            return "";
-        }
-        if($last_char) {
-            $pos = $pos + 1;
-        }
-        return substr($string, 0, $pos);
+    if ($pos === false)
+    {
+      return "";
+    }
+    if ($last_char)
+    {
+      $pos = $pos + 1;
     }
 
-    public static function emptyDirectory($directory, $description = "", $output = null)
+    return substr($string, 0, $pos);
+  }
+
+  public static function emptyDirectory($directory, $description = "", $output = null)
+  {
+    if ($output)
     {
-        if($output)
-            $output->write($description . " ('" . $directory . "') ... ");
-
-        if ($directory == '') {
-            if($output)
-                $output->writeln('failed');
-            return false;
-        }
-
-        $filesystem = new Filesystem();
-
-        $finder = new Finder();
-        $finder->in($directory)->depth(0);
-        foreach ($finder as $file) {
-            // skip folder in templates directory
-            if(($file->getFilename() !== "screenshots") && ($file->getFilename() !== "thumbnails"))
-                $filesystem->remove($file);
-        }
-
-        if($output)
-            $output->writeln('OK');
-        return true;
+      $output->write($description . " ('" . $directory . "') ... ");
     }
 
-    public static function createDirectory($directory, $description, $output)
+    if ($directory == '')
     {
-        $output->write($description." ('".$directory."') ... ");
-        if ($directory == '') {
-            $output->writeln('failed');
-            return;
-        }
+      if ($output)
+      {
+        $output->writeln('failed');
+      }
 
-        $filesystem = new Filesystem();
-        $filesystem->mkdir($directory);
+      return false;
+    }
 
+    $filesystem = new Filesystem();
+
+    $finder = new Finder();
+    $finder->in($directory)->depth(0);
+    foreach ($finder as $file)
+    {
+      // skip folder in templates directory
+      if (($file->getFilename() !== "screenshots") && ($file->getFilename() !== "thumbnails"))
+      {
+        $filesystem->remove($file);
+      }
+    }
+
+    if ($output)
+    {
+      $output->writeln('OK');
+    }
+
+    return true;
+  }
+
+  public static function createDirectory($directory, $description, $output)
+  {
+    $output->write($description . " ('" . $directory . "') ... ");
+    if ($directory == '')
+    {
+      $output->writeln('failed');
+
+      return;
+    }
+
+    $filesystem = new Filesystem();
+    $filesystem->mkdir($directory);
+
+    $output->writeln('OK');
+  }
+
+  public static function executeSymfonyCommand($command, $application, $args, $output)
+  {
+    $command = $application->find($command);
+    $args['command'] = $command;
+    $input = new ArrayInput($args);
+    $command->run($input, $output);
+  }
+
+  public static function executeShellCommand($command, $args = [], $description = "", $output = null)
+  {
+    if ($output)
+    {
+      $output->write($description . " ('" . $command . "') ... ");
+    }
+
+    $process = new Process($command);
+
+    if (isset($args['timeout']))
+    {
+      $process->setTimeout($args['timeout']);
+    }
+
+    $process->run();
+
+    if ($process->isSuccessful())
+    {
+      if ($output)
+      {
         $output->writeln('OK');
+      }
+
+      return true;
     }
 
-    public static function executeSymfonyCommand($command, $application, $args, $output)
+    if ($output)
     {
-        $command = $application->find($command);
-        $args['command'] = $command;
-        $input = new ArrayInput($args);
-        $command->run($input, $output);
+      $output->writeln('failed!');
     }
 
-    public static function executeShellCommand($command, $args = array(), $description = "", $output = null) {
-        if($output) {
-            $output->write($description." ('".$command."') ... ");
-        }
-
-        $process = new Process($command);
-
-        if(isset($args['timeout'])) {
-            $process->setTimeout($args['timeout']);
-        }
-
-        $process->run();
-
-        if ($process->isSuccessful()) {
-            if($output)
-                $output->writeln('OK');
-            return true;
-        }
-
-        if($output)
-            $output->writeln('failed!');
-
-        return false;
-    }
+    return false;
+  }
 }

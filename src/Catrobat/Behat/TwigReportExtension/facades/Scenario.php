@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\Behat\TwigReportExtension\facades;
 
 use Behat\Behat\EventDispatcher\Event\AfterScenarioTested;
@@ -6,43 +7,43 @@ use Behat\Behat\EventDispatcher\Event\AfterScenarioTested;
 class Scenario implements ScenarioInterface
 {
 
-    private $event;
+  private $event;
 
-    private $steps;
+  private $steps;
 
-    public function __construct(AfterScenarioTested $event, $steps)
-    {
-        $this->event = $event;
-        $this->steps = $steps;
-    }
+  public function __construct(AfterScenarioTested $event, $steps)
+  {
+    $this->event = $event;
+    $this->steps = $steps;
+  }
 
-    public function getTitle()
-    {
-        return $this->event->getScenario()->getTitle();
-    }
+  public function getTitle()
+  {
+    return $this->event->getScenario()->getTitle();
+  }
 
-    public function getResult()
-    {
-        return $this->event->getTestResult()->getResultCode();
-    }
+  public function getResult()
+  {
+    return $this->event->getTestResult()->getResultCode();
+  }
 
-    public function getSteps()
-    {
-        return $this->steps;
-    }
+  public function getSteps()
+  {
+    return $this->steps;
+  }
 
-    public function isOutline()
-    {
-        return false;
-    }
+  public function isOutline()
+  {
+    return false;
+  }
 
-    public function getParameters()
-    {
-        return array();
-    }
+  public function getParameters()
+  {
+    return [];
+  }
 
-    public function getExamples()
-    {
-        return array();
-    }
+  public function getExamples()
+  {
+    return [];
+  }
 }

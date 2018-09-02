@@ -4,9 +4,9 @@ Feature: Open Authentication
 
   Background:
     Given there are users:
-      | name            | password  | token      | email                           |
-      | Catrobat        | 123456    | cccccccccc | dev1@pocketcode.org             |
-      | AlreadyinDB     | 642135    | cccccccccc | dev2@pocketcode.org             |
+      | name        | password | token      | email               |
+      | Catrobat    | 123456   | cccccccccc | dev1@pocketcode.org |
+      | AlreadyinDB | 642135   | cccccccccc | dev2@pocketcode.org |
 
 
   @javascript @insulated @RealOAuth
@@ -19,8 +19,8 @@ Feature: Open Authentication
     And I choose the username 'HeyWickieHey'
     Then I should be logged in
     And there is a user in the database:
-      | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
-      | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
+      | name         | email                           | facebook_uid    | facebook_name | google_uid | google_name | country |
+      | HeyWickieHey | pocket_zlxacqt_tester@tfbnw.net | 105678789764016 |               |            |             | en_US   |
     And I should see the logout button
     When I click the "logout" button
     Then I should not be logged in
@@ -38,8 +38,8 @@ Feature: Open Authentication
     And I choose the username 'PocketGoogler'
     Then I should be logged in
     And there is a user in the database:
-      | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
-      | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
+      | name          | email                      | facebook_uid | facebook_name | google_uid            | google_name | country |
+      | PocketGoogler | pocketcodetester@gmail.com |              |               | 105155320106786463089 |             | de      |
     And I should see the logout button
     When I click the "logout" button
     Then I should not be logged in
@@ -69,8 +69,8 @@ Feature: Open Authentication
     And I choose the username 'HeyWickieHey'
     Then I should be logged in
     And there is a user in the database:
-      | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
-      | HeyWickieHey      | pocket_zlxacqt_tester@tfbnw.net    | 105678789764016   |               |                        |                    | en_US  |
+      | name         | email                           | facebook_uid    | facebook_name | google_uid | google_name | country |
+      | HeyWickieHey | pocket_zlxacqt_tester@tfbnw.net | 105678789764016 |               |            |             | en_US   |
     And I am on "/pocketcode/emailEdit"
     Then I wait for the server response
     Then I fill in "email" with "pocket_tester@tfbnw.net"
@@ -94,8 +94,8 @@ Feature: Open Authentication
     And I choose the username 'PocketGoogler'
     Then I should be logged in
     And there is a user in the database:
-      | name              | email                              | facebook_uid      | facebook_name | google_uid             | google_name        |country |
-      | PocketGoogler     | pocketcodetester@gmail.com         |                   |               | 105155320106786463089  |                    | de     |
+      | name          | email                      | facebook_uid | facebook_name | google_uid            | google_name | country |
+      | PocketGoogler | pocketcodetester@gmail.com |              |               | 105155320106786463089 |             | de      |
     And I am on "/pocketcode/emailEdit"
     Then I wait for the server response
     Then I fill in "email" with "pocket-code-tester@gmail.com"

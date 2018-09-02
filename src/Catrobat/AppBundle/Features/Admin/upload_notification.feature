@@ -7,20 +7,20 @@ Feature: Admin Upload Notification
   Background:
     Given I am a valid user
 
-Scenario: Email only subscribed admins directly after upload
-  Given there are users:
-    | name     |  email           |
-    | Catrobat |  admin@catrob.at |
-    | User1    |  dog@catrob.at   |
-    | User2    |  dog2@catrob.at  |
-  And there are notifications:
-    |user     |upload   |report | summary |
-    |Catrobat |true     |1      | 1       |
-    |User1    |true     |0      | 0       |
-    |User2    |0        |1      | 0       |
-  And I activate the Profiler
+  Scenario: Email only subscribed admins directly after upload
+    Given there are users:
+      | name     | email           |
+      | Catrobat | admin@catrob.at |
+      | User1    | dog@catrob.at   |
+      | User2    | dog2@catrob.at  |
+    And there are notifications:
+      | user     | upload | report | summary |
+      | Catrobat | true   | 1      | 1       |
+      | User1    | true   | 0      | 0       |
+      | User2    | 0      | 1      | 0       |
+    And I activate the Profiler
 
-  When I upload a program with valid parameters
-  Then I should see 2 outgoing emails
-  And I should see a email with recipient "admin@catrob.at"
-  And I should see a email with recipient "dog@catrob.at"
+    When I upload a program with valid parameters
+    Then I should see 2 outgoing emails
+    And I should see a email with recipient "admin@catrob.at"
+    And I should see a email with recipient "dog@catrob.at"

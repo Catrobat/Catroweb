@@ -1,9 +1,9 @@
 @api
 Feature: Get recommended programs on homepage
 
-    To find yet unliked programs that were liked by similar users.
-    Similar users are users that liked some of the same programs that the current user also liked
-    (user-based Collaborative Filtering using Jaccard distance as similarity measure).
+  To find yet unliked programs that were liked by similar users.
+  Similar users are users that liked some of the same programs that the current user also liked
+  (user-based Collaborative Filtering using Jaccard distance as similarity measure).
 
   Background:
     Given there are users:
@@ -13,19 +13,19 @@ Feature: Get recommended programs on homepage
       | 3  | Catrobat3 | 12345    | cccccccccc |
       | 4  | Catrobat4 | 12345    | cccccccccc |
     And there are programs:
-      | id | name      | description | owned by  | downloads | views | upload time      | version | remix_root |
-      | 1  | Game      | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | true       |
-      | 2  | Minions   | p1          | Catrobat1 | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
-      | 3  | Galaxy    | p2          | Catrobat2 | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | false      |
-      | 4  | Other     | p3          | Catrobat3 | 12        | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 5  | Other2    | p5          | Catrobat2 | 3         | 9     | 01.02.2013 12:00 | 0.8.5   | false      |
-      | 6  | Other3    | p6          | Catrobat1 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 7  | Other4    | p7          | Catrobat4 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 8  | Other5    | p7          | Catrobat3 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
-      | 9  | Other6    | p7          | Catrobat2 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
+      | id | name    | description | owned by  | downloads | views | upload time      | version | remix_root |
+      | 1  | Game    | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | true       |
+      | 2  | Minions | p1          | Catrobat1 | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
+      | 3  | Galaxy  | p2          | Catrobat2 | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | false      |
+      | 4  | Other   | p3          | Catrobat3 | 12        | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
+      | 5  | Other2  | p5          | Catrobat2 | 3         | 9     | 01.02.2013 12:00 | 0.8.5   | false      |
+      | 6  | Other3  | p6          | Catrobat1 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
+      | 7  | Other4  | p7          | Catrobat4 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
+      | 8  | Other5  | p7          | Catrobat3 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
+      | 9  | Other6  | p7          | Catrobat2 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | true       |
 
   Scenario: Test if most liked recommendations fallback is active when similar users only like same programs
-            (i.e. they don't like any differing programs)
+  (i.e. they don't like any differing programs)
     Given there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.3        |
@@ -42,9 +42,9 @@ Feature: Get recommended programs on homepage
     Then I should get no user-specific recommended projects
     Then I should get a total of "2" projects
     Then I should get following programs:
-      | Name      |
-      | Game      |
-      | Minions   |
+      | Name    |
+      | Game    |
+      | Minions |
 
   Scenario: No recommendations because there are no liked programs
     Given I have a parameter "test_user_id_for_like_recommendation" with value "1"
@@ -55,7 +55,7 @@ Feature: Get recommended programs on homepage
     Then I should get a total of "0" projects
 
   Scenario: Recommend all other unliked programs, liked by similar user
-            (example: #1, "Only one similar user, recommend me programs I've not liked so far and only those that are not mine")
+  (example: #1, "Only one similar user, recommend me programs I've not liked so far and only those that are not mine")
     Given there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.3        |
@@ -72,11 +72,11 @@ Feature: Get recommended programs on homepage
     Then I should get user-specific recommended projects
     Then I should get a total of "1" projects
     Then I should get following programs:
-        | Name      |
-        | Galaxy    |
+      | Name   |
+      | Galaxy |
 
   Scenario: Recommend all other unliked programs, liked by similar user
-            (example: #2 "Three similar users with different similarity values")
+  (example: #2 "Three similar users with different similarity values")
     Given there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.1        |
@@ -96,12 +96,12 @@ Feature: Get recommended programs on homepage
     Then I should get user-specific recommended projects
     Then I should get a total of "2" projects
     Then I should get following programs:
-        | Name      |
-        | Galaxy    |
-        | Other     |
+      | Name   |
+      | Galaxy |
+      | Other  |
 
   Scenario: Recommend all other unliked programs, liked by similar user
-            (example: #3, "Four similar users with different similarity values")
+  (example: #3, "Four similar users with different similarity values")
     Given there are like similar users:
       | first_user_id | second_user_id | similarity |
       | 1             | 2              | 0.1        |
@@ -124,7 +124,7 @@ Feature: Get recommended programs on homepage
     Then I should get user-specific recommended projects
     Then I should get a total of "3" projects
     Then I should get following programs:
-        | Name      |
-        | Other     |
-        | Other2    |
-        | Galaxy    |
+      | Name   |
+      | Other  |
+      | Other2 |
+      | Galaxy |

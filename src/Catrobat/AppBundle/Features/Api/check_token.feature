@@ -1,7 +1,7 @@
 @api
 Feature: Checking a user's token validity
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -21,7 +21,7 @@ Feature: Checking a user's token validity
       {"statusCode":200,"answer":"ok","preHeaderMessages":"  \n"}
       """
     And the response code should be "200"
-    
+
     Examples:
       | username | token      |
       | Catrobat | cccccccccc |

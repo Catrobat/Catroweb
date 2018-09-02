@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,278 +10,278 @@ use Doctrine\ORM\Mapping as ORM;
 class GameJam
 {
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=300)
-     */
-    protected $name;
+  /**
+   * @ORM\Column(type="string", length=300)
+   */
+  protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     */
-    protected $form_url;
+  /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  protected $form_url;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $start;
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected $start;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $end;
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected $end;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="gamejam", fetch="EXTRA_LAZY")
-     */
-    protected $programs;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Program")
-     * @ORM\JoinTable(name="gamejams_sampleprograms",
-     *      joinColumns={@ORM\JoinColumn(name="gamejam_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="program_id", referencedColumnName="id")}
-     *      )
-     **/
-    private $sample_programs;
+  /**
+   * @ORM\OneToMany(targetEntity="Program", mappedBy="gamejam", fetch="EXTRA_LAZY")
+   */
+  protected $programs;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    protected $hashtag;
+  /**
+   * @ORM\ManyToMany(targetEntity="Program")
+   * @ORM\JoinTable(name="gamejams_sampleprograms",
+   *      joinColumns={@ORM\JoinColumn(name="gamejam_id", referencedColumnName="id")},
+   *      inverseJoinColumns={@ORM\JoinColumn(name="program_id", referencedColumnName="id")}
+   *      )
+   **/
+  private $sample_programs;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $flavor;
+  /**
+   * @ORM\Column(type="string", length=100, nullable=true)
+   */
+  protected $hashtag;
 
-    public function __construct()
-    {
-        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->sample_programs = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @ORM\Column(type="string", length=100, nullable=true)
+   */
+  private $flavor;
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return GameJam
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
+  public function __construct()
+  {
+    $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->sample_programs = new \Doctrine\Common\Collections\ArrayCollection();
+  }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+  /**
+   * Get id
+   *
+   * @return integer
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 
-    /**
-     * Set formUrl
-     *
-     * @param string $formUrl
-     *
-     * @return GameJam
-     */
-    public function setFormUrl($formUrl)
-    {
-        $this->form_url = $formUrl;
-        
-        return $this;
-    }
+  /**
+   * Set name
+   *
+   * @param string $name
+   *
+   * @return GameJam
+   */
+  public function setName($name)
+  {
+    $this->name = $name;
 
-    /**
-     * Get formUrl
-     *
-     * @return string
-     */
-    public function getFormUrl()
-    {
-        return $this->form_url;
-    }
+    return $this;
+  }
 
-    /**
-     * Set start
-     *
-     * @param \DateTime $start
-     *
-     * @return GameJam
-     */
-    public function setStart(\DateTime $start)
-    {
-        $this->start = $start;
-        
-        return $this;
-    }
+  /**
+   * Get name
+   *
+   * @return string
+   */
+  public function getName()
+  {
+    return $this->name;
+  }
 
-    /**
-     * Get start
-     *
-     * @return \DateTime
-     */
-    public function getStart()
-    {
-        return $this->start;
-    }
+  /**
+   * Set formUrl
+   *
+   * @param string $formUrl
+   *
+   * @return GameJam
+   */
+  public function setFormUrl($formUrl)
+  {
+    $this->form_url = $formUrl;
 
-    /**
-     * Set end
-     *
-     * @param \DateTime $end
-     *
-     * @return GameJam
-     */
-    public function setEnd(\DateTime $end)
-    {
-        $this->end = $end;
-        
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get end
-     *
-     * @return \DateTime
-     */
-    public function getEnd()
-    {
-        return $this->end;
-    }
+  /**
+   * Get formUrl
+   *
+   * @return string
+   */
+  public function getFormUrl()
+  {
+    return $this->form_url;
+  }
 
-    /**
-     * Add program
-     *
-     * @param \Catrobat\AppBundle\Entity\Program $program
-     *
-     * @return GameJam
-     */
-    public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
-    {
-        $this->programs[] = $program;
+  /**
+   * Set start
+   *
+   * @param \DateTime $start
+   *
+   * @return GameJam
+   */
+  public function setStart(\DateTime $start)
+  {
+    $this->start = $start;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Remove program
-     *
-     * @param \Catrobat\AppBundle\Entity\Program $program
-     */
-    public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
-    {
-        $this->programs->removeElement($program);
-    }
+  /**
+   * Get start
+   *
+   * @return \DateTime
+   */
+  public function getStart()
+  {
+    return $this->start;
+  }
 
-    /**
-     * Get programs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrograms()
-    {
-        return $this->programs;
-    }
+  /**
+   * Set end
+   *
+   * @param \DateTime $end
+   *
+   * @return GameJam
+   */
+  public function setEnd(\DateTime $end)
+  {
+    $this->end = $end;
 
-    /**
-     * Add sampleProgram
-     *
-     * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
-     *
-     * @return GameJam
-     */
-    public function addSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
-    {
-        $this->sample_programs[] = $sampleProgram;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+   * Get end
+   *
+   * @return \DateTime
+   */
+  public function getEnd()
+  {
+    return $this->end;
+  }
 
-    /**
-     * Remove sampleProgram
-     *
-     * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
-     */
-    public function removeSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
-    {
-        $this->sample_programs->removeElement($sampleProgram);
-    }
+  /**
+   * Add program
+   *
+   * @param \Catrobat\AppBundle\Entity\Program $program
+   *
+   * @return GameJam
+   */
+  public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
+  {
+    $this->programs[] = $program;
 
-    /**
-     * Get samplePrograms
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSamplePrograms()
-    {
-        return $this->sample_programs;
-    }
-    
-    public function __toString()
-    {
-        return $this->getName();
-    }
+    return $this;
+  }
 
-    /**
-     * @return mixed
-     */
-    public function getHashtag()
-    {
-        return $this->hashtag;
-    }
+  /**
+   * Remove program
+   *
+   * @param \Catrobat\AppBundle\Entity\Program $program
+   */
+  public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
+  {
+    $this->programs->removeElement($program);
+  }
 
-    /**
-     * @param mixed $hashtag
-     */
-    public function setHashtag($hashtag)
-    {
-        $this->hashtag = $hashtag;
-    }
+  /**
+   * Get programs
+   *
+   * @return \Doctrine\Common\Collections\Collection
+   */
+  public function getPrograms()
+  {
+    return $this->programs;
+  }
 
-    /**
-     * @return mixed
-     */
-    public function getFlavor()
-    {
-        return $this->flavor;
-    }
+  /**
+   * Add sampleProgram
+   *
+   * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
+   *
+   * @return GameJam
+   */
+  public function addSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
+  {
+    $this->sample_programs[] = $sampleProgram;
 
-    /**
-     * @param mixed $flavor
-     */
-    public function setFlavor($flavor)
-    {
-        $this->flavor = $flavor;
-    }
+    return $this;
+  }
 
-    public function isNull()
-    {
-        return null === $this;
-    }
+  /**
+   * Remove sampleProgram
+   *
+   * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
+   */
+  public function removeSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
+  {
+    $this->sample_programs->removeElement($sampleProgram);
+  }
+
+  /**
+   * Get samplePrograms
+   *
+   * @return \Doctrine\Common\Collections\Collection
+   */
+  public function getSamplePrograms()
+  {
+    return $this->sample_programs;
+  }
+
+  public function __toString()
+  {
+    return $this->getName();
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getHashtag()
+  {
+    return $this->hashtag;
+  }
+
+  /**
+   * @param mixed $hashtag
+   */
+  public function setHashtag($hashtag)
+  {
+    $this->hashtag = $hashtag;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getFlavor()
+  {
+    return $this->flavor;
+  }
+
+  /**
+   * @param mixed $flavor
+   */
+  public function setFlavor($flavor)
+  {
+    $this->flavor = $flavor;
+  }
+
+  public function isNull()
+  {
+    return null === $this;
+  }
 
 
 }

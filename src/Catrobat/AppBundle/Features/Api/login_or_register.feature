@@ -1,11 +1,11 @@
 @api
 Feature: Login with an existing accunt or register a new one
 
-  Background: 
+  Background:
     Given there are users:
-      | name     | password | token      | dn           |
-      | Catrobat | 123456   | cccccccccc |              |
-      | LDAP-user|          | cccccccccc | cn=LDAP-user |
+      | name      | password | token      | dn           |
+      | Catrobat  | 123456   | cccccccccc |              |
+      | LDAP-user |          | cccccccccc | cn=LDAP-user |
 
   Scenario: Since LoginOrRegister is deprecated
     Then We can't test anything here

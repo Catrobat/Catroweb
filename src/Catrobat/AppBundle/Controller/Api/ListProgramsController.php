@@ -22,7 +22,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"},
+   *                                        methods={"GET"})
    */
   public function listProgramIdsAction(Request $request)
   {
@@ -30,7 +31,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"},
+   *                                             methods={"GET"})
    */
   public function listMostDownloadedProgramsAction(Request $request)
   {
@@ -38,7 +40,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format":
+   *                                                "json"}, methods={"GET"})
    */
   public function listMostDownloadedProgramIdsAction(Request $request)
   {
@@ -46,7 +49,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"},
+   *                                         methods={"GET"})
    */
   public function listMostViewedProgramsAction(Request $request)
   {
@@ -54,7 +58,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"},
+   *                                            methods={"GET"})
    */
   public function listMostViewedProgramIdsAction(Request $request)
   {
@@ -62,7 +67,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/randomPrograms.json", name="api_random_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/randomPrograms.json", name="api_random_programs", defaults={"_format": "json"},
+   *                                             methods={"GET"})
    */
   public function listRandomProgramsAction(Request $request)
   {
@@ -70,7 +76,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids", defaults={"_format": "json"},
+   *                                               methods={"GET"})
    */
   public function listRandomProgramIdsAction(Request $request)
   {
@@ -96,7 +103,8 @@ class ListProgramsController extends Controller
     $max_version = $request->query->get('max_version', 0);
 
     // setting flavor to null to get all results
-    if ($flavor == 'pocketcode') {
+    if ($flavor == 'pocketcode')
+    {
       $flavor = null;
     }
 
@@ -105,7 +113,8 @@ class ListProgramsController extends Controller
       $programs = $program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
 
       $count = count($programs);
-      if($count != $limit && $flavor) {
+      if ($count != $limit && $flavor)
+      {
         $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getMostDownloadedPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
@@ -116,7 +125,8 @@ class ListProgramsController extends Controller
       $programs = $program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
 
       $count = count($programs);
-      if($count != $limit && $flavor) {
+      if ($count != $limit && $flavor)
+      {
         $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getMostViewedPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
@@ -131,7 +141,8 @@ class ListProgramsController extends Controller
       $programs = $program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
 
       $count = count($programs);
-      if($count != $limit && $flavor) {
+      if ($count != $limit && $flavor)
+      {
         $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getRandomPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
@@ -142,7 +153,8 @@ class ListProgramsController extends Controller
       $programs = $program_manager->getRecentPrograms($flavor, $limit, $offset, $max_version);
 
       $count = count($programs);
-      if($count != $limit && $flavor) {
+      if ($count != $limit && $flavor)
+      {
         $flavor_count = $program_manager->getTotalPrograms($flavor, $max_version);
         $new_offset = max($offset - $flavor_count + $count, 0);
         $programs = array_merge($programs, $program_manager->getRecentPrograms('pocketcode', $limit - $count, $new_offset, $max_version));
@@ -157,7 +169,8 @@ class ListProgramsController extends Controller
     {
       $numbOfTotalProjects = $program_manager->getTotalPrograms($flavor, $max_version);
 
-      if($flavor) {
+      if ($flavor)
+      {
         $numbOfTotalProjects += $program_manager->getTotalPrograms('pocketcode', $max_version);
       }
     }

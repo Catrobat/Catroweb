@@ -3,32 +3,32 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
   Background:
     Given there are users:
-      | name     | password | token       | email               |
-      | Catrobat | 123456   | cccccccccc  | dev1@pocketcode.org |
-      | OtherUser| 123456   | dddddddddd  | dev2@pocketcode.org |
+      | name      | password | token      | email               |
+      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |
+      | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
     And there are extensions:
-      | id | name         | prefix    |
-      | 1  | Arduino      | ARDUINO   |
-      | 2  | Drone        | DRONE     |
-      | 3  | Lego         | LEGO      |
-      | 4  | Phiro        | PHIRO     |
-      | 5  | Raspberry Pi | RASPI     |
+      | id | name         | prefix  |
+      | 1  | Arduino      | ARDUINO |
+      | 2  | Drone        | DRONE   |
+      | 3  | Lego         | LEGO    |
+      | 4  | Phiro        | PHIRO   |
+      | 5  | Raspberry Pi | RASPI   |
     And there are tags:
-      | id | en           | de          |
-      | 1  | Game         | Spiel       |
-      | 2  | Animation    | Animation   |
-      | 3  | Story        | Geschichte  |
-      | 4  | Music        | Musik       |
-      | 5  | Art          | Kunst       |
-      | 6  | Experimental | Experimental|
+      | id | en           | de           |
+      | 1  | Game         | Spiel        |
+      | 2  | Animation    | Animation    |
+      | 3  | Story        | Geschichte   |
+      | 4  | Music        | Musik        |
+      | 5  | Art          | Kunst        |
+      | 6  | Experimental | Experimental |
 
     And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions | tags_id | remix_root |
-      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 | true       |
-      | 2  | Galaxy    | p2          | OtherUser| 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   | false      |
-      | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     | true       |
-      | 4  | Trolol    | p5          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       | true       |
-      | 5  | Nothing   | p6          | Catrobat | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       | true       |
+      | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version | extensions | tags_id | remix_root |
+      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 | true       |
+      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   | false      |
+      | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     | true       |
+      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       | true       |
+      | 5  | Nothing | p6          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       | true       |
 
     And there are forward remix relations:
       | ancestor_id | descendant_id | depth |
@@ -125,10 +125,10 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   @javascript
   Scenario: Create one statistic entry from recommended programs on homepage
     Given there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version |
-      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
-      | 2  | Galaxy    | p2          | OtherUser| 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
-      | 3  | Alone     | p3          | Catrobat | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
+      | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version |
+      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
+      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   |
+      | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |
 
     And there are likes:
       | username  | program_id | type | created at       |
@@ -149,9 +149,9 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   @javascript
   Scenario: Create one statistic entry from recommended program that has been also downloaded by users that downloaded this program
     Given there are program download statistics:
-      | id | program_id | downloaded_at        | ip             | country_code  | country_name | user_agent | username  | referrer |
-      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | AT            | Austria      | okhttp     | OtherUser | Facebook |
-      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | AT            | Austria      | okhttp     | OtherUser | Facebook |
+      | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | username  | referrer |
+      | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
+      | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | OtherUser | Facebook |
 
     And I am on "/pocketcode/program/1"
     Then There should be recommended specific programs
@@ -164,9 +164,9 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   @javascript
   Scenario: No recommendable program that has been also downloaded by *other* users that downloaded this program
     Given there are program download statistics:
-      | id | program_id | downloaded_at        | ip             | country_code  | country_name | user_agent | username  | referrer |
-      | 1  | 1          |  2017-02-09 16:01:00 | 88.116.169.222 | AT            | Austria      | okhttp     | Catrobat  | Facebook |
-      | 2  | 3          |  2017-02-09 16:02:00 | 88.116.169.222 | AT            | Austria      | okhttp     | Catrobat  | Facebook |
+      | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | username | referrer |
+      | 1  | 1          | 2017-02-09 16:01:00 | 88.116.169.222 | AT           | Austria      | okhttp     | Catrobat | Facebook |
+      | 2  | 3          | 2017-02-09 16:02:00 | 88.116.169.222 | AT           | Austria      | okhttp     | Catrobat | Facebook |
 
     And I am on "/pocketcode/program/1"
     Then There should be no recommended specific programs

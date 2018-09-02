@@ -1,7 +1,7 @@
 @api
 Feature: Post to Facebook
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -11,7 +11,7 @@ Feature: Post to Facebook
 
   @RealFacebook
   Scenario: when a program with with valid data is uploaded, a Facebook post with a link to the project should be made
-           and when the program is reported, the Facebook post should be removed again.
+  and when the program is reported, the Facebook post should be removed again.
     When I upload a valid program
     Then the project should be posted to Facebook with message "test" and the correct project ID
     When I report the program

@@ -69,7 +69,7 @@ Feature: Upload a remixed program with one parent
     And the uploaded program should have RemixOf "https://www.google.com" in the xml
 
   Scenario: program upload with parent-URL referring to own Catrobat program should not add any remix relations
-            (except self referencing relation)
+  (except self referencing relation)
     Given I have a program with "url" set to "/pocketcode/program/10"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -81,7 +81,7 @@ Feature: Upload a remixed program with one parent
     And the uploaded program should have RemixOf "/pocketcode/program/10" in the xml
 
   Scenario: program upload with parent-URL referring to no existing Catrobat program should not add any remix relations
-            (except self referencing relation)
+  (except self referencing relation)
     Given I have a program with "url" set to "/pocketcode/program/11"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -93,7 +93,7 @@ Feature: Upload a remixed program with one parent
     And the uploaded program should have RemixOf "/pocketcode/program/11" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat non-root program
-            should correctly add remix relations (example #1)
+  should correctly add remix relations (example #1)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #                (1)
@@ -115,7 +115,7 @@ Feature: Upload a remixed program with one parent
     And the uploaded program should have RemixOf "/pocketcode/program/1" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat non-root program
-            should correctly add remix relations (example #2)
+  should correctly add remix relations (example #2)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #               (1)
@@ -137,7 +137,7 @@ Feature: Upload a remixed program with one parent
     And the uploaded program should have RemixOf "/pocketalice/program/2" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat non-root program
-            should correctly add remix relations (example #3)
+  should correctly add remix relations (example #3)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #              (1)

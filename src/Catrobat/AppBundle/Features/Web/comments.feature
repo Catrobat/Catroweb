@@ -8,29 +8,29 @@ Feature: As a visitor I want to write, see and report comments.
       | Gregor   | 123456   | cccccccccc | dev2@pocketcode.org |
     And there are programs:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready | fb_post_url                                                                          |
-      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             |  true   | true      | https://www.facebook.com/permalink.php?story_fbid=424543024407491&id=403594093169051 |
-      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             |  true   | true      |                                                                                      |
-      | 3  | program 3 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             |  true   | true      |                                                                                      |
+      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      | https://www.facebook.com/permalink.php?story_fbid=424543024407491&id=403594093169051 |
+      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |                                                                                      |
+      | 3  | program 3 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |                                                                                      |
 
     And there are comments:
-      | program_id | user_id | upload_date      | text                | user_name | reported |
-      | 1          | 0       | 01.01.2013 12:01 | 1 | Superman  | true     |
-      | 1          | 1       | 01.01.2013 12:01 | 2 | Superman  | true     |
-      | 2          | 1       | 01.01.2013 12:01 | 3 | Superman  | true     |
-      | 2          | 1       | 01.01.2013 12:01 | 4 | Superman  | true     |
-      | 2          | 1       | 01.01.2013 12:01 | 5 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 6 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 7 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 8 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 9 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 10 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 11 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 12 | Superman  | true     |
-      | 2          | 0       | 01.01.2013 12:01 | 13 | Superman  | true     |
+      | program_id | user_id | upload_date      | text | user_name | reported |
+      | 1          | 0       | 01.01.2013 12:01 | 1    | Superman  | true     |
+      | 1          | 1       | 01.01.2013 12:01 | 2    | Superman  | true     |
+      | 2          | 1       | 01.01.2013 12:01 | 3    | Superman  | true     |
+      | 2          | 1       | 01.01.2013 12:01 | 4    | Superman  | true     |
+      | 2          | 1       | 01.01.2013 12:01 | 5    | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 6    | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 7    | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 8    | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 9    | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 10   | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 11   | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 12   | Superman  | true     |
+      | 2          | 0       | 01.01.2013 12:01 | 13   | Superman  | true     |
 
     And there are admins:
-      | name     | password | token      | email                |
-      | Admin    | 123456   | cccccccccc | admin@pocketcode.org |
+      | name  | password | token      | email                |
+      | Admin | 123456   | cccccccccc | admin@pocketcode.org |
 
   Scenario: I should see user comment wrapper
     Given I am on "/pocketcode/program/1"
@@ -72,7 +72,7 @@ Feature: As a visitor I want to write, see and report comments.
     Then I should not see "Show More"
 
   Scenario: When there are more comments to show and I click on show more, the button should vanish
-    if there are no more comments afterwards.
+  if there are no more comments afterwards.
     Given I am on "/pocketcode/program/2"
     Then I should see "Show More"
     When I click the "show-more" button

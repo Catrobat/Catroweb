@@ -1,6 +1,7 @@
 @api
 Feature: Get details for a specific program
-  Background: 
+
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -12,7 +13,7 @@ Feature: Get details for a specific program
       | 3  | program 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | 1337     |
     And the current time is "01.08.2014 13:00"
 
-      
+
   Scenario: show details of a program with given id
     Given I have a parameter "id" with value "2"
     When I GET "/pocketcode/api/projects/getInfoById.json" with these parameters
@@ -47,7 +48,7 @@ Feature: Get details for a specific program
                                   }
       }
       """
-      
+
   Scenario: return error if no program matches the given id
     Given I have a parameter "id" with value "9"
     When I GET "/pocketcode/api/projects/getInfoById.json" with these parameters

@@ -17,54 +17,62 @@ use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class ChangeNolbUserPasswordCommand extends ContainerAwareCommand
 {
-    private $em;
+  private $em;
 
-    public function __construct(EntityManager $em)
+  public function __construct(EntityManager $em)
+  {
+    parent::__construct();
+    $this->em = $em;
+  }
+
+  protected function configure()
+  {
+    $this->setName('catrobat:nolb-user:change-password')
+      ->setDescription('Changes password from given nolb users')
+      ->addArgument('file', InputArgument::REQUIRED, 'The file to read users.');
+  }
+
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+    $filename = $input->getArgument('file');
+    $handle = fopen($filename, "r");
+    $indicator = new ConsoleProgressIndicator($output, true);
+
+    if ($handle)
     {
-        parent::__construct();
-        $this->em = $em;
-    }
+      while (($line = fgets($handle)) !== false)
+      {
+        $username = CommandHelper::getSubstring($line, " - ", false);
+        $password = substr($line, strlen($username) + 2);
 
-    protected function configure()
-    {
-        $this->setName('catrobat:nolb-user:change-password')
-            ->setDescription('Changes password from given nolb users')
-            ->addArgument('file', InputArgument::REQUIRED, 'The file to read users.');
-    }
+        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username]);
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $filename = $input->getArgument('file');
-        $handle = fopen($filename, "r");
-        $indicator = new ConsoleProgressIndicator($output, true);
-
-        if ($handle) {
-            while (($line = fgets($handle)) !== false) {
-                $username = CommandHelper::getSubstring($line, " - ", false);
-                $password = substr($line, strlen($username) + 2);
-
-                $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('username' => $username));
-
-                if (!$user || !$user->getNolbUser()) {
-                    $indicator->isFailure();
-                    $indicator->addError($username);
-                }
-                else {
-                    if(CommandHelper::executeShellCommand('php app/console fos:user:change-password '.$username.' '.$password)) {
-                        $indicator->isSuccess();
-                    }
-                    else {
-                        $indicator->isFailure();
-                        $indicator->addError($username);
-                    }
-                }
-            }
-            fclose($handle);
-
-            $indicator->printErrors();
-        } else {
-            $output->writeln('File not found!');
+        if (!$user || !$user->getNolbUser())
+        {
+          $indicator->isFailure();
+          $indicator->addError($username);
         }
+        else
+        {
+          if (CommandHelper::executeShellCommand('php app/console fos:user:change-password ' . $username . ' ' . $password))
+          {
+            $indicator->isSuccess();
+          }
+          else
+          {
+            $indicator->isFailure();
+            $indicator->addError($username);
+          }
+        }
+      }
+      fclose($handle);
 
+      $indicator->printErrors();
     }
+    else
+    {
+      $output->writeln('File not found!');
+    }
+
+  }
 }

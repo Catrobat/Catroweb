@@ -323,7 +323,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "7" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading former root program 1 with two new Scratch parents and one additional backward parent
-            creates backward relation and two new Scratch relations
+  creates backward relation and two new Scratch relations
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -429,7 +429,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "7" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading former root program 1 with one new Scratch parent and one additional backward parent
-            creates backward relation and new Scratch relation
+  creates backward relation and new Scratch relation
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -534,7 +534,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "7" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading former root program 1 with program 5 as forward parent appends program 1 accordingly and
-            inherits all ancestors of program 5 to program 1
+  inherits all ancestors of program 5 to program 1
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #

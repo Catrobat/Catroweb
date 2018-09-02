@@ -1,7 +1,7 @@
 @api @upload
-Feature: Upload a program 
+Feature: Upload a program
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -32,6 +32,7 @@ Feature: Upload a program
       """
       {"statusCode":501,"answer":"POST-Data not correct or missing!","preHeaderMessages":""}
       """
+
   Scenario: trying to upload with an invalid user should result in an error
     Given I have a parameter "username" with value "INVALID"
     And I have a parameter "token" with value "cccccccccc"
@@ -40,7 +41,7 @@ Feature: Upload a program
       """
       {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
       """
-    
+
   Scenario: trying to upload with an invalid token should result in an error
     Given I have a parameter "username" with value "Catrobat"
     And I have a parameter "token" with value "INVALID"
@@ -85,9 +86,9 @@ Feature: Upload a program
       {"statusCode":504,"answer":"invalid checksum","preHeaderMessages":""}
       """
 
-  Scenario: 
+  Scenario:
     Given the next generated token will be "aabbccddee"
-      And I am "Catrobat"
-      And I upload a catrobat program
-     When I upload another program using token "aabbccddee"
-     Then It should be uploaded
+    And I am "Catrobat"
+    And I upload a catrobat program
+    When I upload another program using token "aabbccddee"
+    Then It should be uploaded

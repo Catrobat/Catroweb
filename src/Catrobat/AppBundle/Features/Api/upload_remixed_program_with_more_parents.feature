@@ -66,7 +66,7 @@ Feature: Upload a remixed program with multiple parents
       | 9           | 9             | 0     |
 
   Scenario: program upload with parent-URL referring to no existing Catrobat programs should not add any remix relations
-            (except self referencing relation)
+  (except self referencing relation)
     Given I have a program with "catrobatLanguageVersion" set to "0.993" and "url" set to "Program 10 [/pocketcode/program/10], Program 11 [https://share.catrob.at/pocketcode/program/11]"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -78,7 +78,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "Program 10 [/pocketcode/program/10], Program 11 [https://share.catrob.at/pocketcode/program/11]" in the xml
 
   Scenario: program upload with parent-URL referring to multiple existing Catrobat root programs
-            but Catrobat language version 0.992 should not add any remix relations (except self referencing relation)
+  but Catrobat language version 0.992 should not add any remix relations (except self referencing relation)
     Given I have a program with "catrobatLanguageVersion" set to "0.992" and "url" set to "Program 1 [/pocketcode/program/1], Program 8 [https://share.catrob.at/pocketcode/program/8]"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -90,7 +90,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "" in the xml
 
   Scenario: program upload with parent-URL referring to multiple existing Catrobat root programs
-            but Catrobat language version 0.991 should not add any remix relations (except self referencing relation)
+  but Catrobat language version 0.991 should not add any remix relations (except self referencing relation)
     Given I have a program with "catrobatLanguageVersion" set to "0.991" and "url" set to "Program 1 [/pocketcode/program/1], Program 8 [https://share.catrob.at/pocketcode/program/8]"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -102,7 +102,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "" in the xml
 
   Scenario: program upload with parent-URL referring to multiple existing Catrobat root programs
-            but Catrobat language version 0.99 should not add any remix relations (except self referencing relation)
+  but Catrobat language version 0.99 should not add any remix relations (except self referencing relation)
     Given I have a program with "catrobatLanguageVersion" set to "0.99" and "url" set to "Program 1 [/pocketcode/program/1], Program 8 [https://share.catrob.at/pocketcode/program/8]"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -114,7 +114,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "" in the xml
 
   Scenario: program upload with parent-URL referring to multiple existing Catrobat root programs
-            but Catrobat language version 0.92 should not add any remix relations (except self referencing relation)
+  but Catrobat language version 0.92 should not add any remix relations (except self referencing relation)
     Given I have a program with "catrobatLanguageVersion" set to "0.92" and "url" set to "Program 1 [/pocketcode/program/1], Program 8 [https://share.catrob.at/pocketcode/program/8]"
     When I upload a program
     Then the uploaded program should be a remix root
@@ -126,7 +126,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat root programs and
-            Catrobat language version 0.993 should correctly add remix relations
+  Catrobat language version 0.993 should correctly add remix relations
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #              (1)______________  (8)
@@ -153,7 +153,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "Program 1 [/pocketcode/program/1], Program 8 [https://share.catrob.at/pocketcode/program/8]" in the xml
 
   Scenario: program upload with parent-URL referring only to Scratch programs and
-            Catrobat language version 0.999 should correctly add remix relations
+  Catrobat language version 0.999 should correctly add remix relations
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -176,7 +176,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "Music Inventor [https://scratch.mit.edu/projects/29495624], The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/]" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat programs and
-            Catrobat language version 1 should correctly add remix relations (example #1)
+  Catrobat language version 1 should correctly add remix relations (example #1)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -218,7 +218,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "Program 2 [/pocketalice/program/2], Merge 1 [Program 7 [/pocketcode/program/7], Program 9 [https://share.catrob.at/pocketcode/program/9]]" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat programs and
-            Catrobat language version 1.0 should correctly add remix relations (example #2)
+  Catrobat language version 1.0 should correctly add remix relations (example #2)
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
       | 29495624          | 2                 |
@@ -269,7 +269,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded program should have RemixOf "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/program/2], Merge 1 [Program 6 [/pocketcode/program/6], Program 8 [https://share.catrob.at/pocketcode/program/8]]]" in the xml
 
   Scenario: program upload with parent-URL referring to existing Catrobat programs and
-            Catrobat language version 1.1 should correctly add remix relations (example #2)
+  Catrobat language version 1.1 should correctly add remix relations (example #2)
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
       | 29495624          | 2                 |

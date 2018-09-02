@@ -1,7 +1,7 @@
 @api
 Feature: Report a program
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |

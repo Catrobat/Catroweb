@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
@@ -8,44 +9,51 @@ use Symfony\Component\Finder\Finder;
 
 class RemixData
 {
-    const SCRATCH_DOMAIN = 'scratch.mit.edu';
+  const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
-    private $remix_url;
-    private $remix_url_data;
+  private $remix_url;
+  private $remix_url_data;
 
-    /**
-     * @param string $remix_url
-     */
-    public function __construct($remix_url)
+  /**
+   * @param string $remix_url
+   */
+  public function __construct($remix_url)
+  {
+    $this->remix_url = $remix_url;
+    $this->remix_url_data = parse_url($this->remix_url);
+  }
+
+  public function getUrl()
+  {
+    return $this->remix_url;
+  }
+
+  public function getProgramId()
+  {
+    if (!array_key_exists('path', $this->remix_url_data))
     {
-        $this->remix_url = $remix_url;
-        $this->remix_url_data = parse_url($this->remix_url);
+      return 0;
     }
 
-    public function getUrl()
+    $remix_url_path = $this->remix_url_data['path'];
+    preg_match("/(\\/[0-9]+(\\/)?)$/", $remix_url_path, $id_matches);
+
+    return (count($id_matches) > 0) ? intval(str_replace('/', '', $id_matches[0])) : 0;
+  }
+
+  public function isScratchProgram()
+  {
+    if (!array_key_exists('host', $this->remix_url_data))
     {
-        return $this->remix_url;
+      return false;
     }
 
-    public function getProgramId() {
-        if (!array_key_exists('path', $this->remix_url_data)) {
-            return 0;
-        }
+    return (strpos($this->remix_url_data['host'], self::SCRATCH_DOMAIN) !== false);
+  }
 
-        $remix_url_path = $this->remix_url_data['path'];
-        preg_match("/(\\/[0-9]+(\\/)?)$/", $remix_url_path, $id_matches);
-        return (count($id_matches) > 0) ? intval(str_replace('/', '', $id_matches[0])) : 0;
-    }
-
-    public function isScratchProgram() {
-        if (!array_key_exists('host', $this->remix_url_data)) {
-            return false;
-        }
-        return (strpos($this->remix_url_data['host'], self::SCRATCH_DOMAIN) !== false);
-    }
-
-    public function isAbsoluteUrl() {
-        return array_key_exists('host', $this->remix_url_data)
-        && in_array($this->remix_url_data['scheme'], array('http', 'https'));
-    }
+  public function isAbsoluteUrl()
+  {
+    return array_key_exists('host', $this->remix_url_data)
+      && in_array($this->remix_url_data['scheme'], ['http', 'https']);
+  }
 }

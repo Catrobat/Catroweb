@@ -275,7 +275,7 @@ class SymfonySupport
     }
   }
 
-  public function insertDefaultGamejam($config = array())
+  public function insertDefaultGamejam($config = [])
   {
     $gamejam = new GameJam();
     @$gamejam->setName($config['name'] ?: "pocketalice");
@@ -299,7 +299,7 @@ class SymfonySupport
     return $gamejam;
   }
 
-  public function insertUser($config = array())
+  public function insertUser($config = [])
   {
     ++$this->test_user_count;
     $user_manager = $this->getUserManager();
@@ -328,8 +328,8 @@ class SymfonySupport
     shell_exec("$catroweb_dir/app/console catrobat:recommender:export --env=test");
     shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_like_similarity_relation $catroweb_dir $output_dir");
     shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_likes.sql') as file:\\n  for line in file:" .
-        "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
-        "/usr/bin/env python2 > $catroweb_dir/import_likes_output.sql");
+      "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
+      "/usr/bin/env python2 > $catroweb_dir/import_likes_output.sql");
     shell_exec("/usr/bin/env cat $catroweb_dir/import_likes_output.sql | /usr/bin/env sqlite3 $sqlite_db_path");
     @unlink("$catroweb_dir/data_likes");
     @unlink("$catroweb_dir/data_remixes");
@@ -357,7 +357,7 @@ class SymfonySupport
     @unlink("$catroweb_dir/import_remixes_output.sql");
   }
 
-  public function insertUserLikeSimilarity($config = array())
+  public function insertUserLikeSimilarity($config = [])
   {
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -367,7 +367,7 @@ class SymfonySupport
     $em->flush();
   }
 
-  public function insertUserRemixSimilarity($config = array())
+  public function insertUserRemixSimilarity($config = [])
   {
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
@@ -377,12 +377,12 @@ class SymfonySupport
     $em->flush();
   }
 
-  public function insertProgramLike($config = array())
+  public function insertProgramLike($config = [])
   {
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
     $program_manager = $this->getProgramManager();
-    $user = $user_manager->findOneBy(array('username' => $config['username']));
+    $user = $user_manager->findOneBy(['username' => $config['username']]);
     $program = $program_manager->find($config['program_id']);
 
     $program_like = new ProgramLike($program, $user, $config['type']);
@@ -622,15 +622,16 @@ class SymfonySupport
 
     if (is_string($file))
     {
-        try {
-            $file = new UploadedFile($file, 'uploadedFile');
-        }
-        catch (\Exception $e) {
-            throw new PendingException('No case defined for ' . $e);
-        }
+      try
+      {
+        $file = new UploadedFile($file, 'uploadedFile');
+      } catch (\Exception $e)
+      {
+        throw new PendingException('No case defined for ' . $e);
+      }
     }
 
-    $parameters = array();
+    $parameters = [];
     $parameters['username'] = $user->getUsername();
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
@@ -641,7 +642,7 @@ class SymfonySupport
     }
 
     $client = $this->getClient();
-    $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
+    $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, [$file]);
     $response = $client->getResponse();
 
     return $response;
@@ -659,12 +660,12 @@ class SymfonySupport
       $file = new UploadedFile($file, 'uploadedFile');
     }
 
-    $parameters = array();
+    $parameters = [];
     $parameters['username'] = $user->getUsername();
     $parameters['token'] = $user->getUploadToken();
     $parameters['fileChecksum'] = md5_file($file->getPathname());
     $client = $this->getClient();
-    $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, array($file));
+    $client->request('POST', '/pocketcode/api/gamejam/submit.json', $parameters, [$file]);
     $response = $client->getResponse();
 
     return $response;

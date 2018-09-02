@@ -33,14 +33,14 @@ Feature: Pocketcode help page
     When I click on the "<reference>" banner
     Then I should see "<title>"
 
-  Examples:
-    | reference | title                     |
-    | first     | (WELCOME TO) WONDERLAND   |
-    | second    | SAVE ALICE!               |
-    | third     | THE HATTER - HIT AND RUN  |
-    | fourth    | THE HATTER - HIT AND RUN  |
-    | fifth     | WHACK A CHESHIRE CAT      |
-    | sixth     | A RABBITS RACE            |
+    Examples:
+      | reference | title                    |
+      | first     | (WELCOME TO) WONDERLAND  |
+      | second    | SAVE ALICE!              |
+      | third     | THE HATTER - HIT AND RUN |
+      | fourth    | THE HATTER - HIT AND RUN |
+      | fifth     | WHACK A CHESHIRE CAT     |
+      | sixth     | A RABBITS RACE           |
 
 
   @Mobile
@@ -69,20 +69,20 @@ Feature: Pocketcode help page
     When I click "#title-<id>"
     Then I should see "<title>"
 
-  Examples:
-    | id | title               |
-    | 1  | Change Size         |
-    | 2  | Change Look         |
-    | 3  | Animation           |
-    | 4  | Glide               |
-    | 5  | Play a Sound        |
-    | 6  | Speak               |
-    | 7  | Sensor              |
-    | 8  | Compass             |
-    | 9  | Broadcast           |
-    | 10 | Show variable       |
-    | 11 | Collision detection |
-    | 12 | Face detection      |
+    Examples:
+      | id | title               |
+      | 1  | Change Size         |
+      | 2  | Change Look         |
+      | 3  | Animation           |
+      | 4  | Glide               |
+      | 5  | Play a Sound        |
+      | 6  | Speak               |
+      | 7  | Sensor              |
+      | 8  | Compass             |
+      | 9  | Broadcast           |
+      | 10 | Show variable       |
+      | 11 | Collision detection |
+      | 12 | Face detection      |
 
   Scenario: Clicking on starters image at help page and test navigation
     Given there are users:

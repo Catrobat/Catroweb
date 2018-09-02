@@ -3,12 +3,12 @@ Feature: Like feature on program page
 
   Background:
     Given there are users:
-      | name     | password | token       | email               |
-      | Catrobat | 123456   | cccccccccc  | dev1@pocketcode.org |
+      | name     | password | token      | email               |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
 
     And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | remix_root |
-      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
+      | id | name    | description | owned by | downloads | apk_downloads | views | upload time      | version | remix_root |
+      | 1  | Minions | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
 
   Scenario: Like buttons should appear on program page
     Given I am on "/pocketcode/program/1"

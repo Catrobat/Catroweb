@@ -1,7 +1,7 @@
 @api
 Feature: Get the random programs
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -13,7 +13,7 @@ Feature: Get the random programs
       | 3  | program 3 | p3          | User1    | 3         | 2     | 01.03.2012 14:00 | 0.8.5   | false   |
       | 4  | program 4 | p4          | User2    | 4         | 1     | 01.04.2012 15:00 | 0.8.5   | true    |
     And the current time is "01.08.2014 13:00"
-      
+
   Scenario: show random programs
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"

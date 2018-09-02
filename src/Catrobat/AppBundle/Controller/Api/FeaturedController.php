@@ -15,14 +15,17 @@ class FeaturedController extends Controller
   /**
    * @Route("/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"}, methods={"GET"})
    */
-  public function getFeaturedProgramsAction(Request $request) {
+  public function getFeaturedProgramsAction(Request $request)
+  {
     return $this->getFeaturedPrograms($request, false);
   }
 
   /**
-   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs", defaults={"_format": "json"},
+   *                                           methods={"GET"})
    */
-  public function getFeaturedIOSProgramsAction(Request $request) {
+  public function getFeaturedIOSProgramsAction(Request $request)
+  {
     return $this->getFeaturedPrograms($request, true);
   }
 

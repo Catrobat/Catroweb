@@ -1,12 +1,12 @@
 @homepage
-  Feature:
-    As a user, I want to login or request my password
+Feature:
+  As a user, I want to login or request my password
 
   Background:
     Given there are users:
-      | name     | password | token       | email               |
-      | Catrobat | 123456    | cccccccccc | dev1@pocketcode.org |
-      | User1    | 654321    | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email               |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
 
   Scenario: Login and logout
     Given I am on homepage

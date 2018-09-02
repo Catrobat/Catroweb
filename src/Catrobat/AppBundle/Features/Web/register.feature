@@ -1,12 +1,12 @@
 @homepage
-  Feature:
-    As a user, I want to be able to register
+Feature:
+  As a user, I want to be able to register
 
   Background:
     Given there are users:
-      | name     | password | token       | email               |
-      | Catrobat | 123456    | cccccccccc | dev1@pocketcode.org |
-      | User1    | 654321    | cccccccccc | dev2@pocketcode.org |
+      | name     | password | token      | email               |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
+      | User1    | 654321   | cccccccccc | dev2@pocketcode.org |
 
   Scenario: Register, login and logout
     Given I am on homepage

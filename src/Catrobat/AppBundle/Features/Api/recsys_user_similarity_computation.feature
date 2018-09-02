@@ -1,12 +1,12 @@
 @api
 Feature: Computes user similarities by analyzing common likes and remixes between users
-         (user-based Collaborative Filtering using Jaccard distance as similarity measure)
+  (user-based Collaborative Filtering using Jaccard distance as similarity measure)
 
-    The results of the computed similarities are later used by the recommendation algorithm.
-    See tests: get_recommended_programs_homepage.feature
+  The results of the computed similarities are later used by the recommendation algorithm.
+  See tests: get_recommended_programs_homepage.feature
 
   Scenario: We don't have the import_*.sql files anymore
-  Then We can't test anything here
+    Then We can't test anything here
 
 #  Background:
 #    Given there are users:

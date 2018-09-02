@@ -13,314 +13,355 @@ use Catrobat\AppBundle\Entity\UserManager;
 
 class ProfileController extends Controller
 {
-    const MIN_PASSWORD_LENGTH = 6;
-    const MAX_PASSWORD_LENGTH = 32;
-    const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
-    const MAX_AVATAR_SIZE = 300;
+  const MIN_PASSWORD_LENGTH = 6;
+  const MAX_PASSWORD_LENGTH = 32;
+  const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
+  const MAX_AVATAR_SIZE = 300;
 
+  /**
+   * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+   */
+  public function profileAction(Request $request, $id)
+  {
     /**
-     * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+     * @var $user User
      */
-    public function profileAction(Request $request, $id)
+    $twig = 'profile.html.twig';
+    $program_count = 0;
+
+    if ($id == 0)
     {
-        /**
-         * @var $user User
-         */
-        $twig = 'profile.html.twig';
-        $program_count = 0;
-
-        if ($id == 0) {
-            $user = $this->getUser();
-            $twig = 'myprofile.html.twig';
-        } else {
-            $user = $this->get('usermanager')->find($id);
-            $program_count = count($this->get('programmanager')->getUserPrograms($id));
-        }
-
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-
-        $oauth_user = $user->getFacebookUid() || $user->getGplusUid();
-
-        \Locale::setDefault(substr($request->getLocale(), 0, 2));
-        $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
-        $firstMail = $user->getEmail();
-        $secondMail = $user->getAdditionalEmail();
-        $nolb_user = $user->getNolbUser();
-
-        return $this->get('templating')->renderResponse($twig, array(
-            'profile' => $user,
-            'program_count' => $program_count,
-            'country' => $country,
-            'firstMail' => $firstMail,
-            'secondMail' => $secondMail,
-            'oauth_user' => $oauth_user,
-            'nolb_user' => $nolb_user,
-        ));
+      $user = $this->getUser();
+      $twig = 'myprofile.html.twig';
     }
-
-
-    /**
-     * @Route("/profile/edit", name="profile_edit", methods={"GET"})
-     */
-    public function profileEditAction(Request $request)
+    else
     {
-
-        /**
-         * @var $user User
-         */
-        $twig = 'myprofileEdit.html.twig';
-
-        $user = $this->getUser();
-
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-
-        \Locale::setDefault(substr($request->getLocale(), 0, 2));
-        $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
-        $firstMail = $user->getEmail();
-        $secondMail = $user->getAdditionalEmail();
-        $username = $user->getUsername();
-        $nolb_user = $user->getNolbUser();
-
-        return $this->get('templating')->renderResponse($twig, array(
-            'profile' => $user,
-            'minPassLength' => self::MIN_PASSWORD_LENGTH,
-            'maxPassLength' => self::MAX_PASSWORD_LENGTH,
-            'country' => $country,
-            'firstMail' => $firstMail,
-            'secondMail' => $secondMail,
-            'username' => $username,
-            'nolb_user' => $nolb_user,
-        ));
+      $user = $this->get('usermanager')->find($id);
+      $program_count = count($this->get('programmanager')->getUserPrograms($id));
     }
 
-    /**
-     * @Route("/emailEdit", name="email_edit", methods={"GET"})
-     */
-    public function EmailEditAction(Request $request){
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-        $nolb_user = $user->getNolbUser();
-        $twig = 'emailEdit.html.twig';
-        return $this->get('templating')->renderResponse($twig, array(
-            'nolb_user' => $nolb_user,
-        ));
-    }
-
-    /**
-     * @Route("/avatarEdit", name="avatar_edit", methods={"GET"})
-     */
-    public function AvatarEditAction(Request $request){
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-        $nolb_user = $user->getNolbUser();
-        $twig = 'avatarEdit.html.twig';
-        return $this->get('templating')->renderResponse($twig, array(
-            'nolb_user' => $nolb_user,
-        ));
-    }
-
-
-    /**
-     * @Route("/passwordEdit", name="password_edit", methods={"GET"})
-     */
-    public function passwordEditAction(Request $request){
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-        $nolb_user = $user->getNolbUser();
-        $twig = 'passwordEdit.html.twig';
-        return $this->get('templating')->renderResponse($twig, array(
-            'minPassLength' => self::MIN_PASSWORD_LENGTH,
-            'maxPassLength' => self::MAX_PASSWORD_LENGTH,
-            'nolb_user' => $nolb_user,
-        ));
-    }
-
-
-    /**
-     * @Route("/countryEdit", name="country_edit", methods={"GET"})
-     */
-    public function countryEditAction(Request $request){
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-        $nolb_user = $user->getNolbUser();
-        $twig = 'countryEdit.html.twig';
-        return $this->get('templating')->renderResponse($twig, array(
-            'nolb_user' => $nolb_user,
-        ));
-    }
-
-    /**
-     * @Route("/countrySave", name="country_save", methods={"POST"})
-     */
-    public function countrySaveAction(Request $request){
-        /**
-         * @var $user User
-         */
-        $user = $this->getUser();
-
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-
-        $country = $request->request->get('country');
-
-        try {
-            $this->validateCountryCode($country);
-        } catch (\Exception $e) {
-            return JsonResponse::create(array('statusCode' => $e->getMessage()));
-        }
-
-        $user->setCountry($country);
-
-        $this->get('usermanager')->updateUser($user);
-
-        return JsonResponse::create(array('statusCode' => StatusCode::OK));
-    }
-
-    /**
-     * @Route("/passwordSave", name="password_save", methods={"POST"})
-     */
-    public function passwordSaveAction(Request $request)
+    if (!$user)
     {
-        /**
-         * @var \Catrobat\AppBundle\Entity\User $user
-         * @var \Catrobat\AppBundle\Entity\UserManager $userManager
-         */
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-
-        $old_password = $request->request->get('oldPassword');
-
-        $factory = $this->get('security.encoder_factory');
-        $encoder = $factory->getEncoder($user);
-
-        $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
-
-
-        if (!$bool) {
-            return JsonResponse::create(array('statusCode' => "777",));
-        }
-
-        $newPassword = $request->request->get('newPassword');
-        $repeatPassword = $request->request->get('repeatPassword');
-
-        try {
-            $this->validateUserPassword($newPassword, $repeatPassword);
-        } catch (\Exception $e) {
-            return JsonResponse::create(array('statusCode' => $e->getMessage()));
-        }
-
-        if ($newPassword !== '') {
-            $user->setPlainPassword($newPassword);
-        }
-
-        $this->get('usermanager')->updateUser($user);
-
-        return JsonResponse::create(array('statusCode' => StatusCode::OK, 'saved_password' => "supertoll"));
+      return $this->redirectToRoute('fos_user_security_login');
     }
 
+    $oauth_user = $user->getFacebookUid() || $user->getGplusUid();
+
+    \Locale::setDefault(substr($request->getLocale(), 0, 2));
+    $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
+    $firstMail = $user->getEmail();
+    $secondMail = $user->getAdditionalEmail();
+    $nolb_user = $user->getNolbUser();
+
+    return $this->get('templating')->renderResponse($twig, [
+      'profile'       => $user,
+      'program_count' => $program_count,
+      'country'       => $country,
+      'firstMail'     => $firstMail,
+      'secondMail'    => $secondMail,
+      'oauth_user'    => $oauth_user,
+      'nolb_user'     => $nolb_user,
+    ]);
+  }
+
+
+  /**
+   * @Route("/profile/edit", name="profile_edit", methods={"GET"})
+   */
+  public function profileEditAction(Request $request)
+  {
 
     /**
-     * @Route("/emailSave", name="email_save", methods={"POST"})
+     * @var $user User
      */
-    public function emailSaveAction(Request $request){
-        /**
-         * @var \Catrobat\AppBundle\Entity\User
-         */
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
+    $twig = 'myprofileEdit.html.twig';
 
-        $firstMail = $request->request->get('firstEmail');
-        $secondMail = $request->request->get('secondEmail');
+    $user = $this->getUser();
 
-        try {
-            $this->validateEmail($firstMail);
-            $this->validateEmail($secondMail);
-        } catch (\Exception $e) {
-            return JsonResponse::create(array('statusCode' => $e->getMessage()));
-        }
-
-        if ($firstMail === '' && $secondMail === '') {
-            return JsonResponse::create(array('statusCode' => StatusCode::USER_UPDATE_EMAIL_FAILED));
-        }
-
-        if ($this->checkEmailExists($firstMail)) {
-            return JsonResponse::create(array('statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 1));
-        }
-        if ($this->checkEmailExists($secondMail)) {
-            return JsonResponse::create(array('statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 2));
-        }
-
-        if ($firstMail !== '' && $firstMail != $user->getEmail()) {
-            $user->setEmail($firstMail);
-        }
-        if ($firstMail !== '' && $secondMail !== '' && $secondMail != $user->getAdditionalEmail()) {
-            $user->setAdditionalEmail($secondMail);
-        }
-        if ($firstMail !== '' && $secondMail === '') {
-            $user->setAdditionalEmail('');
-        }
-        if ($firstMail === '' && $secondMail === '' && $user->getAdditionalEmail() !== '') {
-            $user->setEmail($user->getAdditionalEmail());
-            $user->setAdditionalEmail('');
-        }
-        if ($firstMail === '' && $secondMail !== '') {
-            $user->setEmail($secondMail);
-            $user->setAdditionalEmail('');
-        }
-
-        $this->get('usermanager')->updateUser($user);
-
-        return JsonResponse::create(array('statusCode' => StatusCode::OK));
-
-
-    }
-
-    /**
-     * @Route("/profileUploadAvatar", name="profile_upload_avatar", methods={"POST"})
-     */
-    public function uploadAvatarAction(Request $request)
+    if (!$user)
     {
-        /*
-         * @var $user \Catrobat\AppBundle\Entity\User
-         */
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('fos_user_security_login');
-        }
-
-        $image_base64 = $request->request->get('image');
-
-        try {
-            $image_base64 = $this->checkAndResizeBase64Image($image_base64);
-        } catch (\Exception $e) {
-            return JsonResponse::create(array('statusCode' => $e->getMessage()));
-        }
-
-        $user->setAvatar($image_base64);
-        $this->get('usermanager')->updateUser($user);
-
-        return JsonResponse::create(array(
-            'statusCode' => StatusCode::OK,
-            'image_base64' => $image_base64,
-        ));
+      return $this->redirectToRoute('fos_user_security_login');
     }
+
+    \Locale::setDefault(substr($request->getLocale(), 0, 2));
+    $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
+    $firstMail = $user->getEmail();
+    $secondMail = $user->getAdditionalEmail();
+    $username = $user->getUsername();
+    $nolb_user = $user->getNolbUser();
+
+    return $this->get('templating')->renderResponse($twig, [
+      'profile'       => $user,
+      'minPassLength' => self::MIN_PASSWORD_LENGTH,
+      'maxPassLength' => self::MAX_PASSWORD_LENGTH,
+      'country'       => $country,
+      'firstMail'     => $firstMail,
+      'secondMail'    => $secondMail,
+      'username'      => $username,
+      'nolb_user'     => $nolb_user,
+    ]);
+  }
+
+  /**
+   * @Route("/emailEdit", name="email_edit", methods={"GET"})
+   */
+  public function EmailEditAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
+    $twig = 'emailEdit.html.twig';
+
+    return $this->get('templating')->renderResponse($twig, [
+      'nolb_user' => $nolb_user,
+    ]);
+  }
+
+  /**
+   * @Route("/avatarEdit", name="avatar_edit", methods={"GET"})
+   */
+  public function AvatarEditAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
+    $twig = 'avatarEdit.html.twig';
+
+    return $this->get('templating')->renderResponse($twig, [
+      'nolb_user' => $nolb_user,
+    ]);
+  }
+
+
+  /**
+   * @Route("/passwordEdit", name="password_edit", methods={"GET"})
+   */
+  public function passwordEditAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
+    $twig = 'passwordEdit.html.twig';
+
+    return $this->get('templating')->renderResponse($twig, [
+      'minPassLength' => self::MIN_PASSWORD_LENGTH,
+      'maxPassLength' => self::MAX_PASSWORD_LENGTH,
+      'nolb_user'     => $nolb_user,
+    ]);
+  }
+
+
+  /**
+   * @Route("/countryEdit", name="country_edit", methods={"GET"})
+   */
+  public function countryEditAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+    $nolb_user = $user->getNolbUser();
+    $twig = 'countryEdit.html.twig';
+
+    return $this->get('templating')->renderResponse($twig, [
+      'nolb_user' => $nolb_user,
+    ]);
+  }
+
+  /**
+   * @Route("/countrySave", name="country_save", methods={"POST"})
+   */
+  public function countrySaveAction(Request $request)
+  {
+    /**
+     * @var $user User
+     */
+    $user = $this->getUser();
+
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $country = $request->request->get('country');
+
+    try
+    {
+      $this->validateCountryCode($country);
+    } catch (\Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+    }
+
+    $user->setCountry($country);
+
+    $this->get('usermanager')->updateUser($user);
+
+    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+  }
+
+  /**
+   * @Route("/passwordSave", name="password_save", methods={"POST"})
+   */
+  public function passwordSaveAction(Request $request)
+  {
+    /**
+     * @var \Catrobat\AppBundle\Entity\User        $user
+     * @var \Catrobat\AppBundle\Entity\UserManager $userManager
+     */
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $old_password = $request->request->get('oldPassword');
+
+    $factory = $this->get('security.encoder_factory');
+    $encoder = $factory->getEncoder($user);
+
+    $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
+
+
+    if (!$bool)
+    {
+      return JsonResponse::create(['statusCode' => "777",]);
+    }
+
+    $newPassword = $request->request->get('newPassword');
+    $repeatPassword = $request->request->get('repeatPassword');
+
+    try
+    {
+      $this->validateUserPassword($newPassword, $repeatPassword);
+    } catch (\Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+    }
+
+    if ($newPassword !== '')
+    {
+      $user->setPlainPassword($newPassword);
+    }
+
+    $this->get('usermanager')->updateUser($user);
+
+    return JsonResponse::create(['statusCode' => StatusCode::OK, 'saved_password' => "supertoll"]);
+  }
+
+
+  /**
+   * @Route("/emailSave", name="email_save", methods={"POST"})
+   */
+  public function emailSaveAction(Request $request)
+  {
+    /**
+     * @var \Catrobat\AppBundle\Entity\User
+     */
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $firstMail = $request->request->get('firstEmail');
+    $secondMail = $request->request->get('secondEmail');
+
+    try
+    {
+      $this->validateEmail($firstMail);
+      $this->validateEmail($secondMail);
+    } catch (\Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+    }
+
+    if ($firstMail === '' && $secondMail === '')
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::USER_UPDATE_EMAIL_FAILED]);
+    }
+
+    if ($this->checkEmailExists($firstMail))
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 1]);
+    }
+    if ($this->checkEmailExists($secondMail))
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 2]);
+    }
+
+    if ($firstMail !== '' && $firstMail != $user->getEmail())
+    {
+      $user->setEmail($firstMail);
+    }
+    if ($firstMail !== '' && $secondMail !== '' && $secondMail != $user->getAdditionalEmail())
+    {
+      $user->setAdditionalEmail($secondMail);
+    }
+    if ($firstMail !== '' && $secondMail === '')
+    {
+      $user->setAdditionalEmail('');
+    }
+    if ($firstMail === '' && $secondMail === '' && $user->getAdditionalEmail() !== '')
+    {
+      $user->setEmail($user->getAdditionalEmail());
+      $user->setAdditionalEmail('');
+    }
+    if ($firstMail === '' && $secondMail !== '')
+    {
+      $user->setEmail($secondMail);
+      $user->setAdditionalEmail('');
+    }
+
+    $this->get('usermanager')->updateUser($user);
+
+    return JsonResponse::create(['statusCode' => StatusCode::OK]);
+
+
+  }
+
+  /**
+   * @Route("/profileUploadAvatar", name="profile_upload_avatar", methods={"POST"})
+   */
+  public function uploadAvatarAction(Request $request)
+  {
+    /*
+     * @var $user \Catrobat\AppBundle\Entity\User
+     */
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $image_base64 = $request->request->get('image');
+
+    try
+    {
+      $image_base64 = $this->checkAndResizeBase64Image($image_base64);
+    } catch (\Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage()]);
+    }
+
+    $user->setAvatar($image_base64);
+    $this->get('usermanager')->updateUser($user);
+
+    return JsonResponse::create([
+      'statusCode'   => StatusCode::OK,
+      'image_base64' => $image_base64,
+    ]);
+  }
 
   /**
    * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
@@ -331,7 +372,8 @@ class ProfileController extends Controller
      * @var $user \Catrobat\AppBundle\Entity\User
      */
     $user = $this->getUser();
-    if (!$user) {
+    if (!$user)
+    {
       return $this->redirectToRoute('fos_user_security_login');
     }
 
@@ -340,180 +382,199 @@ class ProfileController extends Controller
     $user_id = $user->getId();
     $user_comments = $this->getDoctrine()
       ->getRepository('AppBundle:UserComment')
-      ->findBy(array('userId' => $user_id), array('id' => 'DESC'));
+      ->findBy(['userId' => $user_id], ['id' => 'DESC']);
 
-    foreach ($user_comments as $comment) {
+    foreach ($user_comments as $comment)
+    {
       $em->remove($comment);
     }
 
     $em->remove($user);
     $em->flush();
 
-    return JsonResponse::create(array(
+    return JsonResponse::create([
       'statusCode' => StatusCode::OK,
-      'count' => count($user_comments)
-    ));
+      'count'      => count($user_comments),
+    ]);
   }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //// private functions
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //// private functions
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*
-     * @param string $username
-     * @param int $pass1
-     * @param int $pass2
-     */
-    private function validateUserPassword($pass1, $pass2)
+  /*
+   * @param string $username
+   * @param int $pass1
+   * @param int $pass2
+   */
+  private function validateUserPassword($pass1, $pass2)
+  {
+    if ($pass1 !== $pass2)
     {
-        if ($pass1 !== $pass2) {
-            throw new \Exception(StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
-        }
-
-        if (strcasecmp($this->getUser()->getUsername(), $pass1) == 0) {
-            throw new \Exception(StatusCode::USER_USERNAME_PASSWORD_EQUAL);
-        }
-
-        if ($pass1 != '' && strlen($pass1) < self::MIN_PASSWORD_LENGTH) {
-            throw new \Exception(StatusCode::USER_PASSWORD_TOO_SHORT);
-        }
-
-        if ($pass1 != '' && strlen($pass1) > self::MAX_PASSWORD_LENGTH) {
-            throw new \Exception(StatusCode::USER_PASSWORD_TOO_LONG);
-        }
+      throw new \Exception(StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
     }
 
-    /*
-     * @param string $email
-     */
-    private function validateEmail($email)
+    if (strcasecmp($this->getUser()->getUsername(), $pass1) == 0)
     {
-        $name = '[a-zA-Z0-9]((\.|\-|_)?[a-zA-Z0-9])*';
-        $domain = '[a-zA-Z]((\.|\-)?[a-zA-Z0-9])*';
-        $tld = '[a-zA-Z]{2,8}';
-        $regEx = '/^('.$name.')@('.$domain.')\.('.$tld.')$/';
-
-        if (!preg_match($regEx, $email) && !empty($email)) {
-            throw new \Exception(StatusCode::USER_EMAIL_INVALID);
-        }
+      throw new \Exception(StatusCode::USER_USERNAME_PASSWORD_EQUAL);
     }
 
-    /*
-     * @param string $country
-     */
-    private function validateCountryCode($country)
+    if ($pass1 != '' && strlen($pass1) < self::MIN_PASSWORD_LENGTH)
     {
-        //todo: check if code is really from the drop-down
-        if (!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country)) {
-            throw new \Exception(StatusCode::USER_COUNTRY_INVALID);
-        }
+      throw new \Exception(StatusCode::USER_PASSWORD_TOO_SHORT);
     }
 
-    /*
-     * @param string $email
-     * @return bool
-     */
-    private function checkEmailExists($email)
+    if ($pass1 != '' && strlen($pass1) > self::MAX_PASSWORD_LENGTH)
     {
-        if ($email === '') {
-            return false;
-        }
+      throw new \Exception(StatusCode::USER_PASSWORD_TOO_LONG);
+    }
+  }
 
-        $userWithFirstMail = $this->get('usermanager')->findOneBy(array('email' => $email));
-        $userWithSecondMail = $this->get('usermanager')->findOneBy(array('additional_email' => $email));
+  /*
+   * @param string $email
+   */
+  private function validateEmail($email)
+  {
+    $name = '[a-zA-Z0-9]((\.|\-|_)?[a-zA-Z0-9])*';
+    $domain = '[a-zA-Z]((\.|\-)?[a-zA-Z0-9])*';
+    $tld = '[a-zA-Z]{2,8}';
+    $regEx = '/^(' . $name . ')@(' . $domain . ')\.(' . $tld . ')$/';
 
-        if ($userWithFirstMail != null && $userWithFirstMail != $this->getUser() || $userWithSecondMail != null && $userWithSecondMail != $this->getUser()) {
-            return true;
-        }
+    if (!preg_match($regEx, $email) && !empty($email))
+    {
+      throw new \Exception(StatusCode::USER_EMAIL_INVALID);
+    }
+  }
 
-        return false;
+  /*
+   * @param string $country
+   */
+  private function validateCountryCode($country)
+  {
+    //todo: check if code is really from the drop-down
+    if (!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country))
+    {
+      throw new \Exception(StatusCode::USER_COUNTRY_INVALID);
+    }
+  }
+
+  /*
+   * @param string $email
+   * @return bool
+   */
+  private function checkEmailExists($email)
+  {
+    if ($email === '')
+    {
+      return false;
     }
 
-    public function country($code, $locale = null)
-    {
-      $countries = Intl::getRegionBundle()->getCountryNames($locale ?: $this->localeDetector->getLocale());
-        if (array_key_exists($code, $countries)) {
-            return $this->fixCharset($countries[$code]);
-        }
+    $userWithFirstMail = $this->get('usermanager')->findOneBy(['email' => $email]);
+    $userWithSecondMail = $this->get('usermanager')->findOneBy(['additional_email' => $email]);
 
-        return '';
+    if ($userWithFirstMail != null && $userWithFirstMail != $this->getUser() || $userWithSecondMail != null && $userWithSecondMail != $this->getUser())
+    {
+      return true;
     }
 
-    /**
-     * @param string $image_base64
-     *
-     * @throws \Exception
-     *
-     * @return string
-     */
-    private function checkAndResizeBase64Image($image_base64)
+    return false;
+  }
+
+  public function country($code, $locale = null)
+  {
+    $countries = Intl::getRegionBundle()->getCountryNames($locale ?: $this->localeDetector->getLocale());
+    if (array_key_exists($code, $countries))
     {
-        $image_data = explode(';base64,', $image_base64);
-        $data_regx = '/data:(.+)/';
-
-        if (!preg_match($data_regx, $image_data[0])) {
-            throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
-        }
-
-        $image_type = preg_replace('/data:(.+)/', '\\1', $image_data[0]);
-        $image = null;
-
-        switch ($image_type) {
-            case 'image/jpg':
-            case 'image/jpeg':
-                $image = imagecreatefromjpeg($image_base64);
-                break;
-            case 'image/png':
-                $image = imagecreatefrompng($image_base64);
-                break;
-            case 'image/gif':
-                $image = imagecreatefromgif($image_base64);
-                break;
-            default:
-                throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE);
-        }
-
-        if (!$image) {
-            throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
-        }
-
-        $image_data = preg_replace($data_regx, '\\2', $image_base64);
-        $image_size = strlen(base64_decode($image_data));
-
-        if ($image_size > self::MAX_UPLOAD_SIZE) {
-            throw new \Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
-        }
-
-        $width = imagesx($image);
-        $height = imagesy($image);
-
-        if ($width == 0 || $height == 0) {
-            throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
-        }
-
-        if (max($width, $height) > self::MAX_AVATAR_SIZE) {
-            $new_image = imagecreatetruecolor(self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE);
-            if (!$new_image) {
-                throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
-            }
-
-            imagesavealpha($new_image, true);
-            imagefill($new_image, 0, 0, imagecolorallocatealpha($new_image, 0, 0, 0, 127));
-
-            if (!imagecopyresized($new_image, $image, 0, 0, 0, 0, self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE, $width, $height)) {
-                imagedestroy($new_image);
-                throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
-            }
-
-            ob_start();
-            if (!imagepng($new_image)) {
-                imagedestroy($new_image);
-                throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
-            }
-
-            $image_base64 = 'data:image/png;base64,'.base64_encode(ob_get_clean());
-        }
-
-        return $image_base64;
+      return $this->fixCharset($countries[$code]);
     }
+
+    return '';
+  }
+
+  /**
+   * @param string $image_base64
+   *
+   * @throws \Exception
+   *
+   * @return string
+   */
+  private function checkAndResizeBase64Image($image_base64)
+  {
+    $image_data = explode(';base64,', $image_base64);
+    $data_regx = '/data:(.+)/';
+
+    if (!preg_match($data_regx, $image_data[0]))
+    {
+      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+    }
+
+    $image_type = preg_replace('/data:(.+)/', '\\1', $image_data[0]);
+    $image = null;
+
+    switch ($image_type)
+    {
+      case 'image/jpg':
+      case 'image/jpeg':
+        $image = imagecreatefromjpeg($image_base64);
+        break;
+      case 'image/png':
+        $image = imagecreatefrompng($image_base64);
+        break;
+      case 'image/gif':
+        $image = imagecreatefromgif($image_base64);
+        break;
+      default:
+        throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE);
+    }
+
+    if (!$image)
+    {
+      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+    }
+
+    $image_data = preg_replace($data_regx, '\\2', $image_base64);
+    $image_size = strlen(base64_decode($image_data));
+
+    if ($image_size > self::MAX_UPLOAD_SIZE)
+    {
+      throw new \Exception(StatusCode::UPLOAD_EXCEEDING_FILESIZE);
+    }
+
+    $width = imagesx($image);
+    $height = imagesy($image);
+
+    if ($width == 0 || $height == 0)
+    {
+      throw new \Exception(StatusCode::UPLOAD_UNSUPPORTED_FILE_TYPE);
+    }
+
+    if (max($width, $height) > self::MAX_AVATAR_SIZE)
+    {
+      $new_image = imagecreatetruecolor(self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE);
+      if (!$new_image)
+      {
+        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+      }
+
+      imagesavealpha($new_image, true);
+      imagefill($new_image, 0, 0, imagecolorallocatealpha($new_image, 0, 0, 0, 127));
+
+      if (!imagecopyresized($new_image, $image, 0, 0, 0, 0, self::MAX_AVATAR_SIZE, self::MAX_AVATAR_SIZE, $width, $height))
+      {
+        imagedestroy($new_image);
+        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+      }
+
+      ob_start();
+      if (!imagepng($new_image))
+      {
+        imagedestroy($new_image);
+        throw new \Exception(StatusCode::USER_AVATAR_UPLOAD_ERROR);
+      }
+
+      $image_base64 = 'data:image/png;base64,' . base64_encode(ob_get_clean());
+    }
+
+    return $image_base64;
+  }
 }

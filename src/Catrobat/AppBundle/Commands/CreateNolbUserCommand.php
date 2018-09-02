@@ -16,57 +16,65 @@ use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 class CreateNolbUserCommand extends ContainerAwareCommand
 {
-    private $em;
+  private $em;
 
-    public function __construct(EntityManager $em)
+  public function __construct(EntityManager $em)
+  {
+    parent::__construct();
+    $this->em = $em;
+  }
+
+  protected function configure()
+  {
+    $this->setName('catrobat:nolb-user:create')
+      ->setDescription('Creates NOLB user from given file')
+      ->addArgument('file', InputArgument::REQUIRED, 'The file to read users.');
+  }
+
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+    $filename = $input->getArgument('file');
+    $handle = fopen($filename, "r");
+    $indicator = new ConsoleProgressIndicator($output, true);
+
+    if ($handle)
     {
-        parent::__construct();
-        $this->em = $em;
-    }
+      while (($line = fgets($handle)) !== false)
+      {
+        $username = CommandHelper::getSubstring($line, " - ", false);
+        $password = substr($line, strlen($username) + 2);
+        if (CommandHelper::executeShellCommand('php app/console fos:user:create ' . $username . ' ' . $username . '@nolb ' . $password))
+        {
+          $user = $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username]);
 
-    protected function configure()
-    {
-        $this->setName('catrobat:nolb-user:create')
-            ->setDescription('Creates NOLB user from given file')
-            ->addArgument('file', InputArgument::REQUIRED, 'The file to read users.');
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $filename = $input->getArgument('file');
-        $handle = fopen($filename, "r");
-        $indicator = new ConsoleProgressIndicator($output, true);
-
-        if ($handle) {
-            while (($line = fgets($handle)) !== false) {
-                $username = CommandHelper::getSubstring($line, " - ", false);
-                $password = substr($line, strlen($username) + 2);
-                if(CommandHelper::executeShellCommand('php app/console fos:user:create '.$username.' '.$username.'@nolb '.$password)) {
-                    $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('username' => $username));
-
-                    if (!$user) {
-                        $indicator->isFailure();
-                        $indicator->addError($username);
-                    }
-                    else {
-                        $user->setNolbUser(true);
-                        $this->em->flush();
-                        $indicator->isSuccess();
-                    }
-                }
-                else {
-                    $indicator->isFailure();
-                    $indicator->addError($username);
-                }
-            }
-
-            fclose($handle);
-
-            $indicator->printErrors();
-
-        } else {
-            $output->writeln('File not found!');
+          if (!$user)
+          {
+            $indicator->isFailure();
+            $indicator->addError($username);
+          }
+          else
+          {
+            $user->setNolbUser(true);
+            $this->em->flush();
+            $indicator->isSuccess();
+          }
         }
+        else
+        {
+          $indicator->isFailure();
+          $indicator->addError($username);
+        }
+      }
+
+      fclose($handle);
+
+      $indicator->printErrors();
 
     }
+    else
+    {
+      $output->writeln('File not found!');
+    }
+
+  }
 }

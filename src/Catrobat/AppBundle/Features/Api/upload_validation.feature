@@ -1,7 +1,7 @@
 @api @upload
 Feature: All uploaded programs have to be validated.
 
-  Background: 
+  Background:
     Given I am a valid user
 
   Scenario: program must have a code.xml
@@ -17,7 +17,7 @@ Feature: All uploaded programs have to be validated.
       """
       {"statusCode":508,"answer":"invalid code xml","preHeaderMessages":""}
       """
-     And the response code should be "200" 
+    And the response code should be "200"
 
   @disabled
   Scenario: program with missing images are rejected
@@ -34,7 +34,7 @@ Feature: All uploaded programs have to be validated.
       """
       {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
       """
-     And the response code should be "500"
+    And the response code should be "500"
 
   Scenario: invalid catrobat program files should be rejected
     When I upload an invalid program file
@@ -52,10 +52,10 @@ Feature: All uploaded programs have to be validated.
     """
 
     Examples:
-    | Platform | Version   |
-    | Android  |   0.5     |
-    | Windows  |   0.0.1   |
-    | iOS      |   0.0.1   |
+      | Platform | Version |
+      | Android  | 0.5     |
+      | Windows  | 0.0.1   |
+      | iOS      | 0.0.1   |
 
   Scenario Outline: user should not be able to upload a program with an old pocketcode version
     Given I am using pocketcode for "<Platform>" with version "<Version>"
@@ -63,11 +63,11 @@ Feature: All uploaded programs have to be validated.
     Then The upload should be successful
 
     Examples:
-    | Platform | Version   |
-    | Android  |   0.9.1   |
-    | Android  |  v0.9.1   |
-    | Windows  |   0.1.0   |
-    | iOS      |   0.1.0   |
+      | Platform | Version |
+      | Android  | 0.9.1   |
+      | Android  | v0.9.1  |
+      | Windows  | 0.1.0   |
+      | iOS      | 0.1.0   |
 
 
   Scenario: user should not be able to upload a program with an old language version
@@ -78,7 +78,7 @@ Feature: All uploaded programs have to be validated.
       {"statusCode":518,"answer":"Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}
     """
 
-      
+
   Scenario: A valid file must contain at least one screenshot and image and sound directories
 
   Scenario: All media files except screenshots have to be defined in code.xml

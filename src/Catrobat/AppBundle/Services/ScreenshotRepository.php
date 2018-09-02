@@ -186,6 +186,7 @@ class ScreenshotRepository
 
   /**
    * @param $id
+   *
    * @desc
    */
   public function deleteTempFilesForProgram($id)
@@ -195,7 +196,7 @@ class ScreenshotRepository
       [
         $this->tmp_dir . $this->generateFileNameFromId($id),
         $this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id),
-        $this->tmp_dir . $id . ".catrobat"
+        $this->tmp_dir . $id . ".catrobat",
       ]);
   }
 

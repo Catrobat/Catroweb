@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity
  */
@@ -23,9 +24,9 @@ class AnniversaryNotification extends CatroNotification
    * AnniversaryNotification constructor.
    *
    * @param User $user
-   * @param $title
-   * @param $message
-   * @param $prize
+   * @param      $title
+   * @param      $message
+   * @param      $prize
    */
   public function __construct(User $user, $title, $message, $prize)
   {

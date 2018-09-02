@@ -7,55 +7,60 @@ use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
 class LookStatement extends Statement
 {
 
-    private $value;
-    private $fileName;
+  private $value;
+  private $fileName;
 
-    public function __construct($statementFactory, $xmlTree, $spaces, $value)
+  public function __construct($statementFactory, $xmlTree, $spaces, $value)
+  {
+    $this->value = $value;
+    parent::__construct($statementFactory, $xmlTree, $spaces,
+      $value,
+      "");
+  }
+
+  public function execute()
+  {
+    $this->findNames();
+
+    $code = '';
+
+    if ($this->value != null)
     {
-        $this->value = $value;
-        parent::__construct($statementFactory, $xmlTree, $spaces,
-            $value,
-            "");
+      $code = SyntaxHighlightingConstants::VARIABLES . $this->value . SyntaxHighlightingConstants::END;
+    }
+    if ($this->fileName != null)
+    {
+      $code .= ' (filename: ' . $this->fileName->execute() . ')';
     }
 
-    public function execute()
+    return $code;
+  }
+
+
+  private function findNames()
+  {
+    $tmpStatements = parent::getStatements();
+    foreach ($tmpStatements as $statement)
     {
-        $this->findNames();
-
-        $code = '';
-
-        if($this->value != null)
+      if ($statement != null)
+      {
+        if ($statement instanceof FileNameStatement)
         {
-            $code = SyntaxHighlightingConstants::VARIABLES . $this->value . SyntaxHighlightingConstants::END;
+          $this->fileName = $statement;
         }
-        if ($this->fileName != null) {
-            $code .= ' (filename: ' . $this->fileName->execute() . ')';
-        }
-        return $code;
+      }
     }
+  }
 
+  public function getValue()
+  {
+    return $this->value;
+  }
 
-    private function findNames()
-    {
-        $tmpStatements = parent::getStatements();
-        foreach ($tmpStatements as $statement) {
-            if ($statement != null) {
-                if ($statement instanceof FileNameStatement) {
-                    $this->fileName = $statement;
-                }
-            }
-        }
-    }
-
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function getFileName()
-    {
-        return $this->fileName;
-    }
+  public function getFileName()
+  {
+    return $this->fileName;
+  }
 }
 
 ?>

@@ -74,8 +74,8 @@ class UserNotificationController extends Controller
     $unseen_remixed_program_data = $this->get('remixmanager')->getUnseenRemixProgramsDataOfUser($user);
 
     return new JsonResponse([
-      'count' => count($unseen_remixed_program_data) + count($catro_user_notifications),
-      'statusCode' => 200
+      'count'      => count($unseen_remixed_program_data) + count($catro_user_notifications),
+      'statusCode' => 200,
     ]);
   }
 

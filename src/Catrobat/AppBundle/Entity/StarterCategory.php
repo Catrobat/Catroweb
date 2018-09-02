@@ -10,39 +10,39 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class StarterCategory
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="category", fetch="EAGER")
-     **/
-    private $programs;
+  /**
+   * @ORM\OneToMany(targetEntity="Program", mappedBy="category", fetch="EAGER")
+   **/
+  private $programs;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $name;
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $alias;
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  protected $alias;
 
-    /**
-     * @ORM\Column(type="integer", name="order_pos")
-     */
-    protected $order;
+  /**
+   * @ORM\Column(type="integer", name="order_pos")
+   */
+  protected $order;
 
   /**
    * @return mixed
    */
   public function getId()
   {
-      return $this->id;
+    return $this->id;
   }
 
   /**
@@ -50,7 +50,7 @@ class StarterCategory
    */
   public function setId($id)
   {
-      $this->id = $id;
+    $this->id = $id;
   }
 
   /**
@@ -58,7 +58,7 @@ class StarterCategory
    */
   public function getPrograms()
   {
-      return $this->programs;
+    return $this->programs;
   }
 
   /**
@@ -66,7 +66,7 @@ class StarterCategory
    */
   public function setPrograms($programs)
   {
-      $this->programs = $programs;
+    $this->programs = $programs;
   }
 
   /**
@@ -74,7 +74,7 @@ class StarterCategory
    */
   public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
   {
-      $program->setCategory($this);
+    $program->setCategory($this);
   }
 
   /**
@@ -82,7 +82,7 @@ class StarterCategory
    */
   public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
   {
-      $program->setCategory(null);
+    $program->setCategory(null);
   }
 
   /**
@@ -90,7 +90,7 @@ class StarterCategory
    */
   public function getName()
   {
-      return $this->name;
+    return $this->name;
   }
 
   /**
@@ -98,7 +98,7 @@ class StarterCategory
    */
   public function setName($name)
   {
-      $this->name = $name;
+    $this->name = $name;
   }
 
   /**
@@ -106,7 +106,7 @@ class StarterCategory
    */
   public function getAlias()
   {
-      return $this->alias;
+    return $this->alias;
   }
 
   /**
@@ -114,7 +114,7 @@ class StarterCategory
    */
   public function setAlias($alias)
   {
-      $this->alias = $alias;
+    $this->alias = $alias;
   }
 
   /**
@@ -122,7 +122,7 @@ class StarterCategory
    */
   public function getOrder()
   {
-      return $this->order;
+    return $this->order;
   }
 
   /**
@@ -130,11 +130,11 @@ class StarterCategory
    */
   public function setOrder($order)
   {
-      $this->order = $order;
+    $this->order = $order;
   }
 
-    public function __toString()
-    {
-        return $this->alias;
-    }
+  public function __toString()
+  {
+    return $this->alias;
+  }
 }

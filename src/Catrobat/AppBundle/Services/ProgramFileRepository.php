@@ -38,14 +38,16 @@ class ProgramFileRepository
 
   public function saveProgramTemp(ExtractedCatrobatFile $extracted, $id)
   {
-    if ($this->tmp_dir) {
+    if ($this->tmp_dir)
+    {
       $this->file_compressor->compress($extracted->getPath(), $this->tmp_dir, $id);
     }
   }
 
   public function makeTempProgramPerm($id)
   {
-    if ($this->tmp_dir) {
+    if ($this->tmp_dir)
+    {
       $this->filesystem->copy($this->tmp_dir . $id . ".catrobat", $this->directory . $id . ".catrobat", true);
       $this->filesystem->remove($this->tmp_dir . $id . ".catrobat");
     }

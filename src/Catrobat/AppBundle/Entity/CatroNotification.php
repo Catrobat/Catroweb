@@ -89,8 +89,8 @@ class CatroNotification
    * CatroNotification constructor.
    *
    * @param User $user
-   * @param $title
-   * @param $message
+   * @param      $title
+   * @param      $message
    */
   public function __construct(User $user, $title, $message)
   {

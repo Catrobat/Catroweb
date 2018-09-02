@@ -196,7 +196,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with parent-URLs referring to no existing Catrobat programs should unlink all former
-            remix ancestors (except self referencing relation)
+  remix ancestors (except self referencing relation)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -312,7 +312,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with parent-URL referring only to Scratch program should unlink all former
-            Catrobat remix ancestors (except self referencing relation)
+  Catrobat remix ancestors (except self referencing relation)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -429,7 +429,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with parent-URLs referring only to Scratch program but no valid Catrobat programs should
-            unlink all former Catrobat remix ancestors (except self referencing relation)
+  unlink all former Catrobat remix ancestors (except self referencing relation)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -681,7 +681,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 4 with parent-URLs referring only to its Catrobat forward ancestor (program 2) should
-            unlink its Catrobat backward parent (program 6)
+  unlink its Catrobat backward parent (program 6)
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -817,7 +817,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 4 with only backward parent (program 6) should only
-            unlink all former Catrobat forward ancestors
+  unlink all former Catrobat forward ancestors
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -1079,7 +1079,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 3 with child program (program 6) as only parent should create backward relation and
-            remove all former forward ancestors
+  remove all former forward ancestors
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -1208,7 +1208,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with other Scratch program and child programs (program 6 and 7)
-            as additional parents should create backward relations and replace old Scratch parent with new Scratch parent
+  as additional parents should create backward relations and replace old Scratch parent with new Scratch parent
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -1660,7 +1660,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no further Catrobat forward descendants
 
   Scenario: reuploading program 6 with one less parent (program 3) should unlink only forward relation to program 3
-            but not deeper forward relations since these forward relations (1-6 and 2-6) are still needed
+  but not deeper forward relations since these forward relations (1-6 and 2-6) are still needed
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -1794,7 +1794,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 6 with one less parent (program 3) should unlink all program 3's forward relations
-            since they have different depth level than the ones still needed
+  since they have different depth level than the ones still needed
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -1920,8 +1920,8 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 6 with removed Scratch parent and with one less Catrobat parent (program 3) should
-            unlink Scratch parent relation and also unlink all program 3's forward relations since they have different
-            depth level than the ones still needed
+  unlink Scratch parent relation and also unlink all program 3's forward relations since they have different
+  depth level than the ones still needed
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #
@@ -2046,7 +2046,7 @@ Feature: Upload a remixed program with multiple parents
     And the program "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 6 with no parents any more should convert former backward relation (6 -> 4)
-            to a forward ancestor relation
+  to a forward ancestor relation
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph should look like after the program is uploaded:
     #

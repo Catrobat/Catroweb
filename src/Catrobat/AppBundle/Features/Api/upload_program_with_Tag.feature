@@ -1,7 +1,7 @@
 @api @upload @tag
 Feature: Upload a program with tag
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |
@@ -9,11 +9,11 @@ Feature: Upload a program with tag
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
     And there are tags:
-      | id | en        | de          |
-      | 1  | Games     | Spiele      |
-      | 2  | Story     | Geschichte  |
-      | 3  | Music     | Musik       |
-      | 4  | Art       | Kunst       |
+      | id | en    | de         |
+      | 1  | Games | Spiele     |
+      | 2  | Story | Geschichte |
+      | 3  | Music | Musik      |
+      | 4  | Art   | Kunst      |
 
   Scenario: get all tags for language english before upload
     Given I want to upload a program
@@ -31,6 +31,7 @@ Feature: Upload a program with tag
                        ]
       }
       """
+
   Scenario: get all tags in english and statuscode 404 when no language is passed
     Given I want to upload a program
     And I have no parameters
@@ -47,6 +48,7 @@ Feature: Upload a program with tag
                        ]
       }
       """
+
   Scenario: get all tags in english and statuscode 404 when a none existing language is passed
     Given I want to upload a program
     And I have a parameter "language" with value "NotExisting"

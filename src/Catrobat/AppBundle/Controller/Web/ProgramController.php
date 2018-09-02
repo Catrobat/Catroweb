@@ -131,7 +131,7 @@ class ProgramController extends Controller
       'jam'                          => $jam,
       'nolb_status'                  => $nolb_status,
       'user_name'                    => $user_name,
-      'max_description_size'         => $max_description_size
+      'max_description_size'         => $max_description_size,
     ]);
   }
 
@@ -213,14 +213,15 @@ class ProgramController extends Controller
   }
 
   /**
-   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+   * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+"}, defaults={"id" =
+   *                                      0}, methods={"GET"})
    */
   public function deleteProgramAction($id)
   {
     /**
-   * @var $user \Catrobat\AppBundle\Entity\User
-   * @var $program \Catrobat\AppBundle\Entity\Program
-   */
+     * @var $user    \Catrobat\AppBundle\Entity\User
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     */
     if ($id == 0)
     {
       return $this->redirectToRoute('profile');
@@ -257,7 +258,7 @@ class ProgramController extends Controller
   public function toggleProgramVisibilityAction($id)
   {
     /**
-     * @var $user \Catrobat\AppBundle\Entity\User
+     * @var $user    \Catrobat\AppBundle\Entity\User
      * @var $program \Catrobat\AppBundle\Entity\Program
      */
 
@@ -306,8 +307,8 @@ class ProgramController extends Controller
   public function editProgramDescription($id, $newDescription)
   {
     /**
-     * @var $user \Catrobat\AppBundle\Entity\User
-     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var                $user    \Catrobat\AppBundle\Entity\User
+     * @var                $program \Catrobat\AppBundle\Entity\Program
      * @var ProgramManager $program_manager
      */
 
@@ -316,14 +317,16 @@ class ProgramController extends Controller
       ->getParameter("catrobat.max_description_upload_size");
     $translator = $this->get('translator');
 
-    if (strlen($newDescription) > $max_description_size) {
+    if (strlen($newDescription) > $max_description_size)
+    {
       return JsonResponse::create(['statusCode' => StatusCode::DESCRIPTION_TOO_LONG,
-                                   'message' => $translator->trans("programs.tooLongDescription", [], "catroweb")]);
+                                   'message'    => $translator->trans("programs.tooLongDescription", [], "catroweb")]);
     }
 
-    if ($rude_word_filter->containsRudeWord($newDescription)) {
+    if ($rude_word_filter->containsRudeWord($newDescription))
+    {
       return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
-                                   'message' => $translator->trans("programs.rudeWordsInDescription", [], "catroweb")]);
+                                   'message'    => $translator->trans("programs.rudeWordsInDescription", [], "catroweb")]);
     }
 
     $user = $this->getUser();
@@ -339,7 +342,8 @@ class ProgramController extends Controller
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
-    if ($program->getUser() !== $user) {
+    if ($program->getUser() !== $user)
+    {
       throw $this->createAccessDeniedException('Not your program!');
     }
 
@@ -386,8 +390,8 @@ class ProgramController extends Controller
 
   /**
    * @param Request $request
-   * @param $program
-   * @param $viewed
+   * @param         $program
+   * @param         $viewed
    */
   private function checkAndAddViewed(Request $request, $program, $viewed)
   {

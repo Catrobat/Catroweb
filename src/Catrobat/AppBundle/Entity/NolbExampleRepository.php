@@ -47,7 +47,7 @@ class NolbExampleRepository extends EntityRepository
 
   public function getIfNolbExampleProgram($program_id)
   {
-    return $this->findOneBy(array('program' => $program_id));
+    return $this->findOneBy(['program' => $program_id]);
   }
 
 }

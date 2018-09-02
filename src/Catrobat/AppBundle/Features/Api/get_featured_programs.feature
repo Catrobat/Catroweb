@@ -1,7 +1,7 @@
 @api
 Feature: Get featured programs
 
-  Background: 
+  Background:
     Given the server name is "pocketcode.org"
     And I use a secure connection
     Given there are users:
@@ -24,7 +24,7 @@ Feature: Get featured programs
       | Simple click | no     | 4        | no       |
       | IOS test     | yes    | 0        | yes      |
       | Mega Game1   | no     | 1        | yes      |
-      
+
   Scenario: show featured programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"

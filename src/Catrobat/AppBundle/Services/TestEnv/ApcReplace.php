@@ -41,6 +41,7 @@ final class ApcReplace
   protected $store = [];
 
   private static $APC_OBJECTS = "LdapTestDriverFixture";
+
   /**
    * Call this method to get singleton
    *
@@ -49,9 +50,11 @@ final class ApcReplace
   public static function Instance()
   {
     static $inst = null;
-    if ($inst === null) {
+    if ($inst === null)
+    {
       $inst = new ApcReplace();
     }
+
     return $inst;
   }
 
@@ -59,6 +62,7 @@ final class ApcReplace
   public function apc_store($key, $value)
   {
     $this->store[$key] = $value;
+
     return true;
   }
 
@@ -68,12 +72,14 @@ final class ApcReplace
     {
       return false;
     }
+
     return $this->store[$key];
   }
 
   public function apc_delete($key)
   {
     unset($this->store[$key]);
+
     return true;
   }
 

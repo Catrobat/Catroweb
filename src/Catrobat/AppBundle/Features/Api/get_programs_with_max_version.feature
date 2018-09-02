@@ -1,7 +1,7 @@
 @api
 Feature: Get the most downloaded programs
 
-  Background: 
+  Background:
     Given there are users:
       | name     | password | token      |
       | Catrobat | 12345    | cccccccccc |

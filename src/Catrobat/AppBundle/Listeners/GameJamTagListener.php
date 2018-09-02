@@ -9,22 +9,23 @@ use Catrobat\AppBundle\Entity\Program;
 class GameJamTagListener
 {
 
-    public function onEvent(ProgramBeforePersistEvent $event)
+  public function onEvent(ProgramBeforePersistEvent $event)
+  {
+    $this->checkDescriptionTag($event->getProgramEntity());
+  }
+
+  public function checkDescriptionTag(Program $program)
+  {
+    if ($program->getGamejam() == null || $program->getGamejam()->getHashtag() == null)
     {
-        $this->checkDescriptionTag($event->getProgramEntity());
+      return;
     }
 
-    public function checkDescriptionTag(Program $program)
+    $description = $program->getDescription();
+    if (strpos($description, $program->getGamejam()->getHashtag()) === false)
     {
-        if($program->getGamejam() == null || $program->getGamejam()->getHashtag() == null)
-        {
-            return;
-        }
-
-        $description = $program->getDescription();
-        if (strpos($description, $program->getGamejam()->getHashtag()) === false) {
-            $description = $description . "\n\n" . $program->getGamejam()->getHashtag();
-            $program->setDescription($description);
-        }
+      $description = $description . "\n\n" . $program->getGamejam()->getHashtag();
+      $program->setDescription($description);
     }
+  }
 }

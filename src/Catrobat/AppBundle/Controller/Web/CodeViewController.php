@@ -19,17 +19,16 @@ class CodeViewController extends Controller
 
       $parsed_program = $this->get('catrobat_code_parser')->parse($extracted_program);
       $web_path = $extracted_program->getWebPath();
-    }
-    catch(\Exception $e)
+    } catch (\Exception $e)
     {
       $parsed_program = null;
       $web_path = null;
     }
 
-    $code_view_twig_params = array(
+    $code_view_twig_params = [
       'parsed_program' => $parsed_program,
-      'path' => $web_path
-    );
+      'path'           => $web_path,
+    ];
 
     return $this->get('templating')->renderResponse('codeview.html.twig', $code_view_twig_params);
   }

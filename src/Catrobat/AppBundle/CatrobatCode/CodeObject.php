@@ -5,81 +5,89 @@ namespace Catrobat\AppBundle\CatrobatCode;
 
 class CodeObject
 {
-    private $name;
+  private $name;
 
-    private $scripts;
+  private $scripts;
 
-    private $codeObjects;
+  private $codeObjects;
 
-    public function __construct()
+  public function __construct()
+  {
+    $this->scripts = [];
+    $this->codeObjects = [];
+  }
+
+  public function getName()
+  {
+    return $this->name;
+  }
+
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+
+  public function addAllScripts($scriptsToAdd)
+  {
+    foreach ($scriptsToAdd as $script)
     {
-        $this->scripts = array();
-        $this->codeObjects = array();
+      $this->scripts[] = $script;
+    }
+  }
+
+  public function getCodeObjects()
+  {
+    return $this->codeObjects;
+  }
+
+  public function setCodeObjects($codeObjects)
+  {
+    $this->codeObjects = $codeObjects;
+  }
+
+  public function getCodeObjectsRecursively()
+  {
+    $objects = [];
+    $objects[] = $this;
+    foreach ($this->codeObjects as $object)
+    {
+      if ($object != null)
+      {
+        $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
+      }
     }
 
-    public function getName()
+    return $objects;
+  }
+
+  private function addObjectsToArray($objects, $objectsToAdd)
+  {
+    foreach ($objectsToAdd as $object)
     {
-        return $this->name;
+      $objects[] = $object;
     }
 
-    public function setName($name)
+    return $objects;
+  }
+
+  public function addCodeObject($codeObject)
+  {
+    $this->codeObjects[] = $codeObject;
+  }
+
+  public function getCode()
+  {
+    $code = "";
+    foreach ($this->scripts as $script)
     {
-        $this->name = $name;
+      $code .= $script->execute();
     }
 
-    public function addAllScripts($scriptsToAdd)
-    {
-        foreach ($scriptsToAdd as $script) {
-            $this->scripts[] = $script;
-        }
-    }
+    return $code;
+  }
 
-    public function getCodeObjects()
-    {
-        return $this->codeObjects;
-    }
-
-    public function setCodeObjects($codeObjects)
-    {
-        $this->codeObjects = $codeObjects;
-    }
-
-    public function getCodeObjectsRecursively()
-    {
-        $objects = array();
-        $objects[] = $this;
-        foreach ($this->codeObjects as $object) {
-            if($object != null){
-                $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
-            }
-        }
-        return $objects;
-    }
-
-    private function addObjectsToArray($objects, $objectsToAdd)
-    {
-        foreach ($objectsToAdd as $object) {
-            $objects[] = $object;
-        }
-        return $objects;
-    }
-
-    public function addCodeObject($codeObject)
-    {
-        $this->codeObjects[] = $codeObject;
-    }
-
-    public function getCode()
-    {
-        $code = "";
-        foreach ($this->scripts as $script) {
-            $code .= $script->execute();
-        }
-        return $code;
-    }
-
-    public function getScripts()
-    {
-        return $this->scripts;
-    }
+  public function getScripts()
+  {
+    return $this->scripts;
+  }
 }

@@ -12,58 +12,62 @@ use Doctrine\ORM\Mapping\PreUpdate;
 
 class FeaturedProgramImageListener
 {
-    private $repository;
+  private $repository;
 
-    public function __construct(FeaturedImageRepository $repository)
+  public function __construct(FeaturedImageRepository $repository)
+  {
+    $this->repository = $repository;
+  }
+
+  public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  {
+    $file = $featured->file;
+    if ($file == null)
     {
-        $this->repository = $repository;
+      return;
     }
+    $featured->setImageType($file->guessExtension());
+  }
 
-    public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  {
+    $file = $featured->file;
+    if ($file == null)
     {
-        $file = $featured->file;
-        if ($file == null) {
-            return;
-        }
-        $featured->setImageType($file->guessExtension());
+      return;
     }
+    $this->repository->save($file, $featured->getId(), $featured->getImageType());
+  }
 
-    public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event)
+  public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+  {
+    $file = $featured->file;
+    if ($file == null)
     {
-        $file = $featured->file;
-        if ($file == null) {
-            return;
-        }
-        $this->repository->save($file, $featured->getId(), $featured->getImageType());
-    }
+      $featured->setImageType($featured->old_image_type);
 
-    public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+      return;
+    }
+    $featured->setImageType($file->guessExtension());
+  }
+
+  public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
+  {
+    $file = $featured->file;
+    if ($file == null)
     {
-        $file = $featured->file;
-        if ($file == null) {
-            $featured->setImageType($featured->old_image_type);
-
-            return;
-        }
-        $featured->setImageType($file->guessExtension());
+      return;
     }
+    $this->repository->save($file, $featured->getId(), $featured->getImageType());
+  }
 
-    public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event)
-    {
-        $file = $featured->file;
-        if ($file == null) {
-            return;
-        }
-        $this->repository->save($file, $featured->getId(), $featured->getImageType());
-    }
+  public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
+  {
+    $featured->removed_id = $featured->getId();
+  }
 
-    public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
-    {
-        $featured->removed_id = $featured->getId();
-    }
-
-    public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
-    {
-        $this->repository->remove($featured->removed_id, $featured->getImageType());
-    }
+  public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event)
+  {
+    $this->repository->remove($featured->removed_id, $featured->getImageType());
+  }
 }
