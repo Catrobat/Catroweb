@@ -27,8 +27,11 @@ fos_js_routing:
   resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 translate_word:
-  path:  /translate/{word}/{domain}
-  defaults: { _controller: Catrobat\AppBundle\Controller\TranslationController:translateAction }
+  path:  /translate/{word}/{array}/{domain}
+  controller: Catrobat\AppBundle\Controller\TranslationController:translateAction
+  defaults:
+    array: ""
+    domain: "catroweb"
   options:
     expose: true
 

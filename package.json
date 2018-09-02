@@ -34,9 +34,14 @@
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "clipboard": "^1.7.1"
+    "clipboard": "^1.7.1",
+    "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1"
   },
   "standard": {
-    "globals": ["$"]
+    "globals": [
+      "$"
+    ]
   }
 }

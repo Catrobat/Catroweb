@@ -28,10 +28,35 @@ var MyProfile = function(profile_url, email_edit_url, profile_edit_url, avatar_e
     self.setAvatarUploadListener();
   };
 
-  self.deleteProgram = function(id) {
-    var programName = $('#program-' + id).find('.program-name').text();
-    window.location.href = self.delete_url + '/' + id;
-  };
+  self.deleteProgram = function (id) {
+    var programName = $('#program-' + id).find('.program-name').text()
+    var translations = []
+    translations.push({
+      key:   "%programName%",
+      value: programName
+    });
+    var url = Routing.generate('translate_word', {
+      'word': 'programs.deleteConfirmation',
+      'array': JSON.stringify(translations),
+      'domain': 'catroweb'
+    })
+    $.get(url, function (data) {
+      var splitted = data.split("\n");
+      swal({
+        title: splitted[0],
+        html: splitted[1] + "<br><br>" + splitted[2],
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: splitted[3],
+        cancelButtonText: splitted[4]
+      }).then((result) => {
+        window.location.href = self.delete_url + '/' + id
+      })
+    })
+  }
+  
 
   $(document).on("click", ".btn-edit", function() {
 
