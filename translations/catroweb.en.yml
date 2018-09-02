@@ -56,6 +56,8 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Most viewed
     downloaded: Most downloaded

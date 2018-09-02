@@ -7,6 +7,9 @@ use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException;
+use Catrobat\AppBundle\Exceptions\Upload\RudewordInDescriptionException;
+use Catrobat\AppBundle\Listeners\DescriptionValidator;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
@@ -114,6 +117,9 @@ class ProgramController extends Controller
 
     $jam = $this->extractGameJamConfig();
 
+    $max_description_size = $this->container->get('kernel')->getContainer()
+      ->getParameter("catrobat.max_description_upload_size");
+
     return $this->get('templating')->renderResponse('program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
@@ -125,6 +131,7 @@ class ProgramController extends Controller
       'jam'                          => $jam,
       'nolb_status'                  => $nolb_status,
       'user_name'                    => $user_name,
+      'max_description_size'         => $max_description_size
     ]);
   }
 
@@ -210,7 +217,7 @@ class ProgramController extends Controller
    */
   public function deleteProgramAction($id)
   {
-    /*
+    /**
    * @var $user \Catrobat\AppBundle\Entity\User
    * @var $program \Catrobat\AppBundle\Entity\Program
    */
@@ -249,7 +256,7 @@ class ProgramController extends Controller
    */
   public function toggleProgramVisibilityAction($id)
   {
-    /*
+    /**
      * @var $user \Catrobat\AppBundle\Entity\User
      * @var $program \Catrobat\AppBundle\Entity\Program
      */
@@ -290,6 +297,59 @@ class ProgramController extends Controller
     $em->flush();
 
     return new Response("true");
+  }
+
+  /**
+   * @Route("/editProgramDescription/{id}/{newDescription}", name="edit_program_description",
+   *                                         options={"expose"=true}, requirements={"id":"\d+"}, methods={"GET"})
+   */
+  public function editProgramDescription($id, $newDescription)
+  {
+    /**
+     * @var $user \Catrobat\AppBundle\Entity\User
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var ProgramManager $program_manager
+     */
+
+    $rude_word_filter = $this->get('rudewordfilter');
+    $max_description_size = $this->container->get('kernel')->getContainer()
+      ->getParameter("catrobat.max_description_upload_size");
+    $translator = $this->get('translator');
+
+    if (strlen($newDescription) > $max_description_size) {
+      return JsonResponse::create(['statusCode' => StatusCode::DESCRIPTION_TOO_LONG,
+                                   'message' => $translator->trans("programs.tooLongDescription", [], "catroweb")]);
+    }
+
+    if ($rude_word_filter->containsRudeWord($newDescription)) {
+      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
+                                   'message' => $translator->trans("programs.rudeWordsInDescription", [], "catroweb")]);
+    }
+
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    $program_manager = $this->get('programmanager');
+    $program = $program_manager->find($id);
+    if (!$program)
+    {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    if ($program->getUser() !== $user) {
+      throw $this->createAccessDeniedException('Not your program!');
+    }
+
+    $program->setDescription($newDescription);
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($program);
+    $em->flush();
+
+    return JsonResponse::create(['statusCode' => StatusCode::OK]);
   }
 
   /**

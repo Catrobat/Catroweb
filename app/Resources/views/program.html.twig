@@ -37,7 +37,10 @@
 
 {% block body %}
   <div id="program-top" class="h1">
-    <div id="program-name">{{ program.name }}</div>
+    <div id="program-name">
+      {{ program.name }}
+    </div>
+
     <div id="program-user">
       <a href="{{ url('profile', { id : program.user.id }) }}">{{ program.user }}</a>
     </div>
@@ -88,7 +91,16 @@
     </div>
 
     <div id="info">
-      <h2>{{ "description"|trans({}, "catroweb") }}</h2>
+      <div class="h2">
+        <span>
+          {{ "description"|trans({}, "catroweb") }}
+          {% if app.user and my_program %}
+            <a href="#" data-toggle="tooltip" title="Change the program Description">
+              <i id="edit-description-button" class="ml-3 fa fa-pencil-square-o"></i>
+            </a>
+          {% endif %}
+        </span>
+      </div>
 
       <div id="description">
         {% if program.description %}
@@ -97,6 +109,23 @@
           {{ "noDescription"|trans({}, "catroweb") }}
         {% endif %}
       </div>
+
+
+      {% if app.user and my_program %}
+        <div id="edit-description-ui">
+          <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
+          <textarea id="edit-description" name="edit-description" class="mt-2 mb-2" title="_edit-description"
+                    maxlength="{{ max_description_size }}" style="width: 100%" rows="10" >
+{% if program.description %}{{ program.description }}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
+          </textarea>
+
+          <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
+            <i class="fa fa-floppy-o mr-2"></i>
+            Save Description change
+          </button>
+        </div>
+
+      {% endif %}
 
       {% if  program.tags|length > 0  or program.extensions|length > 0 %}
         <div id="tag-extension-container">
@@ -891,5 +920,88 @@
             }
         });
     });
+
+
+    $(function() {
+
+      let description = $("#description");
+      let editDescriptionUI = $("#edit-description-ui");
+      let editDescriptionButton = $("#edit-description-button");
+      let editDescription = $("#edit-description");
+      let editDescriptionSubmitButton = $("#edit-description-submit-button");
+      let editDescriptionError = $("#edit-description-error");
+
+      // set default visibilities
+      initDescriptionEdit();
+
+
+      function initDescriptionEdit() {
+          editDescriptionUI.hide();
+          description.show();
+      }
+
+
+      // increase icon size while hovering over it
+      editDescriptionButton.hover(
+        function() {
+        editDescriptionButton.addClass("fa-lg")
+      },
+        function() {
+        editDescriptionButton.removeClass("fa-lg")
+      });
+
+
+      editDescriptionButton.click(function() {
+        if (description.is(':visible')) {
+          description.hide();
+          editDescriptionUI.show()
+        }
+        else {
+          description.show();
+          editDescriptionUI.hide()
+        }
+      });
+
+
+      editDescriptionSubmitButton.click(function() {
+        let newDescription = editDescription.val().trim();
+        if (newDescription === description.text().trim()) {
+          editDescriptionUI.hide();
+          description.show();
+          return
+        }
+
+        let pId = {{ program.id }};
+        let url = Routing.generate('edit_program_description', { id: pId,  newDescription: newDescription });
+        $.get(url, function(data) {
+          if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
+            description.text(newDescription);
+            editDescription.removeClass("danger");
+            editDescriptionError.hide();
+            editDescriptionUI.hide();
+            description.show()
+          }
+          else if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }} ||
+          data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }} ) {
+            editDescription.addClass("danger");
+            editDescriptionError.show();
+            editDescriptionError.text(data.message)
+          }
+        });
+      });
+
+
+      // save session when edit description text changes
+      //let oldVal = "";
+      //editDescription.on("change keyup paste", function() {
+      //  let currentVal = $(this).val();
+      //  if(currentVal !== oldVal) {
+      //    oldVal = currentVal;
+      //    sessionStorage.setItem('editDescriptionStorage', editDescription.text());
+      //  }
+      //});
+    })
+
+
   </script>
 {% endblock %}

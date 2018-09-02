@@ -1010,6 +1010,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
 
     /**
+     * @Given /^the element "([^"]*)" should not exist$/
+     */
+    public function theElementShouldNotExist($element)
+    {
+      $this->assertSession()->elementNotExists('css', $element);
+    }
+
+    /**
      * @Given /^the element "([^"]*)" should not be visible$/
      */
     public function theElementShouldNotBeVisible($element)
