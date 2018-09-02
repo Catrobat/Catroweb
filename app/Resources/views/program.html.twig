@@ -102,9 +102,23 @@
         </span>
       </div>
 
-      <div id="description">
+      <div id="description" style="max-height: 300px; overflow: auto;">
         {% if program.description %}
-          {{ program.description|nl2br }}
+          {% if program.description|length <= 250 %}
+            {{ program.description|nl2br }}
+          {% else %}
+            <p>
+              <span>{{ program.description[:250]|nl2br }}</span><!--- NO white space hack
+                  --><span id="descriptionPoints">...</span><!--- NO white space hack
+                  --><span id="descriptionFulltext" class="fulltext">{{ program.description[250:]|nl2br }}</span>
+            </p>
+            <a id="descriptionShowMoreToggle" aria-expanded="false" aria-controls="descriptionFulltext" href="#"
+               class="toggle-content">
+                  <span id="descriptionShowMoreText" class="text text-capitalize">
+                    {{ ("show-more")|trans({}, "catroweb") }}
+                  </span>
+            </a>
+          {% endif %}
         {% else %}
           {{ "noDescription"|trans({}, "catroweb") }}
         {% endif %}
@@ -124,8 +138,10 @@
             Save Description change
           </button>
         </div>
-
       {% endif %}
+
+
+      <hr>
 
       {% if  program.tags|length > 0  or program.extensions|length > 0 %}
         <div id="tag-extension-container">
@@ -975,11 +991,7 @@
         let url = Routing.generate('edit_program_description', { id: pId,  newDescription: newDescription });
         $.get(url, function(data) {
           if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
-            description.text(newDescription);
-            editDescription.removeClass("danger");
-            editDescriptionError.hide();
-            editDescriptionUI.hide();
-            description.show()
+            location.reload();
           }
           else if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }} ||
           data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }} ) {
@@ -990,17 +1002,33 @@
         });
       });
 
+    });
 
-      // save session when edit description text changes
-      //let oldVal = "";
-      //editDescription.on("change keyup paste", function() {
-      //  let currentVal = $(this).val();
-      //  if(currentVal !== oldVal) {
-      //    oldVal = currentVal;
-      //    sessionStorage.setItem('editDescriptionStorage', editDescription.text());
-      //  }
-      //});
-    })
+
+    $(function() {
+      let descriptionFulltext = $("#descriptionFulltext");
+      let descriptionPoints = $("#descriptionPoints");
+      let descriptionShowMoreToggle = $("#descriptionShowMoreToggle");
+      let descriptionShowMoreText = $("#descriptionShowMoreText");
+      descriptionFulltext.hide();
+      descriptionPoints.show();
+      descriptionShowMoreToggle.click(function() {
+        if (descriptionFulltext.is(":visible"))
+        {
+          descriptionFulltext.fadeOut();
+          descriptionPoints.show();
+          descriptionShowMoreText.text('{{ ("show-more")|trans({}, "catroweb") }}');
+          descriptionShowMoreToggle.css('aria-expanded', false)
+        }
+        else
+        {
+          descriptionFulltext.fadeIn();
+          descriptionPoints.hide();
+          descriptionShowMoreText.text('{{ ("show-less")|trans({}, "catroweb") }}');
+          descriptionShowMoreToggle.css('aria-expanded', true)
+        }
+      });
+    });
 
 
   </script>
