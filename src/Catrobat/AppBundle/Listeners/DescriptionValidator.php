@@ -26,7 +26,7 @@ class DescriptionValidator
 
     public function validate(ExtractedCatrobatFile $file)
     {
-        if (strlen($file->getDescription()) > 1000) {
+        if (strlen($file->getDescription()) > 5000) {
             throw new DescriptionTooLongException();
         }
 
