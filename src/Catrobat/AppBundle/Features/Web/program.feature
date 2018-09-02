@@ -158,3 +158,35 @@ Feature: As a visitor I want to see a program page
       When I click on the first featured homepage program
       Then I wait 500 milliseconds
       Then I should see "Dapiest"
+
+    Scenario: Changing description is not possible if not logged in
+      Given I am on "/pocketcode/program/1"
+      Then the element "#edit-description-button" should not exist
+      And the element "#edit-description-ui" should not exist
+
+    Scenario: Changing description is not possible if it's not my program
+      Given I am on "/pocketcode/login"
+      And I fill in "username" with "Gregor"
+      And I fill in "password" with "123456"
+      And I press "Login"
+      And I am on "/pocketcode/program/1"
+      Then the element "#edit-description-button" should not exist
+      And the element "#edit-description-ui" should not exist
+
+    Scenario: Changing description is possible if it's my program
+      Given I am on "/pocketcode/login"
+      And I fill in "username" with "Gregor"
+      And I fill in "password" with "123456"
+      And I press "Login"
+      And I am on "/pocketcode/program/2"
+      Then the element "#edit-description-button" should be visible
+      When I click "#edit-description-button"
+      Then the element "#description" should not be visible
+      And the element "#edit-description" should be visible
+      And the element "#edit-description-submit-button" should be visible
+      When I fill in "edit-description" with "This is a new description"
+      And I click "#edit-description-submit-button"
+      And I wait 250 milliseconds
+      Then the element "#description" should be visible
+      And the element "#edit-description-ui" should not be visible
+      And I should see "This is a new description"

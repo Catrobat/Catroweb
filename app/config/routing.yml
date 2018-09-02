@@ -35,6 +35,12 @@ translate_word:
   options:
     expose: true
 
+edit_program_description:
+  path:  /editProgramDescription/{id}/{newDescription}
+  controller: Catrobat\AppBundle\Controller\Web\ProgramController:editProgramDescription
+  options:
+    expose: true
+
 
 # ===== FOS User Bundle =====
 fos_user:

@@ -25,7 +25,7 @@ services:
 
       catroweb.file.validator.description:
             class: Catrobat\AppBundle\Listeners\DescriptionValidator
-            arguments:    ["@rudewordfilter"]
+            autowire: true
             tags:
             - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 

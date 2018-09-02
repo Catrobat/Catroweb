@@ -9,14 +9,17 @@ use Catrobat\AppBundle\Services\RudeWordFilter;
 use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException;
 use Catrobat\AppBundle\Exceptions\Upload\RudewordInDescriptionException;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DescriptionValidator
 {
     private $rudeWordFilter;
+    private $container;
 
-    public function __construct(RudeWordFilter $rudeWordFilter)
+    public function __construct(RudeWordFilter $rudeWordFilter, ContainerInterface $container)
     {
         $this->rudeWordFilter = $rudeWordFilter;
+        $this->container = $container;
     }
 
     public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
@@ -26,7 +29,9 @@ class DescriptionValidator
 
     public function validate(ExtractedCatrobatFile $file)
     {
-        if (strlen($file->getDescription()) > 1000) {
+      $max_description_size = $this->container->get('kernel')->getContainer()
+        ->getParameter("catrobat.max_description_upload_size");
+        if (strlen($file->getDescription()) > $max_description_size) {
             throw new DescriptionTooLongException();
         }
 

@@ -31,6 +31,7 @@ class StatusCode
   const DESCRIPTION_TOO_LONG = 527;
   // upload failed but program still in DB
   const INVALID_FILE_UPLOAD = 528;
+  const NOT_MY_PROGRAM = 529;
 
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;
