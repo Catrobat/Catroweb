@@ -7,12 +7,12 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
 class ChangeYByNBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::CHANGE_Y_BY_N_BRICK;
-        $this->caption = "Change Y by "
-          . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::Y_POSITION_CHANGE_FORMULA];
+  protected function create()
+  {
+    $this->type = Constants::CHANGE_Y_BY_N_BRICK;
+    $this->caption = "Change Y by "
+      . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::Y_POSITION_CHANGE_FORMULA];
 
-        $this->setImgFile(Constants::MOTION_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::MOTION_BRICK_IMG);
+  }
 }

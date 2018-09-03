@@ -7,12 +7,12 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
 class ThinkBubbleBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::THINK_BUBBLE_BRICK;
-        $this->caption = "Think \""
-          . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::STRING_FORMULA] . "\"";
+  protected function create()
+  {
+    $this->type = Constants::THINK_BUBBLE_BRICK;
+    $this->caption = "Think \""
+      . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::STRING_FORMULA] . "\"";
 
-        $this->setImgFile(Constants::LOOKS_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::LOOKS_BRICK_IMG);
+  }
 }

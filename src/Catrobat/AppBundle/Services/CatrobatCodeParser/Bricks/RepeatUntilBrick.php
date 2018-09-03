@@ -7,13 +7,13 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
 class RepeatUntilBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::REPEAT_UNTIL_BRICK;
-        $this->caption = "Repeat until "
-          . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::REPEAT_UNTIL_CONDITION_FORMULA]
-          . " is true";
+  protected function create()
+  {
+    $this->type = Constants::REPEAT_UNTIL_BRICK;
+    $this->caption = "Repeat until "
+      . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::REPEAT_UNTIL_CONDITION_FORMULA]
+      . " is true";
 
-        $this->setImgFile(Constants::CONTROL_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::CONTROL_BRICK_IMG);
+  }
 }

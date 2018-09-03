@@ -7,11 +7,11 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
 class SetLookByIndexBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::SET_LOOK_BY_INDEX_BRICK;
-        $this->caption = "Switch to look number " . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::LOOK_INDEX];
+  protected function create()
+  {
+    $this->type = Constants::SET_LOOK_BY_INDEX_BRICK;
+    $this->caption = "Switch to look number " . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::LOOK_INDEX];
 
-      $this->setImgFile(Constants::LOOKS_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::LOOKS_BRICK_IMG);
+  }
 }
