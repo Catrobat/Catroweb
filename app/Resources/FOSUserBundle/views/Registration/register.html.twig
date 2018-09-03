@@ -39,9 +39,6 @@
                   {% for errorItem in form.plainPassword.first.vars.errors %}
                     <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
                   {% endfor %}
-                  {% for errorItem in form.plainPassword.second.vars.errors %}
-                    <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
-                  {% endfor %}
               </div>
 
               <div class="group">
