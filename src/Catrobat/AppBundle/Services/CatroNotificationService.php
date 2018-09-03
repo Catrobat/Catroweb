@@ -41,6 +41,7 @@ class CatroNotificationService
   const DEFAULT_NOTIFICATION = 0;
 
   private $em;
+
   public function __construct(EntityManager $em)
   {
     $this->em = $em;
@@ -59,6 +60,7 @@ class CatroNotificationService
 
   /**
    * @param array CatroNotification $notifications
+   *
    * @desc Deletes all given notifications
    */
   public function deleteNotifications($notifications)

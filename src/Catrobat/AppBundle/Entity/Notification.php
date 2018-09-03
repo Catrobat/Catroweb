@@ -12,156 +12,157 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Notification
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+  /**
+   * @var int
+   *
+   * @ORM\Column(name="id", type="integer")
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  private $id;
 
-    /**
-     * @var \stdClass
-     *
-     * @ORM\OneToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
-     */
-    private $user;
+  /**
+   * @var \stdClass
+   *
+   * @ORM\OneToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
+   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+   */
+  private $user;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="upload", type="boolean")
-     */
-    private $upload;
+  /**
+   * @var bool
+   *
+   * @ORM\Column(name="upload", type="boolean")
+   */
+  private $upload;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="report", type="boolean")
-     */
-    private $report;
+  /**
+   * @var bool
+   *
+   * @ORM\Column(name="report", type="boolean")
+   */
+  private $report;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="summary", type="boolean")
-     */
-    private $summary;
+  /**
+   * @var bool
+   *
+   * @ORM\Column(name="summary", type="boolean")
+   */
+  private $summary;
 
-    public function __toString()
+  public function __toString()
+  {
+    if (is_object($this->user))
     {
-        if (is_object($this->user)) {
-            return $this->user->__toString().' notification';
-        }
-
-        return 'notification';
+      return $this->user->__toString() . ' notification';
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    return 'notification';
+  }
 
-    /**
-     * Set user.
-     *
-     * @param \Catrobat\AppBundle\Entity\User $user
-     *
-     * @return Notification
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
+  /**
+   * Get id.
+   *
+   * @return int
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 
-        return $this;
-    }
+  /**
+   * Set user.
+   *
+   * @param \Catrobat\AppBundle\Entity\User $user
+   *
+   * @return Notification
+   */
+  public function setUser($user)
+  {
+    $this->user = $user;
 
-    /**
-     * Get user.
-     *
-     * @return \Catrobat\AppBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
+    return $this;
+  }
 
-    /**
-     * Set upload.
-     *
-     * @param bool $upload
-     *
-     * @return Notification
-     */
-    public function setUpload($upload)
-    {
-        $this->upload = $upload;
+  /**
+   * Get user.
+   *
+   * @return \Catrobat\AppBundle\Entity\User
+   */
+  public function getUser()
+  {
+    return $this->user;
+  }
 
-        return $this;
-    }
+  /**
+   * Set upload.
+   *
+   * @param bool $upload
+   *
+   * @return Notification
+   */
+  public function setUpload($upload)
+  {
+    $this->upload = $upload;
 
-    /**
-     * Get upload.
-     *
-     * @return bool
-     */
-    public function getUpload()
-    {
-        return $this->upload;
-    }
+    return $this;
+  }
 
-    /**
-     * Set report.
-     *
-     * @param bool $report
-     *
-     * @return Notification
-     */
-    public function setReport($report)
-    {
-        $this->report = $report;
+  /**
+   * Get upload.
+   *
+   * @return bool
+   */
+  public function getUpload()
+  {
+    return $this->upload;
+  }
 
-        return $this;
-    }
+  /**
+   * Set report.
+   *
+   * @param bool $report
+   *
+   * @return Notification
+   */
+  public function setReport($report)
+  {
+    $this->report = $report;
 
-    /**
-     * Get report.
-     *
-     * @return bool
-     */
-    public function getReport()
-    {
-        return $this->report;
-    }
+    return $this;
+  }
 
-    /**
-     * Set summary.
-     *
-     * @param bool $summary
-     *
-     * @return Notification
-     */
-    public function setSummary($summary)
-    {
-        $this->summary = $summary;
+  /**
+   * Get report.
+   *
+   * @return bool
+   */
+  public function getReport()
+  {
+    return $this->report;
+  }
 
-        return $this;
-    }
+  /**
+   * Set summary.
+   *
+   * @param bool $summary
+   *
+   * @return Notification
+   */
+  public function setSummary($summary)
+  {
+    $this->summary = $summary;
 
-    /**
-     * Get summary.
-     *
-     * @return bool
-     */
-    public function getSummary()
-    {
-        return $this->summary;
-    }
+    return $this;
+  }
+
+  /**
+   * Get summary.
+   *
+   * @return bool
+   */
+  public function getSummary()
+  {
+    return $this->summary;
+  }
 }

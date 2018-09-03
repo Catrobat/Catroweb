@@ -10,18 +10,21 @@ use Catrobat\AppBundle\Requests\TemplateRequest;
 class TemplateService
 {
 
-    /* @var $templateManager \Catrobat\AppBundle\Entity\TemplateManager*/
-    private $templateManager;
+  /* @var $templateManager \Catrobat\AppBundle\Entity\TemplateManager */
+  private $templateManager;
 
-    public function __construct(TemplateManager $templateManager) {
-        $this->templateManager = $templateManager;
-    }
+  public function __construct(TemplateManager $templateManager)
+  {
+    $this->templateManager = $templateManager;
+  }
 
-    public function saveFiles(Template $template){
-        $this->templateManager->saveTemplateFiles($template);
-    }
+  public function saveFiles(Template $template)
+  {
+    $this->templateManager->saveTemplateFiles($template);
+  }
 
-    public function deleteTemplateFiles($id){
-        $this->templateManager->deleteTemplateFiles($id);
-    }
+  public function deleteTemplateFiles($id)
+  {
+    $this->templateManager->deleteTemplateFiles($id);
+  }
 }

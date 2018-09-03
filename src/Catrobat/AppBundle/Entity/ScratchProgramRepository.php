@@ -12,20 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class ScratchProgramRepository extends EntityRepository
 {
-    /**
-     * @param int[] $scratch_program_ids
-     * @return array
-     */
-    public function getProgramDataByIds(array $scratch_program_ids)
-    {
-        $qb = $this->createQueryBuilder('s');
+  /**
+   * @param int[] $scratch_program_ids
+   *
+   * @return array
+   */
+  public function getProgramDataByIds(array $scratch_program_ids)
+  {
+    $qb = $this->createQueryBuilder('s');
 
-        return $qb
-            ->select(array('s.id', 's.name', 's.username'))
-            ->where('s.id IN (:scratch_program_ids)')
-            ->setParameter('scratch_program_ids', $scratch_program_ids)
-            ->distinct()
-            ->getQuery()
-            ->getResult();
-    }
+    return $qb
+      ->select(['s.id', 's.name', 's.username'])
+      ->where('s.id IN (:scratch_program_ids)')
+      ->setParameter('scratch_program_ids', $scratch_program_ids)
+      ->distinct()
+      ->getQuery()
+      ->getResult();
+  }
 }

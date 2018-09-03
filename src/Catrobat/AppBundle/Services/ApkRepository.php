@@ -8,39 +8,41 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ApkRepository
 {
-    private $dir;
+  private $dir;
 
-    public function __construct($dir)
+  public function __construct($dir)
+  {
+    $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
+
+    if (!is_dir($dir))
     {
-        $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
-
-        if (!is_dir($dir)) {
-            throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
-        }
-
-        $this->dir = $dir;
+      throw new InvalidStorageDirectoryException($dir . ' is not a valid directory');
     }
 
-    public function save($file, $id)
-    {
-        $file->move($this->dir, $this->generateFileNameFromId($id));
-    }
+    $this->dir = $dir;
+  }
 
-    public function remove($id)
-    {
-        $path = $this->dir.$this->generateFileNameFromId($id);
-        if (is_file($path)) {
-            unlink($path);
-        }
-    }
+  public function save($file, $id)
+  {
+    $file->move($this->dir, $this->generateFileNameFromId($id));
+  }
 
-    private function generateFileNameFromId($id)
+  public function remove($id)
+  {
+    $path = $this->dir . $this->generateFileNameFromId($id);
+    if (is_file($path))
     {
-        return $id.'.apk';
+      unlink($path);
     }
+  }
 
-    public function getProgramFile($id)
-    {
-        return new File($this->dir.$this->generateFileNameFromId($id));
-    }
+  private function generateFileNameFromId($id)
+  {
+    return $id . '.apk';
+  }
+
+  public function getProgramFile($id)
+  {
+    return new File($this->dir . $this->generateFileNameFromId($id));
+  }
 }

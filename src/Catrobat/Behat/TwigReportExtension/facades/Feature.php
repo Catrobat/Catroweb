@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\Behat\TwigReportExtension\facades;
 
 use Behat\Behat\EventDispatcher\Event\AfterFeatureTested;
@@ -6,48 +7,48 @@ use Behat\Behat\EventDispatcher\Event\AfterFeatureTested;
 class Feature
 {
 
-    private $event;
+  private $event;
 
-    private $scenarios;
+  private $scenarios;
 
-    private $background;
-    
-    private $file;
+  private $background;
 
-    public function __construct(AfterFeatureTested $event, $scenarios, $background)
-    {
-        $this->event = $event;
-        $this->scenarios = $scenarios;
-        $this->background = $background;
-    }
+  private $file;
 
-    public function getTitle()
-    {
-        return $this->event->getFeature()->getTitle();
-    }
+  public function __construct(AfterFeatureTested $event, $scenarios, $background)
+  {
+    $this->event = $event;
+    $this->scenarios = $scenarios;
+    $this->background = $background;
+  }
 
-    public function getDescription()
-    {
-        return $this->event->getFeature()->getDescription();
-    }
+  public function getTitle()
+  {
+    return $this->event->getFeature()->getTitle();
+  }
 
-    public function getResult()
-    {
-        return $this->event->getTestResult()->getResultCode();
-    }
+  public function getDescription()
+  {
+    return $this->event->getFeature()->getDescription();
+  }
 
-    public function getScenarios()
-    {
-        return $this->scenarios;
-    }
+  public function getResult()
+  {
+    return $this->event->getTestResult()->getResultCode();
+  }
 
-    public function getBackground()
-    {
-        return $this->background;
-    }
+  public function getScenarios()
+  {
+    return $this->scenarios;
+  }
 
-    public function getFile()
-    {
-        return $this->event->getFeature()->getFile();
-    }
+  public function getBackground()
+  {
+    return $this->background;
+  }
+
+  public function getFile()
+  {
+    return $this->event->getFeature()->getFile();
+  }
 }

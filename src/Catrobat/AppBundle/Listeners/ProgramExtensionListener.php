@@ -9,54 +9,64 @@ use Catrobat\AppBundle\Entity\Program;
 
 class ProgramExtensionListener
 {
-    private $extension_repository;
+  private $extension_repository;
 
-    public function __construct(ExtensionRepository $repo)
+  public function __construct(ExtensionRepository $repo)
+  {
+    $this->extension_repository = $repo;
+  }
+
+  public function onEvent(ProgramBeforePersistEvent $event)
+  {
+    $this->checkExtension($event->getExtractedFile(), $event->getProgramEntity());
+  }
+
+  public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program)
+  {
+    $xml = $extracted_file->getProgramXmlProperties();
+
+    $xpath = '//@category';
+    $nodes = $xml->xpath($xpath);
+
+    $program->removeAllExtensions();
+
+    if (empty($nodes))
     {
-        $this->extension_repository = $repo;
+      return;
     }
 
-    public function onEvent(ProgramBeforePersistEvent $event)
+    $prefixes = array_map(function ($element) {
+      return explode("_", $element['category'], 2)[0];
+    }, $nodes);
+    $prefixes = array_unique($prefixes);
+
+    $extensions = $this->extension_repository->findAll();
+
+    foreach ($extensions as $extension)
     {
-        $this->checkExtension($event->getExtractedFile(), $event->getProgramEntity());
-    }
+      if (in_array($extension->getPrefix(), $prefixes))
+      {
+        $program->addExtension($extension);
 
-    public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program)
-    {
-        $xml = $extracted_file->getProgramXmlProperties();
+        if ($extension->getPrefix() == 'PHIRO')
+        {
+          $program->setFlavor('phirocode');
+        }
+      }
 
-        $xpath = '//@category';
-        $nodes = $xml->xpath($xpath);
+      if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0)
+      {
+        $is_cast = $xml->xpath('header/isCastProject');
 
-        $program->removeAllExtensions();
-
-        if (empty($nodes))
-            return;
-
-        $prefixes = array_map(function ($element) { return explode("_", $element['category'], 2)[0]; }, $nodes);
-        $prefixes = array_unique($prefixes);
-
-        $extensions = $this->extension_repository->findAll();
-        
-        foreach ($extensions as $extension) {
-            if (in_array($extension->getPrefix(), $prefixes )) {
-                $program->addExtension($extension);
-
-              if ($extension->getPrefix() == 'PHIRO') {
-                $program->setFlavor('phirocode');
-              }
-            }
-
-          if (strcmp($extension->getPrefix(), 'CHROMECAST') == 0) {
-            $is_cast = $xml->xpath('header/isCastProject');
-
-            if(!empty($is_cast)) {
-              $cast_value = ((array) $is_cast[0]);
-              if(strcmp($cast_value[0], 'true') == 0) {
-                $program->addExtension($extension);
-              }
-            }
+        if (!empty($is_cast))
+        {
+          $cast_value = ((array)$is_cast[0]);
+          if (strcmp($cast_value[0], 'true') == 0)
+          {
+            $program->addExtension($extension);
           }
         }
+      }
     }
+  }
 }

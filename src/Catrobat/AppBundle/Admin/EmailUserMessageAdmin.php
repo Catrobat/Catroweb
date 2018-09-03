@@ -17,28 +17,28 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class EmailUserMessageAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'admin_mail';
-    protected $baseRoutePattern = 'mail';
+  protected $baseRouteName = 'admin_mail';
+  protected $baseRoutePattern = 'mail';
 
-    protected function configureFormFields(FormMapper $formMapper)
-    {
+  protected function configureFormFields(FormMapper $formMapper)
+  {
 
-    }
+  }
 
-    // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-    }
+  // Fields to be shown on filter forms
+  protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+  {
+  }
 
-    // Fields to be shown on lists
-    protected function configureListFields(ListMapper $listMapper)
-    {
-    }
+  // Fields to be shown on lists
+  protected function configureListFields(ListMapper $listMapper)
+  {
+  }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(array('list'));
-        $collection->add('send');
-    }
+  protected function configureRoutes(RouteCollection $collection)
+  {
+    $collection->clearExcept(['list']);
+    $collection->add('send');
+  }
 
 }

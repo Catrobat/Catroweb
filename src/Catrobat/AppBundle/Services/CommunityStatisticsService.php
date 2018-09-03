@@ -28,6 +28,7 @@ class CommunityStatisticsService
 {
 
   private $em;
+
   public function __construct(EntityManager $em)
   {
     $this->em = $em;
@@ -44,6 +45,7 @@ class CommunityStatisticsService
     $dql = "SELECT COUNT(p.id) AS program_count, SUM(p.downloads) AS downloads FROM Catrobat\AppBundle\Entity\Program p";
     $stats = $this->em->createQuery($dql)
       ->getScalarResult();
+
     return $stats[0];
   }
 }

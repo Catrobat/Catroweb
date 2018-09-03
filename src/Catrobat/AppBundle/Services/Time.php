@@ -11,8 +11,8 @@ namespace Catrobat\AppBundle\Services;
 
 class Time
 {
-    public function getTime()
-    {
-        return time();
-    }
+  public function getTime()
+  {
+    return time();
+  }
 }

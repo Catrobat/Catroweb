@@ -18,10 +18,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Group extends BaseGroup
 {
-    /**
+  /**
    * @var int @ORM\Id
-   *      @ORM\Column(type="integer")
-   *      @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected $id;
 
@@ -32,6 +32,6 @@ class Group extends BaseGroup
    */
   public function getId()
   {
-      return $this->id;
+    return $this->id;
   }
 }

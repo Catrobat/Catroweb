@@ -16,19 +16,19 @@ class CleanLogsCommand extends ContainerAwareCommand
   protected function configure()
   {
     $this->setName('catrobat:logs:clean')
-         ->setDescription('Delete the log files');
+      ->setDescription('Delete the log files');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-      $this->output = $output;
-      $this->output->writeln('Deleting log files');
-      $log_dir = $this->getContainer()->getParameter('catrobat.logs.dir');
-      $log_files = glob($log_dir . "*.log");
-      foreach ($log_files as $log_file)
-      {
-          unlink($log_file);
-      }
-      $this->output->writeln('Successfully deleted log files');
+    $this->output = $output;
+    $this->output->writeln('Deleting log files');
+    $log_dir = $this->getContainer()->getParameter('catrobat.logs.dir');
+    $log_files = glob($log_dir . "*.log");
+    foreach ($log_files as $log_file)
+    {
+      unlink($log_file);
+    }
+    $this->output->writeln('Successfully deleted log files');
   }
 } 

@@ -4,25 +4,25 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 class StopAllSoundsStatement extends Statement
 {
-    const BEGIN_STRING = "stop all sounds";
-    const END_STRING = "<br/>";
+  const BEGIN_STRING = "stop all sounds";
+  const END_STRING = "<br/>";
 
-    public function __construct($statementFactory, $xmlTree, $spaces)
-    {
-        parent::__construct($statementFactory, $xmlTree, $spaces,
-            self::BEGIN_STRING,
-            self::END_STRING);
-    }
+  public function __construct($statementFactory, $xmlTree, $spaces)
+  {
+    parent::__construct($statementFactory, $xmlTree, $spaces,
+      self::BEGIN_STRING,
+      self::END_STRING);
+  }
 
-    public function getBrickText()
-    {
-        return "Sop all sounds";
-    }
+  public function getBrickText()
+  {
+    return "Sop all sounds";
+  }
 
-    public function getBrickColor()
-    {
-        return "1h_brick_violet.png";
-    }
+  public function getBrickColor()
+  {
+    return "1h_brick_violet.png";
+  }
 
 }
 

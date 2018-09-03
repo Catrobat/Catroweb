@@ -56,13 +56,13 @@ class UserComment
     $this->id = $id;
   }
 
-    /**
-     * @return mixed
-     */
-    public function getProgramId()
-    {
-        return $this->programId;
-    }
+  /**
+   * @return mixed
+   */
+  public function getProgramId()
+  {
+    return $this->programId;
+  }
 
   /**
    * @param mixed $programId

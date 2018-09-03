@@ -16,7 +16,7 @@ class CleanExtractedFileCommand extends ContainerAwareCommand
   protected function configure()
   {
     $this->setName('catrobat:clean:extracted')
-         ->setDescription('Delete the extracted programs and sets the directory hash to NULL');
+      ->setDescription('Delete the extracted programs and sets the directory hash to NULL');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
@@ -31,6 +31,6 @@ class CleanExtractedFileCommand extends ContainerAwareCommand
     $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.directory_hash = :hash WHERE p.directory_hash != :hash");
     $query->setParameter('hash', "null");
     $result = $query->getSingleScalarResult();
-    $this->output->writeln('Reset the directory hash of '.$result.' projects');
+    $this->output->writeln('Reset the directory hash of ' . $result . ' projects');
   }
 } 

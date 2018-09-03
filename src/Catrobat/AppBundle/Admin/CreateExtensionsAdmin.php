@@ -7,13 +7,13 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class CreateExtensionsAdmin extends AbstractAdmin
 {
-    protected $baseRoutePattern = 'create';
-    protected $baseRouteName = 'create';
+  protected $baseRoutePattern = 'create';
+  protected $baseRouteName = 'create';
 
-    //Find the implementation in the Controller-Folder
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(array('list'));
-        $collection->add("extensions");
-    }
+  //Find the implementation in the Controller-Folder
+  protected function configureRoutes(RouteCollection $collection)
+  {
+    $collection->clearExcept(['list']);
+    $collection->add("extensions");
+  }
 }

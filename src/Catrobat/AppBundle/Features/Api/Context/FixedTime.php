@@ -13,15 +13,15 @@ use Catrobat\AppBundle\Services\Time;
 
 class FixedTime extends Time
 {
-    protected $timestamp;
+  protected $timestamp;
 
-    public function __construct($timestamp)
-    {
-        $this->timestamp = $timestamp;
-    }
+  public function __construct($timestamp)
+  {
+    $this->timestamp = $timestamp;
+  }
 
-    public function getTime()
-    {
-        return $this->timestamp;
-    }
+  public function getTime()
+  {
+    return $this->timestamp;
+  }
 }

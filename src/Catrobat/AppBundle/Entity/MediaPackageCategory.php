@@ -104,15 +104,18 @@ class MediaPackageCategory
 
   public function __toString()
   {
-    if(count($this->package)) {
-      $string = $this->name." (";
+    if (count($this->package))
+    {
+      $string = $this->name . " (";
       $count = count($this->package);
 
-      for($it = 0; $it < $count; $it++) {
+      for ($it = 0; $it < $count; $it++)
+      {
         $string .= $this->package[$it];
 
-        if($it < ($count-1)) {
-            $string .= ", ";
+        if ($it < ($count - 1))
+        {
+          $string .= ", ";
         }
       }
       $string .= ")";
@@ -120,7 +123,9 @@ class MediaPackageCategory
       return $string;
     }
     else
+    {
       return $this->name;
+    }
   }
 
   /**

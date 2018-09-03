@@ -13,30 +13,32 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DescriptionValidator
 {
-    private $rudeWordFilter;
-    private $container;
+  private $rudeWordFilter;
+  private $container;
 
-    public function __construct(RudeWordFilter $rudeWordFilter, ContainerInterface $container)
+  public function __construct(RudeWordFilter $rudeWordFilter, ContainerInterface $container)
+  {
+    $this->rudeWordFilter = $rudeWordFilter;
+    $this->container = $container;
+  }
+
+  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+  {
+    $this->validate($event->getExtractedFile());
+  }
+
+  public function validate(ExtractedCatrobatFile $file)
+  {
+    $max_description_size = $this->container->get('kernel')->getContainer()
+      ->getParameter("catrobat.max_description_upload_size");
+    if (strlen($file->getDescription()) > $max_description_size)
     {
-        $this->rudeWordFilter = $rudeWordFilter;
-        $this->container = $container;
+      throw new DescriptionTooLongException();
     }
 
-    public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
+    if ($this->rudeWordFilter->containsRudeWord($file->getDescription()))
     {
-        $this->validate($event->getExtractedFile());
+      throw new RudewordInDescriptionException();
     }
-
-    public function validate(ExtractedCatrobatFile $file)
-    {
-      $max_description_size = $this->container->get('kernel')->getContainer()
-        ->getParameter("catrobat.max_description_upload_size");
-        if (strlen($file->getDescription()) > $max_description_size) {
-            throw new DescriptionTooLongException();
-        }
-
-        if ($this->rudeWordFilter->containsRudeWord($file->getDescription())) {
-            throw new RudewordInDescriptionException();
-        }
-    }
+  }
 }

@@ -14,152 +14,153 @@ use Doctrine\ORM\Mapping as ORM;
 class Tag
 {
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+  /**
+   * @return mixed
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
+
+  /**
+   * @var \Doctrine\Common\Collections\Collection|Program[]
+   *
+   * @ORM\ManyToMany(targetEntity="\Catrobat\AppBundle\Entity\Program", mappedBy="tags")
+   */
+  protected $programs;
+
+  /**
+   * Default constructor, initializes collections
+   */
+  public function __construct()
+  {
+    $this->programs = new ArrayCollection();
+  }
+
+  /**
+   * @param Program $program
+   */
+  public function addProgram(Program $program)
+  {
+    if ($this->programs->contains($program))
     {
-        return $this->id;
+      return;
     }
+    $this->programs->add($program);
+    $program->addTag($this);
+  }
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection|Program[]
-     *
-     * @ORM\ManyToMany(targetEntity="\Catrobat\AppBundle\Entity\Program", mappedBy="tags")
-     */
-    protected $programs;
-
-    /**
-     * Default constructor, initializes collections
-     */
-    public function __construct()
+  /**
+   * @param Program $program
+   */
+  public function removeProgram(Program $program)
+  {
+    if (!$this->programs->contains($program))
     {
-        $this->programs = new ArrayCollection();
+      return;
     }
+    $this->programs->removeElement($program);
+    $program->removeTag($this);
+  }
 
-    /**
-     * @param Program $program
-     */
-    public function addProgram(Program $program)
-    {
-        if ($this->programs->contains($program)) {
-            return;
-        }
-        $this->programs->add($program);
-        $program->addTag($this);
-    }
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $en;
 
-    /**
-     * @param Program $program
-     */
-    public function removeProgram(Program $program)
-    {
-        if (!$this->programs->contains($program)) {
-            return;
-        }
-        $this->programs->removeElement($program);
-        $program->removeTag($this);
-    }
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $de;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $en;
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $it;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $de;
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $fr;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $it;
+  /**
+   * @return Program[]|\Doctrine\Common\Collections\Collection
+   */
+  public function getPrograms()
+  {
+    return $this->programs;
+  }
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $fr;
+  /**
+   * @return mixed
+   */
+  public function getEn()
+  {
+    return $this->en;
+  }
 
-    /**
-     * @return Program[]|\Doctrine\Common\Collections\Collection
-     */
-    public function getPrograms()
-    {
-        return $this->programs;
-    }
+  /**
+   * @param mixed $en
+   */
+  public function setEn($en)
+  {
+    $this->en = $en;
+  }
 
-    /**
-     * @return mixed
-     */
-    public function getEn()
-    {
-        return $this->en;
-    }
+  /**
+   * @return mixed
+   */
+  public function getDe()
+  {
+    return $this->de;
+  }
 
-    /**
-     * @param mixed $en
-     */
-    public function setEn($en)
-    {
-        $this->en = $en;
-    }
+  /**
+   * @param mixed $de
+   */
+  public function setDe($de)
+  {
+    $this->de = $de;
+  }
 
-    /**
-     * @return mixed
-     */
-    public function getDe()
-    {
-        return $this->de;
-    }
+  /**
+   * @return mixed
+   */
+  public function getIt()
+  {
+    return $this->it;
+  }
 
-    /**
-     * @param mixed $de
-     */
-    public function setDe($de)
-    {
-        $this->de = $de;
-    }
+  /**
+   * @param mixed $it
+   */
+  public function setIt($it)
+  {
+    $this->it = $it;
+  }
 
-    /**
-     * @return mixed
-     */
-    public function getIt()
-    {
-        return $this->it;
-    }
+  /**
+   * @return mixed
+   */
+  public function getFr()
+  {
+    return $this->fr;
+  }
 
-    /**
-     * @param mixed $it
-     */
-    public function setIt($it)
-    {
-        $this->it = $it;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFr()
-    {
-        return $this->fr;
-    }
-
-    /**
-     * @param mixed $fr
-     */
-    public function setFr($fr)
-    {
-        $this->fr = $fr;
-    }
-
+  /**
+   * @param mixed $fr
+   */
+  public function setFr($fr)
+  {
+    $this->fr = $fr;
+  }
 
 
 }

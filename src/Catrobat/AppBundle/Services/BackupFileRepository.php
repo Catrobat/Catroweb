@@ -11,8 +11,9 @@ class BackupFileRepository
 
   public function __construct($directory)
   {
-    if (!is_dir($directory)) {
-      throw new InvalidStorageDirectoryException($directory.' is not a valid directory');
+    if (!is_dir($directory))
+    {
+      throw new InvalidStorageDirectoryException($directory . ' is not a valid directory');
     }
     $this->directory = $directory;
   }

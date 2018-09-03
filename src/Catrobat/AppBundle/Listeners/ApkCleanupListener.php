@@ -8,19 +8,20 @@ use Catrobat\AppBundle\Entity\Program;
 
 class ApkCleanupListener
 {
-    protected $repository;
+  protected $repository;
 
-    public function __construct(ApkRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+  public function __construct(ApkRepository $repository)
+  {
+    $this->repository = $repository;
+  }
 
-    public function handleEvent(ProgramBeforePersistEvent $event)
+  public function handleEvent(ProgramBeforePersistEvent $event)
+  {
+    $program = $event->getProgramEntity();
+    if ($program->getId() !== 0)
     {
-        $program = $event->getProgramEntity();
-        if ($program->getId() !== 0) {
-            $this->repository->remove($program->getId());
-            $program->setApkStatus(Program::APK_NONE);
-        }
+      $this->repository->remove($program->getId());
+      $program->setApkStatus(Program::APK_NONE);
     }
+  }
 }

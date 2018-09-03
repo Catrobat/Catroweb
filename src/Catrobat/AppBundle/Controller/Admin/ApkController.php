@@ -10,86 +10,100 @@ use Catrobat\AppBundle\Entity\Program;
 
 class ApkController extends CRUDController
 {
-    public function resetStatusAction() {
-        /* @var $object Program */
-        $object = $this->admin->getSubject();
+  public function resetStatusAction()
+  {
+    /* @var $object Program */
+    $object = $this->admin->getSubject();
 
-        if (!$object) {
-            throw new NotFoundHttpException();
-        }
-
-        $object->setApkStatus(Program::APK_NONE);
-
-        $this->admin->update($object);
-
-        $this->addFlash('sonata_flash_success', 'Reseted APK status of ' . $object->getName());
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
+    if (!$object)
+    {
+      throw new NotFoundHttpException();
     }
 
-    public function rebuildApkAction() {
-        /* @var $object Program */
-        $object = $this->admin->getSubject();
+    $object->setApkStatus(Program::APK_NONE);
 
-        if (!$object) {
-            throw new NotFoundHttpException();
-        }
+    $this->admin->update($object);
 
-        $dispatcher = $this->container->get('ci.jenkins.dispatcher');
-        $dispatcher->sendBuildRequest($object->getId());
+    $this->addFlash('sonata_flash_success', 'Reseted APK status of ' . $object->getName());
 
-        $object->setApkRequestTime(new \DateTime());
-        $object->setApkStatus(Program::APK_PENDING);
+    return new RedirectResponse($this->admin->generateUrl('list'));
+  }
 
-        $this->admin->update($object);
+  public function rebuildApkAction()
+  {
+    /* @var $object Program */
+    $object = $this->admin->getSubject();
 
-        $this->addFlash('sonata_flash_success', 'Requested a rebuild of ' . $object->getName());
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
+    if (!$object)
+    {
+      throw new NotFoundHttpException();
     }
 
-    public function resetAllApkAction() {
-        /* @var $program Program */
+    $dispatcher = $this->container->get('ci.jenkins.dispatcher');
+    $dispatcher->sendBuildRequest($object->getId());
 
-        $datagrid = $this->admin->getDatagrid();
+    $object->setApkRequestTime(new \DateTime());
+    $object->setApkStatus(Program::APK_PENDING);
 
-        $objects = $datagrid->getResults();
+    $this->admin->update($object);
 
-        foreach ($objects as $program) {
-            $program->setApkStatus(Program::APK_NONE);
-            $this->admin->update($program);
-        }
+    $this->addFlash('sonata_flash_success', 'Requested a rebuild of ' . $object->getName());
 
-        if (count($objects) != 0) {
-            $this->addFlash('sonata_flash_success', 'All Apks reseted');
-        } else {
-            $this->addFlash('sonata_flash_info', 'No Apks to be reseted');
-        }
+    return new RedirectResponse($this->admin->generateUrl('list'));
+  }
 
-        return new RedirectResponse($this->admin->generateUrl('list'));
+  public function resetAllApkAction()
+  {
+    /* @var $program Program */
+
+    $datagrid = $this->admin->getDatagrid();
+
+    $objects = $datagrid->getResults();
+
+    foreach ($objects as $program)
+    {
+      $program->setApkStatus(Program::APK_NONE);
+      $this->admin->update($program);
     }
 
-    public function rebuildAllApkAction() {
-        /* @var $program Program */
-
-        $datagrid = $this->admin->getDatagrid();
-
-        $objects = $datagrid->getResults();
-        $dispatcher = $this->container->get('ci.jenkins.dispatcher');
-
-        foreach ($objects as $program) {
-            $dispatcher->sendBuildRequest($program->getId());
-            $program->setApkRequestTime(new \DateTime());
-            $program->setApkStatus(Program::APK_PENDING);
-            $this->admin->update($program);
-        }
-
-        if (count($objects) != 0) {
-            $this->addFlash('sonata_flash_success', 'Requested rebuild for all Apks');
-        } else {
-            $this->addFlash('sonata_flash_info', 'No Rebuild-Requests were sent');
-        }
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
+    if (count($objects) != 0)
+    {
+      $this->addFlash('sonata_flash_success', 'All Apks reseted');
     }
+    else
+    {
+      $this->addFlash('sonata_flash_info', 'No Apks to be reseted');
+    }
+
+    return new RedirectResponse($this->admin->generateUrl('list'));
+  }
+
+  public function rebuildAllApkAction()
+  {
+    /* @var $program Program */
+
+    $datagrid = $this->admin->getDatagrid();
+
+    $objects = $datagrid->getResults();
+    $dispatcher = $this->container->get('ci.jenkins.dispatcher');
+
+    foreach ($objects as $program)
+    {
+      $dispatcher->sendBuildRequest($program->getId());
+      $program->setApkRequestTime(new \DateTime());
+      $program->setApkStatus(Program::APK_PENDING);
+      $this->admin->update($program);
+    }
+
+    if (count($objects) != 0)
+    {
+      $this->addFlash('sonata_flash_success', 'Requested rebuild for all Apks');
+    }
+    else
+    {
+      $this->addFlash('sonata_flash_info', 'No Rebuild-Requests were sent');
+    }
+
+    return new RedirectResponse($this->admin->generateUrl('list'));
+  }
 }

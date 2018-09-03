@@ -12,14 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class RudeWordsRepository extends EntityRepository
 {
-    public function contains($array)
-    {
-        $qb = $this->createQueryBuilder('e');
-        $qb->select($qb->expr()->count('e.word'))
+  public function contains($array)
+  {
+    $qb = $this->createQueryBuilder('e');
+    $qb->select($qb->expr()->count('e.word'))
       ->where($qb->expr()->in('e.word', '?1'))
       ->setParameter(1, $array);
-        $result = $qb->getQuery()->getSingleScalarResult();
+    $result = $qb->getQuery()->getSingleScalarResult();
 
-        return $result > 0;
-    }
+    return $result > 0;
+  }
 }

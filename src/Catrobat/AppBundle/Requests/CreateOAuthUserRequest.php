@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Requests;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +18,7 @@ class CreateOAuthUserRequest
   /**
    * @Assert\NotBlank(message = "error.username.blank")
    * @Assert\Regex(pattern = "/^[\w@_\-\.\s]+$/")
-   */  
+   */
   public $username;
 
   /**
@@ -25,7 +26,7 @@ class CreateOAuthUserRequest
    * @Assert\Email(message = "error.email.invalid")
    */
   public $mail;
-  
+
   /**
    * @Assert\NotBlank(message = "error.id.blank")
    */

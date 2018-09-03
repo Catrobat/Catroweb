@@ -12,26 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExtensionRepository extends EntityRepository
 {
-    public function getAllExtensionsPrefix()
-    {
-        $qb = $this->createQueryBuilder('e');
+  public function getAllExtensionsPrefix()
+  {
+    $qb = $this->createQueryBuilder('e');
 
-        return $qb
-            ->select('e.prefix')
-            ->getQuery()
-            ->getResult();
+    return $qb
+      ->select('e.prefix')
+      ->getQuery()
+      ->getResult();
 
-    }
+  }
 
-    public function getExtensionByName($name)
-    {
-        $qb = $this->createQueryBuilder('e');
+  public function getExtensionByName($name)
+  {
+    $qb = $this->createQueryBuilder('e');
 
-        return $qb
-            ->select('e')
-            ->where($qb->expr()->eq('e.name', ':name'))
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getResult();
-    }
+    return $qb
+      ->select('e')
+      ->where($qb->expr()->eq('e.name', ':name'))
+      ->setParameter('name', $name)
+      ->getQuery()
+      ->getResult();
+  }
 }

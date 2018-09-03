@@ -13,20 +13,20 @@ use Catrobat\AppBundle\Services\Time;
 
 class ProxyTime extends Time
 {
-    protected $time;
+  protected $time;
 
-    public function __construct(Time $time)
-    {
-        $this->time = $time;
-    }
+  public function __construct(Time $time)
+  {
+    $this->time = $time;
+  }
 
-    public function setTime($time)
-    {
-        $this->time = $time;
-    }
+  public function setTime($time)
+  {
+    $this->time = $time;
+  }
 
-    public function getTime()
-    {
-        return $this->time->getTime();
-    }
+  public function getTime()
+  {
+    return $this->time->getTime();
+  }
 }

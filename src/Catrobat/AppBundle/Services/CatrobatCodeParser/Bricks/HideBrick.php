@@ -6,11 +6,11 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
 class HideBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::HIDE_BRICK;
-        $this->caption = "Hide";
+  protected function create()
+  {
+    $this->type = Constants::HIDE_BRICK;
+    $this->caption = "Hide";
 
-        $this->setImgFile(Constants::LOOKS_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::LOOKS_BRICK_IMG);
+  }
 }

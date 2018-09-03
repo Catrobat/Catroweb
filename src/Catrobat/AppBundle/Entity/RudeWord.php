@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RudeWord
 {
-    /**
+  /**
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,7 +28,7 @@ class RudeWord
    */
   public function getId()
   {
-      return $this->id;
+    return $this->id;
   }
 
   /**
@@ -36,7 +36,7 @@ class RudeWord
    */
   public function setId($id)
   {
-      $this->id = $id;
+    $this->id = $id;
   }
 
   /**
@@ -44,7 +44,7 @@ class RudeWord
    */
   public function getWord()
   {
-      return $this->word;
+    return $this->word;
   }
 
   /**
@@ -52,6 +52,6 @@ class RudeWord
    */
   public function setWord($word)
   {
-      $this->word = $word;
+    $this->word = $word;
   }
 }

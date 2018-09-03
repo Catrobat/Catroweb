@@ -7,12 +7,12 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
 class SpeakBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::SPEAK_BRICK;
-        $this->caption = "Speak \""
-          . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::SPEAK_FORMULA] . "\"";
+  protected function create()
+  {
+    $this->type = Constants::SPEAK_BRICK;
+    $this->caption = "Speak \""
+      . FormulaResolver::resolve($this->brick_xml_properties->formulaList)[Constants::SPEAK_FORMULA] . "\"";
 
-        $this->setImgFile(Constants::SOUND_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::SOUND_BRICK_IMG);
+  }
 }

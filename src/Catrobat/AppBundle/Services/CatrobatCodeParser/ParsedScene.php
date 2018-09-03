@@ -7,21 +7,25 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class ParsedScene extends ParsedObjectsContainer
 {
-    protected $name;
+  protected $name;
 
-    public function __construct(\SimpleXMLElement $scene_xml_properties)
+  public function __construct(\SimpleXMLElement $scene_xml_properties)
+  {
+    parent::__construct($scene_xml_properties);
+
+    if (count($scene_xml_properties->name) === 0)
     {
-        parent::__construct($scene_xml_properties);
-
-        if (count($scene_xml_properties->name) === 0)
-            throw new Exception('Scene without name');
-        else
-            $this->name = $scene_xml_properties->name;
+      throw new Exception('Scene without name');
     }
-
-    public function getName()
+    else
     {
-        return $this->name;
+      $this->name = $scene_xml_properties->name;
     }
+  }
+
+  public function getName()
+  {
+    return $this->name;
+  }
 }
 

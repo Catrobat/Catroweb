@@ -1,4 +1,5 @@
 <?php
+
 namespace Catrobat\AppBundle\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

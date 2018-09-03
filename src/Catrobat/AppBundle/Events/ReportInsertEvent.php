@@ -7,31 +7,31 @@ use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 
 class ReportInsertEvent extends Event
 {
-    protected $category;
-    protected $note;
-    protected $program;
+  protected $category;
+  protected $note;
+  protected $program;
 
-    public function __construct($category, $description, ProgramInappropriateReport $program)
-    {
-        $this->category = $category;
-        $this->note = $description;
-        $this->program = $program;
-    }
+  public function __construct($category, $description, ProgramInappropriateReport $program)
+  {
+    $this->category = $category;
+    $this->note = $description;
+    $this->program = $program;
+  }
 
-    /**
-     * @return String
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
+  /**
+   * @return String
+   */
+  public function getCategory()
+  {
+    return $this->category;
+  }
 
   /**
    * @return String
    */
   public function getNote()
   {
-      return $this->note;
+    return $this->note;
   }
 
   /**
@@ -39,6 +39,6 @@ class ReportInsertEvent extends Event
    */
   public function getReport()
   {
-      return $this->program;
+    return $this->program;
   }
 }

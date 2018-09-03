@@ -7,13 +7,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CreateUserRequest
 {
-    public function __construct(Request $request)
-    {
-        $this->username = $request->request->get('registrationUsername');
-        $this->password = $request->request->get('registrationPassword');
-        $this->country = strtoupper($request->request->get('registrationCountry'));
-        $this->mail = $request->request->get('registrationEmail');
-    }
+  public function __construct(Request $request)
+  {
+    $this->username = $request->request->get('registrationUsername');
+    $this->password = $request->request->get('registrationPassword');
+    $this->country = strtoupper($request->request->get('registrationCountry'));
+    $this->mail = $request->request->get('registrationEmail');
+  }
 
   /**
    * @Assert\NotBlank(message = "errors.username.blank")

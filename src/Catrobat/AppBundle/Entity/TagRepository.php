@@ -12,26 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
-    public function getConstantTags($language)
-    {
-        $qb = $this->createQueryBuilder('e');
+  public function getConstantTags($language)
+  {
+    $qb = $this->createQueryBuilder('e');
 
-        return $qb
-            ->select('e.'.$language)
-            ->getQuery()
-            ->getResult();
-    }
+    return $qb
+      ->select('e.' . $language)
+      ->getQuery()
+      ->getResult();
+  }
 
-    public function getTagsWithProgramIdAndLanguage($program_id, $language)
-    {
-        $qb = $this->createQueryBuilder('e');
+  public function getTagsWithProgramIdAndLanguage($program_id, $language)
+  {
+    $qb = $this->createQueryBuilder('e');
 
-        return $qb
-            ->select('e.'.$language)
-            ->leftJoin('e.programs', 'p'  )
-            ->andWhere($qb->expr()->eq('p.id', ':id'))
-            ->setParameter('id', $program_id)
-            ->getQuery()
-            ->getResult();
-    }
+    return $qb
+      ->select('e.' . $language)
+      ->leftJoin('e.programs', 'p')
+      ->andWhere($qb->expr()->eq('p.id', ':id'))
+      ->setParameter('id', $program_id)
+      ->getQuery()
+      ->getResult();
+  }
 }

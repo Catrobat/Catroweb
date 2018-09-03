@@ -6,13 +6,14 @@ use Catrobat\AppBundle\Services\TokenGenerator;
 
 class FixedTokenGenerator extends TokenGenerator
 {
-    private $token;
+  private $token;
+
   /*
    * (non-PHPdoc) @see \Catrobat\AppBundle\Services\TokenGenerator::__construct()
    */
   public function __construct($token)
   {
-      $this->token = $token;
+    $this->token = $token;
   }
 
   /*
@@ -20,6 +21,6 @@ class FixedTokenGenerator extends TokenGenerator
    */
   public function generateToken()
   {
-      return $this->token;
+    return $this->token;
   }
 }

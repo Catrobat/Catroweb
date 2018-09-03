@@ -15,7 +15,7 @@ class CleanApkCommand extends ContainerAwareCommand
   protected function configure()
   {
     $this->setName('catrobat:clean:apk')
-         ->setDescription('Delete the APKs and resets the status to NONE');
+      ->setDescription('Delete the APKs and resets the status to NONE');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
@@ -30,6 +30,6 @@ class CleanApkCommand extends ContainerAwareCommand
     $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p SET p.apk_status = :status WHERE p.apk_status != :status");
     $query->setParameter('status', Program::APK_NONE);
     $result = $query->getSingleScalarResult();
-    $this->output->writeln('Reset the apk status of '.$result.' projects');
+    $this->output->writeln('Reset the apk status of ' . $result . ' projects');
   }
 } 

@@ -6,11 +6,11 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
 class ForeverBrick extends Brick
 {
-    protected function create()
-    {
-        $this->type = Constants::FOREVER_BRICK;
-        $this->caption = "Forever";
+  protected function create()
+  {
+    $this->type = Constants::FOREVER_BRICK;
+    $this->caption = "Forever";
 
-        $this->setImgFile(Constants::CONTROL_BRICK_IMG);
-    }
+    $this->setImgFile(Constants::CONTROL_BRICK_IMG);
+  }
 }

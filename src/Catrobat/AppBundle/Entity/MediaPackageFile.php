@@ -58,10 +58,10 @@ class MediaPackageFile
    */
   protected $flavor = 'pocketcode';
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $author;
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected $author;
 
   /**
    * @return boolean
@@ -73,11 +73,13 @@ class MediaPackageFile
 
   /**
    * @param mixed $active
+   *
    * @return MediaPackageFile
    */
   public function setActive($active)
   {
     $this->active = $active;
+
     return $this;
   }
 
@@ -249,22 +251,21 @@ class MediaPackageFile
     $this->flavor = $flavor;
   }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+  /**
+   * @return mixed
+   */
+  public function getAuthor()
+  {
+    return $this->author;
+  }
 
-    /**
-     * @param mixed $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-    }
-
+  /**
+   * @param mixed $author
+   */
+  public function setAuthor($author)
+  {
+    $this->author = $author;
+  }
 
 
 }

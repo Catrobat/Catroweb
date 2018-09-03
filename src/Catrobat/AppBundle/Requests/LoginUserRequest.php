@@ -7,11 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LoginUserRequest
 {
-    public function __construct(Request $request)
-    {
-        $this->username = $request->request->get('registrationUsername');
-        $this->password = $request->request->get('registrationPassword');
-    }
+  public function __construct(Request $request)
+  {
+    $this->username = $request->request->get('registrationUsername');
+    $this->password = $request->request->get('registrationPassword');
+  }
 
   /**
    * @Assert\NotBlank(message = "errors.username.blank")

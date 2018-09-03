@@ -21,7 +21,7 @@ class DropMigrationCommand extends ContainerAwareCommand
   protected function configure()
   {
     $this->setName('catrobat:drop:migration')
-         ->setDescription('Dropping the migration_versions table');
+      ->setDescription('Dropping the migration_versions table');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
