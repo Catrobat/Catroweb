@@ -37,11 +37,13 @@
 
   <div id="recommended">
     <div class="help-headline">
-      <h1 class="help-title">{{ "programs.recommended"|trans({}, "catroweb") }}</h1>
-      <img class="help-icon" src="{{ asset('images/symbols/help_small.png') }}" alt="Help" title="Help"
+      <span class="help-title h2">{{ "programs.recommended"|trans({}, "catroweb") }}
+        <a id="help-button" data-toggle="tooltip" title="Help"
            data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-           data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}"
-           width="30" height="30"/>
+           data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
+          <i class=" help-icon fa fa-question-circle ml-1"></i>
+        </a>
+      </span>
     </div>
     <div class="programs"></div>
   </div>
@@ -162,7 +164,7 @@
       performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID);
     });
 
-    $(document).on("click", ".help-icon", function()
+    $(document).on("click", "#help-button", function()
     {
       swal({
           title            : $(this).attr("data-help-title"),
