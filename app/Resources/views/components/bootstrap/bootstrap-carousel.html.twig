@@ -1,6 +1,13 @@
-<div id="{{ carousel.id }}" class="carousel slide {{ carousel.classes }}" data-ride="carousel">
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}" />
+{% endblock %}
+
+
+<div id="{{ carousel.id }}" class="carousel slide {{ carousel.classes }} center" data-ride="carousel">
+
   <!-- Indicators -->
-  <ol class="carousel-indicators">
+  <ul class="carousel-indicators">
     {% for i in 0..carousel.slideCount - 1 %}
       {% if i == 0 %}
         <li data-target="#{{ carousel.id }}" data-slide-to="{{ i }}" class="active"></li>
@@ -8,19 +15,19 @@
         <li data-target="#{{ carousel.id }}" data-slide-to="{{ i }}"></li>
       {% endif %}
     {% endfor %}
-  </ol>
+  </ul>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     {% for slide in carousel.slides %}
       {% if loop.first %}
-        <div class="item active">
+        <div class="carousel-item active">
           <a href="{{ slide.url }}">
             <img src="{{ asset(slide.image) }}" alt="featured program">
           </a>
         </div>
       {% else %}
-        <div class="item">
+        <div class="carousel-item">
           <a href="{{ slide.url }}">
             <img src="{{ asset(slide.image) }}" alt="featured program">
           </a>
@@ -31,13 +38,12 @@
 
   {% if carousel.controls %}
   <!-- Left and right controls -->
-  <a class="left carousel-control" href="#{{ carousel.id }}" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">{{ "previous"|trans({}, "catroweb") }}</span>
-  </a>
-  <a class="right carousel-control" href="#{{ carousel.id }}" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">{{ "next"|trans({}, "catroweb") }}</span>
-  </a>
+    <a class="carousel-control-prev carousel-control" href="#{{ carousel.id }}" data-slide="prev">
+      <i class="fa fa-chevron-circle-left"></i>
+    </a>
+    <a class="carousel-control-next carousel-control" href="#{{ carousel.id }}" data-slide="next">
+      <i class="fa fa-chevron-circle-right"></i>
+    </a>
+
   {% endif %}
 </div>

@@ -21,6 +21,10 @@ $theme-logo-luna-color-secondary:       #d19fc1;
   border-bottom: 1px solid $primary !important;
 }
 
+.carousel-indicators .active {
+  background-color: $primary;
+}
+
 .group {
   input {
     border-bottom: 1px solid rgba(68,42,102,0.3) !important;

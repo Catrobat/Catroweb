@@ -22,11 +22,12 @@
           'slideCount' : featured|length,
           'slides' : featured,
           'classes' : '',
-          'controls' : false
+          'controls' : true
         }
       }
       ) }}
     {% endif %}
+
   </div>
 
   <div id="newest">
@@ -104,7 +105,7 @@
 
       $.post(url, params, function(data)
       {
-        if (data == 'error')
+        if (data === 'error')
         {
           console.log("No click statistic is created!");
         }
