@@ -48,21 +48,10 @@
   background-repeat: no-repeat;
 }
 
-.img-load-more, .img-load-less {
-  width: 35px;
-  height: 35px;
-  background-image: $default-sprite-url;
-  background-position: 0 -175px;
-}
-
 .img-load-ajax {
   width: 32px;
   height: 32px;
   background-image: url('../../images/symbols/ajax-loader-dark.gif');
-}
-
-.img-load-less {
-  transform: rotate(180deg);
 }
 
 .img-time-small {

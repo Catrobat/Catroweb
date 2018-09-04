@@ -312,9 +312,9 @@ var Main = function(search_url)
     {
       $(self.container).append('' +
         '<div class="button-show-placeholder">' +
-        '<div class="button-show-more img-load-more"></div>' +
+        '<div class="button-show-more"><i class="fa fa-chevron-circle-down"></i></div>' +
         '<div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>' +
-        '<div class="button-show-less img-load-less"></div>' +
+        '<div class="button-show-less"><i class="fa fa-chevron-circle-up"></i></div>' +
         '</div>');
     }
     self.loadProgramsIntoContainer(data);

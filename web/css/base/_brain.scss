@@ -1,3 +1,4 @@
+@import "../base/variables";
 @import "theme_settings";
 
 @font-face {
@@ -307,7 +308,7 @@ form {
 }
 
 .button-show-placeholder {
-  margin: 0px auto 30px auto;
+  margin: 0 auto 30px auto;
   min-height: 35px;
   display: flex;
   justify-content: center;
@@ -316,10 +317,12 @@ form {
 .button-show-more, .button-show-ajax, .button-show-less {
   text-align: center;
   margin: 0 15px;
+  color: $primary;
 }
 
 .button-show-more {
   cursor: pointer;
+  font-size: 3em;
 }
 
 .button-show-ajax {
@@ -329,6 +332,7 @@ form {
 .button-show-less {
   display: none;
   cursor: pointer;
+  font-size: 3em;
 }
 
 .btn {
