@@ -21,7 +21,7 @@
             <p>
                 <span class="theme-logo-title title-color-left">
                 {% if theme() == 'luna' %}
-                    LUNA
+                    LUNA &
                 {% elseif theme() == 'phirocode' %}
                     PHIRO
                 {% elseif theme() == 'create@school' %}
@@ -33,6 +33,8 @@
                 </span><span class="theme-logo-title title-color-right">
                 {% if theme() == 'create@school' %}
                     SCHOOL
+                {% elseif theme() == 'luna' %}
+                    CAT
                 {% else %}
                     CODE
                 {% endif %}

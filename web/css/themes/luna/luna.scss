@@ -13,7 +13,7 @@
 // your color/variable changes here
 $primary:                               #442a66;
 $theme-logo-luna-color-primary:         #8A78A8;
-$theme-logo-luna-color-secondary:       #d19fc1;
+$theme-logo-luna-color-secondary:       $theme-logo-luna-color-primary;
 
 @import "../../base/catro_bootstrap";
 
