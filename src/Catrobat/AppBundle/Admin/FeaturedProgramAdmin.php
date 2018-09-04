@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
 use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FeaturedProgramAdmin extends AbstractAdmin
@@ -44,8 +46,8 @@ class FeaturedProgramAdmin extends AbstractAdmin
     }
 
     $formMapper
-      ->add('file', 'file', $file_options)
-      ->add('program_id', 'text', ['mapped' => false, 'data' => $id_value])
+      ->add('file', FileType::class, $file_options)
+      ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
       ->add('flavor')
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false, 'help' => 'Toggle for iOS featured programs api call.'])

@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
+use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ class DefaultController extends Controller
      * @var $image_repository FeaturedImageRepository
      * @var $repository       FeaturedRepository
      * @var $user             User
+     * @var $item   FeaturedProgram
      */
 
 
@@ -33,13 +35,13 @@ class DefaultController extends Controller
 
     $flavor = $request->get('flavor');
 
-    if ($flavor == 'phirocode')
+    if ($flavor === 'phirocode' || $flavor === 'luna')
     {
-      $featured_items = $repository->getFeaturedItems('pocketcode', 5, 0);
+      $featured_items = $repository->getFeaturedItems('pocketcode', 10, 0);
     }
     else
     {
-      $featured_items = $repository->getFeaturedItems($flavor, 5, 0);
+      $featured_items = $repository->getFeaturedItems($flavor, 10, 0);
     }
 
     $featured = [];
