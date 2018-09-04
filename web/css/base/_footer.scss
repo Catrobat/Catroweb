@@ -1,0 +1,39 @@
+
+$footer-size: 23em;
+
+.footer {
+  height: $footer-size;
+
+  & .content {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+}
+
+// to keep footer at bottom
+#wrapper {
+  min-height:100vh;
+  padding-bottom: $footer-size;
+  margin-bottom: -$footer-size;
+}
+
+
+.footer-left {
+  float: left;
+
+  @media screen and (max-width: 576px)
+  {
+    float: none;
+  }
+}
+
+.footer-right {
+  float: right;
+
+  @media screen and (max-width: 576px)
+  {
+    margin-top: 1em;
+    float: none;
+  }
+}

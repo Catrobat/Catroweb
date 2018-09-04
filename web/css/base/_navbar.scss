@@ -25,6 +25,11 @@ $nav-logo-dim: 4rem;
     margin-bottom: 2rem;
 }
 
+// stops navbar from being on top of body content
+#wrapper {
+  padding-top: 7rem;
+}
+
 @media (min-width: 768px) {
     .d-md-list-item {
         display: list-item !important;

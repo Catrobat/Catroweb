@@ -4,7 +4,7 @@
 
       <div class="content">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-6 col-md-5 col-lg-3">
             <h4>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h4>
             <ul class="list-vertical">
               <li>
@@ -18,7 +18,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-md-2">
+          <div class="col-6 col-md-5 col-lg-3">
             <h4>{{ "footer.legalities"|trans({}, "catroweb") }}</h4>
             <ul class="list-vertical">
               <li>
@@ -39,7 +39,7 @@
       </div>
 
       <hr>
-      <div class="copyright pull-left">
+      <div class="copyright footer-left">
         <select id="switch-language" autocomplete="off">
             {% set countries = getLanguageOptions() %}
             {% for country in countries %}
@@ -47,7 +47,7 @@
             {% endfor %}
         </select>
       </div>
-      <div class="copyright pull-right">
+      <div class="copyright footer-right">
         Copyright &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.
       </div>
     </div>
