@@ -50,6 +50,11 @@ edit_program_description:
   options:
     expose: true
 
+api_media_lib_category:
+  path:  /api/media/category/{category}/json
+  controller: Catrobat\AppBundle\Controller\Api\MediaPackageController:getMediaFilesForCategory
+  options:
+    expose: true
 
 # ===== FOS User Bundle =====
 fos_user:

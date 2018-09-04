@@ -67,3 +67,10 @@ $carousel-indicator-margin: 0.2em;
     font-size: $carousel-control-size / 1.6;
   }
 }
+
+.card{
+  min-width: 25rem;
+  max-width: 25rem;
+  margin-top: 2rem;
+  border-color: $primary;
+}

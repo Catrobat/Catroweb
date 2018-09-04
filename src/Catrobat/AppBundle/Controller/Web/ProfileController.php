@@ -312,6 +312,7 @@ class ProfileController extends Controller
   {
     /**
      * @var $user User
+     * @var $em   \Doctrine\ORM\EntityManager
      */
     $user = $this->getUser();
     if (!$user)

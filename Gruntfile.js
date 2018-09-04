@@ -95,9 +95,9 @@ module.exports = function(grunt)
         src:'node_modules/popper.js/dist/popper.js',
         dest: 'web/compiled/popper/popper.js'
       },
-      popper_js_utils: {
-        src:'node_modules/popper.js/dist/popper-utils.js',
-        dest: 'web/compiled/popper/popper-utils.js'
+      sticky_sidebar: {
+        src:'node_modules/sticky-sidebar/dist/sticky-sidebar.js',
+        dest: 'web/js/localPlugins/sticky-sidebar.js'
       }
     },
     concat: {

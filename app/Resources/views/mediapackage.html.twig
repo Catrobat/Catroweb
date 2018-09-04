@@ -1,76 +1,70 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/medialib.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
-
-  {% for category in categories %}
-
-    <div>
-      <h1>{{ category.name }}</h1>
-      <div class="programs">
-
-        {% for file in category.files %}
-          {% set sound = getMediaPackageSoundUrl(file.data) %}
-          {% set image = getMediaPackageImageUrl(file.data) %}
-          <div class="program mediafile mediafile-{{ file.id }}">
-
-            <a href="{{ file.downloadUrl }}" onclick="onDownload(this)">
-            {% if image %}
-            <div>
-              <img src="{{ asset(image) }}">
-            </div>
-              {% if file.data.author %}
-                <div>
-                  {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
-                </div>
-              {% endif %}
-            {% endif %}
-
-            {% if sound %}
-            <div>
-              <audio controls preload="none" controlsList="nodownload">
-                <source src="{{ asset(sound) }}" type="audio/mpeg">
-
-                <object>
-                  <param name="autostart" value="false">
-                  <param name="src" value="{{ sound }}">
-                  <param name="controller" value="true">
-                  <embed src="{{ asset(sound) }}" controller="true" autostart="false" type="audio/mpeg"></embed>
-                  Update your Browser
-                </object>
-              </audio>
-            </div>
-            <div>
-              <b>{{ file.data.name }}</b>
-            </div>
-                {% if file.data.author %}
-                  <div>
-                    {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
-                  </div>
-                {% endif %}
-              <div>
-              Download
-            </div>
-            {% endif %}
-            </a>
-
-          </div>
-        {% endfor %}
-
+  <i id="sidebar-toggler" class="fas fa-arrow-left catro-icon-button" data-toggle="tooltip"
+     title="{{ "media-packages.sidebarTooltip"|trans({}, "catroweb") }}"></i>
+  <div id="main-content" class="main">
+    <div id="sidebar" class="sidebar is-affixed medialib-sidebar">
+      <div class="sidebar__inner">
+        <ul>
+          {% for category in categories %}
+            <li><a href="#category-{{ category.displayID }}">{{ category.name }}</a></li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
-    <br>
-  {% endfor %}
-
+    <div id="content" class="medialib-content">
+      {% for category in categories %}
+        <div id="category-{{ category.displayID }}" style="display: none">
+          <h1>{{ category.name }}</h1>
+          <div id="programs-{{ category.displayID }}" class="programs"></div>
+        </div>
+        <br>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
 
+
 {% block js %}
+  <script type="text/javascript" src="{{ asset('compiled/min/sticky-sidebar.js') }}"></script>
   <script>
-    function onDownload(link) {
-      if(link.href != 'javascript:void(0)') {
+
+    new StickySidebar('#sidebar', {
+      bottomSpacing: 20,
+    });
+
+
+    $("#sidebar-toggler").click(function(e) {
+      e.preventDefault();
+
+      let sidebarToggler = $("#sidebar-toggler")
+      let medialibContent = $("#content")
+      let sidebar = $("#sidebar")
+
+      sidebarToggler.toggleClass("fa-arrow-right");
+      sidebar.toggleClass("medialib-sidebar-toggled");
+      sidebar.toggleClass("medialib-sidebar");
+
+      medialibContent.toggleClass("medialib-content-no-sidebar");
+      medialibContent.toggleClass("medialib-content");
+      sidebarToggler.toggleClass("fa-arrow-left");
+    });
+
+
+    $(function() {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+
+    function onDownload(link)
+    {
+      if (link.href !== 'javascript:void(0)')
+      {
         var download_href = link.href;
         link.href = 'javascript:void(0)';
 
@@ -81,6 +75,69 @@
         window.location = download_href;
       }
       return false;
+    }
+
+    getCategoryFiles({{ categories|json_encode|raw }})
+
+    function getCategoryFiles(categories)
+    {
+
+      let flavor = "{{ flavor }}"
+
+      let assetsDir = "{{ asset('resources/mediapackage') }}"
+      categories.forEach(function(category) {
+
+
+        let url = Routing.generate('api_media_lib_category', {category: category.name}, false)
+        $.get(url, {}, function(data) {
+
+          if (data.statusCode === 200)
+          {
+            let counter = 0
+            let f_counter = 0
+            let categoryFiles = data.data
+
+            categoryFiles.forEach(function(file) {
+
+              if (file.flavor === 'pocketcode')
+              {
+                $('#category-' + category.displayID + " .programs").prepend('<div class="program mediafile mediafile-' + file.id + '">' +
+
+                  '<div onclick="onDownload(' + assetsDir + '/' + file.id + '.' + file.extension + ')">' +
+                  "  <a href='" + file.download_url + "' onclick='onDownload(this)'><img src='" + assetsDir + '/' + file.id + "." + file.extension + "' title='" + file.name + "' alt='" + file.name + "'/> </a>" +
+                  '</div>'
+                )
+                counter++;
+              }
+
+              else if (file.flavor === flavor)
+              {
+                $('#category-' + flavor + " .programs").prepend('<div class="program mediafile mediafile-' + file.id + '">' +
+
+                  '<div onclick="onDownload(' + assetsDir + '/' + file.id + '.' + file.extension + ')">' +
+                  "  <a href='" + file.download_url + "' onclick='onDownload(this)'><img src='" + assetsDir + '/' + file.id + "." + file.extension + "' title='" + file.name + "' alt='" + file.name + "'/> </a>" +
+                  '</div>'
+                )
+                f_counter++;
+              }
+            })
+
+            if ($("#programs-" + category.displayID + " > div").length + counter > 0)
+            {
+              $('#category-' + category.displayID).show();
+            }
+
+            if ($("#programs-" + flavor + " > div").length + f_counter > 0)
+            {
+              $('#category-' + flavor).show();
+            }
+          }
+          else
+          {
+            swal("Error")
+          }
+        })
+      });
     }
   </script>
 {% endblock %}

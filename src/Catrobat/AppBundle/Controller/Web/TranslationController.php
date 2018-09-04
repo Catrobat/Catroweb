@@ -1,6 +1,6 @@
 <?php
 
-namespace Catrobat\AppBundle\Controller;
+namespace Catrobat\AppBundle\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Translation\TranslatorInterface;

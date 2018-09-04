@@ -128,7 +128,7 @@ class MediaPackageCategory
       }
       else
       {
-        return $this->name;
+        return (string)$this->name;
       }
     }
     else

@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -9,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -70,7 +72,11 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $listMapper
       ->addIdentifier('id')
       ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
-      ->add('program', 'entity', ['class' => 'Catrobat\AppBundle\Entity\Program', 'route' => ['name' => 'show'], 'admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('program', EntityType::class, [
+        'class'      => Program::class,
+        'route'      => ['name' => 'show'],
+        'admin_code' => 'catrowebadmin.block.programs.all',
+      ])
       ->add('flavor', 'string')
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])

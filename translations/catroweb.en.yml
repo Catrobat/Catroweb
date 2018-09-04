@@ -752,3 +752,8 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Download
     getinvolved_2: now from Google Play and get started!
+
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  sidebarTooltip: Toggle category menu
