@@ -14,6 +14,8 @@ Feature: Pocketcode homepage
       | 1  | program 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | program 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   |
       | 3  | program 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 4  | program 4 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
+      | 5  | program 5 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   |
     And following programs are featured:
       | id | program   | url                   | active | priority |
       | 1  | program 1 |                       | no     | 1        |

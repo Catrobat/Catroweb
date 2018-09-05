@@ -2144,7 +2144,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iShouldSeeTheSliderWithTheValues($values)
   {
     $slider_items = explode(',', $values);
-    $owl_items = $this->getSession()->getPage()->findAll('css', 'div.item > a');
+    $owl_items = $this->getSession()->getPage()->findAll('css', 'div.carousel-item > a');
     Assert::assertEquals(count($owl_items), count($slider_items));
 
     for ($index = 0; $index < count($owl_items); $index++)
