@@ -52,6 +52,16 @@ class User extends BaseUser implements LdapUserInterface
   protected $programs;
 
   /**
+     * @ORM\ManyToMany(targetEntity="\Catrobat\AppBundle\Entity\User", mappedBy="following")
+     */
+    protected $followers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Catrobat\AppBundle\Entity\User", inversedBy="followers")
+     */
+    protected $following;
+
+    /**
    * @ORM\OneToMany(
    *     targetEntity="\Catrobat\AppBundle\Entity\ProgramLike",
    *     mappedBy="user",
@@ -139,7 +149,9 @@ class User extends BaseUser implements LdapUserInterface
   public function __construct()
   {
     parent::__construct();
-    $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->programs = new ArrayCollection();
+    $this->followers = new ArrayCollection();
+    $this->following = new ArrayCollection();
     $this->country = '';
   }
 
@@ -378,4 +390,44 @@ class User extends BaseUser implements LdapUserInterface
   {
     $this->likes = $likes;
   }
+
+    /**
+     * @return mixed
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    public function addFollower($follower){
+        $this->followers->add($follower);
+    }
+
+    public function removeFollower($follower){
+        $this->followers->removeElement($follower);
+    }
+
+    public function hasFollower($user) {
+        return $this->followers->contains($user);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    public function addFollowing($follower){
+        $this->following->add($follower);
+    }
+
+    public function removeFollowing($follower){
+        $this->following->removeElement($follower);
+    }
+
+    public function isFollowing($user) {
+        return $this->following->contains($user);
+    }
 }

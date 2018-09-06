@@ -46,7 +46,9 @@ use Doctrine\ORM\Mapping as ORM;
  *   "anniversary" = "AnniversaryNotification",
  *   "achievement" = "AchievementNotification",
  *   "comment" = "CommentNotification",
- *   "like" = "LikeNotification"
+ *   "like" = "LikeNotification",
+ *   "follow" = "FollowNotification",
+ *   "follow_program" = "NewProgramNotification"
  * })
  */
 class CatroNotification
@@ -161,7 +163,7 @@ class CatroNotification
    *
    * @return CatroNotification
    */
-  public function setUser(\Catrobat\AppBundle\Entity\User $user)
+  public function setUser(User $user)
   {
     $this->user = $user;
 
@@ -193,8 +195,6 @@ class CatroNotification
   {
     $this->twig_template = $twig_template;
   }
-
-
 }
 
 

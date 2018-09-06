@@ -2593,6 +2593,26 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
+   * @Then /^Element "([^"]*)" should have attribute "([^"]*)" with value "([^"]*)"$/
+   */
+  public function elementShouldHaveAttributeWith($arg1, $arg2, $arg3)
+  {
+    $element = $this->getSession()->getPage()->find('css', $arg1);
+
+    if ($element != null)
+    {
+      Assert::assertTrue($element->hasAttribute($arg2), "Element has no attribute $arg2");
+      $attr = $element->getAttribute($arg2);
+      Assert::assertTrue(strpos($attr, $arg3) !== false, "<$attr> does not contain $arg3");
+      Assert::assertTrue($element->isVisible(), "Element is not visible.");
+    }
+    else
+    {
+      Assert::assertTrue(false, "$arg1 not found!");
+    }
+  }
+
+  /**
    * @Then /^I click the currently visible search icon$/
    */
   public function iClickTheCurrentlyVisibleSearchIcon()
@@ -2790,5 +2810,24 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
-}
+  /**
+   * @When /^User "([^"]*)" is followed by "([^"]*)"$/
+   */
+  public function userIsFollowed($user_id, $follow_ids)
+  {
+    $usermanager = $this->kernel->getContainer()->get('usermanager');
+    /**
+     * @var $usermanager UserManager
+     * @var $user        User
+     */
+    $user = $usermanager->find($user_id);
 
+    $ids = explode(",", $follow_ids);
+    foreach ($ids as $id)
+    {
+      $followUser = $usermanager->find($id);
+      $user->addFollowing($followUser);
+      $usermanager->updateUser($user);
+    }
+  }
+}
