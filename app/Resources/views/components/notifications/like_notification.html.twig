@@ -1,22 +1,37 @@
-<div class="catro-notification panel panel-primary" id="catro-notification-{{ notification.id }}">
-  <div class="panel-heading">
-    <h3 class="panel-title">
+<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+
+    <h5 class="card-header notification-header">
       {{ 'catro-notifications.like.title'|trans({'%program_name%' : notification.program.name}, 'catroweb') }}
-    </h3>
-  </div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-12">
+    </h5>
+    <div class="card-body">
 
-        {{ 'catro-notifications.like.messagePart1'|trans({}, 'catroweb') }}
-        <a href="{{ path('profile', {'id': notification.getLikeFrom.id}) }}">{{ notification.getLikeFrom.getUserName }}</a>
-        {{ 'catro-notifications.like.messagePart2'|trans({}, 'catroweb') }}
-        <a href="{{ path('program', {'id': notification.program.id}) }}">{{ notification.program.name }}</a>!
+      <div class="row">
 
-      </div>
-      <div class="col-md-12">
+        {#//$avatar = "asset('images/default/avatar_default.png')";#}
+        <div class="notification-avatar">
+          <img class="notification-round"
+               src="{% if avatars[notification.id] is defined %}{{ avatars[notification.id] }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+               alt="Card image">
+        </div>
+
+        <div class="notification-body">
+
+          <div class="row mb-4">
+            <p class="card-text">
+              {{ 'catro-notifications.like.messagePart1'|trans({}, 'catroweb') }}
+              <a href="{{ path('profile', {'id': notification.getLikeFrom.id}) }}">{{ notification.getLikeFrom.getUserName }}</a>
+              {{ 'catro-notifications.like.messagePart2'|trans({}, 'catroweb') }}
+              <a href="{{ path('program', {'id': notification.program.id}) }}">{{ notification.program.name }}</a>!
+            </p>
+          </div>
+
+          <div class="row">
+            <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary" onclick="notifications.markAsRead({{ notification.id }})">
+              {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="markAsRead({{ notification.id }})">Mark as read</button>
-  </div>
+
 </div>

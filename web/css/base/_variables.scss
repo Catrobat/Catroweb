@@ -4,6 +4,7 @@
 //
 // Color system
 //
+@import "_colors";
 
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -28,7 +29,7 @@ $green:   #43ac6a !default;
 $teal:    #20c997 !default;
 $cyan:    #5bc0de !default;
 
-$primary:       #00acc1 !default;
+$primary:       custom-color(catrobat, 600) !default;
 $secondary:     $gray-200 !default;
 $success:       $green !default;
 $info:          $cyan !default;

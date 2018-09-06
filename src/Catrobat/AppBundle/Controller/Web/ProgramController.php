@@ -10,9 +10,6 @@ use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException;
-use Catrobat\AppBundle\Exceptions\Upload\RudewordInDescriptionException;
-use Catrobat\AppBundle\Listeners\DescriptionValidator;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
@@ -21,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class ProgramController extends Controller
 {
@@ -123,11 +120,17 @@ class ProgramController extends Controller
     $max_description_size = $this->container->get('kernel')->getContainer()
       ->getParameter("catrobat.max_description_upload_size");
 
+
+    $my_program = false;
+    if ($user_programs && count($user_programs) > 0) {
+      $my_program = true;
+    }
+
     return $this->get('templating')->renderResponse('program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
       'program_details'              => $program_details,
-      'my_program'                   => count($user_programs) > 0 ? true : false,
+      'my_program'                   => $my_program,
       'already_reported'             => $isReportedByUser,
       'shareText'                    => $share_text,
       'program_url'                  => $program_url,
@@ -194,29 +197,44 @@ class ProgramController extends Controller
     $like_type_count = $program_manager->likeTypeCount($program->getId(), $type);
     $total_like_count = $program_manager->totalLikeCount($program->getId());
 
-    $send_notification = true;
-    $nr = $this->get("catro_notification_repository");
-    $notifications = $nr->findBy(["user" => $program->getUser()]);
-    /** @var CatroNotification $notification */
-    foreach ($notifications as $notification)
+    if ($program->getUser() !== $user)
     {
-      if ($notification instanceof LikeNotification)
+      $program_notification_exists = false;
+
+      $nr = $this->get("catro_notification_repository");
+      $notifications = $nr->findByUser($program->getUser());
+
+      /** @var CatroNotification $notification */
+      foreach ($notifications as $notification)
       {
-        if ($notification->getLikeFrom()->getId() === $user->getId())
+        if ($notification instanceof LikeNotification)
         {
-          $send_notification = false;
-          break;
+          if ($notification->getLikeFrom()->getId() === $user->getId() &&
+            $notification->getProgram()->getId() === $program->getId())
+          {
+            $program_notification_exists = true;
+            break;
+          }
         }
       }
-    }
 
-    if ($send_notification)
-    {
       /** @var CatroNotificationService $notification_service */
       $notification_service = $this->get("catro_notification_service");
-
-      $notification = new LikeNotification($program->getUser(), "Like gained", "You received a new like", $user, $program);
-      $notification_service->addNotification($notification);
+      if ($new_type === ProgramLike::TYPE_THUMBS_UP)
+      {
+        if (!$program_notification_exists)
+        {
+          $notification = new LikeNotification($program->getUser(), "Like gained", "You received a new like", $user, $program);
+          $notification_service->addNotification($notification);
+        }
+      }
+      else
+      {
+        if ($program_notification_exists)
+        {
+          $notification_service->removeNotification($notification);
+        }
+      }
     }
 
 

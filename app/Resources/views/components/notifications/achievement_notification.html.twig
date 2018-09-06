@@ -1,12 +1,33 @@
-<div class="catro-notification" id="catro-notification-{{ notification.id }}">
-    <div class="title">
-        {{ notification.title }}
+<div class="card mb-3 notification-container" id="catro-notification-{{ notification.id }}">
+
+  <h5 class="card-header notification-header">
+    {{ notification.title }}
+  </h5>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="notification-avatar">
+        <img class="notification-round"
+             src="{{ notification.image_path }}"
+             alt="Card image">
+      </div>
+
+      <div class="notification-body">
+
+        <div class="row mb-4">
+          <p class="card-text">
+            {{ notification.message }}
+        </div>
+
+        <div class="row">
+          <button id="mark-as-read-{{ notification.id }}" class="btn btn-primary"
+                  onclick="notifications.markAsRead({{ notification.id }})">
+            {{ 'catro-notifications.markAsRead'|trans({}, 'catroweb') }}
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="message">
-        {{ notification.message }}
-    </div>
-    <div class="image">
-        {{ notification.image_path }}
-    </div>
-    <button class="catro-notification-read" onclick="markAsRead({{ notification.id }})">Mark as read</button>
+  </div>
+
 </div>

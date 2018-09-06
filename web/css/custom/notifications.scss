@@ -1,0 +1,88 @@
+@import '../base/_variables';
+@import 'theme_settings';
+
+.notification-container {
+  border-color: $primary;
+}
+
+.notification-header {
+  background-color: $primary;
+  color: white;
+}
+
+.notification-avatar {
+  margin-left: 2%;
+  width: 6rem;
+  margin-right: 5%;
+
+  @media screen and (max-width: 500px)
+  {
+    margin-right: 10%;
+  }
+}
+
+.notification-body {
+  width: auto;
+  word-wrap: break-word;
+  word-break: break-all;
+
+  @media screen and (min-width: 1600px)
+  {
+    max-width: 90%;
+  }
+  @media screen and (min-width: 1400px)
+  {
+    max-width: 85%;
+  }
+  @media screen and (min-width: 1200px)
+  {
+    max-width: 81%;
+  }
+  @media screen and (max-width: 1200px)
+  {
+    max-width: 77%;
+  }
+  @media screen and (max-width: 900px)
+  {
+    max-width: 70%;
+  }
+  @media screen and (max-width: 500px)
+  {
+    max-width: 60%;
+  }
+  @media screen and (max-width: 400px)
+  {
+    max-width: 50%;
+  }
+  @media screen and (max-width: 300px)
+  {
+    max-width: 40%;
+  }
+}
+
+.notification-summary-left {
+  float: left;
+
+  @media screen and (max-width: 576px)
+  {
+    float: none;
+    text-align: center;
+  }
+}
+
+.notification-summary-right {
+  float: right;
+
+  @media screen and (max-width: 576px)
+  {
+    display: block;
+    margin: auto;
+    margin-top: 1em;
+    float: none;
+  }
+}
+
+.notification-round {
+  border-radius: 50%;
+  border: 1px $primary;
+}

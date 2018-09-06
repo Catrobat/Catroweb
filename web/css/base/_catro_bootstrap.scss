@@ -133,101 +133,11 @@ header
   }
 }
 
-//################## Footer ####################
-$padding: 15px;
-$margin-adjustment: -5px;
-
-footer
-{
-  background-color: #e1e2e1;
-  padding: $padding 0;
-  ul
-  {
-    margin-bottom: 0;
-    padding: 0;
-    list-style: none;
-
-    li
-    {
-      display: inline-block;
-
-      a
-      {
-        color: inherit;
-        font-weight: 500;
-        font-size: 12px;
-        text-transform: uppercase;
-        text-decoration: none;
-
-        position: relative;
-        padding: $padding;
-        display: block;
-
-        border-radius: 3px;
-        &:hover
-        {
-          text-decoration: none;
-        }
-      }
-
-      .btn
-      {
-        margin: 0;
-      }
-    }
-
-    &.list-horizontal
-    {
-      &:first-child a
-      {
-        padding-left: 0;
-      }
-
-      &:last-child a
-      {
-        padding-right: 0;
-      }
-    }
-
-    &.list-vertical
-    {
-      li
-      {
-        margin-left: $margin-adjustment;
-        margin-right: $margin-adjustment;
-        display: block;
-
-        a
-        {
-          padding: 5px;
-        }
-      }
-    }
-  }
-
-  .pull-center
-  {
-    display: inline-block;
-    float: none;
-  }
-  h4
-  {
-    font-weight: 500;
-    color: #000000;
-  }
-}
-
-//################## Footer End ####################
-
 // can/should be used for uniform width of page containers
 .content
 {
   height: 100%;
 }
-
-
-
-
 
 @media screen and (min-width: map-get($grid-breakpoints, sm))
 {
@@ -535,4 +445,21 @@ footer
   color: $navbar-dark-color !important;
   text-decoration: none !important;
   font-size: 2.0em;
+}
+
+.bg-catrobat {
+  background-color: $primary;
+}
+.text-catrobat {
+  color: $primary;
+}
+
+.theme-logo-title {
+  font-size: $theme-logo-font-size;
+  font-weight: $theme-logo-font-weight;
+}
+
+$galaxy-button-background-color: #9583B2;
+#gamejam-submission {
+  @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
 }

@@ -58,9 +58,6 @@ header {
   }
 }
 
-#wrapper {
-  max-width: none;
-}
 
 article, header {
   max-width: 1024px;
@@ -95,12 +92,5 @@ header {
 
 .owl-theme .owl-controls .owl-page span {
   background: $footer-background-color;
-}
-
-.bg-catrobat {
-  background-color: custom-color(catrobat);
-}
-.text-catrobat {
-  color: custom-color(catrobat);
 }
 

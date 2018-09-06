@@ -8,8 +8,10 @@ Feature: Like feature on program page
       | OtherUser| 123456   | dddddddddd  | dev2@pocketcode.org |
 
     And there are programs:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | remix_root |
-      | 1  | Minions   | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
+      | id | name      | description | owned by  | downloads | apk_downloads | views | upload time      | version | remix_root |
+      | 1  | Minions   | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
+      | 2  | Minimies  | p2          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
+      | 3  | otherPro  | p3          | OtherUser | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
 
   Scenario: Like buttons should appear on program page
     Given I am on "/pocketcode/program/1"
@@ -45,8 +47,80 @@ Feature: Like feature on program page
     Given I log in as "OtherUser" with the password "123456"
     And I am on "/pocketcode/program/1"
     And I click "#program-like-thumbs-up"
-    Then I wait for a second
-    Then I log in as "Catrobat" with the password "123456"
+    And I wait for a second
+    When I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/user/notifications"
-    Then I should see an ".catro-notification" element
-    Then I should see "OtherUser"
+    Then the element "#catro-notification-1" should be visible
+    And I should see "OtherUser"
+    And the element "#notifications-summary" should be visible
+    And I should see "1 new Notification"
+
+  Scenario: I should be able to like multiple programs when I am logged in and it should notify the owner multiple times
+    Given I log in as "OtherUser" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    And I click "#program-like-thumbs-up"
+    And I am on "/pocketcode/program/2"
+    And I click "#program-like-thumbs-up"
+    And I wait for a second
+    When I log in as "Catrobat" with the password "123456"
+    And I am on "/pocketcode/user/notifications"
+    Then the element "#catro-notification-1" should be visible
+    Then the element "#catro-notification-2" should be visible
+    And I should see "OtherUser"
+    And the element "#notifications-summary" should be visible
+    And I should see "2 new Notifications"
+
+  Scenario: I can't notify myself
+    Given I log in as "OtherUser" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    And I click "#program-like-thumbs-up"
+    And I am on "/pocketcode/program/2"
+    And I click "#program-like-thumbs-up"
+    And I am on "/pocketcode/user/notifications"
+    Then the element "#catro-notification-1" should not exist
+    And I should see "OtherUser"
+    And the element "notifications-summary" should not exist
+    And I should not see "new Notification"
+
+  Scenario: I should be able to mark a notifications as read
+    Given I log in as "OtherUser" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    And I click "#program-like-thumbs-up"
+    And I am on "/pocketcode/program/2"
+    And I click "#program-like-thumbs-up"
+    And I wait for a second
+    And I log in as "Catrobat" with the password "123456"
+    And I am on "/pocketcode/user/notifications"
+    And the element "#catro-notification-1" should be visible
+    And the element "#catro-notification-2" should be visible
+    And I should see "OtherUser"
+    And the element "#notifications-summary" should be visible
+    And I should see "2 new Notifications"
+    When I click "#mark-all-as-seen"
+    And I wait for fadeEffect to finish
+    Then I should see "Done!"
+    And the element "#notifications-summary" should not be visible
+    And I should not see "new Notification"
+    And the element "#catro-notification-1" should not exist
+    And the element "#catro-notification-2" should not exist
+
+  Scenario: I should be able to mark all notifications as read at once
+    Given I log in as "OtherUser" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    And I click "#program-like-thumbs-up"
+    And I am on "/pocketcode/program/2"
+    And I click "#program-like-thumbs-up"
+    And I wait for a second
+    And I log in as "Catrobat" with the password "123456"
+    And I am on "/pocketcode/user/notifications"
+    And the element "#catro-notification-1" should be visible
+    And the element "#catro-notification-2" should be visible
+    And I should see "OtherUser"
+    And the element "#notifications-summary" should be visible
+    And I should see "2 new Notifications"
+    When I click "#mark-as-read-2"
+    And I wait for fadeEffect to finish
+    Then the element "#notifications-summary" should be visible
+    And I should see "1 new Notification"
+    And the element "#catro-notification-1" should be visible
+    And the element "#catro-notification-2" should not exist

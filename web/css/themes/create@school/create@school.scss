@@ -17,26 +17,14 @@ $theme-logo-create-at-school-color-secondary:       #aa154b;
 
 @import "../../base/catro_bootstrap";
 
-#gamejam-submission {
-  @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
-}
-
-.bg-catrobat {
-  background-color: custom-color(catrobat);
-}
-.text-catrobat {
-  color: custom-color(catrobat);
-}
-
-.theme-logo-title {
-  font-size: $theme-logo-font-size;
-  font-weight: $theme-logo-font-weight;
-}
-
 .title-color-left {
   color: $theme-logo-create-at-school-color-primary;
 }
 
 .title-color-right {
   color: $theme-logo-create-at-school-color-secondary;
+}
+
+#wrapper {
+  padding-top: 9rem; // bigger navbar
 }

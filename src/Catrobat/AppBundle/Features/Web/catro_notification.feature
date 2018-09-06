@@ -8,30 +8,58 @@ Feature: User gets generic notifications additionally to the remix notifications
       | OtherUser | 123456   | dddddddddd | dev2@pocketcode.org |
 
     And there are catro notifications:
-      | user     | title                 | message                                         | type    |
-      | Catrobat | Achievement - Uploads | Congratulations, you uploaded your first app    | default |
-      | Catrobat | Achievement - View    | Congratulations, you reached a total of 2 views | default |
+      | user     | title                 | message                                         | type        |
+      | Catrobat | Achievement - Uploads | Congratulations, you uploaded your first app    | achievement |
+      | Catrobat | Achievement - View    | Congratulations, you reached a total of 2 views | achievement |
 
   Scenario: User views his notifications and sees all of them
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/user/notifications"
     Then I should see "Achievement - Uploads"
-    Then I should see "Achievement - View"
+    And I should see "Achievement - View"
 
   Scenario: User views his notifications marks one as seen and does not see it anymore
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/user/notifications"
-
     Then I should see "Achievement - Uploads"
-    Then I should see "Achievement - View"
-
-    Then I click on the first ".catro-notification-read" button
-
+    And I should see "Achievement - View"
+    When I click "#mark-as-read-1"
+    And I wait for fadeEffect to finish
     Then I should not see "Achievement - Uploads"
-    Then I should see "Achievement - View"
-
-    Then I click on the first ".catro-notification-read" button
-
+    And I should see "Achievement - View"
+    When I click "#mark-as-read-2"
+    And I wait for fadeEffect to finish
     Then I should not see "Achievement - Uploads"
-    Then I should not see "Achievement - View"
-    Then I should see a ".swal2-modal" element
+    And I should not see "Achievement - View"
+    And I should see a ".swal2-modal" element
+
+  Scenario: User should see the amount of his notifications in the header
+    Given I log in as "Catrobat" with the password "123456"
+    And I am on "/pocketcode/"
+    When I click "#navbarDropdownMenuLink"
+    Then the element "#btn-notifications" should be visible
+    And the element ".user-notification-badge" should be visible
+
+  Scenario: User should see the amount of his notifications in the header
+    Given I log in as "Catrobat" with the password "123456"
+    And I am on "/pocketcode/"
+    When I click "#navbarDropdownMenuLink"
+    Then the element "#btn-notifications" should be visible
+    And the element ".user-notification-badge" should be visible
+    And the ".user-notification-badge" element should contain "2"
+
+  Scenario: User should see the amount of his notifications in the header only if he has notifcations
+    Given I log in as "OtherUser" with the password "123456"
+    And I am on "/pocketcode/"
+    When I click "#navbarDropdownMenuLink"
+    Then the element "#btn-notifications" should be visible
+    And the element ".user-notification-badge" should not be visible
+
+  Scenario: User should see the amount of his notifications in the header
+    Given there are "105"+ notifications for "Catrobat"
+    And I log in as "Catrobat" with the password "123456"
+    And I am on "/pocketcode/"
+    When I click "#navbarDropdownMenuLink"
+    Then the element "#btn-notifications" should be visible
+    And the element ".user-notification-badge" should be visible
+    And the ".user-notification-badge" element should contain "99+"

@@ -36,11 +36,12 @@
                 <span class="mr-1">{{ app.user.username }}</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ path('user_notifications') }}">
+                <a class="dropdown-item" href="{{ path('user_notifications') }}" id="btn-notifications">
                   <i class="material-icons mr-1 my-auto">
                     notifications
                   </i>
                     {{ "notifications"|trans({}, "catroweb") }}
+                  <span class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
                 </a>
                 <a class="dropdown-item" href="{{ url('profile') }}" id="btn-profile">
                   <i class="material-icons mr-1">
@@ -82,11 +83,12 @@
         <ul class="navbar-nav mt-2">
             {% if app.user %}
               <li class="nav-item">
-                <a class="nav-link user-notification-badge" href="{{ path('user_notifications') }}">
+                <a class="nav-link" href="{{ path('user_notifications') }}" id="btn-notifications">
                   <i class="material-icons mr-1">
                     notifications
                   </i>
                     {{ "notifications"|trans({}, "catroweb") }}
+                  <span class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
                 </a>
               </li>
               <li class="nav-item">

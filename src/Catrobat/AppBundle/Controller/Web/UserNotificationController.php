@@ -2,9 +2,14 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\CatroNotification;
+use Catrobat\AppBundle\Entity\CommentNotification;
+use Catrobat\AppBundle\Entity\LikeNotification;
 use Catrobat\AppBundle\Entity\ProgramLike;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +20,7 @@ class UserNotificationController extends Controller
   /**
    * @Route("/user/notifications", name="user_notifications", methods={"GET"})
    */
-  public function userNotificationsAction()
+  public function userNotificationsAction(LoggerInterface $logger)
   {
     $user = $this->getUser();
     if (!$user)
@@ -45,11 +50,50 @@ class UserNotificationController extends Controller
     }
 
     $nr = $this->get("catro_notification_repository");
-    $catro_user_notifications = $nr->findByUser($user);
+    $catro_user_notifications = $nr->findByUser($user, ['id' => 'DESC']);
+
+
+    $avatars = [];
+    /** @var $notification CatroNotification */
+    foreach ($catro_user_notifications as $notification)
+    {
+      if ($notification instanceof LikeNotification)
+      {
+        $avatar = $notification->getLikeFrom()->getAvatar();
+        if ($avatar)
+        {
+          $avatars[$notification->getId()] = $avatar;
+        }
+      }
+
+      if ($notification instanceof CommentNotification)
+      {
+        /**
+         * @var   $em   \Doctrine\ORM\EntityManager
+         * @var   $user \Catrobat\AppBundle\Entity\User
+         */
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy([
+          'id' => $notification->getComment()->getUserId(),
+        ]);
+        if ($user !== null)
+        {
+          $avatar = $user->getAvatar();
+          if ($avatar)
+          {
+            $avatars[$notification->getId()] = $avatar;
+          }
+        }
+      }
+
+    }
+
+    $logger->warning("screens", $avatars);
 
     $response = $this->get('templating')->renderResponse('usernotifications.html.twig', [
       'unseenRemixesGrouped'   => $unseen_remixes_grouped,
       'catroUserNotifications' => $catro_user_notifications,
+      'avatars'                => $avatars,
     ]);
 
     $response->headers->set('Cache-Control', 'no-store, must-revalidate, max-age=0');
