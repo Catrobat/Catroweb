@@ -1,11 +1,19 @@
 // Yeti 4.1.1
 // Bootswatch
 @import '../../bootstrap_vendor/scss/bootstrap';
-
+@import "../../font_awesome_wrapper/fontawesome-free/scss/fontawesome";
 // Variables ===================================================================
 
 $web-font-path: "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700" !default;
 @import url($web-font-path);
+
+// Font Awesome
+$fa-font-path:        "../../webfonts";
+@import url($fa-font-path);
+@import "../../font_awesome_wrapper/fontawesome-free/scss/solid";
+@import "../../font_awesome_wrapper/fontawesome-free/scss/regular";
+
+
 
 // Navbar ======================================================================
 

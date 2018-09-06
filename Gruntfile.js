@@ -69,6 +69,18 @@ module.exports = function(grunt)
         src: '**',
         dest: 'web/bootstrap_vendor/'
       },
+      font_awesome: {
+        expand: true,
+        cwd: 'node_modules/@fortawesome/',
+        src: '**',
+        dest: 'web/font_awesome_wrapper/'
+      },
+      font_awesome_webfonts: {
+        expand: true,
+        cwd: 'web/font_awesome_wrapper/fontawesome-free/webfonts',
+        src: '**',
+        dest: 'web/webfonts/'
+      },
       clipboard_js: {
         expand: true,
         cwd: 'node_modules/clipboard/dist/',

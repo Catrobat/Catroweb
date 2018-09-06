@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb-Symfony#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-contrib-copy": "^1.0.0",
