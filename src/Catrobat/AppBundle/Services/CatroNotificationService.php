@@ -32,26 +32,46 @@ namespace Catrobat\AppBundle\Services;
 use Catrobat\AppBundle\Entity\CatroNotification;
 use Doctrine\ORM\EntityManager;
 
+/**
+ * Class CatroNotificationService
+ * @package Catrobat\AppBundle\Services
+ */
 class CatroNotificationService
 {
-  /*
-   * Notification types
+  /**
    *
    */
   const DEFAULT_NOTIFICATION = 0;
 
+  /**
+   * @var EntityManager
+   */
   private $em;
 
+  /**
+   * CatroNotificationService constructor.
+   *
+   * @param EntityManager $em
+   */
   public function __construct(EntityManager $em)
   {
     $this->em = $em;
   }
 
+  /**
+   * @return string
+   */
   public function drawHeartbeat()
   {
     return "heartbeat";
   }
 
+  /**
+   * @param $notification
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function addNotification($notification)
   {
     $this->em->persist($notification);
@@ -59,7 +79,22 @@ class CatroNotificationService
   }
 
   /**
+   * @param $notification
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function removeNotification($notification)
+  {
+    $this->em->remove($notification);
+    $this->em->flush();
+  }
+
+  /**
    * @param array CatroNotification $notifications
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    *
    * @desc Deletes all given notifications
    */

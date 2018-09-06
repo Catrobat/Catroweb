@@ -1,14 +1,92 @@
 
 $footer-size: 23em;
+$padding: 15px;
+$margin-adjustment: -5px;
 
 .footer {
+  background-color: #e1e2e1;
   height: $footer-size;
+  padding: $padding 0;
 
   & .content {
     padding-top: 1em;
     padding-bottom: 1em;
   }
 
+  ul
+  {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+
+    li
+    {
+      display: inline-block;
+
+      a
+      {
+        color: inherit;
+        font-weight: 500;
+        font-size: 12px;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        position: relative;
+        padding: $padding;
+        display: block;
+
+        border-radius: 3px;
+        &:hover
+        {
+          text-decoration: none;
+        }
+      }
+
+      .btn
+      {
+        margin: 0;
+      }
+    }
+
+    &.list-horizontal
+    {
+      &:first-child a
+      {
+        padding-left: 0;
+      }
+
+      &:last-child a
+      {
+        padding-right: 0;
+      }
+    }
+
+    &.list-vertical
+    {
+      li
+      {
+        margin-left: $margin-adjustment;
+        margin-right: $margin-adjustment;
+        display: block;
+
+        a
+        {
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  .pull-center
+  {
+    display: inline-block;
+    float: none;
+  }
+  h4
+  {
+    font-weight: 500;
+    color: #000000;
+  }
 }
 
 // to keep footer at bottom
@@ -17,7 +95,6 @@ $footer-size: 23em;
   padding-bottom: $footer-size;
   margin-bottom: -$footer-size;
 }
-
 
 .footer-left {
   float: left;

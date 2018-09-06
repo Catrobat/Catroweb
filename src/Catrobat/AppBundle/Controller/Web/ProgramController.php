@@ -2,14 +2,14 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\CatroNotification;
+use Catrobat\AppBundle\Entity\LikeNotification;
+use Catrobat\AppBundle\Services\CatroNotificationService;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Exceptions\Upload\DescriptionTooLongException;
-use Catrobat\AppBundle\Exceptions\Upload\RudewordInDescriptionException;
-use Catrobat\AppBundle\Listeners\DescriptionValidator;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\Common\Collections\Criteria;
@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class ProgramController extends Controller
 {
@@ -112,7 +112,7 @@ class ProgramController extends Controller
 
     $isReportedByUser = $this->checkReportedByUser($program, $user);
 
-    $program_url = $this->generateUrl('program', ['id' => $program->getId(), 'flavor' => $flavor], UrlGeneratorInterface::ABSOLUTE_URL);
+    $program_url = $this->generateUrl('program', ['id' => $program->getId()], true);
     $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
 
     $jam = $this->extractGameJamConfig();
@@ -120,11 +120,17 @@ class ProgramController extends Controller
     $max_description_size = $this->container->get('kernel')->getContainer()
       ->getParameter("catrobat.max_description_upload_size");
 
+
+    $my_program = false;
+    if ($user_programs && count($user_programs) > 0) {
+      $my_program = true;
+    }
+
     return $this->get('templating')->renderResponse('program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
       'program_details'              => $program_details,
-      'my_program'                   => count($user_programs) > 0 ? true : false,
+      'my_program'                   => $my_program,
       'already_reported'             => $isReportedByUser,
       'shareText'                    => $share_text,
       'program_url'                  => $program_url,
@@ -170,6 +176,7 @@ class ProgramController extends Controller
       }
     }
 
+    /** @var User $user */
     $user = $this->getUser();
     if (!$user)
     {
@@ -189,6 +196,47 @@ class ProgramController extends Controller
     $new_type = $program_manager->toggleLike($program, $user, $type, $no_unlike);
     $like_type_count = $program_manager->likeTypeCount($program->getId(), $type);
     $total_like_count = $program_manager->totalLikeCount($program->getId());
+
+    if ($program->getUser() !== $user)
+    {
+      $program_notification_exists = false;
+
+      $nr = $this->get("catro_notification_repository");
+      $notifications = $nr->findByUser($program->getUser());
+
+      /** @var CatroNotification $notification */
+      foreach ($notifications as $notification)
+      {
+        if ($notification instanceof LikeNotification)
+        {
+          if ($notification->getLikeFrom()->getId() === $user->getId() &&
+            $notification->getProgram()->getId() === $program->getId())
+          {
+            $program_notification_exists = true;
+            break;
+          }
+        }
+      }
+
+      /** @var CatroNotificationService $notification_service */
+      $notification_service = $this->get("catro_notification_service");
+      if ($new_type === ProgramLike::TYPE_THUMBS_UP)
+      {
+        if (!$program_notification_exists)
+        {
+          $notification = new LikeNotification($program->getUser(), "Like gained", "You received a new like", $user, $program);
+          $notification_service->addNotification($notification);
+        }
+      }
+      else
+      {
+        if ($program_notification_exists)
+        {
+          $notification_service->removeNotification($notification);
+        }
+      }
+    }
+
 
     if (!$request->isXmlHttpRequest())
     {
@@ -496,7 +544,7 @@ class ProgramController extends Controller
    */
   private function findUserPrograms($user, $program)
   {
-    $user_programs = [];
+    $user_programs = null;
     if ($user)
     {
       $user_programs = $user->getPrograms()->matching(Criteria::create()

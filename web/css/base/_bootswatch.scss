@@ -366,81 +366,92 @@ label,
   }
 }
 
-.alert {
+.alert
+{
   font-size: $font-size-sm;
   font-weight: 300;
   color: $white;
 
-  &-primary {
-    &, > th, > td {
+  &-primary
+  {
+    &, > th, > td
+    {
       background-color: $primary;
     }
   }
 
-  &-secondary {
-    &, > th, > td {
+  &-secondary
+  {
+    &, > th, > td
+    {
       background-color: $secondary;
     }
   }
 
-  &-success {
-    &, > th, > td {
+  &-success
+  {
+    &, > th, > td
+    {
       background-color: $success;
     }
   }
 
-  &-info {
-    &, > th, > td {
+  &-info
+  {
+    &, > th, > td
+    {
       background-color: $info;
     }
   }
 
-  &-danger {
-    &, > th, > td {
+  &-danger
+  {
+    &, > th, > td
+    {
       background-color: $danger;
     }
   }
 
-  &-warning {
-    &, > th, > td {
+  &-warning
+  {
+    &, > th, > td
+    {
       background-color: $warning;
     }
   }
 
-  &-dark {
-    &, > th, > td {
+  &-dark
+  {
+    &, > th, > td
+    {
       background-color: $dark;
     }
   }
 
-  &-light {
-    &, > th, > td {
+  &-light
+  {
+    &, > th, > td
+    {
       background-color: $light;
     }
   }
 
-  .alert-link {
+  .alert-link
+  {
     font-weight: normal;
     color: #fff;
     text-decoration: underline;
   }
 
   &-secondary,
-  &-light {
+  &-light
+  {
     &,
     & a:not(.btn),
-    & .alert-link {
+    & .alert-link
+    {
       color: $body-color;
     }
-  }
-}
-
-.badge {
-  padding-bottom: .3em;
-
-  &-warning,
-  &-info {
-    color: $white;
   }
 }
 

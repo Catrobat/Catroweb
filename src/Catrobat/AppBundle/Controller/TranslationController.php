@@ -32,6 +32,32 @@ class TranslationController extends Controller
     return JsonResponse::create($translator->trans($word, $decodedArray, $domain), 200);
   }
 
+
+  /**
+   * @Route("/transChoice/{word}/{count}/{array}/{domain}", name = "translate_choice", defaults={"array" = "", "domain" =
+   *                                              "catroweb"})
+   *
+   * @param TranslatorInterface $translator
+   * @param                     $word
+   * @param integer             $count
+   * @param string              $array
+   * @param string              $domain
+   *
+   * @return JsonResponse
+   */
+  public function transChoiceAction(TranslatorInterface $translator, $word, $count, $array, $domain)
+  {
+
+    $decodedArray = [];
+
+    if ($array !== "")
+    {
+      $decodedArray = $this->parseJavascriptDictArrayToPhp($array);
+    }
+
+    return JsonResponse::create($translator->transChoice($word, $count, $decodedArray, $domain), 200);
+  }
+
   /**
    * @param $array
    *

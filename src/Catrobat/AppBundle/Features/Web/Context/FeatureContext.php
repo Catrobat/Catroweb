@@ -7,6 +7,7 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Catrobat\AppBundle\Entity\AchievementNotification;
 use Catrobat\AppBundle\Entity\CatroNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -554,12 +555,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       ]);
       if ($user == null)
       {
-        Assert::assert(false, "user is null");
+        Assert::assertTrue(false, "user is null");
       }
       switch ($notification['type'])
       {
-        case "default":
-          $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
+        case "achievement":
+          $to_create = new AchievementNotification($user, $notification['title'], $notification['message'], "");
           $em->persist($to_create);
           break;
         default:
@@ -962,7 +963,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     else
     {
-      Assert::assert(false, "Couldn't find avatar in #avatar-img");
+      Assert::assertTrue(false, "Couldn't find avatar in #avatar-img");
     }
     $source = trim($source, '"');
     $pre_style_header = $this->getSession()->getPage()->find('css', '#menu .img-avatar');
@@ -973,7 +974,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     else
     {
-      //Assert::assert(false, "Couldn't find avatar in menu");
+      //Assert::assertTrue(false, "Couldn't find avatar in menu");
     }
     $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
     $sourceHeader = trim($sourceHeader, '"');
@@ -2748,5 +2749,46 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       Assert::assertTrue(false, "Program with a large description couldn't be loaded");
     }
   }
+
+  /**
+   * @When /^I wait for fadeEffect to finish$/
+   */
+  public function iWaitForFadeEffectToFinish()
+  {
+    $this->iWaitMilliseconds(1000);
+  }
+
+
+  /**
+   * @Given /^there are "([^"]*)"\+ notifications for "([^"]*)"$/
+   */
+  public function thereAreNotificationsFor($arg1, $arg2)
+  {
+    /**
+     * @var EntityManager $em
+     * @var User $user
+     */
+    try {
+      $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+
+      for ($i = 0; $i < $arg1; $i++)
+      {
+        $user = $em->getRepository(User::class)->findOneBy([
+          'username' => $arg2,
+        ]);
+        if ($user == null)
+        {
+          Assert::assertTrue(false, "user is null");
+        }
+        $to_create = new CatroNotification($user, "Random Title", "Random Text");
+        $em->persist($to_create);
+      }
+      $em->flush();
+    }
+    catch (\Exception $e) {
+      Assert::assertTrue(false, "database error");
+    }
+  }
+
 }
 

@@ -14,28 +14,6 @@
 
 @import "../../base/catro_bootstrap";
 
-#gamejam-submission {
-  @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
-}
 
-.bg-catrobat {
-  background-color: custom-color(catrobat);
-}
-.text-catrobat {
-  color: custom-color(catrobat);
-}
-
-.theme-logo-title {
-  font-size: $theme-logo-font-size;
-  font-weight: $theme-logo-font-weight;
-}
-
-.title-color-left {
-  color: $theme-logo-color-primary;
-}
-
-.title-color-right {
-  color: $theme-logo-color-secondary;
-}
 
 

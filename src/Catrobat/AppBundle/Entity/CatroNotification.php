@@ -45,7 +45,8 @@ use Doctrine\ORM\Mapping as ORM;
  *   "default" = "CatroNotification",
  *   "anniversary" = "AnniversaryNotification",
  *   "achievement" = "AchievementNotification",
- *   "comment" = "CommentNotification"
+ *   "comment" = "CommentNotification",
+ *   "like" = "LikeNotification"
  * })
  */
 class CatroNotification

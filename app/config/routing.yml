@@ -35,6 +35,15 @@ translate_word:
   options:
     expose: true
 
+translate_choice:
+  path:  /transChoice/{word}/{count}/{array}/{domain}
+  controller: Catrobat\AppBundle\Controller\TranslationController:transChoiceAction
+  defaults:
+    array: ""
+    domain: "catroweb"
+  options:
+    expose: true
+
 edit_program_description:
   path:  /editProgramDescription/{id}/{newDescription}
   controller: Catrobat\AppBundle\Controller\Web\ProgramController:editProgramDescription
