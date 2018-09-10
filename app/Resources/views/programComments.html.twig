@@ -1,0 +1,69 @@
+<div id="program-comments">
+  <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
+  <div id="user-comment-wrapper">
+    <textarea title="{{ 'programs.comments'|trans({}, 'catroweb') }}"
+              id="comment-message" class="msg" style="width: 100%; height: 100px"></textarea>
+    <button id="comment-post-button" class="btn btn-primary">
+      {{ 'programs.send'|trans({}, 'catroweb') }}
+    </button>
+  </div>
+
+  <div id="comments-wrapper">
+    {% for comment in program_details.comments %}
+    <div id="comment-{{ comment.id }}" class="single-comment"
+    {% if loop.index > 5 %} style="display: none" {% endif %}>
+
+      <div class="comment-avatar">
+        <img class="comment-avatar-img"
+             src="{% if program_details.commentsAvatars[comment.id] is defined %}
+                    {{ program_details.commentsAvatars[comment.id] }}
+                  {% else %}
+                    {{ asset('images/default/avatar_default.png') }}
+                  {% endif %}"
+            alt="Card image">
+      </div>
+
+      <div class="comment-payload-wrapper">
+        <div class="name-date-wrapper">
+          <a href="{{ url('profile', { id : comment.userId }) }}">
+            <div id="profile-comment-user-id-{{ comment.userId }}" class="usr-name">
+              {{ comment.username }}
+            </div>
+          </a>
+          <div class="date">
+            {{ comment.uploadDate.format('Y-m-d') }}
+          </div>
+          {% if comment.username != user_name  %}
+            <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
+               data-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
+              <i class="icon-button ml-3 fas fa-ban text-danger"></i>
+            </a>
+          {% endif %}
+          {% if  program_details.isAdmin or comment.username == user_name  %}
+            <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
+               data-toggle="tooltip" title="{{ 'programs.delete'|trans({}, 'catroweb') }}">
+              <i class="icon-button ml-2 fas fa-trash-alt text-danger"></i>
+            </a>
+          {% endif %}
+        </div>
+        <div class="comment-text">
+          <p>{{ comment.text}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="center">
+    <div id="show-more-comments-button" class="button-show-more" style="display:inline-block">
+      <a data-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
+        <i class="fas fa-chevron-circle-down"></i>
+      </a>
+    </div>
+    <div id="show-less-comments-button" class="button-show-less" style="display:inline-block">
+      <a data-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
+        <i class="fas fa-chevron-circle-up"></i>
+      </a>
+    </div>
+  </div>
+</div>

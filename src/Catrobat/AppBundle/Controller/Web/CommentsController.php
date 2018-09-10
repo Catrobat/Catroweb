@@ -7,26 +7,33 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserComment;
+use Catrobat\AppBundle\StatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class CommentsController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class CommentsController extends Controller
 {
   /**
-   * @Route("/report", name="report", methods={"GET"})
+   * @Route("/reportComment", name="report", methods={"GET"})
+   *
+   * @throws \Exception
+   * @return Response
    */
-  public function reportCommentAction(Request $request)
+  public function reportCommentAction()
   {
     $user = $this->getUser();
     if (!$user)
     {
-      return new Response("log_in");
+      return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
     $em = $this->getDoctrine()->getManager();
-    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+    $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
     if (!$comment)
     {
@@ -38,26 +45,41 @@ class CommentsController extends Controller
     $comment->setIsReported(true);
     $em->flush();
 
-    return new Response("Comment successfully reported!");
+    return new Response(StatusCode::OK);
   }
 
   /**
-   * @Route("/delete", name="delete", methods={"GET"})
+   * @Route("/deleteComment", name="delete", methods={"GET"})
+   *
+   * @throws \Exception
+   * @return Response
    */
-  public function deleteCommentAction(Request $request)
+  public function deleteCommentAction()
   {
+    /**
+     * @var $comment UserComment
+     * @var $user    User
+     */
     $user = $this->getUser();
     if (!$user)
     {
-      return new Response("log_in");
+      return new Response(StatusCode::NOT_LOGGED_IN);
     }
 
-    if (!$this->isGranted("ROLE_ADMIN"))
-    {
-      return new Response("no_admin");
-    }
     $em = $this->getDoctrine()->getManager();
-    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+    $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
+
+    if ($user->getId() !== $comment->getUserId() && !$this->isGranted("ROLE_ADMIN"))
+    {
+      return new Response(StatusCode::NO_ADMIN_RIGHTS);
+    }
+
+    // first remove notification if there is one!
+    $notification = $em->getRepository(CommentNotification::class)->find($_GET['CommentId']);
+    if ($notification)
+    {
+      $em->remove($notification);
+    }
 
     if (!$comment)
     {
@@ -68,34 +90,36 @@ class CommentsController extends Controller
     $em->remove($comment);
     $em->flush();
 
-    return new Response("ok");
+    return new Response(StatusCode::OK);
   }
 
   /**
    * @Route("/comment", name="comment", methods={"POST"})
+   *
+   * @throws \Exception
+   * @return Response
    */
-  public function postCommentAction(Request $request)
+  public function postCommentAction()
   {
-    $user = $this->getUser();
-    if (!$user)
-    {
-      return new Response("log_in");
-    }
-
-    $notification_service = $this->get("catro_notification_service");
-
-    $token = $this->get("security.token_storage")->getToken();
-    $user = $token->getUser();
-    $id = $user->getId();
-
-    $pm = $this->get("programmanager");
-    $program = $pm->find($_POST['ProgramId']);
-
     /**
      * @var $user             User
      * @var $program          Program
      * @var $reported_program ProgramInappropriateReport
      */
+
+    $user = $this->getUser();
+    if (!$user)
+    {
+      return new Response(StatusCode::NOT_LOGGED_IN);
+    }
+
+    $notification_service = $this->get("catro_notification_service");
+
+    $user = $this->get("security.token_storage")->getToken()->getUser();
+    $id = $user->getId();
+
+    $program_manager = $this->get("programmanager");
+    $program = $program_manager->find($_POST['ProgramId']);
 
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUsername());
@@ -112,11 +136,14 @@ class CommentsController extends Controller
 
     $em->refresh($temp_comment);
 
-    $notification = new CommentNotification($program->getUser(),
-      "Comment notification",
-      "You received a new comment on program %programname% from user %author%.", $temp_comment);
-    $notification_service->addNotification($notification);
+    if ($user !== $program->getUser())
+    {
+      $notification = new CommentNotification($program->getUser(),
+        "Comment notification",
+        "You received a new comment on program %programname% from user %author%.", $temp_comment);
+      $notification_service->addNotification($notification);
+    }
 
-    return new Response("ok");
+    return new Response(StatusCode::OK);
   }
 }
