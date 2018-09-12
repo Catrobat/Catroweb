@@ -2786,9 +2786,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var EntityManager $em
-     * @var User $user
+     * @var User          $user
      */
-    try {
+    try
+    {
       $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
       for ($i = 0; $i < $arg1; $i++)
@@ -2804,8 +2805,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $em->persist($to_create);
       }
       $em->flush();
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e)
+    {
       Assert::assertTrue(false, "database error");
     }
   }
@@ -2829,5 +2830,25 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $user->addFollowing($followUser);
       $usermanager->updateUser($user);
     }
+  }
+
+  /**
+   * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
+   */
+  public function theElementShouldHaveType($arg1, $arg2)
+  {
+    $page = $this->getMink()->getSession()->getPage();
+    $type = $page->find('css', $arg1)->getAttribute("type");
+    Assert::assertEquals($arg2, $type);
+  }
+
+  /**
+   * @Then /^the element "([^"]*)" should not have type "([^"]*)"$/
+   */
+  public function theElementShouldNotHaveType($arg1, $arg2)
+  {
+    $page = $this->getMink()->getSession()->getPage();
+    $type = $page->find('css', $arg1)->getAttribute("type");
+    Assert::assertNotEquals($arg2, $type);
   }
 }

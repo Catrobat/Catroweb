@@ -23,7 +23,7 @@
       {% include 'components/login/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
 
             <form id="registration_form" action="{{ path('fos_user_registration_register') }}"
                   method="POST" role="form" class="fos_user_registration_register form-horizontal">
@@ -56,17 +56,31 @@
               </div>
 
               <div class="group">
-                {{ form_widget(form.plainPassword.first) }}
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label><span class="span-input">{{ 'login.passwordFirst'|trans({}, 'catroweb') }}</span></label>
+                <div class="group-with-icon-wrapper show-hide-password">
+                  <div class="group-with-icon">
+                    <span>
+                      {{ form_widget(form.plainPassword.first) }}
+                      <label><span class="span-input" >{{ 'login.passwordFirst'|trans({}, 'catroweb') }}</span></label>
+                    </span>
+                  </div>
+                  <a href=""><i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i></a>
+                </div>
               </div>
 
               <div class="group">
-                {{ form_widget(form.plainPassword.second) }}
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label><span class="span-input">{{ 'login.passwordSecond'|trans({}, 'catroweb') }}</span></label>
+                <div class="group-with-icon-wrapper show-hide-password">
+                  <div class="group-with-icon">
+                    <span>
+                      {{ form_widget(form.plainPassword.second) }}
+                      <label><span class="span-input" >{{ 'login.passwordSecond'|trans({}, 'catroweb') }}</span></label>
+                    </span>
+                  </div>
+                  <a href=""><i class="fa fa-eye-slash icon-from-group" aria-hidden="true"></i></a>
+                </div>
               </div>
 
               <!-- Policy -->
@@ -114,10 +128,12 @@
     {% include 'social/oauth_form.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
 
+
   {% endblock fos_user_content %}
 
 {% endblock body %}
 
 {% block js %}
   <script src="{{ asset('js/custom/register.js') }}"></script>
+  <script src="{{ asset('js/custom/PasswordVisibilityToggler.js') }}"></script>
 {% endblock js %}
