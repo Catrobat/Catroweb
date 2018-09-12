@@ -6,10 +6,10 @@
 
 {% block body %}
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
       <h1>{{ app.user.username }}</h1>
     </div>
-    <div class="col-md-3">
+    <div class="col-3 col-md-3">
       <div id="profile-avatar">
         <div class="avatar-error text-avatar-toolarge">{{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}</div>
         <div class="avatar-error text-avatar-uploadError">{{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}</div>
@@ -18,7 +18,7 @@
         <img width="300" height="300" src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-6 col-md-4 mt-2">
         <div id="user-information">
           <div id="country-information">
             <div id="country-header">{{ 'country'|trans({}, 'catroweb') }}:</div>
@@ -32,18 +32,12 @@
           </div>
         </div>
     </div>
-    <div class="col-md-1 ml-auto">
-        {% if not nolb_user and not app.user.limited %}
-        <div id="edit-icon">
-          <a href="{{ url('profile_edit') }}">
-            <span><i class="material-icons">edit</i></span>
-          </a>
-        </div>
-        {% endif %}
 
-        {% if nolb_user and 'teacher' in app.user.username %}
+    <div class="col-2 col-md-1 ml-auto mt-2">
+        {% if (not nolb_user and not app.user.limited) or (nolb_user and 'teacher' in app.user.username) %}
         <div id="edit-icon">
-          <a href="{{ url('profile_edit') }}">
+          <a href="{{ url('profile_edit') }}"
+            data-toggle="tooltip" title="{{ 'profile.edit'|trans({}, 'catroweb') }}">
             <span><i class="material-icons">edit</i></span>
           </a>
         </div>
@@ -52,9 +46,7 @@
   </div>
 
 
-
-
-  <div class="clear"></div>
+  <div class="clear mt-4"></div>
   {% if not app.user.limited %}
   <div id="myprofile-programs">
   {% else %}
@@ -81,28 +73,28 @@
 {% endblock %}
 
 {% block js %}
-  {#<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>#}
-    <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
   <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
   <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
   <script>
+    let programs;
     {% if not app.user.limited %}
-    var programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}');
-    var profile = new MyProfile('{{ path('profile') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
+    programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}');
+    let profile = new MyProfile('{{ path('profile') }}', '{{ path('email_edit') }}','{{ path('profile_edit') }}', '{{ path('avatar_edit') }}', '{{ path('password_edit') }}',
         '{{ path('country_edit') }}', '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}', '{{ path('profile_delete_program') }}',
         '{{ path('profile_toggle_program_visibility') }}', '{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}', '{{ path('profile_upload_avatar') }}');
     programs.initProfile({{ app.user.id }});
     profile.init();
     {% else %}
-    var programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}');
+    programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}');
     programs.initProfile({{ app.user.id }});
     {% endif %}
   </script>
   <script src="{{ asset('js/custom/ProfileLoader.js') }}"></script>
   <script>
-    var follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}', '{{ path('profile') }}', "#list-follows", '{{ asset('images/default/avatar_default.png') }}');
+    let follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}', '{{ path('profile') }}', "#list-follows", '{{ asset('images/default/avatar_default.png') }}');
     follows.init();
-    var follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}', '{{ path('profile') }}', "#list-follower", '{{ asset('images/default/avatar_default.png') }}');
+    let follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}', '{{ path('profile') }}', "#list-follower", '{{ asset('images/default/avatar_default.png') }}');
     follower.init();
   </script>
 {% endblock %}

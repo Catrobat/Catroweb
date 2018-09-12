@@ -94,7 +94,7 @@
         <span>
           {{ "description"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
-            <a href="#" data-toggle="tooltip" title="Change the program Description">
+            <a href="#" data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
               <i id="edit-description-button" class="ml-3 fa fa-pencil-square-o"></i>
             </a>
           {% endif %}
@@ -134,7 +134,7 @@
 
           <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
             <i class="fa fa-floppy-o mr-2"></i>
-            Save Description change
+            {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
           </button>
         </div>
       {% endif %}
@@ -443,6 +443,7 @@
 
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
+  <script src="{{ asset('js/custom/ProgramDescription.js') }}"></script>
   <script src="{{ asset('js/custom/ProgramComments.js') }}"></script>
   <script>
     new ProgramComments({{ program_details.id }}, 5, 5, 5, {{ (program_details.comments|length) }},
@@ -462,7 +463,14 @@
       "{{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::NOT_LOGGED_IN') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::NO_ADMIN_RIGHTS') }}"
-    )
+    );
+    new ProgramDescription({{ program.id }},
+      '{{ ("show-more")|trans({}, "catroweb") }}',
+      '{{ ("show-less")|trans({}, "catroweb") }}',
+      {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
+      {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }},
+      {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
+    );
   </script>
 
   <script>
@@ -541,6 +549,7 @@
     var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', undefined, programID, recommendedByPageId);
     specificRecommender.initSpecificRecsys();
 
+    counter = 10;
     var cachedRemixData = null;
     var remixGraphTranslations = {
       ok: "{{ "ok"|trans({}, "catroweb") }}",
@@ -729,7 +738,6 @@
           $('#nolb-submission-box').hide();
       });
 
-
       $(document).one('click', ".rec-programs", function(event) {
 
         event.preventDefault();
@@ -815,99 +823,5 @@
             }
         });
     });
-
-
-    $(function() {
-
-      let description = $("#description");
-      let editDescriptionUI = $("#edit-description-ui");
-      let editDescriptionButton = $("#edit-description-button");
-      let editDescription = $("#edit-description");
-      let editDescriptionSubmitButton = $("#edit-description-submit-button");
-      let editDescriptionError = $("#edit-description-error");
-
-      // set default visibilities
-      initDescriptionEdit();
-
-
-      function initDescriptionEdit() {
-          editDescriptionUI.hide();
-          description.show();
-      }
-
-      // increase icon size while hovering over it
-      editDescriptionButton.hover(
-        function() {
-        editDescriptionButton.addClass("fa-lg")
-      },
-        function() {
-        editDescriptionButton.removeClass("fa-lg")
-      });
-
-
-      editDescriptionButton.click(function() {
-        if (description.is(':visible')) {
-          description.hide();
-          editDescriptionUI.show()
-        }
-        else {
-          description.show();
-          editDescriptionUI.hide()
-        }
-      });
-
-
-      editDescriptionSubmitButton.click(function() {
-        let newDescription = editDescription.val().trim();
-        if (newDescription === description.text().trim()) {
-          editDescriptionUI.hide();
-          description.show();
-          return
-        }
-
-        let pId = {{ program.id }};
-        let url = Routing.generate('edit_program_description', { id: pId,  newDescription: newDescription });
-        $.get(url, function(data) {
-          if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
-            location.reload();
-          }
-          else if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }} ||
-          data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }} ) {
-            editDescription.addClass("danger");
-            editDescriptionError.show();
-            editDescriptionError.text(data.message)
-          }
-        });
-      });
-
-    });
-
-
-    $(function() {
-      let descriptionFulltext = $("#descriptionFulltext");
-      let descriptionPoints = $("#descriptionPoints");
-      let descriptionShowMoreToggle = $("#descriptionShowMoreToggle");
-      let descriptionShowMoreText = $("#descriptionShowMoreText");
-      descriptionFulltext.hide();
-      descriptionPoints.show();
-      descriptionShowMoreToggle.click(function() {
-        if (descriptionFulltext.is(":visible"))
-        {
-          descriptionFulltext.fadeOut();
-          descriptionPoints.show();
-          descriptionShowMoreText.text('{{ ("show-more")|trans({}, "catroweb") }}');
-          descriptionShowMoreToggle.css('aria-expanded', false)
-        }
-        else
-        {
-          descriptionFulltext.fadeIn();
-          descriptionPoints.hide();
-          descriptionShowMoreText.text('{{ ("show-less")|trans({}, "catroweb") }}');
-          descriptionShowMoreToggle.css('aria-expanded', true)
-        }
-      });
-    });
-
-
   </script>
 {% endblock %}
