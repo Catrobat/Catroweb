@@ -28,7 +28,6 @@ var Main = function(search_url)
       $.get($ajaxGetFBAppId,
         function(data)
         {
-          console.log(data);
           $appid = data['fb_appid'];
           FB.init({
             appId  : $appid,

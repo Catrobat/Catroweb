@@ -2,36 +2,35 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
+  <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}"/>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css"/>
 
   <script src="https://share.catrob.at/html5/player/pocketCodePlayer.min.js"></script>
-  <script src=" {{  asset( getJavascriptPath('loginscript.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('LoadingAnimation.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('jquery.contextMenu.min.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('jquery.ui.position.min.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('animatedModal.min.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('vis.min.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('clipboard.min.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('remixgraph.configuration.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('remixgraph.builder.js') )}}"></script>
-  <script src=" {{  asset( getJavascriptPath('remixgraph.visualization.js') )}}"></script>
+  <script src=" {{ asset( getJavascriptPath('loginscript.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('LoadingAnimation.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('jquery.contextMenu.min.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('jquery.ui.position.min.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('animatedModal.min.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('vis.min.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('clipboard.min.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('remixgraph.configuration.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('remixgraph.builder.js') ) }}"></script>
+  <script src=" {{ asset( getJavascriptPath('remixgraph.visualization.js') ) }}"></script>
 
-  <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}" />
-  <meta property="og:title" content="{{ program.name|escape('html_attr') }}" />
+  <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}"/>
+  <meta property="og:title" content="{{ program.name|escape('html_attr') }}"/>
   {% if program.description is empty %}
-    <meta property="og:description" content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}" />
+    <meta property="og:description" content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}"/>
   {% else %}
-    <meta property="og:description" content="{{ program.description|escape('html_attr') }}" />
+    <meta property="og:description" content="{{ program.description|escape('html_attr') }}"/>
   {% endif %}
-  <meta property="og:url" content="{{ url('program', {id: program.id}) }}" />
+  <meta property="og:url" content="{{ url('program', {id: program.id}) }}"/>
 {% endblock %}
 
 {% block body %}
@@ -50,37 +49,59 @@
     <div id="image" class="image-container">
       {% if isWebview() %}
         <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-          <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}" />
+          <img id="img-screenshot" width="300" height="300" id="screenshot"
+               src="{{ asset(program_details.screenshotBig) }}"/>
         </a>
       {% endif %}
 
       {% if not isWebview() %}
-        <img id="img-screenshot" width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}" />
-        <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});"> <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64"> <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z"></path> <polygon class="pc-svgPlayerIconSymbol" points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934"></polygon> </svg> </button>
+        <img id="img-screenshot" width="300" height="300" id="screenshot"
+             src="{{ asset(program_details.screenshotBig) }}"/>
+        <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});">
+          <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64">
+            <path class="pc-svgPlayerIconBorder"
+                  d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z"></path>
+            <polygon class="pc-svgPlayerIconSymbol"
+                     points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934"></polygon>
+          </svg>
+        </button>
       {% endif %}
 
       <div id="program-like-container">
         <div>
           <div id="program-like-buttons-container">
-            <a id="program-like-thumbs-up" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}">
-              <img class="img-share" src="{{ asset('images/social/like/thumbs_up.png') }}" alt="Thumbs up!" title="Thumbs up!"/>
-              <span class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span class="plural">{{ "programs.likeThumbsUpDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+            <a id="program-like-thumbs-up" class="program-like-button" href="#"
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}">
+              <img class="img-share" src="{{ asset('images/social/like/thumbs_up.png') }}" alt="Thumbs up!"
+                   title="Thumbs up!"/>
+              <span
+                  class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span
+                  class="plural">{{ "programs.likeThumbsUpDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
-            <a id="program-like-smile" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_SMILE') }}">
+            <a id="program-like-smile" class="program-like-button" href="#"
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_SMILE') }}">
               <img class="img-share" src="{{ asset('images/social/like/smile.png') }}" alt="Smile!" title="Smile!"/>
-              <span class="singular">{{ "programs.likeSmileDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span class="plural">{{ "programs.likeSmileDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+              <span
+                  class="singular">{{ "programs.likeSmileDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span
+                  class="plural">{{ "programs.likeSmileDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
-            <a id="program-like-love" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_LOVE') }}">
+            <a id="program-like-love" class="program-like-button" href="#"
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_LOVE') }}">
               <img class="img-share" src="{{ asset('images/social/like/love.png') }}" alt="Love!" title="Love!"/>
-              <span class="singular">{{ "programs.likeLoveDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span class="plural">{{ "programs.likeLoveDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+              <span
+                  class="singular">{{ "programs.likeLoveDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span
+                  class="plural">{{ "programs.likeLoveDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
-            <a id="program-like-wow" class="program-like-button" href="#" data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_WOW') }}">
+            <a id="program-like-wow" class="program-like-button" href="#"
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_WOW') }}">
               <img class="img-share" src="{{ asset('images/social/like/wow.png') }}" alt="Wooow!" title="Wooow!"/>
-              <span class="singular">{{ "programs.likeWowDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
-              <span class="plural">{{ "programs.likeWowDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
+              <span
+                  class="singular">{{ "programs.likeWowDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
+              <span
+                  class="plural">{{ "programs.likeWowDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
             <span id="program-like-counter" class="program-like-counter"></span>
           </div>
@@ -94,8 +115,8 @@
         <span>
           {{ "description"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
-            <a href="#" data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
-              <i id="edit-description-button" class="ml-3 fa fa-pencil-square-o"></i>
+            <a data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
+              <i id="edit-description-button" class="ml-3 fa fa-pencil-square-o catro-icon-button"></i>
             </a>
           {% endif %}
         </span>
@@ -128,7 +149,7 @@
         <div id="edit-description-ui">
           <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
           <textarea id="edit-description" name="edit-description" class="mt-2 mb-2" title="_edit-description"
-                    maxlength="{{ max_description_size }}" style="width: 100%" rows="10" >
+                    maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
 {% if program.description %}{{ program.description }}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
           </textarea>
 
@@ -139,7 +160,6 @@
         </div>
       {% endif %}
 
-
       <hr>
 
       {% if  program.tags|length > 0  or program.extensions|length > 0 %}
@@ -148,12 +168,12 @@
           {% if program.extensions|length > 0 %}
             <div id="extension-container">
               <div class="tags-extensions-text">{{ ("extenstion-text")|trans({}, "catroweb") }}:</div>
-                <div class="tagext">
-                  {% for extension in program.extensions %}
-                    <a class="rec-programs" href="{{ url('extension_search', { q : extension.name }) }}">
-                      <button id={{ extension.name }} class="btn-tags-extensions"> {{ extension.name }}</button>
-                    </a>
-                  {% endfor %}
+              <div class="tagext">
+                {% for extension in program.extensions %}
+                  <a class="rec-programs" href="{{ url('extension_search', { q : extension.name }) }}">
+                    <button id={{ extension.name }} class="btn-tags-extensions"> {{ extension.name }}</button>
+                  </a>
+                {% endfor %}
               </div>
             </div>
           {% endif %}
@@ -164,7 +184,8 @@
               <div class='tagext'>
                 {% for tag in program.tags %}
                   <a class="rec-programs" href="{{ url('tag_search', { q : tag.id }) }}">
-                    <button id={{ tag.en }} class="btn-tags-extensions"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
+                    <button
+                        id={{ tag.en }} class="btn-tags-extensions"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
                   </a>
                 {% endfor %}
               </div>
@@ -175,94 +196,95 @@
       {% endif %}
 
       <div class="download-container">
-{#        {% if not isWebview() %}#}
-          <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-            <button id="download" class="btn btn-primary download-button">
-              <table>
-                <tr>
-                  <td><img src="{{ asset('images/symbols/download.svg') }}" > </td>
-                  <td>{{ "download"|trans({}, "catroweb") }}</td>
-                </tr>
-              </table>
-            </button>
-          </a>
-
-          <button id="remix-graph-button" class="btn btn-primary download-button">
+        {#        {% if not isWebview() %}#}
+        <a id="url-download"
+           href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+          <button id="download" class="btn btn-primary download-button">
             <table>
               <tr>
-                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                <td><img src="{{ asset('images/symbols/download.svg') }}"></td>
+                <td>{{ "download"|trans({}, "catroweb") }}</td>
               </tr>
             </table>
           </button>
+        </a>
 
-          <button id="apk-generate" class="btn  btn-primary btn-apk download-button">
-            <table>
-              <tr>
-                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-                <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
+        <button id="remix-graph-button" class="btn btn-primary download-button">
+          <table>
+            <tr>
+              <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+              <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
 
-          <button id="apk-pending" class="btn  btn-primary download-button">
-            <table id="pending-table">
-              <tr>
-                <td id="replace-me"><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-                <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
+        <button id="apk-generate" class="btn  btn-primary btn-apk download-button">
+          <table>
+            <tr>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}"/></td>
+              <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
 
-          <button id="apk-download" class="btn btn-apk btn-primary download-button">
-            <table>
-              <tr>
-                <td><img src="{{ asset('images/symbols/apk_download.svg') }}" /></td>
-                <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
+        <button id="apk-pending" class="btn  btn-primary download-button">
+          <table id="pending-table">
+            <tr>
+              <td id="replace-me"><img src="{{ asset('images/symbols/apk_download.svg') }}"/></td>
+              <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
+
+        <button id="apk-download" class="btn btn-apk btn-primary download-button">
+          <table>
+            <tr>
+              <td><img src="{{ asset('images/symbols/apk_download.svg') }}"/></td>
+              <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
+            </tr>
+          </table>
+        </button>
         {#{% endif %}#}
 
-{#        {% if isWebview() %}
-          <button id="remix-graph-button" class="btn btn-primary download-button">
-            <table>
-              <tr>
-                <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-                </tr>
-            </table>
-          </button>
+        {#        {% if isWebview() %}
+                    <button id="remix-graph-button" class="btn btn-primary download-button">
+                      <table>
+                        <tr>
+                          <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
+                          <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
+                          </tr>
+                      </table>
+                    </button>
 
-          <div class="backdrop"></div>
-          <div class="fab child" data-subitem="1">
-            <span>
-              <div>
-                <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
-                <i id="apk-pending" class="fa fa-refresh fa-spin fa-inverse" aria-hidden="true"></i>
-                <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
-              </div>
-            </span>
-          </div>
+                    <div class="backdrop"></div>
+                    <div class="fab child" data-subitem="1">
+                      <span>
+                        <div>
+                          <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
+                          <i id="apk-pending" class="fa fa-refresh fa-spin fa-inverse" aria-hidden="true"></i>
+                          <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
+                        </div>
+                      </span>
+                    </div>
 
-          <div class="fab child" data-subitem="2">
-            <span>
-              <div>
-                <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-                <img src="{{ asset('images/symbols/download.svg') }}" >
-                </a>
-              </div>
-            </span>
-          </div>
-          <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
-      {% endif %}#}
+                    <div class="fab child" data-subitem="2">
+                      <span>
+                        <div>
+                          <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+                          <img src="{{ asset('images/symbols/download.svg') }}" >
+                          </a>
+                        </div>
+                      </span>
+                    </div>
+                    <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
+                {% endif %}#}
       </div>
 
       {% if nolb_status and program.user == app.user.username %}
         <button id="nolb-project-button" class="btn download-button">
           <table>
             <tr>
-              <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}" > </td>
+              <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}"></td>
               <td>{{ "pmd.submitBtn"|trans({}, "catroweb") }}</td>
             </tr>
           </table>
@@ -273,7 +295,8 @@
           <button id="nolb-submission-box-cancel"><i class="fa fa-close"></i></button>
           <p> {{ "pmd.submitBox.text"|trans({}, "catroweb") }}</p>
           <div class="input-field">
-            <input type="number" id="nolb-submission-project-id" name="NOLB-submission-id" placeholder="Your project ID">
+            <input type="number" id="nolb-submission-project-id" name="NOLB-submission-id"
+                   placeholder="Your project ID">
           </div>
           <button id="nolb-submission-button" class="btn">
             <p>{{ "pmd.submitBox.btnText"|trans({}, "catroweb") }}</p>
@@ -302,11 +325,12 @@
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}
           <div id="gamejam-div">
-            <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id })  }}{% else %}{{ url('login') }}{% endif %}"  title="{{ jam.name }}">
+            <a href="{% if app.user %} {{ url('gamejam_web_submit', { "id": program.id }) }}{% else %}{{ url('login') }}{% endif %}"
+               title="{{ jam.name }}">
               <button id="gamejam-submission" class="btn btn-jam download-button">
                 <table>
                   <tr>
-                    <td><img src="{{ asset( jam.logo_url ) }}" > </td>
+                    <td><img src="{{ asset( jam.logo_url ) }}"></td>
                     <td>{{ "gamejam.submit"|trans({ '%gamejamname%' : jam.name}, "catroweb") }}</td>
                   </tr>
                 </table>
@@ -342,25 +366,28 @@
               <div class="row justify-content-center mt-4">
                 <div class="col-6 text-left">
                   <div class="radio">
-                    <label><input type="radio" id="report-inappropriate" name="reportCategory" value="inappropriate" checked>
-                        {{ "programs.reportRadioButtonInappropriate"|trans({}, "catroweb") }}</label>
+                    <label><input type="radio" id="report-inappropriate" name="reportCategory" value="inappropriate"
+                                  checked>
+                      {{ "programs.reportRadioButtonInappropriate"|trans({}, "catroweb") }}</label>
                   </div>
                   <div class="radio">
-                    <label><input type="radio"  id="report-copyright" name="reportCategory" value="copyright infringement">
-                        {{ "programs.reportRadioButtonCopyright"|trans({}, "catroweb") }}</label>
+                    <label><input type="radio" id="report-copyright" name="reportCategory"
+                                  value="copyright infringement">
+                      {{ "programs.reportRadioButtonCopyright"|trans({}, "catroweb") }}</label>
                   </div>
                   <div class="radio">
-                    <label><input type="radio"  id="report-spam" name="reportCategory" value="spam">
-                        {{ "programs.reportRadioButtonSpam"|trans({}, "catroweb") }}</label>
+                    <label><input type="radio" id="report-spam" name="reportCategory" value="spam">
+                      {{ "programs.reportRadioButtonSpam"|trans({}, "catroweb") }}</label>
                   </div>
                   <div class="radio">
                     <label><input type="radio" id="report-dislike" name="reportCategory" value="dislike">
-                        {{ "programs.reportRadioButtonDislike"|trans({}, "catroweb") }}</label>
+                      {{ "programs.reportRadioButtonDislike"|trans({}, "catroweb") }}</label>
                   </div>
                 </div>
             </div>
 
-            <textarea id="reportReason" placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}"></textarea>
+            <textarea id="reportReason"
+                      placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}"></textarea>
             <br>
             <button id="report-cancel" class="btn-white">{{ "cancel"|trans({}, "catroweb") }}</button>
             <button id="report-report" class="btn-green">{{ "report"|trans({}, "catroweb") }}</button>
@@ -377,8 +404,8 @@
   </div>
 
   {#
-   # CODEVIEW
-   #}
+     # CODEVIEW
+     #}
   {% if program_details.languageVersion >= 0.97 %}
     {{ render(controller('AppBundle:Web/CodeView:viewCode', {'id' : program.id})) }}
   {% endif %}
@@ -398,7 +425,8 @@
     </div>
     <div>
       <div class="img-downloads icon"></div>
-      <span class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
+      <span
+          class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
     </div>
     <div>
       <div class="img-views icon"></div>
@@ -416,18 +444,18 @@
 
   <div id="remix-graph-modal">
     <div class="close-remix-graph-modal">
-      <img class="close-button" src="{{ asset('images/symbols/close_button.svg') }}" />
+      <img class="close-button" src="{{ asset('images/symbols/close_button.svg') }}"/>
     </div>
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
 
   {% if  program.tags|length > 0  or program.extensions|length > 0 %}
-  <div id="recommendations">
-    <div id="recsys-headline">
-      <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+    <div id="recommendations">
+      <div id="recsys-headline">
+        <h2>{{ 'recommender.similarPrograms'|trans({}, 'catroweb') }}</h2>
+      </div>
+      <div class="programs"></div>
     </div>
-    <div class="programs"></div>
-  </div>
   {% endif %}
 
   <div id="specific-programs-recommendations">
@@ -443,7 +471,6 @@
 
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
-  <script src="{{ asset('js/custom/ProgramDescription.js') }}"></script>
   <script src="{{ asset('js/custom/ProgramComments.js') }}"></script>
   <script>
     new ProgramComments({{ program_details.id }}, 5, 5, 5, {{ (program_details.comments|length) }},
@@ -463,365 +490,388 @@
       "{{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::NOT_LOGGED_IN') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::NO_ADMIN_RIGHTS') }}"
-    );
+    )
+  </script>
+  <script src="{{ asset('js/custom/ProgramDescription.js') }}"></script>
+  <script>
     new ProgramDescription({{ program.id }},
       '{{ ("show-more")|trans({}, "catroweb") }}',
       '{{ ("show-less")|trans({}, "catroweb") }}',
-      {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
-      {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }},
-      {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
-    );
+        {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
+    )
   </script>
 
   <script>
-    $(function()
-    {
-      var copy_button = $('.btn-copy');
+    $(function () {
+      var copy_button = $('.btn-copy')
 
       copy_button.tooltip({
-        trigger: 'manual',
+        trigger  : 'manual',
         placement: 'right',
         container: '.btn-copy'
-      });
+      })
 
-      copy_button.on('shown.bs.tooltip', function()
-      {
-        setTimeout(function() {
-          copy_button.tooltip('hide');
-        }, 1000);
-      });
+      copy_button.on('shown.bs.tooltip', function () {
+        setTimeout(function () {
+          copy_button.tooltip('hide')
+        }, 1000)
+      })
 
-      var cb = new Clipboard('.btn-copy');
-      cb.on('success', function(e) {
+      var cb = new Clipboard('.btn-copy')
+      cb.on('success', function () {
         copy_button
         .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')
         .addClass('tooltip-success')
-        .removeClass('tooltip-danger');
-        copy_button.tooltip('show');
-        $('.btn-copy +.tooltip .tooltip-inner').prepend("<i class='fa fa-check' style='padding-right: 1em'></i>");
-      });
+        .removeClass('tooltip-danger')
+        copy_button.tooltip('show')
+        $('.btn-copy +.tooltip .tooltip-inner').prepend('<i class=\'fa fa-check\' style=\'padding-right: 1em\'></i>')
+      })
 
-      cb.on('error', function(e) {
+      cb.on('error', function () {
         copy_button
         .attr('data-original-title', '{{ "clipboard.fail"|trans({}, "catroweb") }}')
         .addClass('tooltip-danger')
-        .removeClass('tooltip-success');
-        copy_button.tooltip('show');
-        $('.btn-copy +.tooltip .tooltip-inner').prepend("<i class='fa fa-close' style='padding-right: 1em'></i>");
-      });
+        .removeClass('tooltip-success')
+        copy_button.tooltip('show')
+        $('.btn-copy +.tooltip .tooltip-inner').prepend('<i class=\'fa fa-close\' style=\'padding-right: 1em\'></i>')
+      })
 
-    });
+    })
 
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
-      '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}','{{ asset('images/symbols/loading.gif') }}',
-      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}','{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
-      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}');
-    program.getApkStatus();
-    program.createLinks();
-    program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');
+      '{{ 'apk.preparing'|trans({}, "catroweb") }}', '{{ 'apk.text'|trans({}, "catroweb") }}', '{{ asset('images/symbols/loading.gif') }}',
+      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}', '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
+      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}')
+    program.getApkStatus()
+    program.createLinks()
+    program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}')
 
-    var download_href = document.getElementById("url-download").href;
+    var download_href = document.getElementById('url-download').href
 
-    function blockEventListener(event) {
-      event.preventDefault();
+    function blockEventListener (event)
+    {
+      event.preventDefault()
     }
 
-    $(document).on("click", "#url-download", function() {
-      var url_link = document.getElementById("url-download");
-      if(url_link.href !== 'javascript:void(0)') {
-          url_link.href = 'javascript:void(0)';
+    $(document).on('click', '#url-download', function () {
+      var url_link = document.getElementById('url-download')
+      if (url_link.href !== 'javascript:void(0)')
+      {
+        url_link.href = 'javascript:void(0)'
 
-        setTimeout(function() {
-          url_link.href = download_href;
-        }, 5000);
+        setTimeout(function () {
+          url_link.href = download_href
+        }, 5000)
 
-        window.location = download_href;
+        window.location = download_href
       }
-      return false;
-    });
+      return false
+    })
 
-    var undefined;
+    var undefined
     var programID = {{ program.id }};
-    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', undefined, programID);
-    recs.initRecsys();
+    var recs = new ProgramLoader('#recommendations', '{{ path('api_recsys_programs') }}', undefined, programID)
+    recs.initRecsys()
 
     var recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE') }};
-    var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', undefined, programID, recommendedByPageId);
-    specificRecommender.initSpecificRecsys();
+    var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', undefined, programID, recommendedByPageId)
+    specificRecommender.initSpecificRecsys()
 
-    counter = 10;
-    var cachedRemixData = null;
+    counter = 10
+    var cachedRemixData = null
     var remixGraphTranslations = {
-      ok: "{{ "ok"|trans({}, "catroweb") }}",
-      by: "{{ "remixGraph.by"|trans({}, "catroweb") }}",
-      open: "{{ "remixGraph.open"|trans({}, "catroweb") }}",
-      showPaths: "{{ "remixGraph.showPaths"|trans({}, "catroweb") }}",
-      programNotAvailableErrorTitle: "{{ "remixGraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
+      ok                                 : "{{ "ok"|trans({}, "catroweb") }}",
+      by                                 : "{{ "remixGraph.by"|trans({}, "catroweb") }}",
+      open                               : "{{ "remixGraph.open"|trans({}, "catroweb") }}",
+      showPaths                          : "{{ "remixGraph.showPaths"|trans({}, "catroweb") }}",
+      programNotAvailableErrorTitle      : "{{ "remixGraph.programNotAvailableErrorTitle"|trans({}, "catroweb") }}",
       programNotAvailableErrorDescription: "{{ "remixGraph.programNotAvailableErrorDescription"|trans({}, "catroweb") }}",
-      programNotAvailable: "{{ "remixGraph.programNotAvailable"|trans({}, "catroweb") }}",
-      programUnknownUser: "{{ "remixGraph.programUnknownUser"|trans({}, "catroweb") }}"
-    };
+      programNotAvailable                : "{{ "remixGraph.programNotAvailable"|trans({}, "catroweb") }}",
+      programUnknownUser                 : "{{ "remixGraph.programUnknownUser"|trans({}, "catroweb") }}"
+    }
 
     var PROGRAM_LIKE_TYPE_NONE = {{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_NONE') }};
 
-    function convertToHumanFriendlyNumberText(number) {
-        if (number >= 10000) {
-            return (number / 1000.0).toFixed(0) + "k";
-        } else if (number >= 1000) {
-            return (number / 1000.0).toFixed(1).replace(".0", "") + "k";
-        } else {
-            return number;
-        }
+    function convertToHumanFriendlyNumberText (number)
+    {
+      if (number >= 10000)
+      {
+        return (number / 1000.0).toFixed(0) + 'k'
+      }
+      else if (number >= 1000)
+      {
+        return (number / 1000.0).toFixed(1).replace('.0', '') + 'k'
+      }
+      else
+      {
+        return number
+      }
     }
 
-    function updateLikeCount(likeType, likeTypeCount, totalLikeCount) {
-        $("a.program-like-button").removeClass("selected");
-        $("#program-like-buttons-container > .program-like-counter").text(convertToHumanFriendlyNumberText(totalLikeCount));
-        if (likeType == PROGRAM_LIKE_TYPE_NONE) {
-            $("#program-like-detail-container").html("&nbsp;");
-            return;
-        }
-        var likeTypeButton = $("a.program-like-button[data-like-type=" + likeType + "]");
-        likeTypeButton.addClass("selected");
-        var singularOrPlural = (likeTypeCount == 1) ? true : false;
-        var translatedDetailSpanTextTemplate = likeTypeButton.children(singularOrPlural ? ".singular" : ".plural")[0];
-        var replaceCount = '<span class="program-like-counter">' + convertToHumanFriendlyNumberText(likeTypeCount) + '<span>';
-        var translatedDetailText = translatedDetailSpanTextTemplate.innerHTML.replace((singularOrPlural ? "1" : "2"), replaceCount);
-        $("#program-like-detail-container").html(translatedDetailText);
+    function updateLikeCount (likeType, likeTypeCount, totalLikeCount)
+    {
+      var programLikeDetailContainer = $('#program-like-detail-container');
+      $('a.program-like-button').removeClass('selected')
+      $('#program-like-buttons-container > .program-like-counter').text(convertToHumanFriendlyNumberText(totalLikeCount))
+      if (likeType === PROGRAM_LIKE_TYPE_NONE)
+      {
+        programLikeDetailContainer.html('&nbsp;')
+        return
+      }
+      var likeTypeButton = $('a.program-like-button[data-like-type=' + likeType + ']')
+      likeTypeButton.addClass('selected')
+      var singularOrPlural = (likeTypeCount === 1)
+      var translatedDetailSpanTextTemplate = likeTypeButton.children(singularOrPlural ? '.singular' : '.plural')[0]
+      var replaceCount = '<span class="program-like-counter">' + convertToHumanFriendlyNumberText(likeTypeCount) + '<span>'
+      var translatedDetailText = translatedDetailSpanTextTemplate.innerHTML.replace((singularOrPlural ? '1' : '2'), replaceCount)
+      programLikeDetailContainer.html(translatedDetailText)
     }
 
-    $(document).ready(function() {
-      var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}");
+    $(document).ready(function () {
+      var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}")
       var recommendedByRemixGraphPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
-      var networkDirector = new NetworkDirector();
-      var remixGraph = RemixGraph.getInstance();
-      remixGraph.init(programID, recommendedByRemixGraphPageId, "remix-graph-modal", "remix-graph-layer", "close-button",
-          "{{ program_details_url_template }}", "{{ path('click_stats') }}", remixGraphTranslations);
+      var networkDirector = new NetworkDirector()
+      var remixGraph = RemixGraph.getInstance()
+      remixGraph.init(programID, recommendedByRemixGraphPageId, 'remix-graph-modal', 'remix-graph-layer', 'close-button',
+        "{{ program_details_url_template }}", "{{ path('click_stats') }}", remixGraphTranslations)
 
-      updateLikeCount({{ program_details.likeType }}, {{ program_details.likeTypeCount }}, {{ program_details.totalLikeCount }});
+      updateLikeCount({{ program_details.likeType }}, {{ program_details.likeTypeCount }}, {{ program_details.totalLikeCount }})
 
-      $("#remix-graph-modal-link").animatedModal({
+      $('#remix-graph-modal-link').animatedModal({
         modalTarget: 'remix-graph-modal',
-        animatedIn: 'zoomInUp',
+        animatedIn : 'zoomInUp',
         animatedOut: 'bounceOutDown',
-        color: '#177f8d',
-        beforeOpen: function() {
-          remixGraph.destroy();
-          if (cachedRemixData != null) {
-            document.addEventListener('gesturestart', blockEventListener);
-            document.ontouchmove = blockEventListener;
-            var networkBuilder = new NetworkBuilder(programID, "remix-graph-layer", remixGraphTranslations, cachedRemixData);
-            var networkDescription = networkDirector.construct(networkBuilder);
-            remixGraph.render(loadingAnimation, networkDescription);
-          } else {
+        color      : '#177f8d',
+        beforeOpen : function () {
+          remixGraph.destroy()
+          if (cachedRemixData != null)
+          {
+            document.addEventListener('gesturestart', blockEventListener)
+            document.ontouchmove = blockEventListener
+            var networkBuilder = new NetworkBuilder(programID, 'remix-graph-layer', remixGraphTranslations, cachedRemixData)
+            var networkDescription = networkDirector.construct(networkBuilder)
+            remixGraph.render(loadingAnimation, networkDescription)
+          }
+          else
+          {
             $.ajax({
-              url: "{{ path('program_remix_graph', { 'id' : program.id }) }}",
-              type: "get",
-              success: function(remixData) {
-                cachedRemixData = remixData;
-                document.addEventListener('gesturestart', blockEventListener);
-                document.ontouchmove = blockEventListener;
-                var networkBuilder = new NetworkBuilder(programID, "remix-graph-layer", remixGraphTranslations, remixData);
-                var networkDescription = networkDirector.construct(networkBuilder);
-                remixGraph.render(loadingAnimation, networkDescription);
+              url    : "{{ path('program_remix_graph', { 'id' : program.id }) }}",
+              type   : 'get',
+              success: function (remixData) {
+                cachedRemixData = remixData
+                document.addEventListener('gesturestart', blockEventListener)
+                document.ontouchmove = blockEventListener
+                var networkBuilder = new NetworkBuilder(programID, 'remix-graph-layer', remixGraphTranslations, remixData)
+                var networkDescription = networkDirector.construct(networkBuilder)
+                remixGraph.render(loadingAnimation, networkDescription)
               },
-              error: function(data) {
-                alert("Unable to fetch remix-graph!");
+              error  : function () {
+                alert('Unable to fetch remix-graph!')
               }
-            });
+            })
           }
-          console.log("The animation was called");
+          console.log('The animation was called')
         },
-        afterOpen: function() {
-          loadingAnimation.show();
-          console.log("The animation is completed");
+        afterOpen  : function () {
+          loadingAnimation.show()
+          console.log('The animation is completed')
         },
-        beforeClose: function() {
-          console.log("The animation was called");
-          loadingAnimation.hide();
+        beforeClose: function () {
+          console.log('The animation was called')
+          loadingAnimation.hide()
         },
-        afterClose: function() {
-          console.log("The animation is completed");
-          document.removeEventListener('gesturestart', blockEventListener);
-          document.ontouchmove = null;
+        afterClose : function () {
+          console.log('The animation is completed')
+          document.removeEventListener('gesturestart', blockEventListener)
+          document.ontouchmove = null
         }
-      });
+      })
 
-      $(document).on("click", "#remix-graph-button", function() {
-          $("#remix-graph-modal-link").click();
-      });
+      $(document).on('click', '#remix-graph-button', function () {
+        $('#remix-graph-modal-link').click()
+      })
 
-      $(document).on("click", "a.program-like-button", function(event) {
-          event.preventDefault();
-          var type = $(this).attr("data-like-type");
-          var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type;
-          var username = "{{ user_name }}";
-          if (username === "") {
-              window.location.href = url;
-              return false;
-          }
+      $(document).on('click', 'a.program-like-button', function (event) {
+        event.preventDefault()
+        var type = $(this).attr('data-like-type')
+        var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type
+        var username = "{{ user_name }}"
+        if (username === '')
+        {
+          window.location.href = url
+          return false
+        }
 
-          $("#program-like-detail-container").text("{{ "pleaseWait"|trans({}, "catroweb") }}");
-          $("a.program-like-button").removeClass("selected");
-          $(this).addClass("selected");
+        $('#program-like-detail-container').text("{{ "pleaseWait"|trans({}, "catroweb") }}")
+        $('a.program-like-button').removeClass('selected')
+        $(this).addClass('selected')
 
-          $.ajax({
-              url: url,
-              type: "get",
-              data: { type: type },
-              success: function(data) {
-                  if (data.statusCode !== {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
-                      if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
-                          window.location.href = url;
-                          return;
-                      }
-                      alert("something went wrong");
-                      $(this).removeClass("selected");
-                      return;
-                  }
-                  updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount);
-              },
-              error: function(data) {
-                  alert("something went terribly wrong");
-                  $(this).removeClass("selected");
+        $.ajax({
+          url    : url,
+          type   : 'get',
+          data   : {type: type},
+          success: function (data) {
+            if (data.statusCode !== {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }})
+            {
+              if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }})
+              {
+                window.location.href = url
+                return
               }
-          });
-          return false;
-      });
-
-      $(document).on("click", "#nolb-submission-button", function() {
-         var username = "{{ user_name }}";
-         var programURL = "{{ program_url }}";
-         var projectID = $('#nolb-submission-project-id').val();
-
-        if(projectID === ''){
-          $('#nolb-submission-project-id').addClass('text-area-empty');
-          return;
-        }
-        $('#nolb-submission-project-id').removeClass('text-area-empty');
-
-         var xhr = $.ajax({
-             type: "POST",
-             crossDomain: true,
-             url: "https://www.pmdnolb.cloud/?r=service/upload_program",
-             data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
-             success: function(data){
-               var response = JSON.parse(data);
-               if(response.code === 1) {
-                 $('#nolb-submission-successful').show();
-               }
-               else {
-                 $('#nolb-submission-failed').show();
-               }
-
-             },
-             error: function() {
-             }
-         });
-         $('#nolb-submission-box').hide();
-      });
-
-
-      $(document).on("click", "#nolb-submission-successful-ok", function(){
-        $('#nolb-submission-successful').hide();
-      });
-
-      $(document).on("click", "#nolb-submission-failed-ok", function(){
-        $('#nolb-submission-failed').hide();
-      });
-
-      $(document).on("click", "#nolb-project-button", function(){
-          $('#nolb-submission-box').show();
-      });
-
-      $(document).on("click", "#nolb-submission-box-cancel", function(){
-          $('#nolb-submission-box').hide();
-      });
-
-      $(document).one('click', ".rec-programs", function(event) {
-
-        event.preventDefault();
-
-        var href = $(this).attr('href');
-        var type = "no type";
-        var additions = 0;
-
-        if (href.indexOf("tag") > 0) {
-          type = "tags";
-          additions = (href.match(/[0-9]+/))[0];
-        }
-        else if (href.indexOf("extension") > 0) {
-          type = "extensions";
-          var list = href.split("/");
-          additions = list[list.length-1];
-        }
-        else if (href.indexOf("program") > 0) {
-          type = "programs";
-          additions = (href.match(/[0-9]+/))[0];
-
-          var containerElement = $(this).parent(".program").parent(".programs").parent();
-          if (containerElement.attr("id") === "specific-programs-recommendations") {
-              type = "rec_specific_programs";
-          }
-        }
-
-        $.ajaxSetup({async: false});
-        $.post("{{ path('click_stats') }}", {type: type, recFromID: {{ program.id }}, recID: additions}, function( data ) {
-          if (data === 'error')
-            console.log("No click statistic is created!");
-        }).fail(function (data) {
-            console.log(data);
-        });
-
-        window.location.href = href;
-
-        {#$.ajax({#}
-          {#url:"../click-statistic",#}
-          {#type: "post",#}
-          {#data:{type: type, recFromID: {{ program.id }}, recID: additions},#}
-          {#success: function(data) {#}
-            {#if (data == 'error')#}
-              {#console.log("No click statistic is created!");#}
-          {#},#}
-          {#error: function(data) {#}
-            {#console.log("Connection problem!");#}
-          {#}#}
-        {#});#}
-
-      });
-    });
-
-
-    $(function(){
-        $(".fab,.backdrop").click(function(){
-            if($(".backdrop").is(":visible")){
-                $(".backdrop").fadeOut(125);
-                $("#action-arrow").removeClass("fa-angle-down");
-                $("#action-arrow").addClass("fa-angle-up");
-                $(".fab.child")
-                    .stop()
-                    .animate({
-                        bottom  : $("#masterfab").css("bottom"),
-                        opacity : 0
-                    },125,function(){
-                        $(this).hide();
-                    });
-            }else{
-                $(".backdrop").fadeIn(125);
-                $("#action-arrow").removeClass("fa-angle-up");
-                $("#action-arrow").addClass("fa-angle-down");
-                $(".fab.child").each(function(){
-                    $(this)
-                        .stop()
-                        .show()
-                        .animate({
-                            bottom  : (parseInt($("#masterfab").css("bottom")) + parseInt($("#masterfab").outerHeight())
-                            + 70 * $(this).data("subitem") - $(".fab.child").outerHeight()) + "px",
-                            opacity : 1
-                        },125);
-                });
+              alert('something went wrong')
+              $(this).removeClass('selected')
+              return
             }
-        });
-    });
+            updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount)
+          },
+          error  : function () {
+            alert('something went terribly wrong')
+            $(this).removeClass('selected')
+          }
+        })
+        return false
+      })
+
+      $(document).on('click', '#nolb-submission-button', function () {
+        var username = "{{ user_name }}"
+        var programURL = "{{ program_url }}"
+        var nolbSubmissionProjectId = $('#nolb-submission-project-id')
+        var projectID = nolbSubmissionProjectId.val()
+
+        if (projectID === '')
+        {
+          nolbSubmissionProjectId.addClass('text-area-empty')
+          return
+        }
+        nolbSubmissionProjectId.removeClass('text-area-empty')
+
+        $.ajax({
+          type       : 'POST',
+          crossDomain: true,
+          url        : 'https://www.pmdnolb.cloud/?r=service/upload_program',
+          data       : JSON.stringify({username: username, PID: projectID, progurl: programURL}),
+          success    : function (data) {
+            var response = JSON.parse(data)
+            if (response.code === 1)
+            {
+              $('#nolb-submission-successful').show()
+            }
+            else
+            {
+              $('#nolb-submission-failed').show()
+            }
+
+          },
+          error      : function () {
+          }
+        })
+        $('#nolb-submission-box').hide()
+      })
+
+      $(document).on('click', '#nolb-submission-successful-ok', function () {
+        $('#nolb-submission-successful').hide()
+      })
+
+      $(document).on('click', '#nolb-submission-failed-ok', function () {
+        $('#nolb-submission-failed').hide()
+      })
+
+      $(document).on('click', '#nolb-project-button', function () {
+        $('#nolb-submission-box').show()
+      })
+
+      $(document).on('click', '#nolb-submission-box-cancel', function () {
+        $('#nolb-submission-box').hide()
+      })
+
+      $(document).one('click', '.rec-programs', function (event) {
+
+        event.preventDefault()
+
+        var href = $(this).attr('href')
+        var type = 'no type'
+        var additions = 0
+
+        if (href.indexOf('tag') > 0)
+        {
+          type = 'tags'
+          additions = (href.match(/[0-9]+/))[0]
+        }
+        else if (href.indexOf('extension') > 0)
+        {
+          type = 'extensions'
+          var list = href.split('/')
+          additions = list[list.length - 1]
+        }
+        else if (href.indexOf('program') > 0)
+        {
+          type = 'programs'
+          additions = (href.match(/[0-9]+/))[0]
+
+          var containerElement = $(this).parent('.program').parent('.programs').parent()
+          if (containerElement.attr('id') === 'specific-programs-recommendations')
+          {
+            type = 'rec_specific_programs'
+          }
+        }
+
+        $.ajaxSetup({async: false})
+        $.post("{{ path('click_stats') }}", {
+          type     : type,
+          recFromID: {{ program.id }},
+          recID    : additions
+        }, function (data) {
+          if (data === 'error')
+          {
+            console.log('No click statistic is created!')
+          }
+        }).fail(function (data) {
+          console.log(data)
+        })
+
+        window.location.href = href
+      })
+    })
+
+    $(function () {
+
+      var backdrop = $('.backdrop')
+      var actionArrow = $('#actionArrow')
+      var masterfab = $('#masterfab')
+      $('.fab,.backdrop').click(function () {
+        if (backdrop.is(':visible'))
+        {
+          backdrop.fadeOut(125)
+          actionArrow.removeClass('fa-angle-down')
+          actionArrow.addClass('fa-angle-up')
+          $('.fab.child')
+          .stop()
+          .animate({
+            bottom : masterfab.css('bottom'),
+            opacity: 0
+          }, 125, function () {
+            $(this).hide()
+          })
+        }
+        else
+        {
+          backdrop.fadeIn(125)
+          actionArrow.removeClass('fa-angle-up')
+          actionArrow.addClass('fa-angle-down')
+          $('.fab.child').each(function () {
+            $(this)
+            .stop()
+            .show()
+            .animate({
+              bottom : (parseInt(masterfab.css('bottom')) + parseInt(masterfab.outerHeight())
+                + 70 * $(this).data('subitem') - $('.fab.child').outerHeight()) + 'px',
+              opacity: 1
+            }, 125)
+          })
+        }
+      })
+    })
   </script>
 {% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/login.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/profile.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+
+   {%  include 'profile/myProfileData.html.twig' %}
+
+  <div class="clear mt-5"></div>
+    {% if not app.user.limited %}
+      <div id="myprofile-programs">
+    {% else %}
+      <div id="user-programs">
+    {% endif %}
+    <h1 class="header mb-0">
+      {{ "profile.myPrograms"|trans({}, "catroweb") }}
+    </h1>
+    <div class="programs"></div>
+  </div>
+
+  <div class="clear mt-5"></div>
+    <h1 class="header">
+      {{ "profile.follows"|trans({}, "catroweb") }} ({{ app.user.following|length }})
+    </h1>
+  <div id="list-follows"></div>
+
+  <div class="clear mt-5"></div>
+    <h1 class="header">
+      {{ "profile.follower"|trans({}, "catroweb") }} ({{ app.user.followers|length }})
+    </h1>
+  <div id="list-follower"></div>
+
+{% endblock %}
+
+{% block js %}
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}"/>
+  <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
+  <script src="{{ asset('js/custom/MyProfile.js') }}"></script>
+  <script src="{{ asset('js/custom/ProfileLoader.js') }}"></script>
+  <script src="{{ asset('js/custom/PasswordVisibilityToggler.js') }}"></script>
+
+  <script>
+
+    let programs
+    {% if not app.user.limited %}
+      programs = new ProgramLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
+      // load programs need profile!
+      let profile = new MyProfile('{{ path('profile') }}',
+        '{{ path('email_save') }}', '{{ path('country_save') }}', '{{ path('password_save') }}',
+        '{{ path('profile_delete_program') }}', '{{ path('profile_delete_account') }}',
+        '{{ path('profile_toggle_program_visibility') }}',
+        '{{ path('profile_upload_avatar') }}',
+        {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_EMAIL_ALREADY_EXISTS') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_EMAIL_MISSING') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_EMAIL_INVALID') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_COUNTRY_INVALID') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_USERNAME_PASSWORD_EQUAL') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_PASSWORD_TOO_SHORT') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_PASSWORD_TOO_LONG') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::PASSWORD_INVALID') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
+        {{ constant('Catrobat\\AppBundle\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }},
+        {{ constant('Catrobat\\AppBundle\\Controller\\Web\\ProfileController::MAX_UPLOAD_SIZE') }},
+        '{{ "myprofile.success"|trans({}, "catroweb") }}',
+        '{{ "myprofile.checkMail"|trans({}, "catroweb") }}',
+        '{{ "myprofile.passwordUpdated"|trans({}, "catroweb") }}',
+        '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}',
+        '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}'
+      )
+      profile.init()
+      programs.initProfile({{ app.user.id }})
+    {% else %}
+      programs = new ProgramLoader('#user-programs', '{{ path('api_user_programs') }}')
+      programs.initProfile({{ app.user.id }})
+    {% endif %}
+
+    let follows = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follows' }) }}',
+    '{{ path('profile') }}', '#list-follows', '{{ asset('images/default/avatar_default.png') }}')
+    follows.init()
+
+    let follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}',
+    '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
+    follower.init()
+  </script>
+{% endblock %}

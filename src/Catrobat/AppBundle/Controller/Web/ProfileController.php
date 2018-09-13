@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Intl\Intl;
-use Catrobat\AppBundle\Entity\UserManager;
 
 class ProfileController extends Controller
 {
@@ -21,27 +20,31 @@ class ProfileController extends Controller
   const MAX_UPLOAD_SIZE = 5242880; // 5*1024*1024
   const MAX_AVATAR_SIZE = 300;
 
-
   /**
    * @Route("/profile/{id}", name="profile", requirements={"id":"\d+"}, defaults={"id" = 0}, methods={"GET"})
+   * @Route("/profile/")  // Overwrite for FosUser Profile Route (We don't use it!)
    *
    * @param Request $request
-   * @param         $id
+   * @param integer $id
+   *
+   * @throws \Exception
    *
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public function profileAction(Request $request, $id)
+  public function profileAction(Request $request, $id = 0)
   {
     /**
      * @var $user User
      */
-    $twig = 'profile.html.twig';
+    $id = (integer) $id;
+    $twig = 'profile/profileHandler.html.twig';
+    $my_profile = false;
     $program_count = 0;
 
-    if ($id === 0)
+    if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id) )
     {
       $user = $this->getUser();
-      $twig = 'myprofile.html.twig';
+      $my_profile = true;
     }
     else
     {
@@ -72,155 +75,13 @@ class ProfileController extends Controller
       'secondMail'     => $secondMail,
       'oauth_user'     => $oauth_user,
       'nolb_user'      => $nolb_user,
+      'minPassLength'  => self::MIN_PASSWORD_LENGTH,
+      'maxPassLength'  => self::MAX_PASSWORD_LENGTH,
+      'username'       => $user->getUsername(),
+      'myProfile'      => $my_profile
     ]);
   }
 
-
-  /**
-   * @Route("/profile/edit", name="profile_edit", methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   */
-  public function profileEditAction(Request $request)
-  {
-    /**
-     * @var $user User
-     */
-    $twig = 'myprofileEdit.html.twig';
-
-    $user = $this->getUser();
-
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-
-    \Locale::setDefault(substr($request->getLocale(), 0, 2));
-    $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
-    $firstMail = $user->getEmail();
-    $secondMail = $user->getAdditionalEmail();
-    $username = $user->getUsername();
-    $nolb_user = $user->getNolbUser();
-
-    return $this->get('templating')->renderResponse($twig, [
-      'profile'       => $user,
-      'minPassLength' => self::MIN_PASSWORD_LENGTH,
-      'maxPassLength' => self::MAX_PASSWORD_LENGTH,
-      'country'       => $country,
-      'firstMail'     => $firstMail,
-      'secondMail'    => $secondMail,
-      'username'      => $username,
-      'nolb_user'     => $nolb_user,
-    ]);
-  }
-
-
-  /**
-   * @Route("/emailEdit", name="email_edit", methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   */
-  public function emailEditAction()
-  {
-    /**
-     * @var $user User
-     */
-    $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-    $nolb_user = $user->getNolbUser();
-    $twig = 'emailEdit.html.twig';
-
-    return $this->get('templating')->renderResponse($twig, [
-      'nolb_user' => $nolb_user,
-    ]);
-  }
-
-
-  /**
-   * @Route("/avatarEdit", name="avatar_edit", methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   */
-  public function avatarEditAction()
-  {
-    /**
-     * @var $user User
-     */
-    $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-    $nolb_user = $user->getNolbUser();
-    $twig = 'avatarEdit.html.twig';
-
-    return $this->get('templating')->renderResponse($twig, [
-      'nolb_user' => $nolb_user,
-    ]);
-  }
-
-
-  /**
-   * @Route("/passwordEdit", name="password_edit", methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   */
-  public function passwordEditAction()
-  {
-    /**
-     * @var $user User
-     */
-    $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-    $nolb_user = $user->getNolbUser();
-    $twig = 'passwordEdit.html.twig';
-
-    return $this->get('templating')->renderResponse($twig, [
-      'minPassLength' => self::MIN_PASSWORD_LENGTH,
-      'maxPassLength' => self::MAX_PASSWORD_LENGTH,
-      'nolb_user'     => $nolb_user,
-    ]);
-  }
-
-
-  /**
-   * @Route("/countryEdit", name="country_edit", methods={"GET"})
-   *
-   * @param Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   */
-  public function countryEditAction()
-  {
-    /**
-     * @var $user User
-     */
-    $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
-    }
-    $nolb_user = $user->getNolbUser();
-    $twig = 'countryEdit.html.twig';
-
-    return $this->get('templating')->renderResponse($twig, [
-      'nolb_user' => $nolb_user,
-    ]);
-  }
 
   /**
    * @Route("/countrySave", name="country_save", methods={"POST"})
@@ -249,7 +110,7 @@ class ProfileController extends Controller
     } catch (\Exception $e)
     {
       return JsonResponse::create([
-        'statusCode' => $e->getMessage()
+        'statusCode' => $e->getMessage(),
       ]);
     }
 
@@ -258,7 +119,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK
+      'statusCode' => StatusCode::OK,
     ]);
   }
 
@@ -292,7 +153,7 @@ class ProfileController extends Controller
     if (!$bool)
     {
       return JsonResponse::create([
-        'statusCode' => "777"
+        'statusCode' => StatusCode::PASSWORD_INVALID,
       ]);
     }
 
@@ -305,7 +166,7 @@ class ProfileController extends Controller
     } catch (\Exception $e)
     {
       return JsonResponse::create([
-        'statusCode' => $e->getMessage()
+        'statusCode' => $e->getMessage(),
       ]);
     }
 
@@ -317,8 +178,8 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK,
-      'saved_password' => "supertoll"
+      'statusCode'     => StatusCode::OK,
+      'saved_password' => "supertoll",
     ]);
   }
 
@@ -344,27 +205,33 @@ class ProfileController extends Controller
     $firstMail = $request->request->get('firstEmail');
     $secondMail = $request->request->get('secondEmail');
 
+    if ($firstMail === '' && $secondMail === '')
+    {
+      return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_MISSING]);
+    }
+
     try
     {
       $this->validateEmail($firstMail);
+    } catch (\Exception $e)
+    {
+      return JsonResponse::create(['statusCode' => $e->getMessage(), 'email' => 1]);
+    }
+    try
+    {
       $this->validateEmail($secondMail);
     } catch (\Exception $e)
     {
-      return JsonResponse::create(['statusCode' => $e->getMessage()]);
-    }
-
-    if ($firstMail === '' && $secondMail === '')
-    {
-      return JsonResponse::create(['statusCode' => StatusCode::USER_UPDATE_EMAIL_FAILED]);
+      return JsonResponse::create(['statusCode' => $e->getMessage(), 'email' => 2]);
     }
 
     if ($this->checkEmailExists($firstMail))
     {
-      return JsonResponse::create(['statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 1]);
+      return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 1]);
     }
     if ($this->checkEmailExists($secondMail))
     {
-      return JsonResponse::create(['statusCode' => StatusCode::EMAIL_ALREADY_EXISTS, 'email' => 2]);
+      return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 2]);
     }
 
     if ($firstMail !== '' && $firstMail !== $user->getEmail())
@@ -393,7 +260,7 @@ class ProfileController extends Controller
     $this->get('usermanager')->updateUser($user);
 
     return JsonResponse::create([
-      'statusCode' => StatusCode::OK
+      'statusCode' => StatusCode::OK,
     ]);
   }
 
@@ -439,8 +306,6 @@ class ProfileController extends Controller
   /**
    * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
    *
-   * @param Request $request
-   *
    * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function deleteAccountAction()
@@ -479,8 +344,9 @@ class ProfileController extends Controller
   /**
    * @Route("/followUser/{id}", name="follow_user", methods = {"GET"}, requirements={"id":"\d+"}, defaults={"id" = 0})
    *
-   * @param Request $request
    * @param         $id
+   *
+   * @throws \Exception
    *
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
@@ -701,7 +567,7 @@ class ProfileController extends Controller
    */
   public function country($code, $locale = null)
   {
-    $countries = Intl::getRegionBundle()->getCountryNames($locale ? : $this->localeDetector->getLocale());
+    $countries = Intl::getRegionBundle()->getCountryNames($locale ?: $this->localeDetector->getLocale());
     if (array_key_exists($code, $countries))
     {
       return $this->fixCharset($countries[$code]);

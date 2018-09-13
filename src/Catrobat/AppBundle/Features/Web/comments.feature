@@ -34,12 +34,24 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: There should be a commend section on every program page
     Given I am on "/pocketcode/program/1"
     Then I should see "Comments"
-    And I should see "Send"
+    And the element ".add-comment-button" should be visible
+
+  Scenario: It should be possible to toggle the visibility of the post a comment container
+    Given I am on "/pocketcode/program/1"
+    Then I should see "Comments"
+    And the element "#show-add-comment-button" should be visible
+    And the element "#hide-add-comment-button" should not be visible
+    And the element "#user-comment-wrapper" should not be visible
+    When I click "#show-add-comment-button"
+    Then the element "#show-add-comment-button" should not be visible
+    And the element "#hide-add-comment-button" should be visible
+    And the element "#user-comment-wrapper" should be visible
 
   Scenario: I should not be able to write a comment without being logged in
     Given I am on "/pocketcode/program/1"
+    And I click "#show-add-comment-button"
     And I write "hello" in textbox
-    And I click "#comment-post-button"
+    When I click "#comment-post-button"
     And I wait 200 milliseconds
     Then I should be on "/pocketcode/login"
 
@@ -47,6 +59,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Superman" with the password "123456"
     And I am on "/pocketcode/program/3"
     And the element ".single-comment" should not exist
+    And I click "#show-add-comment-button"
     And I write "hello" in textbox
     And I click "#comment-post-button"
     And I wait for a second
@@ -151,6 +164,7 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to write a comment when I am logged in and it should notify the owner
     Given I log in as "Gregor" with the password "123456"
     And I am on "/pocketcode/program/1"
+    And I click "#show-add-comment-button"
     And I write "hello" in textbox
     When I click "#comment-post-button"
     And I wait for a second
@@ -163,6 +177,7 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to write a comment for my own program but I wont get a notification
     Given I log in as "Superman" with the password "123456"
     And I am on "/pocketcode/program/1"
+    And I click "#show-add-comment-button"
     And I write "hello" in textbox
     When I click "#comment-post-button"
     And I wait for a second

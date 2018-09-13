@@ -24,17 +24,21 @@ Feature: Testcases for nolb user
   Scenario: Nolb user cannot edit their profile
     Given I log in as "nolbmuser" with the password "123456"
     And I am on "/pocketcode/profile"
-    Then I should see 0 "#edit-icon"
+    Then the element "#avatar-upload" should not exist
+    Then the element "#edit-country-button" should not exist
+    Then the element "#edit-email-button" should not exist
+    Then the element "#password-wrapper" should not exist
+    Then the element "#account-settings-wrapper" should not exist
 
   Scenario: Nolb teacher can only edit their password
     Given I log in as "nolbteacher" with the password "654321"
     And I am on "/pocketcode/profile"
-    Then the element "#edit-icon" should be visible
-    When I click the "edit" button
-    Then the element "#password-information" should be visible
-    And I should see 0 "#profile-avatar"
-    And I should see 0 "#country-information"
-    And I should see 0 "#email-information"
+    Then the element "#avatar-upload" should not exist
+    Then the element "#edit-country-button" should not exist
+    Then the element "#edit-email-button" should not exist
+    Then the element "#account-settings-wrapper" should not exist
+    Then the element "#password-wrapper" should be visible
+    Then the element "#edit-password-button" should be visible
 
   Scenario: Nolb user can only submit own programs (not allowed)
     Given I log in as "nolbmuser" with the password "123456"

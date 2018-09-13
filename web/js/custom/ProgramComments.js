@@ -9,38 +9,54 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
   let amountOfVisibleComments
   
   $(function () {
-    amountOfVisibleComments = JSON.parse(window.sessionStorage.getItem('visibleComments'))
-    if (amountOfVisibleComments == null || amountOfVisibleComments < minAmountOfVisibleComments)
-    {
-      amountOfVisibleComments = minAmountOfVisibleComments
-    }
-    else if (amountOfVisibleComments > totalAmountOfComments)
-    {
-      amountOfVisibleComments = totalAmountOfComments
-    }
-    console.log('V: ' + amountOfVisibleComments)
-    
-    $('.single-comment').each(function (index, el) {
-      if (index < amountOfVisibleComments)
-      {
-        $(el).show()
-      }
-    })
-    
+    amountOfVisibleComments = visibleComments
+    restoreAmountOfVisibleCommentsFromSession()
+    updateCommentsVisibility()
     updateButtonVisibility()
-    
-    // increase icon size while hovering over it
-    $('.icon-button').hover(
-      function () {
-        $(this).addClass('fa-lg')
-      },
-      function () {
-        $(this).removeClass('fa-lg')
-      }
-    )
   })
   
   $(document).on('click', '#comment-post-button', function () {
+    postComment()
+  })
+  
+  $(document).on('click', '.comment-delete-button', function () {
+    let commentId = $(this).attr('id').substring('comment-delete-button-'.length)
+    askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
+  })
+  
+  $(document).on('click', '.comment-report-button', function () {
+    let commentId = $(this).attr('id').substring('comment-delete-button-'.length)
+    askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
+  })
+  
+  $(document).on('click', '.add-comment-button', function () {
+    let commentWrapper = $('#user-comment-wrapper')
+    let showCommentWrapperButton = $('#show-add-comment-button')
+    let hideCommentWrapperButton = $('#hide-add-comment-button')
+    if (commentWrapper.is(':visible'))
+    {
+      commentWrapper.slideUp()
+      hideCommentWrapperButton.hide()
+      showCommentWrapperButton.show()
+    }
+    else
+    {
+      commentWrapper.slideDown()
+      showCommentWrapperButton.hide()
+      hideCommentWrapperButton.show()
+    }
+  })
+  
+  $(document).on('click', '#show-more-comments-button', function () {
+    showMore(showStep)
+  })
+  
+  $(document).on('click', '#show-less-comments-button', function () {
+    showLess(showStep)
+  })
+  
+  function postComment ()
+  {
     let msg = $('#comment-message').val()
     if (msg.length === 0)
     {
@@ -59,24 +75,14 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         {
           $('#comments-wrapper').load(' #comments-wrapper')
           $('#comment-message').val('')
-          updateButtonVisibility()
+          location.reload()
         }
       },
       error  : function () {
         swal(defaultErrorMessage)
       }
     })
-  })
-  
-  $(document).on('click', '.comment-delete-button', function () {
-    let commentId = $(this).attr('id').substring('comment-delete-button-'.length)
-    askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
-  })
-  
-  $(document).on('click', '.comment-report-button', function () {
-    let commentId = $(this).attr('id').substring('comment-delete-button-'.length)
-    askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
-  })
+  }
   
   function deleteComment (commentId)
   {
@@ -95,8 +101,8 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         }
         else
         {
-          showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
           $('#comment-' + commentId).remove()
+          showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
         }
       },
       error  : function () {
@@ -152,12 +158,41 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         type              : 'success',
         confirmButtonClass: 'btn btn-success',
       }
-    )
+    ).then(() => {
+      location.reload()
+    })
   }
   
   function redirectToLogin ()
   {
     window.location.href = '../login'
+  }
+  
+  function restoreAmountOfVisibleCommentsFromSession ()
+  {
+    let lastSessionAmount = JSON.parse(window.sessionStorage.getItem('visibleComments'))
+    if (lastSessionAmount !== null)
+    {
+      amountOfVisibleComments = lastSessionAmount
+    }
+    if (amountOfVisibleComments > totalAmountOfComments)
+    {
+      amountOfVisibleComments = totalAmountOfComments
+    }
+  }
+  
+  function updateCommentsVisibility ()
+  {
+    $('.single-comment').each(function (index, comment) {
+      if (index < amountOfVisibleComments)
+      {
+        $(comment).show()
+      }
+      else
+      {
+        $(comment).hide()
+      }
+    })
   }
   
   function updateButtonVisibility ()
@@ -181,50 +216,20 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
     }
   }
   
-  $(document).on('click', '#show-more-comments-button', function () {
-    amountOfVisibleComments = Math.min(amountOfVisibleComments + showStep, totalAmountOfComments)
+  function showMore (step)
+  {
+    amountOfVisibleComments = Math.min(amountOfVisibleComments + step, totalAmountOfComments)
     window.sessionStorage.setItem('visibleComments', JSON.stringify(amountOfVisibleComments))
-    
-    $('.single-comment').each(function (index, el) {
-      if (index >= amountOfVisibleComments - showStep &&
-        index < amountOfVisibleComments && index < totalAmountOfComments)
-      {
-        $(el).show()
-      }
-    })
-    
-    if (amountOfVisibleComments > minAmountOfVisibleComments)
-    {
-      $('#show-less-comments-button').show()
-    }
-    if (amountOfVisibleComments >= totalAmountOfComments)
-    {
-      $(this).hide()
-    }
-  })
+    updateCommentsVisibility()
+    updateButtonVisibility()
+  }
   
-  $(document).on('click', '#show-less-comments-button', function () {
-    console.log('show less')
-    amountOfVisibleComments = Math.max(amountOfVisibleComments - showStep, minAmountOfVisibleComments)
+  function showLess (step)
+  {
+    amountOfVisibleComments = Math.max(amountOfVisibleComments - step, minAmountOfVisibleComments)
     window.sessionStorage.setItem('visibleComments', JSON.stringify(amountOfVisibleComments))
-    
-    $('.single-comment').each(function (index, el) {
-      if (index < amountOfVisibleComments + showStep && index >= amountOfVisibleComments &&
-        index >= minAmountOfVisibleComments)
-      {
-        $(el).hide()
-      }
-    })
-    
-    if (amountOfVisibleComments <= minAmountOfVisibleComments)
-    {
-      $(this).hide()
-    }
-    if (amountOfVisibleComments < totalAmountOfComments)
-    {
-      $('#show-more-comments-button').show()
-    }
-  })
-  
+    updateCommentsVisibility()
+    updateButtonVisibility()
+  }
 }
 

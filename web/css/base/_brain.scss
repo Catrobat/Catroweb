@@ -229,6 +229,12 @@ form {
   }
 }
 
+.no-programs {
+  text-align: center;
+  font-size: 16px; //todo: change to variable...
+  margin-bottom: 25px;
+}
+
 .programs {
   overflow: hidden;
   width: 98.5%;
@@ -239,11 +245,6 @@ form {
     width: 84px;
   }
 
-  .no-programs {
-    text-align: center;
-    font-size: 16px; //todo: change to variable...
-    margin-bottom: 25px;
-  }
   .program-name {
     height: 2em;
   }
@@ -252,7 +253,8 @@ form {
     /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in
     'ProgramLoader.js' before changing the width! */
     width: percentage((100 / 9) / 100);
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
     > div, a {
       margin: auto;

@@ -463,3 +463,16 @@ $galaxy-button-background-color: #9583B2;
 #gamejam-submission {
   @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
 }
+
+
+.catro-icon-button {
+  color: $primary;
+  cursor: pointer;
+  &:hover {
+    color: darken($primary, 10);
+  }
+}
+
+.parting-line {
+  border-top: 1px solid $primary;
+}

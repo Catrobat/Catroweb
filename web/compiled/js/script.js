@@ -32,7 +32,6 @@ var Main = function(search_url)
       $.get($ajaxGetFBAppId,
         function(data)
         {
-          console.log(data);
           $appid = data['fb_appid'];
           FB.init({
             appId  : $appid,
@@ -173,8 +172,8 @@ var Main = function(search_url)
   
   
 };
-;var ProgramLoader = function(container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
-  var self = this;
+;let ProgramLoader = function(container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
+  let self = this;
   self.container = container;
   self.url = url;
   self.recommended_by_program_id =
@@ -201,7 +200,7 @@ var Main = function(search_url)
     $.get(self.url, {limit: self.initial_download_limit, offset: self.amount_of_loaded_programs}, function(data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
-        var url = Routing.generate('translate_word', {
+        let url = Routing.generate('translate_word', {
           'word': 'programs.noPrograms',
           'domain': 'catroweb'
         });
@@ -243,7 +242,8 @@ var Main = function(search_url)
   
   
   self.initProfile = function(user_id) {
-    self.show_all_programs = true;
+    self.show_all_programs = false;
+    self.restoreParamsWithSessionStorage();
     $.get(self.url, {
       limit  : self.initial_download_limit,
       offset : self.amount_of_loaded_programs,
@@ -251,7 +251,7 @@ var Main = function(search_url)
     }, function(data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
-        var url = Routing.generate('translate_word', {
+        let url = Routing.generate('translate_word', {
           'word': 'programs.noPrograms',
           'domain': 'catroweb'
         });
@@ -267,7 +267,7 @@ var Main = function(search_url)
   
   
   self.restoreParamsWithSessionStorage = function() {
-    var amountOfStoredVisiblePrograms = sessionStorage.getItem(self.container);
+    let amountOfStoredVisiblePrograms = sessionStorage.getItem(self.container);
     if (amountOfStoredVisiblePrograms > self.initial_download_limit)
     {
       self.initial_download_limit = amountOfStoredVisiblePrograms;
@@ -281,7 +281,7 @@ var Main = function(search_url)
   
   
   self.initSearch = function(query) {
-    var old_query = sessionStorage.getItem(self.query);
+    let old_query = sessionStorage.getItem(self.query);
     if (query === old_query)
     { // same search -> restore old session limits
       self.restoreParamsWithSessionStorage();
@@ -291,7 +291,7 @@ var Main = function(search_url)
     
     $.get(self.url, {q: query, limit: self.initial_download_limit, offset: self.amount_of_loaded_programs},
       function(data) {
-        var search_results_text = $('#search-results-text');
+        let search_results_text = $('#search-results-text');
         
         if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
         {
@@ -312,9 +312,9 @@ var Main = function(search_url)
     {
       $(self.container).append('' +
         '<div class="button-show-placeholder">' +
-        '<div class="button-show-more"><i class="fa fa-chevron-circle-down"></i></div>' +
+        '<div class="button-show-more"><i class="fa fa-chevron-circle-down catro-icon-button"></i></div>' +
         '<div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>' +
-        '<div class="button-show-less"><i class="fa fa-chevron-circle-up"></i></div>' +
+        '<div class="button-show-less"><i class="fa fa-chevron-circle-up catro-icon-button"></i></div>' +
         '</div>');
     }
     self.loadProgramsIntoContainer(data);
@@ -336,7 +336,7 @@ var Main = function(search_url)
   
   
   self.updateParameterBasedOnScreenSize = function() {
-    var columns = Math.round(($('.programs').width()) / $('.program').outerWidth());
+    let columns = Math.round(($('.programs').width()) / $('.program').outerWidth());
     if (columns < self.columns_min)
     {
       columns = self.columns_min;
@@ -376,11 +376,11 @@ var Main = function(search_url)
   
   
   self.loadProgramsIntoContainer = function(data) {
-    var programs = data.CatrobatProjects;
-    for (var i = 0; i < programs.length; i++)
+    let programs = data.CatrobatProjects;
+    for (let i = 0; i < programs.length; i++)
     {
-      var div = null;
-      var additional_link_css_class = null;
+      let div = null;
+      let additional_link_css_class = null;
       
       // Extend this for new containers...
       switch (self.container)
@@ -421,7 +421,7 @@ var Main = function(search_url)
           }
       }
       
-      var program_link = undefined;
+      let program_link = undefined;
       if (self.container === "#recommendations")
       {
         program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl +
@@ -441,10 +441,10 @@ var Main = function(search_url)
         program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
       }
       
-      var stored_visits = sessionStorage.getItem("visits");
-      var link_css_classes = "rec-programs" + ((additional_link_css_class != null) ?
+      let stored_visits = sessionStorage.getItem("visits");
+      let link_css_classes = "rec-programs" + ((additional_link_css_class != null) ?
         (" " + additional_link_css_class) : "");
-      var program = undefined;
+      let program = undefined;
       if (!stored_visits)
       {
         program = $(
@@ -459,8 +459,8 @@ var Main = function(search_url)
       }
       else
       {
-        var parsed_visits = JSON.parse(stored_visits);
-        var program_id = programs[i].ProjectId.toString();
+        let parsed_visits = JSON.parse(stored_visits);
+        let program_id = programs[i].ProjectId.toString();
         if ($.inArray(program_id, parsed_visits) >= 0)
         {
           program = $(
@@ -493,10 +493,18 @@ var Main = function(search_url)
       if (self.container === '#myprofile-programs')
       {
         $(program).prepend('<div id="delete-' + programs[i].ProjectId + '" class="img-delete" ' +
-          'onclick="profile.deleteProgram(' + programs[i].ProjectId + ')"></div>');
-        $(program).prepend('<div id="visibility-' + programs[i].ProjectId + '" class="' +
-          (programs[i].Private ? 'img-visibility-hidden' : 'img-visibility-amount_of_visible_programs') + '" ' +
-          'onclick="profile.toggleVisibility(' + programs[i].ProjectId + ')"></div>');
+          'onclick="profile.deleteProgram(' + programs[i].ProjectId + ')">' +
+          '<i class="fas fa-times-circle catro-icon-button"></i></div>');
+        
+        $(program).prepend('<div id="visibility-lock-open-' + programs[i].ProjectId + '" class="img-lock-open" ' +
+          (programs[i].Private ? 'style="display: none;"' : '') +
+          ' onclick="profile.toggleVisibility(' + programs[i].ProjectId + ')">' +
+            '<i class="fas fa-lock-open catro-icon-button"></i></div>');
+  
+        $(program).prepend('<div id="visibility-lock-' + programs[i].ProjectId + '" class="img-lock" ' +
+          (programs[i].Private ? '' : 'style="display: none;"') +
+          ' onclick="profile.toggleVisibility(' + programs[i].ProjectId + ')">' +
+          '<i class="fas fa-lock catro-icon-button"></i></div>');
       }
     }
     self.amount_of_loaded_programs += programs.length;
@@ -518,9 +526,9 @@ var Main = function(search_url)
   
   
   self.showVisiblePrograms = function() {
-    var programs_in_container = $(self.container).find('.program');
+    let programs_in_container = $(self.container).find('.program');
     $(programs_in_container).hide();
-    for (var i = 0; i < self.amount_of_visible_programs && i < self.amount_of_loaded_programs; i++)
+    for (let i = 0; i < self.amount_of_visible_programs && i < self.amount_of_loaded_programs; i++)
     {
       $(programs_in_container[i]).show();
     }

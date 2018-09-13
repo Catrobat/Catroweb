@@ -9,6 +9,7 @@ use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Catrobat\AppBundle\Entity\AchievementNotification;
 use Catrobat\AppBundle\Entity\CatroNotification;
+use Catrobat\AppBundle\Entity\CommentNotification;
 use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
@@ -25,6 +26,7 @@ use Catrobat\AppBundle\Entity\Tag;
 use Catrobat\AppBundle\Entity\TagRepository;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserComment;
+use Catrobat\AppBundle\Entity\UserCommentRepository;
 use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Features\Helpers\SymfonySupport;
@@ -541,10 +543,18 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are catro notifications:$/
+   *
+   * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreCatroNotifications(TableNode $table)
   {
-    /** @var EntityManager $em */
+    /**
+     * @var $em EntityManager
+     * @var $user User
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $notifications = $table->getHash();
 
@@ -561,6 +571,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       {
         case "achievement":
           $to_create = new AchievementNotification($user, $notification['title'], $notification['message'], "");
+          $em->persist($to_create);
+          break;
+        case "comment":
+          $comment = $em->getRepository(UserComment::class)->find($notification['commentID']);
+          $to_create = new CommentNotification($user, $notification['title'], $notification['message'], $comment);
           $em->persist($to_create);
           break;
         default:
@@ -592,9 +607,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function thereArePrograms(TableNode $table)
   {
-    /*
-   * @var $program \Catrobat\AppBundle\Entity\Program
-   */
+    /**
+    * @var $program \Catrobat\AppBundle\Entity\Program
+    * @var $em EntityManager
+    */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     $count = count($programs);
@@ -623,6 +639,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $program->setApproved(false);
       $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
       $program->setRemixRoot(isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true);
+      $program->setPrivate(isset($programs[$i]['private']) ? $programs[$i]['private'] : 0);
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {

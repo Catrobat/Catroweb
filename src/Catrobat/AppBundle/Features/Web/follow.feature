@@ -24,7 +24,7 @@ Feature: Follow feature on profiles
   Scenario: Follow button and counter should show up on Profile site
     Given I am on "/pocketcode/profile/1"
     And the element "#follow-btn" should be visible
-    And I should see text matching "Followers:"
+    And I should see text matching "Follower:"
 
   Scenario: Follow when not logged in should redirect to login
     Given I am on "/pocketcode/profile/1"
@@ -37,7 +37,7 @@ Feature: Follow feature on profiles
     And I click "#follow-btn"
     Then I should be on "/pocketcode/profile/1"
     And the element "#follow-btn" should be visible
-    And I should see text matching "Followers: 1"
+    And I should see text matching "Follower: 1"
     And Element "#follow-btn" should have attribute "title" with value "Unfollow this user!"
 
   Scenario: Unfollow user should unfollow and decrease counter
@@ -48,7 +48,7 @@ Feature: Follow feature on profiles
     And I click "#follow-btn"
     Then I should be on "/pocketcode/profile/1"
     And the element "#follow-btn" should be visible
-    And I should see text matching "Followers: 0"
+    And I should see text matching "Follower: 0"
     And Element "#follow-btn" should have attribute "title" with value "Follow this user!"
     
   Scenario: Follower and Following should show on my profile:

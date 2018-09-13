@@ -1,5 +1,5 @@
+@import '../base/variables';
 @import 'theme_settings';
-
 
 .login {
   width: 318px;
@@ -14,7 +14,7 @@
   display: block;
   width: 100%;
   border: none;
-  border-bottom: 1px solid rgba(0, 172, 193, 0.3);
+  border-bottom: 1px solid rgba($primary, 0.3);
   background: none;
   color: rgb(0, 172, 193);
 }
@@ -24,7 +24,7 @@
 /* LABEL ======================================= */
 
 .group label {
-  color: rgba(0, 172, 193, 0.5);
+  color: rgba($primary, 0.5);
   font-size: 18px;
   font-weight: normal;
   position: absolute;
@@ -35,14 +35,17 @@
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
 }
+
 /* active durum */
 
 .group input:focus ~ label,
+.label-with-placeholder,
 input:valid ~ label {
-  top: -20px;
-  font-size: 14px;
-  color: rgba(0, 172, 193, 0.7);
+  top: -20px!important;
+  font-size: 14px!important;
+  color: rgba($primary, 0.7)!important;
 }
+
 /* BOTTOM BARS ================================= */
 
 .bar {
@@ -57,7 +60,7 @@ input:valid ~ label {
   width: 0;
   bottom: 1px;
   position: absolute;
-  background: rgba(0, 172, 193, 0.7);
+  background: rgba($primary, 0.7);
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
@@ -85,6 +88,8 @@ input:valid ~ label {
 }
 
 .icon-from-group {
+  float: right;
+  width: 10%;
   text-align: center;
   font-size: 1.5em;
   margin-top: 1em;
@@ -113,7 +118,7 @@ input:valid ~ label {
 
 @-webkit-keyframes inputHighlighter {
   from {
-    background: rgba(0, 172, 193, 0.7);
+    background: rgba($primary, 0.7);
   }
   to {
     width: 0;
@@ -122,7 +127,7 @@ input:valid ~ label {
 }
 @-moz-keyframes inputHighlighter {
   from {
-    background: rgba(0, 172, 193, 0.7);
+    background: rgba($primary, 0.7);
   }
   to {
     width: 0;
@@ -131,7 +136,7 @@ input:valid ~ label {
 }
 @keyframes inputHighlighter {
   from {
-    background: rgba(0, 172, 193, 0.7);
+    background: rgba($primary, 0.7);
   }
   to {
     width: 0;
@@ -192,8 +197,8 @@ hr {
 }
 
 .hidden {
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
   background: transparent;
   border: none !important;
 }
