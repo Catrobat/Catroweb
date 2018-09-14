@@ -74,7 +74,7 @@ default:
                 - "%paths.base%/src/Catrobat/AppBundle/Features/Admin/"
             contexts:
               - Catrobat\AppBundle\Features\Admin\Context\FeatureContext:
-                    error_directory: "%paths.base%/testreports/behat/"
+                    screenshots_directory: "%paths.base%/testreports/screens/"
         gamejam:
             filters:
                 tags: ~@web&&~@javascript

@@ -79,6 +79,20 @@ class CatroNotificationService
   }
 
   /**
+   * @param array $notifications
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function addNotifications($notifications)
+  {
+    foreach ($notifications as $notification) {
+      $this->em->persist($notification);
+    }
+    $this->em->flush();
+  }
+
+  /**
    * @param $notification
    *
    * @throws \Doctrine\ORM\ORMException

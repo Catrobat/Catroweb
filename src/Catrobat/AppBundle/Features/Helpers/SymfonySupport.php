@@ -211,20 +211,18 @@ class SymfonySupport
   }
 
   /**
-   * @return \Symfony\Component\HttpKernel\Profiler\Profiler
+   * @return false|\Symfony\Component\HttpKernel\Profiler\Profiler
    */
   public function getSymfonyProfile()
   {
     $profile = $this->getClient()->getProfile();
-    if (false === $profile)
-    {
+    if (!$profile) {
       throw new \RuntimeException(
         'The profiler is disabled. Activate it by setting ' .
         'framework.profiler.only_exceptions to false in ' .
         'your config'
       );
     }
-
     return $profile;
   }
 

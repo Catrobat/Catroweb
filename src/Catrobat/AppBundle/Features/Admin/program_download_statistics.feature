@@ -17,6 +17,6 @@ Feature: Program Download Statistics
       | id | program_id | downloaded_at       | ip             | country_code | country_name | user_agent | user_name | referrer |
       | 1  | 1          | 2015-11-21 13:39:00 | 88.116.169.222 | AT           | Austria      | okhttp     | cat       | Facebook |
     When I GET "/admin/download_stats/list"
-    Then the response should contain the elements:
+    Then the client response should contain the elements:
       | id | downloaded_at           | ip             | country_code | country_name | user_agent | user | referrer |
       | 1  | November 21, 2015 13:39 | 88.116.169.222 | AT           | Austria      | okhttp     | cat  | Facebook |
