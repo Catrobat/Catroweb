@@ -113,6 +113,8 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
 
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
@@ -142,6 +144,7 @@ passwordRecovery:
 
 
 profile:
+  edit: Edit your profile
   saveChanges: save changes
   newPass: new password
   repeatPass: repeat password
@@ -163,6 +166,7 @@ profile:
   programsOf: Programs of
   changePicture: Change picture
   avatar:
+    noImage: No Image!
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
