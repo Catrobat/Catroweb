@@ -21,7 +21,7 @@
       {% include 'components/login/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
-        <div class="col-md-5" align="center">
+        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
           {% if error %}
             <div id="login-alert"
                  class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-md-5" align="center">
+        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
 
           <!-- Policy -->
           {% include 'privacy_policy/policy.html.twig' %}
