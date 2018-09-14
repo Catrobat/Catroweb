@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: eric
- * Date: 01.03.16
- * Time: 17:32
- */
 
 namespace Catrobat\AppBundle\Entity;
 
@@ -16,21 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserComment
 {
-  /**
-   * @return mixed
-   */
-  public function getIsReported()
-  {
-    return $this->isReported;
-  }
 
-  /**
-   * @param mixed $isReported
-   */
-  public function setIsReported($isReported)
-  {
-    $this->isReported = $isReported;
-  }
 
   /**
    *
@@ -39,6 +19,58 @@ class UserComment
    * @ORM\Column(type="integer")
    */
   protected $id;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  protected $programId;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program")
+   * @ORM\JoinColumn(name="programs", referencedColumnName="id", nullable=true)
+   */
+  private $program;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  protected $userId;
+
+  /**
+   * @ORM\Column(type="date")
+   */
+  protected $uploadDate;
+
+  /**
+   * @ORM\Column(type="text")
+   */
+  protected $text;
+
+  /**
+   * @ORM\Column(type="string")
+   */
+  protected $username;
+
+  /**
+   * @ORM\Column(type="boolean")
+   */
+  protected $isReported;
+
+  /**
+   * @return mixed
+   */
+  public function getProgram()
+  {
+    return $this->program;
+  }
+
+  /**
+   * @param mixed $program
+   */
+  public function setProgram($program)
+  {
+    $this->program = $program;
+  }
 
   /**
    * @return mixed
@@ -121,22 +153,6 @@ class UserComment
   }
 
   /**
-   * @ORM\Column(type="integer")
-   */
-  protected $programId;
-
-  /**
-   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program")
-   * @ORM\JoinColumn(name="programs", referencedColumnName="id", nullable=true)
-   */
-  private $program;
-
-  /**
-   * @ORM\Column(type="integer")
-   */
-  protected $userId;
-
-  /**
    * @return mixed
    */
   public function getUsername()
@@ -151,42 +167,19 @@ class UserComment
   {
     $this->username = $username;
   }
-
-  /**
-   * @ORM\Column(type="date")
-   */
-  protected $uploadDate;
-
-  /**
-   * @ORM\Column(type="text")
-   */
-  protected $text;
-
-
-  /**
-   * @ORM\Column(type="string")
-   */
-  protected $username;
-
-  /**
-   * @ORM\Column(type="boolean")
-   */
-  protected $isReported;
-
   /**
    * @return mixed
    */
-  public function getProgram()
+  public function getIsReported()
   {
-    return $this->program;
+    return $this->isReported;
   }
 
   /**
-   * @param mixed $program
+   * @param mixed $isReported
    */
-  public function setProgram($program)
+  public function setIsReported($isReported)
   {
-    $this->program = $program;
+    $this->isReported = $isReported;
   }
-
 }

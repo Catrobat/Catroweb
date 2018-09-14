@@ -1,14 +1,13 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/program.css') }}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ asset('css/plugins/jquery.contextMenu.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/plugins/vis.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/remixgraph.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/loadinganimation.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
 
   <script src="https://share.catrob.at/html5/player/pocketCodePlayer.min.js"></script>
@@ -438,74 +437,34 @@
     <div class="programs"></div>
   </div>
 
-  <div id="comment-successfully-reported">
-    <h3>{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}</h3>
-    <p>{{ 'programs.report_popup'|trans({}, 'catroweb') }}</p>
-    <button id="close-reported-popup">Ok</button>
-  </div>
-
-  <div id="program-comments">
-
-    <p>{{ 'programs.comments'|trans({}, 'catroweb') }}</p>
-    <div id="user-comment-wrapper">
-      <textarea class="msg" style="width: 100%; height: 100px"></textarea>
-      <button id="post-button" class="btn btn-primary">{{ 'programs.send'|trans({}, 'catroweb') }}</button>
-    </div>
-
-    <div id="comments-wrapper">
-      {% for comment in program_details.comments|slice(0, 10) %}
-        <div id="comment-{{ comment.id }}" class = "single-comment">
-          <div class = "avatar-wrapper">
-            <div class = "img-avatar"></div>
-          </div>
-          <div class = "comment-payload-wrapper">
-            <div class = "name-date-wrapper">
-              <a href="{{ url('profile', { id : comment.userId }) }}">
-                <div id="profile-comment-user-id-{{ comment.userId }}" class = "usr-name">{{ comment.username }}</div></a>
-              <div class = "date"> {{ comment.uploadDate.format('Y-m-d') }}</div>
-              <button id="report-button-{{ comment.id }}" class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
-              {% if  program_details.isAdmin  %}
-                <button id="delete-button-{{ comment.id }}" class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
-              {% endif %}
-            </div>
-            <div class = "comment-text">
-              <p>{{ comment.text}}</p>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-      {% for comment in program_details.comments|slice(10, program_details.comments|length) %}
-        <div id="comment-{{ comment.id }}" class = "single-comment hidden">
-          <div class = "avatar-wrapper">
-            <div class = "img-avatar"></div>
-          </div>
-          <div class = "comment-payload-wrapper">
-            <div class = "name-date-wrapper">
-              <a href="{{ url('profile', { id : comment.userId }) }}">
-                <div id="profile-comment-user-id-{{ comment.userId }}"  class = "usr-name">{{ comment.username }}</div></a>
-              <div class = "date"> {{ comment.uploadDate.format('Y-m-d') }}</div>
-              <button id="report-button-{{ comment.id }}" class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
-              {% if  program_details.isAdmin  %}
-                <button id="delete-button-{{ comment.id }}" class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
-              {% endif %}
-            </div>
-            <div class = "comment-text">
-              <p>{{ comment.text }}</p>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-
-      <div class = "show-more">
-        <button id="show-more-button" {% if program_details.comments|length <= 10 %} style="display: none" {% endif %}>{{ 'programs.show_more'|trans({}, 'catroweb') }}</button>
-      </div>
-    </div>
-  </div>
+  {% include 'programComments.html.twig' %}
 
 {% endblock %}
 
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
+  <script src="{{ asset('js/custom/ProgramComments.js') }}"></script>
+  <script>
+    new ProgramComments({{ program_details.id }}, 5, 5, 5, {{ (program_details.comments|length) }},
+      "{{ 'cancel'                            |trans({}, 'catroweb') }}",
+      "{{ 'deleteIt'                          |trans({}, 'catroweb') }}",
+      "{{ 'reportIt'                          |trans({}, 'catroweb') }}",
+      "{{ 'areYouSure'                        |trans({}, 'catroweb') }}",
+      "{{ 'noWayOfReturn'                     |trans({}, 'catroweb') }}",
+      "{{ 'programs.deleteCommentConfirmation'|trans({}, 'catroweb') }}",
+      "{{ 'programs.reportCommentConfirmation'|trans({}, 'catroweb') }}",
+      "{{ 'programs.report_popup_header'      |trans({}, 'catroweb') }}",
+      "{{ 'programs.report_popup'             |trans({}, 'catroweb') }}",
+      "{{ 'programs.deleted_popup_header'     |trans({}, 'catroweb') }}",
+      "{{ 'programs.deleted_popup'            |trans({}, 'catroweb') }}",
+      "{{ 'programs.noAdminRights'            |trans({}, 'catroweb') }}",
+      "{{ 'somethingWentWrong'                |trans({}, 'catroweb') }}",
+      "{{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}",
+      "{{ constant('Catrobat\\AppBundle\\StatusCode::NOT_LOGGED_IN') }}",
+      "{{ constant('Catrobat\\AppBundle\\StatusCode::NO_ADMIN_RIGHTS') }}"
+    )
+  </script>
+
   <script>
     $(function()
     {
@@ -561,7 +520,7 @@
 
     $(document).on("click", "#url-download", function() {
       var url_link = document.getElementById("url-download");
-      if(url_link.href != 'javascript:void(0)') {
+      if(url_link.href !== 'javascript:void(0)') {
           url_link.href = 'javascript:void(0)';
 
         setTimeout(function() {
@@ -582,7 +541,6 @@
     var specificRecommender = new ProgramLoader('#specific-programs-recommendations', '{{ path('api_recsys_specific_programs', { 'id': program.id }) }}', undefined, programID, recommendedByPageId);
     specificRecommender.initSpecificRecsys();
 
-    counter = 10;
     var cachedRemixData = null;
     var remixGraphTranslations = {
       ok: "{{ "ok"|trans({}, "catroweb") }}",
@@ -679,16 +637,6 @@
           document.ontouchmove = null;
         }
       });
-      $(document).on("click", "#show-more-button", function() {
-        counter += 10;
-        for(var i = counter - 10; i < counter && i < {{ (program_details.commentsLength) }}; i++)
-        {
-          $('.single-comment.hidden').first().removeClass("hidden");
-        }
-        if(!$('.single-comment.hidden').length){
-          $('.show-more').hide();
-        }
-      });
 
       $(document).on("click", "#remix-graph-button", function() {
           $("#remix-graph-modal-link").click();
@@ -699,7 +647,7 @@
           var type = $(this).attr("data-like-type");
           var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type;
           var username = "{{ user_name }}";
-          if (username == "") {
+          if (username === "") {
               window.location.href = url;
               return false;
           }
@@ -713,8 +661,8 @@
               type: "get",
               data: { type: type },
               success: function(data) {
-                  if (data.statusCode != {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
-                      if (data.statusCode == {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
+                  if (data.statusCode !== {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}) {
+                      if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }}) {
                           window.location.href = url;
                           return;
                       }
@@ -737,7 +685,7 @@
          var programURL = "{{ program_url }}";
          var projectID = $('#nolb-submission-project-id').val();
 
-        if(projectID == ''){
+        if(projectID === ''){
           $('#nolb-submission-project-id').addClass('text-area-empty');
           return;
         }
@@ -750,7 +698,7 @@
              data: JSON.stringify({username: username, PID: projectID, progurl: programURL}),
              success: function(data){
                var response = JSON.parse(data);
-               if(response.code == 1) {
+               if(response.code === 1) {
                  $('#nolb-submission-successful').show();
                }
                else {
@@ -781,75 +729,6 @@
           $('#nolb-submission-box').hide();
       });
 
-      $(document).on("click", ".delete-button", function() {
-        var pId = {{ program_details.id }};
-        var commentId = $(this).data('commentid');
-        $.ajax({
-          url:"../delete",
-          type: "get",
-          data:{ProgramId: pId, CommentId: commentId},
-          success: function(data) {
-            if (data == "log_in")
-              window.location.href = "../login";
-            else if (data == "no_admin"){
-              alert("You have no admin rights. Please Log in as an Admin");
-            }
-            else {
-              $('#comments-wrapper').load(' #comments-wrapper');
-              $('.msg').val("");
-            }
-          },
-          error: function(data) {
-            alert("something went terribly wrong");
-          }});
-      });
-
-      $(document).on("click", "#post-button", function() {
-        var msg = $('.msg').val();
-        if(msg.length == 0) {
-          return;
-        }
-        var pId = {{ program_details.id }};
-        $.ajax({
-          url: "../comment",
-          type: "post",
-          data:{Message: msg, ProgramId: pId},
-          success: function(data) {
-            if (data == "log_in")
-              window.location.href = "../login";
-            else
-            {
-              $('#comments-wrapper').load(' #comments-wrapper');
-              $('.msg').val("");
-            }
-          },
-          error: function() {
-            alert("something went terribly wrong");
-          }});
-      });
-
-      $(document).on("click", ".report-button", function() {
-        var commentId = $(this).data('commentid');
-        var pId = {{ program_details.id }};
-        $.ajax({
-          url:"../report",
-          type: "get",
-          data:{ProgramId: pId, CommentId: commentId},
-          success: function(data) {
-            if (data == "log_in")
-              window.location.href = "../login";
-            else {
-              $('#comment-successfully-reported').show();
-            }
-          },
-          error: function(data) {
-            alert("something went terribly wrong");
-          }});
-      });
-
-      $(document).on("click", "#close-reported-popup", function() {
-        $('#comment-successfully-reported').hide();
-      });
 
       $(document).one('click', ".rec-programs", function(event) {
 
@@ -873,14 +752,14 @@
           additions = (href.match(/[0-9]+/))[0];
 
           var containerElement = $(this).parent(".program").parent(".programs").parent();
-          if (containerElement.attr("id") == "specific-programs-recommendations") {
+          if (containerElement.attr("id") === "specific-programs-recommendations") {
               type = "rec_specific_programs";
           }
         }
 
         $.ajaxSetup({async: false});
         $.post("{{ path('click_stats') }}", {type: type, recFromID: {{ program.id }}, recID: additions}, function( data ) {
-          if (data == 'error')
+          if (data === 'error')
             console.log("No click statistic is created!");
         }).fail(function (data) {
             console.log(data);
@@ -955,7 +834,6 @@
           editDescriptionUI.hide();
           description.show();
       }
-
 
       // increase icon size while hovering over it
       editDescriptionButton.hover(

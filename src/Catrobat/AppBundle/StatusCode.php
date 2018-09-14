@@ -2,6 +2,10 @@
 
 namespace Catrobat\AppBundle;
 
+/**
+ * Class StatusCode
+ * @package Catrobat\AppBundle
+ */
 class StatusCode
 {
   const OK = 200;
@@ -29,9 +33,10 @@ class StatusCode
   const MEDIA_LIB_PACKAGE_NOT_FOUND = 523;
   const PROGRAM_NAME_TOO_LONG = 526;
   const DESCRIPTION_TOO_LONG = 527;
-  // upload failed but program still in DB
-  const INVALID_FILE_UPLOAD = 528;
+  const INVALID_FILE_UPLOAD = 528;  // upload failed but program still in DB
   const NOT_MY_PROGRAM = 529;
+  const NO_ADMIN_RIGHTS = 530;
+  const NOT_LOGGED_IN = 531;
 
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;

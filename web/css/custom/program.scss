@@ -1,3 +1,4 @@
+@import '../base/_variables';
 @import 'theme_settings';
 
 button, .button {
@@ -444,7 +445,6 @@ table td:nth-child(1) {
 }
 
 #user-comment-wrapper {
-  padding-bottom: 90px;
   border-bottom: 1px solid #17a5b8;
 }
 
@@ -499,20 +499,6 @@ table td:nth-child(1) {
   display: block;
   padding-right: 1em;
   font-weight: bold;
-}
-
-.avatar-wrapper {
-  border-radius: 50%;
-  padding-top: 0.9em;
-  padding-bottom: 0.9em;
-  padding-left: 1.3em;
-  padding-right: 1.3em;
-  background: #46A2B6;
-  border: solid 1px black;
-  display: table-row;
-  float: left;
-  text-align: center;
-  margin-right: 2em;
 }
 
 #nolb-project-button {
@@ -782,4 +768,23 @@ input[type='number'] {
   #tag-extension-container {
     width: 215px;
   }
+}
+
+.comment-avatar {
+  border-radius: 50%;
+  border: solid 1px $primary;
+  width: 4.5rem;
+  margin-right: 2%;
+  display: table-row;
+  float: left;
+  text-align: center;
+
+  @media screen and (max-width: 500px)
+  {
+    margin-right: 4%;
+  }
+}
+
+.comment-avatar-img {
+  border-radius: 50%;
 }
