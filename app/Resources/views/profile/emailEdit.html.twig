@@ -1,0 +1,47 @@
+<div id="form_email_edit" class="form-horizontal">
+
+  <div class="mt-4">
+    <div class="d-none error-message text-email1-notvalid alert alert-danger">
+      {{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}
+    </div>
+    <div class="d-none error-message text-email-missing alert alert-danger">
+      {{ 'profile.form.emailMissing'|trans({}, 'catroweb') }}
+    </div>
+    <div class="d-none error-message text-email1-exists alert alert-danger">
+      {{ 'profile.form.emailExists'|trans({}, 'catroweb') }}
+    </div>
+  </div>
+
+  <div class="group">
+    <input title="first_email" type="text" id="email" name="_email" value="{{ firstMail }}" required>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+    <label class="label-with-value"><span class="span-input">{{ 'profile.firstEmail'|trans({}, 'catroweb') }}</span></label>
+  </div>
+
+  <div class="mt-4">
+    <div class="d-none error-message text-email2-notvalid alert alert-danger">
+      {{ 'profile.form.emailNotValid'|trans({}, 'catroweb') }}
+    </div>
+    <div class="d-none error-message text-email2-exists alert alert-danger">
+      {{ 'profile.form.emailExists'|trans({}, 'catroweb') }}
+    </div>
+  </div>
+
+  <div class="group mb-2">
+    <input title="second_email" type="text" id="additional-email" name="_additional-email"
+           value="{{ secondMail }}" required>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+    <label {% if secondMail %}class="label-with-value" {% endif %}>
+      <span class="span-input">{{ 'profile.secondEmail'|trans({}, 'catroweb') }}</span>
+    </label>
+  </div>
+
+  <button id="save-email" class="btn btn-primary save-button">
+    {{ 'profile.saveChanges'|trans({}, 'catroweb') }}
+  </button>
+  <div id="email-ajax" class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
+
+</div>
+

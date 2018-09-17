@@ -1,0 +1,23 @@
+<div id="change-country" class="mt-3">
+  <div id="select-country">
+
+    <select title="select_country" name="country">
+      <option value=""></option>
+      {% for key, country in  countriesList() %}
+        {% if app.user.country == key %}
+          <option value="{{ key }}" selected>{{ country }}</option>
+        {% else %}
+          <option value="{{ key }}">{{ country }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+
+    <button id="save-country" class="btn btn-primary save-button mt-3">
+      {{ 'profile.saveChanges'|trans({}, 'catroweb') }}
+    </button>
+    <div id="country-ajax" class="button-show-ajax">
+      <i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>
+    </div>
+  </div>
+
+</div>

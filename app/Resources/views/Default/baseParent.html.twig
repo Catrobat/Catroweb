@@ -15,7 +15,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}"/>
-
   <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
   <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
   <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
@@ -24,7 +23,7 @@
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
   <script>
-    var configGA = {
+    let configGA = {
       'UaId': 'UA-42270417-5',
       //'DebugOutput' : true,
     }
@@ -53,7 +52,7 @@
 {% endblock %}
 
 <script>
-  var search_input = $('.input-search')
+  let search_input = $('.input-search')
 
   search_input.tooltip({
     trigger  : 'manual',
@@ -69,7 +68,7 @@
       search_input.tooltip('hide')
     }, 1000)
   })
-  var client = new Main('{{ path('search', {'q': 0 } ) }}')
+  new Main('{{ path('search', {'q': 0 } ) }}')
 </script>
 
 {% block js %}{% endblock %}
@@ -77,9 +76,9 @@
 {% if app.user %}
   <script src="{{ asset('js/custom/FetchNotifications.js') }}"></script>
   <script>
-    let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000);
+    let fetchNotifications = new FetchNotifications("{{ path('user_notifications_count') }}", 99, 10000)
     $(document).ready(function () {
-      fetchNotifications.init();
+      fetchNotifications.run()
     })
   </script>
 {% endif %}

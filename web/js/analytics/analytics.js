@@ -7,7 +7,7 @@
 
 
 if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msTrackingProtectionEnabled' in window.external) &&
-  (window.doNotTrack === '1' || navigator.doNotTrack === 'yes' || navigator.doNotTrack === '1' || navigator.msDoNotTrack === '1' || window.external.msTrackingProtectionEnabled()))
+  (window.doNotTrack === '1' || navigator.doNotTrack === 'yes' || navigator.doNotTrack === '1' || navigator.msDoNotTrack === '1'))
 {
   // The browser supports Do Not Track!
   // Do Not Track is enabled!
@@ -31,7 +31,7 @@ else
      * @final
      * @readonly
      */
-    var HelperFunctions = {
+    let HelperFunctions = {
       
       /*
       * Returns the hostname of the currently viewed window
@@ -85,7 +85,7 @@ else
         
         if (uri === undefined || typeof(uri) !== "string") return undefined;
         
-        var hostname = HelperFunctions.getHostname();
+        let hostname = HelperFunctions.getHostname();
         
         // remove protocol = "https:"
         if (uri.indexOf(window.location.protocol) >= 0)
@@ -147,7 +147,7 @@ else
         if (name === undefined || typeof(name) !== "string") return "";
         if (url === undefined || typeof(url) !== "string") return "";
         
-        var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+        let match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
         return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
       },
       
@@ -163,7 +163,7 @@ else
       */
       createTripleElementProgram: function (ident, descriptor, category) {
         
-        var tripleList = [
+        let tripleList = [
           {
             /*
              * Tracks the clicks on the programs
@@ -218,7 +218,7 @@ else
      * @requires jQuery
      * @static
      */
-    var UrlMapper = {
+    let UrlMapper = {
       /*
        * Function to remove query parameter from the uri
        * Format /page/subpage?{parameter}
@@ -262,7 +262,7 @@ else
      * @requires jQuery
      * @static
      */
-    var TrackingObjectFactory = {
+    let TrackingObjectFactory = {
       /*
        * Function to create trackingObjects from plain object
        * @method trackingObjectFactoryArray
@@ -271,7 +271,7 @@ else
   */
       createArray: function (trackingObjectArray) {
         
-        var returnArray = [];
+        let returnArray = [];
         
         jQuery.each(trackingObjectArray, function (index, elementToTrack) {
           returnArray.push(TrackingObjectFactory.createObj(elementToTrack));
@@ -288,7 +288,7 @@ else
        */
       createObj: function (obj) {
         
-        var trackingObject = new TrackingObject();
+        let trackingObject = new TrackingObject();
         
         Object.keys(obj).forEach(function (key, index) {
           // key: the name of the object key
@@ -325,7 +325,7 @@ else
     
     'use strict';
     
-    var TrackingObject;
+    let TrackingObject;
     
     TrackingObject = (function () {
       /**
@@ -425,8 +425,8 @@ else
        */
       TrackingObject.prototype.copy = function () {
         
-        var copy = new TrackingObject();
-        var toCopy = this;
+        let copy = new TrackingObject();
+        let toCopy = this;
         
         // iterates the parameters of the TrackingObject and
         // executes functions of the parametes
@@ -461,7 +461,7 @@ else
      * @requires jQuery
      * @static
      */
-    var AnalyticsTracker;
+    let AnalyticsTracker;
     
     AnalyticsTracker = {
       
@@ -531,7 +531,7 @@ else
        */
       trackEmails: function (parameter) {
         parameter.BaseSelector = 'a[href^="mailto"]';
-        var trackingObject = TrackingObjectFactory.createObj(parameter);
+        let trackingObject = TrackingObjectFactory.createObj(parameter);
         
         AnalyticsTracker.trackOnClickEvent(trackingObject);
       },
@@ -542,7 +542,7 @@ else
        * @param {string} parameter - parameter for tracking
        */
       trackOnKeyPressEnter: function (parameter) {
-        var trackingObject = TrackingObjectFactory.createObj(parameter);
+        let trackingObject = TrackingObjectFactory.createObj(parameter);
         
         // search for the searchbox
         jQuery(trackingObject.baseSelector).keypress(function (e) {
@@ -562,7 +562,7 @@ else
        */
       resolve: function (event) {
         // gets the event parameters
-        var params = event.data.eventParameter;
+        let params = event.data.eventParameter;
         
         // iterates the parameters of the TrackingObject and
         // executes functions of the parametes
@@ -579,23 +579,23 @@ else
       },
       
       /*
-       * Function to map the event parameters accordingly to the tracking Var Map
+       * Function to map the event parameters accordingly to the tracking let Map
        * @method mapEventParameter
        * @param {object} actions - parameters to map
        * @return {object} - mapped parameters
        */
       mapEventParameter: function (actions) {
         
-        var mapped = {};
+        let mapped = {};
         
         Object.keys(actions).forEach(function (key, index) {
           
-          var mapIndex = AnalyticsTracker.trackingVarMap.findIndex(function (x) { return key in x });
+          let mapIndex = AnalyticsTracker.trackingVarMap.findIndex(function (x) { return key in x });
           if (mapIndex >= 0)
           {
             
-            var parameter = AnalyticsTracker.trackingVarMap[mapIndex];
-            var mappedKey = parameter[key];
+            let parameter = AnalyticsTracker.trackingVarMap[mapIndex];
+            let mappedKey = parameter[key];
             
             if (typeof(actions[key]) === "string" && HelperFunctions.isNullOrWhitespace(actions[key]) === false ||
               typeof(actions[key]) === "number")
@@ -621,7 +621,7 @@ else
       */
       sendEvent: function (element, eventParameter) {
         
-        var mapped = AnalyticsTracker.mapEventParameter(eventParameter);
+        let mapped = AnalyticsTracker.mapEventParameter(eventParameter);
         
         // prints the tracking parameter
         if (AnalyticsTracker.debugOutput === true)
@@ -647,7 +647,7 @@ else
         {
           jQuery(trackingObject.baseSelector).on('click', trackingObject.subSelector, function (e) {
             
-            var tracking_copy = trackingObject.copy();
+            let tracking_copy = trackingObject.copy();
             AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
             AnalyticsTracker.resolve(e);
           });
@@ -656,7 +656,7 @@ else
         {
           jQuery(trackingObject.baseSelector).on('click', function (e) {
             
-            var tracking_copy = trackingObject.copy();
+            let tracking_copy = trackingObject.copy();
             AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
             AnalyticsTracker.resolve(e);
           });
@@ -695,7 +695,7 @@ else
           return /^http.*/.test(this.href);
         }).each(function () {
           // Add click event to the link to track the outbound link
-          var _hostDomain = HelperFunctions.getHostname();
+          let _hostDomain = HelperFunctions.getHostname();
           if (this.href.indexOf(_hostDomain) < 0)
           {
             // is external link
@@ -703,8 +703,8 @@ else
               
               if (this.href !== undefined)
               {
-                var url = this.href;
-                var trackingObject = TrackingObjectFactory.createObj(parameter.Outbound);
+                let url = this.href;
+                let trackingObject = TrackingObjectFactory.createObj(parameter.Outbound);
                 
                 if (jQuery(this).attr("target") !== "_blank")
                 {
@@ -726,7 +726,7 @@ else
             }).each(function () {
               jQuery(this).on("click", function (sender) {
                 
-                var trackingObject = TrackingObjectFactory.createObj(parameter.Downloads);
+                let trackingObject = TrackingObjectFactory.createObj(parameter.Downloads);
                 AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter());
                 AnalyticsTracker.resolve(sender);
               });
@@ -743,7 +743,7 @@ else
        * @return {boolean}
        */
       isBaseSeletorValid: function (baseSelector) {
-        var isValid = false;
+        let isValid = false;
         // Chech if the tracked object exits on the page
         if ($(baseSelector).length)
         {
@@ -766,7 +766,7 @@ else
       */
       printObjectParameter: function (obj) {
         
-        var output = "";
+        let output = "";
         Object.keys(obj).forEach(function (key, index) {
           // key: the name of the object key
           // index: the ordinal position of the key within the object
@@ -793,7 +793,7 @@ else
      * @requires jQuery
      * @static
      */
-    var YoutubeTracker;
+    let YoutubeTracker;
     
     YoutubeTracker = {
       
@@ -895,14 +895,14 @@ else
       */
       registerYoutubeVideos: function () {
         
-        var regex = /(http)?s?\:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/;
-        var i = 0;
+        let regex = /(http)?s?\:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/;
+        let i = 0;
         
         $('iframe').each(function (i, element) {
           if (regex.test(element.src))
           {
             $(this).load(function () {
-              var matches = element.src.match(regex);
+              let matches = element.src.match(regex);
               $(element).attr('data-video-id', matches[2]);
               YoutubeTracker.onYouTubeIframeAPIReady(element, matches[2]);
             });
@@ -919,8 +919,8 @@ else
       */
       checkStateChange: function (event) {
         
-        var player = event.target;
-        var id = YoutubeTracker.getId(player);
+        let player = event.target;
+        let id = YoutubeTracker.getId(player);
         
         player.PlayerState = event.data;
         
@@ -971,8 +971,8 @@ else
           YoutubeTracker.intervalId = setInterval(YoutubeTracker.checkPercentage, 500);
         }
         
-        var id = YoutubeTracker.getId(player);
-        var isAdded = false;
+        let id = YoutubeTracker.getId(player);
+        let isAdded = false;
         
         Object.keys(YoutubeTracker.players).forEach(function (key, index) {
           if (key == id)
@@ -1007,24 +1007,24 @@ else
        */
       checkPercentage: function () {
         
-        var anyPlaying = false;
+        let anyPlaying = false;
         
         Object.keys(YoutubeTracker.players).forEach(function (key, index) {
           
-          var player = YoutubeTracker.players[key];
+          let player = YoutubeTracker.players[key];
           
           if (player.PlayerState == YT.PlayerState.PLAYING)
           {
             
             anyPlaying = true;
-            var trackedPercentage = YoutubeTracker.getPercentage(key);
+            let trackedPercentage = YoutubeTracker.getPercentage(key);
             
-            var duration = player.getDuration();
-            var currentTime = player.getCurrentTime();
+            let duration = player.getDuration();
+            let currentTime = player.getCurrentTime();
             
             if (duration > 0)
             {
-              var currentPerc = (currentTime / duration) * 100;
+              let currentPerc = (currentTime / duration) * 100;
               currentPerc = Math.round(currentPerc);
               
               // check each percentage
@@ -1118,10 +1118,10 @@ else
        */
       trackEvent: function (event, id, action, label) {
         
-        var videoName = event.getVideoData().title;
-        var actionName = action + ' - ' + videoName;
+        let videoName = event.getVideoData().title;
+        let actionName = action + ' - ' + videoName;
         
-        var trackingObject = TrackingObjectFactory.createObj({
+        let trackingObject = TrackingObjectFactory.createObj({
           'Category': "videos",
           'Action'  : actionName,
           'Label'   : window.location.pathname,
@@ -1162,7 +1162,7 @@ else
      * configuration object to set global configuration parameters
      * @param {String} UaId - Google Analytics tracking id
      */
-    var configDefault = {
+    let configDefault = {
       'UaId'                   : 'UA-42270417-5',
       'validDownloadExtensions': /\.*.(zip|rar|mp\\d+|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff*|avi|svg)/,
       'GoogleAnalyticsUri'     : 'https://www.googletagmanager.com/gtag/js?id=',
@@ -1234,7 +1234,7 @@ else
         
         gtag('js', new Date());
         // map the url
-        var href = UrlMapper.map(window.location.href, configDefault.UrlMapping);
+        let href = UrlMapper.map(window.location.href, configDefault.UrlMapping);
         gtag('config', configDefault.UaId, {
           'anonymize_ip' : true,
           'page_location': href,
@@ -1265,7 +1265,7 @@ else
       
       // track the search input
       // the input button
-      var searchButton = TrackingObjectFactory.createObj({
+      let searchButton = TrackingObjectFactory.createObj({
         'BaseSelector': 'nav button.btn-search.catro-search-button',
         'Category'    : "engagement",
         'Action'      : "search",
@@ -1308,9 +1308,9 @@ else
         
         // sets the category name of the branch
         
-        var homepageCategory = 'home page';
+        let homepageCategory = 'home page';
         
-        var elementList = [
+        let elementList = [
           {
             /**
              * Tracks the clicks on the featured programs
@@ -1348,7 +1348,7 @@ else
           elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory));
         }
         
-        var trackingObjectList = TrackingObjectFactory.createArray(elementList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
         AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
       }
       
@@ -1358,9 +1358,9 @@ else
         /**
          * Login page tracking code
          */
-        var loginCategory = 'engagement';
+        let loginCategory = 'engagement';
         
-        var elementList = [
+        let elementList = [
           {
             /**
              * Tracks the direct logins
@@ -1393,16 +1393,16 @@ else
           },
         ];
         
-        var trackingObjectList = TrackingObjectFactory.createArray(elementList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
         AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
       }
       
       if (/.*\/program.*/.test(window.location.pathname))
       {
         
-        var programCategory = 'program page';
+        let programCategory = 'program page';
         
-        var elementList = [
+        let elementList = [
           {
             /**
              * Tracks the interactive execution of the program
@@ -1541,7 +1541,7 @@ else
           HelperFunctions.createTripleElementProgram('specific-programs-recommendations', 'recommended', programCategory));
         
         // Social interactions
-        var socialInteraction = [
+        let socialInteraction = [
           {
             /**
              * Tracks the click thumpsUp button
@@ -1594,10 +1594,10 @@ else
           },
         ];
         
-        var trackingObjectList = TrackingObjectFactory.createArray(elementList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
         AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
         
-        var trackingObjectListSocialInteraction = TrackingObjectFactory.createArray(socialInteraction);
+        let trackingObjectListSocialInteraction = TrackingObjectFactory.createArray(socialInteraction);
         AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction);
         
       }
@@ -1605,10 +1605,10 @@ else
       if (/.*\/search.*/.test(window.location.pathname))
       {
         
-        var searchCategory = 'search page';
-        var actionSubstring = ((window.location.pathname.indexOf('/tag/search') >= 0) ? "tag" : "program");
+        let searchCategory = 'search page';
+        let actionSubstring = ((window.location.pathname.indexOf('/tag/search') >= 0) ? "tag" : "program");
         
-        var elementList = [
+        let elementList = [
           {
             /**
              * Tracks the clicks on a searched program
@@ -1641,7 +1641,7 @@ else
           },
         ];
         
-        var trackingObjectList = TrackingObjectFactory.createArray(elementList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
         AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
       }
       
@@ -1650,13 +1650,13 @@ else
         
         
         // tracks the internal downloads
-        var libraryDownload = TrackingObjectFactory.createObj(
+        let libraryDownload = TrackingObjectFactory.createObj(
           {
             'BaseSelector': 'a[onclick^="onDownload',
             'Category'    : 'download',
             'Action'      : 'click - ' + window.location.pathname,
             'Label'       : function (e) {
-              var dataHref = $(e).attr('data-href');
+              let dataHref = $(e).attr('data-href');
               return HelperFunctions.getParameterByName('fname', dataHref);
             }
           });
@@ -1665,7 +1665,7 @@ else
           $(this).attr('data-href', $(this).attr('href'));
         });
         
-        //var libraryDownloadList = [];
+        //let libraryDownloadList = [];
         //libraryDownloadList.push(libraryDownload);
         AnalyticsTracker.registerElementsForClickTracking(libraryDownload);
         
@@ -1674,8 +1674,8 @@ else
       if (/.*\/profile.*/.test(window.location.pathname))
       {
         
-        var profileCategory = 'profile page';
-        var profileElements = [
+        let profileCategory = 'profile page';
+        let profileElements = [
           {
             /**
              * Tracks the click on the delete button
@@ -1690,7 +1690,7 @@ else
              * Tracks the click on the make invisible button
              */
             'BaseSelector': '#myprofile-programs',
-            'SubSelector' : '.img-visibility-visible',
+            'SubSelector' : '.img-lock-open',
             'Category'    : profileCategory,
             'Action'      : 'click - set invisible own program',
           },
@@ -1699,13 +1699,13 @@ else
              * Tracks the click on the make visible button
              */
             'BaseSelector': '#myprofile-programs',
-            'SubSelector' : '.img-visibility-hidden',
+            'SubSelector' : '.img-lock',
             'Category'    : profileCategory,
             'Action'      : 'click - set visible own program',
           }
         ];
         
-        var profileObjectList = TrackingObjectFactory.createArray(profileElements);
+        let profileObjectList = TrackingObjectFactory.createArray(profileElements);
         AnalyticsTracker.registerElementsForClickTracking(profileObjectList);
         
       }

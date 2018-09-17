@@ -37,6 +37,7 @@ class StatusCode
   const NOT_MY_PROGRAM = 529;
   const NO_ADMIN_RIGHTS = 530;
   const NOT_LOGGED_IN = 531;
+  const PASSWORD_INVALID = 532;
 
   const LOGIN_ERROR = 601;
   const REGISTRATION_ERROR = 602;
@@ -68,6 +69,8 @@ class StatusCode
   const USER_NAME_IS_EMAIL_ADDRESS = 775;
   const USER_AVATAR_UPLOAD_ERROR = 776;
   const USER_ADD_USERNAME_EXISTS = 777;
+  const USER_EMAIL_MISSING = 778;
+  const USER_EMAIL_ALREADY_EXISTS = 779;
 
   const NO_GAME_JAM = 900;
 

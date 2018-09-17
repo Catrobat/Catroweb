@@ -1,0 +1,5 @@
+{% if not nolb_user and not app.user.limited %}
+  <button id="delete-account-button" class="btn btn-danger save-button">
+    {{ 'myprofile.deleteAccount'|trans({}, 'catroweb') }}
+  </button>
+{% endif %}

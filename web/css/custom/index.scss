@@ -20,23 +20,6 @@ h1 {
   }
 }
 
-.help-headline {
-  border-bottom: 1px solid #17a5b8;
-  text-align: center;
-
-  h1.help-title {
-    border: none;
-    vertical-align: middle;
-    display: inline;
-  }
-
-  .help-icon {
-    font-size: 1.25em;
-    cursor: pointer;
-    color: $primary;
-  }
-}
-
 
 // feature bootstrap carousel
 $carousel-indicator-size: 1em;
@@ -75,7 +58,6 @@ $carousel-indicator-margin: 0.2em;
 
 .carousel-control  {
     font-size: $carousel-control-size;
-    text-shadow: 0 0 0.1em #000000, 0 0 0.1em #000000;
 
   @media screen and (max-width: 768px) {
     font-size: $carousel-control-size / 1.3;

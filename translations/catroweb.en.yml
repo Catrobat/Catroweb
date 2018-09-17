@@ -3,6 +3,8 @@
 localLanguage: English
 username: Username
 password: Password
+accountSettings: Account Settings
+email: E-Mail
 aboutPocketCode: About Pocket Code
 tutorials: Tutorials
 googlePlay: Google Play
@@ -46,9 +48,6 @@ indexPage:
       title: 'What programs are recommended here?'
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 
-
-
-
 programs:
   welcome:
     title: Welcome to Catrobat's Pocket Code
@@ -67,6 +66,12 @@ programs:
     Cancel
   reportCommentConfirmation: Are you sure you want to report this comment?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongDescription: The program description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
   most:
@@ -115,6 +120,7 @@ programs:
   nolb_example: Example programs
   editDescription: Edit the program Description
   saveDescription: Save Description change
+  addComment: Write a comment
 
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
@@ -148,11 +154,15 @@ profile:
   saveChanges: save changes
   newPass: new password
   repeatPass: repeat password
+  oldPass: old password
   firstEmail: My first email
   secondEmail: My second email
   myPrograms: My programs
   follows: Follows
   follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
@@ -175,6 +185,9 @@ myprofile:
   editProfile: Edit profile
   edit: Edit
   done: Done
+  success: Success
+  checkMail: An email was sent to your email address. Please check your inbox.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
   editAvatar: Edit avatar
@@ -184,6 +197,9 @@ myprofile:
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 
 
 licenseToPlay:
