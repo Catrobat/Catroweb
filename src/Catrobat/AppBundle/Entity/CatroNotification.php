@@ -48,7 +48,8 @@ use Doctrine\ORM\Mapping as ORM;
  *   "comment" = "CommentNotification",
  *   "like" = "LikeNotification",
  *   "follow" = "FollowNotification",
- *   "follow_program" = "NewProgramNotification"
+ *   "follow_program" = "NewProgramNotification",
+ *   "broadcast_notification" = "BroadcastNotification"
  * })
  */
 class CatroNotification

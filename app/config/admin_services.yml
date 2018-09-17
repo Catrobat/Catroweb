@@ -59,6 +59,12 @@ services:
                 - { name: sonata.admin, manager_type: orm, label: SendMail }
               arguments: [null, Catrobat\AppBundle\Entity\Group, AppBundle:Admin\EmailUserMessage]
 
+      catrowebadmin.block.tools.broadcast:
+            class: Catrobat\AppBundle\Admin\BroadcastNotificationAdmin
+            tags:
+            - { name: sonata.admin, manager_type: orm, label: Broadcast Notification }
+            arguments: [null, null, AppBundle:Admin\BroadcastNotification]
+
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
         tags:

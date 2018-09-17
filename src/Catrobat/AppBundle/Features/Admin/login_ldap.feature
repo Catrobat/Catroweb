@@ -13,14 +13,14 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-user         | 123456   | Webserver-Administrators          |
       | ldap-mediapackage | 654321   | Webserver-MediaPackageMaintainers |
     When I POST login with user "ldap-user" and password "123456"
-    Then the response should contain "Featured"
+    Then the client response should contain "Featured"
 
   Scenario: login with invalid username and password on LDAP should fail
     Given there are LDAP-users:
       | name      | password |
       | ldap-user | 123456   |
     When I POST login with user "ldap-user" and password "not-the-pwd-you-are-looking-for"
-    Then the response should contain "Your password or username was incorrect"
+    Then the client response should contain "Your password or username was incorrect"
 
 
   Scenario: User without group on LDAP should not be able to log into admin-area
@@ -28,9 +28,9 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | name      | password |
       | ldap-user | 123456   |
     When I POST login with user "ldap-user" and password "123456"
-    Then the response should contain "Featured"
+    Then the client response should contain "Featured"
     When I GET "/admin/dashboard"
-    Then the response should contain "Access Denied"
+    Then the client response should contain "Access Denied"
 
   Scenario: User in Catroweb-Group on LDAP should be Super-Admin after login
     Given there are LDAP-users:
@@ -38,7 +38,7 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-user | 123456   | Webserver-Administrators |
     When I POST login with user "ldap-user" and password "123456"
     And I GET "/admin/dashboard"
-    Then the response should contain "Admin Panel"
+    Then the client response should contain "Admin Panel"
 
 
   Scenario: login as Mediapackage-User should give access only to mediapackage in admin-area
@@ -48,9 +48,9 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-mediapackage | 654321   | Webserver-MediaPackageMaintainers |
     When I POST login with user "ldap-mediapackage" and password "654321"
     And I GET "/admin/media_package/list"
-    Then the response should contain "Media Package List"
+    Then the client response should contain "Media Package List"
     When I GET "/admin/upload_notification/list"
-    Then the response should contain "Forbidden"
+    Then the client response should contain "Forbidden"
 
 
   Scenario: login as FeaturedProgram-User should give access only to featured programs in admin-area
@@ -60,9 +60,9 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-featured | 654321   | Webserver-FeaturedProgramsMaintainers |
     When I POST login with user "ldap-featured" and password "654321"
     And I GET "/admin/featured_program/list"
-    Then the response should contain "Featured Program List"
+    Then the client response should contain "Featured Program List"
     When I GET "/admin/media_package/list"
-    Then the response should contain "Forbidden"
+    Then the client response should contain "Forbidden"
 
 
   Scenario: login as AppApprover-User should give access only to ApproveProgram in admin-area
@@ -71,9 +71,9 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-approve | 654321   | Webserver-AppApprovers |
     When I POST login with user "ldap-approve" and password "654321"
     And I GET "/admin/approve/list"
-    Then the response should contain "Program List"
+    Then the client response should contain "Program List"
     When I GET "/admin/media_package/list"
-    Then the response should contain "Forbidden"
+    Then the client response should contain "Forbidden"
 
 
   Scenario: login as LDAP-User when user with same email already exists should result in "merge"
@@ -81,7 +81,7 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | name           | password | email   |
       | ldap-emailuser | 654321   | c@d.com |
     When I POST login with user "ldap-emailuser" and password "654321"
-    Then the response should contain "User1"
+    Then the client response should contain "User1"
 
   Scenario: login as User in multiple LDAP groups should give access to multiple admin-areas
     Given there are LDAP-users:
@@ -89,11 +89,11 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-approve | 654321   | Webserver-AppApprovers,Webserver-FeaturedProgramsMaintainers |
     When I POST login with user "ldap-approve" and password "654321"
     And I GET "/admin/approve/list"
-    Then the response should contain "Program List"
+    Then the client response should contain "Program List"
     When I GET "/admin/featured_program/list"
-    Then the response should contain "Featured Program List"
+    Then the client response should contain "Featured Program List"
     When I GET "/admin/media_package/list"
-    Then the response should contain "Forbidden"
+    Then the client response should contain "Forbidden"
 
 
   Scenario: Group-change on LDAP-Server should lead to permissions-change after login
@@ -102,14 +102,14 @@ Feature: As a member of an AD-Server i want to be able to login and get propper 
       | ldap-fired-user | 654321   | Webserver-FeaturedProgramsMaintainers |
     When I POST login with user "ldap-fired-user" and password "654321"
     And I GET "/admin/featured_program/list"
-    Then the response should contain "Featured Program List"
+    Then the client response should contain "Featured Program List"
     When I GET "/logout"
     Given there are LDAP-users:
       | name            | password |
       | ldap-fired-user | 654321   |
     When I POST login with user "ldap-fired-user" and password "654321"
     And I GET "/admin/featured_program/list"
-    Then the response should contain "Access Denied"
+    Then the client response should contain "Access Denied"
 
   Scenario: login with local account should still be possible if LDAP server is not reachable
     Given there are LDAP-users:
