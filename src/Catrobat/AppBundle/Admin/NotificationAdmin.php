@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class NotificationAdmin extends AbstractAdmin
 {
@@ -18,7 +19,7 @@ class NotificationAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('upload', null, ['label' => 'Email bei Upload', 'required' => false])
       ->add('report', null, ['label' => 'Email bei Inappropriate Report', 'required' => false])
       ->add('summary', null, ['label' => 'Emails täglich sammeln', 'required' => false]);
@@ -34,7 +35,7 @@ class NotificationAdmin extends AbstractAdmin
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('user.email')
       ->add('upload', null, ['editable' => true])
       ->add('report', null, ['editable' => true])

@@ -50,7 +50,12 @@ class OnlyDefinedImagesValidator
   {
     $defined_file_nodes = $xml->xpath('/program/objectList/object/lookList/look/fileName');
     $defined_files = [];
-    while (list(, $node) = each($defined_file_nodes))
+//    while (list(, $node) = each($defined_file_nodes))
+//    {
+//      $defined_files[] = $node;
+//    }
+//
+    foreach ($defined_file_nodes as $key => $node)
     {
       $defined_files[] = $node;
     }
