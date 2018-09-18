@@ -52,7 +52,7 @@ class SecurityController extends Controller
      * @var $user        User
      */
     $userManager = $this->get('usermanager');
-    $tokenGenerator = $this->get('tokengenerator');
+    $tokenGenerator = $this->get("tokengenerator");
     $validator = $this->get('validator');
 
     $retArray = [];
@@ -201,8 +201,8 @@ class SecurityController extends Controller
      */
 
     $userManager = $this->get("usermanager");
-    $validator = $this->get("validator");
     $tokenGenerator = $this->get("tokengenerator");
+    $validator = $this->get("validator");
     $retArray = [];
 
     $login_request = new LoginUserRequest($request);
@@ -249,7 +249,10 @@ class SecurityController extends Controller
       }
       else
       {
-        $correct_pass = $userManager->isPasswordValid($user, $password);
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+        $correct_pass = $userManager->isPasswordValid($user, $password, $encoder);
+        $dd = null;
         if ($correct_pass)
         {
           $retArray['statusCode'] = StatusCode::OK;

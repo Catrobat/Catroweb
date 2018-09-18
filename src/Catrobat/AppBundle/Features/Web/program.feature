@@ -41,78 +41,97 @@ Feature: As a visitor I want to see a program page
     And I click "#program-user a"
     Then I should be on "/pocketcode/profile/1"
 
-  Scenario: report as inappropriate
+  Scenario: I should not see the report button for my own programs
+    Given I log in as "Superman" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    Then the element "#report-program-button" should not exist
+
+  Scenario: The report pop up should have a session where reason and checked category is stored
+    Given I log in as "Gregor" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    And I click "#report-program-button"
+    Then I should see "Why do you want to report this program?"
+    When I fill in "report-reason" with "Super secret message"
+    And I click the "#report-copyright" RadioButton
+    And I click ".swal2-cancel"
+    When I click "#report-program-button"
+    Then the "report-reason" field should contain "Super secret message"
+    And the "report-copyright" checkbox should be checked
+    When I fill in "report-reason" with "Magic"
+    And I click ".swal2-cancel"
+    When I am on "/pocketcode/program/6"
+    And I wait for the server response
+    When  I click "#report-program-button"
+    Then the "report-reason" field should not contain "Super secret message"
+    And the "report-reason" field should not contain "Magic"
+    And the "report-copyright" checkbox should not be checked
+    When I am on "/pocketcode/program/1"
+    And I wait for the server response
+    When I click "#report-program-button"
+    Then the "report-reason" field should not contain "Super secret message"
+    Then the "report-reason" field should contain "Magic"
+    And the "report-copyright" checkbox should be checked
+
+  Scenario: report program when not logged in should bring me to login page,
+    but when logging in I should be returned to the program page and my report should be saved
     Given I am on "/pocketcode/program/1"
-    And I click "#report"
-    Then I should see "Please login to report this program."
-    When I click "#report-container a"
-    Then I should be on "/pocketcode/login"
-    And I fill in "username" with "Gregor"
+    And I click "#report-program-button"
+    Then I should be on "/login"
+    When I fill in "username" with "Gregor"
     And I fill in "password" with "123456"
     And I press "Login"
-    Then I should be on "/pocketcode/program/1#login"
-    When I click "#report"
+
+  Scenario: report as inappropriate
+    Given I log in as "Gregor" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-inappropriate" RadioButton
-    And I fill in "reportReason" with "I do not like this program ... hehe"
-    When I click "#report-report"
+    And I fill in "report-reason" with "I do not like this program ... hehe"
+    And I click ".swal2-confirm"
     And I wait for the server response
-    Then I should see "You reported this program!"
+    Then I should see "Your report was successfully sent!"
+    When I click ".swal2-confirm"
+    Then I should be on "/pocketcode/"
 
   Scenario: report as copyright infringement
-    Given I am on "/pocketcode/program/1"
-    And I click "#report"
-    Then I should see "Please login to report this program."
-    When I click "#report-container a"
-    Then I should be on "/pocketcode/login"
-    And I fill in "username" with "Gregor"
-    And I fill in "password" with "123456"
-    And I press "Login"
-    Then I should be on "/pocketcode/program/1#login"
-    When I click "#report"
+    Given I log in as "Gregor" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-copyright" RadioButton
-    And I fill in "reportReason" with "That was my idea!!!"
-    When I click "#report-report"
+    And I fill in "report-reason" with "That was my idea!!!"
+    And I click ".swal2-confirm"
     And I wait for the server response
-    Then I should see "You reported this program!"
-
+    Then I should see "Your report was successfully sent!"
+    When I click ".swal2-confirm"
+    Then I should be on "/pocketcode/"
 
   Scenario: report as spam
-    Given I am on "/pocketcode/program/1"
-    And I click "#report"
-    Then I should see "Please login to report this program."
-    When I click "#report-container a"
-    Then I should be on "/pocketcode/login"
-    And I fill in "username" with "Gregor"
-    And I fill in "password" with "123456"
-    And I press "Login"
-    Then I should be on "/pocketcode/program/1#login"
-    When I click "#report"
+    Given I log in as "Gregor" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-spam" RadioButton
-    And I fill in "reportReason" with "This is spam :D"
-    When I click "#report-report"
+    And I fill in "report-reason" with "That's just spam!!!"
+    And I click ".swal2-confirm"
     And I wait for the server response
-    Then I should see "You reported this program!"
+    Then I should see "Your report was successfully sent!"
+    When I click ".swal2-confirm"
+    Then I should be on "/pocketcode/"
 
   Scenario: report as dislike
-    Given I am on "/pocketcode/program/1"
-    And I click "#report"
-    Then I should see "Please login to report this program."
-    When I click "#report-container a"
-    Then I should be on "/pocketcode/login"
-    And I fill in "username" with "Gregor"
-    And I fill in "password" with "123456"
-    And I press "Login"
-    Then I should be on "/pocketcode/program/1#login"
-    When I click "#report"
+    Given I log in as "Gregor" with the password "123456"
+    And I am on "/pocketcode/program/1"
+    When I click "#report-program-button"
     Then I should see "Why do you want to report this program?"
     And I click the "#report-dislike" RadioButton
-    And I fill in "reportReason" with "I do not like this program ... hehe"
-    When I click "#report-report"
+    And I fill in "report-reason" with "I do not like this program ... hehe"
+    And I click ".swal2-confirm"
     And I wait for the server response
-    Then I should see "You reported this program!"
+    Then I should see "Your report was successfully sent!"
+    When I click ".swal2-confirm"
+    Then I should be on "/pocketcode/"
 
   Scenario: I want a link to this program
     Given I am on "/pocketcode/program/1"

@@ -2,6 +2,8 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Events\ReportInsertEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
@@ -19,8 +21,9 @@ class ReportController extends Controller
    */
   public function reportProgramAction(Request $request)
   {
-    /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */
-    /* @var $program \Catrobat\AppBundle\Entity\Program */
+    /* @var $program_manager ProgramManager */
+    /* @var $program Program */
+    /* @var $user User */
 
     $program_manager = $this->get('programmanager');
     $entity_manager = $this->getDoctrine()->getManager();
@@ -50,11 +53,12 @@ class ReportController extends Controller
 
     if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
     {
-      $report->setReportingUser($this->get('security.token_storage')->getToken()->getUser()); //could be anon
+      $user = $this->get('security.token_storage')->getToken()->getUser();
+      $report->setReportingUser($user);
     }
     else
     {
-      $report->setReportingUser(null); //could be anon
+      $report->setReportingUser(null); // could be anon
     }
 
     $program->setVisible(false);

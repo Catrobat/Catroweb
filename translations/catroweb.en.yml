@@ -185,7 +185,6 @@ myprofile:
   editProfile: Edit profile
   edit: Edit
   done: Done
-  success: Success
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
@@ -572,6 +571,7 @@ errors:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 
 success:
+  text: Success
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
