@@ -121,6 +121,11 @@ programs:
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 
 remixGraph:
   showRemixGraph: 'Show Remix Graph'

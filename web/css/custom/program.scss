@@ -235,11 +235,6 @@ h2
     margin: 25px auto;
     line-height: 23px;
   }
-
-  #apk-pending, #apk-download, #apk-generate
-  {
-    display: none;
-  }
 }
 
 .show
@@ -365,13 +360,10 @@ h2
   height: 40px;
 }
 
-.download-button
-{
-  width: 215px;
-  padding: 5px 10px;
-  font-weight: normal;
-  float: left;
-  margin-right: 10px;
+.download-button {
+  display: flex;
+  align-items:center;
+  justify-content: center;
 }
 
 .download-button img
@@ -382,7 +374,8 @@ h2
 
 .download-container
 {
-  display: table-row;
+  display: block;
+  text-align: center;
 }
 
 .download-pending

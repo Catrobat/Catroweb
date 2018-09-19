@@ -111,6 +111,13 @@ header
   }
 }
 
+.navbar-brand
+{
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 0;
+}
+
 // can/should be used for uniform width of page containers
 .content
 {
@@ -173,7 +180,8 @@ header
   }
 }
 
-@mixin tooltip-border-styles($borderColor){
+@mixin tooltip-border-styles($borderColor)
+{
   & + .tooltip
   {
     &.top .tooltip-arrow,
@@ -205,14 +213,12 @@ header
   {
     background-color: $success;
   }
-  & > .tooltip > .arrow::before {
+  & > .tooltip > .arrow::before
+  {
     border-right-color: $success;
   }
   @include tooltip-border-styles($success);
 }
-
-
-
 
 // general card for catroweb
 .catro-card
@@ -409,6 +415,7 @@ header
     }
   }
 }
+
 .help-video-container
 {
   iframe
@@ -425,33 +432,30 @@ header
   font-size: 2.0em;
 }
 
-.bg-catrobat {
+.bg-catrobat
+{
   background-color: $primary;
 }
-.text-catrobat {
+
+.text-catrobat
+{
   color: $primary;
 }
 
-.theme-logo-title {
+.theme-logo-title
+{
   font-size: $theme-logo-font-size;
   font-weight: $theme-logo-font-weight;
 }
 
-$galaxy-button-background-color: #9583B2;
-#gamejam-submission {
+$galaxy-button-background-color: #9583b2;
+#gamejam-submission
+{
   @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
 }
 
-
-.catro-icon-button {
-  color: $primary;
-  cursor: pointer;
-  &:hover {
-    color: darken($primary, 10);
-  }
-}
-
-.parting-line {
+.parting-line
+{
   border-top: 1px solid $primary;
 }
 

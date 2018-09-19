@@ -52,13 +52,13 @@
             {% if comment.username != user_name %}
               <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
                  data-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
-                <i class="catro-icon-button ml-3 fas fa-ban text-danger"></i>
+                <i class="ml-3 fas fa-ban text-danger"></i>
               </a>
             {% endif %}
             {% if  program_details.isAdmin or comment.username == user_name %}
               <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
                  data-toggle="tooltip" title="{{ 'programs.delete'|trans({}, 'catroweb') }}">
-                <i class="catro-icon-button ml-2 fas fa-trash-alt text-danger"></i>
+                <i class="ml-2 fas fa-trash-alt text-danger"></i>
               </a>
             {% endif %}
           </div>

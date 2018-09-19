@@ -214,36 +214,36 @@ let ProgramLoader = function(container, url, column_max, recommended_by_program_
         case '#newest':
         case '#search-results':
         case "#random":
-          div = '<div><div class="img-time-small"></div>' + programs[i].UploadedString + '</div>';
+          div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>';
           break;
         case '#myprofile-programs':
         case '#user-programs':
-          div = '<div>' + programs[i].UploadedString + '</div>';
+          div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>';
           break;
         case '#mostDownamount_of_loaded_programs':
-          div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
+          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>';
           break;
         case '#mostViewed':
-          div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>';
           break;
         case '#recommendations':
-          div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>';
           break;
         case '#recommended':
-          div = '<div><div class="img-view-small"></div>' + programs[i].Views + '</div>';
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>';
           additional_link_css_class = "homepage-recommended-programs";
           break;
         case '#specific-programs-recommendations':
-          div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
+          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>';
           break;
         default:
           if ($(self.container).hasClass('starterDownloads'))
           {
-            div = '<div><div class="img-download-small"></div>' + programs[i].Downloads + '</div>';
+            div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>';
           }
           else
           {
-            div = '<div>' + programs[i].Author + '</div>';
+            div = '<div><i class="fas fa-user program-small-icon"></i>' + programs[i].Author + '</div>';
           }
       }
       
