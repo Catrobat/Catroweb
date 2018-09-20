@@ -1,6 +1,8 @@
-@import "theme_settings";
-$nav-font-size: $default-font-size + 4;
-$searchbar-font-size: $default-font-size + 2;
+@import "variables";
+@import 'theme_settings';
+
+$nav-font-size: $default-font-size + 0.25;
+$searchbar-font-size: $default-font-size + 0.125;
 $logo-width: 300px;
 
 #header-logo {

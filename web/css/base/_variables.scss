@@ -73,10 +73,15 @@ $nav-tabs-border-color:             $dropdown-border-color !default;
 $nav-tabs-link-hover-border-color:  $nav-tabs-border-color !default;
 $nav-tabs-link-active-border-color: $nav-tabs-border-color !default;
 
+// Nav Logo
+
+$nav-logo-width: 4rem;
+
 // Navbar
 
 $navbar-dark-color:                 rgba($white,.7) !default;
 $navbar-dark-hover-color:           $white !default;
+$nav-dropdown-color:                #FFFCF4;
 
 // Pagination
 
@@ -111,7 +116,60 @@ $close-color:                       $gray-600 !default;
 $close-text-shadow:                 none !default;
 
 // Login Logo
+
 $theme-logo-color-primary:          #17A6B7;
 $theme-logo-color-secondary:        #FF7701;
 $theme-logo-font-size:              40px;
 $theme-logo-font-weight:            800;
+
+
+/* Footer */
+$footer-background-color: #e1e2e1;
+$footer-color: $black;
+$footer-size: 21em;
+$footer-size-small-screens: 25em;
+$footer-padding: 15px;
+
+
+/* Font */
+$font-size-h1: 2.5rem;
+$font-size-h2: 2.0rem;
+$default-font-size: 0.9rem;
+$special-font-color: black;
+
+/* Default */
+$default-background-color: #fefeff;
+$default-input-background-color: #96CED6;
+$default-input-padding: 5px;
+$default-input-size: 18px;
+$default-button-size: 26px;
+$default-button-padding: 10px;
+$default-text-color: $primary;
+$default-border-color: $primary;
+$help-link-color: $primary;
+$content-default-link-color: $primary;
+
+
+// Wrapper
+$wrapper-padding-top: 7rem;
+
+// image sizes
+
+$avatar-img-size: 31px;
+
+// icon sizes
+
+
+// Responsive sizes
+
+$responsive-width-content: 1054px;
+$responsive-width-tablet: 767px;
+
+
+
+
+
+
+
+
+$default-sprite-url: ""; // ToDO Remove me after merge with fontawesome!!!

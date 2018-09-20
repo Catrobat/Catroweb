@@ -53,13 +53,6 @@ var Main = function(search_url)
     var nav = $('nav');
     var navDropdown = $('#nav-dropdown');
     
-    // toggle footer view
-    $('#footer-more-less').click(function()
-    {
-      $('body').toggleClass('footer-expand');
-      $(window).scrollTop($(document).height());
-    });
-    
     // toggle searchbar
     $('#menu-mobile').find('.btn-search').click(function()
     {

@@ -1,21 +1,13 @@
 @import "variables";
 @import "bootswatch";
 @import "mixins";
+@import "elements";
+@import "theme_settings";
 
 html, body
 {
   margin: 0;
   height: 50%;
-}
-.white-icon
-{
-  font-size: 2em;
-  color: white;
-}
-
-.medium-icon
-{
-  font-size: 1.7em;
 }
 
 .right-inline
@@ -42,24 +34,10 @@ header
 {
   padding: 0;
 
-  .navbar-header
-  {
-    display: flex;
-    align-items: center;
-
-    h3
-    {
-      color: white;
-      margin: 0;
-    }
-
-    .navbar-toggle
-    {
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-right: 0;
-    }
+  .dropdown-menu {
+    background-color: $nav-dropdown-color;
   }
+
   .catro-search-button
   {
     background-color: rgba(0, 0, 0, 0.05);
@@ -475,4 +453,14 @@ $galaxy-button-background-color: #9583B2;
 
 .parting-line {
   border-top: 1px solid $primary;
+}
+
+// Login Logo
+
+.title-color-left {
+  color: $theme-logo-color-primary;
+}
+
+.title-color-right {
+  color: $theme-logo-color-secondary;
 }

@@ -1,4 +1,5 @@
-@import "../base/variables";
+@import "elements";
+@import "variables";
 @import "theme_settings";
 
 @font-face {
@@ -58,7 +59,7 @@ input {
 
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 html {
@@ -67,7 +68,7 @@ html {
 }
 
 body {
-  background: $default-background-color;
+  background: $default-background-color!important;
   font-family: 'Roboto', Arial, sans-serif;
   height: 100%;
 }
@@ -84,9 +85,10 @@ h3,
 .h1,
 .h2,
 .h3 {
+  color: $primary!important;
   page-break-after: avoid;
   text-transform: uppercase;
-  margin: 0px;
+  margin: 0;
   font-weight: bold;
 }
 
@@ -101,7 +103,7 @@ h2, .h2 {
 }
 
 .size-small {
-  font-size: $default-font-size - 4;
+  font-size: $default-font-size - 0.25;
 }
 
 li {
@@ -113,15 +115,15 @@ li {
 }
 
 .size-large {
-  font-size: $default-font-size + 4;
+  font-size: $default-font-size + 0.25;
 }
 
 .size-xlarge {
-  font-size: $default-font-size + 8;
+  font-size: $default-font-size + 0.5;
 }
 
 .size-xxlarge {
-  font-size: $default-font-size + 12;
+  font-size: $default-font-size + 0.75;
 }
 
 .content-container {
@@ -208,7 +210,6 @@ form {
   @include box-shadow(inset 2px 2px 5px #999);
     overflow: auto;
     padding: $default-input-padding;
-    margin-bottom: 10px;
 
     input {
       border: none;
@@ -245,9 +246,6 @@ form {
     width: 84px;
   }
 
-  .program-name {
-    height: 2em;
-  }
   > .program {
     float: left;
     /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in
@@ -274,7 +272,7 @@ form {
       }
 
       > div:nth-child(3) {
-        font-size: $default-font-size - 2;
+        font-size: $default-font-size - 0.125;
       }
 
       audio {
@@ -356,7 +354,7 @@ form {
   margin-top: 50px;
 
   p {
-    font-size: $default-font-size + 20;
+    font-size: $default-font-size + 1.25;
   }
 }
 
@@ -424,12 +422,6 @@ form {
 
 @media screen and (max-width: $responsive-width-tablet) {
 
-  .footer-expand {
-    #wrapper {
-      padding-bottom: $footer-height-bottom + $footer-height-mobile + $footer-height-padding;
-    }
-  }
-
   .standard-col-text {
   @include box-columns(1, 25px);
     padding: 25px 0;
@@ -437,7 +429,39 @@ form {
 
 }
 
-/* mouse grab icon */
-.grabbing {
-  cursor:url(../images/symbols/grabbing.png) 8 8, move;
+.radio-item {
+  display: inline-block;
+  position: relative;
+  padding: 0 0 0 20px;
+  margin: 0 0 0 0;
+  width: 100%;
+}
+
+.radio-item input[type='radio'] {
+  display: none;
+}
+
+.radio-item label:before {
+  content: " ";
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  margin: 0 5px 0 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 11px;
+  border: 2px solid $primary;
+  background-color: transparent;
+}
+
+.radio-item input[type=radio]:checked + label:after {
+  border-radius: 11px;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 9px;
+  left: 24px;
+  content: "";
+  display: block;
+  background: $primary;
 }

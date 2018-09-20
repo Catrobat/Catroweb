@@ -1,43 +1,55 @@
-.navbar {
+@import "variables";
+@import 'theme_settings';
 
-    .dropdown-item,
-    .nav-link {
-        font-size: 1.5em;
-    }
+.navbar
+{
+  .dropdown-item,
+  .nav-link
+  {
+    font-size: 1.5em;
+  }
 
-    i.material-icons {
-        font-size: inherit;
-        vertical-align: middle;
-    }
+  i.material-icons
+  {
+    font-size: inherit;
+    vertical-align: middle;
+  }
 }
 
-$nav-logo-dim: 4rem;
-.nav-logo {
-    display: inline-block;
-    width: $nav-logo-dim;
-    max-width: $nav-logo-dim;
-    margin-right: 0.5rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
+.nav-logo
+{
+  display: inline-block;
+  width: $nav-logo-width;
+  max-width: $nav-logo-width;
+  margin-right: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
-.nav-catrobat {
-    padding: 1rem 0.5rem;
-    margin-bottom: 2rem;
+
+.nav-catrobat
+{
+  padding: 1rem 0.5rem;
+  margin-bottom: 2rem;
 }
 
 // stops navbar from being on top of body content
-#wrapper {
-  padding-top: 7rem;
+#wrapper
+{
+  padding-top: $wrapper-padding-top;
 }
 
-@media (min-width: 768px) {
-    .d-md-list-item {
-        display: list-item !important;
-    }
+@media (min-width: 768px)
+{
+  .d-md-list-item
+  {
+    display: list-item !important;
+  }
 }
 
-@media (max-width: 767px) {
-    .w-sm-100 {
-        width: 100% !important;
-    }
+@media (max-width: 767px)
+{
+  .w-sm-100
+  {
+    width: 100% !important;
+  }
 }

@@ -8,6 +8,10 @@
       <a id="page-name" class="navbar-brand mt-1" href="{{ path('index') }}">Home</a>
     {#</div>#}
 
+    {% if theme() == 'pocketgalaxy' %}
+      <a id="event-link" class="navbar-brand mt-1" href="http://www.galaxygamejam.com/AT/main.html">Event</a>
+    {% endif %}
+
     <div class="d-inline-flex ml-auto align-items-center my-auto">
         {# START: Searchfield #}
       <input type="text" class="form-control input-search search-input-header d-none"

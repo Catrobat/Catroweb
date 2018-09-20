@@ -100,7 +100,7 @@ input:valid ~ label {
 
 .highlight {
   position: absolute;
-  height: 0%;
+  height: 0;
   width: 100px;
   top: 25%;
   left: 0;
@@ -224,9 +224,7 @@ hr {
 
 #dialog_oauth_username_input {
   width: 100%;
-  border: 1px;
-  border-style: solid;
-  border-color: grey;
+  border: 1px solid grey;
 }
 
 #error_username_taken {

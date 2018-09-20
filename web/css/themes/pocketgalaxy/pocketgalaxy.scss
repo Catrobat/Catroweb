@@ -1,122 +1,28 @@
-@import '../../base/colors';
-@import '../../base/elements';
-@import '../../base/brain';
-@import '../../base/footer';
-@import '../../base/header';
-@import '../../base/images';
-@import '../../base/navbar';
 
-@import 'theme_settings';
+@import '../../base/elements'; // A set of useful LESS mixins (More info at: http://lesselements.com)
+@import '../../base/mixins';   // Our own defined Mixins
 
+
+//
+//  Here we define all colors and variables with their base values
+//  If you have to overwrite values for base or custom scss files consider using variables and store
+//  them in the _variables.scss file! And when creating new scss use variables and put them in this file!
+//
 @import "../../base/variables";
 
-// your color/variable changes here
 
+//
+// In the theme settings file you can overwrite basic theme variables:
+//
+@import 'theme_settings';
+
+
+//
+// Here we include the remaining base scss files.
+//
+@import '../../base/brain';
+@import '../../base/header';
+@import '../../base/footer';
+@import '../../base/images';
+@import '../../base/navbar';
 @import "../../base/catro_bootstrap";
-
-header {
-  nav {
-    #menu {
-      background: none;
-
-      .btn-menu {
-        border-left: 1px solid white;
-      }
-
-      input {
-        background: $default-input-background-color;
-        border: 0;
-        padding: 8px;
-        width: 200px;
-      @include rounded(2px);
-        margin-right: 8px;
-      }
-    }
-    #header-right {
-      vertical-align: bottom;
-      height:60px;
-    }
-    #header-left {
-      vertical-align: bottom;
-    }
-    #header-top {
-      margin-bottom: 0;
-      a {
-        color: #FFFFFF !important;
-      }
-    }
-    #searchbar {
-      background-color: $default-background-color;
-      color: $footer-background-color;
-      border: none;
-    }
-  }
-}
-
-@media (max-width: $responsive-width-tablet) {
-  .searchbar-visible {
-    #header-left {
-      border: none;
-    }
-  }
-}
-
-#wrapper {
-  background-image: $galaxy-background-image;
-}
-
-article, header {
-  max-width: 1024px;
-  margin: 0 auto;
-}
-
-header {
-  margin-bottom: 10px;
-}
-
-#footer-wrapper, #header-wrapper
-{
-  background-color: $footer-background-color;
-}
-#header-wrapper {
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5);
-}
-#footer-menu-desktop
-{
-  border-bottom: 1px solid $default-background-color;
-}
-#footer-menu-bottom select {
-  background-color: $footer-background-color;
-}
-
-#footer-menu-mobile {
-  border-top: 1px solid $default-background-color;
-}
-
-.owl-theme .owl-controls .owl-page span {
-  background: $footer-background-color;
-}
-
-#wrapper a {
-  color: $content-default-link-color
-}
-
-#program-user a {
-  color: #FFFFFF !important;
-}
-
-.program a {
-  color: #FFFFFF !important;
-}
-
-.img-nav-dropdown {
-  background-image: $galaxy-menu-upper-border;
-}
-
-header nav #nav-dropdown {
-  padding-top: 21px !important;
-}
-
-textarea {
-  color: black;
-}

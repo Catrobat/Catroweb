@@ -1,4 +1,4 @@
-@import 'elements';
+@import '../base/elements';
 
 #remix-graph-modal {
     margin:0;
@@ -26,7 +26,6 @@ div.close-remix-graph-modal {
     border: none;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
 @include user-select(none);
     transition: all 0.2s;
