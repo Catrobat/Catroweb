@@ -162,15 +162,6 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/bootstrap", name="bootstrap_template", methods={"GET"})
-   */
-  public function bootstrapTemplate(Request $request)
-  {
-    return $this->get('templating')->renderResponse('bootstrap_template.html.twig');
-  }
-
-
-  /**
    * @Route("/click-statistic", name="click_stats", methods={"POST"})
    */
   public function makeClickStatisticAction(Request $request)
