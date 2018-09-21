@@ -53,7 +53,8 @@
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.6",
         "symfony/phpunit-bridge": "*",
-        "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev"
+        "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
+        "wapmorgan/php-code-fixer": "dev-master"
     },
 
     "config": {
