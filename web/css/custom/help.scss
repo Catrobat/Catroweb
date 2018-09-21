@@ -1,3 +1,5 @@
+@import "../base/variables";
+@import "../base/elements";
 @import 'theme_settings';
 
 #help-container {
@@ -72,13 +74,13 @@
     .help-split-desktop {
 
       .help-split {
-        margin-left: 0px;
+        margin-left: 0;
         width: 100%;
       }
 
       .help-split:nth-child(1) {
         margin-bottom: 35px;
-        margin-left: 0px;
+        margin-left: 0;
       }
 
       .help-split-spacer {
@@ -115,8 +117,6 @@
     margin: 0 auto;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
     border-radius: 4px;
 
     div {
@@ -128,8 +128,6 @@
         border: 4px #FFF solid;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
-        -ms-border-radius: 4px;
-        -o-border-radius: 4px;
         border-radius: 4px;
       }
     }
@@ -366,7 +364,7 @@
   padding: 0;
 
   h3 {
-    margin: 25px auto 0px auto;
+    margin: 25px auto 0 auto;
   }
 
   .img-container {
@@ -432,7 +430,7 @@
 
       img {
         border: 1px solid #fff;
-        margin: 0px auto 15px auto;
+        margin: 0 auto 15px auto;
         width: 100%;
         max-width: 600px !important;
       }
@@ -443,7 +441,7 @@
       img {
         width: 40%;
         border: 1px solid #fff;
-        margin: 0px auto 15px auto;
+        margin: 0 auto 15px auto;
       }
     }
 

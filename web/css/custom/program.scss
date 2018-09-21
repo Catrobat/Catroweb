@@ -25,7 +25,7 @@ $fab-child-margin-small: ($fab-size-small - $fab-child-size-small) / 2 + $fab-ma
     border-radius: 50%;
     text-align:center;
     color: #FFF;
-    box-shadow:0px 0px 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25);
+    box-shadow:0 0 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25);
     position: fixed;
     bottom: $fab-margin;
     right: $fab-margin;
@@ -89,7 +89,7 @@ $fab-child-margin-small: ($fab-size-small - $fab-child-size-small) / 2 + $fab-ma
     border-radius: 50%;
     text-align:center;
     color: #FFF;
-    box-shadow:0px 0px 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25);
+    box-shadow:0 0 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25);
     position: fixed;
     bottom: $fab-margin-small;
     right: $fab-margin-small;
@@ -146,9 +146,9 @@ $fab-child-margin-small: ($fab-size-small - $fab-child-size-small) / 2 + $fab-ma
 
 
 button, .button {
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 12px;
-  font-size: $default-font-size + 6;
+  font-size: $default-font-size + 0.375;
   padding-left: 25px;
   padding-right: 25px;
 }
@@ -162,8 +162,7 @@ a {
 }
 
 .text-area-empty {
-  border-width: medium;
-  border-color: red;
+  border: medium red;
 }
 
 #program-top {
@@ -191,7 +190,7 @@ a {
 }
 
 h2{
-  margin: 0px;
+  margin: 0;
 }
 
 #program-middle {
@@ -313,7 +312,7 @@ h2{
 
 #program-like-container {
   margin-top: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 
   #program-like-buttons-container {
     text-align: center;
@@ -529,7 +528,7 @@ table td:nth-child(1) {
   #nolb-submission-button {
     max-height: 50px;
     max-width: 200px;
-    padding: 0px 10px;
+    padding: 0 10px;
     line-height: 10px;
     p {
       display: inline;
@@ -590,10 +589,7 @@ input[type='number'] {
   display: inline-block;
   font-family: inherit;
   font-size: 0.8em;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 0 1em 0 1em;
 }
 
 #show-more-button {
@@ -612,10 +608,7 @@ input[type='number'] {
   display: inline-block;
   font-family: inherit;
   font-size: 0.8em;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 0 1em 0 1em;
 }
 
 .btn-jam img {
@@ -634,8 +627,8 @@ input[type='number'] {
   padding: 0;
   position: absolute;
   width: 100%;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
 }
 
 .pc-startButton svg {
@@ -712,10 +705,10 @@ input[type='number'] {
   font-size: 15px;
   font-weight: normal;
   text-transform: none;
-  margin: 0px 0px 8px 5px;
+  margin: 0 0 8px 5px;
   padding: 5px;
   text-shadow: none;
-  background: $button-gradient-3;
+  background: $primary;
 }
 
 .tagext {
@@ -724,7 +717,7 @@ input[type='number'] {
 
 .tags-extensions-text {
   display: table-cell;
-  padding: 5px 5px 5px 0px;
+  padding: 5px 5px 5px 0;
 }
 
 #gamejam-div {
@@ -743,7 +736,7 @@ input[type='number'] {
 
   .report-button {
     clear: left;
-    padding-left: 0em;
+    padding-left: 0;
   }
 }
 

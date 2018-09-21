@@ -1,13 +1,23 @@
+@import "variables";
+@import 'theme_settings';
 
-$footer-size: 25em;
-$padding: 15px;
 $margin-adjustment: -5px;
 
 .footer {
-  background-color: #e1e2e1;
+  background-color: $footer-background-color;
+  color: $footer-color;
   height: $footer-size;
-  padding: $padding 0;
+  padding: $footer-padding 0;
   margin-top: 2em;
+
+  a {
+    color: $footer-color;
+  }
+
+  @media screen and (max-width: $responsive-width-tablet)
+  {
+    height: $footer-size-small-screens;
+  }
 
   & .content {
     padding-top: 1em;
@@ -33,7 +43,7 @@ $margin-adjustment: -5px;
         text-decoration: none;
 
         position: relative;
-        padding: $padding;
+        padding: $footer-padding;
         display: block;
 
         border-radius: 3px;
@@ -86,7 +96,7 @@ $margin-adjustment: -5px;
   h4
   {
     font-weight: 500;
-    color: #000000;
+    color: $footer-color;
   }
 }
 
@@ -95,6 +105,13 @@ $margin-adjustment: -5px;
   min-height:100vh;
   padding-bottom: $footer-size;
   margin-bottom: -$footer-size;
+
+  @media screen and (max-width: $responsive-width-tablet)
+  {
+    padding-bottom: $footer-size-small-screens;
+    margin-bottom: -$footer-size-small-screens;
+  }
+
 }
 
 .footer-left {

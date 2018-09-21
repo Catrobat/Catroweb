@@ -1,3 +1,4 @@
+@import "../base/variables";
 @import 'theme_settings';
 
 p {
@@ -82,7 +83,6 @@ span.brick-stat-heading {
 .show-hide-code-statistic:hover,
 .show-hide-code:hover {
   cursor: hand;
-  cursor: pointer;
 }
 
 #codestatistic-wrapper {
@@ -124,7 +124,6 @@ span.brick-stat-heading {
 
     &:hover {
       cursor: pointer;
-      cursor: hand;
     }
   }
 
@@ -236,7 +235,6 @@ span.brick-stat-heading {
 
     &:hover {
       cursor: pointer;
-      cursor: hand;
 
       .brick-stat-heading {
         color: black;
@@ -275,12 +273,11 @@ span.brick-stat-heading {
 }
 
 #codeview-wrapper {
-  margin: 0;
+  margin: 15px 0 0 0;
   display: none;
   z-index: 0;
   width: 100%;
   padding: 0 15% 0 15%;
-  margin-top: 15px;
 
   .scenes-wrapper {
     margin: 0 -10%;
@@ -310,7 +307,6 @@ span.brick-stat-heading {
       }
       &:hover {
         cursor: pointer;
-        cursor: hand;
       }
 
       .scene-content {
@@ -411,11 +407,9 @@ span.brick-stat-heading {
 
   .dropbtn:hover {
     cursor: pointer;
-    cursor: hand;
     background-color: #006c87;
     -webkit-transition: background-color 0.15s ease-in-out;
     -moz-transition: background-color 0.15s ease-in-out;
-    -ms-transition: background-color 0.15s ease-in-out;
     -o-transition: background-color 0.15s ease-in-out;
     transition: background-color 0.15s ease-in-out;
   }
@@ -483,7 +477,6 @@ span.brick-stat-heading {
 
           .brick-sound {
             cursor: pointer;
-            cursor: hand;
           }
 
         }

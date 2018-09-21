@@ -30,52 +30,86 @@
 
   </div>
 
-  <div id="newest">
-    <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
-    <div class="programs"></div>
-  </div>
+  {% if theme() == 'pocketgalaxy' %}
 
-  <div id="recommended">
-    <h1>{{ "programs.recommended"|trans({}, "catroweb") }}
-      <i id="help-button" class="help-icon fa fa-question-circle ml-1 catro-icon-button"
-         data-toggle="tooltip" title="Help"
-         data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
-         data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
-      </i>
-    </h1>
-    <div class="programs"></div>
-  </div>
+    <div id="submissions">
+      <h1>{{ "programs.submitted"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
 
-  <div id="mostDownloaded">
-    <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
-    <div class="programs"></div>
-  </div>
+    <div id="sample">
+      <h1>{{ "programs.sample"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
 
-  <div id="mostViewed">
-    <h1>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h1>
-    <div class="programs"></div>
-  </div>
+    <div id="related">
+      <h1>{{ "programs.related"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
 
-  <div id="random">
-    <h1>{{ "programs.random"|trans({}, "catroweb") }}</h1>
-    <div class="programs"></div>
-  </div>
+  {% else %}
+
+    <div id="newest">
+      <h1>{{ "programs.newest"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
+
+    <div id="recommended">
+      <h1>{{ "programs.recommended"|trans({}, "catroweb") }}
+        <i id="help-button" class="help-icon fa fa-question-circle ml-1 catro-icon-button"
+           data-toggle="tooltip" title="Help"
+           data-help-title="{{ "indexPage.recommendedSection.info.title"|trans({}, "catroweb") }}"
+           data-help-description="{{ "indexPage.recommendedSection.info.description"|trans({}, "catroweb") }}">
+        </i>
+      </h1>
+      <div class="programs"></div>
+    </div>
+
+    <div id="mostDownloaded">
+      <h1>{{ "programs.most.downloaded"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
+
+    <div id="mostViewed">
+      <h1>{{ "programs.most.viewed"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
+
+    <div id="random">
+      <h1>{{ "programs.random"|trans({}, "catroweb") }}</h1>
+      <div class="programs"></div>
+    </div>
+
+    {% endif %}
 {% endblock %}
 
 {% block js %}
   <script>
-    let newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}')
-    let recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-    let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId)
-    let mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
-    let mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
-    let random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
+    {% if theme() == 'pocketgalaxy' %}
+      let  sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam');
+      let submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam');
+      let related = new ProgramLoader('#related', '{{ path('api_search_programs') }}?q=galaxy');
 
-    newest.init()
-    recommended.init()
-    mostDownloaded.init()
-    mostViewed.init()
-    random.init()
+      sample.init();
+      submissions.init();
+      related.init();
+
+    {% else %}
+      let newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}')
+      let recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
+      let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId)
+      let mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
+      let mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
+      let random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
+
+      newest.init()
+      recommended.init()
+      mostDownloaded.init()
+      mostViewed.init()
+      random.init()
+
+    {% endif %}
+
 
     function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID)
     {

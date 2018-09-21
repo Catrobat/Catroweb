@@ -1,23 +1,28 @@
-@import '../../base/colors';
-@import '../../base/elements';
-@import '../../base/brain';
-@import '../../base/footer';
-@import '../../base/header';
-@import '../../base/images';
-@import '../../base/navbar';
 
-@import 'theme_settings';
+@import '../../base/elements'; // A set of useful LESS mixins (More info at: http://lesselements.com)
+@import '../../base/mixins';   // Our own defined Mixins
 
+
+//
+//  Here we define all colors and variables with their base values
+//  If you have to overwrite values for base or custom scss files consider using variables and store
+//  them in the _variables.scss file! And when creating new scss use variables and put them in this file!
+//
 @import "../../base/variables";
 
-// your color/variable changes here
 
+//
+// In the theme settings file you can overwrite basic theme variables:
+//
+@import 'theme_settings';
+
+
+//
+// Here we include the remaining base scss files.
+//
+@import '../../base/brain';
+@import '../../base/header';
+@import '../../base/footer';
+@import '../../base/images';
+@import '../../base/navbar';
 @import "../../base/catro_bootstrap";
-
-.title-color-left {
-  color: $theme-logo-color-primary;
-}
-
-.title-color-right {
-  color: $theme-logo-color-secondary;
-}
