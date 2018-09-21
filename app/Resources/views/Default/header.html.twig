@@ -1,12 +1,10 @@
 <nav class="navbar fixed-top nav-catrobat navbar-expand-md navbar-dark bg-catrobat">
 
   <div class="container">
-    {#<div class="d-inline-flex align-items-center">#}
-      <a class="nav-logo " href="{{ path('index') }}">
-        <img id="logo" {% include 'Default/headerLogo.html.twig' %}/>
-      </a>
-      <a id="page-name" class="navbar-brand mt-1" href="{{ path('index') }}">Home</a>
-    {#</div>#}
+    <a class="nav-logo " href="{{ path('index') }}">
+      <img id="logo" {% include 'Default/headerLogo.html.twig' %}/> {# header logo contains src and alt from theme #}
+    </a>
+    <a id="page-name" class="nav-link navbar-brand mt-1" href="{{ path('index') }}">Home</a>
 
     {% if theme() == 'pocketgalaxy' %}
       <a id="event-link" class="navbar-brand mt-1" href="http://www.galaxygamejam.com/AT/main.html">Event</a>
@@ -16,121 +14,99 @@
         {# START: Searchfield #}
       <input type="text" class="form-control input-search search-input-header d-none"
              placeholder="{{ "search.dotdotdot"|trans({}, "catroweb") }}">
-      <button class="btn btn-default btn-search catro-search-button d-none">
-        <i class="material-icons">
-          search
-        </i>
+      <button class="btn btn-default btn-search catro-search-button mr-3 d-none">
+        <i class="fas fa-search"></i>
       </button>
-      <a class="navbar-nav search-icon-header nav-item " href="#">
-        <i class="material-icons nav-link">search</i>
+      <a class="navbar-nav search-icon-header nav-item mr-1" href="#">
+        <i class="fas fa-search search-icon nav-link"></i>
       </a>
-        {# END: Searchfield #}
+      {# END: Searchfield #}
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler ml-2 mr-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <ul class="navbar-nav d-none d-md-flex">
-          {% if app.user %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle d-inline-flex align-items-center" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons mr-1">
-                  account_circle
-                </i>
-                <span class="mr-1">{{ app.user.username }}</span>
+        {% if app.user %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-inline-flex align-items-center" href="#" id="navbarDropdownMenuLink"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user-circle mr-1"></i>
+              <span class="mr-1">{{ app.user.username }}</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{{ path('user_notifications') }}" id="btn-notifications">
+                <i class="fas fa-bell mr-1"></i>
+                {{ "notifications"|trans({}, "catroweb") }}
+                <span class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ path('user_notifications') }}" id="btn-notifications">
-                  <i class="material-icons mr-1 my-auto">
-                    notifications
-                  </i>
-                    {{ "notifications"|trans({}, "catroweb") }}
-                  <span class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
-                </a>
-                <a class="dropdown-item" href="{{ url('profile') }}" id="btn-profile">
-                  <i class="material-icons mr-1">
-                    account_circle
-                  </i>
-                    {{ 'menu.profile'|trans({}, "catroweb") }}
-                </a>
-                  {% if is_granted('ROLE_ADMIN') %}
-                    <a class="dropdown-item" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                      <i class="material-icons mr-1">
-                        person
-                      </i>
-                        {{ 'menu.admin'|trans({}, "catroweb") }}
-                    </a>
-                  {% endif %}
-                <a class="dropdown-item" href="{{ url('logout') }}" id="btn-logout">
-                  <i class="material-icons mr-1">
-                    power_settings_new
-                  </i>
-                    {{ 'menu.logout'|trans({}, "catroweb") }}
-                </a>
-              </div>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link d-inline-flex align-items-center" href="{{ url('login') }}" id="btn-login">
-                <i class="material-icons mr-1">
-                  exit_to_app
-                </i>
-                  {{ 'menu.login'|trans({}, "catroweb") }}
+              <a class="dropdown-item" href="{{ url('profile') }}" id="btn-profile">
+                <i class="fas fa-user-circle mr-1"></i>
+                {{ 'menu.profile'|trans({}, "catroweb") }}
               </a>
-            </li>
-          {% endif %}
+              {% if is_granted('ROLE_ADMIN') %}
+                <a class="dropdown-item" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                  <i class="fas fa-user-tie mr-1"></i>
+                  {{ 'menu.admin'|trans({}, "catroweb") }}
+                </a>
+              {% endif %}
+              <a class="dropdown-item" href="{{ url('logout') }}" id="btn-logout">
+                <i class="fas fa-sign-out-alt mr-1"></i>
+                {{ 'menu.logout'|trans({}, "catroweb") }}
+              </a>
+            </div>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link d-inline-flex align-items-center" href="{{ url('login') }}" id="btn-login">
+              <i class="fas fa-sign-in-alt mr-2"></i>
+              <span style="padding-bottom: 3px;">{{ 'menu.login'|trans({}, "catroweb") }}</span>
+            </a>
+          </li>
+        {% endif %}
       </ul>
     </div>
 
     <div class="d-md-none w-100">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mt-2">
-            {% if app.user %}
+          {% if app.user %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('user_notifications') }}" id="btn-notifications">
+                <i class="fas fa-bell mr-1"></i>
+                {{ "notifications"|trans({}, "catroweb") }}
+                <span class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
+                <i class="fas fa-user-circle mr-1"></i>
+                {{ 'menu.profile'|trans({}, "catroweb") }}
+              </a>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ path('user_notifications') }}" id="btn-notifications">
-                  <i class="material-icons mr-1">
-                    notifications
-                  </i>
-                    {{ "notifications"|trans({}, "catroweb") }}
-                  <span class="badge-pill badge-danger user-notification-badge user-notification-badge-font"></span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
-                  <i class="material-icons mr-1">
-                    account_circle
-                  </i>
-                    {{ 'menu.profile'|trans({}, "catroweb") }}
-                </a>
-              </li>
-                {% if is_granted('ROLE_ADMIN') %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-                      <i class="material-icons mr-1">
-                        person
-                      </i>
-                        {{ 'menu.admin'|trans({}, "catroweb") }}
-                    </a>
-                  </li>
-                {% endif %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
-                  <i class="material-icons mr-1">
-                    power_settings_new
-                  </i>
-                    {{ 'menu.logout'|trans({}, "catroweb") }}
-                </a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('login') }}" id="btn-login">
-                  <i class="material-icons mr-1">
-                    exit_to_app
-                  </i>
-                    {{ 'menu.login'|trans({}, "catroweb") }}
+                <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+                  <i class="fas fa-user-tie mr-1"></i>
+                  {{ 'menu.admin'|trans({}, "catroweb") }}
                 </a>
               </li>
             {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
+                <i class="fas fa-sign-out-alt mr-1"></i>
+                {{ 'menu.logout'|trans({}, "catroweb") }}
+              </a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('login') }}" id="btn-login">
+                <i class="fas fa-sign-in-alt mr-1"></i>
+                <span>{{ 'menu.login'|trans({}, "catroweb") }}</span>
+              </a>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -138,25 +114,18 @@
 </nav>
 
 <script>
-    $(document).ready(function()
-    {
-        $('.search-icon-header').on('click', function()
-        {
-            $(this).hide();
-            var page_name = $('#page-name');
-            var search_header = $('.search-input-header');
-            if ($(window).width() <= 400)
-            {
-                page_name.hide();
-            }
-            var val = search_header.val();
-            search_header
-                .removeClass('d-none')
-                .focus()
-                .val("")
-                .val(val);
-            $('.catro-search-button').removeClass('d-none');
-        });
-    });
+  $(document).ready(function () {
+    $('.search-icon-header').on('click', function () {
+      $(this).hide()
+      let search_header = $('.search-input-header')
+      let val = search_header.val()
+      search_header
+      .removeClass('d-none')
+      .focus()
+      .val('')
+      .val(val)
+      $('.catro-search-button').removeClass('d-none')
+    })
+  })
 
 </script>

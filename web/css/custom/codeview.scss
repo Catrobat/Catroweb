@@ -475,8 +475,10 @@ span.brick-stat-heading {
             white-space: nowrap;
           }
 
-          .brick-sound {
+          .brick-sound {;
+            color: white!important;
             cursor: pointer;
+            vertical-align: middle;
           }
 
         }
@@ -484,11 +486,8 @@ span.brick-stat-heading {
       }
 
       .brick-look, .brick-sound {
-        width: 38px;
-        height: 38px;
-        min-height: 0;
         position: absolute;
-        bottom: 7px;
+        bottom: 13px;
         right: 10px;
         z-index: 1;
       }

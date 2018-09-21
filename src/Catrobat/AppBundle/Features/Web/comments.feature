@@ -50,7 +50,9 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should not be able to write a comment without being logged in
     Given I am on "/pocketcode/program/1"
     And I click "#show-add-comment-button"
+    And I wait 250 milliseconds
     And I write "hello" in textbox
+    And I wait 250 milliseconds
     When I click "#comment-post-button"
     And I wait 200 milliseconds
     Then I should be on "/pocketcode/login"
@@ -60,7 +62,9 @@ Feature: As a visitor I want to write, see and report comments.
     And I am on "/pocketcode/program/3"
     And the element ".single-comment" should not exist
     And I click "#show-add-comment-button"
+    And I wait 250 milliseconds
     And I write "hello" in textbox
+    And I wait 250 milliseconds
     And I click "#comment-post-button"
     And I wait for a second
     Then I should see "hello"
@@ -165,7 +169,9 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Gregor" with the password "123456"
     And I am on "/pocketcode/program/1"
     And I click "#show-add-comment-button"
+    And I wait 250 milliseconds
     And I write "hello" in textbox
+    And I wait 250 milliseconds
     When I click "#comment-post-button"
     And I wait for a second
     Then I should see "hello"
@@ -178,7 +184,9 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Superman" with the password "123456"
     And I am on "/pocketcode/program/1"
     And I click "#show-add-comment-button"
+    And I wait 250 milliseconds
     And I write "hello" in textbox
+    And I wait 250 milliseconds
     When I click "#comment-post-button"
     And I wait for a second
     Then I should see "hello"

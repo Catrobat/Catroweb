@@ -71,33 +71,36 @@
         <div>
           <div id="program-like-buttons-container">
             <a id="program-like-thumbs-up" class="program-like-button" href="#"
-               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}">
-              <img class="img-share" src="{{ asset('images/social/like/thumbs_up.png') }}" alt="Thumbs up!"
-                   title="Thumbs up!"/>
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
+                data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
+              <div class="like-round-icon-container mr-3"><i class="like-round-icon fas fa-thumbs-up"></i></div>
               <span
                   class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
               <span
                   class="plural">{{ "programs.likeThumbsUpDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
             <a id="program-like-smile" class="program-like-button" href="#"
-               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_SMILE') }}">
-              <img class="img-share" src="{{ asset('images/social/like/smile.png') }}" alt="Smile!" title="Smile!"/>
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_SMILE') }}"
+               data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
+              <i class="like-icon mr-3 fas fa-grin-squint"></i>
               <span
                   class="singular">{{ "programs.likeSmileDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
               <span
                   class="plural">{{ "programs.likeSmileDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
             <a id="program-like-love" class="program-like-button" href="#"
-               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_LOVE') }}">
-              <img class="img-share" src="{{ asset('images/social/like/love.png') }}" alt="Love!" title="Love!"/>
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_LOVE') }}"
+               data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
+              <div class="like-round-icon-container mr-3"><i class="like-round-icon-heart fas fa-heart"></i></div>
               <span
                   class="singular">{{ "programs.likeLoveDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
               <span
                   class="plural">{{ "programs.likeLoveDetailText"|transchoice(2, { '%persons%' : 2 }, "catroweb") }}</span>
             </a>
             <a id="program-like-wow" class="program-like-button" href="#"
-               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_WOW') }}">
-              <img class="img-share" src="{{ asset('images/social/like/wow.png') }}" alt="Wooow!" title="Wooow!"/>
+               data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_WOW') }}"
+               data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
+              <i class="like-icon mr-3 fas fa-surprise"></i>
               <span
                   class="singular">{{ "programs.likeWowDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
               <span
@@ -195,99 +198,58 @@
         </div>
       {% endif %}
 
-      <div class="download-container">
-        {#        {% if not isWebview() %}#}
-        <a id="url-download"
-           href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-          <button id="download" class="btn btn-primary download-button">
-            <table>
-              <tr>
-                <td><img src="{{ asset('images/symbols/download.svg') }}"></td>
-                <td>{{ "download"|trans({}, "catroweb") }}</td>
-              </tr>
-            </table>
-          </button>
-        </a>
+      <div class="download-container col-12">
+        <div class="row">
 
-        <button id="remix-graph-button" class="btn btn-primary download-button">
-          <table>
-            <tr>
-              <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-              <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+          <div id="download" class="col-12 col-lg-5 col-xl-4">
+            <a id="url-download"
+               href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+              <button class="btn btn-primary download-button col-12">
+                <img class="program-big-button-icon mr-3"
+                     src="{{ asset('images/symbols/download.svg') }}">
+                <span>{{ "download"|trans({}, "catroweb") }}</span>
+              </button>
+            </a>
+          </div>
 
-        <button id="apk-generate" class="btn  btn-primary btn-apk download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}"/></td>
-              <td>{{ "apk.prepare"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+          <div id="remix-graph-button" class="col-12 col-lg-5 col-xl-4">
+            <button class="btn btn-primary download-button col-12">
+              <i class="program-big-button-icon mr-3 fa fa-sitemap"></i>
+              {{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}
+            </button>
+          </div>
 
-        <button id="apk-pending" class="btn  btn-primary download-button">
-          <table id="pending-table">
-            <tr>
-              <td id="replace-me"><img src="{{ asset('images/symbols/apk_download.svg') }}"/></td>
-              <td>{{ "apk.preparing"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
+          <div id="apk-generate" class="col-12 col-lg-5 col-xl-4">
+            <button class="btn  btn-primary btn-apk download-button col-12">
+              <i class="program-big-button-icon mr-3 fa fa-android"></i>
+              {{ "apk.prepare"|trans({}, "catroweb") }}
+            </button>
+          </div>
 
-        <button id="apk-download" class="btn btn-apk btn-primary download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/apk_download.svg') }}"/></td>
-              <td>{{ "apk.download"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
-        </button>
-        {#{% endif %}#}
+          <div id="apk-pending" class="col-12 col-lg-5 col-xl-4 d-none">
+            <button class="btn  btn-primary download-button col-12">
+              <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>
+              {{ "apk.preparing"|trans({}, "catroweb") }}
+            </button>
 
-        {#        {% if isWebview() %}
-                    <button id="remix-graph-button" class="btn btn-primary download-button">
-                      <table>
-                        <tr>
-                          <td><i class="fa fa-sitemap" aria-hidden="true" style="font-size: 40px"></i></td>
-                          <td>{{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}</td>
-                          </tr>
-                      </table>
-                    </button>
+          </div>
 
-                    <div class="backdrop"></div>
-                    <div class="fab child" data-subitem="1">
-                      <span>
-                        <div>
-                          <img id="apk-generate" src="{{ asset('images/symbols/apk_download.svg') }}" />
-                          <i id="apk-pending" class="fa fa-refresh fa-spin fa-inverse" aria-hidden="true"></i>
-                          <img id="apk-download" src="{{ asset('images/symbols/apk_download.svg') }}" />
-                        </div>
-                      </span>
-                    </div>
+          <div id="apk-download" class="col-12 col-lg-5 col-xl-4 d-none">
+            <button class="btn btn-apk btn-primary download-button col-12">
+              <i class="program-big-button-icon mr-3 fa fa-android"></i>
+              {{ "apk.download"|trans({}, "catroweb") }}
+            </button>
+          </div>
 
-                    <div class="fab child" data-subitem="2">
-                      <span>
-                        <div>
-                          <a id="url-download" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-                          <img src="{{ asset('images/symbols/download.svg') }}" >
-                          </a>
-                        </div>
-                      </span>
-                    </div>
-                    <div class="fab" id="masterfab"><span><i id="action-arrow" class="fa fa-angle-up"></i></span></div>
-                {% endif %}#}
+        </div>
+
+
       </div>
 
       {% if nolb_status and program.user == app.user.username %}
         <button id="nolb-project-button" class="btn download-button">
-          <table>
-            <tr>
-              <td><img src="{{ asset('images/symbols/nolb-submit-button-icon.png') }}"></td>
-              <td>{{ "pmd.submitBtn"|trans({}, "catroweb") }}</td>
-            </tr>
-          </table>
+          <i class="program-big-button-icon mr-3 fas fa-cube"></i>
+          {{ "pmd.submitBtn"|trans({}, "catroweb") }}
         </button>
 
         <div id="nolb-submission-box">
@@ -299,7 +261,7 @@
                    placeholder="Your project ID">
           </div>
           <button id="nolb-submission-button" class="btn">
-            <p>{{ "pmd.submitBox.btnText"|trans({}, "catroweb") }}</p>
+            {{ "pmd.submitBox.btnText"|trans({}, "catroweb") }}
           </button>
         </div>
 
@@ -371,39 +333,39 @@
 
   <div id="program-bottom">
     <div id="icon-author">
-      <div class="img-author-2 icon"></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-user"></i></div>
       <a href="{{ url('profile', { id : program.user.id }) }}" class="icon-text">{{ program.user }}</a>
     </div>
     <div>
-      <div class="img-age icon"></div>
+      <div class="program-round-icon-container"><i class="program-round-icon far fa-clock"></i></div>
       <span class="icon-text">{{ program_details.age }}</span>
     </div>
     <div>
-      <div class="img-size icon"></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-file-alt"></i></div>
       <span class="icon-text">{{ program_details.filesize }} MB</span>
     </div>
     <div>
-      <div class="img-downloads icon"></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-download"></i></div>
       <span
-          class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
+          class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
+      </span>
     </div>
     <div>
-      <div class="img-views icon"></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-eye"></i></div>
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
-    <div id="icon-remix">
-      <a id="remix-graph-modal-link" href="#remix-graph-modal">
-        <img src="{{ asset('images/symbols/remix.png') }}"/>
-        <span class="icon-text">
-          {{ "programs.remixes"|transchoice(program_details.remixesLength, { '%remixes%' : program_details.remixesLength }, "catroweb") }}
-        </span>
+    <div>
+        <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i></div>
+      <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
+        {{ "programs.remixes"|transchoice(program_details.remixesLength,
+          { '%remixes%' : program_details.remixesLength }, "catroweb") }}
       </a>
     </div>
   </div>
 
   <div id="remix-graph-modal">
     <div class="close-remix-graph-modal">
-      <img class="close-button" src="{{ asset('images/symbols/close_button.svg') }}"/>
+      <i class="fas fa-times-circle catro-icon-button remix-close-icon"></i>
     </div>
     <div id="remix-graph-layer" class="modal-content"></div>
   </div>
@@ -518,7 +480,7 @@
     })
 
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
-      '{{ 'apk.preparing'|trans({}, "catroweb") }}', '{{ 'apk.text'|trans({}, "catroweb") }}', '{{ asset('images/symbols/loading.gif') }}',
+      '{{ 'apk.preparing'|trans({}, "catroweb") }}', '{{ 'apk.text'|trans({}, "catroweb") }}',
       '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}', '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
       '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}')
     program.getApkStatus()
@@ -589,7 +551,7 @@
     function updateLikeCount (likeType, likeTypeCount, totalLikeCount)
     {
       var programLikeDetailContainer = $('#program-like-detail-container');
-      $('a.program-like-button').removeClass('selected')
+      $('a.program-like-button').addClass('not-selected')
       $('#program-like-buttons-container > .program-like-counter').text(convertToHumanFriendlyNumberText(totalLikeCount))
       if (likeType === PROGRAM_LIKE_TYPE_NONE)
       {
@@ -597,7 +559,7 @@
         return
       }
       var likeTypeButton = $('a.program-like-button[data-like-type=' + likeType + ']')
-      likeTypeButton.addClass('selected')
+      likeTypeButton.removeClass('not-selected')
       var singularOrPlural = (likeTypeCount === 1)
       var translatedDetailSpanTextTemplate = likeTypeButton.children(singularOrPlural ? '.singular' : '.plural')[0]
       var replaceCount = '<span class="program-like-counter">' + convertToHumanFriendlyNumberText(likeTypeCount) + '<span>'
@@ -662,6 +624,7 @@
           console.log('The animation is completed')
           document.removeEventListener('gesturestart', blockEventListener)
           document.ontouchmove = null
+          location.reload()
         }
       })
 
@@ -681,8 +644,8 @@
         }
 
         $('#program-like-detail-container').text("{{ "pleaseWait"|trans({}, "catroweb") }}")
-        $('a.program-like-button').removeClass('selected')
-        $(this).addClass('selected')
+        $('a.program-like-button').addClass('not-selected')
+        $(this).removeClass('not-selected')
 
         $.ajax({
           url    : url,
@@ -697,14 +660,14 @@
                 return
               }
               alert('something went wrong')
-              $(this).removeClass('selected')
+              $(this).addClass('not-selected')
               return
             }
             updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount)
           },
           error  : function () {
             alert('something went terribly wrong')
-            $(this).removeClass('selected')
+            $(this).addClass('not-selected')
           }
         })
         return false

@@ -1,11 +1,10 @@
-let Program = function (status_url, create_url, apk_preparing, apk_text, waiting_gif, update_app_header, update_app_text, btn_close_popup) {
+let Program = function (status_url, create_url, apk_preparing, apk_text, update_app_header, update_app_text, btn_close_popup) {
   let self = this
   
   self.status_url = status_url
   self.create_url = create_url
   self.apk_preparing = apk_preparing
   self.apk_text = apk_text
-  self.waiting_gif = waiting_gif
   self.update_app_header = update_app_header
   self.update_app_text = update_app_text
   self.btn_close_popup = btn_close_popup
@@ -13,26 +12,30 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, waiting
   self.apk_download_timeout = false
   
   self.getApkStatus = function () {
+    console.log("getApkStatus")
     $.get(self.status_url, null, self.onResult)
   }
   
   self.createApk = function () {
-    $('#apk-generate').hide()
-    $('#apk-pending').show().css('display', 'inline-block')
-    $('#replace-me').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">')
+    console.log("createApk")
+    $('#apk-generate').addClass('d-none')
+    $('#apk-pending').removeClass('d-none')
     $.get(self.create_url, null, self.onResult)
     self.showPreparingApkPopup()
   }
   
   self.onResult = function (data) {
+    console.log("onResult: " + JSON.stringify(data))
     let apkPending = $('#apk-pending')
     let apkDownload = $('#apk-download')
     let apkGenerate = $('#apk-generate')
-    apkPending.hide()
+    apkGenerate.addClass('d-none')
+    apkDownload.addClass('d-none')
+    apkPending.addClass('d-none')
     if (data.status === 'ready')
     {
       self.apk_url = data.url
-      apkDownload.show()
+      apkDownload.removeClass('d-none')
       apkDownload.click(function () {
         if (!self.apk_download_timeout)
         {
@@ -45,17 +48,23 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, waiting
           top.location.href = self.apk_url
         }
       })
+      console.log("ready")
     }
     else if (data.status === 'pending')
     {
-      apkPending.show().css('display', 'inline-block')
-      $('#replace-me').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">')
+      apkPending.removeClass('d-none')
       setTimeout(self.getApkStatus, 5000)
+      console.log("pending")
     }
     else if (data.status === 'none')
     {
-      apkGenerate.show()
+      apkGenerate.removeClass('d-none')
       apkGenerate.click(self.createApk)
+      console.log("none")
+    }
+    else {
+      apkGenerate.removeClass('d-none')
+      console.log("else")
     }
     
     let bgDarkPopupInfo = $('#bg-dark, #popup-info')
