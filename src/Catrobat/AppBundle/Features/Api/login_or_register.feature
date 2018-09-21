@@ -1,13 +1,13 @@
 @api
-Feature: Login with an existing accunt or register a new one
+Feature: Deprecated
+#
+#  Background:
+#    Given there are users:
+#      | name      | password | token      | dn           |
+#      | Catrobat  | 123456   | cccccccccc |              |
+#      | LDAP-user |          | cccccccccc | cn=LDAP-user |
 
-  Background:
-    Given there are users:
-      | name      | password | token      | dn           |
-      | Catrobat  | 123456   | cccccccccc |              |
-      | LDAP-user |          | cccccccccc | cn=LDAP-user |
-
-  Scenario: Since LoginOrRegister is deprecated
+  Scenario: LoginOrRegister is deprecated, we need more Register and login tests!
     Then We can't test anything here
 
 #  Scenario: Register a new user

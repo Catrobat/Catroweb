@@ -349,58 +349,17 @@
         <span class="fa fa-link" aria-hidden="true"></span>
         Link
       </button>
-      <span id="report">{{ "programs.reportProgram"|trans({}, 'catroweb') }}</span>
+
+      {% if not my_program  %}
+        <button type="button" class="btn btn-lg btn-link btn-copy" style="text-shadow: none;"
+                id="report-program-button">
+          <i class="fas fa-ban mr-1"></i>
+          {{ "programs.reportProgram"|trans({}, 'catroweb') }}
+        </button>
+      {% endif %}
     </div>
 
     <div class="clear"></div>
-    <div id="report-container" class="size-large">
-      {% if app.user %}
-        {% if my_program %}
-          {{ "programs.reportOwnProgram"|trans({}, "catroweb") }} ... LOL?
-        {% elseif already_reported %}
-          {{ "programs.reportAlready"|trans({}, "catroweb") }}
-        {% else %}
-          <span id="report-form">
-            {{ "programs.reportDialogHeader"|trans({}, "catroweb") }}
-            <br>
-              <div class="row justify-content-center mt-4">
-                <div class="col-6 text-left">
-                  <div class="radio">
-                    <label><input type="radio" id="report-inappropriate" name="reportCategory" value="inappropriate"
-                                  checked>
-                      {{ "programs.reportRadioButtonInappropriate"|trans({}, "catroweb") }}</label>
-                  </div>
-                  <div class="radio">
-                    <label><input type="radio" id="report-copyright" name="reportCategory"
-                                  value="copyright infringement">
-                      {{ "programs.reportRadioButtonCopyright"|trans({}, "catroweb") }}</label>
-                  </div>
-                  <div class="radio">
-                    <label><input type="radio" id="report-spam" name="reportCategory" value="spam">
-                      {{ "programs.reportRadioButtonSpam"|trans({}, "catroweb") }}</label>
-                  </div>
-                  <div class="radio">
-                    <label><input type="radio" id="report-dislike" name="reportCategory" value="dislike">
-                      {{ "programs.reportRadioButtonDislike"|trans({}, "catroweb") }}</label>
-                  </div>
-                </div>
-            </div>
-
-            <textarea id="reportReason"
-                      placeholder="{{ "programs.reportDialogReason"|trans({}, "catroweb") }}"></textarea>
-            <br>
-            <button id="report-cancel" class="btn-white">{{ "cancel"|trans({}, "catroweb") }}</button>
-            <button id="report-report" class="btn-green">{{ "report"|trans({}, "catroweb") }}</button>
-          </span>
-          <span id="report-done">
-            {{ "programs.reportDone"|trans({}, "catroweb") }}
-          </span>
-        {% endif %}
-      {% else %}
-        {% set loginText = "loginText"|trans({}, "catroweb") %}
-        {{ "programs.reportLoginText"|trans({"%login%" : "<a href=\"" ~ url('login') ~ "\">" ~ loginText ~ "</a>"}, "catroweb")|raw }}
-      {% endif %}
-    </div>
   </div>
 
   {#
@@ -471,22 +430,39 @@
 
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
+  <script src="{{ asset('js/custom/ProgramReport.js') }}"></script>
+  <script>
+    new ProgramReport({{ program.id }}, '{{ path('catrobat_api_report_program') }}',
+      "{{ 'success.report'                          |trans({}, 'catroweb') }}",
+      '{{ "error"                                   |trans({}, "catroweb") }}',
+      '{{ "programs.report"                         |trans({}, "catroweb") }}',
+      '{{ "cancel"                                  |trans({}, "catroweb") }}',
+      '{{ "programs.reportDialogHeader"             |trans({}, "catroweb") }}',
+      '{{ "programs.reportDialogReason"             |trans({}, "catroweb") }}',
+      '{{ "programs.reportRadioButtonInappropriate" |trans({}, "catroweb") }}',
+      '{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}',
+      '{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}',
+      '{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}',
+      {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
+      {{ logged_in }}
+    )
+  </script>
   <script src="{{ asset('js/custom/ProgramComments.js') }}"></script>
   <script>
     new ProgramComments({{ program_details.id }}, 5, 5, 5, {{ (program_details.comments|length) }},
-      "{{ 'cancel'                            |trans({}, 'catroweb') }}",
-      "{{ 'deleteIt'                          |trans({}, 'catroweb') }}",
-      "{{ 'reportIt'                          |trans({}, 'catroweb') }}",
-      "{{ 'areYouSure'                        |trans({}, 'catroweb') }}",
-      "{{ 'noWayOfReturn'                     |trans({}, 'catroweb') }}",
-      "{{ 'programs.deleteCommentConfirmation'|trans({}, 'catroweb') }}",
-      "{{ 'programs.reportCommentConfirmation'|trans({}, 'catroweb') }}",
-      "{{ 'programs.report_popup_header'      |trans({}, 'catroweb') }}",
-      "{{ 'programs.report_popup'             |trans({}, 'catroweb') }}",
-      "{{ 'programs.deleted_popup_header'     |trans({}, 'catroweb') }}",
-      "{{ 'programs.deleted_popup'            |trans({}, 'catroweb') }}",
-      "{{ 'programs.noAdminRights'            |trans({}, 'catroweb') }}",
-      "{{ 'somethingWentWrong'                |trans({}, 'catroweb') }}",
+      "{{ 'cancel'                                  |trans({}, 'catroweb') }}",
+      "{{ 'deleteIt'                                |trans({}, 'catroweb') }}",
+      "{{ 'reportIt'                                |trans({}, 'catroweb') }}",
+      "{{ 'areYouSure'                              |trans({}, 'catroweb') }}",
+      "{{ 'noWayOfReturn'                           |trans({}, 'catroweb') }}",
+      "{{ 'programs.deleteCommentConfirmation'      |trans({}, 'catroweb') }}",
+      "{{ 'programs.reportCommentConfirmation'      |trans({}, 'catroweb') }}",
+      "{{ 'programs.report_popup_header'            |trans({}, 'catroweb') }}",
+      "{{ 'programs.report_popup'                   |trans({}, 'catroweb') }}",
+      "{{ 'programs.deleted_popup_header'           |trans({}, 'catroweb') }}",
+      "{{ 'programs.deleted_popup'                  |trans({}, 'catroweb') }}",
+      "{{ 'programs.noAdminRights'                  |trans({}, 'catroweb') }}",
+      "{{ 'somethingWentWrong'                      |trans({}, 'catroweb') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::OK') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::NOT_LOGGED_IN') }}",
       "{{ constant('Catrobat\\AppBundle\\StatusCode::NO_ADMIN_RIGHTS') }}"
@@ -495,8 +471,8 @@
   <script src="{{ asset('js/custom/ProgramDescription.js') }}"></script>
   <script>
     new ProgramDescription({{ program.id }},
-      '{{ ("show-more")|trans({}, "catroweb") }}',
-      '{{ ("show-less")|trans({}, "catroweb") }}',
+      '{{ ("show-more")                             |trans({}, "catroweb") }}',
+      '{{ ("show-less")                             |trans({}, "catroweb") }}',
         {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
         {{ constant('Catrobat\\AppBundle\\StatusCode::DESCRIPTION_TOO_LONG') }},
         {{ constant('Catrobat\\AppBundle\\StatusCode::RUDE_WORD_IN_DESCRIPTION') }}
@@ -504,6 +480,7 @@
   </script>
 
   <script>
+
     $(function () {
       var copy_button = $('.btn-copy')
 
@@ -546,7 +523,6 @@
       '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}')
     program.getApkStatus()
     program.createLinks()
-    program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}')
 
     var download_href = document.getElementById('url-download').href
 

@@ -111,6 +111,7 @@ class ProgramController extends Controller
     $request->getSession()->set('referer', $referrer);
 
     $user = $this->getUser();
+    $logged_in = false;
     $nolb_status = false;
     $user_name = "";
     $like_type = ProgramLike::TYPE_NONE;
@@ -118,6 +119,7 @@ class ProgramController extends Controller
 
     if ($user !== null)
     {
+      $logged_in = true;
       $nolb_status = $user->getNolbUser();
       $user_name = $user->getUsername();
       $like = $program_manager->findUserLike($program->getId(), $user->getId());
@@ -167,6 +169,7 @@ class ProgramController extends Controller
       'nolb_status'                  => $nolb_status,
       'user_name'                    => $user_name,
       'max_description_size'         => $max_description_size,
+      'logged_in'                    => $logged_in
     ]);
   }
 
