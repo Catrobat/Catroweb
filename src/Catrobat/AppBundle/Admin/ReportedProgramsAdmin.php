@@ -13,7 +13,7 @@ class ReportedProgramsAdmin extends AbstractAdmin
 {
   public function createQuery($context = 'list')
   {
-    $query = parent::createQuery($context);
+    $query = parent::createQuery();
 
     return $query;
   }

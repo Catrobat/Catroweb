@@ -14,7 +14,7 @@ class NolbExampleAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
-    $query = parent::createQuery($context);
+    $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->isNotNull($query->getRootAlias() . '.program')
     );
