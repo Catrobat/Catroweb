@@ -512,6 +512,8 @@ errors:
     tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
+  report:
+    error: 'Reporting has not worked. Are you logged in?'
 
 success:
   registration: Registration successful!

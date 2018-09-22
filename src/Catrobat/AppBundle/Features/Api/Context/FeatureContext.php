@@ -1931,5 +1931,37 @@ class FeatureContext extends BaseContext
     }
     $em->flush();
   }
+  /**
+   * @Given /^I am logged in as normal user$/
+   */
+  public function iAmLoggedInAsNormalUser()
+  {
+    $this->iAmAUserWithRole("ROLE_USER");
+  }
 
+  /**
+   * @Given /^I am a user with role "([^"]*)"$/
+   */
+  public function iAmAUserWithRole($role)
+  {
+    $this->insertUser(array(
+      "role" => $role,
+      "name" => "generatedBehatUser"
+    ));
+
+    $client = $this->getClient();
+    $client->getCookieJar()->set(new Cookie(session_name(), true));
+
+    $session = $client->getContainer()->get('session');
+
+    $user = $this->getSymfonyService('fos_user.user_manager')->findUserByUsername("generatedBehatUser");
+    $providerKey = $this->getSymfonyParameter('fos_user.firewall_name');
+
+    $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+    $session->set('_security_' . $providerKey, serialize($token));
+    $session->save();
+
+    $cookie = new Cookie($session->getName(), $session->getId());
+    $client->getCookieJar()->set($cookie);
+  }
 }

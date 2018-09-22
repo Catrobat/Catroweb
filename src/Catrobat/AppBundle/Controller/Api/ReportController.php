@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Events\ReportInsertEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
@@ -11,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReportController extends Controller
 {
@@ -19,11 +21,14 @@ class ReportController extends Controller
      * @Method({"POST","GET"})
      */
     public function reportProgramAction(Request $request) {
-        /* @var $context \Symfony\Component\Security\Core\SecurityContext */
-        /* @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager */
-        /* @var $program \Catrobat\AppBundle\Entity\Program */
+      /**
+       * @var $context \Symfony\Component\Security\Core\SecurityContext
+       * @var $program_manager \Catrobat\AppBundle\Entity\ProgramManager
+       * @var $program \Catrobat\AppBundle\Entity\Program
+       */
 
         $context = $this->get('security.context');
+
         $program_manager = $this->get('programmanager');
         $entity_manager = $this->getDoctrine()->getManager();
         $event_dispatcher = $this->get('event_dispatcher');
@@ -48,26 +53,26 @@ class ReportController extends Controller
 
         $report = new ProgramInappropriateReport();
 
-        if ($context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $report->setReportingUser($context->getToken()->getUser()); //could be anon
+      $response = array();
+      if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+          $report->setReportingUser($user = $this->get('security.token_storage')->getToken()->getUser()); //could be anon
+          $program->setVisible(false);
+          $report->setNote($request->get('note'));
+          $report->setProgram($program);
+
+          $entity_manager->persist($report);
+          $entity_manager->flush();
+
+          $event_dispatcher->dispatch('catrobat.report.insert', new ReportInsertEvent($request->get('note'), $report));
+
+          $response['answer'] = $this->trans('success.report');
+          $response['statusCode'] = StatusCode::OK;
         } else {
-            $report->setReportingUser(null); //could be anon
+            $response['answer'] = $this->trans('errors.report.error');
+            $response['statusCode'] = Response::HTTP_UNAUTHORIZED;
+
         }
-
-        $program->setVisible(false);
-        $report->setNote($request->get('note'));
-        $report->setProgram($program);
-
-        $entity_manager->persist($report);
-        $entity_manager->flush();
-
-        $event_dispatcher->dispatch('catrobat.report.insert', new ReportInsertEvent($request->get('note'), $report));
-
-        $response = array();
-        $response['answer'] = $this->trans('success.report');
-        $response['statusCode'] = StatusCode::OK;
-
-        return JsonResponse::create($response);
+      return JsonResponse::create($response);
     }
 
     private function trans($message, $parameters = array()) {
