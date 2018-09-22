@@ -21,7 +21,7 @@ class PendingApkRequestsAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
-    $query = parent::createQuery($context);
+    $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->eq($query->getRootAlias() . '.apk_status', ':apk_status')
     );

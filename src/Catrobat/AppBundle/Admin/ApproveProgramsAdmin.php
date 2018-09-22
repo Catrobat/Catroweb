@@ -21,7 +21,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
-    $query = parent::createQuery($context);
+    $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->eq($query->getRootAlias() . '.approved', $query->expr()->literal(false))
     );

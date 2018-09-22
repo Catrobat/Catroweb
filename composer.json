@@ -3,7 +3,7 @@
     "license": "proprietary",
 
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "ext-SimpleXML": "^7.1",
         "ext-gd": "^7.2",
         "ext-json": "^1.5",
@@ -17,7 +17,7 @@
         "facebook/graph-sdk": "^5.6",
         "fr3d/ldap-bundle": "^3.0",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
-        "friendsofsymfony/rest-bundle": "^2.3",
+        "friendsofsymfony/rest-bundle": "^2.4",
         "friendsofsymfony/user-bundle": "^2.1",
         "geocoder-php/ip-info-provider": "^0.1.0",
         "google/apiclient": "^2.2",
@@ -27,7 +27,7 @@
         "php-http/message": "^1.7",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.2",
-        "sonata-project/admin-bundle": "^3.37",
+        "sonata-project/admin-bundle": "^3.39",
         "sonata-project/doctrine-orm-admin-bundle": "^3.6",
         "sonata-project/user-bundle": "^4.2",
         "symfony/acl-bundle": "^1.0",
