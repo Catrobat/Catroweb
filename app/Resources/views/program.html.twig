@@ -72,7 +72,7 @@
           <div id="program-like-buttons-container">
             <a id="program-like-thumbs-up" class="program-like-button" href="#"
                data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
-                data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
+               data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
               <div class="like-round-icon-container mr-3"><i class="like-round-icon fas fa-thumbs-up"></i></div>
               <span
                   class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
@@ -169,27 +169,24 @@
         <div id="tag-extension-container">
 
           {% if program.extensions|length > 0 %}
-            <div id="extension-container">
-              <div class="tags-extensions-text">{{ ("extenstion-text")|trans({}, "catroweb") }}:</div>
-              <div class="tagext">
+            <div id="extensions">
+              <p>{{ ("extenstion-text")|trans({}, "catroweb") }}:</p>
+              <div class="list">
                 {% for extension in program.extensions %}
-                  <a class="rec-programs" href="{{ url('extension_search', { q : extension.name }) }}">
-                    <button id={{ extension.name }} class="btn-tags-extensions"> {{ extension.name }}</button>
-                  </a>
+                  <a class="rec-programs badge badge-primary"
+                     href="{{ url('extension_search', { q : extension.name }) }}">{{ extension.name }}</a>
                 {% endfor %}
               </div>
             </div>
           {% endif %}
 
           {% if  program.tags|length > 0 %}
-            <div id="tag-container">
-              <div class="tags-extensions-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
-              <div class='tagext'>
+            <div id="tags">
+              <p>{{ ("tag-text")|trans({}, "catroweb") }}:</p>
+              <div class="list">
                 {% for tag in program.tags %}
-                  <a class="rec-programs" href="{{ url('tag_search', { q : tag.id }) }}">
-                    <button
-                        id={{ tag.en }} class="btn-tags-extensions"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
-                  </a>
+                  <a class="rec-programs badge badge-primary"
+                     href="{{ url('tag_search', { q : tag.id }) }}">{{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</a>
                 {% endfor %}
               </div>
             </div>
@@ -312,7 +309,7 @@
         Link
       </button>
 
-      {% if not my_program  %}
+      {% if not my_program %}
         <button type="button" class="btn btn-lg btn-link btn-copy" style="text-shadow: none;"
                 id="report-program-button">
           <i class="fas fa-ban mr-1"></i>
@@ -355,7 +352,7 @@
       <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
     <div>
-        <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i></div>
       <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
         {{ "programs.remixes"|transchoice(program_details.remixesLength,
           { '%remixes%' : program_details.remixesLength }, "catroweb") }}
@@ -405,8 +402,8 @@
       '{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}',
       '{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}',
       '{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}',
-      {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
-      {{ logged_in }}
+        {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }},
+        {{ logged_in }}
     )
   </script>
   <script src="{{ asset('js/custom/ProgramComments.js') }}"></script>

@@ -1,4 +1,7 @@
+@import '../../bootstrap_vendor/scss/functions';
 @import '../base/_variables';
+@import '../../bootstrap_vendor/scss/variables';
+@import '../../bootstrap_vendor/scss/mixins';
 @import 'theme_settings';
 
 button, .button
@@ -360,9 +363,10 @@ h2
   height: 40px;
 }
 
-.download-button {
+.download-button
+{
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 }
 
@@ -735,7 +739,39 @@ input[type='number']
 
 #tag-extension-container
 {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+
+  > #tags:nth-child(2)
+  {
+    margin-top: 0.5rem;
+  }
+
+  #tags, #extensions
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: -0.15rem;
+
+    @include media-breakpoint-down(sm)
+    {
+      flex-direction: column;
+    }
+
+    p
+    {
+      margin-right: 1rem;
+    }
+
+    .list
+    {
+      .badge
+      {
+        font-size: 100%;
+        margin: 0.15rem;
+      }
+    }
+  }
 }
 
 #recommendations, #specific-programs-recommendations
@@ -748,39 +784,13 @@ input[type='number']
   margin-top: 10px;
 }
 
-.btn-tags-extensions
-{
-  font-size: 15px;
-  font-weight: normal;
-  text-transform: none;
-  margin: 0 0 8px 5px;
-  padding: 5px;
-  text-shadow: none;
-  background: $primary;
-}
-
-.tagext
-{
-  display: table-cell;
-}
-
-.tags-extensions-text
-{
-  display: table-cell;
-  padding: 5px 5px 5px 0;
-}
-
 #gamejam-div
 {
   overflow: auto;
 }
+
 @media screen and (max-width: 534px)
 {
-  #tag-extension-container
-  {
-    width: 215px;
-  }
-
   .report-button
   {
     clear: left;
@@ -793,14 +803,6 @@ input[type='number']
   #nolb-submission-box input
   {
     width: 100%;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 834px)
-{
-  #tag-extension-container
-  {
-    width: 215px;
   }
 }
 

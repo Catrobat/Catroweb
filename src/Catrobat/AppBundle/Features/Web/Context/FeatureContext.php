@@ -99,7 +99,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->use_real_oauth_javascript_code = true;
   }
 
-  /**1
+  /**
    * @AfterScenario @RealOAuth
    */
   public function deactivateRealOAuthService()
@@ -552,7 +552,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereAreCatroNotifications(TableNode $table)
   {
     /**
-     * @var $em EntityManager
+     * @var $em   EntityManager
      * @var $user User
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
@@ -608,9 +608,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function thereArePrograms(TableNode $table)
   {
     /**
-    * @var $program \Catrobat\AppBundle\Entity\Program
-    * @var $em EntityManager
-    */
+     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var $em      EntityManager
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     $count = count($programs);
@@ -2183,31 +2183,37 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I press on the tag "([^"]*)"$/
+   * @param $arg1 string  The name of the tag
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iPressOnTheTag($arg1)
   {
-    $arg1 = '#' . $arg1;
-    $this->assertSession()->elementExists('css', $arg1);
+    $xpath = '//*[@id="tags"]/div/a[normalize-space()="' . $arg1 . '"]';
+    $this->assertSession()->elementExists('xpath', $xpath);
 
     $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg1)
+      ->find('xpath', $xpath)
       ->click();
   }
 
   /**
    * @When /^I press on the extension "([^"]*)"$/
+   * @param $arg1 string  The name of the extension
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iPressOnTheExtension($arg1)
   {
-    $arg1 = '#' . $arg1;
-    $this->assertSession()->elementExists('css', $arg1);
+    $xpath = '//*[@id="extensions"]/div/a[normalize-space()="' . $arg1 . '"]';
+    $this->assertSession()->elementExists('xpath', $xpath);
 
     $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg1)
+      ->find('xpath', $xpath)
       ->click();
   }
 
@@ -2803,7 +2809,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var EntityManager $em
-     * @var User          $user
+     * @var User $user
      */
     try
     {
