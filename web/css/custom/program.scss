@@ -1,4 +1,7 @@
+@import '../../bootstrap_vendor/scss/functions';
 @import '../base/_variables';
+@import '../../bootstrap_vendor/scss/variables';
+@import '../../bootstrap_vendor/scss/mixins';
 @import 'theme_settings';
 
 button, .button
@@ -17,7 +20,7 @@ $fab-margin-small: 1 / 4 * 3 * $fab-size-small;
 $fab-child-size-small: 1 / 3 * 2 * $fab-size-small;
 $fab-child-margin-small: ($fab-size-small - $fab-child-size-small) / 2 + $fab-margin-small;
 
-@media screen and (min-width: 461px)
+@include media-breakpoint-up(sm)
 {
   .fab
   {
@@ -88,7 +91,7 @@ $fab-child-margin-small: ($fab-size-small - $fab-child-size-small) / 2 + $fab-ma
   }
 }
 
-@media screen and (max-width: 460px)
+@include media-breakpoint-down(xs)
 {
   .fab
   {
@@ -360,9 +363,10 @@ h2
   height: 40px;
 }
 
-.download-button {
+.download-button
+{
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 }
 
@@ -512,80 +516,6 @@ table td:nth-child(1)
   font-weight: bold;
 }
 
-#nolb-project-button
-{
-  padding-top: 5px;
-  background: linear-gradient(#ee225a, #aa154b);
-  img
-  {
-    height: auto;
-  }
-}
-
-#nolb-submission-successful,
-#nolb-submission-failed,
-#nolb-submission-box
-{
-  z-index: 10;
-  padding: 10px;
-  position: fixed;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #05222a;
-  border: 3px solid $default-border-color;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 15px;
-  max-width: 400px;
-  width: 80%;
-
-  h2
-  {
-    margin: 6px;
-  }
-
-  p,
-  input,
-  #nolb-submission-button
-  {
-    margin: 10px 0 0 0;
-  }
-
-  #nolb-submission-button
-  {
-    max-height: 50px;
-    max-width: 200px;
-    padding: 0 10px;
-    line-height: 10px;
-    p
-    {
-      display: inline;
-    }
-  }
-
-  #nolb-submission-box-cancel
-  {
-    line-height: 0;
-    padding: 10px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-}
-
-#nolb-submission-failed-ok,
-#nolb-submission-successful-ok
-{
-  margin: 10px 0 0 0;
-  min-height: 26px;
-  p
-  {
-    display: inline;
-  }
-}
-
 input[type='number']
 {
   -moz-appearance: textfield;
@@ -699,7 +629,7 @@ input[type='number']
   cursor: default;
 }
 
-@media screen and (max-width: $responsive-width-tablet)
+@include media-breakpoint-down(sm)
 {
   #program-user
   {
@@ -735,7 +665,39 @@ input[type='number']
 
 #tag-extension-container
 {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+
+  > #tags:nth-child(2)
+  {
+    margin-top: 0.5rem;
+  }
+
+  #tags, #extensions
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: -0.15rem;
+
+    @include media-breakpoint-down(sm)
+    {
+      flex-direction: column;
+    }
+
+    p
+    {
+      margin-right: 1rem;
+    }
+
+    .list
+    {
+      .badge
+      {
+        font-size: 100%;
+        margin: 0.15rem;
+      }
+    }
+  }
 }
 
 #recommendations, #specific-programs-recommendations
@@ -748,59 +710,17 @@ input[type='number']
   margin-top: 10px;
 }
 
-.btn-tags-extensions
-{
-  font-size: 15px;
-  font-weight: normal;
-  text-transform: none;
-  margin: 0 0 8px 5px;
-  padding: 5px;
-  text-shadow: none;
-  background: $primary;
-}
-
-.tagext
-{
-  display: table-cell;
-}
-
-.tags-extensions-text
-{
-  display: table-cell;
-  padding: 5px 5px 5px 0;
-}
-
 #gamejam-div
 {
   overflow: auto;
 }
-@media screen and (max-width: 534px)
-{
-  #tag-extension-container
-  {
-    width: 215px;
-  }
 
+@include media-breakpoint-down(xs)
+{
   .report-button
   {
     clear: left;
     padding-left: 0;
-  }
-}
-
-@media screen and (max-width: 282px)
-{
-  #nolb-submission-box input
-  {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 834px)
-{
-  #tag-extension-container
-  {
-    width: 215px;
   }
 }
 
@@ -814,7 +734,7 @@ input[type='number']
   float: left;
   text-align: center;
 
-  @media screen and (max-width: 500px)
+  @include media-breakpoint-down(xs)
   {
     margin-right: 4%;
   }

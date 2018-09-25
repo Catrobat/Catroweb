@@ -582,16 +582,6 @@ admin:
 recommender:
   similarPrograms: Ähnliche Programme
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Benutzer, die dieses Programm heruntergeladen haben, haben auch heruntergeladen
-pmd:
-  submitBtn: Projekt abgeben
-  submitBox:
-    header: Abgabe
-    text: Du bist im begriff dein Projekt abzugeben. Bitte gib den Projektcode ein.
-    btnText: Abgeben
-  successful:
-    text: Ihr Programm-Upload war erfolgreich.
-  failed:
-    text: Programm-Upload fehlgeschlagen.
 codeview:
   showText: Code anzeigen
 footer:
