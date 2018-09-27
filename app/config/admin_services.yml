@@ -63,7 +63,7 @@ services:
             class: Catrobat\AppBundle\Admin\BroadcastNotificationAdmin
             tags:
             - { name: sonata.admin, manager_type: orm, label: Broadcast Notification }
-            arguments: [null, null, AppBundle:Admin\BroadcastNotification]
+            arguments: [null, Catrobat\AppBundle\Entity\BroadcastNotification, AppBundle:Admin\BroadcastNotification]
 
       catrowebadmin.block.featured.program:
         class: Catrobat\AppBundle\Admin\FeaturedProgramAdmin
