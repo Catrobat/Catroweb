@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "582f482b0cfcfe5179bedbfce4baba5c",
+    "content-hash": "775f5b16aed7734b2edf4103d92df8a5",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -4098,16 +4098,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.40.2",
+            "version": "3.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "0994f416bf85de1f83f9d657f9e578dd1eb0ca81"
+                "reference": "09711748fc1c85132ce21b4df4e8d491412314b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/0994f416bf85de1f83f9d657f9e578dd1eb0ca81",
-                "reference": "0994f416bf85de1f83f9d657f9e578dd1eb0ca81",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/09711748fc1c85132ce21b4df4e8d491412314b3",
+                "reference": "09711748fc1c85132ce21b4df4e8d491412314b3",
                 "shasum": ""
             },
             "require": {
@@ -4199,7 +4199,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2018-10-17T08:36:10+00:00"
+            "time": "2018-09-09T08:11:09+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
