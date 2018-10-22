@@ -29,7 +29,7 @@ parameters:
       catrobat.translations.dir:      "%kernel.root_dir%/Resources/translations"
       catrobat.logs.dir:              "%kernel.root_dir%/logs/"
       catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
-      catrobat.max_version:           "0.996"
+      catrobat.max_version:           "0.998"
 
 services:
 
