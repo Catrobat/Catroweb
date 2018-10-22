@@ -17,7 +17,7 @@ sonata_admin:
     title:     Admin Panel
     title_logo: admin/admin_logo.png
     templates:
-        layout: SonataUserBundle::standard_layout.html.twig
+        layout: '@SonataAdmin/standard_layout.html.twig'
     dashboard:
         blocks:
             -

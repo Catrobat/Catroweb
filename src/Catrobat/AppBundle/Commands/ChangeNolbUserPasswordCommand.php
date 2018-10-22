@@ -54,7 +54,7 @@ class ChangeNolbUserPasswordCommand extends ContainerAwareCommand
         }
         else
         {
-          if (CommandHelper::executeShellCommand('php app/console fos:user:change-password ' . $username . ' ' . $password))
+          if (CommandHelper::executeShellCommand('php bin/console fos:user:change-password ' . $username . ' ' . $password))
           {
             $indicator->isSuccess();
           }

@@ -31,7 +31,7 @@ class WebShareProgramImport extends ContainerAwareCommand
     $filesystem->remove($temp_dir);
     $filesystem->mkdir($temp_dir);
     $this->downloadPrograms($temp_dir, $output, $amount);
-    CommandHelper::executeShellCommand("php app/console catrobat:import $temp_dir catroweb", [], 'Importing Projects', $output);
+    CommandHelper::executeShellCommand("php bin/console catrobat:import $temp_dir catroweb", [], 'Importing Projects', $output);
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), ['directory' => $temp_dir, 'user' => 'catroweb'], $output);
     $filesystem->remove($temp_dir);
   }
