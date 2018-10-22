@@ -99,7 +99,7 @@ class RestoreBackupCommand extends ContainerAwareCommand
       $this->output->writeln('Restore backup on server [' . $backup_host_name . ']');
 
       $this->executeShellCommand("sshpass -p '$backup_host_password' ssh $backup_host_user@$backup_host_name " .
-        "\"php " . $backup_host_directory . "app/console catrobat:purge --env=prod --force\" ",
+        "\"php " . $backup_host_directory . "bin/console catrobat:purge --env=prod --force\" ",
         'Remove files from server resources directory');
 
       $this->executeShellCommand("gzip -dc $backup_file | " .

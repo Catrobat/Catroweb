@@ -45,6 +45,7 @@
         "behat/mink-extension": "^2.3",
         "behat/symfony2-extension": "^2.1",
         "bossa/phpspec2-expect": "^3.0",
+        "deployer/deployer": "^6.3",
         "dmore/behat-chrome-extension": "^1.2",
         "leanphp/phpspec-code-coverage": "^4.2",
         "phpcheckstyle/phpcheckstyle": "^0.14.8",
@@ -110,8 +111,11 @@
             "allow-contrib": false,
             "require": "3.4.*"
         },
-        "symfony-web-dir": "web",
         "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-var-dir": "var",
+        "symfony-bin-dir": "bin",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }

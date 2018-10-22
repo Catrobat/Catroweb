@@ -43,7 +43,7 @@ class CreateNolbUserCommand extends ContainerAwareCommand
       {
         $username = CommandHelper::getSubstring($line, " - ", false);
         $password = substr($line, strlen($username) + 2);
-        if (CommandHelper::executeShellCommand('php app/console fos:user:create ' . $username . ' ' . $username . '@nolb ' . $password))
+        if (CommandHelper::executeShellCommand('php bin/console fos:user:create ' . $username . ' ' . $username . '@nolb ' . $password))
         {
           $user = $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username]);
 

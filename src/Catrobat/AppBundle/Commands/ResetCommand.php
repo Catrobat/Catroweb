@@ -35,12 +35,12 @@ class ResetCommand extends ContainerAwareCommand
       return;
     }
 
-    CommandHelper::executeShellCommand('php app/console doctrine:schema:drop --force', [], 'Dropping database', $output);
+    CommandHelper::executeShellCommand('php bin/console doctrine:schema:drop --force', [], 'Dropping database', $output);
 
-    CommandHelper::executeShellCommand('php app/console catrobat:drop:migration', [], 'Dropping the migration_versions table', $output);
-    CommandHelper::executeShellCommand('php app/console doctrine:migrations:migrate', [], 'Execute the migration to the latest version', $output);
-    CommandHelper::executeShellCommand('php app/console catrobat:create:tags', [], 'Creating constant tags', $output);
-    CommandHelper::executeShellCommand('php app/console cache:clear --env=test', ['timeout' => 120], 'Resetting Cache', $output);
+    CommandHelper::executeShellCommand('php bin/console catrobat:drop:migration', [], 'Dropping the migration_versions table', $output);
+    CommandHelper::executeShellCommand('php bin/console doctrine:migrations:migrate', [], 'Execute the migration to the latest version', $output);
+    CommandHelper::executeShellCommand('php bin/console catrobat:create:tags', [], 'Creating constant tags', $output);
+    CommandHelper::executeShellCommand('php bin/console cache:clear --env=test', ['timeout' => 120], 'Resetting Cache', $output);
 
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.screenshot.dir'), 'Delete screenshots', $output);
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.thumbnail.dir'), 'Delete thumnails', $output);
@@ -51,13 +51,13 @@ class ResetCommand extends ContainerAwareCommand
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.dir'), 'Delete templates', $output);
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.screenshot.dir'), 'Delete templates-screenshots', $output);
 
-    CommandHelper::executeShellCommand('php app/console sonata:admin:setup-acl', [], 'Init Sonata admin ACL', $output);
-    CommandHelper::executeShellCommand('php app/console sonata:admin:generate-object-acl', [], 'Init Sonata object ACL', $output);
+    CommandHelper::executeShellCommand('php bin/console sonata:admin:setup-acl', [], 'Init Sonata admin ACL', $output);
+    CommandHelper::executeShellCommand('php bin/console sonata:admin:generate-object-acl', [], 'Init Sonata object ACL', $output);
 
-    CommandHelper::executeShellCommand('php app/console catrobat:test:generate --env=test', [], 'Generating test data', $output);
-    CommandHelper::executeShellCommand('php app/console cache:clear --no-warmup', [], 'Clearing cache', $output);
+    CommandHelper::executeShellCommand('php bin/console catrobat:test:generate --env=test', [], 'Generating test data', $output);
+    CommandHelper::executeShellCommand('php bin/console cache:clear --no-warmup', [], 'Clearing cache', $output);
 
-    CommandHelper::executeShellCommand('php app/console fos:user:create catroweb catroweb@localhost catroweb --super-admin', [], 'Create default admin user', $output);
+    CommandHelper::executeShellCommand('php bin/console fos:user:create catroweb catroweb@localhost catroweb --super-admin', [], 'Create default admin user', $output);
 
     $temp_dir = sys_get_temp_dir() . '/catrobat.program.import/';
 
@@ -73,7 +73,7 @@ class ResetCommand extends ContainerAwareCommand
       $this->downloadPrograms($temp_dir, $output);
     }
     $remix_layout_option = '--remix-layout=' . intval($input->getOption('remix-layout'));
-    CommandHelper::executeShellCommand("php app/console catrobat:import $temp_dir catroweb $remix_layout_option",
+    CommandHelper::executeShellCommand("php bin/console catrobat:import $temp_dir catroweb $remix_layout_option",
       [], 'Importing Projects', $output);
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(), [
       'directory'      => $temp_dir,

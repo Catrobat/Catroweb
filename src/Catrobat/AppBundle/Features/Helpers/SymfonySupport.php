@@ -323,7 +323,7 @@ class SymfonySupport
     $output_dir = $catroweb_dir;
     $sqlite_db_path = "$catroweb_dir/sqlite/behattest.sqlite";
 
-    shell_exec("$catroweb_dir/app/console catrobat:recommender:export --env=test");
+    shell_exec("$catroweb_dir/bin/console catrobat:recommender:export --env=test");
     shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_like_similarity_relation $catroweb_dir $output_dir");
     shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_likes.sql') as file:\\n  for line in file:" .
       "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .
@@ -343,7 +343,7 @@ class SymfonySupport
     $output_dir = $catroweb_dir;
     $sqlite_db_path = "$catroweb_dir/sqlite/behattest.sqlite";
 
-    shell_exec("$catroweb_dir/app/console catrobat:recommender:export --env=test");
+    shell_exec("$catroweb_dir/bin/console catrobat:recommender:export --env=test");
     shell_exec("/usr/bin/env java -jar $similarity_computation_service catroweb user_remix_similarity_relation $catroweb_dir $output_dir");
     shell_exec("/usr/bin/env printf \"with open('$catroweb_dir/import_remixes.sql') as file:\\n  for line in file:" .
       "\\n    print line.replace('use catroweb;', '').replace('NOW()', '\\\"\\\"')\\n\" | " .

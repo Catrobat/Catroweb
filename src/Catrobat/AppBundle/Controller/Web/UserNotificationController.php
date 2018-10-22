@@ -31,6 +31,8 @@ class UserNotificationController extends Controller
       return $this->redirectToRoute('fos_user_security_login');
     }
 
+    $logger->warning("1");
+
     $unseen_remixed_program_data = $this->get('remixmanager')->getUnseenRemixProgramsDataOfUser($this->getUser());
     $screenshot_repository = $this->get('screenshotrepository');
     $elapsed_time = $this->get('elapsedtime');
@@ -51,6 +53,8 @@ class UserNotificationController extends Controller
       }
       $unseen_remixes_grouped[$original_program_id]['remixes'][] = $remix_data;
     }
+
+    $logger->warning("20");
 
     $nr = $this->get("catro_notification_repository");
     $catro_user_notifications = $nr->findByUser($user, ['id' => 'DESC']);
@@ -96,8 +100,7 @@ class UserNotificationController extends Controller
         }
       }
     }
-
-    $logger->warning("screens", $avatars);
+    $logger->warning("30");
 
     $response = $this->get('templating')->renderResponse('usernotifications.html.twig', [
       'unseenRemixesGrouped'   => $unseen_remixes_grouped,

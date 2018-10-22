@@ -8,7 +8,7 @@ use Symfony\Component\Finder\Finder;
 
 class LogsController extends CRUDController
 {
-  const LOG_DIR = '../app/logs/';
+  const LOG_DIR = '../var/logs/';
   const LOG_PATTERN = '*.log';
 
   const FILTER_LEVEL_DEBUG = 0;
