@@ -20,6 +20,7 @@ set('shared_dirs',
     'var/logs',
     'var/sessions',
     'web/resources',
+    'backups'
   ]);
 
 // Shared files between deploys
@@ -34,7 +35,8 @@ set('writable_dirs',
   [
     'var/cache',
     'var/logs',
-    'var/sessions'
+    'var/sessions',
+    'backups',
   ]);
 
 // Symfony executable and variable directories
@@ -47,7 +49,7 @@ set('allow_anonymous_stats', false);
 host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'deployer')
+  ->set('branch', 'php7Iwillsaveyou')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 

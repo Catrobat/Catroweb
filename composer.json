@@ -27,7 +27,7 @@
         "php-http/message": "^1.7",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.2",
-        "sonata-project/admin-bundle": "^3.39",
+        "sonata-project/admin-bundle": "3.39",
         "sonata-project/doctrine-orm-admin-bundle": "^3.6",
         "sonata-project/user-bundle": "^4.2",
         "symfony/acl-bundle": "^1.0",
