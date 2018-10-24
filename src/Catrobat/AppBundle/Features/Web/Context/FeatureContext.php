@@ -929,7 +929,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
     $this->visitPath('/pocketcode/login');
-    $this->fillField('username', $arg2);
+    $this->fillField('_username', $arg2);
     $this->fillField('password', $arg3);
     $this->pressButton('Login');
     if ($arg1 == 'try to')

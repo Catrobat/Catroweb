@@ -6,46 +6,62 @@
 
 
 {% block body %}
-    <div id="help-container">
-
+  <div id="help-container">
+    {% if theme() == 'luna' %}
       <div class="video-wrapper">
-        <iframe id="youtube-help-video" src="https://www.youtube.com/embed/BHe2r2WU-T8" frameborder="0" allowfullscreen></iframe>
+        <iframe id="youtube-help-video" src="https://www.youtube.com/embed/-6AEZrSbOMg"
+                frameborder="0" allowfullscreen></iframe>
       </div>
-
-      <div class="help-desktop">
-        <img id="alice-tut-desktop" src="{{ asset('images/help/alice_tut.png') }}" alt="Discuss" onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'" />
+    {% else %}
+      <div class="video-wrapper">
+        <iframe id="youtube-help-video" src="https://www.youtube.com/embed/BHe2r2WU-T8"
+                frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="help-mobile">
-        <img id="alice-tut-mobile" src="{{ asset('images/help/alice_tut_mobile.png') }}" alt="Discuss" onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'" />
-      </div>
-      <div class="help-desktop help-special-margin">
-        <img id="step-by-step-desktop" src="{{ asset('images/help/step_by_step.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
-      </div>
-      <div class="help-mobile">
-        <img id="step-by-step-mobile" src="{{ asset('images/help/step_by_step_mobile.png') }}" alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'" />
-      </div>
-      <div class="help-split-desktop">
-        <div class="help-split">
-          <img id="tutorials" src="{{ asset('images/help/tutorials.png') }}" alt="Tutorials" onclick="self.location.href='{{ url('catrobat_web_tutorialcards') }}'" />
-        </div>
-        <div class="help-split-spacer"></div>
-        <div class="help-split">
-          <img id="starters" src="{{ asset('images/help/starters.png') }}" alt="Starter Programs" onclick="self.location.href='{{ url('catrobat_web_starter') }}'" />
-        </div>
-        <div class="clear"></div>
-      </div>
-      <div class="help-desktop">
-        <img id="edu-desktop" src="{{ asset('images/help/edu_site.png') }}" alt="Education" onclick="window.open('https://edu.catrob.at/', '_blank')" />
-      </div>
-      <div class="help-mobile">
-        <img id="edu-mobile" src="{{ asset('images/help/edu_site_mobile.png') }}" alt="Education" onclick="window.open('https://edu.catrob.at/', '_blank')" />
-      </div>
-      <div class="help-desktop">
-        <img id="discuss-desktop" src="{{ asset('images/help/discuss.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
-      </div>
-      <div class="help-mobile">
-        <img id="discuss-mobile" src="{{ asset('images/help/discuss_mobile.png') }}" alt="Discuss" onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')" />
-      </div>
+    {% endif %}
+    <div class="help-desktop">
+      <img id="alice-tut-desktop" src="{{ asset('images/help/alice_tut.png') }}" alt="Discuss"
+           onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'"/>
     </div>
+    <div class="help-mobile">
+      <img id="alice-tut-mobile" src="{{ asset('images/help/alice_tut_mobile.png') }}" alt="Discuss"
+           onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'"/>
+    </div>
+    <div class="help-desktop help-special-margin">
+      <img id="step-by-step-desktop" src="{{ asset('images/help/step_by_step.png') }}"
+           alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'"/>
+    </div>
+    <div class="help-mobile">
+      <img id="step-by-step-mobile" src="{{ asset('images/help/step_by_step_mobile.png') }}"
+           alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'"/>
+    </div>
+    <div class="help-split-desktop">
+      <div class="help-split">
+        <img id="tutorials" src="{{ asset('images/help/tutorials.png') }}" alt="Tutorials"
+             onclick="self.location.href='{{ url('catrobat_web_tutorialcards') }}'"/>
+      </div>
+      <div class="help-split-spacer"></div>
+      <div class="help-split">
+        <img id="starters" src="{{ asset('images/help/starters.png') }}" alt="Starter Programs"
+             onclick="self.location.href='{{ url('catrobat_web_starter') }}'"/>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="help-desktop">
+      <img id="edu-desktop" src="{{ asset('images/help/edu_site.png') }}" alt="Education"
+           onclick="window.open('https://edu.catrob.at/', '_blank')"/>
+    </div>
+    <div class="help-mobile">
+      <img id="edu-mobile" src="{{ asset('images/help/edu_site_mobile.png') }}" alt="Education"
+           onclick="window.open('https://edu.catrob.at/', '_blank')"/>
+    </div>
+    <div class="help-desktop">
+      <img id="discuss-desktop" src="{{ asset('images/help/discuss.png') }}" alt="Discuss"
+           onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')"/>
+    </div>
+    <div class="help-mobile">
+      <img id="discuss-mobile" src="{{ asset('images/help/discuss_mobile.png') }}" alt="Discuss"
+           onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')"/>
+    </div>
+  </div>
 {% endblock %}
 

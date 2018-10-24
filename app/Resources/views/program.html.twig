@@ -26,7 +26,8 @@
   <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:title" content="{{ program.name|escape('html_attr') }}"/>
   {% if program.description is empty %}
-    <meta property="og:description" content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}"/>
+    <meta property="og:description"
+          content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}"/>
   {% else %}
     <meta property="og:description" content="{{ program.description|escape('html_attr') }}"/>
   {% endif %}
@@ -73,7 +74,8 @@
             <a id="program-like-thumbs-up" class="program-like-button" href="#"
                data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
                data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
-              <div class="like-round-icon-container mr-3"><i class="like-round-icon fas fa-thumbs-up"></i></div>
+              <div class="like-round-icon-container mr-3"><i
+                    class="like-round-icon fas fa-thumbs-up"></i></div>
               <span
                   class="singular">{{ "programs.likeThumbsUpDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
               <span
@@ -91,7 +93,8 @@
             <a id="program-like-love" class="program-like-button" href="#"
                data-like-type="{{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_LOVE') }}"
                data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
-              <div class="like-round-icon-container mr-3"><i class="like-round-icon-heart fas fa-heart"></i></div>
+              <div class="like-round-icon-container mr-3"><i
+                    class="like-round-icon-heart fas fa-heart"></i></div>
               <span
                   class="singular">{{ "programs.likeLoveDetailText"|transchoice(1, { '%persons%' : 1 }, "catroweb") }}</span>
               <span
@@ -119,7 +122,8 @@
           {{ "description"|trans({}, "catroweb") }}
           {% if app.user and my_program %}
             <a data-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
-              <i id="edit-description-button" class="ml-3 fa fa-pencil-square-o catro-icon-button"></i>
+              <i id="edit-description-button"
+                 class="ml-3 fa fa-pencil-square-o catro-icon-button"></i>
             </a>
           {% endif %}
         </span>
@@ -133,9 +137,11 @@
             <p>
               <span>{{ program.description[:250]|nl2br }}</span><!--- NO white space hack
                   --><span id="descriptionPoints">...</span><!--- NO white space hack
-                  --><span id="descriptionFulltext" class="fulltext">{{ program.description[250:]|nl2br }}</span>
+                  --><span id="descriptionFulltext"
+                           class="fulltext">{{ program.description[250:]|nl2br }}</span>
             </p>
-            <a id="descriptionShowMoreToggle" aria-expanded="false" aria-controls="descriptionFulltext" href="#"
+            <a id="descriptionShowMoreToggle" aria-expanded="false"
+               aria-controls="descriptionFulltext" href="#"
                class="toggle-content">
                   <span id="descriptionShowMoreText" class="text text-capitalize">
                     {{ ("show-more")|trans({}, "catroweb") }}
@@ -151,7 +157,8 @@
       {% if app.user and my_program %}
         <div id="edit-description-ui">
           <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
-          <textarea id="edit-description" name="edit-description" class="mt-2 mb-2" title="_edit-description"
+          <textarea id="edit-description" name="edit-description" class="mt-2 mb-2"
+                    title="_edit-description"
                     maxlength="{{ max_description_size }}" style="width: 100%" rows="10">
 {% if program.description %}{{ program.description }}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
           </textarea>
@@ -225,7 +232,8 @@
 
           <div id="apk-pending" class="col-12 col-lg-5 col-xl-4 d-none">
             <button class="btn  btn-primary download-button col-12">
-              <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>
+              <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw"
+                 aria-hidden="true"></i>
               {{ "apk.preparing"|trans({}, "catroweb") }}
             </button>
 
@@ -237,49 +245,8 @@
               {{ "apk.download"|trans({}, "catroweb") }}
             </button>
           </div>
-
         </div>
-
-
       </div>
-
-      {% if nolb_status and program.user == app.user.username %}
-        <button id="nolb-project-button" class="btn download-button">
-          <i class="program-big-button-icon mr-3 fas fa-cube"></i>
-          {{ "pmd.submitBtn"|trans({}, "catroweb") }}
-        </button>
-
-        <div id="nolb-submission-box">
-          <h2> {{ "pmd.submitBox.header"|trans({}, "catroweb") }} </h2>
-          <button id="nolb-submission-box-cancel"><i class="fa fa-close"></i></button>
-          <p> {{ "pmd.submitBox.text"|trans({}, "catroweb") }}</p>
-          <div class="input-field">
-            <input type="number" id="nolb-submission-project-id" name="NOLB-submission-id"
-                   placeholder="Your project ID">
-          </div>
-          <button id="nolb-submission-button" class="btn">
-            {{ "pmd.submitBox.btnText"|trans({}, "catroweb") }}
-          </button>
-        </div>
-
-
-        <div id="nolb-submission-successful">
-          <h2> {{ "pmd.submitBox.header"|trans({}, "catroweb") }} </h2>
-          <p>{{ "pmd.successful.text"|trans({}, "catroweb") }}</p>
-          <button id="nolb-submission-successful-ok" class="btn">
-            <p>{{ "ok"|trans({}, "catroweb") }}</p>
-          </button>
-        </div>
-
-        <div id="nolb-submission-failed">
-          <h2> {{ "pmd.submitBox.header"|trans({}, "catroweb") }} </h2>
-          <p>{{ "pmd.failed.text"|trans({}, "catroweb") }}</p>
-          <button id="nolb-submission-failed-ok" class="btn">
-            <p>{{ "ok"|trans({}, "catroweb") }}</p>
-          </button>
-        </div>
-
-      {% endif %}
 
       {% if not program.gamejam or not program.acceptedforgamejam %}
         {% if jam %}
@@ -323,7 +290,7 @@
 
   {#
      # CODEVIEW
-     #}
+   #}
   {% if program_details.languageVersion >= 0.97 %}
     {{ render(controller('AppBundle:Web/CodeView:viewCode', {'id' : program.id})) }}
   {% endif %}
@@ -331,28 +298,34 @@
   <div id="program-bottom">
     <div id="icon-author">
       <div class="program-round-icon-container"><i class="program-round-icon fas fa-user"></i></div>
-      <a href="{{ url('profile', { id : program.user.id }) }}" class="icon-text">{{ program.user }}</a>
+      <a href="{{ url('profile', { id : program.user.id }) }}"
+         class="icon-text">{{ program.user }}</a>
     </div>
     <div>
-      <div class="program-round-icon-container"><i class="program-round-icon far fa-clock"></i></div>
+      <div class="program-round-icon-container"><i class="program-round-icon far fa-clock"></i>
+      </div>
       <span class="icon-text">{{ program_details.age }}</span>
     </div>
     <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-file-alt"></i></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-file-alt"></i>
+      </div>
       <span class="icon-text">{{ program_details.filesize }} MB</span>
     </div>
     <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-download"></i></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-download"></i>
+      </div>
       <span
           class="icon-text">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}
       </span>
     </div>
     <div>
       <div class="program-round-icon-container"><i class="program-round-icon fas fa-eye"></i></div>
-      <span class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
+      <span
+          class="icon-text">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
     <div>
-      <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i></div>
+      <div class="program-round-icon-container"><i class="program-round-icon fas fa-sitemap"></i>
+      </div>
       <a id="remix-graph-modal-link" href="#remix-graph-modal" class="icon-text">
         {{ "programs.remixes"|transchoice(program_details.remixesLength,
           { '%remixes%' : program_details.remixesLength }, "catroweb") }}
@@ -440,7 +413,7 @@
 
   <script>
 
-    $(function () {
+    $(function() {
       var copy_button = $('.btn-copy')
 
       copy_button.tooltip({
@@ -449,14 +422,14 @@
         container: '.btn-copy'
       })
 
-      copy_button.on('shown.bs.tooltip', function () {
-        setTimeout(function () {
+      copy_button.on('shown.bs.tooltip', function() {
+        setTimeout(function() {
           copy_button.tooltip('hide')
         }, 1000)
       })
 
       var cb = new Clipboard('.btn-copy')
-      cb.on('success', function () {
+      cb.on('success', function() {
         copy_button
         .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')
         .addClass('tooltip-success')
@@ -465,7 +438,7 @@
         $('.btn-copy +.tooltip .tooltip-inner').prepend('<i class=\'fa fa-check\' style=\'padding-right: 1em\'></i>')
       })
 
-      cb.on('error', function () {
+      cb.on('error', function() {
         copy_button
         .attr('data-original-title', '{{ "clipboard.fail"|trans({}, "catroweb") }}')
         .addClass('tooltip-danger')
@@ -485,18 +458,18 @@
 
     var download_href = document.getElementById('url-download').href
 
-    function blockEventListener (event)
+    function blockEventListener(event)
     {
       event.preventDefault()
     }
 
-    $(document).on('click', '#url-download', function () {
+    $(document).on('click', '#url-download', function() {
       var url_link = document.getElementById('url-download')
       if (url_link.href !== 'javascript:void(0)')
       {
         url_link.href = 'javascript:void(0)'
 
-        setTimeout(function () {
+        setTimeout(function() {
           url_link.href = download_href
         }, 5000)
 
@@ -529,7 +502,7 @@
 
     var PROGRAM_LIKE_TYPE_NONE = {{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_NONE') }};
 
-    function convertToHumanFriendlyNumberText (number)
+    function convertToHumanFriendlyNumberText(number)
     {
       if (number >= 10000)
       {
@@ -545,7 +518,7 @@
       }
     }
 
-    function updateLikeCount (likeType, likeTypeCount, totalLikeCount)
+    function updateLikeCount(likeType, likeTypeCount, totalLikeCount)
     {
       var programLikeDetailContainer = $('#program-like-detail-container');
       $('a.program-like-button').addClass('not-selected')
@@ -564,7 +537,7 @@
       programLikeDetailContainer.html(translatedDetailText)
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}")
       var recommendedByRemixGraphPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
       var networkDirector = new NetworkDirector()
@@ -579,7 +552,7 @@
         animatedIn : 'zoomInUp',
         animatedOut: 'bounceOutDown',
         color      : '#177f8d',
-        beforeOpen : function () {
+        beforeOpen : function() {
           remixGraph.destroy()
           if (cachedRemixData != null)
           {
@@ -594,7 +567,7 @@
             $.ajax({
               url    : "{{ path('program_remix_graph', { 'id' : program.id }) }}",
               type   : 'get',
-              success: function (remixData) {
+              success: function(remixData) {
                 cachedRemixData = remixData
                 document.addEventListener('gesturestart', blockEventListener)
                 document.ontouchmove = blockEventListener
@@ -602,22 +575,22 @@
                 var networkDescription = networkDirector.construct(networkBuilder)
                 remixGraph.render(loadingAnimation, networkDescription)
               },
-              error  : function () {
+              error  : function() {
                 alert('Unable to fetch remix-graph!')
               }
             })
           }
           console.log('The animation was called')
         },
-        afterOpen  : function () {
+        afterOpen  : function() {
           loadingAnimation.show()
           console.log('The animation is completed')
         },
-        beforeClose: function () {
+        beforeClose: function() {
           console.log('The animation was called')
           loadingAnimation.hide()
         },
-        afterClose : function () {
+        afterClose : function() {
           console.log('The animation is completed')
           document.removeEventListener('gesturestart', blockEventListener)
           document.ontouchmove = null
@@ -625,11 +598,11 @@
         }
       })
 
-      $(document).on('click', '#remix-graph-button', function () {
+      $(document).on('click', '#remix-graph-button', function() {
         $('#remix-graph-modal-link').click()
       })
 
-      $(document).on('click', 'a.program-like-button', function (event) {
+      $(document).on('click', 'a.program-like-button', function(event) {
         event.preventDefault()
         var type = $(this).attr('data-like-type')
         var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type
@@ -648,7 +621,7 @@
           url    : url,
           type   : 'get',
           data   : {type: type},
-          success: function (data) {
+          success: function(data) {
             if (data.statusCode !== {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }})
             {
               if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }})
@@ -662,7 +635,7 @@
             }
             updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount)
           },
-          error  : function () {
+          error  : function() {
             alert('something went terribly wrong')
             $(this).addClass('not-selected')
           }
@@ -670,7 +643,7 @@
         return false
       })
 
-      $(document).on('click', '#nolb-submission-button', function () {
+      $(document).on('click', '#nolb-submission-button', function() {
         var username = "{{ user_name }}"
         var programURL = "{{ program_url }}"
         var nolbSubmissionProjectId = $('#nolb-submission-project-id')
@@ -688,7 +661,7 @@
           crossDomain: true,
           url        : 'https://www.pmdnolb.cloud/?r=service/upload_program',
           data       : JSON.stringify({username: username, PID: projectID, progurl: programURL}),
-          success    : function (data) {
+          success    : function(data) {
             var response = JSON.parse(data)
             if (response.code === 1)
             {
@@ -700,29 +673,29 @@
             }
 
           },
-          error      : function () {
+          error      : function() {
           }
         })
         $('#nolb-submission-box').hide()
       })
 
-      $(document).on('click', '#nolb-submission-successful-ok', function () {
+      $(document).on('click', '#nolb-submission-successful-ok', function() {
         $('#nolb-submission-successful').hide()
       })
 
-      $(document).on('click', '#nolb-submission-failed-ok', function () {
+      $(document).on('click', '#nolb-submission-failed-ok', function() {
         $('#nolb-submission-failed').hide()
       })
 
-      $(document).on('click', '#nolb-project-button', function () {
+      $(document).on('click', '#nolb-project-button', function() {
         $('#nolb-submission-box').show()
       })
 
-      $(document).on('click', '#nolb-submission-box-cancel', function () {
+      $(document).on('click', '#nolb-submission-box-cancel', function() {
         $('#nolb-submission-box').hide()
       })
 
-      $(document).one('click', '.rec-programs', function (event) {
+      $(document).one('click', '.rec-programs', function(event) {
 
         event.preventDefault()
 
@@ -758,12 +731,12 @@
           type     : type,
           recFromID: {{ program.id }},
           recID    : additions
-        }, function (data) {
+        }, function(data) {
           if (data === 'error')
           {
             console.log('No click statistic is created!')
           }
-        }).fail(function (data) {
+        }).fail(function(data) {
           console.log(data)
         })
 
@@ -771,12 +744,12 @@
       })
     })
 
-    $(function () {
+    $(function() {
 
       var backdrop = $('.backdrop')
       var actionArrow = $('#actionArrow')
       var masterfab = $('#masterfab')
-      $('.fab,.backdrop').click(function () {
+      $('.fab,.backdrop').click(function() {
         if (backdrop.is(':visible'))
         {
           backdrop.fadeOut(125)
@@ -787,7 +760,7 @@
           .animate({
             bottom : masterfab.css('bottom'),
             opacity: 0
-          }, 125, function () {
+          }, 125, function() {
             $(this).hide()
           })
         }
@@ -796,7 +769,7 @@
           backdrop.fadeIn(125)
           actionArrow.removeClass('fa-angle-up')
           actionArrow.addClass('fa-angle-down')
-          $('.fab.child').each(function () {
+          $('.fab.child').each(function() {
             $(this)
             .stop()
             .show()
