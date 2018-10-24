@@ -27,6 +27,28 @@ Feature: Pocketcode help page
     And I should see a small help image "Education Platform"
     And I should see a small help image "Discussion"
 
+  Scenario: Viewing the help overview at help page for luna flavor
+    Given I am on "/luna/help"
+    Then I wait for a second
+    Then I should see the video available at "https://www.youtube.com/embed/-6AEZrSbOMg"
+    And I should see a big help image "Game Design"
+    And I should see a big help image "Step By Step"
+    And I should see a help image "Tutorials"
+    And I should see a help image "Starters"
+    And I should see a big help image "Education Platform"
+    And I should see a big help image "Discussion"
+
+  @Mobile
+  Scenario: Viewing the help overview at help page for luna flavor
+    Given I am on "/luna/help"
+    Then I should see the video available at "https://www.youtube.com/embed/-6AEZrSbOMg"
+    And I should see a small help image "Game Design"
+    And I should see a small help image "Step By Step"
+    And I should see a help image "Tutorials"
+    And I should see a help image "Starters"
+    And I should see a small help image "Education Platform"
+    And I should see a small help image "Discussion"
+
   Scenario Outline: Clicking on the alice game jam image at help page
     When I click "#alice-tut-desktop"
     Then I should see "6" "desktop" tutorial banners

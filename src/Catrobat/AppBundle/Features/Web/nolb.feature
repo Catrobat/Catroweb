@@ -16,11 +16,6 @@ Feature: Testcases for nolb user
       | 1  | 1       | true   | true       | 1              | 2            |
       | 2  | 2       | true   | false      | 0              | 4            |
 
-  Scenario: Normal user should not be able to see the nolb submit button
-    Given I log in as "normaluser" with the password "abcdef"
-    And I am on "/pocketcode/program/2"
-    Then I should see 0 "#nolb-project-button"
-
   Scenario: Nolb user cannot edit their profile
     Given I log in as "nolbmuser" with the password "123456"
     And I am on "/pocketcode/profile"
@@ -44,15 +39,6 @@ Feature: Testcases for nolb user
     Given I log in as "nolbmuser" with the password "123456"
     And I am on "/pocketcode/program/2"
     Then I should see 0 "#nolb-project-button"
-
-  Scenario: Nolb user can only submit own programs (allowed)
-    Given I log in as "nolbmuser" with the password "123456"
-    And I am on "/pocketcode/program/1"
-    And I should see 1 "#nolb-project-button"
-    When I click "#nolb-project-button"
-    And I should see 1 "#nolb-submission-box"
-
-  #TODO: add tests for nolb submission button (success and fail)
 
   Scenario: Normal user should not see the example section
     Given I log in as "normaluser" with the password "abcdef"
