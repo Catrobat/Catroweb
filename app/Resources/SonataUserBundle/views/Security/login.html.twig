@@ -201,6 +201,12 @@
 
 {% block js %}
   <script>
+   function initGoogleAuth() {
+      gapi.load('auth2', function() {
+        console.log("Google Auth Ready");
+        initGoogleAuth2Login();
+      });
+    }
     var agree_button = "";
     var agree = false;
 
@@ -222,4 +228,5 @@
 
 
   </script>
+  <script src="https://apis.google.com/js/platform.js?onload=initGoogleAuth" async defer></script>
 {% endblock %}

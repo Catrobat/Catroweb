@@ -1,3 +1,4 @@
+window.auth2google=null;
 $(document).ready(function () {
 /*    var po = document.createElement('script');
     po.type = 'text/javascript';
@@ -8,9 +9,9 @@ $(document).ready(function () {
     console.log('script added once');
  */
 
-    $('#logout').click(function () {
-        GoogleLogout();
-    });
+  $('#logout').click(function () {
+      GoogleLogout();
+  });
 
   $(document).on("click", "#btn-login_google", function() {
     if(!agree) {
@@ -20,8 +21,34 @@ $(document).ready(function () {
   });
 });
 
+function initGoogleAuth2Login() {
+  var $ajaxGetGoogleAppId = Routing.generate(
+    'catrobat_oauth_login_get_google_appid', { flavor: 'pocketcode' }
+  );
+  $.get($ajaxGetGoogleAppId,
+    function (data) {
+      console.log(data);
+      var $appid = data['gplus_appid'];
+      window.auth2google = gapi.auth2.init({
+        client_id: $appid,
+        scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+        cookie_policy: 'single_host_origin', 
+        redirect_uri: 'postmessage'
+      });
+    });
+}
+
 function triggerGoogleLogin(){
   console.log('triggerGoogleLogin');
+  gapi.auth2.getAuthInstance().signIn({
+    'approval_prompt': $('#gplus_approval_prompt').val(), //'force' prevents auto g+-signin
+    'redirect_uri': 'postmessage',
+    'access_type': 'offline',
+    'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
+  }).then(function(authRes){
+    signinCallback(authRes);
+  });
+  
   var $appid = '';
 
   var $ajaxGetGoogleAppId = Routing.generate(
@@ -35,7 +62,7 @@ function triggerGoogleLogin(){
         'callback': 'signinCallback',
         'approvalprompt': $('#gplus_approval_prompt').val(), //'force' prevents auto g+-signin
         'clientid': $appid,
-        'cookiepolicy': 'single_host_origin',
+        'cookiepolicy': 'single_host_origin', 
         'redirecturi': 'postmessage',
         'accesstype': 'offline',
         'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
@@ -45,11 +72,7 @@ function triggerGoogleLogin(){
 
 function signinCallback(authResult) {
   console.log('signinCallback');
-  if (authResult['code']) {
-    $("#access_token_oauth").val(authResult['code']);
-    console.log('auth: ' + authResult['code']);
-    getGoogleUserInfo(authResult);
-  } else if (authResult['error']) {
+  if (authResult['error']) {
     if(authResult['error'] == 'access_denied') {
       console.log('User denied access to the app');
     } else if(authResult['error'] == 'immediate_failed') {
@@ -57,11 +80,11 @@ function signinCallback(authResult) {
     } else {
       console.log('error:' + authResult['error']);
     }
+  }else{
+    window.googleUser=authResult;
+    getGoogleUserInfo(authResult);
   }
-  $('#googleLoginButton').click();
 }
-
-
 
 function getGoogleUserInfo(authResult) {
   console.log('getGoogleUserInfo');
