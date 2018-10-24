@@ -2,12 +2,12 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
-use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,6 +20,9 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
+    /**
+     * @var $query QueryBuilder
+     */
     $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->isNotNull($query->getRootAlias() . '.program')

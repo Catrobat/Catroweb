@@ -2,11 +2,14 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ClickStatisticsAdmin extends AbstractAdmin
 {
@@ -23,11 +26,12 @@ class ClickStatisticsAdmin extends AbstractAdmin
   {
     $formMapper
       ->add('type')
-      ->add('program', 'entity', ['class' => 'Catrobat\AppBundle\Entity\Program'], [
+      ->add('program', EntityType::class, ['class' => Program::class], [
         'admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('scratch_program_id')
-      ->add('recommended_from_program', 'entity', ['class' => 'Catrobat\AppBundle\Entity\Program'], ['admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('recommended_from_program', EntityType::class, ['class' => Program::class],
+        ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('clicked_at')
       ->add('ip')
       ->add('country_code')
@@ -60,10 +64,10 @@ class ClickStatisticsAdmin extends AbstractAdmin
     $listMapper
       ->addIdentifier('id')
       ->add('type')
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
-      ->add('program', 'entity', ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('user', EntityType::class, ['class' => User::class])
+      ->add('program', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('scratch_program_id')
-      ->add('recommended_from_program', 'entity', ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('recommended_from_program', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('tag.en', null, [
         'label' => 'Tag'])
       ->add('extension.name', null, [

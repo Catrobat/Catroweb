@@ -135,6 +135,6 @@ class StarterCategory
 
   public function __toString()
   {
-    return $this->alias;
+    return (string) $this->alias;
   }
 }

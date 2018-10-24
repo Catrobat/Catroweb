@@ -2,11 +2,14 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProgramDownloadStatisticsAdmin extends AbstractAdmin
 {
@@ -22,13 +25,14 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('program', 'entity', ['class' => 'Catrobat\AppBundle\Entity\Program'], [
-        'admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('program', EntityType::class, ['class' => Program::class],
+        ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('recommended_by_page_id')
-      ->add('recommended_by_program', 'entity', ['class' => 'Catrobat\AppBundle\Entity\Program'], [
-        'admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('recommended_from_program_via_tag', 'entity', ['class' => 'Catrobat\AppBundle\Entity\Program'], [
+      ->add('recommended_by_program', EntityType::class, ['class' => Program::class],
+        ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('recommended_from_program_via_tag', EntityType::class,
+        ['class' => Program::class], [
         'admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('downloaded_at')
       ->add('ip')
@@ -68,8 +72,10 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
       ->addIdentifier('id')
       ->add('program', null, ['admin_code' => 'catrowebadmin.block.programs.all',])
       ->add('recommended_by_page_id')
-      ->add('recommended_by_program', 'entity', ['admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('recommended_from_program_via_tag', 'entity', ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('recommended_by_program', EntityType::class,
+        ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('recommended_from_program_via_tag', EntityType::class,
+        ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('user')
       ->add('downloaded_at')
       ->add('ip')

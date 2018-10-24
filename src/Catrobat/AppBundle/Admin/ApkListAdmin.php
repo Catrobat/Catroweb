@@ -2,12 +2,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Catrobat\AppBundle\Entity\Program;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ApkListAdmin extends AbstractAdmin
 {
@@ -20,6 +21,9 @@ class ApkListAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
+    /**
+     * @var $query QueryBuilder
+     */
     $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->eq($query->getRootAlias() . '.apk_status', ':apk_status')
@@ -52,7 +56,7 @@ class ApkListAdmin extends AbstractAdmin
       ->add('name')
       ->add('apk_request_time')
       ->add('thumbnail', 'string', ['template' => 'Admin/program_thumbnail_image_list.html.twig'])
-      ->add('apk_status', 'choice', [
+      ->add('apk_status', ChoiceType::class, [
         'choices' => [
           Program::APK_NONE    => 'none',
           Program::APK_PENDING => 'pending',

@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MediaPackageAdmin extends AbstractAdmin
 {
@@ -16,8 +17,8 @@ class MediaPackageAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('name', 'text', ['label' => 'Name'])
-      ->add('name_url', 'text', ['label' => 'Url']);
+      ->add('name', TextType::class, ['label' => 'Name'])
+      ->add('name_url', TextType::class, ['label' => 'Url']);
   }
 
   // Fields to be shown on filter forms

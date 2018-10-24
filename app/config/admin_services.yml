@@ -19,13 +19,13 @@ services:
         class: Catrobat\AppBundle\Admin\ReportedProgramsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Reported Programs }
-        arguments: [null, Catrobat\AppBundle\Entity\ProgramInappropriateReport, null]
+        arguments: [null, Catrobat\AppBundle\Entity\ProgramInappropriateReport, Catrobat\AppBundle\Controller\Admin\ReportController]
 
       catrowebadmin.block.programs.comments:
-        class: Catrobat\AppBundle\Admin\ReportAdmin
+        class: Catrobat\AppBundle\Admin\ReportedCommentsAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, label: Reported Comments }
-        arguments: [null, Catrobat\AppBundle\Entity\UserComment, AppBundle:Admin\Report]
+        arguments: [null, Catrobat\AppBundle\Entity\UserComment, Catrobat\AppBundle\Controller\Admin\ReportController]
 
       catrowebadmin.block.programs.categories:
         class: Catrobat\AppBundle\Admin\CategoriesAdmin

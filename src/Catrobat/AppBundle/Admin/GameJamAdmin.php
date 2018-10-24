@@ -2,12 +2,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class GameJamAdmin extends AbstractAdmin
 {
@@ -35,7 +36,7 @@ class GameJamAdmin extends AbstractAdmin
                 ',
       ])
       ->add('hashtag')
-      ->add('flavor', 'choice', ['choices' => $flavor])
+      ->add('flavor', ChoiceType::class, ['choices' => $flavor])
       ->add('start')
       ->add('end')
       ->add('sample_programs', null, ['class' => 'Catrobat\AppBundle\Entity\Program'], ['admin_code' => 'catrowebadmin.block.programs.all']);
@@ -94,7 +95,9 @@ class GameJamAdmin extends AbstractAdmin
       ->add('flavor')
       ->add('start')
       ->add('end')
-      ->add('sample_programs', null, ['class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'], ['admin_code' => 'catrowebadmin.block.programs.all']);
+      ->add('sample_programs', null, ['class' => Program::class,
+        'admin_code' => 'catrowebadmin.block.programs.all'],
+        ['admin_code' => 'catrowebadmin.block.programs.all']);
 
   }
 

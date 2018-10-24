@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AllExtensionsAdmin extends AbstractAdmin
 {
@@ -23,8 +23,8 @@ class AllExtensionsAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('name', 'text', ['label' => 'Extension name'])
-      ->add('prefix', 'text');
+      ->add('name', TextType::class, ['label' => 'Extension name'])
+      ->add('prefix', TextType::class);
   }
 
   // Fields to be shown on filter forms

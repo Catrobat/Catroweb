@@ -2,12 +2,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
-use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MediaPackageFileAdmin extends AbstractAdmin
 {
@@ -24,11 +25,13 @@ class MediaPackageFileAdmin extends AbstractAdmin
 //        }
 
     $formMapper
-      ->add('name', 'text', ['label' => 'Name'])
-      ->add('file', 'file', $file_options)
-      ->add('category', 'entity', ['class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory', 'required' => true])
-      ->add('flavor', 'text', ['required' => false])
-      ->add('author', 'text', ['label' => 'Author', 'required' => false])
+      ->add('name', TextType::class, ['label' => 'Name'])
+      ->add('file', FileType::class, $file_options)
+      ->add('category', EntityType::class, [
+        'class'    => MediaPackageCategory::class,
+        'required' => true])
+      ->add('flavor', TextType::class, ['required' => false])
+      ->add('author', TextType::class, ['label' => 'Author', 'required' => false])
       ->add('active', null, ['required' => false]);
   }
 
@@ -47,7 +50,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->addIdentifier('id')
       ->add("name")
       ->add('file', 'string', ['template' => 'Admin/mediapackage_file.html.twig'])
-      ->add('category', 'entity', ['class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory'])
+      ->add('category', EntityType::class, ['class' => MediaPackageCategory::class])
       ->add('author', null, ['editable' => true])
       ->add('flavor', null, ['editable' => true])
       ->add('downloads')

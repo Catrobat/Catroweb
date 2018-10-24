@@ -2,15 +2,19 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramManager;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Services\ExtractedFileRepository;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ApproveProgramsAdmin extends AbstractAdmin
 {
@@ -21,6 +25,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
+    /**
+     * @var $query QueryBuilder
+     */
     $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->eq($query->getRootAlias() . '.approved', $query->expr()->literal(false))
@@ -44,7 +51,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('Name')
       ->add('Description')
       ->add('version')
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('user', EntityType::class, ['class' => 'Catrobat\AppBundle\Entity\User'])
       ->add('upload_ip')
       ->add('visible', 'boolean')
       ->add('Images', null, ['template' => 'Admin/program_containing_image.html.twig'])
@@ -56,6 +63,9 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   public function preUpdate($program)
   {
+    /**
+     * @var $program Program
+     */
     $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
 
     if ($old_program['approved'] == false && $program->getApproved() == true)
@@ -74,8 +84,8 @@ class ApproveProgramsAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('name', 'text', ['label' => 'Program name'])
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User']);
+      ->add('name', TextType::class, ['label' => 'Program name'])
+      ->add('user', EntityType::class, ['class' => User::class]);
   }
 
   // Fields to be shown on filter forms

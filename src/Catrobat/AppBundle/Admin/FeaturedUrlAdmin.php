@@ -2,12 +2,17 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Doctrine\DBAL\Types\IntegerType;
+use Doctrine\DBAL\Types\StringType;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class FeaturedUrlAdmin extends AbstractAdmin
 {
@@ -16,6 +21,9 @@ class FeaturedUrlAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
+    /**
+     * @var $query QueryBuilder
+     */
     $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->isNull($query->getRootAlias() . '.program')
@@ -38,8 +46,8 @@ class FeaturedUrlAdmin extends AbstractAdmin
     }
 
     $formMapper
-      ->add('file', 'file', $file_options)
-      ->add('url', 'url')
+      ->add('file', FileType::class, $file_options)
+      ->add('url', UrlType::class)
       ->add('flavor')
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false, 'help' => 'Toggle for iOS featured url api call.'])
@@ -59,9 +67,9 @@ class FeaturedUrlAdmin extends AbstractAdmin
     $listMapper
       ->addIdentifier('id')
       ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
-      ->add('url', 'url')
-      ->add('flavor', 'string', ['editable' => true])
-      ->add('priority', 'integer', ['editable' => true])
+      ->add('url', UrlType::class)
+      ->add('flavor', StringType::class, ['editable' => true])
+      ->add('priority', IntegerType::class, ['editable' => true])
       ->add('for_ios', null, ['label' => 'iOS only', 'editable' => true])
       ->add('active', null, ['editable' => true])
       ->add('_action', 'actions', [

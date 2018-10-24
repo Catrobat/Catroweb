@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class TemplateAdmin extends AbstractAdmin
 {
@@ -25,10 +27,10 @@ class TemplateAdmin extends AbstractAdmin
   {
     $isNew = $this->getSubject()->getId() == null;
     $formMapper
-      ->add('name', 'text', ['label' => 'Program name'])
-      ->add('landscape_program_file', 'file', ['required' => false])
-      ->add('portrait_program_file', 'file', ['required' => false])
-      ->add('thumbnail', 'file', ['required' => $isNew])
+      ->add('name', TextType::class, ['label' => 'Program name'])
+      ->add('landscape_program_file', FileType::class, ['required' => false])
+      ->add('portrait_program_file', FileType::class, ['required' => false])
+      ->add('thumbnail', FileType::class, ['required' => $isNew])
       ->add('active', null, ['required' => false]);
   }
 
