@@ -52,12 +52,12 @@
 {% endblock %}
 
 <script>
-  let search_input = $('.input-search')
+  let search_input = $('.input-search');
 
   search_input.tooltip({
     trigger  : 'manual',
     placement: 'bottom'
-  })
+  });
 
   search_input
   .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
@@ -67,7 +67,17 @@
     setTimeout(function () {
       search_input.tooltip('hide')
     }, 1000)
-  })
+  });
+
+  function scrollToHash() {
+    if (window.location.hash) {
+      window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
+    }
+  }
+  scrollToHash();
+  window.addEventListener('load', scrollToHash);
+  $(window).on("hashchange", scrollToHash);
+
   new Main('{{ path('search', {'q': 0 } ) }}')
 </script>
 
