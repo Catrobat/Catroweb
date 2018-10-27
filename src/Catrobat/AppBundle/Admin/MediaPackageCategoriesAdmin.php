@@ -2,10 +2,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\MediaPackage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MediaPackageCategoriesAdmin extends AbstractAdmin
 {
@@ -16,8 +19,11 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('name', 'text', ['label' => 'Name'])
-      ->add('package', 'entity', ['class' => 'Catrobat\AppBundle\Entity\MediaPackage', 'required' => true, 'multiple' => true])
+      ->add('name', TextType::class, ['label' => 'Name'])
+      ->add('package', EntityType::class, [
+        'class'    => MediaPackage::class,
+        'required' => true,
+        'multiple' => true])
       ->add('priority');
   }
 
@@ -31,7 +37,7 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   {
     $listMapper
       ->addIdentifier('name')
-      ->add('package', 'entity', ['class' => 'Catrobat\AppBundle\Entity\MediaPackage'])
+      ->add('package', EntityType::class, ['class' => MediaPackage::class])
       ->add('_action', 'actions', [
         'actions' => [
           'edit'   => [],

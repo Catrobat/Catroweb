@@ -101,30 +101,39 @@ class MediaPackageCategory
     $this->files = $files;
   }
 
-
+  /**
+   * @return string
+   */
   public function __toString()
   {
-    if (count($this->package))
+    if ($this->package !== null)
     {
-      $string = $this->name . " (";
-      $count = count($this->package);
-
-      for ($it = 0; $it < $count; $it++)
+      if (count($this->package))
       {
-        $string .= $this->package[$it];
+        $string = $this->name . " (";
+        $count = count($this->package);
 
-        if ($it < ($count - 1))
+        for ($it = 0; $it < $count; $it++)
         {
-          $string .= ", ";
-        }
-      }
-      $string .= ")";
+          $string .= $this->package[$it];
 
-      return $string;
+          if ($it < ($count - 1))
+          {
+            $string .= ", ";
+          }
+        }
+        $string .= ")";
+
+        return (string) $string;
+      }
+      else
+      {
+        return $this->name;
+      }
     }
     else
     {
-      return $this->name;
+      return (string)$this->name;
     }
   }
 

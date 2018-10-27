@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -9,6 +10,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AllProgramsAdmin extends AbstractAdmin
 {
@@ -24,9 +27,9 @@ class AllProgramsAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('name', 'text', ['label' => 'Program name'])
+      ->add('name', TextType::class, ['label' => 'Program name'])
       ->add('description')
-      ->add('user', 'entity', ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('downloads')
       ->add('views')
       ->add('flavor')
@@ -46,6 +49,9 @@ class AllProgramsAdmin extends AbstractAdmin
 
   public function preUpdate($program)
   {
+    /**
+     * @var $program Program
+     */
     $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
 
     if ($old_program['approved'] == false && $program->getApproved() == true)
@@ -82,6 +88,9 @@ class AllProgramsAdmin extends AbstractAdmin
 
   public function getObjectMetadata($object)
   {
+    /**
+     * @var $object object
+     */
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
   }
 
@@ -92,6 +101,9 @@ class AllProgramsAdmin extends AbstractAdmin
 
   public function getThumbnailImageUrl($object)
   {
+    /**
+     * @var $object object
+     */
     return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
   }
 }

@@ -6,6 +6,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategoriesAdmin extends AbstractAdmin
 {
@@ -16,8 +19,8 @@ class CategoriesAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('name', 'text', ['label' => 'Name'])
-      ->add('alias', 'text', ['label' => 'Alias'])
+      ->add('name', TextType::class, ['label' => 'Name'])
+      ->add('alias', TextType::class, ['label' => 'Alias'])
       ->add('programs', null, [
         'required'     => false,
         'by_reference' => false,
@@ -27,7 +30,7 @@ class CategoriesAdmin extends AbstractAdmin
         'sortable'   => 'id',
         'admin_code' => 'catrowebadmin.block.programs.all',
       ])
-      ->add('order', 'integer', ['label' => 'Order']);
+      ->add('order', IntegerType::class, ['label' => 'Order']);
   }
 
   // Fields to be shown on filter forms
@@ -41,7 +44,7 @@ class CategoriesAdmin extends AbstractAdmin
     $listMapper
       ->addIdentifier('name')
       ->add('alias')
-      ->add('programs', 'entity', ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('programs', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('order');
   }
 }

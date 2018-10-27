@@ -21,7 +21,8 @@ class NotificationAdmin extends AbstractAdmin
     $formMapper
       ->add('user', EntityType::class, ['class' => User::class])
       ->add('upload', null, ['label' => 'Email bei Upload', 'required' => false])
-      ->add('report', null, ['label' => 'Email bei Inappropriate Report', 'required' => false])
+      ->add('report', null,
+        ['label' => 'Email bei Inappropriate Report', 'required' => false])
       ->add('summary', null, ['label' => 'Emails täglich sammeln', 'required' => false]);
   }
 

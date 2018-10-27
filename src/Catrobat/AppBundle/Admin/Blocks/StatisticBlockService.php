@@ -70,7 +70,7 @@ class StatisticBlockService extends AbstractBlockService
   function getSymbolByQuantity($bytes)
   {
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-    $exp = floor(log($bytes) / log(1024));
+    $exp = (int)floor(log($bytes) / log(1024));
 
     return sprintf('%.2f ' . $symbol[$exp], ($bytes / pow(1024, floor($exp))));
   }

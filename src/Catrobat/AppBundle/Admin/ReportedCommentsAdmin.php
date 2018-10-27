@@ -8,13 +8,13 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ReportAdmin extends AbstractAdmin
+class ReportedCommentsAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_report';
   protected $baseRoutePattern = 'report';
@@ -22,6 +22,9 @@ class ReportAdmin extends AbstractAdmin
 
   public function createQuery($context = 'list')
   {
+    /**
+     * @var $query QueryBuilder
+     */
     $query = parent::createQuery();
     $query->andWhere(
       $query->expr()->eq($query->getRootAlias() . '.isReported', $query->expr()->literal(true))
@@ -48,7 +51,7 @@ class ReportAdmin extends AbstractAdmin
       ->add('username')
       ->add('_action', 'actions', ['actions' => [
         'delete'   => ['template' => 'CRUD/list__action_delete_comment.html.twig'],
-        'unreport' => ['template' => 'CRUD/list__action_unreport.html.twig'],
+        'unreportComment' => ['template' => 'CRUD/list__action_unreportComment.html.twig'],
       ]]);
   }
 
@@ -56,8 +59,8 @@ class ReportAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->add('deleteComment');
-    $collection->add('unreport');
+    $collection->add('unreportComment');
+    $collection->remove('create')->remove('delete')->remove('export');
   }
-
 
 }
