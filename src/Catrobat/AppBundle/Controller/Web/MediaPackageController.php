@@ -6,14 +6,13 @@ use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\User;
-use phpDocumentor\Reflection\Types\Integer;
 use Psr\Log\LoggerInterface;
-use Psr\Log\Test\LoggerInterfaceTest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class MediaPackageController extends Controller
 {
@@ -38,7 +37,7 @@ class MediaPackageController extends Controller
     return $this->get('templating')->renderResponse('mediapackageindex.html.twig',
       [
         'packages' => $packages,
-        'new_nav'    => true,
+        'new_nav'  => true,
       ]
     );
   }
@@ -50,7 +49,7 @@ class MediaPackageController extends Controller
    *
    * @param Request $request
    * @param         $package_name
-   * @param string  $flavor
+   * @param string $flavor
    *
    * @return mixed
    */
@@ -101,14 +100,22 @@ class MediaPackageController extends Controller
       $nolb = $user->getNolbUser();
     }
 
+    /**
+     * @var TranslatorInterface $translator
+     */
+    $translator = $this->get('translator');
+
     $categories = [];
 
     if ($flavor !== "pocketcode")
     {
+      $flavor_name = $translator->trans("flavor." . $flavor, [], "catroweb");
+      $theme_special_name = $translator->trans("media-packages.theme-special",
+        ["%flavor%" => $flavor_name], "catroweb");
+
       $categories[] = [
-        'displayID' => str_replace(' ', '', $flavor),
-        'name'      => $flavor . " Theme Special",
-        'files'     => [],
+        'displayID' => 'theme-special',
+        'name'      => $theme_special_name,
         'priority'  => PHP_INT_MAX,
       ];
     }
@@ -119,13 +126,13 @@ class MediaPackageController extends Controller
       {
         $categories[] = [
           'displayID' => str_replace(' ', '', $category->getName()),
-          'name'     => $category->getName(),
-          'priority' => $category->getPriority(),
+          'name'      => $category->getName(),
+          'priority'  => $category->getPriority(),
         ];
       }
     }
 
-    usort($categories, function($a, $b) {
+    usort($categories, function ($a, $b) {
       if ($a['priority'] == $b['priority'])
       {
         return 0;

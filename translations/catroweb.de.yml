@@ -636,3 +636,9 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Download
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  thumb-size:
+    description: Vorschau-Größe
+    sm: klein
+    md: mittel
+    lg: groß

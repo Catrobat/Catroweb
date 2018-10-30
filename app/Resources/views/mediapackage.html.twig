@@ -7,107 +7,43 @@
 {% block sidebar_ul %}
   <hr>
   {% for category in categories %}
-    <li class="nav-item" id="menu-mediacat-{{ category.displayID }}" style="display: none" >
+    <li class="nav-item" id="menu-mediacat-{{ category.displayID }}" style="display: none">
       <a class="nav-link" href="#category-{{ category.displayID }}">{{ category.name }}</a>
     </li>
   {% endfor %}
 {% endblock %}
 
 {% block body %}
-  <div id="main-content" class="main">
-    <div id="content" class="medialib-content">
-      {% for category in categories %}
-        <div id="category-{{ category.displayID }}" style="display: none">
-          <h1>{{ category.name }}</h1>
-          <div id="programs-{{ category.displayID }}" class="programs"></div>
-        </div>
-        <br>
-      {% endfor %}
+  <div id="content" class="medialib-content">
+    <div id="thumbsize-control"><span>{{ 'media-packages.thumb-size.description' | trans({}, "catroweb") }}</span>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="thumbsize" value="sm"
+                 autocomplete="off"> {{ 'media-packages.thumb-size.sm' | trans({}, "catroweb") }}
+        </label>
+        <label class="btn btn-secondary active">
+          <input type="radio" name="thumbsize" value="md" autocomplete="off"
+                 checked> {{ 'media-packages.thumb-size.md' | trans({}, "catroweb") }}
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="thumbsize" value="lg"
+                 autocomplete="off"> {{ 'media-packages.thumb-size.lg' | trans({}, "catroweb") }}
+        </label>
+      </div>
     </div>
+
+    {% for category in categories %}
+      <div id="category-{{ category.displayID }}" style="display: none" class="category">
+        <h1>{{ category.name }}</h1>
+        <div class="files"></div>
+      </div>
+    {% endfor %}
   </div>
 {% endblock %}
 
 {% block js %}
+  <script src="{{ asset('js/custom/MediaLib.js') }}"></script>
   <script>
-    function onDownload(link)
-    {
-      if (link.href !== 'javascript:void(0)')
-      {
-        var download_href = link.href;
-        link.href = 'javascript:void(0)';
-
-        setTimeout(function() {
-          link.href = download_href;
-        }, 5000);
-
-        window.location = download_href;
-      }
-      return false;
-    }
-
-    getCategoryFiles({{ categories|json_encode|raw }})
-
-    function getCategoryFiles(categories)
-    {
-
-      let flavor = "{{ flavor }}"
-
-      let assetsDir = "{{ asset('resources/mediapackage') }}"
-      categories.forEach(function(category) {
-
-
-        let url = Routing.generate('api_media_lib_category', {category: category.name}, false)
-        $.get(url, {}, function(data) {
-
-          if (data.statusCode === 200)
-          {
-            let counter = 0
-            let f_counter = 0
-            let categoryFiles = data.data
-
-            categoryFiles.forEach(function(file) {
-
-              if (file.flavor === 'pocketcode')
-              {
-                $('#category-' + category.displayID + " .programs").prepend('<div class="program mediafile mediafile-' + file.id + '">' +
-
-                  '<div onclick="onDownload(' + assetsDir + '/' + file.id + '.' + file.extension + ')">' +
-                  "  <a href='" + file.download_url + "' onclick='onDownload(this)'><img src='" + assetsDir + '/' + file.id + "." + file.extension + "' title='" + file.name + "' alt='" + file.name + "'/> </a>" +
-                  '</div>'
-                )
-                counter++;
-              }
-
-              else if (file.flavor === flavor)
-              {
-                $('#category-' + flavor + " .programs").prepend('<div class="program mediafile mediafile-' + file.id + '">' +
-
-                  '<div onclick="onDownload(' + assetsDir + '/' + file.id + '.' + file.extension + ')">' +
-                  "  <a href='" + file.download_url + "' onclick='onDownload(this)'><img src='" + assetsDir + '/' + file.id + "." + file.extension + "' title='" + file.name + "' alt='" + file.name + "'/> </a>" +
-                  '</div>'
-                )
-                f_counter++;
-              }
-            })
-
-            if ($("#programs-" + category.displayID + " > div").length + counter > 0)
-            {
-              $('#category-' + category.displayID).show();
-              $('#sidebar #menu-mediacat-' + category.displayID).show();
-            }
-
-            if ($("#programs-" + flavor + " > div").length + f_counter > 0)
-            {
-              $('#category-' + flavor).show();
-              $('#sidebar #menu-mediacat-' + flavor).show();
-            }
-          }
-          else
-          {
-            swal("Error")
-          }
-        })
-      });
-    }
+    new MediaLib({{ categories|json_encode|raw }}, "{{ flavor }}", "{{ asset('resources/mediapackage') }}");
   </script>
 {% endblock %}
