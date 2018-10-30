@@ -79,6 +79,7 @@ $margin-adjustment: -5px;
         margin-left: $margin-adjustment;
         margin-right: $margin-adjustment;
         display: block;
+        hyphens: auto;
 
         a
         {
@@ -97,6 +98,8 @@ $margin-adjustment: -5px;
   {
     font-weight: 500;
     color: $footer-color;
+    hyphens: auto;
+    word-wrap: break-word;
   }
 }
 

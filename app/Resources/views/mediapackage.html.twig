@@ -4,19 +4,17 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/medialib.css') }}" media="screen"/>
 {% endblock %}
 
+{% block sidebar_ul %}
+  <hr>
+  {% for category in categories %}
+    <li class="nav-item" id="menu-mediacat-{{ category.displayID }}" style="display: none" >
+      <a class="nav-link" href="#category-{{ category.displayID }}">{{ category.name }}</a>
+    </li>
+  {% endfor %}
+{% endblock %}
+
 {% block body %}
-  <i id="sidebar-toggler" class="fas fa-arrow-left catro-icon-button" data-toggle="tooltip"
-     title="{{ "media-packages.sidebarTooltip"|trans({}, "catroweb") }}"></i>
   <div id="main-content" class="main">
-    <div id="sidebar" class="sidebar is-affixed medialib-sidebar">
-      <div class="sidebar__inner">
-        <ul>
-          {% for category in categories %}
-            <li><a href="#category-{{ category.displayID }}">{{ category.name }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
     <div id="content" class="medialib-content">
       {% for category in categories %}
         <div id="category-{{ category.displayID }}" style="display: none">
@@ -29,38 +27,8 @@
   </div>
 {% endblock %}
 
-
 {% block js %}
-  <script type="text/javascript" src="{{ asset('compiled/min/sticky-sidebar.js') }}"></script>
   <script>
-
-    new StickySidebar('#sidebar', {
-      bottomSpacing: 20,
-    });
-
-
-    $("#sidebar-toggler").click(function(e) {
-      e.preventDefault();
-
-      let sidebarToggler = $("#sidebar-toggler")
-      let medialibContent = $("#content")
-      let sidebar = $("#sidebar")
-
-      sidebarToggler.toggleClass("fa-arrow-right");
-      sidebar.toggleClass("medialib-sidebar-toggled");
-      sidebar.toggleClass("medialib-sidebar");
-
-      medialibContent.toggleClass("medialib-content-no-sidebar");
-      medialibContent.toggleClass("medialib-content");
-      sidebarToggler.toggleClass("fa-arrow-left");
-    });
-
-
-    $(function() {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-
-
     function onDownload(link)
     {
       if (link.href !== 'javascript:void(0)')
@@ -125,11 +93,13 @@
             if ($("#programs-" + category.displayID + " > div").length + counter > 0)
             {
               $('#category-' + category.displayID).show();
+              $('#sidebar #menu-mediacat-' + category.displayID).show();
             }
 
             if ($("#programs-" + flavor + " > div").length + f_counter > 0)
             {
               $('#category-' + flavor).show();
+              $('#sidebar #menu-mediacat-' + flavor).show();
             }
           }
           else

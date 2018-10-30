@@ -38,6 +38,7 @@ class MediaPackageController extends Controller
     return $this->get('templating')->renderResponse('mediapackageindex.html.twig',
       [
         'packages' => $packages,
+        'new_nav'    => true,
       ]
     );
   }
@@ -136,12 +137,11 @@ class MediaPackageController extends Controller
     return $this->get('templating')->renderResponse('mediapackage.html.twig', [
       'flavor'     => $flavor,
       'categories' => $categories,
+      'new_nav'    => true,
     ]);
   }
 
   /**
-   * @Route("/api/mediapackage", name="api_search_programs", defaults={"_format": "json"},
-   *                                     methods={"GET"})
    * @param $flavor
    * @param $category
    * @param $files
