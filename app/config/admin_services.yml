@@ -152,6 +152,15 @@ services:
 
   # ===== Users
 
+  catrowebadmin.block.users.user:
+    class: Catrobat\AppBundle\Admin\UserAdmin
+    tags:
+    - { name: sonata.admin, manager_type: orm, label: User, icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+    - ~
+    - Catrobat\AppBundle\Entity\User
+    - ~
+
   catrowebadmin.block.users.limited:
     class: Catrobat\AppBundle\Admin\LimitedUsersAdmin
     tags:

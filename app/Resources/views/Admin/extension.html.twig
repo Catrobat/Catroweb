@@ -1,7 +1,6 @@
 {% extends base_template %}
 
 {% block content %}
-  {% if is_granted('ROLE_SUPER_ADMIN') %}
     <div class="col-md-6">
     <div class="box">
       <h3 class="box-header">Create Extensions</h3>
@@ -26,5 +25,4 @@
         </div>
       </div>
     </div>
-  {% endif %}
 {% endblock %}
