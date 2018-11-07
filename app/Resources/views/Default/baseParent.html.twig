@@ -33,14 +33,18 @@
 
   {% block head %}{% endblock %}
 </head>
-<body>
+<body{% if new_nav is defined %} class="new-nav"{% endif %}>
 
-<div id="wrapper">
+<div id="wrapper"{% if new_nav is not defined %} class="fixed-nav"{% endif %}>
   <header>
     {% block header %}
       {% include 'Default/header.html.twig' %}
     {% endblock %}
   </header>
+
+  {% if new_nav is defined %}
+    {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
+  {% endif %}
 
   <div class="container">
     {% block body %}{% endblock %}
@@ -70,7 +74,7 @@
   });
 
   function scrollToHash() {
-    if (window.location.hash) {
+    if (window.location.hash && $(window.location.hash).offset()) {
       window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
     }
   }

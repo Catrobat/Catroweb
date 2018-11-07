@@ -13,6 +13,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ApproveProgramsAdmin extends AbstractAdmin
 {
@@ -49,7 +51,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('Name')
       ->add('Description')
       ->add('version')
-      ->add('user', EntityType::class, ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('upload_ip')
       ->add('visible', 'boolean')
       ->add('Images', null, ['template' => 'Admin/program_containing_image.html.twig'])

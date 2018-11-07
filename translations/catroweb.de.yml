@@ -426,6 +426,7 @@ menu:
   login: Einloggen
   logout: Ausloggen
   admin: Admin
+  home: Startseite
 programLoader:
   noPrograms: Es gibt im Moment keine Programme.
 login:

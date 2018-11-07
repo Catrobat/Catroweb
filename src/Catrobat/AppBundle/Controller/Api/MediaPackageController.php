@@ -78,8 +78,12 @@ class MediaPackageController extends Controller
   public function getCategories(Request $request)
   {
     $em = $this->getDoctrine()->getManager();
+    /**
+     * @var $categories array[MediaPackageCategory]
+     */
     $categories = $em->getRepository(MediaPackageCategory::class)->findAll();
-    if ($categories === null)
+
+    if ($categories == [])
     {
       return JsonResponse::create(
         [
@@ -128,7 +132,7 @@ class MediaPackageController extends Controller
         [
           'name' => $category,
         ]);
-    if ($media_package_categories === null)
+    if ($media_package_categories === null || count($media_package_categories) <= 0)
     {
       return JsonResponse::create(
         [
@@ -219,8 +223,10 @@ class MediaPackageController extends Controller
     if ($media_package == null)
     {
       return JsonResponse::create(
-        ['statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
-         'message'    => $package . " not found"]
+        [
+          'statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
+          'message'    => $package . " not found"
+        ]
       );
     }
     $json_response_array = [];
@@ -247,7 +253,7 @@ class MediaPackageController extends Controller
         $category_not_found = false;
         /** @var array|MediaPackageFile $media_package_files */
         $media_package_files = $media_package_category->getFiles();
-        if ($media_package_files != null && count($media_package_files) > 0)
+        if ($media_package_files !== null && count($media_package_files) > 0)
         {
           foreach ($media_package_files as $media_package_file)
           {

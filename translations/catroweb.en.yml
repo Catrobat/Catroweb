@@ -501,6 +501,7 @@ menu:
   login: Login
   logout: Logout
   admin: Admin
+  home: Home
 
 programLoader:
   noPrograms: There are currently no programs.
@@ -756,4 +757,3 @@ help-cards:
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.
-  sidebarTooltip: Toggle category menu
