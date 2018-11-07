@@ -42,10 +42,10 @@
             <span class="edit-title"
             ><i class="fas fa-envelope"></i> {{ 'email'|trans({}, 'catroweb') }}</span>
             {% if not nolb_user and not app.user.limited %}
-            <a class="edit-category-button"
-               data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
-              <i id="edit-email-button" class="fa fa-pencil-square-o catro-icon-button"></i>
-            </a>
+              <a class="edit-category-button"
+                 data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
+                <i id="edit-email-button" class="fa fa-pencil-square-o catro-icon-button"></i>
+              </a>
             {% endif %}
           </div>
 

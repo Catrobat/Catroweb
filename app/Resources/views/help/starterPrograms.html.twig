@@ -11,7 +11,8 @@
     <div class="starter-header">
       {% for category in categories %}
         <div class="col-per-25 center bold uppercase">
-          <a href='#{{ category.alias }}' class="anchor">{{ ("help.starterPrograms.categories."~category.alias)|trans({}, "catroweb") }}</a>
+          <a href='#{{ category.alias }}'
+             class="anchor">{{ ("help.starterPrograms.categories."~category.alias)|trans({}, "catroweb") }}</a>
         </div>
       {% endfor %}
       <div class="clear"></div>
@@ -31,8 +32,9 @@
 {% block js %}
   <script>
     {% for category in categories %}
-      var {{ category.alias }} = new ProgramLoader('#{{ category.alias }}', '{{ path('catrobat_web_category_programs', {'id': category.id}) }}');
-    {{ category.alias }}.init();
+    var {{ category.alias }} =
+    new ProgramLoader('#{{ category.alias }}', '{{ path('catrobat_web_category_programs', {'id': category.id}) }}')
+    {{ category.alias }}.init()
     {% endfor %}
   </script>
 {% endblock %}

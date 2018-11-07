@@ -19,11 +19,11 @@
 
 {% block js %}
   <script>
-    var search = new ProgramLoader('#search-results', '{{ path('api_search_programs') }}');
-    search.initSearch('{{ q }}');
-    $('.input-search').val('{{ q }}');
-    $(function() {
-      $('.search-icon-header').click();
-    });
+    var search = new ProgramLoader('#search-results', '{{ path('api_search_programs') }}')
+    search.initSearch('{{ q }}')
+    $('.input-search').val('{{ q }}')
+    $(function () {
+      $('.search-icon-header').click()
+    })
   </script>
 {% endblock %}

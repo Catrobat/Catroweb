@@ -73,7 +73,7 @@ class ApproveProgramController extends Controller
     $objects = $datagrid->getResults();
     if (count($objects) == 0)
     {
-      return;
+      return null;
     }
     $object_key = array_rand($objects);
 

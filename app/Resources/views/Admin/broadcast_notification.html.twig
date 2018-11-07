@@ -2,105 +2,121 @@
 
 {% block list_table %}
 
-    <style>
-        h3 {
-            margin-left: 20px;
-        }
-        p {
-            margin-left: 20px;
-        }
-        .mtable {
-            display:table;
-            margin-left: 20px;
-            margin-bottom: 30px;
-            width: 95%;
-        }
-        .lrow {
-            width: 150px;
-            line-height: 28px;
-            display: table-row;
-            float: left;
-            clear: both;
-        }
-        .rrow {
-            display: table-row;
-            float: left;
-            margin-bottom: 10px;
-            width: 500px;
-        }
-        .error {
-            color: red;
-        }
-        .success {
-            color: green;
-        }
-    </style>
+  <style>
+    h3
+    {
+      margin-left: 20px;
+    }
 
-    <div class="col-xs-12 col-md-12">
-        <div class="box box-primary">
-            <div class="box-body table-responsive no-padding">
+    p
+    {
+      margin-left: 20px;
+    }
 
-                <h3>Broadcast Notifications</h3>
+    .mtable
+    {
+      display: table;
+      margin-left: 20px;
+      margin-bottom: 30px;
+      width: 95%;
+    }
 
-                <p>This tool allows you to send Notifications to all users.</p>
+    .lrow
+    {
+      width: 150px;
+      line-height: 28px;
+      display: table-row;
+      float: left;
+      clear: both;
+    }
 
-                <div class="mtable">
+    .rrow
+    {
+      display: table-row;
+      float: left;
+      margin-bottom: 10px;
+      width: 500px;
+    }
 
-                    <div class="lrow">
-                        Notification Title:
-                    </div>
-                    <div class="rrow">
-                        <input type="text" id="title" style="width: 100%" />
-                    </div>
+    .error
+    {
+      color: red;
+    }
 
-                    <div class="lrow">
-                        Message:
-                    </div>
-                    <div class="rrow">
-                        <textarea id="msg" style="width: 100%; height: 100px"></textarea>
-                    </div>
+    .success
+    {
+      color: green;
+    }
+  </style>
 
-                    <div class="lrow">
-                        Submit:
-                    </div>
-                    <div class="rrow">
-                        <input type="button" class="btn" value="Send notifications" />
-                    </div>
+  <div class="col-xs-12 col-md-12">
+    <div class="box box-primary">
+      <div class="box-body table-responsive no-padding">
 
-                    <div class="lrow">
-                        Result:
-                    </div>
-                    <div class="rrow resultBox error">
+        <h3>Broadcast Notifications</h3>
 
-                    </div>
-                </div>
+        <p>This tool allows you to send Notifications to all users.</p>
 
-            </div>
+        <div class="mtable">
+
+          <div class="lrow">
+            Notification Title:
+          </div>
+          <div class="rrow">
+            <input type="text" id="title" style="width: 100%"/>
+          </div>
+
+          <div class="lrow">
+            Message:
+          </div>
+          <div class="rrow">
+            <textarea id="msg" style="width: 100%; height: 100px"></textarea>
+          </div>
+
+          <div class="lrow">
+            Submit:
+          </div>
+          <div class="rrow">
+            <input type="button" class="btn" value="Send notifications"/>
+          </div>
+
+          <div class="lrow">
+            Result:
+          </div>
+          <div class="rrow resultBox error">
+
+          </div>
         </div>
+
+      </div>
     </div>
+  </div>
 
-    <script>
-        $('.btn').click(function() {
-            $('.resultBox').html("");
+  <script>
+    $('.btn').click(function () {
+      $('.resultBox').html('')
 
-            var message = $('#msg').val();
-            var title = $('#title').val();
+      var message = $('#msg').val()
+      var title = $('#title').val()
 
-            $.ajax({
-                url: "send",
-                type: "get", //send it through get method
-                data:{Title: title, Message: message},
-                success: function(data) {
-                    if(data === "OK") {
-                        $('.resultBox').switchClass("error", "success");
-                    }
-                    else {
-                        $('.resultBox').switchClass("success", "error");
-                    }
-                    $('.resultBox').html(data);
-                    //Do Something
-                }});
-        });
-    </script>
+      $.ajax({
+        url    : 'send',
+        type   : 'get', //send it through get method
+        data   : {Title: title, Message: message},
+        success: function (data) {
+          if (data === 'OK')
+          {
+            $('.resultBox').switchClass('error', 'success')
+          }
+          else
+          {
+            $('.resultBox').switchClass('success', 'error')
+          }
+          $('.resultBox').html(data)
+          //Do Something
+        }
+      })
+    })
+  </script>
 {% endblock %}
 

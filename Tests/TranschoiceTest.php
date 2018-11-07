@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -12,82 +13,89 @@ use Symfony\Component\Finder\Finder;
 class TranschoiceTest extends \PHPUnit\Framework\TestCase
 {
 
-    const LANGUAGE_DIR = './translations/';
+  const LANGUAGE_DIR = './translations/';
 
-    /**
-     * @test
-     * @dataProvider language_provider
-     */
-    public function all_transchoice_entries_should_have_a_correct_syntax(Translator $translator, $language_code, $message_ids)
+  /**
+   * @test
+   * @dataProvider language_provider
+   */
+  public function all_transchoice_entries_should_have_a_correct_syntax(Translator $translator, $language_code, $message_ids)
+  {
+    foreach ($message_ids as $message_id)
     {
-        foreach ($message_ids as $message_id) {
-            $translator->transChoice($message_id, 1, array(), 'catroweb', $language_code);
-            $translator->transChoice($message_id, 2, array(), 'catroweb', $language_code);
-            $translator->transChoice($message_id, 10, array(), 'catroweb', $language_code);
-        }
-        $this->assertTrue(true);
+      $translator->transChoice($message_id, 1, [], 'catroweb', $language_code);
+      $translator->transChoice($message_id, 2, [], 'catroweb', $language_code);
+      $translator->transChoice($message_id, 10, [], 'catroweb', $language_code);
+    }
+    $this->assertTrue(true);
+  }
+
+  /**
+   * @test
+   */
+  public function all_languages_must_have_a_two_letter_fallback()
+  {
+    $codes = $this->getLanguageCodesFromFilenames();
+    $four_letter_codes = array_filter($codes, function ($val) {
+      return strlen($val) > 2;
+    });
+    foreach ($four_letter_codes as $four_letter_code)
+    {
+      $two_letter_code = explode("_", $four_letter_code)[0];
+      $this->assertContains($two_letter_code, $codes, "No fallback for language code " . $four_letter_code . " found!");
+    }
+  }
+
+  public function language_provider()
+  {
+    $directory = self::LANGUAGE_DIR;
+
+    $translator = new Translator('en', new MessageFormatter());
+    $translator->addLoader('yaml', new YamlFileLoader());
+
+    $finder = new Finder();
+    $files = $finder->in($directory)->files();
+    $language_codes = [];
+    foreach ($files as $file)
+    {
+      $parts = explode(".", $file->getFilename());
+      $language_codes[] = $parts[1];
+      $translator->addResource('yaml', $file, $parts[1], 'catroweb');
     }
 
-    /**
-     * @test
-     */
-    public function all_languages_must_have_a_two_letter_fallback()
+    $translator->setFallbackLocales([
+      'en',
+    ]);
+
+    $catalogue = $translator->getCatalogue('en');
+    $messages = $catalogue->all();
+    $message_ids = array_keys($messages['catroweb']);
+
+    $data = [];
+    foreach ($language_codes as $language_code)
     {
-        $codes = $this->getLanguageCodesFromFilenames();
-        $four_letter_codes = array_filter($codes, function ($val) {
-            return strlen($val) > 2;
-        });
-        foreach ($four_letter_codes as $four_letter_code) {
-            $two_letter_code = explode("_", $four_letter_code)[0];
-            $this->assertContains($two_letter_code, $codes, "No fallback for language code " . $four_letter_code . " found!");
-        }
+      $data[] = [
+        $translator,
+        $language_code,
+        $message_ids,
+      ];
     }
 
-    public function language_provider()
+    return $data;
+  }
+
+  private function getLanguageCodesFromFilenames()
+  {
+    $finder = new Finder();
+    $directory = self::LANGUAGE_DIR;
+    $files = $finder->in($directory)->files();
+    $language_codes = [];
+    foreach ($files as $file)
     {
-        $directory = self::LANGUAGE_DIR;
-
-        $translator = new Translator('en', new MessageFormatter());
-        $translator->addLoader('yaml', new YamlFileLoader());
-        
-        $finder = new Finder();
-        $files = $finder->in($directory)->files();
-        $language_codes = array();
-        foreach ($files as $file) {
-            $parts = explode(".", $file->getFilename());
-            $language_codes[] = $parts[1];
-            $translator->addResource('yaml', $file, $parts[1], 'catroweb');
-        }
-        
-        $translator->setFallbackLocales(array(
-            'en'
-        ));
-
-        $catalogue = $translator->getCatalogue('en');
-        $messages = $catalogue->all();
-        $message_ids = array_keys($messages['catroweb']);
-        
-        $data = array();
-        foreach ($language_codes as $language_code) {
-            $data[] = array(
-                $translator,
-                $language_code,
-                $message_ids
-            );
-        }
-        return $data;
+      $parts = explode(".", $file->getFilename());
+      $language_codes[] = $parts[1];
     }
 
-    private function getLanguageCodesFromFilenames()
-    {
-        $finder = new Finder();
-        $directory = self::LANGUAGE_DIR;
-        $files = $finder->in($directory)->files();
-        $language_codes = array();
-        foreach ($files as $file) {
-            $parts = explode(".", $file->getFilename());
-            $language_codes[] = $parts[1];
-        }
-        return $language_codes;
-    }
+    return $language_codes;
+  }
 }

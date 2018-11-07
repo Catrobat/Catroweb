@@ -28,35 +28,36 @@
     </div>
 
     {% for block in blocks %}
-    <div class="block">
-    <div>
-      {% set block_num = loop.index %}
-      ({{ loop.index }})
-      {%  set link = url('catrobat_web_tutorialcards') %}
-      {{ ("help.tutorialcards.card"~page~"."~block.block~"")|trans({
-        '%tutorial_card_link_1% ': '<a href="'~link~'/1" target="_blank">',
-        '%tutorial_card_link_2% ': '<a href="'~link~'/2" target="_blank">',
-        '%tutorial_card_link_3% ': '<a href="'~link~'/3" target="_blank">',
-        '%tutorial_card_link_4% ': '<a href="'~link~'/4" target="_blank">',
-        '%tutorial_card_link_5% ': '<a href="'~link~'/5" target="_blank">',
-        '%tutorial_card_link_6% ': '<a href="'~link~'/6" target="_blank">',
-        '%tutorial_card_link_7% ': '<a href="'~link~'/7" target="_blank">',
-        '%tutorial_card_link_8% ': '<a href="'~link~'/8" target="_blank">',
-        '%tutorial_card_link_9% ': '<a href="'~link~'/9" target="_blank">',
-        '%tutorial_card_link_10% ': '<a href="'~link~'/10" target="_blank">',
-        '%tutorial_card_link_11% ': '<a href="'~link~'/11" target="_blank">',
-        '%tutorial_card_link_12% ': '<a href="'~link~'/12" target="_blank">',
-        ' %link_end%': '</a>'
-      }, "catroweb")|raw }}
-    </div>
-    <div>
-      {% for i in 1..block.images %}
-      <div class="img-container">
-        <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_'~block_num~'_'~i~'.jpg') }}" alt="" title=""/>
+      <div class="block">
+        <div>
+          {% set block_num = loop.index %}
+          ({{ loop.index }})
+          {% set link = url('catrobat_web_tutorialcards') %}
+          {{ ("help.tutorialcards.card"~page~"."~block.block~"")|trans({
+            '%tutorial_card_link_1% ': '<a href="'~link~'/1" target="_blank">',
+            '%tutorial_card_link_2% ': '<a href="'~link~'/2" target="_blank">',
+            '%tutorial_card_link_3% ': '<a href="'~link~'/3" target="_blank">',
+            '%tutorial_card_link_4% ': '<a href="'~link~'/4" target="_blank">',
+            '%tutorial_card_link_5% ': '<a href="'~link~'/5" target="_blank">',
+            '%tutorial_card_link_6% ': '<a href="'~link~'/6" target="_blank">',
+            '%tutorial_card_link_7% ': '<a href="'~link~'/7" target="_blank">',
+            '%tutorial_card_link_8% ': '<a href="'~link~'/8" target="_blank">',
+            '%tutorial_card_link_9% ': '<a href="'~link~'/9" target="_blank">',
+            '%tutorial_card_link_10% ': '<a href="'~link~'/10" target="_blank">',
+            '%tutorial_card_link_11% ': '<a href="'~link~'/11" target="_blank">',
+            '%tutorial_card_link_12% ': '<a href="'~link~'/12" target="_blank">',
+            ' %link_end%': '</a>'
+          }, "catroweb")|raw }}
+        </div>
+        <div>
+          {% for i in 1..block.images %}
+            <div class="img-container">
+              <img src="{{ asset('images/help/tutorialcards/cards/'~page~'_'~block_num~'_'~i~'.jpg') }}" alt=""
+                   title=""/>
+            </div>
+          {% endfor %}
+        </div>
       </div>
-      {% endfor %}
-    </div>
-    </div>
     {% endfor %}
 
     <div class="clear"></div>

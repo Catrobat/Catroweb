@@ -1,45 +1,45 @@
 <!---  Logo --->
 <a href="{{ path('index') }}">
-    <div class="row justify-content-center">
-        <div class="col-sm-12 mt-4" style="max-width: 11em" align="center">
-            <img class="center-block img-responsive" id="logo"
-                {% if theme() == 'luna' %}
-                    src="{{ asset('images/logo/logo_luna.png') }}" alt="Luna Code Logo"
-                {% elseif theme() == 'phirocode' %}
-                    src="{{ asset('images/logo/logo_phirocode.png') }}" alt="PhiroCode Logo"
-                {% elseif theme() == 'create@school' %}
-                    src="{{ asset('images/logo/logo_create_at_school_icon.png') }}" alt="Create@School Logo"
-                {% else  %}
-                    src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"
-                {% endif %}
-            />
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-12 mt-4" style="max-width: 11em" align="center">
+      <img class="center-block img-responsive" id="logo"
+          {% if theme() == 'luna' %}
+            src="{{ asset('images/logo/logo_luna.png') }}" alt="Luna Code Logo"
+          {% elseif theme() == 'phirocode' %}
+            src="{{ asset('images/logo/logo_phirocode.png') }}" alt="PhiroCode Logo"
+          {% elseif theme() == 'create@school' %}
+            src="{{ asset('images/logo/logo_create_at_school_icon.png') }}" alt="Create@School Logo"
+          {% else %}
+            src="{{ asset('images/logo/logo_icon.png') }}" alt="Pocket Code Logo"
+          {% endif %}
+      />
     </div>
+  </div>
 
-    <div class="row justify-content-center">
-        <div class="col-sm-12" align="center">
-            <p>
+  <div class="row justify-content-center">
+    <div class="col-sm-12" align="center">
+      <p>
                 <span class="theme-logo-title title-color-left">
                 {% if theme() == 'luna' %}
-                    LUNA &
+                  LUNA &
                 {% elseif theme() == 'phirocode' %}
-                    PHIRO
+                  PHIRO
                 {% elseif theme() == 'create@school' %}
-                    CREATE @
+                  CREATE @
                 {% else %}
-                    POCKET
+                  POCKET
                 {% endif %}
 
                 </span><span class="theme-logo-title title-color-right">
                 {% if theme() == 'create@school' %}
-                    SCHOOL
+                  SCHOOL
                 {% elseif theme() == 'luna' %}
-                    CAT
+                  CAT
                 {% else %}
-                    CODE
+                  CODE
                 {% endif %}
                 </span>
-            </p>
-        </div>
+      </p>
     </div>
+  </div>
 </a>

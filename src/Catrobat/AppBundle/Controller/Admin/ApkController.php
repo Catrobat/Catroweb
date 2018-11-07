@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
-use Catrobat\AppBundle\Services\ApkRepository;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;

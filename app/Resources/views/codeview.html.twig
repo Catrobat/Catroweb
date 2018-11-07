@@ -77,7 +77,7 @@
                   </i>
                 {% endif %}
                 <i id="soundStop-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-stop"
-                   style="display:none;"  onclick="stopSound({{ sound_counter }});">
+                   style="display:none;" onclick="stopSound({{ sound_counter }});">
                 </i>
                 {% set sound_counter = sound_counter + 1 %}
               {% endif %}
@@ -361,7 +361,6 @@
         {
           current_brick_stat_block.find('.different-statistic-dropcontent').fadeToggle(150)
           current_brick_stat_block.toggleClass('active')
-          console.log('hi')
         }
 
         if ($(this).is(current_brick_stat_block))

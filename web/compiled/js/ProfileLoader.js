@@ -2,8 +2,8 @@
   Generated File by Grunt
   Sourcepath: web/js
 */
-var ProfileLoader = function(profile_id, url, profile_url, container, default_profile) {
-    var self = this;
+let ProfileLoader = function(profile_id, url, profile_url, container, default_profile) {
+    let self = this;
     self.id = profile_id;
     self.loaded = 0;
     self.url = url;
@@ -45,7 +45,7 @@ var ProfileLoader = function(profile_id, url, profile_url, container, default_pr
     };
 
     self.addProfile = function(profile) {
-        var profilePic = self.defaultProfile;
+        let profilePic = self.defaultProfile;
         if (profile["avatar"] != null) {
             profilePic = profile["avatar"];
         }
@@ -61,7 +61,7 @@ var ProfileLoader = function(profile_id, url, profile_url, container, default_pr
     };
 
     self.showLessProfiles = function() {
-        var removeCount = (self.loaded % self.pageSize) == 0 ? self.pageSize : self.loaded % self.pageSize;
+        let removeCount = (self.loaded % self.pageSize) === 0 ? self.pageSize : self.loaded % self.pageSize;
         self.profileContainer.find(".follow:nth-last-child(-n+" + removeCount + ")").remove();
         self.loaded -= removeCount;
         self.page --;
@@ -75,9 +75,9 @@ var ProfileLoader = function(profile_id, url, profile_url, container, default_pr
             self.removeButton.removeClass("hidden");
         }
 
-        if (self.loaded % self.pageSize || self.loaded == 0 || self.maximum == self.loaded) {
+        if (self.loaded % self.pageSize || self.loaded === 0 || self.maximum === self.loaded) {
             self.loadMoreButton.addClass("hidden");
-            if (self.loaded == 0) {
+            if (self.loaded === 0) {
                 self.addNothingFoundMessage();
             }
         } else {

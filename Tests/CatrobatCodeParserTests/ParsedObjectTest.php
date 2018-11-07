@@ -6,93 +6,93 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObject;
 
 class ParsedObjectTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ParsedObject
-     */
-    protected $object;
+  /**
+   * @var ParsedObject
+   */
+  protected $object;
 
-    public function setUp()
-    {
-        $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
-        $this->object = new ParsedObject($xml_properties->xpath('//object')[0]);
-    }
+  public function setUp()
+  {
+    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/AllBricksProgram/code.xml');
+    $this->object = new ParsedObject($xml_properties->xpath('//object')[0]);
+  }
 
-    /**
-     * @test
-     * @dataProvider provideMethodNames
-     */
-    public function mustHaveMethod($method_name)
-    {
-        $this->assertTrue(method_exists($this->object, $method_name));
-    }
+  /**
+   * @test
+   * @dataProvider provideMethodNames
+   */
+  public function mustHaveMethod($method_name)
+  {
+    $this->assertTrue(method_exists($this->object, $method_name));
+  }
 
-    public function provideMethodNames()
-    {
-        return array(
-          ['getName'],
-          ['getScripts'],
-          ['getSounds'],
-          ['getLooks'],
-          ['isGroup']
-        );
-    }
+  public function provideMethodNames()
+  {
+    return [
+      ['getName'],
+      ['getScripts'],
+      ['getSounds'],
+      ['getLooks'],
+      ['isGroup'],
+    ];
+  }
 
-    /**
-     * @test
-     * @depends mustHaveMethod
-     */
-    public function isGroupMustReturnFalse()
-    {
-        $this->assertFalse($this->object->isGroup());
-    }
+  /**
+   * @test
+   * @depends mustHaveMethod
+   */
+  public function isGroupMustReturnFalse()
+  {
+    $this->assertFalse($this->object->isGroup());
+  }
 
-    /**
-     * @test
-     * @depends mustHaveMethod
-     */
-    public function getLooksMustReturnArrayOfParsedObjectAsset()
-    {
-        $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectAsset';
+  /**
+   * @test
+   * @depends mustHaveMethod
+   */
+  public function getLooksMustReturnArrayOfParsedObjectAsset()
+  {
+    $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectAsset';
 
-        foreach($this->object->getLooks() as $actual)
-            $this->assertInstanceOf($expected, $actual);
-    }
+    foreach ($this->object->getLooks() as $actual)
+      $this->assertInstanceOf($expected, $actual);
+  }
 
-    /**
-     * @test
-     * @depends mustHaveMethod
-     */
-    public function getSoundsMustReturnArrayOfParsedObjectAsset()
-    {
+  /**
+   * @test
+   * @depends mustHaveMethod
+   */
+  public function getSoundsMustReturnArrayOfParsedObjectAsset()
+  {
 //        $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedObjectAsset';
 
-        $this->assertTrue($this->object->getSounds() === []);
+    $this->assertTrue($this->object->getSounds() === []);
 
 //        foreach($this->object->getSounds() as $actual)
 //            $this->assertInstanceOf($expected, $actual);
-    }
+  }
 
-    /**
-     * @test
-     * @depends mustHaveMethod
-     */
-    public function getScriptsMustReturnArrayOfScript()
-    {
-        $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts\Script';
+  /**
+   * @test
+   * @depends mustHaveMethod
+   */
+  public function getScriptsMustReturnArrayOfScript()
+  {
+    $expected = 'Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts\Script';
 
-        foreach($this->object->getScripts() as $actual)
-            $this->assertInstanceOf($expected, $actual);
-    }
+    foreach ($this->object->getScripts() as $actual)
+      $this->assertInstanceOf($expected, $actual);
+  }
 
-    /**
-     * @test
-     * @depends mustHaveMethod
-     */
-    public function getNameMustReturnCertainString()
-    {
-        $expected = 'Background';
-        $actual = $this->object->getName();
+  /**
+   * @test
+   * @depends mustHaveMethod
+   */
+  public function getNameMustReturnCertainString()
+  {
+    $expected = 'Background';
+    $actual = $this->object->getName();
 
-        $this->assertEquals($expected, $actual);
-    }
+    $this->assertEquals($expected, $actual);
+  }
 }

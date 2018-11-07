@@ -228,8 +228,8 @@ Feature:
       | 3          | 1       | 01.01.2013 12:01 | c1   | Catrobat  | true     |
       | 2          | 2       | 01.01.2013 12:02 | c2   | User1     | true     |
     And there are catro notifications:
-      | user     | title                 | message                                         | type        | commentID  |
-      | Catrobat | Achievement - Uploads | Congratulations, you uploaded your first app    | comment     | 2          |
+      | user     | title                 | message                                      | type    | commentID |
+      | Catrobat | Achievement - Uploads | Congratulations, you uploaded your first app | comment | 2         |
     Then the element "#delete-account-button" should not be visible
     When I click "#account-settings-button"
     And I wait 250 milliseconds

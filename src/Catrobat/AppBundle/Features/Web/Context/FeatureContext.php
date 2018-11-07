@@ -2809,7 +2809,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   {
     /**
      * @var EntityManager $em
-     * @var User $user
+     * @var User          $user
      */
     try
     {

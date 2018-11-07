@@ -19,7 +19,7 @@
 
 {% block js %}
   <script>
-    var search = new ProgramLoader('#search-results', '{{ path('api_search_extension') }}');
-    search.initSearch('{{ q }}');
+    var search = new ProgramLoader('#search-results', '{{ path('api_search_extension') }}')
+    search.initSearch('{{ q }}')
   </script>
 {% endblock %}

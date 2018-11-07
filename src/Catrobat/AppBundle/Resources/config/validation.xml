@@ -3,34 +3,34 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-  <class name="Catrobat\AppBundle\Entity\User">
-    <constraint name="FR3D\LdapBundle\Validator\Unique">
-      <option name="message">fr3d_ldap.username.already_used</option>
-      <option name="groups">
-        <value>Registration</value>
-        <value>Profile</value>
-      </option>
-    </constraint>
-  </class>
+    <class name="Catrobat\AppBundle\Entity\User">
+        <constraint name="FR3D\LdapBundle\Validator\Unique">
+            <option name="message">fr3d_ldap.username.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+                <value>Profile</value>
+            </option>
+        </constraint>
+    </class>
 
-  <class name="FOS\UserBundle\Model\User">
-    <property name="plainPassword">
-      <constraint name="NotBlank">
-        <option name="groups">
-          <value>Registration</value>
-          <value>Profile</value>
-        </option>
-      </constraint>
+    <class name="FOS\UserBundle\Model\User">
+        <property name="plainPassword">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
 
-      <constraint name="Length">
-        <option name="min">6</option>
-        <option name="minMessage">fos_user.password.short</option>
-        <option name="groups">
-          <value>Registration</value>
-          <value>Profile</value>
-        </option>
-      </constraint>
-    </property>
-  </class>
+            <constraint name="Length">
+                <option name="min">6</option>
+                <option name="minMessage">fos_user.password.short</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
 
 </constraint-mapping>

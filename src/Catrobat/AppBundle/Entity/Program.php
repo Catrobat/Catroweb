@@ -1219,6 +1219,7 @@ class Program
   {
     $this->likes = $likes;
   }
+
   /**
    * @return Tag[]|\Doctrine\Common\Collections\Collection
    */

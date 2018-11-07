@@ -60,8 +60,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args)
-    {
+    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);
 
       return $args[0];
@@ -86,8 +85,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $extracted_file->getLanguageVersion()->willReturn(null);
     $extracted_file->getTags()->willReturn(null);
 
-    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args)
-    {
+    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);
 
       return $args[0];
@@ -105,8 +103,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args)
-    {
+    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);
 
       return $args[0];
@@ -137,8 +134,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args)
-    {
+    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);
 
       return $args[0];
@@ -155,8 +151,7 @@ class ProgramManagerSpec extends ObjectBehavior
     $metadata->getFieldNames()->willReturn(['id']);
     $entity_manager->getClassMetadata(Argument::any())->willReturn($metadata);
 
-    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args)
-    {
+    $entity_manager->persist(Argument::type('\Catrobat\AppBundle\Entity\Program'))->will(function ($args) {
       $args[0]->setId(1);
 
       return $args[0];

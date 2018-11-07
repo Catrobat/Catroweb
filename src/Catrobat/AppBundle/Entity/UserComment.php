@@ -165,6 +165,7 @@ class UserComment
   {
     $this->username = $username;
   }
+
   /**
    * @return mixed
    */

@@ -36,12 +36,12 @@ class ProfileController extends Controller
     /**
      * @var $user User
      */
-    $id = (integer) $id;
+    $id = (integer)$id;
     $twig = 'profile/profileHandler.html.twig';
     $my_profile = false;
     $program_count = 0;
 
-    if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id) )
+    if ($id === 0 || ($this->getUser() && $this->getUser()->getId() === $id))
     {
       $user = $this->getUser();
       $my_profile = true;
@@ -78,7 +78,7 @@ class ProfileController extends Controller
       'minPassLength'  => self::MIN_PASSWORD_LENGTH,
       'maxPassLength'  => self::MAX_PASSWORD_LENGTH,
       'username'       => $user->getUsername(),
-      'myProfile'      => $my_profile
+      'myProfile'      => $my_profile,
     ]);
   }
 

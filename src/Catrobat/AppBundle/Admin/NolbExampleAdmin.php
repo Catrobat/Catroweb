@@ -51,9 +51,9 @@ class NolbExampleAdmin extends AbstractAdmin
   {
     $listMapper
       ->addIdentifier('id')
-      ->add('program', EntityType::class, ['class' => Program::class,
-        'route' => ['name' => 'show'],
-        'admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('program', EntityType::class, ['class'      => Program::class,
+                                           'route'      => ['name' => 'show'],
+                                           'admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('active', null, ['editable' => true])
       ->add('is_for_female', null, ['editable' => true])
       ->add('downloads_from_female')

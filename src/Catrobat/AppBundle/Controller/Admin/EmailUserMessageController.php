@@ -14,7 +14,7 @@ class EmailUserMessageController extends CRUDController
 {
   public function listAction(Request $request = null)
   {
-    return $this->render('Admin/mail.html.twig');
+    return $this->renderWithExtraParams('Admin/mail.html.twig');
   }
 
   public function sendAction(Request $request = null)

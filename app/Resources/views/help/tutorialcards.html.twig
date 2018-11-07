@@ -14,7 +14,8 @@
       <a href="{{ path('catrobat_web_tutorialcards', {'page': i}) }}">
         <div class="col-2">
           <img src="{{ asset('images/help/tutorialcards/'~i~'.jpg') }}" alt="" title=""/>
-          <span id="title-{{ i }}" class="title size-xlarge">{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>
+          <span id="title-{{ i }}"
+                class="title size-xlarge">{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>
         </div>
       </a>
     {% endfor %}

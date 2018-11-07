@@ -34,7 +34,7 @@ set('writable_dirs',
   [
     'var/cache',
     'var/logs',
-    'var/sessions'
+    'var/sessions',
   ]);
 
 // Symfony executable and variable directories
@@ -48,11 +48,11 @@ host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
   ->set('branch', 'deployer')
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction')
+  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction')
   ->set('deploy_path', '/var/www/share/');
 
 // Tasks
-task('build', function() {
+task('build', function () {
   run('cd {{release_path}} && build');
 });
 

@@ -1,168 +1,168 @@
 services:
 
-# ======== System Validation ========
+  # ======== System Validation ========
 
-      catrowebbundle.listener.language:
-          class: Catrobat\AppBundle\Listeners\LanguageListener
-          tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+  catrowebbundle.listener.language:
+    class: Catrobat\AppBundle\Listeners\LanguageListener
+    tags:
+    - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
 
-      catrowebbundle.listener.flavor:
-          arguments:
-            - "@router"
-            - "@liip_theme.active_theme"
-          class: Catrobat\AppBundle\Listeners\FlavorListener
-          tags:
-              - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
+  catrowebbundle.listener.flavor:
+    arguments:
+    - "@router"
+    - "@liip_theme.active_theme"
+    class: Catrobat\AppBundle\Listeners\FlavorListener
+    tags:
+    - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
 
-# ======== Upload Validation ========
+  # ======== Upload Validation ========
 
-      catroweb.file.validator.name:
-            class: Catrobat\AppBundle\Listeners\NameValidator
-            arguments:    ["@rudewordfilter"]
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+  catroweb.file.validator.name:
+    class: Catrobat\AppBundle\Listeners\NameValidator
+    arguments:    ["@rudewordfilter"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-      catroweb.file.validator.description:
-            class: Catrobat\AppBundle\Listeners\DescriptionValidator
-            autowire: true
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+  catroweb.file.validator.description:
+    class: Catrobat\AppBundle\Listeners\DescriptionValidator
+    autowire: true
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-      catroweb.file.validator.languageversion:
-            class: Catrobat\AppBundle\Listeners\VersionValidator
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+  catroweb.file.validator.languageversion:
+    class: Catrobat\AppBundle\Listeners\VersionValidator
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-#      catroweb.file.validator.filestructure:
-#            class: Catrobat\AppBundle\Listeners\FileStructureValidator
-#            tags:
-#            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
+  #      catroweb.file.validator.filestructure:
+  #            class: Catrobat\AppBundle\Listeners\FileStructureValidator
+  #            tags:
+  #            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
 
-#      catroweb.file.validator.definedimages:
-#            class: Catrobat\AppBundle\Listeners\OnlyDefinedImagesValidator
-#            tags:
-#            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+  #      catroweb.file.validator.definedimages:
+  #            class: Catrobat\AppBundle\Listeners\OnlyDefinedImagesValidator
+  #            tags:
+  #            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-      catroweb.file.validator.xmlheadervalidator:
-            class: Catrobat\AppBundle\Listeners\ProgramXmlHeaderValidator
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+  catroweb.file.validator.xmlheadervalidator:
+    class: Catrobat\AppBundle\Listeners\ProgramXmlHeaderValidator
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
 
-# ======== Upload Modification ========
+  # ======== Upload Modification ========
 
-      catroweb.file.license.updater:
-            class: Catrobat\AppBundle\Listeners\LicenseUpdater
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: -1 }
+  catroweb.file.license.updater:
+    class: Catrobat\AppBundle\Listeners\LicenseUpdater
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: -1 }
 
-      catroweb.file.remix.updater:
-            class: Catrobat\AppBundle\Listeners\RemixUpdater
-            arguments: ["@remixmanager","@async_http_client","@router","%kernel.root_dir%"]
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
+  catroweb.file.remix.updater:
+    class: Catrobat\AppBundle\Listeners\RemixUpdater
+    arguments: ["@remixmanager","@async_http_client","@router","%kernel.root_dir%"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
 
-      catroweb.flavor.check:
-            class: Catrobat\AppBundle\Listeners\ProgramFlavorListener
-            arguments:
-                - "@request_stack"
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+  catroweb.flavor.check:
+    class: Catrobat\AppBundle\Listeners\ProgramFlavorListener
+    arguments:
+    - "@request_stack"
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
 
-      catroweb.apk.cleanup:
-            class: Catrobat\AppBundle\Listeners\ApkCleanupListener
-            arguments: ["@apkrepository"]
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
-      
-      catroweb.extension.check:
-            class: Catrobat\AppBundle\Listeners\ProgramExtensionListener
-            arguments: ["@extensionrepository"]
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+  catroweb.apk.cleanup:
+    class: Catrobat\AppBundle\Listeners\ApkCleanupListener
+    arguments: ["@apkrepository"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
 
-      catroweb.gamejamtag.check:
-            class: Catrobat\AppBundle\Listeners\GameJamTagListener
-            tags:
-            - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
-      
-# ======== Snapshots =======
+  catroweb.extension.check:
+    class: Catrobat\AppBundle\Listeners\ProgramExtensionListener
+    arguments: ["@extensionrepository"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
 
-      catrobat.upload.snapshotlistener:
-              class:        Catrobat\AppBundle\Listeners\Upload\SaveProgramSnapshotListener
-              arguments:    ["@time","@filerepository", "%catrobat.snapshot.dir%"]
-              tags:
-                  - { name: kernel.event_listener, event: catrobat.program.after.insert, method: handleEvent }
+  catroweb.gamejamtag.check:
+    class: Catrobat\AppBundle\Listeners\GameJamTagListener
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
 
-# ======== Notifications =======
+  # ======== Snapshots =======
 
-      catrobat.core.services.uploadnotificator:
-              class:        Catrobat\AppBundle\Listeners\UploadNotificator
-              arguments:    ["@mailer","@notificationrepository"]
-              tags:
-                  - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramInsertEvent }
+  catrobat.upload.snapshotlistener:
+    class:        Catrobat\AppBundle\Listeners\Upload\SaveProgramSnapshotListener
+    arguments:    ["@time","@filerepository", "%catrobat.snapshot.dir%"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.after.insert, method: handleEvent }
 
-      catrobat.core.services.reportnotificator:
-              class:        Catrobat\AppBundle\Listeners\ReportNotificator
-              arguments:    ["@mailer","@notificationrepository"]
-              tags:
-                  - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
+  # ======== Notifications =======
+
+  catrobat.core.services.uploadnotificator:
+    class:        Catrobat\AppBundle\Listeners\UploadNotificator
+    arguments:    ["@mailer","@notificationrepository"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramInsertEvent }
+
+  catrobat.core.services.reportnotificator:
+    class:        Catrobat\AppBundle\Listeners\ReportNotificator
+    arguments:    ["@mailer","@notificationrepository"]
+    tags:
+    - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
 
 
-# ======== Facebook Posts =======
+  # ======== Facebook Posts =======
 
-      catrobat.fb_post.post:
-              class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
-              arguments: ["@facebook_post_service"]
-              tags:
-                  - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+  catrobat.fb_post.post:
+    class: Catrobat\AppBundle\Listeners\ProgramFbPostListener
+    arguments: ["@facebook_post_service"]
+    tags:
+    - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
-# ======== Logging ========
+  # ======== Logging ========
 
-      catrobat.core.services.invalidprogramuploadlogger:
-              class:        Catrobat\AppBundle\Listeners\InvalidProgramUploadLogger
-              arguments:    ["@logger"]
-              tags:
-                  - { name: monolog.logger, channel: upload }
-                  - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }
+  catrobat.core.services.invalidprogramuploadlogger:
+    class:        Catrobat\AppBundle\Listeners\InvalidProgramUploadLogger
+    arguments:    ["@logger"]
+    tags:
+    - { name: monolog.logger, channel: upload }
+    - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }
 
-# ======== Entity ========
+  # ======== Entity ========
 
-      catrobat.entity.featured.image_listener:
-          class: Catrobat\AppBundle\Listeners\Entity\FeaturedProgramImageListener
-          arguments: ["@featuredimagerepository"]
-          tags:
-              - { name: doctrine.orm.entity_listener }
-              
-      catrobat.entity.program_listener:
-          class: Catrobat\AppBundle\Listeners\Entity\ProgramListener
-          arguments: ["@facebook_post_service", "@logger"]
-          tags:
-              - { name: doctrine.orm.entity_listener }
+  catrobat.entity.featured.image_listener:
+    class: Catrobat\AppBundle\Listeners\Entity\FeaturedProgramImageListener
+    arguments: ["@featuredimagerepository"]
+    tags:
+    - { name: doctrine.orm.entity_listener }
 
-# ======== Views ========
-      catrobat.view.uploadexception:
-          class:        Catrobat\AppBundle\Listeners\View\UploadExceptionListener
-          arguments: ["@translator"]
-          tags:
-              - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
-              
-      catrobat.view.programlist:
-          class:        Catrobat\AppBundle\Listeners\View\ProgramListSerializer
-          arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
-          tags:
-              - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
-      catrobat.view.templatelist:
-          class:        Catrobat\AppBundle\Listeners\View\TemplateListSerializer
-          arguments: ["@request_stack","%catrobat.template.storage.path%","@templatescreenshotrepository","@elapsedtime"]
-          tags:
-              - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+  catrobat.entity.program_listener:
+    class: Catrobat\AppBundle\Listeners\Entity\ProgramListener
+    arguments: ["@facebook_post_service", "@logger"]
+    tags:
+    - { name: doctrine.orm.entity_listener }
 
-              
-# =========================== Download ===========================
+  # ======== Views ========
+  catrobat.view.uploadexception:
+    class:        Catrobat\AppBundle\Listeners\View\UploadExceptionListener
+    arguments: ["@translator"]
+    tags:
+    - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-      catrobat.download.stats:
-          class: Catrobat\AppBundle\Listeners\DownloadStatisticsListener
-          arguments: ["@statistics", "@security.token_storage"]
-          tags:
-              - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+  catrobat.view.programlist:
+    class:        Catrobat\AppBundle\Listeners\View\ProgramListSerializer
+    arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
+    tags:
+    - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+  catrobat.view.templatelist:
+    class:        Catrobat\AppBundle\Listeners\View\TemplateListSerializer
+    arguments: ["@request_stack","%catrobat.template.storage.path%","@templatescreenshotrepository","@elapsedtime"]
+    tags:
+    - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+
+
+  # =========================== Download ===========================
+
+  catrobat.download.stats:
+    class: Catrobat\AppBundle\Listeners\DownloadStatisticsListener
+    arguments: ["@statistics", "@security.token_storage"]
+    tags:
+    - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }

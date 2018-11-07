@@ -20,12 +20,13 @@ class BroadcastNotificationController extends CRUDController
    */
   public function listAction()
   {
-    return $this->render('Admin/broadcast_notification.html.twig');
+    return $this->renderWithExtraParams('Admin/broadcast_notification.html.twig');
   }
 
 
   /**
    * @param Request $request
+   *
    * @return Response
    */
   public function sendAction(Request $request)
@@ -36,12 +37,14 @@ class BroadcastNotificationController extends CRUDController
     $notification_service = $this->get("catro_notification_service");
 
     $notification_service->addNotifications($this->getNotifications($message, $title));
+
     return new Response("OK");
   }
 
   /**
    * @param $message
    * @param $title
+   *
    * @return \Generator
    */
   private function getNotifications($message, $title)

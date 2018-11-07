@@ -1,535 +1,584 @@
 parameters:
-      catrobat.webdir:                "%kernel.root_dir%/../web/"
-      catrobat.resources.dir:         "%kernel.root_dir%/../web/resources/"
-      catrobat.file.extract.dir:      "%kernel.root_dir%/../web/resources/extract/"
-      catrobat.file.extract.path:     "resources/extract/"
-      catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"
-      catrobat.file.storage.path:     "resources/programs/"
-      catrobat.upload.temp.dir:       "%catrobat.webdir%resources/tmp/uploads/"
-      catrobat.upload.temp.path:      "resources/tmp/uploads/"
-      catrobat.template.storage.dir:  "%kernel.root_dir%/../web/resources/templates/"
-      catrobat.template.storage.path: "resources/templates/"
-      catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
-      catrobat.screenshot.path:       "resources/screenshots/"
-      catrobat.template.dir:          "%catrobat.webdir%resources/templates/"
-      catrobat.template.path:         "resources/templates/"
-      catrobat.template.screenshot.dir:        "%catrobat.webdir%resources/templates/screenshots/"
-      catrobat.template.screenshot.path:       "resources/templates/screenshots/"
-      catrobat.thumbnail.dir:         "%catrobat.webdir%resources/thumbnails/"
-      catrobat.thumbnail.path:        "resources/thumbnails/"
-      catrobat.template.thumbnail.dir:         "%catrobat.webdir%resources/templates/thumbnails/"
-      catrobat.template.thumbnail.path:        "resources/templates/thumbnails/"
-      catrobat.featuredimage.dir:     "%catrobat.webdir%resources/featured/"
-      catrobat.featuredimage.path:    "resources/featured/"
-      catrobat.mediapackage.dir:      "%catrobat.webdir%resources/mediapackage/"
-      catrobat.mediapackage.path:     "resources/mediapackage/"
-      catrobat.apk.dir:               "%catrobat.webdir%resources/apk/"
-      catrobat.backup.dir:            "%kernel.root_dir%/../backups/"
-      catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
-      catrobat.translations.dir:      "%kernel.root_dir%/../translations"
-      catrobat.logs.dir:              "%kernel.root_dir%/logs/"
-      catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
-      catrobat.max_version:           "0.996"
-      catrobat.max_description_upload_size: 4000
+  catrobat.webdir:                "%kernel.root_dir%/../web/"
+  catrobat.resources.dir:         "%kernel.root_dir%/../web/resources/"
+  catrobat.file.extract.dir:      "%kernel.root_dir%/../web/resources/extract/"
+  catrobat.file.extract.path:     "resources/extract/"
+  catrobat.file.storage.dir:      "%kernel.root_dir%/../web/resources/programs/"
+  catrobat.file.storage.path:     "resources/programs/"
+  catrobat.upload.temp.dir:       "%catrobat.webdir%resources/tmp/uploads/"
+  catrobat.upload.temp.path:      "resources/tmp/uploads/"
+  catrobat.template.storage.dir:  "%kernel.root_dir%/../web/resources/templates/"
+  catrobat.template.storage.path: "resources/templates/"
+  catrobat.screenshot.dir:        "%catrobat.webdir%resources/screenshots/"
+  catrobat.screenshot.path:       "resources/screenshots/"
+  catrobat.template.dir:          "%catrobat.webdir%resources/templates/"
+  catrobat.template.path:         "resources/templates/"
+  catrobat.template.screenshot.dir:        "%catrobat.webdir%resources/templates/screenshots/"
+  catrobat.template.screenshot.path:       "resources/templates/screenshots/"
+  catrobat.thumbnail.dir:         "%catrobat.webdir%resources/thumbnails/"
+  catrobat.thumbnail.path:        "resources/thumbnails/"
+  catrobat.template.thumbnail.dir:         "%catrobat.webdir%resources/templates/thumbnails/"
+  catrobat.template.thumbnail.path:        "resources/templates/thumbnails/"
+  catrobat.featuredimage.dir:     "%catrobat.webdir%resources/featured/"
+  catrobat.featuredimage.path:    "resources/featured/"
+  catrobat.mediapackage.dir:      "%catrobat.webdir%resources/mediapackage/"
+  catrobat.mediapackage.path:     "resources/mediapackage/"
+  catrobat.apk.dir:               "%catrobat.webdir%resources/apk/"
+  catrobat.backup.dir:            "%kernel.root_dir%/../backups/"
+  catrobat.snapshot.dir:          "%kernel.root_dir%/../Resources/Snapshots"
+  catrobat.translations.dir:      "%kernel.root_dir%/../translations"
+  catrobat.logs.dir:              "%kernel.root_dir%/../var/logs/"
+  catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
+  catrobat.max_version:           "0.996"
+  catrobat.max_description_upload_size: 4000
 
-#      This can drastically improve DX by reducing the time to load classes
-      container.dumper.inline_class_loader: true
+  #      This can drastically improve DX by reducing the time to load classes
+  container.dumper.inline_class_loader: true
 
-#      remove when updated to symfony > 4.0
-      container.autowiring.strict_mode: true
+  #      remove when updated to symfony > 4.0
+  container.autowiring.strict_mode: true
 
 services:
 
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
-
-#    # makes classes in src/AppBundle available to be used as services
-#    # this creates a service per class whose id is the fully-qualified class name
-    Catrobat\AppBundle\:
-        resource: '../../src/Catrobat/AppBundle/*'
-        # you can exclude directories or files
-        # but if a service is unused, it's removed anyway -> removed them because there are errors if not
-        exclude: '../../src/Catrobat/AppBundle/{Entity,Repository,Twig,Commands,Admin,CatrobatCode,Events,Exceptions,Features,Listeners,Requests,Responses,Services}'
-
-    # controllers are imported separately to make sure they're public
-    # and have a tag that allows actions to type-hint services
-    Catrobat\AppBundle\Controller\:
-        resource: '../../src/Catrobat/AppBundle/Controller'
-        tags: ['controller.service_arguments']
-        public: true
-
-    apikey_authenticator:
-        class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
-        arguments: ["@translator"]
-        public: true
-    Catrobat\AppBundle\Security\ApiKeyAuthenticator: "@apikey_authenticator"
-
-    user_authenticator:
-        class: Catrobat\AppBundle\Security\UserAuthenticator
-        arguments: ["@security.user.provider.concrete.chain_provider","@security.authentication.manager"]
-        public: true
-    Catrobat\AppBundle\Security\UserAuthenticator: "@user_authenticator"
-
-    template_service:
-        class: Catrobat\AppBundle\Services\TemplateService
-        arguments:
-          - "@templatemanager"
-        public: true
-    Catrobat\AppBundle\Services\TemplateService: "@template_service"
-
-    catro_notification_service:
-        class: Catrobat\AppBundle\Services\CatroNotificationService
-        arguments: ["@doctrine.orm.entity_manager"]
-        public: true
-    Catrobat\AppBundle\Services\CatroNotificationService: "@catro_notification_service"
-
-    community_statistics_service:
-        class: Catrobat\AppBundle\Services\CommunityStatisticsService
-        arguments: ["@doctrine.orm.entity_manager"]
-        public: true
-    Catrobat\AppBundle\Services\CommunityStatisticsService: "@community_statistics_service"
-
-# =========================== Repository ===========================
-
-    programrepository:
-        class: Catrobat\AppBundle\Entity\ProgramRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:Program"
-        public: true
-    Catrobat\AppBundle\Entity\ProgramRepository: "@programrepository"
-
-    programlikerepository:
-        class: Catrobat\AppBundle\Entity\ProgramLikeRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:ProgramLike"
-        public: true
-    Catrobat\AppBundle\Entity\ProgramLikeRepository: "@programlikerepository"
-
-    programremixrepository:
-        class: Catrobat\AppBundle\Entity\ProgramRemixRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:ProgramRemixRelation"
-        public: true
-    Catrobat\AppBundle\Entity\ProgramRemixRepository: "@programremixrepository"
-
-    programremixbackwardrepository:
-        class: Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:ProgramRemixBackwardRelation"
-        public: true
-    Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository: "@programremixbackwardrepository"
-
-    scratchprogramrepository:
-        class: Catrobat\AppBundle\Entity\ScratchProgramRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:ScratchProgram"
-        public: true
-    Catrobat\AppBundle\Entity\ScratchProgramRepository: "@scratchprogramrepository"
-
-    scratchprogramremixrepository:
-        class: Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:ScratchProgramRemixRelation"
-        public: true
-    Catrobat\AppBundle\Entity\ScratchProgramRemixRepository: "@scratchprogramremixrepository"
-
-    userlikesimilarityrelationrepository:
-        class: Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:UserLikeSimilarityRelation"
-        public: true
-    Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository: "@userlikesimilarityrelationrepository"
-
-    userremixsimilarityrelationrepository:
-        class: Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:UserRemixSimilarityRelation"
-        public: true
-    Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository: "@userremixsimilarityrelationrepository"
-
-    tagrepository:
-        class: Catrobat\AppBundle\Entity\TagRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:Tag"
-        public: true
-    Catrobat\AppBundle\Entity\TagRepository: "@tagrepository"
-
-    extensionrepository:
-        class: Catrobat\AppBundle\Entity\ExtensionRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:Extension"
-        public: true
-    Catrobat\AppBundle\Entity\ExtensionRepository: "@extensionrepository"
-
-    notificationrepository:
-        class: Catrobat\AppBundle\Entity\NotificationRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments: ["AppBundle:Notification"]
-        public: true
-    Catrobat\AppBundle\Entity\NotificationRepository: "@notificationrepository"
-
-    rudewordrepository:
-        class: Catrobat\AppBundle\Entity\RudeWordsRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:RudeWord"
-        public: true
-    Catrobat\AppBundle\Entity\RudeWordsRepository: "@rudewordrepository"
-
-    gamejamrepository:
-        class: Catrobat\AppBundle\Entity\GameJamRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:GameJam"
-        public: true
-    Catrobat\AppBundle\Entity\GameJamRepository: "@gamejamrepository"
-
-    featuredrepository:
-        class: Catrobat\AppBundle\Entity\FeaturedRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:FeaturedProgram"
-        public: true
-    Catrobat\AppBundle\Entity\FeaturedRepository: "@featuredrepository"
-
-    filerepository:
-        class: Catrobat\AppBundle\Services\ProgramFileRepository
-        arguments: ["%catrobat.file.storage.dir%","%catrobat.file.storage.path%", "@filecompressor", "%catrobat.upload.temp.dir%"]
-        public: true
-    Catrobat\AppBundle\Services\ProgramFileRepository: "@filerepository"
-
-    extractedfilerepository:
-        class: Catrobat\AppBundle\Services\ExtractedFileRepository
-        arguments:
-            - "%catrobat.file.extract.dir%"
-            - "%catrobat.file.extract.path%"
-            - "%catrobat.file.storage.dir%"
-            - "@fileextractor"
-            - "@programmanager"
-            - "@filerepository"
-        public: true
-    Catrobat\AppBundle\Services\ExtractedFileRepository: "@extractedfilerepository"
-
-    screenshotrepository:
-        class: Catrobat\AppBundle\Services\ScreenshotRepository
-        arguments: ["%catrobat.screenshot.dir%","%catrobat.screenshot.path%","%catrobat.thumbnail.dir%","%catrobat.thumbnail.path%","%catrobat.upload.temp.dir%","%catrobat.upload.temp.path%"]
-        public: true
-
-    templatescreenshotrepository:
-        class: Catrobat\AppBundle\Services\ScreenshotRepository
-        arguments: ["%catrobat.template.screenshot.dir%","%catrobat.template.screenshot.path%","%catrobat.template.thumbnail.dir%","%catrobat.template.thumbnail.path%","%catrobat.upload.temp.dir%","%catrobat.upload.temp.path%"]
-        public: true
-
-    Catrobat\AppBundle\Services\FeaturedImageRepository: "@featuredimagerepository"
-    featuredimagerepository:
-        class: Catrobat\AppBundle\Services\FeaturedImageRepository
-        arguments: ["%catrobat.featuredimage.dir%","%catrobat.featuredimage.path%"]
-        public: true
-
-    Catrobat\AppBundle\Services\MediaPackageFileRepository: "@mediapackagefilerepository"
-    mediapackagefilerepository:
-        class: Catrobat\AppBundle\Services\MediaPackageFileRepository
-        arguments: ["%catrobat.mediapackage.dir%","%catrobat.mediapackage.path%"]
-        public: true
-
-
-    apkrepository:
-        class: Catrobat\AppBundle\Services\ApkRepository
-        arguments: ["%catrobat.apk.dir%"]
-        public: true
-    Catrobat\AppBundle\Services\ApkRepository: "@apkrepository"
-
-    backupfilerepository:
-        class: Catrobat\AppBundle\Services\BackupFileRepository
-        arguments: ["%catrobat.backup.dir%"]
-        public: true
-    Catrobat\AppBundle\Services\BackupFileRepository: "@backupfilerepository"
-
-    programdevicepermissionreader:
-        class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
-        public: true
-    Catrobat\AppBundle\Services\ProgramDevicePermissionReader: "@programdevicepermissionreader"
-
-    templaterepository:
-        class: Catrobat\AppBundle\Entity\TemplateRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:Template"
-        public: true
-    Catrobat\AppBundle\Entity\TemplateRepository: "@templaterepository"
-
-    templatefilerepository:
-        class: Catrobat\AppBundle\Services\TemplateFileRepository
-        arguments: ["%catrobat.template.storage.dir%","%catrobat.template.storage.path%", "@filecompressor"]
-        public: true
-    Catrobat\AppBundle\Services\TemplateFileRepository: "@templatefilerepository"
-
-    nolbexamplerepository:
-        class: Catrobat\AppBundle\Entity\NolbExampleRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:NolbExampleProgram"
-        public: true
-    Catrobat\AppBundle\Entity\NolbExampleRepository: "@nolbexamplerepository"
-
-    catro_notification_repository:
-        class: Catrobat\AppBundle\Entity\CatroNotificationRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AppBundle:CatroNotification"
-        public: true
-    Catrobat\AppBundle\Entity\CatroNotificationRepository: "@catro_notification_repository"
-
-# =========================== Manager & Stuff ===========================
-
-    programmanager:
-        class: Catrobat\AppBundle\Entity\ProgramManager
-        arguments:
-            - "@fileextractor"
-            - "@filerepository"
-            - "@screenshotrepository"
-            - "@doctrine.orm.entity_manager"
-            - "@programrepository"
-            - "@tagrepository"
-            - "@programlikerepository"
-            - "@event_dispatcher"
-            - "%catrobat.max_version%"
-        public: true
-    Catrobat\AppBundle\Entity\ProgramManager: "@programmanager"
-
-    templatemanager:
-        class: Catrobat\AppBundle\Entity\TemplateManager
-        arguments:
-            - "@templatefilerepository"
-            - "@templatescreenshotrepository"
-            - "@doctrine.orm.entity_manager"
-            - "@templaterepository"
-        public: true
-    Catrobat\AppBundle\Entity\TemplateManager: "@templatemanager"
-
-    programmanager.remix_manipulation:
-        class: Catrobat\AppBundle\Commands\RemixManipulationProgramManager
-        arguments:
-            - "@fileextractor"
-            - "@filerepository"
-            - "@screenshotrepository"
-            - "@doctrine.orm.entity_manager"
-            - "@programrepository"
-            - "@tagrepository"
-            - "@programlikerepository"
-            - "@event_dispatcher"
-            - "%catrobat.max_version%"
-        public: true
-    Catrobat\AppBundle\Commands\RemixManipulationProgramManager: "@programmanager.remix_manipulation"
-
-    remixmanager:
-        class: Catrobat\AppBundle\Entity\RemixManager
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@programrepository"
-            - "@scratchprogramrepository"
-            - "@programremixrepository"
-            - "@programremixbackwardrepository"
-            - "@scratchprogramremixrepository"
-            - "@remixgraphmanipulator"
-        public: true
-    Catrobat\AppBundle\Entity\RemixManager: "@remixmanager"
-
-    remixgraphmanipulator:
-        class: Catrobat\AppBundle\RemixGraph\RemixGraphManipulator
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@remixsubgraphmanipulator"
-            - "@programremixrepository"
-            - "@programremixbackwardrepository"
-            - "@scratchprogramremixrepository"
-        public: true
-    Catrobat\AppBundle\RemixGraph\RemixGraphManipulator: "@remixgraphmanipulator"
-
-    remixsubgraphmanipulator:
-        class: Catrobat\AppBundle\RemixGraph\RemixSubgraphManipulator
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@programrepository"
-            - "@programremixrepository"
-            - "@programremixbackwardrepository"
-        public: true
-    Catrobat\AppBundle\RemixGraph\RemixSubgraphManipulator: "@remixsubgraphmanipulator"
-
-    migrationmanager:
-        class: Catrobat\AppBundle\Entity\MigrationManager
-        arguments:
-         - "@doctrine.orm.entity_manager"
-        public: true
-    Catrobat\AppBundle\Entity\MigrationManager: "@migrationmanager"
-
-    recommendermanager:
-        class: Catrobat\AppBundle\RecommenderSystem\RecommenderManager
-        arguments:
-         - "@doctrine.orm.entity_manager"
-         - "@usermanager"
-         - "@userlikesimilarityrelationrepository"
-         - "@userremixsimilarityrelationrepository"
-         - "@programlikerepository"
-         - "@programremixrepository"
-         - "@programremixbackwardrepository"
-        public: true
-    Catrobat\AppBundle\RecommenderSystem\RecommenderManager: "@recommendermanager"
-
-    rudewordfilter:
-        class: Catrobat\AppBundle\Services\RudeWordFilter
-        arguments: ["@rudewordrepository"]
-        public: true
-    Catrobat\AppBundle\Services\RudeWordFilter: "@rudewordfilter"
-
-    usermanager:
-        class: Catrobat\AppBundle\Entity\UserManager
-        arguments: ["@fos_user.util.password_updater", "@fos_user.util.canonical_fields_updater", "@fos_user.object_manager","%fos_user.model.user.class%"]
-        public: true
-    Catrobat\AppBundle\Entity\UserManager: "@usermanager"
-
-    ldap.user_hydrator:
-        class: Catrobat\AppBundle\Ldap\UserHydrator
-        public: true
-    Catrobat\AppBundle\Ldap\UserHydrator: "@ldap.user_hydrator"
-
-    usermanager.ldap:
-        class: Catrobat\AppBundle\Entity\UserLDAPManager
-        arguments:
-            - "@fr3d_ldap.ldap_driver"
-            - "@fr3d_ldap.user_hydrator"
-            - '%fr3d_ldap.ldap_manager.parameters%'
-            - '%ldap_role_mappings%'
-            - '%ldap_group_filter%'
-            - "@tokengenerator"
-            - "@logger"
-        public: true
-    Catrobat\AppBundle\Entity\UserLDAPManager: "@usermanager.ldap"
-
-    fileextractor:
-        class: Catrobat\AppBundle\Services\CatrobatFileExtractor
-        arguments: ["%catrobat.file.extract.dir%","%catrobat.file.extract.path%"]
-        public: true
-    Catrobat\AppBundle\Services\CatrobatFileExtractor: "@fileextractor"
-
-    filecompressor:
-        class: Catrobat\AppBundle\Services\CatrobatFileCompressor
-        public: true
-    Catrobat\AppBundle\Services\CatrobatFileCompressor: "@filecompressor"
-
-    tokengenerator:
-        class: Catrobat\AppBundle\Services\TokenGenerator
-        public: true
-    Catrobat\AppBundle\Services\TokenGenerator: "@tokengenerator"
-
-    time:
-        class: Catrobat\AppBundle\Services\Time
-        public: true
-    Catrobat\AppBundle\Services\Time: "@time"
-
-    elapsedtime:
-        class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
-        arguments: ["@translator","@time"]
-        public: true
-    Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter: "@elapsedtime"
-
-    catrobat_code_parser:
-        class: Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser
-        public: true
-    Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser: "@catrobat_code_parser"
-
-# =========================== Twig ===========================
-
-    app.twig_extension:
-        class: Catrobat\AppBundle\Twig\AppExtension
-        arguments: ["@request_stack", "@mediapackagefilerepository", "@gamejamrepository", "@liip_theme.active_theme", "%catrobat.translations.dir%", "@service_container"]
-        tags:
-            - { name: twig.extension }
-    Catrobat\AppBundle\Twig\AppExtension: "@app.twig_extension"
-
-# =========================== Jenkins ===========================
-
-    ci.jenkins.dispatcher:
-        class: Catrobat\AppBundle\Services\Ci\JenkinsDispatcher
-        arguments:
-          - "@router"
-          - "%jenkins%"
-        public: true
-    Catrobat\AppBundle\Services\Ci\JenkinsDispatcher: "@ci.jenkins.dispatcher"
-
-# =========================== Controller ===========================
-
-    Catrobat\AppBundle\Controller\Api\UploadController:
-        autowire: false
-        arguments:
-            - "@usermanager"
-            - "@security.token_storage"
-            - "@programmanager"
-            - "@gamejamrepository"
-            - "@tokengenerator"
-            - "@translator"
-        public: true
-        tags: ['controller.service_arguments']
-
-# =========================== Social ===========================
-
-    facebook_post_service:
-        class: Catrobat\AppBundle\Services\FacebookPostService
-        arguments: ["@router", "@service_container", "@screenshotrepository"]
-        public: true
-    Catrobat\AppBundle\Services\FacebookPostService: "@facebook_post_service"
-
-    oauth_service:
-        class: Catrobat\AppBundle\Services\OAuthService
-        arguments:
-          - "@service_container"
-        public: true
-    Catrobat\AppBundle\Services\OAuthService: "@oauth_service"
-
-# =========================== Download ===========================
-
-    statistics:
-        class: Catrobat\AppBundle\Services\StatisticsService
-        arguments:
-          - "@programmanager"
-          - "@doctrine.orm.entity_manager"
-          - "@bazinga_geocoder.geocoder"
-          - "@logger"
-          - "@security.token_storage"
-        tags:
-          - { name: monolog.logger, channel: download_stats }
-        public: true
-    Catrobat\AppBundle\Services\StatisticsService: "@statistics"
-
-# =========================== Async HTTP Client ===========================
-    async_http_client:
-        class: Catrobat\AppBundle\Services\AsyncHttpClient
-        arguments:
-          - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }
-        public: true
-    Catrobat\AppBundle\Services\AsyncHttpClient: "@async_http_client"
-
-# =========================== FOS User bundle =============================
-    resetting_send_email_initialize:
-        class: Catrobat\AppBundle\EventListener\ResettingSendEmailInitializeSubscriber
-        autowire: true
-        tags:
-            - { name: kernel.event_subscriber }
-        public: true
-    Catrobat\AppBundle\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+    # fetching services directly from the container via $container->get() won't work.
+    # The best practice is to be explicit about your dependencies anyway.
+
+  #  makes classes in src/AppBundle available to be used as services
+  #  this creates a service per class whose id is the fully-qualified class name
+  Catrobat\AppBundle\:
+    resource: '../../src/Catrobat/AppBundle/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway -> removed them because there are errors if not
+    exclude: '../../src/Catrobat/AppBundle/{Entity,Repository,Twig,Commands,Admin,CatrobatCode,Events,Exceptions,Features,Listeners,Requests,Responses,Services}'
+
+  # controllers are imported separately to make sure they're public
+  # and have a tag that allows actions to type-hint services
+  Catrobat\AppBundle\Controller\:
+    resource: '../../src/Catrobat/AppBundle/Controller'
+    tags: ['controller.service_arguments']
+    public: true
+
+  apikey_authenticator:
+    class:     Catrobat\AppBundle\Security\ApiKeyAuthenticator
+    arguments:
+    - "@translator"
+    public: true
+  Catrobat\AppBundle\Security\ApiKeyAuthenticator: "@apikey_authenticator"
+
+  user_authenticator:
+    class: Catrobat\AppBundle\Security\UserAuthenticator
+    arguments:
+    - "@security.user.provider.concrete.chain_provider"
+    - "@security.authentication.manager"
+    public: true
+  Catrobat\AppBundle\Security\UserAuthenticator: "@user_authenticator"
+
+  template_service:
+    class: Catrobat\AppBundle\Services\TemplateService
+    arguments:
+    - "@templatemanager"
+    public: true
+  Catrobat\AppBundle\Services\TemplateService: "@template_service"
+
+  catro_notification_service:
+    class: Catrobat\AppBundle\Services\CatroNotificationService
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    public: true
+  Catrobat\AppBundle\Services\CatroNotificationService: "@catro_notification_service"
+
+  community_statistics_service:
+    class: Catrobat\AppBundle\Services\CommunityStatisticsService
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    public: true
+  Catrobat\AppBundle\Services\CommunityStatisticsService: "@community_statistics_service"
+
+  # =========================== Repository ===========================
+
+  programrepository:
+    class: Catrobat\AppBundle\Entity\ProgramRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:Program"
+    public: true
+  Catrobat\AppBundle\Entity\ProgramRepository: "@programrepository"
+
+  programlikerepository:
+    class: Catrobat\AppBundle\Entity\ProgramLikeRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:ProgramLike"
+    public: true
+  Catrobat\AppBundle\Entity\ProgramLikeRepository: "@programlikerepository"
+
+  programremixrepository:
+    class: Catrobat\AppBundle\Entity\ProgramRemixRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:ProgramRemixRelation"
+    public: true
+  Catrobat\AppBundle\Entity\ProgramRemixRepository: "@programremixrepository"
+
+  programremixbackwardrepository:
+    class: Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:ProgramRemixBackwardRelation"
+    public: true
+  Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository: "@programremixbackwardrepository"
+
+  scratchprogramrepository:
+    class: Catrobat\AppBundle\Entity\ScratchProgramRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:ScratchProgram"
+    public: true
+  Catrobat\AppBundle\Entity\ScratchProgramRepository: "@scratchprogramrepository"
+
+  scratchprogramremixrepository:
+    class: Catrobat\AppBundle\Entity\ScratchProgramRemixRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:ScratchProgramRemixRelation"
+    public: true
+  Catrobat\AppBundle\Entity\ScratchProgramRemixRepository: "@scratchprogramremixrepository"
+
+  userlikesimilarityrelationrepository:
+    class: Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:UserLikeSimilarityRelation"
+    public: true
+  Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository: "@userlikesimilarityrelationrepository"
+
+  userremixsimilarityrelationrepository:
+    class: Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:UserRemixSimilarityRelation"
+    public: true
+  Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository: "@userremixsimilarityrelationrepository"
+
+  tagrepository:
+    class: Catrobat\AppBundle\Entity\TagRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:Tag"
+    public: true
+  Catrobat\AppBundle\Entity\TagRepository: "@tagrepository"
+
+  extensionrepository:
+    class: Catrobat\AppBundle\Entity\ExtensionRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:Extension"
+    public: true
+  Catrobat\AppBundle\Entity\ExtensionRepository: "@extensionrepository"
+
+  notificationrepository:
+    class: Catrobat\AppBundle\Entity\NotificationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:Notification"
+    public: true
+  Catrobat\AppBundle\Entity\NotificationRepository: "@notificationrepository"
+
+  rudewordrepository:
+    class: Catrobat\AppBundle\Entity\RudeWordsRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:RudeWord"
+    public: true
+  Catrobat\AppBundle\Entity\RudeWordsRepository: "@rudewordrepository"
+
+  gamejamrepository:
+    class: Catrobat\AppBundle\Entity\GameJamRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:GameJam"
+    public: true
+  Catrobat\AppBundle\Entity\GameJamRepository: "@gamejamrepository"
+
+  featuredrepository:
+    class: Catrobat\AppBundle\Entity\FeaturedRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:FeaturedProgram"
+    public: true
+  Catrobat\AppBundle\Entity\FeaturedRepository: "@featuredrepository"
+
+  filerepository:
+    class: Catrobat\AppBundle\Services\ProgramFileRepository
+    arguments:
+    - "%catrobat.file.storage.dir%"
+    - "%catrobat.file.storage.path%"
+    - "@filecompressor"
+    - "%catrobat.upload.temp.dir%"
+    public: true
+  Catrobat\AppBundle\Services\ProgramFileRepository: "@filerepository"
+
+  extractedfilerepository:
+    class: Catrobat\AppBundle\Services\ExtractedFileRepository
+    arguments:
+    - "%catrobat.file.extract.dir%"
+    - "%catrobat.file.extract.path%"
+    - "%catrobat.file.storage.dir%"
+    - "@fileextractor"
+    - "@programmanager"
+    - "@filerepository"
+    public: true
+  Catrobat\AppBundle\Services\ExtractedFileRepository: "@extractedfilerepository"
+
+  screenshotrepository:
+    class: Catrobat\AppBundle\Services\ScreenshotRepository
+    arguments:
+    - "%catrobat.screenshot.dir%"
+    - "%catrobat.screenshot.path%"
+    - "%catrobat.thumbnail.dir%"
+    - "%catrobat.thumbnail.path%"
+    - "%catrobat.upload.temp.dir%"
+    - "%catrobat.upload.temp.path%"
+    public: true
+
+  templatescreenshotrepository:
+    class: Catrobat\AppBundle\Services\ScreenshotRepository
+    arguments:
+    - "%catrobat.template.screenshot.dir%"
+    - "%catrobat.template.screenshot.path%"
+    - "%catrobat.template.thumbnail.dir%"
+    - "%catrobat.template.thumbnail.path%"
+    - "%catrobat.upload.temp.dir%"
+    - "%catrobat.upload.temp.path%"
+    public: true
+
+  Catrobat\AppBundle\Services\FeaturedImageRepository: "@featuredimagerepository"
+  featuredimagerepository:
+    class: Catrobat\AppBundle\Services\FeaturedImageRepository
+    arguments:
+    - "%catrobat.featuredimage.dir%"
+    - "%catrobat.featuredimage.path%"
+    public: true
+
+  Catrobat\AppBundle\Services\MediaPackageFileRepository: "@mediapackagefilerepository"
+  mediapackagefilerepository:
+    class: Catrobat\AppBundle\Services\MediaPackageFileRepository
+    arguments:
+    - "%catrobat.mediapackage.dir%"
+    - "%catrobat.mediapackage.path%"
+    public: true
+
+
+  apkrepository:
+    class: Catrobat\AppBundle\Services\ApkRepository
+    arguments:
+    - "%catrobat.apk.dir%"
+    public: true
+  Catrobat\AppBundle\Services\ApkRepository: "@apkrepository"
+
+  backupfilerepository:
+    class: Catrobat\AppBundle\Services\BackupFileRepository
+    arguments:
+    - "%catrobat.backup.dir%"
+    public: true
+  Catrobat\AppBundle\Services\BackupFileRepository: "@backupfilerepository"
+
+  programdevicepermissionreader:
+    class: Catrobat\AppBundle\Services\ProgramDevicePermissionReader
+    public: true
+  Catrobat\AppBundle\Services\ProgramDevicePermissionReader: "@programdevicepermissionreader"
+
+  templaterepository:
+    class: Catrobat\AppBundle\Entity\TemplateRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:Template"
+    public: true
+  Catrobat\AppBundle\Entity\TemplateRepository: "@templaterepository"
+
+  templatefilerepository:
+    class: Catrobat\AppBundle\Services\TemplateFileRepository
+    arguments:
+    - catrobat.template.storage.dir%"
+    - "%catrobat.template.storage.path%"
+    - "@filecompressor"
+    public: true
+  Catrobat\AppBundle\Services\TemplateFileRepository: "@templatefilerepository"
+
+  nolbexamplerepository:
+    class: Catrobat\AppBundle\Entity\NolbExampleRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:NolbExampleProgram"
+    public: true
+  Catrobat\AppBundle\Entity\NolbExampleRepository: "@nolbexamplerepository"
+
+  catro_notification_repository:
+    class: Catrobat\AppBundle\Entity\CatroNotificationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+    - "AppBundle:CatroNotification"
+    public: true
+  Catrobat\AppBundle\Entity\CatroNotificationRepository: "@catro_notification_repository"
+
+  # =========================== Manager & Stuff ===========================
+
+  programmanager:
+    class: Catrobat\AppBundle\Entity\ProgramManager
+    arguments:
+    - "@fileextractor"
+    - "@filerepository"
+    - "@screenshotrepository"
+    - "@doctrine.orm.entity_manager"
+    - "@programrepository"
+    - "@tagrepository"
+    - "@programlikerepository"
+    - "@event_dispatcher"
+    - "%catrobat.max_version%"
+    public: true
+  Catrobat\AppBundle\Entity\ProgramManager: "@programmanager"
+
+  templatemanager:
+    class: Catrobat\AppBundle\Entity\TemplateManager
+    arguments:
+    - "@templatefilerepository"
+    - "@templatescreenshotrepository"
+    - "@doctrine.orm.entity_manager"
+    - "@templaterepository"
+    public: true
+  Catrobat\AppBundle\Entity\TemplateManager: "@templatemanager"
+
+  programmanager.remix_manipulation:
+    class: Catrobat\AppBundle\Commands\RemixManipulationProgramManager
+    arguments:
+    - "@fileextractor"
+    - "@filerepository"
+    - "@screenshotrepository"
+    - "@doctrine.orm.entity_manager"
+    - "@programrepository"
+    - "@tagrepository"
+    - "@programlikerepository"
+    - "@event_dispatcher"
+    - "%catrobat.max_version%"
+    public: true
+  Catrobat\AppBundle\Commands\RemixManipulationProgramManager: "@programmanager.remix_manipulation"
+
+  remixmanager:
+    class: Catrobat\AppBundle\Entity\RemixManager
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@programrepository"
+    - "@scratchprogramrepository"
+    - "@programremixrepository"
+    - "@programremixbackwardrepository"
+    - "@scratchprogramremixrepository"
+    - "@remixgraphmanipulator"
+    public: true
+  Catrobat\AppBundle\Entity\RemixManager: "@remixmanager"
+
+  remixgraphmanipulator:
+    class: Catrobat\AppBundle\RemixGraph\RemixGraphManipulator
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@remixsubgraphmanipulator"
+    - "@programremixrepository"
+    - "@programremixbackwardrepository"
+    - "@scratchprogramremixrepository"
+    public: true
+  Catrobat\AppBundle\RemixGraph\RemixGraphManipulator: "@remixgraphmanipulator"
+
+  remixsubgraphmanipulator:
+    class: Catrobat\AppBundle\RemixGraph\RemixSubgraphManipulator
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@programrepository"
+    - "@programremixrepository"
+    - "@programremixbackwardrepository"
+    public: true
+  Catrobat\AppBundle\RemixGraph\RemixSubgraphManipulator: "@remixsubgraphmanipulator"
+
+  migrationmanager:
+    class: Catrobat\AppBundle\Entity\MigrationManager
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    public: true
+  Catrobat\AppBundle\Entity\MigrationManager: "@migrationmanager"
+
+  recommendermanager:
+    class: Catrobat\AppBundle\RecommenderSystem\RecommenderManager
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@usermanager"
+    - "@userlikesimilarityrelationrepository"
+    - "@userremixsimilarityrelationrepository"
+    - "@programlikerepository"
+    - "@programremixrepository"
+    - "@programremixbackwardrepository"
+    public: true
+  Catrobat\AppBundle\RecommenderSystem\RecommenderManager: "@recommendermanager"
+
+  rudewordfilter:
+    class: Catrobat\AppBundle\Services\RudeWordFilter
+    arguments:
+    - "@rudewordrepository"
+    public: true
+  Catrobat\AppBundle\Services\RudeWordFilter: "@rudewordfilter"
+
+  usermanager:
+    class: Catrobat\AppBundle\Entity\UserManager
+    arguments:
+    - "@fos_user.util.password_updater"
+    - "@fos_user.util.canonical_fields_updater"
+    - "@fos_user.object_manager"
+    - "%fos_user.model.user.class%"
+    public: true
+  Catrobat\AppBundle\Entity\UserManager: "@usermanager"
+
+  ldap.user_hydrator:
+    class: Catrobat\AppBundle\Ldap\UserHydrator
+    public: true
+  Catrobat\AppBundle\Ldap\UserHydrator: "@ldap.user_hydrator"
+
+  usermanager.ldap:
+    class: Catrobat\AppBundle\Entity\UserLDAPManager
+    arguments:
+    - "@fr3d_ldap.ldap_driver"
+    - "@fr3d_ldap.user_hydrator"
+    - '%fr3d_ldap.ldap_manager.parameters%'
+    - '%ldap_role_mappings%'
+    - '%ldap_group_filter%'
+    - "@tokengenerator"
+    - "@logger"
+    public: true
+  Catrobat\AppBundle\Entity\UserLDAPManager: "@usermanager.ldap"
+
+  fileextractor:
+    class: Catrobat\AppBundle\Services\CatrobatFileExtractor
+    arguments:
+    - "%catrobat.file.extract.dir%"
+    - "%catrobat.file.extract.path%"
+    public: true
+  Catrobat\AppBundle\Services\CatrobatFileExtractor: "@fileextractor"
+
+  filecompressor:
+    class: Catrobat\AppBundle\Services\CatrobatFileCompressor
+    public: true
+  Catrobat\AppBundle\Services\CatrobatFileCompressor: "@filecompressor"
+
+  tokengenerator:
+    class: Catrobat\AppBundle\Services\TokenGenerator
+    public: true
+  Catrobat\AppBundle\Services\TokenGenerator: "@tokengenerator"
+
+  time:
+    class: Catrobat\AppBundle\Services\Time
+    public: true
+  Catrobat\AppBundle\Services\Time: "@time"
+
+  elapsedtime:
+    class: Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter
+    arguments:
+    - "@translator"
+    - "@time"
+    public: true
+  Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter: "@elapsedtime"
+
+  catrobat_code_parser:
+    class: Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser
+    public: true
+  Catrobat\AppBundle\Services\CatrobatCodeParser\CatrobatCodeParser: "@catrobat_code_parser"
+
+  # =========================== Twig ===========================
+
+  app.twig_extension:
+    class: Catrobat\AppBundle\Twig\AppExtension
+    arguments:
+    - "@request_stack"
+    - "@mediapackagefilerepository"
+    - "@gamejamrepository"
+    - "@liip_theme.active_theme"
+    - "%catrobat.translations.dir%"
+    - "@service_container"
+    tags:
+    - { name: twig.extension }
+  Catrobat\AppBundle\Twig\AppExtension: "@app.twig_extension"
+
+  # =========================== Jenkins ===========================
+
+  ci.jenkins.dispatcher:
+    class: Catrobat\AppBundle\Services\Ci\JenkinsDispatcher
+    arguments:
+    - "@router"
+    - "%jenkins%"
+    public: true
+  Catrobat\AppBundle\Services\Ci\JenkinsDispatcher: "@ci.jenkins.dispatcher"
+
+  # =========================== Controller ===========================
+
+  Catrobat\AppBundle\Controller\Api\UploadController:
+    autowire: false
+    arguments:
+    - "@usermanager"
+    - "@security.token_storage"
+    - "@programmanager"
+    - "@gamejamrepository"
+    - "@tokengenerator"
+    - "@translator"
+    public: true
+    tags: ['controller.service_arguments']
+
+  # =========================== Social ===========================
+
+  facebook_post_service:
+    class: Catrobat\AppBundle\Services\FacebookPostService
+    arguments:
+    - "@router"
+    - "@service_container"
+    - "@screenshotrepository"
+    public: true
+  Catrobat\AppBundle\Services\FacebookPostService: "@facebook_post_service"
+
+  oauth_service:
+    class: Catrobat\AppBundle\Services\OAuthService
+    arguments:
+    - "@service_container"
+    public: true
+  Catrobat\AppBundle\Services\OAuthService: "@oauth_service"
+
+  # =========================== Download ===========================
+
+  statistics:
+    class: Catrobat\AppBundle\Services\StatisticsService
+    arguments:
+    - "@programmanager"
+    - "@doctrine.orm.entity_manager"
+    - "@bazinga_geocoder.geocoder"
+    - "@logger"
+    - "@security.token_storage"
+    tags:
+    - { name: monolog.logger, channel: download_stats }
+    public: true
+  Catrobat\AppBundle\Services\StatisticsService: "@statistics"
+
+  # =========================== Async HTTP Client ===========================
+  async_http_client:
+    class: Catrobat\AppBundle\Services\AsyncHttpClient
+    arguments:
+    - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }
+    public: true
+  Catrobat\AppBundle\Services\AsyncHttpClient: "@async_http_client"
+
+  # =========================== FOS User bundle =============================
+  resetting_send_email_initialize:
+    class: Catrobat\AppBundle\EventListener\ResettingSendEmailInitializeSubscriber
+    autowire: true
+    tags:
+    - { name: kernel.event_subscriber }
+    public: true
+  Catrobat\AppBundle\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
 

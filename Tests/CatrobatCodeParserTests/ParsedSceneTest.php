@@ -6,39 +6,39 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedScene;
 
 class ParsedSceneTest extends \PHPUnit\Framework\TestCase
 {
-    protected $scene;
-    
-    public function setUp()
-    {
-        $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/SceneProgram/code.xml');
-        $this->scene = new ParsedScene($xml_properties->xpath('//scene')[0]);
-    }
+  protected $scene;
 
-    /**
-     * @test
-     * @dataProvider provideMethodNames
-     */
-    public function mustHaveMethod($method_name)
-    {
-        $this->assertTrue(method_exists($this->scene, $method_name));
-    }
+  public function setUp()
+  {
+    $xml_properties = simplexml_load_file(__DIR__ . '/Resources/ValidPrograms/SceneProgram/code.xml');
+    $this->scene = new ParsedScene($xml_properties->xpath('//scene')[0]);
+  }
 
-    public function provideMethodNames()
-    {
-        return array(
-          ['getName']
-        );
-    }
+  /**
+   * @test
+   * @dataProvider provideMethodNames
+   */
+  public function mustHaveMethod($method_name)
+  {
+    $this->assertTrue(method_exists($this->scene, $method_name));
+  }
 
-    /**
-     * @test
-     * @depends mustHaveMethod
-     */
-    public function getNameMustReturnCertainString()
-    {
-        $expected = 'Scene 1';
-        $actual = $this->scene->getName();
+  public function provideMethodNames()
+  {
+    return [
+      ['getName'],
+    ];
+  }
 
-        $this->assertEquals($expected, $actual);
-    }
+  /**
+   * @test
+   * @depends mustHaveMethod
+   */
+  public function getNameMustReturnCertainString()
+  {
+    $expected = 'Scene 1';
+    $actual = $this->scene->getName();
+
+    $this->assertEquals($expected, $actual);
+  }
 }
