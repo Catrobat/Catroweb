@@ -14,12 +14,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class DescriptionValidator
 {
   private $rudeWordFilter;
-  private $container;
+  private $max_description_size;
 
-  public function __construct(RudeWordFilter $rudeWordFilter, ContainerInterface $container)
+  public function __construct(RudeWordFilter $rudeWordFilter)
   {
     $this->rudeWordFilter = $rudeWordFilter;
-    $this->container = $container;
+    $this->max_description_size = 4000;
   }
 
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
@@ -29,9 +29,7 @@ class DescriptionValidator
 
   public function validate(ExtractedCatrobatFile $file)
   {
-    $max_description_size = $this->container->get('kernel')->getContainer()
-      ->getParameter("catrobat.max_description_upload_size");
-    if (strlen($file->getDescription()) > $max_description_size)
+    if (strlen($file->getDescription()) > $this->max_description_size)
     {
       throw new DescriptionTooLongException();
     }

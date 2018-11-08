@@ -30,7 +30,7 @@ parameters:
   catrobat.logs.dir:              "%kernel.root_dir%/../var/logs/"
   catrobat.invalidupload.dir:     "%kernel.root_dir%/../src/Catrobat/AppBundle/Commands/invisible_programs/"
   catrobat.max_version:           "0.996"
-  catrobat.max_description_upload_size: 4000
+  catrobat.max_description_upload_size: 4000 # also change in src/Catrobat/AppBundle/Listeners/DescriptionValidator.php
 
   #      This can drastically improve DX by reducing the time to load classes
   container.dumper.inline_class_loader: true
@@ -422,7 +422,7 @@ services:
     public: true
   Catrobat\AppBundle\RecommenderSystem\RecommenderManager: "@recommendermanager"
 
-  rudewordfilter:
+  wordfilter:
     class: Catrobat\AppBundle\Services\RudeWordFilter
     arguments:
     - "@rudewordrepository"
