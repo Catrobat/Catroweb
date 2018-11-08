@@ -5,12 +5,13 @@
   <meta name="robots" content="noindex,nofollow"/>
   <meta name="viewport" content="width=device-width">
   <title>Pocket Code Website {% block title %}{% endblock %}</title>
-  <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
-  
+
   <style>
-    #error {
+    #error
+    {
       margin-top: 0px;
       padding-top: 50px;
     }
@@ -20,13 +21,12 @@
 <body>
 
 
-
-  <article>
-    <div id="error">
-      <img src="{{ asset('images/symbols/error.png') }}" alt="An Error Occurred" />
-      <p>{{ "oldVersionError"|trans({}, "catroweb") }}</p>
-    </div>
-  </article>
+<article>
+  <div id="error">
+    <img src="{{ asset('images/symbols/error.png') }}" alt="An Error Occurred"/>
+    <p>{{ "oldVersionError"|trans({}, "catroweb") }}</p>
+  </div>
+</article>
 
 
 </body>

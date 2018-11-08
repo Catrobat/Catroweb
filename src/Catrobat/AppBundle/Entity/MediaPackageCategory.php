@@ -124,7 +124,7 @@ class MediaPackageCategory
         }
         $string .= ")";
 
-        return (string) $string;
+        return (string)$string;
       }
       else
       {

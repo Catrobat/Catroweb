@@ -1,42 +1,42 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 
 {% block body %}
-    {#<h1>{{ ("teachers.login.title")|trans({}, "catroweb") }}</h1>#}
-    <h1>Teachers</h1>
+  {#<h1>{{ ("teachers.login.title")|trans({}, "catroweb") }}</h1>#}
+  <h1>Teachers</h1>
 
-    <div id="teachers-login-container" style="text-align:center;line-height: 55px;">
-        <div class="size-large">
-            {#{{ ("teachers.login.description")|trans({}, "catroweb") }}#}
-            You may download templates here:
-        </div>
-        <table style="margin: auto; border-spacing: 10px; border-collapse: separate;">
-            {% for template in templates %}
-            <tr>
-                <td style="font-size: 18px;">
-                    {{ template.friendlyName }}
-                </td>
-                <td>
-                    <div>
-                        <a href="teachersDownload/{{ template.id }}.catrobat">
-                            <button class="login-button" style="display: block;margin:auto">Download</button>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        <div class="size-large">
-            <a href="teachersLogout">Logout from teachers area</a>
-        </div>
+  <div id="teachers-login-container" style="text-align:center;line-height: 55px;">
+    <div class="size-large">
+      {#{{ ("teachers.login.description")|trans({}, "catroweb") }}#}
+      You may download templates here:
     </div>
+    <table style="margin: auto; border-spacing: 10px; border-collapse: separate;">
+      {% for template in templates %}
+        <tr>
+          <td style="font-size: 18px;">
+            {{ template.friendlyName }}
+          </td>
+          <td>
+            <div>
+              <a href="teachersDownload/{{ template.id }}.catrobat">
+                <button class="login-button" style="display: block;margin:auto">Download</button>
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <div class="size-large">
+      <a href="teachersLogout">Logout from teachers area</a>
+    </div>
+  </div>
 
 {% endblock %}
 
 {% block js %}
-    <script src="{{ asset('js/custom/Help.js') }}"></script>
+  <script src="{{ asset('js/custom/Help.js') }}"></script>
 {% endblock %}

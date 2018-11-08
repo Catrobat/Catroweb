@@ -16,7 +16,8 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, $class);
   }
 
-  public function isPasswordValid($user, $password, $encoder) {
+  public function isPasswordValid($user, $password, $encoder)
+  {
 
     return $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());
   }

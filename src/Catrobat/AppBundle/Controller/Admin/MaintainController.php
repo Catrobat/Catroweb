@@ -10,11 +10,7 @@ use Catrobat\AppBundle\Commands\CleanLogsCommand;
 use Catrobat\AppBundle\Commands\CreateBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
@@ -181,28 +177,28 @@ class MaintainController extends Controller
     }
 
     //... use any methods or services to get statistics data
-    $removeableObjects = [];
+    $RemovableObjects = [];
 
     $description = "This will remove all extracted catrobat files in the 'extraced'-directory and flag the programs accordingly";
-    $rm = new RemoveableMemory("Extracted Catrobatfiles", $description);
+    $rm = new RemovableMemory("Extracted Catrobatfiles", $description);
     $this->setSizeOfObject($rm, $this->container->getParameter("catrobat.file.extract.dir"));
     $rm->setCommandName("Delete extracted files");
     $rm->setCommandLink($this->admin->generateUrl("extracted"));
-    $removeableObjects[] = $rm;
+    $RemovableObjects[] = $rm;
 
     $description = "This will remove all generated apk-files in the 'apk'-directory and flag the programs accordingly";
-    $rm = new RemoveableMemory("Generated APKs", $description);
+    $rm = new RemovableMemory("Generated APKs", $description);
     $this->setSizeOfObject($rm, $this->container->getParameter("catrobat.apk.dir"), ["apk"]);
     $rm->setCommandName("Delete APKs");
     $rm->setCommandLink($this->admin->generateUrl("apk"));
-    $removeableObjects[] = $rm;
+    $RemovableObjects[] = $rm;
 
     $description = "This will remove all backups stored on this server in the 'backup'-directory (" . $this->container->getParameter("catrobat.backup.dir") . ")";
-    $rm = new RemoveableMemory("Manual backups", $description);
+    $rm = new RemovableMemory("Manual backups", $description);
     $this->setSizeOfObject($rm, $this->container->getParameter("catrobat.backup.dir"), ["gz"]);
     $rm->setCommandName("Delete backups");
     $rm->setCommandLink($this->admin->generateUrl("delete_backups"));
-    $removeableObjects[] = $rm;
+    $RemovableObjects[] = $rm;
 
     $description = "This will create a backup which will be stored on this server in the 'backup'-directory (" . $this->container->getParameter("catrobat.backup.dir") . ")";
     $ac = new AdminCommand("Create backup", $description);
@@ -211,18 +207,18 @@ class MaintainController extends Controller
     $backupCommand = $ac;
 
     $description = "This will remove all log files.";
-    $rm = new RemoveableMemory("Logs", $description);
+    $rm = new RemovableMemory("Logs", $description);
     $this->setSizeOfObject($rm, $this->container->getParameter("catrobat.logs.dir"));
     $rm->setCommandName("Delete log files");
     $rm->setCommandLink($this->admin->generateUrl("delete_logs"));
     $rm->setArchiveCommandLink($this->admin->generateUrl("archive_logs"));
     $rm->setArchiveCommandName("Archive logs files");
-    $removeableObjects[] = $rm;
+    $RemovableObjects[] = $rm;
 
     $freeSpace = disk_free_space("/");
     $usedSpace = disk_total_space("/") - $freeSpace;
     $usedSpaceRaw = $usedSpace;
-    foreach ($removeableObjects as $obj)
+    foreach ($RemovableObjects as $obj)
     {
       $usedSpaceRaw -= $obj->size_raw;
     }
@@ -235,19 +231,24 @@ class MaintainController extends Controller
     $mediaPackageSize = $this->get_dir_size($this->container->getParameter('catrobat.mediapackage.dir'));
     $backupSize = $programsSize + $screenshotSize + $featuredImageSize + $mediaPackageSize;
 
-    return $this->render('Admin/maintain.html.twig', [
-      'RemoveableObjects'       => $removeableObjects,
-      'RemoveableBackupObjects' => $this->getBackupFileObjects(),
-      'wholeSpace'              => $this->getSymbolByQuantity($usedSpace + $freeSpace),
-      'usedSpace'               => $this->getSymbolByQuantity($usedSpaceRaw),
-      'usedSpace_raw'           => $usedSpaceRaw,
-      'freeSpace_raw'           => $freeSpace,
-      'freeSpace'               => $this->getSymbolByQuantity($freeSpace),
-      'programsSpace_raw'       => $programsSize,
-      'programsSpace'           => $this->getSymbolByQuantity($programsSize),
-      'ram'                     => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
-      'backupCommand'           => $backupCommand,
-      'backupSize'              => $this->getSymbolByQuantity($backupSize),
+    return $this->renderWithExtraParams('Admin/maintain.html.twig', [
+      'RemovableObjects'       => $RemovableObjects,
+      'RemovableBackupObjects' => $this->getBackupFileObjects(),
+      'wholeSpace'             => $this->getSymbolByQuantity($usedSpace + $freeSpace),
+      'usedSpace'              => $this->getSymbolByQuantity($usedSpaceRaw),
+      'usedSpace_raw'          => $usedSpaceRaw,
+      'freeSpace_raw'          => $freeSpace,
+      'freeSpace'              => $this->getSymbolByQuantity($freeSpace),
+      'programsSpace_raw'      => $programsSize,
+      'programsSpace'          => $this->getSymbolByQuantity($programsSize),
+      'usedRamPercentage'      => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
+      'wholeRam'               => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $2}'") * 1000),
+      'usedRam'                => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $3}'") * 1000),
+      'freeRam'                => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $4}'") * 1000),
+      'sharedRam'              => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $5}'") * 1000),
+      'cachedRam'              => $this->getSymbolByQuantity((float)shell_exec("free | grep Mem | awk '{print $6}'") * 1000),
+      'backupCommand'          => $backupCommand,
+      'backupSize'             => $this->getSymbolByQuantity($backupSize),
     ]);
   }
 
@@ -300,7 +301,7 @@ class MaintainController extends Controller
 
   private function setSizeOfObject(&$object, $path, $extension = null)
   {
-    /** @var RemoveableMemory $object */
+    /** @var RemovableMemory $object */
     if (is_dir($path))
     {
       $size = $this->get_dir_size($path, $extension);
@@ -335,12 +336,12 @@ class MaintainController extends Controller
   /**
    * @param $file
    *
-   * @return RemoveableMemory
+   * @return RemovableMemory
    */
   private function generateBackupObject($file)
   {
     $filename = pathinfo($file, PATHINFO_BASENAME);
-    $backupObject = new RemoveableMemory($filename, "created at: " . date("d.F.Y H:i:s", filemtime($file)));
+    $backupObject = new RemovableMemory($filename, "created at: " . date("d.F.Y H:i:s", filemtime($file)));
     $backupObject->setSizeRaw(filesize($file));
     $backupObject->setSize($this->getSymbolByQuantity($backupObject->size_raw));
     $backupObject->setCommandLink($this->admin->generateUrl("delete_backups", ["backupFile" => $filename]));
@@ -350,153 +351,4 @@ class MaintainController extends Controller
 
     return $backupObject;
   }
-}
-
-class RemoveableMemory
-{
-  public $name;
-  public $description;
-  public $size;
-  public $size_raw;
-  public $command_link;
-  public $command_name;
-  public $download_link;
-  public $execute_link;
-  public $archive_command_link;
-  public $archive_command_name;
-
-  public function __construct($name, $description)
-  {
-    $this->name = $name;
-    $this->description = $description;
-  }
-
-  /**
-   * @param mixed $size
-   */
-  public function setSize($size)
-  {
-    $this->size = $size;
-  }
-
-  /**
-   * @param mixed $size
-   */
-  public function setSizeRaw($size)
-  {
-    $this->size_raw = $size;
-  }
-
-  /**
-   * @param mixed $command
-   */
-  public function setCommandLink($command)
-  {
-    $this->command_link = $command;
-  }
-
-  /**
-   * @param mixed $command
-   */
-  public function setCommandName($command)
-  {
-    $this->command_name = $command;
-  }
-
-  /**
-   * @param mixed $download_link
-   */
-  public function setDownloadLink($download_link)
-  {
-    $this->download_link = $download_link;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getArchiveCommandLink()
-  {
-    return $this->archive_command_link;
-  }
-
-  /**
-   * @param mixed $archive_command_link
-   */
-  public function setArchiveCommandLink($archive_command_link)
-  {
-    $this->archive_command_link = $archive_command_link;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getArchiveCommandName()
-  {
-    return $this->archive_command_name;
-  }
-
-  /**
-   * @param mixed $archive_command_name
-   */
-  public function setArchiveCommandName($archive_command_name)
-  {
-    $this->archive_command_name = $archive_command_name;
-  }
-
-  /**
-   * @param mixed $execute_link
-   */
-  public function setExecuteLink($execute_link)
-  {
-    $this->execute_link = $execute_link;
-  }
-}
-
-class AdminCommand
-{
-  public $name;
-  public $description;
-  public $command_link;
-  public $progress_link;
-  public $command_name;
-
-  public function __construct($name, $description)
-  {
-    $this->name = $name;
-    $this->description = $description;
-  }
-
-  /**
-   * @param mixed $command
-   */
-  public function setCommandLink($command)
-  {
-    $this->command_link = $command;
-  }
-
-  /**
-   * @param mixed $command
-   */
-  public function setCommandName($command)
-  {
-    $this->command_name = $command;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getProgressLink()
-  {
-    return $this->progress_link;
-  }
-
-  /**
-   * @param mixed $progress_link
-   */
-  public function setProgressLink($progress_link)
-  {
-    $this->progress_link = $progress_link;
-  }
-
-
 }

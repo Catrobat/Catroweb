@@ -68,7 +68,6 @@ function Notification(notifications, unseenRemixesGroupedLength, markAsReadUrl, 
   
   self.markAsRead = function(id)
   {
-    console.log("markAsRead");
     $.ajax({
       url    : self.markAsReadUrl + "/" + id,
       type   : "get",

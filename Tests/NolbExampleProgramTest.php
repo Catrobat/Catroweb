@@ -56,6 +56,4 @@ class NolbExampleProgramTest extends \PHPUnit\Framework\TestCase
   }
 
 
-
-
 }

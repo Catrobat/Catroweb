@@ -12,12 +12,10 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
   self.apk_download_timeout = false
   
   self.getApkStatus = function () {
-    console.log("getApkStatus")
     $.get(self.status_url, null, self.onResult)
   }
   
   self.createApk = function () {
-    console.log("createApk")
     $('#apk-generate').addClass('d-none')
     $('#apk-pending').removeClass('d-none')
     $.get(self.create_url, null, self.onResult)
@@ -25,7 +23,6 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
   }
   
   self.onResult = function (data) {
-    console.log("onResult: " + JSON.stringify(data))
     let apkPending = $('#apk-pending')
     let apkDownload = $('#apk-download')
     let apkGenerate = $('#apk-generate')
@@ -48,23 +45,20 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
           top.location.href = self.apk_url
         }
       })
-      console.log("ready")
     }
     else if (data.status === 'pending')
     {
       apkPending.removeClass('d-none')
       setTimeout(self.getApkStatus, 5000)
-      console.log("pending")
     }
     else if (data.status === 'none')
     {
       apkGenerate.removeClass('d-none')
       apkGenerate.click(self.createApk)
-      console.log("none")
     }
-    else {
+    else
+    {
       apkGenerate.removeClass('d-none')
-      console.log("else")
     }
     
     let bgDarkPopupInfo = $('#bg-dark, #popup-info')
@@ -83,7 +77,7 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
   self.showUpdateAppPopup = function () {
     let popup_background = self.createPopupBackgroundDiv()
     let popup_div = self.createPopupDiv()
-    let body = $('body');
+    let body = $('body')
     popup_div.append('<h2>' + self.update_app_header + '</h2><br>')
     popup_div.append('<p>' + self.update_app_text + '</p>')
     
@@ -102,7 +96,7 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
   self.showPreparingApkPopup = function () {
     let popup_background = self.createPopupBackgroundDiv()
     let popup_div = self.createPopupDiv()
-    let body = $('body');
+    let body = $('body')
     
     popup_div.append('<h2>' + self.apk_preparing + '</h2><br>')
     popup_div.append('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">')

@@ -1,48 +1,46 @@
 imports:
-    - { resource: config.yml }
-    - { resource: parameters_dev.yml }
+- { resource: config.yml }
+- { resource: parameters_dev.yml }
 
 framework:
-    router:
-        resource: "%kernel.root_dir%/config/routing_dev.yml"
-        strict_requirements: true
-    profiler: { only_exceptions: false }
+  router:
+    resource: "%kernel.root_dir%/config/routing_dev.yml"
+    strict_requirements: true
+  profiler: { only_exceptions: false }
 
 web_profiler:
-    toolbar: true
-    intercept_redirects: false
+  toolbar: true
+  intercept_redirects: false
 
 monolog:
-    channels: ['upload', 'download_stats']
-    handlers:
-        upload:
-            type: rotating_file
-            path: '%kernel.logs_dir%/upload/upload.log'
-            level: error
-            max_files: 30
-            channels: [upload]
-        main:
-            type:  rotating_file
-            path:  '%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log'
-            level: info
-            max_files: 30
-        firephp:
-            type:  firephp
-            level: info
-        chromephp:
-            type:  chromephp
-            level: info
-        download_stats:
-            type:  rotating_file
-            path:  '%kernel.logs_dir%/download_stats/download_stats.log'
-            level: info
-            max_files: 30
-            channels: [download_stats]
+  channels: ['upload', 'download_stats']
+  handlers:
+    upload:
+      type: rotating_file
+      path: '%kernel.logs_dir%/upload/upload.log'
+      level: error
+      max_files: 30
+      channels: [upload]
+    main:
+      type:  rotating_file
+      path:  '%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log'
+      level: info
+      max_files: 30
+    firephp:
+      type:  firephp
+      level: info
+    chromephp:
+      type:  chromephp
+      level: info
+    download_stats:
+      type:  rotating_file
+      path:  '%kernel.logs_dir%/download_stats/download_stats.log'
+      level: info
+      max_files: 30
+      channels: [download_stats]
 
 bazinga_geocoder:
-    fake_ip:
-        enabled:              true
-        ip:                   88.116.169.222
+  fake_ip:
+    enabled:              true
+    ip:                   88.116.169.222
 
-#swiftmailer:
-#    delivery_address: me@example.com

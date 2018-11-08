@@ -1,30 +1,31 @@
 {% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
 {% block field %}
 
-    {% set codeObjects = admin.getContainingCodeObjects(object) %}
+  {% set codeObjects = admin.getContainingCodeObjects(object) %}
 
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <a data-toggle="collapse" href="#code">Code</a>
-            </div>
-            <div id="code" class="panel-collapse collapse">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a data-toggle="collapse" href="#code">Code</a>
+      </div>
+      <div id="code" class="panel-collapse collapse">
 
-                {% if codeObjects|length == 0 %}
-                    The program doesn't contain any code <span style="font-weight: 700;">OR</span> the program contains scenes (Viewing code of programs with scenes in the backend is not yet supported)
-                {% else %}
-                    {% autoescape false %}
-                    {% for codeObject in codeObjects %}
-                        <div class="panel-body">
-                            Object name: {{ codeObject.getName }} <br/>
-                            {{ codeObject.getCode }} <br/>
-                        </div>
-                    {% endfor %}
-                    {% endautoescape %}
-                {% endif %}
+        {% if codeObjects|length == 0 %}
+          The program doesn't contain any code <span
+            style="font-weight: 700;">OR</span> the program contains scenes (Viewing code of programs with scenes in the backend is not yet supported)
+        {% else %}
+          {% autoescape false %}
+            {% for codeObject in codeObjects %}
+              <div class="panel-body">
+                Object name: {{ codeObject.getName }} <br/>
+                {{ codeObject.getCode }} <br/>
+              </div>
+            {% endfor %}
+          {% endautoescape %}
+        {% endif %}
 
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
 {% endblock %}

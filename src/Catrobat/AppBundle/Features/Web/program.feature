@@ -73,7 +73,7 @@ Feature: As a visitor I want to see a program page
     And the "report-copyright" checkbox should be checked
 
   Scenario: report program when not logged in should bring me to login page,
-    but when logging in I should be returned to the program page and my report should be saved
+  but when logging in I should be returned to the program page and my report should be saved
     Given I am on "/pocketcode/program/1"
     And I click "#report-program-button"
     Then I should be on "/login"

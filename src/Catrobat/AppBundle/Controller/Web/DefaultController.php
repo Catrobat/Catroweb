@@ -26,7 +26,7 @@ class DefaultController extends Controller
      * @var $image_repository FeaturedImageRepository
      * @var $repository       FeaturedRepository
      * @var $user             User
-     * @var $item   FeaturedProgram
+     * @var $item             FeaturedProgram
      */
 
 

@@ -80,38 +80,38 @@
       <div class="programs"></div>
     </div>
 
-    {% endif %}
+  {% endif %}
 {% endblock %}
 
 {% block js %}
   <script>
     {% if theme() == 'pocketgalaxy' %}
-      let  sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam');
-      let submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam');
-      let related = new ProgramLoader('#related', '{{ path('api_search_programs') }}?q=galaxy');
+    let sample = new ProgramLoader('#sample', '{{ path('api_gamejam_sample_programs') }}?q=GalaxyGameJam')
+    let submissions = new ProgramLoader('#submissions', '{{ path('api_gamejam_submissions') }}?q=GalaxyGameJam')
+    let related = new ProgramLoader('#related', '{{ path('api_search_programs') }}?q=galaxy')
 
-      sample.init();
-      submissions.init();
-      related.init();
+    sample.init()
+    submissions.init()
+    related.init()
 
     {% else %}
-      let newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}')
-      let recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
-      let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId)
-      let mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
-      let mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
-      let random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
+    let newest = new ProgramLoader('#newest', '{{ path('api_recent_programs') }}')
+    let recommendedByPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::INDEX_PAGE') }};
+    let recommended = new ProgramLoader('#recommended', '{{ path('api_recsys_general_programs') }}', undefined, undefined, recommendedByPageId)
+    let mostDownloaded = new ProgramLoader('#mostDownloaded', '{{ path('api_most_downloaded_programs') }}')
+    let mostViewed = new ProgramLoader('#mostViewed', '{{ path('api_most_viewed_programs') }}')
+    let random = new ProgramLoader('#random', '{{ path('api_random_programs') }}')
 
-      newest.init()
-      recommended.init()
-      mostDownloaded.init()
-      mostViewed.init()
-      random.init()
+    newest.init()
+    recommended.init()
+    mostDownloaded.init()
+    mostViewed.init()
+    random.init()
 
     {% endif %}
 
 
-    function performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, programID)
+    function performClickStatisticRequest (href, type, isRecommendedProgram, userSpecificRecommendation, programID)
     {
       let url = "{{ path('click_stats') }}"
       let params = {}
@@ -137,21 +137,21 @@
         }
       }
 
-      $.post(url, params, function(data) {
+      $.post(url, params, function (data) {
         if (data === 'error')
         {
           console.log('No click statistic is created!')
         }
-      }).always(function() {
+      }).always(function () {
         window.location.href = href
       })
-      .fail(function(data) {
+      .fail(function (data) {
         console.log(data)
       })
 
     }
 
-    $(document).on('click', '.program', function() {
+    $(document).on('click', '.program', function () {
       let clicked_program_id = this.id.replace('program-', '')
       this.className += ' visited-program'
       let stored_visits = sessionStorage.getItem('visits')
@@ -172,7 +172,7 @@
       }
     })
 
-    $(document).one('click', '#feature-slider > div > div > a', function(event) {
+    $(document).one('click', '#feature-slider > div > div > a', function (event) {
       event.preventDefault()
       let href = $(this).attr('href')
       let programID = ((href.indexOf('program') > 0) ? (href.split('program')[1].match(/[0-9]+/))[0] : 0)
@@ -180,7 +180,7 @@
       performClickStatisticRequest(href, type, false, 0, programID)
     })
 
-    $(document).one('click', '.rec-programs', function(event) {
+    $(document).one('click', '.rec-programs', function (event) {
       event.preventDefault()
       let isRecommendedProgram = $(this).hasClass('homepage-recommended-programs')
       let type = (isRecommendedProgram ? 'rec_homepage' : $(this).parent('.program').parent('.programs').parent().attr('id'))
@@ -190,16 +190,16 @@
       performClickStatisticRequest(href, type, isRecommendedProgram, userSpecificRecommendation, recommendedProgramID)
     })
 
-    $(document).on('click', '#help-button', function() {
+    $(document).on('click', '#help-button', function () {
       swal({
           title            : $(this).attr('data-help-title'),
           text             : $(this).attr('data-help-description'),
           showCancelButton : false,
           confirmButtonText: "{{ "ok"|trans({}, "catroweb") }}",
           closeOnConfirm   : true,
-          type             : "question",
+          type             : 'question',
         },
-        function() {
+        function () {
         }
       )
     })

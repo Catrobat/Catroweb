@@ -54,6 +54,6 @@ class ExtensionController extends Controller
 
     $url = $this->admin->generateUrl("extensions");
 
-    return $this->render('Admin/extension.html.twig', ['url' => $url]);
+    return $this->renderWithExtraParams('Admin/extension.html.twig', ['url' => $url]);
   }
 }

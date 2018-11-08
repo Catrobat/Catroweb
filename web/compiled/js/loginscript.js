@@ -11,7 +11,6 @@ $(document).ready(function () {
         );
         $.get($ajaxGetFBAppId,
             function (data) {
-                console.log(data);
                 $appid = data['fb_appid'];
                 FB.init({
                     appId: $appid,
@@ -49,7 +48,6 @@ function triggerFacebookLogin() {
 }
 
 function checkLoginState() {
-  console.log("checkLoginState");
   FB.getLoginStatus(function (response) {
     statusChangeCallback(response);
   });
@@ -72,12 +70,12 @@ function statusChangeCallback(response) {
 function getFacebookUserInfo() {
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function (response) {
-    console.log('Successful login for: ' + response.name);
-    console.log("First name:" + response.first_name);
-    console.log("Last name:" + response.last_name);
-    console.log("Name:" + response.name);
-    console.log("Response ID:" + response.id);
-    console.log("Country:" + response.locale);
+    //console.log('Successful login for: ' + response.name);
+    //console.log("First name:" + response.first_name);
+    //console.log("Last name:" + response.last_name);
+    //console.log("Name:" + response.name);
+    //console.log("Response ID:" + response.id);
+    //console.log("Country:" + response.locale);
 
     $("#id_oauth").val(response.id);
     $("#email_oauth").val(response.email);
@@ -102,7 +100,6 @@ var handleFacebookUserInfoResponseTrigger = function handleFacebookUserInfoRespo
       id: $id
     },
     function (data, status) {
-      console.log(data);
       console.log(status);
       var $server_token_available = data['token_available'];
       if (!$server_token_available) {
@@ -115,7 +112,6 @@ var handleFacebookUserInfoResponseTrigger = function handleFacebookUserInfoRespo
             email: $email
           },
           function (data, status) {
-            console.log(data);
             console.log(status);
 
             if(data['email_available'] == false) {
@@ -153,7 +149,6 @@ function sendTokenToServer($token, $facebook_id, $username, $email, $locale) {
       locale: $locale
     },
     function (data, status) {
-      console.log(data);
       console.log(status);
       FacebookLogin($email, $username, $facebook_id, $locale);
     });
@@ -181,7 +176,6 @@ function FacebookLogin($email, $username, $id, $locale) {
         {
           fb_id: $id
         }, function (data, status) {
-          console.log(data);
           $url = data['url'];
           $(location).attr('href', $url);
         });
@@ -218,9 +212,9 @@ function FacebookLogout() {
 function onMySignIn(googleUser) {
 
     // Useful data for your client-side scripts:
-    var profile = googleUser.getBasicProfile();
+    let profile = googleUser.getBasicProfile();
     // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
+    let id_token = googleUser.getAuthResponse().id_token;
 
     $("#email_oauth").val(profile.getEmail());
     $("#id_oauth").val(profile.getId());
@@ -232,7 +226,7 @@ function onMySignIn(googleUser) {
 function triggerGoogleLogin(){
 
     // This option is used to allow switching between multiple google accounts!
-    var options = new gapi.auth2.SigninOptionsBuilder();
+    let options = new gapi.auth2.SigninOptionsBuilder();
     options.setPrompt('select_account');
 
     // Sign in
@@ -256,7 +250,7 @@ function checkGoogleCallbackDataWithServer() {
   $email = $("#email_oauth").val();
   $locale = $("#locale_oauth").val();
 
-  var $ajaxUrlCheckServerTokenAvailable = Routing.generate(
+  let $ajaxUrlCheckServerTokenAvailable = Routing.generate(
     'catrobat_oauth_login_google_servertoken_available', {flavor: 'pocketcode'}
   );
   $.post($ajaxUrlCheckServerTokenAvailable,
@@ -264,13 +258,13 @@ function checkGoogleCallbackDataWithServer() {
       id: $id
     },
     function (data) {
-      var $server_token_available = data['token_available'];
+      let $server_token_available = data['token_available'];
       if (!$server_token_available) {
         $("#id_oauth").val($id);
         $("#email_oauth").val($email);
         $("#locale_oauth").val($locale);
 
-        var $ajaxUrlCheckEmailAvailable = Routing.generate(
+        let $ajaxUrlCheckEmailAvailable = Routing.generate(
           'catrobat_oauth_login_email_available', {flavor: 'pocketcode'}
         );
         $.post($ajaxUrlCheckEmailAvailable,
@@ -279,7 +273,7 @@ function checkGoogleCallbackDataWithServer() {
           },
           function (data, status) {
 
-            if(data['email_available'] == false) {
+            if(data['email_available'] === false) {
               getDesiredUsernameGoogle();
             } else {
               sendCodeToServer($("#access_token_oauth").val(), $id, data['username'], $email, $locale);
@@ -300,7 +294,7 @@ function getDesiredUsernameGoogle() {
 function sendCodeToServer($id_token, $gplus_id, $username, $email, $locale) {
   console.log('sendCodeToServer');
 
-  var $ajaxUrl = Routing.generate(
+  let $ajaxUrl = Routing.generate(
     'catrobat_oauth_login_google_code', {flavor: 'pocketcode'}
   );
 
@@ -320,7 +314,7 @@ function sendCodeToServer($id_token, $gplus_id, $username, $email, $locale) {
 function GoogleLogin($email, $username, $id, $locale) {
   console.log('GoogleLogin');
 
-  var $ajaxUrl = Routing.generate(
+  let $ajaxUrl = Routing.generate(
     'catrobat_oauth_login_google', {flavor: 'pocketcode'}
   );
 
@@ -332,7 +326,7 @@ function GoogleLogin($email, $username, $id, $locale) {
       locale: $locale
     },
     function (data, status) {
-      var $ajaxLoginRedirectUrl = Routing.generate(
+      let $ajaxLoginRedirectUrl = Routing.generate(
         'catrobat_oauth_login_redirect', {flavor: 'pocketcode'}
       );
 
@@ -349,13 +343,13 @@ function GoogleLogin($email, $username, $id, $locale) {
 // ToDo never called
 function GoogleLogout() {
   console.log('GoogleLogout');
-  var $appid = '';
-  var $ajaxGetGoogleAppId = Routing.generate(
+  let $appid = '';
+  let $ajaxGetGoogleAppId = Routing.generate(
     'catrobat_oauth_login_get_google_appid', {flavor: 'pocketcode'}
   );
   $.get($ajaxGetGoogleAppId,
     function (data) {
-      var sessionParams = {
+      let sessionParams = {
         'client_id': data['gplus_appid'],
         'session_state': null
       };
@@ -386,7 +380,7 @@ function GoogleLogout() {
 
     $('#btn_oauth_username').click(function() {
 
-        var $ajaxUrl = Routing.generate(
+        let $ajaxUrl = Routing.generate(
             'catrobat_oauth_login_username_available', {flavor: 'pocketcode'}
         );
 
@@ -411,20 +405,19 @@ function GoogleLogout() {
 
     });
 
-    if($( "#csrf_token_oauth" ).val() == '') {
-        var $ajaxUrl = Routing.generate(
+    if($( "#csrf_token_oauth" ).val() === '') {
+        let $ajaxUrl = Routing.generate(
             'catrobat_oauth_register_get_csrftoken', {flavor: 'pocketcode'}
         );
         $.get($ajaxUrl,
             function (data) {
-                console.log(data);
                 $( "#csrf_token_oauth" ).val(data['csrf_token']);
             });
     }
 });
 
 $(function() {
-    var $dialogSelector = $( "#dialog-oauth-username" );
+    let $dialogSelector = $( "#dialog-oauth-username" );
     if ($dialogSelector.length) {
         $dialogSelector.dialog({
             autoOpen: false
@@ -435,7 +428,7 @@ $(function() {
 function openDialog() {
     $( "#dialog-oauth-username" ).dialog( "open" );
 
-    var dark_background = $('<div id="bg-dark"></div>');
+    let dark_background = $('<div id="bg-dark"></div>');
     dark_background.css({
         'position': 'fixed',
         'width': '100%',

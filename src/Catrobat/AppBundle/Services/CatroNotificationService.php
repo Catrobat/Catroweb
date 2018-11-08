@@ -86,7 +86,8 @@ class CatroNotificationService
    */
   public function addNotifications($notifications)
   {
-    foreach ($notifications as $notification) {
+    foreach ($notifications as $notification)
+    {
       $this->em->persist($notification);
     }
     $this->em->flush();

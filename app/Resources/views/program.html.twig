@@ -413,7 +413,7 @@
 
   <script>
 
-    $(function() {
+    $(function () {
       var copy_button = $('.btn-copy')
 
       copy_button.tooltip({
@@ -422,14 +422,14 @@
         container: '.btn-copy'
       })
 
-      copy_button.on('shown.bs.tooltip', function() {
-        setTimeout(function() {
+      copy_button.on('shown.bs.tooltip', function () {
+        setTimeout(function () {
           copy_button.tooltip('hide')
         }, 1000)
       })
 
       var cb = new Clipboard('.btn-copy')
-      cb.on('success', function() {
+      cb.on('success', function () {
         copy_button
         .attr('data-original-title', '{{ "clipboard.success"|trans({}, "catroweb") }}')
         .addClass('tooltip-success')
@@ -438,7 +438,7 @@
         $('.btn-copy +.tooltip .tooltip-inner').prepend('<i class=\'fa fa-check\' style=\'padding-right: 1em\'></i>')
       })
 
-      cb.on('error', function() {
+      cb.on('error', function () {
         copy_button
         .attr('data-original-title', '{{ "clipboard.fail"|trans({}, "catroweb") }}')
         .addClass('tooltip-danger')
@@ -458,18 +458,18 @@
 
     var download_href = document.getElementById('url-download').href
 
-    function blockEventListener(event)
+    function blockEventListener (event)
     {
       event.preventDefault()
     }
 
-    $(document).on('click', '#url-download', function() {
+    $(document).on('click', '#url-download', function () {
       var url_link = document.getElementById('url-download')
       if (url_link.href !== 'javascript:void(0)')
       {
         url_link.href = 'javascript:void(0)'
 
-        setTimeout(function() {
+        setTimeout(function () {
           url_link.href = download_href
         }, 5000)
 
@@ -502,7 +502,7 @@
 
     var PROGRAM_LIKE_TYPE_NONE = {{ constant('Catrobat\\AppBundle\\Entity\\ProgramLike::TYPE_NONE') }};
 
-    function convertToHumanFriendlyNumberText(number)
+    function convertToHumanFriendlyNumberText (number)
     {
       if (number >= 10000)
       {
@@ -518,9 +518,9 @@
       }
     }
 
-    function updateLikeCount(likeType, likeTypeCount, totalLikeCount)
+    function updateLikeCount (likeType, likeTypeCount, totalLikeCount)
     {
-      var programLikeDetailContainer = $('#program-like-detail-container');
+      var programLikeDetailContainer = $('#program-like-detail-container')
       $('a.program-like-button').addClass('not-selected')
       $('#program-like-buttons-container > .program-like-counter').text(convertToHumanFriendlyNumberText(totalLikeCount))
       if (likeType === PROGRAM_LIKE_TYPE_NONE)
@@ -537,7 +537,7 @@
       programLikeDetailContainer.html(translatedDetailText)
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
       var loadingAnimation = new LoadingAnimation('#177f8d', "{{ "pleaseWait"|trans({}, "catroweb") }}")
       var recommendedByRemixGraphPageId = {{ constant('Catrobat\\AppBundle\\RecommenderSystem\\RecommendedPageId::PROGRAM_DETAIL_PAGE_REMIX_GRAPH') }};
       var networkDirector = new NetworkDirector()
@@ -552,7 +552,7 @@
         animatedIn : 'zoomInUp',
         animatedOut: 'bounceOutDown',
         color      : '#177f8d',
-        beforeOpen : function() {
+        beforeOpen : function () {
           remixGraph.destroy()
           if (cachedRemixData != null)
           {
@@ -567,7 +567,7 @@
             $.ajax({
               url    : "{{ path('program_remix_graph', { 'id' : program.id }) }}",
               type   : 'get',
-              success: function(remixData) {
+              success: function (remixData) {
                 cachedRemixData = remixData
                 document.addEventListener('gesturestart', blockEventListener)
                 document.ontouchmove = blockEventListener
@@ -575,22 +575,22 @@
                 var networkDescription = networkDirector.construct(networkBuilder)
                 remixGraph.render(loadingAnimation, networkDescription)
               },
-              error  : function() {
+              error  : function () {
                 alert('Unable to fetch remix-graph!')
               }
             })
           }
           console.log('The animation was called')
         },
-        afterOpen  : function() {
+        afterOpen  : function () {
           loadingAnimation.show()
           console.log('The animation is completed')
         },
-        beforeClose: function() {
+        beforeClose: function () {
           console.log('The animation was called')
           loadingAnimation.hide()
         },
-        afterClose : function() {
+        afterClose : function () {
           console.log('The animation is completed')
           document.removeEventListener('gesturestart', blockEventListener)
           document.ontouchmove = null
@@ -598,11 +598,11 @@
         }
       })
 
-      $(document).on('click', '#remix-graph-button', function() {
+      $(document).on('click', '#remix-graph-button', function () {
         $('#remix-graph-modal-link').click()
       })
 
-      $(document).on('click', 'a.program-like-button', function(event) {
+      $(document).on('click', 'a.program-like-button', function (event) {
         event.preventDefault()
         var type = $(this).attr('data-like-type')
         var url = "{{ path('program_like', { 'id' : program.id }) }}?type=" + type
@@ -621,7 +621,7 @@
           url    : url,
           type   : 'get',
           data   : {type: type},
-          success: function(data) {
+          success: function (data) {
             if (data.statusCode !== {{ constant('Catrobat\\AppBundle\\StatusCode::OK') }})
             {
               if (data.statusCode === {{ constant('Catrobat\\AppBundle\\StatusCode::LOGIN_ERROR') }})
@@ -635,7 +635,7 @@
             }
             updateLikeCount(data.data.likeType, data.data.likeTypeCount, data.data.totalLikeCount)
           },
-          error  : function() {
+          error  : function () {
             alert('something went terribly wrong')
             $(this).addClass('not-selected')
           }
@@ -643,7 +643,7 @@
         return false
       })
 
-      $(document).on('click', '#nolb-submission-button', function() {
+      $(document).on('click', '#nolb-submission-button', function () {
         var username = "{{ user_name }}"
         var programURL = "{{ program_url }}"
         var nolbSubmissionProjectId = $('#nolb-submission-project-id')
@@ -661,7 +661,7 @@
           crossDomain: true,
           url        : 'https://www.pmdnolb.cloud/?r=service/upload_program',
           data       : JSON.stringify({username: username, PID: projectID, progurl: programURL}),
-          success    : function(data) {
+          success    : function (data) {
             var response = JSON.parse(data)
             if (response.code === 1)
             {
@@ -673,29 +673,29 @@
             }
 
           },
-          error      : function() {
+          error      : function () {
           }
         })
         $('#nolb-submission-box').hide()
       })
 
-      $(document).on('click', '#nolb-submission-successful-ok', function() {
+      $(document).on('click', '#nolb-submission-successful-ok', function () {
         $('#nolb-submission-successful').hide()
       })
 
-      $(document).on('click', '#nolb-submission-failed-ok', function() {
+      $(document).on('click', '#nolb-submission-failed-ok', function () {
         $('#nolb-submission-failed').hide()
       })
 
-      $(document).on('click', '#nolb-project-button', function() {
+      $(document).on('click', '#nolb-project-button', function () {
         $('#nolb-submission-box').show()
       })
 
-      $(document).on('click', '#nolb-submission-box-cancel', function() {
+      $(document).on('click', '#nolb-submission-box-cancel', function () {
         $('#nolb-submission-box').hide()
       })
 
-      $(document).one('click', '.rec-programs', function(event) {
+      $(document).one('click', '.rec-programs', function (event) {
 
         event.preventDefault()
 
@@ -731,12 +731,12 @@
           type     : type,
           recFromID: {{ program.id }},
           recID    : additions
-        }, function(data) {
+        }, function (data) {
           if (data === 'error')
           {
             console.log('No click statistic is created!')
           }
-        }).fail(function(data) {
+        }).fail(function (data) {
           console.log(data)
         })
 
@@ -744,12 +744,12 @@
       })
     })
 
-    $(function() {
+    $(function () {
 
       var backdrop = $('.backdrop')
       var actionArrow = $('#actionArrow')
       var masterfab = $('#masterfab')
-      $('.fab,.backdrop').click(function() {
+      $('.fab,.backdrop').click(function () {
         if (backdrop.is(':visible'))
         {
           backdrop.fadeOut(125)
@@ -760,7 +760,7 @@
           .animate({
             bottom : masterfab.css('bottom'),
             opacity: 0
-          }, 125, function() {
+          }, 125, function () {
             $(this).hide()
           })
         }
@@ -769,7 +769,7 @@
           backdrop.fadeIn(125)
           actionArrow.removeClass('fa-angle-up')
           actionArrow.addClass('fa-angle-down')
-          $('.fab.child').each(function() {
+          $('.fab.child').each(function () {
             $(this)
             .stop()
             .show()

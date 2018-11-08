@@ -60,15 +60,15 @@ class ReportedProgramsAdmin extends AbstractAdmin
       ->add('reportingUser', EntityType::class, ['class' => User::class])
       ->add('program', EntityType::class,
         [
-          'class' => Program::class,
+          'class'      => Program::class,
           'admin_code' => 'catrowebadmin.block.programs.all',
-          'editable' => false
+          'editable'   => false,
         ])
       ->add('program.visible', 'boolean', ['editable' => true])
       ->add('_action', 'actions', ['actions' => [
-        'show' => ['template' => 'CRUD/list__action_show_reported_program_details.html.twig'],
-        'edit' => [],
-        'unreportProgram' => ['template' => 'CRUD/list__action_unreportProgram.html.twig']
+        'show'            => ['template' => 'CRUD/list__action_show_reported_program_details.html.twig'],
+        'edit'            => [],
+        'unreportProgram' => ['template' => 'CRUD/list__action_unreportProgram.html.twig'],
       ]]);
   }
 

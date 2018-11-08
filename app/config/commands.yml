@@ -1,181 +1,201 @@
 services:
-      catrowebadmin.filesystem:
-              class: Symfony\Component\Filesystem\Filesystem
-              public: false
+  catrowebadmin.filesystem:
+    class: Symfony\Component\Filesystem\Filesystem
+    public: false
 
-      catrowebadmin.command.clean.oldapk:
-              class: Catrobat\AppBundle\Commands\CleanOldApkCommand
-              tags:
-              -  { name: console.command }
+  catrowebadmin.command.clean.oldapk:
+    class: Catrobat\AppBundle\Commands\CleanOldApkCommand
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.clean.apk:
-              class: Catrobat\AppBundle\Commands\CleanApkCommand
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.clean.apk:
+    class: Catrobat\AppBundle\Commands\CleanApkCommand
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.clean.backup:
-              class: Catrobat\AppBundle\Commands\CleanBackupsCommand
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.clean.backup:
+    class: Catrobat\AppBundle\Commands\CleanBackupsCommand
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.clean.extracted:
-              class: Catrobat\AppBundle\Commands\CleanExtractedFileCommand
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.clean.extracted:
+    class: Catrobat\AppBundle\Commands\CleanExtractedFileCommand
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.clean.invalid:
-              class: Catrobat\AppBundle\Commands\InvalidFileUploadCleanupCommand
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.clean.invalid:
+    class: Catrobat\AppBundle\Commands\InvalidFileUploadCleanupCommand
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.clean.invalid.revert:
-              class: Catrobat\AppBundle\Commands\InvalidFileUploadCleanupCommand
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.clean.invalid.revert:
+    class: Catrobat\AppBundle\Commands\InvalidFileUploadCleanupCommand
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.init:
-              class: Catrobat\AppBundle\Commands\InitDirectoriesCommand
-              arguments: ["@catrowebadmin.filesystem","%catrobat.file.storage.dir%"]
-              calls:
-                - [setProgramfileDirectory, ["%catrobat.file.storage.dir%"]]
-                - [setExtractDirectory, ["%catrobat.file.extract.dir%"]]
-                - [setScreenshotDirectory, ["%catrobat.screenshot.dir%"]]
-                - [setThumbnailDirectory, ["%catrobat.thumbnail.dir%"]]
-                - [setMediaPackageDirectory, ["%catrobat.mediapackage.dir%"]]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.init:
+    class: Catrobat\AppBundle\Commands\InitDirectoriesCommand
+    arguments:
+    - "@catrowebadmin.filesystem"
+    - "%catrobat.file.storage.dir%"
+    calls:
+    - [setProgramfileDirectory, ["%catrobat.file.storage.dir%"]]
+    - [setExtractDirectory, ["%catrobat.file.extract.dir%"]]
+    - [setScreenshotDirectory, ["%catrobat.screenshot.dir%"]]
+    - [setThumbnailDirectory, ["%catrobat.thumbnail.dir%"]]
+    - [setMediaPackageDirectory, ["%catrobat.mediapackage.dir%"]]
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.import:
-              class: Catrobat\AppBundle\Commands\ProgramImportCommand
-              arguments: ["@catrowebadmin.filesystem","@usermanager","@programmanager.remix_manipulation"]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.import:
+    class: Catrobat\AppBundle\Commands\ProgramImportCommand
+    arguments:
+    - "@catrowebadmin.filesystem"
+    - "@usermanager"
+    - "@programmanager.remix_manipulation"
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.refresh:
-              class: Catrobat\AppBundle\Commands\RefreshCommand
-              arguments: ["@catrowebadmin.filesystem"]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.refresh:
+    class: Catrobat\AppBundle\Commands\RefreshCommand
+    arguments:
+    - "@catrowebadmin.filesystem"
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.command.drop.migration:
-              class: Catrobat\AppBundle\Commands\DropMigrationCommand
-              arguments: ["@migrationmanager"]
-              tags:
-                - { name: console.command }
+  catrowebadmin.command.drop.migration:
+    class: Catrobat\AppBundle\Commands\DropMigrationCommand
+    arguments:
+    - "@migrationmanager"
+    tags:
+    - { name: console.command }
 
-      command.reset:
-              class: Catrobat\AppBundle\Commands\ResetCommand
-              tags:
-                -  { name: console.command }
+  command.reset:
+    class: Catrobat\AppBundle\Commands\ResetCommand
+    tags:
+    - { name: console.command }
 
-      command.import.webshare:
-              class: Catrobat\AppBundle\Commands\WebShareProgramImport
-              tags:
-                -  { name: console.command }
+  command.import.webshare:
+    class: Catrobat\AppBundle\Commands\WebShareProgramImport
+    tags:
+    - { name: console.command }
 
-      command.purge:
-              class: Catrobat\AppBundle\Commands\PurgeCommand
-              tags:
-                -  { name: console.command }
+  command.purge:
+    class: Catrobat\AppBundle\Commands\PurgeCommand
+    tags:
+    - { name: console.command }
 
-      command.backup.create:
-              class: Catrobat\AppBundle\Commands\CreateBackupCommand
-              tags:
-                -  { name: console.command }
+  command.backup.create:
+    class: Catrobat\AppBundle\Commands\CreateBackupCommand
+    tags:
+    - { name: console.command }
 
-      command.backup.restore:
-              class: Catrobat\AppBundle\Commands\RestoreBackupCommand
-              tags:
-                -  { name: console.command }
+  command.backup.restore:
+    class: Catrobat\AppBundle\Commands\RestoreBackupCommand
+    tags:
+    - { name: console.command }
 
 
-      catrowebadmin.command.import.legacy:
-              class: Catrobat\AppBundle\Commands\ImportLegacyCommand
-              arguments:
-                  - "@catrowebadmin.filesystem"
-                  - "@usermanager"
-                  - "@programmanager"
-                  - "@remixmanager"
-                  - "@doctrine.orm.entity_manager"
-              tags:
-                -  { name: console.command }
+  catrowebadmin.command.import.legacy:
+    class: Catrobat\AppBundle\Commands\ImportLegacyCommand
+    arguments:
+    - "@catrowebadmin.filesystem"
+    - "@usermanager"
+    - "@programmanager"
+    - "@remixmanager"
+    - "@doctrine.orm.entity_manager"
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.create.constant.tags:
-              class: Catrobat\AppBundle\Commands\CreateConstantTagsCommand
-              arguments: ["@doctrine.orm.entity_manager", "@translator"]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.create.constant.tags:
+    class: Catrobat\AppBundle\Commands\CreateConstantTagsCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@translator"
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.create.program.extensions:
-              class: Catrobat\AppBundle\Commands\CreateProgramExtensionsCommand
-              arguments: ["@doctrine.orm.entity_manager", "%catrobat.file.storage.dir%", "@programrepository"]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.create.program.extensions:
+    class: Catrobat\AppBundle\Commands\CreateProgramExtensionsCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "%catrobat.file.storage.dir%"
+    - "@programrepository"
+    tags:
+    - { name: console.command }
 
-      command.nolbuser.create:
-              class: Catrobat\AppBundle\Commands\CreateNolbUserCommand
-              arguments: ["@doctrine.orm.entity_manager"]
-              tags:
-                  -  { name: console.command }
+  command.nolbuser.create:
+    class: Catrobat\AppBundle\Commands\CreateNolbUserCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    tags:
+    - { name: console.command }
 
-      command.nolbuser.delete:
-              class: Catrobat\AppBundle\Commands\DeleteNolbUserCommand
-              arguments: ["@usermanager"]
-              tags:
-                  -  { name: console.command }
+  command.nolbuser.delete:
+    class: Catrobat\AppBundle\Commands\DeleteNolbUserCommand
+    arguments:
+    - "@usermanager"
+    tags:
+    - { name: console.command }
 
-      command.nolbuser.changepassword:
-              class: Catrobat\AppBundle\Commands\ChangeNolbUserPasswordCommand
-              arguments: ["@doctrine.orm.entity_manager"]
-              tags:
-                  -  { name: console.command }
+  command.nolbuser.changepassword:
+    class: Catrobat\AppBundle\Commands\ChangeNolbUserPasswordCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    tags:
+    - { name: console.command }
 
-      command.nolbuser.generate:
-              class: Catrobat\AppBundle\Commands\GenerateNolbUserCommand
-              arguments: ["@doctrine.orm.entity_manager"]
-              tags:
-                  -  { name: console.command }
+  command.nolbuser.generate:
+    class: Catrobat\AppBundle\Commands\GenerateNolbUserCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    tags:
+    - { name: console.command }
 
-      command.remixgraph.migrate:
-              class: Catrobat\AppBundle\Commands\MigrateRemixGraphsCommand
-              arguments:
-                  - "@catrowebadmin.filesystem"
-                  - "@usermanager"
-                  - "@programmanager"
-                  - "@remixmanager"
-                  - "@doctrine.orm.entity_manager"
-                  - "%kernel.root_dir%"
-              tags:
-                -  { name: console.command }
+  command.remixgraph.migrate:
+    class: Catrobat\AppBundle\Commands\MigrateRemixGraphsCommand
+    arguments:
+    - "@catrowebadmin.filesystem"
+    - "@usermanager"
+    - "@programmanager"
+    - "@remixmanager"
+    - "@doctrine.orm.entity_manager"
+    - "%kernel.root_dir%"
+    tags:
+    - { name: console.command }
 
-      command.recommender.compute:
-              class: Catrobat\AppBundle\Commands\RecommenderUserSimilaritiesCommand
-              arguments:
-                  - "@usermanager"
-                  - "@recommendermanager"
-                  - "@doctrine.orm.entity_manager"
-                  - "%kernel.root_dir%"
-              tags:
-                -  { name: console.command }
+  command.recommender.compute:
+    class: Catrobat\AppBundle\Commands\RecommenderUserSimilaritiesCommand
+    arguments:
+    - "@usermanager"
+    - "@recommendermanager"
+    - "@doctrine.orm.entity_manager"
+    - "%kernel.root_dir%"
+    tags:
+    - { name: console.command }
 
-      command.recommender.export:
-              class: Catrobat\AppBundle\Commands\CSVUserSimilaritiesCommand
-              arguments:
-                  - "@programremixrepository"
-                  - "@programlikerepository"
-                  - "@doctrine.orm.entity_manager"
-                  - "%kernel.root_dir%"
-              tags:
-                -  { name: console.command }
+  command.recommender.export:
+    class: Catrobat\AppBundle\Commands\CSVUserSimilaritiesCommand
+    arguments:
+    - "@programremixrepository"
+    - "@programlikerepository"
+    - "@doctrine.orm.entity_manager"
+    - "%kernel.root_dir%"
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.reflavor.extension:
-              class: Catrobat\AppBundle\Commands\ReflavorExtensionCommand
-              arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.reflavor.extension:
+    class: Catrobat\AppBundle\Commands\ReflavorExtensionCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@programrepository"
+    tags:
+    - { name: console.command }
 
-      catrowebadmin.reflavor.nolb:
-              class: Catrobat\AppBundle\Commands\ReflavorNolbCommand
-              arguments: ["@doctrine.orm.entity_manager", "@programrepository"]
-              tags:
-                -  { name: console.command }
+  catrowebadmin.reflavor.nolb:
+    class: Catrobat\AppBundle\Commands\ReflavorNolbCommand
+    arguments:
+    - "@doctrine.orm.entity_manager"
+    - "@programrepository"
+    tags:
+    - { name: console.command }

@@ -50,7 +50,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
       ->add('text')
       ->add('username')
       ->add('_action', 'actions', ['actions' => [
-        'delete'   => ['template' => 'CRUD/list__action_delete_comment.html.twig'],
+        'delete'          => ['template' => 'CRUD/list__action_delete_comment.html.twig'],
         'unreportComment' => ['template' => 'CRUD/list__action_unreportComment.html.twig'],
       ]]);
   }

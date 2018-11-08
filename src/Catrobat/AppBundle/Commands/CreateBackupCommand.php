@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -89,10 +90,8 @@ class CreateBackupCommand extends ContainerAwareCommand
     $progress->advance();
     $progress->setMessage('Permissions set.');
 
-
     unlink($sql_path);
     $progress->setMessage("Temp sql file deleted. Finished!\n Backupfile created at " . $zip_path . "\n");
     $progress->finish();
-
   }
 }

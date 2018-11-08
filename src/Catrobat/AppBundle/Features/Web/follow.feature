@@ -3,23 +3,23 @@ Feature: Follow feature on profiles
 
   Background:
     Given there are users:
-      | name      | password | token       | email               |
-      | Catrobat  | 123456   | cccccccccc  | dev1@pocketcode.org |
-      | Catrobat2 | 123456   | dddddddddd  | dev2@pocketcode.org |
-      | Catrobat3 | 123456   | eeeeeeeeee  | dev3@pocketcode.org |
-      | Catrobat4 | 123456   | ffffffffff  | dev4@pocketcode.org |
-      | Catrobat5 | 123456   | gggggggggg  | dev5@pocketcode.org |
-      | Catrobat6 | 123456   | hhhhhhhhhh  | dev6@pocketcode.org |
-      | Catrobat7 | 123456   | iiiiiiiiii  | dev7@pocketcode.org |
-      | Catrobat8 | 123456   | jjjjjjjjjj  | dev8@pocketcode.org |
-      | Catrobat9 | 123456   | kkkkkkkkkk  | dev9@pocketcode.org |
-      | Catrobat10 | 123456   | llllllllll  | dev10@pocketcode.org |
-      | Catrobat11 | 123456   | mmmmmmmmmm  | dev11@pocketcode.org |
-      | Catrobat12 | 123456   | nnnnnnnnnn  | dev12@pocketcode.org |
-      | Catrobat13 | 123456   | oooooooooo  | dev13@pocketcode.org |
-      | Catrobat14 | 123456   | pppppppppp  | dev14@pocketcode.org |
-      | Catrobat15 | 123456   | qqqqqqqqqq  | dev15@pocketcode.org |
-      | Catrobat16 | 123456   | rrrrrrrrrr  | dev16@pocketcode.org |
+      | name       | password | token      | email                |
+      | Catrobat   | 123456   | cccccccccc | dev1@pocketcode.org  |
+      | Catrobat2  | 123456   | dddddddddd | dev2@pocketcode.org  |
+      | Catrobat3  | 123456   | eeeeeeeeee | dev3@pocketcode.org  |
+      | Catrobat4  | 123456   | ffffffffff | dev4@pocketcode.org  |
+      | Catrobat5  | 123456   | gggggggggg | dev5@pocketcode.org  |
+      | Catrobat6  | 123456   | hhhhhhhhhh | dev6@pocketcode.org  |
+      | Catrobat7  | 123456   | iiiiiiiiii | dev7@pocketcode.org  |
+      | Catrobat8  | 123456   | jjjjjjjjjj | dev8@pocketcode.org  |
+      | Catrobat9  | 123456   | kkkkkkkkkk | dev9@pocketcode.org  |
+      | Catrobat10 | 123456   | llllllllll | dev10@pocketcode.org |
+      | Catrobat11 | 123456   | mmmmmmmmmm | dev11@pocketcode.org |
+      | Catrobat12 | 123456   | nnnnnnnnnn | dev12@pocketcode.org |
+      | Catrobat13 | 123456   | oooooooooo | dev13@pocketcode.org |
+      | Catrobat14 | 123456   | pppppppppp | dev14@pocketcode.org |
+      | Catrobat15 | 123456   | qqqqqqqqqq | dev15@pocketcode.org |
+      | Catrobat16 | 123456   | rrrrrrrrrr | dev16@pocketcode.org |
 
   Scenario: Follow button and counter should show up on Profile site
     Given I am on "/pocketcode/profile/1"
@@ -50,7 +50,7 @@ Feature: Follow feature on profiles
     And the element "#follow-btn" should be visible
     And I should see text matching "Follower: 0"
     And Element "#follow-btn" should have attribute "title" with value "Follow this user!"
-    
+
   Scenario: Follower and Following should show on my profile:
     Given I log in as "Catrobat2" with the password "123456"
     And I am on "/pocketcode/profile/1"

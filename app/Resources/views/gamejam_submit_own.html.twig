@@ -1,37 +1,37 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
-    {% if jam %}
-        {% set lang = app.request.locale|slice(0, 2)|lower() %}
+  {% if jam %}
+    {% set lang = app.request.locale|slice(0, 2)|lower() %}
 
-        <div id="help-container">
-            <a href={{ jam.gamejam_url }} target="_blank">
-                <div class="help-desktop">
-                    {% if lang == 'de' %}
-                        <img class="submit-own" src="{{ asset( jam.web_de_image_url ) }}" alt="" title=""/>
-                    {% else %}
-                        <img class="submit-own" src="{{ asset( jam.web_en_image_url ) }}" alt="" title=""/>
-                    {%  endif %}
-                </div>
-                <div class="help-mobile">
-                    {% if lang == 'de' %}
-                        <img class="submit-own" src="{{ asset( jam.mobile_de_image_url ) }}" alt="" title=""/>
-                    {% else %}
-                        <img class="submit-own" src="{{ asset( jam.mobile_en_image_url ) }}" alt="" title=""/>
-                    {%  endif %}
-                </div>
-            </a>
+    <div id="help-container">
+      <a href={{ jam.gamejam_url }} target="_blank">
+        <div class="help-desktop">
+          {% if lang == 'de' %}
+            <img class="submit-own" src="{{ asset( jam.web_de_image_url ) }}" alt="" title=""/>
+          {% else %}
+            <img class="submit-own" src="{{ asset( jam.web_en_image_url ) }}" alt="" title=""/>
+          {% endif %}
         </div>
-        <div id="alice-notice">
-            <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
-            <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
-            <p>{{ ("gamejam.submitown.text")|trans({'%gamejamtag%' : jam.tag}, "catroweb")|nl2br }}</p>
-            <p><a href={{ jam.gamejam_url }} target="_blank">{{ jam.gamejam_url|replace({'http://' : ''}) }}</a></p>
+        <div class="help-mobile">
+          {% if lang == 'de' %}
+            <img class="submit-own" src="{{ asset( jam.mobile_de_image_url ) }}" alt="" title=""/>
+          {% else %}
+            <img class="submit-own" src="{{ asset( jam.mobile_en_image_url ) }}" alt="" title=""/>
+          {% endif %}
         </div>
-    {% endif %}
+      </a>
+    </div>
+    <div id="alice-notice">
+      <h1>{{ ("gamejam.submitown.header")|trans({}, "catroweb") }}</h1>
+      <p class="notice">{{ ("gamejam.submitown.subheader")|trans({}, "catroweb") }}</p>
+      <p>{{ ("gamejam.submitown.text")|trans({'%gamejamtag%' : jam.tag}, "catroweb")|nl2br }}</p>
+      <p><a href={{ jam.gamejam_url }} target="_blank">{{ jam.gamejam_url|replace({'http://' : ''}) }}</a></p>
+    </div>
+  {% endif %}
 
 {% endblock %}

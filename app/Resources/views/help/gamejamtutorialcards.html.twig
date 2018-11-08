@@ -1,26 +1,28 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
-    <div class="tutorialcards-container size-large">
+  <div class="tutorialcards-container size-large">
 
-        <div id="help-container">
-            {% for i in 1..count %}
-                <a href="{{ path('catrobat_web_gamejamtutorialcards', {'page': i}) }}">
+    <div id="help-container">
+      {% for i in 1..count %}
+        <a href="{{ path('catrobat_web_gamejamtutorialcards', {'page': i}) }}">
 
-                    <div class="help-desktop"><img id="tutorial-{{ i }}" src="{{ asset('images/help/alice/'~i~'.png') }}" alt="" title=""/>
-                    </div>
-                    <div class="help-mobile"><img id="tutorial-mobile-{{ i }}" src="{{ asset('images/help/alice/'~i~'_mob.png') }}" alt="" title=""/>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-        <div class="clear"></div>
-
+          <div class="help-desktop"><img id="tutorial-{{ i }}" src="{{ asset('images/help/alice/'~i~'.png') }}" alt=""
+                                         title=""/>
+          </div>
+          <div class="help-mobile"><img id="tutorial-mobile-{{ i }}"
+                                        src="{{ asset('images/help/alice/'~i~'_mob.png') }}" alt="" title=""/>
+          </div>
+        </a>
+      {% endfor %}
     </div>
+    <div class="clear"></div>
+
+  </div>
 
 {% endblock %}
 

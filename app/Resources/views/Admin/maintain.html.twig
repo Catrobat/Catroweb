@@ -1,229 +1,296 @@
 {% extends base_template %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <style type="text/css">
-        .loader {
-            border: 16px solid #f3f3f3; /* Light grey */
-            border-top: 16px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-            -webkit-animation: spin 2s linear infinite;
-        }
+  {{ parent() }}
+  <style type="text/css">
+    .loader
+    {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+      -webkit-animation: spin 2s linear infinite;
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    @keyframes spin
+    {
+      0%
+      {
+        transform: rotate(0deg);
+      }
+      100%
+      {
+        transform: rotate(360deg);
+      }
+    }
 
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-    </style>
+    @-webkit-keyframes spin
+    {
+      0%
+      {
+        -webkit-transform: rotate(0deg);
+      }
+      100%
+      {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <div class="col-md-6">
-            <div class="box">
-                <h3 class="box-header">{{ "admin.maintain.diskMaintenance"|trans({}, "catroweb") }}</h3>
-                <div class="box-body">
-                    <div>
-                        <div id="piechart_3d" style="width: 100%; height: 300px; display: inline-block;"></div>
-                        {#<div id="piechart_3d_mem" style="width: 49%; height: 300px; display: inline-block;"></div>#}
-                    </div>
-                    {% set i = 0 %}
-                    {% for RemoveableObject in RemoveableObjects %}
-                        <div class="box">
-                            <div class="box-header">
-                                {% if RemoveableObject.archive_command_link != null %}
-                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
-                                    <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.archive_command_link }}"><i class="glyphicon glyphicon-briefcase"></i> {{ RemoveableObject.archive_command_name }}</a>
-                                {% else %}
-                                <a  class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ RemoveableObject.command_name }}</a>
-                                {% endif %}
-                                <span style="margin-left: 5%;">
-                                {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
-                                </span>
-                                <span style="float: right">
-                                    <i style="cursor: pointer; font-size: medium" class="glyphicon glyphicon-info-sign" onclick="$('#removeable_{{ i }}').show('slow')"></i>
-                                </span>
+  {% if is_granted('ROLE_SUPER_ADMIN') %}
 
-                            </div>
-                            <div id="removeable_{{ i }}" style="display: none">{{ RemoveableObject.description|raw }}</div>
-                        </div>
-                        {% set i = i+1 %}
-                    {% else %}
-                        {{ "admin.maintain.noRemovableObjects"|trans({}, "catroweb") }}
-                    {% endfor %}
-                </div>
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="box">
+          <h3 class="box-header">{{ "admin.maintain.diskMaintenance"|trans({}, "catroweb") }}</h3>
+          <div class="box-body">
+            <div>
+              <div id="piechart_3d" style="width: 100%; height: 300px; display: inline-block;"></div>
             </div>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="box">
-                <h3 class="box-header">{{ "admin.maintain.manualBackups"|trans({}, "catroweb") }}</h3>
-                <div class="box-body">
-                    <div class="info-box">
-                        <div class="info-box-icon"><i class="glyphicon glyphicon-info-sign"></i></div>
-                        <div class="info-box-content">
-                        Be aware, this are just the manual created backups.<br/>
-                        Currently (state 31.7.2015), admins of the institute are creating snapshots of the whole running machine 2 times a week.<br/>
-                        So, not the right backup at hand? Go get it there.</div>
-                    </div>
+      </div>
 
-                    <div class="box">
-                        <div class="box-header">
-                            <button id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;"><i class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}</button>&nbsp;(~{{ backupSize }})
-                        </div>
-                    </div>
-
-                    {% set i = 0 %}
-                    {% for RemoveableObject in RemoveableBackupObjects %}
-                        <div class="box">
-                            <div class="box-header">
-
-                                <div>
-                                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.command_link }}"><i class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}</a>
-                                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemoveableObject.download_link }}" download><i class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}</a>
-                                </div>
-                                <div style="padding-top: 5px;">
-                                    <span><mark style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemoveableObject.download_link }}</mark></span>
-                                </div>
-
-                                <span style="padding-left: 0.2em;">
-                                {{ RemoveableObject.name }} ({{ RemoveableObject.size }})
-                                </span>
-
-                                <span style="float: right">
-                                    {{ RemoveableObject.description }}
-                                </span>
-
-                            </div>
-                        </div>
-                        {% set i = i+1 %}
-                    {% else %}
-                    <div class="box">
-                        <div class="box-header">
-                            {{ "admin.maintain.noRemovableBackupObjects"|trans({}, "catroweb") }}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h3 class="box-header">{{ "admin.maintain.ramMaintenance"|trans({}, "catroweb") }}</h3>
+          <div class="box-body">
+            <div>
+              <div id="piechart_3d_mem" style="width: 100%; height: 300px; display: inline-block;"></div>
             </div>
+          </div>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="backup-modal" tabindex="-1" role="dialog" aria-labelledby="backup-modal" data-backdrop="static"
-             data-keyboard="false">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="backup-modal-title">Backup in progress</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>
-                                    The backup is being created. Please wait until the process is finished.
-                                </p>
-                                <p>
-                                    You will automatically be forwarded after your request has been executed.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="box">
+          <h3 class="box-header">{{ "admin.maintain.removableObjects"|trans({}, "catroweb") }}</h3>
+          <div class="box-body">
+            <div>
+              {% set i = 0 %}
+              {% for RemovableObject in RemovableObjects %}
+                <div class="box">
+                  <div class="box-header">
+                    {% if RemovableObject.archive_command_link != null %}
+                      <a class="btn btn-sm btn-default" style="min-width:20%;"
+                         href="{{ RemovableObject.command_link }}"><i
+                            class="glyphicon glyphicon-trash"></i> {{ RemovableObject.command_name }}</a>
+                      <a class="btn btn-sm btn-default" style="min-width:20%;"
+                         href="{{ RemovableObject.archive_command_link }}"><i
+                            class="glyphicon glyphicon-briefcase"></i> {{ RemovableObject.archive_command_name }}</a>
+                    {% else %}
+                      <a class="btn btn-sm btn-default" style="min-width:20%;"
+                         href="{{ RemovableObject.command_link }}"><i
+                            class="glyphicon glyphicon-trash"></i> {{ RemovableObject.command_name }}</a>
+                    {% endif %}
+                    <span style="margin-left: 5%;">
+                                  {{ RemovableObject.name }} ({{ RemovableObject.size }})
+                                  </span>
+                    <span style="float: right">
+                                      <i style="cursor: pointer; font-size: medium"
+                                         class="glyphicon glyphicon-info-sign"
+                                         onclick="$('#Removable_{{ i }}').show('slow')"></i>
+                                  </span>
+
+                  </div>
+                  <div id="Removable_{{ i }}" style="display: none">{{ RemovableObject.description|raw }}</div>
+                </div>
+                {% set i = i+1 %}
+              {% else %}
+                {{ "admin.maintain.noRemovableObjects"|trans({}, "catroweb") }}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="box">
+          <h3 class="box-header">{{ "admin.maintain.manualBackups"|trans({}, "catroweb") }}</h3>
+          <div class="box-body">
+            <div class="info-box">
+              <div class="info-box-icon"><i class="glyphicon glyphicon-info-sign"></i></div>
+              <div class="info-box-content">
+                Be aware, this are just the manual created backups.<br/>
+                Currently (state 31.7.2015), admins of the institute are creating snapshots of the whole running machine
+                2
+                times a week.<br/>
+                So, not the right backup at hand? Go get it there.
+              </div>
+            </div>
+
+            <div class="box">
+              <div class="box-header">
+                <button id="btnCreateBackup" class="btn btn-sm btn-default" style="min-width:20%;"><i
+                      class="glyphicon glyphicon-download-alt"></i> {{ "admin.maintain.btnCreateBackup"|trans({}, "catroweb") }}
+                </button>&nbsp;(~{{ backupSize }})
+              </div>
+            </div>
+
+            {% set i = 0 %}
+            {% for RemovableObject in RemovableBackupObjects %}
+              <div class="box">
+                <div class="box-header">
+
+                  <div>
+                    <a class="btn btn-sm btn-default" style="min-width:20%;"
+                       href="{{ RemovableObject.command_link }}"><i
+                          class="glyphicon glyphicon-trash"></i> {{ "admin.maintain.btnDeleteBackup"|trans({}, "catroweb") }}
+                    </a>
+                    <a class="btn btn-sm btn-default" style="min-width:20%;" href="{{ RemovableObject.download_link }}"
+                       download><i
+                          class="glyphicon glyphicon-download"></i> {{ "admin.maintain.btnDownloadBackup"|trans({}, "catroweb") }}
+                    </a>
+                  </div>
+                  <div style="padding-top: 5px;">
+                    <span><mark
+                          style="border-radius: 5px; background-color: khaki;">{{ app.request.getSchemeAndHttpHost() }}{{ RemovableObject.download_link }}</mark></span>
+                  </div>
+
+                  <span style="padding-left: 0.2em;">
+                                  {{ RemovableObject.name }} ({{ RemovableObject.size }})
+                                  </span>
+
+                  <span style="float: right">
+                                      {{ RemovableObject.description }}
+                                  </span>
+
+                </div>
+              </div>
+              {% set i = i+1 %}
+            {% else %}
+              <div class="box">
+                <div class="box-header">
+                  {{ "admin.maintain.noRemovableBackupObjects"|trans({}, "catroweb") }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="backup-modal" tabindex="-1" role="dialog" aria-labelledby="backup-modal"
+         data-backdrop="static"
+         data-keyboard="false">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="backup-modal-title">Backup in progress</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  The backup is being created. Please wait until the process is finished.
+                </p>
+                <p>
+                  You will automatically be forwarded after your request has been executed.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="
                             col-xs-4 col-xs-offset-4
                             col-sm-4 col-sm-offset-4
                             col-md-4 col-md-offset-4
                             col-lg-4 col-lg-offset-4">
-                                <div class="loader"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="loader"></div>
+              </div>
             </div>
+          </div>
         </div>
-    {% endif %}
+      </div>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
-    <script type="text/javascript">
-        backup_create_link = "{{ backupCommand.command_link }}";
+  {{ parent() }}
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script src="{{ asset('js/globalPlugins/sweetalert.min.js') }}"></script>
+  <script type="text/javascript">
+    backup_create_link = "{{ backupCommand.command_link }}"
 
-        function initBackupProgress()
-        {
-            $("#backup-modal").modal('show')
-        }
+    function initBackupProgress ()
+    {
+      $('#backup-modal').modal('show')
+    }
 
-        // https://api.jquery.com/ready/
-        $(function()
-        {
-            $('#btnCreateBackup').click(function(){
-                $('#btnCreateBackup').prop('disabled', true);
-                $('#btnCreateBackup').text('Backup started...');
-                $.ajax
-                ({
-                    type: 'GET',
-                    url: backup_create_link,
+    $(function () {
+      $('#btnCreateBackup').click(function () {
+        $('#btnCreateBackup').prop('disabled', true)
+        $('#btnCreateBackup').text('Backup started...')
+        $.ajax
+        ({
+          type: 'GET',
+          url : backup_create_link,
 
-                    success: function (data)
-                    {
-                        window.location.reload();
-                    },
-                    error: function(jqXHR, error)
-                    {
-                        window.location.reload();
-                    }
-                });
-                initBackupProgress();
-            });
-        });
-    </script>
-    <script>
-        google.load("visualization", "1", {packages:["corechart"]});
-        google.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data_space = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Used ({{ usedSpace }})',     {{ usedSpace_raw }}],
-                ['Programs ({{ programsSpace }})',     {{ programsSpace_raw }}],
-                {% for RemoveableObject in RemoveableObjects %}
-                ['{{ RemoveableObject.name }} ({{ RemoveableObject.size }})',      {{ RemoveableObject.size_raw }}],
-                {% endfor %}
-                ['Free ({{ freeSpace }})', {{ freeSpace_raw }}]
-            ]);
-            var data_mem = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Free',    100 - {{ ram }}],
-                ['Used',      {{ ram }}]
-            ]);
+          success: function (data) {
+            window.location.reload()
+          },
+          error  : function (jqXHR, error) {
+            window.location.reload()
+          }
+        })
+        initBackupProgress()
+      })
+    })
+  </script>
 
-            var options_space = {
-                title: 'Disk Space ({{ wholeSpace }})',
-                is3D: true,
-            };
+  <script>
+    google.load('visualization', '1', {packages: ['corechart']})
+    google.setOnLoadCallback(drawDiskChart)
+    google.setOnLoadCallback(drawRamChart)
 
-            var options_mem = {
-                title: 'RAM',
-                pieHole: 0.4,
-            };
+    function drawDiskChart ()
+    {
+      let data_space = google.visualization.arrayToDataTable([
+        ['name', 'value'],
+        ['Used ({{ usedSpace }})',          {{ usedSpace_raw }}],
+        ['Programs ({{ programsSpace }})',  {{ programsSpace_raw }}],
+        {% for ro in RemovableObjects %}
+        ['{{ ro.name }} ({{ ro.size }})',   {{ ro.size_raw }}],
+        {% endfor %}
+        ['Free ({{ freeSpace }})',          {{ freeSpace_raw }}]
+      ])
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-            chart.draw(data_space, options_space);
+      let options_space = {
+        title: 'Disk Space ({{ wholeSpace }})',
+        is3D : true,
+      }
+      let chart = new google.visualization.PieChart(document.getElementById('piechart_3d'))
+      chart.draw(data_space, options_space)
+    }
 
-            var chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'));
-            chart_mem.draw(data_mem, options_mem);
-        }
+    function drawRamChart ()
+    {
+      let options_mem = {
+        title: 'RAM ({{ wholeRam }})',
+        is3D : true,
+      }
 
-        $(window).load(function(){
-        });
+      let data_mem = google.visualization.arrayToDataTable([
+        ['name', 'value'],
+        ['Free ({{ freeRam }})', 100 - {{ usedRamPercentage }}],
+        ['Used ({{ usedRam }})',          {{ usedRamPercentage }}],
+        ['Shared ({{ sharedRam }})',      {{ usedRamPercentage }}],
+        ['Buff/Cache ({{ cachedRam }})',  {{ usedRamPercentage }}]
+      ])
+      let chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'))
+      chart_mem.draw(data_mem, options_mem)
+    }
 
-
-    </script>
+  </script>
 {% endblock %}

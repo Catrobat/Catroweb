@@ -38,6 +38,7 @@ class ProgramController extends Controller
    *
    * @param Request $request
    * @param integer $id
+   *
    * @return JsonResponse
    */
   public function programRemixGraphAction(Request $request, $id)
@@ -169,7 +170,7 @@ class ProgramController extends Controller
       'nolb_status'                  => $nolb_status,
       'user_name'                    => $user_name,
       'max_description_size'         => $max_description_size,
-      'logged_in'                    => $logged_in
+      'logged_in'                    => $logged_in,
     ]);
   }
 
@@ -186,9 +187,9 @@ class ProgramController extends Controller
   public function programLikeAction(Request $request, $id)
   {
     /**
-     * @var ProgramManager $program_manager
-     * @var User $user
-     * @var CatroNotification $notification
+     * @var ProgramManager           $program_manager
+     * @var User                     $user
+     * @var CatroNotification        $notification
      * @var CatroNotificationService $notification_service
      */
 
@@ -200,7 +201,7 @@ class ProgramController extends Controller
       if ($request->isXmlHttpRequest())
       {
         return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM,
-                                     'message' => 'Invalid like type given!']);
+                                     'message'    => 'Invalid like type given!']);
       }
       else
       {
@@ -214,7 +215,7 @@ class ProgramController extends Controller
       if ($request->isXmlHttpRequest())
       {
         return JsonResponse::create(['statusCode' => StatusCode::INVALID_PARAM,
-                                     'message' => 'Program with given ID does not exist!']);
+                                     'message'    => 'Program with given ID does not exist!']);
       }
       else
       {
@@ -322,8 +323,8 @@ class ProgramController extends Controller
   public function deleteProgramAction($id)
   {
     /**
-     * @var $user    \Catrobat\AppBundle\Entity\User
-     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var $user          \Catrobat\AppBundle\Entity\User
+     * @var $program       \Catrobat\AppBundle\Entity\Program
      * @var $user_programs ArrayCollection
      */
     if ($id === 0)
@@ -369,8 +370,8 @@ class ProgramController extends Controller
   public function toggleProgramVisibilityAction($id)
   {
     /**
-     * @var $user    \Catrobat\AppBundle\Entity\User
-     * @var $program \Catrobat\AppBundle\Entity\Program
+     * @var $user          \Catrobat\AppBundle\Entity\User
+     * @var $program       \Catrobat\AppBundle\Entity\Program
      * @var $user_programs ArrayCollection
      */
 
@@ -418,7 +419,7 @@ class ProgramController extends Controller
    *   options={"expose"=true}, requirements={"id":"\d+"}, methods={"GET"})
    *
    * @param integer $id
-   * @param string $newDescription
+   * @param string  $newDescription
    *
    * @throws \Exception
    *
@@ -576,7 +577,7 @@ class ProgramController extends Controller
       else
       {
         // case: NO recommendation
-        $url = $this->generateUrl('download', ['id' => $program->getId(),
+        $url = $this->generateUrl('download', ['id'    => $program->getId(),
                                                'fname' => $program->getName()]);
       }
     }
@@ -642,7 +643,7 @@ class ProgramController extends Controller
   }
 
   /**
-   * @param $user User
+   * @param $user    User
    * @param $program Program
    *
    * @return null
@@ -665,7 +666,7 @@ class ProgramController extends Controller
 
   /**
    * @param $program Program
-   * @param $user User
+   * @param $user    User
    *
    * @return bool
    */

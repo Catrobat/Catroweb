@@ -59,9 +59,9 @@ class LikeNotification extends CatroNotification
    * CommentNotification constructor.
    *
    * @param User $user
-   * @param $title
-   * @param $message
-   * @param $like_from
+   * @param      $title
+   * @param      $message
+   * @param      $like_from
    *
    */
   public function __construct(User $user, $title, $message, $like_from, $program)

@@ -12,13 +12,11 @@
   <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}"/>
 
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/base.css') }}" media="screen"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/plugins/font-awesome.min.css') }}"/>
   <script src="{{ asset('compiled/bootstrap/jquery.min.js') }}"></script>
   <script src="{{ asset( getJavascriptPath('script.js') ) }}"></script>
   <script src="{{ asset('compiled/bootstrap/bootstrap.min.js') }}"></script>
-
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
@@ -52,12 +50,12 @@
 {% endblock %}
 
 <script>
-  let search_input = $('.input-search');
+  let search_input = $('.input-search')
 
   search_input.tooltip({
     trigger  : 'manual',
     placement: 'bottom'
-  });
+  })
 
   search_input
   .attr('data-original-title', '{{ "search.fail"|trans({}, "catroweb") }}')
@@ -67,16 +65,18 @@
     setTimeout(function () {
       search_input.tooltip('hide')
     }, 1000)
-  });
+  })
 
-  function scrollToHash() {
-    if (window.location.hash) {
-      window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
+  function scrollToHash ()
+  {
+    if (window.location.hash && $(window.location.hash).length) {
+      window.scrollTo(0, ($(window.location.hash).offset().top - $('.navbar').outerHeight()))
     }
   }
-  scrollToHash();
-  window.addEventListener('load', scrollToHash);
-  $(window).on("hashchange", scrollToHash);
+
+  scrollToHash()
+  window.addEventListener('load', scrollToHash)
+  $(window).on('hashchange', scrollToHash)
 
   new Main('{{ path('search', {'q': 0 } ) }}')
 </script>

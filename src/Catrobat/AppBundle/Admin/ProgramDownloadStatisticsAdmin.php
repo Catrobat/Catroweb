@@ -33,7 +33,7 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
         ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('recommended_from_program_via_tag', EntityType::class,
         ['class' => Program::class], [
-        'admin_code' => 'catrowebadmin.block.programs.all'])
+          'admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('downloaded_at')
       ->add('ip')
       ->add('country_code')

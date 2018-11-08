@@ -225,6 +225,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
 
   /**
    * @AfterStep
+   *
    * @param AfterStepScope $scope
    */
   public function makeScreenshot(AfterStepScope $scope)
@@ -260,6 +261,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
 
   /**
    * @param $param
+   *
    * @return mixed
    */
   public function getSymfonyService($param)
@@ -296,6 +298,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    * @param $program
    * @param $config
+   *
    * @return \Catrobat\AppBundle\Entity\ProgramDownloads
    */
   public function insertProgramDownloadStatistics($program, $config)
@@ -324,6 +327,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    *
    * @param $param
+   *
    * @return mixed
    */
   public function getSymfonyParameter($param)
@@ -333,6 +337,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
 
   /**
    * @param array $config
+   *
    * @return \FOS\UserBundle\Model\UserInterface|mixed
    */
   public function insertUser($config = [])
@@ -343,6 +348,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    * @param $user
    * @param $config
+   *
    * @return Program
    */
   public function insertProgram($user, $config)
@@ -351,10 +357,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   }
 
   /**
-   * @param $file
-   * @param $user
+   * @param        $file
+   * @param        $user
    * @param string $flavor
-   * @param null $request_parameters
+   * @param null   $request_parameters
+   *
    * @return null|\Symfony\Component\HttpFoundation\Response
    */
   public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
@@ -429,6 +436,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    * @Given /^there are notifications:$/
    * @param TableNode $table
+   *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException
    */
@@ -468,13 +476,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
       $program = $this->getProgramManger()->find($program_stat['program_id']);
       $config = [
         'downloaded_at' => $program_stat['downloaded_at'],
-      'ip'            => $program_stat['ip'],
-      'country_code'  => $program_stat['country_code'],
-      'country_name'  => $program_stat['country_name'],
-      'user_agent'    => @$program_stat['user_agent'],
-      'username'      => @$program_stat['username'],
-      'referrer'      => @$program_stat['referrer'],
-    ];
+        'ip'            => $program_stat['ip'],
+        'country_code'  => $program_stat['country_code'],
+        'country_name'  => $program_stat['country_name'],
+        'user_agent'    => @$program_stat['user_agent'],
+        'username'      => @$program_stat['username'],
+        'referrer'      => @$program_stat['referrer'],
+      ];
       $this->insertProgramDownloadStatistics($program, $config);
     }
   }
@@ -504,7 +512,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   public function iShouldSeeOutgoingEmailsInTheProfiler($email_amount)
   {
     /**
-     * @var Profile $profile
+     * @var Profile              $profile
      * @var MessageDataCollector $collector
      */
     $profile = $this->getSymfonyProfile();
@@ -519,9 +527,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   public function iShouldSeeAEmailWithRecipient($recipient)
   {
     /**
-     * @var Profile $profile
+     * @var Profile              $profile
      * @var MessageDataCollector $collector
-     * @var \Swift_Message $message
+     * @var \Swift_Message       $message
      */
     $profile = $this->getSymfonyProfile();
     $collector = $profile->getCollector('swiftmailer');
@@ -931,21 +939,21 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
       ]);
       @$config = [
         'name'                => $program['name'],
-      'description'         => $program['description'],
-      'views'               => $program['views'],
-      'downloads'           => $program['downloads'],
-      'uploadtime'          => $program['upload time'],
-      'apk_status'          => $program['apk_status'],
-      'catrobatversionname' => $program['version'],
-      'directory_hash'      => $program['directory_hash'],
-      'filesize'            => @$program['FileSize'],
-      'visible'             => filter_var($program["visible"], FILTER_VALIDATE_BOOLEAN),
-      'approved'            => (isset($program['approved_by_user']) &&
-      $program['approved_by_user'] === '') ? null : true,
-      'tags'                => isset($program['tags_id']) ? $program['tags_id'] : null,
-      'extensions'          => isset($program['extensions']) ? $program['extensions'] : null,
-      'remix_root'          => filter_var($program["remix_root"], FILTER_VALIDATE_BOOLEAN),
-    ];
+        'description'         => $program['description'],
+        'views'               => $program['views'],
+        'downloads'           => $program['downloads'],
+        'uploadtime'          => $program['upload time'],
+        'apk_status'          => $program['apk_status'],
+        'catrobatversionname' => $program['version'],
+        'directory_hash'      => $program['directory_hash'],
+        'filesize'            => @$program['FileSize'],
+        'visible'             => filter_var($program["visible"], FILTER_VALIDATE_BOOLEAN),
+        'approved'            => (isset($program['approved_by_user']) &&
+          $program['approved_by_user'] === '') ? null : true,
+        'tags'                => isset($program['tags_id']) ? $program['tags_id'] : null,
+        'extensions'          => isset($program['extensions']) ? $program['extensions'] : null,
+        'remix_root'          => filter_var($program["remix_root"], FILTER_VALIDATE_BOOLEAN),
+      ];
       $this->insertProgram($user, $config);
     }
   }
@@ -953,6 +961,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    * @When /^I upload a program with (.*)$/
    * @param $program_attribute
+   *
    * @throws PendingException
    */
   public function iUploadAProgramWith($program_attribute)
@@ -995,6 +1004,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    * @When /^I click "([^"]*)"$/
    * @param $arg1
+   *
    * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClick($arg1)

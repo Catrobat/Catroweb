@@ -4,11 +4,11 @@ Feature: Admin Broadcast Notification
 
   Background:
     Given there are admins:
-      | name      | password | token       | email               |
-      | Catrobat  | 123456   | cccccccccc  | dev1@pocketcode.org |
+      | name     | password | token      | email               |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org |
     Given there are users:
-      | name      | password | token       | email               |
-      | Catrobat2 | 123456   | dddddddddd  | dev2@pocketcode.org |
+      | name      | password | token      | email               |
+      | Catrobat2 | 123456   | dddddddddd | dev2@pocketcode.org |
 
   Scenario: Send out Notifications
     Given I log in as "Catrobat" with the password "123456"

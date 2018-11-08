@@ -1,35 +1,25 @@
 imports:
-    - { resource: config.yml }
-
-#framework:
-#    validation:
-#        cache: apc
-
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+- { resource: config.yml }
 
 monolog:
-    channels: ['upload', 'download_stats']
-    handlers:
-        upload:
-            type: stream
-            path: %kernel.logs_dir%/upload.log
-            level: error
-            channels: [upload]
-        main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      nested
-        nested:
-            type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
-            level: debug
-        download_stats:
-            type:  rotating_file
-            path:  %kernel.logs_dir%/download_stats/download_stats.log
-            level: debug
-            max_files: 20
-            channels: [download_stats]
+  channels: ['upload', 'download_stats']
+  handlers:
+    upload:
+      type: stream
+      path: "%kernel.logs_dir%/upload.log"
+      level: error
+      channels: [upload]
+    main:
+      type:         fingers_crossed
+      action_level: error
+      handler:      nested
+    nested:
+      type:  stream
+      path:  "%kernel.logs_dir%/%kernel.environment%.log"
+      level: debug
+    download_stats:
+      type:  rotating_file
+      path:  "%kernel.logs_dir%/download_stats/download_stats.log"
+      level: debug
+      max_files: 20
+      channels: [download_stats]

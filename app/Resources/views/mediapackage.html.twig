@@ -18,43 +18,43 @@
           <div class="program mediafile mediafile-{{ file.id }}">
 
             <a href="{{ file.downloadUrl }}" onclick="onDownload(this)">
-            {% if image %}
-            <div>
-              <img src="{{ asset(image) }}">
-            </div>
-              {% if file.data.author %}
+              {% if image %}
                 <div>
-                  {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
+                  <img src="{{ asset(image) }}">
                 </div>
-              {% endif %}
-            {% endif %}
-
-            {% if sound %}
-            <div>
-              <audio controls preload="none" controlsList="nodownload">
-                <source src="{{ asset(sound) }}" type="audio/mpeg">
-
-                <object>
-                  <param name="autostart" value="false">
-                  <param name="src" value="{{ sound }}">
-                  <param name="controller" value="true">
-                  <embed src="{{ asset(sound) }}" controller="true" autostart="false" type="audio/mpeg"></embed>
-                  Update your Browser
-                </object>
-              </audio>
-            </div>
-            <div>
-              <b>{{ file.data.name }}</b>
-            </div>
                 {% if file.data.author %}
                   <div>
                     {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
                   </div>
                 {% endif %}
-              <div>
-              Download
-            </div>
-            {% endif %}
+              {% endif %}
+
+              {% if sound %}
+                <div>
+                  <audio controls preload="none" controlsList="nodownload">
+                    <source src="{{ asset(sound) }}" type="audio/mpeg">
+
+                    <object>
+                      <param name="autostart" value="false">
+                      <param name="src" value="{{ sound }}">
+                      <param name="controller" value="true">
+                      <embed src="{{ asset(sound) }}" controller="true" autostart="false" type="audio/mpeg"></embed>
+                      Update your Browser
+                    </object>
+                  </audio>
+                </div>
+                <div>
+                  <b>{{ file.data.name }}</b>
+                </div>
+                {% if file.data.author %}
+                  <div>
+                    {{ 'remixGraph.by'|trans({}, 'catroweb') }} <b>{{ file.data.author }}</b>
+                  </div>
+                {% endif %}
+                <div>
+                  Download
+                </div>
+              {% endif %}
             </a>
 
           </div>
@@ -69,18 +69,20 @@
 
 {% block js %}
   <script>
-    function onDownload(link) {
-      if(link.href != 'javascript:void(0)') {
-        var download_href = link.href;
-        link.href = 'javascript:void(0)';
+    function onDownload (link)
+    {
+      if (link.href != 'javascript:void(0)')
+      {
+        var download_href = link.href
+        link.href = 'javascript:void(0)'
 
-        setTimeout(function() {
-          link.href = download_href;
-        }, 5000);
+        setTimeout(function () {
+          link.href = download_href
+        }, 5000)
 
-        window.location = download_href;
+        window.location = download_href
       }
-      return false;
+      return false
     }
   </script>
 {% endblock %}

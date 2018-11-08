@@ -1,100 +1,100 @@
 imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: services.yml }
-    - { resource: commands.yml }
-    - { resource: admin_services.yml }
-    - { resource: admin_config.yml }
-    - { resource: listeners.yml }
-    - { resource: gamejam.yml }
+- { resource: parameters.yml }
+- { resource: security.yml }
+- { resource: services.yml }
+- { resource: commands.yml }
+- { resource: admin_services.yml }
+- { resource: admin_config.yml }
+- { resource: listeners.yml }
+- { resource: gamejam.yml }
 
 
 framework:
-    serializer: { enable_annotations: true }
-    translator: { fallback: en }
-    secret:          "%secret%"
-    router:
-        resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: ~
-    form:            ~
-    csrf_protection: ~
-    validation:      { enabled: true, enable_annotations: true }
-    templating:
-        engines: ['twig']
-    default_locale:  "%locale%"
-    session:         ~
-    fragments:       ~
+  serializer: { enable_annotations: true }
+  translator: { fallback: en }
+  secret:          "%secret%"
+  router:
+    resource: "%kernel.root_dir%/config/routing.yml"
+    strict_requirements: ~
+  form:            ~
+  csrf_protection: ~
+  validation:      { enabled: true, enable_annotations: true }
+  templating:
+    engines: ['twig']
+  default_locale:  "%locale%"
+  session:         ~
+  fragments:       ~
 
 
 twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+  debug:            "%kernel.debug%"
+  strict_variables: "%kernel.debug%"
 
 
 doctrine:
-    dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: %kernel.root_dir%/data/data.db3
-        # path:     %database_path%
-        types:
-            json: Sonata\Doctrine\Types\JsonType
+  dbal:
+    driver:   "%database_driver%"
+    host:     "%database_host%"
+    port:     "%database_port%"
+    dbname:   "%database_name%"
+    user:     "%database_user%"
+    password: "%database_password%"
+    charset:  UTF8
+    # if using pdo_sqlite as your database driver, add the path in parameters.yml
+    # e.g. database_path: %kernel.root_dir%/data/data.db3
+    # path:     %database_path%
+    types:
+      json: Sonata\Doctrine\Types\JsonType
 
-    orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
-        dql:
-            numeric_functions:
-                time_diff: DQL\TimeDiff
-                time_add: DQL\TimeAdd
-                time_sub: DQL\TimeSub
+  orm:
+    auto_generate_proxy_classes: "%kernel.debug%"
+    auto_mapping: true
+    dql:
+      numeric_functions:
+        time_diff: DQL\TimeDiff
+        time_add: DQL\TimeAdd
+        time_sub: DQL\TimeSub
 
 
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    encryption: ssl
-    auth_mode: plain
-    spool: { type: memory }
+  transport: "%mailer_transport%"
+  host:      "%mailer_host%"
+  username:  "%mailer_user%"
+  password:  "%mailer_password%"
+  encryption: ssl
+  auth_mode: plain
+  spool: { type: memory }
 
 
 fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: Catrobat\AppBundle\Entity\User
+  db_driver: orm
+  firewall_name: main
+  user_class: Catrobat\AppBundle\Entity\User
 
-    group:
-        group_class:   Catrobat\AppBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager
+  group:
+    group_class:   Catrobat\AppBundle\Entity\Group
+    group_manager: sonata.user.orm.group_manager
 
-    service:
-        user_manager: usermanager
+  service:
+    user_manager: usermanager
 
-    from_email:
-        address: noreply@catrob.at
-        sender_name: "No Reply"
+  from_email:
+    address: noreply@catrob.at
+    sender_name: "No Reply"
 
 
 sonata_user:
-    security_acl: true
-    manager_type: orm
+  security_acl: true
+  manager_type: orm
 
 
 sensio_framework_extra:
-    router:      { annotations: false }  # use symfony annotations!
-    request:     { converters: true, auto_convert: true }
-    view:        { annotations: true }
-    cache:       { annotations: true }
-    security:    { annotations: true }
-    psr_message: { enabled: false }
+  router:      { annotations: false }  # use symfony annotations!
+  request:     { converters: true, auto_convert: true }
+  view:        { annotations: true }
+  cache:       { annotations: true }
+  security:    { annotations: true }
+  psr_message: { enabled: false }
 
 
 # # working testserver
@@ -109,54 +109,54 @@ sensio_framework_extra:
 #        filter: (&(ObjectClass=person))
 
 fr3d_ldap:
-    driver:
-        host:                '%ldap_host%'
-        port:                '%ldap_port%'   # Optional
-        username:            '%ldap_user%'    # Optional
-        password:            '%ldap_password%'    # Optional
-        bindRequiresDn:      true   # Optional
-        baseDn:              '%ldap_base_dn%'   # Optional
-        accountFilterFormat: (cn=%s) # Optional. sprintf format %s will be the username
-#       optReferrals:        false  # Optional
-        useSsl:              true   # Enable SSL negotiation. Optional
-#       useStartTls:         true   # Enable TLS negotiation. Optional
-#       accountCanonicalForm: 3 # ACCTNAME_FORM_BACKSLASH this is only needed if your users have to login with something like HOST\User
-#       accountDomainName: HOST
-#       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
+  driver:
+    host:                '%ldap_host%'
+    port:                '%ldap_port%'   # Optional
+    username:            '%ldap_user%'    # Optional
+    password:            '%ldap_password%'    # Optional
+    bindRequiresDn:      true   # Optional
+    baseDn:              '%ldap_base_dn%'   # Optional
+    accountFilterFormat: (cn=%s) # Optional. sprintf format %s will be the username
+    #       optReferrals:        false  # Optional
+    useSsl:              true   # Enable SSL negotiation. Optional
+  #       useStartTls:         true   # Enable TLS negotiation. Optional
+  #       accountCanonicalForm: 3 # ACCTNAME_FORM_BACKSLASH this is only needed if your users have to login with something like HOST\User
+  #       accountDomainName: HOST
+  #       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
 
-    user:
-        baseDn: '%ldap_base_dn%'
-        filter: (&(ObjectClass=person)(cn=%s))
-        attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
-        - { ldap_attr: cn,  user_method: setUsername } # Default
-        - { ldap_attr: mail,  user_method: setEmail } # Default
+  user:
+    baseDn: '%ldap_base_dn%'
+    filter: (&(ObjectClass=person)(cn=%s))
+    attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
+    - { ldap_attr: cn,  user_method: setUsername } # Default
+    - { ldap_attr: mail,  user_method: setEmail } # Default
 
-    service:
-        user_hydrator: ldap.user_hydrator      # Overrides default user hydrator
-        ldap_manager: usermanager.ldap   # Overrides default ldap manager
+  service:
+    user_hydrator: ldap.user_hydrator      # Overrides default user hydrator
+    ldap_manager: usermanager.ldap   # Overrides default ldap manager
 #       ldap_driver: fr3d_ldap.ldap_driver.zend        # Overrides default ldap driver
 
 
 knp_paginator:
-    page_range: 3                      # default page range used in pagination control
-    default_options:
-        page_name: page                # page query parameter name
-        sort_field_name: sort          # sort field query parameter name
-        sort_direction_name: direction # sort direction query parameter name
-        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
-    template:
-        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+  page_range: 3                      # default page range used in pagination control
+  default_options:
+    page_name: page                # page query parameter name
+    sort_field_name: sort          # sort field query parameter name
+    sort_direction_name: direction # sort direction query parameter name
+    distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+  template:
+    pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+    sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 
 liip_theme:
-    themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'pocketphiro', 'phirocode', 'luna', 'create@school']
-    active_theme: 'pocketcode'
+  themes: ['pocketcode', 'pocketalice', 'pocketgalaxy', 'pocketphiro', 'phirocode', 'luna', 'create@school']
+  active_theme: 'pocketcode'
 
 
 bazinga_geocoder:
-    providers:
-        acme:
-            # https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/Resources/doc/services.md  All factories
-            # we need one to decode ips (also ipv6)
-            factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoFactory
+  providers:
+    acme:
+      # https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/Resources/doc/services.md  All factories
+      # we need one to decode ips (also ipv6)
+      factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoFactory

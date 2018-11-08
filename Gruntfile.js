@@ -1,19 +1,19 @@
-var jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
-var jsLoginSrc = ['web/js/social/*.js'];
-var jsCustomSrc = 'web/js/custom';
-var jsAnalyticsSrc = 'web/js/analytics';
-var jsLocalPluginSrc = 'web/js/localPlugins';
-var themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school'];
+let jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
+let jsLoginSrc = ['web/js/social/*.js'];
+let jsCustomSrc = 'web/js/custom';
+let jsAnalyticsSrc = 'web/js/analytics';
+let jsLocalPluginSrc = 'web/js/localPlugins';
+let themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school'];
 
-var sassconfig = {};
+let sassconfig = {};
 
 for (index = 0; index < themes.length; index++)
 {
-  var theme = themes[index];
+  let theme = themes[index];
   
-  var base_css_path = "web/css/" + theme + "/base.css";
+  let base_css_path = "web/css/" + theme + "/base.css";
   
-  var base_file_config = {};
+  let base_file_config = {};
   base_file_config[base_css_path] = ["web/css/themes/" + theme + "/" + theme +".scss", "web/css/plugins/*" ];
   
   sassconfig[theme] =
@@ -38,8 +38,8 @@ for (index = 0; index < themes.length; index++)
     };
 }
 
-var admin_css_path = "web/css/admin/admin.css";
-var admin_file_config = {};
+let admin_css_path = "web/css/admin/admin.css";
+let admin_file_config = {};
 admin_file_config[admin_css_path] = ["web/css/plugins/*"];
 
 sassconfig['admin'] = {

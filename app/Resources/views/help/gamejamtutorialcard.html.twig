@@ -1,60 +1,62 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
 
 {% block body %}
 
-    <div class="tutorialcards-container size-large">
+  <div class="tutorialcards-container size-large">
 
-        <div class="section">
-            <div class="videoWrapper">
-                <!-- Copy & Pasted from YouTube -->
-                <iframe width="560" height="315"
-                        src={{ "https://www.youtube.com/embed/"~blocks[1].video_link }} frameborder="0" allowfullscreen></iframe>
-            </div>
+    <div class="section">
+      <div class="videoWrapper">
+        <!-- Copy & Pasted from YouTube -->
+        <iframe width="560" height="315"
+                src={{ "https://www.youtube.com/embed/"~blocks[1].video_link }} frameborder="0"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+
+
+    <div class="headline">
+      <h1>{{ ("help.aliceGameJamTutorialcards.title"~page)|trans({}, "catroweb") }}</h1>
+
+      <div class="subtitle">{{ ("help.aliceGameJamTutorialcards.subtitle"~page)|trans({}, "catroweb")|nl2br }}</div>
+    </div>
+
+    <p class="description">{{ ("help.aliceGameJamTutorialcards.description"~page)|trans({}, "catroweb")|nl2br }}</p>
+
+    <div class="section">
+      <a id="url-download" href={{ blocks[2].download_url }}>
+        <button id="download"
+                class="btn btn-primary download-button">{{ "help.aliceGameJamTutorialcards.download"|trans({}, "catroweb") }}</button>
+      </a>
+    </div>
+
+    <div class="section">
+
+      {% if blocks[0].image_orientation == 'landscape' %}
+        <div class="image_landscape">
+          {% for i in 1..blocks[0].image_count %}
+            <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
+          {% endfor %}
         </div>
 
+      {% elseif blocks[0].image_orientation == 'potrait' %}
+        <div class="image_potrait">
+          {% for i in 1..blocks[0].image_count %}
 
-        <div class="headline">
-            <h1>{{ ("help.aliceGameJamTutorialcards.title"~page)|trans({}, "catroweb") }}</h1>
+            <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
 
-            <div class="subtitle">{{ ("help.aliceGameJamTutorialcards.subtitle"~page)|trans({}, "catroweb")|nl2br }}</div>
+          {% endfor %}
         </div>
-
-        <p class="description">{{ ("help.aliceGameJamTutorialcards.description"~page)|trans({}, "catroweb")|nl2br }}</p>
-
-        <div class="section">
-            <a id="url-download" href={{ blocks[2].download_url }}>
-                <button id="download" class="btn btn-primary download-button">{{ "help.aliceGameJamTutorialcards.download"|trans({}, "catroweb") }}</button>
-            </a>
-        </div>
-
-        <div class="section">
-
-            {% if blocks[0].image_orientation == 'landscape' %}
-                <div class="image_landscape">
-                    {% for i in 1..blocks[0].image_count %}
-                        <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
-                    {% endfor %}
-                </div>
-
-            {% elseif blocks[0].image_orientation == 'potrait' %}
-                <div class="image_potrait">
-                    {% for i in 1..blocks[0].image_count %}
-
-                        <img src="{{ asset('images/help/alice/cards/'~page~'_'~i~'.png') }}" alt="" title=""/>
-
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-        </div>
-        <div class="clear"></div>
+      {% endif %}
 
     </div>
+    <div class="clear"></div>
+
+  </div>
 
 
 {% endblock %}

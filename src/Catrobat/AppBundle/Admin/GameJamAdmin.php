@@ -95,8 +95,8 @@ class GameJamAdmin extends AbstractAdmin
       ->add('flavor')
       ->add('start')
       ->add('end')
-      ->add('sample_programs', null, ['class' => Program::class,
-        'admin_code' => 'catrowebadmin.block.programs.all'],
+      ->add('sample_programs', null, ['class'      => Program::class,
+                                      'admin_code' => 'catrowebadmin.block.programs.all'],
         ['admin_code' => 'catrowebadmin.block.programs.all']);
 
   }

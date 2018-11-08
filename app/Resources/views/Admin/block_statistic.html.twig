@@ -1,49 +1,51 @@
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <div class="box">
-            <h3 class="box-header">{{ settings.title }}</h3>
-            <div class="box-body">
-                <div>
-                    <div id="piechart_3d" style="width: 49%; height: 300px; display: inline-block;"></div>
-                    <div id="piechart_3d_mem" style="width: 49%; height: 300px; display: inline-block;"></div>
-                </div>
-            </div>
-
-            <script type="text/javascript">
-                google.load("visualization", "1", {packages:["corechart"]});
-                google.setOnLoadCallback(drawChart);
-                function drawChart() {
-                    var data_space = google.visualization.arrayToDataTable([
-                        ['Discspace', 'Bytes'],
-                        ['Free {{ freeSpace }}', {{ freeSpace_raw }}],
-                        ['Used {{ usedSpace }}',     {{ wholeSpace_raw - freeSpace_raw }}]
-                    ]);
-                    var data_mem = google.visualization.arrayToDataTable([
-                        ['Ram', 'Percent'],
-                        ['Free',     {{ 100-ram }}],
-                        ['Used',      {{ ram }}]
-                    ]);
-
-                    var options_space = {
-                        title: 'Disk Space ({{ wholeSpace }})',
-                        is3D: true,
-                    };
-
-                    var options_mem = {
-                        title: 'RAM',
-                        pieHole: 0.25,
-                    }
-
-                    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                    chart.draw(data_space, options_space);
-
-                    var chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'));
-                    chart_mem.draw(data_mem, options_mem);
-                }
-            </script>
+  {% if is_granted('ROLE_SUPER_ADMIN') %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <div class="box">
+      <h3 class="box-header">{{ settings.title }}</h3>
+      <div class="box-body">
+        <div>
+          <div id="piechart_3d" style="width: 49%; height: 300px; display: inline-block;"></div>
+          <div id="piechart_3d_mem" style="width: 49%; height: 300px; display: inline-block;"></div>
         </div>
-    {% endif %}
+      </div>
+
+      <script type="text/javascript">
+        google.load('visualization', '1', {packages: ['corechart']})
+        google.setOnLoadCallback(drawChart)
+
+        function drawChart ()
+        {
+          var data_space = google.visualization.arrayToDataTable([
+            ['Discspace', 'Bytes'],
+            ['Free {{ freeSpace }}', {{ freeSpace_raw }}],
+            ['Used {{ usedSpace }}',     {{ wholeSpace_raw - freeSpace_raw }}]
+          ])
+          var data_mem = google.visualization.arrayToDataTable([
+            ['Ram', 'Percent'],
+            ['Free',     {{ 100-ram }}],
+            ['Used',      {{ ram }}]
+          ])
+
+          var options_space = {
+            title: 'Disk Space ({{ wholeSpace }})',
+            is3D : true,
+          }
+
+          var options_mem = {
+            title  : 'RAM',
+            pieHole: 0.25,
+          }
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'))
+          chart.draw(data_space, options_space)
+
+          var chart_mem = new google.visualization.PieChart(document.getElementById('piechart_3d_mem'))
+          chart_mem.draw(data_mem, options_mem)
+        }
+      </script>
+    </div>
+  {% endif %}
 {% endblock %}

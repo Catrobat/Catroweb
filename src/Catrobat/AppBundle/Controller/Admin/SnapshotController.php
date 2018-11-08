@@ -18,6 +18,6 @@ class SnapshotController extends CRUDController
     $directory = $this->container->getParameter('catrobat.snapshot.dir');
     $files = $finder->files()->in($directory);
 
-    return $this->render('Admin/snapshots.html.twig', ['files' => $files]);
+    return $this->renderWithExtraParams('Admin/snapshots.html.twig', ['files' => $files]);
   }
 }
