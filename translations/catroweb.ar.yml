@@ -2,6 +2,8 @@
 localLanguage: اللغة الإنجليزية
 username: اسم المستخدم
 password: كلمة المرور
+accountSettings: Account Settings
+email: البريد الإلكتروني
 aboutPocketCode: حول تطبيق بوكت بينت
 tutorials: دروس للتعلم
 googlePlay: متجرجوجل
@@ -9,6 +11,10 @@ passwordsNoMatch: لا تتطابق كلمات المرور.
 error: خطأ
 cancel: إلغاء
 report: تقرير
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: تحميل كـ برنامج
 description: الوصف
 noDescription: لا يوجد أي وصف .
@@ -21,6 +27,8 @@ pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
 less: 'أقل'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: موافق
 clickToDownloadProgram: 'لتحميل مثال عن البرنامج اضغط %link_start% هنا %link_end%.'
 registrationError: 'اسم المستخدم أو عنوان البريد الإلكتروني قيد الاستخدام بالفعل.'
@@ -46,6 +54,23 @@ programs:
   featured: خصائص
   newest: أحدث البرامج
   recommended: برامج مُوصى بها
+  noPrograms: لا يوجد حاليا أية برامج.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
@@ -63,13 +88,18 @@ programs:
   submitted: برامج مقترحة
   uploaded: برامج مُحملة
   reportAsInappropriate: تبليغ كـ محتوى غير مناسب
+  reportProgram: Report program
   languageVersion: 'إصدار لغة كاتروبات: %languageVersion%'
-  reportLoginText: الرجاء%login% للابلاغ عن هذا البرنامج كـ غير لائق.
-  reportDialogHeader: لماذا تعتقد أن هذا البرنامج غير مناسب؟
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: أدخل السبب
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: لا يمكنك وضع علامة للبرنامج الخاص بك.
-  reportAlready: لقد قمت بتأشير علامة على هذا البرنامج بأنه غير مناسب.
-  reportDone: لقد قمت بالابلاغ بأن هذا البرنامج غير مناسب !
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: تحديث التطبيق
   updateAppText: الرجاء تحديث التطبيق الخاص بك الإصدار الأحدث لتتمكن من تحميل هذا البرنامج.
   btnClosePopup: موافق
@@ -81,7 +111,18 @@ programs:
   report: تقرير
   report_popup: تم الإبلاغ بنجاح عن التعليق.
   report_popup_header: تم الإبلاغ
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: أمثلة عن البرامج
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
   by: 'بمقدار'
@@ -106,12 +147,19 @@ passwordRecovery:
     أطيب التحيات,
     فريق كاتروبات.
 profile:
+  edit: Edit your profile
   saveChanges: حفظ التغييرات؟
   newPass: كلمة المرور الجديدة
   repeatPass: تكرار كلمة المرور
+  oldPass: old password
   firstEmail: بريدي الإلكتروني الأول
   secondEmail: البريد الإلكتروني الثاني الخاص بي
   myPrograms: البرامج الخاصة بي
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: كلمة السر الجديدة يجب أن تحتوي على الأقل %length% أحرف.
     passwordTooLong: كلمة السر الجديدة يجب أن تكون على الأكثر %length% أحرف.
@@ -125,6 +173,7 @@ profile:
   programsOf: البرامج من
   changePicture: تغيير الصورة
   avatar:
+    noImage: No Image!
     pictureTooLarge: الصورة التي تم اختيارها كبيرة جداً، ويرجى عدم استخدام الصور أكبر من 5 ميغا بايت.
     uploadError: عذراً، هناك مشكلة أثناء التحميل!
     noSupport: هذا النوع من الصور غير معتمد، الرجاء محاولة صورة أخرى.
@@ -132,6 +181,8 @@ myprofile:
   editProfile: تحرير الملف الشخصي
   edit: تحرير
   done: موافق
+  checkMail: تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني الخاص بك. الرجاء التحقق من علبة البريد الخاصة بك.
+  passwordUpdated: Your password was successfully updated.
   avatar: الصورة الرمزية
   email: البريد الإلكتروني
   editAvatar: تحرير الصورة الرمزية
@@ -141,6 +192,9 @@ myprofile:
   editEmail: تعديل البريد الالكتروني
   deleteAccount: حذف الحساب
   deleteAccountText: هل أنت متأكد من أنك تريد حذف حسابك؟ سيؤدي هذا إلى حذف البرامج المحملة والتعليقات الخاصة بك!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'ترخيص لتشغيل'
   title: 'ترخيص للتشغيل--منح الائتمان والمشاركة'
@@ -322,7 +376,7 @@ help:
       one: "قم بإضافة العنصر الذي تريده, ليتم تشغيل صوت عند النقر عليه, مثلاً كلب."
       two: "قم بإضافة الطُوب التالية حتى تجعل عملية الإعادة ممكنة. قم بإختيار ملف صوتي من مكتبتك الشخصية, مكتبة الوسائط الخاصة بـ\"بوكت كوود\" أو قم بتسجيل ملف صوتي جديد."
     card6:
-      title: "تحدث بشيء"
+      title: "تَحدّث"
       description: "استخدم هذه التعليمة البرمجية لجعل الكائن يتحدث."
       one: "قم بإضافة الكائن الذي تريده ان يتكلم, مثلاً كاري."
       two: "قم بإدراج الطُوب التالية من أجل تمكين الإخراج الصوتي."
@@ -432,15 +486,23 @@ menu:
 programLoader:
   noPrograms: لا يوجد حاليا أية برامج.
 login:
+  login: تسجيل الدخول
   passOrUser: كلمة المرور أو اسم المستخدم غير صحيح.
   noUsername: لم يتم العثور على عنوان البريد الإلكتروني أو اسم المستخدم الخاص بك.
   forgotPass: نسيت كلمة المرور أو اسم المستخدم؟
   recoverPass: استعادة كلمة المرور
   recoverPassSend: تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني الخاص بك. الرجاء التحقق من علبة البريد الخاصة بك.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: إسم المستخدم أو البريد الإلكتروني
   changePass: تغيير كلمة السر
   createAccount: إنشاء حساب
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: أو
+  username: اسم المستخدم
+  email: البريد الألكتروني
+  passwordFirst: كلمة المرور
+  passwordSecond: Password Confirm
 apk:
   download: تنزيل كـ تطبيق
   prepare: 'إعداد التطبيق'
@@ -490,6 +552,7 @@ errors:
   programversion:
     tooold: 'آسف، أنت تستخدم نسخة قديمة من "النص البرمجي لجهاز الجيب". الرجاء تحديثه الى أحدث نسخة.'
 success:
+  text: Success
   registration: تم التسجيل بنجاح
   token: موافق
   upload: لقد تم تحميل مشروعك بنجاح!
@@ -574,7 +637,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: صيانة القرص
+    ramMaintenance: RAM maintenance
     noRemovableObjects: لا يوجد كائنات قابلة للإزالة.
+    removableObjects: Removable objects
     manualBackups: إجراء نُسخ احتياطية يدوية
     noRemovableBackupObjects: لا يوجد ملفات نسخ احتياطية قابلة للإزالة على هذا الخادم.
     btnCreateBackup: إنشاء نسخة إحتياطية
@@ -602,8 +667,6 @@ footer:
   usefulLinks: روابط مفيدة
   legalities: الجوانب القانونية
   communityStats: إحصائيات المجتمع
-  downloads: التنزيلات
-  programs: البرامج
 privacy-policy:
   header: سياسة الخصوصية
   version: Version 2.1, 25 June 2018
@@ -618,10 +681,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

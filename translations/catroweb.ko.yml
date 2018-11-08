@@ -2,13 +2,19 @@
 localLanguage: 영어
 username: 아이디
 password: 비밀번호
-aboutPocketCode: About 포켓코드
+accountSettings: Account Settings
+email: 이메일
+aboutPocketCode: 포켓 코드에 대하여
 tutorials: 튜토리얼
 googlePlay: 구글 플레이
 passwordsNoMatch: 비밀번호가 일치하지 않습니다.
 error: 오류
 cancel: 취소
 report: 보고서
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: 프로그램 다운로드
 description: 설명
 noDescription: 설명 없음
@@ -21,6 +27,8 @@ pleaseTryAgain: '다시 시도하세요!'
 oldVersionError: '포켓코드를 최신 버전으로 업데이트 하시기 바랍니다!'
 more: '자세히'
 less: '간단히'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: OK
 clickToDownloadProgram: '예제 프로그램을 다운로드 하려면 여기 %link_end%를 클릭%link_start%하세요.'
 registrationError: '이미 사용 중인 사용자 이름 또는 이메일 주소입니다.'
@@ -46,6 +54,23 @@ programs:
   featured: 추천
   newest: 최신 프로그램
   recommended: 추천 프로그램
+  noPrograms: 프로그램가 없습니다.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
@@ -63,13 +88,18 @@ programs:
   submitted: 제출된 프로그램
   uploaded: 업로드된 프로그램
   reportAsInappropriate: 부적합한 프로그램으로 보고
+  reportProgram: Report program
   languageVersion: 'Catrobat 언어 버전: %languageVersion%'
-  reportLoginText: '%login% 부적당한 프로그램으로 보고하시기 바랍니다.'
-  reportDialogHeader: 왜 부적합한 프로그램이라고 생각하세요
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: 이유를 입력하세요
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: 자신의 프로그램을 추천할 수 없습니다
-  reportAlready: 이미 이 프로그램을 부적합하다고 추천했습니다
-  reportDone: 이 프로그램을 부적합하다고 신고했습니다
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: 응용 프로그램 업데이트
   updateAppText: 이 프로그램을 다운로드하려면 최신 버전으로 당신의 앱을 업데이트 하세요.
   btnClosePopup: 예
@@ -81,7 +111,18 @@ programs:
   report: 보고서
   report_popup: 코멘트가 성공적으로 추가 되었습니다.
   report_popup_header: 보고되었습니다
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: 예제 프로그램
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: '리믹스 그래프 표시'
   by: '만큼'
@@ -103,12 +144,19 @@ passwordRecovery:
     안녕하세요, 
     Catrobat 팀.
 profile:
+  edit: Edit your profile
   saveChanges: 변경내용을 저장
   newPass: 새로운 비밀번호
   repeatPass: 비밀번호 다시 입력
+  oldPass: old password
   firstEmail: 처음 메일
   secondEmail: 두번째 메일
   myPrograms: 내 프로그램
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: 새 암호는 적어도 %length% 문자 이상이어야 합니다.
     passwordTooLong: 새 암호는 최대 %length% 문자 사용할 수 있습니다.
@@ -122,6 +170,7 @@ profile:
   programsOf: 프로그램
   changePicture: 사진 변경
   avatar:
+    noImage: No Image!
     pictureTooLarge: 선택한 그림이 너무 큽니다, 5mb 보다 큰 이미지를 사용 하지 마십시오.
     uploadError: 죄송합니다, 업로드하는 동안 문제가 발생했습니다!
     noSupport: 이 이미지 형식은 지원되지 않습니다, 그리고 다른 이미지를 시도하십시오.
@@ -129,6 +178,8 @@ myprofile:
   editProfile: 프로필 수정
   edit: 편집
   done: 완료
+  checkMail: 이메일이 귀하의 이메일 주소로 보냈습니다. 받은 편지함을 확인하시기 바랍니다.
+  passwordUpdated: Your password was successfully updated.
   avatar: 아바타
   email: 이메일
   editAvatar: 아바타 편집
@@ -138,6 +189,9 @@ myprofile:
   editEmail: 전자 메일 편집
   deleteAccount: 계정 삭제
   deleteAccountText: 당신의 계정을 삭제하는 것에 동의하시나요? 당신이 올린 프로그램과 댓글이 삭제될 것입니다. 
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: '게임 라이센스'
   title: '신용 및 공유 라이센스'
@@ -426,15 +480,23 @@ menu:
 programLoader:
   noPrograms: 프로그램가 없습니다.
 login:
+  login: 로그인
   passOrUser: 사용자 이름 또는 암호가 잘못되었습니다.
   noUsername: 사용자 이름 또는 이메일 주소를 찾을 수 없습니다.
   forgotPass: 아이디나 비밀번호가 잘못 되었습니다.
   recoverPass: 비밀번호 복구
   recoverPassSend: 이메일이 귀하의 이메일 주소로 보냈습니다. 받은 편지함을 확인하시기 바랍니다.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: 사용자명 또는 이메일
   changePass: 비밀번호 변경하기
   createAccount: 계정 만들기
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: 또는
+  username: 아이디
+  email: 이메일 주소
+  passwordFirst: 비밀번호
+  passwordSecond: Password Confirm
 apk:
   download: 앱 다운로드하기
   prepare: '응용 프로그램 준비'
@@ -484,6 +546,7 @@ errors:
   programversion:
     tooold: '죄송합니다, 오래된 포켓 코드 버전입니다. 최신 버전으로 업데이트 하세요.'
 success:
+  text: Success
   registration: 등록 성공!
   token: OK
   upload: 프로그램가 성공적으로 업로드되었습니다!
@@ -567,7 +630,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: 유지 보수 필요
+    ramMaintenance: RAM maintenance
     noRemovableObjects: 삭제할 오브젝트가 없음.
+    removableObjects: Removable objects
     manualBackups: 수동 백업
     noRemovableBackupObjects: 서버에 삭제할 수 있는 백업파일 없음.
     btnCreateBackup: 백업 만들기
@@ -595,8 +660,6 @@ footer:
   usefulLinks: 유용한 링크
   legalities: 합법적임
   communityStats: 커뮤니티 현황
-  downloads: 다운로드
-  programs: 프로그램
 privacy-policy:
   header: 개인정보 보호방침
   version: Version 2.1, 25 June 2018
@@ -611,10 +674,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

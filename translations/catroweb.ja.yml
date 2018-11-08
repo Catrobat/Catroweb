@@ -2,6 +2,8 @@
 localLanguage: 英語
 username: ユーザー名
 password: パスワード
+accountSettings: Account Settings
+email: メール
 aboutPocketCode: ポケットコードについて
 tutorials: チュートリアル
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: パスワードが一致しませんでした。
 error: エラー
 cancel: キャンセル
 report: 不適切として報告する
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: ダウンロード
 description: 説明
 noDescription: 説明はありません。
@@ -21,6 +27,8 @@ pleaseTryAgain: 'もう一度やり直してください。'
 oldVersionError: 'ポケット コードの最新のバージョンにアップデートしてください!'
 more: '詳細'
 less: '少ない'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: わかりました
 clickToDownloadProgram: 'サンプルのプログラムをダウンロードするには、%link_start% ここ %link_end% をクリックしてください。'
 registrationError: 'ユーザー名またはメール アドレスは、すでに使用されています。'
@@ -46,6 +54,23 @@ programs:
   featured: おすすめ
   newest: 最新のプログラム
   recommended: 推奨のプログラム
+  noPrograms: 現在、プログラムはありません。
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
@@ -63,13 +88,18 @@ programs:
   submitted: 提出されたプログラム
   uploaded: アップロードされたプログラム
   reportAsInappropriate: 不適切として報告します。
+  reportProgram: Report program
   languageVersion: 'Catrobat 言語バージョン: %languageVersion%'
-  reportLoginText: このプログラムを不適切として報告するには %login% してください。
-  reportDialogHeader: なぜこのプログラムは適切なのだと思いますか？
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: 理由を入力してください。
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: 自身のプログラムを不適切として報告することができません。
-  reportAlready: 既にこのプログラム不適切としてフラグを付けた。
-  reportDone: このプログラム不適切として報告された ！
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: アプリの更新
   updateAppText: このプログラムをダウンロードすることができる、最新のバージョンにアプリをアップデートしてください。
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: 不適切として報告する
   report_popup: 正常にコメントを報告しました。
   report_popup_header: 報告済
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: サンプル プログラム
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'リミックスのグラフを表示'
   by: 'によって'
@@ -106,12 +147,19 @@ passwordRecovery:
     よろしくお願いします。
     Catrobat チーム。
 profile:
+  edit: Edit your profile
   saveChanges: 変更を保存します。
   newPass: 新しいパスワード
   repeatPass: パスワードの確認
+  oldPass: old password
   firstEmail: 私の最初のメール アドレス
   secondEmail: 私の 2 番目のメール アドレス
   myPrograms: マイ プログラム
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: 新しいパスワードは、少なくとも %length% 文字必要です。
     passwordTooLong: 新しいパスワードは、最大 %length% 文字にすることができます。
@@ -125,6 +173,7 @@ profile:
   programsOf: プログラム
   changePicture: 写真を変更
   avatar:
+    noImage: No Image!
     pictureTooLarge: 選択した写真が大きすぎる、5 mb より大きいイメージを使用しないでください。
     uploadError: 申し訳ありませんが、アップロード中に問題があった ！
     noSupport: このタイプのイメージはサポートされていません、別の画像を試してください。
@@ -132,6 +181,8 @@ myprofile:
   editProfile: プロファイルを編集
   edit: 編集
   done: 完了
+  checkMail: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
+  passwordUpdated: Your password was successfully updated.
   avatar: アバター
   email: メール
   editAvatar: アバターを編集
@@ -141,6 +192,9 @@ myprofile:
   editEmail: メールを編集
   deleteAccount: アカウントを削除
   deleteAccountText: アカウントを削除してもよろしいですか? これにより、アップロードされたプログラムやコメントが削除されます!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: '再生するライセンス'
   title: 'プレーするライセンス - クレジットと共有を与えます'
@@ -322,7 +376,7 @@ help:
       one: "サウンドを再生するオブジェクトを追加します。例えば犬など。"
       two: "再生を実現するために、次のブロックを挿入します。あなたの個人ライブラリー、ポケットコード メディア ライブラリー、または自分で記録したサウンドを選択します。"
     card6:
-      title: "何か話します"
+      title: "話す："
       description: "このコードを使用すると、オブジェクトが話をします。"
       one: "話したいオブジェクトを追加します。例えばキャリーなど。"
       two: "音声出力を実現するために、次のブロックを挿入します。"
@@ -433,15 +487,23 @@ menu:
 programLoader:
   noPrograms: 現在、プログラムはありません。
 login:
+  login: ログイン
   passOrUser: ユーザー名またはパスワードが正しくありません。
   noUsername: あなたのユーザー名または電子メール アドレスが見つかりませんでした。
   forgotPass: パスワードまたはユーザ名を忘れましたか?
   recoverPass: パスワードの回復
   recoverPassSend: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: ユーザー名またはメールアドレス
   changePass: パスワードを変更する
   createAccount: アカウントを作成
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: ユーザー名
+  email: Email
+  passwordFirst: パスワード
+  passwordSecond: Password Confirm
 apk:
   download: アプリとしてダウンロード
   prepare: 'アプリを準備する'
@@ -491,6 +553,7 @@ errors:
   programversion:
     tooold: '申し訳ありませんが、古いバージョンのポケットコードを使用しています。最新のバージョンに更新してください。'
 success:
+  text: Success
   registration: 登録に成功しました ！
   token: ok
   upload: プロジェクトは正常にアップロードされました!
@@ -575,7 +638,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: ディスクのメンテナンス
+    ramMaintenance: RAM maintenance
     noRemovableObjects: 取り外し可能なオブジェクトはありません。
+    removableObjects: Removable objects
     manualBackups: 手動バックアップ
     noRemovableBackupObjects: このサーバーに取り外し可能バックアップ ファイルはありません。
     btnCreateBackup: バックアップを作成
@@ -603,8 +668,6 @@ footer:
   usefulLinks: 役に立つリンク
   legalities: 法的
   communityStats: コミュニティ状況
-  downloads: ダウンロード
-  programs: プログラム
 privacy-policy:
   header: プライバシーポリシー
   version: バージョン 2.0、2017年9月20日
@@ -619,10 +682,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

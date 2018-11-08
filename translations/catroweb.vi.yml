@@ -2,13 +2,19 @@
 localLanguage: Tiếng Anh
 username: Tên đăng nhập
 password: Mật khẩu
-aboutPocketCode: Về PocketCode
+accountSettings: Account Settings
+email: E-Mail
+aboutPocketCode: Về Pocket Code
 tutorials: Hướng dẫn
 googlePlay: googlePlay
 passwordsNoMatch: Mật khẩu không khớp.
 error: Lỗi
-cancel: Thoát/Hủy
+cancel: Hủy bỏ
 report: Báo cáo
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Tải xuống
 description: Mô tả
 noDescription: Không có mô tả.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Làm ơn hãy thử lại!'
 oldVersionError: 'Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!'
 more: 'hơn/thêm/nhiều hơn'
 less: 'ít hơn'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: Đồng ý
 clickToDownloadProgram: 'Để tải xuống chương trình ví dụ hãy ấn vào %link_start% đây %link_end%.'
 registrationError: 'Tên người dùng hoặc địa chỉ email đã được sử dụng.'
@@ -46,6 +54,23 @@ programs:
   featured: Nổi bật
   newest: Chương trình mới nhất
   recommended: Recommended programs
+  noPrograms: Hiện không có chương trình nào.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Xem nhiều nhất
     downloaded: Tải về nhiều nhất
@@ -63,13 +88,18 @@ programs:
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Báo cáo không hợp lệ
+  reportProgram: Report program
   languageVersion: 'Ngôn ngữ phiên bản Catrobat %languageVersion%'
-  reportLoginText: Làm ơn %login% hãy báo cáo chương trình này là không hợp lệ.
-  reportDialogHeader: Tại sao bạn nghĩ chương trình này không hợp lệ?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Nhập lý do
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Bạn không thể đánh dấu chương trình của chính bạn.
-  reportAlready: Bạn đã đánh dấu chương trình này không hợp lệ.
-  reportDone: Bạn đã báo cáo chương trình này không hợp lệ!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Cập nhật ứng dụng
   updateAppText: Làm ơn hãy cập nhật ứng dụng của bạn lên phiên bản mới nhất để có thể tải chương trình này.
   btnClosePopup: Đồng ý
@@ -81,7 +111,18 @@ programs:
   report: Báo cáo
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'bởi'
@@ -106,12 +147,19 @@ passwordRecovery:
     Trân trọng,
     Nhóm Catrobat.
 profile:
+  edit: Edit your profile
   saveChanges: lưu thay đổi
   newPass: mật khẩu mới
   repeatPass: nhắc lại mật khẩu
+  oldPass: old password
   firstEmail: Email đầu tiên của tôi
   secondEmail: Email thứ hai của tôi
   myPrograms: Chương trình của tôi
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: Mật khẩu mới phải có ít nhất %length% kí tự.
     passwordTooLong: Mật khẩu mới có nhiều nhất %length% kí tự.
@@ -125,6 +173,7 @@ profile:
   programsOf: Các chương trình của
   changePicture: Thay đổi hình ảnh
   avatar:
+    noImage: No Image!
     pictureTooLarge: Hình ảnh bạn lựa chọn quá lớn, xin vui lòng không sử dụng hình ảnh lớn hơn 5mb.
     uploadError: Xin lỗi, đã có một vấn đề trong quá trình tải lên!
     noSupport: Đây là loại hình ảnh không được hỗ trợ, xin vui lòng thử hình ảnh khác.
@@ -132,6 +181,8 @@ myprofile:
   editProfile: Edit profile
   edit: Chỉnh sửa
   done: Đã Thực hiện
+  checkMail: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
   editAvatar: Edit avatar
@@ -141,6 +192,9 @@ myprofile:
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Giấy phép để chơi'
   title: 'Giấy phép để chơi - cung cấp bản quyền và chia sẻ'
@@ -323,7 +377,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Hãy nói gì đó"
+      title: "Nói chuyện"
       description: "Sử dụng mã này để làm cho đối tượng nói."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -434,15 +488,23 @@ menu:
 programLoader:
   noPrograms: Hiện không có chương trình nào.
 login:
+  login: Đăng nhập
   passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
   noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.
   forgotPass: Quên mật khẩu hoặc tên người dùng?
   recoverPass: Khôi phục mật khẩu
   recoverPassSend: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Tên đăng nhập hoặc Email
   changePass: Thay đổi mật khẩu
   createAccount: Tạo tài khoản mới
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: HOẶC
+  username: Tên đăng nhập
+  email: Thư điện tử
+  passwordFirst: Mật khẩu
+  passwordSecond: Password Confirm
 apk:
   download: Tải về ứng dụng
   prepare: 'Chuẩn bị ứng dụng'
@@ -492,6 +554,7 @@ errors:
   programversion:
     tooold: 'Xin lỗi, bạn đang sử dụng phiên bản cũ của Pocket Code. Hãy cập nhật các phiên bản mới nhất.'
 success:
+  text: Success
   registration: Đăng ký thành công!
   token: Đồng ý
   upload: Dự án của bạn được tải lên thành công!
@@ -576,7 +639,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -604,8 +669,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Chính sách bảo mật
   version: Version 2.1, 25 June 2018
@@ -620,10 +683,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

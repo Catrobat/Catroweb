@@ -2,6 +2,8 @@
 localLanguage: İngilizce
 username: Kullanıcı adı
 password: Şifre
+accountSettings: Account Settings
+email: E-Posta
 aboutPocketCode: Cep kodu hakkında
 tutorials: Rehberler
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: Şifreler eşleşmedi.
 error: Hata
 cancel: İptal et
 report: Rapor et
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: indir
 description: Açıklama
 noDescription: Açıklama mevcut değil.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Lütfen yeniden deneyin!'
 oldVersionError: 'En yeni cep kodu sürümüne güncelleyin!'
 more: 'daha fazla'
 less: 'daha az'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: Tamam
 clickToDownloadProgram: 'Örnek programını indirmek için ''''bağlantı başlangıcını'''' buraya ''''bağlantı sonunu'''' için buraya tıklayın.'
 registrationError: 'Kullanıcı adı yada e-posta zaten kullanımda.'
@@ -46,6 +54,23 @@ programs:
   featured: Seçme
   newest: En yeni programlar
   recommended: Önerilen programlar
+  noPrograms: şu anda mevcut program yok.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: En çok İzlenenler
     downloaded: En çok indirilen
@@ -63,13 +88,18 @@ programs:
   submitted: Gönderilen programlar
   uploaded: Yüklenen programlar
   reportAsInappropriate: Uygunsuz olarak rapor et
+  reportProgram: Report program
   languageVersion: 'Catrobat dil sürümü: %languageVersion%'
-  reportLoginText: Lütfen, bu programı uygunsuz olarak değerlendirmek için %login% yapınız.
-  reportDialogHeader: Bu programı neden uygunsuz buldunuz?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Kendi programınızı uygunsuz olarak işaretleyemezsiniz.
-  reportAlready: Bu programı daha önce uygunsuz olarak belirttiniz.
-  reportDone: Bu programı uygunsuz olarak bildirdiniz!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Program güncelleme
   updateAppText: Lütfen programinizi yeni sürümüyle güncelleştirin.
   btnClosePopup: Tamam
@@ -81,7 +111,18 @@ programs:
   report: Rapor et
   report_popup: Yorum başarıyla rapor edildi.
   report_popup_header: Raporlandı
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Örnek programlar
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Remix Grafiğini Göster'
   by: 'tarafından'
@@ -106,12 +147,19 @@ passwordRecovery:
     Saygılarımla,
     Catrobat Ekibiniz.
 profile:
+  edit: Edit your profile
   saveChanges: Değişiklikleri kaydet
   newPass: yeni şifre
   repeatPass: Şifreyi tekrar girin
+  oldPass: old password
   firstEmail: Benim ilk e-postam
   secondEmail: İkinci e-postam
   myPrograms: Benim programlarım
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: "Yeni şifrenin en az uzunluk karakteri %length% olmalıdır.\n \nBağlam | Bağlam İste."
     passwordTooLong: "Yeni şifrenin uzunluğu en fazla %length% olabilir.\n \nBağlam | Bağlam İste."
@@ -125,6 +173,7 @@ profile:
   programsOf: Programları
   changePicture: Resmi değiştir
   avatar:
+    noImage: No Image!
     pictureTooLarge: Seçilen resim çok büyük, 5 mb'den büyük görüntüleri  lütfen kullanmayın.
     uploadError: Üzgünüz, yükleme sırasında bir sorun oluştu!
     noSupport: Bu resim türü desteklenmiyor, lütfen başka bir görüntü deneyin.
@@ -132,6 +181,8 @@ myprofile:
   editProfile: Profili düzenle
   edit: Düzenle
   done: Tamam
+  checkMail: Bir e-posta adresinize gönderildi. Lütfen gelen kutunuzu kontrol edin.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Posta
   editAvatar: Avatarı düzenle
@@ -141,6 +192,9 @@ myprofile:
   editEmail: E-Postayı düzenle
   deleteAccount: Hesabı Sil
   deleteAccountText: Hesabını silmek istediğinden emin misin? Bu senin yüklediğin programları ve yorumları silecek!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Oynamak için lisansınız'
   title: 'Oynamak için lisans- prim ver ve paylaş'
@@ -320,7 +374,7 @@ help:
       one: "Bir sesi istediğiniz nesneye ekleyin ör. köpek."
       two: "Çalmayı mümkün kılmak için aşağıdaki tuğlaları yerleştirin. Kişisel kütüphanenizden, Cep Kod medya kitaplığından bir ses seçin veya kendiniz bir ses kaydedin."
     card6:
-      title: "Bir şey söyle"
+      title: "Konuş"
       description: "Bir nesneyi konuşturmak için bu kodu kullanın."
       one: "Konuşmak istediğiniz nesneyi ekleyin (ör. Carrie)."
       two: "Ses çıkışını mümkün kılmak için aşağıdaki tuğlaları takın."
@@ -430,15 +484,23 @@ menu:
 programLoader:
   noPrograms: şu anda mevcut program yok.
 login:
+  login: Oturum aç
   passOrUser: Kullanıcı adı veya şifre yanlış.
   noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.
   forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
   recoverPass: Parolayı hatırlat
   recoverPassSend: Bir e-posta adresinize gönderildi. Lütfen gelen kutunuzu kontrol edin.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Kullanıcı adı veya E-Posta
   changePass: Şifre değiştir
   createAccount: Bir hesap oluştur
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: YADA
+  username: Kullanıcı adı
+  email: E-posta
+  passwordFirst: Şifre
+  passwordSecond: Password Confirm
 apk:
   download: Uygulama olarak indir
   prepare: 'Uygulamayı hazırla'
@@ -488,6 +550,7 @@ errors:
   programversion:
     tooold: 'Maalesef, Cep Kodunun eski bir sürümünü kullanıyorsunuz. Lütfen en son sürüme güncelleyin.'
 success:
+  text: Success
   registration: Kayıt başarılı!
   token: Tamam
   upload: Proje başarıyla yüklendi!
@@ -572,7 +635,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk bakımı
+    ramMaintenance: RAM maintenance
     noRemovableObjects: Kaldırılamaz objeler mevcut.
+    removableObjects: Removable objects
     manualBackups: El ile yedekleme
     noRemovableBackupObjects: Kaldırılamaz yedek dosyalar bu sunucuda.
     btnCreateBackup: Yedekle
@@ -600,8 +665,6 @@ footer:
   usefulLinks: Yararlı bağlantılar
   legalities: Yasallık
   communityStats: Topluluk İstatistikleri
-  downloads: indirilenler
-  programs: programlar
 privacy-policy:
   header: Gizlilik İlkesi
   version: Version 2.1, 25 June 2018
@@ -616,10 +679,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

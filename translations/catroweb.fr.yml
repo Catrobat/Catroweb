@@ -2,6 +2,8 @@
 localLanguage: anglais
 username: Nom d'utilisateur
 password: Mot de passe
+accountSettings: Account Settings
+email: E-mail
 aboutPocketCode: À propos de Pocket Code
 tutorials: Tutoriels
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: Les mots de passe ne sont pas identiques.
 error: Erreur
 cancel: Annuler
 report: Signaler
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Télécharger
 description: Description
 noDescription: Aucune description disponible.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Essayez à nouveau !'
 oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
 more: 'plus'
 less: 'moins'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: OK
 clickToDownloadProgram: 'Pour télécharger le programme d''exemple, cliquez %link_start% ici %link_end%.'
 registrationError: 'Nom d’utilisateur ou adresse e-mail déjà en cours d’utilisation.'
@@ -46,6 +54,23 @@ programs:
   featured: A l'affiche
   newest: Nouveaux programmes
   recommended: Programmes recommandés
+  noPrograms: Il n'y à aucun programme pour le moment.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Les plus populaires
     downloaded: Les plus téléchargés
@@ -63,13 +88,18 @@ programs:
   submitted: Programmes soumis
   uploaded: Programmes téléchargés
   reportAsInappropriate: Signaler comme inapproprié
+  reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Merci de vous %login% pour signaler ce programme comme étant inapproprié.
-  reportDialogHeader: Pourquoi pensez-vous que ce programme n'est pas approprié ?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Indiquer un motif
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Vous ne pouvez pas marquer votre propre programme.
-  reportAlready: Tu as déjà signalé l'appli comme étant inappropriée.
-  reportDone: Vous avez déclaré ce programme comme étant inapproprié !
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Mettre à jour l'application
   updateAppText: Veuillez mettre à jour votre application pour pouvoir télécharger ce programme.
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: Signaler
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Exemples de programmes
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'par'
@@ -106,12 +147,19 @@ passwordRecovery:
     Best regards,
     Your Catrobat Team.
 profile:
+  edit: Edit your profile
   saveChanges: enregistrer les changements
   newPass: nouveau mot de passe
   repeatPass: confirmez le mot de passe
+  oldPass: old password
   firstEmail: Mon premier email
   secondEmail: Mon deuxième email
   myPrograms: Mes programmes
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: Le nouveau mot de passe doit avoir au moins %length% caractères.
     passwordTooLong: Le nouveau mot de passe peut avoir un maximum de %length% caractères.
@@ -125,6 +173,7 @@ profile:
   programsOf: Programmes de
   changePicture: Changer l'image
   avatar:
+    noImage: No Image!
     pictureTooLarge: L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo.
     uploadError: Désolé, il y a eu un problème pendant le téléchargement !
     noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
@@ -132,6 +181,8 @@ myprofile:
   editProfile: Éditer le profil
   edit: Éditer
   done: Terminé
+  checkMail: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-mail
   editAvatar: Modifier l'avatar
@@ -141,6 +192,9 @@ myprofile:
   editEmail: Modifier l'adresse mail
   deleteAccount: Supprimer mon compte
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Licence pour jouer'
   title: 'Licence de jeu - Partagez et créditez'
@@ -434,15 +488,23 @@ menu:
 programLoader:
   noPrograms: Il n'y à aucun programme pour le moment.
 login:
+  login: Se connecter
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Identifiants oubliés?
   recoverPass: Retrouver le mot de passe
   recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Nom d'utilisateur ou email
   changePass: Modifier le mot de passe
   createAccount: Créer un compte
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OU
+  username: Nom d'utilisateur
+  email: Email
+  passwordFirst: Mot de passe
+  passwordSecond: Password Confirm
 apk:
   download: Télécharger comme une application
   prepare: 'Préparer l''application'
@@ -492,6 +554,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
+  text: Success
   registration: Enregistrement réussi.
   token: OK
   upload: Votre projet a été envoyé avec succès !
@@ -576,7 +639,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -604,8 +669,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Politique de confidentialité
   version: Version 2.1, 25 June 2018
@@ -620,10 +683,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

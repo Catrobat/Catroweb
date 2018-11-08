@@ -151,59 +151,31 @@
                                                                                                             <leftChild>
                                                                                                                 <leftChild>
                                                                                                                     <leftChild>
-                                                                                                                        <type>
-                                                                                                                            STRING
-                                                                                                                        </type>
-                                                                                                                        <value>
-                                                                                                                            hello
-                                                                                                                            world
-                                                                                                                        </value>
+                                                                                                                        <type>STRING</type>
+                                                                                                                        <value>hello world</value>
                                                                                                                     </leftChild>
-                                                                                                                    <type>
-                                                                                                                        FUNCTION
-                                                                                                                    </type>
-                                                                                                                    <value>
-                                                                                                                        LENGTH
-                                                                                                                    </value>
+                                                                                                                    <type>FUNCTION</type>
+                                                                                                                    <value>LENGTH</value>
                                                                                                                 </leftChild>
                                                                                                                 <rightChild>
-                                                                                                                    <type>
-                                                                                                                        NUMBER
-                                                                                                                    </type>
-                                                                                                                    <value>
-                                                                                                                        1
-                                                                                                                    </value>
+                                                                                                                    <type>NUMBER</type>
+                                                                                                                    <value>1</value>
                                                                                                                 </rightChild>
-                                                                                                                <type>
-                                                                                                                    FUNCTION
-                                                                                                                </type>
-                                                                                                                <value>
-                                                                                                                    MIN
-                                                                                                                </value>
+                                                                                                                <type>FUNCTION</type>
+                                                                                                                <value>MIN</value>
                                                                                                             </leftChild>
                                                                                                             <rightChild>
-                                                                                                                <type>
-                                                                                                                    NUMBER
-                                                                                                                </type>
-                                                                                                                <value>
-                                                                                                                    1
-                                                                                                                </value>
+                                                                                                                <type>NUMBER</type>
+                                                                                                                <value>1</value>
                                                                                                             </rightChild>
-                                                                                                            <type>
-                                                                                                                FUNCTION
-                                                                                                            </type>
-                                                                                                            <value>MAX
-                                                                                                            </value>
+                                                                                                            <type>FUNCTION</type>
+                                                                                                            <value>MAX</value>
                                                                                                         </leftChild>
-                                                                                                        <type>FUNCTION
-                                                                                                        </type>
-                                                                                                        <value>CEIL
-                                                                                                        </value>
+                                                                                                        <type>FUNCTION</type>
+                                                                                                        <value>CEIL</value>
                                                                                                     </leftChild>
-                                                                                                    <type>FUNCTION
-                                                                                                    </type>
-                                                                                                    <value>ARCTAN
-                                                                                                    </value>
+                                                                                                    <type>FUNCTION</type>
+                                                                                                    <value>ARCTAN</value>
                                                                                                 </leftChild>
                                                                                                 <type>FUNCTION</type>
                                                                                                 <value>ARCCOS</value>
@@ -260,7 +232,7 @@
                                                     </leftChild>
                                                     <rightChild>
                                                         <type>STRING</type>
-                                                        <value>world</value>
+                                                        <value> world</value>
                                                     </rightChild>
                                                     <type>FUNCTION</type>
                                                     <value>JOIN</value>
@@ -735,8 +707,7 @@
                     <entry>
                         <object reference="../../../../objectList/object"/>
                         <list>
-                            <userVariable
-                                    reference="../../../../../objectList/object/scriptList/script/brickList/brick[4]/userVariable"/>
+                            <userVariable reference="../../../../../objectList/object/scriptList/script/brickList/brick[4]/userVariable"/>
                         </list>
                     </entry>
                 </objectVariableList>

@@ -422,7 +422,7 @@ services:
     public: true
   Catrobat\AppBundle\RecommenderSystem\RecommenderManager: "@recommendermanager"
 
-  wordfilter:
+  rudewordfilter:
     class: Catrobat\AppBundle\Services\RudeWordFilter
     arguments:
     - "@rudewordrepository"

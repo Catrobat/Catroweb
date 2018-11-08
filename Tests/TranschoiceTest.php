@@ -30,22 +30,6 @@ class TranschoiceTest extends \PHPUnit\Framework\TestCase
     $this->assertTrue(true);
   }
 
-  /**
-   * @test
-   */
-  public function all_languages_must_have_a_two_letter_fallback()
-  {
-    $codes = $this->getLanguageCodesFromFilenames();
-    $four_letter_codes = array_filter($codes, function ($val) {
-      return strlen($val) > 2;
-    });
-    foreach ($four_letter_codes as $four_letter_code)
-    {
-      $two_letter_code = explode("_", $four_letter_code)[0];
-      $this->assertContains($two_letter_code, $codes, "No fallback for language code " . $four_letter_code . " found!");
-    }
-  }
-
   public function language_provider()
   {
     $directory = self::LANGUAGE_DIR;
