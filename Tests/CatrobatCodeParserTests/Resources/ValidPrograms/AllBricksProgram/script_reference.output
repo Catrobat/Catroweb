@@ -7,7 +7,7 @@ When program started
 1h_when_brown.png
 ---
 CollisionScript
-When physical collision with "Collision-Object<	-	>	ANYTHING	"
+When physical collision with "Collision-Object< - > ANYTHING"
 1h_when_brown.png
 ---
 StartScript
@@ -51,7 +51,7 @@ When tapped
 1h_when_brown.png
 ---
 CollisionScript
-When physical collision with "Control-Object<	-	>	ANYTHING	"
+When physical collision with "Control-Object< - > ANYTHING"
 1h_when_brown.png
 ---
 BroadcastScript

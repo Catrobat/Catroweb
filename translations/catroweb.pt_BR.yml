@@ -2,6 +2,8 @@
 localLanguage: Inglês
 username: Nome de usuário
 password: Senha
+accountSettings: Account Settings
+email: E-Mail
 aboutPocketCode: Sobre o Pocket Code
 tutorials: Tutoriais
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: As senhas não coincidem.
 error: Erro
 cancel: Cancelar
 report: Denunciar
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Baixar como programa
 description: Descrição
 noDescription: Sem descrição disponível.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, atualize para a versão mais recente do Pocket Code!'
 more: 'mais'
 less: 'menos'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: OK
 clickToDownloadProgram: 'Para baixar o programa de exemplo clique %link_start% aqui %link_end%.'
 registrationError: 'Este nome de usuário ou endereço de e-mail já está em uso.'
@@ -46,6 +54,23 @@ programs:
   featured: Em Destaque
   newest: Programas mais recentes
   recommended: Programas recomendados
+  noPrograms: Não há, atualmente, nenhum programa.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Mais vistos
     downloaded: Mais baixados
@@ -63,13 +88,18 @@ programs:
   submitted: Programas enviados
   uploaded: Programas carregados
   reportAsInappropriate: Reportar como impróprio
+  reportProgram: Report program
   languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
-  reportLoginText: Por favor, faça %login% para reportar este programa como impróprio.
-  reportDialogHeader: Por que você considera este programa impróprio?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Entre um motivo
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Você não pode sinalizar o seu próprio programa.
-  reportAlready: Você já sinalizou este programa como impróprio.
-  reportDone: Você reportou este programa como impróprio!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Atualizar App
   updateAppText: Por favor, atualize o seu aplicativo para a versão mais recente para poder baixar este programa.
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: Denunciar
   report_popup: Este comentário foi denunciado com sucesso.
   report_popup_header: Denunciado
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Exemplos de programas
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Mostrar Grafo de Remistura'
   by: 'por'
@@ -108,12 +149,19 @@ passwordRecovery:
     Atenciosamente,
     Sua Equipe Catrobat.
 profile:
+  edit: Edit your profile
   saveChanges: salvar alterações
   newPass: nova senha
   repeatPass: repita a senha
+  oldPass: old password
   firstEmail: Meu primeiro e-mail
   secondEmail: Meu segundo e-mail
   myPrograms: Meus programas
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: A nova senha deve conter no mínimo %length% caracteres.
     passwordTooLong: A nova senha deve conter no máximo %length% caracteres.
@@ -127,6 +175,7 @@ profile:
   programsOf: Programas de
   changePicture: Alterar Imagem
   avatar:
+    noImage: No Image!
     pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
     uploadError: Desculpe! Houve um problema durante o upload!
     noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
@@ -134,6 +183,8 @@ myprofile:
   editProfile: Editar perfil
   edit: Editar
   done: Concluído
+  checkMail: Um e-mail foi enviado para seu endereço de e-mail. Por favor, verifique sua caixa de entrada.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
   editAvatar: Alterar avatar
@@ -143,6 +194,9 @@ myprofile:
   editEmail: Alterar E-Mail
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Licença para jogar'
   title: 'Licença para jogar - Dê crédito e compartilhe'
@@ -374,7 +428,7 @@ help:
     text0: "Primeiramente, parabéns pelo seu jogo! Agora, você pode carregá-lo no %link% para criar um app Android autônomo, que você pode, então, fazer o upload para o Site do Game Jolt."
     title1: "Cadastro"
     text1: "Primeiro, você precisa criar uma conta. Depois disso, você pode fazer o upload do programa criado. Não se preocupe, é fácil. Você só precisa pensar em um nome de usuário e senha. Após completar ambos, clique em \"Fazer Login ou Registrar\". Só isso!"
-    title2: "Fazer upload"
+    title2: "Upload"
     text2: "Após o processo de registro, você pode carregar o seu jogo. É só pensar em um nome e adicionar uma descrição. Adicione também #AliceJam150 no campo de descrição."
     title3: "Buscar por seu programa"
     text3: "Vá ao seu perfil do Pocket Code, onde todos os seus programas estão listados, ou busque diretamente por o seu programa usando a pesquisa e o nome do programa."
@@ -436,15 +490,23 @@ menu:
 programLoader:
   noPrograms: Não há, atualmente, nenhum programa.
 login:
+  login: Login
   passOrUser: Sua senha ou nome de usuário está incorreto.
   noUsername: Seu nome de usuário ou endereço de e-mail não foi encontrado.
   forgotPass: Esqueceu a senha ou nome de usuário?
   recoverPass: Recuperar senha
   recoverPassSend: Um e-mail foi enviado para seu endereço de e-mail. Por favor, verifique sua caixa de entrada.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Nome de usuário ou E-mail
   changePass: Alterar senha
   createAccount: Criar uma conta
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OU
+  username: Nome de usuário
+  email: E-Mail
+  passwordFirst: Senha
+  passwordSecond: Password Confirm
 apk:
   download: Baixar como app
   prepare: 'Preparar app'
@@ -494,6 +556,7 @@ errors:
   programversion:
     tooold: 'Desculpe, você está usando uma versão antiga do Pocket Code. Por favor, atualize para a versão mais recente.'
 success:
+  text: Success
   registration: Cadastro bem-sucedido!
   token: Ok
   upload: Seu projeto foi carregado com sucesso!
@@ -578,7 +641,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Manutenção de disco
+    ramMaintenance: RAM maintenance
     noRemovableObjects: Não há objetos removíveis disponíveis.
+    removableObjects: Removable objects
     manualBackups: Backups manuais
     noRemovableBackupObjects: Não há arquivos de backup removíveis neste servidor.
     btnCreateBackup: Criar backup
@@ -606,8 +671,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Política de Privacidade
   version: Version 2.1, 25 June 2018
@@ -622,10 +685,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

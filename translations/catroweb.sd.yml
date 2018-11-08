@@ -2,13 +2,19 @@
 localLanguage: انگريزي
 username: يُوزرنانءُ
 password: ڳجھو لفظ
+accountSettings: Account Settings
+email: اي ميل
 aboutPocketCode: پاڪيٽ ڪوڊ جي باري ۾
 tutorials: سبق
 googlePlay: گوگل پلي
 passwordsNoMatch: ڳجھو لفظ غيردرست آهي.
-error: چُڪَ
+error: غلطي
 cancel: رد ڪريو
 report: رپورٽ درج ڪريو
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: اتاريو
 description: تشريح
 noDescription: ڪا بہ تشريح دستياب نہ آهي.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'ٻيهر ڪوشش ڪيو!'
 oldVersionError: 'مهرباني ڪري تازو ترين پاڪيٽ ڪوڊ کي اپڊيٽ ڪيو!'
 more: 'وڌيڪ'
 less: 'گھٽ'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: اوڪي
 clickToDownloadProgram: 'مثال پروگرام ڊائونلوڊ ڪرڻ لاءِ ٽڙڪ%link_start% هتي%link_end%.'
 registrationError: 'يوزر نالو يا ايميل اڳي ئي استعمال هيٺ آهي.'
@@ -46,6 +54,23 @@ programs:
   featured: خاص
   newest: تازا ترين پروگرام
   recommended: صلاح ڏنل پروگرام
+  noPrograms: There are currently no programs.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: گھڻي ۾ گھڻو ڏٺل
     downloaded: گھڻي ۾ گھڻو اتاريل
@@ -63,13 +88,18 @@ programs:
   submitted: جمع ڪرايل پروگرام
   uploaded: اپلوڊ ڪيل پروگرامَ
   reportAsInappropriate: نامناسب هوڻ جي رپورٽ درج ڪريو
+  reportProgram: Report program
   languageVersion: 'ڪيٽروبيٽ جي زبان جو ورزين: %languageVersion%'
-  reportLoginText: هن پروگرام کي نامناسب رپورٽ ڪرڻ لاءِ  %login% ٿيو.
-  reportDialogHeader: توهان ان پروگرام کي نامناسب ڇو ٿا ڀانيو؟
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: سبب ڄاڻايو
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: توهان پنهنجي ئي پروگرام تي جھنڊي لڳائي نہ ٿا سگھو.
-  reportAlready: ان پروگرام تي توهان اڳ ۾ ئي نامناسب هجڻ جي جھنڊي لڳائي چڪا آهيو.
-  reportDone: توهان ان پروگرام لاءِ نامناسب هجڻ جي رپورٽ درج ڪرائي ڇڏي!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: ايپ کي اپڊيت ڪريو
   updateAppText: مهرباني ڪري پنهنجي ايپ کي نئين ورزن تي اپديٽ ڪريو تہ جيئن هي پروگرام ڊائونلوڊ ڪري سگهجي.
   btnClosePopup: اوڪي
@@ -81,10 +111,21 @@ programs:
   report: رپورٽ درج ڪريو
   report_popup: رايو ڪاميابي سان رپورٽ ڪيو ويو.
   report_popup_header: رپورٽ ڪيو ويو
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'ريمڪس گراف ڏيکاريو'
-  by: 'کان'
+  by: 'by'
   open: 'کوليو'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'معاف ڪجو...'
@@ -107,12 +148,19 @@ passwordRecovery:
     نيڪ تمنائون،
     توهان جي ڪيٽروبيٽ سٿ.
 profile:
+  edit: Edit your profile
   saveChanges: تبديليون سانڍيو
   newPass: نئون ڳجھو لفظ
   repeatPass: ڳجھو لفظ ورجايو
+  oldPass: old password
   firstEmail: منهنجي پهرين برق ٽپال
   secondEmail: منهنجي ٻين برق ٽپال
   myPrograms: منهنجا پروگرام
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: نئون ڳجھو لفظ گھٽ ۾ گھٽ بہ %length% اکر ڊگھو گھرجي.
     passwordTooLong: نئون ڳجھو لفظ وڌ ۾ وڌ %length% اکر ڊگھو ٿي سگھي ٿو.
@@ -126,6 +174,7 @@ profile:
   programsOf: پروگرام از
   changePicture: تصوير بدلايو
   avatar:
+    noImage: No Image!
     pictureTooLarge: توهان جي چونڊيل تصوير هيڪاندي وڏي آهي، مهرباني ڪري 5 ميگا ٻاٽڻ کان وڏا عڪس نہ استعمال ڪريو.
     uploadError: معاف ڪندا، فائيل چاڙهيندي ڪو مسئلو درپيش اچي ويو!
     noSupport: عڪس جو اهو فارميٽ ڪار نہ آهي، مهرباني ڪري ڪو ٻيو عڪس آزمايو.
@@ -133,6 +182,8 @@ myprofile:
   editProfile: پروفائل تصحيح ڪريو
   edit: تصحيح
   done: ٺيڪ آهي
+  checkMail: An email was sent to your email address. Please check your inbox.
+  passwordUpdated: Your password was successfully updated.
   avatar: اوتار
   email: اي ميل
   editAvatar: اوتار تصحيح ڪريو
@@ -142,6 +193,9 @@ myprofile:
   editEmail: اي ميل تصحيح ڪريو
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'کيڏڻ جو اجازت نامو'
   title: 'کيڏڻ جو اجازت نامو - شاباش ڏيو ۽ ونڊيو'
@@ -435,15 +489,23 @@ menu:
 programLoader:
   noPrograms: There are currently no programs.
 login:
+  login: لاگ ان
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: يُوزرنانءُ
+  email: Email
+  passwordFirst: ڳجھو لفظ
+  passwordSecond: Password Confirm
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -493,6 +555,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
+  text: Success
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
@@ -577,7 +640,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -605,8 +670,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: ذاتياتي پاليسي
   version: Version 2.1, 25 June 2018
@@ -621,10 +684,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

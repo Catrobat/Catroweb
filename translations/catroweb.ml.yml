@@ -2,6 +2,8 @@
 localLanguage: ഇംഗ്ലീഷ്
 username: ഉപയോക്തൃനാമം
 password: പാസ്‌വേഡ്
+accountSettings: Account Settings
+email: E-Mail
 aboutPocketCode: About Pocket Code
 tutorials: ട്യൂട്ടോറിയലുകൾ
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: The passwords didn't match.
 error: തെറ്റ്
 cancel: വേണ്ടെന്നു വയ്ക്കുക
 report: റിപ്പോർട്ട് 
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Download as program
 description: Description
 noDescription: No description available.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'കൂടുതൽ'
 less: 'അല്പം'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: ശരി
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
@@ -46,6 +54,23 @@ programs:
   featured: Featured
   newest: Newest programs
   recommended: Recommended programs
+  noPrograms: There are currently no programs.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -63,13 +88,18 @@ programs:
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Report as inappropriate
+  reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this program as inappropriate.
-  reportDialogHeader: Why do you think this program is inappropriate?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: You cannot flag your own program.
-  reportAlready: You've already flagged this program as inappropriate.
-  reportDone: You reported this program as inappropriate!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: റിപ്പോർട്ട് 
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'by'
@@ -106,12 +147,19 @@ passwordRecovery:
     Best regards,
     Your Catrobat Team.
 profile:
+  edit: Edit your profile
   saveChanges: save changes
   newPass: new password
   repeatPass: repeat password
+  oldPass: old password
   firstEmail: My first email
   secondEmail: My second email
   myPrograms: My programs
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
@@ -125,6 +173,7 @@ profile:
   programsOf: Programs of
   changePicture: Change picture
   avatar:
+    noImage: No Image!
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
@@ -132,6 +181,8 @@ myprofile:
   editProfile: Edit profile
   edit: Edit
   done: Done
+  checkMail: An email was sent to your email address. Please check your inbox.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
   editAvatar: Edit avatar
@@ -141,6 +192,9 @@ myprofile:
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'License to play'
   title: 'License to play - Give credit and share'
@@ -434,15 +488,23 @@ menu:
 programLoader:
   noPrograms: There are currently no programs.
 login:
+  login: Login
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: ഉപയോക്തൃനാമം
+  email: Email
+  passwordFirst: പാസ്‌വേഡ്
+  passwordSecond: Password Confirm
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -492,6 +554,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
+  text: Success
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
@@ -576,7 +639,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -604,8 +669,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Privacy Policy
   version: Version 2.1, 25 June 2018
@@ -620,10 +683,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

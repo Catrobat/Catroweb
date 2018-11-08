@@ -2,6 +2,8 @@
 localLanguage: انگریزی
 username: صارف کا نام
 password: خفیہ کوڈ
+accountSettings: Account Settings
+email: ای-میل
 aboutPocketCode: پاکٹ کوڈ کے بارے میں
 tutorials: اسباق
 googlePlay: گوگل پلے
@@ -9,6 +11,10 @@ passwordsNoMatch: خفیہ کوڈ مشابہ نہیں۔
 error: خرابی
 cancel: منسوخ
 report: رپورٹ
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: ڈاؤنلوڈ
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
@@ -21,6 +27,8 @@ pleaseTryAgain: 'برائے مہربانی دوبارہ کوشش کریں!'
 oldVersionError: 'برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!'
 more: 'مزید'
 less: 'کم'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: ٹھيک ہے
 clickToDownloadProgram: 'نمونے کے پروگرام کو ڈاؤن لوڈ کرنے کے لئے %link_start% یہاں %link_end% کلک کریں۔.'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
@@ -46,6 +54,23 @@ programs:
   featured: نمایاں
   newest: تازہ ترین پروگرام
   recommended: Recommended programs
+  noPrograms: اس وقت کوئی پروگرام نہیں ہے۔
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -63,13 +88,18 @@ programs:
   submitted: جمع شدہ پروگرام
   uploaded: اپ لوڈ شدہ پروگرام
   reportAsInappropriate: رپورٹ غیرموزوں ہے
+  reportProgram: Report program
   languageVersion: 'کاٹروبٹ زبان ورژن: %languageVersion%'
-  reportLoginText: برائے مہربانی اس پروگرام کو غیر موزوں رپورٹ کرنے کے لئے {*login_link*} کریں۔
-  reportDialogHeader: آپ اس پروگرام کو غیرموزوں کیوں سمجھتے ہیں؟
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: وجہ بتائیں
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: آپ اپنے پروگرام کو فلیگ نہیں کرسکتے۔
-  reportAlready: آپ پہلے ہی اس پروگرام کو غیرموزوں فلیگ کرچکے ہیں۔
-  reportDone: آپ نے اس پروگرام کو غیرموزوں رپورٹ کیا!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: پروگرام اپ ڈیٹ کریں
   updateAppText: اس پروگرام کو ڈاؤن لوڈ کرنے کے لئے اپنے پروگرام کو اپ ڈیٹ کریں.
   btnClosePopup: ٹھیک ہے
@@ -81,7 +111,18 @@ programs:
   report: رپورٹ
   report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
   report_popup_header: اطلاعات کے مطابق
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'by'
@@ -102,12 +143,19 @@ passwordRecovery:
     نیک تمنائیں،
     آپ کی کاٹروبیٹ ٹیم
 profile:
+  edit: Edit your profile
   saveChanges: تبدیلیاں محفوظ کریں
   newPass: نیا خفیہ کوڈ
   repeatPass: خفیہ کوڈ دہرائیے
+  oldPass: old password
   firstEmail: میری پہلی ای میل
   secondEmail: میری دوسری ای میل
   myPrograms: میرے پروگرامات
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.
     passwordTooLong: نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.
@@ -121,6 +169,7 @@ profile:
   programsOf: کے پروگرامات
   changePicture: تصویر تبدیل کریں
   avatar:
+    noImage: No Image!
     pictureTooLarge: آپکی منتخب کردہ تصویر بہت بڑی ہے، برائے مہربانی 5mb سے بڑے تصاویر استعمال نہ کریں۔
     uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
     noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
@@ -128,6 +177,8 @@ myprofile:
   editProfile: پروفائل میں ترمیم کریں
   edit: تدوین کریں
   done: مکمل ہوا
+  checkMail: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
+  passwordUpdated: Your password was successfully updated.
   avatar: اوتار
   email: ای-میل
   editAvatar: اوتار مین تبدیلی کریں
@@ -137,6 +188,9 @@ myprofile:
   editEmail: ای میل تدوین کریں
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'کھیلنے کے لئے لائسنس'
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
@@ -233,12 +287,12 @@ help:
         text5: 'اب آپکو نئی تصویر کا انتخاب کرنا ہو گا.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "بولیے"
+      title: "Speak"
       description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: 'اب آپ کو پتہ چلے گا کے کس طرح اک اوبجیکٹ سے بات کرائی جاتی ہے.'
+        text3: 'Tap play to see the behaviour on the stage.'
     step6:
       title: 'بار بار'
       description: "یہ مرحلہ آپ کو آبجیکٹ کے طرز عمل کو دہرانے کا طریقہ دکھاتا ہے ۔"
@@ -297,7 +351,7 @@ help:
       one: "وہ اوبجیکٹ شامل کریں جس کا آپ سائز بدلنا چاہتے ہیں، مثلاً جانور."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: "دکھا واٹ تبدیل کریں"
+      title: "Change Look"
       description: "اوبجیکٹ کی دکھا واٹ کو تبدیل کریں."
       one: "شامل کریں وہ اوبجیکٹ جس کی دکھا واٹ آپ تبدیل کرنا چاہتے ہیں، مثلاً آئیٹمز."
       two: "Include further pictures in the object's looks."
@@ -319,7 +373,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "بولیے"
+      title: "Speak"
       description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -334,7 +388,7 @@ help:
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "نشر کرنین"
+      title: "Broadcast"
       description: "ایک اوبجیکٹ سے دوسرے اوبجیکٹ کو میسیج بھجین۔"
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
@@ -430,15 +484,23 @@ menu:
 programLoader:
   noPrograms: اس وقت کوئی پروگرام نہیں ہے۔
 login:
+  login: لاگ اِن
   passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
   noUsername: آپکا یوزر نیم یا ای میل نہیں ملا.
   forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
   recoverPass: خفیہ کوڈ بحال کریں
   recoverPassSend: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: صارف کا نام یا ای میل
   changePass: خفیہ کوڈ تبدیل کریں
   createAccount: ایک اکاؤنٹ بنائیں
-  or: یا
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
+  or: OR
+  username: صارف کا نام
+  email: ای میل
+  passwordFirst: خفیہ کوڈ
+  passwordSecond: Password Confirm
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
   prepare: 'ایپ تیار کریں'
@@ -488,6 +550,7 @@ errors:
   programversion:
     tooold: 'معاف کیجیے، آپ پاکٹ کوڈ کا پرانا ورژن استعمال کر رہے ہیں. برائے مہربانی اپ ڈیٹ کریں تازہ ترین ورژن میں.'
 success:
+  text: Success
   registration: رجسٹریشن کامیاب!
   token: ٹھيک ہے
   upload: آپکے پراجیکٹ کو کامیابی کے ساتھ اپ لوڈ کیا گیا!
@@ -572,7 +635,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: بحالی ڈسک
+    ramMaintenance: RAM maintenance
     noRemovableObjects: کوئی ہٹائی جانے والی اشیاء دستیاب نہیں ۔
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: بیک اپ بنائیں
@@ -600,8 +665,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: رازداری کا طریقہ کار
   version: Version 2.1, 25 June 2018
@@ -616,10 +679,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

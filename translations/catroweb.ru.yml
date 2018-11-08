@@ -2,36 +2,44 @@
 localLanguage: Английский
 username: Имя пользователя
 password: Пароль
-aboutPocketCode: О программе
+accountSettings: Account Settings
+email: E-Mail
+aboutPocketCode: О Pocket Code
 tutorials: Обучение
 googlePlay: Google Play
 passwordsNoMatch: Пароли не совпадают.
 error: Ошибка
 cancel: Отменить
 report: Сообщить о проблеме
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Скачать программу
 description: Описание
 noDescription: Без описания.
 country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
-imprint: '&#x410;&#x43D;&#x433;&#x43B;&#x438;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x412;&#x435;&#x43B;&#x438;&#x43A;&#x43E;&#x431;&#x440;&#x438;&#x442;&#x430;&#x43D;&#x438;&#x44F;)'
+imprint: Английский (Великобритания)
 somethingWentWrong: 'Упс, что-то пошло не так.'
 pleaseTryAgain: 'Пожалуйста, попробуй еще раз!'
 oldVersionError: 'Пожалуйста, скачай последнюю версию Pocket Code!'
 more: '&#x41A;&#x430;&#x442;&#x430;&#x43B;&#x43E;&#x43D;&#x441;&#x43A;&#x438;&#x439;'
 less: '&#x41A;&#x438;&#x442;&#x430;&#x439;&#x441;&#x43A;&#x438;&#x439; (&#x423;&#x43F;&#x440;&#x43E;&#x449;&#x435;&#x43D;&#x43D;&#x44B;&#x439;)'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: ОК
 clickToDownloadProgram: 'Что бы скачать пример программы нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
-notifications: 'Notifications'
+notifications: 'Уведомления'
 wellDone: "Well done!"
-done: "Done!"
+done: "Готово!"
 notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Невозможно отметить оповещения, как прочитанные!"
-pleaseWait: "Please wait..."
+pleaseWait: "Пожалуйста, подождите..."
 indexPage:
   recommendedSection:
     info:
@@ -45,7 +53,24 @@ programs:
     statistics: More Statistics
   featured: Рекомендуемые
   newest: Новые приложения
-  recommended: Recommended programs
+  recommended: Рекомендуемые программы
+  noPrograms: На данный момент программы отсутствуют.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
@@ -63,13 +88,18 @@ programs:
   submitted: Отправленные программы
   uploaded: Загруженные программы
   reportAsInappropriate: Пожаловаться
+  reportProgram: Report program
   languageVersion: 'Версия языка Catrobat: %languageVersion%'
-  reportLoginText: Пожалуйста, %login% для того чтобы пожаловаться на приложение.
-  reportDialogHeader: '&#x41E;&#x442;&#x43C;&#x435;&#x43D;&#x438;&#x442;&#x44C;'
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Введите причину
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: '&#x43F;&#x440;&#x43E;&#x441;&#x43C;&#x43E;&#x442;&#x440;&#x43E;&#x432;'
-  reportAlready: '&#x441;&#x43A;&#x430;&#x447;&#x438;&#x432;&#x430;&#x43D;&#x438;&#x439;'
-  reportDone: '&#x412;&#x44B; &#x43E;&#x442;&#x43C;&#x435;&#x442;&#x438;&#x43B;&#x438; &#x44D;&#x442;&#x43E;&#x442; &#x43F;&#x440;&#x43E;&#x435;&#x43A;&#x442; &#x43A;&#x430;&#x43A; &#x43D;&#x435;&#x443;&#x43C;&#x435;&#x441;&#x442;&#x43D;&#x44B;&#x43C;!'
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Обновить приложение
   updateAppText: Пожалуйста, обновите приложение до последней версии, чтобы скачать эту программу.
   btnClosePopup: Ок
@@ -81,7 +111,18 @@ programs:
   report: Сообщить о проблеме
   report_popup: Комментарий добавлен.
   report_popup_header: Сообщение доставлено.
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'на'
@@ -90,7 +131,7 @@ remixGraph:
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
   programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'Неизвестный пользователь'
 passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
@@ -109,12 +150,19 @@ passwordRecovery:
     С уважением,
     Команда Catrobat.
 profile:
+  edit: Edit your profile
   saveChanges: Сохранить
   newPass: Новый пароль
   repeatPass: Повторите пароль
-  firstEmail: '&#x412;&#x44B; &#x443;&#x432;&#x435;&#x440;&#x435;&#x43D;&#x44B; &#x447;&#x442;&#x43E; &#x445;&#x43E;&#x442;&#x438;&#x442;&#x435; &#x443;&#x434;&#x430;&#x43B;&#x438;&#x442;&#x44C; &#x44D;&#x442;&#x43E;&#x442; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B;?'
-  secondEmail: '&#x412;&#x44B; &#x443;&#x441;&#x43F;&#x435;&#x448;&#x43D;&#x43E; &#x43E;&#x431;&#x43D;&#x43E;&#x432;&#x438;&#x43B;&#x438; &#x441;&#x432;&#x43E;&#x44E; &#x441;&#x442;&#x440;&#x430;&#x43D;&#x443;.'
+  oldPass: old password
+  firstEmail: Вы уверены что хотите удалить этот адрес электронной почты
+  secondEmail: Вы успешно обновили свою страну.
   myPrograms: Мои программы
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: Пароль должен содержать как минимум %length% символов.
     passwordTooLong: Пароль должен содержать максимум %length% символов.
@@ -122,19 +170,22 @@ profile:
     passwordWrong: Неверный пароль
     emailNotValid: Некорректный электронный адрес.
     emailMissing: Ошибка во время обновления электронного адреса. Вы должны иметь как минимум один подтвержденный электронный адрес.
-    emailExists: '&#x41D;&#x435; &#x43F;&#x440;&#x430;&#x432;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x438;&#x43B;&#x438; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435;.'
+    emailExists: Не правильный пароль или прозвище.
     submitSuccess: Сохранено!
   reallyDeleteProgram: Вы действительно хотите удалить свою программу
   programsOf: Программы
-  changePicture: '&#x421;&#x442;&#x440;&#x430;&#x43D;&#x430;'
+  changePicture: Страна
   avatar:
+    noImage: No Image!
     pictureTooLarge: Не возможно использовать данное изображение, размер данного изображения превышает 5 мб.
     uploadError: Простите, к сожалению во время загрузки произошла ошибка!
-    noSupport: '&#x412;&#x430;&#x448;&#x435; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B; &#x43E;&#x442;&#x441;&#x443;&#x442;&#x441;&#x442;&#x432;&#x443;&#x435;&#x442;.'
+    noSupport: Ваше прозвище или адрес электронной почты отсутствует.
 myprofile:
   editProfile: Редактировать профиль
   edit: Редактирование
   done: Готово
+  checkMail: Мы отправили письмо на ваш электронный адрес. Пожалуйста, проверьте входящие сообщения.
+  passwordUpdated: Your password was successfully updated.
   avatar: Аватар
   email: E-Mail
   editAvatar: Изменить аватар
@@ -142,11 +193,14 @@ myprofile:
   editPassword: Изменить пароль
   editCountry: Изменить название страны
   editEmail: Изменить E-Mail
-  deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  deleteAccount: Удалить аккаунт
+  deleteAccountText: Вы уверены, что хотите удалить свою учетную запись? Это удалит ваши загруженные программы и комментарии!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Лицензия на игру'
-  title: '&#x41B;&#x438;&#x446;&#x435;&#x43D;&#x437;&#x438;&#x44F; &#x434;&#x43B;&#x44F; &#x43F;&#x440;&#x43E;&#x438;&#x433;&#x440;&#x44B;&#x432;&#x430;&#x43D;&#x438;&#x44F; - &#x423;&#x43A;&#x430;&#x437;&#x44B;&#x432;&#x430;&#x439;&#x442;&#x435; &#x438;&#x441;&#x442;&#x43E;&#x447;&#x43D;&#x438;&#x43A; &#x438; &#x434;&#x435;&#x43B;&#x438;&#x442;&#x435;&#x441;&#x44C;'
+  title: 'Лицензия для проигрывания - Указывайте источник и делитесь'
   text1: Вообразите, что каждая программа приготовленная на Catrobat это пирог, очень особенный пирог, приготовленный по уникальному рецепту (программными блоками). Каждый может поделиться своим своим уникальным рецептом пирога с каждым членом общества Catrobat. И это значит что каждый сможет учиться на опыте других и приготовить свой особенный пирог!
   text2: 'Нет никаких секретов: все инструкции или рецепты для приготовления какого угодно пирога открыты для всех желающих, любой может использовать эти рецпты сколько угодно раз, менять их или готовить по ним свои собственные идеи... То есть пироги.'
   text3: "Вы можете есть пироги или используя рецепты других пользователей, создать свой собственный рецепт, возможно с другими ингредиентами. Это возможно благодаря двум простым требованиям:"
@@ -164,13 +218,13 @@ teachers:
 termsOfUse:
   title: Условия использования
   headline: Добро пожаловать в сообщество Catrobat!
-  text1: '&#x432;&#x441;&#x435;&#x445; &#x432;&#x43E;&#x437;&#x440;&#x430;&#x441;&#x442;&#x43E;&#x432; (&#x43E;&#x442; &#x434;&#x435;&#x442;&#x435;&#x439; &#x434;&#x43E; &#x43F;&#x43E;&#x434;&#x440;&#x43E;&#x441;&#x442;&#x43A;&#x43E;&#x432;, &#x431;&#x430;&#x431;&#x443;&#x448;&#x435;&#x43A; &#x438; &#x434;&#x435;&#x434;&#x443;&#x448;&#x435;&#x43A;)'
+  text1: 'всех возрастов (от детей до подростков, бабушек и дедушек):'
   text2: "Нам нужна ваша помощь для того чтобы сделать это сообщество комфортным для каждого. Вот как вы можете помочь:"
   text3: "В рамках проекта Catrobat мы хотим способствовать развитию сотрудничества и позволить творчеству объединиться в интересах всего человечества. Вы также можете стать активным членом сообщества Catrobat, даря ваши программы сообществу так же, как другие активные участники дарят свои программы вам:"
   text4: 'Этот подарок вам от нас:'
   text5: 'Наши условия использования обслуживания:'
   list1:
-    item1: '&#x441;&#x43E; &#x432;&#x441;&#x435;&#x43C;&#x438; &#x443;&#x440;&#x43E;&#x432;&#x43D;&#x44F;&#x43C;&#x438; &#x43E;&#x43F;&#x44B;&#x442;&#x430;'
+    item1: со всеми уровнями опыта
     item2: Для всех возрастов ( от детей и до подростков, и бабушек, и дедушек)
     item3: С любым уровнем опыта
   list2:
@@ -202,10 +256,9 @@ help:
     title: "Пошаговое вступление"
     start: "Исходное положение:"
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      С помощью этих видео вы создадите вашу первую программу - интерактивную открытку. Следуйте данным вам инструкциям.
+      Во время создания открытки, вы ознакомитесь с основами Pocket Code, которые пригодятся вам в будущих проектах.
+      После просмотра этих видеогайдов, вы сможете свободно создавать своими руками проекты Pocket Code.
     step1:
       title: 'Создать новую программу'
       detail:
@@ -316,7 +369,7 @@ help:
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: "Скольжение"
+      title: "Скользить "
       description: "Пусть Ваш объект скользит по экрану."
       one: "Add the object you want to be gliding. e.g. plane."
       two: "Insert the following bricks and define the area in which the movement should happen."
@@ -426,26 +479,34 @@ oauth:
 search:
   dotdotdot: Поиск...
   search: Поиск
-  results: '&#x420;&#x435;&#x437;&#x443;&#x43B;&#x44C;&#x442;&#x430;&#x442;&#x44B; &#x43F;&#x43E;&#x438;&#x441;&#x43A;&#x430;'
+  results: Результаты поиска
   resultcount: Найдено %count% результатов
   fail: Please enter at least a single search term
 menu:
-  profile: '&#x438;&#x437;&#x43C;&#x435;&#x43D;&#x438;&#x442;&#x44C; &#x43C;&#x43E;&#x439; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44C;'
+  profile: изменить мой пароль
   login: Войти
-  logout: '1 &#x434;&#x435;&#x43D;&#x44C; &#x43D;&#x430;&#x437;&#x430;&#x434;'
+  logout: 1 день назад
   admin: Admin
 programLoader:
   noPrograms: На данный момент программы отсутствуют.
 login:
-  passOrUser: '&#x42D;&#x442;&#x43E;&#x442; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B; &#x43D;&#x435;&#x434;&#x435;&#x439;&#x441;&#x442;&#x432;&#x438;&#x442;&#x435;&#x43B;&#x435;&#x43D;.'
+  login: Войти
+  passOrUser: Этот адрес электронной почты недействителен.
   noUsername: Ваше имя пользователя или адрес электронной почты не были найдены.
-  forgotPass: '&#x41B;&#x43E;&#x433;&#x438;&#x43D;'
-  recoverPass: '&#x412;&#x432;&#x435;&#x434;&#x438;&#x442;&#x435; &#x432;&#x430;&#x448;&#x435; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x43E;&#x439; &#x43F;&#x43E;&#x447;&#x442;&#x44B;:'
+  forgotPass: Логин
+  recoverPass: Введите ваше прозвище или адрес электронной почты
   recoverPassSend: Мы отправили письмо на ваш электронный адрес. Пожалуйста, проверьте входящие сообщения.
-  userOrEmail: '&#x421;&#x43E;&#x445;&#x440;&#x430;&#x43D;&#x435;&#x43D;&#x438;&#x435; &#x432;&#x430;&#x448;&#x435;&#x433;&#x43E; &#x43D;&#x43E;&#x432;&#x43E;&#x433;&#x43E; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44F;, &#x43F;&#x43E;&#x436;&#x430;&#x43B;&#x443;&#x439;&#x441;&#x442;&#x430;, &#x43F;&#x43E;&#x434;&#x43E;&#x436;&#x434;&#x438;&#x442;&#x435;...'
-  changePass: '&#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x44D;&#x43B;&#x435;&#x43A;&#x442;&#x440;&#x43E;&#x43D;&#x43D;&#x430;&#x44F; &#x43F;&#x43E;&#x447;&#x442;&#x430;'
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  userOrEmail: Сохранение вашего нового пароля, пожалуйста, подождите...
+  changePass: прозвище или электронная почта
   createAccount: Создание учетной записи
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: ИЛИ
+  username: Имя пользователя
+  email: Email
+  passwordFirst: Пароль
+  passwordSecond: Password Confirm
 apk:
   download: Скачать приложение
   prepare: 'Подготовка приложения'
@@ -459,20 +520,20 @@ errors:
     not_exists: Такого имени пользователя не существует.
     not_email: Имя пользователя не может быть адресом электронной почты.
   password:
-    blank: '&#x41F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x434;&#x43E;&#x43B;&#x436;&#x435;&#x43D; &#x43E;&#x442;&#x43B;&#x438;&#x447;&#x430;&#x442;&#x44C;&#x441;&#x44F; &#x43E;&#x442; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x430;.'
+    blank: Пароль должен отличаться от прозвища.
     short: 'Ваш пароль должен содержать как минимум {{ limit }} символов.'
   description:
     rude: Описание не должно содержать грубых слов.
   country:
-    blank: '&#x410;&#x443;&#x442;&#x435;&#x43D;&#x442;&#x438;&#x444;&#x438;&#x43A;&#x430;&#x446;&#x438;&#x44F; &#x43D;&#x435; &#x443;&#x434;&#x430;&#x43B;&#x430;&#x441;&#x44C;.'
+    blank: Аутентификация не удалась.
     invalid: Название страны введено неправильно
   email:
     blank: Поле email не должно быть пустым.
     invalid: Ваш электронный адрес, похоже, не действителен.
-    exists: '&#x41D;&#x435; &#x43F;&#x440;&#x430;&#x432;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; &#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44C; &#x438;&#x43B;&#x438; &#x43F;&#x440;&#x43E;&#x437;&#x432;&#x438;&#x449;&#x435;.'
+    exists: Не правильный пароль или прозвище.
   id:
     blank: Открытый код проверки подлинности не должен быть пустым.
-  login: '&#x41E;&#x442;&#x432;&#x435;&#x442; &#x43E;&#x442; mediawiki API &#x431;&#x44B;&#x43B; &#x43D;&#x435; &#x43F;&#x440;&#x430;&#x432;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x43C;.'
+  login: Ответ от mediawiki API был не правильным.
   post-data: POST-Data неправильные или отсутствуют!
   checksum:
     missing: Клиент не отправил файл контрольной суммы! Вы используете устаревшую версию Pocket Code?
@@ -485,7 +546,7 @@ errors:
     invalid: Недопустимый файл
   image.missing: Файл, к которому обращается проект XML, не найден в папке проекта
   unknown: Неизвестная ошибка
-  token: '&#x410;&#x443;&#x442;&#x435;&#x43D;&#x442;&#x438;&#x444;&#x438;&#x43A;&#x430;&#x446;&#x438;&#x44F; &#x443;&#x441;&#x442;&#x440;&#x43E;&#x439;&#x441;&#x442;&#x432;&#x430; &#x43F;&#x440;&#x43E;&#x432;&#x430;&#x43B;&#x438;&#x43B;&#x430;&#x441;&#x44C;: &#x43D;&#x435;&#x434;&#x435;&#x439;&#x441;&#x442;&#x432;&#x438;&#x442;&#x435;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; &#x442;&#x43E;&#x43A;&#x435;&#x43D;!'
+  token: 'Аутентификация устройства провалилась: недействительный токен!'
   programname:
     rude: Имя программы не должно содержать нецензурных слов.
   program:
@@ -495,6 +556,7 @@ errors:
   programversion:
     tooold: 'К сожалению, Вы используете старую версию Pocket Code. Пожалуйста, обновите до последней версии.'
 success:
+  text: Success
   registration: Регистрация завершена успешно!
   token: ок
   upload: Проект был успешно загружен!
@@ -578,7 +640,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Обслуживание диска
+    ramMaintenance: RAM maintenance
     noRemovableObjects: Нет объектов для удаления.
+    removableObjects: Removable objects
     manualBackups: Ручное резервное копирование
     noRemovableBackupObjects: Нет удаляемых резервных копий файлов на этом сервере.
     btnCreateBackup: Создать резервную копию
@@ -606,8 +670,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Политика конфиденциальности
   version: Version 2.1, 25 June 2018
@@ -622,10 +684,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Вы не можете создать аккаунт без подтверждения, однако основные функции будут доступны.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

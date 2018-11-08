@@ -1,49 +1,49 @@
 ---
-localLanguage: English
-username: Korisničko ime
-password: Lozinka
+localLanguage: Engleză
+username: nume de utilizator
+password: Parolă
 accountSettings: Account Settings
 email: E-Mail
-aboutPocketCode: O Pocket Code-u
-tutorials: Vodiči
-googlePlay: Google Play
-passwordsNoMatch: Lozinke se ne podudaraju.
-error: Pogreška
-cancel: Odustani
-report: Prijavi
+aboutPocketCode: Despre Catroid
+tutorials: Tutoriale
+googlePlay: Magazin Play
+passwordsNoMatch: Parolele nu se potrivesc.
+error: Eroare
+cancel: Anulare
+report: Raport
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Preuzmi
-description: Opis
-noDescription: Opis nije dostupan.
-country: Država
-loginText: prijava
-privacyPolicy: Pravila privatnosti
-imprint: Impresum
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'više'
-less: 'manje'
+download: Descarca
+description: Descrierea
+noDescription: Nici o descriere disponibilă.
+country: Țară
+loginText: Conectare
+privacyPolicy: Politică de confidenţialitate
+imprint: Imprint
+somethingWentWrong: 'Ups... ceva nu a mers bine.'
+pleaseTryAgain: 'Încearcă din nou!'
+oldVersionError: 'Te rog să actualizezi cea mai nouă versiune de Pocket Code!'
+more: 'Mai mult'
+less: 'Mai puțin'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: OK
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+clickToDownloadProgram: 'Pentru a descărca programul de exemplu apasă %link_start% aici %link_end%.'
+registrationError: 'Numele de utilizator sau adresa de email sunt deja în folosință.'
+notifications: 'Notificări'
+wellDone: "Bine lucrat!"
+done: "Efectuat!"
+notificationsReadMessage: "Ați citit toate notificările."
+notificationsClearedMessage: "Toate notificările au fost marcate ca fiind citite."
+clearAllNotificationsButtonTitle: "Marchează totul ca fiind citit"
+notificationsClearError: "Imposibil de marcat notificările ca fiind citite!"
+pleaseWait: "Vă rugăm să așteptați..."
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
+      title: 'Ce programe sunt recomandate aici?'
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   welcome:
@@ -51,10 +51,10 @@ programs:
     subtitle: Create stories, games and more...
     download: Download the app
     statistics: More Statistics
-  featured: Izdvojeni
-  newest: Newest programs
-  recommended: Recommended programs
-  noPrograms: Trenutačno nema programa.
+  featured: Recomandate
+  newest: Progrămele noi
+  recommended: Progrămele recomandate
+  noPrograms: There are currently no programs.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -72,49 +72,49 @@ programs:
   tooLongDescription: The program description is too long!
   rudeWordsInDescription: You can't use rude words in your description!
   most:
-    viewed: Najgledanije
-    downloaded: Sa najviše preuzimanja
-  random: Random Programs
-  related: Related Programs
-  downloads: '%downloads% downloads'
-  sample: Example Programs
-  views: '%views% views'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
+    viewed: Cele mai vizualizate
+    downloaded: Cele mai descărcate
+  random: Progrămele aleatorii
+  related: Progrămele asemanatoare
+  downloads: '%downloads% descărcări'
+  sample: Exemplu Programe
+  views: '%views% vizualizări'
+  likeThumbsUpDetailText: '{0}0 persoane au dat thumbs up la aceasta |{1}1 persoană a dat thumbs up la aceasta |]1,Inf]%persons% persoane au dat thumbs up la aceasta'
   likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
   likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Programs
-  uploaded: Uploaded Programs
-  reportAsInappropriate: Prijavi kao neprikladno
+  likeWowDetailText: '{0}0 persoane au reacționat cu "Wooow!" la aceasta |{1}1 persoană a reacționat cu "Wooow!" la aceasta |]1,Inf]%persons% persoane au reacționat cu "Wooow!" la aceasta'
+  remixes: '{0}0 remixuri |{1}1 remix |]1,Inf]%remixes% remixuri'
+  newRemixesNotificationTitle: '|{1}"%programName%" are 1 nou remix: |]1,Inf] "%programName%" are %remixes% noi remixuri:'
+  submitted: Programele trimise
+  uploaded: Programele încărcate
+  reportAsInappropriate: Raportare ca necorespunzător
   reportProgram: Report program
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'Versiune Catrobat Limba: %languageVersion%'
   reportLoginText: Please %login% to report this program.
   reportDialogHeader: Why do you want to report this program?
-  reportDialogReason: Unesite razlog
+  reportDialogReason: Introduceţi un motiv
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
   reportRadioButtonDislike: I don't like it
-  reportOwnProgram: Ne možeš označiti vlastiti program.
+  reportOwnProgram: Nu pot semnaliza propriul program.
   reportAlready: You've already flagged this program.
   reportDone: You reported this program!
-  updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this program.
+  updateAppHeader: Actualizare a aplicației
+  updateAppText: Te rog să actualizeze aplicația la cea mai nouă versiune pentru a putea descărca acest program.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Izbrisati
-  report: Prijavi
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  checkout_this_program: Verifică acest program Catrobat
+  show_more: Arată mai mult
+  comments: Comentarii
+  send: Trimite
+  delete: șterge
+  report: Raport
+  report_popup: Comentariul a fost raportat cu succes.
+  report_popup_header: Raportat
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
+  nolb_example: Exemple de programe
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -124,112 +124,112 @@ programs:
   wow: Wooow!
   link: Copy program link to clipboard
 remixGraph:
-  showRemixGraph: 'Show Remix Graph'
-  by: 'od'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  showRemixGraph: 'Arată graficul remixului'
+  by: 'cu'
+  open: 'Deschide'
+  showPaths: 'Afișați modalitățile'
+  programNotAvailableErrorTitle: 'Ne pare rău...'
+  programNotAvailableErrorDescription: 'Acest program nu mai este disponibil!'
+  programNotAvailable: 'Indisponibil'
+  programUnknownUser: 'Utilizator necunoscut'
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Recuperare parolă Catrobat
   message: |
-    Dear %username%.
+    Dragă %username%.
     
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
+    Ai solicitat resetarea parolei tale pe %appplication_url% deoarece ți-ai uitat parola. Daca nu ai solicitat asta, te rugăm să ignori acest mesaj. Acesta va expira și va deveni nefolositor în 24 de ore.
+    Pentru a îți reseta parola și a crea una noua, te rugăm să accesezi următoarea pagină: %confirmationUrl%
     
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
+    îți poți utiliza numele de utilizator și parola oricând pentru a accesa comunitatea %appplication_url%.
+    Pentru a face asta, doar vizitați următoarea pagină: %loginPage%
+    Pentru a edita detaliile profilului dumneavoastră, vizitează această pagină: %profilePage%
     
-    Best regards,
-    Your Catrobat Team.
+    Toate cele bune,
+    Echipa Catrobat.
 profile:
   edit: Edit your profile
-  saveChanges: spremi izmjene
-  newPass: new password
-  repeatPass: repeat password
+  saveChanges: salvează schimbările
+  newPass: parolă nouă
+  repeatPass: repetă parola
   oldPass: old password
-  firstEmail: Moja prva email adresa
-  secondEmail: Moja druga email adresa
-  myPrograms: My programs
+  firstEmail: 'Sunte&#x21B;i siguri c&#x103; dori&#x21B;i s&#x103; &#x219;terge&#x21B;i aceast&#x103; adres&#x103; de e-mail?'
+  secondEmail: 'A&#x21B;i actualizat &#x21B;ara dvs. cu succes.'
+  myPrograms: Programele mele
   follows: Follows
   follower: Follower
   unfollowUser: Unfollow this user!
   followUser: Follow this user!
   amountOfPrograms: Amount of programs
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: Lozinka se mora razlikovati od korisničkog imena.
-    passwordWrong: Wrong password
-    emailNotValid: Ova email adresa nije valjana.
-    emailMissing: Pogreška tijekom ažuriranja email adrese. Moraš imati barem jednu potvrđenu email adresu.
-    emailExists: Email adresa već postoji.
-    submitSuccess: spremljeno!
-  reallyDeleteProgram: Želiš li zaista izbrisati svoj program
-  programsOf: Programi od
-  changePicture: Promijeni sliku
+    passwordTooShort: Noua parolă trebuie să aibă cel puţin %length% caractere.
+    passwordTooLong: Noua parolă poate avea maxim %length% caractere.
+    passwordIsUsername: Parola trebuie să difere de numele de utilizator.
+    passwordWrong: Parolă greșită
+    emailNotValid: Această adresă de e-mail nu este validă.
+    emailMissing: Eroare în timpul actualizării aceastei adrese electronice. Trebuie să ai cel puţin o adresă de e-mail validă.
+    emailExists: 'Parola sau numele au fos gre&#x219;ite.'
+    submitSuccess: salvat!
+  reallyDeleteProgram: Într-adevăr doriţi să ştergeţi programul tău
+  programsOf: Programe de
+  changePicture: '&#x21A;ara'
   avatar:
     noImage: No Image!
-    pictureTooLarge: Izabrana slika je prevelika, molimo da ne koristiš slike veće od 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: Ovaj tip slike nije podržan, molimo pokušaj sa drugom slikom.
+    pictureTooLarge: Imaginea ta alese este prea mare, te rog să nu folosi imagini mai mare de 5MB.
+    uploadError: Ne pare rau, a parut o problemă în timpul încărcari!
+    noSupport: 'Numele sau adresa email lipse&#x219;te.'
 myprofile:
-  editProfile: Edit profile
-  edit: Uredi
-  done: Izvršeno
-  checkMail: Email je poslan na tvoju email adresu. Molimo provjeri svoj ulazni spremnik.
+  editProfile: Editați profilul
+  edit: Editează
+  done: Done
+  checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
-  deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAvatar: Editați avatarul
+  editUsername: Editați numele de utilizator
+  editPassword: Editați parola
+  editCountry: Editați țara
+  editEmail: Editați E-Mail-ul
+  deleteAccount: Ștergeți contul
+  deleteAccountText: Sunteți sigur că doriți să ștergeți contul dumneavoastră? Aceasta va șterge programele încărcate și comentariile!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
   notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
-  link: 'Licenca za reproduciranje'
-  title: 'LIcenca za reproduciranje - Daj kredit i podijeli'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  link: 'Licenţă pentru a juca'
+  title: 'Licen&#x21B;a pentru joac&#x103; - Da&#x21B;i creditul &#x219;i &#xEE;mp&#x103;r&#x21B;i&#x21B;iv&#x103;'
+  text1: Imaginează-ți că fiecare program Catrobat este o prăjitură foarte specială care vine cu propria ei rețetă(blocuri de programare). Toți membrii din comunitatea Catrobat își împărtășesc prăjiturile lor împreună cu rețetele. Asta inseamnă că poți să te bucuri de prăjituri și poți invăta cum să le faci singur!
+  text2: 'Nu există rețete ascunse: instrucțiunile privind modul de a face aceste prăjituri sunt deschise pentru toată lumea să utilizeze, reutilizeze, modifice și să servească ca inspirație pentru noi idei... adică torturi.'
+  text3: "Vă puteți mânca torturile, precum și copia rețetele altor persoane pentru a vă face propriul dumneavoastră tort, poate cu diferite ingrediente. Această libertate vine cu două cerințe simple:"
+  text4: "La infiintarea comunitatii Catrobat, noi am decis sa adoptam aceasta abordare, inca de atunci, noi am crezut in ajutor si ca in cadrul comunitatii vei fi ajutat sa inveti si sa fii creativ.  Prin distribuirea \"retetei si ingredientelor\" (script si artwork), oamenii se pot ajuta intre ei cu idei si toata lumea va beneficia."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: 'Aflaţi mai multe despre termenii de utilizare a comunitatii Catrobat online pe %link-termsOfUse%.'
   list1:
-    item1: podijeli svoje kolače zajedno sa receptima
-    item2: daj kredit onome koji te je ispirisao
-  version: Verzija 1.1, 2 travanj 2013
+    item1: Imparte-ti "prajiturile" impreuna cu "reteta"
+    item2: Ofera credite celor care te-au inspirat
+  version: Versiunea 1.1, 2 Aprilie 2013
 teachers:
   login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+    title: 'Zona profesorilor'
+    description: 'Aceasta zona poate fi folosita de catre profesori.'
 termsOfUse:
-  title: Uvjeti korištenja
-  headline: Dobrodošao/la u Catrobat zajednicu!
-  text1: 'Kao dio Catrobat zajednice, dijeliš programe i ideje s ljudima:'
-  text2: "Trebamo tvoju pomoć kako bi ova zajednica bila mjesto podrške za svakog člana. Evo kako možeš pomoći:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Naš poklon za tebe:'
-  text5: 'Naši uvjeti korištenja i usluga:'
+  title: Termeni de utilizare
+  headline: Bine ai venit in comunitatea Catrobat!
+  text1: 'de toate v&#xEE;rstele (de la copii mici p&#xEE;n&#x103; la adolescen&#x21B;i &#x219;i bunici)'
+  text2: "Avem nevoie de ajutorul tău pentru a face această comunitate un loc mai suportiv pentru fiecare membru. Iată cum poți să ne ajuți:"
+  text3: "Prin intermediul proiectului Catrobat, dorim să promovăm cooperarea și să permitem creativitatea tuturor membriilor pentru beneficiul întregii umanități. Poți de asemenea să devii un membru activ a comunității Catrobat încărcând progrămelele tale și apoi oferindu-l comunității ca un cadou, la fel ca ceilalți membrii activi care dau programele lor ție:"
+  text4: 'Cadoul nostru pentru tine:'
+  text5: 'Termenii de utilizare și serviciile:'
   list1:
-    item1: iz više različitih država i kultura
-    item2: svih uzrasta (od djece i tinejdžera do baka i dјedova)
-    item3: sa različitim razinama iskustava
+    item1: 'cu toate nivelele de experien&#x21B;&#x103;'
+    item2: de toate vârstele (de la copii tineri până la adolescenți și bunici)
+    item3: cu toate nivelele de experiență
   list2:
-    item1: Imaj razumijevanja. Prilikom zajedničkog korištenja programa, imaj na umu da ljudi mnogih različitih dobi i porijekla vide tvoj doprinos.
-    item2: "Daj kredit. Slobodno modificiraj programe drugih ljudi - samo pazi da im daš kredit. Jedno mjesto gdje možeš dati kredit je u opisu tvog programa. Molimo pogledaj odlomak, ispod ovog popisa, sa detaljima o modificiranju programa drugih korisnika."
-    item3: "Budi iskren. Ne pretvaraj se da si netko drugi da bi prevario zajednicu."
-    item4: "Čuvaj osobne podatke. Ne dijeli svoju email adresu, broj telefona ili druge osobne podatke za kontakt."
-    item5: "Pomozi održati stranicu ljubaznom. Ako misliš da bi drugi mogli pronaći neki program ili značenje komentara, uvredljivim, previše nasilnim ili na neki drugi način neprikladnim, samo klikni na gumb \"prijavi kao neprikladan\" i ostavi kratko objašnjenje. Catrobat tim će pregledati izvješće i može ukloniti program, komentar ili objavu."
+    item1: Fii respectuos. Când distribui programele, te rog să reții că lumea de vârste diferite o să îți vadă contribuția ta.
+    item2: "Acordă meritele. Simte-te liber să faci versiuni modificate ale programelor realizate de alte persoane. Doar asigură-te că le acorzi meritele. Un loc de a da meritele cuiva este în descrierea programului tău. Te rog să consulți paragraful punctat de mai jos pentru detalii referitoate la modificarea programelor a altor utilizatori."
+    item3: "Fii cinstit. Nu pretinde a fi alt cineva decât cine ești sau să încerci să păcălești comunitatea."
+    item4: "Păstrează datele personale private. Nu împărtăși adresa ta de e-mail, numărul de telefon sau alte informații personale de contact."
+    item5: "Ajută păstrând acest site prietenos. Dacă observi că alții au găsit un program cu comentarii jignitoare, neadecvate sau prea violente, fă click pe butonul 'Raporteaza ca inadecvat' și lasă o explicație scurtă. Echipă Catrobat o să îți revizuiască raportul tău și va elimină orice program, comentariu sau postare."
   list3:
     item1: "By uploading a program to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat programs. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat programs give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other programs. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded program is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your program.
@@ -241,17 +241,17 @@ termsOfUse:
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
     item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: Ako si mlađi od 13 godina, moraš pitati roditelje ili zakonske skrbnike da li će ti oni dopustiti da koristiš Catrobat softver aplikacije i usluge.
+    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
     item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "Svi Catrobat softveri i internet sredstva su ponuđeni u nadi da će biti korisni, ali bez jamstva."
+    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Navrati ovdje s vremena na vrijeme, jer mi uvijek pokušavamo da poboljšamo naše uvjete korištenja.
+  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Verzija 1.3, 4 Ožujak 2014
+  version: Versiunea 1.3, 4 martie 2014
 help:
   stepByStep:
-    title: "Uvod korak po korak"
-    start: "Početni položaj:"
+    title: "Întroducere în Pas-cu-Pas"
+    start: "Poziţia iniţială:"
     description: |
       Here you create your first program, an interactive postcard using the following walkthrough videos.
       You have to follow the instructions given to you.
@@ -260,39 +260,39 @@ help:
     step1:
       title: 'Make a new program'
       detail:
-        text1: 'Dodirni "Novi".'
-        text2: 'Unesi naziv programa, odaberi "Započni novi program" i pritisni "OK".'
+        text1: 'Apăsaţi pe "Nou".'
+        text2: 'Introduceţi un nume de program, selectaţi "Crează program gol" şi apăsaţi "OK".'
     step2:
       title: "Create a new object"
       detail:
-        text1: 'Pritisni:'
+        text1: 'Apăsaţi:'
         text2: 'Choose the source of the first look of your new object.'
         text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'Nacrtaj novi izgled.'
-        special2: 'Odaberi iz galerije.'
-        special3: 'Slikaj.'
+        special1: 'Desenaţi un aspect nou.'
+        special2: 'Alegeţi din galerie.'
+        special3: 'Fotografiaţi.'
     step3:
       title: "Start Moving"
       detail:
-        text1: 'Pritisni:'
-        text2: 'Prvi blok koji koristimo pripada kategoriji "Kretanje".'
-        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
+        text1: 'Apăsaţi:'
+        text2: 'Prima caramida pe care o folosim este din categoria "Mişcare".'
+        text3: 'Alege caramida "Alunecare". Obiectul se va muta pe scena la noua poziţie definită cu caramida.'
         text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
         text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: 'Use the Android Back Button to get back from the stage.'
+        text6: 'Folosiţi butonul înapoi de la Android pentru a pleca din scenă.'
     step4:
-      title: "Promjena izgleda"
-      description: "Možeš promijeniti izgled svog objekta."
+      title: "Change Look"
+      description: "You can change the look of your object."
       detail:
         text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
         text2: 'Snap the brick underneath the "Glide" - brick.'
         text3: 'Tap into the dropdown field to create a new look.'
         text4: 'Choose the source of the image like before.'
-        text5: 'Sada trebaš izabrati novu sliku.'
+        text5: 'Now you have to select the new image.'
         text6: 'Tap play to see the behaviour on the stage.'
     step5:
-      title: "Govori"
-      description: "Sada ćeš saznati kako napraviti objekt koji govori."
+      title: "Vorbește"
+      description: "Now you will find out how to make an object talk."
       detail:
         text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
         text2: 'Snap the brick underneath the "Switch to look" brick.'
@@ -305,7 +305,7 @@ help:
         text2: 'Snap the “Forever” brick underneath the "When program started" - brick.'
         text3: 'Add another "Glide" brick.'
         text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'Pritisni na polje za tekst od x i y vrijednosti i postavi ih na 0.'
+        text5: 'Tap into the text field of the x and y value and set to 0.'
         text6: 'Tap play to see the behaviour on the stage.'
     step7:
       title: "Tapping is everything"
@@ -314,86 +314,86 @@ help:
         text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
         text2: 'Place the "When tapped" underneath the other bricks.'
         text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'Sada imaš ovu skriptu.'
+        text4: 'Now you have this script.'
         text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
     step8:
       title: "Copy, delete or edit a brick"
       detail:
-        text1: 'Jednim dodirom na lijevu stranu svakog bloka otvaraš kontekst izbornik. Na njemu možeš pomjerati, kopirati, izbrisati ili uređivati vrijednosti bloka sa uređivačem formula.'
+        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
     step9:
       title: "Navigation in the app"
       detail:
-        text1: 'Koristi Android-ov gumb za natrag za navigaciju u aplikaciji.'
-        text2: 'Idi natrag jedan zaslon na pregled svog objekta. Ovdje možeš ići u skripte i u  prikaz izgleda i zvukova objekta. Tu možeš preimenovati, kopirati, dodavati ili izbrisati izglede i zvukove.'
-        text3: 'Koristi opet Android-ov gumb za natrag da bi prikazao/la pregled svojih objekata i pozadine.'
+        text1: 'Use the Android Back Button to navigate in the app.'
+        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
+        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
     step10:
       title: "Change the background"
       description: "This is the overview of your objects and your program's background."
       detail:
-        text1: 'Pozadina je kao objekt, ali ti možeš imati samo jednu pozadinu.'
-        text2: 'Možeš dodati skripte, zvukove i izglede na isti način na objekt pozadine.'
+        text1: 'The background is like an object, but you just can have one background.'
+        text2: 'You can add scripts, sounds and look in the same way to the background object.'
     step11:
       title: "Main Menu"
-      description: "Koristi Android-ov gumb za natrag da bi došao/la na ovaj zaslon."
+      description: "Use the Android Back Button to get to this screen."
       detail:
-        text1: 'Nastavi sa trenutno otvorenim programom.'
-        text2: 'Dodaj novi program.'
-        text3: 'Vidi sve svoje lokalne programe.'
-        text4: 'Idi na stranicu za pomoć i razgovaraj sa drugim korisnicima.'
+        text1: 'Continue with your currently opened program.'
+        text2: 'Add a new program.'
+        text3: 'See all your local programs.'
+        text4: 'Go to the help site and discuss with other users.'
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
         text6: 'Upload the program that is currently opened.'
   tutorialcards:
-    title: "Vodiči"
-    description1: "Ovaj vodič će ti pokazati kako korisiti učinkovite trikove u"
-    getReady: "Pripremi se:"
+    title: "Tutoriale"
+    description1: "These tutorials show you how to use effective tricks in Pocket Code."
+    getReady: "Get Ready:"
     tryCode: "Try this code:"
-    doIt: "Učini to:"
-    tip: "Dodatni savjet:"
+    doIt: "Do it:"
+    tip: "Extra Tip:"
     card1:
-      title: "Promjena veličine"
+      title: "Change Size"
       description: "Change the size of an object."
       one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: "Promjena izgleda"
-      description: "Iskoristi ovu vještinu za automatsko brojanje."
+      title: "Change Look"
+      description: "Change the looks of an object."
       one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
       three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
     card3:
-      title: "Pokretne animacije"
-      description: "Iskoristi ovu vještinu ako želiš leteću papigu."
+      title: "Animation"
+      description: "Animate objects"
       one: "Add the object you want to be moving."
       two: "Include another picture in the object's looks which illustrates the movement."
       three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
     card4:
-      title: "Klizati"
-      description: "Kreći se lagano sa jedne točke na drugu."
+      title: "Alunecă"
+      description: "Let your object glide over the screen."
       one: "Add the object you want to be gliding. e.g. plane."
       two: "Insert the following bricks and define the area in which the movement should happen."
     card5:
-      title: "Reproduciranje zvuka"
+      title: "Play a Sound"
       description: "Play a sound by tapping on the object."
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Govori"
-      description: "Iskoriti ovaj kod da bi napravio govoreći objekt."
+      title: "Vorbește"
+      description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
     card7:
-      title: "GSenzor"
-      description: "Iskorisiti ovu vještinu za kontrolu objekta sa nagibanjem uređaja."
+      title: "Sensor"
+      description: "Control an object by using the inclination sensors."
       one: "Add the object you want to be moving on stage."
       two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
     card8:
-      title: "Kompas"
-      description: "Iskoristi ovaj kod za pravljenje kompasa."
+      title: "Compass"
+      description: "Create you own compass"
       one: "Add the object you want to point in compass direction."
       two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
     card9:
-      title: "Razglasi"
-      description: "Pogledaj ovaj kod! Ovo ti pokazuje kako komunicirati između objekata."
+      title: "Difuzează"
+      description: "Send messages from one object to another."
       one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
       two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
       three: "In this case the background changes when the object in the front layer is tapped."
@@ -414,19 +414,19 @@ help:
       one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
-    title: "Početni programi"
-    description: "Isprobaj ove početne programe. Pogledaj ih, pa da napraviš promjene, dodaj svoje ideje."
+    title: "Programe pentru începători"
+    description: "Încearcă aceste programe pentru începători. Uite-te în ele ca să faci modificări și să-ți adaugi ideele tale."
     categories:
-      games: "Igre"
-      animations: "Animacije"
-      interactive: "Interactive Art and Stories"
+      games: "Jocuri"
+      animations: "Animații"
+      interactive: "Artă interactivă şi Povestiri"
       music: "Music And Dance"
   gameJam:
     title: "How to upload a Pocket Code game to the Game Jolt Site?"
     text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
     title1: "Registration"
     text1: "First you need to create an account. After that you can upload your created program. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Upload"
+    title2: "Încărcare"
     text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
     title3: "Search for your program"
     text3: "Go to your Pocket Code profile where all your programs are listed or search directly for your program by using the search and your program name."
@@ -475,35 +475,35 @@ oauth:
   username_hint: The username should not be your real name.
   usernameTaken: Username already taken, please choose a different one.
 search:
-  dotdotdot: Pretraži...
-  search: Pretraga
-  results: Rezultati pretraživanja
+  dotdotdot: Caută...
+  search: Caută
+  results: 'Rezultatele c&#x103;ut&#x103;rii'
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
-  profile: Moj profil
-  login: prijava
-  logout: Odjava
+  profile: Profilul meu
+  login: Intrare
+  logout: Deconectare
   admin: Admin
 programLoader:
-  noPrograms: Trenutačno nema programa.
+  noPrograms: There are currently no programs.
 login:
-  login: prijava
-  passOrUser: Lozinka ili korisničko ime je netočno.
-  noUsername: Korisničko ime ili email adresa nije pronađena.
-  forgotPass: Lozinka ili korisničko ime zaboravljeni?
-  recoverPass: Povrati svoju lozinku
-  recoverPassSend: Email je poslan na tvoju email adresu. Molimo provjeri svoj ulazni spremnik.
+  login: Intrare
+  passOrUser: 'Adresa de email nu este valid&#x103;.'
+  noUsername: Your username or email address was not found.
+  forgotPass: Ai uitat parola sau numele de utilizator?
+  recoverPass: Recuperează parola
+  recoverPassSend: An email was sent to your email address. Please check your inbox.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
-  userOrEmail: Korisničko ime ili E-mail
-  changePass: Promijeni lozinku
+  userOrEmail: Nume de utilizator sau adresă de e-mail
+  changePass: Schimbă parola
   createAccount: Create an account
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
-  or: OR
-  username: Korisničko ime
+  or: SAU
+  username: nume de utilizator
   email: Email
-  passwordFirst: Lozinka
+  passwordFirst: Parolă
   passwordSecond: Password Confirm
 apk:
   download: Download as app
@@ -518,21 +518,21 @@ errors:
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
   password:
-    blank: Lozinka nedostaje.
+    blank: Lipsește parola.
     short: 'Your password must have at least {{ limit }} characters.'
   description:
     rude: Description must not contain rude wordes.
   country:
-    blank: Država nije izabrana.
+    blank: 'Autentificarea &#xEE;n board a e&#x219;uat.'
     invalid: Invalid country
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: Email adresa već postoji.
+    exists: 'Parola sau numele au fos gre&#x219;ite.'
   id:
     blank: Open Authentication ID must not be blank
-  login: Lozinka ili korisničko ime je netočno.
-  post-data: POST-podaci nisu ispravni ili nedostaju!
+  login: Numele de utilizator sau parola sunt incorecte.
+  post-data: POST-Data not correct or missing!
   checksum:
     missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
     invalid: invalid checksum
@@ -544,74 +544,74 @@ errors:
     invalid: invalid file
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
-  token: 'Provjera autentičnosti uređaja nije uspjela: nevaljan auth-token!'
+  token: 'Autentificarea dispozitivului a e&#x219;uat: auth-token invalid!'
   programname:
     rude: Programname must not contain rude wordes.
   program:
     invalid: Invalid program.
   languageversion:
-    tooold: 'Nažalost, tvoj program sadrži staru verziju Catrobat jezika! Koristiš li zadnju verziju Pocket Code-a?'
+    tooold: 'Sorry, your programm contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
-    tooold: 'Žao nam je, koristiš staru verziju Pocket Code-a. Ažuriraj na zadnju verziju.'
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
   text: Success
-  registration: Registracija uspješna!
+  registration: 'BOARD registrare reu&#x219;it&#x103;!'
   token: ok
-  upload: Tvoj projekat je uspiješno uploadovan!
+  upload: Proiectul a fost încărcat cu succes!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < prije minutu |{1}prije 1 minutu |]1, Inf]prije %count% minuta'
-  hours.ago: '{1}prije 1 sat |]1, Inf] prije %count% sati'
-  days.ago: '{1} prije 1 dan |]1, Inf] prije %count% dana'
-  months.ago: '{1} prije 1 mjesec |]1,Inf] prije %count% mjeseca'
-  years.ago: '{1} prije 1 godinu |]1,Inf] prije više od godinu'
+  minutes.ago: '{0} < 1 minut în urmă |{1}1 minute în urmă |]1, Inf] %count% minute în urmă'
+  hours.ago: '{1}1 oră în urmă |]1, Inf] %count% ore în urmă'
+  days.ago: '{1}1 zi în urmă |]1,Inf] %count% zile în urmă'
+  months.ago: '{1} 1 lună în urmă |]1, Inf] %count% luni în urmă'
+  years.ago: '{1}1 an în urmă |]1, Inf] mai mult de un an în urmă'
 failure:
   upload: There was an error during the upload of your app.
 language:
-  arabic: Arapski
-  bulgarian: Bugarski
-  catalan: Katalonski
-  chinese_simplified_han: Kineski (pojednostavljeni Han)
-  chinese_traditional_han: Kineski (tradicionalni Han)
-  croatian: Hrvatski
-  czech: Češki
-  danish: Danski
-  dutch: Nizozemski
-  english_united_kingdom: Engleski (Ujedinjeno Kraljevstvo)
-  english_united_states: Engleski (Sjedinjene Države)
-  estonian: Estonski
-  filipino: Filipinski
-  finnish: Finski
-  french: Francuski
-  german: Njemački
-  greek: Grčki
-  hebrew: Hebrejski
-  hindi: Hindski
-  hungarian: Mađarski
-  indonesian: Indonezijski
-  italian: Talijanski
-  japanese: Japanski
-  korean: Korejski
-  latvian: Letonski
-  lithuanian: Litvanski
-  malay: Malajski
-  norwegian: Norveški
-  persian: Perzijski
-  polish: Poljski
-  portuguese_brazil: Portugalski (Brazil)
-  portuguese_portugal: Portugalski (Portugal)
-  romanian: Rumunjski
-  russian: Ruski
-  serbian: Srpski
-  slovak: Slovački
-  slovenian: Slovenski
-  spanish_latin_america: Španjolski (Latinska Amerika)
-  spanish_spain: Španjolski (Španjolska)
-  swedish: Švedski
-  thai: Tajlandski
-  turkish: Turski
-  ukrainian: Ukrajinski
-  vietnamese: Vijetnamski
+  arabic: 'Arab&#x103;'
+  bulgarian: 'Bulgar&#x103;'
+  catalan: 'Catalan&#x103;'
+  chinese_simplified_han: 'Chinez&#x103; (Simplificat&#x103;)'
+  chinese_traditional_han: 'Chinezp (Tradi&#x21B;ional&#x103;)'
+  croatian: 'Croat&#x103;'
+  czech: 'Ceh&#x103;'
+  danish: 'Danez&#x103;'
+  dutch: 'Olandez&#x103;'
+  english_united_kingdom: 'Englez&#x103; (Regatul Unit)'
+  english_united_states: 'Englez&#x103; (Statele Unite)'
+  estonian: 'Eston&#x103;'
+  filipino: 'Filipinez&#x103;'
+  finnish: 'Finlandez&#x103;'
+  french: 'Francez&#x103;'
+  german: 'German&#x103;'
+  greek: 'Greac&#x103;'
+  hebrew: 'Ebraic&#x103;'
+  hindi: Hindi
+  hungarian: 'Maghiar&#x103;'
+  indonesian: 'Indonezian&#x103;'
+  italian: 'Italian&#x103;'
+  japanese: 'Japonez&#x103;'
+  korean: 'Coreean&#x103;'
+  latvian: 'Leton&#x103;'
+  lithuanian: 'Lituanian&#x103;'
+  malay: 'Malaezian&#x103;'
+  norwegian: 'Norvegian&#x103;'
+  persian: 'Persam&#x103;'
+  polish: 'Polonez&#x103;'
+  portuguese_brazil: 'Portughez&#x103; (Brazilia)'
+  portuguese_portugal: 'Portughez&#x103; (Portugalia)'
+  romanian: Română
+  russian: 'Rus&#x103;'
+  serbian: 'S&#xE2;rb&#x103;'
+  slovak: 'Slovac&#x103;'
+  slovenian: 'Sloven&#x103;'
+  spanish_latin_america: 'Spanoil&#x103; (America Latin&#x103;)'
+  spanish_spain: 'Spaniol&#x103; (Spania)'
+  swedish: 'Suedez&#x103;'
+  thai: 'Tailandez&#x103;'
+  turkish: 'Turc&#x103;'
+  ukrainian: 'Ucrainean&#x103;'
+  vietnamese: 'Vietnamez&#x103;'
 ci:
   generate: Generate Apk
   pending: Generating Apk
@@ -630,8 +630,8 @@ tag-text: Tags
 extenstion-text: Extensions
 tags:
   constant:
-    tag1: Igre
-    tag2: Pokretne animacije
+    tag1: Jocuri
+    tag2: Animation
     tag3: Story
     tag4: Music
     tag5: Art
@@ -666,11 +666,11 @@ pmd:
 codeview:
   showText: Show code
 footer:
-  usefulLinks: Useful Links
-  legalities: Legalities
-  communityStats: Community Stats
+  usefulLinks: Linkuri folositoare
+  legalities: Legalități
+  communityStats: Statistici Comunitate
 privacy-policy:
-  header: Pravila privatnosti
+  header: Politică de confidenţialitate
   version: Version 2.1, 25 June 2018
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
@@ -703,17 +703,17 @@ catro-notifications:
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Următor
 previous: Previous
 help-cards:
   headings:
     starters: Starters
-    tutorials: Vodiči
+    tutorials: Tutoriale
     stepbystep: Step by Step
     getinvolved: Get involved
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: Preuzmi
+    getinvolved_1: Descarca
     getinvolved_2: now from Google Play and get started!

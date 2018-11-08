@@ -2,6 +2,8 @@
 localLanguage: English
 username: Korisničko ime
 password: Lozinka
+accountSettings: Account Settings
+email: E-Mail
 aboutPocketCode: O Pocket Code-u
 tutorials: Vodiči
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: Lozinke se ne odgovaraju.
 error: Greška
 cancel: Otkaži
 report: Prijavi
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Preuzmi
 description: Opis
 noDescription: Opis nije dostupan.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'više'
 less: 'manje'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: U redu
 clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
@@ -46,6 +54,23 @@ programs:
   featured: Izdvojeni
   newest: Newest programs
   recommended: Recommended programs
+  noPrograms: Trenutno nema programa.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -63,13 +88,18 @@ programs:
   submitted: Submitted Programs
   uploaded: Uploaded Programs
   reportAsInappropriate: Prijavi kao neprikladno
+  reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this program as inappropriate.
-  reportDialogHeader: Zašto misliš da je ovaj program neprikladan?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Unesi razlog
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Ne možeš označiti vlastiti program.
-  reportAlready: Već si označio da je ovaj program neprikladan.
-  reportDone: Prijavio si ovaj program kao neprikladan!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: Prijavi
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'by'
@@ -106,12 +147,19 @@ passwordRecovery:
     Best regards,
     Your Catrobat Team.
 profile:
+  edit: Edit your profile
   saveChanges: sačuvaj izmene
   newPass: new password
   repeatPass: repeat password
+  oldPass: old password
   firstEmail: Moja prva e-mail adresa
   secondEmail: Moja druga e-mail adresa
   myPrograms: My programs
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
@@ -125,6 +173,7 @@ profile:
   programsOf: Programi od
   changePicture: Promeni sliku
   avatar:
+    noImage: No Image!
     pictureTooLarge: Izabrana slika je prevelika, molimo da ne koristiš slike veće od 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
@@ -132,6 +181,8 @@ myprofile:
   editProfile: Edit profile
   edit: Edit
   done: Done
+  checkMail: E-mail je poslan na tvoju e-mail adresu. Molimo proveri svoje prijemno sanduče.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
   editAvatar: Edit avatar
@@ -141,6 +192,9 @@ myprofile:
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Licenca za reproduciranje'
   title: 'Licenca za reproduciranje - Daj kredit i podeli'
@@ -323,7 +377,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Reci nešto"
+      title: "Speak"
       description: "Let your object speak."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -434,15 +488,23 @@ menu:
 programLoader:
   noPrograms: Trenutno nema programa.
 login:
+  login: Prijava
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Zaboravio lozinku ili korisničko ime?
   recoverPass: Povrati svoju lozinku
   recoverPassSend: E-mail je poslan na tvoju e-mail adresu. Molimo proveri svoje prijemno sanduče.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Korisničko ime ili e-mail
   changePass: Promeni lozinku
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: Korisničko ime
+  email: Email
+  passwordFirst: Lozinka
+  passwordSecond: Password Confirm
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -492,6 +554,7 @@ errors:
   programversion:
     tooold: 'Žao nam je, koristiš staru verziju Pocket Code-a. Ažuriraj na zadnju verziju.'
 success:
+  text: Success
   registration: Registracija uspešna!
   token: u redu
   upload: Tvoj projekat je uspešno uploadovan!
@@ -576,7 +639,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -604,8 +669,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Pravila privatnosti
   version: Version 2.1, 25 June 2018
@@ -620,10 +683,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

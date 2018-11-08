@@ -2,13 +2,19 @@
 localLanguage: انگليسی
 username: نام کاربری
 password: رمز عبور
-aboutPocketCode: درباره برنامه پاکت کد
+accountSettings: Account Settings
+email: ایمیل
+aboutPocketCode: درباره پاکت کد
 tutorials: آموزش
 googlePlay: گوگل پلی
 passwordsNoMatch: رمز عبور مطابقت نمی کند.
 error: خطا
 cancel: انصراف
 report: گزارش
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: دانلود
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نمی باشد.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'لطفا دوباره سعی کن!'
 oldVersionError: 'لطفا نسخه ی جدید پاکد کد را به روز کن!'
 more: 'بیشتر'
 less: 'کمتر'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: تایید
 clickToDownloadProgram: 'برای اینکه برنامه نمومه را دانلود کنی، کلیک کن %link_start% روی %link_end%.'
 registrationError: 'این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.'
@@ -46,6 +54,23 @@ programs:
   featured: ' پيشنهادي'
   newest: جدیدترین برنامه ها
   recommended: برنامه های توصیه شده
+  noPrograms: در حال حاضر هیچ برنامه ای نیست.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
@@ -63,13 +88,18 @@ programs:
   submitted: برنامه های ارسالی
   uploaded: برنامه های آپلود شده
   reportAsInappropriate: به عنوان نامناسب گزارش بده
+  reportProgram: Report program
   languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
-  reportLoginText: لطفا %login% شو تا نامناسب بودن این برنامه را گزارش بدی.
-  reportDialogHeader: چرا فکر میکنی این برنامه نامناسب است؟
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: یک دلیل وارد کن
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: شما نمی توانید برنامه خود را پرچم گذاری کنید.
-  reportAlready: شما در حال حاضر این برنامه را به عنوان نامناسب پرچم گذاری کرده اید.
-  reportDone: شما این برنامه را به عنوان نامناسب گزارش داده اید!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: به روز رسانی اپلیکیشن
   updateAppText: لطفا اپلیکیشن خود را به جدیدترین نسخه به روز رسانی کن تا قادر باشی این برنامه را دانلود کنی.
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: گزارش
   report_popup: نظرت با موفقیت گزارش شد.
   report_popup_header: گزارش شد
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: برنامه های نمونه
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'به وسیله'
@@ -107,12 +148,19 @@ passwordRecovery:
     با احترام،
     تیم کت ربات.
 profile:
+  edit: Edit your profile
   saveChanges: ذخیره تغییرات
   newPass: رمز عبور جدید
   repeatPass: رمز عبور را تکرار کنید
+  oldPass: old password
   firstEmail: اولین ایمیل من
   secondEmail: دومین ایمیل من
   myPrograms: برنامه های من
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.
     passwordTooLong: رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.
@@ -126,6 +174,7 @@ profile:
   programsOf: برنامه های
   changePicture: تغییر عکس
   avatar:
+    noImage: No Image!
     pictureTooLarge: حجم عکس انتخاب شده تان خیلی بزرگ است، لطفا عکس های بزرگتر از حجم 5 مگابایت استفاده نکنید.
     uploadError: ببخشید، یه مشکلی در حین آپلود پیش اومد!
     noSupport: این نوع تصویر پشتیبانی نمی شه، لطفا تصویر دیگری را امتحان کن.
@@ -133,6 +182,8 @@ myprofile:
   editProfile: ویرایش پروفایل
   edit: ويرايش
   done: ﺍﻧﺠﺎﻡ شد
+  checkMail: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
+  passwordUpdated: Your password was successfully updated.
   avatar: آواتار
   email: ایمیل
   editAvatar: ویرایش آواتار
@@ -142,6 +193,9 @@ myprofile:
   editEmail: ویرایش ایمیل
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'مجوز بازی'
   title: 'مجوز بازی - اعتبار بده و به مشارکت بزار'
@@ -252,7 +306,7 @@ help:
         text3: 'یک آجر "سر بخور" دیگری اضافه کن.'
         text4: 'آجر "سر بخور" را روی آجر "پایان حلقه" قرار بده.'
         text5: 'روی زمینه ی متنی متغیرهای x و y ضربه بزن و مقدار آنها را 0 قرار بده.'
-        text6: 'روی بازی ضربه بزن تا تغییرات را روی صحنه ببینی.'
+        text6: 'روی بازی ضربه بزن تا تغییرات بازی ات را روی صحنه ببینی.'
     step7:
       title: "ضربه زدن همه چیز است"
       description: 'تو همچنین می توانی وقتی که برنامه در حال اجراست رفتار شی را روی صحنه کنترل کنی.'
@@ -323,7 +377,7 @@ help:
       one: "شی ای را که قصد داری روی آن صدا بگذاری، اضافه کن. مثلا سگ."
       two: "آجرهای زیر را به منظور ایجاد پخش صدا وارد کن. ازصداهایی مانند آواهای ضبط شده شخصی ات یا از صوت های آماده ی پاکت کد استفاده کن."
     card6:
-      title: "چیزی بگو"
+      title: "بگو"
       description: "برای این که یک شی صحبت کند از این کد استفاده کن."
       one: "شی را که قصد پخش صدا روی آن را داری اضافه کن. مثل کری."
       two: "آجرهای زیر را به منظور ایجاد خروجی صوتی وارد کن."
@@ -433,15 +487,23 @@ menu:
 programLoader:
   noPrograms: در حال حاضر هیچ برنامه ای نیست.
 login:
+  login: ورود به سیستم
   passOrUser: نام کاربری یا کلمه عبور نادرست است.
   noUsername: آدرس ایمیل یا نام کاربری یافت نشد.
   forgotPass: نام کاربری یا رمز عبور را فراموش کرده اید؟
   recoverPass: بازیابی رمز عبور
   recoverPassSend: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: نام کاربری یا ایمیل
   changePass: تغییر رمز عبور
   createAccount: ایجاد یک حساب کاربری
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: یا
+  username: نام کاربری
+  email: رایانامه
+  passwordFirst: رمز عبور
+  passwordSecond: Password Confirm
 apk:
   download: به عنوان اپلیکیشن دانلود کن
   prepare: 'تهیه ی اپلیکیشن'
@@ -491,6 +553,7 @@ errors:
   programversion:
     tooold: 'ببخشید، تو داری از یک نسخه قدیمی پاکت کد استفاده می کنی. لطفا برنامه ات را با جدیدترین نسخه به روز رسانی کن.'
 success:
+  text: Success
   registration: عملیات ثبت نام موفقیت‌ آمیز بود!
   token: باشه
   upload: پروژه شما با موفقیت ارسال شد!
@@ -575,7 +638,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: تعمیر و نگهداری دیسک
+    ramMaintenance: RAM maintenance
     noRemovableObjects: اشیاء قابل جابجایی در دسترس نیستند.
+    removableObjects: Removable objects
     manualBackups: ایجاد نسخه پشتیبان دستی
     noRemovableBackupObjects: فایل نسخه پشتیبان قابل جابجایی در این سرور نیست.
     btnCreateBackup: ایجاد نسخه پشتیبان
@@ -603,8 +668,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: حریم خصوصی
   version: Version 2.1, 25 June 2018
@@ -619,10 +682,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

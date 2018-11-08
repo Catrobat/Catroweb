@@ -2,6 +2,8 @@
 localLanguage: 英语
 username: 用户名
 password: 密码
+accountSettings: Account Settings
+email: 邮箱
 aboutPocketCode: 关于口袋编程
 tutorials: 新手向导
 googlePlay: 谷歌游戏
@@ -9,6 +11,10 @@ passwordsNoMatch: 密码不对
 error: 错误
 cancel: 取消
 report: 报告
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: 作为程序下载
 description: 描述
 noDescription: 没有可用的描述
@@ -21,7 +27,9 @@ pleaseTryAgain: '再试一次吧！'
 oldVersionError: '请更新到最新版的口袋编程！'
 more: '更多'
 less: '更少'
-ok: 好
+show-more: 'Show more'
+show-less: 'Show less'
+ok: 确定
 clickToDownloadProgram: '请点%link_start% 这里 %link_end%下载样例程序。'
 registrationError: '用户名或邮箱已被占用。'
 notifications: '通知'
@@ -42,10 +50,27 @@ programs:
     title: Welcome to Catrobat's Pocket Code
     subtitle: Create stories, games and more...
     download: Download the app
-    statistics: More Statistics
+    statistics: 更多统计信息
   featured: 经典程序
   newest: 最新版程序
   recommended: 推荐的程序
+  noPrograms: There are currently no programs.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
@@ -63,13 +88,18 @@ programs:
   submitted: 提交的程序
   uploaded: 上传的程序
   reportAsInappropriate: 举报为不适当
+  reportProgram: Report program
   languageVersion: 'Catrobat语言版: %languageVersion%'
-  reportLoginText: 请 %login%对程序进行报错
-  reportDialogHeader: 你为什么认为这个程序是不合适的？
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: 给个理由先
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: 您不能标记您自己的程序。
-  reportAlready: 你早已标记了这是一个不恰当的程序。
-  reportDone: 你报告过这是一个不恰当的程序 ！
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: 升级
   updateAppText: 要下载这个程序请把软件升级到最新版
   btnClosePopup: 好
@@ -81,7 +111,18 @@ programs:
   report: 报告
   report_popup: 您的评论以成功发送
   report_popup_header: 已发送
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: 示例程序
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: '显示调制关系图'
   by: ' '
@@ -93,7 +134,7 @@ remixGraph:
   programUnknownUser: '未知用户'
 passwordRecovery:
   subject: 密码找回
-  message: |2
+  message: |
     亲爱的 %username%：
     
     刚才有人申请重置您的密码%appplication_url%。如果不是你干的, 可以忽略这封邮件。而这个链接在24小时后就会失效。
@@ -109,12 +150,19 @@ passwordRecovery:
     敬礼,
      Catrobat 团队.
 profile:
+  edit: Edit your profile
   saveChanges: 保存修改
   newPass: 新密码
   repeatPass: 重复密码
+  oldPass: old password
   firstEmail: 我的第一封邮件
   secondEmail: 第二邮箱
   myPrograms: 我的程序
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: 新密码至少要有%length%的字符。
     passwordTooLong: 新密码最多可以有%length%的字符。
@@ -128,13 +176,16 @@ profile:
   programsOf: 程序
   changePicture: 更改图片
   avatar:
+    noImage: No Image!
     pictureTooLarge: 您选择的图片体积过大，请不要使用超过5兆的图片。
     uploadError: 对不起，上传发生错误。
     noSupport: 不支持此图像类型，请尝试其他图像。
 myprofile:
   editProfile: 编辑档案
   edit: 编辑
-  done: 完成
+  done: 已完成
+  checkMail: An email was sent to your email address. Please check your inbox.
+  passwordUpdated: Your password was successfully updated.
   avatar: 头像
   email: 邮箱
   editAvatar: 编辑头像
@@ -144,6 +195,9 @@ myprofile:
   editEmail: 修改邮箱地址
   deleteAccount: 删除帐户
   deleteAccountText: 您确定要删除您的账户么？这将删除您之前上传的程序和您的所有评论 ！
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: '授权'
   title: '授权执行-评分并分享'
@@ -253,7 +307,7 @@ help:
         text3: '添加另一个"滑翔"积木。'
         text4: '将"滑翔"积木拼接到"重复执行结束"上方。'
         text5: '点击进入x 和 y的文本区域并将值都设置为 0。'
-        text6: '点击开始可以看到舞台上的表现。'
+        text6: '点击"开始"观看舞台上的表演。'
     step7:
       title: "点击就是一切"
       description: '当程序在舞台上运行时，您也可以控制角色的行为。'
@@ -415,61 +469,69 @@ help:
     description6: |
       This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
       To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the program"
+    download: "下载应用程式"
 oauth:
   username_header: Thank you for signing up to Pocket Code!
-  username_chooser: 'Please choose a username:'
-  username_hint: The username should not be your real name.
+  username_chooser: '请选一个用户名:'
+  username_hint: 用户名不应该是你真名
   usernameTaken: 用户名已经存在，请选择另一个名称。
 search:
-  dotdotdot: Search...
+  dotdotdot: 搜索。。。
   search: 搜索​​​​
   results: 搜索结果
   resultcount: 搜索未返回%count%个结果
-  fail: Please enter at least a single search term
+  fail: 请输入至少一个搜索字词
 menu:
   profile: 我的个人资料
   login: 登录
   logout: 登出
-  admin: Admin
+  admin: 管理人员
 programLoader:
   noPrograms: There are currently no programs.
 login:
+  login: 登录
   passOrUser: 您的密码或用户名不正确。
   noUsername: Your username or email address was not found.
   forgotPass: 忘记了密码或用户名？
   recoverPass: 找回密码
   recoverPassSend: An email was sent to your email address. Please check your inbox.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: 用户名或电子邮件已存在
   changePass: 更改密码
   createAccount: 创建账户
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: 或
+  username: 用户名
+  email: 电子邮件
+  passwordFirst: 密码
+  passwordSecond: Password Confirm
 apk:
   download: 下载程序
   prepare: '准备应用程序'
   preparing: '准备应用程序'
-  text: 'The process may take a while'
+  text: '这个过程可能需要一些时间'
 errors:
   username:
     blank: 用户名不能为空
     invalid: 用户名无效
     exists: 此名称已存在。
     not_exists: 此用户不存在
-    not_email: The username must not be an email address.
+    not_email: 用户名不能是电子邮件地址。
   password:
     blank: 密码空缺
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: '密码必须有至少 {{ limit }} 字符'
   description:
-    rude: Description must not contain rude wordes.
+    rude: 说明不能包含粗鲁的词。
   country:
     blank: 缺少国别。
-    invalid: Invalid country
+    invalid: 无效国家
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: 电子邮件不能为空
+    invalid: 您的电子邮件是无效的
     exists: 此电子邮件地址早已存在。
   id:
-    blank: Open Authentication ID must not be blank
+    blank: 开入认证ID不能为空
   login: 密码或用户名不正确。
   post-data: POST-Data not correct or missing!
   checksum:
@@ -493,6 +555,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
+  text: Success
   registration: 注册成功！
   token: ok
   upload: Your project was uploaded successfully!
@@ -577,7 +640,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -605,8 +670,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: 隐私条款
   version: Version 2.1, 25 June 2018
@@ -621,10 +684,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

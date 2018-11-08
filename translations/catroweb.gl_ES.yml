@@ -2,6 +2,8 @@
 localLanguage: Inglés
 username: Usuario
 password: Contrasinal
+accountSettings: Account Settings
+email: Correo electrónico
 aboutPocketCode: Sobre Pocket Code
 tutorials: Titoriais
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: Os contrasinais non coinciden.
 error: Erro
 cancel: Cancelar
 report: Reportar
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Descargar como programa
 description: Descrición
 noDescription: Non hai ningunha descrición dispoñible.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Téntao de novo!'
 oldVersionError: 'Actualiza á nova versión de Pocket Code!'
 more: 'máis'
 less: 'menos'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: OK
 clickToDownloadProgram: 'Para descargar o programa de exemplo fai clic %link_start% aquí %link_end%.'
 registrationError: 'Username or email address already in use.'
@@ -46,6 +54,23 @@ programs:
   featured: Destacados
   newest: Últimos programas
   recommended: Programas recomendados
+  noPrograms: There are currently no programs.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Os máis vistos
     downloaded: Os máis descargados
@@ -63,13 +88,18 @@ programs:
   submitted: Programas enviados
   uploaded: Programas subidos
   reportAsInappropriate: Reportar como inadecuado
+  reportProgram: Report program
   languageVersion: 'Versión da linguaxe Catrobat: %languageVersion%'
-  reportLoginText: Faga %login% para reportar este programa como inadecuado.
-  reportDialogHeader: Por que pensas que este programa é inadecuado?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Insire unha razón
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Non podes marcar o teu propio programa.
-  reportAlready: Xa marcaches este programa como inadecuado.
-  reportDone: Reportaches este programa como inadecuado!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: Actualizar aplicación
   updateAppText: Actualiza a túa aplicación á última versión para descargar este programa.
   btnClosePopup: Ok
@@ -81,10 +111,21 @@ programs:
   report: Reportar
   report_popup: O comentario foi reportado correctamente.
   report_popup_header: Reportado
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Exemplos de programas
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
-  by: 'por'
+  by: 'by'
   open: 'Abrir'
   showPaths: 'Mostrar rutas'
   programNotAvailableErrorTitle: 'Sentímolo...'
@@ -104,12 +145,19 @@ passwordRecovery:
     Un cordial saúdo,
     o teu equipo Catrobat.
 profile:
+  edit: Edit your profile
   saveChanges: gardar os cambios
   newPass: novo contrasinal
   repeatPass: repetir contrasinal
+  oldPass: old password
   firstEmail: O meu primeiro correo electrónico
   secondEmail: O meu segundo correo electrónico
   myPrograms: Os meus programas
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: O novo contrasinal debe ter ao menos %length% caracteres.
     passwordTooLong: O novo contrasinal pode ter un máximo de %length% caracteres.
@@ -123,13 +171,16 @@ profile:
   programsOf: Programas de
   changePicture: Cambiar imaxe
   avatar:
+    noImage: No Image!
     pictureTooLarge: A imaxe seleccionada é moi pesada, non empregues imaxes de máis de 5mb.
     uploadError: Sentímolo, xurdiu un problema durante o proceso de carga!
     noSupport: Este formato de imaxe non é compatible, téntao con outra imaxe.
 myprofile:
   editProfile: Editar perfil
   edit: Editar
-  done: Feito
+  done: Done
+  checkMail: An email was sent to your email address. Please check your inbox.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: Correo electrónico
   editAvatar: Editar avatar
@@ -139,6 +190,9 @@ myprofile:
   editEmail: Editar correo electrónico
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Licenza para xogar'
   title: 'Licenza para xogar - Recoñece méritos e comparte'
@@ -299,7 +353,7 @@ help:
       one: "Add the object of which you would like to change the size, e.g. Animal."
       two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
     card2:
-      title: "Cambiar apariencia"
+      title: "Change Look"
       description: "Change the looks of an object."
       one: "Add the object of which you would like to change its look, e.g. items."
       two: "Include further pictures in the object's looks."
@@ -432,15 +486,23 @@ menu:
 programLoader:
   noPrograms: There are currently no programs.
 login:
+  login: Iniciar sesión
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Username or Email
   changePass: Change password
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: OR
+  username: Usuario
+  email: Email
+  passwordFirst: Contrasinal
+  passwordSecond: Password Confirm
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -490,6 +552,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
+  text: Success
   registration: Registration successful!
   token: ok
   upload: Your project was uploaded successfully!
@@ -574,7 +637,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -602,8 +667,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Política de privacidade
   version: Version 2.1, 25 June 2018
@@ -618,10 +681,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

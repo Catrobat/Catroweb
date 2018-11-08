@@ -2,6 +2,8 @@
 localLanguage: Angol
 username: Felhasználónév
 password: Jelszó
+accountSettings: Account Settings
+email: E-mail
 aboutPocketCode: A Pocket Code-ról
 tutorials: Ismertetők
 googlePlay: Google Play
@@ -9,6 +11,10 @@ passwordsNoMatch: A jelszó nem egyezik.
 error: Hiba
 cancel: Mégse
 report: Jelentés
+deleteIt: Yes, delete it!
+reportIt: Yes, report it!
+areYouSure: Are you sure?
+noWayOfReturn: There is no way to restore your actions!
 download: Letöltés
 description: Leírás
 noDescription: Leírás nem található.
@@ -21,6 +27,8 @@ pleaseTryAgain: 'Kérjük, próbálkozz újra!'
 oldVersionError: 'Kérjük frissíts a legújabb Pocket Code verzióra!'
 more: 'több'
 less: 'kevesebb'
+show-more: 'Show more'
+show-less: 'Show less'
 ok: OK
 clickToDownloadProgram: 'A példaprogram letöltéséhez kattints %link_start% ide %link_end%.'
 registrationError: 'Username or email address already in use.'
@@ -46,6 +54,23 @@ programs:
   featured: Kiemelt
   newest: Legújabb programok
   recommended: Recommended programs
+  noPrograms: Jelenleg nincsenek programok.
+  deleteConfirmation: |+
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteAccountConfirmation: |+
+    Account Deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongDescription: The program description is too long!
+  rudeWordsInDescription: You can't use rude words in your description!
   most:
     viewed: Legnézettebb
     downloaded: Legtöbbször letöltött
@@ -63,13 +88,18 @@ programs:
   submitted: Submitted Programs
   uploaded: Feltöltött Programok
   reportAsInappropriate: Jelentés problémásként
+  reportProgram: Report program
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this program as inappropriate.
-  reportDialogHeader: Miért gondolod úgy, hogy ez a program problémás?
+  reportLoginText: Please %login% to report this program.
+  reportDialogHeader: Why do you want to report this program?
   reportDialogReason: Add meg az okot
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
   reportOwnProgram: Nem jelölheted a saját programodat.
-  reportAlready: Már megjelölted ezt a programot problémásként.
-  reportDone: Problémásként jelentetted ezt a programot!
+  reportAlready: You've already flagged this program.
+  reportDone: You reported this program!
   updateAppHeader: App Frissítése
   updateAppText: A program letöltéséhez frissítse az appot a legújabb verzióra.
   btnClosePopup: Ok
@@ -81,7 +111,18 @@ programs:
   report: Jelentés
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   nolb_example: Example programs
+  editDescription: Edit the program Description
+  saveDescription: Save Description change
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  link: Copy program link to clipboard
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'ennyivel:'
@@ -96,12 +137,19 @@ passwordRecovery:
   message: |
     Kedves %username%. Jelszó emlékeztetőt kértél a %appplication_url% alkalmazáshoz, mert elfelejtetted a jelszavad. Amennyiben nem te kezdeményezted a jelszó emlékeztető küldését, kérlek hagyd ezt az üzenetet figyelmen kívül. Az üzenet 24 órán belül lejár. A jelszavad frissítéséhez látogasd meg a következő oldalt: %confirmationUrl% Felhasználóneveddel és jelszavaddal elérheted a %appplication_url% közösséget. Ehhez látogasd meg a következő oldalt: %loginPage% Profil adataid módosításához használd: %profilePage% Best regards, A Catrobat Csapat.
 profile:
+  edit: Edit your profile
   saveChanges: módosítások mentése
   newPass: Új jelszó
   repeatPass: ismételje meg a jelszót
+  oldPass: old password
   firstEmail: Első e-mailem
   secondEmail: Második e-mailem
   myPrograms: Programjaim
+  follows: Follows
+  follower: Follower
+  unfollowUser: Unfollow this user!
+  followUser: Follow this user!
+  amountOfPrograms: Amount of programs
   form:
     passwordTooShort: The new password must have at least %length% characters.
     passwordTooLong: The new password can have a maximum of %length% characters.
@@ -115,6 +163,7 @@ profile:
   programsOf: Programok
   changePicture: Kép módosítása
   avatar:
+    noImage: No Image!
     pictureTooLarge: A kiválasztott kép túl nagy, ne használj 5MB-nál nagyobb képeket.
     uploadError: Probléma merült fel a feltöltés közben!
     noSupport: This image type is not supported, please try another image.
@@ -122,6 +171,8 @@ myprofile:
   editProfile: Edit profile
   edit: Szerkesztés
   done: Kész
+  checkMail: Egy e-mailt küldtünk az e-mail címedre. Kérjük, ellenőrizze a postaládádat.
+  passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-mail
   editAvatar: Edit avatar
@@ -131,6 +182,9 @@ myprofile:
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  editAccountSettings: Edit account settings
+  notChangeVisibility: Can not change visibility
+  notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Játékengedély'
   title: 'License to play - Give credit and share'
@@ -313,7 +367,7 @@ help:
       one: "Add the object you want to be playing a sound, e.g. dog."
       two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
     card6:
-      title: "Mondj valamit"
+      title: "Mondd"
       description: "Használd ezt a kódot egy objektum beszéltetésére."
       one: "Add the object you want to be speaking, e.g. Carrie."
       two: "Insert the following bricks in order to make the voice output possible."
@@ -424,15 +478,23 @@ menu:
 programLoader:
   noPrograms: Jelenleg nincsenek programok.
 login:
+  login: Bejelentkezés
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Elfelejtett a jelszó  vagy a felhasználónév?
   recoverPass: Jelszó visszaállítása
   recoverPassSend: Egy e-mailt küldtünk az e-mail címedre. Kérjük, ellenőrizze a postaládádat.
+  alreadyReset: The password for this user has already been requested within the last 24 hours.
   userOrEmail: Felhasználónév vagy e-mail
   changePass: Jelszó módosítása
   createAccount: Create an account
+  noAccount: Don't have an account!
+  alreadyAccount: Already having an account?
   or: VAGY
+  username: Felhasználónév
+  email: E-mail
+  passwordFirst: Jelszó
+  passwordSecond: Password Confirm
 apk:
   download: Download as app
   prepare: 'Prepare app'
@@ -482,6 +544,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
 success:
+  text: Success
   registration: Sikeres regisztráció!
   token: ok
   upload: A projekt sikeresen feltöltve!
@@ -566,7 +629,9 @@ tags:
 admin:
   maintain:
     diskMaintenance: Disk maintenance
+    ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
+    removableObjects: Removable objects
     manualBackups: Manual backups
     noRemovableBackupObjects: No removable backup files on this server.
     btnCreateBackup: Create backup
@@ -594,8 +659,6 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
-  downloads: downloads
-  programs: programs
 privacy-policy:
   header: Adatvédelem
   version: Version 2.1, 25 June 2018
@@ -610,10 +673,23 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
+  markAsRead: "Mark as read"
+  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
   comment:
     title: New comment for program %program_name%!
     messagePart1: User
     messagePart2: commented on your program
+  like:
+    title: New like for program %program_name%!
+    messagePart1: User
+    messagePart2: liked your program
+  follow:
+    title: New Follower!
+    message: follows you now.
+    program-follow:
+      title: New Program from someone you follow
+      messagePart1: created a new Program
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

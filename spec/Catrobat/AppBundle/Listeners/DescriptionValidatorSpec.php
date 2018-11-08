@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Services\RudeWordFilter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DescriptionValidatorSpec extends ObjectBehavior
 {
@@ -23,7 +24,7 @@ class DescriptionValidatorSpec extends ObjectBehavior
   public function it_throws_an_exception_if_the_description_is_too_long(ExtractedCatrobatFile $file)
   {
     $description = '';
-    for ($i = 0; $i <= 1001; ++$i)
+    for ($i = 0; $i <= 10000; ++$i)
     {
       $description = $description . 'a';
     }
