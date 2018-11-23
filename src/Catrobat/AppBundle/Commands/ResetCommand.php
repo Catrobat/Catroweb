@@ -50,14 +50,15 @@ class ResetCommand extends ContainerAwareCommand
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.mediapackage.dir'), 'Delete mediapackages', $output);
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.dir'), 'Delete templates', $output);
     CommandHelper::emptyDirectory($this->getContainer()->getParameter('catrobat.template.screenshot.dir'), 'Delete templates-screenshots', $output);
-
-    CommandHelper::executeShellCommand('php bin/console sonata:admin:setup-acl', [], 'Init Sonata admin ACL', $output);
-    CommandHelper::executeShellCommand('php bin/console sonata:admin:generate-object-acl', [], 'Init Sonata object ACL', $output);
+    
+    CommandHelper::executeShellCommand('php bin/console sonata:admin:setup-acl', [], 'Set up Sonata admin ACL', $output);
+    CommandHelper::executeShellCommand('php bin/console sonata:admin:generate-object-acl', [], 'Generate Sonata object ACL', $output);
 
     CommandHelper::executeShellCommand('php bin/console catrobat:test:generate --env=test', [], 'Generating test data', $output);
     CommandHelper::executeShellCommand('php bin/console cache:clear --no-warmup', [], 'Clearing cache', $output);
 
-    CommandHelper::executeShellCommand('php bin/console fos:user:create catroweb catroweb@localhost catroweb --super-admin', [], 'Create default admin user', $output);
+    CommandHelper::executeShellCommand('php bin/console fos:user:create catroweb catroweb@localhost.at catroweb --super-admin', [], 'Create default admin user', $output);
+    CommandHelper::executeShellCommand('php bin/console fos:user:create user user@localhost.at catroweb', [], 'Create default user', $output);
 
     $temp_dir = sys_get_temp_dir() . '/catrobat.program.import/';
 

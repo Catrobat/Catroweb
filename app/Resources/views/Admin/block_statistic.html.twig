@@ -1,7 +1,6 @@
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-  {% if is_granted('ROLE_SUPER_ADMIN') %}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <div class="box">
       <h3 class="box-header">{{ settings.title }}</h3>
@@ -47,5 +46,4 @@
         }
       </script>
     </div>
-  {% endif %}
 {% endblock %}

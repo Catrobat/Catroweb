@@ -11,42 +11,6 @@ security:
   encoders:
     FOS\UserBundle\Model\UserInterface: bcrypt
 
-  role_hierarchy:
-    #        # for convenience, I decided to gather Sonata roles here
-    #        ROLE_SONATA_FOO_READER:
-    #            - ROLE_SONATA_ADMIN_DEMO_FOO_LIST
-    #            - ROLE_SONATA_ADMIN_DEMO_FOO_VIEW
-    #        ROLE_SONATA_FOO_EDITOR:
-    #            - ROLE_SONATA_ADMIN_DEMO_FOO_CREATE
-    #            - ROLE_SONATA_ADMIN_DEMO_FOO_EDIT
-    #        ROLE_SONATA_FOO_ADMIN:
-    #            - ROLE_SONATA_ADMIN_DEMO_FOO_DELETE
-    #            - ROLE_SONATA_ADMIN_DEMO_FOO_EXPORT
-    # those are the roles I will use (less verbose)
-    ROLE_ADMIN:         [ROLE_USER, ROLE_SONATA_ADMIN]
-    ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-    ROLE_FEATURED:
-    - ROLE_CATROWEBADMIN_BLOCK_FEATURED_PROGRAM_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_FEATURED_URL_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_CATEGORIES_ADMIN
-    - ROLE_ADMIN
-    ROLE_APPROVE:
-    - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_ALL_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_APPROVE_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_REPORTED_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_COMMENTS_ADMIN
-    - ROLE_ADMIN
-    ROLE_MEDIAPACKAGE:
-    - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
-    - ROLE_ADMIN
-    ROLE_GAMEJAM_ADMIN:
-    - ROLE_CATROWEBADMIN_BLOCK_USERS_LIMITED_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_ADMIN
-    - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_SUBMITTED_ADMIN
-    - ROLE_ADMIN
-
   providers:
     chain_provider:
       chain:
@@ -123,17 +87,60 @@ security:
 
 
   access_control:
-  # URL of FOSUserBundle which need to be available to anonymous users
-  - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-  - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-  - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-  # Secured part of the site
-  # This config requires being logged for the whole site and having the admin role for the admin part.
-  # Change these rules to adapt them to your needs
-  - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-  - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
+    - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+    # AsseticBundle paths used when using the controller for assets
+    - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    # URL of FOSUserBundle which need to be available to anonymous users
+    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    # Secured part of the site
+    # This config requires being logged for the whole site and having the admin role for the admin part.
+    # Change these rules to adapt them to your needs
+    - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+    - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    # Only specific admin rights
+    - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+
+  # Sonata "special" roles; Super Admin has all rights
+  role_hierarchy:
+    ROLE_ADMIN:
+      - ROLE_USER
+      - ROLE_SONATA_ADMIN
+    ROLE_SUPER_ADMIN:
+      - ROLE_ADMIN
+      - ROLE_ALLOWED_TO_SWITCH
+
+  # Define custom roles here; all catroweb blocks can be found in the admin interface
+    ROLE_FEATURED:
+      - ROLE_CATROWEBADMIN_BLOCK_FEATURED_PROGRAM_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_FEATURED_URL_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_CATEGORIES_ADMIN
+      - ROLE_ADMIN
+    ROLE_APPROVE:
+      - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_ALL_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_APPROVE_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_REPORTED_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_COMMENTS_ADMIN
+      - ROLE_ADMIN
+    ROLE_MEDIAPACKAGE:
+      - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
+      - ROLE_ADMIN
+    ROLE_GAMEJAM_ADMIN:
+      - ROLE_CATROWEBADMIN_BLOCK_USERS_LIMITED_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_ADMIN
+      - ROLE_CATROWEBADMIN_BLOCK_GAMEJAM_SUBMITTED_ADMIN
+      - ROLE_ADMIN
 
 acl:
   connection: default

@@ -149,16 +149,23 @@ sonata_admin:
         - catrowebadmin.block.statistics.clicks
 
   security:
+
     handler: sonata.admin.security.handler.acl
+
+    role_admin: ROLE_ADMIN
+    role_super_admin: ROLE_SUPER_ADMIN
+
     # acl security information
     information:
-      GUEST:   [VIEW, LIST]
-      STAFF:   [EDIT, LIST, CREATE]
-      EDITOR:  [OPERATOR, EXPORT]
-      ADMIN:   [MASTER]
+      GUEST:    [VIEW, LIST]
+      STAFF:    [EDIT, LIST, CREATE]
+      EDITOR:   [OPERATOR, EXPORT]
+      ADMIN:    [MASTER]
+
     # permissions not related to an object instance and also to be available when objects do not exist
     # the DELETE admin permission means the user is allowed to batch delete objects
     admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
     # permission related to the objects
     object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
 
@@ -209,6 +216,10 @@ sonata_user:
     user:   Catrobat\AppBundle\Entity\User
     group:  Catrobat\AppBundle\Entity\Group
 
+  admin:                  # Admin Classes
+    user:
+      class:          Catrobat\AppBundle\Admin\UserAdmin
+      translation:    SonataUserBundle
 
 sonata_core:
   form:
