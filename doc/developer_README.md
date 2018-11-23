@@ -181,7 +181,7 @@ If you don't like Ubuntu Unity, here is a tutorial on how to get rid of it:
 https://wiki.ubuntuusers.de/Gnome_Flashback
 
 #### Improve the power of your terminal
-If you would like to have a command line interface like the one we use in our VM that always displays the current git branch you are working on, update your ```~/.bashrc``` file with this [one]().
+If you would like to have a command line interface like the one we use in our VM that always displays the current git branch you are working on, update your ```~/.bashrc``` file with this [one](https://gist.github.com/HCrane/5a98753adb5939d21c960f944d095d07).
 
 ### Size of the VM
 We deliberately kept the size of the VM as small as possible so sharing it over the inernet would not take ages. 
