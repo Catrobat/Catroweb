@@ -3,12 +3,10 @@
 namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Mink\Exception\Exception;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
-use Catrobat\AppBundle\Entity\ProgramDownloadsRepository;
 use Catrobat\AppBundle\Entity\RudeWord;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\PyStringNode;
@@ -17,14 +15,13 @@ use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
-use DateTime;
 use Doctrine\ORM\EntityManager;
-use http\Exception\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use PHPUnit\Framework\Assert;
+
 
 
 /**
@@ -37,18 +34,11 @@ class FeatureContext extends BaseContext
 
   private $request_parameters;
 
-  private $files;
-
   private $last_response;
 
   private $hostname;
 
   private $secure;
-
-  /**
-   * @var $program_downloads_repository ProgramDownloadsRepository
-   */
-  private $download_statistics_service;
 
   private $fb_post_program_id;
 
@@ -61,6 +51,18 @@ class FeatureContext extends BaseContext
   private $checked_catrobat_remix_backward_relations;
 
   const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
+
+  private $method;
+
+  private $url;
+
+  private $post_parameters = [];
+
+  private $get_parameters = [];
+
+  private $server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true];
+
+  private $files = [];
 
   /**
    * Initializes context with parameters from behat.yml.
@@ -80,6 +82,267 @@ class FeatureContext extends BaseContext
     $this->checked_catrobat_remix_forward_descendant_relations = [];
     $this->checked_catrobat_remix_backward_relations = [];
   }
+
+
+  /**
+   * @Given /^the HTTP Request:$/
+   * @Given /^I have the HTTP Request:$/
+   */
+  public function iHaveTheHttpRequest(TableNode $table)
+  {
+    $values = $table->getRowsHash();
+    $this->method = $values['Method'];
+    $this->url = $values['Url'];
+  }
+
+  /**
+   * @Given /^the POST parameters:$/
+   * @Given /^I use the POST parameters:$/
+   */
+  public function iUseThePostParameters(TableNode $table)
+  {
+    $values = $table->getRowsHash();
+    $this->post_parameters = $values;
+  }
+
+  /**
+   * @Given /^the GET parameters:$/
+   * @Given /^I use the GET parameters:$/
+   */
+  public function iUseTheGetParameters(TableNode $table)
+  {
+    $values = $table->getRowsHash();
+    $this->get_parameters = $values;
+  }
+
+  /**
+   * @When /^such a Request is invoked$/
+   * @When /^a Request is invoked$/
+   * @When /^the Request is invoked$/
+   * @When /^I invoke the Request$/
+   */
+  public function iInvokeTheRequest()
+  {
+    $this->getClient()->request($this->method, 'https://' . $this->server_parameters['HTTP_HOST'] . $this->url . '?' . http_build_query($this->get_parameters), $this->post_parameters, $this->files, $this->server_parameters);
+  }
+
+  /**
+   * @Then /^the returned json object will be:$/
+   * @Then /^I will get the json object:$/
+   */
+  public function iWillGetTheJsonObject(PyStringNode $string)
+  {
+    $response = $this->getClient()->getResponse();
+    Assert::assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
+  }
+
+  /**
+   * @Then /^the response code will be "([^"]*)"$/
+   */
+  public function theResponseCodeWillBe($code)
+  {
+    $response = $this->getClient()->getResponse();
+    Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
+  }
+
+  /**
+   * @Given /^the server name is "([^"]*)"$/
+   */
+  public function theServerNameIs($arg1)
+  {
+    $this->server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true, 'SERVER_NAME' => 'asdsd.org'];
+  }
+
+  // ----------------------------------------------------------------
+
+  /**
+   * @Given /^there are users:$/
+   */
+  public function thereAreUsers(TableNode $table)
+  {
+    $users = $table->getHash();
+
+    for ($i = 0; $i < count($users); ++$i)
+    {
+      $this->insertUser(['name' => $users[$i]['name'], 'token' => $users[$i]['token'], 'password' => $users[$i]['password']]);
+    }
+  }
+
+  /**
+   * @Given /^there are programs:$/
+   */
+  public function thereArePrograms(TableNode $table)
+  {
+    $programs = $table->getHash();
+    $program_manager = $this->getProgramManger();
+    for ($i = 0; $i < count($programs); ++$i)
+    {
+      $user = $this->getUserManager()->findOneBy([
+        'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : "",
+      ]);
+      if ($user == null)
+      {
+        if (isset($programs[$i]['owned by']))
+        {
+          $user = $this->insertUser(['name' => $programs[$i]['owned by']]);
+        }
+      }
+      @$config = [
+        'name'                => $programs[$i]['name'],
+        'description'         => $programs[$i]['description'],
+        'views'               => $programs[$i]['views'],
+        'downloads'           => $programs[$i]['downloads'],
+        'uploadtime'          => $programs[$i]['upload time'],
+        'apk_status'          => $programs[$i]['apk_status'],
+        'catrobatversionname' => $programs[$i]['version'],
+        'directory_hash'      => $programs[$i]['directory_hash'],
+        'filesize'            => @$programs[$i]['FileSize'],
+        'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
+        'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
+      ];
+
+      $this->insertProgram($user, $config);
+    }
+  }
+
+  /**
+   * @Given /^following programs are featured:$/
+   */
+  public function followingProgramsAreFeatured(TableNode $table)
+  {
+    $em = $this->getManager();
+    $featured = $table->getHash();
+    for ($i = 0; $i < count($featured); ++$i)
+    {
+      $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
+      $featured_entry = new FeaturedProgram();
+      $featured_entry->setProgram($program);
+      $featured_entry->setActive(isset($featured[$i]['active']) ? $featured[$i]['active'] == 'yes' : true);
+      $featured_entry->setImageType('jpg');
+      $em->persist($featured_entry);
+    }
+    $em->flush();
+  }
+
+  /**
+   * @Given /^the current time is "([^"]*)"$/
+   */
+  public function theCurrentTimeIs($time)
+  {
+    $date = new \DateTime($time, new \DateTimeZone('UTC'));
+    $time_service = $this->getSymfonyService('time');
+    $time_service->setTime(new FixedTime($date->getTimestamp()));
+  }
+
+  /**
+   * @Given /^we assume the next generated token will be "([^"]*)"$/
+   */
+  public function weAssumeTheNextGeneratedTokenWillBe($token)
+  {
+    $token_generator = $this->getSymfonyService('tokengenerator');
+    $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
+  }
+
+  /**
+   * @Given /^a catrobat file is attached to the request$/
+   */
+  public function iAttachACatrobatFile()
+  {
+    $filepath = self::FIXTUREDIR . 'test.catrobat';
+    Assert::assertTrue(file_exists($filepath), 'File not found');
+    $this->files[] = new UploadedFile($filepath, 'test.catrobat');
+  }
+
+  /**
+   * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
+   */
+  public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
+  {
+    $this->post_parameters[$arg1] = md5_file($this->files[0]->getPathname());
+  }
+
+  /**
+   * @Given /^the registration problem "([^"]*)"$/
+   * @Given /^there is a registration problem ([^"]*)$/
+   */
+  public function thereIsARegistrationProblem($problem)
+  {
+    switch ($problem)
+    {
+      case "no password given":
+        $this->method = "POST";
+        $this->url = "/pocketcode/api/loginOrRegister/loginOrRegister.json";
+        $this->post_parameters['registrationUsername'] = "Someone";
+        $this->post_parameters['registrationEmail'] = "someone@pocketcode.org";
+        break;
+      default:
+        throw new PendingException("No implementation of case \"" . $problem . "\"");
+    }
+  }
+
+  /**
+   * @Given /^the check token problem "([^"]*)"$/
+   * @When /^there is a check token problem ([^"]*)$/
+   */
+  public function thereIsACheckTokenProblem($problem)
+  {
+    switch ($problem)
+    {
+      case "invalid token":
+        $this->method = "POST";
+        $this->url = "/pocketcode/api/checkToken/check.json";
+        $this->post_parameters['username'] = "Catrobat";
+        $this->post_parameters['token'] = "INVALID";
+        break;
+      default:
+        throw new PendingException("No implementation of case \"" . $problem . "\"");
+    }
+  }
+
+  /**
+   * @When /^searching for "([^"]*)"$/
+   */
+  public function searchingFor($arg1)
+  {
+    $this->method = 'GET';
+    $this->url = '/pocketcode/api/projects/search.json';
+    $this->get_parameters = ['q' => $arg1, 'offset' => 0, 'limit' => 10];
+    $this->iInvokeTheRequest();
+  }
+
+
+  /**
+   * @Given /^the upload problem "([^"]*)"$/
+   */
+  public function theUploadProblem($problem)
+  {
+    switch ($problem)
+    {
+      case "no authentication":
+        $this->method = "POST";
+        $this->url = "/pocketcode/api/upload/upload.json";
+        break;
+      case "missing parameters":
+        $this->method = "POST";
+        $this->url = "/pocketcode/api/upload/upload.json";
+        $this->post_parameters['username'] = "Catrobat";
+        $this->post_parameters['token'] = "cccccccccc";
+        break;
+      case "invalid program file":
+        $this->method = "POST";
+        $this->url = "/pocketcode/api/upload/upload.json";
+        $this->post_parameters['username'] = "Catrobat";
+        $this->post_parameters['token'] = "cccccccccc";
+        $filepath = self::FIXTUREDIR . 'invalid_archive.catrobat';
+        Assert::assertTrue(file_exists($filepath), 'File not found');
+        $this->files[] = new UploadedFile($filepath, 'test.catrobat');
+        $this->post_parameters['fileChecksum'] = md5_file($this->files[0]->getPathname());
+        break;
+      default:
+        throw new PendingException("No implementation of case \"" . $problem . "\"");
+    }
+  }
+
 
   // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Support Functions
@@ -263,22 +526,6 @@ class FeatureContext extends BaseContext
     $this->upload(self::FIXTUREDIR . '/invalid_archive.catrobat', null);
   }
 
-  /**
-   * @Given /^there are users:$/
-   */
-  public function thereAreUsers(TableNode $table)
-  {
-    $users = $table->getHash();
-    for ($i = 0; $i < count($users); ++$i)
-    {
-      $this->insertUser(@[
-        'name'     => $users[$i]['name'],
-        'email'    => $users[$i]['email'],
-        'token'    => isset($users[$i]['token']) ? $users[$i]['token'] : "",
-        'password' => isset($users[$i]['password']) ? $users[$i]['password'] : "",
-      ]);
-    }
-  }
 
   /**
    * @Given /^there are LDAP-users:$/
@@ -300,39 +547,6 @@ class FeatureContext extends BaseContext
       $pwd = $users[$i]['password'];
       $groups = array_key_exists("groups", $users[$i]) ? explode(",", $users[$i]["groups"]) : [];
       $ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null);
-    }
-  }
-
-  /**
-   * @Given /^there are programs:$/
-   */
-  public function thereArePrograms(TableNode $table)
-  {
-    $programs = $table->getHash();
-    $program_manager = $this->getProgramManger();
-    for ($i = 0; $i < count($programs); ++$i)
-    {
-      $user = $this->getUserManager()->findOneBy([
-        'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : "",
-      ]);
-      @$config = [
-        'name'                => $programs[$i]['name'],
-        'description'         => $programs[$i]['description'],
-        'views'               => $programs[$i]['views'],
-        'downloads'           => $programs[$i]['downloads'],
-        'uploadtime'          => $programs[$i]['upload time'],
-        'apk_status'          => $programs[$i]['apk_status'],
-        'catrobatversionname' => $programs[$i]['version'],
-        'directory_hash'      => $programs[$i]['directory_hash'],
-        'filesize'            => @$programs[$i]['FileSize'],
-        'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-        'approved'            => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
-        'tags'                => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
-        'extensions'          => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
-        'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
-      ];
-
-      $this->insertProgram($user, $config);
     }
   }
 
@@ -475,26 +689,6 @@ class FeatureContext extends BaseContext
     }
   }
 
-  /**
-   * @Given /^following programs are featured:$/
-   */
-  public function followingProgramsAreFeatured(TableNode $table)
-  {
-    $em = $this->getManager();
-    $featured = $table->getHash();
-    for ($i = 0; $i < count($featured); ++$i)
-    {
-      $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
-      $featured_entry = new FeaturedProgram();
-      $featured_entry->setProgram($program);
-      $featured_entry->setActive($featured[$i]['active'] == 'yes');
-      $featured_entry->setImageType('jpg');
-      $featured_entry->setPriority($featured[$i]['priority']);
-      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ? $featured[$i]['ios_only'] == 'yes' : false);
-      $em->persist($featured_entry);
-    }
-    $em->flush();
-  }
 
   /**
    * @Given /^there are downloadable programs:$/
@@ -979,15 +1173,6 @@ class FeatureContext extends BaseContext
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
-  /**
-   * @Given /^the current time is "([^"]*)"$/
-   */
-  public function theCurrentTimeIs($time)
-  {
-    $date = new \DateTime($time, new \DateTimeZone('UTC'));
-    $time_service = $this->getSymfonyService('time');
-    $time_service->setTime(new FixedTime($date->getTimestamp()));
-  }
 
   /**
    * @Given /^I have the POST parameters:$/
@@ -1199,14 +1384,6 @@ class FeatureContext extends BaseContext
     $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
     Assert::assertEquals(200, $responseArray['statusCode']);
-  }
-
-  /**
-   * @Given /^the server name is "([^"]*)"$/
-   */
-  public function theServerNameIs($name)
-  {
-    $this->hostname = $name;
   }
 
   /**
