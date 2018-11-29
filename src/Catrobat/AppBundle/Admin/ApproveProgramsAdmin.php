@@ -51,7 +51,7 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('Name')
       ->add('Description')
       ->add('version')
-      ->add('user', EntityType::class, ['class' => 'Catrobat\AppBundle\Entity\User'])
+      ->add('user', EntityType::class, ['class' => User::class])
       ->add('upload_ip')
       ->add('visible', 'boolean')
       ->add('Images', null, ['template' => 'Admin/program_containing_image.html.twig'])

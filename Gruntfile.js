@@ -94,10 +94,6 @@ module.exports = function(grunt)
       popper_js: {
         src:'node_modules/popper.js/dist/popper.js',
         dest: 'web/compiled/popper/popper.js'
-      },
-      popper_js_utils: {
-        src:'node_modules/popper.js/dist/popper-utils.js',
-        dest: 'web/compiled/popper/popper-utils.js'
       }
     },
     concat: {

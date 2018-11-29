@@ -1490,7 +1490,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
-    $mediafile = $this->getSession()->getPage()->find("css", ".mediafile-" . $id . " a");
+    $mediafile = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($mediafile, "Mediafile not found!");
     $link = $mediafile->getAttribute("href");
     Assert::assertTrue(is_int(strpos($link, $file_url)));
@@ -1501,7 +1501,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeMediaFileWithId($id)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id);
+    $link = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($link);
   }
 
@@ -1510,7 +1510,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldNotSeeMediaFileWithId($id)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id);
+    $link = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($link);
   }
 

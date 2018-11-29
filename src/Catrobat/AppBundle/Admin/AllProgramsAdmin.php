@@ -77,7 +77,11 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('flavor', 'string', ['editable' => true])
       ->add('views')
       ->add('downloads')
-      ->add('thumbnail', 'string', ['template' => 'Admin/program_thumbnail_image_list.html.twig'])
+      ->add('thumbnail', 'string',
+        [
+          'template' => 'Admin/program_thumbnail_image_list.html.twig'
+        ]
+      )
       ->add('approved', null, ['editable' => true])
       ->add('visible', null, ['editable' => true])
       ->add('_action', 'actions', ['actions' => [

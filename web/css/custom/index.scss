@@ -1,4 +1,7 @@
-@import "../base/variables";
+@import '../../bootstrap_vendor/scss/functions';
+@import '../base/variables';
+@import '../../bootstrap_vendor/scss/variables';
+@import '../../bootstrap_vendor/scss/mixins';
 @import 'theme_settings';
 
 h1 {
@@ -65,5 +68,18 @@ $carousel-indicator-margin: 0.2em;
 
   @media screen and (max-width: 576px) {
     font-size: $carousel-control-size / 1.6;
+  }
+}
+
+.card{
+  width: 25rem;
+  max-width: 100%;
+  margin-top: 2rem;
+  border-color: $primary;
+
+  @include media-breakpoint-up(sm) {
+    min-width: 25rem;
+    max-width: 25rem;
+    width: inherit;
   }
 }
