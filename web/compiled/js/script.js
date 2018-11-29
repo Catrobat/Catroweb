@@ -2,15 +2,15 @@
   Generated File by Grunt
   Sourcepath: web/js
 */
-var Main = function(search_url) {
-  var self = this;
-  self.search_url = search_url.replace(0, '');
+var Main = function (search_url) {
+  var self = this
+  self.search_url = search_url.replace(0, '')
   
   $(window).ready(function() {
-    self.setClickListener();
-    self.setWindowResizeListener();
-    self.initSidebarSwipe();
-  });
+    self.setClickListener()
+    self.setWindowResizeListener()
+    self.initSidebarSwipe()
+  })
   $(document).ready(function() {
     //var s = 'script';
     //var id = 'facebook-jssdk';
@@ -20,61 +20,61 @@ var Main = function(search_url) {
     //js.id = id;
     //js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.5";
     //fjs.parentNode.insertBefore(js, fjs);
-    $.ajaxSetup({cache: true});
-    $.getScript('//connect.facebook.net/en_US/sdk.js', function() {
-      var $appid = '';
+    $.ajaxSetup({cache: true})
+    $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
+      var $appid = ''
       var $ajaxGetFBAppId = Routing.generate(
         'catrobat_oauth_login_get_facebook_appid', {flavor: 'pocketcode'}
-      );
+      )
       $.get($ajaxGetFBAppId,
-        function(data) {
-          $appid = data['fb_appid'];
+        function (data) {
+          $appid = data['fb_appid']
           FB.init({
             appId  : $appid,
             xfbml  : true,
             status : true,
             cookie : true,  //allow the server to access the session
             version: 'v2.6'
-          });
-        });
-    });
+          })
+        })
+    })
     
     //Google+ JS API:
-    var po = document.createElement('script');
-    po.type = 'text/javascript';
-    po.async = true;
-    po.src = 'https://apis.google.com/js/client:plusone.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(po, s);
-  });
+    var po = document.createElement('script')
+    po.type = 'text/javascript'
+    po.async = true
+    po.src = 'https://apis.google.com/js/client:plusone.js'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(po, s)
+  })
   
   var sidebar, sidebarToggleBtn;
   var fnCloseSidebar = function() {
     sidebar.removeClass('active');
-    sidebarToggleBtn.attr('aria-expanded', false);
+    sidebarToggleBtn.attr('aria-expanded', false)
   };
   var fnCloseSidebarDesktop = function() {
     sidebar.addClass('inactive');
     $("body").removeClass('new-nav');
-    sidebarToggleBtn.attr('aria-expanded', false);
+    sidebarToggleBtn.attr('aria-expanded', false)
   };
   var fnOpenSidebar = function() {
     sidebar.addClass('active');
-    sidebarToggleBtn.attr('aria-expanded', true);
+    sidebarToggleBtn.attr('aria-expanded', true)
   };
   var fnOpenSidebarDesktop = function() {
-    sidebar.removeClass('inactive');
-    $("body").addClass('new-nav');
-    sidebarToggleBtn.attr('aria-expanded', true);
+    sidebar.removeClass('inactive')
+    $("body").addClass('new-nav')
+    sidebarToggleBtn.attr('aria-expanded', true)
   };
   
   self.setClickListener = function() {
-    sidebar = $("#sidebar");
-    sidebarToggleBtn = $("#btn-sidebar-toggle");
+    sidebar = $("#sidebar")
+    sidebarToggleBtn = $("#btn-sidebar-toggle")
     
     if ($(window).width() >= 768)
     {
-      sidebarToggleBtn.attr('aria-expanded', true);
+      sidebarToggleBtn.attr('aria-expanded', true)
     }
     
     sidebarToggleBtn.on("click", function() {
@@ -83,11 +83,11 @@ var Main = function(search_url) {
         // mobile mode
         if (sidebar.hasClass('active'))
         {
-          fnCloseSidebar();
+          fnCloseSidebar()
         }
         else
         {
-          fnOpenSidebar();
+          fnOpenSidebar()
         }
       }
       else
@@ -95,11 +95,11 @@ var Main = function(search_url) {
         // desktop mode
         if (sidebar.hasClass('inactive'))
         {
-          fnOpenSidebarDesktop();
+          fnOpenSidebarDesktop()
         }
         else
         {
-          fnCloseSidebarDesktop();
+          fnCloseSidebarDesktop()
         }
       }
     });
@@ -111,97 +111,97 @@ var Main = function(search_url) {
     var navDropdown = $('#nav-dropdown');
     
     // toggle searchbar
-    $('#menu-mobile').find('.btn-search').click(function() {
-      nav.toggleClass('searchbar-visible');
-      nav.find('input').focus();
-    });
+    $('#menu-mobile').find('.btn-search').click(function () {
+      nav.toggleClass('searchbar-visible')
+      nav.find('input').focus()
+    })
     
     // toggle navigation dropdown (when logged in)
-    $('.show-nav-dropdown').click(function() {
-      var newPosition = nav.position().left + nav.outerWidth() - navDropdown.width();
-      navDropdown.css('left', newPosition).toggle();
-    });
+    $('.show-nav-dropdown').click(function () {
+      var newPosition = nav.position().left + nav.outerWidth() - navDropdown.width()
+      navDropdown.css('left', newPosition).toggle()
+    })
     
-    $('#copy-link').click(function() {
-      $(this).find('tr').first().hide();
-      $(this).find('tr').last().show();
-      $('#url-link').focus().select();
-    });
+    $('#copy-link').click(function () {
+      $(this).find('tr').first().hide()
+      $(this).find('tr').last().show()
+      $('#url-link').focus().select()
+    })
     
-    self.setSearchBtnListener();
-    self.setLanguageSwitchListener();
-  };
+    self.setSearchBtnListener()
+    self.setLanguageSwitchListener()
+  }
   
-  self.setWindowResizeListener = function() {
-    $(window).resize(function() {
-      $('#nav-dropdown').hide();
-    });
-  };
+  self.setWindowResizeListener = function () {
+    $(window).resize(function () {
+      $('#nav-dropdown').hide()
+    })
+  }
   
-  self.setSearchBtnListener = function() {
+  self.setSearchBtnListener = function () {
     
     // search enter pressed
-    $(".input-search").keypress(function(event) {
+    $('.input-search').keypress(function (event) {
       if (event.which == 13)
       {
-        var search_term = $(this).val();
+        var search_term = $(this).val()
         if (!search_term)
         {
-          $(this).tooltip('show');
-          return;
+          $(this).tooltip('show')
+          return
         }
-        self.searchPrograms(search_term);
+        self.searchPrograms(search_term)
       }
-    });
+    })
     
     // search button clicked (header)
-    $('.btn-search').click(function() {
-      var search_field = $(this).parent().find('.input-search');
-      var search_term = search_field.val();
+    $('.btn-search').click(function () {
+      var search_field = $(this).parent().find('.input-search')
+      var search_term = search_field.val()
       if (!search_term)
       {
-        search_field.tooltip('show');
-        return;
+        search_field.tooltip('show')
+        return
       }
-      self.searchPrograms(search_term);
-    });
+      self.searchPrograms(search_term)
+    })
     
     // search button clicked (footer)
     // TODO: when applying bootstrap to the footer this has to be changed to make it work
-    $('#footer-menu-desktop').find('.img-magnifying-glass').click(function() {
-      self.searchPrograms($(this).prev().find('input').val());
-    });
-  };
+    $('#footer-menu-desktop').find('.img-magnifying-glass').click(function () {
+      self.searchPrograms($(this).prev().find('input').val())
+    })
+  }
   
-  self.searchPrograms = function(string) {
-    window.location.href = self.search_url + encodeURIComponent(string.trim());
-  };
+  self.searchPrograms = function (string) {
+    window.location.href = self.search_url + encodeURIComponent(string.trim())
+  }
   
-  self.setLanguageSwitchListener = function() {
-    var select = $('#switch-language');
-    select.change(function() {
-      document.cookie = 'hl=' + $(this).val() + "; path=/";
-      location.reload();
-    });
-  };
+  self.setLanguageSwitchListener = function () {
+    var select = $('#switch-language')
+    select.change(function () {
+      document.cookie = 'hl=' + $(this).val() + '; path=/'
+      location.reload()
+    })
+  }
   
-  self.getCookie = function(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
+  self.getCookie = function (cname) {
+    var name = cname + '='
+    var ca = document.cookie.split(';')
     for (var i = 0; i < ca.length; i++)
     {
-      var c = ca[i];
+      var c = ca[i]
       while (c.charAt(0) == ' ')
       {
-        c = c.substring(1);
+        c = c.substring(1)
       }
       if (c.indexOf(name) != -1)
       {
-        return c.substring(name.length, c.length);
+        return c.substring(name.length, c.length)
       }
     }
-    return "";
-  };
+    return ''
+  }
   
   self.initSidebarSwipe = function() {
     
@@ -361,142 +361,134 @@ var Main = function(search_url) {
   };
   
 };
-;let ProgramLoader = function(container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
-  let self = this;
-  self.container = container;
-  self.url = url;
+;let ProgramLoader = function (container, url, column_max, recommended_by_program_id, recommended_by_page_id) {
+  let self = this
+  self.container = container
+  self.url = url
   self.recommended_by_program_id =
-    (typeof recommended_by_program_id === "undefined") ? null : recommended_by_program_id;
-  self.recommended_by_page_id = (typeof recommended_by_page_id === "undefined") ? null : recommended_by_page_id;
-  self.query = "";
-  self.default_rows = 2;
+    (typeof recommended_by_program_id === 'undefined') ? null : recommended_by_program_id
+  self.recommended_by_page_id = (typeof recommended_by_page_id === 'undefined') ? null : recommended_by_page_id
+  self.query = ''
+  self.default_rows = 2
   // before changing columns_min, columns_max, have a look at '.programs{.program{width:.%}}' in 'brain.scss' first
-  self.columns = 0;
-  self.columns_min = 3;
-  self.columns_max = 9;
-  self.windowWidth = $(window).width();
-  self.download_limit = 0;
-  self.initial_download_limit = self.default_rows * self.columns_max; // this way, always enough programs will be loaded
-  self.show_all_programs = false;
-  self.amount_of_loaded_programs = 0;
-  self.amount_of_visible_programs = 0;
-  self.total_amount_of_found_programs = 0;
-  self.default_amount_of_visible_programs = 3;
+  self.columns = 0
+  self.columns_min = 3
+  self.columns_max = 9
+  self.windowWidth = $(window).width()
+  self.download_limit = 0
+  self.initial_download_limit = self.default_rows * self.columns_max // this way, always enough programs will be loaded
+  self.show_all_programs = false
+  self.amount_of_loaded_programs = 0
+  self.amount_of_visible_programs = 0
+  self.total_amount_of_found_programs = 0
+  self.default_amount_of_visible_programs = 3
   
-  
-  self.init = function() {
-    self.restoreParamsWithSessionStorage();
-    $.get(self.url, {limit: self.initial_download_limit, offset: self.amount_of_loaded_programs}, function(data) {
+  self.init = function () {
+    self.restoreParamsWithSessionStorage()
+    $.get(self.url, {limit: self.initial_download_limit, offset: self.amount_of_loaded_programs}, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
         let url = Routing.generate('translate_word', {
-          'word': 'programs.noPrograms',
+          'word'  : 'programs.noPrograms',
           'domain': 'catroweb'
-        });
-        $.get(url, function(data) {
-          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>');
-        });
-        return;
+        })
+        $.get(url, function (data) {
+          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
+        })
+        return
       }
-      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects;
-      self.setup(data);
-    });
-  };
+      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+      self.setup(data)
+    })
+  }
   
-  
-  self.initRecsys = function() {
+  self.initRecsys = function () {
     
     if (($(self.container).length <= 0))
     {
-      return;
+      return
     }
     
-    self.restoreParamsWithSessionStorage(); // sets self.amount_of_visible_programsOfStoredSession and self.initial_download_limit
-    $.get(self.url, {program_id: self.recommended_by_program_id,}, function(data) {
+    self.restoreParamsWithSessionStorage() // sets self.amount_of_visible_programsOfStoredSession and self.initial_download_limit
+    $.get(self.url, {program_id: self.recommended_by_program_id,}, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
-        $(self.container).hide();
-        return;
+        $(self.container).hide()
+        return
       }
-      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects;
-      self.setup(data);
-    });
-  };
+      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+      self.setup(data)
+    })
+  }
   
+  self.initSpecificRecsys = function () {
+    $(self.container).hide()
+    self.init()
+  }
   
-  self.initSpecificRecsys = function() {
-    $(self.container).hide();
-    self.init();
-  };
-  
-  
-  self.initProfile = function(user_id) {
-    self.show_all_programs = false;
-    self.restoreParamsWithSessionStorage();
+  self.initProfile = function (user_id) {
+    self.show_all_programs = false
+    self.restoreParamsWithSessionStorage()
     $.get(self.url, {
       limit  : self.initial_download_limit,
       offset : self.amount_of_loaded_programs,
       user_id: user_id
-    }, function(data) {
+    }, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
       {
         let url = Routing.generate('translate_word', {
-          'word': 'programs.noPrograms',
+          'word'  : 'programs.noPrograms',
           'domain': 'catroweb'
-        });
-        $.get(url, function(data) {
-          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>');
-        });
-        return;
+        })
+        $.get(url, function (data) {
+          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
+        })
+        return
       }
-      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects;
-      self.setup(data);
-    });
-  };
+      self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
+      self.setup(data)
+    })
+  }
   
-  
-  self.restoreParamsWithSessionStorage = function() {
-    let amountOfStoredVisiblePrograms = sessionStorage.getItem(self.container);
+  self.restoreParamsWithSessionStorage = function () {
+    let amountOfStoredVisiblePrograms = sessionStorage.getItem(self.container)
     if (amountOfStoredVisiblePrograms > self.initial_download_limit)
     {
-      self.initial_download_limit = amountOfStoredVisiblePrograms;
+      self.initial_download_limit = amountOfStoredVisiblePrograms
     }
-  };
+  }
   
+  self.setSessionStorage = function (value) {
+    sessionStorage.setItem(self.container, value)
+  }
   
-  self.setSessionStorage = function(value) {
-    sessionStorage.setItem(self.container, value);
-  };
-  
-  
-  self.initSearch = function(query) {
-    let old_query = sessionStorage.getItem(self.query);
+  self.initSearch = function (query) {
+    let old_query = sessionStorage.getItem(self.query)
     if (query === old_query)
     { // same search -> restore old session limits
-      self.restoreParamsWithSessionStorage();
+      self.restoreParamsWithSessionStorage()
     }
-    sessionStorage.setItem(self.query, query);
-    self.query = query;
+    sessionStorage.setItem(self.query, query)
+    self.query = query
     
     $.get(self.url, {q: query, limit: self.initial_download_limit, offset: self.amount_of_loaded_programs},
-      function(data) {
-        let search_results_text = $('#search-results-text');
+      function (data) {
+        let search_results_text = $('#search-results-text')
         
         if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0)
         {
-          search_results_text.addClass('no-results');
-          search_results_text.find('span').text(0);
-          return;
+          search_results_text.addClass('no-results')
+          search_results_text.find('span').text(0)
+          return
         }
-        search_results_text.find('span').text(data.CatrobatInformation.TotalProjects);
-        self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects;
+        search_results_text.find('span').text(data.CatrobatInformation.TotalProjects)
+        self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
         
-        self.setup(data);
-      });
-  };
+        self.setup(data)
+      })
+  }
   
-  
-  self.setup = function(data) {
+  self.setup = function (data) {
     if (!self.show_all_programs)
     {
       $(self.container).append('' +
@@ -504,136 +496,134 @@ var Main = function(search_url) {
         '<div class="button-show-more"><i class="fa fa-chevron-circle-down catro-icon-button"></i></div>' +
         '<div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>' +
         '<div class="button-show-less"><i class="fa fa-chevron-circle-up catro-icon-button"></i></div>' +
-        '</div>');
+        '</div>')
     }
-    self.loadProgramsIntoContainer(data);
+    self.loadProgramsIntoContainer(data)
     
-    self.showMoreListener();
-    self.showLessListener();
+    self.showMoreListener()
+    self.showLessListener()
     
-    self.updateParameterBasedOnScreenSize();
+    self.updateParameterBasedOnScreenSize()
     
-    $(window).resize(function() {
+    $(window).resize(function () {
       if (self.windowWidth === $(window).width())
       {
-        return;
+        return
       }
-      self.windowWidth = $(window).width();
-      self.updateParameterBasedOnScreenSize();
-    });
-  };
+      self.windowWidth = $(window).width()
+      self.updateParameterBasedOnScreenSize()
+    })
+  }
   
-  
-  self.updateParameterBasedOnScreenSize = function() {
-    let columns = Math.round(($('.programs').width()) / $('.program').outerWidth());
+  self.updateParameterBasedOnScreenSize = function () {
+    let columns = Math.round(($('.programs').width()) / $('.program').outerWidth())
     if (columns < self.columns_min)
     {
-      columns = self.columns_min;
+      columns = self.columns_min
     }
     else if (columns > self.columns_max)
     {
-      columns = self.columns_max;
+      columns = self.columns_max
     }
-    self.columns = columns;
-    self.download_limit = self.default_rows * self.columns;
+    self.columns = columns
+    self.download_limit = self.default_rows * self.columns
     if (self.initial_download_limit > self.download_limit)
     {
-      self.initial_download_limit = self.initial_download_limit - (self.initial_download_limit % self.download_limit);
+      self.initial_download_limit = self.initial_download_limit - (self.initial_download_limit % self.download_limit)
     }
     else
     {
-      self.initial_download_limit = self.download_limit;
+      self.initial_download_limit = self.download_limit
     }
-    self.default_amount_of_visible_programs = self.download_limit;
-    self.amount_of_visible_programs = Math.min(self.initial_download_limit, self.total_amount_of_found_programs);
+    self.default_amount_of_visible_programs = self.download_limit
+    self.amount_of_visible_programs = Math.min(self.initial_download_limit, self.total_amount_of_found_programs)
     
     if (self.amount_of_visible_programs < self.default_amount_of_visible_programs &&
       self.amount_of_visible_programs < self.total_amount_of_found_programs)
     {
-      self.showMorePrograms();
+      self.showMorePrograms()
     }
     else if (self.amount_of_visible_programs > self.default_amount_of_visible_programs &&
       self.amount_of_visible_programs % self.download_limit !== 0)
     {
-      self.showLessPrograms();
+      self.showLessPrograms()
     }
     else
     {
-      self.updateProgramVisibility();
+      self.updateProgramVisibility()
     }
-  };
+  }
   
-  
-  self.loadProgramsIntoContainer = function(data) {
-    let programs = data.CatrobatProjects;
+  self.loadProgramsIntoContainer = function (data) {
+    let programs = data.CatrobatProjects
     for (let i = 0; i < programs.length; i++)
     {
-      let div = null;
-      let additional_link_css_class = null;
+      let div = null
+      let additional_link_css_class = null
       
       // Extend this for new containers...
       switch (self.container)
       {
         case '#newest':
         case '#search-results':
-        case "#random":
-          div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>';
-          break;
+        case '#random':
+          div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>'
+          break
         case '#myprofile-programs':
         case '#user-programs':
-          div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>';
-          break;
+          div = '<div><i class="fas fa-clock program-small-icon"></i>' + programs[i].UploadedString + '</div>'
+          break
         case '#mostDownamount_of_loaded_programs':
-          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>';
-          break;
+          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>'
+          break
         case '#mostViewed':
-          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>';
-          break;
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>'
+          break
         case '#recommendations':
-          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>';
-          break;
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>'
+          break
         case '#recommended':
-          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>';
-          additional_link_css_class = "homepage-recommended-programs";
-          break;
+          div = '<div><i class="fas fa-eye program-small-icon"></i>' + programs[i].Views + '</div>'
+          additional_link_css_class = 'homepage-recommended-programs'
+          break
         case '#specific-programs-recommendations':
-          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>';
-          break;
+          div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>'
+          break
         default:
           if ($(self.container).hasClass('starterDownloads'))
           {
-            div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>';
+            div = '<div><i class="fas fa-download program-small-icon"></i>' + programs[i].Downloads + '</div>'
           }
           else
           {
-            div = '<div><i class="fas fa-user program-small-icon"></i>' + programs[i].Author + '</div>';
+            div = '<div><i class="fas fa-user program-small-icon"></i>' + programs[i].Author + '</div>'
           }
       }
       
-      let program_link = undefined;
-      if (self.container === "#recommendations")
+      let program_link = undefined
+      if (self.container === '#recommendations')
       {
         program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl +
-          "?rec_from=" + self.recommended_by_program_id;
+          '?rec_from=' + self.recommended_by_program_id
       }
-      else if ((self.container === "#recommended") || (self.container === "#specific-programs-recommendations"))
+      else if ((self.container === '#recommended') || (self.container === '#specific-programs-recommendations'))
       {
-        program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + "?rec_by_page_id=" +
-          self.recommended_by_page_id;
-        program_link += (self.recommended_by_program_id != null) ? "&rec_by_program_id=" +
-          self.recommended_by_program_id : "";
-        program_link += "&rec_user_specific=" + (("isUserSpecificRecommendation" in data) &&
-        data.isUserSpecificRecommendation ? 1 : 0);
+        program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl + '?rec_by_page_id=' +
+          self.recommended_by_page_id
+        program_link += (self.recommended_by_program_id != null) ? '&rec_by_program_id=' +
+          self.recommended_by_program_id : ''
+        program_link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) &&
+        data.isUserSpecificRecommendation ? 1 : 0)
       }
       else
       {
-        program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl;
+        program_link = data.CatrobatInformation.BaseUrl + programs[i].ProjectUrl
       }
       
-      let stored_visits = sessionStorage.getItem("visits");
-      let link_css_classes = "rec-programs" + ((additional_link_css_class != null) ?
-        (" " + additional_link_css_class) : "");
-      let program = undefined;
+      let stored_visits = sessionStorage.getItem('visits')
+      let link_css_classes = 'rec-programs' + ((additional_link_css_class != null) ?
+        (' ' + additional_link_css_class) : '')
+      let program = undefined
       if (!stored_visits)
       {
         program = $(
@@ -644,12 +634,12 @@ var Main = function(search_url) {
           div +
           '</a>' +
           '</div>'
-        );
+        )
       }
       else
       {
-        let parsed_visits = JSON.parse(stored_visits);
-        let program_id = programs[i].ProjectId.toString();
+        let parsed_visits = JSON.parse(stored_visits)
+        let program_id = programs[i].ProjectId.toString()
         if ($.inArray(program_id, parsed_visits) >= 0)
         {
           program = $(
@@ -660,7 +650,7 @@ var Main = function(search_url) {
             div +
             '</a>' +
             '</div>'
-          );
+          )
         }
         else
         {
@@ -672,179 +662,170 @@ var Main = function(search_url) {
             div +
             '</a>' +
             '</div>'
-          );
+          )
         }
       }
       
-      $(self.container).find('.programs').append(program);
-      $(self.container).show();
+      $(self.container).find('.programs').append(program)
+      $(self.container).show()
       
       if (self.container === '#myprofile-programs')
       {
         $(program).prepend('<div id="delete-' + programs[i].ProjectId + '" class="img-delete" ' +
           'onclick="profile.deleteProgram(' + programs[i].ProjectId + ')">' +
-          '<i class="fas fa-times-circle catro-icon-button"></i></div>');
+          '<i class="fas fa-times-circle catro-icon-button"></i></div>')
         
         $(program).prepend('<div id="visibility-lock-open-' + programs[i].ProjectId + '" class="img-lock-open" ' +
           (programs[i].Private ? 'style="display: none;"' : '') +
           ' onclick="profile.toggleVisibility(' + programs[i].ProjectId + ')">' +
-            '<i class="fas fa-lock-open catro-icon-button"></i></div>');
-  
+          '<i class="fas fa-lock-open catro-icon-button"></i></div>')
+        
         $(program).prepend('<div id="visibility-lock-' + programs[i].ProjectId + '" class="img-lock" ' +
           (programs[i].Private ? '' : 'style="display: none;"') +
           ' onclick="profile.toggleVisibility(' + programs[i].ProjectId + ')">' +
-          '<i class="fas fa-lock catro-icon-button"></i></div>');
+          '<i class="fas fa-lock catro-icon-button"></i></div>')
       }
     }
-    self.amount_of_loaded_programs += programs.length;
-  };
+    self.amount_of_loaded_programs += programs.length
+  }
   
-  
-  self.updateProgramVisibility = function() {
+  self.updateProgramVisibility = function () {
     if (self.show_all_programs)
     {
-      return;
+      return
     }
     
-    self.showVisiblePrograms();
+    self.showVisiblePrograms()
     
-    self.setSessionStorage(self.amount_of_visible_programs);
+    self.setSessionStorage(self.amount_of_visible_programs)
     
-    self.showVisibleButtons();
-  };
+    self.showVisibleButtons()
+  }
   
-  
-  self.showVisiblePrograms = function() {
-    let programs_in_container = $(self.container).find('.program');
-    $(programs_in_container).hide();
+  self.showVisiblePrograms = function () {
+    let programs_in_container = $(self.container).find('.program')
+    $(programs_in_container).hide()
     for (let i = 0; i < self.amount_of_visible_programs && i < self.amount_of_loaded_programs; i++)
     {
-      $(programs_in_container[i]).show();
+      $(programs_in_container[i]).show()
     }
-  };
+  }
   
-  
-  self.showVisibleButtons = function() {
+  self.showVisibleButtons = function () {
     if (self.amount_of_visible_programs < self.total_amount_of_found_programs)
     {
-      $(self.container).find('.button-show-more').show();
+      $(self.container).find('.button-show-more').show()
     }
     else
     {
-      $(self.container).find('.button-show-more').hide();
+      $(self.container).find('.button-show-more').hide()
     }
-    
     
     if (self.amount_of_visible_programs > self.default_amount_of_visible_programs)
     {
-      $(self.container).find('.button-show-less').show();
+      $(self.container).find('.button-show-less').show()
     }
     else
     {
-      $(self.container).find('.button-show-less').hide();
+      $(self.container).find('.button-show-less').hide()
     }
-  };
+  }
   
+  self.showMoreListener = function () {
+    $(self.container + ' .button-show-more').click(function () {
+      self.showMorePrograms()
+    })
+  }
   
-  self.showMoreListener = function() {
-    $(self.container + ' .button-show-more').click(function() {
-      self.showMorePrograms();
-    });
-  };
-  
-  
-  self.showMorePrograms = function() {
+  self.showMorePrograms = function () {
     
     if (self.total_amount_of_found_programs <= self.amount_of_visible_programs)
     {
-      $(self.container).find('.button-show-more').hide();
-      return;
+      $(self.container).find('.button-show-more').hide()
+      return
     }
     
     if (self.amount_of_visible_programs + self.download_limit <= self.amount_of_loaded_programs)
     {
-      self.amount_of_visible_programs += self.download_limit;
-      self.updateProgramVisibility();
+      self.amount_of_visible_programs += self.download_limit
+      self.updateProgramVisibility()
     }
     else if (self.total_amount_of_found_programs === self.amount_of_loaded_programs)
     {
-      self.amount_of_visible_programs = self.total_amount_of_found_programs;
+      self.amount_of_visible_programs = self.total_amount_of_found_programs
     }
     else
     {
-      $(self.container).find('.button-show-more').hide();
-      $(self.container).find('.button-show-ajax').show();
-      self.loadMorePrograms();
+      $(self.container).find('.button-show-more').hide()
+      $(self.container).find('.button-show-ajax').show()
+      self.loadMorePrograms()
     }
-  };
+  }
   
-  
-  self.loadMorePrograms = function() {
-    if (self.query !== "")
+  self.loadMorePrograms = function () {
+    if (self.query !== '')
     {
       $.get(self.url, {
         q     : self.query,
         limit : self.download_limit,
         offset: self.amount_of_loaded_programs
-      }, function(data) {
+      }, function (data) {
         if ((data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0))
         {
-          $(self.container).find('.button-show-ajax').hide();
-          return;
+          $(self.container).find('.button-show-ajax').hide()
+          return
         }
         
-        self.loadProgramsIntoContainer(data);
-        self.showMorePrograms();
+        self.loadProgramsIntoContainer(data)
+        self.showMorePrograms()
         
-        $(self.container).find('.button-show-ajax').hide();
-      });
+        $(self.container).find('.button-show-ajax').hide()
+      })
       
     }
     else
     {
-      $.get(self.url, {limit: self.download_limit, offset: self.amount_of_loaded_programs}, function(data) {
+      $.get(self.url, {limit: self.download_limit, offset: self.amount_of_loaded_programs}, function (data) {
         if ((data.CatrobatProjects.length === 0 || data.CatrobatProjects === undefined))
         {
-          $(self.container).find('.button-show-ajax').hide();
-          return;
+          $(self.container).find('.button-show-ajax').hide()
+          return
         }
         
-        self.loadProgramsIntoContainer(data);
-        self.showMorePrograms();
+        self.loadProgramsIntoContainer(data)
+        self.showMorePrograms()
         
-        $(self.container).find('.button-show-ajax').hide();
-      });
+        $(self.container).find('.button-show-ajax').hide()
+      })
     }
-  };
+  }
   
+  self.showLessListener = function () {
+    $(self.container + ' .button-show-less').click(function () {
+      self.showLessPrograms()
+    })
+  }
   
-  self.showLessListener = function() {
-    $(self.container + ' .button-show-less').click(function() {
-      self.showLessPrograms();
-    });
-  };
-  
-  
-  self.showLessPrograms = function() {
+  self.showLessPrograms = function () {
     
     if (self.default_amount_of_visible_programs > self.amount_of_visible_programs)
     {
-      $(self.container).find('.button-show-less').hide();
-      return;
+      $(self.container).find('.button-show-less').hide()
+      return
     }
     
     // hides visible programs in a way that all columns are filled for rows that are visible
     if (self.amount_of_visible_programs % self.default_amount_of_visible_programs === 0)
     {
-      self.amount_of_visible_programs -= self.download_limit;
+      self.amount_of_visible_programs -= self.download_limit
     }
     else
     {
-      self.amount_of_visible_programs -= self.amount_of_visible_programs % self.default_amount_of_visible_programs;
+      self.amount_of_visible_programs -= self.amount_of_visible_programs % self.default_amount_of_visible_programs
     }
-    self.updateProgramVisibility();
-  };
-};
+    self.updateProgramVisibility()
+  }
+}
 
 
 

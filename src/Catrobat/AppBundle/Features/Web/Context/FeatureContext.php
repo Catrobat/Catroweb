@@ -910,16 +910,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2000, 'window.location.href.search("login") == -1');
-      $this->assertElementOnPage('#logo');
       $this->assertElementNotOnPage('#btn-login');
       $this->assertElementOnPage('#btn-logout');
-      $this->getSession()->getPage()->find('css', '.dropdown-toggle')->click();
     }
     if ($arg1 == 'out')
     {
       $this->getSession()->wait(2000, 'window.location.href.search("profile") == -1');
       $this->assertElementOnPage('#btn-login');
-      $this->assertElementNotOnPage('#nav-dropdown');
+      $this->assertElementNotOnPage('#btn-logout');
     }
   }
 

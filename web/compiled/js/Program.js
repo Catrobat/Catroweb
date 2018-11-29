@@ -60,7 +60,8 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
       apkGenerate.removeClass('d-none')
       apkGenerate.click(self.createApk)
     }
-    else {
+    else
+    {
       apkGenerate.removeClass('d-none')
     }
     
@@ -80,7 +81,7 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
   self.showUpdateAppPopup = function () {
     let popup_background = self.createPopupBackgroundDiv()
     let popup_div = self.createPopupDiv()
-    let body = $('body');
+    let body = $('body')
     popup_div.append('<h2>' + self.update_app_header + '</h2><br>')
     popup_div.append('<p>' + self.update_app_text + '</p>')
     
@@ -99,7 +100,7 @@ let Program = function (status_url, create_url, apk_preparing, apk_text, update_
   self.showPreparingApkPopup = function () {
     let popup_background = self.createPopupBackgroundDiv()
     let popup_div = self.createPopupDiv()
-    let body = $('body');
+    let body = $('body')
     
     popup_div.append('<h2>' + self.apk_preparing + '</h2><br>')
     popup_div.append('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true">')

@@ -5,7 +5,7 @@
 $(document).ready(function () {
   $('#reset_pw').click(function () {
     
-    let username = $('#username');
+    let username = $('#username')
     let $ajaxUrl = Routing.generate(
       'catrobat_is_oauth_user', {flavor: 'pocketcode'}
     )

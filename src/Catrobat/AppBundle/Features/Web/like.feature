@@ -78,7 +78,6 @@ Feature: Like feature on program page
     And I click "#program-like-thumbs-up"
     And I am on "/pocketcode/user/notifications"
     Then the element "#catro-notification-1" should not exist
-    And I should see "OtherUser"
     And the element "notifications-summary" should not exist
     And I should not see "new Notification"
 

@@ -8,8 +8,6 @@
 //  * YouTube video tracking
 //
 
-
-
 if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msTrackingProtectionEnabled' in window.external) &&
   (window.doNotTrack === '1' || navigator.doNotTrack === 'yes' || navigator.doNotTrack === '1' || navigator.msDoNotTrack === '1'))
 {
@@ -23,7 +21,7 @@ else
   
   (function ($, window, document, undefined) {
     
-    'use strict';
+    'use strict'
     
     /**
      * Contains Helper functions
@@ -44,7 +42,7 @@ else
       * @return {String} Hostname
       */
       getHostname: function () {
-        return window.location.hostname;
+        return window.location.hostname
       },
       
       /*
@@ -55,13 +53,19 @@ else
       */
       getProgramNumberFromUrl: function () {
         
-        if (window.location === undefined) return undefined;
+        if (window.location === undefined)
+        {
+          return undefined
+        }
         
         if (/.*program\/\d+$/.test(window.location.pathname))
         {
-          return HelperFunctions.getLastValue(window.location.pathname);
+          return HelperFunctions.getLastValue(window.location.pathname)
         }
-        else return undefined;
+        else
+        {
+          return undefined
+        }
       },
       
       /*
@@ -73,9 +77,12 @@ else
       */
       getLastValue: function (uri) {
         
-        if (uri === undefined || typeof(uri) !== "string") return undefined;
+        if (uri === undefined || typeof(uri) !== 'string')
+        {
+          return undefined
+        }
         
-        return uri.match(/\d+$/)[0];
+        return uri.match(/\d+$/)[0]
       },
       
       /*
@@ -87,26 +94,29 @@ else
       */
       removeDomainAndQuery: function (uri) {
         
-        if (uri === undefined || typeof(uri) !== "string") return undefined;
+        if (uri === undefined || typeof(uri) !== 'string')
+        {
+          return undefined
+        }
         
-        let hostname = HelperFunctions.getHostname();
+        let hostname = HelperFunctions.getHostname()
         
         // remove protocol = "https:"
         if (uri.indexOf(window.location.protocol) >= 0)
         {
-          uri = uri.replace(window.location.protocol + "//", "");
+          uri = uri.replace(window.location.protocol + '//', '')
         }
         
         // remove hostdomain
         if (uri.indexOf(hostname) >= 0)
         {
-          uri = uri.replace(hostname, "");
+          uri = uri.replace(hostname, '')
         }
         
         // remove query parameters
-        uri = HelperFunctions.removeQueryParameterFromUri(uri);
+        uri = HelperFunctions.removeQueryParameterFromUri(uri)
         
-        return uri;
+        return uri
       },
       
       /*
@@ -118,15 +128,18 @@ else
       */
       removeQueryParameterFromUri: function (uri) {
         
-        if (uri === undefined || typeof(uri) !== "string") return undefined;
+        if (uri === undefined || typeof(uri) !== 'string')
+        {
+          return undefined
+        }
         
         // remove query parameters
         if (uri.indexOf('?') >= 0)
         {
-          uri = uri.substring(0, uri.indexOf('?'));
+          uri = uri.substring(0, uri.indexOf('?'))
         }
         
-        return uri;
+        return uri
       },
       
       /*
@@ -135,9 +148,12 @@ else
        * param{string} text - input parameter
       */
       isNullOrWhitespace: function (text) {
-        if (text === undefined || typeof(text) !== "string") return undefined;
+        if (text === undefined || typeof(text) !== 'string')
+        {
+          return undefined
+        }
         
-        return (!text || text.trim() === "");
+        return (!text || text.trim() === '')
       },
       
       /* Returns the the query parameter from the given url
@@ -148,11 +164,17 @@ else
       */
       getParameterByName: function (name, url) {
         
-        if (name === undefined || typeof(name) !== "string") return "";
-        if (url === undefined || typeof(url) !== "string") return "";
+        if (name === undefined || typeof(name) !== 'string')
+        {
+          return ''
+        }
+        if (url === undefined || typeof(url) !== 'string')
+        {
+          return ''
+        }
         
-        let match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
-        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        let match = RegExp('[?&]' + name + '=([^&]*)').exec(url)
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
       },
       
       /* Returns an array of 3 elements for the tracking of
@@ -176,7 +198,7 @@ else
             'SubSelector' : 'a',
             'Category'    : category,
             'Action'      : 'click - ' + descriptor + ' programs',
-            'Label'       : function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')); },
+            'Label'       : function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')) },
           },
           {
             /*
@@ -196,21 +218,21 @@ else
             'Category'    : category,
             'Action'      : 'click - ' + descriptor + ' programs - less',
           },
-        ];
+        ]
         
-        return tripleList;
+        return tripleList
       }
       
-    };
+    }
     
     // Register the HelperFunctions in the global window context
-    window.HelperFunctions = HelperFunctions;
+    window.HelperFunctions = HelperFunctions
     
   })(window.jQuery, window, document);
   
   (function ($, window, document, undefined) {
     
-    'use strict';
+    'use strict'
     
     /**
      * UrlMapper
@@ -232,29 +254,29 @@ else
       */
       map: function (url, mappings) {
         
-        url = url || window.location.href || '';
-        mappings = mappings || [];
+        url = url || window.location.href || ''
+        mappings = mappings || []
         
         $.each(mappings, function (j, map) {
           if (map.RegEx.test(url))
           {
-            url = url.match(map.RegEx)[map.ValueIndex];
-            return url;
+            url = url.match(map.RegEx)[map.ValueIndex]
+            return url
           }
-        });
+        })
         
-        return url;
+        return url
       },
-    };
+    }
     
     // Register the UrlMapper in the global window context
-    window.UrlMapper = UrlMapper;
+    window.UrlMapper = UrlMapper
     
   })(window.jQuery, window, document);
   
   (function ($, window, document, undefined) {
     
-    'use strict';
+    'use strict'
     
     /**
      * TrackingObjectFactory
@@ -275,13 +297,13 @@ else
   */
       createArray: function (trackingObjectArray) {
         
-        let returnArray = [];
+        let returnArray = []
         
         jQuery.each(trackingObjectArray, function (index, elementToTrack) {
-          returnArray.push(TrackingObjectFactory.createObj(elementToTrack));
-        });
+          returnArray.push(TrackingObjectFactory.createObj(elementToTrack))
+        })
         
-        return returnArray;
+        return returnArray
       },
       
       /*
@@ -292,7 +314,7 @@ else
        */
       createObj: function (obj) {
         
-        let trackingObject = new TrackingObject();
+        let trackingObject = new TrackingObject()
         
         Object.keys(obj).forEach(function (key, index) {
           // key: the name of the object key
@@ -300,36 +322,36 @@ else
           switch (key)
           {
             case 'BaseSelector':
-              trackingObject.addBaseSelector(obj[key]);
-              break;
+              trackingObject.addBaseSelector(obj[key])
+              break
             case 'SubSelector':
-              trackingObject.addSubSelector(obj[key]);
-              break;
+              trackingObject.addSubSelector(obj[key])
+              break
             default:
-              trackingObject.addEventParameter(key, obj[key]);
+              trackingObject.addEventParameter(key, obj[key])
           }
-          ;
-        });
+          
+        })
         
         if (AnalyticsTracker.debugOutput)
         {
-          AnalyticsTracker.isBaseSeletorValid(trackingObject.baseSelector);
+          AnalyticsTracker.isBaseSeletorValid(trackingObject.baseSelector)
         }
         
-        return trackingObject;
+        return trackingObject
       },
-    };
+    }
     
     // Register the TrackingObjectFactory in the global window context
-    window.TrackingObjectFactory = TrackingObjectFactory;
+    window.TrackingObjectFactory = TrackingObjectFactory
     
   })(window.jQuery, window, document);
   
   (function ($, window, document, undefined) {
     
-    'use strict';
+    'use strict'
     
-    let TrackingObject;
+    let TrackingObject
     
     TrackingObject = (function () {
       /**
@@ -347,22 +369,22 @@ else
          * @property Parameter
          * @type collection
          */
-        this.baseSelector = "";
+        this.baseSelector = ''
         
         /**
          * The Event parameter for the event tracking
          * @property Parameter
          * @type collection
          */
-        this.subSelector = "";
+        this.subSelector = ''
         
         /**
          * The Event parameter for the event tracking
          * @property Parameter
          * @type collection
          */
-        this.eventParameter = {};
-      };
+        this.eventParameter = {}
+      }
       
       /**
        * Adds the base identifier for the tracked element
@@ -372,9 +394,9 @@ else
        * @return {TrackingObject} - returns same object
        */
       TrackingObject.prototype.addBaseSelector = function (baseSelector) {
-        this.baseSelector = baseSelector;
-        return this;
-      };
+        this.baseSelector = baseSelector
+        return this
+      }
       
       /**
        * Adds a sub identifier for the tracked element
@@ -384,9 +406,9 @@ else
        * @return {TrackingObject} - returns same object
        */
       TrackingObject.prototype.addSubSelector = function (subSelector) {
-        this.subSelector = subSelector;
-        return this;
-      };
+        this.subSelector = subSelector
+        return this
+      }
       
       /**
        * Adds an event parameter
@@ -397,9 +419,9 @@ else
        * @return {TrackingObject} - returns same object
        */
       TrackingObject.prototype.addEventParameter = function (key, value) {
-        this.eventParameter[key] = value;
-        return this;
-      };
+        this.eventParameter[key] = value
+        return this
+      }
       
       /**
        * Returns the event parameters
@@ -408,8 +430,8 @@ else
        * @return {Object} - returns the event parameter
        */
       TrackingObject.prototype.getEventParameter = function () {
-        return this.eventParameter;
-      };
+        return this.eventParameter
+      }
       
       /**
        * Returns true if a Subselector exits
@@ -418,8 +440,8 @@ else
        * @return {boolean} - true if a subselector exits, else false
        */
       TrackingObject.prototype.hasSubSelector = function () {
-        return ((this.subSelector.length > 0) ? true : false);
-      };
+        return ((this.subSelector.length > 0) ? true : false)
+      }
       
       /**
        * Creates a deep copy of the TrackingObject
@@ -429,31 +451,31 @@ else
        */
       TrackingObject.prototype.copy = function () {
         
-        let copy = new TrackingObject();
-        let toCopy = this;
+        let copy = new TrackingObject()
+        let toCopy = this
         
         // iterates the parameters of the TrackingObject and
         // executes functions of the parametes
         Object.keys(toCopy).forEach(function (key, index) {
           // key: the name of the object key
           // index: the ordinal position of the key within the object
-          copy[key] = ((typeof(copy[key]) === "object") ? Object.assign({}, toCopy[key]) : toCopy[key]);
-        });
-        return copy;
-      };
+          copy[key] = ((typeof(copy[key]) === 'object') ? Object.assign({}, toCopy[key]) : toCopy[key])
+        })
+        return copy
+      }
       
-      return TrackingObject;
+      return TrackingObject
       
-    })();
+    })()
     
     // Register the TrackingObject in the global window context
-    window.TrackingObject = TrackingObject;
+    window.TrackingObject = TrackingObject
     
   })(window.jQuery, window, document);
   
   (function ($, window, document, undefined) {
     
-    'use strict';
+    'use strict'
     
     /**
      * Contains methods to create tracking objects and
@@ -465,7 +487,7 @@ else
      * @requires jQuery
      * @static
      */
-    let AnalyticsTracker;
+    let AnalyticsTracker
     
     AnalyticsTracker = {
       
@@ -512,9 +534,9 @@ else
        * @param {array} validDownloadExtensions - valid download extions for the event tracking
        */
       initialize: function (trackingFunction, map, validDownloadExtensions) {
-        AnalyticsTracker.trackingFunction = trackingFunction;
-        AnalyticsTracker.trackingVarMap = map;
-        AnalyticsTracker.validDownloadExtensions = validDownloadExtensions;
+        AnalyticsTracker.trackingFunction = trackingFunction
+        AnalyticsTracker.trackingVarMap = map
+        AnalyticsTracker.validDownloadExtensions = validDownloadExtensions
       },
       
       /**
@@ -524,8 +546,8 @@ else
        * @param {object} eventParameter - event parameter to add
        */
       addEventParameter: function (obj, eventParameter) {
-        obj.data = obj.data || {};
-        obj.data.eventParameter = eventParameter;
+        obj.data = obj.data || {}
+        obj.data.eventParameter = eventParameter
       },
       
       /*
@@ -534,10 +556,10 @@ else
        * @param {object} parameter - contains the parameter for the tracking
        */
       trackEmails: function (parameter) {
-        parameter.BaseSelector = 'a[href^="mailto"]';
-        let trackingObject = TrackingObjectFactory.createObj(parameter);
+        parameter.BaseSelector = 'a[href^="mailto"]'
+        let trackingObject = TrackingObjectFactory.createObj(parameter)
         
-        AnalyticsTracker.trackOnClickEvent(trackingObject);
+        AnalyticsTracker.trackOnClickEvent(trackingObject)
       },
       
       /*
@@ -546,17 +568,17 @@ else
        * @param {string} parameter - parameter for tracking
        */
       trackOnKeyPressEnter: function (parameter) {
-        let trackingObject = TrackingObjectFactory.createObj(parameter);
+        let trackingObject = TrackingObjectFactory.createObj(parameter)
         
         // search for the searchbox
         jQuery(trackingObject.baseSelector).keypress(function (e) {
           // Keypress 13 = Enter
           if (e.which == 13)
           {
-            AnalyticsTracker.addEventParameter(e, trackingObject.getEventParameter());
-            AnalyticsTracker.resolve(e);
+            AnalyticsTracker.addEventParameter(e, trackingObject.getEventParameter())
+            AnalyticsTracker.resolve(e)
           }
-        });
+        })
       },
       
       /*
@@ -566,20 +588,20 @@ else
        */
       resolve: function (event) {
         // gets the event parameters
-        let params = event.data.eventParameter;
+        let params = event.data.eventParameter
         
         // iterates the parameters of the TrackingObject and
         // executes functions of the parametes
         Object.keys(params).forEach(function (key, index) {
           // key: the name of the object key
           // index: the ordinal position of the key within the object
-          if (typeof(params[key]) === 'function' && key.indexOf("callback") < 0)
+          if (typeof(params[key]) === 'function' && key.indexOf('callback') < 0)
           {
-            params[key] = params[key](event.currentTarget);
+            params[key] = params[key](event.currentTarget)
           }
-        });
+        })
         
-        AnalyticsTracker.sendEvent(event.currentTarget, params);
+        AnalyticsTracker.sendEvent(event.currentTarget, params)
       },
       
       /*
@@ -590,31 +612,31 @@ else
        */
       mapEventParameter: function (actions) {
         
-        let mapped = {};
+        let mapped = {}
         
         Object.keys(actions).forEach(function (key, index) {
           
-          let mapIndex = AnalyticsTracker.trackingVarMap.findIndex(function (x) { return key in x });
+          let mapIndex = AnalyticsTracker.trackingVarMap.findIndex(function (x) { return key in x })
           if (mapIndex >= 0)
           {
             
-            let parameter = AnalyticsTracker.trackingVarMap[mapIndex];
-            let mappedKey = parameter[key];
+            let parameter = AnalyticsTracker.trackingVarMap[mapIndex]
+            let mappedKey = parameter[key]
             
-            if (typeof(actions[key]) === "string" && HelperFunctions.isNullOrWhitespace(actions[key]) === false ||
-              typeof(actions[key]) === "number")
+            if (typeof(actions[key]) === 'string' && HelperFunctions.isNullOrWhitespace(actions[key]) === false ||
+              typeof(actions[key]) === 'number')
             {
               
-              mapped[mappedKey] = actions[key];
+              mapped[mappedKey] = actions[key]
             }
           }
           else
           {
-            mapped[key] = actions[key];
+            mapped[key] = actions[key]
           }
-        });
+        })
         
-        return mapped;
+        return mapped
       },
       
       /*
@@ -625,18 +647,18 @@ else
       */
       sendEvent: function (element, eventParameter) {
         
-        let mapped = AnalyticsTracker.mapEventParameter(eventParameter);
+        let mapped = AnalyticsTracker.mapEventParameter(eventParameter)
         
         // prints the tracking parameter
         if (AnalyticsTracker.debugOutput === true)
         {
-          console.log("event send : \r\n" + AnalyticsTracker.printObjectParameter(mapped));
+          console.log('event send : \r\n' + AnalyticsTracker.printObjectParameter(mapped))
         }
         
         if (AnalyticsTracker.isSending === true)
         {
           // execute tracking code
-          AnalyticsTracker.trackingFunction('event', eventParameter.Action, mapped);
+          AnalyticsTracker.trackingFunction('event', eventParameter.Action, mapped)
         }
       },
       
@@ -651,19 +673,19 @@ else
         {
           jQuery(trackingObject.baseSelector).on('click', trackingObject.subSelector, function (e) {
             
-            let tracking_copy = trackingObject.copy();
-            AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
-            AnalyticsTracker.resolve(e);
-          });
+            let tracking_copy = trackingObject.copy()
+            AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter())
+            AnalyticsTracker.resolve(e)
+          })
         }
         else
         {
           jQuery(trackingObject.baseSelector).on('click', function (e) {
             
-            let tracking_copy = trackingObject.copy();
-            AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter());
-            AnalyticsTracker.resolve(e);
-          });
+            let tracking_copy = trackingObject.copy()
+            AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter())
+            AnalyticsTracker.resolve(e)
+          })
         }
       },
       
@@ -677,12 +699,12 @@ else
         if (Array.isArray(trackingList))
         {
           jQuery.each(trackingList, function (index, trackingObjectToTrack) {
-            AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack);
-          });
+            AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack)
+          })
         }
         else
         {
-          AnalyticsTracker.trackOnClickEvent(trackingList);
+          AnalyticsTracker.trackOnClickEvent(trackingList)
         }
       },
       
@@ -694,31 +716,31 @@ else
        */
       trackOutboundAndDownloads: function (parameter) {
         // select all a with are not beginning with '#'
-        jQuery("a:not([href^='#'])").filter(function () {
+        jQuery('a:not([href^=\'#\'])').filter(function () {
           // filter only links beginning with http
-          return /^http.*/.test(this.href);
+          return /^http.*/.test(this.href)
         }).each(function () {
           // Add click event to the link to track the outbound link
-          let _hostDomain = HelperFunctions.getHostname();
+          let _hostDomain = HelperFunctions.getHostname()
           if (this.href.indexOf(_hostDomain) < 0)
           {
             // is external link
-            jQuery(this).on("click", function (sender) {
+            jQuery(this).on('click', function (sender) {
               
               if (this.href !== undefined)
               {
-                let url = this.href;
-                let trackingObject = TrackingObjectFactory.createObj(parameter.Outbound);
+                let url = this.href
+                let trackingObject = TrackingObjectFactory.createObj(parameter.Outbound)
                 
-                if (jQuery(this).attr("target") !== "_blank")
+                if (jQuery(this).attr('target') !== '_blank')
                 {
-                  trackingObject = trackingObject.addEventParameter("event_callback", function () { document.location = url;});
+                  trackingObject = trackingObject.addEventParameter('event_callback', function () { document.location = url})
                 }
                 
-                AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter());
-                AnalyticsTracker.resolve(sender);
+                AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter())
+                AnalyticsTracker.resolve(sender)
               }
-            });
+            })
           }
           else
           {
@@ -726,17 +748,17 @@ else
             jQuery(this).filter(function () {
               // file extensions
               // valid download extensions
-              return AnalyticsTracker.validDownloadExtensions.test(this.href);
+              return AnalyticsTracker.validDownloadExtensions.test(this.href)
             }).each(function () {
-              jQuery(this).on("click", function (sender) {
+              jQuery(this).on('click', function (sender) {
                 
-                let trackingObject = TrackingObjectFactory.createObj(parameter.Downloads);
-                AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter());
-                AnalyticsTracker.resolve(sender);
-              });
-            });
+                let trackingObject = TrackingObjectFactory.createObj(parameter.Downloads)
+                AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter())
+                AnalyticsTracker.resolve(sender)
+              })
+            })
           }
-        });
+        })
       },
       
       /*
@@ -747,19 +769,19 @@ else
        * @return {boolean}
        */
       isBaseSeletorValid: function (baseSelector) {
-        let isValid = false;
+        let isValid = false
         // Chech if the tracked object exits on the page
         if ($(baseSelector).length)
         {
-          console.log("Selector found: " + baseSelector);
-          isValid = true;
+          console.log('Selector found: ' + baseSelector)
+          isValid = true
         }
         else
         {
-          console.log("%cSelector not found: " + baseSelector, "color:red");
+          console.log('%cSelector not found: ' + baseSelector, 'color:red')
         }
         
-        return isValid;
+        return isValid
       },
       
       /*
@@ -770,19 +792,19 @@ else
       */
       printObjectParameter: function (obj) {
         
-        let output = "";
+        let output = ''
         Object.keys(obj).forEach(function (key, index) {
           // key: the name of the object key
           // index: the ordinal position of the key within the object
-          output += key + ": " + obj[key] + "\r\n";
-        });
+          output += key + ': ' + obj[key] + '\r\n'
+        })
         
-        return output;
+        return output
       },
-    };
+    }
     
     // Register the AnalyticsTracker in the global window context
-    window.AnalyticsTracker = AnalyticsTracker;
+    window.AnalyticsTracker = AnalyticsTracker
     
   })(window.jQuery, window, document);
   
@@ -797,7 +819,7 @@ else
      * @requires jQuery
      * @static
      */
-    let YoutubeTracker;
+    let YoutubeTracker
     
     YoutubeTracker = {
       
@@ -843,7 +865,7 @@ else
        * @param {AnalyticsTracker} analyticsTracker - contains a reference to the AnalyticsTracker
        */
       initialize: function (analyticsTracker) {
-        YoutubeTracker.analyticsTracker = analyticsTracker;
+        YoutubeTracker.analyticsTracker = analyticsTracker
       },
       
       /*
@@ -856,15 +878,15 @@ else
       getPercentage: function (id) {
         if (YoutubeTracker.players[id] === undefined)
         {
-          YoutubeTracker.players[id] = {};
+          YoutubeTracker.players[id] = {}
         }
         
         if (YoutubeTracker.players[id].timePercent === undefined)
         {
-          YoutubeTracker.players[id].timePercent = 0;
+          YoutubeTracker.players[id].timePercent = 0
         }
         
-        return YoutubeTracker.players[id].timePercent;
+        return YoutubeTracker.players[id].timePercent
       },
       
       /*
@@ -877,10 +899,10 @@ else
       setPercentage: function (id, value) {
         if (YoutubeTracker.players[id] === undefined)
         {
-          YoutubeTracker.players[id] = {};
+          YoutubeTracker.players[id] = {}
         }
         
-        YoutubeTracker.players[id].timePercent = value;
+        YoutubeTracker.players[id].timePercent = value
       },
       
       /*
@@ -890,7 +912,7 @@ else
        * @return {string} id of the video
       */
       getId: function (event) {
-        return event.getVideoData().video_id;
+        return event.getVideoData().video_id
       },
       
       /*
@@ -899,21 +921,21 @@ else
       */
       registerYoutubeVideos: function () {
         
-        let regex = /(http)?s?\:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/;
-        let i = 0;
+        let regex = /(http)?s?\:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/
+        let i = 0
         
         $('iframe').each(function (i, element) {
           if (regex.test(element.src))
           {
             $(this).load(function () {
-              let matches = element.src.match(regex);
-              $(element).attr('data-video-id', matches[2]);
-              YoutubeTracker.onYouTubeIframeAPIReady(element, matches[2]);
-            });
+              let matches = element.src.match(regex)
+              $(element).attr('data-video-id', matches[2])
+              YoutubeTracker.onYouTubeIframeAPIReady(element, matches[2])
+            })
           }
           else
-          { return false; }
-        });
+          { return false }
+        })
       },
       
       /*
@@ -923,41 +945,41 @@ else
       */
       checkStateChange: function (event) {
         
-        let player = event.target;
-        let id = YoutubeTracker.getId(player);
+        let player = event.target
+        let id = YoutubeTracker.getId(player)
         
-        player.PlayerState = event.data;
+        player.PlayerState = event.data
         
         if (event.data == YT.PlayerState.UNSTARTED)
         {
-          player.lastPlayerState = YT.PlayerState.UNSTARTED;
+          player.lastPlayerState = YT.PlayerState.UNSTARTED
         }
         // track when user clicks Play
         if (event.data == YT.PlayerState.PLAYING && player.lastPlayerState != YT.PlayerState.PLAYING)
         {
-          player.lastPlayerState = YT.PlayerState.PLAYING;
-          YoutubeTracker.trackEvent(player, id, 'play', '');
-          YoutubeTracker.startChecking(player);
+          player.lastPlayerState = YT.PlayerState.PLAYING
+          YoutubeTracker.trackEvent(player, id, 'play', '')
+          YoutubeTracker.startChecking(player)
           
         }
         // track when user clicks Pause
         if (event.data == YT.PlayerState.PAUSED)
         {
-          player.lastPlayerState = YT.PlayerState.PAUSED;
-          YoutubeTracker.trackEvent(player, id, 'pause', '');
+          player.lastPlayerState = YT.PlayerState.PAUSED
+          YoutubeTracker.trackEvent(player, id, 'pause', '')
         }
         // track when video ends
         if (event.data == YT.PlayerState.ENDED)
         {
-          player.lastPlayerState = YT.PlayerState.ENDED;
-          YoutubeTracker.setPercentage(id, 0);
-          YoutubeTracker.trackEvent(player, id, 'ended', '');
+          player.lastPlayerState = YT.PlayerState.ENDED
+          YoutubeTracker.setPercentage(id, 0)
+          YoutubeTracker.trackEvent(player, id, 'ended', '')
         }
         // track buffering
         if (event.data == YT.PlayerState.BUFFERING)
         {
-          player.lastPlayerState = YT.PlayerState.BUFFERING;
-          YoutubeTracker.trackEvent(player, id, 'buffering', '');
+          player.lastPlayerState = YT.PlayerState.BUFFERING
+          YoutubeTracker.trackEvent(player, id, 'buffering', '')
         }
       },
       
@@ -972,22 +994,22 @@ else
         // check if not already started
         if (YoutubeTracker.intervalId === 0)
         {
-          YoutubeTracker.intervalId = setInterval(YoutubeTracker.checkPercentage, 500);
+          YoutubeTracker.intervalId = setInterval(YoutubeTracker.checkPercentage, 500)
         }
         
-        let id = YoutubeTracker.getId(player);
-        let isAdded = false;
+        let id = YoutubeTracker.getId(player)
+        let isAdded = false
         
         Object.keys(YoutubeTracker.players).forEach(function (key, index) {
           if (key == id)
           {
-            isAdded = true;
+            isAdded = true
           }
-        });
+        })
         
         if (isAdded === false)
         {
-          YoutubeTracker.players[id] = player;
+          YoutubeTracker.players[id] = player
         }
       },
       
@@ -999,8 +1021,8 @@ else
         // check if not already stopped
         if (YoutubeTracker.intervalId !== 0)
         {
-          clearInterval(YoutubeTracker.intervalId);
-          YoutubeTracker.intervalId = 0;
+          clearInterval(YoutubeTracker.intervalId)
+          YoutubeTracker.intervalId = 0
         }
       },
       
@@ -1011,43 +1033,43 @@ else
        */
       checkPercentage: function () {
         
-        let anyPlaying = false;
+        let anyPlaying = false
         
         Object.keys(YoutubeTracker.players).forEach(function (key, index) {
           
-          let player = YoutubeTracker.players[key];
+          let player = YoutubeTracker.players[key]
           
           if (player.PlayerState == YT.PlayerState.PLAYING)
           {
             
-            anyPlaying = true;
-            let trackedPercentage = YoutubeTracker.getPercentage(key);
+            anyPlaying = true
+            let trackedPercentage = YoutubeTracker.getPercentage(key)
             
-            let duration = player.getDuration();
-            let currentTime = player.getCurrentTime();
+            let duration = player.getDuration()
+            let currentTime = player.getCurrentTime()
             
             if (duration > 0)
             {
-              let currentPerc = (currentTime / duration) * 100;
-              currentPerc = Math.round(currentPerc);
+              let currentPerc = (currentTime / duration) * 100
+              currentPerc = Math.round(currentPerc)
               
               // check each percentage
               $.each(YoutubeTracker.percentageToTrack, function (j, percentage) {
                 // check if we reached a defined percentage
                 if (trackedPercentage < percentage && currentPerc > percentage)
                 {
-                  YoutubeTracker.setPercentage(key, percentage);
-                  YoutubeTracker.trackEvent(player, key, "watched-" + percentage + "%", '');
+                  YoutubeTracker.setPercentage(key, percentage)
+                  YoutubeTracker.trackEvent(player, key, 'watched-' + percentage + '%', '')
                 }
-              });
+              })
             }
           }
-        });
+        })
         
         // if no video is currently playing stop the intervall
         if (!anyPlaying)
         {
-          YoutubeTracker.stopChecking();
+          YoutubeTracker.stopChecking()
         }
       },
       
@@ -1066,7 +1088,7 @@ else
               'onReady'      : YoutubeTracker.onPlayerReady,
               'onStateChange': YoutubeTracker.onPlayerStateChange
             }
-          });
+          })
         }
       },
       
@@ -1083,7 +1105,7 @@ else
        * @param {Youtube video element} event - Youtube video event
        */
       onPlayerStateChange: function (event) {
-        YoutubeTracker.checkStateChange(event);
+        YoutubeTracker.checkStateChange(event)
       },
       
       /*
@@ -1103,13 +1125,13 @@ else
           {
             if (elem.src.indexOf('enablejsapi=') === -1)
             {
-              elem.src += (elem.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1&origin=' + window.location.origin;
+              elem.src += (elem.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1&origin=' + window.location.origin
             }
           }
-        });
+        })
         
         //load the tracking script
-        $.getScript("https://www.youtube.com/iframe_api");
+        $.getScript('https://www.youtube.com/iframe_api')
       },
       
       /*
@@ -1122,16 +1144,16 @@ else
        */
       trackEvent: function (event, id, action, label) {
         
-        let videoName = event.getVideoData().title;
-        let actionName = action + ' - ' + videoName;
+        let videoName = event.getVideoData().title
+        let actionName = action + ' - ' + videoName
         
         let trackingObject = TrackingObjectFactory.createObj({
-          'Category': "videos",
+          'Category': 'videos',
           'Action'  : actionName,
           'Label'   : window.location.pathname,
-        });
+        })
         
-        YoutubeTracker.sendEvent(trackingObject.getEventParameter());
+        YoutubeTracker.sendEvent(trackingObject.getEventParameter())
       },
       
       /*
@@ -1143,24 +1165,24 @@ else
         
         if (YoutubeTracker.analyticsTracker === undefined)
         {
-          console.log("AnalyticsTracker is undefined");
-          return;
+          console.log('AnalyticsTracker is undefined')
+          return
         }
-        YoutubeTracker.analyticsTracker.sendEvent(null, parameter);
+        YoutubeTracker.analyticsTracker.sendEvent(null, parameter)
       },
-    };
+    }
     
     // Register the YoutubeTracker in the global window context
-    window.YoutubeTracker = YoutubeTracker;
+    window.YoutubeTracker = YoutubeTracker
     
   })(window.jQuery, window, document);
   
   (function ($, window, document, configCustom, undefined) {
     
-    'use strict';
+    'use strict'
     
     // initializes the configCustom as copy of configCustom or as empty object
-    configCustom = configCustom || {};
+    configCustom = configCustom || {}
     
     /**
      * configuration object to set global configuration parameters
@@ -1214,21 +1236,21 @@ else
         {'Label': 'event_label'},
         {'Value': 'value'},
       ],
-    };
+    }
     
     // copy and overwrite the custom parameter to the default parameters
     Object.keys(configCustom).forEach(function (key, index) {
-      configDefault[key] = configCustom[key];
-    });
+      configDefault[key] = configCustom[key]
+    })
     
     // defintion of the Google Analytics tracking function
-    function gtag () { dataLayer.push(arguments); }
+    function gtag () { dataLayer.push(arguments) }
     
     // configurate the Analytics Tracker
-    AnalyticsTracker.initialize(gtag, configDefault.TrackingVarMap, configDefault.validDownloadExtensions);
-    AnalyticsTracker.debugOutput = configDefault.DebugOutput;
+    AnalyticsTracker.initialize(gtag, configDefault.TrackingVarMap, configDefault.validDownloadExtensions)
+    AnalyticsTracker.debugOutput = configDefault.DebugOutput
     // configurate the Youtube Tracker
-    YoutubeTracker.initialize(AnalyticsTracker);
+    YoutubeTracker.initialize(AnalyticsTracker)
     
     // loads the analytics script and tracks the pageview
     $.getScript(configDefault.GoogleAnalyticsUri + configDefault.UaId, function () {
@@ -1236,15 +1258,15 @@ else
       if (AnalyticsTracker.isSending === true)
       {
         
-        gtag('js', new Date());
+        gtag('js', new Date())
         // map the url
-        let href = UrlMapper.map(window.location.href, configDefault.UrlMapping);
+        let href = UrlMapper.map(window.location.href, configDefault.UrlMapping)
         gtag('config', configDefault.UaId, {
           'anonymize_ip' : true,
           'page_location': href,
-        });
+        })
       }
-    });
+    })
     
     /**
      * Document realdy function
@@ -1253,66 +1275,69 @@ else
     jQuery(document).ready(function () {
       
       // check if the hostname is avialable else abort the script
-      if (HelperFunctions.getHostname() === undefined) return;
+      if (HelperFunctions.getHostname() === undefined)
+      {
+        return
+      }
       
       // Track Youtube Videos
       // registers the Youtube videos on the web page for the tracking
-      YoutubeTracker.addTrackingApiToYoutoubeVideos();
-      YoutubeTracker.registerYoutubeVideos();
+      YoutubeTracker.addTrackingApiToYoutoubeVideos()
+      YoutubeTracker.registerYoutubeVideos()
       
       // track emails
       AnalyticsTracker.trackEmails({
-        'Category': "engagement",
-        'Action'  : "send email",
-        'Label'   : function (e) { return e.href.replace(/^mailto\:/i, ''); },
-      });
+        'Category': 'engagement',
+        'Action'  : 'send email',
+        'Label'   : function (e) { return e.href.replace(/^mailto\:/i, '') },
+      })
       
       // track the search input
       // the input button
       let searchButton = TrackingObjectFactory.createObj({
         'BaseSelector': 'nav button.btn-search.catro-search-button',
-        'Category'    : "engagement",
-        'Action'      : "search",
-        'Label'       : function (e) { return e.previousElementSibling.value; },
-        'search_term' : function (e) { return e.previousElementSibling.value; },
-      });
+        'Category'    : 'engagement',
+        'Action'      : 'search',
+        'Label'       : function (e) { return e.previousElementSibling.value },
+        'search_term' : function (e) { return e.previousElementSibling.value },
+      })
       
-      AnalyticsTracker.registerElementsForClickTracking(searchButton);
+      AnalyticsTracker.registerElementsForClickTracking(searchButton)
       
       //
       // tracks the search input
       AnalyticsTracker.trackOnKeyPressEnter({
         'BaseSelector': 'nav input.search-input-header',
-        'Category'    : "engagement",
-        'Action'      : "search",
-        'Label'       : function (e) { return e.value; },
-        'search_term' : function (e) { return e.value; },
-      });
+        'Category'    : 'engagement',
+        'Action'      : 'search',
+        'Label'       : function (e) { return e.value },
+        'search_term' : function (e) { return e.value },
+      })
       
       // tracks the outbound links and downloads
       AnalyticsTracker.trackOutboundAndDownloads({
         'Outbound' : {
-          'Category'      : "outbound",
-          'Action'        : function (e) { return "outbound - " + e.href.replace(/^https?\:\/\//i, ''); },
+          'Category'      : 'outbound',
+          'Action'        : function (e) { return 'outbound - ' + e.href.replace(/^https?\:\/\//i, '') },
           'Label'         : window.location.pathname,
           'transport_type': 'beacon',
           'pathname'      : window.location.pathname,
         },
         'Downloads': {
-          'Category' : "download",
-          'Action'   : function (e) { return "download - " + e.href; },
-          'Label'    : function (e) { return e.value; },
-          'file_path': function (e) { return e.href; },
+          'Category' : 'download',
+          'Action'   : function (e) { return 'download - ' + e.href },
+          'Label'    : function (e) { return e.value },
+          'file_path': function (e) { return e.href },
           'pathname' : window.location.pathname,
         },
-      });
+      })
       
       if (/^(\/[a-zA-Z@]+\/)(?![a-zA-Z]+)(.*)/.test(window.location.pathname))
       {
         
         // sets the category name of the branch
         
-        let homepageCategory = 'home page';
+        let homepageCategory = 'home page'
         
         let elementList = [
           {
@@ -1324,7 +1349,7 @@ else
             'SubSelector' : 'a',
             'Category'    : homepageCategory,
             'Action'      : 'click - featured programs',
-            'Label'       : function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')); },
+            'Label'       : function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')) },
           },
           {
             /*
@@ -1334,26 +1359,26 @@ else
             'Category'    : homepageCategory,
             'Action'      : 'click - recommended programs - help',
           }
-        ];
+        ]
         
         if (/\/(pocketalice|pocketgalaxy)\/.*/.test(window.location.pathname))
         {
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('submissions', 'submissions', homepageCategory));
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('sample', 'sample', homepageCategory));
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('related', 'related', homepageCategory));
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('submissions', 'submissions', homepageCategory))
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('sample', 'sample', homepageCategory))
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('related', 'related', homepageCategory))
         }
         else
         {
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('newest', 'newest', homepageCategory));
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('recommended', 'recommended', homepageCategory));
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('newest', 'newest', homepageCategory))
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('recommended', 'recommended', homepageCategory))
           elementList.push.apply(elementList,
-            HelperFunctions.createTripleElementProgram('mostDownloaded', 'most Downloaded', homepageCategory));
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('mostViewed', 'most viewed', homepageCategory));
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory));
+            HelperFunctions.createTripleElementProgram('mostDownloaded', 'most Downloaded', homepageCategory))
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('mostViewed', 'most viewed', homepageCategory))
+          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory))
         }
         
-        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList)
+        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
       }
       
       if (/.*\/login.*/.test(window.location.pathname))
@@ -1362,7 +1387,7 @@ else
         /**
          * Login page tracking code
          */
-        let loginCategory = 'engagement';
+        let loginCategory = 'engagement'
         
         let elementList = [
           {
@@ -1395,16 +1420,16 @@ else
             'Label'       : 'Facebook',
             'method'      : 'Facebook',
           },
-        ];
+        ]
         
-        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList)
+        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
       }
       
       if (/.*\/program.*/.test(window.location.pathname))
       {
         
-        let programCategory = 'program page';
+        let programCategory = 'program page'
         
         let elementList = [
           {
@@ -1415,7 +1440,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - launch program',
             'Label'       : function () {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1426,10 +1451,10 @@ else
             'SubSelector' : 'a',
             'Category'    : programCategory,
             'Action'      : function (e) {
-              return 'tag - ' + $(e).find('button').attr("id");
+              return 'tag - ' + $(e).find('button').attr('id')
             },
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1440,7 +1465,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - download program',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1452,7 +1477,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - download apk',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1464,7 +1489,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - download apk pending',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1475,7 +1500,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - show remix graph',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1486,7 +1511,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - show remix graph',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1498,7 +1523,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - code statistics - show',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1510,7 +1535,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - code statistics - hide',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1522,7 +1547,7 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - program code - show',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           },
           {
@@ -1534,15 +1559,15 @@ else
             'Category'    : programCategory,
             'Action'      : 'click - program code - hide',
             'Label'       : function (e) {
-              return window.location.pathname;
+              return window.location.pathname
             },
           }
-        ];
+        ]
         
         elementList.push.apply(elementList,
-          HelperFunctions.createTripleElementProgram('recommendations', 'similar', programCategory));
+          HelperFunctions.createTripleElementProgram('recommendations', 'similar', programCategory))
         elementList.push.apply(elementList,
-          HelperFunctions.createTripleElementProgram('specific-programs-recommendations', 'recommended', programCategory));
+          HelperFunctions.createTripleElementProgram('specific-programs-recommendations', 'recommended', programCategory))
         
         // Social interactions
         let socialInteraction = [
@@ -1596,21 +1621,21 @@ else
             'Label'       : window.location.pathname,
             'Value'       : 30,
           },
-        ];
+        ]
         
-        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList)
+        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
         
-        let trackingObjectListSocialInteraction = TrackingObjectFactory.createArray(socialInteraction);
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction);
+        let trackingObjectListSocialInteraction = TrackingObjectFactory.createArray(socialInteraction)
+        AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction)
         
       }
       
       if (/.*\/search.*/.test(window.location.pathname))
       {
         
-        let searchCategory = 'search page';
-        let actionSubstring = ((window.location.pathname.indexOf('/tag/search') >= 0) ? "tag" : "program");
+        let searchCategory = 'search page'
+        let actionSubstring = ((window.location.pathname.indexOf('/tag/search') >= 0) ? 'tag' : 'program')
         
         let elementList = [
           {
@@ -1622,7 +1647,7 @@ else
             'Category'    : searchCategory,
             'Action'      : 'click - searched ' + actionSubstring,
             'Label'       : function (e) {
-              return HelperFunctions.removeDomainAndQuery($(e).attr('href'));
+              return HelperFunctions.removeDomainAndQuery($(e).attr('href'))
             },
           },
           {
@@ -1643,10 +1668,10 @@ else
             'Category'    : searchCategory,
             'Action'      : 'click - searched ' + actionSubstring + ' - less',
           },
-        ];
+        ]
         
-        let trackingObjectList = TrackingObjectFactory.createArray(elementList);
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList);
+        let trackingObjectList = TrackingObjectFactory.createArray(elementList)
+        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
       }
       
       if (/.*\/pocket-library.*/.test(window.location.pathname))
@@ -1660,25 +1685,25 @@ else
             'Category'    : 'download',
             'Action'      : 'click - ' + window.location.pathname,
             'Label'       : function (e) {
-              let dataHref = $(e).attr('data-href');
-              return HelperFunctions.getParameterByName('fname', dataHref);
+              let dataHref = $(e).attr('data-href')
+              return HelperFunctions.getParameterByName('fname', dataHref)
             }
-          });
+          })
         
         jQuery(libraryDownload.baseSelector).each(function () {
-          $(this).attr('data-href', $(this).attr('href'));
-        });
+          $(this).attr('data-href', $(this).attr('href'))
+        })
         
         //let libraryDownloadList = [];
         //libraryDownloadList.push(libraryDownload);
-        AnalyticsTracker.registerElementsForClickTracking(libraryDownload);
+        AnalyticsTracker.registerElementsForClickTracking(libraryDownload)
         
       }
       
       if (/.*\/profile.*/.test(window.location.pathname))
       {
         
-        let profileCategory = 'profile page';
+        let profileCategory = 'profile page'
         let profileElements = [
           {
             /**
@@ -1707,7 +1732,7 @@ else
             'Category'    : profileCategory,
             'Action'      : 'click - set visible own program',
           }
-        ];
+        ]
         
         let profileObjectList = TrackingObjectFactory.createArray(profileElements);
         AnalyticsTracker.registerElementsForClickTracking(profileObjectList);
