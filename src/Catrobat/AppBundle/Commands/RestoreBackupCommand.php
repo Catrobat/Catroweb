@@ -65,10 +65,10 @@ class RestoreBackupCommand extends ContainerAwareCommand
 //      $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $local_resource_directory ",
 //        'Extract files to local resources directory');
 
-      $this->executeShellCommand("pv pigz -dc $backup_file | tar -xf - -C $local_resource_directory",
+      $this->executeShellCommand("time pigz -dc $backup_file | tar -xf - -C $local_resource_directory",
         "Extracting files to local resources directory");
 
-      $this->executeShellCommand("mysql -u $local_database_user -p$local_database_password $local_database_name " .
+      $this->executeShellCommand("time mysql -u $local_database_user -p$local_database_password $local_database_name " .
         "< " . $local_resource_directory . "database.sql ",
         'Restore SQL file');
 
