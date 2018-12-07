@@ -1,11 +1,11 @@
 {
   "_args": [
     [
-      "@fortawesome/fontawesome-free@5.5.0",
+      "@fortawesome/fontawesome-free@^5.3.1",
       "/home/catroweb/Catroweb-Symfony"
     ]
   ],
-  "_from": "@fortawesome/fontawesome-free@5.5.0",
+  "_from": "@fortawesome/fontawesome-free@>=5.3.1 <6.0.0",
   "_hasShrinkwrap": false,
   "_id": "@fortawesome/fontawesome-free@5.5.0",
   "_inCache": true,
@@ -24,11 +24,11 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "@fortawesome/fontawesome-free",
-    "raw": "@fortawesome/fontawesome-free@5.5.0",
-    "rawSpec": "5.5.0",
+    "raw": "@fortawesome/fontawesome-free@^5.3.1",
+    "rawSpec": "^5.3.1",
     "scope": "@fortawesome",
-    "spec": "5.5.0",
-    "type": "version"
+    "spec": ">=5.3.1 <6.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "#DEV:/"
@@ -36,7 +36,7 @@
   "_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.5.0.tgz",
   "_shasum": "0c6c53823d04457ae669cd19567b8a21dbb4fcfd",
   "_shrinkwrap": null,
-  "_spec": "@fortawesome/fontawesome-free@5.5.0",
+  "_spec": "@fortawesome/fontawesome-free@^5.3.1",
   "_where": "/home/catroweb/Catroweb-Symfony",
   "author": {
     "email": "dave@fontawesome.com",
