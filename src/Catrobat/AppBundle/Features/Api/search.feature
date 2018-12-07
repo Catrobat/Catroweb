@@ -2,7 +2,12 @@
 Feature: Search programs
 
   Background:
-    Given there are programs:
+    Given there are users:
+      | name     | password | token      |
+      | Catrobat | 12345    | cccccccccc |
+      | User1    | vwxyz    | aaaaaaaaaa |
+      | NewUser  | vwxyz    | aaaaaaaaaa |
+    And there are programs:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | Minions         |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
@@ -32,31 +37,31 @@ Feature: Search programs
     Then the returned json object will be:
       """
       {
-        "completeTerm": "",
-        "CatrobatInformation": {
-          "BaseUrl": "https://pocketcode.org/",
-          "TotalProjects": 1,
-          "ProjectsExtension": ".catrobat"
-        },
-        "CatrobatProjects":[{
+        "CatrobatProjects": [{
           "ProjectId": 1,
           "ProjectName": "Galaxy War",
           "ProjectNameShort": "Galaxy War",
-          "ScreenshotBig": "images/default/screenshot.png",
-          "ScreenshotSmall": "images/default/thumbnail.png",
           "Author": "User1",
           "Description": "p1",
-          "Uploaded": 1357041600,
-          "UploadedString": "more than one year ago",
           "Version": "0.8.5",
           "Views": "12",
           "Downloads": "3",
           "Private": false,
-          "ProjectUrl": "pocketcode/program/1",
-          "DownloadUrl": "pocketcode/download/1.catrobat",
+          "Uploaded": 1357041600,
+          "UploadedString": "more than one year ago",
+          "ScreenshotBig": "images\/default\/screenshot.png",
+          "ScreenshotSmall": "images\/default\/thumbnail.png",
+          "ProjectUrl": "pocketcode\/program\/1",
+          "DownloadUrl": "pocketcode\/download\/1.catrobat",
           "FileSize": 0
         }],
-        "preHeaderMessages":""
+        "completeTerm": "",
+        "preHeaderMessages": "",
+        "CatrobatInformation": {
+          "BaseUrl": "https:\/\/pocketcode.org\/",
+          "TotalProjects": 1,
+          "ProjectsExtension": ".catrobat"
+        }
       }
       """
 

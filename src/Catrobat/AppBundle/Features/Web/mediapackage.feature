@@ -36,7 +36,7 @@ Feature:
 
   Scenario: The app needs the filename, so the media file link must provide the media file's name
     When I am on "/pocketcode/media-library/looks"
-    Then the media file "1" must have the download url "/pocketcode/download-media/1?fname=Dog"
+    Then the media file "1" must have the download url "/pocketcode/download-media/1"
 
   Scenario: Viewing only media files for the pocketcode flavor
     Given I am on "/pocketcode/media-library/looks"
@@ -44,13 +44,3 @@ Feature:
     And I should see media file with id "5"
     And I should see media file with id "6"
     But I should not see media file with id "4"
-
-  Scenario: Viewing only media files for the pocketcode flavor and their authors
-    Given I am on "/pocketcode/media-library/looks"
-    Then I should see media file with id "1"
-    And I should see media file with id "5"
-    And I should see media file with id "6"
-    But I should not see media file with id "4"
-    And I should see "Bob Schmidt"
-    And I should see "Jenifer Shawn"
-    But I should not see "Micheal John"

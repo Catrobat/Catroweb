@@ -28,7 +28,7 @@ fos_js_routing:
 
 translate_word:
   path:  /translate/{word}/{array}/{domain}
-  controller: Catrobat\AppBundle\Controller\TranslationController:translateAction
+  controller: Catrobat\AppBundle\Controller\Web\TranslationController:translateAction
   defaults:
     array: ""
     domain: "catroweb"
@@ -37,7 +37,7 @@ translate_word:
 
 translate_choice:
   path:  /transChoice/{word}/{count}/{array}/{domain}
-  controller: Catrobat\AppBundle\Controller\TranslationController:transChoiceAction
+  controller: Catrobat\AppBundle\Controller\Web\TranslationController:transChoiceAction
   defaults:
     array: ""
     domain: "catroweb"
@@ -50,6 +50,11 @@ edit_program_description:
   options:
     expose: true
 
+api_media_lib_category:
+  path:  /api/media/category/{category}/json
+  controller: Catrobat\AppBundle\Controller\Api\MediaPackageController:getMediaFilesForCategory
+  options:
+    expose: true
 
 # ===== FOS User Bundle =====
 fos_user:

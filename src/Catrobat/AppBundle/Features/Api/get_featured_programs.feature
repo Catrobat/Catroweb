@@ -25,6 +25,72 @@ Feature: Get featured programs
       | IOS test     | yes    | 0        | yes      |
       | Mega Game1   | no     | 1        | yes      |
 
+
+  Scenario: show featured programs with limit 1 and offset 1
+    Given I have a parameter "limit" with value "1"
+    And I have a parameter "offset" with value "1"
+    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    Then I should get the json object:
+      """
+      {
+        "CatrobatProjects":
+          [
+             {
+              "ProjectId": 4,
+              "ProjectName":"Soon to be",
+              "Author":"User1",
+              "FeaturedImage": "resources_test/featured/featured_3.jpg"
+             }
+          ],
+         "preHeaderMessages":"",
+         "CatrobatInformation":
+          {
+            "BaseUrl":"https://pocketcode.org/",
+            "TotalProjects":"3",
+            "ProjectsExtension":".catrobat"
+          }
+      }
+      """
+
+
+  Scenario: show featured programs with limit 10 and no offset
+    Given I have a parameter "limit" with value "10"
+    And I have a parameter "offset" with value "0"
+    When I GET "/pocketcode/api/projects/featured.json" with these parameters
+    Then I should get the json object:
+      """
+      {
+        "CatrobatProjects":
+          [
+            {
+              "ProjectId": 3,
+              "ProjectName":"A new world",
+              "Author":"User1",
+              "FeaturedImage":"resources_test/featured/featured_2.jpg"
+            },
+            {
+              "ProjectId": 4,
+              "ProjectName":"Soon to be",
+              "Author":"User1",
+              "FeaturedImage": "resources_test/featured/featured_3.jpg"
+            },
+            {
+              "ProjectId": 1,
+              "ProjectName": "Invaders",
+              "Author": "Catrobat",
+              "FeaturedImage": "resources_test/featured/featured_1.jpg"
+            }
+          ],
+         "preHeaderMessages":"",
+         "CatrobatInformation":
+          {
+            "BaseUrl":"https://pocketcode.org/",
+            "TotalProjects":"3",
+            "ProjectsExtension":".catrobat"
+          }
+      }
+      """
+
   Scenario: show featured programs with limit and offset
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
@@ -33,27 +99,27 @@ Feature: Get featured programs
       """
       {
         "CatrobatProjects":
-            [
-                {
-                    "ProjectId": 3,
-                    "ProjectName":"A new world",
-                    "Author":"User1",
-                    "FeaturedImage":"resources_test/featured/featured_2.jpg"
-                 },
-                 {
-                    "ProjectId": 4,
-                    "ProjectName":"Soon to be",
-                    "Author":"User1",
-                    "FeaturedImage": "resources_test/featured/featured_3.jpg"
-                 }
-            ],
+          [
+            {
+              "ProjectId": 3,
+              "ProjectName":"A new world",
+              "Author":"User1",
+              "FeaturedImage":"resources_test/featured/featured_2.jpg"
+             },
+             {
+              "ProjectId": 4,
+              "ProjectName":"Soon to be",
+              "Author":"User1",
+              "FeaturedImage": "resources_test/featured/featured_3.jpg"
+             }
+          ],
          "preHeaderMessages":"",
          "CatrobatInformation":
-            {
-                "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":"3",
-                "ProjectsExtension":".catrobat"
-            }
+          {
+            "BaseUrl":"https://pocketcode.org/",
+            "TotalProjects":"3",
+            "ProjectsExtension":".catrobat"
+          }
       }
       """
 
@@ -63,33 +129,33 @@ Feature: Get featured programs
       """
       {
         "CatrobatProjects":
-            [
-                {
-                    "ProjectId": 3,
-                    "ProjectName":"A new world",
-                    "Author":"User1",
-                    "FeaturedImage":"resources_test/featured/featured_2.jpg"
-                 },
-                 {
-                    "ProjectId": 4,
-                    "ProjectName":"Soon to be",
-                    "Author":"User1",
-                    "FeaturedImage": "resources_test/featured/featured_3.jpg"
-                 },
-                 {
-                    "ProjectId": 1,
-                    "ProjectName":"Invaders",
-                    "Author":"Catrobat",
-                    "FeaturedImage": "resources_test/featured/featured_1.jpg"
-                 }
-            ],
+          [
+            {
+              "ProjectId": 3,
+              "ProjectName":"A new world",
+              "Author":"User1",
+              "FeaturedImage":"resources_test/featured/featured_2.jpg"
+             },
+             {
+              "ProjectId": 4,
+              "ProjectName":"Soon to be",
+              "Author":"User1",
+              "FeaturedImage": "resources_test/featured/featured_3.jpg"
+             },
+             {
+              "ProjectId": 1,
+              "ProjectName":"Invaders",
+              "Author":"Catrobat",
+              "FeaturedImage": "resources_test/featured/featured_1.jpg"
+             }
+          ],
          "preHeaderMessages":"",
          "CatrobatInformation":
-            {
-                "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":"3",
-                "ProjectsExtension":".catrobat"
-            }
+          {
+            "BaseUrl":"https://pocketcode.org/",
+            "TotalProjects":"3",
+            "ProjectsExtension":".catrobat"
+          }
       }
       """
 
@@ -99,20 +165,20 @@ Feature: Get featured programs
       """
       {
         "CatrobatProjects":
-            [
-                {
-                    "ProjectId": 5,
-                    "ProjectName":"IOS test",
-                    "Author":"User1",
-                    "FeaturedImage":"resources_test/featured/featured_5.jpg"
-                 }
-            ],
-         "preHeaderMessages":"",
-         "CatrobatInformation":
+          [
             {
-                "BaseUrl":"https://pocketcode.org/",
-                "TotalProjects":"1",
-                "ProjectsExtension":".catrobat"
-            }
+              "ProjectId": 5,
+              "ProjectName":"IOS test",
+              "Author":"User1",
+              "FeaturedImage":"resources_test/featured/featured_5.jpg"
+             }
+          ],
+        "preHeaderMessages":"",
+        "CatrobatInformation":
+        {
+          "BaseUrl":"https://pocketcode.org/",
+          "TotalProjects":"1",
+          "ProjectsExtension":".catrobat"
+        }
       }
       """

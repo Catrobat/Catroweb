@@ -24,6 +24,7 @@ class MediaPackageAdmin extends AbstractAdmin
   // Fields to be shown on filter forms
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
+
   }
 
   // Fields to be shown on lists

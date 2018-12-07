@@ -115,6 +115,11 @@ services:
     tags:
     - { name: console.command }
 
+  catrowebadmin.create.media-package-thumbnails:
+    class: Catrobat\AppBundle\Commands\CreateMissingMediaPackageThumbnailsCommand
+    tags:
+    - { name: console.command }
+
   catrowebadmin.create.program.extensions:
     class: Catrobat\AppBundle\Commands\CreateProgramExtensionsCommand
     arguments:

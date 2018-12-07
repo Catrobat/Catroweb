@@ -15,8 +15,8 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "error_code": 523,
-      "error_message": "Looks not found"
+      "statusCode": 523,
+      "message": "Looks not found"
     }
     """
 
@@ -37,8 +37,8 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "error_code": 523,
-      "error_message": "Looks not found"
+      "statusCode": 523,
+      "message": "Looks not found"
     }
     """
 
@@ -50,8 +50,8 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "error_code": 522,
-      "error_message": "category Space not found in package Looks because the package doesn't contain any categories"
+      "statusCode": 522,
+      "message": "category Space not found in package Looks because the package doesn't contain any categories"
     }
     """
 
@@ -66,8 +66,8 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "error_code": 522,
-      "error_message": "category Space not found in package Looks"
+      "statusCode": 522,
+      "message": "category Space not found in package Looks"
     }
     """
 
@@ -87,12 +87,12 @@ Feature: Getting data from the media lib api even though no data is present shou
     """
 
   Scenario: get all files from a media lib category when the category does not exist
-    When I GET from the api "/pocketcode/api/media/category/Animals/json"
+    When I GET from the api "/api/media/category/Animals/json"
     Then I should get the json object:
     """
     {
-      "error_code": 522,
-      "error_message": "category Animals not found"
+      "statusCode": 522,
+      "message": "category Animals not found"
     }
     """
 
@@ -103,12 +103,13 @@ Feature: Getting data from the media lib api even though no data is present shou
     Given there are mediapackage categories:
       | id | name  | package |
       | 1  | Space | Looks   |
-    When I GET from the api "/pocketcode/api/media/category/Space/json"
+    When I GET from the api "/api/media/category/Space/json"
     Then I should get the json object:
     """
-    [
-
-    ]
+    {
+        "statusCode": 200,
+        "data": []
+    }
     """
 
   Scenario: get a single media file by id which does not exist
@@ -116,6 +117,6 @@ Feature: Getting data from the media lib api even though no data is present shou
     Then I should get the json object:
     """
     {
-      "error-code":404
+      "statusCode":404
     }
     """

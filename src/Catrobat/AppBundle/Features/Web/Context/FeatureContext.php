@@ -910,16 +910,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2000, 'window.location.href.search("login") == -1');
-      $this->assertElementOnPage('#logo');
       $this->assertElementNotOnPage('#btn-login');
       $this->assertElementOnPage('#btn-logout');
-      $this->getSession()->getPage()->find('css', '.dropdown-toggle')->click();
     }
     if ($arg1 == 'out')
     {
       $this->getSession()->wait(2000, 'window.location.href.search("profile") == -1');
       $this->assertElementOnPage('#btn-login');
-      $this->assertElementNotOnPage('#nav-dropdown');
+      $this->assertElementNotOnPage('#btn-logout');
     }
   }
 
@@ -1490,7 +1488,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
-    $mediafile = $this->getSession()->getPage()->find("css", ".mediafile-" . $id . " a");
+    $mediafile = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($mediafile, "Mediafile not found!");
     $link = $mediafile->getAttribute("href");
     Assert::assertTrue(is_int(strpos($link, $file_url)));
@@ -1501,7 +1499,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeMediaFileWithId($id)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id);
+    $link = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($link);
   }
 
@@ -1510,7 +1508,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldNotSeeMediaFileWithId($id)
   {
-    $link = $this->getSession()->getPage()->find("css", ".mediafile-" . $id);
+    $link = $this->getSession()->getPage()->find("css", "#mediafile-" . $id);
     Assert::assertNotNull($link);
   }
 

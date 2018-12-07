@@ -53,7 +53,6 @@ class MediaPackageFile
   protected $downloads = 0;
 
   /**
-   * todo: default pocketcode or null?
    * @ORM\Column(type="string", options={"default":"pocketcode"}, nullable=true)
    */
   protected $flavor = 'pocketcode';
@@ -236,7 +235,7 @@ class MediaPackageFile
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getFlavor()
   {

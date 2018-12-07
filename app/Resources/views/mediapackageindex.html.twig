@@ -1,0 +1,32 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/index.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  <div>
+    <h2>{{ "media-packages.title"|trans({}, "catroweb") }}</h2>
+    <p>{{ "media-packages.description"|trans({}, "catroweb") }}</p>
+  </div>
+  <div class="card-deck-wrapper">
+    <div class="card-deck mx-auto">
+      {% for item in packages %}
+          <div class="card">
+            <div class="card-header">Test</div>
+            <div class="card-body">
+              <h4 class="card-title"><a href="{{ path('media_package', {'package_name': item.nameUrl}) }}">{{ item.name }}</a></h4>
+              {% for badge in item.flavors %}
+                <span class="badge badge-pill badge-{{ badge }}">{{ badge }}</span>
+              {% endfor %}
+            </div>
+          </div>
+
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

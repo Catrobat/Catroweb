@@ -214,6 +214,8 @@ class AppExtension extends \Twig_Extension
   }
 
   /**
+   * @Route("/api/twig/getMediaPackageImageUrl", name="catrobat_twig_getMediaPackageImageUrl",
+   *                                                 methods={"POST"})
    *
    * @param $object MediaPackageFile
    *

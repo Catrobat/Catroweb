@@ -160,22 +160,25 @@ Feature: Get data from the media library in json format
     """
 
   Scenario: get all files from a media lib category
-    When I GET from the api "/pocketcode/api/media/category/Fantasy/json"
+    When I GET from the api "/api/media/category/Fantasy/json"
     Then I should get the json object:
     """
-    [
-      {
-        "id": 2,
-        "name": "Magic",
-        "flavor": "pocketcode",
-        "package": "Sounds",
-        "category": "Fantasy",
-        "author": "",
-        "extension": "mpga",
-        "url": null,
-        "download_url": "\/pocketcode\/download-media\/2"
-      }
-    ]
+    {
+      "statusCode": 200,
+      "data": [
+        {
+          "id": 2,
+          "name": "Magic",
+          "flavor": "pocketcode",
+          "package": "Sounds",
+          "category": "Fantasy",
+          "author": "",
+          "extension": "mpga",
+          "url": null,
+          "download_url": "\/pocketcode\/download-media\/2"
+        }
+      ]
+    }
     """
 
   Scenario: get all files from a media lib package and a certain category of that package

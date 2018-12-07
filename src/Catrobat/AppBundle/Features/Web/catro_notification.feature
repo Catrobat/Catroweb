@@ -36,14 +36,13 @@ Feature: User gets generic notifications additionally to the remix notifications
   Scenario: User should see the amount of his notifications in the header
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
-    When I click "#navbarDropdownMenuLink"
-    Then the element "#btn-notifications" should be visible
+    Then I wait 250 milliseconds
+    And the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
 
   Scenario: User should see the amount of his notifications in the header
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
-    When I click "#navbarDropdownMenuLink"
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
     And the ".user-notification-badge" element should contain "2"
@@ -51,7 +50,6 @@ Feature: User gets generic notifications additionally to the remix notifications
   Scenario: User should see the amount of his notifications in the header only if he has notifcations
     Given I log in as "OtherUser" with the password "123456"
     And I am on "/pocketcode/"
-    When I click "#navbarDropdownMenuLink"
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should not be visible
 
@@ -59,7 +57,6 @@ Feature: User gets generic notifications additionally to the remix notifications
     Given there are "105"+ notifications for "Catrobat"
     And I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
-    When I click "#navbarDropdownMenuLink"
     Then the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
     And the ".user-notification-badge" element should contain "99+"

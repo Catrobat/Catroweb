@@ -25,13 +25,31 @@ class MediaPackage
   /**
    * @ORM\Column(type="text", nullable=false)
    */
-  protected $name_url;
+  protected $nameUrl;
 
   /**
    * @ORM\ManyToMany(targetEntity="MediaPackageCategory", mappedBy="package")
    */
   protected $categories;
 
+
+  protected $flavors = [];
+
+  /**
+   * @return array
+   */
+  public function getFlavors(): array
+  {
+    return $this->flavors;
+  }
+
+  /**
+   * @param array $flavors
+   */
+  public function setFlavors(array $flavors): void
+  {
+    $this->flavors = $flavors;
+  }
   /**
    * @return mixed
    */
@@ -65,11 +83,11 @@ class MediaPackage
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getNameUrl()
   {
-    return $this->name_url;
+    return $this->nameUrl;
   }
 
   /**
@@ -77,7 +95,7 @@ class MediaPackage
    */
   public function setNameUrl($name_url)
   {
-    $this->name_url = $name_url;
+    $this->nameUrl = $name_url;
   }
 
   /**

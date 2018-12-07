@@ -31,15 +31,13 @@
 
   {% block head %}{% endblock %}
 </head>
-<body>
-
-<div id="wrapper">
-  <header>
+<body class="new-nav">
+ <header>
     {% block header %}
       {% include 'Default/header.html.twig' %}
     {% endblock %}
   </header>
-
+    {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
   <div class="container">
     {% block body %}{% endblock %}
   </div>
@@ -67,10 +65,9 @@
     }, 1000)
   })
 
-  function scrollToHash ()
-  {
-    if (window.location.hash && $(window.location.hash).length) {
-      window.scrollTo(0, ($(window.location.hash).offset().top - $('.navbar').outerHeight()))
+  function scrollToHash() {
+    if (window.location.hash && $(window.location.hash).offset()) {
+      window.scrollTo(0,($(window.location.hash).offset().top - $(".navbar").outerHeight()));
     }
   }
 

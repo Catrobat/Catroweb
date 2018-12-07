@@ -33,7 +33,7 @@
 }
 
 // stops navbar from being on top of body content
-#wrapper
+#wrapper.fixed-nav
 {
   padding-top: $wrapper-padding-top;
 }

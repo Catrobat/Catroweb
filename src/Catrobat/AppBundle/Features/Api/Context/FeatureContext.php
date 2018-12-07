@@ -23,7 +23,6 @@ use Catrobat\AppBundle\Entity\FeaturedProgram;
 use PHPUnit\Framework\Assert;
 
 
-
 /**
  * Feature context.
  */
@@ -82,8 +81,7 @@ class FeatureContext extends BaseContext
     $this->checked_catrobat_remix_forward_descendant_relations = [];
     $this->checked_catrobat_remix_backward_relations = [];
   }
-
-
+  
   /**
    * @Given /^the HTTP Request:$/
    * @Given /^I have the HTTP Request:$/
@@ -145,94 +143,6 @@ class FeatureContext extends BaseContext
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. ' . $response->getContent());
   }
 
-  /**
-   * @Given /^the server name is "([^"]*)"$/
-   */
-  public function theServerNameIs($arg1)
-  {
-    $this->server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true, 'SERVER_NAME' => 'asdsd.org'];
-  }
-
-  // ----------------------------------------------------------------
-
-  /**
-   * @Given /^there are users:$/
-   */
-  public function thereAreUsers(TableNode $table)
-  {
-    $users = $table->getHash();
-
-    for ($i = 0; $i < count($users); ++$i)
-    {
-      $this->insertUser(['name' => $users[$i]['name'], 'token' => $users[$i]['token'], 'password' => $users[$i]['password']]);
-    }
-  }
-
-  /**
-   * @Given /^there are programs:$/
-   */
-  public function thereArePrograms(TableNode $table)
-  {
-    $programs = $table->getHash();
-    $program_manager = $this->getProgramManger();
-    for ($i = 0; $i < count($programs); ++$i)
-    {
-      $user = $this->getUserManager()->findOneBy([
-        'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : "",
-      ]);
-      if ($user == null)
-      {
-        if (isset($programs[$i]['owned by']))
-        {
-          $user = $this->insertUser(['name' => $programs[$i]['owned by']]);
-        }
-      }
-      @$config = [
-        'name'                => $programs[$i]['name'],
-        'description'         => $programs[$i]['description'],
-        'views'               => $programs[$i]['views'],
-        'downloads'           => $programs[$i]['downloads'],
-        'uploadtime'          => $programs[$i]['upload time'],
-        'apk_status'          => $programs[$i]['apk_status'],
-        'catrobatversionname' => $programs[$i]['version'],
-        'directory_hash'      => $programs[$i]['directory_hash'],
-        'filesize'            => @$programs[$i]['FileSize'],
-        'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
-        'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
-      ];
-
-      $this->insertProgram($user, $config);
-    }
-  }
-
-  /**
-   * @Given /^following programs are featured:$/
-   */
-  public function followingProgramsAreFeatured(TableNode $table)
-  {
-    $em = $this->getManager();
-    $featured = $table->getHash();
-    for ($i = 0; $i < count($featured); ++$i)
-    {
-      $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
-      $featured_entry = new FeaturedProgram();
-      $featured_entry->setProgram($program);
-      $featured_entry->setActive(isset($featured[$i]['active']) ? $featured[$i]['active'] == 'yes' : true);
-      $featured_entry->setImageType('jpg');
-      $em->persist($featured_entry);
-    }
-    $em->flush();
-  }
-
-  /**
-   * @Given /^the current time is "([^"]*)"$/
-   */
-  public function theCurrentTimeIs($time)
-  {
-    $date = new \DateTime($time, new \DateTimeZone('UTC'));
-    $time_service = $this->getSymfonyService('time');
-    $time_service->setTime(new FixedTime($date->getTimestamp()));
-  }
 
   /**
    * @Given /^we assume the next generated token will be "([^"]*)"$/
@@ -526,6 +436,22 @@ class FeatureContext extends BaseContext
     $this->upload(self::FIXTUREDIR . '/invalid_archive.catrobat', null);
   }
 
+  /**
+   * @Given /^there are users:$/
+   */
+  public function thereAreUsers(TableNode $table)
+  {
+    $users = $table->getHash();
+    for ($i = 0; $i < count($users); ++$i)
+    {
+      $this->insertUser(@[
+        'name'     => $users[$i]['name'],
+        'email'    => $users[$i]['email'],
+        'token'    => isset($users[$i]['token']) ? $users[$i]['token'] : "",
+        'password' => isset($users[$i]['password']) ? $users[$i]['password'] : "",
+      ]);
+    }
+  }
 
   /**
    * @Given /^there are LDAP-users:$/
@@ -547,6 +473,39 @@ class FeatureContext extends BaseContext
       $pwd = $users[$i]['password'];
       $groups = array_key_exists("groups", $users[$i]) ? explode(",", $users[$i]["groups"]) : [];
       $ldap_test_driver->addTestUser($username, $pwd, $groups, isset($users[$i]['email']) ? $users[$i]['email'] : null);
+    }
+  }
+
+  /**
+   * @Given /^there are programs:$/
+   */
+  public function thereArePrograms(TableNode $table)
+  {
+    $programs = $table->getHash();
+    $program_manager = $this->getProgramManger();
+    for ($i = 0; $i < count($programs); ++$i)
+    {
+      $user = $this->getUserManager()->findOneBy([
+        'username' => isset($programs[$i]['owned by']) ? $programs[$i]['owned by'] : "",
+      ]);
+      @$config = [
+        'name'                => $programs[$i]['name'],
+        'description'         => $programs[$i]['description'],
+        'views'               => $programs[$i]['views'],
+        'downloads'           => $programs[$i]['downloads'],
+        'uploadtime'          => $programs[$i]['upload time'],
+        'apk_status'          => $programs[$i]['apk_status'],
+        'catrobatversionname' => $programs[$i]['version'],
+        'directory_hash'      => $programs[$i]['directory_hash'],
+        'filesize'            => @$programs[$i]['FileSize'],
+        'visible'             => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
+        'approved'            => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
+        'tags'                => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
+        'extensions'          => isset($programs[$i]['extensions']) ? $programs[$i]['extensions'] : null,
+        'remix_root'          => isset($programs[$i]['remix_root']) ? $programs[$i]['remix_root'] == 'true' : true,
+      ];
+
+      $this->insertProgram($user, $config);
     }
   }
 
@@ -689,6 +648,26 @@ class FeatureContext extends BaseContext
     }
   }
 
+  /**
+   * @Given /^following programs are featured:$/
+   */
+  public function followingProgramsAreFeatured(TableNode $table)
+  {
+    $em = $this->getManager();
+    $featured = $table->getHash();
+    for ($i = 0; $i < count($featured); ++$i)
+    {
+      $program = $this->getProgramManger()->findOneByName($featured[$i]['name']);
+      $featured_entry = new FeaturedProgram();
+      $featured_entry->setProgram($program);
+      $featured_entry->setActive($featured[$i]['active'] == 'yes');
+      $featured_entry->setImageType('jpg');
+      $featured_entry->setPriority($featured[$i]['priority']);
+      $featured_entry->setForIos(isset($featured[$i]['ios_only']) ? $featured[$i]['ios_only'] == 'yes' : false);
+      $em->persist($featured_entry);
+    }
+    $em->flush();
+  }
 
   /**
    * @Given /^there are downloadable programs:$/
@@ -1173,6 +1152,15 @@ class FeatureContext extends BaseContext
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
+  /**
+   * @Given /^the current time is "([^"]*)"$/
+   */
+  public function theCurrentTimeIs($time)
+  {
+    $date = new \DateTime($time, new \DateTimeZone('UTC'));
+    $time_service = $this->getSymfonyService('time');
+    $time_service->setTime(new FixedTime($date->getTimestamp()));
+  }
 
   /**
    * @Given /^I have the POST parameters:$/
@@ -1384,6 +1372,14 @@ class FeatureContext extends BaseContext
     $response = $this->getClient()->getResponse();
     $responseArray = json_decode($response->getContent(), true);
     Assert::assertEquals(200, $responseArray['statusCode']);
+  }
+
+  /**
+   * @Given /^the server name is "([^"]*)"$/
+   */
+  public function theServerNameIs($name)
+  {
+    $this->hostname = $name;
   }
 
   /**
