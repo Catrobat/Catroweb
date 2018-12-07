@@ -36,7 +36,8 @@ Feature: User gets generic notifications additionally to the remix notifications
   Scenario: User should see the amount of his notifications in the header
     Given I log in as "Catrobat" with the password "123456"
     And I am on "/pocketcode/"
-    Then the element "#btn-notifications" should be visible
+    Then I wait 250 milliseconds
+    And the element "#btn-notifications" should be visible
     And the element ".user-notification-badge" should be visible
 
   Scenario: User should see the amount of his notifications in the header

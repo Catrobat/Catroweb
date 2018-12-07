@@ -29,7 +29,7 @@ Feature: A/B testing for recommendation system & remix graph
     And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "Russisch"
     And I wait 250 milliseconds
-    And I should see "Recommended programs"
+    And I should see "РЕКОМЕНДУЕМЫЕ"
     And the element "#recommended" should be visible
     And I should see a recommended homepage program having ID "1" and name "Minions"
     When I switch the language to "French"
