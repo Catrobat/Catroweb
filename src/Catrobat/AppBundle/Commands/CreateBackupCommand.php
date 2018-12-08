@@ -81,7 +81,11 @@ class CreateBackupCommand extends ContainerAwareCommand
     $progress->advance();
     $progress->setMessage('Compression started');
 
-    CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
+//    CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
+//      ['timeout' => 14400]);
+
+    CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -cv 
+      $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir | pigz > $zip_path",
       ['timeout' => 14400]);
     $progress->advance();
     $progress->setMessage('Compression finished. Setting permissions.');
