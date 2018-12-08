@@ -29,13 +29,12 @@ class DefaultController extends Controller
      * @var $item             FeaturedProgram
      */
 
-
     $image_repository = $this->get('featuredimagerepository');
     $repository = $this->get('featuredrepository');
 
     $flavor = $request->get('flavor');
 
-    if ($flavor === 'phirocode' || $flavor === 'luna')
+    if ($flavor === 'phirocode')
     {
       $featured_items = $repository->getFeaturedItems('pocketcode', 10, 0);
     }

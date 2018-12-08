@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Controller\Api;
 
 use Catrobat\AppBundle\Entity\ProgramManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Catrobat\AppBundle\Services\ScreenshotRepository;
@@ -14,16 +15,17 @@ class ListProgramsController extends Controller
 {
 
   /**
-   * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"},
+   *                                     methods={"GET"})
    */
-  public function listProgramsAction(Request $request)
+  public function listProgramsAction(Request $request, $flavor)
   {
-    return $this->listSortedPrograms($request, 'recent');
+    return $this->listSortedPrograms($request, 'recent', true, $flavor);
   }
 
   /**
-   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format": "json"},
-   *                                        methods={"GET"})
+   * @Route("/api/projects/recentIDs.json", name="api_recent_program_ids", defaults={"_format":
+   *                                        "json"}, methods={"GET"})
    */
   public function listProgramIdsAction(Request $request)
   {
@@ -31,8 +33,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"},
-   *                                             methods={"GET"})
+   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs",
+   *                                             defaults={"_format": "json"}, methods={"GET"})
    */
   public function listMostDownloadedProgramsAction(Request $request)
   {
@@ -40,7 +42,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids", defaults={"_format":
+   * @Route("/api/projects/mostDownloadedIDs.json", name="api_most_downloaded_program_ids",
+   *                                                defaults={"_format":
    *                                                "json"}, methods={"GET"})
    */
   public function listMostDownloadedProgramIdsAction(Request $request)
@@ -49,8 +52,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"},
-   *                                         methods={"GET"})
+   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format":
+   *                                         "json"}, methods={"GET"})
    */
   public function listMostViewedProgramsAction(Request $request)
   {
@@ -58,8 +61,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids", defaults={"_format": "json"},
-   *                                            methods={"GET"})
+   * @Route("/api/projects/mostViewedIDs.json", name="api_most_viewed_programids",
+   *                                            defaults={"_format": "json"}, methods={"GET"})
    */
   public function listMostViewedProgramIdsAction(Request $request)
   {
@@ -67,8 +70,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/randomPrograms.json", name="api_random_programs", defaults={"_format": "json"},
-   *                                             methods={"GET"})
+   * @Route("/api/projects/randomPrograms.json", name="api_random_programs", defaults={"_format":
+   *                                             "json"}, methods={"GET"})
    */
   public function listRandomProgramsAction(Request $request)
   {
@@ -76,8 +79,8 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids", defaults={"_format": "json"},
-   *                                               methods={"GET"})
+   * @Route("/api/projects/randomProgramIDs.json", name="api_random_programids",
+   *                                               defaults={"_format": "json"}, methods={"GET"})
    */
   public function listRandomProgramIdsAction(Request $request)
   {
@@ -85,19 +88,22 @@ class ListProgramsController extends Controller
   }
 
   /**
-   * @Route("/api/projects/userPrograms.json", name="api_user_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/userPrograms.json", name="api_user_programs", defaults={"_format":
+   *                                           "json"}, methods={"GET"})
    */
   public function listUserProgramsAction(Request $request)
   {
     return $this->listSortedPrograms($request, 'user');
   }
 
-  private function listSortedPrograms(Request $request, $sortBy, $details = true)
+  private function listSortedPrograms(Request $request, $sortBy, $details = true, $flavor = 'pocketcode')
   {
-    $program_manager = $this->get('programmanager');
-    $flavor = $request->getSession()->get('flavor');
+    /**
+     * @var ProgramManager $program_manager
+     */
 
-    $limit = intval($request->query->get('limit', 20));
+    $program_manager = $this->get('programmanager');
+    $limit = intval($request->query->get('limit', 200));
     $offset = intval($request->query->get('offset', 0));
     $user_id = intval($request->query->get('user_id', 0));
     $max_version = $request->query->get('max_version', 0);
