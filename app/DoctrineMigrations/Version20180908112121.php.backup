@@ -5,6 +5,11 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
+
+// TODO: this is a migration that was lost in translation and might kause problems when executed
+// Currently it does when installing the latest backup from share. This is the backup file if you need it in the future.
+
+
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
