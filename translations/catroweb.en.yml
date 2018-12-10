@@ -6,6 +6,7 @@ password: Password
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: About Pocket Code
+aboutCatrobat: About Catrobat
 tutorials: Tutorials
 googlePlay: Google Play
 passwordsNoMatch: The passwords didn't match.
@@ -749,12 +750,20 @@ help-cards:
     tutorials: Tutorials
     stepbystep: Step by Step
     getinvolved: Get involved
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
     getinvolved_1: Download
     getinvolved_2: now from Google Play and get started!
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 
 media-packages:
   title: Media-Packages

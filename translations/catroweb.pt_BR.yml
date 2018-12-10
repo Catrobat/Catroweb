@@ -5,6 +5,7 @@ password: Senha
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: Sobre o Pocket Code
+aboutCatrobat: Sobre o Catrobat
 tutorials: Tutoriais
 googlePlay: Google Play
 passwordsNoMatch: As senhas não coincidem.
@@ -136,16 +137,16 @@ passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
     Prezado %username%.
-    
+
     Você requisitou redefinir sua senha em %appplication_url% por tê-la esquecido. Caso você não tenha requisitado a redefinição de sua senha, por favor ignore-a. Ela expirará em 24 horas.
     Para redefinir sua senha por favor acesse a seguinte página:
     %confirmationUrl%
-    
+
     Você pode usar seu nome de usuário e senha a qualquer momento para acessar a comunidade %appplication_url%.
     Para fazê-lo agora, visite a seguinte página: %loginPage%
     Para editar seu perfil acesse a página: %profilePage%
-    
-    
+
+
     Atenciosamente,
     Sua Equipe Catrobat.
 profile:
@@ -487,6 +488,7 @@ menu:
   login: Login
   logout: Encerrar Sessão
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: Não há, atualmente, nenhum programa.
 login:
@@ -719,3 +721,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Baixar
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

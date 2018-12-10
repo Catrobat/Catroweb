@@ -5,6 +5,7 @@ password: Lozinka
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: O Pocket Code-u
+aboutCatrobat: O Catrobat-u
 tutorials: Tutoriali
 googlePlay: Google Play
 passwordsNoMatch: Lozinke se ne podudaraju.
@@ -136,16 +137,16 @@ passwordRecovery:
   subject: Povrat lozinke
   message: |
     Dear %username% 
-    
+
     Izabrali ste da resetujete vašu lozinku na %appplication_url% zato što ste zaboravili vašu lozinku. Ako niste vi zatražili ovaj zahtjev, molimo vas da ga ignorišete. U roku od 24 sata postat će nevažeći.
     Ako želite resetovati lozinku i napraviti novu, molimo vas da posjetite sljedeću stranicu:
     %confirmationUrl%
-    
+
     Možete koristiti vaše korisničko ime i lozinku da u bilo kojem trenutku pristupite %appplication_url% zajednici.
-    
+
     U tom slućaju posjetite sljedeču stranicu: %loginPage%
     U slučaju da želite ažurirati vaše profil, psjetite ovu stranicu: %profilePage%
-    
+
     Puno pozdrava,
     Vaš Catrobat Team.
 profile:
@@ -487,6 +488,7 @@ menu:
   login: Prijava
   logout: Logout
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: Trenutno nema programa.
 login:
@@ -719,3 +721,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Preuzmi
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

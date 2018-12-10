@@ -5,6 +5,7 @@ password: 密码
 accountSettings: Account Settings
 email: 邮箱
 aboutPocketCode: 关于口袋编程
+aboutCatrobat: 关于 Catrobat
 tutorials: 新手向导
 googlePlay: 谷歌游戏
 passwordsNoMatch: 密码不对
@@ -44,12 +45,12 @@ indexPage:
   recommendedSection:
     info:
       title: '这里推荐了什么程序？'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description: '如果你的程序收到了例如（”大拇指“，”哈哈“，”喜欢“和”哇！“）这样类似的赞，你的程序就会在列表的最上面显示。'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
-    subtitle: Create stories, games and more...
-    download: Download the app
+    title: 感谢你使用卡特罗巴的口袋编码。
+    subtitle: 书写你的故事，游戏以及更多东西...。
+    download: 下载该APP。
     statistics: 更多统计信息
   featured: 经典程序
   newest: 最新版程序
@@ -136,17 +137,17 @@ passwordRecovery:
   subject: 密码找回
   message: |
     亲爱的 %username%：
-    
+
     刚才有人申请重置您的密码%appplication_url%。如果不是你干的, 可以忽略这封邮件。而这个链接在24小时后就会失效。
     如果你确实需要重置密码，可以登录以下页面: %confirmationUrl%
-    
-    
+
+
     在任意时刻，您都可以使用您的用户名和密码登录%appplication_url% 社区。
     登录入口: 
     %loginPage%
     如果要更改你的档案, 点这里: 
     %profilePage%
-    
+
     敬礼,
      Catrobat 团队.
 profile:
@@ -441,28 +442,28 @@ help:
     text7: "在你登录之后，请前往到你的概要面板。你可以在那里添加你的游戏。首先，你必须点击“接受条款”的按键。然后请填写你的游戏资料。如果是引擎/语言/创造性工具，请点选“其他”并添加到其他引擎/语言/工具“安卓”。如果是“开发性物品或工具”的性质，请点选“已完成/稳定”。请确保你已在你的叙述中包括了#Alicm Jam150以让它能出现在%link%的页面。"
     text7_1: "在您能发布您的游戏之前，请遵照接下来的指示步骤。你必须至少添加一个“缩略图”，设置一个“成熟度评级”，并点击”构建/文件“以上传你的游戏。"
     text7_2: "点击“添加包裹”并填写包裹资料。请保存之后再添加发布版本。 "
-    text7_3: "Now you can upload the apk of your program. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
-    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
-    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
-    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
+    text7_3: "现在你可以上传程序的apk。你可以在你的文件夹中找到你所下载的应用程序。建议使用类似ES数据管理器的数据资源管理器。"
+    text7_4: "注意:如果应用程序缺少后缀”.apk“,你需要手动添加”.apk“。只需重命名。现在你应该可以上传了。"
+    text7_5: "在上传后点击”确定“以发布您的游戏。之后其他人就可以看到一个下载你游戏的链接。"
+    text7_6: "你现在已经上传了你的第一个游戏到Jolt网站上并已被设置为可用。祝贺！"
+    text7_7: "其他人现在可以查找到你的游戏而且你的游戏将出现在%link%网页上。"
   aliceGameJamTutorialcards:
     title1: "(欢迎来到) 仙境"
-    subtitle1: "Animate Characters and create a 'when tapped' event"
+    subtitle1: "动画化人物并创建”当被点击时”事件。"
     description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
+      了解如何让你的人物通过一个简单的动画便的生动并掌握如何使你的人物在被点击时执行一些东西。这个视频会向你展示如何简单的通过一些不同的外观来活化您的角色。
+      而且我们会想您展示如何创建“当点击时”事件以及如何在对象之间发送广播信息。
     title2: "快救爱丽丝！"
-    subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    subtitle2: "使用角度感应器并检测物体之间的碰撞。"
+    description2: "在这你将了解如何使用你手机里的角度感应器来控制人物。你可以通过向左和向右倾斜手机来控制Alice的移动。观看我们的教程，使物体从空中随机坠落并从与其他物体的碰撞获得经验。"
     title3: "帽子击中和奔跑"
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
+    subtitle3: "创建一个移动中的风景并控制Hatter的移动。"
+    description3: "在本教程中你将学习如何创建一个看似正在移动的风景。我们会通过沿着屏幕移动的物体来实现一个移动的假象。并且我们还会向你展示如何让Hatter随着你手机的倾斜移动。"
     title4: "帽子击中和奔跑"
     subtitle4: "让帽子射下邪恶的牌"
-    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
+    description4: "在本教程中我们将向你展示如何创建随机向你移动的敌人。而且，你会学习如何制作一个可以射击teadrops怪的帽匠然后用碰撞检测来检查敌人是否被击中。"
     title5: "捶柴郡猫"
-    subtitle5: "Create a score by using variables"
+    subtitle5: "使用变量创建分数"
     description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
     title6: "兔子赛跑"
     subtitle6: "Create a moving background"
@@ -486,6 +487,7 @@ menu:
   login: 登录
   logout: 登出
   admin: 管理人员
+  home: Home
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -718,3 +720,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: 口袋编程
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

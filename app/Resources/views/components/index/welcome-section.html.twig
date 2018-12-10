@@ -2,8 +2,17 @@
   <h3>{{ "programs.welcome.title"|trans({}, "catroweb") }}</h3>
   <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
 
-  <div class="row">
+  {% if theme() == 'luna' %}
+    {% set displayname = "Luna & Cat" %}
+  {% elseif theme() == 'phirocode' %}
+    {% set displayname = 'Phirocode' %}
+  {% elseif theme() == 'create@school' %}
+    {% set displayname = 'Create@School' %}
+  {% else %}
+    {% set displayname = 'Pocket Code' %}
+  {% endif %}
 
+  <div class="row">
     <div class="col-md-4 col-sm-6 col-xs-6">
       <a href="{{ path('catrobat_web_starter') }}">
         <div class="catro-card help-card green">
@@ -13,7 +22,7 @@
                 <div class="catro-card-title">
                   {{ "help-cards.headings.starters"|trans({}, "catroweb") }}
                 </div>
-                {{ "help-cards.text.starters"|trans({}, "catroweb") }} <b>Pocket Code</b>!
+                {{ "help-cards.text.starters"|trans({}, "catroweb") }} <b>{{ displayname }}</b>!
               </div>
               <img src="{{ asset('images/help/starters_cut.png') }}"/>
             </div>
@@ -31,7 +40,7 @@
                 <div class="catro-card-title">
                   {{ "help-cards.headings.tutorials"|trans({}, "catroweb") }}
                 </div>
-                {{ "help-cards.text.tutorials"|trans({}, "catroweb") }} <b>Pocket Code</b>!
+                {{ "help-cards.text.tutorials"|trans({}, "catroweb") }} <b>{{ displayname }}</b>!
               </div>
               <img src="{{ asset('images/help/tutorials_cut.png') }}"/>
             </div>
@@ -49,7 +58,7 @@
                 <div class="catro-card-title">
                   {{ "help-cards.headings.stepbystep"|trans({}, "catroweb") }}
                 </div>
-                {{ "help-cards.text.stepbystep"|trans({}, "catroweb") }} <b>Pocket Code</b>!
+                {{ "help-cards.text.stepbystep"|trans({}, "catroweb") }} <b>{{ displayname }}</b>!
               </div>
               <img src="{{ asset('images/help/step_by_step_cut.png') }}"/>
             </div>
@@ -70,7 +79,13 @@
       {% endif %}
     </div>
     <div class="col-md-8 col-sm-12 col-xs-12">
-      <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
+      {% if theme() == "pocketcode" %}
+        <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
+      {% elseif theme() == "create@school" %}
+        <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.createatschool">
+      {% elseif theme() == "phirocode" %}
+        <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.phiro">
+      {% endif %}
         <div class="catro-card help-card google-play">
           <div class="catro-content">
             <div class="row">
@@ -79,7 +94,7 @@
                   {{ "help-cards.headings.getinvolved"|trans({}, "catroweb") }}
                 </div>
                 {{ "help-cards.text.getinvolved_1"|trans({}, "catroweb") }}
-                <b>Pocket Code</b>
+                <b>{{ displayname }}</b>
                 {{ "help-cards.text.getinvolved_2"|trans({}, "catroweb") }}!
               </div>
               <img src="{{ asset('images/help/google_playstore.png') }}" width="120px"/>

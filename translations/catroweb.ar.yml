@@ -5,6 +5,7 @@ password: كلمة المرور
 accountSettings: Account Settings
 email: البريد الإلكتروني
 aboutPocketCode: حول تطبيق بوكت بينت
+aboutCatrobat: حول كاتروبات
 tutorials: دروس للتعلم
 googlePlay: متجرجوجل
 passwordsNoMatch: لا تتطابق كلمات المرور.
@@ -136,14 +137,14 @@ passwordRecovery:
   subject: استعادة كلمة سر كاتروبات الخاصة بك
   message: |
     عزيز(ت) ي %username%.
-    
+
     لقد تقدمت بطلب لتغيير كلمة السر الخاصة بك على %appplication_url% لأنك ربما تكون قد نسيتها. إذا لم تقم بذلك, يرجى تجاهل هذه الرسالة, سوف تنتهي صلاحيتها وتصبح عديمة الفائدة خلال مدة 24 ساعة.
     لإعادة تعيين كلمة السر الخاصة بك, يرجى زيارة الرابط التالي: %confirmationUrl%
-    
+
     يمكنك دوماً استخدام اسم المستخدم وكلمة السر الخاصين بك للولوج إلى مجتمعنا %appplication_url%.
     للقيام بذلك, يرجى زيارة الرابط التالي: %loginPage%
     لتعديل بيانات ملفك الشخصي, قم بالذهاب الى الرابط التالي: %profilePage%
-    
+
     أطيب التحيات,
     فريق كاتروبات.
 profile:
@@ -483,6 +484,7 @@ menu:
   login: تسجيل الدخول
   logout: خروج
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: لا يوجد حاليا أية برامج.
 login:
@@ -715,3 +717,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: تحميل
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: بوكت كوود
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

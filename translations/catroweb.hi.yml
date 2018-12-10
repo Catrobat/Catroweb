@@ -5,6 +5,7 @@ password: 'पारण शब्द:'
 accountSettings: Account Settings
 email: ई-मेल
 aboutPocketCode: पॉकेट कोड के बारे में 
+aboutCatrobat: कैटरोबैट के बारे में
 tutorials: अनुशिक्षण कक्षा
 googlePlay: गूगल प्ले
 passwordsNoMatch: पासवर्ड मेल नहीं खाते।
@@ -50,7 +51,7 @@ programs:
     title: Catrobat के पॉकेट कोड में आपका स्वागत है
     subtitle: कहानियां, खेल और अधिक बनाएं ...
     download: ऐप डाउनलोड करें
-    statistics: More Statistics
+    statistics: अधिक सांख्यिकी
   featured: विशेषताएं
   newest: सबसे नये प्रोग्राम
   recommended: अनुशंसित प्रोग्राम
@@ -284,7 +285,7 @@ help:
       title: "बोलिए"
       description: "अब आपको पता चलेगा की ऑब्जेक्ट से कैसे बात करवाई जाती है|"
       detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
+        text1: '"बोलो" ईंट का चयन करें। ऑब्जेक्ट पाठ बोलेगा ये ईंट निष्पादित होगी'
         text2: 'ईंट को "नज़ारा देखें" ईंट के नीचे लगायें'
         text3: 'स्टेज पर व्यवहार को देखने के लिए "प्ले" टैप करें।'
     step6:
@@ -343,7 +344,7 @@ help:
       title: "आकार बदलें"
       description: "आकार बदलने के लिए बतख को छुये|"
       one: "उस वस्तु को जोड़ें जिसमें आप आकार बदलना चाहते हैं, उदाहरण जानवर।"
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
+      two: "वस्तु की लिपियों में निंनलिखित ईंटों डालें क्रम में इसे कम करने के लिए (यह के 20% से मूल आकार है) जब टेप ।"
     card2:
       title: "नज़ारा बदले"
       description: "स्वचालित रूप से गणना करने के लिए इस चाल का उपयोग करें|"
@@ -354,27 +355,27 @@ help:
       title: "चलता हुआ एनीमेशन"
       description: "तोता उड़ाने के लिए इस चाल का प्रयोग करे|"
       one: "वह ऑब्जेक्ट जोड़ें जिसे आप चलाना चाहते हैं।"
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
+      two: "ऑब्जेक्ट के रूप में एक और चित्र शामिल करें जो आंदोलन को दिखाता है ।"
+      three: "एक निश्चित समय के बाद ऑब्जेक्ट की स्थिति को लगातार बदलने के लिए ऑब्जेक्ट की स्क्रिप्ट में निंन ईंटें संमिलित करें । इसके अलावा आप बढ़त पर अगर उछल द्वारा मंच मार्जिन कर सकते हैं ।"
     card4:
       title: "सरकाए"
       description: "सुचारू रूप से एक बिंदु से दूसरे तक जाए|"
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
+      one: "वह ऑब्जेक्ट जोड़ें जिसे आप ग्लाइडिंग करना चाहते हैं. विमान उदा ।"
+      two: "निंनलिखित ईंटें डालें और उस क्षेत्र को परिभाषित करें जिसमें आंदोलन होना चाहिए ।"
     card5:
       title: "ध्वनि चलाएँ"
       description: "ऑब्जेक्ट पर टैप करने पर ध्वनि चलाएं ।"
       one: "वह ऑब्जेक्ट जोड़ें जिसे आप ध्वनि बजाना चाहते हैं, उदा। कुत्ता।"
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
+      two: "प्लेबैक संभव बनाने के क्रम में निम्नलिखित ईंटों डालें. अपने व्यक्तिगत पुस्तकालय, पॉकेट कोड मीडिया पुस्तकालय या रिकॉर्ड एक अपने आप से एक ध्वनि चुनें ।"
     card6:
       title: "बोलिए"
       description: "इस वस्तु को बुलाने क लिए, इस कोड का प्रयोग करे|"
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
+      one: "वह ऑब्जेक्ट जोड़ें जिसे आप ग्लाइडिंग करना चाहते हैं. विमान उदा ।"
+      two: "आवाज उत्पादन संभव बनाने के क्रम में निम्नलिखित ईंटों डालें."
     card7:
       title: "जी सेंसर"
       description: "आपके डिवाइस के झुकाव के अनुसार इस वस्तु को नियंत्रित करने के लिए इस चाल का उपयोग करें।"
-      one: "Add the object you want to be moving on stage."
+      one: "वह ऑब्जेक्ट जोड़ें जिसे आप चलाना चाहते हैं।"
       two: "अपने फोन के सेंसर के माध्यम से ऑब्जेक्ट को नियंत्रित करने के लिए निम्न ईंटें डालें। इसलिए \"एक्स और वाई झुकाव\" चुनें। उपयुक्त आंदोलन प्राप्त करने के लिए, \"झुकाव\" सेट करें। यदि वस्तु का आंदोलन बहुत समझदार है, उदाहरण के लिए झुकाव 10 से विभाजित करें।"
     card8:
       title: "दिशा-सूचक(कम्पास)"
@@ -390,18 +391,18 @@ help:
     card10:
       title: "वेरियेबल दिखये"
       description: "वेरियेबल का मूल्य दिखये"
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
+      one: "आप अपने फोन के सेंसर के माध्यम से ले जाया जा करना चाहते हैं एक वस्तु जोड़ें (देखें < div class = \"notranslate\" > 0 </div> ट्यूटोरियल कार्ड 7 < div class = \"notranslate\" > 1 </div>). इसके अतिरिक्त एक दूसरी पृष्ठभूमि जिसमें इसे परिवर्तित करना चाहिए जब यह एक प्रसारण संदेश प्राप्त जोड़ें ।"
       two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
       three: "Through „Show variable“ you can display the values on stage."
     card11:
       title: "टक्कर की पहचान हुई है"
       description: "Detect a collision between two objects."
       one: "दो वस्तुओं को जोड़ें जिनमें से किसी को आपके फोन के सेंसर के माध्यम से आगे बढ़ना चाहिए, उदा। एलेक्स (% tutorial_card_link_7% ट्यूटोरियल कार्ड 7% link_end% देखें)।"
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
+      two: "चलायमान ऑब्जेक्ट के वर्तमान \"x और y स्थान\" को सहेजें एलेक्स (देखें < div class = \"notranslate\" > 0 </div> ट्यूटोरियल कार्ड 10 < div class = \"notranslate\" > 1 </div>) और निम्न स्क्रिप्ट डालें. दो ऑब्जेक्ट्स पर अधिव्याप्त होने पर लगातार जांच करें । यदि वे ऐसा करते हैं तो तय वस्तु को इस मामले में छिपाना चाहिए."
     card12:
       title: "Face detection"
       description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
+      one: "पहले सुनिश्चित करें कि चेहरा पहचान ईंटें सक्षम हैं । इसलिए सेटिंग्स पर जाएं ।"
       two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
   starterPrograms:
     title: "प्रारंभक प्रोग्राम्स"
@@ -443,12 +444,12 @@ help:
       इसके अलावा हम आपको दिखाते हैं कि "कब टैप किया गया" ईवेंट और ऑब्जेक्ट्स के बीच प्रसारण संदेश कैसे भेजें।
     title2: "ऐलिस को बचाओ!"
     subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
+    description2: "यहाँ आप अपने फोन के झुकाव सेंसर का उपयोग कर एक चरित्र को नियंत्रित करने के लिए सीखना होगा. आप छोड़ दिया है या सही करने के लिए अपने फोन झुका द्वारा ऐलिस आंदोलन को नियंत्रित कर सकते हैं । हमारे ट्यूटोरियल देखो और वस्तुओं आकाश से बेतरतीब ढंग से गिर जाते हैं और अन्य वस्तुओं के साथ टकराव का पता लगाने में अनुभव मिलता है ।"
     title3: "The Hatter - Hit and Run"
     subtitle3: "Create a moving landscape and control the Hatters' movement"
     description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
     title4: "The Hatter - Hit and Run"
-    subtitle4: "Let the Hatter shoot the evil cards"
+    subtitle4: "हाट् बुराई कार्ड गोली मार दो"
     description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
     title5: "बिल्ली को मरो"
     subtitle5: "Create a score by using variables"
@@ -475,6 +476,7 @@ menu:
   login: प्रवेश करे
   logout: बाहर जाए
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: वर्तमान में कोई प्रोग्राम नहीं हैं।
 login:
@@ -661,17 +663,17 @@ footer:
   communityStats: Community Stats
 privacy-policy:
   header: गोपनीयता नीति
-  version: Version 2.1, 25 June 2018
+  version: संस्करण २. १, 25 जून २०१८
   text1: आपको हमारी सेवाओं और संबंधित खाते के सभी लाभ प्रदान करने के लिए, आपके द्वारा कुछ डेटा एकत्र करना आवश्यक है।
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-provider (Google LLC, USA). Data processing is based on an agreement with Google LLC. This relationship to the service provider conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: हमारी सेवाओं (apps और वेबसाइटों) को बनाए रखने और बेहतर बनाने के लिए और आईसीटी और स्टेम/स्टीम शिक्षा पर वैज्ञानिक अनुसंधान करने के लिए, हम गूगल विश्लेषिकी, Crashlytics, और Firebase, गूगल LLC (यूएसए) द्वारा सभी का उपयोग, हमारी सेवाओं के उपयोग के बारे में मेटाडाटा प्राप्त करने के लिए, जैसे, दुर्घटना जानकारी, टाइमस्टैंप, देखे गए पृष्ठ/स्क्रीन, हमारे एप्लिकेशन और सेवाओं के उपयोग, ऑपरेटिंग सिस्टम का उपयोग, और नेटवर्क प्रदाता के बारे में जानकारी । यह विश्लेषण और एकत्रित डेटा आपकी प्रोफ़ाइल से लिंक नहीं है और इसमें कोई भी व्यक्तिगत जानकारी नहीं होती (IP पते के अंतिम बिट्स को अनाम किया जाता है) । हालांकि, एकत्र डेटा सेवा प्रदाता (गूगल LLC, संयुक्त राज्य अमेरिका) को हस्तांतरित हो जाएगा । डेटा प्रोसेसिंग गूगल LLC के साथ एक समझौते पर आधारित है । सेवा प्रदाता के लिए यह संबंध यूरोपीय संघ के सामांय डेटा संरक्षण विनियमन (eu GDPR) और eu-संयुक्त राज्य अमरीका "गोपनीयता शील्ड" समझौते के अनुरूप है ।
   text3: हमारे सिस्टम में एक खाता बनाने और उपयोग करने के लिए, और आपको प्रति ई-मेल के बारे में आवश्यक परिवर्तनों के बारे में सूचित करने के लिए, उदाहरण के लिए, हमारी उपयोग की शर्तों और सेवा, हमारे समुदाय के नियमों या हमारी नीतियों के अपडेट या उल्लंघन, हम आपके स्टोर करेंगे उपयोगकर्ता नाम और, यदि आपके द्वारा प्रदान किया गया है, तो आपका ई-मेल पता। यदि आपने गूगल प्लस या फेसबुक के माध्यम से अपना खाता कनेक्ट किया है, तो हम इन सेवाओं पर आपके खाते से जुड़े एक पहचान कुंजी को अतिरिक्त रूप से स्टोर करते हैं। हम इस डेटा का उपयोग किसी अन्य (उदाहरण के लिए, मार्केटिंग) उद्देश्यों के लिए नहीं करेंगे, जब तक कि आपने हमें ऐसा करने की अनुमति नहीं दी।
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  text4: एक स्वैच्छिक आधार पर, आप हमें साझा साइट पर अपने खाता पृष्ठ के माध्यम से अपने निवास का देश दे सकते हैं । यह आपके सार्वजनिक प्रोफ़ाइल पर प्रदर्शित हो जाएगा और केवल हमारे द्वारा सांख्यिकीय और अनुसंधान प्रयोजनों के लिए इस्तेमाल किया जाएगा । यह आपकी प्रोफ़ाइल सेटिंग में किसी भी समय निकाला जा सकता है ।
+  text5: आप https://share.catrob.at/पर अपने प्रोफ़ाइल पृष्ठ के माध्यम से अपने खाते को हटा कर किसी भी समय अपने खाते से संबंधित व्यक्तिगत डेटा का उपयोग वापस ले सकते हैं । अपने खाते को हटाने के बाद आप अभी भी प्रदान की गई सेवाओं का उपयोग करने के लिए सक्षम हो जाएगा, लेकिन सहयोग करने के लिए नहीं, जैसे, अपलोड कार्यक्रमों के माध्यम से, टिप्पणी, या पसंद. साथ ही, आपके खाते से लिंक की गई सभी सामग्री, जैसे, अपलोड किए गए प्रोग्राम, टिप्पणियाँ आदि, को हटा दिया जाएगा.
+  text6: हमारी सेवाओं के दुरुपयोग से बचने के लिए, उदाहरण के लिए, उपयोगकर्ता के माध्यम से अपलोड या अवैध प्रयोजनों के लिए टिप्पणी योगदान, सभी उपयोगकर्ता सार्वजनिक डेटा उत्पंन (अपलोड, टिप्पणियां) एक डेटाबेस में आंतरिक रूप से संग्रहीत किया जाएगा, एक साथ एक टाइमस्टैंप और इस्तेमाल इंटरनेट पते के साथ । इस डेटा का उपयोग किसी भी संस्थान द्वारा या अग्रेषित नहीं किया जाएगा, जब तक कि पर्याप्त गैरकानूनी कार्रवाइयां यथोचित रूप से संदिग्ध न हों और आधिकारिक रूप से कानूनी संस्थाएं इसे लागू कानून के आधार पर अनुरोध करती हैं । प्रत्येक मामले को अच्छी तरह से हमारे द्वारा पहली बार एक व्यक्तिगत आधार पर जांच की जाएगी ।
+  text7: आप स्वेच्छा से Catrobat ंयूज़लेटर के लिए सदस्यता ले सकते हैं, https://catrob.at/newsletter पर MailChimp सेवा के माध्यम से हमारे द्वारा प्रदान की (रॉकेट विज्ञान समूह LLC डी/ इसके बाद आपको Catrobat प्रोजेक्ट और उसकी सेवाओं पर आपके द्वारा प्रदत्त ई-मेल पता पर अद्यतन प्राप्त होंगे । आप हर ंयूजलेटर के पाद लेख में "सदस्यता समाप्त" लिंक का उपयोग करके किसी भी समय ंयूजलेटर वापस ले सकते हैं । इस ंयूजलेटर MailChimp द्वारा प्रदान की है जिनके साथ हम एक डेटा प्रसंस्करण समझौते है और जो यूरोपीय संघ के जनरल डाटा Prodection विनियमन और यूरोपीय संघ के लिए प्रतिबद्ध संयुक्त राज्य अमेरिका "गोपनीयता शील्ड" । MailChimp पर अधिक जानकारी के लिए कृपया यह भी MailChimp की गोपनीयता नीति और उपयोग की शर्तों को देखो ।
+  text8: सभी सेवाएं अंतर्राष्ट्रीय Catrobat संघ की छतरी के नीचे मुक्त खुला स्रोत Catrobat परियोजना द्वारा प्रदान की जाती है – Verein zur Förderung freier सॉफ्टवेयर, एक गैर लाभ चरने, ऑस्ट्रिया (यूरोपीय संघ) में शामिल एनजीओ । हमारी नीतियां यूरोपीय संघ और ऑस्ट्रिया के डेटा संरक्षण कानून (GDPR) को संमान देते हैं । हमारे साथ संपर्क में पाने के लिए, कृपया एक ई मेल भेजने के लिए contact@catrobat.org या हमें catrobat, सी/ओ सॉफ्टवेयर प्रौद्योगिकी के संस्थान, चराई प्रौद्योगिकी विश्वविद्यालय, Inffeldgasse 16b, ए-८०१० चराई, ऑस्ट्रिया (यूरोपीय संघ) ।
+  text9: यदि आपकी आयु 14 वर्ष से कम है, तो यह पॉलिसी कानूनी अभिभावक (आमतौर पर माता-पिता) द्वारा स्वीकार की जानी चाहिए।
+  disagree-text: अनुमोदन के बिना, हम एक खाता नहीं बना सकते हैं लेकिन मूल विशेषताएं अभी भी उपलब्ध हैं।
 catro-notifications:
   markAsRead: "Mark as read"
   summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
@@ -699,11 +701,27 @@ help-cards:
   headings:
     starters: स्टार्टर्स
     tutorials: अनुशिक्षण कक्षा
-    stepbystep: Step by Step
-    getinvolved: Get involved
+    stepbystep: क्रमशः
+    getinvolved: शामिल होँ
   text:
-    starters: Try out and remix with
-    tutorials: Effective tricks in
-    stepbystep: Do 10 easy steps in
+    starters: बाहर की कोशिश करो और रीमिक्स के साथ
+    tutorials: में कारगर चाल
+    stepbystep: में 10 आसान चरणों
     getinvolved_1: डाउन्लोड
-    getinvolved_2: now from Google Play and get started!
+    getinvolved_2: अब गूगल प्ले से और शुरू हो जाओ!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: पॉकेट कोड
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

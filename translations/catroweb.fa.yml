@@ -5,6 +5,7 @@ password: رمز عبور
 accountSettings: Account Settings
 email: ایمیل
 aboutPocketCode: درباره پاکت کد
+aboutCatrobat: درباره "کت ربات"
 tutorials: آموزش
 googlePlay: گوگل پلی
 passwordsNoMatch: رمز عبور مطابقت نمی کند.
@@ -136,15 +137,15 @@ passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |
     %username% عزیز.
-    
+
     تو می خواستی رمز عبورت را از %appplication_url% احیا کنی چون فراموشش کرده بودی. اگر این خواسته ی تو نبوده. پس بی خیالش شو. خودش تا 24 ساعت آینده از اعتبار ساقط میشه.
     برای احیای رمز عبورت و ساختن یکی دیگه، لطفا به این آدرس مراجعه کن:
     %confirmationUrl%
-    
+
     تو میتونی از نام کاربری و رمز عبورت در هر زمانی برای دسترسی به انجمن %appplication_url% استفاده کنی.
     برای این کار فقط به این آدرس مراجعه کن: %loginPage%
     برای اصلاح جزییات مشخصاتت، به این آدرس سر بزن: %profilePage%
-    
+
     با احترام،
     تیم کت ربات.
 profile:
@@ -484,6 +485,7 @@ menu:
   login: ورود به سیستم
   logout: خروج
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: در حال حاضر هیچ برنامه ای نیست.
 login:
@@ -716,3 +718,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: دانلود
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: پاکت کد
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

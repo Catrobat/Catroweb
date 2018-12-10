@@ -4,57 +4,140 @@
   <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
 {% endblock %}
 
+{% if theme() == 'luna' %}
+  {% set displayname = "Luna & Cat" %}
+{% elseif theme() == 'phirocode' %}
+  {% set displayname = 'Phirocode' %}
+{% elseif theme() == 'create@school' %}
+  {% set displayname = 'Create@School' %}
+{% else %}
+  {% set displayname = 'Pocket Code' %}
+{% endif %}
 
 {% block body %}
   <div id="help-container">
+    <div class="row">
     {% if theme() == 'luna' %}
-      <div class="video-wrapper">
+      <div class="video-wrapper col-12">
         <iframe id="youtube-help-video" src="https://www.youtube.com/embed/-6AEZrSbOMg"
                 frameborder="0" allowfullscreen></iframe>
       </div>
     {% else %}
-      <div class="video-wrapper">
+      <div class="video-wrapper col-12">
         <iframe id="youtube-help-video" src="https://www.youtube.com/embed/BHe2r2WU-T8"
                 frameborder="0" allowfullscreen></iframe>
       </div>
     {% endif %}
-    <div class="help-desktop">
-      <img id="alice-tut-desktop" src="{{ asset('images/help/alice_tut.png') }}" alt="Discuss"
-           onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'"/>
     </div>
-    <div class="help-mobile">
-      <img id="alice-tut-mobile" src="{{ asset('images/help/alice_tut_mobile.png') }}" alt="Discuss"
-           onclick="self.location.href='{{ url('catrobat_web_gamejamtutorialcards') }}'"/>
-    </div>
-    <div class="help-desktop help-special-margin">
-      <img id="step-by-step-desktop" src="{{ asset('images/help/step_by_step.png') }}"
-           alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'"/>
-    </div>
-    <div class="help-mobile">
-      <img id="step-by-step-mobile" src="{{ asset('images/help/step_by_step_mobile.png') }}"
-           alt="StepByStep" onclick="self.location.href='{{ url('catrobat_web_stepByStep') }}'"/>
-    </div>
-    <div class="help-split">
-      <img id="tutorials" src="{{ asset('images/help/tutorials.png') }}" alt="Tutorials"
-           onclick="self.location.href='{{ url('catrobat_web_tutorialcards') }}'"/>
-      <img id="starters" src="{{ asset('images/help/starters.png') }}" alt="Starter Programs"
-           onclick="self.location.href='{{ url('catrobat_web_starter') }}'"/>
-    </div>
-    <div class="help-desktop">
-      <img id="edu-desktop" src="{{ asset('images/help/edu_site.png') }}" alt="Education"
-           onclick="window.open('https://edu.catrob.at/', '_blank')"/>
-    </div>
-    <div class="help-mobile">
-      <img id="edu-mobile" src="{{ asset('images/help/edu_site_mobile.png') }}" alt="Education"
-           onclick="window.open('https://edu.catrob.at/', '_blank')"/>
-    </div>
-    <div class="help-desktop">
-      <img id="discuss-desktop" src="{{ asset('images/help/discuss.png') }}" alt="Discuss"
-           onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')"/>
-    </div>
-    <div class="help-mobile">
-      <img id="discuss-mobile" src="{{ asset('images/help/discuss_mobile.png') }}" alt="Discuss"
-           onclick="window.open('https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode', '_blank')"/>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <a id="step-by-step" href="{{ path('catrobat_web_stepByStep') }}">
+          <div class="catro-card help-card yellow">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-9">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.stepbystep"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.stepbystep"|trans({}, "catroweb") }} <br><b>{{ displayname }}</b>!
+                </div>
+                  <img src="{{ asset('images/help/step_by_step_cut.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-12">
+        <a id="starters" href="{{ path('catrobat_web_starter') }}">
+          <div class="catro-card help-card green">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-9">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.starters"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.starters"|trans({}, "catroweb") }} <br><b>{{ displayname }}</b>!
+                </div>
+                <img src="{{ asset('images/help/starters_cut.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-12">
+        <a id="educat" href="https://edu.catrob.at/">
+          <div class="catro-card help-card dark-green">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-9">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.education"|trans({}, "catroweb") }}
+                  </div>
+                  {%  set text = "help-cards.text.education"|trans({}, "catroweb")|split('&') %}
+                  {% if text|length > 1 %}
+                    {{ text[0] }} & <br>  {{ text[1] }} !
+                  {%  else %}
+                    {{ text }}!
+                  {% endif %}
+                </div>
+                <img src="{{ asset('images/help/edu_site_cut.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-12">
+        <a id="game-design" href="{{ path('catrobat_web_gamejamtutorialcards') }}">
+          <div class="catro-card help-card purple">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-9">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.game_design"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.game_design_1"|trans({}, "catroweb") }}<br>
+                  {{ "help-cards.text.game_design_2"|trans({}, "catroweb") }}!
+                </div>
+                <img src="{{ asset('images/help/alice_tut_cut.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-12">
+        <a id="tutorials" href="{{ path('catrobat_web_tutorialcards') }}">
+          <div class="catro-card help-card blue">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-9">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.tutorials"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.tutorials"|trans({}, "catroweb") }} <br><b>{{ displayname }}</b>!
+                </div>
+                <img src="{{ asset('images/help/tutorials_cut.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-12">
+        <a id="discuss" href="https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode">
+          <div class="catro-card help-card brown">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-9">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.discuss"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.discuss_1"|trans({}, "catroweb") }}!
+                </div>
+                <img src="{{ asset('images/help/discuss_cut.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 {% endblock %}

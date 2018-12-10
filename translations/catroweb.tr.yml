@@ -5,6 +5,7 @@ password: Şifre
 accountSettings: Account Settings
 email: E-Posta
 aboutPocketCode: Cep kodu hakkında
+aboutCatrobat: Catrobat hakkında
 tutorials: Rehberler
 googlePlay: Google Play
 passwordsNoMatch: Şifreler eşleşmedi.
@@ -136,14 +137,14 @@ passwordRecovery:
   subject: Catrobat şifre kurtarma
   message: |
     Sevgili %kullanıcı adı%.
-    
+
     Şifrenizi %başvuru URL'si% tarihinde sıfırlamanızı istediniz, çünkü şifrenizi unuttunuz. Bunu istemediyseniz lütfen yok sayın. 24 saat içinde sona erecek ve yararsız olacak.
     Şifrenizi sıfırlamak ve yenisini oluşturmak için lütfen aşağıdaki sayfayı ziyaret edin:% confirmationUrl%
-    
+
     %başvuru URL'si% topluluğuna erişmek için kullanıcı adınızı ve şifrenizi istediğiniz zaman kullanabilirsiniz.
     Bunu yapmak için, aşağıdaki sayfayı ziyaret etmeniz yeterlidir: %giriş sayfası%
     Profil bilgilerinizi düzenlemek için şu sayfaya gidin: %profil sayfası%
-    
+
     Saygılarımla,
     Catrobat Ekibiniz.
 profile:
@@ -481,6 +482,7 @@ menu:
   login: Oturum aç
   logout: Çıkış Yap
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: şu anda mevcut program yok.
 login:
@@ -713,3 +715,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: indir
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Cep Kodu
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

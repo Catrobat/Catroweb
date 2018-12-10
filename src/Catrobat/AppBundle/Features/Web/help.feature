@@ -10,47 +10,26 @@ Feature: Pocketcode help page
   Scenario: Viewing the help overview at help page
     Then I wait for a second
     Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
-    And I should see a big help image "Game Design"
-    And I should see a big help image "Step By Step"
-    And I should see a help image "Tutorials"
-    And I should see a help image "Starters"
-    And I should see a big help image "Education Platform"
-    And I should see a big help image "Discussion"
-
-  @Mobile
-  Scenario: Viewing the help overview at help page
-    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
-    And I should see a small help image "Game Design"
-    And I should see a small help image "Step By Step"
-    And I should see a help image "Tutorials"
-    And I should see a help image "Starters"
-    And I should see a small help image "Education Platform"
-    And I should see a small help image "Discussion"
+    And I should see "Step by step"
+    And I should see "Starters"
+    And I should see "Education platform"
+    And I should see "Game Design"
+    And I should see "Tutorials"
+    And I should see "Discuss"
 
   Scenario: Viewing the help overview at help page for luna flavor
     Given I am on "/luna/help"
     Then I wait for a second
     Then I should see the video available at "https://www.youtube.com/embed/-6AEZrSbOMg"
-    And I should see a big help image "Game Design"
-    And I should see a big help image "Step By Step"
-    And I should see a help image "Tutorials"
-    And I should see a help image "Starters"
-    And I should see a big help image "Education Platform"
-    And I should see a big help image "Discussion"
-
-  @Mobile
-  Scenario: Viewing the help overview at help page for luna flavor
-    Given I am on "/luna/help"
-    Then I should see the video available at "https://www.youtube.com/embed/-6AEZrSbOMg"
-    And I should see a small help image "Game Design"
-    And I should see a small help image "Step By Step"
-    And I should see a help image "Tutorials"
-    And I should see a help image "Starters"
-    And I should see a small help image "Education Platform"
-    And I should see a small help image "Discussion"
+    And I should see "Step by step"
+    And I should see "Starters"
+    And I should see "Education platform"
+    And I should see "Game Design"
+    And I should see "Tutorials"
+    And I should see "Discuss"
 
   Scenario Outline: Clicking on the alice game jam image at help page
-    When I click "#alice-tut-desktop"
+    When I click "#game-design"
     Then I should see "6" "desktop" tutorial banners
     When I click on the "<reference>" banner
     Then I should see "<title>"
@@ -64,26 +43,6 @@ Feature: Pocketcode help page
       | fifth     | WHACK A CHESHIRE CAT     |
       | sixth     | A RABBITS RACE           |
 
-
-  @Mobile
-  Scenario: Clicking on the alice game jam mobile image at help page
-    When I click "#alice-tut-mobile"
-    Then I should see "6" "mobile" tutorial banners
-
-  Scenario: Clicking on step-by-step-desktop image at help page and test navigation
-    When I click "#step-by-step-desktop"
-    Then  I should see "STEP-BY-STEP INTRO"
-    And I should see an ".video-container" element
-
-  @Mobile
-  Scenario: Clicking on step-by-step-mobile image at help page and test navigation
-    When I click "#step-by-step-mobile"
-    Then  I should see "STEP-BY-STEP INTRO"
-
-  Scenario: Clicking on tutorials image at help page and test navigation
-    When I click "#tutorials"
-    Then  I should see "TUTORIALS"
-    Then  I should see "These tutorials show you how to use effective tricks in Pocket Code."
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
     Given I am on "/pocketcode/tutorialcards"
@@ -125,15 +84,6 @@ Feature: Pocketcode help page
     And I should see an ".anchor" element
     When I click ".anchor"
     Then I am on "/pocketcode/starterPrograms"
-
-  Scenario: Clicking on discuss-desktop image at help page and test navigation
-    When I click "#discuss-desktop"
-    Then I should see an "#discuss-desktop" element
-
-  @Mobile
-  Scenario: Clicking on discuss-mobile image at help page and test navigation
-    When I click "#discuss-mobile"
-    Then I should see an "#discuss-mobile" element
 
   Scenario: Game Jam page should be there
     When I go to "/pocketcode/pocket-game-jam"

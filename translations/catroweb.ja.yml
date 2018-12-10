@@ -5,6 +5,7 @@ password: パスワード
 accountSettings: Account Settings
 email: メール
 aboutPocketCode: ポケットコードについて
+aboutCatrobat: キャトロバットについて
 tutorials: チュートリアル
 googlePlay: Google Play
 passwordsNoMatch: パスワードが一致しませんでした。
@@ -136,14 +137,14 @@ passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
     %username% 様。
-    
+
     あなたは、パスワードを忘れたため %appplication_url% にパスワードのリセットを要求しました。これを要求していない場合は、無視してください。これは 24 時間で有効期限が切れて、無効になります。
     あなたのパスワードをリセットして、新しいく作成する場合は、次のページを参照してください: %confirmationUrl%
-    
+
     %appplication_url% コミュニティにアクセスして、いつでもあなたのユーザー名とパスワードを使用することができます。
     これを行うには、次のページにアクセスしてください: %loginPage%
     プロフィールの詳細を編集するには、このページを参照してください: %profilePage%
-    
+
     よろしくお願いします。
     Catrobat チーム。
 profile:
@@ -484,6 +485,7 @@ menu:
   login: ログイン
   logout: ログアウト
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: 現在、プログラムはありません。
 login:
@@ -716,3 +718,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: ダウンロード
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: ポケット\nコード
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
