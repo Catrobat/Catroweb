@@ -108,6 +108,8 @@ class ProgramController extends Controller
         $program_url = $this->generateUrl('program', array('id' => $program->getId()), true);
         $share_text = trim($program->getName() . ' on ' . $program_url . ' ' . $program->getDescription());
 
+        $approved = $program->getApproved();
+
         $jam = $this->extractGameJamConfig();
         return $this->get('templating')->renderResponse('::program.html.twig', array(
             'program_details_url_template' => $router->generate('program', array('id' => 0)),
@@ -120,6 +122,7 @@ class ProgramController extends Controller
             'jam' => $jam,
             'nolb_status' => $nolb_status,
             'user_name' => $user_name,
+            'approved' => $approved,
         ));
     }
 

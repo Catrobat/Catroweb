@@ -281,7 +281,9 @@
         <span class="fa fa-link" aria-hidden="true"></span>
         Link
       </button>
-      <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
+      {% if not approved %}
+        <span id="report">{{ "programs.reportAsInappropriate"|trans({}, 'catroweb') }}</span>
+      {% endif %}
     </div>
 
     <div class="clear"></div>
