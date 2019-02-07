@@ -16,13 +16,13 @@
       {% if loop.first %}
         <div class="item active">
           <a href="{{ slide.url }}">
-            <img src="{{ asset(slide.image) }}" alt="featured program">
+            <img class="center-block img-responsive" src="{{ asset(slide.image) }}" alt="featured program">
           </a>
         </div>
       {% else %}
         <div class="item">
           <a href="{{ slide.url }}">
-            <img src="{{ asset(slide.image) }}" alt="featured program">
+            <img class="center-block img-responsive" src="{{ asset(slide.image) }}" alt="featured program">
           </a>
         </div>
       {% endif %}
