@@ -142,29 +142,6 @@
   nav {
     margin-bottom: 15px;
 
-    .header-arrows {
-      float: left;
-      width: 10%;
-      text-align: center;
-
-      .arrow {
-        cursor: pointer;
-        margin: 0 auto;
-        width: 35px;
-        height: 35px;
-        background-image: url('../../images/symbols/sprite_icons_web.png');
-        background-position: 0 -175px;
-      }
-
-      .left {
-        @include rotation(90deg);
-      }
-
-      .right {
-        @include rotation(-90deg);
-      }
-    }
-
     .header-pagination {
       float: left;
       width: 80%;
@@ -223,15 +200,6 @@
 
     .spacer {
       width: 3%;
-    }
-
-    .arrow {
-      margin: 0 auto;
-      width: 35px;
-      height: 35px;
-      background-image: url('../../images/symbols/sprite_icons_web.png');
-      background-position: 0 -244px;
-      @include rotation(-90deg);
     }
 
     img {

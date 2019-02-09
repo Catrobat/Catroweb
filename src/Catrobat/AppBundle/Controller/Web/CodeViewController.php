@@ -2,13 +2,19 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedSceneProgram;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CodeViewController extends Controller
 {
-  /**  ToDo?? no route?
-   * , methods={"GET"}
+
+  /**
+   * @param $id
+   *
+   * @var $parsed_program ParsedSceneProgram
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function viewCodeAction($id)
   {
@@ -18,6 +24,7 @@ class CodeViewController extends Controller
       $extracted_program = $this->get('extractedfilerepository')->loadProgramExtractedFile($program);
 
       $parsed_program = $this->get('catrobat_code_parser')->parse($extracted_program);
+
       $web_path = $extracted_program->getWebPath();
     } catch (\Exception $e)
     {

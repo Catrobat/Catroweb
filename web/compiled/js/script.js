@@ -638,7 +638,7 @@ var Main = function (search_url) {
       {
         let parsed_visits = JSON.parse(stored_visits)
         let program_id = programs[i].ProjectId.toString()
-        visited = $.inArray(program_id, parsed_visits) >= 0;
+        visited = $.inArray(program_id, parsed_visits) >= 0
       }
   
       const program = $(
