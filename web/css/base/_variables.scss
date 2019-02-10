@@ -126,9 +126,10 @@ $theme-logo-font-weight:            800;
 /* Footer */
 $footer-background-color: #e1e2e1;
 $footer-color: $black;
-$footer-size: 21em;
-$footer-size-small-screens: 25em;
-$footer-padding: 15px;
+$footer-size: 20em;
+$footer-size-sm: 25em;
+$footer-size-xs: 30em;
+$footer-padding: 1em;
 
 
 /* Font */
@@ -164,3 +165,4 @@ $avatar-img-size: 31px;
 
 $responsive-width-content: 1054px;
 $responsive-width-tablet: 767px;
+$responsive-width-xs: 576px;

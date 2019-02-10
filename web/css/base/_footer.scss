@@ -8,15 +8,17 @@ $margin-adjustment: -5px;
   color: $footer-color;
   height: $footer-size;
   padding: $footer-padding 0;
-  margin-top: 2em;
 
   a {
     color: $footer-color;
   }
 
-  @media screen and (max-width: $responsive-width-tablet)
-  {
-    height: $footer-size-small-screens;
+  @media screen and (max-width: $responsive-width-content) {
+    height: $footer-size-sm;
+  }
+
+  @media screen and (max-width: $responsive-width-xs) {
+    height: $footer-size-xs;
   }
 
   & .content {
@@ -24,18 +26,15 @@ $margin-adjustment: -5px;
     padding-bottom: 1em;
   }
 
-  ul
-  {
+  ul {
     margin-bottom: 0;
     padding: 0;
     list-style: none;
 
-    li
-    {
+    li {
       display: inline-block;
 
-      a
-      {
+      a {
         color: inherit;
         font-weight: 500;
         font-size: 12px;
@@ -47,55 +46,47 @@ $margin-adjustment: -5px;
         display: block;
 
         border-radius: 3px;
-        &:hover
-        {
+
+        &:hover {
           text-decoration: none;
         }
       }
 
-      .btn
-      {
+      .btn {
         margin: 0;
       }
     }
 
-    &.list-horizontal
-    {
-      &:first-child a
-      {
+    &.list-horizontal {
+      &:first-child a {
         padding-left: 0;
       }
 
-      &:last-child a
-      {
+      &:last-child a {
         padding-right: 0;
       }
     }
 
-    &.list-vertical
-    {
-      li
-      {
+    &.list-vertical {
+      li {
         margin-left: $margin-adjustment;
         margin-right: $margin-adjustment;
         display: block;
         hyphens: auto;
 
-        a
-        {
+        a {
           padding: 5px;
         }
       }
     }
   }
 
-  .pull-center
-  {
+  .pull-center {
     display: inline-block;
     float: none;
   }
-  h4
-  {
+
+  h4 {
     font-weight: 500;
     color: $footer-color;
     hyphens: auto;
@@ -105,23 +96,25 @@ $margin-adjustment: -5px;
 
 // to keep footer at bottom
 #wrapper {
-  min-height:100vh;
+  min-height: 100vh;
   padding-bottom: $footer-size;
-  margin-bottom: -$footer-size;
+  margin-bottom: -($footer-size);
 
-  @media screen and (max-width: $responsive-width-tablet)
-  {
-    padding-bottom: $footer-size-small-screens;
-    margin-bottom: -$footer-size-small-screens;
+  @media screen and (max-width: $responsive-width-content) {
+    padding-bottom: $footer-size-sm;
+    margin-bottom: -$footer-size-sm;
   }
 
+  @media screen and (max-width: $responsive-width-xs) {
+    padding-bottom: $footer-size-xs;
+    margin-bottom: -$footer-size-xs;
+  }
 }
 
 .footer-left {
   float: left;
 
-  @media screen and (max-width: 576px)
-  {
+  @media screen and (max-width: $responsive-width-xs) {
     float: none;
   }
 }
@@ -129,8 +122,7 @@ $margin-adjustment: -5px;
 .footer-right {
   float: right;
 
-  @media screen and (max-width: 576px)
-  {
+  @media screen and (max-width: $responsive-width-xs) {
     margin-top: 1em;
     float: none;
   }

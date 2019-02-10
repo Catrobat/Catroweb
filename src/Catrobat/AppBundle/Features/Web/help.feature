@@ -9,24 +9,26 @@ Feature: Pocketcode help page
 
   Scenario: Viewing the help overview at help page
     Then I wait for a second
-    Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
     And I should see "Step by step"
     And I should see "Starters"
     And I should see "Education platform"
     And I should see "Game Design"
     And I should see "Tutorials"
     And I should see "Discuss"
+    And I should see "Google Play"
+    And I should see "IOS"
 
   Scenario: Viewing the help overview at help page for luna flavor
     Given I am on "/luna/help"
     Then I wait for a second
-    Then I should see the video available at "https://www.youtube.com/embed/-6AEZrSbOMg"
     And I should see "Step by step"
     And I should see "Starters"
     And I should see "Education platform"
     And I should see "Game Design"
     And I should see "Tutorials"
     And I should see "Discuss"
+    And I should see "Google Play"
+    And I should see "IOS"
 
   Scenario Outline: Clicking on the alice game jam image at help page
     When I click "#game-design"

@@ -9,6 +9,7 @@ aboutPocketCode: About Pocket Code
 aboutCatrobat: About Catrobat
 tutorials: Tutorials
 googlePlay: Google Play
+iosAppStore: IOS App store
 passwordsNoMatch: The passwords didn't match.
 error: Error
 cancel: Cancel
@@ -51,7 +52,7 @@ indexPage:
 
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
+    title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
     download: Download the app
     statistics: More Statistics
@@ -706,6 +707,7 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
+  download: Get the App
 
 privacy-policy:
   header: Privacy Policy
@@ -749,7 +751,8 @@ help-cards:
     starters: Starters
     tutorials: Tutorials
     stepbystep: Step by Step
-    getinvolved: Get involved
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
     game_design: Game Design
     education: Education platform
     discuss: Discuss
@@ -757,8 +760,7 @@ help-cards:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: Download
-    getinvolved_2: now from Google Play and get started!
+    getinvolved: Download the app and get started
     game_design_1: Effective tricks for
     game_design_2: creating a game
     education: Beginner's course & great resources

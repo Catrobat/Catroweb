@@ -1,6 +1,4 @@
-<div id="welcomeSection">
-  <h3>{{ "programs.welcome.title"|trans({}, "catroweb") }}</h3>
-  <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
+<div id="welcome-section">
 
   {% if theme() == 'luna' %}
     {% set displayname = "Luna & Cat" %}
@@ -12,62 +10,16 @@
     {% set displayname = 'Pocket Code' %}
   {% endif %}
 
-  <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-6">
-      <a href="{{ path('catrobat_web_starter') }}">
-        <div class="catro-card help-card green">
-          <div class="catro-content">
-            <div class="row">
-              <div class="col-md-6 col-sm-7 col-xs-7">
-                <div class="catro-card-title">
-                  {{ "help-cards.headings.starters"|trans({}, "catroweb") }}
-                </div>
-                {{ "help-cards.text.starters"|trans({}, "catroweb") }} <b>{{ displayname }}</b>!
-              </div>
-              <img src="{{ asset('images/help/starters_cut.png') }}"/>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
+  <div class="mb-4">
+    <h3>{{ "programs.welcome.title"|trans({'%theme%': displayname}, "catroweb") }}</h3>
+    <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
+  </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-6">
-      <a href="{{ path('catrobat_web_tutorialcards') }}">
-        <div class="catro-card help-card blue">
-          <div class="catro-content">
-            <div class="row">
-              <div class="col-md-6 col-sm-7 col-xs-7">
-                <div class="catro-card-title">
-                  {{ "help-cards.headings.tutorials"|trans({}, "catroweb") }}
-                </div>
-                {{ "help-cards.text.tutorials"|trans({}, "catroweb") }} <b>{{ displayname }}</b>!
-              </div>
-              <img src="{{ asset('images/help/tutorials_cut.png') }}"/>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-6">
-      <a href="{{ path('catrobat_web_stepByStep') }}">
-        <div class="catro-card help-card yellow">
-          <div class="catro-content">
-            <div class="row">
-              <div class="col-md-6 col-sm-7 col-xs-7">
-                <div class="catro-card-title">
-                  {{ "help-cards.headings.stepbystep"|trans({}, "catroweb") }}
-                </div>
-                {{ "help-cards.text.stepbystep"|trans({}, "catroweb") }} <b>{{ displayname }}</b>!
-              </div>
-              <img src="{{ asset('images/help/step_by_step_cut.png') }}"/>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
+  {% if not isWebview() %}
 
-    <div class="col-md-4 col-sm-6 col-xs-6 help-video-container">
+  <div id="welcome-section-container" class="mb-3">
+    <div class="flex-shrink help-video-container">
       {% if theme() == 'luna' %}
         <iframe id="youtube-help-video" src="https://www.youtube.com/embed/-6AEZrSbOMg"
                 frameborder="0" allowfullscreen width="100%">
@@ -78,38 +30,57 @@
         </iframe>
       {% endif %}
     </div>
-    <div class="col-md-8 col-sm-12 col-xs-12">
-      {% if theme() == "pocketcode" %}
-        <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
-      {% elseif theme() == "create@school" %}
-        <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.createatschool">
-      {% elseif theme() == "phirocode" %}
-        <a href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.phiro">
-      {% endif %}
-        <div class="catro-card help-card google-play">
-          <div class="catro-content">
-            <div class="row">
-              <div class="col-md-6 col-sm-7 col-xs-7">
-                <div class="catro-card-title">
-                  {{ "help-cards.headings.getinvolved"|trans({}, "catroweb") }}
+
+    <div class="flex-no-shrink help-download-container">
+
+      <div class="col-12">
+        <a {% if theme() == "pocketcode" %}
+            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
+          {% elseif theme() == "create@school" %}
+            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.createatschool">
+          {% elseif theme() == "phirocode" %}
+            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid.phiro">
+          {% else %}
+            href="https://play.google.com/store/apps/details?id=org.catrobat.catroid">
+          {% endif %}
+          <div class="catro-card help-card primary google-play">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-8 col-sm-8">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.getinvolvedGoogle"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.getinvolved"|trans({}, "catroweb") }}
                 </div>
-                {{ "help-cards.text.getinvolved_1"|trans({}, "catroweb") }}
-                <b>{{ displayname }}</b>
-                {{ "help-cards.text.getinvolved_2"|trans({}, "catroweb") }}!
+                <img alt="Play Store Logo" src="{{ asset('images/help/google_playstore.png') }}"/>
               </div>
-              <img src="{{ asset('images/help/google_playstore.png') }}" width="120px"/>
             </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
+
+      <div class="col-12">
+        <a href="https://itunes.apple.com/app/pocket-code/id1117935892">
+          <div class="catro-card help-card apple primary">
+            <div class="catro-content">
+              <div class="row">
+                <div class="col-8 col-sm-8">
+                  <div class="catro-card-title">
+                    {{ "help-cards.headings.getinvolvedApple"|trans({}, "catroweb") }}
+                  </div>
+                  {{ "help-cards.text.getinvolved"|trans({}, "catroweb") }}
+                </div>
+                <img alt="Apple Logo" src="{{ asset('images/help/apple_logo.png') }}"/>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
     </div>
+
   </div>
 
-  <div class="row">
-    <div class="col-md-6 col-sm-6">
-      {{ "programs.welcome.download"|trans({}, "catroweb") }}
-      <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid"
-         target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
-    </div>
-  </div>
 </div>
+
+{% endif %}

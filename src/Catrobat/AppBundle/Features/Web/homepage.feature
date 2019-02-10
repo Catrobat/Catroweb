@@ -28,12 +28,17 @@ Feature: Pocketcode homepage
     Given I am on homepage
     Then I should see the featured slider
     And I should see newest programs
+    And I should see recommended programs
     And I should see most downloaded programs
     And I should see most viewed programs
+    And I should see random programs
 
   Scenario: Welcome Section
     Given I am on homepage
     Then I should see the welcome section
+    And I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
+    And I should see "Get it on Google Play"
+    And I should see "Get it on IOS"
 
   Scenario: Cant see the Welcome Section
     Given I am on homepage

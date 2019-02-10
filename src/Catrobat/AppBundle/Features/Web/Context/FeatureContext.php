@@ -244,7 +244,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldSeeTheWelcomeSection()
   {
-    Assert::assertTrue($this->getSession()->getPage()->findById('welcomeSection')->isVisible());
+    Assert::assertTrue($this->getSession()->getPage()->findById('welcome-section')->isVisible());
   }
 
 
@@ -253,7 +253,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
    */
   public function iShouldNotSeeTheWelcomeSection()
   {
-    Assert::assertNull($this->getSession()->getPage()->findById('welcomeSection'));
+    Assert::assertNull($this->getSession()->getPage()->findById('welcome-section'));
   }
 
   /**
@@ -285,6 +285,16 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
       case 'most viewed':
         $this->assertSession()->elementExists('css', '#mostViewed');
+        $this->assertSession()->elementExists('css', '.program');
+        break;
+
+      case 'random':
+        $this->assertSession()->elementExists('css', '#random');
+        $this->assertSession()->elementExists('css', '.program');
+        break;
+
+      case 'recommended':
+        $this->assertSession()->elementExists('css', '#recommended');
         $this->assertSession()->elementExists('css', '.program');
         break;
 
