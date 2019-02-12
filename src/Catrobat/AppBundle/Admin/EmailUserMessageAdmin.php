@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: catroweb
- * Date: 27.02.16
- * Time: 16:47
- */
 
 namespace Catrobat\AppBundle\Admin;
 
@@ -15,6 +9,11 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+
+/**
+ * Class EmailUserMessageAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class EmailUserMessageAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_mail';

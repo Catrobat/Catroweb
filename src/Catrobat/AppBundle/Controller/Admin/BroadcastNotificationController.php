@@ -23,11 +23,12 @@ class BroadcastNotificationController extends CRUDController
     return $this->renderWithExtraParams('Admin/broadcast_notification.html.twig');
   }
 
-
   /**
    * @param Request $request
    *
    * @return Response
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function sendAction(Request $request)
   {

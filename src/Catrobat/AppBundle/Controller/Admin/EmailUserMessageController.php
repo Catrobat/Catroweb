@@ -10,35 +10,72 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class EmailUserMessageController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class EmailUserMessageController extends CRUDController
 {
+  /**
+   * @param Request|null $request
+   *
+   * @return Response
+   */
   public function listAction(Request $request = null)
   {
     return $this->renderWithExtraParams('Admin/mail.html.twig');
   }
 
-  public function sendAction(Request $request = null)
+
+  /**
+   * @param \Swift_Mailer $mailer
+   * @param Request       $request
+   *
+   * @return Response
+   */
+  public function sendAction(\Swift_Mailer $mailer, Request $request)
   {
     /**
      * @var $userManager UserManager
      * @var $user        User
      */
-
     $userManager = $this->get('usermanager');
-    $user = $userManager->findUserByUsername($_GET['Username']);
-
+    $user = $userManager->findUserByUsername($request->get('username'));
     if (!$user)
     {
       return new Response("User does not exist");
     }
 
-    $mailaddress = $user->getEmail();
+    $subject = $request->get('subject');
+    if (!$subject || $subject === "")
+    {
+      return new Response("Empty subject!");
+    }
 
-    $msg = wordwrap($_GET['Message'], 70);
-    //mail("someone@example.com","My subject",$msg);
-    $headers = "From: webmaster@catrob.at" . "\r\n";
-    mail($mailaddress, "Admin Message", $msg, $headers);
+    $messageText = $request->get('message');
+    if (!$messageText || $messageText === "")
+    {
+      return new Response("Empty message!");
+    }
 
-    return new Response("OK");
+    $htmlText = str_replace(PHP_EOL, "<br>", $messageText);
+
+    $message = (new \Swift_Message($subject))
+      ->setFrom('webteam@catrob.at')
+      ->setTo($user->getEmail())
+      ->setBody(
+        $this->renderView(
+          'email/simple_message.html.twig',
+          ['message' => $htmlText]
+        ),
+        'text/html'
+      )
+      // plaintext version of the message
+      ->addPart(strip_tags($messageText), 'text/plain'
+      );
+
+    $mailer->send($message);
+
+    return new Response("OK - message sent");
   }
 }
