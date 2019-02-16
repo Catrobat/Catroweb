@@ -202,50 +202,42 @@
         </div>
       {% endif %}
 
-      <div class="download-container col-12">
+      <div class="download-container">
+        <div class="btn-container col-12 col-xl-6">
+          <a id="url-download" class="btn btn-primary button"
+             href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+            <img class="program-big-button-icon mr-3" src="{{ asset('images/symbols/download.svg') }}" alt=""/>
+            <span>{{ "download"|trans({}, "catroweb") }}</span>
+          </a>
+        </div>
 
-        <div class="row">
+        <div id="remix-graph-button" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary">
+            <i class="program-big-button-icon mr-3 fa fa-sitemap"></i>
+            {{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}
+          </button>
+        </div>
 
-          <div id="download" class="col-12 col-lg-5 col-xl-4">
-            <a id="url-download"
-               href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-              <button class="btn btn-primary download-button col-12">
-                <img class="program-big-button-icon mr-3"
-                     src="{{ asset('images/symbols/download.svg') }}">
-                <span>{{ "download"|trans({}, "catroweb") }}</span>
-              </button>
-            </a>
-          </div>
+        <div id="apk-generate" class="btn-container col-12 col-xl-6">
+          <button class="btn btn-primary">
+            <i class="program-big-button-icon mr-3 fa fa-android"></i>
+            {{ "apk.prepare"|trans({}, "catroweb") }}
+          </button>
+        </div>
 
-          <div id="remix-graph-button" class="col-12 col-lg-5 col-xl-4">
-            <button class="btn btn-primary download-button col-12">
-              <i class="program-big-button-icon mr-3 fa fa-sitemap"></i>
-              {{ "remixGraph.showRemixGraph"|trans({}, "catroweb") }}
-            </button>
-          </div>
+        <div id="apk-pending" class="btn-container col-12 col-xl-6 d-none">
+          <button class="btn btn-primary">
+            <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw"
+               aria-hidden="true"></i>
+            {{ "apk.preparing"|trans({}, "catroweb") }}
+          </button>
+        </div>
 
-          <div id="apk-generate" class="col-12 col-lg-5 col-xl-4">
-            <button class="btn  btn-primary btn-apk download-button col-12">
-              <i class="program-big-button-icon mr-3 fa fa-android"></i>
-              {{ "apk.prepare"|trans({}, "catroweb") }}
-            </button>
-          </div>
-
-          <div id="apk-pending" class="col-12 col-lg-5 col-xl-4 d-none">
-            <button class="btn  btn-primary download-button col-12">
-              <i class="program-big-button-icon mr-3 fa fa-spinner fa-pulse fa-2x fa-fw"
-                 aria-hidden="true"></i>
-              {{ "apk.preparing"|trans({}, "catroweb") }}
-            </button>
-
-          </div>
-
-          <div id="apk-download" class="col-12 col-lg-5 col-xl-4 d-none">
-            <button class="btn btn-apk btn-primary download-button col-12">
-              <i class="program-big-button-icon mr-3 fa fa-android"></i>
-              {{ "apk.download"|trans({}, "catroweb") }}
-            </button>
-          </div>
+        <div id="apk-download" class="btn-container col-12 col-xl-6 d-none">
+          <button class="btn btn-primary">
+            <i class="program-big-button-icon mr-3 fa fa-android"></i>
+            {{ "apk.download"|trans({}, "catroweb") }}
+          </button>
         </div>
       </div>
 
