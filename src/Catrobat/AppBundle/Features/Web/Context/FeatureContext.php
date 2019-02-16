@@ -365,7 +365,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     elseif ($arg1 == '')
     {
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-split-desktop')->isVisible());
+      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-split')->isVisible());
     }
     else
     {

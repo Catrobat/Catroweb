@@ -1,4 +1,7 @@
-@import "../base/variables";
+@import '../../bootstrap_vendor/scss/functions';
+@import '../base/_variables';
+@import '../../bootstrap_vendor/scss/variables';
+@import '../../bootstrap_vendor/scss/mixins';
 @import "../base/elements";
 @import 'theme_settings';
 
@@ -29,13 +32,13 @@
   }
 
   .help-desktop {
+    display: none;
     padding: 17px 0;
     text-align: center;
     width: 100%;
   }
 
   .help-mobile {
-    display: none;
     padding: 17px 0;
   }
 
@@ -43,48 +46,35 @@
     margin-left: 21px;
   }
 
-  .help-split-desktop {
+  .help-split {
     padding: 17px 0;
     width: 100%;
 
-    .help-split {
-      float: left;
-    }
-
-    .help-split:nth-child(1) {
-      margin-left: 61px;
-    }
-
-    .help-split-spacer {
-      float: left;
-      height: 200px;
-      width: 50px;
+    img:first-child {
+      padding-bottom: 17px * 2;
     }
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1025px) {
     .help-desktop {
-      display: none;
-    }
-
-    .help-mobile {
       display: block;
     }
 
-    .help-split-desktop {
+    .help-mobile {
+      display: none;
+    }
 
-      .help-split {
-        margin-left: 0;
-        width: 100%;
-      }
+  }
 
-      .help-split:nth-child(1) {
-        margin-bottom: 35px;
-        margin-left: 0;
-      }
+  @include media-breakpoint-up(xl) {
+    .help-split {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
 
-      .help-split-spacer {
-        display: none;
+      img:first-child {
+        margin-right: 50px;
+        padding-bottom: 0;
       }
     }
   }

@@ -372,7 +372,7 @@ var Main = function (search_url) {
   self.default_rows = 2
   // before changing columns_min, columns_max, have a look at '.programs{.program{width:.%}}' in 'brain.scss' first
   self.columns = 0
-  self.columns_min = 3
+  self.columns_min = 2
   self.columns_max = 9
   self.windowWidth = $(window).width()
   self.download_limit = 0
@@ -382,6 +382,7 @@ var Main = function (search_url) {
   self.amount_of_visible_programs = 0
   self.total_amount_of_found_programs = 0
   self.default_amount_of_visible_programs = 3
+  self.is_init = true
   
   self.init = function () {
     self.restoreParamsWithSessionStorage()
@@ -399,6 +400,7 @@ var Main = function (search_url) {
       }
       self.total_amount_of_found_programs = data.CatrobatInformation.TotalProjects
       self.setup(data)
+      self.is_init = false
     })
   }
   
@@ -516,7 +518,7 @@ var Main = function (search_url) {
   }
   
   self.updateParameterBasedOnScreenSize = function () {
-    let columns = Math.round(($('.programs').width()) / $('.program').outerWidth())
+    let columns = Math.floor(($('.programs').width()) / $('.program').outerWidth(true))
     if (columns < self.columns_min)
     {
       columns = self.columns_min
@@ -536,6 +538,14 @@ var Main = function (search_url) {
       self.initial_download_limit = self.download_limit
     }
     self.default_amount_of_visible_programs = self.download_limit
+    
+    if(self.is_init)
+    {
+      self.amount_of_visible_programs = self.default_amount_of_visible_programs
+      self.updateProgramVisibility()
+      return
+    }
+    
     self.amount_of_visible_programs = Math.min(self.initial_download_limit, self.total_amount_of_found_programs)
     
     if (self.amount_of_visible_programs < self.default_amount_of_visible_programs &&
@@ -623,48 +633,22 @@ var Main = function (search_url) {
       let stored_visits = sessionStorage.getItem('visits')
       let link_css_classes = 'rec-programs' + ((additional_link_css_class != null) ?
         (' ' + additional_link_css_class) : '')
-      let program = undefined
-      if (!stored_visits)
-      {
-        program = $(
-          '<div class="program" id="program-' + programs[i].ProjectId + '">' +
-          '<a class="' + link_css_classes + '" href = \'' + program_link + '\'>' +
-          '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall + '"></div>' +
-          '<div class="program-name"><b>' + programs[i].ProjectName + '</b></div>' +
-          div +
-          '</a>' +
-          '</div>'
-        )
-      }
-      else
+      let visited = false
+      if (stored_visits)
       {
         let parsed_visits = JSON.parse(stored_visits)
         let program_id = programs[i].ProjectId.toString()
-        if ($.inArray(program_id, parsed_visits) >= 0)
-        {
-          program = $(
-            '<div class="program visited-program" id="program-' + programs[i].ProjectId + '">' +
-            '<a class="' + link_css_classes + '" href = \'' + program_link + '\' >' +
-            '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall + '"></div>' +
-            '<div class="program-name"><b>' + programs[i].ProjectName + '</b></div>' +
-            div +
-            '</a>' +
-            '</div>'
-          )
-        }
-        else
-        {
-          program = $(
-            '<div class="program" id="program-' + programs[i].ProjectId + '">' +
-            '<a class="' + link_css_classes + '" href = \'' + program_link + '\'>' +
-            '<div><img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall + '"></div>' +
-            '<div class="program-name"><b>' + programs[i].ProjectName + '</b></div>' +
-            div +
-            '</a>' +
-            '</div>'
-          )
-        }
+        visited = $.inArray(program_id, parsed_visits) >= 0;
       }
+  
+      const program = $(
+        '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + programs[i].ProjectId + '">' +
+        '<a href="' + program_link + '" class="' + link_css_classes + '">' +
+        '<img src="' + data.CatrobatInformation.BaseUrl + programs[i].ScreenshotSmall + '" alt="" />' +
+        '<span class="program-name">' + programs[i].ProjectName + '</span>' +
+        div +
+        '</a></div>'
+      )
       
       $(self.container).find('.programs').append(program)
       $(self.container).show()

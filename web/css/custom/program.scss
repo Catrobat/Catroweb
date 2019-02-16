@@ -160,15 +160,6 @@ $fab-child-margin-small: ($fab-size-small - $fab-child-size-small) / 2 + $fab-ma
 
 }
 
-button, .button
-{
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: $default-font-size + 0.375;
-  padding-left: 25px;
-  padding-right: 25px;
-}
-
 body
 {
   color: black;
@@ -326,6 +317,10 @@ h2
       {
         display: none;
       }
+
+      &:hover {
+        text-decoration: none;
+      }
     }
 
     #program-like-counter
@@ -363,38 +358,40 @@ h2
   height: 40px;
 }
 
-.download-button
-{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.download-button img
-{
-  height: 50px;
-  float: left;
-}
 
 .download-container
 {
-  display: block;
-  text-align: center;
-}
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-.download-pending
-{
-  opacity: 0.5;
-}
+  .btn-container
+  {
+    padding-bottom: 15px;
+    @include media-breakpoint-down(lg) {
+      padding-left: 0;
+      padding-right: 0;
+    }
 
-.pending-container
-{
-  display: inline-block;
-}
+    .btn
+    {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-.pending-icon
-{
-  height: 60px;
+      white-space: initial;
+
+      min-height: 64px;
+      width: 100%;
+
+      img
+      {
+        height: 50px;
+        float: left;
+
+      }
+    }
+  }
 }
 
 table td:nth-child(1)
@@ -446,6 +443,10 @@ table td:nth-child(1)
 {
   margin-top: 0;
   padding-top: 25px;
+
+  #user-comment-wrapper {
+    padding-bottom: 15px;
+  }
 }
 
 .h1
@@ -703,7 +704,7 @@ input[type='number']
   cursor: default;
 }
 
-@media screen and (max-width: $responsive-width-tablet)
+@include media-breakpoint-down(md)
 {
   #program-user
   {
@@ -733,6 +734,7 @@ input[type='number']
     {
       display: block;
       width: 100%;
+      margin-bottom: 5px;
     }
   }
 }

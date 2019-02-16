@@ -192,7 +192,6 @@ button, .button {
   padding: $default-button-padding;
   text-shadow: #333 1px 1px 1px;
   text-align: center;
-  text-transform: uppercase;
 
   img {
     margin-right: 6px;
@@ -236,71 +235,56 @@ form {
   margin-bottom: 25px;
 }
 
-.programs {
-  overflow: hidden;
-  width: 98.5%;
-  margin: 25px auto 0 auto;
+// when changing tile size, adapt self.column_min and self.column_max in ProgramLoader.js
+$program-tile-width: 85px;
 
-  img {
-    height: 84px;
-    width: 84px;
-  }
+.programs {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
 
   > .program {
-    float: left;
-    /* 9 in a row ... number of programs in each row, have a look at 'self.column_min and self.column_max' in
-    'ProgramLoader.js' before changing the width! */
-    width: percentage((100 / 9) / 100);
-    padding-top: 10px;
-    padding-bottom: 10px;
 
-    > div, a {
-      margin: auto;
-      width: 96px;
-      cursor: pointer;
-      text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    width: $program-tile-width;
+    margin: 0.35rem;
+    align-items: center;
+    justify-content: center;
+
+    > a {
+
       display: block;
+      width: 100%;
+
+      > img {
+        max-width: $program-tile-width !important;
+        max-height: $program-tile-width;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      .program-name {
+        font-weight: bold;
+        width: 100%;
+        display: inline-block;
+      }
 
       > div {
-        white-space:nowrap;
-        overflow:hidden;
-        text-overflow:ellipsis;
+        font-size: 0.73rem;
+        max-width: 100%;
       }
 
-      > div:nth-child(2) {
-        padding: 2px 0;
-      }
-
-      > div:nth-child(3) {
-        font-size: $default-font-size - 0.125;
-      }
-
-      audio {
-        width: 100%;
+      .program-name, > div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
-
-    @media screen and (max-width: 1200px) {
-      width: percentage((100 / 8) / 100); /* 8 in a row */
-    }
-    @media screen and (max-width: 992px) {
-      width: percentage((100 / 7) / 100); /* 7 in a row */
-    }
-    @media screen and (max-width: 800px) {
-      width: percentage((100 / 6) / 100); /* 6 in a row */
-    }
-    @media screen and (max-width: 768px) {
-      width: percentage((100 / 5) / 100); /* 5 in a row */
-    }
-    @media screen and (max-width: 576px) {
-      width: percentage((100 / 4) / 100); /* 4 in a row */
-    }
-    @media screen and (max-width: 425px) {
-      width: percentage((100 / 3) / 100); /* 3 in a row */
-    }
   }
-
 }
 
 .button-show-placeholder {
