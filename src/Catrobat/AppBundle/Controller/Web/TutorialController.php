@@ -23,35 +23,9 @@ class TutorialController extends Controller
    * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1}, requirements={"page":"\d+"},
    *                              methods={"GET"})
    */
-  public function stepByStepAction($page)
+  public function stepByStepAction()
   {
-    $max_page = 11;
-
-    if ($page > $max_page)
-    {
-      throw $this->createNotFoundException('Unable to find step.');
-    }
-
-    $paginator = $this->get('knp_paginator');
-    $steps = [];
-
-    for ($i = 1; $i <= $max_page; ++$i)
-    {
-      $steps[] = $i;
-    }
-
-    $pagination = $paginator->paginate(
-      $steps,
-      $page, //current page
-      1/*limit per page*/
-    );
-
-    $pagination->setTemplate('help/paginationStart1.html.twig');
-
-    return $this->get('templating')->renderResponse('help/stepByStep.html.twig', [
-      'page'       => $page,
-      'pagination' => $pagination,
-    ]);
+    return $this->get('templating')->renderResponse('help/stepByStep.html.twig', []);
   }
 
   /**

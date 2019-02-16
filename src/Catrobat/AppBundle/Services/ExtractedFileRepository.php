@@ -2,9 +2,11 @@
 
 namespace Catrobat\AppBundle\Services;
 
+use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Entity\ProgramManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 
 class ExtractedFileRepository
@@ -15,9 +17,12 @@ class ExtractedFileRepository
   private $file_extractor;
   private $program_manager;
   private $prog_file_repo;
+  private $l;
 
   public function __construct($local_extracted_path, $web_extracted_path, $local_storage_path,
-                              CatrobatFileExtractor $file_extractor, ProgramManager $program_manager, ProgramFileRepository $prog_file_rep)
+                              CatrobatFileExtractor $file_extractor,
+                              ProgramManager $program_manager,
+                              ProgramFileRepository $prog_file_rep, LoggerInterface $l)
   {
     if (!is_dir($local_extracted_path))
     {
@@ -29,15 +34,15 @@ class ExtractedFileRepository
     $this->file_extractor = $file_extractor;
     $this->program_manager = $program_manager;
     $this->prog_file_repo = $prog_file_rep;
+    $this->l = $l;
   }
 
-  public function loadProgramExtractedFile(\Catrobat\AppBundle\Entity\Program $program)
+  public function loadProgramExtractedFile(Program $program)
   {
     try
     {
       $hash = $program->getExtractedDirectoryHash();
       $extracted_file = new ExtractedCatrobatFile($this->local_path . $hash . '/', $this->webpath . $hash . '/', $hash);
-
       return $extracted_file;
     } catch (InvalidCatrobatFileException $e)
     {
@@ -45,12 +50,11 @@ class ExtractedFileRepository
       $extracted_file = $this->file_extractor->extract($this->prog_file_repo->getProgramFile($program->getId()));
       $program->setExtractedDirectoryHash($extracted_file->getDirHash());
       $this->program_manager->save($program);
-
       return $extracted_file;
     }
   }
 
-  public function removeProgramExtractedFile(\Catrobat\AppBundle\Entity\Program $program)
+  public function removeProgramExtractedFile(Program $program)
   {
     try
     {

@@ -11,13 +11,12 @@ sonata_block:
     sonata.block.service.text:
     sonata.user.block.menu:    # used to display the menu in profile pages
     sonata.user.block.account: # used to display menu option (login option)
-#        catrowebadmin.block.tools.statistic:
 
 sonata_admin:
   title:     Admin Panel
   title_logo: admin/admin_logo.png
   templates:
-    layout: '@SonataAdmin/standard_layout.html.twig'
+    layout: 'Admin\standard_layout.html.twig'
   dashboard:
     blocks:
     - class:    col-lg-3 col-xs-6
@@ -56,7 +55,7 @@ sonata_admin:
         color: bg-green
 
 
-      # display a dashboard block
+    # display a dashboard block
     # - { position: left, type: sonata.admin.block.admin_list }
     - { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> Accourding to your role you can access different information and tools in our Admin.<br> Have Fun :)"} }
     #            - { position: right, type: catrowebadmin.block.tools.statistic}

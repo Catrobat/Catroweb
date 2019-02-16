@@ -30,7 +30,7 @@ class ProgramDownloads
   protected $recommended_by_page_id;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
+   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program")
    * @ORM\JoinColumn(name="recommended_by_program_id", referencedColumnName="id", nullable=true)
    */
   protected $recommended_by_program;
@@ -41,7 +41,7 @@ class ProgramDownloads
   protected $user_specific_recommendation = false;
 
   /**
-   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program", inversedBy="program")
+   * @ORM\ManyToOne(targetEntity="\Catrobat\AppBundle\Entity\Program")
    * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
    */
   protected $recommended_from_program_via_tag;

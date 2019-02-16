@@ -6,6 +6,7 @@ use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 
 class RemixUrlParsingState
@@ -83,8 +84,6 @@ class ExtractedCatrobatFile
     {
       return explode(',', (string)$this->program_xml_properties->header->tags);
     }
-
-    return;
   }
 
   public function getContainingImagePaths()

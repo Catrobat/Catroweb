@@ -2,11 +2,25 @@
 
 namespace Catrobat\AppBundle\Services\CatrobatCodeParser;
 
-
+/**
+ * Class ParsedSceneProgram
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser
+ */
 class ParsedSceneProgram
 {
+  /**
+   * @var \SimpleXMLElement
+   */
   protected $program_xml_properties;
+
+  /**
+   * @var ParsedScene
+   */
   protected $scenes;
+
+  /**
+   * @var CodeStatistic
+   */
   protected $code_statistic;
 
   public function __construct(\SimpleXMLElement $program_xml_properties)

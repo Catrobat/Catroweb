@@ -2,11 +2,25 @@
 
 namespace Catrobat\AppBundle\Services\CatrobatCodeParser;
 
-
+/**
+ * Class ParsedObjectsContainer
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser
+ */
 abstract class ParsedObjectsContainer
 {
+  /**
+   * @var \SimpleXMLElement
+   */
   protected $xml_properties;
+
+  /**
+   * @var null
+   */
   protected $background;
+
+  /**
+   * @var array
+   */
   protected $objects;
 
   public function __construct(\SimpleXMLElement $xml_properties)

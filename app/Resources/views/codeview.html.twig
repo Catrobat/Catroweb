@@ -7,15 +7,7 @@
 {% import _self as self %}
 
 {% macro dropbtn(object, path, scene_name) %}
-  {% if object.getLooks()|length > 0 %}
-    {% if scene_name is null %}
-      <img src="{{ asset('./'~path~'images/'~object.getLooks()[0].getFileName()) }}" class="object-icon">
-    {% else %}
-      <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~object.getLooks()[0].getFileName) }}" class="object-icon">
-    {% endif %}
-  {% else %}
-    <div class="object-icon"></div>
-  {% endif %}
+  {# ToDo show the correct image#}
   <div class="object-meta">
     <div class="object-meta-name">
       <p>Object:</p>
@@ -45,27 +37,11 @@
           <div class="script-text">
             <span class="script-type">{{ script.getCaption() }}</span>
           </div>
-          {% if script.getLookFileName() is defined %}
-            {% if scene_name is null %}
-              <img src="{{ asset('./'~path~'images/'~script.getLookFileName()) }}" class="brick-look script-brick-look">
-            {% else %}
-              <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~script.getLookFileName()) }}"
-                   class="brick-look script-brick-look">
-            {% endif %}
-          {% endif %}
         </div>
         <div class="script-bricks-wrapper">
           {% for brick in script.getBricks() %}
             <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.getImgFile()) }})">
               <div class="brick-text">{{ brick.getCaption() }}</div>
-              {% if brick.getLookFileName() is defined %}
-                {% if scene_name is null %}
-                  <img src="{{ asset('./'~path~'images/'~brick.getLookFileName()) }}" class="brick-look">
-                {% else %}
-                  <img src="{{ asset('./'~path~'/'~scene_name~'/images/'~brick.getLookFileName()) }}"
-                       class="brick-look">
-                {% endif %}
-              {% endif %}
               {% if brick.getSoundFileName() is defined %}
                 {% if scene_name is null %}
                   <i id="sound-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-volume-up"
@@ -73,7 +49,7 @@
                   </i>
                 {% else %}
                   <i id="sound-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-volume-up"
-                     onclick="initialSound('{{ asset('./'~path~'/'~scene_name~'/sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }});">
+                     onclick="initialSound('{{ asset('./'~path~scene_name~'/sounds/'~brick.getSoundFileName()) }}', {{ sound_counter }});">
                   </i>
                 {% endif %}
                 <i id="soundStop-{{ sound_counter }}" class="catro-icon-button brick-sound fas fa-stop"
