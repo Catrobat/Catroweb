@@ -130,7 +130,8 @@ class MediaPackageFileRepository
       $imagick = new \Imagick(realpath($path));
       $meanImg = clone $imagick;
       $meanImg->setBackgroundColor('#ffffff');
-      $meanImg = $meanImg->flattenImages();
+      $meanImg->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
+      $meanImg->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
       $meanImg->setImageFormat('jpeg');
       $meanImg->setColorspace(\Imagick::COLORSPACE_GRAY);
       $mean = $meanImg->getImageChannelMean(\Imagick::CHANNEL_GRAY);
@@ -142,7 +143,8 @@ class MediaPackageFileRepository
       }
 
       $imagick->setImageBackgroundColor($background);
-      $imagick = $imagick->flattenImages();
+      $imagick->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
+      $imagick->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
       $imagick->setImageFormat("jpeg");
       $imagick->thumbnailImage(200, 0);
       $imagick->writeImage($this->thumb_dir . $id . '.' . 'jpeg');
