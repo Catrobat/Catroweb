@@ -569,6 +569,7 @@ errors:
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: Programname must not contain rude wordes.
   program:

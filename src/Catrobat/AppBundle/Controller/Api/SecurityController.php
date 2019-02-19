@@ -3,8 +3,6 @@
 namespace Catrobat\AppBundle\Controller\Api;
 
 use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Features\Helpers\FakeOAuthService;
-use Catrobat\AppBundle\Services\OAuthService;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\UserManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -304,7 +302,9 @@ class SecurityController extends Controller
    */
   private function signInLdapUser($request, &$retArray)
   {
-    /* @var $authenticator UserAuthenticator */
+    /**
+     * @var $authenticator UserAuthenticator
+     */
     $authenticator = $this->get('user_authenticator');
     $token = null;
     $username = $request->request->get('registrationUsername');

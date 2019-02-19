@@ -99,6 +99,6 @@ Feature: Authenticate to the system
     And the response code will be "<httpcode>"
 
     Examples:
-      | problem       | errorcode | answer                                               | httpcode |
-      | invalid token | 601       | Authentication of device failed: invalid auth-token! | 401      |
+      | problem       | errorcode | answer                    | httpcode |
+      | invalid token | 601       | Upload Token auth failed. | 401      |
 
