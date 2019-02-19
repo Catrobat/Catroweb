@@ -5,6 +5,7 @@ password: Passord
 accountSettings: Account Settings
 email: E-post
 aboutPocketCode: Om Pocket Code
+aboutCatrobat: Om Catrobat
 tutorials: Opplæring
 googlePlay: Google Play
 passwordsNoMatch: Passordene samsvarer ikke.
@@ -136,11 +137,11 @@ passwordRecovery:
   subject: Din Catrobat passordgjenoppretting
   message: |
     Kjære %username%. Du har bedt om å tilbakestille passordet på %appplication_url% fordi du har glemt det. Hvis du ikke har bedt om dette, vennligst ignorer denne henvendelsen. Forespørselen vil utløpe og blir ugyldig etter 24 timer. 
-    
+
     For å tilbakestille passordet og opprette et nytt, kan du gå til følgende side: %confirmationUrl% 
-    
+
     Du kan bruke brukernavnet og passordet ditt til å få tilgang til %appplication_url% samfunnet. For å gjøre dette, gå til følgende side: %loginPage% 
-    
+
     For å redigere dine profildetaljer, gå til denne siden: %profilePage% hilsen, Catrobat Team.
 profile:
   edit: Edit your profile
@@ -481,6 +482,7 @@ menu:
   login: Logg på
   logout: Logout
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -713,3 +715,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Download
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

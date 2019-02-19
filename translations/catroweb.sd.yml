@@ -5,6 +5,7 @@ password: ڳجھو لفظ
 accountSettings: Account Settings
 email: اي ميل
 aboutPocketCode: پاڪيٽ ڪوڊ جي باري ۾
+aboutCatrobat: ڪيٽروبيٽ جي باري ۾
 tutorials: سبق
 googlePlay: گوگل پلي
 passwordsNoMatch: ڳجھو لفظ غيردرست آهي.
@@ -136,15 +137,15 @@ passwordRecovery:
   subject: اوهان جي ڪيٽروبيٽ پاسورڊ جي واپسي
   message: |
     عزيز %username%.
-    
+
     توهان پنهنجو پاسورڊ ٻيهر ٺاهڻ جي لاءِ عرض ڪيو آهي %appplication_url% تي ڇاڪاڻ جو توهان پنهنجو پاسورڊ وساري ويٺا آهيو. جيڪڏهن توهان هي عرض نہ ڪيو آهي، مهرباني ڪري هن کي اڻ ڏٺو ڪري ڇڏيو. هي 24 ڪلاڪن جي وقت ۾ پورو ٿي ۽ استعمال جي لائق نہ رهندو.
     توهان پنهنجو پاسورڊ ٻيهر ٺاهي ۽ نئون جوڙڻ لاءِ، مهرباني ڪري هي پيج گهمو:
     %confirmationUrl%
-    
+
     توهان پنهنجو يوزر نالو ۽ پاسورڊ ڪنهن بہ وقت هن %appplication_url% ڪميونٽي تي پهچ حاصل ڪري سگهو ٿا.
     اهو ڪرڻ لاءِ، صرف هي پيج گهمو: %loginPage%
     پنهنجي پروفائل جا تفصيل تصحيح ڪرڻ لاءِ، هن پيج تي وڃو: %profilePage%
-    
+
     نيڪ تمنائون،
     توهان جي ڪيٽروبيٽ سٿ.
 profile:
@@ -486,6 +487,7 @@ menu:
   login: لاگ ان
   logout: Logout
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -718,3 +720,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: ڊائونلوڊ
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: پاڪيٽ ڪوڊ
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

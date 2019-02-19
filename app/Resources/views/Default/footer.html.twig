@@ -1,25 +1,29 @@
 {% block footer %}
   <footer class="footer">
     <div class="container">
-
       <div class="content">
         <div class="row">
-          <div class="col-6 col-md-5 col-lg-3">
+          <div class="col-6 col-sm-4 col-lg-3">
             <h4>{{ "footer.usefulLinks"|trans({}, "catroweb") }}</h4>
             <ul class="list-vertical">
               <li>
                 <a href="{{ url('catrobat_web_help') }}">{{ "tutorials"|trans({}, "catroweb") }}</a>
               </li>
               <li>
-                <a href="http://www.catrobat.org" target="_blank">{{ "aboutPocketCode"|trans({}, "catroweb") }}</a>
+                <a href="http://www.catrobat.org"
+                   target="_blank">{{ "aboutCatrobat"|trans({}, "catroweb") }}</a>
               </li>
               <li>
-                <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid"
-                   target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+                <a href="https://edu.catrob.at/">
+                  {{ "help-cards.headings.education"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="https://groups.google.com/forum/m/?fromgroups#!forum/pocketcode">
+                  {{ "help-cards.headings.discuss"|trans({}, "catroweb") }}</a>
               </li>
             </ul>
           </div>
-          <div class="col-6 col-md-5 col-lg-3">
+          <div class="col-6 col-sm-4 col-lg-3">
             <h4>{{ "footer.legalities"|trans({}, "catroweb") }}</h4>
             <ul class="list-vertical">
               <li>
@@ -38,6 +42,19 @@
               </li>
             </ul>
           </div>
+          <div class="col-6 mt-4 mt-sm-0 col-sm-4 col-lg-3">
+            <h4>{{ "footer.download"|trans({}, "catroweb") }}</h4>
+            <ul class="list-vertical">
+              <li>
+                <a href="http://play.google.com/store/apps/details?id=org.catrobat.catroid"
+                   target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+              </li>
+              <li>
+                <a href="https://itunes.apple.com/app/pocket-code/id1117935892"
+                   target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -46,12 +63,14 @@
         <select id="switch-language" autocomplete="off">
           {% set countries = getLanguageOptions() %}
           {% for country in countries %}
-            <option value="{{ country[0] }}" {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
+            <option value="{{ country[0] }}"
+                    {% if country[2] %}selected{% endif %}>{{ country[1] }}</option>
           {% endfor %}
         </select>
       </div>
       <div class="copyright footer-right">
-        Copyright &copy; {{ "now"|date("Y") }} <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.
+        Copyright &copy; {{ "now"|date("Y") }} <a href="http://www.catrobat.org">Catrobat</a>. All
+        rights reserved.
       </div>
     </div>
   </footer>

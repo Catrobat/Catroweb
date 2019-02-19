@@ -5,6 +5,7 @@ password: Mật khẩu
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: Về Pocket Code
+aboutCatrobat: Về Catrobat
 tutorials: Hướng dẫn
 googlePlay: googlePlay
 passwordsNoMatch: Mật khẩu không khớp.
@@ -136,14 +137,14 @@ passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
     %username% thân mến,
-    
+
     Bạn đã yêu cầu thiết lập lại mật khẩu của mình trên %appplication_url% vì bạn đã quên nó. Nếu bạn không yêu cầu việc này, vui lòng bỏ qua. Yêu cầu này sẽ hết hạn và không sử dụng được trong vòng 24 giờ. 
     Để thiết lập lại mật khẩu và tạo mật khẩu mới, vui lòng truy cập trang: %confirmationUrl%
-    
+
     Bạn có thể dùng tên đăng nhập và mật khẩu của mình bất kể lúc nào để truy cập vào cộng đồng %appplication_url% 
     Để làm vậy, hãy truy cập trang: %loginPage%
     Để chỉnh sửa thông tin cá nhân, truy cập trang: %profilePage%
-    
+
     Trân trọng,
     Nhóm Catrobat.
 profile:
@@ -485,6 +486,7 @@ menu:
   login: Đăng nhập
   logout: Đăng xuất
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: Hiện không có chương trình nào.
 login:
@@ -717,3 +719,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Tải về
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

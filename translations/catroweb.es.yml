@@ -5,6 +5,7 @@ password: Contraseña
 accountSettings: Account Settings
 email: Correo electrónico
 aboutPocketCode: Acerca de Pocket Code
+aboutCatrobat: Acerca de Catrobat
 tutorials: Tutoriales
 googlePlay: Google Play
 passwordsNoMatch: Las contraseñas no coinciden.
@@ -138,7 +139,7 @@ passwordRecovery:
     Estimado %username%.
     Ha solicitado generar una nueva contraseña en %appplication_url% porque se le ha olvidado su contraseña. Si no la ha solicitado, por favor ignore este mensaje. Se vencerá y no podrá usarse después de 24 horas.
     Para generar su nueva contraseña, por favor visite la siguiente página: %confirmationUrl%
-    
+
     Podrá utilizar su nombre de usuario y contraseña en todo momento para acceder a la comiunidad %appplication_url%.
     Para ello, visite la siguiente página: %loginPage%
     Para editar sus detalles de perfil, vaya a esta página: %profilePage%
@@ -481,6 +482,7 @@ menu:
   login: Login
   logout: Desconectarse
   admin: Administrador
+  home: Home
 programLoader:
   noPrograms: Actualmente no existen programas.
 login:
@@ -712,3 +714,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Descargar
     getinvolved_2: ahora en Google Play y empieza!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

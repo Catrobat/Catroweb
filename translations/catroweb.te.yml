@@ -5,6 +5,7 @@ password: పాస్వర్డ్
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: పాకెట్ కొడ్ గురించి
+aboutCatrobat: About Catrobat
 tutorials: టుటొరియల్స్
 googlePlay: గూగ్లె ప్లే
 passwordsNoMatch: పాస్వర్ద్ సరిచుసుకొండి.
@@ -47,10 +48,10 @@ indexPage:
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
-    subtitle: Create stories, games and more...
+    title: పాకెట్ కోడ్కు స్వాగతం
+    subtitle: కథలు, గేమ్స్ మరియు చాల సృష్టించవచ్చు
     download: Download the app
-    statistics: More Statistics
+    statistics: మరింత గణాంకాలు
   featured: ఫీచర్డ్
   newest: కొత్త ప్రొగ్రాంలు
   recommended: సిఫార్సు కార్యక్రమాలు
@@ -126,31 +127,32 @@ programs:
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'by'
-  open: 'Open'
+  open: 'తెరువు'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'క్షమించండి...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
+  programNotAvailable: 'అందుబాటులో లేదు'
   programUnknownUser: 'తెలియని యూజర్'
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
-    Dear %username%.
-    
-    You have requested to reset your password on %appplication_url% because you have forgotten your password. If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    
-    Best regards,
-    Your Catrobat Team.
+    ప్రియమైన %username%.
+
+    మీ పాస్వర్డ్ను రీసెట్ చేయడానికి మీరు ఇక్కడ అభ్యర్థించారు %appplication_url%. మీరు అభ్యర్థన చేయకపోతే, విస్మరించండి. ఇది 24 గంటల్లో నిష్ఫలంగా మారుతుంది.
+    మీరు మీ పాస్వర్డ్ను రీసెట్ చేయాలనుకుంటే, ఇక్కడ సందర్శించండి: 
+    %confirmationUrl%
+
+    మీరు %appplication_url% ఎప్పుడైనా యాక్సెస్ చేయడానికి మీ యూజర్పేరు మరియు పాస్వర్డ్ను ఉపయోగించవచ్చు.
+    అలా చేయటానికి, ఈ పేజీని సందర్శించండి: %loginPage%
+    మీ ప్రొఫైల్ వివరాలను సవరించడానికి, ఈ పేజీకి వెళ్ళండి: %profilePage%
+
+    ఉత్తమ గౌరవంతో,
+    మీ కత్రోబట్ జట్టు.
 profile:
   edit: Edit your profile
-  saveChanges: save changes
+  saveChanges: మార్పులను ఊంచు
   newPass: కొత్త పాసువర్డ్
-  repeatPass: repeat password
+  repeatPass: పాస్ వర్డ్ ను మళ్లీ వ్రాయండి
   oldPass: old password
   firstEmail: My first email
   secondEmail: My second email
@@ -485,6 +487,7 @@ menu:
   login: Login
   logout: Logout
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -717,3 +720,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Download
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: పాకెట్ కోడ్
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

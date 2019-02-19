@@ -5,6 +5,7 @@ password: סיסמה
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: אודות פוקטקוד
+aboutCatrobat: אודות Catrobat
 tutorials: הדרכות
 googlePlay: Google play
 passwordsNoMatch: הסיסמה לא נכונה.
@@ -31,12 +32,12 @@ show-more: 'Show more'
 show-less: 'Show less'
 ok: OK
 clickToDownloadProgram: 'כדי להוריד את תוכנית ההדגמה %link_start% לחץ %link_end% כאן.'
-registrationError: 'Username or email address already in use.'
+registrationError: 'שם המשתמש או האימייל שבחרת תפוסים.'
 notifications: 'Notifications'
-wellDone: "Well done!"
+wellDone: "כל הכבוד!"
 done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
+notificationsReadMessage: "קראת את כל ההתראות."
+notificationsClearedMessage: "כל ההודעות סומנו כפריטים שנקראו."
 clearAllNotificationsButtonTitle: "Mark all as read"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
@@ -44,17 +45,17 @@ indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description: 'ככל שהתוכנה שלך מקבלת יותר לייקים (כולל "לייק", "צחוק", "אהבה" ו"וואו!"), כך היא תופיע יותר גבוה ברשימה.'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
+    title: ברוכים הבאים לקוד הכיס של Catrobat
     subtitle: Create stories, games and more...
     download: Download the app
     statistics: More Statistics
   featured: Featured
   newest: תוכניות חדשות
-  recommended: Recommended programs
-  noPrograms: There are currently no programs.
+  recommended: תוכנות מומלצות
+  noPrograms: אין כרגע תוכנות.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -75,7 +76,7 @@ programs:
     viewed: הנצפים ביותר
     downloaded: ההורדות הנפוצות ביותר
   random: תוכניות אקראיות
-  related: Related Programs
+  related: תוכנות קשורות
   downloads: '%downloads% הורדות'
   sample: תכניות לדוגמא
   views: '%views% ניצפה'
@@ -109,7 +110,7 @@ programs:
   send: שלח
   delete: מחק
   report: דיווח
-  report_popup: The comment was successfully reported.
+  report_popup: התגובה דווחה בהצלחה.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
@@ -175,27 +176,27 @@ myprofile:
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
+  editAvatar: ערוך תמונת פרופיל
+  editUsername: שנה שם משתמש
+  editPassword: ערוך סיסמא
+  editCountry: שנה מדינה
+  editEmail: שנה אימייל
   deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
+  deleteAccountText: האם אתה בטוח כי ברצונך למחוק את חשבונך? זה ימחק את כל התוכנות והתגובות שהעלת!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
   notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'רשיון לשחק'
   title: 'רשיון לשחק - תן קרדיט ושיתוף'
-  text1: Imagine that each Catrobat program is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
+  text1: דמיינו שכל תוכנה בCatrobat היא עוגה, עוגה מיוחדת מאוד שבאה עם המתכון שלו (לבני תוכנה). כל החברים בקהילה של Catrobat חולקים את העוגות שלהם יחד עם המתכונים. זה אומר שאתה יכול להנות מהעוגות וללמוד איך להכין אותם בעצמך!
+  text2: 'אין מתכונים סודיים: ההוראות איך להכין את העוגות האלה פתוחות לכולם כדי להשתמש, להשתמש-מחדש, לשנות, ולשרת כהשראה לרעיונות חדשים... אני מתכוון עוגות.'
+  text3: "אתה יכול לאכול את העוגות וכמו כן להעתיק מתכונים של אנשים כדי להכין עוגה משלך, אולי עם מרכיבים שונים. החופש הזה בא עם שני תנאים פשוטים:"
   text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each program page, you can always download the original scripts for the program. If you remix a program (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Program Notes, mentioning the people and program that inspired you.
   text6: 'למד עוד אודות תנאי השימוש של הקהילה המקוונת Catrobat על %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
+    item1: חלוק את העוגות שלך יחד עם המתכון
     item2: תן קרדיט לאלו שגרמו לך להשראה
   version: Version 1.1, 2 April 2013
 teachers:
@@ -231,7 +232,7 @@ termsOfUse:
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
     item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
+    item2: אם הנך מתחת לגיל 13, אז עליך לבקש מהוריך או מהממונים עליך לאפשר לך להשתמש בתוכנות והשירותים של Catrobat.
     item3: "We reserve the rights to reject, delete, or hide programs, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a program contains inappropriate material or that a user infringes on the rights of other persons."
     item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
@@ -475,8 +476,9 @@ menu:
   login: התחברות
   logout: התנתק
   admin: Admin
+  home: Home
 programLoader:
-  noPrograms: There are currently no programs.
+  noPrograms: אין כרגע תוכנות.
 login:
   login: התחברות
   passOrUser: שם המשתמש או הסיסמה שלך שגויים.
@@ -554,7 +556,7 @@ time:
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
   days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
   months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  years.ago: 'לפני יותר משנה'
 failure:
   upload: There was an error during the upload of your app.
 language:
@@ -642,7 +644,7 @@ admin:
     createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar programs
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Program Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: משתמשים שהורידו את התוכנה הזו הורידו גם
 pmd:
   submitBtn: Submit your project
   submitBox:
@@ -691,7 +693,7 @@ catro-notifications:
       messagePart1: created a new Program
       messagePart2: ', check it out.'
 clipboard:
-  success: Link to program copied to clipboard!
+  success: קישור לתוכנה הועתק ללוח!
   fail: Failed to copy link to clipboard! :(
 next: Next
 previous: Previous
@@ -707,3 +709,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: הורד
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: פוקטקוד
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

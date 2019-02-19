@@ -242,6 +242,7 @@ $program-tile-width: 85px;
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
+  justify-content: center;
 
   > .program {
 

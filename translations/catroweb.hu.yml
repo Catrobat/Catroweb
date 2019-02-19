@@ -5,6 +5,7 @@ password: Jelszó
 accountSettings: Account Settings
 email: E-mail
 aboutPocketCode: A Pocket Code-ról
+aboutCatrobat: A Catrobatról
 tutorials: Ismertetők
 googlePlay: Google Play
 passwordsNoMatch: A jelszó nem egyezik.
@@ -475,6 +476,7 @@ menu:
   login: Bejelentkezés
   logout: Kijelentkezés
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: Jelenleg nincsenek programok.
 login:
@@ -707,3 +709,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Letöltés
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

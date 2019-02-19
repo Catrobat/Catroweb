@@ -22,6 +22,7 @@
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
   <script>
+    {# seems to be needed for some behat tests #}
     let configGA = {
       'UaId': 'UA-42270417-5',
       //'DebugOutput' : true,
@@ -32,17 +33,20 @@
 
   {% block head %}{% endblock %}
 </head>
+
 <body class="new-nav">
- <header>
-    {% block header %}
-      {% include 'Default/header.html.twig' %}
-    {% endblock %}
-  </header>
+  <div id="wrapper">
+    <header>
+      {% block header %}
+        {% include 'Default/header.html.twig' %}
+      {% endblock %}
+    </header>
     {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
-  <div class="container">
-    {% block body %}{% endblock %}
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
   </div>
-</div>
+</body>
 
 {% block footer %}
   {% include 'Default/footer.html.twig' %}
@@ -96,5 +100,4 @@
   })
 </script>
 
-</body>
 </html>

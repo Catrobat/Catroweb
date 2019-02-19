@@ -5,6 +5,7 @@ password: Fjalëkalimi
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: Për Pocket Code
+aboutCatrobat: About Catrobat
 tutorials: Tutoriale
 googlePlay: Google Play
 passwordsNoMatch: Fjalëkalimet nuk përputhen.
@@ -136,13 +137,13 @@ passwordRecovery:
   subject: Rigjenerimi Fjalëkalimit tuaj
   message: |
     I dashur %username%.
-    
+
     Keni kërkuar të riktheni fjalëkalimin tuaj për %appplication_url% sepse e keni harruar fjalëkalimin. Nëse ju nuk e keni kërkuar këtë, ju lutem injoroje këtë mesazh. Kërkesa do të mbaroj dhe do të bëhet e pavlefshme pas 24 orëve. Për ta rikthyer fjalëkalimin tuaj dhe për të krijuar një tjetër, ju lutem vizitoni faqen në vazhdim:%confirmationUrl%
-    
+
     Mund ta përdorni emrin dhe fjalëkalimin tuaj për të pasur qasje në çdo kohë në %appplication_url% komunitet.
     Për ta bërë këtë, vizitoni: %loginPage%
     Për ti ndryshuar të dhënat tuaja, vizitoni: %profilePage%
-    
+
     Përshëndetje të sinqerta,
     Ekipa Catrobat.
 profile:
@@ -484,6 +485,7 @@ menu:
   login: Kyçuni
   logout: Dil
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: Për momentin nuk ka programe.
 login:
@@ -716,3 +718,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Shkarkoni
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

@@ -5,6 +5,7 @@ password: Пароль
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: О Pocket Code
+aboutCatrobat: О проекте Catrobat
 tutorials: Обучение
 googlePlay: Google Play
 passwordsNoMatch: Пароли не совпадают.
@@ -33,7 +34,7 @@ ok: ОК
 clickToDownloadProgram: 'Что бы скачать пример программы нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
 notifications: 'Уведомления'
-wellDone: "Well done!"
+wellDone: "Великолепно!"
 done: "Готово!"
 notificationsReadMessage: "You have read all notifications."
 notificationsClearedMessage: "All notifications have been marked as read."
@@ -44,11 +45,11 @@ indexPage:
   recommendedSection:
     info:
       title: 'What programs are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description: 'Чем больше лайков(в том числе и: "Палец вверх", "Смех", "Сердечко", и "Вау!") ваша программа получает, тем выше она в этом списке.'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
-    subtitle: Create stories, games and more...
+    title: Добро пожаловать в Catrobat's Pocket Code
+    subtitle: Создавайте истории, игры и многое другое...
     download: Download the app
     statistics: More Statistics
   featured: Рекомендуемые
@@ -136,17 +137,17 @@ passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
     %username%.
-    
+
     Мы получили запрос на восстановления вашего пароля на %appplication_url%. 
-    
+
     Для изменения пароля пройдите по ссылке: %confirmationUrl%
-    
+
     Если вы не делали такой запрос, Вам не нужно предпринимать никаких действий. Срок действия ссылки закончится через 24 часа.
-    
+
     Вы можете использовать свой логин и пароль для доступа к %appplication_url% в любое время. 
     Для этого просто перейдите по ссылке: %loginPage%
     Если вы хотите обновить свой профиль, используйте ссылку %profilePage%
-    
+
     С уважением,
     Команда Catrobat.
 profile:
@@ -487,6 +488,7 @@ menu:
   login: Войти
   logout: 1 день назад
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: На данный момент программы отсутствуют.
 login:
@@ -718,3 +720,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Скачать
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

@@ -5,6 +5,7 @@ password: Kata sandi
 accountSettings: Account Settings
 email: E-mail
 aboutPocketCode: Tentang Pocket Code
+aboutCatrobat: Tentang Catrobat
 tutorials: Tutorial
 googlePlay: Google Play
 passwordsNoMatch: Kata sandi tidak cocok.
@@ -136,14 +137,14 @@ passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat Anda
   message: |
     Yth. %username%.
-    
+
     Anda telah diminta untuk mengatur ulang kata sandi Anda pada %appplication_url% karena Anda telah lupa kata sandi Anda. Jika Anda tidak meminta ini, mohon abaikan. Ini akan berakhir dan menjadi tidak berlaku dalam waktu 24 jam.
     Untuk mengatur ulang kata sandi Anda dan membuat yang baru, silahkan kunjungi laman berikut: %confirmationUrl%
-    
+
     Anda dapat menggunakan nama pengguna dan kata sandi Anda setiap saat untuk mengakses komunitas %appplication_url%.
     Untuk melakukannya, kunjungi laman berikut: %loginPage%
     Untuk mengubah rincian profil Anda, buka laman ini: %profilePage%
-    
+
     Salam hormat,
     Tim Catrobat Anda.
 profile:
@@ -484,6 +485,7 @@ menu:
   login: Masuk
   logout: Logout
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: Saat ini ada tidak ada program.
 login:
@@ -716,3 +718,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Unduh
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

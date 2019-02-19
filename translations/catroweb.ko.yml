@@ -5,6 +5,7 @@ password: 비밀번호
 accountSettings: Account Settings
 email: 이메일
 aboutPocketCode: 포켓 코드에 대하여
+aboutCatrobat: Catrobat에 대하여
 tutorials: 튜토리얼
 googlePlay: 구글 플레이
 passwordsNoMatch: 비밀번호가 일치하지 않습니다.
@@ -136,11 +137,11 @@ passwordRecovery:
   subject: 당신의 포켓코드 비밀번호가 회복되었습니다
   message: |
     친애 하는 %username%.  당신은 비밀 번호를 잊어버려서 %appplication_url%에 비밀 번호 재설정을 요청 했습니다. 요청하지 않은 경우에는 무시하시기 바랍니다. 해지되어 24시간이내에 사용할 수 없게 될 것입니다. 비밀 번호를 재설정하고 새로운 비밀번호를 만들려면, 다음 페이지를 방문 하세오: %confirmationUrl%
-    
+
     당신은  %appplication_url% 커뮤니티에 언제라도 사용하기 위해서  사용자 이름과 비밀 번호를 사용할 수 있습니다.
     그렇게 하려면 다음 페이지를 방문하십시오: %loginPage%
     당신의 프로필 세부 정보를 편집하려면 이 페이지로 이동: %profilePage% 
-    
+
     안녕하세요, 
     Catrobat 팀.
 profile:
@@ -477,6 +478,7 @@ menu:
   login: 로그인
   logout: 로그아웃
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: 프로그램가 없습니다.
 login:
@@ -708,3 +710,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: 다운로드
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: 포켓 코드
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

@@ -5,6 +5,7 @@ password: Contrasinal
 accountSettings: Account Settings
 email: Correo electrónico
 aboutPocketCode: Sobre Pocket Code
+aboutCatrobat: Acerca de Catrobat
 tutorials: Titoriais
 googlePlay: Google Play
 passwordsNoMatch: Os contrasinais non coinciden.
@@ -483,6 +484,7 @@ menu:
   login: Iniciar sesión
   logout: Logout
   admin: Admin
+  home: Home
 programLoader:
   noPrograms: There are currently no programs.
 login:
@@ -715,3 +717,19 @@ help-cards:
     stepbystep: Do 10 easy steps in
     getinvolved_1: Descargar
     getinvolved_2: now from Google Play and get started!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School

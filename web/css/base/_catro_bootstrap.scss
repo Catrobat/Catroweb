@@ -5,105 +5,93 @@
 @import "sidebar";
 @import "theme_settings";
 
-html, body
-{
+html, body {
   margin: 0;
   height: 50%;
 }
 
-.right-inline
-{
+.right-inline {
   display: inline-flex;
   align-items: center;
   margin-left: auto;
   padding-left: 10px;
 }
 
-.navbar-small
-{
+.navbar-small {
   display: inherit;
 }
 
-.navbar-big
-{
+.navbar-big {
   display: none;
 }
 
 //################## Header ####################
 
-header
-{
+header {
   padding: 0;
 
   .dropdown-menu {
     background-color: $nav-dropdown-color;
   }
 
-  .catro-search-button
-  {
+  .catro-search-button {
     background-color: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.1);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left: none;
-    &:focus, &:active, &:hover, &:active:focus
-    {
+
+    &:focus, &:active, &:hover, &:active:focus {
       background-color: rgba(0, 0, 0, 0.1) !important;
       border: 1px rgba(0, 0, 0, 0.2) solid;
       border-left: none;
     }
   }
-  .search-input-header
-  {
+
+  .search-input-header {
     background-color: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.1);
     color: white;
 
-    &::placeholder
-    {
+    &::placeholder {
       color: white !important;
     }
-    &:focus
-    {
+
+    &:focus {
       background-color: rgba(0, 0, 0, 0.1);
       border: 1px rgba(0, 0, 0, 0.2) solid;
-      & + .catro-search-button
-      {
+
+      & + .catro-search-button {
         background-color: rgba(0, 0, 0, 0.1);
         border-color: rgba(0, 0, 0, 0.2);
       }
     }
   }
 
-  #bs-navbar-collapse
-  {
+  #bs-navbar-collapse {
     max-height: none;
 
-    .navbar-small
-    {
+    .navbar-small {
       padding-top: 15px;
       padding-bottom: 15px;
     }
 
-    .navbar-nav
-    {
+    .navbar-nav {
       margin: 0;
 
-      .navbar-form
-      {
+      .navbar-form {
         margin: 0;
       }
 
-      li
-      {
+      li {
         display: flex;
-        a
-        {
+
+        a {
           display: flex;
           visibility: visible;
           align-items: center;
-          h4
-          {
+
+          h4 {
             margin-left: auto;
           }
         }
@@ -112,67 +100,54 @@ header
   }
 }
 
-.navbar-brand
-{
+.navbar-brand {
   padding-top: 0;
   padding-bottom: 0;
   margin-right: 0;
 }
 
 // can/should be used for uniform width of page containers
-.content
-{
+.content {
   height: 100%;
 }
 
-@media screen and (min-width: map-get($grid-breakpoints, sm))
-{
-  .navbar-small
-  {
+@media screen and (min-width: map-get($grid-breakpoints, sm)) {
+  .navbar-small {
     display: none;
   }
 
-  .navbar-big
-  {
+  .navbar-big {
     display: inherit;
   }
 
-  #bs-navbar-collapse
-  {
-    .navbar-nav
-    {
+  #bs-navbar-collapse {
+    .navbar-nav {
       align-items: center;
       display: flex;
       padding-top: 25px;
 
-      li
-      {
+      li {
         padding: 5px;
 
-        a
-        {
+        a {
           padding-top: 0;
           padding-bottom: 0;
         }
 
-        span
-        {
+        span {
           margin-right: 10px;
         }
 
-        ul
-        {
+        ul {
           padding: 5px;
           min-width: 210px;
 
-          a
-          {
+          a {
             padding-top: 0;
             padding-bottom: 0;
           }
 
-          span
-          {
+          span {
             margin-right: 10px;
           }
         }
@@ -181,49 +156,44 @@ header
   }
 }
 
-@mixin tooltip-border-styles($borderColor)
-{
-  & + .tooltip
-  {
+@mixin tooltip-border-styles($borderColor) {
+  & + .tooltip {
     &.top .tooltip-arrow,
     &.top-left .tooltip-arrow,
-    &.top-right .tooltip-arrow
-    {
+    &.top-right .tooltip-arrow {
       border-top-color: $borderColor;
     }
+
     &.bottom .tooltip-arrow,
     &.bottom-left .tooltip-arrow,
-    &.bottom-right .tooltip-arrow
-    {
+    &.bottom-right .tooltip-arrow {
       border-bottom-color: $borderColor;
     }
-    &.right .tooltip-arrow
-    {
+
+    &.right .tooltip-arrow {
       border-right-color: $borderColor;
     }
-    &.left .tooltip-arrow
-    {
+
+    &.left .tooltip-arrow {
       border-left-color: $borderColor;
     }
   }
 }
 
-.btn-copy
-{
-  & > .tooltip .tooltip-inner
-  {
+.btn-copy {
+  & > .tooltip .tooltip-inner {
     background-color: $success;
   }
-  & > .tooltip > .arrow::before
-  {
+
+  & > .tooltip > .arrow::before {
     border-right-color: $success;
   }
+
   @include tooltip-border-styles($success);
 }
 
 // general card for catroweb
-.catro-card
-{
+.catro-card {
   border: 1px solid #ccc;
   border-radius: 6px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), -1px 2px 3px 0 rgba(0, 0, 0, 0.1);
@@ -231,14 +201,30 @@ header
   display: inline-block;
   position: relative;
   background: #fff;
-  .catro-content
-  {
-    padding: 15px;
+
+  .catro-content {
+    padding: 5%;
   }
 }
 
-.help-card.green
-{
+.help-card.primary {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#22c3cc+0,1cadba+100 */
+  background: $primary; /* Old browsers */
+  background: -moz-linear-gradient(top, lighten($primary, 30%) 0%, $primary 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, lighten($primary, 30%) 0%, $primary 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, lighten($primary, 30%) 0%, $primary 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=lighten($primary, 30%), $primary, GradientType=0); /* IE6-9 */
+  border: none;
+  box-shadow: inset lighten($primary, 50%) 0 0 0 5px;
+  color: $body-color;
+  text-shadow: 0 0 75px #FFFFFF;
+
+  img {
+    position: absolute;
+  }
+}
+
+.help-card.green {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fd639+0,8ab66b+44,4caf50+100 */
   background: #8fd639; /* Old browsers */
   background: -moz-linear-gradient(top, #8fd639 0%, #8ab66b 44%, #4caf50 100%); /* FF3.6-15 */
@@ -247,33 +233,26 @@ header
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8fd639', endColorstr='#4caf50', GradientType=0); /* IE6-9 */
   border: none;
   box-shadow: inset #a0df52 0 0 0 5px;
-  img
-  {
+
+  img {
     position: absolute;
-    right: -1px;
+    right: 0;
+    top: 40%;
   }
 }
 
-.help-card.blue
-{
+.help-card.blue {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#22c3cc+0,1cadba+100 */
-  background: #22c3cc; /* Old browsers */
+  background: $primary; /* Old browsers */
   background: -moz-linear-gradient(top, #22c3cc 0%, #1cadba 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #22c3cc 0%, #1cadba 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #22c3cc 0%, #1cadba 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#22c3cc', endColorstr='#1cadba', GradientType=0); /* IE6-9 */
   border: none;
   box-shadow: inset #5fd7de 0 0 0 5px;
-  img
-  {
-    position: absolute;
-    bottom: -1px;
-    right: 5px;
-  }
 }
 
-.help-card.yellow
-{
+.help-card.yellow {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2d554+0,e9bb3b+100 */
   background: #f2d554; /* Old browsers */
   background: -moz-linear-gradient(top, #f2d554 0%, #e9bb3b 100%); /* FF3.6-15 */
@@ -282,49 +261,117 @@ header
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2d554', endColorstr='#e9bb3b', GradientType=0); /* IE6-9 */
   border: none;
   box-shadow: inset #fae277 0 0 0 5px;
-  img
-  {
+}
+
+.help-card.purple {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b39fd3+0,7e6f97+100 */
+  background: #b39fd3; /* Old browsers */
+  background: -moz-linear-gradient(top, #b39fd3 0%, #7e6f97 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #b39fd3 0%, #7e6f97 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #b39fd3 0%, #7e6f97 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b39fd3', endColorstr='#7e6f97', GradientType=0); /* IE6-9 */
+  border: none;
+  box-shadow: inset #ccbce7 0 0 0 5px;
+}
+
+.help-card.dark-green {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00bc63+0,18a964+100 */
+  background: #00bc63; /* Old browsers */
+  background: -moz-linear-gradient(top, #00bc63 0%, #18a964 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #00bc63 0%, #18a964 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #00bc63 0%, #18a964 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00bc63', endColorstr='#18a964', GradientType=0); /* IE6-9 */
+  border: none;
+  box-shadow: inset #28d985 0 0 0 5px;
+}
+
+.help-card.brown {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b35e3d+0,a04d30+100 */
+  background: #b35e3d; /* Old browsers */
+  background: -moz-linear-gradient(top, #b35e3d 0%, #a04d30 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #b35e3d 0%, #a04d30 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #b35e3d 0%, #a04d30 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b35e3d', endColorstr='#a04d30', GradientType=0); /* IE6-9 */
+  border: none;
+  box-shadow: inset #ea8d5a 0 0 0 5px;
+}
+
+
+.help-card.starter {
+  img {
     position: absolute;
-    bottom: -1px;
-    right: -1px;
+    bottom: 24%;
+    right: 0;
   }
-  .catro-card-title
-  {
+}
+
+.help-card.tutorial {
+  img {
+    position: absolute;
+    bottom: 0;
+    right: 7%;
+  }
+}
+
+.help-card.apple {
+  img {
+    position: absolute;
+    top: 20%;
+    right: 7%;
+  }
+}
+
+.help-card.discuss {
+  img {
+    position: absolute;
+    top: 0;
+    right: 5%;
+  }
+}
+
+.help-card.education {
+  img {
+    position: absolute;
+    bottom: 0;
+    right: 7%;
+  }
+}
+
+.help-card.game {
+  img {
+    position: absolute;
+    bottom: 0;
+    right: 9%;
+  }
+}
+
+.step-by-step {
+  img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .catro-card-title {
     white-space: nowrap
   }
 }
 
-.help-card.google-play
-{
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2d554+0,e9bb3b+100 */
-  background: #f2d554; /* Old browsers */
-  background: -moz-linear-gradient(top, #f2d554 0%, #e9bb3b 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #f2d554 0%, #e9bb3b 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #f2d554 0%, #e9bb3b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2d554', endColorstr='#e9bb3b', GradientType=0); /* IE6-9 */
-  border: none;
-  box-shadow: inset #fae277 0 0 0 5px;
-
-  img
-  {
+.help-card.google-play {
+  img {
     position: absolute;
-    right: 20px;
-  }
-  .catro-card-title
-  {
-    white-space: nowrap
+    right: 7%;
+    top: 20%;
   }
 
-  &:hover
-  {
-    &:before
-    {
+  &:hover {
+    &:before {
       transform: translateX(900px) skewX(-15deg) !important;
       opacity: 0.6;
       transition: 1.5s;
     }
-    &:after
-    {
+
+    &:after {
       transform: translateX(900px) skewX(-15deg) !important;
       opacity: 1;
       transition: 1.5s;
@@ -332,44 +379,42 @@ header
   }
 }
 
-.help-card
-{
+.help-card {
   text-decoration: none;
   color: $body-color;
   display: block;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  padding-top: 15px;
+  padding-bottom: 15px;
   min-height: 195px;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-top: 15px;
+  margin-bottom: 15px;
   overflow: hidden;
   transition: 0.6s;
-  .catro-card-title
-  {
+
+  .catro-card-title {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.7em;
     margin-bottom: 0.7em;
     color: rgba(0, 0, 0, 0.7);
   }
-  .catro-content
-  {
-    b
-    {
+
+  .catro-content {
+    b {
       text-transform: uppercase;
     }
-    img
-    {
+
+    img {
+      height: 55%;
       transition: .7s;
     }
   }
 
-  &:focus
-  {
+  &:focus {
     outline: 0;
   }
-  &:before
-  {
+
+  &:before {
     content: '';
     display: block;
     position: absolute;
@@ -382,8 +427,8 @@ header
     filter: blur(30px);
     transform: translateX(-100px) skewX(-15deg);
   }
-  &:after
-  {
+
+  &:after {
     content: '';
     display: block;
     position: absolute;
@@ -396,67 +441,91 @@ header
     filter: blur(5px);
     transform: translateX(-100px) skewX(-15deg);
   }
-  &:hover
-  {
-    &:before
-    {
+
+  &:hover {
+    &:before {
       transform: translateX(500px) skewX(-15deg);
       opacity: 0.6;
       transition: 1.5s;
     }
-    &:after
-    {
+
+    &:after {
       transform: translateX(500px) skewX(-15deg);
       opacity: 1;
       transition: 1.5s;
     }
-    .catro-content img
-    {
+
+    .catro-content img {
       transform: scale(1.2);
     }
   }
 }
 
-.help-video-container
-{
-  iframe
-  {
-    margin-top: 1.5em;
-    min-height: 195px;
+#help-container {
+  display: flex;
+  flex-flow: row wrap;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.help-content {
+  flex-grow: 1;
+  min-width: 300px;
+  width: 30%;
+  margin: 0 10px 0 10px;
+}
+
+#welcome-section-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.help-video-container {
+  padding: 0 15px 0 15px;
+  border-radius: 5px;
+  min-width: 300px;
+  flex: 1;
+
+  iframe {
+    min-height: 250px;
+    height: 92.5%;
+    margin-top: 1.1em;
   }
 }
 
-.search-icon-header
-{
+.help-download-container {
+  min-width: 300px;
+  flex: 1;
+}
+
+.search-icon-header {
   color: $navbar-dark-color !important;
   text-decoration: none !important;
   font-size: 2.0em;
 }
 
-.bg-catrobat
-{
+.bg-catrobat {
   background-color: $primary;
 }
 
-.text-catrobat
-{
+.text-catrobat {
   color: $primary;
 }
 
-.theme-logo-title
-{
+.theme-logo-title {
   font-size: $theme-logo-font-size;
   font-weight: $theme-logo-font-weight;
 }
 
 $galaxy-button-background-color: #9583b2;
-#gamejam-submission
-{
+#gamejam-submission {
   @include gradient($galaxy-button-background-color, $galaxy-button-background-color, $galaxy-button-background-color);
 }
 
-.parting-line
-{
+.parting-line {
   border-top: 1px solid $primary;
 }
 

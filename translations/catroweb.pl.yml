@@ -1,25 +1,26 @@
 ---
-localLanguage: Angielski
+localLanguage: Polski
 username: Nazwa użytkownika
 password: Hasło
-accountSettings: Account Settings
+accountSettings: Ustawienia konta
 email: E-mail
 aboutPocketCode: O Pocket Code
+aboutCatrobat: O Catrobat
 tutorials: Poradniki
 googlePlay: Google Play
 passwordsNoMatch: Hasła nie pasują.
 error: Błąd
 cancel: Anuluj
 report: Zgłoś
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: Tak, usuń!
+reportIt: Tak, zgłoś to!
+areYouSure: Jesteś pewien?
+noWayOfReturn: To działanie jest nieodwracalne!
 download: Pobieranie
 description: Opis
 noDescription: Brak opisu.
 country: Kraj
-loginText: login
+loginText: zaloguj się
 privacyPolicy: Polityka prywatności
 imprint: Stopka
 somethingWentWrong: 'Ooooops coś poszło nie tak.'
@@ -27,8 +28,8 @@ pleaseTryAgain: 'Spróbuj ponownie!'
 oldVersionError: 'Zaktualizuj do najnowszej wersji Pocket code!'
 more: 'więcej'
 less: 'mniej'
-show-more: 'Show more'
-show-less: 'Show less'
+show-more: 'Pokaż więcej'
+show-less: 'Pokaż mniej'
 ok: OK
 clickToDownloadProgram: 'Aby pobrać przykładowy program kliknij %link_start% tutaj %link_end%.'
 registrationError: 'Nazwa użytkownika lub adres e-mail jest już zajęty.'
@@ -56,21 +57,21 @@ programs:
   recommended: Polecane programy
   noPrograms: Obecnie nie ma żadnych programów.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Na pewno?
+    Na pewno chcesz usunąć "%programName%"?
+    To jest nieodwracalne!
+    Tak, usuń!
+    Anuluj
+  reportCommentConfirmation: Na pewno chcesz zgłosić ten komentarz?
+  deleteCommentConfirmation: Na pewno chcesz usunąć ten komentarz?
   deleteAccountConfirmation: |+
-    Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded programs and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The program description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
+    Usunąć konto?
+    Na pewno chcesz usunąć swoje konto? Spowoduje to również usunięcie przesłanych programów i komentarzy!
+    To jest nieodwracalne!
+    Tak, usuń!
+    Anuluj
+  tooLongDescription: Opis programu jest za długi!
+  rudeWordsInDescription: Nie można używać brzydkich słów w opisie!
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
@@ -88,22 +89,22 @@ programs:
   submitted: Przesłane programy
   uploaded: Przesłane programy
   reportAsInappropriate: Zgłoś jako niewłaściwe
-  reportProgram: Report program
+  reportProgram: Zgłoś program
   languageVersion: 'Wersja języka Catrobat: %languageVersion%'
-  reportLoginText: Please %login% to report this program.
-  reportDialogHeader: Why do you want to report this program?
+  reportLoginText: Proszę, %login%, aby zgłosić ten program.
+  reportDialogHeader: Dlaczego chcesz zgłosić ten program?
   reportDialogReason: Podaj powód
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
+  reportRadioButtonInappropriate: To jest nieodpowiednie
+  reportRadioButtonCopyright: Naruszenie praw autorskich
+  reportRadioButtonSpam: To jest spam
+  reportRadioButtonDislike: Nie lubię tego
   reportOwnProgram: Nie możesz oflagować własnego programu.
-  reportAlready: You've already flagged this program.
-  reportDone: You reported this program!
+  reportAlready: Już oflagowałeś ten program.
+  reportDone: Zgłosiłeś ten program!
   updateAppHeader: Aktualizacja aplikacji
   updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji, aby móc pobrać ten program.
   btnClosePopup: OK
-  checkout_this_program: Sprawdź ten program z Catrobata
+  checkout_this_program: Sprawdź ten program z Catrobat
   show_more: Pokaż więcej
   comments: Komentarze
   send: Wyślij
@@ -111,25 +112,25 @@ programs:
   report: Zgłoś
   report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Zgłoszono
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  deleted_popup: Komentarz został pomyślnie usunięty.
+  deleted_popup_header: Usunięte
+  noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
   nolb_example: Przykładowe programy
-  editDescription: Edit the program Description
-  saveDescription: Save Description change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  link: Copy program link to clipboard
+  editDescription: Edytuj opis programu
+  saveDescription: Zapisz zmiany w Opisie
+  addComment: Napisz komentarz
+  thumbsUp: Kciuk do góry!
+  smile: Uśmiech!
+  love: Kocham!
+  wow: Wow!
+  link: Skopiuj link do programu do schowka
 remixGraph:
-  showRemixGraph: 'Pokaż Drzewo Remiksów'
+  showRemixGraph: 'Pokaż wykres remiksów'
   by: 'o'
   open: 'Otwórz'
   showPaths: 'Pokaż ścieżki'
   programNotAvailableErrorTitle: 'Przepraszamy...'
-  programNotAvailableErrorDescription: 'Program jest już niedostępny!'
+  programNotAvailableErrorDescription: 'Program nie jest już dostępny!'
   programNotAvailable: 'Niedostępny'
   programUnknownUser: 'Nieznany użytkownik'
 passwordRecovery:
@@ -138,26 +139,26 @@ passwordRecovery:
     Drogi %username%. 
     Żądasz zresetowania hasła do %appplication_url%, ponieważ zapomniałeś swojego hasła. Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna. 
     Aby zresetować hasło i utworzyć nowe, proszę odwiedzić następującą stronę: %confirmationUrl%
-    
+
     W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności %appplication_url%. 
     Aby to zrobić, odwiedź następującą stronę: %loginPage%
     Aby edytować swój profil, przejdź do tej strony: %profilePage% 
     Pozdrawiamy! 
     Twój zespół Catrobat.
 profile:
-  edit: Edit your profile
+  edit: Edytuj swój profil
   saveChanges: zapisz zmiany
   newPass: nowe hasło
   repeatPass: powtórz hasło
-  oldPass: old password
+  oldPass: stare hasło
   firstEmail: Mój pierwszy e-mail
   secondEmail: Mój drugi e-mail
   myPrograms: Moje programy
   follows: Follows
   follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of programs
+  unfollowUser: Przestań obserwować tego użytkownika!
+  followUser: Obserwuj tego użytkownika!
+  amountOfPrograms: Liczba programów
   form:
     passwordTooShort: Nowe hasło musi mieć co najmniej %length% znaków.
     passwordTooLong: Nowe hasło może mieć maksymalnie %length% znaków.
@@ -171,7 +172,7 @@ profile:
   programsOf: Programy
   changePicture: Zmień zdjęcie
   avatar:
-    noImage: No Image!
+    noImage: Brak obrazka!
     pictureTooLarge: Wybrane zdjęcie jest za duże, proszę, nie używaj zdjęć większych niż 5MB.
     uploadError: Przepraszamy, wystąpił błąd podczas wysyłania!
     noSupport: Ten typ obrazu nie jest obsługiwany, proszę wybierz inny obraz.
@@ -180,7 +181,7 @@ myprofile:
   edit: Edytuj
   done: Zrobione
   checkMail: E-mail został wysłany na Twój adres. Sprawdź swoją skrzynkę odbiorczą.
-  passwordUpdated: Your password was successfully updated.
+  passwordUpdated: Twoje hasło zostało pomyślnie zaktualizowane.
   avatar: Awatar
   email: E-mail
   editAvatar: Edytuj awatara
@@ -190,8 +191,8 @@ myprofile:
   editEmail: Edytuj e-mail
   deleteAccount: Usuń konto
   deleteAccountText: Jesteś pewien, że chcesz usunąć swoje konto? Spowoduje to usunięcie przesłanych programów i komentarzy!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
+  editAccountSettings: Edytuj ustawienia konta
+  notChangeVisibility: Nie można zmienić widoczności
   notChangeVisibilityReason: The language version of your program is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'Licencja na korzystanie'
@@ -394,7 +395,7 @@ help:
       three: "W tym przypadku, tło zmienia się, kiedy zostanie dotknięty obiekt na pierwszym planie."
     card10:
       title: "Pokaż zmienną"
-      description: "Pokaż wartość zmienną."
+      description: "Pokaż wartość zmiennej."
       one: "Dodaj obiekt, który ma zostać poruszany dzięki czujnikom w telefonie (zobacz %tutorial_card_link_7% samouczek 7 %link_end%). Dodatkowo możesz dodać drugie tło, które zmieni się po odebraniu wiadomości."
       two: "Wstaw poniższe bloczki, aby w zmiennych zapisać aktualne współrzędne położenia x i y poruszającego się obiektu."
       three: "Poprzez \"Pokaż zmienną\" można wyświetlać wartości w wybranym miejscu na scenie."
@@ -437,7 +438,7 @@ help:
     text7_2: "Kliknij na 'Dodaj pakiet' i wypełnij pakiet informacyjny. Zapisz i dodaj nową wersję. "
     text7_3: "Teraz możesz przesłać APK Twojego programu. Możesz znaleźć pobraną aplikację w folderze Pobrane. Najlepiej użyć eksploratora danych (np. ES File Explorer)."
     text7_4: "Uwaga: Jeśli aplikacji brakuje rozszerzenia '.apk', trzeba dodać '.apk' ręcznie. Wystarczy zmienić nazwę pliku. Teraz będziesz w stanie go przesłać."
-    text7_5: "Po wysyłania kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry."
+    text7_5: "Po wysłaniu kliknij 'OK', aby opublikować swoją grę. Później będziesz mógł pokazać ludziom link do pobrania gry."
     text7_6: "Przesłałeś swoją pierwszą grę na stronę Game Jolt i ustawiłeś ją jako aktywną. Gratulacje!"
     text7_7: "Teraz inni ludzie będą mogli znaleźć Twoją grę i pojawi się ona na stronie %link%."
   aliceGameJamTutorialcards:
@@ -479,6 +480,7 @@ menu:
   login: Logowanie
   logout: Wyloguj się
   admin: Administrator
+  home: Home
 programLoader:
   noPrograms: Obecnie nie ma żadnych programów.
 login:
@@ -488,17 +490,17 @@ login:
   forgotPass: Nie pamiętasz nazwy użytkownika lub hasła?
   recoverPass: Odzyskaj hasło
   recoverPassSend: E-mail został wysłany na Twój adres. Sprawdź swoją skrzynkę odbiorczą.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
+  alreadyReset: Hasło tego użytkownika zostało już wysłane w ciągu ostatnich 24 godzin.
   userOrEmail: Nazwa użytkownika lub e-mail
   changePass: Zmień hasło
   createAccount: Utwórz konto
-  noAccount: Don't have an account!
+  noAccount: Nie masz konta!
   alreadyAccount: Already having an account?
   or: lub
   username: Nazwa użytkownika
   email: Adres e-mail
   passwordFirst: Hasło
-  passwordSecond: Password Confirm
+  passwordSecond: Potwierdź hasło
 apk:
   download: Pobierz aplikację
   prepare: 'Przygotuj apkę'
@@ -548,7 +550,7 @@ errors:
   programversion:
     tooold: 'Przepraszamy, używasz starej wersji Pocket Code. Proszę, zaktualizuj do najnowszej wersji.'
 success:
-  text: Success
+  text: Sukces
   registration: Rejestracja udana!
   token: OK
   upload: Projekt został wysłany pomyślnie!
@@ -631,7 +633,7 @@ tags:
     tag6: Eksperymentalne
 admin:
   maintain:
-    diskMaintenance: Zarządzanie miejscem na dysku
+    diskMaintenance: Zarządzanie dyskiem
     ramMaintenance: RAM maintenance
     noRemovableObjects: Nie istnieją żadne usuwalne obiekty.
     removableObjects: Removable objects
@@ -676,23 +678,23 @@ privacy-policy:
   text9: W przypadku, gdy masz poniżej 14 lat, te zasady muszą zostać zaakceptowane przez opiekuna prawnego (zwykle rodzica).
   disagree-text: Bez Twojej zgody nie możemy stworzyć konta, ale podstawowe funkcje są nadal dostępne.
 catro-notifications:
-  markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  markAsRead: "Oznacz jako przeczytane"
+  summary: "{0}Nie masz nowych powiadomień|{1}Masz %amount% nowe powiadomienie!|]1,Inf]Masz %amount% nowych powiadomień!"
   comment:
     title: Nowy komentarz do programu %program_name%!
     messagePart1: Użytkownik
     messagePart2: skomentował(a) Twój program
   like:
-    title: New like for program %program_name%!
+    title: Nowe polubienie programu %program_name%!
     messagePart1: Użytkownik
-    messagePart2: liked your program
+    messagePart2: polubiono twój post
   follow:
-    title: New Follower!
-    message: follows you now.
+    title: Nowy Obserwator!
+    message: obserwuje Cię teraz.
     program-follow:
-      title: New Program from someone you follow
-      messagePart1: created a new Program
-      messagePart2: ', check it out.'
+      title: Nowy program użytkownika, którego obserwujesz
+      messagePart1: stworzył nowy Program
+      messagePart2: ', sprawdź to.'
 clipboard:
   success: Link do programu skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
@@ -710,3 +712,19 @@ help-cards:
     stepbystep: Zrób 10 prostych kroków w
     getinvolved_1: Pobieranie
     getinvolved_2: teraz z Google Play i rozpocznij pracę!
+media-packages:
+  title: Media-Packages
+  description: In the following categories you can find additional objects to add to you PocketCode programs.
+  thumb-size:
+    description: Preview Size
+    sm: small
+    md: medium
+    lg: large
+  theme-special: "%flavor% Theme Special"
+flavor:
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
