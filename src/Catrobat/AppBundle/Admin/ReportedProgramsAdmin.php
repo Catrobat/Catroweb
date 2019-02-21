@@ -12,8 +12,19 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+
+/**
+ * Class ReportedProgramsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class ReportedProgramsAdmin extends AbstractAdmin
 {
+
+  /**
+   * @param string $context
+   *
+   * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+   */
   public function createQuery($context = 'list')
   {
     $query = parent::createQuery();
@@ -38,7 +49,11 @@ class ReportedProgramsAdmin extends AbstractAdmin
 //  }
 
 
-  // Fields to be shown on filter forms
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -48,7 +63,12 @@ class ReportedProgramsAdmin extends AbstractAdmin
       ->add('program.visible');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -66,13 +86,18 @@ class ReportedProgramsAdmin extends AbstractAdmin
         ])
       ->add('program.visible', 'boolean', ['editable' => true])
       ->add('_action', 'actions', ['actions' => [
-        'show'            => ['template' => 'CRUD/list__action_show_reported_program_details.html.twig'],
+        'show'            => ['template' => 'Admin/CRUD/list__action_show_reported_program_details.html.twig'],
         'edit'            => [],
-        'unreportProgram' => ['template' => 'CRUD/list__action_unreportProgram.html.twig'],
+        'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProgram.html.twig'],
       ]]);
   }
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -87,6 +112,10 @@ class ReportedProgramsAdmin extends AbstractAdmin
         'required' => true,]);
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->add('unreportProgram');

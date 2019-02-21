@@ -13,6 +13,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserLikeSimilarityRelationRepository extends EntityRepository
 {
+  /**
+   *
+   */
   public function removeAllUserRelations()
   {
     $qb = $this->createQueryBuilder('ul');
@@ -23,6 +26,11 @@ class UserLikeSimilarityRelationRepository extends EntityRepository
       ->execute();
   }
 
+  /**
+   * @param User $user
+   *
+   * @return mixed
+   */
   public function getRelationsOfSimilarUsers(User $user)
   {
     $qb = $this->createQueryBuilder('ul');

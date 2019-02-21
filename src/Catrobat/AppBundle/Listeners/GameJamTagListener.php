@@ -3,17 +3,26 @@
 namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
-use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Entity\Program;
 
+/**
+ * Class GameJamTagListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class GameJamTagListener
 {
 
+  /**
+   * @param ProgramBeforePersistEvent $event
+   */
   public function onEvent(ProgramBeforePersistEvent $event)
   {
     $this->checkDescriptionTag($event->getProgramEntity());
   }
 
+  /**
+   * @param Program $program
+   */
   public function checkDescriptionTag(Program $program)
   {
     if ($program->getGamejam() == null || $program->getGamejam()->getHashtag() == null)

@@ -2,23 +2,34 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\MediaPackage;
+use Catrobat\AppBundle\Entity\MediaPackageCategory;
+use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-
+/**
+ * Class DefaultController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class DefaultController extends Controller
 {
+
   /**
    * @Route("/", name="index", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return Response
+   * @throws \Twig\Error\Error
    */
   public function indexAction(Request $request)
   {
@@ -55,7 +66,7 @@ class DefaultController extends Controller
         }
         else
         {
-          $info['url'] = $this->generateUrl('catrobat_web_program', ['id' => $item->getProgram()->getId()]);
+          $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId()]);
         }
       }
       else
@@ -67,37 +78,54 @@ class DefaultController extends Controller
       $featured[] = $info;
     }
 
-    return $this->get('templating')->renderResponse('index.html.twig', [
+    return $this->get('templating')->renderResponse('Index/index.html.twig', [
       'featured' => $featured,
     ]);
   }
 
+
   /**
    * @Route("/termsOfUse", name="termsOfUse", methods={"GET"})
+   *
+   * @return Response
+   * @throws \Twig\Error\Error
    */
   public function termsOfUseAction()
   {
-    return $this->get('templating')->renderResponse('termsOfUse.html.twig');
+    return $this->get('templating')->renderResponse('PrivacyAndTerms/termsOfUse.html.twig');
   }
+
 
   /**
    * @Route("/licenseToPlay", name="licenseToPlay", methods={"GET"})
+   *
+   * @return Response
+   * @throws \Twig\Error\Error
    */
   public function licenseToPlayAction()
   {
-    return $this->get('templating')->renderResponse('licenseToPlay.html.twig');
+    return $this->get('templating')->renderResponse('PrivacyAndTerms/licenseToPlay.html.twig');
   }
+
 
   /**
    * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
    * @Route("/media-library/{package_name}", name="media_package", methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $package_name
+   * @param string  $flavor
+   *
+   * @return Response
+   * @throws \Twig\Error\Error
    */
   public function MediaPackageAction(Request $request, $package_name, $flavor = 'pocketcode')
   {
     /**
-     * @var $package  \Catrobat\AppBundle\Entity\MediaPackage
-     * @var $file     \Catrobat\AppBundle\Entity\MediaPackageFile
-     * @var $category \Catrobat\AppBundle\Entity\MediaPackageCategory
+     * @var $package  MediaPackage
+     * @var $file     MediaPackageFile
+     * @var $category MediaPackageCategory
+     * @var $user     User
      */
     if ($request->query->get('username') && $request->query->get('token'))
     {
@@ -110,7 +138,6 @@ class DefaultController extends Controller
         $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
         $this->get('security.token_storage')->setToken($token);
         // now dispatch the login event
-        $request = $this->get("request");
         $event = new InteractiveLoginEvent($request, $token);
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
       }
@@ -155,13 +182,20 @@ class DefaultController extends Controller
       return ($a['priority'] > $b['priority']) ? -1 : 1;
     });
 
-    return $this->get('templating')->renderResponse('mediapackage.html.twig', [
+    return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
       'categories' => $categories,
     ]);
   }
 
   /**
    * @Route("/click-statistic", name="click_stats", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return Response
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Geocoder\Exception\Exception
    */
   public function makeClickStatisticAction(Request $request)
   {
@@ -213,6 +247,11 @@ class DefaultController extends Controller
 
   /**
    * @Route("/homepage-click-statistic", name="homepage_click_stats", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return Response
+   * @throws \Exception
    */
   public function makeNonRecommendedProgramClickStatisticAction(Request $request)
   {
@@ -234,15 +273,19 @@ class DefaultController extends Controller
     }
   }
 
+
   /**
    * @param $flavor
-   * @param $category
+   * @param $category MediaPackageCategory
    * @param $files
    *
    * @return array
    */
   private function generateDownloadUrl($flavor, $category, $files)
   {
+    /**
+     * @var $file MediaPackageFile
+     */
     foreach ($category->getFiles() as $file)
     {
       $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
@@ -256,11 +299,11 @@ class DefaultController extends Controller
         'data'        => $file,
         'downloadUrl' => $this->generateUrl('download_media', [
             'id'    => $file->getId(),
-            'fname' => $file->getName()]
+            'fname' => $file->getName()
+          ]
         ),
       ];
     }
-
     return $files;
   }
 }

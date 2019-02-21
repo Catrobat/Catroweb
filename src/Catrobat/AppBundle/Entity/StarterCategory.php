@@ -70,17 +70,17 @@ class StarterCategory
   }
 
   /**
-   * @param mixed $programs
+   * @param Program $program
    */
-  public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
+  public function addProgram(Program $program)
   {
     $program->setCategory($this);
   }
 
   /**
-   * @param mixed $programs
+   * @param Program $program
    */
-  public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
+  public function removeProgram(Program $program)
   {
     $program->setCategory(null);
   }
@@ -133,6 +133,9 @@ class StarterCategory
     $this->order = $order;
   }
 
+  /**
+   * @return string
+   */
   public function __toString()
   {
     return (string)$this->alias;

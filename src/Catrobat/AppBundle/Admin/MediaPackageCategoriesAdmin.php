@@ -10,12 +10,30 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+
+/**
+ * Class MediaPackageCategoriesAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class MediaPackageCategoriesAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'adminmedia_package_category';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'media_package_category';
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -27,12 +45,22 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
       ->add('priority');
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper

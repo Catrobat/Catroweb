@@ -3,7 +3,7 @@
 namespace Catrobat\AppBundle\Commands;
 
 use Catrobat\AppBundle\Entity\RemixManager;
-use Catrobat\AppBundle\Listeners\RemixUpdater;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Catrobat\AppBundle\Services\RemixData;
 use Catrobat\AppBundle\Entity\Program;
@@ -23,6 +23,10 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 
+/**
+ * Class MigrateRemixGraphsCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class MigrateRemixGraphsCommand extends ContainerAwareCommand
 {
   /**
@@ -70,9 +74,19 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
    */
   private $migration_file_lock;
 
+  /**
+   * MigrateRemixGraphsCommand constructor.
+   *
+   * @param Filesystem     $filesystem
+   * @param UserManager    $user_manager
+   * @param ProgramManager $program_manager
+   * @param RemixManager   $remix_manager
+   * @param EntityManager  $entity_manager
+   * @param                $app_root_dir
+   */
   public function __construct(Filesystem $filesystem, UserManager $user_manager,
-                              ProgramManager $program_manager, RemixManager $remix_manager,
-                              EntityManager $entity_manager, $app_root_dir)
+                                 ProgramManager $program_manager, RemixManager $remix_manager,
+                                 EntityManager $entity_manager, $app_root_dir)
   {
     parent::__construct();
     $this->file_system = $filesystem;
@@ -86,6 +100,9 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $this->migration_file_lock = null;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:remixgraph:migrate')
@@ -96,6 +113,9 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
       ->addOption('debug-import-missing-programs', InputOption::VALUE_OPTIONAL);
   }
 
+  /**
+   * @param $signal_number
+   */
   public function signalHandler($signal_number)
   {
     $this->output->writeln('[SignalHandler] Called Signal Handler');
@@ -121,6 +141,15 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     exit(-1);
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     declare(ticks=1);
@@ -152,8 +181,21 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $this->migrateRemixDataOfExistingPrograms($output, $directory);
   }
 
+  /**
+   * @param OutputInterface $output
+   * @param                 $directory
+   *
+   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory)
   {
+    /**
+     * @var $program Program
+     * @var $unmigrated_program Program
+     */
     $migration_start_time = new \DateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | ' .
@@ -299,6 +341,15 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }
 
+  /**
+   * @param                 $program_file_path
+   * @param                 $program_id
+   * @param                 $program_name
+   * @param OutputInterface $output
+   * @param ProgressBar     $progress_bar
+   *
+   * @return array
+   */
   private function extractRemixData($program_file_path, $program_id, $program_name, OutputInterface $output, ProgressBar $progress_bar)
   {
     /** @var CatrobatFileExtractor $file_extractor */
@@ -359,11 +410,22 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     return $result;
   }
 
+  /**
+   * @param Program $program
+   * @param array   $remixes_data
+   * @param bool    $is_update
+   *
+   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   private function addRemixData(Program $program, array $remixes_data, $is_update = false)
   {
     assert($program != null);
     $scratch_remixes_data = array_filter($remixes_data, function ($remix_data) {
-      /** @var RemixData $remix_data */
+      /**
+       * @var RemixData $remix_data
+       */
       return $remix_data->isScratchProgram();
     });
     $scratch_info_data = [];
@@ -371,6 +433,9 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     if (count($scratch_remixes_data) > 0)
     {
       $scratch_ids = array_map(function ($data) {
+        /**
+         * @var $data RemixData
+         */
         return $data->getProgramId();
       }, $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
@@ -390,6 +455,15 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $this->entity_manager->clear();
   }
 
+  /**
+   * @param OutputInterface $output
+   * @param                 $directory
+   * @param                 $username
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   private function debugImportMissingPrograms(OutputInterface $output, $directory, $username)
   {
     $finder = new Finder();
@@ -424,7 +498,10 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
 
     foreach ($finder as $program_file_path)
     {
-      /** @var CatrobatFileExtractor $fileextractor */
+      /**
+       * @var CatrobatFileExtractor $fileextractor
+       * @var $user User
+       */
       $fileextractor = $this->getContainer()->get('fileextractor');
       $program_file = new File($program_file_path);
       $extracted_file = $fileextractor->extract($program_file);
@@ -501,46 +578,5 @@ class MigrateRemixGraphsCommand extends ContainerAwareCommand
     $progress_bar->finish();
     $output->writeln('');
     $output->writeln('<info>Imported ' . $number_imported_programs . ' programs (Skipped ' . $skipped . ')</info>');
-  }
-}
-
-class MigrationFileLock
-{
-  private $lock_file_path;
-  private $lock_file;
-  private $output;
-
-  public function __construct($app_root_dir, OutputInterface $output)
-  {
-    $this->lock_file_path = $app_root_dir . '/' . RemixUpdater::MIGRATION_LOCK_FILE_NAME;
-    $this->lock_file = null;
-    $this->output = $output;
-  }
-
-  public function lock()
-  {
-    $this->lock_file = fopen($this->lock_file_path, 'w+');
-    $this->output->writeln('[MigrationFileLock] Trying to acquire lock...');
-    while (flock($this->lock_file, LOCK_EX) == false)
-    {
-      $this->output->writeln('[MigrationFileLock] Waiting for file lock to be released...');
-      sleep(1);
-    }
-
-    $this->output->writeln('[MigrationFileLock] Lock acquired...');
-    fwrite($this->lock_file, 'Migration of remixes in progress...');
-  }
-
-  public function unlock()
-  {
-    if ($this->lock_file == null)
-    {
-      return;
-    }
-
-    $this->output->writeln('[MigrationFileLock] Lock released...');
-    flock($this->lock_file, LOCK_UN);
-    fclose($this->lock_file);
-    @unlink($this->lock_file_path);
   }
 }

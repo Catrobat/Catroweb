@@ -81,6 +81,8 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws \Exception
    */
   public function updateTimestamps()
   {
@@ -208,11 +210,17 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     return $this;
   }
 
+  /**
+   * @return string
+   */
   public function getUniqueKey()
   {
     return sprintf("ProgramRemixRelation(%d,%d,%d)", $this->ancestor_id, $this->descendant_id, $this->depth);
   }
 
+  /**
+   * @return string
+   */
   public function __toString()
   {
     return "(#" . $this->ancestor_id . ", #" . $this->descendant_id . ", depth: " . $this->depth . ")";

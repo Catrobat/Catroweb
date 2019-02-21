@@ -2,11 +2,18 @@
 
 namespace Catrobat\AppBundle\Exceptions;
 
+/**
+ * Class InvalidStorageDirectoryException
+ * @package Catrobat\AppBundle\Exceptions
+ */
 class InvalidStorageDirectoryException extends \RuntimeException
 {
-  /*
- * (non-PHPdoc) @see RuntimeException::__construct()
- */
+
+  /**
+   * InvalidStorageDirectoryException constructor.
+   *
+   * @param $message
+   */
   public function __construct($message)
   {
     parent::__construct($message);

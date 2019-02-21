@@ -2,17 +2,38 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
+use Catrobat\AppBundle\Services\FacebookPostService;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
+
+/**
+ * Class ProgramFbPostListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class ProgramFbPostListener
 {
+  /**
+   * @var FacebookPostService
+   */
   private $facebook_post_service;
 
+  /**
+   * ProgramFbPostListener constructor.
+   *
+   * @param $facebook_post_service
+   */
   public function __construct($facebook_post_service)
   {
     $this->facebook_post_service = $facebook_post_service;
   }
 
+  /**
+   * @param PostResponseEvent $event
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Facebook\Exceptions\FacebookSDKException
+   */
   public function onTerminateEvent(PostResponseEvent $event)
   {
     $attributes = $event->getRequest()->attributes;

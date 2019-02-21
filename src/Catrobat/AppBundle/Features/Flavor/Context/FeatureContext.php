@@ -4,8 +4,6 @@ namespace Catrobat\AppBundle\Features\Flavor\Context;
 
 use Behat\Gherkin\Node\TableNode;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
-use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use PHPUnit\Framework\Assert;
 
@@ -17,9 +15,9 @@ class FeatureContext extends BaseContext
 {
 
   /**
-   * Initializes context with parameters from behat.yml.
+   * FeatureContext constructor.
    *
-   * @param array $parameters
+   * @param $error_directory
    */
   public function __construct($error_directory)
   {
@@ -27,8 +25,11 @@ class FeatureContext extends BaseContext
     $this->setErrorDirectory($error_directory);
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Support Functions
+  /**
+   * @return UploadedFile
+   */
   private function getStandardProgramFile()
   {
     $filepath = self::FIXTUREDIR . 'test.catrobat';
@@ -37,7 +38,7 @@ class FeatureContext extends BaseContext
     return new UploadedFile($filepath, 'test.catrobat');
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////
 
   /**
@@ -88,6 +89,8 @@ class FeatureContext extends BaseContext
    * @When /^I get the recent programs with "([^"]*)"$/
    * @When /^I get the most downloaded programs with "([^"]*)"$/
    * @When /^I get the most viewed programs with "([^"]*)"$/
+   *
+   * @param $url
    */
   public function iGetTheMostProgramsWith($url)
   {
@@ -96,6 +99,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get following programs:$/
+   *
+   * @param TableNode $table
    */
   public function iShouldGetFollowingPrograms(TableNode $table)
   {
@@ -121,6 +126,11 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are programs:$/
+   *
+   * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereArePrograms(TableNode $table)
   {
@@ -141,11 +151,13 @@ class FeatureContext extends BaseContext
    */
   public function allProgramsAreFromTheSameUser()
   {
-    // /
+    //
   }
 
   /**
    * @When /^I get the user\'s programs with "([^"]*)"$/
+   *
+   * @param $url
    */
   public function iGetTheUserSProgramsWith($url)
   {

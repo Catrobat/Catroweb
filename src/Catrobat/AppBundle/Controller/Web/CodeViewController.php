@@ -5,6 +5,11 @@ namespace Catrobat\AppBundle\Controller\Web;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\ParsedSceneProgram;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
+/**
+ * Class CodeViewController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class CodeViewController extends Controller
 {
 
@@ -37,6 +42,6 @@ class CodeViewController extends Controller
       'path'           => $web_path,
     ];
 
-    return $this->get('templating')->renderResponse('codeview.html.twig', $code_view_twig_params);
+    return $this->get('templating')->renderResponse('Program/codeview.html.twig', $code_view_twig_params);
   }
 }

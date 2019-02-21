@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class CollisionScript
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class CollisionScript extends Script
 {
+  /**
+   * @return mixed|void
+   */
   protected function create()
   {
     $this->type = Constants::COLLISION_SCRIPT;

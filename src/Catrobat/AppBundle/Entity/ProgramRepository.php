@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+
 /**
  * ProgramRepository.
  *
@@ -14,10 +15,27 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProgramRepository extends EntityRepository
 {
+  /**
+   * @var array
+   */
   private $cached_most_remixed_programs_full_result = [];
+  /**
+   * @var array
+   */
   private $cached_most_liked_programs_full_result = [];
+  /**
+   * @var array
+   */
   private $cached_most_downloaded_other_programs_full_result = [];
 
+  /**
+   * @param null $flavor
+   * @param int  $limit
+   * @param int  $offset
+   * @param int  $max_version
+   *
+   * @return mixed
+   */
   public function getMostDownloadedPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -47,6 +65,14 @@ class ProgramRepository extends EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * @param null $flavor
+   * @param int  $limit
+   * @param int  $offset
+   * @param int  $max_version
+   *
+   * @return mixed
+   */
   public function getMostViewedPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -77,6 +103,12 @@ class ProgramRepository extends EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * @param $limit
+   * @param $offset
+   *
+   * @return string
+   */
   private function generateUnionSqlStatementForMostRemixedPrograms($limit, $offset)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -119,6 +151,15 @@ class ProgramRepository extends EntityRepository
         ";
   }
 
+
+  /**
+   * @param string $flavor
+   * @param int    $limit
+   * @param int    $offset
+   *
+   * @return array
+   * @throws \Doctrine\DBAL\DBALException
+   */
   public function getMostRemixedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
   {
     if (!isset($this->cached_most_remixed_programs_full_result[$flavor]))
@@ -143,6 +184,12 @@ class ProgramRepository extends EntityRepository
     return $programs;
   }
 
+  /**
+   * @param string $flavor
+   *
+   * @return int
+   * @throws \Doctrine\DBAL\DBALException
+   */
   public function getTotalRemixedProgramsCount($flavor = 'pocketcode')
   {
     if (isset($this->cached_most_remixed_programs_full_result[$flavor]))
@@ -160,6 +207,13 @@ class ProgramRepository extends EntityRepository
     return count($this->cached_most_remixed_programs_full_result[$flavor]);
   }
 
+  /**
+   * @param string $flavor
+   * @param int    $limit
+   * @param int    $offset
+   *
+   * @return array
+   */
   public function getMostLikedPrograms($flavor = 'pocketcode', $limit = 20, $offset = 0)
   {
     if (isset($this->cached_most_liked_programs_full_result[$flavor]))
@@ -198,6 +252,11 @@ class ProgramRepository extends EntityRepository
     }, $results);
   }
 
+  /**
+   * @param string $flavor
+   *
+   * @return int
+   */
   public function getTotalLikedProgramsCount($flavor = 'pocketcode')
   {
     if (isset($this->cached_most_liked_programs_full_result[$flavor]))
@@ -210,6 +269,15 @@ class ProgramRepository extends EntityRepository
     return count($this->cached_most_liked_programs_full_result[$flavor]);
   }
 
+  /**
+   * @param $flavor string
+   * @param $program Program
+   * @param $limit
+   * @param $offset
+   * @param $is_test_environment
+   *
+   * @return array
+   */
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $program, $limit, $offset, $is_test_environment)
   {
     $cache_key = $flavor . '_' . $program->getId();
@@ -264,7 +332,14 @@ class ProgramRepository extends EntityRepository
     }, $results);
   }
 
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount($flavor = 'pocketcode', $program, $is_test_environment)
+  /**
+   * @param $flavor string
+   * @param $program Program
+   * @param $is_test_environment
+   *
+   * @return int
+   */
+  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount($flavor, $program, $is_test_environment)
   {
     $cache_key = $flavor . '_' . $program->getId();
     if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key]))
@@ -278,6 +353,14 @@ class ProgramRepository extends EntityRepository
     return count($this->cached_most_downloaded_other_programs_full_result[$cache_key]);
   }
 
+  /**
+   * @param null $flavor
+   * @param int  $limit
+   * @param int  $offset
+   * @param int  $max_version
+   *
+   * @return mixed
+   */
   public function getRecentPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -308,6 +391,14 @@ class ProgramRepository extends EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * @param null $flavor
+   * @param int  $limit
+   * @param int  $offset
+   * @param int  $max_version
+   *
+   * @return array
+   */
   public function getRandomPrograms($flavor = null, $limit = 20, $offset = 0, $max_version = 0)
   {
     // Rand(), newid() and TABLESAMPLE() doesn't exist in the Native Query therefore we have to do a workaround
@@ -336,6 +427,12 @@ class ProgramRepository extends EntityRepository
     return $array_programs;
   }
 
+  /**
+   * @param     $flavor
+   * @param int $max_version
+   *
+   * @return mixed
+   */
   public function getVisibleProgramIds($flavor, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -385,6 +482,12 @@ class ProgramRepository extends EntityRepository
     }, $result);
   }
 
+  /**
+   * @param $search_terms
+   * @param $metadata
+   *
+   * @return string
+   */
   public function getAppendableSqlStringForEveryTerm($search_terms, $metadata)
   {
     $sql = '';
@@ -426,6 +529,14 @@ class ProgramRepository extends EntityRepository
     return $sql;
   }
 
+  /**
+   * @param     $query
+   * @param int $limit
+   * @param int $offset
+   * @param int $max_version
+   *
+   * @return array
+   */
   public function search($query, $limit = 10, $offset = 0, $max_version = 0)
   {
     $em = $this->getEntityManager();
@@ -534,6 +645,12 @@ class ProgramRepository extends EntityRepository
     }, $result);
   }
 
+  /**
+   * @param     $query
+   * @param int $max_version
+   *
+   * @return int
+   */
   public function searchCount($query, $max_version = 0)
   {
     $em = $this->getEntityManager();
@@ -595,6 +712,9 @@ class ProgramRepository extends EntityRepository
     return count($result);
   }
 
+  /**
+   *
+   */
   public function markAllProgramsAsNotYetMigrated()
   {
     $qb = $this->createQueryBuilder('p');
@@ -607,6 +727,12 @@ class ProgramRepository extends EntityRepository
       ->execute();
   }
 
+  /**
+   * @param $previous_program_id
+   *
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function findNext($previous_program_id)
   {
     $qb = $this->createQueryBuilder('p');
@@ -620,6 +746,12 @@ class ProgramRepository extends EntityRepository
       ->getSingleScalarResult();
   }
 
+  /**
+   * @param     $user_id
+   * @param int $max_version
+   *
+   * @return mixed
+   */
   public function getUserPrograms($user_id, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -641,6 +773,13 @@ class ProgramRepository extends EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * @param null $flavor
+   * @param int  $max_version
+   *
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function getTotalPrograms($flavor = null, $max_version = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -668,6 +807,11 @@ class ProgramRepository extends EntityRepository
     return $qb->getQuery()->getSingleScalarResult();
   }
 
+  /**
+   * @param $apk_status
+   *
+   * @return mixed
+   */
   public function getProgramsWithApkStatus($apk_status)
   {
     $qb = $this->createQueryBuilder('e');
@@ -680,6 +824,9 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @return mixed
+   */
   public function getProgramsWithExtractedDirectoryHash()
   {
     $qb = $this->createQueryBuilder('e');
@@ -691,6 +838,13 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param     $id
+   * @param int $limit
+   * @param int $offset
+   *
+   * @return mixed
+   */
   public function getProgramsByTagId($id, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -708,6 +862,11 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param array $program_ids
+   *
+   * @return mixed
+   */
   public function getProgramDataByIds(Array $program_ids)
   {
     $qb = $this->createQueryBuilder('p');
@@ -724,6 +883,13 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param     $name
+   * @param int $limit
+   * @param int $offset
+   *
+   * @return mixed
+   */
   public function getProgramsByExtensionName($name, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -741,6 +907,12 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param int $limit
+   * @param int $offset
+   *
+   * @return mixed
+   */
   public function getProgramsFromNolbUser($limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -757,6 +929,11 @@ class ProgramRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param $query
+   *
+   * @return int
+   */
   public function searchTagCount($query)
   {
     $query = str_replace("yahoo", "", $query);
@@ -776,6 +953,11 @@ class ProgramRepository extends EntityRepository
     return count($result);
   }
 
+  /**
+   * @param $query
+   *
+   * @return int
+   */
   public function searchExtensionCount($query)
   {
     $qb = $this->createQueryBuilder('e');
@@ -794,6 +976,12 @@ class ProgramRepository extends EntityRepository
   }
 
 
+  /**
+   * @param        $id
+   * @param string $flavor
+   *
+   * @return int
+   */
   public function getRecommendedProgramsCount($id, $flavor = 'pocketcode')
   {
     $qb_tags = $this->createQueryBuilder('e');
@@ -844,7 +1032,15 @@ class ProgramRepository extends EntityRepository
 
   }
 
-  public function getRecommendedProgramsById($id, $flavor = 'pocketcode', $limit, $offset)
+  /**
+   * @param        $id
+   * @param string $flavor
+   * @param        $limit
+   * @param        $offset
+   *
+   * @return array
+   */
+  public function getRecommendedProgramsById($id, $flavor, $limit, $offset)
   {
 
     $qb_tags = $this->createQueryBuilder('e');

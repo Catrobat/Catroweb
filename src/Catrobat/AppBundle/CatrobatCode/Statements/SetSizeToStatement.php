@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class SetSizeToStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class SetSizeToStatement extends BaseSetToStatement
 {
   const BEGIN_STRING = "size";
   const END_STRING = ")%<br/>";
 
+  /**
+   * SetSizeToStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,6 +25,9 @@ class SetSizeToStatement extends BaseSetToStatement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
@@ -22,11 +36,12 @@ class SetSizeToStatement extends BaseSetToStatement
     return "Set size to " . $formula_string_without_markup . "%";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_green.png";
   }
 
 }
-
-?>

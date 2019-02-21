@@ -2,6 +2,10 @@
 
 namespace Catrobat\AppBundle\Services\CatrobatCodeParser;
 
+/**
+ * Class Constants
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser
+ */
 class Constants
 {
   // Attributes

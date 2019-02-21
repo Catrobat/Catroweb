@@ -146,6 +146,9 @@ class User extends BaseUser implements LdapUserInterface
    */
   protected $nolb_user = false;
 
+  /**
+   * User constructor.
+   */
   public function __construct()
   {
     parent::__construct();
@@ -240,11 +243,11 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * Add programs.
    *
-   * @param \Catrobat\AppBundle\Entity\Program $programs
+   * @param Program $programs
    *
    * @return User
    */
-  public function addProgram(\Catrobat\AppBundle\Entity\Program $programs)
+  public function addProgram(Program $programs)
   {
     $this->programs[] = $programs;
 
@@ -254,9 +257,9 @@ class User extends BaseUser implements LdapUserInterface
   /**
    * Remove programs
    *
-   * @param \Catrobat\AppBundle\Entity\Program $programs
+   * @param Program $programs
    */
-  public function removeProgram(\Catrobat\AppBundle\Entity\Program $programs)
+  public function removeProgram(Program $programs)
   {
     $this->programs->removeElement($programs);
   }
@@ -271,21 +274,35 @@ class User extends BaseUser implements LdapUserInterface
     return $this->programs;
   }
 
+  /**
+   * @return mixed
+   */
   public function getUploadToken()
   {
     return $this->upload_token;
   }
 
+  /**
+   * @param $upload_token
+   */
   public function setUploadToken($upload_token)
   {
     $this->upload_token = $upload_token;
   }
 
+  /**
+   * @return string
+   */
   public function getCountry()
   {
     return $this->country;
   }
 
+  /**
+   * @param $country
+   *
+   * @return $this
+   */
   public function setCountry($country)
   {
     $this->country = $country;
@@ -293,6 +310,9 @@ class User extends BaseUser implements LdapUserInterface
     return $this;
   }
 
+  /**
+   * @param $id
+   */
   public function setId($id)
   {
     $this->id = $id;
@@ -316,11 +336,19 @@ class User extends BaseUser implements LdapUserInterface
     return $this->additional_email;
   }
 
+  /**
+   * @return mixed
+   */
   public function getAvatar()
   {
     return $this->avatar;
   }
 
+  /**
+   * @param $avatar
+   *
+   * @return $this
+   */
   public function setAvatar($avatar)
   {
     $this->avatar = $avatar;
@@ -349,11 +377,17 @@ class User extends BaseUser implements LdapUserInterface
     return $this->dn;
   }
 
+  /**
+   * @return bool
+   */
   public function isLimited()
   {
     return $this->limited;
   }
 
+  /**
+   * @param $limited
+   */
   public function setLimited($limited)
   {
     $this->limited = $limited;
@@ -399,16 +433,27 @@ class User extends BaseUser implements LdapUserInterface
     return $this->followers;
   }
 
+  /**
+   * @param $follower
+   */
   public function addFollower($follower)
   {
     $this->followers->add($follower);
   }
 
+  /**
+   * @param $follower
+   */
   public function removeFollower($follower)
   {
     $this->followers->removeElement($follower);
   }
 
+  /**
+   * @param $user
+   *
+   * @return bool
+   */
   public function hasFollower($user)
   {
     return $this->followers->contains($user);
@@ -422,16 +467,27 @@ class User extends BaseUser implements LdapUserInterface
     return $this->following;
   }
 
+  /**
+   * @param $follower
+   */
   public function addFollowing($follower)
   {
     $this->following->add($follower);
   }
 
+  /**
+   * @param $follower
+   */
   public function removeFollowing($follower)
   {
     $this->following->removeElement($follower);
   }
 
+  /**
+   * @param $user
+   *
+   * @return bool
+   */
   public function isFollowing($user)
   {
     return $this->following->contains($user);

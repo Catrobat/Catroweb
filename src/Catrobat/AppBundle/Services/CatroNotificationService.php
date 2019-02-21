@@ -79,7 +79,7 @@ class CatroNotificationService
   }
 
   /**
-   * @param array $notifications
+   * @param \Generator $notifications
    *
    * @throws \Doctrine\ORM\ORMException
    * @throws \Doctrine\ORM\OptimisticLockException

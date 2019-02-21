@@ -4,9 +4,18 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class TemplateRepository
+ * @package Catrobat\AppBundle\Entity
+ */
 class TemplateRepository extends EntityRepository
 {
 
+  /**
+   * @param $active
+   *
+   * @return mixed
+   */
   public function findByActive($active)
   {
     $qb = $this->createQueryBuilder('e');

@@ -4,14 +4,27 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="media_package_file")
  */
 class MediaPackageFile
 {
+
+  /**
+   * @var
+   */
   public $file;
+
+  /**
+   * @var
+   */
   public $removed_id;
+
+  /**
+   * @var
+   */
   public $old_extension;
 
   /**
@@ -40,7 +53,6 @@ class MediaPackageFile
    * @ORM\ManyToOne(targetEntity="MediaPackageCategory", inversedBy="files")
    */
   protected $category;
-
 
   /**
    * @ORM\Column(type="boolean")

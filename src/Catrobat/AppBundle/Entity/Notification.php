@@ -22,9 +22,9 @@ class Notification
   private $id;
 
   /**
-   * @var \stdClass
+   * @var User
    *
-   * @ORM\OneToOne(targetEntity="\Catrobat\AppBundle\Entity\User")
+   * @ORM\OneToOne(targetEntity="User")
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
    */
   private $user;
@@ -50,6 +50,9 @@ class Notification
    */
   private $summary;
 
+  /**
+   * @return string
+   */
   public function __toString()
   {
     if (is_object($this->user))
@@ -87,7 +90,7 @@ class Notification
   /**
    * Get user.
    *
-   * @return \Catrobat\AppBundle\Entity\User
+   * @return User
    */
   public function getUser()
   {

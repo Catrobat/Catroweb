@@ -12,8 +12,17 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class FeaturedProgram
 {
+  /**
+   * @var File
+   */
   public $file;
+  /**
+   * @var
+   */
   public $removed_id;
+  /**
+   * @var
+   */
   public $old_image_type;
 
   /**
@@ -111,11 +120,11 @@ class FeaturedProgram
   /**
    * Set program.
    *
-   * @param \Catrobat\AppBundle\Entity\Program $program
+   * @param Program $program
    *
    * @return FeaturedProgram
    */
-  public function setProgram(\Catrobat\AppBundle\Entity\Program $program = null)
+  public function setProgram(Program $program = null)
   {
     $this->program = $program;
 
@@ -132,11 +141,19 @@ class FeaturedProgram
     return $this->program;
   }
 
+  /**
+   * @return mixed
+   */
   public function getUrl()
   {
     return $this->url;
   }
 
+  /**
+   * @param $url
+   *
+   * @return $this
+   */
   public function setUrl($url)
   {
     $this->url = $url;
@@ -144,11 +161,19 @@ class FeaturedProgram
     return $this;
   }
 
+  /**
+   * @return mixed
+   */
   public function getActive()
   {
     return $this->active;
   }
 
+  /**
+   * @param $active
+   *
+   * @return $this
+   */
   public function setActive($active)
   {
     $this->active = $active;
@@ -156,6 +181,9 @@ class FeaturedProgram
     return $this;
   }
 
+  /**
+   * @param File $file
+   */
   public function setNewFeaturedImage(File $file)
   {
     $this->file = $file;

@@ -10,8 +10,18 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+
+/**
+ * Class GameJamAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class GameJamAdmin extends AbstractAdmin
 {
+
+  /**
+   * @return mixed
+   * @throws \Exception
+   */
   public function getNewInstance()
   {
     $instance = parent::getNewInstance();
@@ -22,10 +32,16 @@ class GameJamAdmin extends AbstractAdmin
     return $instance;
   }
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
-    $returnurl = $this->getConfigurationPool()->getContainer()->get('router')->generate('gamejam_form_submission', ["id" => 42], true);
+    $returnurl = $this->getConfigurationPool()->getContainer()->get('router')
+      ->generate('gamejam_form_submission', ["id" => 42], true);
     $returnurl = str_replace('42', '%CAT_ID%', $returnurl);
     $flavor = $this->getFlavorOptions();
     $formMapper
@@ -39,9 +55,14 @@ class GameJamAdmin extends AbstractAdmin
       ->add('flavor', ChoiceType::class, ['choices' => $flavor])
       ->add('start')
       ->add('end')
-      ->add('sample_programs', null, ['class' => 'Catrobat\AppBundle\Entity\Program'], ['admin_code' => 'catrowebadmin.block.programs.all']);
+      ->add('sample_programs', null, ['class' => 'Catrobat\AppBundle\Entity\Program'],
+        ['admin_code' => 'catrowebadmin.block.programs.all']);
   }
 
+
+  /**
+   * @return array
+   */
   private function getFlavorOptions()
   {
     $flavors = $this->getConfigurationPool()->getContainer()->getParameter('gamejam');
@@ -57,7 +78,11 @@ class GameJamAdmin extends AbstractAdmin
   }
 
 
-  // Fields to be shown on filter forms
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -67,7 +92,12 @@ class GameJamAdmin extends AbstractAdmin
       ->add('end');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -81,10 +111,14 @@ class GameJamAdmin extends AbstractAdmin
       ->add('_action', 'actions', ['actions' => [
         'edit'             => [],
         'delete'           => [],
-        'show_submissions' => ['template' => 'CRUD/list__action_show_submitted_programs.html.twig'],
+        'show_submissions' => ['template' => 'Admin/CRUD/list__action_show_submitted_programs.html.twig'],
       ]]);
   }
 
+
+  /**
+   * @param ShowMapper $showMapper
+   */
   protected function configureShowFields(ShowMapper $showMapper)
   {
     // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
@@ -95,10 +129,7 @@ class GameJamAdmin extends AbstractAdmin
       ->add('flavor')
       ->add('start')
       ->add('end')
-      ->add('sample_programs', null, ['class'      => Program::class,
-                                      'admin_code' => 'catrowebadmin.block.programs.all'],
-        ['admin_code' => 'catrowebadmin.block.programs.all']);
-
+      ->add('sample_programs', null,
+        ['class' => Program::class, 'admin_code' => 'catrowebadmin.block.programs.all']);
   }
-
 }

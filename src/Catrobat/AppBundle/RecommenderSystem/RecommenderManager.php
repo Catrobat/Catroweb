@@ -2,9 +2,12 @@
 
 namespace Catrobat\AppBundle\RecommenderSystem;
 
+use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramLikeRepository;
 use Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository;
+use Catrobat\AppBundle\Entity\ProgramRemixRelation;
 use Catrobat\AppBundle\Entity\ProgramRemixRepository;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Entity\UserLikeSimilarityRelation;
 use Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository;
@@ -13,6 +16,10 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 
+/**
+ * Class RecommenderManager
+ * @package Catrobat\AppBundle\RecommenderSystem
+ */
 class RecommenderManager
 {
   const RECOMMENDER_LOCK_FILE_NAME = 'CatrobatRecommender.lock';
@@ -51,16 +58,24 @@ class RecommenderManager
    */
   private $program_remix_backward_repository;
 
+
   /**
+   * RecommenderManager constructor.
+   *
    * @param EntityManager                         $entity_manager
    * @param UserManager                           $user_manager
    * @param UserLikeSimilarityRelationRepository  $user_like_similarity_relation_repository
    * @param UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository
    * @param ProgramLikeRepository                 $program_like_repository
+   * @param ProgramRemixRepository                $program_remix_repository
+   * @param ProgramRemixBackwardRepository        $program_remix_backward_repository
    */
-  public function __construct($entity_manager, $user_manager, $user_like_similarity_relation_repository,
-                              $user_remix_similarity_relation_repository, $program_like_repository,
-                              $program_remix_repository, $program_remix_backward_repository)
+  public function __construct(EntityManager $entity_manager, UserManager $user_manager,
+                              UserLikeSimilarityRelationRepository $user_like_similarity_relation_repository,
+                              UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository,
+                              ProgramLikeRepository $program_like_repository,
+                              ProgramRemixRepository $program_remix_repository,
+                              ProgramRemixBackwardRepository $program_remix_backward_repository)
   {
     $this->entity_manager = $entity_manager;
     $this->user_manager = $user_manager;
@@ -71,6 +86,10 @@ class RecommenderManager
     $this->program_remix_backward_repository = $program_remix_backward_repository;
   }
 
+  /**
+   * @param $array1
+   * @param $array2
+   */
   private function imitateMerge(&$array1, &$array2)
   {
     foreach ($array2 as $i)
@@ -79,17 +98,24 @@ class RecommenderManager
     }
   }
 
+  /**
+   *
+   */
   public function removeAllUserLikeSimilarityRelations()
   {
     $this->user_like_similarity_relation_repository->removeAllUserRelations();
   }
 
+  /**
+   *
+   */
   public function removeAllUserRemixSimilarityRelations()
   {
     $this->user_remix_similarity_relation_repository->removeAllUserRelations();
   }
 
   /**
+   *
    * Collaborative Filtering by using Jaccard Distance
    * As in this case we have to deal with TRUE/FALSE ratings (i.e. user liked the program OR has not seen/liked it yet)
    * the Jaccard distance is used to measure the similarity between two users.
@@ -101,16 +127,26 @@ class RecommenderManager
    * @time_complexity: O(n^2 * m)
    *
    * @param ProgressBar $progress_bar
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function computeUserLikeSimilarities($progress_bar = null)
   {
     $users = $this->user_manager->findAll();
     $rated_users = array_unique(array_filter($users, function ($user) {
+      /**
+       * @var $user User
+       */
       return (count($this->program_like_repository->findBy(['user_id' => $user->getId()])) > 0);
     }));
 
     $already_added_relations = [];
 
+    /**
+     * @var $first_user User
+     * @var $second_user User
+     */
     foreach ($rated_users as $first_user)
     {
       if ($progress_bar != null)
@@ -120,6 +156,9 @@ class RecommenderManager
 
       $first_user_likes = $this->program_like_repository->findBy(['user_id' => $first_user->getId()]);
       $ids_of_programs_liked_by_first_user = array_map(function ($like) {
+        /**
+         * @var $like ProgramLike
+         */
         return $like->getProgramId();
       }, $first_user_likes);
 
@@ -138,6 +177,9 @@ class RecommenderManager
         $already_added_relations[] = $key;
         $second_user_likes = $this->program_like_repository->findBy(['user_id' => $second_user->getId()]);
         $ids_of_programs_liked_by_second_user = array_map(function ($like) {
+          /**
+           * @var $like ProgramLike
+           */
           return $like->getProgramId();
         }, $second_user_likes);
 
@@ -172,8 +214,18 @@ class RecommenderManager
     }
   }
 
+  /**
+   * @param $user
+   * @param $flavor
+   *
+   * @return array
+   */
   public function recommendProgramsOfLikeSimilarUsers($user, $flavor)
   {
+    /**
+     * @var $user User
+     * @var $r UserLikeSimilarityRelation
+     */
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
     // NOTE: If you modify this parameter, some tests will intentionally fail as they rely on the value of this parameter!
@@ -198,6 +250,9 @@ class RecommenderManager
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_liked_programs = array_unique(array_map(function ($like) {
+      /**
+       * @var $like ProgramLike
+       */
       return $like->getProgramId();
     }, $all_likes_of_user));
 
@@ -208,6 +263,9 @@ class RecommenderManager
     $programs_liked_by_others = [];
     foreach ($differing_likes as $differing_like)
     {
+      /**
+       * @var $differing_like ProgramLike
+       */
       $key = $differing_like->getProgramId();
       assert(!in_array($key, $excluded_ids_of_liked_programs));
 
@@ -228,6 +286,7 @@ class RecommenderManager
   }
 
   /**
+   *
    * Collaborative Filtering by using Jaccard Distance
    * As in this case we have to deal with TRUE/FALSE values (i.e. user remixed the program OR not yet)
    * the Jaccard distance is used to measure the similarity between two users.
@@ -238,7 +297,10 @@ class RecommenderManager
    * @see            : http://infolab.stanford.edu/~ullman/mmds/ch9.pdf (section 9.3)
    * @time_complexity: O(n^2 * m)
    *
+   *
    * @param ProgressBar $progress_bar
+   *
+   * @throws \Doctrine\DBAL\DBALException
    */
   public function computeUserRemixSimilarities($progress_bar = null)
   {
@@ -330,8 +392,19 @@ class RecommenderManager
     }
   }
 
+  /**
+   * @param $user
+   * @param $flavor
+   *
+   * @return array
+   */
   public function recommendProgramsOfRemixSimilarUsers($user, $flavor)
   {
+    /**
+     * @var $user User
+     * @var $r UserLikeSimilarityRelation
+     * @var $relation_of_differing_parent ProgramRemixRelation
+     */
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 3-4
     // NOTE: If you modify this parameter, some tests will intentionally fail as they rely on the value of this parameter!

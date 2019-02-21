@@ -3,26 +3,43 @@
 namespace Catrobat\AppBundle\Admin;
 
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
+use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\File\File;
 
+
+/**
+ * Class MediaPackageFileAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class MediaPackageFileAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'adminmedia_package_file';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'media_package_file';
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $file_options = [
       'required' => ($this->getSubject()->getId() === null),];
-//        if ($this->getSubject()->getId() != null) {
-//            $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($this->getSubject()).'">';
-//        }
 
     $formMapper
       ->add('name', TextType::class, ['label' => 'Name'])
@@ -35,15 +52,12 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->add('active', null, ['required' => false]);
   }
 
-  // Fields to be shown on filter forms
-//    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-//    {
-//        $datagridMapper
-//            ->add('program', null, array('class' => 'Catrobat\AppBundle\Entity\Program', 'admin_code' => 'catrowebadmin.block.programs.all'))
-//        ;
-//    }
 
-  // Fields to be shown on lists
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -63,8 +77,16 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ]);
   }
 
+
+  /**
+   * @param $object MediaPackageFile
+   */
   public function prePersist($object)
   {
+    /**
+     * @var $file File
+     */
+
     $file = $object->file;
     if ($file == null)
     {
@@ -73,18 +95,37 @@ class MediaPackageFileAdmin extends AbstractAdmin
     $object->setExtension($file->guessExtension());
   }
 
+
+  /**
+   * @param $object MediaPackageFile
+   *
+   * @throws \ImagickException
+   */
   public function postPersist($object)
   {
+    /**
+     * @var $file File
+     */
+
     $file = $object->file;
     if ($file == null)
     {
       return;
     }
-    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')->save($file, $object->getId(), $object->getExtension());
+    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
+      ->save($file, $object->getId(), $object->getExtension());
   }
 
+
+  /**
+   * @param $object MediaPackageFile
+   */
   public function preUpdate($object)
   {
+    /**
+     * @var $file File
+     */
+
     $object->old_extension = $object->getExtension();
     $object->setExtension(null);
 
@@ -98,6 +139,12 @@ class MediaPackageFileAdmin extends AbstractAdmin
     $object->setExtension($file->guessExtension());
   }
 
+
+  /**
+   * @param $object MediaPackageFile
+   *
+   * @throws \ImagickException
+   */
   public function postUpdate($object)
   {
     $file = $object->file;
@@ -105,16 +152,26 @@ class MediaPackageFileAdmin extends AbstractAdmin
     {
       return;
     }
-    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')->save($file, $object->getId(), $object->getExtension());
+    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
+      ->save($file, $object->getId(), $object->getExtension());
   }
 
+
+  /**
+   * @param $object MediaPackageFile
+   */
   public function preRemove($object)
   {
     $object->removed_id = $object->getId();
   }
 
+
+  /**
+   * @param $object MediaPackageFile
+   */
   public function postRemove($object)
   {
-    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')->remove($object->removed_id, $object->getExtension());
+    $this->getConfigurationPool()->getContainer()->get('mediapackagefilerepository')
+      ->remove($object->removed_id, $object->getExtension());
   }
 }

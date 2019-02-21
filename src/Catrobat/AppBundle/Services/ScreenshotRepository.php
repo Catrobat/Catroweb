@@ -6,20 +6,54 @@ use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use WebDriver\Log;
 
+/**
+ * Class ScreenshotRepository
+ * @package Catrobat\AppBundle\Services
+ */
 class ScreenshotRepository
 {
   const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
   const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
+  /**
+   * @var string|string[]|null
+   */
   private $thumbnail_dir;
+  /**
+   * @var string|string[]|null
+   */
   private $thumbnail_path;
+  /**
+   * @var string|string[]|null
+   */
   private $screenshot_dir;
+  /**
+   * @var string|string[]|null
+   */
   private $screenshot_path;
+  /**
+   * @var
+   */
   private $imagick;
+  /**
+   * @var string|string[]|null
+   */
   private $tmp_path;
+  /**
+   * @var string|string[]|null
+   */
   private $tmp_dir;
 
+  /**
+   * ScreenshotRepository constructor.
+   *
+   * @param $screenshot_dir
+   * @param $screenshot_path
+   * @param $thumbnail_dir
+   * @param $thumbnail_path
+   * @param $tmp_dir
+   * @param $tmp_path
+   */
   public function __construct($screenshot_dir, $screenshot_path, $thumbnail_dir, $thumbnail_path, $tmp_dir, $tmp_path)
   {
     $screenshot_dir = preg_replace('/([^\/]+)$/', '$1/', $screenshot_dir);
@@ -28,7 +62,6 @@ class ScreenshotRepository
     $thumbnail_path = preg_replace('/([^\/]+)$/', '$1/', $thumbnail_path);
     $tmp_dir = preg_replace('/([^\/]+)$/', '$1/', $tmp_dir);
     $tmp_path = preg_replace('/([^\/]+)$/', '$1/', $tmp_path);
-    $fs = new Filesystem();
 
     if (!is_dir($screenshot_dir))
     {
@@ -53,12 +86,24 @@ class ScreenshotRepository
     $this->tmp_path = $tmp_path;
   }
 
+  /**
+   * @param $screenshot_filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
   public function saveProgramAssets($screenshot_filepath, $id)
   {
     $this->saveScreenshot($screenshot_filepath, $id);
     $this->saveThumbnail($screenshot_filepath, $id);
   }
 
+  /**
+   * @param $filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
   public function saveScreenshot($filepath, $id)
   {
     $screen = $this->getImagick();
@@ -68,6 +113,12 @@ class ScreenshotRepository
     $screen->destroy();
   }
 
+  /**
+   * @param $filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
   private function saveThumbnail($filepath, $id)
   {
     $thumb = $this->getImagick();
@@ -77,11 +128,21 @@ class ScreenshotRepository
     $thumb->destroy();
   }
 
+  /**
+   * @param $id
+   *
+   * @return string
+   */
   private function generateFileNameFromId($id)
   {
     return 'screen_' . $id . '.png';
   }
 
+  /**
+   * @param $id
+   *
+   * @return string
+   */
   public function getScreenshotWebPath($id)
   {
     if (file_exists($this->screenshot_dir . $this->generateFileNameFromId($id)))
@@ -92,6 +153,11 @@ class ScreenshotRepository
     return self::DEFAULT_SCREENSHOT;
   }
 
+  /**
+   * @param $id
+   *
+   * @return string
+   */
   public function getThumbnailWebPath($id)
   {
     if (file_exists($this->thumbnail_dir . $this->generateFileNameFromId($id)))
@@ -102,6 +168,11 @@ class ScreenshotRepository
     return self::DEFAULT_THUMBNAIL;
   }
 
+  /**
+   * @param $screenshot_filepath
+   * @param $thumbnail_filepath
+   * @param $id
+   */
   public function importProgramAssets($screenshot_filepath, $thumbnail_filepath, $id)
   {
     $filesystem = new Filesystem();
@@ -109,6 +180,10 @@ class ScreenshotRepository
     $filesystem->copy($thumbnail_filepath, $this->thumbnail_dir . $this->generateFileNameFromId($id));
   }
 
+  /**
+   * @return \Imagick
+   * @throws \ImagickException
+   */
   public function getImagick()
   {
     if ($this->imagick == null)
@@ -119,16 +194,26 @@ class ScreenshotRepository
     return $this->imagick;
   }
 
+  /**
+   * @param $id
+   */
   public function deleteThumbnail($id)
   {
     $this->deleteFiles($this->thumbnail_dir, $id);
   }
 
+  /**
+   * @param $id
+   */
   public function deleteScreenshot($id)
   {
     $this->deleteFiles($this->screenshot_dir, $id);
   }
 
+  /**
+   * @param $directory
+   * @param $id
+   */
   private function deleteFiles($directory, $id)
   {
     try
@@ -140,18 +225,30 @@ class ScreenshotRepository
     }
   }
 
+  /**
+   * @param $screenshot_filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
   public function saveProgramAssetsTemp($screenshot_filepath, $id)
   {
     $this->saveScreenshotTemp($screenshot_filepath, $id);
     $this->saveThumbnailTemp($screenshot_filepath, $id);
   }
 
+  /**
+   * @param $id
+   */
   public function makeTempProgramAssetsPerm($id)
   {
     $this->makeScreenshotPerm($id);
     $this->makeThumbnailPerm($id);
   }
 
+  /**
+   * @param $id
+   */
   public function makeScreenshotPerm($id)
   {
     $filesystem = new Filesystem();
@@ -159,6 +256,9 @@ class ScreenshotRepository
     $filesystem->remove($this->tmp_dir . $this->generateFileNameFromId($id));
   }
 
+  /**
+   * @param $id
+   */
   public function makeThumbnailPerm($id)
   {
     $filesystem = new Filesystem();
@@ -166,6 +266,12 @@ class ScreenshotRepository
     $filesystem->remove($this->tmp_dir . "thumb/" . $this->generateFileNameFromId($id));
   }
 
+  /**
+   * @param $filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
   public function saveScreenshotTemp($filepath, $id)
   {
     $screen = $this->getImagick();
@@ -175,6 +281,12 @@ class ScreenshotRepository
     $screen->destroy();
   }
 
+  /**
+   * @param $filepath
+   * @param $id
+   *
+   * @throws \ImagickException
+   */
   private function saveThumbnailTemp($filepath, $id)
   {
     $thumb = $this->getImagick();
@@ -200,6 +312,9 @@ class ScreenshotRepository
       ]);
   }
 
+  /**
+   * @param $id
+   */
   public function deletePermProgramAssets($id)
   {
     $this->deleteScreenshot($id);
@@ -219,6 +334,9 @@ class ScreenshotRepository
     $this->removeDirectory($this->tmp_dir);
   }
 
+  /**
+   * @param $directory
+   */
   private function removeDirectory($directory)
   {
     foreach (glob("{$directory}*") as $file)
@@ -234,6 +352,9 @@ class ScreenshotRepository
     }
   }
 
+  /**
+   * @param $directory
+   */
   private function recursiveRemoveDirectory($directory)
   {
     foreach (glob("{$directory}/*") as $file)

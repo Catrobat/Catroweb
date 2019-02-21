@@ -12,6 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+  /**
+   * @param $language
+   *
+   * @return mixed
+   */
   public function getConstantTags($language)
   {
     $qb = $this->createQueryBuilder('e');
@@ -22,6 +27,12 @@ class TagRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param $program_id
+   * @param $language
+   *
+   * @return mixed
+   */
   public function getTagsWithProgramIdAndLanguage($program_id, $language)
   {
     $qb = $this->createQueryBuilder('e');

@@ -6,7 +6,6 @@ use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\User;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,13 +13,22 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Translation\TranslatorInterface;
 
+
+/**
+ * Class MediaPackageController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class MediaPackageController extends Controller
 {
+
   /**
    * @Route("/media-library", name="media_library_overview", methods={"GET"})
    * @Route("/pocket-library", name="pocket_library_overview", methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
-  public function indexAction(LoggerInterface $logger)
+  public function indexAction()
   {
     /**
      * @var $user       \Catrobat\AppBundle\Entity\User
@@ -34,7 +42,7 @@ class MediaPackageController extends Controller
     $em = $this->getDoctrine()->getManager();
     $packages = $em->getRepository(MediaPackage::class)->findAll();
 
-    return $this->get('templating')->renderResponse('mediapackageindex.html.twig',
+    return $this->get('templating')->renderResponse('MediaLibrary/mediapackageindex.html.twig',
       [
         'packages' => $packages,
         'new_nav'  => true,
@@ -42,16 +50,17 @@ class MediaPackageController extends Controller
     );
   }
 
+
   /**
-   *
    * @Route("/pocket-library/{package_name}", name="pocket_library", methods={"GET"})
    * @Route("/media-library/{package_name}", name="media_package", methods={"GET"})
    *
    * @param Request $request
    * @param         $package_name
-   * @param string $flavor
+   * @param string  $flavor
    *
-   * @return mixed
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function MediaPackageAction(Request $request, $package_name, $flavor = 'pocketcode')
   {
@@ -62,7 +71,9 @@ class MediaPackageController extends Controller
      * @var $user     User
      * @var $token    UsernamePasswordToken
      * @var $event    InteractiveLoginEvent
+     * @var TranslatorInterface $translator
      */
+
 //    if($request->query->get('username') && $request->query->get('token'))
 //    {
 //      $username = $request->query->get('username');
@@ -100,9 +111,6 @@ class MediaPackageController extends Controller
       $nolb = $user->getNolbUser();
     }
 
-    /**
-     * @var TranslatorInterface $translator
-     */
     $translator = $this->get('translator');
 
     $categories = [];
@@ -141,22 +149,27 @@ class MediaPackageController extends Controller
       return ($a['priority'] > $b['priority']) ? -1 : 1;
     });
 
-    return $this->get('templating')->renderResponse('mediapackage.html.twig', [
+    return $this->get('templating')->renderResponse('MediaLibrary/mediapackage.html.twig', [
       'flavor'     => $flavor,
       'categories' => $categories,
       'new_nav'    => true,
     ]);
   }
 
+
   /**
    * @param $flavor
-   * @param $category
+   * @param $category MediaPackageCategory
    * @param $files
    *
    * @return array
    */
   private function generateDownloadUrl($flavor, $category, $files)
   {
+    /**
+     * @var $file MediaPackageFile
+     */
+
     foreach ($category->getFiles() as $file)
     {
       $flavors_arr = preg_replace("/ /", "", $file->getFlavor());

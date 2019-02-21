@@ -5,20 +5,36 @@ namespace Catrobat\AppBundle\Commands;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
+
+/**
+ * Class CleanExtractedFileCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CleanExtractedFileCommand extends ContainerAwareCommand
 {
+  /**
+   * @var
+   */
   private $output;
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:clean:extracted')
       ->setDescription('Delete the extracted programs and sets the directory hash to NULL');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;

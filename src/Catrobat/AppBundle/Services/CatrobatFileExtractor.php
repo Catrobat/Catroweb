@@ -3,16 +3,31 @@
 namespace Catrobat\AppBundle\Services;
 
 use Symfony\Component\HttpFoundation\File\File;
-use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
-use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidArchiveException;
 
+
+/**
+ * Class CatrobatFileExtractor
+ * @package Catrobat\AppBundle\Services
+ */
 class CatrobatFileExtractor
 {
+  /**
+   * @var
+   */
   private $extract_dir;
+  /**
+   * @var
+   */
   private $extract_path;
 
+  /**
+   * CatrobatFileExtractor constructor.
+   *
+   * @param $extract_dir
+   * @param $extract_path
+   */
   public function __construct($extract_dir, $extract_path)
   {
     if (!is_dir($extract_dir))
@@ -23,6 +38,11 @@ class CatrobatFileExtractor
     $this->extract_path = $extract_path;
   }
 
+  /**
+   * @param File $file
+   *
+   * @return ExtractedCatrobatFile
+   */
   public function extract(File $file)
   {
     $temp_path = hash('md5', time() . mt_rand());
@@ -45,11 +65,17 @@ class CatrobatFileExtractor
     return new ExtractedCatrobatFile($full_extract_dir, $full_extract_path, $temp_path);
   }
 
+  /**
+   * @return mixed
+   */
   public function getExtractDir()
   {
     return $this->extract_dir;
   }
 
+  /**
+   * @return mixed
+   */
   public function getExtractPath()
   {
     return $this->extract_path;

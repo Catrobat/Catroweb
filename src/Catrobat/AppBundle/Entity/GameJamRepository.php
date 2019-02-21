@@ -5,8 +5,17 @@ namespace Catrobat\AppBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
+/**
+ * Class GameJamRepository
+ * @package Catrobat\AppBundle\Entity
+ */
 class GameJamRepository extends EntityRepository
 {
+  /**
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws \Exception
+   */
   public function getCurrentGameJam()
   {
     $qb = $this->createQueryBuilder('e');
@@ -19,6 +28,10 @@ class GameJamRepository extends EntityRepository
       ->getQuery()->getOneOrNullResult();
   }
 
+  /**
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function getLatestGameJam()
   {
     $qb = $this->createQueryBuilder('e');
@@ -30,6 +43,12 @@ class GameJamRepository extends EntityRepository
       ->getQuery()->getOneOrNullResult();
   }
 
+  /**
+   * @param $flavor
+   *
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function getLatestGameJamByFlavor($flavor)
   {
     $qb = $this->createQueryBuilder('e');
@@ -43,6 +62,9 @@ class GameJamRepository extends EntityRepository
       ->getQuery()->getOneOrNullResult();
   }
 
+  /**
+   * @return mixed
+   */
   public function getUsedFlavors()
   {
     $qb = $this->createQueryBuilder('e');

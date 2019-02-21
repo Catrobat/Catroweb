@@ -13,16 +13,39 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+
+/**
+ * Class ApproveProgramsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class ApproveProgramsAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_approve_programs';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'approve';
 
+  /**
+   * @var null
+   */
   private $extractedProgram = null;
 
+
+  /**
+   * @param string $context
+   *
+   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+   */
   public function createQuery($context = 'list')
   {
     /**
@@ -30,15 +53,19 @@ class ApproveProgramsAdmin extends AbstractAdmin
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->eq($query->getRootAlias() . '.approved', $query->expr()->literal(false))
+      $query->expr()->eq($query->getRootAliases()[0] . '.approved', $query->expr()->literal(false))
     );
     $query->andWhere(
-      $query->expr()->eq($query->getRootAlias() . '.visible', $query->expr()->literal(true))
+      $query->expr()->eq($query->getRootAliases()[0] . '.visible', $query->expr()->literal(true))
     );
 
     return $query;
   }
 
+
+  /**
+   * @param ShowMapper $showMapper
+   */
   protected function configureShowFields(ShowMapper $showMapper)
   {
     // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
@@ -61,16 +88,26 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('', null, ['template' => 'Admin/program_approve_action.html.twig']);
   }
 
+
+  /**
+   * @param $program
+   *
+   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
+   */
   public function preUpdate($program)
   {
     /**
      * @var $program Program
+     * @var $model_manager ModelManager
      */
-    $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
+    $model_manager = $this->getModelManager();
+    $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
+      ->getOriginalEntityData($program);
 
     if ($old_program['approved'] == false && $program->getApproved() == true)
     {
-      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser());
+      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
+        ->get('security.token_storage')->getToken()->getUser());
       $this->getModelManager()->update($program);
     }
     elseif ($old_program['approved'] == true && $program->getApproved() == false)
@@ -80,7 +117,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
     }
   }
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -88,7 +130,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('user', EntityType::class, ['class' => User::class]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -96,7 +143,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('user.username');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -109,61 +161,120 @@ class ApproveProgramsAdmin extends AbstractAdmin
       ->add('_action', 'actions', ['actions' => ['show' => []]]);
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return string
+   */
   public function getThumbnailImageUrl($object)
   {
-    return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
+    /**
+     * @var $object Program
+     */
+
+    return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')
+        ->getThumbnailWebPath($object->getId());
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return array
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function getContainingImageUrls($object)
   {
-
-    /* @var $extractedFileRepository ExtractedFileRepository */
-    /* @var $progManager ProgramManager */
+    /**
+     * @var $extractedFileRepository ExtractedFileRepository
+     * @var $progManager ProgramManager
+     * @var $object Program
+     */
 
     if ($this->extractedProgram == null)
     {
       $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
       $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $extractedFileRepository
+        ->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
     return $this->extractedProgram->getContainingImagePaths();
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return array
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function getContainingSoundUrls($object)
   {
-    /* @var $extractedFileRepository ExtractedFileRepository */
-    /* @var $progManager ProgramManager */
+    /**
+     * @var $extractedFileRepository ExtractedFileRepository
+     * @var $progManager ProgramManager
+     * @var $object Program
+     */
 
     if ($this->extractedProgram == null)
     {
       $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
       $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $extractedFileRepository
+        ->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
     return $this->extractedProgram->getContainingSoundPaths();
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return array
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function getContainingStrings($object)
   {
+    /**
+     * @var $object Program
+     */
+
     if ($this->extractedProgram == null)
     {
       $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
       $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $extractedFileRepository
+        ->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
     return $this->extractedProgram->getContainingStrings();
   }
 
+  /**
+   * @param $object
+   *
+   * @return array
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function getContainingCodeObjects($object)
   {
+    /**
+     * @var $object Program
+     */
+
     if ($this->extractedProgram == null)
     {
       $extractedFileRepository = $this->getConfigurationPool()->getContainer()->get('extractedfilerepository');
       $progManager = $this->getConfigurationPool()->getContainer()->get('programmanager');
-      $this->extractedProgram = $extractedFileRepository->loadProgramExtractedFile($progManager->find($object->getId()));
+      $this->extractedProgram = $extractedFileRepository
+        ->loadProgramExtractedFile($progManager->find($object->getId()));
     }
 
     if ($this->extractedProgram->hasScenes())
@@ -176,6 +287,10 @@ class ApproveProgramsAdmin extends AbstractAdmin
     }
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('create')->remove('delete')->remove('edit');

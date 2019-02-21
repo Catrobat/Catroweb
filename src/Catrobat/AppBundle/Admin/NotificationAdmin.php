@@ -10,12 +10,30 @@ use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+
+/**
+ * Class NotificationAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class NotificationAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_uploadnotificationadmin';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'upload_notification';
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -26,13 +44,23 @@ class NotificationAdmin extends AbstractAdmin
       ->add('summary', null, ['label' => 'Emails täglich sammeln', 'required' => false]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
+  //
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
-    $datagridMapper;
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -49,6 +77,10 @@ class NotificationAdmin extends AbstractAdmin
       ]);
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
   }

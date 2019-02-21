@@ -9,24 +9,63 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
-use Facebook\GraphNodes\GraphNode;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 
+/**
+ * Class FacebookPostService
+ * @package Catrobat\AppBundle\Services
+ */
 class FacebookPostService
 {
+  /**
+   * @var Router
+   */
   private $router;
+  /**
+   * @var Container
+   */
   private $container;
+  /**
+   * @var ScreenshotRepository
+   */
   private $screenshot_repository;
+  /**
+   * @var
+   */
   private $facebook;
+  /**
+   * @var
+   */
   private $app_id;
+  /**
+   * @var
+   */
   private $app_secret;
+  /**
+   * @var
+   */
   private $fb_admin_id;
+  /**
+   * @var
+   */
   private $fb_channel_id;
+  /**
+   * @var
+   */
   private $fb_admin_user_token;
+  /**
+   * @var
+   */
   private $debug;
 
+  /**
+   * FacebookPostService constructor.
+   *
+   * @param Router               $router
+   * @param Container            $container
+   * @param ScreenshotRepository $screenshot_repository
+   */
   public function __construct(Router $router, Container $container, ScreenshotRepository $screenshot_repository)
   {
     $this->router = $router;
@@ -34,6 +73,12 @@ class FacebookPostService
     $this->screenshot_repository = $screenshot_repository;
   }
 
+  /**
+   * @param $post_id
+   *
+   * @return int
+   * @throws FacebookSDKException
+   */
   public function removeFbPost($post_id)
   {
     if ($this->debug)
@@ -113,6 +158,12 @@ class FacebookPostService
     }
   }
 
+  /**
+   * @param $post_id
+   *
+   * @return int|string
+   * @throws FacebookSDKException
+   */
   public function getFacebookPostUrl($post_id)
   {
     if ($this->facebook == null)
@@ -172,6 +223,12 @@ class FacebookPostService
     }
   }
 
+  /**
+   * @param $post_id
+   *
+   * @return int|string
+   * @throws FacebookSDKException
+   */
   public function checkFacebookPostAvailable($post_id)
   {
     $this->initializeFacebook();
@@ -222,6 +279,14 @@ class FacebookPostService
     }
   }
 
+  /**
+   * @param $program_id
+   *
+   * @return mixed
+   * @throws FacebookSDKException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function postOnFacebook($program_id)
   {
     $this->initializeFacebook();
@@ -297,6 +362,9 @@ class FacebookPostService
     }
   }
 
+  /**
+   * @return mixed
+   */
   private function checkFacebookServerAccessTokenValidity()
   {
     $is_valid = $this->debugToken($this->fb_admin_user_token);
@@ -349,6 +417,11 @@ class FacebookPostService
     }
   }
 
+  /**
+   * @param $token_to_check
+   *
+   * @return bool
+   */
   private function debugToken($token_to_check)
   {
     try
@@ -400,6 +473,9 @@ class FacebookPostService
     return $is_valid;
   }
 
+  /**
+   * @return string
+   */
   private function getAppToken()
   {
     $app_token = $this->app_id . '|' . $this->app_secret;
@@ -407,6 +483,9 @@ class FacebookPostService
     return $app_token;
   }
 
+  /**
+   * @param null $client_token
+   */
   private function setFacebookDefaultAccessToken($client_token = null)
   {
     if ($client_token)
@@ -415,6 +494,9 @@ class FacebookPostService
     }
   }
 
+  /**
+   * @throws FacebookSDKException
+   */
   private function initializeFacebook()
   {
     $this->setFacebookChannelConfigurationData();
@@ -435,6 +517,9 @@ class FacebookPostService
     }
   }
 
+  /**
+   *
+   */
   private function setFacebookChannelConfigurationData()
   {
     $this->app_id = $this->container->getParameter('facebook_share_app_id');

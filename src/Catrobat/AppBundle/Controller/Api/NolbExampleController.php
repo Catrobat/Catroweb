@@ -9,11 +9,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\NolbExampleRepository;
 
+
+/**
+ * Class NolbExampleController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class NolbExampleController extends Controller
 {
 
   /**
+   *
    * @Route("/api/nolb/example.json", name="api_nolb_examples", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return ProgramListResponse
    */
   public function getNolbExampleProgramsAction(Request $request)
   {

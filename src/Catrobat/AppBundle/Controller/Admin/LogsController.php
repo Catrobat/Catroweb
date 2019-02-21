@@ -6,8 +6,14 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
 
+
+/**
+ * Class LogsController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class LogsController extends CRUDController
 {
+
   const LOG_DIR = '../var/logs/';
   const LOG_PATTERN = '*.log';
 
@@ -20,19 +26,19 @@ class LogsController extends CRUDController
   const FILTER_LEVEL_ALERT = 6;
   const FILTER_LEVEL_EMERGENCY = 7;
 
-  /*
-   * (non-PHPdoc)
-   * @see \Sonata\AdminBundle\Controller\CRUDController::listAction()
-   * @Method({"POST"})
+  /**
+   * @param Request|null $request
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
    */
-  public function listAction(Request $request = null) //public function listAction(Request $request = null, int $line_count = 20, int $filter = self::FILTER_LEVEL_DEBUG, Boolean $greater_equal_than_level = true)
+  public function listAction(Request $request = null)
   {
+    /**
+      * @var $finder Finder
+      */
     $filter = self::FILTER_LEVEL_WARNING;
     $greater_equal_than_level = true;
     $line_count = 20;
-    /*
-     * @var $finder Symfony\Component\Finder\Finder
-     */
     if ($request->isXmlHttpRequest())
     {
       if ($request->query->get('count'))

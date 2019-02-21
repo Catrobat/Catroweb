@@ -2,19 +2,29 @@
 
 namespace Catrobat\AppBundle\Controller;
 
+use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Symfony\Component\HttpFoundation\Request;
-use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+
+/**
+ * Class DownloadMediaPackageController
+ * @package Catrobat\AppBundle\Controller
+ */
 class DownloadMediaPackageController extends Controller
 {
+
   /**
    * @Route("/download-media/{id}", name="download_media", defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $id
+   *
+   * @return BinaryFileResponse
    */
   public function downloadMediaPackageAction(Request $request, $id)
   {
@@ -26,7 +36,7 @@ class DownloadMediaPackageController extends Controller
     $file_repository = $this->get('mediapackagefilerepository');
 
     $em = $this->getDoctrine()->getManager();
-    $media_file = $em->getRepository("\Catrobat\AppBundle\Entity\MediaPackageFile")->findOneBy(['id' => $id]);
+    $media_file = $em->getRepository(MediaPackageFile::class)->findOneBy(['id' => $id]);
 
     if (!$media_file)
     {

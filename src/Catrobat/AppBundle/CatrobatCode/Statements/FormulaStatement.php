@@ -2,13 +2,37 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class FormulaStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class FormulaStatement extends Statement
 {
+  /**
+   * @var Statement
+   */
   private $leftChild;
+  /**
+   * @var Statement
+   */
   private $rightChild;
+  /**
+   * @var Statement
+   */
   private $type;
+  /**
+   * @var
+   */
   private $category;
 
+  /**
+   * FormulaStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   * @param $category
+   */
   public function __construct($statementFactory, $xmlTree, $spaces, $category)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -16,6 +40,9 @@ class FormulaStatement extends Statement
     $this->category = $category;
   }
 
+  /**
+   * @return string
+   */
   public function execute()
   {
     $code = $this->executeChildren();
@@ -23,6 +50,9 @@ class FormulaStatement extends Statement
     return $code;
   }
 
+  /**
+   * @return string
+   */
   public function executeChildren()
   {
     $code = '';
@@ -60,6 +90,9 @@ class FormulaStatement extends Statement
   }
 
 
+  /**
+   *
+   */
   protected function setVariables()
   {
 
@@ -86,12 +119,12 @@ class FormulaStatement extends Statement
     }
   }
 
+  /**
+   * @return mixed
+   */
   public function getCategory()
   {
     return $this->category;
   }
 
-
 }
-
-?>

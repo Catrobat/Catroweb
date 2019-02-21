@@ -3,11 +3,18 @@
 namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
+use Catrobat\AppBundle\Entity\ProgramRemixBackwardRelation;
+use Catrobat\AppBundle\Entity\ProgramRemixRelation;
 use Catrobat\AppBundle\Entity\RudeWord;
+use Catrobat\AppBundle\Entity\ScratchProgramRemixRelation;
+use Catrobat\AppBundle\Entity\Tag;
+use Catrobat\AppBundle\Entity\UserLikeSimilarityRelation;
+use Catrobat\AppBundle\Entity\UserRemixSimilarityRelation;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -29,44 +36,92 @@ use PHPUnit\Framework\Assert;
 class FeatureContext extends BaseContext
 {
 
+  /**
+   * @var null
+   */
   private $username;
 
+  /**
+   * @var array
+   */
   private $request_parameters;
 
+  /**
+   * @var
+   */
   private $last_response;
 
+  /**
+   * @var string
+   */
   private $hostname;
 
+  /**
+   * @var bool
+   */
   private $secure;
 
+  /**
+   * @var
+   */
   private $fb_post_program_id;
 
+  /**
+   * @var
+   */
   private $fb_post_id;
 
+  /**
+   * @var array
+   */
   private $checked_catrobat_remix_forward_ancestor_relations;
 
+  /**
+   * @var array
+   */
   private $checked_catrobat_remix_forward_descendant_relations;
 
+  /**
+   * @var array
+   */
   private $checked_catrobat_remix_backward_relations;
 
   const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
 
+  /**
+   * @var
+   */
   private $method;
 
+  /**
+   * @var
+   */
   private $url;
 
+  /**
+   * @var array
+   */
   private $post_parameters = [];
 
+  /**
+   * @var array
+   */
   private $get_parameters = [];
 
+  /**
+   * @var array
+   */
   private $server_parameters = ['HTTP_HOST' => 'pocketcode.org', 'HTTPS' => true];
 
+  /**
+   * @var array
+   */
   private $files = [];
 
   /**
-   * Initializes context with parameters from behat.yml.
+   * FeatureContext constructor.
    *
-   * @param array $parameters
+   * @param $error_directory
    */
   public function __construct($error_directory)
   {
@@ -81,10 +136,11 @@ class FeatureContext extends BaseContext
     $this->checked_catrobat_remix_forward_descendant_relations = [];
     $this->checked_catrobat_remix_backward_relations = [];
   }
-  
+
   /**
    * @Given /^the HTTP Request:$/
    * @Given /^I have the HTTP Request:$/
+   * @param TableNode $table
    */
   public function iHaveTheHttpRequest(TableNode $table)
   {
@@ -96,6 +152,7 @@ class FeatureContext extends BaseContext
   /**
    * @Given /^the POST parameters:$/
    * @Given /^I use the POST parameters:$/
+   * @param TableNode $table
    */
   public function iUseThePostParameters(TableNode $table)
   {
@@ -106,6 +163,7 @@ class FeatureContext extends BaseContext
   /**
    * @Given /^the GET parameters:$/
    * @Given /^I use the GET parameters:$/
+   * @param TableNode $table
    */
   public function iUseTheGetParameters(TableNode $table)
   {
@@ -121,12 +179,14 @@ class FeatureContext extends BaseContext
    */
   public function iInvokeTheRequest()
   {
-    $this->getClient()->request($this->method, 'https://' . $this->server_parameters['HTTP_HOST'] . $this->url . '?' . http_build_query($this->get_parameters), $this->post_parameters, $this->files, $this->server_parameters);
+    $this->getClient()->request($this->method, 'https://' . $this->server_parameters['HTTP_HOST'] . $this->url .
+      '?' . http_build_query($this->get_parameters), $this->post_parameters, $this->files, $this->server_parameters);
   }
 
   /**
    * @Then /^the returned json object will be:$/
    * @Then /^I will get the json object:$/
+   * @param PyStringNode $string
    */
   public function iWillGetTheJsonObject(PyStringNode $string)
   {
@@ -136,6 +196,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the response code will be "([^"]*)"$/
+   * @param $code
    */
   public function theResponseCodeWillBe($code)
   {
@@ -146,6 +207,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^we assume the next generated token will be "([^"]*)"$/
+   * @param $token
    */
   public function weAssumeTheNextGeneratedTokenWillBe($token)
   {
@@ -165,6 +227,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
+   * @param $arg1
    */
   public function thePostParameterContainsTheMdSumOfTheGivenFile($arg1)
   {
@@ -174,6 +237,7 @@ class FeatureContext extends BaseContext
   /**
    * @Given /^the registration problem "([^"]*)"$/
    * @Given /^there is a registration problem ([^"]*)$/
+   * @param $problem
    */
   public function thereIsARegistrationProblem($problem)
   {
@@ -193,6 +257,7 @@ class FeatureContext extends BaseContext
   /**
    * @Given /^the check token problem "([^"]*)"$/
    * @When /^there is a check token problem ([^"]*)$/
+   * @param $problem
    */
   public function thereIsACheckTokenProblem($problem)
   {
@@ -211,6 +276,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^searching for "([^"]*)"$/
+   * @param $arg1
    */
   public function searchingFor($arg1)
   {
@@ -223,6 +289,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the upload problem "([^"]*)"$/
+   * @param $problem
    */
   public function theUploadProblem($problem)
   {
@@ -254,7 +321,7 @@ class FeatureContext extends BaseContext
   }
 
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Support Functions
 
   /**
@@ -294,6 +361,9 @@ class FeatureContext extends BaseContext
     $this->getSymfonyService('statistics')->useRealService(false);
   }
 
+  /**
+   *
+   */
   private function prepareValidRegistrationParameters()
   {
     $this->request_parameters['registrationUsername'] = 'newuser';
@@ -302,16 +372,21 @@ class FeatureContext extends BaseContext
     $this->request_parameters['registrationCountry'] = 'at';
   }
 
+  /**
+   * @param $url
+   */
   private function sendPostRequest($url)
   {
     $this->getClient()->request('POST', $url, $this->request_parameters, $this->files);
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Steps
 
   /**
    * @Given /^I have a program with "([^"]*)" as (name|description|tags)$/
+   * @param $value
+   * @param $header
    */
   public function iHaveAProgramWithAsDescription($value, $header)
   {
@@ -327,7 +402,8 @@ class FeatureContext extends BaseContext
   {
     if (array_key_exists('deviceLanguage', $this->request_parameters))
     {
-      $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+      $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null,
+        'pocketcode', $this->request_parameters);
     }
     else
     {
@@ -337,6 +413,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program should get (.*)$/
+   * @param $result
    */
   public function theProgramShouldGet($result)
   {
@@ -358,6 +435,10 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I define the following rude words:$/
+   * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iDefineTheFollowingRudeWords(TableNode $table)
   {
@@ -389,6 +470,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I upload a program with (.*)$/
+   * @param $programattribute
    */
   public function iUploadAProgramWith($programattribute)
   {
@@ -438,6 +520,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are users:$/
+   * @param TableNode $table
    */
   public function thereAreUsers(TableNode $table)
   {
@@ -455,6 +538,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are LDAP-users:$/
+   * @param TableNode $table
    */
   public function thereAreLdapUsers(TableNode $table)
   {
@@ -478,11 +562,14 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are programs:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereArePrograms(TableNode $table)
   {
     $programs = $table->getHash();
-    $program_manager = $this->getProgramManger();
+
     for ($i = 0; $i < count($programs); ++$i)
     {
       $user = $this->getUserManager()->findOneBy([
@@ -511,6 +598,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are like similar users:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreLikeSimilarUsers(TableNode $table)
   {
@@ -528,6 +618,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are remix similar users:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreRemixSimilarUsers(TableNode $table)
   {
@@ -545,6 +638,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are likes:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreLikes(TableNode $table)
   {
@@ -563,6 +659,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are tags:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreTags(TableNode $table)
   {
@@ -581,6 +680,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are extensions:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreExtensions(TableNode $table)
   {
@@ -598,6 +700,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are forward remix relations:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreForwardRemixRelations(TableNode $table)
   {
@@ -616,6 +721,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are backward remix relations:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreBackwardRemixRelations(TableNode $table)
   {
@@ -633,6 +741,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are Scratch remix relations:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreScratchRemixRelations(TableNode $table)
   {
@@ -650,6 +761,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^following programs are featured:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function followingProgramsAreFeatured(TableNode $table)
   {
@@ -671,10 +785,12 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are downloadable programs:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreDownloadablePrograms(TableNode $table)
   {
-    $em = $this->getManager();
     $file_repo = $this->getFileRepository();
     $programs = $table->getHash();
     for ($i = 0; $i < count($programs); ++$i)
@@ -701,6 +817,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
+   * @param $name
+   * @param $value
    */
   public function iHaveAParameterWithValue($name, $value)
   {
@@ -709,6 +827,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with the tag id "([^"]*)"$/
+   * @param $name
+   * @param $value
    */
   public function iHaveAParameterWithTheTagId($name, $value)
   {
@@ -717,6 +837,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I POST these parameters to "([^"]*)"$/
+   * @param $url
    */
   public function iPostTheseParametersTo($url)
   {
@@ -728,6 +849,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I GET "([^"]*)" with these parameters$/
+   * @param $url
    */
   public function iGetWithTheseParameters($url)
   {
@@ -739,6 +861,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I GET from the api "([^"]*)"$/
+   * @param $url
    */
   public function iGetFromTheApi($url)
   {
@@ -767,6 +890,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I am "([^"]*)"$/
+   * @param $username
    */
   public function iAm($username)
   {
@@ -775,6 +899,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I search for "([^"]*)"$/
+   * @param $arg1
    */
   public function iSearchFor($arg1)
   {
@@ -800,6 +925,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get a total of "([^"]*)" projects$/
+   * @param $arg1
    */
   public function iShouldGetATotalOfProjects($arg1)
   {
@@ -831,6 +957,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I use the limit "([^"]*)"$/
+   * @param $arg1
    */
   public function iUseTheLimit($arg1)
   {
@@ -839,6 +966,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I use the offset "([^"]*)"$/
+   * @param $arg1
    */
   public function iUseTheOffset($arg1)
   {
@@ -847,6 +975,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I call "([^"]*)" with token "([^"]*)"$/
+   * @param $url
+   * @param $token
    */
   public function iCallWithToken($url, $token)
   {
@@ -859,6 +989,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get the json object:$/
+   * @param PyStringNode $string
    */
   public function iShouldGetTheJsonObject(PyStringNode $string)
   {
@@ -868,6 +999,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get the json object with random token:$/
+   * @param PyStringNode $string
    */
   public function iShouldGetTheJsonObjectWithRandomToken(PyStringNode $string)
   {
@@ -881,6 +1013,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get the json object with random "([^"]*)" and "([^"]*)":$/
+   * @param              $arg1
+   * @param              $arg2
+   * @param PyStringNode $string
    */
   public function iShouldGetTheJsonObjectWithRandomAndProgramid($arg1, $arg2, PyStringNode $string)
   {
@@ -894,6 +1029,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get programs in the following order:$/
+   * @param TableNode $table
    */
   public function iShouldGetProgramsInTheFollowingOrder(TableNode $table)
   {
@@ -901,13 +1037,7 @@ class FeatureContext extends BaseContext
     $responseArray = json_decode($response->getContent(), true);
     $returned_programs = $responseArray['CatrobatProjects'];
     $expected_programs = $table->getHash();
-    /* // if you want to check which programs are missing use this
-    if (count($expected_programs) != count($returned_programs))
-    {
-      print_r($returned_programs);
-      Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
-    }
-    */
+
     for ($i = 0; $i < count($returned_programs); ++$i)
     {
       Assert::assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
@@ -916,6 +1046,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get (\d+) programs in random order:$/
+   * @param           $program_count
+   * @param TableNode $table
    */
   public function iShouldGetProgramsInRandomOrder($program_count, TableNode $table)
   {
@@ -941,6 +1073,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get following programs:$/
+   * @param TableNode $table
    */
   public function iShouldGetFollowingPrograms(TableNode $table)
   {
@@ -949,44 +1082,61 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^I should get following like similarities:$/
+   * @param TableNode $table
    */
   public function iShouldGetFollowingLikePrograms(TableNode $table)
   {
     $all_like_similarities = $this->getAllLikeSimilaritiesBetweenUsers();
     $expected_like_similarities = $table->getHash();
-    Assert::assertEquals(count($expected_like_similarities), count($all_like_similarities), 'Wrong number of returned similarity entries');
+    Assert::assertEquals(count($expected_like_similarities), count($all_like_similarities),
+      'Wrong number of returned similarity entries');
     for ($i = 0; $i < count($all_like_similarities); ++$i)
     {
-      Assert::assertEquals($expected_like_similarities[$i]['first_user_id'], $all_like_similarities[$i]->getFirstUserId(),
+      /**
+       * @var $like_similarity UserLikeSimilarityRelation
+       */
+      $like_similarity = $all_like_similarities[$i];
+      Assert::assertEquals($expected_like_similarities[$i]['first_user_id'],
+        $like_similarity->getFirstUserId(),
         'Wrong value for first_user_id or wrong order of results');
-      Assert::assertEquals($expected_like_similarities[$i]['second_user_id'], $all_like_similarities[$i]->getSecondUserId(),
+      Assert::assertEquals($expected_like_similarities[$i]['second_user_id'],
+        $like_similarity->getSecondUserId(),
         'Wrong value for second_user_id');
-      Assert::assertEquals(round($expected_like_similarities[$i]['similarity'], 3), round($all_like_similarities[$i]->getSimilarity(), 3),
+      Assert::assertEquals(round($expected_like_similarities[$i]['similarity'], 3),
+        round($like_similarity->getSimilarity(), 3),
         'Wrong value for similarity');
     }
   }
 
   /**
    * @Then /^I should get following remix similarities:$/
+   * @param TableNode $table
    */
   public function iShouldGetFollowingRemixPrograms(TableNode $table)
   {
     $all_remix_similarities = $this->getAllRemixSimilaritiesBetweenUsers();
     $expected_remix_similarities = $table->getHash();
-    Assert::assertEquals(count($expected_remix_similarities), count($all_remix_similarities), 'Wrong number of returned similarity entries');
+    Assert::assertEquals(count($expected_remix_similarities), count($all_remix_similarities),
+      'Wrong number of returned similarity entries');
     for ($i = 0; $i < count($all_remix_similarities); ++$i)
     {
-      Assert::assertEquals($expected_remix_similarities[$i]['first_user_id'], $all_remix_similarities[$i]->getFirstUserId(),
+      /**
+       * @var $remix_similarity UserRemixSimilarityRelation
+       */
+      $remix_similarity = $all_remix_similarities[$i];
+      Assert::assertEquals($expected_remix_similarities[$i]['first_user_id'], $remix_similarity->getFirstUserId(),
         'Wrong value for first_user_id or wrong order of results');
-      Assert::assertEquals($expected_remix_similarities[$i]['second_user_id'], $all_remix_similarities[$i]->getSecondUserId(),
+      Assert::assertEquals($expected_remix_similarities[$i]['second_user_id'], $remix_similarity->getSecondUserId(),
         'Wrong value for second_user_id');
-      Assert::assertEquals(round($expected_remix_similarities[$i]['similarity'], 3), round($all_remix_similarities[$i]->getSimilarity(), 3),
+      Assert::assertEquals(round($expected_remix_similarities[$i]['similarity'], 3),
+        round($remix_similarity->getSimilarity(), 3),
         'Wrong value for similarity');
     }
   }
 
   /**
    * @Given /^the response code should be "([^"]*)"$/
+   * @param $code
    */
   public function theResponseCodeShouldBe($code)
   {
@@ -996,6 +1146,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the returned "([^"]*)" should be a number$/
+   * @param $arg1
    */
   public function theReturnedShouldBeANumber($arg1)
   {
@@ -1007,6 +1158,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a file "([^"]*)"$/
+   * @param $filename
    */
   public function iHaveAFile($filename)
   {
@@ -1038,6 +1190,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with the md5checksum my file$/
+   * @param $parameter
    */
   public function iHaveAParameterWithTheMdchecksumMyFile($parameter)
   {
@@ -1046,6 +1199,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
+   * @param $parameter
    */
   public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile($parameter)
   {
@@ -1066,6 +1220,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I upload another program using token "([^"]*)"$/
+   * @param $arg1
    */
   public function iUploadAnotherProgramUsingToken($arg1)
   {
@@ -1078,6 +1233,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I upload another program with name set to "([^"]*)" and url set to "([^"]*)"$/
+   * @param $name
+   * @param $url
    */
   public function iUploadAnotherProgramWithNameSetToAndUrlSetTo($name, $url)
   {
@@ -1087,8 +1244,12 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I upload another program with name set to "([^"]*)", url set to "([^"]*)" and catrobatLanguageVersion set to "([^"]*)"$/
+   * @param $name
+   * @param $url
+   * @param $catrobat_language_version
    */
-  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo($name, $url, $catrobat_language_version)
+  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo($name, $url,
+                                                                                            $catrobat_language_version)
   {
     $this->iHaveAProgramWithAsMultipleHeaderFields('name', $name, 'url', $url,
       'catrobatLanguageVersion', $catrobat_language_version);
@@ -1113,6 +1274,9 @@ class FeatureContext extends BaseContext
    */
   public function iUploadACatrobatProgramWithTheSameName()
   {
+    /**
+     * @var $user User
+     */
     $user = $this->getUserManager()->findUserByUsername($this->username);
     $this->request_parameters['token'] = $user->getUploadToken();
     $this->last_response = $this->getClient()
@@ -1137,6 +1301,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
+   * @param $parameter
+   * @param $file
    */
   public function iHaveAParameterWithTheMdchecksumOf($parameter, $file)
   {
@@ -1145,6 +1311,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the next generated token will be "([^"]*)"$/
+   * @param $token
    */
   public function theNextGeneratedTokenWillBe($token)
   {
@@ -1154,6 +1321,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the current time is "([^"]*)"$/
+   * @param $time
+   * @throws \Exception
    */
   public function theCurrentTimeIs($time)
   {
@@ -1164,6 +1333,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have the POST parameters:$/
+   * @param TableNode $table
    */
   public function iHaveThePostParameters(TableNode $table)
   {
@@ -1176,6 +1346,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I try to register without (.*)$/
+   * @param $missing_parameter
    */
   public function iTryToRegisterWithout($missing_parameter)
   {
@@ -1212,6 +1383,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are uploaded programs:$/
+   * @param TableNode $table
    */
   public function thereAreUploadedPrograms(TableNode $table)
   {
@@ -1230,6 +1402,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program download statistic should have a download timestamp, an anonimous user and the following statistics:$/
+   * @param TableNode $table
+   * @throws \Exception
    */
   public function theProgramShouldHaveADownloadTimestampAndTheFollowingStatistics(TableNode $table)
   {
@@ -1267,6 +1441,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^i download "([^"]*)"$/
+   * @param $arg1
    */
   public function iDownload($arg1)
   {
@@ -1303,6 +1478,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I am using pocketcode for "([^"]*)" with version "([^"]*)"$/
+   * @param $platform
+   * @param $version
    */
   public function iAmUsingPocketcodeForWithVersion($platform, $version)
   {
@@ -1314,6 +1491,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
+   * @param $key
+   * @param $value
    */
   public function iHaveAProgramWithAs($key, $value)
   {
@@ -1324,6 +1503,10 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
+   * @param $key1
+   * @param $value1
+   * @param $key2
+   * @param $value2
    */
   public function iHaveAProgramWithAsTwoHeaderFields($key1, $value1, $key2, $value2)
   {
@@ -1335,6 +1518,12 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)", "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
+   * @param $key1
+   * @param $value1
+   * @param $key2
+   * @param $value2
+   * @param $key3
+   * @param $value3
    */
   public function iHaveAProgramWithAsMultipleHeaderFields($key1, $value1, $key2, $value2, $key3, $value3)
   {
@@ -1356,6 +1545,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I am using pocketcode with language version "([^"]*)"$/
+   * @param $version
    */
   public function iAmUsingPocketcodeWithLanguageVersion($version)
   {
@@ -1376,6 +1566,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the server name is "([^"]*)"$/
+   * @param $name
    */
   public function theServerNameIs($name)
   {
@@ -1392,6 +1583,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^program "([^"]*)" is not visible$/
+   * @param $programname
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function programIsNotVisible($programname)
   {
@@ -1416,6 +1610,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I get the most recent programs with limit "([^"]*)" and offset "([^"]*)"$/
+   * @param $limit
+   * @param $offset
    */
   public function iGetTheMostRecentProgramsWithLimitAndOffset($limit, $offset)
   {
@@ -1427,6 +1623,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I upload the program with "([^"]*)" as name$/
+   * @param $name
    */
   public function iUploadTheProgramWithAsName($name)
   {
@@ -1438,6 +1635,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I upload the program with "([^"]*)" as name again$/
+   * @param $name
    */
   public function iUploadTheProgramWithAsNameAgain($name)
   {
@@ -1455,6 +1653,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should be a remix root$/
+   * @param $program_id
    */
   public function theProgramShouldBeARemixRoot($program_id)
   {
@@ -1485,6 +1684,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should not be a remix root$/
+   * @param $program_id
    */
   public function theProgramShouldNotBeARemixRoot($program_id)
   {
@@ -1495,6 +1695,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the uploaded program should have a Scratch parent having id "([^"]*)"$/
+   * @param $scratch_parent_id
    */
   public function theUploadedProgramShouldHaveAScratchParentHavingScratchID($scratch_parent_id)
   {
@@ -1504,6 +1705,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the program "([^"]*)" should have a Scratch parent having id "([^"]*)"$/
+   * @param $program_id
+   * @param $scratch_parent_id
    */
   public function theProgramShouldHaveAScratchParentHavingScratchID($program_id, $scratch_parent_id)
   {
@@ -1527,6 +1730,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the program "([^"]*)" should have no further Scratch parents$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoFurtherScratchParents($program_id)
   {
@@ -1536,6 +1740,9 @@ class FeatureContext extends BaseContext
 
     $further_scratch_parent_relations = array_filter($direct_edge_relations,
       function ($r) {
+        /**
+         * @var $r ScratchProgramRemixRelation
+         */
         return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations);
       });
 
@@ -1544,6 +1751,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the uploaded program should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
+   * @param $id
+   * @param $depth
    */
   public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($id, $depth)
   {
@@ -1553,6 +1762,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
+   * @param $program_id
+   * @param $ancestor_program_id
+   * @param $depth
    */
   public function theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($program_id, $ancestor_program_id, $depth)
   {
@@ -1573,6 +1785,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the uploaded program should have a Catrobat backward parent having id "([^"]*)"$/
+   * @param $id
    */
   public function theUploadedProgramShouldHaveACatrobatBackwardParentHavingId($id)
   {
@@ -1582,6 +1795,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have a Catrobat backward parent having id "([^"]*)"$/
+   * @param $program_id
+   * @param $backward_parent_program_id
    */
   public function theProgramShouldHaveACatrobatBackwardParentHavingId($program_id, $backward_parent_program_id)
   {
@@ -1605,6 +1820,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no Catrobat forward ancestors except self-relation$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($program_id)
   {
@@ -1614,6 +1830,9 @@ class FeatureContext extends BaseContext
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
       function ($r) {
+        /**
+         * @var $r ProgramRemixRelation
+         */
         return $r->getDepth() >= 1;
       }));
   }
@@ -1629,6 +1848,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no further Catrobat forward ancestors$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoFurtherCatrobatForwardAncestors($program_id)
   {
@@ -1638,6 +1858,9 @@ class FeatureContext extends BaseContext
 
     $further_forward_ancestor_relations = array_filter($forward_ancestors_including_self_referencing_relation,
       function ($r) {
+        /**
+         * @var $r ProgramRemixRelation
+         */
         return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations);
       });
 
@@ -1655,6 +1878,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no Catrobat backward parents$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoCatrobatBackwardParents($program_id)
   {
@@ -1673,6 +1897,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no further Catrobat backward parents$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoFurtherCatrobatBackwardParents($program_id)
   {
@@ -1680,6 +1905,9 @@ class FeatureContext extends BaseContext
 
     $further_backward_parent_relations = array_filter($backward_parent_relations,
       function ($r) {
+        /**
+         * @var $r ProgramRemixBackwardRelation
+         */
         return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_backward_relations);
       });
 
@@ -1697,6 +1925,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no Catrobat ancestors except self-relation$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoCatrobatAncestors($program_id)
   {
@@ -1715,6 +1944,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no Scratch parents$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoScratchParents($program_id)
   {
@@ -1724,6 +1954,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the uploaded program should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
+   * @param $id
+   * @param $depth
    */
   public function theUploadedProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($id, $depth)
   {
@@ -1733,6 +1965,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
+   * @param $program_id
+   * @param $descendant_program_id
+   * @param $depth
    */
   public function theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($program_id, $descendant_program_id, $depth)
   {
@@ -1762,6 +1997,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no Catrobat forward descendants except self-relation$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($program_id)
   {
@@ -1771,6 +2007,9 @@ class FeatureContext extends BaseContext
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
       function ($r) {
+        /**
+         * @var $r ProgramRemixRelation
+         */
         return $r->getDepth() >= 1;
       }));
   }
@@ -1786,6 +2025,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have no further Catrobat forward descendants$/
+   * @param $program_id
    */
   public function theProgramShouldHaveNoFurtherCatrobatForwardDescendants($program_id)
   {
@@ -1795,6 +2035,9 @@ class FeatureContext extends BaseContext
 
     $further_forward_descendant_relations = array_filter($forward_descendants_including_self_referencing_relation,
       function ($r) {
+        /**
+         * @var $r ProgramRemixRelation
+         */
         return !array_key_exists($r->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations);
       });
 
@@ -1803,6 +2046,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the uploaded program should have RemixOf "([^"]*)" in the xml$/
+   * @param $value
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function theUploadedProgramShouldHaveRemixofInTheXml($value)
   {
@@ -1812,6 +2058,10 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program "([^"]*)" should have RemixOf "([^"]*)" in the xml$/
+   * @param $program_id
+   * @param $value
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function theProgramShouldHaveRemixofInTheXml($program_id, $value)
   {
@@ -1850,6 +2100,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the project should be posted to Facebook with message "([^"]*)" and the correct project ID$/
+   * @param $fb_post_message
    */
   public function theProjectShouldBePostedToFacebookWithMessageAndTheCorrectProjectId($fb_post_message)
   {
@@ -1886,6 +2137,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I have a parameter "([^"]*)" with the returned projectId$/
+   * @param $name
    */
   public function iHaveAParameterWithTheReturnedProjectid($name)
   {
@@ -1929,6 +2181,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I GET the tag list from "([^"]*)" with these parameters$/
+   * @param $url
    */
   public function iGetTheTagListFromWithTheseParameters($url)
   {
@@ -1940,6 +2193,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I use the "([^"]*)" app$/
+   * @param $language
    */
   public function iUseTheApp($language)
   {
@@ -1961,6 +2215,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program should be tagged with "([^"]*)" in the database$/
+   * @param $arg1
    */
   public function theProgramShouldBeTaggedWithInTheDatabase($arg1)
   {
@@ -1970,6 +2225,9 @@ class FeatureContext extends BaseContext
 
     foreach ($program_tags as $program_tag)
     {
+      /**
+       * @var $program_tag Tag
+       */
       if (!(in_array($program_tag->getDe(), $tags) || in_array($program_tag->getEn(), $tags)))
       {
         Assert::assertTrue(false, 'The tag is not found!');
@@ -1988,6 +2246,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I upload this program again with the tags "([^"]*)"$/
+   * @param $tags
    */
   public function iUploadThisProgramAgainWithTheTags($tags)
   {
@@ -2019,6 +2278,9 @@ class FeatureContext extends BaseContext
     $ext = ["Arduino", "Lego", "Phiro"];
     foreach ($program_extensions as $program_extension)
     {
+      /**
+       * @var $program_extension Extension
+       */
       if (!(in_array($program_extension->getName(), $ext)))
       {
         Assert::assertTrue(false, 'The Extension is not found!');
@@ -2047,6 +2309,9 @@ class FeatureContext extends BaseContext
     $ext = ["Arduino", "Lego", "Phiro"];
     foreach ($program_extensions as $program_extension)
     {
+      /**
+       * @var $program_extension Extension
+       */
       if (!(in_array($program_extension->getName(), $ext)))
       {
         Assert::assertTrue(false, 'The Extension is not found!');
@@ -2056,6 +2321,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I search similar programs for program id "([^"]*)"$/
+   * @param $id
    */
   public function iSearchSimilarProgramsForProgramId($id)
   {
@@ -2081,6 +2347,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are mediapackages:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreMediapackages(TableNode $table)
   {
@@ -2101,6 +2370,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are mediapackage categories:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreMediapackageCategories(TableNode $table)
   {
@@ -2116,7 +2388,7 @@ class FeatureContext extends BaseContext
       $package = $em->getRepository('AppBundle:MediaPackage')->findOneBy(['name' => $category['package']]);
       if ($package == null)
       {
-        Assert::assert(false, "Fatal error package not found");
+        Assert::assertTrue(false, "Fatal error package not found");
       }
       $new_category->setPackage([$package]);
       $current_categories = $package->getCategories();
@@ -2130,6 +2402,10 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are mediapackage files:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \ImagickException
    */
   public function thereAreMediapackageFiles(TableNode $table)
   {
@@ -2150,7 +2426,7 @@ class FeatureContext extends BaseContext
       $category = $em->getRepository('AppBundle:MediaPackageCategory')->findOneBy(['name' => $file['category']]);
       if ($category == null)
       {
-        Assert::assert(false, "Fatal error category not found");
+        Assert::assertTrue(false, "Fatal error category not found");
       }
       $new_file->setCategory($category);
       $old_files = $category->getFiles();
@@ -2160,7 +2436,8 @@ class FeatureContext extends BaseContext
 
       $new_file->setAuthor($file['author']);
 
-      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' . $file['extension']), $file['id'], $file['extension']);
+      $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR . $file['id'] . '.' .
+        $file['extension']), $file['id'], $file['extension']);
 
       $em->persist($new_file);
     }
@@ -2169,6 +2446,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^We can\'t test anything here$/
+   *
+   * @throws \Exception
    */
   public function weCantTestAnythingHere()
   {

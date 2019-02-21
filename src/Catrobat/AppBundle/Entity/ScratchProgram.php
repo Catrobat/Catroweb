@@ -39,9 +39,11 @@ class ScratchProgram
   protected $last_modified_at;
 
   /**
-   * ProgramRemixRelation constructor.
+   * ScratchProgram constructor.
    *
-   * @param int $id
+   * @param $id
+   *
+   * @throws \Exception
    */
   public function __construct($id)
   {
@@ -87,6 +89,8 @@ class ScratchProgram
 
   /**
    * @ORM\PreUpdate
+   *
+   * @throws \Exception
    */
   public function updateLastModifiedTimestamp()
   {

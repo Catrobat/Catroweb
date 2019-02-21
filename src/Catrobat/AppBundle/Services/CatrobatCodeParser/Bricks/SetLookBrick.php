@@ -4,10 +4,20 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class SetLookBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class SetLookBrick extends Brick
 {
+  /**
+   * @var
+   */
   private $look_file_name;
 
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::SET_LOOK_BRICK;
@@ -26,6 +36,9 @@ class SetLookBrick extends Brick
     $this->setImgFile(Constants::LOOKS_BRICK_IMG);
   }
 
+  /**
+   * @return mixed
+   */
   public function getLookFileName()
   {
     return $this->look_file_name;

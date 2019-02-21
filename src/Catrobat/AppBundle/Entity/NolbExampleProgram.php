@@ -3,7 +3,7 @@
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\NolbExampleRepository")
@@ -131,6 +131,9 @@ class NolbExampleProgram
     $this->downloads_from_male = $downloads_from_male;
   }
 
+  /**
+   *
+   */
   public function increaseMaleDownloads()
   {
     $this->downloads_from_male = $this->downloads_from_male + 1;
@@ -152,6 +155,9 @@ class NolbExampleProgram
     $this->downloads_from_female = $downloads_from_female;
   }
 
+  /**
+   *
+   */
   public function increaseFemaleDownloads()
   {
     $this->downloads_from_female = $this->downloads_from_female + 1;

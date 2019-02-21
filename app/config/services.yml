@@ -310,6 +310,7 @@ services:
     - catrobat.template.storage.dir%"
     - "%catrobat.template.storage.path%"
     - "@filecompressor"
+    - "%catrobat.upload.temp.dir%"
     public: true
   Catrobat\AppBundle\Services\TemplateFileRepository: "@templatefilerepository"
 

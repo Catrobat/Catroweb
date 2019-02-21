@@ -12,6 +12,10 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 
+/**
+ * Class RecommenderUserSimilaritiesCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
 {
   /**
@@ -44,7 +48,16 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
    */
   private $migration_file_lock;
 
-  public function __construct(UserManager $user_manager, RecommenderManager $recommender_manager, EntityManager $entity_manager, $app_root_dir)
+  /**
+   * RecommenderUserSimilaritiesCommand constructor.
+   *
+   * @param UserManager        $user_manager
+   * @param RecommenderManager $recommender_manager
+   * @param EntityManager      $entity_manager
+   * @param                    $app_root_dir
+   */
+  public function __construct(UserManager $user_manager, RecommenderManager $recommender_manager,
+                              EntityManager $entity_manager, $app_root_dir)
   {
     parent::__construct();
     $this->user_manager = $user_manager;
@@ -55,6 +68,9 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
     $this->migration_file_lock = null;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:recommender:compute')
@@ -63,6 +79,9 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
       ->addOption('cronjob');
   }
 
+  /**
+   * @param $signal_number
+   */
   public function signalHandler($signal_number)
   {
     $this->output->writeln('[SignalHandler] Called Signal Handler');
@@ -88,6 +107,16 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
     exit(-1);
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
+   * @throws \Doctrine\DBAL\DBALException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     declare(ticks=1);
@@ -101,6 +130,17 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
     $this->computeUserSimilarities($output, $input->getArgument('type'), $input->getOption('cronjob'));
   }
 
+  /**
+   * @param OutputInterface $output
+   * @param                 $type
+   * @param                 $is_cronjob
+   *
+   * @throws \Doctrine\Common\Persistence\Mapping\MappingException
+   * @throws \Doctrine\DBAL\DBALException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   private function computeUserSimilarities(OutputInterface $output, $type, $is_cronjob)
   {
     $computation_start_time = new \DateTime();
@@ -135,89 +175,5 @@ class RecommenderUserSimilaritiesCommand extends ContainerAwareCommand
     $progress_bar->finish();
     $output->writeln('');
     $output->writeln('<info>Finished similarity computation (Duration: ' . $duration . 's)</info>');
-  }
-}
-
-class CronjobProgressWriter #extends ProgressBar
-{
-  /**
-   * @var OutputInterface
-   */
-  private $_output = null;
-
-  public function __construct(OutputInterface $output, $max = 0)
-  {
-    $this->_output = $output;
-    #parent::__construct($output, $max);
-  }
-
-  public function clear()
-  {
-  }
-
-  public function advance($step = 1)
-  {
-  }
-
-  public function display()
-  {
-  }
-
-  public function start($max = null)
-  {
-  }
-
-  public function finish()
-  {
-  }
-
-  public function setFormat($format)
-  {
-  }
-
-  public function setMessage($message, $name = 'message')
-  {
-    $this->_output->writeln('[' . date_format(new \DateTime(), "Y-m-d H:i:s") . '] ' . $message);
-  }
-}
-
-class RecommenderFileLock
-{
-  private $lock_file_path;
-  private $lock_file;
-  private $output;
-
-  public function __construct($app_root_dir, OutputInterface $output)
-  {
-    $this->lock_file_path = $app_root_dir . '/' . RecommenderManager::RECOMMENDER_LOCK_FILE_NAME;
-    $this->lock_file = null;
-    $this->output = $output;
-  }
-
-  public function lock()
-  {
-    $this->lock_file = fopen($this->lock_file_path, 'w+');
-    $this->output->writeln('[RecommenderFileLock] Trying to acquire lock...');
-    while (flock($this->lock_file, LOCK_EX) == false)
-    {
-      $this->output->writeln('[RecommenderFileLock] Waiting for file lock to be released...');
-      sleep(1);
-    }
-
-    $this->output->writeln('[RecommenderFileLock] Lock acquired...');
-    fwrite($this->lock_file, 'User similarity computation in progress...');
-  }
-
-  public function unlock()
-  {
-    if ($this->lock_file == null)
-    {
-      return;
-    }
-
-    $this->output->writeln('[RecommenderFileLock] Lock released...');
-    flock($this->lock_file, LOCK_UN);
-    fclose($this->lock_file);
-    @unlink($this->lock_file_path);
   }
 }

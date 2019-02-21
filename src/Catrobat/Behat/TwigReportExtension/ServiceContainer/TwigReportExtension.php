@@ -10,11 +10,18 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Behat\Behat\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 
+/**
+ * Class TwigReportExtension
+ * @package Catrobat\Behat\TwigReportExtension\ServiceContainer
+ */
 class TwigReportExtension implements Extension
 {
 
   /*
    * (non-PHPdoc) @see \Behat\Testwork\ServiceContainer\Extension::getConfigKey()
+   */
+  /**
+   * @return string
    */
   public function getConfigKey()
   {
@@ -23,6 +30,10 @@ class TwigReportExtension implements Extension
 
   /*
    * (non-PHPdoc) @see \Behat\Testwork\ServiceContainer\Extension::load()
+   */
+  /**
+   * @param ContainerBuilder $container
+   * @param array            $config
    */
   public function load(ContainerBuilder $container, array $config)
   {
@@ -73,12 +84,18 @@ class TwigReportExtension implements Extension
   /*
    * (non-PHPdoc) @see \Behat\Testwork\ServiceContainer\Extension::initialize()
    */
+  /**
+   * @param ExtensionManager $extensionManager
+   */
   public function initialize(ExtensionManager $extensionManager)
   {
   }
 
   /*
    * (non-PHPdoc) @see \Behat\Testwork\ServiceContainer\Extension::configure()
+   */
+  /**
+   * @param ArrayNodeDefinition $builder
    */
   public function configure(ArrayNodeDefinition $builder)
   {
@@ -116,6 +133,9 @@ class TwigReportExtension implements Extension
       ->end();
   }
 
+  /**
+   * @param ContainerBuilder $container
+   */
   public function process(ContainerBuilder $container)
   {
   }

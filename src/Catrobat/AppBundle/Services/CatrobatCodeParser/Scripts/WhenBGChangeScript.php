@@ -4,10 +4,20 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class WhenBGChangeScript
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class WhenBGChangeScript extends Script
 {
+  /**
+   * @var
+   */
   private $look_file_name;
 
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::WHEN_BG_CHANGE_SCRIPT;
@@ -29,6 +39,9 @@ class WhenBGChangeScript extends Script
     $this->setImgFile(Constants::EVENT_SCRIPT_IMG);
   }
 
+  /**
+   * @return mixed
+   */
   public function getLookFileName()
   {
     return $this->look_file_name;

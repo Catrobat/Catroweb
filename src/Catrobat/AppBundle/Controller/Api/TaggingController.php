@@ -2,26 +2,25 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
-use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
-use Catrobat\AppBundle\Entity\ProgramManager;
-use Catrobat\AppBundle\Entity\Tag;
-use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\StatusCode;
-use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-use Catrobat\AppBundle\Services\FeaturedImageRepository;
-use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Intl\Intl;
 
+
+/**
+ * Class TaggingController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class TaggingController extends Controller
 {
 
   /**
    * @Route("/api/tags/getTags.json", name="api_get_tags", defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse
    */
   public function taggingAction(Request $request)
   {

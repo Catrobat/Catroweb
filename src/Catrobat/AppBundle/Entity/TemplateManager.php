@@ -2,27 +2,52 @@
 
 namespace Catrobat\AppBundle\Entity;
 
-use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
-use Catrobat\AppBundle\Requests\TemplateRequest;
-use Catrobat\AppBundle\Services\ScreenshotRepository;
-use Symfony\Component\Filesystem\Exception\IOException;
 
+use Catrobat\AppBundle\Services\ScreenshotRepository;
+use Catrobat\AppBundle\Services\TemplateFileRepository;
+use Doctrine\ORM\EntityManager;
+
+/**
+ * Class TemplateManager
+ * @package Catrobat\AppBundle\Entity
+ */
 class TemplateManager
 {
 
   const LANDSCAPE_PREFIX = 'l_';
   const PORTRAIT_PREFIX = 'p_';
 
+  /**
+   * @var TemplateFileRepository
+   */
   protected $file_repository;
 
+  /**
+   * @var ScreenshotRepository
+   */
   protected $screenshot_repository;
 
+  /**
+   * @var EntityManager
+   */
   protected $entity_manager;
 
+  /**
+   * @var TemplateRepository
+   */
   protected $template_repository;
 
 
-  public function __construct($file_repository, $screenshot_repository, $entity_manager, $template_repository)
+  /**
+   * TemplateManager constructor.
+   *
+   * @param TemplateFileRepository $file_repository
+   * @param ScreenshotRepository  $screenshot_repository
+   * @param EntityManager         $entity_manager
+   * @param TemplateRepository    $template_repository
+   */
+  public function __construct(TemplateFileRepository $file_repository, ScreenshotRepository $screenshot_repository,
+                              EntityManager $entity_manager, TemplateRepository $template_repository)
   {
     $this->file_repository = $file_repository;
     $this->screenshot_repository = $screenshot_repository;
@@ -30,6 +55,11 @@ class TemplateManager
     $this->template_repository = $template_repository;
   }
 
+  /**
+   * @param Template $template
+   *
+   * @throws \ImagickException
+   */
   private function saveThumbnail(Template $template)
   {
     $file = $template->getThumbnail();
@@ -42,6 +72,9 @@ class TemplateManager
     $this->screenshot_repository->saveProgramAssets($thumbnail->getPathname(), $template->getId());
   }
 
+  /**
+   * @param Template $template
+   */
   private function saveLandscapeProgram(Template $template)
   {
     $file = $template->getLandscapeProgramFile();
@@ -49,6 +82,9 @@ class TemplateManager
 
   }
 
+  /**
+   * @param Template $template
+   */
   private function savePortraitProgram(Template $template)
   {
     $file = $template->getPortraitProgramFile();
@@ -56,6 +92,10 @@ class TemplateManager
 
   }
 
+  /**
+   * @param $file
+   * @param $id
+   */
   private function saveTemplateProgram($file, $id)
   {
     if ($file == null)
@@ -66,6 +106,11 @@ class TemplateManager
 
   }
 
+  /**
+   * @param Template $template
+   *
+   * @throws \ImagickException
+   */
   public function saveTemplateFiles(Template $template)
   {
     if ($template->getId() != null)
@@ -76,21 +121,35 @@ class TemplateManager
     }
   }
 
+  /**
+   * @param $templateName
+   *
+   * @return mixed
+   */
   public function findOneByName($templateName)
   {
-    return $this->template_repository->findOneByName($templateName);
+    return $this->template_repository->findOneBy(["name" => $templateName]);
   }
 
+  /**
+   * @return mixed
+   */
   public function findAll()
   {
     return $this->template_repository->findAll();
   }
 
+  /**
+   * @return mixed
+   */
   public function findAllActive()
   {
     return $this->template_repository->findByActive(true);
   }
 
+  /**
+   * @param $id
+   */
   public function deleteTemplateFiles($id)
   {
     $this->file_repository->deleteTemplateFiles(self::LANDSCAPE_PREFIX . $id);

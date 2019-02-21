@@ -2,15 +2,15 @@
 
 namespace Catrobat\AppBundle\Features\Web\Context;
 
-use Behat\Behat\Context\CustomSnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Catrobat\AppBundle\Entity\AchievementNotification;
 use Catrobat\AppBundle\Entity\CatroNotification;
+use Catrobat\AppBundle\Entity\ClickStatistic;
 use Catrobat\AppBundle\Entity\CommentNotification;
 use Catrobat\AppBundle\Entity\Extension;
+use Catrobat\AppBundle\Entity\ExtensionRepository;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
@@ -19,17 +19,13 @@ use Catrobat\AppBundle\Entity\NolbExampleProgram;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Catrobat\AppBundle\Entity\ProgramLike;
-use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\ProgramRemixRelation;
 use Catrobat\AppBundle\Entity\StarterCategory;
 use Catrobat\AppBundle\Entity\Tag;
-use Catrobat\AppBundle\Entity\TagRepository;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserComment;
-use Catrobat\AppBundle\Entity\UserCommentRepository;
-use Catrobat\AppBundle\Entity\UserLDAPManager;
 use Catrobat\AppBundle\Entity\UserManager;
-use Catrobat\AppBundle\Features\Helpers\SymfonySupport;
+use Catrobat\AppBundle\Services\ApkRepository;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\File;
@@ -38,9 +34,7 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Hook\Scope\AfterStepScope;
-use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use PHPUnit\Framework\Assert;
-
 
 //
 // Require 3rd-party libraries here:
@@ -49,11 +43,23 @@ use PHPUnit\Framework\Assert;
 /**
  * Feature context.
  */
-class FeatureContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
+class FeatureContext extends MinkContext implements KernelAwareContext
 {
+  /**
+   * @var KernelInterface
+   */
   private $kernel;
+  /**
+   * @var string|string[]|null
+   */
   private $screenshot_directory;
+  /**
+   * @var
+   */
   private $client;
+  /**
+   * @var bool
+   */
   private $use_real_oauth_javascript_code;
 
   const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
@@ -108,29 +114,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->use_real_oauth_javascript_code = false;
   }
 
+  /**
+   * @return string
+   */
   public static function getAcceptedSnippetType()
   {
     return 'regex';
-  }
-
-  private function deleteScreens()
-  {
-    $files = glob($this->screenshot_directory . '*');
-    foreach ($files as $file)
-    {
-      if (is_file($file))
-      {
-        unlink($file);
-      }
-    }
-  }
-
-  /**
-   * @When /^I go to the website root$/
-   */
-  public function iGoToTheWebsiteRoot()
-  {
-    $this->getSession()->visit(self::BASE_URL);
   }
 
   /**
@@ -160,6 +149,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @AfterStep
+   *
+   * @param AfterStepScope $scope
    */
   public function makeScreenshot(AfterStepScope $scope)
   {
@@ -187,6 +178,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I wait (\d+) milliseconds$/
+   * @param $milliseconds
    */
   public function iWaitMilliseconds($milliseconds)
   {
@@ -195,6 +187,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see (\d+) "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
    */
   public function iShouldSeeNumberOfElements($arg1, $arg2)
   {
@@ -204,6 +198,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see a node with id "([^"]*)" having name "([^"]*)" and username "([^"]*)"$/
+   * @param $node_id
+   * @param $expected_node_name
+   * @param $expected_username
    */
   public function iShouldSeeANodeWithNameAndUsername($node_id, $expected_node_name, $expected_username)
   {
@@ -219,6 +216,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see an edge from "([^"]*)" to "([^"]*)"$/
+   * @param $from_id
+   * @param $to_id
    */
   public function iShouldSeeAnEdgeFromTo($from_id, $to_id)
   {
@@ -232,6 +231,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see the featured slider$/
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function iShouldSeeTheFeaturedSlider()
   {
@@ -258,6 +259,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see ([^"]*) programs$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function iShouldSeePrograms($arg1)
   {
@@ -306,6 +310,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   /**
    * @Then /^the selected language should be "([^"]*)"$/
    * @Given /^the selected language is "([^"]*)"$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function theSelectedLanguageShouldBe($arg1)
   {
@@ -330,6 +336,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I switch the language to "([^"]*)"$/
+   * @param $arg1
    */
   public function iSwitchTheLanguageTo($arg1)
   {
@@ -355,6 +362,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see a( [^"]*)? help image "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function iShouldSeeAHelpImage($arg1, $arg2)
   {
@@ -494,6 +504,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are users:$/
+   * @param TableNode $table
    */
   public function thereAreUsers(TableNode $table)
   {
@@ -524,6 +535,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are admins:$/
+   * @param TableNode $table
    */
   public function thereAreAdmins(TableNode $table)
   {
@@ -599,6 +611,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I click on the first "([^"]*)" button$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheFirstButton($arg1)
   {
@@ -614,12 +628,20 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are programs:$/
+   *
+   * @param TableNode $table
+   *
+   * @throws \Exception
    */
   public function thereArePrograms(TableNode $table)
   {
     /**
-     * @var $program \Catrobat\AppBundle\Entity\Program
-     * @var $em      EntityManager
+     * @var $program Program
+     * @var $user User
+     * @var $apkrepository ApkRepository
+     * @var $tag Tag
+     * @var $extension_repo ExtensionRepository
+     * @var $extension Extension
      */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
@@ -668,14 +690,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
         $extensions = explode(',', $programs[$i]['extensions']);
         foreach ($extensions as $extension_name)
         {
-          $extension = $extension_repo->findOneByName($extension_name);
+          $extension = $extension_repo->findOneBy(["name" => $extension_name]);
           $program->addExtension($extension);
         }
       }
 
       if ($program->getApkStatus() == Program::APK_READY)
       {
-        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
         $apkrepository = $this->kernel->getContainer()->get('apkrepository');
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
         copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
@@ -692,6 +713,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are nolb example programs:$/
+   * @param TableNode $table
    */
   public function thereAreNolbExamplePrograms(TableNode $table)
   {
@@ -718,6 +740,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are comments:$/
+   * @param TableNode $table
+   * @throws \Exception
    */
   public function thereAreComments(TableNode $table)
   {
@@ -746,9 +770,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are likes:$/
+   * @param TableNode $table
+   * @throws \Exception
    */
   public function thereAreLikes(TableNode $table)
   {
+    /**
+     * @var $user User
+     * @var $program Program
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $likes = $table->getHash();
 
@@ -767,6 +797,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are forward remix relations:$/
+   * @param TableNode $table
    */
   public function thereAreForwardRemixRelations(TableNode $table)
   {
@@ -778,8 +809,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
     foreach ($relations as $relation)
     {
-      $ancestor_program = $em->getRepository('AppBundle:Program')->find($relation['ancestor_id']);
-      $descendant_program = $em->getRepository('AppBundle:Program')->find($relation['descendant_id']);
+      /**
+       * @var $ancestor_program Program
+       * @var $descendant_program Program
+       */
+      $ancestor_program = $em->getRepository(Program::class)->find($relation['ancestor_id']);
+      $descendant_program = $em->getRepository(Program::class)->find($relation['descendant_id']);
 
       $forward_relation = new ProgramRemixRelation($ancestor_program, $descendant_program, intval($relation['depth']));
       $em->persist($forward_relation);
@@ -789,18 +824,19 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are featured programs:$/
+   * @param TableNode $table
    */
   public function thereAreFeaturedPrograms(TableNode $table)
   {
-    /*
-    * @var $em \Doctrine\ORM\EntityManager
-    */
+    /**
+     * @var $program Program
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $relations = $table->getHash();
 
     foreach ($relations as $relation)
     {
-      $program = $em->getRepository('AppBundle:Program')->find($relation['program_id']);
+      $program = $em->getRepository(Program::class)->find($relation['program_id']);
 
       $featured_program = new FeaturedProgram();
       $featured_program->setProgram($program);
@@ -815,6 +851,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^I write "([^"]*)" in textbox$/
+   * @param $arg1
    */
   public function iWriteInTextbox($arg1)
   {
@@ -826,6 +863,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are tags:$/
+   * @param TableNode $table
    */
   public function thereAreTags(TableNode $table)
   {
@@ -846,6 +884,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^the nolb example program (\d+) has "([^"]*)" set to (\d+)$/
+   * @param $arg1
+   * @param $arg2
+   * @param $arg3
    */
   public function theNolbExampleProgramHasSetTo($arg1, $arg2, $arg3)
   {
@@ -867,6 +908,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are extensions:$/
+   * @param TableNode $table
    */
   public function thereAreExtensions(TableNode $table)
   {
@@ -887,6 +929,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click "([^"]*)"$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClick($arg1)
   {
@@ -903,6 +947,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I click the "([^"]*)" RadioButton$/
+   * @param $arg1
    */
   public function iClickTheRadiobutton($arg1)
   {
@@ -913,6 +958,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should be logged ([^"]*)?$/
+   * @param $arg1
    */
   public function iShouldBeLoggedIn($arg1)
   {
@@ -933,6 +979,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^I( [^"]*)? log in as "([^"]*)" with the password "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
+   * @param $arg3
    */
   public function iAmLoggedInAsAsWithThePassword($arg1, $arg2, $arg3)
   {
@@ -956,6 +1005,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^"([^"]*)" must be selected in "([^"]*)"$/
+   * @param $country
+   * @param $select
    */
   public function mustBeSelectedIn($country, $select)
   {
@@ -965,6 +1016,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^(?:|I )attach the avatar "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/
+   * @param $field
+   * @param $path
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function attachFileToField($field, $path)
   {
@@ -974,6 +1028,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the avatar img tag should( [^"]*)? have the "([^"]*)" data url$/
+   * @param $not
+   * @param $name
    */
   public function theAvatarImgTagShouldHaveTheDataUrl($not, $name)
   {
@@ -997,12 +1053,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
       $styleHeader = $pre_style_header->getAttribute('style');
     }
-    else
-    {
-      //Assert::assertTrue(false, "Couldn't find avatar in menu");
-    }
+
     $sourceHeader = preg_replace("/(.+)url\(([^)]+)\)(.+)/", '\\2', $styleHeader);
-    $sourceHeader = trim($sourceHeader, '"');
+    trim($sourceHeader, '"');
 
     switch ($name)
     {
@@ -1027,6 +1080,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^the element "([^"]*)" should be visible$/
+   * @param $element
    */
   public function theElementShouldBeVisible($element)
   {
@@ -1037,6 +1091,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^the element "([^"]*)" should not exist$/
+   * @param $element
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function theElementShouldNotExist($element)
   {
@@ -1045,6 +1101,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^the element "([^"]*)" should not be visible$/
+   * @param $element
    */
   public function theElementShouldNotBeVisible($element)
   {
@@ -1064,6 +1121,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click the "([^"]*)" button$/
+   * @param $arg1
    */
   public function iClickTheButton($arg1)
   {
@@ -1133,6 +1191,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I trigger Facebook login with auth_type '([^']*)'$/
+   * @param $arg1
    */
   public function iTriggerFacebookLogin($arg1)
   {
@@ -1147,6 +1206,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see marked "([^"]*)"$/
+   * @param $arg1
    */
   public function iShouldSeeMarked($arg1)
   {
@@ -1177,6 +1237,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I trigger Google login with approval prompt "([^"]*)"$/
+   * @param $arg1
    */
 
   public function iTriggerGoogleLogin($arg1)
@@ -1193,6 +1254,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click Google login link "([^"]*)"$/
+   * @param $arg1
    */
   public function iClickGoogleLoginLink($arg1)
   {
@@ -1213,6 +1275,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^there should be "([^"]*)" programs in the database$/
+   * @param $arg1
    */
   public function thereShouldBeProgramsInTheDatabase($arg1)
   {
@@ -1227,13 +1290,14 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are starter programs:$/
+   * @param TableNode $table
+   * @throws \Exception
    */
   public function thereAreStarterPrograms(TableNode $table)
   {
-    /*
-   * @var $program \Catrobat\AppBundle\Entity\Program
-   * @var $starter \Catrobat\AppBundle\Entity\StarterCategory
-   */
+    /**
+     * @var $user User
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
 
     $starter = new StarterCategory();
@@ -1277,6 +1341,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are mediapackages:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreMediapackages(TableNode $table)
   {
@@ -1297,6 +1364,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are mediapackage categories:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreMediapackageCategories(TableNode $table)
   {
@@ -1318,6 +1388,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are mediapackage files:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \ImagickException
    */
   public function thereAreMediapackageFiles(TableNode $table)
   {
@@ -1348,6 +1422,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are program download statistics:$/
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
    */
   public function thereAreProgramDownloadStatistics(TableNode $table)
   {
@@ -1372,7 +1450,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       ];
       $program_statistics = new ProgramDownloads();
       $program_statistics->setProgram($program);
-      $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new DateTime());
+      $program_statistics->setDownloadedAt(new \DateTime($config['downloaded_at']) ?: new \DateTime());
       $program_statistics->setIp(isset($config['ip']) ? $config['ip'] : '88.116.169.222');
       $program_statistics->setCountryCode(isset($config['country_code']) ? $config['country_code'] : 'AT');
       $program_statistics->setCountryName(isset($config['country_name']) ? $config['country_name'] : 'Austria');
@@ -1395,9 +1473,17 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are reportable programs:$/
+   *
+   * @param TableNode $table
+   *
+   * @throws \Exception
    */
   public function thereAreReportablePrograms(TableNode $table)
   {
+    /**
+     * @var $user User
+     * @var $tag Tag
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $programs = $table->getHash();
     $count = count($programs);
@@ -1429,7 +1515,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
       if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null)
       {
-        $tag_repo = $em->getRepository('AppBundle:Tag');
+        $tag_repo = $em->getRepository(Tag::class);
         $tags = explode(',', $programs[$i]['tags_id']);
         foreach ($tags as $tag_id)
         {
@@ -1440,18 +1526,24 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
       if (isset($programs[$i]['extensions']) && $programs[$i]['extensions'] != null)
       {
-        $extension_repo = $em->getRepository('AppBundle:Extension');
+        /**
+         * @var $extension_repo ExtensionRepository
+         * @var $extension Extension
+         */
+        $extension_repo = $em->getRepository(Extension::class);
         $extensions = explode(',', $programs[$i]['extensions']);
         foreach ($extensions as $extension_name)
         {
-          $extension = $extension_repo->findOneByName($extension_name);
+          $extension = $extension_repo->findOneBy(["name" => $extension_name]);
           $program->addExtension($extension);
         }
       }
 
       if ($program->getApkStatus() == Program::APK_READY)
       {
-        /* @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository */
+        /**
+         * @var $apkrepository \Catrobat\AppBundle\Services\ApkRepository
+         */
         $apkrepository = $this->kernel->getContainer()->get('apkrepository');
         $temppath = tempnam(sys_get_temp_dir(), 'apktest');
         copy(self::FIXTUREDIR . 'test.catrobat', $temppath);
@@ -1469,6 +1561,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I download "([^"]*)"$/
+   * @param $arg1
    */
   public function iDownload($arg1)
   {
@@ -1477,6 +1570,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should receive a "([^"]*)" file$/
+   * @param $extension
    */
   public function iShouldReceiveAFile($extension)
   {
@@ -1486,6 +1580,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^the response code should be "([^"]*)"$/
+   * @param $code
    */
   public function theResponseCodeShouldBe($code)
   {
@@ -1495,6 +1590,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the media file "([^"]*)" must have the download url "([^"]*)"$/
+   * @param $id
+   * @param $file_url
    */
   public function theMediaFileMustHaveTheDownloadUrl($id, $file_url)
   {
@@ -1506,6 +1603,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see media file with id "([^"]*)"$/
+   * @param $id
    */
   public function iShouldSeeMediaFileWithId($id)
   {
@@ -1515,6 +1613,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should not see media file with id "([^"]*)"$/
+   * @param $id
    */
   public function iShouldNotSeeMediaFileWithId($id)
   {
@@ -1524,9 +1623,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the link of "([^"]*)" should open "([^"]*)"$/
+   * @param $identifier
+   * @param $url_type
    */
   public function theLinkOfShouldOpen($identifier, $url_type)
   {
+    $class_name = "";
     switch ($identifier)
     {
       case "image":
@@ -1542,6 +1644,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
     Assert::assertTrue(strlen($class_name) > 0);
 
+    $url_text = "";
     switch ($url_type)
     {
       case "download":
@@ -1564,6 +1667,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I see the "([^"]*)" popup$/
+   * @param $arg1
    */
   public function iSeeThePopup($arg1)
   {
@@ -1581,6 +1685,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I see not the "([^"]*)" popup$/
+   * @param $arg1
    */
   public function iSeeNotThePopup($arg1)
   {
@@ -1598,6 +1703,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I click the program download button$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickTheProgramDownloadButton()
   {
@@ -1607,6 +1714,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I click the program image$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickTheProgramImage()
   {
@@ -1615,6 +1724,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I click on the program popup background$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheProgramPopupBackground()
   {
@@ -1623,6 +1734,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I click on the program popup button$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheProgramPopupButton()
   {
@@ -1639,6 +1752,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I want to download the apk file of "([^"]*)"$/
+   * @param $arg1
+   * @throws \Exception
    */
   public function iWantToDownloadTheApkFileOf($arg1)
   {
@@ -1646,7 +1761,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $program = $pm->findOneByName($arg1);
     if ($program === null)
     {
-      throw new \Exception('Program not found: ' + $arg1);
+      throw new \Exception('Program not found: ' . $arg1);
     }
     $router = $this->kernel->getContainer()->get('router');
     $url = $router->generate('ci_download', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
@@ -1677,6 +1792,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I should see the video available at "([^"]*)"$/
+   * @param $url
    */
   public function iShouldSeeElementWithIdWithSrc($url)
   {
@@ -1706,6 +1822,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I switch to popup window$/
+   *
+   * @throws DriverException
+   * @throws UnsupportedDriverActionException
    */
   public function iSwitchToPopupWindow()
   {
@@ -1726,6 +1845,10 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I log in to Facebook with valid credentials$/
+   *
+   * @throws DriverException
+   * @throws UnsupportedDriverActionException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iLogInToFacebookWithEmailAndPassword()
   {
@@ -1781,6 +1904,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I log in to Google with valid credentials$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iLogInToGoogleWithEmailAndPassword()
   {
@@ -1828,6 +1953,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   }
 
+  /**
+   *
+   */
   private function approveGoogleAccess()
   {
     echo 'Google Approve Access form appeared' . "\n";
@@ -1838,6 +1966,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->getSession()->switchToWindow(null);
   }
 
+  /**
+   * @param $mail
+   * @param $pw
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   */
   private function signInWithGoogleEMailAndPassword($mail, $pw)
   {
     echo 'Google login form with E-Mail and Password appeared' . "\n";
@@ -1853,11 +1987,13 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^there is a user in the database:$/
+   * @param TableNode $table
    */
   public function thereIsAUserInTheDatabase(TableNode $table)
   {
     /**
-     * @var $user_manager \Catrobat\AppBundle\Entity\UserManager
+     * @var $user_manager UserManager
+     * @var $user User
      */
     $user_manager = $this->kernel->getContainer()->get('usermanager');
     $users = $table->getHash();
@@ -1890,6 +2026,12 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
+  /**
+   * @param $mail
+   * @param $pw
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   */
   private function signInWithGoogleEMail($mail, $pw)
   {
     echo 'Google Signin with E-Mail form appeared' . "\n";
@@ -1908,6 +2050,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
+  /**
+   * @param $pw
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   */
   private function signInWithGooglePassword($pw)
   {
     echo 'Google Signin with Password form appeared' . "\n";
@@ -1925,6 +2072,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     }
   }
 
+  /**
+   *
+   */
   private function setFacebookFakeData()
   {
     //simulate Facebook login by faking Javascript code and server responses from FakeOAuthService
@@ -1936,6 +2086,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $session->evaluateScript("$('#locale_oauth').val('en_US');");
   }
 
+  /**
+   *
+   */
   private function clickFacebookFakeButton()
   {
     $page = $this->getSession()->getPage();
@@ -1944,6 +2097,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $button->press();
   }
 
+  /**
+   *
+   */
   private function setGooglePlusFakeData()
   {
     //simulate Google+ login by faking Javascript code and server responses from FakeOAuthService
@@ -1955,6 +2111,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $session->evaluateScript("$('#locale_oauth').val('de');");
   }
 
+  /**
+   *
+   */
   private function clickGooglePlusFakeButton()
   {
     $page = $this->getSession()->getPage();
@@ -1995,6 +2154,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I choose the username '([^']*)' and check button activations$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iChooseTheUsernameTestingButtonEnabled($arg1)
   {
@@ -2021,6 +2182,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I choose the username '([^']*)'$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iChooseTheUsername($arg1)
   {
@@ -2042,6 +2205,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     $this->getSession()->wait(500);
   }
 
+  /**
+   * @param $name
+   *
+   * @return bool|string
+   */
   private function getParameterValue($name)
   {
     $myfile = fopen("app/config/parameters.yml", "r") or die("Unable to open file!");
@@ -2061,6 +2229,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     return false;
   }
 
+  /**
+   * @param $value
+   */
   private function setOauthServiceParameter($value)
   {
     $new_content = 'parameters:' . chr(10) . '    oauth_use_real_service: ' . $value;
@@ -2069,6 +2240,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see "([^"]*)" "([^"]*)" tutorial banners$/
+   * @param $count
+   * @param $view
    */
   public function iShouldSeeTutorialBanners($count, $view)
   {
@@ -2104,6 +2277,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on the "([^"]*)" banner$/
+   * @param $numb
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheBanner($numb)
   {
@@ -2135,6 +2311,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^following programs are featured:$/
+   * @param TableNode $table
    */
   public function followingProgramsAreFeatured(TableNode $table)
   {
@@ -2166,6 +2343,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I should see the slider with the values "([^"]*)"$/
+   * @param $values
    */
   public function iShouldSeeTheSliderWithTheValues($values)
   {
@@ -2227,6 +2405,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^I search for "([^"]*)" with the searchbar$/
+   * @param $arg1
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iSearchForWithTheSearchbar($arg1)
   {
@@ -2266,61 +2446,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
   }
 
   /**
-   * @Then /^I should see the Google Plus (\d+) button on the bottom of the program page$/
-   */
-  public function iShouldSeeTheGooglePlusButtonOnTheBottomOfTheProgramPage($arg1)
-  {
-    $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
-    Assert::assertTrue($plus_one_button != null && $plus_one_button->isVisible(), "The Google +1 Button is not visible!");
-    Assert::assertTrue($plus_one_button->getParent()->getParent()->getTagName() == 'div', "Parent is not header element");
-  }
-
-  /**
-   * @Then /^I should see the Facebook Share button$/
-   */
-  public function iShouldSeeTheFacebookShareButton()
-  {
-    $share_button = $this->getSession()->getPage()->findById('share-facebook');
-    Assert::assertTrue($share_button != null && $share_button->isVisible(), "The Facebook share button is not visible!");
-  }
-
-  /**
-   * @Then /^I should see the Google Plus share button$/
-   */
-  public function iShouldSeeTheGooglePlusShareButton()
-  {
-    $share_button = $this->getSession()->getPage()->findById('share-gplus');
-    Assert::assertTrue($share_button != null && $share_button->isVisible(), "The Google+ share button is not visible!");
-  }
-
-  /**
-   * @Then /^I should see the Twitter share button$/
-   */
-  public function iShouldSeeTheTwitterShareButton()
-  {
-    $share_button = $this->getSession()->getPage()->findById('share-twitter');
-    Assert::assertTrue($share_button != null && $share_button->isVisible(), "The Twitter share button is not visible!");
-  }
-
-  /**
-   * @Then /^I should see the Mail share button$/
-   */
-  public function iShouldSeeTheMailShareButton()
-  {
-    $share_button = $this->getSession()->getPage()->findById('share-email');
-    Assert::assertTrue($share_button != null && $share_button->isVisible(), "The E-Mail share button is not visible!");
-  }
-
-  /**
-   * @Then /^I should see the WhatsApp share button$/
-   */
-  public function iShouldSeeTheWhatsappShareButton()
-  {
-    $share_button = $this->getSession()->getPage()->findById('share-whatsapp');
-    Assert::assertTrue($share_button != null && $share_button->isVisible(), "The WhatsApp share button is not visible!");
-  }
-
-  /**
    * @Then /^I should see the logout button$/
    */
   public function iShouldSeeTheLogoutButton()
@@ -2340,6 +2465,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the href with id "([^"]*)" should be void$/
+   * @param $arg1
    */
   public function theHrefWithIdShouldBeVoid($arg1)
   {
@@ -2349,6 +2475,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the href with id "([^"]*)" should not be void$/
+   * @param $arg1
    */
   public function theHrefWithIdShouldNotBeVoid($arg1)
   {
@@ -2367,9 +2494,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
+   * @param $type_name
+   * @param $name_id
+   * @param $id_or_value
    */
   public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id_or_value)
   {
+    /**
+     * @var $click ClickStatistic
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('AppBundle:ClickStatistic')->findAll();
     Assert::assertEquals(1, count($clicks), "No database entry found!");
@@ -2409,9 +2542,15 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^There should be one homepage click database entry with type is "([^"]*)" and program id is "([^"]*)"$/
+   *
+   * @param $type_name
+   * @param $id
    */
   public function thereShouldBeOneHomepageClickDatabaseEntryWithTypeIsAndIs($type_name, $id)
   {
+    /**
+     * @var $click ClickStatistic
+     */
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
     $clicks = $em->getRepository('AppBundle:HomepageClickStatistic')->findAll();
     Assert::assertEquals(1, count($clicks), "No database entry found!");
@@ -2442,6 +2581,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on the first recommended program$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheFirstRecommendedProgram()
   {
@@ -2457,6 +2598,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on the first recommended homepage program$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheFirstRecommendedHomepageProgram()
   {
@@ -2472,6 +2615,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on the first featured homepage program$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnAFeaturedHomepageProgram()
   {
@@ -2487,6 +2632,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on a newest homepage program having program id "([^"]*)"$/
+   * @param $program_id
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnANewestHomepageProgram($program_id)
   {
@@ -2502,6 +2649,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
+   * @param $program_id
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnAMostDownloadedHomepageProgram($program_id)
   {
@@ -2517,6 +2666,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
+   *
+   * @param $program_id
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnAMostViewedHomepageProgram($program_id)
   {
@@ -2532,6 +2684,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on a random homepage program having program id "([^"]*)"$/
+   *
+   * @param $program_id
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnARandomHomepageProgram($program_id)
   {
@@ -2547,6 +2702,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^I click on the first recommended specific program$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickOnTheFirstRecommendedSpecificProgram()
   {
@@ -2562,6 +2719,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^There should be recommended specific programs$/
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function thereShouldBeRecommendedSpecificPrograms()
   {
@@ -2571,40 +2730,46 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^There should be no recommended specific programs$/
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function thereShouldBeNoRecommendedSpecificPrograms()
   {
-    $arg1 = '#specific-programs-recommendations .programs .rec-programs';
-    $this->assertSession()->elementNotExists('css', $arg1);
+    $this->assertSession()->elementNotExists('css',
+      '#specific-programs-recommendations .programs .rec-programs');
   }
 
   /**
    * @Then /^I should see a recommended homepage program having ID "([^"]*)" and name "([^"]*)"$/
+   * @param $program_id
+   * @param $program_name
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iShouldSeeARecommendedHomepageProgramHavingIdAndName($program_id, $program_name)
   {
-    $arg1 = '#program-' . $program_id . ' .homepage-recommended-programs';
-    $this->assertSession()->elementExists('css', $arg1);
+    $this->assertSession()->elementExists('css',
+      '#program-' . $program_id . ' .homepage-recommended-programs');
 
-    $arg2 = '#program-' . $program_id . ' .homepage-recommended-programs .program-name';
     Assert::assertEquals($program_name, $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg2)
+      ->find('css', '#program-' . $program_id . ' .homepage-recommended-programs .program-name')
       ->getText());
   }
 
   /**
    * @Then /^I should not see any recommended homepage programs$/
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function iShouldNotSeeAnyRecommendedHomepagePrograms()
   {
-    $arg1 = '.homepage-recommended-programs';
-    $this->assertSession()->elementNotExists('css', $arg1);
+    $this->assertSession()->elementNotExists('css', '.homepage-recommended-programs');
   }
 
   /**
    * @Then /^I should see the image "([^"]*)"$/
+   * @param $arg1
    */
   public function iShouldSeeTheImage($arg1)
   {
@@ -2625,6 +2790,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^Element "([^"]*)" should have attribute "([^"]*)" with value "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
+   * @param $arg3
    */
   public function elementShouldHaveAttributeWith($arg1, $arg2, $arg3)
   {
@@ -2664,6 +2832,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^at least one "([^"]*)" element should be visible$/
+   * @param $arg1
    */
   public function atLeastOneElementShouldBeVisible($arg1)
   {
@@ -2681,6 +2850,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^no "([^"]*)" element should be visible$/
+   * @param $arg1
    */
   public function atLeastOneElementShouldNotBeVisible($arg1)
   {
@@ -2716,6 +2886,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^I enter "([^"]*)" into the currently visible search input$/
+   * @param $arg1
    */
   public function iEnterIntoTheCurrentlyVisibleSearchInput($arg1)
   {
@@ -2752,6 +2923,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are programs with a large description:$/
+   * @param TableNode $table
    */
   public function thereAreProgramsWithALargeDescription(TableNode $table)
   {
@@ -2766,6 +2938,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     {
       for ($i = 0; $i < $count; ++$i)
       {
+        /**
+         * @var $user User
+         */
         $user = $em->getRepository('AppBundle:User')->findOneBy([
           'username' => $programs[$i]['owned by'],
         ]);
@@ -2812,6 +2987,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Given /^there are "([^"]*)"\+ notifications for "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
    */
   public function thereAreNotificationsFor($arg1, $arg2)
   {
@@ -2844,6 +3021,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @When /^User "([^"]*)" is followed by "([^"]*)"$/
+   * @param $user_id
+   * @param $follow_ids
    */
   public function userIsFollowed($user_id, $follow_ids)
   {
@@ -2865,6 +3044,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
    */
   public function theElementShouldHaveType($arg1, $arg2)
   {
@@ -2875,6 +3056,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
 
   /**
    * @Then /^the element "([^"]*)" should not have type "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
    */
   public function theElementShouldNotHaveType($arg1, $arg2)
   {

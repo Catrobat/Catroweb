@@ -6,6 +6,9 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
 class PointToBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::POINT_TO_BRICK;

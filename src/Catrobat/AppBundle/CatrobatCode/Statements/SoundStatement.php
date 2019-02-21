@@ -2,12 +2,33 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class SoundStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class SoundStatement extends Statement
 {
+  /**
+   * @var
+   */
   private $value;
+  /**
+   * @var
+   */
   private $fileName;
+  /**
+   * @var
+   */
   private $name;
 
+  /**
+   * SoundStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   * @param $value
+   */
   public function __construct($statementFactory, $xmlTree, $spaces, $value)
   {
     $this->value = $value;
@@ -16,6 +37,9 @@ class SoundStatement extends Statement
       "");
   }
 
+  /**
+   * @return string
+   */
   public function execute()
   {
     $code = $this->value;
@@ -34,6 +58,9 @@ class SoundStatement extends Statement
     return $code;
   }
 
+  /**
+   *
+   */
   private function findNames()
   {
     $tmpStatements = parent::getStatements();
@@ -56,10 +83,11 @@ class SoundStatement extends Statement
     }
   }
 
+  /**
+   * @return mixed
+   */
   public function getName()
   {
     return $this->name;
   }
 }
-
-?>

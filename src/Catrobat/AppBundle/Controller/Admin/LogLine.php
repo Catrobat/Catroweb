@@ -3,13 +3,39 @@
 namespace Catrobat\AppBundle\Controller\Admin;
 
 
+/**
+ * Class LogLine
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class LogLine
 {
+
+  /**
+   * @var string
+   */
   public $date = "";
+
+  /**
+   * @var string
+   */
   public $debug_code = "";
+
+  /**
+   * @var int
+   */
   public $debug_level = 0;
+
+  /**
+   * @var string
+   */
   public $msg = "";
 
+
+  /**
+   * LogLine constructor.
+   *
+   * @param null $line
+   */
   public function __construct($line = null)
   {
     if ($line === null)
@@ -29,6 +55,14 @@ class LogLine
     }
   }
 
+
+  /**
+   * @param      $string
+   * @param      $needle
+   * @param bool $last_char
+   *
+   * @return bool|string
+   */
   private function getSubstring($string, $needle, $last_char = false)
   {
     $pos = strpos($string, $needle);
@@ -45,6 +79,12 @@ class LogLine
     return substr($string, 0, $pos);
   }
 
+
+  /**
+   * @param $string
+   *
+   * @return int
+   */
   private function getDebugLevel($string)
   {
     $pos = strpos($string, ".");

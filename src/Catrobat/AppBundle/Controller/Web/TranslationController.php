@@ -7,8 +7,14 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+
+/**
+ * Class TranslationController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class TranslationController extends Controller
 {
+
   /**
    * @Route("/translate/{word}/{array}/{domain}", name = "translate_word", defaults={"array" = "", "domain" =
    *                                              "catroweb"})
@@ -58,6 +64,7 @@ class TranslationController extends Controller
     return JsonResponse::create($translator->transChoice($word, $count, $decodedArray, $domain), 200);
   }
 
+  
   /**
    * @param $array
    *

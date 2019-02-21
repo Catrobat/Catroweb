@@ -3,16 +3,28 @@
 namespace Catrobat\AppBundle\Admin\Blocks;
 
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use \Symfony\Component\OptionsResolver\OptionsResolver;
 
+
+/**
+ * Class StatisticBlockService
+ * @package Catrobat\AppBundle\Admin\Blocks
+ */
 class StatisticBlockService extends AbstractBlockService
 {
 
+  /**
+   * @var
+   */
   private $extraced_path;
+
+  /**
+   * @var
+   */
   private $apk_path;
+
 
   /**
    * {@inheritdoc}
@@ -36,8 +48,8 @@ class StatisticBlockService extends AbstractBlockService
       'usedSpace'      => $this->getSymbolByQuantity($usedSpace),
       'ram'            => shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'"),
     ], $response);
-
   }
+
 
   /**
    * {@inheritdoc}
@@ -47,10 +59,11 @@ class StatisticBlockService extends AbstractBlockService
     return 'Cleanup Server';
   }
 
+
   /**
    * {@inheritdoc}
    */
-  public function setDefaultSettings(OptionsResolverInterface $resolver)
+  public function configureSettings(OptionsResolver $resolver)
   {
     $resolver->setDefaults([
       'url'      => false,
@@ -59,6 +72,15 @@ class StatisticBlockService extends AbstractBlockService
     ]);
   }
 
+
+  /**
+   * StatisticBlockService constructor.
+   *
+   * @param $name
+   * @param $templating
+   * @param $extraced_path
+   * @param $apk_path
+   */
   public function __construct($name, $templating, $extraced_path, $apk_path)
   {
     parent::__construct($name, $templating);
@@ -67,6 +89,11 @@ class StatisticBlockService extends AbstractBlockService
   }
 
 
+  /**
+   * @param $bytes
+   *
+   * @return string
+   */
   function getSymbolByQuantity($bytes)
   {
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];

@@ -2,13 +2,23 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\GameJam;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class GameJamController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class GameJamController extends Controller
 {
+
   /**
    * @Route("/gamejame/submit-your-own", name="gamejam_submit_own", methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws \Twig\Error\Error
    */
   public function gamejamSubmitOwnAction()
   {
@@ -35,9 +45,15 @@ class GameJamController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/gaming-tutorials/{page}", name="catrobat_web_gamejamtutorialcards", defaults={"page" = -1},
    *                                    requirements={"page":"\d+"}, methods={"GET"})
+   *
+   * @param $page
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function tutorialcardsAction($page)
   {
@@ -98,9 +114,10 @@ class GameJamController extends Controller
     ]);
   }
 
+
   /**
    * @param $gamejam_config
-   * @param $gamejam
+   * @param $gamejam GameJam
    *
    * @return array
    */

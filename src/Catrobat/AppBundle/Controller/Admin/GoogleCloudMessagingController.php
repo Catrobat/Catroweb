@@ -6,13 +6,30 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
+/**
+ * Class GoogleCloudMessagingController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class GoogleCloudMessagingController extends CRUDController
 {
+
+  /**
+   * @param Request|null $request
+   *
+   * @return Response
+   */
   public function listAction(Request $request = null)
   {
     return $this->renderWithExtraParams('Admin/gcm.html.twig');
   }
 
+
+  /**
+   * @param Request|null $request
+   *
+   * @return Response
+   */
   public function sendAction(Request $request = null)
   {
     if (!isset($_GET['a']) || !isset($_GET['m']))

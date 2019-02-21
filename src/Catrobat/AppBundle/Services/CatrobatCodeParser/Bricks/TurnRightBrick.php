@@ -7,6 +7,9 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
 class TurnRightBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::TURN_RIGHT_BRICK;

@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class GoNStepsBackStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class GoNStepsBackStatement extends Statement
 {
   const BEGIN_STRING = "go back (";
   const END_STRING = ") layers<br/>";
 
+  /**
+   * GoNStepsBackStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,6 +25,9 @@ class GoNStepsBackStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
@@ -22,10 +36,11 @@ class GoNStepsBackStatement extends Statement
     return "Go back " . $formula_string_without_markup . " layer(s)";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_blue.png";
   }
 }
-
-?>

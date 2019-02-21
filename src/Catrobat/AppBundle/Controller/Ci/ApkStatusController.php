@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Controller\Ci;
 
-use Catrobat\AppBundle\Controller\Web\DefaultController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,10 +9,22 @@ use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+
+/**
+ * Class ApkStatusController
+ * @package Catrobat\AppBundle\Controller\Ci
+ */
 class ApkStatusController extends Controller
 {
+
   /**
-   * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"}, requirements={"id": "\d+"}, methods={"GET"})
+   * @Route("/ci/status/{id}", name="ci_status", defaults={"_format": "json"},
+   *   requirements={"id": "\d+"}, methods={"GET"})
+   *
+   * @param Request $request
+   * @param Program $program
+   *
+   * @return JsonResponse
    */
   public function getApkStatusAction(Request $request, Program $program)
   {
@@ -22,7 +33,8 @@ class ApkStatusController extends Controller
     {
       case Program::APK_READY:
         $result['status'] = 'ready';
-        $result['url'] = $this->generateUrl('ci_download', ['id' => $program->getId(), 'fname' => $program->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $result['url'] = $this->generateUrl('ci_download',
+          ['id' => $program->getId(), 'fname' => $program->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
         $result['label'] = $this->get('translator')->trans('ci.download', [], 'catroweb');
         break;
       case Program::APK_PENDING:

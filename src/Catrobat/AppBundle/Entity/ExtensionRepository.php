@@ -4,6 +4,7 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * ExtensionRepository.
  *
@@ -12,6 +13,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExtensionRepository extends EntityRepository
 {
+  /**
+   * @return mixed
+   */
   public function getAllExtensionsPrefix()
   {
     $qb = $this->createQueryBuilder('e');
@@ -23,6 +27,11 @@ class ExtensionRepository extends EntityRepository
 
   }
 
+  /**
+   * @param $name
+   *
+   * @return mixed
+   */
   public function getExtensionByName($name)
   {
     $qb = $this->createQueryBuilder('e');

@@ -3,24 +3,42 @@
 namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
-use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
-use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * Class ProgramFlavorListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class ProgramFlavorListener
 {
+
+  /**
+   * @var RequestStack
+   */
+  private $request_stack;
+
+  /**
+   * ProgramFlavorListener constructor.
+   *
+   * @param RequestStack $stack
+   */
   public function __construct(RequestStack $stack)
   {
     $this->request_stack = $stack;
   }
 
+  /**
+   * @param ProgramBeforePersistEvent $event
+   */
   public function onEvent(ProgramBeforePersistEvent $event)
   {
     $this->checkFlavor($event->getProgramEntity());
   }
 
+  /**
+   * @param Program $program
+   */
   public function checkFlavor(Program $program)
   {
     $request = $this->request_stack->getCurrentRequest();

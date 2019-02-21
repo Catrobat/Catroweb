@@ -9,13 +9,24 @@ use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\MissingImageException;
 
+
+/**
+ * Class OnlyDefinedImagesValidator
+ * @package Catrobat\AppBundle\Listeners
+ */
 class OnlyDefinedImagesValidator
 {
+  /**
+   * @param ProgramBeforeInsertEvent $event
+   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile());
   }
 
+  /**
+   * @param ExtractedCatrobatFile $file
+   */
   public function validate(ExtractedCatrobatFile $file)
   {
     $files_in_xml = self::getImagesFromXml($file->getProgramXmlProperties());
@@ -33,6 +44,11 @@ class OnlyDefinedImagesValidator
     }
   }
 
+  /**
+   * @param $base_path
+   *
+   * @return array
+   */
   protected static function getImagesFromImageDirectory($base_path)
   {
     $images = [];
@@ -46,15 +62,16 @@ class OnlyDefinedImagesValidator
     return $images;
   }
 
+  /**
+   * @param $xml
+   *
+   * @return array
+   */
   protected static function getImagesFromXml($xml)
   {
     $defined_file_nodes = $xml->xpath('/program/objectList/object/lookList/look/fileName');
     $defined_files = [];
-//    while (list(, $node) = each($defined_file_nodes))
-//    {
-//      $defined_files[] = $node;
-//    }
-//
+
     foreach ($defined_file_nodes as $key => $node)
     {
       $defined_files[] = $node;

@@ -7,11 +7,27 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * Class UserAuthenticator
+ * @package Catrobat\AppBundle\Security
+ */
 class UserAuthenticator
 {
+  /**
+   * @var AuthenticationManagerInterface
+   */
   private $authentication_manager;
+  /**
+   * @var UserProviderInterface
+   */
   private $user_provider;
 
+  /**
+   * UserAuthenticator constructor.
+   *
+   * @param UserProviderInterface          $user_provider
+   * @param AuthenticationManagerInterface $authentication_manager
+   */
   public function __construct(UserProviderInterface $user_provider, AuthenticationManagerInterface $authentication_manager)
   {
     $this->authentication_manager = $authentication_manager;
@@ -19,8 +35,8 @@ class UserAuthenticator
   }
 
   /**
-   * @param unknown $username
-   * @param unknown $password
+   * @param $username
+   * @param $password
    *
    * @return TokenInterface
    */

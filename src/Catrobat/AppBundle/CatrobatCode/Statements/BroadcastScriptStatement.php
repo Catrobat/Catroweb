@@ -2,12 +2,27 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+
+/**
+ * Class BroadcastScriptStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class BroadcastScriptStatement extends Statement
 {
   const BEGIN_STRING = "when receive message ";
 
+  /**
+   * @var
+   */
   private $message;
 
+  /**
+   * BroadcastScriptStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -15,6 +30,9 @@ class BroadcastScriptStatement extends Statement
       "");
   }
 
+  /**
+   * @return string
+   */
   public function execute()
   {
     $children = $this->executeChildren();
@@ -28,6 +46,9 @@ class BroadcastScriptStatement extends Statement
     return $code;
   }
 
+  /**
+   * @return string
+   */
   public function executeChildren()
   {
     $code = '';
@@ -46,6 +67,9 @@ class BroadcastScriptStatement extends Statement
     return $code;
   }
 
+  /**
+   * @return mixed
+   */
   public function getMessage()
   {
     if ($this->message == null)
@@ -56,5 +80,3 @@ class BroadcastScriptStatement extends Statement
     return $this->message;
   }
 }
-
-?>

@@ -8,13 +8,26 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
+/**
+ * Class ReportController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class ReportController extends Controller
 {
 
+  /**
+   * @param Request|null $request
+   *
+   * @return RedirectResponse
+   */
   public function unreportProgramAction(Request $request = null)
   {
-    /* @var $object \Catrobat\AppBundle\Entity\ProgramInappropriateReport */
-    /* @var $program \Catrobat\AppBundle\Entity\Program */
+    /**
+      * @var $object \Catrobat\AppBundle\Entity\ProgramInappropriateReport
+      * @var $program \Catrobat\AppBundle\Entity\Program
+      */
+
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -35,6 +48,12 @@ class ReportController extends Controller
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+
+  /**
+   * @param Request|null $request
+   *
+   * @return RedirectResponse
+   */
   public function unreportCommentAction(Request $request = null)
   {
 
@@ -54,6 +73,12 @@ class ReportController extends Controller
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+
+  /**
+   * @param Request|null $request
+   *
+   * @return RedirectResponse
+   */
   public function deleteCommentAction(Request $request = null)
   {
     /* @var $object \Catrobat\AppBundle\Entity\UserComment */

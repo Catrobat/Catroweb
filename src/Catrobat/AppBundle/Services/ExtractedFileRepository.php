@@ -9,20 +9,57 @@ use Catrobat\AppBundle\Entity\ProgramManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 
+
+/**
+ * Class ExtractedFileRepository
+ * @package Catrobat\AppBundle\Services
+ */
 class ExtractedFileRepository
 {
+  /**
+   * @var
+   */
   private $local_path;
+  /**
+   * @var
+   */
   private $webpath;
+  /**
+   * @var
+   */
   private $local_storage_path;
+  /**
+   * @var CatrobatFileExtractor
+   */
   private $file_extractor;
+  /**
+   * @var ProgramManager
+   */
   private $program_manager;
+  /**
+   * @var ProgramFileRepository
+   */
   private $prog_file_repo;
+  /**
+   * @var LoggerInterface
+   */
   private $l;
 
+  /**
+   * ExtractedFileRepository constructor.
+   *
+   * @param                       $local_extracted_path
+   * @param                       $web_extracted_path
+   * @param                       $local_storage_path
+   * @param CatrobatFileExtractor $file_extractor
+   * @param ProgramManager        $program_manager
+   * @param ProgramFileRepository $prog_file_rep
+   * @param LoggerInterface       $l
+   */
   public function __construct($local_extracted_path, $web_extracted_path, $local_storage_path,
-                              CatrobatFileExtractor $file_extractor,
-                              ProgramManager $program_manager,
-                              ProgramFileRepository $prog_file_rep, LoggerInterface $l)
+                                 CatrobatFileExtractor $file_extractor,
+                                 ProgramManager $program_manager,
+                                 ProgramFileRepository $prog_file_rep, LoggerInterface $l)
   {
     if (!is_dir($local_extracted_path))
     {
@@ -37,6 +74,13 @@ class ExtractedFileRepository
     $this->l = $l;
   }
 
+  /**
+   * @param Program $program
+   *
+   * @return ExtractedCatrobatFile
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function loadProgramExtractedFile(Program $program)
   {
     try
@@ -54,6 +98,12 @@ class ExtractedFileRepository
     }
   }
 
+  /**
+   * @param Program $program
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function removeProgramExtractedFile(Program $program)
   {
     try

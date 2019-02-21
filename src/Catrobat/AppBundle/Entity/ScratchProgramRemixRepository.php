@@ -48,6 +48,9 @@ class ScratchProgramRemixRepository extends EntityRepository
       ->execute();
   }
 
+  /**
+   *
+   */
   public function removeAllRelations()
   {
     $qb = $this->createQueryBuilder('s');

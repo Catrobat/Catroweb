@@ -176,11 +176,11 @@ class GameJam
   /**
    * Add program
    *
-   * @param \Catrobat\AppBundle\Entity\Program $program
+   * @param Program $program
    *
    * @return GameJam
    */
-  public function addProgram(\Catrobat\AppBundle\Entity\Program $program)
+  public function addProgram(Program $program)
   {
     $this->programs[] = $program;
 
@@ -190,9 +190,9 @@ class GameJam
   /**
    * Remove program
    *
-   * @param \Catrobat\AppBundle\Entity\Program $program
+   * @param Program $program
    */
-  public function removeProgram(\Catrobat\AppBundle\Entity\Program $program)
+  public function removeProgram(Program $program)
   {
     $this->programs->removeElement($program);
   }
@@ -210,11 +210,11 @@ class GameJam
   /**
    * Add sampleProgram
    *
-   * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
+   * @param Program $sampleProgram
    *
    * @return GameJam
    */
-  public function addSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
+  public function addSampleProgram(Program $sampleProgram)
   {
     $this->sample_programs[] = $sampleProgram;
 
@@ -224,9 +224,9 @@ class GameJam
   /**
    * Remove sampleProgram
    *
-   * @param \Catrobat\AppBundle\Entity\Program $sampleProgram
+   * @param Program $sampleProgram
    */
-  public function removeSampleProgram(\Catrobat\AppBundle\Entity\Program $sampleProgram)
+  public function removeSampleProgram(Program $sampleProgram)
   {
     $this->sample_programs->removeElement($sampleProgram);
   }

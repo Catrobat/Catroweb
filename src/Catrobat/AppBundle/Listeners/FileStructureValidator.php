@@ -4,18 +4,27 @@ namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Symfony\Component\Finder\Finder;
-use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Exceptions\Upload\UnexpectedFileException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
+
+/**
+ * Class FileStructureValidator
+ * @package Catrobat\AppBundle\Listeners
+ */
 class FileStructureValidator
 {
+  /**
+   * @param ProgramBeforeInsertEvent $event
+   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile());
   }
 
+  /**
+   * @param ExtractedCatrobatFile $file
+   */
   public function validate(ExtractedCatrobatFile $file)
   {
 

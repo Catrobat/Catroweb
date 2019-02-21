@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class ComeToFrontStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class ComeToFrontStatement extends Statement
 {
   const BEGIN_STRING = "come to front";
   const END_STRING = "<br/>";
 
+  /**
+   * ComeToFrontStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,15 +25,19 @@ class ComeToFrontStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     return "Go to front";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_blue.png";
   }
 }
-
-?>

@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class WhenClonedScript
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class WhenClonedScript extends Script
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::WHEN_CLONED_SCRIPT;

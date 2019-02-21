@@ -2,22 +2,28 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Process\Process;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
+
+/**
+ * Class CreateBackupCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CreateBackupCommand extends ContainerAwareCommand
 {
+  /**
+   * @var
+   */
   public $output;
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:backup:create')
@@ -25,6 +31,13 @@ class CreateBackupCommand extends ContainerAwareCommand
       ->addArgument('backupName', InputArgument::OPTIONAL, 'Backupname without extension');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Exception
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
@@ -80,9 +93,6 @@ class CreateBackupCommand extends ContainerAwareCommand
 
     $progress->advance();
     $progress->setMessage('Compression started');
-
-//    CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -zcvf $zip_path $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir",
-//      ['timeout' => 14400]);
 
     CommandHelper::executeShellCommand("tar --exclude=.gitignore --mode=0777 --transform \"s|web/resources||\" --transform \"s|" . substr($sql_path, 1) . "|database.sql|\" -cv 
       $sql_path $thumbnail_dir $screenshot_dir $featuredimage_dir $programs_dir $mediapackage_dir $template_dir | pigz > $zip_path",

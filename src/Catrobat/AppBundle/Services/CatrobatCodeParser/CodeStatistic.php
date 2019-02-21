@@ -5,20 +5,58 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts\Script;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
+
+/**
+ * Class CodeStatistic
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser
+ */
 class CodeStatistic
 {
+  /**
+   * @var int
+   */
   private $total_num_scenes;
+  /**
+   * @var int
+   */
   private $total_num_scripts;
+  /**
+   * @var int
+   */
   private $total_num_bricks;
+  /**
+   * @var int
+   */
   private $total_num_objects;
+  /**
+   * @var int
+   */
   private $total_num_looks;
+  /**
+   * @var int
+   */
   private $total_num_sounds;
+  /**
+   * @var int
+   */
   private $total_num_global_vars;
+  /**
+   * @var int
+   */
   private $total_num_local_vars;
 
+  /**
+   * @var array
+   */
   private $brick_type_statistic;
+  /**
+   * @var array
+   */
   private $brick_type_register;
 
+  /**
+   * CodeStatistic constructor.
+   */
   public function __construct()
   {
     $this->total_num_scenes = 0;
@@ -93,6 +131,9 @@ class CodeStatistic
     ];
   }
 
+  /**
+   * @param ParsedObjectsContainer $object_list_container
+   */
   public function update(ParsedObjectsContainer $object_list_container)
   {
     if ($object_list_container instanceof ParsedScene)
@@ -104,6 +145,9 @@ class CodeStatistic
 
     foreach ($objects as $object)
     {
+      /**
+       * @var $object ParsedObject|ParsedObjectGroup
+       */
       if ($object->isGroup())
       {
         foreach ($object->getObjects() as $group_object)
@@ -116,11 +160,17 @@ class CodeStatistic
     }
   }
 
+  /**
+   *
+   */
   protected function updateSceneStatistic()
   {
     $this->total_num_scenes++;
   }
 
+  /**
+   * @param ParsedObject $object
+   */
   protected function updateObjectStatistic(ParsedObject $object)
   {
     $this->total_num_objects++;
@@ -132,16 +182,25 @@ class CodeStatistic
       $this->updateScriptStatistic($script);
   }
 
+  /**
+   * @param $num_looks
+   */
   protected function updateLookStatistic($num_looks)
   {
     $this->total_num_looks += $num_looks;
   }
 
+  /**
+   * @param $num_sounds
+   */
   protected function updateSoundStatistic($num_sounds)
   {
     $this->total_num_sounds += $num_sounds;
   }
 
+  /**
+   * @param Script $script
+   */
   protected function updateScriptStatistic(Script $script)
   {
     $this->total_num_scripts++;
@@ -152,6 +211,9 @@ class CodeStatistic
       $this->updateBrickStatistic($brick);
   }
 
+  /**
+   * @param $brick Script
+   */
   protected function updateBrickStatistic($brick)
   {
     $this->total_num_bricks++;
@@ -190,6 +252,10 @@ class CodeStatistic
     }
   }
 
+  /**
+   * @param $brick_type
+   * @param $brick_category
+   */
   protected function updateBrickTypeStatistic($brick_type, $brick_category)
   {
     $this->brick_type_statistic[$brick_category]['numTotal']++;
@@ -202,12 +268,18 @@ class CodeStatistic
   }
 
 
+  /**
+   * @param \SimpleXMLElement $program_xml_properties
+   */
   public function computeVariableStatistic(\SimpleXMLElement $program_xml_properties)
   {
     $this->countGlobalVariables($program_xml_properties);
     $this->countLocalVariables($program_xml_properties);
   }
 
+  /**
+   * @param \SimpleXMLElement $program_xml_properties
+   */
   protected function countGlobalVariables(\SimpleXMLElement $program_xml_properties)
   {
     try
@@ -221,6 +293,9 @@ class CodeStatistic
     }
   }
 
+  /**
+   * @param \SimpleXMLElement $program_xml_properties
+   */
   protected function countLocalVariables(\SimpleXMLElement $program_xml_properties)
   {
     try
@@ -234,46 +309,73 @@ class CodeStatistic
     }
   }
 
+  /**
+   * @return int
+   */
   public function getSceneStatistic()
   {
     return $this->total_num_scenes;
   }
 
+  /**
+   * @return int
+   */
   public function getScriptStatistic()
   {
     return $this->total_num_scripts;
   }
 
+  /**
+   * @return int
+   */
   public function getBrickStatistic()
   {
     return $this->total_num_bricks;
   }
 
+  /**
+   * @return array
+   */
   public function getBrickTypeStatistic()
   {
     return $this->brick_type_statistic;
   }
 
+  /**
+   * @return int
+   */
   public function getObjectStatistic()
   {
     return $this->total_num_objects;
   }
 
+  /**
+   * @return int
+   */
   public function getLookStatistic()
   {
     return $this->total_num_looks;
   }
 
+  /**
+   * @return int
+   */
   public function getSoundStatistic()
   {
     return $this->total_num_sounds;
   }
 
+  /**
+   * @return int
+   */
   public function getGlobalVarStatistic()
   {
     return $this->total_num_global_vars;
   }
 
+  /**
+   * @return int
+   */
   public function getLocalVarStatistic()
   {
     return $this->total_num_local_vars;

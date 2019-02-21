@@ -10,17 +10,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * Created by IntelliJ IDEA.
- * User: Wolfgang Karl
- * Date: 20.03.16
- * Time: 14:55
+ * Class TeacherDownloadAreaController
+ * @package Catrobat\AppBundle\Controller\Web
  */
 class TeacherDownloadAreaController extends Controller
 {
   const PASSWORD = "1234";
 
+
   /**
    * @Route("/teachersLogin", name="teachersLogin", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+   * @throws \Twig\Error\Error
    */
   public function teachersLoginAction(Request $request)
   {
@@ -32,8 +36,14 @@ class TeacherDownloadAreaController extends Controller
     return $this->get('templating')->renderResponse('teachers/teachersLogin.html.twig');
   }
 
+
   /**
    * @Route("/teachersLogout", name="teachersLogout", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   *
    */
   public function teachersLogoutAction(Request $request)
   {
@@ -43,8 +53,13 @@ class TeacherDownloadAreaController extends Controller
     return $this->redirectToRoute('teachersLogin');
   }
 
+
   /**
    * @Route("/teachersAuth", name="teachersAuth", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
   public function teachersLoginPostAction(Request $request)
   {
@@ -59,8 +74,14 @@ class TeacherDownloadAreaController extends Controller
     return $this->redirectToRoute('teachersLogin');
   }
 
+
   /**
    * @Route("/teachers", name="teachers", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+   * @throws \Twig\Error\Error
    */
   public function teachersInternalSectionAction(Request $request)
   {
@@ -76,8 +97,14 @@ class TeacherDownloadAreaController extends Controller
     return $this->get('templating')->renderResponse('teachers/teachers.html.twig', ['templates' => $templates]);
   }
 
+
   /**
    * @Route("/teachersDownload/{program}", name="teachersDownload", methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $program
+   *
+   * @return Response
    */
   public function teachersDownloadAction(Request $request, $program)
   {
@@ -113,8 +140,14 @@ class TeacherDownloadAreaController extends Controller
     }
   }
 
+
   /**
    * @Route("/teachersTemplateUpload", name="teachersTemplateUpload", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+   * @throws \Twig\Error\Error
    */
   public function teachersUploadAction(Request $request)
   {
@@ -126,8 +159,13 @@ class TeacherDownloadAreaController extends Controller
     return $this->get('templating')->renderResponse('teachers/teachersUpload.html.twig');
   }
 
+
   /**
    * @Route("/teachersTemplatePostUpload", name="teachersTemplatePostUpload", methods={"POST"})
+   *
+   * @param Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
    */
   public function teachersUploadPostAction(Request $request)
   {
@@ -171,6 +209,9 @@ class TeacherDownloadAreaController extends Controller
 
   }
 
+  /**
+   * @return bool
+   */
   public function isAuthenticatedAsTeacher()
   {
     $session = $this->get('session');
@@ -179,6 +220,10 @@ class TeacherDownloadAreaController extends Controller
     return $isAuthenticated !== null && $isAuthenticated;
   }
 
+
+  /**
+   *
+   */
   public function authenticateAsTeacher()
   {
     $session = $this->get('session');

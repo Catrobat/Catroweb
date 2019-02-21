@@ -16,7 +16,7 @@
 
     <div class="container-fluid" style="width:100%">
 
-      {% include 'components/login/login_logo.html.twig' %}
+      {% include 'UserManagement/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-5 text-center" align="center">
@@ -32,7 +32,7 @@
           {% endif %}
 
           <!-- Policy -->
-          {% include 'privacy_policy/policy.html.twig' %}
+          {% include 'PrivacyAndTerms/policy.html.twig' %}
 
           <!-- Redirects -->
           <div>
@@ -56,14 +56,14 @@
               </div>
             </div>
 
-            {% include 'components/login/or_line.html.twig' %}
+            {% include 'UserManagement/or_line.html.twig' %}
           </div>
 
         </div>
       </div>
 
     <div id="spacer1" style="margin-bottom: 30px"></div>
-    {% include 'social/oauth_form.html.twig' %}
+    {% include 'UserManagement/oauth_form.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
 
 

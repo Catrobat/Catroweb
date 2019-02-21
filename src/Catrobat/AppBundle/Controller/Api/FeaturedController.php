@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
+use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,30 +10,58 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\FeaturedRepository;
 use Catrobat\AppBundle\Services\FeaturedImageRepository;
 
+
+/**
+ * Class FeaturedController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class FeaturedController extends Controller
 {
 
   /**
-   * @Route("/api/projects/featured.json", name="api_featured_programs", defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/projects/featured.json", name="api_featured_programs",
+   *   defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function getFeaturedProgramsAction(Request $request)
   {
     return $this->getFeaturedPrograms($request, false);
   }
 
+
   /**
-   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs", defaults={"_format": "json"},
-   *                                           methods={"GET"})
+   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs",
+   *   defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function getFeaturedIOSProgramsAction(Request $request)
   {
     return $this->getFeaturedPrograms($request, true);
   }
 
+
+  /**
+   * @param Request $request
+   * @param         $ios_only
+   *
+   * @return JsonResponse
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   private function getFeaturedPrograms(Request $request, $ios_only)
   {
-    /* @var $image_repository FeaturedImageRepository */
-    /* @var $repository FeaturedRepository */
+    /**
+     * @var $image_repository FeaturedImageRepository
+     * @var $repository FeaturedRepository
+     * @var $featured_program FeaturedProgram
+     */
 
     $image_repository = $this->get('featuredimagerepository');
     $repository = $this->get('featuredrepository');
@@ -61,9 +90,10 @@ class FeaturedController extends Controller
     return JsonResponse::create($retArray);
   }
 
+
   /**
-   * @param $program
-   * @param $image_repository
+   * @param $featured_program FeaturedProgram
+   * @param $image_repository FeaturedImageRepository
    *
    * @return array
    */

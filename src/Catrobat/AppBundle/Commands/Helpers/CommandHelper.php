@@ -2,13 +2,29 @@
 
 namespace Catrobat\AppBundle\Commands\Helpers;
 
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\Output;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Process\Process;
 
+
+/**
+ * Class CommandHelper
+ * @package Catrobat\AppBundle\Commands\Helpers
+ */
 class CommandHelper
 {
+  /**
+   * @param      $string
+   * @param      $needle
+   * @param bool $last_char
+   *
+   * @return bool|string
+   */
   public static function getSubstring($string, $needle, $last_char = false)
   {
     $pos = strpos($string, $needle);
@@ -25,6 +41,13 @@ class CommandHelper
     return substr($string, 0, $pos);
   }
 
+  /**
+   * @param        $directory
+   * @param string $description
+   * @param Output $output
+   *
+   * @return bool
+   */
   public static function emptyDirectory($directory, $description = "", $output = null)
   {
     if ($output)
@@ -63,6 +86,11 @@ class CommandHelper
     return true;
   }
 
+  /**
+   * @param $directory
+   * @param $description
+   * @param $output Output
+   */
   public static function createDirectory($directory, $description, $output)
   {
     $output->write($description . " ('" . $directory . "') ... ");
@@ -79,6 +107,13 @@ class CommandHelper
     $output->writeln('OK');
   }
 
+  /**
+   * @param $command
+   * @param $application Application
+   * @param $args
+   * @param $output Output|NullOutput|OutputInterface
+   * @throws \Exception
+   */
   public static function executeSymfonyCommand($command, $application, $args, $output)
   {
     $command = $application->find($command);
@@ -87,6 +122,14 @@ class CommandHelper
     $command->run($input, $output);
   }
 
+  /**
+   * @param $command
+   * @param array   $args
+   * @param string  $description
+   * @param Output  $output
+   *
+   * @return bool
+   */
   public static function executeShellCommand($command, $args = [], $description = "", $output = null)
   {
     if ($output)

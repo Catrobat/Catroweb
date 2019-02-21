@@ -9,17 +9,38 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+
+/**
+ * Class AllExtensionsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class AllExtensionsAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_allxtensionsadmin';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'all_extensions';
 
+  /**
+   * @var array
+   */
   protected $datagridValues = [
     '_sort_by'    => 'id',
     '_sort_order' => 'ASC',
   ];
 
-//     Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -27,7 +48,12 @@ class AllExtensionsAdmin extends AbstractAdmin
       ->add('prefix', TextType::class);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -35,7 +61,11 @@ class AllExtensionsAdmin extends AbstractAdmin
       ->add('prefix');
   }
 
-  // Fields to be shown on lists
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -47,6 +77,9 @@ class AllExtensionsAdmin extends AbstractAdmin
       ]]);
   }
 
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('delete')->remove('export');

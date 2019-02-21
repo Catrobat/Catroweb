@@ -2,15 +2,23 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
+
+use Sonata\Form\Validator\ErrorElement;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseUserAdmin;
 
 
+/**
+ * Class UserAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class UserAdmin extends BaseUserAdmin
 {
 
-// Override FormBuilder to disable default validation
+  /**
+   * @return \Symfony\Component\Form\FormBuilder|\Symfony\Component\Form\FormBuilderInterface
+   *
+   * Override FormBuilder to disable default validation
+   */
   public function getFormBuilder()
   {
     $this->formOptions['data_class'] = $this->getClass();
@@ -26,17 +34,23 @@ class UserAdmin extends BaseUserAdmin
     return $formBuilder;
   }
 
-  // rewrite validation
+
+  /**
+   * @param ErrorElement $errorElement
+   * @param              $object
+   *
+   * rewrite validation
+   */
   public function validate(ErrorElement $errorElement, $object)
   {
     $errorElement
       ->with('username')
-      ->assertNotBlank()
-      ->assertRegex(['pattern' => "/^[\w@_\-\.]+$/"])
+      ->addConstraint(new \Symfony\Component\Validator\Constraints\NotBlank())
+      ->addConstraint(new \Symfony\Component\Validator\Constraints\Regex(['pattern' => "/^[\w@_\-\.]+$/"]))
       ->end()
       ->with('email')
-      ->assertNotBlank()
-      ->assertEmail()
+      ->addConstraint(new \Symfony\Component\Validator\Constraints\NotBlank())
+      ->addConstraint(new \Symfony\Component\Validator\Constraints\Email())
       ->end();
   }
 }

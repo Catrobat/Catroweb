@@ -7,31 +7,45 @@ use Catrobat\AppBundle\Entity\CommentNotification;
 use Catrobat\AppBundle\Entity\FollowNotification;
 use Catrobat\AppBundle\Entity\LikeNotification;
 use Catrobat\AppBundle\Entity\NewProgramNotification;
-use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
+use Catrobat\AppBundle\Services\Formatter\ElapsedTimeStringFormatter;
 use Catrobat\AppBundle\StatusCode;
 use Doctrine\ORM\EntityManager;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+
+/**
+ * Class UserNotificationController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class UserNotificationController extends Controller
 {
+
   /**
    * @Route("/user/notifications", name="user_notifications", methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
-  public function userNotificationsAction(LoggerInterface $logger)
+  public function userNotificationsAction()
   {
+    /**
+     * @var $notification CatroNotification
+     * @var $user         User
+     * @var $em           EntityManager
+     * @var $elapsed_time ElapsedTimeStringFormatter
+     * @var $remix_data
+     */
+
     $user = $this->getUser();
     if (!$user)
     {
       return $this->redirectToRoute('fos_user_security_login');
     }
-
-    $logger->warning("1");
 
     $unseen_remixed_program_data = $this->get('remixmanager')->getUnseenRemixProgramsDataOfUser($this->getUser());
     $screenshot_repository = $this->get('screenshotrepository');
@@ -54,19 +68,14 @@ class UserNotificationController extends Controller
       $unseen_remixes_grouped[$original_program_id]['remixes'][] = $remix_data;
     }
 
-    $logger->warning("20");
-
     $nr = $this->get("catro_notification_repository");
     $catro_user_notifications = $nr->findByUser($user, ['id' => 'DESC']);
 
 
     $avatars = [];
-    /** @var $notification CatroNotification */
+
     foreach ($catro_user_notifications as $notification)
     {
-      /**
-       * @var   $user User
-       */
       $user = null;
       if ($notification instanceof LikeNotification)
       {
@@ -74,9 +83,6 @@ class UserNotificationController extends Controller
       }
       elseif ($notification instanceof CommentNotification)
       {
-        /**
-         * @var   $em   \Doctrine\ORM\EntityManager
-         */
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy([
           'id' => $notification->getComment()->getUserId(),
@@ -100,9 +106,8 @@ class UserNotificationController extends Controller
         }
       }
     }
-    $logger->warning("30");
 
-    $response = $this->get('templating')->renderResponse('usernotifications.html.twig', [
+    $response = $this->get('templating')->renderResponse('Notifications/usernotifications.html.twig', [
       'unseenRemixesGrouped'   => $unseen_remixes_grouped,
       'catroUserNotifications' => $catro_user_notifications,
       'avatars'                => $avatars,
@@ -112,11 +117,13 @@ class UserNotificationController extends Controller
     $response->headers->set('Pragma', 'no-cache');
 
     return $response;
-
   }
+
 
   /**
    * @Route("/user/notifications/count", name="user_notifications_count", methods={"GET"})
+   *
+   * @return JsonResponse
    */
   public function userNotificationsCountAction()
   {
@@ -135,8 +142,13 @@ class UserNotificationController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/user/notifications/seen", name="user_notifications_seen", methods={"GET"})
+   *
+   * @return JsonResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function userNotificationsSeenAction()
   {
@@ -154,9 +166,19 @@ class UserNotificationController extends Controller
     return new JsonResponse(['success' => true]);
   }
 
+
   /**
    * @Route("/user/notification/ancestor/{ancestor_id}/descendant/{descendant_id}", name="see_user_notification",
    *        requirements={"ancestor_id":"\d+", "descendant_id":"\d+"}, methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $ancestor_id
+   * @param         $descendant_id
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Geocoder\Exception\Exception
    */
   public function seeUserNotificationAction(Request $request, $ancestor_id, $descendant_id)
   {
@@ -192,9 +214,16 @@ class UserNotificationController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/user/notifications/markasread/{notification_id}", name="catro_notification_mark_as_read",
    *   requirements={"notification_id":"\d+"}, defaults={"notification_id" = null}, methods={"GET"})
+   *
+   * @param $notification_id
+   *
+   * @return JsonResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function markCatroNotificationAsRead($notification_id)
   {
@@ -213,6 +242,5 @@ class UserNotificationController extends Controller
     $ns->deleteNotifications([$notification_to_delete]);
 
     return new JsonResponse(['success' => true]);
-
   }
 }

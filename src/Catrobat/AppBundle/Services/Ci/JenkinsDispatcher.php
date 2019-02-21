@@ -2,11 +2,31 @@
 
 namespace Catrobat\AppBundle\Services\Ci;
 
+use Symfony\Component\Routing\Router;
+
+/**
+ * Class JenkinsDispatcher
+ * @package Catrobat\AppBundle\Services\Ci
+ */
 class JenkinsDispatcher
 {
+  /**
+   * @var Router
+   */
   protected $router;
+  /**
+   * @var
+   */
   protected $config;
 
+  /**
+   * JenkinsDispatcher constructor.
+   *
+   * @param $router
+   * @param $config
+   *
+   * @throws \Exception
+   */
   public function __construct($router, $config)
   {
     if (!isset($config['url']))
@@ -17,6 +37,11 @@ class JenkinsDispatcher
     $this->router = $router;
   }
 
+  /**
+   * @param $id
+   *
+   * @return string
+   */
   public function sendBuildRequest($id)
   {
     $params = [
@@ -31,6 +56,11 @@ class JenkinsDispatcher
     return $this->dispatch($params);
   }
 
+  /**
+   * @param $params
+   *
+   * @return string
+   */
   protected function dispatch($params)
   {
     $url = $this->config['url'] . '?' . http_build_query($params);

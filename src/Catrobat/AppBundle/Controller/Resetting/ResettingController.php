@@ -5,10 +5,18 @@ namespace Catrobat\AppBundle\Controller\Resetting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * Class ResettingController
+ * @package Catrobat\AppBundle\Controller\Resetting
+ */
 class ResettingController extends Controller
 {
+
   /**
    * @Route("/reset/invalid", name="reset_invalid")
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
    */
   public function handleInvalidUsernameOrEmail()
   {
@@ -20,6 +28,8 @@ class ResettingController extends Controller
 
   /**
    * @Route("/reset/already_requested", name="reset_already_requested")
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
    */
   public function handlePasswordAlreadyRequested()
   {

@@ -4,11 +4,22 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
 
+/**
+ * Class IfLogicBeginStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class IfLogicBeginStatement extends Statement
 {
   const BEGIN_STRING = "if ";
   const END_STRING = ")<br/>";
 
+  /**
+   * IfLogicBeginStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END . "(";
@@ -18,11 +29,17 @@ class IfLogicBeginStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return int
+   */
   public function getSpacesForNextBrick()
   {
     return $this->spaces + 1;
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
@@ -31,10 +48,11 @@ class IfLogicBeginStatement extends Statement
     return "If " . $formula_string_without_markup . " is true then";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_orange.png";
   }
 }
-
-?>

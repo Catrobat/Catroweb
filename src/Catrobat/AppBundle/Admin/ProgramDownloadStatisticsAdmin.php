@@ -11,17 +11,38 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+
+/**
+ * Class ProgramDownloadStatisticsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class ProgramDownloadStatisticsAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_programdownloadstatisticsadmin';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'download_stats';
 
+  /**
+   * @var array
+   */
   protected $datagridValues = [
     '_sort_by'    => 'id',
     '_sort_order' => 'DESC',
   ];
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -43,7 +64,12 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
       ->add('referrer');
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -65,7 +91,12 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
       ->add('locale');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -91,6 +122,10 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
       ]]);
   }
 
+
+  /**
+   * @return array
+   */
   public function getExportFields()
   {
     return ['id', 'program.id', 'recommended_by_page_id', 'program.name', 'recommended_by_program.id',
@@ -99,6 +134,10 @@ class ProgramDownloadStatisticsAdmin extends AbstractAdmin
       'downloaded_at', 'ip', 'country_code', 'country_name', 'locale', 'user_agent', 'user.username', 'referrer'];
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('create')->remove('delete');

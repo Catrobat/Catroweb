@@ -33,18 +33,24 @@ use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\StatusCode;
-use Psr\Log\LoggerInterface;
-use Psr\Log\Test\LoggerInterfaceTest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+
+/**
+ * Class MediaPackageController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class MediaPackageController extends Controller
 {
+
   /**
    * @Route("/api/media/json", name="api_media_lib", defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @return JsonResponse
    */
   public function getMediaLib()
   {
@@ -71,16 +77,19 @@ class MediaPackageController extends Controller
 
   /**
    * @Route("/api/media/category/json", name="api_media_lib_all_category",
-   *   defaults={"_format": "json"},
-   *   methods={"GET"})
+   *   defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse
    */
-
   public function getCategories(Request $request)
   {
-    $em = $this->getDoctrine()->getManager();
     /**
      * @var $categories array[MediaPackageCategory]
      */
+
+    $em = $this->getDoctrine()->getManager();
     $categories = $em->getRepository(MediaPackageCategory::class)->findAll();
 
     if ($categories == [])
@@ -117,9 +126,14 @@ class MediaPackageController extends Controller
     );
   }
 
+
   /**
-   * @Route("/api/media/category/{category}/json", name="api_media_lib_category", requirements={"category":"\w+"},
-   *                                               defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/media/category/{category}/json", name="api_media_lib_category",
+   *   requirements={"category":"\w+"}, defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param $category
+   *
+   * @return JsonResponse
    */
   public function getMediaFilesForCategory($category)
   {
@@ -159,7 +173,6 @@ class MediaPackageController extends Controller
       }
     }
 
-
     return JsonResponse::create([
         'statusCode' => StatusCode::OK,
         'data'       => $json_response_array,
@@ -167,9 +180,14 @@ class MediaPackageController extends Controller
     );
   }
 
+
   /**
-   * @Route("/api/media/package/{package}/json", name="api_media_lib_package", requirements={"package":"\w+"},
-   *                                             defaults={"_format": "json"}, methods={"GET"})
+   * @Route("/api/media/package/{package}/json", name="api_media_lib_package",
+   *   requirements={"package":"\w+"}, defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param $package
+   *
+   * @return JsonResponse
    */
   public function getMediaFilesForPackage($package)
   {
@@ -210,10 +228,15 @@ class MediaPackageController extends Controller
     );
   }
 
+
   /**
    * @Route("/api/media/package/{package}/{category}/json", name="api_media_lib_package_category",
-   *                                                        requirements={"package":"\w+", "category":"\w+"},
-   *                                                        defaults={"_format": "json"}, methods={"GET"})
+   *   requirements={"package":"\w+", "category":"\w+"}, defaults={"_format": "json"}, methods={"GET"})
+   *
+   * @param $package
+   * @param $category
+   *
+   * @return JsonResponse
    */
   public function getMediaFilesForPackageAndCategory($package, $category)
   {
@@ -279,8 +302,13 @@ class MediaPackageController extends Controller
 
 
   /**
-   * @Route("/api/media/file/{id}/json", name="api_media_lib_file", requirements={"id":"\d+"}, defaults={"id" = 0,
-   *                                     "_format": "json"}, methods={"GET"})
+   *
+   * @Route("/api/media/file/{id}/json", name="api_media_lib_file", requirements={"id":"\d+"},
+   *   defaults={"id" = 0, "_format": "json"}, methods={"GET"})
+   *
+   * @param $id
+   *
+   * @return JsonResponse
    */
   public function getSingleMediaFile($id)
   {
@@ -309,6 +337,7 @@ class MediaPackageController extends Controller
     );
   }
 
+
   /**
    * @param $category MediaPackageCategory
    *
@@ -319,7 +348,6 @@ class MediaPackageController extends Controller
     $id = $category->getId();
     $name = $category->getName();
 
-
     return
       [
         'id'   => $id,
@@ -328,6 +356,7 @@ class MediaPackageController extends Controller
       ];
   }
 
+
   /**
    * @param $media_package_file MediaPackageFile
    *
@@ -335,22 +364,23 @@ class MediaPackageController extends Controller
    */
   private function createArrayOfMediaData($media_package_file)
   {
-    /** @var MediaPackageFile $media_package_file */
+    /**
+     * @var MediaPackageFile $media_package_file
+     * @var MediaPackage $package
+     */
+
     $id = $media_package_file->getId();
     $name = $media_package_file->getName();
     $flavor = $media_package_file->getFlavor();
-    /** @var MediaPackage $package */
     $package = $media_package_file->getCategory()->getPackage()->first()->getName();
     $category = $media_package_file->getCategory()->getName();
     $author = $media_package_file->getAuthor();
     $extension = $media_package_file->getExtension();
     $url = $media_package_file->getUrl();
-
     $download_url = $this->generateUrl('download_media',
       [
         'id' => $id,
       ]);
-
 
     return
       [

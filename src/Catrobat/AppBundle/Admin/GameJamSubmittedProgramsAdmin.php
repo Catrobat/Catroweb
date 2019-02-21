@@ -6,10 +6,19 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+
+/**
+ * Class GameJamSubmittedProgramsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class GameJamSubmittedProgramsAdmin extends AbstractAdmin
 {
 
-  // Fields to be shown on lists
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -21,14 +30,18 @@ class GameJamSubmittedProgramsAdmin extends AbstractAdmin
       ->add('gamejam_submission_accepted', 'boolean', ['editable' => true])
       ->add('_action', 'actions', [
         'actions' => [
-          'show'              => ['template' => 'CRUD/list__action_show_program_details.html.twig'],
+          'show'              => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
           'removeFromGameJam' => [
-            'template' => 'CRUD/list__action_remove_from_gamejam.html.twig',
+            'template' => 'Admin/CRUD/list__action_remove_from_gamejam.html.twig',
           ],
         ],
       ]);
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list', 'edit']);

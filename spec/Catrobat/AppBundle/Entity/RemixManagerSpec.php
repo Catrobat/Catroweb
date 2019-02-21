@@ -15,26 +15,53 @@ use Catrobat\AppBundle\Services\RemixData;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use \Doctrine\Common\Collections\ArrayCollection;
 
+
+/**
+ * Class RemixManagerSpec
+ * @package spec\Catrobat\AppBundle\Entity
+ */
 class RemixManagerSpec extends ObjectBehavior
 {
 
-  public function let(EntityManager $entity_manager, ProgramRepository $program_repository, ScratchProgramRepository $scratch_program_repository, ProgramRemixRepository $program_remix_repository,
-                      ProgramRemixBackwardRepository $program_remix_backward_repository, ScratchProgramRemixRepository $scratch_program_remix_repository, RemixGraphManipulator $remix_graph_manipulator,
-                      Program $program_entity)
+  /**
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator                  $entity_manager
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator              $program_repository
+   * @param ScratchProgramRepository|\PhpSpec\Wrapper\Collaborator       $scratch_program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator         $program_remix_repository
+   * @param ProgramRemixBackwardRepository|\PhpSpec\Wrapper\Collaborator $program_remix_backward_repository
+   * @param ScratchProgramRemixRepository|\PhpSpec\Wrapper\Collaborator  $scratch_program_remix_repository
+   * @param RemixGraphManipulator|\PhpSpec\Wrapper\Collaborator          $remix_graph_manipulator
+   */
+  public function let(EntityManager $entity_manager, ProgramRepository $program_repository,
+                      ScratchProgramRepository $scratch_program_repository,
+                      ProgramRemixRepository $program_remix_repository,
+                      ProgramRemixBackwardRepository $program_remix_backward_repository,
+                      ScratchProgramRemixRepository $scratch_program_remix_repository,
+                      RemixGraphManipulator $remix_graph_manipulator)
   {
     $this->beConstructedWith($entity_manager, $program_repository, $scratch_program_repository,
       $program_remix_repository, $program_remix_backward_repository, $scratch_program_remix_repository,
       $remix_graph_manipulator);
   }
 
+  /**
+   *
+   */
   public function it_is_initializable()
   {
     $this->shouldHaveType('Catrobat\AppBundle\Entity\RemixManager');
   }
 
-  public function it_add_single_scratch_program(EntityManager $entity_manager, ScratchProgramRemixRepository $scratch_program_repository)
+  /**
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator            $entity_manager
+   * @param ScratchProgramRepository|\PhpSpec\Wrapper\Collaborator $scratch_program_repository
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function it_add_single_scratch_program(EntityManager $entity_manager,
+                                                ScratchProgramRepository $scratch_program_repository)
   {
     $expected_id_of_first_program = 123;
     $expected_name_of_first_program = 'Test program';
@@ -72,7 +99,15 @@ class RemixManagerSpec extends ObjectBehavior
     $this->addScratchPrograms($scratch_info_data);
   }
 
-  public function it_add_single_scratch_program_with_missing_data(EntityManager $entity_manager, ScratchProgramRemixRepository $scratch_program_repository)
+  /**
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator            $entity_manager
+   * @param ScratchProgramRepository|\PhpSpec\Wrapper\Collaborator $scratch_program_repository
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function it_add_single_scratch_program_with_missing_data(EntityManager $entity_manager,
+                                                                  ScratchProgramRepository $scratch_program_repository)
   {
     $expected_id_of_first_program = 123;
     $scratch_info_data = [$expected_id_of_first_program => []];
@@ -98,7 +133,15 @@ class RemixManagerSpec extends ObjectBehavior
     $this->addScratchPrograms($scratch_info_data);
   }
 
-  public function it_add_multiple_scratch_programs(EntityManager $entity_manager, ScratchProgramRemixRepository $scratch_program_repository)
+  /**
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator            $entity_manager
+   * @param ScratchProgramRepository|\PhpSpec\Wrapper\Collaborator $scratch_program_repository
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function it_add_multiple_scratch_programs(EntityManager $entity_manager,
+                                                   ScratchProgramRepository $scratch_program_repository)
   {
     $expected_id_of_first_program = 123;
     $expected_name_of_first_program = 'Test program';
@@ -167,8 +210,21 @@ class RemixManagerSpec extends ObjectBehavior
     $this->addScratchPrograms($scratch_info_data);
   }
 
-  public function testRemixRelations(Program $program_entity, $parent_data, $expected_relations, ProgramRepository $program_repository,
-                                     ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
+  /**
+   * @param Program                $program_entity
+   * @param                        $parent_data
+   * @param                        $expected_relations
+   * @param ProgramRepository      $program_repository
+   * @param ProgramRemixRepository $program_remix_repository
+   * @param EntityManager          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function testRemixRelations(Program $program_entity, $parent_data, $expected_relations,
+                                     ProgramRepository $program_repository,
+                                     ProgramRemixRepository $program_remix_repository,
+                                     EntityManager $entity_manager)
   {
     $expected_relations_map = [];
     $expected_catrobat_relations = [];
@@ -249,8 +305,18 @@ class RemixManagerSpec extends ObjectBehavior
     expect($expected_relations_map)->shouldHaveCount(0);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_set_program_as_root_and_dont_add_remix_relations_when_no_parents_are_given(
-    ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
+    ProgramRepository $program_repository,
+    ProgramRemixRepository $program_remix_repository,
+    EntityManager $entity_manager)
   {
     $program_entity = new Program();
     $program_entity->setId(123);
@@ -267,8 +333,18 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(true);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_set_program_as_root_and_dont_add_remix_relations_for_non_existing_parents(
-    ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
+    ProgramRepository $program_repository,
+    ProgramRemixRepository $program_remix_repository,
+    EntityManager $entity_manager)
   {
     $program_entity = new Program();
     $program_entity->setId(123);
@@ -304,7 +380,16 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(true);
   }
 
-  public function it_set_program_as_root_if_only_has_scratch_parents(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function it_set_program_as_root_if_only_has_scratch_parents(ProgramRepository $program_repository,
+                                                                     ProgramRemixRepository $program_remix_repository,
                                                                      EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -350,7 +435,16 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(true);
   }
 
-  public function it_add_remix_relations_for_only_one_existing_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function it_add_remix_relations_for_only_one_existing_parent(ProgramRepository $program_repository,
+                                                                      ProgramRemixRepository $program_remix_repository,
                                                                       EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -396,7 +490,16 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
-  public function it_add_remix_relations_for_existing_parents(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
+  public function it_add_remix_relations_for_existing_parents(ProgramRepository $program_repository,
+                                                              ProgramRemixRepository $program_remix_repository,
                                                               EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -443,8 +546,16 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_existing_parents_sharing_same_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository,
-                                                                                  EntityManager $entity_manager)
+                                                                                     EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
     //                       (1)
@@ -506,6 +617,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_existing_parents_having_different_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -572,6 +691,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_scratch_parent(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -643,6 +770,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_1(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -713,6 +848,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_2(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -801,6 +944,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_3(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -887,6 +1038,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_4(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -987,6 +1146,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_5(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -1089,6 +1256,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_6(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------
@@ -1184,6 +1359,14 @@ class RemixManagerSpec extends ObjectBehavior
     expect($program_entity)->isRemixRoot()->shouldReturn(false);
   }
 
+  /**
+   * @param ProgramRepository|\PhpSpec\Wrapper\Collaborator      $program_repository
+   * @param ProgramRemixRepository|\PhpSpec\Wrapper\Collaborator $program_remix_repository
+   * @param EntityManager|\PhpSpec\Wrapper\Collaborator          $entity_manager
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function it_add_remix_relations_for_more_complex_graph_7(ProgramRepository $program_repository, ProgramRemixRepository $program_remix_repository, EntityManager $entity_manager)
   {
     //--------------------------------------------------------------------------------------------------------------

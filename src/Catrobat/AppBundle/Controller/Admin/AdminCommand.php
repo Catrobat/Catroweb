@@ -3,14 +3,45 @@
 namespace Catrobat\AppBundle\Controller\Admin;
 
 
+/**
+ * Class AdminCommand
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class AdminCommand
 {
+
+  /**
+   * @var String
+   */
   public $name;
+
+  /**
+   * @var String
+   */
   public $description;
+
+  /**
+   * @var
+   */
   public $command_link;
+
+  /**
+   * @var
+   */
   public $progress_link;
+
+  /**
+   * @var
+   */
   public $command_name;
 
+
+  /**
+   * AdminCommand constructor.
+   *
+   * @param String $name
+   * @param String $description
+   */
   public function __construct(String $name = "", String $description = "")
   {
     $this->name = $name;

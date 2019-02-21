@@ -5,14 +5,42 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
 use Symfony\Component\DomCrawler\Form;
 
+/**
+ * Class Statement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class Statement
 {
+  /**
+   * @var
+   */
   protected $xmlTree;
+  /**
+   * @var array
+   */
   protected $statements;
+  /**
+   * @var
+   */
   protected $spaces;
+  /**
+   * @var
+   */
   private $beginString;
+  /**
+   * @var
+   */
   private $endString;
 
+  /**
+   * Statement constructor.
+   *
+   * @param StatementFactory $statementFactory
+   * @param                  $xmlTree
+   * @param                  $spaces
+   * @param                  $beginString
+   * @param                  $endString
+   */
   public function __construct(StatementFactory $statementFactory, $xmlTree, $spaces, $beginString, $endString)
   {
     $this->statements = [];
@@ -24,6 +52,9 @@ class Statement
     $this->createChildren($statementFactory);
   }
 
+  /**
+   * @param StatementFactory $statementFactory
+   */
   protected function createChildren(StatementFactory $statementFactory)
   {
     if ($this->xmlTree != null)
@@ -32,6 +63,9 @@ class Statement
     }
   }
 
+  /**
+   * @param $statementsToAdd
+   */
   protected function addAllScripts($statementsToAdd)
   {
     foreach ($statementsToAdd as $statement)
@@ -40,6 +74,9 @@ class Statement
     }
   }
 
+  /**
+   * @return string
+   */
   public function execute()
   {
     $code = $this->addSpaces() . $this->beginString . $this->executeChildren() . $this->endString;
@@ -47,6 +84,11 @@ class Statement
     return $code;
   }
 
+  /**
+   * @param int $offset
+   *
+   * @return string
+   */
   protected function addSpaces($offset = 0)
   {
     $stringSpaces = "";
@@ -58,6 +100,9 @@ class Statement
     return $stringSpaces;
   }
 
+  /**
+   * @return string
+   */
   public function executeChildren()
   {
     $code = '';
@@ -70,36 +115,57 @@ class Statement
     return $code;
   }
 
+  /**
+   * @return mixed
+   */
   public function getSpacesForNextBrick()
   {
     return $this->spaces;
   }
 
+  /**
+   * @return array
+   */
   public function getStatements()
   {
     return $this->statements;
   }
 
+  /**
+   * @return mixed
+   */
   public function getBeginString()
   {
     return $this->beginString;
   }
 
+  /**
+   * @return mixed
+   */
   public function getEndString()
   {
     return $this->endString;
   }
 
+  /**
+   * @return mixed
+   */
   public function getXmlTree()
   {
     return $this->xmlTree;
   }
 
+  /**
+   * @return string
+   */
   public function getClassName()
   {
     return static::class;
   }
 
+  /**
+   * @return mixed
+   */
   protected function getLastChildStatement()
   {
     $child_statement_keys = array_keys($this->statements);
@@ -108,6 +174,9 @@ class Statement
     return $this->statements[$last_child_stmt_key];
   }
 
+  /**
+   * @return FormulaListStatement|mixed|null
+   */
   protected function getFormulaListChildStatement()
   {
     $formula_list_stmt = null;
@@ -120,5 +189,3 @@ class Statement
     return $formula_list_stmt;
   }
 }
-
-?>

@@ -8,17 +8,33 @@ use PhpSpec\Console\ConsoleIO;
 use PhpSpec\Event\ExampleEvent;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * Class CatrobatListener
+ * @package PhpSpec\CatrobatExtension
+ */
 class CatrobatListener implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
+  /**
+   * @var
+   */
   protected $io;
+  /**
+   * @var string
+   */
   protected $cache_dir;
 
+  /**
+   * CatrobatListener constructor.
+   */
   public function __construct()
   {
     $this->cache_dir = realpath(__DIR__ . '/../../../testdata/Cache') . '/';
     define('__SPEC_CACHE_DIR__', $this->cache_dir);
   }
 
+  /**
+   * @param SuiteEvent $event
+   */
   public function beforeSuite(SuiteEvent $event)
   {
     $fixtures_dir = __DIR__ . '/../../../testdata/DataFixtures';
@@ -33,16 +49,25 @@ class CatrobatListener implements \Symfony\Component\EventDispatcher\EventSubscr
     }
   }
 
+  /**
+   * @param ExampleEvent $event
+   */
   public function beforeExample(ExampleEvent $event)
   {
     $this->emptyDirectory($this->cache_dir);
   }
 
+  /**
+   * @param ConsoleIO $io
+   */
   public function setIO(ConsoleIO $io)
   {
     $this->io = $io;
   }
 
+  /**
+   * @param $directory
+   */
   private function emptyDirectory($directory)
   {
     $filesystem = new Filesystem();
@@ -55,6 +80,9 @@ class CatrobatListener implements \Symfony\Component\EventDispatcher\EventSubscr
     }
   }
 
+  /**
+   * @return array
+   */
   public static function getSubscribedEvents()
   {
     return [

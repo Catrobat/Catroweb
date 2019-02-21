@@ -8,9 +8,12 @@ use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramRemixBackwardRelation;
 use Catrobat\AppBundle\Entity\ProgramRemixRelation;
 use Catrobat\AppBundle\Entity\ScratchProgramRemixRelation;
+use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserLikeSimilarityRelation;
 use Catrobat\AppBundle\Entity\UserLikeSimilarityRelationRepository;
 use Catrobat\AppBundle\Entity\UserRemixSimilarityRelation;
+use Catrobat\AppBundle\RecommenderSystem\RecommenderManager;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -24,21 +27,51 @@ use Catrobat\AppBundle\Entity\GameJam;
 use Symfony\Component\Validator\Constraints\DateTime;
 use PHPUnit\Framework\Assert;
 
+/**
+ * Class SymfonySupport
+ * @package Catrobat\AppBundle\Features\Helpers
+ */
 class SymfonySupport
 {
+  /**
+   * @var
+   */
   private $fixture_dir;
 
+  /**
+   * @var Kernel
+   */
   private $kernel;
+  /**
+   * @var
+   */
   private $client;
+  /**
+   * @var int
+   */
   private $test_user_count = 0;
+  /**
+   * @var User
+   */
   private $default_user;
+  /**
+   * @var
+   */
   private $error_directory;
 
+  /**
+   * SymfonySupport constructor.
+   *
+   * @param $fixture_dir
+   */
   public function __construct($fixture_dir)
   {
     $this->fixture_dir = $fixture_dir;
   }
 
+  /**
+   * @param KernelInterface $kernel
+   */
   public function setKernel(KernelInterface $kernel)
   {
     $this->kernel = $kernel;
@@ -163,7 +196,7 @@ class SymfonySupport
   }
 
   /**
-   * @return UserLikeSimilarityRelationRepository
+   * @return \Catrobat\AppBundle\Entity\UserRemixSimilarityRelationRepository
    */
   public function getUserRemixSimilarityRelationRepository()
   {
@@ -195,6 +228,8 @@ class SymfonySupport
   }
 
   /**
+   * @param $param
+   *
    * @return mixed
    */
   public function getSymfonyParameter($param)
@@ -203,7 +238,9 @@ class SymfonySupport
   }
 
   /**
-   * @return mixed
+   * @param $param
+   *
+   * @return object
    */
   public function getSymfonyService($param)
   {
@@ -246,6 +283,9 @@ class SymfonySupport
   }
 
 
+  /**
+   * @return string
+   */
   public function getDefaultProgramFile()
   {
     $file = $this->fixture_dir . "/test.catrobat";
@@ -254,11 +294,17 @@ class SymfonySupport
     return $file;
   }
 
+  /**
+   * @param $dir
+   */
   public function setErrorDirectory($dir)
   {
     $this->error_directory = $dir;
   }
 
+  /**
+   * @param $directory
+   */
   public function emptyDirectory($directory)
   {
     if (!is_dir($directory))
@@ -275,6 +321,14 @@ class SymfonySupport
     }
   }
 
+  /**
+   * @param array $config
+   *
+   * @return GameJam
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   public function insertDefaultGamejam($config = [])
   {
     $gamejam = new GameJam();
@@ -299,6 +353,11 @@ class SymfonySupport
     return $gamejam;
   }
 
+  /**
+   * @param array $config
+   *
+   * @return \FOS\UserBundle\Model\UserInterface|mixed
+   */
   public function insertUser($config = [])
   {
     ++$this->test_user_count;
@@ -317,6 +376,9 @@ class SymfonySupport
     return $user;
   }
 
+  /**
+   *
+   */
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
     //$this->getRecommenderManager()->computeUserLikeSimilarities(null);
@@ -337,6 +399,9 @@ class SymfonySupport
     @unlink("$catroweb_dir/import_likes_output.sql");
   }
 
+  /**
+   *
+   */
   public function computeAllRemixSimilaritiesBetweenUsers()
   {
     //$this->getRecommenderManager()->computeUserRemixSimilarities(null);
@@ -357,8 +422,18 @@ class SymfonySupport
     @unlink("$catroweb_dir/import_remixes_output.sql");
   }
 
+  /**
+   * @param array $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertUserLikeSimilarity($config = [])
   {
+    /**
+     * @var $first_user User
+     * @var $second_user User
+     */
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
     $first_user = $user_manager->find($config['first_user_id']);
@@ -367,8 +442,18 @@ class SymfonySupport
     $em->flush();
   }
 
+  /**
+   * @param array $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertUserRemixSimilarity($config = [])
   {
+    /**
+     * @var $first_user User
+     * @var $second_user User
+     */
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
     $first_user = $user_manager->find($config['first_user_id']);
@@ -377,8 +462,19 @@ class SymfonySupport
     $em->flush();
   }
 
+  /**
+   * @param array $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   public function insertProgramLike($config = [])
   {
+    /**
+     * @var $user User
+     * @var $program Program
+     */
     $em = $this->getManager();
     $user_manager = $this->getUserManager();
     $program_manager = $this->getProgramManager();
@@ -392,6 +488,12 @@ class SymfonySupport
     $em->flush();
   }
 
+  /**
+   * @param $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertTag($config)
   {
     $em = $this->getManager();
@@ -405,6 +507,12 @@ class SymfonySupport
 
   }
 
+  /**
+   * @param $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertExtension($config)
   {
     $em = $this->getManager();
@@ -418,36 +526,63 @@ class SymfonySupport
 
   }
 
+  /**
+   * @param $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertForwardRemixRelation($config)
   {
-    $forward_relation = new ProgramRemixRelation(
-      $this->getProgramManager()->find($config['ancestor_id']),
-      $this->getProgramManager()->find($config['descendant_id']),
-      (int)$config['depth']
-    );
+    /**
+     * @var $ancestor Program
+     * @var $descendant Program
+     */
+    $ancestor = $this->getProgramManager()->find($config['ancestor_id']);
+    $descendant = $this->getProgramManager()->find($config['descendant_id']);
+    $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int)$config['depth']);
 
     $em = $this->getManager();
     $em->persist($forward_relation);
     $em->flush();
   }
 
+  /**
+   * @param $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertBackwardRemixRelation($config)
   {
-    $forward_relation = new ProgramRemixBackwardRelation(
-      $this->getProgramManager()->find($config['parent_id']),
-      $this->getProgramManager()->find($config['child_id'])
-    );
+    /**
+     * @var $parent Program
+     * @var $child Program
+     */
+    $parent = $this->getProgramManager()->find($config['parent_id']);
+    $child = $this->getProgramManager()->find($config['child_id']);
+    $forward_relation = new ProgramRemixBackwardRelation($parent, $child);
 
     $em = $this->getManager();
     $em->persist($forward_relation);
     $em->flush();
   }
 
+  /**
+   * @param $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertScratchRemixRelation($config)
   {
+    /**
+     * @var $catrobat_child Program
+     */
+    $catrobat_child = $this->getProgramManager()->find($config['catrobat_child_id']);
     $scratch_relation = new ScratchProgramRemixRelation(
       $config['scratch_parent_id'],
-      $this->getProgramManager()->find($config['catrobat_child_id'])
+      $catrobat_child
     );
 
     $em = $this->getManager();
@@ -455,8 +590,21 @@ class SymfonySupport
     $em->flush();
   }
 
+  /**
+   * @param $user
+   * @param $config
+   *
+   * @return Program
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   public function insertProgram($user, $config)
   {
+    /**
+     * @var $tag Tag
+     * @var $extension Extension
+     */
     if ($user == null)
     {
       $user = $this->getDefaultUser();
@@ -501,7 +649,7 @@ class SymfonySupport
       $extensions = explode(',', $config['extensions']);
       foreach ($extensions as $extension_name)
       {
-        $extension = $this->getExtensionRepository()->findOneByName($extension_name);
+        $extension = $this->getExtensionRepository()->findOneBy(["name" => $extension_name]);
         $program->addExtension($extension);
       }
     }
@@ -514,6 +662,9 @@ class SymfonySupport
     // FIXXME: why exactly do we have to do this?
     if (isset($config['gamejam']))
     {
+      /**
+       * @var $jam GameJam
+       */
       $jam = $config['gamejam'];
       $jam->addProgram($program);
       $em->persist($jam);
@@ -524,12 +675,21 @@ class SymfonySupport
     return $program;
   }
 
+  /**
+   * @param $program Program
+   * @param $config
+   *
+   * @return ProgramDownloads
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
+   */
   public function insertProgramDownloadStatistics($program, $config)
   {
     $em = $this->getManager();
-    /*
-     * @var $program_statistics Entity\ProgramDownloads;
-     * @var $program Entity\Program;
+    /**
+     * @var $program_statistics ProgramDownloads
+     * @var $program Program;
      */
     $program_statistics = new ProgramDownloads();
     $program_statistics->setProgram($program);
@@ -561,6 +721,11 @@ class SymfonySupport
     return $program_statistics;
   }
 
+  /**
+   * @param $parameters
+   *
+   * @return string
+   */
   public function generateProgramFileWith($parameters)
   {
     $filesystem = new Filesystem();
@@ -613,6 +778,14 @@ class SymfonySupport
     return $compressor->compress($new_program_dir, sys_get_temp_dir() . '/', 'program_generated');
   }
 
+  /**
+   * @param        $file
+   * @param        $user
+   * @param string $flavor
+   * @param null   $request_param
+   *
+   * @return \Symfony\Component\HttpFoundation\Response|null
+   */
   public function upload($file, $user, $flavor = "pocketcode", $request_param = null)
   {
     if ($user == null)
@@ -648,6 +821,12 @@ class SymfonySupport
     return $response;
   }
 
+  /**
+   * @param $file
+   * @param $user
+   *
+   * @return \Symfony\Component\HttpFoundation\Response|null
+   */
   public function submit($file, $user)
   {
     if ($user == null)
@@ -671,6 +850,9 @@ class SymfonySupport
     return $response;
   }
 
+  /**
+   * @param AfterStepScope $scope
+   */
   public function logOnError(AfterStepScope $scope)
   {
     if ($this->error_directory == null)
@@ -688,6 +870,11 @@ class SymfonySupport
     }
   }
 
+  /**
+   * @param $path
+   *
+   * @return bool|string
+   */
   protected function getTempCopy($path)
   {
     $temppath = tempnam(sys_get_temp_dir(), 'apktest');
@@ -696,6 +883,9 @@ class SymfonySupport
     return $temppath;
   }
 
+  /**
+   *
+   */
   public function clearDefaultUser()
   {
     $this->default_user = null;

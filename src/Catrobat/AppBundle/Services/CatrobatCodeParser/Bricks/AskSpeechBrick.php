@@ -5,8 +5,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class AskSpeechBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class AskSpeechBrick extends Brick
 {
+  /**
+   * @return mixed|void
+   */
   protected function create()
   {
     $this->type = Constants::ASK_SPEECH_BRICK;

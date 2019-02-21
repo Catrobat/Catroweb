@@ -10,24 +10,58 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Catrobat\AppBundle\Entity\GameJamRepository;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 
+
+/**
+ * Class CustomExtension
+ * @package Catrobat\AppBundle\Twig
+ */
 class CustomExtension extends \Twig_Extension
 {
 
+  /**
+   * @var RequestStack
+   */
   private $request_stack;
 
+  /**
+   * @var MediaPackageFileRepository
+   */
   private $mediapackage_file_repository;
 
+  /**
+   * @var GameJamRepository
+   */
   private $gamejamrepository;
 
+  /**
+   * @var ActiveTheme
+   */
   private $theme;
 
+  /**
+   * @var
+   */
   private $translationPath;
 
+  /**
+   * @var Container
+   */
   private $container;
 
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo, GameJamRepository $gamejamrepository, ActiveTheme $theme, $translationPath, Container $container)
+  /**
+   * CustomExtension constructor.
+   *
+   * @param RequestStack               $request_stack
+   * @param MediaPackageFileRepository $mediapackage_file_repo
+   * @param GameJamRepository          $gamejamrepository
+   * @param ActiveTheme                $theme
+   * @param                            $translationPath
+   * @param Container                  $container
+   */
+  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $mediapackage_file_repo,
+                              GameJamRepository $gamejamrepository, ActiveTheme $theme, $translationPath,
+                              Container $container)
   {
     $this->translationPath = $translationPath;
     $this->request_stack = $request_stack;
@@ -37,6 +71,9 @@ class CustomExtension extends \Twig_Extension
     $this->container = $container;
   }
 
+  /**
+   * @return array|\Twig_Filter[]
+   */
   public function getFilters()
   {
     return [
@@ -44,6 +81,11 @@ class CustomExtension extends \Twig_Extension
     ];
   }
 
+  /**
+   * @param $input
+   *
+   * @return string|string[]|null
+   */
   public function decamelizeFilter($input)
   {
     if (!is_string($input))
@@ -54,6 +96,9 @@ class CustomExtension extends \Twig_Extension
     return preg_replace('/(?<!^)[A-Z]/', ' $0', $input);
   }
 
+  /**
+   * @return array|\Twig_Function[]
+   */
   public function getFunctions()
   {
     return [
@@ -75,16 +120,25 @@ class CustomExtension extends \Twig_Extension
     ];
   }
 
+  /**
+   * @return string
+   */
   public function getName()
   {
     return 'app_extension';
   }
 
+  /**
+   * @return string[]
+   */
   public function getCountriesList()
   {
     return Intl::getRegionBundle()->getCountryNames();
   }
 
+  /**
+   * @return array
+   */
   public function getLanguageOptions()
   {
     $path = $this->translationPath;
@@ -134,6 +188,12 @@ class CustomExtension extends \Twig_Extension
     return $list;
   }
 
+  /**
+   * @param $languages
+   * @param $currentLanguage
+   *
+   * @return array
+   */
   private function setSelectedLanguage($languages, $currentLanguage)
   {
     $list = [];
@@ -154,6 +214,11 @@ class CustomExtension extends \Twig_Extension
     return $list;
   }
 
+  /**
+   * @param $filename
+   *
+   * @return bool|string
+   */
   private function getShortLanguageNameFromFileName($filename)
   {
     $firstOccurrence = strpos($filename, '.') + 1;
@@ -162,6 +227,9 @@ class CustomExtension extends \Twig_Extension
     return substr($filename, $firstOccurrence, $lastOccurrence - $firstOccurrence);
   }
 
+  /**
+   * @return bool
+   */
   public function isWebview()
   {
     $request = $this->request_stack->getCurrentRequest();
@@ -203,6 +271,9 @@ class CustomExtension extends \Twig_Extension
     return true;
   }
 
+  /**
+   * @return mixed
+   */
   public function getFlavor()
   {
     $request = $this->request_stack->getCurrentRequest();
@@ -210,6 +281,9 @@ class CustomExtension extends \Twig_Extension
     return $request->attributes->get('flavor');
   }
 
+  /**
+   * @return string
+   */
   public function getTheme()
   {
     return $this->theme->getName();
@@ -257,11 +331,20 @@ class CustomExtension extends \Twig_Extension
     }
   }
 
+  /**
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function getCurrentGameJam()
   {
     return $this->gamejamrepository->getCurrentGameJam();
   }
 
+  /**
+   * @param $jsFile
+   *
+   * @return mixed|string
+   */
   public function getJavascriptPath($jsFile)
   {
     $jsPath = $this->container->getParameter('jspath');
@@ -272,12 +355,14 @@ class CustomExtension extends \Twig_Extension
   }
 
   /**
-   * Twig extension to provide a function to retrieve the community statistics in any view.
+   * * Twig extension to provide a function to retrieve the community statistics in any view.
    * Needed to render the footer.
    *
    * See the fetchStatistics implementation of AppBundle\Services\CommunityStatisticsService.php
    *                                           for details.
+   *
    * @return array|mixed
+   * @throws \Exception
    */
   public function getCommunityStats()
   {

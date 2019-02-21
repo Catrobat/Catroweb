@@ -2,37 +2,46 @@
 
 namespace Catrobat\AppBundle\Services;
 
-use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\CatrobatCode\StatementFactory;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\File;
 
-class RemixUrlParsingState
-{
-  const STARTING = 0;
-  const BETWEEN = 1;
-  const TOKEN = 2;
-}
 
-class RemixUrlIndicator
-{
-  const PREFIX_INDICATOR = '[';
-  const SUFFIX_INDICATOR = ']';
-  const SEPARATOR = ',';
-}
-
+/**
+ * Class ExtractedCatrobatFile
+ * @package Catrobat\AppBundle\Services
+ */
 class ExtractedCatrobatFile
 {
+  /**
+   * @var
+   */
   protected $path;
 
+  /**
+   * @var
+   */
   protected $web_path;
 
+  /**
+   * @var
+   */
   protected $dir_hash;
 
+  /**
+   * @var \SimpleXMLElement
+   */
   protected $program_xml_properties;
 
+  /**
+   * ExtractedCatrobatFile constructor.
+   *
+   * @param $base_dir
+   * @param $base_path
+   * @param $dir_hash
+   */
   public function __construct($base_dir, $base_path, $dir_hash)
   {
     $this->path = $base_dir;
@@ -57,26 +66,41 @@ class ExtractedCatrobatFile
     }
   }
 
+  /**
+   * @return string
+   */
   public function getName()
   {
     return (string)$this->program_xml_properties->header->programName;
   }
 
+  /**
+   * @return string
+   */
   public function getLanguageVersion()
   {
     return (string)$this->program_xml_properties->header->catrobatLanguageVersion;
   }
 
+  /**
+   * @return string
+   */
   public function getDescription()
   {
     return (string)$this->program_xml_properties->header->description;
   }
 
+  /**
+   * @return mixed
+   */
   public function getDirHash()
   {
     return $this->dir_hash;
   }
 
+  /**
+   * @return array
+   */
   public function getTags()
   {
     $tags = (string)$this->program_xml_properties->header->tags;
@@ -84,8 +108,12 @@ class ExtractedCatrobatFile
     {
       return explode(',', (string)$this->program_xml_properties->header->tags);
     }
+    return [];
   }
 
+  /**
+   * @return array
+   */
   public function getContainingImagePaths()
   {
     $finder = new Finder();
@@ -112,6 +140,9 @@ class ExtractedCatrobatFile
     return $file_paths;
   }
 
+  /**
+   * @return array
+   */
   public function getContainingSoundPaths()
   {
     $finder = new Finder();
@@ -138,6 +169,9 @@ class ExtractedCatrobatFile
     return $file_paths;
   }
 
+  /**
+   * @return array
+   */
   public function getContainingStrings()
   {
     $xml = file_get_contents($this->path . 'code.xml');
@@ -147,8 +181,14 @@ class ExtractedCatrobatFile
     return array_unique($matches[1]);
   }
 
+  /**
+   * @return string|null
+   */
   public function getScreenshotPath()
   {
+    /**
+     * @var $file File
+     */
     $screenshot_path = null;
     if (is_file($this->path . 'screenshot.png'))
     {
@@ -188,36 +228,57 @@ class ExtractedCatrobatFile
     return $screenshot_path;
   }
 
+  /**
+   * @return string
+   */
   public function getApplicationVersion()
   {
     return (string)$this->program_xml_properties->header->applicationVersion;
   }
 
+  /**
+   * @return string
+   */
   public function getRemixUrlsString()
   {
     return trim((string)$this->program_xml_properties->header->url);
   }
 
+  /**
+   * @return string
+   */
   public function getRemixMigrationUrlsString()
   {
     return trim((string)$this->program_xml_properties->header->remixOf);
   }
 
+  /**
+   * @return mixed
+   */
   public function getPath()
   {
     return $this->path;
   }
 
+  /**
+   * @return mixed
+   */
   public function getWebPath()
   {
     return $this->web_path;
   }
 
+  /**
+   * @return \SimpleXMLElement
+   */
   public function getProgramXmlProperties()
   {
     return $this->program_xml_properties;
   }
 
+  /**
+   *
+   */
   public function saveProgramXmlProperties()
   {
     $this->program_xml_properties->asXML($this->path . 'code.xml');
@@ -333,6 +394,9 @@ class ExtractedCatrobatFile
     return array_values($unique_remixes);
   }
 
+  /**
+   * @return array
+   */
   public function getContainingCodeObjects()
   {
     $objects = [];
@@ -345,6 +409,9 @@ class ExtractedCatrobatFile
     return $objectList + $objects;
   }
 
+  /**
+   * @return array
+   */
   public function getCodeObjects()
   {
     $objects = [];
@@ -361,6 +428,11 @@ class ExtractedCatrobatFile
     return $objects;
   }
 
+  /**
+   * @param $objectTree
+   *
+   * @return \Catrobat\AppBundle\CatrobatCode\CodeObject|null
+   */
   private function getObject($objectTree)
   {
     $factory = new StatementFactory();
@@ -368,6 +440,12 @@ class ExtractedCatrobatFile
     return $factory->createObject($objectTree);
   }
 
+  /**
+   * @param $objects
+   * @param $objectsToAdd
+   *
+   * @return array
+   */
   private function addObjectsToArray($objects, $objectsToAdd)
   {
 
@@ -379,6 +457,9 @@ class ExtractedCatrobatFile
     return $objects;
   }
 
+  /**
+   * @return bool
+   */
   public function hasScenes()
   {
     return count($this->program_xml_properties->xpath('//scenes')) != 0;

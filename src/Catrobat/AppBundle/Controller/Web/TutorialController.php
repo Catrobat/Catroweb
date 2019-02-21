@@ -2,37 +2,59 @@
 
 namespace Catrobat\AppBundle\Controller\Web;
 
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\StarterCategory;
+use Catrobat\AppBundle\Services\ScreenshotRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+
+/**
+ * Class TutorialController
+ * @package Catrobat\AppBundle\Controller\Web
+ */
 class TutorialController extends Controller
 {
+
   /**
    * @Route("/help", name="catrobat_web_help", methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function helpAction()
   {
     return $this->get('templating')->renderResponse('help/help.html.twig');
   }
 
+
   /**
    * @Route("/step-by-step/{page}", name="catrobat_web_step_by_step", defaults={"page" = 1},
    *                                requirements={"page":"\d+"}, methods={"GET"})
-   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1}, requirements={"page":"\d+"},
-   *                              methods={"GET"})
+   * @Route("/stepByStep/{page}", name="catrobat_web_stepByStep", defaults={"page" = 1},
+   *                                requirements={"page":"\d+"}, methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function stepByStepAction()
   {
     return $this->get('templating')->renderResponse('help/stepByStep.html.twig', []);
   }
 
+
   /**
    * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page" = -1},
    *                                 requirements={"page":"\d+"}, methods={"GET"})
+   *
+   * @param $page
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
-  public function tutorialcardsAction($page)
+  public function tutorialCardsAction($page)
   {
     $cards_num = 12;
 
@@ -57,14 +79,19 @@ class TutorialController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/starter-programs", name="catrobat_web_starter", methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function starterProgramsAction()
   {
-    /*
-   * @var $categories \Catrobat\AppBundle\Entity\StarterCategory
-   */
+    /**
+    * @var $categories StarterCategory
+    */
+
     $em = $this->getDoctrine()->getManager();
 
     $categories = $em->getRepository('AppBundle:StarterCategory')->findBy([], ['order' => 'asc']);
@@ -76,15 +103,22 @@ class TutorialController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/category-programs/{id}", name="catrobat_web_category_programs", requirements={"id":"\d+"},
    *                                   methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $id
+   *
+   * @return JsonResponse
    */
   public function categoryProgramsAction(Request $request, $id)
   {
-    /*
-   * @var $program \Catrobat\AppBundle\Entity\Program
-   */
+    /**
+    * @var $program Program
+    */
+
     $em = $this->getDoctrine()->getManager();
     $programs = $em->getRepository('AppBundle:Program')->findBy(['category' => $id]);
 
@@ -101,13 +135,18 @@ class TutorialController extends Controller
     return JsonResponse::create($retArray);
   }
 
+
   /**
    * @Route("/pocket-game-jam", name="catrobat_web_game_jam", methods={"GET"})
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Twig\Error\Error
    */
   public function gameJamAction()
   {
     return $this->get('templating')->renderResponse('help/gamejam.html.twig');
   }
+
 
   /**
    * @param $page
@@ -144,6 +183,7 @@ class TutorialController extends Controller
 
     return $blocks;
   }
+
 
   /**
    * @param $page
@@ -196,6 +236,7 @@ class TutorialController extends Controller
     return $example_link;
   }
 
+
   /**
    * @param $categories
    *
@@ -203,6 +244,10 @@ class TutorialController extends Controller
    */
   private function generateCategoryArray($categories)
   {
+    /**
+     * @var $category StarterCategory
+     */
+
     $categories_twig = [];
 
     foreach ($categories as $category)
@@ -217,14 +262,18 @@ class TutorialController extends Controller
   }
 
   /**
-   * @param Request $request
-   * @param         $programs
-   * @param         $screenshot_repository
+   * @param Request                 $request
+   * @param array                   $programs
+   * @param ScreenshotRepository    $screenshot_repository
    *
    * @return array
    */
   private function receiveCategoryPrograms(Request $request, $programs, $screenshot_repository)
   {
+    /**
+     * @var $program Program
+     */
+
     $retArray = [
       'CatrobatProjects' => [],
     ];

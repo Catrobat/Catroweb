@@ -3,6 +3,10 @@
 namespace Catrobat\AppBundle\CatrobatCode;
 
 
+/**
+ * Class SyntaxHighlightingConstants
+ * @package Catrobat\AppBundle\CatrobatCode
+ */
 class SyntaxHighlightingConstants
 {
   const VARIABLES = '<span style="color:blueviolet">';

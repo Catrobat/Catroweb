@@ -2,22 +2,43 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
-use Catrobat\AppBundle\Events\ProgramDownloadedEvent;
-use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
+use Catrobat\AppBundle\Services\StatisticsService;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
+
+/**
+ * Class DownloadStatisticsListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class DownloadStatisticsListener
 {
+  /**
+   * @var StatisticsService
+   */
   private $statistics_service;
+  /**
+   * @var
+   */
   private $security_token_storage;
 
+  /**
+   * DownloadStatisticsListener constructor.
+   *
+   * @param $statistics_service
+   * @param $security_token_storage
+   */
   public function __construct($statistics_service, $security_token_storage)
   {
     $this->statistics_service = $statistics_service;
     $this->security_token_storage = $security_token_storage;
   }
 
+  /**
+   * @param PostResponseEvent $event
+   *
+   * @throws \Geocoder\Exception\Exception
+   */
   public function onTerminateEvent(PostResponseEvent $event)
   {
     $request = $event->getRequest();
@@ -57,16 +78,32 @@ class DownloadStatisticsListener
         }
       }
 
-      $this->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale, $rec_user_specific);
+      $this->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id,
+        $rec_by_page_id, $rec_by_program_id, $locale, $rec_user_specific);
       $event->getRequest()->attributes->remove('download_statistics_program_id');
     }
   }
 
-  public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale, $is_user_specific_recommendation)
+  /**
+   * @param $request
+   * @param $program_id
+   * @param $referrer
+   * @param $rec_tag_by_program_id
+   * @param $rec_by_page_id
+   * @param $rec_by_program_id
+   * @param $locale
+   * @param $is_user_specific_recommendation
+   *
+   * @throws \Geocoder\Exception\Exception
+   */
+  public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id,
+                                                  $rec_by_page_id, $rec_by_program_id, $locale,
+                                                  $is_user_specific_recommendation)
   {
     if ((strpos($request->headers->get('User-Agent'), 'okhttp') === false) || ($rec_by_page_id != null))
     {
-      $this->statistics_service->createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale, $is_user_specific_recommendation);
+      $this->statistics_service->createProgramDownloadStatistics($request, $program_id, $referrer,
+        $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale, $is_user_specific_recommendation);
     }
   }
 }

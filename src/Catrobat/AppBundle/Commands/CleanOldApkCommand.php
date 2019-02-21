@@ -9,13 +9,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
+
 define("HOURS", 24);
 define("MINUTES", 60);
 define("SECONDS", 60);
 
 
+/**
+ * Class CleanOldApkCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CleanOldApkCommand extends ContainerAwareCommand
 {
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:clean:old-apk')
@@ -23,6 +31,13 @@ class CleanOldApkCommand extends ContainerAwareCommand
       ->addArgument('days');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|null
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $days = $input->getArgument('days');
@@ -70,8 +85,16 @@ class CleanOldApkCommand extends ContainerAwareCommand
   }
 
 
+  /**
+   * @param $removed_apk_ids
+   *
+   * @return \Doctrine\ORM\Query
+   */
   private function createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids)
   {
+    /**
+     * @var $em \Doctrine\ORM\EntityManager
+     */
     $id_query_part = '';
     $i = 0;
     foreach ($removed_apk_ids as $apk_id)
@@ -89,7 +112,6 @@ class CleanOldApkCommand extends ContainerAwareCommand
       $id_query_part = ' AND (' . $id_query_part . ')';
     }
 
-    /* @var $em \Doctrine\ORM\EntityManager */
     $em = $this->getContainer()->get('doctrine.orm.entity_manager');
     $query = $em->createQuery("UPDATE Catrobat\AppBundle\Entity\Program p 
                       SET p.apk_status = :status WHERE p.apk_status != :status" . $id_query_part);

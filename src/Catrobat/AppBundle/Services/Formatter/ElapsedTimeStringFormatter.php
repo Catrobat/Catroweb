@@ -5,17 +5,40 @@ namespace Catrobat\AppBundle\Services\Formatter;
 use Catrobat\AppBundle\Services\Time;
 use Symfony\Component\Translation\TranslatorInterface;
 
+
+/**
+ * Class ElapsedTimeStringFormatter
+ * @package Catrobat\AppBundle\Services\Formatter
+ */
 class ElapsedTimeStringFormatter
 {
+  /**
+   * @var TranslatorInterface
+   */
   private $translator;
+
+  /**
+   * @var Time
+   */
   private $time;
 
+  /**
+   * ElapsedTimeStringFormatter constructor.
+   *
+   * @param TranslatorInterface $translator
+   * @param Time                $time
+   */
   public function __construct(TranslatorInterface $translator, Time $time)
   {
     $this->translator = $translator;
     $this->time = $time;
   }
 
+  /**
+   * @param $timestamp
+   *
+   * @return string
+   */
   public function getElapsedTime($timestamp)
   {
     $elapsed = $this->time->getTime() - $timestamp;

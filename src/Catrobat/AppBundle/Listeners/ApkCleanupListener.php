@@ -6,15 +6,30 @@ use Catrobat\AppBundle\Services\ApkRepository;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 use Catrobat\AppBundle\Entity\Program;
 
+/**
+ * Class ApkCleanupListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class ApkCleanupListener
 {
+  /**
+   * @var ApkRepository
+   */
   protected $repository;
 
+  /**
+   * ApkCleanupListener constructor.
+   *
+   * @param ApkRepository $repository
+   */
   public function __construct(ApkRepository $repository)
   {
     $this->repository = $repository;
   }
 
+  /**
+   * @param ProgramBeforePersistEvent $event
+   */
   public function handleEvent(ProgramBeforePersistEvent $event)
   {
     $program = $event->getProgramEntity();

@@ -10,15 +10,36 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+
+/**
+ * Class ApkListAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class ApkListAdmin extends AbstractAdmin
 {
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_apk_list';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'apk_list';
 
+  /**
+   * @var array
+   */
   protected $datagridValues = [
     '_sort_by' => 'apk_request_time',
   ];
 
+
+  /**
+   * @param string $context
+   *
+   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+   */
   public function createQuery($context = 'list')
   {
     /**
@@ -26,14 +47,19 @@ class ApkListAdmin extends AbstractAdmin
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->eq($query->getRootAlias() . '.apk_status', ':apk_status')
+      $query->expr()->eq($query->getRootAliases()[0] . '.apk_status', ':apk_status')
     );
     $query->setParameter('apk_status', Program::APK_READY);
 
     return $query;
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -43,7 +69,12 @@ class ApkListAdmin extends AbstractAdmin
       ->add('apk_request_time');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -65,15 +96,19 @@ class ApkListAdmin extends AbstractAdmin
       ->add('_action', 'actions', [
         'actions' => [
           'Rebuild'    => [
-            'template' => 'CRUD/list__action_rebuild_apk.html.twig',
+            'template' => 'Admin/CRUD/list__action_rebuild_apk.html.twig',
           ],
           'Delete Apk' => [
-            'template' => 'CRUD/list__action_delete_apk.html.twig',
+            'template' => 'Admin/CRUD/list__action_delete_apk.html.twig',
           ],
         ],
       ]);
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(['list']);
@@ -81,8 +116,18 @@ class ApkListAdmin extends AbstractAdmin
     $collection->add('deleteApk', $this->getRouterIdParameter() . '/deleteApk');
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return string
+   */
   public function getThumbnailImageUrl($object)
   {
-    return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')->getThumbnailWebPath($object->getId());
+    /**
+     * @var $object Program
+     */
+    return '/' . $this->getConfigurationPool()->getContainer()->get('screenshotrepository')
+        ->getThumbnailWebPath($object->getId());
   }
 }

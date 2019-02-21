@@ -7,14 +7,30 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
+
+/**
+ * Class LimitedUsersAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class LimitedUsersAdmin extends AbstractAdmin
 {
 
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_limited_users';
 
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'limited_users';
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper->addIdentifier('id')
@@ -25,7 +41,12 @@ class LimitedUsersAdmin extends AbstractAdmin
       ]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper->add('username', null, [
@@ -35,6 +56,10 @@ class LimitedUsersAdmin extends AbstractAdmin
       ->add('limited');
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept([

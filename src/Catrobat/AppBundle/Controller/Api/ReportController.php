@@ -13,11 +13,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Catrobat\AppBundle\Entity\ProgramInappropriateReport;
 
+
+/**
+ * Class ReportController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class ReportController extends Controller
 {
+
   /**
-   * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program", defaults={"_format": "json"},
-   *                                                 methods={"POST", "GET"})
+   * @Route("/api/reportProgram/reportProgram.json", name="catrobat_api_report_program",
+   *   defaults={"_format": "json"}, methods={"POST", "GET"})
+   *
+   * @param Request $request
+   *
+   * @return JsonResponse
    */
   public function reportProgramAction(Request $request)
   {
@@ -79,6 +89,12 @@ class ReportController extends Controller
     return JsonResponse::create($response);
   }
 
+  /**
+   * @param       $message
+   * @param array $parameters
+   *
+   * @return string
+   */
   private function trans($message, $parameters = [])
   {
     return $this->get('translator')->trans($message, $parameters, 'catroweb');

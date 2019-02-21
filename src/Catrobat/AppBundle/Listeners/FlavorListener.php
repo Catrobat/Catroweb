@@ -2,20 +2,41 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
+use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\RouterInterface;
 
+
+/**
+ * Class FlavorListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class FlavorListener
 {
+  /**
+   * @var RouterInterface
+   */
   private $router;
+  /**
+   * @var ActiveTheme
+   */
   private $theme;
 
+  /**
+   * FlavorListener constructor.
+   *
+   * @param RouterInterface $router
+   * @param                 $theme
+   */
   public function __construct(RouterInterface $router, $theme)
   {
     $this->router = $router;
     $this->theme = $theme;
   }
 
+  /**
+   * @param GetResponseEvent $event
+   */
   public function onKernelRequest(GetResponseEvent $event)
   {
     $attributes = $event->getRequest()->attributes;

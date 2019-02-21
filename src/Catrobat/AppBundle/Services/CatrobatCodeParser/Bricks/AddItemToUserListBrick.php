@@ -5,8 +5,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class AddItemToUserListBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class AddItemToUserListBrick extends Brick
 {
+  /**
+   * @return mixed|void
+   */
   protected function create()
   {
     $this->type = Constants::ADD_ITEM_LIST_BRICK;

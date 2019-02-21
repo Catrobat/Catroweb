@@ -27,6 +27,11 @@ class ProgramLike
     // -> ... and here
   ];
 
+  /**
+   * @param $type
+   *
+   * @return bool
+   */
   static public function isValidType($type)
   {
     return in_array($type, self::$VALID_TYPES);
@@ -87,11 +92,12 @@ class ProgramLike
     $this->setUser($user);
     $this->setType($type);
     $this->created_at = null;
-    $this->seen_at = null;
   }
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws \Exception
    */
   public function updateTimestamps()
   {

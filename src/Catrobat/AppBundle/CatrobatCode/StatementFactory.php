@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\CatrobatCode;
 
-
 use Catrobat\AppBundle\CatrobatCode\Statements\AddItemToUserListStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\BroadcastMessageStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\BroadcastScriptStatement;
@@ -76,6 +75,11 @@ use Catrobat\AppBundle\CatrobatCode\Statements\VibrationStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\WaitStatement;
 use Catrobat\AppBundle\CatrobatCode\Statements\WhenScriptStatement;
 
+
+/**
+ * Class StatementFactory
+ * @package Catrobat\AppBundle\CatrobatCode
+ */
 class StatementFactory
 {
   const WAIT_STMT = 'WaitBrick';
@@ -164,8 +168,17 @@ class StatementFactory
   const ACTION = 'action';
   const USER_VARIABLE_NAME = 'userVariableName';
 
+  /**
+   * @var CodeObject
+   */
   private $currentObject;
 
+
+  /**
+   * @param \SimpleXMLElement $objectTree
+   *
+   * @return CodeObject|null
+   */
   public function createObject(\SimpleXMLElement $objectTree)
   {
     $this->currentObject = new CodeObject();
@@ -180,6 +193,13 @@ class StatementFactory
     return $this->currentObject;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $xmlTree
+   * @param                   $spaces
+   *
+   * @return array
+   */
   public function createStatement(\SimpleXMLElement $xmlTree, $spaces)
   {
     $statements = [];
@@ -293,6 +313,13 @@ class StatementFactory
     return $statements;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return BroadcastScriptStatement|TappedScriptStatement|UnknownStatement|WhenScriptStatement|null
+   */
   private function generateScriptStatement(\SimpleXMLElement $statement, $spaces)
   {
     $stmt = null;
@@ -316,6 +343,14 @@ class StatementFactory
     return $stmt;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return BroadcastWaitStatement|ChangeVolumeByNStatement|
+   *          PlaySoundStatement|SetVolumeToStatement|SpeakStatement|StopAllSoundsStatement|null
+   */
   public function generateBrickStatement(\SimpleXMLElement $statement, $spaces)
   {
     $stmt = null;
@@ -483,12 +518,18 @@ class StatementFactory
       default:
         $stmt = new UnknownStatement($this, $statement, $spaces);
         break;
-
     }
 
     return $stmt;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return ValueStatement
+   */
   private function generateValueStatement(\SimpleXMLElement $statement, $spaces)
   {
     $value = (string)$statement;
@@ -497,6 +538,12 @@ class StatementFactory
     return new ValueStatement($this, $statement, $spaces, $value, $type);
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   *
+   * @return string|null
+   */
   private function getTypeOfValue(\SimpleXMLElement $statement)
   {
     $siblings = $statement->xpath('preceding-sibling::* | following-sibling::*');
@@ -511,6 +558,13 @@ class StatementFactory
     return null;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return UserVariableStatement
+   */
   private function generateUserVariableStatement(\SimpleXMLElement $statement, $spaces)
   {
     $variableName = (string)$statement;
@@ -546,6 +600,13 @@ class StatementFactory
     return false;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return ObjectStatement
+   */
   private function generateObjectStatement(\SimpleXMLElement $statement, $spaces)
   {
     $name = $statement['name'];
@@ -555,6 +616,13 @@ class StatementFactory
     return new ObjectStatement($this, $spaces, $name);
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return ReceivedMessageStatement
+   */
   private function generateReceivedMessageStatement(\SimpleXMLElement $statement, $spaces)
   {
     $message = (string)$statement;
@@ -562,6 +630,13 @@ class StatementFactory
     return new ReceivedMessageStatement($this, $statement, $spaces, $message);
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return BroadcastMessageStatement
+   */
   private function generateBroadcastMessageStatement(\SimpleXMLElement $statement, $spaces)
   {
     $message = (string)$statement;
@@ -569,6 +644,13 @@ class StatementFactory
     return new BroadcastMessageStatement($this, $statement, $spaces, $message);
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return LookStatement
+   */
   private function generateLookStatement(\SimpleXMLElement $statement, $spaces)
   {
     $lookName = (string)$statement[self::NAME_ATTRIBUTE];
@@ -589,6 +671,12 @@ class StatementFactory
     return new UserListStatement($this, $statement, $spaces, $userListName);
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   *
+   * @return string
+   */
   private function getNameWithReference(\SimpleXMLElement $statement)
   {
     $name = "";
@@ -610,6 +698,13 @@ class StatementFactory
     return $name;
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return SoundStatement
+   */
   private function generateSoundStatement(\SimpleXMLElement $statement, $spaces)
   {
     $name = $this->getNameWithReference($statement);
@@ -617,6 +712,13 @@ class StatementFactory
     return new SoundStatement($this, $statement, $spaces, $name);
   }
 
+
+  /**
+   * @param \SimpleXMLElement $statement
+   * @param                   $spaces
+   *
+   * @return FileNameStatement
+   */
   private function generateFileNameStatement(\SimpleXMLElement $statement, $spaces)
   {
     $message = (string)$statement;

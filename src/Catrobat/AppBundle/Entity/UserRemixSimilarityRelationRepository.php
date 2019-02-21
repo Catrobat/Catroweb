@@ -13,6 +13,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRemixSimilarityRelationRepository extends EntityRepository
 {
+  /**
+   *
+   */
   public function removeAllUserRelations()
   {
     $qb = $this->createQueryBuilder('ur');
@@ -23,6 +26,11 @@ class UserRemixSimilarityRelationRepository extends EntityRepository
       ->execute();
   }
 
+  /**
+   * @param User $user
+   *
+   * @return mixed
+   */
   public function getRelationsOfSimilarUsers(User $user)
   {
     $qb = $this->createQueryBuilder('ur');
@@ -38,6 +46,14 @@ class UserRemixSimilarityRelationRepository extends EntityRepository
       ->getResult();
   }
 
+  /**
+   * @param $first_user_id
+   * @param $second_user_id
+   * @param $similarity
+   *
+   * @throws \Doctrine\DBAL\DBALException
+   * @throws \Exception
+   */
   public function insertRelation($first_user_id, $second_user_id, $similarity)
   {
     $connection = $this->getEntityManager()->getConnection();

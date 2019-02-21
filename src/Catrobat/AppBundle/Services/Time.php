@@ -1,16 +1,16 @@
 <?php
 
-/**
- * Created by IntelliJ IDEA.
- * User: catroweb
- * Date: 21.08.14
- * Time: 14:45.
- */
-
 namespace Catrobat\AppBundle\Services;
 
+/**
+ * Class Time
+ * @package Catrobat\AppBundle\Services
+ */
 class Time
 {
+  /**
+   * @return int
+   */
   public function getTime()
   {
     return time();

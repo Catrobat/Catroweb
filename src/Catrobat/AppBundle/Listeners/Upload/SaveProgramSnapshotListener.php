@@ -5,16 +5,35 @@ namespace Catrobat\AppBundle\Listeners\Upload;
 use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 use Catrobat\AppBundle\Entity\Program;
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Catrobat\AppBundle\Services\Time;
 
+/**
+ * Class SaveProgramSnapshotListener
+ * @package Catrobat\AppBundle\Listeners\Upload
+ */
 class SaveProgramSnapshotListener
 {
 
+  /**
+   * @var ProgramFileRepository
+   */
   private $file_repository;
+  /**
+   * @var
+   */
   private $snapshot_dir;
+  /**
+   * @var Time
+   */
   private $time;
 
+  /**
+   * SaveProgramSnapshotListener constructor.
+   *
+   * @param Time                  $time
+   * @param ProgramFileRepository $file_repository
+   * @param                       $snapshot_dir
+   */
   public function __construct(Time $time, ProgramFileRepository $file_repository, $snapshot_dir)
   {
     $this->file_repository = $file_repository;
@@ -22,11 +41,17 @@ class SaveProgramSnapshotListener
     $this->time = $time;
   }
 
+  /**
+   * @param ProgramAfterInsertEvent $event
+   */
   public function handleEvent(ProgramAfterInsertEvent $event)
   {
     $this->saveProgramSnapshot($event->getProgramEntity());
   }
 
+  /**
+   * @param Program $program
+   */
   public function saveProgramSnapshot(Program $program)
   {
     if ($program->getUser()->isLimited())
