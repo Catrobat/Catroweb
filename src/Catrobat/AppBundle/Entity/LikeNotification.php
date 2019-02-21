@@ -53,7 +53,7 @@ class LikeNotification extends CatroNotification
    *  You have to set this parameter otherwise the wrong template will be
    *       rendered.
    */
-  private $twig_template = "/components/notifications/like_notification.html.twig";
+  private $twig_template = "/Notifications/NotificationTypes/like_notification.html.twig";
 
   /**
    * CommentNotification constructor.
@@ -62,7 +62,7 @@ class LikeNotification extends CatroNotification
    * @param      $title
    * @param      $message
    * @param      $like_from
-   *
+   * @param      $program
    */
   public function __construct(User $user, $title, $message, $like_from, $program)
   {
@@ -71,7 +71,7 @@ class LikeNotification extends CatroNotification
     $this->program = $program;
     /* if you didn't forget to set the member variable to default above
        you don't need the following line */
-    $this->twig_template = "/components/notifications/like_notification.html.twig";
+    $this->twig_template = "/Notifications/NotificationTypes/like_notification.html.twig";
   }
 
   /**

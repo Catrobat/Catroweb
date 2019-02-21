@@ -5,8 +5,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class SayForBubbleBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class SayForBubbleBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::SAY_FOR_BUBBLE_BRICK;

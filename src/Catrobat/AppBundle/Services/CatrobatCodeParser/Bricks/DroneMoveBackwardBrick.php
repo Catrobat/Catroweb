@@ -5,8 +5,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class DroneMoveBackwardBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class DroneMoveBackwardBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::AR_DRONE_MOVE_BACKWARD_BRICK;

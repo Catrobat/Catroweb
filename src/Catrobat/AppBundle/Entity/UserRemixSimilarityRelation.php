@@ -71,6 +71,8 @@ class UserRemixSimilarityRelation
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws \Exception
    */
   public function updateTimestamps()
   {
@@ -81,9 +83,9 @@ class UserRemixSimilarityRelation
   }
 
   /**
-   * @param \Catrobat\AppBundle\Entity\User $first_user
+   * @param User $first_user
    *
-   * @return ProgramLike
+   * @return $this
    */
   public function setFirstUser(User $first_user)
   {
@@ -94,9 +96,9 @@ class UserRemixSimilarityRelation
   }
 
   /**
-   * @param \Catrobat\AppBundle\Entity\User $second_user
+   * @param User $second_user
    *
-   * @return ProgramLike
+   * @return $this
    */
   public function setSecondUser(User $second_user)
   {

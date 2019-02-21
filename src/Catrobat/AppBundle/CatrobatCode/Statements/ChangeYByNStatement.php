@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class ChangeYByNStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class ChangeYByNStatement extends BaseChangeByNStatement
 {
   const BEGIN_STRING = "Y";
   const END_STRING = ")<br/>";
 
+  /**
+   * ChangeYByNStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
 
@@ -15,6 +26,9 @@ class ChangeYByNStatement extends BaseChangeByNStatement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
@@ -23,10 +37,11 @@ class ChangeYByNStatement extends BaseChangeByNStatement
     return "Change Y by " . $formula_string_without_markup;
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_blue.png";
   }
 }
-
-?>

@@ -2,15 +2,28 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+
+/**
+ * Class GameJamSubmittedProgramsController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class GameJamSubmittedProgramsController extends CRUDController
 {
+
+  /**
+   * @return RedirectResponse
+   */
   public function removeFromGameJamAction()
   {
-    /* @var $object \Catrobat\AppBundle\Entity\Program */
+    /**
+      * @var $object Program
+      */
+
     $object = $this->admin->getSubject();
 
     if (!$object)

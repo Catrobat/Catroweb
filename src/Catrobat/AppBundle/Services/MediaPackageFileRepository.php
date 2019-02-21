@@ -3,7 +3,6 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
-use FOS\RestBundle\Controller\Annotations\Unlink;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;

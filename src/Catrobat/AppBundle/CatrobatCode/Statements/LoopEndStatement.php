@@ -4,11 +4,22 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
 
+/**
+ * Class LoopEndStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class LoopEndStatement extends Statement
 {
   const BEGIN_STRING = "end of loop";
   const END_STRING = "<br/>";
 
+  /**
+   * LoopEndStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     $stmt = SyntaxHighlightingConstants::LOOP . self::BEGIN_STRING . SyntaxHighlightingConstants::END;
@@ -17,15 +28,19 @@ class LoopEndStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     return "End of loop";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_orange.png";
   }
 }
-
-?>

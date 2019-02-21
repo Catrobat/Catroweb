@@ -3,13 +3,30 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
-use FOS\RestBundle\Controller\Annotations\Unlink;
+use Symfony\Component\HttpFoundation\File\File;
 
+
+/**
+ * Class FeaturedImageRepository
+ * @package Catrobat\AppBundle\Services
+ */
 class FeaturedImageRepository
 {
+  /**
+   * @var string|string[]|null
+   */
   private $dir;
+  /**
+   * @var string|string[]|null
+   */
   private $path;
 
+  /**
+   * FeaturedImageRepository constructor.
+   *
+   * @param $dir
+   * @param $path
+   */
   public function __construct($dir, $path)
   {
     $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
@@ -24,11 +41,20 @@ class FeaturedImageRepository
     $this->path = $path;
   }
 
+  /**
+   * @param $file File
+   * @param $id
+   * @param $extension
+   */
   public function save($file, $id, $extension)
   {
     $file->move($this->dir, $this->generateFileNameFromId($id, $extension));
   }
 
+  /**
+   * @param $id
+   * @param $extension
+   */
   public function remove($id, $extension)
   {
     $path = $this->dir . $this->generateFileNameFromId($id, $extension);
@@ -38,11 +64,23 @@ class FeaturedImageRepository
     }
   }
 
+  /**
+   * @param $id
+   * @param $extension
+   *
+   * @return string
+   */
   private function generateFileNameFromId($id, $extension)
   {
     return 'featured_' . $id . '.' . $extension;
   }
 
+  /**
+   * @param $id
+   * @param $extension
+   *
+   * @return string
+   */
   public function getWebPath($id, $extension)
   {
     return $this->path . $this->generateFileNameFromId($id, $extension);

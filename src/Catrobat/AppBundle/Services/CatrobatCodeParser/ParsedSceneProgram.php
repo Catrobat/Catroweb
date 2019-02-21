@@ -23,6 +23,11 @@ class ParsedSceneProgram
    */
   protected $code_statistic;
 
+  /**
+   * ParsedSceneProgram constructor.
+   *
+   * @param \SimpleXMLElement $program_xml_properties
+   */
   public function __construct(\SimpleXMLElement $program_xml_properties)
   {
     $this->program_xml_properties = $program_xml_properties;
@@ -34,12 +39,18 @@ class ParsedSceneProgram
     $this->computeCodeStatistic();
   }
 
+  /**
+   *
+   */
   protected function parseScenes()
   {
     foreach ($this->program_xml_properties->scenes->scene as $scene_xml_properties)
       $this->scenes[] = new ParsedScene($scene_xml_properties);
   }
 
+  /**
+   *
+   */
   protected function computeCodeStatistic()
   {
     foreach ($this->scenes as $scene)
@@ -48,16 +59,25 @@ class ParsedSceneProgram
     $this->code_statistic->computeVariableStatistic($this->program_xml_properties);
   }
 
+  /**
+   * @return bool
+   */
   public function hasScenes()
   {
     return true;
   }
 
+  /**
+   * @return array|ParsedScene
+   */
   public function getScenes()
   {
     return $this->scenes;
   }
 
+  /**
+   * @return CodeStatistic
+   */
   public function getCodeStatistic()
   {
     return $this->code_statistic;

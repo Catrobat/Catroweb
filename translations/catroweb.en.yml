@@ -739,7 +739,7 @@ catro-notifications:
     program-follow:
       title: New Program from someone you follow
       messagePart1: created a new Program
-      messagePart2: , check it out.
+      messagePart2: ', check it out.'
 clipboard:
   success: Link to program copied to clipboard!
   fail: Failed to copy link to clipboard! :(

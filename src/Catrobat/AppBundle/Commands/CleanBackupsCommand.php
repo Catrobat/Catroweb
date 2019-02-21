@@ -2,26 +2,35 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Entity\ProgramManager;
-use Catrobat\AppBundle\Services\ApkRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+
+/**
+ * Class CleanBackupsCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CleanBackupsCommand extends ContainerAwareCommand
 {
-  private $apk_repository;
-  private $program_manager;
+  /**
+   * @var
+   */
   private $output;
 
+  /**
+   * CleanBackupsCommand constructor.
+   */
   public function __construct()
   {
     parent::__construct();
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:clean:backup')
@@ -30,6 +39,13 @@ class CleanBackupsCommand extends ContainerAwareCommand
       ->addOption('all', null, InputOption::VALUE_NONE, 'all backups are deleted');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|null
+   * @throws \Exception
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;

@@ -3,18 +3,26 @@
 namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
-use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
-use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
 
+/**
+ * Class ProgramXmlHeaderValidator
+ * @package Catrobat\AppBundle\Listeners
+ */
 class ProgramXmlHeaderValidator
 {
+  /**
+   * @param ProgramBeforeInsertEvent $event
+   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile());
   }
 
+  /**
+   * @param ExtractedCatrobatFile $file
+   */
   public function validate(ExtractedCatrobatFile $file)
   {
     $program_xml_properties = $file->getProgramXmlProperties();
@@ -38,7 +46,7 @@ class ProgramXmlHeaderValidator
     }
     else
     {
-      throw new InvalidXmlException('No Program XML header found!', StatusCode::INVALID_XML);
+      throw new InvalidXmlException('No Program XML header found!');
     }
   }
 }

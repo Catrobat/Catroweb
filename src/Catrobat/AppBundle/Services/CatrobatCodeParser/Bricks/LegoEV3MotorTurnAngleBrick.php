@@ -5,8 +5,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class LegoEV3MotorTurnAngleBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class LegoEV3MotorTurnAngleBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::LEGO_EV3_MOTOR_TURN_ANGLE_BRICK;

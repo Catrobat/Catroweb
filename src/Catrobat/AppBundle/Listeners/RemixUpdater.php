@@ -7,9 +7,14 @@ use Catrobat\AppBundle\Entity\RemixManager;
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Services\AsyncHttpClient;
+use Catrobat\AppBundle\Services\RemixData;
 use Symfony\Component\Routing\Router;
 
 
+/**
+ * Class RemixUpdater
+ * @package Catrobat\AppBundle\Listeners
+ */
 class RemixUpdater
 {
   const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
@@ -42,15 +47,31 @@ class RemixUpdater
     $this->migration_lock_file_path = $app_root_dir . '/' . self::MIGRATION_LOCK_FILE_NAME;
   }
 
+  /**
+   * @param ProgramAfterInsertEvent $event
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function onProgramAfterInsert(ProgramAfterInsertEvent $event)
   {
     $this->update($event->getExtractedFile(), $event->getProgramEntity());
   }
 
+  /**
+   * @param ExtractedCatrobatFile $file
+   * @param Program               $program
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function update(ExtractedCatrobatFile $file, Program $program)
   {
     $remixes_data = $file->getRemixesData($program->getId(), $program->isInitialVersion());
     $scratch_remixes_data = array_filter($remixes_data, function ($remix_data) {
+      /**
+       * @var $remix_data RemixData
+       */
       return $remix_data->isScratchProgram();
     });
     $scratch_info_data = [];
@@ -68,6 +89,9 @@ class RemixUpdater
     if (count($scratch_remixes_data) > 0)
     {
       $scratch_ids = array_map(function ($data) {
+        /**
+         * @var $data RemixData
+         */
         return $data->getProgramId();
       }, $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);

@@ -4,17 +4,36 @@ namespace Catrobat\AppBundle\Listeners;
 
 use Catrobat\AppBundle\Events\ProgramAfterInsertEvent;
 
+/**
+ * Class UploadNotificator
+ * @package Catrobat\AppBundle\Listeners
+ */
 class UploadNotificator
 {
+  /**
+   * @var \Swift_Mailer
+   */
   private $mailer;
+  /**
+   * @var \Catrobat\AppBundle\Entity\NotificationRepository
+   */
   private $notification_repo;
 
+  /**
+   * UploadNotificator constructor.
+   *
+   * @param \Swift_Mailer                                     $mailer
+   * @param \Catrobat\AppBundle\Entity\NotificationRepository $repository
+   */
   public function __construct(\Swift_Mailer $mailer, \Catrobat\AppBundle\Entity\NotificationRepository $repository)
   {
     $this->mailer = $mailer;
     $this->notification_repo = $repository;
   }
 
+  /**
+   * @param ProgramAfterInsertEvent $event
+   */
   public function onProgramInsertEvent(ProgramAfterInsertEvent $event)
   {
 

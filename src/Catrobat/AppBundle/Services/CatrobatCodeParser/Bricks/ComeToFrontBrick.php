@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class ComeToFrontBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class ComeToFrontBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::COME_TO_FRONT_BRICK;

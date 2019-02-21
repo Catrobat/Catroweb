@@ -4,12 +4,30 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
 
+/**
+ * Class LookStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class LookStatement extends Statement
 {
 
+  /**
+   * @var
+   */
   private $value;
+  /**
+   * @var Statement
+   */
   private $fileName;
 
+  /**
+   * LookStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   * @param $value
+   */
   public function __construct($statementFactory, $xmlTree, $spaces, $value)
   {
     $this->value = $value;
@@ -18,6 +36,9 @@ class LookStatement extends Statement
       "");
   }
 
+  /**
+   * @return string
+   */
   public function execute()
   {
     $this->findNames();
@@ -37,6 +58,9 @@ class LookStatement extends Statement
   }
 
 
+  /**
+   *
+   */
   private function findNames()
   {
     $tmpStatements = parent::getStatements();
@@ -52,15 +76,19 @@ class LookStatement extends Statement
     }
   }
 
+  /**
+   * @return mixed
+   */
   public function getValue()
   {
     return $this->value;
   }
 
+  /**
+   * @return mixed
+   */
   public function getFileName()
   {
     return $this->fileName;
   }
 }
-
-?>

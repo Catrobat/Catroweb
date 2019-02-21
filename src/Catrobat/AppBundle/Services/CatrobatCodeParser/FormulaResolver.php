@@ -2,8 +2,17 @@
 
 namespace Catrobat\AppBundle\Services\CatrobatCodeParser;
 
+/**
+ * Class FormulaResolver
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser
+ */
 class FormulaResolver
 {
+  /**
+   * @param $formula_list
+   *
+   * @return array
+   */
   public static function resolve($formula_list)
   {
     $formulas = [];
@@ -15,6 +24,11 @@ class FormulaResolver
     return $formulas;
   }
 
+  /**
+   * @param $formula
+   *
+   * @return string|null
+   */
   private static function resolveFormula($formula)
   {
     $resolved_formula = null;
@@ -42,6 +56,11 @@ class FormulaResolver
     return $resolved_formula;
   }
 
+  /**
+   * @param $formula
+   *
+   * @return string|null
+   */
   private static function resolveFunction($formula)
   {
     $resolved_function = null;
@@ -74,6 +93,11 @@ class FormulaResolver
     return $resolved_function;
   }
 
+  /**
+   * @param $operator
+   *
+   * @return string|null
+   */
   private static function resolveOperator($operator)
   {
     $resolved_operator = null;

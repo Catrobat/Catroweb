@@ -11,17 +11,38 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+
+/**
+ * Class ClickStatisticsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class ClickStatisticsAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_clickstatisticsadmin';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'click_stats';
 
+  /**
+   * @var array
+   */
   protected $datagridValues = [
     '_sort_by'    => 'id',
     '_sort_order' => 'DESC',
   ];
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -41,7 +62,12 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('referrer');
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -58,7 +84,12 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('locale');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -67,7 +98,8 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('user', EntityType::class, ['class' => User::class])
       ->add('program', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('scratch_program_id')
-      ->add('recommended_from_program', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
+      ->add('recommended_from_program',
+        EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('tag.en', null, [
         'label' => 'Tag'])
       ->add('extension.name', null, [
@@ -84,13 +116,21 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ]]);
   }
 
+
+  /**
+   * @return array
+   */
   public function getExportFields()
   {
-    return ['id', 'type', 'user.username', 'program.id', 'program.name', 'scratch_program_id', 'recommended_from_program.id',
-      'recommended_from_program.name', 'tag.en', 'extension.name', 'clicked_at', 'ip', 'country_code',
-      'country_name', 'locale', 'user_agent', 'referrer'];
+    return ['id', 'type', 'user.username', 'program.id', 'program.name', 'scratch_program_id',
+      'recommended_from_program.id', 'recommended_from_program.name', 'tag.en', 'extension.name',
+      'clicked_at', 'ip', 'country_code', 'country_name', 'locale', 'user_agent', 'referrer'];
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('create')->remove('delete');

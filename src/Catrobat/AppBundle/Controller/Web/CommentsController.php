@@ -12,12 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+
 /**
  * Class CommentsController
  * @package Catrobat\AppBundle\Controller\Web
  */
 class CommentsController extends Controller
 {
+
   /**
    * @Route("/reportComment", name="report", methods={"GET"})
    *
@@ -47,6 +49,7 @@ class CommentsController extends Controller
 
     return new Response(StatusCode::OK);
   }
+
 
   /**
    * @Route("/deleteComment", name="delete", methods={"GET"})
@@ -92,6 +95,7 @@ class CommentsController extends Controller
 
     return new Response(StatusCode::OK);
   }
+
 
   /**
    * @Route("/comment", name="comment", methods={"POST"})

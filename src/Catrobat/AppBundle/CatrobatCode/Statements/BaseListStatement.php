@@ -2,9 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class BaseListStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class BaseListStatement extends Statement
 {
 
+  /**
+   * BaseListStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   * @param $start
+   * @param $end
+   */
   public function __construct($statementFactory, $xmlTree, $spaces, $start, $end)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -12,6 +25,9 @@ class BaseListStatement extends Statement
       $end);
   }
 
+  /**
+   * @return string
+   */
   public function execute()
   {
     if (count(parent::getStatements()) < 1)
@@ -23,6 +39,9 @@ class BaseListStatement extends Statement
     return $code;
   }
 
+  /**
+   * @return string
+   */
   public function executeChildren()
   {
     $code = '';
@@ -35,5 +54,3 @@ class BaseListStatement extends Statement
     return $code;
   }
 }
-
-?>

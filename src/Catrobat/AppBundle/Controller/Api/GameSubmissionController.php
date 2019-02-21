@@ -2,24 +2,34 @@
 
 namespace Catrobat\AppBundle\Controller\Api;
 
+use Catrobat\AppBundle\Entity\GameJam;
+use Catrobat\AppBundle\Entity\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Catrobat\AppBundle\Entity\GameJam;
-use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
 use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 use Catrobat\AppBundle\Responses\ProgramListResponse;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+
+/**
+ * Class GameSubmissionController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class GameSubmissionController extends Controller
 {
 
   /**
    * @Route("/api/gamejam/finalize/{id}", name="gamejam_form_submission", methods={"GET"})
+   *
+   * @param Request $request
+   * @param Program $program
+   *
+   * @return JsonResponse
    */
   public function formSubmittedAction(Request $request, Program $program)
   {
@@ -45,8 +55,14 @@ class GameSubmissionController extends Controller
     }
   }
 
+
   /**
    * @Route("/api/gamejam/sampleprograms.json", name="api_gamejam_sample_programs", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return ProgramListResponse
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function getSampleProgramsForLatestGamejam(Request $request)
   {
@@ -69,8 +85,14 @@ class GameSubmissionController extends Controller
     return new ProgramListResponse($returning_samples, $returning_samples !== null ? count($returning_samples) : 0);
   }
 
+
   /**
    * @Route("/api/gamejam/submissions.json", name="api_gamejam_submissions", methods={"GET"})
+   *
+   * @param Request $request
+   *
+   * @return ProgramListResponse
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function getSubmissionsForLatestGamejam(Request $request)
   {
@@ -93,6 +115,13 @@ class GameSubmissionController extends Controller
       ->count());
   }
 
+
+  /**
+   * @param $flavor
+   *
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   private function getGameJam($flavor)
   {
     $gamejam = $this->get("gamejamrepository")->getLatestGameJamByFlavor($flavor);
@@ -112,6 +141,12 @@ class GameSubmissionController extends Controller
 
   /**
    * @Route("/gamejam/submit/{id}", name="gamejam_web_submit", methods={"GET"})
+   *
+   * @param Request $request
+   * @param Program $program
+   *
+   * @return RedirectResponse
+   * @throws \Exception
    */
   public function webSubmitAction(Request $request, Program $program)
   {
@@ -160,6 +195,14 @@ class GameSubmissionController extends Controller
     }
   }
 
+  /**
+   * @param $gamejam GameJam
+   * @param $user User
+   * @param $program Program
+   * @param $request Request
+   *
+   * @return mixed
+   */
   private function assembleFormUrl($gamejam, $user, $program, $request)
   {
     $languageCode = $this->getLanguageCode($request);
@@ -173,6 +216,12 @@ class GameSubmissionController extends Controller
     return $url;
   }
 
+
+  /**
+   * @param $request Request
+   *
+   * @return string
+   */
   private function getLanguageCode($request)
   {
     $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
@@ -191,6 +240,9 @@ class GameSubmissionController extends Controller
     return $languageCode;
   }
 
+  /**
+   * @param Program $program
+   */
   private function persistAndFlush(Program $program)
   {
     $this->getDoctrine()->getManager()->persist($program);

@@ -58,9 +58,12 @@ class ProgramLikeRepository extends EntityRepository
   }
 
   /**
-   * @param int $user_ids
+   * @param $user_ids array
+   * @param $exclude_user_id
+   * @param $exclude_program_ids
+   * @param $flavor
    *
-   * @return ProgramLike
+   * @return mixed
    */
   public function getLikesOfUsers($user_ids, $exclude_user_id, $exclude_program_ids, $flavor)
   {

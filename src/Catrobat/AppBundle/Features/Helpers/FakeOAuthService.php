@@ -5,17 +5,35 @@ namespace Catrobat\AppBundle\Features\Helpers;
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Services\OAuthService;
-use Catrobat\AppBundle\StatusCode;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class FakeOAuthService
+ * @package Catrobat\AppBundle\Features\Helpers
+ */
 class FakeOAuthService
 {
+  /**
+   * @var OAuthService
+   */
   private $oauth_service;
+  /**
+   * @var mixed
+   */
   private $use_real_oauth_service;
+  /**
+   * @var Container
+   */
   private $container;
 
+  /**
+   * FakeOAuthService constructor.
+   *
+   * @param OAuthService $oauth_service
+   * @param Container    $container
+   */
   public function __construct(OAuthService $oauth_service, Container $container)
   {
     $this->oauth_service = $oauth_service;
@@ -23,26 +41,56 @@ class FakeOAuthService
     $this->use_real_oauth_service = $container->getParameter('oauth_use_real_service');
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function isOAuthUser(Request $request)
   {
     return $this->oauth_service->isOAuthUser($request);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkEMailAvailable(Request $request)
   {
     return $this->oauth_service->checkEMailAvailable($request);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkUserNameAvailable(Request $request)
   {
     return $this->oauth_service->checkUserNameAvailable($request);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkFacebookServerTokenAvailable(Request $request)
   {
     return $this->oauth_service->checkFacebookServerTokenAvailable($request);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return OAuthService|JsonResponse
+   * @throws \Exception
+   */
   public function exchangeFacebookTokenAction(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -81,6 +129,12 @@ class FakeOAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return OAuthService|JsonResponse
+   * @throws \Exception
+   */
   public function loginWithFacebookAction(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -94,6 +148,12 @@ class FakeOAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function getFacebookUserProfileInfo(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -103,6 +163,12 @@ class FakeOAuthService
     throw new \Exception('Function not implemented in FakeOAuthService');
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function isFacebookServerAccessTokenValid(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -112,11 +178,23 @@ class FakeOAuthService
     throw new \Exception('Function not implemented in FakeOAuthService');
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkGoogleServerTokenAvailable(Request $request)
   {
     return $this->oauth_service->checkGoogleServerTokenAvailable($request);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return OAuthService|JsonResponse
+   * @throws \Exception
+   */
   public function exchangeGoogleCodeAction(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -156,6 +234,12 @@ class FakeOAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return OAuthService|JsonResponse
+   * @throws \Exception
+   */
   public function loginWithGoogleAction(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -169,6 +253,12 @@ class FakeOAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function getGoogleUserProfileInfo(Request $request)
   {
     if ($this->use_real_oauth_service)
@@ -178,11 +268,21 @@ class FakeOAuthService
     throw new \Exception('Function not implemented in FakeOAuthService');
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function loginWithTokenAndRedirectAction(Request $request)
   {
     return $this->oauth_service->loginWithTokenAndRedirectAction($request);
   }
 
+  /**
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function deleteOAuthTestUserAccounts()
   {
     if ($this->use_real_oauth_service)
@@ -192,11 +292,17 @@ class FakeOAuthService
     throw new \Exception('Function not implemented in FakeOAuthService');
   }
 
+  /**
+   * @param $use_real
+   */
   public function useRealService($use_real)
   {
     $this->use_real_oauth_service = $use_real;
   }
 
+  /**
+   * @return mixed
+   */
   public function getUseRealOauthService()
   {
     return $this->use_real_oauth_service;

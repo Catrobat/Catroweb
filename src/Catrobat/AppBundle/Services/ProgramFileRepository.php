@@ -6,13 +6,38 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
 
+
+/**
+ * Class ProgramFileRepository
+ * @package Catrobat\AppBundle\Services
+ */
 class ProgramFileRepository
 {
+  /**
+   * @var
+   */
   private $directory;
+  /**
+   * @var Filesystem
+   */
   private $filesystem;
+  /**
+   * @var
+   */
   private $webpath;
+  /**
+   * @var CatrobatFileCompressor
+   */
   private $file_compressor;
 
+  /**
+   * ProgramFileRepository constructor.
+   *
+   * @param                        $directory
+   * @param                        $webpath
+   * @param CatrobatFileCompressor $file_compressor
+   * @param                        $tmp_dir
+   */
   public function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor, $tmp_dir)
   {
     if (!is_dir($directory))
@@ -31,11 +56,19 @@ class ProgramFileRepository
     $this->file_compressor = $file_compressor;
   }
 
+  /**
+   * @param ExtractedCatrobatFile $extracted
+   * @param                       $id
+   */
   public function saveProgram(ExtractedCatrobatFile $extracted, $id)
   {
     $this->file_compressor->compress($extracted->getPath(), $this->directory, $id);
   }
 
+  /**
+   * @param ExtractedCatrobatFile $extracted
+   * @param                       $id
+   */
   public function saveProgramTemp(ExtractedCatrobatFile $extracted, $id)
   {
     if ($this->tmp_dir)
@@ -44,6 +77,9 @@ class ProgramFileRepository
     }
   }
 
+  /**
+   * @param $id
+   */
   public function makeTempProgramPerm($id)
   {
     if ($this->tmp_dir)
@@ -53,16 +89,28 @@ class ProgramFileRepository
     }
   }
 
+  /**
+   * @param $id
+   */
   public function deleteProgramFile($id)
   {
     $this->filesystem->remove($this->directory . $id . ".catrobat");
   }
 
+  /**
+   * @param File $file
+   * @param      $id
+   */
   public function saveProgramfile(File $file, $id)
   {
     $this->filesystem->copy($file->getPathname(), $this->directory . $id . '.catrobat');
   }
 
+  /**
+   * @param $id
+   *
+   * @return File
+   */
   public function getProgramFile($id)
   {
     return new File($this->directory . $id . '.catrobat');

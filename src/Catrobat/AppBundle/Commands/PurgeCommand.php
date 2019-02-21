@@ -9,8 +9,16 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
+
+/**
+ * Class PurgeCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class PurgeCommand extends ContainerAwareCommand
 {
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:purge')
@@ -18,6 +26,13 @@ class PurgeCommand extends ContainerAwareCommand
       ->addOption('force');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Exception
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     if (!$input->getOption('force'))
@@ -59,7 +74,8 @@ class PurgeCommand extends ContainerAwareCommand
     $progress->advance();
 
     $progress->setMessage('Droping Database');
-    CommandHelper::executeSymfonyCommand('doctrine:schema:drop', $this->getApplication(), ['--force' => true], $suboutput);
+    CommandHelper::executeSymfonyCommand('doctrine:schema:drop',
+      $this->getApplication(), ['--force' => true], $suboutput);
     $progress->advance();
 
     $progress->setMessage('(Re-) Creating Database');

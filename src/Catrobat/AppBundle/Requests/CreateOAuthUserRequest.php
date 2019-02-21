@@ -5,8 +5,17 @@ namespace Catrobat\AppBundle\Requests;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class CreateOAuthUserRequest
+ * @package Catrobat\AppBundle\Requests
+ */
 class CreateOAuthUserRequest
 {
+  /**
+   * CreateOAuthUserRequest constructor.
+   *
+   * @param Request $request
+   */
   public function __construct(Request $request)
   {
 

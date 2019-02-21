@@ -179,14 +179,6 @@ class ClickStatistic
   }
 
   /**
-   * @return mixed
-   */
-  public function getLatitude()
-  {
-    return $this->latitude;
-  }
-
-  /**
    * @param mixed $latitude
    */
   public function setLatitude($latitude)

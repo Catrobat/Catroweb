@@ -6,8 +6,14 @@ use FR3D\LdapBundle\Hydrator\HydratorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Catrobat\AppBundle\Entity\User;
 
+
+/**
+ * Class UserHydrator
+ * @package Catrobat\AppBundle\Ldap
+ */
 class UserHydrator implements HydratorInterface
 {
+
   /**
    * Populate an user with the data retrieved from LDAP.
    *

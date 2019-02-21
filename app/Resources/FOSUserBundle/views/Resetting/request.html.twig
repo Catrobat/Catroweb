@@ -16,7 +16,7 @@
 
     <div class="container-fluid" style="width:100%">
 
-      {% include 'components/login/login_logo.html.twig' %}
+      {% include 'UserManagement/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-5 text-center" align="center">
@@ -32,7 +32,7 @@
         <div class="col-sm-11 col-md-8 col-lg-5" align="center">
 
           <!-- Policy -->
-          {% include 'privacy_policy/policy.html.twig' %}
+          {% include 'PrivacyAndTerms/policy.html.twig' %}
 
           <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
                 action="{{ path('fos_user_resetting_send_email') }}" method="post">
@@ -78,7 +78,7 @@
                     </div>
                   </div>
 
-                  {% include 'components/login/or_line.html.twig' %}
+                  {% include 'UserManagement/or_line.html.twig' %}
                 </div>
 
               </div>
@@ -89,7 +89,7 @@
     </div>
 
     <div id="spacer1" style="margin-bottom: 30px"></div>
-    {% include 'social/oauth_form.html.twig' %}
+    {% include 'UserManagement/oauth_form.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
 
   {% endblock fos_user_content %}

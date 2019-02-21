@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class JumpingSumoTakingPictureBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class JumpingSumoTakingPictureBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::JUMP_SUMO_TAKING_PICTURE_BRICK;

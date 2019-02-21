@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class ClearGraphicEffectStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class ClearGraphicEffectStatement extends Statement
 {
   const BEGIN_STRING = "clear graphic effects";
   const END_STRING = "<br/>";
 
+  /**
+   * ClearGraphicEffectStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,15 +25,19 @@ class ClearGraphicEffectStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     return "Clear graphic effects";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_green.png";
   }
 }
-
-?>

@@ -32,10 +32,19 @@ class Template
    */
   protected $active = true;
 
+  /**
+   * @var
+   */
   protected $thumbnail;
 
+  /**
+   * @var
+   */
   protected $landscape_program_file;
 
+  /**
+   * @var
+   */
   protected $portrait_program_file;
 
   /**

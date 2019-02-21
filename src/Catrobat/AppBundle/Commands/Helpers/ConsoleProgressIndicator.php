@@ -2,27 +2,66 @@
 
 namespace Catrobat\AppBundle\Commands\Helpers;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ConsoleProgressIndicator
+ * @package Catrobat\AppBundle\Commands\Helpers
+ */
 class ConsoleProgressIndicator
 {
+  /**
+   * @var OutputInterface
+   */
   private $console;
+  /**
+   * @var int
+   */
   private $inline_count = 0;
+  /**
+   * @var int
+   */
   private $inline_limit = 80;
+  /**
+   * @var int
+   */
   private $line_count = 1;
+  /**
+   * @var array
+   */
   private $error_array = [];
+  /**
+   * @var int
+   */
   private $error_print_limit = 50;
+  /**
+   * @var bool
+   */
   private $enable_error_file;
+  /**
+   * @var string
+   */
   private $on_success_msg = '<info>.</info>';
+  /**
+   * @var string
+   */
   private $on_failure_msg = '<error>F</error>';
 
+  /**
+   * ConsoleProgressIndicator constructor.
+   *
+   * @param OutputInterface $console
+   * @param bool            $enable_error_file
+   */
   public function __construct(OutputInterface $console, $enable_error_file = false)
   {
     $this->console = $console;
     $this->enable_error_file = $enable_error_file;
   }
 
+  /**
+   * @param string $msg
+   */
   public function isSuccess($msg = '')
   {
     if ($msg == '')
@@ -34,6 +73,9 @@ class ConsoleProgressIndicator
     $this->checkProgress();
   }
 
+  /**
+   * @param string $msg
+   */
   public function isFailure($msg = '')
   {
     if ($msg == '')
@@ -45,6 +87,9 @@ class ConsoleProgressIndicator
     $this->checkProgress();
   }
 
+  /**
+   * @param $msg
+   */
   public function isOther($msg)
   {
     $this->console->write($msg);
@@ -52,11 +97,17 @@ class ConsoleProgressIndicator
     $this->checkProgress();
   }
 
+  /**
+   * @param $error
+   */
   public function addError($error)
   {
     array_push($this->error_array, $error);
   }
 
+  /**
+   *
+   */
   public function printErrors()
   {
     $this->console->writeln('');
@@ -94,6 +145,9 @@ class ConsoleProgressIndicator
     }
   }
 
+  /**
+   *
+   */
   public function createErrorFile()
   {
     if ($this->enable_error_file)
@@ -132,6 +186,9 @@ class ConsoleProgressIndicator
     }
   }
 
+  /**
+   *
+   */
   private function checkProgress()
   {
     if ($this->inline_count >= $this->inline_limit)

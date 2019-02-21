@@ -2,16 +2,25 @@
 
 namespace Catrobat\AppBundle\Services;
 
-use Catrobat\AppBundle\CatrobatCode\StatementFactory;
-use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
-use Catrobat\AppBundle\Exceptions\Upload\MissingXmlException;
-use Symfony\Component\Finder\Finder;
 
+/**
+ * Class RemixData
+ * @package Catrobat\AppBundle\Services
+ */
 class RemixData
 {
+  /**
+   *
+   */
   const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
+  /**
+   * @var string
+   */
   private $remix_url;
+  /**
+   * @var mixed
+   */
   private $remix_url_data;
 
   /**
@@ -23,11 +32,17 @@ class RemixData
     $this->remix_url_data = parse_url($this->remix_url);
   }
 
+  /**
+   * @return string
+   */
   public function getUrl()
   {
     return $this->remix_url;
   }
 
+  /**
+   * @return int
+   */
   public function getProgramId()
   {
     if (!array_key_exists('path', $this->remix_url_data))
@@ -41,6 +56,9 @@ class RemixData
     return (count($id_matches) > 0) ? intval(str_replace('/', '', $id_matches[0])) : 0;
   }
 
+  /**
+   * @return bool
+   */
   public function isScratchProgram()
   {
     if (!array_key_exists('host', $this->remix_url_data))
@@ -51,6 +69,9 @@ class RemixData
     return (strpos($this->remix_url_data['host'], self::SCRATCH_DOMAIN) !== false);
   }
 
+  /**
+   * @return bool
+   */
   public function isAbsoluteUrl()
   {
     return array_key_exists('host', $this->remix_url_data)

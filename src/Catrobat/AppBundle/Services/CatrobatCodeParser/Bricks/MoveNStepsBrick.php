@@ -5,6 +5,10 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class MoveNStepsBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class MoveNStepsBrick extends Brick
 {
   protected function create()

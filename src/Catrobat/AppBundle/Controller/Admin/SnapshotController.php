@@ -6,11 +6,18 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
 
+
+/**
+ * Class SnapshotController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class SnapshotController extends CRUDController
 {
-  /*
-   * (non-PHPdoc)
-   * @see \Sonata\AdminBundle\Controller\CRUDController::listAction()
+
+  /**
+   * @param Request|null $request
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
    */
   public function listAction(Request $request = null)
   {

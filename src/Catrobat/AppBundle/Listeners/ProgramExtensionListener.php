@@ -2,27 +2,52 @@
 
 namespace Catrobat\AppBundle\Listeners;
 
+use Catrobat\AppBundle\Entity\Extension;
 use Catrobat\AppBundle\Entity\ExtensionRepository;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
 use Catrobat\AppBundle\Services\ExtractedCatrobatFile;
 use Catrobat\AppBundle\Entity\Program;
 
+
+/**
+ * Class ProgramExtensionListener
+ * @package Catrobat\AppBundle\Listeners
+ */
 class ProgramExtensionListener
 {
+  /**
+   * @var ExtensionRepository
+   */
   private $extension_repository;
 
+  /**
+   * ProgramExtensionListener constructor.
+   *
+   * @param ExtensionRepository $repo
+   */
   public function __construct(ExtensionRepository $repo)
   {
     $this->extension_repository = $repo;
   }
 
+  /**
+   * @param ProgramBeforePersistEvent $event
+   */
   public function onEvent(ProgramBeforePersistEvent $event)
   {
     $this->checkExtension($event->getExtractedFile(), $event->getProgramEntity());
   }
 
+  /**
+   * @param ExtractedCatrobatFile $extracted_file
+   * @param Program               $program
+   */
   public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program)
   {
+    /**
+     * @var $extension Extension
+     */
+
     $xml = $extracted_file->getProgramXmlProperties();
 
     $xpath = '//@category';

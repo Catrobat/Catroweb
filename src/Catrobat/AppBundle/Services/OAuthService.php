@@ -13,26 +13,45 @@ use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
 use Google_Client;
-use Google_Http_Request;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Validator\Validator;
 
+
+/**
+ * Class OAuthService
+ * @package Catrobat\AppBundle\Services
+ */
 class OAuthService
 {
+  /**
+   * @var Container
+   */
   private $container;
+  /**
+   * @var
+   */
   private $facebook;
 
+  /**
+   * OAuthService constructor.
+   *
+   * @param Container $container
+   */
   public function __construct(Container $container)
   {
     $this->container = $container;
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function isOAuthUser(Request $request)
   {
     /**
@@ -67,6 +86,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkEMailAvailable(Request $request)
   {
     /**
@@ -93,6 +118,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkUserNameAvailable(Request $request)
   {
     /**
@@ -121,6 +152,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkFacebookServerTokenAvailable(Request $request)
   {
     /**
@@ -150,6 +187,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function exchangeFacebookTokenAction(Request $request)
   {
     /**
@@ -276,6 +319,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function loginWithFacebookAction(Request $request)
   {
     /**
@@ -319,6 +368,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function getFacebookUserProfileInfo(Request $request)
   {
     /**
@@ -372,6 +427,11 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param $e
+   *
+   * @return JsonResponse
+   */
   private function returnErrorCode($e)
   {
     $retArray['error_code'] = $e->getCode();
@@ -380,6 +440,10 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @return bool|Response
+   * @throws FacebookSDKException
+   */
   private function initializeFacebook()
   {
     if ($this->facebook != null)
@@ -404,6 +468,12 @@ class OAuthService
     return true;
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function isFacebookServerAccessTokenValid(Request $request)
   {
     /**
@@ -515,6 +585,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param $token_to_check
+   *
+   * @return \Facebook\GraphNodes\GraphNode
+   * @throws FacebookSDKException
+   */
   private function checkFacebookServerAccessTokenValidity($token_to_check)
   {
     $app_token = $this->getFacebookAppToken();
@@ -528,6 +604,11 @@ class OAuthService
     return $response->getGraphNode();
   }
 
+  /**
+   * @param null $client_token
+   *
+   * @throws FacebookSDKException
+   */
   private function setFacebookDefaultAccessToken($client_token = null)
   {
     $this->initializeFacebook();
@@ -560,6 +641,17 @@ class OAuthService
     }
   }
 
+  /**
+   * @param $userManager
+   * @param $request
+   * @param $retArray
+   * @param $user
+   * @param $facebookId
+   * @param $facebookUsername
+   * @param $locale
+   *
+   * @throws \Exception
+   */
   private function connectFacebookUserToExistingUserAccount($userManager, $request, &$retArray, $user, $facebookId, $facebookUsername, $locale)
   {
     /**
@@ -588,6 +680,17 @@ class OAuthService
     }
   }
 
+  /**
+   * @param      $request
+   * @param      $userManager
+   * @param      $retArray
+   * @param      $facebookId
+   * @param      $facebookUsername
+   * @param      $facebookEmail
+   * @param      $locale
+   * @param null $access_token
+   * @throws \Exception
+   */
   private function registerFacebookUser($request, $userManager, &$retArray, $facebookId, $facebookUsername, $facebookEmail, $locale, $access_token = null)
   {
     /**
@@ -623,6 +726,9 @@ class OAuthService
     }
   }
 
+  /**
+   * @return string
+   */
   private function getFacebookAppToken()
   {
     $app_id = $this->container->getParameter('facebook_app_id');
@@ -632,6 +738,12 @@ class OAuthService
     return $app_token;
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function checkGoogleServerTokenAvailable(Request $request)
   {
     /**
@@ -661,6 +773,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse|Response
+   * @throws \Exception
+   */
   public function exchangeGoogleCodeAction(Request $request)
   {
     /**
@@ -839,6 +957,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function loginWithGoogleAction(Request $request)
   {
     /**
@@ -882,6 +1006,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function getGoogleUserProfileInfo(Request $request)
   {
     /**
@@ -917,6 +1047,13 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param $userManager
+   * @param $user
+   * @param $access_token
+   * @param $refresh_token
+   * @param $id_token
+   */
   private function setGoogleTokens($userManager, $user, $access_token, $refresh_token, $id_token)
   {
     /**
@@ -938,6 +1075,16 @@ class OAuthService
     $userManager->updateUser($user);
   }
 
+  /**
+   * @param $userManager
+   * @param $request
+   * @param $retArray
+   * @param $user
+   * @param $googleId
+   * @param $googleUsername
+   * @param $locale
+   * @throws \Exception
+   */
   private function connectGoogleUserToExistingUserAccount($userManager, $request, &$retArray, $user, $googleId, $googleUsername, $locale)
   {
     /**
@@ -965,6 +1112,19 @@ class OAuthService
     }
   }
 
+  /**
+   * @param      $request
+   * @param      $userManager
+   * @param      $retArray
+   * @param      $googleId
+   * @param      $googleUsername
+   * @param      $googleEmail
+   * @param      $locale
+   * @param null $access_token
+   * @param null $refresh_token
+   * @param null $id_token
+   * @throws \Exception
+   */
   private function registerGoogleUser($request, $userManager, &$retArray, $googleId, $googleUsername, $googleEmail, $locale, $access_token = null, $refresh_token = null, $id_token = null)
   {
     /**
@@ -1001,6 +1161,11 @@ class OAuthService
     }
   }
 
+  /**
+   * @param $user
+   *
+   * @throws \Exception
+   */
   private function refreshGoogleAccessToken($user)
   {
     /**
@@ -1054,6 +1219,11 @@ class OAuthService
     }
   }
 
+  /**
+   * @param $user
+   *
+   * @return Google_Client|Response
+   */
   private function getAuthenticatedGoogleClientForGPlusUser($user)
   {
     /**
@@ -1088,6 +1258,12 @@ class OAuthService
     return $client;
   }
 
+  /**
+   * @param Request $request
+   *
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function loginWithTokenAndRedirectAction(Request $request)
   {
     /**
@@ -1140,6 +1316,9 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @return string
+   */
   function randomPassword()
   {
     $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -1154,11 +1333,21 @@ class OAuthService
     return implode($pass); //turn the array into a string
   }
 
+  /**
+   * @param $retArray
+   */
   private function setLoginOAuthUserStatusCode(&$retArray)
   {
     $retArray['statusCode'] = StatusCode::OK;
   }
 
+  /**
+   * @param $request
+   * @param $retArray
+   *
+   * @return mixed
+   * @throws \Exception
+   */
   private function validateOAuthUser($request, &$retArray)
   {
     /**
@@ -1177,6 +1366,10 @@ class OAuthService
     return $violations;
   }
 
+  /**
+   * @return JsonResponse
+   * @throws \Exception
+   */
   public function deleteOAuthTestUserAccounts()
   {
     /**
@@ -1250,6 +1443,12 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
+  /**
+   * @param $user
+   * @param $retArray
+   *
+   * @throws FacebookSDKException
+   */
   private function revokeFacebookPermissions($user, &$retArray)
   {
     /**
@@ -1264,6 +1463,12 @@ class OAuthService
     $retArray['response'] = $response;
   }
 
+  /**
+   * @param $user
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   private function deleteUser($user)
   {
     /**
@@ -1286,6 +1491,13 @@ class OAuthService
     $userManager->deleteUser($user);
   }
 
+  /**
+   * @param       $message
+   * @param array $parameters
+   *
+   * @return string
+   * @throws \Exception
+   */
   private function trans($message, $parameters = [])
   {
     return $this->container->get('translator')->trans($message, $parameters, 'catroweb');

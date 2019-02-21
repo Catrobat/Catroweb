@@ -2,9 +2,9 @@
 
 namespace Catrobat\AppBundle\Admin;
 
-
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
+
 
 /**
  * Class BroadcastNotificationAdmin
@@ -30,5 +30,4 @@ class BroadcastNotificationAdmin extends AbstractAdmin
     $collection->clearExcept(['list']);
     $collection->add('send');
   }
-
 }

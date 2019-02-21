@@ -4,8 +4,8 @@ namespace Catrobat\AppBundle\Controller;
 
 use Catrobat\AppBundle\Entity\NolbExampleProgram;
 use Catrobat\AppBundle\Entity\NolbExampleRepository;
+use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Exceptions\Upload\InvalidFileUploadException;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
 use Catrobat\AppBundle\StatusCode;
 use Monolog\Logger;
@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Catrobat\AppBundle\Entity\ProgramManager;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Catrobat\AppBundle\Services\ProgramFileRepository;
@@ -21,11 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+
+/**
+ * Class DownloadProgramController
+ * @package Catrobat\AppBundle\Controller
+ */
 class DownloadProgramController extends Controller
 {
   /**
    * @Route("/download/{id}.catrobat", name="download", options={"expose"=true}, defaults={"_format": "json"},
-   *                                   methods={"GET"})
+   *         methods={"GET"})
+   *
+   * @param Request $request
+   * @param         $id
+   *
+   * @return JsonResponse | BinaryFileResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function downloadProgramAction(Request $request, $id)
   {
@@ -102,8 +113,9 @@ class DownloadProgramController extends Controller
     throw new NotFoundHttpException();
   }
 
+
   /**
-   * @param $program
+   * @param $program Program
    */
   protected function increaseGenderedDownloadsIfNolbExampleProgram($program)
   {
@@ -123,10 +135,17 @@ class DownloadProgramController extends Controller
     }
   }
 
+
+  /**
+   * @param $user
+   * @param $nolb_example_program
+   */
   protected function increaseGenderedDownloads($user, $nolb_example_program)
   {
-    /* @var $user User */
-    /* @var $nolb_example_program NolbExampleProgram */
+    /**
+     * @var $user User
+     * @var $nolb_example_program NolbExampleProgram
+     */
 
     $user_name = $user->getUsername();
     $gender = substr($user_name, 4, 1);

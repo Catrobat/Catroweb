@@ -2,6 +2,10 @@
 
 namespace Catrobat\AppBundle\Entity;
 
+/**
+ * Interface ProgramCatrobatRemixRelationInterface
+ * @package Catrobat\AppBundle\Entity
+ */
 interface ProgramCatrobatRemixRelationInterface
 {
   /**

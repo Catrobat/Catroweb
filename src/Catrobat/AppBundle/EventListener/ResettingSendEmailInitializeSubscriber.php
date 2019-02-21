@@ -9,18 +9,39 @@ use \Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
+/**
+ * Class ResettingSendEmailInitializeSubscriber
+ * @package Catrobat\AppBundle\EventListener
+ */
 class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
 {
 
+  /**
+   * @var RouterInterface
+   */
   private $router;
+  /**
+   * @var ContainerInterface
+   */
   private $container;
 
+  /**
+   * ResettingSendEmailInitializeSubscriber constructor.
+   *
+   * @param RouterInterface    $router
+   * @param ContainerInterface $container
+   */
   public function __construct(RouterInterface $router, ContainerInterface $container)
   {
     $this->router = $router;
     $this->container = $container;
   }
 
+  /**
+   * @param GetResponseNullableUserEvent $event
+   *
+   * @return GetResponseNullableUserEvent
+   */
   public function onResettingSendEmailInitialize(GetResponseNullableUserEvent $event)
   {
     $user = $event->getUser();
@@ -39,13 +60,13 @@ class ResettingSendEmailInitializeSubscriber implements EventSubscriberInterface
       return $event->setResponse(new RedirectResponse($url));
     }
 
-//        if ($user->isLimited()) {
-//            $event->setResponse(new HttpException(403, 'This Account cannot reset the password'));
-//        }
     return $event;
   }
 
 
+  /**
+   * @return array
+   */
   public static function getSubscribedEvents()
   {
     return [

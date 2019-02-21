@@ -3,32 +3,35 @@
 namespace Catrobat\AppBundle\Features\Helpers;
 
 use Behat\Behat\Hook\Scope\AfterStepScope;
-use Behat\Behat\Tester\Exception\PendingException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Catrobat\AppBundle\Entity\Program;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Behat\Behat\Context\CustomSnippetAcceptingContext;
-use Catrobat\AppBundle\Services\CatrobatFileCompressor;
-use Catrobat\AppBundle\Entity\ProgramManager;
+
+
 
 /**
  * Feature context.
  */
-class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
+class BaseContext implements KernelAwareContext
 {
 
   const FIXTUREDIR = './testdata/DataFixtures/';
 
+  /**
+   * @var SymfonySupport
+   */
   private $symfony_support;
 
+  /**
+   * BaseContext constructor.
+   */
   public function __construct()
   {
     $this->symfony_support = new SymfonySupport(self::FIXTUREDIR);
   }
 
+  /**
+   * @return string
+   */
   public static function getAcceptedSnippetType()
   {
     return 'regex';
@@ -48,6 +51,9 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Getter & Setter
 
+  /**
+   * @return SymfonySupport
+   */
   public function getSymfonySupport()
   {
     return $this->symfony_support;
@@ -167,6 +173,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   }
 
   /**
+   * @param $param
    *
    * @return mixed
    */
@@ -176,6 +183,7 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
   }
 
   /**
+   * @param $param
    *
    * @return mixed
    */
@@ -202,9 +210,12 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     return $this->symfony_support->getDefaultUser();
   }
 
+  /**
+   * @param $dir
+   */
   public function setErrorDirectory($dir)
   {
-    return $this->symfony_support->setErrorDirectory($dir);
+    $this->symfony_support->setErrorDirectory($dir);
   }
 
   // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,6 +246,8 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
 
   /**
    * @AfterStep
+   *
+   * @param AfterStepScope $scope
    */
   public function saveResponseToFile(AfterStepScope $scope)
   {
@@ -243,96 +256,191 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
 
   // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Support Functions
+  /**
+   * @param $directory
+   */
   public function emptyDirectory($directory)
   {
-    return $this->symfony_support->emptyDirectory($directory);
+    $this->symfony_support->emptyDirectory($directory);
   }
 
+  /**
+   * @param array $config
+   *
+   * @return \FOS\UserBundle\Model\UserInterface|mixed
+   */
   public function insertUser($config = [])
   {
     return $this->symfony_support->insertUser($config);
   }
 
+  /**
+   *
+   */
   public function computeAllLikeSimilaritiesBetweenUsers()
   {
-    return $this->symfony_support->computeAllLikeSimilaritiesBetweenUsers();
+    $this->symfony_support->computeAllLikeSimilaritiesBetweenUsers();
   }
 
+  /**
+   * @return array
+   */
   public function getAllLikeSimilaritiesBetweenUsers()
   {
     return $this->symfony_support->getUserLikeSimilarityRelationRepository()->findAll();
   }
 
+  /**
+   *
+   */
   public function computeAllRemixSimilaritiesBetweenUsers()
   {
-    return $this->symfony_support->computeAllRemixSimilaritiesBetweenUsers();
+    $this->symfony_support->computeAllRemixSimilaritiesBetweenUsers();
   }
 
+  /**
+   * @return array|\Catrobat\AppBundle\Entity\MediaPackage[]|\Catrobat\AppBundle\Entity\TeacherTemplate[]
+   */
   public function getAllRemixSimilaritiesBetweenUsers()
   {
     return $this->symfony_support->getUserRemixSimilarityRelationRepository()->findAll();
   }
 
+  /**
+   * @param array $config
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertUserLikeSimilarity($config = [])
   {
-    return $this->symfony_support->insertUserLikeSimilarity($config);
+    $this->symfony_support->insertUserLikeSimilarity($config);
   }
 
+  /**
+   * @param array $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertUserRemixSimilarity($config = [])
   {
-    return $this->symfony_support->insertUserRemixSimilarity($config);
+    $this->symfony_support->insertUserRemixSimilarity($config);
   }
 
+  /**
+   * @param array $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertProgramLike($config = [])
   {
-    return $this->symfony_support->insertProgramLike($config);
+    $this->symfony_support->insertProgramLike($config);
   }
 
+  /**
+   * @param $user
+   * @param $config
+   *
+   * @return \Catrobat\AppBundle\Entity\Program
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertProgram($user, $config)
   {
     return $this->symfony_support->insertProgram($user, $config);
   }
 
+  /**
+   * @param $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertTag($config)
   {
-    return $this->symfony_support->insertTag($config);
+    $this->symfony_support->insertTag($config);
   }
 
+  /**
+   * @param $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertExtension($config)
   {
-    return $this->symfony_support->insertExtension($config);
+    $this->symfony_support->insertExtension($config);
   }
 
+  /**
+   * @param $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertForwardRemixRelation($config)
   {
-    return $this->symfony_support->insertForwardRemixRelation($config);
+    $this->symfony_support->insertForwardRemixRelation($config);
   }
 
+  /**
+   * @param $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertBackwardRemixRelation($config)
   {
-    return $this->symfony_support->insertBackwardRemixRelation($config);
+    $this->symfony_support->insertBackwardRemixRelation($config);
   }
 
+  /**
+   * @param $config
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertScratchRemixRelation($config)
   {
-    return $this->symfony_support->insertScratchRemixRelation($config);
+    $this->symfony_support->insertScratchRemixRelation($config);
   }
 
+  /**
+   * @param $program
+   * @param $config
+   *
+   * @return \Catrobat\AppBundle\Entity\ProgramDownloads
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   public function insertProgramDownloadStatistics($program, $config)
   {
     return $this->symfony_support->insertProgramDownloadStatistics($program, $config);
   }
 
+  /**
+   * @param $parameters
+   *
+   * @return string
+   */
   public function generateProgramFileWith($parameters)
   {
     return $this->symfony_support->generateProgramFileWith($parameters);
   }
 
+  /**
+   * @param        $file
+   * @param        $user
+   * @param string $flavor
+   * @param null   $request_parameters
+   *
+   * @return \Symfony\Component\HttpFoundation\Response|null
+   */
   public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
   {
     return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
   }
 
+  /**
+   * @param $path
+   *
+   * @return bool|string
+   */
   protected function getTempCopy($path)
   {
     $temppath = tempnam(sys_get_temp_dir(), 'apktest');
@@ -341,6 +449,4 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     return $temppath;
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // //////////////////////////////////////////////////////////////////////////////
 }

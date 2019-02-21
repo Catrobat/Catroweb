@@ -10,10 +10,23 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+
+/**
+ * Class DownloadApkController
+ * @package Catrobat\AppBundle\Controller\Ci
+ */
 class DownloadApkController extends Controller
 {
+
   /**
    * @Route("/ci/download/{id}", name="ci_download", requirements={"id": "\d+"}, methods={"GET"})
+   *
+   * @param Request $request
+   * @param Program $program
+   *
+   * @return BinaryFileResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function downloadApkAction(Request $request, Program $program)
   {
@@ -52,8 +65,10 @@ class DownloadApkController extends Controller
 
       return $response;
     }
+
     throw new NotFoundHttpException();
   }
+
 
   /**
    * @param Program $program

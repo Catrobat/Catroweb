@@ -12,9 +12,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * Class InvalidFileUploadCleanupCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class InvalidFileUploadCleanupCommand extends ContainerAwareCommand
 {
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:clean:invalid-upload')
@@ -23,6 +30,14 @@ class InvalidFileUploadCleanupCommand extends ContainerAwareCommand
       ->addArgument('file', InputArgument::REQUIRED, 'File with the programs that terminate with 528 error');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $finder = new Finder();

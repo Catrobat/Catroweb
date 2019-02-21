@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class BroadcastScript
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class BroadcastScript extends Script
 {
+  /**
+   * @return mixed|void
+   */
   protected function create()
   {
     $this->type = Constants::BROADCAST_SCRIPT;

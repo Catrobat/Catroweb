@@ -2,6 +2,10 @@
 
 namespace Catrobat\AppBundle\RecommenderSystem;
 
+/**
+ * Class RecommendedPageId
+ * @package Catrobat\AppBundle\RecommenderSystem
+ */
 class RecommendedPageId
 {
   // -----------------------------------------------------------------------------------------------------------------
@@ -24,6 +28,11 @@ class RecommendedPageId
   ];
 
 
+  /**
+   * @param $page_id
+   *
+   * @return bool
+   */
   static public function isValidRecommendedPageId($page_id)
   {
     return in_array($page_id, self::$VALID_PAGE_IDS);

@@ -2,36 +2,50 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Entity\Extension;
+use Catrobat\AppBundle\Entity\ProgramRepository;
 use Catrobat\AppBundle\Exceptions\Upload\InvalidXmlException;
-use Catrobat\AppBundle\Services\CatrobatFileExtractor;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Catrobat\AppBundle\Entity\ProgramManager;
-use Catrobat\AppBundle\Entity\UserManager;
-use Catrobat\AppBundle\Entity\Tag;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Process\Process;
-use Catrobat\AppBundle\Entity\Program;
-use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Catrobat\AppBundle\Entity\FeaturedProgram;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Translation\TranslatorInterface;
-use Catrobat\AppBundle\Entity\TagRepository;
 
+
+/**
+ * Class CreateProgramExtensionsCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CreateProgramExtensionsCommand extends ContainerAwareCommand
 {
-
+  /**
+   * @var OutputInterface
+   */
   private $output;
+
+  /**
+   * @var EntityManager
+   */
   private $em;
+
+  /**
+   * @var
+   */
   private $programfile_directory;
+
+  /**
+   * @var ProgramRepository
+   */
   private $program_repository;
 
+
+  /**
+   * CreateProgramExtensionsCommand constructor.
+   *
+   * @param EntityManager     $em
+   * @param string            $programfile_directory
+   * @param ProgramRepository $program_repo
+   */
   public function __construct(EntityManager $em, $programfile_directory, $program_repo)
   {
     parent::__construct();
@@ -40,14 +54,30 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
     $this->program_repository = $program_repo;
   }
 
+
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:create:extensions')
       ->setDescription('Creating extensions from uploaded programs');
   }
 
+
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
+    /**
+     * @var $extension Extension
+     */
     $this->output = $output;
     $xpath = '//@category';
     $program_with_extensiones = false;
@@ -161,6 +191,12 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
     $this->writeln("Done!");
   }
 
+
+  /**
+   * @param $element
+   *
+   * @return object|null
+   */
   private function getProgram($element)
   {
     $id = explode(".", $element->getFilename());
@@ -168,6 +204,10 @@ class CreateProgramExtensionsCommand extends ContainerAwareCommand
     return $this->program_repository->find($id[0]);
   }
 
+
+  /**
+   * @param $string
+   */
   private function writeln($string)
   {
     if ($this->output != null)

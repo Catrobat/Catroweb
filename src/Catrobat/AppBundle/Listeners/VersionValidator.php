@@ -8,6 +8,10 @@ use Catrobat\AppBundle\StatusCode;
 use Catrobat\AppBundle\Exceptions\Upload\OldCatrobatLanguageVersionException;
 use Catrobat\AppBundle\Exceptions\Upload\OldApplicationVersionException;
 
+/**
+ * Class VersionValidator
+ * @package Catrobat\AppBundle\Listeners
+ */
 class VersionValidator
 {
   const MIN_LANGUAGE_VERSION = '0.92';
@@ -15,11 +19,17 @@ class VersionValidator
   const MIN_IOS_PROGRAM_VERSION = '0.1';
   const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
 
+  /**
+   * @param ProgramBeforeInsertEvent $event
+   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event)
   {
     $this->validate($event->getExtractedFile()->getProgramXmlProperties());
   }
 
+  /**
+   * @param \SimpleXMLElement $xml
+   */
   public function validate(\SimpleXMLElement $xml)
   {
     if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<'))

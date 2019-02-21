@@ -3,28 +3,45 @@
 namespace Catrobat\AppBundle\Features\GameJam\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
-use Catrobat\AppBundle\Features\Helpers\BaseContext;
-use Behat\Gherkin\Node\PyStringNode;
 use Catrobat\AppBundle\Entity\GameJam;
-use Behat\Gherkin\Node\TableNode;
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use PHPUnit\Framework\Assert;
 
+
+/**
+ * Class WebContext
+ * @package Catrobat\AppBundle\Features\GameJam\Context
+ */
 class WebContext extends BaseContext
 {
 
+  /**
+   * @var User
+   */
   private $i;
 
+  /**
+   * @var Program
+   */
   private $my_program;
 
+  /**
+   * @var GameJam
+   */
   private $gamejam;
 
+  /**
+   * @var
+   */
   private $response;
 
   /**
-   * Initializes context with parameters from behat.yml.
+   * WebContext constructor.
    *
-   * @param array $parameters
+   * @param $error_directory
    */
   public function __construct($error_directory)
   {
@@ -34,6 +51,9 @@ class WebContext extends BaseContext
 
   /**
    * @Given There is an ongoing game jam
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereIsAnOngoingGameJam()
   {
@@ -59,6 +79,9 @@ class WebContext extends BaseContext
 
   /**
    * @When /^I visit the details page of my program$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iVisitTheDetailsPageOfMyProgram()
   {
@@ -117,9 +140,11 @@ class WebContext extends BaseContext
     Assert::assertEquals(0, $this->response->filter("#gamejam-whats")->count());
   }
 
-
   /**
    * @When /^I submit my program to a gamejam$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iSubmitMyProgramToAGamejam()
   {
@@ -159,6 +184,9 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^I submitted a program to the gamejam$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iSubmittedAProgramToTheGamejam()
   {
@@ -179,6 +207,9 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^I submit a program to this gamejam$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iSubmitAProgramToThisGamejam()
   {
@@ -199,6 +230,9 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^I filled out the google form$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iFilledOutTheGoogleForm()
   {
@@ -210,6 +244,9 @@ class WebContext extends BaseContext
 
   /**
    * @When /^I visit the details page of a program from another user$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iVisitTheDetailsPageOfAProgramFromAnotherUser()
   {
@@ -233,6 +270,9 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^I have a limited account$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iHaveALimitedAccount()
   {
@@ -271,6 +311,10 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^I have a program named "([^"]*)"$/
+   * @param $arg1
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iHaveAProgramNamed($arg1)
   {
@@ -281,6 +325,7 @@ class WebContext extends BaseContext
 
   /**
    * @Then /^I see the program "([^"]*)"$/
+   * @param $arg1
    */
   public function iSeeTheProgram($arg1)
   {
@@ -307,6 +352,10 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^There is an ongoing game jam with the hashtag "([^"]*)"$/
+   * @param $hashtag
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereIsAnOngoingGameJamWithTheHashtag($hashtag)
   {
@@ -317,6 +366,9 @@ class WebContext extends BaseContext
 
   /**
    * @Given /^There is an ongoing game jam without flavor$/
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereIsAnOngoingGameJamWithoutFlavor()
   {
@@ -328,6 +380,7 @@ class WebContext extends BaseContext
 
   /**
    * @Then /^I should see the hashtag "([^"]*)" in the program description$/
+   * @param $hashtag
    */
   public function iShouldSeeTheHashtagInTheProgramDescription($hashtag)
   {
@@ -381,6 +434,7 @@ class WebContext extends BaseContext
 
   /**
    * @Then /^I should see the message "([^"]*)"$/
+   * @param $arg1
    */
   public function iShouldSeeAMessage($arg1)
   {

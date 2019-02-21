@@ -37,7 +37,7 @@ class ProfileController extends Controller
      * @var $user User
      */
     $id = (integer)$id;
-    $twig = 'profile/profileHandler.html.twig';
+    $twig = 'UserManagement/Profile/profileHandler.html.twig';
     $my_profile = false;
     $program_count = 0;
 
@@ -307,6 +307,8 @@ class ProfileController extends Controller
    * @Route("/deleteAccount", name="profile_delete_account", methods={"POST"})
    *
    * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function deleteAccountAction()
   {
@@ -390,8 +392,7 @@ class ProfileController extends Controller
   /**
    * @Route("/unfollowUser/{id}", name="unfollow_user", methods = {"GET"},requirements={"id":"\d+"}, defaults={"id" = 0})
    *
-   * @param Request $request
-   * @param         $id
+   * @param $id
    *
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
@@ -560,6 +561,7 @@ class ProfileController extends Controller
     return false;
   }
 
+
   /**
    * @param      $code
    * @param null $locale
@@ -576,6 +578,7 @@ class ProfileController extends Controller
 
     return '';
   }
+
 
   /**
    * @param string $image_base64

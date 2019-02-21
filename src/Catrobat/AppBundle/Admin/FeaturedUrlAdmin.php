@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\QueryBuilder;
@@ -10,15 +11,33 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
+
+/**
+ * Class FeaturedUrlAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class FeaturedUrlAdmin extends AbstractAdmin
 {
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_featured_url';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'featured_url';
 
+
+  /**
+   * @param string $context
+   *
+   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+   */
   public function createQuery($context = 'list')
   {
     /**
@@ -26,13 +45,18 @@ class FeaturedUrlAdmin extends AbstractAdmin
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->isNull($query->getRootAlias() . '.program')
+      $query->expr()->isNull($query->getRootAliases()[0] . '.program')
     );
 
     return $query;
   }
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $file_options = [
@@ -50,18 +74,29 @@ class FeaturedUrlAdmin extends AbstractAdmin
       ->add('url', UrlType::class)
       ->add('flavor')
       ->add('priority')
-      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false, 'help' => 'Toggle for iOS featured url api call.'])
+      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
+                              'help' => 'Toggle for iOS featured url api call.'])
       ->add('active', null, ['required' => false]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
       ->add('url');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -80,16 +115,41 @@ class FeaturedUrlAdmin extends AbstractAdmin
       ]);
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return string
+   */
   public function getFeaturedImageUrl($object)
   {
-    return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')->getWebPath($object->getId(), $object->getImageType());
+    /**
+     * @var $object FeaturedProgram
+     */
+
+    return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')
+        ->getWebPath($object->getId(), $object->getImageType());
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return Metadata
+   */
   public function getObjectMetadata($object)
   {
+    /**
+     * @var $object FeaturedProgram
+     */
+
     return new Metadata($object->getUrl(), '', $this->getFeaturedImageUrl($object));
   }
 
+
+  /**
+   * @param $image FeaturedProgram
+   */
   public function preUpdate($image)
   {
     $image->old_image_type = $image->getImageType();

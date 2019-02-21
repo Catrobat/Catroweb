@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class IfOnEdgeBounceStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class IfOnEdgeBounceStatement extends Statement
 {
   const BEGIN_STRING = "if on edge, bounce";
   const END_STRING = "<br/>";
 
+  /**
+   * IfOnEdgeBounceStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,15 +25,19 @@ class IfOnEdgeBounceStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     return "If on edge, bounce";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_blue.png";
   }
 }
-
-?>

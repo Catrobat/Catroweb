@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class EndIfBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class EndIfBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::ENDIF_BRICK;

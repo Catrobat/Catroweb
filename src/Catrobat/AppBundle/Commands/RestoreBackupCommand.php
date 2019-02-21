@@ -2,26 +2,30 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\ArrayInput;
 use Catrobat\AppBundle\Entity\Program;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Filesystem\Filesystem;
-use Catrobat\AppBundle\Services\SshConnect;
 
+
+/**
+ * Class RestoreBackupCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class RestoreBackupCommand extends ContainerAwareCommand
 {
+  /**
+   * @var Output
+   */
   public $output;
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:backup:restore')
@@ -30,6 +34,13 @@ class RestoreBackupCommand extends ContainerAwareCommand
       ->addArgument('local', InputArgument::OPTIONAL, 'Add true after the file name restore the backup local. ');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\NonUniqueResultException|\Exception
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
@@ -61,9 +72,6 @@ class RestoreBackupCommand extends ContainerAwareCommand
       $this->output->writeln('Restore backup on localhost');
 
       $this->executeSymfonyCommand('catrobat:purge', ['--force' => true], $this->output);
-
-//      $this->executeShellCommand("gzip -dc $backup_file | tar -xf - -C $local_resource_directory ",
-//        'Extract files to local resources directory');
 
       $this->executeShellCommand("time pigz -dc $backup_file | tar -xf - -C $local_resource_directory",
         "Extracting files to local resources directory");
@@ -133,6 +141,13 @@ class RestoreBackupCommand extends ContainerAwareCommand
     $this->output->writeln('Import finished!');
   }
 
+  /**
+   * @param $command
+   * @param $description
+   *
+   * @return bool
+   * @throws \Exception
+   */
   private function executeShellCommand($command, $description)
   {
     $this->output->write($description . " ('" . $command . "') ... ");
@@ -149,6 +164,13 @@ class RestoreBackupCommand extends ContainerAwareCommand
     throw new \Exception("failed: " . $process->getErrorOutput());
   }
 
+  /**
+   * @param $command
+   * @param $args
+   * @param $output
+   *
+   * @throws \Exception
+   */
   private function executeSymfonyCommand($command, $args, $output)
   {
     $command = $this->getApplication()->find($command);

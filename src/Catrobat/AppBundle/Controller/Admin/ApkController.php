@@ -7,11 +7,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Catrobat\AppBundle\Entity\Program;
 
+
+/**
+ * Class ApkController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class ApkController extends CRUDController
 {
+
   public function resetStatusAction()
   {
-    /* @var $object Program */
+    /**
+     * @var $object Program
+     */
+
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -28,9 +37,17 @@ class ApkController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+
+  /**
+   * @return RedirectResponse
+   * @throws \Exception
+   */
   public function rebuildApkAction()
   {
-    /* @var $object Program */
+    /**
+     * @var $object Program
+     */
+
     $object = $this->admin->getSubject();
 
     if (!$object)
@@ -51,9 +68,15 @@ class ApkController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+
+  /**
+   * @return RedirectResponse
+   */
   public function resetAllApkAction()
   {
-    /* @var $program Program */
+    /**
+     * @var $program Program
+     */
 
     $datagrid = $this->admin->getDatagrid();
 
@@ -77,6 +100,11 @@ class ApkController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+
+  /**
+   * @return RedirectResponse
+   * @throws \Exception
+   */
   public function rebuildAllApkAction()
   {
     /* @var $program Program */

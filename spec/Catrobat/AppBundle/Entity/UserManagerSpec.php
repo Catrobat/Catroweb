@@ -12,9 +12,21 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 
+/**
+ * Class UserManagerSpec
+ * @package spec\Catrobat\AppBundle\Entity
+ */
 class UserManagerSpec extends ObjectBehavior
 {
 
+  /**
+   * @param PasswordUpdaterInterface|\PhpSpec\Wrapper\Collaborator $passwordUpdater
+   * @param CanonicalFieldsUpdater|\PhpSpec\Wrapper\Collaborator   $canonicalFieldsUpdater
+   * @param ObjectManager|\PhpSpec\Wrapper\Collaborator            $object_manager
+   * @param User|\PhpSpec\Wrapper\Collaborator                     $user
+   * @param ClassMetadata|\PhpSpec\Wrapper\Collaborator            $meta
+   * @param EntityRepository|\PhpSpec\Wrapper\Collaborator         $repository
+   */
   public function let(PasswordUpdaterInterface $passwordUpdater, CanonicalFieldsUpdater $canonicalFieldsUpdater,
                       ObjectManager $object_manager, User $user, ClassMetadata $meta, EntityRepository $repository)
   {
@@ -23,14 +35,12 @@ class UserManagerSpec extends ObjectBehavior
     $this->beConstructedWith($passwordUpdater, $canonicalFieldsUpdater, $object_manager, $user);
   }
 
+  /**
+   *
+   */
   public function it_is_initializable()
   {
     $this->shouldHaveType('Catrobat\AppBundle\Entity\UserManager');
   }
 
-//    public function it_checks_if_password_is_valid(User $user, ObjectManager $object_manager, EntityRepository $repository)
-//    {
-//        $this->isPasswordValid($user, '123')->shouldBe(true);
-//        $this->isPasswordValid($user, 'abc')->shouldBe(false);
-//    }
 }

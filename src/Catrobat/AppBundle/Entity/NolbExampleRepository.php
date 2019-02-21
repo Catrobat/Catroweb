@@ -4,8 +4,18 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class NolbExampleRepository
+ * @package Catrobat\AppBundle\Entity
+ */
 class NolbExampleRepository extends EntityRepository
 {
+  /**
+   * @param int $limit
+   * @param int $offset
+   *
+   * @return mixed
+   */
   public function getActivePrograms($limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -19,6 +29,9 @@ class NolbExampleRepository extends EntityRepository
       ->getQuery()->getResult();
   }
 
+  /**
+   * @return int
+   */
   public function getActiveProgramsCount()
   {
     $qb = $this->createQueryBuilder('e');
@@ -30,6 +43,13 @@ class NolbExampleRepository extends EntityRepository
       ->getQuery()->getResult());
   }
 
+  /**
+   * @param bool $for_female
+   * @param int  $limit
+   * @param int  $offset
+   *
+   * @return mixed
+   */
   public function getGenderPrograms($for_female = false, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -45,6 +65,11 @@ class NolbExampleRepository extends EntityRepository
       ->getQuery()->getResult();
   }
 
+  /**
+   * @param $program_id
+   *
+   * @return object|null
+   */
   public function getIfNolbExampleProgram($program_id)
   {
     return $this->findOneBy(['program' => $program_id]);

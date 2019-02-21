@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: catroweb
- * Date: 18.08.15
- * Time: 16:57
- */
 
 namespace Catrobat\AppBundle\Services\TestEnv;
 
@@ -12,19 +6,40 @@ use FR3D\LdapBundle\Driver\LdapDriverException;
 use FR3D\LdapBundle\Driver\LdapDriverInterface;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Catrobat\AppBundle\Services\TestEnv\ApcReplace;
 
+
+/**
+ * Class LdapTestDriver
+ * @package Catrobat\AppBundle\Services\TestEnv
+ */
 class LdapTestDriver implements LdapDriverInterface
 {
 
+  /**
+   * @var
+   */
   protected $objects;
 
+  /**
+   * @var
+   */
   private $baseDN;
 
+  /**
+   * @var bool
+   */
   private $throw_expection_on_search;
 
+  /**
+   * @var string
+   */
   private static $APC_OBJECTS = "LdapTestDriverFixture";
 
+  /**
+   * LdapTestDriver constructor.
+   *
+   * @param $baseDN
+   */
   public function __construct($baseDN)
   {
     $this->baseDN = $baseDN;
@@ -133,11 +148,22 @@ class LdapTestDriver implements LdapDriverInterface
     return $result;
   }
 
+  /**
+   * @return bool
+   */
   public function resetFixtures()
   {
     return ApcReplace::Instance()->apc_delete($this::$APC_OBJECTS);
   }
 
+  /**
+   * @param       $username
+   * @param       $password
+   * @param array $groups
+   * @param null  $mail
+   *
+   * @return bool
+   */
   public function addTestUser($username, $password, $groups = [], $mail = null)
   {
     $this->loadFixtures();
@@ -190,6 +216,11 @@ class LdapTestDriver implements LdapDriverInterface
     return ApcReplace::Instance()->apc_store($this::$APC_OBJECTS, $this->objects);
   }
 
+  /**
+   * @param $string
+   *
+   * @return array
+   */
   private function extractKeys($string)
   {
     $matches = null;
@@ -206,6 +237,9 @@ class LdapTestDriver implements LdapDriverInterface
     return $result;
   }
 
+  /**
+   *
+   */
   private function loadFixtures()
   {
     if (!is_array($this->objects))
@@ -218,6 +252,9 @@ class LdapTestDriver implements LdapDriverInterface
     }
   }
 
+  /**
+   * @param $value
+   */
   public function setThrowExceptionOnSearch($value)
   {
     $this->throw_expection_on_search = $value;

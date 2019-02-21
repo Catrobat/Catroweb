@@ -10,11 +10,30 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+
+/**
+ * Class NolbExampleAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class NolbExampleAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'adminnolb_example_program';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'nolb_example_program';
 
+
+  /**
+   * @param string $context
+   *
+   * @return QueryBuilder
+   */
   public function createQuery($context = 'list')
   {
     /**
@@ -22,13 +41,18 @@ class NolbExampleAdmin extends AbstractAdmin
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->isNotNull($query->getRootAlias() . '.program')
+      $query->expr()->isNotNull($query->getRootAliases()[0] . '.program')
     );
 
     return $query;
   }
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -39,14 +63,24 @@ class NolbExampleAdmin extends AbstractAdmin
       ->add('is_for_female', null, ['required' => false]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
       ->add('program.name');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper

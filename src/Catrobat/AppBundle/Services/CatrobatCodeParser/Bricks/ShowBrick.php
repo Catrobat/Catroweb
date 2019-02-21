@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class ShowBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class ShowBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::SHOW_BRICK;

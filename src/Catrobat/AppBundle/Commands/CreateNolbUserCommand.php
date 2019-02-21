@@ -2,28 +2,40 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManager;
 use Catrobat\AppBundle\Commands\Helpers\ConsoleProgressIndicator;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
+
+/**
+ * Class CreateNolbUserCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CreateNolbUserCommand extends ContainerAwareCommand
 {
+  /**
+   * @var EntityManager
+   */
   private $em;
 
+  /**
+   * CreateNolbUserCommand constructor.
+   *
+   * @param EntityManager $em
+   */
   public function __construct(EntityManager $em)
   {
     parent::__construct();
     $this->em = $em;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:nolb-user:create')
@@ -31,6 +43,14 @@ class CreateNolbUserCommand extends ContainerAwareCommand
       ->addArgument('file', InputArgument::REQUIRED, 'The file to read users.');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $filename = $input->getArgument('file');
@@ -43,7 +63,8 @@ class CreateNolbUserCommand extends ContainerAwareCommand
       {
         $username = CommandHelper::getSubstring($line, " - ", false);
         $password = substr($line, strlen($username) + 2);
-        if (CommandHelper::executeShellCommand('php bin/console fos:user:create ' . $username . ' ' . $username . '@nolb ' . $password))
+        if (CommandHelper::executeShellCommand(
+          'php bin/console fos:user:create ' . $username . ' ' . $username . '@nolb ' . $password))
         {
           $user = $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username]);
 

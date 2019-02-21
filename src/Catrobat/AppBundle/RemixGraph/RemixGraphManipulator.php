@@ -10,6 +10,10 @@ use Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository;
 use Catrobat\AppBundle\Entity\ScratchProgramRemixRepository;
 
 
+/**
+ * Class RemixGraphManipulator
+ * @package Catrobat\AppBundle\RemixGraph
+ */
 class RemixGraphManipulator
 {
   /**
@@ -58,7 +62,10 @@ class RemixGraphManipulator
 
   /**
    * @param Program $program
-   * @param int[]   $removed_forward_parent_ids
+   * @param array   $removed_forward_parent_ids
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function convertBackwardParentsHavingNoForwardAncestor(Program $program, array $removed_forward_parent_ids)
   {
@@ -105,6 +112,9 @@ class RemixGraphManipulator
   /**
    * @param Program $program
    * @param int[]   $all_catrobat_forward_parent_ids
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function unlinkFromAllCatrobatForwardParents(Program $program, array $all_catrobat_forward_parent_ids)
   {
@@ -160,7 +170,10 @@ class RemixGraphManipulator
 
   /**
    * @param Program $program
-   * @param int[]   $scratch_parent_ids_to_be_added
+   * @param         $scratch_parent_ids_to_be_added
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function linkToScratchParents(Program $program, $scratch_parent_ids_to_be_added)
   {
@@ -178,6 +191,8 @@ class RemixGraphManipulator
    * @param int[]   $ids_of_new_parents
    * @param array   $preserved_creation_date_mapping
    * @param array   $preserved_seen_date_mapping
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
                                                        array $preserved_creation_date_mapping,

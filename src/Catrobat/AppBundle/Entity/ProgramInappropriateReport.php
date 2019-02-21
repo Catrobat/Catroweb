@@ -79,6 +79,8 @@ class ProgramInappropriateReport
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws \Exception
    */
   public function updateTimestamps()
   {
@@ -246,7 +248,7 @@ class ProgramInappropriateReport
   /**
    * Set project.
    *
-   * @param \Catrobat\AppBundle\Entity\Program $project
+   * @param Program $program
    *
    * @return ProgramInappropriateReport
    */

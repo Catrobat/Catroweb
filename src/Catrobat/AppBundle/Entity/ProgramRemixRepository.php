@@ -42,6 +42,9 @@ class ProgramRemixRepository extends EntityRepository
     $parents_catrobat_ancestor_relations = $this->getAncestorRelations($descendant_program_ids);
 
     return array_unique(array_map(function ($r) {
+      /**
+       * @var $r ProgramRemixRelation
+       */
       return $r->getAncestorId();
     }, $parents_catrobat_ancestor_relations));
   }
@@ -98,6 +101,9 @@ class ProgramRemixRepository extends EntityRepository
       ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids);
 
     return array_unique(array_map(function ($r) {
+      /**
+       * @var $r ProgramRemixRelation
+       */
       return $r->getAncestorId();
     }, $direct_and_indirect_descendant_relations));
   }
@@ -154,6 +160,9 @@ class ProgramRemixRepository extends EntityRepository
     $catrobat_root_descendant_relations = $this->getDescendantRelations($ancestor_program_ids);
 
     return array_unique(array_map(function ($r) {
+      /**
+       * @var $r ProgramRemixRelation
+       */
       return $r->getDescendantId();
     }, $catrobat_root_descendant_relations));
   }
@@ -198,6 +207,9 @@ class ProgramRemixRepository extends EntityRepository
       ->execute();
   }
 
+  /**
+   *
+   */
   public function removeAllRelations()
   {
     $qb = $this->createQueryBuilder('r');
@@ -219,8 +231,8 @@ class ProgramRemixRepository extends EntityRepository
 
     return $qb
       ->select('r')
-      ->innerJoin('r.ancestor', 'p', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.ancestor_id = p.id')
-      ->innerJoin('r.descendant', 'p2', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.descendant_id = p2.id')
+      ->innerJoin('r.ancestor', 'p', Join::WITH, 'r.ancestor_id = p.id')
+      ->innerJoin('r.descendant', 'p2', Join::WITH, 'r.descendant_id = p2.id')
       ->where($qb->expr()->eq('p.user', ':user'))
       ->andWhere($qb->expr()->neq('p2.user', 'p.user'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
@@ -279,7 +291,7 @@ class ProgramRemixRepository extends EntityRepository
 
     return $qb
       ->select('r.ancestor_id', 'r.descendant_id')
-      ->innerJoin('r.descendant', 'p', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.descendant_id = p.id')
+      ->innerJoin('r.descendant', 'p', Join::WITH, 'r.descendant_id = p.id')
       ->where($qb->expr()->eq('IDENTITY(p.user)', ':user_id'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
       ->setParameter('user_id', $user_id)
@@ -289,9 +301,12 @@ class ProgramRemixRepository extends EntityRepository
   }
 
   /**
-   * @param int $user_ids
+   * @param $user_ids array
+   * @param $exclude_user_id
+   * @param $exclude_program_ids
+   * @param $flavor
    *
-   * @return Program
+   * @return mixed
    */
   public function getDirectParentRelationsOfUsersRemixes($user_ids, $exclude_user_id, $exclude_program_ids, $flavor)
   {
@@ -299,8 +314,8 @@ class ProgramRemixRepository extends EntityRepository
 
     return $qb
       ->select('r')
-      ->innerJoin('r.ancestor', 'pa', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.ancestor_id = pa.id')
-      ->innerJoin('r.descendant', 'pd', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.descendant_id = pd.id')
+      ->innerJoin('r.ancestor', 'pa', Join::WITH, 'r.ancestor_id = pa.id')
+      ->innerJoin('r.descendant', 'pd', Join::WITH, 'r.descendant_id = pd.id')
       ->where($qb->expr()->in('IDENTITY(pd.user)', ':user_ids'))
       ->andWhere($qb->expr()->neq('IDENTITY(pa.user)', ':exclude_user_id'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))

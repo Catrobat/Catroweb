@@ -9,9 +9,9 @@ use Catrobat\AppBundle\Entity\Program;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Routing\Router;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use PHPUnit\Framework\Assert;
+
 
 /**
  * Feature context.
@@ -19,14 +19,20 @@ use PHPUnit\Framework\Assert;
 class FeatureContext extends BaseContext
 {
 
+  /**
+   * @var string
+   */
   private $hostname;
 
+  /**
+   * @var bool
+   */
   private $secure;
 
   /**
-   * Initializes context with parameters from behat.yml.
+   * FeatureContext constructor.
    *
-   * @param array $parameters
+   * @param $error_directory
    */
   public function __construct($error_directory)
   {
@@ -36,7 +42,7 @@ class FeatureContext extends BaseContext
     $this->secure = false;
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Hooks
 
   /**
@@ -48,8 +54,11 @@ class FeatureContext extends BaseContext
     $this->emptyDirectory($extract_dir);
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Support Functions
+  /**
+   * @return UploadedFile
+   */
   private function getStandardProgramFile()
   {
     $filepath = self::FIXTUREDIR . 'test.catrobat';
@@ -58,11 +67,13 @@ class FeatureContext extends BaseContext
     return new UploadedFile($filepath, 'test.catrobat');
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////// Steps
 
   /**
    * @Given /^the server name is "([^"]*)"$/
+   *
+   * @param $arg1
    */
   public function theServerNameIs($arg1)
   {
@@ -79,6 +90,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the token to upload an apk file is "([^"]*)"$/
+   *
+   * @param $arg1
    */
   public function theTokenToUploadAnApkFileIs($arg1)
   {
@@ -87,6 +100,11 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)"$/
+   * @param $arg1
+   * @param $arg2
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iHaveAProgramWithId($arg1, $arg2)
   {
@@ -102,6 +120,12 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)" and a vibrator brick$/
+   *
+   * @param $arg1
+   * @param $arg2
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iHaveAProgramWithIdAndAVibratorBrick($arg1, $arg2)
   {
@@ -117,6 +141,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the jenkins job id is "([^"]*)"$/
+   *
+   * @param $arg1
    */
   public function theJenkinsJobIdIs($arg1)
   {
@@ -125,6 +151,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the jenkins token is "([^"]*)"$/
+   *
+   * @param $arg1
    */
   public function theJenkinsTokenIs($arg1)
   {
@@ -147,6 +175,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^following parameters are sent to jenkins:$/
+   *
+   * @param TableNode $table
    */
   public function followingParametersAreSentToJenkins(TableNode $table)
   {
@@ -163,6 +193,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^the program apk status will.* be flagged "([^"]*)"$/
+   *
+   * @param $arg1
    */
   public function theProgramApkStatusWillBeFlagged($arg1)
   {
@@ -181,7 +213,7 @@ class FeatureContext extends BaseContext
         Assert::assertEquals(Program::APK_NONE, $program->getApkStatus());
         break;
       default:
-        throw new PendingException('Unknown state: ' + $arg1);
+        throw new PendingException('Unknown state: ' . $arg1);
     }
   }
 
@@ -222,6 +254,11 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^there are programs:$/
+   *
+   * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereArePrograms(TableNode $table)
   {
@@ -260,6 +297,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I want to download the apk file of "([^"]*)"$/
+   *
+   * @param $arg1
    */
   public function iWantToDownloadTheApkFileOf($arg1)
   {
@@ -267,7 +306,7 @@ class FeatureContext extends BaseContext
     $program = $pm->findOneByName($arg1);
     if ($program === null)
     {
-      throw new PendingException('Program not found: ' + $arg1);
+      throw new PendingException('Program not found: ' . $arg1);
     }
     $router = $this->getSymfonyService('router');
     $url = $router->generate('ci_download', [
@@ -304,6 +343,11 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given /^the program apk status is flagged "([^"]*)"$/
+   *
+   * @param $arg1
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function theProgramApkStatusIsFlagged($arg1)
   {
@@ -379,6 +423,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @When /^I GET "([^"]*)"$/
+   *
+   * @param $uri
    */
   public function iGet($uri)
   {
@@ -387,6 +433,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then /^will get the following JSON:$/
+   *
+   * @param PyStringNode $string
    */
   public function willGetTheFollowingJson(PyStringNode $string)
   {

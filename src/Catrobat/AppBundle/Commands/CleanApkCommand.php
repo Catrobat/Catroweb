@@ -8,16 +8,34 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
+
+/**
+ * Class CleanApkCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CleanApkCommand extends ContainerAwareCommand
 {
+  /**
+   * @var
+   */
   private $output;
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:clean:apk')
       ->setDescription('Delete the APKs and resets the status to NONE');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;

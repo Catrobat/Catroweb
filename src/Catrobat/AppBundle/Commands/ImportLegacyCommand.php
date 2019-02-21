@@ -8,6 +8,7 @@ use Catrobat\AppBundle\Services\AsyncHttpClient;
 use Catrobat\AppBundle\Services\CatrobatFileExtractor;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -15,43 +16,104 @@ use Catrobat\AppBundle\Entity\ProgramManager;
 use Catrobat\AppBundle\Entity\UserManager;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Process\Process;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Catrobat\AppBundle\Commands\Helpers\CommandHelper;
 
 
+/**
+ * Class ImportLegacyCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class ImportLegacyCommand extends ContainerAwareCommand
 {
+  /**
+   *
+   */
   const RESOURCE_CONTAINER_FILE = 'resources.tar';
+  /**
+   *
+   */
   const SQL_CONTAINER_FILE = 'sql.tar';
+  /**
+   *
+   */
   const SQL_WEB_CONTAINER_FILE = 'catroweb-sql.tar.gz';
+  /**
+   *
+   */
   const TSV_USERS_FILE = '2034.dat';
+  /**
+   *
+   */
   const TSV_PROGRAMS_FILE = '2041.dat';
+  /**
+   *
+   */
   const TSV_FEATURED_PROGRAMS = '2037.dat';
 
+  /**
+   * @var Filesystem
+   */
   private $fileystem;
+  /**
+   * @var UserManager
+   */
   private $user_manager;
+  /**
+   * @var ProgramManager
+   */
   private $program_manager;
   /**
    * @var RemixManager
    */
   private $remix_manager;
+  /**
+   * @var Output
+   */
   private $output;
 
+  /**
+   * @var EntityManager
+   */
+  private $em;
+
+  /**
+   * @var
+   */
   private $importdir;
+  /**
+   * @var
+   */
   private $finder;
+  /**
+   * @var
+   */
   private $filesystem;
 
+  /**
+   * @var
+   */
   private $screenshot_repository;
+  /**
+   * @var
+   */
   private $catrobat_file_repository;
 
+  /**
+   * ImportLegacyCommand constructor.
+   *
+   * @param Filesystem     $filesystem
+   * @param UserManager    $user_manager
+   * @param ProgramManager $program_manager
+   * @param RemixManager   $remix_manager
+   * @param EntityManager  $em
+   */
   public function __construct(Filesystem $filesystem, UserManager $user_manager, ProgramManager $program_manager,
-                              RemixManager $remix_manager, EntityManager $em)
+                                 RemixManager $remix_manager, EntityManager $em)
   {
     parent::__construct();
     $this->fileystem = $filesystem;
@@ -61,6 +123,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
     $this->em = $em;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:legacy:import')
@@ -68,6 +133,14 @@ class ImportLegacyCommand extends ContainerAwareCommand
       ->addArgument('backupfile', InputArgument::REQUIRED, 'legacy backup file (tar.gz)');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
@@ -122,6 +195,12 @@ class ImportLegacyCommand extends ContainerAwareCommand
     $this->filesystem->remove($temp_dir);
   }
 
+  /**
+   * @param $program_file
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function importPrograms($program_file)
   {
     $row = 0;
@@ -205,6 +284,12 @@ class ImportLegacyCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @param $program_file
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function importProgramFiles($program_file)
   {
     $row = 0;
@@ -256,6 +341,12 @@ class ImportLegacyCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @param $user_file
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function importUsers($user_file)
   {
     print_r($user_file);
@@ -319,6 +410,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @param $id
+   */
   private function importScreenshots($id)
   {
     $screenhot_dir = $this->importdir . '/resources/thumbnails/';
@@ -330,6 +424,12 @@ class ImportLegacyCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @param $id
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   private function importProgramfile($id)
   {
     $filepath = $this->importdir . '/resources/projects/' . "$id" . '.catrobat';
@@ -337,7 +437,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
 
     if (file_exists($filepath))
     {
-      /* @var $fileextractor CatrobatFileExtractor */
+      /**
+       * @var $fileextractor CatrobatFileExtractor
+       */
       $fileextractor = $this->getContainer()->get('fileextractor');
       $router = $this->getContainer()->get('router');
       $extracted_catrobat_file = $fileextractor->extract(new File($filepath));
@@ -351,6 +453,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @param $string
+   */
   private function writeln($string)
   {
     if ($this->output != null)
@@ -359,6 +464,9 @@ class ImportLegacyCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @return bool|string
+   */
   private function createTempDir()
   {
     $tempfile = tempnam(sys_get_temp_dir(), 'catimport');

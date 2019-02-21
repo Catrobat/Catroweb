@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class SetTransparencyStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class SetTransparencyStatement extends BaseSetToStatement
 {
   const BEGIN_STRING = "transparency";
   const END_STRING = ")%<br/>";
 
+  /**
+   * SetTransparencyStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,6 +25,9 @@ class SetTransparencyStatement extends BaseSetToStatement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     $formula_string = $this->getFormulaListChildStatement()->executeChildren();
@@ -22,11 +36,12 @@ class SetTransparencyStatement extends BaseSetToStatement
     return "Set transparency to " . $formula_string_without_markup . "%";
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_green.png";
   }
 
 }
-
-?>

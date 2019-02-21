@@ -7,6 +7,10 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Promise\EachPromise;
 
 
+/**
+ * Class AsyncHttpClient
+ * @package Catrobat\AppBundle\Services
+ */
 class AsyncHttpClient
 {
   /**
@@ -24,6 +28,11 @@ class AsyncHttpClient
    */
   private $scratch_info_data;
 
+  /**
+   * AsyncHttpClient constructor.
+   *
+   * @param array $config
+   */
   public function __construct(array $config = [])
   {
     $this->config = $config;

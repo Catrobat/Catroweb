@@ -2,11 +2,22 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class GlideToStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class GlideToStatement extends Statement
 {
   const BEGIN_STRING = "glide (";
   const END_STRING = ")<br/>";
 
+  /**
+   * GlideToStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -14,6 +25,9 @@ class GlideToStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
@@ -42,10 +56,11 @@ class GlideToStatement extends Statement
     return "Glide " . $formula_duration_no_markup . " second(s) to X: " . $formula_x_dest_no_markup . " Y: " . $formula_y_dest_no_markup;
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_blue.png";
   }
 }
-
-?>

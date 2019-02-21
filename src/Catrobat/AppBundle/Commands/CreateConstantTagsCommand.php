@@ -23,13 +23,37 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Translation\TranslatorInterface;
 use Catrobat\AppBundle\Entity\TagRepository;
 
+/**
+ * Class CreateConstantTagsCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CreateConstantTagsCommand extends ContainerAwareCommand
 {
 
+  /**
+   * @var
+   */
   private $output;
+  /**
+   * @var TranslatorInterface
+   */
   private $translator;
+  /**
+   * @var
+   */
   private $tag_repository;
 
+  /**
+   * @var EntityManager
+   */
+  private $em;
+
+  /**
+   * CreateConstantTagsCommand constructor.
+   *
+   * @param EntityManager       $em
+   * @param TranslatorInterface $translator
+   */
   public function __construct(EntityManager $em, TranslatorInterface $translator)
   {
     parent::__construct();
@@ -37,12 +61,23 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
     $this->translator = $translator;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:create:tags')
       ->setDescription('Creating constant tags in supported languages');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $this->output = $output;
@@ -69,7 +104,6 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
       }
       else
       {
-
         $tag = new Tag();
 
         for ($j = 1; $j < count($metadata); $j++)
@@ -84,6 +118,12 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
     }
   }
 
+  /**
+   * @param $message
+   * @param $locale
+   *
+   * @return string
+   */
   private function trans($message, $locale)
   {
     $parameters = [];

@@ -9,21 +9,43 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Entity\User;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+
+/**
+ * Class AllProgramsAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class AllProgramsAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_allprogramsadmin';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'all_programs';
 
+  /**
+   * @var array
+   */
   protected $datagridValues = [
     '_sort_by'    => 'id',
     '_sort_order' => 'DESC',
   ];
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -37,7 +59,12 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('approved', null, ['required' => false]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -47,16 +74,26 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('user.username');
   }
 
+
+  /**
+   * @param $program
+   *
+   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
+   */
   public function preUpdate($program)
   {
     /**
      * @var $program Program
+     * @var $model_manager ModelManager
      */
-    $old_program = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($program);
+    $model_manager = $this->getModelManager();
+    $old_program = $model_manager->getEntityManager($this->getClass())
+      ->getUnitOfWork()->getOriginalEntityData($program);
 
     if ($old_program['approved'] == false && $program->getApproved() == true)
     {
-      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser());
+      $program->setApprovedByUser($this->getConfigurationPool()->getContainer()
+        ->get('security.token_storage')->getToken()->getUser());
       $this->getModelManager()->update($program);
     }
     elseif ($old_program['approved'] == true && $program->getApproved() == false)
@@ -66,7 +103,11 @@ class AllProgramsAdmin extends AbstractAdmin
     }
   }
 
-  // Fields to be shown on lists
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -85,11 +126,17 @@ class AllProgramsAdmin extends AbstractAdmin
       ->add('approved', null, ['editable' => true])
       ->add('visible', null, ['editable' => true])
       ->add('_action', 'actions', ['actions' => [
-        'show' => ['template' => 'CRUD/list__action_show_program_details.html.twig'],
+        'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
         'edit' => [],
       ]]);
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return Metadata
+   */
   public function getObjectMetadata($object)
   {
     /**
@@ -98,11 +145,21 @@ class AllProgramsAdmin extends AbstractAdmin
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('create')->remove('delete')->remove('export');
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return string
+   */
   public function getThumbnailImageUrl($object)
   {
     /**

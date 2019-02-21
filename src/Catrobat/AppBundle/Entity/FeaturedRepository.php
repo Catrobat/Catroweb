@@ -4,8 +4,20 @@ namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class FeaturedRepository
+ * @package Catrobat\AppBundle\Entity
+ */
 class FeaturedRepository extends EntityRepository
 {
+  /**
+   * @param      $flavor
+   * @param int  $limit
+   * @param int  $offset
+   * @param bool $for_ios
+   *
+   * @return mixed
+   */
   public function getFeaturedPrograms($flavor, $limit = 20, $offset = 0, $for_ios = false)
   {
     $qb = $this->createQueryBuilder('e');
@@ -26,6 +38,13 @@ class FeaturedRepository extends EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * @param      $flavor
+   * @param bool $for_ios
+   *
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function getFeaturedProgramCount($flavor, $for_ios = false)
   {
     $qb = $this->createQueryBuilder('e');
@@ -42,6 +61,13 @@ class FeaturedRepository extends EntityRepository
     return $qb->getQuery()->getSingleScalarResult();
   }
 
+  /**
+   * @param     $flavor
+   * @param int $limit
+   * @param int $offset
+   *
+   * @return mixed
+   */
   public function getFeaturedItems($flavor, $limit = 20, $offset = 0)
   {
     $qb = $this->createQueryBuilder('e');
@@ -58,6 +84,12 @@ class FeaturedRepository extends EntityRepository
       ->getQuery()->getResult();
   }
 
+  /**
+   * @param $flavor
+   *
+   * @return mixed
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function getFeaturedItemCount($flavor)
   {
     $qb = $this->createQueryBuilder('e');
@@ -71,9 +103,14 @@ class FeaturedRepository extends EntityRepository
       ->getQuery()->getSingleScalarResult();
   }
 
+  /**
+   * @param $program
+   *
+   * @return bool
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function isFeatured($program)
   {
-    /* @var \Catrobat\AppBundle\Entity\Program $program */
     $qb = $this->createQueryBuilder('e');
     $qb
       ->where($qb->expr()->eq('e.program', ':program'))

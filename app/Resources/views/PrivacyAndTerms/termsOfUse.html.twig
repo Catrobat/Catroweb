@@ -1,0 +1,69 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/termsofuse.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+  <h1>{{ "termsOfUse.title"|trans({}, "catroweb") }}</h1>
+  <div class="standard-col-text size-large">
+    <h2 class="size-xlarge">{{ "termsOfUse.headline"|trans({}, "catroweb") }}</h2>
+    <p>
+      <b>{{ "termsOfUse.text1"|trans({}, "catroweb") }}</b>
+    </p>
+    <ul>
+      <li>{{ "termsOfUse.list1.item1"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list1.item2"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list1.item3"|trans({}, "catroweb") }}</li>
+    </ul>
+    <p>
+      <b>{{ "termsOfUse.text2"|trans({}, "catroweb") }}</b>
+    </p>
+    <ul>
+      <li>{{ "termsOfUse.list2.item1"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list2.item2"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list2.item3"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list2.item4"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list2.item5"|trans({}, "catroweb") }}</li>
+    </ul>
+    <p>
+      <b>{{ "termsOfUse.text3"|trans({}, "catroweb") }}</b>
+    </p>
+    <ul>
+      <li>{{ "termsOfUse.list3.item1"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list3.item2"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list3.item3"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list3.item4"|trans({'%link-licenseUploaded%': '<a class="standard-article-link" href="http://developer.catrobat.org/licenses_of_uploaded_catrobat_programs" target="_blank">developer.catrobat.org/licenses_of_uploaded_catrobat_programs</a>'}, "catroweb")|raw }}</li>
+    </ul>
+    <p>
+      <b>{{ "termsOfUse.text4"|trans({}, "catroweb") }}</b>
+    </p>
+    <ul>
+      <li>{{ "termsOfUse.list4.item1"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list4.item2"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list4.item3"|trans({'%link-licenseToPlay%': '<a class="standard-article-link" href="http://developer.catrobat.org/licenses" target="_blank">developer.catrobat.org/licenses</a>', '%link-developer%': '<a class="standard-article-link" href="http://developer.catrobat.org" target="_blank">developer.catrobat.org</a>'}, "catroweb")|raw }}</li>
+    </ul>
+    <p>
+      <b>{{ "termsOfUse.text5"|trans({}, "catroweb") }}</b>
+    </p>
+    <ul>
+      <li>{{ "termsOfUse.list5.item1"|trans({'%link-termsOfUse%': '<a class="standard-article-link" href="http://developer.catrobat.org/terms_of_use_and_service" target="_blank">developer.catrobat.org/terms_of_use_and_service</a>'}, "catroweb")|raw }}</li>
+      <li>{{ "termsOfUse.list5.item2"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list5.item3"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list5.item4"|trans({}, "catroweb") }}</li>
+      <li>{{ "termsOfUse.list5.item5"|trans({'%link-termsOfUse%': '<a class="standard-article-link" href="http://developer.catrobat.org/terms_of_use_and_service" target="_blank">developer.catrobat.org/terms_of_use_and_service</a>'}, "catroweb")|raw }}</li>
+    </ul>
+    <br/>
+    <p>
+      <b>{{ "termsOfUse.bottom1"|trans({}, "catroweb") }}</b>
+    </p>
+    <p>
+      <b>{{ "termsOfUse.bottom2"|trans({'%email-webmaster%': '<a class="standard-article-link" href="mailto:webmaster@catrobat.org">webmaster@catrobat.org</a>'}, "catroweb")|raw }} </b>
+    </p>
+    <br/>
+    <p>
+      <b>{{ "termsOfUse.version"|trans({}, "catroweb") }}</b>
+    </p>
+  </div>
+{% endblock %}
+

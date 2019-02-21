@@ -4,8 +4,17 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class ScriptFactory
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class ScriptFactory
 {
+  /**
+   * @param \SimpleXMLElement $script_xml_properties
+   *
+   * @return BroadcastScript|CollisionScript|StartScript|WhenScript|WhenTouchScript|null
+   */
   public static function generate(\SimpleXMLElement $script_xml_properties)
   {
     $generated_script = null;

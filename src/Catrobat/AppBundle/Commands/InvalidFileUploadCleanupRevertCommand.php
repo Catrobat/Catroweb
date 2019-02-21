@@ -11,10 +11,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\File;
 
+/**
+ * Class InvalidFileUploadCleanupRevertCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class InvalidFileUploadCleanupRevertCommand extends ContainerAwareCommand
 {
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:clean:invalid-upload:revert')
@@ -23,8 +31,19 @@ class InvalidFileUploadCleanupRevertCommand extends ContainerAwareCommand
       ->addArgument('file', InputArgument::REQUIRED, 'File with the programs that should be visible again');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
+    /**
+     * @var $file File
+     */
     $finder = new Finder();
     $file_name = $input->getArgument('file');
     $finder->files()->name($file_name);

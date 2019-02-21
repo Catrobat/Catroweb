@@ -3,16 +3,30 @@
 
 namespace Catrobat\AppBundle\Services;
 
-use Catrobat\AppBundle\Services\ProgramFileRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
+/**
+ * Class TemplateFileRepository
+ * @package Catrobat\AppBundle\Services
+ */
 class TemplateFileRepository extends ProgramFileRepository
 {
-  public function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor)
+  /**
+   * TemplateFileRepository constructor.
+   *
+   * @param                        $directory
+   * @param                        $webpath
+   * @param CatrobatFileCompressor $file_compressor
+   * @param                        $tmp_dir
+   */
+  public function __construct($directory, $webpath, CatrobatFileCompressor $file_compressor, $tmp_dir)
   {
-    parent::__construct($directory, $webpath, $file_compressor);
+    parent::__construct($directory, $webpath, $file_compressor, $tmp_dir);
   }
 
+  /**
+   * @param $id
+   */
   public function deleteTemplateFiles($id)
   {
     try

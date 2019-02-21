@@ -20,7 +20,7 @@
 
     <div class="container-fluid">
 
-      {% include 'components/login/login_logo.html.twig' %}
+      {% include 'UserManagement/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-5" align="center">
@@ -84,7 +84,7 @@
             </div>
 
             <!-- Policy -->
-            {% include 'privacy_policy/policy.html.twig' %}
+            {% include 'PrivacyAndTerms/policy.html.twig' %}
 
             <!-- Button -->
             <div style="margin-top:30px; margin-bottom:30px" class="form-group">
@@ -116,7 +116,7 @@
                   </div>
                 </div>
               </div>
-              {% include 'components/login/or_line.html.twig' %}
+              {% include 'UserManagement/or_line.html.twig' %}
             </div>
 
             {{ form_rest(form) }}
@@ -125,7 +125,7 @@
       </div>
     </div>
     <div id="spacer1" style="margin-bottom: 30px"></div>
-    {% include 'social/oauth_form.html.twig' %}
+    {% include 'UserManagement/oauth_form.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
 
 

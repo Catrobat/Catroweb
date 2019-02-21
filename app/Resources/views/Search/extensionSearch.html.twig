@@ -1,0 +1,24 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/search.css') }}" media="screen"/>
+{% endblock %}
+
+{% block body %}
+
+  <div id="search-results">
+    <h1>{{ "search.results"|trans({}, "catroweb") }}</h1>
+    <div id="search-results-text">
+      {{ "search.resultcount"|trans({'%count%': '<span></span>'}, "catroweb")|raw }}
+    </div>
+    <div class="programs"></div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script>
+    let search = new ProgramLoader('#search-results', '{{ path('api_search_extension') }}')
+    search.initSearch('{{ q }}')
+  </script>
+{% endblock %}

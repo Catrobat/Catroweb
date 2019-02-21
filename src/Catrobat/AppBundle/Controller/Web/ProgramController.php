@@ -32,6 +32,7 @@ use Twig\Error\Error;
  */
 class ProgramController extends Controller
 {
+
   /**
    * @Route("/program/remixgraph/{id}", name="program_remix_graph",
    *   requirements={"id":"\d+"}, methods={"GET"})
@@ -40,6 +41,9 @@ class ProgramController extends Controller
    * @param integer $id
    *
    * @return JsonResponse
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Geocoder\Exception\Exception
    */
   public function programRemixGraphAction(Request $request, $id)
   {
@@ -71,6 +75,7 @@ class ProgramController extends Controller
     ]);
   }
 
+
   /**
    * @Route("/program/{id}", name="program", requirements={"id":"\d+"})
    * @Route("/details/{id}", name="catrobat_web_detail", requirements={"id":"\d+"},
@@ -79,9 +84,11 @@ class ProgramController extends Controller
    * @param Request $request
    * @param integer $id
    *
-   * @throws Error
-   *
    * @return JsonResponse
+   * @throws Error
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function programAction(Request $request, $id)
   {
@@ -158,7 +165,7 @@ class ProgramController extends Controller
       $my_program = true;
     }
 
-    return $this->get('templating')->renderResponse('program.html.twig', [
+    return $this->get('templating')->renderResponse('Program/program.html.twig', [
       'program_details_url_template' => $router->generate('program', ['id' => 0]),
       'program'                      => $program,
       'program_details'              => $program_details,
@@ -173,6 +180,7 @@ class ProgramController extends Controller
       'logged_in'                    => $logged_in,
     ]);
   }
+
 
   /**
    * @Route("/program/like/{id}", name="program_like", requirements={"id":"\d+"}, methods={"GET"})
@@ -295,6 +303,7 @@ class ProgramController extends Controller
     ]]);
   }
 
+
   /**
    * @Route("/search/{q}", name="search", requirements={"q":".+"}, methods={"GET"})
    * @Route("/search/", name="empty_search", defaults={"q":null}, methods={"GET"})
@@ -307,8 +316,9 @@ class ProgramController extends Controller
    */
   public function searchAction($q)
   {
-    return $this->get('templating')->renderResponse('search.html.twig', ['q' => $q]);
+    return $this->get('templating')->renderResponse('Search/search.html.twig', ['q' => $q]);
   }
+
 
   /**
    * @Route("/profileDeleteProgram/{id}", name="profile_delete_program", requirements={"id":"\d+"},
@@ -356,6 +366,7 @@ class ProgramController extends Controller
 
     return $this->redirectToRoute('profile');
   }
+
 
   /**
    * @Route("/profileToggleProgramVisibility/{id}", name="profile_toggle_program_visibility",
@@ -413,6 +424,7 @@ class ProgramController extends Controller
 
     return new Response("true");
   }
+
 
   /**
    * @Route("/editProgramDescription/{id}/{newDescription}", name="edit_program_description",
@@ -479,8 +491,10 @@ class ProgramController extends Controller
     return JsonResponse::create(['statusCode' => StatusCode::OK]);
   }
 
+
   /**
    * @return array
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   private function extractGameJamConfig()
   {
@@ -511,10 +525,14 @@ class ProgramController extends Controller
     return $jam;
   }
 
+
   /**
    * @param Request $request
    * @param Program $program
    * @param         $viewed
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   private function checkAndAddViewed(Request $request, $program, $viewed)
   {
@@ -525,6 +543,7 @@ class ProgramController extends Controller
       $request->getSession()->set('viewed', $viewed);
     }
   }
+
 
   /**
    * @param $screenshot_repository      ScreenshotRepository
@@ -627,6 +646,7 @@ class ProgramController extends Controller
     return $program_details;
   }
 
+
   /**
    * @param $program Program
    *
@@ -641,6 +661,7 @@ class ProgramController extends Controller
 
     return $program_comments;
   }
+
 
   /**
    * @param $user    User
@@ -663,6 +684,7 @@ class ProgramController extends Controller
 
     return $user_programs;
   }
+
 
   /**
    * @param $program Program

@@ -12,6 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class RudeWordsRepository extends EntityRepository
 {
+  /**
+   * @param $array
+   *
+   * @return bool
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   */
   public function contains($array)
   {
     $qb = $this->createQueryBuilder('e');

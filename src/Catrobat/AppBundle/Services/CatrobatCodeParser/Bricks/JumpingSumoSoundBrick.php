@@ -6,8 +6,15 @@ use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
 //use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class JumpingSumoSoundBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class JumpingSumoSoundBrick extends Brick
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::JUMP_SUMO_SOUND_BRICK;

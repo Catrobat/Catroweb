@@ -2,25 +2,33 @@
 
 namespace Catrobat\AppBundle\Features\GameJam\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\PyStringNode;
-use Catrobat\AppBundle\Entity\GameJam;
 use Behat\Gherkin\Node\TableNode;
 use Symfony\Component\Finder\Finder;
 use PHPUnit\Framework\Assert;
 
+/**
+ * Class FeatureContext
+ * @package Catrobat\AppBundle\Features\GameJam\Context
+ */
 class FeatureContext extends BaseContext
 {
 
+  /**
+   * @var
+   */
   private $i;
 
+  /**
+   * @var
+   */
   private $gamejam;
 
   /**
    * Initializes context with parameters from behat.yml.
    *
-   * @param array $parameters
+   * @param $error_directory
    */
   public function __construct($error_directory)
   {
@@ -28,6 +36,9 @@ class FeatureContext extends BaseContext
     $this->setErrorDirectory($error_directory);
   }
 
+  /**
+   * @return string
+   */
   static public function getAcceptedSnippetType()
   {
     return 'turnip';
@@ -35,6 +46,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given There is an ongoing game jam
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereIsAnOngoingGameJam()
   {
@@ -52,6 +66,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given I submitted a game
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iSubmittedAGame()
   {
@@ -190,6 +207,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then The message schould be:
+   *
+   * @param PyStringNode $string
    */
   public function theMessageSchouldBe(PyStringNode $string)
   {
@@ -210,6 +229,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given The form url of the current jam is
+   * @param PyStringNode $string
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function theFormUrlOfTheCurrentJamIs(PyStringNode $string)
   {
@@ -220,6 +242,8 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given I am :arg1 with email :arg2
+   * @param $arg1
+   * @param $arg2
    */
   public function iAmWithEmail($arg1, $arg2)
   {
@@ -231,6 +255,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When I submit a game which gets the id :arg1
+   * @param $arg1
    */
   public function iSubmitAGameWhichGetsTheId($arg1)
   {
@@ -240,6 +265,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then The returned url should be
+   * @param PyStringNode $string
    */
   public function theReturnedUrlShouldBe(PyStringNode $string)
   {
@@ -251,6 +277,9 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given There are follwing gamejam programs:
+   * @param TableNode $table
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreFollwingGamejamPrograms(TableNode $table)
   {
@@ -279,6 +308,12 @@ class FeatureContext extends BaseContext
 
   /**
    * @Given There are following gamejams:
+   *
+   * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Exception
    */
   public function thereAreFollowingGamejams(TableNode $table)
   {
@@ -302,6 +337,12 @@ class FeatureContext extends BaseContext
     }
   }
 
+  /**
+   * @param $days
+   *
+   * @return \DateTime
+   * @throws \Exception
+   */
   private function getDateFromNow($days)
   {
     $date = new \DateTime();
@@ -320,6 +361,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @When I GET :arg1
+   * @param $arg1
    */
   public function iGet($arg1)
   {
@@ -328,6 +370,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then I should receive the following programs:
+   * @param TableNode $table
    */
   public function iShouldReceiveTheFollowingPrograms(TableNode $table)
   {
@@ -344,6 +387,7 @@ class FeatureContext extends BaseContext
 
   /**
    * @Then The total number of found projects should be :arg1
+   * @param $arg1
    */
   public function theTotalNumberOfFoundProjectsShouldBe($arg1)
   {

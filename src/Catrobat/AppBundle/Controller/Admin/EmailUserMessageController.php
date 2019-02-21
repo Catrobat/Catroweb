@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Catrobat\AppBundle\Controller\Admin;
-
 
 use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\UserManager;
@@ -10,13 +8,30 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
+/**
+ * Class EmailUserMessageController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class EmailUserMessageController extends CRUDController
 {
+
+  /**
+   * @param Request|null $request
+   *
+   * @return Response
+   */
   public function listAction(Request $request = null)
   {
     return $this->renderWithExtraParams('Admin/mail.html.twig');
   }
 
+
+  /**
+   * @param Request|null $request
+   *
+   * @return Response
+   */
   public function sendAction(Request $request = null)
   {
     /**

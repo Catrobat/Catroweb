@@ -3,13 +3,24 @@
 namespace Catrobat\AppBundle\Services;
 
 use Catrobat\AppBundle\Exceptions\InvalidStorageDirectoryException;
-use FOS\RestBundle\Controller\Annotations\Unlink;
 use Symfony\Component\HttpFoundation\File\File;
 
+/**
+ * Class ApkRepository
+ * @package Catrobat\AppBundle\Services
+ */
 class ApkRepository
 {
+  /**
+   * @var string|string[]|null
+   */
   private $dir;
 
+  /**
+   * ApkRepository constructor.
+   *
+   * @param $dir
+   */
   public function __construct($dir)
   {
     $dir = preg_replace('/([^\/]+)$/', '$1/', $dir);
@@ -22,11 +33,18 @@ class ApkRepository
     $this->dir = $dir;
   }
 
+  /**
+   * @param $file File
+   * @param $id
+   */
   public function save($file, $id)
   {
     $file->move($this->dir, $this->generateFileNameFromId($id));
   }
 
+  /**
+   * @param $id
+   */
   public function remove($id)
   {
     $path = $this->dir . $this->generateFileNameFromId($id);
@@ -36,11 +54,21 @@ class ApkRepository
     }
   }
 
+  /**
+   * @param $id
+   *
+   * @return string
+   */
   private function generateFileNameFromId($id)
   {
     return $id . '.apk';
   }
 
+  /**
+   * @param $id
+   *
+   * @return File
+   */
   public function getProgramFile($id)
   {
     return new File($this->dir . $this->generateFileNameFromId($id));

@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -73,6 +72,8 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws \Exception
    */
   public function updateTimestamps()
   {
@@ -83,9 +84,9 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   }
 
   /**
-   * @param \Catrobat\AppBundle\Entity\Program $parent
+   * @param Program $parent
    *
-   * @return ProgramRemixRelation
+   * @return $this
    */
   public function setParent(Program $parent)
   {
@@ -114,7 +115,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   /**
    * @param Program $child
    *
-   * @return ProgramRemixRelation
+   * @return $this
    */
   public function setChild(Program $child)
   {
@@ -188,11 +189,17 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this;
   }
 
+  /**
+   * @return string
+   */
   public function getUniqueKey()
   {
     return sprintf("ProgramRemixBackwardRelation(%d,%d)", $this->parent_id, $this->child_id);
   }
 
+  /**
+   * @return string
+   */
   public function __toString()
   {
     return "(#" . $this->parent_id . ", #" . $this->child_id . ")";

@@ -3,7 +3,6 @@
 namespace Catrobat\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\DBAL\Types\Type;
 
 
 /**
@@ -71,6 +70,9 @@ class ProgramRemixBackwardRepository extends EntityRepository
       ->execute();
   }
 
+  /**
+   *
+   */
   public function removeAllRelations()
   {
     $qb = $this->createQueryBuilder('b');

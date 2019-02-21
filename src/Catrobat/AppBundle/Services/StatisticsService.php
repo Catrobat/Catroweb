@@ -2,27 +2,57 @@
 
 namespace Catrobat\AppBundle\Services;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Mink\Exception\Exception;
 use Catrobat\AppBundle\Entity\ClickStatistic;
 use Catrobat\AppBundle\Entity\HomepageClickStatistic;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Catrobat\AppBundle\RecommenderSystem\RecommendedPageId;
-use Geocoder\Exception\CollectionIsEmpty;
+use Doctrine\ORM\EntityManager;
+use Geocoder\Geocoder;
 use Symfony\Bridge\Monolog\Logger;
 use Catrobat\AppBundle\Entity\ProgramManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
+
+/**
+ * Class StatisticsService
+ * @package Catrobat\AppBundle\Services
+ */
 class StatisticsService
 {
+  /**
+   * @var ProgramManager
+   */
   private $programmanager;
+  /**
+   * @var EntityManager
+   */
   private $entity_manager;
+  /**
+   * @var Geocoder
+   */
   private $geocoder;
+  /**
+   * @var Logger
+   */
   private $logger;
+  /**
+   * @var TokenStorage
+   */
   private $security_token_storage;
 
-  public function __construct(ProgramManager $programmanager, $entity_manager, $geocoder, Logger $logger, $security_token_storage)
+  /**
+   * StatisticsService constructor.
+   *
+   * @param ProgramManager $programmanager
+   * @param                $entity_manager
+   * @param                $geocoder
+   * @param Logger         $logger
+   * @param                $security_token_storage
+   */
+  public function __construct(ProgramManager $programmanager, $entity_manager, $geocoder,
+                              Logger $logger, $security_token_storage)
   {
     $this->programmanager = $programmanager;
     $this->entity_manager = $entity_manager;
@@ -31,6 +61,20 @@ class StatisticsService
     $this->security_token_storage = $security_token_storage;
   }
 
+  /**
+   * @param      $request
+   * @param      $program_id
+   * @param      $referrer
+   * @param      $rec_tag_by_program_id
+   * @param      $rec_by_page_id
+   * @param      $rec_by_program_id
+   * @param      $locale
+   * @param bool $is_user_specific_recommendation
+   *
+   * @return bool
+   * @throws \Geocoder\Exception\Exception
+   * @throws \Exception
+   */
   public function createProgramDownloadStatistics($request, $program_id, $referrer, $rec_tag_by_program_id, $rec_by_page_id,
                                                   $rec_by_program_id, $locale, $is_user_specific_recommendation = false)
   {
@@ -96,6 +140,9 @@ class StatisticsService
 
       if ($rec_by_program != null)
       {
+        /**
+         * @var $rec_by_program Program
+         */
         $program_download_statistic->setRecommendedByProgram($rec_by_program);
       }
     }
@@ -128,6 +175,104 @@ class StatisticsService
     return true;
   }
 
+  /**
+   * @return ProgramManager
+   */
+  public function getProgrammanager(): ProgramManager
+  {
+    return $this->programmanager;
+  }
+
+  /**
+   * @param ProgramManager $programmanager
+   */
+  public function setProgrammanager(ProgramManager $programmanager): void
+  {
+    $this->programmanager = $programmanager;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getEntityManager()
+  {
+    return $this->entity_manager;
+  }
+
+  /**
+   * @param mixed $entity_manager
+   */
+  public function setEntityManager($entity_manager): void
+  {
+    $this->entity_manager = $entity_manager;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getGeocoder()
+  {
+    return $this->geocoder;
+  }
+
+  /**
+   * @param mixed $geocoder
+   */
+  public function setGeocoder($geocoder): void
+  {
+    $this->geocoder = $geocoder;
+  }
+
+  /**
+   * @return Logger
+   */
+  public function getLogger(): Logger
+  {
+    return $this->logger;
+  }
+
+  /**
+   * @param Logger $logger
+   */
+  public function setLogger(Logger $logger): void
+  {
+    $this->logger = $logger;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSecurityTokenStorage()
+  {
+    return $this->security_token_storage;
+  }
+
+  /**
+   * @param mixed $security_token_storage
+   */
+  public function setSecurityTokenStorage($security_token_storage): void
+  {
+    $this->security_token_storage = $security_token_storage;
+  }
+
+  /**
+   * @param      $request
+   * @param      $type
+   * @param      $rec_from_id
+   * @param      $rec_program_id
+   * @param      $tag_id
+   * @param      $extension_name
+   * @param      $referrer
+   * @param null $locale
+   * @param bool $is_recommended_program_a_scratch_program
+   * @param bool $is_user_specific_recommendation
+   *
+   * @return bool
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Geocoder\Exception\Exception
+   * @throws \Exception
+   */
   public function createClickStatistics($request, $type, $rec_from_id, $rec_program_id, $tag_id, $extension_name,
                                         $referrer, $locale = null, $is_recommended_program_a_scratch_program = false,
                                         $is_user_specific_recommendation = false)
@@ -185,6 +330,9 @@ class StatisticsService
 
       if ($rec_from_id > 0)
       {
+        /**
+         * @var $recommended_from Program
+         */
         $recommended_from = $this->programmanager->find($rec_from_id);
         $click_statistics->setRecommendedFromProgram($recommended_from);
       }
@@ -195,18 +343,20 @@ class StatisticsService
       }
       else
       {
-        $click_statistics->setProgram($this->programmanager->find($rec_program_id));
+        /**
+         * @var $recommended_program Program
+         */
+        $recommended_program = $this->programmanager->find($rec_program_id);
+        $click_statistics->setProgram($recommended_program);
       }
 
       $this->entity_manager->persist($click_statistics);
       $this->entity_manager->flush();
-
     }
     else
     {
       if ($type == "tags")
       {
-
         $tag_repo = $this->entity_manager->getRepository("\Catrobat\AppBundle\Entity\Tag");
         $tag = $tag_repo->find($tag_id);
 
@@ -224,21 +374,18 @@ class StatisticsService
 
         $this->entity_manager->persist($click_statistics);
         $this->entity_manager->flush();
-
-
       }
       else
       {
         if ($type == "extensions")
         {
-
           $extensions_repo = $this->entity_manager->getRepository("\Catrobat\AppBundle\Entity\Extension");
 
           $extension = $extensions_repo->getExtensionByName($extension_name);
 
           if ($extension == null)
           {
-            return;
+            return false;
           }
 
           $click_statistics = new ClickStatistic();
@@ -262,8 +409,21 @@ class StatisticsService
     return true;
   }
 
+  /**
+   * @param $request
+   * @param $type
+   * @param $program_id
+   * @param $referrer
+   * @param $locale
+   *
+   * @return bool
+   * @throws \Exception
+   */
   public function createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale)
   {
+    /**
+     * @var $program Program
+     */
     $ip = $this->getOriginalClientIp($request);
     $user_agent = $this->getUserAgent($request);
     $session_user = $this->getSessionUser();
@@ -304,16 +464,29 @@ class StatisticsService
     return true;
   }
 
+  /**
+   * @param $request
+   *
+   * @return mixed
+   */
   private function getUserAgent($request)
   {
     return $request->headers->get('User-Agent');
   }
 
+  /**
+   * @return mixed
+   */
   private function getSessionUser()
   {
     return $this->security_token_storage->getToken()->getUser();
   }
 
+  /**
+   * @param $request Request
+   *
+   * @return bool|string
+   */
   private function getOriginalClientIp($request)
   {
     $ip = $request->getClientIp();
@@ -325,6 +498,11 @@ class StatisticsService
     return $ip;
   }
 
+  /**
+   * @param $code
+   *
+   * @return string
+   */
   function countryCodeToCountry($code)
   {
     $code = strtoupper($code);

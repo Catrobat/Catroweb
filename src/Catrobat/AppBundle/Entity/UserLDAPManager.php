@@ -10,18 +10,46 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Monolog\Logger;
 use FR3D\LdapBundle\Model\LdapUserInterface;
 
+/**
+ * Class UserLDAPManager
+ * @package Catrobat\AppBundle\Entity
+ */
 class UserLDAPManager extends LdapManager
 {
 
+  /**
+   * @var
+   */
   protected $role_mappings;
 
+  /**
+   * @var
+   */
   protected $group_filter;
 
+  /**
+   * @var
+   */
   protected $tokengenerator;
 
+  /**
+   * @var Logger
+   */
   protected $logger;
 
-  public function __construct(LdapDriverInterface $driver, UserHydrator $userManager, array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
+  /**
+   * UserLDAPManager constructor.
+   *
+   * @param LdapDriverInterface $driver
+   * @param UserHydrator        $userManager
+   * @param array               $params
+   * @param                     $role_mappings
+   * @param                     $group_filter
+   * @param                     $tokengenerator
+   * @param Logger              $logger
+   */
+  public function __construct(LdapDriverInterface $driver, UserHydrator $userManager,
+                              array $params, $role_mappings, $group_filter, $tokengenerator, Logger $logger)
   {
     $this->role_mappings = $role_mappings;
     $this->group_filter = $group_filter;
@@ -31,6 +59,12 @@ class UserLDAPManager extends LdapManager
     parent::__construct($driver, $userManager, $params);
   }
 
+  /**
+   * @param array $criteria
+   *
+   * @return bool|\FOS\UserBundle\Model\UserInterface|object|UserInterface|null
+   * @throws \Exception
+   */
   public function findUserBy(array $criteria)
   {
     try
@@ -78,6 +112,12 @@ class UserLDAPManager extends LdapManager
     }
   }
 
+  /**
+   * @param UserInterface $user
+   * @param               $password
+   *
+   * @return bool
+   */
   public function bind(UserInterface $user, $password)
   {
     try
@@ -116,6 +156,10 @@ class UserLDAPManager extends LdapManager
     return $binding;
   }
 
+  /**
+   * @param UserInterface $user
+   * @param array         $entry
+   */
   protected function hydrate(UserInterface $user, array $entry)
   {
     parent::hydrate($user, $entry);

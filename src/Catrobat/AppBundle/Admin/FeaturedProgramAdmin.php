@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Catrobat\AppBundle\Entity\Program;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -9,17 +10,35 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Catrobat\AppBundle\Forms\FeaturedImageConstraint;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
+/**
+ * Class FeaturedProgramAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class FeaturedProgramAdmin extends AbstractAdmin
 {
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'adminfeatured_program';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'featured_program';
 
+
+  /**
+   * @param string $context
+   *
+   * @return QueryBuilder|\Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+   */
   public function createQuery($context = 'list')
   {
     /**
@@ -27,13 +46,18 @@ class FeaturedProgramAdmin extends AbstractAdmin
      */
     $query = parent::createQuery();
     $query->andWhere(
-      $query->expr()->isNotNull($query->getRootAlias() . '.program')
+      $query->expr()->isNotNull($query->getRootAliases()[0] . '.program')
     );
 
     return $query;
   }
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $file_options = [
@@ -55,18 +79,29 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
       ->add('flavor')
       ->add('priority')
-      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false, 'help' => 'Toggle for iOS featured programs api call.'])
+      ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
+                              'help' => 'Toggle for iOS featured programs api call.'])
       ->add('active', null, ['required' => false]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
       ->add('program.name');
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -89,38 +124,77 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ]);
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return string
+   */
   public function getFeaturedImageUrl($object)
   {
-    return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')->getWebPath($object->getId(), $object->getImageType());
+    /**
+     * @var $object FeaturedProgram
+     */
+
+    return '../../' . $this->getConfigurationPool()->getContainer()->get('featuredimagerepository')
+        ->getWebPath($object->getId(), $object->getImageType());
   }
 
+
+  /**
+   * @param $object
+   *
+   * @return Metadata
+   */
   public function getObjectMetadata($object)
   {
-    return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(), $this->getFeaturedImageUrl($object));
+    /**
+     * @var $object FeaturedProgram
+     */
+
+    return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
+      $this->getFeaturedImageUrl($object));
   }
 
+
+  /**
+   * @param $object
+   */
   public function preUpdate($object)
   {
+    /**
+      * @var $object FeaturedProgram
+      */
+
     $object->old_image_type = $object->getImageType();
     $object->setImageType(null);
     $this->checkProgramID($object);
-
   }
 
+
+  /**
+   * @param $object
+   */
   public function prePersist($object)
   {
     $this->checkProgramID($object);
   }
 
+
+  /**
+    * @param $object
+    */
   private function checkProgramID($object)
   {
-    /*
-    * @var $program Program
-    */
+    /**
+     * @var $object FeaturedProgram
+     * @var $program Program
+     */
 
     $id = $this->getForm()->get('program_id')->getData();
 
-    $program_manager = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager()->getRepository('\Catrobat\AppBundle\Entity\Program');
+    $program_manager = $this->getConfigurationPool()->getContainer()->get('doctrine')
+      ->getManager()->getRepository('\Catrobat\AppBundle\Entity\Program');
     $program = $program_manager->find($id);
 
     if ($program)

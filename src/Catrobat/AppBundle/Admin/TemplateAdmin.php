@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Admin;
 
+use Catrobat\AppBundle\Entity\Template;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -12,17 +13,37 @@ use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+
+/**
+ * Class TemplateAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class TemplateAdmin extends AbstractAdmin
 {
+
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_templateadmin';
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'template';
 
+  /**
+   * @var array
+   */
   protected $datagridValues = [
     '_sort_by'    => 'id',
     '_sort_order' => 'DESC',
   ];
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $isNew = $this->getSubject()->getId() == null;
@@ -34,7 +55,12 @@ class TemplateAdmin extends AbstractAdmin
       ->add('active', null, ['required' => false]);
   }
 
-  // Fields to be shown on filter forms
+
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
@@ -42,6 +68,10 @@ class TemplateAdmin extends AbstractAdmin
       ->add('name');
   }
 
+
+  /**
+   * @return array
+   */
   public function getBatchActions()
   {
     $actions = parent::getBatchActions();
@@ -51,7 +81,11 @@ class TemplateAdmin extends AbstractAdmin
   }
 
 
-  // Fields to be shown on lists
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
@@ -65,14 +99,25 @@ class TemplateAdmin extends AbstractAdmin
       ]]);
   }
 
+
+  /**
+   * @param RouteCollection $collection
+   */
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->remove('export');
   }
 
+
+  /**
+   * @param $object Template
+   *
+   * @return string
+   */
   public function getThumbnailImageUrl($object)
   {
-    return '/' . $this->getConfigurationPool()->getContainer()->get('templatescreenshotrepository')->getThumbnailWebPath($object->getId());
+    return '/' . $this->getConfigurationPool()->getContainer()->get('templatescreenshotrepository')
+        ->getThumbnailWebPath($object->getId());
   }
 
 }

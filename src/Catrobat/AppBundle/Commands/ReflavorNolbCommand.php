@@ -3,17 +3,36 @@
 namespace Catrobat\AppBundle\Commands;
 
 use Catrobat\AppBundle\Commands\Helpers\ConsoleProgressIndicator;
+use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\ProgramRepository;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
+
+/**
+ * Class ReflavorNolbCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class ReflavorNolbCommand extends ContainerAwareCommand
 {
+  /**
+   * @var EntityManager
+   */
   private $em;
+  /**
+   * @var ProgramRepository
+   */
   private $program_repository;
 
+  /**
+   * ReflavorNolbCommand constructor.
+   *
+   * @param EntityManager $em
+   * @param               $program_repo
+   */
   public function __construct(EntityManager $em, $program_repo)
   {
     parent::__construct();
@@ -21,6 +40,9 @@ class ReflavorNolbCommand extends ContainerAwareCommand
     $this->program_repository = $program_repo;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:reflavor:nolb')
@@ -28,9 +50,17 @@ class ReflavorNolbCommand extends ContainerAwareCommand
       ->addArgument('flavor', InputArgument::REQUIRED, 'Flavor');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    /*
+    /**
      * @var $program Program
      */
     $flavor = $input->getArgument('flavor');

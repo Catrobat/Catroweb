@@ -3,19 +3,69 @@
 namespace Catrobat\AppBundle\Controller\Admin;
 
 
+/**
+ * Class RemovableMemory
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class RemovableMemory
 {
+  /**
+   * @var String
+   */
   public $name;
+
+  /**
+   * @var String
+   */
   public $description;
+
+  /**
+   * @var
+   */
   public $size;
+
+  /**
+   * @var
+   */
   public $size_raw;
+
+  /**
+   * @var
+   */
   public $command_link;
+
+  /**
+   * @var
+   */
   public $command_name;
+
+  /**
+   * @var
+   */
   public $download_link;
+
+  /**
+   * @var
+   */
   public $execute_link;
+
+  /**
+   * @var
+   */
   public $archive_command_link;
+
+  /**
+   * @var
+   */
   public $archive_command_name;
 
+
+  /**
+   * RemovableMemory constructor.
+   *
+   * @param String $name
+   * @param String $description
+   */
   public function __construct(String $name = "", String $description = "")
   {
     $this->name = $name;

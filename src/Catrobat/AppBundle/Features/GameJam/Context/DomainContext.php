@@ -3,9 +3,14 @@
 namespace Catrobat\AppBundle\Features\GameJam\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\GameJamRepository;
+use Catrobat\AppBundle\Entity\ProgramManager;
+use Catrobat\AppBundle\Entity\User;
+use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Features\Helpers\BaseContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Gherkin\Node\PyStringNode;
+use Catrobat\AppBundle\Services\TokenGenerator;
 use Prophecy\Prophet;
 use Catrobat\AppBundle\Entity\GameJam;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,29 +18,57 @@ use Catrobat\AppBundle\Controller\Api\UploadController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Entity\Program;
 use Prophecy\Argument;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
+
+/**
+ * Class DomainContext
+ * @package Catrobat\AppBundle\Features\GameJam\Context
+ */
 class DomainContext extends BaseContext
 {
 
+  /**
+   * @var Prophet
+   */
   private $prophet;
 
+  /**
+   * @var GameJamRepository
+   */
   private $gamejam_repository;
 
+  /**
+   * @var TokenGenerator
+   */
   private $tokengenerator;
 
+  /**
+   * @var TranslatorInterface
+   */
   private $translator;
 
+  /**
+   * @var
+   */
   private $last_result;
 
+  /**
+   * DomainContext constructor.
+   */
   public function __construct()
   {
+    parent::__construct();
     $this->prophet = new Prophet();
     $this->tokengenerator = $this->prophet->prophesize('Catrobat\AppBundle\Services\TokenGenerator');
     $this->translator = $this->prophet->prophesize('Symfony\Component\Translation\TranslatorInterface');
-
-
   }
 
+  /**
+   * @return string
+   */
   static public function getAcceptedSnippetType()
   {
     return 'turnip';
@@ -43,6 +76,9 @@ class DomainContext extends BaseContext
 
   /**
    * @Given I am :arg1 with email :arg2
+   *
+   * @param $arg1
+   * @param $arg2
    */
   public function iAmWithEmail($arg1, $arg2)
   {
@@ -51,6 +87,8 @@ class DomainContext extends BaseContext
 
   /**
    * @When I submit a game which gets the id :arg1
+   *
+   * @param $arg1
    */
   public function iSubmitAGameWhichGetsTheId($arg1)
   {
@@ -59,6 +97,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Then The following patameters should be set in the form url:
+   *
+   * @param TableNode $table
    */
   public function theFollowingPatametersShouldBeSetInTheFormUrl(TableNode $table)
   {
@@ -67,6 +107,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Given The form url of the current jam is
+   *
+   * @param PyStringNode $string
    */
   public function theFormUrlOfTheCurrentJamIs(PyStringNode $string)
   {
@@ -75,6 +117,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Then The returned url should be
+   *
+   * @param PyStringNode $string
    */
   public function theReturnedUrlShouldBe(PyStringNode $string)
   {
@@ -83,6 +127,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Given The jam is on :arg1
+   *
+   * @param $arg1
    */
   public function theJamIsOn($arg1)
   {
@@ -91,6 +137,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Given I filled the google form for my game with id :arg1
+   *
+   * @param $arg1
    */
   public function iFilledTheGoogleFormForMyGameWithId($arg1)
   {
@@ -107,6 +155,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Then The url :arg1 should be called
+   *
+   * @param $arg1
    */
   public function theUrlShouldBeCalled($arg1)
   {
@@ -115,6 +165,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Given There is an ongoing game jam
+   *
+   * @throws \Doctrine\ORM\NonUniqueResultException
    */
   public function thereIsAnOngoingGameJam()
   {
@@ -130,23 +182,29 @@ class DomainContext extends BaseContext
    */
   public function iSubmitAGame()
   {
+    /**
+     * @var $usermanager UserManager
+     * @var $user User
+     */
     $request = new Request();
     $request->files->add(['file1' => new UploadedFile(self::FIXTUREDIR . 'test.catrobat', "generated")]);
     $request->request->set('fileChecksum', md5_file(self::FIXTUREDIR . 'test.catrobat'));
 
-    $usermanager = $this->prophet->prophesize('Catrobat\AppBundle\Entity\UserManager')->reveal();
+    $usermanager = $this->prophet->prophesize(UserManager::class)->reveal();
+    $user = $this->prophet->prophesize(User::class)->reveal();
 
-    $user = $this->prophet->prophesize('Catrobat\AppBundle\Entity\User');
+    $token = $this->prophet->prophesize(TokenInterface::class);
+    $token->getUser()->willReturn($user);
 
-    $token = $this->prophet->prophesize('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
-    $token->getUser()->willReturn($user->reveal());
-    $tokenstorage = $this->prophet->prophesize('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage');
+    $tokenstorage = $this->prophet->prophesize(TokenStorage::class);
     $tokenstorage->getToken()->willReturn($token->reveal());
 
-    $programmanager = $this->prophet->prophesize('Catrobat\AppBundle\Entity\ProgramManager');
+    $programmanager = $this->prophet->prophesize(ProgramManager::class);
     $programmanager->addProgram(Argument::any())->willReturn(new Program());
 
-    $controller = new UploadController($usermanager, $tokenstorage->reveal(), $programmanager->reveal(), $this->tokengenerator->reveal(), $this->translator->reveal());
+
+    $controller = new UploadController($usermanager, $tokenstorage->reveal(), $programmanager->reveal(),
+      null, $this->tokengenerator->reveal(), $this->translator->reveal());
     $this->last_result = $controller->uploadAction($request);
   }
 
@@ -264,6 +322,8 @@ class DomainContext extends BaseContext
 
   /**
    * @Then The message schould be:
+   *
+   * @param PyStringNode $string
    */
   public function theMessageSchouldBe(PyStringNode $string)
   {

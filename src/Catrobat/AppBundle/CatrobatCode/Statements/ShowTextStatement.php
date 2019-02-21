@@ -2,12 +2,23 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class ShowTextStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class ShowTextStatement extends Statement
 {
   const BEGIN_STRING = "show variable ";
   const END_STRING = ")<br/>";
 
 
+  /**
+   * ShowTextStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   */
   public function __construct($statementFactory, $xmlTree, $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
@@ -15,6 +26,9 @@ class ShowTextStatement extends Statement
       self::END_STRING);
   }
 
+  /**
+   * @return string
+   */
   public function getBrickText()
   {
     $variable_name = $this->xmlTree->userVariableName;
@@ -40,11 +54,12 @@ class ShowTextStatement extends Statement
     return "Show variable " . $variable_name . " at X: " . $formula_x_pos_no_markup . " Y: " . $formula_y_pos_no_markup;
   }
 
+  /**
+   * @return string
+   */
   public function getBrickColor()
   {
     return "1h_brick_red.png";
   }
 
 }
-
-?>

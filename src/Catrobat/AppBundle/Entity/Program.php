@@ -5,6 +5,7 @@ namespace Catrobat\AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity
  * @ORM\EntityListeners({"Catrobat\AppBundle\Listeners\Entity\ProgramListener"})
@@ -14,12 +15,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Program
 {
+  /**
+   *
+   */
   const APK_NONE = 0;
 
+  /**
+   *
+   */
   const APK_PENDING = 1;
 
+  /**
+   *
+   */
   const APK_READY = 2;
 
+  /**
+   *
+   */
   const INITIAL_VERSION = 1;
 
   /**
@@ -281,6 +294,9 @@ class Program
    */
   protected $program_downloads;
 
+  /**
+   * Program constructor.
+   */
   public function __construct()
   {
     $this->program_downloads = new ArrayCollection();
@@ -337,6 +353,8 @@ class Program
 
   /**
    * @ORM\PreUpdate
+   *
+   * @throws \Exception
    */
   public function updateLastModifiedTimestamp()
   {
@@ -345,6 +363,8 @@ class Program
 
   /**
    * @ORM\PrePersist
+   *
+   * @throws \Exception
    */
   public function updateTimestamps()
   {
@@ -363,6 +383,9 @@ class Program
     $this->version = self::INITIAL_VERSION;
   }
 
+  /**
+   * @return bool
+   */
   public function isInitialVersion()
   {
     return $this->version == self::INITIAL_VERSION;
@@ -581,11 +604,11 @@ class Program
   /**
    * Set user.
    *
-   * @param \Catrobat\AppBundle\Entity\User $user
+   * @param User $user
    *
    * @return Program
    */
-  public function setUser(\Catrobat\AppBundle\Entity\User $user = null)
+  public function setUser(User $user = null)
   {
     $this->user = $user;
 
@@ -595,13 +618,16 @@ class Program
   /**
    * Get user.
    *
-   * @return \Catrobat\AppBundle\Entity\User
+   * @return User
    */
   public function getUser()
   {
     return $this->user;
   }
 
+  /**
+   * @return string
+   */
   public function __toString()
   {
     return $this->name . " (#" . $this->id . ")";
@@ -820,11 +846,17 @@ class Program
     return $this->approved;
   }
 
+  /**
+   * @return mixed
+   */
   public function isVisible()
   {
     return $this->visible;
   }
 
+  /**
+   * @param $id
+   */
   public function setId($id)
   {
     $this->id = $id;
@@ -878,11 +910,19 @@ class Program
     return $this->directory_hash;
   }
 
+  /**
+   * @return int
+   */
   public function getApkStatus()
   {
     return $this->apk_status;
   }
 
+  /**
+   * @param $apk_status
+   *
+   * @return $this
+   */
   public function setApkStatus($apk_status)
   {
     $this->apk_status = $apk_status;
@@ -965,11 +1005,11 @@ class Program
   /**
    * Set gamejam
    *
-   * @param \Catrobat\AppBundle\Entity\GameJam $gamejam
+   * @param GameJam $gamejam
    *
    * @return Program
    */
-  public function setGamejam(\Catrobat\AppBundle\Entity\GameJam $gamejam = null)
+  public function setGamejam(GameJam $gamejam = null)
   {
     $this->gamejam = $gamejam;
 
@@ -979,7 +1019,7 @@ class Program
   /**
    * Get gamejam
    *
-   * @return \Catrobat\AppBundle\Entity\GameJam
+   * @return GameJam
    */
   public function getGamejam()
   {
@@ -1000,11 +1040,17 @@ class Program
     return $this;
   }
 
+  /**
+   * @param $accepted
+   */
   public function setGamejamSubmissionAccepted($accepted)
   {
     $this->gamejam_submission_accepted = $accepted;
   }
 
+  /**
+   * @return bool
+   */
   public function getGamejamSubmissionAccepted()
   {
     return $this->gamejam_submission_accepted;
@@ -1020,16 +1066,25 @@ class Program
     return $this->gamejam_submission_accepted;
   }
 
+  /**
+   * @param $date
+   */
   public function setGameJamSubmissionDate($date)
   {
     $this->gamejam_submission_date = $date;
   }
 
+  /**
+   * @return mixed
+   */
   public function getGameJamSubmissionDate()
   {
     return $this->gamejam_submission_date;
   }
 
+  /**
+   * @return bool
+   */
   public function getGamejam_submission_accepted()
   {
     return $this->gamejam_submission_accepted;
@@ -1044,11 +1099,11 @@ class Program
   }
 
   /**
-   * @param \Catrobat\AppBundle\Entity\ProgramDownloads $program_download
+   * @param ProgramDownloads $program_download
    *
    * @return ProgramDownloads[]|\Doctrine\Common\Collections\Collection
    */
-  public function addProgramDownloads(\Catrobat\AppBundle\Entity\ProgramDownloads $program_download)
+  public function addProgramDownloads(ProgramDownloads $program_download)
   {
     $this->program_downloads[] = $program_download;
 
@@ -1123,6 +1178,9 @@ class Program
     $extension->removeProgram($this);
   }
 
+  /**
+   *
+   */
   public function removeAllExtensions()
   {
     foreach ($this->extensions as $extension)
@@ -1185,12 +1243,19 @@ class Program
       : new ArrayCollection();
   }
 
+  /**
+   * @return array
+   */
   public function getCatrobatRemixDescendantIds()
   {
+    /**
+     * @var $ra ProgramRemixRelation
+     */
+
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(function ($r) {
-      return $r->getDescendantId();
+    return array_unique(array_map(function ($ra) {
+      return $ra->getDescendantId();
     }, $relations));
   }
 

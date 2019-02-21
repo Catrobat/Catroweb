@@ -11,13 +11,24 @@ use Catrobat\AppBundle\Commands\CreateBackupCommand;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\Output;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+
+/**
+ * Class MaintainController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class MaintainController extends Controller
 {
+
+  /**
+   * @return RedirectResponse
+   * @throws \Exception
+   */
   public function extractedAction()
   {
     if ($this->admin->isGranted('EXTRACTED') === false)
@@ -37,6 +48,11 @@ class MaintainController extends Controller
     return new RedirectResponse($this->admin->generateUrl("list"));
   }
 
+
+  /**
+   * @return RedirectResponse
+   * @throws \Exception
+   */
   public function archiveLogsAction()
   {
     if ($this->admin->isGranted('EXTRACTED') === false)
@@ -56,6 +72,11 @@ class MaintainController extends Controller
     return new RedirectResponse($this->admin->generateUrl("list"));
   }
 
+
+  /**
+   * @return RedirectResponse
+   * @throws \Exception
+   */
   public function deleteLogsAction()
   {
     if ($this->admin->isGranted('EXTRACTED') === false)
@@ -76,6 +97,10 @@ class MaintainController extends Controller
   }
 
 
+  /**
+   * @return RedirectResponse
+   * @throws \Exception
+   */
   public function apkAction()
   {
     if ($this->admin->isGranted('APK') === false)
@@ -96,6 +121,11 @@ class MaintainController extends Controller
   }
 
 
+  /**
+   * @param Request|null $request
+   *
+   * @return RedirectResponse
+   */
   public function deleteBackupsAction(Request $request = null)
   {
     if (false === $this->admin->isGranted('BACKUP'))
@@ -131,6 +161,12 @@ class MaintainController extends Controller
     return new RedirectResponse($this->admin->generateUrl("list"));
   }
 
+
+  /**
+   * @param Request|null $request
+   *
+   * @return RedirectResponse
+   */
   public function createBackupAction(Request $request = null)
   {
     if (false === $this->admin->isGranted('BACKUP'))
@@ -169,6 +205,12 @@ class MaintainController extends Controller
     return new RedirectResponse($this->admin->generateUrl("list"));
   }
 
+
+  /**
+   * @param Request|null $request
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
   public function listAction(Request $request = null)
   {
     if (false === $this->admin->isGranted('LIST'))
@@ -252,6 +294,10 @@ class MaintainController extends Controller
     ]);
   }
 
+
+  /**
+   * @return array
+   */
   private function getBackupFileObjects()
   {
     $objects = [];
@@ -266,6 +312,12 @@ class MaintainController extends Controller
   }
 
 
+  /**
+   * @param      $directory
+   * @param null $extension
+   *
+   * @return int
+   */
   private function get_dir_size($directory, $extension = null)
   {
     $count_size = 0;
@@ -299,6 +351,11 @@ class MaintainController extends Controller
   }
 
 
+  /**
+   * @param      $object
+   * @param      $path
+   * @param null $extension
+   */
   private function setSizeOfObject(&$object, $path, $extension = null)
   {
     /** @var RemovableMemory $object */
@@ -310,6 +367,12 @@ class MaintainController extends Controller
     }
   }
 
+
+  /**
+   * @param $bytes
+   *
+   * @return string
+   */
   private function getSymbolByQuantity($bytes)
   {
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
@@ -318,6 +381,12 @@ class MaintainController extends Controller
     return sprintf('%.2f ' . $symbol[$exp], ($bytes / pow(1024, floor($exp))));
   }
 
+
+  /**
+   * @param $command
+   * @param $description
+   * @param $output Output
+   */
   private function executeShellCommand($command, $description, $output)
   {
     $output->write($description . " ('" . $command . "') ... ");
@@ -332,6 +401,7 @@ class MaintainController extends Controller
       $output->writeln('failed!');
     }
   }
+
 
   /**
    * @param $file

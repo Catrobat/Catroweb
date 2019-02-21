@@ -11,6 +11,10 @@ use Catrobat\AppBundle\Entity\ProgramRemixRepository;
 use Catrobat\AppBundle\Entity\ProgramRemixBackwardRepository;
 
 
+/**
+ * Class RemixSubgraphManipulator
+ * @package Catrobat\AppBundle\RemixGraph
+ */
 class RemixSubgraphManipulator
 {
   const COMMON_TIMESTAMP = 'common_timestamp';
@@ -43,7 +47,8 @@ class RemixSubgraphManipulator
    * @param ProgramRemixRepository         $program_remix_repository
    * @param ProgramRemixBackwardRepository $program_remix_backward_repository
    */
-  public function __construct($entity_manager, $program_repository, $program_remix_repository, $program_remix_backward_repository)
+  public function __construct($entity_manager, $program_repository, $program_remix_repository,
+                              $program_remix_backward_repository)
   {
     $this->entity_manager = $entity_manager;
     $this->program_repository = $program_repository;
@@ -53,12 +58,16 @@ class RemixSubgraphManipulator
 
   /**
    * @param Program $program
-   * @param int[]   $ids_of_new_parents
+   * @param array   $ids_of_new_parents
    * @param array   $preserved_creation_date_mapping
    * @param array   $preserved_seen_date_mapping
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
-                                                       array $preserved_creation_date_mapping, array $preserved_seen_date_mapping)
+                                                       array $preserved_creation_date_mapping,
+                                                       array $preserved_seen_date_mapping)
   {
     $program_descendant_relations = $this->program_remix_repository->getDescendantRelations([$program->getId()]);
 
@@ -68,13 +77,20 @@ class RemixSubgraphManipulator
 
     $parents_ancestor_relations = $this->program_remix_repository->getAncestorRelations($forward_parent_ids);
     $parent_ancestor_ids = array_unique(array_map(function ($r) {
+      /**
+       * @var $r ProgramRemixRelation
+       */
       return $r->getAncestorId();
     }, $parents_ancestor_relations));
-    $parent_ancestors_descendant_relations = $this->program_remix_repository->getDescendantRelations($parent_ancestor_ids);
+    $parent_ancestors_descendant_relations = $this->program_remix_repository
+      ->getDescendantRelations($parent_ancestor_ids);
     $backward_parent_relations = $this->program_remix_backward_repository->getParentRelations([$program->getId()]);
 
     $all_existing_relations = array_merge($parent_ancestors_descendant_relations, $backward_parent_relations);
     $unique_keys_of_all_existing_relations = array_map(function ($r) {
+      /**
+       * @var $r ProgramRemixRelation
+       */
       return $r->getUniqueKey();
     }, $all_existing_relations);
 
@@ -83,6 +99,9 @@ class RemixSubgraphManipulator
     // case backward relation:
     foreach ($backward_parent_ids as $backward_parent_id)
     {
+      /**
+       * @var $parent_program Program
+       */
       $parent_program = $this->program_repository->find($backward_parent_id);
       $program_remix_backward_relation = new ProgramRemixBackwardRelation($parent_program, $program);
       $unique_key = $program_remix_backward_relation->getUniqueKey();
@@ -145,7 +164,14 @@ class RemixSubgraphManipulator
     }
   }
 
-  private function splitNewParentIdsByRelationDirection(array $existing_descendant_relations_of_program, array $ids_of_new_parents)
+  /**
+   * @param array $existing_descendant_relations_of_program
+   * @param array $ids_of_new_parents
+   *
+   * @return array
+   */
+  private function splitNewParentIdsByRelationDirection(array $existing_descendant_relations_of_program,
+                                                        array $ids_of_new_parents)
   {
     // check if any new parent is already an existing child of this program
     // (i.e. has a forward descendant connection to the program)!

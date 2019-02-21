@@ -4,8 +4,17 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class BrickFactory
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class BrickFactory
 {
+  /**
+   * @param \SimpleXMLElement $brick_xml_properties
+   *
+   * @return BroadcastBrick|BroadcastWaitBrick|ForeverBrick|NoteBrick|WaitBrick|WhenBrick|null
+   */
   public static function generate(\SimpleXMLElement $brick_xml_properties)
   {
     $generated_brick = null;

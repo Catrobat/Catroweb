@@ -2,28 +2,38 @@
 
 namespace Catrobat\AppBundle\Features\GameJam\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Catrobat\AppBundle\Features\Helpers\BaseContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Catrobat\AppBundle\Entity\GameJam;
-use Behat\Gherkin\Node\TableNode;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Behat\MinkExtension\Context\MinkAwareContext;
-use Behat\Mink\Mink;
+
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Catrobat\AppBundle\Entity\User;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Catrobat\AppBundle\Features\Helpers\SymfonySupport;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
-class JavascriptContext extends MinkContext implements KernelAwareContext, SnippetAcceptingContext
+
+/**
+ * Class JavascriptContext
+ * @package Catrobat\AppBundle\Features\GameJam\Context
+ */
+class JavascriptContext extends MinkContext implements KernelAwareContext
 {
+  /**
+   *
+   */
   const FIXTUREDIR = './testdata/DataFixtures/';
 
+  /**
+   * @var SymfonySupport
+   */
   private $symfony_support;
 
+  /**
+   * @var User
+   */
   private $i;
 
+  /**
+   * JavascriptContext constructor.
+   */
   public function __construct()
   {
     $this->symfony_support = new SymfonySupport(self::FIXTUREDIR);
@@ -33,11 +43,17 @@ class JavascriptContext extends MinkContext implements KernelAwareContext, Snipp
    * (non-PHPdoc)
    * @see \Behat\Symfony2Extension\Context\KernelAwareContext::setKernel()
    */
+  /**
+   * @param KernelInterface $kernel
+   */
   public function setKernel(KernelInterface $kernel)
   {
     $this->symfony_support->setKernel($kernel);
   }
 
+  /**
+   * @return SymfonySupport
+   */
   public function getSymfonySupport()
   {
     return $this->symfony_support;
@@ -58,6 +74,9 @@ class JavascriptContext extends MinkContext implements KernelAwareContext, Snipp
 
   /**
    * @Given I have a limited account
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iHaveALimitedAccount()
   {
@@ -68,6 +87,11 @@ class JavascriptContext extends MinkContext implements KernelAwareContext, Snipp
 
   /**
    * @Given I have a program named :arg1
+   *
+   * @param $arg1
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function iHaveAProgramNamed($arg1)
   {
@@ -84,6 +108,8 @@ class JavascriptContext extends MinkContext implements KernelAwareContext, Snipp
 
   /**
    * @Then I see the program :arg1
+   *
+   * @param $arg1
    */
   public function iSeeTheProgram($arg1)
   {
@@ -97,6 +123,4 @@ class JavascriptContext extends MinkContext implements KernelAwareContext, Snipp
   {
     $this->assertElementNotOnPage(".img-delete");
   }
-
-
 }

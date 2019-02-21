@@ -2,13 +2,44 @@
 
 namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
+/**
+ * Class BaseUserListStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class BaseUserListStatement extends Statement
 {
+
+  /**
+   * @var
+   */
   private $start;
+
+  /**
+   * @var
+   */
   private $middle;
+
+  /**
+   * @var
+   */
   private $end;
+
+  /**
+   * @var
+   */
   private $listName;
 
+
+  /**
+   * BaseUserListStatement constructor.
+   *
+   * @param $statementFactory
+   * @param $xmlTree
+   * @param $spaces
+   * @param $start
+   * @param $middle
+   * @param $end
+   */
   public function __construct($statementFactory, $xmlTree, $spaces, $start, $middle, $end)
   {
     $this->start = $start;
@@ -19,6 +50,10 @@ class BaseUserListStatement extends Statement
       $end);
   }
 
+
+  /**
+   * @return string
+   */
   public function execute()
   {
     $children = $this->executeChildren();
@@ -27,6 +62,10 @@ class BaseUserListStatement extends Statement
     return $code;
   }
 
+
+  /**
+   * @return string
+   */
   public function executeChildren()
   {
     $code = '';
@@ -46,5 +85,3 @@ class BaseUserListStatement extends Statement
     return $code;
   }
 }
-
-?>

@@ -4,6 +4,10 @@ namespace Catrobat\AppBundle\CatrobatCode\Statements;
 
 use Catrobat\AppBundle\CatrobatCode\SyntaxHighlightingConstants;
 
+/**
+ * Class UserVariableStatement
+ * @package Catrobat\AppBundle\CatrobatCode\Statements
+ */
 class UserVariableStatement extends Statement
 {
 
@@ -12,6 +16,15 @@ class UserVariableStatement extends Statement
   const AT_END_STRING = " at (";
   const TO_END_STRING = " to (";
 
+  /**
+   * UserVariableStatement constructor.
+   *
+   * @param      $statementFactory
+   * @param      $xmlTree
+   * @param      $spaces
+   * @param      $value
+   * @param bool $useAt
+   */
   public function __construct($statementFactory, $xmlTree, $spaces, $value, $useAt = false)
   {
     $end = self::TO_END_STRING;
@@ -27,5 +40,3 @@ class UserVariableStatement extends Statement
   }
 
 }
-
-?>

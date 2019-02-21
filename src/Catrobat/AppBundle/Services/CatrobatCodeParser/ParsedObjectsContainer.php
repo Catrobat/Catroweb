@@ -23,6 +23,11 @@ abstract class ParsedObjectsContainer
    */
   protected $objects;
 
+  /**
+   * ParsedObjectsContainer constructor.
+   *
+   * @param \SimpleXMLElement $xml_properties
+   */
   public function __construct(\SimpleXMLElement $xml_properties)
   {
     $this->xml_properties = $xml_properties;
@@ -32,8 +37,14 @@ abstract class ParsedObjectsContainer
     $this->parseObjects();
   }
 
+  /**
+   *
+   */
   private function parseObjects()
   {
+    /**
+     * @var $current_group null|ParsedObjectGroup
+     */
     $current_group = null;
     foreach ($this->getAllObjectXMLProperties() as $object_xml_properties)
     {
@@ -63,6 +74,9 @@ abstract class ParsedObjectsContainer
     $this->addCurrentGroup($current_group);
   }
 
+  /**
+   * @param $current_group
+   */
   private function addCurrentGroup(&$current_group)
   {
     if ($current_group)
@@ -72,6 +86,9 @@ abstract class ParsedObjectsContainer
     }
   }
 
+  /**
+   * @return array
+   */
   private function getAllObjectXMLProperties()
   {
     $all_object_xmls = [];
@@ -89,6 +106,11 @@ abstract class ParsedObjectsContainer
     return $all_object_xmls;
   }
 
+  /**
+   * @param $object_xml \SimpleXMLElement
+   *
+   * @return array
+   */
   private function getPointedObjectXMLProperties($object_xml)
   {
     $all_pointed_object_xmls = [];
@@ -105,6 +127,11 @@ abstract class ParsedObjectsContainer
     return $all_pointed_object_xmls;
   }
 
+  /**
+   * @param $object_xml_properties \SimpleXMLElement
+   *
+   * @return mixed
+   */
   private function dereference($object_xml_properties)
   {
     if ($object_xml_properties[Constants::REFERENCE_ATTRIBUTE] != null)
@@ -118,16 +145,27 @@ abstract class ParsedObjectsContainer
     }
   }
 
+  /**
+   * @param $object_xml_properties
+   *
+   * @return bool
+   */
   private function hasName($object_xml_properties)
   {
     return ($object_xml_properties[Constants::NAME_ATTRIBUTE] != null) or (count($object_xml_properties->name) != 0);
   }
 
+  /**
+   * @return null
+   */
   public function getBackground()
   {
     return $this->background;
   }
 
+  /**
+   * @return array
+   */
   public function getObjects()
   {
     return $this->objects;

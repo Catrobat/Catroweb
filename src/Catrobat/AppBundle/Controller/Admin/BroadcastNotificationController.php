@@ -9,12 +9,14 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 /**
  * Class BroadcastNotificationController
  * @package Catrobat\AppBundle\Controller\Admin
  */
 class BroadcastNotificationController extends CRUDController
 {
+
   /**
    * @return Response
    */
@@ -28,6 +30,8 @@ class BroadcastNotificationController extends CRUDController
    * @param Request $request
    *
    * @return Response
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function sendAction(Request $request)
   {
@@ -40,6 +44,7 @@ class BroadcastNotificationController extends CRUDController
 
     return new Response("OK");
   }
+
 
   /**
    * @param $message

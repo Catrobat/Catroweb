@@ -2,6 +2,7 @@
 
 namespace Catrobat\AppBundle\Commands;
 
+use Catrobat\AppBundle\Entity\ProgramLike;
 use Catrobat\AppBundle\Entity\ProgramLikeRepository;
 use Catrobat\AppBundle\Entity\ProgramRemixRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -10,6 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 
 
+/**
+ * Class CSVUserSimilaritiesCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class CSVUserSimilaritiesCommand extends ContainerAwareCommand
 {
   /**
@@ -32,8 +37,18 @@ class CSVUserSimilaritiesCommand extends ContainerAwareCommand
    */
   private $app_root_dir;
 
-  public function __construct(ProgramRemixRepository $program_remix_repository, ProgramLikeRepository $program_like_repository,
-                              EntityManager $entity_manager, $app_root_dir)
+
+  /**
+   * CSVUserSimilaritiesCommand constructor.
+   *
+   * @param ProgramRemixRepository $program_remix_repository
+   * @param ProgramLikeRepository  $program_like_repository
+   * @param EntityManager          $entity_manager
+   * @param                        $app_root_dir
+   */
+  public function __construct(ProgramRemixRepository $program_remix_repository,
+                              ProgramLikeRepository $program_like_repository,
+                                 EntityManager $entity_manager, $app_root_dir)
   {
     parent::__construct();
     $this->program_remix_repository = $program_remix_repository;
@@ -42,18 +57,34 @@ class CSVUserSimilaritiesCommand extends ContainerAwareCommand
     $this->app_root_dir = $app_root_dir;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     date_default_timezone_set('Europe/Berlin');
     $this->setName('catrobat:recommender:export')->setDescription('Export command');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   * @throws \Doctrine\DBAL\DBALException
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
+    /**
+     * @var $likes_of_users array
+     * @var $likes_of_user ProgramLike
+     */
+
     @unlink($this->app_root_dir . '/../data_remixes');
     @unlink($this->app_root_dir . '/../data_likes');
 
-    $statement = $this->entity_manager->getConnection()->prepare("SELECT MAX(id) as id_of_last_user FROM fos_user");
+    $statement = $this->entity_manager->getConnection()
+      ->prepare("SELECT MAX(id) as id_of_last_user FROM fos_user");
     $statement->execute();
     $id_of_last_user = intval($statement->fetch()['id_of_last_user']);
     echo PHP_EOL . 'Last ID: ' . $id_of_last_user . PHP_EOL;

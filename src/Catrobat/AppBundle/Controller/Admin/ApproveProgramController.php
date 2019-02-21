@@ -2,20 +2,32 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
+use Catrobat\AppBundle\Entity\Program;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
+/**
+ * Class ApproveProgramController
+ * @package Catrobat\AppBundle\Controller\Admin
+ */
 class ApproveProgramController extends Controller
 {
+
+  /**
+   * @return RedirectResponse
+   */
   public function approveAction()
   {
+    /**
+     * @var $object Program
+     */
     $object = $this->admin->getSubject();
     if (!$object)
     {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
-    /* @var $object \Catrobat\AppBundle\Entity\Program */
     $object->setApproved(true);
     $object->setVisible(true);
     $this->admin->update($object);
@@ -24,6 +36,10 @@ class ApproveProgramController extends Controller
     return new RedirectResponse($this->getRedirectionUrl());
   }
 
+
+  /**
+   * @return RedirectResponse
+   */
   public function skipAction()
   {
     $object = $this->admin->getSubject();
@@ -36,16 +52,21 @@ class ApproveProgramController extends Controller
     return new RedirectResponse($this->getRedirectionUrl());
   }
 
+
+  /**
+   * @return RedirectResponse
+   */
   public function invisibleAction()
   {
-    $object = $this->admin->getSubject();
+    /**
+     * @var $object Program
+     */
 
+    $object = $this->admin->getSubject();
     if (!$object)
     {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
-    /* @var $object \Catrobat\AppBundle\Entity\Program */
-
     $object->setApproved(true);
     $object->setVisible(false);
     $this->admin->update($object);
@@ -55,6 +76,10 @@ class ApproveProgramController extends Controller
     return new RedirectResponse($this->getRedirectionUrl());
   }
 
+
+  /**
+   * @return string
+   */
   private function getRedirectionUrl()
   {
     $nextId = $this->getNextRandomApproveProgramId();
@@ -66,8 +91,16 @@ class ApproveProgramController extends Controller
     return $this->admin->generateUrl('show', ['id' => $nextId]);
   }
 
+
+  /**
+   * @return Program|null
+   */
   private function getNextRandomApproveProgramId()
   {
+    /**
+     * @var $object Program
+     */
+
     $datagrid = $this->admin->getDatagrid();
 
     $objects = $datagrid->getResults();
@@ -77,9 +110,13 @@ class ApproveProgramController extends Controller
     }
     $object_key = array_rand($objects);
 
-    return $objects[$object_key]->getId();
+    $object = $objects[$object_key];
+    return $object->getId();
   }
 
+  /**
+   * @return int
+   */
   private function getRemainingProgramCount()
   {
     $datagrid = $this->admin->getDatagrid();

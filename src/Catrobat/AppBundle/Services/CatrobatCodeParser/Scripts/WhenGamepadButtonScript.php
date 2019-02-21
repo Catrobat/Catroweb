@@ -4,8 +4,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class WhenGamepadButtonScript
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class WhenGamepadButtonScript extends Script
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::WHEN_GAME_PAD_BUTTON_SCRIPT;

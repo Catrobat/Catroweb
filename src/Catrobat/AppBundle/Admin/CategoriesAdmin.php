@@ -10,12 +10,29 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+
+/**
+ * Class CategoriesAdmin
+ * @package Catrobat\AppBundle\Admin
+ */
 class CategoriesAdmin extends AbstractAdmin
 {
+  /**
+   * @var string
+   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_categoriesadmin';
+
+  /**
+   * @var string
+   */
   protected $baseRoutePattern = 'categories';
 
-  // Fields to be shown on create/edit forms
+
+  /**
+   * @param FormMapper $formMapper
+   *
+   * Fields to be shown on create/edit forms
+   */
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
@@ -33,12 +50,21 @@ class CategoriesAdmin extends AbstractAdmin
       ->add('order', IntegerType::class, ['label' => 'Order']);
   }
 
-  // Fields to be shown on filter forms
+  /**
+   * @param DatagridMapper $datagridMapper
+   *
+   * Fields to be shown on filter forms
+   */
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
   }
 
-  // Fields to be shown on lists
+
+  /**
+   * @param ListMapper $listMapper
+   *
+   * Fields to be shown on lists
+   */
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper

@@ -109,11 +109,17 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
     return 1;
   }
 
+  /**
+   * @return string
+   */
   public function getUniqueKey()
   {
     return sprintf("ScratchProgramRemixRelation(%d, %d)", $this->scratch_parent_id, $this->catrobat_child_id);
   }
 
+  /**
+   * @return string
+   */
   public function __toString()
   {
     return "(Scratch: #" . $this->scratch_parent_id . ", Catrobat: #" . $this->catrobat_child_id . ")";

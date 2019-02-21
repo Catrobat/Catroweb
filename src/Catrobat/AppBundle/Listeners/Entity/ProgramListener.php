@@ -9,17 +9,37 @@ use Catrobat\AppBundle\StatusCode;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Symfony\Bridge\Monolog\Logger;
 
+/**
+ * Class ProgramListener
+ * @package Catrobat\AppBundle\Listeners\Entity
+ */
 class ProgramListener
 {
+  /**
+   * @var FacebookPostService
+   */
   private $facebook_post_service;
+  /**
+   * @var Logger
+   */
   private $logger;
 
+  /**
+   * ProgramListener constructor.
+   *
+   * @param        $facebook_post_service
+   * @param Logger $logger
+   */
   public function __construct($facebook_post_service, Logger $logger)
   {
     $this->facebook_post_service = $facebook_post_service;
     $this->logger = $logger;
   }
 
+  /**
+   * @param Program            $program
+   * @param PreUpdateEventArgs $eventArgs
+   */
   public function preUpdate(Program $program, PreUpdateEventArgs $eventArgs)
   {
     $fb_post_id = $program->getFbPostId();
@@ -36,11 +56,13 @@ class ProgramListener
         {
           $eventArgs->getEntity()->setFbPostId('');
           $eventArgs->getEntity()->setFbPostUrl('');
-          $eventArgs->getEntityManager()->getUnitOfWork()->recomputeSingleEntityChangeSet($eventArgs->getEntityManager()->getClassMetadata('Catrobat\AppBundle\Entity\Program'), $eventArgs->getEntity());
+          $eventArgs->getEntityManager()->getUnitOfWork()->recomputeSingleEntityChangeSet(
+            $eventArgs->getEntityManager()->getClassMetadata(Program::class), $eventArgs->getEntity());
         }
-      } catch (Exception $e)
+      } catch (\Exception $e)
       {
-        $this->logger->error('ProgramListener->preUpdate: FbPostId[' . $fb_post_id . '], Message[' . $e->getMessage() . ']');
+        $this->logger->error(
+          'ProgramListener->preUpdate: FbPostId[' . $fb_post_id . '], Message[' . $e->getMessage() . ']');
       }
     }
   }

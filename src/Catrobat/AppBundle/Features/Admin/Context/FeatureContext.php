@@ -2,7 +2,7 @@
 
 namespace Catrobat\AppBundle\Features\Admin\Context;
 
-use Behat\Behat\Context\CustomSnippetAcceptingContext;
+
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\MinkExtension\Context\MinkContext;
@@ -28,8 +28,7 @@ use PHPUnit\Framework\Assert;
 /**
  * Feature context.
  */
-class FeatureContext extends MinkContext implements KernelAwareContext,
-  CustomSnippetAcceptingContext
+class FeatureContext extends MinkContext implements KernelAwareContext
 {
   /**
    * @var KernelInterface
@@ -41,12 +40,33 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
    */
   private $symfony_support;
 
+  /**
+   * @var string|string[]|null
+   */
   private $screenshots_directory;
+  /**
+   * @var bool
+   */
   private $use_real_oauth_javascript_code = false;
+  /**
+   * @var array
+   */
   private $headers = [];
+  /**
+   * @var array
+   */
   private $request_parameters = [];
+  /**
+   * @var string
+   */
   private $hostname = "localhost";
+  /**
+   * @var bool
+   */
   private $secure = false;
+  /**
+   * @var array
+   */
   private $files = [];
 
   const AVATAR_DIR = './testdata/DataFixtures/AvatarImages/';
@@ -300,6 +320,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
    * @param $config
    *
    * @return \Catrobat\AppBundle\Entity\ProgramDownloads
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function insertProgramDownloadStatistics($program, $config)
   {
@@ -308,7 +330,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
 
   /**
    *
-   * @return \Catrobat\AppBundle\Entity\User
+   * @return User
    */
   public function getDefaultUser()
   {
@@ -350,6 +372,8 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
    * @param $config
    *
    * @return Program
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function insertProgram($user, $config)
   {
@@ -467,6 +491,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
   /**
    * @Given /^there are program download statistics:$/
    * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereAreProgramDownloadStatistics(TableNode $table)
   {
@@ -487,15 +514,6 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
     }
   }
 
-  /**
-   * @Given /^I am a valid admin$/
-   */
-  public function iAmAValidAdmin()
-  {
-    $this->getDefaultUser([
-      "role" => "ROLE_ADMIN",
-    ]);
-  }
 
   /**
    * @Given /^I activate the Profiler$/
@@ -927,7 +945,11 @@ class FeatureContext extends MinkContext implements KernelAwareContext,
 
   /**
    * @Given /^there are programs:$/
+   *
    * @param TableNode $table
+   *
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function thereArePrograms(TableNode $table)
   {

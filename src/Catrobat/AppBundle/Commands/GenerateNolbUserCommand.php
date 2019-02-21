@@ -2,7 +2,6 @@
 
 namespace Catrobat\AppBundle\Commands;
 
-use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,18 +9,40 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Doctrine\ORM\EntityManager;
 use Catrobat\AppBundle\Commands\Helpers\ConsoleProgressIndicator;
 
+
+/**
+ * Class GenerateNolbUserCommand
+ * @package Catrobat\AppBundle\Commands
+ */
 class GenerateNolbUserCommand extends ContainerAwareCommand
 {
+  /**
+   * @var EntityManager
+   */
   private $em;
+  /**
+   * @var string
+   */
   private $charset = "abcdefghijklmnopqrstuvwxyz";
+  /**
+   * @var int
+   */
   private $password_length = 6;
 
+  /**
+   * GenerateNolbUserCommand constructor.
+   *
+   * @param EntityManager $em
+   */
   public function __construct(EntityManager $em)
   {
     parent::__construct();
     $this->em = $em;
   }
 
+  /**
+   *
+   */
   protected function configure()
   {
     $this->setName('catrobat:nolb-user:generate')
@@ -31,6 +52,12 @@ class GenerateNolbUserCommand extends ContainerAwareCommand
       ->addArgument('end', InputArgument::REQUIRED, 'Number where to stop');
   }
 
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   *
+   * @return int|void|null
+   */
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $identifier = $input->getArgument('identifier');

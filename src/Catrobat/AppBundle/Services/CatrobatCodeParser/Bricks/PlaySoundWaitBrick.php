@@ -4,10 +4,20 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks;
 
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 
+/**
+ * Class PlaySoundWaitBrick
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Bricks
+ */
 class PlaySoundWaitBrick extends Brick
 {
+  /**
+   * @var
+   */
   private $sound_file_name;
 
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::PLAY_SOUND_WAIT_BRICK;
@@ -26,6 +36,9 @@ class PlaySoundWaitBrick extends Brick
     $this->setImgFile(Constants::SOUND_BRICK_IMG);
   }
 
+  /**
+   * @return mixed
+   */
   public function getSoundFileName()
   {
     return $this->sound_file_name;

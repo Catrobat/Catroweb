@@ -23,20 +23,43 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Catrobat\AppBundle\Entity\GameJamRepository;
 use Catrobat\AppBundle\Exceptions\Upload\NoGameJamException;
 
-
+/**
+ * Class UploadController
+ * @package Catrobat\AppBundle\Controller\Api
+ */
 class UploadController
 {
+
+  /**
+   * @var UserManager
+   */
   private $usermanager;
 
+  /**
+   * @var TokenStorage
+   */
   private $tokenstorage;
 
+  /**
+   * @var ProgramManager
+   */
   private $programmanager;
 
+  /**
+   * @var GameJamRepository
+   */
   private $gamejamrepository;
 
+  /**
+   * @var TokenGenerator
+   */
   private $tokengenerator;
 
+  /**
+   * @var TranslatorInterface
+   */
   private $translator;
+
 
   /**
    * UploadController constructor.
@@ -67,6 +90,7 @@ class UploadController
    * @param Request $request
    *
    * @return JsonResponse
+   * @throws \Exception
    */
   public function uploadAction(Request $request)
   {
@@ -75,12 +99,14 @@ class UploadController
 
 
   /**
-   * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"}, methods={"POST"})
+   * @Route("/api/gamejam/submit.json", name="catrobat_api_gamejam_submit", defaults={"_format": "json"},
+   *   methods={"POST"})
    *
    * @param Request $request
    *
-   * @throws NoGameJamException
    * @return JsonResponse
+   * @throws \Doctrine\ORM\NonUniqueResultException
+   * @throws \Exception
    */
   public function submitAction(Request $request)
   {
@@ -98,9 +124,14 @@ class UploadController
    * @param null    $gamejam
    *
    * @return JsonResponse
+   * @throws \Exception
    */
   private function processUpload(Request $request, $gamejam = null)
   {
+    /**
+     * @var $file File
+     * @var $user User
+     */
 
     if ($request->files->count() !== 1)
     {
@@ -111,10 +142,6 @@ class UploadController
       throw new MissingChecksumException();
     }
 
-    /**
-     * @var $file File
-     * @var $user User
-     */
     $file = array_values($request->files->all())[0];
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum'))
     {
@@ -143,9 +170,6 @@ class UploadController
     }
     else
     {
-      /**
-       * @var $user User
-       */
       foreach ($user->getFollowers() as $follower)
       {
         $notification_service = $request->get("catro_notification_service");
@@ -163,11 +187,12 @@ class UploadController
     return JsonResponse::create($response);
   }
 
+
   /**
-   * @param $gamejam
-   * @param $user
-   * @param $program
-   * @param $request
+   * @param $gamejam GameJam
+   * @param $user    User
+   * @param $program Program
+   * @param $request Request
    *
    * @return mixed
    */
@@ -187,6 +212,7 @@ class UploadController
     return $url;
   }
 
+
   /**
    * @param       $message
    * @param array $parameters
@@ -198,8 +224,9 @@ class UploadController
     return $this->translator->trans($message, $parameters, 'catroweb');
   }
 
+
   /**
-   * @param $request
+   * @param $request Request
    *
    * @return string
    */
@@ -214,12 +241,12 @@ class UploadController
     return $languageCode;
   }
 
+
   /**
-   * @param Request $request
-   * @param         $gamejam
-   * @param         $user
-   * @param         $program
-   * @param         $response
+   * @param $request  Request
+   * @param $gamejam  GameJam
+   * @param $user     User
+   * @param $program  Program
    *
    * @return mixed
    */
@@ -249,10 +276,11 @@ class UploadController
     return $response;
   }
 
+
   /**
-   * @param  $request
-   * @param  $user
-   * @param  $gamejam
+   * @param  $request Request
+   * @param  $user User
+   * @param  $gamejam GameJam
    *
    * @return array
    */

@@ -5,8 +5,15 @@ namespace Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\Constants;
 use Catrobat\AppBundle\Services\CatrobatCodeParser\FormulaResolver;
 
+/**
+ * Class WhenConditionScript
+ * @package Catrobat\AppBundle\Services\CatrobatCodeParser\Scripts
+ */
 class WhenConditionScript extends Script
 {
+  /**
+   *
+   */
   protected function create()
   {
     $this->type = Constants::WHEN_CONDITION_SCRIPT;

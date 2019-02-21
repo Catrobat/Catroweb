@@ -5,8 +5,16 @@ namespace Catrobat\AppBundle\Forms;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
 
+/**
+ * Class FeaturedImageConstraintValidator
+ * @package Catrobat\AppBundle\Forms
+ */
 class FeaturedImageConstraintValidator extends ConstraintValidator
 {
+  /**
+   * @param mixed      $value
+   * @param Constraint $constraint
+   */
   public function validate($value, Constraint $constraint)
   {
     if ($value != null)
