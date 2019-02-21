@@ -2,6 +2,8 @@ default:
     formatters:
         pretty:   false
         progress: true
+        html:
+            output_path: "%paths.base%/testreports/behat/htmlTestReport"
         
     gherkin:
         filters:
@@ -26,6 +28,14 @@ default:
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
+
+        emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+              name: html
+              renderer: Twig
+              file_name: testreport
+              print_args: true
+              print_outp: true
+              loop_break: true
 
     suites:
         api:
@@ -103,14 +113,3 @@ wip:
     gherkin:
         filters:
             tags: "@wip"
-
-apidoc:
-    gherkin:
-        filters:
-            tags: "@apidoc"
-    extensions:
-        chartinger\Behat\TwigReportExtension\Extension:
-            templates:
-                file: default.twig
-            output:
-                file: "%paths.base%/testreports/behat/index.html"
