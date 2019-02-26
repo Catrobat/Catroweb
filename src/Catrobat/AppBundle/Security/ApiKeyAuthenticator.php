@@ -48,9 +48,17 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     $upload_token = $request->request->get('token');
     $username = $request->request->get('username');
 
+
     if (!$upload_token)
     {
-      throw new BadCredentialsException('No API key found');
+      throw new BadCredentialsException(
+        $this->translator->trans("errors.token", [], 'catroweb'));
+    }
+
+    if (!$username)
+    {
+      throw new BadCredentialsException(
+        $this->translator->trans("errors.username.blank", [], 'catroweb'));
     }
 
     return new PreAuthenticatedToken($username, $upload_token, $providerKey);
@@ -71,7 +79,8 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     $user = $userProvider->loadUserByUsername($token->getUsername());
     if (!$user)
     {
-      throw new AuthenticationException('No user found');
+      throw new AuthenticationException(
+        $this->translator->trans("errors.username.not_exists", [], 'catroweb'));
     }
 
     if ($token->getCredentials() === $user->getUploadToken())
@@ -83,7 +92,8 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     }
     else
     {
-      throw new AuthenticationException('Upload Token auth failed.');
+      throw new AuthenticationException(
+        $this->translator->trans("errors.uploadTokenAuthFailed", [], 'catroweb'));
     }
   }
 
@@ -106,17 +116,8 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
-    return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR, 'answer' => $this->trans('errors.token'), 'preHeaderMessages' => ''], Response::HTTP_UNAUTHORIZED);
-  }
-
-  /**
-   * @param       $message
-   * @param array $parameters
-   *
-   * @return string
-   */
-  private function trans($message, $parameters = [])
-  {
-    return $this->translator->trans($message, $parameters, 'catroweb');
+    return JsonResponse::create(['statusCode' => StatusCode::LOGIN_ERROR,
+                                 'answer' => $exception->getMessage(), 'preHeaderMessages' => ""],
+      Response::HTTP_UNAUTHORIZED);
   }
 }

@@ -39,7 +39,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
+      {"statusCode":601,"answer":"There is no user with name \"INVALID\".","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with an invalid token should result in an error
@@ -48,7 +48,7 @@ Feature: Upload a program
     When I POST these parameters to "/pocketcode/api/upload/upload.json"
     Then I should get the json object:
       """
-      {"statusCode":601,"answer":"Authentication of device failed: invalid auth-token!","preHeaderMessages":""}
+      {"statusCode":601,"answer":"Upload Token auth failed.","preHeaderMessages":""}
       """
 
   Scenario: trying to upload with a missing token should result in an error

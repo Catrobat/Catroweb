@@ -44,6 +44,7 @@ class UserAuthenticator
   {
     $user = $this->user_provider->loadUserByUsername($username);
 
-    return $this->authentication_manager->authenticate(new UsernamePasswordToken($user->getUsername(), $password, 'main'));
+    return $this->authentication_manager->authenticate(
+      new UsernamePasswordToken($user->getUsername(), $password, 'main'));
   }
 }
