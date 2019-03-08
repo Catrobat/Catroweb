@@ -83,7 +83,8 @@ That's it. You can start testing.
 
 2. You need to install following: 
   ```
-  sudo apt-get install php php7.2-ldap php7.2-cli php7.2-curl php7.2-sqlite3 php7.2-intl php-apcu mysql-server apache2 php-imagick php-mbstring php-gettext git curl npm grunt sass phpmyadmin
+  sudo apt-get install php php7.2-ldap php7.2-cli php7.2-curl php7.2-sqlite3 php7.2-intl php-apcu mysql-server apache2 php-imagick php-mbstring php-gettext git curl npm ruby ruby-dev grunt php-xdebug phpmyadmin
+  sudo gem install sass
   ```
 
 3. Configure and set up Mysql and Phpmyadmin: 
@@ -126,8 +127,9 @@ That's it. You can start testing.
   Update your local parameters.yml files (in config/packages, config/packages/dev/) with the one you can find [here.](https://confluence.catrob.at/display/CATWEB/Parameters)
   !! Use your database password !!! when updating the parameters.yml file
   ```
-  php composer.phar install
   npm install
+  sudo npm install grunt
+  php composer.phar install
   php bin/console catrobat:reset --hard
   grunt
   ```
@@ -292,9 +294,9 @@ If everything works continue. If not, check what is not working, fix it or ask s
   git checkout dev-master
   git pull
   ```
- 2. create new branch "WEB-XXX_name_of_ticket"
+ 2. create new branch "SHARE-XXX_name_of_ticket"
   ```
-  git checkout -b "WEB-XXX_name_of_ticket"
+  git checkout -b "SHARE-XXX_name_of_ticket"
   ```
  3. Code your work for the ticket
 
@@ -309,7 +311,7 @@ If everything works continue. If not, check what is not working, fix it or ask s
     ```
  7. go to your branch and rebase with dev-master
   ```
-  git checkout "WEB-XXX_name_of_ticket"
+  git checkout "SHARE-XXX_name_of_ticket"
   git rebase dev-master -i"
   ```
 8.  Squash your commits, there must be only 1 commit! (XX is the amount of your commits)
@@ -322,7 +324,7 @@ If everything works continue. If not, check what is not working, fix it or ask s
 
 ## Git Commit Message Layout
 must read: [How to Write a Git Commit Message, by Chirs Beams](http://chris.beams.io/posts/git-commit/)
-> Line 1: WEB-XXX Fitting Title (< 50 chars)
+> Line 1: SHARE-XXX Fitting Title (< 50 chars)
 > Line 2: empty line 
 > Lines 3 - X: actual commit message; first focusing on WHY then focusing on WHAT you have changed.
 
