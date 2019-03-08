@@ -1,39 +1,56 @@
-/web/bundles/
-/app/bootstrap.php.cache
-/app/config/parameters.yml
-/app/config/parameters_dev.yml
-/app/config/parameters_test.yml
-/var/*
-/build/
-/vendor/
-/composer.phar
-/coverage
-/phpspec.yml
+### Catroweb ###
 .idea/
-app/config/deploy.rb
-crowdin.yaml
-crowdin-cli.jar
-/screens
-/output
-/behat.yml
-/.externalToolBuilders
-/.settings
-/.buildpath
-/.rsync_cache
-Catroweb.iml
-Catroweb-Symfony.iml
-.idea/vcs.xml
-/node_modules/
-.project
-# Created by https://www.gitignore.io/api/sass
+composer.phar
+behat.yml
+phpspec.yml
+phpunit.xml.dist
+
+### backups ###
+backups/**
+
+### config ###
+config/packages/parameters.yml
+config/packages/dev/parameters.yml
+config/packages/test/parameters.yml
 
 ### Sass ###
 .sass-cache/
 *.css.map
 
+### Node ###
+node_modules/
 
-# End of https://www.gitignore.io/api/sass
-/web/bootstrap_vendor
-crowdin.yml
+### public ###
+public/bootstrap_vendor
+public/bundles
+public/compiled
+public/css
+public/font_awesome_wrapper
+public/js
 
-x_*.sh
+### tests ###
+tests/behat/sqlite/**
+tests/style-report/**
+!tests/style-report/catroweb.xml
+tests/testreports/behat/**
+tests/testreports/coverage/**
+tests/testreports/screens/**
+
+### var ###
+var/cache/**
+var/log/**
+
+### vendor ###
+vendor/
+
+
+
+
+
+
+
+
+
+
+
+

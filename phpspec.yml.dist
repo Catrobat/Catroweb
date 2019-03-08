@@ -1,11 +1,16 @@
 formatter.name: pretty
+
 extensions:
   PhpSpec\CatrobatExtension\Extension: ~
-  # PhpSpec\Extension\CodeCoverageExtension: ~
   LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~
 
 code_coverage:
     whitelist:
-      - "src/Catrobat/AppBundle/"
+      - "src/Catrobat/"
     output:
-      html: ./testreports/coverage
+      html: ./tests/testreports/coverage
+
+
+suites:
+    default:
+        spec_prefix: tests\PhpSpec\spec

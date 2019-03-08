@@ -2,7 +2,7 @@
 
 namespace Deployer;
 
-require 'recipe/symfony.php';
+require 'recipe/symfony3.php';
 
 
 // Project name
@@ -17,31 +17,35 @@ set('symfony_env', 'prod');
 // Symfony shared dirs
 set('shared_dirs',
   [
-    'var/logs',
+    'var/log',
     'var/sessions',
-    'web/resources',
+    'public/resources',
     'backups'
   ]);
 
 // Shared files between deploys
 add('shared_files',
   [
-    'app/config/parameters.yml',
-    'app/config/parameters_dev.yml', // only dev!
+    'config/packages/parameters.yml',
+    'config/packages/dev/parameters.yml', // only dev!
   ]);
 
 // Symfony writable dirs
 set('writable_dirs',
   [
     'var/cache',
-    'var/logs',
+    'var/log',
     'var/sessions',
     'backups',
   ]);
 
+
+
 // Symfony executable and variable directories
 set('bin_dir', 'bin');
 set('var_dir', 'var');
+set('web_dir', 'public');
+set('public_dir', 'public');
 
 set('allow_anonymous_stats', false);
 
@@ -49,14 +53,34 @@ set('allow_anonymous_stats', false);
 host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'php7Iwillsaveyou')
+  ->set('branch', 'SHARE-13_Symfony_Flex')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
 // Tasks
-task('build', function() {
-  run('cd {{release_path}} && build');
-});
+/**
+ * Main task
+ */
+task('deploy', [
+  'deploy:info',
+  'deploy:prepare',
+  'deploy:lock',
+  'deploy:release',
+  'deploy:update_code',
+  'deploy:clear_paths',
+  'deploy:create_cache_dir',
+  'deploy:shared',
+  'deploy:assets',
+  'deploy:vendors',
+  //'deploy:assets:install',
+  'deploy:assetic:dump',
+  'deploy:cache:clear',
+  'deploy:cache:warmup',
+  'deploy:writable',
+  'deploy:symlink',
+  'deploy:unlock',
+  'cleanup',
+])->desc('Deploy your project');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');

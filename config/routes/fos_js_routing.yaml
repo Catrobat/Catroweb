@@ -1,0 +1,35 @@
+#fos_js_routing:
+#    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+translate_word:
+    path:  /translate/{word}/{array}/{domain}
+    controller: App\Catrobat\Controller\Web\TranslationController:translateAction
+    defaults:
+        array: ""
+        domain: "catroweb"
+    options:
+        expose: true
+
+translate_choice:
+    path:  /transChoice/{word}/{count}/{array}/{domain}
+    controller: App\Catrobat\Controller\Web\TranslationController:transChoiceAction
+    defaults:
+        array: ""
+        domain: "catroweb"
+    options:
+        expose: true
+
+edit_program_description:
+    path:  /editProgramDescription/{id}/{newDescription}
+    controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription
+    options:
+        expose: true
+
+api_media_lib_category:
+    path:  /api/media/category/{category}/json
+    controller: App\Catrobat\Controller\Api\MediaPackageController:getMediaFilesForCategory
+    options:
+        expose: true

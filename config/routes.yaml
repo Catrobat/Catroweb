@@ -1,0 +1,34 @@
+# This file is the entry point to configure your own HTTP routes.
+# Files in the routes/ subdirectory configure the routes for your dependencies.
+
+# ===== Themes and flavors =====
+catrobat_web_index:
+  path: /
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: index
+    permanent: false
+    flavor: "pocketcode"
+
+catroweb_flavored:
+  resource: "routing_flavored.yml"
+  prefix:   /{flavor}/
+
+# ===== FOS User Bundle =====
+fos_user:
+  resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+  prefix: /{flavor}
+
+fos_user_security_login:
+  path: /{flavor}/login
+  defaults:  { _controller: fos_user.security.controller:loginAction }
+
+#redirect the user after a successfully registration
+fos_user_registration_confirmed:
+  path: /{flavor}/profile
+
+# ===== Logout =====
+sonata_user_admin_security_logout:
+  path: /{flavor}/logout
+  defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
+

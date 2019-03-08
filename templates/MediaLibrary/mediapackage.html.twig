@@ -1,0 +1,49 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/medialib.css') }}" media="screen"/>
+{% endblock %}
+
+{% block sidebar_ul %}
+  <hr>
+  {% for category in categories %}
+    <li class="nav-item" id="menu-mediacat-{{ category.displayID }}" style="display: none">
+      <a class="nav-link" href="#category-{{ category.displayID }}">{{ category.name }}</a>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block body %}
+  <div id="content" class="medialib-content">
+    <div id="thumbsize-control"><span>{{ 'media-packages.thumb-size.description' | trans({}, "catroweb") }}</span>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="thumbsize" value="sm"
+                 autocomplete="off"> {{ 'media-packages.thumb-size.sm' | trans({}, "catroweb") }}
+        </label>
+        <label class="btn btn-secondary active">
+          <input type="radio" name="thumbsize" value="md" autocomplete="off"
+                 checked> {{ 'media-packages.thumb-size.md' | trans({}, "catroweb") }}
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="thumbsize" value="lg"
+                 autocomplete="off"> {{ 'media-packages.thumb-size.lg' | trans({}, "catroweb") }}
+        </label>
+      </div>
+    </div>
+
+    {% for category in categories %}
+      <div id="category-{{ category.displayID }}" style="display: none" class="category">
+        <h1>{{ category.name }}</h1>
+        <div class="files"></div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('compiled/js/MediaLib.js') }}"></script>
+  <script>
+    new MediaLib({{ categories|json_encode|raw }}, "{{ flavor }}", "{{ asset('resources/mediapackage') }}");
+  </script>
+{% endblock %}

@@ -1,0 +1,17 @@
+monolog:
+    channels: ['upload', 'download_stats']
+    handlers:
+        upload:
+            type: stream
+            path: "%kernel.logs_dir%/upload.log"
+            channels: [upload]
+        main:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        download_stats:
+            type:  rotating_file
+            path:  "%kernel.logs_dir%/download_stats/download_stats.log"
+            level: debug
+            max_files: 20
+            channels: [download_stats]

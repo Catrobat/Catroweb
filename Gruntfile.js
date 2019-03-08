@@ -1,182 +1,204 @@
-let jsBaseSrc = ['web/js/base/*.js', 'web/js/globalPlugins/*.js'];
-let jsLoginSrc = ['web/js/social/*.js'];
-let jsCustomSrc = 'web/js/custom';
-let jsAnalyticsSrc = 'web/js/analytics';
-let jsLocalPluginSrc = 'web/js/localPlugins';
-let themes = ['pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school'];
 
-let sassconfig = {};
+// -------------------------------------------------------------------------------------------------
+// Change assets/public dir here:
+//
+let assetsDir = 'assets'
+let publicDir = 'public' // 'public'
 
-for (index = 0; index < themes.length; index++)
-{
-  let theme = themes[index];
-  
-  let base_css_path = "web/css/" + theme + "/base.css";
-  
-  let base_file_config = {};
-  base_file_config[base_css_path] = ["web/css/themes/" + theme + "/" + theme +".scss", "web/css/plugins/*" ];
-  
+// -------------------------------------------------------------------------------------------------
+// Defining JavaScript paths:
+//
+let jsBaseSrc = [ assetsDir + '/js/base/*.js', assetsDir + '/js/globalPlugins/*.js' ]
+let jsLoginSrc = [ assetsDir + '/js/social/*.js' ]
+let jsCustomSrc = assetsDir + '/js/custom'
+let jsAnalyticsSrc = assetsDir + '/js/analytics'
+let jsLocalPluginSrc = assetsDir + '/js/localPlugins'
+
+// -------------------------------------------------------------------------------------------------
+// Defining CSS paths for all themes + admin:
+//
+let themes = [ 'pocketcode', 'pocketalice', 'pocketgalaxy', 'phirocode', 'luna', 'create@school' ]
+let sassconfig = {}
+
+for (let index = 0; index < themes.length; index++) {
+  let theme = themes[index]
+  let baseCssPath = publicDir + '/css/' + theme + '/base.css'
+  let baseFileConfig = {}
+  baseFileConfig[baseCssPath] = [ assetsDir + '/css/themes/' + theme + '/' + theme + '.scss' ]
   sassconfig[theme] =
-    {
-      options: {
-        loadPath    : ["web/css/base", "web/css/themes/" + theme],
-        style: "compressed",
-        sourcemap: 'none'
+  {
+    options: {
+      loadPath: [ assetsDir + '/css/base', assetsDir + '/css/themes/' + theme ],
+      style: 'compressed',
+      sourcemap: 'none'
+    },
+    files: [
+      baseFileConfig,
+      // copy plugins
+      {
+        expand: true,
+        cwd: assetsDir + '/css/plugins/',
+        src: ['*'],
+        dest: publicDir + '/css/plugins/',
+        extDot: 'first'
       },
-      files  : [
-        base_file_config,
-        {
-          expand: true,
-          cwd   : 'web/css/custom/',
-          src   : ['**/*.scss'],
-          dest  : 'web/css/' + theme + '/',
-          ext   : '.css',
-          extDot: 'first'
-        }
-
-      ]
-    };
+      // every css/custom file gets a separate file
+      {
+        expand: true,
+        cwd: assetsDir + '/css/custom/',
+        src: ['**/*.scss'],
+        dest: publicDir + '/css/' + theme + '/',
+        ext: '.css',
+        extDot: 'first'
+      }
+    ]
+  }
 }
 
-let admin_css_path = "web/css/admin/admin.css";
-let admin_file_config = {};
-admin_file_config[admin_css_path] = ["web/css/plugins/*"];
+let adminCssPath = publicDir + '/css/admin/admin.css'
+let adminFileConfig = {}
+adminFileConfig[adminCssPath] = [ assetsDir + '/css/plugins/*' ]
 
 sassconfig['admin'] = {
-  files  : [
-    admin_file_config,
+  files: [
+    adminFileConfig,
     {
       expand: true,
-      cwd   : 'web/css/admin/',
-      src   : ['**/*.scss'],
-      dest  : 'web/css/admin/',
-      ext   : '.css',
+      cwd: assetsDir + '/css/admin/',
+      src: ['**/*.scss'],
+      dest: publicDir + '/css/admin/',
+      ext: '.css',
       extDot: 'first'
     }
   ]
-};
+}
 
-module.exports = function(grunt)
-{
-  require('jit-grunt')(grunt);
-  
+// -------------------------------------------------------------------------------------------------
+// Register all grunt tasks here:
+//
+module.exports = function (grunt) {
+  require('jit-grunt')(grunt)
   grunt.initConfig({
-    pkg   : grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
     copy: {
       bootstrap_vendor: {
         expand: true,
         cwd: 'node_modules/bootstrap/',
         src: '**',
-        dest: 'web/bootstrap_vendor/'
+        dest: publicDir + '/bootstrap_vendor/'
       },
       font_awesome: {
         expand: true,
         cwd: 'node_modules/@fortawesome/',
         src: '**',
-        dest: 'web/font_awesome_wrapper/'
+        dest: publicDir + '/font_awesome_wrapper/'
       },
       font_awesome_webfonts: {
         expand: true,
-        cwd: 'web/font_awesome_wrapper/fontawesome-free/webfonts',
+        cwd: assetsDir + '/font_awesome_wrapper/fontawesome-free/webfonts',
         src: '**',
-        dest: 'web/webfonts/'
+        dest: publicDir + '/webfonts/'
       },
       clipboard_js: {
         expand: true,
         cwd: 'node_modules/clipboard/dist/',
         src: 'clipboard.min.js',
-        dest: 'web/js/localPlugins/'
+        dest: publicDir + '/js/localPlugins/'
       },
       bootstrap_js: {
         src: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
-        dest: 'web/compiled/bootstrap/bootstrap.min.js'
+        dest: publicDir + '/compiled/bootstrap/bootstrap.min.js'
       },
       popper_js: {
-        src:'node_modules/popper.js/dist/popper.js',
-        dest: 'web/compiled/popper/popper.js'
+        src: 'node_modules/popper.js/dist/popper.js',
+        dest: publicDir + '/compiled/popper/popper.js'
+      },
+      jquery_ui_js: {
+        src: 'node_modules/popper.js/dist/popper.js',
+        dest: publicDir + '/compiled/popper/popper.js'
       }
     },
     concat: {
-      options     : {
+      options: {
         separator: ';',
-        banner   : '/*\n  Generated File by Grunt\n  Sourcepath: web/js\n*/\n'
+        banner: '/*\n  Generated File by Grunt\n  Sourcepath: assets/js\n*/\n'
       },
-      base        : {
-        src : jsBaseSrc,
-        dest: 'web/compiled/js/<%= pkg.baseJSName %>.js'
+      base: {
+        src: jsBaseSrc,
+        dest: publicDir + '/compiled/js/<%= pkg.baseJSName %>.js'
       },
-      login       : {
-        src : jsLoginSrc,
-        dest: 'web/compiled/js/<%= pkg.loginJSName %>.js'
+      login: {
+        src: jsLoginSrc,
+        dest: publicDir + '/compiled/js/<%= pkg.loginJSName %>.js'
       },
       localPlugins: {
         expand: true,
-        cwd   : jsLocalPluginSrc,
-        src   : '**/*.js',
-        dest  : 'web/compiled/js/'
+        cwd: jsLocalPluginSrc,
+        src: '**/*.js',
+        dest: publicDir + '/compiled/js/'
       },
-      custom      : {
+      custom: {
         expand: true,
-        cwd   : jsCustomSrc,
-        src   : '**/*.js',
-        dest  : 'web/compiled/js/'
+        cwd: jsCustomSrc,
+        src: '**/*.js',
+        dest: publicDir + '/compiled/js/'
       },
-      analytics   : {
+      analytics: {
         expand: true,
-        cwd   : jsAnalyticsSrc,
-        src   : '**/*.js',
-        dest  : 'web/compiled/js/'
+        cwd: jsAnalyticsSrc,
+        src: '**/*.js',
+        dest: publicDir + '/compiled/js/'
       },
-      jquery      : {
+      jquery: {
         expand: true,
-        cwd   : 'node_modules/jquery/dist',
-        src   : 'jquery.min.js',
-        dest  : 'web/compiled/bootstrap/'
+        cwd: 'node_modules/jquery/dist',
+        src: 'jquery.min.js',
+        dest: publicDir + '/compiled/bootstrap/'
       },
-      css : {
+      css: {
         expand: true,
         cwd: ''
       }
     },
     uglify: {
-      options      : {
+      options: {
         mangle: false
       },
       compiledFiles: {
         files: [
           {
             expand: true,
-            cwd   : 'web/compiled/js',
-            src   : '**/*.js',
-            dest  : 'web/compiled/min'
+            cwd: publicDir + '/compiled/js',
+            src: '**/*.js',
+            dest: publicDir + '/compiled/min'
           }
         ]
       }
     },
-    sass  : sassconfig,
-    watch : {
+    sass: sassconfig,
+    watch: {
       options: {
         nospawn: true
       },
-      styles : {
-        files  : ['web/css/**/*.scss'],
-        tasks  : ['sass'],
+      styles: {
+        files: [publicDir + '/css/**/*.scss'],
+        tasks: ['sass'],
         options: {
           nospawn: true
         }
       },
       scripts: {
-        files  : ['web/js/**/*.js'],
-        tasks  : ['concat', 'uglify'],
+        files: [publicDir + '/js/**/*.js'],
+        tasks: ['concat', 'uglify'],
         options: {
           nospawn: true
         }
       }
     }
-  });
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify-es');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.registerTask('default', ['copy','concat', 'sass', 'uglify']);
-};
+  })
+  grunt.loadNpmTasks('grunt-contrib-copy')
+  grunt.loadNpmTasks('grunt-contrib-concat')
+  grunt.loadNpmTasks('grunt-contrib-uglify-es')
+  grunt.loadNpmTasks('grunt-contrib-sass')
+  grunt.registerTask('default', ['copy', 'concat', 'sass', 'uglify'])
+}

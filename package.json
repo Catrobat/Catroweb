@@ -6,8 +6,8 @@
   "description": "Catroweb =========",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "standard 'web/js/base/*'",
-    "fix": "standard --fix 'web/js/base/*'"
+    "test": "standard 'public/js/base/*'",
+    "fix": "standard --fix 'public/js/base/*'"
   },
   "repository": {
     "type": "git",

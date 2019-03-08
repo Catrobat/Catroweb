@@ -1,0 +1,1319 @@
+parameters:
+  catrobat.pubdir:                "%kernel.project_dir%/public/"
+  catrobat.resources.dir:         "%kernel.project_dir%/public/resources/"
+  catrobat.file.extract.dir:      "%kernel.project_dir%/public/resources/extract/"
+  catrobat.file.extract.path:     "resources/extract/"
+  catrobat.file.storage.dir:      "%kernel.project_dir%/public/resources/programs/"
+  catrobat.file.storage.path:     "resources/programs/"
+  catrobat.upload.temp.dir:       "%catrobat.pubdir%resources/tmp/uploads/"
+  catrobat.upload.temp.path:      "resources/tmp/uploads/"
+  catrobat.template.storage.dir:  "%kernel.project_dir%/public/resources/templates/"
+  catrobat.template.storage.path: "resources/templates/"
+  catrobat.screenshot.dir:        "%catrobat.pubdir%resources/screenshots/"
+  catrobat.screenshot.path:       "resources/screenshots/"
+  catrobat.template.dir:          "%catrobat.pubdir%resources/templates/"
+  catrobat.template.path:         "resources/templates/"
+  catrobat.template.screenshot.dir:        "%catrobat.pubdir%resources/templates/screenshots/"
+  catrobat.template.screenshot.path:       "resources/templates/screenshots/"
+  catrobat.thumbnail.dir:         "%catrobat.pubdir%resources/thumbnails/"
+  catrobat.thumbnail.path:        "resources/thumbnails/"
+  catrobat.template.thumbnail.dir:         "%catrobat.pubdir%resources/templates/thumbnails/"
+  catrobat.template.thumbnail.path:        "resources/templates/thumbnails/"
+  catrobat.featuredimage.dir:     "%catrobat.pubdir%resources/featured/"
+  catrobat.featuredimage.path:    "resources/featured/"
+  catrobat.mediapackage.dir:      "%catrobat.pubdir%resources/mediapackage/"
+  catrobat.mediapackage.path:     "resources/mediapackage/"
+  catrobat.apk.dir:               "%catrobat.pubdir%resources/apk/"
+  catrobat.backup.dir:            "%kernel.project_dir%/backups/"
+  catrobat.snapshot.dir:          "%catrobat.pubdir%resources/Snapshots"
+  catrobat.translations.dir:      "%kernel.project_dir%/translations"
+  catrobat.logs.dir:              "%kernel.project_dir%/var/log/"
+  catrobat.invalidupload.dir:     "%kernel.project_dir%/src/Catrobat/Commands/invisible_programs/"
+  catrobat.max_version:           "0.999"
+  catrobat.max_description_upload_size: 4000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
+
+  ldap_role_mappings:
+    ROLE_MEDIAPACKAGE:  "Webserver-MediaPackageMaintainers"
+    ROLE_FEATURED:      "Webserver-FeaturedProgramsMaintainers"
+    ROLE_APPROVE:       "Webserver-AppApprovers"
+    ROLE_SUPER_ADMIN:   "Webserver-Administrators"
+    ROLE_GAMEJAM_ADMIN: "Webserver-GameJam-Administrators"
+
+  #      This can drastically improve DX by reducing the time to load classes
+  container.dumper.inline_class_loader: true
+
+  #      remove when updated to symfony > 4.0
+  container.autowiring.strict_mode: true
+
+services:
+
+  security.acl.permission.map:
+    class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
+
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+    # fetching services directly from the container via $container->get() won't work.
+    # The best practice is to be explicit about your dependencies anyway.
+
+  #  makes classes in src/Catrobat available to be used as services
+  #  this creates a service per class whose id is the fully-qualified class name
+  App\Catrobat\:
+    resource: '../src/Catrobat/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway -> removed them because there are errors if not
+    exclude: '../src/Catrobat/{Entity,Twig,Commands,Admin,CatrobatCode,Events,Exceptions,Features,Listeners,Requests,Responses,Services}'
+
+  # controllers are imported separately to make sure they're public
+  # and have a tag that allows actions to type-hint services
+  App\Catrobat\Controller\:
+    resource: '../src/Catrobat/Controller'
+    tags: ['controller.service_arguments']
+    public: true
+
+  apikey_authenticator:
+    class: App\Catrobat\Security\ApiKeyAuthenticator
+    arguments:
+      - "@translator"
+    public: true
+  App\Catrobat\Security\ApiKeyAuthenticator: "@apikey_authenticator"
+
+  user_authenticator:
+    class: App\Catrobat\Security\UserAuthenticator
+    arguments:
+      - "@security.user.provider.concrete.chain_provider"
+      - "@security.authentication.manager"
+    public: true
+  App\Catrobat\Security\UserAuthenticator: "@user_authenticator"
+
+  template_service:
+    class: App\Catrobat\Services\TemplateService
+    arguments:
+      - "@templatemanager"
+    public: true
+  App\Catrobat\Services\TemplateService: "@template_service"
+
+  catro_notification_service:
+    class: App\Catrobat\Services\CatroNotificationService
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    public: true
+  App\Catrobat\Services\CatroNotificationService: "@catro_notification_service"
+
+  community_statistics_service:
+    class: App\Catrobat\Services\CommunityStatisticsService
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    public: true
+  App\Catrobat\Services\CommunityStatisticsService: "@community_statistics_service"
+
+  # =========================== Repository ===========================
+
+  programrepository:
+    class: App\Repository\ProgramRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\Program
+    public: true
+  App\Repository\ProgramRepository: "@programrepository"
+
+  programlikerepository:
+    class: App\Repository\ProgramLikeRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\ProgramLike
+    public: true
+  App\Repository\ProgramLikeRepository: "@programlikerepository"
+
+  programremixrepository:
+    class: App\Repository\ProgramRemixRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\ProgramRemixRelation
+    public: true
+  App\Repository\ProgramRemixRepository: "@programremixrepository"
+
+  programremixbackwardrepository:
+    class: App\Repository\ProgramRemixBackwardRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\ProgramRemixBackwardRelation
+    public: true
+  App\Repository\ProgramRemixBackwardRepository: "@programremixbackwardrepository"
+
+  scratchprogramrepository:
+    class: App\Repository\ScratchProgramRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\ScratchProgram
+    public: true
+  App\Repository\ScratchProgramRepository: "@scratchprogramrepository"
+
+  scratchprogramremixrepository:
+    class: App\Repository\ScratchProgramRemixRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\ScratchProgramRemixRelation
+    public: true
+  App\Repository\ScratchProgramRemixRepository: "@scratchprogramremixrepository"
+
+  userlikesimilarityrelationrepository:
+    class: App\Repository\UserLikeSimilarityRelationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\UserLikeSimilarityRelation
+    public: true
+  App\Repository\UserLikeSimilarityRelationRepository: "@userlikesimilarityrelationrepository"
+
+  userremixsimilarityrelationrepository:
+    class: App\Repository\UserRemixSimilarityRelationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\UserRemixSimilarityRelation
+    public: true
+  App\Repository\UserRemixSimilarityRelationRepository: "@userremixsimilarityrelationrepository"
+
+  tagrepository:
+    class: App\Repository\TagRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\Tag
+    public: true
+  App\Repository\TagRepository: "@tagrepository"
+
+  extensionrepository:
+    class: App\Repository\ExtensionRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\Extension
+    public: true
+  App\Repository\ExtensionRepository: "@extensionrepository"
+
+  notificationrepository:
+    class: App\Repository\NotificationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\Notification
+    public: true
+  App\Repository\NotificationRepository: "@notificationrepository"
+
+  rudewordrepository:
+    class: App\Repository\RudeWordsRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\RudeWord
+    public: true
+  App\Repository\RudeWordsRepository: "@rudewordrepository"
+
+  gamejamrepository:
+    class: App\Repository\GameJamRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\GameJam
+    public: true
+  App\Repository\GameJamRepository: "@gamejamrepository"
+
+  featuredrepository:
+    class: App\Repository\FeaturedRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\FeaturedProgram
+    public: true
+  App\Repository\FeaturedRepository: "@featuredrepository"
+
+  filerepository:
+    class: App\Catrobat\Services\ProgramFileRepository
+    arguments:
+      - "%catrobat.file.storage.dir%"
+      - "%catrobat.file.storage.path%"
+      - "@filecompressor"
+      - "%catrobat.upload.temp.dir%"
+    public: true
+  App\Catrobat\Services\ProgramFileRepository: "@filerepository"
+
+  extractedfilerepository:
+    class: App\Catrobat\Services\ExtractedFileRepository
+    arguments:
+      - "%catrobat.file.extract.dir%"
+      - "%catrobat.file.extract.path%"
+      - "%catrobat.file.storage.dir%"
+      - "@fileextractor"
+      - "@programmanager"
+      - "@filerepository"
+    public: true
+  App\Catrobat\Services\ExtractedFileRepository: "@extractedfilerepository"
+
+  screenshotrepository:
+    class: App\Catrobat\Services\ScreenshotRepository
+    arguments:
+      - "%catrobat.screenshot.dir%"
+      - "%catrobat.screenshot.path%"
+      - "%catrobat.thumbnail.dir%"
+      - "%catrobat.thumbnail.path%"
+      - "%catrobat.upload.temp.dir%"
+      - "%catrobat.upload.temp.path%"
+    public: true
+
+  templatescreenshotrepository:
+    class: App\Catrobat\Services\ScreenshotRepository
+    arguments:
+      - "%catrobat.template.screenshot.dir%"
+      - "%catrobat.template.screenshot.path%"
+      - "%catrobat.template.thumbnail.dir%"
+      - "%catrobat.template.thumbnail.path%"
+      - "%catrobat.upload.temp.dir%"
+      - "%catrobat.upload.temp.path%"
+    public: true
+
+  App\Catrobat\Services\FeaturedImageRepository: "@featuredimagerepository"
+  featuredimagerepository:
+    class: App\Catrobat\Services\FeaturedImageRepository
+    arguments:
+      - "%catrobat.featuredimage.dir%"
+      - "%catrobat.featuredimage.path%"
+    public: true
+
+  App\Catrobat\Services\MediaPackageFileRepository: "@mediapackagefilerepository"
+  mediapackagefilerepository:
+    class: App\Catrobat\Services\MediaPackageFileRepository
+    arguments:
+      - "%catrobat.mediapackage.dir%"
+      - "%catrobat.mediapackage.path%"
+    public: true
+
+
+  apkrepository:
+    class: App\Catrobat\Services\ApkRepository
+    arguments:
+      - "%catrobat.apk.dir%"
+    public: true
+  App\Catrobat\Services\ApkRepository: "@apkrepository"
+
+  backupfilerepository:
+    class: App\Catrobat\Services\BackupFileRepository
+    arguments:
+      - "%catrobat.backup.dir%"
+    public: true
+  App\Catrobat\Services\BackupFileRepository: "@backupfilerepository"
+
+  programdevicepermissionreader:
+    class: App\Catrobat\Services\ProgramDevicePermissionReader
+    public: true
+  App\Catrobat\Services\ProgramDevicePermissionReader: "@programdevicepermissionreader"
+
+  templaterepository:
+    class: App\Repository\TemplateRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\Template"
+    public: true
+  App\Repository\TemplateRepository: "@templaterepository"
+
+  templatefilerepository:
+    class: App\Catrobat\Services\TemplateFileRepository
+    arguments:
+      - catrobat.template.storage.dir%"
+      - "%catrobat.template.storage.path%"
+      - "@filecompressor"
+      - "%catrobat.upload.temp.dir%"
+    public: true
+  App\Catrobat\Services\TemplateFileRepository: "@templatefilerepository"
+
+  nolbexamplerepository:
+    class: App\Repository\NolbExampleRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\NolbExampleProgram
+    public: true
+  App\Repository\NolbExampleRepository: "@nolbexamplerepository"
+
+  catro_notification_repository:
+    class: App\Repository\CatroNotificationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\CatroNotification
+    public: true
+  App\Repository\CatroNotificationRepository: "@catro_notification_repository"
+
+  # =========================== Manager & Stuff ===========================
+
+  programmanager:
+    class: App\Entity\ProgramManager
+    arguments:
+      - "@fileextractor"
+      - "@filerepository"
+      - "@screenshotrepository"
+      - "@doctrine.orm.entity_manager"
+      - "@programrepository"
+      - "@tagrepository"
+      - "@programlikerepository"
+      - "@event_dispatcher"
+      - "%catrobat.max_version%"
+    public: true
+  App\Entity\ProgramManager: "@programmanager"
+
+  templatemanager:
+    class: App\Entity\TemplateManager
+    arguments:
+      - "@templatefilerepository"
+      - "@templatescreenshotrepository"
+      - "@doctrine.orm.entity_manager"
+      - "@templaterepository"
+    public: true
+  App\Entity\TemplateManager: "@templatemanager"
+
+  programmanager.remix_manipulation:
+    class: App\Catrobat\Commands\RemixManipulationProgramManager
+    arguments:
+      - "@fileextractor"
+      - "@filerepository"
+      - "@screenshotrepository"
+      - "@doctrine.orm.entity_manager"
+      - "@programrepository"
+      - "@tagrepository"
+      - "@programlikerepository"
+      - "@event_dispatcher"
+      - "%catrobat.max_version%"
+    public: true
+  App\Catrobat\Commands\RemixManipulationProgramManager: "@programmanager.remix_manipulation"
+
+  remixmanager:
+    class: App\Entity\RemixManager
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@programrepository"
+      - "@scratchprogramrepository"
+      - "@programremixrepository"
+      - "@programremixbackwardrepository"
+      - "@scratchprogramremixrepository"
+      - "@remixgraphmanipulator"
+    public: true
+  App\Entity\RemixManager: "@remixmanager"
+
+  remixgraphmanipulator:
+    class: App\Catrobat\RemixGraph\RemixGraphManipulator
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@remixsubgraphmanipulator"
+      - "@programremixrepository"
+      - "@programremixbackwardrepository"
+      - "@scratchprogramremixrepository"
+    public: true
+  App\Catrobat\RemixGraph\RemixGraphManipulator: "@remixgraphmanipulator"
+
+  remixsubgraphmanipulator:
+    class: App\Catrobat\RemixGraph\RemixSubgraphManipulator
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@programrepository"
+      - "@programremixrepository"
+      - "@programremixbackwardrepository"
+    public: true
+  App\Catrobat\RemixGraph\RemixSubgraphManipulator: "@remixsubgraphmanipulator"
+
+  migrationmanager:
+    class: App\Entity\MigrationManager
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    public: true
+  App\Entity\MigrationManager: "@migrationmanager"
+
+  recommendermanager:
+    class: App\Catrobat\RecommenderSystem\RecommenderManager
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@usermanager"
+      - "@userlikesimilarityrelationrepository"
+      - "@userremixsimilarityrelationrepository"
+      - "@programlikerepository"
+      - "@programremixrepository"
+      - "@programremixbackwardrepository"
+    public: true
+  App\Catrobat\RecommenderSystem\RecommenderManager: "@recommendermanager"
+
+  rudewordfilter:
+    class: App\Catrobat\Services\RudeWordFilter
+    arguments:
+      - "@rudewordrepository"
+    public: true
+  App\Catrobat\Services\RudeWordFilter: "@rudewordfilter"
+
+  usermanager:
+    class: App\Entity\UserManager
+    arguments:
+      - "@fos_user.util.password_updater"
+      - "@fos_user.util.canonical_fields_updater"
+      - "@fos_user.object_manager"
+      - "%fos_user.model.user.class%"
+    public: true
+  App\Entity\UserManager: "@usermanager"
+
+  ldap.user_hydrator:
+    class: App\Catrobat\Ldap\UserHydrator
+    public: true
+  App\Catrobat\Ldap\UserHydrator: "@ldap.user_hydrator"
+
+  usermanager.ldap:
+    class: App\Entity\UserLDAPManager
+    arguments:
+      - "@fr3d_ldap.ldap_driver"
+      - "@fr3d_ldap.user_hydrator"
+      - '%fr3d_ldap.ldap_manager.parameters%'
+      - '%ldap_role_mappings%'
+      - '%ldap_group_filter%'
+      - "@tokengenerator"
+      - "@logger"
+    public: true
+  App\Entity\UserLDAPManager: "@usermanager.ldap"
+
+  fileextractor:
+    class: App\Catrobat\Services\CatrobatFileExtractor
+    arguments:
+      - "%catrobat.file.extract.dir%"
+      - "%catrobat.file.extract.path%"
+    public: true
+  App\Catrobat\Services\CatrobatFileExtractor: "@fileextractor"
+
+  filecompressor:
+    class: App\Catrobat\Services\CatrobatFileCompressor
+    public: true
+  App\Catrobat\Services\CatrobatFileCompressor: "@filecompressor"
+
+  tokengenerator:
+    class: App\Catrobat\Services\TokenGenerator
+    public: true
+  App\Catrobat\Services\TokenGenerator: "@tokengenerator"
+
+  time:
+    class: App\Catrobat\Services\Time
+    public: true
+  App\Catrobat\Services\Time: "@time"
+
+  elapsedtime:
+    class: App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter
+    arguments:
+      - "@translator"
+      - "@time"
+    public: true
+  App\Catrobat\Services\Formatter\ElapsedTimeStringFormatter: "@elapsedtime"
+
+  catrobat_code_parser:
+    class: App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser
+    public: true
+  App\Catrobat\Services\CatrobatCodeParser\CatrobatCodeParser: "@catrobat_code_parser"
+
+  # =========================== Twig ===========================
+
+  app.twig_extension:
+    class: App\Catrobat\Twig\AppExtension
+    arguments:
+      - "@request_stack"
+      - "@mediapackagefilerepository"
+      - "@gamejamrepository"
+      - "@liip_theme.active_theme"
+      - "%catrobat.translations.dir%"
+      - "@service_container"
+    tags:
+      - { name: twig.extension }
+  App\Catrobat\Twig\AppExtension: "@app.twig_extension"
+
+  # =========================== Jenkins ===========================
+
+  ci.jenkins.dispatcher:
+    class: App\Catrobat\Services\Ci\JenkinsDispatcher
+    arguments:
+      - "@router"
+      - "%jenkins%"
+    public: true
+  App\Catrobat\Services\Ci\JenkinsDispatcher: "@ci.jenkins.dispatcher"
+
+  # =========================== Controller ===========================
+
+  App\Catrobat\Controller\Api\UploadController:
+    autowire: false
+    arguments:
+      - "@usermanager"
+      - "@security.token_storage"
+      - "@programmanager"
+      - "@gamejamrepository"
+      - "@tokengenerator"
+      - "@translator"
+    public: true
+    tags: ['controller.service_arguments']
+
+  # =========================== Social ===========================
+
+  facebook_post_service:
+    class: App\Catrobat\Services\FacebookPostService
+    arguments:
+      - "@router"
+      - "@service_container"
+      - "@screenshotrepository"
+    public: true
+  App\Catrobat\Services\FacebookPostService: "@facebook_post_service"
+
+  oauth_service:
+    class: App\Catrobat\Services\OAuthService
+    arguments:
+      - "@service_container"
+    public: true
+  App\Catrobat\Services\OAuthService: "@oauth_service"
+
+  # =========================== Download ===========================
+
+  statistics:
+    class: App\Catrobat\Services\StatisticsService
+    arguments:
+      - "@programmanager"
+      - "@doctrine.orm.entity_manager"
+      - "@bazinga_geocoder.geocoder"
+      - "@logger"
+      - "@security.token_storage"
+    tags:
+      - { name: monolog.logger, channel: download_stats }
+    public: true
+  App\Catrobat\Services\StatisticsService: "@statistics"
+
+  # =========================== Async HTTP Client ===========================
+  async_http_client:
+    class: App\Catrobat\Services\AsyncHttpClient
+    arguments:
+      - { timeout: 8.0, max_number_of_total_requests: 12, max_number_of_concurrent_requests: 4 }
+    public: true
+  App\Catrobat\Services\AsyncHttpClient: "@async_http_client"
+
+  # =========================== FOS User bundle =============================
+  resetting_send_email_initialize:
+    class: App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber
+    autowire: true
+    tags:
+      - { name: kernel.event_subscriber }
+    public: true
+  App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
+
+
+  # ============================ Commands ====================================
+
+  catrowebadmin.filesystem:
+    class: Symfony\Component\Filesystem\Filesystem
+    public: false
+
+  catrowebadmin.command.clean.oldapk:
+    class: App\Catrobat\Commands\CleanOldApkCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.clean.apk:
+    class: App\Catrobat\Commands\CleanApkCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.clean.backup:
+    class: App\Catrobat\Commands\CleanBackupsCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.clean.extracted:
+    class: App\Catrobat\Commands\CleanExtractedFileCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.clean.invalid:
+    class: App\Catrobat\Commands\InvalidFileUploadCleanupCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.clean.invalid.revert:
+    class: App\Catrobat\Commands\InvalidFileUploadCleanupCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.init:
+    class: App\Catrobat\Commands\InitDirectoriesCommand
+    arguments:
+      - "@catrowebadmin.filesystem"
+      - "%catrobat.file.storage.dir%"
+    calls:
+      - [setProgramfileDirectory, ["%catrobat.file.storage.dir%"]]
+      - [setExtractDirectory, ["%catrobat.file.extract.dir%"]]
+      - [setScreenshotDirectory, ["%catrobat.screenshot.dir%"]]
+      - [setThumbnailDirectory, ["%catrobat.thumbnail.dir%"]]
+      - [setMediaPackageDirectory, ["%catrobat.mediapackage.dir%"]]
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.import:
+    class: App\Catrobat\Commands\ProgramImportCommand
+    arguments:
+      - "@catrowebadmin.filesystem"
+      - "@usermanager"
+      - "@programmanager.remix_manipulation"
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.refresh:
+    class: App\Catrobat\Commands\RefreshCommand
+    arguments:
+      - "@catrowebadmin.filesystem"
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.drop.migration:
+    class: App\Catrobat\Commands\DropMigrationCommand
+    arguments:
+      - "@migrationmanager"
+    tags:
+      - { name: console.command }
+
+  command.reset:
+    class: App\Catrobat\Commands\ResetCommand
+    tags:
+      - { name: console.command }
+
+  command.import.webshare:
+    class: App\Catrobat\Commands\WebShareProgramImport
+    tags:
+      - { name: console.command }
+
+  command.purge:
+    class: App\Catrobat\Commands\PurgeCommand
+    tags:
+      - { name: console.command }
+
+  command.backup.create:
+    class: App\Catrobat\Commands\CreateBackupCommand
+    tags:
+      - { name: console.command }
+
+  command.backup.restore:
+    class: App\Catrobat\Commands\RestoreBackupCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.command.checkcodestyle:
+    class: App\Catrobat\Commands\CheckCodeStyleCommand
+    tags:
+      - { name: console.command }
+
+
+  catrowebadmin.command.import.legacy:
+    class: App\Catrobat\Commands\ImportLegacyCommand
+    arguments:
+      - "@catrowebadmin.filesystem"
+      - "@usermanager"
+      - "@programmanager"
+      - "@remixmanager"
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.create.constant.tags:
+    class: App\Catrobat\Commands\CreateConstantTagsCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@translator"
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.create.media-package-thumbnails:
+    class: App\Catrobat\Commands\CreateMissingMediaPackageThumbnailsCommand
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.create.program.extensions:
+    class: App\Catrobat\Commands\CreateProgramExtensionsCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "%catrobat.file.storage.dir%"
+      - "@programrepository"
+    tags:
+      - { name: console.command }
+
+  command.nolbuser.create:
+    class: App\Catrobat\Commands\CreateNolbUserCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: console.command }
+
+  command.nolbuser.delete:
+    class: App\Catrobat\Commands\DeleteNolbUserCommand
+    arguments:
+      - "@usermanager"
+    tags:
+      - { name: console.command }
+
+  command.nolbuser.changepassword:
+    class: App\Catrobat\Commands\ChangeNolbUserPasswordCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: console.command }
+
+  command.nolbuser.generate:
+    class: App\Catrobat\Commands\GenerateNolbUserCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: console.command }
+
+  command.remixgraph.migrate:
+    class: App\Catrobat\Commands\MigrateRemixGraphsCommand
+    arguments:
+      - "@catrowebadmin.filesystem"
+      - "@usermanager"
+      - "@programmanager"
+      - "@remixmanager"
+      - "@doctrine.orm.entity_manager"
+      - "%kernel.root_dir%"
+    tags:
+      - { name: console.command }
+
+  command.recommender.compute:
+    class: App\Catrobat\Commands\RecommenderUserSimilaritiesCommand
+    arguments:
+      - "@usermanager"
+      - "@recommendermanager"
+      - "@doctrine.orm.entity_manager"
+      - "%kernel.root_dir%"
+    tags:
+      - { name: console.command }
+
+  command.recommender.export:
+    class: App\Catrobat\Commands\CSVUserSimilaritiesCommand
+    arguments:
+      - "@programremixrepository"
+      - "@programlikerepository"
+      - "@doctrine.orm.entity_manager"
+      - "%kernel.root_dir%"
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.reflavor.extension:
+    class: App\Catrobat\Commands\ReflavorExtensionCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@programrepository"
+    tags:
+      - { name: console.command }
+
+  catrowebadmin.reflavor.nolb:
+    class: App\Catrobat\Commands\ReflavorNolbCommand
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@programrepository"
+    tags:
+      - { name: console.command }
+
+
+  # =========================== Sonata Admin Blocks ================================================
+
+  # ===== Programs
+
+  catrowebadmin.block.programs.all:
+    class: App\Admin\AllProgramsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "All Programs" }
+    arguments:
+      - ~
+      - App\Entity\Program
+      - ~
+    public: true
+
+  catrowebadmin.block.programs.approve:
+    class: App\Admin\ApproveProgramsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Approve Programs" }
+    arguments:
+      - ~
+      - App\Entity\Program
+      - App\Catrobat\Controller\Admin\ApproveProgramController
+    public: true
+
+  catrowebadmin.block.programs.reported:
+    class: App\Admin\ReportedProgramsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Reported Programs" }
+    arguments:
+      - ~
+      - App\Entity\ProgramInappropriateReport
+      - App\Catrobat\Controller\Admin\ReportController
+    public: true
+
+  catrowebadmin.block.programs.comments:
+    class: App\Admin\ReportedCommentsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Reported Comments" }
+    arguments:
+      - ~
+      - App\Entity\UserComment
+      - App\Catrobat\Controller\Admin\ReportController
+    public: true
+
+  # ===== Special Programs
+
+  catrowebadmin.block.programs.categories:
+    class: App\Admin\CategoriesAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Starter Programs" }
+    arguments:
+      - ~
+      - App\Entity\StarterCategory
+      - ~
+    public: true
+
+  catrowebadmin.block.featured.program:
+    class: App\Admin\FeaturedProgramAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Featured Programs" }
+    arguments:
+      - ~
+      - App\Entity\FeaturedProgram
+      - ~
+    public: true
+
+  catrowebadmin.block.featured.url:
+    class: App\Admin\FeaturedUrlAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Featured Urls" }
+    arguments:
+      - ~
+      - App\Entity\FeaturedProgram
+      - ~
+    public: true
+
+  catrowebadmin.block.programs.templates:
+    class: App\Admin\TemplateAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Template Programs" }
+    arguments:
+      - ~
+      - App\Entity\Template
+      - App\Catrobat\Controller\Admin\TemplateController
+    public: true
+
+  catrowebadmin.block.nolb.examples:
+    class: App\Admin\NolbExampleAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Nolb Example Programs"}
+    arguments:
+      - ~
+      - App\Entity\NolbExampleProgram
+      - ~
+    public: true
+
+  # ===== Media Package
+
+  catrowebadmin.block.mediapackage.package:
+    class: App\Admin\MediaPackageAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Packages" }
+    arguments:
+      - ~
+      - App\Entity\MediaPackage
+      - ~
+    public: true
+
+  catrowebadmin.block.mediapackage.category:
+    class: App\Admin\MediaPackageCategoriesAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Categories" }
+    arguments:
+      - ~
+      - App\Entity\MediaPackageCategory
+      - ~
+    public: true
+
+  catrowebadmin.block.mediapackage.file:
+    class: App\Admin\MediaPackageFileAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Files" }
+    arguments:
+      - ~
+      - App\Entity\MediaPackageFile
+      - ~
+    public: true
+
+  # ===== Apk Generation
+
+  catrowebadmin.block.apk.pending:
+    class: App\Admin\PendingApkRequestsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Pending" }
+    arguments:
+      - ~
+      - App\Entity\Program
+      - App\Catrobat\Controller\Admin\ApkController
+    public: true
+
+  catrowebadmin.block.apk.list:
+    class: App\Admin\ApkListAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Ready" }
+    arguments:
+      - ~
+      - App\Entity\Program
+      - App\Catrobat\Controller\Admin\ApkController
+    public: true
+
+  # ===== Users
+
+  catrowebadmin.block.users.user:
+    class: App\Admin\UserAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: User, icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\User
+      - ~
+
+  catrowebadmin.block.users.limited:
+    class: App\Admin\LimitedUsersAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Limited Users",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\User
+      - ~
+    public: true
+
+  # ===== Tools
+
+  # TODO change 2nd parameter
+  catrowebadmin.block.tools.maintain:
+    class: App\Admin\MaintainAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Maintain",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\MaintainController
+    public: true
+
+  # TODO change 2nd parameter
+  catrowebadmin.block.tools.logs:
+    class: App\Admin\LogsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Logs",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\LogsController
+    public: true
+
+  catrowebadmin.block.tools.notify:
+    class: App\Admin\NotificationAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Notifications" }
+    arguments:
+      - ~
+      - App\Entity\Notification
+      - ~
+    public: true
+
+  catrowebadmin.block.tools.rudewords:
+    class: App\Admin\RudewordAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Rude Words" }
+    arguments:
+      - ~
+      - App\Entity\RudeWord
+      - ~
+    public: true
+
+  # TODO change 2nd parameter
+  catrowebadmin.block.tools.gcm:
+    class: App\Admin\GoogleCloudMessagingAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Push Notifications" }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\GoogleCloudMessagingController
+    public: true
+
+  # TODO change 2nd parameter
+  catrowebadmin.block.tools.mail:
+    class: App\Admin\EmailUserMessageAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Send Mail" }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\EmailUserMessageController
+    public: true
+
+  catrowebadmin.block.tools.broadcast:
+    class: App\Admin\BroadcastNotificationAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Broadcast Notification" }
+    arguments:
+      - ~
+      - App\Entity\BroadcastNotification
+      - App\Catrobat\Controller\Admin\BroadcastNotificationController
+    public: true
+
+  # ===== Extensions
+
+  catrowebadmin.block.extensions.all:
+    class: App\Admin\AllExtensionsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "All Extensions" }
+    arguments:
+      - ~
+      - App\Entity\Extension
+      - ~
+    public: true
+
+  # TODO change 2nd parameter
+  catrowebadmin.block.extensions.create:
+    class: App\Admin\CreateExtensionsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Create Extensions"}
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\ExtensionController
+    public: true
+
+  # ===== Statistics
+
+  catrowebadmin.block.tools.statistic:
+    class: App\Admin\Blocks\StatisticBlockService
+    tags:
+      - { name: sonata.block, label: Cleanup }
+    arguments:
+      - "catrowebadmin.block.tools.statistic"
+      - "@templating"
+      - "%catrobat.file.extract.dir%"
+      - "%catrobat.apk.dir%"
+    public: true
+
+  catrowebadmin.block.statistics.programs:
+    class: App\Admin\ProgramDownloadStatisticsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Program Download Statistics" }
+    arguments:
+      - ~
+      - App\Entity\ProgramDownloads
+      - ~
+    public: true
+
+  catrowebadmin.block.statistics.clicks:
+    class: App\Admin\ClickStatisticsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Click Statistics" }
+    arguments:
+      - ~
+      - App\Entity\ClickStatistic
+      - ~
+    public: true
+
+  # ===== GameJam
+
+  catrowebadmin.block.gamejam:
+    class: App\Admin\GameJamAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "GameJams" }
+    arguments:
+      - catrowebadmin.block.gamejam
+      - App\Entity\GameJam
+      - ~
+    calls:
+      - [addChild, ["@catrowebadmin.block.gamejam.submitted", 'NAME_OF_PARENT']]
+    public: true
+
+  catrowebadmin.block.gamejam.submitted:
+    class: App\Admin\GameJamSubmittedProgramsAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Submissions" }
+    arguments:
+      - ~
+      - App\Entity\Program
+      - App\Catrobat\Controller\Admin\GameJamSubmittedProgramsController
+    public: true
+
+  # TODO change 2nd parameter
+  catrowebadmin.block.program.snapshots:
+    class: App\Admin\SnapshotAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Snapshots",
+          icon: '<i class="fa fa-cogs"></i>' }
+    arguments:
+      - ~
+      - App\Entity\Group
+      - App\Catrobat\Controller\Admin\SnapshotController
+    public: true
+
+  #====================== Listeners
+  # ======== System Validation ========
+
+  catrowebbundle.listener.language:
+    class: App\Catrobat\Listeners\LanguageListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+
+  catrowebbundle.listener.flavor:
+    arguments:
+      - "@router"
+      - "@liip_theme.active_theme"
+    class: App\Catrobat\Listeners\FlavorListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
+
+  # ======== Upload Validation ========
+
+  catroweb.file.validator.name:
+    class: App\Catrobat\Listeners\NameValidator
+    arguments:    ["@rudewordfilter"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+  catroweb.file.validator.description:
+    class: App\Catrobat\Listeners\DescriptionValidator
+    autowire: true
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+  catroweb.file.validator.languageversion:
+    class: App\Catrobat\Listeners\VersionValidator
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+  #      catroweb.file.validator.filestructure:
+  #            class: App\Catrobat\Listeners\FileStructureValidator
+  #            tags:
+  #            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: 250 }
+
+  #      catroweb.file.validator.definedimages:
+  #            class: App\Catrobat\Listeners\OnlyDefinedImagesValidator
+  #            tags:
+  #            - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+  catroweb.file.validator.xmlheadervalidator:
+    class: App\Catrobat\Listeners\ProgramXmlHeaderValidator
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert }
+
+  # ======== Upload Modification ========
+
+  catroweb.file.license.updater:
+    class: App\Catrobat\Listeners\LicenseUpdater
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before, method: onProgramBeforeInsert, priority: -1 }
+
+  catroweb.file.remix.updater:
+    class: App\Catrobat\Listeners\RemixUpdater
+    arguments: ["@remixmanager","@async_http_client","@router","%kernel.root_dir%"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramAfterInsert }
+
+  catroweb.flavor.check:
+    class: App\Catrobat\Listeners\ProgramFlavorListener
+    arguments:
+      - "@request_stack"
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+
+  catroweb.apk.cleanup:
+    class: App\Catrobat\Listeners\ApkCleanupListener
+    arguments: ["@apkrepository"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: handleEvent }
+
+  catroweb.extension.check:
+    class: App\Catrobat\Listeners\ProgramExtensionListener
+    arguments: ["@extensionrepository"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+
+  catroweb.gamejamtag.check:
+    class: App\Catrobat\Listeners\GameJamTagListener
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.before.persist, method: onEvent }
+
+  # ======== Snapshots =======
+
+  catrobat.upload.snapshotlistener:
+    class:        App\Catrobat\Listeners\Upload\SaveProgramSnapshotListener
+    arguments:    ["@time","@filerepository", "%catrobat.snapshot.dir%"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: handleEvent }
+
+  # ======== Notifications =======
+
+  catrobat.core.services.uploadnotificator:
+    class:        App\Catrobat\Listeners\UploadNotificator
+    arguments:    ["@mailer","@notificationrepository"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.program.after.insert, method: onProgramInsertEvent }
+
+  catrobat.core.services.reportnotificator:
+    class:        App\Catrobat\Listeners\ReportNotificator
+    arguments:    ["@mailer","@notificationrepository"]
+    tags:
+      - { name: kernel.event_listener, event: catrobat.report.insert, method: onReportInsertEvent }
+
+
+  # ======== Facebook Posts =======
+
+  catrobat.fb_post.post:
+    class: App\Catrobat\Listeners\ProgramFbPostListener
+    arguments: ["@facebook_post_service"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+
+  # ======== Logging ========
+
+  catrobat.core.services.invalidprogramuploadlogger:
+    class:        App\Catrobat\Listeners\InvalidProgramUploadLogger
+    arguments:    ["@logger"]
+    tags:
+      - { name: monolog.logger, channel: upload }
+      - { name: kernel.event_listener, event: catrobat.program.invalid.upload, method: onInvalidProgramUploadedEvent }
+
+  # ======== Entity ========
+
+  catrobat.entity.featured.image_listener:
+    class: App\Catrobat\Listeners\Entity\FeaturedProgramImageListener
+    arguments: ["@featuredimagerepository"]
+    tags:
+      - { name: doctrine.orm.entity_listener }
+
+  catrobat.entity.program_listener:
+    class: App\Catrobat\Listeners\Entity\ProgramListener
+    arguments: ["@facebook_post_service", "@logger"]
+    tags:
+      - { name: doctrine.orm.entity_listener }
+
+  # ======== Views ========
+  catrobat.view.uploadexception:
+    class:        App\Catrobat\Listeners\View\UploadExceptionListener
+    arguments: ["@translator"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+  catrobat.view.programlist:
+    class:        App\Catrobat\Listeners\View\ProgramListSerializer
+    arguments: ["@request_stack","@router","@screenshotrepository","@elapsedtime"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+  catrobat.view.templatelist:
+    class:        App\Catrobat\Listeners\View\TemplateListSerializer
+    arguments: ["@request_stack","%catrobat.template.storage.path%","@templatescreenshotrepository","@elapsedtime"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+
+
+  # =========================== Download ===========================
+
+  catrobat.download.stats:
+    class: App\Catrobat\Listeners\DownloadStatisticsListener
+    arguments: ["@statistics", "@security.token_storage"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }

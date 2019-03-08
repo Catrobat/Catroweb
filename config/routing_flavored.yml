@@ -1,0 +1,32 @@
+login:
+    path: login
+    defaults:  { _controller: fos_user.security.controller:loginAction }
+
+logout:
+    path: logout
+    defaults:  { _controller: App\Catrobat\Controller\Security\LogoutController:logoutAction }
+
+
+catrobat_web_hourOfCode_index:
+    path: /hourOfCode/
+    defaults:
+        _controller: App\Catrobat\Controller\Web\TutorialController:helpAction
+
+catrobat_web_hourOfCode:
+    path: /hourOfCode/{page}
+    defaults:
+        page: 0
+        _controller: App\Catrobat\Controller\Web\TutorialController:helpAction
+
+catrobat_web_hour_of_code_index:
+    path: /hour-of-code/
+    defaults:
+        _controller: App\Catrobat\Controller\Web\TutorialController:helpAction
+
+catrobat_web_hour_of_code:
+    path: /hour-of-code/{page}
+    defaults:
+        page: 0
+        _controller: App\Catrobat\Controller\Web\TutorialController:helpAction
+
+
