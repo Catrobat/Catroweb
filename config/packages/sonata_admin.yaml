@@ -1,0 +1,221 @@
+# Sonata Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.stats:
+            contexts: [admin]
+        sonata.admin.block.admin_list:
+            contexts:  [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+        sonata.block.service.text:
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+
+sonata_admin:
+    title:     Admin Panel
+    title_logo: images/admin/admin_logo.png
+    templates:
+        layout: 'Admin\standard_layout.html.twig'
+    dashboard:
+        blocks:
+            - class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: catrowebadmin.block.programs.approve
+                  icon: fa-warning
+                  text: Programme unbestätigt
+                  color: bg-yellow
+            - class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: catrowebadmin.block.programs.reported
+                  icon: fa-bullhorn
+                  text: Programme gemeldet
+                  color: bg-red
+                  filters:
+                      state: { type: 3, value: 1 } # 3 => NumberType::TYPE_EQUAL
+            - class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: catrowebadmin.block.programs.all
+                  icon: fa-cubes
+                  text: Programme gesamt
+                  color: bg-blue
+            - class:    col-lg-3 col-xs-6
+              position: top
+              type:     sonata.admin.block.stats
+              settings:
+                  code: sonata.user.admin.user
+                  icon: fa-users
+                  text: User
+                  color: bg-green
+
+
+            # display a dashboard block
+            # - { position: left, type: sonata.admin.block.admin_list }
+            - { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> Accourding to your role you can access different information and tools in our Admin.<br> Have Fun :)"} }
+        #            - { position: right, type: catrowebadmin.block.tools.statistic}
+
+
+        groups:
+
+            sonata.admin.group.programs:
+                label:           Programs
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-cubes"></i>'
+                items:
+                    - catrowebadmin.block.programs.all
+                    - catrowebadmin.block.programs.approve
+                    - catrowebadmin.block.programs.reported
+                    - catrowebadmin.block.programs.comments
+
+            sonata.admin.group.featured:
+                label:           Special Programs
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-bullhorn"></i>'
+                items:
+                    - catrowebadmin.block.programs.categories
+                    - catrowebadmin.block.featured.program
+                    - catrowebadmin.block.featured.url
+                    - catrowebadmin.block.programs.templates
+                    - catrowebadmin.block.nolb.examples
+
+            sonata.admin.group.mediapackage:
+                label:           Media Package
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-newspaper-o"></i>'
+                items:
+                    - catrowebadmin.block.mediapackage.package
+                    - catrowebadmin.block.mediapackage.category
+                    - catrowebadmin.block.mediapackage.file
+
+            sonata.admin.group.apk:
+                label:           Apk Generation
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-android"></i>'
+                items:
+                    - catrowebadmin.block.apk.pending
+                    - catrowebadmin.block.apk.list
+
+            sonata.admin.group.users:
+                label:           Users
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-users"></i>'
+                items:
+                    - sonata.user.admin.user
+                    - sonata.user.admin.group
+                    - catrowebadmin.block.users.limited
+
+            sonata.admin.group.tools:
+                label:           Tools
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-cogs"></i>'
+                items:
+                    - catrowebadmin.block.tools.maintain
+                    - catrowebadmin.block.tools.logs
+                    - catrowebadmin.block.tools.notify
+                    - catrowebadmin.block.tools.rudewords
+                    - catrowebadmin.block.tools.gcm
+                    - catrowebadmin.block.tools.mail
+                    - catrowebadmin.block.tools.broadcast
+
+            sonata.admin.group.gamejams:
+                label:           GameJam
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-cogs"></i>'
+                items:
+                    - catrowebadmin.block.gamejam
+                    - catrowebadmin.block.program.snapshots
+
+            sonata.admin.group.extensions:
+                label:           Extensions
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-external-link"></i>'
+                items:
+                    - catrowebadmin.block.extensions.all
+                    - catrowebadmin.block.extensions.create
+
+            sonata.admin.group.statistics:
+                label:           Statistics
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-bar-chart"></i>'
+                items:
+                    - catrowebadmin.block.statistics.programs
+                    - catrowebadmin.block.statistics.clicks
+
+    security:
+
+        handler: sonata.admin.security.handler.acl
+
+        role_admin: ROLE_ADMIN
+        role_super_admin: ROLE_SUPER_ADMIN
+
+        # acl security information
+        information:
+            GUEST:    [VIEW, LIST]
+            STAFF:    [EDIT, LIST, CREATE]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+
+
+sonata_doctrine_orm_admin:
+    # default value is null, so doctrine uses the value defined in the configuration
+    entity_manager: ~
+
+    templates:
+        form:
+            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
+        filter:
+            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
+        types:
+            list:
+                array:     SonataAdminBundle:CRUD:list_array.html.twig
+                boolean:   SonataAdminBundle:CRUD:list_boolean.html.twig
+                date:      SonataAdminBundle:CRUD:list_date.html.twig
+                time:      SonataAdminBundle:CRUD:list_time.html.twig
+                datetime:  SonataAdminBundle:CRUD:list_datetime.html.twig
+                text:      SonataAdminBundle:CRUD:base_list_field.html.twig
+                trans:     SonataAdminBundle:CRUD:list_trans.html.twig
+                string:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                smallint:  SonataAdminBundle:CRUD:base_list_field.html.twig
+                bigint:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                integer:   SonataAdminBundle:CRUD:base_list_field.html.twig
+                decimal:   SonataAdminBundle:CRUD:base_list_field.html.twig
+                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
+
+            show:
+                array:     SonataAdminBundle:CRUD:show_array.html.twig
+                boolean:   SonataAdminBundle:CRUD:show_boolean.html.twig
+                date:      SonataAdminBundle:CRUD:show_date.html.twig
+                time:      SonataAdminBundle:CRUD:show_time.html.twig
+                datetime:  SonataAdminBundle:CRUD:show_datetime.html.twig
+                text:      SonataAdminBundle:CRUD:base_show_field.html.twig
+                trans:     SonataAdminBundle:CRUD:show_trans.html.twig
+                string:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                smallint:  SonataAdminBundle:CRUD:base_show_field.html.twig
+                bigint:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                integer:   SonataAdminBundle:CRUD:base_show_field.html.twig
+                decimal:   SonataAdminBundle:CRUD:base_show_field.html.twig
+
+sonata_user:
+    security_acl:  true
+    manager_type:  orm
+    class:
+        user:   App\Entity\User
+        group:  App\Entity\Group
+
+    admin:                  # Admin Classes
+        user:
+            class:          App\Admin\UserAdmin
+            translation:    SonataUserBundle

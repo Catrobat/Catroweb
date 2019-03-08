@@ -1,0 +1,48 @@
+#monolog:
+#    handlers:
+#        main:
+#            type: fingers_crossed
+#            action_level: error
+#            handler: nested
+#            excluded_404s:
+#                # regex: exclude all 404 errors from the logs
+#                - ^/
+#        nested:
+#            type: stream
+#            path: "%kernel.logs_dir%/%kernel.environment%.log"
+#            level: debug
+#        console:
+#            type: console
+#            process_psr_3_messages: false
+#            channels: ["!event", "!doctrine"]
+#        deprecation:
+#            type: stream
+#            path: "%kernel.logs_dir%/%kernel.environment%.deprecations.log"
+#        deprecation_filter:
+#            type: filter
+#            handler: deprecation
+#            max_level: info
+#            channels: ["php"]
+monolog:
+    channels: ['upload', 'download_stats']
+    handlers:
+        upload:
+            type: stream
+            path: "%kernel.logs_dir%/upload.log"
+            level: error
+            channels: [upload]
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        download_stats:
+            type:  rotating_file
+            path:  "%kernel.logs_dir%/download_stats/download_stats.log"
+            level: debug
+            max_files: 20
+            channels: [download_stats]
+

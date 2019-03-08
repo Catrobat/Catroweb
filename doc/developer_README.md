@@ -113,11 +113,19 @@ That's it. You can start testing.
   ```
   git clone https://github.com/Catrobat/Catroweb-Symfony.git
   cd Catroweb-Symfony
+  git checkout php7IWillSaveYou
   curl -sS https://getcomposer.org/installer | php
   ``` 
   Login to http://localhost/phpmyadmin create a database called "symfony"
+  Create your local parameters.yml files based on the dist versions
   ```
-  cp app/config/parameters_dev.yml.dist app/config/parameters_dev.yml
+  cp config/packages/parameters.yml.dist config/packages/parameters.yml
+  cp config/packages/test/parameters.yml.dist config/packages/test/parameters.yml
+  cp config/packages/dev/parameters.yml.dist config/packages/dev/parameters.yml
+  ```
+  Update your local parameters.yml files (in config/packages, config/packages/dev/) with the one you can find [here.](https://confluence.catrob.at/display/CATWEB/Parameters)
+  !! Use your database password !!! when updating the parameters.yml file
+  ```
   php composer.phar install
   npm install
   php bin/console catrobat:reset --hard
@@ -126,16 +134,17 @@ That's it. You can start testing.
 
 6. Setup Apache:
   ```
-  sudo ln -s <absolute path to the symfony web directory> /var/www/catroweb
+  sudo ln -s <absolute path to the symfony public directory> /var/www/catroweb
   sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/catroweb.conf
   ```
    Edit the catroweb.conf file to look like this:
+   
   >ServerName catroweb
   >ServerAdmin webmaster@localhost
   >DocumentRoot /var/www/catroweb
   ><Directory /var/www/catroweb>
-  >DirectoryIndex /app_dev.php
-  >FallbackResource /app_dev.php
+  >DirectoryIndex /index.php
+  >FallbackResource /index.php
   > &lt;/Directory> 
   ```
   sudo gedit /etc/apache2/sites-available/catroweb.conf
@@ -155,16 +164,15 @@ That's it. You can start testing.
 
 8. Set permissions go to the root of the project and execute the following commands: 
   ```
-  rm -rf app/cache/*
-  rm -rf var/logs/*
+  rm -rf var/cache/*
+  rm -rf var/log/*
   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-  sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache var/logs 
-  sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache var/logs 
-  chmod o+w web/resources/ -R
-  chmod o+w+x sqlite/ -R
+  sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log 
+  sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log 
+  chmod o+w public/resources/ -R
+  chmod o+w+x tests/behat/sqlite/ -R
   ```
 
-10. Update your local parameters.yml file (in var/config) with the one you can find [here.](https://confluence.catrob.at/display/CATWEB/Parameters)
 
 Setup should be done! Lets test it.
 
@@ -211,24 +219,25 @@ bin/console cache:clear --env=test
 
 For our project we use three **different Test suites**. PhpSpec, PhpUnit and Behat ([Tutorial](http://behat.org/en/latest/guides.html)). ---
  - **PhpUnit**
-  - Unit tests. Files are in "Tests/..."
-  - ```bin/phpunit Tests```
+  - Unit tests. Files are in "tests/phpUnit/..."
+  - ```bin/phpunit tests```
  - **PhpSpec**
-  - Specification tests. Files are in "specs/Catrobat/AppBundle/..."
+  - Specification tests. Files are in "tests/PhpSpec/specs/Catrobat/..."
   - ```bin/phpspec run```
  - **Behat**
-  - Tests for the API. Files are in "src/Catrobat/AppBundle/Features/..."
+  - Tests for the API. Files are in "tests/behat/features/..."
   -   Failed Tests:  
-    -> **Firefox screenshot**  for each failed  **Scenario**  in "testreports/screens/..."  
-    -> **errors.json**  file for  **response errors**  in "testreports/behat/"
+    -> **Firefox screenshot**  for each failed  **Scenario**  in "tests/testreports/screens/..."  
+    -> **errors.json**  file for  **response errors**  in "tests/testreports/behat/"
   - For Behat Headless Chrome must run in the background! 
   - ```google-chrome-stable --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 bin/behat ```
 ---
 #### Tests that fail right now:
 | PhpUnit | PhpSpec | Behat |
 | :-----: | :-----: | :---: |
-| 0       | 3       |      4|
-Headless Chrome crashes sometimes when the web suite (Oauth features) is executed. If that happens just restart headless chrome and  the tests.
+| 0       | 3       |      1|
+Note: The first behat test using chrome headless always fails after clearing the cache.
+Just stop the test execution and restart the tests.
 
 ---
 #### Test your Code Sytle
@@ -238,7 +247,7 @@ After successfully testing your code please apply the Style check tests.
 - **PHP:**
 The PHP coding standard can be tested with **PHPCheckStyle**:
   ```
-  time php ~/Catroweb-Symfony/vendor/phpcheckstyle/phpcheckstyle/run.php --src ~/Catroweb-Symfony/src/ --config ~/Catroweb-Symfony/style-report/catroweb.xml
+  bin/console phpcheckstyle
   ```
   (please adjust it to your own installation!) 
   The HTML report can be found in /Catroweb-Symfony/style-report/
@@ -252,16 +261,12 @@ In the project you can find the two files phpspec.yml.dist and behat.yml.dist . 
 
 - At your first Behat run you might get fatal errors. Just reset sqlite permissions
   ```
-  chmod o+w+x sqlite/ -R
+  chmod o+w+x tests/behat/sqlite/ -R
   ```
 
 - If your changes in feature files seem to change nothing you can try to clear the cache
   ```
-  rm -rf app/cache/test/* 
-  ```
-  or 
-  ```
-  bin/console cache:clear --env=test
+  bin/console cache:clear -e test
   ```
 
 ## Before you start working on a new Ticket
@@ -328,7 +333,7 @@ must read: [How to Write a Git Commit Message, by Chirs Beams](http://chris.beam
 In our project we use a database migration system.
 
  - **never** make changes directly in the database with tools like phpMyAdmin.
- - make your changes in the "AppBundle\Entity\" folder (eg. FeaturedProgram.php) 
+ - make your changes in the "Entity\" folder (eg. FeaturedProgram.php) 
     
 ---
 #### If you have never used migrations before and "status" says no  _Executed Migrations_  but you have  _Available Migrations_:
@@ -461,30 +466,31 @@ Here you can find additional Information that might be useful from time to time.
 #### Clear cache/logs & reset permissions
 ```
 rm -rf var/cache/* 
-rm -rf var/logs/* 
+rm -rf var/log/* 
 HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/logs 
-sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/logs 
+sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log 
+sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/log 
 ```
 ---
 #### Testing Cheat Sheet
 
 Clear the test cache before starting the tests!
 ```
-  bin/console cache:clear --env=test
+  bin/console cache:clear -e test
 ```
 
 || |
 | ---- | ---- |
 |google-chrome-stable --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 | Starts Headless Chrome |
 |bin/phpspec run | Start all phpspec tests |
-|bin/phpspec run specs/Catrobat/... | Start a specific phpspec file |
-|bin/phpunit Tests | Start all phpUnit tests |
+|bin/phpspec run <path> | Start a specific phpspec file |
+|bin/phpunit tests | Start all phpUnit tests |
 |bin/behat | Start all Behat tests |
 |bin/behat -f pretty | Start all Behat Tests with detailed output |
 |bin/behat -s XXX | Start a Testing Suite |
 |bin/behat scr/.../Features/.../fancyTests.feature | Start all tests in a .feature file |
 |bin/behat scr/.../Features/.../fancyTests.feature:63 | Start a specific test in a .feature file |
+|bin/console phpcheckstyle | Generates a new php coding style check report |
 
 
 ####  Cheat Sheet
@@ -493,7 +499,7 @@ Clear the test cache before starting the tests!
 | ---- | ---- |
 | bin/console list | List console commands|
 | bin/console catrobat:reset --hard|Recreate database, clear cache |
-| chmod o+w web/resources -R|Sometimes neccessary if there are problems with the privileges|
+| chmod o+w public/resources -R|Sometimes neccessary if there are problems with the privileges|
 | bin/console doctrine:migrations:XXX | General command for handling migrations XXX can be: status, migrate, diff |
 | bin/console fos:user:promote | With parameter --super promotes an user to an admin. For all options use parameter --help.|
 | bin/console fos:user:demote | With parameter --super demotes an user to a "normal" user. For all options use parameter --help. |
@@ -501,6 +507,7 @@ Clear the test cache before starting the tests!
 | sudo service apache2 restart| Restart apache|
 | bin/console cache:clear | Clear the cache |
 | bin/console cache:clear --env=test | Clear the cache for the test environment|
+| bin/console about | Useful information about the symfony environment|
 
 
 

@@ -1,0 +1,4 @@
+controllers:
+    resource: ../../src/Catrobat/Controller/
+    type: annotation
+    prefix:   /{flavor}/

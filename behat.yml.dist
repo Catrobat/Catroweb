@@ -1,30 +1,45 @@
 default:
+
+# --------------------------------------------------------------------------------------------------
+# Telling Behat where to find the FeatureContext files
+#
+    autoload:
+        - "tests/behat/features/bootstrap/"
+
+
+# --------------------------------------------------------------------------------------------------
+# Output formatting:
+#                     - only shows the progress in command line and then creates a new html report
+#
     formatters:
         pretty:   false
         progress: true
         html:
-            output_path: "%paths.base%/testreports/behat/htmlTestReport"
-        
-    gherkin:
-        filters:
-            tags: "@~disabled&&~wip&&~external&&~RealOAuth&&~RealFacebook"
-        
+            output_path: "tests/testreports/behat/htmlTestReport"
+
+
+# --------------------------------------------------------------------------------------------------
+# Register all Extensions here:
+#
     extensions:
-        Behat\Symfony2Extension\ServiceContainer\Symfony2Extension: 
+
+        Behat\Symfony2Extension:
             kernel:
-                env: test
-                debug: true
+                bootstrap: config/bootstrap.php
+                class: App\Kernel
+
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
         Behat\MinkExtension:
-              base_url: http://localhost/app_test.php/
-              sessions:
+            base_url: http://localhost/index_test.php/
+            sessions:
                 default:
-                  chrome:
-                    api_url: "http://localhost:9222"
+                    chrome:
+                        api_url: "http://localhost:9222"
                 mobile:
-                  chrome:
-                    api_url: "http://localhost:9222"
-                    
+                    chrome:
+                        api_url: "http://localhost:9222"
+
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    false
@@ -37,79 +52,70 @@ default:
               print_outp: true
               loop_break: true
 
+
+# --------------------------------------------------------------------------------------------------
+# Register test suites here:
+#
     suites:
-        api:
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/Api/"
-            contexts:
-              - Catrobat\AppBundle\Features\Api\Context\FeatureContext:
-                    error_directory: "%paths.base%/testreports/behat/"
-        flavor:
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/Flavor/"
-            contexts:
-              - Catrobat\AppBundle\Features\Flavor\Context\FeatureContext:
-                    error_directory: "%paths.base%/testreports/behat/"
-        ci:
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/Ci/"
-            contexts:
-              - Catrobat\AppBundle\Features\Ci\Context\FeatureContext:
-                    error_directory: "%paths.base%/testreports/behat/"
-        web:
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/Web/"
-            contexts:
-              - Catrobat\AppBundle\Features\Web\Context\FeatureContext:
-                    screenshot_directory: "%paths.base%/testreports/screens/"
+
         admin:
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/Admin/"
+            paths:    [ "tests/behat/features/admin" ]
             contexts:
-              - Catrobat\AppBundle\Features\Admin\Context\FeatureContext:
-                    screenshots_directory: "%paths.base%/testreports/screens/"
+                - AdminFeatureContext:
+                    - "tests/testreports/screens/"
+
+        api:
+            paths:    [ "tests/behat/features/api" ]
+            contexts:
+                - ApiFeatureContext:
+                    - "tests/testreports/behat/"
+
+        ci:
+            paths:    [ "tests/behat/features/ci" ]
+            contexts:
+                - CiFeatureContext:
+                    - "tests/testreports/behat/"
+
+        flavor:
+            paths:    [ "tests/behat/features/flavor" ]
+            contexts:
+                - FlavorFeatureContext:
+                    - "tests/testreports/behat/"
+
+        web:
+            paths:    [ "tests/behat/features/web" ]
+            contexts:
+                - WebFeatureContext:
+                    - "tests/testreports/screens/"
+
         gamejam:
             filters:
-                tags: ~@web&&~@javascript
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+                tags: "~@web&&~@javascript"
+            paths:    [ "tests/behat/features/gamejam" ]
             contexts:
-                - Catrobat\AppBundle\Features\GameJam\Context\FeatureContext:
-                    error_directory: "%paths.base%/testreports/behat/"
+                - GamejamFeatureContext:
+                    - "tests/testreports/behat/"
+
         gamejam_web:
             filters:
-                tags: "@web"
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+                tags: "@web~"
+            paths:    [ "tests/behat/features/gamejam" ]
             contexts:
-              - Catrobat\AppBundle\Features\GameJam\Context\WebContext:
-                    error_directory: "%paths.base%/testreports/behat/"
+                - GamejamWebContext:
+                    - "tests/testreports/behat/"
 
         gamejam_javascript:
             filters:
                 tags: "@javascript"
-            type: symfony_bundle
-            bundle: 'AppBundle'
-            paths:
-                - "%paths.base%/src/Catrobat/AppBundle/Features/GameJam/"
+            paths:    [ "tests/behat/features/gamejam" ]
             contexts:
-                - Catrobat\AppBundle\Features\GameJam\Context\JavascriptContext: ~
+                - GamejamJavascriptContext
 
-wip:
+
+# --------------------------------------------------------------------------------------------------
+# Exclude specific tests based on their tags here:
+#
     gherkin:
         filters:
-            tags: "@wip"
+            tags: "@~disabled&&~wip&&~external&&~RealOAuth&&~RealFacebook"
+

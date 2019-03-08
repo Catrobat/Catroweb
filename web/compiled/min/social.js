@@ -1,1 +1,0 @@
-let agree_button="",agree=!1;$(document).ready(function(){$(document).on("click","#agreeButton",function(){switch(agree=!0,agree_button){case"google_login":console.log("agree_google_login"),triggerGoogleLogin();break;case"facebook_login":console.log("agree_facebook_login"),triggerFacebookLogin()}})});

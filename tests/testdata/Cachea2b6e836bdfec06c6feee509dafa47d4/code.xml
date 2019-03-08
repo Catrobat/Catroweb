@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<program>
+  <header>
+    <applicationBuildName></applicationBuildName>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.7</applicationVersion>
+    <catrobatLanguageVersion>0.92</catrobatLanguageVersion>
+    <dateTimeUpload></dateTimeUpload>
+    <description></description>
+    <deviceName>Nexus 5</deviceName>
+    <mediaLicense></mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>19</platformVersion>
+    <programLicense></programLicense>
+    <programName>test</programName>
+    <remixOf></remixOf>
+    <screenHeight>1776</screenHeight>
+    <screenMode>STRETCH</screenMode>
+    <screenWidth>1080</screenWidth>
+    <tags></tags>
+    <url>やねうら部屋(びっくりハウス) remix お化け屋敷 [https://scratch.mit.edu/projects/117697631/], The Periodic Table [/pocketcode/program/3570]</url>
+    <userHandle></userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>6153c44ce0f49f21facbb8c2b2263ce8_Aussehen.png</fileName>
+          <name>Aussehen2</name>
+        </look>
+      </lookList>
+      <name>Hintergrund</name>
+      <scriptList>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Nachricht 1</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>af0da9be3d582b2f715ec432dd836150_Download.jpg</fileName>
+          <name>androidi</name>
+        </look>
+      </lookList>
+      <name>androidi</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Nachricht 1</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <playSoundBrick>
+              <object reference="../../../../.."/>
+              <sound>
+                <fileName>e7d1e1ee00c0ee4020854b058f27e35a_Powerup.wav</fileName>
+                <name>Powerup</name>
+              </sound>
+            </playSoundBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.5</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>200</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList>
+        <sound reference="../../scriptList/whenScript/brickList/playSoundBrick/sound"/>
+      </soundList>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList/>
+  </variables>
+</program>

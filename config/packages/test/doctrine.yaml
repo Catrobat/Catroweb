@@ -1,0 +1,4 @@
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: "%kernel.root_dir%/../tests/behat/sqlite/behattest.sqlite"

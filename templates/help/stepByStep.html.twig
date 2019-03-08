@@ -1,0 +1,33 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/help.css') }}" media="screen"/>
+{% endblock %}
+
+
+{% block body %}
+  <h1>{{ ("help.stepByStep.title")|trans({}, "catroweb") }}</h1>
+
+  <div id="step-by-step-container">
+    <div class="size-large">
+      {{ ("help.stepByStep.description")|trans({}, "catroweb") }}
+    </div>
+    <div class="video-container">
+      <iframe class="video" src="https://www.youtube.com/embed/WdiymNb7J2A" frameborder="0" allowfullscreen></iframe>
+      <br>
+      <iframe class="video" src="https://www.youtube.com/embed/6bPZUuKv1s0" frameborder="0" allowfullscreen></iframe>
+      <br>
+      <iframe class="video" src="https://www.youtube.com/embed/beisA81jJg8" frameborder="0" allowfullscreen></iframe>
+      <br>
+      <iframe class="video" src="https://www.youtube.com/embed/JZdInTZMuTg" frameborder="0" allowfullscreen></iframe>
+      <br>
+      <iframe class="video" src="https://www.youtube.com/embed/SBF8zAX2nu8" frameborder="0" allowfullscreen></iframe>
+      <br>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('compiled/js/Help.js') }}"></script>
+{% endblock %}

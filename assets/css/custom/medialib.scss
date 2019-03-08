@@ -1,0 +1,136 @@
+@import '../../../public/bootstrap_vendor/scss/functions';
+@import "../base/variables";
+@import "../base/elements";
+@import '../../../public/bootstrap_vendor/scss/variables';
+@import '../../../public/bootstrap_vendor/scss/mixins';
+@import 'theme_settings';
+
+#content
+{
+  padding: 18px;
+  min-height: 100vh;
+  color: darkgrey;
+}
+
+#thumbsize-control
+{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  span
+  {
+    margin-right: 0.5rem;
+  }
+}
+
+$tile-size: 80px;
+$tile-size-md-smup: 100px;
+$tile-size-sm: 54px;
+$tile-size-lg: 191px;
+$border-spacing: 8px;
+
+.category
+{
+  margin-top: 1rem;
+  &:first-child
+  {
+    margin-top: 0;
+  }
+
+  > .files
+  {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+
+    .mediafile
+    {
+      display: flex;
+      height: $tile-size;
+      width: $tile-size;
+      margin: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      transition: border 0.5s;
+      border: 2px solid transparent;
+      border-radius: 5px;
+
+      &:hover
+      {
+        border-color: $primary;
+      }
+
+      > img
+      {
+        max-width: $tile-size - $border-spacing !important;
+        max-height: $tile-size - $border-spacing;
+      }
+
+      .fas, .far
+      {
+        font-size: $tile-size - 15px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm)
+{
+  .category > .files .mediafile
+  {
+    height: $tile-size-md-smup;
+    width: $tile-size-md-smup;
+
+    > img
+    {
+      max-width: $tile-size-md-smup - $border-spacing !important;
+      max-height: $tile-size-md-smup - $border-spacing;
+    }
+
+    .fas, .far
+    {
+      font-size: $tile-size-md-smup - 15px;
+    }
+  }
+}
+
+#content[size=sm] .category
+{
+  > .files .mediafile
+  {
+    height: $tile-size-sm;
+    width: $tile-size-sm;
+
+    > img
+    {
+      max-width: $tile-size-sm - $border-spacing !important;
+      max-height: $tile-size-sm - $border-spacing;
+    }
+
+    .fas, .far
+    {
+      font-size: $tile-size-sm - 15px;
+    }
+  }
+}
+
+#content[size=lg] .category
+{
+  > .files .mediafile
+  {
+    height: $tile-size-lg;
+    width: $tile-size-lg;
+
+    > img
+    {
+      max-width: $tile-size-lg - $border-spacing !important;
+      max-height: $tile-size-lg - $border-spacing;
+    }
+
+    .fas, .far
+    {
+      font-size: $tile-size-lg - 15px;
+    }
+  }
+}
