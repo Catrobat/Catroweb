@@ -53,4 +53,16 @@ class UserAdmin extends BaseUserAdmin
       ->addConstraint(new \Symfony\Component\Validator\Constraints\Email())
       ->end();
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getRequest()
+  {
+    if (!$this->request) {
+      return $this->request = $this
+        ->getConfigurationPool()->getContainer()->get('request_stack')->getCurrentRequest();
+    }
+    return $this->request;
+  }
 }

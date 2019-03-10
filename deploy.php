@@ -26,6 +26,7 @@ set('shared_dirs',
 // Shared files between deploys
 add('shared_files',
   [
+    '.env',
     'config/packages/parameters.yml',
     'config/packages/dev/parameters.yml', // only dev!
   ]);
@@ -54,7 +55,7 @@ host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
   ->set('branch', 'php7Iwillsaveyou')
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
   ->set('deploy_path', '/var/www/share/');
 
 // Tasks

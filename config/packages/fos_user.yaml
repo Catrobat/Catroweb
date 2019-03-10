@@ -9,7 +9,20 @@ fos_user:
 
   service:
     user_manager: usermanager
+    mailer: fos_user.mailer.twig_swift # allows usage of twig templates
 
+  # Sends user an email to confirm their registration
+  registration:
+    confirmation:
+      enabled: true
+      template:   Email/registration_confirmation.email.twig
+
+  # Define password resetting email
+  resetting:
+    email:
+      template:   Email/password_resetting.email.twig
+
+  #  Default fos user mail config
   from_email:
     address: noreply@catrob.at
     sender_name: "No Reply"

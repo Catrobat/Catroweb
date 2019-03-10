@@ -1,0 +1,23 @@
+{% block subject %}
+  {% autoescape false %}
+    {{ 'accountConfirmation.subject'|trans({}, 'catroweb')}}
+  {% endautoescape %}
+{% endblock %}
+
+
+{% block body_text %}
+
+  {% autoescape false %}
+    {{ 'accountConfirmation.message'|trans({'%username%': user.username,
+      '%confirmationUrl%': confirmationUrl
+    }, 'catroweb') }}
+  {% endautoescape %}
+
+{% endblock %}
+
+
+{% block body_html %}
+
+  {% include 'Email/registration_confirmation.html.twig' %}
+
+{% endblock %}

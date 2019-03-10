@@ -19,7 +19,7 @@
       {% include 'UserManagement/login_logo.html.twig' %}
 
       <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-5 text-center" align="center">
+        <div class="col-sm-11 col-md-8 col-lg-6 text-center" align="center">
           {% if invalid_username is defined %}
             <div id="request-alert"
                  class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb") }}
@@ -29,10 +29,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-5" align="center">
-
-          <!-- Policy -->
-          {% include 'PrivacyAndTerms/policy.html.twig' %}
+        <div class="col-sm-11 col-md-8 col-lg-6" align="center">
 
           <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
                 action="{{ path('fos_user_resetting_send_email') }}" method="post">

@@ -5,7 +5,7 @@
         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
 
-    <class name="Catrobat\AppBundle\Entity\User">
+    <class name="App\Entity\User">
         <constraint name="FR3D\LdapBundle\Validator\Unique">
             <option name="message">fr3d_ldap.username.already_used</option>
             <option name="groups">

@@ -21,15 +21,9 @@
       <div class="row justify-content-center">
         <div class="col-sm-11 col-md-8 col-lg-6 text-center" align="center">
 
-          {% if already_reset is defined %}
-          <div class="alert alert-danger" style="margin-top: 15px">
-            {{ "login.alreadyReset"|trans({}, "catroweb") }}
-          </div>
-          {% else %}
           <div class="alert alert-success" style="margin-top: 15px">
-            {{ "login.recoverPassSend"|trans({}, "catroweb") }}
+            {{ "login.confirmationSend"|trans({}, "catroweb") }}
           </div>
-          {% endif %}
 
           <!-- Redirects -->
           <div>
@@ -64,7 +58,6 @@
     <div id="spacer1" style="margin-bottom: 30px"></div>
     {% include 'UserManagement/oauth_form.html.twig' %}
     <div id="spacer2" style="margin-bottom: 30px"></div>
-
 
   {% endblock fos_user_content %}
 

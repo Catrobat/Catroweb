@@ -8,9 +8,6 @@
     "behat/mink": {
         "version": "v1.7.1"
     },
-    "behat/mink-browserkit-driver": {
-        "version": "1.3.3"
-    },
     "behat/mink-extension": {
         "version": "2.3.1"
     },
@@ -647,6 +644,9 @@
     "symfony/polyfill-intl-icu": {
         "version": "v1.10.0"
     },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.10.0"
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
     },
@@ -654,6 +654,9 @@
         "version": "v1.10.0"
     },
     "symfony/polyfill-php70": {
+        "version": "v1.10.0"
+    },
+    "symfony/polyfill-php72": {
         "version": "v1.10.0"
     },
     "symfony/polyfill-util": {

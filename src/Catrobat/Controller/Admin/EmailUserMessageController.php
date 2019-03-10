@@ -26,34 +26,50 @@ class EmailUserMessageController extends CRUDController
     return $this->renderWithExtraParams('Admin/mail.html.twig');
   }
 
-
   /**
-   * @param Request|null $request
+   * @param \Swift_Mailer $mailer
+   * @param Request       $request
    *
    * @return Response
    */
-  public function sendAction(Request $request = null)
+  public function sendAction(\Swift_Mailer $mailer, Request $request)
   {
     /**
      * @var $userManager UserManager
      * @var $user        User
      */
-
     $userManager = $this->get('usermanager');
-    $user = $userManager->findUserByUsername($_GET['Username']);
-
+    $user = $userManager->findUserByUsername($request->get('username'));
     if (!$user)
     {
       return new Response("User does not exist");
     }
+    $subject = $request->get('subject');
+    if (!$subject || $subject === "")
+    {
+      return new Response("Empty subject!");
+    }
+    $messageText = $request->get('message');
+    if (!$messageText || $messageText === "")
+    {
+      return new Response("Empty message!");
+    }
+    $htmlText = str_replace(PHP_EOL, "<br>", $messageText);
+    $message = (new \Swift_Message($subject))
+      ->setFrom('webteam@catrob.at')
+      ->setTo($user->getEmail())
+      ->setBody(
+        $this->renderView(
+          'Email/simple_message.html.twig',
+          ['message' => $htmlText]
+        ),
+        'text/html'
+      )
+      // plaintext version of the message
+      ->addPart(strip_tags($messageText), 'text/plain'
+      );
+    $mailer->send($message);
 
-    $mailaddress = $user->getEmail();
-
-    $msg = wordwrap($_GET['Message'], 70);
-    //mail("someone@example.com","My subject",$msg);
-    $headers = "From: webmaster@catrob.at" . "\r\n";
-    mail($mailaddress, "Admin Message", $msg, $headers);
-
-    return new Response("OK");
+    return new Response("OK - message sent");
   }
 }
