@@ -48,8 +48,8 @@ Feature: Pocketcode help page
 
   Scenario Outline: Clicking on tutorials image at help page and test navigation
     Given I am on "/pocketcode/tutorialcards"
-    And I should see "<title>" in the "#title-<id>" element
-    When I click "#title-<id>"
+    And I should see "<title>" in the "#card-<id>" element
+    When I click "#card-<id>"
     Then I should see "<title>"
 
     Examples:

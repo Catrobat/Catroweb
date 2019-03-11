@@ -347,20 +347,6 @@
     }
   }
 
-  .col-2 {
-    float: left;
-    width: 50%;
-    padding: 5px 0;
-
-    img {
-      border: 2px solid $default-text-color;
-    }
-
-    .title {
-      padding-left: 15px;
-    }
-  }
-
   .block {
     overflow: auto;
 
@@ -436,9 +422,6 @@
   }
 
   @media screen and (max-width: 720px) {
-    .col-2 {
-      width: 100%;
-    }
 
     .block > div:nth-child(1),
     .block > div:nth-child(2) {
@@ -552,4 +535,48 @@
 
 #step-by-step-container {
   padding: 25px 0;
+}
+
+.tutorialcards-wrapper {
+
+  $tutorialcard-size: 80px;
+  $tutorialcard-padding: 5px;
+  $tutorialcard-grid-spacing: 10px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  > a {
+    width: $tutorialcard-size + 4 + 2 * $tutorialcard-padding;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 1px;
+
+    margin-right: $tutorialcard-grid-spacing;
+    margin-bottom: $tutorialcard-grid-spacing;
+
+    &:hover {
+      text-decoration: none;
+      color: $primary;
+      border-color: $primary;
+      border-width: 2px;
+      padding: 0;
+    }
+
+    img {
+      padding: $tutorialcard-padding;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    span {
+      padding: $tutorialcard-padding;
+      text-align: center;
+      word-break: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+  }
 }
