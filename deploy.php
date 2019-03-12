@@ -53,7 +53,7 @@ set('allow_anonymous_stats', false);
 host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'SHARE-20_remove_teacher_templates')
+  ->set('branch', 'php7Iwillsaveyou')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
@@ -80,7 +80,7 @@ task('deploy', [
   'deploy:symlink',
   'deploy:unlock',
   'cleanup',
-])->desc('Deploy your project');
+])->desc('Deploy Catroweb!');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
@@ -90,5 +90,31 @@ after('deploy:failed', 'deploy:unlock');
 
 //before('deploy:symlink', 'database:migrate');
 
-//after('deploy:unlock', 'nginx:reload');
+// Manually define this task because deployer uses the old symfony structure with web instead of
+// public. Change this when deployer gets updated.
+task('install:assets', function () {
+  run('{{bin/php}} {{bin/console}} assets:install --symlink --relative public');
+});
+
+// For such sudo commands to work, the server must allow those commands without a password
+// change the sudoers file if needed!
+task('restart:nginx', function () {
+  run('sudo /usr/sbin/service nginx restart');
+});
+task('restart:php-fpm', function () {
+  run('sudo /usr/sbin/service php7.2-fpm restart');
+});
+task('install:npm', function () {
+  cd('{{release_path}}');
+  run('npm install');
+});
+task('deploy:grunt', function () {
+  cd('{{release_path}}');
+  run('grunt');
+});
+after('deploy:unlock', 'install:assets');
+after('install:assets', 'install:npm');
+after('install:npm', 'deploy:grunt');
+after('deploy:grunt', 'restart:nginx');
+after('restart:nginx', 'restart:php-fpm');
 
