@@ -8,6 +8,7 @@ aboutPocketCode: पॉकेट कोड के बारे में
 aboutCatrobat: कैटरोबैट के बारे में
 tutorials: अनुशिक्षण कक्षा
 googlePlay: गूगल प्ले
+iosAppStore: IOS App store
 passwordsNoMatch: पासवर्ड मेल नहीं खाते।
 error: त्रुटि
 cancel: रद्द करें
@@ -48,7 +49,7 @@ indexPage:
       description: 'अधिक लाइक ("थम्स अप", "लाफ़", "लव" और "वाउ!" सहित) आपके प्रोग्राम को प्राप्त होता है, इस सूची में उतना अधिक दिखाई देता है।'
 programs:
   welcome:
-    title: Catrobat के पॉकेट कोड में आपका स्वागत है
+    title: Welcome to Catrobat's %theme%
     subtitle: कहानियां, खेल और अधिक बनाएं ...
     download: ऐप डाउनलोड करें
     statistics: अधिक सांख्यिकी
@@ -127,7 +128,7 @@ programs:
 remixGraph:
   showRemixGraph: 'रीमिक्स ग्राफ दिखाएं'
   by: 'by'
-  open: 'खोलें'
+  open: 'Open'
   showPaths: 'पथ दिखाएं'
   programNotAvailableErrorTitle: 'क्षमा करें...'
   programNotAvailableErrorDescription: 'यह प्रोग्राम अब उपलब्ध नहीं है!'
@@ -537,6 +538,7 @@ errors:
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: अज्ञात गल्ती
   token: 'Authentication of device failed: invalid auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: Programname must not contain rude wordes.
   program:
@@ -661,6 +663,7 @@ footer:
   usefulLinks: उपयोगी कड़ियां
   legalities: कानूनी निर्देशों
   communityStats: Community Stats
+  download: Get the App
 privacy-policy:
   header: गोपनीयता नीति
   version: संस्करण २. १, 25 जून २०१८
@@ -702,13 +705,21 @@ help-cards:
     starters: स्टार्टर्स
     tutorials: अनुशिक्षण कक्षा
     stepbystep: क्रमशः
-    getinvolved: शामिल होँ
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: बाहर की कोशिश करो और रीमिक्स के साथ
     tutorials: में कारगर चाल
     stepbystep: में 10 आसान चरणों
-    getinvolved_1: डाउन्लोड
-    getinvolved_2: अब गूगल प्ले से और शुरू हो जाओ!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

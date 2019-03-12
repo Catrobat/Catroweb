@@ -8,6 +8,7 @@ aboutPocketCode: O Pocket Code
 aboutCatrobat: O Catrobat
 tutorials: Tutoriál
 googlePlay: Google Play
+iosAppStore: IOS App store
 passwordsNoMatch: Hesla se neshodují.
 error: Chyba
 cancel: Zrušit
@@ -45,13 +46,13 @@ indexPage:
   recommendedSection:
     info:
       title: 'Programy, které jsou zde doporučeny?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      description: 'Čím více Likes (počítají se i "Palce nahoru", "Smích", "Láska", "Woow!") tvůj program dostane, tím na vyšší pozici ze seznamu se zobrazí.'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
-    subtitle: Create stories, games and more...
-    download: Download the app
-    statistics: More Statistics
+    title: Welcome to Catrobat's %theme%
+    subtitle: Vytvářejte příběhy, hry a mnohem více...
+    download: Stáhněte si aplikaci
+    statistics: Více statistik
   featured: Nabízený
   newest: Nejnovější programy
   recommended: Doporučené programy
@@ -127,7 +128,7 @@ programs:
 remixGraph:
   showRemixGraph: 'Zobrazit graf Remixů'
   by: 'o'
-  open: 'Otevřít'
+  open: 'Otevřít '
   showPaths: 'Zobrazit dráhy'
   programNotAvailableErrorTitle: 'Promiň...'
   programNotAvailableErrorDescription: 'Program již není k dispozici!'
@@ -201,18 +202,18 @@ licenseToPlay:
   version: Verze 1.1, 2. dubna 2013
 teachers:
   login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+    title: 'Učitelská oblast'
+    description: 'Tato oblast může být použita učiteli.'
 termsOfUse:
   title: Podmínky použití
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing programs and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your programs back to the community as a gift, in the same way as other active members are giving their programs to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  headline: Vítejte do Catrobot Community!
+  text1: 'Jako součást komunity Catrobot, sdílíte své programy a nápady s ostatními lidmi:'
+  text2: "Potřebujeme vaši pomoc, aby se tato komunita stala podpůrným místem pro každého člena. Zde je, jak můžete pomoci:"
+  text3: "Prostřednictvím projektu Catrobat chceme podporovat spolupráci a umožnit všem propojit jejich kreativitu ve prospěch celého lidstva. Můžete se také stát aktivním členem komunity Catrobat tím, že dáte své programy zpět do komunity jako dárek, stejně jako ostatní aktivní členové, kteří dávají své programy vám:"
+  text4: 'Náš dárek pro vás:'
+  text5: 'Naše podmínky používání a služby:'
   list1:
-    item1: from many different countries and cultures
+    item1: z mnoha různých zemí a kultur
     item2: of all ages (from young children to teens and grandparents)
     item3: with all levels of experience
   list2:
@@ -532,6 +533,7 @@ errors:
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: Programname must not contain rude wordes.
   program:
@@ -656,6 +658,7 @@ footer:
   usefulLinks: Užitečné odkazy
   legalities: Právní věci
   communityStats: Statistika webu
+  download: Get the App
 privacy-policy:
   header: Ochrana soukromí
   version: Verze 2.1 z 25. června 2018
@@ -697,13 +700,21 @@ help-cards:
     starters: Starters
     tutorials: Tutoriál
     stepbystep: Step by Step
-    getinvolved: Get involved
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: Stáhnout
-    getinvolved_2: now from Google Play and get started!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

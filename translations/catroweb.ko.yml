@@ -8,6 +8,7 @@ aboutPocketCode: 포켓 코드에 대하여
 aboutCatrobat: Catrobat에 대하여
 tutorials: 튜토리얼
 googlePlay: 구글 플레이
+iosAppStore: IOS App store
 passwordsNoMatch: 비밀번호가 일치하지 않습니다.
 error: 오류
 cancel: 취소
@@ -48,7 +49,7 @@ indexPage:
       description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
+    title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
     download: Download the app
     statistics: More Statistics
@@ -539,6 +540,7 @@ errors:
   image.missing: 프로그램 XML은 프로그램 폴더에 존재 하지 않는 파일을 언급한다
   unknown: 알 수 없는 오류
   token: '인증 장치 실패: 잘못 된 인증 토큰!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: 설명에 무례한 단어를 포함할 수 없습니다.
   program:
@@ -662,6 +664,7 @@ footer:
   usefulLinks: 유용한 링크
   legalities: 합법적임
   communityStats: 커뮤니티 현황
+  download: Get the App
 privacy-policy:
   header: 개인정보 보호방침
   version: Version 2.1, 25 June 2018
@@ -703,13 +706,21 @@ help-cards:
     starters: Starters
     tutorials: 튜토리얼
     stepbystep: Step by Step
-    getinvolved: Get involved
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: 다운로드
-    getinvolved_2: now from Google Play and get started!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

@@ -8,6 +8,7 @@ aboutPocketCode: Über Pocket Code
 aboutCatrobat: Über Catrobat
 tutorials: Tutorials
 googlePlay: Google Play
+iosAppStore: IOS App store
 passwordsNoMatch: Die Passwörter stimmen nicht überein.
 error: Fehler
 cancel: Abbrechen
@@ -48,7 +49,7 @@ indexPage:
       description: 'Je mehr Likes (auch "Daumen nach oben", "Lachen", Liebe" und "Woow!") dein Programm erhält, desto höher erscheint es in der Liste.'
 programs:
   welcome:
-    title: Willkommen bei Catrobat's Pocket Code
+    title: Welcome to Catrobat's %theme%
     subtitle: Erstelle Animationen, Spiele und mehr...
     download: Lade die App herunter
     statistics: Mehr Statistiken
@@ -80,10 +81,10 @@ programs:
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprogramme
   views: '%views% gesehen'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
+  likeThumbsUpDetailText: '{0}0 Personen befürworten das |{1}1 Person befürwortet das |]1,Inf]%persons% Personen befürworten das'
+  likeSmileDetailText: '{0}Menschen lächeln hier |{1}Person lächelt hier |]1,Inf]%persons% Menschen lächeln hier'
+  likeLoveDetailText: '{0}Menschen lieben dies |{1}1 Person liebt dies |]1,Inf]%persons% Menschen lieben das'
+  likeWowDetailText: '{0}Leute sagen "Wooow!" dazu |{1}Person sagt "Wooow!" dazu |]1,Inf]%persons% Leute sagen "Wooow!" dazu'
   remixes: '{0}0 Remixe |{1}1 Remix |] 1, Inf]%remixes% Remixe'
   newRemixesNotificationTitle: '|{1} "%programName%" hat 1 neuen Remix: |] 1, Inf] "%programName%" hat %remixes% neue Remixe:'
   submitted: Eingereichte Programme
@@ -127,7 +128,7 @@ programs:
 remixGraph:
   showRemixGraph: 'Zeige den Remix Graphen'
   by: 'um'
-  open: 'Öffnen'
+  open: 'Öffne '
   showPaths: 'Wege anzeigen'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'Das Programm ist nicht mehr verfügbar!'
@@ -542,6 +543,7 @@ errors:
   image.missing: In der Projekt XML ist eine Datei gelistet, die nicht im Projekt Ordner vorhanden ist
   unknown: Unbekannter Fehler
   token: 'Authentifizierung des Geräts fehlgeschlagen: ungültiger auth-token!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: Programmname darf keine unhöflichen Wörter enthalten.
   program:
@@ -665,6 +667,7 @@ footer:
   usefulLinks: Nützliche Links
   legalities: Rechtliche Hinweise
   communityStats: Community Statistiken
+  download: Get the App
 privacy-policy:
   header: Datenschutzrichtlinie
   version: Version 2.1, 25. Juni 2018
@@ -706,13 +709,21 @@ help-cards:
     starters: Beginner
     tutorials: Tutorials
     stepbystep: Schritt für Schritt
-    getinvolved: Versuche es selbst
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Erstelle deinen ersten Remix mit
     tutorials: Spannende Funktionen in
     stepbystep: Erstelle dein erstes Programm in
-    getinvolved_1: Download
-    getinvolved_2: von Google Play und probiere es direkt aus!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

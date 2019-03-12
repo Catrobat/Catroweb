@@ -3,11 +3,12 @@ localLanguage: ภาษาอังกฤษ
 username: ชื่อผู้ใช้
 password: รหัสผ่าน
 accountSettings: Account Settings
-email: E-Mail
+email: อีเมล
 aboutPocketCode: เกี่ยวกับ Pocket Code
 aboutCatrobat: เกี่ยวกับ Catrobat
 tutorials: บทเรียน
 googlePlay: Google Play
+iosAppStore: IOS App store
 passwordsNoMatch: รหัสผ่านไม่ตรงกัน
 error: ผิดพลาด
 cancel: ยกเลิก
@@ -31,30 +32,30 @@ less: 'ย่อ'
 show-more: 'Show more'
 show-less: 'Show less'
 ok: ตกลง
-clickToDownloadProgram: 'To download the example program click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "You have read all notifications."
-notificationsClearedMessage: "All notifications have been marked as read."
-clearAllNotificationsButtonTitle: "Mark all as read"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+clickToDownloadProgram: 'คลิก%link_start%ที่นี่%link_end%เพื่อดาวน์โหลดตัวอย่างโปรแกรม'
+registrationError: 'ชื่อผู้ใช้หรืออีเมลถูกใช้ไปแล้ว'
+notifications: 'การแจ้งเตือน'
+wellDone: "ทำได้ดี!"
+done: "เสร็จสิ้น"
+notificationsReadMessage: "คุณได้อ่านการแจ้งเตือนทั้งหมดแล้ว"
+notificationsClearedMessage: "การแจ้งเตือนทั้งหมดถูกทำเครื่องหมายว่าอ่านแล้ว"
+clearAllNotificationsButtonTitle: "ทำเครื่องหมายว่าอ่านทั้งหมดแล้ว"
+notificationsClearError: "ไม่สามารถทำเครื่องหมายแจ้งเตือนว่าอ่านได้"
+pleaseWait: "กรุณารอสักครู่…"
 indexPage:
   recommendedSection:
     info:
-      title: 'What programs are recommended here?'
-      description: 'The more Likes (including "Thumbs up", "Laugh", "Love" and "Woow!") your program receives, the higher it appears in this list.'
+      title: 'แนะนำโปรแกรมอะไรบ้าง'
+      description: 'ยิ่งโปรแกรมได้รับไลค์มากเท่าไหร่ (รวมไปถึง "ยกนิ้ว" "หัวเราะ" "รัก" และ "ว้าว") โปรแกรมจะยิ่งปรากฏสูงขึ้นในรายการนี้'
 programs:
   welcome:
-    title: Welcome to Catrobat's Pocket Code
-    subtitle: Create stories, games and more...
-    download: Download the app
-    statistics: More Statistics
+    title: Welcome to Catrobat's %theme%
+    subtitle: สร้างเรื่องราว เกม และอื่น ๆ...
+    download: ดาวน์โหลดแอป
+    statistics: สถิติเพิ่มเติม
   featured: รายการเด่น
   newest: โปรแกรมใหม่ล่าสุด
-  recommended: Recommended programs
+  recommended: โปรแกรมที่แนะนำ
   noPrograms: ขณะนี้ไม่มีโปรแกรม
   deleteConfirmation: |+
     Are you sure?
@@ -75,16 +76,16 @@ programs:
   most:
     viewed: เข้าดูมากที่สุด
     downloaded: ดาวน์โหลดมากที่สุด
-  random: Random Programs
-  related: Related Programs
+  random: สุ่มโปรแกรม
+  related: โปรแกรมที่เกี่ยวข้อง
   downloads: '%downloads% ดาวน์โหลด'
-  sample: Example Programs
+  sample: ตัวอย่างโปรแกรม
   views: '%views% มุมมอง'
-  likeThumbsUpDetailText: '{0}0 people give thumbs up on this |{1}1 person gives thumbs up on this |]1,Inf]%persons% people give thumbs up on this'
-  likeSmileDetailText: '{0}0 people smile on this |{1}1 person smiles on this |]1,Inf]%persons% people smile on this'
-  likeLoveDetailText: '{0}0 people love this |{1}1 person loves this |]1,Inf]%persons% people love this'
-  likeWowDetailText: '{0}0 people say "Wooow!" on this |{1}1 person says "Wooow!" on this |]1,Inf]%persons% people say "Wooow!" on this'
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  likeThumbsUpDetailText: '{0}0 คนยกนิ้วให้ |{1}1 คนยกนิ้วให้ |]1,Inf]%persons% คนยกนิ้วให้'
+  likeSmileDetailText: '{0}0 คนให้ยิ้ม |{1}1 คนให้ยิ้ม |]1,Inf]%persons% คนให้ยิ้ม'
+  likeLoveDetailText: '{0}0 คนรัก |{1}1 คนรัก |]1,Inf]%persons% คนรัก'
+  likeWowDetailText: '{0}0 คนพูด "ว้าว" |{1}1 คนพูด "ว้าว" |]1,Inf]%persons% คนพูด "ว้าว"'
+  remixes: '{0}0 รีมิกซ์ |{1}1 รีมิกซ์ |]1,Inf]%remixes% รีมิกซ์'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Programs
   uploaded: Uploaded Programs
@@ -101,21 +102,21 @@ programs:
   reportOwnProgram: คุณไม่สามารถแฟลกโปรแกรมของคุณเอง
   reportAlready: You've already flagged this program.
   reportDone: You reported this program!
-  updateAppHeader: Update App
+  updateAppHeader: อัพเดทแอพพลิเคชั่น
   updateAppText: Please update your app to the newest version to be able to download this program.
-  btnClosePopup: Ok
+  btnClosePopup: ตกลง
   checkout_this_program: Checkout this Catrobat program
-  show_more: Show More
-  comments: Comments
-  send: Send
+  show_more: แสดงเพิ่มเติม
+  comments: ความคิดเห็น
+  send: ส่ง
   delete: ลบ
   report: รายงาน
   report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup_header: รายงาน
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
+  nolb_example: ตัวอย่างโปรแกรม
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -127,12 +128,12 @@ programs:
 remixGraph:
   showRemixGraph: 'Show Remix Graph'
   by: 'โดย'
-  open: 'Open'
+  open: 'เปิด​ '
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The program is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown User'
+  programNotAvailable: 'ไม่พร้อมใช้งาน'
+  programUnknownUser: 'ผู้ใช้ที่ไม่รู้จัก'
 passwordRecovery:
   subject: การกู้คืนรหัสผ่าน Catrobat ของคุณ
   message: |
@@ -165,7 +166,7 @@ profile:
     passwordTooShort: รหัสผ่านใหม่ต้องมีอักขระอย่างน้อย %length% ตัว
     passwordTooLong: รหัสผ่านใหม่สามารถมีอักขระสูงสุด %length% ตัว
     passwordIsUsername: รหัสผ่านต้องแตกต่างจากชื่อผู้ใช้
-    passwordWrong: Wrong password
+    passwordWrong: รหัสผ่านไม่ถูกต้อง
     emailNotValid: อีเมล์นี้ไม่ถูกต้อง
     emailMissing: เกิดข้อผิดพลาดขณะอัพเดตอีเมลนี้ คุณต้องมีอีเมลที่ใช้การได้อย่างน้อยหนึ่งอีเมล์
     emailExists: มีอีเมล์นี้อยู่แล้ว
@@ -179,19 +180,19 @@ profile:
     uploadError: ขออภัย มีปัญหาในการอัพโหลด
     noSupport: ไม่สนับสนุนนประเภทไฟล์ของรูปนี้ กรุณาลองใช้รูปอื่น
 myprofile:
-  editProfile: Edit profile
+  editProfile: แก้ไขโปรไฟล์
   edit: แก้ไข
   done: เสร็จสิ้น
   checkMail: อีเมล์ถูกส่งไปยังอีเมล์แอดเดรสของคุณ กรุณาตรวจสอบกล่องขาเข้า
   passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
-  email: E-Mail
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit E-Mail
-  deleteAccount: Delete Account
+  avatar: รูปโปรไฟล์
+  email: อีเมล
+  editAvatar: แก้ไขรูปโปรไฟล์
+  editUsername: แก้ไขชื่อผู้ใช้
+  editPassword: แก้ไขรหัสผ่าน
+  editCountry: แก้ไขประเทศ
+  editEmail: แก้ไขอีเมล์
+  deleteAccount: ลบบัญชี
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded programs and comments!
   editAccountSettings: Edit account settings
   notChangeVisibility: Can not change visibility
@@ -547,6 +548,7 @@ errors:
   image.missing: โครงการ XML อ้างถึงแฟ้มที่ไม่มีอยู่ในโฟลเดอร์โครงการ
   unknown: ข้อผิดพลาดที่ไม่ทราบสาเหตุ
   token: 'การรับรองความถูกต้องของอุปกรณ์ล้มเหลว: ตรวจสอบอุปกรณ์ไม่ถูกต้อง'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: โปรแกรมต้องไม่มีคำหยาบ
   program:
@@ -671,6 +673,7 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
+  download: Get the App
 privacy-policy:
   header: นโยบายความเป็นส่วนตัว
   version: Version 2.1, 25 June 2018
@@ -712,13 +715,21 @@ help-cards:
     starters: Starters
     tutorials: บทเรียน
     stepbystep: Step by Step
-    getinvolved: Get involved
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: ดาวน์โหลด
-    getinvolved_2: now from Google Play and get started!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

@@ -8,6 +8,7 @@ aboutPocketCode: Acerca de Pocket Code
 aboutCatrobat: Acerca de Catrobat
 tutorials: Tutoriales
 googlePlay: Google Play
+iosAppStore: IOS App store
 passwordsNoMatch: Las contraseñas no coinciden.
 error: Error
 cancel: Cancelar
@@ -48,7 +49,7 @@ indexPage:
       description: 'Mientras más Me gusta (incluyendo "Pulgar arriba", "Risa", "Me encanta", y "¡Guau!") reciba tu programa, más arriba aparece en esta lista.'
 programs:
   welcome:
-    title: Bienvenido a Pocket Code de Catrobat
+    title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
     download: Descargue la app
     statistics: Más Estadísticas
@@ -127,7 +128,7 @@ programs:
 remixGraph:
   showRemixGraph: 'Mostrar gráfico de remixes'
   by: 'por'
-  open: 'Abrir'
+  open: 'Abierto '
   showPaths: 'Mostrar rutas'
   programNotAvailableErrorTitle: 'Lo sentimos...'
   programNotAvailableErrorDescription: 'Este programa ya no está disponible.'
@@ -543,6 +544,7 @@ errors:
   image.missing: Proyecto XML menciona un archivo que no existe en la carpeta del proyecto
   unknown: error desconocido
   token: 'La autenticación del dispositivo ha fallado: auth-token es inválido!'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: El nombre del programa no debe contener palabras groseras.
   program:
@@ -666,6 +668,7 @@ footer:
   usefulLinks: Hipervínculos que te servirán
   legalities: Aspectos legales
   communityStats: Estadísticas de la comunidad
+  download: Get the App
 privacy-policy:
   header: Política de Privacidad
   version: Version 2.1, 25 June 2018
@@ -707,13 +710,21 @@ help-cards:
     starters: Principiantes
     tutorials: Tutoriales
     stepbystep: Paso a paso
-    getinvolved: Get involved
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: Descargar
-    getinvolved_2: ahora en Google Play y empieza!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

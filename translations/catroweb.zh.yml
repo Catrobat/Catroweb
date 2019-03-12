@@ -8,6 +8,7 @@ aboutPocketCode: 关于口袋编程
 aboutCatrobat: 关于 Catrobat
 tutorials: 新手向导
 googlePlay: 谷歌游戏
+iosAppStore: IOS App store
 passwordsNoMatch: 密码不对
 error: 错误
 cancel: 取消
@@ -48,7 +49,7 @@ indexPage:
       description: '如果你的程序收到了例如（”大拇指“，”哈哈“，”喜欢“和”哇！“）这样类似的赞，你的程序就会在列表的最上面显示。'
 programs:
   welcome:
-    title: 感谢你使用卡特罗巴的口袋编码。
+    title: Welcome to Catrobat's %theme%
     subtitle: 书写你的故事，游戏以及更多东西...。
     download: 下载该APP。
     statistics: 更多统计信息
@@ -127,7 +128,7 @@ programs:
 remixGraph:
   showRemixGraph: '显示调制关系图'
   by: ' '
-  open: '打开'
+  open: '打开 '
   showPaths: '显示路径'
   programNotAvailableErrorTitle: '抱歉...'
   programNotAvailableErrorDescription: '不再提供对该程序的访问！'
@@ -257,8 +258,7 @@ help:
     title: "分步骤介绍"
     start: "开始位置:"
     description: |
-      现在您可以创建您的第一个应用程序了，通过学习玩法视频制作一张交互式明信片。您必须按照接收到的指令操作，在创建这张明信片的过程中，您将学习到创建更多的口袋编程应用程序的基本技能。
-      在这些引导视频之后，会有更多的活动能帮助您在创建自己的口袋编程应用程序时变得十分自如。
+      现在你可以创建你的第一个程序了，一个用接下来的视频制作的可互动明信片。但你必须按照给你的步骤进行。在创建这个明信片的过程中，你会学习更多关于口袋编程程序的基本技能。在这些引导的视频之后，所有其他活动会让你在创建你个人的口袋编程项目是更加自如。
     step1:
       title: '新建一个程序'
       detail:
@@ -548,6 +548,7 @@ errors:
   image.missing: Project XML mentions a file which does not exist in project-folder
   unknown: unknown error
   token: '设备验证失败： 无效的验证标记！'
+  uploadTokenAuthFailed: 'Upload Token auth failed.'
   programname:
     rude: Programname must not contain rude wordes.
   program:
@@ -672,6 +673,7 @@ footer:
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
+  download: Get the App
 privacy-policy:
   header: 隐私条款
   version: Version 2.1, 25 June 2018
@@ -713,13 +715,21 @@ help-cards:
     starters: Starters
     tutorials: 新手向导
     stepbystep: Step by Step
-    getinvolved: Get involved
+    getinvolvedGoogle: Get it on Google Play
+    getinvolvedApple: Get it on IOS
+    game_design: Game Design
+    education: Education platform
+    discuss: Discuss
   text:
     starters: Try out and remix with
     tutorials: Effective tricks in
     stepbystep: Do 10 easy steps in
-    getinvolved_1: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
-    getinvolved_2: now from Google Play and get started!
+    getinvolved: Download the app and get started
+    game_design_1: Effective tricks for
+    game_design_2: creating a game
+    education: Beginner's course & great resources
+    discuss_1: Get in touch with other
+    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional objects to add to you PocketCode programs.

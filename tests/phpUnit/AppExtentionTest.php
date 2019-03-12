@@ -30,7 +30,7 @@ class AppExtentionTest extends \PHPUnit\Framework\TestCase
     $appExtension = $this->createAppExtension($short);
     $list = $appExtension->getLanguageOptions();
     // TODO change this to a dynamic number
-    $this->assertEquals(count($list), 63);
+    $this->assertEquals(count($list), 64);
 
     $this->assertTrue($this->inArray('Deutsch', $list));
     $this->assertTrue($this->inArray('English', $list));
