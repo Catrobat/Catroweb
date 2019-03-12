@@ -15,6 +15,8 @@
 
 {% block body %}
   <div id="content" class="medialib-content">
+    {# MediaLib Thumbnail Size Control #}
+    {# Disabled for first release. Please enable again laiter: SHARE-17
     <div id="thumbsize-control"><span>{{ 'media-packages.thumb-size.description' | trans({}, "catroweb") }}</span>
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary">
@@ -31,6 +33,7 @@
         </label>
       </div>
     </div>
+    #}
 
     {% for category in categories %}
       <div id="category-{{ category.displayID }}" style="display: none" class="category">
