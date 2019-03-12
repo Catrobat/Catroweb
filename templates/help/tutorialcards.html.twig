@@ -6,21 +6,15 @@
 
 {% block body %}
   <h1>{{ ("help.tutorialcards.title")|trans({}, "catroweb") }}</h1>
+  <p class="description">{{ ("help.tutorialcards.description1")|trans({}, "catroweb") }}</p>
 
-  <div class="tutorialcards-container size-large">
-    <p class="description">{{ ("help.tutorialcards.description1")|trans({}, "catroweb") }}</p>
-
-    {% for i in 1..count %}
-      <a href="{{ path('catrobat_web_tutorialcards', {'page': i}) }}">
-        <div class="col-2">
+  <div class="tutorialcards-wrapper">
+  {% for i in 1..count %}
+      <a href="{{ path('catrobat_web_tutorialcards', {'page': i}) }}" id="card-{{ i }}">
           <img src="{{ asset('images/help/tutorialcards/'~i~'.jpg') }}" alt="" title=""/>
-          <span id="title-{{ i }}"
-                class="title size-xlarge">{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>
-        </div>
+          <span>{{ ("help.tutorialcards.card"~i~".title")|trans({}, "catroweb") }}</span>
       </a>
     {% endfor %}
-
-    <div class="clear"></div>
 
   </div>
 

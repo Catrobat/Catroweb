@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#">
+<html prefix="og: http://ogp.me/ns#" lang="{{ app.request.locale | slice(0, 2) }}">
 <head>
   <meta http-equiv="Content-Type" content="text/html"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +45,6 @@
       {% block body %}{% endblock %}
     </div>
   </div>
-</body>
 
 {% block footer %}
   {% include 'Default/footer.html.twig' %}
@@ -99,4 +98,5 @@
   })
 </script>
 
+</body>
 </html>
