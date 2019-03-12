@@ -26,7 +26,9 @@ public/bundles
 public/compiled
 public/css
 public/font_awesome_wrapper
+public/images
 public/js
+public/webfonts
 
 ### tests ###
 tests/behat/sqlite/**

@@ -2,6 +2,30 @@
 @import "variables";
 @import "theme_settings";
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular-webfont.eot');
+  src: local('Roboto Regular'), local('Roboto-Regular'), url('../fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Regular-webfont.woff') format('woff'), url('../fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('../fonts/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Italic-webfont.eot');
+  src: local('Roboto Italic'), local('Roboto-Italic'), url('../fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Italic-webfont.woff') format('woff'), url('../fonts/Roboto-Italic-webfont.ttf') format('truetype'), url('../fonts/Roboto-Italic-webfont.svg#RobotoItalic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold-webfont.eot');
+  src: local('Roboto Bold'), local('Roboto-Bold'), url('../fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Bold-webfont.woff') format('woff'), url('../fonts/Roboto-Bold-webfont.ttf') format('truetype'), url('../fonts/Roboto-Bold-webfont.svg#RobotoBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
