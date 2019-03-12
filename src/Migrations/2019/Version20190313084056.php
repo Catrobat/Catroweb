@@ -25,11 +25,6 @@ final class Version20190313084056 extends AbstractMigration
         $this->addSql('ALTER TABLE GameJam CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE Notification CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE ProgramInappropriateReport CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_classes CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_entries CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_object_identities CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_object_identity_ancestors CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_security_identities CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE click_statistics CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE extension CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE featured CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
@@ -56,7 +51,6 @@ final class Version20190313084056 extends AbstractMigration
         $this->addSql('ALTER TABLE scratch_program_remix_relation CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE starter_category CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE tags CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE teacher_template CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE template CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE user_comment CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE user_like_similarity_relation CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci');
@@ -72,11 +66,6 @@ final class Version20190313084056 extends AbstractMigration
         $this->addSql('ALTER TABLE GameJam CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE Notification CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE ProgramInappropriateReport CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_classes CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_entries CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_object_identities CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_object_identity_ancestors CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE acl_security_identities CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE click_statistics CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE extension CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE featured CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
@@ -103,7 +92,6 @@ final class Version20190313084056 extends AbstractMigration
         $this->addSql('ALTER TABLE scratch_program_remix_relation CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE starter_category CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE tags CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE teacher_template CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE template CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE user_comment CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE user_like_similarity_relation CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci collate utf8mb4_unicode_ci');

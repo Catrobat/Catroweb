@@ -9,7 +9,7 @@ class CatrobatFileExtractorSpec extends ObjectBehavior
 {
   public function let()
   {
-    $this->beConstructedWith(__SPEC_CACHE_DIR__, '/webpath');
+    $this->beConstructedWith(__SPEC_CACHE_DIR__ . '/', '/webpath');
   }
 
   public function it_is_initializable()

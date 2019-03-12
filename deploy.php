@@ -53,7 +53,7 @@ set('allow_anonymous_stats', false);
 host('unpriv@cat-share-exp.ist.tugraz.at')
   ->stage('exp')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'SHARE-13_Symfony_Flex')
+  ->set('branch', 'SHARE-20_remove_teacher_templates')
   ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
