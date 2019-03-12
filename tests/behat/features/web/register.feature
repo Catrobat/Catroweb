@@ -21,7 +21,7 @@ Feature:
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create an account"
     Then I should see a "#termsModal" element
-    Then I wait 500 milliseconds
+    Then I wait 100 milliseconds
     Then I click "#agreeButton"
     Then I should be on "/pocketcode/profile"
     And I should see "CatrobatNew"
@@ -98,10 +98,11 @@ Feature:
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
     Then I press "Create an account"
     Then I should see a "#termsModal" element
-    Then I wait 500 milliseconds
+    And I wait 100 milliseconds
     Then I click "#agreeButton"
     Then I should be on "/pocketcode/profile"
     When I am on "/pocketcode/logout"
+    And I wait 500 milliseconds
     Then I should be logged out
     When I click "#btn-login"
     And I fill in "username" with "CatrobatNew"
