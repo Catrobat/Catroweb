@@ -95,9 +95,21 @@ module.exports = function (grunt) {
       },
       font_awesome_webfonts: {
         expand: true,
-        cwd: assetsDir + '/font_awesome_wrapper/fontawesome-free/webfonts',
+        cwd: publicDir + '/font_awesome_wrapper/fontawesome-free/webfonts',
         src: '**',
         dest: publicDir + '/webfonts/'
+      },
+      fonts: {
+        expand: true,
+        cwd: assetsDir + '/css/fonts',
+        src: '**',
+        dest: publicDir + '/css/fonts/'
+      },
+      images: {
+        expand: true,
+        cwd: assetsDir + '/images',
+        src: '**',
+        dest: publicDir + '/images/'
       },
       clipboard_js: {
         expand: true,
