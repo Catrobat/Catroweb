@@ -102,3 +102,23 @@ Feature: Authenticate to the system
       | problem       | errorcode | answer                    | httpcode |
       | invalid token | 601       | Upload Token auth failed. | 401      |
 
+  Scenario: Registration of a new user with a too long username
+    Given the HTTP Request:
+      | Method | POST                                                 |
+      | Url    | /pocketcode/api/register/Register.json |
+    And the POST parameters:
+      | Name                 | Value                |
+      | registrationUsername | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa              |
+      | registrationPassword | registrationpassword |
+      | registrationEmail    | test@mail.com        |
+      | registrationCountry  | at                   |
+    And we assume the next generated token will be "rrrrrrrrrrr"
+    When the Request is invoked
+    Then the returned json object will be:
+          """
+          {
+            "statusCode": 602,
+            "answer": "This value is not valid.",
+            "preHeaderMessages": ""
+          }
+          """
