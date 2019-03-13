@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,7 @@ licenseToPlay:
     item1: podijeli svoje kolače zajedno sa receptima
     item2: daj kredit onome koji te je ispirisao
   version: Verzija 1.1, 2 travanj 2013
-teachers:
-  login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+
 termsOfUse:
   title: Uvjeti korištenja
   headline: Dobrodošao/la u Catrobat zajednicu!

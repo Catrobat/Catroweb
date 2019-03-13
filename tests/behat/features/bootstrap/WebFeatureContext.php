@@ -13,7 +13,6 @@ use App\Entity\FeaturedProgram;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
-use App\Entity\NolbExampleProgram;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
@@ -521,7 +520,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $user->setEnabled(true);
       $user->setUploadToken($users[$i]['token']);
       $user->setCountry('at');
-      $user->setNolbUser(isset($users[$i]['nolb_status']) ? $users[$i]['nolb_status'] == 'true' : false);
       $user_manager->updateUser($user, false);
     }
     $em = $this->kernel->getContainer()->get('doctrine')->getManager();
@@ -707,33 +705,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^there are nolb example programs:$/
-   * @param TableNode $table
-   */
-  public function thereAreNolbExamplePrograms(TableNode $table)
-  {
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $examples = $table->getHash();
-
-    foreach ($examples as $example)
-    {
-      $new_example = new NolbExampleProgram();
-
-      $program_id = intval($example['program']);
-      $program = $em->getRepository('App\Entity\Program')->find($program_id);
-
-      $new_example->setProgram($program);
-      $new_example->setActive(isset($example['active']) ? $example['active'] == 'true' : true);
-      $new_example->setIsForFemale(isset($example['for_female']) ? $example['for_female'] == 'true' : false);
-      $new_example->setDownloadsFromFemale(intval($example['female_counter']));
-      $new_example->setDownloadsFromMale(intval($example['male_counter']));
-      $em->persist($new_example);
-    }
-    $em->flush();
-  }
-
-
-  /**
    * @Given /^there are comments:$/
    * @param TableNode $table
    * @throws \Exception
@@ -875,29 +846,6 @@ class WebFeatureContext extends MinkContext implements KernelAwareContext
       $em->persist($insert_tag);
     }
     $em->flush();
-  }
-
-  /**
-   * @Given /^the nolb example program (\d+) has "([^"]*)" set to (\d+)$/
-   * @param $arg1
-   * @param $arg2
-   * @param $arg3
-   */
-  public function theNolbExampleProgramHasSetTo($arg1, $arg2, $arg3)
-  {
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-    $example_program = $em->getRepository('App\Entity\NolbExampleProgram')->find($arg1);
-
-    switch ($arg2)
-    {
-      case "female_counter":
-        $counter = $example_program->getDownloadsFromFemale();
-        break;
-      default:
-        $counter = $example_program->getDownloadsFromMale();
-    }
-
-    Assert::assertEquals($arg3, $counter, "$arg2 not same");
   }
 
 

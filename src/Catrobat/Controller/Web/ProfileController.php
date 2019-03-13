@@ -63,7 +63,6 @@ class ProfileController extends Controller
     $country = Intl::getRegionBundle()->getCountryName(strtoupper($user->getCountry()));
     $firstMail = $user->getEmail();
     $secondMail = $user->getAdditionalEmail();
-    $nolb_user = $user->getNolbUser();
     $followerCount = $user->getFollowers()->count();
 
     return $this->get('templating')->renderResponse($twig, [
@@ -74,7 +73,6 @@ class ProfileController extends Controller
       'firstMail'      => $firstMail,
       'secondMail'     => $secondMail,
       'oauth_user'     => $oauth_user,
-      'nolb_user'      => $nolb_user,
       'minPassLength'  => self::MIN_PASSWORD_LENGTH,
       'maxPassLength'  => self::MAX_PASSWORD_LENGTH,
       'username'       => $user->getUsername(),

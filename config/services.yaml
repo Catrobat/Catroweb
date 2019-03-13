@@ -321,14 +321,6 @@ services:
     public: true
   App\Catrobat\Services\TemplateFileRepository: "@templatefilerepository"
 
-  nolbexamplerepository:
-    class: App\Repository\NolbExampleRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments:
-      - App\Entity\NolbExampleProgram
-    public: true
-  App\Repository\NolbExampleRepository: "@nolbexamplerepository"
-
   catro_notification_repository:
     class: App\Repository\CatroNotificationRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -593,6 +585,10 @@ services:
     public: true
   App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
 
+  # =========================== Debug =======================================
+  logger:
+    alias: 'monolog.logger'
+    public: true
 
   # ============================ Commands ====================================
 
@@ -731,34 +727,6 @@ services:
     tags:
       - { name: console.command }
 
-  command.nolbuser.create:
-    class: App\Catrobat\Commands\CreateNolbUserCommand
-    arguments:
-      - "@doctrine.orm.entity_manager"
-    tags:
-      - { name: console.command }
-
-  command.nolbuser.delete:
-    class: App\Catrobat\Commands\DeleteNolbUserCommand
-    arguments:
-      - "@usermanager"
-    tags:
-      - { name: console.command }
-
-  command.nolbuser.changepassword:
-    class: App\Catrobat\Commands\ChangeNolbUserPasswordCommand
-    arguments:
-      - "@doctrine.orm.entity_manager"
-    tags:
-      - { name: console.command }
-
-  command.nolbuser.generate:
-    class: App\Catrobat\Commands\GenerateNolbUserCommand
-    arguments:
-      - "@doctrine.orm.entity_manager"
-    tags:
-      - { name: console.command }
-
   command.remixgraph.migrate:
     class: App\Catrobat\Commands\MigrateRemixGraphsCommand
     arguments:
@@ -798,15 +766,6 @@ services:
       - "@programrepository"
     tags:
       - { name: console.command }
-
-  catrowebadmin.reflavor.nolb:
-    class: App\Catrobat\Commands\ReflavorNolbCommand
-    arguments:
-      - "@doctrine.orm.entity_manager"
-      - "@programrepository"
-    tags:
-      - { name: console.command }
-
 
   # =========================== Sonata Admin Blocks ================================================
 
@@ -892,16 +851,6 @@ services:
       - ~
       - App\Entity\Template
       - App\Catrobat\Controller\Admin\TemplateController
-    public: true
-
-  catrowebadmin.block.nolb.examples:
-    class: App\Admin\NolbExampleAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Nolb Example Programs"}
-    arguments:
-      - ~
-      - App\Entity\NolbExampleProgram
-      - ~
     public: true
 
   # ===== Media Package

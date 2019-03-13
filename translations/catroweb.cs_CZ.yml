@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Ukázkové programy
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -200,10 +199,6 @@ licenseToPlay:
     item1: sdílej své dortíky spolu s receptem
     item2: cituj ty, kteří tě inspirovali
   version: Verze 1.1, 2. dubna 2013
-teachers:
-  login:
-    title: 'Učitelská oblast'
-    description: 'Tato oblast může být použita učiteli.'
 termsOfUse:
   title: Podmínky použití
   headline: Vítejte do Catrobot Community!

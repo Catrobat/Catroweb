@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Προγράμματα παραδείγματα
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,6 @@ licenseToPlay:
     item1: μοιραστείτε τα κέικ σας μαζί με την συνταγή
     item2: αναγνωρήστε αυτούς που σας ενέπνευσαν
   version: Έκδοση 1.1, 2 Απρίλιος 2013
-teachers:
-  login:
-    title: 'Περιοχή Καθηγητών'
-    description: 'Αυτή η περιοχή μπορεί να χρησιμοποιηθεί από καθηγητές.'
 termsOfUse:
   title: Όροι χρήσης
   headline: Καλώς ήλθατε στην κοινότητα της Catrobat!

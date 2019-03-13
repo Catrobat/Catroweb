@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -206,10 +205,6 @@ licenseToPlay:
     item1: اپنے کیک بمع ترکیب دوسروں کے ساتھ شریک کریں
     item2: جو لوگ آپ کی حوصلہ افزائی کریں اُن کو اعزاز دیں
   version: ورژن 1.1, 2 اپریل 2013 ء
-teachers:
-  login:
-    title: 'اساتذہ کا علاقہ'
-    description: 'اس علاقے کو اساتذہ استعمال کر سکتے ہیں۔'
 termsOfUse:
   title: استعمال کی شرائط
   headline: کاٹروبٹ گروہ میں خوش آمدید!

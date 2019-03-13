@@ -116,7 +116,6 @@ programs:
   deleted_popup: Komentarz został pomyślnie usunięty.
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
-  nolb_example: Przykładowe programy
   editDescription: Edytuj opis programu
   saveDescription: Zapisz zmiany w Opisie
   addComment: Napisz komentarz
@@ -208,10 +207,6 @@ licenseToPlay:
     item1: dziel się swoimi ciasteczkami wraz z przepisami na nie
     item2: podziękuj tym, którzy Cię zainspirowali
   version: Wersja 1.1, 2 kwietnia 2013
-teachers:
-  login:
-    title: 'Strefa nauczycieli'
-    description: 'Ta strefa może być używana przez nauczycieli.'
 termsOfUse:
   title: Warunki użytkowania
   headline: Witaj w społeczności Catrobat!

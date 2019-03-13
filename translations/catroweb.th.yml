@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: ตัวอย่างโปรแกรม
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,7 @@ licenseToPlay:
     item1: คุณต้องแบ่งปันเค้กของคุณพร้อมกับสูตรอร่อยๆต่อไป
     item2: คุณต้องให้เครดิตคนที่เป็นแรงบันดาลใจให้คุณด้วยนะ
   version: รุ่น 1.1, ณ วันที่ 2 เมษายน 2013
-teachers:
-  login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+
 termsOfUse:
   title: เงื่อนไขการใช้งาน
   headline: ยินดีต้อนรับสู่ชุมชน Catrobat!

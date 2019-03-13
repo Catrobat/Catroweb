@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: 示例程序
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -213,10 +212,6 @@ licenseToPlay:
     item1: 和蛋糕一起分析您的秘方
     item2: 给那些激励您的用户好的评价
   version: 版本 1.1，2013 年 4 月 2 日
-teachers:
-  login:
-    title: '教师地带'
-    description: '老师们可以使用这个区域。'
 termsOfUse:
   title: 使用条款
   headline: 欢迎来到 Catrobat 社区 ！

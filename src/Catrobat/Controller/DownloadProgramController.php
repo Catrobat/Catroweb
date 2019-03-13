@@ -2,8 +2,6 @@
 
 namespace App\Catrobat\Controller;
 
-use App\Entity\NolbExampleProgram;
-use App\Repository\NolbExampleRepository;
 use App\Entity\Program;
 use App\Entity\User;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
@@ -35,8 +33,6 @@ class DownloadProgramController extends Controller
    * @param         $id
    *
    * @return JsonResponse | BinaryFileResponse
-   * @throws \Doctrine\ORM\ORMException
-   * @throws \Doctrine\ORM\OptimisticLockException
    */
   public function downloadProgramAction(Request $request, $id)
   {
@@ -77,7 +73,6 @@ class DownloadProgramController extends Controller
       $downloaded = $request->getSession()->get('downloaded', []);
       if (!in_array($program->getId(), $downloaded))
       {
-        $this->increaseGenderedDownloadsIfNolbExampleProgram($program);
         $this->get('programmanager')->increaseDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('downloaded', $downloaded);
@@ -111,51 +106,5 @@ class DownloadProgramController extends Controller
       return $response;
     }
     throw new NotFoundHttpException();
-  }
-
-
-  /**
-   * @param $program Program
-   */
-  protected function increaseGenderedDownloadsIfNolbExampleProgram($program)
-  {
-    /* @var $nolb_example_repository NolbExampleRepository */
-    /* @var $user User */
-    /* @var $nolb_example_program NolbExampleProgram */
-
-    $user = $this->getUser();
-    if ($user AND $user->getNolbUser())
-    {
-      $nolb_example_repository = $this->get('nolbexamplerepository');
-      $nolb_example_program = $nolb_example_repository->getIfNolbExampleProgram($program);
-      if ($nolb_example_program)
-      {
-        $this->increaseGenderedDownloads($user, $nolb_example_program);
-      }
-    }
-  }
-
-
-  /**
-   * @param $user
-   * @param $nolb_example_program
-   */
-  protected function increaseGenderedDownloads($user, $nolb_example_program)
-  {
-    /**
-     * @var $user User
-     * @var $nolb_example_program NolbExampleProgram
-     */
-
-    $user_name = $user->getUsername();
-    $gender = substr($user_name, 4, 1);
-    if ($gender === "f")
-    {
-      $nolb_example_program->increaseFemaleDownloads();
-    }
-    if ($gender === "m")
-    {
-      $nolb_example_program->increaseMaleDownloads();
-    }
   }
 }

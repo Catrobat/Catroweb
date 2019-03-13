@@ -82,7 +82,6 @@ sonata_admin:
                     - catrowebadmin.block.featured.program
                     - catrowebadmin.block.featured.url
                     - catrowebadmin.block.programs.templates
-                    - catrowebadmin.block.nolb.examples
 
             sonata.admin.group.mediapackage:
                 label:           Media Package
