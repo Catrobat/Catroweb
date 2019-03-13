@@ -297,7 +297,7 @@ class BaseContext implements KernelAwareContext
   }
 
   /**
-   * @return array|\App\Entity\MediaPackage[]|\App\Entity\TeacherTemplate[]
+   * @return array
    */
   public function getAllRemixSimilaritiesBetweenUsers()
   {

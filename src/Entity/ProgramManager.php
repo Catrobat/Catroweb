@@ -434,7 +434,7 @@ class ProgramManager
   }
 
   /**
-   * @return array|MediaPackage[]|TeacherTemplate[]
+   * @return array
    */
   public function findAll()
   {
