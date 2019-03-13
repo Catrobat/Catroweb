@@ -45,14 +45,6 @@ var/log/**
 ### vendor ###
 vendor/
 
-
-
-
-
-
-
-
-
-
-
-
+### root ###
+*.sh
+crowdin.yml
