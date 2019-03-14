@@ -151,26 +151,16 @@ class DefaultController extends Controller
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
 
-    $user = $this->getUser();
-    $nolb = false;
-    if ($user)
-    {
-      $nolb = $user->getNolbUser();
-    }
-
     $categories = [];
     foreach ($package->getCategories() as $category)
     {
       $files = [];
       $files = $this->generateDownloadUrl($flavor, $category, $files);
-      if (!(strpos($category->getName(), 'Nolb') !== false && !$nolb))
-      {
-        $categories[] = [
-          'name'     => $category->getName(),
-          'files'    => $files,
-          'priority' => $category->getPriority(),
-        ];
-      }
+      $categories[] = [
+        'name'     => $category->getName(),
+        'files'    => $files,
+        'priority' => $category->getPriority(),
+      ];
     }
 
     usort($categories, function ($a, $b) {
@@ -260,7 +250,7 @@ class DefaultController extends Controller
     $statistics = $this->get('statistics');
     $locale = strtolower($request->getLocale());
 
-    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random', 'nolb-example']))
+    if (in_array($type, ['featured', 'newest', 'mostDownloaded', 'mostViewed', 'random']))
     {
       $program_id = $_POST['programID'];
       $statistics->createHomepageProgramClickStatistics($request, $type, $program_id, $referrer, $locale);

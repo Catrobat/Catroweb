@@ -104,13 +104,6 @@ class MediaPackageController extends Controller
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
 
-    $user = $this->getUser();
-    $nolb = false;
-    if ($user)
-    {
-      $nolb = $user->getNolbUser();
-    }
-
     $translator = $this->get('translator');
 
     $categories = [];
@@ -130,14 +123,11 @@ class MediaPackageController extends Controller
 
     foreach ($package->getCategories() as $category)
     {
-      if (!$nolb && strpos($category->getName(), 'Nolb') === false)
-      {
-        $categories[] = [
-          'displayID' => str_replace(' ', '', $category->getName()),
-          'name'      => $category->getName(),
-          'priority'  => $category->getPriority(),
-        ];
-      }
+      $categories[] = [
+        'displayID' => str_replace(' ', '', $category->getName()),
+        'name'      => $category->getName(),
+        'priority'  => $category->getPriority(),
+      ];
     }
 
     usort($categories, function ($a, $b) {

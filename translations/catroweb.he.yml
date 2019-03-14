@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -200,10 +199,6 @@ licenseToPlay:
     item1: חלוק את העוגות שלך יחד עם המתכון
     item2: תן קרדיט לאלו שגרמו לך להשראה
   version: Version 1.1, 2 April 2013
-teachers:
-  login:
-    title: 'אזור המורים'
-    description: 'אזור זה ניתן לשימושם של מורים.'
 termsOfUse:
   title: תנאי שימוש
   headline: ברוכים הבאים לקהילת Catrobat!

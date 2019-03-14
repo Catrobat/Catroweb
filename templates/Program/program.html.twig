@@ -432,10 +432,15 @@
 
     })
 
-    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
-      '{{ 'apk.preparing'|trans({}, "catroweb") }}', '{{ 'apk.text'|trans({}, "catroweb") }}',
-      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}', '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
-      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}')
+    let program = new Program(
+      '{{ path('ci_status', { 'id' : program.id }) }}',
+      '{{ path('ci_build', { 'id' : program.id }) }}',
+      '{{ 'apk.preparing'|trans({}, "catroweb") }}',
+      '{{ 'apk.text'|trans({}, "catroweb") }}',
+      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}',
+      '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
+      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}'
+    )
     program.getApkStatus()
     program.createLinks()
 
@@ -624,58 +629,6 @@
           }
         })
         return false
-      })
-
-      $(document).on('click', '#nolb-submission-button', function () {
-        var username = "{{ user_name }}"
-        var programURL = "{{ program_url }}"
-        var nolbSubmissionProjectId = $('#nolb-submission-project-id')
-        var projectID = nolbSubmissionProjectId.val()
-
-        if (projectID === '')
-        {
-          nolbSubmissionProjectId.addClass('text-area-empty')
-          return
-        }
-        nolbSubmissionProjectId.removeClass('text-area-empty')
-
-        $.ajax({
-          type       : 'POST',
-          crossDomain: true,
-          url        : 'https://www.pmdnolb.cloud/?r=service/upload_program',
-          data       : JSON.stringify({username: username, PID: projectID, progurl: programURL}),
-          success    : function (data) {
-            var response = JSON.parse(data)
-            if (response.code === 1)
-            {
-              $('#nolb-submission-successful').show()
-            }
-            else
-            {
-              $('#nolb-submission-failed').show()
-            }
-
-          },
-          error      : function () {
-          }
-        })
-        $('#nolb-submission-box').hide()
-      })
-
-      $(document).on('click', '#nolb-submission-successful-ok', function () {
-        $('#nolb-submission-successful').hide()
-      })
-
-      $(document).on('click', '#nolb-submission-failed-ok', function () {
-        $('#nolb-submission-failed').hide()
-      })
-
-      $(document).on('click', '#nolb-project-button', function () {
-        $('#nolb-submission-box').show()
-      })
-
-      $(document).on('click', '#nolb-submission-box-cancel', function () {
-        $('#nolb-submission-box').hide()
       })
 
       $(document).one('click', '.rec-programs', function (event) {

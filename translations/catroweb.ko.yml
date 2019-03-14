@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: 예제 프로그램
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -207,10 +206,6 @@ licenseToPlay:
     item1: 당신의 요리법과 함께 케이크를 공유하세요
     item2: 당신에게 영감을 준 사람들에 대한 제작과정을 설명하세요
   version: 버전 1.1, 2013년 4 월 2 일
-teachers:
-  login:
-    title: '교사 지역'
-    description: '여기는 교사용입니다.'
 termsOfUse:
   title: 이용 약관
   headline: 오신 것을 환영 합니다 Catrobat 커뮤니티!

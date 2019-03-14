@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: उदाहरण कार्यक्रम
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -200,10 +199,6 @@ licenseToPlay:
     item1: नुस्खा के साथ अपने केक साझा करें
     item2: जो आप्को प्रेरित करते है उन्हे श्रेय दे
   version: संस्करण 1.1, 2 अप्रैल 2013
-teachers:
-  login:
-    title: 'शिक्षक क्षेत्र'
-    description: 'यह जगह शिक्षकों के लिये है'
 termsOfUse:
   title: उपयोग की शर्ते
   headline: कैट्रोबैट सम्प्रदाय में आप्का बहौत बहौत स्वागत है

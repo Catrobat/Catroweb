@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Exemplos de programas
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -211,10 +210,6 @@ licenseToPlay:
     item1: partilhar os seus bolos juntamente com a receita
     item2: dar crédito aos que o inspiraram
   version: Versão 1.1, de 2 de Abril de 2013
-teachers:
-  login:
-    title: 'Área de professores'
-    description: 'Esta área pode ser usada por professores.'
 termsOfUse:
   title: Termos de Utilização
   headline: Bem-vindo à comunidade Catrobat!

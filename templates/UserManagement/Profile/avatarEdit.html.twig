@@ -14,7 +14,7 @@
 <img alt="avatar" id="avatar-img"
      src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}">
 
-{% if not nolb_user and not app.user.limited %}
+{% if not app.user.limited %}
   <div id="avatar-upload">
     <div>
       <input type="file" name="file">

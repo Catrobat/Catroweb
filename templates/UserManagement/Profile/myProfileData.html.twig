@@ -19,7 +19,7 @@
           <div class="edit-category-title">
             <span class="edit-title"
             ><i class="fas fa-globe-africa"></i> {{ 'country'|trans({}, 'catroweb') }}</span>
-            {% if not nolb_user and not app.user.limited %}
+            {% if not app.user.limited %}
               <a class="edit-category-button" data-toggle="tooltip" title="todo">
                 <i id="edit-country-button" class="far fa-edit catro-icon-button"></i>
               </a>
@@ -28,7 +28,7 @@
           <div id="country" class="profile-data">
             {{ country }}
           </div>
-          {% if not nolb_user and not app.user.limited %}
+          {% if not app.user.limited %}
             <div id="country-edit-container" class="edit-container">
               {% include 'UserManagement/Profile/countryEdit.html.twig' %}
             </div>
@@ -41,7 +41,7 @@
           <div class="edit-category-title">
             <span class="edit-title"
             ><i class="fas fa-envelope"></i> {{ 'email'|trans({}, 'catroweb') }}</span>
-            {% if not nolb_user and not app.user.limited %}
+            {% if not app.user.limited %}
               <a class="edit-category-button"
                  data-toggle="tooltip" title="{{ 'myprofile.editEmail'|trans({}, 'catroweb') }}">
                 <i id="edit-email-button" class="far fa-edit catro-icon-button"></i>
@@ -49,7 +49,7 @@
             {% endif %}
           </div>
 
-          {% if not nolb_user and not app.user.limited %}
+          {% if not app.user.limited %}
             <div id="email-edit-container" class="edit-container">
               {% include 'UserManagement/Profile/emailEdit.html.twig' %}
             </div>
@@ -68,7 +68,7 @@
 
         </div>
 
-        {% if (not nolb_user and not app.user.limited) or (nolb_user and 'teacher' in app.user.username) %}
+        {% if (not app.user.limited) %}
 
           <hr>
 
@@ -88,7 +88,7 @@
 
         {% endif %}
 
-        {% if not nolb_user and not app.user.limited %}
+        {% if not app.user.limited %}
           <hr>
 
           <div id="account-settings-wrapper">

@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,7 @@ licenseToPlay:
     item1: Dela dina kakor tillsammans med receptet
     item2: ge kredit till dem som inspirerade dig
   version: Version 1.1, 2 April 2013
-teachers:
-  login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+
 termsOfUse:
   title: Användarvillkor
   headline: Välkommen till Catrobat gemenskapen!

@@ -23,13 +23,12 @@ class BuildApkController extends Controller
    * @Route("/ci/build/{id}", name="ci_build", defaults={"_format": "json"},
    *   requirements={"id": "\d+"}, methods={"GET"})
    *
-   * @param Request $request
    * @param Program $program
    *
    * @return JsonResponse
    * @throws \Exception
    */
-  public function createApkAction(Request $request, Program $program)
+  public function createApkAction(Program $program)
   {
     if (!$program->isVisible())
     {

@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Exemplos de programas
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -208,10 +207,7 @@ licenseToPlay:
     item1: Comparte as túas tortas xunto ca receita
     item2: Recoñece o mérito daqueles nos que te inspiraches
   version: Versión 1.1, 2 abril 2013
-teachers:
-  login:
-    title: 'Teachers area'
-    description: 'This area can be used by teachers.'
+
 termsOfUse:
   title: Condicións de uso
   headline: Benvido á comunidade Catrobat!

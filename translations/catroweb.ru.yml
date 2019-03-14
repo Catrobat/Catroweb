@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Example programs
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -213,10 +212,6 @@ licenseToPlay:
     item1: Делитесь рецептами ваших пирогов
     item2: Отдайте тем, кто вдохновил вас
   version: Версия 1.1, 2 Апреля 2013
-teachers:
-  login:
-    title: 'Уголок учителя'
-    description: 'Эта область может использоваться преподавателями.'
 termsOfUse:
   title: Условия использования
   headline: Добро пожаловать в сообщество Catrobat!

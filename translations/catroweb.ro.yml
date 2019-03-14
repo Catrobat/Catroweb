@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: Exemple de programe
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,6 @@ licenseToPlay:
     item1: Imparte-ti "prajiturile" impreuna cu "reteta"
     item2: Ofera credite celor care te-au inspirat
   version: Versiunea 1.1, 2 Aprilie 2013
-teachers:
-  login:
-    title: 'Zona profesorilor'
-    description: 'Aceasta zona poate fi folosita de catre profesori.'
 termsOfUse:
   title: Termeni de utilizare
   headline: Bine ai venit in comunitatea Catrobat!

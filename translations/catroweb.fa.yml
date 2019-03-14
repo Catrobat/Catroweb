@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: برنامه های نمونه
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -211,10 +210,6 @@ licenseToPlay:
     item1: کیک هایت را همراه با دستورپخت آنها به اشتراک بگذار
     item2: دادن اعتبار به کسانی که الهامبخش تو بوده اند
   version: نسخهٔ 1.1 2 آوریل 2013
-teachers:
-  login:
-    title: 'بخش معلمین'
-    description: 'این بخش می تواند توسط معلمان مورد استفاده قرار گیرد.'
 termsOfUse:
   title: شرایط استفاده
   headline: به انجمن کت ربات خوش آمدید!

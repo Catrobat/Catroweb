@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: サンプル プログラム
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,6 @@ licenseToPlay:
     item1: レシピと一緒にあなたのケーキを共有します
     item2: あなたがインスパイアされた人のクレジットを入れます
   version: バージョン 1.1、2013/4/2
-teachers:
-  login:
-    title: '教師エリア'
-    description: 'このエリアは教師が使用することができます。'
 termsOfUse:
   title: 利用規約
   headline: Catrobat コミュニティへようこそ!

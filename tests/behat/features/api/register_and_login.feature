@@ -60,7 +60,7 @@ Feature: Login with an existing account or register a new one
     When I POST these parameters to "/pocketcode/api/login/Login.json"
     Then I should get the json object:
       """
-      {"statusCode":200, "token": "rrrrrrrrrrr", "email":"default1@pocketcode.org","nolbUser":false,"preHeaderMessages":""}
+      {"statusCode":200, "token": "rrrrrrrrrrr", "email":"default1@pocketcode.org","preHeaderMessages":""}
       """
 
   Scenario: Log in user not exists

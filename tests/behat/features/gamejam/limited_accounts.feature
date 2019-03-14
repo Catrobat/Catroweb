@@ -7,7 +7,7 @@ Feature: Limited Accounts
   I need the possibility to prevent program deletions and password changes
 
 
-  @web  @disabled
+  @web
   Scenario: My Profile of a limited account does not show edit fields
 
     Given I am logged in

@@ -116,7 +116,6 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  nolb_example: أمثلة عن البرامج
   editDescription: Edit the program Description
   saveDescription: Save Description change
   addComment: Write a comment
@@ -210,10 +209,6 @@ licenseToPlay:
     item1: شارك بالكعكة الخاص بك جنبا إلى جنب مع الوصفة
     item2: إعطاء الفرصة والثقة لأولئك الذين شكلوا لك إلهاما
   version: الإصدار 1، 1، 2 أبريل 2013
-teachers:
-  login:
-    title: 'نطاق المعلمين'
-    description: 'هذا النطاق يمكن أن يستخدمه فقط المعلمون.'
 termsOfUse:
   title: شروط الاستخدام
   headline: مرحبا بكم في بيئة كاتروبات!

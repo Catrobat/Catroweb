@@ -151,10 +151,7 @@ class UploadController
     $user = $this->tokenstorage->getToken()->getUser();
 
     $flavor = 'pocketcode';
-    if ($user->getNolbUser())
-    {
-      $flavor = 'create@school';
-    }
+
     if ($request->request->has('flavor'))
     {
       $flavor = $request->request->get('flavor');
