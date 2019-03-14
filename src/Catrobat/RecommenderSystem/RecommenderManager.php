@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\RecommenderSystem;
 
+use App\Repository\ProgramRepository;
 use App\Entity\ProgramLike;
 use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRemixBackwardRepository;
@@ -44,6 +45,11 @@ class RecommenderManager
   private $user_remix_similarity_relation_repository;
 
   /**
+   * @var ProgramRepository
+   */
+  private $program_repository;
+
+  /**
    * @var ProgramLikeRepository
    */
   private $program_like_repository;
@@ -66,6 +72,7 @@ class RecommenderManager
    * @param UserManager                           $user_manager
    * @param UserLikeSimilarityRelationRepository  $user_like_similarity_relation_repository
    * @param UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository
+   * @param ProgramRepository                     $program_repository
    * @param ProgramLikeRepository                 $program_like_repository
    * @param ProgramRemixRepository                $program_remix_repository
    * @param ProgramRemixBackwardRepository        $program_remix_backward_repository
@@ -73,6 +80,7 @@ class RecommenderManager
   public function __construct(EntityManager $entity_manager, UserManager $user_manager,
                               UserLikeSimilarityRelationRepository $user_like_similarity_relation_repository,
                               UserRemixSimilarityRelationRepository $user_remix_similarity_relation_repository,
+                              ProgramRepository $program_repository,
                               ProgramLikeRepository $program_like_repository,
                               ProgramRemixRepository $program_remix_repository,
                               ProgramRemixBackwardRepository $program_remix_backward_repository)
@@ -81,6 +89,7 @@ class RecommenderManager
     $this->user_manager = $user_manager;
     $this->user_like_similarity_relation_repository = $user_like_similarity_relation_repository;
     $this->user_remix_similarity_relation_repository = $user_remix_similarity_relation_repository;
+    $this->program_repository = $program_repository;
     $this->program_like_repository = $program_like_repository;
     $this->program_remix_repository = $program_remix_repository;
     $this->program_remix_backward_repository = $program_remix_backward_repository;
@@ -214,18 +223,22 @@ class RecommenderManager
     }
   }
 
+  /*
+   * Three different algorithms for recommending programs on the homepage based on likes
+   * follow. They are going to be compared as part of a master's thesis. The general aim
+   * is to recommend more different programs.
+   */
+
   /**
+   * Algorithm 1 is the baseline algorithm, former "recommendProgramsOfLikeSimilarUsers"
+   * (only the function name has been changed here)
+   *
    * @param $user
    * @param $flavor
-   *
    * @return array
    */
-  public function recommendProgramsOfLikeSimilarUsers($user, $flavor)
+  public function recommendHomepageProgramsAlgorithmOne($user, $flavor)
   {
-    /**
-     * @var $user User
-     * @var $r UserLikeSimilarityRelation
-     */
     // NOTE: this parameter should/can be increased after A/B testing has ended!
     //       -> meaningful values for this simple algorithm would be between 4-6
     // NOTE: If you modify this parameter, some tests will intentionally fail as they rely on the value of this parameter!
@@ -250,9 +263,6 @@ class RecommenderManager
 
     $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
     $excluded_ids_of_liked_programs = array_unique(array_map(function ($like) {
-      /**
-       * @var $like ProgramLike
-       */
       return $like->getProgramId();
     }, $all_likes_of_user));
 
@@ -263,9 +273,6 @@ class RecommenderManager
     $programs_liked_by_others = [];
     foreach ($differing_likes as $differing_like)
     {
-      /**
-       * @var $differing_like ProgramLike
-       */
       $key = $differing_like->getProgramId();
       assert(!in_array($key, $excluded_ids_of_liked_programs));
 
@@ -280,9 +287,239 @@ class RecommenderManager
 
     arsort($recommendation_weights);
 
+    // $recommendation_weights only holds the program ids and total weights. In order to
+    // return an array with elements of the program entity $programs_liked_by_others is
+    // used.
     return array_map(function ($program_id) use ($programs_liked_by_others) {
       return $programs_liked_by_others[$program_id];
     }, array_keys($recommendation_weights));
+  }
+
+  /**
+   * Algorithm 2 wants to increase the diversity of recommended programs. The approach is
+   * decreasing the weights of the top 75 most downloaded programs.
+   *
+   * @param $user
+   * @param $flavor
+   * @return array
+   */
+  public function recommendHomepageProgramsAlgorithmTwo($user, $flavor)
+  {
+    // NOTE: this parameter should/can be increased after A/B testing has ended!
+    //       -> meaningful values for this simple algorithm would be between 4-6
+    // NOTE: If you modify this parameter, some tests will intentionally fail as they rely on the value of this parameter!
+    //       -> Don't forget to update them as well.
+    $min_num_of_likes_required_to_allow_recommendations = 1;
+
+    $all_likes_of_user = $this->program_like_repository->findBy(['user_id' => $user->getId()]);
+
+    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
+    {
+      return [];
+    }
+
+    $user_similarity_relations = $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
+    $similar_user_similarity_mapping = [];
+
+    foreach ($user_similarity_relations as $r)
+    {
+      $id_of_similar_user = ($r->getFirstUserId() != $user->getId()) ? $r->getFirstUserId() : $r->getSecondUserId();
+      $similar_user_similarity_mapping[$id_of_similar_user] = $r->getSimilarity();
+    }
+
+    $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
+    $excluded_ids_of_liked_programs = array_unique(array_map(function ($like) {
+      return $like->getProgramId();
+    }, $all_likes_of_user));
+
+    $differing_likes = $this->program_like_repository->getLikesOfUsers(
+      $ids_of_similar_users, $user->getId(), $excluded_ids_of_liked_programs, $flavor);
+
+    $recommendation_weights = [];
+    $programs_liked_by_others = [];
+    foreach ($differing_likes as $differing_like)
+    {
+      $key = $differing_like->getProgramId();
+      assert(!in_array($key, $excluded_ids_of_liked_programs));
+
+      if (!array_key_exists($key, $recommendation_weights))
+      {
+        $recommendation_weights[$key] = 0.0;
+        $programs_liked_by_others[$key] = $differing_like->getProgram();
+      }
+
+      $recommendation_weights[$key] += $similar_user_similarity_mapping[$differing_like->getUserId()];
+    }
+
+    /*
+     * In order to generate more diverse recommendations, the weights of programs that are
+     * ranked within the top 75 most downloaded programs are reduced. The used
+     * mathematical function has been chosen because it consistently reduces the weight
+     * decrease from rank to rank, fast in the beginning, then slowing down.
+     */
+    $most_downloaded_programs = $this->program_repository->getMostDownloadedPrograms($flavor, 75);
+    $ids_of_most_downloaded_programs = array_map(function ($program){
+      return $program->getId();
+    }, $most_downloaded_programs);
+
+    foreach ($recommendation_weights as $key => $weight)
+    {
+      $rank_in_top_downloads = array_search($key, $ids_of_most_downloaded_programs);
+      if ($rank_in_top_downloads !== false)
+      {
+        $recommendation_weights[$key] = $weight * cos(deg2rad(75 - $rank_in_top_downloads));
+      }
+    }
+
+    arsort($recommendation_weights);
+
+    // $recommendation_weights only holds the program ids and total weights. In order to
+    // return an array with elements of the program entity $programs_liked_by_others is
+    // used.
+    return array_map(function ($program_id) use ($programs_liked_by_others) {
+      return $programs_liked_by_others[$program_id];
+    }, array_keys($recommendation_weights));
+  }
+
+  /**
+   * Algorithm 3 wants to increase the diversity of recommended programs. The approach is
+   * re-ranking the recommended items.
+   *
+   * @param $user
+   * @param $flavor
+   * @return array
+   */
+  public function recommendHomepageProgramsAlgorithmThree($user, $flavor)
+  {
+    // NOTE: this parameter should/can be increased after A/B testing has ended!
+    //       -> meaningful values for this simple algorithm would be between 4-6
+    // NOTE: If you modify this parameter, some tests will intentionally fail as they rely on the value of this parameter!
+    //       -> Don't forget to update them as well.
+    $min_num_of_likes_required_to_allow_recommendations = 1;
+
+    $all_likes_of_user = $this->program_like_repository->findBy(['user_id' => $user->getId()]);
+
+    if (count($all_likes_of_user) < $min_num_of_likes_required_to_allow_recommendations)
+    {
+      return [];
+    }
+
+    $user_similarity_relations = $this->user_like_similarity_relation_repository->getRelationsOfSimilarUsers($user);
+    $similar_user_similarity_mapping = [];
+
+    foreach ($user_similarity_relations as $r)
+    {
+      $id_of_similar_user = ($r->getFirstUserId() != $user->getId()) ? $r->getFirstUserId() : $r->getSecondUserId();
+      $similar_user_similarity_mapping[$id_of_similar_user] = $r->getSimilarity();
+    }
+
+    $ids_of_similar_users = array_keys($similar_user_similarity_mapping);
+    $excluded_ids_of_liked_programs = array_unique(array_map(function ($like) {
+      return $like->getProgramId();
+    }, $all_likes_of_user));
+
+    $differing_likes = $this->program_like_repository->getLikesOfUsers(
+      $ids_of_similar_users, $user->getId(), $excluded_ids_of_liked_programs, $flavor);
+
+    $recommendation_weights = [];
+    $number_of_recommendations = [];
+    $programs_liked_by_others = [];
+    foreach ($differing_likes as $differing_like)
+    {
+      $key = $differing_like->getProgramId();
+      assert(!in_array($key, $excluded_ids_of_liked_programs));
+
+      if (!array_key_exists($key, $recommendation_weights))
+      {
+        $recommendation_weights[$key] = 0.0;
+        $number_of_recommendations[$key] = 0;
+        $programs_liked_by_others[$key] = $differing_like->getProgram();
+      }
+
+      $recommendation_weights[$key] += $similar_user_similarity_mapping[$differing_like->getUserId()];
+      $number_of_recommendations[$key]++;
+    }
+
+    arsort($recommendation_weights);
+    $recommendations_by_id = array_keys($recommendation_weights);
+
+    /*
+     * In order to present more diverse recommendations, they are now re-ranked. The
+     * re-ranking algorithm is based on the paper
+     * "Improving AggregateRecommendation Diversity Using Ranking-Based Techniques" by
+     * Gediminas Adomavicius, Member, IEEE, and YoungOk Kwon.
+     *
+     *
+     * Basically we want to recommend less popular items without sacrificing accuracy (=
+     * the chance that the user downloads the recommendation). In order to achieve this we
+     * have a look at the average weights of the recommendations and assume that, if the
+     * average weight is above a certain threshold, it's a good recommendation, irrelevant
+     * of it's total weight. Therefore we get a number of good recommendations that we can
+     * re-rank after another criteria, which is popularity (= total number of likes).
+     * That means all programs above the threshold are ranked from lowest to highest
+     * popularity.
+     *
+     * There is a second threshold which is higher than the first one. The second one's
+     * purpose is to increase the accuracy in the case that enough programs with high
+     * average weights are found (because higher average weights mean higher accuracy).
+     */
+    $average_user_similarity = array_sum($similar_user_similarity_mapping) / count($similar_user_similarity_mapping);
+    $threshold_above_average_weight = $average_user_similarity * 1.25;
+    $threshold_high_weight = $average_user_similarity * 1.5;
+    $average_recommendation_weight = [];
+    $above_average_recommendation = [];
+    $top_recommendation = [];
+
+    foreach ($recommendations_by_id as $key => $recommendation_id)
+    {
+      $average_recommendation_weight[$recommendation_id] = $recommendation_weights[$recommendation_id] /
+        $number_of_recommendations[$recommendation_id];
+
+      switch ($average_recommendation_weight[$recommendation_id])
+      {
+        case $average_recommendation_weight[$recommendation_id] >= $threshold_high_weight:
+          $top_recommendation[$recommendation_id] = $this->program_like_repository->totalLikeCount($recommendation_id);
+          break;
+        case $average_recommendation_weight[$recommendation_id] >= $threshold_above_average_weight:
+          $above_average_recommendation[$recommendation_id] = $this->program_like_repository->totalLikeCount($recommendation_id);
+          break;
+        default:
+          // do nothing
+      }
+    }
+
+    /*
+     * The reason why the top_recommendations don't always get put in front of the
+     * above_average_recommendations is that if there is only a very small number of
+     * top recommendations, the chance that those are only popular programs with high
+     * total-weights is rather high. Since we want to make sure to recommend less popular
+     * programs that is not desired.
+     *
+     * There is no minimum number for above_average_recommendations on the other hand
+     * since after above_average_recommendations there is only the regular recommendations
+     * left which usually recommend popular items anyway.
+     */
+    if (count($top_recommendation) >= 12)
+    {
+      asort($top_recommendation);
+      asort($above_average_recommendation);
+      $recommendations_by_id = array_merge(array_keys($above_average_recommendation), $recommendations_by_id);
+      $recommendations_by_id = array_merge(array_keys($top_recommendation), $recommendations_by_id);
+      $recommendations_by_id = array_unique($recommendations_by_id);
+    }
+    elseif (count($above_average_recommendation) > 0 || count($top_recommendation) > 0)
+    {
+      $above_average_recommendation = $above_average_recommendation + $top_recommendation;
+      asort($above_average_recommendation);
+      $recommendations_by_id = array_merge(array_keys($above_average_recommendation), $recommendations_by_id);
+      $recommendations_by_id = array_unique($recommendations_by_id);
+    }
+
+    // $recommendation_by_id only holds the program ids. In order to return an array with
+    // elements of the program entity $programs_liked_by_others is used.
+    return array_map(function ($program_id) use ($programs_liked_by_others) {
+      return $programs_liked_by_others[$program_id];
+    }, $recommendations_by_id);
   }
 
   /**
