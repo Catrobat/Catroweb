@@ -1,0 +1,67 @@
+{# needed for Google Sign #}
+<head>
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id"
+      {# content="YOUR_CLIENT_ID.apps.googleusercontent.com"> #}
+        content="427226922034-r016ige5kb30q9vflqbt1h0i3arng8u1.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-sm-11 col-md-8 col-lg-5" align="center">
+
+      <!-- ["g-signin2"] needed for an easy initialization of the google services#} -->
+      <div class="g-signin2" data-onsuccess="onSignIn" style="display: none"></div>
+
+      <div id="googleLoginButton">
+        <!-- Google Login Button is a 2 click button:
+             click 1: shows terms of modal
+             click 2: (terms of modal aggree -> trigger google sign in) -->
+        <a id="btn-login_google" href="#" data-toggle="modal" data-target="#termsModal">
+          <img class="img-socialLogin social-button-effects"
+               src="{{ asset('images/social/btn_google_signin_light_normal_web2x.png') }}"
+               alt="Google Login"></a>
+      </div>
+
+      <!-- ToDo fb login not working -->
+      <div id="facebookLoginButton">
+        <a id="btn-login_facebook" href="#" data-toggle="modal" data-target="#termsModal">
+          <img class="img-socialLogin social-button-effects"
+               src="{{ asset('images/social/sign-in-with-facebook.png') }}"
+               alt="Facebook Login"></a>
+      </div>
+
+      <!-- Hidden fields that get filled by Google/facebook Sign in -->
+      <input type="hidden" id="fb_google">
+      <input type="hidden" id="id_oauth" name="_id"/>
+      <input type="hidden" id="email_oauth" name="_email"/>
+      <input type="hidden" id="locale_oauth" name="_locale"/>
+      <input type="hidden" id="username_oauth" name="_username"/>
+      <input type="hidden" id="access_token_oauth" name="_access_token"/>
+      <input type="hidden" id="facebook_auth_type" value=""/>
+
+    </div>
+  </div>
+</div>
+
+{% block js %}
+  <script src="{{ asset('compiled/min/register.js') }}"></script>
+  <script>
+    // Defining register.js constants here for easy twig extension access
+    let flavor = "{{ flavor() }}"
+    let chooseUserNameDialogTitleText = "{{ "oauth.username_header"|trans({}, "catroweb") }}"
+    let chooseUserNameDialogText = "{{ "oauth.username_chooser"|trans({}, "catroweb") }}"
+    let usernameTaken = "{{ "oauth.usernameTaken"|trans({}, "catroweb") }}"
+    let usernameInvalidSize = "{{ "errors.username.size"|trans({}, "catroweb") }}"
+    let okButtonText = "{{ "ok"|trans({}, "catroweb") }}"
+  </script>
+{% endblock %}
+
+
+{# Test hooks #}
+<button id="btn-facebook-testhook" class="hidden" onclick="handleFacebookUserInfoResponseTrigger();"></button>
+<button id="btn-gplus-testhook" class="hidden" onclick="checkGoogleCallbackDataWithServer();"></button>
+
+

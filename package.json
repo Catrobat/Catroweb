@@ -1,7 +1,7 @@
 {
   "name": "catroweb",
   "baseJSName": "script",
-  "loginJSName": "loginscript",
+  "registerJSName": "register",
   "version": "1.0.0",
   "description": "Catroweb =========",
   "main": "Gruntfile.js",

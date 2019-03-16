@@ -5,21 +5,39 @@
         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
 
-    <class name="App\Entity\User">
-        <constraint name="FR3D\LdapBundle\Validator\Unique">
-            <option name="message">fr3d_ldap.username.already_used</option>
-            <option name="groups">
-                <value>Registration</value>
-                <value>Profile</value>
-            </option>
-        </constraint>
-    </class>
-
-
     <!-- Overwriting fos user validation (vendor/friendsofsymfony/user-bundle/Resources/config/validation.xml) -->
     <class name="FOS\UserBundle\Model\User">
 
+        <property name="username">
+            <!-- Also has to be manually changed for:
+                    - oauth registration (assets/js/register/register.js)
+                    - API
+                    - Sonata Admin
+            -->
+            <constraint name="NotBlank">
+                <option name="message">fos_user.username.blank</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="minMessage">fos_user.username.short</option>
+                <option name="max">180</option>
+                <option name="maxMessage">fos_user.username.long</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
+        </property>
+
         <property name="plainPassword">
+            <!-- Also has to be manually changed for:
+                        - Api
+                        - Sonata Admin
+             -->
             <constraint name="NotBlank">
                 <option name="message">fos_user.password.blank</option>
                 <option name="groups">

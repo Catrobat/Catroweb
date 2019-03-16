@@ -9,7 +9,7 @@ let publicDir = 'public' // 'public'
 // Defining JavaScript paths:
 //
 let jsBaseSrc = [ assetsDir + '/js/base/*.js', assetsDir + '/js/globalPlugins/*.js' ]
-let jsLoginSrc = [ assetsDir + '/js/social/*.js' ]
+let jsRegisterSrc = [ assetsDir + '/js/register/*.js' ]
 let jsCustomSrc = assetsDir + '/js/custom'
 let jsAnalyticsSrc = assetsDir + '/js/analytics'
 let jsLocalPluginSrc = assetsDir + '/js/localPlugins'
@@ -139,9 +139,9 @@ module.exports = function (grunt) {
         src: jsBaseSrc,
         dest: publicDir + '/compiled/js/<%= pkg.baseJSName %>.js'
       },
-      login: {
-        src: jsLoginSrc,
-        dest: publicDir + '/compiled/js/<%= pkg.loginJSName %>.js'
+      register: {
+        src: jsRegisterSrc,
+        dest: publicDir + '/compiled/js/<%= pkg.registerJSName %>.js'
       },
       localPlugins: {
         expand: true,
